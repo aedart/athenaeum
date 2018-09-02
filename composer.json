@@ -25,6 +25,11 @@
       "Aedart\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Aedart\\Tests\\": "tests/"
+    }
+  },
   "require": {
     "php": ">=7.2.0",
     "fzaninotto/faker": "1.8.*",
