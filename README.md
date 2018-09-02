@@ -1,0 +1,3 @@
+# Athenaeum
+
+Project initialisation is in progress...
