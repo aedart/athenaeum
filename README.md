@@ -1,4 +1,8 @@
-
+[![Latest Stable Version](https://poser.pugx.org/aedart/athenaeum/v/stable)](https://packagist.org/packages/aedart/athenaeum)
+[![Total Downloads](https://poser.pugx.org/aedart/athenaeum/downloads)](https://packagist.org/packages/aedart/athenaeum)
+[![Latest Unstable Version](https://poser.pugx.org/aedart/athenaeum/v/unstable)](https://packagist.org/packages/aedart/athenaeum)
+[![composer.lock](https://poser.pugx.org/aedart/athenaeum/composerlock)](https://packagist.org/packages/aedart/athenaeum)
+[![License](https://poser.pugx.org/aedart/athenaeum/license)](https://packagist.org/packages/aedart/athenaeum)
 [![Build Status](https://travis-ci.org/aedart/athenaeum.svg?branch=master)](https://travis-ci.org/aedart/athenaeum)
 
 # Athenaeum
