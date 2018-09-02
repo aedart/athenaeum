@@ -1,3 +1,8 @@
+---
+title: Athenaeum
+description: Athenaeum package documentation
+---
+
 # Athenaeum
 
 Athenaeum is collection of various library components. Most of these are based on [Laravel](https://laravel.com/) packages.
