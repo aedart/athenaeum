@@ -7,7 +7,17 @@
 
 # Athenaeum
 
-Project initialisation is in progress...
+Athenaeum is collection of various library components. Most of these are based on [Laravel](https://laravel.com/) packages.
+
+# How to install
+
+```console
+composer require aedart/athenaeum
+```
+
+# Official Documentation
+
+Please read the [official documentation](https://aedart.github.io/athenaeum/) for additional information.
 
 ## Contribution
 
