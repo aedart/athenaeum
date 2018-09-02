@@ -2,7 +2,10 @@
   "name": "aedart/athenaeum",
   "description": "Various library components",
   "keywords": [
-    "Library"
+    "Library",
+    "Testing",
+    "Utilities",
+    "Test Cases"
   ],
   "homepage": "https://github.com/aedart/athenaeum",
   "support": {
@@ -23,9 +26,15 @@
     }
   },
   "require": {
-    "php": ">=7.2.0"
+    "php": ">=7.2.0",
+    "fzaninotto/faker": "1.8.*",
+    "mockery/mockery": "1.1.*"
   },
   "require-dev": {
+    "codeception/codeception": "2.4.*"
+  },
+  "suggest": {
+    "codeception/codeception": "Required for Testing utilities"
   },
   "minimum-stability": "stable",
   "prefer-stable": true,
