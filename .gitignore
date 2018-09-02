@@ -6,3 +6,6 @@ composer.lock
 composer.phar
 tests/_output/*
 tests/_support/_generated/*
+
+yarn.lock
+/node_modules
