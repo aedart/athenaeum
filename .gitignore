@@ -1,0 +1,8 @@
+/vendor
+.DS_Store
+.idea/
+Thumbs.db
+composer.lock
+composer.phar
+tests/_output/*
+tests/_support/_generated/*
