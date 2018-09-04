@@ -1,6 +1,6 @@
 {
   "name": "aedart/athenaeum",
-  "description": "Athenaeum is collection of various library components that are built using several Laravel packages",
+  "description": "Athenaeum is collection of various library components that are built using several Laravel components",
   "keywords": [
     "Library",
     "Testing",
