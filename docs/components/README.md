@@ -1,3 +1,12 @@
-# Available Components
+# How to install
 
-Here you will find documentation for the available components within the Athenaeum package.
+By using [Composer](https://getcomposer.org/), you can require Athenaeum into your project. 
+
+```console
+composer require aedart/athenaeum
+```
+
+## Dependencies
+
+Depending on what component(s) you desire to use, you might have to require additional dependencies.
+You can find additional information within each component's documentation. 
