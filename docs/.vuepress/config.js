@@ -1,5 +1,5 @@
 module.exports = {
-    base: '/athenaeum/',
+    base: '/',
     dest: '.build',
     title: 'Athenaeum',
     description: 'Athenaeum Official Documentation',
@@ -36,7 +36,7 @@ module.exports = {
                     { text: 'Components', link: '/components/' }
                 ],
                 sidebar: {
-                    '/components/' : genSidebarComponents('Components'),
+                    '/components/' : genSidebarComponents(),
                 }
                 //sidebar: 'auto'
             },
@@ -44,25 +44,22 @@ module.exports = {
     }
 };
 
-function genSidebarComponents (title) {
+function genSidebarComponents () {
     return [
         {
-            title,
-            collapsable: false,
+            title: 'Getting Started',
+            collapsable: true,
             children: [
                 '',
-                'testing/',
-
-                // TODO: Does not appear to work!?
-                // ['testing/', {
-                //     title: 'Testing',
-                //     collapsable: false,
-                //     children: [
-                //         '',
-                //         'testing/test-cases'
-                //     ]
-                // }],
             ]
-        }
+        },
+        {
+            title: 'Testing',
+            collapsable: true,
+            children: [
+                'testing/',
+                'testing/test-cases',
+            ]
+        },
     ]
 }
