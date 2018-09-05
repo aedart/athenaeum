@@ -1,5 +1,5 @@
 module.exports = {
-    base: '/',
+    base: '/athenaeum/',
     dest: '.build',
     title: 'Athenaeum',
     description: 'Athenaeum Official Documentation',
