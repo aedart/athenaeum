@@ -71,10 +71,28 @@ class TraitTester
      * Assertions
      ****************************************************************/
 
+    /**
+     * Assert getter-setter trait with given values
+     *
+     * <br />
+     *
+     * If set or default values are given, method will attempt to
+     * guess what data to generate that fulfills argument(s).
+     *
+     * @see \Aedart\Testing\Helpers\ArgumentFaker::fakeFor
+     *
+     * @param mixed|null $setValue [optional] Auto generated, if none given
+     * @param mixed|null $defaultValue [optional] Auto generated, if none given
+     *
+     * @throws ReflectionException
+     */
     public function assert($setValue = null, $defaultValue = null)
     {
-        // TODO: Implement this...
-        // TODO: Auto-generate values if possible
+        $trait = $this->trait;
+        $method = $this->setPropertyMethodName();
+
+        $setValue = $setValue ?? ArgumentFaker::fakeFor($trait, $method);
+        $defaultValue = $defaultValue ?? ArgumentFaker::fakeFor($trait, $method);
 
         $this->assertWithValues($setValue, $defaultValue);
     }
