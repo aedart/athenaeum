@@ -59,6 +59,7 @@ function genSidebarComponents () {
             children: [
                 'testing/',
                 'testing/test-cases',
+                'testing/traits',
             ]
         },
     ]
