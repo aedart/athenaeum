@@ -4,7 +4,6 @@ namespace Aedart\Testing\Helpers;
 
 use Aedart\Testing\Exceptions\IncorrectPropertiesAmount;
 use Codeception\TestCase\Test;
-use Codeception\Util\Debug;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
@@ -23,6 +22,8 @@ use ReflectionException;
  */
 class TraitTester
 {
+    use ConsoleDebugger;
+
     /**
      * The test-case to use
      *
@@ -343,24 +344,5 @@ class TraitTester
     protected function getDefaultPropertyMethodName() : string
     {
         return 'getDefault' . $this->getPropertyName();
-    }
-
-    /**
-     * Output debug message
-     *
-     * @param string $message
-     */
-    protected function output(string $message)
-    {
-        if(class_exists(Debug::class)){
-            Debug::debug(PHP_EOL . $message);
-            return;
-        }
-
-        // get args
-        $args = $_SERVER['argv'];
-        if (in_array('--debug', $args) || in_array('-vvv', $args) || in_array('--verbose', $args)) {
-            fwrite(STDERR, PHP_EOL . $message);
-        }
     }
 }
