@@ -2,7 +2,6 @@
 
 namespace Aedart\Testing;
 
-use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\Helpers\TraitTester;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -24,7 +23,22 @@ trait GetterSetterTraitTester
      * Assertions
      ****************************************************************/
 
-    // TODO: Implement this..
+    /**
+     * Assert all methods in the given `getter-setter` trait, by invoking
+     * all methods, specifying and retrieving the given value, as well as
+     * mocking a custom value return.
+     *
+     * <br />
+     *
+     * If set or default values are given, method will attempt to
+     * guess what data to generate that fulfills argument(s).
+     *
+     * @param string $trait Trait class path
+     * @param mixed|null $setValue [optional] Auto generated, if none given
+     * @param mixed|null $defaultValue [optional] Auto generated, if none given
+     *
+     * @throws ReflectionException
+     */
     public function assertTraitMethods(string $trait, $setValue = null, $defaultValue = null)
     {
         $this->makeTraitTester($trait)->assert($setValue, $defaultValue);
