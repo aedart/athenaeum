@@ -19,7 +19,6 @@ use ReflectionException;
  */
 trait GetterSetterTraitTester
 {
-    use ConsoleDebugger;
 
     /*****************************************************************
      * Assertions

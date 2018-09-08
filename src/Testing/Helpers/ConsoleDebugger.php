@@ -14,14 +14,14 @@ use Codeception\Util\Debug;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Testing\Helpers
  */
-trait ConsoleDebugger
+class ConsoleDebugger
 {
     /**
      * Output debug message
      *
      * @param mixed ...$message
      */
-    protected function output(...$message)
+    static public function output(...$message)
     {
         if(class_exists(Debug::class)){
 

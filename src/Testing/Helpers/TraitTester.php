@@ -22,8 +22,6 @@ use ReflectionException;
  */
 class TraitTester
 {
-    use ConsoleDebugger;
-
     /**
      * The test-case to use
      *
@@ -125,7 +123,7 @@ class TraitTester
     ) {
         $method = $method ?? $this->getDefaultPropertyMethodName();
 
-        $this->output(sprintf(' testing %s()', $method));
+       ConsoleDebugger::output(sprintf(' testing %s()', $method));
 
         $this->testCase->assertNull($mock->$method(), $failMessage);
     }
@@ -147,7 +145,7 @@ class TraitTester
     ) {
         $method = $method ?? $this->hasPropertyMethodName();
 
-        $this->output(sprintf(' testing %s()', $method));
+        ConsoleDebugger::output(sprintf(' testing %s()', $method));
 
         $this->testCase->assertFalse($mock->$method(), $failMessage);
     }
@@ -176,14 +174,14 @@ class TraitTester
         $getMethod = $getMethod ?? $this->getPropertyMethodName();
 
         if (is_object($value)) {
-            $this->output(sprintf(' testing %s(%s)', $setMethod, get_class($value)));
+            ConsoleDebugger::output(sprintf(' testing %s(%s)', $setMethod, get_class($value)));
         } else {
-            $this->output(sprintf(' testing %s(%s)', $setMethod, var_export($value, true)));
+            ConsoleDebugger::output(sprintf(' testing %s(%s)', $setMethod, var_export($value, true)));
         }
 
         $mock->$setMethod($value);
 
-        $this->output(sprintf(' testing %s()', $getMethod));
+        ConsoleDebugger::output(sprintf(' testing %s()', $getMethod));
 
         $this->testCase->assertSame($value, $mock->$getMethod(), $failMessage);
     }
@@ -212,9 +210,9 @@ class TraitTester
         $getMethod = $getMethod ?? $this->getPropertyMethodName();
 
         if (is_object($defaultValue)) {
-            $this->output(sprintf(' mocking %s(), must return %s', $defaultMethod, get_class($defaultValue)));
+            ConsoleDebugger::output(sprintf(' mocking %s(), must return %s', $defaultMethod, get_class($defaultValue)));
         } else {
-            $this->output(sprintf(' mocking %s(), must return %s', $defaultMethod, var_export($defaultValue, true)));
+            ConsoleDebugger::output(sprintf(' mocking %s(), must return %s', $defaultMethod, var_export($defaultValue, true)));
         }
 
         $mock = $this->makeTraitMock($trait, [
@@ -225,7 +223,7 @@ class TraitTester
             ->method($defaultMethod)
             ->willReturn($defaultValue);
 
-        $this->output(sprintf(' testing %s()', $getMethod));
+        ConsoleDebugger::output(sprintf(' testing %s()', $getMethod));
 
         $this->testCase->assertSame($defaultValue, $mock->$getMethod(), $failMessage);
     }
