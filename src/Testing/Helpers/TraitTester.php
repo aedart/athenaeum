@@ -144,6 +144,8 @@ class TraitTester
         ?string $method = null,
         string $failMessage = 'Should not have a value set'
     ) {
+        $method = $method ?? $this->hasPropertyMethodName();
+
         $this->output(sprintf(' testing %s()', $method));
 
         $this->testCase->assertFalse($mock->$method(), $failMessage);
