@@ -62,5 +62,12 @@ function genSidebarComponents () {
                 'testing/traits',
             ]
         },
+        {
+            title: 'Utils',
+            collapsable: true,
+            children: [
+                'utils/',
+            ]
+        },
     ]
 }
