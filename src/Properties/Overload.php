@@ -35,11 +35,11 @@ trait Overload
      */
     public function __get(string $name)
     {
-        if ($this->hasInternalProperty($name)) {
-            return $this->invokeGetter($this->getInternalProperty($name));
+        if ( ! $this->hasInternalProperty($name)) {
+            throw new UndefinedProperty(sprintf('Failed reading Property "%s". It does not exist or is inaccessible', $name));
         }
 
-        throw new UndefinedProperty(sprintf('Failed reading Property "%s". It does not exist or is inaccessible', $name));
+        return $this->invokeGetter($this->getInternalProperty($name));
     }
 
     /**
@@ -55,11 +55,12 @@ trait Overload
      */
     public function __set(string $name, $value)
     {
-        if ($this->hasInternalProperty($name)) {
-            return $this->invokeSetter($this->getInternalProperty($name), $value);
+        if ( ! $this->hasInternalProperty($name)) {
+            throw new UndefinedProperty(sprintf('Failed writing Property "%s". It does not exist or is inaccessible', $name));
         }
 
-        throw new UndefinedProperty(sprintf('Failed writing Property "%s". It does not exist or is inaccessible', $name));
+        return $this->invokeSetter($this->getInternalProperty($name), $value);
+
     }
 
     /**
