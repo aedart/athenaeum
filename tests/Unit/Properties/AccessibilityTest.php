@@ -6,6 +6,7 @@ namespace Aedart\Tests\Unit\Properties;
 use Aedart\Contracts\Properties\AccessibilityLevels;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Tests\Helpers\Dummies\Properties\Accessibility\Person;
+use Aedart\Tests\TestCases\Properties\PropertiesTestCase;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionMethod;
@@ -19,50 +20,8 @@ use ReflectionMethod;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Properties
  */
-class AccessibilityTest extends UnitTestCase
+class AccessibilityTest extends PropertiesTestCase
 {
-    /*****************************************************************
-     * Helpers
-     ****************************************************************/
-
-    /**
-     * Returns a new dummy with accessibility
-     *
-     * @return Person
-     */
-    public function makeDummy()
-    {
-        return new Person();
-    }
-
-    /**
-     * Get a method - with its accessibility set to true
-     *
-     * @param string $name Method name
-     * @return ReflectionMethod
-     */
-
-    /**
-     * Returns a method with it's accessibility set to true (forced)
-     *
-     * @param string $name Method name
-     *
-     * @return ReflectionMethod
-     *
-     * @throws ReflectionException
-     */
-    public function getMethod(string $name) : ReflectionMethod
-    {
-        $class = new ReflectionClass($this->makeDummy());
-        $method = $class->getMethod($name);
-        $method->setAccessible(true);
-        return $method;
-    }
-
-    /*****************************************************************
-     * Actual tests
-     ****************************************************************/
-
     /**
      * @test
      */
