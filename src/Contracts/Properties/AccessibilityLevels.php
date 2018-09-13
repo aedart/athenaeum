@@ -37,4 +37,13 @@ interface AccessibilityLevels
      * 'protected' or 'private' can be set / get.
      */
     const PRIVATE_LEVEL = ReflectionProperty::IS_PRIVATE;
+
+    /**
+     * Levels map, key = level, value = name of level
+     */
+    const LEVELS = [
+        self::PUBLIC_LEVEL      => 'public',
+        self::PROTECTED_LEVEL   => 'protected',
+        self::PRIVATE_LEVEL     => 'private',
+    ];
 }
