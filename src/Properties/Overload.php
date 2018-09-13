@@ -56,12 +56,35 @@ trait Overload
     public function __set(string $name, $value)
     {
         if ($this->hasInternalProperty($name)) {
-            $this->invokeSetter($this->getInternalProperty($name), $value);
-            return;
+            return $this->invokeSetter($this->getInternalProperty($name), $value);
         }
 
         throw new UndefinedProperty(sprintf('Failed writing Property "%s". It does not exist or is inaccessible', $name));
     }
+
+    /**
+     * Method is triggered by calling isset() or empty() on inaccessible properties.
+     *
+     * <br />
+     *
+     * If an undefined property is being checked, using isset or empty, then
+     * this method will always return false
+     *
+     * @param string $name
+     *
+     * @return bool
+     *
+     * @throws ReflectionException
+     */
+    public function __isset(string $name) : bool
+    {
+        if( ! $this->hasInternalProperty($name)){
+            return false;
+        }
+
+        return isset($this->$name);
+    }
+
 
     /*****************************************************************
      * Internals
