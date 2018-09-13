@@ -42,6 +42,27 @@ trait Overload
         throw new UndefinedProperty(sprintf('Property "%s" does not exist or is inaccessible', $name));
     }
 
+    /**
+     * Method is run when writing data to inaccessible properties.
+     *
+     * @param string $name
+     * @param mixed $value
+     *
+     * @return mixed
+     *
+     * @throws ReflectionException
+     * @throws UndefinedProperty
+     */
+    public function __set(string $name, $value)
+    {
+        if ($this->hasInternalProperty($name)) {
+            $this->invokeSetter($this->getInternalProperty($name), $value);
+            return;
+        }
+
+        throw new UndefinedProperty(sprintf('Property "%s" does not exist or is inaccessible', $name));
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -61,6 +82,30 @@ trait Overload
         $methodName = MethodHelper::makeGetterName($property->getName());
         if ($this->hasInternalMethod($methodName)) {
             return $this->$methodName();
+        }
+
+        throw new UndefinedProperty(sprintf(
+            'No "%s"() method available for property "%s"', $methodName,
+            $property->getName()
+        ));
+    }
+
+    /**
+     * Invoke the given property's setter-method
+     *
+     * @param ReflectionProperty $property
+     * @param mixed $value
+     *
+     * @return mixed
+     *
+     * @throws ReflectionException
+     * @throws UndefinedProperty
+     */
+    protected function invokeSetter(ReflectionProperty $property, $value)
+    {
+        $methodName = MethodHelper::makeSetterName($property->getName());
+        if ($this->hasInternalMethod($methodName)) {
+            return $this->$methodName($value);
         }
 
         throw new UndefinedProperty(sprintf(
