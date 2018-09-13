@@ -10,7 +10,11 @@ use ReflectionProperty;
 /**
  * Overload
  *
- * TODO: Description of this trait
+ * <br />
+ *
+ * Components using this trait will have their properties overloaded.
+ *
+ * @link http://php.net/manual/en/language.oop5.overloading.php
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Properties
@@ -60,7 +64,6 @@ trait Overload
         }
 
         return $this->invokeSetter($this->getInternalProperty($name), $value);
-
     }
 
     /**
@@ -86,6 +89,21 @@ trait Overload
         return isset($this->$name);
     }
 
+    /**
+     * Method is invoked when unset() is used on inaccessible properties.
+     *
+     * @param string $name
+     *
+     * @throws ReflectionException
+     */
+    public function __unset(string $name) : void
+    {
+        if ( ! $this->hasInternalProperty($name)) {
+            throw new UndefinedProperty(sprintf('Failed unset of Property "%s". It does not exist or is inaccessible', $name));
+        }
+
+        unset($this->$name);
+    }
 
     /*****************************************************************
      * Internals
