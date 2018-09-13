@@ -39,7 +39,7 @@ trait Overload
             return $this->invokeGetter($this->getInternalProperty($name));
         }
 
-        throw new UndefinedProperty(sprintf('Property "%s" does not exist or is inaccessible', $name));
+        throw new UndefinedProperty(sprintf('Failed reading Property "%s". It does not exist or is inaccessible', $name));
     }
 
     /**
@@ -60,7 +60,7 @@ trait Overload
             return;
         }
 
-        throw new UndefinedProperty(sprintf('Property "%s" does not exist or is inaccessible', $name));
+        throw new UndefinedProperty(sprintf('Failed writing Property "%s". It does not exist or is inaccessible', $name));
     }
 
     /*****************************************************************
@@ -85,7 +85,7 @@ trait Overload
         }
 
         throw new UndefinedProperty(sprintf(
-            'No "%s"() method available for property "%s"', $methodName,
+            'No %s() getter-method available for property "%s"', $methodName,
             $property->getName()
         ));
     }
@@ -109,7 +109,7 @@ trait Overload
         }
 
         throw new UndefinedProperty(sprintf(
-            'No "%s"() method available for property "%s"', $methodName,
+            'No %s() setter-method available for property "%s"', $methodName,
             $property->getName()
         ));
     }
