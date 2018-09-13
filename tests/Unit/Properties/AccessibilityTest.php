@@ -4,12 +4,8 @@ namespace Aedart\Tests\Unit\Properties;
 
 
 use Aedart\Contracts\Properties\AccessibilityLevels;
-use Aedart\Testing\TestCases\UnitTestCase;
-use Aedart\Tests\Helpers\Dummies\Properties\Accessibility\Person;
 use Aedart\Tests\TestCases\Properties\PropertiesTestCase;
 use ReflectionClass;
-use ReflectionException;
-use ReflectionMethod;
 
 /**
  * AccessibilityTest
