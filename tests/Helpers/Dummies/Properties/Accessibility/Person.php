@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Properties\Accessibility;
 
-use Aedart\Properties\Accessibility;
+use Aedart\Properties\Reflections;
 
 /**
  * Person
@@ -14,7 +14,7 @@ use Aedart\Properties\Accessibility;
  */
 class Person
 {
-    use Accessibility;
+    use Reflections;
 
     /**
      * Name of person
@@ -36,4 +36,14 @@ class Person
      * @var int
      */
     private $height = 193;
+
+    /**
+     * N/A
+     *
+     * @return bool
+     */
+    protected function myInternalMethod() : bool
+    {
+        return false;
+    }
 }
