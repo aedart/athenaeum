@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts;
 
+use Aedart\Contracts\Utils\Exceptions\JsonEncodingException;
 use Aedart\Contracts\Utils\Populatable;
 use ArrayAccess;
 use Illuminate\Contracts\Container\Container;
@@ -82,4 +83,26 @@ interface Dto extends ArrayAccess,
      * @return Container|null IoC service Container or null if none defined
      */
     public function container() : ?Container;
+
+    /**
+     * Returns a new instance of this Dto
+     *
+     * @param array $properties
+     * @param Container|null $container [optional]
+     *
+     * @return static
+     */
+    static public function makeNew(array $properties, ?Container $container = null);
+
+    /**
+     * Create a new populated instance of this Dto from a
+     * json encoded string
+     *
+     * @param string $json
+     *
+     * @return static
+     *
+     * @throws JsonEncodingException
+     */
+    static public function fromJson(string $json);
 }

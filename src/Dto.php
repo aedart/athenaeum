@@ -3,6 +3,7 @@
 namespace Aedart;
 
 use Aedart\Contracts\Dto as DtoInterface;
+use Aedart\Contracts\Utils\Exceptions\JsonEncodingException;
 use Aedart\Properties\Overload;
 use Aedart\Utils\Helpers\MethodHelper;
 use Aedart\Utils\Json;
@@ -124,6 +125,27 @@ abstract class Dto implements DtoInterface
         foreach ($data as $property => $value){
             $this->__set($property, $value);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws Throwable
+     */
+    static public function makeNew(array $properties, ?Container $container = null)
+    {
+        return new static($properties, $container);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws Throwable
+     * @throws Utils\Exceptions\JsonEncoding
+     */
+    static public function fromJson(string $json)
+    {
+        return static::makeNew(Json::decode($json, true));
     }
 
     /**
