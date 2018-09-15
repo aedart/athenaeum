@@ -46,4 +46,52 @@ class Person
     {
         return false;
     }
+
+    /**
+     * Set name of this person
+     *
+     * @param null|string $value
+     *
+     * @return self
+     */
+    public function setName(?string $value)
+    {
+        $this->name = $value;
+
+        return $this;
+    }
+
+    /**
+     * Returns name of this person
+     *
+     * @return null|string
+     */
+    public function getName() : ?string
+    {
+        return $this->name;
+    }
+
+    /*****************************************************************
+     * Utils
+     ****************************************************************/
+
+    /**
+     * Determine if property isset
+     *
+     * @param string $propName
+     *
+     * @return bool
+     */
+    public function isPropSet(string $propName) : bool
+    {
+        return isset($this->$propName);
+    }
+
+    /**
+     * Unset this person's name
+     */
+    public function unsetName()
+    {
+        unset($this->name);
+    }
 }
