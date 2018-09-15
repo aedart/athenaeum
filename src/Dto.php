@@ -3,7 +3,6 @@
 namespace Aedart;
 
 use Aedart\Contracts\Dto as DtoInterface;
-use Aedart\Contracts\Utils\Exceptions\JsonEncodingException;
 use Aedart\Properties\Overload;
 use Aedart\Utils\Helpers\MethodHelper;
 use Aedart\Utils\Json;
