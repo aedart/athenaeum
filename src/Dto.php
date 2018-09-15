@@ -3,6 +3,7 @@
 namespace Aedart;
 
 use Aedart\Contracts\Dto as DtoInterface;
+use Aedart\Contracts\Utils\Populatable;
 use Aedart\Properties\Overload;
 use Aedart\Utils\Helpers\MethodHelper;
 use Aedart\Utils\Json;
@@ -341,7 +342,8 @@ abstract class Dto implements DtoInterface
      *
      * @return mixed
      * @throws BindingResolutionException If the instance is not populatable and or the given value is not an
-     *                                      array that can be passed to the populatable instance
+     *                                    array that can be passed to the populatable instance
+     * @throws Throwable
      */
     protected function resolveInstancePopulation($instance, ReflectionParameter $parameter, $value)
     {
