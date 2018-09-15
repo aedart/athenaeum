@@ -35,7 +35,8 @@
     "php": ">=7.2.0",
     "fzaninotto/faker": "1.8.*",
     "mockery/mockery": "1.1.*",
-    "illuminate/support": "5.7.*"
+    "illuminate/support": "5.7.*",
+    "illuminate/container": "5.7.*"
   },
   "require-dev": {
     "codeception/codeception": "2.4.*",
