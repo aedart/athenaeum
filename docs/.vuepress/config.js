@@ -74,6 +74,7 @@ function genSidebarComponents () {
             collapsable: true,
             children: [
                 'utils/',
+                'utils/json',
             ]
         },
     ]
