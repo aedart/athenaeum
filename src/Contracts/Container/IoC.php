@@ -12,6 +12,7 @@ use Illuminate\Contracts\Container\Container;
  * Adapted version of Laravel IoC Service Container.
  *
  * @see \Illuminate\Contracts\Container\Container
+ * @link https://en.wikipedia.org/wiki/Inversion_of_control
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Container
