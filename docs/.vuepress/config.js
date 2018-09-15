@@ -61,6 +61,19 @@ function genSidebarComponents () {
             ]
         },
         {
+            title: 'Dto',
+            collapsable: true,
+            children: [
+                'dto/',
+                'dto/interface',
+                'dto/concrete-dto',
+                'dto/overloading',
+                'dto/populate',
+                'dto/json',
+                'dto/nested-dto',
+            ]
+        },
+        {
             title: 'Properties',
             collapsable: true,
             children: [
