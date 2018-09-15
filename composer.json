@@ -33,6 +33,7 @@
   },
   "require": {
     "php": ">=7.2.0",
+    "ext-json": "*",
     "fzaninotto/faker": "1.8.*",
     "mockery/mockery": "1.1.*",
     "illuminate/support": "5.7.*",
