@@ -70,6 +70,7 @@ abstract class Dto implements DtoInterface
      *
      * @throws ReflectionException
      * @throws BindingResolutionException
+     * @throws Throwable
      */
     public function __set(string $name, $value)
     {
@@ -276,6 +277,7 @@ abstract class Dto implements DtoInterface
      *
      * @throws BindingResolutionException
      * @throws ReflectionException
+     * @throws Throwable
      */
     protected function resolveValue(string $setterMethodName, $value)
     {
@@ -297,6 +299,7 @@ abstract class Dto implements DtoInterface
      *                                      b) If the instance is not populatable and or the given value is not an
      *                                      array that can be passed to the populatable instance
      *                                      c) No service container is available
+     * @throws Throwable
      */
     protected function resolveParameter(ReflectionParameter $parameter, $value)
     {
