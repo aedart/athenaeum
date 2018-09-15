@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Helpers\Dummies\Dto;
 
 use Aedart\Dto;
+use Aedart\Tests\Helpers\Dummies\Contracts\Note as NoteInterface;
 
 /**
  * Person
@@ -11,6 +12,8 @@ use Aedart\Dto;
  *
  * @property string $name
  * @property int $age
+ * @property Address $address
+ * @property NoteInterface $note
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Dto
@@ -30,6 +33,20 @@ class Person extends Dto
      * @var int|null
      */
     protected $age = null;
+
+    /**
+     * Address
+     *
+     * @var Address|null
+     */
+    protected $address = null;
+
+    /**
+     * Note
+     *
+     * @var NoteInterface|null
+     */
+    protected $note = null;
 
     /**
      * Set name
@@ -77,5 +94,53 @@ class Person extends Dto
     public function getAge(): ?int
     {
         return $this->age;
+    }
+
+    /**
+     * Set address
+     *
+     * @param Address|null $address Address
+     *
+     * @return self
+     */
+    public function setAddress(?Address $address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return Address|null address or null if none address has been set
+     */
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set note
+     *
+     * @param NoteInterface|null $note Note
+     *
+     * @return self
+     */
+    public function setNote(?NoteInterface $note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get note
+     *
+     * @return NoteInterface|null note or null if none note has been set
+     */
+    public function getNote(): ?NoteInterface
+    {
+        return $this->note;
     }
 }
