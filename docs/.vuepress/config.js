@@ -54,6 +54,13 @@ function genSidebarComponents () {
             ]
         },
         {
+            title: 'Container',
+            collapsable: true,
+            children: [
+                'container/',
+            ]
+        },
+        {
             title: 'Properties',
             collapsable: true,
             children: [
