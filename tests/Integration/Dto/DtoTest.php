@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Integration\Dto;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
+use Aedart\Tests\Helpers\Dummies\Dto\Person;
 use Aedart\Tests\TestCases\Dto\DtoTestCase;
 use Aedart\Utils\Json;
 
@@ -160,6 +161,19 @@ class DtoTest extends DtoTestCase
 
         ConsoleDebugger::output($encoded);
         $this->assertInternalType('string', $encoded);
+    }
+
+    /**
+     * @test
+     */
+    public function canCreateInstanceFromJson()
+    {
+        $json = '{"name":"Stacy Douglas","age":67571179}';
+
+        $dto = Person::fromJson($json);
+
+        $this->assertSame('Stacy Douglas', $dto['name']);
+        $this->assertSame(67571179, $dto['age']);
     }
 
     /**
