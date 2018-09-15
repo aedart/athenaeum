@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Properties\Accessibility;
 
-use Aedart\Properties\Reflections;
+use Aedart\Properties\Overload;
 
 /**
  * Person
@@ -14,7 +14,7 @@ use Aedart\Properties\Reflections;
  */
 class Person
 {
-    use Reflections;
+    use Overload;
 
     /**
      * Name of person
