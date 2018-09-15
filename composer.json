@@ -5,7 +5,9 @@
     "Library",
     "Testing",
     "Utilities",
-    "Test Cases"
+    "Test Cases",
+    "Overload",
+    "Magic Method"
   ],
   "homepage": "https://aedart.github.io/athenaeum/",
   "support": {
