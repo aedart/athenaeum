@@ -13,6 +13,7 @@ use Aedart\Support\Helpers\Bus\BusTrait;
 use Aedart\Support\Helpers\Bus\QueueingBusTrait;
 use Aedart\Support\Helpers\Cache\CacheFactoryTrait;
 use Aedart\Support\Helpers\Cache\CacheStoreTrait;
+use Aedart\Support\Helpers\Cache\CacheTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -70,6 +71,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             // Cache
             'CacheFactoryTrait'                 => [ CacheFactoryTrait::class ],
             'CacheStoreTrait'                   => [ CacheStoreTrait::class ],
+            'CacheTrait'                        => [ CacheTrait::class ],
         ];
     }
 
@@ -96,7 +98,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
         $mock = $tester->getTraitMock();
 
         $value = $mock->$getMethod();
-        $this->assertNotNull($value. 'Default value is not set. Please check your Laravel services');
+        $this->assertNotNull($value, 'Default value is not set. Please check your Laravel services');
     }
 
     /**
