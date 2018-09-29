@@ -22,6 +22,7 @@ use Aedart\Support\Helpers\Database\ConnectionResolverTrait;
 use Aedart\Support\Helpers\Database\DbTrait;
 use Aedart\Support\Helpers\Database\SchemaTrait;
 use Aedart\Support\Helpers\Encryption\CryptTrait;
+use Aedart\Support\Helpers\Events\EventTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -101,6 +102,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Encryption
             'CryptTrait'                        => [ CryptTrait::class ],
+
+            // Events
+            'EventTrait'                        => [ EventTrait::class ],
         ];
     }
 
