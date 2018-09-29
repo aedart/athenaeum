@@ -96,7 +96,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
         $mock = $tester->getTraitMock();
 
         $value = $mock->$getMethod();
-        $this->assertNotNull($value);
+        $this->assertNotNull($value. 'Default value is not set. Please check your Laravel services');
     }
 
     /**
