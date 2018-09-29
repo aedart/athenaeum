@@ -10,6 +10,7 @@ use Aedart\Support\Helpers\Auth\PasswordTrait;
 use Aedart\Support\Helpers\Broadcasting\BroadcastFactoryTrait;
 use Aedart\Support\Helpers\Broadcasting\BroadcastTrait;
 use Aedart\Support\Helpers\Bus\BusTrait;
+use Aedart\Support\Helpers\Bus\QueueingBusTrait;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
 
@@ -61,6 +62,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Bus
             'BusTrait'                          => [ BusTrait::class ],
+            'QueueingBusTrait'                  => [ QueueingBusTrait::class ],
         ];
     }
 
