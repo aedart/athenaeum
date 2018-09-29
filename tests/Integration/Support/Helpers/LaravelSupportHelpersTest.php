@@ -21,6 +21,7 @@ use Aedart\Support\Helpers\Cookie\CookieTrait;
 use Aedart\Support\Helpers\Cookie\QueueingCookieTrait;
 use Aedart\Support\Helpers\Database\ConnectionResolverTrait;
 use Aedart\Support\Helpers\Database\DbTrait;
+use Aedart\Support\Helpers\Database\SchemaTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -96,6 +97,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             // Database
             'ConnectionResolverTrait'           => [ ConnectionResolverTrait::class ],
             'DbTrait'                           => [ DbTrait::class ],
+            'SchemaTrait'                       => [ SchemaTrait::class ],
         ];
     }
 
