@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Integration\Support\Helpers;
 
 
+use Aedart\Support\Helpers\Auth\Access\GateTrait;
 use Aedart\Support\Helpers\Auth\AuthFactoryTrait;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -41,7 +42,11 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
     {
         return [
             // Auth
-            'AuthFactoryTrait' => [ AuthFactoryTrait::class ]
+
+            // TODO: Still unable to mock Gate
+            // TODO: @see https://github.com/mockery/mockery/issues/861
+            //'GateTrait'                 => [ GateTrait::class ],
+            'AuthFactoryTrait'          => [ AuthFactoryTrait::class ],
         ];
     }
 
