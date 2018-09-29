@@ -23,6 +23,7 @@ use Aedart\Support\Helpers\Database\DbTrait;
 use Aedart\Support\Helpers\Database\SchemaTrait;
 use Aedart\Support\Helpers\Encryption\CryptTrait;
 use Aedart\Support\Helpers\Events\EventTrait;
+use Aedart\Support\Helpers\Filesystem\CloudStorageTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -105,6 +106,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Events
             'EventTrait'                        => [ EventTrait::class ],
+
+            // Filesystem
+            'CloudStorageTrait'                 => [ CloudStorageTrait::class ],
         ];
     }
 
