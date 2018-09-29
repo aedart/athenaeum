@@ -27,6 +27,7 @@ use Aedart\Support\Helpers\Filesystem\CloudStorageTrait;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Support\Helpers\Filesystem\StorageFactoryTrait;
 use Aedart\Support\Helpers\Filesystem\StorageTrait;
+use Aedart\Support\Helpers\Foundation\AppTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -115,6 +116,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'FileTrait'                         => [ FileTrait::class ],
             'StorageFactoryTrait'               => [ StorageFactoryTrait::class ],
             'StorageTrait'                      => [ StorageTrait::class ],
+
+            // Foundation
+            'AppTrait'                          => [ AppTrait::class ],
         ];
     }
 
