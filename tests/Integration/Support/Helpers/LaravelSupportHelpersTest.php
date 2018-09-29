@@ -17,6 +17,7 @@ use Aedart\Support\Helpers\Cache\CacheTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Console\ArtisanTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
+use Aedart\Support\Helpers\Cookie\CookieTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -84,6 +85,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Container
             'ContainerTrait'                    => [ ContainerTrait::class ],
+
+            // Cookie
+            'CookieTrait'                       => [ CookieTrait::class ],
         ];
     }
 
