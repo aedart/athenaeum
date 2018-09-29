@@ -16,6 +16,7 @@ use Aedart\Support\Helpers\Cache\CacheStoreTrait;
 use Aedart\Support\Helpers\Cache\CacheTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Console\ArtisanTrait;
+use Aedart\Support\Helpers\Container\ContainerTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -80,6 +81,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Console
             'ArtisanTrait'                      => [ ArtisanTrait::class ],
+
+            // Container
+            'ContainerTrait'                    => [ ContainerTrait::class ],
         ];
     }
 
