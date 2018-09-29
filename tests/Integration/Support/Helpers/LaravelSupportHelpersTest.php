@@ -18,6 +18,7 @@ use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Console\ArtisanTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use Aedart\Support\Helpers\Cookie\CookieTrait;
+use Aedart\Support\Helpers\Cookie\QueueingCookieTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -88,6 +89,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Cookie
             'CookieTrait'                       => [ CookieTrait::class ],
+            'QueueingCookieTrait'               => [ QueueingCookieTrait::class ],
         ];
     }
 
