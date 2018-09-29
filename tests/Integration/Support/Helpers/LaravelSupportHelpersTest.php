@@ -15,6 +15,7 @@ use Aedart\Support\Helpers\Cache\CacheFactoryTrait;
 use Aedart\Support\Helpers\Cache\CacheStoreTrait;
 use Aedart\Support\Helpers\Cache\CacheTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
+use Aedart\Support\Helpers\Console\ArtisanTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -76,6 +77,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Config
             'ConfigTrait'                       => [ ConfigTrait::class ],
+
+            // Console
+            'ArtisanTrait'                      => [ ArtisanTrait::class ],
         ];
     }
 
