@@ -2,7 +2,6 @@
 
 namespace Aedart\Tests\Integration\Support\Helpers;
 
-
 use Aedart\Support\Helpers\Auth\AuthFactoryTrait;
 use Aedart\Support\Helpers\Auth\AuthTrait;
 use Aedart\Support\Helpers\Auth\PasswordBrokerFactoryTrait;
@@ -22,6 +21,7 @@ use Aedart\Support\Helpers\Cookie\QueueingCookieTrait;
 use Aedart\Support\Helpers\Database\ConnectionResolverTrait;
 use Aedart\Support\Helpers\Database\DbTrait;
 use Aedart\Support\Helpers\Database\SchemaTrait;
+use Aedart\Support\Helpers\Encryption\CryptTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -98,6 +98,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'ConnectionResolverTrait'           => [ ConnectionResolverTrait::class ],
             'DbTrait'                           => [ DbTrait::class ],
             'SchemaTrait'                       => [ SchemaTrait::class ],
+
+            // Encryption
+            'CryptTrait'                        => [ CryptTrait::class ],
         ];
     }
 
