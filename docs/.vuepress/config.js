@@ -85,6 +85,7 @@ function genSidebarComponents () {
             collapsable: true,
             children: [
                 'testing/',
+                'testing/laravel',
                 'testing/test-cases',
                 'testing/traits',
             ]
