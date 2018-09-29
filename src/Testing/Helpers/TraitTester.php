@@ -83,10 +83,12 @@ class TraitTester
      *
      * @param mixed|null $setValue [optional] Auto generated, if none given
      * @param mixed|null $defaultValue [optional] Auto generated, if none given
+     * @param bool $assertDefaultIsNull [optional] If true, then "get-default" will be asserted to
+     *                                  return "null" on initial call
      *
      * @throws ReflectionException
      */
-    public function assert($setValue = null, $defaultValue = null)
+    public function assert($setValue = null, $defaultValue = null, bool $assertDefaultIsNull = true)
     {
         $trait = $this->trait;
         $method = $this->setPropertyMethodName();
@@ -94,7 +96,7 @@ class TraitTester
         $setValue = $setValue ?? ArgumentFaker::fakeFor($trait, $method);
         $defaultValue = $defaultValue ?? ArgumentFaker::fakeFor($trait, $method);
 
-        $this->assertWithValues($setValue, $defaultValue);
+        $this->assertWithValues($setValue, $defaultValue, $assertDefaultIsNull);
     }
 
     /**
@@ -102,15 +104,19 @@ class TraitTester
      *
      * @param mixed $setValue The value to set and obtain
      * @param mixed $defaultValue Custom default value
+     * @param bool $assertDefaultIsNull [optional] If true, then "get-default" will be asserted to
+     *                                  return "null" on initial call
      *
      * @throws ExpectationFailedException
      */
-    public function assertWithValues($setValue, $defaultValue)
+    public function assertWithValues($setValue, $defaultValue, bool $assertDefaultIsNull = true)
     {
         $mock = $this->mock;
 
         // Ensures default value is null (by default)
-        $this->assertDefaultValueIsNull($mock);
+        if($assertDefaultIsNull){
+            $this->assertDefaultValueIsNull($mock);
+        }
 
         // Ensures that no value is set (by default)
         $this->assertHasNoValue($mock);

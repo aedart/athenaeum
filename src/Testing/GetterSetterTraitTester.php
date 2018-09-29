@@ -36,12 +36,19 @@ trait GetterSetterTraitTester
      * @param string $trait Trait class path
      * @param mixed|null $setValue [optional] Auto generated, if none given
      * @param mixed|null $defaultValue [optional] Auto generated, if none given
+     * @param bool $assertDefaultIsNull [optional] If true, then "get-default" will be asserted to
+     *                                  return "null" on initial call
      *
      * @throws ReflectionException
      */
-    public function assertTraitMethods(string $trait, $setValue = null, $defaultValue = null)
+    public function assertTraitMethods(
+        string $trait,
+        $setValue = null,
+        $defaultValue = null,
+        bool $assertDefaultIsNull = true
+    ) : void
     {
-        $this->makeTraitTester($trait)->assert($setValue, $defaultValue);
+        $this->makeTraitTester($trait)->assert($setValue, $defaultValue, $assertDefaultIsNull);
     }
 
     /**
@@ -52,12 +59,19 @@ trait GetterSetterTraitTester
      * @param string $trait Trait class path
      * @param mixed $setValue
      * @param mixed $defaultValue
+     * @param bool $assertDefaultIsNull [optional] If true, then "get-default" will be asserted to
+     *                                  return "null" on initial call
      *
      * @throws ReflectionException
      */
-    public function assertGetterSetterTraitMethods(string $trait, $setValue, $defaultValue)
+    public function assertGetterSetterTraitMethods(
+        string $trait,
+        $setValue,
+        $defaultValue,
+        bool $assertDefaultIsNull = true
+    ) : void
     {
-        $this->makeTraitTester($trait)->assertWithValues($setValue, $defaultValue);
+        $this->makeTraitTester($trait)->assertWithValues($setValue, $defaultValue, $assertDefaultIsNull);
     }
 
     /*****************************************************************
