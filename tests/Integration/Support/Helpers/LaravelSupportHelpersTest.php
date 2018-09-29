@@ -8,6 +8,7 @@ use Aedart\Support\Helpers\Auth\AuthTrait;
 use Aedart\Support\Helpers\Auth\PasswordBrokerFactoryTrait;
 use Aedart\Support\Helpers\Auth\PasswordTrait;
 use Aedart\Support\Helpers\Broadcasting\BroadcastFactoryTrait;
+use Aedart\Support\Helpers\Broadcasting\BroadcastTrait;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
 
@@ -54,7 +55,8 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'PasswordTrait'                     => [ PasswordTrait::class ],
 
             // Broadcasting
-            'BroadcastFactoryTrait'             => [ BroadcastFactoryTrait::class ]
+            'BroadcastFactoryTrait'             => [ BroadcastFactoryTrait::class ],
+            'BroadcastTrait'                    => [ BroadcastTrait::class ],
         ];
     }
 
