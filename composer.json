@@ -46,7 +46,8 @@
     "symfony/var-dumper": "4.1.*"
   },
   "suggest": {
-    "codeception/codeception": "Required for Testing utilities"
+    "codeception/codeception": "Required for Testing utilities",
+    "orchestra/testbench": "Required for Laravel Testing utilities"
   },
   "minimum-stability": "stable",
   "prefer-stable": true,
