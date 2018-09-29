@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Integration\Support\Helpers;
 
 use Aedart\Support\Helpers\Auth\Access\GateTrait;
+use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 
 /**
  * GateTest
@@ -15,7 +16,7 @@ use Aedart\Support\Helpers\Auth\Access\GateTrait;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Support\Helpers
  */
-class GateTest extends LaravelSupportHelpersTest
+class GateTest extends LaravelHelpersTestCase
 {
     use GateTrait;
 
