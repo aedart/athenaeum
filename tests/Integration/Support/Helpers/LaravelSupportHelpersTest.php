@@ -7,6 +7,7 @@ use Aedart\Support\Helpers\Auth\AuthFactoryTrait;
 use Aedart\Support\Helpers\Auth\AuthTrait;
 use Aedart\Support\Helpers\Auth\PasswordBrokerFactoryTrait;
 use Aedart\Support\Helpers\Auth\PasswordTrait;
+use Aedart\Support\Helpers\Broadcasting\BroadcastFactoryTrait;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
 
@@ -44,7 +45,6 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
     {
         return [
             // Auth
-
             // TODO: Still unable to mock Gate
             // TODO: @see https://github.com/mockery/mockery/issues/861
             //'GateTrait'                       => [ GateTrait::class ],
@@ -52,6 +52,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'AuthTrait'                         => [ AuthTrait::class ],
             'PasswordBrokerFactoryTrait'        => [ PasswordBrokerFactoryTrait::class ],
             'PasswordTrait'                     => [ PasswordTrait::class ],
+
+            // Broadcasting
+            'BroadcastFactoryTrait'             => [ BroadcastFactoryTrait::class ]
         ];
     }
 
