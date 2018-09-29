@@ -6,6 +6,7 @@ namespace Aedart\Tests\Integration\Support\Helpers;
 use Aedart\Support\Helpers\Auth\AuthFactoryTrait;
 use Aedart\Support\Helpers\Auth\AuthTrait;
 use Aedart\Support\Helpers\Auth\PasswordBrokerFactoryTrait;
+use Aedart\Support\Helpers\Auth\PasswordTrait;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
 
@@ -50,6 +51,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'AuthFactoryTrait'                  => [ AuthFactoryTrait::class ],
             'AuthTrait'                         => [ AuthTrait::class ],
             'PasswordBrokerFactoryTrait'        => [ PasswordBrokerFactoryTrait::class ],
+            'PasswordTrait'                     => [ PasswordTrait::class ],
         ];
     }
 
