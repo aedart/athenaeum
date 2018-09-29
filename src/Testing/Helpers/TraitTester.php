@@ -279,6 +279,16 @@ class TraitTester
     }
 
     /**
+     * Get the trait mock
+     *
+     * @return PHPUnit_Framework_MockObject_MockObject
+     */
+    public function getTraitMock() : PHPUnit_Framework_MockObject_MockObject
+    {
+        return $this->mock;
+    }
+
+    /**
      * Guesses a property name for given trait
      *
      * @param string $trait Trait class path
@@ -304,10 +314,6 @@ class TraitTester
         return $properties[0]->getName();
     }
 
-    /*****************************************************************
-     * Internals
-     ****************************************************************/
-
     /**
      * Returns the property name, camel-cased
      *
@@ -315,7 +321,7 @@ class TraitTester
      *
      * @return string
      */
-    protected function getPropertyName() : string
+    public function getPropertyName() : string
     {
         return ucwords($this->property);
     }
@@ -327,7 +333,7 @@ class TraitTester
      *
      * @return string E.g. setDescription, setName, setId
      */
-    protected function setPropertyMethodName() : string
+    public function setPropertyMethodName() : string
     {
         return 'set' . $this->getPropertyName();
     }
@@ -339,7 +345,7 @@ class TraitTester
      *
      * @return string E.g. getDescription, getName, getId
      */
-    protected function getPropertyMethodName() : string
+    public function getPropertyMethodName() : string
     {
         return 'get' . $this->getPropertyName();
     }
@@ -351,7 +357,7 @@ class TraitTester
      *
      * @return string E.g. hasDescription, hasName, hasId
      */
-    protected function hasPropertyMethodName() : string
+    public function hasPropertyMethodName() : string
     {
         return 'has' . $this->getPropertyName();
     }
@@ -363,7 +369,7 @@ class TraitTester
      *
      * @return string E.g. getDefaultDescription, getDefaultName, getDefaultId
      */
-    protected function getDefaultPropertyMethodName() : string
+    public function getDefaultPropertyMethodName() : string
     {
         return 'getDefault' . $this->getPropertyName();
     }
