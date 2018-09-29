@@ -2,8 +2,9 @@
 
 namespace Aedart\Tests\Integration\Laravel;
 
-use Aedart\Testing\Laravel\ApplicationInitiator;
+use Aedart\Testing\Laravel\LaravelTestHelper;
 use Codeception\TestCase\Test;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
 
 /**
@@ -18,7 +19,7 @@ use Illuminate\Contracts\Foundation\Application;
  */
 class ApplicationInitiatorTest extends Test
 {
-    use ApplicationInitiator;
+    use LaravelTestHelper;
 
     /*****************************************************************
      * Setup Methods
@@ -64,5 +65,20 @@ class ApplicationInitiatorTest extends Test
         $app = $this->getApplication();
 
         $this->assertInstanceOf(Application::class, $app);
+    }
+
+    /**
+     * @test
+     */
+    public function laravelComponentIsAvailable()
+    {
+        $app = $this->getApplication();
+
+        /** @var Repository $config */
+        $config = $app['config'];
+        $this->assertInstanceOf(Repository::class, $config);
+
+        // Assert a typical config is available
+        $this->assertNotEmpty($config->get('cache.default'));
     }
 }
