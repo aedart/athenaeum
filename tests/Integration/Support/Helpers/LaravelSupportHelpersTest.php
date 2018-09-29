@@ -28,6 +28,7 @@ use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Support\Helpers\Filesystem\StorageFactoryTrait;
 use Aedart\Support\Helpers\Filesystem\StorageTrait;
 use Aedart\Support\Helpers\Foundation\AppTrait;
+use Aedart\Support\Helpers\Hashing\HashTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -119,6 +120,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Foundation
             'AppTrait'                          => [ AppTrait::class ],
+
+            // Hashing
+            'HashTrait'                          => [ HashTrait::class ],
         ];
     }
 
