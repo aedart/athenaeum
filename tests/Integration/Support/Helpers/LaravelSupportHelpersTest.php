@@ -12,6 +12,8 @@ use Aedart\Support\Helpers\Broadcasting\BroadcastTrait;
 use Aedart\Support\Helpers\Bus\BusTrait;
 use Aedart\Support\Helpers\Bus\QueueingBusTrait;
 use Aedart\Support\Helpers\Cache\CacheFactoryTrait;
+use Aedart\Support\Helpers\Cache\CacheStoreTrait;
+use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
 
@@ -67,6 +69,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Cache
             'CacheFactoryTrait'                 => [ CacheFactoryTrait::class ],
+            'CacheStoreTrait'                   => [ CacheStoreTrait::class ],
         ];
     }
 
@@ -84,7 +87,16 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
      */
     public function canInvokeAwareOfMethods(string $awareOfTrait)
     {
+        // Assert getter and setter methods
         $this->assertTraitMethods($awareOfTrait, null, null, false);
+
+        // Assert a default method
+        $tester = new TraitTester($this, $awareOfTrait, null);
+        $getMethod = $tester->getPropertyMethodName();
+        $mock = $tester->getTraitMock();
+
+        $value = $mock->$getMethod();
+        $this->assertNotNull($value);
     }
 
     /**
