@@ -38,6 +38,7 @@ use Aedart\Support\Helpers\Notifications\NotificationDispatcherTrait;
 use Aedart\Support\Helpers\Notifications\NotificationFactoryTrait;
 use Aedart\Support\Helpers\Queue\QueueFactoryTrait;
 use Aedart\Support\Helpers\Queue\QueueMonitorTrait;
+use Aedart\Support\Helpers\Queue\QueueTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -151,6 +152,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             // Queue
             'QueueFactoryTrait'                 => [ QueueFactoryTrait::class ],
             'QueueMonitorTrait'                 => [ QueueMonitorTrait::class ],
+            'QueueTrait'                        => [ QueueTrait::class ],
         ];
     }
 
