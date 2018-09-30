@@ -30,6 +30,7 @@ use Aedart\Support\Helpers\Filesystem\StorageTrait;
 use Aedart\Support\Helpers\Foundation\AppTrait;
 use Aedart\Support\Helpers\Hashing\HashTrait;
 use Aedart\Support\Helpers\Http\RequestTrait;
+use Aedart\Support\Helpers\Logging\LogManagerTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -127,6 +128,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Http
             'RequestTrait'                      => [ RequestTrait::class ],
+
+            // Logging
+            'LogManagerTrait'                   => [ LogManagerTrait::class ],
         ];
     }
 
