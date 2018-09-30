@@ -47,6 +47,7 @@ use Aedart\Support\Helpers\Routing\RouteRegistrarTrait;
 use Aedart\Support\Helpers\Routing\UrlGeneratorTrait;
 use Aedart\Support\Helpers\Session\SessionManagerTrait;
 use Aedart\Support\Helpers\Session\SessionTrait;
+use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -175,6 +176,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             // Session
             'SessionManagerTrait'               => [ SessionManagerTrait::class ],
             'SessionTrait'                      => [ SessionTrait::class ],
+
+            // Translation
+            'TranslatorTrait'                   => [ TranslatorTrait::class ],
         ];
     }
 
