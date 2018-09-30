@@ -32,6 +32,7 @@ use Aedart\Support\Helpers\Hashing\HashTrait;
 use Aedart\Support\Helpers\Http\RequestTrait;
 use Aedart\Support\Helpers\Logging\LogManagerTrait;
 use Aedart\Support\Helpers\Logging\LogTrait;
+use Aedart\Support\Helpers\Mail\MailerTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -133,6 +134,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             // Logging
             'LogManagerTrait'                   => [ LogManagerTrait::class ],
             'LogTrait'                          => [ LogTrait::class ],
+
+            // Mail
+            'MailerTrait'                       => [ MailerTrait::class ],
         ];
     }
 
