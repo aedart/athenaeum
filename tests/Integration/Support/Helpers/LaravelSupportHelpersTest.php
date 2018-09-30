@@ -36,6 +36,7 @@ use Aedart\Support\Helpers\Mail\MailerTrait;
 use Aedart\Support\Helpers\Mail\MailQueueTrait;
 use Aedart\Support\Helpers\Notifications\NotificationDispatcherTrait;
 use Aedart\Support\Helpers\Notifications\NotificationFactoryTrait;
+use Aedart\Support\Helpers\Queue\QueueFactoryTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -145,6 +146,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             // Notifications
             'NotificationDispatcherTrait'       => [ NotificationDispatcherTrait::class ],
             'NotificationFactoryTrait'          => [ NotificationFactoryTrait::class ],
+
+            // Queue
+            'QueueFactoryTrait'                 => [ QueueFactoryTrait::class ],
         ];
     }
 
