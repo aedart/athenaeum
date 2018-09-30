@@ -42,6 +42,7 @@ use Aedart\Support\Helpers\Queue\QueueTrait;
 use Aedart\Support\Helpers\Redis\RedisFactoryTrait;
 use Aedart\Support\Helpers\Redis\RedisTrait;
 use Aedart\Support\Helpers\Routing\RedirectTrait;
+use Aedart\Support\Helpers\Routing\ResponseFactoryTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -163,6 +164,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Routing
             'RedirectTrait'                     => [ RedirectTrait::class ],
+            'ResponseFactoryTrait'              => [ ResponseFactoryTrait::class ],
         ];
     }
 
