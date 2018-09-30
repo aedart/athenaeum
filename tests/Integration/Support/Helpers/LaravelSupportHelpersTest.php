@@ -50,6 +50,7 @@ use Aedart\Support\Helpers\Session\SessionTrait;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
 use Aedart\Support\Helpers\View\BladeTrait;
+use Aedart\Support\Helpers\View\ViewFactoryTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use \Mockery as m;
@@ -187,6 +188,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // View
             'BladeTrait'                        => [ BladeTrait::class ],
+            'ViewFactoryTrait'                  => [ ViewFactoryTrait::class ],
         ];
     }
 
