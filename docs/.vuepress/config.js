@@ -81,6 +81,14 @@ function genSidebarComponents () {
             ]
         },
         {
+            title: 'Support',
+            collapsable: true,
+            children: [
+                'support/',
+                'support/helpers',
+            ]
+        },
+        {
             title: 'Testing',
             collapsable: true,
             children: [
