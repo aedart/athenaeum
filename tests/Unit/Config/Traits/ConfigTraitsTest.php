@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Unit\Config\Traits;
 
+use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Config\Traits\FileParserFactoryTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
 
@@ -28,6 +29,7 @@ class ConfigTraitsTest extends TraitTestCase
     {
         return [
             'FileParserFactoryTrait'        => [ FileParserFactoryTrait::class ],
+            'ConfigLoaderTrait'             => [ ConfigLoaderTrait::class ],
         ];
     }
 
