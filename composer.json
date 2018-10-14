@@ -51,7 +51,8 @@
   },
   "suggest": {
     "codeception/codeception": "Required for Testing utilities",
-    "orchestra/testbench": "Required for Laravel Testing utilities"
+    "orchestra/testbench": "Required for Laravel Testing utilities",
+    "symfony/yaml": "Required for parsing Yaml configuration files"
   },
   "minimum-stability": "stable",
   "prefer-stable": true,
