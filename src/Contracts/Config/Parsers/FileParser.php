@@ -16,7 +16,7 @@ use Aedart\Contracts\Support\Helpers\Filesystem\FileAware;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Config\Parsers
  */
-interface File extends FileAware
+interface FileParser extends FileAware
 {
     /**
      * Returns the file extension that this parser
