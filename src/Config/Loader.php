@@ -151,7 +151,7 @@ class Loader implements LoaderInterface
     protected function resolveSectionName(SplFileInfo $file, string $directory) : string
     {
         $path = str_replace($directory, '', $file->getPath() . DIRECTORY_SEPARATOR) . $file->getBasename('.'.$file->getExtension());
-        
+
         return strtolower(str_replace(DIRECTORY_SEPARATOR, '.', $path));
     }
 }
