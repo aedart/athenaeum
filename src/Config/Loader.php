@@ -42,6 +42,8 @@ class Loader implements LoaderInterface
             throw new InvalidPath(sprintf('%s does not exist', $path));
         }
 
+        $this->directory = $path;
+
         return $this;
     }
 
