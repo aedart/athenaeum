@@ -58,7 +58,6 @@ function genSidebarComponents () {
             collapsable: true,
             children: [
                 'config/',
-                'config/loader',
             ]
         },
         {
