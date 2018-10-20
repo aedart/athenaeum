@@ -21,6 +21,6 @@ $decoded = Json::decode('{"name":"Michele Rodriguez","age":4}');
 ```
 
 ::: tip Note
-From PHP 7.3, `json_encode()` and `json_decode()` will natively support an option throw an exception upon encoding errors.
+From PHP 7.3, `json_encode()` and `json_decode()` will natively support an option to throw an exception upon encoding errors.
 These wrapper methods will be adapted to use this native option in the future.
 :::
