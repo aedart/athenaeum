@@ -9,6 +9,7 @@ use Aedart\Contracts\Config\Loader as LoaderInterface;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Support\Str;
 use SplFileInfo;
 use Throwable;
 
@@ -103,7 +104,7 @@ class Loader implements LoaderInterface
             // simply want to "overwrite" entire config.
             $config = $this->getConfig();
 
-            $section = strtolower(str_replace_array(DIRECTORY_SEPARATOR, ['.'], $path));
+            $section = $this->resolveSectionName($file, $this->getDirectory());
             $existing = $config->get($section, []);
             $new = array_merge($existing, $content);
 
@@ -137,5 +138,20 @@ class Loader implements LoaderInterface
         }
 
         throw new UnableToParseFile(sprintf('Unable to parse file "%s"', var_export($file, true)));
+    }
+
+    /**
+     * Resolves the section name of configuration
+     *
+     * @param SplFileInfo $file
+     * @param string $directory
+     *
+     * @return string
+     */
+    protected function resolveSectionName(SplFileInfo $file, string $directory) : string
+    {
+        $path = str_replace($directory, '', $file->getPath() . DIRECTORY_SEPARATOR) . $file->getBasename('.'.$file->getExtension());
+        
+        return strtolower(str_replace(DIRECTORY_SEPARATOR, '.', $path));
     }
 }
