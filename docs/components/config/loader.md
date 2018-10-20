@@ -9,7 +9,7 @@ The `Loader` component is able to load various types of configuration files and 
 | *.ini  |
 | *.json  |
 | *.php (php array)  |
-| *.yml (also *.yaml) |
+| *.yml (also *.yaml) (_requires [symfony/yaml](https://github.com/symfony/yaml)_) |
 
 ## Setup
 
