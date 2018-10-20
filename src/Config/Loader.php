@@ -3,15 +3,24 @@
 namespace Aedart\Config;
 
 
+use Aedart\Config\Loaders\Exceptions\InvalidPath;
+use Aedart\Config\Parsers\Exceptions\UnableToParseFile;
 use Aedart\Config\Traits\FileParserFactoryTrait;
 use Aedart\Contracts\Config\Loader as LoaderInterface;
-use Aedart\Contracts\Config\Loaders\Exceptions\InvalidPathException;
-use Aedart\Contracts\Config\Parsers\Exceptions\FileParserException;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Illuminate\Contracts\Config\Repository;
+use SplFileInfo;
+use Throwable;
 
-// TODO
+/**
+ * Configuration Loader
+ *
+ * @see \Aedart\Contracts\Config\Loader
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Config
+ */
 class Loader implements LoaderInterface
 {
     use ConfigTrait;
@@ -19,69 +28,113 @@ class Loader implements LoaderInterface
     use FileParserFactoryTrait;
 
     /**
-     * Set the path to where the configuration
-     * files are located
+     * Directory location of configuration files
      *
-     * @param string $path
-     *
-     * @return self
-     *
-     * @throws InvalidPathException If given path does not exist
+     * @var null|string
+     */
+    protected $directory = null;
+
+    /**
+     * {@inheritdoc}
      */
     public function setDirectory(string $path): LoaderInterface
     {
-        // TODO: Implement setDirectory() method.
+        if( ! is_dir($path)){
+            throw new InvalidPath(sprintf('%s does not exist', $path));
+        }
+
+        return $this;
     }
 
     /**
-     * Returns the path to where the configuration
-     * files are located
-     *
-     * @return string|null
+     * {@inheritdoc}
      */
     public function getDirectory(): ?string
     {
-        // TODO: Implement getDirectory() method.
+        return $this->directory;
     }
 
     /**
-     * Check if a directory was set
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasDirectory(): bool
     {
-        // TODO: Implement hasDirectory() method.
+        return isset($this->directory);
     }
 
     /**
-     * Loads and parses the configuration files found inside
-     * the specified directory
-     *
-     * @see getDirectory()
-     * @see parse()
-     * @see getConfig()
-     *
-     * @throws FileParserException If unable to parse a given configuration file
-     * @throws InvalidPathException If no directory was specified
+     * {@inheritdoc}
      */
     public function load(): void
     {
-        // TODO: Implement load() method.
+        if( ! $this->hasDirectory()){
+            throw new InvalidPath('Unable to load configuration. No load directory specified');
+        }
+
+        $files = $this->getFile()->allFiles($this->getDirectory());
+        foreach ($files as $fileInfo){
+            $this->parse($fileInfo->getRealPath());
+        }
     }
 
     /**
-     * Parse the given configuration file, and return instance
-     * of the repository, in which the configuration is contained
-     *
-     * @param string $filePath Path to configuration file
-     *
-     * @return Repository
-     *
-     * @throws FileParserException If unable to parse given configuration file
+     * {@inheritdoc}
      */
-    public function parse(string $filePath): Repository
+    public function parse($file) : Repository
     {
-        // TODO: Implement parse() method.
+        $file = $this->resolveFile($file);
+
+        try {
+
+            // Get the file path
+            $path = $file->getRealPath();
+
+            // Obtain a parser for the given file ext.
+            $parser = $this->getFileParserFactory()->make($file->getExtension());
+            $parser->setFile($this->getFile());
+
+            // Load and parse the file content
+            $content = $parser
+                ->setFilePath($path)
+                ->loadAndParse();
+
+            // Merge content into configuration. We do not
+            // simply want to "overwrite" entire config.
+            $config = $this->getConfig();
+
+            $section = strtolower(str_replace_array(DIRECTORY_SEPARATOR, ['.'], $path));
+            $existing = $config->get($section, []);
+            $new = array_merge($existing, $content);
+
+            $config->set($section, $new);
+            return $config;
+
+        } catch (Throwable $e){
+            throw new UnableToParseFile(sprintf('Unable to parse file %s: %s', (string) $file, $e->getMessage()), $e->getCode(), $e);
+        }
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Resolve the given file into a SplFileInfo obj
+     *
+     * @param string|SplFileInfo $file
+     *
+     * @return SplFileInfo
+     */
+    protected function resolveFile($file) : SplFileInfo
+    {
+        if($file instanceof SplFileInfo){
+            return $file;
+        }
+
+        if(is_string($file)){
+            return new SplFileInfo($file);
+        }
+
+        throw new UnableToParseFile(sprintf('Unable to parse file "%s"', var_export($file, true)));
     }
 }
