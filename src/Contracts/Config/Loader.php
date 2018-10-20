@@ -8,6 +8,7 @@ use Aedart\Contracts\Config\Parsers\Factories\FileParserFactoryAware;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\Contracts\Support\Helpers\Filesystem\FileAware;
 use Illuminate\Contracts\Config\Repository;
+use SplFileInfo;
 
 /**
  * Configuration Loader
@@ -67,11 +68,11 @@ interface Loader extends ConfigAware,
      * Parse the given configuration file, and return instance
      * of the repository, in which the configuration is contained
      *
-     * @param string $filePath Path to configuration file
+     * @param string|SplFileInfo $file File path or SplFileInfo
      *
      * @return Repository
      *
      * @throws FileParserException If unable to parse given configuration file
      */
-    public function parse(string $filePath) : Repository ;
+    public function parse($file) : Repository ;
 }
