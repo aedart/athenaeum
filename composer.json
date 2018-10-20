@@ -7,7 +7,8 @@
     "Testing",
     "Overloading",
     "Magic Methods",
-    "DTO"
+    "DTO",
+    "Configuration"
   ],
   "homepage": "https://aedart.github.io/athenaeum/",
   "support": {
