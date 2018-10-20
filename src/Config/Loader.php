@@ -2,7 +2,6 @@
 
 namespace Aedart\Config;
 
-
 use Aedart\Config\Loaders\Exceptions\InvalidPath;
 use Aedart\Config\Parsers\Exceptions\UnableToParseFile;
 use Aedart\Config\Traits\FileParserFactoryTrait;
