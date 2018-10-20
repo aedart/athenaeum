@@ -54,6 +54,14 @@ function genSidebarComponents () {
             ]
         },
         {
+            title: 'Config',
+            collapsable: true,
+            children: [
+                'config/',
+                'config/loader',
+            ]
+        },
+        {
             title: 'Container',
             collapsable: true,
             children: [
