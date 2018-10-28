@@ -54,7 +54,7 @@ abstract class Dto implements DtoInterface
     /**
      * Dto constructor.
      *
-     * @param array $properties
+     * @param array $properties [optional]
      * @param Container|null $container [optional]
      *
      * @throws Throwable
