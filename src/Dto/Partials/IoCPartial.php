@@ -143,7 +143,7 @@ trait IoCPartial
      * Attempts to populate instance, if possible
      *
      * @param object $instance The instance that must be populated
-     * @param ReflectionParameter $parameter Setter method's parameter reflection that requires the given instance
+     * @param ReflectionParameter|string $parameter Name of property or property reflection
      * @param mixed $value The value to be passed to the setter method
      *
      * @return mixed
@@ -151,7 +151,7 @@ trait IoCPartial
      *                                    array that can be passed to the populatable instance
      * @throws Throwable
      */
-    protected function resolveInstancePopulation($instance, ReflectionParameter $parameter, $value)
+    protected function resolveInstancePopulation($instance, $parameter, $value)
     {
         // Check if instance is populatable and if the given value
         // is an array.
@@ -165,10 +165,14 @@ trait IoCPartial
         // It is NOT safe to continue and make assumptions on how
         // we can populate the given instance. For this reason, we
         // just throw an exception
+        $name = $parameter;
+        if($parameter instanceof ReflectionParameter){
+            $name = $parameter->getName();
+        }
+
         $message = sprintf(
-            'Unable to resolve dependency for property "%s" of the type "%s"; do not know how to populate with "%s"',
-            $parameter->getName(),
-            $parameter->getClass()->getName(),
+            'Unable to resolve dependency for property "%s"; do not know how to populate with "%s"',
+            $name,
             var_export($value, true)
         );
 
