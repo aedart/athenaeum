@@ -133,7 +133,7 @@ abstract class Dto implements DtoInterface
      *
      * @throws Throwable
      */
-    static public function makeNew(array $properties, ?Container $container = null)
+    static public function makeNew(array $properties = [], ?Container $container = null)
     {
         return new static($properties, $container);
     }

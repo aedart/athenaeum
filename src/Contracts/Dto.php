@@ -87,12 +87,12 @@ interface Dto extends ArrayAccess,
     /**
      * Returns a new instance of this Dto
      *
-     * @param array $properties
+     * @param array $properties [optional]
      * @param Container|null $container [optional]
      *
      * @return static
      */
-    static public function makeNew(array $properties, ?Container $container = null);
+    static public function makeNew(array $properties = [], ?Container $container = null);
 
     /**
      * Create a new populated instance of this Dto from a
