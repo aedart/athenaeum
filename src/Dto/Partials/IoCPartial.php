@@ -1,0 +1,177 @@
+<?php
+
+namespace Aedart\Dto\Partials;
+
+use Aedart\Contracts\Utils\Populatable;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Support\Facades\App;
+use ReflectionClass;
+use ReflectionException;
+use ReflectionParameter;
+use Throwable;
+
+/**
+ * IoC Partial
+ *
+ * <br />
+ *
+ * Keeps track of the assigned (or default) Service Container
+ * and offers utils for resolving dependencies for mutator
+ * methods.
+ *
+ * <br />
+ *
+ * This partial is intended for the Dto abstraction(s)
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Dto\Partials
+ */
+trait IoCPartial
+{
+    /**
+     * IoC Service Container
+     *
+     * @var null|Container
+     */
+    private $ioc = null;
+
+    /**
+     * Returns the container that is responsible for
+     * resolving dependency injection or eventual
+     * nested object
+     *
+     * @return Container|null IoC service Container or null if none defined
+     */
+    public function container(): ?Container
+    {
+        if( ! isset($this->ioc)){
+            $this->ioc = App::getFacadeApplication();
+        }
+
+        return $this->ioc;
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Set the IoC Service Container
+     *
+     * @param Container|null $ioc [optional]
+     *
+     * @return self
+     */
+    protected function setContainer(?Container $ioc = null)
+    {
+        $this->ioc = $ioc;
+
+        return $this;
+    }
+
+    /**
+     * Resolve and return the given value, for the given setter method
+     *
+     * @param string $setterMethodName The setter method to be invoked
+     * @param mixed $value The value to be passed to the setter method
+     *
+     * @return mixed
+     *
+     * @throws BindingResolutionException
+     * @throws ReflectionException
+     * @throws Throwable
+     */
+    protected function resolveValue(string $setterMethodName, $value)
+    {
+        $reflection = new ReflectionClass($this);
+        $method = $reflection->getMethod($setterMethodName);
+        $parameter = $method->getParameters()[0];
+
+        return $this->resolveParameter($parameter, $value);
+    }
+
+    /**
+     * Resolve the given parameter; pass the given value to it
+     *
+     * @param ReflectionParameter $parameter The setter method's parameter reflection
+     * @param mixed $value The value to be passed to the setter method
+     *
+     * @return mixed
+     * @throws BindingResolutionException   a) If no concrete instance could be resolved from the IoC, or
+     *                                      b) If the instance is not populatable and or the given value is not an
+     *                                      array that can be passed to the populatable instance
+     *                                      c) No service container is available
+     * @throws Throwable
+     */
+    protected function resolveParameter(ReflectionParameter $parameter, $value)
+    {
+        // If there is no class for the given parameter
+        // then some kind of primitive data has been provided
+        // and thus we need only to return it.
+        $paramClass = $parameter->getClass();
+        if ( ! isset($paramClass)) {
+            return $value;
+        }
+
+        // If the value corresponds to the given expected class,
+        // then there is no need to resolve anything from the
+        // IoC service container.
+        $className = $paramClass->getName();
+        if ($value instanceof $className) {
+            return $value;
+        }
+
+        // Fail if no service container is available
+        $container = $this->container();
+        if ( ! isset($container)) {
+            $message = sprintf(
+                'No IoC Service Container is available, cannot resolve property "%s" of the type "%s"; do not know how to populate with "%s"',
+                $parameter->getName(),
+                $className,
+                var_export($value, true)
+            );
+            throw new BindingResolutionException($message);
+        }
+
+        // Populate instance
+        $instance = $container->make($className);
+        return $this->resolveInstancePopulation($instance, $parameter, $value);
+    }
+
+    /**
+     * Attempts to populate instance, if possible
+     *
+     * @param object $instance The instance that must be populated
+     * @param ReflectionParameter $parameter Setter method's parameter reflection that requires the given instance
+     * @param mixed $value The value to be passed to the setter method
+     *
+     * @return mixed
+     * @throws BindingResolutionException If the instance is not populatable and or the given value is not an
+     *                                    array that can be passed to the populatable instance
+     * @throws Throwable
+     */
+    protected function resolveInstancePopulation($instance, ReflectionParameter $parameter, $value)
+    {
+        // Check if instance is populatable and if the given value
+        // is an array.
+        if ($instance instanceof Populatable && is_array($value)) {
+            $instance->populate($value);
+
+            return $instance;
+        }
+
+        // If we reach this part, then we are simply going to fail.
+        // It is NOT safe to continue and make assumptions on how
+        // we can populate the given instance. For this reason, we
+        // just throw an exception
+        $message = sprintf(
+            'Unable to resolve dependency for property "%s" of the type "%s"; do not know how to populate with "%s"',
+            $parameter->getName(),
+            $parameter->getClass()->getName(),
+            var_export($value, true)
+        );
+
+        throw new BindingResolutionException($message);
+    }
+}
