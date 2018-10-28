@@ -8,6 +8,20 @@ use Aedart\Utils\Json;
 use Carbon\Carbon;
 use DateTimeInterface;
 
+/**
+ * CastingPartial
+ *
+ * <br />
+ *
+ * Deals with property value casting
+ *
+ * <br />
+ *
+ * This partial is intended for the Dto abstraction(s)
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Dto\Partials
+ */
 trait CastingPartial
 {
     /**
