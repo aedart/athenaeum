@@ -78,6 +78,7 @@ function genSidebarComponents () {
                 'dto/populate',
                 'dto/json',
                 'dto/nested-dto',
+                'dto/array/',
             ]
         },
         {
