@@ -122,20 +122,49 @@ trait IoCPartial
             return $value;
         }
 
+        // Finally, resolve the class instance and populate it
+        return $this->resolveClassAndPopulate($className, $parameter, $value);
+    }
+
+    /**
+     * Builds the given class and populates it
+     *
+     * @param string $class Class path to instantiate / resolve from IoC
+     * @param ReflectionParameter|string $parameter Name of property or property reflection
+     * @param mixed $value The value to be passed to the setter method
+     *
+     * @return mixed
+     *
+     * @throws BindingResolutionException
+     * @throws Throwable
+     */
+    protected function resolveClassAndPopulate(string $class, $parameter, $value)
+    {
+        // In some situations, the given value is already an instance of the
+        // given class. If such, then there is no need to do anything.
+        if($value instanceof $class){
+            return $value;
+        }
+
+        $name = $parameter;
+        if($parameter instanceof ReflectionParameter){
+            $name = $parameter->getName();
+        }
+
         // Fail if no service container is available
         $container = $this->container();
         if ( ! isset($container)) {
             $message = sprintf(
                 'No IoC Service Container is available, cannot resolve property "%s" of the type "%s"; do not know how to populate with "%s"',
-                $parameter->getName(),
-                $className,
+                $name,
+                $class,
                 var_export($value, true)
             );
             throw new BindingResolutionException($message);
         }
 
         // Populate instance
-        $instance = $container->make($className);
+        $instance = $container->make($class);
         return $this->resolveInstancePopulation($instance, $parameter, $value);
     }
 
