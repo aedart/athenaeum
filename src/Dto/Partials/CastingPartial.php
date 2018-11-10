@@ -31,8 +31,6 @@ trait CastingPartial
      * @param mixed $value Value to cast
      * @return bool|float|int|mixed|string
      *
-     * @throws BindingResolutionException
-     * @throws Throwable
      * @throws JsonEncoding
      */
     protected function castPropertyValue(string $name, $value)
@@ -44,23 +42,24 @@ trait CastingPartial
             return $value;
         }
 
+        // Cast value to assigned type
         $type = $this->allowed[$name];
         switch ($type){
             case 'string':
             case 'str':
-                return (string) $value;
+                return $this->castAsString($value);
 
-            case 'integer':
             case 'int':
-                return (int) $value;
+            case 'integer':
+                return $this->castAsInteger($value);
 
             case 'float':
             case 'double':
-                return (float) $value;
+                return $this->castAsFloat($value);
 
-            case 'boolean':
             case 'bool':
-                return (bool) $value;
+            case 'boolean':
+                return $this->castAsBoolean($value);
 
             case 'array':
                 return $this->castAsArray($value);
@@ -71,13 +70,60 @@ trait CastingPartial
             // We assume that it's an object that must be
             // resolved via the IoC
             default:
-                $instance = $this->container()->make($type);
-                return $this->resolveInstancePopulation($instance, $name, $value);
+                return $this->resolveClassAndPopulate($type, $name, $value);
         }
     }
 
     /**
-     * Cast given value as array
+     * Cast given value to a string
+     *
+     * @param mixed $value
+     *
+     * @return string
+     */
+    protected function castAsString($value) : string
+    {
+        return (string) $value;
+    }
+
+    /**
+     * Cast given value to an integer
+     *
+     * @param mixed $value
+     *
+     * @return int
+     */
+    protected function castAsInteger($value) : int
+    {
+        return (int) $value;
+    }
+
+    /**
+     * Cast given value to a float
+     *
+     * @param mixed $value
+     *
+     * @return float
+     */
+    protected function castAsFloat($value) : float
+    {
+        return (float) $value;
+    }
+
+    /**
+     * Cast given value to a boolean
+     *
+     * @param mixed $value
+     *
+     * @return bool
+     */
+    protected function castAsBoolean($value) : bool
+    {
+        return (bool) $value;
+    }
+
+    /**
+     * Cast given value to an array
      *
      * @param string|array $value
      * @return array
