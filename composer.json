@@ -26,15 +26,15 @@
   "autoload": {
     "psr-4": {
       "Aedart\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Aedart\\Tests\\": "tests/"
     },
     "files": [
       "helpers/dto-properties.php"
     ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Aedart\\Tests\\": "tests/"
+    }
   },
   "require": {
     "php": ">=7.2.0",
