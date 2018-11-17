@@ -14,14 +14,8 @@ if( ! function_exists('awareOfProperty')){
      *
      * @param string $property Name of property
      * @param string $description Description of property
-     * @param string $dataType [optional] Property scalar data type
+     * @param string $dataType [optional] Property data type
      * @param string $inputArgName [optional] Name of property input argument (for setter method)
-     * @param string $traitNamespace [optional] Namespace for aware-of trait implementation
-     * @param string $interfaceNamespace [optional] Namespace for aware-of interface implementation
-     * @param string $author [optional] Author name
-     * @param string $email [optional] Author's email
-     * @param string|null $outputLocation [optional] Output location, e.g. 'src/'.
-     *                                     If null given, then current working directory is used
      *
      * @return array
      */
@@ -29,28 +23,183 @@ if( ! function_exists('awareOfProperty')){
         string $property,
         string $description,
         string $dataType = DataTypes::STRING_TYPE,
-        string $inputArgName = 'value',
-        string $traitNamespace = 'Acme\\Strings',
-        string $interfaceNamespace = 'Acme\\Contracts\\Strings',
-        string $author = 'John Doe',
-        string $email = 'john.doe@example.org',
-        ?string $outputLocation = null
+        string $inputArgName = 'value'
     ) : array
     {
-        // Set output if needed
-        $outputLocation = $outputLocation ?? getcwd();
-
         // Return data structure
         return [
-            'output'                => $outputLocation,
             'property'              => $property,
             'type'                  => $dataType,
             'description'           => $description,
             'inputArgName'          => $inputArgName,
-            'traitNamespace'        => $traitNamespace,
-            'interfaceNamespace'    => $interfaceNamespace,
-            'author'                => $author,
-            'email'                 => $email
         ];
+    }
+}
+
+if( ! function_exists('stringProperty')){
+
+    /**
+     * Returns "string" aware-of property configuration
+     *
+     * @see awareOfProperty()
+     *
+     * @param string $name Name of property
+     * @param string $description Description of property
+     * @param string $inputName [optional] Name of property input argument (for setter method)
+     *
+     * @return array
+     */
+    function stringProperty(string $name, string $description, string $inputName = 'value') : array
+    {
+        return awareOfProperty(
+            $name,
+            $description,
+            DataTypes::STRING_TYPE,
+            $inputName
+        );
+    }
+}
+
+if( ! function_exists('integerProperty')){
+
+    /**
+     * Returns "integer" aware-of property configuration
+     *
+     * @see awareOfProperty()
+     *
+     * @param string $name Name of property
+     * @param string $description Description of property
+     * @param string $inputName [optional] Name of property input argument (for setter method)
+     *
+     * @return array
+     */
+    function integerProperty(string $name, string $description, string $inputName = 'value') : array
+    {
+        return awareOfProperty(
+            $name,
+            $description,
+            DataTypes::INT_TYPE,
+            $inputName
+        );
+    }
+}
+
+if( ! function_exists('floatProperty')){
+
+    /**
+     * Returns "float" aware-of property configuration
+     *
+     * @see awareOfProperty()
+     *
+     * @param string $name Name of property
+     * @param string $description Description of property
+     * @param string $inputName [optional] Name of property input argument (for setter method)
+     *
+     * @return array
+     */
+    function floatProperty(string $name, string $description, string $inputName = 'value') : array
+    {
+        return awareOfProperty(
+            $name,
+            $description,
+            DataTypes::FLOAT_TYPE,
+            $inputName
+        );
+    }
+}
+
+if( ! function_exists('booleanProperty')){
+
+    /**
+     * Returns "boolean" aware-of property configuration
+     *
+     * @see awareOfProperty()
+     *
+     * @param string $name Name of property
+     * @param string $description Description of property
+     * @param string $inputName [optional] Name of property input argument (for setter method)
+     *
+     * @return array
+     */
+    function booleanProperty(string $name, string $description, string $inputName = 'value') : array
+    {
+        return awareOfProperty(
+            $name,
+            $description,
+            DataTypes::BOOL_TYPE,
+            $inputName
+        );
+    }
+}
+
+if( ! function_exists('arrayProperty')){
+
+    /**
+     * Returns "array" aware-of property configuration
+     *
+     * @see awareOfProperty()
+     *
+     * @param string $name Name of property
+     * @param string $description Description of property
+     * @param string $inputName [optional] Name of property input argument (for setter method)
+     *
+     * @return array
+     */
+    function arrayProperty(string $name, string $description, string $inputName = 'value') : array
+    {
+        return awareOfProperty(
+            $name,
+            $description,
+            DataTypes::ARRAY_TYPE,
+            $inputName
+        );
+    }
+}
+
+if( ! function_exists('callableProperty')){
+
+    /**
+     * Returns "callable" aware-of property configuration
+     *
+     * @see awareOfProperty()
+     *
+     * @param string $name Name of property
+     * @param string $description Description of property
+     * @param string $inputName [optional] Name of property input argument (for setter method)
+     *
+     * @return array
+     */
+    function callableProperty(string $name, string $description, string $inputName = 'value') : array
+    {
+        return awareOfProperty(
+            $name,
+            $description,
+            DataTypes::CALLABLE_TYPE,
+            $inputName
+        );
+    }
+}
+
+if( ! function_exists('iterableProperty')){
+
+    /**
+     * Returns "iterable" aware-of property configuration
+     *
+     * @see awareOfProperty()
+     *
+     * @param string $name Name of property
+     * @param string $description Description of property
+     * @param string $inputName [optional] Name of property input argument (for setter method)
+     *
+     * @return array
+     */
+    function iterableProperty(string $name, string $description, string $inputName = 'value') : array
+    {
+        return awareOfProperty(
+            $name,
+            $description,
+            DataTypes::CALLABLE_TYPE,
+            $inputName
+        );
     }
 }
