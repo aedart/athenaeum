@@ -31,7 +31,10 @@
   "autoload-dev": {
     "psr-4": {
       "Aedart\\Tests\\": "tests/"
-    }
+    },
+    "files": [
+      "helpers/dto-properties.php"
+    ]
   },
   "require": {
     "php": ">=7.2.0",
