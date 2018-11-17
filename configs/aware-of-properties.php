@@ -23,7 +23,9 @@ return [
      ****************************************************************/
 
     /*
-     * If "null" is given, then default templates are used
+     * If "null" is given, then default twig templates are used
+     *
+     * @var string|array|null
      */
     'templates-path' => null,
 
