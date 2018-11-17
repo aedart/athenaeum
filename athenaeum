@@ -16,7 +16,9 @@ if (file_exists(__DIR__.'/vendor/autoload.php')) {
  * Imports
  ****************************************************************/
 
+use Aedart\Console\CreateAwareOfCommand;
 use Jean85\PrettyVersions;
+use Symfony\Component\Console\Application;
 
 /*****************************************************************
  * Create & Run Application
@@ -24,5 +26,7 @@ use Jean85\PrettyVersions;
 
 $version = PrettyVersions::getVersion('aedart/athenaeum');
 
-$app = new \Symfony\Component\Console\Application('Athenaeum', $version->getPrettyVersion());
-$app->run();
+$app = new Application('Athenaeum', $version->getPrettyVersion());
+$app->add(new CreateAwareOfCommand());
+
+echo $app->run();
