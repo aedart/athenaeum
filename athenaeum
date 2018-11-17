@@ -1,6 +1,10 @@
 #!/usr/bin/env php
 <?php
 
+/*****************************************************************
+ * Autoloader
+ ****************************************************************/
+
 // Load the composer autoloader
 if (file_exists(__DIR__.'/vendor/autoload.php')) {
     require __DIR__.'/vendor/autoload.php';
@@ -8,5 +12,17 @@ if (file_exists(__DIR__.'/vendor/autoload.php')) {
     require __DIR__.'/../../autoload.php';
 }
 
-$app = new \Symfony\Component\Console\Application('Athenaeum', '1.x.x');
+/*****************************************************************
+ * Imports
+ ****************************************************************/
+
+use Jean85\PrettyVersions;
+
+/*****************************************************************
+ * Create & Run Application
+ ****************************************************************/
+
+$version = PrettyVersions::getVersion('aedart/athenaeum');
+
+$app = new \Symfony\Component\Console\Application('Athenaeum', $version->getPrettyVersion());
 $app->run();
