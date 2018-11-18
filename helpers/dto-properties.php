@@ -198,7 +198,7 @@ if( ! function_exists('iterableProperty')){
         return awareOfProperty(
             $name,
             $description,
-            DataTypes::CALLABLE_TYPE,
+            DataTypes::ITERABLE_TYPE,
             $inputName
         );
     }
