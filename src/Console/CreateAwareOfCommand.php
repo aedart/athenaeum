@@ -2,12 +2,11 @@
 
 namespace Aedart\Console;
 
+use Aedart\Support\AwareOf\Generator;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Illuminate\Config\Repository;
 use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
-use Twig_Environment;
-use Twig_Loader_Filesystem;
 
 /**
  * Create Aware Of Properties Command
@@ -20,11 +19,11 @@ class CreateAwareOfCommand extends CommandBase
     use ConfigTrait;
 
     /**
-     * Twig Template Engine
+     * The "aware-of" generator
      *
-     * @var Twig_Environment
+     * @var Generator
      */
-    protected $twig;
+    protected $generator;
 
     /*****************************************************************
      * Command Configuration
@@ -55,7 +54,7 @@ class CreateAwareOfCommand extends CommandBase
 
         $this
             ->loadConfiguration()
-            ->setupTwig()
+            ->setupGenerator()
             ->build();
 
         $this->output->success('done');
@@ -88,10 +87,14 @@ class CreateAwareOfCommand extends CommandBase
         $this->output->progressFinish();
     }
 
-    // TODO: incomplete!
+    /**
+     * Generates the given "aware-of" component
+     *
+     * @param array $component
+     */
     protected function buildAwareOfComponent(array $component)
     {
-        // TODO: Puhh... lots of things that need to happen here...
+        $this->generator->generate($component);
     }
 
     /**
@@ -119,44 +122,15 @@ class CreateAwareOfCommand extends CommandBase
     }
 
     /**
-     * Setup the twig template engine
+     * Setup the "aware-of" generator
      *
      * @return self
      */
-    protected function setupTwig()
+    protected function setupGenerator()
     {
-        $path = $this->getConfig()->get('templates-path', $this->defaultTemplatesPath());
-
-        // Create new loader for twig
-        $loader = new Twig_Loader_Filesystem($path);
-
-        // Create twig engine
-        $this->twig = new Twig_Environment($loader, $this->twigEngineOptions());
+        $this->generator = new Generator($this->getConfig());
 
         return $this;
-    }
-
-    /**
-     * Returns twig template engine options
-     *
-     * @return array
-     */
-    protected function twigEngineOptions() : array
-    {
-        return [
-            'debug'                 => true,
-            'strict_variables'      => true,
-        ];
-    }
-
-    /**
-     * Returns the default path to the twig templates directory
-     *
-     * @return string
-     */
-    protected function defaultTemplatesPath() : string
-    {
-        return __DIR__ . '../../resources/templates/aware-of-component';
     }
 
     /**
