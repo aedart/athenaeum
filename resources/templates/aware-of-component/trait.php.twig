@@ -7,24 +7,24 @@ namespace {{ traitNamespace }};
  *
  * @see \{{ interfaceNamespace }}\{{ interfaceClassName }}
  *
- * @author {{ include('snippets/partials/author-and-email.twig') }}
+ * @author {{ include('partials/author-and-email.twig') }}
  * @package {{ traitNamespace }}
  */
 trait {{ traitClassName }}
 {
-    {{ include('snippets/partials/property-description.twig') }}
+    {{ include('partials/property-description.twig') }}
     protected ${{ coreProperty }} = null;
 
-    {{ include('snippets/partials/set-method-description.twig') }}
-    {{ include('snippets/partials/set-method.twig') }}
+    {{ include('partials/set-method-description.twig') }}
+    {{ include('partials/set-method.twig') }}
     {
         $this->{{ coreProperty }} = ${{ inputArgument }};
 
         return $this;
     }
 
-    {{ include('snippets/partials/get-method-description.twig') }}
-    {{ include('snippets/partials/get-method.twig') }}
+    {{ include('partials/get-method-description.twig') }}
+    {{ include('partials/get-method.twig') }}
     {
         if ( ! $this->has{{ propertyName }}()) {
             $this->set{{ propertyName }}($this->getDefault{{ propertyName }}());
@@ -32,14 +32,14 @@ trait {{ traitClassName }}
         return $this->{{ coreProperty }};
     }
 
-    {{ include('snippets/partials/has-method-description.twig') }}
-    {{ include('snippets/partials/has-method.twig') }}
+    {{ include('partials/has-method-description.twig') }}
+    {{ include('partials/has-method.twig') }}
     {
         return isset($this->{{ coreProperty }});
     }
 
-    {{ include('snippets/partials/get-default-method-description.twig') }}
-    {{ include('snippets/partials/get-default-method.twig') }}
+    {{ include('partials/get-default-method-description.twig') }}
+    {{ include('partials/get-default-method.twig') }}
     {
         return null;
     }
