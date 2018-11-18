@@ -15,6 +15,8 @@ return [
 
     /*
      * Location where files are to be generated
+     *
+     * E.g. Psr-4 namespace location
      */
     'output'    => 'src/',
 
@@ -23,17 +25,23 @@ return [
      ****************************************************************/
 
     /*
-     * If "null" is given, then default twig templates are used
+     * If none is given, then default twig templates are used
      *
-     * @var string|array|null
+     * @var string|array
      */
-    'templates-path' => null,
+    //'templates-path' => '',
 
     /*****************************************************************
      * Namespaces to use
      ****************************************************************/
 
     'namespaces' => [
+
+        /*
+         * Vendor namespace to apply on all generated
+         * namespaces.
+         */
+        'vendor' => 'Acme\\',
 
         /*
          * Namespaces for interfaces
@@ -43,7 +51,7 @@ return [
             /*
              * Prefix for all interfaces
              */
-            'prefix'  => 'Acme\\Contracts\\',
+            'prefix'  => 'Contracts\\',
 
             /*
              * Namespaces for various data types
@@ -65,7 +73,7 @@ return [
             /*
              * Prefix for all traits
              */
-            'prefix'  => 'Acme\\Traits\\',
+            'prefix'  => 'Traits\\',
 
             /*
              * Namespaces for various data types
