@@ -52,12 +52,13 @@ class Generator implements ConfigAware
      * Generate the given component
      *
      * @param array $component [optional]
+     * @param bool $force [optional] If true, then existing file is overwritten
      *
      * @throws \Throwable
      *
      * @return array Data about the generated aware-of component
      */
-    public function generate(array $component = []) : array
+    public function generate(array $component = [], bool $force = false) : array
     {
         // Abort if nothing given
         if(empty($component)){
@@ -106,8 +107,8 @@ class Generator implements ConfigAware
         ];
 
         // Generate interface and trait
-        $this->generateFile($this->interfaceTemplate, $interfaceFile, $data);
-        $this->generateFile($this->traitTemplate, $traitFile, $data);
+        $this->generateFile($this->interfaceTemplate, $interfaceFile, $data, $force);
+        $this->generateFile($this->traitTemplate, $traitFile, $data, $force);
 
         // Return the generated data
         return $data;

@@ -47,15 +47,19 @@ trait TwigPartial
      * @param string $template Path to template
      * @param string $destination File destination, including filename
      * @param array $data Template data to render
+     * @param bool $force [optional] If true, then existing file is overwritten
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function generateFile(string $template, string $destination, array $data)
+    public function generateFile(string $template, string $destination, array $data, bool $force = false)
     {
-        // Abort if file already exists
-        if(file_exists($destination)){
+        // Remove existing file, if force flag set
+        if($force && file_exists($destination)){
+            unlink($destination);
+        } else if(file_exists($destination)){
+            // Otherwise abort if file exists...
             return;
         }
 

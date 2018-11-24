@@ -8,6 +8,7 @@ use Aedart\Support\Helpers\Config\ConfigTrait;
 use Illuminate\Config\Repository;
 use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Create Aware Of Properties Command
@@ -46,6 +47,7 @@ class CreateAwareOfCommand extends CommandBase
             ->setName('dto:create-aware-of')
             ->setDescription('Generates a series of aware-of components, based on given configuration')
             ->addArgument('config', InputArgument::REQUIRED, 'Path to php configuration file')
+            ->addOption('force', 'f', InputOption::VALUE_NONE, 'Force overwrite existing aware-of components')
             ->setHelp($this->formatHelp());
     }
 
@@ -119,7 +121,10 @@ class CreateAwareOfCommand extends CommandBase
      */
     protected function buildAwareOfComponent(array $component) : array
     {
-        return $this->generator->generate($component);
+        // Get the force flag, if set
+        $force = $this->input->getOption('force');
+
+        return $this->generator->generate($component, $force);
     }
 
     /**
@@ -133,7 +138,10 @@ class CreateAwareOfCommand extends CommandBase
      */
     protected function buildDocs(array $awareOfComponents = [])
     {
-        $this->documenter->makeDocs($awareOfComponents);
+        // Get the force flag, if set
+        $force = $this->input->getOption('force');
+
+        $this->documenter->makeDocs($awareOfComponents, $force);
     }
 
     /**

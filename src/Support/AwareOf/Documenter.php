@@ -35,12 +35,13 @@ class Documenter implements ConfigAware
      * components
      *
      * @param array $awareOfComponents [optional]
+     * @param bool $force [optional] If true, then existing file is overwritten
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function makeDocs(array $awareOfComponents = [])
+    public function makeDocs(array $awareOfComponents = [], bool $force = false)
     {
         $destination = $this->getConfig()->get('docs-output', false);
         if( ! $destination || empty($awareOfComponents)){
@@ -54,7 +55,7 @@ class Documenter implements ConfigAware
 
         //dd($data);
 
-        $this->generateFile($this->docsTemplate, $destination, $data);
+        $this->generateFile($this->docsTemplate, $destination, $data, $force);
     }
 
     /*****************************************************************
