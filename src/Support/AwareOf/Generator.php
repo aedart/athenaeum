@@ -70,7 +70,7 @@ class Generator implements ConfigAware
     {
         // Abort if nothing given
         if(empty($component)){
-            return;
+            return [];
         }
 
         // Format the various template variables
