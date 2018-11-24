@@ -32,6 +32,18 @@ return [
     //'templates-path' => '',
 
     /*****************************************************************
+     * Documentation
+     ****************************************************************/
+
+    /*
+     * Location where a markdown file is to be generated.
+     * Omit if no document should be generated.
+     *
+     * @var string
+     */
+    //'docs-output' => 'docs/aware-of-properties.md',
+
+    /*****************************************************************
      * Namespaces to use
      ****************************************************************/
 
