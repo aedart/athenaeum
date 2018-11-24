@@ -42,6 +42,49 @@ trait TwigPartial
     }
 
     /**
+     * Generate file
+     *
+     * @param string $template Path to template
+     * @param string $destination File destination, including filename
+     * @param array $data Template data to render
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    protected function generateFile(string $template, string $destination, array $data)
+    {
+        // Abort if file already exists
+        if(file_exists($destination)){
+            return;
+        }
+
+        // Prepare destination; create directories if needed
+        $this->prepareOutputDirectory($destination);
+
+        // Render template
+        $content = $this->twig->render($template, $data);
+
+        // Finally, write the file
+        file_put_contents($destination, $content, FILE_APPEND | LOCK_EX);
+    }
+
+    /**
+     * Creates nested directories for the given file path
+     *
+     * @param string $filePath
+     */
+    protected function prepareOutputDirectory(string $filePath)
+    {
+        $directory = pathinfo($filePath, PATHINFO_DIRNAME);
+        if(is_dir($directory)){
+            return;
+        }
+
+        @mkdir($directory, 0755, true);
+    }
+
+    /**
      * Returns twig template engine options
      *
      * @return array
