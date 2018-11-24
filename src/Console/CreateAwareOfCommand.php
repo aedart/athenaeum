@@ -68,6 +68,8 @@ class CreateAwareOfCommand extends CommandBase
 
     /**
      * Builds the aware-of components
+     *
+     * @throws \Throwable
      */
     protected function build()
     {
@@ -78,8 +80,9 @@ class CreateAwareOfCommand extends CommandBase
         $this->output->progressStart(count($list));
 
         // Build each aware-of component
+        $awareOfComponents = [];
         foreach ($list as $component){
-            $this->buildAwareOfComponent($component);
+            $awareOfComponents[] = $this->buildAwareOfComponent($component);
             $this->output->progressAdvance();
         }
 
@@ -93,10 +96,12 @@ class CreateAwareOfCommand extends CommandBase
      * @param array $component
      *
      * @throws \Throwable
+     *
+     * @return array
      */
-    protected function buildAwareOfComponent(array $component)
+    protected function buildAwareOfComponent(array $component) : array
     {
-        $this->generator->generate($component);
+        return $this->generator->generate($component);
     }
 
     /**
