@@ -1,3 +1,7 @@
+---
+title: Testing Introduction
+---
+
 # Introduction
 
 The `Aedart\Testing` namespace contains various testing utilities.

@@ -92,7 +92,7 @@ function genSidebarComponents () {
             title: 'Support',
             collapsable: true,
             children: [
-                'support/',
+                ['support/', 'Introduction'],
                 'support/helpers',
             ]
         },
@@ -100,7 +100,7 @@ function genSidebarComponents () {
             title: 'Testing',
             collapsable: true,
             children: [
-                'testing/',
+                ['testing/', 'Introduction'],
                 'testing/laravel',
                 'testing/test-cases',
                 'testing/traits',
