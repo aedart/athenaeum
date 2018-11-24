@@ -52,7 +52,7 @@ trait TwigPartial
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    protected function generateFile(string $template, string $destination, array $data)
+    public function generateFile(string $template, string $destination, array $data)
     {
         // Abort if file already exists
         if(file_exists($destination)){
@@ -74,7 +74,7 @@ trait TwigPartial
      *
      * @param string $filePath
      */
-    protected function prepareOutputDirectory(string $filePath)
+    public function prepareOutputDirectory(string $filePath)
     {
         $directory = pathinfo($filePath, PATHINFO_DIRNAME);
         if(is_dir($directory)){
