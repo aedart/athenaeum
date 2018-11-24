@@ -93,19 +93,23 @@ class Generator implements ConfigAware
 
         // Format context array for template
         $data = [
-            'interfaceNamespace' => $interfaceNamespace,
-            'interfaceClassName' => $interfaceClass,
+            'interfaceNamespace'    => $interfaceNamespace,
+            'interfaceClassName'    => $interfaceClass,
+            'interfaceFile'         => $interfaceFile,
+            'interfaceTemplate'     => $this->interfaceTemplate,
             'traitNamespace'        => $traitNamespace,
             'traitClassName'        => $traitClass,
+            'traitFile'             => $traitFile,
+            'traitTemplate'         => $this->traitTemplate,
             'title'                 => $propertyInTitle,
-            'dataType'                  => $type,
-            'coreProperty' => $property,
-            'propertyName' => $propertyMethod,
-            'propertyDescription' => $description,
+            'dataType'              => $type,
+            'coreProperty'          => $property,
+            'propertyName'          => $propertyMethod,
+            'propertyDescription'   => $description,
             'propertyInDescription' => $propertyInDescription,
-            'inputArgument' => $input,
-            'author'        => $author,
-            'email'     => $email
+            'inputArgument'         => $input,
+            'author'                => $author,
+            'email'                 => $email
         ];
 
         // Generate interface and trait
