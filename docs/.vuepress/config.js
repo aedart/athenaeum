@@ -85,7 +85,7 @@ function genSidebarComponents () {
             title: 'Properties',
             collapsable: true,
             children: [
-                'properties/',
+                ['properties/', 'Overload'],
             ]
         },
         {

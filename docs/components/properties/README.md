@@ -1,3 +1,7 @@
+---
+title: Properties Overload
+---
+
 # Overload
 
 `\Aedart\Properties\Overload` provides means to dynamically deal with inaccessible properties, by implementing PHP's magic methods;
