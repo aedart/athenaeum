@@ -1,3 +1,7 @@
+---
+title: Configuration Loader
+---
+
 # Loader
 
 The `Loader` component is able to load various types of configuration files and parse them into a Laravel [Repository](https://github.com/laravel/framework/blob/5.7/src/Illuminate/Contracts/Config/Repository.php).

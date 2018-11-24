@@ -57,7 +57,7 @@ function genSidebarComponents () {
             title: 'Config',
             collapsable: true,
             children: [
-                'config/',
+                ['config/', 'Loader'],
             ]
         },
         {
