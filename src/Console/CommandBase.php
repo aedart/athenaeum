@@ -36,6 +36,8 @@ abstract class CommandBase extends Command
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \Throwable
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -59,6 +61,8 @@ abstract class CommandBase extends Command
 
     /**
      * Execute this command
+     *
+     * @throws \Throwable
      *
      * @return int|null
      */
