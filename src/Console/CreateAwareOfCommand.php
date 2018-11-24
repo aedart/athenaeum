@@ -91,6 +91,8 @@ class CreateAwareOfCommand extends CommandBase
      * Generates the given "aware-of" component
      *
      * @param array $component
+     * 
+     * @throws \Throwable
      */
     protected function buildAwareOfComponent(array $component)
     {
