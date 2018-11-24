@@ -29,7 +29,22 @@ return [
      *
      * @var string|array
      */
-    //'templates-path' => '',
+    'templates-path' => [
+        'resources/athenaeum/templates/aware-of/',
+        'resources/templates/aware-of-component/',
+    ],
+
+    /*****************************************************************
+     * Documentation
+     ****************************************************************/
+
+    /*
+     * Location where a markdown file is to be generated.
+     * Omit if no document should be generated.
+     *
+     * @var string
+     */
+    'docs-output' => 'docs/components/support/properties.md',
 
     /*****************************************************************
      * Namespaces to use
@@ -96,7 +111,7 @@ return [
 
     'aware-of-properties' => [
 
-        //stringProperty('name', 'Name of a person', 'name'),
+        stringProperty('name', 'Name of a someone or something', 'name'),
         //stringProperty('description', 'Description of something', 'description'),
         //integerProperty('age', 'Age of a person', 'years'),
     ]
