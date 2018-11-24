@@ -2,7 +2,7 @@
 sidebarDepth: 3
 ---
 
-# Aware Of Helpers
+# Laravel Aware Of Helpers
 
 [Getters and Setters](https://en.wikipedia.org/wiki/Mutator_method) helpers for some of [Laravel's](http://laravel.com/) core packages. 
 

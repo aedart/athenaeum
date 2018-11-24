@@ -93,7 +93,7 @@ function genSidebarComponents () {
             collapsable: true,
             children: [
                 ['support/', 'Introduction'],
-                'support/helpers',
+                'support/laravel-helpers',
             ]
         },
         {
