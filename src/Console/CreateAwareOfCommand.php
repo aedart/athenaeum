@@ -91,7 +91,12 @@ class CreateAwareOfCommand extends CommandBase
         // Build each aware-of component
         $awareOfComponents = [];
         foreach ($list as $component){
-            $awareOfComponents[] = $this->buildAwareOfComponent($component);
+            $result = $this->buildAwareOfComponent($component);
+            $awareOfComponents[] = $result;
+
+            // Debug
+            $this->debug($result);
+
             $this->output->progressAdvance();
         }
 
@@ -177,6 +182,20 @@ class CreateAwareOfCommand extends CommandBase
         $this->documenter = new Documenter($this->getConfig());
 
         return $this;
+    }
+
+    /**
+     * Outputs given component, if verbose
+     *
+     * @param array $awareOfComponentData
+     */
+    protected function debug(array $awareOfComponentData = [])
+    {
+        if($this->output->isVerbose()){
+            $this->output->newLine();
+            $this->output->text(var_export($awareOfComponentData, true));
+            $this->output->newLine();
+        }
     }
 
     /**
