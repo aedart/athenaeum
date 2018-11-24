@@ -331,7 +331,7 @@ class Generator implements ConfigAware
      */
     protected function vendor() : string
     {
-        return $this->getConfig()->get('vendor', 'Acme\\');
+        return $this->getConfig()->get('namespaces.vendor', 'Acme\\');
     }
 
     /**
