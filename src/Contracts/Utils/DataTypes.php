@@ -93,4 +93,18 @@ interface DataTypes
         self::RESOURCE_TYPE,
         self::NULL_TYPE
     ];
+
+    // -------------------------------------------------------------- //
+
+    /**
+     * Mixed type
+     */
+    const MIXED_TYPE = 'mixed';
+
+    /**
+     * Pseudo types
+     */
+    const PSEUDO_TYPES = [
+        self::MIXED_TYPE
+    ];
 }
