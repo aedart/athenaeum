@@ -63,8 +63,10 @@ class Generator implements ConfigAware
      * @param array $component [optional]
      *
      * @throws \Throwable
+     *
+     * @return array Data about the generated aware-of component
      */
-    public function generate(array $component = [])
+    public function generate(array $component = []) : array
     {
         // Abort if nothing given
         if(empty($component)){
@@ -115,6 +117,9 @@ class Generator implements ConfigAware
         // Generate interface and trait
         $this->generateFile($this->interfaceTemplate, $interfaceFile, $data);
         $this->generateFile($this->traitTemplate, $traitFile, $data);
+
+        // Return the generated data
+        return $data;
     }
 
     /*****************************************************************
