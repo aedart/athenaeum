@@ -3,11 +3,9 @@
 namespace Aedart\Support\AwareOf;
 
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
-use Aedart\Support\Helpers\Config\ConfigTrait;
+use Aedart\Support\AwareOf\Partials\TwigPartial;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Str;
-use Twig_Environment;
-use Twig_Loader_Filesystem;
 
 /**
  * Aware-Of Generator
@@ -22,14 +20,7 @@ use Twig_Loader_Filesystem;
  */
 class Generator implements ConfigAware
 {
-    use ConfigTrait;
-
-    /**
-     * Twig Template Engine
-     *
-     * @var Twig_Environment
-     */
-    protected $twig;
+    use TwigPartial;
 
     /**
      * Template for interface
@@ -167,47 +158,6 @@ class Generator implements ConfigAware
         }
 
         @mkdir($directory, 0755, true);
-    }
-
-    /**
-     * Setup the twig template engine
-     *
-     * @return self
-     */
-    protected function setupTwig()
-    {
-        $path = $this->getConfig()->get('templates-path', $this->defaultTemplatesPath());
-
-        // Create new loader for twig
-        $loader = new Twig_Loader_Filesystem($path);
-
-        // Create twig engine
-        $this->twig = new Twig_Environment($loader, $this->twigEngineOptions());
-
-        return $this;
-    }
-
-    /**
-     * Returns twig template engine options
-     *
-     * @return array
-     */
-    protected function twigEngineOptions() : array
-    {
-        return [
-            'debug'                 => true,
-            'strict_variables'      => true,
-        ];
-    }
-
-    /**
-     * Returns the default path to the twig templates directory
-     *
-     * @return string
-     */
-    protected function defaultTemplatesPath() : string
-    {
-        return __DIR__ . '/../../../resources/templates/aware-of-component/';
     }
 
     /**
