@@ -32,6 +32,18 @@ return [
     //'templates-path' => '',
 
     /*****************************************************************
+     * Documentation location
+     ****************************************************************/
+
+    /*
+     * Location where a markdown file is to be generated.
+     * Omit if no document should be generated.
+     *
+     * @var string
+     */
+    'docs-output' => 'tests/_output/aware-of/README.md',
+
+    /*****************************************************************
      * Namespaces to use
      ****************************************************************/
 

@@ -104,5 +104,7 @@ class CreateAwareOfCommandTest extends IntegrationTestCase
 
         $this->assertAwareOfComponentExists('Contracts/Strings/NameAware.php');
         $this->assertAwareOfComponentExists('Traits/Strings/NameTrait.php');
+
+        $this->assertFileExists(Configuration::outputDir() . 'aware-of/README.md');
     }
 }

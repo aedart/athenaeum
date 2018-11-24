@@ -2,6 +2,7 @@
 
 namespace Aedart\Console;
 
+use Aedart\Support\AwareOf\Documenter;
 use Aedart\Support\AwareOf\Generator;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Illuminate\Config\Repository;
@@ -24,6 +25,13 @@ class CreateAwareOfCommand extends CommandBase
      * @var Generator
      */
     protected $generator;
+
+    /**
+     * The "aware-of" documenter
+     *
+     * @var Documenter
+     */
+    protected $documenter;
 
     /*****************************************************************
      * Command Configuration
@@ -55,6 +63,7 @@ class CreateAwareOfCommand extends CommandBase
         $this
             ->loadConfiguration()
             ->setupGenerator()
+            ->setupDocumenter()
             ->build();
 
         $this->output->success('done');
@@ -77,7 +86,7 @@ class CreateAwareOfCommand extends CommandBase
         $list = $this->getConfig()->get('aware-of-properties', []);
 
         // Create new process bar
-        $this->output->progressStart(count($list));
+        $this->output->progressStart(count($list) + 1);
 
         // Build each aware-of component
         $awareOfComponents = [];
@@ -85,6 +94,10 @@ class CreateAwareOfCommand extends CommandBase
             $awareOfComponents[] = $this->buildAwareOfComponent($component);
             $this->output->progressAdvance();
         }
+
+        // Build markdown doc(s)
+        $this->buildDocs($awareOfComponents);
+        $this->output->progressAdvance();
 
         // Complete the progress bar
         $this->output->progressFinish();
@@ -102,6 +115,20 @@ class CreateAwareOfCommand extends CommandBase
     protected function buildAwareOfComponent(array $component) : array
     {
         return $this->generator->generate($component);
+    }
+
+    /**
+     * Generates markdown documentation for given "aware-of" components.
+     *
+     * NOTE: Only if "docs-output" config set !
+     *
+     * @param array $awareOfComponents [optional]
+     *
+     * @throws \Throwable
+     */
+    protected function buildDocs(array $awareOfComponents = [])
+    {
+        $this->documenter->makeDocs($awareOfComponents);
     }
 
     /**
@@ -136,6 +163,18 @@ class CreateAwareOfCommand extends CommandBase
     protected function setupGenerator()
     {
         $this->generator = new Generator($this->getConfig());
+
+        return $this;
+    }
+
+    /**
+     * Setup the "aware-of" documenter
+     *
+     * @return self
+     */
+    protected function setupDocumenter()
+    {
+        $this->documenter = new Documenter($this->getConfig());
 
         return $this;
     }
