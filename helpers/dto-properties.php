@@ -15,7 +15,8 @@ if( ! function_exists('awareOfProperty')){
      * @param string $property Name of property
      * @param string $description Description of property
      * @param string $dataType [optional] Property data type
-     * @param string $inputArgName [optional] Name of property input argument (for setter method)
+     * @param string|null $inputArgName [optional] Name of property input argument (for setter method).
+     *                                  If null given, then input argument name is the same as the property
      *
      * @return array
      */
@@ -23,9 +24,11 @@ if( ! function_exists('awareOfProperty')){
         string $property,
         string $description,
         string $dataType = DataTypes::STRING_TYPE,
-        string $inputArgName = 'value'
+        ?string $inputArgName = null
     ) : array
     {
+        $inputArgName = $inputArgName ?? $property;
+
         // Return data structure
         return [
             'property'              => $property,
@@ -45,11 +48,12 @@ if( ! function_exists('stringProperty')){
      *
      * @param string $name Name of property
      * @param string $description Description of property
-     * @param string $inputName [optional] Name of property input argument (for setter method)
+     * @param string|null $inputName [optional] Name of property input argument (for setter method).
+     *                                  If null given, then input argument name is the same as the property
      *
      * @return array
      */
-    function stringProperty(string $name, string $description, string $inputName = 'value') : array
+    function stringProperty(string $name, string $description, ?string $inputName = null) : array
     {
         return awareOfProperty(
             $name,
@@ -69,11 +73,12 @@ if( ! function_exists('integerProperty')){
      *
      * @param string $name Name of property
      * @param string $description Description of property
-     * @param string $inputName [optional] Name of property input argument (for setter method)
+     * @param string|null $inputName [optional] Name of property input argument (for setter method).
+     *                                  If null given, then input argument name is the same as the property
      *
      * @return array
      */
-    function integerProperty(string $name, string $description, string $inputName = 'value') : array
+    function integerProperty(string $name, string $description, ?string $inputName = null) : array
     {
         return awareOfProperty(
             $name,
@@ -93,11 +98,12 @@ if( ! function_exists('floatProperty')){
      *
      * @param string $name Name of property
      * @param string $description Description of property
-     * @param string $inputName [optional] Name of property input argument (for setter method)
+     * @param string|null $inputName [optional] Name of property input argument (for setter method).
+     *                                  If null given, then input argument name is the same as the property
      *
      * @return array
      */
-    function floatProperty(string $name, string $description, string $inputName = 'value') : array
+    function floatProperty(string $name, string $description, ?string $inputName = null) : array
     {
         return awareOfProperty(
             $name,
@@ -117,11 +123,12 @@ if( ! function_exists('booleanProperty')){
      *
      * @param string $name Name of property
      * @param string $description Description of property
-     * @param string $inputName [optional] Name of property input argument (for setter method)
+     * @param string|null $inputName [optional] Name of property input argument (for setter method).
+     *                                  If null given, then input argument name is the same as the property
      *
      * @return array
      */
-    function booleanProperty(string $name, string $description, string $inputName = 'value') : array
+    function booleanProperty(string $name, string $description, ?string $inputName = null) : array
     {
         return awareOfProperty(
             $name,
@@ -141,11 +148,12 @@ if( ! function_exists('arrayProperty')){
      *
      * @param string $name Name of property
      * @param string $description Description of property
-     * @param string $inputName [optional] Name of property input argument (for setter method)
+     * @param string|null $inputName [optional] Name of property input argument (for setter method).
+     *                                  If null given, then input argument name is the same as the property
      *
      * @return array
      */
-    function arrayProperty(string $name, string $description, string $inputName = 'value') : array
+    function arrayProperty(string $name, string $description, ?string $inputName = null) : array
     {
         return awareOfProperty(
             $name,
@@ -165,11 +173,12 @@ if( ! function_exists('callableProperty')){
      *
      * @param string $name Name of property
      * @param string $description Description of property
-     * @param string $inputName [optional] Name of property input argument (for setter method)
+     * @param string|null $inputName [optional] Name of property input argument (for setter method).
+     *                                  If null given, then input argument name is the same as the property
      *
      * @return array
      */
-    function callableProperty(string $name, string $description, string $inputName = 'value') : array
+    function callableProperty(string $name, string $description, ?string $inputName = null) : array
     {
         return awareOfProperty(
             $name,
@@ -189,16 +198,42 @@ if( ! function_exists('iterableProperty')){
      *
      * @param string $name Name of property
      * @param string $description Description of property
-     * @param string $inputName [optional] Name of property input argument (for setter method)
+     * @param string|null $inputName [optional] Name of property input argument (for setter method).
+     *                                  If null given, then input argument name is the same as the property
      *
      * @return array
      */
-    function iterableProperty(string $name, string $description, string $inputName = 'value') : array
+    function iterableProperty(string $name, string $description, ?string $inputName = null) : array
     {
         return awareOfProperty(
             $name,
             $description,
             DataTypes::ITERABLE_TYPE,
+            $inputName
+        );
+    }
+}
+
+if( ! function_exists('mixedProperty')){
+
+    /**
+     * Returns "mixed" aware-of property configuration
+     *
+     * @see awareOfProperty()
+     *
+     * @param string $name Name of property
+     * @param string $description Description of property
+     * @param string|null $inputName [optional] Name of property input argument (for setter method).
+     *                                  If null given, then input argument name is the same as the property
+     *
+     * @return array
+     */
+    function mixedProperty(string $name, string $description, ?string $inputName = null) : array
+    {
+        return awareOfProperty(
+            $name,
+            $description,
+            DataTypes::MIXED_TYPE,
             $inputName
         );
     }
