@@ -63,6 +63,7 @@ return [
             DataTypes::ARRAY_TYPE       => 'Arrays\\',
             DataTypes::CALLABLE_TYPE    => 'Callables\\',
             DataTypes::ITERABLE_TYPE    => 'Iterators\\',
+            DataTypes::MIXED_TYPE       => 'Mixed\\',
         ],
 
         /*
@@ -85,6 +86,7 @@ return [
             DataTypes::ARRAY_TYPE       => 'Arrays\\',
             DataTypes::CALLABLE_TYPE    => 'Callables\\',
             DataTypes::ITERABLE_TYPE    => 'Iterators\\',
+            DataTypes::MIXED_TYPE       => 'Mixed\\',
         ],
     ],
 
