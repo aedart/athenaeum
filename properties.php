@@ -122,6 +122,11 @@ return [
             'A process or fact of doing something',
             'action'
         ),
+        callableProperty(
+            'action',
+            'Callback method',
+            'callback'
+        ),
         stringProperty(
             'address',
             'Address to someone or something',

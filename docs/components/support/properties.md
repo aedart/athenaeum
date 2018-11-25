@@ -6,7 +6,7 @@ They are suitable for usage with the [Dto abstraction](../dto/README.md) or for 
 ## Make You Own
 
 If you cannot find a specific aware-of component, then you can [request a new component](https://github.com/aedart/athenaeum/issues).
-Alternatively, you can generate your own, by using the available [Dto Generator](./generator.md), which has also been used to generate these components.
+Alternatively, you can generate your own by using the available [Dto Generator](./generator.md), which has also been used to generate these components.
 
 ## Available Aware-Of Components
 
@@ -21,6 +21,13 @@ The following list are the available aware-of components.
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ActionAware`</small>
 
 <small>**Trait** : `Aedart\Support\Properties\Strings\ActionTrait`</small>
+
+-------------------------------------------------------
+`callable` Callback method
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Callables\ActionAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Callables\ActionTrait`</small>
 
 
 ### Address
