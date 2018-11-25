@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Created at Aware
  *
- * Component is aware of \DateTimeInterface "created at"
+ * Component is aware of \DateTime "created at"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,11 +15,11 @@ interface CreatedAtAware
     /**
      * Set created at
      *
-     * @param \DateTimeInterface|null $date Date of when this component, entity or resource was created
+     * @param \DateTime|null $date Date of when this component, entity or resource was created
      *
      * @return self
      */
-    public function setCreatedAt(?\DateTimeInterface $date);
+    public function setCreatedAt(?\DateTime $date);
 
     /**
      * Get created at
@@ -29,9 +29,9 @@ interface CreatedAtAware
      *
      * @see getDefaultCreatedAt()
      *
-     * @return \DateTimeInterface|null created at or null if no created at has been set
+     * @return \DateTime|null created at or null if no created at has been set
      */
-    public function getCreatedAt() : ?\DateTimeInterface;
+    public function getCreatedAt() : ?\DateTime;
 
     /**
      * Check if "created at" has been set
@@ -43,7 +43,7 @@ interface CreatedAtAware
     /**
      * Get a default "created at" value, if any is available
      *
-     * @return \DateTimeInterface|null Default "created at" value or null if no default value is available
+     * @return \DateTime|null Default "created at" value or null if no default value is available
      */
-    public function getDefaultCreatedAt() : ?\DateTimeInterface;
+    public function getDefaultCreatedAt() : ?\DateTime;
 }

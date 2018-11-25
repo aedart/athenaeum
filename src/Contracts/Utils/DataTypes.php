@@ -113,5 +113,5 @@ interface DataTypes
     /**
      * Date Time type
      */
-    const DATE_TIME_TYPE = '\DateTimeInterface';
+    const DATE_TIME_TYPE = '\DateTime';
 }

@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Deceased at Aware
  *
- * Component is aware of \DateTimeInterface "deceased at"
+ * Component is aware of \DateTime "deceased at"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,11 +15,11 @@ interface DeceasedAtAware
     /**
      * Set deceased at
      *
-     * @param \DateTimeInterface|null $date Date of when person, animal of something has died
+     * @param \DateTime|null $date Date of when person, animal of something has died
      *
      * @return self
      */
-    public function setDeceasedAt(?\DateTimeInterface $date);
+    public function setDeceasedAt(?\DateTime $date);
 
     /**
      * Get deceased at
@@ -29,9 +29,9 @@ interface DeceasedAtAware
      *
      * @see getDefaultDeceasedAt()
      *
-     * @return \DateTimeInterface|null deceased at or null if no deceased at has been set
+     * @return \DateTime|null deceased at or null if no deceased at has been set
      */
-    public function getDeceasedAt() : ?\DateTimeInterface;
+    public function getDeceasedAt() : ?\DateTime;
 
     /**
      * Check if "deceased at" has been set
@@ -43,7 +43,7 @@ interface DeceasedAtAware
     /**
      * Get a default "deceased at" value, if any is available
      *
-     * @return \DateTimeInterface|null Default "deceased at" value or null if no default value is available
+     * @return \DateTime|null Default "deceased at" value or null if no default value is available
      */
-    public function getDefaultDeceasedAt() : ?\DateTimeInterface;
+    public function getDefaultDeceasedAt() : ?\DateTime;
 }

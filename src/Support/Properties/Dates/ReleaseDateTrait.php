@@ -15,18 +15,18 @@ trait ReleaseDateTrait
     /**
      * Date of planned release
      *
-     * @var \DateTimeInterface|null
+     * @var \DateTime|null
      */
     protected $releaseDate = null;
 
     /**
      * Set release date
      *
-     * @param \DateTimeInterface|null $date Date of planned release
+     * @param \DateTime|null $date Date of planned release
      *
      * @return self
      */
-    public function setReleaseDate(?\DateTimeInterface $date)
+    public function setReleaseDate(?\DateTime $date)
     {
         $this->releaseDate = $date;
 
@@ -41,9 +41,9 @@ trait ReleaseDateTrait
      *
      * @see getDefaultReleaseDate()
      *
-     * @return \DateTimeInterface|null release date or null if no release date has been set
+     * @return \DateTime|null release date or null if no release date has been set
      */
-    public function getReleaseDate() : ?\DateTimeInterface
+    public function getReleaseDate() : ?\DateTime
     {
         if ( ! $this->hasReleaseDate()) {
             $this->setReleaseDate($this->getDefaultReleaseDate());
@@ -64,9 +64,9 @@ trait ReleaseDateTrait
     /**
      * Get a default "release date" value, if any is available
      *
-     * @return \DateTimeInterface|null Default "release date" value or null if no default value is available
+     * @return \DateTime|null Default "release date" value or null if no default value is available
      */
-    public function getDefaultReleaseDate() : ?\DateTimeInterface
+    public function getDefaultReleaseDate() : ?\DateTime
     {
         return null;
     }

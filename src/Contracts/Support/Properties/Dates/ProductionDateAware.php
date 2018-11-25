@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Production date Aware
  *
- * Component is aware of \DateTimeInterface "production date"
+ * Component is aware of \DateTime "production date"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,11 +15,11 @@ interface ProductionDateAware
     /**
      * Set production date
      *
-     * @param \DateTimeInterface|null $date Date of planned production
+     * @param \DateTime|null $date Date of planned production
      *
      * @return self
      */
-    public function setProductionDate(?\DateTimeInterface $date);
+    public function setProductionDate(?\DateTime $date);
 
     /**
      * Get production date
@@ -29,9 +29,9 @@ interface ProductionDateAware
      *
      * @see getDefaultProductionDate()
      *
-     * @return \DateTimeInterface|null production date or null if no production date has been set
+     * @return \DateTime|null production date or null if no production date has been set
      */
-    public function getProductionDate() : ?\DateTimeInterface;
+    public function getProductionDate() : ?\DateTime;
 
     /**
      * Check if "production date" has been set
@@ -43,7 +43,7 @@ interface ProductionDateAware
     /**
      * Get a default "production date" value, if any is available
      *
-     * @return \DateTimeInterface|null Default "production date" value or null if no default value is available
+     * @return \DateTime|null Default "production date" value or null if no default value is available
      */
-    public function getDefaultProductionDate() : ?\DateTimeInterface;
+    public function getDefaultProductionDate() : ?\DateTime;
 }

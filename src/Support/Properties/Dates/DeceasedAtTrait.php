@@ -15,18 +15,18 @@ trait DeceasedAtTrait
     /**
      * Date of when person, animal of something has died
      *
-     * @var \DateTimeInterface|null
+     * @var \DateTime|null
      */
     protected $deceasedAt = null;
 
     /**
      * Set deceased at
      *
-     * @param \DateTimeInterface|null $date Date of when person, animal of something has died
+     * @param \DateTime|null $date Date of when person, animal of something has died
      *
      * @return self
      */
-    public function setDeceasedAt(?\DateTimeInterface $date)
+    public function setDeceasedAt(?\DateTime $date)
     {
         $this->deceasedAt = $date;
 
@@ -41,9 +41,9 @@ trait DeceasedAtTrait
      *
      * @see getDefaultDeceasedAt()
      *
-     * @return \DateTimeInterface|null deceased at or null if no deceased at has been set
+     * @return \DateTime|null deceased at or null if no deceased at has been set
      */
-    public function getDeceasedAt() : ?\DateTimeInterface
+    public function getDeceasedAt() : ?\DateTime
     {
         if ( ! $this->hasDeceasedAt()) {
             $this->setDeceasedAt($this->getDefaultDeceasedAt());
@@ -64,9 +64,9 @@ trait DeceasedAtTrait
     /**
      * Get a default "deceased at" value, if any is available
      *
-     * @return \DateTimeInterface|null Default "deceased at" value or null if no default value is available
+     * @return \DateTime|null Default "deceased at" value or null if no default value is available
      */
-    public function getDefaultDeceasedAt() : ?\DateTimeInterface
+    public function getDefaultDeceasedAt() : ?\DateTime
     {
         return null;
     }

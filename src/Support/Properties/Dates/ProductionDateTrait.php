@@ -15,18 +15,18 @@ trait ProductionDateTrait
     /**
      * Date of planned production
      *
-     * @var \DateTimeInterface|null
+     * @var \DateTime|null
      */
     protected $productionDate = null;
 
     /**
      * Set production date
      *
-     * @param \DateTimeInterface|null $date Date of planned production
+     * @param \DateTime|null $date Date of planned production
      *
      * @return self
      */
-    public function setProductionDate(?\DateTimeInterface $date)
+    public function setProductionDate(?\DateTime $date)
     {
         $this->productionDate = $date;
 
@@ -41,9 +41,9 @@ trait ProductionDateTrait
      *
      * @see getDefaultProductionDate()
      *
-     * @return \DateTimeInterface|null production date or null if no production date has been set
+     * @return \DateTime|null production date or null if no production date has been set
      */
-    public function getProductionDate() : ?\DateTimeInterface
+    public function getProductionDate() : ?\DateTime
     {
         if ( ! $this->hasProductionDate()) {
             $this->setProductionDate($this->getDefaultProductionDate());
@@ -64,9 +64,9 @@ trait ProductionDateTrait
     /**
      * Get a default "production date" value, if any is available
      *
-     * @return \DateTimeInterface|null Default "production date" value or null if no default value is available
+     * @return \DateTime|null Default "production date" value or null if no default value is available
      */
-    public function getDefaultProductionDate() : ?\DateTimeInterface
+    public function getDefaultProductionDate() : ?\DateTime
     {
         return null;
     }

@@ -284,7 +284,7 @@ The "mixed" type ensures that no type hinting is applied for the generated aware
 
 ### `dateTimeProperty()`
 
-Returns "[DateTimeInterface](http://php.net/manual/en/class.datetimeinterface.php)" aware-of property configuration (_array_).
+Returns "[DateTime](https://secure.php.net/manual/en/class.datetime.php)" aware-of property configuration (_array_).
 
 ```php
 return [

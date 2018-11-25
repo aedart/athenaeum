@@ -97,7 +97,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\AnniversaryTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of anniversary
+`\DateTime` Date of anniversary
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\AnniversaryAware`</small>
 
@@ -164,7 +164,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\BirthdateTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of birth
+`\DateTime` Date of birth
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\BirthdateAware`</small>
 
@@ -388,7 +388,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\CreatedAtTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of when this component, entity or resource was created
+`\DateTime` Date of when this component, entity or resource was created
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\CreatedAtAware`</small>
 
@@ -445,7 +445,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\DateTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of event
+`\DateTime` Date of event
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\DateAware`</small>
 
@@ -469,7 +469,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\DeceasedAtTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of when person, animal of something has died
+`\DateTime` Date of when person, animal of something has died
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\DeceasedAtAware`</small>
 
@@ -493,7 +493,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\DeletedAtTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of when this component, entity or resource was deleted
+`\DateTime` Date of when this component, entity or resource was deleted
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\DeletedAtAware`</small>
 
@@ -517,7 +517,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\DeliveredAtTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of delivery
+`\DateTime` Date of delivery
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\DeliveredAtAware`</small>
 
@@ -551,7 +551,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\DeliveryDateTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of planned delivery
+`\DateTime` Date of planned delivery
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\DeliveryDateAware`</small>
 
@@ -764,7 +764,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\EndDateTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date for when some kind of event ends
+`\DateTime` Date for when some kind of event ends
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\EndDateAware`</small>
 
@@ -822,7 +822,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\ExpiresAtTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of when this component, entity or resource is going to expire
+`\DateTime` Date of when this component, entity or resource is going to expire
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\ExpiresAtAware`</small>
 
@@ -1638,7 +1638,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\ProducedAtTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of when this component, entity or something was produced
+`\DateTime` Date of when this component, entity or something was produced
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\ProducedAtAware`</small>
 
@@ -1662,7 +1662,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\ProductionDateTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of planned production
+`\DateTime` Date of planned production
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\ProductionDateAware`</small>
 
@@ -1686,7 +1686,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\PurchaseDateTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of planned purchase
+`\DateTime` Date of planned purchase
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\PurchaseDateAware`</small>
 
@@ -1710,7 +1710,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\PurchasedAtTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of when this component, entity or resource was purchased
+`\DateTime` Date of when this component, entity or resource was purchased
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\PurchasedAtAware`</small>
 
@@ -1849,7 +1849,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\ReleasedAtTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of when this component, entity or something was released
+`\DateTime` Date of when this component, entity or something was released
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\ReleasedAtAware`</small>
 
@@ -1873,7 +1873,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\ReleaseDateTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of planned release
+`\DateTime` Date of planned release
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\ReleaseDateAware`</small>
 
@@ -2004,7 +2004,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\StartDateTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Start date of event
+`\DateTime` Start date of event
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\StartDateAware`</small>
 
@@ -2225,7 +2225,7 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\UpdatedAtTrait`</small>
 
 -------------------------------------------------------
-`\DateTimeInterface` Date of when this component, entity or resource was updated
+`\DateTime` Date of when this component, entity or resource was updated
 
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\UpdatedAtAware`</small>
 

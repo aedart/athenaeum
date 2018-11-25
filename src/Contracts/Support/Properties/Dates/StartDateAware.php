@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Start date Aware
  *
- * Component is aware of \DateTimeInterface "start date"
+ * Component is aware of \DateTime "start date"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,11 +15,11 @@ interface StartDateAware
     /**
      * Set start date
      *
-     * @param \DateTimeInterface|null $date Start date of event
+     * @param \DateTime|null $date Start date of event
      *
      * @return self
      */
-    public function setStartDate(?\DateTimeInterface $date);
+    public function setStartDate(?\DateTime $date);
 
     /**
      * Get start date
@@ -29,9 +29,9 @@ interface StartDateAware
      *
      * @see getDefaultStartDate()
      *
-     * @return \DateTimeInterface|null start date or null if no start date has been set
+     * @return \DateTime|null start date or null if no start date has been set
      */
-    public function getStartDate() : ?\DateTimeInterface;
+    public function getStartDate() : ?\DateTime;
 
     /**
      * Check if "start date" has been set
@@ -43,7 +43,7 @@ interface StartDateAware
     /**
      * Get a default "start date" value, if any is available
      *
-     * @return \DateTimeInterface|null Default "start date" value or null if no default value is available
+     * @return \DateTime|null Default "start date" value or null if no default value is available
      */
-    public function getDefaultStartDate() : ?\DateTimeInterface;
+    public function getDefaultStartDate() : ?\DateTime;
 }

@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Purchased at Aware
  *
- * Component is aware of \DateTimeInterface "purchased at"
+ * Component is aware of \DateTime "purchased at"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,11 +15,11 @@ interface PurchasedAtAware
     /**
      * Set purchased at
      *
-     * @param \DateTimeInterface|null $date Date of when this component, entity or resource was purchased
+     * @param \DateTime|null $date Date of when this component, entity or resource was purchased
      *
      * @return self
      */
-    public function setPurchasedAt(?\DateTimeInterface $date);
+    public function setPurchasedAt(?\DateTime $date);
 
     /**
      * Get purchased at
@@ -29,9 +29,9 @@ interface PurchasedAtAware
      *
      * @see getDefaultPurchasedAt()
      *
-     * @return \DateTimeInterface|null purchased at or null if no purchased at has been set
+     * @return \DateTime|null purchased at or null if no purchased at has been set
      */
-    public function getPurchasedAt() : ?\DateTimeInterface;
+    public function getPurchasedAt() : ?\DateTime;
 
     /**
      * Check if "purchased at" has been set
@@ -43,7 +43,7 @@ interface PurchasedAtAware
     /**
      * Get a default "purchased at" value, if any is available
      *
-     * @return \DateTimeInterface|null Default "purchased at" value or null if no default value is available
+     * @return \DateTime|null Default "purchased at" value or null if no default value is available
      */
-    public function getDefaultPurchasedAt() : ?\DateTimeInterface;
+    public function getDefaultPurchasedAt() : ?\DateTime;
 }

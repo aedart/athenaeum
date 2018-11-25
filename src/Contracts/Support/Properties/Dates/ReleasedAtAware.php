@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Released at Aware
  *
- * Component is aware of \DateTimeInterface "released at"
+ * Component is aware of \DateTime "released at"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,11 +15,11 @@ interface ReleasedAtAware
     /**
      * Set released at
      *
-     * @param \DateTimeInterface|null $date Date of when this component, entity or something was released
+     * @param \DateTime|null $date Date of when this component, entity or something was released
      *
      * @return self
      */
-    public function setReleasedAt(?\DateTimeInterface $date);
+    public function setReleasedAt(?\DateTime $date);
 
     /**
      * Get released at
@@ -29,9 +29,9 @@ interface ReleasedAtAware
      *
      * @see getDefaultReleasedAt()
      *
-     * @return \DateTimeInterface|null released at or null if no released at has been set
+     * @return \DateTime|null released at or null if no released at has been set
      */
-    public function getReleasedAt() : ?\DateTimeInterface;
+    public function getReleasedAt() : ?\DateTime;
 
     /**
      * Check if "released at" has been set
@@ -43,7 +43,7 @@ interface ReleasedAtAware
     /**
      * Get a default "released at" value, if any is available
      *
-     * @return \DateTimeInterface|null Default "released at" value or null if no default value is available
+     * @return \DateTime|null Default "released at" value or null if no default value is available
      */
-    public function getDefaultReleasedAt() : ?\DateTimeInterface;
+    public function getDefaultReleasedAt() : ?\DateTime;
 }
