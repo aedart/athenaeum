@@ -14,7 +14,7 @@ if( ! function_exists('awareOfProperty')){
      *
      * @param string $property Name of property
      * @param string $description Description of property
-     * @param string $dataType [optional] Property data type
+     * @param string $dataType [optional] Property data type. Defaults to "string" if none given.
      * @param string|null $inputArgName [optional] Name of property input argument (for setter method).
      *                                  If null given, then input argument name is the same as the property
      *
