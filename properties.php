@@ -182,7 +182,6 @@ return [
             'Name of area, e.g. in a building, in a city, outside the city, ...etc',
             'name'
         ),
-        // TODO: Boolean Ask
         stringProperty(
             'author',
             'Name of author',
