@@ -220,6 +220,13 @@ Usage:
 
 <info>php athenaeum dto:create-aware-of my-dto-list.php</info>
 
+Force Flag:
+
+If you set the force flag, then all existing interfaces and traits are overwritten.
+This also applies to the generated markdown documentation! 
+
+<info>php athenaeum dto:create-aware-of aware-of-properties.php --force</info>
+
 EOT;
     }
 }
