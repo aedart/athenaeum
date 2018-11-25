@@ -773,6 +773,11 @@ return [
             'JavaScript Object Notation (JSON)',
             'json'
         ),
+        mixedProperty(
+            'json',
+            'JavaScript Object Notation (JSON)',
+            'json'
+        ),
 
         // -------------------------------------------------------------------------------------
         // K
@@ -1413,7 +1418,11 @@ return [
             'Value',
             'value'
         ),
-        // TODO: Mixed Value!?!
+        mixedProperty(
+            'value',
+            'Value',
+            'value'
+        ),
         stringProperty(
             'vat',
             'Value Added Tac (VAT), formatted amount or rate',
@@ -1484,8 +1493,17 @@ return [
             'Co-ordinate or value',
             'value'
         ),
-        // TODO: Mixed X?!?!
+        mixedProperty(
+            'x',
+            'Co-ordinate or value',
+            'value'
+        ),
         stringProperty(
+            'xml',
+            'Extensible Markup Language (XML)',
+            'xml'
+        ),
+        mixedProperty(
             'xml',
             'Extensible Markup Language (XML)',
             'xml'
@@ -1505,7 +1523,11 @@ return [
             'Co-ordinate or value',
             'value'
         ),
-        // TODO: Mixed Y?!?!
+        mixedProperty(
+            'y',
+            'Co-ordinate or value',
+            'value'
+        ),
 
         // -------------------------------------------------------------------------------------
         // Z
@@ -1521,7 +1543,11 @@ return [
             'Co-ordinate or value',
             'value'
         ),
-        // TODO: Mixed Z?!?!
+        mixedProperty(
+            'z',
+            'Co-ordinate or value',
+            'value'
+        ),
         stringProperty(
             'zone',
             'Name or identifier of area, district or division',

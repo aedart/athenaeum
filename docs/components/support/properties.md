@@ -1138,6 +1138,13 @@ The following list are the available aware-of components.
 
 <small>**Trait** : `Aedart\Support\Properties\Strings\JsonTrait`</small>
 
+-------------------------------------------------------
+`mixed` JavaScript Object Notation (JSON)
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\JsonAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Mixed\JsonTrait`</small>
+
 
 
 
@@ -2223,6 +2230,13 @@ The following list are the available aware-of components.
 
 <small>**Trait** : `Aedart\Support\Properties\Strings\ValueTrait`</small>
 
+-------------------------------------------------------
+`mixed` Value
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\ValueAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Mixed\ValueTrait`</small>
+
 
 ### Vat
 
@@ -2334,6 +2348,13 @@ The following list are the available aware-of components.
 
 <small>**Trait** : `Aedart\Support\Properties\Floats\XTrait`</small>
 
+-------------------------------------------------------
+`mixed` Co-ordinate or value
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\XAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Mixed\XTrait`</small>
+
 
 ### Xml
 
@@ -2343,6 +2364,13 @@ The following list are the available aware-of components.
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\XmlAware`</small>
 
 <small>**Trait** : `Aedart\Support\Properties\Strings\XmlTrait`</small>
+
+-------------------------------------------------------
+`mixed` Extensible Markup Language (XML)
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\XmlAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Mixed\XmlTrait`</small>
 
 
 
@@ -2364,6 +2392,13 @@ The following list are the available aware-of components.
 
 <small>**Trait** : `Aedart\Support\Properties\Floats\YTrait`</small>
 
+-------------------------------------------------------
+`mixed` Co-ordinate or value
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\YAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Mixed\YTrait`</small>
+
 
 
 
@@ -2383,6 +2418,13 @@ The following list are the available aware-of components.
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\ZAware`</small>
 
 <small>**Trait** : `Aedart\Support\Properties\Floats\ZTrait`</small>
+
+-------------------------------------------------------
+`mixed` Co-ordinate or value
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\ZAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Mixed\ZTrait`</small>
 
 
 ### Zone
