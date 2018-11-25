@@ -995,6 +995,13 @@ The following list are the available aware-of components.
 
 <small>**Trait** : `Aedart\Support\Properties\Strings\HtmlTrait`</small>
 
+-------------------------------------------------------
+`mixed` HyperText Markup Language (HTML)
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\HtmlAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Mixed\HtmlTrait`</small>
+
 
 
 

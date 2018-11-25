@@ -693,6 +693,11 @@ return [
             'HyperText Markup Language (HTML)',
             'html'
         ),
+        mixedProperty(
+            'html',
+            'HyperText Markup Language (HTML)',
+            'html'
+        ),
 
         // -------------------------------------------------------------------------------------
         // I
