@@ -1467,6 +1467,26 @@ The following list are the available aware-of components.
 
 
 
+### On
+
+-------------------------------------------------------
+`bool` 
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Booleans\OnAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Booleans\OnTrait`</small>
+
+
+### Off
+
+-------------------------------------------------------
+`bool` 
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Booleans\OffAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Booleans\OffTrait`</small>
+
+
 ### OrderNumber
 
 -------------------------------------------------------

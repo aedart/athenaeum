@@ -968,6 +968,16 @@ return [
         // O
         // -------------------------------------------------------------------------------------
 
+        booleanProperty(
+            'on',
+            '',
+            'isOn'
+        ),
+        booleanProperty(
+            'off',
+            '',
+            'isOff'
+        ),
         stringProperty(
             'orderNumber',
             'Number that represents a purchase or order placed by a customer',
