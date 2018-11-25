@@ -94,6 +94,8 @@ function genSidebarComponents () {
             children: [
                 ['support/', 'Introduction'],
                 'support/laravel-helpers',
+                'support/properties',
+                ['support/generator', 'Generator'],
             ]
         },
         {
