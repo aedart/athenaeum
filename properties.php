@@ -228,6 +228,11 @@ return [
         // C
         // -------------------------------------------------------------------------------------
 
+        callableProperty(
+            'callback',
+            'Callback method',
+            'callback'
+        ),
         stringProperty(
             'calendar',
             'Location to calendar, e.g. URI, name, ID or other identifier',
@@ -648,6 +653,21 @@ return [
         // H
         // -------------------------------------------------------------------------------------
 
+        stringProperty(
+            'handler',
+            'Identifier of a handler',
+            'identifier'
+        ),
+        integerProperty(
+            'handler',
+            'Identifier of a handler',
+            'identifier'
+        ),
+        callableProperty(
+            'handler',
+            'Handler callback method',
+            'callback'
+        ),
         integerProperty(
             'height',
             'Height of something',

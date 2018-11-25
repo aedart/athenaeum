@@ -201,6 +201,16 @@ The following list are the available aware-of components.
 
 
 
+### Callback
+
+-------------------------------------------------------
+`callable` Callback method
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Callables\CallbackAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Callables\CallbackTrait`</small>
+
+
 ### Calendar
 
 -------------------------------------------------------
@@ -913,6 +923,30 @@ The following list are the available aware-of components.
 
 
 
+
+
+### Handler
+
+-------------------------------------------------------
+`string` Identifier of a handler
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\HandlerAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\HandlerTrait`</small>
+
+-------------------------------------------------------
+`int` Identifier of a handler
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\HandlerAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Integers\HandlerTrait`</small>
+
+-------------------------------------------------------
+`callable` Handler callback method
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Callables\HandlerAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Callables\HandlerTrait`</small>
 
 
 ### Height
