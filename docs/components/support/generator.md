@@ -9,6 +9,14 @@ Creating aware-of components (_glorified getters and setters_) can be a tiresome
 To make it a bit easier for yourself, you can use this package's aware-of component generator.
 Based on a php configuration file, it will generate a series of interfaces and traits, for your desired properties.
 
+## Prerequisite 
+
+You must have [Twig Template Engine](https://twig.symfony.com/) available in your project.
+
+```
+composer require twig/twig
+```
+
 ## Create Configuration File
 
 The first thing that you need to do, is to create a configuration file.
