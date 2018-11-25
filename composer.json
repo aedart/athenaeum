@@ -59,7 +59,8 @@
   "suggest": {
     "codeception/codeception": "Required for Testing utilities",
     "orchestra/testbench": "Required for Laravel Testing utilities",
-    "symfony/yaml": "Required for parsing Yaml configuration files"
+    "symfony/yaml": "Required for parsing Yaml configuration files",
+    "wig/twig": "Required for using aware-of generator"
   },
   "minimum-stability": "stable",
   "prefer-stable": true,
