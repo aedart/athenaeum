@@ -1,0 +1,73 @@
+<?php
+
+namespace Aedart\Support\Properties\Strings;
+
+/**
+ * Template Trait
+ *
+ * @see \Aedart\Contracts\Support\Properties\Strings\TemplateAware
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Support\Properties\Strings
+ */
+trait TemplateTrait
+{
+    /**
+     * Template or location of a template file
+     *
+     * @var string|null
+     */
+    protected $template = null;
+
+    /**
+     * Set template
+     *
+     * @param string|null $template Template or location of a template file
+     *
+     * @return self
+     */
+    public function setTemplate(?string $template)
+    {
+        $this->template = $template;
+
+        return $this;
+    }
+
+    /**
+     * Get template
+     *
+     * If no "template" value set, method
+     * sets and returns a default "template".
+     *
+     * @see getDefaultTemplate()
+     *
+     * @return string|null template or null if no template has been set
+     */
+    public function getTemplate() : ?string
+    {
+        if ( ! $this->hasTemplate()) {
+            $this->setTemplate($this->getDefaultTemplate());
+        }
+        return $this->template;
+    }
+
+    /**
+     * Check if "template" has been set
+     *
+     * @return bool True if "template" has been set, false if not
+     */
+    public function hasTemplate() : bool
+    {
+        return isset($this->template);
+    }
+
+    /**
+     * Get a default "template" value, if any is available
+     *
+     * @return string|null Default "template" value or null if no default value is available
+     */
+    public function getDefaultTemplate() : ?string
+    {
+        return null;
+    }
+}
