@@ -879,6 +879,11 @@ return [
             'identifier'
         ),
         stringProperty(
+            'link',
+            'Hyperlink to related resource or action',
+            'link'
+        ),
+        stringProperty(
             'locale',
             'Locale language code, e.g. en_us or other format',
             'code'

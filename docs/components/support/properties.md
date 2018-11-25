@@ -1317,6 +1317,16 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\LicenseTrait`</small>
 
 
+### Link
+
+-------------------------------------------------------
+`string` Hyperlink to related resource or action
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LinkAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\LinkTrait`</small>
+
+
 ### Locale
 
 -------------------------------------------------------
