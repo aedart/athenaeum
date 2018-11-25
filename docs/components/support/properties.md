@@ -43,6 +43,16 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\AgeTrait`</small>
 
 
+### Agency
+
+-------------------------------------------------------
+`string` Name of agency organisation
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\AgencyAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\AgencyTrait`</small>
+
+
 ### Agent
 
 -------------------------------------------------------

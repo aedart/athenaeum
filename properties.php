@@ -133,6 +133,11 @@ return [
             'age'
         ),
         stringProperty(
+            'agency',
+            'Name of agency organisation',
+            'name'
+        ),
+        stringProperty(
             'agent',
             'Someone or something that acts on behalf of someone else or something else',
             'agent'
