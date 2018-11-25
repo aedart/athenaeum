@@ -76,6 +76,7 @@ return [
             DataTypes::CALLABLE_TYPE    => 'Callables\\',
             DataTypes::ITERABLE_TYPE    => 'Iterators\\',
             DataTypes::MIXED_TYPE       => 'Mixed\\',
+            DataTypes::DATE_TIME_TYPE   => 'Dates\\',
         ],
 
         /*
@@ -99,6 +100,7 @@ return [
             DataTypes::CALLABLE_TYPE    => 'Callables\\',
             DataTypes::ITERABLE_TYPE    => 'Iterators\\',
             DataTypes::MIXED_TYPE       => 'Mixed\\',
+            DataTypes::DATE_TIME_TYPE   => 'Dates\\',
         ],
     ],
 

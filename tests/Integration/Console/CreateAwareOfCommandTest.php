@@ -90,6 +90,9 @@ class CreateAwareOfCommandTest extends IntegrationTestCase
         $this->assertAwareOfComponentExists('Contracts/Callables/CallbackAware.php');
         $this->assertAwareOfComponentExists('Traits/Callables/CallbackTrait.php');
 
+        $this->assertAwareOfComponentExists('Contracts/Dates/CreatedAtAware.php');
+        $this->assertAwareOfComponentExists('Traits/Dates/CreatedAtTrait.php');
+
         $this->assertAwareOfComponentExists('Contracts/Floats/PriceAware.php');
         $this->assertAwareOfComponentExists('Traits/Floats/PriceTrait.php');
 

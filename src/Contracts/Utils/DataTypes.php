@@ -107,4 +107,11 @@ interface DataTypes
     const PSEUDO_TYPES = [
         self::MIXED_TYPE
     ];
+
+    // -------------------------------------------------------------- //
+
+    /**
+     * Date Time type
+     */
+    const DATE_TIME_TYPE = '\DateTimeInterface';
 }

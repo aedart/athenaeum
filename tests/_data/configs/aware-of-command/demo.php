@@ -76,6 +76,7 @@ return [
             DataTypes::CALLABLE_TYPE    => 'Callables\\',
             DataTypes::ITERABLE_TYPE    => 'Iterators\\',
             DataTypes::MIXED_TYPE       => 'Mixed\\',
+            DataTypes::DATE_TIME_TYPE   => 'Dates\\',
         ],
 
         /*
@@ -99,6 +100,7 @@ return [
             DataTypes::CALLABLE_TYPE    => 'Callables\\',
             DataTypes::ITERABLE_TYPE    => 'Iterators\\',
             DataTypes::MIXED_TYPE       => 'Mixed\\',
+            DataTypes::DATE_TIME_TYPE   => 'Dates\\',
         ],
     ],
 
@@ -116,5 +118,6 @@ return [
         callableProperty('callback', 'A callback method', 'callback'),
         iterableProperty('persons', 'List of persons', 'persons'),
         mixedProperty('player', 'A player instance', 'player'),
+        dateTimeProperty('created at', 'Date of creation', 'date'),
     ]
 ];

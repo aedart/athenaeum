@@ -238,3 +238,28 @@ if( ! function_exists('mixedProperty')){
         );
     }
 }
+
+if( ! function_exists('dateTimeProperty')){
+
+    /**
+     * Returns "DateTime" aware-of property configuration
+     *
+     * @see awareOfProperty()
+     *
+     * @param string $name Name of property
+     * @param string $description Description of property
+     * @param string|null $inputName [optional] Name of property input argument (for setter method).
+     *                                  If null given, then input argument name is the same as the property
+     *
+     * @return array
+     */
+    function dateTimeProperty(string $name, string $description, ?string $inputName = null) : array
+    {
+        return awareOfProperty(
+            $name,
+            $description,
+            DataTypes::DATE_TIME_TYPE,
+            $inputName
+        );
+    }
+}
