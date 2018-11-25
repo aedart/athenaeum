@@ -958,6 +958,11 @@ return [
             'Name of method or other identifier',
             'identifier'
         ),
+        callableProperty(
+            'method',
+            'Callback method',
+            'callback'
+        ),
         stringProperty(
             'middleName',
             'Middle Name or names of a person',

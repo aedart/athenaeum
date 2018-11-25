@@ -1460,6 +1460,13 @@ The following list are the available aware-of components.
 
 <small>**Trait** : `Aedart\Support\Properties\Integers\MethodTrait`</small>
 
+-------------------------------------------------------
+`callable` Callback method
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Callables\MethodAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Callables\MethodTrait`</small>
+
 
 ### MiddleName
 
