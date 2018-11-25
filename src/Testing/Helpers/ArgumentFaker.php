@@ -96,6 +96,9 @@ class ArgumentFaker
             case 'array':
                 return $faker->randomElements();
 
+            case 'callable':
+                return function(){};
+
             case 'null';
             default:
                 return $faker->name;
