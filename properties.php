@@ -1014,6 +1014,36 @@ return [
             'pattern'
         ),
         stringProperty(
+            'percent',
+            'A part or other object per hundred',
+            'percent'
+        ),
+        integerProperty(
+            'percent',
+            'A part or other object per hundred',
+            'percent'
+        ),
+        floatProperty(
+            'percent',
+            'A part or other object per hundred',
+            'percent'
+        ),
+        stringProperty(
+            'percentage',
+            'A proportion (especially per hundred)',
+            'percentage'
+        ),
+        integerProperty(
+            'percentage',
+            'A part or other object per hundred',
+            'percentage'
+        ),
+        floatProperty(
+            'percentage',
+            'A proportion (especially per hundred)',
+            'percentage'
+        ),
+        stringProperty(
             'phone',
             'Phone number',
             'number'

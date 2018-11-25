@@ -1547,6 +1547,54 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Strings\PatternTrait`</small>
 
 
+### Percent
+
+-------------------------------------------------------
+`string` A part or other object per hundred
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PercentAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\PercentTrait`</small>
+
+-------------------------------------------------------
+`int` A part or other object per hundred
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\PercentAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Integers\PercentTrait`</small>
+
+-------------------------------------------------------
+`float` A part or other object per hundred
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\PercentAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Floats\PercentTrait`</small>
+
+
+### Percentage
+
+-------------------------------------------------------
+`string` A proportion (especially per hundred)
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PercentageAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\PercentageTrait`</small>
+
+-------------------------------------------------------
+`int` A part or other object per hundred
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\PercentageAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Integers\PercentageTrait`</small>
+
+-------------------------------------------------------
+`float` A proportion (especially per hundred)
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\PercentageAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Floats\PercentageTrait`</small>
+
+
 ### Phone
 
 -------------------------------------------------------
