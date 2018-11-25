@@ -1090,6 +1090,26 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Integers\IndexTrait`</small>
 
 
+### Info
+
+-------------------------------------------------------
+`string` Information about someone or something
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\InfoAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\InfoTrait`</small>
+
+
+### Information
+
+-------------------------------------------------------
+`string` Information about someone or something
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\InformationAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\InformationTrait`</small>
+
+
 ### InvoiceAddress
 
 -------------------------------------------------------

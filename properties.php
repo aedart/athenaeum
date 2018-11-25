@@ -749,6 +749,16 @@ return [
             'index'
         ),
         stringProperty(
+            'info',
+            'Information about someone or something',
+            'text'
+        ),
+        stringProperty(
+            'information',
+            'Information about someone or something',
+            'text'
+        ),
+        stringProperty(
             'invoiceAddress',
             'Invoice Address. Can be formatted.',
             'address'
