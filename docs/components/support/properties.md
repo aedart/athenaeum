@@ -1454,6 +1454,16 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Strings\NickNameTrait`</small>
 
 
+### Namespace
+
+-------------------------------------------------------
+`string` Namespace
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\NamespaceAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\NamespaceTrait`</small>
+
+
 
 
 

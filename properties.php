@@ -958,6 +958,11 @@ return [
             'Nickname of someone or something',
             'name'
         ),
+        stringProperty(
+            'namespace',
+            'Namespace',
+            'namespace'
+        ),
 
         // -------------------------------------------------------------------------------------
         // O
