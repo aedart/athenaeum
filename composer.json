@@ -54,7 +54,8 @@
     "symfony/var-dumper": "4.1.*",
     "predis/predis": "~1.1",
     "symfony/yaml": "4.1.*",
-    "twig/twig": "^2.5"
+    "twig/twig": "^2.5",
+    "hanneskod/classtools" : "~1.2"
   },
   "suggest": {
     "codeception/codeception": "Required for Testing utilities",
