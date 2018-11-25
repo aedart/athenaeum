@@ -2,7 +2,5 @@
 {% for property, types in list %}
 ### {{ property }}
 
-{{ types|first.description }}.
-
 {{ include('partials/docs/types-list.twig') }}
 {% endfor %}
