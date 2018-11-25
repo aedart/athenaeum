@@ -162,6 +162,11 @@ return [
             'Date of anniversary',
             'anniversary'
         ),
+        dateTimeProperty(
+            'anniversary',
+            'Date of anniversary',
+            'anniversary'
+        ),
         stringProperty(
             'area',
             'Name of area, e.g. in a building, in a city, outside the city, ...etc',
@@ -194,6 +199,11 @@ return [
             'date'
         ),
         integerProperty(
+            'birthdate',
+            'Date of birth',
+            'date'
+        ),
+        dateTimeProperty(
             'birthdate',
             'Date of birth',
             'date'
@@ -308,6 +318,11 @@ return [
             'Date of when this component, entity or resource was created',
             'date'
         ),
+        dateTimeProperty(
+            'createdAt',
+            'Date of when this component, entity or resource was created',
+            'date'
+        ),
         stringProperty(
             'currency',
             'Name, code or other identifier of currency',
@@ -338,12 +353,22 @@ return [
             'Date of event',
             'date'
         ),
+        dateTimeProperty(
+            'date',
+            'Date of event',
+            'date'
+        ),
         stringProperty(
             'deceasedAt',
             'Date of when person, animal of something has died',
             'date'
         ),
         integerProperty(
+            'deceasedAt',
+            'Date of when person, animal of something has died',
+            'date'
+        ),
+        dateTimeProperty(
             'deceasedAt',
             'Date of when person, animal of something has died',
             'date'
@@ -354,6 +379,11 @@ return [
             'date'
         ),
         integerProperty(
+            'deletedAt',
+            'Date of when this component, entity or resource was deleted',
+            'date'
+        ),
+        dateTimeProperty(
             'deletedAt',
             'Date of when this component, entity or resource was deleted',
             'date'
@@ -364,6 +394,11 @@ return [
             'date'
         ),
         integerProperty(
+            'deliveredAt',
+            'Date of delivery',
+            'date'
+        ),
+        dateTimeProperty(
             'deliveredAt',
             'Date of delivery',
             'date'
@@ -379,6 +414,11 @@ return [
             'date'
         ),
         integerProperty(
+            'deliveryDate',
+            'Date of planned delivery',
+            'date'
+        ),
+        dateTimeProperty(
             'deliveryDate',
             'Date of planned delivery',
             'date'
@@ -508,6 +548,11 @@ return [
             'Date for when some kind of event ends',
             'date'
         ),
+        dateTimeProperty(
+            'endDate',
+            'Date for when some kind of event ends',
+            'date'
+        ),
         stringProperty(
             'error',
             'Error name or identifier',
@@ -534,6 +579,11 @@ return [
             'date'
         ),
         integerProperty(
+            'expiresAt',
+            'Date of when this component, entity or resource is going to expire',
+            'date'
+        ),
+        dateTimeProperty(
             'expiresAt',
             'Date of when this component, entity or resource is going to expire',
             'date'
@@ -983,12 +1033,22 @@ return [
             'Date of when this component, entity or something was produced',
             'date'
         ),
+        dateTimeProperty(
+            'producedAt',
+            'Date of when this component, entity or something was produced',
+            'date'
+        ),
         stringProperty(
             'productionDate',
             'Date of planned production',
             'date'
         ),
         integerProperty(
+            'productionDate',
+            'Date of planned production',
+            'date'
+        ),
+        dateTimeProperty(
             'productionDate',
             'Date of planned production',
             'date'
@@ -999,6 +1059,11 @@ return [
             'date'
         ),
         integerProperty(
+            'purchaseDate',
+            'Date of planned purchase',
+            'date'
+        ),
+        dateTimeProperty(
             'purchaseDate',
             'Date of planned purchase',
             'date'
@@ -1009,6 +1074,11 @@ return [
             'date'
         ),
         integerProperty(
+            'purchasedAt',
+            'Date of when this component, entity or resource was purchased',
+            'date'
+        ),
+        dateTimeProperty(
             'purchasedAt',
             'Date of when this component, entity or resource was purchased',
             'date'
@@ -1098,12 +1168,22 @@ return [
             'Date of when this component, entity or something was released',
             'date'
         ),
+        dateTimeProperty(
+            'releasedAt',
+            'Date of when this component, entity or something was released',
+            'date'
+        ),
         stringProperty(
             'releaseDate',
             'Date of planned release',
             'date'
         ),
         integerProperty(
+            'releaseDate',
+            'Date of planned release',
+            'date'
+        ),
+        dateTimeProperty(
             'releaseDate',
             'Date of planned release',
             'date'
@@ -1174,6 +1254,11 @@ return [
             'date'
         ),
         integerProperty(
+            'startDate',
+            'Start date of event',
+            'date'
+        ),
+        dateTimeProperty(
             'startDate',
             'Start date of event',
             'date'
@@ -1294,6 +1379,11 @@ return [
             'date'
         ),
         integerProperty(
+            'updatedAt',
+            'Date of when this component, entity or resource was updated',
+            'date'
+        ),
+        dateTimeProperty(
             'updatedAt',
             'Date of when this component, entity or resource was updated',
             'date'
