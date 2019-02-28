@@ -1,9 +1,15 @@
-# Release Notes for v.2.x
+# Release Notes
 
-## [v2.0.0](https://github.com/aedart/athenaeum/compare/1.2.0...2.0.0)
+## v2.x
 
-### Added
+### [v2.0.0](https://github.com/aedart/athenaeum/compare/1.2.0...2.0.0)
 
-### Changed
+#### Added
 
-### Fixed
+#### Changed
+
+#### Fixed
+
+## v1.x
+
+* Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
