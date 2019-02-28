@@ -5,7 +5,8 @@ Among such, it wraps PHP's native [`json_encode()`](https://secure.php.net/manua
 
 ## Encoding and Decoding
 
-Using the `encode()` and `decode()` methods, you ensure that if encoding fails, a `JsonEncodingException` will be thrown.
+Using the `encode()` and `decode()` methods, you ensure that the [`JSON_THROW_ON_ERROR`](http://php.net/manual/en/json.constants.php) bitmask option is automatically set.
+This means that encoding or decoding should fail, the native [`\JsonException `](http://php.net/manual/en/class.jsonexception.php) is thrown.
 
 ```php
 use Aedart\Utils\Json;
@@ -19,8 +20,3 @@ $encoded = Json::encode([
 
 $decoded = Json::decode('{"name":"Michele Rodriguez","age":4}');
 ```
-
-::: tip Note
-From PHP 7.3, `json_encode()` and `json_decode()` will natively support an option to throw an exception upon encoding errors.
-These wrapper methods will be adapted to use this native option in the future.
-:::
