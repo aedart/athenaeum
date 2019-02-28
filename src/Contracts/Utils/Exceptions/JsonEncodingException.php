@@ -5,6 +5,8 @@ namespace Aedart\Contracts\Utils\Exceptions;
 use Throwable;
 
 /**
+ * @deprecated Since 2.0
+ *
  * Json Encoding Exception
  *
  * <br />

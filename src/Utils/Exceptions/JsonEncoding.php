@@ -6,6 +6,8 @@ use Aedart\Contracts\Utils\Exceptions\JsonEncodingException;
 use JsonException;
 
 /**
+ * @deprecated Since 2.0, use native \JsonException instead
+ *
  * Json Encoding Exception
  *
  * <br />
