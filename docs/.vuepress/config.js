@@ -1,5 +1,5 @@
 module.exports = {
-    base: '/athenaeum/',
+    base: '/',
     dest: '.build',
     title: 'Athenaeum',
     description: 'Athenaeum Official Documentation',
@@ -33,12 +33,12 @@ module.exports = {
                 // algolia docsearch options for current locale
                 //algolia: {},
                 nav: [
-                    { text: 'Components', link: '/components/' }
+                    { text: 'Components', link: '/components/' },
+                    { text: 'Changelog', link: 'https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md' },
                 ],
                 sidebar: {
                     '/components/' : genSidebarComponents(),
                 }
-                //sidebar: 'auto'
             },
         }
     }
