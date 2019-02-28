@@ -5,8 +5,8 @@ namespace Aedart\Testing\Helpers;
 use Aedart\Testing\Exceptions\IncorrectPropertiesAmount;
 use Codeception\TestCase\Test;
 use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 use ReflectionClass;
 use ReflectionException;
 
@@ -134,14 +134,14 @@ class TraitTester
      * Assert that the default value is `null`, by invoking the trait's
      * `get-default-property` method
      *
-     * @param PHPUnit_Framework_MockObject_MockObject $mock
+     * @param MockObject $mock
      * @param string $method [optional] Method name is guessed if none provided
      * @param string $failMessage [optional]
      *
      * @throws ExpectationFailedException
      */
     public function assertDefaultValueIsNull(
-        PHPUnit_Framework_MockObject_MockObject $mock,
+        MockObject $mock,
         ?string $method = null,
         string $failMessage = 'Default value should be null'
     ) {
@@ -156,14 +156,14 @@ class TraitTester
      * Assert that no value is set, by invoking the trait's
      * `has-property` method
      *
-     * @param PHPUnit_Framework_MockObject_MockObject $mock
+     * @param MockObject $mock
      * @param string $method [optional] Method name is guessed if none provided
      * @param string $failMessage [optional]
      *
      * @throws ExpectationFailedException
      */
     public function assertHasNoValue(
-        PHPUnit_Framework_MockObject_MockObject $mock,
+        MockObject $mock,
         ?string $method = null,
         string $failMessage = 'Should not have a value set'
     ) {
@@ -179,7 +179,7 @@ class TraitTester
      * by invoking the trait's `set-property` and `get-property`
      * methods
      *
-     * @param PHPUnit_Framework_MockObject_MockObject $mock
+     * @param MockObject $mock
      * @param mixed $value
      * @param null|string $setMethod [optional] Method name is guessed if none provided
      * @param null|string $getMethod [optional] Method name is guessed if none provided
@@ -188,7 +188,7 @@ class TraitTester
      * @throws ExpectationFailedException
      */
     public function assertCanSetAndGetValue(
-        PHPUnit_Framework_MockObject_MockObject $mock,
+        MockObject $mock,
         $value,
         ?string $setMethod = null,
         ?string $getMethod = null,
@@ -262,9 +262,9 @@ class TraitTester
      * @param string $trait Trait class path
      * @param string[] $methods [optional] Methods to be mocked
      *
-     * @return PHPUnit_Framework_MockObject_MockObject
+     * @return MockObject
      */
-    public function makeTraitMock(string $trait, array $methods = []) : PHPUnit_Framework_MockObject_MockObject
+    public function makeTraitMock(string $trait, array $methods = []) : MockObject
     {
         $builder = $this->testCase->getMockBuilder($trait);
         $builder
@@ -281,9 +281,9 @@ class TraitTester
     /**
      * Get the trait mock
      *
-     * @return PHPUnit_Framework_MockObject_MockObject
+     * @return MockObject
      */
-    public function getTraitMock() : PHPUnit_Framework_MockObject_MockObject
+    public function getTraitMock() : MockObject
     {
         return $this->mock;
     }
