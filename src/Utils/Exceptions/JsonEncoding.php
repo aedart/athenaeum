@@ -3,7 +3,7 @@
 namespace Aedart\Utils\Exceptions;
 
 use Aedart\Contracts\Utils\Exceptions\JsonEncodingException;
-use Exception;
+use JsonException;
 
 /**
  * Json Encoding Exception
@@ -19,7 +19,7 @@ use Exception;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Utils\Exceptions
  */
-class JsonEncoding extends Exception implements JsonEncodingException
+class JsonEncoding extends JsonException implements JsonEncodingException
 {
 
 }
