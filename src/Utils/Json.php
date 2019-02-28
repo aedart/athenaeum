@@ -3,6 +3,7 @@
 namespace Aedart\Utils;
 
 use Aedart\Utils\Exceptions\JsonEncoding;
+use JsonException;
 
 /**
  * Json Utility
@@ -27,17 +28,17 @@ class Json
      *
      * @return string
      *
-     * @throws JsonEncoding
+     * @throws JsonException
      */
     static public function encode($value, int $options = 0, int $depth = 512) : string
     {
-        $encoded = json_encode($value, $options, $depth);
+        $options = static::resolveThrowExceptionBitmask($options);
 
-        if(json_last_error() !== JSON_ERROR_NONE){
-            throw new JsonEncoding(json_last_error_msg());
+        try {
+            return json_encode($value, $options, $depth);
+        } catch (JsonException $e) {
+            throw new JsonEncoding($e->getMessage(), $e->getCode(), $e);
         }
-
-        return $encoded;
     }
 
     /**
@@ -52,7 +53,7 @@ class Json
      *
      * @return mixed
      *
-     * @throws JsonEncoding
+     * @throws JsonException
      */
     static public function decode(
         string $json,
@@ -60,12 +61,34 @@ class Json
         int $depth = 512,
         int $options = 0
     ) {
-        $decoded = json_decode($json, $assoc, $depth, $options);
+        $options = static::resolveThrowExceptionBitmask($options);
 
-        if(json_last_error() !== JSON_ERROR_NONE){
-            throw new JsonEncoding(json_last_error_msg());
+        try {
+            return json_decode($json, $assoc, $depth, $options);
+        } catch (JsonException $e) {
+            throw new JsonEncoding($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Add the "throw on error" bitmask option, if required
+     *
+     * @see http://php.net/manual/en/json.constants.php
+     *
+     * @param int $options Json encode / decode bitmask options
+     *
+     * @return int
+     */
+    static protected function resolveThrowExceptionBitmask(int $options) : int
+    {
+        if($options & JSON_THROW_ON_ERROR){
+            return $options;
         }
 
-        return $decoded;
+        return $options | JSON_THROW_ON_ERROR;
     }
 }

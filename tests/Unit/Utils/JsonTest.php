@@ -44,7 +44,7 @@ class JsonTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \Aedart\Utils\Exceptions\JsonEncoding
+     * @expectedException \JsonException
      */
     public function failsEncodingJson()
     {
@@ -55,7 +55,7 @@ class JsonTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \Aedart\Utils\Exceptions\JsonEncoding
+     * @expectedException \JsonException
      */
     public function failsDecodingJson()
     {
