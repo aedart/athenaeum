@@ -4,7 +4,7 @@ title: Configuration Loader
 
 # Loader
 
-The `Loader` component is able to load various types of configuration files and parse them into a Laravel [Repository](https://github.com/laravel/framework/blob/5.7/src/Illuminate/Contracts/Config/Repository.php).
+The `Loader` component is able to load various types of configuration files and parse them into a Laravel [Repository](https://github.com/laravel/framework/blob/5.8/src/Illuminate/Contracts/Config/Repository.php).
 
 ## Supported File Types
 
@@ -115,4 +115,4 @@ $repository = $loader->getConfig();
 $width = $repository->get('modules.box.width');
 ```
 
-For more information about how to access the loaded configuration, please review [Laravel's documentation](https://laravel.com/docs/5.7/configuration#accessing-configuration-values) or review the `Repository` [source code](https://github.com/laravel/framework/blob/5.7/src/Illuminate/Config/Repository.php).
+For more information about how to access the loaded configuration, please review [Laravel's documentation](https://laravel.com/docs/5.8/configuration#accessing-configuration-values) or review the `Repository` [source code](https://github.com/laravel/framework/blob/5.8/src/Illuminate/Config/Repository.php).

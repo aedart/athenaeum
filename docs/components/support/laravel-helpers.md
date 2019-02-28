@@ -7,9 +7,9 @@ sidebarDepth: 3
 [Getters and Setters](https://en.wikipedia.org/wiki/Mutator_method) helpers for some of [Laravel's](http://laravel.com/) core packages. 
 
 These components allow you to manually set and retrieve a Laravel component, e.g. a configuration `Repository`.
-Additionally, when no component instance has been specified, it will automatically default to whatever Laravel has bound in the [IoC](https://laravel.com/docs/5.7/container).
+Additionally, when no component instance has been specified, it will automatically default to whatever Laravel has bound in the [IoC](https://laravel.com/docs/5.8/container).
 
-You can think of these helpers as alternatives, or supplements to Laravel's native [Facades](http://laravel.com/docs/5.7/facades).
+You can think of these helpers as alternatives, or supplements to Laravel's native [Facades](http://laravel.com/docs/5.8/facades).
 
 ## Usage
 
@@ -85,12 +85,12 @@ class Box
 
 ## Outside Laravel Usage
 
-If you wish to use these helpers outside a typical Laravel Application, then you must ensure that the required services have been registered in the [IoC](https://laravel.com/docs/5.7/container).
+If you wish to use these helpers outside a typical Laravel Application, then you must ensure that the required services have been registered in the [IoC](https://laravel.com/docs/5.8/container).
 
 ## Pros and Cons
 
 If you are a regular Laravel user, then you most likely have your own desired way to obtain dependencies.
-Most likely, you either resolve these via the Service Container or rely on [Facades](http://laravel.com/docs/5.7/facades).
+Most likely, you either resolve these via the Service Container or rely on [Facades](http://laravel.com/docs/5.8/facades).
 There is absolutely nothing wrong with that and you should continue to do so, if it feels right.
 
 As previously mentioned, these components are alternatives or supplementary - either they make sense for you to use or they do not.
@@ -101,7 +101,7 @@ Should you do, then remember that they do add a bit of additional complexity to 
 
 These are the available aware-of helpers for Laravel components.
 The _Defaults to binding_ column illustrates what Service Container binding a given trait defaults to, if no custom has been set or overwritten.
-See [Facade Class Reference](https://laravel.com/docs/5.7/facades#facade-class-reference) for additional information.
+See [Facade Class Reference](https://laravel.com/docs/5.8/facades#facade-class-reference) for additional information.
 
 ::: tip Note
 Corresponding aware-of interfaces can be found inside the `Aedart\Contracts\Support\Helpers\*` namespace.

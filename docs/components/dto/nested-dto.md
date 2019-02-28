@@ -2,7 +2,7 @@
 
 Imagine that your `Person` DTO accepts more complex properties, e.g. an address DTO.
 Normally, you would either manually create the nested DTO or perhaps use some kind of factory to achieve the same.
-However, the `Dto` abstraction comes with [Laravel's Service Container](https://laravel.com/docs/5.7/container), meaning that it will automatically attempt to resolve dependencies.
+However, the `Dto` abstraction comes with [Laravel's Service Container](https://laravel.com/docs/5.8/container), meaning that it will automatically attempt to resolve dependencies.
 
 ## Prerequisite
 
