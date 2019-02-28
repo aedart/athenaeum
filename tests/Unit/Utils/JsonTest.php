@@ -34,7 +34,12 @@ class JsonTest extends UnitTestCase
         // ------------------------------------ //
         $decoded = Json::decode($encoded, true);
         ConsoleDebugger::output($decoded);
-        $this->assertArraySubset($data, $decoded);
+
+        $this->assertArrayHasKey('name', $decoded);
+        $this->assertSame($data['name'], $decoded['name']);
+
+        $this->assertArrayHasKey('age', $decoded);
+        $this->assertSame($data['age'], $decoded['age']);
     }
 
     /**
