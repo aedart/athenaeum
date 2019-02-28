@@ -49,6 +49,7 @@
     "jean85/pretty-package-versions": "~1.2"
   },
   "require-dev": {
+    "ext-sockets": "*",
     "orchestra/testbench": "3.8.*",
     "codeception/codeception": "2.5.*",
     "symfony/var-dumper": "4.2.*",
