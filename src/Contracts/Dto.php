@@ -2,12 +2,12 @@
 
 namespace Aedart\Contracts;
 
-use Aedart\Contracts\Utils\Exceptions\JsonEncodingException;
 use Aedart\Contracts\Utils\Populatable;
 use ArrayAccess;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
+use JsonException;
 use JsonSerializable;
 
 /**
@@ -102,7 +102,7 @@ interface Dto extends ArrayAccess,
      *
      * @return static
      *
-     * @throws JsonEncodingException
+     * @throws JsonException
      */
     static public function fromJson(string $json);
 }

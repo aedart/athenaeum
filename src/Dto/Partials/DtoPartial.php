@@ -2,11 +2,10 @@
 
 namespace Aedart\Dto\Partials;
 
-
-use Aedart\Contracts\Utils\Exceptions\JsonEncodingException;
 use Aedart\Utils\Json;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Support\Arrayable;
+use JsonException;
 use JsonSerializable;
 
 /**
@@ -80,7 +79,7 @@ trait DtoPartial
      *
      * @return static
      *
-     * @throws JsonEncodingException
+     * @throws JsonException
      */
     static public function fromJson(string $json)
     {
@@ -116,7 +115,7 @@ trait DtoPartial
      * @param  int $options
      * @return string
      *
-     * @throws \Aedart\Utils\Exceptions\JsonEncoding
+     * @throws JsonException
      */
     public function toJson($options = 0)
     {
@@ -148,7 +147,7 @@ trait DtoPartial
      *
      * @return string
      *
-     * @throws \Aedart\Utils\Exceptions\JsonEncoding
+     * @throws JsonException
      */
     public function __toString()
     {

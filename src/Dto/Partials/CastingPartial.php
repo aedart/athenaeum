@@ -2,11 +2,10 @@
 
 namespace Aedart\Dto\Partials;
 
-
-use Aedart\Utils\Exceptions\JsonEncoding;
 use Aedart\Utils\Json;
 use Carbon\Carbon;
 use DateTimeInterface;
+use JsonException;
 
 /**
  * CastingPartial
@@ -31,7 +30,7 @@ trait CastingPartial
      * @param mixed $value Value to cast
      * @return bool|float|int|mixed|string
      *
-     * @throws JsonEncoding
+     * @throws JsonException
      */
     protected function castPropertyValue(string $name, $value)
     {
@@ -128,7 +127,7 @@ trait CastingPartial
      * @param string|array $value
      * @return array
      *
-     * @throws JsonEncoding
+     * @throws JsonException
      */
     protected function castAsArray($value) : array
     {

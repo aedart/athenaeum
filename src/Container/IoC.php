@@ -22,6 +22,7 @@ class IoC extends Container implements IoCInterface
      */
     static public function getInstance()
     {
+        /** @var \Illuminate\Contracts\Foundation\Application $container */
         $container = parent::getInstance();
 
         // Self register as "app" and set Facade application

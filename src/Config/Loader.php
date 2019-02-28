@@ -9,7 +9,6 @@ use Aedart\Contracts\Config\Loader as LoaderInterface;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Illuminate\Contracts\Config\Repository;
-use Illuminate\Support\Str;
 use SplFileInfo;
 use Throwable;
 
