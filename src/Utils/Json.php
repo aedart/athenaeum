@@ -32,7 +32,7 @@ class Json
      */
     static public function encode($value, int $options = 0, int $depth = 512) : string
     {
-        $options = static::resolveThrowExceptionBitmask($options);
+        $options |= JSON_THROW_ON_ERROR;
 
         try {
             return json_encode($value, $options, $depth);
@@ -61,34 +61,12 @@ class Json
         int $depth = 512,
         int $options = 0
     ) {
-        $options = static::resolveThrowExceptionBitmask($options);
+        $options |= JSON_THROW_ON_ERROR;
 
         try {
             return json_decode($json, $assoc, $depth, $options);
         } catch (JsonException $e) {
             throw new JsonEncoding($e->getMessage(), $e->getCode(), $e);
         }
-    }
-
-    /*****************************************************************
-     * Internals
-     ****************************************************************/
-
-    /**
-     * Add the "throw on error" bitmask option, if required
-     *
-     * @see http://php.net/manual/en/json.constants.php
-     *
-     * @param int $options Json encode / decode bitmask options
-     *
-     * @return int
-     */
-    static protected function resolveThrowExceptionBitmask(int $options) : int
-    {
-        if($options & JSON_THROW_ON_ERROR){
-            return $options;
-        }
-
-        return $options | JSON_THROW_ON_ERROR;
     }
 }
