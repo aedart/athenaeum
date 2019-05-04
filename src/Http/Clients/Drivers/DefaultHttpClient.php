@@ -3,8 +3,8 @@
 namespace Aedart\Http\Clients\Drivers;
 
 use Aedart\Contracts\Http\Clients\Client;
+use GuzzleHttp\Client as GuzzleClient;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\UriInterface;
 
 /**
  * Default Http Client
@@ -15,254 +15,228 @@ use Psr\Http\Message\UriInterface;
 class DefaultHttpClient implements Client
 {
     /**
-     * Make a GET request
+     * Initial client options
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET
+     * @var array
+     */
+    protected $initialOptions = [];
+
+    /**
+     * Options for the next request
      *
-     * @param string|UriInterface $uri
+     * @var array
+     */
+    protected $optionsForNextRequest = [];
+
+    /**
+     * The Guzzle Http Client
      *
-     * @return ResponseInterface
+     * @var GuzzleClient|null
+     */
+    protected $client = null;
+
+    /**
+     * DefaultHttpClient constructor.
+     *
+     * @param array $options [optional]
+     */
+    public function __construct(array $options = [])
+    {
+        $this->initialOptions = $options;
+        $this->resetOptionsForNextRequest();
+
+        $this->client = new GuzzleClient($this->initialOptions);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function get($uri): ResponseInterface
     {
-        // TODO: Implement get() method.
+        return $this->request('GET', $uri);
     }
 
     /**
-     * Make a HEAD request
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD
-     *
-     * @param string|UriInterface $uri
-     *
-     * @return ResponseInterface
+     * {@inheritdoc}
      */
     public function head($uri): ResponseInterface
     {
-        // TODO: Implement head() method.
+        return $this->request('HEAD', $uri);
     }
 
     /**
-     * Make a POST request
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST
-     *
-     * @param string|UriInterface $uri
-     * @param array $body [optional]
-     *
-     * @return ResponseInterface
+     * {@inheritdoc}
      */
     public function post($uri, array $body = []): ResponseInterface
     {
-        // TODO: Implement post() method.
+        return $this->request('POST', $uri, [ 'body' => $body ]);
     }
 
     /**
-     * Make a PUT request
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT
-     *
-     * @param string|UriInterface $uri
-     * @param array $body [optional]
-     *
-     * @return ResponseInterface
+     * {@inheritdoc}
      */
     public function put($uri, array $body = []): ResponseInterface
     {
-        // TODO: Implement put() method.
+        return $this->request('PUT', $uri, [ 'body' => $body ]);
     }
 
     /**
-     * Make a DELETE request
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE
-     *
-     * @param string|UriInterface $uri
-     * @param array $body [optional]
-     *
-     * @return ResponseInterface
+     * {@inheritdoc}
      */
     public function delete($uri, array $body = []): ResponseInterface
     {
-        // TODO: Implement delete() method.
+        return $this->request('DELETE', $uri, [ 'body' => $body ]);
     }
 
     /**
-     * Make a OPTIONS request
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS
-     *
-     * @param string|UriInterface $uri
-     *
-     * @return ResponseInterface
+     * {@inheritdoc}
      */
     public function options($uri): ResponseInterface
     {
-        // TODO: Implement options() method.
+        return $this->request('OPTIONS', $uri);
     }
 
     /**
-     * Make a PATCH request
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH
-     *
-     * @param string|UriInterface $uri
-     * @param array $body [optional]
-     *
-     * @return ResponseInterface
+     * {@inheritdoc}
      */
     public function patch($uri, array $body = []): ResponseInterface
     {
-        // TODO: Implement patch() method.
+        return $this->request('PATCH', $uri, [ 'body' => $body ]);
     }
 
     /**
-     * Make a http request
-     *
-     * @param string $method Http method name
-     * @param string|UriInterface $uri
-     * @param array $options [optional]
-     *
-     * @return ResponseInterface
+     * {@inheritdoc}
      */
     public function request(string $method, $uri, array $options = []): ResponseInterface
     {
-        // TODO: Implement request() method.
+        // Resolve options for request
+        $options = array_merge_recursive($this->optionsForNextRequest, $options);
+
+        // Perform request
+        $response = $this->client->request($method, $uri, $options);
+
+        // Reset options for next request
+        $this->resetOptionsForNextRequest();
+
+        // Finally, return response
+        return $response;
     }
 
     /**
-     * Set the Http headers for the next request
-     *
-     * Method will merge with existing headers, if client has any predefined
-     *
-     * @param array $headers [optional] Key-value pair
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function withHeaders(array $headers = []): Client
     {
-        // TODO: Implement withHeaders() method.
+        $this->optionsForNextRequest['headers'] = array_merge_recursive($this->optionsForNextRequest['headers'], $headers);
+
+        return $this;
     }
 
     /**
-     * Set a Http header for the next request
-     *
-     * Method will merge with existing headers, if client has any predefined
-     *
-     * @param string $name
-     * @param mixed $value
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function withHeader(string $name, $value): Client
     {
-        // TODO: Implement withHeader() method.
+        return $this->withHeaders([ $name => $value ]);
     }
 
     /**
-     * Remove a Http header from the next request
-     *
-     * @param string $name
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function withoutHeader(string $name): Client
     {
-        // TODO: Implement withoutHeader() method.
+        unset($this->optionsForNextRequest['headers'][$name]);
+
+        return $this;
     }
 
     /**
-     * Get all the Http headers for the next request
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getHeaders(): array
     {
-        // TODO: Implement getHeaders() method.
+        return $this->optionsForNextRequest['headers'];
     }
 
     /**
-     * Get the desired Http header, for the next request
-     *
-     * @param string $name
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getHeader(string $name)
     {
-        // TODO: Implement getHeader() method.
+        if(isset($this->optionsForNextRequest['headers'][$name])){
+            return $this->optionsForNextRequest['headers'][$name];
+        }
+
+        return null;
     }
 
     /**
-     * Apply a set of options for the next request
-     *
-     * Method will merge given options with Client's default options
-     *
-     * @param array $options [optional]
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function withOptions(array $options = []): Client
     {
-        // TODO: Implement withOptions() method.
+        $this->optionsForNextRequest = array_merge_recursive($this->optionsForNextRequest, $options);
+
+        return $this;
     }
 
     /**
-     * Set a specific option for the next request
-     *
-     * Method will merge given options with Client's default options
-     *
-     * @param string $name
-     * @param mixed $value
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function withOption(string $name, $value): Client
     {
-        // TODO: Implement withOption() method.
+        return $this->withOptions([ $name => $value ]);
     }
 
     /**
-     * Remove given option for the next request
-     *
-     * @param string $name
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function withoutOption(string $name): Client
     {
-        // TODO: Implement withoutOption() method.
+        unset($this->optionsForNextRequest[$name]);
+
+        return $this;
     }
 
     /**
-     * Get all the options for the next request
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getOptions(): array
     {
-        // TODO: Implement getOptions() method.
+        return $this->optionsForNextRequest;
     }
 
     /**
-     * Get a specific option for the next request
-     *
-     * @param string $name
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getOption(string $name)
     {
-        // TODO: Implement getOption() method.
+        if(isset($this->optionsForNextRequest[$name])){
+            return $this->optionsForNextRequest[$name];
+        }
+
+        return null;
     }
 
     /**
-     * Get this Http Client's native driver
+     * @inheritDoc
      *
-     * @return mixed
+     * @return GuzzleClient
      */
     public function driver()
     {
-        // TODO: Implement driver() method.
+        return $this->client;
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Resets the options back to the initial options
+     */
+    protected function resetOptionsForNextRequest()
+    {
+        $this->optionsForNextRequest = $this->initialOptions;
     }
 }
