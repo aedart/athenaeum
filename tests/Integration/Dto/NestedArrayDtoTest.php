@@ -9,6 +9,7 @@ use Aedart\Tests\Helpers\Dummies\Dto\Address;
 use Aedart\Tests\Helpers\Dummies\Dto\City;
 use Aedart\Tests\Helpers\Dummies\Dto\Note;
 use Aedart\Tests\TestCases\Dto\DtoTestCase;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * NestedArrayDtoTest
@@ -68,10 +69,11 @@ class NestedArrayDtoTest extends DtoTestCase
 
     /**
      * @test
-     * @expectedException \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function failsResolvingWhenNoServiceContainerAvailable()
     {
+        $this->expectException(BindingResolutionException::class);
+
         $this->ioc->destroy();
 
         $data = $this->arrayDtoData();
@@ -166,11 +168,12 @@ class NestedArrayDtoTest extends DtoTestCase
 
     /**
      * @test
-     * @expectedException \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function failsResolvingAbstractInstance()
     {
         // NOTE: Here the interface is not bound. The IoC should thus fail resolving.
+
+        $this->expectException(BindingResolutionException::class);
 
         $data = [
             'name' => $this->faker->name,

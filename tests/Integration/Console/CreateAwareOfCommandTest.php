@@ -79,7 +79,7 @@ class CreateAwareOfCommandTest extends IntegrationTestCase
 
         // --------------------------------------------------------------- //
 
-        $this->assertContains('[OK]', $output);
+        $this->assertStringContainsString('[OK]', $output);
 
         $this->assertAwareOfComponentExists('Contracts/Arrays/CategoriesAware.php');
         $this->assertAwareOfComponentExists('Traits/Arrays/CategoriesTrait.php');

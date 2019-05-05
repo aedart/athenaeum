@@ -5,6 +5,7 @@ namespace Aedart\Tests\Unit\Utils;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Json;
+use JsonException;
 
 /**
  * JsonTest
@@ -44,10 +45,11 @@ class JsonTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \JsonException
      */
     public function failsEncodingJson()
     {
+        $this->expectException(JsonException::class);
+
         $socket = socket_create(AF_UNIX, SOCK_STREAM, 0);
 
         Json::encode($socket);
@@ -55,10 +57,11 @@ class JsonTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \JsonException
      */
     public function failsDecodingJson()
     {
+        $this->expectException(JsonException::class);
+
         $json = '{"name:fisk';
 
         Json::decode($json);

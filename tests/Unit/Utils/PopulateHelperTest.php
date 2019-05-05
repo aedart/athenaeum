@@ -4,6 +4,7 @@ namespace Aedart\Tests\Unit\Utils;
 
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Helpers\PopulateHelper;
+use Exception;
 
 /**
  * PopulateHelperTest
@@ -34,10 +35,11 @@ class PopulateHelperTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \Exception
      */
     public function failsIfIncorrectCount()
     {
+        $this->expectException(Exception::class);
+
         $data  = [
             'a' => true,
             'b' => true,
@@ -51,10 +53,11 @@ class PopulateHelperTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \Exception
      */
     public function failsIfRequiredMissing()
     {
+        $this->expectException(Exception::class);
+
         $data  = [
             'a' => true,
             'b' => true,

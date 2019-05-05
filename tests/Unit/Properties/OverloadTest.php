@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Unit\Properties;
 
+use Aedart\Properties\Exceptions\UndefinedProperty;
 use Aedart\Tests\TestCases\Properties\PropertiesTestCase;
 
 /**
@@ -26,20 +27,22 @@ class OverloadTest extends PropertiesTestCase
 
     /**
      * @test
-     * @expectedException \Aedart\Properties\Exceptions\UndefinedProperty
      */
     public function failsOnNoneExistingProperty()
     {
+        $this->expectException(UndefinedProperty::class);
+
         $dummy = $this->makeDummy();
         $x = $dummy->address;
     }
 
     /**
      * @test
-     * @expectedException \Aedart\Properties\Exceptions\UndefinedProperty
      */
     public function failsPropertyReadWithoutGetter()
     {
+        $this->expectException(UndefinedProperty::class);
+
         $dummy = $this->makeDummy();
         $x = $dummy->age;
     }
@@ -72,20 +75,22 @@ class OverloadTest extends PropertiesTestCase
 
     /**
      * @test
-     * @expectedException \Aedart\Properties\Exceptions\UndefinedProperty
      */
     public function failsSettingNoneExistingProperty()
     {
+        $this->expectException(UndefinedProperty::class);
+
         $dummy = $this->makeDummy();
         $dummy->age = 98;
     }
 
     /**
      * @test
-     * @expectedException \Aedart\Properties\Exceptions\UndefinedProperty
      */
     public function failsPropertyWriteWithoutSetter()
     {
+        $this->expectException(UndefinedProperty::class);
+
         $dummy = $this->makeDummy();
         $dummy->age = 'Brian Conner';
     }
@@ -130,10 +135,11 @@ class OverloadTest extends PropertiesTestCase
 
     /**
      * @test
-     * @expectedException \Aedart\Properties\Exceptions\UndefinedProperty
      */
     public function failsUnsetIfPropertyDoesNotExist()
     {
+        $this->expectException(UndefinedProperty::class);
+
         $dummy = $this->makeDummy();
         unset($dummy->jim);
     }

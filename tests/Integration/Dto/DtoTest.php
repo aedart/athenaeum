@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Integration\Dto;
 
+use Aedart\Properties\Exceptions\UndefinedProperty;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Dto\Person;
 use Aedart\Tests\TestCases\Dto\DtoTestCase;
@@ -78,20 +79,22 @@ class DtoTest extends DtoTestCase
 
     /**
      * @test
-     * @expectedException \Aedart\Properties\Exceptions\UndefinedProperty
      */
     public function failsReadingWhenPropertyDoesNotExist()
     {
+        $this->expectException(UndefinedProperty::class);
+
         $dto = $this->makeDto();
         $prop = $dto['myUnknownProperty'];
     }
 
     /**
      * @test
-     * @expectedException \Aedart\Properties\Exceptions\UndefinedProperty
      */
     public function failsWritingWhenPropertyDoesNotExist()
     {
+        $this->expectException(UndefinedProperty::class);
+
         $dto = $this->makeDto();
         $dto['myUnknownProperty'] = 42;
     }
@@ -160,7 +163,7 @@ class DtoTest extends DtoTestCase
         $encoded = (string) $dto;
 
         ConsoleDebugger::output($encoded);
-        $this->assertInternalType('string', $encoded);
+        $this->assertIsString($encoded);
     }
 
     /**
@@ -191,7 +194,7 @@ class DtoTest extends DtoTestCase
         $result = $dto->__debugInfo();
 
         ConsoleDebugger::output($result);
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertNotEmpty($result);
     }
 

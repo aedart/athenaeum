@@ -56,7 +56,7 @@ class AwareOfScaffoldCommandTest extends IntegrationTestCase
 
         // --------------------------------------------------------------- //
 
-        $this->assertContains('[OK]', $output);
+        $this->assertStringContainsString('[OK]', $output);
 
         $this->assertFileExists(Configuration::outputDir() . 'aware-of-config/aware-of-properties.php');
     }

@@ -5,6 +5,7 @@ namespace Aedart\Tests\Unit\Properties;
 
 use Aedart\Contracts\Properties\AccessibilityLevels;
 use Aedart\Tests\TestCases\Properties\PropertiesTestCase;
+use RangeException;
 use ReflectionClass;
 
 /**
@@ -44,10 +45,11 @@ class AccessibilityTest extends PropertiesTestCase
 
     /**
      * @test
-     * @expectedException \RangeException
      */
     public function setInvalidPropertyAccessibilityLevel()
     {
+        $this->expectException(RangeException::class);
+
         $setter = $this->getMethod('setPropertyAccessibilityLevel');
         $dummy = $this->makeDummy();
 
