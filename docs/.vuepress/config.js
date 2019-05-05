@@ -82,6 +82,14 @@ function genSidebarComponents () {
             ]
         },
         {
+            title: 'Http',
+            collapsable: true,
+            children: [
+                'http/',
+                'http/clients/'
+            ]
+        },
+        {
             title: 'Properties',
             collapsable: true,
             children: [
