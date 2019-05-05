@@ -69,7 +69,7 @@ class DefaultHttpClient implements Client
      */
     public function post($uri, array $body = []): ResponseInterface
     {
-        return $this->request('POST', $uri, [ 'body' => $body ]);
+        return $this->request('POST', $uri, [ 'form_params' => $body ]);
     }
 
     /**
@@ -77,7 +77,7 @@ class DefaultHttpClient implements Client
      */
     public function put($uri, array $body = []): ResponseInterface
     {
-        return $this->request('PUT', $uri, [ 'body' => $body ]);
+        return $this->request('PUT', $uri, [ 'form_params' => $body ]);
     }
 
     /**
@@ -85,7 +85,7 @@ class DefaultHttpClient implements Client
      */
     public function delete($uri, array $body = []): ResponseInterface
     {
-        return $this->request('DELETE', $uri, [ 'body' => $body ]);
+        return $this->request('DELETE', $uri, [ 'form_params' => $body ]);
     }
 
     /**
@@ -101,7 +101,7 @@ class DefaultHttpClient implements Client
      */
     public function patch($uri, array $body = []): ResponseInterface
     {
-        return $this->request('PATCH', $uri, [ 'body' => $body ]);
+        return $this->request('PATCH', $uri, [ 'form_params' => $body ]);
     }
 
     /**
@@ -110,7 +110,8 @@ class DefaultHttpClient implements Client
     public function request(string $method, $uri, array $options = []): ResponseInterface
     {
         // Resolve options for request
-        $options = array_merge_recursive($this->optionsForNextRequest, $options);
+        $options = $this->withOptions($options)
+                        ->getOptions();
 
         // Perform request
         $response = $this->client->request($method, $uri, $options);
