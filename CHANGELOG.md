@@ -2,6 +2,22 @@
 
 ## v2.x
 
+### [v2.2.0](https://github.com/aedart/athenaeum/compare/2.1.0...2.2.0)
+
+#### Added
+
+* Http Client package, a wrapper for the [Guzzle Http Client](http://docs.guzzlephp.org/en/stable/index.html), offering multiple "profile" based client instances, which can be configured via a `configs/http-clients.php` configuration file.
+
+#### Changed
+
+* Upgraded to codeception `v3.0.x` (_dev dependency_) and replaced deprecated assertions.
+
+### [v2.1.0](https://github.com/aedart/athenaeum/compare/2.0.0...2.1.0)
+
+#### Changed
+
+* Simplified the bitmask operation for the `\Aedart\Utils\Json`.
+
 ### [v2.0.0](https://github.com/aedart/athenaeum/compare/1.2.0...2.0.0)
 
 #### Changed
