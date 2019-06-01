@@ -8,7 +8,7 @@ use DateTimeInterface;
 use JsonException;
 
 /**
- * CastingPartial
+ * Casting Partial
  *
  * <br />
  *
