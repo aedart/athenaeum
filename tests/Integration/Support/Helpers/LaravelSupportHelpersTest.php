@@ -53,6 +53,7 @@ use Aedart\Support\Helpers\View\BladeTrait;
 use Aedart\Support\Helpers\View\ViewFactoryTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
+use Illuminate\Support\Facades\Config;
 use \Mockery as m;
 
 /**
@@ -70,6 +71,12 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
     /*****************************************************************
      * Setup Methods
      ****************************************************************/
+
+    protected function _before()
+    {
+        // Ensure to use "predis" as the default client
+        Config::set('database.redis.client', 'predis');
+    }
 
     protected function _after()
     {

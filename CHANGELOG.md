@@ -2,6 +2,12 @@
 
 ## v3.x
 
+### [v3.0.1](https://github.com/aedart/athenaeum/compare/3.0.0...3.0.1)
+
+#### Fixed
+
+* `LogicalException` thrown during travis build (_tests only_), caused by `PhpRedisConnector`. Changed test to use `predis` as default laravel redis connection.
+
 ### [v3.0.0](https://github.com/aedart/athenaeum/compare/2.3.0...3.0.0)
 
 #### Changed
