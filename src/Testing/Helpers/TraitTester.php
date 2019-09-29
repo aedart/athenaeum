@@ -46,7 +46,7 @@ class TraitTester
     /**
      * The mocked trait
      *
-     * @var PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     protected $mock;
 
@@ -147,7 +147,7 @@ class TraitTester
     ) {
         $method = $method ?? $this->getDefaultPropertyMethodName();
 
-       ConsoleDebugger::output(sprintf(' testing %s()', $method));
+        ConsoleDebugger::output(sprintf(' testing %s()', $method));
 
         $this->testCase->assertNull($mock->$method(), $failMessage);
     }
@@ -273,7 +273,7 @@ class TraitTester
             ->enableOriginalClone()
             ->enableAutoload()
             ->enableArgumentCloning()
-            ->setMethods($methods);
+            ->onlyMethods($methods);
 
         return $builder->getMockForTrait();
     }
