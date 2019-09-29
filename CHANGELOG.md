@@ -9,7 +9,11 @@
 **Breaking Changes**
 
 * Upgraded to Laravel `v6.x`, Symfony `v4.3.x` and upgraded various other dependencies.
-* Removed custom `JsonException`, in `Json` utility. Now defaults to php's native [`JsonException`](https://www.php.net/manual/en/class.jsonexception.php).
+* Removed custom `JsonException` (_deprecated_), in `Json` utility. Now defaults to php's native [`JsonException`](https://www.php.net/manual/en/class.jsonexception.php).
+
+**Non-breaking Changes**
+
+* Added `InteractsWithRedis` helper trait to the `LaravelTestHelper`.
 
 ## v2.x
 
