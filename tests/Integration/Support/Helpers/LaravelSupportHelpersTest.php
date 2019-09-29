@@ -74,6 +74,8 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
     protected function _before()
     {
+        parent::_before();
+
         // Ensure to use "predis" as the default client
         Config::set('database.redis.client', 'predis');
     }
