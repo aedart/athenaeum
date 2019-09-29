@@ -1,5 +1,13 @@
 # Release Notes
 
+## v3.x
+
+### [v3.0.0](https://github.com/aedart/athenaeum/compare/2.3.0...3.0.0)
+
+#### Changed
+
+* Upgraded to Laravel `v6.x` and Symfony `v4.3.x`.
+
 ## v2.x
 
 ### [v2.3.0](https://github.com/aedart/athenaeum/compare/2.2.0...2.3.0)
