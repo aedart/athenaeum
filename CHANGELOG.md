@@ -7,6 +7,7 @@
 #### Changed
 
 * Upgraded to Laravel `v6.x` and Symfony `v4.3.x`.
+* Removed custom `JsonException`, in `Json` utility. Now defaults to php's native [`JsonException`](https://www.php.net/manual/en/class.jsonexception.php).
 
 ## v2.x
 

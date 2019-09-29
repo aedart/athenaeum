@@ -2,7 +2,6 @@
 
 namespace Aedart\Utils;
 
-use Aedart\Utils\Exceptions\JsonEncoding;
 use JsonException;
 
 /**
@@ -32,13 +31,7 @@ class Json
      */
     static public function encode($value, int $options = 0, int $depth = 512) : string
     {
-        $options |= JSON_THROW_ON_ERROR;
-
-        try {
-            return json_encode($value, $options, $depth);
-        } catch (JsonException $e) {
-            throw new JsonEncoding($e->getMessage(), $e->getCode(), $e);
-        }
+        return json_encode($value, $options |= JSON_THROW_ON_ERROR, $depth);
     }
 
     /**
@@ -61,12 +54,6 @@ class Json
         int $depth = 512,
         int $options = 0
     ) {
-        $options |= JSON_THROW_ON_ERROR;
-
-        try {
-            return json_decode($json, $assoc, $depth, $options);
-        } catch (JsonException $e) {
-            throw new JsonEncoding($e->getMessage(), $e->getCode(), $e);
-        }
+        return json_decode($json, $assoc, $depth, $options |= JSON_THROW_ON_ERROR);
     }
 }
