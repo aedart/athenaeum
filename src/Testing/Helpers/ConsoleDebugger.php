@@ -21,7 +21,7 @@ class ConsoleDebugger
      *
      * @param mixed ...$message
      */
-    static public function output(...$message)
+    public static function output(...$message)
     {
         if(class_exists(Debug::class)){
 

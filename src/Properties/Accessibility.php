@@ -44,7 +44,7 @@ trait Accessibility
      *
      * @see AccessibilityLevels
      *
-     * @var integer
+     * @var int
      */
     private ?int $_propertyAccessibilityLevel = null;
 

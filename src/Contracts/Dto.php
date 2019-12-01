@@ -92,7 +92,7 @@ interface Dto extends ArrayAccess,
      *
      * @return static
      */
-    static public function makeNew(array $properties = [], ?Container $container = null);
+    public static function makeNew(array $properties = [], ?Container $container = null);
 
     /**
      * Create a new populated instance of this Dto from a
@@ -104,5 +104,5 @@ interface Dto extends ArrayAccess,
      *
      * @throws JsonException
      */
-    static public function fromJson(string $json);
+    public static function fromJson(string $json);
 }

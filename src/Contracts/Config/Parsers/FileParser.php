@@ -24,7 +24,7 @@ interface FileParser extends FileAware
      *
      * @return string E.g. ini, php, yml... etc
      */
-    static public function getFileType() : string;
+    public static function getFileType() : string;
 
     /**
      * Set the path of the configuration file that

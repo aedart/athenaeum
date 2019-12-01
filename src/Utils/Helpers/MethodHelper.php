@@ -29,7 +29,7 @@ class MethodHelper
      *
      * @return string
      */
-    static public function makeGetterName(string $property) : string
+    public static function makeGetterName(string $property) : string
     {
         static $methods = [];
 
@@ -49,7 +49,7 @@ class MethodHelper
      *
      * @return string
      */
-    static public function makeSetterName(string $property) : string
+    public static function makeSetterName(string $property) : string
     {
         static $methods = [];
 

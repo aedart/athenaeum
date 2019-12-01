@@ -66,7 +66,7 @@ trait DtoPartial
      *
      * @return static
      */
-    static public function makeNew(array $properties = [], ?Container $container = null)
+    public static function makeNew(array $properties = [], ?Container $container = null)
     {
         return new static($properties, $container);
     }
@@ -81,7 +81,7 @@ trait DtoPartial
      *
      * @throws JsonException
      */
-    static public function fromJson(string $json)
+    public static function fromJson(string $json)
     {
         return static::makeNew(Json::decode($json, true));
     }
@@ -134,7 +134,7 @@ trait DtoPartial
 
             if($value instanceof JsonSerializable){
                 return $value->jsonSerialize();
-            } else if($value instanceof Arrayable){
+            } elseif($value instanceof Arrayable){
                 return $value->toArray();
             }
 

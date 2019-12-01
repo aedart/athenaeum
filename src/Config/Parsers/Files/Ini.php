@@ -36,7 +36,7 @@ class Ini extends ParserBase
     /**
      * {@inheritdoc}
      */
-    static public function getFileType(): string
+    public static function getFileType(): string
     {
         return 'ini';
     }
