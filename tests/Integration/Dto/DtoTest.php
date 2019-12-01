@@ -118,7 +118,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
-    public function canBeSerialised()
+    public function canBeJsonSerialised()
     {
         $data = [
             'name'  => $this->faker->name,
@@ -147,6 +147,28 @@ class DtoTest extends DtoTestCase
 
         ConsoleDebugger::output($encoded);
         $this->assertJson($encoded);
+    }
+
+    /**
+     * @test
+     */
+    public function canBeSerialisedAndUnserialised()
+    {
+        $data = [
+            'name'  => $this->faker->name,
+            'age'   => $this->faker->randomNumber()
+        ];
+
+        $dto = $this->makeDto($data);
+        $serialised = serialize($dto);
+
+        ConsoleDebugger::output('Serialised', $serialised);
+        $this->assertIsString($serialised, 'Invalid serialised format');
+
+        $newDto = unserialize($serialised);
+        ConsoleDebugger::output('Unserialize', $serialised);
+        $this->assertSame($data['name'], $newDto['name']);
+        $this->assertSame($data['age'], $newDto['age']);
     }
 
     /**
