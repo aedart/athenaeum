@@ -17,11 +17,7 @@ use Illuminate\Support\Facades\Facade;
 class FileParserFactory extends Facade
 {
     /**
-     * Get the registered name of the component.
-     *
-     * @return string
-     *
-     * @throws \RuntimeException
+     * @inheritDoc
      */
     protected static function getFacadeAccessor()
     {

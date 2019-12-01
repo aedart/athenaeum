@@ -22,11 +22,7 @@ use Illuminate\Support\Facades\Facade;
 class ConfigLoader extends Facade
 {
     /**
-     * Get the registered name of the component.
-     *
-     * @return string
-     *
-     * @throws \RuntimeException
+     * @inheritDoc
      */
     protected static function getFacadeAccessor()
     {
