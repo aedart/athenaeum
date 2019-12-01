@@ -37,7 +37,7 @@
     }
   },
   "require": {
-    "php": ">=7.3.0",
+    "php": ">=7.4.0",
     "ext-json": "*",
     "fzaninotto/faker": "1.8.*",
     "mockery/mockery": "1.2.*",
