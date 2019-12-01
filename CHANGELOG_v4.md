@@ -17,6 +17,7 @@
 **Non-breaking Changes**
 
 * Upgraded to Laravel `v6.6.x`, Symfony `v4.4.x` and upgraded various other dependencies.
+* Code style to [PSR-12](https://www.php-fig.org/psr/psr-12/)
 
 #### Added
 
