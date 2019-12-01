@@ -17,7 +17,7 @@ trait MacAddressTrait
      *
      * @var string|null
      */
-    protected $macAddress = null;
+    protected ?string $macAddress = null;
 
     /**
      * Set mac address

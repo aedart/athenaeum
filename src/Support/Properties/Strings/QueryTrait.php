@@ -17,7 +17,7 @@ trait QueryTrait
      *
      * @var string|null
      */
-    protected $query = null;
+    protected ?string $query = null;
 
     /**
      * Set query

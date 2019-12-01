@@ -17,7 +17,7 @@ trait TypeTrait
      *
      * @var int|null
      */
-    protected $type = null;
+    protected ?int $type = null;
 
     /**
      * Set type

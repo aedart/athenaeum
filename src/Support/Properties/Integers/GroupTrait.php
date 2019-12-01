@@ -17,7 +17,7 @@ trait GroupTrait
      *
      * @var int|null
      */
-    protected $group = null;
+    protected ?int $group = null;
 
     /**
      * Set group

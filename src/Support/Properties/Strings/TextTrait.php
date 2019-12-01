@@ -17,7 +17,7 @@ trait TextTrait
      *
      * @var string|null
      */
-    protected $text = null;
+    protected ?string $text = null;
 
     /**
      * Set text

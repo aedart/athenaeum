@@ -17,7 +17,7 @@ trait IpTrait
      *
      * @var string|null
      */
-    protected $ip = null;
+    protected ?string $ip = null;
 
     /**
      * Set ip

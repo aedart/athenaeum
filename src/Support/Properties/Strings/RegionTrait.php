@@ -17,7 +17,7 @@ trait RegionTrait
      *
      * @var string|null
      */
-    protected $region = null;
+    protected ?string $region = null;
 
     /**
      * Set region

@@ -17,7 +17,7 @@ trait LengthTrait
      *
      * @var int|null
      */
-    protected $length = null;
+    protected ?int $length = null;
 
     /**
      * Set length

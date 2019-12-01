@@ -17,7 +17,7 @@ trait TopicTrait
      *
      * @var string|null
      */
-    protected $topic = null;
+    protected ?string $topic = null;
 
     /**
      * Set topic

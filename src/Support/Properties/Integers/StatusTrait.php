@@ -17,7 +17,7 @@ trait StatusTrait
      *
      * @var int|null
      */
-    protected $status = null;
+    protected ?int $status = null;
 
     /**
      * Set status

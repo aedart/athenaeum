@@ -17,7 +17,7 @@ trait DeceasedAtTrait
      *
      * @var int|null
      */
-    protected $deceasedAt = null;
+    protected ?int $deceasedAt = null;
 
     /**
      * Set deceased at

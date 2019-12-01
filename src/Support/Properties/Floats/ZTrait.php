@@ -17,7 +17,7 @@ trait ZTrait
      *
      * @var float|null
      */
-    protected $z = null;
+    protected ?float $z = null;
 
     /**
      * Set z

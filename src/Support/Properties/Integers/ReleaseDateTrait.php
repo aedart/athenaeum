@@ -17,7 +17,7 @@ trait ReleaseDateTrait
      *
      * @var int|null
      */
-    protected $releaseDate = null;
+    protected ?int $releaseDate = null;
 
     /**
      * Set release date

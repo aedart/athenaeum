@@ -17,7 +17,7 @@ trait FormatTrait
      *
      * @var string|null
      */
-    protected $format = null;
+    protected ?string $format = null;
 
     /**
      * Set format

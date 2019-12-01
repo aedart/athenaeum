@@ -17,7 +17,7 @@ trait NameTrait
      *
      * @var string|null
      */
-    protected $name = null;
+    protected ?string $name = null;
 
     /**
      * Set name

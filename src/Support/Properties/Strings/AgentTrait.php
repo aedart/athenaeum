@@ -17,7 +17,7 @@ trait AgentTrait
      *
      * @var string|null
      */
-    protected $agent = null;
+    protected ?string $agent = null;
 
     /**
      * Set agent

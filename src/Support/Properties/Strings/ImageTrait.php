@@ -17,7 +17,7 @@ trait ImageTrait
      *
      * @var string|null
      */
-    protected $image = null;
+    protected ?string $image = null;
 
     /**
      * Set image

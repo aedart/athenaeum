@@ -17,7 +17,7 @@ trait BeginTrait
      *
      * @var string|null
      */
-    protected $begin = null;
+    protected ?string $begin = null;
 
     /**
      * Set begin

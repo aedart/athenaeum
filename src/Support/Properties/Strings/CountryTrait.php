@@ -17,7 +17,7 @@ trait CountryTrait
      *
      * @var string|null
      */
-    protected $country = null;
+    protected ?string $country = null;
 
     /**
      * Set country

@@ -17,7 +17,7 @@ trait EndDateTrait
      *
      * @var int|null
      */
-    protected $endDate = null;
+    protected ?int $endDate = null;
 
     /**
      * Set end date

@@ -17,7 +17,7 @@ trait LatitudeTrait
      *
      * @var float|null
      */
-    protected $latitude = null;
+    protected ?float $latitude = null;
 
     /**
      * Set latitude

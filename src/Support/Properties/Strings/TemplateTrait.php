@@ -17,7 +17,7 @@ trait TemplateTrait
      *
      * @var string|null
      */
-    protected $template = null;
+    protected ?string $template = null;
 
     /**
      * Set template

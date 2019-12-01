@@ -17,7 +17,7 @@ trait PackageTrait
      *
      * @var string|null
      */
-    protected $package = null;
+    protected ?string $package = null;
 
     /**
      * Set package

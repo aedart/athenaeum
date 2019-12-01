@@ -17,7 +17,7 @@ trait DeletedAtTrait
      *
      * @var string|null
      */
-    protected $deletedAt = null;
+    protected ?string $deletedAt = null;
 
     /**
      * Set deleted at

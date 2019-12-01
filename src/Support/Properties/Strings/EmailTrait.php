@@ -17,7 +17,7 @@ trait EmailTrait
      *
      * @var string|null
      */
-    protected $email = null;
+    protected ?string $email = null;
 
     /**
      * Set email

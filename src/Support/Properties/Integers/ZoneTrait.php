@@ -17,7 +17,7 @@ trait ZoneTrait
      *
      * @var int|null
      */
-    protected $zone = null;
+    protected ?int $zone = null;
 
     /**
      * Set zone

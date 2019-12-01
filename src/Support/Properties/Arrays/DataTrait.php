@@ -17,7 +17,7 @@ trait DataTrait
      *
      * @var array|null
      */
-    protected $data = null;
+    protected ?array $data = null;
 
     /**
      * Set data

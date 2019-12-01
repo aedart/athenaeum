@@ -17,7 +17,7 @@ trait ManufacturerTrait
      *
      * @var string|null
      */
-    protected $manufacturer = null;
+    protected ?string $manufacturer = null;
 
     /**
      * Set manufacturer

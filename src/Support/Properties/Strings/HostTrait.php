@@ -17,7 +17,7 @@ trait HostTrait
      *
      * @var string|null
      */
-    protected $host = null;
+    protected ?string $host = null;
 
     /**
      * Set host

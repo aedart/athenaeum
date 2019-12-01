@@ -17,7 +17,7 @@ trait StateTrait
      *
      * @var string|null
      */
-    protected $state = null;
+    protected ?string $state = null;
 
     /**
      * Set state

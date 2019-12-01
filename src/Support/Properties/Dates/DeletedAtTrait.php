@@ -17,7 +17,7 @@ trait DeletedAtTrait
      *
      * @var \DateTime|null
      */
-    protected $deletedAt = null;
+    protected ?\DateTime $deletedAt = null;
 
     /**
      * Set deleted at

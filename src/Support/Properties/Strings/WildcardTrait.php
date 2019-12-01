@@ -17,7 +17,7 @@ trait WildcardTrait
      *
      * @var string|null
      */
-    protected $wildcard = null;
+    protected ?string $wildcard = null;
 
     /**
      * Set wildcard

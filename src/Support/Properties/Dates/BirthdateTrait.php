@@ -17,7 +17,7 @@ trait BirthdateTrait
      *
      * @var \DateTime|null
      */
-    protected $birthdate = null;
+    protected ?\DateTime $birthdate = null;
 
     /**
      * Set birthdate

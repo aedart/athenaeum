@@ -17,7 +17,7 @@ trait PatternTrait
      *
      * @var string|null
      */
-    protected $pattern = null;
+    protected ?string $pattern = null;
 
     /**
      * Set pattern

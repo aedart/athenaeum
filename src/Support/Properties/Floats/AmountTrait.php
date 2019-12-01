@@ -17,7 +17,7 @@ trait AmountTrait
      *
      * @var float|null
      */
-    protected $amount = null;
+    protected ?float $amount = null;
 
     /**
      * Set amount

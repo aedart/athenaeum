@@ -17,7 +17,7 @@ trait TldTrait
      *
      * @var string|null
      */
-    protected $tld = null;
+    protected ?string $tld = null;
 
     /**
      * Set tld

@@ -17,7 +17,7 @@ trait StateTrait
      *
      * @var int|null
      */
-    protected $state = null;
+    protected ?int $state = null;
 
     /**
      * Set state

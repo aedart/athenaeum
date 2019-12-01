@@ -17,7 +17,7 @@ trait LabelTrait
      *
      * @var string|null
      */
-    protected $label = null;
+    protected ?string $label = null;
 
     /**
      * Set label

@@ -17,7 +17,7 @@ trait RatingTrait
      *
      * @var float|null
      */
-    protected $rating = null;
+    protected ?float $rating = null;
 
     /**
      * Set rating

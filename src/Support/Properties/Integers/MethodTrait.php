@@ -17,7 +17,7 @@ trait MethodTrait
      *
      * @var int|null
      */
-    protected $method = null;
+    protected ?int $method = null;
 
     /**
      * Set method

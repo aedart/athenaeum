@@ -17,7 +17,7 @@ trait AuthorTrait
      *
      * @var string|null
      */
-    protected $author = null;
+    protected ?string $author = null;
 
     /**
      * Set author

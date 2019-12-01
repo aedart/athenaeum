@@ -17,7 +17,7 @@ trait DiscountTrait
      *
      * @var int|null
      */
-    protected $discount = null;
+    protected ?int $discount = null;
 
     /**
      * Set discount

@@ -17,7 +17,7 @@ trait TagsTrait
      *
      * @var array|null
      */
-    protected $tags = null;
+    protected ?array $tags = null;
 
     /**
      * Set tags

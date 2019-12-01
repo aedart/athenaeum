@@ -17,7 +17,7 @@ trait DepthTrait
      *
      * @var float|null
      */
-    protected $depth = null;
+    protected ?float $depth = null;
 
     /**
      * Set depth

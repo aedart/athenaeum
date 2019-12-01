@@ -17,7 +17,7 @@ trait QuestionTrait
      *
      * @var string|null
      */
-    protected $question = null;
+    protected ?string $question = null;
 
     /**
      * Set question

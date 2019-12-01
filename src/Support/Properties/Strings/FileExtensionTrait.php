@@ -17,7 +17,7 @@ trait FileExtensionTrait
      *
      * @var string|null
      */
-    protected $fileExtension = null;
+    protected ?string $fileExtension = null;
 
     /**
      * Set file extension

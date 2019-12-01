@@ -17,7 +17,7 @@ trait IataTrait
      *
      * @var string|null
      */
-    protected $iata = null;
+    protected ?string $iata = null;
 
     /**
      * Set iata

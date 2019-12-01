@@ -17,7 +17,7 @@ trait RowTrait
      *
      * @var int|null
      */
-    protected $row = null;
+    protected ?int $row = null;
 
     /**
      * Set row

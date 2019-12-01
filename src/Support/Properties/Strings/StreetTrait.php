@@ -17,7 +17,7 @@ trait StreetTrait
      *
      * @var string|null
      */
-    protected $street = null;
+    protected ?string $street = null;
 
     /**
      * Set street

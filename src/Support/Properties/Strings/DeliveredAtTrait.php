@@ -17,7 +17,7 @@ trait DeliveredAtTrait
      *
      * @var string|null
      */
-    protected $deliveredAt = null;
+    protected ?string $deliveredAt = null;
 
     /**
      * Set delivered at

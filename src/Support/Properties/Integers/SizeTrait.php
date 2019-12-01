@@ -17,7 +17,7 @@ trait SizeTrait
      *
      * @var int|null
      */
-    protected $size = null;
+    protected ?int $size = null;
 
     /**
      * Set size

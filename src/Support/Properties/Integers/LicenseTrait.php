@@ -17,7 +17,7 @@ trait LicenseTrait
      *
      * @var int|null
      */
-    protected $license = null;
+    protected ?int $license = null;
 
     /**
      * Set license

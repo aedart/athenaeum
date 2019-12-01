@@ -17,7 +17,7 @@ trait LocationTrait
      *
      * @var int|null
      */
-    protected $location = null;
+    protected ?int $location = null;
 
     /**
      * Set location

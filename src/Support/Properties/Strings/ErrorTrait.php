@@ -17,7 +17,7 @@ trait ErrorTrait
      *
      * @var string|null
      */
-    protected $error = null;
+    protected ?string $error = null;
 
     /**
      * Set error

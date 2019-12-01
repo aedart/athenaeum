@@ -17,7 +17,7 @@ trait XmlTrait
      *
      * @var string|null
      */
-    protected $xml = null;
+    protected ?string $xml = null;
 
     /**
      * Set xml

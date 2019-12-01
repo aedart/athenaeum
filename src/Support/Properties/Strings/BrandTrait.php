@@ -17,7 +17,7 @@ trait BrandTrait
      *
      * @var string|null
      */
-    protected $brand = null;
+    protected ?string $brand = null;
 
     /**
      * Set brand

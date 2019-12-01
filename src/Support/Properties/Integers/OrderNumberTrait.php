@@ -17,7 +17,7 @@ trait OrderNumberTrait
      *
      * @var int|null
      */
-    protected $orderNumber = null;
+    protected ?int $orderNumber = null;
 
     /**
      * Set order number

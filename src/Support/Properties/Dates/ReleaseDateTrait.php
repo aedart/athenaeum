@@ -17,7 +17,7 @@ trait ReleaseDateTrait
      *
      * @var \DateTime|null
      */
-    protected $releaseDate = null;
+    protected ?\DateTime $releaseDate = null;
 
     /**
      * Set release date

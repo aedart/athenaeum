@@ -17,7 +17,7 @@ trait ProfileTrait
      *
      * @var string|null
      */
-    protected $profile = null;
+    protected ?string $profile = null;
 
     /**
      * Set profile

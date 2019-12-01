@@ -17,7 +17,7 @@ trait PathTrait
      *
      * @var string|null
      */
-    protected $path = null;
+    protected ?string $path = null;
 
     /**
      * Set path

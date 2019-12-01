@@ -17,7 +17,7 @@ trait EndTrait
      *
      * @var string|null
      */
-    protected $end = null;
+    protected ?string $end = null;
 
     /**
      * Set end

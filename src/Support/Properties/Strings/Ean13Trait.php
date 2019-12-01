@@ -17,7 +17,7 @@ trait Ean13Trait
      *
      * @var string|null
      */
-    protected $ean13 = null;
+    protected ?string $ean13 = null;
 
     /**
      * Set ean13

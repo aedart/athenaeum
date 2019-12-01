@@ -17,7 +17,7 @@ trait UuidTrait
      *
      * @var string|null
      */
-    protected $uuid = null;
+    protected ?string $uuid = null;
 
     /**
      * Set uuid

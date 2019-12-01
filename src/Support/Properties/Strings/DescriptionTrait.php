@@ -17,7 +17,7 @@ trait DescriptionTrait
      *
      * @var string|null
      */
-    protected $description = null;
+    protected ?string $description = null;
 
     /**
      * Set description

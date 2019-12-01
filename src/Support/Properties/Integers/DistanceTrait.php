@@ -17,7 +17,7 @@ trait DistanceTrait
      *
      * @var int|null
      */
-    protected $distance = null;
+    protected ?int $distance = null;
 
     /**
      * Set distance

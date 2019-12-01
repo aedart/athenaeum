@@ -17,7 +17,7 @@ trait LogoTrait
      *
      * @var string|null
      */
-    protected $logo = null;
+    protected ?string $logo = null;
 
     /**
      * Set logo

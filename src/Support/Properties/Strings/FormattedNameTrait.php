@@ -17,7 +17,7 @@ trait FormattedNameTrait
      *
      * @var string|null
      */
-    protected $formattedName = null;
+    protected ?string $formattedName = null;
 
     /**
      * Set formatted name

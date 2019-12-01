@@ -17,7 +17,7 @@ trait CityTrait
      *
      * @var string|null
      */
-    protected $city = null;
+    protected ?string $city = null;
 
     /**
      * Set city

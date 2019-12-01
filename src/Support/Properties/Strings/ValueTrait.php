@@ -17,7 +17,7 @@ trait ValueTrait
      *
      * @var string|null
      */
-    protected $value = null;
+    protected ?string $value = null;
 
     /**
      * Set value

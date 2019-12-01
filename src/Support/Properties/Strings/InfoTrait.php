@@ -17,7 +17,7 @@ trait InfoTrait
      *
      * @var string|null
      */
-    protected $info = null;
+    protected ?string $info = null;
 
     /**
      * Set info

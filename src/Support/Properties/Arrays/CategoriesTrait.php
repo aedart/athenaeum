@@ -17,7 +17,7 @@ trait CategoriesTrait
      *
      * @var array|null
      */
-    protected $categories = null;
+    protected ?array $categories = null;
 
     /**
      * Set categories

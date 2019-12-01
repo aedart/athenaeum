@@ -17,7 +17,7 @@ trait ClassTrait
      *
      * @var string|null
      */
-    protected $class = null;
+    protected ?string $class = null;
 
     /**
      * Set class

@@ -17,7 +17,7 @@ trait DeliveryDateTrait
      *
      * @var string|null
      */
-    protected $deliveryDate = null;
+    protected ?string $deliveryDate = null;
 
     /**
      * Set delivery date

@@ -17,7 +17,7 @@ trait InvoiceAddressTrait
      *
      * @var string|null
      */
-    protected $invoiceAddress = null;
+    protected ?string $invoiceAddress = null;
 
     /**
      * Set invoice address

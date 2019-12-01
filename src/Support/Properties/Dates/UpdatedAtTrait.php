@@ -17,7 +17,7 @@ trait UpdatedAtTrait
      *
      * @var \DateTime|null
      */
-    protected $updatedAt = null;
+    protected ?\DateTime $updatedAt = null;
 
     /**
      * Set updated at

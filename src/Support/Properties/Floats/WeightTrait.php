@@ -17,7 +17,7 @@ trait WeightTrait
      *
      * @var float|null
      */
-    protected $weight = null;
+    protected ?float $weight = null;
 
     /**
      * Set weight

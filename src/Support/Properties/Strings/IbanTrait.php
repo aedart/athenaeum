@@ -17,7 +17,7 @@ trait IbanTrait
      *
      * @var string|null
      */
-    protected $iban = null;
+    protected ?string $iban = null;
 
     /**
      * Set iban

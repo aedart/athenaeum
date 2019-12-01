@@ -17,7 +17,7 @@ trait UpdatedAtTrait
      *
      * @var int|null
      */
-    protected $updatedAt = null;
+    protected ?int $updatedAt = null;
 
     /**
      * Set updated at

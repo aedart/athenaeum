@@ -17,7 +17,7 @@ trait KeyTrait
      *
      * @var string|null
      */
-    protected $key = null;
+    protected ?string $key = null;
 
     /**
      * Set key

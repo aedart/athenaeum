@@ -17,7 +17,7 @@ trait HeightTrait
      *
      * @var float|null
      */
-    protected $height = null;
+    protected ?float $height = null;
 
     /**
      * Set height

@@ -17,7 +17,7 @@ trait MediaTypeTrait
      *
      * @var string|null
      */
-    protected $mediaType = null;
+    protected ?string $mediaType = null;
 
     /**
      * Set media type

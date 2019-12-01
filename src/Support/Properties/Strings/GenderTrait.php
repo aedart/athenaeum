@@ -17,7 +17,7 @@ trait GenderTrait
      *
      * @var string|null
      */
-    protected $gender = null;
+    protected ?string $gender = null;
 
     /**
      * Set gender

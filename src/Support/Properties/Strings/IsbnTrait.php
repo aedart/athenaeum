@@ -17,7 +17,7 @@ trait IsbnTrait
      *
      * @var string|null
      */
-    protected $isbn = null;
+    protected ?string $isbn = null;
 
     /**
      * Set isbn

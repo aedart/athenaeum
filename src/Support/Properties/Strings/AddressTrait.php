@@ -17,7 +17,7 @@ trait AddressTrait
      *
      * @var string|null
      */
-    protected $address = null;
+    protected ?string $address = null;
 
     /**
      * Set address

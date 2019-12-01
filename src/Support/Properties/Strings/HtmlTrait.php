@@ -17,7 +17,7 @@ trait HtmlTrait
      *
      * @var string|null
      */
-    protected $html = null;
+    protected ?string $html = null;
 
     /**
      * Set html

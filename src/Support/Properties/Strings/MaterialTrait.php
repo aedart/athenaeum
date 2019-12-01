@@ -17,7 +17,7 @@ trait MaterialTrait
      *
      * @var string|null
      */
-    protected $material = null;
+    protected ?string $material = null;
 
     /**
      * Set material

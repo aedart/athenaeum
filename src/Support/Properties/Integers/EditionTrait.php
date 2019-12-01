@@ -17,7 +17,7 @@ trait EditionTrait
      *
      * @var int|null
      */
-    protected $edition = null;
+    protected ?int $edition = null;
 
     /**
      * Set edition

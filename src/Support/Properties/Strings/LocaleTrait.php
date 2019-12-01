@@ -17,7 +17,7 @@ trait LocaleTrait
      *
      * @var string|null
      */
-    protected $locale = null;
+    protected ?string $locale = null;
 
     /**
      * Set locale

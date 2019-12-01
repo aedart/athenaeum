@@ -17,7 +17,7 @@ trait IndexTrait
      *
      * @var string|null
      */
-    protected $index = null;
+    protected ?string $index = null;
 
     /**
      * Set index

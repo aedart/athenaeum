@@ -17,7 +17,7 @@ trait VatTrait
      *
      * @var float|null
      */
-    protected $vat = null;
+    protected ?float $vat = null;
 
     /**
      * Set vat

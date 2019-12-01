@@ -17,7 +17,7 @@ trait PostalCodeTrait
      *
      * @var string|null
      */
-    protected $postalCode = null;
+    protected ?string $postalCode = null;
 
     /**
      * Set postal code

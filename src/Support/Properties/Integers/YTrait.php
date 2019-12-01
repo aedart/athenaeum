@@ -17,7 +17,7 @@ trait YTrait
      *
      * @var int|null
      */
-    protected $y = null;
+    protected ?int $y = null;
 
     /**
      * Set y

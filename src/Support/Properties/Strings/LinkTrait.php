@@ -17,7 +17,7 @@ trait LinkTrait
      *
      * @var string|null
      */
-    protected $link = null;
+    protected ?string $link = null;
 
     /**
      * Set link

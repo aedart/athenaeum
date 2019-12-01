@@ -17,7 +17,7 @@ trait OrganisationTrait
      *
      * @var string|null
      */
-    protected $organisation = null;
+    protected ?string $organisation = null;
 
     /**
      * Set organisation

@@ -17,7 +17,7 @@ trait DurationTrait
      *
      * @var float|null
      */
-    protected $duration = null;
+    protected ?float $duration = null;
 
     /**
      * Set duration

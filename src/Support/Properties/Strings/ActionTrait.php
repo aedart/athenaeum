@@ -17,7 +17,7 @@ trait ActionTrait
      *
      * @var string|null
      */
-    protected $action = null;
+    protected ?string $action = null;
 
     /**
      * Set action

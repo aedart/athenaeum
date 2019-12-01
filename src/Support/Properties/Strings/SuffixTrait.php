@@ -17,7 +17,7 @@ trait SuffixTrait
      *
      * @var string|null
      */
-    protected $suffix = null;
+    protected ?string $suffix = null;
 
     /**
      * Set suffix

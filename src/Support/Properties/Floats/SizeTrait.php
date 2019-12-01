@@ -17,7 +17,7 @@ trait SizeTrait
      *
      * @var float|null
      */
-    protected $size = null;
+    protected ?float $size = null;
 
     /**
      * Set size

@@ -17,7 +17,7 @@ trait KindTrait
      *
      * @var string|null
      */
-    protected $kind = null;
+    protected ?string $kind = null;
 
     /**
      * Set kind

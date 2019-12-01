@@ -17,7 +17,7 @@ trait DateTrait
      *
      * @var \DateTime|null
      */
-    protected $date = null;
+    protected ?\DateTime $date = null;
 
     /**
      * Set date

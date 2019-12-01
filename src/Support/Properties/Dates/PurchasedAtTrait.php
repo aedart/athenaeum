@@ -17,7 +17,7 @@ trait PurchasedAtTrait
      *
      * @var \DateTime|null
      */
-    protected $purchasedAt = null;
+    protected ?\DateTime $purchasedAt = null;
 
     /**
      * Set purchased at

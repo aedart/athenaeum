@@ -17,7 +17,7 @@ trait ColumnTrait
      *
      * @var string|null
      */
-    protected $column = null;
+    protected ?string $column = null;
 
     /**
      * Set column

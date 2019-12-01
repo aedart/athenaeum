@@ -17,7 +17,7 @@ trait LicenseTrait
      *
      * @var string|null
      */
-    protected $license = null;
+    protected ?string $license = null;
 
     /**
      * Set license

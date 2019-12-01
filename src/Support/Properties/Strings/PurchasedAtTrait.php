@@ -17,7 +17,7 @@ trait PurchasedAtTrait
      *
      * @var string|null
      */
-    protected $purchasedAt = null;
+    protected ?string $purchasedAt = null;
 
     /**
      * Set purchased at

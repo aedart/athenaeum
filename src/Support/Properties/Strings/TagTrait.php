@@ -17,7 +17,7 @@ trait TagTrait
      *
      * @var string|null
      */
-    protected $tag = null;
+    protected ?string $tag = null;
 
     /**
      * Set tag

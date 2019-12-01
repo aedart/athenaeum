@@ -17,7 +17,7 @@ trait IsicV4Trait
      *
      * @var string|null
      */
-    protected $isicV4 = null;
+    protected ?string $isicV4 = null;
 
     /**
      * Set isic v4
