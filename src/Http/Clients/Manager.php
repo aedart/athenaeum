@@ -25,7 +25,7 @@ class Manager implements HttpClientsManager,
      *
      * @var Client[]
      */
-    protected $clients = [];
+    protected array $clients = [];
 
     /**
      * {@inheritdoc}

@@ -21,7 +21,7 @@ class Note extends Dto implements \Aedart\Tests\Helpers\Dummies\Contracts\Note
      *
      * @var string|null
      */
-    protected $content = null;
+    protected ?string $content = null;
 
     /**
      * Set content

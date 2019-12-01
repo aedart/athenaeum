@@ -20,7 +20,7 @@ trait LogTrait
      *
      * @var LoggerInterface|null
      */
-    protected $log = null;
+    protected ?LoggerInterface $log = null;
 
     /**
      * Set log

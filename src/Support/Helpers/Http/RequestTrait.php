@@ -20,7 +20,7 @@ trait RequestTrait
      *
      * @var Request|null
      */
-    protected $request = null;
+    protected ?Request $request = null;
 
     /**
      * Set request

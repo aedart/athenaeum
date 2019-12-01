@@ -31,7 +31,7 @@ class Loader implements LoaderInterface
      *
      * @var null|string
      */
-    protected $directory = null;
+    protected ?string $directory = null;
 
     /**
      * {@inheritdoc}

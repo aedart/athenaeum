@@ -20,7 +20,7 @@ trait MailQueueTrait
      *
      * @var MailQueue|null
      */
-    protected $mailQueue = null;
+    protected ?MailQueue $mailQueue = null;
 
     /**
      * Set mail queue

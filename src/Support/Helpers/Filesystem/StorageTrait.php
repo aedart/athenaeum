@@ -20,7 +20,7 @@ trait StorageTrait
      *
      * @var Filesystem|null
      */
-    protected $storage = null;
+    protected ?Filesystem $storage = null;
 
     /**
      * Set storage

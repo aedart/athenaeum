@@ -20,7 +20,7 @@ trait BroadcastTrait
      *
      * @var Broadcaster|null
      */
-    protected $broadcast = null;
+    protected ?Broadcaster $broadcast = null;
 
     /**
      * Set broadcast

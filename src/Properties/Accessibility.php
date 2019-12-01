@@ -46,7 +46,7 @@ trait Accessibility
      *
      * @var integer
      */
-    private $_propertyAccessibilityLevel = null;
+    private ?int $_propertyAccessibilityLevel = null;
 
     /**
      * Set the maximum level of accessibility for allowing properties

@@ -20,7 +20,7 @@ trait HttpClientsManagerTrait
      *
      * @var Manager|null
      */
-    protected $httpClientsManager = null;
+    protected ?Manager $httpClientsManager = null;
 
     /**
      * Set http clients manager

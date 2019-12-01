@@ -15,7 +15,7 @@ use Illuminate\Support\ServiceProvider;
  */
 class HttpClientServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    public $singletons = [
+    public array $singletons = [
         HttpClientsManager::class => Manager::class
     ];
 

@@ -20,7 +20,7 @@ trait ValidatorFactoryTrait
      *
      * @var Factory|null
      */
-    protected $validatorFactory = null;
+    protected ?Factory $validatorFactory = null;
 
     /**
      * Set validator factory

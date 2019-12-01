@@ -20,7 +20,7 @@ trait FileTrait
      *
      * @var Filesystem|null
      */
-    protected $file = null;
+    protected ?Filesystem $file = null;
 
     /**
      * Set file

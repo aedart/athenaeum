@@ -20,7 +20,7 @@ trait NotificationFactoryTrait
      *
      * @var Factory|null
      */
-    protected $notificationFactory = null;
+    protected ?Factory $notificationFactory = null;
 
     /**
      * Set notification factory

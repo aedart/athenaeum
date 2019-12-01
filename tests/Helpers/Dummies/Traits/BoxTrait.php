@@ -23,7 +23,7 @@ trait BoxTrait
      *
      * @var Box|null
      */
-    protected $box = null;
+    protected ?Box $box = null;
 
     /**
      * Set box

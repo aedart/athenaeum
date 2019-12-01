@@ -27,14 +27,14 @@ class Generator implements ConfigAware
      *
      * @var string
      */
-    protected $interfaceTemplate = 'interface.php.twig';
+    protected string $interfaceTemplate = 'interface.php.twig';
 
     /**
      * Template for trait
      *
      * @var string
      */
-    protected $traitTemplate = 'trait.php.twig';
+    protected string $traitTemplate = 'trait.php.twig';
 
     /**
      * Generator constructor.

@@ -20,7 +20,7 @@ trait LogManagerTrait
      *
      * @var LogManager|null
      */
-    protected $logManager = null;
+    protected ?LogManager $logManager = null;
 
     /**
      * Set log manager

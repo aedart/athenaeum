@@ -21,7 +21,7 @@ trait CacheStoreTrait
      *
      * @var Store|null
      */
-    protected $cacheStore = null;
+    protected ?Store $cacheStore = null;
 
     /**
      * Set cache store

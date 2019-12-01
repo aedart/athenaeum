@@ -28,7 +28,7 @@ abstract class ParserBase implements FileParser
      *
      * @var null|string
      */
-    protected $filePath = null;
+    protected ?string $filePath = null;
 
     /**
      * ParserBase constructor.

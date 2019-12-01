@@ -19,21 +19,21 @@ class DefaultHttpClient implements Client
      *
      * @var array
      */
-    protected $initialOptions = [];
+    protected array $initialOptions = [];
 
     /**
      * Options for the next request
      *
      * @var array
      */
-    protected $optionsForNextRequest = [];
+    protected array $optionsForNextRequest = [];
 
     /**
      * The Guzzle Http Client
      *
      * @var GuzzleClient|null
      */
-    protected $client = null;
+    protected ?GuzzleClient $client = null;
 
     /**
      * DefaultHttpClient constructor.

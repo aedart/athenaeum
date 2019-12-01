@@ -20,7 +20,7 @@ trait PasswordBrokerFactoryTrait
      *
      * @var PasswordBrokerFactory|null
      */
-    protected $passwordBrokerFactory = null;
+    protected ?PasswordBrokerFactory $passwordBrokerFactory = null;
 
     /**
      * Set password broker factory

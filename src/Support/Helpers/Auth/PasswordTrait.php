@@ -20,7 +20,7 @@ trait PasswordTrait
      *
      * @var PasswordBroker|null
      */
-    protected $password = null;
+    protected ?PasswordBroker $password = null;
 
     /**
      * Set password

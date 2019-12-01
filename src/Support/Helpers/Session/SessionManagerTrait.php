@@ -20,7 +20,7 @@ trait SessionManagerTrait
      *
      * @var SessionManager|null
      */
-    protected $sessionManager = null;
+    protected ?SessionManager $sessionManager = null;
 
     /**
      * Set session manager

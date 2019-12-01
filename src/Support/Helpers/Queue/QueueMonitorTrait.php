@@ -20,7 +20,7 @@ trait QueueMonitorTrait
      *
      * @var Monitor|null
      */
-    protected $queueMonitor = null;
+    protected ?Monitor $queueMonitor = null;
 
     /**
      * Set queue monitor

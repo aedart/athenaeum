@@ -20,7 +20,7 @@ trait ResponseFactoryTrait
      *
      * @var ResponseFactory|null
      */
-    protected $responseFactory = null;
+    protected ?ResponseFactory $responseFactory = null;
 
     /**
      * Set response factory

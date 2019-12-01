@@ -20,7 +20,7 @@ trait RedisFactoryTrait
      *
      * @var Factory|null
      */
-    protected $redisFactory = null;
+    protected ?Factory $redisFactory = null;
 
     /**
      * Set redis factory

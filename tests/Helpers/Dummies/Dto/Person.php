@@ -25,28 +25,28 @@ class Person extends Dto
      *
      * @var string|null
      */
-    protected $name = null;
+    protected ?string $name = null;
 
     /**
      * Age of person
      *
      * @var int|null
      */
-    protected $age = null;
+    protected ?int $age = null;
 
     /**
      * Address
      *
      * @var Address|null
      */
-    protected $address = null;
+    protected ?Address $address = null;
 
     /**
      * Note
      *
      * @var NoteInterface|null
      */
-    protected $note = null;
+    protected ?NoteInterface $note = null;
 
     /**
      * Set name

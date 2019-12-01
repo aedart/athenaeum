@@ -20,7 +20,7 @@ trait NotificationDispatcherTrait
      *
      * @var Dispatcher|null
      */
-    protected $notificationDispatcher = null;
+    protected ?Dispatcher $notificationDispatcher = null;
 
     /**
      * Set notification dispatcher

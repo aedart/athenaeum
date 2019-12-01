@@ -21,7 +21,7 @@ trait SchemaTrait
      *
      * @var Builder|null
      */
-    protected $schema = null;
+    protected ?Builder $schema = null;
 
     /**
      * Set schema

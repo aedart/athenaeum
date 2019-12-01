@@ -19,7 +19,7 @@ trait HttpClientTrait
      *
      * @var Client|null
      */
-    protected $httpClient = null;
+    protected ?Client $httpClient = null;
 
     /**
      * Set http client

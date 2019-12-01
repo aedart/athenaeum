@@ -20,7 +20,7 @@ trait BroadcastFactoryTrait
      *
      * @var Factory|null
      */
-    protected $broadcastFactory = null;
+    protected ?Factory $broadcastFactory = null;
 
     /**
      * Set broadcast factory

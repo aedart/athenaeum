@@ -21,21 +21,21 @@ class Person
      *
      * @var string
      */
-    public $name = 'John Doe';
+    public string $name = 'John Doe';
 
     /**
      * Age of person
      *
      * @var int
      */
-    protected $age = 42;
+    protected int $age = 42;
 
     /**
      * Height of person
      *
      * @var int
      */
-    private $height = 193;
+    private int $height = 193;
 
     /**
      * N/A

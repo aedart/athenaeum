@@ -20,7 +20,7 @@ trait RedisTrait
      *
      * @var Connection|null
      */
-    protected $redis = null;
+    protected ?Connection $redis = null;
 
     /**
      * Set redis

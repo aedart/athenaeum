@@ -21,7 +21,7 @@ trait TwigPartial
      *
      * @var Twig_Environment
      */
-    protected $twig;
+    protected Twig_Environment $twig;
 
     /**
      * Setup the twig template engine

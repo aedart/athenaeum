@@ -20,7 +20,7 @@ trait ConfigTrait
      *
      * @var Repository|null
      */
-    protected $config = null;
+    protected ?Repository $config = null;
 
     /**
      * Set config

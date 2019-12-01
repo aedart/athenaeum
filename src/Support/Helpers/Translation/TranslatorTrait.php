@@ -20,7 +20,7 @@ trait TranslatorTrait
      *
      * @var Translator|null
      */
-    protected $translator = null;
+    protected ?Translator $translator = null;
 
     /**
      * Set translator

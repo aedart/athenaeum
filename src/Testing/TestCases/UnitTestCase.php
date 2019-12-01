@@ -2,8 +2,10 @@
 
 namespace Aedart\Testing\TestCases;
 
+use Codeception\Actor;
 use Codeception\TestCase\Test;
 use Faker\Factory;
+use Faker\Generator;
 use \Mockery as m;
 
 /**
@@ -19,14 +21,14 @@ use \Mockery as m;
 abstract class UnitTestCase extends Test
 {
     /**
-     * @var \UnitTester
+     * @var \UnitTester|Actor
      */
     protected $tester;
 
     /**
-     * @var \Faker\Generator
+     * @var Generator
      */
-    protected $faker = null;
+    protected ?Generator $faker = null;
 
     /**
      * {@inheritdoc}

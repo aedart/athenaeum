@@ -27,7 +27,7 @@ trait ApplicationInitiator
      *
      * @var string
      */
-    protected $environment = 'testing';
+    protected string $environment = 'testing';
 
     /**
      * Start the Laravel application

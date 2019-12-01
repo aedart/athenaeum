@@ -22,7 +22,7 @@ abstract class IntegrationTestCase extends UnitTestCase
      *
      * @var IoCInterface|null
      */
-    protected $ioc;
+    protected ?IoCInterface $ioc;
 
     /**
      * {@inheritdoc}

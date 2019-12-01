@@ -25,7 +25,7 @@ abstract class CommandBase extends Command
      *
      * @var InputInterface
      */
-    protected $input;
+    protected InputInterface $input;
 
     /**
      * This command's output

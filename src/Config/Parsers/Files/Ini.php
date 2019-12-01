@@ -22,7 +22,7 @@ class Ini extends ParserBase
      *
      * @var bool
      */
-    protected $processSections = true;
+    protected bool $processSections = true;
 
     /**
      * Scanner mode
@@ -31,7 +31,7 @@ class Ini extends ParserBase
      *
      * @var int
      */
-    protected $scannerMode = INI_SCANNER_TYPED;
+    protected int $scannerMode = INI_SCANNER_TYPED;
 
     /**
      * {@inheritdoc}

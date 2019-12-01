@@ -34,21 +34,21 @@ class TraitTester
      *
      * @var string
      */
-    protected $trait;
+    protected string $trait;
 
     /**
      * Name of getter-setter-trait property
      *
      * @var string
      */
-    protected $property;
+    protected ?string $property;
 
     /**
      * The mocked trait
      *
      * @var MockObject
      */
-    protected $mock;
+    protected MockObject $mock;
 
     /**
      * TraitTester constructor.

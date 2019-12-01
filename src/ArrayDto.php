@@ -46,7 +46,7 @@ abstract class ArrayDto implements Dto
      *
      * @var array Key = property's name, value = property's value
      */
-    protected $properties = [];
+    protected array $properties = [];
 
     /**
      * Defines the allowed properties and their
@@ -62,7 +62,7 @@ abstract class ArrayDto implements Dto
      *
      * @var array
      */
-    protected $allowed = [];
+    protected array $allowed = [];
 
     /**
      * ArrayDto constructor.

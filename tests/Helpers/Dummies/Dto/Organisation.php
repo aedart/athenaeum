@@ -26,16 +26,16 @@ use Carbon\Carbon;
  */
 class Organisation extends ArrayDto
 {
-    protected $allowed = [
-        'name'          => 'string',
-        'slogan'        => 'string',
-        'employees'     => 'int',
-        'hasInsurance'  => 'bool',
-        'profitScore'   => 'float',
-        'persons'       => 'array',
-        'started'       => 'date',
-        'address'       => Address::class,
-        'note'          => Note::class
+    protected array $allowed = [
+        'name' => 'string',
+        'slogan' => 'string',
+        'employees' => 'int',
+        'hasInsurance' => 'bool',
+        'profitScore' => 'float',
+        'persons' => 'array',
+        'started' => 'date',
+        'address' => Address::class,
+        'note' => Note::class
     ];
 
     public function setSlogan(?string $slogan)
