@@ -13,6 +13,7 @@
 * PHP version from `v7.3.x` to `v7.4.x`.
 * All class properties now have their [types declared](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties), if possible.
 * `dto:create-aware-of` command now generates traits with class [type declarations](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties) for it's properties.
+* `Dto` and `ArrayDto` now inherits from [`Serializable`](https://www.php.net/manual/en/class.serializable.php), allowing native php `serialize()` and `unserialize` to be used.
 
 **Non-breaking Changes**
 
