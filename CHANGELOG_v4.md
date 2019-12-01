@@ -10,14 +10,15 @@
 
 **Breaking Changes**
 
-* PHP version from `v7.3.x` to `v7.4.x`
+* PHP version from `v7.3.x` to `v7.4.x`.
 * All class properties now have their [types declared](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties), if possible.
 * `dto:create-aware-of` command now generates traits with class [type declarations](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties) for it's properties.
 
 **Non-breaking Changes**
 
 * Upgraded to Laravel `v6.6.x`, Symfony `v4.4.x` and upgraded various other dependencies.
-* Code style to [PSR-12](https://www.php-fig.org/psr/psr-12/)
+* Code style to [PSR-12](https://www.php-fig.org/psr/psr-12/).
+* Replaced deprecated `Twig` components, in `TwigPartial` trait.
 
 #### Added
 
