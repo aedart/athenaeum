@@ -21,7 +21,7 @@ use Aedart\Dto;
 
 class Address extends Dto
 {
-    protected $street = '';
+    protected ?string $street = '';
 
     public function setStreet(?string $street)
     {
@@ -38,11 +38,11 @@ class Address extends Dto
 
 class Person extends Dto implements PersonInterface
 {
-    protected $name = '';
+    protected ?string $name = '';
     
-    protected $age = 0;
+    protected ?int $age = 0;
  
-    protected $address = null;
+    protected ?Address $address = null;
  
     // ... getters and setters for name and age not shown ... //
 

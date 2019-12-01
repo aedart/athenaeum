@@ -33,7 +33,7 @@ class Person
 {
     use Overload;
     
-    protected $name = null;
+    protected ?string $name = null;
     
     public function getName() : string
     {
@@ -130,9 +130,9 @@ class Person
 {
     use Overload;
 
-    protected $name = null; // Accessible
+    protected ?string $name = null; // Accessible
 
-    private $age = null; // Inaccessible
+    private ?int $age = null; // Inaccessible
 
     // ...remaining not shown ...
 }
@@ -150,9 +150,9 @@ class Person
 {
     use Overload;
 
-    protected $name = null; // Accessible
+    protected ?string $name = null; // Accessible
 
-    private $age = null;    // Accessible
+    private ?int $age = null;    // Accessible
 
     public function __construct(){
 	    // Change the property accessibility to private

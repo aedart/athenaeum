@@ -20,7 +20,7 @@ use Aedart\ArrayDto;
 
 class Organisation extends ArrayDto
 {
-    protected $allowed = [
+    protected array $allowed = [
         'name'          => 'string',
         'employees'     => 'int',
         'hasInsurance'  => 'bool',
@@ -85,7 +85,7 @@ use Acme\Dto\Address;
 
 class Organisation extends ArrayDto
 {
-    protected $allowed = [
+    protected array $allowed = [
         'name'          => 'string',
         'address'       => Address::class,
     ];
@@ -103,7 +103,7 @@ use Aedart\ArrayDto;
 
 class Organisation extends ArrayDto
 {
-    protected $allowed = [
+    protected array $allowed = [
         'name'          => 'string', // Type ignored!
     ];
     
