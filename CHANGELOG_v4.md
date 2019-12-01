@@ -11,6 +11,7 @@
 **Breaking Changes**
 
 * PHP version from `v7.3.x` to `v7.4.x`
+* All class properties now have their [types declared](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties), if possible.
 
 **Non-breaking Changes**
 
