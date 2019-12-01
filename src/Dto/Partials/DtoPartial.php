@@ -143,6 +143,27 @@ trait DtoPartial
     }
 
     /**
+     * Returns a this the serialised representation of this DTO
+     *
+     * @return string
+     */
+    public function serialize() : string
+    {
+        return serialize($this->toArray());
+    }
+
+    /**
+     * Populate this DTO with given serialised data
+     *
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        $data = unserialize($serialized);
+        $this->populate($data);
+    }
+
+    /**
      * Returns a string representation of this Data Transfer Object
      *
      * @return string

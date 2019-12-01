@@ -9,6 +9,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use JsonException;
 use JsonSerializable;
+use Serializable;
 
 /**
  * Data Transfer Object (DTO)
@@ -57,6 +58,7 @@ use JsonSerializable;
  * @link https://en.wikipedia.org/wiki/Inversion_of_control
  * @link https://www.php-fig.org/psr/psr-11/
  * @link http://php.net/manual/en/class.jsonserializable.php
+ * @link https://www.php.net/manual/en/class.serializable.php
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts
@@ -65,7 +67,8 @@ interface Dto extends ArrayAccess,
     Arrayable,
     Populatable,
     Jsonable,
-    JsonSerializable
+    JsonSerializable,
+    Serializable
 {
     /**
      * Returns a list of the properties / attributes that
