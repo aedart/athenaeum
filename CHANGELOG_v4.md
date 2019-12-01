@@ -14,6 +14,8 @@
 
 **Non-breaking Changes**
 
+* Upgraded to Laravel `v6.6.x`, Symfony `v4.4.x` and upgraded various other dependencies.
+
 #### Added
 
 #### Fixed
