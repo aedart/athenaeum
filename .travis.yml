@@ -10,6 +10,7 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
+  - pecl install php-zip
   - travis_retry composer self-update
 
 install:
