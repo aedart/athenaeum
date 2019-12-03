@@ -1,16 +1,16 @@
+dist: bionic
 language: php
 
-php:
-  - '7.4'
-
-sudo: false
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.4
 
 cache:
   directories:
     - $HOME/.composer/cache
 
 before_install:
-  - sudo apt install php7.4-zip
   - travis_retry composer self-update
 
 install:
