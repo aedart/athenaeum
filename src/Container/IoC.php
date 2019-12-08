@@ -29,8 +29,8 @@ class IoC extends Container implements IoCInterface
 
         // Self register as "app" and set Facade application
         $container->instance('app', $container);
-        $container->instance(ContainerInterface::class, $container);
-        $container->instance(IoCInterface::class, $container);
+        $container->alias('app', ContainerInterface::class);
+        $container->alias('app', IoCInterface::class);
 
         Facade::setFacadeApplication($container);
 
