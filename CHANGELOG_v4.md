@@ -37,5 +37,7 @@ Existing abstractions are still available, yet will be removed entirely in `v5.0
 
 #### Fixed
 
+* `destroy()` does not flush bindings, in `IoC`. Instance is destroyed, yet formal Service Container `flush()` was not respected.
+
 
 
