@@ -42,6 +42,9 @@ class IoC extends Container implements IoCInterface
      */
     public function destroy(): void
     {
+        // Flush all bindings
+        $this->flush();
+
         // Clear facade instances and application
         Facade::clearResolvedInstances();
         Facade::setFacadeApplication(null);
