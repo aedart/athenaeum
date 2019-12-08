@@ -17,7 +17,7 @@
 * Replaced `\Aedart\Dto` with `\Aedart\Dto\Dto`[1].
 * Replaced `\Aedart\ArrayDto` with `\Aedart\Dto\ArrayDto`[1].
 
-[1]: _Deprecation of existing abstractions is due to a future possibility of converting athenaeum package into a true mono-repository, containing of multiple packages.
+[1]: _Deprecation of existing abstractions is due to future possibility of converting the athenaeum package into a true mono-repository, containing multiple packages.
 Existing abstractions are still available, yet will be removed entirely in `v5.0`._
 
 **Non-breaking Changes**
