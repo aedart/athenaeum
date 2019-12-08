@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Dto;
 
-use Aedart\ArrayDto;
+use Aedart\Dto\ArrayDto;
 use Aedart\Tests\Helpers\Dummies\Contracts\Note;
 use Carbon\Carbon;
 

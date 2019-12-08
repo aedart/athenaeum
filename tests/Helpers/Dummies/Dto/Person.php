@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Dto;
 
-use Aedart\Dto;
+use Aedart\Dto\Dto;
 use Aedart\Tests\Helpers\Dummies\Contracts\Note as NoteInterface;
 
 /**

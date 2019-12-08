@@ -2,7 +2,8 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Dto;
 
-use Aedart\Dto;
+use Aedart\Dto\Dto;
+use Aedart\Tests\Helpers\Dummies\Contracts\Note as NoteInterface;
 
 /**
  * Note
@@ -14,7 +15,7 @@ use Aedart\Dto;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Dto
  */
-class Note extends Dto implements \Aedart\Tests\Helpers\Dummies\Contracts\Note
+class Note extends Dto implements NoteInterface
 {
     /**
      * This note's content

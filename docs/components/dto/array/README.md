@@ -16,7 +16,7 @@ The keys of the `$allowed` variable correspond to your property's name, whereas 
 Whenever your DTO is populated, it will automatically ensure to [cast](http://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting) the property to it's decalred type. 
 
 ```php
-use Aedart\ArrayDto;
+use Aedart\Dto\ArrayDto;
 
 class Organisation extends ArrayDto
 {
@@ -80,7 +80,7 @@ In order to work with [nested DTOs](../nested-dto.md), you must declare their cl
 Other than that, the populate mechanism works in same way, as [previously mentioned](../nested-dto.md).
 
 ```php
-use Aedart\ArrayDto;
+use Aedart\Dto\ArrayDto;
 use Acme\Dto\Address;
 
 class Organisation extends ArrayDto
@@ -99,7 +99,7 @@ Should you require to mutate a property, then you can do so by defining an acces
 The naming rules, for your property getter or setter method, are the same as for [overloading](../../properties/README.md).
 
 ```php
-use Aedart\ArrayDto;
+use Aedart\Dto\ArrayDto;
 
 class Organisation extends ArrayDto
 {
