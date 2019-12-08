@@ -25,8 +25,12 @@ Existing abstractions are still available, yet will be removed entirely in `v5.0
 * Upgraded to Laravel `v6.6.x`, Symfony `v4.4.x` and upgraded various other dependencies.
 * Code style to [PSR-12](https://www.php-fig.org/psr/psr-12/).
 * Replaced deprecated `Twig` components, in `TwigPartial` trait.
+* `UnitTestCase` now uses `FakerPartial` to setup [Faker](https://github.com/fzaninotto/Faker).
 
 #### Added
+
+* `FakerAware` component that can be used for testing purposes.
+* `FakerPartial`, offers basic setup for [Faker](https://github.com/fzaninotto/Faker).
 
 #### Fixed
 
