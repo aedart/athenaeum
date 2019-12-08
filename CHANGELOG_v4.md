@@ -26,9 +26,12 @@ Existing abstractions are still available, yet will be removed entirely in `v5.0
 * Code style to [PSR-12](https://www.php-fig.org/psr/psr-12/).
 * Replaced deprecated `Twig` components, in `TwigPartial` trait.
 * `UnitTestCase` now uses `FakerPartial` to setup [Faker](https://github.com/fzaninotto/Faker).
+* Using `IoCFacade` to resolve default Http Client `Manager`, in `HttpClientsManagerTrait`.
+* Added `\Aedart\Contracts\Container\IoC` and `\Illuminate\Contracts\Container\Container` as `app` binding aliases, in `IoC`. 
 
 #### Added
 
+* `IoCFacade`, able to resolve bindings or return a default value, if binding does not exist.
 * `FakerAware` component that can be used for testing purposes.
 * `FakerPartial`, offers basic setup for [Faker](https://github.com/fzaninotto/Faker).
 
