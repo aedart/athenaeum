@@ -143,23 +143,22 @@ trait DtoPartial
     }
 
     /**
-     * Returns a this the serialised representation of this DTO
+     * Returns the data this DTO chooses to have serialised
      *
-     * @return string
+     * @return array
      */
-    public function serialize() : string
+    public function __serialize(): array
     {
-        return serialize($this->toArray());
+        return $this->toArray();
     }
 
     /**
-     * Populate this DTO with given serialised data
+     * Populates this DTO with unserialized data
      *
-     * @param string $serialized
+     * @param array $data
      */
-    public function unserialize($serialized)
+    public function __unserialize(array $data): void
     {
-        $data = unserialize($serialized);
         $this->populate($data);
     }
 
