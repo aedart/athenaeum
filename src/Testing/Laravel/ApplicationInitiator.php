@@ -71,6 +71,9 @@ trait ApplicationInitiator
             return false;
         }
 
+        // Clear service container instance
+        $this->app->setInstance(null);
+
         // Tear down test environment
         $this->tearDownTheTestEnvironment();
 
