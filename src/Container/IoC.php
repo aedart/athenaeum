@@ -4,6 +4,7 @@ namespace Aedart\Container;
 
 use Aedart\Contracts\Container\IoC as IoCInterface;
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Container\Container as ContainerInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Facade;
 
@@ -28,6 +29,9 @@ class IoC extends Container implements IoCInterface
 
         // Self register as "app" and set Facade application
         $container->instance('app', $container);
+        $container->instance(ContainerInterface::class, $container);
+        $container->instance(IoCInterface::class, $container);
+
         Facade::setFacadeApplication($container);
 
         return $container;
