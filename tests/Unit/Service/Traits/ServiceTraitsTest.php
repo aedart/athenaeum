@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Aedart\Tests\Unit\Service\Traits;
 
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
