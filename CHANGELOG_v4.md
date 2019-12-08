@@ -37,6 +37,8 @@ Existing abstractions are still available, yet will be removed entirely in `v5.0
 
 #### Fixed
 
+* `Applicaiton` instance not destroyed after `stopApplication()` invoked, in `ApplocationInitiator`.
+This resulting in `$instance` still containing reference to the application, inside Laravel's Service Container, causing tests to fail.
 * `destroy()` does not flush bindings, in `IoC`. Instance is destroyed, yet formal Service Container `flush()` was not respected.
 
 
