@@ -71,6 +71,6 @@ trait HttpClientsManagerTrait
      */
     public function getDefaultHttpClientsManager(): ?Manager
     {
-        return IoCFacade::make(Manager::class);
+        return IoCFacade::tryMake(Manager::class);
     }
 }

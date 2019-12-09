@@ -70,6 +70,6 @@ trait ServiceProviderRegistrarTrait
      */
     public function getDefaultServiceProviderRegistrar(): ?Registrar
     {
-        return IoCFacade::make(Registrar::class);
+        return IoCFacade::tryMake(Registrar::class);
     }
 }

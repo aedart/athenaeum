@@ -28,7 +28,7 @@ class IoCFacadeTest extends IntegrationTestCase
 
         // -------------------------------------------- //
 
-        $resolved = IoCFacade::make($abstract);
+        $resolved = IoCFacade::tryMake($abstract);
 
         $this->assertInstanceOf(Box::class, $resolved, 'unable to resolve binding');
     }
@@ -41,7 +41,7 @@ class IoCFacadeTest extends IntegrationTestCase
         $abstract = 'my_binding';
         $default = 'nothing there...';
 
-        $resolved = IoCFacade::make($abstract, $default);
+        $resolved = IoCFacade::tryMake($abstract, $default, []);
 
         $this->assertSame($default, $resolved, 'incorrect default resolved');
     }
