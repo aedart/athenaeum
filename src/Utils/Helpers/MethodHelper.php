@@ -55,4 +55,24 @@ class MethodHelper
 
         return $methods[$property] ?? $methods[$property] = 'set' . ucfirst(Str::camel($property));
     }
+
+    /**
+     * Call the given method and return whatever method returns
+     *
+     * If given method is not callable, e.g. an integer is given,
+     * then given value is returned instead
+     *
+     * @param mixed $method [optional] Callable method
+     * @param array $parameters [optional] Evt. method arguments
+     *
+     * @return mixed Return value of given method or whatever was given if not callable
+     */
+    public static function callOrReturn($method = null, array $parameters = [])
+    {
+        if(is_callable($method)){
+            return $method(...$parameters);
+        }
+
+        return $method;
+    }
 }
