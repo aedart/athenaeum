@@ -34,6 +34,7 @@ Existing abstractions are still available, yet will be removed entirely in `v5.0
 * `IoCFacade`, able to resolve bindings or return a default value, if binding does not exist.
 * `FakerAware` component that can be used for testing purposes.
 * `FakerPartial`, offers basic setup for [Faker](https://github.com/fzaninotto/Faker).
+* `callOrReturn()` utility method in `MethodHelper`.
 
 #### Fixed
 
