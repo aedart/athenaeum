@@ -45,14 +45,7 @@ class Registrar implements RegistrarInterface
     }
 
     /**
-     * Register a service provider
-     *
-     * @see boot()
-     *
-     * @param ServiceProvider|string $provider Service Provider instance or string namespace of provider
-     * @param bool $boot [optional] Boot the given provider after registration, if not already booted
-     *
-     * @return bool False if provider already registered
+     * @inheritDoc
      */
     public function register($provider, bool $boot = true) : bool
     {
@@ -76,15 +69,7 @@ class Registrar implements RegistrarInterface
     }
 
     /**
-     * Register multiple service providers
-     *
-     * @see register()
-     * @see boot()
-     *
-     * @param ServiceProvider[]|string[] $providers Service Provider instances or list of string namespaces
-     * @param bool $boot [optional] Boot providers after registration, if not already booted
-     * @param bool $safeBoot [optional] If true, then providers are only booted after all
-     *                       the given providers have been registered.
+     * @inheritdoc
      */
     public function registerMultiple(array $providers, bool $boot = true, bool $safeBoot = true) : void
     {
@@ -104,13 +89,7 @@ class Registrar implements RegistrarInterface
     }
 
     /**
-     * Boot service provider
-     *
-     * @see booted()
-     *
-     * @param ServiceProvider $provider
-     *
-     * @return bool False if already booted or provider does not contain a boot method
+     * @inheritdoc
      */
     public function boot(ServiceProvider $provider) : bool
     {
@@ -134,11 +113,7 @@ class Registrar implements RegistrarInterface
     }
 
     /**
-     * Boot the given list of service providers
-     *
-     * @see boot()
-     *
-     * @param ServiceProvider[] $providers
+     * @inheritdoc
      */
     public function bootMultiple(array $providers) : void
     {
@@ -148,12 +123,7 @@ class Registrar implements RegistrarInterface
     }
 
     /**
-     * Boot all service providers
-     *
-     * Method will not boot providers that have already
-     * been booted
-     *
-     * @see boot()
+     * @inheritdoc
      */
     public function bootAll() : void
     {
@@ -161,11 +131,7 @@ class Registrar implements RegistrarInterface
     }
 
     /**
-     * Determine if service provider has been registered
-     *
-     * @param ServiceProvider|string $provider
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function isRegistered($provider) : bool
     {
@@ -186,11 +152,7 @@ class Registrar implements RegistrarInterface
     }
 
     /**
-     * Determine if given service provider has been booted
-     *
-     * @param ServiceProvider $provider
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function hasBooted(ServiceProvider $provider) : bool
     {
@@ -198,9 +160,7 @@ class Registrar implements RegistrarInterface
     }
 
     /**
-     * Get the registered service providers
-     *
-     * @return ServiceProvider[]
+     * @inheritdoc
      */
     public function providers() : array
     {
@@ -208,9 +168,7 @@ class Registrar implements RegistrarInterface
     }
 
     /**
-     * Get the booted service providers
-     *
-     * @return ServiceProvider[]
+     * @inheritdoc
      */
     public function booted() : array
     {
