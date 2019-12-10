@@ -32,13 +32,14 @@ interface Registrar
      * Register multiple service providers
      *
      * @param ServiceProvider[]|string[] $providers Service Provider instances or list of string namespaces
+     * @param bool $boot [optional] Boot providers after registration, if not already booted
      * @param bool $safeBoot [optional] If true, then providers are only booted after all
      *                       the given providers have been registered.
      * @see register()
      * @see boot()
      *
      */
-    public function registerMultiple(array $providers, bool $safeBoot = true): void;
+    public function registerMultiple(array $providers, bool $boot = true, bool $safeBoot = true): void;
 
     /**
      * Boot service provider
