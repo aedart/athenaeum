@@ -97,7 +97,9 @@ class Registrar implements RegistrarInterface
         }
 
         if($boot && $safeBoot){
-            $this->bootMultiple($providers);
+            // We have to boot instances registered, not given
+            // list of providers, which might just be class paths!
+            $this->bootMultiple($this->providers());
         }
     }
 
@@ -140,9 +142,7 @@ class Registrar implements RegistrarInterface
      */
     public function bootMultiple(array $providers) : void
     {
-        array_walk($providers, function($provider){
-            $provider = $this->resolveProviderInstance($provider);
-
+        array_walk($providers, function(ServiceProvider $provider){
             $this->boot($provider);
         });
     }
