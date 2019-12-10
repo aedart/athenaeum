@@ -35,6 +35,7 @@ Existing abstractions are still available, yet will be removed entirely in `v5.0
 * `FakerAware` component that can be used for testing purposes.
 * `FakerPartial`, offers basic setup for [Faker](https://github.com/fzaninotto/Faker).
 * `callOrReturn()` utility method in `MethodHelper`.
+* `MessageBag` testing component. Intended to store test or debugging messages across components and tests. 
 
 #### Fixed
 
