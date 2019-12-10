@@ -139,7 +139,9 @@ class Registrar implements RegistrarInterface
      */
     public function bootMultiple(array $providers) : void
     {
-        array_walk($providers, function(ServiceProvider $provider){
+        array_walk($providers, function($provider){
+            $provider = $this->resolveProviderInstance($provider);
+
             $this->boot($provider);
         });
     }
