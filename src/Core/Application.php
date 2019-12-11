@@ -4,6 +4,9 @@ namespace Aedart\Core;
 
 use Aedart\Container\IoC;
 use Aedart\Contracts\Core\Application as ApplicationInterface;
+use Aedart\Contracts\Service\Registrar as ServiceProviderRegistrar;
+use Aedart\Service\Registrar;
+use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Closure;
 
 /**
@@ -16,6 +19,8 @@ use Closure;
  */
 class Application extends IoC implements ApplicationInterface
 {
+    use ServiceProviderRegistrarTrait;
+
     // TODO: Implement constructor
     public function __construct()
     {
@@ -128,10 +133,20 @@ class Application extends IoC implements ApplicationInterface
 
     /**
      * @inheritDoc
+     *
+     * @param  \Illuminate\Support\ServiceProvider|string  $provider
+     * @param bool $force [optional] Force argument ignored!
      */
     public function register($provider, $force = false)
     {
-        // TODO: Implement register() method.
+        // Register provider. Boot if needed
+        $registrar = $this->getServiceProviderRegistrar();
+        $registrar->register($provider, $this->isBooted());
+
+        // Obtain last registered provider, return it.
+        $providers = $registrar->providers();
+
+        return array_pop($providers);
     }
 
     /**
@@ -147,7 +162,7 @@ class Application extends IoC implements ApplicationInterface
      */
     public function resolveProvider($provider)
     {
-        // TODO: Implement resolveProvider() method.
+        return $this->getServiceProviderRegistrar()->resolveProvider($provider);
     }
 
     /**
@@ -325,4 +340,36 @@ class Application extends IoC implements ApplicationInterface
     {
         // TODO: Implement terminate() method.
     }
+
+    /*****************************************************************
+     * Custom methods implementation
+     ****************************************************************/
+
+    /**
+     * @inheritdoc
+     */
+    public function isBooted(): bool
+    {
+        $bootedProviders = $this->getServiceProviderRegistrar()->booted();
+
+        return !empty($bootedProviders);
+    }
+
+    /*****************************************************************
+     * Defaults
+     ****************************************************************/
+
+    /**
+     * @inheritdoc
+     */
+    public function getDefaultServiceProviderRegistrar(): ?ServiceProviderRegistrar
+    {
+        return new Registrar($this);
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+
 }

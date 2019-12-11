@@ -2,8 +2,8 @@
 
 namespace Aedart\Contracts\Core;
 
-
 use Aedart\Contracts\Container\IoC;
+use Aedart\Contracts\Service\ServiceProviderRegistrarAware;
 use Illuminate\Contracts\Foundation\Application as LaravelApplication;
 
 /**
@@ -17,7 +17,13 @@ use Illuminate\Contracts\Foundation\Application as LaravelApplication;
  * @package Aedart\Contracts\Core
  */
 interface Application extends IoC,
-    LaravelApplication
+    LaravelApplication,
+    ServiceProviderRegistrarAware
 {
-
+    /**
+     * Determine if this application has booted
+     *
+     * @return bool
+     */
+    public function isBooted() : bool ;
 }
