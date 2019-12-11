@@ -54,7 +54,7 @@ class Registrar implements RegistrarInterface
         }
 
         // Create provider instance or return given
-        $provider = $this->resolveProviderInstance($provider);
+        $provider = $this->resolveProvider($provider);
 
         // Register provider and it's internal bindings & singletons
         $this->performRegistration($provider);
@@ -174,6 +174,22 @@ class Registrar implements RegistrarInterface
         return $this->bootedServiceProviders;
     }
 
+    /**
+     * Create service provider instance, if required
+     *
+     * @param ServiceProvider|string $provider
+     *
+     * @return ServiceProvider
+     */
+    public function resolveProvider($provider) : ServiceProvider
+    {
+        if($provider instanceof ServiceProvider){
+            return $provider;
+        }
+
+        return new $provider($this->getApp());
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -220,21 +236,5 @@ class Registrar implements RegistrarInterface
     protected function providerNamespace($provider) : string
     {
         return is_string($provider) ? $provider : get_class($provider);
-    }
-
-    /**
-     * Create service provider instance, if required
-     *
-     * @param ServiceProvider|string $provider
-     *
-     * @return ServiceProvider
-     */
-    protected function resolveProviderInstance($provider) : ServiceProvider
-    {
-        if($provider instanceof ServiceProvider){
-            return $provider;
-        }
-
-        return new $provider($this->getApp());
     }
 }

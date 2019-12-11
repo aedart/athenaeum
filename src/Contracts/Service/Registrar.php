@@ -102,4 +102,13 @@ interface Registrar
      * @return ServiceProvider[]
      */
     public function booted(): array;
+
+    /**
+     * Create service provider instance, if required
+     *
+     * @param ServiceProvider|string $provider Service Provider or class path
+     *
+     * @return ServiceProvider
+     */
+    public function resolveProvider($provider) : ServiceProvider ;
 }
