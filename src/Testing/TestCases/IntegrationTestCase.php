@@ -4,7 +4,7 @@ namespace Aedart\Testing\TestCases;
 
 use Aedart\Container\IoC;
 use Aedart\Contracts\Container\IoC as IoCInterface;
-use Illuminate\Contracts\Container\Container;
+use Aedart\Contracts\Core\Application;
 
 /**
  * Integration Test Case
@@ -21,7 +21,7 @@ abstract class IntegrationTestCase extends UnitTestCase
     /**
      * Service Container instance
      *
-     * @var IoCInterface|Container null
+     * @var IoCInterface|Application null
      */
     protected $ioc = null;
 
