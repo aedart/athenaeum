@@ -1,11 +1,10 @@
 <?php
 
-
 namespace Aedart\Service;
 
 use Aedart\Contracts\Service\Registrar as RegistrarInterface;
-use Aedart\Support\Helpers\Container\ContainerTrait;
-use Illuminate\Container\Container;
+use Aedart\Support\Helpers\Foundation\AppTrait;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -18,7 +17,7 @@ use Illuminate\Support\ServiceProvider;
  */
 class Registrar implements RegistrarInterface
 {
-    use ContainerTrait;
+    use AppTrait;
 
     /**
      * List of registered service providers
@@ -37,11 +36,11 @@ class Registrar implements RegistrarInterface
     /**
      * Registrar constructor.
      *
-     * @param Container|null $container [optional] IoC Service Container
+     * @param Application|null $application [optional]
      */
-    public function __construct(?Container $container = null)
+    public function __construct(?Application $application = null)
     {
-        $this->setContainer($container);
+        $this->setApp($application);
     }
 
     /**
@@ -101,7 +100,7 @@ class Registrar implements RegistrarInterface
         // does such.
         // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L826
         if(method_exists($provider, 'boot')){
-            $this->getContainer()->call([$provider, 'boot']);
+            $this->getApp()->call([$provider, 'boot']);
 
             $this->bootedServiceProviders[] = $provider;
 
@@ -191,7 +190,7 @@ class Registrar implements RegistrarInterface
         // Resolve "bindings" and "singletons" properties.
         // This is done in the exact same way as in Laravel's Application.
         // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L596
-        $ioc = $this->getContainer();
+        $ioc = $this->getApp();
 
         // Bindings
         if(property_exists($provider, 'bindings')){
@@ -236,6 +235,6 @@ class Registrar implements RegistrarInterface
             return $provider;
         }
 
-        return new $provider($this->getContainer());
+        return new $provider($this->getApp());
     }
 }

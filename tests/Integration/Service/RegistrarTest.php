@@ -3,9 +3,10 @@
 namespace Aedart\Tests\Integration\Service;
 
 use Aedart\Contracts\Service\Registrar as RegistrarInterface;
+use Aedart\Core\Application;
 use Aedart\Service\Registrar;
 use Aedart\Testing\Helpers\MessageBag;
-use Aedart\Testing\TestCases\IntegrationTestCase;
+use Aedart\Testing\TestCases\ApplicationIntegrationTestCase;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\Partials\ProviderState;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderA;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderB;
@@ -21,8 +22,23 @@ use Illuminate\Support\ServiceProvider;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Service
  */
-class RegistrarTest extends IntegrationTestCase
+class RegistrarTest extends ApplicationIntegrationTestCase
 {
+    /**
+     * @inheritdoc
+     */
+    protected function _before()
+    {
+        parent::_before();
+
+        // Use full Application instead of IoC
+        $this->ioc->destroy();
+        $this->ioc = Application::getInstance();
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function _after()
     {
         // Clear cached messages
