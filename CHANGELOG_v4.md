@@ -4,6 +4,11 @@
 
 ## v4.x
 
+// TODO:
+* added custom application (incomplete)
+* added application integration test-case
+* docs about custom application, etc.
+
 ### [v4.0.0](__TODO__)
 
 #### Changed
