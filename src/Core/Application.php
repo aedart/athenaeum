@@ -8,6 +8,7 @@ use Aedart\Contracts\Service\Registrar as ServiceProviderRegistrar;
 use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Closure;
+use Illuminate\Support\ServiceProvider;
 
 /**
  * Application
@@ -134,7 +135,7 @@ class Application extends IoC implements ApplicationInterface
     /**
      * @inheritDoc
      *
-     * @param  \Illuminate\Support\ServiceProvider|string  $provider
+     * @param  ServiceProvider|string  $provider
      * @param bool $force [optional] Force argument ignored!
      */
     public function register($provider, $force = false)
