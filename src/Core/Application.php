@@ -22,6 +22,20 @@ class Application extends IoC implements ApplicationInterface
 {
     use ServiceProviderRegistrarTrait;
 
+    /**
+     * Callbacks to be invoked before booting
+     *
+     * @var callable[]
+     */
+    protected array $beforeBootingCallbacks = [];
+
+    /**
+     * Callbacks to be invoked after booted
+     *
+     * @var callable[]
+     */
+    protected array $afterBootedCallbacks = [];
+
     // TODO: Implement constructor
     public function __construct()
     {
@@ -171,7 +185,19 @@ class Application extends IoC implements ApplicationInterface
      */
     public function boot()
     {
-        // TODO: Implement boot() method.
+        // Abort if already booted
+        if($this->isBooted()){
+            return;
+        }
+
+        // Invoke "before" callbacks
+        $this->invokeApplicationCallbacks($this->beforeBootingCallbacks);
+
+        // Boot all registered service providers
+        $this->getServiceProviderRegistrar()->bootAll();
+
+        // Invoke "after" callbacks
+        $this->invokeApplicationCallbacks($this->afterBootedCallbacks);
     }
 
     /**
@@ -179,7 +205,7 @@ class Application extends IoC implements ApplicationInterface
      */
     public function booting($callback)
     {
-        // TODO: Implement booting() method.
+        $this->beforeBootingCallbacks[] = $callback;
     }
 
     /**
@@ -187,7 +213,13 @@ class Application extends IoC implements ApplicationInterface
      */
     public function booted($callback)
     {
-        // TODO: Implement booted() method.
+        $this->afterBootedCallbacks[] = $callback;
+
+        // Invoke callbacks, if application has already
+        // booted...
+        if($this->isBooted()){
+            $this->invokeApplicationCallbacks($this->afterBootedCallbacks);
+        }
     }
 
     /**
@@ -372,5 +404,17 @@ class Application extends IoC implements ApplicationInterface
      * Internals
      ****************************************************************/
 
-
+    /**
+     * Invokes given list of callbacks
+     *
+     * @param callable[] $callbacks
+     */
+    protected function invokeApplicationCallbacks(array $callbacks)
+    {
+        // This method corresponds directly to Laravel's fireAppCallbacks
+        // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L865
+        foreach ($callbacks as $callback){
+            $callback($this);
+        }
+    }
 }
