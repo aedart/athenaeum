@@ -282,7 +282,7 @@ class Application extends IoC implements ApplicationInterface
      */
     public function getProviders($provider)
     {
-        // TODO: Implement getProviders() method.
+        return $this->getServiceProviderRegistrar()->getProviders($provider);
     }
 
     /**

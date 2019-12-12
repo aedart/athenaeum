@@ -97,6 +97,16 @@ interface Registrar
     public function providers(): array;
 
     /**
+     * Get the registered service providers instances that match
+     * given service provider
+     *
+     * @param ServiceProvider|string $provider Service provider instance or class path
+     *
+     * @return ServiceProvider[]
+     */
+    public function getProviders($provider) : array ;
+
+    /**
      * Get the booted service providers
      *
      * @return ServiceProvider[]

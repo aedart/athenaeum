@@ -140,11 +140,9 @@ class Registrar implements RegistrarInterface
         }
 
         // In case that a string has been given,...
-        $name = $this->providerNamespace($provider);
-        foreach ($providers as $registered){
-            if($registered instanceof $name){
-                return true;
-            }
+        $registered = $this->getProviders($provider);
+        if(!empty($registered)){
+            return true;
         }
 
         return false;
@@ -164,6 +162,21 @@ class Registrar implements RegistrarInterface
     public function providers() : array
     {
         return $this->providers;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getProviders($provider): array
+    {
+        // This function behaves the same way that Laravel's Application::getProviders
+        // See https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L655
+        $name = $this->providerNamespace($provider);
+
+        return array_filter(
+            $this->providers(),
+            fn(ServiceProvider $registered) => $registered instanceof $name
+        );
     }
 
     /**
