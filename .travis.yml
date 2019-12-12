@@ -11,7 +11,6 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - sudo apt install php7.4-ext
   - travis_retry composer self-update
 
 install:
