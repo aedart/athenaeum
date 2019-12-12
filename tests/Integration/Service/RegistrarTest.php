@@ -10,6 +10,7 @@ use Aedart\Testing\TestCases\ApplicationIntegrationTestCase;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\Partials\ProviderState;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderA;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderB;
+use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderC;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderD;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,18 +25,6 @@ use Illuminate\Support\ServiceProvider;
  */
 class RegistrarTest extends ApplicationIntegrationTestCase
 {
-    /**
-     * @inheritdoc
-     */
-    protected function _before()
-    {
-        parent::_before();
-
-        // Use full Application instead of IoC
-        $this->ioc->destroy();
-        $this->ioc = Application::getInstance();
-    }
-
     /**
      * @inheritdoc
      */
@@ -58,7 +47,7 @@ class RegistrarTest extends ApplicationIntegrationTestCase
      */
     protected function makeRegistrar() : RegistrarInterface
     {
-        return new Registrar();
+        return $this->app->getServiceProviderRegistrar();
     }
 
     /**
@@ -71,6 +60,21 @@ class RegistrarTest extends ApplicationIntegrationTestCase
         return [
             ServiceProviderA::class,
             ServiceProviderB::class,
+            new ServiceProviderD($this->ioc)
+        ];
+    }
+
+    /**
+     * Returns a list of service providers
+     *
+     * @return string[]|ServiceProvider[]
+     */
+    protected function providersListWithAggregate() : array
+    {
+        return [
+            ServiceProviderA::class,
+            ServiceProviderB::class,
+            ServiceProviderC::class,
             new ServiceProviderD($this->ioc)
         ];
     }
@@ -195,5 +199,35 @@ class RegistrarTest extends ApplicationIntegrationTestCase
         // ----------------------------------------------------- //
         $this->assertFalse($result, 'Should NOT have booted already booted service provider');
         $this->assertCount(1, $bootedProviders, 'Should NOT allow multiple booting of same provider');
+    }
+
+    /**
+     * @test
+     */
+    public function canRegisterAndBootAggregateServiceProviders()
+    {
+        $registrar = $this->makeRegistrar();
+        $providers = $this->providersListWithAggregate();
+        $registrar->registerMultiple($providers);
+
+        // ----------------------------------------------------- //
+        $messages = MessageBag::all();
+
+        // Verify that register & boot order is correct
+        $this->assertStringContainsString('A has registered', $messages[0]);
+        $this->assertStringContainsString('B has registered', $messages[1]);
+        $this->assertStringContainsString('C1 has registered', $messages[2]);
+        $this->assertStringContainsString('C2 has registered', $messages[3]);
+        $this->assertStringContainsString('C3 has registered', $messages[4]);
+        $this->assertStringContainsString('C has registered', $messages[5]);
+        $this->assertStringContainsString('D has registered', $messages[6]);
+
+        $this->assertStringContainsString('A has booted', $messages[7]);
+        $this->assertStringContainsString('B has booted', $messages[8]);
+        $this->assertStringContainsString('C1 has booted', $messages[9]);
+        $this->assertStringContainsString('C2 has booted', $messages[10]);
+        $this->assertStringContainsString('C3 has booted', $messages[11]);
+        $this->assertStringContainsString('C has booted', $messages[12]);
+        $this->assertStringContainsString('D has booted', $messages[13]);
     }
 }
