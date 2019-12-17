@@ -219,24 +219,4 @@ class DtoTest extends DtoTestCase
         $this->assertIsArray($result);
         $this->assertNotEmpty($result);
     }
-
-    /**
-     * @test
-     */
-    public function debugInfoDoesNotContainUnsetProperty()
-    {
-        $data = [
-            'name'  => $this->faker->name,
-            'age'   => $this->faker->randomNumber()
-        ];
-
-        $dto = $this->makeDto($data);
-
-        unset($dto['name']);
-        $result = $dto->__debugInfo();
-
-        ConsoleDebugger::output($result);
-        $keys = array_keys($result);
-        $this->assertNotContains('name', $keys);
-    }
 }
