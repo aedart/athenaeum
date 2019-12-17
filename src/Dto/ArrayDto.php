@@ -178,4 +178,16 @@ abstract class ArrayDto implements Dto
     {
         unset($this->properties[$name]);
     }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * @inheritdoc
+     */
+    protected function isPropertyUnset(string $property)
+    {
+        return ! isset($this->{$property});
+    }
 }

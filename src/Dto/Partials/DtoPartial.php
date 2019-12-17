@@ -98,7 +98,7 @@ trait DtoPartial
 
         foreach ($properties as $property) {
             // Make sure that property is not unset
-            if( ! property_exists($this, $property)){
+            if($this->isPropertyUnset($property)){
                 continue;
             }
 
@@ -149,7 +149,10 @@ trait DtoPartial
      */
     public function __serialize(): array
     {
-        return $this->toArray();
+        // Filter off properties that have "null" as value!
+        // Those might cause undesired unserialize effect,
+        // in case of nested Dto instances...
+        return array_filter( $this->toArray(), fn($value) => isset($value) );
     }
 
     /**
@@ -218,5 +221,21 @@ trait DtoPartial
     public function offsetUnset($offset)
     {
         unset($this->$offset);
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Determine if the given property has been unset
+     *
+     * @param string $property
+     *
+     * @return bool
+     */
+    protected function isPropertyUnset(string $property)
+    {
+        return ! property_exists($this, $property);
     }
 }
