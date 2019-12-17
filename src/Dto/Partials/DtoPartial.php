@@ -98,7 +98,7 @@ trait DtoPartial
 
         foreach ($properties as $property) {
             // Make sure that property is not unset
-            if ( ! isset($this->$property)) {
+            if( ! property_exists($this, $property)){
                 continue;
             }
 
