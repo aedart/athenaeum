@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Core;
 
 use Aedart\Contracts\Container\IoC;
+use Aedart\Contracts\Core\Helpers\PathsContainerAware;
 use Aedart\Contracts\Service\ServiceProviderRegistrarAware;
 use Illuminate\Contracts\Foundation\Application as LaravelApplication;
 
@@ -18,6 +19,7 @@ use Illuminate\Contracts\Foundation\Application as LaravelApplication;
  */
 interface Application extends IoC,
     LaravelApplication,
+    PathsContainerAware,
     ServiceProviderRegistrarAware
 {
     /**
