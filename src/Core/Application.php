@@ -34,9 +34,9 @@ class Application extends IoC implements ApplicationInterface,
     /**
      * Application's version
      *
-     * @var string|null
+     * @var string
      */
-    protected ?string $version = null;
+    protected string $version;
 
     /**
      * Callbacks to be invoked before booting
@@ -56,11 +56,11 @@ class Application extends IoC implements ApplicationInterface,
      * Application constructor.
      *
      * @param PathsContainer|array|null $paths [optional] Application's core paths
-     * @param string|null $version [optional] Application's version, e.g. '1.5.3'
+     * @param string $version [optional] Application's version, e.g. '1.5.3'
      *
      * @throws \Throwable
      */
-    public function __construct($paths = null, ?string $version = '1.0.0')
+    public function __construct($paths = null, string $version = '1.0.0')
     {
         $this->version = $version;
 
