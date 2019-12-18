@@ -475,7 +475,7 @@ class Application extends IoC implements ApplicationInterface,
     {
         $this->tryPopulatePathsContainer($paths);
 
-        // TODO: Bind paths in container... some services depend on this!
+        $this->bindPaths();
     }
 
     /**
@@ -507,6 +507,26 @@ class Application extends IoC implements ApplicationInterface,
 
         // Lastly, an invalid paths argument has been provide...
         throw new LogicException('Paths must either be a valid "Paths Container" instance, an "array" of paths or "null"');
+    }
+
+    /**
+     * Binds paths in the IoC service container
+     */
+    protected function bindPaths() : void
+    {
+        // Laravel uses the IoC to store paths, so that Services are able to
+        // obtain them. Strictly speaking we could skip this, yet some service
+        // providers use those bindings. Therefore, we bind some of those paths
+        // here...
+        // See https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L285
+
+        $this->instance('path.base', $this->basePath());
+        $this->instance('path.bootstrap', $this->bootstrapPath());
+        $this->instance('path.config', $this->configPath());
+        $this->instance('path.database', $this->databasePath());
+        $this->instance('path.environment', $this->environmentPath());
+        $this->instance('path.resource', $this->resourcePath());
+        $this->instance('path.storage', $this->storagePath());
     }
 
     /**
