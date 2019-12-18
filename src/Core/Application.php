@@ -5,7 +5,9 @@ namespace Aedart\Core;
 use Aedart\Container\IoC;
 use Aedart\Contracts\Core\Application as ApplicationInterface;
 use Aedart\Contracts\Core\Helpers\PathsContainer;
+use Aedart\Contracts\Core\Helpers\PathsContainerAware;
 use Aedart\Contracts\Service\Registrar as ServiceProviderRegistrar;
+use Aedart\Contracts\Service\ServiceProviderRegistrarAware;
 use Aedart\Core\Helpers\Paths;
 use Aedart\Core\Traits\PathsContainerTrait;
 use Aedart\Service\Registrar;
@@ -22,7 +24,9 @@ use LogicException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Core
  */
-class Application extends IoC implements ApplicationInterface
+class Application extends IoC implements ApplicationInterface,
+    PathsContainerAware,
+    ServiceProviderRegistrarAware
 {
     use PathsContainerTrait;
     use ServiceProviderRegistrarTrait;
