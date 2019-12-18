@@ -260,7 +260,8 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function configurationIsCached()
     {
-        // TODO: Implement configurationIsCached() method.
+        // By default, this application does not cache configuration.
+        return false;
     }
 
     /**
@@ -376,7 +377,8 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function routesAreCached()
     {
-        // TODO: Implement routesAreCached() method.
+        // By default, this application does not offer routing
+        return false;
     }
 
     /**
@@ -392,7 +394,9 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function shouldSkipMiddleware()
     {
-        // TODO: Implement shouldSkipMiddleware() method.
+        // By default, this application does not offer routing or
+        // PSR middleware.
+        return false;
     }
 
     /**
