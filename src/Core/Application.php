@@ -400,7 +400,12 @@ class Application extends IoC implements ApplicationInterface,
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * NOTE: Terminate will trigger termination callbacks,
+     * yet the application is NOT destroyed!
+     *
+     * @see destroy
      */
     public function terminate()
     {
@@ -419,6 +424,20 @@ class Application extends IoC implements ApplicationInterface,
         $bootedProviders = $this->getServiceProviderRegistrar()->booted();
 
         return !empty($bootedProviders);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function destroy(): void
+    {
+        $this->beforeBootingCallbacks = [];
+        $this->afterBootedCallbacks = [];
+
+        $this->setServiceProviderRegistrar(null);
+        $this->setPathsContainer(null);
+
+        parent::destroy();
     }
 
     /*****************************************************************
