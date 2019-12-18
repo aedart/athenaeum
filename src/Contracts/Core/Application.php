@@ -24,4 +24,13 @@ interface Application extends IoC,
      * @return bool
      */
     public function isBooted() : bool ;
+
+    /**
+     * Register a new terminating listener.
+     *
+     * @param callable $callback
+     *
+     * @return self
+     */
+    public function terminating(callable $callback);
 }

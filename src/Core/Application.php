@@ -53,6 +53,13 @@ class Application extends IoC implements ApplicationInterface,
     protected array $afterBootedCallbacks = [];
 
     /**
+     * Callbacks to be invoked during termination
+     *
+     * @var callable[]
+     */
+    protected array $terminationCallbacks = [];
+
+    /**
      * Application constructor.
      *
      * @param PathsContainer|array|null $paths [optional] Application's core paths
@@ -409,7 +416,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function terminate()
     {
-        // TODO: Implement terminate() method.
+        $this->invokeApplicationCallbacks($this->terminationCallbacks);
     }
 
     /*****************************************************************
@@ -429,10 +436,21 @@ class Application extends IoC implements ApplicationInterface,
     /**
      * @inheritdoc
      */
+    public function terminating(callable $callback)
+    {
+        $this->terminationCallbacks[] = $callback;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function destroy(): void
     {
         $this->beforeBootingCallbacks = [];
         $this->afterBootedCallbacks = [];
+        $this->terminationCallbacks = [];
 
         $this->setServiceProviderRegistrar(null);
         $this->setPathsContainer(null);
