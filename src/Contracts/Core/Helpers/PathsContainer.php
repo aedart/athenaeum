@@ -34,5 +34,66 @@ interface PathsContainer extends BasePathAware,
     Jsonable,
     JsonSerializable
 {
+    /**
+     * Get a path within the "base" directory
+     *
+     * @param string $path [optional]
+     *
+     * @return string
+     */
+    public function basePath(string $path = '') : string ;
 
+    /**
+     * Get a path within the "bootstrap" directory
+     *
+     * @param string $path [optional]
+     *
+     * @return string
+     */
+    public function bootstrapPath(string $path = '') : string ;
+
+    /**
+     * Get a path within the "config" directory
+     *
+     * @param string $path [optional]
+     *
+     * @return string
+     */
+    public function configPath(string $path = '') : string ;
+
+    /**
+     * get a path with the "database" directory
+     *
+     * @param string $path [optional]
+     *
+     * @return string
+     */
+    public function databasePath(string $path = '') : string ;
+
+    /**
+     * Get a path within the "environment" directory
+     *
+     * @param string $path [optional]
+     *
+     * @return string
+     */
+    public function environmentPath(string $path = '') : string ;
+
+    /**
+     * Get a path within the "resources" directory
+     *
+     * @param string $path [optional]
+     *
+     * @return string
+     */
+    public function resourcePath(string $path = '') : string ;
+
+    /**
+     * Get a path within the "storage" directory
+     *
+     * @param string $path [optional]
+     *
+     * @return string
+     */
+    public function storagePath(string $path = '') : string ;
 }

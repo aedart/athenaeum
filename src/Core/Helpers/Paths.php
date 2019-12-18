@@ -30,6 +30,62 @@ class Paths extends Dto implements PathsContainer
     use ResourcePathTrait;
     use StoragePathTrait;
 
+    /**
+     * @inheritDoc
+     */
+    public function basePath(string $path = ''): string
+    {
+        return $this->pathIn($this->getBasePath(), $path);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function bootstrapPath(string $path = ''): string
+    {
+        return $this->pathIn($this->getBootstrapPath(), $path);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function configPath(string $path = ''): string
+    {
+        return $this->pathIn($this->getConfigPath(), $path);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function databasePath(string $path = ''): string
+    {
+        return $this->pathIn($this->getDatabasePath(), $path);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function environmentPath(string $path = ''): string
+    {
+        return $this->pathIn($this->getEnvironmentPath(), $path);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function resourcePath(string $path = ''): string
+    {
+        return $this->pathIn($this->getResourcePath(), $path);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function storagePath(string $path = ''): string
+    {
+        return $this->pathIn($this->getStoragePath(), $path);
+    }
+
     /*****************************************************************
      * Defaults
      ****************************************************************/
@@ -88,5 +144,22 @@ class Paths extends Dto implements PathsContainer
     public function getDefaultStoragePath(): ?string
     {
         return $this->getBasePath() . DIRECTORY_SEPARATOR . 'storage';
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Returns given path within the desired directory
+     *
+     * @param string $directory
+     * @param string $path [optional]
+     *
+     * @return string
+     */
+    protected function pathIn(string $directory, string $path = '') : string
+    {
+        return $directory . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 }
