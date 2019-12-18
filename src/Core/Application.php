@@ -144,7 +144,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function runningInConsole()
     {
-        // TODO: Implement runningInConsole() method.
+        return in_array(php_sapi_name(), ['cli', 'phpdbg']);
     }
 
     /**
