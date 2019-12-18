@@ -80,7 +80,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function basePath($path = '')
     {
-        // TODO: Implement basePath() method.
+        return $this->getPathsContainer()->basePath($path);
     }
 
     /**
@@ -88,7 +88,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function bootstrapPath($path = '')
     {
-        // TODO: Implement bootstrapPath() method.
+        return $this->getPathsContainer()->bootstrapPath($path);
     }
 
     /**
@@ -96,7 +96,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function configPath($path = '')
     {
-        // TODO: Implement configPath() method.
+        return $this->getPathsContainer()->configPath($path);
     }
 
     /**
@@ -104,7 +104,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function databasePath($path = '')
     {
-        // TODO: Implement databasePath() method.
+        return $this->getPathsContainer()->databasePath($path);
     }
 
     /**
@@ -112,7 +112,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function environmentPath()
     {
-        // TODO: Implement environmentPath() method.
+        return $this->getPathsContainer()->environmentPath();
     }
 
     /**
@@ -120,7 +120,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function resourcePath($path = '')
     {
-        // TODO: Implement resourcePath() method.
+        return $this->getPathsContainer()->resourcePath($path);
     }
 
     /**
@@ -128,7 +128,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function storagePath()
     {
-        // TODO: Implement storagePath() method.
+        return $this->getPathsContainer()->storagePath();
     }
 
     /**
@@ -292,7 +292,8 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function getCachedConfigPath()
     {
-        // TODO: Implement getCachedConfigPath() method.
+        // Not used by this application - overwrite if required
+        return '';
     }
 
     /**
@@ -300,7 +301,8 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function getCachedServicesPath()
     {
-        // TODO: Implement getCachedServicesPath() method.
+        // Not used by this application - overwrite if required
+        return '';
     }
 
     /**
@@ -308,7 +310,8 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function getCachedPackagesPath()
     {
-        // TODO: Implement getCachedPackagesPath() method.
+        // Not used by this application - overwrite if required
+        return '';
     }
 
     /**
@@ -316,7 +319,8 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function getCachedRoutesPath()
     {
-        // TODO: Implement getCachedRoutesPath() method.
+        // Not used by this application - overwrite if required
+        return '';
     }
 
     /**
