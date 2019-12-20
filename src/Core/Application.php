@@ -161,7 +161,13 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function environment(...$environments)
     {
-        // TODO: Implement environment() method.
+        if(count($environments) > 0){
+            $search = is_array($environments) ? $environments : [ $environments ];
+
+            return in_array($this['env'], $search);
+        }
+
+        return $this['env'];
     }
 
     /**
