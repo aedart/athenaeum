@@ -9,10 +9,12 @@ use Aedart\Contracts\Core\Helpers\PathsContainer;
 use Aedart\Contracts\Core\Helpers\PathsContainerAware;
 use Aedart\Contracts\Service\Registrar as ServiceProviderRegistrar;
 use Aedart\Contracts\Service\ServiceProviderRegistrarAware;
+use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\Core\Helpers\Paths;
 use Aedart\Core\Traits\PathsContainerTrait;
 use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
+use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Utils\Json;
 use Closure;
 use Illuminate\Support\Arr;
@@ -32,10 +34,12 @@ use Throwable;
  */
 class Application extends IoC implements ApplicationInterface,
     PathsContainerAware,
-    ServiceProviderRegistrarAware
+    ServiceProviderRegistrarAware,
+    ConfigAware
 {
     use PathsContainerTrait;
     use ServiceProviderRegistrarTrait;
+    use ConfigTrait;
 
     /**
      * Application's version
@@ -382,7 +386,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function getLocale()
     {
-        // TODO: Implement getLocale() method.
+        return $this->getConfig()->get('app.locale', 'en');
     }
 
     /**
@@ -451,7 +455,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function setLocale($locale)
     {
-        // TODO: Implement setLocale() method.
+        $this->getConfig()->set('app.locale', $locale);
     }
 
     /**
