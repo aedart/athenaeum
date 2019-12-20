@@ -27,12 +27,9 @@ class IoC extends Container implements IoCInterface
         /** @var Application|static $container */
         $container = parent::getInstance();
 
-        // Self register as "app" and set Facade application
-        $container->instance('app', $container);
-        $container->alias('app', ContainerInterface::class);
-        $container->alias('app', IoCInterface::class);
-
-        Facade::setFacadeApplication($container);
+        $container
+            ->registerMainBindings()
+            ->setFacadeApplication();
 
         return $container;
     }
@@ -52,4 +49,38 @@ class IoC extends Container implements IoCInterface
         // Clear container instance
         static::setInstance(null);
     }
+
+    /**
+     * Register the "main" bindings
+     *
+     * @return self
+     */
+    public function registerMainBindings()
+    {
+        // Self register as "app" and set Facade application
+        $this->instance('app', $this);
+        $this->alias('app', ContainerInterface::class);
+        $this->alias('app', IoCInterface::class);
+
+        return $this;
+    }
+
+    /**
+     * Set the Facade's application
+     *
+     * @return self
+     */
+    public function setFacadeApplication()
+    {
+        // Force set the facade's application to this container.
+        // NOTE: This works only because Laravel has yet to
+        // use typed arguments.
+        Facade::setFacadeApplication($this);
+
+        return $this;
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
 }
