@@ -304,7 +304,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function detectEnvironment(Closure $callback)
     {
-        // TODO: Implement detectEnvironment() method.
+        return $this['env'] = $callback();
     }
 
     /**
@@ -456,7 +456,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function isLocal(): bool
     {
-        // TODO: Implement isLocal() method.
+        return $this['env'] === 'local';
     }
 
     /**
@@ -464,7 +464,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function isProduction(): bool
     {
-        // TODO: Implement isProduction() method.
+        return $this['env'] === 'production';
     }
 
     /**
@@ -472,7 +472,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function isTesting(): bool
     {
-        // TODO: Implement isTesting() method.
+        return $this['env'] === 'testing';
     }
 
     /**
