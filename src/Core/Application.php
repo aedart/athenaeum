@@ -177,7 +177,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function runningUnitTests()
     {
-        // TODO: Implement runningUnitTests() method.
+        return $this->isTesting();
     }
 
     /**
@@ -450,6 +450,30 @@ class Application extends IoC implements ApplicationInterface,
     /*****************************************************************
      * Custom methods implementation
      ****************************************************************/
+
+    /**
+     * @inheritDoc
+     */
+    public function isLocal(): bool
+    {
+        // TODO: Implement isLocal() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isProduction(): bool
+    {
+        // TODO: Implement isProduction() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isTesting(): bool
+    {
+        // TODO: Implement isTesting() method.
+    }
 
     /**
      * @inheritdoc
