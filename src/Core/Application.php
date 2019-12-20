@@ -265,8 +265,7 @@ class Application extends IoC implements ApplicationInterface,
     {
         $this->afterBootedCallbacks[] = $callback;
 
-        // Invoke callbacks, if application has already
-        // booted...
+        // Invoke callbacks, if application has already booted...
         if($this->isBooted()){
             $this->invokeApplicationCallbacks($this->afterBootedCallbacks);
         }
