@@ -13,7 +13,6 @@ use Aedart\Core\Traits\PathsContainerTrait;
 use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Closure;
-use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 use LogicException;
 
