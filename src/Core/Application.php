@@ -209,7 +209,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function isDownForMaintenance()
     {
-        // TODO: Implement isDownForMaintenance() method.
+        return file_exists($this->basePath('.down'));
     }
 
     /**
