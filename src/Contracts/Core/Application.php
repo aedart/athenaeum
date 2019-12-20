@@ -19,6 +19,27 @@ interface Application extends IoC,
     LaravelApplication
 {
     /**
+     * Determine if running in "local" environment
+     *
+     * @return bool
+     */
+    public function isLocal() : bool ;
+
+    /**
+     * Determine if running in "production" environment
+     *
+     * @return bool
+     */
+    public function isProduction() : bool ;
+
+    /**
+     * Determine if running in "testing" environment
+     *
+     * @return bool
+     */
+    public function isTesting() : bool ;
+
+    /**
      * Determine if this application has booted
      *
      * @return bool
