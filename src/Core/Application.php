@@ -13,9 +13,14 @@ use Aedart\Core\Helpers\Paths;
 use Aedart\Core\Traits\PathsContainerTrait;
 use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
+use Aedart\Utils\Json;
 use Closure;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
+use JsonException;
 use LogicException;
+use RuntimeException;
+use Throwable;
 
 /**
  * Application
@@ -75,12 +80,19 @@ class Application extends IoC implements ApplicationInterface,
     protected string $environmentFile = '.env';
 
     /**
+     * Your application's namespace
+     *
+     * @var string|null
+     */
+    protected ?string $namespace = null;
+
+    /**
      * Application constructor.
      *
      * @param PathsContainer|array|null $paths [optional] Application's core paths
      * @param string $version [optional] Application's version, e.g. '1.5.3'
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function __construct($paths = null, string $version = '1.0.0')
     {
@@ -378,7 +390,19 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function getNamespace()
     {
-        // TODO: Implement getNamespace() method.
+        if(isset($this->namespace)){
+            return $this->namespace;
+        }
+
+        try {
+            return $this->namespace = $this->detectApplicationNamespace();
+        } catch (Throwable $e) {
+            throw new RuntimeException(
+                'Cannot read application namespace: ' . $e->getMessage(),
+                $e->getCode(),
+                $e
+            );
+        }
     }
 
     /**
@@ -556,7 +580,7 @@ class Application extends IoC implements ApplicationInterface,
      *
      * @param null|PathsContainer|array $paths [optional]
      *
-     * @throws \Throwable If an invalid paths argument has been provided
+     * @throws Throwable If an invalid paths argument has been provided
      *
      * @return self
      */
@@ -574,7 +598,7 @@ class Application extends IoC implements ApplicationInterface,
      *
      * @param null|PathsContainer|array $paths [optional]
      *
-     * @throws \Throwable If an invalid paths argument has been provided
+     * @throws Throwable If an invalid paths argument has been provided
      */
     protected function tryPopulatePathsContainer($paths = null)
     {
@@ -632,5 +656,39 @@ class Application extends IoC implements ApplicationInterface,
         foreach ($callbacks as $callback){
             $callback($this);
         }
+    }
+
+    /**
+     * Detects your application's namespace
+     *
+     * @return string
+     *
+     * @throws JsonException If unable to decode composer.json file
+     * @throws RuntimeException If composer.json file is not found or does not contain a PRS-4 declaration
+     */
+    protected function detectApplicationNamespace() : string
+    {
+        // Laravel's version of namespace detection differs from the one below.
+        // Here, we guess that the the first found PSR-4 namespace is the one
+        // that the application should use...
+        // See https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L1222
+
+        // Load the content of the composer.json file
+        $composerFile = $this->basePath('composer.json');
+        if(!is_file($composerFile)){
+            throw new RuntimeException(sprintf('Unable to load %s', $composerFile));
+        }
+
+        $content = Json::decode($composerFile, true);
+
+        // Get the "psr4" namespace declarations
+        $psr4 = Arr::get($content, 'autoload.psr-4');
+        if(!isset($psr4)){
+            throw new RuntimeException('composer.json does not contain any psr-4 namespace declaration');
+        }
+
+        // We take a lucky guess about the application's namespace.
+        // It might NOT be correct, but should satisfy Laravel's application interface.
+        return array_key_first($psr4);
     }
 }
