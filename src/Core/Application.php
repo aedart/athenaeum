@@ -13,6 +13,7 @@ use Aedart\Core\Traits\PathsContainerTrait;
 use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Closure;
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 use LogicException;
 
@@ -71,7 +72,10 @@ class Application extends IoC implements ApplicationInterface,
     {
         $this->version = $version;
 
-        $this->resolveApplicationPaths($paths);
+        $this
+            ->resolveApplicationPaths($paths)
+            ->registerMainBindings()
+            ->setFacadeApplication();
     }
 
     /**
@@ -488,12 +492,16 @@ class Application extends IoC implements ApplicationInterface,
      * @param null|PathsContainer|array $paths [optional]
      *
      * @throws \Throwable If an invalid paths argument has been provided
+     *
+     * @return self
      */
-    protected function resolveApplicationPaths($paths = null) : void
+    protected function resolveApplicationPaths($paths = null)
     {
         $this->tryPopulatePathsContainer($paths);
 
         $this->bindPaths();
+
+        return $this;
     }
 
     /**
