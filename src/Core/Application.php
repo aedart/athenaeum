@@ -68,6 +68,13 @@ class Application extends IoC implements ApplicationInterface,
     protected bool $hasBootstrapped = false;
 
     /**
+     * Filename of the environment file to be used
+     *
+     * @var string
+     */
+    protected string $environmentFile = '.env';
+
+    /**
      * Application constructor.
      *
      * @param PathsContainer|array|null $paths [optional] Application's core paths
@@ -306,7 +313,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function environmentFile()
     {
-        // TODO: Implement environmentFile() method.
+        return $this->environmentFile;
     }
 
     /**
@@ -314,7 +321,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function environmentFilePath()
     {
-        // TODO: Implement environmentFilePath() method.
+        return $this->getPathsContainer()->environmentPath( $this->environmentPath() );
     }
 
     /**
