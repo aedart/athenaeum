@@ -4,6 +4,7 @@ namespace Aedart\Core;
 
 use Aedart\Container\IoC;
 use Aedart\Contracts\Core\Application as ApplicationInterface;
+use Aedart\Contracts\Core\Helpers\CanBeBootstrapped;
 use Aedart\Contracts\Core\Helpers\PathsContainer;
 use Aedart\Contracts\Core\Helpers\PathsContainerAware;
 use Aedart\Contracts\Service\Registrar as ServiceProviderRegistrar;
@@ -58,6 +59,13 @@ class Application extends IoC implements ApplicationInterface,
      * @var callable[]
      */
     protected array $terminationCallbacks = [];
+
+    /**
+     * State whether or not this application has been bootstrapped
+     *
+     * @var bool
+     */
+    protected bool $hasBootstrapped = false;
 
     /**
      * Application constructor.
@@ -262,7 +270,18 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function bootstrapWith(array $bootstrappers)
     {
-        // TODO: Implement bootstrapWith() method.
+        // Abort if already bootstrapped
+        if($this->hasBootstrapped){
+            return;
+        }
+
+        // Change bootstrapping state of application
+        $this->hasBootstrapped = true;
+
+        // Invoke the bootstrappers
+        foreach ($bootstrappers as $bootstrapper){
+            $this->invokeBootstrapper( $this->make($bootstrapper) );
+        }
     }
 
     /**
@@ -363,7 +382,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function hasBeenBootstrapped()
     {
-        // TODO: Implement hasBeenBootstrapped() method.
+        return $this->hasBootstrapped;
     }
 
     /**
@@ -454,6 +473,7 @@ class Application extends IoC implements ApplicationInterface,
         $this->beforeBootingCallbacks = [];
         $this->afterBootedCallbacks = [];
         $this->terminationCallbacks = [];
+        $this->hasBootstrapped = false;
 
         $this->setServiceProviderRegistrar(null);
         $this->setPathsContainer(null);
@@ -484,6 +504,16 @@ class Application extends IoC implements ApplicationInterface,
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * Invokes bootstrap-able component.
+     *
+     * @param CanBeBootstrapped $boostrapper
+     */
+    protected function invokeBootstrapper(CanBeBootstrapped $boostrapper)
+    {
+        $boostrapper->bootstrap($this);
+    }
 
     /**
      * Resolves this application's paths from given argument
