@@ -58,6 +58,11 @@ interface Application extends IoC,
     /**
      * Get this application's core service providers.
      *
+     * Service Providers are automatically registered via
+     * the "register configured providers" method.
+     *
+     * @see registerConfiguredProviders
+     *
      * @return \Illuminate\Support\ServiceProvider[]|string[] Instances or list of class paths
      */
     public function getCoreServiceProviders() : array ;
