@@ -217,7 +217,11 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function registerConfiguredProviders()
     {
-        // TODO: Implement registerConfiguredProviders() method.
+        $coreProviders = $this->getCoreServiceProviders();
+
+        foreach ($coreProviders as $serviceProvider){
+            $this->register($serviceProvider);
+        }
     }
 
     /**
@@ -522,6 +526,14 @@ class Application extends IoC implements ApplicationInterface,
         $this->terminationCallbacks[] = $callback;
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCoreServiceProviders(): array
+    {
+        return [];
     }
 
     /**

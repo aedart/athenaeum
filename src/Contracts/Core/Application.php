@@ -54,4 +54,11 @@ interface Application extends IoC,
      * @return self
      */
     public function terminating(callable $callback);
+
+    /**
+     * Get this application's core service providers.
+     *
+     * @return \Illuminate\Support\ServiceProvider[]|string[] Instances or list of class paths
+     */
+    public function getCoreServiceProviders() : array ;
 }
