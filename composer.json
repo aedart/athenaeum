@@ -45,6 +45,7 @@
     "illuminate/config": "^6.6",
     "illuminate/container": "^6.6",
     "illuminate/filesystem": "^6.6",
+    "illuminate/events": "^6.6",
     "symfony/console": "4.4.*",
     "jean85/pretty-package-versions": "~1.2",
     "psr/http-message": "^1.0.1"
