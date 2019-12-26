@@ -22,6 +22,7 @@ use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Closure;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
 use LogicException;
 use Throwable;
@@ -593,11 +594,26 @@ class Application extends IoC implements ApplicationInterface,
     /**
      * Invokes bootstrap-able component.
      *
-     * @param CanBeBootstrapped $boostrapper
+     * @param CanBeBootstrapped $bootstrapper
      */
-    protected function invokeBootstrapper(CanBeBootstrapped $boostrapper)
+    protected function invokeBootstrapper(CanBeBootstrapped $bootstrapper)
     {
-        $boostrapper->bootstrap($this);
+        // This implementation is identical to how Laravel's bootstrapping
+        // logic functions. We dispatch custom events for each bootstrapper.
+        // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L212
+
+        /** @var Dispatcher $dispatcher */
+        $dispatcher = $this['events'];
+        $class = get_class($bootstrapper);
+
+        // Dispatch "before" event
+        $dispatcher->dispatch('bootstrapping: ' . $class, [$this]);
+
+        // Bootstrap
+        $bootstrapper->bootstrap($this);
+
+        // Dispatch "after" event
+        $dispatcher->dispatch('bootstrapped: ' . $class, [$this]);
     }
 
     /**
