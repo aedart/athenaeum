@@ -7,6 +7,7 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Container\Container as ContainerInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Facade;
+use Psr\Container\ContainerInterface as PsrContainerInterface;
 
 /**
  * Inverse-of-Control (IoC) Service Container
@@ -58,9 +59,12 @@ class IoC extends Container implements IoCInterface
     public function registerMainBindings()
     {
         // Self register as "app" and set Facade application
-        $this->instance('app', $this);
-        $this->alias('app', ContainerInterface::class);
-        $this->alias('app', IoCInterface::class);
+        $key = 'app';
+
+        $this->instance($key, $this);
+        $this->alias($key, ContainerInterface::class);
+        $this->alias($key, IoCInterface::class);
+        $this->alias($key, PsrContainerInterface::class);
 
         return $this;
     }

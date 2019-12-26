@@ -23,6 +23,7 @@ use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Closure;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Contracts\Foundation\Application as LaravelApplicationInterface;
 use Illuminate\Support\ServiceProvider;
 use LogicException;
 use Throwable;
@@ -557,6 +558,22 @@ class Application extends IoC implements ApplicationInterface,
         $this->setPathsContainer(null);
 
         parent::destroy();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function registerMainBindings()
+    {
+        parent::registerMainBindings();
+
+        $key = 'app';
+
+        $this->alias($key, self::class);
+        $this->alias($key, ApplicationInterface::class);
+        $this->alias($key, LaravelApplicationInterface::class);
+
+        return $this;
     }
 
     /*****************************************************************
