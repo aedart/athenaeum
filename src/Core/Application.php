@@ -12,6 +12,7 @@ use Aedart\Contracts\Core\Helpers\PathsContainerAware;
 use Aedart\Contracts\Service\Registrar as ServiceProviderRegistrar;
 use Aedart\Contracts\Service\ServiceProviderRegistrarAware;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
+use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Helpers\NamespaceDetector;
 use Aedart\Core\Helpers\Paths;
 use Aedart\Core\Traits\NamespaceDetectorTrait;
@@ -570,7 +571,9 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function getCoreBootstrappers(): array
     {
-        return [];
+        return [
+            DetectAndLoadEnvironment::class
+        ];
     }
 
     /**
