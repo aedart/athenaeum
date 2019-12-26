@@ -534,6 +534,36 @@ class Application extends IoC implements ApplicationInterface,
         return $this;
     }
 
+
+    /**
+     * @inheritDoc
+     */
+    public function isRunning(): bool
+    {
+        return $this->hasBeenBootstrapped() && $this->isBooted();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function run(?callable $callback = null): void
+    {
+        if($this->isRunning()){
+            return;
+        }
+
+        try {
+            $this->bootstrapWith( $this->getCoreBootstrappers() );
+
+            $this->boot();
+
+            $callback = $callback ?? fn() => null;
+            $this->invokeApplicationCallbacks([ $callback ]);
+        } catch (Throwable $e) {
+            $this->handleException($e);
+        }
+    }
+
     /**
      * @inheritDoc
      */
@@ -723,5 +753,21 @@ class Application extends IoC implements ApplicationInterface,
         foreach ($callbacks as $callback){
             $callback($this);
         }
+    }
+
+    /**
+     * Handles given exception
+     *
+     * @param Throwable $exception
+     *
+     * @throws Throwable
+     */
+    protected function handleException(Throwable $exception)
+    {
+        // TODO: Pass exception to "composite" exception handler
+        // TODO: if possible...
+        // TODO: ALSO - allow "force throw" exceptions... somehow!
+        // TODO: For now, we simple just (re)throw the exception.
+        throw $exception;
     }
 }

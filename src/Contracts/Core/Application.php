@@ -5,6 +5,7 @@ namespace Aedart\Contracts\Core;
 use Aedart\Contracts\Container\IoC;
 use Aedart\Contracts\Core\Helpers\CanBeBootstrapped;
 use Illuminate\Contracts\Foundation\Application as LaravelApplication;
+use Throwable;
 
 /**
  * Application
@@ -55,6 +56,35 @@ interface Application extends IoC,
      * @return self
      */
     public function terminating(callable $callback);
+
+    /**
+     * Determine if the application has bootstrapped it's
+     * core bootstrappers and booted
+     *
+     * @see run
+     * @see hasBeenBootstrapped
+     * @see isBooted
+     *
+     * @return bool
+     */
+    public function isRunning() : bool ;
+
+    /**
+     * Bootstrap application's core bootstrappers and boot
+     * all of it's registered service providers
+     *
+     * Method does nothing, if application is already running
+     *
+     * @param callable|null $callback [optional] Invoked after bootstrap and boot has completed
+     *
+     * @see isRunning
+     * @see bootstrapWith
+     * @see boot
+     * @see getCoreBootstrappers
+     *
+     * @throws Throwable
+     */
+    public function run(?callable $callback = null) : void ;
 
     /**
      * Get the application's core "bootstrappers"
