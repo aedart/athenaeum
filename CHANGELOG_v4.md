@@ -48,6 +48,7 @@ Existing abstractions are still available, yet will be removed entirely in `v5.0
 This resulting in `$instance` still containing reference to the application, inside Laravel's Service Container, causing tests to fail.
 * `destroy()` does not flush bindings, in `IoC`. Instance is destroyed, yet formal Service Container `flush()` was not respected.
 * Default values not triggered when invoking `toArray()`, in `Dto` and `ArrayDto`, when using aware-of traits to create a Dto class.
+* Missing Psr `ContainerInterface` alias binging for the custom `IoC`;
 
 
 
