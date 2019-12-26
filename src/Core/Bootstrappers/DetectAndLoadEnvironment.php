@@ -8,7 +8,6 @@ use Aedart\Core\Exceptions\UnableToDetectOrLoadEnv;
 use Dotenv\Dotenv;
 use Illuminate\Support\Env;
 use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use Throwable;
 
 /**
@@ -41,7 +40,7 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
         try {
             $this->loadEnvironmentFile( $this->determineEnvFileToUse() );
         } catch (Throwable $e) {
-            $this->fail($e);
+            throw new UnableToDetectOrLoadEnv('Unable to detect or load environment: ' . $e->getMessage(), 1, $e);
         }
     }
 
@@ -106,30 +105,5 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
         }
 
         return null;
-    }
-
-    /**
-     * Output a failure to "detect or load environment"
-     *
-     * @param Throwable $e
-     *
-     * @throws UnableToDetectOrLoadEnv
-     */
-    protected function fail(Throwable $e)
-    {
-        $exception = new UnableToDetectOrLoadEnv('Unable to detect or load environment: ' . $e->getMessage(), 1, $e);
-
-        // Output for console, if required.
-        if($this->app->runningInConsole()){
-            $output = (new ConsoleOutput())->getErrorOutput();
-
-            $output->writeln("<error>{$exception->getMessage()}</error>");
-
-            die(1);
-        }
-
-        // Otherwise, we simple allow the exception to bubble upwards,
-        // allowing php to act upon it...
-        throw $exception;
     }
 }
