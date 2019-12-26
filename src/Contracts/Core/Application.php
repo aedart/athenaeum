@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Core;
 
 use Aedart\Contracts\Container\IoC;
+use Aedart\Contracts\Core\Helpers\CanBeBootstrapped;
 use Illuminate\Contracts\Foundation\Application as LaravelApplication;
 
 /**
@@ -54,6 +55,13 @@ interface Application extends IoC,
      * @return self
      */
     public function terminating(callable $callback);
+
+    /**
+     * Get the application's core "bootstrappers"
+     *
+     * @return CanBeBootstrapped[]|string[] Instances or list of class paths
+     */
+    public function getCoreBootstrappers() : array ;
 
     /**
      * Get this application's core service providers.

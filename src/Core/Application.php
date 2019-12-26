@@ -537,6 +537,14 @@ class Application extends IoC implements ApplicationInterface,
     /**
      * @inheritDoc
      */
+    public function getCoreBootstrappers(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getCoreServiceProviders(): array
     {
         return [
