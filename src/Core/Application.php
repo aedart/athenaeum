@@ -15,6 +15,7 @@ use Aedart\Contracts\Service\Registrar as ServiceProviderRegistrar;
 use Aedart\Contracts\Service\ServiceProviderRegistrarAware;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
+use Aedart\Core\Bootstrappers\LoadConfiguration;
 use Aedart\Core\Helpers\NamespaceDetector;
 use Aedart\Core\Helpers\Paths;
 use Aedart\Core\Traits\NamespaceDetectorTrait;
@@ -574,7 +575,8 @@ class Application extends IoC implements ApplicationInterface,
     public function getCoreBootstrappers(): array
     {
         return [
-            DetectAndLoadEnvironment::class
+            DetectAndLoadEnvironment::class,
+            LoadConfiguration::class
         ];
     }
 
