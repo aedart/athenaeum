@@ -25,6 +25,7 @@ use Closure;
 use Illuminate\Contracts\Foundation\Application as LaravelApplicationInterface;
 use Illuminate\Support\ServiceProvider;
 use LogicException;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Throwable;
 
 /**
@@ -768,6 +769,32 @@ class Application extends IoC implements ApplicationInterface,
         // TODO: if possible...
         // TODO: ALSO - allow "force throw" exceptions... somehow!
         // TODO: For now, we simple just (re)throw the exception.
+        $this->handleExceptionUsingFallback($exception);
+    }
+
+    /**
+     * Handle exception using this application's "last resort" handler.
+     *
+     * Method should ONLY be used, if there is no other exception handler
+     * available.
+     *
+     * @param Throwable $exception
+     *
+     * @throws Throwable
+     */
+    protected function handleExceptionUsingFallback(Throwable $exception)
+    {
+        // Output for console, if required.
+        if($this->runningInConsole()){
+            $output = (new ConsoleOutput())->getErrorOutput();
+
+            $output->writeln("<error>{$exception->getMessage()}</error>");
+
+            die(1);
+        }
+
+        // Otherwise, we simple allow the exception to bubble upwards,
+        // allowing php to act upon it...
         throw $exception;
     }
 }
