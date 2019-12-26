@@ -2,6 +2,8 @@
 
 namespace Aedart\Core;
 
+use Aedart\Config\Providers\ConfigLoaderServiceProvider;
+use Aedart\Config\Providers\ConfigServiceProvider;
 use Aedart\Container\IoC;
 use Aedart\Contracts\Core\Application as ApplicationInterface;
 use Aedart\Contracts\Core\Helpers\CanBeBootstrapped;
@@ -583,7 +585,9 @@ class Application extends IoC implements ApplicationInterface,
     {
         return [
             NativeFilesystemServiceProvider::class,
-            EventServiceProvider::class
+            EventServiceProvider::class,
+            ConfigServiceProvider::class,
+            ConfigLoaderServiceProvider::class
         ];
     }
 
