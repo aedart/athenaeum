@@ -48,7 +48,8 @@
     "illuminate/events": "^6.8",
     "symfony/console": "4.4.*",
     "jean85/pretty-package-versions": "~1.2",
-    "psr/http-message": "^1.0.1"
+    "psr/http-message": "^1.0.1",
+    "vlucas/phpdotenv": "^3.3"
   },
   "require-dev": {
     "ext-sockets": "*",
