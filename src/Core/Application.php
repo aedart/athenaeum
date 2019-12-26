@@ -17,6 +17,7 @@ use Aedart\Core\Helpers\Paths;
 use Aedart\Core\Traits\NamespaceDetectorTrait;
 use Aedart\Core\Traits\PathsContainerTrait;
 use Aedart\Events\Providers\EventServiceProvider;
+use Aedart\Filesystem\Providers\NativeFilesystemServiceProvider;
 use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
@@ -536,6 +537,7 @@ class Application extends IoC implements ApplicationInterface,
     public function getCoreServiceProviders(): array
     {
         return [
+            NativeFilesystemServiceProvider::class,
             EventServiceProvider::class
         ];
     }
