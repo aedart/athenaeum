@@ -442,7 +442,9 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function loadEnvironmentFrom($file)
     {
-        // TODO: Implement loadEnvironmentFrom() method.
+        $this->environmentFile = $file;
+
+        return $this;
     }
 
     /**
