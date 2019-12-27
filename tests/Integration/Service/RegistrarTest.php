@@ -3,8 +3,6 @@
 namespace Aedart\Tests\Integration\Service;
 
 use Aedart\Contracts\Service\Registrar as RegistrarInterface;
-use Aedart\Core\Application;
-use Aedart\Service\Registrar;
 use Aedart\Testing\Helpers\MessageBag;
 use Aedart\Testing\TestCases\ApplicationIntegrationTestCase;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\Partials\ProviderState;
