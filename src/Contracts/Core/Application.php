@@ -73,6 +73,22 @@ interface Application extends IoC,
     public function registerMultipleServiceProviders(array $providers);
 
     /**
+     * Determine if the given service is a deferred service.
+     *
+     * @param  string  $service
+     * @return bool
+     */
+
+    /**
+     * Determine if given service is deferred
+     *
+     * @param string $service Class path or identifier
+     *
+     * @return bool
+     */
+    public function isDeferredService(string $service) : bool ;
+
+    /**
      * Determine if the application has bootstrapped it's
      * core bootstrappers and booted
      *

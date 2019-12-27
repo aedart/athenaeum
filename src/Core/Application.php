@@ -269,7 +269,7 @@ class Application extends IoC implements ApplicationInterface,
     public function registerDeferredProvider($provider, $service = null)
     {
         // Remove service from list of deferred services
-        if(isset($service, $this->deferredServices[$service])){
+        if(isset($service) && $this->isDeferredService($service)){
             unset($this->deferredServices[$service]);
         }
 
@@ -519,6 +519,35 @@ class Application extends IoC implements ApplicationInterface,
      ****************************************************************/
 
     /**
+     * @inheritdoc
+     */
+    public function make($abstract, array $parameters = [])
+    {
+        // To handle deferred services, the same implementation is used
+        // as by Laravel's application:
+        // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L768
+
+        $abstract = $this->getAlias($abstract);
+
+        if ($this->isDeferredService($abstract) && ! isset($this->instances[$abstract])) {
+            $this->registerDeferredProvider($abstract);
+        }
+
+        return parent::make($abstract, $parameters);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function bound($abstract)
+    {
+        // We determine if service is bound, in the exact same way that is
+        // done by Laravel's application.
+        // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L787
+        return $this->isDeferredService($abstract) || parent::bound($abstract);
+    }
+
+    /**
      * @inheritDoc
      */
     public function isLocal(): bool
@@ -574,6 +603,14 @@ class Application extends IoC implements ApplicationInterface,
         }
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isDeferredService(string $service): bool
+    {
+        return isset($this->deferredServices[$service]);
     }
 
     /**
@@ -835,7 +872,7 @@ class Application extends IoC implements ApplicationInterface,
         $this->listenWhenToRegister($provider->when(), $provider);
 
         // Add deferred services that are offered by given provider
-        $this->addDeferredServices($provider->provides(), $provider);
+        $this->addDeferredServicesFrom($provider);
 
         return $provider;
     }
@@ -868,13 +905,17 @@ class Application extends IoC implements ApplicationInterface,
     }
 
     /**
-     * Add deferred services
+     * Add deferred services from given service provider
      *
-     * @param string[] $services Class paths to services
      * @param ServiceProvider $provider Service Provider that provides given services
      */
-    protected function addDeferredServices(array $services, ServiceProvider $provider)
+    protected function addDeferredServicesFrom(ServiceProvider $provider)
     {
+        if( ! $provider->isDeferred()){
+            return;
+        }
+
+        $services = $provider->provides();
         foreach ($services as $service){
             $this->deferredServices[$service] = $provider;
         }
