@@ -106,12 +106,12 @@ class RegistrarTest extends ApplicationIntegrationTestCase
 
         // ----------------------------------------------------- //
 
-        $this->assertCount(count($providers), $registeredProviders, 'Incorrect amount of providers registered');
+        $this->assertGreaterThanOrEqual(count($providers), $registeredProviders, 'Incorrect amount of providers registered');
         $this->assertCount(0, $bootedProviders, 'Should NOT have booted any providers');
 
-        foreach ($registeredProviders as $provider){
-            /** @var ProviderState $provider */
-            $this->assertTrue($provider->hasRegistered, sprintf('%s has not been marked as registered', get_class($provider)));
+        // Determine if requested providers have been registered
+        foreach ($providers as $provider){
+            $this->assertTrue( $registrar->isRegistered($provider) , 'A provider was not registered!');
         }
     }
 
@@ -129,11 +129,17 @@ class RegistrarTest extends ApplicationIntegrationTestCase
 
         // ----------------------------------------------------- //
 
-        $this->assertCount(count($providers), $registeredProviders, 'Incorrect amount of providers registered');
-        $this->assertCount(count($providers), $bootedProviders, 'Incorrect amount of providers registered');
+        $this->assertGreaterThanOrEqual(count($providers), $registeredProviders, 'Incorrect amount of providers registered');
+        $this->assertGreaterThanOrEqual(count($providers), $bootedProviders, 'Incorrect amount of providers registered');
 
         foreach ($registeredProviders as $provider){
-            /** @var ProviderState $provider */
+            // Skip providers that do not inherit from "provider state".
+            // The application might have one or more core providers registered
+            // that do not inherit such.
+            if( ! ($provider instanceof ProviderState)){
+                continue;
+            }
+
             $this->assertTrue($provider->hasRegistered, sprintf('%s has not been marked as registered', get_class($provider)));
             $this->assertTrue($provider->hasBooted, sprintf('%s has not been marked as booted', get_class($provider)));
         }
@@ -166,16 +172,14 @@ class RegistrarTest extends ApplicationIntegrationTestCase
     public function doesNotRegisterSameProviderTwice()
     {
         $registrar = $this->makeRegistrar();
-        $providers = [
-            ServiceProviderA::class,
-            ServiceProviderA::class,
-        ];
-        $registrar->registerMultiple($providers);
 
-        $registeredProviders = $registrar->providers();
+        $first = $registrar->register(ServiceProviderA::class);
+        $second = $registrar->register(ServiceProviderA::class);
 
         // ----------------------------------------------------- //
-        $this->assertCount(1, $registeredProviders, 'Should NOT allow multiple registration of same provider');
+
+        $this->assertTrue($first, 'First service provider not registered');
+        $this->assertFalse($second, 'Same service provider registered, but should not be');
     }
 
     /**
@@ -194,11 +198,9 @@ class RegistrarTest extends ApplicationIntegrationTestCase
 
         $result = $registrar->boot($serviceProviderA);
 
-        $bootedProviders = $registrar->booted();
-
         // ----------------------------------------------------- //
+
         $this->assertFalse($result, 'Should NOT have booted already booted service provider');
-        $this->assertCount(1, $bootedProviders, 'Should NOT allow multiple booting of same provider');
     }
 
     /**
