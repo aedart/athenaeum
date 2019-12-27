@@ -36,6 +36,20 @@ class IoC extends Container implements IoCInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function flush()
+    {
+        parent::flush();
+
+        $this->buildStack = [];
+        $this->reboundCallbacks = [];
+        $this->resolvingCallbacks = [];
+        $this->afterResolvingCallbacks = [];
+        $this->globalResolvingCallbacks = [];
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function destroy(): void
