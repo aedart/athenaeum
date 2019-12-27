@@ -117,7 +117,7 @@ class Application extends IoC implements ApplicationInterface,
             ->resolveApplicationPaths($paths)
             ->registerMainBindings()
             ->setFacadeApplication()
-            ->registerConfiguredProviders();
+            ->registerCoreServiceProviders();
     }
 
     /**
@@ -227,11 +227,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function registerConfiguredProviders()
     {
-        $coreProviders = $this->getCoreServiceProviders();
-
-        foreach ($coreProviders as $serviceProvider){
-            $this->register($serviceProvider);
-        }
+        // TODO: Here, the app.providers SHOULD be registered!
     }
 
     /**
@@ -765,6 +761,32 @@ class Application extends IoC implements ApplicationInterface,
         foreach ($callbacks as $callback){
             $callback($this);
         }
+    }
+
+    /**
+     * Register this application's core service providers
+     *
+     * @return self
+     */
+    protected function registerCoreServiceProviders()
+    {
+        return $this->registerMultipleServiceProviders( $this->getCoreServiceProviders() );
+    }
+
+    /**
+     * Register a list of service providers
+     *
+     * @param ServiceProvider[]|string[] $providers
+     *
+     * @return self
+     */
+    protected function registerMultipleServiceProviders(array $providers)
+    {
+        foreach ($providers as $provider){
+            $this->register($provider);
+        }
+
+        return $this;
     }
 
     /**

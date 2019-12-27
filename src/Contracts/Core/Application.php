@@ -81,6 +81,7 @@ interface Application extends IoC,
      * @see bootstrapWith
      * @see boot
      * @see getCoreBootstrappers
+     * @see getCoreServiceProviders
      *
      * @throws Throwable
      */
@@ -95,11 +96,6 @@ interface Application extends IoC,
 
     /**
      * Get this application's core service providers.
-     *
-     * Service Providers are automatically registered via
-     * the "register configured providers" method.
-     *
-     * @see registerConfiguredProviders
      *
      * @return \Illuminate\Support\ServiceProvider[]|string[] Instances or list of class paths
      */
