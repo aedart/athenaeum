@@ -14,6 +14,7 @@ use Aedart\Contracts\Core\Helpers\PathsContainerAware;
 use Aedart\Contracts\Service\Registrar as ServiceProviderRegistrar;
 use Aedart\Contracts\Service\ServiceProviderRegistrarAware;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
+use Aedart\Contracts\Support\Helpers\Events\EventAware;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
 use Aedart\Core\Bootstrappers\RegisterApplicationServiceProviders;
@@ -27,6 +28,7 @@ use Aedart\Filesystem\Providers\NativeFilesystemServiceProvider;
 use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
+use Aedart\Support\Helpers\Events\EventTrait;
 use Closure;
 use Illuminate\Contracts\Foundation\Application as LaravelApplicationInterface;
 use Illuminate\Support\ServiceProvider;
@@ -46,11 +48,13 @@ class Application extends IoC implements ApplicationInterface,
     PathsContainerAware,
     ServiceProviderRegistrarAware,
     ConfigAware,
+    EventAware,
     NamespaceDetectorAware
 {
     use PathsContainerTrait;
     use ServiceProviderRegistrarTrait;
     use ConfigTrait;
+    use EventTrait;
     use NamespaceDetectorTrait;
 
     /**
@@ -80,6 +84,14 @@ class Application extends IoC implements ApplicationInterface,
      * @var callable[]
      */
     protected array $terminationCallbacks = [];
+
+    /**
+     * List of deferred services that are offered
+     * by "deferred service providers"
+     *
+     * @var array Key = service class path, value = service provider
+     */
+    protected array $deferredServices = [];
 
     /**
      * State whether or not this application has been bootstrapped
@@ -230,8 +242,6 @@ class Application extends IoC implements ApplicationInterface,
     {
         $providers = $this->getConfig()->get('app.providers', []);
 
-        // TODO: What if providers are deferred??
-
         $this->registerMultipleServiceProviders($providers);
     }
 
@@ -258,7 +268,14 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function registerDeferredProvider($provider, $service = null)
     {
-        // TODO: Implement registerDeferredProvider() method.
+        // Remove service from list of deferred services
+        if(isset($service, $this->deferredServices[$service])){
+            unset($this->deferredServices[$service]);
+        }
+
+        // Register the provider. Note: unlike Laravel's application, we
+        // do not care about booting here. It is handled by the register method
+        $this->register($provider);
     }
 
     /**
@@ -440,7 +457,11 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function loadDeferredProviders()
     {
-        // TODO: Implement loadDeferredProviders() method.
+        foreach ($this->deferredServices as $service => $provider){
+            $this->registerDeferredProvider(get_class($provider), $service);
+        }
+
+        $this->deferredServices = [];
     }
 
     /**
@@ -541,6 +562,19 @@ class Application extends IoC implements ApplicationInterface,
         return $this;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function registerMultipleServiceProviders(array $providers)
+    {
+        $registrar = $this->getServiceProviderRegistrar();
+
+        foreach ($providers as $provider){
+            $this->performProviderRegistration( $registrar->resolveProvider($provider) );
+        }
+
+        return $this;
+    }
 
     /**
      * @inheritDoc
@@ -605,6 +639,7 @@ class Application extends IoC implements ApplicationInterface,
         $this->beforeBootingCallbacks = [];
         $this->afterBootedCallbacks = [];
         $this->terminationCallbacks = [];
+        $this->deferredServices = [];
         $this->hasBootstrapped = false;
 
         $this->setServiceProviderRegistrar(null);
@@ -672,8 +707,7 @@ class Application extends IoC implements ApplicationInterface,
         // logic functions. We dispatch custom events for each bootstrapper.
         // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L212
 
-        /** @var \Illuminate\Contracts\Events\Dispatcher $dispatcher */
-        $dispatcher = $this['events'];
+        $dispatcher = $this->getEvent();
         $class = get_class($bootstrapper);
 
         // Dispatch "before" event
@@ -780,19 +814,70 @@ class Application extends IoC implements ApplicationInterface,
     }
 
     /**
-     * Register a list of service providers
+     * Performs service provider registration.
      *
-     * @param ServiceProvider[]|string[] $providers
+     * Method will automatically handle deferred service registration, if such is required.
      *
-     * @return self
+     * @param ServiceProvider $provider
+     *
+     * @return ServiceProvider
      */
-    protected function registerMultipleServiceProviders(array $providers)
+    protected function performProviderRegistration(ServiceProvider $provider) : ServiceProvider
     {
-        foreach ($providers as $provider){
-            $this->register($provider);
+        // When a "normal" service provider is given, then we register it
+        // as usual (eager).
+        if( ! $provider->isDeferred()){
+            return $this->register($provider);
         }
 
-        return $this;
+        // Register evt. events that trigger this service provider to be
+        // registered and booted.
+        $this->listenWhenToRegister($provider->when(), $provider);
+
+        // Add deferred services that are offered by given provider
+        $this->addDeferredServices($provider->provides(), $provider);
+
+        return $provider;
+    }
+
+    /**
+     * Listen for the given events. When they are dispatched register and
+     * boot given service provider
+     *
+     * @param string[] $events
+     * @param ServiceProvider $provider
+     */
+    protected function listenWhenToRegister(array $events, ServiceProvider $provider)
+    {
+        if(empty($events)){
+            return;
+        }
+
+        // Listen for the events that must trigger given provider to be
+        // registered and booted.
+        $this->getEvent()->listen($events, function() use ($events, $provider){
+            $this->register($provider);
+
+            // Ensure that we forget this listener, now that the provider
+            // has registered - listener should no longer be required.
+            $dispatcher = $this->getEvent();
+            foreach ($events as $event){
+                $dispatcher->forget($event);
+            }
+        });
+    }
+
+    /**
+     * Add deferred services
+     *
+     * @param string[] $services Class paths to services
+     * @param ServiceProvider $provider Service Provider that provides given services
+     */
+    protected function addDeferredServices(array $services, ServiceProvider $provider)
+    {
+        foreach ($services as $service){
+            $this->deferredServices[$service] = $provider;
+        }
     }
 
     /**

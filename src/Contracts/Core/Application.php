@@ -58,6 +58,21 @@ interface Application extends IoC,
     public function terminating(callable $callback);
 
     /**
+     * Register a list of service providers
+     *
+     * Method will automatically determine if a service provider needs
+     * to be registered normally (eager) or deferred.
+     *
+     * @see register
+     * @see \Illuminate\Contracts\Support\DeferrableProvider
+     *
+     * @param \Illuminate\Support\ServiceProvider[]|string[] $providers
+     *
+     * @return self
+     */
+    public function registerMultipleServiceProviders(array $providers);
+
+    /**
      * Determine if the application has bootstrapped it's
      * core bootstrappers and booted
      *
