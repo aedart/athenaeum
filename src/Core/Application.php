@@ -16,6 +16,7 @@ use Aedart\Contracts\Service\ServiceProviderRegistrarAware;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
+use Aedart\Core\Bootstrappers\RegisterApplicationServiceProviders;
 use Aedart\Core\Bootstrappers\SetDefaultTimezone;
 use Aedart\Core\Helpers\NamespaceDetector;
 use Aedart\Core\Helpers\Paths;
@@ -227,7 +228,11 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function registerConfiguredProviders()
     {
-        // TODO: Here, the app.providers SHOULD be registered!
+        $providers = $this->getConfig()->get('app.providers', []);
+
+        // TODO: What if providers are deferred??
+
+        $this->registerMultipleServiceProviders($providers);
     }
 
     /**
@@ -574,7 +579,8 @@ class Application extends IoC implements ApplicationInterface,
         return [
             DetectAndLoadEnvironment::class,
             LoadConfiguration::class,
-            SetDefaultTimezone::class
+            SetDefaultTimezone::class,
+            RegisterApplicationServiceProviders::class
         ];
     }
 
