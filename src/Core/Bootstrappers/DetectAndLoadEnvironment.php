@@ -7,6 +7,7 @@ use Aedart\Contracts\Core\Helpers\CanBeBootstrapped;
 use Aedart\Core\Exceptions\UnableToDetectOrLoadEnv;
 use Dotenv\Dotenv;
 use Illuminate\Support\Env;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\ArgvInput;
 use Throwable;
 
@@ -38,7 +39,13 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
         $this->app = $application;
 
         try {
+            // Determine what environment file to use and load it.
             $this->loadEnvironmentFile( $this->determineEnvFileToUse() );
+
+            // Set application's environment name. Note: we default to "production" in
+            // case that a file was loaded, yet APP_ENV wasn't specified.
+            $this->app->detectEnvironment(fn() => Env::get('APP_ENV', 'production'));
+
         } catch (Throwable $e) {
             throw new UnableToDetectOrLoadEnv('Unable to detect or load environment: ' . $e->getMessage(), 1, $e);
         }
@@ -55,6 +62,10 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
      */
     protected function loadEnvironmentFile(string $file)
     {
+        if( ! Str::startsWith($file, '.')){
+            $file = '.' . $file;
+        }
+
         // Set the environment file to be used by application
         $this->app->loadEnvironmentFrom($file);
 
@@ -84,14 +95,14 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
         }
 
         // Attempt to read environment file from console
-        $file = $this->getEnvFromConsole();
-        if(isset($file)){
-            return $this->loadEnvironmentFile($file);
+        $env = $this->getEnvFromConsole();
+        if(isset($env)){
+            return $env;
         }
 
-        // Otherwise, attempt to read file from environment directly.
-        // Default to whatever the application has a default environment
-        // file.
+        // Otherwise, default attempting reading APP_ENV, which might be
+        // set via the web server. Should this too fail, then default
+        // to whatever the application's default environment file is.
         return Env::get('APP_ENV', $this->app->environmentFile());
     }
 
