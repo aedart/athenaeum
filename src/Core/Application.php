@@ -608,6 +608,14 @@ class Application extends IoC implements ApplicationInterface,
     /**
      * @inheritDoc
      */
+    public function getDeferredServices(): array
+    {
+        return $this->deferredServices;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function isDeferredService(string $service): bool
     {
         return isset($this->deferredServices[$service]);
