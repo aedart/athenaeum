@@ -962,12 +962,9 @@ class Application extends IoC implements ApplicationInterface,
             $output = (new ConsoleOutput())->getErrorOutput();
 
             $output->writeln("<error>{$exception->getMessage()}</error>");
-
-            die(1);
         }
 
-        // Otherwise, we simple allow the exception to bubble upwards,
-        // allowing php to act upon it...
+        // Allow the exception to bubble upwards.
         throw $exception;
     }
 }
