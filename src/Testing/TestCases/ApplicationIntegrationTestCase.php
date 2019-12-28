@@ -1,14 +1,8 @@
 <?php
 
-
 namespace Aedart\Testing\TestCases;
 
-use Aedart\Contracts\Core\Application;
-use Aedart\Contracts\Core\Helpers\NamespaceDetectorAware;
-use Aedart\Contracts\Core\Helpers\PathsContainerAware;
-use Aedart\Contracts\Service\ServiceProviderRegistrarAware;
-use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
-use Aedart\Contracts\Support\Helpers\Events\EventAware;
+use Aedart\Contracts\Core\Helpers\PathsContainer;
 use Aedart\Core\Application as CoreApplication;
 use Codeception\Configuration;
 
@@ -27,9 +21,9 @@ abstract class ApplicationIntegrationTestCase extends IntegrationTestCase
     /**
      * Application instance
      *
-     * @var Application|PathsContainerAware|ServiceProviderRegistrarAware|ConfigAware|EventAware|NamespaceDetectorAware|null
+     * @var CoreApplication|null
      */
-    protected $app = null;
+    protected ?CoreApplication $app = null;
 
     /**
      * State of application's exception handling.
@@ -74,17 +68,21 @@ abstract class ApplicationIntegrationTestCase extends IntegrationTestCase
     /**
      * Creates a new application instance
      *
-     * @return Application
+     * @see applicationPaths
+     *
+     * @param PathsContainer|array|null $paths [optional] Defaults to "application paths" if none given
+     *
+     * @return CoreApplication
      *
      * @throws \Throwable
      */
-    protected function createApplication() : Application
+    protected function createApplication($paths = null)
     {
+        // Resolve paths
+        $paths = $paths ?? $this->applicationPaths();
+
         // Create application
-        $app = new CoreApplication(
-            $this->applicationPaths(),
-            'x.x.x-testing'
-        );
+        $app = new CoreApplication($paths, 'x.x.x-testing');
 
         // Detect "testing" environment
         $app->detectEnvironment(fn() => $this->detectEnvironment());
