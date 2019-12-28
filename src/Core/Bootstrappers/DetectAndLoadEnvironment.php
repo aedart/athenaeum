@@ -76,6 +76,13 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
      */
     protected function determineEnvFileToUse() : string
     {
+        // If an environment has already been specified, then we
+        // must respect it. This can be done via the application's
+        // "detectEnvironment" method, before bootstrapping!
+        if(isset($this->app['env'])){
+            return '.' . $this->app['env'];
+        }
+
         // Attempt to read environment file from console
         $file = $this->getEnvFromConsole();
         if(isset($file)){
