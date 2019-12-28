@@ -115,6 +115,13 @@ class Application extends IoC implements ApplicationInterface,
     protected ?string $namespace = null;
 
     /**
+     * State of exception handling
+     *
+     * @var bool
+     */
+    protected bool $forceThrowExceptions = false;
+
+    /**
      * Application constructor.
      *
      * @param PathsContainer|array|null $paths [optional] Application's core paths
@@ -677,6 +684,22 @@ class Application extends IoC implements ApplicationInterface,
     }
 
     /**
+     * @inheritDoc
+     */
+    public function forceThrowExceptions(bool $force)
+    {
+        $this->forceThrowExceptions = $force;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function mustThrowExceptions(): bool
+    {
+        return $this->forceThrowExceptions;
+    }
+
+    /**
      * @inheritdoc
      */
     public function destroy(): void
@@ -938,6 +961,11 @@ class Application extends IoC implements ApplicationInterface,
      */
     protected function handleException(Throwable $exception)
     {
+        // Abort if application must allow the exceptions to bubble upwards
+        if($this->mustThrowExceptions()){
+            throw $exception;
+        }
+
         // TODO: Pass exception to "composite" exception handler
         // TODO: if possible...
         // TODO: ALSO - allow "force throw" exceptions... somehow!

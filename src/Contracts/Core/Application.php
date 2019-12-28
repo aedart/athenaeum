@@ -131,4 +131,28 @@ interface Application extends IoC,
      * @return \Illuminate\Support\ServiceProvider[]|string[] Instances or list of class paths
      */
     public function getCoreServiceProviders() : array ;
+
+    /**
+     * Set the state of exception handling
+     *
+     * If set to true, exception handlers are bypassed and evt.
+     * exceptions are allowed to bubble upwards when caught.
+     *
+     * @param bool $force
+     *
+     * @return self
+     */
+    public function forceThrowExceptions(bool $force);
+
+    /**
+     * Get the state of exception handling
+     *
+     * If set to true, exception handlers are bypassed and evt.
+     * exceptions are allowed to bubble upwards when caught.
+     *
+     * @see forceThrowExceptions
+     *
+     * @return bool
+     */
+    public function mustThrowExceptions() : bool ;
 }
