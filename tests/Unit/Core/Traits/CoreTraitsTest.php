@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Unit\Core\Traits;
 
+use Aedart\Core\Traits\ApplicationTrait;
 use Aedart\Core\Traits\NamespaceDetectorTrait;
 use Aedart\Core\Traits\PathsContainerTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
@@ -31,6 +32,7 @@ class CoreTraitsTest extends TraitTestCase
         return [
             'PathsContainerTrait'           => [ PathsContainerTrait::class ],
             'NamespaceDetectorTrait'        => [ NamespaceDetectorTrait::class ],
+            'ApplicationTrait'              => [ ApplicationTrait::class ],
         ];
     }
 
