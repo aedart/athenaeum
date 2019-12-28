@@ -14,12 +14,12 @@ use Illuminate\Support\Env;
  * A1_RunTest
  *
  * @group application
- * @group application-a1
+ * @group application-b0
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
-class A1_EnvironmentTest extends ApplicationIntegrationTestCase
+class B0_EnvironmentTest extends ApplicationIntegrationTestCase
 {
     /**
      * @inheritdoc
