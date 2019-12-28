@@ -689,6 +689,8 @@ class Application extends IoC implements ApplicationInterface,
     public function forceThrowExceptions(bool $force)
     {
         $this->forceThrowExceptions = $force;
+
+        return $this;
     }
 
     /**
