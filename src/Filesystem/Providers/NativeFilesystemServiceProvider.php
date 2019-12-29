@@ -16,14 +16,11 @@ use Illuminate\Support\ServiceProvider;
 class NativeFilesystemServiceProvider extends ServiceProvider
 {
     /**
-     * @inheritdoc
+     * Singleton bindings
+     *
+     * @var array
      */
-    public function register()
-    {
-        $key = 'files';
-
-        $this->app->singleton($key, Filesystem::class);
-
-        $this->app->alias($key, Filesystem::class);
-    }
+    public array $singletons = [
+        'files'     => Filesystem::class
+    ];
 }
