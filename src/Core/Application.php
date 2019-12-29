@@ -312,13 +312,13 @@ class Application extends IoC implements ApplicationInterface,
         }
 
         // Invoke "before" callbacks
-        $this->invokeApplicationCallbacks($this->beforeBootingCallbacks);
+        $this->invokeCallbacks($this->beforeBootingCallbacks);
 
         // Boot all registered service providers
         $this->getServiceProviderRegistrar()->bootAll();
 
         // Invoke "after" callbacks
-        $this->invokeApplicationCallbacks($this->afterBootedCallbacks);
+        $this->invokeCallbacks($this->afterBootedCallbacks);
     }
 
     /**
@@ -338,7 +338,7 @@ class Application extends IoC implements ApplicationInterface,
 
         // Invoke callbacks, if application has already booted...
         if($this->isBooted()){
-            $this->invokeApplicationCallbacks($this->afterBootedCallbacks);
+            $this->invokeCallbacks($this->afterBootedCallbacks);
         }
     }
 
@@ -526,7 +526,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function terminate()
     {
-        $this->invokeApplicationCallbacks($this->terminationCallbacks);
+        $this->invokeCallbacks($this->terminationCallbacks);
     }
 
     /*****************************************************************
@@ -669,7 +669,7 @@ class Application extends IoC implements ApplicationInterface,
 
             // Finally, resolve given callback and invoke it
             $callback = $callback ?? fn() => null;
-            $this->invokeApplicationCallbacks([ $callback ]);
+            $this->invokeCallbacks([ $callback ]);
         } catch (Throwable $e) {
             $this->handleException($e);
         }
@@ -884,7 +884,7 @@ class Application extends IoC implements ApplicationInterface,
      *
      * @param callable[] $callbacks
      */
-    protected function invokeApplicationCallbacks(array $callbacks)
+    protected function invokeCallbacks(array $callbacks)
     {
         // This method corresponds directly to Laravel's fireAppCallbacks
         // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L865
