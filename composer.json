@@ -74,7 +74,7 @@
         "athenaeum"
     ],
     "scripts": {
-        "post-root-package-install": [
+        "post-install-cmd": [
             "@php -r \"file_exists('.testing') || copy('.testing.example', '.testing');\""
         ]
     },
