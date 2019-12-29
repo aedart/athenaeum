@@ -139,4 +139,22 @@ class B0_EnvironmentTest extends ApplicationIntegrationTestCase
 
         $this->assertSame('my-cgi-env', $app->environment());
     }
+
+    /*****************************************************************
+     * Test of utility methods
+     ****************************************************************/
+
+    /**
+     * @test
+     */
+    public function canDetermineIfRunningInTestingEnv()
+    {
+        $app = $this->app;
+
+        $this->bootstrap();
+
+        $this->assertFalse($app->isLocal(), 'should not be in local environment');
+        $this->assertFalse($app->isProduction(), 'should not be in production environment');
+        $this->assertTrue($app->runningUnitTests(), 'should be running in testing environment');
+    }
 }
