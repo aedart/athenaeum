@@ -9,7 +9,8 @@ use Codeception\Configuration;
 /**
  * Application Integration Test Case
  *
- * Base test-case for integration tests, using an application
+ * Base test-case for integration tests, using the custom adaptation of
+ * Laravel's application
  *
  * @see \Aedart\Contracts\Core\Application
  *
