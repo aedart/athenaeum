@@ -145,6 +145,7 @@ return [
         \Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderB::class,
         \Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderC::class,
         \Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderD::class,
+        \Aedart\Tests\Helpers\Dummies\Service\Providers\DeferredServiceProvider::class
     ],
 
     /*
