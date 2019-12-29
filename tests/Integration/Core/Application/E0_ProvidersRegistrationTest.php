@@ -5,7 +5,6 @@ namespace Aedart\Tests\Integration\Core\Application;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
 use Aedart\Core\Bootstrappers\RegisterApplicationServiceProviders;
-use Aedart\Core\Bootstrappers\SetDefaultTimezone;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\Nested\ServiceProviderC1;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\Nested\ServiceProviderC2;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\Nested\ServiceProviderC3;
