@@ -101,6 +101,13 @@ class Application extends IoC implements ApplicationInterface,
     protected bool $hasBootstrapped = false;
 
     /**
+     * State whether or not the application's run method has triggered
+     *
+     * @var bool
+     */
+    protected bool $hasTriggeredRun = false;
+
+    /**
      * Filename of the environment file to be used
      *
      * @var string
@@ -633,7 +640,9 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function isRunning(): bool
     {
-        return $this->hasBeenBootstrapped() && $this->isBooted();
+        return $this->hasTriggeredRun
+            && $this->hasBeenBootstrapped()
+            && $this->isBooted();
     }
 
     /**
@@ -646,10 +655,18 @@ class Application extends IoC implements ApplicationInterface,
         }
 
         try {
+            // Bootstrap - Core bootstrappers are ignored, if
+            // already bootstrapped with a different set of bootstrappers.
             $this->bootstrapWith( $this->getCoreBootstrappers() );
 
+            // Boot application, if not already booted.
             $this->boot();
 
+            // Change "has triggered run" state, so that whatever logic
+            // might depend on "isRunning" can be used.
+            $this->hasTriggeredRun = true;
+
+            // Finally, resolve given callback and invoke it
             $callback = $callback ?? fn() => null;
             $this->invokeApplicationCallbacks([ $callback ]);
         } catch (Throwable $e) {
@@ -711,6 +728,7 @@ class Application extends IoC implements ApplicationInterface,
         $this->terminationCallbacks = [];
         $this->deferredServices = [];
         $this->hasBootstrapped = false;
+        $this->hasTriggeredRun = false;
 
         $this->setServiceProviderRegistrar(null);
         $this->setPathsContainer(null);
