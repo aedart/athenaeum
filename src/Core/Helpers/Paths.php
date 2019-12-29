@@ -35,7 +35,7 @@ class Paths extends Dto implements PathsContainer
      */
     public function basePath(string $path = ''): string
     {
-        return $this->pathIn($this->getBasePath(), $path);
+        return $this->getBasePath() . DIRECTORY_SEPARATOR . $path;
     }
 
     /**
@@ -43,7 +43,7 @@ class Paths extends Dto implements PathsContainer
      */
     public function bootstrapPath(string $path = ''): string
     {
-        return $this->pathIn($this->getBootstrapPath(), $path);
+        return $this->getBootstrapPath() . DIRECTORY_SEPARATOR . $path;
     }
 
     /**
@@ -51,7 +51,7 @@ class Paths extends Dto implements PathsContainer
      */
     public function configPath(string $path = ''): string
     {
-        return $this->pathIn($this->getConfigPath(), $path);
+        return $this->getConfigPath() . DIRECTORY_SEPARATOR . $path;
     }
 
     /**
@@ -59,7 +59,7 @@ class Paths extends Dto implements PathsContainer
      */
     public function databasePath(string $path = ''): string
     {
-        return $this->pathIn($this->getDatabasePath(), $path);
+        return $this->getDatabasePath() . DIRECTORY_SEPARATOR . $path;
     }
 
     /**
@@ -67,7 +67,7 @@ class Paths extends Dto implements PathsContainer
      */
     public function environmentPath(string $path = ''): string
     {
-        return $this->pathIn($this->getEnvironmentPath(), $path);
+        return $this->getEnvironmentPath() . DIRECTORY_SEPARATOR . $path;
     }
 
     /**
@@ -75,7 +75,7 @@ class Paths extends Dto implements PathsContainer
      */
     public function resourcePath(string $path = ''): string
     {
-        return $this->pathIn($this->getResourcePath(), $path);
+        return $this->getResourcePath() . DIRECTORY_SEPARATOR . $path;
     }
 
     /**
@@ -83,7 +83,7 @@ class Paths extends Dto implements PathsContainer
      */
     public function storagePath(string $path = ''): string
     {
-        return $this->pathIn($this->getStoragePath(), $path);
+        return $this->getStoragePath() . DIRECTORY_SEPARATOR . $path;
     }
 
     /*****************************************************************
@@ -144,22 +144,5 @@ class Paths extends Dto implements PathsContainer
     public function getDefaultStoragePath(): ?string
     {
         return $this->getBasePath() . DIRECTORY_SEPARATOR . 'storage';
-    }
-
-    /*****************************************************************
-     * Internals
-     ****************************************************************/
-
-    /**
-     * Returns given path within the desired directory
-     *
-     * @param string $directory
-     * @param string $path [optional]
-     *
-     * @return string
-     */
-    protected function pathIn(string $directory, string $path = '') : string
-    {
-        return $directory . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 }
