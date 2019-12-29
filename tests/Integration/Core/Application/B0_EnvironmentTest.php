@@ -48,9 +48,9 @@ class B0_EnvironmentTest extends ApplicationIntegrationTestCase
     /**
      * @inheritdoc
      */
-    protected function createApplication(): Application
+    protected function createApplication($paths = null): Application
     {
-        $app = parent::createApplication();
+        $app = parent::createApplication($paths);
 
         // Set the environment path
         $app->getPathsContainer()->setEnvironmentPath( Configuration::dataDir() . 'environment' );
