@@ -10,3 +10,10 @@ tests/_support/_generated/*
 yarn.lock
 /node_modules
 .build/
+
+# Ignore various environment files in root directory
+.env
+.testing
+.production
+.locale
+.development
