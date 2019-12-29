@@ -17,7 +17,7 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Testing\TestCases
  */
-abstract class ApplicationIntegrationTestCase extends IntegrationTestCase
+abstract class ApplicationTestCase extends IntegrationTestCase
 {
     /**
      * Application instance

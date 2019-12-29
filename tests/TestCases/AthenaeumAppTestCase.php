@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\TestCases;
 
-use Aedart\Testing\TestCases\ApplicationIntegrationTestCase;
+use Aedart\Testing\TestCases\ApplicationTestCase;
 use Codeception\Configuration;
 
 /**
@@ -11,7 +11,7 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases
  */
-abstract class AthenaeumAppTestCase extends ApplicationIntegrationTestCase
+abstract class AthenaeumAppTestCase extends ApplicationTestCase
 {
     /*****************************************************************
      * Helpers
