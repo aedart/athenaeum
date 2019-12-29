@@ -545,7 +545,7 @@ class Application extends IoC implements ApplicationInterface,
         $abstract = $this->getAlias($abstract);
 
         if ($this->isDeferredService($abstract) && ! isset($this->instances[$abstract])) {
-            $this->registerDeferredProvider($this->deferredServices[$abstract]);
+            $this->registerDeferredProvider($this->deferredServices[$abstract], $abstract);
         }
 
         return parent::make($abstract, $parameters);
