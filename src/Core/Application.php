@@ -614,7 +614,7 @@ class Application extends IoC implements ApplicationInterface,
         $registrar = $this->getServiceProviderRegistrar();
 
         foreach ($providers as $provider){
-            $this->performProviderRegistration( $registrar->resolveProvider($provider) );
+            $this->registerNormalOrDeferred($registrar->resolveProvider($provider) );
         }
 
         return $this;
@@ -904,15 +904,13 @@ class Application extends IoC implements ApplicationInterface,
     }
 
     /**
-     * Performs service provider registration.
-     *
-     * Method will automatically handle deferred service registration, if such is required.
+     * Registers given service provider either normally or deferred, if required
      *
      * @param ServiceProvider $provider
      *
      * @return ServiceProvider
      */
-    protected function performProviderRegistration(ServiceProvider $provider) : ServiceProvider
+    protected function registerNormalOrDeferred(ServiceProvider $provider) : ServiceProvider
     {
         // When a "normal" service provider is given, then we register it
         // as usual (eager).
