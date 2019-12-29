@@ -38,7 +38,6 @@ class E0_ProvidersRegistrationTest extends AthenaeumAppTestCase
         $this->app->bootstrapWith([
             DetectAndLoadEnvironment::class,
             LoadConfiguration::class,
-            SetDefaultTimezone::class,
             RegisterApplicationServiceProviders::class
         ]);
     }
