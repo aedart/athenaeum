@@ -4,7 +4,7 @@ namespace Aedart\Tests\Integration\Core\Application;
 
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
-use Aedart\Testing\TestCases\ApplicationIntegrationTestCase;
+use Aedart\Tests\TestCases\AthenaeumAppTestCase;
 use Codeception\Configuration;
 
 /**
@@ -16,21 +16,11 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
-class C0_ConfigurationLoadingTest extends ApplicationIntegrationTestCase
+class C0_ConfigurationLoadingTest extends AthenaeumAppTestCase
 {
     /*****************************************************************
      * Helpers
      ****************************************************************/
-
-    /**
-     * @inheritdoc
-     */
-    protected function applicationPaths(): array
-    {
-        return array_merge(parent::applicationPaths(), [
-            'configPath'    => Configuration::dataDir() . 'configs' . DIRECTORY_SEPARATOR . 'application'
-        ]);
-    }
 
     /**
      * Bootstrap the application

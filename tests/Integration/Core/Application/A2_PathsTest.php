@@ -3,7 +3,7 @@
 namespace Aedart\Tests\Integration\Core\Application;
 
 use Aedart\Core\Helpers\Paths;
-use Aedart\Testing\TestCases\ApplicationIntegrationTestCase;
+use Aedart\Tests\TestCases\AthenaeumAppTestCase;
 use LogicException;
 
 /**
@@ -15,7 +15,7 @@ use LogicException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
-class A2_PathsTest extends ApplicationIntegrationTestCase
+class A2_PathsTest extends AthenaeumAppTestCase
 {
     /**
      * @test

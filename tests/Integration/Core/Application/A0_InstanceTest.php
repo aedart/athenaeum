@@ -1,10 +1,9 @@
 <?php
 
-
 namespace Aedart\Tests\Integration\Core\Application;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
-use Aedart\Testing\TestCases\ApplicationIntegrationTestCase;
+use Aedart\Tests\TestCases\AthenaeumAppTestCase;
 
 /**
  * A0_InstanceTest
@@ -15,7 +14,7 @@ use Aedart\Testing\TestCases\ApplicationIntegrationTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
-class A0_InstanceTest extends ApplicationIntegrationTestCase
+class A0_InstanceTest extends AthenaeumAppTestCase
 {
     /**
      * @test
