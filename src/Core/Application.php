@@ -17,6 +17,7 @@ use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\Contracts\Support\Helpers\Events\EventAware;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
+use Aedart\Core\Bootstrappers\RegisterApplicationAliases;
 use Aedart\Core\Bootstrappers\RegisterApplicationServiceProviders;
 use Aedart\Core\Bootstrappers\SetDefaultTimezone;
 use Aedart\Core\Helpers\NamespaceDetector;
@@ -683,7 +684,8 @@ class Application extends IoC implements ApplicationInterface,
             DetectAndLoadEnvironment::class,
             LoadConfiguration::class,
             SetDefaultTimezone::class,
-            RegisterApplicationServiceProviders::class
+            RegisterApplicationServiceProviders::class,
+            RegisterApplicationAliases::class
         ];
     }
 
