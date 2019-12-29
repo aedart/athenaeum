@@ -11,12 +11,12 @@ use Aedart\Tests\TestCases\AthenaeumAppTestCase;
  * E1_AliasRegistrationTest
  *
  * @group application
- * @group application-e1
+ * @group application-e2
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
-class E1_AliasRegistrationTest extends AthenaeumAppTestCase
+class E2_AliasRegistrationTest extends AthenaeumAppTestCase
 {
     /*****************************************************************
      * Helpers
