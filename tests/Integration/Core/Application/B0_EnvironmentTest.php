@@ -155,5 +155,7 @@ class B0_EnvironmentTest extends AthenaeumAppTestCase
         $this->assertFalse($app->isLocal(), 'should not be in local environment');
         $this->assertFalse($app->isProduction(), 'should not be in production environment');
         $this->assertTrue($app->runningUnitTests(), 'should be running in testing environment');
+
+        $this->assertTrue($app->environment('testing'), 'environment comparison failed');
     }
 }
