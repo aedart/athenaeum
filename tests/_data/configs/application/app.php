@@ -141,16 +141,10 @@ return [
     */
 
     'providers' => [
-
-        /*
-         * Application, Package or Laravel Service Providers...
-         */
-        // App\Providers\AppServiceProvider::class,
-        // App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        // App\Providers\EventServiceProvider::class,
-        // App\Providers\RouteServiceProvider::class,
-
+        \Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderA::class,
+        \Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderB::class,
+        \Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderC::class,
+        \Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderD::class,
     ],
 
     /*
