@@ -183,6 +183,7 @@ Corresponding aware-of interfaces can be found inside the `Aedart\Contracts\Supp
 | Trait        | Defaults to binding  |
 | ------------ | -------------------- |
 | <small>`Aedart\Support\Helpers\Events\EventTrait`</small> | <small>`Illuminate\Contracts\Events\Dispatcher`</small> |
+| <small>`Aedart\Support\Helpers\Events\DispatcherTrait`</small> | <small>`Illuminate\Contracts\Events\Dispatcher`</small> |
 
 ### Filesystem
 
