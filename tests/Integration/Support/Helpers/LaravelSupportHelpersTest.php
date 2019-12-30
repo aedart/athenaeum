@@ -22,6 +22,7 @@ use Aedart\Support\Helpers\Database\ConnectionResolverTrait;
 use Aedart\Support\Helpers\Database\DbTrait;
 use Aedart\Support\Helpers\Database\SchemaTrait;
 use Aedart\Support\Helpers\Encryption\CryptTrait;
+use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Aedart\Support\Helpers\Events\EventTrait;
 use Aedart\Support\Helpers\Filesystem\CloudStorageTrait;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
@@ -142,6 +143,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Events
             'EventTrait'                        => [ EventTrait::class ],
+            'DispatcherTrait'                   => [ DispatcherTrait::class ],
 
             // Filesystem
             'CloudStorageTrait'                 => [ CloudStorageTrait::class ],
