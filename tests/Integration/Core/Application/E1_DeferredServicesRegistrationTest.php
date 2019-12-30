@@ -76,7 +76,7 @@ class E1_DeferredServicesRegistrationTest extends AthenaeumAppTestCase
     {
         $this->bootstrap();
 
-        $dispatcher = $this->app->getEvent();
+        $dispatcher = $this->app->getDispatcher();
 
         // Check if event listener has been registered
         $this->assertTrue($dispatcher->hasListeners(TestEvent::class), 'Event should had been registered');

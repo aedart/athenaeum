@@ -14,7 +14,7 @@ use Aedart\Contracts\Core\Helpers\PathsContainerAware;
 use Aedart\Contracts\Service\Registrar as ServiceProviderRegistrar;
 use Aedart\Contracts\Service\ServiceProviderRegistrarAware;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
-use Aedart\Contracts\Support\Helpers\Events\EventAware;
+use Aedart\Contracts\Support\Helpers\Events\DispatcherAware;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
 use Aedart\Core\Bootstrappers\RegisterApplicationAliases;
@@ -29,7 +29,7 @@ use Aedart\Filesystem\Providers\NativeFilesystemServiceProvider;
 use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
-use Aedart\Support\Helpers\Events\EventTrait;
+use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Closure;
 use Illuminate\Contracts\Foundation\Application as LaravelApplicationInterface;
 use Illuminate\Support\ServiceProvider;
@@ -49,13 +49,13 @@ class Application extends IoC implements ApplicationInterface,
     PathsContainerAware,
     ServiceProviderRegistrarAware,
     ConfigAware,
-    EventAware,
+    DispatcherAware,
     NamespaceDetectorAware
 {
     use PathsContainerTrait;
     use ServiceProviderRegistrarTrait;
     use ConfigTrait;
-    use EventTrait;
+    use DispatcherTrait;
     use NamespaceDetectorTrait;
 
     /**
@@ -797,7 +797,7 @@ class Application extends IoC implements ApplicationInterface,
         // logic functions. We dispatch custom events for each bootstrapper.
         // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L212
 
-        $dispatcher = $this->getEvent();
+        $dispatcher = $this->getDispatcher();
         $class = get_class($bootstrapper);
 
         // Dispatch "before" event
@@ -943,12 +943,12 @@ class Application extends IoC implements ApplicationInterface,
 
         // Listen for the events that must trigger given provider to be
         // registered and booted.
-        $this->getEvent()->listen($events, function() use ($events, $provider){
+        $this->getDispatcher()->listen($events, function() use ($events, $provider){
             $this->register($provider);
 
             // Ensure that we forget this listener, now that the provider
             // has registered - listener should no longer be required.
-            $dispatcher = $this->getEvent();
+            $dispatcher = $this->getDispatcher();
             foreach ($events as $event){
                 $dispatcher->forget($event);
             }
