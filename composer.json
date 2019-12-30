@@ -28,7 +28,8 @@
             "Aedart\\": "src/"
         },
         "files": [
-            "helpers/dto-properties.php"
+            "helpers/dto-properties.php",
+            "helpers/paths.php"
         ]
     },
     "autoload-dev": {
