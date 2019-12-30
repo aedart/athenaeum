@@ -54,11 +54,13 @@ class EventServiceProvider extends LaravelEventServiceProvider
      */
     protected function registerEventListener()
     {
-        $listeners = $this->getConfig()->get('events.listeners', []);
+        $list = $this->getConfig()->get('events.listeners', []);
         $dispatcher = $this->getDispatcher();
 
-        foreach ($listeners as $event => $listener){
-            $dispatcher->listen($event, $listener);
+        foreach ($list as $event => $listeners){
+            foreach ($listeners as $listener){
+                $dispatcher->listen($event, $listener);
+            }
         }
 
         return $this;
