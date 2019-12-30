@@ -8,6 +8,7 @@
 * added custom application (incomplete)
 * added application integration test-case
 * docs about custom application, etc.
+* docs about custom event service provider
 
 ### [v4.0.0](__TODO__)
 
@@ -36,7 +37,9 @@ Existing abstractions are still available, yet will be removed entirely in `v5.0
 
 #### Added
 
+* `Application`, custom adaptation of Laravel's Application.
 * `IoCFacade`, able to resolve bindings or return a default value, if binding does not exist.
+* `EventServiceProvider`, extended version of Laravel's event service provider.
 * `FakerAware` component that can be used for testing purposes.
 * `FakerPartial`, offers basic setup for [Faker](https://github.com/fzaninotto/Faker).
 * `callOrReturn()` utility method in `MethodHelper`.
@@ -49,6 +52,7 @@ This resulting in `$instance` still containing reference to the application, ins
 * `destroy()` does not flush bindings, in `IoC`. Instance is destroyed, yet formal Service Container `flush()` was not respected.
 * Default values not triggered when invoking `toArray()`, in `Dto` and `ArrayDto`, when using aware-of traits to create a Dto class.
 * Missing Psr `ContainerInterface` alias binging for the custom `IoC`;
+* `$instance` not set if `IoC` was created via constructor, instead of `getInstance()`.
 
 
 
