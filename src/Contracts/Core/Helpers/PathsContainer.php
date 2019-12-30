@@ -62,7 +62,7 @@ interface PathsContainer extends BasePathAware,
     public function configPath(string $path = '') : string ;
 
     /**
-     * get a path with the "database" directory
+     * Get a path with the "database" directory
      *
      * @param string $path [optional]
      *
