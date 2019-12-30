@@ -75,6 +75,9 @@
     ],
     "scripts": {
         "post-install-cmd": [
+            "@test-env"
+        ],
+        "test-env": [
             "@php -r \"file_exists('.testing') || copy('.testing.example', '.testing');\""
         ]
     },

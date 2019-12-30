@@ -17,6 +17,7 @@ install:
   - composer install --no-interaction --prefer-dist --no-suggest
 
 before_script:
+  - composer run test-env
 
 script:
   - vendor/bin/codecept build
