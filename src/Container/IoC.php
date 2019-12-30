@@ -74,11 +74,15 @@ class IoC extends Container implements IoCInterface
     {
         // Self register as "app" and set Facade application
         $key = 'app';
-
         $this->instance($key, $this);
+
+        // Register aliases
         $this->alias($key, ContainerInterface::class);
         $this->alias($key, IoCInterface::class);
         $this->alias($key, PsrContainerInterface::class);
+
+        // Finally, set the singleton instance to this
+        static::setInstance($this);
 
         return $this;
     }
