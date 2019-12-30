@@ -1,0 +1,96 @@
+<?php
+
+namespace Aedart\Tests\Integration\Events\Provider;
+
+use Aedart\Testing\Helpers\MessageBag;
+use Aedart\Tests\Helpers\Dummies\Events\FooEvent;
+use Aedart\Tests\Helpers\Dummies\Events\Listeners\DoesNothing;
+use Aedart\Tests\Helpers\Dummies\Events\Subscribers\FooEventSubscriber;
+use Aedart\Tests\Helpers\Dummies\Events\TestEvent;
+use Aedart\Tests\TestCases\AthenaeumAppTestCase;
+use Codeception\Configuration;
+
+/**
+ * EventServiceProviderTest
+ *
+ * @group application
+ * @group events
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Tests\Integration\Events\Provider
+ */
+class EventServiceProviderTest extends AthenaeumAppTestCase
+{
+    /**
+     * @inheritdoc
+     */
+    protected function _after()
+    {
+        MessageBag::clearAll();
+
+        parent::_after();
+    }
+
+    /*****************************************************************
+     * Helpers
+     ****************************************************************/
+
+    /**
+     * @inheritdoc
+     */
+    protected function applicationPaths(): array
+    {
+        return array_merge(parent::applicationPaths(), [
+            'configPath'        => Configuration::dataDir() . 'configs' . DIRECTORY_SEPARATOR . 'events'
+        ]);
+    }
+
+    /*****************************************************************
+     * Actual Tests
+     ****************************************************************/
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function hasLoadedEventsConfiguration()
+    {
+        $this->app->run();
+
+        $hasLoaded = $this->app->getConfig()->has('events');
+        $this->assertTrue($hasLoaded);
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function hasRegisteredListeners()
+    {
+        $this->app->run();
+
+        // We test this directly by dispatching the test event
+        $this->app->getDispatcher()->dispatch(new TestEvent());
+
+        $messages = MessageBag::all();
+        $this->assertStringContainsString(DoesNothing::class . ' invoked', array_shift($messages));
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function hasRegisteredSubscribers()
+    {
+        $this->app->run();
+
+        // The same as previous test, we verify by dispatching an event
+        $this->app->getDispatcher()->dispatch(new FooEvent());
+
+        $messages = MessageBag::all();
+        $this->assertStringContainsString(FooEventSubscriber::class . ' invoked', array_shift($messages));
+    }
+}
