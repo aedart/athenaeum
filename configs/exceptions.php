@@ -85,4 +85,18 @@ return [
         //E_NOTICE, // ...I double-dare you!
         //E_ALL, // ...I submit to your superior PHP skills!
     ],
+
+    /*
+     |--------------------------------------------------------------------------
+     | Exception Handler
+     |--------------------------------------------------------------------------
+     |
+     | Class path to application's exception handler. Must be instance of
+     | "ExceptionHandler".
+     |
+     | @see \Aedart\Contracts\Exceptions\ExceptionHandler
+     | @see \Aedart\Exceptions\Handlers\BaseExceptionHandler
+    */
+
+    'handler' => \Aedart\Exceptions\Handlers\DefaultExceptionHandler::class
 ];
