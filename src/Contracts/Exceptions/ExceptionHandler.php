@@ -68,6 +68,9 @@ interface ExceptionHandler
      * @param Throwable $exception
      *
      * @return void
+     *
+     * @throws Throwable If unable to report the exception then exception is
+     *                   re-thrown.
      */
     public function report(Throwable $exception) : void ;
 }
