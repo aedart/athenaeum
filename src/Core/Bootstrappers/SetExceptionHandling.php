@@ -4,6 +4,7 @@ namespace Aedart\Core\Bootstrappers;
 
 use Aedart\Contracts\Core\Application;
 use Aedart\Contracts\Core\Helpers\CanBeBootstrapped;
+use Aedart\Exceptions\Helpers\BuildsExceptionHandler;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use ErrorException;
 use Throwable;
@@ -21,6 +22,7 @@ use Throwable;
 class SetExceptionHandling implements CanBeBootstrapped
 {
     use ConfigTrait;
+    use BuildsExceptionHandler;
 
     /**
      * @inheritDoc
@@ -85,10 +87,14 @@ class SetExceptionHandling implements CanBeBootstrapped
      * @see https://www.php.net/manual/en/function.set-exception-handler.php
      *
      * @param Throwable $e
+     *
+     * @throws Throwable
      */
     public function handleException(Throwable $e) : void
     {
-        // TODO: Handle exception via composite exception handler!
+        $handler = $this->buildExceptionHandler();
+
+        $handler->handle($e);
     }
 
     /**
@@ -102,6 +108,8 @@ class SetExceptionHandling implements CanBeBootstrapped
      * @see https://www.php.net/manual/en/function.error-get-last.php
      *
      * @param int[] $fatalErrors [optional] List of "fatal" error-severities
+     *
+     * @throws Throwable
      */
     public function handleShutdown(array $fatalErrors = []) : void
     {

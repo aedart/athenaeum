@@ -26,6 +26,7 @@ use Aedart\Core\Helpers\Paths;
 use Aedart\Core\Traits\NamespaceDetectorTrait;
 use Aedart\Core\Traits\PathsContainerTrait;
 use Aedart\Events\Providers\EventServiceProvider;
+use Aedart\Exceptions\Helpers\BuildsExceptionHandler;
 use Aedart\Filesystem\Providers\NativeFilesystemServiceProvider;
 use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
@@ -35,7 +36,6 @@ use Closure;
 use Illuminate\Contracts\Foundation\Application as LaravelApplicationInterface;
 use Illuminate\Support\ServiceProvider;
 use LogicException;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use Throwable;
 
 /**
@@ -58,6 +58,7 @@ class Application extends IoC implements ApplicationInterface,
     use ConfigTrait;
     use DispatcherTrait;
     use NamespaceDetectorTrait;
+    use BuildsExceptionHandler;
 
     /**
      * Application's version
@@ -988,33 +989,8 @@ class Application extends IoC implements ApplicationInterface,
             throw $exception;
         }
 
-        // TODO: Pass exception to "composite" exception handler
-        // TODO: if possible...
-        // TODO: ALSO - allow "force throw" exceptions... somehow!
-        // TODO: For now, we simple just (re)throw the exception.
-        $this->handleExceptionUsingFallback($exception);
-    }
+        $handler = $this->buildExceptionHandler();
 
-    /**
-     * Handle exception using this application's "last resort" handler.
-     *
-     * Method should ONLY be used, if there is no other exception handler
-     * available.
-     *
-     * @param Throwable $exception
-     *
-     * @throws Throwable
-     */
-    protected function handleExceptionUsingFallback(Throwable $exception)
-    {
-        // Output for console, if required.
-        if($this->runningInConsole()){
-            $output = (new ConsoleOutput())->getErrorOutput();
-
-            $output->writeln("<error>{$exception->getMessage()}</error>");
-        }
-
-        // Allow the exception to bubble upwards.
-        throw $exception;
+        $handler->handle($exception);
     }
 }
