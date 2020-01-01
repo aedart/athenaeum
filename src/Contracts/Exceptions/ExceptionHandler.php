@@ -62,7 +62,7 @@ interface ExceptionHandler
      * Report given exception, e.g. log exception or send notification
      *
      * Method must respect not to report exceptions that are marked
-     * as "do not report"
+     * as "do not report".
      *
      * @see shouldReport
      * @see dontReport
@@ -70,9 +70,6 @@ interface ExceptionHandler
      * @param Throwable $exception
      *
      * @return void
-     *
-     * @throws Throwable If unable to report the exception then exception is
-     *                   re-thrown.
      */
     public function report(Throwable $exception) : void ;
 }
