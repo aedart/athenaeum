@@ -33,9 +33,11 @@ interface ExceptionHandler
      *
      * @param Throwable $exception
      *
-     * @return bool True if handled, false if not
+     * @return void
+     *
+     * @throws Throwable If unable to handle exception.
      */
-    public function handle(Throwable $exception) : bool ;
+    public function handle(Throwable $exception) : void ;
 
     /**
      * Determine if given exception should be reported, e.g. logged
@@ -57,7 +59,7 @@ interface ExceptionHandler
     public function dontReport() : array ;
 
     /**
-     * Report given exception, e.g. log or send notification
+     * Report given exception, e.g. log exception or send notification
      *
      * Method must respect not to report exceptions that are marked
      * as "do not report"
