@@ -2,6 +2,12 @@
 
 ## v3.x
 
+### [v3.1.0](https://github.com/aedart/athenaeum/compare/3.0.1...3.1.0)
+
+#### Changed
+
+* Updated license
+
 ### [v3.0.1](https://github.com/aedart/athenaeum/compare/3.0.0...3.0.1)
 
 #### Fixed
