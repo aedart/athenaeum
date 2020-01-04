@@ -31,7 +31,7 @@ class SetExceptionHandling implements CanBeBootstrapped
     {
         // Skip this bootstrapper, if exception handling is disabled
         $config = $this->getConfig();
-        if($config->get('exceptions.enabled', false)){
+        if( ! $config->get('exceptions.enabled', false)){
             return;
         }
 
