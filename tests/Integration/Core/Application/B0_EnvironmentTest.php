@@ -20,26 +20,6 @@ use Illuminate\Support\Env;
  */
 class B0_EnvironmentTest extends AthenaeumAppTestCase
 {
-    /**
-     * @inheritdoc
-     */
-    protected function _before()
-    {
-        parent::_before();
-
-        Env::disablePutenv();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function _after()
-    {
-        Env::enablePutenv();
-
-        parent::_after();
-    }
-
     /*****************************************************************
      * Helpers
      ****************************************************************/

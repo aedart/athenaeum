@@ -5,6 +5,7 @@ namespace Aedart\Testing\TestCases;
 use Aedart\Contracts\Core\Helpers\PathsContainer;
 use Aedart\Core\Application as CoreApplication;
 use Codeception\Configuration;
+use Illuminate\Support\Env;
 
 /**
  * Application Integration Test Case
@@ -50,6 +51,8 @@ abstract class ApplicationTestCase extends IntegrationTestCase
 
         $this->app = $this->createApplication();
         $this->ioc = $this->app;
+
+        Env::disablePutenv();
     }
 
     /**
@@ -62,6 +65,8 @@ abstract class ApplicationTestCase extends IntegrationTestCase
             $this->app->destroy();
             $this->app = null;
         }
+
+        Env::enablePutenv();
 
         parent::_after();
     }
