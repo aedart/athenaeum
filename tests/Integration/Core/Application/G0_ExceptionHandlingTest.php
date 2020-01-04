@@ -2,7 +2,6 @@
 
 namespace Aedart\Tests\Integration\Core\Application;
 
-use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\IntegrationTestCase;
 use Codeception\Configuration;
