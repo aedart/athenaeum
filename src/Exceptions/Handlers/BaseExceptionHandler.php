@@ -2,9 +2,11 @@
 
 namespace Aedart\Exceptions\Handlers;
 
+use Aedart\Container\Facades\IoCFacade;
 use Aedart\Contracts\Exceptions\ExceptionHandler;
 use Aedart\Contracts\Support\Helpers\Logging\LogAware;
 use Aedart\Support\Helpers\Logging\LogTrait;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
@@ -128,6 +130,20 @@ abstract class BaseExceptionHandler implements ExceptionHandler,
 
         // Finally, log the exception as "error" severity
         $logger->error($exception->getMessage(), $context);
+    }
+
+    /*****************************************************************
+     * Defaults
+     ****************************************************************/
+
+    /**
+     * @inheritdoc
+     */
+    public function getDefaultLog(): ?LoggerInterface
+    {
+        // The default log-aware uses Laravel's log facade,
+        // which will fail in case it's not bound.
+        return IoCFacade::tryMake('log');
     }
 
     /*****************************************************************
