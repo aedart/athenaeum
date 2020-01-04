@@ -76,8 +76,13 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
             Env::getFactory()
         );
 
-        // Finally, attempt to load environment
-        $dotEnv->load();
+        // Attempt to load the environment. Allow failure, if required
+        if($this->app->mustThrowExceptions()){
+            $dotEnv->load();
+            return;
+        }
+
+        $dotEnv->safeLoad();
     }
 
     /**
