@@ -5,10 +5,12 @@
 ## v4.x
 
 // TODO:
-* added custom application (incomplete)
+* added custom application
 * added application integration test-case
 * docs about custom application, etc.
 * docs about custom event service provider
+* docs about custom exception handling
+* docs about logging using custom application
 
 ### [v4.0.0](__TODO__)
 
@@ -28,7 +30,7 @@ Existing abstractions are still available, yet will be removed entirely in `v5.0
 
 **Non-breaking Changes**
 
-* Upgraded to Laravel `v6.6.x`, Symfony `v4.4.x` and upgraded various other dependencies.
+* Upgraded to Laravel `v6.8.x`, Symfony `v4.4.x` and upgraded various other dependencies.
 * Code style to [PSR-12](https://www.php-fig.org/psr/psr-12/).
 * Replaced deprecated `Twig` components, in `TwigPartial` trait.
 * `UnitTestCase` now uses `FakerPartial` to setup [Faker](https://github.com/fzaninotto/Faker).
@@ -40,6 +42,7 @@ Existing abstractions are still available, yet will be removed entirely in `v5.0
 * `Application`, custom adaptation of Laravel's Application.
 * `IoCFacade`, able to resolve bindings or return a default value, if binding does not exist.
 * `EventServiceProvider`, extended version of Laravel's event service provider.
+* `BaseExeptionHandler` abstraction along with a few default exception handlers that can be used with `Application`, if enabled.
 * `FakerAware` component that can be used for testing purposes.
 * `FakerPartial`, offers basic setup for [Faker](https://github.com/fzaninotto/Faker).
 * `callOrReturn()` utility method in `MethodHelper`.
