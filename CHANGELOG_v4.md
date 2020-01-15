@@ -11,6 +11,7 @@
 * docs about custom event service provider
 * docs about custom exception handling
 * docs about logging using custom application
+* change IoC register main bindings - should NOT conflict with Laravel's Service Container, unless explicit call!
 
 ### [v4.0.0](__TODO__)
 
