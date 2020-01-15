@@ -188,6 +188,16 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Dates\BirthdateTrait`</small>
 
 
+### BootstrapPath
+
+-------------------------------------------------------
+`string` Directory path where bootstrapping resources are located
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\BootstrapPathAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\BootstrapPathTrait`</small>
+
+
 ### Brand
 
 -------------------------------------------------------
@@ -368,6 +378,16 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Strings\CompanyTrait`</small>
 
 
+### ConfigPath
+
+-------------------------------------------------------
+`string` Directory path where configuration files or resources located
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ConfigPathAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\ConfigPathTrait`</small>
+
+
 ### Content
 
 -------------------------------------------------------
@@ -443,6 +463,16 @@ The following list are the available aware-of components.
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DatabaseAware`</small>
 
 <small>**Trait** : `Aedart\Support\Properties\Strings\DatabaseTrait`</small>
+
+
+### DatabasePath
+
+-------------------------------------------------------
+`string` Directory path where your databases are located
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DatabasePathAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\DatabasePathTrait`</small>
 
 
 ### Date
@@ -786,6 +816,16 @@ The following list are the available aware-of components.
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\EndDateAware`</small>
 
 <small>**Trait** : `Aedart\Support\Properties\Dates\EndDateTrait`</small>
+
+
+### EnvironmentPath
+
+-------------------------------------------------------
+`string` Directory path where your environment resources are located
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\EnvironmentPathAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\EnvironmentPathTrait`</small>
 
 
 ### Error
@@ -1258,6 +1298,16 @@ The following list are the available aware-of components.
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LabelAware`</small>
 
 <small>**Trait** : `Aedart\Support\Properties\Strings\LabelTrait`</small>
+
+
+### LangPath
+
+-------------------------------------------------------
+`string` Directory path where translation resources are located
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LangPathAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\LangPathTrait`</small>
 
 
 ### Language
@@ -1798,6 +1848,16 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Dates\ProductionDateTrait`</small>
 
 
+### PublicPath
+
+-------------------------------------------------------
+`string` Directory path where public resources are located
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PublicPathAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\PublicPathTrait`</small>
+
+
 ### PurchaseDate
 
 -------------------------------------------------------
@@ -2009,6 +2069,16 @@ The following list are the available aware-of components.
 <small>**Trait** : `Aedart\Support\Properties\Dates\ReleaseDateTrait`</small>
 
 
+### ResourcePath
+
+-------------------------------------------------------
+`string` Directory path where your resources are located
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ResourcePathAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\ResourcePathTrait`</small>
+
+
 ### Row
 
 -------------------------------------------------------
@@ -2172,6 +2242,16 @@ The following list are the available aware-of components.
 <small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\StatusAware`</small>
 
 <small>**Trait** : `Aedart\Support\Properties\Integers\StatusTrait`</small>
+
+
+### StoragePath
+
+-------------------------------------------------------
+`string` Directory path where bootstrapping resources are located
+
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\StoragePathAware`</small>
+
+<small>**Trait** : `Aedart\Support\Properties\Strings\StoragePathTrait`</small>
 
 
 ### Street

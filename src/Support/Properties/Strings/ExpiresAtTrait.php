@@ -17,7 +17,7 @@ trait ExpiresAtTrait
      *
      * @var string|null
      */
-    protected $expiresAt = null;
+    protected ?string $expiresAt = null;
 
     /**
      * Set expires at

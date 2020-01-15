@@ -17,7 +17,7 @@ trait PurchaseDateTrait
      *
      * @var \DateTime|null
      */
-    protected $purchaseDate = null;
+    protected ?\DateTime $purchaseDate = null;
 
     /**
      * Set purchase date

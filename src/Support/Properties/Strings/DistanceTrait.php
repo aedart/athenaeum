@@ -17,7 +17,7 @@ trait DistanceTrait
      *
      * @var string|null
      */
-    protected $distance = null;
+    protected ?string $distance = null;
 
     /**
      * Set distance

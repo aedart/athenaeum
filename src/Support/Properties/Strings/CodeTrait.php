@@ -17,7 +17,7 @@ trait CodeTrait
      *
      * @var string|null
      */
-    protected $code = null;
+    protected ?string $code = null;
 
     /**
      * Set code

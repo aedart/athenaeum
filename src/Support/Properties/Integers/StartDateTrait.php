@@ -17,7 +17,7 @@ trait StartDateTrait
      *
      * @var int|null
      */
-    protected $startDate = null;
+    protected ?int $startDate = null;
 
     /**
      * Set start date

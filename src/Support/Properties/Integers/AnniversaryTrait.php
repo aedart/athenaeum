@@ -17,7 +17,7 @@ trait AnniversaryTrait
      *
      * @var int|null
      */
-    protected $anniversary = null;
+    protected ?int $anniversary = null;
 
     /**
      * Set anniversary

@@ -17,7 +17,7 @@ trait XTrait
      *
      * @var float|null
      */
-    protected $x = null;
+    protected ?float $x = null;
 
     /**
      * Set x

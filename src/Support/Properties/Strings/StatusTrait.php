@@ -17,7 +17,7 @@ trait StatusTrait
      *
      * @var string|null
      */
-    protected $status = null;
+    protected ?string $status = null;
 
     /**
      * Set status

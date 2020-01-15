@@ -17,7 +17,7 @@ trait IpV4Trait
      *
      * @var string|null
      */
-    protected $ipV4 = null;
+    protected ?string $ipV4 = null;
 
     /**
      * Set ip v4

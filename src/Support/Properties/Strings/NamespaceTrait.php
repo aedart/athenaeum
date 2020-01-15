@@ -17,7 +17,7 @@ trait NamespaceTrait
      *
      * @var string|null
      */
-    protected $namespace = null;
+    protected ?string $namespace = null;
 
     /**
      * Set namespace

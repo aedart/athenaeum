@@ -2,6 +2,7 @@
 
 namespace Aedart\Http\Clients\Traits;
 
+use Aedart\Container\Facades\IoCFacade;
 use Aedart\Container\IoC;
 use Aedart\Contracts\Http\Clients\Manager;
 
@@ -20,7 +21,7 @@ trait HttpClientsManagerTrait
      *
      * @var Manager|null
      */
-    protected $httpClientsManager = null;
+    protected ?Manager $httpClientsManager = null;
 
     /**
      * Set http clients manager
@@ -70,11 +71,6 @@ trait HttpClientsManagerTrait
      */
     public function getDefaultHttpClientsManager(): ?Manager
     {
-        $container = IoC::getInstance();
-        if($container->has(Manager::class)){
-            return $container->make(Manager::class);
-        }
-
-        return null;
+        return IoCFacade::tryMake(Manager::class);
     }
 }

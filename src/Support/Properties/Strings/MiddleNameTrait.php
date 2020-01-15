@@ -17,7 +17,7 @@ trait MiddleNameTrait
      *
      * @var string|null
      */
-    protected $middleName = null;
+    protected ?string $middleName = null;
 
     /**
      * Set middle name

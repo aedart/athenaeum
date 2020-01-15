@@ -17,7 +17,7 @@ trait Ean8Trait
      *
      * @var string|null
      */
-    protected $ean8 = null;
+    protected ?string $ean8 = null;
 
     /**
      * Set ean8

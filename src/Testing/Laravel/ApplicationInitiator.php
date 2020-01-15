@@ -27,7 +27,7 @@ trait ApplicationInitiator
      *
      * @var string
      */
-    protected $environment = 'testing';
+    protected string $environment = 'testing';
 
     /**
      * Start the Laravel application
@@ -70,6 +70,9 @@ trait ApplicationInitiator
         if( ! $this->hasApplicationBeenStarted()){
             return false;
         }
+
+        // Clear service container instance
+        $this->app->setInstance(null);
 
         // Tear down test environment
         $this->tearDownTheTestEnvironment();

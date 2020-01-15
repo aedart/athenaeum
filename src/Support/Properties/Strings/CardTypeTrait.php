@@ -17,7 +17,7 @@ trait CardTypeTrait
      *
      * @var string|null
      */
-    protected $cardType = null;
+    protected ?string $cardType = null;
 
     /**
      * Set card type

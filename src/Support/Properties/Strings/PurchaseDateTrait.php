@@ -17,7 +17,7 @@ trait PurchaseDateTrait
      *
      * @var string|null
      */
-    protected $purchaseDate = null;
+    protected ?string $purchaseDate = null;
 
     /**
      * Set purchase date

@@ -17,7 +17,7 @@ trait IpV6Trait
      *
      * @var string|null
      */
-    protected $ipV6 = null;
+    protected ?string $ipV6 = null;
 
     /**
      * Set ip v6

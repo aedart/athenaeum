@@ -17,7 +17,7 @@ trait PercentTrait
      *
      * @var string|null
      */
-    protected $percent = null;
+    protected ?string $percent = null;
 
     /**
      * Set percent

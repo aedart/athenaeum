@@ -17,7 +17,7 @@ trait EventTrait
      *
      * @var string|null
      */
-    protected $event = null;
+    protected ?string $event = null;
 
     /**
      * Set event

@@ -17,7 +17,7 @@ trait IdentifierTrait
      *
      * @var int|null
      */
-    protected $identifier = null;
+    protected ?int $identifier = null;
 
     /**
      * Set identifier

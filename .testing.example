@@ -1,0 +1,5 @@
+# Application name
+APP_NAME="Athenaeum"
+
+# Application environment
+APP_ENV="testing"

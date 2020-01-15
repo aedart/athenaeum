@@ -218,6 +218,11 @@ return [
             'date'
         ),
         stringProperty(
+            'bootstrapPath',
+            'Directory path where bootstrapping resources are located',
+            'path'
+        ),
+        stringProperty(
             'brand',
             'Name or identifier of a brand that is associated with a product or service',
             'identifier'
@@ -313,6 +318,11 @@ return [
             'name'
         ),
         stringProperty(
+            'configPath',
+            'Directory path where configuration files or resources located',
+            'path'
+        ),
+        stringProperty(
             'content',
             'Content',
             'content'
@@ -356,6 +366,11 @@ return [
             'database',
             'Name of database',
             'name'
+        ),
+        stringProperty(
+            'databasePath',
+            'Directory path where your databases are located',
+            'path'
         ),
         stringProperty(
             'date',
@@ -566,6 +581,11 @@ return [
             'endDate',
             'Date for when some kind of event ends',
             'date'
+        ),
+        stringProperty(
+            'environmentPath',
+            'Directory path where your environment resources are located',
+            'path'
         ),
         stringProperty(
             'error',
@@ -846,6 +866,11 @@ return [
             'label',
             'Label name',
             'name'
+        ),
+        stringProperty(
+            'langPath',
+            'Directory path where translation resources are located',
+            'path'
         ),
         stringProperty(
             'language',
@@ -1158,6 +1183,11 @@ return [
             'date'
         ),
         stringProperty(
+            'publicPath',
+            'Directory path where public resources are located',
+            'path'
+        ),
+        stringProperty(
             'purchaseDate',
             'Date of planned purchase',
             'date'
@@ -1292,6 +1322,11 @@ return [
             'Date of planned release',
             'date'
         ),
+        stringProperty(
+            'resourcePath',
+            'Directory path where your resources are located',
+            'path'
+        ),
         integerProperty(
             'row',
             'A row identifier',
@@ -1386,6 +1421,11 @@ return [
             'status',
             'Situation of progress, classification, or civil status',
             'status'
+        ),
+        stringProperty(
+            'storagePath',
+            'Directory path where bootstrapping resources are located',
+            'path'
         ),
         stringProperty(
             'street',

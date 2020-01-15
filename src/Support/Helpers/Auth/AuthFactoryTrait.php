@@ -20,7 +20,7 @@ trait AuthFactoryTrait
      *
      * @var Factory|null
      */
-    protected $authFactory = null;
+    protected ?Factory $authFactory = null;
 
     /**
      * Set auth factory

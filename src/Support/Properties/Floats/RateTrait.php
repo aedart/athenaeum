@@ -17,7 +17,7 @@ trait RateTrait
      *
      * @var float|null
      */
-    protected $rate = null;
+    protected ?float $rate = null;
 
     /**
      * Set rate

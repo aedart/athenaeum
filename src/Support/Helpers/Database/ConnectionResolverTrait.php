@@ -20,7 +20,7 @@ trait ConnectionResolverTrait
      *
      * @var ConnectionResolverInterface|null
      */
-    protected $connectionResolver = null;
+    protected ?ConnectionResolverInterface $connectionResolver = null;
 
     /**
      * Set connection resolver

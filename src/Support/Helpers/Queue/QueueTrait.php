@@ -20,7 +20,7 @@ trait QueueTrait
      *
      * @var Queue|null
      */
-    protected $queue = null;
+    protected ?Queue $queue = null;
 
     /**
      * Set queue

@@ -17,7 +17,7 @@ trait FilenameTrait
      *
      * @var string|null
      */
-    protected $filename = null;
+    protected ?string $filename = null;
 
     /**
      * Set filename

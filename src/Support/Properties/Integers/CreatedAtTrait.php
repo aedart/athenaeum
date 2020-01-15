@@ -17,7 +17,7 @@ trait CreatedAtTrait
      *
      * @var int|null
      */
-    protected $createdAt = null;
+    protected ?int $createdAt = null;
 
     /**
      * Set created at

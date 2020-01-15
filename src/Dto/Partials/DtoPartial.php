@@ -66,7 +66,7 @@ trait DtoPartial
      *
      * @return static
      */
-    static public function makeNew(array $properties = [], ?Container $container = null)
+    public static function makeNew(array $properties = [], ?Container $container = null)
     {
         return new static($properties, $container);
     }
@@ -81,7 +81,7 @@ trait DtoPartial
      *
      * @throws JsonException
      */
-    static public function fromJson(string $json)
+    public static function fromJson(string $json)
     {
         return static::makeNew(Json::decode($json, true));
     }
@@ -98,7 +98,7 @@ trait DtoPartial
 
         foreach ($properties as $property) {
             // Make sure that property is not unset
-            if ( ! isset($this->$property)) {
+            if($this->isPropertyUnset($property)){
                 continue;
             }
 
@@ -134,12 +134,35 @@ trait DtoPartial
 
             if($value instanceof JsonSerializable){
                 return $value->jsonSerialize();
-            } else if($value instanceof Arrayable){
+            } elseif($value instanceof Arrayable){
                 return $value->toArray();
             }
 
             return $value;
         }, $this->toArray());
+    }
+
+    /**
+     * Returns the data this DTO chooses to have serialised
+     *
+     * @return array
+     */
+    public function __serialize(): array
+    {
+        // Filter off properties that have "null" as value!
+        // Those might cause undesired unserialize effect,
+        // in case of nested Dto instances...
+        return array_filter( $this->toArray(), fn($value) => isset($value) );
+    }
+
+    /**
+     * Populates this DTO with unserialized data
+     *
+     * @param array $data
+     */
+    public function __unserialize(array $data): void
+    {
+        $this->populate($data);
     }
 
     /**
@@ -198,5 +221,21 @@ trait DtoPartial
     public function offsetUnset($offset)
     {
         unset($this->$offset);
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Determine if the given property has been unset
+     *
+     * @param string $property
+     *
+     * @return bool
+     */
+    protected function isPropertyUnset(string $property)
+    {
+        return ! property_exists($this, $property);
     }
 }

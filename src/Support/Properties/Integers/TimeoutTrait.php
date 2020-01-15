@@ -17,7 +17,7 @@ trait TimeoutTrait
      *
      * @var int|null
      */
-    protected $timeout = null;
+    protected ?int $timeout = null;
 
     /**
      * Set timeout

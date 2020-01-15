@@ -17,11 +17,11 @@ Consider using this package's [Service Container](../container/) (_a slightly ad
 The following example shows two DTOs; `Address` and `Person`. 
 
 ```php
-use Aedart\Dto;
+use Aedart\Dto\Dto;
 
 class Address extends Dto
 {
-    protected $street = '';
+    protected ?string $street = '';
 
     public function setStreet(?string $street)
     {
@@ -38,11 +38,11 @@ class Address extends Dto
 
 class Person extends Dto implements PersonInterface
 {
-    protected $name = '';
+    protected ?string $name = '';
     
-    protected $age = 0;
+    protected ?int $age = 0;
  
-    protected $address = null;
+    protected ?Address $address = null;
  
     // ... getters and setters for name and age not shown ... //
 

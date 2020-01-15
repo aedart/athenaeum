@@ -17,7 +17,7 @@ trait FilePathTrait
      *
      * @var string|null
      */
-    protected $filePath = null;
+    protected ?string $filePath = null;
 
     /**
      * Set file path

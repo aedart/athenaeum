@@ -17,7 +17,7 @@ trait ExpiresAtTrait
      *
      * @var \DateTime|null
      */
-    protected $expiresAt = null;
+    protected ?\DateTime $expiresAt = null;
 
     /**
      * Set expires at

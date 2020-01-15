@@ -17,7 +17,7 @@ trait DeliveredAtTrait
      *
      * @var \DateTime|null
      */
-    protected $deliveredAt = null;
+    protected ?\DateTime $deliveredAt = null;
 
     /**
      * Set delivered at

@@ -17,7 +17,7 @@ trait DatabaseTrait
      *
      * @var string|null
      */
-    protected $database = null;
+    protected ?string $database = null;
 
     /**
      * Set database

@@ -15,8 +15,8 @@ use Aedart\Tests\Helpers\Dummies\Contracts\Box as BoxInterface;
 class Box implements BoxInterface
 {
 
-    protected $width;
-    protected $height;
+    protected ?int $width;
+    protected ?int $height;
 
     /**
      * {@inheritdoc}

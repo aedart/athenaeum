@@ -20,7 +20,7 @@ trait SessionTrait
      *
      * @var Session|null
      */
-    protected $session = null;
+    protected ?Session $session = null;
 
     /**
      * Set session

@@ -17,7 +17,7 @@ trait DirectoryTrait
      *
      * @var string|null
      */
-    protected $directory = null;
+    protected ?string $directory = null;
 
     /**
      * Set directory

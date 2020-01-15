@@ -20,7 +20,7 @@ trait QueueingBusTrait
      *
      * @var QueueingDispatcher|null
      */
-    protected $queueingBus = null;
+    protected ?QueueingDispatcher $queueingBus = null;
 
     /**
      * Set queueing bus

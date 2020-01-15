@@ -17,7 +17,7 @@ trait CardNumberTrait
      *
      * @var string|null
      */
-    protected $cardNumber = null;
+    protected ?string $cardNumber = null;
 
     /**
      * Set card number

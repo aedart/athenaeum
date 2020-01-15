@@ -20,7 +20,7 @@ trait StorageFactoryTrait
      *
      * @var Factory|null
      */
-    protected $storageFactory = null;
+    protected ?Factory $storageFactory = null;
 
     /**
      * Set storage factory

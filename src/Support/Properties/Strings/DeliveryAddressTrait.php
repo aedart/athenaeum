@@ -17,7 +17,7 @@ trait DeliveryAddressTrait
      *
      * @var string|null
      */
-    protected $deliveryAddress = null;
+    protected ?string $deliveryAddress = null;
 
     /**
      * Set delivery address

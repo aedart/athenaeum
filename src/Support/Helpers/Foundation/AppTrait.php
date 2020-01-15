@@ -20,7 +20,7 @@ trait AppTrait
      *
      * @var Application|null
      */
-    protected $app = null;
+    protected ?Application $app = null;
 
     /**
      * Set app

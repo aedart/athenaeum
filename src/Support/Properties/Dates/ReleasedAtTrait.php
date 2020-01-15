@@ -17,7 +17,7 @@ trait ReleasedAtTrait
      *
      * @var \DateTime|null
      */
-    protected $releasedAt = null;
+    protected ?\DateTime $releasedAt = null;
 
     /**
      * Set released at

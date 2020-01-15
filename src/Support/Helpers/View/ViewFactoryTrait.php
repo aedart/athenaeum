@@ -20,7 +20,7 @@ trait ViewFactoryTrait
      *
      * @var Factory|null
      */
-    protected $viewFactory = null;
+    protected ?Factory $viewFactory = null;
 
     /**
      * Set view factory

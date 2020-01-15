@@ -17,7 +17,7 @@ trait PrefixTrait
      *
      * @var string|null
      */
-    protected $prefix = null;
+    protected ?string $prefix = null;
 
     /**
      * Set prefix

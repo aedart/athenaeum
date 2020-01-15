@@ -17,7 +17,7 @@ trait ColourTrait
      *
      * @var string|null
      */
-    protected $colour = null;
+    protected ?string $colour = null;
 
     /**
      * Set colour

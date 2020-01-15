@@ -17,7 +17,7 @@ trait UrlTrait
      *
      * @var string|null
      */
-    protected $url = null;
+    protected ?string $url = null;
 
     /**
      * Set url

@@ -17,7 +17,7 @@ trait EndDateTrait
      *
      * @var \DateTime|null
      */
-    protected $endDate = null;
+    protected ?\DateTime $endDate = null;
 
     /**
      * Set end date

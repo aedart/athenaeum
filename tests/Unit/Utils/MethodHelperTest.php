@@ -102,4 +102,32 @@ class MethodHelperTest extends UnitTestCase
         $this->assertSame('set' . ucfirst($property), $resultA);
         $this->assertSame($resultA, $resultB);
     }
+
+    /**
+     * @test
+     */
+    public function canCallMethod()
+    {
+        $method = fn($lastName) => 'James ' . $lastName;
+
+        $result = MethodHelper::callOrReturn($method, ['Bond']);
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame('James Bond', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function returnsValueIfNotCallable()
+    {
+        $method = $this->faker->name;
+
+        $result = MethodHelper::callOrReturn($method);
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame($method, $result);
+    }
 }

@@ -17,7 +17,7 @@ trait CalendarTrait
      *
      * @var string|null
      */
-    protected $calendar = null;
+    protected ?string $calendar = null;
 
     /**
      * Set calendar

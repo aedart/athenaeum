@@ -17,7 +17,7 @@ trait QuantityTrait
      *
      * @var float|null
      */
-    protected $quantity = null;
+    protected ?float $quantity = null;
 
     /**
      * Set quantity

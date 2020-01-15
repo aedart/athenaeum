@@ -20,7 +20,7 @@ trait CryptTrait
      *
      * @var Encrypter|null
      */
-    protected $crypt = null;
+    protected ?Encrypter $crypt = null;
 
     /**
      * Set crypt

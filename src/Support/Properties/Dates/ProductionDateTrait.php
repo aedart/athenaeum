@@ -17,7 +17,7 @@ trait ProductionDateTrait
      *
      * @var \DateTime|null
      */
-    protected $productionDate = null;
+    protected ?\DateTime $productionDate = null;
 
     /**
      * Set production date

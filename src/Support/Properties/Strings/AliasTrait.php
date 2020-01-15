@@ -17,7 +17,7 @@ trait AliasTrait
      *
      * @var string|null
      */
-    protected $alias = null;
+    protected ?string $alias = null;
 
     /**
      * Set alias

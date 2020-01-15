@@ -17,7 +17,7 @@ trait LocationsTrait
      *
      * @var array|null
      */
-    protected $locations = null;
+    protected ?array $locations = null;
 
     /**
      * Set locations

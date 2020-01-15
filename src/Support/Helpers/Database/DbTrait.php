@@ -20,7 +20,7 @@ trait DbTrait
      *
      * @var ConnectionInterface|null
      */
-    protected $db = null;
+    protected ?ConnectionInterface $db = null;
 
     /**
      * Set db

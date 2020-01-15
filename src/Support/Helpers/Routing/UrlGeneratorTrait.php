@@ -20,7 +20,7 @@ trait UrlGeneratorTrait
      *
      * @var UrlGenerator|null
      */
-    protected $urlGenerator = null;
+    protected ?UrlGenerator $urlGenerator = null;
 
     /**
      * Set url generator

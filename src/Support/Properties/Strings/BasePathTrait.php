@@ -17,7 +17,7 @@ trait BasePathTrait
      *
      * @var string|null
      */
-    protected $basePath = null;
+    protected ?string $basePath = null;
 
     /**
      * Set base path

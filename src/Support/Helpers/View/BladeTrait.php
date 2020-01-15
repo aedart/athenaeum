@@ -21,7 +21,7 @@ trait BladeTrait
      *
      * @var BladeCompiler|null
      */
-    protected $blade = null;
+    protected ?BladeCompiler $blade = null;
 
     /**
      * Set blade

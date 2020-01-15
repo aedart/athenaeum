@@ -17,7 +17,7 @@ trait OnTrait
      *
      * @var bool|null
      */
-    protected $on = null;
+    protected ?bool $on = null;
 
     /**
      * Set on

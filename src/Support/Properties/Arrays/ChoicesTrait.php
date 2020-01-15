@@ -17,7 +17,7 @@ trait ChoicesTrait
      *
      * @var array|null
      */
-    protected $choices = null;
+    protected ?array $choices = null;
 
     /**
      * Set choices

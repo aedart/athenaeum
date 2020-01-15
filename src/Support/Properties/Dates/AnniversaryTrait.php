@@ -17,7 +17,7 @@ trait AnniversaryTrait
      *
      * @var \DateTime|null
      */
-    protected $anniversary = null;
+    protected ?\DateTime $anniversary = null;
 
     /**
      * Set anniversary

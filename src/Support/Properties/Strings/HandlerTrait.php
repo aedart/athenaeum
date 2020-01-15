@@ -17,7 +17,7 @@ trait HandlerTrait
      *
      * @var string|null
      */
-    protected $handler = null;
+    protected ?string $handler = null;
 
     /**
      * Set handler

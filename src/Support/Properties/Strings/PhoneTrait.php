@@ -17,7 +17,7 @@ trait PhoneTrait
      *
      * @var string|null
      */
-    protected $phone = null;
+    protected ?string $phone = null;
 
     /**
      * Set phone

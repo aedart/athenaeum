@@ -17,7 +17,7 @@ trait VersionTrait
      *
      * @var string|null
      */
-    protected $version = null;
+    protected ?string $version = null;
 
     /**
      * Set version

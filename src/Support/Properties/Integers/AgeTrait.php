@@ -17,7 +17,7 @@ trait AgeTrait
      *
      * @var int|null
      */
-    protected $age = null;
+    protected ?int $age = null;
 
     /**
      * Set age

@@ -6,6 +6,7 @@ use Faker\Factory;
 use Faker\Generator;
 use \Mockery as m;
 use Mockery\MockInterface;
+use ReflectionException;
 use ReflectionMethod;
 
 /**
@@ -34,9 +35,9 @@ class ArgumentFaker
      * @param Generator|null $faker [optional] If none given, a generator is automatically created
      * @return array|mixed
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
-    static public function fakeFor($target, string $method, ?Generator $faker = null)
+    public static function fakeFor($target, string $method, ?Generator $faker = null)
     {
         $faker = $faker ?? static::makeFakerGenerator();
 
@@ -73,14 +74,11 @@ class ArgumentFaker
      *
      * @return array|bool|float|int|string Returns a string for "null" type
      */
-    static public function fakeForType(string $type, ?Generator $faker = null)
+    public static function fakeForType(string $type, ?Generator $faker = null)
     {
         $faker = $faker ?? static::makeFakerGenerator();
 
         switch (strtolower($type)){
-
-            case 'string':
-                return $faker->name;
 
             case 'int':
             case 'integer':
@@ -99,6 +97,7 @@ class ArgumentFaker
             case 'callable':
                 return function(){};
 
+            case 'string';
             case 'null';
             default:
                 return $faker->name;
@@ -112,7 +111,7 @@ class ArgumentFaker
      *
      * @return MockInterface
      */
-    static public function makeMockFor(string $target) : MockInterface
+    public static function makeMockFor(string $target) : MockInterface
     {
         return m::mock($target);
     }
@@ -124,7 +123,7 @@ class ArgumentFaker
      *
      * @return Generator
      */
-    static public function makeFakerGenerator(string $locale = Factory::DEFAULT_LOCALE) : Generator
+    public static function makeFakerGenerator(string $locale = Factory::DEFAULT_LOCALE) : Generator
     {
         return Factory::create($locale);
     }

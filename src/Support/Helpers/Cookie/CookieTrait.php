@@ -20,7 +20,7 @@ trait CookieTrait
      *
      * @var Factory|null
      */
-    protected $cookie = null;
+    protected ?Factory $cookie = null;
 
     /**
      * Set cookie

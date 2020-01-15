@@ -20,7 +20,7 @@ trait QueueingCookieTrait
      *
      * @var QueueingFactory|null
      */
-    protected $queueingCookie = null;
+    protected ?QueueingFactory $queueingCookie = null;
 
     /**
      * Set queueing cookie

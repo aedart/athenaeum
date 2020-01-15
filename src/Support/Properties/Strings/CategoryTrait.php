@@ -17,7 +17,7 @@ trait CategoryTrait
      *
      * @var string|null
      */
-    protected $category = null;
+    protected ?string $category = null;
 
     /**
      * Set category

@@ -20,7 +20,7 @@ trait FileParserFactoryTrait
      *
      * @var FileParserFactory|null
      */
-    protected $fileParserFactory = null;
+    protected ?FileParserFactory $fileParserFactory = null;
 
     /**
      * Set file parser factory

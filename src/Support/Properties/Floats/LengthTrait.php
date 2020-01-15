@@ -17,7 +17,7 @@ trait LengthTrait
      *
      * @var float|null
      */
-    protected $length = null;
+    protected ?float $length = null;
 
     /**
      * Set length

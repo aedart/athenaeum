@@ -17,7 +17,7 @@ trait TitleTrait
      *
      * @var string|null
      */
-    protected $title = null;
+    protected ?string $title = null;
 
     /**
      * Set title

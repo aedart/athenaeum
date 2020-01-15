@@ -20,7 +20,7 @@ trait AuthTrait
      *
      * @var Guard|null
      */
-    protected $auth = null;
+    protected ?Guard $auth = null;
 
     /**
      * Set auth

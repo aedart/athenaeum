@@ -17,7 +17,7 @@ trait SourceTrait
      *
      * @var string|null
      */
-    protected $source = null;
+    protected ?string $source = null;
 
     /**
      * Set source

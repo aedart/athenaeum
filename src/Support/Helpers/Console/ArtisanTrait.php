@@ -20,7 +20,7 @@ trait ArtisanTrait
      *
      * @var Kernel|null
      */
-    protected $artisan = null;
+    protected ?Kernel $artisan = null;
 
     /**
      * Set artisan

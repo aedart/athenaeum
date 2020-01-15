@@ -91,7 +91,7 @@ class NestedArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
-    public function canSerialiseNestedInstances()
+    public function canJsonSerialiseNestedInstances()
     {
         $data = $this->arrayDtoData();
         $data['address']   = [
@@ -107,6 +107,37 @@ class NestedArrayDtoTest extends DtoTestCase
 
         ConsoleDebugger::output($result);
         $this->assertJson($result);
+    }
+
+    /**
+     * @test
+     */
+    public function canSerialiseNestedInstances()
+    {
+        $data = [
+            'name'      => $this->faker->name,
+            'age'       => $this->faker->randomNumber(),
+            'address'   => [
+                'street'    => $this->faker->streetName,
+                'city'      => [
+                    'name'      => $this->faker->city,
+                    'zipCode'   => $this->faker->randomNumber(4),
+                ]
+            ]
+        ];
+
+        $dto = $this->makeDto($data);
+        $serialised = serialize($dto);
+
+        ConsoleDebugger::output('Serialised', $serialised);
+        $this->assertIsString($serialised, 'Invalid serialised format');
+
+        $newDto = unserialize($serialised);
+        ConsoleDebugger::output('Unserialize', $serialised);
+
+        $address  = $newDto['address'];
+        $this->assertInstanceOf(Address::class, $address, 'Unable to unserialise nested DTO');
+        $this->assertSame($data['address']['city']['name'], $address['city']['name'], 'Invalid unserialised nested dto property');
     }
 
     /**

@@ -17,7 +17,7 @@ trait CurrencyTrait
      *
      * @var string|null
      */
-    protected $currency = null;
+    protected ?string $currency = null;
 
     /**
      * Set currency

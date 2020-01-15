@@ -20,7 +20,7 @@ trait ContainerTrait
      *
      * @var Container|null
      */
-    protected $container = null;
+    protected ?Container $container = null;
 
     /**
      * Set container

@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Dto;
 
-use Aedart\Dto;
+use Aedart\Dto\Dto;
 
 /**
  * City
@@ -22,14 +22,14 @@ class City extends Dto
      *
      * @var string|null
      */
-    protected $name = null;
+    protected ?string $name = null;
 
     /**
      * Zip Code
      *
      * @var int|null
      */
-    protected $zipCode = null;
+    protected ?int $zipCode = null;
 
     /**
      * Set name

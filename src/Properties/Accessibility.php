@@ -44,9 +44,9 @@ trait Accessibility
      *
      * @see AccessibilityLevels
      *
-     * @var integer
+     * @var int
      */
-    private $_propertyAccessibilityLevel = null;
+    private ?int $propertyAccessibilityLevel = null;
 
     /**
      * Set the maximum level of accessibility for allowing properties
@@ -65,7 +65,7 @@ trait Accessibility
         if ( ! $this->isPropertyAccessibilityLevelValid($level)) {
             throw new RangeException(sprintf('Property accessibility level "%s" is invalid', $level));
         }
-        $this->_propertyAccessibilityLevel = $level;
+        $this->propertyAccessibilityLevel = $level;
 
         return $this;
     }
@@ -83,11 +83,11 @@ trait Accessibility
      */
     protected function getPropertyAccessibilityLevel() : int
     {
-        if ( ! isset($this->_propertyAccessibilityLevel)) {
+        if ( ! isset($this->propertyAccessibilityLevel)) {
             $this->setPropertyAccessibilityLevel($this->getDefaultPropertyAccessibilityLevel());
         }
 
-        return $this->_propertyAccessibilityLevel;
+        return $this->propertyAccessibilityLevel;
     }
 
     /**

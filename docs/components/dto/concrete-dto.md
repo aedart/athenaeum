@@ -6,13 +6,13 @@ Also, you should ensure that it implements your previously defined interface.
 ```php
 
 use Acme\Person as PersonInterface;
-use Aedart\Dto;
+use Aedart\Dto\Dto;
 
 class Person extends Dto implements PersonInterface
 {
-    protected $name = '';
+    protected ?string $name = '';
     
-    protected $age = 0;
+    protected ?int $age = 0;
  
     public function setName(?string $name)
     {

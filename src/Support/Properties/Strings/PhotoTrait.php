@@ -17,7 +17,7 @@ trait PhotoTrait
      *
      * @var string|null
      */
-    protected $photo = null;
+    protected ?string $photo = null;
 
     /**
      * Set photo

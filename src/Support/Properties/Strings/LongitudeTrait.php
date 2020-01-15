@@ -17,7 +17,7 @@ trait LongitudeTrait
      *
      * @var string|null
      */
-    protected $longitude = null;
+    protected ?string $longitude = null;
 
     /**
      * Set longitude

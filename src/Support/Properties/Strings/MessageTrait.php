@@ -17,7 +17,7 @@ trait MessageTrait
      *
      * @var string|null
      */
-    protected $message = null;
+    protected ?string $message = null;
 
     /**
      * Set message

@@ -17,7 +17,7 @@ trait DomainTrait
      *
      * @var string|null
      */
-    protected $domain = null;
+    protected ?string $domain = null;
 
     /**
      * Set domain

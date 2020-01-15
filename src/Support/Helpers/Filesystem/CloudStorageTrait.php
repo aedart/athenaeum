@@ -20,7 +20,7 @@ trait CloudStorageTrait
      *
      * @var Cloud|null
      */
-    protected $cloudStorage = null;
+    protected ?Cloud $cloudStorage = null;
 
     /**
      * Set cloud storage

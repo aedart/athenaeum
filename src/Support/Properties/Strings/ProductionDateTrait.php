@@ -17,7 +17,7 @@ trait ProductionDateTrait
      *
      * @var string|null
      */
-    protected $productionDate = null;
+    protected ?string $productionDate = null;
 
     /**
      * Set production date

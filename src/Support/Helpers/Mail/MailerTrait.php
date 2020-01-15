@@ -20,7 +20,7 @@ trait MailerTrait
      *
      * @var Mailer|null
      */
-    protected $mailer = null;
+    protected ?Mailer $mailer = null;
 
     /**
      * Set mailer

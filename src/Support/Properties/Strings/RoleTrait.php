@@ -17,7 +17,7 @@ trait RoleTrait
      *
      * @var string|null
      */
-    protected $role = null;
+    protected ?string $role = null;
 
     /**
      * Set role

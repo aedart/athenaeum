@@ -17,7 +17,7 @@ trait IcaoTrait
      *
      * @var string|null
      */
-    protected $icao = null;
+    protected ?string $icao = null;
 
     /**
      * Set icao

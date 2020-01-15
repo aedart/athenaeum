@@ -20,7 +20,7 @@ trait EventTrait
      *
      * @var Dispatcher|null
      */
-    protected $event = null;
+    protected ?Dispatcher $event = null;
 
     /**
      * Set event

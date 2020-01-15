@@ -2,8 +2,9 @@
 
 namespace Aedart\Testing\TestCases;
 
+use Aedart\Testing\TestCases\Partials\FakerPartial;
+use Codeception\Actor;
 use Codeception\TestCase\Test;
-use Faker\Factory;
 use \Mockery as m;
 
 /**
@@ -18,22 +19,19 @@ use \Mockery as m;
  */
 abstract class UnitTestCase extends Test
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    use FakerPartial;
 
     /**
-     * @var \Faker\Generator
+     * @var \UnitTester|Actor
      */
-    protected $faker = null;
+    protected $tester;
 
     /**
      * {@inheritdoc}
      */
     protected function _before()
     {
-        $this->faker = Factory::create();
+        $this->setupFaker();
     }
 
     /**

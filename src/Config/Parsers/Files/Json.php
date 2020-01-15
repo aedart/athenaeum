@@ -17,7 +17,7 @@ class Json extends ParserBase
     /**
      * {@inheritdoc}
      */
-    static public function getFileType(): string
+    public static function getFileType(): string
     {
         return 'json';
     }

@@ -34,7 +34,7 @@ trait IoCPartial
      *
      * @var null|Container
      */
-    private $ioc = null;
+    private ?Container $ioc = null;
 
     /**
      * Returns the container that is responsible for

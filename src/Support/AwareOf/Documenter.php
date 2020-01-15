@@ -16,7 +16,7 @@ class Documenter implements ConfigAware
      *
      * @var string
      */
-    protected $docsTemplate = 'docs.md.twig';
+    protected string $docsTemplate = 'docs.md.twig';
 
     /**
      * Generator constructor.

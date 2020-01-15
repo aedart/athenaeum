@@ -17,7 +17,7 @@ trait SwiftTrait
      *
      * @var string|null
      */
-    protected $swift = null;
+    protected ?string $swift = null;
 
     /**
      * Set swift

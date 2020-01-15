@@ -20,7 +20,7 @@ trait BusTrait
      *
      * @var Dispatcher|null
      */
-    protected $bus = null;
+    protected ?Dispatcher $bus = null;
 
     /**
      * Set bus

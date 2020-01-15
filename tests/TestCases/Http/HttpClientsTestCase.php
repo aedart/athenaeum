@@ -34,7 +34,7 @@ abstract class HttpClientsTestCase extends LaravelTestCase
      *
      * @var null|RequestInterface
      */
-    protected $lastRequest = null;
+    protected ?RequestInterface $lastRequest = null;
 
     /*****************************************************************
      * Setup Methods

@@ -20,7 +20,7 @@ trait RouteRegistrarTrait
      *
      * @var Registrar|null
      */
-    protected $routeRegistrar = null;
+    protected ?Registrar $routeRegistrar = null;
 
     /**
      * Set route registrar

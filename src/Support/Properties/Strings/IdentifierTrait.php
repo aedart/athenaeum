@@ -17,7 +17,7 @@ trait IdentifierTrait
      *
      * @var string|null
      */
-    protected $identifier = null;
+    protected ?string $identifier = null;
 
     /**
      * Set identifier

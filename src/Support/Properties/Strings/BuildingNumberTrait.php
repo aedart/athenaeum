@@ -17,7 +17,7 @@ trait BuildingNumberTrait
      *
      * @var string|null
      */
-    protected $buildingNumber = null;
+    protected ?string $buildingNumber = null;
 
     /**
      * Set building number

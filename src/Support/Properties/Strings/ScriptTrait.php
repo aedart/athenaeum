@@ -17,7 +17,7 @@ trait ScriptTrait
      *
      * @var string|null
      */
-    protected $script = null;
+    protected ?string $script = null;
 
     /**
      * Set script

@@ -17,7 +17,7 @@ trait StartDateTrait
      *
      * @var \DateTime|null
      */
-    protected $startDate = null;
+    protected ?\DateTime $startDate = null;
 
     /**
      * Set start date

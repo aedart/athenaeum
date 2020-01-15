@@ -17,7 +17,7 @@ trait TableTrait
      *
      * @var string|null
      */
-    protected $table = null;
+    protected ?string $table = null;
 
     /**
      * Set table

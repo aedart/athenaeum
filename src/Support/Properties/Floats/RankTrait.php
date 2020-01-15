@@ -17,7 +17,7 @@ trait RankTrait
      *
      * @var float|null
      */
-    protected $rank = null;
+    protected ?float $rank = null;
 
     /**
      * Set rank

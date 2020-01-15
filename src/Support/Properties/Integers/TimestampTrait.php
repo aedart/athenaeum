@@ -17,7 +17,7 @@ trait TimestampTrait
      *
      * @var int|null
      */
-    protected $timestamp = null;
+    protected ?int $timestamp = null;
 
     /**
      * Set timestamp

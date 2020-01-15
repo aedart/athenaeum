@@ -17,7 +17,7 @@ trait CompanyTrait
      *
      * @var string|null
      */
-    protected $company = null;
+    protected ?string $company = null;
 
     /**
      * Set company

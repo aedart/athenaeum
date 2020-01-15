@@ -20,7 +20,7 @@ trait GateTrait
      *
      * @var Gate|null
      */
-    protected $gate = null;
+    protected ?Gate $gate = null;
 
     /**
      * Set gate

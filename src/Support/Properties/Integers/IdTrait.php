@@ -17,7 +17,7 @@ trait IdTrait
      *
      * @var int|null
      */
-    protected $id = null;
+    protected ?int $id = null;
 
     /**
      * Set id

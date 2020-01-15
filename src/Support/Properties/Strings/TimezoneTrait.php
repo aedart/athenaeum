@@ -17,7 +17,7 @@ trait TimezoneTrait
      *
      * @var string|null
      */
-    protected $timezone = null;
+    protected ?string $timezone = null;
 
     /**
      * Set timezone

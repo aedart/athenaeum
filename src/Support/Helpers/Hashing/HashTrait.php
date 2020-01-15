@@ -20,7 +20,7 @@ trait HashTrait
      *
      * @var Hasher|null
      */
-    protected $hash = null;
+    protected ?Hasher $hash = null;
 
     /**
      * Set hash

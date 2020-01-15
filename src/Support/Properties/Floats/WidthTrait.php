@@ -17,7 +17,7 @@ trait WidthTrait
      *
      * @var float|null
      */
-    protected $width = null;
+    protected ?float $width = null;
 
     /**
      * Set width

@@ -17,7 +17,7 @@ trait LanguageTrait
      *
      * @var string|null
      */
-    protected $language = null;
+    protected ?string $language = null;
 
     /**
      * Set language

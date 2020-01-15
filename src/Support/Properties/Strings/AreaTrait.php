@@ -17,7 +17,7 @@ trait AreaTrait
      *
      * @var string|null
      */
-    protected $area = null;
+    protected ?string $area = null;
 
     /**
      * Set area

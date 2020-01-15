@@ -20,7 +20,7 @@ trait RedirectTrait
      *
      * @var Redirector|null
      */
-    protected $redirect = null;
+    protected ?Redirector $redirect = null;
 
     /**
      * Set redirect

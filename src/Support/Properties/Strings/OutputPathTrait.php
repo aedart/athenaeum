@@ -17,7 +17,7 @@ trait OutputPathTrait
      *
      * @var string|null
      */
-    protected $outputPath = null;
+    protected ?string $outputPath = null;
 
     /**
      * Set output path

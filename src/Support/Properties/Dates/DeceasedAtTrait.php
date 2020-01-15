@@ -17,7 +17,7 @@ trait DeceasedAtTrait
      *
      * @var \DateTime|null
      */
-    protected $deceasedAt = null;
+    protected ?\DateTime $deceasedAt = null;
 
     /**
      * Set deceased at

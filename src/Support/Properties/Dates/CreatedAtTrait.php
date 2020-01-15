@@ -17,7 +17,7 @@ trait CreatedAtTrait
      *
      * @var \DateTime|null
      */
-    protected $createdAt = null;
+    protected ?\DateTime $createdAt = null;
 
     /**
      * Set created at

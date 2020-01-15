@@ -20,7 +20,7 @@ trait CacheFactoryTrait
      *
      * @var Factory|null
      */
-    protected $cacheFactory = null;
+    protected ?Factory $cacheFactory = null;
 
     /**
      * Set cache factory

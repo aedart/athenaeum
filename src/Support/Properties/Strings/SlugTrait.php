@@ -17,7 +17,7 @@ trait SlugTrait
      *
      * @var string|null
      */
-    protected $slug = null;
+    protected ?string $slug = null;
 
     /**
      * Set slug

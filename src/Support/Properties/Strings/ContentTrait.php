@@ -17,7 +17,7 @@ trait ContentTrait
      *
      * @var string|null
      */
-    protected $content = null;
+    protected ?string $content = null;
 
     /**
      * Set content

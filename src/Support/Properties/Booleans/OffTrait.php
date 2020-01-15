@@ -17,7 +17,7 @@ trait OffTrait
      *
      * @var bool|null
      */
-    protected $off = null;
+    protected ?bool $off = null;
 
     /**
      * Set off

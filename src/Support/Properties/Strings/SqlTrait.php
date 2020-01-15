@@ -17,7 +17,7 @@ trait SqlTrait
      *
      * @var string|null
      */
-    protected $sql = null;
+    protected ?string $sql = null;
 
     /**
      * Set sql

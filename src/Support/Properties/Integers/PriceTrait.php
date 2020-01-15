@@ -17,7 +17,7 @@ trait PriceTrait
      *
      * @var int|null
      */
-    protected $price = null;
+    protected ?int $price = null;
 
     /**
      * Set price

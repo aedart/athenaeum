@@ -20,7 +20,7 @@ trait QueueFactoryTrait
      *
      * @var Factory|null
      */
-    protected $queueFactory = null;
+    protected ?Factory $queueFactory = null;
 
     /**
      * Set queue factory

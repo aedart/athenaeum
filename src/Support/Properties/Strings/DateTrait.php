@@ -17,7 +17,7 @@ trait DateTrait
      *
      * @var string|null
      */
-    protected $date = null;
+    protected ?string $date = null;
 
     /**
      * Set date

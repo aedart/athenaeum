@@ -3,8 +3,11 @@
 namespace Aedart\Support\AwareOf\Partials;
 
 use Aedart\Support\Helpers\Config\ConfigTrait;
-use Twig_Environment;
-use Twig_Loader_Filesystem;
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use Twig\Loader\FilesystemLoader;
 
 /**
  * Twig Template Engine Partial
@@ -19,9 +22,9 @@ trait TwigPartial
     /**
      * Twig Template Engine
      *
-     * @var Twig_Environment
+     * @var Environment|null
      */
-    protected $twig;
+    protected ?Environment $twig;
 
     /**
      * Setup the twig template engine
@@ -33,10 +36,10 @@ trait TwigPartial
         $path = $this->getConfig()->get('templates-path', $this->defaultTemplatesPath());
 
         // Create new loader for twig
-        $loader = new Twig_Loader_Filesystem($path);
+        $loader = new FilesystemLoader($path);
 
         // Create twig engine
-        $this->twig = new Twig_Environment($loader, $this->twigEngineOptions());
+        $this->twig = new Environment($loader, $this->twigEngineOptions());
 
         return $this;
     }
@@ -49,16 +52,16 @@ trait TwigPartial
      * @param array $data Template data to render
      * @param bool $force [optional] If true, then existing file is overwritten
      *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @throws LoaderError  When the template cannot be found
+     * @throws SyntaxError  When an error occurred during compilation
+     * @throws RuntimeError When an error occurred during rendering
      */
     public function generateFile(string $template, string $destination, array $data, bool $force = false)
     {
         // Remove existing file, if force flag set
         if($force && file_exists($destination)){
             unlink($destination);
-        } else if(file_exists($destination)){
+        } elseif(file_exists($destination)){
             // Otherwise abort if file exists...
             return;
         }

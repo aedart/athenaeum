@@ -17,7 +17,7 @@ trait VendorTrait
      *
      * @var string|null
      */
-    protected $vendor = null;
+    protected ?string $vendor = null;
 
     /**
      * Set vendor

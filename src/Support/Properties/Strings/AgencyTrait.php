@@ -17,7 +17,7 @@ trait AgencyTrait
      *
      * @var string|null
      */
-    protected $agency = null;
+    protected ?string $agency = null;
 
     /**
      * Set agency

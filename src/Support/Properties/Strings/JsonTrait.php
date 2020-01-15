@@ -17,7 +17,7 @@ trait JsonTrait
      *
      * @var string|null
      */
-    protected $json = null;
+    protected ?string $json = null;
 
     /**
      * Set json

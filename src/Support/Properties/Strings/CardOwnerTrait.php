@@ -17,7 +17,7 @@ trait CardOwnerTrait
      *
      * @var string|null
      */
-    protected $cardOwner = null;
+    protected ?string $cardOwner = null;
 
     /**
      * Set card owner

@@ -17,7 +17,7 @@ trait BirthdateTrait
      *
      * @var int|null
      */
-    protected $birthdate = null;
+    protected ?int $birthdate = null;
 
     /**
      * Set birthdate

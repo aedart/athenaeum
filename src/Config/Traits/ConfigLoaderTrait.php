@@ -20,7 +20,7 @@ trait ConfigLoaderTrait
      *
      * @var Loader|null
      */
-    protected $configLoader = null;
+    protected ?Loader $configLoader = null;
 
     /**
      * Set config loader

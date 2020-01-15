@@ -17,7 +17,7 @@ trait PasswordTrait
      *
      * @var string|null
      */
-    protected $password = null;
+    protected ?string $password = null;
 
     /**
      * Set password

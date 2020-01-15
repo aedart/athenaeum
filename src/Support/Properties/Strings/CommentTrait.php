@@ -17,7 +17,7 @@ trait CommentTrait
      *
      * @var string|null
      */
-    protected $comment = null;
+    protected ?string $comment = null;
 
     /**
      * Set comment

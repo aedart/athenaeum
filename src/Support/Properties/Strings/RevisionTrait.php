@@ -17,7 +17,7 @@ trait RevisionTrait
      *
      * @var string|null
      */
-    protected $revision = null;
+    protected ?string $revision = null;
 
     /**
      * Set revision

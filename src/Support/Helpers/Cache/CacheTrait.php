@@ -20,7 +20,7 @@ trait CacheTrait
      *
      * @var Repository|null
      */
-    protected $cache = null;
+    protected ?Repository $cache = null;
 
     /**
      * Set cache

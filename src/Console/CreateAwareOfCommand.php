@@ -25,14 +25,14 @@ class CreateAwareOfCommand extends CommandBase
      *
      * @var Generator
      */
-    protected $generator;
+    protected Generator $generator;
 
     /**
      * The "aware-of" documenter
      *
      * @var Documenter
      */
-    protected $documenter;
+    protected Documenter $documenter;
 
     /*****************************************************************
      * Command Configuration
@@ -223,7 +223,7 @@ Usage:
 Force Flag:
 
 If you set the force flag, then all existing interfaces and traits are overwritten.
-This also applies to the generated markdown documentation! 
+This also applies to the generated markdown documentation!
 
 <info>php athenaeum dto:create-aware-of aware-of-properties.php --force</info>
 
