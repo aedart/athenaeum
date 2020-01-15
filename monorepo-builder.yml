@@ -49,7 +49,7 @@ parameters:
 
     # for "split" command
     directories_to_repositories:
-        packages/first-package: 'git@github.com:your-monorepo/first-package.git'
+        packages/Contracts: 'git@github.com:aedart/athenaeum-contracts.git'
 
     # Package alias format
     package_alias_format: '<major>.<minor>.x-dev'
