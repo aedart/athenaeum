@@ -77,11 +77,22 @@
     ],
     "scripts": {
         "post-install-cmd": [
-            "@test-env"
+            "@test-env",
+            "@update-bin"
+        ],
+        "post-update-cmd": [
+            "@update-bin"
         ],
         "test-env": [
             "@php -r \"file_exists('.testing') || copy('.testing.example', '.testing');\""
+        ],
+        "update-bin": [
+            "@composer bin all update --ansi"
         ]
+    },
+    "scripts-descriptions": {
+        "test-env": "Create .testing environment file, if it does not exist",
+        "update-bin": "Updates all vendor-bin dependencies"
     },
     "extra": {
         "branch-alias": {
