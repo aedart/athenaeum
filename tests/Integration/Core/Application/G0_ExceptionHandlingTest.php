@@ -37,7 +37,10 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
 
         // Remove entire output dir for these tests
         $fs = new Filesystem();
-        $fs->deleteDirectories( $this->outputPath() );
+        if($fs->exists( $this->outputPath() )){
+            $fs->deleteDirectories( $this->outputPath() );
+            $fs->makeDirectory( $this->outputPath(), 0755, true, true);
+        }
     }
 
     /*****************************************************************
