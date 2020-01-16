@@ -111,6 +111,6 @@ trait TwigPartial
      */
     public function defaultTemplatesPath() : string
     {
-        return __DIR__ . '/../../../../resources/templates/aware-of-component/';
+        return __DIR__ . '/../../../resources/templates/aware-of-component/';
     }
 }
