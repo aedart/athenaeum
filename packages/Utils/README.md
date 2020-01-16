@@ -2,7 +2,7 @@
 
 Please read the [official documentation](https://aedart.github.io/athenaeum/) for additional information.
 
-The mono repository located at [github.com/aedart/athenaeum](https://github.com/aedart/athenaeum)
+The mono repository is located at [github.com/aedart/athenaeum](https://github.com/aedart/athenaeum)
 
 ## Versioning
 
