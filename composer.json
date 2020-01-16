@@ -54,7 +54,8 @@
     "autoload": {
         "psr-4": {
             "Aedart\\": "src",
-            "Aedart\\Contracts\\": "packages/Contracts/src"
+            "Aedart\\Contracts\\": "packages/Contracts/src",
+            "Aedart\\Utils\\": "packages/Utils/src"
         },
         "files": [
             "helpers/dto-properties.php",
@@ -67,7 +68,8 @@
         }
     },
     "replace": {
-        "aedart/athenaeum-contracts": "self.version"
+        "aedart/athenaeum-contracts": "self.version",
+        "aedart/athenaeum-utils": "self.version"
     },
     "bin": [
         "athenaeum"
