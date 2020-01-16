@@ -2,6 +2,8 @@
 
 Please read the [official documentation](https://aedart.github.io/athenaeum/) for additional information.
 
+The mono repository located at [github.com/aedart/athenaeum](https://github.com/aedart/athenaeum)
+
 ## Versioning
 
 This package follows [Semantic Versioning 2.0.0](http://semver.org/)
