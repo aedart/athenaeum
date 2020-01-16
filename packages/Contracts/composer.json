@@ -28,6 +28,11 @@
             "Aedart\\Contracts\\": "src"
         }
     },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "4.0.x-dev"
