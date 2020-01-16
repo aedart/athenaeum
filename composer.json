@@ -25,7 +25,6 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "ext-json": "*",
         "fzaninotto/faker": "1.9.*",
         "illuminate/config": "^6.11",
         "illuminate/container": "^6.11",
@@ -54,9 +53,11 @@
     "autoload": {
         "psr-4": {
             "Aedart\\": "src",
+            "Aedart\\Config\\": "packages/Config/src",
             "Aedart\\Contracts\\": "packages/Contracts/src",
             "Aedart\\Dto\\": "packages/Dto/src",
             "Aedart\\Properties\\": "packages/Properties/src",
+            "Aedart\\Support\\": "packages/Support/src",
             "Aedart\\Utils\\": "packages/Utils/src"
         },
         "files": [
@@ -70,9 +71,11 @@
         }
     },
     "replace": {
+        "aedart/athenaeum-config": "self.version",
         "aedart/athenaeum-contracts": "self.version",
         "aedart/athenaeum-dto": "self.version",
         "aedart/athenaeum-properties": "self.version",
+        "aedart/athenaeum-support": "self.version",
         "aedart/athenaeum-utils": "self.version"
     },
     "bin": [
