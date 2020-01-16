@@ -1,4 +1,4 @@
-# Athenaeum Contracts
+# Athenaeum Utils
 
 Please read the [official documentation](https://aedart.github.io/athenaeum/) for additional information.
 
