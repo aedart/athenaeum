@@ -24,7 +24,13 @@
         }
     ],
     "require": {
-        "php": ">=7.4.0"
+        "php": ">=7.4.0",
+        "illuminate/config": "^6.11",
+        "aedart/athenaeum-contracts": "4.0.x-dev",
+        "aedart/athenaeum-utils": "4.0.x-dev"
+    },
+    "require-dev": {
+        "symfony/yaml": "4.4.*"
     },
     "autoload": {
         "psr-4": {
