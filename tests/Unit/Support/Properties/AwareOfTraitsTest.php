@@ -33,7 +33,7 @@ class AwareOfTraitsTest extends TraitTestCase
     public function awareOfTraits() : array
     {
         $finder = new Finder;
-        $iter = new ClassIterator($finder->in('src/Support/Properties'));
+        $iter = new ClassIterator($finder->in('packages/Support/src/Properties'));
 
         $output = [];
         foreach ($iter as $reflection){
