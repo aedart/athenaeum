@@ -7,6 +7,7 @@
 // TODO:
 * added custom application
 * added application integration test-case
+* Split docs into version 3.x and 4.x
 * docs about custom application, etc.
 * docs about custom event service provider
 * docs about custom exception handling
