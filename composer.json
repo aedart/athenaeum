@@ -55,6 +55,7 @@
         "psr-4": {
             "Aedart\\": "src",
             "Aedart\\Contracts\\": "packages/Contracts/src",
+            "Aedart\\Properties\\": "packages/Properties/src",
             "Aedart\\Utils\\": "packages/Utils/src"
         },
         "files": [
@@ -69,7 +70,8 @@
     },
     "replace": {
         "aedart/athenaeum-contracts": "self.version",
-        "aedart/athenaeum-utils": "self.version"
+        "aedart/athenaeum-utils": "self.version",
+        "aedart/athenaeum-properties": "self.version"
     },
     "bin": [
         "athenaeum"
