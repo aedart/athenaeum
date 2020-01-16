@@ -23,12 +23,15 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "aedart/athenaeum-contracts": "4.0.x-dev",
-        "aedart/athenaeum-utils": "4.0.x-dev"
+        "illuminate/support": "^6.11",
+        "aedart/athenaeum-contracts": "4.0.x-dev"
+    },
+    "require-dev": {
+        "twig/twig": "^2.11"
     },
     "autoload": {
         "psr-4": {
-            "Aedart\\Properties\\": "src"
+            "Aedart\\Support\\": "src"
         }
     },
     "config": {
