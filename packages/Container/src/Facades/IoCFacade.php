@@ -35,7 +35,7 @@ class IoCFacade extends Facade
      * @see \Illuminate\Contracts\Container\Container::make
      *
      * @param string $abstract The type to attempt resolving
-     * @param null $default [optional] Default value to return. Is NOT processed by IoC
+     * @param mixed $default [optional] Default value to return. Is NOT processed by IoC
      * @param array $parameters [optional] Evt. parameters to be passed on to given type (contextual binding)
      *
      * @return mixed
