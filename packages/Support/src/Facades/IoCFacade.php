@@ -1,6 +1,6 @@
 <?php
 
-namespace Aedart\Container\Facades;
+namespace Aedart\Support\Facades;
 
 use Aedart\Contracts\Container\IoC;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -8,14 +8,12 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @deprecated Use \Aedart\Support\Facades\IoCFacade instead
- *
  * IoC Facade
  *
  * @see \Illuminate\Support\Facades\Facade
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
- * @package Aedart\Container\Facades
+ * @package Aedart\Support\Facades
  */
 class IoCFacade extends Facade
 {
