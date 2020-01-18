@@ -78,7 +78,7 @@ class ListenersViaConfigServiceProvider extends ServiceProvider
     protected function publishConfiguration()
     {
         $this->publishes([
-            __DIR__ . '/../../../configs/events.php' => config_path('events.php')
+            __DIR__ . '/../../configs/events.php' => config_path('events.php')
         ], 'config');
 
         return $this;
