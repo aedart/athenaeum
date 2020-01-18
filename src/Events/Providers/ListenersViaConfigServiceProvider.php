@@ -14,7 +14,7 @@ use Illuminate\Events\EventServiceProvider as LaravelEventServiceProvider;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Events\Providers
  */
-class EventServiceProvider extends LaravelEventServiceProvider
+class ListenersViaConfigServiceProvider extends LaravelEventServiceProvider
 {
     use ConfigTrait;
     use DispatcherTrait;
