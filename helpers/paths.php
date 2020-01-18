@@ -1,7 +1,7 @@
 <?php
 
-use Aedart\Container\Facades\IoCFacade;
 use Aedart\Contracts\Core\Helpers\PathsContainer;
+use Aedart\Support\Facades\IoCFacade;
 use Illuminate\Contracts\Foundation\Application;
 
 if( ! function_exists('paths')){

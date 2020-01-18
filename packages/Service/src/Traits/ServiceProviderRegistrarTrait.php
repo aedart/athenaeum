@@ -2,8 +2,8 @@
 
 namespace Aedart\Service\Traits;
 
-use Aedart\Container\Facades\IoCFacade;
 use Aedart\Contracts\Service\Registrar;
+use Aedart\Support\Facades\IoCFacade;
 
 /**
  * Service Provider Registrar Trait

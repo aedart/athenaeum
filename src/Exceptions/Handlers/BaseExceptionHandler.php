@@ -2,9 +2,9 @@
 
 namespace Aedart\Exceptions\Handlers;
 
-use Aedart\Container\Facades\IoCFacade;
 use Aedart\Contracts\Exceptions\ExceptionHandler;
 use Aedart\Contracts\Support\Helpers\Logging\LogAware;
+use Aedart\Support\Facades\IoCFacade;
 use Aedart\Support\Helpers\Logging\LogTrait;
 use Psr\Log\LoggerInterface;
 use Throwable;

@@ -2,8 +2,8 @@
 
 namespace Aedart\Core\Traits;
 
-use Aedart\Container\Facades\IoCFacade;
 use Aedart\Contracts\Core\Helpers\PathsContainer;
+use Aedart\Support\Facades\IoCFacade;
 
 /**
  * Paths Container Trait

@@ -3,7 +3,7 @@
 
 namespace Aedart\Tests\Integration\Container;
 
-use Aedart\Container\Facades\IoCFacade;
+use Aedart\Support\Facades\IoCFacade;
 use Aedart\Testing\TestCases\IntegrationTestCase;
 use Aedart\Tests\Helpers\Dummies\Box;
 

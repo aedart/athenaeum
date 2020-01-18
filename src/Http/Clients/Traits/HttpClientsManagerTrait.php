@@ -2,9 +2,8 @@
 
 namespace Aedart\Http\Clients\Traits;
 
-use Aedart\Container\Facades\IoCFacade;
-use Aedart\Container\IoC;
 use Aedart\Contracts\Http\Clients\Manager;
+use Aedart\Support\Facades\IoCFacade;
 
 /**
  * Http Clients Manager Trait

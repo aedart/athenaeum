@@ -2,8 +2,8 @@
 
 namespace Aedart\Core\Traits;
 
-use Aedart\Container\Facades\IoCFacade;
 use Aedart\Contracts\Core\Application;
+use Aedart\Support\Facades\IoCFacade;
 
 /**
  * Application Trait

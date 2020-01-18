@@ -2,9 +2,9 @@
 
 namespace Aedart\Exceptions\Helpers;
 
-use Aedart\Container\Facades\IoCFacade;
 use Aedart\Contracts\Exceptions\ExceptionHandler;
 use Aedart\Exceptions\Handlers\DefaultExceptionHandler;
+use Aedart\Support\Facades\IoCFacade;
 use Illuminate\Config\Repository;
 
 /**
