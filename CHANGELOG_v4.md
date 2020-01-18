@@ -1,6 +1,6 @@
 # Release Notes
 
-**Note**: _this is a working document, to be removed again, once this major version is ready for release!_
+**Note**: _this is a working document that will be removed, as soon as this major version is ready for release!_
 
 ## v4.x
 
@@ -12,7 +12,7 @@
 * docs about custom event service provider
 * docs about custom exception handling
 * docs about logging using custom application
-* change IoC register main bindings - should NOT conflict with Laravel's Service Container, unless explicit call!
+* change IoC register main bindings - should NOT conflict with Laravel's Service Container, unless called explicitly!
 
 ### [v4.0.0](__TODO__)
 
