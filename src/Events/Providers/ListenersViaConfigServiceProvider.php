@@ -4,33 +4,20 @@ namespace Aedart\Events\Providers;
 
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
-use Illuminate\Contracts\Events\Dispatcher as DispatcherInterface;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Events\EventServiceProvider as LaravelEventServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 /**
- * Event Service Provider
+ * Listeners via Config Service Provider
+ *
+ * Registers event listeners and subscribers from configuration.
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Events\Providers
  */
-class ListenersViaConfigServiceProvider extends LaravelEventServiceProvider
+class ListenersViaConfigServiceProvider extends ServiceProvider
 {
     use ConfigTrait;
     use DispatcherTrait;
-
-    /**
-     * @inheritdoc
-     */
-    public function register()
-    {
-        parent::register();
-
-        // Register aliases
-        $key = 'events';
-        $this->app->alias($key, Dispatcher::class);
-        $this->app->alias($key, DispatcherInterface::class);
-    }
 
     /**
      * Boot this service
