@@ -21,6 +21,8 @@ class EventServiceProvider extends LaravelEventServiceProvider
      */
     public function register()
     {
+        parent::register();
+
         // Register aliases
         $key = 'events';
         $this->app->alias($key, Dispatcher::class);
