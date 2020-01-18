@@ -58,6 +58,7 @@
             "Aedart\\Contracts\\": "packages/Contracts/src",
             "Aedart\\Dto\\": "packages/Dto/src",
             "Aedart\\Properties\\": "packages/Properties/src",
+            "Aedart\\Service\\": "packages/Service/src",
             "Aedart\\Support\\": "packages/Support/src",
             "Aedart\\Utils\\": "packages/Utils/src"
         },
@@ -77,6 +78,7 @@
         "aedart/athenaeum-contracts": "self.version",
         "aedart/athenaeum-dto": "self.version",
         "aedart/athenaeum-properties": "self.version",
+        "aedart/athenaeum-service": "self.version",
         "aedart/athenaeum-support": "self.version",
         "aedart/athenaeum-utils": "self.version"
     },

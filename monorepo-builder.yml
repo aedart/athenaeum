@@ -49,6 +49,7 @@ parameters:
         packages/Contracts: 'git@github.com:aedart/athenaeum-contracts.git'
         packages/Dto: 'git@github.com:aedart/athenaeum-dto.git'
         packages/Properties: 'git@github.com:aedart/athenaeum-properties.git'
+        packages/Service: 'git@github.com:aedart/athenaeum-service.git'
         packages/Support: 'git@github.com:aedart/athenaeum-support.git'
         packages/Utils: 'git@github.com:aedart/athenaeum-utils.git'
 
