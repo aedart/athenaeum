@@ -25,7 +25,7 @@ class HttpClientServiceProvider extends ServiceProvider implements DeferrablePro
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../../../configs/http-clients.php' => config_path('http-clients.php')
+            __DIR__ . '/../../configs/http-clients.php' => config_path('http-clients.php')
         ], 'config');
     }
 
