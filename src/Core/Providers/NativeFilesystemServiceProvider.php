@@ -1,6 +1,6 @@
 <?php
 
-namespace Aedart\Filesystem\Providers;
+namespace Aedart\Core\Providers;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
@@ -10,8 +10,10 @@ use Illuminate\Support\ServiceProvider;
  *
  * Binds the "native" filesystem component
  *
+ * @see \Illuminate\Filesystem\Filesystem
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
- * @package Aedart\Filesystem\Providers
+ * @package Aedart\Core\Providers
  */
 class NativeFilesystemServiceProvider extends ServiceProvider
 {
