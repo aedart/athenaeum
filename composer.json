@@ -54,6 +54,7 @@
         "psr-4": {
             "Aedart\\": "src",
             "Aedart\\Config\\": "packages/Config/src",
+            "Aedart\\Container\\": "packages/Container/src",
             "Aedart\\Contracts\\": "packages/Contracts/src",
             "Aedart\\Dto\\": "packages/Dto/src",
             "Aedart\\Properties\\": "packages/Properties/src",
@@ -72,6 +73,7 @@
     },
     "replace": {
         "aedart/athenaeum-config": "self.version",
+        "aedart/athenaeum-container": "self.version",
         "aedart/athenaeum-contracts": "self.version",
         "aedart/athenaeum-dto": "self.version",
         "aedart/athenaeum-properties": "self.version",

@@ -17,7 +17,6 @@ parameters:
             'fzaninotto/faker': '1.9.*'
             'mockery/mockery': '1.3.*'
             'illuminate/config': '^6.11'
-            'illuminate/container': '^6.11'
             'illuminate/filesystem': '^6.11'
             'illuminate/events': '^6.1'
             'symfony/console': '4.4.*'
@@ -46,6 +45,7 @@ parameters:
     # for "split" command
     directories_to_repositories:
         packages/Config: 'git@github.com:aedart/athenaeum-config.git'
+        package/Container: 'git@github.com:aedart/athenaeum-container.git'
         packages/Contracts: 'git@github.com:aedart/athenaeum-contracts.git'
         packages/Dto: 'git@github.com:aedart/athenaeum-dto.git'
         packages/Properties: 'git@github.com:aedart/athenaeum-properties.git'
