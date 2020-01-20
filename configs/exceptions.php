@@ -88,7 +88,47 @@ return [
 
     /*
      |--------------------------------------------------------------------------
-     | Exception Handler
+     | Log Channel
+     |--------------------------------------------------------------------------
+     |
+     | Profile name of the log channel to use, when reporting exceptions.
+     | This will work only if you have Laravel's logger component enabled.
+     |
+     | Ensure to register the 'LogServiceProvider', if you wish exceptions
+     | to be automatically logged.
+     |
+     | @see https://laravel.com/docs/6.x/logging
+     | @see \Illuminate\Log\LogServiceProvider
+    */
+
+    'log-profile' => env('LOG_CHANNEL', 'stack'),
+
+    /*
+     |--------------------------------------------------------------------------
+     | Exception Handlers
+     |--------------------------------------------------------------------------
+     |
+     | List of exception handlers. When an exception is captured, it is passed
+     | on to this list of exception handlers. The first handler to return true,
+     | will stop the exception for being delegated further. Then, the exception
+     | is considered to be handled.
+     |
+     | @see \Aedart\Contracts\Exceptions\ExceptionHandler
+     | @see \Aedart\Core\Exceptions\Handlers\BaseExceptionHandler
+    */
+
+    'handlers' => [
+        \Aedart\Core\Exceptions\Handlers\NullExceptionHandler::class // Replace with your own!
+        // Acme\Exceptions\Handlers\EditorExceptions::class,
+        // Acme\Exceptions\Handlers\ShoppingExceptions::class,
+        // Acme\Exceptions\Handlers\NavigationExceptions::class,
+        // Acme\Exceptions\Handlers\DbExceptions::class,
+        // Acme\Exceptions\Handlers\FatalErrorExceptions::class,
+    ],
+
+    /*
+     |--------------------------------------------------------------------------
+     | TODO: Remove this Exception Handler
      |--------------------------------------------------------------------------
      |
      | Class path to application's exception handler. Must be instance of
