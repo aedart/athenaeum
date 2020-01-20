@@ -5,6 +5,8 @@ namespace Aedart\Exceptions\Handlers;
 use Throwable;
 
 /**
+ * @deprecated
+ *
  * Default Exception Handler
  *
  * This default handler is only responsible for enabling reporting of

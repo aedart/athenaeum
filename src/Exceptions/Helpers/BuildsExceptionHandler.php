@@ -8,6 +8,8 @@ use Aedart\Support\Facades\IoCFacade;
 use Illuminate\Config\Repository;
 
 /**
+ * @deprecated 
+ *
  * Builds Exception Handler Helper
  *
  * @author Alin Eugen Deac <aedart@gmail.com>

@@ -7,6 +7,8 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Throwable;
 
 /**
+ * @deprecated
+ *
  * Null Exception Handler
  *
  * Intended for testing purposes only!

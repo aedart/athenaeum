@@ -6,6 +6,8 @@ namespace Aedart\Exceptions\Handlers;
 use Throwable;
 
 /**
+ * @deprecated
+ *
  * Prints Exceptions - Exception Handler
  *
  * Intended for testing purposes only

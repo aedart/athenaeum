@@ -10,6 +10,8 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
+ * @deprecated
+ *
  * Base Exception Handler
  *
  * Abstraction offers a few common methods for dealing with exceptions.
