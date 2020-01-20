@@ -8,7 +8,7 @@ use Aedart\Support\Facades\IoCFacade;
 use Illuminate\Config\Repository;
 
 /**
- * @deprecated 
+ * @deprecated
  *
  * Builds Exception Handler Helper
  *
