@@ -45,6 +45,7 @@
         "hanneskod/classtools": "~1.2",
         "orchestra/testbench": "^4.4",
         "predis/predis": "~1.1",
+        "roave/security-advisories": "dev-master",
         "symfony/var-dumper": "4.4.*",
         "symfony/yaml": "4.4.*",
         "twig/twig": "^2.11"
