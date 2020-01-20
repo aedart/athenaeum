@@ -33,11 +33,9 @@ interface ExceptionHandler
      *
      * @param Throwable $exception
      *
-     * @return void
-     *
-     * @throws Throwable If unable to handle exception.
+     * @return bool True if handled, false if not
      */
-    public function handle(Throwable $exception) : void ;
+    public function handle(Throwable $exception) : bool ;
 
     /**
      * Determine if given exception should be reported, e.g. logged
