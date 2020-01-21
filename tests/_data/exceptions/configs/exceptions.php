@@ -119,6 +119,7 @@ return [
     */
 
     'handlers' => [
-        \Aedart\Core\Exceptions\Handlers\PrintsExceptions::class
+        \Aedart\Core\Exceptions\Handlers\PrintsExceptions::class,
+        \Aedart\Tests\Helpers\Dummies\Core\Exceptions\Handlers\HandlesSpecialExceptions::class
     ]
 ];

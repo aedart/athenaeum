@@ -165,4 +165,23 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
         $this->assertStringContainsString($expected, $output, 'incorrect output');
         $this->assertLogFileContainers($expected);
     }
+
+    /**
+     * @test
+     */
+    public function terminatesGracefullyWhenExceptionIsHandled()
+    {
+        // This test has two aspects:
+        //
+        // a) If exception is handled, application should be allowed to continue
+        //    and terminate (if run() method is used with callback...)
+        //
+        // b) Exception is allowed to be passed on to the next handler registered,
+        //    if the first didn't handle it.
+
+        $output = $this->invokeApp('terminates-gracefully');
+
+        $this->assertStringContainsString('special exception handled', $output, 'incorrect output');
+        $this->assertStringContainsString('Terminating...', $output, 'incorrect output');
+    }
 }
