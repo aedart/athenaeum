@@ -85,7 +85,7 @@ abstract class BaseExceptionHandler implements ExceptionHandler,
      */
     public function getDefaultLog(): ?LoggerInterface
     {
-        $channel = $this->getConfig()->get('exceptions.log', 'stack');
+        $channel = $this->getConfig()->get('exceptions.log-profile', 'stack');
 
         // Attempt resolve manager
         $manager = IoCFacade::tryMake('log');
