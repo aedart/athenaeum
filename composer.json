@@ -52,6 +52,10 @@
         "twig/twig": "^2.11"
     },
     "autoload": {
+        "files": [
+            "packages/Core/helpers/paths.php",
+            "helpers/dto-properties.php"
+        ],
         "psr-4": {
             "Aedart\\": "src",
             "Aedart\\Config\\": "packages/Config/src",
@@ -65,11 +69,7 @@
             "Aedart\\Service\\": "packages/Service/src",
             "Aedart\\Support\\": "packages/Support/src",
             "Aedart\\Utils\\": "packages/Utils/src"
-        },
-        "files": [
-            "helpers/dto-properties.php",
-            "helpers/paths.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {

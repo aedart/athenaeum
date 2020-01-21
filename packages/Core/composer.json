@@ -40,7 +40,10 @@
     "autoload": {
         "psr-4": {
             "Aedart\\Core\\": "src"
-        }
+        },
+        "files": [
+            "helpers/paths.php"
+        ]
     },
     "config": {
         "sort-packages": true
