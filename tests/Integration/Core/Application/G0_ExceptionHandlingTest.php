@@ -184,4 +184,15 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
         $this->assertStringContainsString('special exception handled', $output, 'incorrect output');
         $this->assertStringContainsString('Terminating...', $output, 'incorrect output');
     }
+
+    /**
+     * @test
+     */
+    public function handlesExceptionHandlingFailure()
+    {
+        $output = $this->invokeApp('fails-exception-handling');
+
+        $this->assertStringContainsString('Exception Handler failure', $output, 'incorrect output');
+        $this->assertLogFileContainers('CRITICAL: Exception Handler failure');
+    }
 }

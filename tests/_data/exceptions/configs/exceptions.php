@@ -120,6 +120,7 @@ return [
 
     'handlers' => [
         \Aedart\Core\Exceptions\Handlers\PrintsExceptions::class,
-        \Aedart\Tests\Helpers\Dummies\Core\Exceptions\Handlers\HandlesSpecialExceptions::class
+        \Aedart\Tests\Helpers\Dummies\Core\Exceptions\Handlers\HandlesSpecialExceptions::class,
+        \Aedart\Tests\Helpers\Dummies\Core\Exceptions\Handlers\FailsHandling::class
     ]
 ];
