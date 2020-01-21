@@ -30,7 +30,6 @@ parameters:
                 'Aedart\': 'src'
             files:
               - 'helpers/dto-properties.php'
-              - 'helpers/paths.php'
         autoload-dev:
             psr-4:
                 'Aedart\Tests\': 'tests/'
