@@ -28,12 +28,13 @@
 * Replaced `\Aedart\Dto` with `\Aedart\Dto\Dto`[1].
 * Replaced `\Aedart\ArrayDto` with `\Aedart\Dto\ArrayDto`[1].
 
-[1]: _Deprecation of existing abstractions or components is due to the conversion of this package into a true mono repository.
+[1]: _Deprecation of existing abstractions or components is due to the conversion of this package into a [mono repository](ttps://en.wikipedia.org/wiki/Monorepo).
 Existing abstractions are still available, yet will be removed entirely in `v5.0`_
 
 **Non-breaking Changes**
 
-* Upgraded to Laravel `v6.8.x`, Symfony `v4.4.x` and upgraded various other dependencies.
+* Converted athenaeum into a true [mono repository](ttps://en.wikipedia.org/wiki/Monorepo). All major components are now available as separate packages, via composer.
+* Upgraded to Laravel `v6.12.x`, Symfony `v4.4.x` and upgraded various other dependencies.
 * Code style to [PSR-12](https://www.php-fig.org/psr/psr-12/).
 * Replaced deprecated `Twig` components, in `TwigPartial` trait.
 * `UnitTestCase` now uses `FakerPartial` to setup [Faker](https://github.com/fzaninotto/Faker).
@@ -43,6 +44,7 @@ Existing abstractions are still available, yet will be removed entirely in `v5.0
 #### Added
 
 * `Application`, custom adaptation of Laravel's Application.
+* `Registrar`, able to register service providers.
 * `IoCFacade`, able to resolve bindings or return a default value, if binding does not exist.
 * `ListenersViaConfigServiceProvider`, offers registration of event listeners and subscribers via configuration.
 * `BaseExeptionHandler` abstraction along with a few default exception handlers that can be used with `Application`, if enabled.
