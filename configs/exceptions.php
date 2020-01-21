@@ -124,19 +124,5 @@ return [
         // Acme\Exceptions\Handlers\NavigationExceptions::class,
         // Acme\Exceptions\Handlers\DbExceptions::class,
         // Acme\Exceptions\Handlers\FatalErrorExceptions::class,
-    ],
-
-    /*
-     |--------------------------------------------------------------------------
-     | TODO: Remove this Exception Handler
-     |--------------------------------------------------------------------------
-     |
-     | Class path to application's exception handler. Must be instance of
-     | "ExceptionHandler".
-     |
-     | @see \Aedart\Contracts\Exceptions\ExceptionHandler
-     | @see \Aedart\Exceptions\Handlers\BaseExceptionHandler
-    */
-
-    'handler' => \Aedart\Exceptions\Handlers\DefaultExceptionHandler::class
+    ]
 ];
