@@ -28,19 +28,6 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements Composit
     protected array $handlers = [];
 
     /**
-     * CompositeExceptionHandler constructor.
-     *
-     * @throws Throwable
-     */
-    public function __construct()
-    {
-        $handlers = $this->getConfig()->get('exceptions.handlers', []);
-
-        $this->setHandlers( $handlers );
-    }
-
-
-    /**
      * {@inheritDoc}
      *
      * <br />
