@@ -34,6 +34,13 @@ abstract class BaseExceptionHandler implements ExceptionHandler,
     use ConfigTrait;
 
     /**
+     * List of exception that should not be reported
+     *
+     * @var string[] Class paths
+     */
+    protected array $dontReport = [];
+
+    /**
      * @inheritDoc
      */
     public function shouldReport(Throwable $exception): bool
