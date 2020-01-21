@@ -3,7 +3,9 @@
 namespace Aedart\Core\Providers;
 
 use Aedart\Contracts\Exceptions\ExceptionHandler;
+use Aedart\Contracts\Exceptions\Factory as ExceptionHandlerFactory;
 use Aedart\Core\Exceptions\Handlers\CompositeExceptionHandler;
+use Aedart\Core\Exceptions\Handlers\Factory;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,7 +18,8 @@ use Illuminate\Support\ServiceProvider;
 class ExceptionHandlerServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     public array $singletons = [
-        ExceptionHandler::class      => CompositeExceptionHandler::class
+        ExceptionHandler::class             => CompositeExceptionHandler::class,
+        ExceptionHandlerFactory::class      => Factory::class
     ];
 
     /**
