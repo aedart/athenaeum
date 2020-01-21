@@ -9,7 +9,7 @@ use Throwable;
  *
  * This exception handler is inspired by Laravel's version hereof.
  * However, unlike Laravel's version, this handler does NOT know anything
- * about how to render an exception for Http, console or other output formats.
+ * about how to render exceptions for Http, console...etc
  *
  * @see \Illuminate\Contracts\Debug\ExceptionHandler
  *
