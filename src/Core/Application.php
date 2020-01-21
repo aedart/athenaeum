@@ -24,6 +24,7 @@ use Aedart\Core\Bootstrappers\SetExceptionHandling;
 use Aedart\Core\Helpers\NamespaceDetector;
 use Aedart\Core\Helpers\Paths;
 use Aedart\Core\Providers\EventServiceProvider;
+use Aedart\Core\Providers\ExceptionHandlerServiceProvider;
 use Aedart\Core\Providers\NativeFilesystemServiceProvider;
 use Aedart\Core\Traits\NamespaceDetectorTrait;
 use Aedart\Core\Traits\PathsContainerTrait;
@@ -699,6 +700,7 @@ class Application extends IoC implements ApplicationInterface,
     public function getCoreServiceProviders(): array
     {
         return [
+            ExceptionHandlerServiceProvider::class,
             NativeFilesystemServiceProvider::class,
             EventServiceProvider::class,
             ListenersViaConfigServiceProvider::class,
