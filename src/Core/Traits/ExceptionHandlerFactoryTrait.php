@@ -2,7 +2,6 @@
 
 namespace Aedart\Core\Traits;
 
-use Aedart\Contracts\Exceptions\ExceptionHandler;
 use Aedart\Contracts\Exceptions\Factory;
 use Aedart\Support\Facades\IoCFacade;
 
@@ -71,6 +70,6 @@ trait ExceptionHandlerFactoryTrait
      */
     public function getDefaultExceptionHandlerFactory(): ?Factory
     {
-        return IoCFacade::tryMake(ExceptionHandler::class);
+        return IoCFacade::tryMake(Factory::class);
     }
 }
