@@ -74,7 +74,7 @@ return [
         E_PARSE,
         E_USER_ERROR,
         E_USER_WARNING,
-        E_USER_NOTICE
+        E_USER_NOTICE,
 
         //E_DEPRECATED, // Might be good if you wish to hunt down deprecated functionality
         //E_USER_DEPRECATED, // Also good if developers use "trigger_error()" for custom deprecation
