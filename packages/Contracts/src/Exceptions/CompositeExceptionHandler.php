@@ -7,6 +7,9 @@ use Throwable;
 /**
  * Composite Exception Handler
  *
+ * Able to delegate actual exception handling to "lead" exception
+ * handlers.
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Exceptions
  */
