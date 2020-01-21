@@ -4,7 +4,7 @@ namespace Aedart\Core\Bootstrappers;
 
 use Aedart\Contracts\Core\Application;
 use Aedart\Contracts\Core\Helpers\CanBeBootstrapped;
-use Aedart\Exceptions\Helpers\BuildsExceptionHandler;
+use Aedart\Core\Traits\ExceptionHandlerFactoryTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use ErrorException;
 use Throwable;
@@ -22,7 +22,7 @@ use Throwable;
 class SetExceptionHandling implements CanBeBootstrapped
 {
     use ConfigTrait;
-    use BuildsExceptionHandler;
+    use ExceptionHandlerFactoryTrait;
 
     /**
      * @inheritDoc
@@ -88,13 +88,15 @@ class SetExceptionHandling implements CanBeBootstrapped
      *
      * @param Throwable $e
      *
+     * @return bool True if handled, false if not
+     *
      * @throws Throwable
      */
-    public function handleException(Throwable $e) : void
+    public function handleException(Throwable $e) : bool
     {
-        $handler = $this->buildExceptionHandler();
+        $handler = $this->getExceptionHandlerFactory()->make();
 
-        $handler->handle($e);
+        return $handler->handle($e);
     }
 
     /**

@@ -11,6 +11,7 @@ use Aedart\Contracts\Core\Helpers\NamespaceDetector as ApplicationNamespaceDetec
 use Aedart\Contracts\Core\Helpers\NamespaceDetectorAware;
 use Aedart\Contracts\Core\Helpers\PathsContainer;
 use Aedart\Contracts\Core\Helpers\PathsContainerAware;
+use Aedart\Contracts\Exceptions\ExceptionHandlerFactoryAware;
 use Aedart\Contracts\Service\Registrar as ServiceProviderRegistrar;
 use Aedart\Contracts\Service\ServiceProviderRegistrarAware;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
@@ -26,10 +27,10 @@ use Aedart\Core\Helpers\Paths;
 use Aedart\Core\Providers\EventServiceProvider;
 use Aedart\Core\Providers\ExceptionHandlerServiceProvider;
 use Aedart\Core\Providers\NativeFilesystemServiceProvider;
+use Aedart\Core\Traits\ExceptionHandlerFactoryTrait;
 use Aedart\Core\Traits\NamespaceDetectorTrait;
 use Aedart\Core\Traits\PathsContainerTrait;
 use Aedart\Events\Providers\ListenersViaConfigServiceProvider;
-use Aedart\Exceptions\Helpers\BuildsExceptionHandler;
 use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
@@ -53,14 +54,15 @@ class Application extends IoC implements ApplicationInterface,
     ServiceProviderRegistrarAware,
     ConfigAware,
     DispatcherAware,
-    NamespaceDetectorAware
+    NamespaceDetectorAware,
+    ExceptionHandlerFactoryAware
 {
     use PathsContainerTrait;
     use ServiceProviderRegistrarTrait;
     use ConfigTrait;
     use DispatcherTrait;
     use NamespaceDetectorTrait;
-    use BuildsExceptionHandler;
+    use ExceptionHandlerFactoryTrait;
 
     /**
      * Application's version
@@ -993,7 +995,7 @@ class Application extends IoC implements ApplicationInterface,
             throw $exception;
         }
 
-        $handler = $this->buildExceptionHandler();
+        $handler = $this->getExceptionHandlerFactory()->make();
 
         $handler->handle($exception);
     }
