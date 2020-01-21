@@ -102,7 +102,7 @@ return [
      | @see \Illuminate\Log\LogServiceProvider
     */
 
-    'log-profile' => env('LOG_CHANNEL', 'single'),
+    'log-profile' => 'single',
 
     /*
      |--------------------------------------------------------------------------
