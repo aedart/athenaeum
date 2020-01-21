@@ -86,17 +86,39 @@ return [
         //E_ALL, // ...I submit to your superior PHP skills!
     ],
 
+
     /*
      |--------------------------------------------------------------------------
-     | Exception Handler
+     | Log Channel
      |--------------------------------------------------------------------------
      |
-     | Class path to application's exception handler. Must be instance of
-     | "ExceptionHandler".
+     | Profile name of the log channel to use, when reporting exceptions.
+     | This will work only if you have Laravel's logger component enabled.
      |
-     | @see \Aedart\Contracts\Exceptions\ExceptionHandler
-     | @see \Aedart\Exceptions\Handlers\BaseExceptionHandler
+     | Ensure to register the 'LogServiceProvider', if you wish exceptions
+     | to be automatically logged.
+     |
+     | @see https://laravel.com/docs/6.x/logging
+     | @see \Illuminate\Log\LogServiceProvider
     */
 
-    'handler' => \Aedart\Exceptions\Handlers\PrintsExceptions::class
+    'log-profile' => env('LOG_CHANNEL', 'single'),
+
+    /*
+     |--------------------------------------------------------------------------
+     | Exception Handlers
+     |--------------------------------------------------------------------------
+     |
+     | List of exception handlers. When an exception is captured, it is passed
+     | on to this list of exception handlers. The first handler to return true,
+     | will stop the exception for being delegated further. Then, the exception
+     | is considered to be handled.
+     |
+     | @see \Aedart\Contracts\Exceptions\ExceptionHandler
+     | @see \Aedart\Core\Exceptions\Handlers\BaseExceptionHandler
+    */
+
+    'handlers' => [
+        \Aedart\Core\Exceptions\Handlers\PrintsExceptions::class
+    ]
 ];
