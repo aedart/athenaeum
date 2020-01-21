@@ -19,7 +19,11 @@ class PrintsExceptions extends BaseExceptionHandler
      */
     public function handle(Throwable $exception): bool
     {
-        dump($exception);
+        if(function_exists('dump')){
+            dump($exception);
+        } else {
+            print (string) $exception;
+        }
 
         return false;
     }
