@@ -37,6 +37,9 @@ class ExceptionHandlerServiceProvider extends ServiceProvider implements Deferra
      */
     public function provides()
     {
-        return [ ExceptionHandler::class ];
+        return [
+            ExceptionHandler::class,
+            ExceptionHandlerFactory::class
+        ];
     }
 }
