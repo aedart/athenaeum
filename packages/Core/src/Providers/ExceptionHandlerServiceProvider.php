@@ -28,7 +28,7 @@ class ExceptionHandlerServiceProvider extends ServiceProvider implements Deferra
     public function boot()
     {
         $this->publishes( [
-            __DIR__ . '/../../../configs/exceptions.php' => config_path('exceptions.php')
+            __DIR__ . '/../../configs/exceptions.php' => config_path('exceptions.php')
         ],'config');
     }
 
