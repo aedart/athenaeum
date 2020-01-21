@@ -14,8 +14,6 @@
 * docs about logging using custom application
 * change IoC register main bindings - should NOT conflict with Laravel's Service Container, unless called explicitly!
 * change Http Client interface to adhere to the PSR-18 (Http Client) interface!
-* Redesign exception handling, move it inside core package. Also, might as well go for the "composite" exception handler design...
-* `BaseExceptionHandler` depends on Laravel's log, yet would be much better to just depend on Psr-log interface instead, if possible
 
 ### [v4.0.0](__TODO__)
 
