@@ -4,6 +4,7 @@ namespace Aedart\Core\Exceptions\Handlers;
 
 use Aedart\Contracts\Exceptions\CompositeExceptionHandler as CompositeExceptionHandlerInterface;
 use Aedart\Contracts\Exceptions\ExceptionHandler;
+use Aedart\Core\Exceptions\ExceptionHandlerFailure;
 use Aedart\Support\Facades\IoCFacade;
 use Psr\Log\LogLevel;
 use Throwable;
@@ -49,17 +50,21 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements Composit
 
             // Delegate exception until handled
             $wasHandled = $this->delegate($exception);
-        } catch (Throwable $critical) {
+        } catch (Throwable $e) {
             // A "leaf" exception handler contains one or more
             // errors - it failed for some reason. Therefore,
             // we must allow this exception to bubble upwards (sadly),
             // with enough information about both this exception.
             // Hopefully, the original exception has already been reported
             // at this point.
+
+            // Convert to a "critical" type of exception
+            $critical = new ExceptionHandlerFailure('Exception Handler failure: ' . $e->getMessage(), $e->getCode(), $e);
+
+            // Report it...
             $this->reportWithLevel($critical, LogLevel::CRITICAL);
 
-            // Now we throw the "new" exception, hopefully allowing the
-            // developer to take immediate action,...
+            // Lastly, throw new critical exception...
             throw $critical;
         }
 
