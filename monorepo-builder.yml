@@ -40,6 +40,7 @@ parameters:
         packages/Properties: 'git@github.com:aedart/athenaeum-properties.git'
         packages/Service: 'git@github.com:aedart/athenaeum-service.git'
         packages/Support: 'git@github.com:aedart/athenaeum-support.git'
+        packages/Testing: 'git@github.com:aedart/athenaeum-testing.git'
         packages/Utils: 'git@github.com:aedart/athenaeum-utils.git'
 
     # Package alias format
