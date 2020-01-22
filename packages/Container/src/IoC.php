@@ -21,21 +21,6 @@ use Psr\Container\ContainerInterface as PsrContainerInterface;
 class IoC extends Container implements IoCInterface
 {
     /**
-     * {@inheritdoc}
-     */
-    public static function getInstance()
-    {
-        /** @var Application|static $container */
-        $container = parent::getInstance();
-
-        $container
-            ->registerMainBindings()
-            ->setFacadeApplication();
-
-        return $container;
-    }
-
-    /**
      * @inheritdoc
      */
     public function flush()
@@ -58,6 +43,7 @@ class IoC extends Container implements IoCInterface
         $this->flush();
 
         // Clear facade instances and application
+        // in case this was registered as an application!
         Facade::clearResolvedInstances();
         Facade::setFacadeApplication(null);
 
@@ -66,13 +52,20 @@ class IoC extends Container implements IoCInterface
     }
 
     /**
-     * Register the "main" bindings
+     * Register this container as the "app"
+     *
+     * <b>Warning</b>: Avoid invoking this method inside a Laravel application.
+     * It will <i>highjack</i> the application instance! Method is intended for
+     * testing purposes or when using as stand-alone outside a Laravel
+     * application!
      *
      * @return self
      */
-    public function registerMainBindings()
+    public function registerAsApplication()
     {
-        // Self register as "app" and set Facade application
+        $this->registerSelfAsInstance();
+
+        // Self register as "app"
         $key = 'app';
         $this->instance($key, $this);
 
@@ -81,22 +74,9 @@ class IoC extends Container implements IoCInterface
         $this->alias($key, IoCInterface::class);
         $this->alias($key, PsrContainerInterface::class);
 
-        // Finally, set the singleton instance to this
-        static::setInstance($this);
-
-        return $this;
-    }
-
-    /**
-     * Set the Facade's application
-     *
-     * @return self
-     */
-    public function setFacadeApplication()
-    {
         // Force set the facade's application to this container.
-        // NOTE: This works only because Laravel has yet to
-        // use typed arguments.
+        // Warning: This works only because Laravel has yet to
+        // use typed arguments on the facade and service providers!
         Facade::setFacadeApplication($this);
 
         return $this;
@@ -105,4 +85,17 @@ class IoC extends Container implements IoCInterface
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * Registers this running instance as the
+     * singleton instance
+     *
+     * @return self
+     */
+    protected function registerSelfAsInstance()
+    {
+        static::setInstance($this);
+
+        return $this;
+    }
 }

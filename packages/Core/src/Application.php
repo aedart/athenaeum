@@ -37,6 +37,7 @@ use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Closure;
 use Illuminate\Contracts\Foundation\Application as LaravelApplicationInterface;
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 use LogicException;
 use Throwable;
@@ -148,9 +149,8 @@ class Application extends IoC implements ApplicationInterface,
         $this->version = $version;
 
         $this
+            ->registerAsApplication()
             ->resolveApplicationPaths($paths)
-            ->registerMainBindings()
-            ->setFacadeApplication()
             ->registerCoreServiceProviders();
     }
 
@@ -750,9 +750,9 @@ class Application extends IoC implements ApplicationInterface,
     /**
      * @inheritdoc
      */
-    public function registerMainBindings()
+    public function registerAsApplication()
     {
-        parent::registerMainBindings();
+        parent::registerAsApplication();
 
         $key = 'app';
 
