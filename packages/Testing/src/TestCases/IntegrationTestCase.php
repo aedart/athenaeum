@@ -33,6 +33,7 @@ abstract class IntegrationTestCase extends UnitTestCase
         parent::_before();
 
         $this->ioc = IoC::getInstance();
+        $this->ioc->registerAsApplication();
     }
 
     /**
