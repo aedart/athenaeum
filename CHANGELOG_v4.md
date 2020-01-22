@@ -29,7 +29,7 @@
 * Replaced `\Aedart\Dto` with `\Aedart\Dto\Dto`[1].
 * Replaced `\Aedart\ArrayDto` with `\Aedart\Dto\ArrayDto`[1].
 * `Faker`, `Mockery`, `Codeception` and `Orchestra Testbench` are now defined as dev-dependencies.
-You need to require these packages, if you depended on these packages, should you wish to use the full Athenaeum package[2].
+You need to require these packages, if you depended on these packages[2].
 
 [1]: _Deprecation of existing abstractions or components is due to the conversion of this package into a [mono repository](ttps://en.wikipedia.org/wiki/Monorepo).
 Existing abstractions are still available, yet will be removed entirely in `v5.0`_
