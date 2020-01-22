@@ -14,6 +14,7 @@
 * docs about logging using custom application
 * change IoC register main bindings - should NOT conflict with Laravel's Service Container, unless called explicitly!
 * change Http Client interface to adhere to the PSR-18 (Http Client) interface!
+* Upgrade to codeception v4! (phpunit 8.x)
 
 ### [v4.0.0](__TODO__)
 
