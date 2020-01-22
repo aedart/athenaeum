@@ -63,7 +63,8 @@ class IoC extends Container implements IoCInterface
      */
     public function registerAsApplication()
     {
-        $this->registerSelfAsInstance();
+        // Set the singleton instance
+        static::setInstance($this);
 
         // Self register as "app"
         $key = 'app';
@@ -86,16 +87,4 @@ class IoC extends Container implements IoCInterface
      * Internals
      ****************************************************************/
 
-    /**
-     * Registers this running instance as the
-     * singleton instance
-     *
-     * @return self
-     */
-    protected function registerSelfAsInstance()
-    {
-        static::setInstance($this);
-
-        return $this;
-    }
 }
