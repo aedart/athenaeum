@@ -95,10 +95,12 @@
         "athenaeum"
     ],
     "suggest": {
-        "codeception/codeception": "Required for Testing utilities",
+        "symfony/console": "Required for using various commands",
+        "twig/twig": "Required for using aware-of generator",
         "orchestra/testbench": "Required for Laravel Testing utilities",
-        "symfony/yaml": "Required for parsing Yaml configuration files",
-        "twig/twig": "Required for using aware-of generator"
+        "codeception/codeception": "Required for Testing utilities",
+        "fzaninotto/faker": "Required for Testing utilities",
+        "mockery/mockery": "Required for Testing utilities"
     },
     "scripts": {
         "post-install-cmd": [

@@ -39,6 +39,11 @@ parameters:
         autoload-dev:
             psr-4:
                 'Aedart\Tests\': 'tests/'
+        suggest:
+            'orchestra/testbench': 'Required for Laravel Testing utilities'
+            'codeception/codeception': 'Required for Testing utilities'
+            'fzaninotto/faker': 'Required for Testing utilities'
+            'mockery/mockery': 'Required for Testing utilities'
 
     # for "split" command
     directories_to_repositories:
