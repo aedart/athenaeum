@@ -2,13 +2,11 @@
 
 namespace Aedart\Console;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\StyleInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
+use Aedart\Support\AwareOf\Console\CommandBase as AwareOfCommandBase;
 
 /**
+ * @deprecated Since version 4.0 - use \Aedart\Support\AwareOf\Console\CommandBase instead.
+ *
  * Console Command Base
  *
  * <br />
@@ -18,53 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Console
  */
-abstract class CommandBase extends Command
+abstract class CommandBase extends AwareOfCommandBase
 {
-    /**
-     * This command's input
-     *
-     * @var InputInterface
-     */
-    protected InputInterface $input;
 
-    /**
-     * This command's output
-     *
-     * @var OutputInterface|StyleInterface
-     */
-    protected $output;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Throwable
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        // Set input
-        $this->input = $input;
-
-        // Resolve output
-        if($output instanceof StyleInterface){
-            $this->output = $output;
-        } else {
-            $this->output = new SymfonyStyle($this->input, $output);
-        }
-
-        // Finally, run the command
-        return $this->runCommand();
-    }
-
-    /*****************************************************************
-     * Abstract Methods
-     ****************************************************************/
-
-    /**
-     * Execute this command
-     *
-     * @throws \Throwable
-     *
-     * @return int|null
-     */
-    abstract public function runCommand() : ?int ;
 }
