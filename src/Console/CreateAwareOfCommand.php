@@ -5,6 +5,8 @@ namespace Aedart\Console;
 use Aedart\Support\AwareOf\Console\CreateCommand;
 
 /**
+ * @deprecated Since version 4.0 - use \Aedart\Support\AwareOf\Console\CreateCommand
+ *
  * Create Aware Of Properties Command
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
@@ -37,7 +39,7 @@ class CreateAwareOfCommand extends CreateCommand
      */
     public function runCommand(): ?int
     {
-        trigger_error('Deprecated since v4.0 - use use aware-of scaffold command instead', E_USER_DEPRECATED);
+        trigger_error('Deprecated since v4.0 - use use aware-of create command instead', E_USER_DEPRECATED);
 
         return parent::runCommand();
     }
