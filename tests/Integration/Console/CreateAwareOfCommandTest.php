@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Integration\Console;
 
-use Aedart\Console\CreateAwareOfCommand;
+use Aedart\Support\AwareOf\Console\CreateCommand;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\IntegrationTestCase;
 use Codeception\Configuration;
@@ -65,7 +65,7 @@ class CreateAwareOfCommandTest extends IntegrationTestCase
      */
     public function canCreateAwareOfComponents()
     {
-        $command = new CreateAwareOfCommand();
+        $command = new CreateCommand();
 
         $commandTester = new CommandTester($command);
         $commandTester->execute(array(
