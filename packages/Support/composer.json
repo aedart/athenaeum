@@ -23,6 +23,7 @@
     ],
     "require": {
         "php": ">=7.4.0",
+        "illuminate/config": "^6.12",
         "illuminate/support": "^6.12",
         "aedart/athenaeum-contracts": "4.0.x-dev",
         "aedart/athenaeum-utils": "4.0.x-dev"
