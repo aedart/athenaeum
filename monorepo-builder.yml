@@ -22,8 +22,6 @@ parameters:
 
   # for "merge" command
     data_to_append:
-        require:
-            'jean85/pretty-package-versions': '~1.2'
         require-dev:
             'ext-sockets': "*"
             'bamarni/composer-bin-plugin': '^1.3'
