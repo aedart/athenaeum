@@ -23,8 +23,8 @@ class ScaffoldCommand extends CommandBase
     protected function configure()
     {
         $this
-            ->setName('dto:scaffold')
-            ->setDescription('Creates a configuration file that can e used by the "dto:create-aware-of" command')
+            ->setName('scaffold')
+            ->setDescription('Creates a configuration file that can e used by the "create" command')
             ->addOption('output', 'o', InputOption::VALUE_OPTIONAL, 'Directory where to create configuration file', getcwd())
             ->setHelp($this->formatHelp());
     }
@@ -81,16 +81,16 @@ class ScaffoldCommand extends CommandBase
     protected function formatHelp()
     {
         return <<<EOT
-Creates a configuration file that can e used by the "dto:create-aware-of" command
+Creates a configuration file that can e used by the "create" command
 
 Usage:
 
-<info>php athenaeum dto:scaffold</info>
+<info>php aware-of scaffold scaffold</info>
 
 You can optionally also specify the output directory where the configuration file
 should be created.
 
-<info>php athenaeum dto:scaffold --output configs/dto</info>
+<info>php aware-of scaffold --output configs/dto</info>
 
 EOT;
     }
