@@ -1,9 +1,7 @@
 <?php
 
-
 namespace Aedart\Support\AwareOf\Console;
 
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -40,8 +38,7 @@ class ScaffoldCommand extends CommandBase
      */
     public function runCommand(): ?int
     {
-        $fs = new Filesystem();
-        $target = __DIR__ . '/../../configs/aware-of-properties.php';
+        $target = __DIR__ . '/../../../configs/aware-of-properties.php';
         $output = $this->input->getOption('output');
 
         // Add trailing slash if needed
@@ -51,18 +48,24 @@ class ScaffoldCommand extends CommandBase
 
         // Abort if config file already exists
         $destination = $output . 'aware-of-properties.php';
-        if($fs->exists($destination)){
+        if(file_exists($destination)){
             $this->output->warning($destination . ' already exists. Aborting!');
             return 1;
         }
 
         // Create nested directories, if required
-        $fs->makeDirectory($output, 0755, true);
+        if(mkdir($output, 0755, true) === false){
+            $this->output->error('unable to create directory: ' . $output);
+            return 2;
+        }
 
         // Copy the configuration file
-        $fs->copy($target, $destination);
-        $this->output->success('Created ' . $destination);
+        if(copy($target, $destination) === false){
+            $this->output->error('unable to copy scaffold into ' . $output);
+            return 2;
+        }
 
+        $this->output->success('Created ' . $destination);
         return 0;
     }
 
