@@ -24,16 +24,22 @@
     "require": {
         "php": ">=7.4.0",
         "illuminate/support": "^6.12",
-        "aedart/athenaeum-contracts": "4.0.x-dev"
+        "aedart/athenaeum-contracts": "4.0.x-dev",
+        "aedart/athenaeum-utils": "4.0.x-dev"
     },
     "require-dev": {
         "twig/twig": "^2.11",
-        "predis/predis": "~1.1"
+        "predis/predis": "~1.1",
+        "symfony/console": "4.4.*"
     },
     "autoload": {
         "psr-4": {
             "Aedart\\Support\\": "src"
         }
+    },
+    "suggest": {
+        "symfony/console": "Required for using various commands",
+        "twig/twig": "Required for using aware-of generator"
     },
     "config": {
         "sort-packages": true
