@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Integration\Console;
 
-use Aedart\Console\AwareOfScaffoldCommand;
+use Aedart\Support\AwareOf\Console\ScaffoldCommand;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\IntegrationTestCase;
 use Codeception\Configuration;
@@ -42,7 +42,7 @@ class AwareOfScaffoldCommandTest extends IntegrationTestCase
      */
     public function canCreateAwareOfComponents()
     {
-        $command = new AwareOfScaffoldCommand();
+        $command = new ScaffoldCommand();
 
         $commandTester = new CommandTester($command);
         $commandTester->execute(array(
