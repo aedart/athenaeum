@@ -13,6 +13,7 @@
 * docs about custom exception handling
 * docs about logging using custom application
 * change Http Client interface to adhere to the PSR-18 (Http Client) interface!
+* docs about version util
 
 ### [v4.0.0](__TODO__)
 
@@ -61,7 +62,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 * `FakerAware` component that can be used for testing purposes.
 * `FakerPartial`, offers basic setup for [Faker](https://github.com/fzaninotto/Faker).
 * `callOrReturn()` utility method in `MethodHelper`.
-* `MessageBag` testing component. Intended to store test or debugging messages across components and tests. 
+* `MessageBag` testing component. Intended to store test or debugging messages across components and tests.
+* `Version` utility. 
 
 #### Fixed
 
