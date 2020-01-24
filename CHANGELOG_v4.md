@@ -64,6 +64,7 @@ It will highjack the `app` binding, which will cause your application to behave 
 * `callOrReturn()` utility method in `MethodHelper`.
 * `MessageBag` testing component. Intended to store test or debugging messages across components and tests.
 * `Version` utility. 
+* `string` and `int` `Milestone` aware components
 
 #### Fixed
 
