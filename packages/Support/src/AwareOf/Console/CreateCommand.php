@@ -43,7 +43,7 @@ class CreateCommand extends CommandBase
     protected function configure()
     {
         $this
-            ->setName('create')
+            ->setName('dto:create')
             ->setDescription('Generates a series of aware-of components, based on given configuration')
             ->addArgument('config', InputArgument::REQUIRED, 'Path to php configuration file')
             ->addOption('force', 'f', InputOption::VALUE_NONE, 'Force overwrite existing aware-of components')
@@ -217,14 +217,14 @@ Generates a series of aware-of components, based on given configuration
 
 Usage:
 
-<info>php aware-of create my-dto-list.php</info>
+<info>dto:create my-dto-list.php</info>
 
 Force Flag:
 
 If you set the force flag, then all existing interfaces and traits are overwritten.
 This also applies to the generated markdown documentation!
 
-<info>php aware-of create aware-of-properties.php --force</info>
+<info>dto:create aware-of-properties.php --force</info>
 
 EOT;
     }

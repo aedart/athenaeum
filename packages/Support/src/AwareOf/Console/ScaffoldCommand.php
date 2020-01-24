@@ -23,7 +23,7 @@ class ScaffoldCommand extends CommandBase
     protected function configure()
     {
         $this
-            ->setName('scaffold')
+            ->setName('dto:scaffold')
             ->setDescription('Creates a configuration file that can e used by the "create" command')
             ->addOption('output', 'o', InputOption::VALUE_OPTIONAL, 'Directory where to create configuration file', getcwd())
             ->setHelp($this->formatHelp());
@@ -85,12 +85,12 @@ Creates a configuration file that can e used by the "create" command
 
 Usage:
 
-<info>php aware-of scaffold scaffold</info>
+<info>dto:scaffold scaffold</info>
 
 You can optionally also specify the output directory where the configuration file
 should be created.
 
-<info>php aware-of scaffold --output configs/dto</info>
+<info>dto:scaffold --output configs/dto</info>
 
 EOT;
     }
