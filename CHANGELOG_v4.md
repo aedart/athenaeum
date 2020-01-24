@@ -49,7 +49,7 @@ The original commands are still available using the `athenaeum` console applicat
 * Added possibility to specify specific `vendor` and `output` paths for `interfaces` and `traits`, in the aware-of `Generator`. 
 
 [1]: _Deprecation of existing abstractions or components is due to the conversion of this package into a [mono repository](ttps://en.wikipedia.org/wiki/Monorepo).
-Existing abstractions are still available, yet will be removed entirely in `v5.0`_
+Existing abstractions are still available, yet will be removed entirely in `v5.0`._
 
 [2]: _You can require packages separately or if you only use the "testing" components, then replace this package with [`aedart/athenaeum-testing`](https://packagist.org/packages/aedart/athenaeum-testing) as dev-dependency and the mentioned packages will all be installed._
 
