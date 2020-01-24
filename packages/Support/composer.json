@@ -36,7 +36,10 @@
     "autoload": {
         "psr-4": {
             "Aedart\\Support\\": "src"
-        }
+        },
+        "files": [
+            "helpers/properties.php"
+        ]
     },
     "suggest": {
         "symfony/console": "Required for using various commands",
