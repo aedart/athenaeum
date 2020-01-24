@@ -27,7 +27,7 @@ class CreateAwareOfCommand extends CreateCommand
 
         $this
             ->setName('dto:create-aware-of')
-            ->setDescription('DEPRECATED - use aware-of create command instead');
+            ->setDescription('DEPRECATED - use dto:create create command instead. See \Aedart\Support\AwareOf\Console\CreateCommand');
     }
 
     /*****************************************************************
@@ -39,7 +39,7 @@ class CreateAwareOfCommand extends CreateCommand
      */
     public function runCommand(): ?int
     {
-        trigger_error('Deprecated since v4.0 - use use aware-of create command instead', E_USER_DEPRECATED);
+        trigger_error('Deprecated since v4.0 - use use dto:create command instead. See \Aedart\Support\AwareOf\Console\CreateCommand', E_USER_DEPRECATED);
 
         return parent::runCommand();
     }

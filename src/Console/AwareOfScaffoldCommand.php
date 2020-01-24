@@ -27,7 +27,7 @@ class AwareOfScaffoldCommand extends ScaffoldCommand
 
         $this
             ->setName('dto:scaffold')
-            ->setDescription('DEPRECATED - use aware-of scaffold command instead');
+            ->setDescription('DEPRECATED - use new dto:scaffold command instead. See \Aedart\Support\AwareOf\Console\ScaffoldCommand');
     }
 
     /*****************************************************************
@@ -39,7 +39,7 @@ class AwareOfScaffoldCommand extends ScaffoldCommand
      */
     public function runCommand(): ?int
     {
-        trigger_error('Deprecated since v4.0 - use use aware-of scaffold command instead', E_USER_DEPRECATED);
+        trigger_error('Deprecated since v4.0 - use new dto:scaffold command instead. See \Aedart\Support\AwareOf\Console\ScaffoldCommand', E_USER_DEPRECATED);
 
         return parent::runCommand();
     }
