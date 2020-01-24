@@ -18,7 +18,7 @@ return [
      *
      * E.g. Psr-4 namespace location
      */
-    'output'    => 'src/',
+    'output'    => 'packages/',
 
     /*****************************************************************
      * Templates location
@@ -30,8 +30,8 @@ return [
      * @var string|array
      */
     'templates-path' => [
-        'resources/athenaeum/templates/aware-of/',
-        'resources/templates/aware-of-component/',
+        'packages/Support/resources/athenaeum/templates/aware-of/',
+        'packages/Support/resources/templates/aware-of-component/',
     ],
 
     /*****************************************************************
@@ -64,9 +64,21 @@ return [
         'interfaces' => [
 
             /*
+             * Vendor namespace overwrite for interfaces
+             */
+            'vendor' => 'Aedart\\Contracts\\',
+
+            /*
              * Prefix for all interfaces
              */
-            'prefix'  => 'Contracts\\Support\\Properties\\',
+            'prefix'  => 'Support\\Properties\\',
+
+            /**
+             * Path overwrite for interfaces
+             *
+             * Uses "output" if not given
+             */
+            'output'  => 'packages/Contracts/src/',
 
             /*
              * Namespaces for various data types
@@ -88,9 +100,21 @@ return [
         'traits' => [
 
             /*
+             * Vendor namespace overwrite for interfaces
+             */
+            'vendor' => 'Aedart\\Support\\',
+
+            /*
              * Prefix for all traits
              */
-            'prefix'  => 'Support\\Properties\\',
+            'prefix'  => 'Properties\\',
+
+            /**
+             * Path overwrite for traits
+             *
+             * Uses "output" if not given
+             */
+            'output'  => 'packages/Support/src/',
 
             /*
              * Namespaces for various data types

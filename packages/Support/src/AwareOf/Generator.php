@@ -76,11 +76,11 @@ class Generator implements ConfigAware
 
         $interfaceNamespace = $this->interfaceNamespace($type);
         $interfaceClass = $this->interfaceClass($property);
-        $interfaceFile = $this->fileLocation($interfaceClass, $interfaceNamespace);
+        $interfaceFile = $this->interfaceFileLocation($interfaceClass, $interfaceNamespace);
 
         $traitNamespace = $this->traitNamespace($type);
         $traitClass = $this->traitClass($property);
-        $traitFile = $this->fileLocation($traitClass, $traitNamespace);
+        $traitFile = $this->traitFileLocation($traitClass, $traitNamespace);
 
         $author = $this->author();
         $email = $this->email();
@@ -214,7 +214,7 @@ class Generator implements ConfigAware
     {
         $config = $this->getConfig();
 
-        $vendor = $this->vendor();
+        $vendor = $this->interfaceVendorNamespace();
         $prefix = $config->get('namespaces.interfaces.prefix', 'Contracts\\');
         $typeNamespace = $this->interfaceTypeNamespace($type);
 
@@ -232,7 +232,7 @@ class Generator implements ConfigAware
     {
         $config = $this->getConfig();
 
-        $vendor = $this->vendor();
+        $vendor = $this->traitVendorNamespace();
         $prefix = $config->get('namespaces.traits.prefix', 'Traits\\');
         $typeNamespace = $this->traitTypeNamespace($type);
 
@@ -288,18 +288,57 @@ class Generator implements ConfigAware
     }
 
     /**
-     * Computes the file location for given interface or trait file
+     * Computes the file location for given interface file
      *
      * @param string $class Class name
      * @param string $namespace Class namespace
      *
      * @return string
      */
-    protected function fileLocation(string $class, string $namespace) : string
+    protected function interfaceFileLocation(string $class, string $namespace) : string
+    {
+        $vendor = $this->interfaceVendorNamespace();
+        $outputDirectory = $this->interfaceOutputDirectory();
+
+        return $this->fileLocation($class, $namespace, $vendor, $outputDirectory);
+    }
+
+    /**
+     * Computes the file location for given trait file
+     *
+     * @param string $class Class name
+     * @param string $namespace Class namespace
+     *
+     * @return string
+     */
+    protected function traitFileLocation(string $class, string $namespace) : string
+    {
+        $vendor = $this->traitVendorNamespace();
+        $outputDirectory = $this->traitOutputDirectory();
+
+        return $this->fileLocation($class, $namespace, $vendor, $outputDirectory);
+    }
+
+    /**
+     * Computes the file location for given interface or trait file
+     *
+     * @param string $class Class name
+     * @param string $namespace Class namespace
+     * @param string $vendor Specific vendor namespace
+     * @param string $outputDirectory Output directory
+     *
+     * @return string
+     */
+    protected function fileLocation(
+        string $class,
+        string $namespace,
+        string $vendor,
+        string $outputDirectory
+    ) : string
     {
         $class = $class . '.php';
-        $namespace = str_replace($this->vendor(), '', $namespace);
-        $destination = $this->outputDirectory() . str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
+        $namespace = str_replace($vendor, '', $namespace);
+        $destination = $outputDirectory . str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
 
         return $destination . DIRECTORY_SEPARATOR . $class;
     }
@@ -342,5 +381,61 @@ class Generator implements ConfigAware
     protected function outputDirectory() : string
     {
         return $this->getConfig()->get('output', 'src/');
+    }
+
+    /**
+     * Returns the vendor namespace for interfaces
+     *
+     * @return string Specific namespace or defaults to vendor namespace
+     */
+    protected function interfaceVendorNamespace() : string
+    {
+        return $this->getConfig()->get(
+            'namespaces.interfaces.vendor',
+            $this->vendor()
+        );
+    }
+
+    /**
+     * Returns the vendor namespace for traits
+     *
+     * @return string Specific namespace or defaults to vendor namespace
+     */
+    protected function traitVendorNamespace() : string
+    {
+        return $this->getConfig()->get(
+            'namespaces.traits.vendor',
+            $this->vendor()
+        );
+    }
+
+    /**
+     * Returns output directory for interfaces
+     *
+     * @see outputDirectory
+     *
+     * @return string Specific or defaults to output directory
+     */
+    protected function interfaceOutputDirectory() : string
+    {
+        return $this->getConfig()->get(
+            'namespaces.interfaces.output',
+            $this->outputDirectory()
+        );
+    }
+
+    /**
+     * Returns output directory for traits
+     *
+     * @see outputDirectory
+     *
+     * @return string Specific or defaults to output directory
+     */
+    protected function traitOutputDirectory() : string
+    {
+        return $this->getConfig()->get(
+            'namespaces.traits.output',
+            $this->outputDirectory()
+        );
     }
 }
