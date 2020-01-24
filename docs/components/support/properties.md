@@ -18,16 +18,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` A process or fact of doing something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ActionAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ActionAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ActionTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ActionTrait`</small>
 
 -------------------------------------------------------
 `callable` Callback method
 
-*Interface* : `Aedart\Contracts\Support\Properties\Callables\ActionAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Callables\ActionAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Callables\ActionTrait`
+<small>**Trait** : `Aedart\Support\Properties\Callables\ActionTrait`</small>
 
 
 ### Address
@@ -35,9 +35,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Address to someone or something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\AddressAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\AddressAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\AddressTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\AddressTrait`</small>
 
 
 ### Age
@@ -45,9 +45,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` Age of someone or something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\AgeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\AgeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\AgeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\AgeTrait`</small>
 
 
 ### Agency
@@ -55,9 +55,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of agency organisation
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\AgencyAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\AgencyAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\AgencyTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\AgencyTrait`</small>
 
 
 ### Agent
@@ -65,9 +65,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Someone or something that acts on behalf of someone else or something else
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\AgentAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\AgentAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\AgentTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\AgentTrait`</small>
 
 
 ### Alias
@@ -75,9 +75,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` An alternate name of an item or component
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\AliasAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\AliasAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\AliasTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\AliasTrait`</small>
 
 
 ### Amount
@@ -85,16 +85,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` The quantity of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\AmountAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\AmountAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\AmountTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\AmountTrait`</small>
 
 -------------------------------------------------------
 `float` The quantity of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\AmountAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\AmountAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\AmountTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\AmountTrait`</small>
 
 
 ### Anniversary
@@ -102,23 +102,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of anniversary
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\AnniversaryAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\AnniversaryAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\AnniversaryTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\AnniversaryTrait`</small>
 
 -------------------------------------------------------
 `int` Date of anniversary
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\AnniversaryAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\AnniversaryAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\AnniversaryTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\AnniversaryTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of anniversary
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\AnniversaryAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\AnniversaryAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\AnniversaryTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\AnniversaryTrait`</small>
 
 
 ### Area
@@ -126,9 +126,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of area, e.g. in a building, in a city, outside the city, ...etc
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\AreaAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\AreaAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\AreaTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\AreaTrait`</small>
 
 
 ### Author
@@ -136,9 +136,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of author
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\AuthorAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\AuthorAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\AuthorTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\AuthorTrait`</small>
 
 
 
@@ -149,9 +149,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The path to the root directory of some kind of a resource, e.g. your application, files, pictures,...etc
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\BasePathAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\BasePathAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\BasePathTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\BasePathTrait`</small>
 
 
 ### Begin
@@ -159,9 +159,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Location, index or some other identifier of where something begins
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\BeginAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\BeginAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\BeginTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\BeginTrait`</small>
 
 
 ### Birthdate
@@ -169,23 +169,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of birth
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\BirthdateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\BirthdateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\BirthdateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\BirthdateTrait`</small>
 
 -------------------------------------------------------
 `int` Date of birth
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\BirthdateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\BirthdateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\BirthdateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\BirthdateTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of birth
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\BirthdateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\BirthdateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\BirthdateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\BirthdateTrait`</small>
 
 
 ### BootstrapPath
@@ -193,9 +193,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Directory path where bootstrapping resources are located
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\BootstrapPathAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\BootstrapPathAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\BootstrapPathTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\BootstrapPathTrait`</small>
 
 
 ### Brand
@@ -203,16 +203,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name or identifier of a brand that is associated with a product or service
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\BrandAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\BrandAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\BrandTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\BrandTrait`</small>
 
 -------------------------------------------------------
 `int` Name or identifier of a brand that is associated with a product or service
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\BrandAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\BrandAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\BrandTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\BrandTrait`</small>
 
 
 ### BuildingNumber
@@ -220,9 +220,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The house number assigned to a building or apartment in a street or area, e.g. 12a
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\BuildingNumberAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\BuildingNumberAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\BuildingNumberTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\BuildingNumberTrait`</small>
 
 
 
@@ -233,9 +233,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `callable` Callback method
 
-*Interface* : `Aedart\Contracts\Support\Properties\Callables\CallbackAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Callables\CallbackAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Callables\CallbackTrait`
+<small>**Trait** : `Aedart\Support\Properties\Callables\CallbackTrait`</small>
 
 
 ### Calendar
@@ -243,9 +243,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Location to calendar, e.g. URI, name, ID or other identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\CalendarAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\CalendarAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\CalendarTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\CalendarTrait`</small>
 
 
 ### CardNumber
@@ -253,9 +253,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Numeric or Alphanumeric card number, e.g. for credit cards or other types of cards
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\CardNumberAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\CardNumberAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\CardNumberTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\CardNumberTrait`</small>
 
 
 ### CardOwner
@@ -263,9 +263,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of the card owner (cardholder)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\CardOwnerAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\CardOwnerAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\CardOwnerTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\CardOwnerTrait`</small>
 
 
 ### CardType
@@ -273,9 +273,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The type of card, e.g. VISA, MasterCard, Playing Card, Magic Card... etc
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\CardTypeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\CardTypeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\CardTypeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\CardTypeTrait`</small>
 
 
 ### Category
@@ -283,9 +283,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of category
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\CategoryAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\CategoryAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\CategoryTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\CategoryTrait`</small>
 
 
 ### Categories
@@ -293,9 +293,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `array` List of category names
 
-*Interface* : `Aedart\Contracts\Support\Properties\Arrays\CategoriesAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Arrays\CategoriesAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Arrays\CategoriesTrait`
+<small>**Trait** : `Aedart\Support\Properties\Arrays\CategoriesTrait`</small>
 
 
 ### Choices
@@ -303,9 +303,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `array` Various choices that can be made
 
-*Interface* : `Aedart\Contracts\Support\Properties\Arrays\ChoicesAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Arrays\ChoicesAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Arrays\ChoicesTrait`
+<small>**Trait** : `Aedart\Support\Properties\Arrays\ChoicesTrait`</small>
 
 
 ### City
@@ -313,9 +313,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of city, town or village
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\CityAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\CityAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\CityTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\CityTrait`</small>
 
 
 ### Class
@@ -323,9 +323,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The class of something or perhaps a class path
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ClassAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ClassAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ClassTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ClassTrait`</small>
 
 
 ### Code
@@ -333,9 +333,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The code for something, e.g. language code, classification code, or perhaps an artifacts identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\CodeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\CodeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\CodeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\CodeTrait`</small>
 
 
 ### Colour
@@ -343,9 +343,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of colour or colour value, e.g. RGB, CMYK, HSL or other format
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ColourAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ColourAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ColourTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ColourTrait`</small>
 
 
 ### Column
@@ -353,9 +353,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of column
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ColumnAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ColumnAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ColumnTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ColumnTrait`</small>
 
 
 ### Comment
@@ -363,9 +363,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` A comment
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\CommentAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\CommentAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\CommentTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\CommentTrait`</small>
 
 
 ### Company
@@ -373,9 +373,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of company
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\CompanyAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\CompanyAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\CompanyTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\CompanyTrait`</small>
 
 
 ### ConfigPath
@@ -383,9 +383,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Directory path where configuration files or resources located
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ConfigPathAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ConfigPathAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ConfigPathTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ConfigPathTrait`</small>
 
 
 ### Content
@@ -393,9 +393,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Content
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ContentAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ContentAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ContentTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ContentTrait`</small>
 
 
 ### Country
@@ -403,9 +403,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of country, e.g. Denmark, United Kingdom, Australia...etc
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\CountryAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\CountryAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\CountryTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\CountryTrait`</small>
 
 
 ### CreatedAt
@@ -413,23 +413,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of when this component, entity or resource was created
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\CreatedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\CreatedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\CreatedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\CreatedAtTrait`</small>
 
 -------------------------------------------------------
 `int` Date of when this component, entity or resource was created
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\CreatedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\CreatedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\CreatedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\CreatedAtTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of when this component, entity or resource was created
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\CreatedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\CreatedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\CreatedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\CreatedAtTrait`</small>
 
 
 ### Currency
@@ -437,9 +437,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name, code or other identifier of currency
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\CurrencyAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\CurrencyAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\CurrencyTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\CurrencyTrait`</small>
 
 
 
@@ -450,9 +450,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `array` A list (array) containing a set of values
 
-*Interface* : `Aedart\Contracts\Support\Properties\Arrays\DataAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Arrays\DataAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Arrays\DataTrait`
+<small>**Trait** : `Aedart\Support\Properties\Arrays\DataTrait`</small>
 
 
 ### Database
@@ -460,9 +460,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of database
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DatabaseAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DatabaseAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DatabaseTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DatabaseTrait`</small>
 
 
 ### DatabasePath
@@ -470,9 +470,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Directory path where your databases are located
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DatabasePathAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DatabasePathAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DatabasePathTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DatabasePathTrait`</small>
 
 
 ### Date
@@ -480,23 +480,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of event
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DateTrait`</small>
 
 -------------------------------------------------------
 `int` Date of event
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\DateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\DateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\DateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\DateTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of event
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\DateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\DateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\DateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\DateTrait`</small>
 
 
 ### DeceasedAt
@@ -504,23 +504,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of when person, animal of something has died
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DeceasedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DeceasedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DeceasedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DeceasedAtTrait`</small>
 
 -------------------------------------------------------
 `int` Date of when person, animal of something has died
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\DeceasedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\DeceasedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\DeceasedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\DeceasedAtTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of when person, animal of something has died
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\DeceasedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\DeceasedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\DeceasedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\DeceasedAtTrait`</small>
 
 
 ### DeletedAt
@@ -528,23 +528,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of when this component, entity or resource was deleted
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DeletedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DeletedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DeletedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DeletedAtTrait`</small>
 
 -------------------------------------------------------
 `int` Date of when this component, entity or resource was deleted
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\DeletedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\DeletedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\DeletedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\DeletedAtTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of when this component, entity or resource was deleted
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\DeletedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\DeletedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\DeletedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\DeletedAtTrait`</small>
 
 
 ### DeliveredAt
@@ -552,23 +552,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of delivery
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DeliveredAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DeliveredAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DeliveredAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DeliveredAtTrait`</small>
 
 -------------------------------------------------------
 `int` Date of delivery
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\DeliveredAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\DeliveredAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\DeliveredAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\DeliveredAtTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of delivery
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\DeliveredAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\DeliveredAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\DeliveredAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\DeliveredAtTrait`</small>
 
 
 ### DeliveryAddress
@@ -576,9 +576,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Delivery address
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DeliveryAddressAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DeliveryAddressAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DeliveryAddressTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DeliveryAddressTrait`</small>
 
 
 ### DeliveryDate
@@ -586,23 +586,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of planned delivery
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DeliveryDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DeliveryDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DeliveryDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DeliveryDateTrait`</small>
 
 -------------------------------------------------------
 `int` Date of planned delivery
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\DeliveryDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\DeliveryDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\DeliveryDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\DeliveryDateTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of planned delivery
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\DeliveryDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\DeliveryDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\DeliveryDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\DeliveryDateTrait`</small>
 
 
 ### Depth
@@ -610,16 +610,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` Depth of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\DepthAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\DepthAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\DepthTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\DepthTrait`</small>
 
 -------------------------------------------------------
 `float` Depth of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\DepthAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\DepthAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\DepthTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\DepthTrait`</small>
 
 
 ### Description
@@ -627,9 +627,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Description
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DescriptionAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DescriptionAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DescriptionTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DescriptionTrait`</small>
 
 
 ### Directory
@@ -637,9 +637,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Path to a given directory, relative or absolute, existing or none-existing
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DirectoryAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DirectoryAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DirectoryTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DirectoryTrait`</small>
 
 
 ### Discount
@@ -647,23 +647,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Discount amount
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DiscountAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DiscountAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DiscountTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DiscountTrait`</small>
 
 -------------------------------------------------------
 `int` Discount amount
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\DiscountAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\DiscountAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\DiscountTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\DiscountTrait`</small>
 
 -------------------------------------------------------
 `float` Discount amount
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\DiscountAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\DiscountAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\DiscountTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\DiscountTrait`</small>
 
 
 ### Distance
@@ -671,23 +671,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Distance to or from something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DistanceAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DistanceAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DistanceTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DistanceTrait`</small>
 
 -------------------------------------------------------
 `int` Distance to or from something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\DistanceAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\DistanceAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\DistanceTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\DistanceTrait`</small>
 
 -------------------------------------------------------
 `float` Distance to or from something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\DistanceAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\DistanceAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\DistanceTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\DistanceTrait`</small>
 
 
 ### Domain
@@ -695,9 +695,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name, URL, territory or term that describes a given domain... etc
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DomainAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DomainAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DomainTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DomainTrait`</small>
 
 
 ### Duration
@@ -705,23 +705,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Duration of some event or media
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\DurationAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\DurationAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\DurationTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\DurationTrait`</small>
 
 -------------------------------------------------------
 `int` Duration of some event or media
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\DurationAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\DurationAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\DurationTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\DurationTrait`</small>
 
 -------------------------------------------------------
 `float` Duration of some event or media
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\DurationAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\DurationAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\DurationTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\DurationTrait`</small>
 
 
 
@@ -732,9 +732,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` International Article Number (EAN)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\EanAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\EanAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\EanTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\EanTrait`</small>
 
 
 ### Ean8
@@ -742,9 +742,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` International Article Number (EAN), 8-digit
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\Ean8Aware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\Ean8Aware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\Ean8Trait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\Ean8Trait`</small>
 
 
 ### Ean13
@@ -752,9 +752,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` International Article Number (EAN), 13-digit
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\Ean13Aware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\Ean13Aware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\Ean13Trait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\Ean13Trait`</small>
 
 
 ### Edition
@@ -762,16 +762,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The version of a published text, e.g. book, article, newspaper, report... etc
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\EditionAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\EditionAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\EditionTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\EditionTrait`</small>
 
 -------------------------------------------------------
 `int` The version of a published text, e.g. book, article, newspaper, report... etc
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\EditionAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\EditionAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\EditionTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\EditionTrait`</small>
 
 
 ### Email
@@ -779,9 +779,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Email
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\EmailAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\EmailAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\EmailTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\EmailTrait`</small>
 
 
 ### End
@@ -789,9 +789,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Location, index or other identifier of when something ends
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\EndAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\EndAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\EndTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\EndTrait`</small>
 
 
 ### EndDate
@@ -799,23 +799,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date for when some kind of event ends
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\EndDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\EndDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\EndDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\EndDateTrait`</small>
 
 -------------------------------------------------------
 `int` Date for when some kind of event ends
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\EndDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\EndDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\EndDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\EndDateTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date for when some kind of event ends
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\EndDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\EndDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\EndDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\EndDateTrait`</small>
 
 
 ### EnvironmentPath
@@ -823,9 +823,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Directory path where your environment resources are located
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\EnvironmentPathAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\EnvironmentPathAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\EnvironmentPathTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\EnvironmentPathTrait`</small>
 
 
 ### Error
@@ -833,16 +833,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Error name or identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ErrorAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ErrorAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ErrorTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ErrorTrait`</small>
 
 -------------------------------------------------------
 `int` Error name or identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\ErrorAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\ErrorAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\ErrorTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\ErrorTrait`</small>
 
 
 ### Event
@@ -850,16 +850,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Event name or identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\EventAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\EventAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\EventTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\EventTrait`</small>
 
 -------------------------------------------------------
 `int` Event name or identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\EventAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\EventAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\EventTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\EventTrait`</small>
 
 
 ### ExpiresAt
@@ -867,23 +867,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of when this component, entity or resource is going to expire
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ExpiresAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ExpiresAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ExpiresAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ExpiresAtTrait`</small>
 
 -------------------------------------------------------
 `int` Date of when this component, entity or resource is going to expire
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\ExpiresAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\ExpiresAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\ExpiresAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\ExpiresAtTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of when this component, entity or resource is going to expire
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\ExpiresAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\ExpiresAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\ExpiresAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\ExpiresAtTrait`</small>
 
 
 
@@ -894,9 +894,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` File extension, e.g. php, avi, json, txt...etc
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\FileExtensionAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\FileExtensionAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\FileExtensionTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\FileExtensionTrait`</small>
 
 
 ### Filename
@@ -904,9 +904,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of given file, with or without path, e.g. myText.txt, /usr/docs/README.md
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\FilenameAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\FilenameAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\FilenameTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\FilenameTrait`</small>
 
 
 ### FilePath
@@ -914,9 +914,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Path to a file
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\FilePathAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\FilePathAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\FilePathTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\FilePathTrait`</small>
 
 
 ### FirstName
@@ -924,9 +924,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` First name (given name) or forename of a person
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\FirstNameAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\FirstNameAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\FirstNameTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\FirstNameTrait`</small>
 
 
 ### Format
@@ -934,9 +934,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The shape, size and presentation or medium of an item or component
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\FormatAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\FormatAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\FormatTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\FormatTrait`</small>
 
 
 ### FormattedName
@@ -944,9 +944,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Formatted name of someone or something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\FormattedNameAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\FormattedNameAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\FormattedNameTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\FormattedNameTrait`</small>
 
 
 
@@ -957,9 +957,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Gender (sex) identity of a person, animal or something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\GenderAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\GenderAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\GenderTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\GenderTrait`</small>
 
 
 ### Group
@@ -967,16 +967,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Group identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\GroupAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\GroupAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\GroupTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\GroupTrait`</small>
 
 -------------------------------------------------------
 `int` Group identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\GroupAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\GroupAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\GroupTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\GroupTrait`</small>
 
 
 
@@ -987,23 +987,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Identifier of a handler
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\HandlerAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\HandlerAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\HandlerTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\HandlerTrait`</small>
 
 -------------------------------------------------------
 `int` Identifier of a handler
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\HandlerAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\HandlerAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\HandlerTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\HandlerTrait`</small>
 
 -------------------------------------------------------
 `callable` Handler callback method
 
-*Interface* : `Aedart\Contracts\Support\Properties\Callables\HandlerAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Callables\HandlerAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Callables\HandlerTrait`
+<small>**Trait** : `Aedart\Support\Properties\Callables\HandlerTrait`</small>
 
 
 ### Height
@@ -1011,16 +1011,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` Height of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\HeightAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\HeightAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\HeightTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\HeightTrait`</small>
 
 -------------------------------------------------------
 `float` Height of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\HeightAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\HeightAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\HeightTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\HeightTrait`</small>
 
 
 ### Host
@@ -1028,9 +1028,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Identifier of a host
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\HostAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\HostAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\HostTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\HostTrait`</small>
 
 
 ### Html
@@ -1038,16 +1038,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` HyperText Markup Language (HTML)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\HtmlAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\HtmlAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\HtmlTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\HtmlTrait`</small>
 
 -------------------------------------------------------
 `mixed` HyperText Markup Language (HTML)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Mixed\HtmlAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\HtmlAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Mixed\HtmlTrait`
+<small>**Trait** : `Aedart\Support\Properties\Mixed\HtmlTrait`</small>
 
 
 
@@ -1058,9 +1058,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` International Air Transport Association code
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\IataAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\IataAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\IataTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\IataTrait`</small>
 
 
 ### Iban
@@ -1068,9 +1068,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` International Bank Account Number (IBAN)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\IbanAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\IbanAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\IbanTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\IbanTrait`</small>
 
 
 ### Icao
@@ -1078,9 +1078,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` International Civil Aviation Organization code
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\IcaoAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\IcaoAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\IcaoTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\IcaoTrait`</small>
 
 
 ### Id
@@ -1088,16 +1088,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Unique identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\IdAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\IdAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\IdTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\IdTrait`</small>
 
 -------------------------------------------------------
 `int` Unique identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\IdAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\IdAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\IdTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\IdTrait`</small>
 
 
 ### Identifier
@@ -1105,16 +1105,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name or code that identifies a unique object, resource, class, component or thing
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\IdentifierAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\IdentifierAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\IdentifierTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\IdentifierTrait`</small>
 
 -------------------------------------------------------
 `int` Name or code that identifies a unique object, resource, class, component or thing
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\IdentifierAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\IdentifierAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\IdentifierTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\IdentifierTrait`</small>
 
 
 ### Image
@@ -1122,9 +1122,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Path, Uri or other type of location to an image
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ImageAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ImageAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ImageTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ImageTrait`</small>
 
 
 ### Index
@@ -1132,16 +1132,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Index
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\IndexAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\IndexAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\IndexTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\IndexTrait`</small>
 
 -------------------------------------------------------
 `int` Index
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\IndexAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\IndexAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\IndexTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\IndexTrait`</small>
 
 
 ### Info
@@ -1149,9 +1149,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Information about someone or something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\InfoAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\InfoAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\InfoTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\InfoTrait`</small>
 
 
 ### Information
@@ -1159,9 +1159,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Information about someone or something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\InformationAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\InformationAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\InformationTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\InformationTrait`</small>
 
 
 ### InvoiceAddress
@@ -1169,9 +1169,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Invoice Address. Can be formatted.
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\InvoiceAddressAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\InvoiceAddressAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\InvoiceAddressTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\InvoiceAddressTrait`</small>
 
 
 ### Ip
@@ -1179,9 +1179,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` IP address
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\IpAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\IpAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\IpTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\IpTrait`</small>
 
 
 ### IpV4
@@ -1189,9 +1189,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` IPv4 address
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\IpV4Aware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\IpV4Aware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\IpV4Trait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\IpV4Trait`</small>
 
 
 ### IpV6
@@ -1199,9 +1199,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` IPv6 address
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\IpV6Aware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\IpV6Aware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\IpV6Trait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\IpV6Trait`</small>
 
 
 ### IsicV4
@@ -1209,9 +1209,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` International Standard of Industrial Classification of All Economic Activities (ISIC), revision 4 code
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\IsicV4Aware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\IsicV4Aware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\IsicV4Trait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\IsicV4Trait`</small>
 
 
 ### Isbn
@@ -1219,9 +1219,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` International Standard Book Number (ISBN)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\IsbnAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\IsbnAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\IsbnTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\IsbnTrait`</small>
 
 
 ### Isbn10
@@ -1229,9 +1229,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` International Standard Book Number (ISBN), 10-digits
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\Isbn10Aware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\Isbn10Aware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\Isbn10Trait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\Isbn10Trait`</small>
 
 
 ### Isbn13
@@ -1239,9 +1239,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` International Standard Book Number (ISBN), 13-digits
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\Isbn13Aware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\Isbn13Aware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\Isbn13Trait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\Isbn13Trait`</small>
 
 
 
@@ -1252,16 +1252,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` JavaScript Object Notation (JSON)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\JsonAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\JsonAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\JsonTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\JsonTrait`</small>
 
 -------------------------------------------------------
 `mixed` JavaScript Object Notation (JSON)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Mixed\JsonAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\JsonAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Mixed\JsonTrait`
+<small>**Trait** : `Aedart\Support\Properties\Mixed\JsonTrait`</small>
 
 
 
@@ -1272,9 +1272,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Key, e.g. indexing key, encryption key or other type of key
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\KeyAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\KeyAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\KeyTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\KeyTrait`</small>
 
 
 ### Kind
@@ -1282,9 +1282,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The kind of object this represents, e.g. human, organisation, group, individual...etc
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\KindAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\KindAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\KindTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\KindTrait`</small>
 
 
 
@@ -1295,9 +1295,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Label name
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\LabelAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LabelAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\LabelTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\LabelTrait`</small>
 
 
 ### LangPath
@@ -1305,9 +1305,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Directory path where translation resources are located
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\LangPathAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LangPathAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\LangPathTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\LangPathTrait`</small>
 
 
 ### Language
@@ -1315,9 +1315,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name or identifier of a language
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\LanguageAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LanguageAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\LanguageTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\LanguageTrait`</small>
 
 
 ### LastName
@@ -1325,9 +1325,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Last Name (surname) or family name of a person
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\LastNameAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LastNameAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\LastNameTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\LastNameTrait`</small>
 
 
 ### Latitude
@@ -1335,16 +1335,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` North-South position on Earth&#039;s surface
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\LatitudeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LatitudeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\LatitudeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\LatitudeTrait`</small>
 
 -------------------------------------------------------
 `float` North-South position on Earth&#039;s surface
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\LatitudeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\LatitudeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\LatitudeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\LatitudeTrait`</small>
 
 
 ### Length
@@ -1352,16 +1352,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` Length of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\LengthAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\LengthAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\LengthTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\LengthTrait`</small>
 
 -------------------------------------------------------
 `float` Length of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\LengthAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\LengthAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\LengthTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\LengthTrait`</small>
 
 
 ### License
@@ -1369,16 +1369,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` License name or identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\LicenseAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LicenseAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\LicenseTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\LicenseTrait`</small>
 
 -------------------------------------------------------
 `int` License name or identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\LicenseAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\LicenseAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\LicenseTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\LicenseTrait`</small>
 
 
 ### Link
@@ -1386,9 +1386,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Hyperlink to related resource or action
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\LinkAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LinkAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\LinkTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\LinkTrait`</small>
 
 
 ### Locale
@@ -1396,9 +1396,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Locale language code, e.g. en_us or other format
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\LocaleAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LocaleAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\LocaleTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\LocaleTrait`</small>
 
 
 ### Location
@@ -1406,16 +1406,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name or identifier of a location
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\LocationAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LocationAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\LocationTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\LocationTrait`</small>
 
 -------------------------------------------------------
 `int` Name or identifier of a location
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\LocationAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\LocationAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\LocationTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\LocationTrait`</small>
 
 
 ### Locations
@@ -1423,9 +1423,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `array` List of locations
 
-*Interface* : `Aedart\Contracts\Support\Properties\Arrays\LocationsAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Arrays\LocationsAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Arrays\LocationsTrait`
+<small>**Trait** : `Aedart\Support\Properties\Arrays\LocationsTrait`</small>
 
 
 ### Logo
@@ -1433,9 +1433,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Path, Uri or other type of location to a logo
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\LogoAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LogoAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\LogoTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\LogoTrait`</small>
 
 
 ### Longitude
@@ -1443,16 +1443,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` East-West position on Earth&#039;s surface
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\LongitudeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\LongitudeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\LongitudeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\LongitudeTrait`</small>
 
 -------------------------------------------------------
 `float` East-West position on Earth&#039;s surface
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\LongitudeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\LongitudeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\LongitudeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\LongitudeTrait`</small>
 
 
 
@@ -1463,9 +1463,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Media Access Control Address (MAC Address)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\MacAddressAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\MacAddressAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\MacAddressTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\MacAddressTrait`</small>
 
 
 ### Manufacturer
@@ -1473,9 +1473,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name or identifier of a manufacturer
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ManufacturerAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ManufacturerAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ManufacturerTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ManufacturerTrait`</small>
 
 
 ### Material
@@ -1483,9 +1483,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name or identifier of a material, e.g. leather, wool, cotton, paper.
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\MaterialAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\MaterialAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\MaterialTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\MaterialTrait`</small>
 
 
 ### MediaType
@@ -1493,9 +1493,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Media Type (also known as MIME Type), acc. to IANA standard, or perhaps a type name
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\MediaTypeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\MediaTypeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\MediaTypeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\MediaTypeTrait`</small>
 
 
 ### Message
@@ -1503,9 +1503,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` A message
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\MessageAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\MessageAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\MessageTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\MessageTrait`</small>
 
 
 ### Method
@@ -1513,23 +1513,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of method or other identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\MethodAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\MethodAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\MethodTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\MethodTrait`</small>
 
 -------------------------------------------------------
 `int` Name of method or other identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\MethodAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\MethodAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\MethodTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\MethodTrait`</small>
 
 -------------------------------------------------------
 `callable` Callback method
 
-*Interface* : `Aedart\Contracts\Support\Properties\Callables\MethodAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Callables\MethodAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Callables\MethodTrait`
+<small>**Trait** : `Aedart\Support\Properties\Callables\MethodTrait`</small>
 
 
 ### MiddleName
@@ -1537,26 +1537,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Middle Name or names of a person
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\MiddleNameAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\MiddleNameAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\MiddleNameTrait`
-
-
-### Milestone
-
--------------------------------------------------------
-`string` A marker that signifies a change, state, location or action
-
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\MilestoneAware`
-
-*Trait* : `Aedart\Support\Properties\Strings\MilestoneTrait`
-
--------------------------------------------------------
-`int` A marker that signifies a change, state, location or action
-
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\MilestoneAware`
-
-*Trait* : `Aedart\Support\Properties\Integers\MilestoneTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\MiddleNameTrait`</small>
 
 
 
@@ -1567,9 +1550,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\NameAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\NameAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\NameTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\NameTrait`</small>
 
 
 ### NickName
@@ -1577,9 +1560,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Nickname of someone or something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\NickNameAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\NickNameAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\NickNameTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\NickNameTrait`</small>
 
 
 ### Namespace
@@ -1587,9 +1570,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Namespace
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\NamespaceAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\NamespaceAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\NamespaceTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\NamespaceTrait`</small>
 
 
 
@@ -1600,9 +1583,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `bool` 
 
-*Interface* : `Aedart\Contracts\Support\Properties\Booleans\OnAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Booleans\OnAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Booleans\OnTrait`
+<small>**Trait** : `Aedart\Support\Properties\Booleans\OnTrait`</small>
 
 
 ### Off
@@ -1610,9 +1593,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `bool` 
 
-*Interface* : `Aedart\Contracts\Support\Properties\Booleans\OffAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Booleans\OffAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Booleans\OffTrait`
+<small>**Trait** : `Aedart\Support\Properties\Booleans\OffTrait`</small>
 
 
 ### OrderNumber
@@ -1620,16 +1603,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Number that represents a purchase or order placed by a customer
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\OrderNumberAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\OrderNumberAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\OrderNumberTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\OrderNumberTrait`</small>
 
 -------------------------------------------------------
 `int` Number that represents a purchase or order placed by a customer
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\OrderNumberAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\OrderNumberAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\OrderNumberTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\OrderNumberTrait`</small>
 
 
 ### Organisation
@@ -1637,9 +1620,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of organisation
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\OrganisationAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\OrganisationAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\OrganisationTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\OrganisationTrait`</small>
 
 
 ### OutputPath
@@ -1647,9 +1630,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Location of where some kind of output must be placed or written to
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\OutputPathAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\OutputPathAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\OutputPathTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\OutputPathTrait`</small>
 
 
 
@@ -1660,9 +1643,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of package. Can evt. contain path to package as well
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PackageAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PackageAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PackageTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PackageTrait`</small>
 
 
 ### Password
@@ -1670,9 +1653,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Password
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PasswordAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PasswordAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PasswordTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PasswordTrait`</small>
 
 
 ### Path
@@ -1680,9 +1663,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Location of some kind of a resources, e.g. a file, an Url, an index
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PathAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PathAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PathTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PathTrait`</small>
 
 
 ### Pattern
@@ -1690,9 +1673,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Some kind of a pattern, e.g. search or regex
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PatternAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PatternAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PatternTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PatternTrait`</small>
 
 
 ### Percent
@@ -1700,23 +1683,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` A part or other object per hundred
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PercentAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PercentAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PercentTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PercentTrait`</small>
 
 -------------------------------------------------------
 `int` A part or other object per hundred
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\PercentAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\PercentAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\PercentTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\PercentTrait`</small>
 
 -------------------------------------------------------
 `float` A part or other object per hundred
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\PercentAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\PercentAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\PercentTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\PercentTrait`</small>
 
 
 ### Percentage
@@ -1724,23 +1707,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` A proportion (especially per hundred)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PercentageAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PercentageAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PercentageTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PercentageTrait`</small>
 
 -------------------------------------------------------
 `int` A part or other object per hundred
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\PercentageAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\PercentageAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\PercentageTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\PercentageTrait`</small>
 
 -------------------------------------------------------
 `float` A proportion (especially per hundred)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\PercentageAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\PercentageAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\PercentageTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\PercentageTrait`</small>
 
 
 ### Phone
@@ -1748,9 +1731,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Phone number
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PhoneAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PhoneAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PhoneTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PhoneTrait`</small>
 
 
 ### Photo
@@ -1758,9 +1741,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Path, Uri or other type of location to a photo
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PhotoAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PhotoAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PhotoTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PhotoTrait`</small>
 
 
 ### PostalCode
@@ -1768,9 +1751,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Numeric or Alphanumeric postal code (zip code)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PostalCodeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PostalCodeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PostalCodeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PostalCodeTrait`</small>
 
 
 ### Prefix
@@ -1778,9 +1761,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Prefix
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PrefixAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PrefixAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PrefixTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PrefixTrait`</small>
 
 
 ### Price
@@ -1788,23 +1771,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Numeric price
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PriceAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PriceAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PriceTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PriceTrait`</small>
 
 -------------------------------------------------------
 `int` Numeric price
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\PriceAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\PriceAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\PriceTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\PriceTrait`</small>
 
 -------------------------------------------------------
 `float` Numeric price
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\PriceAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\PriceAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\PriceTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\PriceTrait`</small>
 
 
 ### Profile
@@ -1812,9 +1795,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The profile or someone or something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ProfileAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ProfileAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ProfileTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ProfileTrait`</small>
 
 
 ### ProducedAt
@@ -1822,23 +1805,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of when this component, entity or something was produced
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ProducedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ProducedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ProducedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ProducedAtTrait`</small>
 
 -------------------------------------------------------
 `int` Date of when this component, entity or something was produced
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\ProducedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\ProducedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\ProducedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\ProducedAtTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of when this component, entity or something was produced
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\ProducedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\ProducedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\ProducedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\ProducedAtTrait`</small>
 
 
 ### ProductionDate
@@ -1846,23 +1829,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of planned production
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ProductionDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ProductionDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ProductionDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ProductionDateTrait`</small>
 
 -------------------------------------------------------
 `int` Date of planned production
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\ProductionDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\ProductionDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\ProductionDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\ProductionDateTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of planned production
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\ProductionDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\ProductionDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\ProductionDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\ProductionDateTrait`</small>
 
 
 ### PublicPath
@@ -1870,9 +1853,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Directory path where public resources are located
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PublicPathAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PublicPathAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PublicPathTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PublicPathTrait`</small>
 
 
 ### PurchaseDate
@@ -1880,23 +1863,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of planned purchase
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PurchaseDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PurchaseDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PurchaseDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PurchaseDateTrait`</small>
 
 -------------------------------------------------------
 `int` Date of planned purchase
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\PurchaseDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\PurchaseDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\PurchaseDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\PurchaseDateTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of planned purchase
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\PurchaseDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\PurchaseDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\PurchaseDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\PurchaseDateTrait`</small>
 
 
 ### PurchasedAt
@@ -1904,23 +1887,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of when this component, entity or resource was purchased
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\PurchasedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\PurchasedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\PurchasedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\PurchasedAtTrait`</small>
 
 -------------------------------------------------------
 `int` Date of when this component, entity or resource was purchased
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\PurchasedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\PurchasedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\PurchasedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\PurchasedAtTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of when this component, entity or resource was purchased
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\PurchasedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\PurchasedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\PurchasedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\PurchasedAtTrait`</small>
 
 
 
@@ -1931,16 +1914,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` The quantity of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\QuantityAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\QuantityAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\QuantityTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\QuantityTrait`</small>
 
 -------------------------------------------------------
 `float` The quantity of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\QuantityAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\QuantityAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\QuantityTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\QuantityTrait`</small>
 
 
 ### Query
@@ -1948,9 +1931,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Query
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\QueryAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\QueryAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\QueryTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\QueryTrait`</small>
 
 
 ### Question
@@ -1958,9 +1941,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` A question that can be asked
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\QuestionAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\QuestionAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\QuestionTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\QuestionTrait`</small>
 
 
 
@@ -1971,23 +1954,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The position in a hierarchy
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\RankAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\RankAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\RankTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\RankTrait`</small>
 
 -------------------------------------------------------
 `int` The position in a hierarchy
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\RankAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\RankAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\RankTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\RankTrait`</small>
 
 -------------------------------------------------------
 `float` The position in a hierarchy
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\RankAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\RankAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\RankTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\RankTrait`</small>
 
 
 ### Rate
@@ -1995,23 +1978,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The rate of something, e.g. growth rate, tax rate
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\RateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\RateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\RateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\RateTrait`</small>
 
 -------------------------------------------------------
 `int` The rate of something, e.g. growth rate, tax rate
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\RateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\RateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\RateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\RateTrait`</small>
 
 -------------------------------------------------------
 `float` The rate of something, e.g. growth rate, tax rate
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\RateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\RateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\RateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\RateTrait`</small>
 
 
 ### Rating
@@ -2019,23 +2002,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The rating of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\RatingAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\RatingAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\RatingTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\RatingTrait`</small>
 
 -------------------------------------------------------
 `int` The rating of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\RatingAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\RatingAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\RatingTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\RatingTrait`</small>
 
 -------------------------------------------------------
 `float` The rating of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\RatingAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\RatingAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\RatingTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\RatingTrait`</small>
 
 
 ### ReleasedAt
@@ -2043,23 +2026,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of when this component, entity or something was released
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ReleasedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ReleasedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ReleasedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ReleasedAtTrait`</small>
 
 -------------------------------------------------------
 `int` Date of when this component, entity or something was released
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\ReleasedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\ReleasedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\ReleasedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\ReleasedAtTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of when this component, entity or something was released
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\ReleasedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\ReleasedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\ReleasedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\ReleasedAtTrait`</small>
 
 
 ### ReleaseDate
@@ -2067,23 +2050,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of planned release
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ReleaseDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ReleaseDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ReleaseDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ReleaseDateTrait`</small>
 
 -------------------------------------------------------
 `int` Date of planned release
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\ReleaseDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\ReleaseDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\ReleaseDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\ReleaseDateTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of planned release
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\ReleaseDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\ReleaseDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\ReleaseDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\ReleaseDateTrait`</small>
 
 
 ### ResourcePath
@@ -2091,9 +2074,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Directory path where your resources are located
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ResourcePathAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ResourcePathAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ResourcePathTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ResourcePathTrait`</small>
 
 
 ### Row
@@ -2101,9 +2084,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` A row identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\RowAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\RowAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\RowTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\RowTrait`</small>
 
 
 ### Region
@@ -2111,9 +2094,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of a region, state or province
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\RegionAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\RegionAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\RegionTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\RegionTrait`</small>
 
 
 ### Revision
@@ -2121,9 +2104,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` A revision, batch number or other identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\RevisionAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\RevisionAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\RevisionTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\RevisionTrait`</small>
 
 
 ### Role
@@ -2131,9 +2114,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name or identifier of role
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\RoleAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\RoleAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\RoleTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\RoleTrait`</small>
 
 
 
@@ -2144,23 +2127,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The size of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\SizeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\SizeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\SizeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\SizeTrait`</small>
 
 -------------------------------------------------------
 `int` The size of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\SizeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\SizeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\SizeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\SizeTrait`</small>
 
 -------------------------------------------------------
 `float` The size of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\SizeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\SizeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\SizeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\SizeTrait`</small>
 
 
 ### Script
@@ -2168,9 +2151,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Script of some kind or path to some script
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ScriptAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ScriptAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ScriptTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ScriptTrait`</small>
 
 
 ### Slug
@@ -2178,9 +2161,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Human readable keyword(s) that can be part or a Url
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\SlugAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\SlugAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\SlugTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\SlugTrait`</small>
 
 
 ### Source
@@ -2188,9 +2171,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The source of something. E.g. location, reference, index key, or other identifier that can be used to determine the source
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\SourceAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\SourceAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\SourceTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\SourceTrait`</small>
 
 
 ### Sql
@@ -2198,9 +2181,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` A Structured Query Language (SQL) query
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\SqlAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\SqlAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\SqlTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\SqlTrait`</small>
 
 
 ### StartDate
@@ -2208,23 +2191,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Start date of event
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\StartDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\StartDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\StartDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\StartDateTrait`</small>
 
 -------------------------------------------------------
 `int` Start date of event
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\StartDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\StartDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\StartDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\StartDateTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Start date of event
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\StartDateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\StartDateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\StartDateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\StartDateTrait`</small>
 
 
 ### State
@@ -2232,16 +2215,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` State of this component or what it represents. Alternative, state address
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\StateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\StateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\StateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\StateTrait`</small>
 
 -------------------------------------------------------
 `int` State of this component or what it represents
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\StateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\StateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\StateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\StateTrait`</small>
 
 
 ### Status
@@ -2249,16 +2232,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Situation of progress, classification, or civil status
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\StatusAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\StatusAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\StatusTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\StatusTrait`</small>
 
 -------------------------------------------------------
 `int` Situation of progress, classification, or civil status
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\StatusAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\StatusAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\StatusTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\StatusTrait`</small>
 
 
 ### StoragePath
@@ -2266,9 +2249,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Directory path where bootstrapping resources are located
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\StoragePathAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\StoragePathAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\StoragePathTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\StoragePathTrait`</small>
 
 
 ### Street
@@ -2276,9 +2259,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Full street address, which might include building or apartment number(s)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\StreetAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\StreetAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\StreetTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\StreetTrait`</small>
 
 
 ### Suffix
@@ -2286,9 +2269,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Suffix
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\SuffixAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\SuffixAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\SuffixTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\SuffixTrait`</small>
 
 
 ### Swift
@@ -2296,9 +2279,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` ISO-9362 Swift Code
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\SwiftAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\SwiftAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\SwiftTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\SwiftTrait`</small>
 
 
 
@@ -2309,9 +2292,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of table
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\TableAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\TableAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\TableTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\TableTrait`</small>
 
 
 ### Tag
@@ -2319,9 +2302,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of tag
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\TagAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\TagAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\TagTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\TagTrait`</small>
 
 
 ### Tags
@@ -2329,9 +2312,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `array` List of tags
 
-*Interface* : `Aedart\Contracts\Support\Properties\Arrays\TagsAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Arrays\TagsAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Arrays\TagsTrait`
+<small>**Trait** : `Aedart\Support\Properties\Arrays\TagsTrait`</small>
 
 
 ### Template
@@ -2339,9 +2322,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Template or location of a template file
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\TemplateAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\TemplateAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\TemplateTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\TemplateTrait`</small>
 
 
 ### Text
@@ -2349,9 +2332,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` The full text content for something, e.g. an article&#039;s body text
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\TextAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\TextAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\TextTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\TextTrait`</small>
 
 
 ### Timeout
@@ -2359,9 +2342,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` Timeout amount
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\TimeoutAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\TimeoutAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\TimeoutTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\TimeoutTrait`</small>
 
 
 ### Timestamp
@@ -2369,9 +2352,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` Unix timestamp
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\TimestampAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\TimestampAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\TimestampTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\TimestampTrait`</small>
 
 
 ### Timezone
@@ -2379,9 +2362,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of timezone
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\TimezoneAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\TimezoneAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\TimezoneTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\TimezoneTrait`</small>
 
 
 ### Title
@@ -2389,9 +2372,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Title
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\TitleAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\TitleAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\TitleTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\TitleTrait`</small>
 
 
 ### Tld
@@ -2399,9 +2382,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Top Level Domain (TLD)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\TldAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\TldAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\TldTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\TldTrait`</small>
 
 
 ### Topic
@@ -2409,9 +2392,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name of topic
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\TopicAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\TopicAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\TopicTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\TopicTrait`</small>
 
 
 ### Type
@@ -2419,16 +2402,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Type identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\TypeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\TypeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\TypeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\TypeTrait`</small>
 
 -------------------------------------------------------
 `int` Type identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\TypeAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\TypeAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\TypeTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\TypeTrait`</small>
 
 
 
@@ -2439,23 +2422,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Date of when this component, entity or resource was updated
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\UpdatedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\UpdatedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\UpdatedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\UpdatedAtTrait`</small>
 
 -------------------------------------------------------
 `int` Date of when this component, entity or resource was updated
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\UpdatedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\UpdatedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\UpdatedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\UpdatedAtTrait`</small>
 
 -------------------------------------------------------
 `\DateTime` Date of when this component, entity or resource was updated
 
-*Interface* : `Aedart\Contracts\Support\Properties\Dates\UpdatedAtAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Dates\UpdatedAtAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Dates\UpdatedAtTrait`
+<small>**Trait** : `Aedart\Support\Properties\Dates\UpdatedAtTrait`</small>
 
 
 ### Url
@@ -2463,9 +2446,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Uniform Resource Locator (Url), commonly known as a web address
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\UrlAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\UrlAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\UrlTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\UrlTrait`</small>
 
 
 ### Username
@@ -2473,9 +2456,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Identifier to be used as username
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\UsernameAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\UsernameAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\UsernameTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\UsernameTrait`</small>
 
 
 ### Uuid
@@ -2483,9 +2466,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Universally Unique Identifier (UUID)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\UuidAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\UuidAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\UuidTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\UuidTrait`</small>
 
 
 
@@ -2496,16 +2479,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Value
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ValueAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ValueAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ValueTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ValueTrait`</small>
 
 -------------------------------------------------------
 `mixed` Value
 
-*Interface* : `Aedart\Contracts\Support\Properties\Mixed\ValueAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\ValueAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Mixed\ValueTrait`
+<small>**Trait** : `Aedart\Support\Properties\Mixed\ValueTrait`</small>
 
 
 ### Vat
@@ -2513,23 +2496,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Value Added Tac (VAT), formatted amount or rate
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\VatAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\VatAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\VatTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\VatTrait`</small>
 
 -------------------------------------------------------
 `int` Value Added Tac (VAT), formatted amount or rate
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\VatAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\VatAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\VatTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\VatTrait`</small>
 
 -------------------------------------------------------
 `float` Value Added Tac (VAT), formatted amount or rate
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\VatAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\VatAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\VatTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\VatTrait`</small>
 
 
 ### Vendor
@@ -2537,9 +2520,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name or path of a vendor
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\VendorAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\VendorAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\VendorTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\VendorTrait`</small>
 
 
 ### Version
@@ -2547,9 +2530,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Version
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\VersionAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\VersionAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\VersionTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\VersionTrait`</small>
 
 
 
@@ -2560,16 +2543,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` Weight of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\WeightAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\WeightAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\WeightTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\WeightTrait`</small>
 
 -------------------------------------------------------
 `float` Weight of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\WeightAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\WeightAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\WeightTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\WeightTrait`</small>
 
 
 ### Width
@@ -2577,16 +2560,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` Width of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\WidthAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\WidthAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\WidthTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\WidthTrait`</small>
 
 -------------------------------------------------------
 `float` Width of something
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\WidthAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\WidthAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\WidthTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\WidthTrait`</small>
 
 
 ### Wildcard
@@ -2594,9 +2577,9 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Wildcard identifier
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\WildcardAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\WildcardAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\WildcardTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\WildcardTrait`</small>
 
 
 
@@ -2607,23 +2590,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` Co-ordinate or value
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\XAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\XAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\XTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\XTrait`</small>
 
 -------------------------------------------------------
 `float` Co-ordinate or value
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\XAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\XAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\XTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\XTrait`</small>
 
 -------------------------------------------------------
 `mixed` Co-ordinate or value
 
-*Interface* : `Aedart\Contracts\Support\Properties\Mixed\XAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\XAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Mixed\XTrait`
+<small>**Trait** : `Aedart\Support\Properties\Mixed\XTrait`</small>
 
 
 ### Xml
@@ -2631,16 +2614,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Extensible Markup Language (XML)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\XmlAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\XmlAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\XmlTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\XmlTrait`</small>
 
 -------------------------------------------------------
 `mixed` Extensible Markup Language (XML)
 
-*Interface* : `Aedart\Contracts\Support\Properties\Mixed\XmlAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\XmlAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Mixed\XmlTrait`
+<small>**Trait** : `Aedart\Support\Properties\Mixed\XmlTrait`</small>
 
 
 
@@ -2651,23 +2634,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` Co-ordinate or value
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\YAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\YAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\YTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\YTrait`</small>
 
 -------------------------------------------------------
 `float` Co-ordinate or value
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\YAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\YAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\YTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\YTrait`</small>
 
 -------------------------------------------------------
 `mixed` Co-ordinate or value
 
-*Interface* : `Aedart\Contracts\Support\Properties\Mixed\YAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\YAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Mixed\YTrait`
+<small>**Trait** : `Aedart\Support\Properties\Mixed\YTrait`</small>
 
 
 
@@ -2678,23 +2661,23 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `int` Co-ordinate or value
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\ZAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\ZAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\ZTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\ZTrait`</small>
 
 -------------------------------------------------------
 `float` Co-ordinate or value
 
-*Interface* : `Aedart\Contracts\Support\Properties\Floats\ZAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Floats\ZAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Floats\ZTrait`
+<small>**Trait** : `Aedart\Support\Properties\Floats\ZTrait`</small>
 
 -------------------------------------------------------
 `mixed` Co-ordinate or value
 
-*Interface* : `Aedart\Contracts\Support\Properties\Mixed\ZAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Mixed\ZAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Mixed\ZTrait`
+<small>**Trait** : `Aedart\Support\Properties\Mixed\ZTrait`</small>
 
 
 ### Zone
@@ -2702,16 +2685,16 @@ The following list are the available aware-of components.
 -------------------------------------------------------
 `string` Name or identifier of area, district or division
 
-*Interface* : `Aedart\Contracts\Support\Properties\Strings\ZoneAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Strings\ZoneAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Strings\ZoneTrait`
+<small>**Trait** : `Aedart\Support\Properties\Strings\ZoneTrait`</small>
 
 -------------------------------------------------------
 `int` Name or identifier of area, district or division
 
-*Interface* : `Aedart\Contracts\Support\Properties\Integers\ZoneAware`
+<small>**Interface** : `Aedart\Contracts\Support\Properties\Integers\ZoneAware`</small>
 
-*Trait* : `Aedart\Support\Properties\Integers\ZoneTrait`
+<small>**Trait** : `Aedart\Support\Properties\Integers\ZoneTrait`</small>
 
 
 
