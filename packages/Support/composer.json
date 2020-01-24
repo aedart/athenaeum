@@ -41,6 +41,9 @@
             "helpers/properties.php"
         ]
     },
+    "bin": [
+        "aware-of"
+    ],
     "suggest": {
         "symfony/console": "Required for using various commands",
         "twig/twig": "Required for using aware-of generator"
