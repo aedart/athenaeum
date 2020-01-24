@@ -61,9 +61,21 @@ return [
         'interfaces' => [
 
             /*
+             * Vendor namespace overwrite for interfaces
+             */
+            //'vendor' => 'Acme\\PackageA\\',
+
+            /*
              * Prefix for all interfaces
              */
             'prefix'  => 'Contracts\\',
+
+            /**
+             * Path overwrite for interfaces
+             *
+             * Uses "output" if not given
+             */
+            //'output'  => 'package/Contracts/src/',
 
             /*
              * Namespaces for various data types
@@ -85,9 +97,21 @@ return [
         'traits' => [
 
             /*
+             * Vendor namespace overwrite for traits
+             */
+            //'vendor' => 'Acme\\PackageB\\',
+
+            /*
              * Prefix for all traits
              */
             'prefix'  => 'Traits\\',
+
+            /**
+             * Path overwrite for traits
+             *
+             * Uses "output" if not given
+             */
+            //'output'  => 'package/Support/src/',
 
             /*
              * Namespaces for various data types
