@@ -54,7 +54,7 @@
     "autoload": {
         "files": [
             "packages/Core/helpers/paths.php",
-            "helpers/dto-properties.php"
+            "packages/Support/helpers/properties.php"
         ],
         "psr-4": {
             "Aedart\\": "src",
