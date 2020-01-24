@@ -1,0 +1,42 @@
+#!/usr/bin/env php
+<?php
+
+/*****************************************************************
+ * Autoloader
+ ****************************************************************/
+
+// Load the composer autoloader
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require __DIR__ . '/vendor/autoload.php';
+} else {
+    require __DIR__ . '/../../vendor/autoload.php';
+}
+
+/*****************************************************************
+ * Imports
+ ****************************************************************/
+
+use Aedart\Support\AwareOf\Console\CreateCommand;
+use Aedart\Support\AwareOf\Console\ScaffoldCommand;
+use Aedart\Utils\Version;
+use Symfony\Component\Console\Application;
+
+/*****************************************************************
+ * Create Application
+ ****************************************************************/
+
+$app = new Application('Athenaeum', Version::package('aedart/athenaeum-support'));
+
+// Dto related commands
+$app->addCommands([
+    new CreateCommand(),
+    new ScaffoldCommand()
+]);
+
+/*****************************************************************
+ * Run and terminate
+ ****************************************************************/
+
+$status = $app->run();
+
+exit($status);
