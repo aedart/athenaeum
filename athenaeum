@@ -16,21 +16,29 @@ if (file_exists(__DIR__.'/vendor/autoload.php')) {
  * Imports
  ****************************************************************/
 
-use Aedart\Console\AwareOfScaffoldCommand;
 use Aedart\Console\CreateAwareOfCommand;
-use Jean85\PrettyVersions;
+use Aedart\Support\AwareOf\Console\CreateCommand;
+use Aedart\Support\AwareOf\Console\ScaffoldCommand;
+use Aedart\Utils\Version;
 use Symfony\Component\Console\Application;
 
 /*****************************************************************
- * Create & Run Application
+ * Create Application
  ****************************************************************/
 
-$version = PrettyVersions::getVersion('aedart/athenaeum');
-
-$app = new Application('Athenaeum', $version->getPrettyVersion());
+$app = new Application('Athenaeum', Version::package('aedart/athenaeum'));
 
 // Dto related commands
-$app->add(new CreateAwareOfCommand());
-$app->add(new AwareOfScaffoldCommand());
+$app->addCommands([
+    new CreateAwareOfCommand(),
+    new CreateCommand(),
+    new ScaffoldCommand()
+]);
 
-echo $app->run();
+/*****************************************************************
+ * Run and terminate
+ ****************************************************************/
+
+$status = $app->run();
+
+exit($status);
