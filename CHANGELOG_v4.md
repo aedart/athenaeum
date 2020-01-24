@@ -24,7 +24,7 @@
 
 * PHP version from `v7.3.x` to `v7.4.x`.
 * All class properties now have their [types declared](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties), if possible.
-* `dto:create-aware-of` command now generates traits with class [type declarations](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties) for it's properties.
+* `dto:create` command now generates traits with class [type declarations](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties) for it's properties (_former `dto:create-aware-of` command_).
 * `Dto` and `ArrayDto` now implements the `__serialize()` and `__unserialize()` magic methods.
 * Replaced `\Aedart\Dto` with `\Aedart\Dto\Dto`[1].
 * Replaced `\Aedart\ArrayDto` with `\Aedart\Dto\ArrayDto`[1].
@@ -33,6 +33,9 @@ You need to require these packages, if you depended on them[2].
 * (_Fix_) `IoC` no longer highjacks Laravel's `app` binding automatically, when `getInstance()` is invoked.
 This was used to get some of Laravel's components to work outside the scope of a Laravel application.
 Yet, this was a kinda a hack that wasn't intended[3].
+* Deprecated `\Aedart\Console\CommandBase`, `\Aedart\Console\AwareOfScaffoldCommand` and `\Aedart\Console\CreateAwareOfCommand` components.
+Commands have been replaced with updated versions within the [`aedart/athenaeum-support `](https://packagist.org/packages/aedart/athenaeum-support) package.
+The original commands are still available using the `athenaeum` console application.
 
 **Non-breaking Changes**
 
