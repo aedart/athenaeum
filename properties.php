@@ -1026,6 +1026,16 @@ return [
             'Middle Name or names of a person',
             'name'
         ),
+        stringProperty(
+            'milestone',
+            'A marker that signifies a change, state, location or action',
+            'identifier'
+        ),
+        integerProperty(
+            'milestone',
+            'A marker that signifies a change, state, location or action',
+            'identifier'
+        ),
 
         // -------------------------------------------------------------------------------------
         // N
