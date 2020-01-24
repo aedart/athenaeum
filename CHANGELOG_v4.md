@@ -27,7 +27,7 @@
 * `Dto` and `ArrayDto` now implements the `__serialize()` and `__unserialize()` magic methods.
 * Replaced `\Aedart\Dto` with `\Aedart\Dto\Dto`[1].
 * Replaced `\Aedart\ArrayDto` with `\Aedart\Dto\ArrayDto`[1].
-* [Faker](https://github.com/fzaninotto/Faker), [Mockery](https://github.com/mockery/mockery), [Codeception](https://github.com/Codeception/Codeception) and [Orchestra Testbench](https://github.com/orchestral/testbench) are now defined as dev-dependencies.
+* [Codeception](https://github.com/Codeception/Codeception) and [Orchestra Testbench](https://github.com/orchestral/testbench) are now defined as dev-dependencies.
 You need to require these packages, if you depended on them[2].
 * (_Fix_) `IoC` no longer highjacks Laravel's `app` binding automatically, when `getInstance()` is invoked.
 This was used to get some of Laravel's components to work outside the scope of a Laravel application.
@@ -41,12 +41,13 @@ Yet, this was a kinda a hack that wasn't intended[3].
 * Replaced deprecated `Twig` components, in `TwigPartial` trait.
 * `UnitTestCase` now uses `FakerPartial` to setup [Faker](https://github.com/fzaninotto/Faker).
 * Using `IoCFacade` to resolve default Http Client `Manager`, in `HttpClientsManagerTrait`.
-* Added `\Aedart\Contracts\Container\IoC` and `\Illuminate\Contracts\Container\Container` as `app` binding aliases, in `IoC`[3]. 
+* Added `\Aedart\Contracts\Container\IoC` and `\Illuminate\Contracts\Container\Container` as `app` binding aliases, in `IoC`[3].
+* Added possibility to specify specific `vendor` and `output` paths for `interfaces` and `traits`, in the aware-of `Generator`. 
 
 [1]: _Deprecation of existing abstractions or components is due to the conversion of this package into a [mono repository](ttps://en.wikipedia.org/wiki/Monorepo).
 Existing abstractions are still available, yet will be removed entirely in `v5.0`_
 
-[2]: _You can require [`aedart/athenaeum-testing`](https://packagist.org/packages/aedart/athenaeum-testing) as dev-dependency and the mentioned packages will all be installed._
+[2]: _You can require packages separately or if you only use the "testing" components, then replace this package with [`aedart/athenaeum-testing`](https://packagist.org/packages/aedart/athenaeum-testing) as dev-dependency and the mentioned packages will all be installed._
 
 [3]: _You have to invoke `registerAsApplication()` explicitly to bind the `IoC` instance as `app`, should you require this during testing or outside a Laravel application.
 **Warning**: do NOT invoke mentioned method if you are using the `IoC` within a Laravel application.
