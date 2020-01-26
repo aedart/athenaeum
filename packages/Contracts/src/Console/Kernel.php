@@ -4,6 +4,7 @@ namespace Aedart\Contracts\Console;
 
 use Illuminate\Console\Application;
 use Illuminate\Contracts\Console\Kernel as LaravelConsoleKernel;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Console Kernel
@@ -35,4 +36,14 @@ interface Kernel extends LaravelConsoleKernel,
      * @return \Illuminate\Console\Application|null
      */
     public function getArtisan();
+
+    /**
+     * Handles an exception
+     *
+     * @param \Throwable $e
+     * @param OutputInterface $output
+     *
+     * @return void
+     */
+    public function handleException(\Throwable $e, OutputInterface $output) : void ;
 }
