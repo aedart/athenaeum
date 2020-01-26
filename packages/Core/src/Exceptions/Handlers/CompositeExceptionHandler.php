@@ -2,9 +2,11 @@
 
 namespace Aedart\Core\Exceptions\Handlers;
 
+use Aedart\Contracts\Core\ApplicationAware;
 use Aedart\Contracts\Exceptions\CompositeExceptionHandler as CompositeExceptionHandlerInterface;
 use Aedart\Contracts\Exceptions\ExceptionHandler;
 use Aedart\Core\Exceptions\ExceptionHandlerFailure;
+use Aedart\Core\Traits\ApplicationTrait;
 use Aedart\Support\Facades\IoCFacade;
 use Psr\Log\LogLevel;
 use Throwable;
@@ -19,8 +21,11 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Core\Exceptions\Handlers
  */
-class CompositeExceptionHandler extends BaseExceptionHandler implements CompositeExceptionHandlerInterface
+class CompositeExceptionHandler extends BaseExceptionHandler implements CompositeExceptionHandlerInterface,
+    ApplicationAware
 {
+    use ApplicationTrait;
+
     /**
      * List of "leaf" exception handlers
      *
@@ -42,7 +47,10 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements Composit
      */
     public function handle(Throwable $exception): bool
     {
-        $wasHandled = false;
+        // Abort if application must allow the exceptions to bubble upwards
+        if($this->getApplication()->mustThrowExceptions()){
+            throw $exception;
+        }
 
         try {
             // Attempt to report exception, if required
@@ -74,7 +82,7 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements Composit
             throw $exception;
         }
 
-        return true;
+        return $wasHandled;
     }
 
     /**

@@ -989,11 +989,6 @@ class Application extends IoC implements ApplicationInterface,
      */
     protected function handleException(Throwable $exception)
     {
-        // Abort if application must allow the exceptions to bubble upwards
-        if($this->mustThrowExceptions()){
-            throw $exception;
-        }
-
         $handler = $this->getExceptionHandlerFactory()->make();
 
         $handler->handle($exception);
