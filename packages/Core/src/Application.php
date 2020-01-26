@@ -37,7 +37,6 @@ use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Closure;
 use Illuminate\Contracts\Foundation\Application as LaravelApplicationInterface;
-use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 use LogicException;
 use Throwable;
