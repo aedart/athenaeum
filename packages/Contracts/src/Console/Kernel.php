@@ -25,14 +25,14 @@ interface Kernel extends LaravelConsoleKernel,
      *
      * @param \Illuminate\Console\Application $artisan
      *
-     * @return void
+     * @return self
      */
     public function setArtisan($artisan);
 
     /**
      * Returns Laravel's Artisan Console Application instance
      *
-     * @return \Illuminate\Console\Application
+     * @return \Illuminate\Console\Application|null
      */
     public function getArtisan();
 }
