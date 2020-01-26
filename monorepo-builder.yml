@@ -40,6 +40,7 @@ parameters:
     # for "split" command
     directories_to_repositories:
         packages/Config: 'git@github.com:aedart/athenaeum-config.git'
+        packages/Console: 'git@github.com:aedart/athenaeum-console.git'
         packages/Container: 'git@github.com:aedart/athenaeum-container.git'
         packages/Contracts: 'git@github.com:aedart/athenaeum-contracts.git'
         packages/Core: 'git@github.com:aedart/athenaeum-core.git'
