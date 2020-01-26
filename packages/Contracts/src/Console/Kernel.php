@@ -2,7 +2,6 @@
 
 namespace Aedart\Contracts\Console;
 
-use Aedart\Contracts\Core\ApplicationAware;
 use Illuminate\Contracts\Console\Kernel as LaravelConsoleKernel;
 
 /**
@@ -18,7 +17,7 @@ use Illuminate\Contracts\Console\Kernel as LaravelConsoleKernel;
  * @package Aedart\Contracts\Console
  */
 interface Kernel extends LaravelConsoleKernel,
-    ApplicationAware
+    CoreApplicationAware
 {
 
 }
