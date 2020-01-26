@@ -28,6 +28,7 @@
         "fzaninotto/faker": "1.9.*",
         "guzzlehttp/guzzle": "~6.4",
         "illuminate/config": "^6.12",
+        "illuminate/console": "^6.12",
         "illuminate/container": "^6.12",
         "illuminate/contracts": "^6.12",
         "illuminate/events": "^6.12",
@@ -59,6 +60,7 @@
         "psr-4": {
             "Aedart\\": "src",
             "Aedart\\Config\\": "packages/Config/src",
+            "Aedart\\Console\\": "packages/Console/src",
             "Aedart\\Container\\": "packages/Container/src",
             "Aedart\\Contracts\\": "packages/Contracts/src",
             "Aedart\\Core\\": "packages/Core/src",
@@ -79,6 +81,7 @@
     },
     "replace": {
         "aedart/athenaeum-config": "self.version",
+        "aedart/athenaeum-console": "self.version",
         "aedart/athenaeum-container": "self.version",
         "aedart/athenaeum-contracts": "self.version",
         "aedart/athenaeum-core": "self.version",
