@@ -26,7 +26,7 @@ class Application extends LaravelConsoleApplication
     {
         parent::__construct($laravel, $events, $version);
 
-        $this->setName(sprintf('Athenaeum Console Application (via. Laravel Console v.%s)', $this->laravelVersion()));
+        $this->setName(sprintf('Athenaeum (via. Laravel ~ Illuminate/console v.%s)', $this->laravelVersion()));
     }
 
     /*****************************************************************
