@@ -19,7 +19,11 @@
         }
     ],
     "require": {
-        "php": ">=7.4.0"
+        "php": ">=7.4.0",
+        "illuminate/console": "^6.12",
+        "aedart/athenaeum-contracts": "^4.0.x-dev",
+        "aedart/athenaeum-support": "^4.0.x-dev",
+        "aedart/athenaeum-utils": "^4.0.x-dev"
     },
     "autoload": {
         "psr-4": {
