@@ -136,6 +136,34 @@ class Application extends IoC implements ApplicationInterface,
     protected bool $forceThrowExceptions = false;
 
     /**
+     * Default core bootstrappers
+     *
+     * @var string[] Class paths
+     */
+    protected array $defaultCoreBootstrappers = [
+        DetectAndLoadEnvironment::class,
+        LoadConfiguration::class,
+        SetDefaultTimezone::class,
+        SetExceptionHandling::class,
+        RegisterApplicationServiceProviders::class,
+        RegisterApplicationAliases::class
+    ];
+
+    /**
+     * Default core service providers
+     *
+     * @var string[] Class paths
+     */
+    protected array $defaultCoreServiceProviders = [
+        ExceptionHandlerServiceProvider::class,
+        NativeFilesystemServiceProvider::class,
+        EventServiceProvider::class,
+        ListenersViaConfigServiceProvider::class,
+        ConfigServiceProvider::class,
+        ConfigLoaderServiceProvider::class
+    ];
+
+    /**
      * Application constructor.
      *
      * @param PathsContainer|array|null $paths [optional] Application's core paths
@@ -685,14 +713,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function getCoreBootstrappers(): array
     {
-        return [
-            DetectAndLoadEnvironment::class,
-            LoadConfiguration::class,
-            SetDefaultTimezone::class,
-            SetExceptionHandling::class,
-            RegisterApplicationServiceProviders::class,
-            RegisterApplicationAliases::class
-        ];
+        return $this->defaultCoreBootstrappers;
     }
 
     /**
@@ -700,14 +721,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function getCoreServiceProviders(): array
     {
-        return [
-            ExceptionHandlerServiceProvider::class,
-            NativeFilesystemServiceProvider::class,
-            EventServiceProvider::class,
-            ListenersViaConfigServiceProvider::class,
-            ConfigServiceProvider::class,
-            ConfigLoaderServiceProvider::class
-        ];
+        return $this->defaultCoreServiceProviders;
     }
 
     /**
