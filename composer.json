@@ -25,6 +25,7 @@
     ],
     "require": {
         "php": ">=7.4.0",
+        "dragonmantank/cron-expression": "^2.3",
         "fzaninotto/faker": "1.9.*",
         "guzzlehttp/guzzle": "~6.4",
         "illuminate/config": "^6.12",
