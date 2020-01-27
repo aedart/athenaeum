@@ -3,6 +3,8 @@
 namespace Aedart\Core\Console;
 
 use Aedart\Console\Traits\CoreApplicationTrait;
+use Aedart\Console\Traits\LastInputTrait;
+use Aedart\Console\Traits\LastOutputTrait;
 use Aedart\Contracts\Console\Kernel as ConsoleKernelInterface;
 use Aedart\Contracts\Core\Application;
 use Aedart\Contracts\Exceptions\Factory;
@@ -30,6 +32,8 @@ class Kernel implements ConsoleKernelInterface,
     DispatcherAware
 {
     use CoreApplicationTrait;
+    use LastInputTrait;
+    use LastOutputTrait;
     use DispatcherTrait;
 
     /**
@@ -56,6 +60,8 @@ class Kernel implements ConsoleKernelInterface,
     {
         return $this->attempt(function(ConsoleKernelInterface $kernel, $output) use($input){
             return $this
+                ->setLastInput($input)
+                ->setLastOutput($output)
                 ->runCore()
                 ->getArtisan()
                 ->run($input, $output);
@@ -68,6 +74,7 @@ class Kernel implements ConsoleKernelInterface,
     public function call($command, array $parameters = [], $outputBuffer = null)
     {
         return $this
+            ->setLastOutput($outputBuffer)
             ->runCore()
             ->getArtisan()
             ->call($command, $parameters, $outputBuffer);
@@ -210,6 +217,8 @@ class Kernel implements ConsoleKernelInterface,
      */
     protected function handleExceptionViaHandler(Throwable $e, OutputInterface $output) : bool
     {
+        $this->setLastOutput($output);
+
         /** @var Factory $factory */
         $factory = IoCFacade::tryMake(Factory::class);
         if( ! isset($factory)){
