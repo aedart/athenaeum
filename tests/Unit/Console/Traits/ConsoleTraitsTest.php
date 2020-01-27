@@ -4,6 +4,7 @@ namespace Aedart\Tests\Unit\Console\Traits;
 
 use Aedart\Console\Traits\CoreApplicationTrait;
 use Aedart\Console\Traits\LastInputTrait;
+use Aedart\Console\Traits\LastOutputTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
 
 /**
@@ -30,6 +31,7 @@ class ConsoleTraitsTest extends TraitTestCase
         return [
             'CoreApplicationTrait'           => [ CoreApplicationTrait::class ],
             'LastInputTrait'                 => [ LastInputTrait::class ],
+            'LastOutputTrait'                => [ LastOutputTrait::class ],
         ];
     }
 
