@@ -26,6 +26,7 @@
         "vlucas/phpdotenv": "^3.3",
         "illuminate/filesystem": "^6.12",
         "aedart/athenaeum-config": "^4.0.x-dev",
+        "aedart/athenaeum-console": "^4.0.x-dev",
         "aedart/athenaeum-container": "^4.0.x-dev",
         "aedart/athenaeum-contracts": "^4.0.x-dev",
         "aedart/athenaeum-dto": "^4.0.x-dev",
