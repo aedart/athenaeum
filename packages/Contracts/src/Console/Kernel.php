@@ -2,7 +2,8 @@
 
 namespace Aedart\Contracts\Console;
 
-use Illuminate\Console\Application;
+use Aedart\Contracts\Console\Input\LastInputAware;
+use Aedart\Contracts\Console\Output\LastOutputAware;
 use Illuminate\Contracts\Console\Kernel as LaravelConsoleKernel;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -19,7 +20,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @package Aedart\Contracts\Console
  */
 interface Kernel extends LaravelConsoleKernel,
-    CoreApplicationAware
+    CoreApplicationAware,
+    LastInputAware,
+    LastOutputAware
 {
     /**
      * Set Laravel's Artisan Console Application instance
