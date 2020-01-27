@@ -1,6 +1,6 @@
 <?php
 
-namespace Aedart\Console;
+namespace Aedart\Core\Console;
 
 use Aedart\Console\Traits\CoreApplicationTrait;
 use Aedart\Contracts\Console\Kernel as ConsoleKernelInterface;
