@@ -86,6 +86,7 @@ class Kernel implements ConsoleKernelInterface,
     public function queue($command, array $parameters = [])
     {
         // TODO: PROBLEM, interface states return type must be \Illuminate\Foundation\Bus\PendingDispatch
+        // @see https://github.com/laravel/framework/issues/31248
         throw new \RuntimeException('Unsupported operation');
     }
 
