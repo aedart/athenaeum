@@ -11,6 +11,7 @@ use Aedart\Support\Facades\IoCFacade;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Aedart\Utils\Version;
 use Illuminate\Console\Application as Artisan;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 
@@ -53,16 +54,12 @@ class Kernel implements ConsoleKernelInterface,
      */
     public function handle($input, $output = null)
     {
-        try {
-            $this->runCore();
-
-            return $this->getArtisan()->run($input, $output);
-        } catch (Throwable $e) {
-
-            $this->handleException($e, $output);
-
-            return 1;
-        }
+        return $this->attempt(function(ConsoleKernelInterface $kernel, $output) use($input){
+            return $this
+                ->runCore()
+                ->getArtisan()
+                ->run($input, $output);
+        }, $output);
     }
 
     /**
@@ -158,8 +155,59 @@ class Kernel implements ConsoleKernelInterface,
      * Internals
      ****************************************************************/
 
-    // TODO: UHm... assign input / output so exception handler(s) are able to
-    // TODO: obtain them, if required.
+    /**
+     * Attempt to perform some action.
+     *
+     * If given callback should fail (throw exception), then method will
+     * delegate the exception to assigned exception handler.
+     *
+     * @see handleException
+     *
+     * @param callable $callback Callback to be invoked
+     * @param OutputInterface|null $output [optional] Defaults to Symfony's Console Output, if output not provided
+     *
+     * @return mixed
+     */
+    protected function attempt(callable $callback, OutputInterface $output = null)
+    {
+        $output = $output ?? new ConsoleOutput();
+        $app = $this->getCoreApplication();
+
+        // Force the application to throw exceptions, so that actual
+        // handling is performed via this kernel.
+        $mustThrow = $app->mustThrowExceptions();
+        $app->forceThrowExceptions(true);
+
+        try {
+            // Attempt to perform whatever is being requested.
+            $result = $callback($this, $output);
+        } catch (Throwable $e) {
+
+            $wasHandled = $this->handleException($e, $output);
+
+            // In case exception was not handled via a handler, then
+            // there is nothing we can do, other than rendering the
+            // exception.
+            if( ! $wasHandled){
+                $this->getArtisan()->renderThrowable($e, $output);
+            }
+
+            return 1;
+        }
+
+        // Restore original "must throw" state
+        $app->forceThrowExceptions($mustThrow);
+
+        // Finally, return evt. output
+        return $result;
+    }
+
+    /**
+     * @param Throwable $e
+     * @param OutputInterface $output
+     *
+     * @return bool
+     */
     protected function handleExceptionViaHandler(Throwable $e, OutputInterface $output) : bool
     {
         /** @var Factory $factory */
@@ -217,7 +265,7 @@ class Kernel implements ConsoleKernelInterface,
         );
 
         $console->setName(sprintf(
-            'Athenaeum (via. Laravel ~ Illuminate/console v.%s)',
+            'Athenaeum (via. Laravel ~ illuminate/console v.%s)',
             $this->laravelVersion()
         ));
 
