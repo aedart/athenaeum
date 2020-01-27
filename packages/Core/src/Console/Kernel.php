@@ -85,7 +85,8 @@ class Kernel implements ConsoleKernelInterface,
      */
     public function queue($command, array $parameters = [])
     {
-        // TODO: Implement queue() method.
+        // TODO: PROBLEM, interface states return type must be \Illuminate\Foundation\Bus\PendingDispatch
+        throw new \RuntimeException('Unsupported operation');
     }
 
     /**
