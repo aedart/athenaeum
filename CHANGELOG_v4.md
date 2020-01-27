@@ -62,6 +62,7 @@ It will highjack the `app` binding, which will cause your application to behave 
 * `Application`, custom adaptation of Laravel's Application.
 * `Registrar`, able to register service providers.
 * `IoCFacade`, able to resolve bindings or return a default value, if binding does not exist.
+* `LastInput` and `LastOutput` aware components (console).
 * `ListenersViaConfigServiceProvider`, offers registration of event listeners and subscribers via configuration.
 * `BaseExeptionHandler` abstraction along with a few default exception handlers that can be used with `Application`, if enabled.
 * `FakerAware` component that can be used for testing purposes.
