@@ -6,6 +6,7 @@ use Aedart\Console\Providers\ConsoleServiceProvider;
 use Aedart\Contracts\Console\Kernel as ConsoleKernelInterface;
 use Aedart\Contracts\Core\Application;
 use Aedart\Core\Console\Kernel;
+use Illuminate\Contracts\Console\Kernel as LaravelConsoleKernelInterface;
 use Illuminate\Contracts\Support\DeferrableProvider;
 
 /**
@@ -30,6 +31,8 @@ class ArtisanServiceProvider extends ConsoleServiceProvider implements Deferrabl
 
             return new Kernel($core);
         });
+
+        $this->app->alias(ConsoleKernelInterface::class, LaravelConsoleKernelInterface::class);
     }
 
     /**
