@@ -13,5 +13,13 @@ use Illuminate\Support\ServiceProvider;
  */
 class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-
+    /**
+     * Bootstrap this service
+     */
+    public function boot()
+    {
+        $this->publishes( [
+            __DIR__ . '/../../configs/commands.php' => config_path('commands.php')
+        ],'config');
+    }
 }
