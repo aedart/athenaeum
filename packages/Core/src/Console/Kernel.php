@@ -11,6 +11,7 @@ use Aedart\Contracts\Exceptions\Factory;
 use Aedart\Contracts\Support\Helpers\Events\DispatcherAware;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
+use Aedart\Utils\Exceptions\UnsupportedOperation;
 use Aedart\Utils\Version;
 use Illuminate\Console\Application as Artisan;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -85,9 +86,10 @@ class Kernel implements ConsoleKernelInterface,
      */
     public function queue($command, array $parameters = [])
     {
-        // TODO: PROBLEM, interface states return type must be \Illuminate\Foundation\Bus\PendingDispatch
-        // @see https://github.com/laravel/framework/issues/31248
-        throw new \RuntimeException('Unsupported operation');
+        $msg = 'queue() method is not supported in this adapted version of Console Kernel.';
+        $msg .= ' See https://github.com/laravel/ideas/issues/2036 for more information.';
+
+        throw new UnsupportedOperation($msg);
     }
 
     /**
