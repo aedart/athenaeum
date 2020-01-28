@@ -131,8 +131,6 @@ class Kernel implements ConsoleKernelInterface,
      */
     public function addCommands(array $commands)
     {
-        $this->runCore();
-
         foreach ($commands as $command){
             $this->addCommand($command);
         }
