@@ -5,10 +5,9 @@
 ## v4.x
 
 // TODO:
-* added custom application
-* added application integration test-case
 * Split docs into version 3.x and 4.x
 * docs about custom application, etc.
+* docs about custom kernel, etc.
 * docs about custom event service provider
 * docs about custom exception handling
 * docs about logging using custom application
@@ -60,6 +59,7 @@ It will highjack the `app` binding, which will cause your application to behave 
 #### Added
 
 * `Application`, custom adaptation of Laravel's Application.
+* `Kernel`, custom adaptation of Laravel's Console Application (Artisan).
 * `Registrar`, able to register service providers.
 * `IoCFacade`, able to resolve bindings or return a default value, if binding does not exist.
 * `LastInput` and `LastOutput` aware components (console).
