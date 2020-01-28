@@ -2,12 +2,12 @@
 
 namespace Aedart\Core\Providers;
 
-use Aedart\Console\Providers\ConsoleServiceProvider;
 use Aedart\Contracts\Console\Kernel as ConsoleKernelInterface;
 use Aedart\Contracts\Core\Application;
 use Aedart\Core\Console\Kernel;
 use Illuminate\Contracts\Console\Kernel as LaravelConsoleKernelInterface;
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\ServiceProvider;
 
 /**
  * Artisan Service Provider
@@ -15,15 +15,13 @@ use Illuminate\Contracts\Support\DeferrableProvider;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Core\Providers
  */
-class ArtisanServiceProvider extends ConsoleServiceProvider implements DeferrableProvider
+class ArtisanServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * @inheritdoc
      */
     public function register()
     {
-        parent::register();
-
         $this->app->singleton(
             ConsoleKernelInterface::class, function(){
             /** @var Application $core */
@@ -40,8 +38,8 @@ class ArtisanServiceProvider extends ConsoleServiceProvider implements Deferrabl
      */
     public function provides()
     {
-        return array_merge(parent::provides(), [
+        return a[
             ConsoleKernelInterface::class
-        ]);
+        ];
     }
 }
