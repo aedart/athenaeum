@@ -45,6 +45,26 @@ interface Kernel extends LaravelConsoleKernel,
      ****************************************************************/
 
     /**
+     * Register a list of commands
+     *
+     * @see addCommand
+     *
+     * @param string[]|\Symfony\Component\Console\Command\Command[] $commands List of class paths or instances
+     *
+     * @return void
+     */
+    public function addCommands(array $commands);
+
+    /**
+     * Register a command
+     *
+     * @param string|\Symfony\Component\Console\Command\Command $command Class path or instance
+     *
+     * @return void
+     */
+    public function addCommand($command);
+
+    /**
      * Set Laravel's Artisan Console Application instance
      *
      * @param \Illuminate\Console\Application $artisan
