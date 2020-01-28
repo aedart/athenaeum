@@ -278,7 +278,7 @@ class Kernel implements ConsoleKernelInterface,
         );
 
         $console->setName(sprintf(
-            'Athenaeum (via. Laravel ~ illuminate/console v.%s)',
+            'Athenaeum (via. Laravel Artisan ~ illuminate/console v.%s)',
             $this->laravelVersion()
         ));
 
