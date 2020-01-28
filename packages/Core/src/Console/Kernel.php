@@ -129,6 +129,32 @@ class Kernel implements ConsoleKernelInterface,
     /**
      * @inheritDoc
      */
+    public function addCommands(array $commands)
+    {
+        $this->runCore();
+
+        foreach ($commands as $command){
+            $this->addCommand($command);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function addCommand($command)
+    {
+        $this->runCore();
+
+        if(is_string($command)){
+            $command = $this->getCoreApplication()->make($command);
+        }
+
+        $this->getArtisan()->add($command);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function setArtisan($artisan)
     {
         $this->artisan = $artisan;
@@ -254,6 +280,9 @@ class Kernel implements ConsoleKernelInterface,
     protected function runCore()
     {
         $app = $this->getCoreApplication();
+        if($app->isRunning()){
+            return $this;
+        }
 
         // Bootstrap, boot and run the core application
         $app->run();
