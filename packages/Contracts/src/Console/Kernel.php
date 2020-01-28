@@ -4,6 +4,7 @@ namespace Aedart\Contracts\Console;
 
 use Aedart\Contracts\Console\Input\LastInputAware;
 use Aedart\Contracts\Console\Output\LastOutputAware;
+use Aedart\Contracts\Exceptions\UnsupportedOperationException;
 use Illuminate\Contracts\Console\Kernel as LaravelConsoleKernel;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -24,6 +25,25 @@ interface Kernel extends LaravelConsoleKernel,
     LastInputAware,
     LastOutputAware
 {
+    /*****************************************************************
+     * Overwrites
+     ****************************************************************/
+
+    /**
+     * NOT SUPPORTED in current adaptation of Kernel
+     *
+     * {@inheritDoc}
+     *
+     * @see https://github.com/laravel/ideas/issues/2036
+     *
+     * @throws UnsupportedOperationException
+     */
+    public function queue($command, array $parameters = []);
+
+    /*****************************************************************
+     * Custom Methods
+     ****************************************************************/
+
     /**
      * Set Laravel's Artisan Console Application instance
      *
