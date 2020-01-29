@@ -2,8 +2,8 @@
 
 namespace Aedart\Support\Helpers\Container;
 
+use Aedart\Support\Facades\IoCFacade;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Support\Facades\Facade;
 
 /**
  * Container Trait
@@ -72,6 +72,6 @@ trait ContainerTrait
      */
     public function getDefaultContainer(): ?Container
     {
-        return Facade::getFacadeApplication();
+        return IoCFacade::tryMake(Container::class);
     }
 }
