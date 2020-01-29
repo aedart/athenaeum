@@ -46,6 +46,11 @@ class Registrar implements ArtisanAware,
      */
     public function registerCommands(array $commands = [])
     {
+        // Skip if no commands given
+        if(empty($commands)){
+            return;
+        }
+
         $strategy = $this->determineStrategy();
         $strategy->register($commands);
     }
