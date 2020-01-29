@@ -2,11 +2,10 @@
 
 namespace Aedart\Console\Providers;
 
-use Aedart\Contracts\Console\Kernel;
+use Aedart\Console\Registrars\Commands\Registrar as CommandRegistrar;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Console\ArtisanTrait;
 use Illuminate\Console\Events\ArtisanStarting;
-use Illuminate\Contracts\Console\Kernel as LaravelConsoleKernelInterface;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use RuntimeException;
@@ -54,47 +53,17 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
      * @return self
      *
      * @throws RuntimeException If no register command method available
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function registerAvailableCommands()
     {
         $commands = $this->getConfig()->get('commands', []);
 
-        $artisan = $this->getArtisan();
-        if( ! ($artisan instanceof Kernel)){
-            return $this->registerCommandsViaLaravelConsole($artisan, $commands);
-        }
+        $registrar = new CommandRegistrar(
+            $this->getArtisan(),
+            $this->app
+        );
 
-        $artisan->addCommands($commands);
-
-        return $this;
-    }
-
-    /**
-     * Register commands via given artisan instance
-     *
-     * @param LaravelConsoleKernelInterface $artisan
-     * @param string[] $commands List of class paths
-     *
-     * @return self
-     *
-     * @throws RuntimeException If no register command method available
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    protected function registerCommandsViaLaravelConsole(LaravelConsoleKernelInterface $artisan, array $commands)
-    {
-        // Abort if provided artisan is unable to register commands
-        if( ! method_exists($artisan, 'registerCommand')){
-            throw new RuntimeException('Unable to register commands to console application. No register method available');
-        }
-
-        /** @var \Illuminate\Foundation\Console\Kernel $artisan */
-
-        foreach ($commands as $command){
-            /** @var \Symfony\Component\Console\Command\Command $command */
-            $command = $this->app->make($command);
-            $artisan->registerCommand($command);
-        }
+        $registrar->registerCommands($commands);
 
         return $this;
     }
