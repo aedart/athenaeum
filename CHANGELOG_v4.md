@@ -79,6 +79,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 This resulting in `$instance` still containing reference to the application, inside Laravel's Service Container, causing tests to fail.
 * `destroy()` does not flush bindings, in `IoC`. Instance is destroyed, yet formal Service Container `flush()` was not respected.
 * Default values not triggered when invoking `toArray()`, in `Dto` and `ArrayDto`, when using aware-of traits to create a Dto class.
+* `ContainerTrait`'s default value returns the `Facade` root application, instead of `Container`.
+(_Strictly speaking, this was not a defect. `Application` is an extended version of `Container`._)
 
 
 
