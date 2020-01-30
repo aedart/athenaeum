@@ -36,10 +36,6 @@ class CommandsRegistrarTest extends LaravelTestCase
         parent::_before();
 
         $this->addCommandsToConfig();
-
-        // TODO: What is going on here...
-        $c = $this->app[Kernel::class]->all();
-        dump('_before', array_keys($c));
     }
 
     /**
