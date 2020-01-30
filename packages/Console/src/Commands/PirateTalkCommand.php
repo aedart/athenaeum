@@ -2,6 +2,7 @@
 
 namespace Aedart\Console\Commands;
 
+use Aedart\Utils\Arr;
 use Illuminate\Console\Command;
 
 /**
@@ -61,12 +62,8 @@ class PirateTalkCommand extends Command
             'The seashell commands with halitosis, blow the reef before it dies.'
         ];
 
-        // Seed and obtain random index
-        mt_srand(time());
-        $index = array_rand($sentences, 1);
-
         // Say something, you pirate!
-        $this->output->text($sentences[$index]);
+        $this->output->text(Arr::randomElement($sentences));
 
         return 0;
     }
