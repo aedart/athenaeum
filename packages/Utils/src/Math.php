@@ -11,7 +11,7 @@ namespace Aedart\Utils;
 class Math
 {
     /**
-     * Generates a random seed, based on microtime
+     * Generates a seed based on microtime
      *
      * Resulting seed can be used to seed the Mersenne Twister Random Number Generator
      *
@@ -20,7 +20,7 @@ class Math
      *
      * @return int
      */
-    public static function seed() : int
+    public static function makeSeed() : int
     {
         list($usec, $sec) = explode(' ', microtime());
         return $sec + $usec * 1000000;
