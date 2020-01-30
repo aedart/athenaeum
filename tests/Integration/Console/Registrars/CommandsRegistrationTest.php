@@ -13,7 +13,7 @@ use Aedart\Testing\TestCases\LaravelTestCase;
  * CommandsRegistrarTest
  *
  * @group console
- * @group commands-registrar
+ * @group commands-registration
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Console\Registrars
