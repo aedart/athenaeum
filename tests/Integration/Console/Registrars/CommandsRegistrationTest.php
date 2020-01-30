@@ -19,7 +19,7 @@ use Illuminate\Contracts\Console\Kernel;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Console\Registrars
  */
-class CommandsRegistrarTest extends LaravelTestCase
+class CommandsRegistrationTest extends LaravelTestCase
 {
     use ConfigTrait;
     use ArtisanTrait;
