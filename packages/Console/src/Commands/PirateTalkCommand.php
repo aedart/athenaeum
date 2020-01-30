@@ -61,11 +61,12 @@ class PirateTalkCommand extends Command
             'The seashell commands with halitosis, blow the reef before it dies.'
         ];
 
-        // Seed
-        mt_srand(microtime(false));
+        // Seed and obtain random index
+        mt_srand(time());
+        $index = array_rand($sentences, 1);
 
         // Say something, you pirate!
-        $this->output->text(array_rand($sentences, 1));
+        $this->output->text($sentences[$index]);
 
         return 0;
     }
