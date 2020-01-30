@@ -72,6 +72,7 @@ It will highjack the `app` binding, which will cause your application to behave 
 * `MessageBag` testing component. Intended to store test or debugging messages across components and tests.
 * `Version` utility. 
 * `Math` utility.
+* `Arr` utility.
 * `string` and `int` `Milestone` aware components
 
 #### Fixed
