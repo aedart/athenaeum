@@ -2,9 +2,8 @@
 
 namespace Aedart\Console\Providers;
 
-use Aedart\Console\Registrars\Commands\Registrar as CommandRegistrar;
 use Aedart\Support\Helpers\Config\ConfigTrait;
-use Aedart\Support\Helpers\Console\ArtisanTrait;
+use Illuminate\Console\Application;
 use Illuminate\Console\Events\ArtisanStarting;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
@@ -19,7 +18,6 @@ use RuntimeException;
 class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     use ConfigTrait;
-    use ArtisanTrait;
 
     /**
      * Bootstrap this service
@@ -58,12 +56,9 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
     {
         $commands = $this->getConfig()->get('commands', []);
 
-        $registrar = new CommandRegistrar(
-            $this->getArtisan(),
-            $this->app
-        );
-
-        $registrar->registerCommands($commands);
+        Application::starting(function(Application $artisan) use($commands){
+            $artisan->resolveCommands($commands);
+        });
 
         return $this;
     }
