@@ -82,15 +82,14 @@ class CommandsRegistrationTest extends LaravelTestCase
      */
     public function canExecuteRegisteredCommand()
     {
-        $command = $this->artisan('pirate:talk');
-
-        $command
-            ->assertExitCode(0)
-            ->run();
+        $exitCode = $this
+            ->withoutMockingConsoleOutput()
+            ->artisan('pirate:talk');
 
         $output = $this->getArtisan()->output();
         ConsoleDebugger::output($output);
 
+        $this->assertSame(0, $exitCode, 'Incorrect exist code');
         $this->assertNotEmpty($output);
     }
 
