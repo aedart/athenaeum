@@ -23,8 +23,7 @@
         "illuminate/console": "^6.13",
         "dragonmantank/cron-expression": "^2.3",
         "aedart/athenaeum-contracts": "^4.0.x-dev",
-        "aedart/athenaeum-support": "^4.0.x-dev",
-        "aedart/athenaeum-utils": "^4.0.x-dev"
+        "aedart/athenaeum-support": "^4.0.x-dev"
     },
     "autoload": {
         "psr-4": {
