@@ -8,7 +8,6 @@ use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Console\ArtisanTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\LaravelTestCase;
-use Illuminate\Contracts\Console\Kernel;
 
 /**
  * CommandsRegistrarTest
