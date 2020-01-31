@@ -2,8 +2,9 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Console\Commands\Exceptions;
 
-use Aedart\Console\Traits\CoreApplicationTrait;
+use Aedart\Contracts\Console\Output\LastOutputAware;
 use Aedart\Core\Exceptions\Handlers\BaseExceptionHandler;
+use Aedart\Support\Helpers\Console\ArtisanTrait;
 use Illuminate\Console\OutputStyle;
 use Throwable;
 
@@ -17,17 +18,20 @@ use Throwable;
  */
 class HandlesAllExceptions extends BaseExceptionHandler
 {
-    use CoreApplicationTrait;
+    use ArtisanTrait;
 
     /**
      * @inheritDoc
      */
     public function handle(Throwable $exception): bool
     {
-        /** @var OutputStyle $output */
-        $output = $this->getCoreApplication()->make(OutputStyle::class);
+        /** @var LastOutputAware $console */
+        $console = $this->getArtisan();
 
-        //dump($output);
+        /** @var OutputStyle $output */
+        $output = $console->getLastOutput();
+
+        //dump(__METHOD__ . get_class($output));
 
         $output->error($exception->getMessage());
 
