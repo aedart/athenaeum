@@ -5,6 +5,7 @@ namespace Aedart\Tests\Unit\Utils;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Math;
+use RuntimeException;
 
 /**
  * MathTest
@@ -17,6 +18,32 @@ use Aedart\Utils\Math;
  */
 class MathTest extends UnitTestCase
 {
+    /**
+     * @test
+     */
+    public function canGenerateRandomInt()
+    {
+        $resultA = Math::randomInt(0, 100);
+        $resultB = Math::randomInt(0, 100);
+        $resultC = Math::randomInt(0, 100);
+
+        ConsoleDebugger::output($resultA, $resultB, $resultC);
+
+        $this->assertNotEmpty($resultA);
+        $this->assertNotEmpty($resultB);
+        $this->assertNotEmpty($resultC);
+    }
+
+    /**
+     * @test
+     */
+    public function failsRandomIntWhenInvalidArguments()
+    {
+        $this->expectException(RuntimeException::class);
+
+        Math::randomInt(1, -1);
+    }
+
     /**
      * @test
      */
