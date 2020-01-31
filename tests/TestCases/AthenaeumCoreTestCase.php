@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\TestCases;
 
+use Aedart\Support\Helpers\Console\ArtisanTrait;
 use Aedart\Testing\TestCases\AthenaeumTestCase;
 use Codeception\Configuration;
 
@@ -13,6 +14,8 @@ use Codeception\Configuration;
  */
 abstract class AthenaeumCoreTestCase extends AthenaeumTestCase
 {
+    use ArtisanTrait;
+
     /*****************************************************************
      * Helpers
      ****************************************************************/
