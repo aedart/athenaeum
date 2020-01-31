@@ -2,10 +2,8 @@
 
 namespace Aedart\Testing\TestCases;
 
-use Aedart\Contracts\Core\Helpers\PathsContainer;
-use Aedart\Core\Application as CoreApplication;
+use Aedart\Testing\Athenaeum\AthenaeumTestHelper;
 use Codeception\Configuration;
-use Illuminate\Support\Env;
 
 /**
  * Application Integration Test Case
@@ -20,19 +18,7 @@ use Illuminate\Support\Env;
  */
 abstract class ApplicationTestCase extends IntegrationTestCase
 {
-    /**
-     * Application instance
-     *
-     * @var CoreApplication|null
-     */
-    protected ?CoreApplication $app = null;
-
-    /**
-     * State of application's exception handling.
-     *
-     * @var bool
-     */
-    protected bool $forceThrowExceptions = true;
+    use AthenaeumTestHelper;
 
     /*****************************************************************
      * Setup
@@ -49,10 +35,8 @@ abstract class ApplicationTestCase extends IntegrationTestCase
         // instead.
         $this->ioc->destroy();
 
-        $this->app = $this->createApplication();
+        $this->startApplication();
         $this->ioc = $this->app;
-
-        Env::disablePutenv();
     }
 
     /**
@@ -61,49 +45,13 @@ abstract class ApplicationTestCase extends IntegrationTestCase
     protected function _after()
     {
         // Destroy application before destroying ioc
-        if(isset($this->app)){
-            $this->app->destroy();
-            $this->app = null;
-        }
-
-        Env::enablePutenv();
+        $this->stopApplication();
 
         parent::_after();
     }
 
     /**
-     * Creates a new application instance
-     *
-     * @see applicationPaths
-     *
-     * @param PathsContainer|array|null $paths [optional] Defaults to "application paths" if none given
-     *
-     * @return CoreApplication
-     *
-     * @throws \Throwable
-     */
-    protected function createApplication($paths = null)
-    {
-        // Resolve paths
-        $paths = $paths ?? $this->applicationPaths();
-
-        // Create application
-        $app = new CoreApplication($paths, 'x.x.x-testing');
-
-        // Detect "testing" environment
-        $app->detectEnvironment(fn() => $this->detectEnvironment());
-
-        // Final setup and return the instance
-        return $app
-            ->forceThrowExceptions($this->forceThrowExceptions);
-    }
-
-    /**
-     * Returns the paths that the application must use
-     *
-     * @return array
-     *
-     * @throws \Codeception\Exception\ConfigurationException
+     * @inheritdoc
      */
     protected function applicationPaths() : array
     {
@@ -116,16 +64,6 @@ abstract class ApplicationTestCase extends IntegrationTestCase
             'resourcePath'      => Configuration::dataDir() . 'resources',
             'storagePath'       => Configuration::dataDir()
         ];
-    }
-
-    /**
-     * Detects the environment the application must use
-     *
-     * @return string
-     */
-    protected function detectEnvironment() : string
-    {
-        return 'testing';
     }
 
     /*****************************************************************
