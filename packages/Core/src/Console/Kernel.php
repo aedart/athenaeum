@@ -319,6 +319,22 @@ class Kernel implements ConsoleKernelInterface,
      */
     protected function laravelVersion() : string
     {
-        return Version::package('illuminate/console');
+        if(Version::hasFor('illuminate/console')){
+            return Version::package('illuminate/console');
+        }
+
+        // NOTE: This should NOT be the case, because the core
+        // application is not able to be used inside a normal
+        // Laravel project. However, during test while using
+        // orchestra test-bench, the entire framework is installed,
+        // replacing illuminate/console and causes the previous
+        // condition to fail. Thus, attempt to determine if this
+        // is the case and return laravel's installed version.
+
+        if(Version::hasFor('laravel/framework')){
+            return Version::package('laravel/framework');
+        }
+
+        return 'unknown';
     }
 }
