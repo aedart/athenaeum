@@ -14,6 +14,7 @@ use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Aedart\Utils\Exceptions\UnsupportedOperation;
 use Aedart\Utils\Version;
 use Illuminate\Console\Application as Artisan;
+use Illuminate\Console\OutputStyle;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
@@ -210,7 +211,7 @@ class Kernel implements ConsoleKernelInterface,
      */
     protected function attempt(callable $callback, OutputInterface $output = null)
     {
-        $output = $output ?? new ConsoleOutput();
+        $output = $output ?? $this->resolveDefaultOutput();
 
         try {
             // Attempt to perform whatever is being requested.
@@ -260,6 +261,25 @@ class Kernel implements ConsoleKernelInterface,
 
             return true;
         }
+    }
+
+    /**
+     * Resolves a default output instance
+     *
+     * @return OutputInterface
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    protected function resolveDefaultOutput() : OutputInterface
+    {
+        $core = $this->getCoreApplication();
+
+        // Laravel's Console binds OutputStyle inside their commands...
+        if($core->bound(OutputStyle::class)){
+            return $core->make(OutputStyle::class);
+        }
+
+        return new ConsoleOutput();
     }
 
     /**
