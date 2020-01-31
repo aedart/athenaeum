@@ -24,7 +24,7 @@ class MathTest extends UnitTestCase
     {
         // NOTE: We do not really care about how valid, good or
         // unique the random seed generator is, in this test.
-        $result = Math::makeSeed();
+        $result = Math::seed();
 
         ConsoleDebugger::output($result);
 

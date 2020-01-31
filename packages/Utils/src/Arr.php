@@ -24,7 +24,7 @@ class Arr extends ArrBase
     public static function randomElement(array $list, bool $shuffle = true)
     {
         if($shuffle){
-            $list = static::shuffle($list, Math::makeSeed());
+            $list = static::shuffle($list, Math::seed());
         }
 
         $index = array_rand($list, 1);

@@ -11,16 +11,14 @@ namespace Aedart\Utils;
 class Math
 {
     /**
-     * Generates a seed based on microtime
-     *
-     * Resulting seed can be used to seed the Mersenne Twister Random Number Generator
+     * Generates a seed that can be used for the random number generator
      *
      * @see mt_srand
      * @see https://www.php.net/manual/en/function.mt-srand.php#refsect1-function.mt-srand-examples
      *
      * @return int
      */
-    public static function makeSeed() : int
+    public static function seed() : int
     {
         list($usec, $sec) = explode(' ', microtime());
         return $sec + $usec * 1000000;
