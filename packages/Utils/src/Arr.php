@@ -18,13 +18,14 @@ class Arr extends ArrBase
      *
      * @param array $list
      * @param bool $shuffle [optional] If true, list is shuffled first
+     * @param int|null $seed [optional] Number to seed the random generator. Only used if shuffle set to true
      *
      * @return mixed
      */
-    public static function randomElement(array $list, bool $shuffle = true)
+    public static function randomElement(array $list, bool $shuffle = false, int $seed = null)
     {
         if($shuffle){
-            $list = static::shuffle($list, Math::seed());
+            $list = static::shuffle($list,$seed);
         }
 
         $index = array_rand($list, 1);
