@@ -33,7 +33,7 @@ class HandlesAllExceptions extends BaseExceptionHandler
 
         //dump(__METHOD__ . get_class($output));
 
-        $output->error($exception->getMessage());
+        $output->write("<error>{$exception->getMessage()}</error>");
 
         return true;
     }
