@@ -20,6 +20,8 @@ use Throwable;
  */
 trait ApplicationInitiator
 {
+    use HandlesApplicationCallbacks;
+
     /**
      * Application instance
      *
@@ -54,6 +56,8 @@ trait ApplicationInitiator
 
         $this->app = $this->createApplication();
 
+        $this->invokeAfterCreatedCallbacks();;
+
         return $this;
     }
 
@@ -75,6 +79,8 @@ trait ApplicationInitiator
         if( ! $this->hasApplicationBeenStarted()){
             return false;
         }
+
+        $this->invokeBeforeDestroyedCallbacks();;
 
         $this->app->destroy();
         $this->app = null;
