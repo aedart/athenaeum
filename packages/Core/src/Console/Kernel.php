@@ -15,6 +15,7 @@ use Aedart\Utils\Exceptions\UnsupportedOperation;
 use Aedart\Utils\Version;
 use Illuminate\Console\Application as Artisan;
 use Illuminate\Console\OutputStyle;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
@@ -279,7 +280,7 @@ class Kernel implements ConsoleKernelInterface,
             return $core->make(OutputStyle::class);
         }
 
-        return new ConsoleOutput();
+        return new BufferedOutput();
     }
 
     /**
