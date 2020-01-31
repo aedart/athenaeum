@@ -6,7 +6,7 @@ use Aedart\Testing\Athenaeum\AthenaeumTestHelper;
 use Codeception\Configuration;
 
 /**
- * Application Integration Test Case
+ * Athenaeum Core Application Integration Test Case
  *
  * Base test-case for integration tests, using the custom adaptation of
  * Laravel's application
