@@ -39,4 +39,47 @@ class VersionTest extends UnitTestCase
 
         Version::package('acme/unknown-pgk-' . $this->getFaker()->word);
     }
+
+    /**
+     * @test
+     */
+    public function cachesPackageVersion()
+    {
+        $package = 'aedart/athenaeum';
+
+        Version::package($package);
+
+        $cache = Version::cached();
+
+        ConsoleDebugger::output($cache);
+
+        $this->assertArrayHasKey($package, $cache);
+    }
+
+    /**
+     * @test
+     */
+    public function canClearCachedPackageVersion()
+    {
+        $package = 'aedart/athenaeum';
+
+        Version::package($package);
+        Version::clearCached();
+
+        $cache = Version::cached();
+
+        $this->assertEmpty($cache);
+    }
+
+    /**
+     * @test
+     */
+    public function canDetermineIfVersionIsAvailableForPackage()
+    {
+        $resultA = Version::hasFor('aedart/athenaeum');
+        $this->assertTrue($resultA, 'Should exist for A');
+
+        $resultB = Version::hasFor('acme/unknown-pgk-' . $this->getFaker()->word);
+        $this->assertFalse($resultB, 'Should not exist for B');
+    }
 }
