@@ -38,7 +38,7 @@ class ArtisanServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     public function provides()
     {
-        return a[
+        return [
             ConsoleKernelInterface::class
         ];
     }
