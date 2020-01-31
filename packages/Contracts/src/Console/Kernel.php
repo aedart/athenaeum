@@ -7,6 +7,7 @@ use Aedart\Contracts\Console\Output\LastOutputAware;
 use Aedart\Contracts\Exceptions\UnsupportedOperationException;
 use Illuminate\Contracts\Console\Kernel as LaravelConsoleKernel;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 
 /**
  * Console Kernel
@@ -83,10 +84,21 @@ interface Kernel extends LaravelConsoleKernel,
     /**
      * Handles an exception
      *
-     * @param \Throwable $e
+     * Method will attempt to handle exception via application's
+     * registered exception handler(s). If unable to handle, it defaults
+     * to rendering the exception in the console.
+     *
+     * In case that the core application must throw exceptions, then this
+     * must be respected by this method.
+     *
+     * @see \Aedart\Contracts\Core\Application::mustThrowExceptions
+     *
+     * @param Throwable $e
      * @param OutputInterface $output
+     *
+     * @throws Throwable In case that exceptions must be thrown
      *
      * @return void
      */
-    public function handleException(\Throwable $e, OutputInterface $output) : void ;
+    public function handleException(Throwable $e, OutputInterface $output) : void ;
 }

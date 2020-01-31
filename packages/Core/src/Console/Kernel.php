@@ -74,11 +74,13 @@ class Kernel implements ConsoleKernelInterface,
      */
     public function call($command, array $parameters = [], $outputBuffer = null)
     {
-        return $this
-            ->setLastOutput($outputBuffer)
-            ->runCore()
-            ->getArtisan()
-            ->call($command, $parameters, $outputBuffer);
+        return $this->attempt(function(ConsoleKernelInterface $kernel, $output) use($command, $parameters){
+            return $this
+                ->setLastOutput($output)
+                ->runCore()
+                ->getArtisan()
+                ->call($command, $parameters, $output);
+        }, $outputBuffer);
     }
 
     /**
@@ -197,41 +199,33 @@ class Kernel implements ConsoleKernelInterface,
      * delegate the exception to assigned exception handler.
      *
      * @see handleException
+     * @see \Aedart\Contracts\Core\Application::mustThrowExceptions
      *
      * @param callable $callback Callback to be invoked
      * @param OutputInterface|null $output [optional] Defaults to Symfony's Console Output, if output not provided
      *
      * @return mixed
+     *
+     * @throws Throwable In case exceptions must be thrown
      */
     protected function attempt(callable $callback, OutputInterface $output = null)
     {
         $output = $output ?? new ConsoleOutput();
-        $app = $this->getCoreApplication();
-
-        // Force the application to throw exceptions, so that actual
-        // handling is performed via this kernel.
-        $mustThrow = $app->mustThrowExceptions();
-        $app->forceThrowExceptions(true);
 
         try {
             // Attempt to perform whatever is being requested.
             $result = $callback($this, $output);
         } catch (Throwable $e) {
 
-            $wasHandled = $this->handleException($e, $output);
-
-            // In case exception was not handled via a handler, then
-            // there is nothing we can do, other than rendering the
-            // exception.
-            if( ! $wasHandled){
-                $this->getArtisan()->renderThrowable($e, $output);
+            // Force throw exceptions if required by application
+            if($this->getCoreApplication()->mustThrowExceptions()){
+                throw $e;
             }
+
+            $this->handleException($e, $output);
 
             return 1;
         }
-
-        // Restore original "must throw" state
-        $app->forceThrowExceptions($mustThrow);
 
         // Finally, return evt. output
         return $result;
