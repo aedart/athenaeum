@@ -142,6 +142,8 @@ return [
 
     'providers' => [
 
+        \Illuminate\Log\LogServiceProvider::class,
+
     ],
 
     /*
@@ -156,8 +158,7 @@ return [
     */
 
     'aliases' => [
-        //'lipsum'    => \Illuminate\Filesystem\Filesystem::class // Would fail!
-        'lipsum'    => 'files',
+
     ],
 
 ];
