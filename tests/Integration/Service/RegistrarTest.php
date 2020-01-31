@@ -4,7 +4,7 @@ namespace Aedart\Tests\Integration\Service;
 
 use Aedart\Contracts\Service\Registrar as RegistrarInterface;
 use Aedart\Testing\Helpers\MessageBag;
-use Aedart\Testing\TestCases\ApplicationTestCase;
+use Aedart\Testing\TestCases\AthenaeumTestCase;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\Partials\ProviderState;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderA;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderB;
@@ -21,7 +21,7 @@ use Illuminate\Support\ServiceProvider;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Service
  */
-class RegistrarTest extends ApplicationTestCase
+class RegistrarTest extends AthenaeumTestCase
 {
     /**
      * @inheritdoc
