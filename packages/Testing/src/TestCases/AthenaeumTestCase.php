@@ -62,7 +62,7 @@ abstract class AthenaeumTestCase extends IntegrationTestCase
             'databasePath'      => Configuration::outputDir() . 'database',
             'environmentPath'   => getcwd(),
             'resourcePath'      => Configuration::dataDir() . 'resources',
-            'storagePath'       => Configuration::dataDir()
+            'storagePath'       => Configuration::outputDir()
         ];
     }
 
