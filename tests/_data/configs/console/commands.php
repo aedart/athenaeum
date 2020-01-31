@@ -12,8 +12,5 @@ return [
     */
 
     \Aedart\Console\Commands\PirateTalkCommand::class,
-
-    //\Acme\Console\DatabaseDumpCommand::class,
-    //\Acme\Console\ExportPicturesCommand::class,
-    //\Acme\Console\RestoreUserCommand::class,
+    \Aedart\Tests\Helpers\Dummies\Console\Commands\FailsCommand::class
 ];
