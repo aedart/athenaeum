@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Integration\Core\Application;
 
-use Aedart\Tests\TestCases\AthenaeumAppTestCase;
+use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
 
 /**
  * F0_RunTest
@@ -13,7 +13,7 @@ use Aedart\Tests\TestCases\AthenaeumAppTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
-class F0_RunTest extends AthenaeumAppTestCase
+class F0_RunTest extends AthenaeumCoreTestCase
 {
     /**
      * @test

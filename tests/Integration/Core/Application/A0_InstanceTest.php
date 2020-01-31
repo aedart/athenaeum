@@ -3,7 +3,7 @@
 namespace Aedart\Tests\Integration\Core\Application;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
-use Aedart\Tests\TestCases\AthenaeumAppTestCase;
+use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
 
 /**
  * A0_InstanceTest
@@ -14,7 +14,7 @@ use Aedart\Tests\TestCases\AthenaeumAppTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
-class A0_InstanceTest extends AthenaeumAppTestCase
+class A0_InstanceTest extends AthenaeumCoreTestCase
 {
     /**
      * @test

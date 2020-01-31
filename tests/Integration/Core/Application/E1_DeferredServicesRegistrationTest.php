@@ -8,7 +8,7 @@ use Aedart\Core\Bootstrappers\RegisterApplicationServiceProviders;
 use Aedart\Tests\Helpers\Dummies\Contracts\Box;
 use Aedart\Tests\Helpers\Dummies\Events\TestEvent;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\DeferredServiceProvider;
-use Aedart\Tests\TestCases\AthenaeumAppTestCase;
+use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
 
 /**
  * E1_DeferredServicesRegistrationTest
@@ -19,7 +19,7 @@ use Aedart\Tests\TestCases\AthenaeumAppTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
-class E1_DeferredServicesRegistrationTest extends AthenaeumAppTestCase
+class E1_DeferredServicesRegistrationTest extends AthenaeumCoreTestCase
 {
     /*****************************************************************
      * Helpers

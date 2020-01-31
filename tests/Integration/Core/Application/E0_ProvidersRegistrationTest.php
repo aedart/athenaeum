@@ -12,7 +12,7 @@ use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderA;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderB;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderC;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderD;
-use Aedart\Tests\TestCases\AthenaeumAppTestCase;
+use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
 
 /**
  * E0_ProvidersRegistrationTest
@@ -23,7 +23,7 @@ use Aedart\Tests\TestCases\AthenaeumAppTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
-class E0_ProvidersRegistrationTest extends AthenaeumAppTestCase
+class E0_ProvidersRegistrationTest extends AthenaeumCoreTestCase
 {
     /*****************************************************************
      * Helpers

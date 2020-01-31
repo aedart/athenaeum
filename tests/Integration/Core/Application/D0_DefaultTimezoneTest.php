@@ -5,7 +5,7 @@ namespace Aedart\Tests\Integration\Core\Application;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
 use Aedart\Core\Bootstrappers\SetDefaultTimezone;
-use Aedart\Tests\TestCases\AthenaeumAppTestCase;
+use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
 use Codeception\Configuration;
 
 /**
@@ -17,7 +17,7 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
-class D0_DefaultTimezoneTest extends AthenaeumAppTestCase
+class D0_DefaultTimezoneTest extends AthenaeumCoreTestCase
 {
     /*****************************************************************
      * Helpers

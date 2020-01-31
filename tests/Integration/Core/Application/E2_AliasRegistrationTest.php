@@ -5,7 +5,7 @@ namespace Aedart\Tests\Integration\Core\Application;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
 use Aedart\Core\Bootstrappers\RegisterApplicationAliases;
-use Aedart\Tests\TestCases\AthenaeumAppTestCase;
+use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
 
 /**
  * E1_AliasRegistrationTest
@@ -16,7 +16,7 @@ use Aedart\Tests\TestCases\AthenaeumAppTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
-class E2_AliasRegistrationTest extends AthenaeumAppTestCase
+class E2_AliasRegistrationTest extends AthenaeumCoreTestCase
 {
     /*****************************************************************
      * Helpers

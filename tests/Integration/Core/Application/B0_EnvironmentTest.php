@@ -5,7 +5,7 @@ namespace Aedart\Tests\Integration\Core\Application;
 use Aedart\Contracts\Core\Application;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Exceptions\UnableToDetectOrLoadEnv;
-use Aedart\Tests\TestCases\AthenaeumAppTestCase;
+use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
 use Codeception\Configuration;
 use Illuminate\Support\Env;
 
@@ -18,7 +18,7 @@ use Illuminate\Support\Env;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
-class B0_EnvironmentTest extends AthenaeumAppTestCase
+class B0_EnvironmentTest extends AthenaeumCoreTestCase
 {
     /*****************************************************************
      * Helpers

@@ -7,7 +7,7 @@ use Aedart\Tests\Helpers\Dummies\Events\FooEvent;
 use Aedart\Tests\Helpers\Dummies\Events\Listeners\DoesNothing;
 use Aedart\Tests\Helpers\Dummies\Events\Subscribers\FooEventSubscriber;
 use Aedart\Tests\Helpers\Dummies\Events\TestEvent;
-use Aedart\Tests\TestCases\AthenaeumAppTestCase;
+use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
 use Codeception\Configuration;
 
 /**
@@ -19,7 +19,7 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Events\Provider
  */
-class EventServiceProviderTest extends AthenaeumAppTestCase
+class EventServiceProviderTest extends AthenaeumCoreTestCase
 {
     /**
      * @inheritdoc
