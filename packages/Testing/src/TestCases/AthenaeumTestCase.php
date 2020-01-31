@@ -16,7 +16,7 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Testing\TestCases
  */
-abstract class ApplicationTestCase extends IntegrationTestCase
+abstract class AthenaeumTestCase extends IntegrationTestCase
 {
     use AthenaeumTestHelper;
 
