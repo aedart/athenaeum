@@ -4,6 +4,7 @@ namespace Aedart\Core\Providers;
 
 use Aedart\Contracts\Console\Kernel as ConsoleKernelInterface;
 use Aedart\Contracts\Core\Application;
+use Aedart\Core\Console\Commands\PublishCommand;
 use Aedart\Core\Console\Kernel;
 use Illuminate\Contracts\Console\Kernel as LaravelConsoleKernelInterface;
 use Illuminate\Contracts\Support\DeferrableProvider;
@@ -31,6 +32,20 @@ class ArtisanServiceProvider extends ServiceProvider implements DeferrableProvid
         });
 
         $this->app->alias(ConsoleKernelInterface::class, LaravelConsoleKernelInterface::class);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function boot()
+    {
+        if( ! $this->app->runningInConsole()){
+            return;
+        }
+
+        $this->commands([
+            PublishCommand::class
+        ]);
     }
 
     /**
