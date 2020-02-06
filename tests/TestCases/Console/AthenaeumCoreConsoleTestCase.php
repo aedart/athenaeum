@@ -23,7 +23,8 @@ abstract class AthenaeumCoreConsoleTestCase extends AthenaeumCoreTestCase
     protected function applicationPaths(): array
     {
         return array_merge(parent::applicationPaths(), [
-            'configPath'    => Configuration::dataDir() . 'configs' . DIRECTORY_SEPARATOR . 'console'
+            'configPath'    => Configuration::dataDir() . 'configs' . DIRECTORY_SEPARATOR . 'console',
+            'storagePath'   => Configuration::outputDir() . 'console'
         ]);
     }
 }
