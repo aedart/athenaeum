@@ -24,6 +24,8 @@ use Aedart\Core\Bootstrappers\SetDefaultTimezone;
 use Aedart\Core\Bootstrappers\SetExceptionHandling;
 use Aedart\Core\Helpers\NamespaceDetector;
 use Aedart\Core\Helpers\Paths;
+use Aedart\Core\Providers\CacheServiceProvider;
+use Aedart\Core\Providers\CoreCacheServiceProvider;
 use Aedart\Core\Providers\CoreConsoleServiceProvider;
 use Aedart\Core\Providers\EventServiceProvider;
 use Aedart\Core\Providers\ExceptionHandlerServiceProvider;
@@ -162,6 +164,7 @@ class Application extends IoC implements ApplicationInterface,
         ListenersViaConfigServiceProvider::class,
         ConfigServiceProvider::class,
         ConfigLoaderServiceProvider::class,
+        CacheServiceProvider::class,
         CoreConsoleServiceProvider::class
     ];
 
