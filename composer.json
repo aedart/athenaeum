@@ -28,6 +28,7 @@
         "dragonmantank/cron-expression": "^2.3",
         "fzaninotto/faker": "1.9.*",
         "guzzlehttp/guzzle": "~6.4",
+        "illuminate/cache": "^6.13",
         "illuminate/config": "^6.13",
         "illuminate/console": "^6.13",
         "illuminate/container": "^6.13",
