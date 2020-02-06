@@ -79,6 +79,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 #### Fixed
 
+* `Loader` fails to populate configuration correctly, adds initial directory path to each section.
+_This happens when relative paths are set as the loader's initial directory._
 * `Applicaiton` instance not destroyed after `stopApplication()` invoked, in `ApplocationInitiator`.
 This resulting in `$instance` still containing reference to the application, inside Laravel's Service Container, causing tests to fail.
 * `destroy()` does not flush bindings, in `IoC`. Instance is destroyed, yet formal Service Container `flush()` was not respected.

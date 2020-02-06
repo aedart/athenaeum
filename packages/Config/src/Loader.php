@@ -38,8 +38,14 @@ class Loader implements LoaderInterface
      */
     public function setDirectory(string $path): LoaderInterface
     {
+        $path = realpath($path);
+
         if( ! is_dir($path)){
             throw new InvalidPath(sprintf('%s does not exist', $path));
+        }
+
+        if(substr($path, -1) !== DIRECTORY_SEPARATOR){
+            $path .= DIRECTORY_SEPARATOR;
         }
 
         $this->directory = $path;

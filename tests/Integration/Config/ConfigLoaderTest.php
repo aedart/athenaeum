@@ -68,6 +68,23 @@ class ConfigLoaderTest extends LaravelTestCase
 
     /**
      * @test
+     *
+     * @throws \Aedart\Contracts\Config\Loaders\Exceptions\InvalidPathException
+     */
+    public function convertsRelativePathsToRealPaths()
+    {
+        $loader = $this->getConfigLoader();
+
+        $path = __DIR__ . '/../../_data/configs/loader';
+        $loader->setDirectory($path);
+
+        $convertedPath = $loader->getDirectory();
+
+        $this->assertSame($this->directory(), $convertedPath);
+    }
+
+    /**
+     * @test
      */
     public function canLoadConfigurationFiles()
     {
