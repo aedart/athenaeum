@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+
+/*****************************************************************
+ * Application setup
+ ****************************************************************/
+
+/** @var \Aedart\Contracts\Core\Application $app */
+$app = require_once 'bootstrap.php';
+
+/*****************************************************************
+ * Run Artisan
+ ****************************************************************/
+
+/** @var \Aedart\Contracts\Console\Kernel $kernel */
+$kernel = $app->make(\Aedart\Contracts\Console\Kernel::class);
+
+$status = $kernel->handle(
+    $input = new \Symfony\Component\Console\Input\ArgvInput(),
+    new \Symfony\Component\Console\Output\ConsoleOutput()
+);
+
+/*****************************************************************
+ * Terminate
+ ****************************************************************/
+
+$kernel->terminate($input, $status);
+
+exit($status);
