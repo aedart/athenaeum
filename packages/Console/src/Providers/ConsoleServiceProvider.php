@@ -2,11 +2,15 @@
 
 namespace Aedart\Console\Providers;
 
+use Aedart\Contracts\Console\Scheduling\SchedulesTasks;
 use Aedart\Support\Helpers\Config\ConfigTrait;
-use Illuminate\Console\Application;
 use Illuminate\Console\Events\ArtisanStarting;
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Console\Scheduling\ScheduleFinishCommand;
+use Illuminate\Console\Scheduling\ScheduleRunCommand;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
+use LogicException;
 use RuntimeException;
 
 /**
@@ -20,13 +24,23 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
     use ConfigTrait;
 
     /**
+     * @inheritdoc
+     */
+    public function register()
+    {
+        $this->registerSchedule();
+    }
+
+    /**
      * Bootstrap this service
      */
     public function boot()
     {
         $this
             ->publishConfig()
-            ->registerAvailableCommands();
+            ->registerAvailableCommands()
+            ->registerScheduleCommands()
+            ->registerSchedulesFromConfig();
     }
 
     /**
@@ -56,8 +70,96 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
     {
         $commands = $this->getConfig()->get('commands', []);
 
-        Application::starting(function(Application $artisan) use($commands){
-            $artisan->resolveCommands($commands);
+        $this->commands($commands);
+
+        return $this;
+    }
+
+    /**
+     * Register the schedule command(s)
+     *
+     * @return self
+     */
+    protected function registerScheduleCommands()
+    {
+        $this->commands([
+            ScheduleRunCommand::class,
+            ScheduleFinishCommand::class
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * Register scheduled tasks from configuration
+     *
+     * @return self
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws LogicException If given schedules cannot be resolved
+     */
+    protected function registerSchedulesFromConfig()
+    {
+        /** @var Schedule $schedule */
+        $schedule = $this->app->make(Schedule::class);
+
+        $tasks = $this->getConfig()->get('schedule.tasks', []);
+
+        foreach ($tasks as $schedules){
+            $this->addSchedules($schedules, $schedule);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Register scheduled tasks via given schedules instance
+     *
+     * @param string $schedules Class path
+     * @param Schedule $schedule
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws LogicException If given schedules cannot be resolved
+     */
+    protected function addSchedules($schedules, Schedule $schedule)
+    {
+        $scheduler = $this->app->make($schedules);
+        if( ! ($scheduler instanceof SchedulesTasks)){
+            throw new LogicException(sprintf('%s must be instance of %s', $schedules, SchedulesTasks::class));
+        }
+
+        $scheduler->schedule($schedule);
+    }
+
+    /**
+     * Register the Laravel schedule instance
+     *
+     * @return self
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    protected function registerSchedule()
+    {
+        $config = $this->getConfig();
+        $timezone = $config->get('schedule.timezone', $config->get('app.timezone'));
+        $cacheStore = $config->get('schedule.cache', 'null');
+
+        // If a schedule already bound...
+        if($this->app->bound(Schedule::class)){
+
+            // NOTE: At this point, we are unable to (re)specify the timezone!
+            // But we can instruct what cache store the schedule should use.
+
+            /** @var Schedule $schedule */
+            $schedule = $this->app->make(Schedule::class);
+            $schedule->useCache($cacheStore);
+        }
+
+        // This could mean that we are not within a Laravel application,
+        // therefore we bind the schedule instance
+        $this->app->singleton(Schedule::class, function() use($timezone, $cacheStore){
+            return (new Schedule($timezone))
+                ->useCache($cacheStore);
         });
 
         return $this;
@@ -71,7 +173,8 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
     protected function publishConfig()
     {
         $this->publishes([
-            __DIR__ . '/../../configs/commands.php' => config_path('commands.php')
+            __DIR__ . '/../../configs/commands.php' => config_path('commands.php'),
+            __DIR__ . '/../../configs/schedule.php' => config_path('schedule.php'),
         ],'config');
 
         return $this;
