@@ -153,6 +153,8 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
             /** @var Schedule $schedule */
             $schedule = $this->app->make(Schedule::class);
             $schedule->useCache($cacheStore);
+
+            return $this;
         }
 
         // This could mean that we are not within a Laravel application,
