@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\Core\Console;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Console\Commands\Exceptions\CommandFailure;
 use Aedart\Tests\TestCases\Console\AthenaeumCoreConsoleTestCase;
+use Codeception\Configuration;
 
 /**
  * C0_ExceptionHandlingTest
@@ -18,6 +19,23 @@ use Aedart\Tests\TestCases\Console\AthenaeumCoreConsoleTestCase;
  */
 class C0_ExceptionHandlingTest extends AthenaeumCoreConsoleTestCase
 {
+    /**
+     * @inheritdoc
+     */
+    protected function _before()
+    {
+        // Cleanup
+        $file = Configuration::outputDir() . 'console/logs/athenaeum.log';
+        if(file_exists($file)){
+            unlink($file);
+        }
+
+        parent::_before();
+    }
+
+    /*****************************************************************
+     * Actual Tests
+     ****************************************************************/
 
     /**
      * @test
