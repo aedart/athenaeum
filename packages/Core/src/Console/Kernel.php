@@ -16,7 +16,6 @@ use Aedart\Utils\Version;
 use Illuminate\Console\Application as Artisan;
 use Illuminate\Console\OutputStyle;
 use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 
@@ -320,7 +319,7 @@ class Kernel implements ConsoleKernelInterface,
         );
 
         $console->setName(sprintf(
-            'Athenaeum (via. Laravel Artisan ~ illuminate/console v.%s)',
+            '<fg=blue>Athenaeum</> (via. Laravel Artisan ~ <comment>illuminate/console</comment> %s)',
             $this->laravelVersion()
         ));
 
