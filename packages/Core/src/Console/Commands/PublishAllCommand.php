@@ -63,8 +63,8 @@ yet no <comment>configs/redis.php</comment> file is created, once you have regis
 <info>-></info> Not all of Laravel's packages publish resources. You might have to manually copy them from
 <href=https://github.com/laravel/laravel/tree/master/config>Laravel's Scaffold Repository</>.
 
-Another common scenario is that this command fails publishing assets, due to insufficient permissions.
-<info>-></info> Please ensure that you have the required read & write permissions set for those
+Another common scenario is that assets fail to be published, due to insufficient permissions.
+<info>-></info> Please ensure that you have the required write permissions set for those
 directories where assets are intended to be published to.
 
 EOD;
