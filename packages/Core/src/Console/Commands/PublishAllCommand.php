@@ -25,21 +25,21 @@ class PublishAllCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'vendor:publish {--force : Overwrite existing assets}';
+    protected $signature = 'vendor:publish-all {--force : Overwrite existing assets}';
 
     /**
      * Command description.
      *
      * @var string|null
      */
-    protected $description = 'Publish assets from your registered vendor packages';
+    protected $description = 'Publish all assets from your registered vendor packages';
 
     /**
      * Command help
      *
      * @var string
      */
-    protected $help = 'Light version of Laravel\'s vendor:publish command. Is only able to publish all assets or nothing.';
+    protected $help = 'A light version of Laravel\'s vendor:publish command. It is only able to publish all assets or nothing.';
 
     /**
      * Execute this command
