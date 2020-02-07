@@ -42,6 +42,13 @@ class PublishAllCommand extends Command
     protected $help = 'A light version of Laravel\'s vendor:publish command. It is only able to publish all assets or nothing.';
 
     /**
+     * Amount published
+     *
+     * @var int
+     */
+    protected int $amountPublished = 0;
+
+    /**
      * Execute this command
      *
      * @return int
@@ -54,7 +61,7 @@ class PublishAllCommand extends Command
             $this->publish($from, $to);
         }
 
-        $this->output->success('Assets published');
+        $this->output->success("{$this->amountPublished} Assets published");
 
         return 0;
     }
@@ -105,26 +112,61 @@ class PublishAllCommand extends Command
         }
 
         // Create directory, if required
-        $parentDir = dirname($to);
-        if( ! $fs->isDirectory($parentDir)){
-            $fs->makeDirectory($parentDir, 0755, true);
-        }
+        $parentDir = $this->fetchOrCreateParentDirectory($to);
 
         // Finally, copy the file into target destination
         $wasCopied = $fs->copy($from, $to);
         if( ! $wasCopied){
-            throw new RuntimeException(sprintf('Unable to publish "%s", please check permissions for "%s"', $from, $parentDir));
+            throw new RuntimeException(sprintf('Unable to copy "%s", please check permissions for "%s"', $from, $parentDir));
         }
 
         $this->markPublished($to);
     }
 
-    // TODO:
+    /**
+     * Copies a directory and it's content to given target location
+     *
+     * @param string $from
+     * @param string $to
+     *
+     * @throws RuntimeException
+     */
     public function copyDirectory(string $from, string $to) : void
     {
         $fs = $this->getFile();
 
-        // TODO: fs->copyDirectory();
+        // Create directory, if required
+        $parentDir = $this->fetchOrCreateParentDirectory($to);
+
+        // NOTE: We do NOT deal with "force" option here.
+        // We could by deleting everything from the target location,
+        // but that might be dangerous!
+        $wasCopied = $fs->copyDirectory($from, $to);
+        if( ! $wasCopied){
+            throw new RuntimeException(sprintf('Unable to copy "%s", please check permissions for "%s"', $from, $parentDir));
+        }
+
+        $this->markPublished($to);
+    }
+
+    /**
+     * Obtains the parent directory path of given target or creates
+     * it if it does not exist.
+     *
+     * @param string $target
+     *
+     * @return string Parent directory path
+     */
+    protected function fetchOrCreateParentDirectory(string $target) : string
+    {
+        $fs = $this->getFile();
+
+        $parentDir = dirname($target);
+        if( ! $fs->isDirectory($parentDir)){
+            $fs->makeDirectory($parentDir, 0755, true);
+        }
+
+        return $parentDir;
     }
 
     /**
@@ -156,9 +198,11 @@ class PublishAllCommand extends Command
      */
     protected function markPublished(string $asset) : void
     {
+        $this->amountPublished++;
+
         $asset = $this->shortenPath($asset);
 
-        $this->info("'{$asset}' published");
+        $this->info("Publishing '{$asset}'");
     }
 
     /**
