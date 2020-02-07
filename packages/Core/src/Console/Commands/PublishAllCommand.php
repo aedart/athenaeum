@@ -216,7 +216,7 @@ EOD;
     {
         $asset = $this->shortenPath($asset);
 
-        $this->warn("Skipping '{$asset}', file already exists");
+        $this->line("<comment>Skipped '</comment>{$asset}<comment>', file already exists</comment>");
     }
 
     /**
@@ -230,7 +230,7 @@ EOD;
 
         $asset = $this->shortenPath($asset);
 
-        $this->info("Publishing '{$asset}'");
+        $this->line("<info>Published '</info>{$asset}<info>'</info>");
     }
 
     /**
