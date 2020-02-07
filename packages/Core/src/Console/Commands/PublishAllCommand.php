@@ -76,10 +76,10 @@ class PublishAllCommand extends Command
         $fs = $this->getFile();
 
         if($fs->isFile($from)){
-            $this->publishFile($from, $to);
+            $this->copyFile($from, $to);
             return;
         } elseif ($fs->isDirectory($from)){
-            $this->publishDirectory($from, $to);
+            $this->copyDirectory($from, $to);
             return;
         }
 
@@ -94,7 +94,7 @@ class PublishAllCommand extends Command
      *
      * @throws RuntimeException
      */
-    protected function publishFile(string $from, string $to) : void
+    protected function copyFile(string $from, string $to) : void
     {
         $fs = $this->getFile();
 
@@ -120,7 +120,7 @@ class PublishAllCommand extends Command
     }
 
     // TODO:
-    public function publishDirectory(string $from, string $to) : void
+    public function copyDirectory(string $from, string $to) : void
     {
         $fs = $this->getFile();
 
