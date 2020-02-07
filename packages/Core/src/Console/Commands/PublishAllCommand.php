@@ -39,7 +39,35 @@ class PublishAllCommand extends Command
      *
      * @var string
      */
-    protected $help = 'A light version of Laravel\'s vendor:publish command. It is only able to publish all assets or nothing.';
+    protected $help = <<<EOD
+A light version of Laravel's vendor:publish command. It is only able to publish all assets or nothing.
+
+<info>How to use</info>
+Invoke <comment>{your-cli-app} vendor:publish-all</comment>
+
+All asserts that are set to be published by your registered service providers will be copied into their
+specified destinations.
+
+<info>--force flag</info>
+<comment>{your-cli-app} vendor:publish-all --force</comment>
+
+Will overwrite existing files.
+
+<options=bold>Note:</> If an entire directory has been specified to be published, then this flag will
+have no effect.
+
+<info>Troubleshooting</info>
+
+A common scenario is that you wish to publish assets from a Laravel package, e.g. <comment>illuminate/redis</comment>,
+yet no <comment>configs/redis.php</comment> file is created, once you have registered the Service Provider,... etc.
+<info>-></info> Not all of Laravel's packages publish resources. You might have to manually copy them from
+<href=https://github.com/laravel/laravel/tree/master/config>Laravel's Scaffold Repository</>.
+
+Another common scenario is that this command fails publishing assets, due to insufficient permissions.
+<info>-></info> Please ensure that you have the required read & write permissions set for those
+directories where assets are intended to be published to.
+
+EOD;
 
     /**
      * Amount published
