@@ -143,6 +143,7 @@ return [
     'providers' => [
 
         \Illuminate\Log\LogServiceProvider::class,
+        \Aedart\Tests\Helpers\Dummies\Core\Providers\AssetsServiceProvider::class
 
     ],
 
