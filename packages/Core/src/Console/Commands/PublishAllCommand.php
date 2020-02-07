@@ -16,7 +16,7 @@ use RuntimeException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Core\Console\Commands
  */
-class PublishCommand extends Command
+class PublishAllCommand extends Command
 {
     use FileTrait;
 
