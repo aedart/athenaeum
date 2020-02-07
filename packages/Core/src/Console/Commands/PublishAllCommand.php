@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use RuntimeException;
 
 /**
- * Vendor Publish Command
+ * Publish All Command
  *
  * Largely inspired by Laravel's "vendor:publish" command, but with less features...
  * @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Console/VendorPublishCommand.php
