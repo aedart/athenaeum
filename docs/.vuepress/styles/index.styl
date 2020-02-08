@@ -20,6 +20,46 @@ table {
     color: $primary
 }
 
+/* Navbar */
+header.navbar {
+    background-color desaturate(lighten($primary, 15%), 35%)
+    border-bottom none
+    box-shadow 0 2px 3px 1px darken($arrowBgColor, 75%)
+
+    .site-name,
+    .title,
+    .links {
+        background-color inherit
+        color: lighten($textColor, 95%)
+    }
+
+    .search-box {
+        input {
+            width: 8rem
+            border-radius 5px;
+        }
+        input:focus {
+            border: 2px solid lighten($secondary, 10%)
+        }
+    }
+
+    li.dropdown-item {
+        a {
+            color: $textColor
+        }
+    }
+}
+
+@media screen and (min-width: 950px) {
+    header.navbar {
+        .search-box {
+            input {
+                width: 25rem
+            }
+        }
+    }
+}
+
 /* Edit page */
 footer.page-edit {
     color: $secondary
