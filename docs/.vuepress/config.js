@@ -38,7 +38,7 @@ module.exports = {
                 nav: [
                     { text: 'Packages', link: '/packages/' },
                     {
-                        text: 'Versions',
+                        text: 'Archive',
                         items: [
                             { text: 'v3.x', link: '/archive/v3x/' }
                         ]
