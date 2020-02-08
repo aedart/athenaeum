@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis:400,600|Roboto:400,400i,700|Source+Code+Pro:400,500i&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family 'Dosis', sans-serif;
+    font-weight bold;
+    letter-spacing 0.2rem;
+}
+
+table {
+    width: 99%
+    display: table
+}
+
+.description {
+    color: $primary
+}
+
+/* Edit page */
+footer.page-edit {
+    color: $secondary
+}
+
+.last-updated {
+    .time {
+        color: darken($borderColor, 50%)
+    }
+}
+
+/* Tips, warnings and danger blocks */
+.custom-block {
+    &.tip {
+        border-color $primary
+
+        .custom-block-title {
+            color: $primary
+        }
+    }
+
+    &.warning {
+        border-color $badgeWarningColor
+    }
+
+    &.danger {
+        border-color $badgeErrorColor
+    }
+}
+
+/* Code highlighting */
+div[class~="language-console"]
+    &:before
+        content "console"
+
+code {
+    font-family: 'Source Code Pro', monospace;
+    font-weight normal;
+}
+
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #878787;
+}
+
+.token.punctuation {
+    color: #ccc;
+}
+
+.token.tag,
+.token.attr-name,
+.token.namespace,
+.token.deleted {
+    color: $badgeErrorColor;
+}
+
+.token.function-name {
+    color: lighten($primary, 10%);
+}
+
+.token.number {
+    color: $borderColor
+}
+
+.token.boolean,
+.token.function {
+    color: lighten($secondary, 25%)
+}
+
+.token.class-name {
+    font-style italic;
+    font-size: 1.1em;
+}
+
+.token.property,
+.token.class-name,
+.token.constant,
+.token.symbol {
+    color: lighten($secondary, 45%)
+}
+
+.token.selector,
+.token.important,
+.token.atrule,
+.token.keyword,
+.token.builtin {
+    color: lighten($primary, 75%);
+}
+
+.token.string {
+    color: lighten($badgeWarningColor, 50%);
+}
+.token.char,
+.token.attr-value,
+.token.regex,
+.token.variable {
+    color: lighten($primary, 50%)
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+    color: lighten($secondary, 25%)
+}
