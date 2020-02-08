@@ -2,7 +2,7 @@ const version3 = require('./nav/version3x');
 const version4 = require('./nav/version4x');
 
 module.exports = {
-    base: '/',
+    base: '/athenaeum/',
     dest: '.build',
     title: 'Athenaeum',
     description: 'Athenaeum Official Documentation',
