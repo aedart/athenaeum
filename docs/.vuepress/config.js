@@ -35,7 +35,7 @@ module.exports = {
                 // algolia docsearch options for current locale
                 //algolia: {},
                 nav: [
-                    { text: 'Packages', link: '/versions/v3x/' },
+                    { text: 'Packages', link: '/packages/' },
                     {
                         text: 'Versions',
                         items: [
@@ -45,6 +45,10 @@ module.exports = {
                     { text: 'Changelog', link: 'https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md' },
                 ],
                 sidebar: {
+                    // Current (latest) version
+                    '/packages/' : version3.sidebar(),
+
+                    // Previous versions
                     '/versions/v3x/' : version3.sidebar(),
                 }
             },
