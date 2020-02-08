@@ -2,7 +2,7 @@ const version3 = require('./nav/version3x');
 const version4 = require('./nav/version4x');
 
 module.exports = {
-    base: '/athenaeum/',
+    base: resolveBasePath(),
     dest: '.build',
     title: 'Athenaeum',
     description: 'Athenaeum Official Documentation',
@@ -56,3 +56,17 @@ module.exports = {
         }
     }
 };
+
+/**
+ * Resolves the base path
+ *
+ * @return {string}
+ */
+function resolveBasePath() {
+    if(process.env.NODE_ENV === 'development'){
+        console.info('ENVIRONMENT', process.env.NODE_ENV);
+        return '/';
+    }
+
+    return /athenaeum/;
+}
