@@ -1,7 +1,8 @@
 const version3 = require('./nav/version3x');
+const version4 = require('./nav/version4x');
 
 module.exports = {
-    base: '/athenaeum/',
+    base: '/',
     dest: '.build',
     title: 'Athenaeum',
     description: 'Athenaeum Official Documentation',
@@ -39,17 +40,17 @@ module.exports = {
                     {
                         text: 'Versions',
                         items: [
-                            { text: 'v3.x', link: '/versions/v3x/' }
+                            { text: 'v3.x', link: '/archive/v3x/' }
                         ]
                     },
                     { text: 'Changelog', link: 'https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md' },
                 ],
                 sidebar: {
                     // Current (latest) version
-                    '/packages/' : version3.sidebar(),
+                    '/packages/' : version4.sidebar(),
 
                     // Previous versions
-                    '/versions/v3x/' : version3.sidebar(),
+                    '/archive/v3x/' : version3.sidebar(),
                 }
             },
         }
