@@ -1,3 +1,5 @@
+const version3 = require('./nav/version3x');
+
 module.exports = {
     base: '/athenaeum/',
     dest: '.build',
@@ -33,96 +35,19 @@ module.exports = {
                 // algolia docsearch options for current locale
                 //algolia: {},
                 nav: [
-                    { text: 'Components', link: '/components/' },
+                    { text: 'Packages', link: '/versions/v3x/' },
+                    {
+                        text: 'Versions',
+                        items: [
+                            { text: 'v3.x', link: '/versions/v3x/' }
+                        ]
+                    },
                     { text: 'Changelog', link: 'https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md' },
                 ],
                 sidebar: {
-                    '/components/' : genSidebarComponents(),
+                    '/versions/v3x/' : version3.sidebar(),
                 }
             },
         }
     }
 };
-
-function genSidebarComponents () {
-    return [
-        {
-            title: 'Getting Started',
-            collapsable: true,
-            children: [
-                '',
-            ]
-        },
-        {
-            title: 'Config',
-            collapsable: true,
-            children: [
-                ['config/', 'Loader'],
-            ]
-        },
-        {
-            title: 'Container',
-            collapsable: true,
-            children: [
-                'container/',
-            ]
-        },
-        {
-            title: 'Dto',
-            collapsable: true,
-            children: [
-                'dto/',
-                'dto/interface',
-                'dto/concrete-dto',
-                'dto/overloading',
-                'dto/populate',
-                'dto/json',
-                'dto/nested-dto',
-                'dto/array/',
-            ]
-        },
-        {
-            title: 'Http',
-            collapsable: true,
-            children: [
-                'http/',
-                'http/clients/'
-            ]
-        },
-        {
-            title: 'Properties',
-            collapsable: true,
-            children: [
-                ['properties/', 'Overload'],
-            ]
-        },
-        {
-            title: 'Support',
-            collapsable: true,
-            children: [
-                ['support/', 'Introduction'],
-                'support/laravel-helpers',
-                'support/properties',
-                ['support/generator', 'Generator'],
-            ]
-        },
-        {
-            title: 'Testing',
-            collapsable: true,
-            children: [
-                ['testing/', 'Introduction'],
-                'testing/laravel',
-                'testing/test-cases',
-                'testing/traits',
-            ]
-        },
-        {
-            title: 'Utils',
-            collapsable: true,
-            children: [
-                'utils/',
-                'utils/json',
-            ]
-        },
-    ]
-}
