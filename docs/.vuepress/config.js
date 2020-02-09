@@ -39,7 +39,15 @@ module.exports = {
                 //algolia: {},
                 nav: [
                     { text: 'Packages', link: '/packages/' },
-                    { text: 'Archive', link: '/archive/' },
+                    {
+                        text: 'Archive',
+                        link: '/archive/',
+                        items: [
+                            { text: 'v3.x', link: '/archive/v3x/' },
+                            { text: 'v2.x', link: '/archive/v2x/' },
+                            { text: 'v1.x', link: '/archive/v1x/' },
+                        ]
+                    },
                     { text: 'Changelog', link: 'https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md' },
                 ],
                 sidebar: {
@@ -50,28 +58,11 @@ module.exports = {
                     '/archive/v3x/' : version3.sidebar(),
                     '/archive/v2x/' : version2.sidebar(),
                     '/archive/v1x/' : version1.sidebar(),
-
-                    // Archive (index)
-                    '/archive/' : archiveSidebar()
                 }
             },
         }
     }
 };
-
-function archiveSidebar(){
-    return [
-        {
-            title: 'Available Versions',
-            collapsable: false,
-            children: [
-                ['v3x/', 'v3.x'],
-                ['v2x/', 'v2.x'],
-                ['v1x/', 'v1.x'],
-            ]
-        }
-    ]
-}
 
 /**
  * Resolves the base path
