@@ -12,7 +12,7 @@ However, due to limited time, it became a burden having to maintain that many re
 Therefore, I decided to migrate them into a single package.
 If you have previously used any `Aedart\*` packages, then you should be able to find most of those components here.
 
-Please explore the [available components](/packages/).
+Please explore the [available components](/archive/current/).
 
 ## Not A Framework
 
