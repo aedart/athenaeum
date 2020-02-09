@@ -1,3 +1,5 @@
+const version1 = require('./nav/version1x');
+const version2 = require('./nav/version2x');
 const version3 = require('./nav/version3x');
 const version4 = require('./nav/version4x');
 
@@ -46,6 +48,8 @@ module.exports = {
 
                     // Previous versions
                     '/archive/v3x/' : version3.sidebar(),
+                    '/archive/v2x/' : version2.sidebar(),
+                    '/archive/v1x/' : version1.sidebar(),
 
                     // Archive (index)
                     '/archive/' : archiveSidebar()
@@ -61,7 +65,9 @@ function archiveSidebar(){
             title: 'Available Versions',
             collapsable: false,
             children: [
-                ['v3x/', 'v3.x']
+                ['v3x/', 'v3.x'],
+                ['v2x/', 'v2.x'],
+                ['v1x/', 'v1.x'],
             ]
         }
     ]
