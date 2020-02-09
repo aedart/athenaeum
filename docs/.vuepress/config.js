@@ -38,11 +38,12 @@ module.exports = {
                 // algolia docsearch options for current locale
                 //algolia: {},
                 nav: [
-                    { text: 'Packages', link: '/packages/' },
+                    { text: 'Packages', link: '/archive/current/' },
                     {
                         text: 'Archive',
                         link: '/archive/',
                         items: [
+                            { text: 'current', link: '/archive/current/' },
                             { text: 'v3.x', link: '/archive/v3x/' },
                             { text: 'v2.x', link: '/archive/v2x/' },
                             { text: 'v1.x', link: '/archive/v1x/' },
@@ -52,7 +53,7 @@ module.exports = {
                 ],
                 sidebar: {
                     // Current (latest) version
-                    '/packages/' : version4.sidebar(),
+                    '/archive/current/' : version4.sidebar(),
 
                     // Previous versions
                     '/archive/v3x/' : version3.sidebar(),
