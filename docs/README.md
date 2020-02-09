@@ -1,7 +1,7 @@
 ---
 home: true
 actionText: Discover Packages →
-actionLink: /packages/
+actionLink: /archive/current/
 footer: Copyright © 2018-present Alin Eugen Deac, License BSD-3-Clause
 ---
 
