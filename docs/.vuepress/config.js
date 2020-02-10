@@ -46,7 +46,16 @@ module.exports = {
                 sidebar: nav.sidebarItems(),
             },
         }
-    }
+    },
+
+    // Search settings
+    // @see https://vuepress.vuejs.org/plugin/official/plugin-search.html
+    plugins: [
+        ['@vuepress/search', {
+            searchMaxSuggestions: 10,
+            test: '/archive\/current/'
+        }]
+    ]
 };
 
 /**
