@@ -3,7 +3,7 @@ description: About the Console
 ---
 # Command and Schedule Registration
 
-This package offers a way to register [commands](https://laravel.com/docs/6.x/artisan#writing-commands) and [schedules](https://laravel.com/docs/6.x/scheduling#defining-schedules) via configuration.
+This package offers a way to register [commands](https://laravel.com/docs/6.x/artisan) and [schedules](https://laravel.com/docs/6.x/scheduling) via configuration.
 
 It serves as an alternative to the default registration method provided by [Laravel](https://laravel.com).
 
