@@ -1,6 +1,21 @@
 # Athenaeum Config
 
+A `Loader` component that is able to load various types of configuration files and parse them into a Laravel [Repository](https://github.com/laravel/framework/blob/6.x/src/Illuminate/Config/Repository.php).
+
+## Supported File Types
+
+| File Extension  |
+|-----------------|
+| *.ini  |
+| *.json  |
+| *.php (_php array_)  |
+| *.yml, *.yaml (_requires [symfony/yaml](https://github.com/symfony/yaml)_) |
+
+## Documentation
+
 Please read the [official documentation](https://aedart.github.io/athenaeum/) for additional information.
+
+## Repository
 
 The mono repository is located at [github.com/aedart/athenaeum](https://github.com/aedart/athenaeum)
 
