@@ -19,9 +19,6 @@ use Acme\Console\SendNewsHighlights;
 
 class DefinesUserTasks implements SchedulesTasks
 {
-    /**
-     * @inheritDoc
-     */
     public function schedule($schedule): void
     {
         $schedule
