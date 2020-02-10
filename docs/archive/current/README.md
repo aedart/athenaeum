@@ -1,3 +1,6 @@
+---
+description: Athenaeum Release Notes
+---
 # Release Notes
 
 TODO... the new things that have been added
