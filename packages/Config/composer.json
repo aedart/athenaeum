@@ -1,6 +1,6 @@
 {
     "name": "aedart/athenaeum-config",
-    "description": "Athenaeum config package",
+    "description": "A loader that is able to load various types of configuration files",
     "keywords": [
         "Athenaeum",
         "Configuration",
