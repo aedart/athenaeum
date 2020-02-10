@@ -8,13 +8,15 @@ module.exports.sidebar = function(){
                 'upgrade-guide',
             ]
         },
-        // {
-        //     title: 'Config',
-        //     collapsable: true,
-        //     children: [
-        //         ['config/', 'Loader'],
-        //     ]
-        // },
+        {
+            title: 'Config',
+            collapsable: true,
+            children: [
+                'config/',
+                'config/install',
+                'config/usage',
+            ]
+        },
         // {
         //     title: 'Container',
         //     collapsable: true,
