@@ -1,9 +1,11 @@
 {
     "name": "aedart/athenaeum-console",
-    "description": "Athenaeum console package",
+    "description": "Offers a way to register commands and schedules via configuration",
     "keywords": [
         "Athenaeum",
-        "Console"
+        "Console",
+        "Command",
+        "Schedule"
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "support": {
