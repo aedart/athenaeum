@@ -5,6 +5,7 @@ module.exports.sidebar = function(){
             collapsable: true,
             children: [
                 '',
+                'upgrade-guide',
             ]
         },
         // {
