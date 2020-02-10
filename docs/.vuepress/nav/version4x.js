@@ -25,6 +25,13 @@ module.exports.sidebar = function(){
         //         'container/',
         //     ]
         // },
+        {
+            title: 'Core',
+            collapsable: true,
+            children: [
+                'core/',
+            ]
+        },
         // {
         //     title: 'Dto',
         //     collapsable: true,
