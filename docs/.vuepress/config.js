@@ -1,7 +1,4 @@
-const version1 = require('./nav/version1x');
-const version2 = require('./nav/version2x');
-const version3 = require('./nav/version3x');
-const version4 = require('./nav/version4x');
+const nav = require('./nav/index');
 
 module.exports = {
     base: resolveBasePath(),
@@ -42,24 +39,11 @@ module.exports = {
                     {
                         text: 'Archive',
                         link: '/archive/',
-                        items: [
-                            { text: 'current', link: '/archive/current/' },
-                            { text: 'v3.x', link: '/archive/v3x/' },
-                            { text: 'v2.x', link: '/archive/v2x/' },
-                            { text: 'v1.x', link: '/archive/v1x/' },
-                        ]
+                        items: nav.archiveItems(),
                     },
                     { text: 'Changelog', link: 'https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md' },
                 ],
-                sidebar: {
-                    // Current (latest) version
-                    '/archive/current/' : version4.sidebar(),
-
-                    // Previous versions
-                    '/archive/v3x/' : version3.sidebar(),
-                    '/archive/v2x/' : version2.sidebar(),
-                    '/archive/v1x/' : version1.sidebar(),
-                }
+                sidebar: nav.sidebarItems(),
             },
         }
     }
