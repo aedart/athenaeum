@@ -14,6 +14,7 @@ module.exports.sidebar = function(){
             children: [
                 'config/',
                 'config/install',
+                'config/setup',
                 'config/usage',
             ]
         },
