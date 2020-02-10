@@ -18,6 +18,17 @@ module.exports.sidebar = function(){
                 'config/usage',
             ]
         },
+        {
+            title: 'Console',
+            collapsable: true,
+            children: [
+                'console/',
+                'console/install',
+                'console/setup',
+                'console/commands',
+                'console/schedules',
+            ]
+        },
         // {
         //     title: 'Container',
         //     collapsable: true,
