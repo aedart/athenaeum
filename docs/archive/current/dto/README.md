@@ -13,7 +13,7 @@ perform a few [Google searches](https://www.google.com/search?q=data+transfer+ob
 
 ## When to use this
 
-* When you need to encapsulate data that needs to be communicated between systems and or component instances
+* When you need to encapsulate data that needs to be communicated between two or more systems, services or components.
 
 ::: warning A word of caution
 Using DTOs will increase the complexity of your project.
