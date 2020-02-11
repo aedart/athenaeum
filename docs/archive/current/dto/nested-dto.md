@@ -21,7 +21,7 @@ Consider using this package's [Service Container](../container/) (_a slightly ad
 The following example shows two DTOs; `Address` and `Person`. 
 
 ```php
-use Aedart\Dto;
+use Aedart\Dto\Dto;
 
 class Address extends Dto
 {
