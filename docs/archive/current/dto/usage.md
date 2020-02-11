@@ -29,13 +29,13 @@ $person['name'] = 'Jane'; // Will also automatically invoke setName()
 // ... //
 
 // Obtain name using the regular getter method
-$age = $person->getName();
+$name = $person->getName();
 
 // Can also get it via invoking the property directly
-$age = $person->name; // Will automatically invoke getName()
+$name = $person->name; // Will automatically invoke getName()
 
 // Lastly, it can also be access via an array-accessor
-$age = $person['name']; // Also invokes the getName()
+$name = $person['name']; // Also invokes the getName()
 ```
 
 For additional information, please read about [Mutators and Accessor](https://en.wikipedia.org/wiki/Mutator_method), [PHP's overloading](http://php.net/manual/en/language.oop5.overloading.php),
