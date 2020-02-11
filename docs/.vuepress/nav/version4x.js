@@ -51,6 +51,7 @@ module.exports.sidebar = function(){
             collapsable: true,
             children: [
                 'dto/',
+                'dto/install',
                 'dto/interface',
                 'dto/concrete-dto',
                 'dto/overloading',
