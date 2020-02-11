@@ -1,10 +1,11 @@
 {
     "name": "aedart/athenaeum-container",
-    "description": "Athenaeum container package",
+    "description": "Slightly adapted version of Laravel's Service Container",
     "keywords": [
         "Athenaeum",
         "IoC",
-        "Container"
+        "Container",
+        "Service Container"
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "support": {
