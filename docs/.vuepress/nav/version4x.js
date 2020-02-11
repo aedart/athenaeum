@@ -29,13 +29,16 @@ module.exports.sidebar = function(){
                 'console/schedules',
             ]
         },
-        // {
-        //     title: 'Container',
-        //     collapsable: true,
-        //     children: [
-        //         'container/',
-        //     ]
-        // },
+        {
+            title: 'Container',
+            collapsable: true,
+            children: [
+                'container/',
+                'container/install',
+                'container/reg-as-app',
+                'container/destroy',
+            ]
+        },
         {
             title: 'Core',
             collapsable: true,
