@@ -4,17 +4,22 @@ description: How to export Dto
 
 # Export
 
-## Export to array
+The `Dto` abstraction supports two main data export methods; to array and [JSON](./json.md).
+
+## Array
 
 Each DTO can be exported to an array.
 
 ```php 
 $properties = $person->toArray();
+var_dump($properties);  
+```
 
-var_dump($properties);  // Will output a "property-name => value" list
-                        // Example:
-                        //  [
-                        //      'name'  => 'Timmy'
-                        //      'age'   => 16
-                        //  ]
+The above example will output the following:
+
+```console
+array(2) {
+  ["name"]=> string(5) "Timmy"
+  ["age"]=> int(19)
+}
 ```
