@@ -1,45 +1,50 @@
 ---
-description: Dto property overloading
+description: How to use DTO
 ---
 
-# Property overloading
+# How to use
 
-Each defined property is accessible in multiple ways, if a getter and or setter method has been defined for that given property.
-
-For additional information, please read about [Mutators and Accessor](https://en.wikipedia.org/wiki/Mutator_method), [PHP's overloading](http://php.net/manual/en/language.oop5.overloading.php),
-and [PHP's Array-Access](http://php.net/manual/en/class.arrayaccess.php)
+Once you have your implementation completed, simply create a new instance of your DTO.
 
 ```php
-// Create a new instance of your DTO
 $person = new Person();
+```
 
+## Property overloading
+
+If a getter and or setter method has been defined for a property, then it becomes accessible in multiple ways.
+
+The following example illustrates how the `name` property can be set and retrieved, in multiple ways.
+
+```php
 // Name can be set using normal setter methods
 $person->setName('John');
 
 // But you can also just set the property itself
 $person->name = 'Jack'; // Will automatically invoke setName()
 
-// And you can also set it, using an array-accessor
+// And you can also set it using an array-accessor
 $person['name'] = 'Jane'; // Will also automatically invoke setName()
 
 // ... //
 
-// Obtain age using the regular getter method
-$age = $person->getAge();
+// Obtain name using the regular getter method
+$age = $person->getName();
 
 // Can also get it via invoking the property directly
-$age = $person->age; // Will automatically invoke getAge()
+$age = $person->name; // Will automatically invoke getName()
 
 // Lastly, it can also be access via an array-accessor
-$age = $person['age']; // Also invokes the getAge()
+$age = $person['name']; // Also invokes the getName()
 ```
 
-::: tip
-If you are using a modern [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment), then it will most likely support [PHPDoc](http://www.phpdoc.org/).
+For additional information, please read about [Mutators and Accessor](https://en.wikipedia.org/wiki/Mutator_method), [PHP's overloading](http://php.net/manual/en/language.oop5.overloading.php),
+and [PHP's Array-Access](http://php.net/manual/en/class.arrayaccess.php)
 
-By adding a [`@property`](http://www.phpdoc.org/docs/latest/references/phpdoc/tags/property.html) tag to your interface or concrete implementation, your IDE will be able to auto-complete the overloadable properties.
+::: tip
+By adding a [`@property`](http://www.phpdoc.org/docs/latest/references/phpdoc/tags/property.html) tag to your interface or concrete implementation, your IDE will should be able to auto-complete the overloadable properties.
 :::
 
 ## Behind the Scene
 
-The [`Overload`](../properties/) component is responsible for handling the properties overloading of the `Dto` abstraction.
+The [`Overload`](../properties/) component is responsible most of the magic.
