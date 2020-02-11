@@ -58,6 +58,7 @@ module.exports.sidebar = function(){
                 'dto/populate',
                 'dto/export',
                 'dto/json',
+                'dto/serialization',
                 'dto/nested-dto',
                 'dto/array/',
             ]
