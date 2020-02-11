@@ -4,8 +4,12 @@ description: Create your Dto interface
 
 # Create Interface
 
-Start off by creating an interface for your DTO.
-Below is an example for a simple Person interface
+Strictly speaking, you do not have to create an interface for each Dto.
+However, if you are working on a large and complex system, then it might be a good idea. 
+It will help you to keep a clean design throughout your system's architecture.
+
+Below you will see a simplified interface for a `Person` Dto.
+It might not conform to your needs, but it exemplifies how Dto interfaces might look like.
 
 ```php
 namespace Acme;
