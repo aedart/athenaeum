@@ -54,7 +54,7 @@ module.exports.sidebar = function(){
                 'dto/install',
                 'dto/interface',
                 'dto/concrete-dto',
-                'dto/overloading',
+                'dto/usage',
                 'dto/populate',
                 'dto/json',
                 'dto/nested-dto',
