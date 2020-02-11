@@ -4,46 +4,28 @@ description: How to populate Dto
 
 # Populate
 
-You can populate your DTO using an array.
+To populating your DTO with data, provide the constructor with an array or use the `populate()` method.
 
-```php
-// property-name => value array
-$data = [
-    'name' => 'Timmy Jones',
-    'age'  => 32
-];
+::: tip Note
+Getters and setter methods are automatically invoked for each property, if available.
+:::
 
-// Create instance and invoke populate
-$person = new Person();
-$person->populate($data); // setName() and setAge() are invoked with the given values
-```
-
-## Via `__construct`
+## Via constructor
 
 If you are extending the default DTO abstraction, then you can also pass in an array in the constructor.
 
 ```php
-// property-name => value array
-$data = [
+$person = new Person([
     'name' => 'Carmen Rock',
     'age'  => 25
-];
-
-// Create instance and invoke populate
-$person = new Person($data);
+]);
 ```
 
-## Export to array
+## Via `populate()`
 
-Each DTO can be exported to an array.
-
-```php 
-$properties = $person->toArray();
-
-var_dump($properties);  // Will output a "property-name => value" list
-                        // Example:
-                        //  [
-                        //      'name'  => 'Timmy'
-                        //      'age'   => 16
-                        //  ]
+```php
+$person->populate([
+    'name' => 'Timmy Jones',
+    'age'  => 32
+]);
 ```
