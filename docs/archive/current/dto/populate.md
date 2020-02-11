@@ -5,6 +5,7 @@ description: How to populate Dto
 # Populate
 
 To populating your DTO with data, provide the constructor with an array or use the `populate()` method.
+Alternatively, you can also populate a DTO from a JSON string.
 
 ::: tip Note
 Getters and setter methods are automatically invoked for each property, if available.
@@ -29,3 +30,7 @@ $person->populate([
     'age'  => 32
 ]);
 ```
+
+## From JSON
+
+See [JSON](./json.md) section.
