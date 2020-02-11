@@ -5,7 +5,7 @@ description: How to create Array Dto
 # Array DTO
 
 While the `Dto` abstraction is good for situations where you must adhere to interfaces that define getters and setters, it can be a bit cumbersome to maintain a large number classes.
-This can especially be true, if you must create DTOs to represent all the resources available of a large scale API.
+This can especially be true, if you must create DTOs to represent all the resources available for a large scale API.
 
 In such situations, the `ArrayDto` abstraction is perhaps better suited.
 As it's name suggests, it uses an `array` to keep track of it's properties.
@@ -125,7 +125,7 @@ class Organisation extends ArrayDto
 }
 ```
 
-::: warning Caution
+::: warning Warning
 When you define accessor or mutator method for a property, it's initial type declaration and casting is ignored.
 If special casting or converting is required, then you must manually handle such in your methods.  
 :::
