@@ -1,3 +1,7 @@
+---
+description: Create your Dto interface
+---
+
 # Create Interface
 
 Start off by creating an interface for your DTO.

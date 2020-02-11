@@ -1,3 +1,7 @@
+---
+description: Export Dto to json
+---
+
 # Json
 
 All DTOs are Json serializable, meaning that they inherit from the [`JsonSerializable`](http://php.net/manual/en/class.jsonserializable.php) interface.

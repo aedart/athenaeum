@@ -1,3 +1,7 @@
+---
+description: How to create a Dto
+---
+
 # Implement DTO
 
 To implement your DTO, extend the `Dto` abstraction.

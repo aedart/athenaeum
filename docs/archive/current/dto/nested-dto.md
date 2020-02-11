@@ -1,3 +1,7 @@
+---
+description: Handling nested dependencies in your Dto
+---
+
 # Nested DTOs
 
 Imagine that your `Person` DTO accepts more complex properties, e.g. an address DTO.

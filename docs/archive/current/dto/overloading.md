@@ -1,3 +1,7 @@
+---
+description: Dto property overloading
+---
+
 # Property overloading
 
 Each defined property is accessible in multiple ways, if a getter and or setter method has been defined for that given property.

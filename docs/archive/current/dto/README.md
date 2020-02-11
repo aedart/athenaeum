@@ -1,3 +1,7 @@
+---
+description: About the Dto Package
+---
+
 # Data Transfer Object (DTO)
 
 A variation / interpretation of the Data Transfer Object (DTO) design pattern (Distribution Pattern). A DTO is nothing more than an object that

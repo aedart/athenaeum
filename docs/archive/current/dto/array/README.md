@@ -1,3 +1,7 @@
+---
+description: How to create Array Dto
+---
+
 # Array DTO
 
 While the `Dto` abstraction is good for situations where you must adhere to interfaces that define getters and setters, it can be a bit cumbersome to maintain a large number classes.
