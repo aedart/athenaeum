@@ -11,7 +11,6 @@ This package provides an abstraction for such DTOs.
 If you don't know about DTOs, I recommend you to read [Martin Fowler's description](http://martinfowler.com/eaaCatalog/dataTransferObject.html) of DTO, and perhaps
 perform a few [Google searches](https://www.google.com/search?q=data+transfer+object&ie=utf-8&oe=utf-8) about this topic.
 
-
 ## When to use this
 
 * When you need to encapsulate data that needs to be communicated between systems and or component instances
