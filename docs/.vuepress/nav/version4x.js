@@ -56,6 +56,7 @@ module.exports.sidebar = function(){
                 'dto/concrete-dto',
                 'dto/usage',
                 'dto/populate',
+                'dto/export',
                 'dto/json',
                 'dto/nested-dto',
                 'dto/array/',
