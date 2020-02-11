@@ -1,5 +1,5 @@
 ---
-description: About the Console
+description: About the Console Package
 ---
 # Command and Schedule Registration
 

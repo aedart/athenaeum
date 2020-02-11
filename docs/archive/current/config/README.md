@@ -1,5 +1,5 @@
 ---
-description: About the Configuration Loader
+description: About the Configuration Package
 ---
 # Configuration Loader
 

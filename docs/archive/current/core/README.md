@@ -1,5 +1,5 @@
 ---
-description: About the Athenaeum Core Application
+description: About the Athenaeum Core Application Package
 ---
 # Athenaeum Core Application
 
