@@ -4,8 +4,7 @@ description: How to create a Dto
 
 # Implement DTO
 
-To implement your DTO, extend the `Dto` abstraction.
-Also, you should ensure that it implements your previously defined interface.
+In order to implement the DTO, extend the `Dto` abstraction and inherit from your DTO interface (_if you choose to use interfaces for your DTOs_).
  
 ```php
 
