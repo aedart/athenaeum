@@ -5,7 +5,6 @@ namespace Aedart\Container;
 use Aedart\Contracts\Container\IoC as IoCInterface;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Container\Container as ContainerInterface;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Facade;
 use Psr\Container\ContainerInterface as PsrContainerInterface;
 
