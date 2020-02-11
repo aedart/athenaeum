@@ -10,6 +10,9 @@ return [
     | Default timezone for your scheduled events. If "null" is provided, then
     | the timezone will default to your application's timezone.
     | See app.timezone
+    |
+    | Has NO EFFECT when this is used inside a typical Laravel Application!
+    | (Laravel already sets this setting)
     */
 
     'timezone' => null,
