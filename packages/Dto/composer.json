@@ -1,6 +1,6 @@
 {
     "name": "aedart/athenaeum-dto",
-    "description": "Athenaeum dto package",
+    "description": "Data Transfer Object (DTO) abstraction",
     "keywords": [
         "Athenaeum",
         "DTO",
