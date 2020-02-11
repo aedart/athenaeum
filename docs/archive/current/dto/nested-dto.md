@@ -5,24 +5,24 @@ description: Handling nested dependencies in your Dto
 # Nested DTOs
 
 Imagine that your `Person` DTO accepts more complex properties, e.g. an address DTO.
-Normally, you would either manually create the nested DTO or perhaps use some kind of factory to achieve the same.
-However, the `Dto` abstraction comes with [Laravel's Service Container](https://laravel.com/docs/5.8/container), meaning that it will automatically attempt to resolve dependencies.
+Normally, you would manually create that address DTO first, in order to populate your main DTO.
+However, if you use the `Dto` abstraction with [Laravel's Service Container](https://laravel.com/docs/6.x/container), populating nested DTOs will be automatically handled for you. 
 
 ## Prerequisite
 
 If you are using the `Dto` component within a typical Laravel application, then you do not have to do anything.
 A Service Container should already be available.
 
-If you are using the `Dto` outside a Laravel application, then you must ensure that a Service Container has been initialised.
+If you are using this `Dto` package outside a Laravel application, then you must ensure that a Service Container has been initialised.
 Consider using this package's [Service Container](../container/) (_a slightly adapted version of Laravel's Service Container_).
 
 ## Example
 
 The following example shows two DTOs; `Address` and `Person`. 
 
-```php
-use Aedart\Dto\Dto;
+### Address DTO
 
+```php
 class Address extends Dto
 {
     protected ?string $street = '';
@@ -37,9 +37,11 @@ class Address extends Dto
         return $this->street;
     }
 }
+```
 
-// ------------------------------------------------ //
+### Person DTO
 
+```php
 class Person extends Dto implements PersonInterface
 {
     protected ?string $name = '';
@@ -60,25 +62,32 @@ class Person extends Dto implements PersonInterface
          return $this->address;
      }
 }
+```
 
-// ------------------------------------------------ //
-// ... elsewhere in your application ... //
+### Resolving Nested Dependencies
 
-// Data for your Person DTO
+When populating your DTO, just pass in the data as your normally do.
+Eventual nested dependencies will automatically be attempted resolved and populated.
+Consider the following example:
+
+```php
 $data = [
     'name' => 'Arial Jackson',
     'age' => 42,
     
-    // Notice that we are NOT passing in an instance of Address, but an array instead!
+    // Notice that we are NOT passing an instance of Address, but an array instead!
     'address' => [
         'street' => 'Somewhere str. 44'
     ]
 ];
 
 $person = new Person($data);                                    
-$address = $person->getAddress();
+$address = $person->getAddress(); // Address DTO instance
 ```
 
-In the above example, [Laravel's Service Container](http://laravel.com/docs/5.5/container) attempts to find and resolve instances that are expected.
+In the above example, the `Address` DTO is automatically resolved and populated by the [Service Container](https://laravel.com/docs/6.x/container).
 
-Furthermore, the default `Dto` abstraction will attempt to automatically populate that instance.
+::: tip Note
+If unable to resolve a nested dependency, the Service Container will fail with a `\Psr\Container\ContainerExceptionInterface`.
+:::
+
