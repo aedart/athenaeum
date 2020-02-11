@@ -4,8 +4,12 @@ description: Export Dto to json
 
 # Json
 
-All DTOs are Json serializable, meaning that they inherit from the [`JsonSerializable`](http://php.net/manual/en/class.jsonserializable.php) interface.
+All DTOs inherit from [`JsonSerializable`](http://php.net/manual/en/class.jsonserializable.php).
 This means that when using `json_encode()`, the DTO automatically ensures that its properties are serializable by the encoding method.
+
+## Encoding
+
+### Via `json_encode()`
 
 ```php
 $person = new Person([
@@ -25,7 +29,7 @@ The above example will output the following Json string;
 }
 ```
 
-## `toJson()`
+### Via `toJson()`
 
 You can also perform json serialization directly on the DTO, by invoking the `toJson()` method.
 
