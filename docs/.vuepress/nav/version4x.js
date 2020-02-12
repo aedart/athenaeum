@@ -64,6 +64,17 @@ module.exports.sidebar = function(){
                 'dto/array/',
             ]
         },
+        {
+            title: 'Events',
+            collapsable: true,
+            children: [
+                'events/',
+                'events/install',
+                'events/setup',
+                'events/listeners',
+                'events/subscribers',
+            ]
+        },
         // {
         //     title: 'Http',
         //     collapsable: true,
