@@ -6,6 +6,7 @@ module.exports.sidebar = function(){
             children: [
                 '',
                 'upgrade-guide',
+                'new',
             ]
         },
         {
