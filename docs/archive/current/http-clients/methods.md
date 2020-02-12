@@ -13,6 +13,8 @@ In general, all methods that perform a HTTP request will return a `ResponseInter
 
 Performs a [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request.
 
+Returns a `ResponseInterface`.
+
 ```php
 $response = $client->get('/flight-status/KL743');
 ```
@@ -21,6 +23,8 @@ $response = $client->get('/flight-status/KL743');
 
 Performs a [HEAD](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD) request.
 
+Returns a `ResponseInterface`.
+
 ```php
 $response = $client->head('/flights');
 ```
@@ -28,6 +32,8 @@ $response = $client->head('/flights');
 ## `post()`
 
 Performs a [POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request.
+
+Returns a `ResponseInterface`.
 
 ```php
 $response = $client->post('/flights', [
@@ -40,6 +46,8 @@ $response = $client->post('/flights', [
 
 Performs a [PUT](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT) request.
 
+Returns a `ResponseInterface`.
+
 ```php
 $response = $client->put('/flights', [
     'flightNo'      => 'WN417',
@@ -51,6 +59,8 @@ $response = $client->put('/flights', [
 
 Performs a [DELETE](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request.
 
+Returns a `ResponseInterface`.
+
 ```php
 $response = $client->delete('/flights', [
     'flightNo'      => 'WN417'
@@ -61,6 +71,8 @@ $response = $client->delete('/flights', [
 
 Performs a [OPTIONS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS) request.
 
+Returns a `ResponseInterface`.
+
 ```php
 $response = $client->options('/flights');
 ```
@@ -68,6 +80,8 @@ $response = $client->options('/flights');
 ## `patch()`
 
 Performs a [PATCH](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) request.
+
+Returns a `ResponseInterface`.
 
 ```php
 $response = $client->patch('/flights', [
@@ -89,6 +103,8 @@ Accepts 3 arguments:
 The default provided drivers use [Guzzle Http Client](http://docs.guzzlephp.org).
 Therefore, when using the `request()` method the following [options](http://docs.guzzlephp.org/en/stable/request-options.html) are accepted.
 
+Returns a `ResponseInterface`.
+
 ```php
 $response = $client->request('POST', '/flight-status', [
     'form_params' => [
@@ -98,110 +114,150 @@ $response = $client->request('POST', '/flight-status', [
 ]);
 ```
 
--------------------TODO-------------------------
+## `withHeaders()`
 
+Set the [Http Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) for the next request.
+
+Returns the `Client`.
+
+```php
+$response = $client
+                ->withHeaders([ 'Accept' => 'application/xml' ])
+                ->get('/status-report');
 ```
 
-    /**
-     * Set the Http headers for the next request
-     *
-     * Method will merge with existing headers, if client has any predefined
-     *
-     * @param array $headers [optional] Key-value pair
-     *
-     * @return self
-     */
-    public function withHeaders(array $headers = []) : self ;
+## `withHeader()`
 
-    /**
-     * Set a Http header for the next request
-     *
-     * Method will merge with existing headers, if client has any predefined
-     *
-     * @param string $name
-     * @param mixed $value
-     *
-     * @return self
-     */
-    public function withHeader(string $name, $value) : self ;
+Set a single [Http Header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) for the next request.
 
-    /**
-     * Remove a Http header from the next request
-     *
-     * @param string $name
-     *
-     * @return self
-     */
-    public function withoutHeader(string $name) : self ;
+Method accepts 2 arguments:
 
-    /**
-     * Get all the Http headers for the next request
-     *
-     * @return array
-     */
-    public function getHeaders() : array ;
+- `$name`: `string` Header name
+- `$value`: `mixed` Header value
 
-    /**
-     * Get the desired Http header, for the next request
-     *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function getHeader(string $name);
+Returns the `Client`.
 
-    /**
-     * Apply a set of options for the next request
-     *
-     * Method will merge given options with Client's default options
-     *
-     * @param array $options [optional]
-     *
-     * @return self
-     */
-    public function withOptions(array $options = []) : self ;
+```php
+$response = $client
+                ->withHeader('Accept', 'application/xml')
+                ->get('/status-report');
+```
 
-    /**
-     * Set a specific option for the next request
-     *
-     * Method will merge given options with Client's default options
-     *
-     * @param string $name
-     * @param mixed $value
-     *
-     * @return self
-     */
-    public function withOption(string $name, $value) : self ;
+## `withoutHeader()`
 
-    /**
-     * Remove given option for the next request
-     *
-     * @param string $name
-     *
-     * @return self
-     */
-    public function withoutOption(string $name) : self ;
+Remove a [Http Header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) for the next request.
 
-    /**
-     * Get all the options for the next request
-     *
-     * @return array
-     */
-    public function getOptions() : array ;
+_This is useful if you have predefined headers for your Http Client profile, yet you need to remove a single header, for a special occasion._ 
 
-    /**
-     * Get a specific option for the next request
-     *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function getOption(string $name);
+Returns the `Client`.
 
-    /**
-     * Get this Http Client's native driver
-     *
-     * @return mixed
-     */
-    public function driver();
+```php
+$response = $client
+                ->withoutHeader('Accept')
+                ->get('/status-report');
+```
+
+## `getHeaders()`
+
+Returns all the [Http Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) set for the next request.
+
+Returns `array`.
+
+```php
+$headers = $client->getHeaders();
+```
+
+## `getHeader()`
+
+Returns value of a specified [Http Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers), set the next request. 
+
+Returns `mixed`.
+
+```php
+$value = $client->getHeader('Accept');
+```
+
+## `withOptions()`
+
+Set driver specific options for the next request
+
+Provided options will be merged with preconfigured Http Client options, set via configuration.
+
+Returns the `Client`.
+
+```php
+$response = $client
+                ->withOptions([ 'allow_redirects' => true ])
+                ->get('/find-flight/CA7745');
+```
+
+## `withOption()`
+
+Set a single driver specific option for the next request.
+
+Provided options will be merged with preconfigured Http Client options, set via configuration.
+
+Method accepts 2 arguments:
+
+- `$name`: `string` Name of option
+- `$value`: `mixed` Option value
+
+Returns the `Client`.
+
+```php
+$response = $client
+                ->withOption('allow_redirects', [
+                    'max'             => 5,
+                    'strict'          => false,
+                    'referer'         => false,
+                    'protocols'       => ['http', 'https'],
+                    'track_redirects' => false
+                ])
+                ->get('/find-flight/CA7745');
+```
+
+## `withoutOption()`
+
+Remove a single driver specific option for the next request.
+
+_This is useful if you have predefined options for your Http Client profile, yet you need to remove a single option, for a special occasion._
+
+Returns the `Client`.
+
+```php
+$response = $client
+                ->withoutOption('allow_redirects')
+                ->get('/find-flight/CA7745');
+```
+
+## `getOptions()`
+
+Returns all driver specific options for the next request.
+
+Returns `array`.
+
+```php
+$options = $client->getOptions();
+```
+
+## `getOption()`
+
+Get the value of a driver specific option, for the next request.
+
+Returns `mixed`.
+
+```php
+$value = $client->getOption('allow_redirects');
+```
+
+## `driver()`
+
+Returns the native driver used by the Http Client.
+
+_If you are using the default provided Http Client(s), then this method will return the [Guzzle Http Client](http://docs.guzzlephp.org) instance._
+
+Returns `mixed`.
+
+```php
+$driver = $client->driver();
 ```
