@@ -1,4 +1,5 @@
 ---
+sidebarDepth: 0
 description: Available Methods for Http Client
 ---
 
