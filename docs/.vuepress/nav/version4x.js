@@ -75,14 +75,19 @@ module.exports.sidebar = function(){
                 'events/subscribers',
             ]
         },
-        // {
-        //     title: 'Http',
-        //     collapsable: true,
-        //     children: [
-        //         'http/',
-        //         'http/clients/'
-        //     ]
-        // },
+        {
+            title: 'Http Clients',
+            collapsable: true,
+            children: [
+                'http-clients/',
+                'http-clients/install',
+                'http-clients/setup',
+                'http-clients/usage',
+                'http-clients/json',
+                'http-clients/methods',
+                'http-clients/custom',
+            ]
+        },
         // {
         //     title: 'Properties',
         //     collapsable: true,
