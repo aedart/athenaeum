@@ -1,10 +1,11 @@
 {
     "name": "aedart/athenaeum-events",
-    "description": "Athenaeum events package",
+    "description": "Offers a way to register event listeners and subscribers via configuration",
     "keywords": [
         "Athenaeum",
-        "Contracts",
-        "Interfaces"
+        "Events",
+        "Listeners",
+        "Subscribers"
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "support": {
