@@ -7,6 +7,8 @@ description: Available Methods for Http Client
 All provided Http Clients offer a common set of methods. These are shortly described below.
 In general, all methods that perform a HTTP request will return a `ResponseInterface` that adheres to [PSR-7 Http Message](https://www.php-fig.org/psr/psr-7/). 
 
+[[toc]]
+
 ## `get()`
 
 Performs a [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request.
