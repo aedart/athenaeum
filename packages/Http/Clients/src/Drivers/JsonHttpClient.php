@@ -33,7 +33,7 @@ class JsonHttpClient extends DefaultHttpClient
     {
         parent::__construct($options);
 
-        $this->setHeadersIfRequired();
+        $this->setInitialHeadersIfRequired();
     }
 
     /**
@@ -86,17 +86,26 @@ class JsonHttpClient extends DefaultHttpClient
      *
      * @return self
      */
-    protected function setHeadersIfRequired()
+    protected function setInitialHeadersIfRequired()
     {
-        $accept = $this->getHeader('Accept');
-        if( ! isset($accept)){
-            $this->withHeader('Accept', $this->defaultAcceptHeader);
+        $this->initialOptions['headers'] = $this->initialOptions['headers'] ?? [];
+        $headers = [];
+
+        // Accept header
+        if( ! isset($this->initialOptions['headers']['Accept'])){
+            $headers['Accept'] = $this->defaultAcceptHeader;
         }
 
-        $contentType = $this->getHeader('Content-Type');
-        if( ! isset($contentType)){
-            $this->withHeader('Content-Type', $this->defaultContentTypeHeader);
+        // Content-Type header
+        if( ! isset($this->initialOptions['headers']['Content-Type'])){
+            $headers['Content-Type'] = $this->defaultContentTypeHeader;
         }
+
+        // Merge into the initial options
+        $this->initialOptions['headers'] = array_merge_recursive($this->initialOptions['headers'], $headers);
+
+        // Ensure that next request has these initial headers set.
+        $this->resetOptionsForNextRequest();
 
         return $this;
     }
