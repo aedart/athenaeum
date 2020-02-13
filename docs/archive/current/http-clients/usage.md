@@ -6,7 +6,8 @@ description: How to use Http Clients
 
 ## Obtain Http Client
 
-To obtain a http client, you can use the `HttpClientsManager`, which can be obtained via a trait.
+To obtain a Http Client instance, use the `HttpClientsManager`.
+It can be obtained via `HttpClientsManagerTrait`.
 
 ```php
 use Aedart\Http\Clients\Traits\HttpClientsManagerTrait;
@@ -29,7 +30,7 @@ class WeatherController
 
 ## Obtain Specific Client Profile
 
-In order to obtain a Http Client instance that matches a specific profile, simply state the name as argument for the `profile()` method. 
+In order to obtain a Http Client profile, state the profile name as argument for the `profile()` method. 
 
 ```php
 $myClient = $this->getHttpClientsManager()->profile('my-client-profile');
