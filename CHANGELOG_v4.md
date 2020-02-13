@@ -38,8 +38,6 @@ Commands have been replaced with updated versions within the [`aedart/athenaeum-
 The original commands are still available using the `athenaeum` console application.
 * `JsonHttpClient` now sets `Accept` and `Content-Type` to `application/json` if not specified.
 (_Previously only the `Content-Type` header was automatically set._)
-* Headers are now case-insensitive in the `DefaultHttpClient` and `JsonHttpClient`.
-Handling of headers is now more inline with [PSR-7](https://www.php-fig.org/psr/psr-7/#12-http-headers).
 
 **Non-breaking Changes**
 
@@ -51,6 +49,8 @@ Handling of headers is now more inline with [PSR-7](https://www.php-fig.org/psr/
 * Using `IoCFacade` to resolve default Http Client `Manager`, in `HttpClientsManagerTrait`.
 * Added `\Aedart\Contracts\Container\IoC` and `\Illuminate\Contracts\Container\Container` as `app` binding aliases, in `IoC`[3].
 * Added possibility to specify specific `vendor` and `output` paths for `interfaces` and `traits`, in the aware-of `Generator`. 
+* `getHeader()` is now case-insensitive, in `DefaultHttpClient` and `JsonHttpClient`.
+Handling of headers is now more inline with [PSR-7](https://www.php-fig.org/psr/psr-7/#12-http-headers).
 
 [1]: _Deprecation of existing abstractions or components is due to the conversion of this package into a [mono repository](ttps://en.wikipedia.org/wiki/Monorepo).
 Existing abstractions are still available, yet will be removed entirely in `v5.0`._
