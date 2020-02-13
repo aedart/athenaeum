@@ -1,6 +1,6 @@
 {
     "name": "aedart/athenaeum-http-clients",
-    "description": "Athenaeum http-clients package",
+    "description": "Http Client wrapper along with a Manager that is able to handle multiple client instances (profiles)",
     "keywords": [
         "Athenaeum",
         "Http",
