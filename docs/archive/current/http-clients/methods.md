@@ -168,9 +168,17 @@ Returns `array`.
 $headers = $client->getHeaders();
 ```
 
+::: tip Note
+The case of the turned headers are as provided to the client.
+See [PSR-7: Http Headers](https://www.php-fig.org/psr/psr-7/#12-http-headers) for more information. 
+:::
+
 ## `getHeader()`
 
 Returns value of a specified [Http Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers), set the next request. 
+
+The header `$name` argument is case-insensitive.
+See [PSR-7: Http Headers](https://www.php-fig.org/psr/psr-7/#12-http-headers) for more information.
 
 Returns `mixed`.
 
