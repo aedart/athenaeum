@@ -18,7 +18,7 @@ getDefault[property-name](): ?[type] ;
 ```php
 class NameTrait
 {
-    protected ?string $name = null;
+    protected $name = null;
 
     public function setName(?string $name)
     {

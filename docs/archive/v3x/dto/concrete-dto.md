@@ -10,9 +10,9 @@ use Aedart\Dto;
 
 class Person extends Dto implements PersonInterface
 {
-    protected ?string $name = '';
+    protected $name = '';
     
-    protected ?int $age = 0;
+    protected $age = 0;
  
     public function setName(?string $name)
     {
