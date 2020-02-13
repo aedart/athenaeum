@@ -88,13 +88,17 @@ module.exports.sidebar = function(){
                 'http-clients/custom',
             ]
         },
-        // {
-        //     title: 'Properties',
-        //     collapsable: true,
-        //     children: [
-        //         ['properties/', 'Overload'],
-        //     ]
-        // },
+        {
+            title: 'Properties',
+            collapsable: true,
+            children: [
+                'properties/',
+                'properties/install',
+                'properties/usage',
+                'properties/naming',
+                'properties/visibility',
+            ]
+        },
         // {
         //     title: 'Support',
         //     collapsable: true,
