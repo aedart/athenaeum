@@ -92,13 +92,13 @@ class JsonHttpClient extends DefaultHttpClient
         $headers = [];
 
         // Accept header
-        if( ! isset($this->initialOptions['headers']['accept'])){
-            $headers['accept'] = $this->defaultAcceptHeader;
+        if( ! isset($this->initialOptions['headers']['Accept'])){
+            $headers['Accept'] = $this->defaultAcceptHeader;
         }
 
         // Content-Type header
-        if( ! isset($this->initialOptions['headers']['content-type'])){
-            $headers['content-type'] = $this->defaultContentTypeHeader;
+        if( ! isset($this->initialOptions['headers']['Content-Type'])){
+            $headers['Content-Type'] = $this->defaultContentTypeHeader;
         }
 
         // Merge into the initial options

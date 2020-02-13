@@ -72,8 +72,8 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
 
         $headers = $this->lastRequest->getHeaders();
 
-        $this->assertArrayHasKey('content-type', $headers);
-        $this->assertSame('application/json', $headers['content-type'][0]);
+        $this->assertArrayHasKey('Content-Type', $headers);
+        $this->assertSame('application/json', $headers['Content-Type'][0]);
     }
 
     /**
@@ -95,8 +95,8 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
 
         $headers = $this->lastRequest->getHeaders();
 
-        $this->assertArrayHasKey('accept', $headers);
-        $this->assertSame('application/json', $headers['accept'][0]);
+        $this->assertArrayHasKey('Accept', $headers);
+        $this->assertSame('application/json', $headers['Accept'][0]);
     }
 
     /**
@@ -115,8 +115,7 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
 
         // Obtain headers
         $accept = $client->getHeader('accept');
-        $contentType = $client->getHeader('Content-Type');
-        dump($client->getHeaders());
+        $contentType = $client->getHeader('Content-TYPE');
 
         $this->assertSame('application/json', $accept, 'Accept header not set for next request');
         $this->assertSame('application/json', $contentType, 'Content-Type header not set for next request');

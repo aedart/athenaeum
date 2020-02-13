@@ -260,8 +260,8 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
         $headers = $this->lastRequest->getHeaders();
         ConsoleDebugger::output($headers);
 
-        $this->assertArrayHasKey('x-wing', $headers);
-        $this->assertSame('27000', $headers['x-wing'][0]);
+        $this->assertArrayHasKey('X-Wing', $headers);
+        $this->assertSame('27000', $headers['X-Wing'][0]);
     }
 
     /**
