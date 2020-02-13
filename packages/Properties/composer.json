@@ -1,6 +1,6 @@
 {
     "name": "aedart/athenaeum-properties",
-    "description": "Athenaeum properties package",
+    "description": "Provides means to dynamically deal with inaccessible properties, by implementing some of PHP's magic methods",
     "keywords": [
         "Athenaeum",
         "Properties",
