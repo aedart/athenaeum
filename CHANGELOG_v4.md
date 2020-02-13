@@ -87,6 +87,7 @@ This resulting in `$instance` still containing reference to the application, ins
 * Default values not triggered when invoking `toArray()`, in `Dto` and `ArrayDto`, when using aware-of traits to create a Dto class.
 * `ContainerTrait`'s default value returns the `Facade` root application, instead of `Container`.
 (_Strictly speaking, this was not a defect. `Application` is an extended version of `Container`._)
+* Headers option not initially set in `DefaultHttpClient`.
 
 
 
