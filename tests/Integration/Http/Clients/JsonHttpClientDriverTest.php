@@ -78,6 +78,29 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
 
     /**
      * @test
+     * @dataProvider httpMethods
+     *
+     * @param string $method
+     */
+    public function setsJsonAcceptHeader(string $method)
+    {
+        $mockedResponses = $this->makeResponseMock([
+            new Response(200, [ 'X-Foo' => 'Bar' ])
+        ]);
+
+        $client = $this->getHttpClient();
+        $client
+            ->withOption('handler', $mockedResponses)
+            ->$method('/my-api');
+
+        $headers = $this->lastRequest->getHeaders();
+
+        $this->assertArrayHasKey('Accept', $headers);
+        $this->assertSame('application/json', $headers['Accept'][0]);
+    }
+
+    /**
+     * @test
      */
     public function requestIsJsonEncoded()
     {
