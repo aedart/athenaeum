@@ -267,4 +267,26 @@ class DefaultHttpClient implements Client
     {
         return strtolower(trim($name));
     }
+
+    /**
+     * Determine if a given header has been set in the initial options
+     *
+     * @param string $name Case-insensitive
+     *
+     * @return bool
+     */
+    protected function hasInitialHeader(string $name) : bool
+    {
+        $headers = $this->initialOptions['headers'] ?? [];
+
+        $name = $this->normaliseHeaderName($name);
+
+        foreach ($headers as $header => $value){
+            if($this->normaliseHeaderName($header) === $name){
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
