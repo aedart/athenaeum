@@ -121,7 +121,7 @@ interface Client
      *
      * Method will merge with existing headers, if client has any predefined
      *
-     * @param string $name
+     * @param string $name Case-insensitive
      * @param mixed $value
      *
      * @return self
@@ -131,7 +131,7 @@ interface Client
     /**
      * Remove a Http header from the next request
      *
-     * @param string $name
+     * @param string $name Case-insensitive
      *
      * @return self
      */
@@ -147,7 +147,7 @@ interface Client
     /**
      * Get the desired Http header, for the next request
      *
-     * @param string $name
+     * @param string $name Case-insensitive
      *
      * @return mixed
      */

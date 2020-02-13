@@ -130,7 +130,12 @@ class DefaultHttpClient implements Client
     {
         $this->optionsForNextRequest['headers'] = $this->optionsForNextRequest['headers'] ?? [];
 
-        $this->optionsForNextRequest['headers'] = array_merge_recursive($this->optionsForNextRequest['headers'], $headers);
+        $normalised = [];
+        foreach ($headers as $name => $value){
+            $normalised[ $this->normaliseHeaderName($name) ] = $value;
+        }
+
+        $this->optionsForNextRequest['headers'] = array_merge_recursive($this->optionsForNextRequest['headers'], $normalised);
 
         return $this;
     }
@@ -148,6 +153,8 @@ class DefaultHttpClient implements Client
      */
     public function withoutHeader(string $name): Client
     {
+        $name = $this->normaliseHeaderName($name);
+
         unset($this->optionsForNextRequest['headers'][$name]);
 
         return $this;
@@ -166,6 +173,8 @@ class DefaultHttpClient implements Client
      */
     public function getHeader(string $name)
     {
+        $name = $this->normaliseHeaderName($name);
+
         if(isset($this->optionsForNextRequest['headers'][$name])){
             return $this->optionsForNextRequest['headers'][$name];
         }
@@ -241,5 +250,17 @@ class DefaultHttpClient implements Client
     protected function resetOptionsForNextRequest()
     {
         $this->optionsForNextRequest = $this->initialOptions;
+    }
+
+    /**
+     * Normalises the header name
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function normaliseHeaderName(string $name) : string
+    {
+        return strtolower(trim($name));
     }
 }

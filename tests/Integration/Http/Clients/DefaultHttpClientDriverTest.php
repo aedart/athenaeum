@@ -260,8 +260,8 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
         $headers = $this->lastRequest->getHeaders();
         ConsoleDebugger::output($headers);
 
-        $this->assertArrayHasKey('X-Wing', $headers);
-        $this->assertSame('27000', $headers['X-Wing'][0]);
+        $this->assertArrayHasKey('x-wing', $headers);
+        $this->assertSame('27000', $headers['x-wing'][0]);
     }
 
     /**
@@ -272,9 +272,9 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
         $client = $this->getHttpClient();
 
         $value = 'Yuck, shiny shore. go to cabo rojo.';
-        $client->withHeader('X-Token', $value);
+        $client->withHeader('x-token', $value);
 
-        $this->assertSame($value, $client->getHeader('X-Token'));
+        $this->assertSame($value, $client->getHeader('x-token'));
     }
 
     /**
