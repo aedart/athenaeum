@@ -128,6 +128,8 @@ class DefaultHttpClient implements Client
      */
     public function withHeaders(array $headers = []): Client
     {
+        $this->optionsForNextRequest['headers'] = $this->optionsForNextRequest['headers'] ?? [];
+
         $this->optionsForNextRequest['headers'] = array_merge_recursive($this->optionsForNextRequest['headers'], $headers);
 
         return $this;
