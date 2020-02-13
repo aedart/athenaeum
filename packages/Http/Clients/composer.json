@@ -3,9 +3,10 @@
     "description": "Http Client wrapper along with a Manager that is able to handle multiple client instances (profiles)",
     "keywords": [
         "Athenaeum",
-        "Http",
-        "Clients",
-        "Psr-7"
+        "Http Clients",
+        "Psr-7",
+        "Manager",
+        "Profiles"
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "support": {
