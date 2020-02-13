@@ -88,20 +88,18 @@ class JsonHttpClient extends DefaultHttpClient
      */
     protected function setInitialHeadersIfRequired()
     {
-        $this->initialOptions['headers'] = $this->initialOptions['headers'] ?? [];
         $headers = [];
 
-        // Accept header
-        if( ! isset($this->initialOptions['headers']['Accept'])){
+        if( ! $this->hasInitialHeader('Accept')){
             $headers['Accept'] = $this->defaultAcceptHeader;
         }
 
-        // Content-Type header
-        if( ! isset($this->initialOptions['headers']['Content-Type'])){
+        if( ! $this->hasInitialHeader('Content-Type')){
             $headers['Content-Type'] = $this->defaultContentTypeHeader;
         }
 
         // Merge into the initial options
+        $this->initialOptions['headers'] = $this->initialOptions['headers'] ?? [];
         $this->initialOptions['headers'] = array_merge_recursive($this->initialOptions['headers'], $headers);
 
         // Ensure that next request has these initial headers set.
