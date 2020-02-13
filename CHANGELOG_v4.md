@@ -5,10 +5,8 @@
 ## v4.x
 
 // TODO:
-* Split docs into version 3.x and 4.x
 * docs about custom application, etc.
 * docs about custom kernel, etc.
-* docs about custom event service provider
 * docs about custom exception handling
 * docs about logging using custom application
 * change Http Client interface to adhere to the PSR-18 (Http Client) interface!
