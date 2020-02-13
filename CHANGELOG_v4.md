@@ -38,6 +38,8 @@ Commands have been replaced with updated versions within the [`aedart/athenaeum-
 The original commands are still available using the `athenaeum` console application.
 * `JsonHttpClient` now sets `Accept` and `Content-Type` to `application/json` if not specified.
 (_Previously only the `Content-Type` header was automatically set._)
+* Headers are now case-insensitive in the `DefaultHttpClient` and `JsonHttpClient`.
+Handling of headers is now more inline with [PSR-7](https://www.php-fig.org/psr/psr-7/#12-http-headers).
 
 **Non-breaking Changes**
 
