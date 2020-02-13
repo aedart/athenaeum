@@ -10,6 +10,7 @@
 * docs about custom exception handling
 * docs about logging using custom application
 * change Http Client interface to adhere to the PSR-18 (Http Client) interface!
+-> See [Guzzle Psr 7](https://github.com/guzzle/psr7/tree/master), it contains a factory that might be useful.
 * docs about version util
 * change `docs` location for aware-of properties (`properties.php`), so that current v3.x are not overwritten!
 * change docs for testing custom application 
