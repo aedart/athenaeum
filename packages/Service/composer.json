@@ -1,6 +1,6 @@
 {
     "name": "aedart/athenaeum-service",
-    "description": "Athenaeum service package",
+    "description": "Service Registrar that is able to register and boot Laravel Service Providers",
     "keywords": [
         "Athenaeum",
         "Service Registrar",
