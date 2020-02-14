@@ -99,6 +99,15 @@ module.exports.sidebar = function(){
                 'properties/visibility',
             ]
         },
+        {
+            title: 'Service',
+            collapsable: true,
+            children: [
+                'service/',
+                'service/install',
+                'service/usage',
+            ]
+        },
         // {
         //     title: 'Support',
         //     collapsable: true,
