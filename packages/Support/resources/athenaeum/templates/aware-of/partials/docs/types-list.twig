@@ -1,9 +1,11 @@
 {% for type, component in types %}
--------------------------------------------------------
+___
 {{ "`#{type}`" }} {{ component.description }}
 
-*Interface* : {{ "`#{component.interface}`" }}
+*Interface*: {{ "`#{component.interface}`" }}
 
-*Trait* : {{ "`#{component.trait}`" }}
+*Trait*: {{ "`#{component.trait}`" }}
+
 {#| <small>{{ "`#{type}`" }}</small> | {{ component.description }} | <small>{{ "`#{component.interface}`" }} <br> {{ "`#{component.trait}`" }}</small> |#}
+
 {% endfor %}
