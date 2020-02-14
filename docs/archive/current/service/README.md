@@ -16,7 +16,7 @@ $registrar->bootAll();
 ```
 
 ::: warning Caution
-This package is intended to be used outside a normal Laravel application!
+**This package is intended to be used outside a normal Laravel application!**
 There is no need for you to use it within your regular application, because Laravel already [provides such functionality](https://laravel.com/docs/6.x/providers#registering-providers).
 
 Initially this component has been designed to be to be used by the [Athenaeum Core Application](../core).
