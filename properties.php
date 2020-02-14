@@ -44,7 +44,7 @@ return [
      *
      * @var string
      */
-    'docs-output' => 'docs/components/support/properties.md',
+    'docs-output' => 'docs/archive/current/support/properties/available-helpers.md',
 
     /*****************************************************************
      * Namespaces to use
