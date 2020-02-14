@@ -1,12 +1,12 @@
 {
     "name": "aedart/athenaeum-support",
-    "description": "Athenaeum support package",
+    "description": "Aware-of Helpers for Laravel components and other utilities",
     "keywords": [
         "Athenaeum",
         "Helpers",
-        "Laravel",
         "Aware Of",
-        "Properties"
+        "Properties",
+        "Utils"
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "support": {
