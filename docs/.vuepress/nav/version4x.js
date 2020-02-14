@@ -108,16 +108,33 @@ module.exports.sidebar = function(){
                 'service/usage',
             ]
         },
-        // {
-        //     title: 'Support',
-        //     collapsable: true,
-        //     children: [
-        //         ['support/', 'Introduction'],
-        //         'support/laravel-helpers',
-        //         'support/properties',
-        //         ['support/generator', 'Generator'],
-        //     ]
-        // },
+        {
+            title: 'Support',
+            collapsable: true,
+            children: [
+                'support/',
+                'support/install',
+                {
+                    title: 'Laravel Aware-of Helpers',
+                    collapsable: true,
+                    children: [
+                        'support/laravel/',
+                        'support/laravel/interfaces',
+                        'support/laravel/default',
+                        'support/laravel/pros-cons',
+                        'support/laravel/available-helpers',
+                    ]
+                },
+                {
+                    title: 'Aware-of Properties',
+                    collapsable: true,
+                    children: [
+                        'support/properties/',
+                        'support/properties/available-helpers',
+                    ]
+                }
+            ]
+        },
         // {
         //     title: 'Testing',
         //     collapsable: true,
