@@ -4,7 +4,7 @@ namespace Aedart\Testing\TestCases;
 
 use Aedart\Testing\TestCases\Partials\FakerPartial;
 use Codeception\Actor;
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use \Mockery as m;
 
 /**
@@ -17,7 +17,7 @@ use \Mockery as m;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Testing\TestCases
  */
-abstract class UnitTestCase extends Test
+abstract class UnitTestCase extends Unit
 {
     use FakerPartial;
 
