@@ -141,16 +141,16 @@ module.exports.sidebar = function(){
                 }
             ]
         },
-        // {
-        //     title: 'Testing',
-        //     collapsable: true,
-        //     children: [
-        //         ['testing/', 'Introduction'],
-        //         'testing/laravel',
-        //         'testing/test-cases',
-        //         'testing/traits',
-        //     ]
-        // },
+        {
+            title: 'Testing',
+            collapsable: true,
+            children: [
+                'testing/',
+                'testing/install',
+                'testing/test-cases',
+                'testing/testing-aware-of',
+            ]
+        },
         // {
         //     title: 'Utils',
         //     collapsable: true,
