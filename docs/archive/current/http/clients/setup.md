@@ -42,7 +42,7 @@ After the publish command has completed, you should see the following configurat
 
 ### Publish Assets for Athenaeum Core Application
 
-If you are using the [Athenaeum Core Application](../core/), then run the following command to publish assets:
+If you are using the [Athenaeum Core Application](../../core), then run the following command to publish assets:
 
 ```console
 php {your-cli-app} vendor:publish-all

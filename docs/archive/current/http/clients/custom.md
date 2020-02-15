@@ -85,7 +85,7 @@ return [
 ## Obtaining the Client
 
 To obtain your client, simply state the profile name in the `profile()` method.
-See [basic usage](./usage.md) for more information.
+See [basic usage](usage.md) for more information.
 
 ```php
 $myClient = $this->getHttpClientsManager()->profile('my-custom-client');
