@@ -26,6 +26,16 @@ abstract class IntegrationTestCase extends UnitTestCase
     protected $ioc = null;
 
     /**
+     * If true, the Service Container instance
+     * will automatically register as application.
+     *
+     * @see \Aedart\Container\IoC::registerAsApplication
+     *
+     * @var bool
+     */
+    protected bool $registerAsApplication = true;
+
+    /**
      * {@inheritdoc}
      */
     protected function _before()
@@ -33,7 +43,10 @@ abstract class IntegrationTestCase extends UnitTestCase
         parent::_before();
 
         $this->ioc = IoC::getInstance();
-        $this->ioc->registerAsApplication();
+
+        if($this->registerAsApplication){
+            $this->ioc->registerAsApplication();
+        }
     }
 
     /**
