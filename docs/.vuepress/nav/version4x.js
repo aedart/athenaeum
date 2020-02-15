@@ -76,16 +76,22 @@ module.exports.sidebar = function(){
             ]
         },
         {
-            title: 'Http Clients',
+            title: 'Http',
             collapsable: true,
             children: [
-                'http-clients/',
-                'http-clients/install',
-                'http-clients/setup',
-                'http-clients/usage',
-                'http-clients/json',
-                'http-clients/methods',
-                'http-clients/custom',
+                {
+                    title: 'Clients',
+                    collapsable: true,
+                    children: [
+                        'http/clients/',
+                        'http/clients/install',
+                        'http/clients/setup',
+                        'http/clients/usage',
+                        'http/clients/json',
+                        'http/clients/methods',
+                        'http/clients/custom',
+                    ]
+                },
             ]
         },
         {
