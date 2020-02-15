@@ -20,7 +20,7 @@
 
 **Breaking Changes**
 
-* PHP version from `v7.3.x` to `v7.4.x`.
+* Required PHP version changed to `v7.4.x`.
 * All class properties now have their [types declared](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties), if possible.
 * `dto:create` command now generates traits with class [type declarations](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties) for it's properties (_former `dto:create-aware-of` command_).
 * `Dto` and `ArrayDto` now implements the `__serialize()` and `__unserialize()` magic methods.
@@ -40,10 +40,11 @@ The original commands are still available using the `athenaeum` console applicat
 **Non-breaking Changes**
 
 * Converted athenaeum into a true [mono repository](ttps://en.wikipedia.org/wiki/Monorepo). All major components are now available as separate packages, via composer.
-* Upgraded to Laravel `v6.14.x`, Symfony `v4.4.x` and upgraded various other dependencies.
+* Upgraded Laravel dependencies to `v6.15.x`, Symfony to `v4.4.x`, Codeception to `v4.1.x`, and various other dependencies.
 * Code style to [PSR-12](https://www.php-fig.org/psr/psr-12/).
 * Replaced deprecated `Twig` components, in `TwigPartial` trait.
 * `UnitTestCase` now uses `FakerPartial` to setup [Faker](https://github.com/fzaninotto/Faker).
+* `UnitTestCase` now inherits from Codeception's `Unit` test-case.
 * Using `IoCFacade` to resolve default Http Client `Manager`, in `HttpClientsManagerTrait`.
 * Added `\Aedart\Contracts\Container\IoC` and `\Illuminate\Contracts\Container\Container` as `app` binding aliases, in `IoC`[3].
 * Added possibility to specify specific `vendor` and `output` paths for `interfaces` and `traits`, in the aware-of `Generator`. 
