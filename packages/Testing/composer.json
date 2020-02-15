@@ -1,6 +1,6 @@
 {
     "name": "aedart/athenaeum-testing",
-    "description": "Athenaeum testing package",
+    "description": "Testing utilities built on top of Orchestra Testbench and Codeception",
     "keywords": [
         "Athenaeum",
         "Testing"
