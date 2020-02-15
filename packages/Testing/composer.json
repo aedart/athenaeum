@@ -20,7 +20,8 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "codeception/codeception": "3.1.*",
+        "codeception/codeception": "4.1.*",
+        "codeception/module-asserts": "1.1.*",
         "fzaninotto/faker": "1.9.*",
         "hanneskod/classtools": "~1.2",
         "mockery/mockery": "1.3.*",
