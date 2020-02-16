@@ -45,6 +45,8 @@ module.exports.sidebar = function(){
             collapsable: true,
             children: [
                 'core/',
+                'core/prerequisite',
+                'core/install',
             ]
         },
         {
