@@ -57,7 +57,7 @@ class MethodHelper
     }
 
     /**
-     * Call the given method and return whatever method returns
+     * Call the given method and return whatever the method returns
      *
      * If given method is not callable, e.g. an integer is given,
      * then given value is returned instead
