@@ -10,9 +10,7 @@
 * docs about custom exception handling
 * docs about logging using custom application
 * change Http Client interface to adhere to the PSR-18 (Http Client) interface!
--> See [Guzzle Psr 7](https://github.com/guzzle/psr7/tree/master), it contains a factory that might be useful.
-* docs about version util
-* change docs for testing custom application 
+-> See [Guzzle Psr 7](https://github.com/guzzle/psr7/tree/master), it contains a factory that might be useful. 
 
 ### [v4.0.0](__TODO__)
 
