@@ -12,7 +12,7 @@ use Aedart\Utils\Version;
 // Obtain version of installed package
 $version = Version::package('aedart/athenaeum-utils');
 
-// Json encode ~ throw exception if encoding fails
+// Json encode ~ throws exception if encoding fails
 echo Json::encode([
     'version' => $version
 ]);
