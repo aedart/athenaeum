@@ -1,9 +1,14 @@
 {
     "name": "aedart/athenaeum-utils",
-    "description": "Athenaeum utils package",
+    "description": "Offers a few utility components that are used by the Athenaeum packages",
     "keywords": [
         "Athenaeum",
-        "Utilities"
+        "Utilities",
+        "Array",
+        "Json",
+        "Math",
+        "Function",
+        "Version"
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "support": {
