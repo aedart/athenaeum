@@ -151,13 +151,19 @@ module.exports.sidebar = function(){
                 'testing/testing-aware-of',
             ]
         },
-        // {
-        //     title: 'Utils',
-        //     collapsable: true,
-        //     children: [
-        //         'utils/',
-        //         'utils/json',
-        //     ]
-        // },
+        {
+            title: 'Utils',
+            collapsable: true,
+            children: [
+                'utils/',
+                'utils/install',
+                'utils/array',
+                'utils/json',
+                'utils/math',
+                'utils/method-helper',
+                'utils/populatable',
+                'utils/version',
+            ]
+        },
     ]
 };
