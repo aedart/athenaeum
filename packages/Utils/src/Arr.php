@@ -30,12 +30,6 @@ class Arr extends ArrBase
 
         $index = array_rand($list, 1);
 
-        // Reset the seed to avoid other random methods from
-        // using the same seed!
-        if(isset($seed)){
-            mt_srand();
-        }
-
         return $list[$index];
     }
 }
