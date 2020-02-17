@@ -19,16 +19,15 @@ $element = Arr::randomElement(['Jim', 'Sine', 'Ally', 'Gordon']);
 
 See also Laravel's [`Arr::random`](https://laravel.com/docs/6.x/helpers#method-array-random).
 
-### Shuffle & Seed
+### Seed
 
-You can instruct the method to [shuffle](https://en.wikipedia.org/wiki/Shuffling) the given list before picking a random element.
-Furthermore, you can also provide it with a seed.
+You can also provide a [seed for the random number generator](https://www.php.net/manual/en/function.mt-srand.php). 
 
 ```php
 use Aedart\Utils\Arr;
 use Aedart\Utils\Math;
 
-$element = Arr::randomElement(['Jim', 'Sine', 'Ally', 'Gordon'], true, Math::seed());
+$element = Arr::randomElement(['Jim', 'Sine', 'Ally', 'Gordon'], Math::seed());
 ```
 
 See [`Math::seed()`](math.md) for additional information about seeding.

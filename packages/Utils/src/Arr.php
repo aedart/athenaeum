@@ -17,18 +17,24 @@ class Arr extends ArrBase
      * Returns a single random element from given list
      *
      * @param array $list
-     * @param bool $shuffle [optional] If true, list is shuffled first
-     * @param int|null $seed [optional] Number to seed the random generator. Only used if shuffle set to true
+     * @param int|null $seed [optional] Number to seed the random generator.
      *
      * @return mixed
      */
-    public static function randomElement(array $list, bool $shuffle = false, int $seed = null)
+    public static function randomElement(array $list, int $seed = null)
     {
-        if($shuffle){
-            $list = static::shuffle($list, $seed);
+        // Seed generator if required
+        if(isset($seed)){
+            mt_srand($seed);
         }
 
         $index = array_rand($list, 1);
+
+        // Reset the seed to avoid other random methods from
+        // using the same seed!
+        if(isset($seed)){
+            mt_srand();
+        }
 
         return $list[$index];
     }

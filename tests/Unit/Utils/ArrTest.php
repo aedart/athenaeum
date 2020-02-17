@@ -31,4 +31,24 @@ class ArrTest extends UnitTestCase
 
         $this->assertTrue(in_array($result, $list));
     }
+
+    /**
+     * @test
+     */
+    public function returnsSameValueWhenSeededWithStaticValue()
+    {
+        $list = range('a', 'z');
+
+        $seed = 123456;
+
+        $resultA = Arr::randomElement($list, $seed);
+        $resultB = Arr::randomElement($list, $seed);
+        $resultC = Arr::randomElement($list, $seed);
+
+        ConsoleDebugger::output($resultA, $resultB, $resultC);
+
+        $this->assertSame($resultA, $resultB);
+        $this->assertSame($resultA, $resultC);
+        $this->assertSame($resultB, $resultC);
+    }
 }
