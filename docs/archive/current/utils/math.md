@@ -7,6 +7,8 @@ sidebarDepth: 0
 
 Offers a few math related utility methods.
 
+[[TOC]]
+
 ## `randomInt()`
 
 Generates a random number between given minimum and maximum values.
@@ -27,4 +29,26 @@ use Aedart\Utils\Math;
 $seed = Math::seed();
 
 mt_srand($seed);
+```
+
+## `applySeed()`
+
+Seeds the Mersenne Twister Random Number Generator.
+
+See [PHP's documentation](https://www.php.net/manual/en/function.mt-srand) for additional information.
+
+```php
+use Aedart\Utils\Math;
+
+$seed = 123456;
+$list = ['a', 'b', 'c', 'd'];
+
+Math::applySeed($seed);
+$resultA = $list[ array_rand($list, 1) ];
+
+Math::applySeed($seed);
+$resultB = $list[ array_rand($list, 1) ];
+
+echo $resultA; // b
+echo $resultB; // b
 ```

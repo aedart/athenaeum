@@ -57,4 +57,31 @@ class MathTest extends UnitTestCase
 
         $this->assertNotEmpty($result);
     }
+
+    /**
+     * @test
+     */
+    public function canApplySeed()
+    {
+        $seed = 123456;
+        $list = ['a', 'b', 'c', 'd'];
+
+        Math::applySeed($seed);
+        $a = array_rand($list, 1);
+        $resultA = $list[$a];
+
+        Math::applySeed($seed);
+        $b = array_rand($list, 1);
+        $resultB = $list[$b];
+
+        Math::applySeed($seed);
+        $c = array_rand($list, 1);
+        $resultC = $list[$c];
+
+        ConsoleDebugger::output($resultA, $resultB, $resultC);
+
+        $this->assertSame($resultA, $resultB);
+        $this->assertSame($resultA, $resultC);
+        $this->assertSame($resultB, $resultC);
+    }
 }

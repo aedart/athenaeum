@@ -39,6 +39,7 @@ class Math
     /**
      * Generates a seed that can be used for the random number generator
      *
+     * @see applySeed
      * @see mt_srand
      *
      * @return int
@@ -49,5 +50,21 @@ class Math
         // @see https://www.php.net/manual/en/function.mt-srand.php#refsect1-function.mt-srand-examples
         list($usec, $sec) = explode(' ', microtime());
         return $sec + $usec * 1000000;
+    }
+
+    /**
+     * Seeds the Mersenne Twister Random Number Generator
+     *
+     * <b>WARNING</b>: If you choose to seed the random number generator,
+     * all methods that depend on it will be affected.
+     *
+     * @see seed
+     * @see https://www.php.net/manual/en/function.mt-srand.php
+     *
+     * @param int|null $seed [optional] Seed value
+     */
+    public static function applySeed(int $seed = null)
+    {
+        mt_srand($seed);
     }
 }
