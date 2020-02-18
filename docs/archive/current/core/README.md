@@ -4,11 +4,23 @@ description: About the Athenaeum Core Application Package
 
 # Athenaeum Core Application
 
-TODO... documentation is in the process of being written. Come back a bit later...
+The Athenaeum Core Application is a custom implementation of [Laravel's](https://laravel.com/) [`\Illuminate\Contracts\Foundation\Application`](https://github.com/laravel/framework/blob/6.x/src/Illuminate/Contracts/Foundation/Application.php).
+It is intended to bring some of Laravel's service and components into your [legacy application](https://en.wikipedia.org/wiki/Legacy_system).
+It offers the following features:
+
+- Registration and booting of Service Providers
+- Laravel's Service Container
+- Laravel's Configuration Repository
+- Laravel's Event Dispatcher
+- Laravel's Cache Repository
+- Laravel's Console Application (_lightweight version of Artisan_)
+- Exception Handling (_optional_)
+
+Please read the "Motivation" and "Limitations" section before continuing.
 
 ## Motivation
 
-Despite your best intentions, it might not be possible to make use of the entire Laravel framework, when dealing with [legacy applications](https://en.wikipedia.org/wiki/Legacy_system). 
+Despite your best intentions, it might not be possible to make use of the entire Laravel framework, when dealing with legacy applications. 
 For whatever reasons, you may have to continue development of new features in an outdated system.
 Ultimately, you may wish to start from scratch and make use of all the tools and frameworks you desire.
 This may even prove to be the best choice in the long run.
@@ -19,7 +31,7 @@ Nevertheless, to make some tasks easier, perhaps you choose to make due with a f
 But when a few packages (or services) become a handful, then it can become somewhat tricky or cumbersome trying to setup those services, when you lack Laravel's native mechanisms; _the ability to register and boot service providers._
 
 This package was created to offer such a mechanism, in hopes that it can bridge the gab between you legacy application and some of Laravel's packages.
-However, you must understand that **it is not a replacement for the Laravel framework!**
+However, you must understand that **it is not a replacement for Laravel framework!**
 
 ### Why not include the entire Framework?
 
@@ -27,8 +39,8 @@ Should you be able to include the entire Laravel Framework in your vendor, and y
 Laravel is incredible powerful. If you spend enough time reviewing it's source code, you might be surprised just how flexible it actually is. 
 Consequently, if such a choice is available to you, then you shouldn't have any need for this package. 
 
-Regardless of the choices available, please bare in mind that no framework can be bent to solve every kind of challenge.
-Nor would it be fair to demand a it's authors and contributes to solve all of your challenges, when dealing with legacy applications. 
+Regardless, please bare in mind that no framework can solve every kind of problem or challenge.
+Nor would it be fair, to demand it's authors and contributes to solve all of your challenges, when dealing with legacy applications. 
 Not even this package will be able to solve all problems.
 It only offers a "minimum" set of functionality, hopefully allowing you to bring some of Laravel's capabilities, services and components into your legacy application.
 How you choose to make use of it, if at all, is entirely up to you. 
@@ -74,15 +86,15 @@ Given the line of argumentation already provided, if may seem redundant to state
 Yet, this cannot be emphasised enough: _continuing to add features into a legacy application will increase complexity._
 Integrating this package into your legacy application will most certainly bring unforeseen challenges.
 Therefore, when mentioning Laravel (_or Lumen_) as a possible alternative, try to think about your challenge in a different way.
-Perhaps you can extract those "new" features out of your legacy application, by offer them via an API of [microservice](https://en.wikipedia.org/wiki/Microservices).
-If this is possible for you, then Laravel or Lumen will be able to act as good alternatives.
+Perhaps you can extract those "new" features out of your legacy application, by offering them via an API or [microservice](https://en.wikipedia.org/wiki/Microservices).
+If this is possible for you, then Laravel or Lumen are good alternatives to consider.
 
 ### Other Frameworks
 
 There are many other [PHP frameworks](https://en.wikipedia.org/wiki/Category:PHP_frameworks).
 Some are lightweight, whilst others are large-scale.
 Some are easy to master, and some are a bit more cumbersome to learn.
-The point of this is, you should know that there are many different types of frameworks available.
+The point is, you should know that there are many different types of frameworks available.
 Each having it's own strengths and weaknesses.
-Perhaps one of those frameworks could be integrated directly into your legacy application and fulfill some of your needs, without causing too many changes. 
-In any case, it is worth taking some time researching what features they offer, and what requirements they impose. 
+Perhaps one of those frameworks can be integrated directly into your legacy application, and fulfill some of your needs, without causing too many changes. 
+In any case, it is worth taking some time researching what features other frameworks offer, and what requirements they impose. 
