@@ -68,4 +68,21 @@ It is not able to support all features, that you otherwise would expect from Lar
 
 ## Alternatives
 
-TODO... A few good alternatives?
+### Laravel Framework or Lumen
+
+Given the line of argumentation already provided, if may seem redundant to state [Laravel Framework](https://laravel.com/) or [Lumen](https://lumen.laravel.com/) as alternatives (_E.g. you may not have this choice available_).
+Yet, this cannot be emphasised enough: _continuing to add features into a legacy application will increase complexity._
+Integrating this package into your legacy application will most certainly bring unforeseen challenges.
+Therefore, when mentioning Laravel (_or Lumen_) as a possible alternative, try to think about your challenge in a different way.
+Perhaps you can extract those "new" features out of your legacy application, by offer them via an API of [microservice](https://en.wikipedia.org/wiki/Microservices).
+If this is possible for you, then Laravel or Lumen will be able to act as good alternatives.
+
+### Other Frameworks
+
+There are many other [PHP frameworks](https://en.wikipedia.org/wiki/Category:PHP_frameworks).
+Some are lightweight, whilst others are large-scale.
+Some are easy to master, and some are a bit more cumbersome to learn.
+The point of this is, you should know that there are many different types of frameworks available.
+Each having it's own strengths and weaknesses.
+Perhaps one of those frameworks could be integrated directly into your legacy application and fulfill some of your needs, without causing too many changes. 
+In any case, it is worth taking some time researching what features they offer, and what requirements they impose. 
