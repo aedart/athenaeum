@@ -14,7 +14,8 @@ This package is not intended to be used inside a regular Laravel application.
 The Athenaeum Core Application is a custom implementation of Laravel's [`\Illuminate\Contracts\Foundation\Application`](https://github.com/laravel/framework/blob/6.x/src/Illuminate/Contracts/Foundation/Application.php).
 It is intended to run on it's own.
 
-#### Will Highjack the `app` Binding
+#### Will Highjack the Application
 
-If you still choose to require and use this inside your regular Laravel application, then you risk that it will highjack the `app` binding, which will result in very undesirable behaviour.  
+If you still choose to require and use this inside your regular Laravel application, then you risk that it will highjack the `app` binding (_Laravel's application instance_).
+This will result in very undesirable behaviour.  
 :::
