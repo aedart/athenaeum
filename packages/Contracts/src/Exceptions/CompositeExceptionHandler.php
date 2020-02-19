@@ -42,5 +42,5 @@ interface CompositeExceptionHandler extends ExceptionHandler
      *
      * @return ExceptionHandler[]
      */
-    public function getHandlers() : array ;
+    public function getHandlers(): array;
 }

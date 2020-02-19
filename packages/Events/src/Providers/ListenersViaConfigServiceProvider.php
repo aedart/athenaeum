@@ -44,8 +44,8 @@ class ListenersViaConfigServiceProvider extends ServiceProvider
         $list = $this->getConfig()->get('events.listeners', []);
         $dispatcher = $this->getDispatcher();
 
-        foreach ($list as $event => $listeners){
-            foreach ($listeners as $listener){
+        foreach ($list as $event => $listeners) {
+            foreach ($listeners as $listener) {
                 $dispatcher->listen($event, $listener);
             }
         }
@@ -63,7 +63,7 @@ class ListenersViaConfigServiceProvider extends ServiceProvider
         $subscribers = $this->getConfig()->get('events.subscribers', []);
         $dispatcher = $this->getDispatcher();
 
-        foreach ($subscribers as $subscriber){
+        foreach ($subscribers as $subscriber) {
             $dispatcher->subscribe($subscriber);
         }
 

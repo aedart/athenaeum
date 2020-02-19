@@ -31,7 +31,7 @@ class SetExceptionHandling implements CanBeBootstrapped
     {
         // Skip this bootstrapper, if exception handling is disabled
         $config = $this->getConfig();
-        if( ! $config->get('exceptions.enabled', false)){
+        if (!$config->get('exceptions.enabled', false)) {
             return;
         }
 
@@ -72,9 +72,9 @@ class SetExceptionHandling implements CanBeBootstrapped
      *
      * @throws ErrorException
      */
-    public function handleError(int $level, string $message, string $file = '', int $line = 0) : bool
+    public function handleError(int $level, string $message, string $file = '', int $line = 0): bool
     {
-        if(error_reporting() & $level){
+        if (error_reporting() & $level) {
             throw new ErrorException($message, 0, $level, $file, $line);
         }
 
@@ -92,7 +92,7 @@ class SetExceptionHandling implements CanBeBootstrapped
      *
      * @throws Throwable
      */
-    public function handleException(Throwable $e) : bool
+    public function handleException(Throwable $e): bool
     {
         $handler = $this->getExceptionHandlerFactory()->make();
 
@@ -113,10 +113,10 @@ class SetExceptionHandling implements CanBeBootstrapped
      *
      * @throws Throwable
      */
-    public function handleShutdown(array $fatalErrors = []) : void
+    public function handleShutdown(array $fatalErrors = []): void
     {
         $lastError = error_get_last();
-        if( ! isset($lastError)){
+        if (!isset($lastError)) {
             return;
         }
 
@@ -125,8 +125,8 @@ class SetExceptionHandling implements CanBeBootstrapped
         $file = $lastError['file'] ?? 'unknown';
         $line = $lastError['line'] ?? 0;
 
-        if(in_array($level, $fatalErrors)){
-            $this->handleException( new ErrorException($message, 0, $level, $file, $line) );
+        if (in_array($level, $fatalErrors)) {
+            $this->handleException(new ErrorException($message, 0, $level, $file, $line));
         }
     }
 
@@ -140,10 +140,10 @@ class SetExceptionHandling implements CanBeBootstrapped
      * @param string $environment Current application environment
      * @param array $allowedInEnvironments [optional] List of allowed environments
      */
-    public function setErrorDisplay(string $environment, array $allowedInEnvironments = []) : void
+    public function setErrorDisplay(string $environment, array $allowedInEnvironments = []): void
     {
         // Enable if current environment is within the allowed environments
-        if(in_array($environment, $allowedInEnvironments)){
+        if (in_array($environment, $allowedInEnvironments)) {
             ini_set('display_errors', '1');
             return;
         }
@@ -163,7 +163,7 @@ class SetExceptionHandling implements CanBeBootstrapped
      *
      * @return int[]
      */
-    protected function fatalErrors() : array
+    protected function fatalErrors(): array
     {
         // In case that there is no list in the configuration, use this
         // default list of "fatal" errors, which match those used by

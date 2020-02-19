@@ -43,9 +43,9 @@ trait GenderTrait
      *
      * @return string|null gender or null if no gender has been set
      */
-    public function getGender() : ?string
+    public function getGender(): ?string
     {
-        if ( ! $this->hasGender()) {
+        if (!$this->hasGender()) {
             $this->setGender($this->getDefaultGender());
         }
         return $this->gender;
@@ -56,7 +56,7 @@ trait GenderTrait
      *
      * @return bool True if "gender" has been set, false if not
      */
-    public function hasGender() : bool
+    public function hasGender(): bool
     {
         return isset($this->gender);
     }
@@ -66,7 +66,7 @@ trait GenderTrait
      *
      * @return string|null Default "gender" value or null if no default value is available
      */
-    public function getDefaultGender() : ?string
+    public function getDefaultGender(): ?string
     {
         return null;
     }

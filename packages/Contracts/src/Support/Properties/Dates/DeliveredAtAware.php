@@ -31,19 +31,19 @@ interface DeliveredAtAware
      *
      * @return \DateTime|null delivered at or null if no delivered at has been set
      */
-    public function getDeliveredAt() : ?\DateTime;
+    public function getDeliveredAt(): ?\DateTime;
 
     /**
      * Check if "delivered at" has been set
      *
      * @return bool True if "delivered at" has been set, false if not
      */
-    public function hasDeliveredAt() : bool;
+    public function hasDeliveredAt(): bool;
 
     /**
      * Get a default "delivered at" value, if any is available
      *
      * @return \DateTime|null Default "delivered at" value or null if no default value is available
      */
-    public function getDefaultDeliveredAt() : ?\DateTime;
+    public function getDefaultDeliveredAt(): ?\DateTime;
 }

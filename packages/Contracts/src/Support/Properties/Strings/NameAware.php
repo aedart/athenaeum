@@ -31,19 +31,19 @@ interface NameAware
      *
      * @return string|null name or null if no name has been set
      */
-    public function getName() : ?string;
+    public function getName(): ?string;
 
     /**
      * Check if "name" has been set
      *
      * @return bool True if "name" has been set, false if not
      */
-    public function hasName() : bool;
+    public function hasName(): bool;
 
     /**
      * Get a default "name" value, if any is available
      *
      * @return string|null Default "name" value or null if no default value is available
      */
-    public function getDefaultName() : ?string;
+    public function getDefaultName(): ?string;
 }

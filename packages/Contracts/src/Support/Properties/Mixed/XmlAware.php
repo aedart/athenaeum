@@ -38,7 +38,7 @@ interface XmlAware
      *
      * @return bool True if "xml" has been set, false if not
      */
-    public function hasXml() : bool;
+    public function hasXml(): bool;
 
     /**
      * Get a default "xml" value, if any is available

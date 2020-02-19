@@ -43,9 +43,9 @@ trait DurationTrait
      *
      * @return float|null duration or null if no duration has been set
      */
-    public function getDuration() : ?float
+    public function getDuration(): ?float
     {
-        if ( ! $this->hasDuration()) {
+        if (!$this->hasDuration()) {
             $this->setDuration($this->getDefaultDuration());
         }
         return $this->duration;
@@ -56,7 +56,7 @@ trait DurationTrait
      *
      * @return bool True if "duration" has been set, false if not
      */
-    public function hasDuration() : bool
+    public function hasDuration(): bool
     {
         return isset($this->duration);
     }
@@ -66,7 +66,7 @@ trait DurationTrait
      *
      * @return float|null Default "duration" value or null if no default value is available
      */
-    public function getDefaultDuration() : ?float
+    public function getDefaultDuration(): ?float
     {
         return null;
     }

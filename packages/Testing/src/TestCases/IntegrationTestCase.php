@@ -44,7 +44,7 @@ abstract class IntegrationTestCase extends UnitTestCase
 
         $this->ioc = IoC::getInstance();
 
-        if($this->registerAsApplication){
+        if ($this->registerAsApplication) {
             $this->ioc->registerAsApplication();
         }
     }
@@ -54,7 +54,7 @@ abstract class IntegrationTestCase extends UnitTestCase
      */
     protected function _after()
     {
-        if(isset($this->ioc)){
+        if (isset($this->ioc)) {
             $this->ioc->destroy();
             $this->ioc = null;
         }

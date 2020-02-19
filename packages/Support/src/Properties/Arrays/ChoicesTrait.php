@@ -43,9 +43,9 @@ trait ChoicesTrait
      *
      * @return array|null choices or null if no choices has been set
      */
-    public function getChoices() : ?array
+    public function getChoices(): ?array
     {
-        if ( ! $this->hasChoices()) {
+        if (!$this->hasChoices()) {
             $this->setChoices($this->getDefaultChoices());
         }
         return $this->choices;
@@ -56,7 +56,7 @@ trait ChoicesTrait
      *
      * @return bool True if "choices" has been set, false if not
      */
-    public function hasChoices() : bool
+    public function hasChoices(): bool
     {
         return isset($this->choices);
     }
@@ -66,7 +66,7 @@ trait ChoicesTrait
      *
      * @return array|null Default "choices" value or null if no default value is available
      */
-    public function getDefaultChoices() : ?array
+    public function getDefaultChoices(): ?array
     {
         return null;
     }

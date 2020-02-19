@@ -90,11 +90,11 @@ class JsonHttpClient extends DefaultHttpClient
     {
         $headers = [];
 
-        if( ! $this->hasInitialHeader('Accept')){
+        if (!$this->hasInitialHeader('Accept')) {
             $headers['Accept'] = $this->defaultAcceptHeader;
         }
 
-        if( ! $this->hasInitialHeader('Content-Type')){
+        if (!$this->hasInitialHeader('Content-Type')) {
             $headers['Content-Type'] = $this->defaultContentTypeHeader;
         }
 

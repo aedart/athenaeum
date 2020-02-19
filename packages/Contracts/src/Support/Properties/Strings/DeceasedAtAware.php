@@ -31,19 +31,19 @@ interface DeceasedAtAware
      *
      * @return string|null deceased at or null if no deceased at has been set
      */
-    public function getDeceasedAt() : ?string;
+    public function getDeceasedAt(): ?string;
 
     /**
      * Check if "deceased at" has been set
      *
      * @return bool True if "deceased at" has been set, false if not
      */
-    public function hasDeceasedAt() : bool;
+    public function hasDeceasedAt(): bool;
 
     /**
      * Get a default "deceased at" value, if any is available
      *
      * @return string|null Default "deceased at" value or null if no default value is available
      */
-    public function getDefaultDeceasedAt() : ?string;
+    public function getDefaultDeceasedAt(): ?string;
 }

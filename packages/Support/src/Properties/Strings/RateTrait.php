@@ -43,9 +43,9 @@ trait RateTrait
      *
      * @return string|null rate or null if no rate has been set
      */
-    public function getRate() : ?string
+    public function getRate(): ?string
     {
-        if ( ! $this->hasRate()) {
+        if (!$this->hasRate()) {
             $this->setRate($this->getDefaultRate());
         }
         return $this->rate;
@@ -56,7 +56,7 @@ trait RateTrait
      *
      * @return bool True if "rate" has been set, false if not
      */
-    public function hasRate() : bool
+    public function hasRate(): bool
     {
         return isset($this->rate);
     }
@@ -66,7 +66,7 @@ trait RateTrait
      *
      * @return string|null Default "rate" value or null if no default value is available
      */
-    public function getDefaultRate() : ?string
+    public function getDefaultRate(): ?string
     {
         return null;
     }

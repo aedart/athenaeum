@@ -104,7 +104,7 @@ interface Registrar
      *
      * @return ServiceProvider[]
      */
-    public function getProviders($provider) : array ;
+    public function getProviders($provider): array;
 
     /**
      * Get the booted service providers
@@ -120,5 +120,5 @@ interface Registrar
      *
      * @return ServiceProvider
      */
-    public function resolveProvider($provider) : ServiceProvider ;
+    public function resolveProvider($provider): ServiceProvider;
 }

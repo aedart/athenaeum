@@ -46,10 +46,10 @@ class Registrar implements RegistrarInterface
     /**
      * @inheritDoc
      */
-    public function register($provider, bool $boot = true) : bool
+    public function register($provider, bool $boot = true): bool
     {
         // Abort if already registered and not forced to register
-        if($this->isRegistered($provider)){
+        if ($this->isRegistered($provider)) {
             return false;
         }
 
@@ -60,7 +60,7 @@ class Registrar implements RegistrarInterface
         $this->performRegistration($provider);
 
         // Boot provider if required
-        if($boot){
+        if ($boot) {
             $this->boot($provider);
         }
 
@@ -70,17 +70,17 @@ class Registrar implements RegistrarInterface
     /**
      * @inheritdoc
      */
-    public function registerMultiple(array $providers, bool $boot = true, bool $safeBoot = true) : void
+    public function registerMultiple(array $providers, bool $boot = true, bool $safeBoot = true): void
     {
         // If invoked with "safe boot false", then we must boot
         // each provider immediately, during it's registration
-        $shouldBootImmediately = $boot && ! $safeBoot;
+        $shouldBootImmediately = $boot && !$safeBoot;
 
-        foreach ($providers as $provider){
+        foreach ($providers as $provider) {
             $this->register($provider, $shouldBootImmediately);
         }
 
-        if($boot && $safeBoot){
+        if ($boot && $safeBoot) {
             // We have to boot instances registered, not given
             // list of providers, which might just be class paths!
             $this->bootMultiple($this->providers());
@@ -90,16 +90,16 @@ class Registrar implements RegistrarInterface
     /**
      * @inheritdoc
      */
-    public function boot(ServiceProvider $provider) : bool
+    public function boot(ServiceProvider $provider): bool
     {
-        if($this->hasBooted($provider)){
+        if ($this->hasBooted($provider)) {
             return false;
         }
 
         // Boot provider in the same way that Laravel's Application
         // does such.
         // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L826
-        if(method_exists($provider, 'boot')){
+        if (method_exists($provider, 'boot')) {
             $this->getApp()->call([$provider, 'boot']);
 
             $this->bootedServiceProviders[] = $provider;
@@ -114,9 +114,9 @@ class Registrar implements RegistrarInterface
     /**
      * @inheritdoc
      */
-    public function bootMultiple(array $providers) : void
+    public function bootMultiple(array $providers): void
     {
-        array_walk($providers, function(ServiceProvider $provider){
+        array_walk($providers, function (ServiceProvider $provider) {
             $this->boot($provider);
         });
     }
@@ -124,7 +124,7 @@ class Registrar implements RegistrarInterface
     /**
      * @inheritdoc
      */
-    public function bootAll() : void
+    public function bootAll(): void
     {
         $this->bootMultiple($this->providers());
     }
@@ -132,16 +132,16 @@ class Registrar implements RegistrarInterface
     /**
      * @inheritdoc
      */
-    public function isRegistered($provider) : bool
+    public function isRegistered($provider): bool
     {
         $providers = $this->providers();
-        if($provider instanceof ServiceProvider){
+        if ($provider instanceof ServiceProvider) {
             return in_array($provider, $providers);
         }
 
         // In case that a string has been given,...
         $registered = $this->getProviders($provider);
-        if(!empty($registered)){
+        if (!empty($registered)) {
             return true;
         }
 
@@ -151,7 +151,7 @@ class Registrar implements RegistrarInterface
     /**
      * @inheritdoc
      */
-    public function hasBooted(ServiceProvider $provider) : bool
+    public function hasBooted(ServiceProvider $provider): bool
     {
         return in_array($provider, $this->booted());
     }
@@ -159,7 +159,7 @@ class Registrar implements RegistrarInterface
     /**
      * @inheritdoc
      */
-    public function providers() : array
+    public function providers(): array
     {
         return $this->providers;
     }
@@ -175,14 +175,14 @@ class Registrar implements RegistrarInterface
 
         return array_filter(
             $this->providers(),
-            fn(ServiceProvider $registered) => $registered instanceof $name
+            fn (ServiceProvider $registered) => $registered instanceof $name
         );
     }
 
     /**
      * @inheritdoc
      */
-    public function booted() : array
+    public function booted(): array
     {
         return $this->bootedServiceProviders;
     }
@@ -194,9 +194,9 @@ class Registrar implements RegistrarInterface
      *
      * @return ServiceProvider
      */
-    public function resolveProvider($provider) : ServiceProvider
+    public function resolveProvider($provider): ServiceProvider
     {
-        if($provider instanceof ServiceProvider){
+        if ($provider instanceof ServiceProvider) {
             return $provider;
         }
 
@@ -222,15 +222,15 @@ class Registrar implements RegistrarInterface
         $ioc = $this->getApp();
 
         // Bindings
-        if(property_exists($provider, 'bindings')){
-            foreach ($provider->bindings as $abstract => $concrete){
+        if (property_exists($provider, 'bindings')) {
+            foreach ($provider->bindings as $abstract => $concrete) {
                 $ioc->bind($abstract, $concrete);
             }
         }
 
         // Singletons
-        if(property_exists($provider, 'singletons')){
-            foreach ($provider->singletons as $abstract => $concrete){
+        if (property_exists($provider, 'singletons')) {
+            foreach ($provider->singletons as $abstract => $concrete) {
                 $ioc->singleton($abstract, $concrete);
             }
         }
@@ -246,7 +246,7 @@ class Registrar implements RegistrarInterface
      *
      * @return string
      */
-    protected function providerNamespace($provider) : string
+    protected function providerNamespace($provider): string
     {
         return is_string($provider) ? $provider : get_class($provider);
     }

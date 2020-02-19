@@ -43,9 +43,9 @@ trait DatabasePathTrait
      *
      * @return string|null database path or null if no database path has been set
      */
-    public function getDatabasePath() : ?string
+    public function getDatabasePath(): ?string
     {
-        if ( ! $this->hasDatabasePath()) {
+        if (!$this->hasDatabasePath()) {
             $this->setDatabasePath($this->getDefaultDatabasePath());
         }
         return $this->databasePath;
@@ -56,7 +56,7 @@ trait DatabasePathTrait
      *
      * @return bool True if "database path" has been set, false if not
      */
-    public function hasDatabasePath() : bool
+    public function hasDatabasePath(): bool
     {
         return isset($this->databasePath);
     }
@@ -66,7 +66,7 @@ trait DatabasePathTrait
      *
      * @return string|null Default "database path" value or null if no default value is available
      */
-    public function getDefaultDatabasePath() : ?string
+    public function getDefaultDatabasePath(): ?string
     {
         return null;
     }

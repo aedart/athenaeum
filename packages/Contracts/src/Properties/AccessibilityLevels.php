@@ -42,8 +42,8 @@ interface AccessibilityLevels
      * Levels map, key = level, value = name of level
      */
     public const LEVELS = [
-        self::PUBLIC_LEVEL      => 'public',
-        self::PROTECTED_LEVEL   => 'protected',
-        self::PRIVATE_LEVEL     => 'private',
+        self::PUBLIC_LEVEL => 'public',
+        self::PROTECTED_LEVEL => 'protected',
+        self::PRIVATE_LEVEL => 'private',
     ];
 }

@@ -43,9 +43,9 @@ trait CountryTrait
      *
      * @return string|null country or null if no country has been set
      */
-    public function getCountry() : ?string
+    public function getCountry(): ?string
     {
-        if ( ! $this->hasCountry()) {
+        if (!$this->hasCountry()) {
             $this->setCountry($this->getDefaultCountry());
         }
         return $this->country;
@@ -56,7 +56,7 @@ trait CountryTrait
      *
      * @return bool True if "country" has been set, false if not
      */
-    public function hasCountry() : bool
+    public function hasCountry(): bool
     {
         return isset($this->country);
     }
@@ -66,7 +66,7 @@ trait CountryTrait
      *
      * @return string|null Default "country" value or null if no default value is available
      */
-    public function getDefaultCountry() : ?string
+    public function getDefaultCountry(): ?string
     {
         return null;
     }

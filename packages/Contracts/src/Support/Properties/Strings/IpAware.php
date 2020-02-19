@@ -31,19 +31,19 @@ interface IpAware
      *
      * @return string|null ip or null if no ip has been set
      */
-    public function getIp() : ?string;
+    public function getIp(): ?string;
 
     /**
      * Check if "ip" has been set
      *
      * @return bool True if "ip" has been set, false if not
      */
-    public function hasIp() : bool;
+    public function hasIp(): bool;
 
     /**
      * Get a default "ip" value, if any is available
      *
      * @return string|null Default "ip" value or null if no default value is available
      */
-    public function getDefaultIp() : ?string;
+    public function getDefaultIp(): ?string;
 }

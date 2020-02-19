@@ -31,19 +31,19 @@ interface ExpiresAtAware
      *
      * @return int|null expires at or null if no expires at has been set
      */
-    public function getExpiresAt() : ?int;
+    public function getExpiresAt(): ?int;
 
     /**
      * Check if "expires at" has been set
      *
      * @return bool True if "expires at" has been set, false if not
      */
-    public function hasExpiresAt() : bool;
+    public function hasExpiresAt(): bool;
 
     /**
      * Get a default "expires at" value, if any is available
      *
      * @return int|null Default "expires at" value or null if no default value is available
      */
-    public function getDefaultExpiresAt() : ?int;
+    public function getDefaultExpiresAt(): ?int;
 }

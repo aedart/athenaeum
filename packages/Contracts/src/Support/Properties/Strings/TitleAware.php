@@ -31,19 +31,19 @@ interface TitleAware
      *
      * @return string|null title or null if no title has been set
      */
-    public function getTitle() : ?string;
+    public function getTitle(): ?string;
 
     /**
      * Check if "title" has been set
      *
      * @return bool True if "title" has been set, false if not
      */
-    public function hasTitle() : bool;
+    public function hasTitle(): bool;
 
     /**
      * Get a default "title" value, if any is available
      *
      * @return string|null Default "title" value or null if no default value is available
      */
-    public function getDefaultTitle() : ?string;
+    public function getDefaultTitle(): ?string;
 }

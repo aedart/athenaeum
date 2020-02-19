@@ -43,9 +43,9 @@ trait Ean8Trait
      *
      * @return string|null ean8 or null if no ean8 has been set
      */
-    public function getEan8() : ?string
+    public function getEan8(): ?string
     {
-        if ( ! $this->hasEan8()) {
+        if (!$this->hasEan8()) {
             $this->setEan8($this->getDefaultEan8());
         }
         return $this->ean8;
@@ -56,7 +56,7 @@ trait Ean8Trait
      *
      * @return bool True if "ean8" has been set, false if not
      */
-    public function hasEan8() : bool
+    public function hasEan8(): bool
     {
         return isset($this->ean8);
     }
@@ -66,7 +66,7 @@ trait Ean8Trait
      *
      * @return string|null Default "ean8" value or null if no default value is available
      */
-    public function getDefaultEan8() : ?string
+    public function getDefaultEan8(): ?string
     {
         return null;
     }

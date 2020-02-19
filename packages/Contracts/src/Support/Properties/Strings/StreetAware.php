@@ -31,19 +31,19 @@ interface StreetAware
      *
      * @return string|null street or null if no street has been set
      */
-    public function getStreet() : ?string;
+    public function getStreet(): ?string;
 
     /**
      * Check if "street" has been set
      *
      * @return bool True if "street" has been set, false if not
      */
-    public function hasStreet() : bool;
+    public function hasStreet(): bool;
 
     /**
      * Get a default "street" value, if any is available
      *
      * @return string|null Default "street" value or null if no default value is available
      */
-    public function getDefaultStreet() : ?string;
+    public function getDefaultStreet(): ?string;
 }

@@ -31,19 +31,19 @@ interface AnniversaryAware
      *
      * @return int|null anniversary or null if no anniversary has been set
      */
-    public function getAnniversary() : ?int;
+    public function getAnniversary(): ?int;
 
     /**
      * Check if "anniversary" has been set
      *
      * @return bool True if "anniversary" has been set, false if not
      */
-    public function hasAnniversary() : bool;
+    public function hasAnniversary(): bool;
 
     /**
      * Get a default "anniversary" value, if any is available
      *
      * @return int|null Default "anniversary" value or null if no default value is available
      */
-    public function getDefaultAnniversary() : ?int;
+    public function getDefaultAnniversary(): ?int;
 }

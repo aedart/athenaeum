@@ -31,19 +31,19 @@ interface LocaleAware
      *
      * @return string|null locale or null if no locale has been set
      */
-    public function getLocale() : ?string;
+    public function getLocale(): ?string;
 
     /**
      * Check if "locale" has been set
      *
      * @return bool True if "locale" has been set, false if not
      */
-    public function hasLocale() : bool;
+    public function hasLocale(): bool;
 
     /**
      * Get a default "locale" value, if any is available
      *
      * @return string|null Default "locale" value or null if no default value is available
      */
-    public function getDefaultLocale() : ?string;
+    public function getDefaultLocale(): ?string;
 }

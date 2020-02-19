@@ -43,9 +43,9 @@ trait ZoneTrait
      *
      * @return int|null zone or null if no zone has been set
      */
-    public function getZone() : ?int
+    public function getZone(): ?int
     {
-        if ( ! $this->hasZone()) {
+        if (!$this->hasZone()) {
             $this->setZone($this->getDefaultZone());
         }
         return $this->zone;
@@ -56,7 +56,7 @@ trait ZoneTrait
      *
      * @return bool True if "zone" has been set, false if not
      */
-    public function hasZone() : bool
+    public function hasZone(): bool
     {
         return isset($this->zone);
     }
@@ -66,7 +66,7 @@ trait ZoneTrait
      *
      * @return int|null Default "zone" value or null if no default value is available
      */
-    public function getDefaultZone() : ?int
+    public function getDefaultZone(): ?int
     {
         return null;
     }

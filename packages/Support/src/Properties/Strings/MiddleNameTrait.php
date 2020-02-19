@@ -43,9 +43,9 @@ trait MiddleNameTrait
      *
      * @return string|null middle name or null if no middle name has been set
      */
-    public function getMiddleName() : ?string
+    public function getMiddleName(): ?string
     {
-        if ( ! $this->hasMiddleName()) {
+        if (!$this->hasMiddleName()) {
             $this->setMiddleName($this->getDefaultMiddleName());
         }
         return $this->middleName;
@@ -56,7 +56,7 @@ trait MiddleNameTrait
      *
      * @return bool True if "middle name" has been set, false if not
      */
-    public function hasMiddleName() : bool
+    public function hasMiddleName(): bool
     {
         return isset($this->middleName);
     }
@@ -66,7 +66,7 @@ trait MiddleNameTrait
      *
      * @return string|null Default "middle name" value or null if no default value is available
      */
-    public function getDefaultMiddleName() : ?string
+    public function getDefaultMiddleName(): ?string
     {
         return null;
     }

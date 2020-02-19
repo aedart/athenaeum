@@ -31,19 +31,19 @@ interface ActionAware
      *
      * @return callable|null action or null if no action has been set
      */
-    public function getAction() : ?callable;
+    public function getAction(): ?callable;
 
     /**
      * Check if "action" has been set
      *
      * @return bool True if "action" has been set, false if not
      */
-    public function hasAction() : bool;
+    public function hasAction(): bool;
 
     /**
      * Get a default "action" value, if any is available
      *
      * @return callable|null Default "action" value or null if no default value is available
      */
-    public function getDefaultAction() : ?callable;
+    public function getDefaultAction(): ?callable;
 }

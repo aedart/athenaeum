@@ -31,19 +31,19 @@ interface ClassAware
      *
      * @return string|null class or null if no class has been set
      */
-    public function getClass() : ?string;
+    public function getClass(): ?string;
 
     /**
      * Check if "class" has been set
      *
      * @return bool True if "class" has been set, false if not
      */
-    public function hasClass() : bool;
+    public function hasClass(): bool;
 
     /**
      * Get a default "class" value, if any is available
      *
      * @return string|null Default "class" value or null if no default value is available
      */
-    public function getDefaultClass() : ?string;
+    public function getDefaultClass(): ?string;
 }

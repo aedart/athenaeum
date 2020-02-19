@@ -38,7 +38,7 @@ interface JsonAware
      *
      * @return bool True if "json" has been set, false if not
      */
-    public function hasJson() : bool;
+    public function hasJson(): bool;
 
     /**
      * Get a default "json" value, if any is available

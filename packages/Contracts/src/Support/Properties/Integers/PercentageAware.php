@@ -31,19 +31,19 @@ interface PercentageAware
      *
      * @return int|null percentage or null if no percentage has been set
      */
-    public function getPercentage() : ?int;
+    public function getPercentage(): ?int;
 
     /**
      * Check if "percentage" has been set
      *
      * @return bool True if "percentage" has been set, false if not
      */
-    public function hasPercentage() : bool;
+    public function hasPercentage(): bool;
 
     /**
      * Get a default "percentage" value, if any is available
      *
      * @return int|null Default "percentage" value or null if no default value is available
      */
-    public function getDefaultPercentage() : ?int;
+    public function getDefaultPercentage(): ?int;
 }

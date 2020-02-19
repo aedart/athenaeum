@@ -43,9 +43,9 @@ trait RowTrait
      *
      * @return int|null row or null if no row has been set
      */
-    public function getRow() : ?int
+    public function getRow(): ?int
     {
-        if ( ! $this->hasRow()) {
+        if (!$this->hasRow()) {
             $this->setRow($this->getDefaultRow());
         }
         return $this->row;
@@ -56,7 +56,7 @@ trait RowTrait
      *
      * @return bool True if "row" has been set, false if not
      */
-    public function hasRow() : bool
+    public function hasRow(): bool
     {
         return isset($this->row);
     }
@@ -66,7 +66,7 @@ trait RowTrait
      *
      * @return int|null Default "row" value or null if no default value is available
      */
-    public function getDefaultRow() : ?int
+    public function getDefaultRow(): ?int
     {
         return null;
     }

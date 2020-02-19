@@ -31,19 +31,19 @@ interface ReleaseDateAware
      *
      * @return string|null release date or null if no release date has been set
      */
-    public function getReleaseDate() : ?string;
+    public function getReleaseDate(): ?string;
 
     /**
      * Check if "release date" has been set
      *
      * @return bool True if "release date" has been set, false if not
      */
-    public function hasReleaseDate() : bool;
+    public function hasReleaseDate(): bool;
 
     /**
      * Get a default "release date" value, if any is available
      *
      * @return string|null Default "release date" value or null if no default value is available
      */
-    public function getDefaultReleaseDate() : ?string;
+    public function getDefaultReleaseDate(): ?string;
 }

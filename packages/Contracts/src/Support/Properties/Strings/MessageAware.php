@@ -31,19 +31,19 @@ interface MessageAware
      *
      * @return string|null message or null if no message has been set
      */
-    public function getMessage() : ?string;
+    public function getMessage(): ?string;
 
     /**
      * Check if "message" has been set
      *
      * @return bool True if "message" has been set, false if not
      */
-    public function hasMessage() : bool;
+    public function hasMessage(): bool;
 
     /**
      * Get a default "message" value, if any is available
      *
      * @return string|null Default "message" value or null if no default value is available
      */
-    public function getDefaultMessage() : ?string;
+    public function getDefaultMessage(): ?string;
 }

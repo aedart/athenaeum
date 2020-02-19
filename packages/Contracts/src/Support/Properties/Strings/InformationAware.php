@@ -31,19 +31,19 @@ interface InformationAware
      *
      * @return string|null information or null if no information has been set
      */
-    public function getInformation() : ?string;
+    public function getInformation(): ?string;
 
     /**
      * Check if "information" has been set
      *
      * @return bool True if "information" has been set, false if not
      */
-    public function hasInformation() : bool;
+    public function hasInformation(): bool;
 
     /**
      * Get a default "information" value, if any is available
      *
      * @return string|null Default "information" value or null if no default value is available
      */
-    public function getDefaultInformation() : ?string;
+    public function getDefaultInformation(): ?string;
 }

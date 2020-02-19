@@ -31,19 +31,19 @@ interface MaterialAware
      *
      * @return string|null material or null if no material has been set
      */
-    public function getMaterial() : ?string;
+    public function getMaterial(): ?string;
 
     /**
      * Check if "material" has been set
      *
      * @return bool True if "material" has been set, false if not
      */
-    public function hasMaterial() : bool;
+    public function hasMaterial(): bool;
 
     /**
      * Get a default "material" value, if any is available
      *
      * @return string|null Default "material" value or null if no default value is available
      */
-    public function getDefaultMaterial() : ?string;
+    public function getDefaultMaterial(): ?string;
 }

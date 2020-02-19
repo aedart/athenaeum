@@ -31,19 +31,19 @@ interface UsernameAware
      *
      * @return string|null username or null if no username has been set
      */
-    public function getUsername() : ?string;
+    public function getUsername(): ?string;
 
     /**
      * Check if "username" has been set
      *
      * @return bool True if "username" has been set, false if not
      */
-    public function hasUsername() : bool;
+    public function hasUsername(): bool;
 
     /**
      * Get a default "username" value, if any is available
      *
      * @return string|null Default "username" value or null if no default value is available
      */
-    public function getDefaultUsername() : ?string;
+    public function getDefaultUsername(): ?string;
 }

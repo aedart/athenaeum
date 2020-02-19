@@ -43,9 +43,9 @@ trait ProducedAtTrait
      *
      * @return string|null produced at or null if no produced at has been set
      */
-    public function getProducedAt() : ?string
+    public function getProducedAt(): ?string
     {
-        if ( ! $this->hasProducedAt()) {
+        if (!$this->hasProducedAt()) {
             $this->setProducedAt($this->getDefaultProducedAt());
         }
         return $this->producedAt;
@@ -56,7 +56,7 @@ trait ProducedAtTrait
      *
      * @return bool True if "produced at" has been set, false if not
      */
-    public function hasProducedAt() : bool
+    public function hasProducedAt(): bool
     {
         return isset($this->producedAt);
     }
@@ -66,7 +66,7 @@ trait ProducedAtTrait
      *
      * @return string|null Default "produced at" value or null if no default value is available
      */
-    public function getDefaultProducedAt() : ?string
+    public function getDefaultProducedAt(): ?string
     {
         return null;
     }

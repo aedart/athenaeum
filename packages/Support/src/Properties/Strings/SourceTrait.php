@@ -43,9 +43,9 @@ trait SourceTrait
      *
      * @return string|null source or null if no source has been set
      */
-    public function getSource() : ?string
+    public function getSource(): ?string
     {
-        if ( ! $this->hasSource()) {
+        if (!$this->hasSource()) {
             $this->setSource($this->getDefaultSource());
         }
         return $this->source;
@@ -56,7 +56,7 @@ trait SourceTrait
      *
      * @return bool True if "source" has been set, false if not
      */
-    public function hasSource() : bool
+    public function hasSource(): bool
     {
         return isset($this->source);
     }
@@ -66,7 +66,7 @@ trait SourceTrait
      *
      * @return string|null Default "source" value or null if no default value is available
      */
-    public function getDefaultSource() : ?string
+    public function getDefaultSource(): ?string
     {
         return null;
     }

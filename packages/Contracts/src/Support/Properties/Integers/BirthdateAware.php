@@ -31,19 +31,19 @@ interface BirthdateAware
      *
      * @return int|null birthdate or null if no birthdate has been set
      */
-    public function getBirthdate() : ?int;
+    public function getBirthdate(): ?int;
 
     /**
      * Check if "birthdate" has been set
      *
      * @return bool True if "birthdate" has been set, false if not
      */
-    public function hasBirthdate() : bool;
+    public function hasBirthdate(): bool;
 
     /**
      * Get a default "birthdate" value, if any is available
      *
      * @return int|null Default "birthdate" value or null if no default value is available
      */
-    public function getDefaultBirthdate() : ?int;
+    public function getDefaultBirthdate(): ?int;
 }

@@ -31,19 +31,19 @@ interface SourceAware
      *
      * @return string|null source or null if no source has been set
      */
-    public function getSource() : ?string;
+    public function getSource(): ?string;
 
     /**
      * Check if "source" has been set
      *
      * @return bool True if "source" has been set, false if not
      */
-    public function hasSource() : bool;
+    public function hasSource(): bool;
 
     /**
      * Get a default "source" value, if any is available
      *
      * @return string|null Default "source" value or null if no default value is available
      */
-    public function getDefaultSource() : ?string;
+    public function getDefaultSource(): ?string;
 }

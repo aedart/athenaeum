@@ -43,9 +43,9 @@ trait BasePathTrait
      *
      * @return string|null base path or null if no base path has been set
      */
-    public function getBasePath() : ?string
+    public function getBasePath(): ?string
     {
-        if ( ! $this->hasBasePath()) {
+        if (!$this->hasBasePath()) {
             $this->setBasePath($this->getDefaultBasePath());
         }
         return $this->basePath;
@@ -56,7 +56,7 @@ trait BasePathTrait
      *
      * @return bool True if "base path" has been set, false if not
      */
-    public function hasBasePath() : bool
+    public function hasBasePath(): bool
     {
         return isset($this->basePath);
     }
@@ -66,7 +66,7 @@ trait BasePathTrait
      *
      * @return string|null Default "base path" value or null if no default value is available
      */
-    public function getDefaultBasePath() : ?string
+    public function getDefaultBasePath(): ?string
     {
         return null;
     }

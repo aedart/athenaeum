@@ -28,10 +28,8 @@ class Json extends ParserBase
     public function parse(string $content): array
     {
         try {
-
             return JsonUtil::decode($content, true);
-
-        } catch (Throwable $e){
+        } catch (Throwable $e) {
             throw new UnableToParseFile($e->getMessage(), $e->getCode(), $e);
         }
     }

@@ -30,9 +30,7 @@ class Yaml extends ParserBase
     public function parse(string $content): array
     {
         try {
-
             return SymfonyYamlParser::parse($content, SymfonyYamlParser::PARSE_EXCEPTION_ON_INVALID_TYPE);
-
         } catch (Throwable $e) {
             throw new UnableToParseFile($e->getMessage(), $e->getCode(), $e);
         }

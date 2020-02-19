@@ -5,7 +5,7 @@ namespace Aedart\Testing\TestCases;
 use Aedart\Testing\TestCases\Partials\FakerPartial;
 use Codeception\Actor;
 use Codeception\Test\Unit;
-use \Mockery as m;
+use Mockery as m;
 
 /**
  * Unit Test Case
@@ -45,6 +45,4 @@ abstract class UnitTestCase extends Unit
     /*****************************************************************
      * Helpers and Utilities
      ****************************************************************/
-
-
 }

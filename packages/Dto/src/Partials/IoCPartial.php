@@ -45,7 +45,7 @@ trait IoCPartial
      */
     public function container(): ?Container
     {
-        if( ! isset($this->ioc)){
+        if (!isset($this->ioc)) {
             $this->ioc = App::getFacadeApplication();
         }
 
@@ -110,7 +110,7 @@ trait IoCPartial
         // then some kind of primitive data has been provided
         // and thus we need only to return it.
         $paramClass = $parameter->getClass();
-        if ( ! isset($paramClass)) {
+        if (!isset($paramClass)) {
             return $value;
         }
 
@@ -142,18 +142,18 @@ trait IoCPartial
     {
         // In some situations, the given value is already an instance of the
         // given class. If such, then there is no need to do anything.
-        if($value instanceof $class){
+        if ($value instanceof $class) {
             return $value;
         }
 
         $name = $parameter;
-        if($parameter instanceof ReflectionParameter){
+        if ($parameter instanceof ReflectionParameter) {
             $name = $parameter->getName();
         }
 
         // Fail if no service container is available
         $container = $this->container();
-        if ( ! isset($container)) {
+        if (!isset($container)) {
             $message = sprintf(
                 'No IoC Service Container is available, cannot resolve property "%s" of the type "%s"; do not know how to populate with "%s"',
                 $name,
@@ -195,7 +195,7 @@ trait IoCPartial
         // we can populate the given instance. For this reason, we
         // just throw an exception
         $name = $parameter;
-        if($parameter instanceof ReflectionParameter){
+        if ($parameter instanceof ReflectionParameter) {
             $name = $parameter->getName();
         }
 

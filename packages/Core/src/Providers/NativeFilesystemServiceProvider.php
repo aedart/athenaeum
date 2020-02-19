@@ -23,6 +23,6 @@ class NativeFilesystemServiceProvider extends ServiceProvider
      * @var array
      */
     public array $singletons = [
-        'files'     => Filesystem::class
+        'files' => Filesystem::class
     ];
 }

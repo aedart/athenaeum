@@ -15,7 +15,7 @@ interface OnAware
     /**
      * Set on
      *
-     * @param bool|null $isOn 
+     * @param bool|null $isOn
      *
      * @return self
      */
@@ -31,19 +31,19 @@ interface OnAware
      *
      * @return bool|null on or null if no on has been set
      */
-    public function getOn() : ?bool;
+    public function getOn(): ?bool;
 
     /**
      * Check if "on" has been set
      *
      * @return bool True if "on" has been set, false if not
      */
-    public function hasOn() : bool;
+    public function hasOn(): bool;
 
     /**
      * Get a default "on" value, if any is available
      *
      * @return bool|null Default "on" value or null if no default value is available
      */
-    public function getDefaultOn() : ?bool;
+    public function getDefaultOn(): ?bool;
 }

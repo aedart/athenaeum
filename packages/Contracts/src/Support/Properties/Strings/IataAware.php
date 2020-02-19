@@ -31,19 +31,19 @@ interface IataAware
      *
      * @return string|null iata or null if no iata has been set
      */
-    public function getIata() : ?string;
+    public function getIata(): ?string;
 
     /**
      * Check if "iata" has been set
      *
      * @return bool True if "iata" has been set, false if not
      */
-    public function hasIata() : bool;
+    public function hasIata(): bool;
 
     /**
      * Get a default "iata" value, if any is available
      *
      * @return string|null Default "iata" value or null if no default value is available
      */
-    public function getDefaultIata() : ?string;
+    public function getDefaultIata(): ?string;
 }

@@ -31,19 +31,19 @@ interface LabelAware
      *
      * @return string|null label or null if no label has been set
      */
-    public function getLabel() : ?string;
+    public function getLabel(): ?string;
 
     /**
      * Check if "label" has been set
      *
      * @return bool True if "label" has been set, false if not
      */
-    public function hasLabel() : bool;
+    public function hasLabel(): bool;
 
     /**
      * Get a default "label" value, if any is available
      *
      * @return string|null Default "label" value or null if no default value is available
      */
-    public function getDefaultLabel() : ?string;
+    public function getDefaultLabel(): ?string;
 }

@@ -43,9 +43,9 @@ trait CalendarTrait
      *
      * @return string|null calendar or null if no calendar has been set
      */
-    public function getCalendar() : ?string
+    public function getCalendar(): ?string
     {
-        if ( ! $this->hasCalendar()) {
+        if (!$this->hasCalendar()) {
             $this->setCalendar($this->getDefaultCalendar());
         }
         return $this->calendar;
@@ -56,7 +56,7 @@ trait CalendarTrait
      *
      * @return bool True if "calendar" has been set, false if not
      */
-    public function hasCalendar() : bool
+    public function hasCalendar(): bool
     {
         return isset($this->calendar);
     }
@@ -66,7 +66,7 @@ trait CalendarTrait
      *
      * @return string|null Default "calendar" value or null if no default value is available
      */
-    public function getDefaultCalendar() : ?string
+    public function getDefaultCalendar(): ?string
     {
         return null;
     }

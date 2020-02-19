@@ -45,7 +45,7 @@ trait YTrait
      */
     public function getY()
     {
-        if ( ! $this->hasY()) {
+        if (!$this->hasY()) {
             $this->setY($this->getDefaultY());
         }
         return $this->y;
@@ -56,7 +56,7 @@ trait YTrait
      *
      * @return bool True if "y" has been set, false if not
      */
-    public function hasY() : bool
+    public function hasY(): bool
     {
         return isset($this->y);
     }

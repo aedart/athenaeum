@@ -43,9 +43,9 @@ trait RevisionTrait
      *
      * @return string|null revision or null if no revision has been set
      */
-    public function getRevision() : ?string
+    public function getRevision(): ?string
     {
-        if ( ! $this->hasRevision()) {
+        if (!$this->hasRevision()) {
             $this->setRevision($this->getDefaultRevision());
         }
         return $this->revision;
@@ -56,7 +56,7 @@ trait RevisionTrait
      *
      * @return bool True if "revision" has been set, false if not
      */
-    public function hasRevision() : bool
+    public function hasRevision(): bool
     {
         return isset($this->revision);
     }
@@ -66,7 +66,7 @@ trait RevisionTrait
      *
      * @return string|null Default "revision" value or null if no default value is available
      */
-    public function getDefaultRevision() : ?string
+    public function getDefaultRevision(): ?string
     {
         return null;
     }

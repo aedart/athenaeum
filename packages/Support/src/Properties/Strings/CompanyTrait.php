@@ -43,9 +43,9 @@ trait CompanyTrait
      *
      * @return string|null company or null if no company has been set
      */
-    public function getCompany() : ?string
+    public function getCompany(): ?string
     {
-        if ( ! $this->hasCompany()) {
+        if (!$this->hasCompany()) {
             $this->setCompany($this->getDefaultCompany());
         }
         return $this->company;
@@ -56,7 +56,7 @@ trait CompanyTrait
      *
      * @return bool True if "company" has been set, false if not
      */
-    public function hasCompany() : bool
+    public function hasCompany(): bool
     {
         return isset($this->company);
     }
@@ -66,7 +66,7 @@ trait CompanyTrait
      *
      * @return string|null Default "company" value or null if no default value is available
      */
-    public function getDefaultCompany() : ?string
+    public function getDefaultCompany(): ?string
     {
         return null;
     }

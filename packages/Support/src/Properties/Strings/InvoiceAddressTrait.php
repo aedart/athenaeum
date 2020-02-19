@@ -43,9 +43,9 @@ trait InvoiceAddressTrait
      *
      * @return string|null invoice address or null if no invoice address has been set
      */
-    public function getInvoiceAddress() : ?string
+    public function getInvoiceAddress(): ?string
     {
-        if ( ! $this->hasInvoiceAddress()) {
+        if (!$this->hasInvoiceAddress()) {
             $this->setInvoiceAddress($this->getDefaultInvoiceAddress());
         }
         return $this->invoiceAddress;
@@ -56,7 +56,7 @@ trait InvoiceAddressTrait
      *
      * @return bool True if "invoice address" has been set, false if not
      */
-    public function hasInvoiceAddress() : bool
+    public function hasInvoiceAddress(): bool
     {
         return isset($this->invoiceAddress);
     }
@@ -66,7 +66,7 @@ trait InvoiceAddressTrait
      *
      * @return string|null Default "invoice address" value or null if no default value is available
      */
-    public function getDefaultInvoiceAddress() : ?string
+    public function getDefaultInvoiceAddress(): ?string
     {
         return null;
     }

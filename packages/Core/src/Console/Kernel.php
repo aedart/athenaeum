@@ -30,7 +30,8 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Console
  */
-class Kernel implements ConsoleKernelInterface,
+class Kernel implements
+    ConsoleKernelInterface,
     DispatcherAware
 {
     use CoreApplicationTrait;
@@ -60,7 +61,7 @@ class Kernel implements ConsoleKernelInterface,
      */
     public function handle($input, $output = null)
     {
-        return $this->attempt(function(ConsoleKernelInterface $kernel, $output) use($input){
+        return $this->attempt(function (ConsoleKernelInterface $kernel, $output) use ($input) {
             return $this
                 ->setLastInput($input)
                 ->setLastOutput($output)
@@ -75,7 +76,7 @@ class Kernel implements ConsoleKernelInterface,
      */
     public function call($command, array $parameters = [], $outputBuffer = null)
     {
-        return $this->attempt(function(ConsoleKernelInterface $kernel, $output) use($command, $parameters){
+        return $this->attempt(function (ConsoleKernelInterface $kernel, $output) use ($command, $parameters) {
             return $this
                 ->setLastOutput($output)
                 ->runCore()
@@ -134,7 +135,7 @@ class Kernel implements ConsoleKernelInterface,
      */
     public function addCommands(array $commands)
     {
-        foreach ($commands as $command){
+        foreach ($commands as $command) {
             $this->addCommand($command);
         }
     }
@@ -146,7 +147,7 @@ class Kernel implements ConsoleKernelInterface,
     {
         $this->runCore();
 
-        if(is_string($command)){
+        if (is_string($command)) {
             $command = $this->getCoreApplication()->make($command);
         }
 
@@ -168,7 +169,7 @@ class Kernel implements ConsoleKernelInterface,
      */
     public function getArtisan()
     {
-        if( ! isset($this->artisan)){
+        if (!isset($this->artisan)) {
             $this->setArtisan($this->makeArtisan());
         }
 
@@ -181,7 +182,7 @@ class Kernel implements ConsoleKernelInterface,
     public function handleException(Throwable $e, OutputInterface $output): void
     {
         // Attempt to handle exception via registered exception handler(s)
-        if($this->handleExceptionViaHandler($e, $output)){
+        if ($this->handleExceptionViaHandler($e, $output)) {
             return;
         }
 
@@ -219,7 +220,7 @@ class Kernel implements ConsoleKernelInterface,
         } catch (Throwable $e) {
 
             // Force throw exceptions if required by application
-            if($this->getCoreApplication()->mustThrowExceptions()){
+            if ($this->getCoreApplication()->mustThrowExceptions()) {
                 throw $e;
             }
 
@@ -238,13 +239,13 @@ class Kernel implements ConsoleKernelInterface,
      *
      * @return bool
      */
-    protected function handleExceptionViaHandler(Throwable $e, OutputInterface $output) : bool
+    protected function handleExceptionViaHandler(Throwable $e, OutputInterface $output): bool
     {
         $this->setLastOutput($output);
 
         /** @var Factory $factory */
         $factory = IoCFacade::tryMake(Factory::class);
-        if( ! isset($factory)){
+        if (!isset($factory)) {
             return false;
         }
 
@@ -252,7 +253,6 @@ class Kernel implements ConsoleKernelInterface,
             $handler = $factory->make();
 
             return $handler->handle($e);
-
         } catch (Throwable $handlerException) {
 
             // In case exception was (re)thrown via handler, we simply output
@@ -270,12 +270,12 @@ class Kernel implements ConsoleKernelInterface,
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    protected function resolveDefaultOutput() : OutputInterface
+    protected function resolveDefaultOutput(): OutputInterface
     {
         $core = $this->getCoreApplication();
 
         // Laravel's Console binds OutputStyle inside their commands...
-        if($core->bound(OutputStyle::class)){
+        if ($core->bound(OutputStyle::class)) {
             return $core->make(OutputStyle::class);
         }
 
@@ -292,7 +292,7 @@ class Kernel implements ConsoleKernelInterface,
     protected function runCore()
     {
         $app = $this->getCoreApplication();
-        if($app->isRunning()){
+        if ($app->isRunning()) {
             return $this;
         }
 
@@ -331,9 +331,9 @@ class Kernel implements ConsoleKernelInterface,
      *
      * @return string
      */
-    protected function laravelVersion() : string
+    protected function laravelVersion(): string
     {
-        if(Version::hasFor('illuminate/console')){
+        if (Version::hasFor('illuminate/console')) {
             return Version::package('illuminate/console');
         }
 
@@ -345,7 +345,7 @@ class Kernel implements ConsoleKernelInterface,
         // condition to fail. Thus, attempt to determine if this
         // is the case and return laravel's installed version.
 
-        if(Version::hasFor('laravel/framework')){
+        if (Version::hasFor('laravel/framework')) {
             return Version::package('laravel/framework');
         }
 

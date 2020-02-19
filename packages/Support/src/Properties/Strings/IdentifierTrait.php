@@ -43,9 +43,9 @@ trait IdentifierTrait
      *
      * @return string|null identifier or null if no identifier has been set
      */
-    public function getIdentifier() : ?string
+    public function getIdentifier(): ?string
     {
-        if ( ! $this->hasIdentifier()) {
+        if (!$this->hasIdentifier()) {
             $this->setIdentifier($this->getDefaultIdentifier());
         }
         return $this->identifier;
@@ -56,7 +56,7 @@ trait IdentifierTrait
      *
      * @return bool True if "identifier" has been set, false if not
      */
-    public function hasIdentifier() : bool
+    public function hasIdentifier(): bool
     {
         return isset($this->identifier);
     }
@@ -66,7 +66,7 @@ trait IdentifierTrait
      *
      * @return string|null Default "identifier" value or null if no default value is available
      */
-    public function getDefaultIdentifier() : ?string
+    public function getDefaultIdentifier(): ?string
     {
         return null;
     }

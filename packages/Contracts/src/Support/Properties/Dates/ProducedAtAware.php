@@ -31,19 +31,19 @@ interface ProducedAtAware
      *
      * @return \DateTime|null produced at or null if no produced at has been set
      */
-    public function getProducedAt() : ?\DateTime;
+    public function getProducedAt(): ?\DateTime;
 
     /**
      * Check if "produced at" has been set
      *
      * @return bool True if "produced at" has been set, false if not
      */
-    public function hasProducedAt() : bool;
+    public function hasProducedAt(): bool;
 
     /**
      * Get a default "produced at" value, if any is available
      *
      * @return \DateTime|null Default "produced at" value or null if no default value is available
      */
-    public function getDefaultProducedAt() : ?\DateTime;
+    public function getDefaultProducedAt(): ?\DateTime;
 }

@@ -15,5 +15,4 @@ use RuntimeException;
  */
 class FileDoesNotExist extends RuntimeException implements FileDoesNotExistException
 {
-
 }

@@ -31,19 +31,19 @@ interface HeightAware
      *
      * @return int|null height or null if no height has been set
      */
-    public function getHeight() : ?int;
+    public function getHeight(): ?int;
 
     /**
      * Check if "height" has been set
      *
      * @return bool True if "height" has been set, false if not
      */
-    public function hasHeight() : bool;
+    public function hasHeight(): bool;
 
     /**
      * Get a default "height" value, if any is available
      *
      * @return int|null Default "height" value or null if no default value is available
      */
-    public function getDefaultHeight() : ?int;
+    public function getDefaultHeight(): ?int;
 }

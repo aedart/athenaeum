@@ -43,9 +43,9 @@ trait IbanTrait
      *
      * @return string|null iban or null if no iban has been set
      */
-    public function getIban() : ?string
+    public function getIban(): ?string
     {
-        if ( ! $this->hasIban()) {
+        if (!$this->hasIban()) {
             $this->setIban($this->getDefaultIban());
         }
         return $this->iban;
@@ -56,7 +56,7 @@ trait IbanTrait
      *
      * @return bool True if "iban" has been set, false if not
      */
-    public function hasIban() : bool
+    public function hasIban(): bool
     {
         return isset($this->iban);
     }
@@ -66,7 +66,7 @@ trait IbanTrait
      *
      * @return string|null Default "iban" value or null if no default value is available
      */
-    public function getDefaultIban() : ?string
+    public function getDefaultIban(): ?string
     {
         return null;
     }

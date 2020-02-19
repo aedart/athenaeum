@@ -34,7 +34,7 @@ interface Loader extends ConfigAware,
      *
      * @throws InvalidPathException If given path does not exist
      */
-    public function setDirectory(string $path) : self ;
+    public function setDirectory(string $path): self;
 
     /**
      * Returns the path to where the configuration
@@ -42,7 +42,7 @@ interface Loader extends ConfigAware,
      *
      * @return string|null
      */
-    public function getDirectory() : ?string;
+    public function getDirectory(): ?string;
 
     /**
      * Check if a directory was set
@@ -74,5 +74,5 @@ interface Loader extends ConfigAware,
      *
      * @throws FileParserException If unable to parse given configuration file
      */
-    public function parse($file) : Repository ;
+    public function parse($file): Repository;
 }

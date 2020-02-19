@@ -43,9 +43,9 @@ trait IpV4Trait
      *
      * @return string|null ip v4 or null if no ip v4 has been set
      */
-    public function getIpV4() : ?string
+    public function getIpV4(): ?string
     {
-        if ( ! $this->hasIpV4()) {
+        if (!$this->hasIpV4()) {
             $this->setIpV4($this->getDefaultIpV4());
         }
         return $this->ipV4;
@@ -56,7 +56,7 @@ trait IpV4Trait
      *
      * @return bool True if "ip v4" has been set, false if not
      */
-    public function hasIpV4() : bool
+    public function hasIpV4(): bool
     {
         return isset($this->ipV4);
     }
@@ -66,7 +66,7 @@ trait IpV4Trait
      *
      * @return string|null Default "ip v4" value or null if no default value is available
      */
-    public function getDefaultIpV4() : ?string
+    public function getDefaultIpV4(): ?string
     {
         return null;
     }

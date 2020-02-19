@@ -41,7 +41,7 @@ abstract class CommandBase extends Command
         $this->input = $input;
 
         // Resolve output
-        if($output instanceof StyleInterface){
+        if ($output instanceof StyleInterface) {
             $this->output = $output;
         } else {
             $this->output = new SymfonyStyle($this->input, $output);
@@ -62,5 +62,5 @@ abstract class CommandBase extends Command
      *
      * @return int|null
      */
-    abstract public function runCommand() : ?int ;
+    abstract public function runCommand(): ?int;
 }

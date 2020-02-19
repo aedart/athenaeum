@@ -14,5 +14,4 @@ namespace Aedart\Contracts\Config\Loaders\Exceptions;
  */
 interface InvalidPathException extends LoaderException
 {
-
 }

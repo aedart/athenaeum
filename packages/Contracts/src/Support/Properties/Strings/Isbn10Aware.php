@@ -31,19 +31,19 @@ interface Isbn10Aware
      *
      * @return string|null isbn10 or null if no isbn10 has been set
      */
-    public function getIsbn10() : ?string;
+    public function getIsbn10(): ?string;
 
     /**
      * Check if "isbn10" has been set
      *
      * @return bool True if "isbn10" has been set, false if not
      */
-    public function hasIsbn10() : bool;
+    public function hasIsbn10(): bool;
 
     /**
      * Get a default "isbn10" value, if any is available
      *
      * @return string|null Default "isbn10" value or null if no default value is available
      */
-    public function getDefaultIsbn10() : ?string;
+    public function getDefaultIsbn10(): ?string;
 }

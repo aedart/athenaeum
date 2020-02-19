@@ -40,11 +40,11 @@ class Loader implements LoaderInterface
     {
         $path = realpath($path);
 
-        if( ! is_dir($path)){
+        if (!is_dir($path)) {
             throw new InvalidPath(sprintf('%s does not exist', $path));
         }
 
-        if(substr($path, -1) !== DIRECTORY_SEPARATOR){
+        if (substr($path, -1) !== DIRECTORY_SEPARATOR) {
             $path .= DIRECTORY_SEPARATOR;
         }
 
@@ -74,12 +74,12 @@ class Loader implements LoaderInterface
      */
     public function load(): void
     {
-        if( ! $this->hasDirectory()){
+        if (!$this->hasDirectory()) {
             throw new InvalidPath('Unable to load configuration. No load directory specified');
         }
 
         $files = $this->getFile()->allFiles($this->getDirectory());
-        foreach ($files as $fileInfo){
+        foreach ($files as $fileInfo) {
             $this->parse($fileInfo->getRealPath());
         }
     }
@@ -87,7 +87,7 @@ class Loader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function parse($file) : Repository
+    public function parse($file): Repository
     {
         $file = $this->resolveFile($file);
 
@@ -115,8 +115,7 @@ class Loader implements LoaderInterface
 
             $config->set($section, $new);
             return $config;
-
-        } catch (Throwable $e){
+        } catch (Throwable $e) {
             throw new UnableToParseFile(sprintf('Unable to parse file %s: %s', (string) $file, $e->getMessage()), $e->getCode(), $e);
         }
     }
@@ -132,13 +131,13 @@ class Loader implements LoaderInterface
      *
      * @return SplFileInfo
      */
-    protected function resolveFile($file) : SplFileInfo
+    protected function resolveFile($file): SplFileInfo
     {
-        if($file instanceof SplFileInfo){
+        if ($file instanceof SplFileInfo) {
             return $file;
         }
 
-        if(is_string($file)){
+        if (is_string($file)) {
             return new SplFileInfo($file);
         }
 
@@ -153,9 +152,9 @@ class Loader implements LoaderInterface
      *
      * @return string
      */
-    protected function resolveSectionName(SplFileInfo $file, string $directory) : string
+    protected function resolveSectionName(SplFileInfo $file, string $directory): string
     {
-        $path = str_replace($directory, '', $file->getPath() . DIRECTORY_SEPARATOR) . $file->getBasename('.'.$file->getExtension());
+        $path = str_replace($directory, '', $file->getPath() . DIRECTORY_SEPARATOR) . $file->getBasename('.' . $file->getExtension());
 
         return strtolower(str_replace(DIRECTORY_SEPARATOR, '.', $path));
     }

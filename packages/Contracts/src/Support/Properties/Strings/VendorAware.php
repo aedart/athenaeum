@@ -31,19 +31,19 @@ interface VendorAware
      *
      * @return string|null vendor or null if no vendor has been set
      */
-    public function getVendor() : ?string;
+    public function getVendor(): ?string;
 
     /**
      * Check if "vendor" has been set
      *
      * @return bool True if "vendor" has been set, false if not
      */
-    public function hasVendor() : bool;
+    public function hasVendor(): bool;
 
     /**
      * Get a default "vendor" value, if any is available
      *
      * @return string|null Default "vendor" value or null if no default value is available
      */
-    public function getDefaultVendor() : ?string;
+    public function getDefaultVendor(): ?string;
 }

@@ -43,9 +43,9 @@ trait DeletedAtTrait
      *
      * @return int|null deleted at or null if no deleted at has been set
      */
-    public function getDeletedAt() : ?int
+    public function getDeletedAt(): ?int
     {
-        if ( ! $this->hasDeletedAt()) {
+        if (!$this->hasDeletedAt()) {
             $this->setDeletedAt($this->getDefaultDeletedAt());
         }
         return $this->deletedAt;
@@ -56,7 +56,7 @@ trait DeletedAtTrait
      *
      * @return bool True if "deleted at" has been set, false if not
      */
-    public function hasDeletedAt() : bool
+    public function hasDeletedAt(): bool
     {
         return isset($this->deletedAt);
     }
@@ -66,7 +66,7 @@ trait DeletedAtTrait
      *
      * @return int|null Default "deleted at" value or null if no default value is available
      */
-    public function getDefaultDeletedAt() : ?int
+    public function getDefaultDeletedAt(): ?int
     {
         return null;
     }

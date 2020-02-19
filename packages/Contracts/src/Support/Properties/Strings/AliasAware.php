@@ -31,19 +31,19 @@ interface AliasAware
      *
      * @return string|null alias or null if no alias has been set
      */
-    public function getAlias() : ?string;
+    public function getAlias(): ?string;
 
     /**
      * Check if "alias" has been set
      *
      * @return bool True if "alias" has been set, false if not
      */
-    public function hasAlias() : bool;
+    public function hasAlias(): bool;
 
     /**
      * Get a default "alias" value, if any is available
      *
      * @return string|null Default "alias" value or null if no default value is available
      */
-    public function getDefaultAlias() : ?string;
+    public function getDefaultAlias(): ?string;
 }

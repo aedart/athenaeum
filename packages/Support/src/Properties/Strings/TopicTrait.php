@@ -43,9 +43,9 @@ trait TopicTrait
      *
      * @return string|null topic or null if no topic has been set
      */
-    public function getTopic() : ?string
+    public function getTopic(): ?string
     {
-        if ( ! $this->hasTopic()) {
+        if (!$this->hasTopic()) {
             $this->setTopic($this->getDefaultTopic());
         }
         return $this->topic;
@@ -56,7 +56,7 @@ trait TopicTrait
      *
      * @return bool True if "topic" has been set, false if not
      */
-    public function hasTopic() : bool
+    public function hasTopic(): bool
     {
         return isset($this->topic);
     }
@@ -66,7 +66,7 @@ trait TopicTrait
      *
      * @return string|null Default "topic" value or null if no default value is available
      */
-    public function getDefaultTopic() : ?string
+    public function getDefaultTopic(): ?string
     {
         return null;
     }

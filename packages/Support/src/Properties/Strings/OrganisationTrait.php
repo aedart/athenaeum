@@ -43,9 +43,9 @@ trait OrganisationTrait
      *
      * @return string|null organisation or null if no organisation has been set
      */
-    public function getOrganisation() : ?string
+    public function getOrganisation(): ?string
     {
-        if ( ! $this->hasOrganisation()) {
+        if (!$this->hasOrganisation()) {
             $this->setOrganisation($this->getDefaultOrganisation());
         }
         return $this->organisation;
@@ -56,7 +56,7 @@ trait OrganisationTrait
      *
      * @return bool True if "organisation" has been set, false if not
      */
-    public function hasOrganisation() : bool
+    public function hasOrganisation(): bool
     {
         return isset($this->organisation);
     }
@@ -66,7 +66,7 @@ trait OrganisationTrait
      *
      * @return string|null Default "organisation" value or null if no default value is available
      */
-    public function getDefaultOrganisation() : ?string
+    public function getDefaultOrganisation(): ?string
     {
         return null;
     }

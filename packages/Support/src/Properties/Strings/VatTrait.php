@@ -43,9 +43,9 @@ trait VatTrait
      *
      * @return string|null vat or null if no vat has been set
      */
-    public function getVat() : ?string
+    public function getVat(): ?string
     {
-        if ( ! $this->hasVat()) {
+        if (!$this->hasVat()) {
             $this->setVat($this->getDefaultVat());
         }
         return $this->vat;
@@ -56,7 +56,7 @@ trait VatTrait
      *
      * @return bool True if "vat" has been set, false if not
      */
-    public function hasVat() : bool
+    public function hasVat(): bool
     {
         return isset($this->vat);
     }
@@ -66,7 +66,7 @@ trait VatTrait
      *
      * @return string|null Default "vat" value or null if no default value is available
      */
-    public function getDefaultVat() : ?string
+    public function getDefaultVat(): ?string
     {
         return null;
     }

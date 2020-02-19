@@ -43,9 +43,9 @@ trait ColourTrait
      *
      * @return string|null colour or null if no colour has been set
      */
-    public function getColour() : ?string
+    public function getColour(): ?string
     {
-        if ( ! $this->hasColour()) {
+        if (!$this->hasColour()) {
             $this->setColour($this->getDefaultColour());
         }
         return $this->colour;
@@ -56,7 +56,7 @@ trait ColourTrait
      *
      * @return bool True if "colour" has been set, false if not
      */
-    public function hasColour() : bool
+    public function hasColour(): bool
     {
         return isset($this->colour);
     }
@@ -66,7 +66,7 @@ trait ColourTrait
      *
      * @return string|null Default "colour" value or null if no default value is available
      */
-    public function getDefaultColour() : ?string
+    public function getDefaultColour(): ?string
     {
         return null;
     }

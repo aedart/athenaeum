@@ -31,19 +31,19 @@ interface FilenameAware
      *
      * @return string|null filename or null if no filename has been set
      */
-    public function getFilename() : ?string;
+    public function getFilename(): ?string;
 
     /**
      * Check if "filename" has been set
      *
      * @return bool True if "filename" has been set, false if not
      */
-    public function hasFilename() : bool;
+    public function hasFilename(): bool;
 
     /**
      * Get a default "filename" value, if any is available
      *
      * @return string|null Default "filename" value or null if no default value is available
      */
-    public function getDefaultFilename() : ?string;
+    public function getDefaultFilename(): ?string;
 }

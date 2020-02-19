@@ -31,19 +31,19 @@ interface LengthAware
      *
      * @return float|null length or null if no length has been set
      */
-    public function getLength() : ?float;
+    public function getLength(): ?float;
 
     /**
      * Check if "length" has been set
      *
      * @return bool True if "length" has been set, false if not
      */
-    public function hasLength() : bool;
+    public function hasLength(): bool;
 
     /**
      * Get a default "length" value, if any is available
      *
      * @return float|null Default "length" value or null if no default value is available
      */
-    public function getDefaultLength() : ?float;
+    public function getDefaultLength(): ?float;
 }

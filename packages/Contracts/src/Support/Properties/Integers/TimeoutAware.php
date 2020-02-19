@@ -31,19 +31,19 @@ interface TimeoutAware
      *
      * @return int|null timeout or null if no timeout has been set
      */
-    public function getTimeout() : ?int;
+    public function getTimeout(): ?int;
 
     /**
      * Check if "timeout" has been set
      *
      * @return bool True if "timeout" has been set, false if not
      */
-    public function hasTimeout() : bool;
+    public function hasTimeout(): bool;
 
     /**
      * Get a default "timeout" value, if any is available
      *
      * @return int|null Default "timeout" value or null if no default value is available
      */
-    public function getDefaultTimeout() : ?int;
+    public function getDefaultTimeout(): ?int;
 }

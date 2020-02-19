@@ -43,9 +43,9 @@ trait QuantityTrait
      *
      * @return float|null quantity or null if no quantity has been set
      */
-    public function getQuantity() : ?float
+    public function getQuantity(): ?float
     {
-        if ( ! $this->hasQuantity()) {
+        if (!$this->hasQuantity()) {
             $this->setQuantity($this->getDefaultQuantity());
         }
         return $this->quantity;
@@ -56,7 +56,7 @@ trait QuantityTrait
      *
      * @return bool True if "quantity" has been set, false if not
      */
-    public function hasQuantity() : bool
+    public function hasQuantity(): bool
     {
         return isset($this->quantity);
     }
@@ -66,7 +66,7 @@ trait QuantityTrait
      *
      * @return float|null Default "quantity" value or null if no default value is available
      */
-    public function getDefaultQuantity() : ?float
+    public function getDefaultQuantity(): ?float
     {
         return null;
     }

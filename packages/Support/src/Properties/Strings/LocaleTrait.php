@@ -43,9 +43,9 @@ trait LocaleTrait
      *
      * @return string|null locale or null if no locale has been set
      */
-    public function getLocale() : ?string
+    public function getLocale(): ?string
     {
-        if ( ! $this->hasLocale()) {
+        if (!$this->hasLocale()) {
             $this->setLocale($this->getDefaultLocale());
         }
         return $this->locale;
@@ -56,7 +56,7 @@ trait LocaleTrait
      *
      * @return bool True if "locale" has been set, false if not
      */
-    public function hasLocale() : bool
+    public function hasLocale(): bool
     {
         return isset($this->locale);
     }
@@ -66,7 +66,7 @@ trait LocaleTrait
      *
      * @return string|null Default "locale" value or null if no default value is available
      */
-    public function getDefaultLocale() : ?string
+    public function getDefaultLocale(): ?string
     {
         return null;
     }

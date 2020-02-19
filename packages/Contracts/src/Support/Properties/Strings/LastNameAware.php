@@ -31,19 +31,19 @@ interface LastNameAware
      *
      * @return string|null last name or null if no last name has been set
      */
-    public function getLastName() : ?string;
+    public function getLastName(): ?string;
 
     /**
      * Check if "last name" has been set
      *
      * @return bool True if "last name" has been set, false if not
      */
-    public function hasLastName() : bool;
+    public function hasLastName(): bool;
 
     /**
      * Get a default "last name" value, if any is available
      *
      * @return string|null Default "last name" value or null if no default value is available
      */
-    public function getDefaultLastName() : ?string;
+    public function getDefaultLastName(): ?string;
 }

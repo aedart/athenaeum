@@ -31,19 +31,19 @@ interface PublicPathAware
      *
      * @return string|null public path or null if no public path has been set
      */
-    public function getPublicPath() : ?string;
+    public function getPublicPath(): ?string;
 
     /**
      * Check if "public path" has been set
      *
      * @return bool True if "public path" has been set, false if not
      */
-    public function hasPublicPath() : bool;
+    public function hasPublicPath(): bool;
 
     /**
      * Get a default "public path" value, if any is available
      *
      * @return string|null Default "public path" value or null if no default value is available
      */
-    public function getDefaultPublicPath() : ?string;
+    public function getDefaultPublicPath(): ?string;
 }

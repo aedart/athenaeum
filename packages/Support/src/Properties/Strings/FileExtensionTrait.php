@@ -43,9 +43,9 @@ trait FileExtensionTrait
      *
      * @return string|null file extension or null if no file extension has been set
      */
-    public function getFileExtension() : ?string
+    public function getFileExtension(): ?string
     {
-        if ( ! $this->hasFileExtension()) {
+        if (!$this->hasFileExtension()) {
             $this->setFileExtension($this->getDefaultFileExtension());
         }
         return $this->fileExtension;
@@ -56,7 +56,7 @@ trait FileExtensionTrait
      *
      * @return bool True if "file extension" has been set, false if not
      */
-    public function hasFileExtension() : bool
+    public function hasFileExtension(): bool
     {
         return isset($this->fileExtension);
     }
@@ -66,7 +66,7 @@ trait FileExtensionTrait
      *
      * @return string|null Default "file extension" value or null if no default value is available
      */
-    public function getDefaultFileExtension() : ?string
+    public function getDefaultFileExtension(): ?string
     {
         return null;
     }

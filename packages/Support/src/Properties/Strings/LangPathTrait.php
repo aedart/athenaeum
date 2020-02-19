@@ -43,9 +43,9 @@ trait LangPathTrait
      *
      * @return string|null lang path or null if no lang path has been set
      */
-    public function getLangPath() : ?string
+    public function getLangPath(): ?string
     {
-        if ( ! $this->hasLangPath()) {
+        if (!$this->hasLangPath()) {
             $this->setLangPath($this->getDefaultLangPath());
         }
         return $this->langPath;
@@ -56,7 +56,7 @@ trait LangPathTrait
      *
      * @return bool True if "lang path" has been set, false if not
      */
-    public function hasLangPath() : bool
+    public function hasLangPath(): bool
     {
         return isset($this->langPath);
     }
@@ -66,7 +66,7 @@ trait LangPathTrait
      *
      * @return string|null Default "lang path" value or null if no default value is available
      */
-    public function getDefaultLangPath() : ?string
+    public function getDefaultLangPath(): ?string
     {
         return null;
     }

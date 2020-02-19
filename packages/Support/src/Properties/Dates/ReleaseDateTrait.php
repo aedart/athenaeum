@@ -43,9 +43,9 @@ trait ReleaseDateTrait
      *
      * @return \DateTime|null release date or null if no release date has been set
      */
-    public function getReleaseDate() : ?\DateTime
+    public function getReleaseDate(): ?\DateTime
     {
-        if ( ! $this->hasReleaseDate()) {
+        if (!$this->hasReleaseDate()) {
             $this->setReleaseDate($this->getDefaultReleaseDate());
         }
         return $this->releaseDate;
@@ -56,7 +56,7 @@ trait ReleaseDateTrait
      *
      * @return bool True if "release date" has been set, false if not
      */
-    public function hasReleaseDate() : bool
+    public function hasReleaseDate(): bool
     {
         return isset($this->releaseDate);
     }
@@ -66,7 +66,7 @@ trait ReleaseDateTrait
      *
      * @return \DateTime|null Default "release date" value or null if no default value is available
      */
-    public function getDefaultReleaseDate() : ?\DateTime
+    public function getDefaultReleaseDate(): ?\DateTime
     {
         return null;
     }

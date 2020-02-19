@@ -33,7 +33,7 @@ class Version
      */
     public static function package(string $name)
     {
-        if(isset(static::$versions[$name])){
+        if (isset(static::$versions[$name])) {
             return static::$versions[$name];
         }
 
@@ -47,18 +47,18 @@ class Version
      *
      * @return bool
      */
-    public static function hasFor(string $package) : bool
+    public static function hasFor(string $package): bool
     {
-        if(isset(static::$versions[$package])){
+        if (isset(static::$versions[$package])) {
             return true;
         }
 
         try {
             $version = static::package($package);
-            if(isset($version)){
+            if (isset($version)) {
                 return true;
             }
-        } catch (OutOfBoundsException $e){
+        } catch (OutOfBoundsException $e) {
             // This means that the package was not installed / found.
             // This we can safely ignore.
         }
@@ -71,7 +71,7 @@ class Version
      *
      * @return array Key-value pair, key = package name, value = \Jean85\Version instance
      */
-    public static function cached() : array
+    public static function cached(): array
     {
         return static::$versions;
     }
@@ -81,7 +81,7 @@ class Version
      *
      * @return bool
      */
-    public static function clearCached() : bool
+    public static function clearCached(): bool
     {
         static::$versions = [];
 

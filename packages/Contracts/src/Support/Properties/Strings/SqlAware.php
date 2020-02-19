@@ -31,19 +31,19 @@ interface SqlAware
      *
      * @return string|null sql or null if no sql has been set
      */
-    public function getSql() : ?string;
+    public function getSql(): ?string;
 
     /**
      * Check if "sql" has been set
      *
      * @return bool True if "sql" has been set, false if not
      */
-    public function hasSql() : bool;
+    public function hasSql(): bool;
 
     /**
      * Get a default "sql" value, if any is available
      *
      * @return string|null Default "sql" value or null if no default value is available
      */
-    public function getDefaultSql() : ?string;
+    public function getDefaultSql(): ?string;
 }

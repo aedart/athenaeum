@@ -31,19 +31,19 @@ interface GroupAware
      *
      * @return int|null group or null if no group has been set
      */
-    public function getGroup() : ?int;
+    public function getGroup(): ?int;
 
     /**
      * Check if "group" has been set
      *
      * @return bool True if "group" has been set, false if not
      */
-    public function hasGroup() : bool;
+    public function hasGroup(): bool;
 
     /**
      * Get a default "group" value, if any is available
      *
      * @return int|null Default "group" value or null if no default value is available
      */
-    public function getDefaultGroup() : ?int;
+    public function getDefaultGroup(): ?int;
 }

@@ -43,9 +43,9 @@ trait AuthorTrait
      *
      * @return string|null author or null if no author has been set
      */
-    public function getAuthor() : ?string
+    public function getAuthor(): ?string
     {
-        if ( ! $this->hasAuthor()) {
+        if (!$this->hasAuthor()) {
             $this->setAuthor($this->getDefaultAuthor());
         }
         return $this->author;
@@ -56,7 +56,7 @@ trait AuthorTrait
      *
      * @return bool True if "author" has been set, false if not
      */
-    public function hasAuthor() : bool
+    public function hasAuthor(): bool
     {
         return isset($this->author);
     }
@@ -66,7 +66,7 @@ trait AuthorTrait
      *
      * @return string|null Default "author" value or null if no default value is available
      */
-    public function getDefaultAuthor() : ?string
+    public function getDefaultAuthor(): ?string
     {
         return null;
     }

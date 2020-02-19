@@ -74,7 +74,7 @@ trait SchemaTrait
     public function getDefaultSchema(): ?Builder
     {
         $manager = DB::getFacadeRoot();
-        if (isset($manager) && ! is_null($manager->connection())) {
+        if (isset($manager) && !is_null($manager->connection())) {
             return Schema::getFacadeRoot();
         }
         return $manager;

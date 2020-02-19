@@ -43,9 +43,9 @@ trait VendorTrait
      *
      * @return string|null vendor or null if no vendor has been set
      */
-    public function getVendor() : ?string
+    public function getVendor(): ?string
     {
-        if ( ! $this->hasVendor()) {
+        if (!$this->hasVendor()) {
             $this->setVendor($this->getDefaultVendor());
         }
         return $this->vendor;
@@ -56,7 +56,7 @@ trait VendorTrait
      *
      * @return bool True if "vendor" has been set, false if not
      */
-    public function hasVendor() : bool
+    public function hasVendor(): bool
     {
         return isset($this->vendor);
     }
@@ -66,7 +66,7 @@ trait VendorTrait
      *
      * @return string|null Default "vendor" value or null if no default value is available
      */
-    public function getDefaultVendor() : ?string
+    public function getDefaultVendor(): ?string
     {
         return null;
     }

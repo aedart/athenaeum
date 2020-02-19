@@ -38,7 +38,7 @@ interface XAware
      *
      * @return bool True if "x" has been set, false if not
      */
-    public function hasX() : bool;
+    public function hasX(): bool;
 
     /**
      * Get a default "x" value, if any is available

@@ -21,6 +21,6 @@ class SetDefaultTimezone implements CanBeBootstrapped
      */
     public function bootstrap(Application $application): void
     {
-        date_default_timezone_set( $this->getConfig()->get('app.timezone', 'UTC') );
+        date_default_timezone_set($this->getConfig()->get('app.timezone', 'UTC'));
     }
 }

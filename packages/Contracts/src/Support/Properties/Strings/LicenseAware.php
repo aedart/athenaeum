@@ -31,19 +31,19 @@ interface LicenseAware
      *
      * @return string|null license or null if no license has been set
      */
-    public function getLicense() : ?string;
+    public function getLicense(): ?string;
 
     /**
      * Check if "license" has been set
      *
      * @return bool True if "license" has been set, false if not
      */
-    public function hasLicense() : bool;
+    public function hasLicense(): bool;
 
     /**
      * Get a default "license" value, if any is available
      *
      * @return string|null Default "license" value or null if no default value is available
      */
-    public function getDefaultLicense() : ?string;
+    public function getDefaultLicense(): ?string;
 }

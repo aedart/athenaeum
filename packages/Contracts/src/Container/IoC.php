@@ -22,5 +22,5 @@ interface IoC extends Container
     /**
      * Destroy the current IoC Service Container instance
      */
-    public function destroy() : void ;
+    public function destroy(): void;
 }

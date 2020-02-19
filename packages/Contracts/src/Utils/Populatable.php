@@ -43,5 +43,5 @@ interface Populatable
      *
      * @throws Throwable In case that one or more of the given array entries are invalid
      */
-    public function populate(array $data = []) : void ;
+    public function populate(array $data = []): void;
 }

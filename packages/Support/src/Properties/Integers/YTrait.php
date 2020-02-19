@@ -43,9 +43,9 @@ trait YTrait
      *
      * @return int|null y or null if no y has been set
      */
-    public function getY() : ?int
+    public function getY(): ?int
     {
-        if ( ! $this->hasY()) {
+        if (!$this->hasY()) {
             $this->setY($this->getDefaultY());
         }
         return $this->y;
@@ -56,7 +56,7 @@ trait YTrait
      *
      * @return bool True if "y" has been set, false if not
      */
-    public function hasY() : bool
+    public function hasY(): bool
     {
         return isset($this->y);
     }
@@ -66,7 +66,7 @@ trait YTrait
      *
      * @return int|null Default "y" value or null if no default value is available
      */
-    public function getDefaultY() : ?int
+    public function getDefaultY(): ?int
     {
         return null;
     }

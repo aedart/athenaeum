@@ -31,19 +31,19 @@ interface RegionAware
      *
      * @return string|null region or null if no region has been set
      */
-    public function getRegion() : ?string;
+    public function getRegion(): ?string;
 
     /**
      * Check if "region" has been set
      *
      * @return bool True if "region" has been set, false if not
      */
-    public function hasRegion() : bool;
+    public function hasRegion(): bool;
 
     /**
      * Get a default "region" value, if any is available
      *
      * @return string|null Default "region" value or null if no default value is available
      */
-    public function getDefaultRegion() : ?string;
+    public function getDefaultRegion(): ?string;
 }

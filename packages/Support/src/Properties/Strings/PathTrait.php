@@ -43,9 +43,9 @@ trait PathTrait
      *
      * @return string|null path or null if no path has been set
      */
-    public function getPath() : ?string
+    public function getPath(): ?string
     {
-        if ( ! $this->hasPath()) {
+        if (!$this->hasPath()) {
             $this->setPath($this->getDefaultPath());
         }
         return $this->path;
@@ -56,7 +56,7 @@ trait PathTrait
      *
      * @return bool True if "path" has been set, false if not
      */
-    public function hasPath() : bool
+    public function hasPath(): bool
     {
         return isset($this->path);
     }
@@ -66,7 +66,7 @@ trait PathTrait
      *
      * @return string|null Default "path" value or null if no default value is available
      */
-    public function getDefaultPath() : ?string
+    public function getDefaultPath(): ?string
     {
         return null;
     }

@@ -31,19 +31,19 @@ interface GenderAware
      *
      * @return string|null gender or null if no gender has been set
      */
-    public function getGender() : ?string;
+    public function getGender(): ?string;
 
     /**
      * Check if "gender" has been set
      *
      * @return bool True if "gender" has been set, false if not
      */
-    public function hasGender() : bool;
+    public function hasGender(): bool;
 
     /**
      * Get a default "gender" value, if any is available
      *
      * @return string|null Default "gender" value or null if no default value is available
      */
-    public function getDefaultGender() : ?string;
+    public function getDefaultGender(): ?string;
 }

@@ -43,9 +43,9 @@ trait TypeTrait
      *
      * @return int|null type or null if no type has been set
      */
-    public function getType() : ?int
+    public function getType(): ?int
     {
-        if ( ! $this->hasType()) {
+        if (!$this->hasType()) {
             $this->setType($this->getDefaultType());
         }
         return $this->type;
@@ -56,7 +56,7 @@ trait TypeTrait
      *
      * @return bool True if "type" has been set, false if not
      */
-    public function hasType() : bool
+    public function hasType(): bool
     {
         return isset($this->type);
     }
@@ -66,7 +66,7 @@ trait TypeTrait
      *
      * @return int|null Default "type" value or null if no default value is available
      */
-    public function getDefaultType() : ?int
+    public function getDefaultType(): ?int
     {
         return null;
     }

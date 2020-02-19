@@ -31,19 +31,19 @@ interface HostAware
      *
      * @return string|null host or null if no host has been set
      */
-    public function getHost() : ?string;
+    public function getHost(): ?string;
 
     /**
      * Check if "host" has been set
      *
      * @return bool True if "host" has been set, false if not
      */
-    public function hasHost() : bool;
+    public function hasHost(): bool;
 
     /**
      * Get a default "host" value, if any is available
      *
      * @return string|null Default "host" value or null if no default value is available
      */
-    public function getDefaultHost() : ?string;
+    public function getDefaultHost(): ?string;
 }

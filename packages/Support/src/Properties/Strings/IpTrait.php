@@ -43,9 +43,9 @@ trait IpTrait
      *
      * @return string|null ip or null if no ip has been set
      */
-    public function getIp() : ?string
+    public function getIp(): ?string
     {
-        if ( ! $this->hasIp()) {
+        if (!$this->hasIp()) {
             $this->setIp($this->getDefaultIp());
         }
         return $this->ip;
@@ -56,7 +56,7 @@ trait IpTrait
      *
      * @return bool True if "ip" has been set, false if not
      */
-    public function hasIp() : bool
+    public function hasIp(): bool
     {
         return isset($this->ip);
     }
@@ -66,7 +66,7 @@ trait IpTrait
      *
      * @return string|null Default "ip" value or null if no default value is available
      */
-    public function getDefaultIp() : ?string
+    public function getDefaultIp(): ?string
     {
         return null;
     }

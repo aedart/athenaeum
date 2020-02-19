@@ -34,7 +34,7 @@ class PirateTalkCommand extends Command
      *
      * @return int
      */
-    public function handle() : int
+    public function handle(): int
     {
         // Text generated via Kay Stenschke's Dummy Text Generator
         // @see https://plugins.jetbrains.com/plugin/7216-dummy-text-generator

@@ -43,9 +43,9 @@ trait AgencyTrait
      *
      * @return string|null agency or null if no agency has been set
      */
-    public function getAgency() : ?string
+    public function getAgency(): ?string
     {
-        if ( ! $this->hasAgency()) {
+        if (!$this->hasAgency()) {
             $this->setAgency($this->getDefaultAgency());
         }
         return $this->agency;
@@ -56,7 +56,7 @@ trait AgencyTrait
      *
      * @return bool True if "agency" has been set, false if not
      */
-    public function hasAgency() : bool
+    public function hasAgency(): bool
     {
         return isset($this->agency);
     }
@@ -66,7 +66,7 @@ trait AgencyTrait
      *
      * @return string|null Default "agency" value or null if no default value is available
      */
-    public function getDefaultAgency() : ?string
+    public function getDefaultAgency(): ?string
     {
         return null;
     }

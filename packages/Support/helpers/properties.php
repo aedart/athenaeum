@@ -6,7 +6,7 @@
 
 use Aedart\Contracts\Utils\DataTypes;
 
-if( ! function_exists('awareOfProperty')){
+if (!function_exists('awareOfProperty')) {
 
     /**
      * Returns an array of configuration that allows a generator
@@ -25,21 +25,20 @@ if( ! function_exists('awareOfProperty')){
         string $description,
         string $dataType = DataTypes::STRING_TYPE,
         ?string $inputArgName = null
-    ) : array
-    {
+    ): array {
         $inputArgName = $inputArgName ?? $property;
 
         // Return data structure
         return [
-            'property'              => $property,
-            'type'                  => $dataType,
-            'description'           => $description,
-            'inputArgName'          => $inputArgName,
+            'property' => $property,
+            'type' => $dataType,
+            'description' => $description,
+            'inputArgName' => $inputArgName,
         ];
     }
 }
 
-if( ! function_exists('stringProperty')){
+if (!function_exists('stringProperty')) {
 
     /**
      * Returns "string" aware-of property configuration
@@ -53,7 +52,7 @@ if( ! function_exists('stringProperty')){
      *
      * @return array
      */
-    function stringProperty(string $name, string $description, ?string $inputName = null) : array
+    function stringProperty(string $name, string $description, ?string $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -64,7 +63,7 @@ if( ! function_exists('stringProperty')){
     }
 }
 
-if( ! function_exists('integerProperty')){
+if (!function_exists('integerProperty')) {
 
     /**
      * Returns "integer" aware-of property configuration
@@ -78,7 +77,7 @@ if( ! function_exists('integerProperty')){
      *
      * @return array
      */
-    function integerProperty(string $name, string $description, ?string $inputName = null) : array
+    function integerProperty(string $name, string $description, ?string $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -89,7 +88,7 @@ if( ! function_exists('integerProperty')){
     }
 }
 
-if( ! function_exists('floatProperty')){
+if (!function_exists('floatProperty')) {
 
     /**
      * Returns "float" aware-of property configuration
@@ -103,7 +102,7 @@ if( ! function_exists('floatProperty')){
      *
      * @return array
      */
-    function floatProperty(string $name, string $description, ?string $inputName = null) : array
+    function floatProperty(string $name, string $description, ?string $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -114,7 +113,7 @@ if( ! function_exists('floatProperty')){
     }
 }
 
-if( ! function_exists('booleanProperty')){
+if (!function_exists('booleanProperty')) {
 
     /**
      * Returns "boolean" aware-of property configuration
@@ -128,7 +127,7 @@ if( ! function_exists('booleanProperty')){
      *
      * @return array
      */
-    function booleanProperty(string $name, string $description, ?string $inputName = null) : array
+    function booleanProperty(string $name, string $description, ?string $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -139,7 +138,7 @@ if( ! function_exists('booleanProperty')){
     }
 }
 
-if( ! function_exists('arrayProperty')){
+if (!function_exists('arrayProperty')) {
 
     /**
      * Returns "array" aware-of property configuration
@@ -153,7 +152,7 @@ if( ! function_exists('arrayProperty')){
      *
      * @return array
      */
-    function arrayProperty(string $name, string $description, ?string $inputName = null) : array
+    function arrayProperty(string $name, string $description, ?string $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -164,7 +163,7 @@ if( ! function_exists('arrayProperty')){
     }
 }
 
-if( ! function_exists('callableProperty')){
+if (!function_exists('callableProperty')) {
 
     /**
      * Returns "callable" aware-of property configuration
@@ -178,7 +177,7 @@ if( ! function_exists('callableProperty')){
      *
      * @return array
      */
-    function callableProperty(string $name, string $description, ?string $inputName = null) : array
+    function callableProperty(string $name, string $description, ?string $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -189,7 +188,7 @@ if( ! function_exists('callableProperty')){
     }
 }
 
-if( ! function_exists('iterableProperty')){
+if (!function_exists('iterableProperty')) {
 
     /**
      * Returns "iterable" aware-of property configuration
@@ -203,7 +202,7 @@ if( ! function_exists('iterableProperty')){
      *
      * @return array
      */
-    function iterableProperty(string $name, string $description, ?string $inputName = null) : array
+    function iterableProperty(string $name, string $description, ?string $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -214,7 +213,7 @@ if( ! function_exists('iterableProperty')){
     }
 }
 
-if( ! function_exists('mixedProperty')){
+if (!function_exists('mixedProperty')) {
 
     /**
      * Returns "mixed" aware-of property configuration
@@ -228,7 +227,7 @@ if( ! function_exists('mixedProperty')){
      *
      * @return array
      */
-    function mixedProperty(string $name, string $description, ?string $inputName = null) : array
+    function mixedProperty(string $name, string $description, ?string $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -239,7 +238,7 @@ if( ! function_exists('mixedProperty')){
     }
 }
 
-if( ! function_exists('dateTimeProperty')){
+if (!function_exists('dateTimeProperty')) {
 
     /**
      * Returns "DateTime" aware-of property configuration
@@ -253,7 +252,7 @@ if( ! function_exists('dateTimeProperty')){
      *
      * @return array
      */
-    function dateTimeProperty(string $name, string $description, ?string $inputName = null) : array
+    function dateTimeProperty(string $name, string $description, ?string $inputName = null): array
     {
         return awareOfProperty(
             $name,

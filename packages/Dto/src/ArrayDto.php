@@ -110,13 +110,13 @@ abstract class ArrayDto implements Dto
     public function __set(string $name, $value)
     {
         // Abort if not allowed.
-        if( ! array_key_exists($name, $this->allowed)){
+        if (!array_key_exists($name, $this->allowed)) {
             throw new UndefinedProperty(sprintf('Property "%s" is not supported (not allowed)', $name));
         }
 
         // Invoke mutator, if one exists.
         $mutator = MethodHelper::makeSetterName($name);
-        if(method_exists($this, $mutator)){
+        if (method_exists($this, $mutator)) {
             return $this->$mutator($this->resolveValue($mutator, $value));
         }
 
@@ -138,19 +138,19 @@ abstract class ArrayDto implements Dto
     public function __get(string $name)
     {
         // Abort if not allowed.
-        if( ! array_key_exists($name, $this->allowed)){
+        if (!array_key_exists($name, $this->allowed)) {
             throw new UndefinedProperty(sprintf('Property "%s" is not supported (not allowed)', $name));
         }
 
         // Invoke accessor, if one exists.
         $accessor = MethodHelper::makeGetterName($name);
-        if(method_exists($this, $accessor)){
+        if (method_exists($this, $accessor)) {
             return $this->$accessor();
         }
 
         // Otherwise, return property if a value exists or
         // simply return null.
-        if( isset($this->properties[$name])){
+        if (isset($this->properties[$name])) {
             return $this->properties[$name];
         }
 
@@ -164,7 +164,7 @@ abstract class ArrayDto implements Dto
      *
      * @return bool
      */
-    public function __isset(string $name) : bool
+    public function __isset(string $name): bool
     {
         return isset($this->properties[$name]);
     }
@@ -174,7 +174,7 @@ abstract class ArrayDto implements Dto
      *
      * @param string $name
      */
-    public function __unset(string $name) : void
+    public function __unset(string $name): void
     {
         unset($this->properties[$name]);
     }
@@ -188,6 +188,6 @@ abstract class ArrayDto implements Dto
      */
     protected function isPropertyUnset(string $property)
     {
-        return ! isset($this->{$property});
+        return !isset($this->{$property});
     }
 }

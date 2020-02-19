@@ -31,19 +31,19 @@ interface ColourAware
      *
      * @return string|null colour or null if no colour has been set
      */
-    public function getColour() : ?string;
+    public function getColour(): ?string;
 
     /**
      * Check if "colour" has been set
      *
      * @return bool True if "colour" has been set, false if not
      */
-    public function hasColour() : bool;
+    public function hasColour(): bool;
 
     /**
      * Get a default "colour" value, if any is available
      *
      * @return string|null Default "colour" value or null if no default value is available
      */
-    public function getDefaultColour() : ?string;
+    public function getDefaultColour(): ?string;
 }

@@ -43,9 +43,9 @@ trait FormatTrait
      *
      * @return string|null format or null if no format has been set
      */
-    public function getFormat() : ?string
+    public function getFormat(): ?string
     {
-        if ( ! $this->hasFormat()) {
+        if (!$this->hasFormat()) {
             $this->setFormat($this->getDefaultFormat());
         }
         return $this->format;
@@ -56,7 +56,7 @@ trait FormatTrait
      *
      * @return bool True if "format" has been set, false if not
      */
-    public function hasFormat() : bool
+    public function hasFormat(): bool
     {
         return isset($this->format);
     }
@@ -66,7 +66,7 @@ trait FormatTrait
      *
      * @return string|null Default "format" value or null if no default value is available
      */
-    public function getDefaultFormat() : ?string
+    public function getDefaultFormat(): ?string
     {
         return null;
     }

@@ -42,25 +42,25 @@ class ScaffoldCommand extends CommandBase
         $output = $this->input->getOption('output');
 
         // Add trailing slash if needed
-        if( ! Str::endsWith($output, DIRECTORY_SEPARATOR)){
+        if (!Str::endsWith($output, DIRECTORY_SEPARATOR)) {
             $output .= DIRECTORY_SEPARATOR;
         }
 
         // Abort if config file already exists
         $destination = $output . 'aware-of-properties.php';
-        if(file_exists($destination)){
+        if (file_exists($destination)) {
             $this->output->warning($destination . ' already exists. Aborting!');
             return 1;
         }
 
         // Create nested directories, if required
-        if(mkdir($output, 0755, true) === false){
+        if (mkdir($output, 0755, true) === false) {
             $this->output->error('unable to create directory: ' . $output);
             return 2;
         }
 
         // Copy the configuration file
-        if(copy($target, $destination) === false){
+        if (copy($target, $destination) === false) {
             $this->output->error('unable to copy scaffold into ' . $output);
             return 2;
         }

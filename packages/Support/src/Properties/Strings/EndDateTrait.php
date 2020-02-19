@@ -43,9 +43,9 @@ trait EndDateTrait
      *
      * @return string|null end date or null if no end date has been set
      */
-    public function getEndDate() : ?string
+    public function getEndDate(): ?string
     {
-        if ( ! $this->hasEndDate()) {
+        if (!$this->hasEndDate()) {
             $this->setEndDate($this->getDefaultEndDate());
         }
         return $this->endDate;
@@ -56,7 +56,7 @@ trait EndDateTrait
      *
      * @return bool True if "end date" has been set, false if not
      */
-    public function hasEndDate() : bool
+    public function hasEndDate(): bool
     {
         return isset($this->endDate);
     }
@@ -66,7 +66,7 @@ trait EndDateTrait
      *
      * @return string|null Default "end date" value or null if no default value is available
      */
-    public function getDefaultEndDate() : ?string
+    public function getDefaultEndDate(): ?string
     {
         return null;
     }

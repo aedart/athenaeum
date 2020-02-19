@@ -65,7 +65,7 @@ class CacheServiceProvider extends LaravelCacheServiceProvider
      */
     protected function registerCommands()
     {
-        if( ! $this->app->runningInConsole()) {
+        if (!$this->app->runningInConsole()) {
             return $this;
         }
 
@@ -86,7 +86,7 @@ class CacheServiceProvider extends LaravelCacheServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../../configs/cache.php' => config_path('cache.php')
-        ],'config');
+        ], 'config');
 
         return $this;
     }

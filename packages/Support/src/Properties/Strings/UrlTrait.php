@@ -43,9 +43,9 @@ trait UrlTrait
      *
      * @return string|null url or null if no url has been set
      */
-    public function getUrl() : ?string
+    public function getUrl(): ?string
     {
-        if ( ! $this->hasUrl()) {
+        if (!$this->hasUrl()) {
             $this->setUrl($this->getDefaultUrl());
         }
         return $this->url;
@@ -56,7 +56,7 @@ trait UrlTrait
      *
      * @return bool True if "url" has been set, false if not
      */
-    public function hasUrl() : bool
+    public function hasUrl(): bool
     {
         return isset($this->url);
     }
@@ -66,7 +66,7 @@ trait UrlTrait
      *
      * @return string|null Default "url" value or null if no default value is available
      */
-    public function getDefaultUrl() : ?string
+    public function getDefaultUrl(): ?string
     {
         return null;
     }

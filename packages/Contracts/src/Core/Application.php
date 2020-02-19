@@ -25,28 +25,28 @@ interface Application extends IoC,
      *
      * @return bool
      */
-    public function isLocal() : bool ;
+    public function isLocal(): bool;
 
     /**
      * Determine if running in "production" environment
      *
      * @return bool
      */
-    public function isProduction() : bool ;
+    public function isProduction(): bool;
 
     /**
      * Determine if running in "testing" environment
      *
      * @return bool
      */
-    public function isTesting() : bool ;
+    public function isTesting(): bool;
 
     /**
      * Determine if this application has booted
      *
      * @return bool
      */
-    public function isBooted() : bool ;
+    public function isBooted(): bool;
 
     /**
      * Register a new terminating listener.
@@ -77,7 +77,7 @@ interface Application extends IoC,
      *
      * @return array Key = service class path, value = service provider
      */
-    public function getDeferredServices() : array ;
+    public function getDeferredServices(): array;
 
     /**
      * Determine if given service is deferred
@@ -86,7 +86,7 @@ interface Application extends IoC,
      *
      * @return bool
      */
-    public function isDeferredService(string $service) : bool ;
+    public function isDeferredService(string $service): bool;
 
     /**
      * Determine if the application has bootstrapped it's
@@ -98,7 +98,7 @@ interface Application extends IoC,
      *
      * @return bool
      */
-    public function isRunning() : bool ;
+    public function isRunning(): bool;
 
     /**
      * Bootstrap application's core bootstrappers and boot
@@ -116,21 +116,21 @@ interface Application extends IoC,
      *
      * @throws Throwable
      */
-    public function run(?callable $callback = null) : void ;
+    public function run(?callable $callback = null): void;
 
     /**
      * Get the application's core "bootstrappers"
      *
      * @return CanBeBootstrapped[]|string[] Instances or list of class paths
      */
-    public function getCoreBootstrappers() : array ;
+    public function getCoreBootstrappers(): array;
 
     /**
      * Get this application's core service providers.
      *
      * @return \Illuminate\Support\ServiceProvider[]|string[] Instances or list of class paths
      */
-    public function getCoreServiceProviders() : array ;
+    public function getCoreServiceProviders(): array;
 
     /**
      * Set the state of exception handling
@@ -154,5 +154,5 @@ interface Application extends IoC,
      *
      * @return bool
      */
-    public function mustThrowExceptions() : bool ;
+    public function mustThrowExceptions(): bool;
 }

@@ -43,9 +43,9 @@ trait StoragePathTrait
      *
      * @return string|null storage path or null if no storage path has been set
      */
-    public function getStoragePath() : ?string
+    public function getStoragePath(): ?string
     {
-        if ( ! $this->hasStoragePath()) {
+        if (!$this->hasStoragePath()) {
             $this->setStoragePath($this->getDefaultStoragePath());
         }
         return $this->storagePath;
@@ -56,7 +56,7 @@ trait StoragePathTrait
      *
      * @return bool True if "storage path" has been set, false if not
      */
-    public function hasStoragePath() : bool
+    public function hasStoragePath(): bool
     {
         return isset($this->storagePath);
     }
@@ -66,7 +66,7 @@ trait StoragePathTrait
      *
      * @return string|null Default "storage path" value or null if no default value is available
      */
-    public function getDefaultStoragePath() : ?string
+    public function getDefaultStoragePath(): ?string
     {
         return null;
     }

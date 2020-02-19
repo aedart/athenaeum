@@ -15,5 +15,4 @@ use RuntimeException;
  */
 class InvalidPath extends RuntimeException implements InvalidPathException
 {
-
 }

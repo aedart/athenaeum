@@ -43,9 +43,9 @@ trait UpdatedAtTrait
      *
      * @return \DateTime|null updated at or null if no updated at has been set
      */
-    public function getUpdatedAt() : ?\DateTime
+    public function getUpdatedAt(): ?\DateTime
     {
-        if ( ! $this->hasUpdatedAt()) {
+        if (!$this->hasUpdatedAt()) {
             $this->setUpdatedAt($this->getDefaultUpdatedAt());
         }
         return $this->updatedAt;
@@ -56,7 +56,7 @@ trait UpdatedAtTrait
      *
      * @return bool True if "updated at" has been set, false if not
      */
-    public function hasUpdatedAt() : bool
+    public function hasUpdatedAt(): bool
     {
         return isset($this->updatedAt);
     }
@@ -66,7 +66,7 @@ trait UpdatedAtTrait
      *
      * @return \DateTime|null Default "updated at" value or null if no default value is available
      */
-    public function getDefaultUpdatedAt() : ?\DateTime
+    public function getDefaultUpdatedAt(): ?\DateTime
     {
         return null;
     }

@@ -43,9 +43,9 @@ trait TemplateTrait
      *
      * @return string|null template or null if no template has been set
      */
-    public function getTemplate() : ?string
+    public function getTemplate(): ?string
     {
-        if ( ! $this->hasTemplate()) {
+        if (!$this->hasTemplate()) {
             $this->setTemplate($this->getDefaultTemplate());
         }
         return $this->template;
@@ -56,7 +56,7 @@ trait TemplateTrait
      *
      * @return bool True if "template" has been set, false if not
      */
-    public function hasTemplate() : bool
+    public function hasTemplate(): bool
     {
         return isset($this->template);
     }
@@ -66,7 +66,7 @@ trait TemplateTrait
      *
      * @return string|null Default "template" value or null if no default value is available
      */
-    public function getDefaultTemplate() : ?string
+    public function getDefaultTemplate(): ?string
     {
         return null;
     }

@@ -43,9 +43,9 @@ trait DiscountTrait
      *
      * @return int|null discount or null if no discount has been set
      */
-    public function getDiscount() : ?int
+    public function getDiscount(): ?int
     {
-        if ( ! $this->hasDiscount()) {
+        if (!$this->hasDiscount()) {
             $this->setDiscount($this->getDefaultDiscount());
         }
         return $this->discount;
@@ -56,7 +56,7 @@ trait DiscountTrait
      *
      * @return bool True if "discount" has been set, false if not
      */
-    public function hasDiscount() : bool
+    public function hasDiscount(): bool
     {
         return isset($this->discount);
     }
@@ -66,7 +66,7 @@ trait DiscountTrait
      *
      * @return int|null Default "discount" value or null if no default value is available
      */
-    public function getDefaultDiscount() : ?int
+    public function getDefaultDiscount(): ?int
     {
         return null;
     }

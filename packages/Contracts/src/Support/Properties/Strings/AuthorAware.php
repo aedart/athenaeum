@@ -31,19 +31,19 @@ interface AuthorAware
      *
      * @return string|null author or null if no author has been set
      */
-    public function getAuthor() : ?string;
+    public function getAuthor(): ?string;
 
     /**
      * Check if "author" has been set
      *
      * @return bool True if "author" has been set, false if not
      */
-    public function hasAuthor() : bool;
+    public function hasAuthor(): bool;
 
     /**
      * Get a default "author" value, if any is available
      *
      * @return string|null Default "author" value or null if no default value is available
      */
-    public function getDefaultAuthor() : ?string;
+    public function getDefaultAuthor(): ?string;
 }

@@ -38,7 +38,7 @@ interface YAware
      *
      * @return bool True if "y" has been set, false if not
      */
-    public function hasY() : bool;
+    public function hasY(): bool;
 
     /**
      * Get a default "y" value, if any is available

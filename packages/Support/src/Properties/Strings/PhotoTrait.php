@@ -43,9 +43,9 @@ trait PhotoTrait
      *
      * @return string|null photo or null if no photo has been set
      */
-    public function getPhoto() : ?string
+    public function getPhoto(): ?string
     {
-        if ( ! $this->hasPhoto()) {
+        if (!$this->hasPhoto()) {
             $this->setPhoto($this->getDefaultPhoto());
         }
         return $this->photo;
@@ -56,7 +56,7 @@ trait PhotoTrait
      *
      * @return bool True if "photo" has been set, false if not
      */
-    public function hasPhoto() : bool
+    public function hasPhoto(): bool
     {
         return isset($this->photo);
     }
@@ -66,7 +66,7 @@ trait PhotoTrait
      *
      * @return string|null Default "photo" value or null if no default value is available
      */
-    public function getDefaultPhoto() : ?string
+    public function getDefaultPhoto(): ?string
     {
         return null;
     }

@@ -31,19 +31,19 @@ interface AmountAware
      *
      * @return int|null amount or null if no amount has been set
      */
-    public function getAmount() : ?int;
+    public function getAmount(): ?int;
 
     /**
      * Check if "amount" has been set
      *
      * @return bool True if "amount" has been set, false if not
      */
-    public function hasAmount() : bool;
+    public function hasAmount(): bool;
 
     /**
      * Get a default "amount" value, if any is available
      *
      * @return int|null Default "amount" value or null if no default value is available
      */
-    public function getDefaultAmount() : ?int;
+    public function getDefaultAmount(): ?int;
 }

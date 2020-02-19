@@ -43,9 +43,9 @@ trait StreetTrait
      *
      * @return string|null street or null if no street has been set
      */
-    public function getStreet() : ?string
+    public function getStreet(): ?string
     {
-        if ( ! $this->hasStreet()) {
+        if (!$this->hasStreet()) {
             $this->setStreet($this->getDefaultStreet());
         }
         return $this->street;
@@ -56,7 +56,7 @@ trait StreetTrait
      *
      * @return bool True if "street" has been set, false if not
      */
-    public function hasStreet() : bool
+    public function hasStreet(): bool
     {
         return isset($this->street);
     }
@@ -66,7 +66,7 @@ trait StreetTrait
      *
      * @return string|null Default "street" value or null if no default value is available
      */
-    public function getDefaultStreet() : ?string
+    public function getDefaultStreet(): ?string
     {
         return null;
     }

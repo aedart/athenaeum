@@ -43,9 +43,9 @@ trait BirthdateTrait
      *
      * @return string|null birthdate or null if no birthdate has been set
      */
-    public function getBirthdate() : ?string
+    public function getBirthdate(): ?string
     {
-        if ( ! $this->hasBirthdate()) {
+        if (!$this->hasBirthdate()) {
             $this->setBirthdate($this->getDefaultBirthdate());
         }
         return $this->birthdate;
@@ -56,7 +56,7 @@ trait BirthdateTrait
      *
      * @return bool True if "birthdate" has been set, false if not
      */
-    public function hasBirthdate() : bool
+    public function hasBirthdate(): bool
     {
         return isset($this->birthdate);
     }
@@ -66,7 +66,7 @@ trait BirthdateTrait
      *
      * @return string|null Default "birthdate" value or null if no default value is available
      */
-    public function getDefaultBirthdate() : ?string
+    public function getDefaultBirthdate(): ?string
     {
         return null;
     }

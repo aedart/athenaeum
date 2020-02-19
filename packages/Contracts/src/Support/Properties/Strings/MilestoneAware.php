@@ -31,19 +31,19 @@ interface MilestoneAware
      *
      * @return string|null milestone or null if no milestone has been set
      */
-    public function getMilestone() : ?string;
+    public function getMilestone(): ?string;
 
     /**
      * Check if "milestone" has been set
      *
      * @return bool True if "milestone" has been set, false if not
      */
-    public function hasMilestone() : bool;
+    public function hasMilestone(): bool;
 
     /**
      * Get a default "milestone" value, if any is available
      *
      * @return string|null Default "milestone" value or null if no default value is available
      */
-    public function getDefaultMilestone() : ?string;
+    public function getDefaultMilestone(): ?string;
 }

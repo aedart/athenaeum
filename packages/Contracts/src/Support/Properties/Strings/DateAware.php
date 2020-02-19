@@ -31,19 +31,19 @@ interface DateAware
      *
      * @return string|null date or null if no date has been set
      */
-    public function getDate() : ?string;
+    public function getDate(): ?string;
 
     /**
      * Check if "date" has been set
      *
      * @return bool True if "date" has been set, false if not
      */
-    public function hasDate() : bool;
+    public function hasDate(): bool;
 
     /**
      * Get a default "date" value, if any is available
      *
      * @return string|null Default "date" value or null if no default value is available
      */
-    public function getDefaultDate() : ?string;
+    public function getDefaultDate(): ?string;
 }

@@ -31,19 +31,19 @@ interface PurchasedAtAware
      *
      * @return int|null purchased at or null if no purchased at has been set
      */
-    public function getPurchasedAt() : ?int;
+    public function getPurchasedAt(): ?int;
 
     /**
      * Check if "purchased at" has been set
      *
      * @return bool True if "purchased at" has been set, false if not
      */
-    public function hasPurchasedAt() : bool;
+    public function hasPurchasedAt(): bool;
 
     /**
      * Get a default "purchased at" value, if any is available
      *
      * @return int|null Default "purchased at" value or null if no default value is available
      */
-    public function getDefaultPurchasedAt() : ?int;
+    public function getDefaultPurchasedAt(): ?int;
 }

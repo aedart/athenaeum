@@ -43,9 +43,9 @@ trait OutputPathTrait
      *
      * @return string|null output path or null if no output path has been set
      */
-    public function getOutputPath() : ?string
+    public function getOutputPath(): ?string
     {
-        if ( ! $this->hasOutputPath()) {
+        if (!$this->hasOutputPath()) {
             $this->setOutputPath($this->getDefaultOutputPath());
         }
         return $this->outputPath;
@@ -56,7 +56,7 @@ trait OutputPathTrait
      *
      * @return bool True if "output path" has been set, false if not
      */
-    public function hasOutputPath() : bool
+    public function hasOutputPath(): bool
     {
         return isset($this->outputPath);
     }
@@ -66,7 +66,7 @@ trait OutputPathTrait
      *
      * @return string|null Default "output path" value or null if no default value is available
      */
-    public function getDefaultOutputPath() : ?string
+    public function getDefaultOutputPath(): ?string
     {
         return null;
     }

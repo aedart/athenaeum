@@ -31,19 +31,19 @@ interface ScriptAware
      *
      * @return string|null script or null if no script has been set
      */
-    public function getScript() : ?string;
+    public function getScript(): ?string;
 
     /**
      * Check if "script" has been set
      *
      * @return bool True if "script" has been set, false if not
      */
-    public function hasScript() : bool;
+    public function hasScript(): bool;
 
     /**
      * Get a default "script" value, if any is available
      *
      * @return string|null Default "script" value or null if no default value is available
      */
-    public function getDefaultScript() : ?string;
+    public function getDefaultScript(): ?string;
 }

@@ -17,5 +17,5 @@ interface SchedulesTasks
      *
      * @param \Illuminate\Console\Scheduling\Schedule $schedule
      */
-    public function schedule($schedule) : void ;
+    public function schedule($schedule): void;
 }

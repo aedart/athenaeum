@@ -15,7 +15,8 @@ use Aedart\Support\Helpers\Config\ConfigTrait;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients
  */
-class Manager implements HttpClientsManager,
+class Manager implements
+    HttpClientsManager,
     ConfigAware
 {
     use ConfigTrait;
@@ -36,7 +37,7 @@ class Manager implements HttpClientsManager,
         $profile = $profile ?? 'default';
 
         // Return client if already created
-        if(isset($this->clients[$profile])){
+        if (isset($this->clients[$profile])) {
             return $this->clients[$profile];
         }
 
@@ -62,12 +63,12 @@ class Manager implements HttpClientsManager,
      *
      * @throws ProfileNotFoundException
      */
-    protected function findOrFailConfiguration(string $profile) : array
+    protected function findOrFailConfiguration(string $profile): array
     {
         $config = $this->getConfig();
         $key = 'http-clients.profiles.' . $profile;
 
-        if( ! $config->has($key)){
+        if (!$config->has($key)) {
             throw new ProfileNotFound(sprintf('Http Client profile "%s" does not exist', $profile));
         }
 

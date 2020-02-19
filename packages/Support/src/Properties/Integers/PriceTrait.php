@@ -43,9 +43,9 @@ trait PriceTrait
      *
      * @return int|null price or null if no price has been set
      */
-    public function getPrice() : ?int
+    public function getPrice(): ?int
     {
-        if ( ! $this->hasPrice()) {
+        if (!$this->hasPrice()) {
             $this->setPrice($this->getDefaultPrice());
         }
         return $this->price;
@@ -56,7 +56,7 @@ trait PriceTrait
      *
      * @return bool True if "price" has been set, false if not
      */
-    public function hasPrice() : bool
+    public function hasPrice(): bool
     {
         return isset($this->price);
     }
@@ -66,7 +66,7 @@ trait PriceTrait
      *
      * @return int|null Default "price" value or null if no default value is available
      */
-    public function getDefaultPrice() : ?int
+    public function getDefaultPrice(): ?int
     {
         return null;
     }

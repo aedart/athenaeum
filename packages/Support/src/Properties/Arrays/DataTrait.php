@@ -43,9 +43,9 @@ trait DataTrait
      *
      * @return array|null data or null if no data has been set
      */
-    public function getData() : ?array
+    public function getData(): ?array
     {
-        if ( ! $this->hasData()) {
+        if (!$this->hasData()) {
             $this->setData($this->getDefaultData());
         }
         return $this->data;
@@ -56,7 +56,7 @@ trait DataTrait
      *
      * @return bool True if "data" has been set, false if not
      */
-    public function hasData() : bool
+    public function hasData(): bool
     {
         return isset($this->data);
     }
@@ -66,7 +66,7 @@ trait DataTrait
      *
      * @return array|null Default "data" value or null if no default value is available
      */
-    public function getDefaultData() : ?array
+    public function getDefaultData(): ?array
     {
         return null;
     }

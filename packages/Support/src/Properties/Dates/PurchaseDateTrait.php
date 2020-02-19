@@ -43,9 +43,9 @@ trait PurchaseDateTrait
      *
      * @return \DateTime|null purchase date or null if no purchase date has been set
      */
-    public function getPurchaseDate() : ?\DateTime
+    public function getPurchaseDate(): ?\DateTime
     {
-        if ( ! $this->hasPurchaseDate()) {
+        if (!$this->hasPurchaseDate()) {
             $this->setPurchaseDate($this->getDefaultPurchaseDate());
         }
         return $this->purchaseDate;
@@ -56,7 +56,7 @@ trait PurchaseDateTrait
      *
      * @return bool True if "purchase date" has been set, false if not
      */
-    public function hasPurchaseDate() : bool
+    public function hasPurchaseDate(): bool
     {
         return isset($this->purchaseDate);
     }
@@ -66,7 +66,7 @@ trait PurchaseDateTrait
      *
      * @return \DateTime|null Default "purchase date" value or null if no default value is available
      */
-    public function getDefaultPurchaseDate() : ?\DateTime
+    public function getDefaultPurchaseDate(): ?\DateTime
     {
         return null;
     }

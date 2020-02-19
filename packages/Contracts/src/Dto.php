@@ -74,7 +74,7 @@ interface Dto extends ArrayAccess,
      *
      * @return string[]
      */
-    public function populatableProperties() : array;
+    public function populatableProperties(): array;
 
     /**
      * Returns the container that is responsible for
@@ -83,7 +83,7 @@ interface Dto extends ArrayAccess,
      *
      * @return Container|null IoC service Container or null if none defined
      */
-    public function container() : ?Container;
+    public function container(): ?Container;
 
     /**
      * Returns a new instance of this Dto

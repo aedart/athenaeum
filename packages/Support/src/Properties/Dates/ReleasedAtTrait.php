@@ -43,9 +43,9 @@ trait ReleasedAtTrait
      *
      * @return \DateTime|null released at or null if no released at has been set
      */
-    public function getReleasedAt() : ?\DateTime
+    public function getReleasedAt(): ?\DateTime
     {
-        if ( ! $this->hasReleasedAt()) {
+        if (!$this->hasReleasedAt()) {
             $this->setReleasedAt($this->getDefaultReleasedAt());
         }
         return $this->releasedAt;
@@ -56,7 +56,7 @@ trait ReleasedAtTrait
      *
      * @return bool True if "released at" has been set, false if not
      */
-    public function hasReleasedAt() : bool
+    public function hasReleasedAt(): bool
     {
         return isset($this->releasedAt);
     }
@@ -66,7 +66,7 @@ trait ReleasedAtTrait
      *
      * @return \DateTime|null Default "released at" value or null if no default value is available
      */
-    public function getDefaultReleasedAt() : ?\DateTime
+    public function getDefaultReleasedAt(): ?\DateTime
     {
         return null;
     }

@@ -43,9 +43,9 @@ trait DatabaseTrait
      *
      * @return string|null database or null if no database has been set
      */
-    public function getDatabase() : ?string
+    public function getDatabase(): ?string
     {
-        if ( ! $this->hasDatabase()) {
+        if (!$this->hasDatabase()) {
             $this->setDatabase($this->getDefaultDatabase());
         }
         return $this->database;
@@ -56,7 +56,7 @@ trait DatabaseTrait
      *
      * @return bool True if "database" has been set, false if not
      */
-    public function hasDatabase() : bool
+    public function hasDatabase(): bool
     {
         return isset($this->database);
     }
@@ -66,7 +66,7 @@ trait DatabaseTrait
      *
      * @return string|null Default "database" value or null if no default value is available
      */
-    public function getDefaultDatabase() : ?string
+    public function getDefaultDatabase(): ?string
     {
         return null;
     }

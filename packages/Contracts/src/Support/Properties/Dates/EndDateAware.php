@@ -31,19 +31,19 @@ interface EndDateAware
      *
      * @return \DateTime|null end date or null if no end date has been set
      */
-    public function getEndDate() : ?\DateTime;
+    public function getEndDate(): ?\DateTime;
 
     /**
      * Check if "end date" has been set
      *
      * @return bool True if "end date" has been set, false if not
      */
-    public function hasEndDate() : bool;
+    public function hasEndDate(): bool;
 
     /**
      * Get a default "end date" value, if any is available
      *
      * @return \DateTime|null Default "end date" value or null if no default value is available
      */
-    public function getDefaultEndDate() : ?\DateTime;
+    public function getDefaultEndDate(): ?\DateTime;
 }

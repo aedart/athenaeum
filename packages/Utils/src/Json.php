@@ -29,7 +29,7 @@ class Json
      *
      * @throws JsonException
      */
-    public static function encode($value, int $options = 0, int $depth = 512) : string
+    public static function encode($value, int $options = 0, int $depth = 512): string
     {
         return json_encode($value, $options |= JSON_THROW_ON_ERROR, $depth);
     }

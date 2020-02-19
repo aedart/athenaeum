@@ -43,9 +43,9 @@ trait PasswordTrait
      *
      * @return string|null password or null if no password has been set
      */
-    public function getPassword() : ?string
+    public function getPassword(): ?string
     {
-        if ( ! $this->hasPassword()) {
+        if (!$this->hasPassword()) {
             $this->setPassword($this->getDefaultPassword());
         }
         return $this->password;
@@ -56,7 +56,7 @@ trait PasswordTrait
      *
      * @return bool True if "password" has been set, false if not
      */
-    public function hasPassword() : bool
+    public function hasPassword(): bool
     {
         return isset($this->password);
     }
@@ -66,7 +66,7 @@ trait PasswordTrait
      *
      * @return string|null Default "password" value or null if no default value is available
      */
-    public function getDefaultPassword() : ?string
+    public function getDefaultPassword(): ?string
     {
         return null;
     }

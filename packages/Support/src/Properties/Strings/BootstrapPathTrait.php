@@ -43,9 +43,9 @@ trait BootstrapPathTrait
      *
      * @return string|null bootstrap path or null if no bootstrap path has been set
      */
-    public function getBootstrapPath() : ?string
+    public function getBootstrapPath(): ?string
     {
-        if ( ! $this->hasBootstrapPath()) {
+        if (!$this->hasBootstrapPath()) {
             $this->setBootstrapPath($this->getDefaultBootstrapPath());
         }
         return $this->bootstrapPath;
@@ -56,7 +56,7 @@ trait BootstrapPathTrait
      *
      * @return bool True if "bootstrap path" has been set, false if not
      */
-    public function hasBootstrapPath() : bool
+    public function hasBootstrapPath(): bool
     {
         return isset($this->bootstrapPath);
     }
@@ -66,7 +66,7 @@ trait BootstrapPathTrait
      *
      * @return string|null Default "bootstrap path" value or null if no default value is available
      */
-    public function getDefaultBootstrapPath() : ?string
+    public function getDefaultBootstrapPath(): ?string
     {
         return null;
     }

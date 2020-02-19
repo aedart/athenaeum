@@ -24,7 +24,7 @@ class PhpArray extends ParserBase
     /**
      * @inheritdoc
      */
-    public function loadAndParse() : array
+    public function loadAndParse(): array
     {
         if (!$this->hasFilePath()) {
             throw new UnableToParseFile('No file path has been specified');
@@ -36,9 +36,9 @@ class PhpArray extends ParserBase
     /**
      * @inheritdoc
      */
-    public function parse(string $content) : array
+    public function parse(string $content): array
     {
-        try{
+        try {
             $fileContent = require $content;
 
             if (!is_array($fileContent)) {

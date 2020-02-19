@@ -31,19 +31,19 @@ interface QuantityAware
      *
      * @return int|null quantity or null if no quantity has been set
      */
-    public function getQuantity() : ?int;
+    public function getQuantity(): ?int;
 
     /**
      * Check if "quantity" has been set
      *
      * @return bool True if "quantity" has been set, false if not
      */
-    public function hasQuantity() : bool;
+    public function hasQuantity(): bool;
 
     /**
      * Get a default "quantity" value, if any is available
      *
      * @return int|null Default "quantity" value or null if no default value is available
      */
-    public function getDefaultQuantity() : ?int;
+    public function getDefaultQuantity(): ?int;
 }

@@ -31,19 +31,19 @@ interface PhotoAware
      *
      * @return string|null photo or null if no photo has been set
      */
-    public function getPhoto() : ?string;
+    public function getPhoto(): ?string;
 
     /**
      * Check if "photo" has been set
      *
      * @return bool True if "photo" has been set, false if not
      */
-    public function hasPhoto() : bool;
+    public function hasPhoto(): bool;
 
     /**
      * Get a default "photo" value, if any is available
      *
      * @return string|null Default "photo" value or null if no default value is available
      */
-    public function getDefaultPhoto() : ?string;
+    public function getDefaultPhoto(): ?string;
 }

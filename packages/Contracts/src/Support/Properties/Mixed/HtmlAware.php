@@ -38,7 +38,7 @@ interface HtmlAware
      *
      * @return bool True if "html" has been set, false if not
      */
-    public function hasHtml() : bool;
+    public function hasHtml(): bool;
 
     /**
      * Get a default "html" value, if any is available

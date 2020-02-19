@@ -43,9 +43,9 @@ trait TimezoneTrait
      *
      * @return string|null timezone or null if no timezone has been set
      */
-    public function getTimezone() : ?string
+    public function getTimezone(): ?string
     {
-        if ( ! $this->hasTimezone()) {
+        if (!$this->hasTimezone()) {
             $this->setTimezone($this->getDefaultTimezone());
         }
         return $this->timezone;
@@ -56,7 +56,7 @@ trait TimezoneTrait
      *
      * @return bool True if "timezone" has been set, false if not
      */
-    public function hasTimezone() : bool
+    public function hasTimezone(): bool
     {
         return isset($this->timezone);
     }
@@ -66,7 +66,7 @@ trait TimezoneTrait
      *
      * @return string|null Default "timezone" value or null if no default value is available
      */
-    public function getDefaultTimezone() : ?string
+    public function getDefaultTimezone(): ?string
     {
         return null;
     }

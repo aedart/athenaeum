@@ -43,9 +43,9 @@ trait ExpiresAtTrait
      *
      * @return string|null expires at or null if no expires at has been set
      */
-    public function getExpiresAt() : ?string
+    public function getExpiresAt(): ?string
     {
-        if ( ! $this->hasExpiresAt()) {
+        if (!$this->hasExpiresAt()) {
             $this->setExpiresAt($this->getDefaultExpiresAt());
         }
         return $this->expiresAt;
@@ -56,7 +56,7 @@ trait ExpiresAtTrait
      *
      * @return bool True if "expires at" has been set, false if not
      */
-    public function hasExpiresAt() : bool
+    public function hasExpiresAt(): bool
     {
         return isset($this->expiresAt);
     }
@@ -66,7 +66,7 @@ trait ExpiresAtTrait
      *
      * @return string|null Default "expires at" value or null if no default value is available
      */
-    public function getDefaultExpiresAt() : ?string
+    public function getDefaultExpiresAt(): ?string
     {
         return null;
     }

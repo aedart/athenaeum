@@ -43,9 +43,9 @@ trait IataTrait
      *
      * @return string|null iata or null if no iata has been set
      */
-    public function getIata() : ?string
+    public function getIata(): ?string
     {
-        if ( ! $this->hasIata()) {
+        if (!$this->hasIata()) {
             $this->setIata($this->getDefaultIata());
         }
         return $this->iata;
@@ -56,7 +56,7 @@ trait IataTrait
      *
      * @return bool True if "iata" has been set, false if not
      */
-    public function hasIata() : bool
+    public function hasIata(): bool
     {
         return isset($this->iata);
     }
@@ -66,7 +66,7 @@ trait IataTrait
      *
      * @return string|null Default "iata" value or null if no default value is available
      */
-    public function getDefaultIata() : ?string
+    public function getDefaultIata(): ?string
     {
         return null;
     }

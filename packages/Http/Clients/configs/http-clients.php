@@ -1,4 +1,5 @@
 <?php
+
 return [
 
     /*
@@ -27,15 +28,15 @@ return [
     'profiles' => [
 
         'default' => [
-            'driver'    => \Aedart\Http\Clients\Drivers\DefaultHttpClient::class,
-            'options'   => [
+            'driver' => \Aedart\Http\Clients\Drivers\DefaultHttpClient::class,
+            'options' => [
 
             ]
         ],
 
         'json' => [
-            'driver'    => \Aedart\Http\Clients\Drivers\JsonHttpClient::class,
-            'options'   => [
+            'driver' => \Aedart\Http\Clients\Drivers\JsonHttpClient::class,
+            'options' => [
 
             ]
         ]

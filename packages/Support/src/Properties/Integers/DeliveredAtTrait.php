@@ -43,9 +43,9 @@ trait DeliveredAtTrait
      *
      * @return int|null delivered at or null if no delivered at has been set
      */
-    public function getDeliveredAt() : ?int
+    public function getDeliveredAt(): ?int
     {
-        if ( ! $this->hasDeliveredAt()) {
+        if (!$this->hasDeliveredAt()) {
             $this->setDeliveredAt($this->getDefaultDeliveredAt());
         }
         return $this->deliveredAt;
@@ -56,7 +56,7 @@ trait DeliveredAtTrait
      *
      * @return bool True if "delivered at" has been set, false if not
      */
-    public function hasDeliveredAt() : bool
+    public function hasDeliveredAt(): bool
     {
         return isset($this->deliveredAt);
     }
@@ -66,7 +66,7 @@ trait DeliveredAtTrait
      *
      * @return int|null Default "delivered at" value or null if no default value is available
      */
-    public function getDefaultDeliveredAt() : ?int
+    public function getDefaultDeliveredAt(): ?int
     {
         return null;
     }

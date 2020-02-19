@@ -81,11 +81,11 @@ EOD;
      *
      * @return int
      */
-    public function handle() : int
+    public function handle(): int
     {
         $assets = $this->assertsToPublish();
 
-        foreach ($assets as $from => $to){
+        foreach ($assets as $from => $to) {
             $this->publish($from, $to);
         }
 
@@ -106,14 +106,14 @@ EOD;
      *
      * @throws RuntimeException
      */
-    protected function publish(string $from, string $to) : void
+    protected function publish(string $from, string $to): void
     {
         $fs = $this->getFile();
 
-        if($fs->isFile($from)){
+        if ($fs->isFile($from)) {
             $this->copyFile($from, $to);
             return;
-        } elseif ($fs->isDirectory($from)){
+        } elseif ($fs->isDirectory($from)) {
             $this->copyDirectory($from, $to);
             return;
         }
@@ -129,12 +129,12 @@ EOD;
      *
      * @throws RuntimeException
      */
-    protected function copyFile(string $from, string $to) : void
+    protected function copyFile(string $from, string $to): void
     {
         $fs = $this->getFile();
 
         // Abort if file already exists and force flag if not set
-        if($fs->exists($to) && !$this->option('force')){
+        if ($fs->exists($to) && !$this->option('force')) {
             $this->markSkipped($to);
             return;
         }
@@ -144,7 +144,7 @@ EOD;
 
         // Finally, copy the file into target destination
         $wasCopied = $fs->copy($from, $to);
-        if( ! $wasCopied){
+        if (!$wasCopied) {
             throw new RuntimeException(sprintf('Unable to copy "%s", please check permissions for "%s"', $from, $parentDir));
         }
 
@@ -159,7 +159,7 @@ EOD;
      *
      * @throws RuntimeException
      */
-    public function copyDirectory(string $from, string $to) : void
+    public function copyDirectory(string $from, string $to): void
     {
         $fs = $this->getFile();
 
@@ -170,7 +170,7 @@ EOD;
         // We could by deleting everything from the target location,
         // but that might be dangerous!
         $wasCopied = $fs->copyDirectory($from, $to);
-        if( ! $wasCopied){
+        if (!$wasCopied) {
             throw new RuntimeException(sprintf('Unable to copy "%s", please check permissions for "%s"', $from, $parentDir));
         }
 
@@ -185,12 +185,12 @@ EOD;
      *
      * @return string Parent directory path
      */
-    protected function fetchOrCreateParentDirectory(string $target) : string
+    protected function fetchOrCreateParentDirectory(string $target): string
     {
         $fs = $this->getFile();
 
         $parentDir = dirname($target);
-        if( ! $fs->isDirectory($parentDir)){
+        if (!$fs->isDirectory($parentDir)) {
             $fs->makeDirectory($parentDir, 0755, true);
         }
 
@@ -202,7 +202,7 @@ EOD;
      *
      * @return array list contains "from" and "to" paths
      */
-    protected function assertsToPublish() : array
+    protected function assertsToPublish(): array
     {
         return ServiceProvider::pathsToPublish();
     }
@@ -212,7 +212,7 @@ EOD;
      *
      * @param string $asset Target path where asset is to be located
      */
-    protected function markSkipped(string $asset) : void
+    protected function markSkipped(string $asset): void
     {
         $asset = $this->shortenPath($asset);
 
@@ -224,7 +224,7 @@ EOD;
      *
      * @param string $asset Target path where asset is to be located
      */
-    protected function markPublished(string $asset) : void
+    protected function markPublished(string $asset): void
     {
         $this->amountPublished++;
 
@@ -240,7 +240,7 @@ EOD;
      *
      * @return string
      */
-    protected function shortenPath(string $asset) : string
+    protected function shortenPath(string $asset): string
     {
         return str_replace(getcwd(), '', $asset);
     }

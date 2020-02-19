@@ -31,19 +31,19 @@ interface StateAware
      *
      * @return string|null state or null if no state has been set
      */
-    public function getState() : ?string;
+    public function getState(): ?string;
 
     /**
      * Check if "state" has been set
      *
      * @return bool True if "state" has been set, false if not
      */
-    public function hasState() : bool;
+    public function hasState(): bool;
 
     /**
      * Get a default "state" value, if any is available
      *
      * @return string|null Default "state" value or null if no default value is available
      */
-    public function getDefaultState() : ?string;
+    public function getDefaultState(): ?string;
 }

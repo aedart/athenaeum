@@ -43,9 +43,9 @@ trait MilestoneTrait
      *
      * @return string|null milestone or null if no milestone has been set
      */
-    public function getMilestone() : ?string
+    public function getMilestone(): ?string
     {
-        if ( ! $this->hasMilestone()) {
+        if (!$this->hasMilestone()) {
             $this->setMilestone($this->getDefaultMilestone());
         }
         return $this->milestone;
@@ -56,7 +56,7 @@ trait MilestoneTrait
      *
      * @return bool True if "milestone" has been set, false if not
      */
-    public function hasMilestone() : bool
+    public function hasMilestone(): bool
     {
         return isset($this->milestone);
     }
@@ -66,7 +66,7 @@ trait MilestoneTrait
      *
      * @return string|null Default "milestone" value or null if no default value is available
      */
-    public function getDefaultMilestone() : ?string
+    public function getDefaultMilestone(): ?string
     {
         return null;
     }

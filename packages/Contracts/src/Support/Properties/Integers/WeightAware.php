@@ -31,19 +31,19 @@ interface WeightAware
      *
      * @return int|null weight or null if no weight has been set
      */
-    public function getWeight() : ?int;
+    public function getWeight(): ?int;
 
     /**
      * Check if "weight" has been set
      *
      * @return bool True if "weight" has been set, false if not
      */
-    public function hasWeight() : bool;
+    public function hasWeight(): bool;
 
     /**
      * Get a default "weight" value, if any is available
      *
      * @return int|null Default "weight" value or null if no default value is available
      */
-    public function getDefaultWeight() : ?int;
+    public function getDefaultWeight(): ?int;
 }

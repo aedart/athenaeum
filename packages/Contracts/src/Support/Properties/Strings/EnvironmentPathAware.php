@@ -31,19 +31,19 @@ interface EnvironmentPathAware
      *
      * @return string|null environment path or null if no environment path has been set
      */
-    public function getEnvironmentPath() : ?string;
+    public function getEnvironmentPath(): ?string;
 
     /**
      * Check if "environment path" has been set
      *
      * @return bool True if "environment path" has been set, false if not
      */
-    public function hasEnvironmentPath() : bool;
+    public function hasEnvironmentPath(): bool;
 
     /**
      * Get a default "environment path" value, if any is available
      *
      * @return string|null Default "environment path" value or null if no default value is available
      */
-    public function getDefaultEnvironmentPath() : ?string;
+    public function getDefaultEnvironmentPath(): ?string;
 }

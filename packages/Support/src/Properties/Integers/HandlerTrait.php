@@ -43,9 +43,9 @@ trait HandlerTrait
      *
      * @return int|null handler or null if no handler has been set
      */
-    public function getHandler() : ?int
+    public function getHandler(): ?int
     {
-        if ( ! $this->hasHandler()) {
+        if (!$this->hasHandler()) {
             $this->setHandler($this->getDefaultHandler());
         }
         return $this->handler;
@@ -56,7 +56,7 @@ trait HandlerTrait
      *
      * @return bool True if "handler" has been set, false if not
      */
-    public function hasHandler() : bool
+    public function hasHandler(): bool
     {
         return isset($this->handler);
     }
@@ -66,7 +66,7 @@ trait HandlerTrait
      *
      * @return int|null Default "handler" value or null if no default value is available
      */
-    public function getDefaultHandler() : ?int
+    public function getDefaultHandler(): ?int
     {
         return null;
     }

@@ -31,19 +31,19 @@ interface DeletedAtAware
      *
      * @return int|null deleted at or null if no deleted at has been set
      */
-    public function getDeletedAt() : ?int;
+    public function getDeletedAt(): ?int;
 
     /**
      * Check if "deleted at" has been set
      *
      * @return bool True if "deleted at" has been set, false if not
      */
-    public function hasDeletedAt() : bool;
+    public function hasDeletedAt(): bool;
 
     /**
      * Get a default "deleted at" value, if any is available
      *
      * @return int|null Default "deleted at" value or null if no default value is available
      */
-    public function getDefaultDeletedAt() : ?int;
+    public function getDefaultDeletedAt(): ?int;
 }

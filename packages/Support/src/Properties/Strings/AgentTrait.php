@@ -43,9 +43,9 @@ trait AgentTrait
      *
      * @return string|null agent or null if no agent has been set
      */
-    public function getAgent() : ?string
+    public function getAgent(): ?string
     {
-        if ( ! $this->hasAgent()) {
+        if (!$this->hasAgent()) {
             $this->setAgent($this->getDefaultAgent());
         }
         return $this->agent;
@@ -56,7 +56,7 @@ trait AgentTrait
      *
      * @return bool True if "agent" has been set, false if not
      */
-    public function hasAgent() : bool
+    public function hasAgent(): bool
     {
         return isset($this->agent);
     }
@@ -66,7 +66,7 @@ trait AgentTrait
      *
      * @return string|null Default "agent" value or null if no default value is available
      */
-    public function getDefaultAgent() : ?string
+    public function getDefaultAgent(): ?string
     {
         return null;
     }

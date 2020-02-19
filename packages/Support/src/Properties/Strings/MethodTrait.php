@@ -43,9 +43,9 @@ trait MethodTrait
      *
      * @return string|null method or null if no method has been set
      */
-    public function getMethod() : ?string
+    public function getMethod(): ?string
     {
-        if ( ! $this->hasMethod()) {
+        if (!$this->hasMethod()) {
             $this->setMethod($this->getDefaultMethod());
         }
         return $this->method;
@@ -56,7 +56,7 @@ trait MethodTrait
      *
      * @return bool True if "method" has been set, false if not
      */
-    public function hasMethod() : bool
+    public function hasMethod(): bool
     {
         return isset($this->method);
     }
@@ -66,7 +66,7 @@ trait MethodTrait
      *
      * @return string|null Default "method" value or null if no default value is available
      */
-    public function getDefaultMethod() : ?string
+    public function getDefaultMethod(): ?string
     {
         return null;
     }

@@ -31,19 +31,19 @@ interface EditionAware
      *
      * @return string|null edition or null if no edition has been set
      */
-    public function getEdition() : ?string;
+    public function getEdition(): ?string;
 
     /**
      * Check if "edition" has been set
      *
      * @return bool True if "edition" has been set, false if not
      */
-    public function hasEdition() : bool;
+    public function hasEdition(): bool;
 
     /**
      * Get a default "edition" value, if any is available
      *
      * @return string|null Default "edition" value or null if no default value is available
      */
-    public function getDefaultEdition() : ?string;
+    public function getDefaultEdition(): ?string;
 }

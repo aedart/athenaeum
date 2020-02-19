@@ -43,9 +43,9 @@ trait CommentTrait
      *
      * @return string|null comment or null if no comment has been set
      */
-    public function getComment() : ?string
+    public function getComment(): ?string
     {
-        if ( ! $this->hasComment()) {
+        if (!$this->hasComment()) {
             $this->setComment($this->getDefaultComment());
         }
         return $this->comment;
@@ -56,7 +56,7 @@ trait CommentTrait
      *
      * @return bool True if "comment" has been set, false if not
      */
-    public function hasComment() : bool
+    public function hasComment(): bool
     {
         return isset($this->comment);
     }
@@ -66,7 +66,7 @@ trait CommentTrait
      *
      * @return string|null Default "comment" value or null if no default value is available
      */
-    public function getDefaultComment() : ?string
+    public function getDefaultComment(): ?string
     {
         return null;
     }

@@ -43,9 +43,9 @@ trait EnvironmentPathTrait
      *
      * @return string|null environment path or null if no environment path has been set
      */
-    public function getEnvironmentPath() : ?string
+    public function getEnvironmentPath(): ?string
     {
-        if ( ! $this->hasEnvironmentPath()) {
+        if (!$this->hasEnvironmentPath()) {
             $this->setEnvironmentPath($this->getDefaultEnvironmentPath());
         }
         return $this->environmentPath;
@@ -56,7 +56,7 @@ trait EnvironmentPathTrait
      *
      * @return bool True if "environment path" has been set, false if not
      */
-    public function hasEnvironmentPath() : bool
+    public function hasEnvironmentPath(): bool
     {
         return isset($this->environmentPath);
     }
@@ -66,7 +66,7 @@ trait EnvironmentPathTrait
      *
      * @return string|null Default "environment path" value or null if no default value is available
      */
-    public function getDefaultEnvironmentPath() : ?string
+    public function getDefaultEnvironmentPath(): ?string
     {
         return null;
     }

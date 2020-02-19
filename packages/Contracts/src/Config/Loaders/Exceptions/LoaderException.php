@@ -16,5 +16,4 @@ use Throwable;
  */
 interface LoaderException extends Throwable
 {
-
 }

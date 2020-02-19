@@ -31,19 +31,19 @@ interface LanguageAware
      *
      * @return string|null language or null if no language has been set
      */
-    public function getLanguage() : ?string;
+    public function getLanguage(): ?string;
 
     /**
      * Check if "language" has been set
      *
      * @return bool True if "language" has been set, false if not
      */
-    public function hasLanguage() : bool;
+    public function hasLanguage(): bool;
 
     /**
      * Get a default "language" value, if any is available
      *
      * @return string|null Default "language" value or null if no default value is available
      */
-    public function getDefaultLanguage() : ?string;
+    public function getDefaultLanguage(): ?string;
 }

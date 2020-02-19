@@ -43,9 +43,9 @@ trait AmountTrait
      *
      * @return float|null amount or null if no amount has been set
      */
-    public function getAmount() : ?float
+    public function getAmount(): ?float
     {
-        if ( ! $this->hasAmount()) {
+        if (!$this->hasAmount()) {
             $this->setAmount($this->getDefaultAmount());
         }
         return $this->amount;
@@ -56,7 +56,7 @@ trait AmountTrait
      *
      * @return bool True if "amount" has been set, false if not
      */
-    public function hasAmount() : bool
+    public function hasAmount(): bool
     {
         return isset($this->amount);
     }
@@ -66,7 +66,7 @@ trait AmountTrait
      *
      * @return float|null Default "amount" value or null if no default value is available
      */
-    public function getDefaultAmount() : ?float
+    public function getDefaultAmount(): ?float
     {
         return null;
     }

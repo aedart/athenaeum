@@ -12,5 +12,4 @@ use Throwable;
  */
 interface ProfileNotFoundException extends Throwable
 {
-
 }

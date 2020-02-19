@@ -48,7 +48,7 @@ trait ApplicationInitiator
      */
     public function startApplication()
     {
-        if($this->hasApplicationBeenStarted()){
+        if ($this->hasApplicationBeenStarted()) {
             return $this;
         }
 
@@ -56,7 +56,7 @@ trait ApplicationInitiator
 
         $this->app = $this->createApplication();
 
-        $this->invokeAfterCreatedCallbacks();;
+        $this->invokeAfterCreatedCallbacks();
 
         return $this;
     }
@@ -74,13 +74,13 @@ trait ApplicationInitiator
      *
      * @return bool
      */
-    public function stopApplication() : bool
+    public function stopApplication(): bool
     {
-        if( ! $this->hasApplicationBeenStarted()){
+        if (!$this->hasApplicationBeenStarted()) {
             return false;
         }
 
-        $this->invokeBeforeDestroyedCallbacks();;
+        $this->invokeBeforeDestroyedCallbacks();
 
         $this->app->destroy();
         $this->app = null;
@@ -95,7 +95,7 @@ trait ApplicationInitiator
      *
      * @return Application|null
      */
-    public function getApplication() : ?Application
+    public function getApplication(): ?Application
     {
         return $this->app;
     }
@@ -105,7 +105,7 @@ trait ApplicationInitiator
      *
      * @return bool
      */
-    public function hasApplicationBeenStarted() : bool
+    public function hasApplicationBeenStarted(): bool
     {
         return isset($this->app);
     }
@@ -134,7 +134,7 @@ trait ApplicationInitiator
         $app = new CoreApplication($paths, 'x.x.x-testing');
 
         // Detect "testing" environment
-        $app->detectEnvironment(fn() => $this->detectEnvironment());
+        $app->detectEnvironment(fn () => $this->detectEnvironment());
 
         // Final setup and return the instance
         return $app
@@ -146,18 +146,18 @@ trait ApplicationInitiator
      *
      * @return array
      */
-    protected function applicationPaths() : array
+    protected function applicationPaths(): array
     {
         $root = getcwd() . DIRECTORY_SEPARATOR . 'testing';
 
         return [
-            'basePath'          => $root,
-            'bootstrapPath'     => $root . DIRECTORY_SEPARATOR . 'bootstrap',
-            'configPath'        => $root . DIRECTORY_SEPARATOR .  'config',
-            'databasePath'      => $root . DIRECTORY_SEPARATOR .  'database',
-            'environmentPath'   => $root,
-            'resourcePath'      => $root . DIRECTORY_SEPARATOR .  'resources',
-            'storagePath'       => $root . DIRECTORY_SEPARATOR .  'storage'
+            'basePath' => $root,
+            'bootstrapPath' => $root . DIRECTORY_SEPARATOR . 'bootstrap',
+            'configPath' => $root . DIRECTORY_SEPARATOR . 'config',
+            'databasePath' => $root . DIRECTORY_SEPARATOR . 'database',
+            'environmentPath' => $root,
+            'resourcePath' => $root . DIRECTORY_SEPARATOR . 'resources',
+            'storagePath' => $root . DIRECTORY_SEPARATOR . 'storage'
         ];
     }
 
@@ -166,7 +166,7 @@ trait ApplicationInitiator
      *
      * @return string
      */
-    protected function detectEnvironment() : string
+    protected function detectEnvironment(): string
     {
         return 'testing';
     }

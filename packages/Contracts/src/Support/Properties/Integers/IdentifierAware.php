@@ -31,19 +31,19 @@ interface IdentifierAware
      *
      * @return int|null identifier or null if no identifier has been set
      */
-    public function getIdentifier() : ?int;
+    public function getIdentifier(): ?int;
 
     /**
      * Check if "identifier" has been set
      *
      * @return bool True if "identifier" has been set, false if not
      */
-    public function hasIdentifier() : bool;
+    public function hasIdentifier(): bool;
 
     /**
      * Get a default "identifier" value, if any is available
      *
      * @return int|null Default "identifier" value or null if no default value is available
      */
-    public function getDefaultIdentifier() : ?int;
+    public function getDefaultIdentifier(): ?int;
 }

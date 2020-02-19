@@ -43,9 +43,9 @@ trait DateTrait
      *
      * @return int|null date or null if no date has been set
      */
-    public function getDate() : ?int
+    public function getDate(): ?int
     {
-        if ( ! $this->hasDate()) {
+        if (!$this->hasDate()) {
             $this->setDate($this->getDefaultDate());
         }
         return $this->date;
@@ -56,7 +56,7 @@ trait DateTrait
      *
      * @return bool True if "date" has been set, false if not
      */
-    public function hasDate() : bool
+    public function hasDate(): bool
     {
         return isset($this->date);
     }
@@ -66,7 +66,7 @@ trait DateTrait
      *
      * @return int|null Default "date" value or null if no default value is available
      */
-    public function getDefaultDate() : ?int
+    public function getDefaultDate(): ?int
     {
         return null;
     }

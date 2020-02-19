@@ -43,9 +43,9 @@ trait BuildingNumberTrait
      *
      * @return string|null building number or null if no building number has been set
      */
-    public function getBuildingNumber() : ?string
+    public function getBuildingNumber(): ?string
     {
-        if ( ! $this->hasBuildingNumber()) {
+        if (!$this->hasBuildingNumber()) {
             $this->setBuildingNumber($this->getDefaultBuildingNumber());
         }
         return $this->buildingNumber;
@@ -56,7 +56,7 @@ trait BuildingNumberTrait
      *
      * @return bool True if "building number" has been set, false if not
      */
-    public function hasBuildingNumber() : bool
+    public function hasBuildingNumber(): bool
     {
         return isset($this->buildingNumber);
     }
@@ -66,7 +66,7 @@ trait BuildingNumberTrait
      *
      * @return string|null Default "building number" value or null if no default value is available
      */
-    public function getDefaultBuildingNumber() : ?string
+    public function getDefaultBuildingNumber(): ?string
     {
         return null;
     }

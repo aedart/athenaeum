@@ -31,19 +31,19 @@ interface DirectoryAware
      *
      * @return string|null directory or null if no directory has been set
      */
-    public function getDirectory() : ?string;
+    public function getDirectory(): ?string;
 
     /**
      * Check if "directory" has been set
      *
      * @return bool True if "directory" has been set, false if not
      */
-    public function hasDirectory() : bool;
+    public function hasDirectory(): bool;
 
     /**
      * Get a default "directory" value, if any is available
      *
      * @return string|null Default "directory" value or null if no default value is available
      */
-    public function getDefaultDirectory() : ?string;
+    public function getDefaultDirectory(): ?string;
 }

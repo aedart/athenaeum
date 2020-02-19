@@ -43,9 +43,9 @@ trait LengthTrait
      *
      * @return int|null length or null if no length has been set
      */
-    public function getLength() : ?int
+    public function getLength(): ?int
     {
-        if ( ! $this->hasLength()) {
+        if (!$this->hasLength()) {
             $this->setLength($this->getDefaultLength());
         }
         return $this->length;
@@ -56,7 +56,7 @@ trait LengthTrait
      *
      * @return bool True if "length" has been set, false if not
      */
-    public function hasLength() : bool
+    public function hasLength(): bool
     {
         return isset($this->length);
     }
@@ -66,7 +66,7 @@ trait LengthTrait
      *
      * @return int|null Default "length" value or null if no default value is available
      */
-    public function getDefaultLength() : ?int
+    public function getDefaultLength(): ?int
     {
         return null;
     }

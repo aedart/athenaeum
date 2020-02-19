@@ -43,9 +43,9 @@ trait AnniversaryTrait
      *
      * @return \DateTime|null anniversary or null if no anniversary has been set
      */
-    public function getAnniversary() : ?\DateTime
+    public function getAnniversary(): ?\DateTime
     {
-        if ( ! $this->hasAnniversary()) {
+        if (!$this->hasAnniversary()) {
             $this->setAnniversary($this->getDefaultAnniversary());
         }
         return $this->anniversary;
@@ -56,7 +56,7 @@ trait AnniversaryTrait
      *
      * @return bool True if "anniversary" has been set, false if not
      */
-    public function hasAnniversary() : bool
+    public function hasAnniversary(): bool
     {
         return isset($this->anniversary);
     }
@@ -66,7 +66,7 @@ trait AnniversaryTrait
      *
      * @return \DateTime|null Default "anniversary" value or null if no default value is available
      */
-    public function getDefaultAnniversary() : ?\DateTime
+    public function getDefaultAnniversary(): ?\DateTime
     {
         return null;
     }

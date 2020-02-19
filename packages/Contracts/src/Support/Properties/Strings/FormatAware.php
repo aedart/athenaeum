@@ -31,19 +31,19 @@ interface FormatAware
      *
      * @return string|null format or null if no format has been set
      */
-    public function getFormat() : ?string;
+    public function getFormat(): ?string;
 
     /**
      * Check if "format" has been set
      *
      * @return bool True if "format" has been set, false if not
      */
-    public function hasFormat() : bool;
+    public function hasFormat(): bool;
 
     /**
      * Get a default "format" value, if any is available
      *
      * @return string|null Default "format" value or null if no default value is available
      */
-    public function getDefaultFormat() : ?string;
+    public function getDefaultFormat(): ?string;
 }

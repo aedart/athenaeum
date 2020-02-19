@@ -31,19 +31,19 @@ interface EndAware
      *
      * @return string|null end or null if no end has been set
      */
-    public function getEnd() : ?string;
+    public function getEnd(): ?string;
 
     /**
      * Check if "end" has been set
      *
      * @return bool True if "end" has been set, false if not
      */
-    public function hasEnd() : bool;
+    public function hasEnd(): bool;
 
     /**
      * Get a default "end" value, if any is available
      *
      * @return string|null Default "end" value or null if no default value is available
      */
-    public function getDefaultEnd() : ?string;
+    public function getDefaultEnd(): ?string;
 }

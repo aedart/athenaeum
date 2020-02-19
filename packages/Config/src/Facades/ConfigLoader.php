@@ -2,7 +2,6 @@
 
 namespace Aedart\Config\Facades;
 
-
 use Aedart\Contracts\Config\Loader;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Facades\Facade;

@@ -43,9 +43,9 @@ trait IsbnTrait
      *
      * @return string|null isbn or null if no isbn has been set
      */
-    public function getIsbn() : ?string
+    public function getIsbn(): ?string
     {
-        if ( ! $this->hasIsbn()) {
+        if (!$this->hasIsbn()) {
             $this->setIsbn($this->getDefaultIsbn());
         }
         return $this->isbn;
@@ -56,7 +56,7 @@ trait IsbnTrait
      *
      * @return bool True if "isbn" has been set, false if not
      */
-    public function hasIsbn() : bool
+    public function hasIsbn(): bool
     {
         return isset($this->isbn);
     }
@@ -66,7 +66,7 @@ trait IsbnTrait
      *
      * @return string|null Default "isbn" value or null if no default value is available
      */
-    public function getDefaultIsbn() : ?string
+    public function getDefaultIsbn(): ?string
     {
         return null;
     }

@@ -43,9 +43,9 @@ trait RoleTrait
      *
      * @return string|null role or null if no role has been set
      */
-    public function getRole() : ?string
+    public function getRole(): ?string
     {
-        if ( ! $this->hasRole()) {
+        if (!$this->hasRole()) {
             $this->setRole($this->getDefaultRole());
         }
         return $this->role;
@@ -56,7 +56,7 @@ trait RoleTrait
      *
      * @return bool True if "role" has been set, false if not
      */
-    public function hasRole() : bool
+    public function hasRole(): bool
     {
         return isset($this->role);
     }
@@ -66,7 +66,7 @@ trait RoleTrait
      *
      * @return string|null Default "role" value or null if no default value is available
      */
-    public function getDefaultRole() : ?string
+    public function getDefaultRole(): ?string
     {
         return null;
     }

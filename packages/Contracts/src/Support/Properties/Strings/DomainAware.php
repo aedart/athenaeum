@@ -31,19 +31,19 @@ interface DomainAware
      *
      * @return string|null domain or null if no domain has been set
      */
-    public function getDomain() : ?string;
+    public function getDomain(): ?string;
 
     /**
      * Check if "domain" has been set
      *
      * @return bool True if "domain" has been set, false if not
      */
-    public function hasDomain() : bool;
+    public function hasDomain(): bool;
 
     /**
      * Get a default "domain" value, if any is available
      *
      * @return string|null Default "domain" value or null if no default value is available
      */
-    public function getDefaultDomain() : ?string;
+    public function getDefaultDomain(): ?string;
 }

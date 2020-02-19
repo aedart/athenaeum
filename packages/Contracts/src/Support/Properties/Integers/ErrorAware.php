@@ -31,19 +31,19 @@ interface ErrorAware
      *
      * @return int|null error or null if no error has been set
      */
-    public function getError() : ?int;
+    public function getError(): ?int;
 
     /**
      * Check if "error" has been set
      *
      * @return bool True if "error" has been set, false if not
      */
-    public function hasError() : bool;
+    public function hasError(): bool;
 
     /**
      * Get a default "error" value, if any is available
      *
      * @return int|null Default "error" value or null if no default value is available
      */
-    public function getDefaultError() : ?int;
+    public function getDefaultError(): ?int;
 }

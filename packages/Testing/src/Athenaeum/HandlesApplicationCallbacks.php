@@ -36,7 +36,7 @@ trait HandlesApplicationCallbacks
     {
         $this->afterAppCreated[] = $callback;
 
-        if($this->hasApplicationBeenStarted()){
+        if ($this->hasApplicationBeenStarted()) {
             $callback();
         }
     }
@@ -48,7 +48,7 @@ trait HandlesApplicationCallbacks
      */
     protected function invokeAfterCreatedCallbacks()
     {
-        foreach ($this->afterAppCreated as $callback){
+        foreach ($this->afterAppCreated as $callback) {
             $callback();
         }
     }
@@ -70,7 +70,7 @@ trait HandlesApplicationCallbacks
      */
     protected function invokeBeforeDestroyedCallbacks()
     {
-        foreach ($this->beforeAppDestroyed as $callback){
+        foreach ($this->beforeAppDestroyed as $callback) {
             $callback();
         }
     }

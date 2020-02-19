@@ -31,19 +31,19 @@ interface RatingAware
      *
      * @return string|null rating or null if no rating has been set
      */
-    public function getRating() : ?string;
+    public function getRating(): ?string;
 
     /**
      * Check if "rating" has been set
      *
      * @return bool True if "rating" has been set, false if not
      */
-    public function hasRating() : bool;
+    public function hasRating(): bool;
 
     /**
      * Get a default "rating" value, if any is available
      *
      * @return string|null Default "rating" value or null if no default value is available
      */
-    public function getDefaultRating() : ?string;
+    public function getDefaultRating(): ?string;
 }

@@ -31,19 +31,19 @@ interface ContentAware
      *
      * @return string|null content or null if no content has been set
      */
-    public function getContent() : ?string;
+    public function getContent(): ?string;
 
     /**
      * Check if "content" has been set
      *
      * @return bool True if "content" has been set, false if not
      */
-    public function hasContent() : bool;
+    public function hasContent(): bool;
 
     /**
      * Get a default "content" value, if any is available
      *
      * @return string|null Default "content" value or null if no default value is available
      */
-    public function getDefaultContent() : ?string;
+    public function getDefaultContent(): ?string;
 }

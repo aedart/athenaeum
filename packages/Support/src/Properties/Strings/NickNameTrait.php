@@ -43,9 +43,9 @@ trait NickNameTrait
      *
      * @return string|null nick name or null if no nick name has been set
      */
-    public function getNickName() : ?string
+    public function getNickName(): ?string
     {
-        if ( ! $this->hasNickName()) {
+        if (!$this->hasNickName()) {
             $this->setNickName($this->getDefaultNickName());
         }
         return $this->nickName;
@@ -56,7 +56,7 @@ trait NickNameTrait
      *
      * @return bool True if "nick name" has been set, false if not
      */
-    public function hasNickName() : bool
+    public function hasNickName(): bool
     {
         return isset($this->nickName);
     }
@@ -66,7 +66,7 @@ trait NickNameTrait
      *
      * @return string|null Default "nick name" value or null if no default value is available
      */
-    public function getDefaultNickName() : ?string
+    public function getDefaultNickName(): ?string
     {
         return null;
     }

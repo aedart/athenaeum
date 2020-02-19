@@ -43,9 +43,9 @@ trait RatingTrait
      *
      * @return int|null rating or null if no rating has been set
      */
-    public function getRating() : ?int
+    public function getRating(): ?int
     {
-        if ( ! $this->hasRating()) {
+        if (!$this->hasRating()) {
             $this->setRating($this->getDefaultRating());
         }
         return $this->rating;
@@ -56,7 +56,7 @@ trait RatingTrait
      *
      * @return bool True if "rating" has been set, false if not
      */
-    public function hasRating() : bool
+    public function hasRating(): bool
     {
         return isset($this->rating);
     }
@@ -66,7 +66,7 @@ trait RatingTrait
      *
      * @return int|null Default "rating" value or null if no default value is available
      */
-    public function getDefaultRating() : ?int
+    public function getDefaultRating(): ?int
     {
         return null;
     }

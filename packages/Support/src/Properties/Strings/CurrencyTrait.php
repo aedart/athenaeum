@@ -43,9 +43,9 @@ trait CurrencyTrait
      *
      * @return string|null currency or null if no currency has been set
      */
-    public function getCurrency() : ?string
+    public function getCurrency(): ?string
     {
-        if ( ! $this->hasCurrency()) {
+        if (!$this->hasCurrency()) {
             $this->setCurrency($this->getDefaultCurrency());
         }
         return $this->currency;
@@ -56,7 +56,7 @@ trait CurrencyTrait
      *
      * @return bool True if "currency" has been set, false if not
      */
-    public function hasCurrency() : bool
+    public function hasCurrency(): bool
     {
         return isset($this->currency);
     }
@@ -66,7 +66,7 @@ trait CurrencyTrait
      *
      * @return string|null Default "currency" value or null if no default value is available
      */
-    public function getDefaultCurrency() : ?string
+    public function getDefaultCurrency(): ?string
     {
         return null;
     }

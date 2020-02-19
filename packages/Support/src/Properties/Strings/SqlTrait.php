@@ -43,9 +43,9 @@ trait SqlTrait
      *
      * @return string|null sql or null if no sql has been set
      */
-    public function getSql() : ?string
+    public function getSql(): ?string
     {
-        if ( ! $this->hasSql()) {
+        if (!$this->hasSql()) {
             $this->setSql($this->getDefaultSql());
         }
         return $this->sql;
@@ -56,7 +56,7 @@ trait SqlTrait
      *
      * @return bool True if "sql" has been set, false if not
      */
-    public function hasSql() : bool
+    public function hasSql(): bool
     {
         return isset($this->sql);
     }
@@ -66,7 +66,7 @@ trait SqlTrait
      *
      * @return string|null Default "sql" value or null if no default value is available
      */
-    public function getDefaultSql() : ?string
+    public function getDefaultSql(): ?string
     {
         return null;
     }

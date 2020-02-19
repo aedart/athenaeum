@@ -43,9 +43,9 @@ trait XmlTrait
      *
      * @return string|null xml or null if no xml has been set
      */
-    public function getXml() : ?string
+    public function getXml(): ?string
     {
-        if ( ! $this->hasXml()) {
+        if (!$this->hasXml()) {
             $this->setXml($this->getDefaultXml());
         }
         return $this->xml;
@@ -56,7 +56,7 @@ trait XmlTrait
      *
      * @return bool True if "xml" has been set, false if not
      */
-    public function hasXml() : bool
+    public function hasXml(): bool
     {
         return isset($this->xml);
     }
@@ -66,7 +66,7 @@ trait XmlTrait
      *
      * @return string|null Default "xml" value or null if no default value is available
      */
-    public function getDefaultXml() : ?string
+    public function getDefaultXml(): ?string
     {
         return null;
     }

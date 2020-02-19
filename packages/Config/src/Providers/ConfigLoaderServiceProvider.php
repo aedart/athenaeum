@@ -23,11 +23,11 @@ class ConfigLoaderServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(FileParserFactoryInterface::class, function(){
+        $this->app->singleton(FileParserFactoryInterface::class, function () {
             return new FileParserFactory();
         });
 
-        $this->app->singleton(LoaderInterface::class, function(){
+        $this->app->singleton(LoaderInterface::class, function () {
             return new Loader();
         });
     }

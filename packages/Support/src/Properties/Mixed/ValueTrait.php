@@ -45,7 +45,7 @@ trait ValueTrait
      */
     public function getValue()
     {
-        if ( ! $this->hasValue()) {
+        if (!$this->hasValue()) {
             $this->setValue($this->getDefaultValue());
         }
         return $this->value;
@@ -56,7 +56,7 @@ trait ValueTrait
      *
      * @return bool True if "value" has been set, false if not
      */
-    public function hasValue() : bool
+    public function hasValue(): bool
     {
         return isset($this->value);
     }

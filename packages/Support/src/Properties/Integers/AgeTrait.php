@@ -43,9 +43,9 @@ trait AgeTrait
      *
      * @return int|null age or null if no age has been set
      */
-    public function getAge() : ?int
+    public function getAge(): ?int
     {
-        if ( ! $this->hasAge()) {
+        if (!$this->hasAge()) {
             $this->setAge($this->getDefaultAge());
         }
         return $this->age;
@@ -56,7 +56,7 @@ trait AgeTrait
      *
      * @return bool True if "age" has been set, false if not
      */
-    public function hasAge() : bool
+    public function hasAge(): bool
     {
         return isset($this->age);
     }
@@ -66,7 +66,7 @@ trait AgeTrait
      *
      * @return int|null Default "age" value or null if no default value is available
      */
-    public function getDefaultAge() : ?int
+    public function getDefaultAge(): ?int
     {
         return null;
     }

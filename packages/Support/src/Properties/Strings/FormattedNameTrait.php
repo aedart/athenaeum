@@ -43,9 +43,9 @@ trait FormattedNameTrait
      *
      * @return string|null formatted name or null if no formatted name has been set
      */
-    public function getFormattedName() : ?string
+    public function getFormattedName(): ?string
     {
-        if ( ! $this->hasFormattedName()) {
+        if (!$this->hasFormattedName()) {
             $this->setFormattedName($this->getDefaultFormattedName());
         }
         return $this->formattedName;
@@ -56,7 +56,7 @@ trait FormattedNameTrait
      *
      * @return bool True if "formatted name" has been set, false if not
      */
-    public function hasFormattedName() : bool
+    public function hasFormattedName(): bool
     {
         return isset($this->formattedName);
     }
@@ -66,7 +66,7 @@ trait FormattedNameTrait
      *
      * @return string|null Default "formatted name" value or null if no default value is available
      */
-    public function getDefaultFormattedName() : ?string
+    public function getDefaultFormattedName(): ?string
     {
         return null;
     }

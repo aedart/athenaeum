@@ -31,19 +31,19 @@ interface StatusAware
      *
      * @return int|null status or null if no status has been set
      */
-    public function getStatus() : ?int;
+    public function getStatus(): ?int;
 
     /**
      * Check if "status" has been set
      *
      * @return bool True if "status" has been set, false if not
      */
-    public function hasStatus() : bool;
+    public function hasStatus(): bool;
 
     /**
      * Get a default "status" value, if any is available
      *
      * @return int|null Default "status" value or null if no default value is available
      */
-    public function getDefaultStatus() : ?int;
+    public function getDefaultStatus(): ?int;
 }

@@ -31,19 +31,19 @@ interface CreatedAtAware
      *
      * @return int|null created at or null if no created at has been set
      */
-    public function getCreatedAt() : ?int;
+    public function getCreatedAt(): ?int;
 
     /**
      * Check if "created at" has been set
      *
      * @return bool True if "created at" has been set, false if not
      */
-    public function hasCreatedAt() : bool;
+    public function hasCreatedAt(): bool;
 
     /**
      * Get a default "created at" value, if any is available
      *
      * @return int|null Default "created at" value or null if no default value is available
      */
-    public function getDefaultCreatedAt() : ?int;
+    public function getDefaultCreatedAt(): ?int;
 }

@@ -53,7 +53,7 @@ trait DtoPartial
      */
     public function populate(array $data = []): void
     {
-        foreach ($data as $property => $value){
+        foreach ($data as $property => $value) {
             $this->__set($property, $value);
         }
     }
@@ -98,7 +98,7 @@ trait DtoPartial
 
         foreach ($properties as $property) {
             // Make sure that property is not unset
-            if($this->isPropertyUnset($property)){
+            if ($this->isPropertyUnset($property)) {
                 continue;
             }
 
@@ -130,11 +130,10 @@ trait DtoPartial
      */
     public function jsonSerialize()
     {
-        return array_map(function($value){
-
-            if($value instanceof JsonSerializable){
+        return array_map(function ($value) {
+            if ($value instanceof JsonSerializable) {
                 return $value->jsonSerialize();
-            } elseif($value instanceof Arrayable){
+            } elseif ($value instanceof Arrayable) {
                 return $value->toArray();
             }
 
@@ -152,7 +151,7 @@ trait DtoPartial
         // Filter off properties that have "null" as value!
         // Those might cause undesired unserialize effect,
         // in case of nested Dto instances...
-        return array_filter( $this->toArray(), fn($value) => isset($value) );
+        return array_filter($this->toArray(), fn ($value) => isset($value));
     }
 
     /**
@@ -182,7 +181,7 @@ trait DtoPartial
      *
      * @return array
      */
-    public function __debugInfo() : array
+    public function __debugInfo(): array
     {
         return $this->toArray();
     }
@@ -236,6 +235,6 @@ trait DtoPartial
      */
     protected function isPropertyUnset(string $property)
     {
-        return ! property_exists($this, $property);
+        return !property_exists($this, $property);
     }
 }

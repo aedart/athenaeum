@@ -4,7 +4,7 @@ namespace Aedart\Testing\Helpers;
 
 use Faker\Factory;
 use Faker\Generator;
-use \Mockery as m;
+use Mockery as m;
 use Mockery\MockInterface;
 use ReflectionException;
 use ReflectionMethod;
@@ -45,11 +45,11 @@ class ArgumentFaker
         $parameters = $reflectionMethod->getParameters();
 
         $output = [];
-        foreach ($parameters as $parameter){
+        foreach ($parameters as $parameter) {
 
             // Create a mock as "faked" argument, if needed
-            $typeClass = $parameter->getClass ();
-            if(isset($typeClass)){
+            $typeClass = $parameter->getClass();
+            if (isset($typeClass)) {
                 $output[] = static::makeMockFor($typeClass->getName());
                 continue;
             }
@@ -59,7 +59,7 @@ class ArgumentFaker
             $output[] = static::fakeForType($type, $faker);
         }
 
-        if(count($output) == 1){
+        if (count($output) == 1) {
             return $output[0];
         }
 
@@ -78,7 +78,7 @@ class ArgumentFaker
     {
         $faker = $faker ?? static::makeFakerGenerator();
 
-        switch (strtolower($type)){
+        switch (strtolower($type)) {
 
             case 'int':
             case 'integer':
@@ -95,10 +95,11 @@ class ArgumentFaker
                 return $faker->randomElements();
 
             case 'callable':
-                return function(){};
+                return function () {
+                };
 
-            case 'string';
-            case 'null';
+            case 'string':
+            case 'null':
             default:
                 return $faker->name;
         }
@@ -111,7 +112,7 @@ class ArgumentFaker
      *
      * @return MockInterface
      */
-    public static function makeMockFor(string $target) : MockInterface
+    public static function makeMockFor(string $target): MockInterface
     {
         return m::mock($target);
     }
@@ -123,7 +124,7 @@ class ArgumentFaker
      *
      * @return Generator
      */
-    public static function makeFakerGenerator(string $locale = Factory::DEFAULT_LOCALE) : Generator
+    public static function makeFakerGenerator(string $locale = Factory::DEFAULT_LOCALE): Generator
     {
         return Factory::create($locale);
     }

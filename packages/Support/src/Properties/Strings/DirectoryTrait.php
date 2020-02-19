@@ -43,9 +43,9 @@ trait DirectoryTrait
      *
      * @return string|null directory or null if no directory has been set
      */
-    public function getDirectory() : ?string
+    public function getDirectory(): ?string
     {
-        if ( ! $this->hasDirectory()) {
+        if (!$this->hasDirectory()) {
             $this->setDirectory($this->getDefaultDirectory());
         }
         return $this->directory;
@@ -56,7 +56,7 @@ trait DirectoryTrait
      *
      * @return bool True if "directory" has been set, false if not
      */
-    public function hasDirectory() : bool
+    public function hasDirectory(): bool
     {
         return isset($this->directory);
     }
@@ -66,7 +66,7 @@ trait DirectoryTrait
      *
      * @return string|null Default "directory" value or null if no default value is available
      */
-    public function getDefaultDirectory() : ?string
+    public function getDefaultDirectory(): ?string
     {
         return null;
     }

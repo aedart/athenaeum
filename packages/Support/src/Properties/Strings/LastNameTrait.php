@@ -43,9 +43,9 @@ trait LastNameTrait
      *
      * @return string|null last name or null if no last name has been set
      */
-    public function getLastName() : ?string
+    public function getLastName(): ?string
     {
-        if ( ! $this->hasLastName()) {
+        if (!$this->hasLastName()) {
             $this->setLastName($this->getDefaultLastName());
         }
         return $this->lastName;
@@ -56,7 +56,7 @@ trait LastNameTrait
      *
      * @return bool True if "last name" has been set, false if not
      */
-    public function hasLastName() : bool
+    public function hasLastName(): bool
     {
         return isset($this->lastName);
     }
@@ -66,7 +66,7 @@ trait LastNameTrait
      *
      * @return string|null Default "last name" value or null if no default value is available
      */
-    public function getDefaultLastName() : ?string
+    public function getDefaultLastName(): ?string
     {
         return null;
     }

@@ -43,9 +43,9 @@ trait MaterialTrait
      *
      * @return string|null material or null if no material has been set
      */
-    public function getMaterial() : ?string
+    public function getMaterial(): ?string
     {
-        if ( ! $this->hasMaterial()) {
+        if (!$this->hasMaterial()) {
             $this->setMaterial($this->getDefaultMaterial());
         }
         return $this->material;
@@ -56,7 +56,7 @@ trait MaterialTrait
      *
      * @return bool True if "material" has been set, false if not
      */
-    public function hasMaterial() : bool
+    public function hasMaterial(): bool
     {
         return isset($this->material);
     }
@@ -66,7 +66,7 @@ trait MaterialTrait
      *
      * @return string|null Default "material" value or null if no default value is available
      */
-    public function getDefaultMaterial() : ?string
+    public function getDefaultMaterial(): ?string
     {
         return null;
     }

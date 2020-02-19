@@ -43,9 +43,9 @@ trait KindTrait
      *
      * @return string|null kind or null if no kind has been set
      */
-    public function getKind() : ?string
+    public function getKind(): ?string
     {
-        if ( ! $this->hasKind()) {
+        if (!$this->hasKind()) {
             $this->setKind($this->getDefaultKind());
         }
         return $this->kind;
@@ -56,7 +56,7 @@ trait KindTrait
      *
      * @return bool True if "kind" has been set, false if not
      */
-    public function hasKind() : bool
+    public function hasKind(): bool
     {
         return isset($this->kind);
     }
@@ -66,7 +66,7 @@ trait KindTrait
      *
      * @return string|null Default "kind" value or null if no default value is available
      */
-    public function getDefaultKind() : ?string
+    public function getDefaultKind(): ?string
     {
         return null;
     }

@@ -43,9 +43,9 @@ trait LicenseTrait
      *
      * @return int|null license or null if no license has been set
      */
-    public function getLicense() : ?int
+    public function getLicense(): ?int
     {
-        if ( ! $this->hasLicense()) {
+        if (!$this->hasLicense()) {
             $this->setLicense($this->getDefaultLicense());
         }
         return $this->license;
@@ -56,7 +56,7 @@ trait LicenseTrait
      *
      * @return bool True if "license" has been set, false if not
      */
-    public function hasLicense() : bool
+    public function hasLicense(): bool
     {
         return isset($this->license);
     }
@@ -66,7 +66,7 @@ trait LicenseTrait
      *
      * @return int|null Default "license" value or null if no default value is available
      */
-    public function getDefaultLicense() : ?int
+    public function getDefaultLicense(): ?int
     {
         return null;
     }

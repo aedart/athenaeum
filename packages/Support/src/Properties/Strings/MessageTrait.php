@@ -43,9 +43,9 @@ trait MessageTrait
      *
      * @return string|null message or null if no message has been set
      */
-    public function getMessage() : ?string
+    public function getMessage(): ?string
     {
-        if ( ! $this->hasMessage()) {
+        if (!$this->hasMessage()) {
             $this->setMessage($this->getDefaultMessage());
         }
         return $this->message;
@@ -56,7 +56,7 @@ trait MessageTrait
      *
      * @return bool True if "message" has been set, false if not
      */
-    public function hasMessage() : bool
+    public function hasMessage(): bool
     {
         return isset($this->message);
     }
@@ -66,7 +66,7 @@ trait MessageTrait
      *
      * @return string|null Default "message" value or null if no default value is available
      */
-    public function getDefaultMessage() : ?string
+    public function getDefaultMessage(): ?string
     {
         return null;
     }

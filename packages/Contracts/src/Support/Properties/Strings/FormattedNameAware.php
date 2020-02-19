@@ -31,19 +31,19 @@ interface FormattedNameAware
      *
      * @return string|null formatted name or null if no formatted name has been set
      */
-    public function getFormattedName() : ?string;
+    public function getFormattedName(): ?string;
 
     /**
      * Check if "formatted name" has been set
      *
      * @return bool True if "formatted name" has been set, false if not
      */
-    public function hasFormattedName() : bool;
+    public function hasFormattedName(): bool;
 
     /**
      * Get a default "formatted name" value, if any is available
      *
      * @return string|null Default "formatted name" value or null if no default value is available
      */
-    public function getDefaultFormattedName() : ?string;
+    public function getDefaultFormattedName(): ?string;
 }

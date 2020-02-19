@@ -31,19 +31,19 @@ interface EmailAware
      *
      * @return string|null email or null if no email has been set
      */
-    public function getEmail() : ?string;
+    public function getEmail(): ?string;
 
     /**
      * Check if "email" has been set
      *
      * @return bool True if "email" has been set, false if not
      */
-    public function hasEmail() : bool;
+    public function hasEmail(): bool;
 
     /**
      * Get a default "email" value, if any is available
      *
      * @return string|null Default "email" value or null if no default value is available
      */
-    public function getDefaultEmail() : ?string;
+    public function getDefaultEmail(): ?string;
 }

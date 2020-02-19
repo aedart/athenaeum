@@ -31,19 +31,19 @@ interface TimezoneAware
      *
      * @return string|null timezone or null if no timezone has been set
      */
-    public function getTimezone() : ?string;
+    public function getTimezone(): ?string;
 
     /**
      * Check if "timezone" has been set
      *
      * @return bool True if "timezone" has been set, false if not
      */
-    public function hasTimezone() : bool;
+    public function hasTimezone(): bool;
 
     /**
      * Get a default "timezone" value, if any is available
      *
      * @return string|null Default "timezone" value or null if no default value is available
      */
-    public function getDefaultTimezone() : ?string;
+    public function getDefaultTimezone(): ?string;
 }

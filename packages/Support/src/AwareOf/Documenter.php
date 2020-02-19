@@ -44,7 +44,7 @@ class Documenter implements ConfigAware
     public function makeDocs(array $awareOfComponents = [], bool $force = false)
     {
         $destination = $this->getConfig()->get('docs-output', false);
-        if( ! $destination || empty($awareOfComponents)){
+        if (!$destination || empty($awareOfComponents)) {
             return;
         }
 
@@ -69,10 +69,10 @@ class Documenter implements ConfigAware
      *
      * @return array
      */
-    protected function format(array $awareOfComponents) : array
+    protected function format(array $awareOfComponents): array
     {
         $output = [];
-        foreach ($awareOfComponents as $component){
+        foreach ($awareOfComponents as $component) {
 
             // Make key (index
             $letter = strtoupper(substr($component['propertyName'], 0, 1));
@@ -80,9 +80,9 @@ class Documenter implements ConfigAware
 
             // Store component acc. to index
             Arr::set($output, $index, [
-                'description'   => $component['propertyDescription'],
-                'interface'     => $component['interfaceNamespace'] . '\\' . $component['interfaceClassName'],
-                'trait'         => $component['traitNamespace'] . '\\' . $component['traitClassName'],
+                'description' => $component['propertyDescription'],
+                'interface' => $component['interfaceNamespace'] . '\\' . $component['interfaceClassName'],
+                'trait' => $component['traitNamespace'] . '\\' . $component['traitClassName'],
             ]);
         }
 

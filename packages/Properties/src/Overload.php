@@ -39,7 +39,7 @@ trait Overload
      */
     public function __get(string $name)
     {
-        if ( ! $this->hasInternalProperty($name)) {
+        if (!$this->hasInternalProperty($name)) {
             throw new UndefinedProperty(sprintf('Failed reading Property "%s". It does not exist or is inaccessible', $name));
         }
 
@@ -59,7 +59,7 @@ trait Overload
      */
     public function __set(string $name, $value)
     {
-        if ( ! $this->hasInternalProperty($name)) {
+        if (!$this->hasInternalProperty($name)) {
             throw new UndefinedProperty(sprintf('Failed writing Property "%s". It does not exist or is inaccessible', $name));
         }
 
@@ -80,9 +80,9 @@ trait Overload
      *
      * @throws ReflectionException
      */
-    public function __isset(string $name) : bool
+    public function __isset(string $name): bool
     {
-        if( ! $this->hasInternalProperty($name)){
+        if (!$this->hasInternalProperty($name)) {
             return false;
         }
 
@@ -96,9 +96,9 @@ trait Overload
      *
      * @throws ReflectionException
      */
-    public function __unset(string $name) : void
+    public function __unset(string $name): void
     {
-        if ( ! $this->hasInternalProperty($name)) {
+        if (!$this->hasInternalProperty($name)) {
             throw new UndefinedProperty(sprintf('Failed unset of Property "%s". It does not exist or is inaccessible', $name));
         }
 
@@ -127,7 +127,8 @@ trait Overload
         }
 
         throw new UndefinedProperty(sprintf(
-            'No %s() getter-method available for property "%s"', $methodName,
+            'No %s() getter-method available for property "%s"',
+            $methodName,
             $property->getName()
         ));
     }
@@ -151,7 +152,8 @@ trait Overload
         }
 
         throw new UndefinedProperty(sprintf(
-            'No %s() setter-method available for property "%s"', $methodName,
+            'No %s() setter-method available for property "%s"',
+            $methodName,
             $property->getName()
         ));
     }

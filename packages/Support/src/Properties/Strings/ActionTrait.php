@@ -43,9 +43,9 @@ trait ActionTrait
      *
      * @return string|null action or null if no action has been set
      */
-    public function getAction() : ?string
+    public function getAction(): ?string
     {
-        if ( ! $this->hasAction()) {
+        if (!$this->hasAction()) {
             $this->setAction($this->getDefaultAction());
         }
         return $this->action;
@@ -56,7 +56,7 @@ trait ActionTrait
      *
      * @return bool True if "action" has been set, false if not
      */
-    public function hasAction() : bool
+    public function hasAction(): bool
     {
         return isset($this->action);
     }
@@ -66,7 +66,7 @@ trait ActionTrait
      *
      * @return string|null Default "action" value or null if no default value is available
      */
-    public function getDefaultAction() : ?string
+    public function getDefaultAction(): ?string
     {
         return null;
     }

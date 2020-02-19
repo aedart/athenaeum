@@ -43,9 +43,9 @@ trait PhoneTrait
      *
      * @return string|null phone or null if no phone has been set
      */
-    public function getPhone() : ?string
+    public function getPhone(): ?string
     {
-        if ( ! $this->hasPhone()) {
+        if (!$this->hasPhone()) {
             $this->setPhone($this->getDefaultPhone());
         }
         return $this->phone;
@@ -56,7 +56,7 @@ trait PhoneTrait
      *
      * @return bool True if "phone" has been set, false if not
      */
-    public function hasPhone() : bool
+    public function hasPhone(): bool
     {
         return isset($this->phone);
     }
@@ -66,7 +66,7 @@ trait PhoneTrait
      *
      * @return string|null Default "phone" value or null if no default value is available
      */
-    public function getDefaultPhone() : ?string
+    public function getDefaultPhone(): ?string
     {
         return null;
     }

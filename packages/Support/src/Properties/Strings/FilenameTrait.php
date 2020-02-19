@@ -43,9 +43,9 @@ trait FilenameTrait
      *
      * @return string|null filename or null if no filename has been set
      */
-    public function getFilename() : ?string
+    public function getFilename(): ?string
     {
-        if ( ! $this->hasFilename()) {
+        if (!$this->hasFilename()) {
             $this->setFilename($this->getDefaultFilename());
         }
         return $this->filename;
@@ -56,7 +56,7 @@ trait FilenameTrait
      *
      * @return bool True if "filename" has been set, false if not
      */
-    public function hasFilename() : bool
+    public function hasFilename(): bool
     {
         return isset($this->filename);
     }
@@ -66,7 +66,7 @@ trait FilenameTrait
      *
      * @return string|null Default "filename" value or null if no default value is available
      */
-    public function getDefaultFilename() : ?string
+    public function getDefaultFilename(): ?string
     {
         return null;
     }

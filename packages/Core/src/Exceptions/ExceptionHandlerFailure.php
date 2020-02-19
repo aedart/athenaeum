@@ -14,5 +14,4 @@ use LogicException;
  */
 class ExceptionHandlerFailure extends LogicException
 {
-
 }

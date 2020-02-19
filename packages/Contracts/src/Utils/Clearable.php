@@ -20,5 +20,5 @@ interface Clearable
      *
      * @return void
      */
-    public function clear() : void ;
+    public function clear(): void;
 }

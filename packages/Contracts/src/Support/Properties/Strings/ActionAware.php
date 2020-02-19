@@ -31,19 +31,19 @@ interface ActionAware
      *
      * @return string|null action or null if no action has been set
      */
-    public function getAction() : ?string;
+    public function getAction(): ?string;
 
     /**
      * Check if "action" has been set
      *
      * @return bool True if "action" has been set, false if not
      */
-    public function hasAction() : bool;
+    public function hasAction(): bool;
 
     /**
      * Get a default "action" value, if any is available
      *
      * @return string|null Default "action" value or null if no default value is available
      */
-    public function getDefaultAction() : ?string;
+    public function getDefaultAction(): ?string;
 }

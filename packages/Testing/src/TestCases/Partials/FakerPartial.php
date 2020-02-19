@@ -46,7 +46,7 @@ trait FakerPartial
      *
      * @return Generator|null
      */
-    protected function makeFaker(?string $locale = null) : ?Generator
+    protected function makeFaker(?string $locale = null): ?Generator
     {
         return Factory::create($locale);
     }

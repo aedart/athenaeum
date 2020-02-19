@@ -19,5 +19,5 @@ interface Factory
      *
      * @throws Throwable If unable to obtain handler instance
      */
-    public function make() : ExceptionHandler ;
+    public function make(): ExceptionHandler;
 }

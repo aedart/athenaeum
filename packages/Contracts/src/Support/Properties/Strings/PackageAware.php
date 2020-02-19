@@ -31,19 +31,19 @@ interface PackageAware
      *
      * @return string|null package or null if no package has been set
      */
-    public function getPackage() : ?string;
+    public function getPackage(): ?string;
 
     /**
      * Check if "package" has been set
      *
      * @return bool True if "package" has been set, false if not
      */
-    public function hasPackage() : bool;
+    public function hasPackage(): bool;
 
     /**
      * Get a default "package" value, if any is available
      *
      * @return string|null Default "package" value or null if no default value is available
      */
-    public function getDefaultPackage() : ?string;
+    public function getDefaultPackage(): ?string;
 }

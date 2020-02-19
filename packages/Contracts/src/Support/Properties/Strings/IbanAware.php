@@ -31,19 +31,19 @@ interface IbanAware
      *
      * @return string|null iban or null if no iban has been set
      */
-    public function getIban() : ?string;
+    public function getIban(): ?string;
 
     /**
      * Check if "iban" has been set
      *
      * @return bool True if "iban" has been set, false if not
      */
-    public function hasIban() : bool;
+    public function hasIban(): bool;
 
     /**
      * Get a default "iban" value, if any is available
      *
      * @return string|null Default "iban" value or null if no default value is available
      */
-    public function getDefaultIban() : ?string;
+    public function getDefaultIban(): ?string;
 }

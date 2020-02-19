@@ -43,9 +43,9 @@ trait MediaTypeTrait
      *
      * @return string|null media type or null if no media type has been set
      */
-    public function getMediaType() : ?string
+    public function getMediaType(): ?string
     {
-        if ( ! $this->hasMediaType()) {
+        if (!$this->hasMediaType()) {
             $this->setMediaType($this->getDefaultMediaType());
         }
         return $this->mediaType;
@@ -56,7 +56,7 @@ trait MediaTypeTrait
      *
      * @return bool True if "media type" has been set, false if not
      */
-    public function hasMediaType() : bool
+    public function hasMediaType(): bool
     {
         return isset($this->mediaType);
     }
@@ -66,7 +66,7 @@ trait MediaTypeTrait
      *
      * @return string|null Default "media type" value or null if no default value is available
      */
-    public function getDefaultMediaType() : ?string
+    public function getDefaultMediaType(): ?string
     {
         return null;
     }

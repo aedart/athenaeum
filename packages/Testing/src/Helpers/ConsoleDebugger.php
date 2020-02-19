@@ -23,10 +23,9 @@ class ConsoleDebugger
      */
     public static function output(...$message)
     {
-        if(class_exists(Debug::class)){
-
-            $message = array_map(function($msg){
-                if(is_string($msg)){
+        if (class_exists(Debug::class)) {
+            $message = array_map(function ($msg) {
+                if (is_string($msg)) {
                     return $msg;
                 }
 

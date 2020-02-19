@@ -31,19 +31,19 @@ interface YAware
      *
      * @return float|null y or null if no y has been set
      */
-    public function getY() : ?float;
+    public function getY(): ?float;
 
     /**
      * Check if "y" has been set
      *
      * @return bool True if "y" has been set, false if not
      */
-    public function hasY() : bool;
+    public function hasY(): bool;
 
     /**
      * Get a default "y" value, if any is available
      *
      * @return float|null Default "y" value or null if no default value is available
      */
-    public function getDefaultY() : ?float;
+    public function getDefaultY(): ?float;
 }

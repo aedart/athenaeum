@@ -43,9 +43,9 @@ trait WeightTrait
      *
      * @return int|null weight or null if no weight has been set
      */
-    public function getWeight() : ?int
+    public function getWeight(): ?int
     {
-        if ( ! $this->hasWeight()) {
+        if (!$this->hasWeight()) {
             $this->setWeight($this->getDefaultWeight());
         }
         return $this->weight;
@@ -56,7 +56,7 @@ trait WeightTrait
      *
      * @return bool True if "weight" has been set, false if not
      */
-    public function hasWeight() : bool
+    public function hasWeight(): bool
     {
         return isset($this->weight);
     }
@@ -66,7 +66,7 @@ trait WeightTrait
      *
      * @return int|null Default "weight" value or null if no default value is available
      */
-    public function getDefaultWeight() : ?int
+    public function getDefaultWeight(): ?int
     {
         return null;
     }

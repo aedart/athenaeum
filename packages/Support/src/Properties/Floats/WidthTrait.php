@@ -43,9 +43,9 @@ trait WidthTrait
      *
      * @return float|null width or null if no width has been set
      */
-    public function getWidth() : ?float
+    public function getWidth(): ?float
     {
-        if ( ! $this->hasWidth()) {
+        if (!$this->hasWidth()) {
             $this->setWidth($this->getDefaultWidth());
         }
         return $this->width;
@@ -56,7 +56,7 @@ trait WidthTrait
      *
      * @return bool True if "width" has been set, false if not
      */
-    public function hasWidth() : bool
+    public function hasWidth(): bool
     {
         return isset($this->width);
     }
@@ -66,7 +66,7 @@ trait WidthTrait
      *
      * @return float|null Default "width" value or null if no default value is available
      */
-    public function getDefaultWidth() : ?float
+    public function getDefaultWidth(): ?float
     {
         return null;
     }

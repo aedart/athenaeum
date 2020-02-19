@@ -35,7 +35,7 @@ trait Reflections
      *
      * @throws ReflectionException
      */
-    protected function hasInternalProperty(string $name) : bool
+    protected function hasInternalProperty(string $name): bool
     {
         $reflection = new ReflectionClass($this);
 
@@ -56,7 +56,7 @@ trait Reflections
      *
      * @throws ReflectionException
      */
-    protected function getInternalProperty(string $name) : ReflectionProperty
+    protected function getInternalProperty(string $name): ReflectionProperty
     {
         return (new ReflectionClass($this))->getProperty($name);
     }
@@ -70,7 +70,7 @@ trait Reflections
      *
      * @throws ReflectionException
      */
-    protected function hasInternalMethod(string $name) : bool
+    protected function hasInternalMethod(string $name): bool
     {
         static $methods = [];
 

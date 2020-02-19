@@ -18,7 +18,6 @@ use ReflectionException;
  */
 trait GetterSetterTraitTester
 {
-
     /*****************************************************************
      * Assertions
      ****************************************************************/
@@ -46,8 +45,7 @@ trait GetterSetterTraitTester
         $setValue = null,
         $defaultValue = null,
         bool $assertDefaultIsNull = true
-    ) : void
-    {
+    ): void {
         $this->makeTraitTester($trait)->assert($setValue, $defaultValue, $assertDefaultIsNull);
     }
 
@@ -69,8 +67,7 @@ trait GetterSetterTraitTester
         $setValue,
         $defaultValue,
         bool $assertDefaultIsNull = true
-    ) : void
-    {
+    ): void {
         $this->makeTraitTester($trait)->assertWithValues($setValue, $defaultValue, $assertDefaultIsNull);
     }
 
@@ -88,7 +85,7 @@ trait GetterSetterTraitTester
      *
      * @throws ReflectionException
      */
-    protected function makeTraitTester(string $trait, ?string $property = null) : TraitTester
+    protected function makeTraitTester(string $trait, ?string $property = null): TraitTester
     {
         /** @var TestCase $this */
         return new TraitTester($this, $trait, $property);

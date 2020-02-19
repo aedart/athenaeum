@@ -31,19 +31,19 @@ interface LongitudeAware
      *
      * @return string|null longitude or null if no longitude has been set
      */
-    public function getLongitude() : ?string;
+    public function getLongitude(): ?string;
 
     /**
      * Check if "longitude" has been set
      *
      * @return bool True if "longitude" has been set, false if not
      */
-    public function hasLongitude() : bool;
+    public function hasLongitude(): bool;
 
     /**
      * Get a default "longitude" value, if any is available
      *
      * @return string|null Default "longitude" value or null if no default value is available
      */
-    public function getDefaultLongitude() : ?string;
+    public function getDefaultLongitude(): ?string;
 }

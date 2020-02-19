@@ -31,19 +31,19 @@ interface HtmlAware
      *
      * @return string|null html or null if no html has been set
      */
-    public function getHtml() : ?string;
+    public function getHtml(): ?string;
 
     /**
      * Check if "html" has been set
      *
      * @return bool True if "html" has been set, false if not
      */
-    public function hasHtml() : bool;
+    public function hasHtml(): bool;
 
     /**
      * Get a default "html" value, if any is available
      *
      * @return string|null Default "html" value or null if no default value is available
      */
-    public function getDefaultHtml() : ?string;
+    public function getDefaultHtml(): ?string;
 }

@@ -38,7 +38,7 @@ interface ValueAware
      *
      * @return bool True if "value" has been set, false if not
      */
-    public function hasValue() : bool;
+    public function hasValue(): bool;
 
     /**
      * Get a default "value" value, if any is available

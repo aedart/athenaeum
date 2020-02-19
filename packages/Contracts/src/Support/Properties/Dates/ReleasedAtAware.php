@@ -31,19 +31,19 @@ interface ReleasedAtAware
      *
      * @return \DateTime|null released at or null if no released at has been set
      */
-    public function getReleasedAt() : ?\DateTime;
+    public function getReleasedAt(): ?\DateTime;
 
     /**
      * Check if "released at" has been set
      *
      * @return bool True if "released at" has been set, false if not
      */
-    public function hasReleasedAt() : bool;
+    public function hasReleasedAt(): bool;
 
     /**
      * Get a default "released at" value, if any is available
      *
      * @return \DateTime|null Default "released at" value or null if no default value is available
      */
-    public function getDefaultReleasedAt() : ?\DateTime;
+    public function getDefaultReleasedAt(): ?\DateTime;
 }

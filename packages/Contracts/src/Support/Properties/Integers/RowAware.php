@@ -31,19 +31,19 @@ interface RowAware
      *
      * @return int|null row or null if no row has been set
      */
-    public function getRow() : ?int;
+    public function getRow(): ?int;
 
     /**
      * Check if "row" has been set
      *
      * @return bool True if "row" has been set, false if not
      */
-    public function hasRow() : bool;
+    public function hasRow(): bool;
 
     /**
      * Get a default "row" value, if any is available
      *
      * @return int|null Default "row" value or null if no default value is available
      */
-    public function getDefaultRow() : ?int;
+    public function getDefaultRow(): ?int;
 }

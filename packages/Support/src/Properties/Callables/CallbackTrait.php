@@ -43,9 +43,9 @@ trait CallbackTrait
      *
      * @return callable|null callback or null if no callback has been set
      */
-    public function getCallback() : ?callable
+    public function getCallback(): ?callable
     {
-        if ( ! $this->hasCallback()) {
+        if (!$this->hasCallback()) {
             $this->setCallback($this->getDefaultCallback());
         }
         return $this->callback;
@@ -56,7 +56,7 @@ trait CallbackTrait
      *
      * @return bool True if "callback" has been set, false if not
      */
-    public function hasCallback() : bool
+    public function hasCallback(): bool
     {
         return isset($this->callback);
     }
@@ -66,7 +66,7 @@ trait CallbackTrait
      *
      * @return callable|null Default "callback" value or null if no default value is available
      */
-    public function getDefaultCallback() : ?callable
+    public function getDefaultCallback(): ?callable
     {
         return null;
     }

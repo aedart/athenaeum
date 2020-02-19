@@ -31,19 +31,19 @@ interface MiddleNameAware
      *
      * @return string|null middle name or null if no middle name has been set
      */
-    public function getMiddleName() : ?string;
+    public function getMiddleName(): ?string;
 
     /**
      * Check if "middle name" has been set
      *
      * @return bool True if "middle name" has been set, false if not
      */
-    public function hasMiddleName() : bool;
+    public function hasMiddleName(): bool;
 
     /**
      * Get a default "middle name" value, if any is available
      *
      * @return string|null Default "middle name" value or null if no default value is available
      */
-    public function getDefaultMiddleName() : ?string;
+    public function getDefaultMiddleName(): ?string;
 }

@@ -24,7 +24,7 @@ class Arr extends ArrBase
     public static function randomElement(array $list, int $seed = null)
     {
         // Seed generator if required
-        if(isset($seed)){
+        if (isset($seed)) {
             mt_srand($seed);
         }
 

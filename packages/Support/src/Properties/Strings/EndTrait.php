@@ -43,9 +43,9 @@ trait EndTrait
      *
      * @return string|null end or null if no end has been set
      */
-    public function getEnd() : ?string
+    public function getEnd(): ?string
     {
-        if ( ! $this->hasEnd()) {
+        if (!$this->hasEnd()) {
             $this->setEnd($this->getDefaultEnd());
         }
         return $this->end;
@@ -56,7 +56,7 @@ trait EndTrait
      *
      * @return bool True if "end" has been set, false if not
      */
-    public function hasEnd() : bool
+    public function hasEnd(): bool
     {
         return isset($this->end);
     }
@@ -66,7 +66,7 @@ trait EndTrait
      *
      * @return string|null Default "end" value or null if no default value is available
      */
-    public function getDefaultEnd() : ?string
+    public function getDefaultEnd(): ?string
     {
         return null;
     }

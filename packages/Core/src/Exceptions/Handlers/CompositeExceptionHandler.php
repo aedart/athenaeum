@@ -21,7 +21,8 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Core\Exceptions\Handlers
  */
-class CompositeExceptionHandler extends BaseExceptionHandler implements CompositeExceptionHandlerInterface,
+class CompositeExceptionHandler extends BaseExceptionHandler implements
+    CompositeExceptionHandlerInterface,
     ApplicationAware
 {
     use ApplicationTrait;
@@ -48,7 +49,7 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements Composit
     public function handle(Throwable $exception): bool
     {
         // Abort if application must allow the exceptions to bubble upwards
-        if($this->getApplication()->mustThrowExceptions()){
+        if ($this->getApplication()->mustThrowExceptions()) {
             throw $exception;
         }
 
@@ -78,7 +79,7 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements Composit
 
         // This means that no handler was able to handle the
         // exception. Thus, we must allow it to bubble upwards!
-        if($wasHandled === false){
+        if ($wasHandled === false) {
             throw $exception;
         }
 
@@ -93,7 +94,7 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements Composit
         $list = parent::dontReport();
 
         $handlers = $this->getHandlers();
-        foreach ($handlers as $handler){
+        foreach ($handlers as $handler) {
             $list = array_merge($list, $handler->dontReport());
         }
 
@@ -115,7 +116,7 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements Composit
      */
     public function setHandlers(array $handlers = [])
     {
-        foreach ($handlers as $handler){
+        foreach ($handlers as $handler) {
             $this->addHandler($handler);
         }
 
@@ -144,11 +145,11 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements Composit
      *
      * @return bool
      */
-    protected function delegate(Throwable $exception) : bool
+    protected function delegate(Throwable $exception): bool
     {
         $handlers = $this->getHandlers();
-        foreach ($handlers as $handler){
-            if($handler->handle($exception) === true){
+        foreach ($handlers as $handler) {
+            if ($handler->handle($exception) === true) {
                 return true;
             }
         }
@@ -165,14 +166,14 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements Composit
      *
      * @throws LogicException If handler is invalid
      */
-    protected function resolveHandler($handler) : ExceptionHandler
+    protected function resolveHandler($handler): ExceptionHandler
     {
         $resolved = $handler;
-        if(is_string($handler)){
+        if (is_string($handler)) {
             $resolved = IoCFacade::tryMake($handler);
         }
 
-        if( ! ($resolved instanceof ExceptionHandler)){
+        if (!($resolved instanceof ExceptionHandler)) {
             throw new LogicException('Provided exception handler MUST be a valid class path. Handler MUST also inherit from \Aedart\Contracts\Exceptions\ExceptionHandler');
         }
 

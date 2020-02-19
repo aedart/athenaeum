@@ -31,19 +31,19 @@ interface CountryAware
      *
      * @return string|null country or null if no country has been set
      */
-    public function getCountry() : ?string;
+    public function getCountry(): ?string;
 
     /**
      * Check if "country" has been set
      *
      * @return bool True if "country" has been set, false if not
      */
-    public function hasCountry() : bool;
+    public function hasCountry(): bool;
 
     /**
      * Get a default "country" value, if any is available
      *
      * @return string|null Default "country" value or null if no default value is available
      */
-    public function getDefaultCountry() : ?string;
+    public function getDefaultCountry(): ?string;
 }

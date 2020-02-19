@@ -31,19 +31,19 @@ interface IdAware
      *
      * @return int|null id or null if no id has been set
      */
-    public function getId() : ?int;
+    public function getId(): ?int;
 
     /**
      * Check if "id" has been set
      *
      * @return bool True if "id" has been set, false if not
      */
-    public function hasId() : bool;
+    public function hasId(): bool;
 
     /**
      * Get a default "id" value, if any is available
      *
      * @return int|null Default "id" value or null if no default value is available
      */
-    public function getDefaultId() : ?int;
+    public function getDefaultId(): ?int;
 }

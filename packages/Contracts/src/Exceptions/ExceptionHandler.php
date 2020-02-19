@@ -35,7 +35,7 @@ interface ExceptionHandler
      *
      * @return bool True if handled, false if not
      */
-    public function handle(Throwable $exception) : bool ;
+    public function handle(Throwable $exception): bool;
 
     /**
      * Determine if given exception should be reported, e.g. logged
@@ -46,7 +46,7 @@ interface ExceptionHandler
      *
      * @return bool
      */
-    public function shouldReport(Throwable $exception) : bool ;
+    public function shouldReport(Throwable $exception): bool;
 
     /**
      * Returns a list of exceptions that this handler does not
@@ -54,7 +54,7 @@ interface ExceptionHandler
      *
      * @return Throwable[]|string[]
      */
-    public function dontReport() : array ;
+    public function dontReport(): array;
 
     /**
      * Report given exception, e.g. log exception or send notification
@@ -69,5 +69,5 @@ interface ExceptionHandler
      *
      * @return void
      */
-    public function report(Throwable $exception) : void ;
+    public function report(Throwable $exception): void;
 }

@@ -43,9 +43,9 @@ trait LocationTrait
      *
      * @return int|null location or null if no location has been set
      */
-    public function getLocation() : ?int
+    public function getLocation(): ?int
     {
-        if ( ! $this->hasLocation()) {
+        if (!$this->hasLocation()) {
             $this->setLocation($this->getDefaultLocation());
         }
         return $this->location;
@@ -56,7 +56,7 @@ trait LocationTrait
      *
      * @return bool True if "location" has been set, false if not
      */
-    public function hasLocation() : bool
+    public function hasLocation(): bool
     {
         return isset($this->location);
     }
@@ -66,7 +66,7 @@ trait LocationTrait
      *
      * @return int|null Default "location" value or null if no default value is available
      */
-    public function getDefaultLocation() : ?int
+    public function getDefaultLocation(): ?int
     {
         return null;
     }

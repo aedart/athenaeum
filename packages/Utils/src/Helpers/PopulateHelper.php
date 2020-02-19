@@ -25,7 +25,7 @@ class PopulateHelper
      * @throws Exception If there are too few properties provided or if the required
      *                   properties are not present in the given data array
      */
-    public static function verifyRequired(array $data, array $required) : void
+    public static function verifyRequired(array $data, array $required): void
     {
         // Check if the provided data has less entries, than the
         // required
@@ -35,7 +35,7 @@ class PopulateHelper
 
         // Check that all of the required are present
         foreach ($required as $requiredKey) {
-            if( ! isset($data[$requiredKey])){
+            if (!isset($data[$requiredKey])) {
                 throw new Exception(sprintf('Cannot populate, missing %s', $requiredKey));
             }
         }

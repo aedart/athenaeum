@@ -43,9 +43,9 @@ trait ProductionDateTrait
      *
      * @return string|null production date or null if no production date has been set
      */
-    public function getProductionDate() : ?string
+    public function getProductionDate(): ?string
     {
-        if ( ! $this->hasProductionDate()) {
+        if (!$this->hasProductionDate()) {
             $this->setProductionDate($this->getDefaultProductionDate());
         }
         return $this->productionDate;
@@ -56,7 +56,7 @@ trait ProductionDateTrait
      *
      * @return bool True if "production date" has been set, false if not
      */
-    public function hasProductionDate() : bool
+    public function hasProductionDate(): bool
     {
         return isset($this->productionDate);
     }
@@ -66,7 +66,7 @@ trait ProductionDateTrait
      *
      * @return string|null Default "production date" value or null if no default value is available
      */
-    public function getDefaultProductionDate() : ?string
+    public function getDefaultProductionDate(): ?string
     {
         return null;
     }

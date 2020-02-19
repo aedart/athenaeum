@@ -31,19 +31,19 @@ interface PhoneAware
      *
      * @return string|null phone or null if no phone has been set
      */
-    public function getPhone() : ?string;
+    public function getPhone(): ?string;
 
     /**
      * Check if "phone" has been set
      *
      * @return bool True if "phone" has been set, false if not
      */
-    public function hasPhone() : bool;
+    public function hasPhone(): bool;
 
     /**
      * Get a default "phone" value, if any is available
      *
      * @return string|null Default "phone" value or null if no default value is available
      */
-    public function getDefaultPhone() : ?string;
+    public function getDefaultPhone(): ?string;
 }

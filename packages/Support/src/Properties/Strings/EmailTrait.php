@@ -43,9 +43,9 @@ trait EmailTrait
      *
      * @return string|null email or null if no email has been set
      */
-    public function getEmail() : ?string
+    public function getEmail(): ?string
     {
-        if ( ! $this->hasEmail()) {
+        if (!$this->hasEmail()) {
             $this->setEmail($this->getDefaultEmail());
         }
         return $this->email;
@@ -56,7 +56,7 @@ trait EmailTrait
      *
      * @return bool True if "email" has been set, false if not
      */
-    public function hasEmail() : bool
+    public function hasEmail(): bool
     {
         return isset($this->email);
     }
@@ -66,7 +66,7 @@ trait EmailTrait
      *
      * @return string|null Default "email" value or null if no default value is available
      */
-    public function getDefaultEmail() : ?string
+    public function getDefaultEmail(): ?string
     {
         return null;
     }

@@ -43,9 +43,9 @@ trait SwiftTrait
      *
      * @return string|null swift or null if no swift has been set
      */
-    public function getSwift() : ?string
+    public function getSwift(): ?string
     {
-        if ( ! $this->hasSwift()) {
+        if (!$this->hasSwift()) {
             $this->setSwift($this->getDefaultSwift());
         }
         return $this->swift;
@@ -56,7 +56,7 @@ trait SwiftTrait
      *
      * @return bool True if "swift" has been set, false if not
      */
-    public function hasSwift() : bool
+    public function hasSwift(): bool
     {
         return isset($this->swift);
     }
@@ -66,7 +66,7 @@ trait SwiftTrait
      *
      * @return string|null Default "swift" value or null if no default value is available
      */
-    public function getDefaultSwift() : ?string
+    public function getDefaultSwift(): ?string
     {
         return null;
     }

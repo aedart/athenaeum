@@ -31,19 +31,19 @@ interface LengthAware
      *
      * @return int|null length or null if no length has been set
      */
-    public function getLength() : ?int;
+    public function getLength(): ?int;
 
     /**
      * Check if "length" has been set
      *
      * @return bool True if "length" has been set, false if not
      */
-    public function hasLength() : bool;
+    public function hasLength(): bool;
 
     /**
      * Get a default "length" value, if any is available
      *
      * @return int|null Default "length" value or null if no default value is available
      */
-    public function getDefaultLength() : ?int;
+    public function getDefaultLength(): ?int;
 }

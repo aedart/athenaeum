@@ -31,19 +31,19 @@ interface TopicAware
      *
      * @return string|null topic or null if no topic has been set
      */
-    public function getTopic() : ?string;
+    public function getTopic(): ?string;
 
     /**
      * Check if "topic" has been set
      *
      * @return bool True if "topic" has been set, false if not
      */
-    public function hasTopic() : bool;
+    public function hasTopic(): bool;
 
     /**
      * Get a default "topic" value, if any is available
      *
      * @return string|null Default "topic" value or null if no default value is available
      */
-    public function getDefaultTopic() : ?string;
+    public function getDefaultTopic(): ?string;
 }

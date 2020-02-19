@@ -31,19 +31,19 @@ interface SizeAware
      *
      * @return float|null size or null if no size has been set
      */
-    public function getSize() : ?float;
+    public function getSize(): ?float;
 
     /**
      * Check if "size" has been set
      *
      * @return bool True if "size" has been set, false if not
      */
-    public function hasSize() : bool;
+    public function hasSize(): bool;
 
     /**
      * Get a default "size" value, if any is available
      *
      * @return float|null Default "size" value or null if no default value is available
      */
-    public function getDefaultSize() : ?float;
+    public function getDefaultSize(): ?float;
 }

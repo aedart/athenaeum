@@ -43,9 +43,9 @@ trait Ean13Trait
      *
      * @return string|null ean13 or null if no ean13 has been set
      */
-    public function getEan13() : ?string
+    public function getEan13(): ?string
     {
-        if ( ! $this->hasEan13()) {
+        if (!$this->hasEan13()) {
             $this->setEan13($this->getDefaultEan13());
         }
         return $this->ean13;
@@ -56,7 +56,7 @@ trait Ean13Trait
      *
      * @return bool True if "ean13" has been set, false if not
      */
-    public function hasEan13() : bool
+    public function hasEan13(): bool
     {
         return isset($this->ean13);
     }
@@ -66,7 +66,7 @@ trait Ean13Trait
      *
      * @return string|null Default "ean13" value or null if no default value is available
      */
-    public function getDefaultEan13() : ?string
+    public function getDefaultEan13(): ?string
     {
         return null;
     }

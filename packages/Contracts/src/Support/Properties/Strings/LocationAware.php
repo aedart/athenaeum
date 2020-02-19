@@ -31,19 +31,19 @@ interface LocationAware
      *
      * @return string|null location or null if no location has been set
      */
-    public function getLocation() : ?string;
+    public function getLocation(): ?string;
 
     /**
      * Check if "location" has been set
      *
      * @return bool True if "location" has been set, false if not
      */
-    public function hasLocation() : bool;
+    public function hasLocation(): bool;
 
     /**
      * Get a default "location" value, if any is available
      *
      * @return string|null Default "location" value or null if no default value is available
      */
-    public function getDefaultLocation() : ?string;
+    public function getDefaultLocation(): ?string;
 }

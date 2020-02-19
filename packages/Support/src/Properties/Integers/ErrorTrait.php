@@ -43,9 +43,9 @@ trait ErrorTrait
      *
      * @return int|null error or null if no error has been set
      */
-    public function getError() : ?int
+    public function getError(): ?int
     {
-        if ( ! $this->hasError()) {
+        if (!$this->hasError()) {
             $this->setError($this->getDefaultError());
         }
         return $this->error;
@@ -56,7 +56,7 @@ trait ErrorTrait
      *
      * @return bool True if "error" has been set, false if not
      */
-    public function hasError() : bool
+    public function hasError(): bool
     {
         return isset($this->error);
     }
@@ -66,7 +66,7 @@ trait ErrorTrait
      *
      * @return int|null Default "error" value or null if no default value is available
      */
-    public function getDefaultError() : ?int
+    public function getDefaultError(): ?int
     {
         return null;
     }

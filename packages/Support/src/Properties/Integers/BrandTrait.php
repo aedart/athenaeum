@@ -43,9 +43,9 @@ trait BrandTrait
      *
      * @return int|null brand or null if no brand has been set
      */
-    public function getBrand() : ?int
+    public function getBrand(): ?int
     {
-        if ( ! $this->hasBrand()) {
+        if (!$this->hasBrand()) {
             $this->setBrand($this->getDefaultBrand());
         }
         return $this->brand;
@@ -56,7 +56,7 @@ trait BrandTrait
      *
      * @return bool True if "brand" has been set, false if not
      */
-    public function hasBrand() : bool
+    public function hasBrand(): bool
     {
         return isset($this->brand);
     }
@@ -66,7 +66,7 @@ trait BrandTrait
      *
      * @return int|null Default "brand" value or null if no default value is available
      */
-    public function getDefaultBrand() : ?int
+    public function getDefaultBrand(): ?int
     {
         return null;
     }

@@ -43,9 +43,9 @@ trait ClassTrait
      *
      * @return string|null class or null if no class has been set
      */
-    public function getClass() : ?string
+    public function getClass(): ?string
     {
-        if ( ! $this->hasClass()) {
+        if (!$this->hasClass()) {
             $this->setClass($this->getDefaultClass());
         }
         return $this->class;
@@ -56,7 +56,7 @@ trait ClassTrait
      *
      * @return bool True if "class" has been set, false if not
      */
-    public function hasClass() : bool
+    public function hasClass(): bool
     {
         return isset($this->class);
     }
@@ -66,7 +66,7 @@ trait ClassTrait
      *
      * @return string|null Default "class" value or null if no default value is available
      */
-    public function getDefaultClass() : ?string
+    public function getDefaultClass(): ?string
     {
         return null;
     }

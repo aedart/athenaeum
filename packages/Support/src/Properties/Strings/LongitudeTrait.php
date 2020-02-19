@@ -43,9 +43,9 @@ trait LongitudeTrait
      *
      * @return string|null longitude or null if no longitude has been set
      */
-    public function getLongitude() : ?string
+    public function getLongitude(): ?string
     {
-        if ( ! $this->hasLongitude()) {
+        if (!$this->hasLongitude()) {
             $this->setLongitude($this->getDefaultLongitude());
         }
         return $this->longitude;
@@ -56,7 +56,7 @@ trait LongitudeTrait
      *
      * @return bool True if "longitude" has been set, false if not
      */
-    public function hasLongitude() : bool
+    public function hasLongitude(): bool
     {
         return isset($this->longitude);
     }
@@ -66,7 +66,7 @@ trait LongitudeTrait
      *
      * @return string|null Default "longitude" value or null if no default value is available
      */
-    public function getDefaultLongitude() : ?string
+    public function getDefaultLongitude(): ?string
     {
         return null;
     }

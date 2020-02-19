@@ -31,19 +31,19 @@ interface AddressAware
      *
      * @return string|null address or null if no address has been set
      */
-    public function getAddress() : ?string;
+    public function getAddress(): ?string;
 
     /**
      * Check if "address" has been set
      *
      * @return bool True if "address" has been set, false if not
      */
-    public function hasAddress() : bool;
+    public function hasAddress(): bool;
 
     /**
      * Get a default "address" value, if any is available
      *
      * @return string|null Default "address" value or null if no default value is available
      */
-    public function getDefaultAddress() : ?string;
+    public function getDefaultAddress(): ?string;
 }

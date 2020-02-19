@@ -43,9 +43,9 @@ trait LogoTrait
      *
      * @return string|null logo or null if no logo has been set
      */
-    public function getLogo() : ?string
+    public function getLogo(): ?string
     {
-        if ( ! $this->hasLogo()) {
+        if (!$this->hasLogo()) {
             $this->setLogo($this->getDefaultLogo());
         }
         return $this->logo;
@@ -56,7 +56,7 @@ trait LogoTrait
      *
      * @return bool True if "logo" has been set, false if not
      */
-    public function hasLogo() : bool
+    public function hasLogo(): bool
     {
         return isset($this->logo);
     }
@@ -66,7 +66,7 @@ trait LogoTrait
      *
      * @return string|null Default "logo" value or null if no default value is available
      */
-    public function getDefaultLogo() : ?string
+    public function getDefaultLogo(): ?string
     {
         return null;
     }

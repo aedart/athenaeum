@@ -31,19 +31,19 @@ interface XmlAware
      *
      * @return string|null xml or null if no xml has been set
      */
-    public function getXml() : ?string;
+    public function getXml(): ?string;
 
     /**
      * Check if "xml" has been set
      *
      * @return bool True if "xml" has been set, false if not
      */
-    public function hasXml() : bool;
+    public function hasXml(): bool;
 
     /**
      * Get a default "xml" value, if any is available
      *
      * @return string|null Default "xml" value or null if no default value is available
      */
-    public function getDefaultXml() : ?string;
+    public function getDefaultXml(): ?string;
 }

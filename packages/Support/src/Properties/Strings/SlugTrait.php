@@ -43,9 +43,9 @@ trait SlugTrait
      *
      * @return string|null slug or null if no slug has been set
      */
-    public function getSlug() : ?string
+    public function getSlug(): ?string
     {
-        if ( ! $this->hasSlug()) {
+        if (!$this->hasSlug()) {
             $this->setSlug($this->getDefaultSlug());
         }
         return $this->slug;
@@ -56,7 +56,7 @@ trait SlugTrait
      *
      * @return bool True if "slug" has been set, false if not
      */
-    public function hasSlug() : bool
+    public function hasSlug(): bool
     {
         return isset($this->slug);
     }
@@ -66,7 +66,7 @@ trait SlugTrait
      *
      * @return string|null Default "slug" value or null if no default value is available
      */
-    public function getDefaultSlug() : ?string
+    public function getDefaultSlug(): ?string
     {
         return null;
     }

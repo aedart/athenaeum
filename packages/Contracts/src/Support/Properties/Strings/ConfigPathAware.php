@@ -31,19 +31,19 @@ interface ConfigPathAware
      *
      * @return string|null config path or null if no config path has been set
      */
-    public function getConfigPath() : ?string;
+    public function getConfigPath(): ?string;
 
     /**
      * Check if "config path" has been set
      *
      * @return bool True if "config path" has been set, false if not
      */
-    public function hasConfigPath() : bool;
+    public function hasConfigPath(): bool;
 
     /**
      * Get a default "config path" value, if any is available
      *
      * @return string|null Default "config path" value or null if no default value is available
      */
-    public function getDefaultConfigPath() : ?string;
+    public function getDefaultConfigPath(): ?string;
 }

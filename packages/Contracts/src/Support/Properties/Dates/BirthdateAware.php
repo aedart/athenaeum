@@ -31,19 +31,19 @@ interface BirthdateAware
      *
      * @return \DateTime|null birthdate or null if no birthdate has been set
      */
-    public function getBirthdate() : ?\DateTime;
+    public function getBirthdate(): ?\DateTime;
 
     /**
      * Check if "birthdate" has been set
      *
      * @return bool True if "birthdate" has been set, false if not
      */
-    public function hasBirthdate() : bool;
+    public function hasBirthdate(): bool;
 
     /**
      * Get a default "birthdate" value, if any is available
      *
      * @return \DateTime|null Default "birthdate" value or null if no default value is available
      */
-    public function getDefaultBirthdate() : ?\DateTime;
+    public function getDefaultBirthdate(): ?\DateTime;
 }

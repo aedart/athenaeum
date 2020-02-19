@@ -2,7 +2,6 @@
 
 namespace Aedart\Contracts\Core\Helpers;
 
-use JsonException;
 use RuntimeException;
 
 /**
@@ -22,5 +21,5 @@ interface NamespaceDetector
      *
      * @throws RuntimeException
      */
-    public function detect(string $composerPath) : string ;
+    public function detect(string $composerPath): string;
 }

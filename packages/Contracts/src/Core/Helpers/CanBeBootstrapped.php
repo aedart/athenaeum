@@ -23,5 +23,5 @@ interface CanBeBootstrapped
      *
      * @param Application $application
      */
-    public function bootstrap(Application $application) : void ;
+    public function bootstrap(Application $application): void;
 }

@@ -31,19 +31,19 @@ interface HeightAware
      *
      * @return float|null height or null if no height has been set
      */
-    public function getHeight() : ?float;
+    public function getHeight(): ?float;
 
     /**
      * Check if "height" has been set
      *
      * @return bool True if "height" has been set, false if not
      */
-    public function hasHeight() : bool;
+    public function hasHeight(): bool;
 
     /**
      * Get a default "height" value, if any is available
      *
      * @return float|null Default "height" value or null if no default value is available
      */
-    public function getDefaultHeight() : ?float;
+    public function getDefaultHeight(): ?float;
 }

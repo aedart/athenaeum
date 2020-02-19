@@ -16,5 +16,4 @@ use LogicException;
  */
 class UndefinedProperty extends LogicException
 {
-
 }

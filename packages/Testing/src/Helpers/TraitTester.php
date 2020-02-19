@@ -114,7 +114,7 @@ class TraitTester
         $mock = $this->mock;
 
         // Ensures default value is null (by default)
-        if($assertDefaultIsNull){
+        if ($assertDefaultIsNull) {
             $this->assertDefaultValueIsNull($mock);
         }
 
@@ -264,7 +264,7 @@ class TraitTester
      *
      * @return MockObject
      */
-    public function makeTraitMock(string $trait, array $methods = []) : MockObject
+    public function makeTraitMock(string $trait, array $methods = []): MockObject
     {
         $builder = $this->testCase->getMockBuilder($trait);
         $builder
@@ -283,7 +283,7 @@ class TraitTester
      *
      * @return MockObject
      */
-    public function getTraitMock() : MockObject
+    public function getTraitMock(): MockObject
     {
         return $this->mock;
     }
@@ -298,7 +298,7 @@ class TraitTester
      * @throws ReflectionException
      * @throws IncorrectPropertiesAmount
      */
-    public function guessProperty(string $trait) : string
+    public function guessProperty(string $trait): string
     {
         $reflection = new ReflectionClass($trait);
 
@@ -321,7 +321,7 @@ class TraitTester
      *
      * @return string
      */
-    public function getPropertyName() : string
+    public function getPropertyName(): string
     {
         return ucwords($this->property);
     }
@@ -333,7 +333,7 @@ class TraitTester
      *
      * @return string E.g. setDescription, setName, setId
      */
-    public function setPropertyMethodName() : string
+    public function setPropertyMethodName(): string
     {
         return 'set' . $this->getPropertyName();
     }
@@ -345,7 +345,7 @@ class TraitTester
      *
      * @return string E.g. getDescription, getName, getId
      */
-    public function getPropertyMethodName() : string
+    public function getPropertyMethodName(): string
     {
         return 'get' . $this->getPropertyName();
     }
@@ -357,7 +357,7 @@ class TraitTester
      *
      * @return string E.g. hasDescription, hasName, hasId
      */
-    public function hasPropertyMethodName() : string
+    public function hasPropertyMethodName(): string
     {
         return 'has' . $this->getPropertyName();
     }
@@ -369,7 +369,7 @@ class TraitTester
      *
      * @return string E.g. getDefaultDescription, getDefaultName, getDefaultId
      */
-    public function getDefaultPropertyMethodName() : string
+    public function getDefaultPropertyMethodName(): string
     {
         return 'getDefault' . $this->getPropertyName();
     }

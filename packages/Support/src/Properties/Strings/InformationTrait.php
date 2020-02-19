@@ -43,9 +43,9 @@ trait InformationTrait
      *
      * @return string|null information or null if no information has been set
      */
-    public function getInformation() : ?string
+    public function getInformation(): ?string
     {
-        if ( ! $this->hasInformation()) {
+        if (!$this->hasInformation()) {
             $this->setInformation($this->getDefaultInformation());
         }
         return $this->information;
@@ -56,7 +56,7 @@ trait InformationTrait
      *
      * @return bool True if "information" has been set, false if not
      */
-    public function hasInformation() : bool
+    public function hasInformation(): bool
     {
         return isset($this->information);
     }
@@ -66,7 +66,7 @@ trait InformationTrait
      *
      * @return string|null Default "information" value or null if no default value is available
      */
-    public function getDefaultInformation() : ?string
+    public function getDefaultInformation(): ?string
     {
         return null;
     }

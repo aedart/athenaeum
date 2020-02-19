@@ -43,9 +43,9 @@ trait DistanceTrait
      *
      * @return int|null distance or null if no distance has been set
      */
-    public function getDistance() : ?int
+    public function getDistance(): ?int
     {
-        if ( ! $this->hasDistance()) {
+        if (!$this->hasDistance()) {
             $this->setDistance($this->getDefaultDistance());
         }
         return $this->distance;
@@ -56,7 +56,7 @@ trait DistanceTrait
      *
      * @return bool True if "distance" has been set, false if not
      */
-    public function hasDistance() : bool
+    public function hasDistance(): bool
     {
         return isset($this->distance);
     }
@@ -66,7 +66,7 @@ trait DistanceTrait
      *
      * @return int|null Default "distance" value or null if no default value is available
      */
-    public function getDefaultDistance() : ?int
+    public function getDefaultDistance(): ?int
     {
         return null;
     }

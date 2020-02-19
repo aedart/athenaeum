@@ -31,19 +31,19 @@ interface VatAware
      *
      * @return float|null vat or null if no vat has been set
      */
-    public function getVat() : ?float;
+    public function getVat(): ?float;
 
     /**
      * Check if "vat" has been set
      *
      * @return bool True if "vat" has been set, false if not
      */
-    public function hasVat() : bool;
+    public function hasVat(): bool;
 
     /**
      * Get a default "vat" value, if any is available
      *
      * @return float|null Default "vat" value or null if no default value is available
      */
-    public function getDefaultVat() : ?float;
+    public function getDefaultVat(): ?float;
 }

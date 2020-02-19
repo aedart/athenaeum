@@ -31,19 +31,19 @@ interface ColumnAware
      *
      * @return string|null column or null if no column has been set
      */
-    public function getColumn() : ?string;
+    public function getColumn(): ?string;
 
     /**
      * Check if "column" has been set
      *
      * @return bool True if "column" has been set, false if not
      */
-    public function hasColumn() : bool;
+    public function hasColumn(): bool;
 
     /**
      * Get a default "column" value, if any is available
      *
      * @return string|null Default "column" value or null if no default value is available
      */
-    public function getDefaultColumn() : ?string;
+    public function getDefaultColumn(): ?string;
 }

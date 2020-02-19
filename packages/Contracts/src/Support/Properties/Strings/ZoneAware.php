@@ -31,19 +31,19 @@ interface ZoneAware
      *
      * @return string|null zone or null if no zone has been set
      */
-    public function getZone() : ?string;
+    public function getZone(): ?string;
 
     /**
      * Check if "zone" has been set
      *
      * @return bool True if "zone" has been set, false if not
      */
-    public function hasZone() : bool;
+    public function hasZone(): bool;
 
     /**
      * Get a default "zone" value, if any is available
      *
      * @return string|null Default "zone" value or null if no default value is available
      */
-    public function getDefaultZone() : ?string;
+    public function getDefaultZone(): ?string;
 }

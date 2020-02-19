@@ -43,9 +43,9 @@ trait StateTrait
      *
      * @return string|null state or null if no state has been set
      */
-    public function getState() : ?string
+    public function getState(): ?string
     {
-        if ( ! $this->hasState()) {
+        if (!$this->hasState()) {
             $this->setState($this->getDefaultState());
         }
         return $this->state;
@@ -56,7 +56,7 @@ trait StateTrait
      *
      * @return bool True if "state" has been set, false if not
      */
-    public function hasState() : bool
+    public function hasState(): bool
     {
         return isset($this->state);
     }
@@ -66,7 +66,7 @@ trait StateTrait
      *
      * @return string|null Default "state" value or null if no default value is available
      */
-    public function getDefaultState() : ?string
+    public function getDefaultState(): ?string
     {
         return null;
     }

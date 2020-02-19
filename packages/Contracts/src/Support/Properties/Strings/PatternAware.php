@@ -31,19 +31,19 @@ interface PatternAware
      *
      * @return string|null pattern or null if no pattern has been set
      */
-    public function getPattern() : ?string;
+    public function getPattern(): ?string;
 
     /**
      * Check if "pattern" has been set
      *
      * @return bool True if "pattern" has been set, false if not
      */
-    public function hasPattern() : bool;
+    public function hasPattern(): bool;
 
     /**
      * Get a default "pattern" value, if any is available
      *
      * @return string|null Default "pattern" value or null if no default value is available
      */
-    public function getDefaultPattern() : ?string;
+    public function getDefaultPattern(): ?string;
 }

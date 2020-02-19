@@ -43,9 +43,9 @@ trait JsonTrait
      *
      * @return string|null json or null if no json has been set
      */
-    public function getJson() : ?string
+    public function getJson(): ?string
     {
-        if ( ! $this->hasJson()) {
+        if (!$this->hasJson()) {
             $this->setJson($this->getDefaultJson());
         }
         return $this->json;
@@ -56,7 +56,7 @@ trait JsonTrait
      *
      * @return bool True if "json" has been set, false if not
      */
-    public function hasJson() : bool
+    public function hasJson(): bool
     {
         return isset($this->json);
     }
@@ -66,7 +66,7 @@ trait JsonTrait
      *
      * @return string|null Default "json" value or null if no default value is available
      */
-    public function getDefaultJson() : ?string
+    public function getDefaultJson(): ?string
     {
         return null;
     }

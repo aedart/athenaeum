@@ -43,9 +43,9 @@ trait PercentageTrait
      *
      * @return float|null percentage or null if no percentage has been set
      */
-    public function getPercentage() : ?float
+    public function getPercentage(): ?float
     {
-        if ( ! $this->hasPercentage()) {
+        if (!$this->hasPercentage()) {
             $this->setPercentage($this->getDefaultPercentage());
         }
         return $this->percentage;
@@ -56,7 +56,7 @@ trait PercentageTrait
      *
      * @return bool True if "percentage" has been set, false if not
      */
-    public function hasPercentage() : bool
+    public function hasPercentage(): bool
     {
         return isset($this->percentage);
     }
@@ -66,7 +66,7 @@ trait PercentageTrait
      *
      * @return float|null Default "percentage" value or null if no default value is available
      */
-    public function getDefaultPercentage() : ?float
+    public function getDefaultPercentage(): ?float
     {
         return null;
     }

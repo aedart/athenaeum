@@ -31,19 +31,19 @@ interface LatitudeAware
      *
      * @return string|null latitude or null if no latitude has been set
      */
-    public function getLatitude() : ?string;
+    public function getLatitude(): ?string;
 
     /**
      * Check if "latitude" has been set
      *
      * @return bool True if "latitude" has been set, false if not
      */
-    public function hasLatitude() : bool;
+    public function hasLatitude(): bool;
 
     /**
      * Get a default "latitude" value, if any is available
      *
      * @return string|null Default "latitude" value or null if no default value is available
      */
-    public function getDefaultLatitude() : ?string;
+    public function getDefaultLatitude(): ?string;
 }

@@ -31,19 +31,19 @@ interface IndexAware
      *
      * @return int|null index or null if no index has been set
      */
-    public function getIndex() : ?int;
+    public function getIndex(): ?int;
 
     /**
      * Check if "index" has been set
      *
      * @return bool True if "index" has been set, false if not
      */
-    public function hasIndex() : bool;
+    public function hasIndex(): bool;
 
     /**
      * Get a default "index" value, if any is available
      *
      * @return int|null Default "index" value or null if no default value is available
      */
-    public function getDefaultIndex() : ?int;
+    public function getDefaultIndex(): ?int;
 }

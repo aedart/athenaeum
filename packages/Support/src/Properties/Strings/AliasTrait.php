@@ -43,9 +43,9 @@ trait AliasTrait
      *
      * @return string|null alias or null if no alias has been set
      */
-    public function getAlias() : ?string
+    public function getAlias(): ?string
     {
-        if ( ! $this->hasAlias()) {
+        if (!$this->hasAlias()) {
             $this->setAlias($this->getDefaultAlias());
         }
         return $this->alias;
@@ -56,7 +56,7 @@ trait AliasTrait
      *
      * @return bool True if "alias" has been set, false if not
      */
-    public function hasAlias() : bool
+    public function hasAlias(): bool
     {
         return isset($this->alias);
     }
@@ -66,7 +66,7 @@ trait AliasTrait
      *
      * @return string|null Default "alias" value or null if no default value is available
      */
-    public function getDefaultAlias() : ?string
+    public function getDefaultAlias(): ?string
     {
         return null;
     }

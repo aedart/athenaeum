@@ -43,9 +43,9 @@ trait ProfileTrait
      *
      * @return string|null profile or null if no profile has been set
      */
-    public function getProfile() : ?string
+    public function getProfile(): ?string
     {
-        if ( ! $this->hasProfile()) {
+        if (!$this->hasProfile()) {
             $this->setProfile($this->getDefaultProfile());
         }
         return $this->profile;
@@ -56,7 +56,7 @@ trait ProfileTrait
      *
      * @return bool True if "profile" has been set, false if not
      */
-    public function hasProfile() : bool
+    public function hasProfile(): bool
     {
         return isset($this->profile);
     }
@@ -66,7 +66,7 @@ trait ProfileTrait
      *
      * @return string|null Default "profile" value or null if no default value is available
      */
-    public function getDefaultProfile() : ?string
+    public function getDefaultProfile(): ?string
     {
         return null;
     }

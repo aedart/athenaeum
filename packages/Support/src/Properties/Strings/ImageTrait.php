@@ -43,9 +43,9 @@ trait ImageTrait
      *
      * @return string|null image or null if no image has been set
      */
-    public function getImage() : ?string
+    public function getImage(): ?string
     {
-        if ( ! $this->hasImage()) {
+        if (!$this->hasImage()) {
             $this->setImage($this->getDefaultImage());
         }
         return $this->image;
@@ -56,7 +56,7 @@ trait ImageTrait
      *
      * @return bool True if "image" has been set, false if not
      */
-    public function hasImage() : bool
+    public function hasImage(): bool
     {
         return isset($this->image);
     }
@@ -66,7 +66,7 @@ trait ImageTrait
      *
      * @return string|null Default "image" value or null if no default value is available
      */
-    public function getDefaultImage() : ?string
+    public function getDefaultImage(): ?string
     {
         return null;
     }

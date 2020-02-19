@@ -31,19 +31,19 @@ interface WidthAware
      *
      * @return int|null width or null if no width has been set
      */
-    public function getWidth() : ?int;
+    public function getWidth(): ?int;
 
     /**
      * Check if "width" has been set
      *
      * @return bool True if "width" has been set, false if not
      */
-    public function hasWidth() : bool;
+    public function hasWidth(): bool;
 
     /**
      * Get a default "width" value, if any is available
      *
      * @return int|null Default "width" value or null if no default value is available
      */
-    public function getDefaultWidth() : ?int;
+    public function getDefaultWidth(): ?int;
 }

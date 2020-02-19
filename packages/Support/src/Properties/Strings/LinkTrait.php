@@ -43,9 +43,9 @@ trait LinkTrait
      *
      * @return string|null link or null if no link has been set
      */
-    public function getLink() : ?string
+    public function getLink(): ?string
     {
-        if ( ! $this->hasLink()) {
+        if (!$this->hasLink()) {
             $this->setLink($this->getDefaultLink());
         }
         return $this->link;
@@ -56,7 +56,7 @@ trait LinkTrait
      *
      * @return bool True if "link" has been set, false if not
      */
-    public function hasLink() : bool
+    public function hasLink(): bool
     {
         return isset($this->link);
     }
@@ -66,7 +66,7 @@ trait LinkTrait
      *
      * @return string|null Default "link" value or null if no default value is available
      */
-    public function getDefaultLink() : ?string
+    public function getDefaultLink(): ?string
     {
         return null;
     }

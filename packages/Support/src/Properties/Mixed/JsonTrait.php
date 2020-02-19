@@ -45,7 +45,7 @@ trait JsonTrait
      */
     public function getJson()
     {
-        if ( ! $this->hasJson()) {
+        if (!$this->hasJson()) {
             $this->setJson($this->getDefaultJson());
         }
         return $this->json;
@@ -56,7 +56,7 @@ trait JsonTrait
      *
      * @return bool True if "json" has been set, false if not
      */
-    public function hasJson() : bool
+    public function hasJson(): bool
     {
         return isset($this->json);
     }

@@ -24,7 +24,8 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Core\Exceptions\Handlers
  */
-abstract class BaseExceptionHandler implements ExceptionHandler,
+abstract class BaseExceptionHandler implements
+    ExceptionHandler,
     LogManagerAware,
     LogAware,
     ConfigAware
@@ -46,8 +47,8 @@ abstract class BaseExceptionHandler implements ExceptionHandler,
     public function shouldReport(Throwable $exception): bool
     {
         $dontReportList = $this->dontReport();
-        foreach ($dontReportList as $exceptionNotToReport){
-            if($exception instanceof $exceptionNotToReport){
+        foreach ($dontReportList as $exceptionNotToReport) {
+            if ($exception instanceof $exceptionNotToReport) {
                 return false;
             }
         }
@@ -68,7 +69,7 @@ abstract class BaseExceptionHandler implements ExceptionHandler,
      */
     public function report(Throwable $exception): void
     {
-        if( ! $this->shouldReport($exception)){
+        if (!$this->shouldReport($exception)) {
             return;
         }
 
@@ -91,7 +92,7 @@ abstract class BaseExceptionHandler implements ExceptionHandler,
         $manager = IoCFacade::tryMake('log');
 
         // Build log instance, if a manager was returned
-        if(isset($manager) && method_exists($manager, 'channel')){
+        if (isset($manager) && method_exists($manager, 'channel')) {
             return $manager->channel($channel);
         }
 
@@ -113,19 +114,21 @@ abstract class BaseExceptionHandler implements ExceptionHandler,
     {
         // Abort if no log instance is available.
         $logger = $this->getLog();
-        if( ! isset($logger)){
+        if (!isset($logger)) {
             return;
         }
 
         // Try to build a context for given exception
         try {
             $context = $this->makeReportContext($exception);
-        } catch (Throwable $e){
+        } catch (Throwable $e) {
             // For whatever reason we are not able to build a context
             // for the given exception. We log a message about this,
             // and build a default content.
-            $logger->warning('Unable to build exception context. Failure detected inside exception handler',
-                             [ 'exception' => $e ]);
+            $logger->warning(
+                'Unable to build exception context. Failure detected inside exception handler',
+                [ 'exception' => $e ]
+            );
 
             $context = [ 'exception-throw' => get_class($exception) ];
         }
@@ -142,7 +145,7 @@ abstract class BaseExceptionHandler implements ExceptionHandler,
      *
      * @return array
      */
-    protected function makeReportContext(Throwable $exception) : array
+    protected function makeReportContext(Throwable $exception): array
     {
         return [
             'exception' => $exception

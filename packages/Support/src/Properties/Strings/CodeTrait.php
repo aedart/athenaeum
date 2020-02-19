@@ -43,9 +43,9 @@ trait CodeTrait
      *
      * @return string|null code or null if no code has been set
      */
-    public function getCode() : ?string
+    public function getCode(): ?string
     {
-        if ( ! $this->hasCode()) {
+        if (!$this->hasCode()) {
             $this->setCode($this->getDefaultCode());
         }
         return $this->code;
@@ -56,7 +56,7 @@ trait CodeTrait
      *
      * @return bool True if "code" has been set, false if not
      */
-    public function hasCode() : bool
+    public function hasCode(): bool
     {
         return isset($this->code);
     }
@@ -66,7 +66,7 @@ trait CodeTrait
      *
      * @return string|null Default "code" value or null if no default value is available
      */
-    public function getDefaultCode() : ?string
+    public function getDefaultCode(): ?string
     {
         return null;
     }

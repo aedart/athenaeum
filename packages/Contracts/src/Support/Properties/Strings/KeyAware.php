@@ -31,19 +31,19 @@ interface KeyAware
      *
      * @return string|null key or null if no key has been set
      */
-    public function getKey() : ?string;
+    public function getKey(): ?string;
 
     /**
      * Check if "key" has been set
      *
      * @return bool True if "key" has been set, false if not
      */
-    public function hasKey() : bool;
+    public function hasKey(): bool;
 
     /**
      * Get a default "key" value, if any is available
      *
      * @return string|null Default "key" value or null if no default value is available
      */
-    public function getDefaultKey() : ?string;
+    public function getDefaultKey(): ?string;
 }

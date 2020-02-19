@@ -38,7 +38,7 @@ interface ZAware
      *
      * @return bool True if "z" has been set, false if not
      */
-    public function hasZ() : bool;
+    public function hasZ(): bool;
 
     /**
      * Get a default "z" value, if any is available

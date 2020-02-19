@@ -31,19 +31,19 @@ interface CommentAware
      *
      * @return string|null comment or null if no comment has been set
      */
-    public function getComment() : ?string;
+    public function getComment(): ?string;
 
     /**
      * Check if "comment" has been set
      *
      * @return bool True if "comment" has been set, false if not
      */
-    public function hasComment() : bool;
+    public function hasComment(): bool;
 
     /**
      * Get a default "comment" value, if any is available
      *
      * @return string|null Default "comment" value or null if no default value is available
      */
-    public function getDefaultComment() : ?string;
+    public function getDefaultComment(): ?string;
 }

@@ -31,19 +31,19 @@ interface ProductionDateAware
      *
      * @return string|null production date or null if no production date has been set
      */
-    public function getProductionDate() : ?string;
+    public function getProductionDate(): ?string;
 
     /**
      * Check if "production date" has been set
      *
      * @return bool True if "production date" has been set, false if not
      */
-    public function hasProductionDate() : bool;
+    public function hasProductionDate(): bool;
 
     /**
      * Get a default "production date" value, if any is available
      *
      * @return string|null Default "production date" value or null if no default value is available
      */
-    public function getDefaultProductionDate() : ?string;
+    public function getDefaultProductionDate(): ?string;
 }

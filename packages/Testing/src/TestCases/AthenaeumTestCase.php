@@ -53,21 +53,20 @@ abstract class AthenaeumTestCase extends IntegrationTestCase
     /**
      * @inheritdoc
      */
-    protected function applicationPaths() : array
+    protected function applicationPaths(): array
     {
         return [
-            'basePath'          => getcwd(),
-            'bootstrapPath'     => Configuration::dataDir() . 'bootstrap',
-            'configPath'        => Configuration::dataDir() . 'config',
-            'databasePath'      => Configuration::outputDir() . 'database',
-            'environmentPath'   => getcwd(),
-            'resourcePath'      => Configuration::dataDir() . 'resources',
-            'storagePath'       => Configuration::outputDir()
+            'basePath' => getcwd(),
+            'bootstrapPath' => Configuration::dataDir() . 'bootstrap',
+            'configPath' => Configuration::dataDir() . 'config',
+            'databasePath' => Configuration::outputDir() . 'database',
+            'environmentPath' => getcwd(),
+            'resourcePath' => Configuration::dataDir() . 'resources',
+            'storagePath' => Configuration::outputDir()
         ];
     }
 
     /*****************************************************************
      * Helpers
      ****************************************************************/
-
 }

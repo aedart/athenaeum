@@ -31,19 +31,19 @@ interface Isbn13Aware
      *
      * @return string|null isbn13 or null if no isbn13 has been set
      */
-    public function getIsbn13() : ?string;
+    public function getIsbn13(): ?string;
 
     /**
      * Check if "isbn13" has been set
      *
      * @return bool True if "isbn13" has been set, false if not
      */
-    public function hasIsbn13() : bool;
+    public function hasIsbn13(): bool;
 
     /**
      * Get a default "isbn13" value, if any is available
      *
      * @return string|null Default "isbn13" value or null if no default value is available
      */
-    public function getDefaultIsbn13() : ?string;
+    public function getDefaultIsbn13(): ?string;
 }

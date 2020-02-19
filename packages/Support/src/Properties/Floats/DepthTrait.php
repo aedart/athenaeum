@@ -43,9 +43,9 @@ trait DepthTrait
      *
      * @return float|null depth or null if no depth has been set
      */
-    public function getDepth() : ?float
+    public function getDepth(): ?float
     {
-        if ( ! $this->hasDepth()) {
+        if (!$this->hasDepth()) {
             $this->setDepth($this->getDefaultDepth());
         }
         return $this->depth;
@@ -56,7 +56,7 @@ trait DepthTrait
      *
      * @return bool True if "depth" has been set, false if not
      */
-    public function hasDepth() : bool
+    public function hasDepth(): bool
     {
         return isset($this->depth);
     }
@@ -66,7 +66,7 @@ trait DepthTrait
      *
      * @return float|null Default "depth" value or null if no default value is available
      */
-    public function getDefaultDepth() : ?float
+    public function getDefaultDepth(): ?float
     {
         return null;
     }

@@ -22,5 +22,5 @@ interface Manager
      *
      * @throws ProfileNotFoundException
      */
-    public function profile(?string $profile = null, array $options = []) : Client ;
+    public function profile(?string $profile = null, array $options = []): Client;
 }

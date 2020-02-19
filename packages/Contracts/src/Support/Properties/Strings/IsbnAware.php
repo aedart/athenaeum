@@ -31,19 +31,19 @@ interface IsbnAware
      *
      * @return string|null isbn or null if no isbn has been set
      */
-    public function getIsbn() : ?string;
+    public function getIsbn(): ?string;
 
     /**
      * Check if "isbn" has been set
      *
      * @return bool True if "isbn" has been set, false if not
      */
-    public function hasIsbn() : bool;
+    public function hasIsbn(): bool;
 
     /**
      * Get a default "isbn" value, if any is available
      *
      * @return string|null Default "isbn" value or null if no default value is available
      */
-    public function getDefaultIsbn() : ?string;
+    public function getDefaultIsbn(): ?string;
 }

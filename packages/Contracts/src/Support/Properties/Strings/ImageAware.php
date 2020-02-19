@@ -31,19 +31,19 @@ interface ImageAware
      *
      * @return string|null image or null if no image has been set
      */
-    public function getImage() : ?string;
+    public function getImage(): ?string;
 
     /**
      * Check if "image" has been set
      *
      * @return bool True if "image" has been set, false if not
      */
-    public function hasImage() : bool;
+    public function hasImage(): bool;
 
     /**
      * Get a default "image" value, if any is available
      *
      * @return string|null Default "image" value or null if no default value is available
      */
-    public function getDefaultImage() : ?string;
+    public function getDefaultImage(): ?string;
 }

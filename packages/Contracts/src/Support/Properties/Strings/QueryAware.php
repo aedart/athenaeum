@@ -31,19 +31,19 @@ interface QueryAware
      *
      * @return string|null query or null if no query has been set
      */
-    public function getQuery() : ?string;
+    public function getQuery(): ?string;
 
     /**
      * Check if "query" has been set
      *
      * @return bool True if "query" has been set, false if not
      */
-    public function hasQuery() : bool;
+    public function hasQuery(): bool;
 
     /**
      * Get a default "query" value, if any is available
      *
      * @return string|null Default "query" value or null if no default value is available
      */
-    public function getDefaultQuery() : ?string;
+    public function getDefaultQuery(): ?string;
 }

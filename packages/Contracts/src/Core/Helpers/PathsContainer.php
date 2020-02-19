@@ -41,7 +41,7 @@ interface PathsContainer extends BasePathAware,
      *
      * @return string
      */
-    public function basePath(string $path = '') : string ;
+    public function basePath(string $path = ''): string;
 
     /**
      * Get a path within the "bootstrap" directory
@@ -50,7 +50,7 @@ interface PathsContainer extends BasePathAware,
      *
      * @return string
      */
-    public function bootstrapPath(string $path = '') : string ;
+    public function bootstrapPath(string $path = ''): string;
 
     /**
      * Get a path within the "config" directory
@@ -59,7 +59,7 @@ interface PathsContainer extends BasePathAware,
      *
      * @return string
      */
-    public function configPath(string $path = '') : string ;
+    public function configPath(string $path = ''): string;
 
     /**
      * Get a path with the "database" directory
@@ -68,7 +68,7 @@ interface PathsContainer extends BasePathAware,
      *
      * @return string
      */
-    public function databasePath(string $path = '') : string ;
+    public function databasePath(string $path = ''): string;
 
     /**
      * Get a path within the "environment" directory
@@ -77,7 +77,7 @@ interface PathsContainer extends BasePathAware,
      *
      * @return string
      */
-    public function environmentPath(string $path = '') : string ;
+    public function environmentPath(string $path = ''): string;
 
     /**
      * Get a path within the "resources" directory
@@ -86,7 +86,7 @@ interface PathsContainer extends BasePathAware,
      *
      * @return string
      */
-    public function resourcePath(string $path = '') : string ;
+    public function resourcePath(string $path = ''): string;
 
     /**
      * Get a path within the "storage" directory
@@ -95,5 +95,5 @@ interface PathsContainer extends BasePathAware,
      *
      * @return string
      */
-    public function storagePath(string $path = '') : string ;
+    public function storagePath(string $path = ''): string;
 }

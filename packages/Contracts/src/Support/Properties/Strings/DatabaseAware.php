@@ -31,19 +31,19 @@ interface DatabaseAware
      *
      * @return string|null database or null if no database has been set
      */
-    public function getDatabase() : ?string;
+    public function getDatabase(): ?string;
 
     /**
      * Check if "database" has been set
      *
      * @return bool True if "database" has been set, false if not
      */
-    public function hasDatabase() : bool;
+    public function hasDatabase(): bool;
 
     /**
      * Get a default "database" value, if any is available
      *
      * @return string|null Default "database" value or null if no default value is available
      */
-    public function getDefaultDatabase() : ?string;
+    public function getDefaultDatabase(): ?string;
 }

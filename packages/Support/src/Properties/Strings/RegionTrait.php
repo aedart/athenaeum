@@ -43,9 +43,9 @@ trait RegionTrait
      *
      * @return string|null region or null if no region has been set
      */
-    public function getRegion() : ?string
+    public function getRegion(): ?string
     {
-        if ( ! $this->hasRegion()) {
+        if (!$this->hasRegion()) {
             $this->setRegion($this->getDefaultRegion());
         }
         return $this->region;
@@ -56,7 +56,7 @@ trait RegionTrait
      *
      * @return bool True if "region" has been set, false if not
      */
-    public function hasRegion() : bool
+    public function hasRegion(): bool
     {
         return isset($this->region);
     }
@@ -66,7 +66,7 @@ trait RegionTrait
      *
      * @return string|null Default "region" value or null if no default value is available
      */
-    public function getDefaultRegion() : ?string
+    public function getDefaultRegion(): ?string
     {
         return null;
     }

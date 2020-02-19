@@ -31,19 +31,19 @@ interface OrganisationAware
      *
      * @return string|null organisation or null if no organisation has been set
      */
-    public function getOrganisation() : ?string;
+    public function getOrganisation(): ?string;
 
     /**
      * Check if "organisation" has been set
      *
      * @return bool True if "organisation" has been set, false if not
      */
-    public function hasOrganisation() : bool;
+    public function hasOrganisation(): bool;
 
     /**
      * Get a default "organisation" value, if any is available
      *
      * @return string|null Default "organisation" value or null if no default value is available
      */
-    public function getDefaultOrganisation() : ?string;
+    public function getDefaultOrganisation(): ?string;
 }

@@ -31,19 +31,19 @@ interface ZAware
      *
      * @return int|null z or null if no z has been set
      */
-    public function getZ() : ?int;
+    public function getZ(): ?int;
 
     /**
      * Check if "z" has been set
      *
      * @return bool True if "z" has been set, false if not
      */
-    public function hasZ() : bool;
+    public function hasZ(): bool;
 
     /**
      * Get a default "z" value, if any is available
      *
      * @return int|null Default "z" value or null if no default value is available
      */
-    public function getDefaultZ() : ?int;
+    public function getDefaultZ(): ?int;
 }

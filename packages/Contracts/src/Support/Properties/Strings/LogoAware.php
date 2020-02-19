@@ -31,19 +31,19 @@ interface LogoAware
      *
      * @return string|null logo or null if no logo has been set
      */
-    public function getLogo() : ?string;
+    public function getLogo(): ?string;
 
     /**
      * Check if "logo" has been set
      *
      * @return bool True if "logo" has been set, false if not
      */
-    public function hasLogo() : bool;
+    public function hasLogo(): bool;
 
     /**
      * Get a default "logo" value, if any is available
      *
      * @return string|null Default "logo" value or null if no default value is available
      */
-    public function getDefaultLogo() : ?string;
+    public function getDefaultLogo(): ?string;
 }

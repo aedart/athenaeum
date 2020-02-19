@@ -31,19 +31,19 @@ interface TagAware
      *
      * @return string|null tag or null if no tag has been set
      */
-    public function getTag() : ?string;
+    public function getTag(): ?string;
 
     /**
      * Check if "tag" has been set
      *
      * @return bool True if "tag" has been set, false if not
      */
-    public function hasTag() : bool;
+    public function hasTag(): bool;
 
     /**
      * Get a default "tag" value, if any is available
      *
      * @return string|null Default "tag" value or null if no default value is available
      */
-    public function getDefaultTag() : ?string;
+    public function getDefaultTag(): ?string;
 }

@@ -31,19 +31,19 @@ interface SlugAware
      *
      * @return string|null slug or null if no slug has been set
      */
-    public function getSlug() : ?string;
+    public function getSlug(): ?string;
 
     /**
      * Check if "slug" has been set
      *
      * @return bool True if "slug" has been set, false if not
      */
-    public function hasSlug() : bool;
+    public function hasSlug(): bool;
 
     /**
      * Get a default "slug" value, if any is available
      *
      * @return string|null Default "slug" value or null if no default value is available
      */
-    public function getDefaultSlug() : ?string;
+    public function getDefaultSlug(): ?string;
 }

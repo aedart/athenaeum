@@ -31,19 +31,19 @@ interface AnniversaryAware
      *
      * @return \DateTime|null anniversary or null if no anniversary has been set
      */
-    public function getAnniversary() : ?\DateTime;
+    public function getAnniversary(): ?\DateTime;
 
     /**
      * Check if "anniversary" has been set
      *
      * @return bool True if "anniversary" has been set, false if not
      */
-    public function hasAnniversary() : bool;
+    public function hasAnniversary(): bool;
 
     /**
      * Get a default "anniversary" value, if any is available
      *
      * @return \DateTime|null Default "anniversary" value or null if no default value is available
      */
-    public function getDefaultAnniversary() : ?\DateTime;
+    public function getDefaultAnniversary(): ?\DateTime;
 }

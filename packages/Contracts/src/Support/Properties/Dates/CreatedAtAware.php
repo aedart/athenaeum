@@ -31,19 +31,19 @@ interface CreatedAtAware
      *
      * @return \DateTime|null created at or null if no created at has been set
      */
-    public function getCreatedAt() : ?\DateTime;
+    public function getCreatedAt(): ?\DateTime;
 
     /**
      * Check if "created at" has been set
      *
      * @return bool True if "created at" has been set, false if not
      */
-    public function hasCreatedAt() : bool;
+    public function hasCreatedAt(): bool;
 
     /**
      * Get a default "created at" value, if any is available
      *
      * @return \DateTime|null Default "created at" value or null if no default value is available
      */
-    public function getDefaultCreatedAt() : ?\DateTime;
+    public function getDefaultCreatedAt(): ?\DateTime;
 }

@@ -43,9 +43,9 @@ trait PurchasedAtTrait
      *
      * @return \DateTime|null purchased at or null if no purchased at has been set
      */
-    public function getPurchasedAt() : ?\DateTime
+    public function getPurchasedAt(): ?\DateTime
     {
-        if ( ! $this->hasPurchasedAt()) {
+        if (!$this->hasPurchasedAt()) {
             $this->setPurchasedAt($this->getDefaultPurchasedAt());
         }
         return $this->purchasedAt;
@@ -56,7 +56,7 @@ trait PurchasedAtTrait
      *
      * @return bool True if "purchased at" has been set, false if not
      */
-    public function hasPurchasedAt() : bool
+    public function hasPurchasedAt(): bool
     {
         return isset($this->purchasedAt);
     }
@@ -66,7 +66,7 @@ trait PurchasedAtTrait
      *
      * @return \DateTime|null Default "purchased at" value or null if no default value is available
      */
-    public function getDefaultPurchasedAt() : ?\DateTime
+    public function getDefaultPurchasedAt(): ?\DateTime
     {
         return null;
     }

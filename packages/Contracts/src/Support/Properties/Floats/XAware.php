@@ -31,19 +31,19 @@ interface XAware
      *
      * @return float|null x or null if no x has been set
      */
-    public function getX() : ?float;
+    public function getX(): ?float;
 
     /**
      * Check if "x" has been set
      *
      * @return bool True if "x" has been set, false if not
      */
-    public function hasX() : bool;
+    public function hasX(): bool;
 
     /**
      * Get a default "x" value, if any is available
      *
      * @return float|null Default "x" value or null if no default value is available
      */
-    public function getDefaultX() : ?float;
+    public function getDefaultX(): ?float;
 }

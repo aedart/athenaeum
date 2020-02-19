@@ -31,19 +31,19 @@ interface CurrencyAware
      *
      * @return string|null currency or null if no currency has been set
      */
-    public function getCurrency() : ?string;
+    public function getCurrency(): ?string;
 
     /**
      * Check if "currency" has been set
      *
      * @return bool True if "currency" has been set, false if not
      */
-    public function hasCurrency() : bool;
+    public function hasCurrency(): bool;
 
     /**
      * Get a default "currency" value, if any is available
      *
      * @return string|null Default "currency" value or null if no default value is available
      */
-    public function getDefaultCurrency() : ?string;
+    public function getDefaultCurrency(): ?string;
 }

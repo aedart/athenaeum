@@ -31,19 +31,19 @@ interface RateAware
      *
      * @return string|null rate or null if no rate has been set
      */
-    public function getRate() : ?string;
+    public function getRate(): ?string;
 
     /**
      * Check if "rate" has been set
      *
      * @return bool True if "rate" has been set, false if not
      */
-    public function hasRate() : bool;
+    public function hasRate(): bool;
 
     /**
      * Get a default "rate" value, if any is available
      *
      * @return string|null Default "rate" value or null if no default value is available
      */
-    public function getDefaultRate() : ?string;
+    public function getDefaultRate(): ?string;
 }

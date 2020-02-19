@@ -43,9 +43,9 @@ trait IpV6Trait
      *
      * @return string|null ip v6 or null if no ip v6 has been set
      */
-    public function getIpV6() : ?string
+    public function getIpV6(): ?string
     {
-        if ( ! $this->hasIpV6()) {
+        if (!$this->hasIpV6()) {
             $this->setIpV6($this->getDefaultIpV6());
         }
         return $this->ipV6;
@@ -56,7 +56,7 @@ trait IpV6Trait
      *
      * @return bool True if "ip v6" has been set, false if not
      */
-    public function hasIpV6() : bool
+    public function hasIpV6(): bool
     {
         return isset($this->ipV6);
     }
@@ -66,7 +66,7 @@ trait IpV6Trait
      *
      * @return string|null Default "ip v6" value or null if no default value is available
      */
-    public function getDefaultIpV6() : ?string
+    public function getDefaultIpV6(): ?string
     {
         return null;
     }

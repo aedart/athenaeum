@@ -43,9 +43,9 @@ trait QuestionTrait
      *
      * @return string|null question or null if no question has been set
      */
-    public function getQuestion() : ?string
+    public function getQuestion(): ?string
     {
-        if ( ! $this->hasQuestion()) {
+        if (!$this->hasQuestion()) {
             $this->setQuestion($this->getDefaultQuestion());
         }
         return $this->question;
@@ -56,7 +56,7 @@ trait QuestionTrait
      *
      * @return bool True if "question" has been set, false if not
      */
-    public function hasQuestion() : bool
+    public function hasQuestion(): bool
     {
         return isset($this->question);
     }
@@ -66,7 +66,7 @@ trait QuestionTrait
      *
      * @return string|null Default "question" value or null if no default value is available
      */
-    public function getDefaultQuestion() : ?string
+    public function getDefaultQuestion(): ?string
     {
         return null;
     }

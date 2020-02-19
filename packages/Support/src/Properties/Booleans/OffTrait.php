@@ -13,7 +13,7 @@ namespace Aedart\Support\Properties\Booleans;
 trait OffTrait
 {
     /**
-     * 
+     *
      *
      * @var bool|null
      */
@@ -22,7 +22,7 @@ trait OffTrait
     /**
      * Set off
      *
-     * @param bool|null $isOff 
+     * @param bool|null $isOff
      *
      * @return self
      */
@@ -43,9 +43,9 @@ trait OffTrait
      *
      * @return bool|null off or null if no off has been set
      */
-    public function getOff() : ?bool
+    public function getOff(): ?bool
     {
-        if ( ! $this->hasOff()) {
+        if (!$this->hasOff()) {
             $this->setOff($this->getDefaultOff());
         }
         return $this->off;
@@ -56,7 +56,7 @@ trait OffTrait
      *
      * @return bool True if "off" has been set, false if not
      */
-    public function hasOff() : bool
+    public function hasOff(): bool
     {
         return isset($this->off);
     }
@@ -66,7 +66,7 @@ trait OffTrait
      *
      * @return bool|null Default "off" value or null if no default value is available
      */
-    public function getDefaultOff() : ?bool
+    public function getDefaultOff(): ?bool
     {
         return null;
     }

@@ -4,14 +4,14 @@ use Aedart\Contracts\Core\Helpers\PathsContainer;
 use Aedart\Support\Facades\IoCFacade;
 use Illuminate\Contracts\Foundation\Application;
 
-if( ! function_exists('paths')){
+if (!function_exists('paths')) {
 
     /**
      * Get he paths container
      *
      * @return mixed|PathsContainer|Application
      */
-    function paths() : ?PathsContainer
+    function paths(): ?PathsContainer
     {
         // Try to resolve the Paths Container if possible. If not,
         // try to default to Laravel's application. This is in case
@@ -26,7 +26,7 @@ if( ! function_exists('paths')){
     }
 }
 
-if( ! function_exists('base_path')){
+if (!function_exists('base_path')) {
 
     /**
      * Get a path within the "base" directory
@@ -35,13 +35,13 @@ if( ! function_exists('base_path')){
      *
      * @return string
      */
-    function base_path(string $path = '') : string
+    function base_path(string $path = ''): string
     {
         return paths()->basePath($path);
     }
 }
 
-if( ! function_exists('bootstrap_path')){
+if (!function_exists('bootstrap_path')) {
 
     /**
      * Get a path within the "bootstrap" directory
@@ -50,13 +50,13 @@ if( ! function_exists('bootstrap_path')){
      *
      * @return string
      */
-    function bootstrap_path(string $path = '') : string
+    function bootstrap_path(string $path = ''): string
     {
         return paths()->bootstrapPath($path);
     }
 }
 
-if( ! function_exists('config_path')){
+if (!function_exists('config_path')) {
 
     /**
      * Get a path within the "config" directory
@@ -65,13 +65,13 @@ if( ! function_exists('config_path')){
      *
      * @return string
      */
-    function config_path(string $path = '') : string
+    function config_path(string $path = ''): string
     {
         return paths()->configPath($path);
     }
 }
 
-if( ! function_exists('database_path')){
+if (!function_exists('database_path')) {
 
     /**
      * Get a path with the "database" directory
@@ -80,13 +80,13 @@ if( ! function_exists('database_path')){
      *
      * @return string
      */
-    function database_path(string $path = '') : string
+    function database_path(string $path = ''): string
     {
         return paths()->databasePath($path);
     }
 }
 
-if( ! function_exists('environment_path')){
+if (!function_exists('environment_path')) {
 
     /**
      * Get a path within the "environment" directory
@@ -95,13 +95,13 @@ if( ! function_exists('environment_path')){
      *
      * @return string
      */
-    function environment_path(string $path = '') : string
+    function environment_path(string $path = ''): string
     {
         return paths()->environmentPath($path);
     }
 }
 
-if( ! function_exists('resource_path')){
+if (!function_exists('resource_path')) {
 
     /**
      * Get a path within the "resources" directory
@@ -110,13 +110,13 @@ if( ! function_exists('resource_path')){
      *
      * @return string
      */
-    function resource_path(string $path = '') : string
+    function resource_path(string $path = ''): string
     {
         return paths()->resourcePath($path);
     }
 }
 
-if( ! function_exists('storage_path')){
+if (!function_exists('storage_path')) {
 
     /**
      * Get a path within the "storage" directory
@@ -125,7 +125,7 @@ if( ! function_exists('storage_path')){
      *
      * @return string
      */
-    function storage_path(string $path = '') : string
+    function storage_path(string $path = ''): string
     {
         return paths()->storagePath($path);
     }

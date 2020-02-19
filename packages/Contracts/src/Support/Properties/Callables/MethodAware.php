@@ -31,19 +31,19 @@ interface MethodAware
      *
      * @return callable|null method or null if no method has been set
      */
-    public function getMethod() : ?callable;
+    public function getMethod(): ?callable;
 
     /**
      * Check if "method" has been set
      *
      * @return bool True if "method" has been set, false if not
      */
-    public function hasMethod() : bool;
+    public function hasMethod(): bool;
 
     /**
      * Get a default "method" value, if any is available
      *
      * @return callable|null Default "method" value or null if no default value is available
      */
-    public function getDefaultMethod() : ?callable;
+    public function getDefaultMethod(): ?callable;
 }

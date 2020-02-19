@@ -12,5 +12,4 @@ use RuntimeException;
  */
 class IncorrectPropertiesAmount extends RuntimeException
 {
-
 }

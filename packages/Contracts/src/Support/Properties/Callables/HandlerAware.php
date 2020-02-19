@@ -31,19 +31,19 @@ interface HandlerAware
      *
      * @return callable|null handler or null if no handler has been set
      */
-    public function getHandler() : ?callable;
+    public function getHandler(): ?callable;
 
     /**
      * Check if "handler" has been set
      *
      * @return bool True if "handler" has been set, false if not
      */
-    public function hasHandler() : bool;
+    public function hasHandler(): bool;
 
     /**
      * Get a default "handler" value, if any is available
      *
      * @return callable|null Default "handler" value or null if no default value is available
      */
-    public function getDefaultHandler() : ?callable;
+    public function getDefaultHandler(): ?callable;
 }

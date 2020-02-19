@@ -37,13 +37,13 @@ trait CastingPartial
         // Get the type to cast to, if one exists.
         // If none type has been set, then just return
         // the value as it is.
-        if( ! isset($this->allowed[$name]) || is_null($value)){
+        if (!isset($this->allowed[$name]) || is_null($value)) {
             return $value;
         }
 
         // Cast value to assigned type
         $type = $this->allowed[$name];
-        switch ($type){
+        switch ($type) {
             case 'string':
             case 'str':
                 return $this->castAsString($value);
@@ -80,7 +80,7 @@ trait CastingPartial
      *
      * @return string
      */
-    protected function castAsString($value) : string
+    protected function castAsString($value): string
     {
         return (string) $value;
     }
@@ -92,7 +92,7 @@ trait CastingPartial
      *
      * @return int
      */
-    protected function castAsInteger($value) : int
+    protected function castAsInteger($value): int
     {
         return (int) $value;
     }
@@ -104,7 +104,7 @@ trait CastingPartial
      *
      * @return float
      */
-    protected function castAsFloat($value) : float
+    protected function castAsFloat($value): float
     {
         return (float) $value;
     }
@@ -116,7 +116,7 @@ trait CastingPartial
      *
      * @return bool
      */
-    protected function castAsBoolean($value) : bool
+    protected function castAsBoolean($value): bool
     {
         return (bool) $value;
     }
@@ -129,9 +129,9 @@ trait CastingPartial
      *
      * @throws JsonException
      */
-    protected function castAsArray($value) : array
+    protected function castAsArray($value): array
     {
-        if(is_array($value)){
+        if (is_array($value)) {
             return $value;
         }
 

@@ -43,9 +43,9 @@ trait EanTrait
      *
      * @return string|null ean or null if no ean has been set
      */
-    public function getEan() : ?string
+    public function getEan(): ?string
     {
-        if ( ! $this->hasEan()) {
+        if (!$this->hasEan()) {
             $this->setEan($this->getDefaultEan());
         }
         return $this->ean;
@@ -56,7 +56,7 @@ trait EanTrait
      *
      * @return bool True if "ean" has been set, false if not
      */
-    public function hasEan() : bool
+    public function hasEan(): bool
     {
         return isset($this->ean);
     }
@@ -66,7 +66,7 @@ trait EanTrait
      *
      * @return string|null Default "ean" value or null if no default value is available
      */
-    public function getDefaultEan() : ?string
+    public function getDefaultEan(): ?string
     {
         return null;
     }

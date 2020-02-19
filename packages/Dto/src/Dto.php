@@ -87,11 +87,11 @@ abstract class Dto implements DtoInterface
         $properties = $reflection->getProperties();
 
         $output = [];
-        foreach ($properties as $reflectionProperty){
+        foreach ($properties as $reflectionProperty) {
             $name = $reflectionProperty->getName();
             $method = MethodHelper::makeGetterName($name);
 
-            if($this->hasInternalMethod($method)){
+            if ($this->hasInternalMethod($method)) {
                 $output[] = $name;
             }
         }

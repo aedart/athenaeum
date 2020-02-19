@@ -31,19 +31,19 @@ interface UuidAware
      *
      * @return string|null uuid or null if no uuid has been set
      */
-    public function getUuid() : ?string;
+    public function getUuid(): ?string;
 
     /**
      * Check if "uuid" has been set
      *
      * @return bool True if "uuid" has been set, false if not
      */
-    public function hasUuid() : bool;
+    public function hasUuid(): bool;
 
     /**
      * Get a default "uuid" value, if any is available
      *
      * @return string|null Default "uuid" value or null if no default value is available
      */
-    public function getDefaultUuid() : ?string;
+    public function getDefaultUuid(): ?string;
 }

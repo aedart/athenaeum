@@ -43,9 +43,9 @@ trait OrderNumberTrait
      *
      * @return string|null order number or null if no order number has been set
      */
-    public function getOrderNumber() : ?string
+    public function getOrderNumber(): ?string
     {
-        if ( ! $this->hasOrderNumber()) {
+        if (!$this->hasOrderNumber()) {
             $this->setOrderNumber($this->getDefaultOrderNumber());
         }
         return $this->orderNumber;
@@ -56,7 +56,7 @@ trait OrderNumberTrait
      *
      * @return bool True if "order number" has been set, false if not
      */
-    public function hasOrderNumber() : bool
+    public function hasOrderNumber(): bool
     {
         return isset($this->orderNumber);
     }
@@ -66,7 +66,7 @@ trait OrderNumberTrait
      *
      * @return string|null Default "order number" value or null if no default value is available
      */
-    public function getDefaultOrderNumber() : ?string
+    public function getDefaultOrderNumber(): ?string
     {
         return null;
     }

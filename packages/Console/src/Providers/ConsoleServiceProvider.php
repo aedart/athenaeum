@@ -105,7 +105,7 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
 
         $tasks = $this->getConfig()->get('schedule.tasks', []);
 
-        foreach ($tasks as $schedules){
+        foreach ($tasks as $schedules) {
             $this->addSchedules($schedules, $schedule);
         }
 
@@ -124,7 +124,7 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
     protected function addSchedules($schedules, Schedule $schedule)
     {
         $scheduler = $this->app->make($schedules);
-        if( ! ($scheduler instanceof SchedulesTasks)){
+        if (!($scheduler instanceof SchedulesTasks)) {
             throw new LogicException(sprintf('%s must be instance of %s', $schedules, SchedulesTasks::class));
         }
 
@@ -145,7 +145,7 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
         $cacheStore = $config->get('schedule.cache', 'null');
 
         // If a schedule already bound...
-        if($this->app->bound(Schedule::class)){
+        if ($this->app->bound(Schedule::class)) {
 
             // NOTE: At this point, we are unable to (re)specify the timezone!
             // But we can instruct what cache store the schedule should use.
@@ -159,7 +159,7 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
 
         // This could mean that we are not within a Laravel application,
         // therefore we bind the schedule instance
-        $this->app->singleton(Schedule::class, function() use($timezone, $cacheStore){
+        $this->app->singleton(Schedule::class, function () use ($timezone, $cacheStore) {
             return (new Schedule($timezone))
                 ->useCache($cacheStore);
         });
@@ -177,7 +177,7 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
         $this->publishes([
             __DIR__ . '/../../configs/commands.php' => config_path('commands.php'),
             __DIR__ . '/../../configs/schedule.php' => config_path('schedule.php'),
-        ],'config');
+        ], 'config');
 
         return $this;
     }

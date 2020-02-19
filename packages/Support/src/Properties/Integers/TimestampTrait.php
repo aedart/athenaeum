@@ -43,9 +43,9 @@ trait TimestampTrait
      *
      * @return int|null timestamp or null if no timestamp has been set
      */
-    public function getTimestamp() : ?int
+    public function getTimestamp(): ?int
     {
-        if ( ! $this->hasTimestamp()) {
+        if (!$this->hasTimestamp()) {
             $this->setTimestamp($this->getDefaultTimestamp());
         }
         return $this->timestamp;
@@ -56,7 +56,7 @@ trait TimestampTrait
      *
      * @return bool True if "timestamp" has been set, false if not
      */
-    public function hasTimestamp() : bool
+    public function hasTimestamp(): bool
     {
         return isset($this->timestamp);
     }
@@ -66,7 +66,7 @@ trait TimestampTrait
      *
      * @return int|null Default "timestamp" value or null if no default value is available
      */
-    public function getDefaultTimestamp() : ?int
+    public function getDefaultTimestamp(): ?int
     {
         return null;
     }

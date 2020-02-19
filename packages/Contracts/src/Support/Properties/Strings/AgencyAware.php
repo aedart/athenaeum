@@ -31,19 +31,19 @@ interface AgencyAware
      *
      * @return string|null agency or null if no agency has been set
      */
-    public function getAgency() : ?string;
+    public function getAgency(): ?string;
 
     /**
      * Check if "agency" has been set
      *
      * @return bool True if "agency" has been set, false if not
      */
-    public function hasAgency() : bool;
+    public function hasAgency(): bool;
 
     /**
      * Get a default "agency" value, if any is available
      *
      * @return string|null Default "agency" value or null if no default value is available
      */
-    public function getDefaultAgency() : ?string;
+    public function getDefaultAgency(): ?string;
 }

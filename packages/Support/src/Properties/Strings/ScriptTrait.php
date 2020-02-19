@@ -43,9 +43,9 @@ trait ScriptTrait
      *
      * @return string|null script or null if no script has been set
      */
-    public function getScript() : ?string
+    public function getScript(): ?string
     {
-        if ( ! $this->hasScript()) {
+        if (!$this->hasScript()) {
             $this->setScript($this->getDefaultScript());
         }
         return $this->script;
@@ -56,7 +56,7 @@ trait ScriptTrait
      *
      * @return bool True if "script" has been set, false if not
      */
-    public function hasScript() : bool
+    public function hasScript(): bool
     {
         return isset($this->script);
     }
@@ -66,7 +66,7 @@ trait ScriptTrait
      *
      * @return string|null Default "script" value or null if no default value is available
      */
-    public function getDefaultScript() : ?string
+    public function getDefaultScript(): ?string
     {
         return null;
     }

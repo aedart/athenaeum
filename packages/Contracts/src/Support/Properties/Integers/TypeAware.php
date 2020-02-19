@@ -31,19 +31,19 @@ interface TypeAware
      *
      * @return int|null type or null if no type has been set
      */
-    public function getType() : ?int;
+    public function getType(): ?int;
 
     /**
      * Check if "type" has been set
      *
      * @return bool True if "type" has been set, false if not
      */
-    public function hasType() : bool;
+    public function hasType(): bool;
 
     /**
      * Get a default "type" value, if any is available
      *
      * @return int|null Default "type" value or null if no default value is available
      */
-    public function getDefaultType() : ?int;
+    public function getDefaultType(): ?int;
 }

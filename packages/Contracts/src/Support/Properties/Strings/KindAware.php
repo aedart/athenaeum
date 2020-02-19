@@ -31,19 +31,19 @@ interface KindAware
      *
      * @return string|null kind or null if no kind has been set
      */
-    public function getKind() : ?string;
+    public function getKind(): ?string;
 
     /**
      * Check if "kind" has been set
      *
      * @return bool True if "kind" has been set, false if not
      */
-    public function hasKind() : bool;
+    public function hasKind(): bool;
 
     /**
      * Get a default "kind" value, if any is available
      *
      * @return string|null Default "kind" value or null if no default value is available
      */
-    public function getDefaultKind() : ?string;
+    public function getDefaultKind(): ?string;
 }

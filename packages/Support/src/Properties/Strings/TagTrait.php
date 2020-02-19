@@ -43,9 +43,9 @@ trait TagTrait
      *
      * @return string|null tag or null if no tag has been set
      */
-    public function getTag() : ?string
+    public function getTag(): ?string
     {
-        if ( ! $this->hasTag()) {
+        if (!$this->hasTag()) {
             $this->setTag($this->getDefaultTag());
         }
         return $this->tag;
@@ -56,7 +56,7 @@ trait TagTrait
      *
      * @return bool True if "tag" has been set, false if not
      */
-    public function hasTag() : bool
+    public function hasTag(): bool
     {
         return isset($this->tag);
     }
@@ -66,7 +66,7 @@ trait TagTrait
      *
      * @return string|null Default "tag" value or null if no default value is available
      */
-    public function getDefaultTag() : ?string
+    public function getDefaultTag(): ?string
     {
         return null;
     }

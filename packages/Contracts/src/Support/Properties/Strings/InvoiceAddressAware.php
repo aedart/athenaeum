@@ -31,19 +31,19 @@ interface InvoiceAddressAware
      *
      * @return string|null invoice address or null if no invoice address has been set
      */
-    public function getInvoiceAddress() : ?string;
+    public function getInvoiceAddress(): ?string;
 
     /**
      * Check if "invoice address" has been set
      *
      * @return bool True if "invoice address" has been set, false if not
      */
-    public function hasInvoiceAddress() : bool;
+    public function hasInvoiceAddress(): bool;
 
     /**
      * Get a default "invoice address" value, if any is available
      *
      * @return string|null Default "invoice address" value or null if no default value is available
      */
-    public function getDefaultInvoiceAddress() : ?string;
+    public function getDefaultInvoiceAddress(): ?string;
 }

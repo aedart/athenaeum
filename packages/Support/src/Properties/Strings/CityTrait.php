@@ -43,9 +43,9 @@ trait CityTrait
      *
      * @return string|null city or null if no city has been set
      */
-    public function getCity() : ?string
+    public function getCity(): ?string
     {
-        if ( ! $this->hasCity()) {
+        if (!$this->hasCity()) {
             $this->setCity($this->getDefaultCity());
         }
         return $this->city;
@@ -56,7 +56,7 @@ trait CityTrait
      *
      * @return bool True if "city" has been set, false if not
      */
-    public function hasCity() : bool
+    public function hasCity(): bool
     {
         return isset($this->city);
     }
@@ -66,7 +66,7 @@ trait CityTrait
      *
      * @return string|null Default "city" value or null if no default value is available
      */
-    public function getDefaultCity() : ?string
+    public function getDefaultCity(): ?string
     {
         return null;
     }

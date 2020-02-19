@@ -43,9 +43,9 @@ trait HostTrait
      *
      * @return string|null host or null if no host has been set
      */
-    public function getHost() : ?string
+    public function getHost(): ?string
     {
-        if ( ! $this->hasHost()) {
+        if (!$this->hasHost()) {
             $this->setHost($this->getDefaultHost());
         }
         return $this->host;
@@ -56,7 +56,7 @@ trait HostTrait
      *
      * @return bool True if "host" has been set, false if not
      */
-    public function hasHost() : bool
+    public function hasHost(): bool
     {
         return isset($this->host);
     }
@@ -66,7 +66,7 @@ trait HostTrait
      *
      * @return string|null Default "host" value or null if no default value is available
      */
-    public function getDefaultHost() : ?string
+    public function getDefaultHost(): ?string
     {
         return null;
     }

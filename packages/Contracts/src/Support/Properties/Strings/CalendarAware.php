@@ -31,19 +31,19 @@ interface CalendarAware
      *
      * @return string|null calendar or null if no calendar has been set
      */
-    public function getCalendar() : ?string;
+    public function getCalendar(): ?string;
 
     /**
      * Check if "calendar" has been set
      *
      * @return bool True if "calendar" has been set, false if not
      */
-    public function hasCalendar() : bool;
+    public function hasCalendar(): bool;
 
     /**
      * Get a default "calendar" value, if any is available
      *
      * @return string|null Default "calendar" value or null if no default value is available
      */
-    public function getDefaultCalendar() : ?string;
+    public function getDefaultCalendar(): ?string;
 }

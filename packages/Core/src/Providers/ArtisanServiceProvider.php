@@ -24,12 +24,14 @@ class ArtisanServiceProvider extends ServiceProvider implements DeferrableProvid
     public function register()
     {
         $this->app->singleton(
-            ConsoleKernelInterface::class, function(){
-            /** @var Application $core */
-            $core = $this->app->make(Application::class);
+            ConsoleKernelInterface::class,
+            function () {
+                /** @var Application $core */
+                $core = $this->app->make(Application::class);
 
-            return new Kernel($core);
-        });
+                return new Kernel($core);
+            }
+        );
 
         $this->app->alias(ConsoleKernelInterface::class, LaravelConsoleKernelInterface::class);
     }
@@ -39,7 +41,7 @@ class ArtisanServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     public function boot()
     {
-        if( ! $this->app->runningInConsole()){
+        if (!$this->app->runningInConsole()) {
             return;
         }
 

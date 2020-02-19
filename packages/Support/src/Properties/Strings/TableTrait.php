@@ -43,9 +43,9 @@ trait TableTrait
      *
      * @return string|null table or null if no table has been set
      */
-    public function getTable() : ?string
+    public function getTable(): ?string
     {
-        if ( ! $this->hasTable()) {
+        if (!$this->hasTable()) {
             $this->setTable($this->getDefaultTable());
         }
         return $this->table;
@@ -56,7 +56,7 @@ trait TableTrait
      *
      * @return bool True if "table" has been set, false if not
      */
-    public function hasTable() : bool
+    public function hasTable(): bool
     {
         return isset($this->table);
     }
@@ -66,7 +66,7 @@ trait TableTrait
      *
      * @return string|null Default "table" value or null if no default value is available
      */
-    public function getDefaultTable() : ?string
+    public function getDefaultTable(): ?string
     {
         return null;
     }

@@ -31,19 +31,19 @@ interface LocationsAware
      *
      * @return array|null locations or null if no locations has been set
      */
-    public function getLocations() : ?array;
+    public function getLocations(): ?array;
 
     /**
      * Check if "locations" has been set
      *
      * @return bool True if "locations" has been set, false if not
      */
-    public function hasLocations() : bool;
+    public function hasLocations(): bool;
 
     /**
      * Get a default "locations" value, if any is available
      *
      * @return array|null Default "locations" value or null if no default value is available
      */
-    public function getDefaultLocations() : ?array;
+    public function getDefaultLocations(): ?array;
 }

@@ -43,9 +43,9 @@ trait WildcardTrait
      *
      * @return string|null wildcard or null if no wildcard has been set
      */
-    public function getWildcard() : ?string
+    public function getWildcard(): ?string
     {
-        if ( ! $this->hasWildcard()) {
+        if (!$this->hasWildcard()) {
             $this->setWildcard($this->getDefaultWildcard());
         }
         return $this->wildcard;
@@ -56,7 +56,7 @@ trait WildcardTrait
      *
      * @return bool True if "wildcard" has been set, false if not
      */
-    public function hasWildcard() : bool
+    public function hasWildcard(): bool
     {
         return isset($this->wildcard);
     }
@@ -66,7 +66,7 @@ trait WildcardTrait
      *
      * @return string|null Default "wildcard" value or null if no default value is available
      */
-    public function getDefaultWildcard() : ?string
+    public function getDefaultWildcard(): ?string
     {
         return null;
     }

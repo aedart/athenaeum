@@ -15,5 +15,4 @@ use RuntimeException;
  */
 class NoFileParserFound extends RuntimeException implements NoFileParserFoundException
 {
-
 }

@@ -31,19 +31,19 @@ interface FileExtensionAware
      *
      * @return string|null file extension or null if no file extension has been set
      */
-    public function getFileExtension() : ?string;
+    public function getFileExtension(): ?string;
 
     /**
      * Check if "file extension" has been set
      *
      * @return bool True if "file extension" has been set, false if not
      */
-    public function hasFileExtension() : bool;
+    public function hasFileExtension(): bool;
 
     /**
      * Get a default "file extension" value, if any is available
      *
      * @return string|null Default "file extension" value or null if no default value is available
      */
-    public function getDefaultFileExtension() : ?string;
+    public function getDefaultFileExtension(): ?string;
 }

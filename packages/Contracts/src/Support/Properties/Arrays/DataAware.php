@@ -31,19 +31,19 @@ interface DataAware
      *
      * @return array|null data or null if no data has been set
      */
-    public function getData() : ?array;
+    public function getData(): ?array;
 
     /**
      * Check if "data" has been set
      *
      * @return bool True if "data" has been set, false if not
      */
-    public function hasData() : bool;
+    public function hasData(): bool;
 
     /**
      * Get a default "data" value, if any is available
      *
      * @return array|null Default "data" value or null if no default value is available
      */
-    public function getDefaultData() : ?array;
+    public function getDefaultData(): ?array;
 }

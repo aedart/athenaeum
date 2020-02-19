@@ -100,5 +100,5 @@ interface Kernel extends LaravelConsoleKernel,
      *
      * @return void
      */
-    public function handleException(Throwable $e, OutputInterface $output) : void ;
+    public function handleException(Throwable $e, OutputInterface $output): void;
 }

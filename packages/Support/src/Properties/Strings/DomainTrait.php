@@ -43,9 +43,9 @@ trait DomainTrait
      *
      * @return string|null domain or null if no domain has been set
      */
-    public function getDomain() : ?string
+    public function getDomain(): ?string
     {
-        if ( ! $this->hasDomain()) {
+        if (!$this->hasDomain()) {
             $this->setDomain($this->getDefaultDomain());
         }
         return $this->domain;
@@ -56,7 +56,7 @@ trait DomainTrait
      *
      * @return bool True if "domain" has been set, false if not
      */
-    public function hasDomain() : bool
+    public function hasDomain(): bool
     {
         return isset($this->domain);
     }
@@ -66,7 +66,7 @@ trait DomainTrait
      *
      * @return string|null Default "domain" value or null if no default value is available
      */
-    public function getDefaultDomain() : ?string
+    public function getDefaultDomain(): ?string
     {
         return null;
     }

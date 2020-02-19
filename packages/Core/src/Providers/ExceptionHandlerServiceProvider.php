@@ -18,8 +18,8 @@ use Illuminate\Support\ServiceProvider;
 class ExceptionHandlerServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     public array $singletons = [
-        ExceptionHandler::class             => CompositeExceptionHandler::class,
-        ExceptionHandlerFactory::class      => Factory::class
+        ExceptionHandler::class => CompositeExceptionHandler::class,
+        ExceptionHandlerFactory::class => Factory::class
     ];
 
     /**
@@ -29,7 +29,7 @@ class ExceptionHandlerServiceProvider extends ServiceProvider implements Deferra
     {
         $this->publishes([
             __DIR__ . '/../../configs/exceptions.php' => config_path('exceptions.php')
-        ],'config');
+        ], 'config');
     }
 
     /**

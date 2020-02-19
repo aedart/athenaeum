@@ -31,19 +31,19 @@ interface JsonAware
      *
      * @return string|null json or null if no json has been set
      */
-    public function getJson() : ?string;
+    public function getJson(): ?string;
 
     /**
      * Check if "json" has been set
      *
      * @return bool True if "json" has been set, false if not
      */
-    public function hasJson() : bool;
+    public function hasJson(): bool;
 
     /**
      * Get a default "json" value, if any is available
      *
      * @return string|null Default "json" value or null if no default value is available
      */
-    public function getDefaultJson() : ?string;
+    public function getDefaultJson(): ?string;
 }

@@ -13,7 +13,7 @@ namespace Aedart\Support\Properties\Booleans;
 trait OnTrait
 {
     /**
-     * 
+     *
      *
      * @var bool|null
      */
@@ -22,7 +22,7 @@ trait OnTrait
     /**
      * Set on
      *
-     * @param bool|null $isOn 
+     * @param bool|null $isOn
      *
      * @return self
      */
@@ -43,9 +43,9 @@ trait OnTrait
      *
      * @return bool|null on or null if no on has been set
      */
-    public function getOn() : ?bool
+    public function getOn(): ?bool
     {
-        if ( ! $this->hasOn()) {
+        if (!$this->hasOn()) {
             $this->setOn($this->getDefaultOn());
         }
         return $this->on;
@@ -56,7 +56,7 @@ trait OnTrait
      *
      * @return bool True if "on" has been set, false if not
      */
-    public function hasOn() : bool
+    public function hasOn(): bool
     {
         return isset($this->on);
     }
@@ -66,7 +66,7 @@ trait OnTrait
      *
      * @return bool|null Default "on" value or null if no default value is available
      */
-    public function getDefaultOn() : ?bool
+    public function getDefaultOn(): ?bool
     {
         return null;
     }

@@ -31,19 +31,19 @@ interface TldAware
      *
      * @return string|null tld or null if no tld has been set
      */
-    public function getTld() : ?string;
+    public function getTld(): ?string;
 
     /**
      * Check if "tld" has been set
      *
      * @return bool True if "tld" has been set, false if not
      */
-    public function hasTld() : bool;
+    public function hasTld(): bool;
 
     /**
      * Get a default "tld" value, if any is available
      *
      * @return string|null Default "tld" value or null if no default value is available
      */
-    public function getDefaultTld() : ?string;
+    public function getDefaultTld(): ?string;
 }

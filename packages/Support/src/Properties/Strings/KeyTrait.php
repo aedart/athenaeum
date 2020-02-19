@@ -43,9 +43,9 @@ trait KeyTrait
      *
      * @return string|null key or null if no key has been set
      */
-    public function getKey() : ?string
+    public function getKey(): ?string
     {
-        if ( ! $this->hasKey()) {
+        if (!$this->hasKey()) {
             $this->setKey($this->getDefaultKey());
         }
         return $this->key;
@@ -56,7 +56,7 @@ trait KeyTrait
      *
      * @return bool True if "key" has been set, false if not
      */
-    public function hasKey() : bool
+    public function hasKey(): bool
     {
         return isset($this->key);
     }
@@ -66,7 +66,7 @@ trait KeyTrait
      *
      * @return string|null Default "key" value or null if no default value is available
      */
-    public function getDefaultKey() : ?string
+    public function getDefaultKey(): ?string
     {
         return null;
     }

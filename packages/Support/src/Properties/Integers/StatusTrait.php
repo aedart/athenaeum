@@ -43,9 +43,9 @@ trait StatusTrait
      *
      * @return int|null status or null if no status has been set
      */
-    public function getStatus() : ?int
+    public function getStatus(): ?int
     {
-        if ( ! $this->hasStatus()) {
+        if (!$this->hasStatus()) {
             $this->setStatus($this->getDefaultStatus());
         }
         return $this->status;
@@ -56,7 +56,7 @@ trait StatusTrait
      *
      * @return bool True if "status" has been set, false if not
      */
-    public function hasStatus() : bool
+    public function hasStatus(): bool
     {
         return isset($this->status);
     }
@@ -66,7 +66,7 @@ trait StatusTrait
      *
      * @return int|null Default "status" value or null if no default value is available
      */
-    public function getDefaultStatus() : ?int
+    public function getDefaultStatus(): ?int
     {
         return null;
     }

@@ -31,19 +31,19 @@ interface ValueAware
      *
      * @return string|null value or null if no value has been set
      */
-    public function getValue() : ?string;
+    public function getValue(): ?string;
 
     /**
      * Check if "value" has been set
      *
      * @return bool True if "value" has been set, false if not
      */
-    public function hasValue() : bool;
+    public function hasValue(): bool;
 
     /**
      * Get a default "value" value, if any is available
      *
      * @return string|null Default "value" value or null if no default value is available
      */
-    public function getDefaultValue() : ?string;
+    public function getDefaultValue(): ?string;
 }

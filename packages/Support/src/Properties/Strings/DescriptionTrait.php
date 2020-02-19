@@ -43,9 +43,9 @@ trait DescriptionTrait
      *
      * @return string|null description or null if no description has been set
      */
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
-        if ( ! $this->hasDescription()) {
+        if (!$this->hasDescription()) {
             $this->setDescription($this->getDefaultDescription());
         }
         return $this->description;
@@ -56,7 +56,7 @@ trait DescriptionTrait
      *
      * @return bool True if "description" has been set, false if not
      */
-    public function hasDescription() : bool
+    public function hasDescription(): bool
     {
         return isset($this->description);
     }
@@ -66,7 +66,7 @@ trait DescriptionTrait
      *
      * @return string|null Default "description" value or null if no default value is available
      */
-    public function getDefaultDescription() : ?string
+    public function getDefaultDescription(): ?string
     {
         return null;
     }

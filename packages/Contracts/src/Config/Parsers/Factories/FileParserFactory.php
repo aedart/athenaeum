@@ -28,5 +28,5 @@ interface FileParserFactory
      *
      * @throws NoFileParserFoundException
      */
-    public function make(string $type) : FileParser ;
+    public function make(string $type): FileParser;
 }

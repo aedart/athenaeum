@@ -46,7 +46,7 @@ class IoCFacade extends Facade
         $container = static::getFacadeRoot();
 
         // If we have no container, resolve to default if possible
-        if(!isset($container)){
+        if (!isset($container)) {
             return $default;
         }
 
@@ -54,7 +54,7 @@ class IoCFacade extends Facade
             // Attempt to resolve from IoC. If type is bound or
             // buildable, then this will work fine.
             return $container->make($abstract, $parameters);
-        } catch (BindingResolutionException $e){
+        } catch (BindingResolutionException $e) {
             // If unable to build given type, just return the default
             return $default;
         }

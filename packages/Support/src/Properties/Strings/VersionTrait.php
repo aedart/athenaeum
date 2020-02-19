@@ -43,9 +43,9 @@ trait VersionTrait
      *
      * @return string|null version or null if no version has been set
      */
-    public function getVersion() : ?string
+    public function getVersion(): ?string
     {
-        if ( ! $this->hasVersion()) {
+        if (!$this->hasVersion()) {
             $this->setVersion($this->getDefaultVersion());
         }
         return $this->version;
@@ -56,7 +56,7 @@ trait VersionTrait
      *
      * @return bool True if "version" has been set, false if not
      */
-    public function hasVersion() : bool
+    public function hasVersion(): bool
     {
         return isset($this->version);
     }
@@ -66,7 +66,7 @@ trait VersionTrait
      *
      * @return string|null Default "version" value or null if no default value is available
      */
-    public function getDefaultVersion() : ?string
+    public function getDefaultVersion(): ?string
     {
         return null;
     }

@@ -31,19 +31,19 @@ interface CardTypeAware
      *
      * @return string|null card type or null if no card type has been set
      */
-    public function getCardType() : ?string;
+    public function getCardType(): ?string;
 
     /**
      * Check if "card type" has been set
      *
      * @return bool True if "card type" has been set, false if not
      */
-    public function hasCardType() : bool;
+    public function hasCardType(): bool;
 
     /**
      * Get a default "card type" value, if any is available
      *
      * @return string|null Default "card type" value or null if no default value is available
      */
-    public function getDefaultCardType() : ?string;
+    public function getDefaultCardType(): ?string;
 }

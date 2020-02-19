@@ -43,9 +43,9 @@ trait RankTrait
      *
      * @return int|null rank or null if no rank has been set
      */
-    public function getRank() : ?int
+    public function getRank(): ?int
     {
-        if ( ! $this->hasRank()) {
+        if (!$this->hasRank()) {
             $this->setRank($this->getDefaultRank());
         }
         return $this->rank;
@@ -56,7 +56,7 @@ trait RankTrait
      *
      * @return bool True if "rank" has been set, false if not
      */
-    public function hasRank() : bool
+    public function hasRank(): bool
     {
         return isset($this->rank);
     }
@@ -66,7 +66,7 @@ trait RankTrait
      *
      * @return int|null Default "rank" value or null if no default value is available
      */
-    public function getDefaultRank() : ?int
+    public function getDefaultRank(): ?int
     {
         return null;
     }

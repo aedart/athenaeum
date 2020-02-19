@@ -31,19 +31,19 @@ interface BrandAware
      *
      * @return int|null brand or null if no brand has been set
      */
-    public function getBrand() : ?int;
+    public function getBrand(): ?int;
 
     /**
      * Check if "brand" has been set
      *
      * @return bool True if "brand" has been set, false if not
      */
-    public function hasBrand() : bool;
+    public function hasBrand(): bool;
 
     /**
      * Get a default "brand" value, if any is available
      *
      * @return int|null Default "brand" value or null if no default value is available
      */
-    public function getDefaultBrand() : ?int;
+    public function getDefaultBrand(): ?int;
 }

@@ -43,9 +43,9 @@ trait LocationsTrait
      *
      * @return array|null locations or null if no locations has been set
      */
-    public function getLocations() : ?array
+    public function getLocations(): ?array
     {
-        if ( ! $this->hasLocations()) {
+        if (!$this->hasLocations()) {
             $this->setLocations($this->getDefaultLocations());
         }
         return $this->locations;
@@ -56,7 +56,7 @@ trait LocationsTrait
      *
      * @return bool True if "locations" has been set, false if not
      */
-    public function hasLocations() : bool
+    public function hasLocations(): bool
     {
         return isset($this->locations);
     }
@@ -66,7 +66,7 @@ trait LocationsTrait
      *
      * @return array|null Default "locations" value or null if no default value is available
      */
-    public function getDefaultLocations() : ?array
+    public function getDefaultLocations(): ?array
     {
         return null;
     }

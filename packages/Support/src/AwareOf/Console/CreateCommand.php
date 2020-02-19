@@ -91,7 +91,7 @@ class CreateCommand extends CommandBase
 
         // Build each aware-of component
         $awareOfComponents = [];
-        foreach ($list as $component){
+        foreach ($list as $component) {
             $result = $this->buildAwareOfComponent($component);
             $awareOfComponents[] = $result;
 
@@ -118,7 +118,7 @@ class CreateCommand extends CommandBase
      *
      * @return array
      */
-    protected function buildAwareOfComponent(array $component) : array
+    protected function buildAwareOfComponent(array $component): array
     {
         // Get the force flag, if set
         $force = $this->input->getOption('force');
@@ -153,7 +153,7 @@ class CreateCommand extends CommandBase
     protected function loadConfiguration()
     {
         $path = $this->input->getArgument('config');
-        if( ! file_exists($path)){
+        if (!file_exists($path)) {
             throw new InvalidArgumentException($path . ' is an invalid path. Configuration file does not exist');
         }
 
@@ -198,7 +198,7 @@ class CreateCommand extends CommandBase
      */
     protected function debug(array $awareOfComponentData = [])
     {
-        if($this->output->isVerbose()){
+        if ($this->output->isVerbose()) {
             $this->output->newLine();
             $this->output->text(var_export($awareOfComponentData, true));
             $this->output->newLine();

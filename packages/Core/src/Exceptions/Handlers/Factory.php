@@ -15,7 +15,8 @@ use Aedart\Support\Helpers\Config\ConfigTrait;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Core\Exceptions\Handlers
  */
-class Factory implements ExceptionHandlerFactory,
+class Factory implements
+    ExceptionHandlerFactory,
     ConfigAware
 {
     use ConfigTrait;
@@ -32,7 +33,7 @@ class Factory implements ExceptionHandlerFactory,
         // and another exception is raised, causing the handling
         // process again.
         $leafs = $handler->getHandlers();
-        if(empty($leafs)){
+        if (empty($leafs)) {
             $handlers = $this->getConfig()->get('exceptions.handlers', []);
             $handler->setHandlers($handlers);
         }
@@ -45,7 +46,7 @@ class Factory implements ExceptionHandlerFactory,
      *
      * @return CompositeExceptionHandlerInterface
      */
-    protected function obtainCompositeHandler() : CompositeExceptionHandlerInterface
+    protected function obtainCompositeHandler(): CompositeExceptionHandlerInterface
     {
         return IoCFacade::tryMake(
             ExceptionHandler::class,

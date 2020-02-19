@@ -31,19 +31,19 @@ interface FirstNameAware
      *
      * @return string|null first name or null if no first name has been set
      */
-    public function getFirstName() : ?string;
+    public function getFirstName(): ?string;
 
     /**
      * Check if "first name" has been set
      *
      * @return bool True if "first name" has been set, false if not
      */
-    public function hasFirstName() : bool;
+    public function hasFirstName(): bool;
 
     /**
      * Get a default "first name" value, if any is available
      *
      * @return string|null Default "first name" value or null if no default value is available
      */
-    public function getDefaultFirstName() : ?string;
+    public function getDefaultFirstName(): ?string;
 }

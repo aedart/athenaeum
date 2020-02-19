@@ -31,19 +31,19 @@ interface Ean13Aware
      *
      * @return string|null ean13 or null if no ean13 has been set
      */
-    public function getEan13() : ?string;
+    public function getEan13(): ?string;
 
     /**
      * Check if "ean13" has been set
      *
      * @return bool True if "ean13" has been set, false if not
      */
-    public function hasEan13() : bool;
+    public function hasEan13(): bool;
 
     /**
      * Get a default "ean13" value, if any is available
      *
      * @return string|null Default "ean13" value or null if no default value is available
      */
-    public function getDefaultEan13() : ?string;
+    public function getDefaultEan13(): ?string;
 }

@@ -31,19 +31,19 @@ interface IpV6Aware
      *
      * @return string|null ip v6 or null if no ip v6 has been set
      */
-    public function getIpV6() : ?string;
+    public function getIpV6(): ?string;
 
     /**
      * Check if "ip v6" has been set
      *
      * @return bool True if "ip v6" has been set, false if not
      */
-    public function hasIpV6() : bool;
+    public function hasIpV6(): bool;
 
     /**
      * Get a default "ip v6" value, if any is available
      *
      * @return string|null Default "ip v6" value or null if no default value is available
      */
-    public function getDefaultIpV6() : ?string;
+    public function getDefaultIpV6(): ?string;
 }

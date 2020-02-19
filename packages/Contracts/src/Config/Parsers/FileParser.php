@@ -24,7 +24,7 @@ interface FileParser extends FileAware
      *
      * @return string E.g. ini, php, yml... etc
      */
-    public static function getFileType() : string;
+    public static function getFileType(): string;
 
     /**
      * Set the path of the configuration file that
@@ -36,7 +36,7 @@ interface FileParser extends FileAware
      *
      * @throws FileDoesNotExistException If the given file does not exist
      */
-    public function setFilePath(string $filePath) : self;
+    public function setFilePath(string $filePath): self;
 
     /**
      * Get the path of the configuration file that
@@ -44,7 +44,7 @@ interface FileParser extends FileAware
      *
      * @return string|null
      */
-    public function getFilePath() : ?string ;
+    public function getFilePath(): ?string;
 
     /**
      * Check if this parser has a configuration file path
@@ -52,7 +52,7 @@ interface FileParser extends FileAware
      *
      * @return bool
      */
-    public function hasFilePath() : bool ;
+    public function hasFilePath(): bool;
 
     /**
      * Loads the specified configuration file's content
@@ -64,7 +64,7 @@ interface FileParser extends FileAware
      *
      * @throws FileParserException If given file's content could not be parsed
      */
-    public function loadAndParse() : array ;
+    public function loadAndParse(): array;
 
     /**
      * Parse the given content into an array
@@ -75,5 +75,5 @@ interface FileParser extends FileAware
      *
      * @throws FileParserException If given content could not be parsed
      */
-    public function parse(string $content) : array ;
+    public function parse(string $content): array;
 }

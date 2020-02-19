@@ -43,9 +43,9 @@ trait StartDateTrait
      *
      * @return \DateTime|null start date or null if no start date has been set
      */
-    public function getStartDate() : ?\DateTime
+    public function getStartDate(): ?\DateTime
     {
-        if ( ! $this->hasStartDate()) {
+        if (!$this->hasStartDate()) {
             $this->setStartDate($this->getDefaultStartDate());
         }
         return $this->startDate;
@@ -56,7 +56,7 @@ trait StartDateTrait
      *
      * @return bool True if "start date" has been set, false if not
      */
-    public function hasStartDate() : bool
+    public function hasStartDate(): bool
     {
         return isset($this->startDate);
     }
@@ -66,7 +66,7 @@ trait StartDateTrait
      *
      * @return \DateTime|null Default "start date" value or null if no default value is available
      */
-    public function getDefaultStartDate() : ?\DateTime
+    public function getDefaultStartDate(): ?\DateTime
     {
         return null;
     }

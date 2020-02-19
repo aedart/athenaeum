@@ -2,7 +2,6 @@
 
 namespace Aedart\Testing\Traits;
 
-use Aedart\Contracts\Testing\Fakers\FakerAware;
 use Faker\Factory;
 use Faker\Generator;
 

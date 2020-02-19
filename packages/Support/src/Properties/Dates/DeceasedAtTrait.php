@@ -43,9 +43,9 @@ trait DeceasedAtTrait
      *
      * @return \DateTime|null deceased at or null if no deceased at has been set
      */
-    public function getDeceasedAt() : ?\DateTime
+    public function getDeceasedAt(): ?\DateTime
     {
-        if ( ! $this->hasDeceasedAt()) {
+        if (!$this->hasDeceasedAt()) {
             $this->setDeceasedAt($this->getDefaultDeceasedAt());
         }
         return $this->deceasedAt;
@@ -56,7 +56,7 @@ trait DeceasedAtTrait
      *
      * @return bool True if "deceased at" has been set, false if not
      */
-    public function hasDeceasedAt() : bool
+    public function hasDeceasedAt(): bool
     {
         return isset($this->deceasedAt);
     }
@@ -66,7 +66,7 @@ trait DeceasedAtTrait
      *
      * @return \DateTime|null Default "deceased at" value or null if no default value is available
      */
-    public function getDefaultDeceasedAt() : ?\DateTime
+    public function getDefaultDeceasedAt(): ?\DateTime
     {
         return null;
     }

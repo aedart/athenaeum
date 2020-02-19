@@ -40,12 +40,11 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
 
         try {
             // Determine what environment file to use and load it.
-            $this->loadEnvironmentFile( $this->determineEnvFileToUse() );
+            $this->loadEnvironmentFile($this->determineEnvFileToUse());
 
             // Set application's environment name. Note: we default to "production" in
             // case that a file was loaded, yet APP_ENV wasn't specified.
-            $this->app->detectEnvironment(fn() => Env::get('APP_ENV', 'production'));
-
+            $this->app->detectEnvironment(fn () => Env::get('APP_ENV', 'production'));
         } catch (Throwable $e) {
             throw new UnableToDetectOrLoadEnv('Unable to detect or load environment: ' . $e->getMessage(), 1, $e);
         }
@@ -62,7 +61,7 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
      */
     protected function loadEnvironmentFile(string $file)
     {
-        if( ! Str::startsWith($file, '.')){
+        if (!Str::startsWith($file, '.')) {
             $file = '.' . $file;
         }
 
@@ -77,7 +76,7 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
         );
 
         // Attempt to load the environment. Allow failure, if required
-        if($this->app->mustThrowExceptions()){
+        if ($this->app->mustThrowExceptions()) {
             $dotEnv->load();
             return;
         }
@@ -90,18 +89,18 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
      *
      * @return string
      */
-    protected function determineEnvFileToUse() : string
+    protected function determineEnvFileToUse(): string
     {
         // If an environment has already been specified, then we
         // must respect it. This can be done via the application's
         // "detectEnvironment" method, before bootstrapping!
-        if(isset($this->app['env'])){
+        if (isset($this->app['env'])) {
             return '.' . $this->app['env'];
         }
 
         // Attempt to read environment file from console
         $env = $this->getEnvFromConsole();
-        if(isset($env)){
+        if (isset($env)) {
             return $env;
         }
 
@@ -116,14 +115,14 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
      *
      * @return string|null Filename of environment file or null if unable to determine
      */
-    protected function getEnvFromConsole() : ?string
+    protected function getEnvFromConsole(): ?string
     {
-        if( ! $this->app->runningInConsole()){
+        if (!$this->app->runningInConsole()) {
             return null;
         }
 
         $input = new ArgvInput();
-        if($input->hasParameterOption('--env')){
+        if ($input->hasParameterOption('--env')) {
             return $input->getParameterOption('--env');
         }
 

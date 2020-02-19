@@ -21,7 +21,7 @@ class ConfigServiceProvider extends ServiceProvider
     {
         $key = 'config';
 
-        $this->app->singleton($key, fn() => new Repository());
+        $this->app->singleton($key, fn () => new Repository());
 
         $this->app->alias($key, RepositoryInterface::class);
         $this->app->alias($key, Repository::class);

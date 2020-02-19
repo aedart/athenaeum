@@ -45,7 +45,7 @@ trait XTrait
      */
     public function getX()
     {
-        if ( ! $this->hasX()) {
+        if (!$this->hasX()) {
             $this->setX($this->getDefaultX());
         }
         return $this->x;
@@ -56,7 +56,7 @@ trait XTrait
      *
      * @return bool True if "x" has been set, false if not
      */
-    public function hasX() : bool
+    public function hasX(): bool
     {
         return isset($this->x);
     }

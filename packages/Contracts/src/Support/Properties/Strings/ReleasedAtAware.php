@@ -31,19 +31,19 @@ interface ReleasedAtAware
      *
      * @return string|null released at or null if no released at has been set
      */
-    public function getReleasedAt() : ?string;
+    public function getReleasedAt(): ?string;
 
     /**
      * Check if "released at" has been set
      *
      * @return bool True if "released at" has been set, false if not
      */
-    public function hasReleasedAt() : bool;
+    public function hasReleasedAt(): bool;
 
     /**
      * Get a default "released at" value, if any is available
      *
      * @return string|null Default "released at" value or null if no default value is available
      */
-    public function getDefaultReleasedAt() : ?string;
+    public function getDefaultReleasedAt(): ?string;
 }

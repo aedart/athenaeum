@@ -43,9 +43,9 @@ trait IcaoTrait
      *
      * @return string|null icao or null if no icao has been set
      */
-    public function getIcao() : ?string
+    public function getIcao(): ?string
     {
-        if ( ! $this->hasIcao()) {
+        if (!$this->hasIcao()) {
             $this->setIcao($this->getDefaultIcao());
         }
         return $this->icao;
@@ -56,7 +56,7 @@ trait IcaoTrait
      *
      * @return bool True if "icao" has been set, false if not
      */
-    public function hasIcao() : bool
+    public function hasIcao(): bool
     {
         return isset($this->icao);
     }
@@ -66,7 +66,7 @@ trait IcaoTrait
      *
      * @return string|null Default "icao" value or null if no default value is available
      */
-    public function getDefaultIcao() : ?string
+    public function getDefaultIcao(): ?string
     {
         return null;
     }

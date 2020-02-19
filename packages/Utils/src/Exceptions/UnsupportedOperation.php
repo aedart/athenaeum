@@ -15,5 +15,4 @@ use LogicException;
  */
 class UnsupportedOperation extends LogicException implements UnsupportedOperationException
 {
-
 }

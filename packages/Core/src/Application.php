@@ -25,7 +25,6 @@ use Aedart\Core\Bootstrappers\SetExceptionHandling;
 use Aedart\Core\Helpers\NamespaceDetector;
 use Aedart\Core\Helpers\Paths;
 use Aedart\Core\Providers\CacheServiceProvider;
-use Aedart\Core\Providers\CoreCacheServiceProvider;
 use Aedart\Core\Providers\CoreConsoleServiceProvider;
 use Aedart\Core\Providers\EventServiceProvider;
 use Aedart\Core\Providers\ExceptionHandlerServiceProvider;
@@ -52,7 +51,8 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Core
  */
-class Application extends IoC implements ApplicationInterface,
+class Application extends IoC implements
+    ApplicationInterface,
     PathsContainerAware,
     ServiceProviderRegistrarAware,
     ConfigAware,
@@ -255,7 +255,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function environment(...$environments)
     {
-        if(count($environments) > 0){
+        if (count($environments) > 0) {
             $search = is_array($environments) ? $environments : [ $environments ];
 
             return in_array($this['env'], $search);
@@ -322,7 +322,7 @@ class Application extends IoC implements ApplicationInterface,
     public function registerDeferredProvider($provider, $service = null)
     {
         // Remove service from list of deferred services
-        if(isset($service) && $this->isDeferredService($service)){
+        if (isset($service) && $this->isDeferredService($service)) {
             unset($this->deferredServices[$service]);
         }
 
@@ -345,7 +345,7 @@ class Application extends IoC implements ApplicationInterface,
     public function boot()
     {
         // Abort if already booted
-        if($this->isBooted()){
+        if ($this->isBooted()) {
             return;
         }
 
@@ -375,7 +375,7 @@ class Application extends IoC implements ApplicationInterface,
         $this->afterBootedCallbacks[] = $callback;
 
         // Invoke callbacks, if application has already booted...
-        if($this->isBooted()){
+        if ($this->isBooted()) {
             $this->invokeCallbacks($this->afterBootedCallbacks);
         }
     }
@@ -386,7 +386,7 @@ class Application extends IoC implements ApplicationInterface,
     public function bootstrapWith(array $bootstrappers)
     {
         // Abort if already bootstrapped
-        if($this->hasBootstrapped){
+        if ($this->hasBootstrapped) {
             return;
         }
 
@@ -394,8 +394,8 @@ class Application extends IoC implements ApplicationInterface,
         $this->hasBootstrapped = true;
 
         // Invoke the bootstrappers
-        foreach ($bootstrappers as $bootstrapper){
-            $this->invokeBootstrapper( $this->make($bootstrapper) );
+        foreach ($bootstrappers as $bootstrapper) {
+            $this->invokeBootstrapper($this->make($bootstrapper));
         }
     }
 
@@ -429,7 +429,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function environmentFilePath()
     {
-        return $this->getPathsContainer()->environmentPath( $this->environmentPath() );
+        return $this->getPathsContainer()->environmentPath($this->environmentPath());
     }
 
     /**
@@ -481,12 +481,12 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function getNamespace()
     {
-        if(isset($this->namespace)){
+        if (isset($this->namespace)) {
             return $this->namespace;
         }
 
         return $this->namespace = $this->getNamespaceDetector()
-            ->detect( $this->basePath('composer.json') );
+            ->detect($this->basePath('composer.json'));
     }
 
     /**
@@ -510,7 +510,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function loadDeferredProviders()
     {
-        foreach ($this->deferredServices as $service => $provider){
+        foreach ($this->deferredServices as $service => $provider) {
             $this->registerDeferredProvider(get_class($provider), $service);
         }
 
@@ -582,7 +582,7 @@ class Application extends IoC implements ApplicationInterface,
 
         $abstract = $this->getAlias($abstract);
 
-        if ($this->isDeferredService($abstract) && ! isset($this->instances[$abstract])) {
+        if ($this->isDeferredService($abstract) && !isset($this->instances[$abstract])) {
             $this->registerDeferredProvider($this->deferredServices[$abstract], $abstract);
         }
 
@@ -651,8 +651,8 @@ class Application extends IoC implements ApplicationInterface,
     {
         $registrar = $this->getServiceProviderRegistrar();
 
-        foreach ($providers as $provider){
-            $this->registerNormalOrDeferred($registrar->resolveProvider($provider) );
+        foreach ($providers as $provider) {
+            $this->registerNormalOrDeferred($registrar->resolveProvider($provider));
         }
 
         return $this;
@@ -689,14 +689,14 @@ class Application extends IoC implements ApplicationInterface,
      */
     public function run(?callable $callback = null): void
     {
-        if($this->isRunning()){
+        if ($this->isRunning()) {
             return;
         }
 
         try {
             // Bootstrap - Core bootstrappers are ignored, if
             // already bootstrapped with a different set of bootstrappers.
-            $this->bootstrapWith( $this->getCoreBootstrappers() );
+            $this->bootstrapWith($this->getCoreBootstrappers());
 
             // Boot application, if not already booted.
             $this->boot();
@@ -706,7 +706,7 @@ class Application extends IoC implements ApplicationInterface,
             $this->hasTriggeredRun = true;
 
             // Finally, resolve given callback and invoke it
-            $callback = $callback ?? fn() => null;
+            $callback = $callback ?? fn () => null;
             $this->invokeCallbacks([ $callback ]);
         } catch (Throwable $e) {
             $this->handleException($e);
@@ -865,19 +865,19 @@ class Application extends IoC implements ApplicationInterface,
     protected function tryPopulatePathsContainer($paths = null)
     {
         // If nothing given, set and get default paths
-        if( ! isset($paths)){
+        if (!isset($paths)) {
             $this->getPathsContainer();
             return;
         }
 
         // If array of paths has been given, populate paths container
-        if(is_array($paths)){
+        if (is_array($paths)) {
             $this->getPathsContainer()->populate($paths);
             return;
         }
 
         // If a paths container has been provided, use it
-        if($paths instanceof PathsContainer){
+        if ($paths instanceof PathsContainer) {
             $this->setPathsContainer($paths);
             return;
         }
@@ -889,7 +889,7 @@ class Application extends IoC implements ApplicationInterface,
     /**
      * Binds paths in the IoC service container
      */
-    protected function bindPaths() : void
+    protected function bindPaths(): void
     {
         // Laravel uses the IoC to store paths, so that Services are able to
         // obtain them. Strictly speaking we could skip this, yet some service
@@ -915,7 +915,7 @@ class Application extends IoC implements ApplicationInterface,
     {
         // This method corresponds directly to Laravel's fireAppCallbacks
         // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L865
-        foreach ($callbacks as $callback){
+        foreach ($callbacks as $callback) {
             $callback($this);
         }
     }
@@ -927,7 +927,7 @@ class Application extends IoC implements ApplicationInterface,
      */
     protected function registerCoreServiceProviders()
     {
-        return $this->registerMultipleServiceProviders( $this->getCoreServiceProviders() );
+        return $this->registerMultipleServiceProviders($this->getCoreServiceProviders());
     }
 
     /**
@@ -937,11 +937,11 @@ class Application extends IoC implements ApplicationInterface,
      *
      * @return ServiceProvider
      */
-    protected function registerNormalOrDeferred(ServiceProvider $provider) : ServiceProvider
+    protected function registerNormalOrDeferred(ServiceProvider $provider): ServiceProvider
     {
         // When a "normal" service provider is given, then we register it
         // as usual (eager).
-        if( ! $provider->isDeferred()){
+        if (!$provider->isDeferred()) {
             return $this->register($provider);
         }
 
@@ -964,19 +964,19 @@ class Application extends IoC implements ApplicationInterface,
      */
     protected function listenWhenToRegister(array $events, ServiceProvider $provider)
     {
-        if(empty($events)){
+        if (empty($events)) {
             return;
         }
 
         // Listen for the events that must trigger given provider to be
         // registered and booted.
-        $this->getDispatcher()->listen($events, function() use ($events, $provider){
+        $this->getDispatcher()->listen($events, function () use ($events, $provider) {
             $this->register($provider);
 
             // Ensure that we forget this listener, now that the provider
             // has registered - listener should no longer be required.
             $dispatcher = $this->getDispatcher();
-            foreach ($events as $event){
+            foreach ($events as $event) {
                 $dispatcher->forget($event);
             }
         });
@@ -989,12 +989,12 @@ class Application extends IoC implements ApplicationInterface,
      */
     protected function addDeferredServicesFrom(ServiceProvider $provider)
     {
-        if( ! $provider->isDeferred()){
+        if (!$provider->isDeferred()) {
             return;
         }
 
         $services = $provider->provides();
-        foreach ($services as $service){
+        foreach ($services as $service) {
             $this->deferredServices[$service] = $provider;
         }
     }

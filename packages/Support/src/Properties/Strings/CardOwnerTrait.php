@@ -43,9 +43,9 @@ trait CardOwnerTrait
      *
      * @return string|null card owner or null if no card owner has been set
      */
-    public function getCardOwner() : ?string
+    public function getCardOwner(): ?string
     {
-        if ( ! $this->hasCardOwner()) {
+        if (!$this->hasCardOwner()) {
             $this->setCardOwner($this->getDefaultCardOwner());
         }
         return $this->cardOwner;
@@ -56,7 +56,7 @@ trait CardOwnerTrait
      *
      * @return bool True if "card owner" has been set, false if not
      */
-    public function hasCardOwner() : bool
+    public function hasCardOwner(): bool
     {
         return isset($this->cardOwner);
     }
@@ -66,7 +66,7 @@ trait CardOwnerTrait
      *
      * @return string|null Default "card owner" value or null if no default value is available
      */
-    public function getDefaultCardOwner() : ?string
+    public function getDefaultCardOwner(): ?string
     {
         return null;
     }

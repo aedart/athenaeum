@@ -31,19 +31,19 @@ interface IsicV4Aware
      *
      * @return string|null isic v4 or null if no isic v4 has been set
      */
-    public function getIsicV4() : ?string;
+    public function getIsicV4(): ?string;
 
     /**
      * Check if "isic v4" has been set
      *
      * @return bool True if "isic v4" has been set, false if not
      */
-    public function hasIsicV4() : bool;
+    public function hasIsicV4(): bool;
 
     /**
      * Get a default "isic v4" value, if any is available
      *
      * @return string|null Default "isic v4" value or null if no default value is available
      */
-    public function getDefaultIsicV4() : ?string;
+    public function getDefaultIsicV4(): ?string;
 }

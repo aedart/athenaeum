@@ -31,19 +31,19 @@ interface CategoryAware
      *
      * @return string|null category or null if no category has been set
      */
-    public function getCategory() : ?string;
+    public function getCategory(): ?string;
 
     /**
      * Check if "category" has been set
      *
      * @return bool True if "category" has been set, false if not
      */
-    public function hasCategory() : bool;
+    public function hasCategory(): bool;
 
     /**
      * Get a default "category" value, if any is available
      *
      * @return string|null Default "category" value or null if no default value is available
      */
-    public function getDefaultCategory() : ?string;
+    public function getDefaultCategory(): ?string;
 }

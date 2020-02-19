@@ -31,19 +31,19 @@ interface ProfileAware
      *
      * @return string|null profile or null if no profile has been set
      */
-    public function getProfile() : ?string;
+    public function getProfile(): ?string;
 
     /**
      * Check if "profile" has been set
      *
      * @return bool True if "profile" has been set, false if not
      */
-    public function hasProfile() : bool;
+    public function hasProfile(): bool;
 
     /**
      * Get a default "profile" value, if any is available
      *
      * @return string|null Default "profile" value or null if no default value is available
      */
-    public function getDefaultProfile() : ?string;
+    public function getDefaultProfile(): ?string;
 }

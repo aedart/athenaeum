@@ -31,19 +31,19 @@ interface NamespaceAware
      *
      * @return string|null namespace or null if no namespace has been set
      */
-    public function getNamespace() : ?string;
+    public function getNamespace(): ?string;
 
     /**
      * Check if "namespace" has been set
      *
      * @return bool True if "namespace" has been set, false if not
      */
-    public function hasNamespace() : bool;
+    public function hasNamespace(): bool;
 
     /**
      * Get a default "namespace" value, if any is available
      *
      * @return string|null Default "namespace" value or null if no default value is available
      */
-    public function getDefaultNamespace() : ?string;
+    public function getDefaultNamespace(): ?string;
 }

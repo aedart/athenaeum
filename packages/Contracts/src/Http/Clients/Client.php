@@ -22,7 +22,7 @@ interface Client
      *
      * @return ResponseInterface
      */
-    public function get($uri) : ResponseInterface ;
+    public function get($uri): ResponseInterface;
 
     /**
      * Make a HEAD request
@@ -33,7 +33,7 @@ interface Client
      *
      * @return ResponseInterface
      */
-    public function head($uri) : ResponseInterface ;
+    public function head($uri): ResponseInterface;
 
     /**
      * Make a POST request
@@ -45,7 +45,7 @@ interface Client
      *
      * @return ResponseInterface
      */
-    public function post($uri, array $body = []) : ResponseInterface ;
+    public function post($uri, array $body = []): ResponseInterface;
 
     /**
      * Make a PUT request
@@ -57,7 +57,7 @@ interface Client
      *
      * @return ResponseInterface
      */
-    public function put($uri, array $body = []) : ResponseInterface ;
+    public function put($uri, array $body = []): ResponseInterface;
 
     /**
      * Make a DELETE request
@@ -69,7 +69,7 @@ interface Client
      *
      * @return ResponseInterface
      */
-    public function delete($uri, array $body = []) : ResponseInterface ;
+    public function delete($uri, array $body = []): ResponseInterface;
 
     /**
      * Make a OPTIONS request
@@ -80,7 +80,7 @@ interface Client
      *
      * @return ResponseInterface
      */
-    public function options($uri) : ResponseInterface ;
+    public function options($uri): ResponseInterface;
 
     /**
      * Make a PATCH request
@@ -92,7 +92,7 @@ interface Client
      *
      * @return ResponseInterface
      */
-    public function patch($uri, array $body = []) : ResponseInterface ;
+    public function patch($uri, array $body = []): ResponseInterface;
 
     /**
      * Make a http request
@@ -103,7 +103,7 @@ interface Client
      *
      * @return ResponseInterface
      */
-    public function request(string $method, $uri, array $options = []) : ResponseInterface ;
+    public function request(string $method, $uri, array $options = []): ResponseInterface;
 
     /**
      * Set the Http headers for the next request
@@ -114,7 +114,7 @@ interface Client
      *
      * @return self
      */
-    public function withHeaders(array $headers = []) : self ;
+    public function withHeaders(array $headers = []): self;
 
     /**
      * Set a Http header for the next request
@@ -126,7 +126,7 @@ interface Client
      *
      * @return self
      */
-    public function withHeader(string $name, $value) : self ;
+    public function withHeader(string $name, $value): self;
 
     /**
      * Remove a Http header from the next request
@@ -135,14 +135,14 @@ interface Client
      *
      * @return self
      */
-    public function withoutHeader(string $name) : self ;
+    public function withoutHeader(string $name): self;
 
     /**
      * Get all the Http headers for the next request
      *
      * @return array
      */
-    public function getHeaders() : array ;
+    public function getHeaders(): array;
 
     /**
      * Get the desired Http header, for the next request
@@ -162,7 +162,7 @@ interface Client
      *
      * @return self
      */
-    public function withOptions(array $options = []) : self ;
+    public function withOptions(array $options = []): self;
 
     /**
      * Set a specific option for the next request
@@ -174,7 +174,7 @@ interface Client
      *
      * @return self
      */
-    public function withOption(string $name, $value) : self ;
+    public function withOption(string $name, $value): self;
 
     /**
      * Remove given option for the next request
@@ -183,14 +183,14 @@ interface Client
      *
      * @return self
      */
-    public function withoutOption(string $name) : self ;
+    public function withoutOption(string $name): self;
 
     /**
      * Get all the options for the next request
      *
      * @return array
      */
-    public function getOptions() : array ;
+    public function getOptions(): array;
 
     /**
      * Get a specific option for the next request

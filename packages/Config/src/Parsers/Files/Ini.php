@@ -48,7 +48,7 @@ class Ini extends ParserBase
     {
         $result = parse_ini_string($content, $this->processSections, $this->scannerMode);
 
-        if($result === false){
+        if ($result === false) {
             throw new UnableToParseFile(sprintf('ini file "%s" contains errors', $this->getFilePath()));
         }
 

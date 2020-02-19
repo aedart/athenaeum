@@ -31,19 +31,19 @@ interface DistanceAware
      *
      * @return int|null distance or null if no distance has been set
      */
-    public function getDistance() : ?int;
+    public function getDistance(): ?int;
 
     /**
      * Check if "distance" has been set
      *
      * @return bool True if "distance" has been set, false if not
      */
-    public function hasDistance() : bool;
+    public function hasDistance(): bool;
 
     /**
      * Get a default "distance" value, if any is available
      *
      * @return int|null Default "distance" value or null if no default value is available
      */
-    public function getDefaultDistance() : ?int;
+    public function getDefaultDistance(): ?int;
 }

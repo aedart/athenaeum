@@ -31,19 +31,19 @@ interface ChoicesAware
      *
      * @return array|null choices or null if no choices has been set
      */
-    public function getChoices() : ?array;
+    public function getChoices(): ?array;
 
     /**
      * Check if "choices" has been set
      *
      * @return bool True if "choices" has been set, false if not
      */
-    public function hasChoices() : bool;
+    public function hasChoices(): bool;
 
     /**
      * Get a default "choices" value, if any is available
      *
      * @return array|null Default "choices" value or null if no default value is available
      */
-    public function getDefaultChoices() : ?array;
+    public function getDefaultChoices(): ?array;
 }

@@ -31,19 +31,19 @@ interface PurchasedAtAware
      *
      * @return \DateTime|null purchased at or null if no purchased at has been set
      */
-    public function getPurchasedAt() : ?\DateTime;
+    public function getPurchasedAt(): ?\DateTime;
 
     /**
      * Check if "purchased at" has been set
      *
      * @return bool True if "purchased at" has been set, false if not
      */
-    public function hasPurchasedAt() : bool;
+    public function hasPurchasedAt(): bool;
 
     /**
      * Get a default "purchased at" value, if any is available
      *
      * @return \DateTime|null Default "purchased at" value or null if no default value is available
      */
-    public function getDefaultPurchasedAt() : ?\DateTime;
+    public function getDefaultPurchasedAt(): ?\DateTime;
 }

@@ -31,19 +31,19 @@ interface DatabasePathAware
      *
      * @return string|null database path or null if no database path has been set
      */
-    public function getDatabasePath() : ?string;
+    public function getDatabasePath(): ?string;
 
     /**
      * Check if "database path" has been set
      *
      * @return bool True if "database path" has been set, false if not
      */
-    public function hasDatabasePath() : bool;
+    public function hasDatabasePath(): bool;
 
     /**
      * Get a default "database path" value, if any is available
      *
      * @return string|null Default "database path" value or null if no default value is available
      */
-    public function getDefaultDatabasePath() : ?string;
+    public function getDefaultDatabasePath(): ?string;
 }

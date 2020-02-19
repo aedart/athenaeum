@@ -43,9 +43,9 @@ trait PostalCodeTrait
      *
      * @return string|null postal code or null if no postal code has been set
      */
-    public function getPostalCode() : ?string
+    public function getPostalCode(): ?string
     {
-        if ( ! $this->hasPostalCode()) {
+        if (!$this->hasPostalCode()) {
             $this->setPostalCode($this->getDefaultPostalCode());
         }
         return $this->postalCode;
@@ -56,7 +56,7 @@ trait PostalCodeTrait
      *
      * @return bool True if "postal code" has been set, false if not
      */
-    public function hasPostalCode() : bool
+    public function hasPostalCode(): bool
     {
         return isset($this->postalCode);
     }
@@ -66,7 +66,7 @@ trait PostalCodeTrait
      *
      * @return string|null Default "postal code" value or null if no default value is available
      */
-    public function getDefaultPostalCode() : ?string
+    public function getDefaultPostalCode(): ?string
     {
         return null;
     }

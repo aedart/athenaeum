@@ -43,9 +43,9 @@ trait BeginTrait
      *
      * @return string|null begin or null if no begin has been set
      */
-    public function getBegin() : ?string
+    public function getBegin(): ?string
     {
-        if ( ! $this->hasBegin()) {
+        if (!$this->hasBegin()) {
             $this->setBegin($this->getDefaultBegin());
         }
         return $this->begin;
@@ -56,7 +56,7 @@ trait BeginTrait
      *
      * @return bool True if "begin" has been set, false if not
      */
-    public function hasBegin() : bool
+    public function hasBegin(): bool
     {
         return isset($this->begin);
     }
@@ -66,7 +66,7 @@ trait BeginTrait
      *
      * @return string|null Default "begin" value or null if no default value is available
      */
-    public function getDefaultBegin() : ?string
+    public function getDefaultBegin(): ?string
     {
         return null;
     }

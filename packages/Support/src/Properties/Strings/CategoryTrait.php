@@ -43,9 +43,9 @@ trait CategoryTrait
      *
      * @return string|null category or null if no category has been set
      */
-    public function getCategory() : ?string
+    public function getCategory(): ?string
     {
-        if ( ! $this->hasCategory()) {
+        if (!$this->hasCategory()) {
             $this->setCategory($this->getDefaultCategory());
         }
         return $this->category;
@@ -56,7 +56,7 @@ trait CategoryTrait
      *
      * @return bool True if "category" has been set, false if not
      */
-    public function hasCategory() : bool
+    public function hasCategory(): bool
     {
         return isset($this->category);
     }
@@ -66,7 +66,7 @@ trait CategoryTrait
      *
      * @return string|null Default "category" value or null if no default value is available
      */
-    public function getDefaultCategory() : ?string
+    public function getDefaultCategory(): ?string
     {
         return null;
     }

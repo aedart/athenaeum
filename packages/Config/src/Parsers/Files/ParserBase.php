@@ -39,7 +39,7 @@ abstract class ParserBase implements FileParser
      */
     public function __construct(?string $filePath = null)
     {
-        if(isset($filePath)){
+        if (isset($filePath)) {
             $this->setFilePath($filePath);
         }
     }
@@ -49,7 +49,7 @@ abstract class ParserBase implements FileParser
      */
     public function setFilePath(string $filePath): FileParser
     {
-        if( ! is_file($filePath)){
+        if (!is_file($filePath)) {
             throw new FileDoesNotExist(sprintf('%s does not exist', $filePath));
         }
 
@@ -79,13 +79,13 @@ abstract class ParserBase implements FileParser
      */
     public function loadAndParse(): array
     {
-        if( ! $this->hasFilePath()){
+        if (!$this->hasFilePath()) {
             throw new UnableToParseFile('No file path has been specified');
         }
 
         try {
             $content = $this->getFile()->get($this->getFilePath());
-        } catch (Throwable $e){
+        } catch (Throwable $e) {
             throw new UnableToParseFile($e->getMessage(), $e->getCode(), $e);
         }
 

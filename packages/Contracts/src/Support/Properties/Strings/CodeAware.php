@@ -31,19 +31,19 @@ interface CodeAware
      *
      * @return string|null code or null if no code has been set
      */
-    public function getCode() : ?string;
+    public function getCode(): ?string;
 
     /**
      * Check if "code" has been set
      *
      * @return bool True if "code" has been set, false if not
      */
-    public function hasCode() : bool;
+    public function hasCode(): bool;
 
     /**
      * Get a default "code" value, if any is available
      *
      * @return string|null Default "code" value or null if no default value is available
      */
-    public function getDefaultCode() : ?string;
+    public function getDefaultCode(): ?string;
 }

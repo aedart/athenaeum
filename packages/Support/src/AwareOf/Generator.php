@@ -58,10 +58,10 @@ class Generator implements ConfigAware
      *
      * @return array Data about the generated aware-of component
      */
-    public function generate(array $component = [], bool $force = false) : array
+    public function generate(array $component = [], bool $force = false): array
     {
         // Abort if nothing given
-        if(empty($component)){
+        if (empty($component)) {
             return [];
         }
 
@@ -87,23 +87,23 @@ class Generator implements ConfigAware
 
         // Format context array for template
         $data = [
-            'interfaceNamespace'    => $interfaceNamespace,
-            'interfaceClassName'    => $interfaceClass,
-            'interfaceFile'         => $interfaceFile,
-            'interfaceTemplate'     => $this->interfaceTemplate,
-            'traitNamespace'        => $traitNamespace,
-            'traitClassName'        => $traitClass,
-            'traitFile'             => $traitFile,
-            'traitTemplate'         => $this->traitTemplate,
-            'title'                 => $propertyInTitle,
-            'dataType'              => $type,
-            'coreProperty'          => $property,
-            'propertyName'          => $propertyMethod,
-            'propertyDescription'   => $description,
+            'interfaceNamespace' => $interfaceNamespace,
+            'interfaceClassName' => $interfaceClass,
+            'interfaceFile' => $interfaceFile,
+            'interfaceTemplate' => $this->interfaceTemplate,
+            'traitNamespace' => $traitNamespace,
+            'traitClassName' => $traitClass,
+            'traitFile' => $traitFile,
+            'traitTemplate' => $this->traitTemplate,
+            'title' => $propertyInTitle,
+            'dataType' => $type,
+            'coreProperty' => $property,
+            'propertyName' => $propertyMethod,
+            'propertyDescription' => $description,
             'propertyInDescription' => $propertyInDescription,
-            'inputArgument'         => $input,
-            'author'                => $author,
-            'email'                 => $email
+            'inputArgument' => $input,
+            'author' => $author,
+            'email' => $email
         ];
 
         // Generate interface and trait
@@ -125,7 +125,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function property(string $name) : string
+    protected function property(string $name): string
     {
         return lcfirst(Str::studly(trim($name)));
     }
@@ -137,7 +137,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function propertyMethod(string $name) : string
+    protected function propertyMethod(string $name): string
     {
         return ucfirst($name);
     }
@@ -149,7 +149,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function propertyInDescription(string $property) : string
+    protected function propertyInDescription(string $property): string
     {
         $property = Str::snake($property);
         return str_replace('_', ' ', $property);
@@ -162,7 +162,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function propertyInTitle(string $property) : string
+    protected function propertyInTitle(string $property): string
     {
         return ucfirst($this->propertyInDescription($property));
     }
@@ -174,7 +174,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function type(string $type) : string
+    protected function type(string $type): string
     {
         return trim($type);
     }
@@ -186,7 +186,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function description(string $description) : string
+    protected function description(string $description): string
     {
         return trim(ucfirst($description));
     }
@@ -198,7 +198,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function inputArgument(string $name) : string
+    protected function inputArgument(string $name): string
     {
         return lcfirst(Str::studly(trim($name)));
     }
@@ -210,7 +210,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function interfaceNamespace(string $type) : string
+    protected function interfaceNamespace(string $type): string
     {
         $config = $this->getConfig();
 
@@ -228,7 +228,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function traitNamespace(string $type) : string
+    protected function traitNamespace(string $type): string
     {
         $config = $this->getConfig();
 
@@ -246,7 +246,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function interfaceTypeNamespace(string $type) : string
+    protected function interfaceTypeNamespace(string $type): string
     {
         return $this->getConfig()->get('namespaces.interfaces.' . $type, '');
     }
@@ -258,7 +258,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function traitTypeNamespace(string $type) : string
+    protected function traitTypeNamespace(string $type): string
     {
         return $this->getConfig()->get('namespaces.traits.' . $type, '');
     }
@@ -270,7 +270,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function interfaceClass(string $property) : string
+    protected function interfaceClass(string $property): string
     {
         return ucfirst($property) . 'Aware';
     }
@@ -282,7 +282,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function traitClass(string $property) : string
+    protected function traitClass(string $property): string
     {
         return ucfirst($property) . 'Trait';
     }
@@ -295,7 +295,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function interfaceFileLocation(string $class, string $namespace) : string
+    protected function interfaceFileLocation(string $class, string $namespace): string
     {
         $vendor = $this->interfaceVendorNamespace();
         $outputDirectory = $this->interfaceOutputDirectory();
@@ -311,7 +311,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function traitFileLocation(string $class, string $namespace) : string
+    protected function traitFileLocation(string $class, string $namespace): string
     {
         $vendor = $this->traitVendorNamespace();
         $outputDirectory = $this->traitOutputDirectory();
@@ -334,9 +334,8 @@ class Generator implements ConfigAware
         string $namespace,
         string $vendor,
         string $outputDirectory
-    ) : string
-    {
-        $class = $class . '.php';
+    ): string {
+        $class .= '.php';
         $namespace = str_replace($vendor, '', $namespace);
         $destination = $outputDirectory . str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
 
@@ -348,7 +347,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function author() : string
+    protected function author(): string
     {
         return $this->getConfig()->get('author', 'John Doe');
     }
@@ -358,7 +357,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function email() : string
+    protected function email(): string
     {
         return $this->getConfig()->get('email', 'john.doe@example.org');
     }
@@ -368,7 +367,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function vendor() : string
+    protected function vendor(): string
     {
         return $this->getConfig()->get('namespaces.vendor', 'Acme\\');
     }
@@ -378,7 +377,7 @@ class Generator implements ConfigAware
      *
      * @return string
      */
-    protected function outputDirectory() : string
+    protected function outputDirectory(): string
     {
         return $this->getConfig()->get('output', 'src/');
     }
@@ -388,7 +387,7 @@ class Generator implements ConfigAware
      *
      * @return string Specific namespace or defaults to vendor namespace
      */
-    protected function interfaceVendorNamespace() : string
+    protected function interfaceVendorNamespace(): string
     {
         return $this->getConfig()->get(
             'namespaces.interfaces.vendor',
@@ -401,7 +400,7 @@ class Generator implements ConfigAware
      *
      * @return string Specific namespace or defaults to vendor namespace
      */
-    protected function traitVendorNamespace() : string
+    protected function traitVendorNamespace(): string
     {
         return $this->getConfig()->get(
             'namespaces.traits.vendor',
@@ -416,7 +415,7 @@ class Generator implements ConfigAware
      *
      * @return string Specific or defaults to output directory
      */
-    protected function interfaceOutputDirectory() : string
+    protected function interfaceOutputDirectory(): string
     {
         return $this->getConfig()->get(
             'namespaces.interfaces.output',
@@ -431,7 +430,7 @@ class Generator implements ConfigAware
      *
      * @return string Specific or defaults to output directory
      */
-    protected function traitOutputDirectory() : string
+    protected function traitOutputDirectory(): string
     {
         return $this->getConfig()->get(
             'namespaces.traits.output',

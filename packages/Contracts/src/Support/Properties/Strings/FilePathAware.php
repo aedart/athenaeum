@@ -31,19 +31,19 @@ interface FilePathAware
      *
      * @return string|null file path or null if no file path has been set
      */
-    public function getFilePath() : ?string;
+    public function getFilePath(): ?string;
 
     /**
      * Check if "file path" has been set
      *
      * @return bool True if "file path" has been set, false if not
      */
-    public function hasFilePath() : bool;
+    public function hasFilePath(): bool;
 
     /**
      * Get a default "file path" value, if any is available
      *
      * @return string|null Default "file path" value or null if no default value is available
      */
-    public function getDefaultFilePath() : ?string;
+    public function getDefaultFilePath(): ?string;
 }

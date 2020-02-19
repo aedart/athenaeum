@@ -31,19 +31,19 @@ interface MacAddressAware
      *
      * @return string|null mac address or null if no mac address has been set
      */
-    public function getMacAddress() : ?string;
+    public function getMacAddress(): ?string;
 
     /**
      * Check if "mac address" has been set
      *
      * @return bool True if "mac address" has been set, false if not
      */
-    public function hasMacAddress() : bool;
+    public function hasMacAddress(): bool;
 
     /**
      * Get a default "mac address" value, if any is available
      *
      * @return string|null Default "mac address" value or null if no default value is available
      */
-    public function getDefaultMacAddress() : ?string;
+    public function getDefaultMacAddress(): ?string;
 }

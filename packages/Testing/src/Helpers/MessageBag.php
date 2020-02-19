@@ -25,7 +25,7 @@ class MessageBag
      *
      * @param string $message
      */
-    public static function add(string $message) : void
+    public static function add(string $message): void
     {
         static::$messages[] = $message;
     }
@@ -35,7 +35,7 @@ class MessageBag
      *
      * @return string[]
      */
-    public static function all() : array
+    public static function all(): array
     {
         return static::$messages;
     }
@@ -43,7 +43,7 @@ class MessageBag
     /**
      * Clear all messages
      */
-    public static function clearAll() : void
+    public static function clearAll(): void
     {
         static::$messages = [];
     }

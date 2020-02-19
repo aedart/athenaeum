@@ -23,7 +23,7 @@ class Math
      *
      * @throws RuntimeException If arguments are invalid or unable to generate enough randomness
      */
-    public static function randomInt(int $min = PHP_INT_MIN, int $max = PHP_INT_MAX) : int
+    public static function randomInt(int $min = PHP_INT_MIN, int $max = PHP_INT_MAX): int
     {
         try {
             return random_int($min, $max);
@@ -44,7 +44,7 @@ class Math
      *
      * @return int
      */
-    public static function seed() : int
+    public static function seed(): int
     {
         // Source is from php.net's documentation:
         // @see https://www.php.net/manual/en/function.mt-srand.php#refsect1-function.mt-srand-examples

@@ -45,7 +45,7 @@ trait HtmlTrait
      */
     public function getHtml()
     {
-        if ( ! $this->hasHtml()) {
+        if (!$this->hasHtml()) {
             $this->setHtml($this->getDefaultHtml());
         }
         return $this->html;
@@ -56,7 +56,7 @@ trait HtmlTrait
      *
      * @return bool True if "html" has been set, false if not
      */
-    public function hasHtml() : bool
+    public function hasHtml(): bool
     {
         return isset($this->html);
     }

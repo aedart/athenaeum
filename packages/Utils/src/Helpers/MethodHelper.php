@@ -29,7 +29,7 @@ class MethodHelper
      *
      * @return string
      */
-    public static function makeGetterName(string $property) : string
+    public static function makeGetterName(string $property): string
     {
         static $methods = [];
 
@@ -49,7 +49,7 @@ class MethodHelper
      *
      * @return string
      */
-    public static function makeSetterName(string $property) : string
+    public static function makeSetterName(string $property): string
     {
         static $methods = [];
 
@@ -69,7 +69,7 @@ class MethodHelper
      */
     public static function callOrReturn($method = null, array $parameters = [])
     {
-        if(is_callable($method)){
+        if (is_callable($method)) {
             return $method(...$parameters);
         }
 

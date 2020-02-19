@@ -31,19 +31,19 @@ interface OrderNumberAware
      *
      * @return string|null order number or null if no order number has been set
      */
-    public function getOrderNumber() : ?string;
+    public function getOrderNumber(): ?string;
 
     /**
      * Check if "order number" has been set
      *
      * @return bool True if "order number" has been set, false if not
      */
-    public function hasOrderNumber() : bool;
+    public function hasOrderNumber(): bool;
 
     /**
      * Get a default "order number" value, if any is available
      *
      * @return string|null Default "order number" value or null if no default value is available
      */
-    public function getDefaultOrderNumber() : ?string;
+    public function getDefaultOrderNumber(): ?string;
 }

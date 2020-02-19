@@ -25,7 +25,7 @@ class RegisterApplicationAliases implements CanBeBootstrapped
         // configuration and register them
         $aliases = $this->getConfig()->get('app.aliases', []);
 
-        foreach ($aliases as $alias => $abstract){
+        foreach ($aliases as $alias => $abstract) {
             $application->alias($abstract, $alias);
         }
     }

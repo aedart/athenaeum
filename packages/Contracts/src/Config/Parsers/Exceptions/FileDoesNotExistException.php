@@ -14,5 +14,4 @@ namespace Aedart\Contracts\Config\Parsers\Exceptions;
  */
 interface FileDoesNotExistException extends FileParserException
 {
-
 }

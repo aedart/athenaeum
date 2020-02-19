@@ -31,19 +31,19 @@ interface RankAware
      *
      * @return int|null rank or null if no rank has been set
      */
-    public function getRank() : ?int;
+    public function getRank(): ?int;
 
     /**
      * Check if "rank" has been set
      *
      * @return bool True if "rank" has been set, false if not
      */
-    public function hasRank() : bool;
+    public function hasRank(): bool;
 
     /**
      * Get a default "rank" value, if any is available
      *
      * @return int|null Default "rank" value or null if no default value is available
      */
-    public function getDefaultRank() : ?int;
+    public function getDefaultRank(): ?int;
 }

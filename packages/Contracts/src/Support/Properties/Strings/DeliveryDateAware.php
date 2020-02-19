@@ -31,19 +31,19 @@ interface DeliveryDateAware
      *
      * @return string|null delivery date or null if no delivery date has been set
      */
-    public function getDeliveryDate() : ?string;
+    public function getDeliveryDate(): ?string;
 
     /**
      * Check if "delivery date" has been set
      *
      * @return bool True if "delivery date" has been set, false if not
      */
-    public function hasDeliveryDate() : bool;
+    public function hasDeliveryDate(): bool;
 
     /**
      * Get a default "delivery date" value, if any is available
      *
      * @return string|null Default "delivery date" value or null if no default value is available
      */
-    public function getDefaultDeliveryDate() : ?string;
+    public function getDefaultDeliveryDate(): ?string;
 }

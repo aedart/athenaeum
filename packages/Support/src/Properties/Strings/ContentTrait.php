@@ -43,9 +43,9 @@ trait ContentTrait
      *
      * @return string|null content or null if no content has been set
      */
-    public function getContent() : ?string
+    public function getContent(): ?string
     {
-        if ( ! $this->hasContent()) {
+        if (!$this->hasContent()) {
             $this->setContent($this->getDefaultContent());
         }
         return $this->content;
@@ -56,7 +56,7 @@ trait ContentTrait
      *
      * @return bool True if "content" has been set, false if not
      */
-    public function hasContent() : bool
+    public function hasContent(): bool
     {
         return isset($this->content);
     }
@@ -66,7 +66,7 @@ trait ContentTrait
      *
      * @return string|null Default "content" value or null if no default value is available
      */
-    public function getDefaultContent() : ?string
+    public function getDefaultContent(): ?string
     {
         return null;
     }

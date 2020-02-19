@@ -62,7 +62,7 @@ trait Accessibility
      */
     protected function setPropertyAccessibilityLevel(int $level)
     {
-        if ( ! $this->isPropertyAccessibilityLevelValid($level)) {
+        if (!$this->isPropertyAccessibilityLevelValid($level)) {
             throw new RangeException(sprintf('Property accessibility level "%s" is invalid', $level));
         }
         $this->propertyAccessibilityLevel = $level;
@@ -81,9 +81,9 @@ trait Accessibility
      *
      * @return int Property accessibility level
      */
-    protected function getPropertyAccessibilityLevel() : int
+    protected function getPropertyAccessibilityLevel(): int
     {
-        if ( ! isset($this->propertyAccessibilityLevel)) {
+        if (!isset($this->propertyAccessibilityLevel)) {
             $this->setPropertyAccessibilityLevel($this->getDefaultPropertyAccessibilityLevel());
         }
 
@@ -111,9 +111,9 @@ trait Accessibility
      *
      * @return bool True if level is valid, false if not
      */
-    protected function isPropertyAccessibilityLevelValid(int $level) : bool
+    protected function isPropertyAccessibilityLevelValid(int $level): bool
     {
-        if( ! isset(AccessibilityLevels::LEVELS[$level])) {
+        if (!isset(AccessibilityLevels::LEVELS[$level])) {
             return false;
         }
 
@@ -134,11 +134,11 @@ trait Accessibility
      *
      * @return bool True if the given property is accessible, false if not
      */
-    protected function isPropertyAccessible(ReflectionProperty $property) : bool
+    protected function isPropertyAccessible(ReflectionProperty $property): bool
     {
         $level = $this->getPropertyAccessibilityLevel();
 
-        if ( ! $property->isStatic() && $property->getModifiers() <= $level) {
+        if (!$property->isStatic() && $property->getModifiers() <= $level) {
             return true;
         }
 

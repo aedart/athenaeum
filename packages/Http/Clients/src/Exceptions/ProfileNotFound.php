@@ -12,5 +12,4 @@ use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
  */
 class ProfileNotFound extends \RuntimeException implements ProfileNotFoundException
 {
-
 }

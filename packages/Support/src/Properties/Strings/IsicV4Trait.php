@@ -43,9 +43,9 @@ trait IsicV4Trait
      *
      * @return string|null isic v4 or null if no isic v4 has been set
      */
-    public function getIsicV4() : ?string
+    public function getIsicV4(): ?string
     {
-        if ( ! $this->hasIsicV4()) {
+        if (!$this->hasIsicV4()) {
             $this->setIsicV4($this->getDefaultIsicV4());
         }
         return $this->isicV4;
@@ -56,7 +56,7 @@ trait IsicV4Trait
      *
      * @return bool True if "isic v4" has been set, false if not
      */
-    public function hasIsicV4() : bool
+    public function hasIsicV4(): bool
     {
         return isset($this->isicV4);
     }
@@ -66,7 +66,7 @@ trait IsicV4Trait
      *
      * @return string|null Default "isic v4" value or null if no default value is available
      */
-    public function getDefaultIsicV4() : ?string
+    public function getDefaultIsicV4(): ?string
     {
         return null;
     }

@@ -43,9 +43,9 @@ trait TitleTrait
      *
      * @return string|null title or null if no title has been set
      */
-    public function getTitle() : ?string
+    public function getTitle(): ?string
     {
-        if ( ! $this->hasTitle()) {
+        if (!$this->hasTitle()) {
             $this->setTitle($this->getDefaultTitle());
         }
         return $this->title;
@@ -56,7 +56,7 @@ trait TitleTrait
      *
      * @return bool True if "title" has been set, false if not
      */
-    public function hasTitle() : bool
+    public function hasTitle(): bool
     {
         return isset($this->title);
     }
@@ -66,7 +66,7 @@ trait TitleTrait
      *
      * @return string|null Default "title" value or null if no default value is available
      */
-    public function getDefaultTitle() : ?string
+    public function getDefaultTitle(): ?string
     {
         return null;
     }

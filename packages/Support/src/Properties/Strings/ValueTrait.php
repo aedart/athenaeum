@@ -43,9 +43,9 @@ trait ValueTrait
      *
      * @return string|null value or null if no value has been set
      */
-    public function getValue() : ?string
+    public function getValue(): ?string
     {
-        if ( ! $this->hasValue()) {
+        if (!$this->hasValue()) {
             $this->setValue($this->getDefaultValue());
         }
         return $this->value;
@@ -56,7 +56,7 @@ trait ValueTrait
      *
      * @return bool True if "value" has been set, false if not
      */
-    public function hasValue() : bool
+    public function hasValue(): bool
     {
         return isset($this->value);
     }
@@ -66,7 +66,7 @@ trait ValueTrait
      *
      * @return string|null Default "value" value or null if no default value is available
      */
-    public function getDefaultValue() : ?string
+    public function getDefaultValue(): ?string
     {
         return null;
     }

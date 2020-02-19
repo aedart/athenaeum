@@ -31,19 +31,19 @@ interface TextAware
      *
      * @return string|null text or null if no text has been set
      */
-    public function getText() : ?string;
+    public function getText(): ?string;
 
     /**
      * Check if "text" has been set
      *
      * @return bool True if "text" has been set, false if not
      */
-    public function hasText() : bool;
+    public function hasText(): bool;
 
     /**
      * Get a default "text" value, if any is available
      *
      * @return string|null Default "text" value or null if no default value is available
      */
-    public function getDefaultText() : ?string;
+    public function getDefaultText(): ?string;
 }

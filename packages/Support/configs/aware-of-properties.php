@@ -10,15 +10,15 @@ return [
     /*
      * Author and email
      */
-    'author'    => 'John Doe',
-    'email'     => 'john.doe@example.org',
+    'author' => 'John Doe',
+    'email' => 'john.doe@example.org',
 
     /*
      * Location where files are to be generated
      *
      * E.g. Psr-4 namespace location
      */
-    'output'    => 'src/',
+    'output' => 'src/',
 
     /*****************************************************************
      * Templates location
@@ -68,7 +68,7 @@ return [
             /*
              * Prefix for all interfaces
              */
-            'prefix'  => 'Contracts\\',
+            'prefix' => 'Contracts\\',
 
             /**
              * Path overwrite for interfaces
@@ -80,15 +80,15 @@ return [
             /*
              * Namespaces for various data types
              */
-            DataTypes::STRING_TYPE      => 'Strings\\',
-            DataTypes::INT_TYPE         => 'Integers\\',
-            DataTypes::FLOAT_TYPE       => 'Floats\\',
-            DataTypes::BOOL_TYPE        => 'Booleans\\',
-            DataTypes::ARRAY_TYPE       => 'Arrays\\',
-            DataTypes::CALLABLE_TYPE    => 'Callables\\',
-            DataTypes::ITERABLE_TYPE    => 'Iterators\\',
-            DataTypes::MIXED_TYPE       => 'Mixed\\',
-            DataTypes::DATE_TIME_TYPE   => 'Dates\\',
+            DataTypes::STRING_TYPE => 'Strings\\',
+            DataTypes::INT_TYPE => 'Integers\\',
+            DataTypes::FLOAT_TYPE => 'Floats\\',
+            DataTypes::BOOL_TYPE => 'Booleans\\',
+            DataTypes::ARRAY_TYPE => 'Arrays\\',
+            DataTypes::CALLABLE_TYPE => 'Callables\\',
+            DataTypes::ITERABLE_TYPE => 'Iterators\\',
+            DataTypes::MIXED_TYPE => 'Mixed\\',
+            DataTypes::DATE_TIME_TYPE => 'Dates\\',
         ],
 
         /*
@@ -104,7 +104,7 @@ return [
             /*
              * Prefix for all traits
              */
-            'prefix'  => 'Traits\\',
+            'prefix' => 'Traits\\',
 
             /**
              * Path overwrite for traits
@@ -116,15 +116,15 @@ return [
             /*
              * Namespaces for various data types
              */
-            DataTypes::STRING_TYPE      => 'Strings\\',
-            DataTypes::INT_TYPE         => 'Integers\\',
-            DataTypes::FLOAT_TYPE       => 'Floats\\',
-            DataTypes::BOOL_TYPE        => 'Booleans\\',
-            DataTypes::ARRAY_TYPE       => 'Arrays\\',
-            DataTypes::CALLABLE_TYPE    => 'Callables\\',
-            DataTypes::ITERABLE_TYPE    => 'Iterators\\',
-            DataTypes::MIXED_TYPE       => 'Mixed\\',
-            DataTypes::DATE_TIME_TYPE   => 'Dates\\',
+            DataTypes::STRING_TYPE => 'Strings\\',
+            DataTypes::INT_TYPE => 'Integers\\',
+            DataTypes::FLOAT_TYPE => 'Floats\\',
+            DataTypes::BOOL_TYPE => 'Booleans\\',
+            DataTypes::ARRAY_TYPE => 'Arrays\\',
+            DataTypes::CALLABLE_TYPE => 'Callables\\',
+            DataTypes::ITERABLE_TYPE => 'Iterators\\',
+            DataTypes::MIXED_TYPE => 'Mixed\\',
+            DataTypes::DATE_TIME_TYPE => 'Dates\\',
         ],
     ],
 

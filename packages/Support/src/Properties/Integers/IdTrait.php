@@ -43,9 +43,9 @@ trait IdTrait
      *
      * @return int|null id or null if no id has been set
      */
-    public function getId() : ?int
+    public function getId(): ?int
     {
-        if ( ! $this->hasId()) {
+        if (!$this->hasId()) {
             $this->setId($this->getDefaultId());
         }
         return $this->id;
@@ -56,7 +56,7 @@ trait IdTrait
      *
      * @return bool True if "id" has been set, false if not
      */
-    public function hasId() : bool
+    public function hasId(): bool
     {
         return isset($this->id);
     }
@@ -66,7 +66,7 @@ trait IdTrait
      *
      * @return int|null Default "id" value or null if no default value is available
      */
-    public function getDefaultId() : ?int
+    public function getDefaultId(): ?int
     {
         return null;
     }

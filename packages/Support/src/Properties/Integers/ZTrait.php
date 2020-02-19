@@ -43,9 +43,9 @@ trait ZTrait
      *
      * @return int|null z or null if no z has been set
      */
-    public function getZ() : ?int
+    public function getZ(): ?int
     {
-        if ( ! $this->hasZ()) {
+        if (!$this->hasZ()) {
             $this->setZ($this->getDefaultZ());
         }
         return $this->z;
@@ -56,7 +56,7 @@ trait ZTrait
      *
      * @return bool True if "z" has been set, false if not
      */
-    public function hasZ() : bool
+    public function hasZ(): bool
     {
         return isset($this->z);
     }
@@ -66,7 +66,7 @@ trait ZTrait
      *
      * @return int|null Default "z" value or null if no default value is available
      */
-    public function getDefaultZ() : ?int
+    public function getDefaultZ(): ?int
     {
         return null;
     }

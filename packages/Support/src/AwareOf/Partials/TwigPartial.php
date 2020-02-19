@@ -59,9 +59,9 @@ trait TwigPartial
     public function generateFile(string $template, string $destination, array $data, bool $force = false)
     {
         // Remove existing file, if force flag set
-        if($force && file_exists($destination)){
+        if ($force && file_exists($destination)) {
             unlink($destination);
-        } elseif(file_exists($destination)){
+        } elseif (file_exists($destination)) {
             // Otherwise abort if file exists...
             return;
         }
@@ -84,7 +84,7 @@ trait TwigPartial
     public function prepareOutputDirectory(string $filePath)
     {
         $directory = pathinfo($filePath, PATHINFO_DIRNAME);
-        if(is_dir($directory)){
+        if (is_dir($directory)) {
             return;
         }
 
@@ -96,11 +96,11 @@ trait TwigPartial
      *
      * @return array
      */
-    public function twigEngineOptions() : array
+    public function twigEngineOptions(): array
     {
         return [
-            'debug'                 => true,
-            'strict_variables'      => true,
+            'debug' => true,
+            'strict_variables' => true,
         ];
     }
 
@@ -109,7 +109,7 @@ trait TwigPartial
      *
      * @return string
      */
-    public function defaultTemplatesPath() : string
+    public function defaultTemplatesPath(): string
     {
         return __DIR__ . '/../../../resources/templates/aware-of-component/';
     }

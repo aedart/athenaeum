@@ -31,19 +31,19 @@ interface AgeAware
      *
      * @return int|null age or null if no age has been set
      */
-    public function getAge() : ?int;
+    public function getAge(): ?int;
 
     /**
      * Check if "age" has been set
      *
      * @return bool True if "age" has been set, false if not
      */
-    public function hasAge() : bool;
+    public function hasAge(): bool;
 
     /**
      * Get a default "age" value, if any is available
      *
      * @return int|null Default "age" value or null if no default value is available
      */
-    public function getDefaultAge() : ?int;
+    public function getDefaultAge(): ?int;
 }

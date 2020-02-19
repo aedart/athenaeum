@@ -18,5 +18,4 @@ use Throwable;
  */
 interface UnsupportedOperationException extends Throwable
 {
-
 }

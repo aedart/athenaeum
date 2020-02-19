@@ -24,7 +24,7 @@ class LoadConfiguration implements CanBeBootstrapped
         $loader = $this->getConfigLoader();
 
         $loader
-            ->setDirectory( $application->configPath() )
+            ->setDirectory($application->configPath())
             ->load();
     }
 }

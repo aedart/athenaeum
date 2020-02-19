@@ -31,19 +31,19 @@ interface RoleAware
      *
      * @return string|null role or null if no role has been set
      */
-    public function getRole() : ?string;
+    public function getRole(): ?string;
 
     /**
      * Check if "role" has been set
      *
      * @return bool True if "role" has been set, false if not
      */
-    public function hasRole() : bool;
+    public function hasRole(): bool;
 
     /**
      * Get a default "role" value, if any is available
      *
      * @return string|null Default "role" value or null if no default value is available
      */
-    public function getDefaultRole() : ?string;
+    public function getDefaultRole(): ?string;
 }

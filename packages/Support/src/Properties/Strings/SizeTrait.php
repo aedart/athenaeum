@@ -43,9 +43,9 @@ trait SizeTrait
      *
      * @return string|null size or null if no size has been set
      */
-    public function getSize() : ?string
+    public function getSize(): ?string
     {
-        if ( ! $this->hasSize()) {
+        if (!$this->hasSize()) {
             $this->setSize($this->getDefaultSize());
         }
         return $this->size;
@@ -56,7 +56,7 @@ trait SizeTrait
      *
      * @return bool True if "size" has been set, false if not
      */
-    public function hasSize() : bool
+    public function hasSize(): bool
     {
         return isset($this->size);
     }
@@ -66,7 +66,7 @@ trait SizeTrait
      *
      * @return string|null Default "size" value or null if no default value is available
      */
-    public function getDefaultSize() : ?string
+    public function getDefaultSize(): ?string
     {
         return null;
     }

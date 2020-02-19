@@ -43,9 +43,9 @@ trait LabelTrait
      *
      * @return string|null label or null if no label has been set
      */
-    public function getLabel() : ?string
+    public function getLabel(): ?string
     {
-        if ( ! $this->hasLabel()) {
+        if (!$this->hasLabel()) {
             $this->setLabel($this->getDefaultLabel());
         }
         return $this->label;
@@ -56,7 +56,7 @@ trait LabelTrait
      *
      * @return bool True if "label" has been set, false if not
      */
-    public function hasLabel() : bool
+    public function hasLabel(): bool
     {
         return isset($this->label);
     }
@@ -66,7 +66,7 @@ trait LabelTrait
      *
      * @return string|null Default "label" value or null if no default value is available
      */
-    public function getDefaultLabel() : ?string
+    public function getDefaultLabel(): ?string
     {
         return null;
     }

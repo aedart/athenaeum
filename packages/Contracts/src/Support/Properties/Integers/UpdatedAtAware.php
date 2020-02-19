@@ -31,19 +31,19 @@ interface UpdatedAtAware
      *
      * @return int|null updated at or null if no updated at has been set
      */
-    public function getUpdatedAt() : ?int;
+    public function getUpdatedAt(): ?int;
 
     /**
      * Check if "updated at" has been set
      *
      * @return bool True if "updated at" has been set, false if not
      */
-    public function hasUpdatedAt() : bool;
+    public function hasUpdatedAt(): bool;
 
     /**
      * Get a default "updated at" value, if any is available
      *
      * @return int|null Default "updated at" value or null if no default value is available
      */
-    public function getDefaultUpdatedAt() : ?int;
+    public function getDefaultUpdatedAt(): ?int;
 }

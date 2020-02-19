@@ -31,19 +31,19 @@ interface SuffixAware
      *
      * @return string|null suffix or null if no suffix has been set
      */
-    public function getSuffix() : ?string;
+    public function getSuffix(): ?string;
 
     /**
      * Check if "suffix" has been set
      *
      * @return bool True if "suffix" has been set, false if not
      */
-    public function hasSuffix() : bool;
+    public function hasSuffix(): bool;
 
     /**
      * Get a default "suffix" value, if any is available
      *
      * @return string|null Default "suffix" value or null if no default value is available
      */
-    public function getDefaultSuffix() : ?string;
+    public function getDefaultSuffix(): ?string;
 }

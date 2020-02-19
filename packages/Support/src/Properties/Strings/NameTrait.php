@@ -43,9 +43,9 @@ trait NameTrait
      *
      * @return string|null name or null if no name has been set
      */
-    public function getName() : ?string
+    public function getName(): ?string
     {
-        if ( ! $this->hasName()) {
+        if (!$this->hasName()) {
             $this->setName($this->getDefaultName());
         }
         return $this->name;
@@ -56,7 +56,7 @@ trait NameTrait
      *
      * @return bool True if "name" has been set, false if not
      */
-    public function hasName() : bool
+    public function hasName(): bool
     {
         return isset($this->name);
     }
@@ -66,7 +66,7 @@ trait NameTrait
      *
      * @return string|null Default "name" value or null if no default value is available
      */
-    public function getDefaultName() : ?string
+    public function getDefaultName(): ?string
     {
         return null;
     }

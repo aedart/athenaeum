@@ -31,19 +31,19 @@ interface ManufacturerAware
      *
      * @return string|null manufacturer or null if no manufacturer has been set
      */
-    public function getManufacturer() : ?string;
+    public function getManufacturer(): ?string;
 
     /**
      * Check if "manufacturer" has been set
      *
      * @return bool True if "manufacturer" has been set, false if not
      */
-    public function hasManufacturer() : bool;
+    public function hasManufacturer(): bool;
 
     /**
      * Get a default "manufacturer" value, if any is available
      *
      * @return string|null Default "manufacturer" value or null if no default value is available
      */
-    public function getDefaultManufacturer() : ?string;
+    public function getDefaultManufacturer(): ?string;
 }

@@ -31,19 +31,19 @@ interface DurationAware
      *
      * @return int|null duration or null if no duration has been set
      */
-    public function getDuration() : ?int;
+    public function getDuration(): ?int;
 
     /**
      * Check if "duration" has been set
      *
      * @return bool True if "duration" has been set, false if not
      */
-    public function hasDuration() : bool;
+    public function hasDuration(): bool;
 
     /**
      * Get a default "duration" value, if any is available
      *
      * @return int|null Default "duration" value or null if no default value is available
      */
-    public function getDefaultDuration() : ?int;
+    public function getDefaultDuration(): ?int;
 }

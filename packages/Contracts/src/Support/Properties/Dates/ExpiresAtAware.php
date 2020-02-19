@@ -31,19 +31,19 @@ interface ExpiresAtAware
      *
      * @return \DateTime|null expires at or null if no expires at has been set
      */
-    public function getExpiresAt() : ?\DateTime;
+    public function getExpiresAt(): ?\DateTime;
 
     /**
      * Check if "expires at" has been set
      *
      * @return bool True if "expires at" has been set, false if not
      */
-    public function hasExpiresAt() : bool;
+    public function hasExpiresAt(): bool;
 
     /**
      * Get a default "expires at" value, if any is available
      *
      * @return \DateTime|null Default "expires at" value or null if no default value is available
      */
-    public function getDefaultExpiresAt() : ?\DateTime;
+    public function getDefaultExpiresAt(): ?\DateTime;
 }

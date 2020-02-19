@@ -43,9 +43,9 @@ trait XTrait
      *
      * @return int|null x or null if no x has been set
      */
-    public function getX() : ?int
+    public function getX(): ?int
     {
-        if ( ! $this->hasX()) {
+        if (!$this->hasX()) {
             $this->setX($this->getDefaultX());
         }
         return $this->x;
@@ -56,7 +56,7 @@ trait XTrait
      *
      * @return bool True if "x" has been set, false if not
      */
-    public function hasX() : bool
+    public function hasX(): bool
     {
         return isset($this->x);
     }
@@ -66,7 +66,7 @@ trait XTrait
      *
      * @return int|null Default "x" value or null if no default value is available
      */
-    public function getDefaultX() : ?int
+    public function getDefaultX(): ?int
     {
         return null;
     }

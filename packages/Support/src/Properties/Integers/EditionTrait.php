@@ -43,9 +43,9 @@ trait EditionTrait
      *
      * @return int|null edition or null if no edition has been set
      */
-    public function getEdition() : ?int
+    public function getEdition(): ?int
     {
-        if ( ! $this->hasEdition()) {
+        if (!$this->hasEdition()) {
             $this->setEdition($this->getDefaultEdition());
         }
         return $this->edition;
@@ -56,7 +56,7 @@ trait EditionTrait
      *
      * @return bool True if "edition" has been set, false if not
      */
-    public function hasEdition() : bool
+    public function hasEdition(): bool
     {
         return isset($this->edition);
     }
@@ -66,7 +66,7 @@ trait EditionTrait
      *
      * @return int|null Default "edition" value or null if no default value is available
      */
-    public function getDefaultEdition() : ?int
+    public function getDefaultEdition(): ?int
     {
         return null;
     }

@@ -43,9 +43,9 @@ trait IndexTrait
      *
      * @return int|null index or null if no index has been set
      */
-    public function getIndex() : ?int
+    public function getIndex(): ?int
     {
-        if ( ! $this->hasIndex()) {
+        if (!$this->hasIndex()) {
             $this->setIndex($this->getDefaultIndex());
         }
         return $this->index;
@@ -56,7 +56,7 @@ trait IndexTrait
      *
      * @return bool True if "index" has been set, false if not
      */
-    public function hasIndex() : bool
+    public function hasIndex(): bool
     {
         return isset($this->index);
     }
@@ -66,7 +66,7 @@ trait IndexTrait
      *
      * @return int|null Default "index" value or null if no default value is available
      */
-    public function getDefaultIndex() : ?int
+    public function getDefaultIndex(): ?int
     {
         return null;
     }

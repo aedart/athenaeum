@@ -31,19 +31,19 @@ interface VersionAware
      *
      * @return string|null version or null if no version has been set
      */
-    public function getVersion() : ?string;
+    public function getVersion(): ?string;
 
     /**
      * Check if "version" has been set
      *
      * @return bool True if "version" has been set, false if not
      */
-    public function hasVersion() : bool;
+    public function hasVersion(): bool;
 
     /**
      * Get a default "version" value, if any is available
      *
      * @return string|null Default "version" value or null if no default value is available
      */
-    public function getDefaultVersion() : ?string;
+    public function getDefaultVersion(): ?string;
 }

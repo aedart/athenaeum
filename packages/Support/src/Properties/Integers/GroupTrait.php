@@ -43,9 +43,9 @@ trait GroupTrait
      *
      * @return int|null group or null if no group has been set
      */
-    public function getGroup() : ?int
+    public function getGroup(): ?int
     {
-        if ( ! $this->hasGroup()) {
+        if (!$this->hasGroup()) {
             $this->setGroup($this->getDefaultGroup());
         }
         return $this->group;
@@ -56,7 +56,7 @@ trait GroupTrait
      *
      * @return bool True if "group" has been set, false if not
      */
-    public function hasGroup() : bool
+    public function hasGroup(): bool
     {
         return isset($this->group);
     }
@@ -66,7 +66,7 @@ trait GroupTrait
      *
      * @return int|null Default "group" value or null if no default value is available
      */
-    public function getDefaultGroup() : ?int
+    public function getDefaultGroup(): ?int
     {
         return null;
     }

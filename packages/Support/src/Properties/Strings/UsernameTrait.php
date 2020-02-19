@@ -43,9 +43,9 @@ trait UsernameTrait
      *
      * @return string|null username or null if no username has been set
      */
-    public function getUsername() : ?string
+    public function getUsername(): ?string
     {
-        if ( ! $this->hasUsername()) {
+        if (!$this->hasUsername()) {
             $this->setUsername($this->getDefaultUsername());
         }
         return $this->username;
@@ -56,7 +56,7 @@ trait UsernameTrait
      *
      * @return bool True if "username" has been set, false if not
      */
-    public function hasUsername() : bool
+    public function hasUsername(): bool
     {
         return isset($this->username);
     }
@@ -66,7 +66,7 @@ trait UsernameTrait
      *
      * @return string|null Default "username" value or null if no default value is available
      */
-    public function getDefaultUsername() : ?string
+    public function getDefaultUsername(): ?string
     {
         return null;
     }

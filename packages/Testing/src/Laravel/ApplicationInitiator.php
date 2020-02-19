@@ -42,7 +42,7 @@ trait ApplicationInitiator
     public function startApplication()
     {
         // Abort if already running
-        if($this->hasApplicationBeenStarted()){
+        if ($this->hasApplicationBeenStarted()) {
             return $this;
         }
 
@@ -65,9 +65,9 @@ trait ApplicationInitiator
      *
      * @return bool
      */
-    public function stopApplication() : bool
+    public function stopApplication(): bool
     {
-        if( ! $this->hasApplicationBeenStarted()){
+        if (!$this->hasApplicationBeenStarted()) {
             return false;
         }
 
@@ -89,7 +89,7 @@ trait ApplicationInitiator
      *
      * @return Application|null
      */
-    public function getApplication() : ?Application
+    public function getApplication(): ?Application
     {
         return $this->app;
     }
@@ -99,7 +99,7 @@ trait ApplicationInitiator
      *
      * @return bool
      */
-    public function hasApplicationBeenStarted() : bool
+    public function hasApplicationBeenStarted(): bool
     {
         return isset($this->app);
     }

@@ -43,9 +43,9 @@ trait UpdatedAtTrait
      *
      * @return int|null updated at or null if no updated at has been set
      */
-    public function getUpdatedAt() : ?int
+    public function getUpdatedAt(): ?int
     {
-        if ( ! $this->hasUpdatedAt()) {
+        if (!$this->hasUpdatedAt()) {
             $this->setUpdatedAt($this->getDefaultUpdatedAt());
         }
         return $this->updatedAt;
@@ -56,7 +56,7 @@ trait UpdatedAtTrait
      *
      * @return bool True if "updated at" has been set, false if not
      */
-    public function hasUpdatedAt() : bool
+    public function hasUpdatedAt(): bool
     {
         return isset($this->updatedAt);
     }
@@ -66,7 +66,7 @@ trait UpdatedAtTrait
      *
      * @return int|null Default "updated at" value or null if no default value is available
      */
-    public function getDefaultUpdatedAt() : ?int
+    public function getDefaultUpdatedAt(): ?int
     {
         return null;
     }

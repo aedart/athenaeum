@@ -31,19 +31,19 @@ interface EventAware
      *
      * @return string|null event or null if no event has been set
      */
-    public function getEvent() : ?string;
+    public function getEvent(): ?string;
 
     /**
      * Check if "event" has been set
      *
      * @return bool True if "event" has been set, false if not
      */
-    public function hasEvent() : bool;
+    public function hasEvent(): bool;
 
     /**
      * Get a default "event" value, if any is available
      *
      * @return string|null Default "event" value or null if no default value is available
      */
-    public function getDefaultEvent() : ?string;
+    public function getDefaultEvent(): ?string;
 }
