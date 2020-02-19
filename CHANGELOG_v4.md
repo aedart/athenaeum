@@ -38,7 +38,7 @@ The original commands are still available using the `athenaeum` console applicat
 **Non-breaking Changes**
 
 * Converted athenaeum into a true [mono repository](ttps://en.wikipedia.org/wiki/Monorepo). All major components are now available as separate packages, via composer.
-* Upgraded Laravel dependencies to `v6.15.x`, Symfony to `v4.4.x`, Codeception to `v4.1.x`, and various other dependencies.
+* Upgraded Laravel dependencies to `v6.16.x`, Symfony to `v4.4.x`, Codeception to `v4.1.x`, and various other dependencies.
 * Code style to [PSR-12](https://www.php-fig.org/psr/psr-12/).
 * Replaced deprecated `Twig` components, in `TwigPartial` trait.
 * `UnitTestCase` now uses `FakerPartial` to setup [Faker](https://github.com/fzaninotto/Faker).
