@@ -151,7 +151,9 @@ class DefaultHttpClient implements Client
         $headers = $this->optionsForNextRequest['headers'] ?? [];
 
         $name = $this->normaliseHeaderName($name);
-        foreach ($headers as $header => $value){
+
+        $names = array_keys($headers);
+        foreach ($names as $header){
             if($this->normaliseHeaderName($header) === $name){
                 unset($this->optionsForNextRequest['headers'][$header]);
                 break;
@@ -281,7 +283,8 @@ class DefaultHttpClient implements Client
 
         $name = $this->normaliseHeaderName($name);
 
-        foreach ($headers as $header => $value){
+        $names = array_keys($headers);
+        foreach ($names as $header){
             if($this->normaliseHeaderName($header) === $name){
                 return true;
             }

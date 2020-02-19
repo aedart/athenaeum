@@ -74,7 +74,7 @@ trait CacheTrait
     {
         $manager = Cache::getFacadeRoot();
         if (isset($manager)) {
-            return $cache = $manager->store();
+            return $manager->store();
         }
         return $manager;
     }
