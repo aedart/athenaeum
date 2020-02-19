@@ -120,7 +120,9 @@
     },
     "scripts-descriptions": {
         "test-env": "Create .testing environment file, if it does not exist",
-        "update-bin": "Updates all vendor-bin dependencies"
+        "update-bin": "Updates all vendor-bin dependencies",
+        "cs": "vendor/bin/ecs check",
+        "cs-fix": "vendor/bin/ecs check --fix"
     },
     "config": {
         "sort-packages": true
