@@ -117,12 +117,16 @@
         "update-bin": [
             "@composer bin all update --ansi"
         ],
+        "php-cc": [
+            "vendor/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary ./packages ./src ./tests"
+        ],
         "cs": "vendor/bin/ecs check --ansi",
         "cs-fix": "vendor/bin/ecs check --fix --ansi"
     },
     "scripts-descriptions": {
         "test-env": "Create .testing environment file, if it does not exist",
         "update-bin": "Updates all vendor-bin dependencies",
+        "php-cc": "Check PHP Compatibility",
         "cs": "Perform an 'Easy Coding Standard' check",
         "cs-fix": "Perform an 'Easy Coding Standard' check and automatically fix warnings"
     },
