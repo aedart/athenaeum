@@ -20,6 +20,10 @@ Your application stands to benefit greatly from this, both in terms of security,
 
 Please consult yourself with [PHP Migration Guides](https://www.php.net/manual/en/migration74.php), for additional information.
 
+_As the author of this package, I apologise if you somehow feel mislead.
+I have been working on this and many other packages by myself.
+There are limits as to how much backwards compatibility I can offer._
+
 ### Other Requirements
 
 See eventual remaining requirements on [packagist](https://packagist.org/packages/aedart/athenaeum-core) or inside this package's `composer.json`.
