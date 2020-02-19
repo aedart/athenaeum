@@ -116,13 +116,15 @@
         ],
         "update-bin": [
             "@composer bin all update --ansi"
-        ]
+        ],
+        "cs": "vendor/bin/ecs check --ansi",
+        "cs-fix": "vendor/bin/ecs check --fix --ansi"
     },
     "scripts-descriptions": {
         "test-env": "Create .testing environment file, if it does not exist",
         "update-bin": "Updates all vendor-bin dependencies",
-        "cs": "vendor/bin/ecs check",
-        "cs-fix": "vendor/bin/ecs check --fix"
+        "cs": "Perform an 'Easy Coding Standard' check",
+        "cs-fix": "Perform an 'Easy Coding Standard' check and automatically fix warnings"
     },
     "config": {
         "sort-packages": true
