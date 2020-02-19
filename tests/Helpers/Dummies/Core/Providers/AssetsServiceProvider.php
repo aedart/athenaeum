@@ -22,12 +22,12 @@ class AssetsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if( ! $this->app->runningUnitTests()){
+        if (!$this->app->runningUnitTests()) {
             return;
         }
 
         $this->publishes([
             __DIR__ . '/../../../../../packages/Support/resources/' => Configuration::outputDir() . 'console/publish/',
-        ],'resources');
+        ], 'resources');
     }
 }

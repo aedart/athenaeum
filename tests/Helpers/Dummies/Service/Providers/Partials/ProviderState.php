@@ -54,7 +54,7 @@ trait ProviderState
      *
      * @param string $message
      */
-    protected function logMessage(string $message) : void
+    protected function logMessage(string $message): void
     {
         MessageBag::add($message);
 

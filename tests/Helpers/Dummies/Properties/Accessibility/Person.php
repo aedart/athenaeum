@@ -42,7 +42,7 @@ class Person
      *
      * @return bool
      */
-    protected function myInternalMethod() : bool
+    protected function myInternalMethod(): bool
     {
         return false;
     }
@@ -66,7 +66,7 @@ class Person
      *
      * @return null|string
      */
-    public function getName() : ?string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -82,7 +82,7 @@ class Person
      *
      * @return bool
      */
-    public function isPropSet(string $propName) : bool
+    public function isPropSet(string $propName): bool
     {
         return isset($this->$propName);
     }

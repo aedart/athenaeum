@@ -45,7 +45,7 @@ class Organisation extends ArrayDto
         return $this;
     }
 
-    public function getSlogan() : ?string
+    public function getSlogan(): ?string
     {
         return $this->properties['slogan'] ?? null;
     }

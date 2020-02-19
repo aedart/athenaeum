@@ -4,7 +4,6 @@
 namespace Aedart\Tests\Helpers\Dummies\Console\Commands;
 
 use Aedart\Support\Helpers\Logging\LogTrait;
-use Aedart\Testing\Helpers\ConsoleDebugger;
 use Illuminate\Console\Command;
 
 /**
@@ -33,7 +32,6 @@ class DoesNothingCommand extends Command
      */
     public function handle()
     {
-
         $this->getLog()->info('Has done nothing executed');
 
         $this->output->writeln('Has done nothing');

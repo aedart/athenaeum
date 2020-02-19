@@ -2,9 +2,7 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Traits;
 
-
 use Aedart\Tests\Helpers\Dummies\Contracts\Box;
-use Aedart\Tests\Helpers\Dummies\Contracts\BoxAware;
 
 /**
  * Box Trait

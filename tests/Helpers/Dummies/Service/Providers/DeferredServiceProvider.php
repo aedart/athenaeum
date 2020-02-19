@@ -28,7 +28,7 @@ class DeferredServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function register()
     {
-        $this->app->bind(BoxInterface::class, fn() => new Box());
+        $this->app->bind(BoxInterface::class, fn () => new Box());
 
         $this->traitRegister();
     }

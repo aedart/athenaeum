@@ -22,7 +22,7 @@ class FailsHandling extends BaseExceptionHandler
      */
     public function handle(Throwable $exception): bool
     {
-        if($exception instanceof UnexpectedValueException) {
+        if ($exception instanceof UnexpectedValueException) {
 
             // (Re)throw this exception - in a real life application,
             // a handler could contain very complex logic that might

@@ -15,5 +15,4 @@ use RuntimeException;
  */
 class CommandFailure extends RuntimeException
 {
-
 }

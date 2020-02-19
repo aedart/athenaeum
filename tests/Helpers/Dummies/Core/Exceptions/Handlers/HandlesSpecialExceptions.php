@@ -21,7 +21,7 @@ class HandlesSpecialExceptions extends BaseExceptionHandler
      */
     public function handle(Throwable $exception): bool
     {
-        if($exception instanceof SpecialException){
+        if ($exception instanceof SpecialException) {
             dump('special exception handled');
 
             return true;

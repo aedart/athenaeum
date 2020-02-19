@@ -14,5 +14,4 @@ use RuntimeException;
  */
 class SpecialException extends RuntimeException
 {
-
 }

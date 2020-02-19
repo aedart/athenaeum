@@ -26,7 +26,7 @@ interface Box
      *
      * @return int|null
      */
-    public function getWidth() : ?int;
+    public function getWidth(): ?int;
 
     /**
      * Set height
@@ -42,5 +42,5 @@ interface Box
      *
      * @return int|null
      */
-    public function getHeight() : ?int;
+    public function getHeight(): ?int;
 }

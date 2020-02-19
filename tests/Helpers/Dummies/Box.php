@@ -14,7 +14,6 @@ use Aedart\Tests\Helpers\Dummies\Contracts\Box as BoxInterface;
  */
 class Box implements BoxInterface
 {
-
     protected ?int $width;
     protected ?int $height;
 

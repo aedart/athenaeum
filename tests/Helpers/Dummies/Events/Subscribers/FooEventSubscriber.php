@@ -5,8 +5,6 @@ namespace Aedart\Tests\Helpers\Dummies\Events\Subscribers;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\Helpers\MessageBag;
 use Aedart\Tests\Helpers\Dummies\Events\FooEvent;
-use Aedart\Tests\Helpers\Dummies\Events\Listeners\DoesNothing;
-use Aedart\Tests\Helpers\Dummies\Events\TestEvent;
 use Illuminate\Contracts\Events\Dispatcher;
 
 /**
