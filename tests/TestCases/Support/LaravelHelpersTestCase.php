@@ -30,7 +30,7 @@ abstract class LaravelHelpersTestCase extends UnitTestCase
     {
         parent::_before();
 
-        if( ! $this->hasApplicationBeenStarted()){
+        if (!$this->hasApplicationBeenStarted()) {
             $this->startApplication();
         }
 
@@ -43,5 +43,4 @@ abstract class LaravelHelpersTestCase extends UnitTestCase
     /*****************************************************************
      * Helpers
      ****************************************************************/
-
 }

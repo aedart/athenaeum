@@ -83,7 +83,7 @@ abstract class HttpClientsTestCase extends LaravelTestCase
      *
      * @return string
      */
-    public function directory() : string
+    public function directory(): string
     {
         return Configuration::dataDir() . 'configs/http/clients/';
     }
@@ -98,9 +98,9 @@ abstract class HttpClientsTestCase extends LaravelTestCase
      */
     protected function makeResponseMock(array $responses = [], bool $requestDebug = true)
     {
-        $handler = HandlerStack::create( new MockHandler($responses) );
+        $handler = HandlerStack::create(new MockHandler($responses));
 
-        if($requestDebug){
+        if ($requestDebug) {
             $handler->push($this->makeRequestDebugMiddleware());
         }
 
@@ -114,8 +114,8 @@ abstract class HttpClientsTestCase extends LaravelTestCase
      */
     protected function makeRequestDebugMiddleware()
     {
-        return function(callable $handler){
-            return function (RequestInterface $request, array $options) use($handler){
+        return function (callable $handler) {
+            return function (RequestInterface $request, array $options) use ($handler) {
 
                 // Set the last request
                 $this->lastRequest = $request;

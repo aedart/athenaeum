@@ -26,7 +26,7 @@ abstract class AthenaeumCoreTestCase extends AthenaeumTestCase
     protected function applicationPaths(): array
     {
         return array_merge(parent::applicationPaths(), [
-            'configPath'    => Configuration::dataDir() . 'configs' . DIRECTORY_SEPARATOR . 'application'
+            'configPath' => Configuration::dataDir() . 'configs' . DIRECTORY_SEPARATOR . 'application'
         ]);
     }
 }

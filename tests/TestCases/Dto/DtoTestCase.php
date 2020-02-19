@@ -53,21 +53,21 @@ abstract class DtoTestCase extends IntegrationTestCase
      *
      * @return array
      */
-    public function arrayDtoData() : array
+    public function arrayDtoData(): array
     {
         return [
-            'name'          => $this->faker->name,
-            'slogan'        => $this->faker->words(3, true),
-            'employees'     => $this->faker->randomDigitNotNull,
-            'hasInsurance'  => $this->faker->boolean,
-            'profitScore'   => (string) $this->faker->randomFloat(2, 0, 10),
-            'persons'       => $this->faker->randomElements([
+            'name' => $this->faker->name,
+            'slogan' => $this->faker->words(3, true),
+            'employees' => $this->faker->randomDigitNotNull,
+            'hasInsurance' => $this->faker->boolean,
+            'profitScore' => (string) $this->faker->randomFloat(2, 0, 10),
+            'persons' => $this->faker->randomElements([
                 'Jessey',
                 'Arline',
                 'Mark',
                 'Ole'
             ], 2),
-            'started'       => Carbon::now()->toIso8601String()
+            'started' => Carbon::now()->toIso8601String()
         ];
     }
 }

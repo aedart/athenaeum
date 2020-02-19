@@ -46,7 +46,7 @@ abstract class PropertiesTestCase extends UnitTestCase
      *
      * @throws ReflectionException
      */
-    public function getMethod(string $name) : ReflectionMethod
+    public function getMethod(string $name): ReflectionMethod
     {
         $class = new ReflectionClass($this->makeDummy());
         $method = $class->getMethod($name);
