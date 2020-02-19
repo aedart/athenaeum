@@ -18,5 +18,4 @@ use Aedart\Support\AwareOf\Console\CommandBase as AwareOfCommandBase;
  */
 abstract class CommandBase extends AwareOfCommandBase
 {
-
 }

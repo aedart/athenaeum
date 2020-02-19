@@ -12,5 +12,4 @@ use Aedart\Dto\ArrayDto as ArrayDtoBase;
  */
 abstract class ArrayDto extends ArrayDtoBase
 {
-
 }

@@ -14,5 +14,4 @@ use Aedart\Dto\Dto as DtoBase;
  */
 abstract class Dto extends DtoBase
 {
-
 }
