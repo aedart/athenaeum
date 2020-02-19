@@ -33,7 +33,7 @@ class OverloadTest extends PropertiesTestCase
         $this->expectException(UndefinedProperty::class);
 
         $dummy = $this->makeDummy();
-        $x = $dummy->address;
+        $dummy->address;
     }
 
     /**
@@ -44,7 +44,7 @@ class OverloadTest extends PropertiesTestCase
         $this->expectException(UndefinedProperty::class);
 
         $dummy = $this->makeDummy();
-        $x = $dummy->age;
+        $dummy->age;
     }
 
     /**
