@@ -2,7 +2,6 @@
 
 namespace Aedart\Tests\Integration\Core\Console;
 
-use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Console\Commands\Exceptions\CommandFailure;
 use Aedart\Tests\TestCases\Console\AthenaeumCoreConsoleTestCase;
 use Codeception\Configuration;
@@ -26,7 +25,7 @@ class C0_ExceptionHandlingTest extends AthenaeumCoreConsoleTestCase
     {
         // Cleanup
         $file = Configuration::outputDir() . 'console/logs/athenaeum.log';
-        if(file_exists($file)){
+        if (file_exists($file)) {
             unlink($file);
         }
 

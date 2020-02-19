@@ -6,7 +6,6 @@ use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
 use Aedart\Core\Bootstrappers\SetDefaultTimezone;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
-use Codeception\Configuration;
 
 /**
  * D0_DefaultTimezoneTest

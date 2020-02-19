@@ -55,7 +55,7 @@ use Aedart\Support\Helpers\View\ViewFactoryTrait;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
 use Illuminate\Support\Facades\Config;
-use \Mockery as m;
+use Mockery as m;
 
 /**
  * LaravelSupportHelpersTest
@@ -102,104 +102,104 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             // TODO: Still unable to mock Gate
             // TODO: @see https://github.com/mockery/mockery/issues/861
             //'GateTrait'                       => [ GateTrait::class ],
-            'AuthFactoryTrait'                  => [ AuthFactoryTrait::class ],
-            'AuthTrait'                         => [ AuthTrait::class ],
-            'PasswordBrokerFactoryTrait'        => [ PasswordBrokerFactoryTrait::class ],
-            'PasswordTrait'                     => [ PasswordTrait::class ],
+            'AuthFactoryTrait' => [ AuthFactoryTrait::class ],
+            'AuthTrait' => [ AuthTrait::class ],
+            'PasswordBrokerFactoryTrait' => [ PasswordBrokerFactoryTrait::class ],
+            'PasswordTrait' => [ PasswordTrait::class ],
 
             // Broadcasting
-            'BroadcastFactoryTrait'             => [ BroadcastFactoryTrait::class ],
-            'BroadcastTrait'                    => [ BroadcastTrait::class ],
+            'BroadcastFactoryTrait' => [ BroadcastFactoryTrait::class ],
+            'BroadcastTrait' => [ BroadcastTrait::class ],
 
             // Bus
-            'BusTrait'                          => [ BusTrait::class ],
-            'QueueingBusTrait'                  => [ QueueingBusTrait::class ],
+            'BusTrait' => [ BusTrait::class ],
+            'QueueingBusTrait' => [ QueueingBusTrait::class ],
 
             // Cache
-            'CacheFactoryTrait'                 => [ CacheFactoryTrait::class ],
-            'CacheStoreTrait'                   => [ CacheStoreTrait::class ],
-            'CacheTrait'                        => [ CacheTrait::class ],
+            'CacheFactoryTrait' => [ CacheFactoryTrait::class ],
+            'CacheStoreTrait' => [ CacheStoreTrait::class ],
+            'CacheTrait' => [ CacheTrait::class ],
 
             // Config
-            'ConfigTrait'                       => [ ConfigTrait::class ],
+            'ConfigTrait' => [ ConfigTrait::class ],
 
             // Console
-            'ArtisanTrait'                      => [ ArtisanTrait::class ],
+            'ArtisanTrait' => [ ArtisanTrait::class ],
 
             // Container
-            'ContainerTrait'                    => [ ContainerTrait::class ],
+            'ContainerTrait' => [ ContainerTrait::class ],
 
             // Cookie
-            'CookieTrait'                       => [ CookieTrait::class ],
-            'QueueingCookieTrait'               => [ QueueingCookieTrait::class ],
+            'CookieTrait' => [ CookieTrait::class ],
+            'QueueingCookieTrait' => [ QueueingCookieTrait::class ],
 
             // Database
-            'ConnectionResolverTrait'           => [ ConnectionResolverTrait::class ],
-            'DbTrait'                           => [ DbTrait::class ],
-            'SchemaTrait'                       => [ SchemaTrait::class ],
+            'ConnectionResolverTrait' => [ ConnectionResolverTrait::class ],
+            'DbTrait' => [ DbTrait::class ],
+            'SchemaTrait' => [ SchemaTrait::class ],
 
             // Encryption
-            'CryptTrait'                        => [ CryptTrait::class ],
+            'CryptTrait' => [ CryptTrait::class ],
 
             // Events
-            'EventTrait'                        => [ EventTrait::class ],
-            'DispatcherTrait'                   => [ DispatcherTrait::class ],
+            'EventTrait' => [ EventTrait::class ],
+            'DispatcherTrait' => [ DispatcherTrait::class ],
 
             // Filesystem
-            'CloudStorageTrait'                 => [ CloudStorageTrait::class ],
-            'FileTrait'                         => [ FileTrait::class ],
-            'StorageFactoryTrait'               => [ StorageFactoryTrait::class ],
-            'StorageTrait'                      => [ StorageTrait::class ],
+            'CloudStorageTrait' => [ CloudStorageTrait::class ],
+            'FileTrait' => [ FileTrait::class ],
+            'StorageFactoryTrait' => [ StorageFactoryTrait::class ],
+            'StorageTrait' => [ StorageTrait::class ],
 
             // Foundation
-            'AppTrait'                          => [ AppTrait::class ],
+            'AppTrait' => [ AppTrait::class ],
 
             // Hashing
-            'HashTrait'                         => [ HashTrait::class ],
+            'HashTrait' => [ HashTrait::class ],
 
             // Http
-            'RequestTrait'                      => [ RequestTrait::class ],
+            'RequestTrait' => [ RequestTrait::class ],
 
             // Logging
-            'LogManagerTrait'                   => [ LogManagerTrait::class ],
-            'LogTrait'                          => [ LogTrait::class ],
+            'LogManagerTrait' => [ LogManagerTrait::class ],
+            'LogTrait' => [ LogTrait::class ],
 
             // Mail
-            'MailerTrait'                       => [ MailerTrait::class ],
-            'MailQueueTrait'                    => [ MailQueueTrait::class ],
+            'MailerTrait' => [ MailerTrait::class ],
+            'MailQueueTrait' => [ MailQueueTrait::class ],
 
             // Notifications
-            'NotificationDispatcherTrait'       => [ NotificationDispatcherTrait::class ],
-            'NotificationFactoryTrait'          => [ NotificationFactoryTrait::class ],
+            'NotificationDispatcherTrait' => [ NotificationDispatcherTrait::class ],
+            'NotificationFactoryTrait' => [ NotificationFactoryTrait::class ],
 
             // Queue
-            'QueueFactoryTrait'                 => [ QueueFactoryTrait::class ],
-            'QueueMonitorTrait'                 => [ QueueMonitorTrait::class ],
-            'QueueTrait'                        => [ QueueTrait::class ],
+            'QueueFactoryTrait' => [ QueueFactoryTrait::class ],
+            'QueueMonitorTrait' => [ QueueMonitorTrait::class ],
+            'QueueTrait' => [ QueueTrait::class ],
 
             // Redis
-            'RedisFactoryTrait'                 => [ RedisFactoryTrait::class ],
-            'RedisTrait'                        => [ RedisTrait::class ],
+            'RedisFactoryTrait' => [ RedisFactoryTrait::class ],
+            'RedisTrait' => [ RedisTrait::class ],
 
             // Routing
-            'RedirectTrait'                     => [ RedirectTrait::class ],
-            'ResponseFactoryTrait'              => [ ResponseFactoryTrait::class ],
-            'RouteRegistrarTrait'               => [ RouteRegistrarTrait::class ],
-            'UrlGeneratorTrait'                 => [ UrlGeneratorTrait::class ],
+            'RedirectTrait' => [ RedirectTrait::class ],
+            'ResponseFactoryTrait' => [ ResponseFactoryTrait::class ],
+            'RouteRegistrarTrait' => [ RouteRegistrarTrait::class ],
+            'UrlGeneratorTrait' => [ UrlGeneratorTrait::class ],
 
             // Session
-            'SessionManagerTrait'               => [ SessionManagerTrait::class ],
-            'SessionTrait'                      => [ SessionTrait::class ],
+            'SessionManagerTrait' => [ SessionManagerTrait::class ],
+            'SessionTrait' => [ SessionTrait::class ],
 
             // Translation
-            'TranslatorTrait'                   => [ TranslatorTrait::class ],
+            'TranslatorTrait' => [ TranslatorTrait::class ],
 
             // Validation
-            'ValidatorFactory'                  => [ ValidatorFactoryTrait::class ],
+            'ValidatorFactory' => [ ValidatorFactoryTrait::class ],
 
             // View
-            'BladeTrait'                        => [ BladeTrait::class ],
-            'ViewFactoryTrait'                  => [ ViewFactoryTrait::class ],
+            'BladeTrait' => [ BladeTrait::class ],
+            'ViewFactoryTrait' => [ ViewFactoryTrait::class ],
         ];
     }
 

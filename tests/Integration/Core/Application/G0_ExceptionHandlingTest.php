@@ -37,9 +37,9 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
 
         // Remove entire output dir for these tests
         $fs = new Filesystem();
-        if($fs->exists( $this->outputPath() )){
-            $fs->deleteDirectories( $this->outputPath() );
-            $fs->makeDirectory( $this->outputPath(), 0755, true, true);
+        if ($fs->exists($this->outputPath())) {
+            $fs->deleteDirectories($this->outputPath());
+            $fs->makeDirectory($this->outputPath(), 0755, true, true);
         }
     }
 
@@ -52,7 +52,7 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
      *
      * @return string
      */
-    protected function outputPath() : string
+    protected function outputPath(): string
     {
         return Configuration::outputDir() . 'exceptions/';
     }
@@ -63,7 +63,7 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
      *
      * @return string
      */
-    protected function applicationPath() : string
+    protected function applicationPath(): string
     {
         return Configuration::dataDir() . 'exceptions/';
     }
@@ -75,11 +75,11 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
      *
      * @return string Application output
      */
-    protected function invokeApp(string $application = 'normal') : string
+    protected function invokeApp(string $application = 'normal'): string
     {
         // Setup command and output
         $path = $this->applicationPath();
-        $application = $application . '.php';
+        $application .= '.php';
         $cmd = 'php ' . $path . $application . ' 2>&1';
 
         $output = [];

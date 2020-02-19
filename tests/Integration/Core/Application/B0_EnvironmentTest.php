@@ -7,7 +7,6 @@ use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Exceptions\UnableToDetectOrLoadEnv;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
 use Codeception\Configuration;
-use Illuminate\Support\Env;
 
 /**
  * A1_RunTest
@@ -32,7 +31,7 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
         $app = parent::createApplication($paths);
 
         // Set the environment path
-        $app->getPathsContainer()->setEnvironmentPath( Configuration::dataDir() . 'environment' );
+        $app->getPathsContainer()->setEnvironmentPath(Configuration::dataDir() . 'environment');
 
         return $app;
     }
@@ -62,7 +61,7 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
 
         // Set environment path to a none-existing dir.
         $app = $this->app;
-        $app->getPathsContainer()->setEnvironmentPath( Configuration::dataDir() . 'none-existing-directory' );
+        $app->getPathsContainer()->setEnvironmentPath(Configuration::dataDir() . 'none-existing-directory');
 
         $this->bootstrap();
     }

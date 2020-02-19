@@ -2,7 +2,6 @@
 
 namespace Aedart\Tests\Integration\Dto;
 
-
 use Aedart\Properties\Exceptions\UndefinedProperty;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Dto\Organisation;
@@ -81,7 +80,7 @@ class ArrayDtoTest extends DtoTestCase
         $this->expectException(UndefinedProperty::class);
 
         $dto = $this->makeArrayDto();
-        $prop = $dto['myUnknownProperty'];
+        $dto['myUnknownProperty'];
     }
 
     /**
@@ -142,8 +141,8 @@ class ArrayDtoTest extends DtoTestCase
     public function canBeSerialisedAndUnserialised()
     {
         $data = [
-            'name'  => $this->faker->name,
-            'age'   => $this->faker->randomNumber()
+            'name' => $this->faker->name,
+            'age' => $this->faker->randomNumber()
         ];
 
         $dto = $this->makeDto($data);

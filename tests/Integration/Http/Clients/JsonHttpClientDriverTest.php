@@ -41,11 +41,11 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
     public function httpMethods()
     {
         return [
-            'GET'        => [ 'get' ],
-            'POST'       => [ 'post' ],
-            'PUT'        => [ 'put' ],
-            'DELETE'     => [ 'delete' ],
-            'PATCH'      => [ 'patch' ],
+            'GET' => [ 'get' ],
+            'POST' => [ 'post' ],
+            'PUT' => [ 'put' ],
+            'DELETE' => [ 'delete' ],
+            'PATCH' => [ 'patch' ],
         ];
     }
 

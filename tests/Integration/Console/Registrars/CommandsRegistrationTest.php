@@ -92,5 +92,4 @@ class CommandsRegistrationTest extends LaravelTestCase
         $this->assertSame(0, $exitCode, 'Incorrect exist code');
         $this->assertNotEmpty($output);
     }
-
 }

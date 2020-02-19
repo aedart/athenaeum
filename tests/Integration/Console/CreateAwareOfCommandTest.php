@@ -29,7 +29,7 @@ class CreateAwareOfCommandTest extends IntegrationTestCase
         parent::_before();
 
         $fs = new Filesystem();
-        $fs->deleteDirectory( Configuration::outputDir() . 'aware-of/');
+        $fs->deleteDirectory(Configuration::outputDir() . 'aware-of/');
     }
 
 
@@ -68,9 +68,9 @@ class CreateAwareOfCommandTest extends IntegrationTestCase
         $command = new CreateCommand();
 
         $commandTester = new CommandTester($command);
-        $commandTester->execute(array(
+        $commandTester->execute([
             'config' => Configuration::dataDir() . 'configs/aware-of-command/demo.php',
-        ));
+        ]);
 
         // the output of the command in the console
         $output = $commandTester->getDisplay();

@@ -2,7 +2,6 @@
 
 namespace Aedart\Tests\Integration\Dto;
 
-
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Contracts\Note as NoteInterface;
 use Aedart\Tests\Helpers\Dummies\Dto\Address;
@@ -31,11 +30,11 @@ class NestedArrayDtoTest extends DtoTestCase
     {
         $data = $this->arrayDtoData();
         $data['address'] = new Address([
-            'street'    => $this->faker->streetName,
+            'street' => $this->faker->streetName,
 
-            'city'      => new City([
-                'name'      => $this->faker->city,
-                'zipCode'   => $this->faker->randomNumber(4),
+            'city' => new City([
+                'name' => $this->faker->city,
+                'zipCode' => $this->faker->randomNumber(4),
             ])
         ]);
 
@@ -52,11 +51,11 @@ class NestedArrayDtoTest extends DtoTestCase
     public function canResolveUnboundInstances()
     {
         $data = $this->arrayDtoData();
-        $data['address']   = [
-            'street'    => $this->faker->streetName,
-            'city'      => [
-                'name'      => $this->faker->city,
-                'zipCode'   => $this->faker->randomNumber(4),
+        $data['address'] = [
+            'street' => $this->faker->streetName,
+            'city' => [
+                'name' => $this->faker->city,
+                'zipCode' => $this->faker->randomNumber(4),
             ]
         ];
 
@@ -77,15 +76,15 @@ class NestedArrayDtoTest extends DtoTestCase
         $this->ioc->destroy();
 
         $data = $this->arrayDtoData();
-        $data['address']   = [
-            'street'    => $this->faker->streetName,
-            'city'      => [
-                'name'      => $this->faker->city,
-                'zipCode'   => $this->faker->randomNumber(4),
+        $data['address'] = [
+            'street' => $this->faker->streetName,
+            'city' => [
+                'name' => $this->faker->city,
+                'zipCode' => $this->faker->randomNumber(4),
             ]
         ];
 
-        $dto = $this->makeArrayDto($data);
+        $this->makeArrayDto($data);
     }
 
     /**
@@ -94,11 +93,11 @@ class NestedArrayDtoTest extends DtoTestCase
     public function canJsonSerialiseNestedInstances()
     {
         $data = $this->arrayDtoData();
-        $data['address']   = [
-            'street'    => $this->faker->streetName,
-            'city'      => [
-                'name'      => $this->faker->city,
-                'zipCode'   => $this->faker->randomNumber(4),
+        $data['address'] = [
+            'street' => $this->faker->streetName,
+            'city' => [
+                'name' => $this->faker->city,
+                'zipCode' => $this->faker->randomNumber(4),
             ]
         ];
 
@@ -115,13 +114,13 @@ class NestedArrayDtoTest extends DtoTestCase
     public function canSerialiseNestedInstances()
     {
         $data = [
-            'name'      => $this->faker->name,
-            'age'       => $this->faker->randomNumber(),
-            'address'   => [
-                'street'    => $this->faker->streetName,
-                'city'      => [
-                    'name'      => $this->faker->city,
-                    'zipCode'   => $this->faker->randomNumber(4),
+            'name' => $this->faker->name,
+            'age' => $this->faker->randomNumber(),
+            'address' => [
+                'street' => $this->faker->streetName,
+                'city' => [
+                    'name' => $this->faker->city,
+                    'zipCode' => $this->faker->randomNumber(4),
                 ]
             ]
         ];
@@ -135,7 +134,7 @@ class NestedArrayDtoTest extends DtoTestCase
         $newDto = unserialize($serialised);
         ConsoleDebugger::output('Unserialize', $serialised);
 
-        $address  = $newDto['address'];
+        $address = $newDto['address'];
         $this->assertInstanceOf(Address::class, $address, 'Unable to unserialise nested DTO');
         $this->assertSame($data['address']['city']['name'], $address['city']['name'], 'Invalid unserialised nested dto property');
     }
@@ -221,6 +220,6 @@ class NestedArrayDtoTest extends DtoTestCase
             ]
         ];
 
-        $dto = $this->makeArrayDto($data);
+        $this->makeArrayDto($data);
     }
 }

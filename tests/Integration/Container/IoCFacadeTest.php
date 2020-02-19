@@ -24,7 +24,7 @@ class IoCFacadeTest extends IntegrationTestCase
     public function canResolveBinding()
     {
         $abstract = 'my_binding';
-        $this->ioc->bind($abstract, fn() => new Box());
+        $this->ioc->bind($abstract, fn () => new Box());
 
         // -------------------------------------------- //
 

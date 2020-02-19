@@ -109,7 +109,7 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
             ->withOption('handler', $mockedResponses)
             ->post('/post', [ 'name' => 'John Doe' ]);
 
-        $content =  $response->getBody()->getContents();
+        $content = $response->getBody()->getContents();
         ConsoleDebugger::output($content);
 
         $this->assertSame(201, $response->getStatusCode());
@@ -131,7 +131,7 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
             ->withOption('handler', $mockedResponses)
             ->put('/put', [ 'name' => 'John Doe' ]);
 
-        $content =  $response->getBody()->getContents();
+        $content = $response->getBody()->getContents();
         ConsoleDebugger::output($content);
 
         $this->assertSame(200, $response->getStatusCode());
@@ -153,7 +153,7 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
             ->withOption('handler', $mockedResponses)
             ->delete('/delete', [ 'name' => 'John Doe' ]);
 
-        $content =  $response->getBody()->getContents();
+        $content = $response->getBody()->getContents();
         ConsoleDebugger::output($content);
 
         $this->assertSame(200, $response->getStatusCode());
@@ -198,7 +198,7 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
             ->withOption('handler', $mockedResponses)
             ->delete('/delete', [ 'name' => 'John Doe' ]);
 
-        $content =  $response->getBody()->getContents();
+        $content = $response->getBody()->getContents();
         ConsoleDebugger::output($content);
 
         $this->assertSame(200, $response->getStatusCode());
@@ -301,7 +301,7 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
             ->withoutHeader('User-Agent') // Default to Guzzle's default User-Agent header
             ->get('https://google.com');
 
-        $content =  $response->getBody()->getContents();
+        $content = $response->getBody()->getContents();
         ConsoleDebugger::output($content);
 
         $this->assertSame(200, $response->getStatusCode());

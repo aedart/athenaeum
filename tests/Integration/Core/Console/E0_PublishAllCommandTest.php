@@ -30,7 +30,7 @@ class E0_PublishAllCommandTest extends AthenaeumCoreConsoleTestCase
 
         $fs = $this->getFile();
         $target = $this->targetPublishDir();
-        if($fs->isDirectory($target)){
+        if ($fs->isDirectory($target)) {
             $fs->cleanDirectory($target);
         }
     }

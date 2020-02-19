@@ -47,7 +47,7 @@ class ConfigLoaderTest extends LaravelTestCase
      *
      * @return string
      */
-    public function directory() : string
+    public function directory(): string
     {
         return Configuration::dataDir() . 'configs/loader/';
     }

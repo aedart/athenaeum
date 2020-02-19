@@ -65,7 +65,7 @@ class E0_ProvidersRegistrationTest extends AthenaeumCoreTestCase
             ServiceProviderD::class,
         ];
 
-        foreach ($expected as $provider){
+        foreach ($expected as $provider) {
             $this->assertTrue($registrar->isRegistered($provider), $provider . ' is not registered');
         }
     }

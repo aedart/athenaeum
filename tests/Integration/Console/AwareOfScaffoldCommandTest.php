@@ -30,7 +30,7 @@ class AwareOfScaffoldCommandTest extends IntegrationTestCase
         parent::_before();
 
         $fs = new Filesystem();
-        $fs->deleteDirectory( Configuration::outputDir() . 'aware-of-config/');
+        $fs->deleteDirectory(Configuration::outputDir() . 'aware-of-config/');
     }
 
     /*****************************************************************
@@ -45,9 +45,9 @@ class AwareOfScaffoldCommandTest extends IntegrationTestCase
         $command = new ScaffoldCommand();
 
         $commandTester = new CommandTester($command);
-        $commandTester->execute(array(
+        $commandTester->execute([
             '--output' => Configuration::outputDir() . 'aware-of-config/',
-        ));
+        ]);
 
         // the output of the command in the console
         $output = $commandTester->getDisplay();

@@ -35,7 +35,7 @@ class F0_RunTest extends AthenaeumCoreTestCase
     public function invokesRunCallback()
     {
         $invoked = false;
-        $callback = function() use(&$invoked){
+        $callback = function () use (&$invoked) {
             $invoked = true;
         };
 
@@ -56,7 +56,7 @@ class F0_RunTest extends AthenaeumCoreTestCase
 
         // ----------------------------------------- //
         $invoked = false;
-        $callback = function() use(&$invoked){
+        $callback = function () use (&$invoked) {
             $invoked = true;
         };
 

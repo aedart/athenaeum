@@ -5,7 +5,6 @@ namespace Aedart\Tests\Integration\Core\Application;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
-use Codeception\Configuration;
 
 /**
  * C0_ConfigurationLoadingTest

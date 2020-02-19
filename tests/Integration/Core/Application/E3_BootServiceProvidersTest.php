@@ -93,10 +93,10 @@ class E3_BootServiceProvidersTest extends AthenaeumCoreTestCase
         $hasInvokedAfter = false;
 
         // Define callbacks
-        $before = function() use(&$hasInvokedBefore){
+        $before = function () use (&$hasInvokedBefore) {
             $hasInvokedBefore = true;
         };
-        $after = function() use(&$hasInvokedAfter) {
+        $after = function () use (&$hasInvokedAfter) {
             $hasInvokedAfter = true;
         };
 
@@ -121,7 +121,7 @@ class E3_BootServiceProvidersTest extends AthenaeumCoreTestCase
         $hasInvokedAfter = false;
 
         // Define callbacks
-        $after = function() use(&$hasInvokedAfter) {
+        $after = function () use (&$hasInvokedAfter) {
             $hasInvokedAfter = true;
         };
 

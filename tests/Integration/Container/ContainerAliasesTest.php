@@ -22,11 +22,11 @@ class ContainerAliasesTest extends IntegrationTestCase
      *
      * @return array
      */
-    public function aliasProvider() : array
+    public function aliasProvider(): array
     {
         return [
             'container interface' => [Container::class],
-            'ioc interface'       => [IoC::class]
+            'ioc interface' => [IoC::class]
         ];
     }
 

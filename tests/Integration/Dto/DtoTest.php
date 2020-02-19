@@ -34,8 +34,8 @@ class DtoTest extends DtoTestCase
     public function canCreateInstanceWithProperties()
     {
         $data = [
-            'name'  => $this->faker->name,
-            'age'   => $this->faker->randomNumber()
+            'name' => $this->faker->name,
+            'age' => $this->faker->randomNumber()
         ];
 
         $dto = $this->makeDto($data);
@@ -50,8 +50,8 @@ class DtoTest extends DtoTestCase
     public function canDetermineIfExists()
     {
         $data = [
-            'name'  => $this->faker->name,
-            'age'   => $this->faker->randomNumber()
+            'name' => $this->faker->name,
+            'age' => $this->faker->randomNumber()
         ];
 
         $dto = $this->makeDto($data);
@@ -85,7 +85,7 @@ class DtoTest extends DtoTestCase
         $this->expectException(UndefinedProperty::class);
 
         $dto = $this->makeDto();
-        $prop = $dto['myUnknownProperty'];
+        $dto['myUnknownProperty'];
     }
 
     /**
@@ -105,8 +105,8 @@ class DtoTest extends DtoTestCase
     public function canUnsetProperty()
     {
         $data = [
-            'name'  => $this->faker->name,
-            'age'   => $this->faker->randomNumber()
+            'name' => $this->faker->name,
+            'age' => $this->faker->randomNumber()
         ];
 
         $dto = $this->makeDto($data);
@@ -121,8 +121,8 @@ class DtoTest extends DtoTestCase
     public function canBeJsonSerialised()
     {
         $data = [
-            'name'  => $this->faker->name,
-            'age'   => $this->faker->randomNumber()
+            'name' => $this->faker->name,
+            'age' => $this->faker->randomNumber()
         ];
 
         $dto = $this->makeDto($data);
@@ -138,8 +138,8 @@ class DtoTest extends DtoTestCase
     public function canBeExportedToJson()
     {
         $data = [
-            'name'  => $this->faker->name,
-            'age'   => $this->faker->randomNumber()
+            'name' => $this->faker->name,
+            'age' => $this->faker->randomNumber()
         ];
 
         $dto = $this->makeDto($data);
@@ -155,8 +155,8 @@ class DtoTest extends DtoTestCase
     public function canBeSerialisedAndUnserialised()
     {
         $data = [
-            'name'  => $this->faker->name,
-            'age'   => $this->faker->randomNumber()
+            'name' => $this->faker->name,
+            'age' => $this->faker->randomNumber()
         ];
 
         $dto = $this->makeDto($data);
@@ -177,8 +177,8 @@ class DtoTest extends DtoTestCase
     public function canBeRepresentedAsString()
     {
         $data = [
-            'name'  => $this->faker->name,
-            'age'   => $this->faker->randomNumber()
+            'name' => $this->faker->name,
+            'age' => $this->faker->randomNumber()
         ];
 
         $dto = $this->makeDto($data);
@@ -207,8 +207,8 @@ class DtoTest extends DtoTestCase
     public function canObtainDebugInfo()
     {
         $data = [
-            'name'  => $this->faker->name,
-            'age'   => $this->faker->randomNumber()
+            'name' => $this->faker->name,
+            'age' => $this->faker->randomNumber()
         ];
 
         $dto = $this->makeDto($data);

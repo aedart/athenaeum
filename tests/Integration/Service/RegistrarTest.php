@@ -43,7 +43,7 @@ class RegistrarTest extends AthenaeumTestCase
      *
      * @return RegistrarInterface
      */
-    protected function makeRegistrar() : RegistrarInterface
+    protected function makeRegistrar(): RegistrarInterface
     {
         return $this->app->getServiceProviderRegistrar();
     }
@@ -53,7 +53,7 @@ class RegistrarTest extends AthenaeumTestCase
      *
      * @return string[]|ServiceProvider[]
      */
-    protected function simpleProvidersList() : array
+    protected function simpleProvidersList(): array
     {
         return [
             ServiceProviderA::class,
@@ -67,7 +67,7 @@ class RegistrarTest extends AthenaeumTestCase
      *
      * @return string[]|ServiceProvider[]
      */
-    protected function providersListWithAggregate() : array
+    protected function providersListWithAggregate(): array
     {
         return [
             ServiceProviderA::class,
@@ -108,8 +108,8 @@ class RegistrarTest extends AthenaeumTestCase
         $this->assertCount(0, $bootedProviders, 'Should NOT have booted any providers');
 
         // Determine if requested providers have been registered
-        foreach ($providers as $provider){
-            $this->assertTrue( $registrar->isRegistered($provider) , 'A provider was not registered!');
+        foreach ($providers as $provider) {
+            $this->assertTrue($registrar->isRegistered($provider), 'A provider was not registered!');
         }
     }
 
@@ -130,11 +130,11 @@ class RegistrarTest extends AthenaeumTestCase
         $this->assertGreaterThanOrEqual(count($providers), $registeredProviders, 'Incorrect amount of providers registered');
         $this->assertGreaterThanOrEqual(count($providers), $bootedProviders, 'Incorrect amount of providers registered');
 
-        foreach ($registeredProviders as $provider){
+        foreach ($registeredProviders as $provider) {
             // Skip providers that do not inherit from "provider state".
             // The application might have one or more core providers registered
             // that do not inherit such.
-            if( ! ($provider instanceof ProviderState)){
+            if (!($provider instanceof ProviderState)) {
                 continue;
             }
 

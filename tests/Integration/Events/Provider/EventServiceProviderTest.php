@@ -41,7 +41,7 @@ class EventServiceProviderTest extends AthenaeumCoreTestCase
     protected function applicationPaths(): array
     {
         return array_merge(parent::applicationPaths(), [
-            'configPath'        => Configuration::dataDir() . 'configs' . DIRECTORY_SEPARATOR . 'events'
+            'configPath' => Configuration::dataDir() . 'configs' . DIRECTORY_SEPARATOR . 'events'
         ]);
     }
 
