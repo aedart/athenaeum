@@ -2,7 +2,6 @@
 
 namespace Aedart\Tests\Unit\Utils;
 
-
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Helpers\MethodHelper;
@@ -27,7 +26,7 @@ class MethodHelperTest extends UnitTestCase
      *
      * @return string
      */
-    public function makePropertyName() : string
+    public function makePropertyName(): string
     {
         return $this->faker->randomElement([
             'age',
@@ -108,7 +107,7 @@ class MethodHelperTest extends UnitTestCase
      */
     public function canCallMethod()
     {
-        $method = fn($lastName) => 'James ' . $lastName;
+        $method = fn ($lastName) => 'James ' . $lastName;
 
         $result = MethodHelper::callOrReturn($method, ['Bond']);
 

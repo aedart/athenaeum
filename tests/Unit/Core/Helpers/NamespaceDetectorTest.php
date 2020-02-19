@@ -31,7 +31,7 @@ class NamespaceDetectorTest extends UnitTestCase
      *
      * @return NamespaceDetectorInterface
      */
-    protected function makeDetector() : NamespaceDetectorInterface
+    protected function makeDetector(): NamespaceDetectorInterface
     {
         return new NamespaceDetector();
     }
@@ -43,7 +43,7 @@ class NamespaceDetectorTest extends UnitTestCase
      *
      * @return string
      */
-    protected function composerFile(string $file) : string
+    protected function composerFile(string $file): string
     {
         return Configuration::dataDir() . 'core/helpers/detector/' . $file;
     }
@@ -53,7 +53,7 @@ class NamespaceDetectorTest extends UnitTestCase
      *
      * @return string
      */
-    protected function validComposerFile() : string
+    protected function validComposerFile(): string
     {
         return $this->composerFile('valid-composer.json');
     }
@@ -63,7 +63,7 @@ class NamespaceDetectorTest extends UnitTestCase
      *
      * @return string
      */
-    protected function invalidComposerFile() : string
+    protected function invalidComposerFile(): string
     {
         return $this->composerFile('invalid-composer.json');
     }
@@ -79,7 +79,7 @@ class NamespaceDetectorTest extends UnitTestCase
      */
     public function canDetectNamespace()
     {
-        $namespace = $this->makeDetector()->detect( $this->validComposerFile() );
+        $namespace = $this->makeDetector()->detect($this->validComposerFile());
         ConsoleDebugger::output($namespace);
 
         $this->assertSame('Aedart\\', $namespace);
@@ -94,7 +94,7 @@ class NamespaceDetectorTest extends UnitTestCase
     {
         $this->expectException(\RuntimeException::class);
 
-        $this->makeDetector()->detect( $this->composerFile('uknown-composer-file.json') );
+        $this->makeDetector()->detect($this->composerFile('uknown-composer-file.json'));
     }
 
     /**
@@ -106,6 +106,6 @@ class NamespaceDetectorTest extends UnitTestCase
     {
         $this->expectException(\RuntimeException::class);
 
-        $this->makeDetector()->detect( $this->invalidComposerFile() );
+        $this->makeDetector()->detect($this->invalidComposerFile());
     }
 }

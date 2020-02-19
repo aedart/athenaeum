@@ -33,7 +33,7 @@ class PathsContainerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
-    protected function makePathsContainer(array $data = []) : PathsContainer
+    protected function makePathsContainer(array $data = []): PathsContainer
     {
         return new Paths($data);
     }

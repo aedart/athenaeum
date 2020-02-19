@@ -2,7 +2,6 @@
 
 namespace Aedart\Tests\Unit\Properties;
 
-
 use Aedart\Contracts\Properties\AccessibilityLevels;
 use Aedart\Tests\TestCases\Properties\PropertiesTestCase;
 use RangeException;

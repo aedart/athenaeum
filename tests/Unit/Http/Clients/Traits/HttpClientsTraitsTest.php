@@ -28,8 +28,8 @@ class HttpClientsTraitsTest extends TraitTestCase
     public function awareOfComponentsProvider()
     {
         return [
-            'HttpClientsManagerTrait'        => [ HttpClientsManagerTrait::class ],
-            'HttpClientTrait'                => [ HttpClientTrait::class ],
+            'HttpClientsManagerTrait' => [ HttpClientsManagerTrait::class ],
+            'HttpClientTrait' => [ HttpClientTrait::class ],
         ];
     }
 

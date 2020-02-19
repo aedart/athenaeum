@@ -2,7 +2,6 @@
 
 namespace Aedart\Tests\Unit\Testing;
 
-
 use Aedart\Testing\TestCases\UnitTestCase;
 
 /**

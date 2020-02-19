@@ -22,7 +22,7 @@ class PopulateHelperTest extends UnitTestCase
      */
     public function canVerifyRequiredProperties()
     {
-        $data  = [
+        $data = [
             'a' => true,
             'b' => true,
             'c' => true,
@@ -40,7 +40,7 @@ class PopulateHelperTest extends UnitTestCase
     {
         $this->expectException(Exception::class);
 
-        $data  = [
+        $data = [
             'a' => true,
             'b' => true,
             'c' => true,
@@ -58,7 +58,7 @@ class PopulateHelperTest extends UnitTestCase
     {
         $this->expectException(Exception::class);
 
-        $data  = [
+        $data = [
             'a' => true,
             'b' => true,
             'c' => true,

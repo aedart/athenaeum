@@ -28,8 +28,8 @@ class ConfigTraitsTest extends TraitTestCase
     public function awareOfComponentsProvider()
     {
         return [
-            'FileParserFactoryTrait'        => [ FileParserFactoryTrait::class ],
-            'ConfigLoaderTrait'             => [ ConfigLoaderTrait::class ],
+            'FileParserFactoryTrait' => [ FileParserFactoryTrait::class ],
+            'ConfigLoaderTrait' => [ ConfigLoaderTrait::class ],
         ];
     }
 

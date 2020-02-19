@@ -29,9 +29,9 @@ class ConsoleTraitsTest extends TraitTestCase
     public function awareOfComponentsProvider()
     {
         return [
-            'CoreApplicationTrait'           => [ CoreApplicationTrait::class ],
-            'LastInputTrait'                 => [ LastInputTrait::class ],
-            'LastOutputTrait'                => [ LastOutputTrait::class ],
+            'CoreApplicationTrait' => [ CoreApplicationTrait::class ],
+            'LastInputTrait' => [ LastInputTrait::class ],
+            'LastOutputTrait' => [ LastOutputTrait::class ],
         ];
     }
 

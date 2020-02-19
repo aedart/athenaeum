@@ -30,9 +30,9 @@ class CoreTraitsTest extends TraitTestCase
     public function awareOfComponentsProvider()
     {
         return [
-            'PathsContainerTrait'           => [ PathsContainerTrait::class ],
-            'NamespaceDetectorTrait'        => [ NamespaceDetectorTrait::class ],
-            'ApplicationTrait'              => [ ApplicationTrait::class ],
+            'PathsContainerTrait' => [ PathsContainerTrait::class ],
+            'NamespaceDetectorTrait' => [ NamespaceDetectorTrait::class ],
+            'ApplicationTrait' => [ ApplicationTrait::class ],
         ];
     }
 

@@ -23,7 +23,7 @@ class ServiceTraitsTest extends TraitTestCase
     public function awareOfComponentsProvider()
     {
         return [
-            'ServiceProviderRegistrarTrait'  => [ ServiceProviderRegistrarTrait::class ],
+            'ServiceProviderRegistrarTrait' => [ ServiceProviderRegistrarTrait::class ],
         ];
     }
 

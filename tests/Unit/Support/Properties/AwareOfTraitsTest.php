@@ -30,13 +30,13 @@ class AwareOfTraitsTest extends TraitTestCase
      *
      * @return array
      */
-    public function awareOfTraits() : array
+    public function awareOfTraits(): array
     {
-        $finder = new Finder;
+        $finder = new Finder();
         $iter = new ClassIterator($finder->in('packages/Support/src/Properties'));
 
         $output = [];
-        foreach ($iter as $reflection){
+        foreach ($iter as $reflection) {
             /** @var \ReflectionClass $reflection */
 
             $namespace = $reflection->getName();
