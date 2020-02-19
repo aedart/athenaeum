@@ -1,0 +1,19 @@
+# Easy Coding Standards
+parameters:
+    sets:
+        - 'clean-code'
+        - 'psr12'
+    paths:
+        - 'packages'
+        - 'tests/Helpers'
+        - 'tests/TestCases'
+        - 'tests/Integration'
+        - 'tests/Unit'
+        - 'src'
+
+    # Rules to be skipped
+    skip:
+        SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff.UnusedProperty:
+            # The "private int $height" is used by Dto, via magic methods...
+            - 'tests/Helpers/Dummies/Properties/Accessibility/Person.php'
+
