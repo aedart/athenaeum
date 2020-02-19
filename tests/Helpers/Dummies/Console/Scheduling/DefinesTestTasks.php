@@ -27,9 +27,9 @@ class DefinesTestTasks implements SchedulesTasks
             ->name('does nothing')
             ->description('A command that does nothing');
 
-            // Cannot test send output, because of ARTISAN_BINARY const!
-            // Manually tested via executing ./artisan schedule:run, in
-            // tests/_data/console/artisan
-            //->sendOutputTo(storage_path('schedule.log'));
+        // Cannot test send output, because of ARTISAN_BINARY const!
+        // Manually tested via executing ./artisan schedule:run, in
+        // tests/_data/console/artisan
+        //->sendOutputTo(storage_path('schedule.log'));
     }
 }
