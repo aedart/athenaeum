@@ -90,7 +90,7 @@ return [
             DataTypes::ARRAY_TYPE       => 'Arrays\\',
             DataTypes::CALLABLE_TYPE    => 'Callables\\',
             DataTypes::ITERABLE_TYPE    => 'Iterators\\',
-            DataTypes::MIXED_TYPE       => 'Mixed\\',
+            DataTypes::MIXED_TYPE       => 'Mixes\\',
             DataTypes::DATE_TIME_TYPE   => 'Dates\\',
         ],
 
@@ -126,7 +126,7 @@ return [
             DataTypes::ARRAY_TYPE       => 'Arrays\\',
             DataTypes::CALLABLE_TYPE    => 'Callables\\',
             DataTypes::ITERABLE_TYPE    => 'Iterators\\',
-            DataTypes::MIXED_TYPE       => 'Mixed\\',
+            DataTypes::MIXED_TYPE       => 'Mixes\\',
             DataTypes::DATE_TIME_TYPE   => 'Dates\\',
         ],
     ],
