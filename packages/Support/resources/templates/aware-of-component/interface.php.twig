@@ -13,14 +13,14 @@ namespace {{ interfaceNamespace }};
 interface {{ interfaceClassName }}
 {
     {{ include('partials/set-method-description.twig') }}
-    {{ include('partials/set-method.twig') }};
+    {{ include('partials/set-method.twig')|replace({"\n": ""}) }};
 
     {{ include('partials/get-method-description.twig') }}
-    {{ include('partials/get-method.twig') }};
+    {{ include('partials/get-method.twig')|replace({"\n": ""}) }};
 
     {{ include('partials/has-method-description.twig') }}
-    {{ include('partials/has-method.twig') }};
+    {{ include('partials/has-method.twig')|replace({"\n": ""}) }};
 
     {{ include('partials/get-default-method-description.twig') }}
-    {{ include('partials/get-default-method.twig') }};
+    {{ include('partials/get-default-method.twig')|replace({"\n": ""}) }};
 }

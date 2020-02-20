@@ -16,7 +16,7 @@ trait {{ traitClassName }}
     protected {{- dataType in ['mixed', 'callable'] ? ' ' : " ?#{dataType} " -}} ${{ coreProperty }} = null;
 
     {{ include('partials/set-method-description.twig') }}
-    {{ include('partials/set-method.twig') }}
+    {{ include('partials/set-method.twig')|replace({"\n": ""}) }}
     {
         $this->{{ coreProperty }} = ${{ inputArgument }};
 
@@ -24,22 +24,22 @@ trait {{ traitClassName }}
     }
 
     {{ include('partials/get-method-description.twig') }}
-    {{ include('partials/get-method.twig') }}
+    {{ include('partials/get-method.twig')|replace({"\n": ""}) }}
     {
-        if ( ! $this->has{{ propertyName }}()) {
+        if (!$this->has{{ propertyName }}()) {
             $this->set{{ propertyName }}($this->getDefault{{ propertyName }}());
         }
         return $this->{{ coreProperty }};
     }
 
     {{ include('partials/has-method-description.twig') }}
-    {{ include('partials/has-method.twig') }}
+    {{ include('partials/has-method.twig')|replace({"\n": ""}) }}
     {
         return isset($this->{{ coreProperty }});
     }
 
     {{ include('partials/get-default-method-description.twig') }}
-    {{ include('partials/get-default-method.twig') }}
+    {{ include('partials/get-default-method.twig')|replace({"\n": ""}) }}
     {
         return null;
     }
