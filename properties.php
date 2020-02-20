@@ -1063,12 +1063,12 @@ return [
 
         booleanProperty(
             'on',
-            '',
+            'Is on',
             'isOn'
         ),
         booleanProperty(
             'off',
-            '',
+            'Is off',
             'isOff'
         ),
         stringProperty(
