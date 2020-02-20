@@ -22,7 +22,7 @@ Please consult yourself with [PHP Migration Guides](https://www.php.net/manual/e
 
 _As the author of this package, I apologise if you somehow feel mislead.
 I have been working on this and many other packages by myself.
-There are limits as to how much backwards compatibility I can offer._
+There are limits to how much backwards compatibility I can offer._
 
 ### Other Requirements
 
