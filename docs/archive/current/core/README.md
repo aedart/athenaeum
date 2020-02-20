@@ -8,12 +8,12 @@ The Athenaeum Core Application is a custom implementation of [Laravel's](https:/
 It is intended to bring some of Laravel's service and components into your [legacy application](https://en.wikipedia.org/wiki/Legacy_system).
 It offers the following features:
 
-- Registration and booting of Service Providers
-- Laravel's Service Container
-- Laravel's Configuration Repository
-- Laravel's Event Dispatcher
-- Laravel's Cache Repository
-- Laravel's Console Application (_lightweight version of Artisan_)
+- Registration and booting of [Service Providers](https://laravel.com/docs/6.x/providers)
+- Laravel's [Service Container](https://laravel.com/docs/6.x/container)
+- Laravel's [Configuration Repository](https://laravel.com/docs/6.x/configuration)
+- Laravel's [Event Dispatcher](https://laravel.com/docs/6.x/events)
+- Laravel's [Cache Repository](https://laravel.com/docs/6.x/cache)
+- Laravel's [Console Application](https://laravel.com/docs/6.x/artisan) (_lightweight version of Artisan_)
 - Exception Handling (_optional_)
 
 Please read the "Motivation" and "Limitations" section before continuing.
