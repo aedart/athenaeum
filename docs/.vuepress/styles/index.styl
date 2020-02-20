@@ -41,6 +41,28 @@ header.navbar {
         input:focus {
             border: 2px solid lighten($secondary, 10%)
         }
+
+        .suggestions {
+            width: 95%;
+
+            .suggestion {
+                a {
+                    width: 100%;
+                }
+
+                // Display the path after each search result
+                a::after {
+                    content: "" attr(href) "";
+                    display: block;
+                    color: lighten($textColor, 65%)
+                    background-color: #EDEDED;
+                      font-style italic;
+                    width: 100%;
+                    padding: 2px;
+                }
+
+            }
+        }
     }
 
     li.dropdown-item {
