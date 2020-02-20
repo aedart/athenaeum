@@ -1154,9 +1154,9 @@ ___
 ___
 `mixed` HyperText Markup Language (HTML)
 
-*Interface*: `Aedart\Contracts\Support\Properties\Mixed\HtmlAware`
+*Interface*: `Aedart\Contracts\Support\Properties\Mixes\HtmlAware`
 
-*Trait*: `Aedart\Support\Properties\Mixed\HtmlTrait`
+*Trait*: `Aedart\Support\Properties\Mixes\HtmlTrait`
 
 
 
@@ -1390,9 +1390,9 @@ ___
 ___
 `mixed` JavaScript Object Notation (JSON)
 
-*Interface*: `Aedart\Contracts\Support\Properties\Mixed\JsonAware`
+*Interface*: `Aedart\Contracts\Support\Properties\Mixes\JsonAware`
 
-*Trait*: `Aedart\Support\Properties\Mixed\JsonTrait`
+*Trait*: `Aedart\Support\Properties\Mixes\JsonTrait`
 
 
 
@@ -1764,7 +1764,7 @@ ___
 ## On
 
 ___
-`bool` 
+`bool` Is on
 
 *Interface*: `Aedart\Contracts\Support\Properties\Booleans\OnAware`
 
@@ -1775,7 +1775,7 @@ ___
 ## Off
 
 ___
-`bool` 
+`bool` Is off
 
 *Interface*: `Aedart\Contracts\Support\Properties\Booleans\OffAware`
 
@@ -2768,9 +2768,9 @@ ___
 ___
 `mixed` Value
 
-*Interface*: `Aedart\Contracts\Support\Properties\Mixed\ValueAware`
+*Interface*: `Aedart\Contracts\Support\Properties\Mixes\ValueAware`
 
-*Trait*: `Aedart\Support\Properties\Mixed\ValueTrait`
+*Trait*: `Aedart\Support\Properties\Mixes\ValueTrait`
 
 
 
@@ -2899,9 +2899,9 @@ ___
 ___
 `mixed` Co-ordinate or value
 
-*Interface*: `Aedart\Contracts\Support\Properties\Mixed\XAware`
+*Interface*: `Aedart\Contracts\Support\Properties\Mixes\XAware`
 
-*Trait*: `Aedart\Support\Properties\Mixed\XTrait`
+*Trait*: `Aedart\Support\Properties\Mixes\XTrait`
 
 
 
@@ -2918,9 +2918,9 @@ ___
 ___
 `mixed` Extensible Markup Language (XML)
 
-*Interface*: `Aedart\Contracts\Support\Properties\Mixed\XmlAware`
+*Interface*: `Aedart\Contracts\Support\Properties\Mixes\XmlAware`
 
-*Trait*: `Aedart\Support\Properties\Mixed\XmlTrait`
+*Trait*: `Aedart\Support\Properties\Mixes\XmlTrait`
 
 
 
@@ -2948,9 +2948,9 @@ ___
 ___
 `mixed` Co-ordinate or value
 
-*Interface*: `Aedart\Contracts\Support\Properties\Mixed\YAware`
+*Interface*: `Aedart\Contracts\Support\Properties\Mixes\YAware`
 
-*Trait*: `Aedart\Support\Properties\Mixed\YTrait`
+*Trait*: `Aedart\Support\Properties\Mixes\YTrait`
 
 
 
@@ -2978,9 +2978,9 @@ ___
 ___
 `mixed` Co-ordinate or value
 
-*Interface*: `Aedart\Contracts\Support\Properties\Mixed\ZAware`
+*Interface*: `Aedart\Contracts\Support\Properties\Mixes\ZAware`
 
-*Trait*: `Aedart\Support\Properties\Mixed\ZTrait`
+*Trait*: `Aedart\Support\Properties\Mixes\ZTrait`
 
 
 
