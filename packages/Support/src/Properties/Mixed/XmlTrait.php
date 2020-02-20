@@ -3,9 +3,9 @@
 namespace Aedart\Support\Properties\Mixed;
 
 /**
- * Xml Trait
+ * @deprecated Since v4.0, please use \Aedart\Support\Properties\Mixes\XmlTrait instead
  *
- * @see \Aedart\Contracts\Support\Properties\Mixed\XmlAware
+ * Xml Trait
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Support\Properties\Mixed

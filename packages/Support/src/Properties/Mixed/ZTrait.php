@@ -3,9 +3,9 @@
 namespace Aedart\Support\Properties\Mixed;
 
 /**
- * Z Trait
+ * @deprecated Since v4.0, please use \Aedart\Support\Properties\Mixes\ZTrait instead
  *
- * @see \Aedart\Contracts\Support\Properties\Mixed\ZAware
+ * Z Trait
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Support\Properties\Mixed

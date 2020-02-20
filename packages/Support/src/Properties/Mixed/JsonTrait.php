@@ -3,9 +3,9 @@
 namespace Aedart\Support\Properties\Mixed;
 
 /**
- * Json Trait
+ * @deprecated Since v4.0, please use \Aedart\Support\Properties\Mixes\JsonTrait instead
  *
- * @see \Aedart\Contracts\Support\Properties\Mixed\JsonAware
+ * Json Trait
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Support\Properties\Mixed

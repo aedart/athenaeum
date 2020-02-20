@@ -3,9 +3,9 @@
 namespace Aedart\Support\Properties\Mixed;
 
 /**
- * X Trait
+ * @deprecated Since v4.0, please use \Aedart\Support\Properties\Mixes\XTrait instead
  *
- * @see \Aedart\Contracts\Support\Properties\Mixed\XAware
+ * X Trait
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Support\Properties\Mixed

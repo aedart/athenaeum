@@ -3,9 +3,9 @@
 namespace Aedart\Support\Properties\Mixed;
 
 /**
- * Y Trait
+ * @deprecated Since v4.0, please use \Aedart\Support\Properties\Mixes\YTrait instead
  *
- * @see \Aedart\Contracts\Support\Properties\Mixed\YAware
+ * Y Trait
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Support\Properties\Mixed
