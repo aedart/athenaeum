@@ -34,6 +34,10 @@ Commands have been replaced with updated versions within the [`aedart/athenaeum-
 The original commands are still available using the `athenaeum` console application.
 * `JsonHttpClient` now sets `Accept` and `Content-Type` to `application/json` if not specified.
 (_Previously only the `Content-Type` header was automatically set._)
+* Deprecated all aware-of helpers that contained `*\Mixed\*` in their namespace.
+These will be removed in next major version.
+Replacement components are available within the `*\Mixes\*` namespace.
+The term `Mixed` has been a [soft-reserved keyword](https://www.php.net/manual/en/reserved.other-reserved-words.php) since PHP `v7.0`.
 
 **Non-breaking Changes**
 
