@@ -48,13 +48,17 @@ module.exports = {
         }
     },
 
-    // Search settings
-    // @see https://vuepress.vuejs.org/plugin/official/plugin-search.html
+    // Plugins
     plugins: {
+
+        // Search Box
+        // @see https://vuepress.vuejs.org/plugin/official/plugin-search.html
         '@vuepress/search': {
             searchMaxSuggestions: 10,
             test: '/archive\/current/'
         },
+
+        // Back-to-top
         // '@vuepress/back-to-top': {}
     }
 };
