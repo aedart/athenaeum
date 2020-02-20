@@ -17,7 +17,7 @@ var_dump($properties);
 
 The above example will output the following:
 
-```console
+```shell
 array(2) {
   ["name"]=> string(5) "Timmy"
   ["age"]=> int(19)

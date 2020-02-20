@@ -4,7 +4,7 @@ description: How to install Container
 
 # How to install
 
-```console
+```shell
 composer require aedart/athenaeum-container
 ```
 

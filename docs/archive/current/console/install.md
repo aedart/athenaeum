@@ -3,7 +3,7 @@ description: How to install Console
 ---
 # How to install
 
-```console
+```shell
 composer require aedart/athenaeum-console
 ```
 

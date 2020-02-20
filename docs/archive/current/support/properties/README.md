@@ -12,7 +12,7 @@ It is able to generate a series of interfaces and traits, based on a configurati
 
 You must have [Twig Template Engine](https://twig.symfony.com/) available in your project.
 
-```console
+```shell
 composer require twig/twig
 ```
 
@@ -21,7 +21,7 @@ composer require twig/twig
 To create the configuration file, use the `dto:scaffold` command.
 It will create a `aware-of-properties.php` file in your project directory
 
-```console
+```shell
 php vendor/bin/aware-of dto:scaffold
 ```
 
@@ -37,7 +37,7 @@ Provided that you have edited your configuration and specified what aware-of hel
 
 The command expects a path to the configuration file that you wish to use.
 
-```console
+```shell
 php vendor/bin/aware-of dto:create aware-of-properties.php
 ```
 
@@ -45,7 +45,7 @@ php vendor/bin/aware-of dto:create aware-of-properties.php
 
 To force create your aware-of helper, set the `--force` flag.
 
-```console
+```shell
 php vendor/bin/aware-of dto:create aware-of-properties.php --force
 ```
 

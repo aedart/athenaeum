@@ -4,7 +4,7 @@ description: How to install Testing Package
 
 # How to install
 
-```console
+```shell
 composer require aedart/athenaeum-testing --dev
 ```
 

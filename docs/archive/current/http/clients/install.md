@@ -4,7 +4,7 @@ description: How to install Http Clients Package
 
 # How to install
 
-```console
+```shell
 composer require aedart/athenaeum-http-clients
 ```
 

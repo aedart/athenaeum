@@ -10,7 +10,7 @@ If you are working with Aware-of Helpers (_"getter-setter-traits"_), then you ca
 
 The helper that you wish to test **MUST** have it's methods declared in accordance with the following:
 
-```console
+```shell
 set[property-name](?[type] $property);
 get[property-name](): ?[type] ;
 has[property-name](): bool ;

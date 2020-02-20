@@ -4,6 +4,6 @@ description: How to install Utils Package
 
 # How to install
 
-```console
+```shell
 composer require aedart/athenaeum-utils
 ```

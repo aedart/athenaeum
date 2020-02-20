@@ -32,7 +32,7 @@ return [
 
 Run `vendor:publish` to publish this package's assets.
 
-```console
+```shell
 php artisan vendor:publish
 ```
 
@@ -44,6 +44,6 @@ Once completed, you should have the following configuration file in your `/confi
 
 If you are using the [Athenaeum Core Application](../core/), then run the following command to publish assets:
 
-```console
+```shell
 php {your-cli-app} vendor:publish-all
 ```

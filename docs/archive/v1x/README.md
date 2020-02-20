@@ -2,7 +2,7 @@
 
 By using [Composer](https://getcomposer.org/), you can require Athenaeum into your project. 
 
-```console
+```shell
 composer require aedart/athenaeum
 ```
 

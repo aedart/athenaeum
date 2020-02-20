@@ -23,7 +23,7 @@ The first thing that you need to do, is to create a configuration file.
 The easiest way to do so, is via the `dto:scaffold` command.
 When executed, it will create a `aware-of-properties.php` file in your project.
 
-```console
+```shell
 php athenaeum dto:scaffold
 ```
 
@@ -42,7 +42,7 @@ You can change this to whatever suits you.
 Provided that you have edited your configuration and specified what aware-of components should be generated (_covered later in this document_), you can run the generate command.
 The command expects a path to the configuration file that you wish to use.
 
-```console
+```shell
 php athenaeum dto:create-aware-of aware-of-properties.php
 ```
 
@@ -51,7 +51,7 @@ php athenaeum dto:create-aware-of aware-of-properties.php
 Should you wish to force create your aware-of components, set the `--force` flag, when running the command.
 It will overwrite any existing interfaces and traits.
 
-```console
+```shell
 php athenaeum dto:create-aware-of aware-of-properties.php --force
 ```
 

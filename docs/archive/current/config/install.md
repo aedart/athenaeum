@@ -3,7 +3,7 @@ description: How to install Configuration Loader
 ---
 # How to install
 
-```console
+```shell
 composer require aedart/athenaeum-config
 ```
 
@@ -11,7 +11,7 @@ composer require aedart/athenaeum-config
 
 If you wish to use this component with [YAML](https://en.wikipedia.org/wiki/YAML), then you also need the following installed:
 
-```console
+```shell
 composer require symfony/yaml
 ```
 

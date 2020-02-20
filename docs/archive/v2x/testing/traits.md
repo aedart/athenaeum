@@ -6,7 +6,7 @@ If you are working with "getter-setter-traits" (aware-of components), then you c
 
 The trait in question must have the following methods defined:
 
-```console
+```shell
 set[property-name](?[type] $property);
 get[property-name](): ?[type] ;
 has[property-name](): bool ;

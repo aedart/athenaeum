@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # How to install
 
-```console
+```shell
 composer require aedart/athenaeum-core
 ```
 
