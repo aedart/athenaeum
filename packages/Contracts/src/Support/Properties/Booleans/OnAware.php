@@ -15,7 +15,7 @@ interface OnAware
     /**
      * Set on
      *
-     * @param bool|null $isOn
+     * @param bool|null $isOn Is on
      *
      * @return self
      */

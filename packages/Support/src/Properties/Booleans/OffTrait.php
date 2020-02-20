@@ -13,7 +13,7 @@ namespace Aedart\Support\Properties\Booleans;
 trait OffTrait
 {
     /**
-     *
+     * Is off
      *
      * @var bool|null
      */
@@ -22,7 +22,7 @@ trait OffTrait
     /**
      * Set off
      *
-     * @param bool|null $isOff
+     * @param bool|null $isOff Is off
      *
      * @return self
      */

@@ -13,7 +13,7 @@ namespace Aedart\Support\Properties\Booleans;
 trait OnTrait
 {
     /**
-     *
+     * Is on
      *
      * @var bool|null
      */
@@ -22,7 +22,7 @@ trait OnTrait
     /**
      * Set on
      *
-     * @param bool|null $isOn
+     * @param bool|null $isOn Is on
      *
      * @return self
      */

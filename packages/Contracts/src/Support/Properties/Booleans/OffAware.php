@@ -15,7 +15,7 @@ interface OffAware
     /**
      * Set off
      *
-     * @param bool|null $isOff
+     * @param bool|null $isOff Is off
      *
      * @return self
      */
