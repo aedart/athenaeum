@@ -1,0 +1,85 @@
+<templateSet group="Aedart\Athenaeum">
+  <template name="gst" value="    /**&#10;     * $DESCRIPTION_OF_PROPERTY$&#10;     *&#10;     * @var $DATA_TYPE$|null&#10;     */&#10;    protected ?$DATA_TYPE$ $$$CORE_PROPERTY$ = null;&#10;&#10;    /**&#10;     * Set $PROPERTY_IN_DESCRIPTION$&#10;     *&#10;     * @param $DATA_TYPE$|null $$$INPUT_ARGUMENT$ $DESCRIPTION_OF_PROPERTY$&#10;     *&#10;     * @return self&#10;     */&#10;    public function set$PROPERTY$(?$DATA_TYPE$ $$$INPUT_ARGUMENT$)&#10;    {&#10;        $$this-&gt;$CORE_PROPERTY$ = $$$INPUT_ARGUMENT$;&#10;        &#10;        return $$this;&#10;    }&#10;    &#10;    /**&#10;     * Get $PROPERTY_IN_DESCRIPTION$&#10;     *&#10;     * If no $PROPERTY_IN_DESCRIPTION$ has been set, this method will&#10;     * set and return a default $PROPERTY_IN_DESCRIPTION$, if any such&#10;     * value is available&#10;     *&#10;     * @return $DATA_TYPE$|null $PROPERTY_IN_DESCRIPTION$ or null if none $PROPERTY_IN_DESCRIPTION$ has been set&#10;     */&#10;    public function get$PROPERTY$() : ?$DATA_TYPE$&#10;    {&#10;        if( ! $this-&gt;has$PROPERTY$()){&#10;            $this-&gt;set$PROPERTY$($this-&gt;getDefault$PROPERTY$());&#10;        }&#10;        return $$this-&gt;$CORE_PROPERTY$;&#10;    }&#10;    &#10;    /**&#10;     * Check if $PROPERTY_IN_DESCRIPTION$ has been set&#10;     *&#10;     * @return bool True if $PROPERTY_IN_DESCRIPTION$ has been set, false if not&#10;     */&#10;    public function has$PROPERTY$() : bool&#10;    {&#10;        return isset($$this-&gt;$CORE_PROPERTY$);&#10;    }&#10;    &#10;    /**&#10;     * Get a default $PROPERTY_IN_DESCRIPTION$ value, if any is available&#10;     *&#10;     * @return $DATA_TYPE$|null A default $PROPERTY_IN_DESCRIPTION$ value or Null if no default value is available&#10;     */&#10;    public function getDefault$PROPERTY$() : ?$DATA_TYPE$&#10;    {&#10;        return null;&#10;    }" description="Getter Setter Trait" toReformat="true" toShortenFQNames="true">
+    <variable name="DESCRIPTION_OF_PROPERTY" expression="" defaultValue="&quot;Description of my property&quot;" alwaysStopAt="true" />
+    <variable name="DATA_TYPE" expression="enum(&quot;string&quot;,&quot;int&quot;,&quot;float&quot;,&quot;bool&quot;,&quot;resource&quot;,&quot;null&quot;,&quot;callable&quot;,&quot;array&quot;,&quot;mixed&quot;)" defaultValue="&quot;mixed&quot;" alwaysStopAt="true" />
+    <variable name="CORE_PROPERTY" expression="" defaultValue="&quot;myProperty&quot;" alwaysStopAt="true" />
+    <variable name="PROPERTY" expression="capitalize(CORE_PROPERTY)" defaultValue="" alwaysStopAt="false" />
+    <variable name="PROPERTY_IN_DESCRIPTION" expression="underscoresToSpaces(snakeCase(PROPERTY))" defaultValue="" alwaysStopAt="false" />
+    <variable name="INPUT_ARGUMENT" expression="" defaultValue="&quot;value&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="cov" value="@coversDefaultClass " description="Covers Default" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP Comment" value="true" />
+    </context>
+  </template>
+  <template name="auth" value="@author Alin Eugen Deac &lt;aedart@gmail.com&gt;" description="Author" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JSX_HTML" value="false" />
+      <option name="JS_EXPRESSION" value="false" />
+      <option name="JS_STATEMENT" value="false" />
+      <option name="PHP Comment" value="true" />
+    </context>
+  </template>
+  <template name="jsc" value="'use strict';&#10;&#10;/**&#10; * $CLASS_NAME_JS_DOC$&#10; * &#10; * @author Alin Eugen Deac &lt;aedart@gmail.com&gt;&#10; */&#10;class $CLASS_NAME$ {&#10;    $END$&#10;}&#10;&#10;export default $CLASS_NAME$;" description="JavaScript Class" toReformat="false" toShortenFQNames="true">
+    <variable name="CLASS_NAME" expression="" defaultValue="&quot;MyClass&quot;" alwaysStopAt="true" />
+    <variable name="CLASS_NAME_JS_DOC" expression="spaceSeparated(CLASS_NAME)" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="gs" value="    /**&#10;     * $PROPERTY_IN_DESC$ symbol&#10;     *&#10;     * @type {Symbol}&#10;     * @private&#10;     */&#10;    //const _$PROPERTY_CONST_NAME$ = Symbol('$PROPERTY_SYMBOL_NAME$');$END$&#10;    &#10;    /**&#10;     * Set $PROPERTY_IN_DESC$&#10;     *&#10;     * @param {$DATA_TYPE$} $ARGUMENT$ $DESCRIPTION$&#10;     */&#10;    set $PROPERTY$($ARGUMENT$){&#10;        this[_$PROPERTY_CONST_NAME$] = $ARGUMENT$;&#10;    }&#10;&#10;    /**&#10;     * Get $PROPERTY_IN_DESC$&#10;     * &#10;     * @return {$DATA_TYPE$} $DESCRIPTION$&#10;     */&#10;    get $PROPERTY$(){&#10;        return this[_$PROPERTY_CONST_NAME$];&#10;    }" description="JavaScript Getter and Setter" toReformat="true" toShortenFQNames="true">
+    <variable name="PROPERTY" expression="" defaultValue="&quot;myProperty&quot;" alwaysStopAt="true" />
+    <variable name="PROPERTY_CONST_NAME" expression="" defaultValue="PROPERTY" alwaysStopAt="false" />
+    <variable name="PROPERTY_SYMBOL_NAME" expression="lowercaseAndDash(PROPERTY)" defaultValue="" alwaysStopAt="false" />
+    <variable name="DATA_TYPE" expression="enum(&quot;string&quot;, &quot;Array.&lt;*&gt;&quot;, &quot;undefined&quot;, &quot;null&quot;, &quot;boolean&quot;, &quot;number&quot;, &quot;string&quot;, &quot;symbol&quot;, &quot;object&quot;, &quot;function&quot;)" defaultValue="&quot;string&quot;" alwaysStopAt="true" />
+    <variable name="ARGUMENT" expression="" defaultValue="&quot;value&quot;" alwaysStopAt="true" />
+    <variable name="DESCRIPTION" expression="" defaultValue="&quot;my property description&quot;" alwaysStopAt="true" />
+    <variable name="PROPERTY_IN_DESC" expression="spaceSeparated(PROPERTY)" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="it" value="it('$TEST_NAME$', function(){&#10;    $END$&#10;});" description="JavaScript, Jasmine test" toReformat="true" toShortenFQNames="true">
+    <variable name="TEST_NAME" expression="" defaultValue="&quot;can do something&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="mixin" value="'use strict';&#10;&#10;import { DeclareMixin } from '@vcas/js-mixin';&#10;&#10;/**&#10; * $PROPERTY_IN_DESC$ symbol&#10; *&#10; * @type {Symbol}&#10; * @private&#10; */&#10;const _$PROPERTY_CONST_NAME$ = Symbol('$PROPERTY_SYMBOL_NAME$');&#10;&#10;/**&#10; * $MIXIN_CLASS_NAME_DESC$ Mixin&#10; *&#10; * @return {$MIXIN_CLASS_NAME_RETURN_TYPE$}&#10; */&#10;export default DeclareMixin((superClass) =&gt; class $MIXIN_CLASS_NAME$ extends superClass {&#10;&#10;    /**&#10;     * Set $PROPERTY_IN_DESC$&#10;     *&#10;     * @param {$DATA_TYPE$|null} $ARGUMENT$ $DESCRIPTION$&#10;     */&#10;    set $PROPERTY$($ARGUMENT$) {&#10;        this[_$PROPERTY_CONST_NAME$] = $ARGUMENT$;&#10;    }&#10;&#10;    /**&#10;     * Get $PROPERTY_IN_DESC$&#10;     *&#10;     * @return {$DATA_TYPE$|null} $DESCRIPTION$&#10;     */&#10;    get $PROPERTY$() {&#10;        if( ! this.has$PROPERTY_REF$()){&#10;            this.$PROPERTY$ = this.default$PROPERTY_REF$;&#10;        }&#10;        return this[_$PROPERTY_CONST_NAME$];&#10;    }&#10;&#10;    /**&#10;     * Check if &quot;$PROPERTY_IN_DESC$&quot; has been set&#10;     *&#10;     * @return {boolean}&#10;     */&#10;    has$PROPERTY_REF$(){&#10;        return (this[_$PROPERTY_CONST_NAME$] !== undefined &amp;&amp; this[_$PROPERTY_CONST_NAME$] !== null);&#10;    }&#10;&#10;    /**&#10;     * Get a default &quot;$PROPERTY_IN_DESC$&quot;&#10;     *&#10;     * @return {$DATA_TYPE$|null} A default &quot;$PROPERTY_IN_DESC$&quot; value or null if none is available&#10;     */&#10;    get default$PROPERTY_REF$() {&#10;        return null;$END$&#10;    }&#10;});" description="JavaScript Mixin" toReformat="true" toShortenFQNames="true">
+    <variable name="MIXIN_CLASS_NAME" expression="" defaultValue="&quot;PropertyAware&quot;" alwaysStopAt="true" />
+    <variable name="PROPERTY" expression="" defaultValue="&quot;myProperty&quot;" alwaysStopAt="true" />
+    <variable name="DATA_TYPE" expression="enum(&quot;string&quot;, &quot;Array.&lt;*&gt;&quot;, &quot;undefined&quot;, &quot;null&quot;, &quot;boolean&quot;, &quot;number&quot;, &quot;string&quot;, &quot;symbol&quot;, &quot;object&quot;, &quot;function&quot;)" defaultValue="&quot;string&quot;" alwaysStopAt="true" />
+    <variable name="ARGUMENT" expression="" defaultValue="&quot;value&quot;" alwaysStopAt="true" />
+    <variable name="DESCRIPTION" expression="" defaultValue="&quot;myProperty value...&quot;" alwaysStopAt="true" />
+    <variable name="PROPERTY_SYMBOL_NAME" expression="lowercaseAndDash(PROPERTY)" defaultValue="" alwaysStopAt="false" />
+    <variable name="PROPERTY_CONST_NAME" expression="" defaultValue="PROPERTY" alwaysStopAt="false" />
+    <variable name="PROPERTY_IN_DESC" expression="spaceSeparated(PROPERTY)" defaultValue="" alwaysStopAt="false" />
+    <variable name="MIXIN_CLASS_NAME_RETURN_TYPE" expression="" defaultValue="MIXIN_CLASS_NAME" alwaysStopAt="false" />
+    <variable name="MIXIN_CLASS_NAME_DESC" expression="spaceSeparated(MIXIN_CLASS_NAME)" defaultValue="" alwaysStopAt="false" />
+    <variable name="PROPERTY_REF" expression="capitalize(PROPERTY)" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="sec" value="    /*****************************************************************&#10;     * $DESCRIPTION$&#10;     ****************************************************************/&#10;     &#10;     " description="Comment Section" toReformat="true" toShortenFQNames="true">
+    <variable name="DESCRIPTION" expression="" defaultValue="Section" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="inh" value="    /**&#10;     * @inheritdoc&#10;     */" description="Inherit doc" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="opt" value="[optional] " description="Optional comment" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="PHP Comment" value="true" />
+    </context>
+  </template>
+</templateSet>
