@@ -49,18 +49,18 @@ module.exports = {
     },
 
     // Plugins
-    plugins: {
+    plugins: [
+        // Back-to-top
+        // @see https://v1.vuepress.vuejs.org/plugin/official/plugin-back-to-top.html
+        [ '@vuepress/back-to-top', true ],
 
         // Search Box
         // @see https://vuepress.vuejs.org/plugin/official/plugin-search.html
-        '@vuepress/search': {
+        [ '@vuepress/search', {
             searchMaxSuggestions: 10,
             test: '/archive\/current/'
-        },
-
-        // Back-to-top
-        // '@vuepress/back-to-top': {}
-    }
+        }]
+    ]
 };
 
 /**
