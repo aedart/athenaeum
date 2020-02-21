@@ -26,6 +26,7 @@ use Aedart\Core\Helpers\NamespaceDetector;
 use Aedart\Core\Helpers\Paths;
 use Aedart\Core\Providers\CacheServiceProvider;
 use Aedart\Core\Providers\CoreConsoleServiceProvider;
+use Aedart\Core\Providers\CoreServiceProvider;
 use Aedart\Core\Providers\EventServiceProvider;
 use Aedart\Core\Providers\ExceptionHandlerServiceProvider;
 use Aedart\Core\Providers\NativeFilesystemServiceProvider;
@@ -158,6 +159,7 @@ class Application extends IoC implements
      * @var string[] Class paths
      */
     protected array $defaultCoreServiceProviders = [
+        CoreServiceProvider::class,
         ExceptionHandlerServiceProvider::class,
         NativeFilesystemServiceProvider::class,
         EventServiceProvider::class,
