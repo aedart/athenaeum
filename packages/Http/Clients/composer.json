@@ -24,8 +24,8 @@
     "require": {
         "php": ">=7.4.0",
         "guzzlehttp/guzzle": "~6.4",
-        "aedart/athenaeum-contracts": "^4.0.x-dev",
-        "aedart/athenaeum-support": "^4.0.x-dev"
+        "aedart/athenaeum-contracts": "dev-master",
+        "aedart/athenaeum-support": "dev-master"
     },
     "autoload": {
         "psr-4": {
