@@ -47,6 +47,7 @@ module.exports.sidebar = function(){
                 'core/',
                 'core/prerequisite',
                 'core/install',
+                'core/integration',
             ]
         },
         {
