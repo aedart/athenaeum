@@ -11,7 +11,7 @@ if (!function_exists('paths')) {
      *
      * @return mixed|PathsContainer|Application
      */
-    function paths(): ?PathsContainer
+    function paths()
     {
         // Try to resolve the Paths Container if possible. If not,
         // try to default to Laravel's application. This is in case
