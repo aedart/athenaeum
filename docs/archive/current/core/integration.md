@@ -39,6 +39,7 @@ Enter localhost:8000/index.php
 Other topics:
     Register Service Providers, e.g. Laravel's or Own
     Exception Handling - should be the first?
+        What about logging????
     The run method - alternative setup
 
 Advanced:
