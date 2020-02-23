@@ -254,6 +254,6 @@ Please make sure to use the [`require_once`](https://www.php.net/manual/en/funct
 ## Onward
 
 Hopefully, by now you have an application up and running.
-From here, you should be able to register service providers inside your `/configs/app.php` file and make use of them in your legacy application.
+From here, you should be able to register service providers inside your `configs/app.php` file and make use of them in your legacy application.
 Throughout the remaining of this package's documentation, more advanced topics are covered.
 You should browse through it. It might give you some more perspective and helpful information about how this package can be used. 
