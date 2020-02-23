@@ -11,9 +11,9 @@ Please take your time and read through this carefully.
 
 ## Bootstrap Directory
 
-In your legacy application, create a new directory to contain the application file.
+Create a new directory to contain the application file.
 The directory _SHOULD_ not be publicly available via the browser.
-You can call this directory for `bootstrap` - or whatever makes sense to you.
+You can call this directory for `bootstrap` or whatever makes sense to you.
 
 ```shell
 /bootstrap
@@ -21,7 +21,7 @@ You can call this directory for `bootstrap` - or whatever makes sense to you.
 
 ## The Application file (`app.php`)
 
-Inside your newly created `/bootstrap` directory, create a `app.php` file (_The file name does not matter_).
+Inside your newly created `/bootstrap` directory, create a `app.php` file (_The filename does not matter_).
 This application file will create a new `Application` instance.
 It accepts an `array` of various directory paths.
 These paths are used throughout the `Application` and many of Laravel's components.
@@ -43,7 +43,7 @@ return new \Aedart\Core\Application([
 ```
 
 ::: tip
-You can read more about the directory structure, e.g. what they are intended for, inside [Laravel's documentation](https://laravel.com/docs/6.x/structure#the-bootstrap-directory).
+You can read more about the directory structure, e.g. what each directory is intended for, inside [Laravel's documentation](https://laravel.com/docs/6.x/structure#the-bootstrap-directory).
 :::
 
 ## The Environment File (`.env`)
