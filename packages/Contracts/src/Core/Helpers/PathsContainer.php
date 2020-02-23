@@ -100,7 +100,7 @@ interface PathsContainer extends BasePathAware,
     public function storagePath(string $path = ''): string;
 
     /**
-     * Get a path within the "public# directory
+     * Get a path within the "public" directory
      *
      * @param string $path [optional]
      *
