@@ -48,6 +48,15 @@ module.exports.sidebar = function(){
                 'core/prerequisite',
                 'core/install',
                 'core/integration',
+                'core/console',
+                'core/events',
+                {
+                    title: 'Advanced',
+                    collapsable: true,
+                    children: [
+                        'core/advanced/',
+                    ]
+                },
             ]
         },
         {
