@@ -9,6 +9,7 @@ use Aedart\Support\Properties\Strings\BootstrapPathTrait;
 use Aedart\Support\Properties\Strings\ConfigPathTrait;
 use Aedart\Support\Properties\Strings\DatabasePathTrait;
 use Aedart\Support\Properties\Strings\EnvironmentPathTrait;
+use Aedart\Support\Properties\Strings\PublicPathTrait;
 use Aedart\Support\Properties\Strings\ResourcePathTrait;
 use Aedart\Support\Properties\Strings\StoragePathTrait;
 
@@ -29,6 +30,7 @@ class Paths extends Dto implements PathsContainer
     use EnvironmentPathTrait;
     use ResourcePathTrait;
     use StoragePathTrait;
+    use PublicPathTrait;
 
     /**
      * @inheritDoc
@@ -84,6 +86,14 @@ class Paths extends Dto implements PathsContainer
     public function storagePath(string $path = ''): string
     {
         return $this->getStoragePath() . DIRECTORY_SEPARATOR . $path;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function publicPath(string $path = ''): string
+    {
+        return $this->getPublicPath() . DIRECTORY_SEPARATOR . $path;
     }
 
     /*****************************************************************
@@ -144,5 +154,13 @@ class Paths extends Dto implements PathsContainer
     public function getDefaultStoragePath(): ?string
     {
         return $this->getBasePath() . DIRECTORY_SEPARATOR . 'storage';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getDefaultPublicPath(): ?string
+    {
+        return $this->getBasePath() . DIRECTORY_SEPARATOR . 'public';
     }
 }

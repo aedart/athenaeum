@@ -7,6 +7,7 @@ use Aedart\Contracts\Support\Properties\Strings\BootstrapPathAware;
 use Aedart\Contracts\Support\Properties\Strings\ConfigPathAware;
 use Aedart\Contracts\Support\Properties\Strings\DatabasePathAware;
 use Aedart\Contracts\Support\Properties\Strings\EnvironmentPathAware;
+use Aedart\Contracts\Support\Properties\Strings\PublicPathAware;
 use Aedart\Contracts\Support\Properties\Strings\ResourcePathAware;
 use Aedart\Contracts\Support\Properties\Strings\StoragePathAware;
 use Aedart\Contracts\Utils\Populatable;
@@ -29,6 +30,7 @@ interface PathsContainer extends BasePathAware,
     EnvironmentPathAware,
     ResourcePathAware,
     StoragePathAware,
+    PublicPathAware,
     Populatable,
     Arrayable,
     Jsonable,
@@ -96,4 +98,13 @@ interface PathsContainer extends BasePathAware,
      * @return string
      */
     public function storagePath(string $path = ''): string;
+
+    /**
+     * Get a path within the "public# directory
+     *
+     * @param string $path [optional]
+     *
+     * @return string
+     */
+    public function publicPath(string $path = ''): string ;
 }

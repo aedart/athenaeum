@@ -60,6 +60,7 @@ class PathsContainerTest extends UnitTestCase
         $this->assertNotEmpty($container->getEnvironmentPath(), 'Environment path missing');
         $this->assertNotEmpty($container->getResourcePath(), 'Resources path missing');
         $this->assertNotEmpty($container->getStoragePath(), 'Storage path missing');
+        $this->assertNotEmpty($container->getPublicPath(), 'Public path missing');
     }
 
     /**
@@ -178,6 +179,23 @@ class PathsContainerTest extends UnitTestCase
         ConsoleDebugger::output($result);
 
         $expected = $container->getStoragePath() . DIRECTORY_SEPARATOR . $path;
+        $this->assertStringContainsString($expected, $result);
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function canResolvePathInPublicDir()
+    {
+        $container = $this->makePathsContainer();
+        $path = $this->getFaker()->word;
+
+        $result = $container->publicPath($path);
+        ConsoleDebugger::output($result);
+
+        $expected = $container->getPublicPath() . DIRECTORY_SEPARATOR . $path;
         $this->assertStringContainsString($expected, $result);
     }
 }
