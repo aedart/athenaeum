@@ -27,7 +27,7 @@ interface Application extends IoC,
      *
      * @return string
      */
-    public function publicPath(string $path = ''): string ;
+    public function publicPath(string $path = ''): string;
 
     /**
      * Determine if running in "local" environment

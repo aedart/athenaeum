@@ -106,5 +106,5 @@ interface PathsContainer extends BasePathAware,
      *
      * @return string
      */
-    public function publicPath(string $path = ''): string ;
+    public function publicPath(string $path = ''): string;
 }
