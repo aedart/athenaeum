@@ -55,7 +55,7 @@ module.exports.sidebar = function(){
                         'core/advanced/',
                         'core/advanced/config',
                         'core/advanced/events',
-                        'core/advanced/commands',
+                        'core/advanced/console',
                         'core/advanced/tasks',
                         'core/advanced/ext',
                         'core/advanced/testing',
