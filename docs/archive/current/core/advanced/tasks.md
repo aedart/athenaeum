@@ -4,6 +4,10 @@ description: Task Scheduling in Core Application
 
 # Task Scheduling
 
+Laravel's [Tasks Scheduling](https://laravel.com/docs/6.x/scheduling) is offered via the [Console Application](./console).
+
+## Define Tasks
+
 The [Console Package](../../console/schedules.md) contains examples of how to define scheduled tasks and how to register them.
 
 ## Run Scheduled Tasks
@@ -12,5 +16,10 @@ Just like Laravel, you need to add the `schedule:run` command to your [Cron](htt
 Review Laravel's [documentation](https://laravel.com/docs/6.x/scheduling) for more information about how to run scheduled tasks
 
 ```
-* * * * * cd /path-to-your-project && php cli.php schedule:run >> /dev/null 2>&1
+* * * * * cd /your-project-path && php cli.php schedule:run >> /dev/null 2>&1
 ```
+
+### Run Scheduled Tasks in Windows
+
+It is possible to use [Windows Tasks Scheduler](https://en.wikipedia.org/wiki/Windows_Task_Scheduler), in order to utilise Laravel's scheduled tasks.
+Waleed Ahmed wrote a nice article about [how to use Task Scheduler on Windows 10](https://quantizd.com/how-to-use-laravel-task-scheduler-on-windows-10/). 
