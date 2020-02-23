@@ -48,7 +48,6 @@ How you choose to make use of it, if at all, is entirely up to you.
 ## Limitations
 
 When comparing this package's deliverables, with the application offered by Laravel, it has an abundance of limitations.
-Some of those limitations are even deliberate, in order not to be a copy of Laravel's application!
 To illustrate some of these limitations, consider the following major unsupported features: 
 
 ### No Http Request / Response Support
