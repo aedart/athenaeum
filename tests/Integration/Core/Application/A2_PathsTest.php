@@ -135,6 +135,16 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertNotEmpty($path);
     }
 
+    /**
+     * @test
+     */
+    public function canReadPublicPath()
+    {
+        $path = $this->app->publicPath();
+
+        $this->assertNotEmpty($path);
+    }
+
     /*****************************************************************
      * Unsupported "cache" paths
      ****************************************************************/

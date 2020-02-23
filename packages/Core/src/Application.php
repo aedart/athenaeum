@@ -576,6 +576,14 @@ class Application extends IoC implements
     /**
      * @inheritdoc
      */
+    public function publicPath(string $path = ''): string
+    {
+        return $this->getPathsContainer()->publicPath($path);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function make($abstract, array $parameters = [])
     {
         // To handle deferred services, the same implementation is used
