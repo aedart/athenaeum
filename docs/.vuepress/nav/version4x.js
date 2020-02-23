@@ -53,9 +53,12 @@ module.exports.sidebar = function(){
                     collapsable: true,
                     children: [
                         'core/advanced/',
+                        'core/advanced/config',
                         'core/advanced/events',
-                        'core/advanced/console',
-                        'core/advanced/ext-core',
+                        'core/advanced/commands',
+                        'core/advanced/tasks',
+                        'core/advanced/ext',
+                        'core/advanced/testing',
                     ]
                 },
             ]
