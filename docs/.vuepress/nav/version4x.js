@@ -49,16 +49,16 @@ module.exports.sidebar = function(){
                 'core/install',
                 'core/integration',
                 {
-                    title: 'Advanced',
+                    title: 'Usage',
                     collapsable: true,
                     children: [
-                        'core/advanced/',
-                        'core/advanced/config',
-                        'core/advanced/events',
-                        'core/advanced/console',
-                        'core/advanced/tasks',
-                        'core/advanced/ext',
-                        'core/advanced/testing',
+                        'core/usage/',
+                        'core/usage/config',
+                        'core/usage/events',
+                        'core/usage/console',
+                        'core/usage/tasks',
+                        'core/usage/ext',
+                        'core/usage/testing',
                     ]
                 },
             ]
