@@ -17,6 +17,7 @@ module.exports.sidebar = function(){
                 'config/install',
                 'config/setup',
                 'config/usage',
+                'config/custom',
             ]
         },
         {
