@@ -4,7 +4,7 @@ description: Task Scheduling in Core Application
 
 # Task Scheduling
 
-Laravel's [Tasks Scheduling](https://laravel.com/docs/6.x/scheduling) is offered via the [Console Application](./console).
+Laravel's [Tasks Scheduling](https://laravel.com/docs/6.x/scheduling) is also offered by the [Console Application](./console).
 
 ## Define Tasks
 
