@@ -2,7 +2,7 @@
 description: How to use Athenaeum Core Application
 ---
 
-# How to Integrate
+# Integration
 
 In this chapter you will find information, on how to integrate the Athenaeum Core Application into your legacy application.
 Please take your time and read through this carefully.
