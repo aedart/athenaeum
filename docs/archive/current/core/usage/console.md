@@ -4,9 +4,36 @@ description: Console Application
 
 # Console
 
+Laravel's [Console Application](https://laravel.com/docs/6.x/artisan) is used to enable command-line interfacing.
+It offers the ability to register and execute custom console commands.
+
 ## Create Commands
 
-To create a console command, please review Laravel's [documentation](https://laravel.com/docs/6.x/artisan#writing-commands) 
+To create a console command, extend the `Command` class.
+
+```php
+<?php
+
+namespace Acme\Console;
+
+use \Illuminate\Console\Command;
+
+class MyCommand extends Command
+{
+    protected $signature = 'test:my-command';
+
+    protected $description = 'A simple test command';
+
+    public function handle(): int
+    {
+        $this->output->text('Hi there...');
+
+        return 0;
+    }
+}
+```
+
+For additional information about how to create console commands, please review Laravel's [documentation](https://laravel.com/docs/6.x/artisan#writing-commands). 
 
 ::: tip Note
 This package does not offer Laravel's `make:command` generator utility.
@@ -34,10 +61,14 @@ class MyConsoleServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->commands([
-            \Acme\Console\MyCustomCommandA::class,
-            \Acme\Console\MyCustomCommandB::class
-        ]);
+        // ... your logic / condition check ...
+
+        if($shouldRegisterCommands){
+            $this->commands([
+                \Acme\Console\MyCustomCommandA::class,
+                \Acme\Console\MyCustomCommandB::class
+            ]);
+        }
     }
 }
 ```
