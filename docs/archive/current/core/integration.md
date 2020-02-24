@@ -43,6 +43,11 @@ return new \Aedart\Core\Application([
 ]);
 ```
 
+::: warning
+With the exception of the `publicPath`, all paths shouldn't be publicly available via a browser.
+Please configure your web server to deny access to those paths, when requested via Http. 
+:::
+
 ::: tip
 You can read more about the directory structure, e.g. what each directory is intended for, inside [Laravel's documentation](https://laravel.com/docs/6.x/structure#the-bootstrap-directory).
 :::
