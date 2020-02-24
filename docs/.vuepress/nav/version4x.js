@@ -52,11 +52,14 @@ module.exports.sidebar = function(){
                     title: 'Usage',
                     collapsable: true,
                     children: [
-                        'core/usage/',
-                        'core/usage/config',
+                        'core/usage/', // Configuration
+                        'core/usage/providers',
+                        'core/usage/container',
                         'core/usage/events',
+                        'core/usage/cache',
                         'core/usage/console',
                         'core/usage/tasks',
+                        'core/usage/exceptions',
                         'core/usage/ext',
                         'core/usage/testing',
                     ]
