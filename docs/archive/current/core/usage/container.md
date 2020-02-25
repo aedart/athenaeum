@@ -4,4 +4,231 @@ description: How to use Service Container
 
 # Service Container
 
-TODO ... How should one go about obtaining / resolving dependencies within a legacy application.
+The Athenaeum Core Application is essentially an extended version of Laravel's [Service Container](https://laravel.com/docs/6.x/container).
+It works exactly as you are used to, in your Laravel projects.
+This chapter only briefly highlights some of it's major features.
+For more saturated examples and information on how to use the Service Container, please review Laravel's [documentation](https://laravel.com/docs/6.x/container). 
+
+[[TOC]]
+
+## Bindings
+
+Inside your Service Provider's `register()` method, you can use the `bind()` method to register a binding.
+
+```php
+<?php
+
+use Acme\Contracts\Weather\Temperature\Measurement as MeasurementInterface;
+use Acme\Weather\Temperature\Measurement;
+use Illuminate\Support\ServiceProvider;
+
+class WeatherServiceProvider extends ServiceProvider
+{
+    public function register()
+    {
+        $this->app->bind(MeasurementInterface::class, function($app){
+            return new Measurement();
+        });
+    }
+}
+```
+
+### Singleton Bindings
+
+To bind a single instance, use the `singleton()` method.
+
+```php
+<?php
+
+use Acme\Contracts\Weather\Station;
+use Acme\Weather\Stations\LondonWeatherGateway;
+use Illuminate\Support\ServiceProvider;
+
+class WeatherServiceProvider extends ServiceProvider
+{
+    public function register()
+    {
+        $this->app->singleton(Station::class, function($app){
+            return new LondonWeatherGateway();
+        });
+    }
+}
+```
+
+## Resolving
+
+To resolve a binding, use the `make()` method on the application instance.
+Given the above shown examples, imagine that you are somewhere inside your legacy application.
+To obtain (_resolve_) your desired bound components, use the `$app`.
+
+```php
+<?php
+
+use Acme\Contracts\Weather\Station;
+
+// ... somewhere inside you legacy application
+
+$weatherStation = $app->make(Station::class);
+```
+
+The above example assumes that you are within your entry-point(s), e.g. your `index.php`, and have direct access to your `$app`.
+This may, however, not always be the case for you.
+Therefore, in the next few sections, different approaches on how to resolve your dependencies are explored.
+
+### Using the `App` Facade
+
+You can achieve the same result by using Laravel's `App` [Facade](https://laravel.com/docs/6.x/facades).
+This Facade provides access to your application instance, as long as your application is running.
+Such can be useful, in situations where you might not have direct access to your `$app`.
+
+```php
+<?php
+
+use Acme\Contracts\Weather\Station;
+use Illuminate\Support\Facades\App;
+
+// ... somewhere inside you legacy application
+
+$weatherStation = App::make(Station::class);
+```
+
+::: warning Caution
+Depending upon how you use Facades, they can either help you to get the job done or become a hindrance.
+You should take some time to read about their conceptual [benefits and limitations](https://laravel.com/docs/6.x/facades#when-to-use-facades).  
+:::
+
+### Using the `IoCFacade`
+
+You can also use the `IoCFacade`, which is a custom Facade that also provides access to your application instance.
+It offers the `make()` method, just like Laravel's `App` Facade.
+But it also comes with a `tryMake()` method, which does not fail, in case that a binding could not be resolved.
+Additionally, it offers the possibility to return a default value, should a binding not be available.
+
+```php
+<?php
+
+use Acme\Contracts\Weather\Station;
+use Acme\Weather\Stations\NullStation;
+use Aedart\Support\Facades\IoCFacade;
+
+// ... somewhere inside you legacy application
+
+// Either resolves "station" binding or returns a default value.
+$weatherStation = IoCFacade::tryMake(Station::class, new NullStation());
+```
+
+For more information, please review the source code of [`IoCFacade`](https://github.com/aedart/athenaeum/blob/master/packages/Support/src/Facades/IoCFacade.php).
+
+### Inside your Classes
+
+Arguably, when situated inside a class, it is considered best practice to rely on [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection), rather than using Facades.
+Given that you have a component with one or more dependencies, you should type-hint them in the component's constructor.
+Imagine the following component:
+
+```php
+<?php
+
+use Acme\Contracts\Weather\Station;
+
+class WeatherController
+{
+    protected Station $weatherStation;
+
+    public function __construct(Station $weatherStation)
+    {
+        $this->weatherStation = $weatherStation;
+    }
+}
+```
+
+When you need to resolve it's dependencies, use the `make()` method.
+
+```php
+<?php
+
+// Constructor dependencies are automatically resolved.
+$controller = $app->make(WeatherController::class);
+```
+
+### Alternative
+
+You can also make use of [Aware-of Helpers](../../support) to achieve the same result.
+In the example below, it is assumed that a "Weather Station Aware of" helper is available in your application.
+
+```php
+<?php
+
+use Acme\Weather\Stations\Traits\StationTrait;
+use Psr\Http\Message\ResponseInterface;
+
+class WeatherController
+{
+    use StationTrait;
+
+    public function index() : ResponseInterface
+    {
+        // A default station binding resolved from the Service Container.
+        $weatherStation = $this->getStation();
+    
+        // ... remaining not shown ...
+    }
+}
+```
+
+The implementation of a "Weather Station Aware of" helper, could look similar to the following example:
+
+```php
+<?php
+
+namespace Acme\Weather\Stations\Traits;
+
+use Acme\Contracts\Weather\Station;
+use Aedart\Support\Facades\IoCFacade;
+
+trait StationTrait
+{
+    protected ?Station $station = null;
+
+    public function setStation(?Station $station)
+    {
+        $this->station = $station;
+        
+        return $this;
+    }
+    
+    public function getStation(): ?Station
+    {
+        if( ! $this->hasStation()){
+            $this->setStation($this->getDefaultStation());
+        }
+        return $this->station;
+    }
+    
+    public function hasStation(): bool
+    {
+        return isset($this->station);
+    }
+    
+    public function getDefaultStation(): ?Station
+    {
+        return IoCFacade::tryMake(Station::class);
+    }
+}
+```
+
+The benefit of using an "Aware-of" Helper approach, is that your component(s) can "lazy" resolve their dependencies.
+Furthermore, you always have the possibility to overwrite it's methods, meaning that a different implementation could be returned as a default, should you require such.
+Regardless of this possibility, you as the developer have to make the choice of how to resolve your dependencies, within your legacy application.
+A method might work for you in a particular situation, but not in another.
+
+::: tip Live Template
+If you are using [PHP Storm](https://www.jetbrains.com/phpstorm/), then you might find the `gst` [Live Template](https://www.jetbrains.com/help/phpstorm/using-live-templates.html) helpful.
+It offers a quick way to implement Aware-of Helpers.
+It is available in the [Athenaeum Repository](https://github.com/aedart/athenaeum/blob/master/.editor/Aedart_Athenaeum.xml), along a few other Live Templates (_that might not be as useful!_).
+
+#### Other IDEs
+
+If you prefer other IDEs, and you are skilled at creating "templates" or "scaffolds", then please help out.
+Share your version of a "Aware-of" template. Other developers will surely thank you for it :)
+It the meantime, perhaps this [Generator](../../support/properties/) could help you.
+:::
