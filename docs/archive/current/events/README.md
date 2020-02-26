@@ -2,13 +2,11 @@
 description: About the Events Package
 ---
 
-# Registration of Listeners and Subscribers
+# Register Listeners and Subscribers
 
 The Athenaeum Events package offers way to register [Event Listeners](https://laravel.com/docs/6.x/events#registering-events-and-listeners) and [Subscribers](https://laravel.com/docs/6.x/events#event-subscribers) via configuration.
 
 It serves as an alternative registration method than that provided by [Laravel](https://laravel.com).
-
-## Example:
 
 ```php
 <?php
