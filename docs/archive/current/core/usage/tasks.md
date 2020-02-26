@@ -22,4 +22,9 @@ Review Laravel's [documentation](https://laravel.com/docs/6.x/scheduling) for mo
 ### Run Scheduled Tasks in Windows
 
 It is possible to use [Windows Tasks Scheduler](https://en.wikipedia.org/wiki/Windows_Task_Scheduler), in order to utilise Laravel's scheduled tasks.
-Waleed Ahmed wrote a nice article about [how to use Task Scheduler on Windows 10](https://quantizd.com/how-to-use-laravel-task-scheduler-on-windows-10/). 
+Waleed Ahmed wrote a nice article about [how to use Task Scheduler on Windows 10](https://quantizd.com/how-to-use-laravel-task-scheduler-on-windows-10/).
+
+## Limitations
+
+[Scheduled Queued Jobs](https://laravel.com/docs/6.x/scheduling#scheduling-queued-jobs) are not support by default.
+You have to add Laravel's [Queue package](https://packagist.org/packages/illuminate/queue) by on your own, in order to gain access to this feature. 
