@@ -33,6 +33,32 @@ class WeatherServiceProvider extends ServiceProvider
 }
 ```
 
+### When no interfaces are available
+
+The Service Container does not explicitly require you to state an interface's class path, as the "abstract" identifier for your binding.
+You can use a regular string value that you wish, as long as it is unique.
+Depending on just how "legacy" your application is, this can come very handy for you, should you wish to redesign or refactor certain logic.
+
+```php
+$this->app->bind('weather-measurement', function($app){
+    return new Measurement();
+});
+```
+
+### Aliases
+
+Another helpful feature of the Service Container, is the ability to create aliases for your bindings.
+This will allow you to resolve a bound instance, via both an interface's class path or your assigned alias. 
+
+```php
+$this->app->bind(MeasurementInterface::class, function($app){
+    return new Measurement();
+});
+
+// "weather-measurement" alias for MeasurementInterface::class
+$this->app->alias(MeasurementInterface::class, 'weather-measurement'); 
+```
+
 ### Singleton Bindings
 
 To bind a single instance, use the `singleton()` method.
@@ -59,7 +85,7 @@ class WeatherServiceProvider extends ServiceProvider
 
 To resolve a binding, use the `make()` method on the application instance.
 Given the above shown examples, imagine that you are somewhere inside your legacy application.
-To obtain (_resolve_) your desired bound components, use the `$app`.
+To obtain (_resolve_) your desired bound components, use your `$app`.
 
 ```php
 <?php
@@ -72,12 +98,12 @@ $weatherStation = $app->make(Station::class);
 ```
 
 The above example assumes that you are within your entry-point(s), e.g. your `index.php`, and have direct access to your `$app`.
-This may, however, not always be the case for you.
-Therefore, in the next few sections, different approaches on how to resolve your dependencies are explored.
+This might not always be the case for you.
+In the next few sections, different approaches are explored.
 
 ### Using the `App` Facade
 
-You can achieve the same result by using Laravel's `App` [Facade](https://laravel.com/docs/6.x/facades).
+You can also resolve your bindings, by using Laravel's `App` [Facade](https://laravel.com/docs/6.x/facades).
 This Facade provides access to your application instance, as long as your application is running.
 Such can be useful, in situations where you might not have direct access to your `$app`.
 
@@ -99,10 +125,10 @@ You should take some time to read about their conceptual [benefits and limitatio
 
 ### Using the `IoCFacade`
 
-You can also use the `IoCFacade`, which is a custom Facade that also provides access to your application instance.
-It offers the `make()` method, just like Laravel's `App` Facade.
-But it also comes with a `tryMake()` method, which does not fail, in case that a binding could not be resolved.
-Additionally, it offers the possibility to return a default value, should a binding not be available.
+The `IoCFacade` is a custom Facade, which also provides access to your application instance.
+Just like Laravel's `App` Facade, it too offers the `make()` method.
+In addition, it also comes with a `tryMake()` method, which does not fail, in case that a binding could not be resolved.
+When a binding cannot be resolved, it returns a default value that you can specify.
 
 ```php
 <?php
@@ -152,8 +178,9 @@ $controller = $app->make(WeatherController::class);
 
 ### Alternative
 
-You can also make use of [Aware-of Helpers](../../support) to achieve the same result.
-In the example below, it is assumed that a "Weather Station Aware of" helper is available in your application.
+Another approach to resolving you bindings, is by making use of [Aware-of Helpers](../../support).
+These helpers are basically "getters and setters" that come with a default value.
+Consider the following example, where a "Weather Station Aware of" helper is available.
 
 ```php
 <?php
@@ -218,8 +245,8 @@ trait StationTrait
 
 The benefit of using an "Aware-of" Helper approach, is that your component(s) can "lazy" resolve their dependencies.
 Furthermore, you always have the possibility to overwrite it's methods, meaning that a different implementation could be returned as a default, should you require such.
-Regardless of this possibility, you as the developer have to make the choice of how to resolve your dependencies, within your legacy application.
-A method might work for you in a particular situation, but not in another.
+Regardless, you as the developer have to make the choice, of how to resolve your dependencies within your legacy application.
+One approach might work for a particular situation, but not for another.
 
 ::: tip Live Template
 If you are using [PHP Storm](https://www.jetbrains.com/phpstorm/), then you might find the `gst` [Live Template](https://www.jetbrains.com/help/phpstorm/using-live-templates.html) helpful.
