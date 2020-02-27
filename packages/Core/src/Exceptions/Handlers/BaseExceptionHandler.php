@@ -2,10 +2,12 @@
 
 namespace Aedart\Core\Exceptions\Handlers;
 
+use Aedart\Contracts\Core\ApplicationAware;
 use Aedart\Contracts\Exceptions\ExceptionHandler;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\Contracts\Support\Helpers\Logging\LogAware;
 use Aedart\Contracts\Support\Helpers\Logging\LogManagerAware;
+use Aedart\Core\Traits\ApplicationTrait;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Logging\LogManagerTrait;
@@ -26,6 +28,7 @@ use Throwable;
  */
 abstract class BaseExceptionHandler implements
     ExceptionHandler,
+    ApplicationAware,
     LogManagerAware,
     LogAware,
     ConfigAware
@@ -33,6 +36,7 @@ abstract class BaseExceptionHandler implements
     use LogManagerTrait;
     use LogTrait;
     use ConfigTrait;
+    use ApplicationTrait;
 
     /**
      * List of exception that should not be reported
@@ -103,6 +107,18 @@ abstract class BaseExceptionHandler implements
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * Determine if the application is running in the console.
+     *
+     * @see \Illuminate\Contracts\Foundation\Application::runningInConsole
+     *
+     * @return bool
+     */
+    protected function runningInConsole(): bool
+    {
+        return $this->getApplication()->runningInConsole();
+    }
 
     /**
      * Report given exception with the given severity
