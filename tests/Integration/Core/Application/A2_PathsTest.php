@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Integration\Core\Application;
 
 use Aedart\Core\Helpers\Paths;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
 use LogicException;
 
@@ -143,6 +144,122 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $path = $this->app->publicPath();
 
         $this->assertNotEmpty($path);
+    }
+
+    /*****************************************************************
+     * Global Helpers Test
+     ****************************************************************/
+
+    /**
+     * @test
+     */
+    public function returnsPathInBaseDir()
+    {
+        $path = 'readme.' . $this->getFaker()->fileExtension;
+
+        $result = base_path($path);
+
+        ConsoleDebugger::output($result);
+
+        $this->assertStringContainsString($path, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function returnsPathInBootstrapDir()
+    {
+        $path = 'readme.' . $this->getFaker()->fileExtension;
+
+        $result = bootstrap_path($path);
+
+        ConsoleDebugger::output($result);
+
+        $this->assertStringContainsString($path, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function returnsPathInConfigDir()
+    {
+        $path = 'readme.' . $this->getFaker()->fileExtension;
+
+        $result = config_path($path);
+
+        ConsoleDebugger::output($result);
+
+        $this->assertStringContainsString($path, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function returnsPathInDatabaseDir()
+    {
+        $path = 'readme.' . $this->getFaker()->fileExtension;
+
+        $result = database_path($path);
+
+        ConsoleDebugger::output($result);
+
+        $this->assertStringContainsString($path, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function returnsPathInEnvironmentDir()
+    {
+        $path = 'readme.' . $this->getFaker()->fileExtension;
+
+        $result = environment_path($path);
+
+        ConsoleDebugger::output($result);
+
+        $this->assertStringContainsString($path, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function returnsPathInResourceDir()
+    {
+        $path = 'readme.' . $this->getFaker()->fileExtension;
+
+        $result = resource_path($path);
+
+        ConsoleDebugger::output($result);
+
+        $this->assertStringContainsString($path, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function returnsPathInStorageDir()
+    {
+        $path = 'readme.' . $this->getFaker()->fileExtension;
+
+        $result = storage_path($path);
+
+        ConsoleDebugger::output($result);
+
+        $this->assertStringContainsString($path, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function returnsPathInPublicDir()
+    {
+        $path = 'readme.' . $this->getFaker()->fileExtension;
+
+        $result = public_path($path);
+
+        ConsoleDebugger::output($result);
+
+        $this->assertStringContainsString($path, $result);
     }
 
     /*****************************************************************

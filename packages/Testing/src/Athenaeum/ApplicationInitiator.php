@@ -157,7 +157,8 @@ trait ApplicationInitiator
             'databasePath' => $root . DIRECTORY_SEPARATOR . 'database',
             'environmentPath' => $root,
             'resourcePath' => $root . DIRECTORY_SEPARATOR . 'resources',
-            'storagePath' => $root . DIRECTORY_SEPARATOR . 'storage'
+            'storagePath' => $root . DIRECTORY_SEPARATOR . 'storage',
+            'publicPath' => $root . DIRECTORY_SEPARATOR . 'public',
         ];
     }
 

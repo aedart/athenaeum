@@ -21,13 +21,11 @@ interface Application extends IoC,
     LaravelApplication
 {
     /**
-     * Get a path within the "public" directory
-     *
-     * @param string $path [optional]
+     * Get path to "public" directory
      *
      * @return string
      */
-    public function publicPath(string $path = ''): string;
+    public function publicPath();
 
     /**
      * Determine if running in "local" environment

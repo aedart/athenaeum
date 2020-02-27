@@ -576,9 +576,9 @@ class Application extends IoC implements
     /**
      * @inheritdoc
      */
-    public function publicPath(string $path = ''): string
+    public function publicPath()
     {
-        return $this->getPathsContainer()->publicPath($path);
+        return $this->getPathsContainer()->publicPath();
     }
 
     /**
@@ -914,6 +914,7 @@ class Application extends IoC implements
         $this->instance('path.environment', $this->environmentPath());
         $this->instance('path.resource', $this->resourcePath());
         $this->instance('path.storage', $this->storagePath());
+        $this->instance('path.public', $this->publicPath());
     }
 
     /**

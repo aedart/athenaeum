@@ -97,7 +97,12 @@ if (!function_exists('environment_path')) {
      */
     function environment_path(string $path = ''): string
     {
-        return paths()->environmentPath($path);
+        $app = paths();
+        if($app instanceof PathsContainer){
+            return $app->environmentPath($path);
+        }
+
+        return $app->environmentPath() . DIRECTORY_SEPARATOR . $path;
     }
 }
 
@@ -127,7 +132,12 @@ if (!function_exists('storage_path')) {
      */
     function storage_path(string $path = ''): string
     {
-        return paths()->storagePath($path);
+        $app = paths();
+        if($app instanceof PathsContainer){
+            return $app->storagePath($path);
+        }
+
+        return $app->storagePath() . DIRECTORY_SEPARATOR . $path;
     }
 }
 
@@ -142,6 +152,11 @@ if (!function_exists('public_path')) {
      */
     function public_path(string $path = ''): string
     {
-        return paths()->publicPath($path);
+        $app = paths();
+        if($app instanceof PathsContainer){
+            return $app->publicPath($path);
+        }
+
+        return $app->publicPath() . DIRECTORY_SEPARATOR . $path;
     }
 }
