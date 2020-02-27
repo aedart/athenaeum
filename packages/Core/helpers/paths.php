@@ -98,7 +98,7 @@ if (!function_exists('environment_path')) {
     function environment_path(string $path = ''): string
     {
         $app = paths();
-        if($app instanceof PathsContainer){
+        if ($app instanceof PathsContainer) {
             return $app->environmentPath($path);
         }
 
@@ -133,7 +133,7 @@ if (!function_exists('storage_path')) {
     function storage_path(string $path = ''): string
     {
         $app = paths();
-        if($app instanceof PathsContainer){
+        if ($app instanceof PathsContainer) {
             return $app->storagePath($path);
         }
 
@@ -153,7 +153,7 @@ if (!function_exists('public_path')) {
     function public_path(string $path = ''): string
     {
         $app = paths();
-        if($app instanceof PathsContainer){
+        if ($app instanceof PathsContainer) {
             return $app->publicPath($path);
         }
 
