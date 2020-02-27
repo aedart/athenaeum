@@ -130,3 +130,18 @@ if (!function_exists('storage_path')) {
         return paths()->storagePath($path);
     }
 }
+
+if (!function_exists('public_path')) {
+
+    /**
+     * Get a path within the "public" directory
+     *
+     * @param string $path [optional]
+     *
+     * @return string
+     */
+    function public_path(string $path = ''): string
+    {
+        return paths()->publicPath($path);
+    }
+}
