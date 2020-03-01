@@ -6,7 +6,7 @@ description: How to use setup exception handling
 
 Presumably, your legacy application already has some kind of [error](https://www.php.net/manual/en/function.set-error-handler.php), [exception](https://www.php.net/manual/en/function.set-exception-handler.php) and [shutdown handling](https://www.php.net/manual/en/function.register-shutdown-function.php)[1].
 Therefore, **exception handling in Athenaeum Core Application is disabled, by default**.
-Nevertheless, should you not be happy with your existing solution, then perhaps the possibilities offered here, could prove beneficial.
+Should you not be happy with your existing solution, then perhaps the possibilities offered here, could prove beneficial.
 At the very least, it might give you some inspiration.
 
 [[TOC]]
