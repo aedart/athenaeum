@@ -5,16 +5,32 @@ actionLink: /archive/current/
 footer: Copyright © 2018-present Alin Eugen Deac, License BSD-3-Clause
 ---
 
-Athenaeum is a collection of various library components. Most of these are based on [Laravel](https://laravel.com/) packages.
+Athenaeum is a [mono repository](https://en.wikipedia.org/wiki/Monorepo); a collection of various packages. 
+The majority are based on well known components, such as those offered by [Laravel](https://laravel.com/).
+Some of the key packages that are offered by Athenaeum, are the following:
 
-The majority used to exist inside their own repositories (and packages).
-However, due to limited time, it became a burden having to maintain that many repositories.
-Therefore, I decided to migrate them into a single package.
-If you have previously used any `Aedart\*` packages, then you should be able to find most of those components here.
+### [Config](/archive/current/config)
 
-Please explore the [available components](/archive/current/).
+_A configuration loader, supporting *.ini, *.json, *.php and *.yml._
 
-## Not A Framework
+### [Core](/archive/current/core)
 
-It is not the intent nor purpose of this package to act as a framework.
-As previously mentioned, it's just a collection of utilities.
+_A custom Laravel Application implementation, intended to be integrated into legacy applications._
+
+### [Dto](/archive/current/dto)
+
+_Data Transfer Object abstraction._
+
+### [Http Clients](/archive/current/http/clients) 
+
+_Http Client wrapper, with a Manager able to handle multiple "profiles"._
+
+### [Support](/archive/current/support) 
+
+_Aware-of Helpers for Laravel and DTOs._
+
+## Not a Framework
+
+Despite the amount of packages, you should not mistake Athenaeum for a framework.
+It is not the intent nor purpose of this mono repository to act as a framework.
+The majority of the offered packages, are merely helpers and utilities.
