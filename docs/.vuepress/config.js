@@ -69,10 +69,11 @@ module.exports = {
  * @return {string}
  */
 function resolveBasePath() {
+    console.info('ENVIRONMENT', process.env.NODE_ENV);
+
     if(process.env.NODE_ENV === 'development'){
-        console.info('ENVIRONMENT', process.env.NODE_ENV);
         return '/';
     }
 
-    return /athenaeum/;
+    return '/athenaeum/';
 }
