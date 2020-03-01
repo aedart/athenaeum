@@ -247,15 +247,3 @@ The benefit of using an "Aware-of" Helper approach, is that your component(s) ca
 Furthermore, you always have the possibility to overwrite it's methods, meaning that a different implementation could be returned as a default, should you require such.
 Regardless, you as the developer have to make the choice, of how to resolve your dependencies within your legacy application.
 One approach might work for a particular situation, but not for another.
-
-::: tip Live Template
-If you are using [PHP Storm](https://www.jetbrains.com/phpstorm/), then you might find the `gst` [Live Template](https://www.jetbrains.com/help/phpstorm/using-live-templates.html) helpful.
-It offers a quick way to implement Aware-of Helpers.
-It is available in the [Athenaeum Repository](https://github.com/aedart/athenaeum/blob/master/.editor/Aedart_Athenaeum.xml), along a few other Live Templates (_that might not be as useful!_).
-
-#### Other IDEs
-
-If you prefer other IDEs, and you are skilled at creating "templates" or "scaffolds", then please help out.
-Share your version of a "Aware-of" template. Other developers will surely thank you for it :)
-It the meantime, perhaps this [Generator](../../support/properties/) could help you.
-:::

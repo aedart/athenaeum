@@ -158,7 +158,8 @@ module.exports.sidebar = function(){
                         'support/properties/',
                         'support/properties/available-helpers',
                     ]
-                }
+                },
+                'support/live-templates',
             ]
         },
         {
