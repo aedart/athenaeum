@@ -210,13 +210,13 @@ $app->destroy();
 ```
 
 Ensuring clean and graceful application shutdown, is a common problem for many applications.
-In the next section, possible solutions are explored.
+In the next section, a possible solution is explored.
 
 ## Graceful Shutdown
 
 Depending upon your registered service providers, or application's overall logic, it may require termination and shutdown logic.
-For instance, you may require logic that ensures all open database transactions to are committed or rolled back, in case of exceptions.
-Or perhaps you may logic, that closes the current session, file points, or other resources.
+For instance, you may require logic that ensures all open database transactions are committed, or perhaps rolled back in case of exceptions.
+Or perhaps you may require logic, that closes the current session, file points, or other resources.
 A possible solution is to utilise the `terminating()` method.
 It registers callback methods that will be executed, when `terminate()` is invoked.
 
@@ -231,13 +231,13 @@ $app->terminating(function(){
 $app->terminate(); // Triggers the registered "terminating" callback method
 ```
 
-If an exception is thrown, however, the `terminate()` method might never be reached.
+Unfortunately, if an exception is thrown, the `terminate()` method might never be reached.
 All of your registered callbacks are therefore not invoked.
 This could prove problematic, if your application depends on being able to perform ["graceful shutdown"](https://en.wikipedia.org/wiki/Graceful_exit) logic.
 
 ### Encapsulate logic via `run()`
 
-Another possible solution could be, to encapsulate your legacy application's logic via the `run()` method.
+A different solution could be, to encapsulate your legacy application's logic via the `run()` method.
 It accepts a single callback. If the callback should fail, e.g. an exception is thrown, it will be captured by the `run()` method and passed on to the exception handling mechanism.
 Once the exception has been handled, code execution is resumed and the `terminate()` method is triggered.
 
@@ -260,51 +260,110 @@ $app->destroy();
 
 If the above shown approach is possible for you to implement, then it could contribute towards allowing graceful shutdown.   
 
-### Terminate in your Exception Handler
+### Avoid using `terminating()`? 
 
-A different possibility could be, to perform application termination in your "last resort" exception handler.
+One could argue that you should avoid registering callbacks, via the `terminating()` method.
+But this might not always be possible.
+Imagine that for every request, _if all goes well_, you application needs to commit open database transactions, before closing it's connection gracefully.
+It makes sense to use the `terminate()`, in order to achieve such.
+
+```php
+$app->terminating(function(){
+    $db = IoCFacade::tryMake(Db::class);
+
+    if($db->hasOpenTransations()){
+        $db->commit();
+    }
+    
+    $db->close();
+});
+
+// ... later in your application ...
+$app->terminate();
+```
+
+::: tip
+Terminating callbacks can also be registered in your Service Provider's [boot method](https://laravel.com/docs/6.x/providers#the-boot-method).
+
+```php
+// In your service provider
+public function boot(Application $app)
+{
+    $app->terminating(function($app){
+        $db = $app->make(Db::class);
+    
+        if($db->hasOpenTransations()){
+            $db->commit();
+        }
+        
+        $db->close();
+    });
+}
+```
+:::
+
+### Use Handles to Cleanup 
+
+Now, if an exception is encountered, then you could use make use of an exception handler;
+one which ensures to rollback any open database transactions - _or perform other cleanup routines_ - but avoid actually dealing with any exception!
+Any exception would just be passed on to the next registered handler.
 
 ```php
 <?php
 
-class LastResortExceptionHandler extends BaseExceptionHandler
+namespace Acme\Db\Cleanup;
+
+class RollsBackTransactions extends BaseExceptionHandler
 {
     public function handle(Throwable $exception): bool
     {
-        if( ! $this->runningInConsole()){
-            // ... not shown ...
+        $db = IoCFacade::tryMake(Db::class);
+    
+        if($db->hasOpenTransations()){
+            $db->rollback();
         }
+        
+        $db->close();        
 
-        // Terminate the application
-        $app = $this->getApplication();
-        if(isset($app) && $app->isRunning()){
-            $app->terminate();
-        }
-
-        return true;
+        // Allow exception to be passed on...
+        return false;
     }
 }
 ```
 
-Unfortunately, this requires all of your "leaf" exception handlers return `false`, in order for the above shown handler to be reached.
-This approach is not considered to be very clean - _and not recommended!_
-But, depending on your application's complexity and logic, it might work for you.
+If such an approach is used, then your `handlers` array could look something similar, to the below illustrated example.
+In the top section of the array, you would place handlers that explicitly deal with application cleanup routines, whereas the middle and bottom section of the array would place handlers that deal with exceptions.
 
-### Avoid using `terminating()`? 
+```php
+<?php
+return [
 
-One could argue that you should avoid registering callbacks, via the `terminating()` method.
-Then, you could attempt to perform required cleanup and shutdown logic via respective registered exception handlers.
-For instance, if you encounter a database query exception, then an appropriate "database" exception handler could ensure to commit or rollback open transactions.
-This would perhaps be the most "clean" way to go about graceful shutdown logic.
-However, other services might still require termination logic to be executed.
-If you try to handle all kinds of situations inside your exception handlers, you could end up with very complex code to maintain. 
+    // ... previous not shown ...
+
+    'handlers' => [
+        // Cleanup         
+        Acme\Db\Cleanup\RollsBackTransactions::class,
+        Acme\Session\Cleanup\ClosesSessions::class,
+        Acme\Storage\Files\RemovesTempUploadedFiles::class,
+
+        // Handles exceptions
+        Acme\Exceptions\Handlers\EditorExceptions::class,
+        Acme\Exceptions\Handlers\ShoppingExceptions::class,
+        Acme\Exceptions\Handlers\NavigationExceptions::class,
+        Acme\Exceptions\Handlers\DbExceptions::class,
+
+        // Last resort - if all else fails...
+        Acme\Exceptions\Handlers\LastResortExceptionHandler::class
+    ]
+];
+```
 
 Ultimately, the burden of ensuring graceful shutdown falls on your shoulders.
 How you go about it, is entirely up to you.
-The above illustrated examples are nothing more than possible solutions.
+The above illustrated examples is nothing more than a possible solution.
 
 ## Onward
 
 Error, exception & shutdown handling is by no means a trivial task.
 Perhaps your existing mechanism is sufficient and gets the job done.
-If not, perhaps this package's exception handling offers a suitable alternative.
+If not, perhaps this package's exception handling can offer a suitable alternative.
