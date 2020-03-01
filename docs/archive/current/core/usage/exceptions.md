@@ -308,14 +308,16 @@ Now, if an exception is encountered, then you could use make use of an exception
 one which ensures to rollback any open database transactions - _or perform other cleanup routines_ - but avoid actually dealing with any exception!
 Any exception would just be passed on to the next registered handler.
 
-```php
+```php{5}
 <?php
 
 namespace Acme\Db\Cleanup;
 
-class RollsBackTransactions extends BaseExceptionHandler
+use Aedart\Core\Exceptions\Handlers\CleanupHandler;
+
+class RollsBackTransactions extends CleanupHandler
 {
-    public function handle(Throwable $exception): bool
+    public function cleanup(Throwable $exception): void
     {
         $db = IoCFacade::tryMake(Db::class);
     
@@ -323,10 +325,7 @@ class RollsBackTransactions extends BaseExceptionHandler
             $db->rollback();
         }
         
-        $db->close();        
-
-        // Allow exception to be passed on...
-        return false;
+        $db->close();
     }
 }
 ```
@@ -344,7 +343,7 @@ return [
         // Cleanup         
         Acme\Db\Cleanup\RollsBackTransactions::class,
         Acme\Session\Cleanup\ClosesSessions::class,
-        Acme\Storage\Files\RemovesTempUploadedFiles::class,
+        Acme\Storage\Cleanup\RemovesFileLock::class,
 
         // Handles exceptions
         Acme\Exceptions\Handlers\EditorExceptions::class,
