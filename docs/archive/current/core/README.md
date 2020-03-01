@@ -17,6 +17,7 @@ It offers the following features:
 - Exception Handling (_optional_)
 
 Please read the "Motivation" and "Limitations" section before continuing.
+_However, if you are entirely new to Laravel and have little experience working with it's Application and Services, then please start by reading the [newcomer chapter](../new.md)._
 
 ## Motivation
 
