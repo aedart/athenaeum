@@ -1,10 +1,11 @@
 {
     "name": "aedart/athenaeum-core",
-    "description": "Athenaeum core package",
+    "description": "Custom implementation of Laravel's Application, intended towards integration with legacy applications",
     "keywords": [
         "Athenaeum",
         "Core",
-        "Application"
+        "Application",
+        "Legacy Applications"
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "support": {
