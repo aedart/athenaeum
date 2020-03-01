@@ -1,15 +1,10 @@
 {
     "name": "aedart/athenaeum",
     "type": "library",
-    "description": "Athenaeum is collection of various library components that are built using several Laravel components",
+    "description": "Athenaeum is a mono repository; a collection of various PHP packages",
     "keywords": [
-        "Library",
-        "Utilities",
-        "Testing",
-        "Overloading",
-        "Magic Methods",
-        "DTO",
-        "Configuration"
+        "Athenaeum",
+        "Mono Repo"
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "support": {
