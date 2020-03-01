@@ -56,48 +56,7 @@ Similar logic is applied during PHP's shutdown, in case that an error was encoun
 ## Prerequisite
 
 This exception handling mechanism depends on Laravel's [Log](https://packagist.org/packages/illuminate/log)[2] package, as means of default reporting.
-You will need to require it.
-
-```shell
-composer require illuminate/log
-```
-
-[2]: _The `illuminate/log` package uses [MonoLog](https://github.com/Seldaek/monolog)._
-
-### Logger Configuration
-
-Copy the `logging.php` configuration file from Laravel's [Repository](https://github.com/laravel/laravel/blob/master/config/logging.php), and place it within your `/configs` directory.
-You can read more about the configuration in Laravel's [documentation](https://laravel.com/docs/6.x/logging).
-
-### Register `LogServiceProvider`
-
-Add the class path to `LogServiceProvider` in your `providers` array, in your `/configs/app.php` configuration file.
-
-```php
-<?php
-return [
-    // ... previous not shown ...
-
-    'providers' => [
-        \Illuminate\Log\LogServiceProvider::class,
-    ],
-
-    // ... remaining not shown ...
-];
-```
-
-At this point, you should have logging available in your application.
-
-::: tip Folder Permissions
-If you chose a log-profile that stores log entries in files, then please ensure that storage directory has the correct permissions.
-For instance, if you chose to store log-files in the `/storage/logs` directory, you _could_ change the permissions to the following:
-
-```shell
-chown -R www-data:www-data /storage/logs
-```
-
-_The above example applies to Linux environments. Please seek appropriate guidance regarding read/write permissions, if you work on a difference type of server environment._
-:::
+See [Logging chapter](logging.md) for how to install it.
 
 ## Enabling Exception Handling
 

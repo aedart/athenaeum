@@ -58,6 +58,7 @@ module.exports.sidebar = function(){
                         'core/usage/container',
                         'core/usage/events',
                         'core/usage/cache',
+                        'core/usage/logging',
                         'core/usage/console',
                         'core/usage/tasks',
                         'core/usage/exceptions',
