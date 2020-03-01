@@ -1,12 +1,12 @@
 {
     "devDependencies": {
         "@vuepress/plugin-back-to-top": "^1.3.1",
-        "cross-env": "^7.0.0",
-        "vuepress": "^1.3.1"
+        "vuepress": "^1.3.1",
+        "cross-env": "^7.0.0"
     },
     "scripts": {
         "docs:dev": "cross-env NODE_ENV=development ./node_modules/.bin/vuepress dev docs",
-        "docs:build": "cross-env NODE_ENV=development ./node_modules/.bin/vuepress vuepress build docs",
-        "docs:build-prod": "cross-env NODE_ENV=production ./node_modules/.bin/vuepress vuepress build docs"
+        "docs:build": "cross-env NODE_ENV=development ./node_modules/.bin/vuepress build docs",
+        "docs:build-prod": "cross-env NODE_ENV=production ./node_modules/.bin/vuepress build docs"
     }
 }
