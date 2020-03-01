@@ -4,7 +4,7 @@
 set -e
 
 # build
-yarn run docs:build
+yarn run docs:build-prod
 
 # navigate into the build output directory
 cd .build
