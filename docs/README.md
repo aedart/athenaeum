@@ -9,23 +9,23 @@ Athenaeum is a [mono repository](https://en.wikipedia.org/wiki/Monorepo); a coll
 The majority are based on well known components, such as those offered by [Laravel](https://laravel.com/).
 Some of the key packages that are offered by Athenaeum, are the following:
 
-### [Config](/archive/current/config)
+### [Config](archive/current/config)
 
 _A configuration loader, supporting *.ini, *.json, *.php and *.yml._
 
-### [Core](/archive/current/core)
+### [Core](archive/current/core)
 
 _A custom Laravel Application implementation, intended to be integrated into legacy applications._
 
-### [Dto](/archive/current/dto)
+### [Dto](archive/current/dto)
 
 _Data Transfer Object abstraction._
 
-### [Http Clients](/archive/current/http/clients) 
+### [Http Clients](archive/current/http/clients) 
 
 _Http Client wrapper, with a Manager able to handle multiple "profiles"._
 
-### [Support](/archive/current/support) 
+### [Support](archive/current/support) 
 
 _Aware-of Helpers for Laravel and DTOs._
 
