@@ -30,8 +30,8 @@ It contains everything you need to know, in order to satisfy the bare minimum.
 ## Or... `~41` minutes of Laracast
 
 [Laracast](https://laracasts.com) contains some of the best video tutorials, that I know.
-It contains over 1.500 lessons and will surely get you up to speed on Laravel, PHP, Testing, Vue.js and much more[1].
-Yes, it does **cost a bit of money**, but you do not have to commit for more than a month, if it is not to your liking.
+It contains over 1.500 lessons and will surely get you up to speed on Laravel, PHP, Testing, Vue.js and much more.
+Yes, it does **cost a bit of money**, but you do not have to commit for more than a month, if it is not to your liking[1].
 
 If this is a viable option for you, then you could consider the following lessons, before going through all of the available lessons (_membership is required_).
 
