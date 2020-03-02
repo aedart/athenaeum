@@ -4,7 +4,7 @@ description: How to use configuration files in Core Application
 
 # Configuration
 
-All of this package's configuration is located within your `/configs` directory (_this path [can be specified]((../integration.md)) in your application instance_).
+All of this package's configuration is located within your `/configs` directory (_this path [can be specified](../integration.md) in your application instance_).
 
 ## Get and Set Values
 

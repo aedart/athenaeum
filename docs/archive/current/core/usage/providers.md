@@ -8,7 +8,7 @@ description: How to Register Service Providers
 
 ## Register Service Providers
 
-Just like within a regular Laravel application, you can register you service providers in the `providers` array, located in your `/configs/app.php`. (_configuration path [can be specified]((../integration.md)) in your application instance_).
+Just like within a regular Laravel application, you can register you service providers in the `providers` array, located in your `/configs/app.php`. (_configuration path [can be specified](../integration.md) in your application instance_).
 
 ## Register a Laravel Service Provider
 
