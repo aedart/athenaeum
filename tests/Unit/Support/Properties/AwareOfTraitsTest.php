@@ -4,8 +4,8 @@ namespace Aedart\Tests\Unit\Support\Properties;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\TraitTestCase;
-use hanneskod\classtools\Iterator\ClassIterator;
 use Illuminate\Support\Str;
+use ReflectionClass;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -29,15 +29,25 @@ class AwareOfTraitsTest extends TraitTestCase
      * Returns all traits in "Aedart\Support\Properties" namespace
      *
      * @return array
+     * @throws \ReflectionException
      */
     public function awareOfTraits(): array
     {
+        $path = 'packages/Support/src/Properties';
+        $namespacePrefix = 'Aedart\Support\Properties';
+
         $finder = new Finder();
-        $iter = new ClassIterator($finder->in('packages/Support/src/Properties'));
+        $iter = $finder->in($path)->name('*.php');
 
         $output = [];
-        foreach ($iter as $reflection) {
-            /** @var \ReflectionClass $reflection */
+        foreach ($iter as $filePath => $fileInfo) {
+
+            // Obtain class path
+            $partial = str_replace($path, $namespacePrefix, $filePath);
+            $partial = str_replace('/', '\\', $partial);
+            $class = str_replace('.php', '', $partial);
+
+            $reflection = new ReflectionClass($class);
 
             $namespace = $reflection->getName();
             $parts = explode('\\', $reflection->getName());
