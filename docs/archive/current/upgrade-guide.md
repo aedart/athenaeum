@@ -6,6 +6,8 @@ description: Athenaeum Packages Upgrade Guide
 
 ## From version 3.x to 4.x.
 
+**Version 4.x is not yet released, this is a working document**
+
 ### Laravel `v7.x`
 
 Upgraded the `illuminate/*` packages to version `^7.0`.
