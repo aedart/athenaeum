@@ -7,6 +7,7 @@ use Aedart\Tests\TestCases\TraitTestCase;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * AwareOfTraitsTest
@@ -40,10 +41,11 @@ class AwareOfTraitsTest extends TraitTestCase
         $iter = $finder->in($path)->name('*.php');
 
         $output = [];
-        foreach ($iter as $filePath => $fileInfo) {
+        foreach ($iter as $fileInfo) {
+            /** @var SplFileInfo $fileInfo */
 
             // Obtain class path
-            $partial = str_replace($path, $namespacePrefix, $filePath);
+            $partial = str_replace($path, $namespacePrefix, $fileInfo->getPathname());
             $partial = str_replace('/', '\\', $partial);
             $class = str_replace('.php', '', $partial);
 
