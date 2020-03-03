@@ -50,5 +50,5 @@ class Box implements Populatable
 
 ::: warning
 `verifyRequired()` is not intended to be a saturated validation method for input.
-Please consider using a [Validator](https://laravel.com/docs/6.x/validation#validating-arrays), if you plan to populate objects with data received from a request or other untrusted source.
+Please consider using a [Validator](https://laravel.com/docs/7.x/validation#validating-arrays), if you plan to populate objects with data received from a request or other untrusted source.
 :::

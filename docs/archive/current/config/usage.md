@@ -43,4 +43,4 @@ $width = $repository->get('modules.box.width');
 
 ## Onward
 
-For more information about how to access the loaded configuration, please review [Laravel's documentation](https://laravel.com/docs/6.x/configuration).
+For more information about how to access the loaded configuration, please review [Laravel's documentation](https://laravel.com/docs/7.x/configuration).

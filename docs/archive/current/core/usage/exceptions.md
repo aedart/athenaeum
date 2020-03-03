@@ -16,7 +16,7 @@ At the very least, it might give you some inspiration.
 ## Laravel's Exception Handling?
 
 In the [limitations section](../README.md#limitations), it has been mentioned that the Athenaeum Core Application does not offer Http Request / Response Handling.
-Since Laravel's [Error & Exception Handling](https://laravel.com/docs/6.x/errors#the-exception-handler) mechanism depends on a Http Request and Response, it cannot be used directly with this application. 
+Since Laravel's [Error & Exception Handling](https://laravel.com/docs/7.x/errors#the-exception-handler) mechanism depends on a Http Request and Response, it cannot be used directly with this application. 
 More specifically, the `render()` method, in Laravel's [Exception Handler](https://github.com/laravel/framework/blob/6.x/src/Illuminate/Contracts/Debug/ExceptionHandler.php), requires a request and must return a response.
 Such cannot be satisfied by the Athenaeum Core Application.
 Therefore, a different mechanism is offered - _it is still inspired by that of Laravel!_
@@ -283,7 +283,7 @@ $app->terminate();
 ```
 
 ::: tip
-Terminating callbacks can also be registered in your Service Provider's [boot method](https://laravel.com/docs/6.x/providers#the-boot-method).
+Terminating callbacks can also be registered in your Service Provider's [boot method](https://laravel.com/docs/7.x/providers#the-boot-method).
 
 ```php
 // In your service provider
