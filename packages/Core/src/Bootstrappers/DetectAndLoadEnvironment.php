@@ -70,9 +70,9 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
 
         // Create Dot env instance
         $dotEnv = Dotenv::create(
+            Env::getRepository(),
             $this->app->environmentPath(),
-            $this->app->environmentFile(),
-            Env::getFactory()
+            $this->app->environmentFile()
         );
 
         // Attempt to load the environment. Allow failure, if required
