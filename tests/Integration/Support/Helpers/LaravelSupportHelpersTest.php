@@ -34,6 +34,7 @@ use Aedart\Support\Helpers\Http\RequestTrait;
 use Aedart\Support\Helpers\Logging\LogManagerTrait;
 use Aedart\Support\Helpers\Logging\LogTrait;
 use Aedart\Support\Helpers\Mail\MailerTrait;
+use Aedart\Support\Helpers\Mail\MailManagerTrait;
 use Aedart\Support\Helpers\Mail\MailQueueTrait;
 use Aedart\Support\Helpers\Notifications\NotificationDispatcherTrait;
 use Aedart\Support\Helpers\Notifications\NotificationFactoryTrait;
@@ -166,6 +167,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Mail
             'MailerTrait' => [ MailerTrait::class ],
+            'MailerManagerTrait' => [ MailManagerTrait::class ],
             'MailQueueTrait' => [ MailQueueTrait::class ],
 
             // Notifications
