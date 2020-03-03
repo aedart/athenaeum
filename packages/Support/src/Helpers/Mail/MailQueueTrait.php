@@ -74,7 +74,7 @@ trait MailQueueTrait
     {
         /** @var \Illuminate\Contracts\Mail\Factory $manager */
         $manager = Mail::getFacadeRoot();
-        if(isset($manager)){
+        if (isset($manager)) {
             return $manager->mailer();
         }
 
