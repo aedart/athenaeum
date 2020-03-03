@@ -86,6 +86,7 @@ This resulting in `$instance` still containing reference to the application, ins
 * `ContainerTrait`'s default value returns the `Facade` root application, instead of `Container`.
 (_Strictly speaking, this was not a defect. `Application` is an extended version of `Container`._)
 * Headers option not initially set in `DefaultHttpClient`.
+* Default return type of `MailerTrait` and `MailQueueTrait` (Laravel `v7.x` changed return of `Mail` Facade to `MailManager`).
 
 ## v3.x
 
