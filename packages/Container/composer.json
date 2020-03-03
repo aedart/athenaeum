@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "illuminate/container": "^6.17",
+        "illuminate/container": "^7.0",
         "aedart/athenaeum-contracts": "dev-master",
         "aedart/athenaeum-support": "dev-master"
     },
