@@ -72,6 +72,12 @@ trait MailerTrait
      */
     public function getDefaultMailer(): ?Mailer
     {
-        return Mail::getFacadeRoot();
+        /** @var \Illuminate\Contracts\Mail\Factory $manager */
+        $manager = Mail::getFacadeRoot();
+        if(isset($manager)){
+            return $manager->mailer();
+        }
+
+        return null;
     }
 }
