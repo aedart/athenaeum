@@ -207,7 +207,7 @@ class DefaultHttpClient implements Client
     /**
      * @inheritDoc
      */
-    public function useToken(string $token, string $scheme = 'Bearer'): Client
+    public function useTokenAuth(string $token, string $scheme = 'Bearer'): Client
     {
         return $this->withHeader('Authorization', trim($scheme. ' ' . $token));
     }

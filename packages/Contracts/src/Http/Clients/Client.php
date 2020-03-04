@@ -187,7 +187,7 @@ interface Client
      *
      * @return self
      */
-    public function useToken(string $token, string $scheme = 'Bearer'): self;
+    public function useTokenAuth(string $token, string $scheme = 'Bearer'): self;
 
     /**
      * Apply a set of options for the next request
