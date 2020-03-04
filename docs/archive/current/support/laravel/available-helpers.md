@@ -116,6 +116,7 @@ Corresponding Aware-of interfaces can be found inside the `Aedart\Contracts\Supp
 
 | Trait        | Defaults to  |
 | ------------ | -------------------- |
+| <small>`Aedart\Support\Helpers\Http\ClientFactoryTrait`</small> | <small>`Illuminate\Http\Client\Factory`</small> |
 | <small>`Aedart\Support\Helpers\Http\RequestTrait`</small> | <small>`Illuminate\Http\Request`</small> |
 
 ## Logging
