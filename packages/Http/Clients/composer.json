@@ -23,7 +23,7 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "guzzlehttp/guzzle": "~6.5",
+        "guzzlehttp/guzzle": "^6.5|^7.0",
         "aedart/athenaeum-contracts": "dev-master",
         "aedart/athenaeum-support": "dev-master"
     },

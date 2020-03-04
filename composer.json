@@ -1,28 +1,12 @@
 {
     "name": "aedart/athenaeum",
-    "type": "library",
     "description": "Athenaeum is a mono repository; a collection of various PHP packages",
-    "keywords": [
-        "Athenaeum",
-        "Mono Repo"
-    ],
-    "homepage": "https://aedart.github.io/athenaeum/",
-    "support": {
-        "issues": "https://github.com/aedart/athenaeum/issues",
-        "source": "https://github.com/aedart/athenaeum"
-    },
     "license": "BSD-3-Clause",
-    "authors": [
-        {
-            "name": "Alin Eugen Deac",
-            "email": "aedart@gmail.com"
-        }
-    ],
     "require": {
         "php": ">=7.4.0",
         "dragonmantank/cron-expression": "^2.3",
         "fzaninotto/faker": "1.9.*",
-        "guzzlehttp/guzzle": "~6.5",
+        "guzzlehttp/guzzle": "^6.5|^7.0",
         "illuminate/cache": "^7.0",
         "illuminate/config": "^7.0",
         "illuminate/console": "^7.0",
@@ -91,12 +75,6 @@
         "aedart/athenaeum-testing": "self.version",
         "aedart/athenaeum-utils": "self.version"
     },
-    "bin": [
-        "athenaeum"
-    ],
-    "suggest": {
-        "twig/twig": "Required for using aware-of generator"
-    },
     "scripts": {
         "post-install-cmd": [
             "@test-env",
@@ -117,21 +95,14 @@
         "cs": "vendor/bin/ecs check --ansi",
         "cs-fix": "vendor/bin/ecs check --fix --ansi"
     },
-    "scripts-descriptions": {
-        "test-env": "Create .testing environment file, if it does not exist",
-        "update-bin": "Updates all vendor-bin dependencies",
-        "check": "Check PHP Compatibility",
-        "cs": "Perform an 'Easy Coding Standard' check",
-        "cs-fix": "Perform an 'Easy Coding Standard' check and automatically fix warnings"
-    },
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "4.0.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
