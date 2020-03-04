@@ -28,9 +28,9 @@ The original commands are still available using the `athenaeum` console applicat
 * `DefaultHttpClient` and `JsonHttpClient` have `http_errors` set to `false` by default.
 (_Can be overwritten via configuration or via `withOption()` method_).
 See Guzzle [Documentation](http://docs.guzzlephp.org/en/stable/request-options.html#http-errors) for additional details.
-* `DefaultHttpClient` and `JsonHttpClient` have `connect_timeout` set to `5` seconds by default.
+* `DefaultHttpClient` and `JsonHttpClient` have `connect_timeout` set to `5` seconds and `timeout` to 10 seconds, by default.
 (_Can be overwritten via configuration or via `withOption()` method_).
-See Guzzle [Documentation](http://docs.guzzlephp.org/en/stable/request-options.html#connect-timeout) for additional details.
+See Guzzle [Documentation](http://docs.guzzlephp.org/en/stable/request-options.html) for additional details.
 * `JsonHttpClient` now sets `Accept` and `Content-Type` to `application/json` if not specified.
 (_Previously only the `Content-Type` header was automatically set._)
 * Deprecated all aware-of helpers that contained `*\Mixed\*` in their namespace.
