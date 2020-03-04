@@ -190,6 +190,22 @@ interface Client
     public function useTokenAuth(string $token, string $scheme = 'Bearer'): self;
 
     /**
+     * Set the next request's timeout
+     *
+     * @param float $seconds
+     *
+     * @return self
+     */
+    public function setTimeout(float $seconds): self;
+
+    /**
+     * Get the next request's timeout
+     *
+     * @return float Duration in seconds
+     */
+    public function getTimeout(): float;
+
+    /**
      * Apply a set of options for the next request
      *
      * Method will merge given options with Client's default options

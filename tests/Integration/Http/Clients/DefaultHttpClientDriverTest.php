@@ -281,6 +281,25 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
     /**
      * @test
      */
+    public function canSpecifyMultipleHeaders()
+    {
+        $client = $this->getHttpClient();
+
+        $value = 'Yuck, shiny shore. go to cabo rojo.';
+        $client->withHeaders([
+            'x-token' => $value,
+            'y-token' => $value
+        ])
+        ->withHeader('z-token', $value);
+
+        $this->assertSame($value, $client->getHeader('x-token'));
+        $this->assertSame($value, $client->getHeader('y-token'));
+        $this->assertSame($value, $client->getHeader('z-token'));
+    }
+
+    /**
+     * @test
+     */
     public function canObtainDriver()
     {
         $client = $this->getHttpClient();
@@ -428,5 +447,21 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
         $result = $client->getOption('timeout');
 
         $this->assertGreaterThan(0, $result, 'Timeout SHOULD be set!');
+    }
+
+    /**
+     * @test
+     */
+    public function canSpecifyTimeout()
+    {
+        $client = $this->getHttpClient();
+
+        $seconds = (float) $this->getFaker()->randomDigitNotNull;
+
+        $result = $client
+            ->setTimeout($seconds)
+            ->getTimeout();
+
+        $this->assertSame($seconds, $result, 'Request timeout incorrect');
     }
 }

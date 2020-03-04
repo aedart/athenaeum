@@ -217,11 +217,27 @@ class DefaultHttpClient implements Client
     }
 
     /**
+     * @inheritDoc
+     */
+    public function setTimeout(float $seconds): Client
+    {
+        return $this->withOption('timeout', $seconds);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTimeout(): float
+    {
+        return (float) $this->getOption('timeout');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function withOptions(array $options = []): Client
     {
-        $this->optionsForNextRequest = array_merge_recursive($this->optionsForNextRequest, $options);
+        $this->optionsForNextRequest = array_merge($this->optionsForNextRequest, $options);
 
         return $this;
     }
