@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 
 /**
@@ -306,5 +307,90 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertNotEmpty($content);
+    }
+
+    /**
+     * @test
+     */
+    public function sendsBasicAuthHeader()
+    {
+        $mockedResponses = $this->makeResponseMock([
+            new Response(200, [ 'X-Foo' => 'Bar' ])
+        ]);
+
+        $client = $this->getHttpClient();
+
+        $faker = $this->getFaker();
+        $username = $faker->userName;
+        $password = $faker->password;
+
+        $client
+            ->withOption('handler', $mockedResponses)
+            ->useBasicAuth($username, $password)
+            ->get('/get');
+
+        $headers = $this->lastRequest->getHeaders();
+        ConsoleDebugger::output($headers);
+
+        $this->assertArrayHasKey('Authorization', $headers);
+        $this->assertStringContainsString('Basic', $headers['Authorization'][0]);
+    }
+
+    /**
+     * @test
+     */
+    public function sendsDigestAuthHeader()
+    {
+        $mock = new MockHandler([new Response()]);
+
+        $client = $this->getHttpClient();
+
+        $faker = $this->getFaker();
+        $username = $faker->userName;
+        $password = $faker->password;
+
+        $client
+            ->withOption('handler', $mock)
+            ->useDigestAuth($username, $password)
+            ->get('/get');
+
+        //$headers = $this->lastRequest->getHeaders();
+
+        // Test inspired by Guzzle's own way of testing this.
+        $lastOptions = $mock->getLastOptions();
+
+        ConsoleDebugger::output($lastOptions['curl']);
+
+        $this->assertSame([
+            CURLOPT_HTTPAUTH => 2,
+            CURLOPT_USERPWD => $username . ':' . $password
+        ], $lastOptions['curl']);
+    }
+
+    /**
+     * @test
+     */
+    public function sendsTokenAuthHeader()
+    {
+        $mockedResponses = $this->makeResponseMock([
+            new Response(200, [ 'X-Foo' => 'Bar' ])
+        ]);
+
+        $client = $this->getHttpClient();
+
+        $faker = $this->getFaker();
+        $token = sha1($faker->password);
+
+        $client
+            ->withOption('handler', $mockedResponses)
+            ->useTokenAuth($token)
+            ->get('/get');
+
+        $headers = $this->lastRequest->getHeaders();
+        ConsoleDebugger::output($headers);
+
+        $this->assertArrayHasKey('Authorization', $headers);
+        $this->assertStringContainsString('Bearer', $headers['Authorization'][0]);
+        $this->assertStringContainsString($token, $headers['Authorization'][0]);
     }
 }
