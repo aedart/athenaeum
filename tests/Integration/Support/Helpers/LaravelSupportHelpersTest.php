@@ -30,6 +30,7 @@ use Aedart\Support\Helpers\Filesystem\StorageFactoryTrait;
 use Aedart\Support\Helpers\Filesystem\StorageTrait;
 use Aedart\Support\Helpers\Foundation\AppTrait;
 use Aedart\Support\Helpers\Hashing\HashTrait;
+use Aedart\Support\Helpers\Http\ClientFactoryTrait;
 use Aedart\Support\Helpers\Http\RequestTrait;
 use Aedart\Support\Helpers\Logging\LogManagerTrait;
 use Aedart\Support\Helpers\Logging\LogTrait;
@@ -159,6 +160,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'HashTrait' => [ HashTrait::class ],
 
             // Http
+            'ClientFactoryTrait' => [ ClientFactoryTrait::class ],
             'RequestTrait' => [ RequestTrait::class ],
 
             // Logging
