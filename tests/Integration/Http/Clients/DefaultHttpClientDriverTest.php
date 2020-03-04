@@ -464,4 +464,52 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
 
         $this->assertSame($seconds, $result, 'Request timeout incorrect');
     }
+
+    /**
+     * @test
+     */
+    public function hasFollowRedirectsSetByDefault()
+    {
+        $client = $this->getHttpClient();
+
+        $result = $client->getOption('allow_redirects');
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame(1, $result['max'], 'Max amount of redirects is incorrect');
+        $this->assertSame(true, $result['strict'], 'Should be strict redirects');
+        $this->assertSame(true, $result['referer'], 'Should have referer set to true');
+        $this->assertSame(['http', 'https'], $result['protocols'], 'Incorrect protocols');
+        $this->assertSame(false, $result['track_redirects'], 'Should not track redirects');
+    }
+
+    /**
+     * @test
+     */
+    public function canDisableRedirectBehaviour()
+    {
+        $client = $this->getHttpClient();
+
+        $client->maxRedirects(0);
+
+        $result = $client->getOption('allow_redirects');
+
+        $this->assertFalse($result, 'Allow redirects should be disabled');
+    }
+
+    /**
+     * @test
+     */
+    public function canSpecifyMaxRedirects()
+    {
+        $client = $this->getHttpClient();
+
+        $client->maxRedirects(5);
+
+        $result = $client->getOption('allow_redirects');
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame(5, $result['max'], 'Max amount of redirects is incorrect');
+    }
 }

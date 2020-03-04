@@ -190,6 +190,28 @@ interface Client
     public function useTokenAuth(string $token, string $scheme = 'Bearer'): self;
 
     /**
+     * Set the maximum amount of redirects to follow,
+     * for the next request.
+     *
+     * If follow redirects was disabled and an amount
+     * other than 0 is specified, then follow behaviour
+     * is enabled again, for next request.
+     *
+     * @param int $amount If 0 given, then follow redirects is disabled.
+     *
+     * @return self
+     */
+    public function maxRedirects(int $amount): self;
+
+    /**
+     * Disables the follow redirects behaviour,
+     * for the next request
+     *
+     * @return self
+     */
+    public function disableRedirects(): self;
+
+    /**
      * Set the next request's timeout
      *
      * @param float $seconds

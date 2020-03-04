@@ -23,6 +23,13 @@ class DefaultHttpClient implements Client
         'http_errors' => false,
         'connect_timeout' => 5,
         'timeout' => 10,
+        'allow_redirects' => [
+            'max' => 1,
+            'strict' => true,
+            'referer' => true,
+            'protocols' => ['http', 'https'],
+            'track_redirects' => false
+        ]
     ];
 
     /**
@@ -214,6 +221,32 @@ class DefaultHttpClient implements Client
     public function useTokenAuth(string $token, string $scheme = 'Bearer'): Client
     {
         return $this->withHeader('Authorization', trim($scheme. ' ' . $token));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function maxRedirects(int $amount): Client
+    {
+        if($amount === 0){
+            return $this->disableRedirects();
+        }
+
+        return $this->withOption('allow_redirects', [
+            'max' => $amount,
+            'strict' => true,
+            'referer' => true,
+            'protocols' => ['http', 'https'],
+            'track_redirects' => false
+        ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function disableRedirects(): Client
+    {
+        return $this->withOption('allow_redirects', false);
     }
 
     /**
