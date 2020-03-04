@@ -25,12 +25,11 @@ Yet, this was "hack" solution that potentially conflicted with Laravel. This was
 * Deprecated `\Aedart\Console\CommandBase`, `\Aedart\Console\AwareOfScaffoldCommand` and `\Aedart\Console\CreateAwareOfCommand` components.
 Commands have been replaced with updated versions within the [`aedart/athenaeum-support `](https://packagist.org/packages/aedart/athenaeum-support) package.
 The original commands are still available using the `athenaeum` console application.
-* `DefaultHttpClient` and `JsonHttpClient` have the following options set as default.
+* `DefaultHttpClient` and `JsonHttpClient` have the following [options](http://docs.guzzlephp.org/en/stable/request-options.html) set as default.
+(_Can be overwritten via configuration or via `withOption()` method_)
   * `http_errors` set to `false`.
   * `connect_timeout` set to `5` seconds and `timeout` to 10 seconds.
-  * `allow_redirects` set to maximum of `1` redirect
-(_Can be overwritten via configuration or via `withOption()` method_).
-See Guzzle [Documentation](http://docs.guzzlephp.org/en/stable/request-options.html) for additional details.
+  * `allow_redirects` set to maximum of `1` redirect.
 * `JsonHttpClient` now sets `Accept` and `Content-Type` to `application/json` if not specified.
 (_Previously only the `Content-Type` header was automatically set._)
 * Deprecated all aware-of helpers that contained `*\Mixed\*` in their namespace.
