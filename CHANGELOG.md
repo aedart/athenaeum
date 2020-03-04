@@ -94,6 +94,8 @@ This resulting in `$instance` still containing reference to the application, ins
 (_Strictly speaking, this was not a defect. `Application` is an extended version of `Container`._)
 * Headers option not initially set in `DefaultHttpClient`.
 * Default return type of `MailerTrait` and `MailQueueTrait` (Laravel `v7.x` changed return of `Mail` Facade to `MailManager`).
+* `withOptions()` incorrectly merged options, in `DefaultHttpClient` and `JsonHttpClient`.
+This caused strange behaviour, when attempting to overwrite an already set option.
 
 ## v3.x
 
