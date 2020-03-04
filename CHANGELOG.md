@@ -25,6 +25,8 @@ Yet, this was "hack" solution that potentially conflicted with Laravel. This was
 * Deprecated `\Aedart\Console\CommandBase`, `\Aedart\Console\AwareOfScaffoldCommand` and `\Aedart\Console\CreateAwareOfCommand` components.
 Commands have been replaced with updated versions within the [`aedart/athenaeum-support `](https://packagist.org/packages/aedart/athenaeum-support) package.
 The original commands are still available using the `athenaeum` console application.
+* `DefaultHttpClient` and `JsonHttpClient` have `http_errors` set to `false` by default.
+(_Can be overwritten via configuration or via `withOption()` method_).
 * `JsonHttpClient` now sets `Accept` and `Content-Type` to `application/json` if not specified.
 (_Previously only the `Content-Type` header was automatically set._)
 * Deprecated all aware-of helpers that contained `*\Mixed\*` in their namespace.
