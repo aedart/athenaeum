@@ -74,6 +74,7 @@ It will highjack the `app` binding, which will cause your application to behave 
 * `string` and `int` `Milestone` aware components
 * `ApplicationInitiator` and `AthenaeumTestHelper`, testing utilities for the custom adaptation of Laravel's Application.
 * `MailManagerAware` and `MailManagerTrait` Laravel Aware-of Helper.
+* Http- `ClientFactoryAware` and `ClientFactoryTrait` Laravel Aware-of Helper.
 
 #### Fixed
 
