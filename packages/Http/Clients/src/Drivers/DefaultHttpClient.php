@@ -220,7 +220,7 @@ class DefaultHttpClient implements Client
      */
     public function useTokenAuth(string $token, string $scheme = 'Bearer'): Client
     {
-        return $this->withHeader('Authorization', trim($scheme. ' ' . $token));
+        return $this->withHeader('Authorization', trim($scheme . ' ' . $token));
     }
 
     /**
@@ -228,7 +228,7 @@ class DefaultHttpClient implements Client
      */
     public function maxRedirects(int $amount): Client
     {
-        if($amount === 0){
+        if ($amount === 0) {
             return $this->disableRedirects();
         }
 
