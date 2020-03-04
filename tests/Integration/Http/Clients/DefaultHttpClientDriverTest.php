@@ -417,4 +417,16 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
 
         $this->assertGreaterThan(0, $result, 'Connection Timeout SHOULD be set!');
     }
+
+    /**
+     * @test
+     */
+    public function hasRequestTimeoutSetByDefault()
+    {
+        $client = $this->getHttpClient();
+
+        $result = $client->getOption('timeout');
+
+        $this->assertGreaterThan(0, $result, 'Timeout SHOULD be set!');
+    }
 }
