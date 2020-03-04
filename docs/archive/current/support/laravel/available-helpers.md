@@ -129,6 +129,7 @@ Corresponding Aware-of interfaces can be found inside the `Aedart\Contracts\Supp
 
 | Trait        | Defaults to  |
 | ------------ | -------------------- |
+| <small>`Aedart\Support\Helpers\Mail\MailManagerTrait`</small> | <small>`Illuminate\Contracts\Mail\Factory`</small> |
 | <small>`Aedart\Support\Helpers\Mail\MailerTrait`</small> | <small>`Illuminate\Contracts\Mail\Mailer`</small> |
 | <small>`Aedart\Support\Helpers\Mail\MailQueueTrait`</small> | <small>`Illuminate\Contracts\Mail\MailQueue`</small> |
 
