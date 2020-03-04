@@ -218,7 +218,7 @@ interface Client
      *
      * @return self
      */
-    public function setTimeout(float $seconds): self;
+    public function withTimeout(float $seconds): self;
 
     /**
      * Get the next request's timeout

@@ -252,7 +252,7 @@ class DefaultHttpClient implements Client
     /**
      * @inheritDoc
      */
-    public function setTimeout(float $seconds): Client
+    public function withTimeout(float $seconds): Client
     {
         return $this->withOption('timeout', $seconds);
     }

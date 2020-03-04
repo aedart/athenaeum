@@ -459,7 +459,7 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
         $seconds = (float) $this->getFaker()->randomDigitNotNull;
 
         $result = $client
-            ->setTimeout($seconds)
+            ->withTimeout($seconds)
             ->getTimeout();
 
         $this->assertSame($seconds, $result, 'Request timeout incorrect');
