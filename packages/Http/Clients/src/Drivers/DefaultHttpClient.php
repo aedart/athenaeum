@@ -19,7 +19,9 @@ class DefaultHttpClient implements Client
      *
      * @var array
      */
-    protected array $initialOptions = [];
+    protected array $initialOptions = [
+        'http_errors' => false,
+    ];
 
     /**
      * Options for the next request
@@ -42,7 +44,7 @@ class DefaultHttpClient implements Client
      */
     public function __construct(array $options = [])
     {
-        $this->initialOptions = $options;
+        $this->initialOptions = array_merge($this->initialOptions, $options);
         $this->resetOptionsForNextRequest();
 
         $this->client = new GuzzleClient($this->initialOptions);

@@ -393,4 +393,16 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
         $this->assertStringContainsString('Bearer', $headers['Authorization'][0]);
         $this->assertStringContainsString($token, $headers['Authorization'][0]);
     }
+
+    /**
+     * @test
+     */
+    public function httpErrorsAreDisabledByDefault()
+    {
+        $client = $this->getHttpClient();
+
+        $result = $client->getOption('http_errors');
+
+        $this->assertFalse($result, 'Http errors SHOULD be set to false');
+    }
 }
