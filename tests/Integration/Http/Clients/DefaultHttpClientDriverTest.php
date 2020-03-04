@@ -397,12 +397,24 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
     /**
      * @test
      */
-    public function httpErrorsAreDisabledByDefault()
+    public function hasHttpErrorsDisabledByDefault()
     {
         $client = $this->getHttpClient();
 
         $result = $client->getOption('http_errors');
 
         $this->assertFalse($result, 'Http errors SHOULD be set to false');
+    }
+
+    /**
+     * @test
+     */
+    public function hasConnectTimeoutSetByDefault()
+    {
+        $client = $this->getHttpClient();
+
+        $result = $client->getOption('connect_timeout');
+
+        $this->assertGreaterThan(0, $result, 'Connection Timeout SHOULD be set!');
     }
 }

@@ -21,6 +21,7 @@ class DefaultHttpClient implements Client
      */
     protected array $initialOptions = [
         'http_errors' => false,
+        'connect_timeout' => 5,
     ];
 
     /**
