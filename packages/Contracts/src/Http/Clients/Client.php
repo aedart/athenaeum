@@ -154,6 +154,42 @@ interface Client
     public function getHeader(string $name);
 
     /**
+     * Use Basic Http Authentication, for the next request
+     *
+     * @see https://tools.ietf.org/html/rfc7617
+     *
+     * @param string $username
+     * @param string $password
+     *
+     * @return self
+     */
+    public function useBasicAuth(string $username, string $password): self;
+
+    /**
+     * Use Digest Authentication, for the next request
+     *
+     * @see https://tools.ietf.org/html/rfc7616
+     *
+     * @param string $username
+     * @param string $password
+     *
+     * @return self
+     */
+    public function useDigestAuth(string $username, string $password): self;
+
+    /**
+     * Use a token as authentication, for the next request
+     *
+     * @see https://tools.ietf.org/html/rfc6750
+     *
+     * @param string $token
+     * @param string $scheme [optional] Basic Authentication Scheme
+     *
+     * @return self
+     */
+    public function useToken(string $token, string $scheme = 'Bearer'): self;
+
+    /**
      * Apply a set of options for the next request
      *
      * Method will merge given options with Client's default options

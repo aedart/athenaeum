@@ -189,6 +189,30 @@ class DefaultHttpClient implements Client
     }
 
     /**
+     * @inheritDoc
+     */
+    public function useBasicAuth(string $username, string $password): Client
+    {
+        return $this->withOption('auth', [ $username, $password ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function useDigestAuth(string $username, string $password): Client
+    {
+        return $this->withOption('auth', [ $username, $password, 'digest' ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function useToken(string $token, string $scheme = 'Bearer'): Client
+    {
+        return $this->withHeader('Authorization', trim($scheme. ' ' . $token));
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function withOptions(array $options = []): Client
