@@ -32,10 +32,15 @@ A Service Provider that [registers Console Commands and Schedules](console) via 
 
 A Service Provider that [registers Event Listeners and Subscribers](events) via configuration files. 
 
+## Http Clients
+
+The [Http Clients](http/clients) package has been redesigned, adding several new features to allow a more fluent experience.
+See the [migration guide](upgrade-guide.md) for details. 
+
 ### Upgraded Dependencies
 
 All dependencies have been upgraded to use the latest version.
-Athenaeum packages now make use of Laravel `^v6.17`, Symfony `v4.4.x`, Codeception `v4.1.x`, ...etc.
+Athenaeum packages now make use of Laravel `^v7.0`, Symfony `v5.0.x`, Codeception `v4.1.x`, ...etc.
 
 ### Improved Documentation
 
