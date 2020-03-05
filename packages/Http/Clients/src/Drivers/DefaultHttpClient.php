@@ -451,7 +451,7 @@ class DefaultHttpClient implements Client
     {
         $dataFormat = $this->initialOptions['data_format'] ?? $this->defaultDataFormat;
 
-        switch($dataFormat){
+        switch ($dataFormat) {
             case RequestOptions::FORM_PARAMS:
                 $this->formFormat();
                 break;
