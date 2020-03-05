@@ -25,6 +25,7 @@ Yet, this was "hack" solution that potentially conflicted with Laravel. This was
 * Deprecated `\Aedart\Console\CommandBase`, `\Aedart\Console\AwareOfScaffoldCommand` and `\Aedart\Console\CreateAwareOfCommand` components.
 Commands have been replaced with updated versions within the [`aedart/athenaeum-support `](https://packagist.org/packages/aedart/athenaeum-support) package.
 The original commands are still available using the `athenaeum` console application.
+* Http `Client` interface has been heavily redesigned, adding several new features. 
 * `DefaultHttpClient` and `JsonHttpClient` have the following [options](http://docs.guzzlephp.org/en/stable/request-options.html) set as default.
 (_Can be overwritten via configuration or via `withOption()` method_)
   * `http_errors` set to `false`.
