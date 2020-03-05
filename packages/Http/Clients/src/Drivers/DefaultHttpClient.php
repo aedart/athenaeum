@@ -452,6 +452,10 @@ class DefaultHttpClient implements Client
         $dataFormat = $this->initialOptions['data_format'] ?? $this->defaultDataFormat;
 
         switch($dataFormat){
+            case RequestOptions::FORM_PARAMS:
+                $this->formFormat();
+                break;
+
             case RequestOptions::JSON:
                 $this->jsonFormat();
                 break;
@@ -460,9 +464,8 @@ class DefaultHttpClient implements Client
                 $this->multipartFormat();
                 break;
 
-            case RequestOptions::FORM_PARAMS:
             default:
-                $this->formFormat();
+                $this->useDataFormat($dataFormat);
                 break;
         }
     }
