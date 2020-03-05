@@ -30,14 +30,14 @@ return [
         'default' => [
             'driver' => \Aedart\Http\Clients\Drivers\DefaultHttpClient::class,
             'options' => [
-
+                'data_format' => \GuzzleHttp\RequestOptions::FORM_PARAMS
             ]
         ],
 
         'json' => [
             'driver' => \Aedart\Http\Clients\Drivers\JsonHttpClient::class,
             'options' => [
-
+                'data_format' => \GuzzleHttp\RequestOptions::JSON
             ]
         ]
     ]
