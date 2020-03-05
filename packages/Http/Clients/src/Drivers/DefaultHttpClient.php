@@ -47,12 +47,40 @@ class DefaultHttpClient implements Client
     protected ?GuzzleClient $client = null;
 
     /**
+     * The data format to use
+     *
+     * @see http://docs.guzzlephp.org/en/stable/request-options.html#body
+     * @see http://docs.guzzlephp.org/en/stable/request-options.html#form-params
+     * @see http://docs.guzzlephp.org/en/stable/request-options.html#multipart
+     * @see http://docs.guzzlephp.org/en/stable/request-options.html#json
+     *
+     * @var string
+     */
+    protected string $dataFormat;
+
+    /**
+     * Default Accept header for json data format
+     *
+     * @var string
+     */
+    protected string $jsonAccept = 'application/json';
+
+    /**
+     * Default Content-Type header for json data format
+     *
+     * @var string
+     */
+    protected string $jsonContentType = 'application/json';
+
+    /**
      * DefaultHttpClient constructor.
      *
      * @param array $options [optional]
      */
     public function __construct(array $options = [])
     {
+        $this->formFormat();
+
         $this->initialOptions = array_merge($this->initialOptions, $options);
         $this->resetOptionsForNextRequest();
 
@@ -80,7 +108,9 @@ class DefaultHttpClient implements Client
      */
     public function post($uri, array $body = []): ResponseInterface
     {
-        return $this->request('POST', $uri, [ 'form_params' => $body ]);
+        return $this->request('POST', $uri, [
+            $this->getDataFormat() => $body
+        ]);
     }
 
     /**
@@ -88,7 +118,9 @@ class DefaultHttpClient implements Client
      */
     public function put($uri, array $body = []): ResponseInterface
     {
-        return $this->request('PUT', $uri, [ 'form_params' => $body ]);
+        return $this->request('PUT', $uri, [
+            $this->getDataFormat() => $body
+        ]);
     }
 
     /**
@@ -96,7 +128,9 @@ class DefaultHttpClient implements Client
      */
     public function delete($uri, array $body = []): ResponseInterface
     {
-        return $this->request('DELETE', $uri, [ 'form_params' => $body ]);
+        return $this->request('DELETE', $uri, [
+            $this->getDataFormat() => $body
+        ]);
     }
 
     /**
@@ -112,7 +146,9 @@ class DefaultHttpClient implements Client
      */
     public function patch($uri, array $body = []): ResponseInterface
     {
-        return $this->request('PATCH', $uri, [ 'form_params' => $body ]);
+        return $this->request('PATCH', $uri, [
+            $this->getDataFormat() => $body
+        ]);
     }
 
     /**
@@ -197,6 +233,71 @@ class DefaultHttpClient implements Client
         }
 
         return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function withAccept(string $contentType): Client
+    {
+        return $this->withHeader('Accept', $contentType);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function withContentType(string $contentType): Client
+    {
+        return $this->withHeader('Content-Type', $contentType);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function formFormat(): Client
+    {
+        return $this
+            ->useDataFormat('form_params')
+            ->withContentType('application/x-www-form-urlencoded');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function jsonFormat(): Client
+    {
+        return $this
+            ->useDataFormat('json')
+            ->withAccept($this->jsonAccept)
+            ->withContentType($this->jsonContentType);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function multipartFormat(): Client
+    {
+        return $this
+            ->useDataFormat('multipart')
+            ->withContentType('multipart/form-data');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function useDataFormat(string $format): Client
+    {
+        $this->dataFormat = $format;
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDataFormat(): string
+    {
+        return $this->dataFormat;
     }
 
     /**

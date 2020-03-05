@@ -512,4 +512,37 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
 
         $this->assertSame(5, $result['max'], 'Max amount of redirects is incorrect');
     }
+
+    /**
+     * @test
+     */
+    public function canUseFormDataFormat()
+    {
+        $client = $this->getHttpClient()
+            ->formFormat();
+
+        $this->assertSame('form_params', $client->getDataFormat());
+    }
+
+    /**
+     * @test
+     */
+    public function canUseJsonDataFormat()
+    {
+        $client = $this->getHttpClient()
+            ->jsonFormat();
+
+        $this->assertSame('json', $client->getDataFormat());
+    }
+
+    /**
+     * @test
+     */
+    public function canUseMultipartDataFormat()
+    {
+        $client = $this->getHttpClient()
+            ->multipartFormat();
+
+        $this->assertSame('multipart', $client->getDataFormat());
+    }
 }

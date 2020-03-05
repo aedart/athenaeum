@@ -154,6 +154,80 @@ interface Client
     public function getHeader(string $name);
 
     /**
+     * Use given Accept header for the next request
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept
+     *
+     * @param string $contentType
+     *
+     * @return self
+     */
+    public function withAccept(string $contentType): self;
+
+    /**
+     * Use given Content-Type for the next request
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
+     *
+     * @param string $contentType
+     *
+     * @return self
+     */
+    public function withContentType(string $contentType): self;
+
+    /**
+     * Use application/x-www-form-urlencoded as next request's body format.
+     *
+     * Method might set Accept or Content-Type headers,
+     * if required.
+     *
+     * @see useDataFormat
+     *
+     * @return self
+     */
+    public function formFormat(): self;
+
+    /**
+     * Use json as data format as next request's body format.
+     *
+     * Method might set Accept or Content-Type headers,
+     * if required.
+     *
+     * @see useDataFormat
+     *
+     * @return self
+     */
+    public function jsonFormat(): self;
+
+    /**
+     * Use multipart/form-data as next request's body format.
+     *
+     * Method might set Accept or Content-Type headers,
+     * if required.
+     *
+     * @see useDataFormat
+     *
+     * @return self
+     */
+    public function multipartFormat(): self;
+
+    /**
+     * Use the given data format for the next request
+     *
+     * @param string $format Driver specific format identifier
+     *
+     * @return self
+     */
+    public function useDataFormat(string $format): self;
+
+    /**
+     * Get the data format to use for the next request
+     *
+     * @return string Driver specific format identifier
+     */
+    public function getDataFormat(): string;
+
+    /**
      * Use Basic Http Authentication, for the next request
      *
      * @see https://tools.ietf.org/html/rfc7617
