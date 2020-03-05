@@ -4,6 +4,7 @@ namespace Aedart\Http\Clients\Drivers;
 
 use Aedart\Contracts\Http\Clients\Client;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -73,14 +74,19 @@ class DefaultHttpClient implements Client
     protected string $jsonContentType = 'application/json';
 
     /**
+     * The default data format to use for requests
+     *
+     * @var string
+     */
+    protected string $defaultDataFormat = RequestOptions::FORM_PARAMS;
+
+    /**
      * DefaultHttpClient constructor.
      *
      * @param array $options [optional]
      */
     public function __construct(array $options = [])
     {
-        $this->formFormat();
-
         $this->initialOptions = array_merge($this->initialOptions, $options);
         $this->resetOptionsForNextRequest();
 
@@ -434,6 +440,31 @@ class DefaultHttpClient implements Client
     protected function resetOptionsForNextRequest()
     {
         $this->optionsForNextRequest = $this->initialOptions;
+
+        $this->resolveDataFormat();
+    }
+
+    /**
+     * Resolve the data format to use for the next request
+     */
+    protected function resolveDataFormat()
+    {
+        $dataFormat = $this->initialOptions['data_format'] ?? $this->defaultDataFormat;
+
+        switch($dataFormat){
+            case RequestOptions::JSON:
+                $this->jsonFormat();
+                break;
+
+            case RequestOptions::MULTIPART:
+                $this->multipartFormat();
+                break;
+
+            case RequestOptions::FORM_PARAMS:
+            default:
+                $this->formFormat();
+                break;
+        }
     }
 
     /**
