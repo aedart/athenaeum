@@ -49,6 +49,7 @@ The term `Mixed` has been a [soft-reserved keyword](https://www.php.net/manual/e
 * Added possibility to specify specific `vendor` and `output` paths for `interfaces` and `traits`, in the aware-of `Generator`. 
 * `getHeader()` is now case-insensitive, in `DefaultHttpClient` and `JsonHttpClient`.
 Handling of headers is now more inline with [PSR-7](https://www.php-fig.org/psr/psr-7/#12-http-headers).
+* Added `data_format` option for Http Clients.
 
 [1]: _Deprecation of existing abstractions or components is due to the conversion of this package into a [mono repository](ttps://en.wikipedia.org/wiki/Monorepo).
 Existing abstractions are still available, yet will be removed entirely in `v5.0`._
