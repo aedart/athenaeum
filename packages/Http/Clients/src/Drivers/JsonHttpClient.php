@@ -13,9 +13,12 @@ use GuzzleHttp\RequestOptions;
 class JsonHttpClient extends DefaultHttpClient
 {
     /**
-     * The default data format to use for requests
-     *
-     * @var string
+     * @inheritDoc
      */
-    protected string $defaultDataFormat = RequestOptions::JSON;
+    public function initialOptions(): array
+    {
+        return array_merge(parent::initialOptions(), [
+            'data_format' => RequestOptions::JSON,
+        ]);
+    }
 }

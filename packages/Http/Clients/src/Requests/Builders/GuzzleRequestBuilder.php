@@ -2,8 +2,11 @@
 
 namespace Aedart\Http\Clients\Requests\Builders;
 
+use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -16,131 +19,69 @@ use Psr\Http\Message\ResponseInterface;
 class GuzzleRequestBuilder extends BaseBuilder
 {
     /**
+     * The data format to use
+     *
+     * @var string
+     */
+    protected string $dataFormat = RequestOptions::FORM_PARAMS;
+
+    /**
+     * GuzzleRequestBuilder constructor.
+     *
+     * @param Client $client
+     * @param array $options [optional] Guzzle Request Options
+     */
+    public function __construct(Client $client, array $options = [])
+    {
+        parent::__construct($client, $options);
+
+        $this->extractHeadersFromOptions();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function request(string $method = null, $uri = null, array $options = []): ResponseInterface
+    {
+        $method = $method ?? $this->getMethod();
+        $uri = $uri ?? $this->getUri();
+
+        // Resolve options for this request
+        // NOTE: We should NOT use the withOptions() method here, as it will
+        // be applied for entire builder.
+        $options = $this->prepareOptions(
+            array_merge($this->getOptions(), $options)
+        );
+
+        return $this->send(
+            $this->createRequest($method, $uri),
+            $options
+        );
+    }
+
+    /**
      * @inheritDoc
      */
     public function createRequest(string $method, $uri): RequestInterface
     {
-        // TODO: Implement createRequest() method.
+        return new Request(
+            $method,
+            $uri,
+            $this->getHeaders()
+            // TODO: Body???
+            // TODO: Protocol
+        );
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
-    public function get($uri): ResponseInterface
+    public function send(RequestInterface $request, array $options = []): ResponseInterface
     {
-        // TODO: Implement get() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function head($uri): ResponseInterface
-    {
-        // TODO: Implement head() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function post($uri, array $body = []): ResponseInterface
-    {
-        // TODO: Implement post() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function put($uri, array $body = []): ResponseInterface
-    {
-        // TODO: Implement put() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function delete($uri, array $body = []): ResponseInterface
-    {
-        // TODO: Implement delete() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function options($uri): ResponseInterface
-    {
-        // TODO: Implement options() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function patch($uri, array $body = []): ResponseInterface
-    {
-        // TODO: Implement patch() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function request(string $method, $uri, array $options = []): ResponseInterface
-    {
-        // TODO: Implement request() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function withHeaders(array $headers = []): Builder
-    {
-        // TODO: Implement withHeaders() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function withHeader(string $name, $value): Builder
-    {
-        // TODO: Implement withHeader() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function withoutHeader(string $name): Builder
-    {
-        // TODO: Implement withoutHeader() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getHeaders(): array
-    {
-        // TODO: Implement getHeaders() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getHeader(string $name)
-    {
-        // TODO: Implement getHeader() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function withAccept(string $contentType): Builder
-    {
-        // TODO: Implement withAccept() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function withContentType(string $contentType): Builder
-    {
-        // TODO: Implement withContentType() method.
+        return $this->driver()->send(
+            $request,
+            $options
+        );
     }
 
     /**
@@ -148,7 +89,9 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     public function formFormat(): Builder
     {
-        // TODO: Implement formFormat() method.
+        return $this
+            ->useDataFormat('form_params')
+            ->withContentType('application/x-www-form-urlencoded');
     }
 
     /**
@@ -156,7 +99,10 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     public function jsonFormat(): Builder
     {
-        // TODO: Implement jsonFormat() method.
+        return $this
+            ->useDataFormat('json')
+            ->withAccept($this->jsonAccept)
+            ->withContentType($this->jsonContentType);
     }
 
     /**
@@ -164,23 +110,9 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     public function multipartFormat(): Builder
     {
-        // TODO: Implement multipartFormat() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function useDataFormat(string $format): Builder
-    {
-        // TODO: Implement useDataFormat() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getDataFormat(): string
-    {
-        // TODO: Implement getDataFormat() method.
+        return $this
+            ->useDataFormat('multipart')
+            ->withContentType('multipart/form-data');
     }
 
     /**
@@ -188,7 +120,7 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     public function useBasicAuth(string $username, string $password): Builder
     {
-        // TODO: Implement useBasicAuth() method.
+        return $this->withOption('auth', [ $username, $password ]);
     }
 
     /**
@@ -196,15 +128,7 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     public function useDigestAuth(string $username, string $password): Builder
     {
-        // TODO: Implement useDigestAuth() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function useTokenAuth(string $token, string $scheme = 'Bearer'): Builder
-    {
-        // TODO: Implement useTokenAuth() method.
+        return $this->withOption('auth', [ $username, $password, 'digest' ]);
     }
 
     /**
@@ -212,7 +136,17 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     public function maxRedirects(int $amount): Builder
     {
-        // TODO: Implement maxRedirects() method.
+        if ($amount === 0) {
+            return $this->disableRedirects();
+        }
+
+        return $this->withOption('allow_redirects', [
+            'max' => $amount,
+            'strict' => true,
+            'referer' => true,
+            'protocols' => ['http', 'https'],
+            'track_redirects' => false
+        ]);
     }
 
     /**
@@ -220,7 +154,7 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     public function disableRedirects(): Builder
     {
-        // TODO: Implement disableRedirects() method.
+        return $this->withOption('allow_redirects', false);
     }
 
     /**
@@ -228,7 +162,7 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     public function withTimeout(float $seconds): Builder
     {
-        // TODO: Implement withTimeout() method.
+        return $this->withOption('timeout', $seconds);
     }
 
     /**
@@ -236,47 +170,7 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     public function getTimeout(): float
     {
-        // TODO: Implement getTimeout() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function withOptions(array $options = []): Builder
-    {
-        // TODO: Implement withOptions() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function withOption(string $name, $value): Builder
-    {
-        // TODO: Implement withOption() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function withoutOption(string $name): Builder
-    {
-        // TODO: Implement withoutOption() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getOptions(): array
-    {
-        // TODO: Implement getOptions() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getOption(string $name)
-    {
-        // TODO: Implement getOption() method.
+        return (float) $this->getOption('timeout');
     }
 
     /**
@@ -286,6 +180,90 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     public function driver()
     {
-        return $this->client()->driver();
+        return parent::driver();
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Extracts the Http headers from the options into this
+     * builder.
+     *
+     * @return self
+     */
+    protected function extractHeadersFromOptions()
+    {
+        $headers = $this->options['headers'] ?? [];
+
+        if( ! empty($headers)){
+            $this->withHeaders($headers);
+        }
+
+        unset($this->options['headers']);
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function prepareOptions(array $options = []): array
+    {
+        $options = $this->resolveDataFormat(
+            $options
+        );
+
+        return parent::prepareOptions($options);
+    }
+
+
+    /**
+     * Resolve the data format to use for the next request
+     *
+     * @param array $options [optional]
+     *
+     * @return array Modified options
+     */
+    protected function resolveDataFormat(array $options = [])
+    {
+        $dataFormat = $options['data_format'] ?? RequestOptions::FORM_PARAMS;
+
+        switch ($dataFormat) {
+            case RequestOptions::FORM_PARAMS:
+                $this->formFormat();
+                break;
+
+            case RequestOptions::JSON:
+                $this->jsonFormat();
+                break;
+
+            case RequestOptions::MULTIPART:
+                $this->multipartFormat();
+                break;
+
+            default:
+                $this->useDataFormat($dataFormat);
+                break;
+        }
+
+        return $options;
+    }
+
+    /**
+     * Prepares the http headers
+     *
+     * @param array $options
+     *
+     * @return array
+     */
+    protected function prepareHeaders(array $options = []): array
+    {
+        $defaultHeaders = $options['headers'] ?? [];
+
+        $headers = $this->getHeaders();
+
+        return array_merge_recursive($defaultHeaders, $headers);
     }
 }
