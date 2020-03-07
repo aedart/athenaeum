@@ -15,7 +15,7 @@ use Psr\Http\Message\ResponseInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Drivers
  */
-class DefaultHttpClient implements Client
+class DefaultHttpClient extends BaseClient
 {
     /**
      * Initial client options
