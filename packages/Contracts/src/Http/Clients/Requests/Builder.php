@@ -110,6 +110,26 @@ interface Builder extends HttpClientAware,
     public function request(string $method, $uri, array $options = []): ResponseInterface;
 
     /**
+     * Set the Http method, for the next request
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+     *
+     * @param string $method
+     *
+     * @return self
+     */
+    public function withMethod(string $method): self;
+
+    /**
+     * Returns the Http method, for the next request
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+     *
+     * @return string
+     */
+    public function getMethod(): string;
+
+    /**
      * Set the Http headers for the next request
      *
      * Method will merge with existing headers, if client has any predefined
