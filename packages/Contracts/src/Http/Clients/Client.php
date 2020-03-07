@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Http\Clients;
 
+use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -355,4 +356,11 @@ interface Client
      * @return mixed
      */
     public function driver();
+
+    /**
+     * Creates and returns a new Http Request Builder
+     *
+     * @return Builder
+     */
+    public function makeBuilder(): Builder;
 }
