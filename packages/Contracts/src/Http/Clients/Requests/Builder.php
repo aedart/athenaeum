@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Http\Clients\Requests;
 
 use Aedart\Contracts\Http\Clients\Client;
+use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -128,6 +129,24 @@ interface Builder extends HttpClientAware,
      * @return string
      */
     public function getMethod(): string;
+
+    /**
+     * Set the Uri for the next request
+     *
+     * @param string|UriInterface $uri
+     *
+     * @return self
+     *
+     * @throws InvalidUriException If given Uri argument is invalid
+     */
+    public function withUri($uri): self;
+
+    /**
+     * Get Uri for the next request
+     *
+     * @return UriInterface|null
+     */
+    public function getUri(): ?UriInterface;
 
     /**
      * Set the Http headers for the next request
