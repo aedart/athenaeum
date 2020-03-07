@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -12,7 +13,7 @@ use Psr\Http\Message\UriInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Clients
  */
-interface Client
+interface Client extends ClientInterface
 {
     /**
      * Make a GET request
