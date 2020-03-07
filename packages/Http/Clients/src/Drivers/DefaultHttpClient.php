@@ -3,6 +3,8 @@
 namespace Aedart\Http\Clients\Drivers;
 
 use Aedart\Contracts\Http\Clients\Client;
+use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Http\Clients\Requests\Builders\GuzzleRequestBuilder;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
@@ -428,6 +430,14 @@ class DefaultHttpClient implements Client
     public function driver()
     {
         return $this->client;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function makeBuilder(): Builder
+    {
+        return new GuzzleRequestBuilder($this);
     }
 
     /*****************************************************************
