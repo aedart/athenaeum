@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -125,6 +126,16 @@ interface Builder extends HttpClientAware,
      * @return ResponseInterface
      */
     public function request(?string $method = null, $uri = null, array $options = []): ResponseInterface;
+
+    /**
+     * Send the given request
+     *
+     * @param RequestInterface $request
+     * @param array $options [optional]
+     *
+     * @return ResponseInterface
+     */
+    public function send(RequestInterface $request, array $options = []): ResponseInterface;
 
     /**
      * Set the Http method, for the next request
