@@ -23,7 +23,9 @@ interface Builder extends HttpClientAware,
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET
      *
-     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
+     * @see withUri
+     *
+     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
      *
      * @return ResponseInterface
      */
@@ -34,7 +36,9 @@ interface Builder extends HttpClientAware,
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD
      *
-     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
+     * @see withUri
+     *
+     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
      *
      * @return ResponseInterface
      */
@@ -45,7 +49,9 @@ interface Builder extends HttpClientAware,
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST
      *
-     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
+     * @see withUri
+     *
+     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
      * @param array $body [optional]
      *
      * @return ResponseInterface
@@ -57,7 +63,9 @@ interface Builder extends HttpClientAware,
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT
      *
-     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
+     * @see withUri
+     *
+     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
      * @param array $body [optional]
      *
      * @return ResponseInterface
@@ -69,7 +77,9 @@ interface Builder extends HttpClientAware,
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE
      *
-     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
+     * @see withUri
+     *
+     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
      * @param array $body [optional]
      *
      * @return ResponseInterface
@@ -81,7 +91,9 @@ interface Builder extends HttpClientAware,
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS
      *
-     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
+     * @see withUri
+     *
+     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
      *
      * @return ResponseInterface
      */
@@ -92,7 +104,9 @@ interface Builder extends HttpClientAware,
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH
      *
-     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
+     * @see withUri
+     *
+     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
      * @param array $body [optional]
      *
      * @return ResponseInterface
@@ -102,13 +116,15 @@ interface Builder extends HttpClientAware,
     /**
      * Make a http request
      *
-     * @param string $method Http method name
-     * @param string|UriInterface $uri
+     * @see withUri
+     *
+     * @param string|null $method [optional] Http method name. If none given, the previous set is applied
+     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
      * @param array $options [optional]
      *
      * @return ResponseInterface
      */
-    public function request(string $method, $uri, array $options = []): ResponseInterface;
+    public function request(?string $method = null, $uri = null, array $options = []): ResponseInterface;
 
     /**
      * Set the Http method, for the next request
