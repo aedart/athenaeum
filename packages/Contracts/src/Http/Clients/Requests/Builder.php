@@ -23,81 +23,81 @@ interface Builder extends HttpClientAware,
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET
      *
-     * @param string|UriInterface $uri
+     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
      *
      * @return ResponseInterface
      */
-    public function get($uri): ResponseInterface;
+    public function get($uri = null): ResponseInterface;
 
     /**
      * Make a HEAD request
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD
      *
-     * @param string|UriInterface $uri
+     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
      *
      * @return ResponseInterface
      */
-    public function head($uri): ResponseInterface;
+    public function head($uri = null): ResponseInterface;
 
     /**
      * Make a POST request
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST
      *
-     * @param string|UriInterface $uri
+     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
      * @param array $body [optional]
      *
      * @return ResponseInterface
      */
-    public function post($uri, array $body = []): ResponseInterface;
+    public function post($uri = null, array $body = []): ResponseInterface;
 
     /**
      * Make a PUT request
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT
      *
-     * @param string|UriInterface $uri
+     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
      * @param array $body [optional]
      *
      * @return ResponseInterface
      */
-    public function put($uri, array $body = []): ResponseInterface;
+    public function put($uri = null, array $body = []): ResponseInterface;
 
     /**
      * Make a DELETE request
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE
      *
-     * @param string|UriInterface $uri
+     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
      * @param array $body [optional]
      *
      * @return ResponseInterface
      */
-    public function delete($uri, array $body = []): ResponseInterface;
+    public function delete($uri = null, array $body = []): ResponseInterface;
 
     /**
      * Make a OPTIONS request
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS
      *
-     * @param string|UriInterface $uri
+     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
      *
      * @return ResponseInterface
      */
-    public function options($uri): ResponseInterface;
+    public function options($uri = null): ResponseInterface;
 
     /**
      * Make a PATCH request
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH
      *
-     * @param string|UriInterface $uri
+     * @param string|UriInterface|null $uri [optional] If Uri given, it will replace already set Uri
      * @param array $body [optional]
      *
      * @return ResponseInterface
      */
-    public function patch($uri, array $body = []): ResponseInterface;
+    public function patch($uri = null, array $body = []): ResponseInterface;
 
     /**
      * Make a http request
