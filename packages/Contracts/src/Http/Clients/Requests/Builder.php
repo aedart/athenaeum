@@ -4,6 +4,7 @@ namespace Aedart\Contracts\Http\Clients\Requests;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -13,7 +14,8 @@ use Psr\Http\Message\UriInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Clients\Requests
  */
-interface Builder extends HttpClientAware
+interface Builder extends HttpClientAware,
+    RequestFactoryInterface
 {
     /**
      * Make a GET request
