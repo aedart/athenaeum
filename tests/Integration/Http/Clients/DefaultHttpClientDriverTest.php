@@ -39,14 +39,14 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
     /**
      * @test
      */
-    public function hasInitialOptions()
+    public function hasInitialHeadersFromOptions()
     {
-        $options = $this->getHttpClient()->getOption('headers');
+        $headers = $this->getHttpClient()->getHeaders();
 
-        ConsoleDebugger::output($options);
+        ConsoleDebugger::output($headers);
 
-        $this->assertArrayHasKey('User-Agent', $options);
-        $this->assertSame('Aedart/HttpClient/1.0', $options['User-Agent']);
+        $this->assertArrayHasKey('User-Agent', $headers);
+        $this->assertSame('Aedart/HttpClient/1.0', $headers['User-Agent']);
     }
 
     /**
@@ -270,10 +270,10 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
      */
     public function canObtainCustomHeaders()
     {
-        $client = $this->getHttpClient();
-
         $value = 'Yuck, shiny shore. go to cabo rojo.';
-        $client->withHeader('x-token', $value);
+
+        $client = $this->getHttpClient()
+            ->withHeader('x-token', $value);
 
         $this->assertSame($value, $client->getHeader('x-token'));
     }
@@ -283,14 +283,14 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
      */
     public function canSpecifyMultipleHeaders()
     {
-        $client = $this->getHttpClient();
-
         $value = 'Yuck, shiny shore. go to cabo rojo.';
-        $client->withHeaders([
-            'x-token' => $value,
-            'y-token' => $value
-        ])
-        ->withHeader('z-token', $value);
+
+        $client = $this->getHttpClient()
+            ->withHeaders([
+                'x-token' => $value,
+                'y-token' => $value
+            ])
+            ->withHeader('z-token', $value);
 
         $this->assertSame($value, $client->getHeader('x-token'));
         $this->assertSame($value, $client->getHeader('y-token'));
@@ -488,9 +488,8 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
      */
     public function canDisableRedirectBehaviour()
     {
-        $client = $this->getHttpClient();
-
-        $client->maxRedirects(0);
+        $client = $this->getHttpClient()
+            ->maxRedirects(0);
 
         $result = $client->getOption('allow_redirects');
 
@@ -502,9 +501,8 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
      */
     public function canSpecifyMaxRedirects()
     {
-        $client = $this->getHttpClient();
-
-        $client->maxRedirects(5);
+        $client = $this->getHttpClient()
+            ->maxRedirects(5);
 
         $result = $client->getOption('allow_redirects');
 
