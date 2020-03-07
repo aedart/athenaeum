@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Http\Clients\Requests;
 
+use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
@@ -349,4 +350,20 @@ interface Builder extends HttpClientAware
      * @return mixed
      */
     public function getOption(string $name);
+
+    /**
+     * Alias for getHttpClient
+     *
+     * @see getHttpClient
+     *
+     * @return Client
+     */
+    public function client(): Client;
+
+    /**
+     * Get this Http Client's native driver
+     *
+     * @return mixed
+     */
+    public function driver();
 }
