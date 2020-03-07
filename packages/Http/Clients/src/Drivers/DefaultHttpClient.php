@@ -83,6 +83,10 @@ class DefaultHttpClient extends BaseClient
     public function initialOptions(): array
     {
         return [
+            // Builder specific options
+            'data_format' => RequestOptions::FORM_PARAMS,
+
+            // Guzzle specific options
             'http_errors' => false,
             'connect_timeout' => 5,
             'timeout' => 10,
