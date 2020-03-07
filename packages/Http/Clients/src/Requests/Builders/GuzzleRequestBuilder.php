@@ -4,6 +4,7 @@ namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use GuzzleHttp\Client as GuzzleClient;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -14,6 +15,14 @@ use Psr\Http\Message\ResponseInterface;
  */
 class GuzzleRequestBuilder extends BaseBuilder
 {
+    /**
+     * @inheritDoc
+     */
+    public function createRequest(string $method, $uri): RequestInterface
+    {
+        // TODO: Implement createRequest() method.
+    }
+
     /**
      * @inheritDoc
      */
