@@ -4,8 +4,6 @@ namespace Aedart\Contracts\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\UriInterface;
 
 /**
  * Http Client
@@ -350,6 +348,13 @@ interface Client extends ClientInterface
 //     * @return mixed
 //     */
 //    public function getOption(string $name);
+
+    /**
+     * Returns this Http Client's initial options
+     *
+     * @return array
+     */
+    public function getClientOptions(): array;
 
     /**
      * Get this Http Client's native driver

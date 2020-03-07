@@ -16,6 +16,44 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 abstract class BaseClient implements Client
 {
     /**
+     * Http Client specific options
+     *
+     * @var array
+     */
+    protected array $options = [];
+
+    /**
+     * BaseClient constructor.
+     *
+     * @param array $options [optional]
+     */
+    public function __construct(array $options = [])
+    {
+        $this->options = array_merge(
+            $this->initialOptions(),
+            $options
+        );
+    }
+
+    /**
+     * Returns evt. initial options for this Http Client
+     *
+     * @return array
+     */
+    public function initialOptions(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getClientOptions(): array
+    {
+        return $this->options;
+    }
+
+    /**
      * Invokes a method on this Http Client's Request Builder
      *
      * @see Builder
@@ -29,4 +67,8 @@ abstract class BaseClient implements Client
     {
         return $this->makeBuilder()->{$method}(...$arguments);
     }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
 }
