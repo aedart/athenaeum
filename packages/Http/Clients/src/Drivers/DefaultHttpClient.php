@@ -105,7 +105,7 @@ class DefaultHttpClient extends BaseClient
      */
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
-        return $this->makeBuilder()->send($request);
+        return $this->send($request);
     }
 
 //    /**
