@@ -18,6 +18,22 @@ use GuzzleHttp\RequestOptions;
 class PayloadData
 {
     /**
+     * Returns the payload data identifiers, used by
+     * Guzzle
+     *
+     * @return string[]
+     */
+    public static function dataIdentifiers(): array
+    {
+        return [
+            RequestOptions::FORM_PARAMS,
+            RequestOptions::BODY,
+            RequestOptions::JSON,
+            RequestOptions::MULTIPART
+        ];
+    }
+
+    /**
      * Extracts payload data from given driver options
      *
      * @param array $options
@@ -26,12 +42,7 @@ class PayloadData
      */
     public static function extract(array $options): array
     {
-        $targets = [
-            RequestOptions::FORM_PARAMS,
-            RequestOptions::BODY,
-            RequestOptions::JSON,
-            RequestOptions::MULTIPART
-        ];
+        $targets = static::dataIdentifiers();
 
         $output = [];
         foreach ($targets as $key){
