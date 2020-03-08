@@ -9,12 +9,13 @@ use GuzzleHttp\RequestOptions;
 /**
  * Data Extractor
  *
- * Utility that extracts a request's payload data from
+ * Able to extract a request's payload data from Guzzle's options,
+ * and offer other payload utilities.
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders\Guzzle
  */
-class DataExtractor
+class PayloadData
 {
     /**
      * Extracts payload data from given driver options

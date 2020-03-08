@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Unit\Http\Clients\Helpers\Guzzle;
 
-use Aedart\Http\Clients\Requests\Builders\Guzzle\DataExtractor;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\PayloadData;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use GuzzleHttp\RequestOptions;
@@ -12,12 +12,12 @@ use GuzzleHttp\RequestOptions;
  *
  * @group http-clients
  * @group guzzle
- * @group guzzle-data-extractor
+ * @group guzzle-payload-data
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Clients\Helpers\Guzzle
  */
-class DataExtractorTest extends UnitTestCase
+class PayloadDataTest extends UnitTestCase
 {
     /**
      * @test
@@ -42,7 +42,7 @@ class DataExtractorTest extends UnitTestCase
             ]
         ];
 
-        $data = DataExtractor::extract($options);
+        $data = PayloadData::extract($options);
 
         ConsoleDebugger::output($data);
 
