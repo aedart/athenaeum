@@ -26,7 +26,7 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
      *
      * @return ResponseInterface
      */
@@ -39,7 +39,7 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
      *
      * @return ResponseInterface
      */
@@ -52,7 +52,7 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
      * @param array $body [optional]
      *
      * @return ResponseInterface
@@ -66,7 +66,7 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
      * @param array $body [optional]
      *
      * @return ResponseInterface
@@ -80,7 +80,7 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
      * @param array $body [optional]
      *
      * @return ResponseInterface
@@ -94,7 +94,7 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
      *
      * @return ResponseInterface
      */
@@ -107,7 +107,7 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
      * @param array $body [optional]
      *
      * @return ResponseInterface
@@ -120,7 +120,7 @@ interface Builder extends HttpClientAware,
      * @see withUri
      *
      * @param string|null $method [optional] Http method name. If none given, the previous set is applied
-     * @param string|UriInterface|null $uri [optional] If none given, then set Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
      * @param array $options [optional] Given options are merged with this builder already set options.
      *                      However, these options are not applied on the builder's options!
      *
