@@ -26,10 +26,10 @@ class MergeWithBuilderOptions
         $builderOptions = $prepared->builder()->getOptions();
 
         // Obtain the given options
-        $setOptions = $prepared->preparedOptions();
+        $setOptions = $prepared->options();
 
         // Merge them together and overwrite the given options
-        $prepared->setPreparedOptions(
+        $prepared->setOptions(
             array_merge($builderOptions, $setOptions)
         );
 

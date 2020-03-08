@@ -456,7 +456,7 @@ abstract class BaseBuilder implements
                 $this->getPrepareOptionsPipes()
             )
             ->then(function (PreparedOptions $prepared) {
-                return $prepared->preparedOptions();
+                return $prepared->options();
             });
     }
 

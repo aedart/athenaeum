@@ -25,7 +25,7 @@ class ResolvesRequestPayload
     public function handle(PreparedOptions $prepared, $next)
     {
         // Get options set from the builder
-        $options = $prepared->preparedOptions();
+        $options = $prepared->options();
 
         // Obtain evt. appended data (e.g. via the post, patch, ...etc)
         // Or perhaps via the withOptions() method on the builder.
@@ -45,7 +45,7 @@ class ResolvesRequestPayload
 
         // Finally, apply the data
         $options[$format] = $data;
-        $prepared->setPreparedOptions($options);
+        $prepared->setOptions($options);
 
         return $next($prepared);
     }

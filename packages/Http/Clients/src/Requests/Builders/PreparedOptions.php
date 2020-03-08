@@ -36,7 +36,7 @@ class PreparedOptions
     {
         $this
             ->setBuilder($builder)
-            ->setPreparedOptions($options);
+            ->setOptions($options);
     }
 
     /**
@@ -46,7 +46,7 @@ class PreparedOptions
      *
      * @return self
      */
-    public function setPreparedOptions(array $options = [])
+    public function setOptions(array $options = [])
     {
         $this->options = $options;
 
@@ -58,7 +58,7 @@ class PreparedOptions
      *
      * @return array
      */
-    public function getPreparedOptions(): array
+    public function getOptions(): array
     {
         return $this->options;
     }
@@ -66,13 +66,13 @@ class PreparedOptions
     /**
      * Alias for getPreparedOptions
      *
-     * @see getPreparedOptions
+     * @see getOptions
      *
      * @return array
      */
-    public function preparedOptions(): array
+    public function options(): array
     {
-        return $this->getPreparedOptions();
+        return $this->getOptions();
     }
 
     /**
