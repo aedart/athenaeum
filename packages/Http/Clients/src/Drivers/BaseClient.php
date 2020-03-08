@@ -38,6 +38,9 @@ abstract class BaseClient implements Client
     /**
      * Returns evt. initial options for this Http Client
      *
+     * These options can be overwritten via the regular options
+     * given to this client.
+     *
      * @return array
      */
     public function initialOptions(): array
