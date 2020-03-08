@@ -2,9 +2,7 @@
 
 namespace Aedart\Http\Clients\Requests\Builders;
 
-use Aedart\Contracts\Http\Clients\Client;
-use Aedart\Contracts\Http\Clients\HttpClientAware;
-use Aedart\Http\Clients\Traits\HttpClientTrait;
+use Aedart\Contracts\Http\Clients\Requests\Builder;
 
 /**
  * Prepared Driver Options
@@ -12,9 +10,14 @@ use Aedart\Http\Clients\Traits\HttpClientTrait;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders
  */
-class PreparedOptions implements HttpClientAware
+class PreparedOptions
 {
-    use HttpClientTrait;
+    /**
+     * The Http Request Builder
+     *
+     * @var Builder
+     */
+    protected Builder $builder;
 
     /**
      * The prepared driver options
@@ -26,13 +29,13 @@ class PreparedOptions implements HttpClientAware
     /**
      * PreparedOptions constructor.
      *
-     * @param Client $client
+     * @param Builder $builder
      * @param array $options [optional]
      */
-    public function __construct(Client $client, array $options = [])
+    public function __construct(Builder $builder, array $options = [])
     {
         $this
-            ->setHttpClient($client)
+            ->setBuilder($builder)
             ->setPreparedOptions($options);
     }
 
@@ -61,14 +64,50 @@ class PreparedOptions implements HttpClientAware
     }
 
     /**
-     * Alias for getHttpClient
+     * Alias for getPreparedOptions
      *
-     * @see getHttpClient
+     * @see getPreparedOptions
      *
-     * @return Client
+     * @return array
      */
-    public function client(): Client
+    public function preparedOptions(): array
     {
-        return $this->getHttpClient();
+        return $this->getPreparedOptions();
+    }
+
+    /**
+     * Set the Http Request Builder
+     *
+     * @param Builder $builder
+     *
+     * @return self
+     */
+    public function setBuilder(Builder $builder)
+    {
+        $this->builder = $builder;
+
+        return $this;
+    }
+
+    /**
+     * Return the Http Request Builder
+     *
+     * @return Builder
+     */
+    public function getBuilder(): Builder
+    {
+        return $this->builder;
+    }
+
+    /**
+     * Alias for getBuilder
+     *
+     * @see getBuilder
+     *
+     * @return Builder
+     */
+    public function builder(): Builder
+    {
+        return $this->getBuilder();
     }
 }
