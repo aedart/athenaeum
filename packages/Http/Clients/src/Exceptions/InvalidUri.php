@@ -13,5 +13,4 @@ use InvalidArgumentException;
  */
 class InvalidUri extends InvalidArgumentException implements InvalidUriException
 {
-
 }

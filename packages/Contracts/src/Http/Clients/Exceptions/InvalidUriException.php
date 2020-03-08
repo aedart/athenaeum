@@ -13,5 +13,4 @@ use Throwable;
  */
 interface InvalidUriException extends Throwable
 {
-
 }

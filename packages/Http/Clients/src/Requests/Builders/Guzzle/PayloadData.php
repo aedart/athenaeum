@@ -3,7 +3,6 @@
 
 namespace Aedart\Http\Clients\Requests\Builders\Guzzle;
 
-
 use GuzzleHttp\RequestOptions;
 
 /**
@@ -45,7 +44,7 @@ class PayloadData
         $targets = static::dataIdentifiers();
 
         $output = [];
-        foreach ($targets as $key){
+        foreach ($targets as $key) {
             $output = static::mergeIfExists($key, $options, $output);
         }
 
@@ -63,7 +62,7 @@ class PayloadData
      */
     protected static function mergeIfExists(string $key, array $from, array $target): array
     {
-        if(array_key_exists($key, $from)){
+        if (array_key_exists($key, $from)) {
             return $target = array_merge($target, $from[$key]);
         }
 

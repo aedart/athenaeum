@@ -23,7 +23,8 @@ use Psr\Http\Message\UriInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders
  */
-abstract class BaseBuilder implements Builder,
+abstract class BaseBuilder implements
+    Builder,
   ContainerAware
 {
     use HttpClientTrait;
@@ -195,11 +196,11 @@ abstract class BaseBuilder implements Builder,
      */
     public function withUri($uri): Builder
     {
-        if(is_string($uri)){
+        if (is_string($uri)) {
             $uri = new Uri($uri);
         }
 
-        if( ! ($uri instanceof UriInterface)){
+        if (!($uri instanceof UriInterface)) {
             throw new InvalidUri('Provided Uri must either be a string or Psr-7 UriInterface');
         }
 
@@ -454,7 +455,7 @@ abstract class BaseBuilder implements Builder,
             ->through(
                 $this->getPrepareOptionsPipes()
             )
-            ->then(function(PreparedOptions $prepared){
+            ->then(function (PreparedOptions $prepared) {
                 return $prepared->preparedOptions();
             });
     }

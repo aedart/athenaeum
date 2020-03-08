@@ -203,7 +203,7 @@ class GuzzleRequestBuilder extends BaseBuilder
     {
         $headers = $this->options['headers'] ?? [];
 
-        if( ! empty($headers)){
+        if (!empty($headers)) {
             $this->withHeaders($headers);
         }
 
