@@ -72,6 +72,13 @@ abstract class BaseBuilder implements Builder
     protected string $jsonContentType = 'application/json';
 
     /**
+     * The request payload (body)
+     *
+     * @var array
+     */
+    protected array $data = [];
+
+    /**
      * BaseBuilder constructor.
      *
      * @param Client $client
@@ -295,6 +302,34 @@ abstract class BaseBuilder implements Builder
     public function useTokenAuth(string $token, string $scheme = 'Bearer'): Builder
     {
         return $this->withHeader('Authorization', trim($scheme . ' ' . $token));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function withData(array $data): Builder
+    {
+        return $this->setData(
+            array_merge($this->getData(), $data)
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setData(array $data): Builder
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getData(): array
+    {
+        return $this->data;
     }
 
     /**

@@ -374,6 +374,41 @@ interface Builder extends HttpClientAware,
     public function getTimeout(): float;
 
     /**
+     * Add data to the next request's payload (body).
+     *
+     * Method will merge given data with existing payload.
+     *
+     * @see setData
+     * @see getData
+     *
+     * @param array $data Decoded payload, key-value pairs
+     *
+     * @return self
+     */
+    public function withData(array $data): self;
+
+    /**
+     * Set the next request's payload (body).
+     *
+     * Method will overwrite existing data.
+     *
+     * @see withData
+     * @see getData
+     *
+     * @param array $data Decoded payload, key-value pairs
+     *
+     * @return self
+     */
+    public function setData(array $data): self;
+
+    /**
+     * Get the next request's payload (body)
+     *
+     * @return array Decoded payload, key-value pairs
+     */
+    public function getData(): array;
+
+    /**
      * Apply a set of options for the next request
      *
      * Method will merge given options with Client's default options
