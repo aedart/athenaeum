@@ -37,7 +37,7 @@ return [
         'json' => [
             'driver' => \Aedart\Http\Clients\Drivers\JsonHttpClient::class,
             'options' => [
-                'data_format' => \GuzzleHttp\RequestOptions::JSON
+
             ]
         ]
     ]
