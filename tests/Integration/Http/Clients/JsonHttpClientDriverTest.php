@@ -108,10 +108,10 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
             new Response(200, [ 'X-Foo' => 'Bar' ])
         ]);
 
-        $client = $this->getHttpClient();
-        $client
-            ->withOption('handler', $mockedResponses)
-            ->post('/my-api');
+        $client = $this->getHttpClient()
+            ->withOption('handler', $mockedResponses);
+
+        $client->post('/my-api');
 
         // Obtain headers
         $accept = $client->getHeader('accept');
@@ -130,15 +130,15 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
             new Response(200, [ 'X-Foo' => 'Bar' ])
         ]);
 
-        $client = $this->getHttpClient();
-
         $body = [
             'name' => 'Jimmy Rick Jr.'
         ];
 
-        $client
-            ->withOption('handler', $mockedResponses)
-            ->post('/v1/some-api', $body);
+        $client = $this->getHttpClient()
+            ->withOption('handler', $mockedResponses);
+
+
+        $client->post('/v1/some-api', $body);
 
         $content = $this->lastRequest->getBody()->getContents();
         ConsoleDebugger::output($content);
