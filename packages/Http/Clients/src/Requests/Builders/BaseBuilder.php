@@ -4,9 +4,14 @@ namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use Aedart\Http\Clients\Exceptions\InvalidUri;
+use Aedart\Http\Clients\Requests\Builders\Pipes\MergeWithBuilderOptions;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
+use Aedart\Support\Helpers\Container\ContainerTrait;
 use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\RequestOptions;
+use Illuminate\Pipeline\Pipeline;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -18,9 +23,11 @@ use Psr\Http\Message\UriInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders
  */
-abstract class BaseBuilder implements Builder
+abstract class BaseBuilder implements Builder,
+  ContainerAware
 {
     use HttpClientTrait;
+    use ContainerTrait;
 
     /**
      * Driver specific options for the next request
@@ -34,7 +41,7 @@ abstract class BaseBuilder implements Builder
      *
      * @var string
      */
-    protected string $dataFormat = 'body';
+    protected string $dataFormat = RequestOptions::FORM_PARAMS;
 
     /**
      * The Http Headers to send
@@ -79,6 +86,16 @@ abstract class BaseBuilder implements Builder
     protected array $data = [];
 
     /**
+     * Pipes that prepare the driver options, before
+     * applied on request and sent
+     *
+     * @var array|mixed
+     */
+    protected array $prepareOptionsPipes = [
+        MergeWithBuilderOptions::class
+    ];
+
+    /**
      * BaseBuilder constructor.
      *
      * @param Client $client
@@ -113,7 +130,7 @@ abstract class BaseBuilder implements Builder
     public function post($uri = null, array $body = []): ResponseInterface
     {
         return $this->request('POST', $uri, [
-            $this->getDataFormat() => $body
+            RequestOptions::FORM_PARAMS => $body
         ]);
     }
 
@@ -123,7 +140,7 @@ abstract class BaseBuilder implements Builder
     public function put($uri = null, array $body = []): ResponseInterface
     {
         return $this->request('PUT', $uri, [
-            $this->getDataFormat() => $body
+            RequestOptions::FORM_PARAMS => $body
         ]);
     }
 
@@ -133,7 +150,7 @@ abstract class BaseBuilder implements Builder
     public function delete($uri = null, array $body = []): ResponseInterface
     {
         return $this->request('DELETE', $uri, [
-            $this->getDataFormat() => $body
+            RequestOptions::FORM_PARAMS => $body
         ]);
     }
 
@@ -151,7 +168,7 @@ abstract class BaseBuilder implements Builder
     public function patch($uri = null, array $body = []): ResponseInterface
     {
         return $this->request('PATCH', $uri, [
-            $this->getDataFormat() => $body
+            RequestOptions::FORM_PARAMS => $body
         ]);
     }
 
@@ -383,6 +400,24 @@ abstract class BaseBuilder implements Builder
     /**
      * @inheritdoc
      */
+    public function setPrepareOptionsPipes($pipes): Builder
+    {
+        $this->prepareOptionsPipes = $pipes;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPrepareOptionsPipes()
+    {
+        return $this->prepareOptionsPipes;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function client(): Client
     {
         return $this->getHttpClient();
@@ -403,15 +438,25 @@ abstract class BaseBuilder implements Builder
      ****************************************************************/
 
     /**
-     * Prepares the options
+     * Prepares the driver options, just before the request is built
+     * and sent.
      *
      * @param array $options [optional]
      *
      * @return array
      */
-    protected function prepareOptions(array $options = []): array
+    protected function prepareDriverOptions(array $options = []): array
     {
-        return array_merge($this->options, $options);
+        $pipe = new Pipeline($this->getContainer());
+
+        return $pipe
+            ->send(new PreparedOptions($this, $options))
+            ->through(
+                $this->getPrepareOptionsPipes()
+            )
+            ->then(function(PreparedOptions $prepared){
+                return $prepared->preparedOptions();
+            });
     }
 
     /**

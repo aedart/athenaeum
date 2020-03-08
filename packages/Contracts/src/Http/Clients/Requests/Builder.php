@@ -457,6 +457,28 @@ interface Builder extends HttpClientAware,
     public function getOption(string $name);
 
     /**
+     * Set the pipes that the builder's options are
+     * to be passed through, before applied on driver
+     *
+     * @see \Illuminate\Contracts\Pipeline\Pipeline
+     *
+     * @param array|mixed $pipes
+     *
+     * @return self
+     */
+    public function setPrepareOptionsPipes($pipes): self;
+
+    /**
+     * Returns the pipes that the builder's options are
+     * to be passed through, before applied on driver
+     *
+     * @see \Illuminate\Contracts\Pipeline\Pipeline
+     *
+     * @return array|mixed
+     */
+    public function getPrepareOptionsPipes();
+
+    /**
      * Alias for getHttpClient
      *
      * @see getHttpClient
