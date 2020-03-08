@@ -4,6 +4,8 @@ namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ResolvesRequestPayload;
+use Aedart\Http\Clients\Requests\Builders\Pipes\MergeWithBuilderOptions;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
@@ -35,7 +37,13 @@ class GuzzleRequestBuilder extends BaseBuilder
     {
         parent::__construct($client, $options);
 
-        $this->extractHeadersFromOptions();
+        $this
+            ->extractHeadersFromOptions()
+            ->extractDataFormatFromOptions()
+            ->setPrepareOptionsPipes([
+                MergeWithBuilderOptions::class,
+                ResolvesRequestPayload::class
+            ]);
     }
 
     /**
@@ -49,9 +57,7 @@ class GuzzleRequestBuilder extends BaseBuilder
         // Resolve options for this request
         // NOTE: We should NOT use the withOptions() method here, as it will
         // be applied for entire builder.
-        $options = $this->prepareOptions(
-            array_merge($this->getOptions(), $options)
-        );
+        $options = $this->prepareDriverOptions($options);
 
         return $this->send(
             $this->createRequest($method, $uri),
@@ -207,31 +213,19 @@ class GuzzleRequestBuilder extends BaseBuilder
     }
 
     /**
-     * @inheritdoc
-     */
-    protected function prepareOptions(array $options = []): array
-    {
-        $options = $this->resolveDataFormat(
-            $options
-        );
-
-        return parent::prepareOptions($options);
-    }
-
-
-    /**
-     * Resolve the data format to use for the next request
+     * Extracts the data format from the options and sets
+     * the appropriate headers
      *
-     * @param array $options [optional]
-     *
-     * @return array Modified options
+     * @return self
      */
-    protected function resolveDataFormat(array $options = [])
+    protected function extractDataFormatFromOptions()
     {
-        $dataFormat = $options['data_format'] ?? RequestOptions::FORM_PARAMS;
+        $format = $this->options['data_format'] ?? $this->getDataFormat();
+        unset($this->options['data_format']);
 
-        switch ($dataFormat) {
+        switch ($format) {
             case RequestOptions::FORM_PARAMS:
+            case RequestOptions::BODY:
                 $this->formFormat();
                 break;
 
@@ -244,26 +238,10 @@ class GuzzleRequestBuilder extends BaseBuilder
                 break;
 
             default:
-                $this->useDataFormat($dataFormat);
+                $this->useDataFormat($format);
                 break;
         }
 
-        return $options;
-    }
-
-    /**
-     * Prepares the http headers
-     *
-     * @param array $options
-     *
-     * @return array
-     */
-    protected function prepareHeaders(array $options = []): array
-    {
-        $defaultHeaders = $options['headers'] ?? [];
-
-        $headers = $this->getHeaders();
-
-        return array_merge_recursive($defaultHeaders, $headers);
+        return $this;
     }
 }
