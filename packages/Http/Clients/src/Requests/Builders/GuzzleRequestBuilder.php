@@ -48,7 +48,7 @@ class GuzzleRequestBuilder extends BaseBuilder
 
         $this
             ->extractHeadersFromOptions()
-            ->extractDataFormatFromOptions()
+            ->extractDataOptions()
             ->setPrepareOptionsPipes([
                 MergeWithBuilderOptions::class,
                 AppliesHttpProtocolVersion::class,
@@ -248,32 +248,42 @@ class GuzzleRequestBuilder extends BaseBuilder
     }
 
     /**
-     * Extracts the data format from the options and sets
+     * Extracts the data and it's format from the options and sets
      * the appropriate headers
      *
      * @return self
      */
-    protected function extractDataFormatFromOptions()
+    protected function extractDataOptions()
     {
         $format = $this->options['data_format'] ?? $this->getDataFormat();
         unset($this->options['data_format']);
 
         switch ($format) {
             case RequestOptions::FORM_PARAMS:
-            case RequestOptions::BODY:
-                $this->formFormat();
+                $this
+                    ->formFormat()
+                    ->setData($this->options[RequestOptions::FORM_PARAMS]);
                 break;
 
             case RequestOptions::JSON:
-                $this->jsonFormat();
+                $this
+                    ->jsonFormat()
+                    ->setData($this->options[RequestOptions::JSON]);
                 break;
 
             case RequestOptions::MULTIPART:
                 $this->multipartFormat();
+
+                // TODO: Extract Files ????
+
                 break;
 
+            //case RequestOptions::BODY:
             default:
                 $this->useDataFormat($format);
+
+                // TODO: What if "body" is used... this cannot be supported here?
+
                 break;
         }
 
