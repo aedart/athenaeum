@@ -4,6 +4,8 @@ namespace Aedart\Http\Clients\Drivers;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Base Http Client
@@ -33,6 +35,14 @@ abstract class BaseClient implements Client
             $this->initialOptions(),
             $options
         );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function sendRequest(RequestInterface $request): ResponseInterface
+    {
+        return $this->send($request);
     }
 
     /**

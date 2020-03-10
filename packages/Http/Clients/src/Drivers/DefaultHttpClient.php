@@ -62,14 +62,6 @@ class DefaultHttpClient extends BaseClient
 
     /**
      * @inheritDoc
-     */
-    public function sendRequest(RequestInterface $request): ResponseInterface
-    {
-        return $this->send($request);
-    }
-
-    /**
-     * @inheritDoc
      *
      * @return GuzzleClient
      */
