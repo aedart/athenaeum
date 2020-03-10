@@ -4,10 +4,12 @@ namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers\CaptureHandler;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHeaders;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHttpProtocolVersion;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ResolvesRequestPayload;
 use Aedart\Http\Clients\Requests\Builders\Pipes\MergeWithBuilderOptions;
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -28,6 +30,13 @@ class GuzzleRequestBuilder extends BaseBuilder
     protected string $dataFormat = RequestOptions::FORM_PARAMS;
 
     /**
+     * Temporary request options
+     *
+     * @var array
+     */
+    protected array $nextRequestOptions = [];
+
+    /**
      * GuzzleRequestBuilder constructor.
      *
      * @param Client $client
@@ -42,7 +51,9 @@ class GuzzleRequestBuilder extends BaseBuilder
             ->extractDataFormatFromOptions()
             ->setPrepareOptionsPipes([
                 MergeWithBuilderOptions::class,
-                ResolvesRequestPayload::class
+                AppliesHttpProtocolVersion::class,
+                ResolvesRequestPayload::class,
+                AppliesHeaders::class
             ]);
     }
 
@@ -54,15 +65,20 @@ class GuzzleRequestBuilder extends BaseBuilder
         $method = $method ?? $this->getMethod();
         $uri = $uri ?? $this->getUri();
 
-        // Resolve options for this request
-        // NOTE: We should NOT use the withOptions() method here, as it will
-        // be applied for entire builder.
-        $options = $this->prepareDriverOptions($options);
+        // Set the next response's options
+        $this->nextRequestOptions = $options;
 
-        return $this->send(
-            $this->createRequest($method, $uri),
-            $options
+        $response = $this->send(
+            $this->createRequest($method, $uri), // NOTE: Alters the next request options!
+            $this->nextRequestOptions
         );
+
+        // Reset the next request options, to avoid memory leaks or
+        // other unwanted behaviour
+        $this->nextRequestOptions = [];
+
+        // Finally, return the response
+        return $response;
     }
 
     /**
@@ -70,13 +86,32 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     public function createRequest(string $method, $uri): RequestInterface
     {
-        return new Request(
-            $method,
-            $uri,
-            $this->getHeaders(),
-            null, // TODO
-            $this->getProtocolVersion(),
-        );
+        $options = $this->prepareDriverOptions($this->nextRequestOptions);
+
+        // Obtain original handler
+        $originalHandler = $options['handler'] ?? null;
+
+        // Create a "capture" handler
+        $handler = new CaptureHandler();
+        $options['handler'] = $handler;
+
+        // Perform a request, which is NOT sent, but rather captured,
+        // once it has been built.
+        $this->driver()->request($method, $uri, $options);
+
+        // Overwrite the next request options, with the processed options
+        // from Guzzle. This should limit processing time if the builder's
+        // "request()" is sending the captured request.
+        $this->nextRequestOptions = $handler->options();
+
+        // Restore original handler option
+        unset($this->nextRequestOptions['handler']);
+        if(isset($originalHandler)){
+            $this->nextRequestOptions['handler'] = $originalHandler;
+        }
+
+        // Finally, return the built request
+        return $handler->request();
     }
 
     /**
