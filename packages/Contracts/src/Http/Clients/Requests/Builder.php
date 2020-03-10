@@ -226,6 +226,24 @@ interface Builder extends HttpClientAware,
     public function getHeader(string $name);
 
     /**
+     * Set the HTTP protocol version, for the next request
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages
+     *
+     * @param string $version
+     *
+     * @return self
+     */
+    public function useProtocolVersion(string $version): self;
+
+    /**
+     * Get the HTTP protocol version, for the next request
+     *
+     * @return string
+     */
+    public function getProtocolVersion(): string;
+
+    /**
      * Use given Accept header for the next request
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept

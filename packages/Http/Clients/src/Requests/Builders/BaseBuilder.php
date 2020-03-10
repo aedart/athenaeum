@@ -52,6 +52,13 @@ abstract class BaseBuilder implements
     protected array $headers = [];
 
     /**
+     * The Http protocol version
+     *
+     * @var string
+     */
+    protected string $httpProtocolVersion = '1.1';
+
+    /**
      * The http method to use
      *
      * @var string
@@ -278,6 +285,23 @@ abstract class BaseBuilder implements
         }
 
         return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function useProtocolVersion(string $version): Builder
+    {
+        $this->httpProtocolVersion = $version;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getProtocolVersion() : string{
+        return $this->httpProtocolVersion;
     }
 
     /**

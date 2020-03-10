@@ -73,9 +73,9 @@ class GuzzleRequestBuilder extends BaseBuilder
         return new Request(
             $method,
             $uri,
-            $this->getHeaders()
-            // TODO: Body???
-            // TODO: Protocol
+            $this->getHeaders(),
+            null, // TODO
+            $this->getProtocolVersion(),
         );
     }
 
