@@ -121,8 +121,8 @@ interface Builder extends HttpClientAware,
      *
      * @param string|null $method [optional] Http method name. If none given, the previous set is applied
      * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
-     * @param array $options [optional] Given options are merged with this builder already set options.
-     *                      However, these options are not applied on the builder's options!
+     * @param array $options [optional] Driver specific options. These options are merged with
+     *                       builder's already set options, if any given.
      *
      * @return ResponseInterface
      */
@@ -132,8 +132,8 @@ interface Builder extends HttpClientAware,
      * Send the given request
      *
      * @param RequestInterface $request
-     * @param array $options [optional] Driver specific options. Note, options are NOT merged with
-     *                      this builder's existing options!
+     * @param array $options [optional] Driver specific options. These options are merged with
+     *                       builder's already set options, if any given.
      *
      * @return ResponseInterface
      */
