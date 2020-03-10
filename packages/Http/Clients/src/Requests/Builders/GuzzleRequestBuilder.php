@@ -258,17 +258,19 @@ class GuzzleRequestBuilder extends BaseBuilder
         $format = $this->options['data_format'] ?? $this->getDataFormat();
         unset($this->options['data_format']);
 
+        $data = $this->options[$format] ?? [];
+
         switch ($format) {
             case RequestOptions::FORM_PARAMS:
                 $this
                     ->formFormat()
-                    ->setData($this->options[RequestOptions::FORM_PARAMS]);
+                    ->setData($data);
                 break;
 
             case RequestOptions::JSON:
                 $this
                     ->jsonFormat()
-                    ->setData($this->options[RequestOptions::JSON]);
+                    ->setData($data);
                 break;
 
             case RequestOptions::MULTIPART:
