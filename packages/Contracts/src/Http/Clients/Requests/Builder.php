@@ -119,7 +119,7 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|null $method [optional] Http method name. If none given, the previous set is applied
+     * @param string|null $method [optional] Http method name. If none given, builder's method is used
      * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
      * @param array $options [optional] Driver specific options. These options are merged with
      *                       builder's already set options, if any given.
