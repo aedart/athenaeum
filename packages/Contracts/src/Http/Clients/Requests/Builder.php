@@ -132,8 +132,8 @@ interface Builder extends HttpClientAware,
      * Send the given request
      *
      * @param RequestInterface $request
-     * @param array $options [optional] Driver specific options. These options are merged with
-     *                       builder's already set options, if any given.
+     * @param array $options [optional] Driver specific options.
+     *                       NOTE: Builder's options are NOT applied, nor merged with given options!
      *
      * @return ResponseInterface
      */
