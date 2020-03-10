@@ -106,7 +106,7 @@ class GuzzleRequestBuilder extends BaseBuilder
 
         // Restore original handler option
         unset($this->nextRequestOptions['handler']);
-        if(isset($originalHandler)){
+        if (isset($originalHandler)) {
             $this->nextRequestOptions['handler'] = $originalHandler;
         }
 

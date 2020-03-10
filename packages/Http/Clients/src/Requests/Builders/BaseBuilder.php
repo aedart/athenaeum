@@ -300,7 +300,8 @@ abstract class BaseBuilder implements
     /**
      * @inheritdoc
      */
-    public function getProtocolVersion() : string{
+    public function getProtocolVersion(): string
+    {
         return $this->httpProtocolVersion;
     }
 

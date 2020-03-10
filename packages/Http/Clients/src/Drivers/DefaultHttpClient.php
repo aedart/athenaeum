@@ -7,8 +7,6 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Http\Clients\Requests\Builders\GuzzleRequestBuilder;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\RequestOptions;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * Default Http Client
