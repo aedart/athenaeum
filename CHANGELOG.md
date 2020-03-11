@@ -25,7 +25,9 @@ Yet, this was "hack" solution that potentially conflicted with Laravel. This was
 * Deprecated `\Aedart\Console\CommandBase`, `\Aedart\Console\AwareOfScaffoldCommand` and `\Aedart\Console\CreateAwareOfCommand` components.
 Commands have been replaced with updated versions within the [`aedart/athenaeum-support `](https://packagist.org/packages/aedart/athenaeum-support) package.
 The original commands are still available using the `athenaeum` console application.
-* Http `Client` interface has been heavily redesigned, adding several new features. 
+* Http `Client` has been heavily redesigned, adding several new features, but also breaking some backwards compatibility. 
+(_This is especially true if you implemented your own client, using the offered interface_)
+* Http `Client` (implicit also the `Manager`) now depends on the Service `Container`.
 * `DefaultHttpClient` and `JsonHttpClient` have the following [options](http://docs.guzzlephp.org/en/stable/request-options.html) set as default.
 (_Can be overwritten via configuration or via `withOption()` method_)
   * `http_errors` set to `false`.
@@ -71,6 +73,7 @@ It will highjack the `app` binding, which will cause your application to behave 
 * `ListenersViaConfigServiceProvider`, offers registration of event listeners and subscribers via configuration.
 * `ConsoleServiceProvider`, offers console commands to be registered via configuration.
 * `BaseExeptionHandler` abstraction along with a few default exception handlers that can be used with `Application`, if enabled.
+* `Builder`, a Http request builder used by the Http `Client`.
 * `FakerAware` component that can be used for testing purposes.
 * `FakerPartial`, offers basic setup for [Faker](https://github.com/fzaninotto/Faker).
 * `callOrReturn()` utility method in `MethodHelper`.
