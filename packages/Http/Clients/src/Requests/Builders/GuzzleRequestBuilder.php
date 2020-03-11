@@ -30,6 +30,19 @@ class GuzzleRequestBuilder extends BaseBuilder
     protected string $dataFormat = RequestOptions::FORM_PARAMS;
 
     /**
+     * Pipes that prepare the driver options, before
+     * applied on request and sent
+     *
+     * @var string[] List of class paths
+     */
+    protected array $beforeRequestPipes = [
+        MergeWithBuilderOptions::class,
+        AppliesHttpProtocolVersion::class,
+        ResolvesRequestPayload::class,
+        AppliesHeaders::class
+    ];
+
+    /**
      * Temporary request options
      *
      * @var array
@@ -48,13 +61,7 @@ class GuzzleRequestBuilder extends BaseBuilder
 
         $this
             ->extractHeadersFromOptions()
-            ->extractDataOptions()
-            ->setPrepareOptionsPipes([
-                MergeWithBuilderOptions::class,
-                AppliesHttpProtocolVersion::class,
-                ResolvesRequestPayload::class,
-                AppliesHeaders::class
-            ]);
+            ->extractDataOptions();
     }
 
     /**
@@ -86,7 +93,11 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     public function createRequest(string $method, $uri): RequestInterface
     {
-        $options = $this->prepareDriverOptions($this->nextRequestOptions);
+        // Prepare the driver options
+        $options = $this->processDriverOptions(
+            $this->beforeRequestPipes,
+            $this->nextRequestOptions
+        );
 
         // Obtain original handler
         $originalHandler = $options['handler'] ?? null;
