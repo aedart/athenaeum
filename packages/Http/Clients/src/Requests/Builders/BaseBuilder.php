@@ -111,7 +111,9 @@ abstract class BaseBuilder implements
      */
     public function __construct(Client $client, array $options = [])
     {
-        $this->setHttpClient($client);
+        $this
+            ->setHttpClient($client)
+            ->setContainer($client->getContainer());
 
         $this->options = $options;
     }
