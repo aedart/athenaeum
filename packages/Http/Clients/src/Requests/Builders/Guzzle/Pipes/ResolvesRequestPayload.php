@@ -3,7 +3,7 @@
 namespace Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes;
 
 use Aedart\Http\Clients\Requests\Builders\Guzzle\PayloadData;
-use Aedart\Http\Clients\Requests\Builders\PreparedOptions;
+use Aedart\Http\Clients\Requests\Builders\ProcessedOptions;
 use GuzzleHttp\RequestOptions;
 
 /**
@@ -17,15 +17,15 @@ class ResolvesRequestPayload
     /**
      * Sets the request's payload data, via the options
      *
-     * @param PreparedOptions $prepared
+     * @param ProcessedOptions $processed
      * @param mixed $next
      *
      * @return mixed
      */
-    public function handle(PreparedOptions $prepared, $next)
+    public function handle(ProcessedOptions $processed, $next)
     {
         // Get options set from the builder
-        $options = $prepared->options();
+        $options = $processed->options();
 
         // Obtain evt. appended data (e.g. via the post, patch, ...etc)
         // Or perhaps via the withOptions() method on the builder.
@@ -40,13 +40,13 @@ class ResolvesRequestPayload
         );
 
         // Determine the desired data format
-        $format = $options['data_format'] ?? $prepared->builder()->getDataFormat();
+        $format = $options['data_format'] ?? $processed->builder()->getDataFormat();
         unset($options['data_format']);
 
         // Finally, apply the data
         $options[$format] = $data;
-        $prepared->setOptions($options);
+        $processed->setOptions($options);
 
-        return $next($prepared);
+        return $next($processed);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes;
 
-use Aedart\Http\Clients\Requests\Builders\PreparedOptions;
+use Aedart\Http\Clients\Requests\Builders\ProcessedOptions;
 
 /**
  * Applies Headers
@@ -15,22 +15,22 @@ class AppliesHeaders
     /**
      * Sets the request's headers, via the options
      *
-     * @param PreparedOptions $prepared
+     * @param ProcessedOptions $processed
      * @param mixed $next
      *
      * @return mixed
      */
-    public function handle(PreparedOptions $prepared, $next)
+    public function handle(ProcessedOptions $processed, $next)
     {
-        $options = $prepared->options();
+        $options = $processed->options();
 
         $headersFromOptions = $options['headers'] ?? [];
-        $headersFromBuilder = $prepared->builder()->getHeaders();
+        $headersFromBuilder = $processed->builder()->getHeaders();
 
         $options['headers'] = array_merge($headersFromBuilder, $headersFromOptions);
 
         return $next(
-            $prepared->setOptions($options)
+            $processed->setOptions($options)
         );
     }
 }

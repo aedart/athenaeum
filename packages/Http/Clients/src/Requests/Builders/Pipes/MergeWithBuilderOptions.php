@@ -2,7 +2,7 @@
 
 namespace Aedart\Http\Clients\Requests\Builders\Pipes;
 
-use Aedart\Http\Clients\Requests\Builders\PreparedOptions;
+use Aedart\Http\Clients\Requests\Builders\ProcessedOptions;
 
 /**
  * Merge With Builder Options
@@ -15,24 +15,24 @@ class MergeWithBuilderOptions
     /**
      * Merges given options with builder's already set options
      *
-     * @param PreparedOptions $prepared
+     * @param ProcessedOptions $processed
      * @param mixed $next
      *
      * @return mixed
      */
-    public function handle(PreparedOptions $prepared, $next)
+    public function handle(ProcessedOptions $processed, $next)
     {
         // Obtain the builder's already set options
-        $builderOptions = $prepared->builder()->getOptions();
+        $builderOptions = $processed->builder()->getOptions();
 
         // Obtain the given options
-        $setOptions = $prepared->options();
+        $setOptions = $processed->options();
 
         // Merge them together and overwrite the given options
-        $prepared->setOptions(
+        $processed->setOptions(
             array_merge($builderOptions, $setOptions)
         );
 
-        return $next($prepared);
+        return $next($processed);
     }
 }
