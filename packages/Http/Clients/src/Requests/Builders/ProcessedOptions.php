@@ -5,12 +5,12 @@ namespace Aedart\Http\Clients\Requests\Builders;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 
 /**
- * Prepared Driver Options
+ * Processed Driver Options
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders
  */
-class PreparedOptions
+class ProcessedOptions
 {
     /**
      * The Http Request Builder
@@ -20,14 +20,14 @@ class PreparedOptions
     protected Builder $builder;
 
     /**
-     * The prepared driver options
+     * The processed driver options
      *
      * @var array
      */
     protected array $options = [];
 
     /**
-     * PreparedOptions constructor.
+     * ProcessedOptions constructor.
      *
      * @param Builder $builder
      * @param array $options [optional]
@@ -40,7 +40,7 @@ class PreparedOptions
     }
 
     /**
-     * Set the prepared driver options
+     * Set the processed driver options
      *
      * @param array $options [optional]
      *
@@ -54,7 +54,7 @@ class PreparedOptions
     }
 
     /**
-     * Returns the prepared driver options
+     * Returns the processed driver options
      *
      * @return array
      */
