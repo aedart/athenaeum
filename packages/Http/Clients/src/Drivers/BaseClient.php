@@ -4,6 +4,9 @@ namespace Aedart\Http\Clients\Drivers;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
+use Aedart\Support\Helpers\Container\ContainerTrait;
+use Illuminate\Contracts\Container\Container;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -17,6 +20,8 @@ use Psr\Http\Message\ResponseInterface;
  */
 abstract class BaseClient implements Client
 {
+    use ContainerTrait;
+
     /**
      * Http Client specific options
      *
@@ -27,10 +32,13 @@ abstract class BaseClient implements Client
     /**
      * BaseClient constructor.
      *
+     * @param Container $container
      * @param array $options [optional]
      */
-    public function __construct(array $options = [])
+    public function __construct(Container $container, array $options = [])
     {
+        $this->setContainer($container);
+
         $this->options = array_merge(
             $this->initialOptions(),
             $options

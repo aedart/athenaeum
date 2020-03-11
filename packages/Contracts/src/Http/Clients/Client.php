@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use Psr\Http\Client\ClientInterface;
 
 /**
@@ -11,7 +12,9 @@ use Psr\Http\Client\ClientInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Clients
  */
-interface Client extends ClientInterface
+interface Client extends
+    ClientInterface,
+    ContainerAware
 {
 //    /**
 //     * Make a GET request
