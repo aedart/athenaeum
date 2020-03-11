@@ -7,6 +7,7 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Http\Clients\Requests\Builders\GuzzleRequestBuilder;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Container\Container;
 
 /**
  * Default Http Client
@@ -26,11 +27,12 @@ class DefaultHttpClient extends BaseClient
     /**
      * DefaultHttpClient constructor.
      *
+     * @param Container $container
      * @param array $options [optional]
      */
-    public function __construct(array $options = [])
+    public function __construct(Container $container, array $options = [])
     {
-        parent::__construct($options);
+        parent::__construct($container, $options);
 
         $this->client = new GuzzleClient($this->options);
     }
