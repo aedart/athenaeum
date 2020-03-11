@@ -192,13 +192,13 @@ class GuzzleRequestBuilder extends BaseBuilder
             return $this->disableRedirects();
         }
 
-        return $this->withOption('allow_redirects', [
-            'max' => $amount,
-            'strict' => true,
-            'referer' => true,
-            'protocols' => ['http', 'https'],
-            'track_redirects' => false
+        $allowRedirects = $this->getOption('allow_redirects') ?? [];
+
+        $modified = array_merge($allowRedirects, [
+            'max' => $amount
         ]);
+
+        return $this->withOption('allow_redirects', $modified);
     }
 
     /**
