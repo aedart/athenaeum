@@ -6,8 +6,11 @@ use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Manager as HttpClientsManager;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
+use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use Aedart\Http\Clients\Exceptions\ProfileNotFound;
 use Aedart\Support\Helpers\Config\ConfigTrait;
+use Aedart\Support\Helpers\Container\ContainerTrait;
+use Illuminate\Contracts\Container\Container;
 
 /**
  * Http Clients Manager
@@ -17,8 +20,10 @@ use Aedart\Support\Helpers\Config\ConfigTrait;
  */
 class Manager implements
     HttpClientsManager,
+    ContainerAware,
     ConfigAware
 {
+    use ContainerTrait;
     use ConfigTrait;
 
     /**
@@ -27,6 +32,16 @@ class Manager implements
      * @var Client[]
      */
     protected array $clients = [];
+
+    /**
+     * Manager constructor.
+     *
+     * @param Container|null $container [optional]
+     */
+    public function __construct(?Container $container = null)
+    {
+        $this->setContainer($container);
+    }
 
     /**
      * {@inheritdoc}
@@ -47,7 +62,10 @@ class Manager implements
         $options = array_merge_recursive($configuration['options'], $options);
 
         // Finally, create the Http Client
-        return $this->clients[$profile] = new $driver($options);
+        return $this->clients[$profile] = new $driver(
+            $this->getContainer(),
+            $options
+        );
     }
 
     /*****************************************************************
