@@ -25,7 +25,7 @@ use Psr\Http\Message\UriInterface;
  */
 abstract class BaseBuilder implements
     Builder,
-  ContainerAware
+    ContainerAware
 {
     use HttpClientTrait;
     use ContainerTrait;
