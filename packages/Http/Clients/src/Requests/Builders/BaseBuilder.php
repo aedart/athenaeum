@@ -6,11 +6,11 @@ use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use Aedart\Http\Clients\Exceptions\InvalidUri;
-use Aedart\Http\Clients\Requests\Builders\Pipes\MergeWithBuilderOptions;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Contracts\Pipeline\Pipeline as PipelineInterface;
 use Illuminate\Pipeline\Pipeline;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
@@ -92,16 +92,6 @@ abstract class BaseBuilder implements
      * @var array
      */
     protected array $data = [];
-
-    /**
-     * Pipes that prepare the driver options, before
-     * applied on request and sent
-     *
-     * @var array|mixed
-     */
-    protected array $prepareOptionsPipes = [
-        MergeWithBuilderOptions::class
-    ];
 
     /**
      * BaseBuilder constructor.
@@ -428,24 +418,6 @@ abstract class BaseBuilder implements
     /**
      * @inheritdoc
      */
-    public function setPrepareOptionsPipes($pipes): Builder
-    {
-        $this->prepareOptionsPipes = $pipes;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPrepareOptionsPipes()
-    {
-        return $this->prepareOptionsPipes;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function client(): Client
     {
         return $this->getHttpClient();
@@ -466,25 +438,39 @@ abstract class BaseBuilder implements
      ****************************************************************/
 
     /**
-     * Prepares the driver options, just before the request is built
-     * and sent.
+     * Processes the driver's options via given set of pipes
      *
+     * Depending on the given pipes and options, both the
+     * provided options as well as this builder's properties
+     * and state can be mutated by the pipes.
+     *
+     * @see makePipeline
+     * @see \Illuminate\Contracts\Pipeline\Pipeline
+     *
+     * @param string[] $pipes List of class paths
      * @param array $options [optional]
      *
-     * @return array
+     * @return array Processed Driver Options
      */
-    protected function prepareDriverOptions(array $options = []): array
+    protected function processDriverOptions(array $pipes, array $options = []): array
     {
-        $pipe = new Pipeline($this->getContainer());
-
-        return $pipe
-            ->send(new PreparedOptions($this, $options))
-            ->through(
-                $this->getPrepareOptionsPipes()
-            )
-            ->then(function (PreparedOptions $prepared) {
+        return $this
+            ->makePipeline()
+            ->send(new ProcessedOptions($this, $options))
+            ->through($pipes)
+            ->then(function (ProcessedOptions $prepared) {
                 return $prepared->options();
             });
+    }
+
+    /**
+     * Creates a new Pipeline instance
+     *
+     * @return PipelineInterface
+     */
+    protected function makePipeline(): PipelineInterface
+    {
+        return new Pipeline($this->getContainer());
     }
 
     /**
