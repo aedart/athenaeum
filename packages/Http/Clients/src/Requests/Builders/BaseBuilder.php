@@ -384,7 +384,7 @@ abstract class BaseBuilder implements
     /**
      * @inheritdoc
      */
-    public function withRaw($body): Builder
+    public function withRawPayload($body): Builder
     {
         $this->rawPayload = $body;
 
@@ -394,7 +394,7 @@ abstract class BaseBuilder implements
     /**
      * @inheritdoc
      */
-    public function getRaw()
+    public function getRawPayload()
     {
         return $this->rawPayload;
     }

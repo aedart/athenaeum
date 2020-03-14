@@ -447,16 +447,16 @@ interface Builder extends HttpClientAware,
      * method will result in existing payload being
      * overwritten.
      *
-     * @see withData
-     * @see getRaw
-     *
      * @param mixed $body
      *
      * @return self
      *
      * @throws Throwable
+     *@see getRawPayload
+     *
+     * @see withData
      */
-    public function withRaw($body): self;
+    public function withRawPayload($body): self;
 
     /**
      * Get the next request's raw payload (body)
@@ -464,12 +464,12 @@ interface Builder extends HttpClientAware,
      * If data has been set via "withData" or "setData",
      * then this method will not return anything (null).
      *
-     * @see withRaw
-     * @see withData
-     *
      * @return mixed Null if raw payload not set
+     *@see withData
+     *
+     * @see withRawPayload
      */
-    public function getRaw();
+    public function getRawPayload();
 
     /**
      * Apply a set of options for the next request
