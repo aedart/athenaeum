@@ -10,12 +10,12 @@ description: Athenaeum Packages Upgrade Guide
 
 ### Laravel `v7.x`
 
-Upgraded the `illuminate/*` packages to version `^7.0`.
+Upgraded the `illuminate/*` packages to version `7.x`.
 Please review Laravel's [upgrade guide](https://laravel.com/docs/7.x/upgrade) for additional information.
 
 ### Symfony `v5.x`
 
-Upgraded the `symfony/*` packages to version `^5.0`.
+Upgraded the `symfony/*` packages to version `5.x`.
 Please review Symfony's [upgrade guide](https://symfony.com/doc/current/setup/upgrade_major.html) for additional information.
 
 ### Http `Client` Redesigned
