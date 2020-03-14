@@ -14,6 +14,7 @@ use Illuminate\Contracts\Pipeline\Pipeline as PipelineInterface;
 use Illuminate\Pipeline\Pipeline;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
+use Throwable;
 
 /**
  * Http Request Base Builder
@@ -89,9 +90,21 @@ abstract class BaseBuilder implements
     /**
      * The request payload (body)
      *
+     * Might be empty, if raw payload used.
+     *
      * @var array
      */
     protected array $data = [];
+
+    /**
+     * Raw payload (body) of request.
+     *
+     * Might NOT be set, if data is set via
+     * "withData" or "setData".
+     *
+     * @var mixed
+     */
+    protected $rawPayload;
 
     /**
      * BaseBuilder constructor.
@@ -366,6 +379,24 @@ abstract class BaseBuilder implements
     public function getData(): array
     {
         return $this->data;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function withRaw($body): Builder
+    {
+        $this->rawPayload = $body;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getRaw()
+    {
+        return $this->rawPayload;
     }
 
     /**

@@ -9,6 +9,7 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
+use Throwable;
 
 /**
  * Http Request Builder
@@ -396,12 +397,17 @@ interface Builder extends HttpClientAware,
      *
      * Method will merge given data with existing payload.
      *
+     * Depending on driver, method might not allow setting
+     * data if a raw payload has been set.
+     *
      * @see setData
      * @see getData
      *
      * @param array $data Decoded payload, key-value pairs
      *
      * @return self
+     *
+     * @throws Throwable
      */
     public function withData(array $data): self;
 
@@ -410,12 +416,17 @@ interface Builder extends HttpClientAware,
      *
      * Method will overwrite existing data.
      *
+     * Depending on driver, method might not allow setting
+     * data if a raw payload has been set.
+     *
      * @see withData
      * @see getData
      *
      * @param array $data Decoded payload, key-value pairs
      *
      * @return self
+     *
+     * @throws Throwable
      */
     public function setData(array $data): self;
 
@@ -425,6 +436,40 @@ interface Builder extends HttpClientAware,
      * @return array Decoded payload, key-value pairs
      */
     public function getData(): array;
+
+    /**
+     * Set the next request's raw payload (body)
+     *
+     * Depending on driver, method might not allow setting
+     * the raw payload, if data has already been set.
+     *
+     * If a raw payload has already been set, invoking this
+     * method will result in existing payload being
+     * overwritten.
+     *
+     * @see withData
+     * @see getRaw
+     *
+     * @param mixed $body
+     *
+     * @return self
+     *
+     * @throws Throwable
+     */
+    public function withRaw($body): self;
+
+    /**
+     * Get the next request's raw payload (body)
+     *
+     * If data has been set via "withData" or "setData",
+     * then this method will not return anything (null).
+     *
+     * @see withRaw
+     * @see withData
+     *
+     * @return mixed Null if raw payload not set
+     */
+    public function getRaw();
 
     /**
      * Apply a set of options for the next request
