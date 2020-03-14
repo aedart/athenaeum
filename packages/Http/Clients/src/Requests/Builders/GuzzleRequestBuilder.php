@@ -186,6 +186,16 @@ class GuzzleRequestBuilder extends BaseBuilder
     }
 
     /**
+     * @inheritdoc
+     */
+    public function withRawPayload($body): Builder
+    {
+        $this->useDataFormat(RequestOptions::BODY);
+
+        return parent::withRawPayload($body);
+    }
+
+    /**
      * @inheritDoc
      */
     public function maxRedirects(int $amount): Builder
