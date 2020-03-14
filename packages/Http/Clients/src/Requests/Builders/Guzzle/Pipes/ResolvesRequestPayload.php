@@ -61,7 +61,7 @@ class ResolvesRequestPayload
      */
     protected function obtainData(string $format, array $options, Builder $builder)
     {
-        switch ($format){
+        switch ($format) {
             // Array formats
             case RequestOptions::JSON:
             case RequestOptions::FORM_PARAMS:
@@ -75,7 +75,7 @@ class ResolvesRequestPayload
             case RequestOptions::BODY:
             default:
                 // First, try to obtain "raw" payload from given options
-                if( ! empty($options[RequestOptions::BODY])){
+                if (!empty($options[RequestOptions::BODY])) {
                     return PayloadData::extract($options);
                 }
 

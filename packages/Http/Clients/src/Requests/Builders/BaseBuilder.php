@@ -14,7 +14,6 @@ use Illuminate\Contracts\Pipeline\Pipeline as PipelineInterface;
 use Illuminate\Pipeline\Pipeline;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
-use Throwable;
 
 /**
  * Http Request Base Builder

@@ -44,7 +44,7 @@ class PayloadData
 
         // In case that "body" is used, then we cannot make use
         // the other data identifiers.
-        if(!empty($options[RequestOptions::BODY])){
+        if (!empty($options[RequestOptions::BODY])) {
             return $options[RequestOptions::BODY];
         }
 
