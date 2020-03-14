@@ -7,6 +7,7 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers\CaptureHandler;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHttpProtocolVersion;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ResolvesRequestPayload;
 use Aedart\Http\Clients\Requests\Builders\Pipes\MergeWithBuilderOptions;
 use GuzzleHttp\Client as GuzzleClient;
@@ -60,7 +61,7 @@ class GuzzleRequestBuilder extends BaseBuilder
         parent::__construct($client, $options);
 
         $this
-            ->extractHeadersFromOptions()
+            //->extractHeadersFromOptions()
             ->extractDataOptions();
     }
 
@@ -240,22 +241,15 @@ class GuzzleRequestBuilder extends BaseBuilder
      ****************************************************************/
 
     /**
-     * Extracts the Http headers from the options into this
-     * builder.
-     *
-     * @return self
+     * @inheritdoc
      */
-    protected function extractHeadersFromOptions()
+    protected function prepareBuilderFromOptions(array $options = []): array
     {
-        $headers = $this->options['headers'] ?? [];
+        $options = parent::prepareBuilderFromOptions($options);
 
-        if (!empty($headers)) {
-            $this->withHeaders($headers);
-        }
-
-        unset($this->options['headers']);
-
-        return $this;
+        return $this->processDriverOptions([
+            ExtractsHeaders::class
+        ], $options);
     }
 
     /**
