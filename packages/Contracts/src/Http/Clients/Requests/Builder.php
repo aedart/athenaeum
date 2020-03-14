@@ -472,6 +472,14 @@ interface Builder extends HttpClientAware,
     public function getRawPayload();
 
     /**
+     * Determine if the next request has a raw
+     * payload (body) set
+     *
+     * @return bool
+     */
+    public function hasRawPayload(): bool;
+
+    /**
      * Apply a set of options for the next request
      *
      * Method will merge given options with Client's default options

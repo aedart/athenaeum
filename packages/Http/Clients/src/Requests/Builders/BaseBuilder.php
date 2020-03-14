@@ -400,6 +400,15 @@ abstract class BaseBuilder implements
     }
 
     /**
+     * @inheritdoc
+     */
+    public function hasRawPayload(): bool
+    {
+        return !empty($this->rawPayload);
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     public function withOptions(array $options = []): Builder
