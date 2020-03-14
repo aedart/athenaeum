@@ -8,7 +8,7 @@ Provides a Http Client wrapper along with a Manager that is able to handle multi
 This allows you to segment each api you communicate with, into it's own client instance.
 
 By default, [Guzzle Http Client](http://docs.guzzlephp.org/en/stable/index.html) is used as the default Http Client.
-However, this package does not limit to using using only Guzzle. You can [create your own wrapper](./custom.md).
+However, this package does not limit you to using using only Guzzle. You can [create your own wrapper](./custom.md).
 
 ## Example
 
