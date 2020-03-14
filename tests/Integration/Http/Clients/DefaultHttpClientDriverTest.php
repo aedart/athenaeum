@@ -5,8 +5,10 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Aedart\Utils\Json;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\RequestOptions;
 
 /**
  * DefaultHttpClientDriverTest
@@ -542,5 +544,153 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
             ->multipartFormat();
 
         $this->assertSame('multipart', $client->getDataFormat());
+    }
+
+    /**
+     * @test
+     *
+     * @throws \JsonException
+     */
+    public function canSetDataViaTheBuilder()
+    {
+        $mockedResponses = $this->makeResponseMock([
+            new Response(200)
+        ]);
+
+        $client = $this->getHttpClient();
+
+        $data = [
+            'name' => 'Jim Carter'
+        ];
+
+        $client
+            ->withOption('handler', $mockedResponses)
+            ->jsonFormat()
+            ->withData($data)
+            ->post('/users');
+
+        $sentBody = $this->lastRequest->getBody()->getContents();
+        ConsoleDebugger::output($sentBody);
+
+        $decoded = Json::decode($sentBody, true);
+
+        $this->assertArrayHasKey('name', $decoded);
+        $this->assertSame($data['name'], $decoded['name']);
+    }
+
+    /**
+     * @test
+     *
+     * @throws \JsonException
+     */
+    public function mergesMultipleDataSources()
+    {
+        $mockedResponses = $this->makeResponseMock([
+            new Response(200)
+        ]);
+
+        $client = $this->getHttpClient();
+
+        $dataA = [ 'name' => 'Sven Wolfson' ];
+        $dataB = [ 'age' => 37 ];
+        $dataC = [ 'address' => 'Griswalt Street 3' ];
+
+        $client
+            ->withOption('handler', $mockedResponses)
+            ->jsonFormat()
+            ->withData($dataA)
+            ->withData($dataB)
+            ->post('/users', $dataC);
+
+        $sentBody = $this->lastRequest->getBody()->getContents();
+        ConsoleDebugger::output($sentBody);
+
+        $decoded = Json::decode($sentBody, true);
+
+        $this->assertArrayHasKey('name', $decoded);
+        $this->assertSame($dataA['name'], $decoded['name']);
+
+        $this->assertArrayHasKey('age', $decoded);
+        $this->assertSame($dataB['age'], $decoded['age']);
+
+        $this->assertArrayHasKey('address', $decoded);
+        $this->assertSame($dataC['address'], $decoded['address']);
+    }
+
+    /**
+     * @test
+     */
+    public function canSetTheRawPayload()
+    {
+        $mockedResponses = $this->makeResponseMock([
+            new Response(200)
+        ]);
+
+        $client = $this->getHttpClient();
+
+        $body = '<p>Sweet</p>';
+
+        $client
+            ->withOption('handler', $mockedResponses)
+            ->withRawPayload($body)
+            ->post('/content');
+
+        $sentBody = $this->lastRequest->getBody()->getContents();
+        ConsoleDebugger::output($sentBody);
+
+        $this->assertSame($body, $sentBody);
+    }
+
+    /**
+     * @test
+     */
+    public function favoursRawPayloadFromOptions()
+    {
+        $mockedResponses = $this->makeResponseMock([
+            new Response(200)
+        ]);
+
+        $client = $this->getHttpClient();
+
+        $bodyA = '<p>Sweet</p>';
+        $bodyB = '<p>Due</p>';
+
+        $client
+            ->withOption('handler', $mockedResponses)
+            ->withRawPayload($bodyA)
+            ->withOption(RequestOptions::BODY, $bodyB) // Only other way to set raw body
+            ->post('/content'); // Method only accepts array...
+
+        $sentBody = $this->lastRequest->getBody()->getContents();
+        ConsoleDebugger::output($sentBody);
+
+        $this->assertSame($bodyB, $sentBody);
+    }
+
+    /**
+     * @test
+     */
+    public function ignoresArrayDataIfRawPayloadSet()
+    {
+        $mockedResponses = $this->makeResponseMock([
+            new Response(200)
+        ]);
+
+        $client = $this->getHttpClient();
+
+        $body = '<p>Louise Lane</p>';
+
+        $client
+            ->withOption('handler', $mockedResponses)
+            ->jsonFormat()
+            ->withData([ 'name' => 'Jane Jr.' ])
+            ->withRawPayload($body)
+            ->post('/users');
+
+        $sentBody = $this->lastRequest->getBody()->getContents();
+        ConsoleDebugger::output($sentBody);
+
+        $this->assertIsString($sentBody);
+        $this->assertSame($body, $sentBody);
     }
 }
