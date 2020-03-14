@@ -7,6 +7,7 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers\CaptureHandler;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHttpProtocolVersion;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractHttpProtocolVersion;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ResolvesRequestPayload;
 use Aedart\Http\Clients\Requests\Builders\Pipes\MergeWithBuilderOptions;
@@ -248,7 +249,8 @@ class GuzzleRequestBuilder extends BaseBuilder
         $options = parent::prepareBuilderFromOptions($options);
 
         return $this->processDriverOptions([
-            ExtractsHeaders::class
+            ExtractsHeaders::class,
+            ExtractHttpProtocolVersion::class
         ], $options);
     }
 
