@@ -24,7 +24,7 @@
         "codeception/module-asserts": "1.1.*",
         "fzaninotto/faker": "1.9.*",
         "mockery/mockery": "1.3.*",
-        "orchestra/testbench": "^5.0",
+        "orchestra/testbench": "^5.1",
         "aedart/athenaeum-contracts": "dev-master",
         "aedart/athenaeum-container": "dev-master"
     },
