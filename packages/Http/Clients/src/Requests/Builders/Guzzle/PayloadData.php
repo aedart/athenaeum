@@ -26,7 +26,6 @@ class PayloadData
     {
         return [
             RequestOptions::FORM_PARAMS,
-            RequestOptions::BODY,
             RequestOptions::JSON,
             RequestOptions::MULTIPART
         ];
@@ -37,12 +36,20 @@ class PayloadData
      *
      * @param array $options
      *
-     * @return array
+     * @return mixed Array if form_params, json or multipart.
      */
-    public static function extract(array $options): array
+    public static function extract(array $options)
     {
         $targets = static::dataIdentifiers();
 
+        // In case that "body" is used, then we cannot make use
+        // the other data identifiers.
+        if(!empty($options[RequestOptions::BODY])){
+            return $options[RequestOptions::BODY];
+        }
+
+        // Otherwise, we can merge various arrays into a single
+        // array of data...
         $output = [];
         foreach ($targets as $key) {
             $output = static::mergeIfExists($key, $options, $output);

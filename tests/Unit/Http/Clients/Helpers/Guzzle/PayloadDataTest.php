@@ -28,9 +28,6 @@ class PayloadDataTest extends UnitTestCase
             RequestOptions::FORM_PARAMS => [
                 'name' => 'John Due',
             ],
-            RequestOptions::BODY => [
-                'age' => '32',
-            ],
             RequestOptions::JSON => [
                 'mail' => 'john.due@example.com',
             ],
@@ -46,10 +43,42 @@ class PayloadDataTest extends UnitTestCase
 
         ConsoleDebugger::output($data);
 
+        $this->assertIsArray($data);
         $this->assertArrayHasKey('name', $data);
-        $this->assertArrayHasKey('age', $data);
         $this->assertArrayHasKey('mail', $data);
         $this->assertArrayHasKey('phone', $data);
         $this->assertArrayNotHasKey('address', $data);
+    }
+
+    /**
+     * @test
+     */
+    public function extractsOnlyRawBodyIfStated()
+    {
+        $options = [
+            RequestOptions::FORM_PARAMS => [
+                'name' => 'John Due',
+            ],
+            RequestOptions::JSON => [
+                'mail' => 'john.due@example.com',
+            ],
+            RequestOptions::MULTIPART => [
+                'phone' => '55 55 55 55',
+            ],
+            'other' => [
+                'address' => 'Somewhere Str. 77'
+            ],
+
+            // NOTE: This is the ONLY one used, when
+            // stated...
+            RequestOptions::BODY => 'raw payload...'
+        ];
+
+        $data = PayloadData::extract($options);
+
+        ConsoleDebugger::output($data);
+
+        $this->assertIsString($data);
+        $this->assertSame('raw payload...', $data);
     }
 }
