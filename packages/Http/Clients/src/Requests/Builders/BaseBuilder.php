@@ -105,7 +105,8 @@ abstract class BaseBuilder implements
             ->setHttpClient($client)
             ->setContainer($client->getContainer());
 
-        $this->options = $options;
+        // Prepare this builder, using the following options
+        $this->options = $this->prepareBuilderFromOptions($options);
     }
 
     /**
@@ -436,6 +437,21 @@ abstract class BaseBuilder implements
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * Prepares this builder, based on given driver specific options.
+     *
+     * Method MIGHT alter the resulting driver options, depending on
+     * circumstance and context.
+     *
+     * @param array $options [optional] Driver specific options
+     *
+     * @return array Driver specific options
+     */
+    protected function prepareBuilderFromOptions(array $options = []): array
+    {
+        return $options;
+    }
 
     /**
      * Processes the driver's options via given set of pipes
