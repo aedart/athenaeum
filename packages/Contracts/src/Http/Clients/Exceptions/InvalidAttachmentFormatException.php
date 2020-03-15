@@ -13,5 +13,4 @@ namespace Aedart\Contracts\Http\Clients\Exceptions;
  */
 interface InvalidAttachmentFormatException
 {
-
 }
