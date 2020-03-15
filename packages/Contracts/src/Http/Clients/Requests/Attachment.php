@@ -70,8 +70,7 @@ interface Attachment extends Arrayable
     public function getContents();
 
     /**
-     * Set this attachment's contents from given
-     * file path.
+     * Use given file as this attachment's contents
      *
      * Method will attempt to open given file and set
      * the contents using a resource
@@ -82,7 +81,7 @@ interface Attachment extends Arrayable
      *
      * @throws InvalidFilePathException
      */
-    public function file(string $path): self;
+    public function attachFile(string $path): self;
 
     /**
      * Set the attachment's filename to be used by a request
