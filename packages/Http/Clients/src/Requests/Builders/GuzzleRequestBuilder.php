@@ -32,6 +32,17 @@ class GuzzleRequestBuilder extends BaseBuilder
     protected string $dataFormat = RequestOptions::FORM_PARAMS;
 
     /**
+     * Pipes that are used to prepare this builder,
+     * based on provided driver options
+     *
+     * @var string[] List of class paths
+     */
+    protected array $prepareBuilderPipes = [
+        ExtractsHeaders::class,
+        ExtractHttpProtocolVersion::class
+    ];
+
+    /**
      * Pipes that prepare the driver options, before
      * applied on request and sent
      *
@@ -258,10 +269,7 @@ class GuzzleRequestBuilder extends BaseBuilder
     {
         $options = parent::prepareBuilderFromOptions($options);
 
-        return $this->processDriverOptions([
-            ExtractsHeaders::class,
-            ExtractHttpProtocolVersion::class
-        ], $options);
+        return $this->processDriverOptions($this->prepareBuilderPipes, $options);
     }
 
     /**
