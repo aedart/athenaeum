@@ -15,5 +15,4 @@ use InvalidArgumentException;
  */
 class InvalidAttachmentFormat extends InvalidArgumentException implements InvalidAttachmentFormatException
 {
-
 }
