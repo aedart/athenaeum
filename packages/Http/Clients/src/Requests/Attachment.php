@@ -43,7 +43,7 @@ class Attachment implements AttachmentInterface
      *
      * @var string|null
      */
-    protected ?string $filename;
+    protected ?string $filename = null;
 
     /**
      * Attachment constructor.
