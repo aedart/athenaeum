@@ -37,9 +37,6 @@ interface Attachment extends Arrayable
     /**
      * Set the attachment's Http headers
      *
-     * Method will merge with existing headers, if any have previously
-     * been set.
-     *
      * @param array $headers [optional] Key-value pair
      *
      * @return self
