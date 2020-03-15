@@ -3,9 +3,11 @@
 namespace Aedart\Tests\Integration\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Client;
+use Aedart\Http\Clients\Requests\Attachment;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use Aedart\Utils\Json;
+use Codeception\Configuration;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\RequestOptions;
@@ -693,4 +695,121 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
         $this->assertIsString($sentBody);
         $this->assertSame($body, $sentBody);
     }
+
+    /**
+     * @test
+     *
+     * @throws \Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException
+     */
+    public function canAttachFiles()
+    {
+        $pathPrefix = Configuration::dataDir() . '/http/clients/attachments/';
+        $fileA = $pathPrefix . 'config.ini';
+        $fileB = $pathPrefix . 'lipsum.txt';
+        $fileC = $pathPrefix . 'test.md';
+        $fileD = $pathPrefix . 'data';
+
+        // File as attachment instance
+        $attachmentA = $this->makeAttachment('fileA')
+                    ->attachFile($fileA)
+                    ->headers([ 'X-Foo' => 'bar' ])
+                    ->filename('setup.ini');
+
+        // File as callback
+        $attachmentB = function (Attachment $file) use ($fileB) {
+            $file
+                ->name('text.txt')
+                ->contents(fopen($fileB, 'r'));
+        };
+
+        // File as Guzzle option (multipart format)
+        $attachmentC = [
+            [
+                'name' => 'help_file',
+                'contents' => fopen($fileC, 'r'),
+                'filename' => 'README.md'
+            ]
+        ];
+
+        // Form data (to test if arrays are merged correctly)
+        $data = [ 'person' => 'Sine Oleson' ];
+
+        // --------------------------------------------------------------- //
+        $mockedResponses = $this->makeResponseMock([ new Response(200) ]);
+
+        $client = $this->getHttpClient();
+        $builder = $client
+            ->withOption('handler', $mockedResponses)
+
+            // Attachment instance
+            ->withAttachment('setup', $attachmentA)
+
+            // Callback
+            ->withAttachment('text', $attachmentB)
+
+            // Guzzle multipart option
+            ->withOption('multipart', $attachmentC)
+
+            // Using attach-file method
+            ->attachFile('data', $fileD, [ 'X-Swing' => 'sweet'], 'data.txt')
+
+            // Additional form data
+            ->withData($data);
+
+        $builder->post('/records');
+
+        // --------------------------------------------------------------- //
+
+        $this->assertTrue($builder->hasAttachment('setup'), 'fileA not in builder');
+        $this->assertTrue($builder->hasAttachment('text'), 'fileB not in builder');
+        $this->assertTrue($builder->hasAttachment('data'), 'Attached file not in builder (via attach-file method)');
+
+        // --------------------------------------------------------------- //
+
+        $request = $this->lastRequest;
+        $contents = $request->getBody()->getContents();
+        ConsoleDebugger::output($contents);
+
+        // Attachment A
+        $this->assertAttachmentInPayload(
+            $contents,
+            'setup',
+            file_get_contents($fileA),
+            [ 'X-Foo' => 'bar' ],
+            'setup.ini'
+        );
+
+        // Attachment B
+        $this->assertAttachmentInPayload(
+            $contents,
+            'text',
+            file_get_contents($fileB),
+            [],
+            'lipsum.txt'
+        );
+
+        // Attachment C (via multipart options)
+        $this->assertAttachmentInPayload(
+            $contents,
+            'help_file',
+            file_get_contents($fileC),
+            [],
+            'README.md'
+        );
+
+        // Attachment D
+        $this->assertAttachmentInPayload(
+            $contents,
+            'data',
+            file_get_contents($fileD),
+            [ 'X-Swing' => 'sweet' ],
+            'data.txt'
+        );
+
+        // Form input data
+        $this->assertStringContainsString("name=\"person\"", $contents, 'Form input data name not part of payload');
+        $this->assertStringContainsString('Sine Oleson', $contents, 'Form input data value not part of payload');
+    }
+
+
 }
