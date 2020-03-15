@@ -15,5 +15,4 @@ use InvalidArgumentException;
  */
 class InvalidFilePath extends InvalidArgumentException implements InvalidFilePathException
 {
-
 }

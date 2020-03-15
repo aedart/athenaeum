@@ -114,7 +114,7 @@ class Attachment implements AttachmentInterface
      */
     public function attachFile(string $path): AttachmentInterface
     {
-        if(!file_exists($path)){
+        if (!file_exists($path)) {
             throw new InvalidFilePath(sprintf('Cannot attach file %s, please check your path', $path));
         }
 
