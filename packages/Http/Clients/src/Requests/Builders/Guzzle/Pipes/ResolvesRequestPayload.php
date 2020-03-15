@@ -99,16 +99,29 @@ class ResolvesRequestPayload
      */
     protected function attachmentData(array $options, Builder $builder): array
     {
-        $attachments = $builder->getAttachments();
-
+        // Attachments
         $data = array_map(function (Attachment $attachment) {
             return $attachment->toArray();
-        }, $attachments);
+        }, $builder->getAttachments());
 
-        return array_merge(
-            $data,
-            $this->mergeData($options, $builder)
-        );
+        // Append form input data
+        $inputData = $this->mergeData($options, $builder);
+        foreach ($inputData as $key => $value){
+            // In case that multipart option might have been used.
+            if(!is_string($key)){
+                $output[$key] = $value;
+                continue;
+            }
+
+            // Append regular form input data
+            $data[] = [
+                'name' => $key,
+                'contents' => $value
+            ];
+        }
+
+        // Finally, merge the attachments and form input data
+        return $data;
     }
 
     /**
