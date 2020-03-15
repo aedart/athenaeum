@@ -429,14 +429,7 @@ abstract class BaseBuilder implements
         $this->multipartFormat();
 
         if (is_callable($attachment)) {
-            // Create new attachment instance
-            $instance = $this->makeAttachment($name);
-
-            // Apply callback
-            $attachment($instance);
-
-            // Overwrite attachment with the instance
-            $attachment = $instance;
+            $attachment = $this->resolveCallbackAttachment($attachment, $name);
         }
 
         if (!($attachment instanceof Attachment)) {
@@ -447,6 +440,9 @@ abstract class BaseBuilder implements
         if ($name === static::NO_ATTACHMENT_NAME) {
             $name = $attachment->getName();
         }
+
+        // Overwrite the name of the attachment
+        $attachment->name($name);
 
         // Finally add the attachment
         $this->attachments[$name] = $attachment;
@@ -635,6 +631,29 @@ abstract class BaseBuilder implements
             ->then(function (ProcessedOptions $prepared) {
                 return $prepared->options();
             });
+    }
+
+    /**
+     * Resolves an attachment from given callback
+     *
+     * @param callable $callback New attachment instance is given as callback argument
+     * @param string|null $name [optional] Defaults to a "no name" identifier, if none given
+     *
+     * @return Attachment
+     */
+    protected function resolveCallbackAttachment(callable $callback, ?string $name = null): Attachment
+    {
+        // Resolve name, if none given
+        $name = $name ?? static::NO_ATTACHMENT_NAME;
+
+        // Create attachment
+        $attachment = $this->makeAttachment($name);
+
+        // Invoke callback
+        $callback($attachment);
+
+        // Finally, return attachment
+        return $attachment;
     }
 
     /**
