@@ -150,4 +150,41 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     {
         return new Attachment($name);
     }
+
+    /*****************************************************************
+     * Custom Asserts
+     ****************************************************************/
+
+    /**
+     * Assert attachment in request payload
+     *
+     * @param string $body
+     * @param string $name
+     * @param string $value
+     * @param array $headers [optional] A single header, key = name, value = header value
+     * @param string|null $filename [optional]
+     */
+    protected function assertAttachmentInPayload(
+        string $body,
+        string $name,
+        string $value,
+        array $headers = [],
+        ?string $filename = null
+    ) {
+        // Assert name
+        $this->assertStringContainsString("name=\"{$name}\"", $body, "{$name} is not part of payload");
+
+        // Assert value
+        $this->assertStringContainsString($value, $body, "Payload does not contain value (for {$name} attachment)");
+
+        // Assert headers
+        foreach($headers as $key => $value){
+            $this->assertStringContainsString("{$key}: {$value}", $body, "Header is not part of payload (for {$name} attachment)");
+        }
+
+        // Assert filename, if given
+        if(isset($filename)){
+            $this->assertStringContainsString("filename=\"{$filename}\"", $body, "Filename is not part of payload (for {$name} attachment)");
+        }
+    }
 }
