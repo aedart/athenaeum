@@ -3,6 +3,8 @@
 namespace Aedart\Contracts\Http\Clients\Requests;
 
 use Aedart\Contracts\Http\Clients\Client;
+use Aedart\Contracts\Http\Clients\Exceptions\InvalidAttachmentFormatException;
+use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -478,6 +480,87 @@ interface Builder extends HttpClientAware,
      * @return bool
      */
     public function hasRawPayload(): bool;
+
+    /**
+     * Add an attachment to the next request
+     *
+     * @param string $name Form input name
+     * @param Attachment|callable $attachment If a callback is provided, a new attachment
+     *                          instance will be given as the callback's argument
+     *
+     * @return self
+     *
+     * @throws InvalidAttachmentFormatException
+     */
+    public function withAttachment(string $name, $attachment): self;
+
+    /**
+     * Add one or more attachments to the next request
+     *
+     * @see withAttachment
+     *
+     * @param Attachment[]|callable[] $attachments List of attachments or callbacks.
+     *                              Callbacks are given new attachment instance as argument.
+     *
+     * @return self
+     *
+     * @throws InvalidAttachmentFormatException
+     */
+    public function withAttachments(array $attachments = []): self;
+
+    /**
+     * Remove an attachment from the next request
+     *
+     * @param string $name Form input name
+     *
+     * @return self
+     */
+    public function withoutAttachment(string $name): self;
+
+    /**
+     * Determine if an attachment exists
+     *
+     * @param string $name Form input name
+     *
+     * @return bool
+     */
+    public function hasAttachment(string $name): bool;
+
+    /**
+     * Get the attachment with the given name
+     *
+     * @param string $name Form input name
+     *
+     * @return Attachment|null
+     */
+    public function getAttachment(string $name): ?Attachment;
+
+    /**
+     * Get the attachments for the next request
+     *
+     * @return Attachment[]
+     */
+    public function getAttachments(): array;
+
+    /**
+     * Attach a file to the next request
+     *
+     * @param string $name Form input name
+     * @param string $path Path to file
+     * @param array $headers [optional] Http headers for attachment
+     * @param string|null $filename [optional] Filename to be used by request
+     *
+     * @return self
+     *
+     * @throws InvalidFilePathException If path to file is invalid
+     * @throws InvalidAttachmentFormatException
+     */
+    public function attachFile(
+        string $name,
+        string $path,
+        array $headers = [],
+        ?string $filename = null
+    ): self;
 
     /**
      * Apply a set of options for the next request
