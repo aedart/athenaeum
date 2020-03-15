@@ -109,7 +109,7 @@ class ResolvesRequestPayload
         foreach ($inputData as $key => $value){
             // In case that multipart option might have been used.
             if(!is_string($key)){
-                $output[$key] = $value;
+                $data[] = $value;
                 continue;
             }
 
