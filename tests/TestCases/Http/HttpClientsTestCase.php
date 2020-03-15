@@ -4,7 +4,9 @@ namespace Aedart\Tests\TestCases\Http;
 
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
+use Aedart\Contracts\Http\Clients\Requests\Attachment as AttachmentInterface;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
+use Aedart\Http\Clients\Requests\Attachment;
 use Aedart\Http\Clients\Traits\HttpClientsManagerTrait;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
@@ -135,5 +137,17 @@ abstract class HttpClientsTestCase extends LaravelTestCase
                 return $handler($request, $options);
             };
         };
+    }
+
+    /**
+     * Creates a new attachment instance
+     *
+     * @param string $name
+     *
+     * @return AttachmentInterface
+     */
+    protected function makeAttachment(string $name): AttachmentInterface
+    {
+        return new Attachment($name);
     }
 }
