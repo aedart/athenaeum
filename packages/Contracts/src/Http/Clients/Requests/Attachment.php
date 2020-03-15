@@ -65,7 +65,7 @@ interface Attachment extends Arrayable
     /**
      * Get this attachment's contents
      *
-     * @return StreamInterface|resource|string
+     * @return StreamInterface|resource|string|null
      */
     public function getContents();
 
