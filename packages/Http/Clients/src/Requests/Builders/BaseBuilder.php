@@ -3,9 +3,12 @@
 namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
+use Aedart\Contracts\Http\Clients\Requests\Attachment;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
+use Aedart\Http\Clients\Exceptions\InvalidAttachmentFormat;
 use Aedart\Http\Clients\Exceptions\InvalidUri;
+use Aedart\Http\Clients\Requests\Attachment as RequestAttachment;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use GuzzleHttp\Psr7\Uri;
@@ -29,6 +32,11 @@ abstract class BaseBuilder implements
 {
     use HttpClientTrait;
     use ContainerTrait;
+
+    /**
+     * Default attachment name given, when no name provided
+     */
+    protected const NO_ATTACHMENT_NAME = '@:_no_att_name_:@';
 
     /**
      * Driver specific options for the next request
@@ -104,6 +112,13 @@ abstract class BaseBuilder implements
      * @var mixed
      */
     protected $rawPayload;
+
+    /**
+     * Attachments
+     *
+     * @var Attachment[] Key = form input name, value = attachment instance
+     */
+    protected array $attachments = [];
 
     /**
      * BaseBuilder constructor.
@@ -406,6 +421,108 @@ abstract class BaseBuilder implements
         return !empty($this->rawPayload);
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function withAttachment(string $name, $attachment): Builder
+    {
+        if (is_callable($attachment)) {
+            // Create new attachment instance
+            $instance = $this->makeAttachment($name);
+
+            // Apply callback
+            $attachment($instance);
+
+            // Overwrite attachment with the instance
+            $attachment = $instance;
+        }
+
+        if (!($attachment instanceof Attachment)) {
+            throw new InvalidAttachmentFormat('Argument must be an Attachment instance or callback');
+        }
+
+        // Resolve the name, in case that it matches "no name"
+        if ($name === static::NO_ATTACHMENT_NAME) {
+            $name = $attachment->getName();
+        }
+
+        // Finally add the attachment
+        $this->attachments[$name] = $attachment;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function withAttachments(array $attachments = []): Builder
+    {
+        foreach ($attachments as $key => $attachment) {
+            $key = is_string($key)
+                ? $key
+                : static::NO_ATTACHMENT_NAME;
+
+            $this->withAttachment($key, $attachment);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function withoutAttachment(string $name): Builder
+    {
+        unset($this->attachments[$name]);
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function hasAttachment(string $name): bool
+    {
+        return isset($this->attachments[$name]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAttachment(string $name): ?Attachment
+    {
+        if ($this->hasAttachment($name)) {
+            return $this->attachments[$name];
+        }
+
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAttachments(): array
+    {
+        return array_values($this->attachments);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attachFile(
+        string $name,
+        string $path,
+        array $headers = [],
+        ?string $filename = null
+    ): Builder {
+        $attachment = $this
+            ->makeAttachment($name)
+            ->attachFile($path)
+            ->headers($headers)
+            ->filename($filename);
+
+        return $this->withAttachment($name, $attachment);
+    }
 
     /**
      * {@inheritdoc}
@@ -519,6 +636,18 @@ abstract class BaseBuilder implements
     }
 
     /**
+     * Normalises the header name
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function normaliseHeaderName(string $name): string
+    {
+        return strtolower(trim($name));
+    }
+
+    /**
      * Creates a new Pipeline instance
      *
      * @return PipelineInterface
@@ -529,14 +658,14 @@ abstract class BaseBuilder implements
     }
 
     /**
-     * Normalises the header name
+     * Creates a new attachment instance
      *
      * @param string $name
      *
-     * @return string
+     * @return Attachment
      */
-    protected function normaliseHeaderName(string $name): string
+    protected function makeAttachment(string $name): Attachment
     {
-        return strtolower(trim($name));
+        return new RequestAttachment($name);
     }
 }

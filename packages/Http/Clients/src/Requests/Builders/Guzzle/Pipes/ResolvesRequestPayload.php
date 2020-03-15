@@ -3,6 +3,7 @@
 namespace Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Http\Clients\Requests\Attachment;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\PayloadData;
 use Aedart\Http\Clients\Requests\Builders\ProcessedOptions;
 use GuzzleHttp\RequestOptions;
@@ -62,26 +63,71 @@ class ResolvesRequestPayload
     protected function obtainData(string $format, array $options, Builder $builder)
     {
         switch ($format) {
-            // Array formats
             case RequestOptions::JSON:
             case RequestOptions::FORM_PARAMS:
-                return $this->mergeData($options, $builder);
+                return $this->jsonOrFormInputData($options, $builder);
 
             case RequestOptions::MULTIPART:
-                // TODO: Files...
-                return null;
+                return $this->attachmentData($options, $builder);
 
-            // None-array format, e.g. streams, plain text... etc.
             case RequestOptions::BODY:
             default:
-                // First, try to obtain "raw" payload from given options
-                if (!empty($options[RequestOptions::BODY])) {
-                    return PayloadData::extract($options);
-                }
-
-                // Otherwise, default to raw payload from the builder.
-                return $builder->getRawPayload();
+                return $this->rawPayloadData($options, $builder);
         }
+    }
+
+    /**
+     * Obtains data json and form input data
+     *
+     * @param array $options
+     * @param Builder $builder
+     *
+     * @return array
+     */
+    protected function jsonOrFormInputData(array $options, Builder $builder): array
+    {
+        return $this->mergeData($options, $builder);
+    }
+
+    /**
+     * Obtains attachment data, merged with json or form input data
+     *
+     * @param array $options
+     * @param Builder $builder
+     *
+     * @return array
+     */
+    protected function attachmentData(array $options, Builder $builder): array
+    {
+        $attachments = $builder->getAttachments();
+
+        $data = array_map(function (Attachment $attachment) {
+            return $attachment->toArray();
+        }, $attachments);
+
+        return array_merge(
+            $data,
+            $this->mergeData($options, $builder)
+        );
+    }
+
+    /**
+     * Obtains raw payload data (body)
+     *
+     * @param array $options
+     * @param Builder $builder
+     *
+     * @return mixed
+     */
+    protected function rawPayloadData(array $options, Builder $builder)
+    {
+        // First, try to obtain "raw" payload from given options
+        if (!empty($options[RequestOptions::BODY])) {
+            return PayloadData::extract($options);
+        }
+
+        // Otherwise, default to raw payload from the builder.
+        return $builder->getRawPayload();
     }
 
     /**
