@@ -486,7 +486,9 @@ interface Builder extends HttpClientAware,
      *
      * @param string $name Form input name
      * @param Attachment|callable $attachment If a callback is provided, a new attachment
-     *                          instance will be given as the callback's argument
+     *                          instance will be given as the callback's argument.
+     *                          If Attachment is given, then it's name is overwritten with
+     *                          the form input name given to this method.
      *
      * @return self
      *
