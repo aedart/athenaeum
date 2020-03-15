@@ -810,6 +810,4 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
         $this->assertStringContainsString("name=\"person\"", $contents, 'Form input data name not part of payload');
         $this->assertStringContainsString('Sine Oleson', $contents, 'Form input data value not part of payload');
     }
-
-
 }

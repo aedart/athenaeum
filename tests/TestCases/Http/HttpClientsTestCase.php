@@ -178,12 +178,12 @@ abstract class HttpClientsTestCase extends LaravelTestCase
         $this->assertStringContainsString($value, $body, "Payload does not contain value (for {$name} attachment)");
 
         // Assert headers
-        foreach($headers as $key => $value){
+        foreach ($headers as $key => $value) {
             $this->assertStringContainsString("{$key}: {$value}", $body, "Header is not part of payload (for {$name} attachment)");
         }
 
         // Assert filename, if given
-        if(isset($filename)){
+        if (isset($filename)) {
             $this->assertStringContainsString("filename=\"{$filename}\"", $body, "Filename is not part of payload (for {$name} attachment)");
         }
     }

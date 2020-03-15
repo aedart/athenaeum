@@ -106,9 +106,9 @@ class ResolvesRequestPayload
 
         // Append form input data
         $inputData = $this->mergeData($options, $builder);
-        foreach ($inputData as $key => $value){
+        foreach ($inputData as $key => $value) {
             // In case that multipart option might have been used.
-            if(!is_string($key)){
+            if (!is_string($key)) {
                 $data[] = $value;
                 continue;
             }
