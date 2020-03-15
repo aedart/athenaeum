@@ -426,6 +426,8 @@ abstract class BaseBuilder implements
      */
     public function withAttachment(string $name, $attachment): Builder
     {
+        $this->multipartFormat();
+
         if (is_callable($attachment)) {
             // Create new attachment instance
             $instance = $this->makeAttachment($name);
