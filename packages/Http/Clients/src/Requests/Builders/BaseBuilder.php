@@ -330,7 +330,9 @@ abstract class BaseBuilder implements
      */
     public function withAccept(string $contentType): Builder
     {
-        return $this->withHeader('Accept', $contentType);
+        return $this
+            ->withoutHeader('Accept')
+            ->withHeader('Accept', $contentType);
     }
 
     /**
@@ -338,7 +340,9 @@ abstract class BaseBuilder implements
      */
     public function withContentType(string $contentType): Builder
     {
-        return $this->withHeader('Content-Type', $contentType);
+        return $this
+            ->withoutHeader('Content-Type')
+            ->withHeader('Content-Type', $contentType);
     }
 
     /**
@@ -364,7 +368,9 @@ abstract class BaseBuilder implements
      */
     public function useTokenAuth(string $token, string $scheme = 'Bearer'): Builder
     {
-        return $this->withHeader('Authorization', trim($scheme . ' ' . $token));
+        return $this
+            ->withoutHeader('Authorization')
+            ->withHeader('Authorization', trim($scheme . ' ' . $token));
     }
 
     /**

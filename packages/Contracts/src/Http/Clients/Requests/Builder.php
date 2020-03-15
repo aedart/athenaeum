@@ -249,6 +249,9 @@ interface Builder extends HttpClientAware,
     /**
      * Use given Accept header for the next request
      *
+     * Method remove already set Accept header, before
+     * applying new value.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept
      *
      * @param string $contentType
@@ -259,6 +262,9 @@ interface Builder extends HttpClientAware,
 
     /**
      * Use given Content-Type for the next request
+     *
+     * Method remove already set Content-Type header, before
+     * applying new value.
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
      *
