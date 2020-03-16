@@ -1,0 +1,116 @@
+<?php
+
+
+namespace Aedart\Tests\Integration\Http\Clients;
+
+use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
+use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Predis\Response\ResponseInterface;
+
+/**
+ * B0_HeadersTest
+ *
+ * @group http-clients
+ * @group http-clients-d0
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Tests\Integration\Http\Clients
+ */
+class D0_HeadersTest extends HttpClientsTestCase
+{
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function extractsHeadersFromOptions(string $profile)
+    {
+        $agent = 'Aedart/HttpClient/2.0';
+
+        $client = $this->getHttpClientsManager()->profile($profile, [
+            'headers' => [
+                'User-Agent' => $agent
+            ]
+        ]);
+
+        $this->assertNotEmpty($client->getHeaders(), 'Header not extracted by request builder');
+        $this->assertSame($agent, $client->getHeader('User-Agent'), 'Specific header not available');
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function setsHeadersForRequest(string $profile)
+    {
+        $client = $this->getHttpClientsManager()->profile($profile);
+
+        $agent = 'Aedart/HttpClient/2.0';
+
+        /** @var ResponseInterface $response */
+        $client
+            ->withOption('handler', $this->makeRespondsOkMock())
+            ->withHeader('User-Agent', $agent)
+            ->request('get', '/users');
+
+        $headerFromSent = $this->lastRequest->getHeader('User-Agent')[0];
+        $this->assertSame($agent, $headerFromSent, 'Specific header not set on request');
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function canSpecifyMultipleHeaders(string $profile)
+    {
+        $client = $this->getHttpClientsManager()->profile($profile);
+
+        $value = 'Yuck, shiny shore. go to cabo rojo.';
+        $builder = $client
+            ->withHeaders([
+                'x-token' => $value,
+                'y-token' => $value
+            ])
+            ->withHeader('z-token', $value);
+
+        $this->assertSame($value, $builder->getHeader('x-token'));
+        $this->assertSame($value, $builder->getHeader('y-token'));
+        $this->assertSame($value, $builder->getHeader('z-token'));
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function canRemoveHeaderBeforeRequest(string $profile)
+    {
+        $client = $this->getHttpClientsManager()->profile($profile, [
+            'headers' => [
+                'X-Foo' => 'bar'
+            ]
+        ]);
+
+        $client
+            ->withOption('handler', $this->makeRespondsOkMock())
+            ->withoutHeader('X-Foo')
+            ->request('get', '/users');
+
+        $headerFromSent = $this->lastRequest->getHeader('X-Foo');
+        $this->assertEmpty($headerFromSent, 'Specific header still sent via request');
+    }
+}

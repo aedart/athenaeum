@@ -40,175 +40,175 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
-    public function hasInitialHeadersFromOptions()
-    {
-        $headers = $this->getHttpClient()->getHeaders();
+//    /**
+//     * @test
+//     */
+//    public function hasInitialHeadersFromOptions()
+//    {
+//        $headers = $this->getHttpClient()->getHeaders();
+//
+//        ConsoleDebugger::output($headers);
+//
+//        $this->assertArrayHasKey('User-Agent', $headers);
+//        $this->assertSame('Aedart/HttpClient/1.0', $headers['User-Agent']);
+//    }
 
-        ConsoleDebugger::output($headers);
-
-        $this->assertArrayHasKey('User-Agent', $headers);
-        $this->assertSame('Aedart/HttpClient/1.0', $headers['User-Agent']);
-    }
-
-    /**
-     * @test
-     */
-    public function canPerformGetRequest()
-    {
-        $mockedResponses = $this->makeResponseMock([
-            new Response(200, [ 'X-Foo' => 'Bar' ])
-        ]);
-
-        $client = $this->getHttpClient();
-
-        $response = $client
-                        ->withOption('handler', $mockedResponses)
-                        ->get('/get');
-
-        $headers = $response->getHeaders();
-        ConsoleDebugger::output($headers);
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertArrayHasKey('X-Foo', $headers);
-        $this->assertSame('Bar', $headers['X-Foo'][0]);
-    }
-
-    /**
-     * @test
-     */
-    public function canPerformHeadRequest()
-    {
-        $mockedResponses = $this->makeResponseMock([
-            new Response(200, [ 'X-Foo' => 'Bar' ])
-        ]);
-
-        $client = $this->getHttpClient();
-
-        $response = $client
-            ->withOption('handler', $mockedResponses)
-            ->head('/head');
-
-        $headers = $response->getHeaders();
-        ConsoleDebugger::output($headers);
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertArrayHasKey('X-Foo', $headers);
-        $this->assertSame('Bar', $headers['X-Foo'][0]);
-    }
-
-    /**
-     * @test
-     */
-    public function canPerformPostRequest()
-    {
-        $mockedResponses = $this->makeResponseMock([
-            new Response(201, [], 'created')
-        ]);
-
-        $client = $this->getHttpClient();
-
-        $response = $client
-            ->withOption('handler', $mockedResponses)
-            ->post('/post', [ 'name' => 'John Doe' ]);
-
-        $content = $response->getBody()->getContents();
-        ConsoleDebugger::output($content);
-
-        $this->assertSame(201, $response->getStatusCode());
-        $this->assertSame('created', $content);
-    }
-
-    /**
-     * @test
-     */
-    public function canPerformPutRequest()
-    {
-        $mockedResponses = $this->makeResponseMock([
-            new Response(200, [], 'updated')
-        ]);
-
-        $client = $this->getHttpClient();
-
-        $response = $client
-            ->withOption('handler', $mockedResponses)
-            ->put('/put', [ 'name' => 'John Doe' ]);
-
-        $content = $response->getBody()->getContents();
-        ConsoleDebugger::output($content);
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame('updated', $content);
-    }
-
-    /**
-     * @test
-     */
-    public function canPerformDeleteRequest()
-    {
-        $mockedResponses = $this->makeResponseMock([
-            new Response(200, [], 'deleted')
-        ]);
-
-        $client = $this->getHttpClient();
-
-        $response = $client
-            ->withOption('handler', $mockedResponses)
-            ->delete('/delete', [ 'name' => 'John Doe' ]);
-
-        $content = $response->getBody()->getContents();
-        ConsoleDebugger::output($content);
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame('deleted', $content);
-    }
-
-    /**
-     * @test
-     */
-    public function canPerformOptionsRequest()
-    {
-        $mockedResponses = $this->makeResponseMock([
-            new Response(200, [ 'X-Foo' => 'Bar' ])
-        ]);
-
-        $client = $this->getHttpClient();
-
-        $response = $client
-            ->withOption('handler', $mockedResponses)
-            ->options('/options');
-
-        $headers = $response->getHeaders();
-        ConsoleDebugger::output($headers);
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertArrayHasKey('X-Foo', $headers);
-        $this->assertSame('Bar', $headers['X-Foo'][0]);
-    }
-
-    /**
-     * @test
-     */
-    public function canPerformPatchRequest()
-    {
-        $mockedResponses = $this->makeResponseMock([
-            new Response(200, [], 'patched')
-        ]);
-
-        $client = $this->getHttpClient();
-
-        $response = $client
-            ->withOption('handler', $mockedResponses)
-            ->delete('/delete', [ 'name' => 'John Doe' ]);
-
-        $content = $response->getBody()->getContents();
-        ConsoleDebugger::output($content);
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame('patched', $content);
-    }
+//    /**
+//     * @test
+//     */
+//    public function canPerformGetRequest()
+//    {
+//        $mockedResponses = $this->makeResponseMock([
+//            new Response(200, [ 'X-Foo' => 'Bar' ])
+//        ]);
+//
+//        $client = $this->getHttpClient();
+//
+//        $response = $client
+//                        ->withOption('handler', $mockedResponses)
+//                        ->get('/get');
+//
+//        $headers = $response->getHeaders();
+//        ConsoleDebugger::output($headers);
+//
+//        $this->assertSame(200, $response->getStatusCode());
+//        $this->assertArrayHasKey('X-Foo', $headers);
+//        $this->assertSame('Bar', $headers['X-Foo'][0]);
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function canPerformHeadRequest()
+//    {
+//        $mockedResponses = $this->makeResponseMock([
+//            new Response(200, [ 'X-Foo' => 'Bar' ])
+//        ]);
+//
+//        $client = $this->getHttpClient();
+//
+//        $response = $client
+//            ->withOption('handler', $mockedResponses)
+//            ->head('/head');
+//
+//        $headers = $response->getHeaders();
+//        ConsoleDebugger::output($headers);
+//
+//        $this->assertSame(200, $response->getStatusCode());
+//        $this->assertArrayHasKey('X-Foo', $headers);
+//        $this->assertSame('Bar', $headers['X-Foo'][0]);
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function canPerformPostRequest()
+//    {
+//        $mockedResponses = $this->makeResponseMock([
+//            new Response(201, [], 'created')
+//        ]);
+//
+//        $client = $this->getHttpClient();
+//
+//        $response = $client
+//            ->withOption('handler', $mockedResponses)
+//            ->post('/post', [ 'name' => 'John Doe' ]);
+//
+//        $content = $response->getBody()->getContents();
+//        ConsoleDebugger::output($content);
+//
+//        $this->assertSame(201, $response->getStatusCode());
+//        $this->assertSame('created', $content);
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function canPerformPutRequest()
+//    {
+//        $mockedResponses = $this->makeResponseMock([
+//            new Response(200, [], 'updated')
+//        ]);
+//
+//        $client = $this->getHttpClient();
+//
+//        $response = $client
+//            ->withOption('handler', $mockedResponses)
+//            ->put('/put', [ 'name' => 'John Doe' ]);
+//
+//        $content = $response->getBody()->getContents();
+//        ConsoleDebugger::output($content);
+//
+//        $this->assertSame(200, $response->getStatusCode());
+//        $this->assertSame('updated', $content);
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function canPerformDeleteRequest()
+//    {
+//        $mockedResponses = $this->makeResponseMock([
+//            new Response(200, [], 'deleted')
+//        ]);
+//
+//        $client = $this->getHttpClient();
+//
+//        $response = $client
+//            ->withOption('handler', $mockedResponses)
+//            ->delete('/delete', [ 'name' => 'John Doe' ]);
+//
+//        $content = $response->getBody()->getContents();
+//        ConsoleDebugger::output($content);
+//
+//        $this->assertSame(200, $response->getStatusCode());
+//        $this->assertSame('deleted', $content);
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function canPerformOptionsRequest()
+//    {
+//        $mockedResponses = $this->makeResponseMock([
+//            new Response(200, [ 'X-Foo' => 'Bar' ])
+//        ]);
+//
+//        $client = $this->getHttpClient();
+//
+//        $response = $client
+//            ->withOption('handler', $mockedResponses)
+//            ->options('/options');
+//
+//        $headers = $response->getHeaders();
+//        ConsoleDebugger::output($headers);
+//
+//        $this->assertSame(200, $response->getStatusCode());
+//        $this->assertArrayHasKey('X-Foo', $headers);
+//        $this->assertSame('Bar', $headers['X-Foo'][0]);
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function canPerformPatchRequest()
+//    {
+//        $mockedResponses = $this->makeResponseMock([
+//            new Response(200, [], 'patched')
+//        ]);
+//
+//        $client = $this->getHttpClient();
+//
+//        $response = $client
+//            ->withOption('handler', $mockedResponses)
+//            ->delete('/delete', [ 'name' => 'John Doe' ]);
+//
+//        $content = $response->getBody()->getContents();
+//        ConsoleDebugger::output($content);
+//
+//        $this->assertSame(200, $response->getStatusCode());
+//        $this->assertSame('patched', $content);
+//    }
 
     /**
      * @test
@@ -246,60 +246,60 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
         $this->assertArrayNotHasKey('X-Custom', $headers);
     }
 
-    /**
-     * @test
-     */
-    public function canSpecifyCustomHeaders()
-    {
-        $mockedResponses = $this->makeResponseMock([
-            new Response(200, [ 'X-Foo' => 'Bar' ])
-        ]);
+//    /**
+//     * @test
+//     */
+//    public function canSpecifyCustomHeaders()
+//    {
+//        $mockedResponses = $this->makeResponseMock([
+//            new Response(200, [ 'X-Foo' => 'Bar' ])
+//        ]);
+//
+//        $client = $this->getHttpClient();
+//
+//        $client
+//            ->withOption('handler', $mockedResponses)
+//            ->withHeader('X-Wing', 27000)
+//            ->get('/get');
+//
+//        $headers = $this->lastRequest->getHeaders();
+//        ConsoleDebugger::output($headers);
+//
+//        $this->assertArrayHasKey('X-Wing', $headers);
+//        $this->assertSame('27000', $headers['X-Wing'][0]);
+//    }
 
-        $client = $this->getHttpClient();
+//    /**
+//     * @test
+//     */
+//    public function canObtainCustomHeaders()
+//    {
+//        $value = 'Yuck, shiny shore. go to cabo rojo.';
+//
+//        $client = $this->getHttpClient()
+//            ->withHeader('x-token', $value);
+//
+//        $this->assertSame($value, $client->getHeader('x-token'));
+//    }
 
-        $client
-            ->withOption('handler', $mockedResponses)
-            ->withHeader('X-Wing', 27000)
-            ->get('/get');
-
-        $headers = $this->lastRequest->getHeaders();
-        ConsoleDebugger::output($headers);
-
-        $this->assertArrayHasKey('X-Wing', $headers);
-        $this->assertSame('27000', $headers['X-Wing'][0]);
-    }
-
-    /**
-     * @test
-     */
-    public function canObtainCustomHeaders()
-    {
-        $value = 'Yuck, shiny shore. go to cabo rojo.';
-
-        $client = $this->getHttpClient()
-            ->withHeader('x-token', $value);
-
-        $this->assertSame($value, $client->getHeader('x-token'));
-    }
-
-    /**
-     * @test
-     */
-    public function canSpecifyMultipleHeaders()
-    {
-        $value = 'Yuck, shiny shore. go to cabo rojo.';
-
-        $client = $this->getHttpClient()
-            ->withHeaders([
-                'x-token' => $value,
-                'y-token' => $value
-            ])
-            ->withHeader('z-token', $value);
-
-        $this->assertSame($value, $client->getHeader('x-token'));
-        $this->assertSame($value, $client->getHeader('y-token'));
-        $this->assertSame($value, $client->getHeader('z-token'));
-    }
+//    /**
+//     * @test
+//     */
+//    public function canSpecifyMultipleHeaders()
+//    {
+//        $value = 'Yuck, shiny shore. go to cabo rojo.';
+//
+//        $client = $this->getHttpClient()
+//            ->withHeaders([
+//                'x-token' => $value,
+//                'y-token' => $value
+//            ])
+//            ->withHeader('z-token', $value);
+//
+//        $this->assertSame($value, $client->getHeader('x-token'));
+//        $this->assertSame($value, $client->getHeader('y-token'));
+//        $this->assertSame($value, $client->getHeader('z-token'));
+//    }
 
     /**
      * @test
@@ -311,26 +311,26 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
         $this->assertNotNull($client->driver());
     }
 
-    /**
-     * @test
-     */
-    public function canObtainContentFromGoogle()
-    {
-        // "live" integration test to see if guzzle works
-        // as intended.
-
-        $client = $this->getHttpClient();
-
-        $response = $client
-            ->withoutHeader('User-Agent') // Default to Guzzle's default User-Agent header
-            ->get('https://google.com');
-
-        $content = $response->getBody()->getContents();
-        ConsoleDebugger::output($content);
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertNotEmpty($content);
-    }
+//    /**
+//     * @test
+//     */
+//    public function canObtainContentFromGoogle()
+//    {
+//        // "live" integration test to see if guzzle works
+//        // as intended.
+//
+//        $client = $this->getHttpClient();
+//
+//        $response = $client
+//            ->withoutHeader('User-Agent') // Default to Guzzle's default User-Agent header
+//            ->get('https://google.com');
+//
+//        $content = $response->getBody()->getContents();
+//        ConsoleDebugger::output($content);
+//
+//        $this->assertSame(200, $response->getStatusCode());
+//        $this->assertNotEmpty($content);
+//    }
 
     /**
      * @test
@@ -417,41 +417,41 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
         $this->assertStringContainsString($token, $headers['Authorization'][0]);
     }
 
-    /**
-     * @test
-     */
-    public function hasHttpErrorsDisabledByDefault()
-    {
-        $client = $this->getHttpClient();
+//    /**
+//     * @test
+//     */
+//    public function hasHttpErrorsDisabledByDefault()
+//    {
+//        $client = $this->getHttpClient();
+//
+//        $result = $client->getOption('http_errors');
+//
+//        $this->assertFalse($result, 'Http errors SHOULD be set to false');
+//    }
 
-        $result = $client->getOption('http_errors');
-
-        $this->assertFalse($result, 'Http errors SHOULD be set to false');
-    }
-
-    /**
-     * @test
-     */
-    public function hasConnectTimeoutSetByDefault()
-    {
-        $client = $this->getHttpClient();
-
-        $result = $client->getOption('connect_timeout');
-
-        $this->assertGreaterThan(0, $result, 'Connection Timeout SHOULD be set!');
-    }
-
-    /**
-     * @test
-     */
-    public function hasRequestTimeoutSetByDefault()
-    {
-        $client = $this->getHttpClient();
-
-        $result = $client->getOption('timeout');
-
-        $this->assertGreaterThan(0, $result, 'Timeout SHOULD be set!');
-    }
+//    /**
+//     * @test
+//     */
+//    public function hasConnectTimeoutSetByDefault()
+//    {
+//        $client = $this->getHttpClient();
+//
+//        $result = $client->getOption('connect_timeout');
+//
+//        $this->assertGreaterThan(0, $result, 'Connection Timeout SHOULD be set!');
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function hasRequestTimeoutSetByDefault()
+//    {
+//        $client = $this->getHttpClient();
+//
+//        $result = $client->getOption('timeout');
+//
+//        $this->assertGreaterThan(0, $result, 'Timeout SHOULD be set!');
+//    }
 
     /**
      * @test
@@ -469,51 +469,51 @@ class DefaultHttpClientDriverTest extends HttpClientsTestCase
         $this->assertSame($seconds, $result, 'Request timeout incorrect');
     }
 
-    /**
-     * @test
-     */
-    public function hasFollowRedirectsSetByDefault()
-    {
-        $client = $this->getHttpClient();
+//    /**
+//     * @test
+//     */
+//    public function hasFollowRedirectsSetByDefault()
+//    {
+//        $client = $this->getHttpClient();
+//
+//        $result = $client->getOption('allow_redirects');
+//
+//        ConsoleDebugger::output($result);
+//
+//        $this->assertSame(1, $result['max'], 'Max amount of redirects is incorrect');
+//        $this->assertSame(true, $result['strict'], 'Should be strict redirects');
+//        $this->assertSame(true, $result['referer'], 'Should have referer set to true');
+//        $this->assertSame(['http', 'https'], $result['protocols'], 'Incorrect protocols');
+//        $this->assertSame(false, $result['track_redirects'], 'Should not track redirects');
+//    }
 
-        $result = $client->getOption('allow_redirects');
-
-        ConsoleDebugger::output($result);
-
-        $this->assertSame(1, $result['max'], 'Max amount of redirects is incorrect');
-        $this->assertSame(true, $result['strict'], 'Should be strict redirects');
-        $this->assertSame(true, $result['referer'], 'Should have referer set to true');
-        $this->assertSame(['http', 'https'], $result['protocols'], 'Incorrect protocols');
-        $this->assertSame(false, $result['track_redirects'], 'Should not track redirects');
-    }
-
-    /**
-     * @test
-     */
-    public function canDisableRedirectBehaviour()
-    {
-        $client = $this->getHttpClient()
-            ->maxRedirects(0);
-
-        $result = $client->getOption('allow_redirects');
-
-        $this->assertFalse($result, 'Allow redirects should be disabled');
-    }
-
-    /**
-     * @test
-     */
-    public function canSpecifyMaxRedirects()
-    {
-        $client = $this->getHttpClient()
-            ->maxRedirects(5);
-
-        $result = $client->getOption('allow_redirects');
-
-        ConsoleDebugger::output($result);
-
-        $this->assertSame(5, $result['max'], 'Max amount of redirects is incorrect');
-    }
+//    /**
+//     * @test
+//     */
+//    public function canDisableRedirectBehaviour()
+//    {
+//        $client = $this->getHttpClient()
+//            ->maxRedirects(0);
+//
+//        $result = $client->getOption('allow_redirects');
+//
+//        $this->assertFalse($result, 'Allow redirects should be disabled');
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function canSpecifyMaxRedirects()
+//    {
+//        $client = $this->getHttpClient()
+//            ->maxRedirects(5);
+//
+//        $result = $client->getOption('allow_redirects');
+//
+//        ConsoleDebugger::output($result);
+//
+//        $this->assertSame(5, $result['max'], 'Max amount of redirects is incorrect');
+//    }
 
     /**
      * @test

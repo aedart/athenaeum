@@ -29,9 +29,7 @@ return [
         'default' => [
             'driver'    => \Aedart\Http\Clients\Drivers\DefaultHttpClient::class,
             'options'   => [
-                'headers' => [
-                    'User-Agent'    => 'Aedart/HttpClient/1.0'
-                ],
+
             ]
         ],
 

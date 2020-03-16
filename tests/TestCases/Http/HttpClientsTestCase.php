@@ -4,6 +4,7 @@ namespace Aedart\Tests\TestCases\Http;
 
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
+use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Attachment as AttachmentInterface;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Http\Clients\Requests\Attachment;
@@ -16,6 +17,7 @@ use Closure;
 use Codeception\Configuration;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -110,6 +112,17 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     }
 
     /**
+     * Creates a handle stack that mocks a Http response,
+     * with status 200 (Ok)
+     *
+     * @return HandlerStack
+     */
+    protected function makeRespondsOkMock()
+    {
+        return $this->makeResponseMock([ new Response(200) ]);
+    }
+
+    /**
      * Creates a debugger middleware for Guzzle
      *
      * @return Closure
@@ -149,6 +162,41 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     protected function makeAttachment(string $name): AttachmentInterface
     {
         return new Attachment($name);
+    }
+
+    /*****************************************************************
+     * Data Providers
+     ****************************************************************/
+
+    /**
+     * Provides Http Client profile identifiers
+     *
+     * @return array
+     */
+    public function providesClientProfiles()
+    {
+        return [
+            'default' => [ 'default' ],
+            'json' => [ 'json' ],
+        ];
+    }
+
+    /**
+     * Provides Http methods
+     *
+     * @return array
+     */
+    public function providesHttpMethods()
+    {
+        return [
+            'GET' => [ 'get' ],
+            'HEAD' => [ 'head' ],
+            'POST' => [ 'post' ],
+            'PUT' => [ 'put' ],
+            'DELETE' => [ 'delete' ],
+            'OPTIONS' => [ 'options' ],
+            'PATCH' => [ 'patch' ],
+        ];
     }
 
     /*****************************************************************
