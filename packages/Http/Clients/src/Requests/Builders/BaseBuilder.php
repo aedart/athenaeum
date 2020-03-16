@@ -231,7 +231,7 @@ abstract class BaseBuilder implements
             throw new InvalidUri('Provided Uri must either be a string or Psr-7 UriInterface');
         }
 
-        $this->uri;
+        $this->uri = $uri;
 
         return $this;
     }
