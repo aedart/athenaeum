@@ -75,6 +75,6 @@ class DefaultHttpClient extends BaseClient
      */
     public function makeBuilder(): Builder
     {
-        return new GuzzleRequestBuilder($this, $this->getClientOptions());
+        return new GuzzleRequestBuilder($this);
     }
 }
