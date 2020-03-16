@@ -34,7 +34,7 @@ class DefaultHttpClient extends BaseClient
     {
         parent::__construct($container, $options);
 
-        $this->client = new GuzzleClient($this->options);
+        $this->client = new GuzzleClient();
     }
 
     /**
@@ -75,6 +75,6 @@ class DefaultHttpClient extends BaseClient
      */
     public function makeBuilder(): Builder
     {
-        return new GuzzleRequestBuilder($this);
+        return new GuzzleRequestBuilder($this, $this->getClientOptions());
     }
 }
