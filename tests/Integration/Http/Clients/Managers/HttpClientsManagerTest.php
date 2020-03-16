@@ -1,6 +1,6 @@
 <?php
 
-namespace Aedart\Tests\Integration\Http\Clients;
+namespace Aedart\Tests\Integration\Http\Clients\Managers;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
