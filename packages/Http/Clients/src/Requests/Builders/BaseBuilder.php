@@ -267,11 +267,9 @@ abstract class BaseBuilder implements
      */
     public function withoutHeader(string $name): Builder
     {
-        $headers = $this->headers;
-
         $name = $this->normaliseHeaderName($name);
 
-        $names = array_keys($headers);
+        $names = array_keys($this->headers);
         foreach ($names as $header) {
             if ($this->normaliseHeaderName($header) === $name) {
                 unset($this->headers[$header]);
@@ -295,10 +293,8 @@ abstract class BaseBuilder implements
      */
     public function getHeader(string $name)
     {
-        $headers = $this->headers;
-
         $name = $this->normaliseHeaderName($name);
-        foreach ($headers as $header => $value) {
+        foreach ($this->headers as $header => $value) {
             if ($this->normaliseHeaderName($header) === $name) {
                 return $value;
             }
