@@ -25,7 +25,7 @@ class D2_AcceptHeaderTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
-    public function setsHeadersForRequest(string $profile)
+    public function usesAcceptHeaderForRequest(string $profile)
     {
         $client = $this->client($profile);
 
