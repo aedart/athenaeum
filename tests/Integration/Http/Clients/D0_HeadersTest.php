@@ -5,7 +5,7 @@ namespace Aedart\Tests\Integration\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
-use Predis\Response\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * B0_HeadersTest
