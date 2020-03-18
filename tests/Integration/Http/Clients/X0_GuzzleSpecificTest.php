@@ -2,9 +2,11 @@
 
 namespace Aedart\Tests\Integration\Http\Clients;
 
+use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Configuration;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 
@@ -192,5 +194,46 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
             CURLOPT_HTTPAUTH => 2,
             CURLOPT_USERPWD => $username . ':' . $password
         ], $options['curl']);
+    }
+
+    /**
+     * @test
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function canAttachUsingOptions()
+    {
+        $pathPrefix = Configuration::dataDir() . '/http/clients/attachments/';
+        $file = $pathPrefix . 'test.md';
+
+        $attachment = [
+            [
+                'name' => 'help_file',
+                'contents' => fopen($file, 'r'),
+                'filename' => 'README.md'
+            ]
+        ];
+
+        $client = $this->client();
+        $builder = $client
+            ->withOption('handler', $this->makeRespondsOkMock())
+            ->multipartFormat()
+            ->withOption('multipart', $attachment);
+
+        $builder->post('/records');
+
+        // --------------------------------------------------------------- //
+
+        $request = $this->lastRequest;
+        $contents = $request->getBody()->getContents();
+        ConsoleDebugger::output($contents);
+
+        $this->assertAttachmentInPayload(
+            $contents,
+            'help_file',
+            file_get_contents($file),
+            [],
+            'README.md'
+        );
     }
 }
