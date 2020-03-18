@@ -30,7 +30,7 @@ class D0_HeadersTest extends HttpClientsTestCase
     {
         $agent = 'Aedart/HttpClient/2.0';
 
-        $client = $this->getHttpClientsManager()->profile($profile, [
+        $client = $this->client($profile, [
             'headers' => [
                 'User-Agent' => $agent
             ]
@@ -50,7 +50,7 @@ class D0_HeadersTest extends HttpClientsTestCase
      */
     public function setsHeadersForRequest(string $profile)
     {
-        $client = $this->getHttpClientsManager()->profile($profile);
+        $client = $this->client($profile);
 
         $agent = 'Aedart/HttpClient/2.0';
 
@@ -74,7 +74,7 @@ class D0_HeadersTest extends HttpClientsTestCase
      */
     public function canSpecifyMultipleHeaders(string $profile)
     {
-        $client = $this->getHttpClientsManager()->profile($profile);
+        $client = $this->client($profile);
 
         $value = 'Yuck, shiny shore. go to cabo rojo.';
         $builder = $client
@@ -99,7 +99,7 @@ class D0_HeadersTest extends HttpClientsTestCase
      */
     public function canRemoveHeaderBeforeRequest(string $profile)
     {
-        $client = $this->getHttpClientsManager()->profile($profile, [
+        $client = $this->client($profile, [
             'headers' => [
                 'X-Foo' => 'bar'
             ]

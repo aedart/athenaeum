@@ -28,7 +28,7 @@ class B0_MethodTest extends HttpClientsTestCase
      */
     public function canSetRequestMethod(string $profile)
     {
-        $client = $this->getHttpClientsManager()->profile($profile);
+        $client = $this->client($profile);
 
         $method = $this->getFaker()->randomElement(array_keys(
             $this->providesHttpMethods()

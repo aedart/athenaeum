@@ -5,6 +5,7 @@ namespace Aedart\Tests\TestCases\Http;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Contracts\Http\Clients\Client;
+use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Requests\Attachment as AttachmentInterface;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Http\Clients\Requests\Attachment;
@@ -90,6 +91,21 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     public function directory(): string
     {
         return Configuration::dataDir() . 'configs/http/clients/';
+    }
+
+    /**
+     * Creates or obtains Http Client that matches given profile
+     *
+     * @param string $profile
+     * @param array $options [optional]
+     *
+     * @return Client
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function client(string $profile, array $options = []): Client
+    {
+        return $this->getHttpClientsManager()->profile($profile, $options);
     }
 
     /**

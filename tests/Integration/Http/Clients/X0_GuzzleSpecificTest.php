@@ -25,7 +25,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      */
     public function hasHttpErrorsDisabledByDefault()
     {
-        $client = $this->getHttpClientsManager()->profile('default');
+        $client = $this->client('default');
 
         $result = $client->getOption('http_errors');
 
@@ -39,7 +39,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      */
     public function hasConnectTimeoutSetByDefault()
     {
-        $client = $this->getHttpClientsManager()->profile('default');
+        $client = $this->client('default');
 
         $result = $client->getOption('connect_timeout');
 
@@ -53,7 +53,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      */
     public function hasRequestTimeoutSetByDefault()
     {
-        $client = $this->getHttpClientsManager()->profile('default');
+        $client = $this->client('default');
 
         $result = $client->getOption('timeout');
 
@@ -67,7 +67,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      */
     public function hasFollowRedirectsSetByDefault()
     {
-        $client = $this->getHttpClientsManager()->profile('default');
+        $client = $this->client('default');
 
         $result = $client->getOption('allow_redirects');
 
@@ -87,7 +87,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      */
     public function canDisableRedirectBehaviour()
     {
-        $client = $this->getHttpClientsManager()->profile('default');
+        $client = $this->client('default');
 
         $builder = $client->maxRedirects(0);
 
@@ -103,7 +103,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      */
     public function canSpecifyMaxRedirects()
     {
-        $client = $this->getHttpClientsManager()->profile('default');
+        $client = $this->client('default');
 
         $builder = $client->maxRedirects(5);
 

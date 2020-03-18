@@ -29,7 +29,7 @@ class C0_UriTest extends HttpClientsTestCase
      */
     public function canSetRequestUri(string $profile)
     {
-        $client = $this->getHttpClientsManager()->profile($profile);
+        $client = $this->client($profile);
 
         $uri = '/' . $this->getFaker()->word;
 

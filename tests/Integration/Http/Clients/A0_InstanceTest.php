@@ -26,7 +26,7 @@ class A0_InstanceTest extends HttpClientsTestCase
      */
     public function canObtainInstance(string $profile)
     {
-        $client = $this->getHttpClientsManager()->profile($profile);
+        $client = $this->client($profile);
 
         $this->assertNotNull($client);
     }
@@ -41,7 +41,7 @@ class A0_InstanceTest extends HttpClientsTestCase
      */
     public function canObtainDriver(string $profile)
     {
-        $client = $this->getHttpClientsManager()->profile($profile);
+        $client = $this->client($profile);
         $driver = $client->driver();
 
         $this->assertNotNull($driver);
@@ -57,7 +57,7 @@ class A0_InstanceTest extends HttpClientsTestCase
      */
     public function canCreateBuilder(string $profile)
     {
-        $client = $this->getHttpClientsManager()->profile($profile);
+        $client = $this->client($profile);
         $builder = $client->makeBuilder();
 
         $this->assertNotNull($builder);

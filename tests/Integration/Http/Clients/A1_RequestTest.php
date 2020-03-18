@@ -34,7 +34,7 @@ class A1_RequestTest extends HttpClientsTestCase
      */
     protected function assertCanPerformRequest(string $method, string $profile)
     {
-        $client = $this->getHttpClientsManager()->profile($profile);
+        $client = $this->client($profile);
         ConsoleDebugger::output(get_class($client), $method);
 
         // Resolve method and uri
@@ -161,7 +161,7 @@ class A1_RequestTest extends HttpClientsTestCase
     {
         // "live" integration test to see if guzzle works
         // as intended.
-        $client = $this->getHttpClientsManager()->profile($profile);
+        $client = $this->client($profile);
 
         $response = $client->get('https://jsonplaceholder.typicode.com/posts/42');
 
