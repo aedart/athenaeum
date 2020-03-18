@@ -12,7 +12,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @group http
  * @group http-clients
- * @group http-clients-a0
+ * @group http-clients-a1
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
