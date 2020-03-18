@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
-class A0_RequestTest extends HttpClientsTestCase
+class A1_RequestTest extends HttpClientsTestCase
 {
     /*****************************************************************
      * Helpers
