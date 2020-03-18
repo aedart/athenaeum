@@ -26,25 +26,6 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
-    public function extractsHeadersFromOptions()
-    {
-        $agent = 'Aedart/HttpClient/2.0';
-
-        $client = $this->client('default', [
-            'headers' => [
-                'User-Agent' => $agent
-            ]
-        ]);
-
-        $this->assertNotEmpty($client->getHeaders(), 'Header not extracted by request builder');
-        $this->assertSame($agent, $client->getHeader('User-Agent'), 'Specific header not available');
-    }
-
-    /**
-     * @test
-     *
-     * @throws ProfileNotFoundException
-     */
     public function hasHttpErrorsDisabledByDefault()
     {
         $client = $this->client();
