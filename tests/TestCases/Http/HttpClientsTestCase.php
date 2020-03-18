@@ -96,14 +96,14 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     /**
      * Creates or obtains Http Client that matches given profile
      *
-     * @param string $profile
+     * @param string $profile [optional]
      * @param array $options [optional]
      *
      * @return Client
      *
      * @throws ProfileNotFoundException
      */
-    public function client(string $profile, array $options = []): Client
+    public function client(?string $profile = null, array $options = []): Client
     {
         return $this->getHttpClientsManager()->profile($profile, $options);
     }
