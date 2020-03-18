@@ -628,7 +628,7 @@ interface Builder extends HttpClientAware,
     public function client(): Client;
 
     /**
-     * Get this Http Client's native driver
+     * Get Http Client's native driver
      *
      * @return mixed
      */
