@@ -64,6 +64,22 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
 
     /**
      * @test
+     */
+    public function canSpecifyTimeout()
+    {
+        $client = $this->client();
+
+        $seconds = (float) $this->getFaker()->randomDigitNotNull;
+
+        $result = $client
+            ->withTimeout($seconds)
+            ->getTimeout();
+
+        $this->assertSame($seconds, $result, 'Request timeout incorrect');
+    }
+
+    /**
+     * @test
      *
      * @throws ProfileNotFoundException
      */
