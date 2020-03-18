@@ -5,14 +5,13 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
-use GuzzleHttp\Psr7\Response;
 
 /**
  * JsonHttpClientDriverTest
  *
  * @group http
  * @group http-clients
- * @group json-http-client
+ * @group http-clients-json
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
@@ -28,7 +27,7 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
      */
     public function getDefaultHttpClient(): ?Client
     {
-        return $this->getHttpClientsManager()->profile('json');
+        return $this->client('json');
     }
 
     /*****************************************************************
@@ -61,13 +60,9 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
      */
     public function setsJsonContentType(string $method)
     {
-        $mockedResponses = $this->makeResponseMock([
-            new Response(200, [ 'X-Foo' => 'Bar' ])
-        ]);
-
         $client = $this->getHttpClient();
         $client
-            ->withOption('handler', $mockedResponses)
+            ->withOption('handler', $this->makeRespondsOkMock())
             ->$method('/my-api');
 
         $headers = $this->lastRequest->getHeaders();
@@ -84,13 +79,9 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
      */
     public function setsJsonAcceptHeader(string $method)
     {
-        $mockedResponses = $this->makeResponseMock([
-            new Response(200, [ 'X-Foo' => 'Bar' ])
-        ]);
-
         $client = $this->getHttpClient();
         $client
-            ->withOption('handler', $mockedResponses)
+            ->withOption('handler', $this->makeRespondsOkMock())
             ->$method('/my-api');
 
         $headers = $this->lastRequest->getHeaders();
@@ -104,12 +95,8 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
      */
     public function maintainsDefaultHeadersAfterRequest()
     {
-        $mockedResponses = $this->makeResponseMock([
-            new Response(200, [ 'X-Foo' => 'Bar' ])
-        ]);
-
         $client = $this->getHttpClient()
-            ->withOption('handler', $mockedResponses);
+            ->withOption('handler', $this->makeRespondsOkMock());
 
         $client->post('/my-api');
 
@@ -126,17 +113,12 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
      */
     public function requestIsJsonEncoded()
     {
-        $mockedResponses = $this->makeResponseMock([
-            new Response(200, [ 'X-Foo' => 'Bar' ])
-        ]);
-
         $body = [
             'name' => 'Jimmy Rick Jr.'
         ];
 
         $client = $this->getHttpClient()
-            ->withOption('handler', $mockedResponses);
-
+            ->withOption('handler', $this->makeRespondsOkMock());
 
         $client->post('/v1/some-api', $body);
 
