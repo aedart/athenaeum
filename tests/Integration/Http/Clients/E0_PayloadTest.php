@@ -6,7 +6,6 @@ use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use Aedart\Utils\Json;
-use GuzzleHttp\Psr7\Response;
 use JsonException;
 
 /**

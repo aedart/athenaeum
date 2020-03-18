@@ -8,7 +8,6 @@ use Aedart\Http\Clients\Requests\Attachment;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use Codeception\Configuration;
-use GuzzleHttp\Psr7\Response;
 
 /**
  * F0_AttachmentsTest
