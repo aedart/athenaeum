@@ -25,7 +25,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      */
     public function hasHttpErrorsDisabledByDefault()
     {
-        $client = $this->client('default');
+        $client = $this->client();
 
         $result = $client->getOption('http_errors');
 
@@ -39,7 +39,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      */
     public function hasConnectTimeoutSetByDefault()
     {
-        $client = $this->client('default');
+        $client = $this->client();
 
         $result = $client->getOption('connect_timeout');
 
@@ -53,7 +53,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      */
     public function hasRequestTimeoutSetByDefault()
     {
-        $client = $this->client('default');
+        $client = $this->client();
 
         $result = $client->getOption('timeout');
 
@@ -67,7 +67,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      */
     public function hasFollowRedirectsSetByDefault()
     {
-        $client = $this->client('default');
+        $client = $this->client();
 
         $result = $client->getOption('allow_redirects');
 
@@ -87,7 +87,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      */
     public function canDisableRedirectBehaviour()
     {
-        $client = $this->client('default');
+        $client = $this->client();
 
         $builder = $client->maxRedirects(0);
 
@@ -103,7 +103,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      */
     public function canSpecifyMaxRedirects()
     {
-        $client = $this->client('default');
+        $client = $this->client();
 
         $builder = $client->maxRedirects(5);
 
@@ -112,5 +112,38 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
         ConsoleDebugger::output($result);
 
         $this->assertSame(5, $result['max'], 'Max amount of redirects is incorrect');
+    }
+
+    /**
+     * @test
+     */
+    public function canUseFormDataFormat()
+    {
+        $builder = $this->client()
+            ->formFormat();
+
+        $this->assertSame('form_params', $builder->getDataFormat());
+    }
+
+    /**
+     * @test
+     */
+    public function canUseJsonDataFormat()
+    {
+        $builder = $this->client()
+            ->jsonFormat();
+
+        $this->assertSame('json', $builder->getDataFormat());
+    }
+
+    /**
+     * @test
+     */
+    public function canUseMultipartDataFormat()
+    {
+        $builder = $this->client()
+            ->multipartFormat();
+
+        $this->assertSame('multipart', $builder->getDataFormat());
     }
 }
