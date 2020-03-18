@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * D4_AuthorisationHeadersTest
@@ -43,7 +45,38 @@ class D4_AuthorisationHeadersTest extends HttpClientsTestCase
         $this->assertStringContainsString('Basic', $headers['Authorization'][0]);
     }
 
-    // See Guzzle Specific Tests for Digest Auth...
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function sendsDigestAuthHeader(string $profile)
+    {
+        // This test is is inspired by Guzzle's own way of testing
+        // digest authentication requests.
+        // @see https://github.com/guzzle/guzzle/blob/master/tests/ClientTest.php
+
+        $client = $this->client($profile);
+        $faker = $this->getFaker();
+        $username = $faker->userName;
+        $password = $faker->password;
+
+        $mock = new MockHandler([ new Response() ]);
+
+        $client
+            ->withOption('handler', $mock)
+            ->useDigestAuth($username, $password)
+            ->get('/get');
+
+        $options = $mock->getLastOptions();
+        $this->assertSame([
+            CURLOPT_HTTPAUTH => 2,
+            CURLOPT_USERPWD => $username . ':' . $password
+        ], $options['curl']);
+    }
 
     /**
      * @test

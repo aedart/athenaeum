@@ -114,6 +114,50 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      *
      * @param string $profile
      *
+     * @throws ProfileNotFoundException
+     */
+    public function canAttachUsingOptions(string $profile)
+    {
+        $pathPrefix = Configuration::dataDir() . '/http/clients/attachments/';
+        $file = $pathPrefix . 'test.md';
+
+        $attachment = [
+            [
+                'name' => 'help_file',
+                'contents' => fopen($file, 'r'),
+                'filename' => 'README.md'
+            ]
+        ];
+
+        $client = $this->client($profile);
+        $builder = $client
+            ->withOption('handler', $this->makeRespondsOkMock())
+            ->multipartFormat()
+            ->withOption('multipart', $attachment);
+
+        $builder->post('/records');
+
+        // --------------------------------------------------------------- //
+
+        $request = $this->lastRequest;
+        $contents = $request->getBody()->getContents();
+        ConsoleDebugger::output($contents);
+
+        $this->assertAttachmentInPayload(
+            $contents,
+            'help_file',
+            file_get_contents($file),
+            [],
+            'README.md'
+        );
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
      * @throws InvalidFilePathException
      * @throws ProfileNotFoundException
      */
