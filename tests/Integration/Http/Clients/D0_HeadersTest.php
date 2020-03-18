@@ -26,28 +26,6 @@ class D0_HeadersTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
-    public function extractsHeadersFromOptions(string $profile)
-    {
-        $agent = 'Aedart/HttpClient/2.0';
-
-        $client = $this->client($profile, [
-            'headers' => [
-                'User-Agent' => $agent
-            ]
-        ]);
-
-        $this->assertNotEmpty($client->getHeaders(), 'Header not extracted by request builder');
-        $this->assertSame($agent, $client->getHeader('User-Agent'), 'Specific header not available');
-    }
-
-    /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
-     * @param string $profile
-     *
-     * @throws ProfileNotFoundException
-     */
     public function setsHeadersForRequest(string $profile)
     {
         $client = $this->client($profile);
@@ -99,14 +77,11 @@ class D0_HeadersTest extends HttpClientsTestCase
      */
     public function canRemoveHeaderBeforeRequest(string $profile)
     {
-        $client = $this->client($profile, [
-            'headers' => [
-                'X-Foo' => 'bar'
-            ]
-        ]);
+        $client = $this->client($profile);
 
         $client
             ->withOption('handler', $this->makeRespondsOkMock())
+            ->withHeader('X-Foo', 'bar')
             ->withoutHeader('X-Foo')
             ->request('get', '/users');
 
