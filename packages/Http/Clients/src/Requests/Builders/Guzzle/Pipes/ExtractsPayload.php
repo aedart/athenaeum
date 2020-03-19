@@ -28,6 +28,7 @@ class ExtractsPayload
      * @return mixed
      *
      * @throws Throwable
+     * @throws InvalidAttachmentFormatException
      */
     public function handle(ProcessedOptions $processed, $next)
     {
@@ -35,7 +36,14 @@ class ExtractsPayload
         $builder = $processed->builder();
 
         // Determine format
-        //$format = $options['data_format'] ?? $builder->getDataFormat();
+        $format = $options['data_format'] ?? $builder->getDataFormat();
+        if($format === RequestOptions::JSON){
+            // The "json" format method sets both Accept and Content-Type
+            // headers, which is why we must ensure to invoke it, if required.
+            $builder->jsonFormat();
+        } else {
+            $builder->useDataFormat($format);
+        }
 
         // Obtain data, based on format
         $this->extractAndApplyPayload($options, $builder);
@@ -64,6 +72,7 @@ class ExtractsPayload
      * @return Builder
      *
      * @throws Throwable
+     * @throws InvalidAttachmentFormatException
      */
     protected function extractAndApplyPayload(array $options, Builder $builder)
     {
@@ -76,24 +85,13 @@ class ExtractsPayload
             $builder->withRawPayload($data);
         }
 
-        // Form input
-        if(isset($options[RequestOptions::FORM_PARAMS])){
-            $builder
-                ->formFormat()
-                ->withData($data);
-        }
-
-        // Json
-        if(isset($options[RequestOptions::JSON])){
-            $builder
-                ->jsonFormat()
-                ->withData($data);
+        // Form input or json
+        if(isset($options[RequestOptions::FORM_PARAMS]) || isset($options[RequestOptions::JSON])){
+            $builder->withData($data);
         }
 
         // Multipart (attachments and data)
         if(isset($options[RequestOptions::MULTIPART])){
-            $builder->multipartFormat();
-
             foreach ($data as $key => $entry){
                 // Data
                 if(is_string($key)){
