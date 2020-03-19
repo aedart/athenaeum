@@ -9,12 +9,12 @@ use Aedart\Http\Clients\Requests\Builders\ProcessedOptions;
 use GuzzleHttp\RequestOptions;
 
 /**
- * Resolves Request Payload
+ * Applies Payload onto the Request
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes
  */
-class ResolvesRequestPayload
+class AppliesPayload
 {
     /**
      * Sets the request's payload data, via the options
