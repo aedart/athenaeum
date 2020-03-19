@@ -95,6 +95,13 @@ abstract class BaseBuilder implements
     protected string $jsonContentType = 'application/json';
 
     /**
+     * Http query string values
+     *
+     * @var array Key-value pairs
+     */
+    protected array $query = [];
+
+    /**
      * The request payload (body)
      *
      * Might be empty, if raw payload used.
@@ -367,6 +374,42 @@ abstract class BaseBuilder implements
         return $this
             ->withoutHeader('Authorization')
             ->withHeader('Authorization', trim($scheme . ' ' . $token));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function withQuery(array $query): Builder
+    {
+        return $this->setQuery(
+            array_merge($this->getQuery(), $query)
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setQuery(array $query): Builder
+    {
+        $this->query = $query;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function hasQuery(): bool
+    {
+        return !empty($this->query);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getQuery(): array
+    {
+        return $this->query;
     }
 
     /**

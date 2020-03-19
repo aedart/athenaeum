@@ -401,6 +401,52 @@ interface Builder extends HttpClientAware,
     public function getTimeout(): float;
 
     /**
+     * Add query string values to the next request
+     *
+     * Method merges given values with existing.
+     *
+     * NOTE: When this method used, evt. query string
+     * applied on the Uri is ignored.
+     *
+     * @see setQuery
+     *
+     * @param array $query Key-value pair
+     *
+     * @return self
+     */
+    public function withQuery(array $query): self;
+
+    /**
+     * Set the Http query string for the next request
+     *
+     * Method will overwrite existing query.
+     *
+     * NOTE: When this method used, evt. query string
+     * applied on the Uri is ignored.
+     *
+     * @param array $query Key-value pair
+     *
+     * @return self
+     */
+    public function setQuery(array $query): self;
+
+    /**
+     * Determine if Http query string values have been set
+     * for the next request
+     *
+     * @return bool
+     */
+    public function hasQuery(): bool;
+
+    /**
+     * Get the Http query string values for the next
+     * request
+     *
+     * @return array Key-value pairs
+     */
+    public function getQuery(): array;
+
+    /**
      * Add data to the next request's payload (body).
      *
      * Method will merge given data with existing payload.
