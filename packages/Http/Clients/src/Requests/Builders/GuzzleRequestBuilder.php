@@ -7,7 +7,7 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers\CaptureHandler;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHttpProtocolVersion;
-use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractHttpProtocolVersion;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHttpProtocolVersion;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesPayload;
 use Aedart\Http\Clients\Requests\Builders\Pipes\MergeWithBuilderOptions;
@@ -39,7 +39,7 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     protected array $prepareBuilderPipes = [
         ExtractsHeaders::class,
-        ExtractHttpProtocolVersion::class
+        ExtractsHttpProtocolVersion::class
     ];
 
     /**

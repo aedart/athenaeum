@@ -5,12 +5,12 @@ namespace Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes;
 use Aedart\Http\Clients\Requests\Builders\ProcessedOptions;
 
 /**
- * Extract Http Protocol Version
+ * Extracts Http Protocol Version
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes
  */
-class ExtractHttpProtocolVersion
+class ExtractsHttpProtocolVersion
 {
     /**
      * Extracts the HTTP protocol version from options
