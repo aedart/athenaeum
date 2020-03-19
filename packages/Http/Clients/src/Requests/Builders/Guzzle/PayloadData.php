@@ -43,7 +43,7 @@ class PayloadData
         $targets = static::dataIdentifiers();
 
         // In case that "body" is used, then we cannot make use
-        // the other data identifiers.
+        // of other data identifiers.
         if (!empty($options[RequestOptions::BODY])) {
             return $options[RequestOptions::BODY];
         }
