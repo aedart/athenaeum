@@ -392,6 +392,14 @@ abstract class BaseBuilder implements
     /**
      * @inheritdoc
      */
+    public function hasData(): bool
+    {
+        return !empty($this->data);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getData(): array
     {
         return $this->data;

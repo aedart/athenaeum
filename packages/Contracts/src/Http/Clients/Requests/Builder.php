@@ -439,6 +439,13 @@ interface Builder extends HttpClientAware,
     public function setData(array $data): self;
 
     /**
+     * Determine if next request has payload data
+     *
+     * @return bool
+     */
+    public function hasData(): bool;
+
+    /**
      * Get the next request's payload (body)
      *
      * @return array Decoded payload, key-value pairs

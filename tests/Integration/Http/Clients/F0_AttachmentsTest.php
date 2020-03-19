@@ -85,8 +85,8 @@ class F0_AttachmentsTest extends HttpClientsTestCase
 
         // ----------------------------------------------------------- //
 
-        $dataFromBuilder = $client->getData();
-        $this->assertSame([ 'address' => $address ], $dataFromBuilder, 'Additional data not set');
+        $this->assertTrue($client->hasData(), 'No additional data set on builder');
+        $this->assertSame([ 'address' => $address ], $client->getData(), 'Additional data not set');
     }
 
     /**
