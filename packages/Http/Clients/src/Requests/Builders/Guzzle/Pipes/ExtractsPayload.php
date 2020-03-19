@@ -37,7 +37,7 @@ class ExtractsPayload
 
         // Determine format
         $format = $options['data_format'] ?? $builder->getDataFormat();
-        if($format === RequestOptions::JSON){
+        if ($format === RequestOptions::JSON) {
             // The "json" format method sets both Accept and Content-Type
             // headers, which is why we must ensure to invoke it, if required.
             $builder->jsonFormat();
@@ -81,25 +81,25 @@ class ExtractsPayload
 
         // If "body" is populated, then we cannot use other formats and
         // must set the raw payload.
-        if(isset($options[RequestOptions::BODY])){
+        if (isset($options[RequestOptions::BODY])) {
             $builder->withRawPayload($data);
         }
 
         // Form input or json
-        if(isset($options[RequestOptions::FORM_PARAMS]) || isset($options[RequestOptions::JSON])){
+        if (isset($options[RequestOptions::FORM_PARAMS]) || isset($options[RequestOptions::JSON])) {
             $builder->withData($data);
         }
 
         // Multipart (attachments and data)
-        if(isset($options[RequestOptions::MULTIPART])){
-            foreach ($data as $key => $entry){
+        if (isset($options[RequestOptions::MULTIPART])) {
+            foreach ($data as $key => $entry) {
                 // Data
-                if(is_string($key)){
+                if (is_string($key)) {
                     $builder->withData([ $key => $entry ]);
                 }
 
                 // Attachment
-                if(is_numeric($key) && is_array($entry)){
+                if (is_numeric($key) && is_array($entry)) {
                     $this->addAttachment($entry, $builder);
                 }
 
@@ -126,7 +126,7 @@ class ExtractsPayload
      */
     protected function addAttachment(array $entry, Builder $builder)
     {
-        $builder->withAttachment($entry['name'], function(Attachment $file) use($entry){
+        $builder->withAttachment($entry['name'], function (Attachment $file) use ($entry) {
             $contents = $entry['contents'] ?? null;
             $headers = $entry['headers'] ?? [];
             $filename = $entry['filename'] ?? null;

@@ -7,7 +7,6 @@ use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Http\Clients\Requests\Attachment;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
-use Codeception\Configuration;
 
 /**
  * F0_AttachmentsTest

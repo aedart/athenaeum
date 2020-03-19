@@ -33,7 +33,7 @@ class ExtractsQuery
 
         // Guzzle also accepts a string as option value.
         // Therefore, we parse it using Guzzle's own method
-        if(is_string($query)){
+        if (is_string($query)) {
             $query = parse_query($query);
         }
 

@@ -418,7 +418,7 @@ abstract class BaseBuilder implements
      */
     public function where(string $field, $type = null, $value = null): Builder
     {
-        if(func_num_args() <= 2){
+        if (func_num_args() <= 2) {
             $this->query[$field] = $type;
 
             return $this;
@@ -426,7 +426,7 @@ abstract class BaseBuilder implements
 
         // Abort if provided type is unsupported
         $acceptedTypes = ['string', 'integer', 'boolean'];
-        if( ! in_array(gettype($type), $acceptedTypes)){
+        if (!in_array(gettype($type), $acceptedTypes)) {
             throw new InvalidArgumentException(sprintf(
                 'Provided type argument only supports of the following: %s',
                 implode(', ', $acceptedTypes)
