@@ -15,6 +15,7 @@ use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Contracts\Pipeline\Pipeline as PipelineInterface;
 use Illuminate\Pipeline\Pipeline;
+use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -411,6 +412,33 @@ abstract class BaseBuilder implements
     {
         return $this->query;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function where(string $field, $type = null, $value = null): Builder
+    {
+        if(func_num_args() <= 2){
+            $this->query[$field] = $type;
+
+            return $this;
+        }
+
+        // Abort if provided type is unsupported
+        $acceptedTypes = ['string', 'integer', 'boolean'];
+        if( ! in_array(gettype($type), $acceptedTypes)){
+            throw new InvalidArgumentException(sprintf(
+                'Provided type argument only supports of the following: %s',
+                implode(', ', $acceptedTypes)
+            ));
+        }
+
+        $key = "{$field}[{$type}]";
+        $this->query[$key] = $value;
+
+        return $this;
+    }
+
 
     /**
      * @inheritdoc

@@ -7,6 +7,7 @@ use Aedart\Contracts\Http\Clients\Exceptions\InvalidAttachmentFormatException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
+use InvalidArgumentException;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -409,6 +410,7 @@ interface Builder extends HttpClientAware,
      * applied on the Uri is ignored.
      *
      * @see setQuery
+     * @see https://en.wikipedia.org/wiki/Query_string
      *
      * @param array $query Key-value pair
      *
@@ -423,6 +425,8 @@ interface Builder extends HttpClientAware,
      *
      * NOTE: When this method used, evt. query string
      * applied on the Uri is ignored.
+     *
+     * @see https://en.wikipedia.org/wiki/Query_string
      *
      * @param array $query Key-value pair
      *
@@ -445,6 +449,35 @@ interface Builder extends HttpClientAware,
      * @return array Key-value pairs
      */
     public function getQuery(): array;
+
+    /**
+     * Add a Http query string value, for the given field
+     *
+     * If a value already exists for the given field, this method
+     * will overwrite it's value.
+     *
+     * When only two arguments are provided, the second argument
+     * acts as the value, and the last argument is omitted.
+     *
+     * When all three arguments are provided, the second arguments
+     * acts either as a "sparse field type" identifier, as described
+     * by Json API v1.x.
+     *
+     * @see setQuery
+     * @see withQuery
+     * @see https://en.wikipedia.org/wiki/Query_string
+     * @see https://jsonapi.org/format/#fetching-pagination
+     * @see https://jsonapi.org/format/#fetching-sparse-fieldsets
+     *
+     * @param string $field
+     * @param mixed $type [optional] Sparse fieldset identifier (string) or field value
+     * @param mixed $value [optional] Field value. Only used if $type argument is provided
+     *
+     * @return self
+     *
+     * @throws InvalidArgumentException
+     */
+    public function where(string $field, $type = null, $value = null): self;
 
     /**
      * Add data to the next request's payload (body).
