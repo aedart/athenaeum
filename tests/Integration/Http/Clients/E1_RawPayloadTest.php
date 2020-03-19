@@ -26,6 +26,26 @@ class E1_RawPayloadTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    public function extractsRawPayloadFromOptions(string $profile)
+    {
+        $payload = '<p>When the cannon falls for puerto rico, all lads hail swashbuckling, weird scabbards.</p>';
+
+        $client = $this->client($profile, [
+            'body' => $payload
+        ]);
+
+        $this->assertTrue($client->hasRawPayload(), 'No raw payload detected in options');
+        $this->assertSame($payload, $client->getRawPayload(), 'Incorrect raw payload');
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
     public function canSetTheRawPayload(string $profile)
     {
         $client = $this->client($profile);

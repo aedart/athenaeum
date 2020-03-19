@@ -10,6 +10,7 @@ use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHttpProtocolVersio
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHttpProtocolVersion;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesPayload;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsPayload;
 use Aedart\Http\Clients\Requests\Builders\Pipes\MergeWithBuilderOptions;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\RequestOptions;
@@ -39,7 +40,8 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     protected array $prepareBuilderPipes = [
         ExtractsHeaders::class,
-        ExtractsHttpProtocolVersion::class
+        ExtractsHttpProtocolVersion::class,
+        ExtractsPayload::class
     ];
 
     /**
@@ -71,10 +73,6 @@ class GuzzleRequestBuilder extends BaseBuilder
     public function __construct(Client $client, array $options = [])
     {
         parent::__construct($client, $options);
-
-        $this
-            //->extractHeadersFromOptions()
-            ->extractDataOptions();
     }
 
     /**
@@ -270,50 +268,5 @@ class GuzzleRequestBuilder extends BaseBuilder
         $options = parent::prepareBuilderFromOptions($options);
 
         return $this->processDriverOptions($this->prepareBuilderPipes, $options);
-    }
-
-    /**
-     * Extracts the data and it's format from the options and sets
-     * the appropriate headers
-     *
-     * @return self
-     */
-    protected function extractDataOptions()
-    {
-        $format = $this->options['data_format'] ?? $this->getDataFormat();
-        unset($this->options['data_format']);
-
-        $data = $this->options[$format] ?? [];
-
-        switch ($format) {
-            case RequestOptions::FORM_PARAMS:
-                $this
-                    ->formFormat()
-                    ->setData($data);
-                break;
-
-            case RequestOptions::JSON:
-                $this
-                    ->jsonFormat()
-                    ->setData($data);
-                break;
-
-            case RequestOptions::MULTIPART:
-                $this->multipartFormat();
-
-                // TODO: Extract Files ????
-
-                break;
-
-            //case RequestOptions::BODY:
-            default:
-                $this->useDataFormat($format);
-
-                // TODO: What if "body" is used... this cannot be supported here?
-
-                break;
-        }
-
-        return $this;
     }
 }

@@ -26,6 +26,50 @@ class E0_PayloadTest extends HttpClientsTestCase
      * @param string $profile
      *
      * @throws ProfileNotFoundException
+     */
+    public function extractsFormInputDataFromOptions(string $profile)
+    {
+        $data = [
+            'name' => 'Jessy',
+            'age' => 29
+        ];
+
+        $client = $this->client($profile, [
+            'form_params' => $data
+        ]);
+
+        $this->assertSame($data, $client->getData(), 'Incorrect data from options');
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function extractsJsonDataFromOptions(string $profile)
+    {
+        $data = [
+            'name' => 'Ricky',
+            'age' => 36
+        ];
+
+        $client = $this->client($profile, [
+            'json' => $data
+        ]);
+
+        $this->assertSame($data, $client->getData(), 'Incorrect data from options');
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
      * @throws JsonException
      */
     public function canSetDataViaTheBuilder(string $profile)

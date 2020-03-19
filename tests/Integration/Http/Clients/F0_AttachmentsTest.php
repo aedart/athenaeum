@@ -20,6 +20,75 @@ use Codeception\Configuration;
  */
 class F0_AttachmentsTest extends HttpClientsTestCase
 {
+    /*****************************************************************
+     * Helpers
+     ****************************************************************/
+
+
+
+    /*****************************************************************
+     * Actual Tests
+     ****************************************************************/
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function extractsAttachmentsFromOptions(string $profile)
+    {
+        $pathPrefix = $this->attachmentsPath();
+        $fileA = $pathPrefix . 'config.ini';
+        $fileB = $pathPrefix . 'lipsum.txt';
+        $data = 'Be soft.';
+        $address = 'Somewhere Street 33 Ltd.';
+
+        $attachments = [
+            [
+                'name' => 'setup',
+                'contents' => fopen($fileA, 'r'),
+                'headers' => [ 'X-Foo' => 'bar' ],
+                'filename' => 'setup.ini'
+            ],
+            [
+                'name' => 'text',
+                'contents' => fopen($fileB, 'r'),
+            ],
+            [
+                'name' => 'slogan',
+                'contents' => $data,
+            ],
+
+            // Not an attachment (not sure if valid Guzzle option)
+            'address' => $address
+        ];
+
+        $client = $this->client($profile, [
+            'multipart' => $attachments
+        ]);
+
+        // ----------------------------------------------------------- //
+
+        $this->assertTrue($client->hasAttachment('setup'), 'FileA not part of attachments');
+        $this->assertSame($attachments[0]['contents'], $client->getAttachment('setup')->getContents(), 'FileA incorrect contents');
+        $this->assertSame($attachments[0]['headers'], $client->getAttachment('setup')->getHeaders(), 'FileA incorrect headers');
+        $this->assertSame($attachments[0]['filename'], $client->getAttachment('setup')->getFilename(), 'FileA incorrect filename');
+
+        $this->assertTrue($client->hasAttachment('text'), 'FileB not part of attachments');
+        $this->assertSame($attachments[1]['contents'], $client->getAttachment('text')->getContents(), 'FileB incorrect contents');
+
+        $this->assertTrue($client->hasAttachment('slogan'), '"slogan" not part of attachments');
+        $this->assertSame($attachments[2]['contents'], $client->getAttachment('slogan')->getContents(), 'Incorrect contents for "slogan" attachments');
+
+        // ----------------------------------------------------------- //
+
+        $dataFromBuilder = $client->getData();
+        $this->assertSame([ 'address' => $address ], $dataFromBuilder, 'Additional data not set');
+    }
+
     /**
      * @test
      * @dataProvider providesClientProfiles
@@ -31,8 +100,7 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      */
     public function canAttachUsingAttachmentInstance(string $profile)
     {
-        $pathPrefix = Configuration::dataDir() . '/http/clients/attachments/';
-        $file = $pathPrefix . 'config.ini';
+        $file = $this->attachmentsPath() . 'config.ini';
 
         $attachment = $this->makeAttachment('fileA')
             ->attachFile($file)
@@ -74,8 +142,7 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      */
     public function canAttachUsingCallback(string $profile)
     {
-        $pathPrefix = Configuration::dataDir() . '/http/clients/attachments/';
-        $file = $pathPrefix . 'lipsum.txt';
+        $file = $this->attachmentsPath() . 'lipsum.txt';
 
         $attachment = function (Attachment $att) use ($file) {
             $att
@@ -118,8 +185,7 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      */
     public function canAttachUsingOptions(string $profile)
     {
-        $pathPrefix = Configuration::dataDir() . '/http/clients/attachments/';
-        $file = $pathPrefix . 'test.md';
+        $file = $this->attachmentsPath() . 'test.md';
 
         $attachment = [
             [
@@ -163,7 +229,7 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      */
     public function canAttachMultipleFiles(string $profile)
     {
-        $pathPrefix = Configuration::dataDir() . '/http/clients/attachments/';
+        $pathPrefix = $this->attachmentsPath();
         $fileA = $pathPrefix . 'config.ini';
         $fileB = $pathPrefix . 'lipsum.txt';
         $fileC = $pathPrefix . 'data';
