@@ -94,6 +94,16 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     }
 
     /**
+     * Returns the path where dummy attachments are located
+     *
+     * @return string
+     */
+    protected function attachmentsPath(): string
+    {
+        return Configuration::dataDir() . '/http/clients/attachments/';
+    }
+
+    /**
      * Creates or obtains Http Client that matches given profile
      *
      * @param string $profile [optional]
