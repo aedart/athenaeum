@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Integration\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use InvalidArgumentException;
 
@@ -61,7 +62,9 @@ class C2_WhereTest extends HttpClientsTestCase
         // --------------------------------------------------- //
 
         $this->assertTrue($builder->hasQuery(), 'No query available');
-        $this->assertSame([ "{$key}[{$type}]" => $value ], $builder->getQuery());
+        $this->assertSame([
+            $key => [ $type => $value ]
+        ], $builder->getQuery());
     }
 
     /**
@@ -72,16 +75,58 @@ class C2_WhereTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
-    public function failsWhenTypeInvalid(string $profile)
+    public function canApplyMultipleWhereClausesForSameField(string $profile)
     {
-        $this->expectException(InvalidArgumentException::class);
-
         $client = $this->client($profile);
 
-        $key = 'invalid';
-        $type = $client;
-        $value = 'argument';
+        $builder = $client
+            ->where('year', 'gt', '2021')
+            ->where('year', 'lt', '2088');
 
-        $client->where($key, $type, $value);
+        // --------------------------------------------------- //
+
+        $query = $builder->getQuery();
+
+        ConsoleDebugger::output($query);
+
+        $this->assertSame([
+            'year' => [
+                'gt' => '2021',
+                'lt' => '2088',
+            ]
+        ], $builder->getQuery());
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function acceptsListOfFieldsWithValues(string $profile)
+    {
+        $client = $this->client($profile);
+
+        $fields = [
+            'name' => 'Cris',
+            'has_pets' => true,
+            'items' => ['x', 'y', 'z'],
+            'date' => [
+                'gt' => '1985',
+                'lt' => '2034'
+            ]
+        ];
+
+        $builder = $client->where($fields);
+
+        // --------------------------------------------------- //
+
+        $query = $builder->getQuery();
+
+        ConsoleDebugger::output($query);
+
+        $this->assertSame($fields, $builder->getQuery());
     }
 }

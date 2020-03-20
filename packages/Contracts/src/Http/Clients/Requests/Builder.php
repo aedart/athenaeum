@@ -451,10 +451,10 @@ interface Builder extends HttpClientAware,
     public function getQuery(): array;
 
     /**
-     * Add a Http query string value, for the given field
+     * Add a Http query value, for the given field
      *
-     * If a value already exists for the given field, this method
-     * will overwrite it's value.
+     * Method attempts to merge field values recursively, with
+     * existing query values.
      *
      * When only two arguments are provided, the second argument
      * acts as the value, and the last argument is omitted.
@@ -463,21 +463,22 @@ interface Builder extends HttpClientAware,
      * acts either as a "sparse field type" identifier, as described
      * by Json API v1.x.
      *
+     * If the first argument is a list of fields with values, then
+     * both `$type` and `$value` arguments are ignored.
+     *
      * @see setQuery
      * @see withQuery
      * @see https://en.wikipedia.org/wiki/Query_string
      * @see https://jsonapi.org/format/#fetching-pagination
      * @see https://jsonapi.org/format/#fetching-sparse-fieldsets
      *
-     * @param string $field
+     * @param string|array $field Field name or List of fields with values
      * @param mixed $type [optional] Sparse fieldset identifier (string) or field value
-     * @param mixed $value [optional] Field value. Only used if $type argument is provided
+     * @param mixed $value [optional] Field value. Only used if `$type` argument is provided
      *
      * @return self
-     *
-     * @throws InvalidArgumentException
      */
-    public function where(string $field, $type = null, $value = null): self;
+    public function where($field, $type = null, $value = null): self;
 
     /**
      * Add data to the next request's payload (body).

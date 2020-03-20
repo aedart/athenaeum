@@ -416,29 +416,34 @@ abstract class BaseBuilder implements
     /**
      * @inheritdoc
      */
-    public function where(string $field, $type = null, $value = null): Builder
+    public function where($field, $type = null, $value = null): Builder
     {
-        if (func_num_args() <= 2) {
-            $this->query[$field] = $type;
-
-            return $this;
+        // When list of fields => values is given.
+        if(is_array($field)){
+            return $this->addQueryFieldsWithValues($field);
         }
 
-        // Abort if provided type is unsupported
-        $acceptedTypes = ['string', 'integer', 'boolean'];
-        if (!in_array(gettype($type), $acceptedTypes)) {
-            throw new InvalidArgumentException(sprintf(
-                'Provided type argument only supports of the following: %s',
-                implode(', ', $acceptedTypes)
-            ));
+        // Prepare the value to be used. We assume that only two arguments are
+        // provided, at this point. This means that the "type" argument acts as
+        // the field's value.
+        $appliedValue = $type;
+
+        // When all arguments are provided, then we change the structure of the
+        // applied value, to match that of "Sparse Fieldset", as described by
+        // Json Api v1.x.
+        if (func_num_args() === 3) {
+            $appliedValue = [ $type => $value ];
         }
 
-        $key = "{$field}[{$type}]";
-        $this->query[$key] = $value;
+        // Prepare the "query" field and value to be added.
+        $query = [ $field => $appliedValue];
 
-        return $this;
+        // Merge the query recursively, with the existing query values.
+        // This allows multiple calls to the same field to be performed.
+        return $this->setQuery(
+            array_merge_recursive($this->getQuery(), $query)
+        );
     }
-
 
     /**
      * @inheritdoc
@@ -747,6 +752,24 @@ abstract class BaseBuilder implements
     protected function normaliseHeaderName(string $name): string
     {
         return strtolower(trim($name));
+    }
+
+    /**
+     * Add multiple Http query values for list of fields
+     *
+     * @see where
+     *
+     * @param array $fields
+     *
+     * @return self
+     */
+    protected function addQueryFieldsWithValues(array $fields): Builder
+    {
+        foreach ($fields as $field => $value){
+            $this->where($field, $value);
+        }
+
+        return $this;
     }
 
     /**
