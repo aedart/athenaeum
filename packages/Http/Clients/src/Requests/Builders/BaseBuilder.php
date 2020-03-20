@@ -77,6 +77,13 @@ abstract class BaseBuilder implements
     protected string $method = 'GET';
 
     /**
+     * Base Url for next request
+     *
+     * @var string
+     */
+    protected string $baseUrl = '';
+
+    /**
      * The Uri to send to
      *
      * @var UriInterface|null
@@ -226,6 +233,32 @@ abstract class BaseBuilder implements
     public function getMethod(): string
     {
         return $this->method;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function withBaseUrl(string $url): Builder
+    {
+        $this->baseUrl = $url;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function hasBaseUrl(): bool
+    {
+        return ! empty($this->baseUrl);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getBaseUrl(): string
+    {
+        return $this->baseUrl;
     }
 
     /**

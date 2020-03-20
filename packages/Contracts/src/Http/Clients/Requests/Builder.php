@@ -180,6 +180,29 @@ interface Builder extends HttpClientAware,
     public function getMethod(): string;
 
     /**
+     * Set the base url for the next request
+     *
+     * @param string $url
+     *
+     * @return self
+     */
+    public function withBaseUrl(string $url): self;
+
+    /**
+     * Determine if base url is set for next request
+     *
+     * @return bool
+     */
+    public function hasBaseUrl(): bool;
+
+    /**
+     * Get the base url for the next request
+     *
+     * @return string
+     */
+    public function getBaseUrl(): string;
+
+    /**
      * Set the Uri for the next request
      *
      * If the given uri string of {@see UriInterface} contain a
