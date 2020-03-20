@@ -5,10 +5,12 @@ namespace Aedart\Http\Clients\Requests\Builders;
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers\CaptureHandler;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesBaseUrl;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHttpProtocolVersion;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesPayload;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesQuery;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsBaseUrl;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHttpProtocolVersion;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsPayload;
@@ -41,6 +43,7 @@ class GuzzleRequestBuilder extends BaseBuilder
      * @var string[] List of class paths
      */
     protected array $prepareBuilderPipes = [
+        ExtractsBaseUrl::class,
         ExtractsHeaders::class,
         ExtractsHttpProtocolVersion::class,
         ExtractsQuery::class,
@@ -55,6 +58,7 @@ class GuzzleRequestBuilder extends BaseBuilder
      */
     protected array $beforeRequestPipes = [
         MergeWithBuilderOptions::class,
+        AppliesBaseUrl::class,
         AppliesHeaders::class,
         AppliesHttpProtocolVersion::class,
         AppliesQuery::class,
