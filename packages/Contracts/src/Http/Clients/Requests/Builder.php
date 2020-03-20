@@ -481,6 +481,36 @@ interface Builder extends HttpClientAware,
     public function where($field, $type = null, $value = null): self;
 
     /**
+     * Apply a callback, when result is true
+     *
+     * @see unless
+     *
+     * @param bool $result E.g. the boolean result of a condition
+     * @param callable $callback The callback to apply, if result is `true`.
+     *                          Request builder instance is given as callback's argument.
+     * @param callable|null $otherwise [optional] Callback to apply, if result evaluates is not `true`.
+     *                          Request builder instance is given as callback's argument.
+     *
+     * @return self
+     */
+    public function when(bool $result, callable $callback, ?callable $otherwise = null): self;
+
+    /**
+     * Apply a callback, when result is false
+     *
+     * @see when
+     *
+     * @param bool $result E.g. the boolean result of a condition
+     * @param callable $callback The callback to apply, if result is `false`.
+     *                          Request builder instance is given as callback's argument.
+     * @param callable|null $otherwise [optional] Callback to apply, if result evaluates is not `false`.
+     *                          Request builder instance is given as callback's argument.
+     *
+     * @return self
+     */
+    public function unless(bool $result, callable $callback, ?callable $otherwise = null): self;
+
+    /**
      * Add data to the next request's payload (body).
      *
      * Method will merge given data with existing payload.

@@ -448,6 +448,29 @@ abstract class BaseBuilder implements
     /**
      * @inheritdoc
      */
+    public function when(bool $result, callable $callback, ?callable $otherwise = null): Builder
+    {
+        if($result === true){
+            $callback($this);
+        } elseif (isset($otherwise)){
+            $otherwise($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function unless(bool $result, callable $callback, ?callable $otherwise = null): Builder
+    {
+        return $this->when( ! $result, $callback, $otherwise);
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     public function withData(array $data): Builder
     {
         return $this->setData(
