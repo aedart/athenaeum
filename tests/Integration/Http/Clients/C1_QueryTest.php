@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Integration\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use Psr\Http\Message\ResponseInterface;
 
@@ -56,7 +57,11 @@ class C1_QueryTest extends HttpClientsTestCase
         $query = [
             'name' => 'Matt',
             'has_pets' => false,
-            'items' => ['a', 'b', 'c']
+            'items' => ['a', 'b', 'c'],
+            'date' => [
+                'gt' => '2020',
+                'lt' => '2054'
+            ]
         ];
 
         $client = $this->client($profile, [
@@ -82,7 +87,11 @@ class C1_QueryTest extends HttpClientsTestCase
         $query = [
             'name' => 'Matt',
             'has_pets' => false,
-            'items' => ['a', 'b', 'c']
+            'items' => ['a', 'b', 'c'],
+            'date' => [
+                'gt' => '2020',
+                'lt' => '2054'
+            ]
         ];
 
         /** @var ResponseInterface $response */
@@ -96,12 +105,16 @@ class C1_QueryTest extends HttpClientsTestCase
         $sentQuery = $this->lastRequest->getUri()->getQuery();
         $sentQuery = parse_query($sentQuery);
 
+        ConsoleDebugger::output($sentQuery);
+
         $this->assertSame([
             'name' => 'Matt',
             'has_pets' => '0',
             'items[0]' => 'a',
             'items[1]' => 'b',
             'items[2]' => 'c',
+            'date[gt]' => '2020',
+            'date[lt]' => '2054',
         ], $sentQuery, 'Incorrect query string values sent');
     }
 }
