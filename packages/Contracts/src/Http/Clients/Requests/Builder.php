@@ -30,7 +30,9 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     *                                  Http query is ignored if it is set via builder's {@see withQuery},
+     *                                  {@see setQuery}, {@see where}, or other http query method.
      *
      * @return ResponseInterface
      */
@@ -43,7 +45,9 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     *                                  Http query is ignored if it is set via builder's {@see withQuery},
+     *                                  {@see setQuery}, {@see where}, or other http query method.
      *
      * @return ResponseInterface
      */
@@ -56,7 +60,9 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     *                                  Http query is ignored if it is set via builder's {@see withQuery},
+     *                                  {@see setQuery}, {@see where}, or other http query method.
      * @param array $body [optional]
      *
      * @return ResponseInterface
@@ -70,7 +76,9 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     *                                  Http query is ignored if it is set via builder's {@see withQuery},
+     *                                  {@see setQuery}, {@see where}, or other http query method.
      * @param array $body [optional]
      *
      * @return ResponseInterface
@@ -84,7 +92,9 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     *                                  Http query is ignored if it is set via builder's {@see withQuery},
+     *                                  {@see setQuery}, {@see where}, or other http query method.
      * @param array $body [optional]
      *
      * @return ResponseInterface
@@ -98,7 +108,9 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     *                                  Http query is ignored if it is set via builder's {@see withQuery},
+     *                                  {@see setQuery}, {@see where}, or other http query method.
      *
      * @return ResponseInterface
      */
@@ -111,7 +123,9 @@ interface Builder extends HttpClientAware,
      *
      * @see withUri
      *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     *                                  Http query is ignored if it is set via builder's {@see withQuery},
+     *                                  {@see setQuery}, {@see where}, or other http query method.
      * @param array $body [optional]
      *
      * @return ResponseInterface
@@ -124,7 +138,9 @@ interface Builder extends HttpClientAware,
      * @see withUri
      *
      * @param string|null $method [optional] Http method name. If none given, builder's method is used
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used
+     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     *                                  Http query is ignored if it is set via builder's {@see withQuery},
+     *                                  {@see setQuery}, {@see where}, or other http query method.
      * @param array $options [optional] Driver specific options. These options are merged with
      *                       builder's already set options, if any given.
      *
