@@ -202,6 +202,28 @@ interface Builder extends HttpClientAware,
     public function getUri(): ?UriInterface;
 
     /**
+     * Alias for {@see withUri}
+     *
+     * @param string|UriInterface $uri
+     *
+     * @return self
+     *
+     * @throws InvalidUriException If given Uri argument is invalid
+     */
+    public function from($uri): self;
+
+    /**
+     * Alias for {@see withUri}
+     *
+     * @param string|UriInterface $uri
+     *
+     * @return self
+     *
+     * @throws InvalidUriException If given Uri argument is invalid
+     */
+    public function into($uri): self;
+
+    /**
      * Set the Http headers for the next request
      *
      * Method will merge with existing headers, if client has any predefined

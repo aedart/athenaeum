@@ -265,6 +265,22 @@ abstract class BaseBuilder implements
     }
 
     /**
+     * @inheritdoc
+     */
+    public function from($uri): Builder
+    {
+        return $this->withUri($uri);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function into($uri): Builder
+    {
+        return $this->withUri($uri);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function withHeaders(array $headers = []): Builder

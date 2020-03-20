@@ -35,7 +35,7 @@ class C0_UriTest extends HttpClientsTestCase
 
         // --------------------------------------------- //
 
-        $builder = $client->withUri($uri);
+        $builder = $client->into($uri);
 
         $uriFromBuilder = $builder->getUri();
         $this->assertInstanceOf(UriInterface::class, $uriFromBuilder);
@@ -67,7 +67,7 @@ class C0_UriTest extends HttpClientsTestCase
 
         $uri = '/' . $this->getFaker()->word . '?foo=bar';
 
-        $builder = $client->withUri($uri);
+        $builder = $client->from($uri);
 
         // ------------------------------------------------------- //
 
