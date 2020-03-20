@@ -19,6 +19,8 @@ use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
+use function GuzzleHttp\Psr7\parse_query;
+
 /**
  * Http Request Base Builder
  *
@@ -231,15 +233,25 @@ abstract class BaseBuilder implements
      */
     public function withUri($uri): Builder
     {
+        // Build a new query, if a string uri has been provided.
         if (is_string($uri)) {
             $uri = new Uri($uri);
         }
 
+        // Abort if uri wasn't a string or Psr-7 Uri.
         if (!($uri instanceof UriInterface)) {
             throw new InvalidUri('Provided Uri must either be a string or Psr-7 UriInterface');
         }
 
-        $this->uri = $uri;
+        // Extract http query, if uri contains such and apply
+        // it onto this builder.
+        $this->withQuery(
+            $this->extractQueryFromUri($uri)
+        );
+
+        // Remove the http query on the uri instance, so that it
+        // does not cause issues when the request is performed.
+        $this->uri = $uri->withQuery('');
 
         return $this;
     }
@@ -775,6 +787,23 @@ abstract class BaseBuilder implements
     protected function normaliseHeaderName(string $name): string
     {
         return strtolower(trim($name));
+    }
+
+    /**
+     * Extracts the Http query fragment from given Uri
+     *
+     * @param UriInterface $uri
+     *
+     * @return array Empty if Uri does not contain a Http query
+     */
+    protected function extractQueryFromUri(UriInterface $uri): array
+    {
+        $query = $uri->getQuery();
+        if( ! empty($query)){
+            return parse_query($query);
+        }
+
+        return [];
     }
 
     /**

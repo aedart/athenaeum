@@ -52,4 +52,27 @@ class C0_UriTest extends HttpClientsTestCase
         $this->assertSame($uri, $sentToUri->getPath(), 'Request did not send to correct uri');
         $this->assertSame(200, $response->getStatusCode());
     }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function extractsQueryFromUri(string $profile)
+    {
+        $client = $this->client($profile);
+
+        $uri = '/' . $this->getFaker()->word . '?foo=bar';
+
+        $builder = $client->withUri($uri);
+
+        // ------------------------------------------------------- //
+
+        $this->assertTrue($builder->hasQuery(), 'Builder has not extracted query from uri');
+        $this->assertSame([ 'foo' => 'bar' ], $builder->getQuery(), 'Incorrect query extraction');
+        $this->assertEmpty($builder->getUri()->getQuery(), 'Uri instance still has a http query');
+    }
 }

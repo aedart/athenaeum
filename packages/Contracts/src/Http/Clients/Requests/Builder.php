@@ -166,6 +166,10 @@ interface Builder extends HttpClientAware,
     /**
      * Set the Uri for the next request
      *
+     * If the given uri string of {@see UriInterface} contain a
+     * http query, then it is extracted and applied onto this
+     * builder, via the {@see withQuery} method.
+     *
      * @param string|UriInterface $uri
      *
      * @return self
