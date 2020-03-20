@@ -15,7 +15,6 @@ use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Contracts\Pipeline\Pipeline as PipelineInterface;
 use Illuminate\Pipeline\Pipeline;
-use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -250,7 +249,7 @@ abstract class BaseBuilder implements
      */
     public function hasBaseUrl(): bool
     {
-        return ! empty($this->baseUrl);
+        return !empty($this->baseUrl);
     }
 
     /**
@@ -480,7 +479,7 @@ abstract class BaseBuilder implements
     public function where($field, $type = null, $value = null): Builder
     {
         // When list of fields => values is given.
-        if(is_array($field)){
+        if (is_array($field)) {
             return $this->addQueryFieldsWithValues($field);
         }
 
@@ -511,9 +510,9 @@ abstract class BaseBuilder implements
      */
     public function when(bool $result, callable $callback, ?callable $otherwise = null): Builder
     {
-        if($result === true){
+        if ($result === true) {
             $callback($this);
-        } elseif (isset($otherwise)){
+        } elseif (isset($otherwise)) {
             $otherwise($this);
         }
 
@@ -525,7 +524,7 @@ abstract class BaseBuilder implements
      */
     public function unless(bool $result, callable $callback, ?callable $otherwise = null): Builder
     {
-        return $this->when( ! $result, $callback, $otherwise);
+        return $this->when(!$result, $callback, $otherwise);
     }
 
 
@@ -848,7 +847,7 @@ abstract class BaseBuilder implements
     protected function extractQueryFromUri(UriInterface $uri): array
     {
         $query = $uri->getQuery();
-        if( ! empty($query)){
+        if (!empty($query)) {
             return parse_query($query);
         }
 
@@ -866,7 +865,7 @@ abstract class BaseBuilder implements
      */
     protected function addQueryFieldsWithValues(array $fields): Builder
     {
-        foreach ($fields as $field => $value){
+        foreach ($fields as $field => $value) {
             $this->where($field, $value);
         }
 

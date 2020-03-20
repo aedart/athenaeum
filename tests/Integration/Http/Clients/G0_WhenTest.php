@@ -4,7 +4,6 @@ namespace Aedart\Tests\Integration\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
-use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 
 /**
@@ -31,7 +30,7 @@ class G0_WhenTest extends HttpClientsTestCase
         $client = $this->client($profile);
 
         $hasAppliedCallback = false;
-        $client->when(true, function(Builder $builder) use(&$hasAppliedCallback){
+        $client->when(true, function (Builder $builder) use (&$hasAppliedCallback) {
             $hasAppliedCallback = true;
         });
 
@@ -51,9 +50,9 @@ class G0_WhenTest extends HttpClientsTestCase
         $client = $this->client($profile);
 
         $hasAppliedCallback = false;
-        $client->when(false, function(Builder $builder){
+        $client->when(false, function (Builder $builder) {
             // Do nothing here...
-        }, function(Builder $builder) use(&$hasAppliedCallback){
+        }, function (Builder $builder) use (&$hasAppliedCallback) {
             $hasAppliedCallback = true;
         });
 
@@ -73,7 +72,7 @@ class G0_WhenTest extends HttpClientsTestCase
         $client = $this->client($profile);
 
         $hasAppliedCallback = false;
-        $client->unless(false, function(Builder $builder) use(&$hasAppliedCallback){
+        $client->unless(false, function (Builder $builder) use (&$hasAppliedCallback) {
             $hasAppliedCallback = true;
         });
 
@@ -93,9 +92,9 @@ class G0_WhenTest extends HttpClientsTestCase
         $client = $this->client($profile);
 
         $hasAppliedCallback = false;
-        $client->unless(true, function(Builder $builder){
+        $client->unless(true, function (Builder $builder) {
             // Do nothing here...
-        }, function(Builder $builder) use(&$hasAppliedCallback){
+        }, function (Builder $builder) use (&$hasAppliedCallback) {
             $hasAppliedCallback = true;
         });
 
