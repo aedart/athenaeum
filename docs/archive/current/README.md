@@ -39,7 +39,7 @@ See the [migration guide](upgrade-guide.md) for details.
 
 ### Http Cookies
 
-New package that contains two simple DTOs, a `Cookie` and `SetCookie`.
+New package that contains two simple DTOs; `Cookie` and `SetCookie`.
 
 ### Upgraded Dependencies
 
