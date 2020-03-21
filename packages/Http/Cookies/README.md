@@ -1,8 +1,32 @@
 # Athenaeum Cookies
 
-Simple DTOs for Http Cookie and Set-Cookie.
+Provides very simple [DTOs](https://en.wikipedia.org/wiki/Data_transfer_object) for [Http Cookie](https://en.wikipedia.org/wiki/HTTP_cookie).
+These DTOs are nothing more than data placeholders; they do not offer "advanced" capabilities.
+Feel free to extend them with whatever logic your application might require.
 
-TODO: ...
+## Examples
+
+```php
+<?php
+use Aedart\Http\Cookies\Cookie;
+
+$cookie = new Cookie([
+    'name' => 'my_cookie',
+    'value' => 'sweet'
+]);
+```
+
+```php
+<?php
+use Aedart\Http\Cookies\SetCookie;
+
+$cookie = new SetCookie([
+    'name' => 'my_cookie',
+    'value' => 'sweet',
+    'maxAge' => 60 * 5,
+    'secure' => true
+]);
+```
 
 ## Documentation
 
