@@ -3,7 +3,6 @@
 namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
-use Aedart\Contracts\Http\Clients\Exceptions\InvalidCookieFormatException;
 use Aedart\Contracts\Http\Clients\Requests\Attachment;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Cookies\Cookie;
@@ -699,15 +698,15 @@ abstract class BaseBuilder implements
      */
     public function withCookie($cookie): Builder
     {
-        if(is_array($cookie)){
+        if (is_array($cookie)) {
             $cookie = $this->makeCookie($cookie);
         }
 
-        if(is_callable($cookie)){
+        if (is_callable($cookie)) {
             $cookie = $this->resolveCallbackCookie($cookie);
         }
 
-        if(!($cookie instanceof Cookie)){
+        if (!($cookie instanceof Cookie)) {
             throw new InvalidCookieFormat('Argument must be a Cookie instance, array, or callback');
         }
 
@@ -722,7 +721,7 @@ abstract class BaseBuilder implements
      */
     public function withCookies(array $cookies = []): Builder
     {
-        foreach ($cookies as $cookie){
+        foreach ($cookies as $cookie) {
             $this->withCookie($cookie);
         }
 
@@ -752,7 +751,7 @@ abstract class BaseBuilder implements
      */
     public function getCookie(string $name): ?Cookie
     {
-        if($this->hasCookie($name)){
+        if ($this->hasCookie($name)) {
             return $this->cookies[$name];
         }
 
