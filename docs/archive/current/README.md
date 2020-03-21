@@ -40,7 +40,7 @@ See the [migration guide](upgrade-guide.md) for details.
 ### Upgraded Dependencies
 
 All dependencies have been upgraded to use the latest version.
-Athenaeum packages now make use of Laravel `^v7.0`, Symfony `v5.0.x`, Codeception `v4.1.x`, ...etc.
+Athenaeum packages now make use of Laravel `v7.x`, Symfony `v5.x`, Codeception `v4.x`, ...etc.
 
 ### Improved Documentation
 
