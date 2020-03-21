@@ -140,7 +140,9 @@ use Aedart\Support\Facades\IoCFacade;
 // ... somewhere inside you legacy application
 
 // Either resolves "station" binding or returns a default value.
-$weatherStation = IoCFacade::tryMake(Station::class, new NullStation());
+$weatherStation = IoCFacade::tryMake(Station::class, function(){
+    return new NullStation();
+});
 ```
 
 For more information, please review the source code of [`IoCFacade`](https://github.com/aedart/athenaeum/blob/master/packages/Support/src/Facades/IoCFacade.php).
