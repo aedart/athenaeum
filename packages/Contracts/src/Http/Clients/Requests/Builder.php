@@ -675,7 +675,7 @@ interface Builder extends HttpClientAware,
     /**
      * Add an attachment to the next request
      *
-     * @param Attachment|callable $attachment If a callback is provided, a new attachment
+     * @param Attachment|array|callable $attachment If a callback is provided, a new attachment
      *                          instance will be given as the callback's argument.
      *
      * @return self
@@ -689,7 +689,7 @@ interface Builder extends HttpClientAware,
      *
      * @see withAttachment
      *
-     * @param Attachment[]|callable[] $attachments List of attachments or callbacks.
+     * @param Attachment[]|callable[][] $attachments List of attachments, callbacks or data-arrays
      *                              Callbacks are given new attachment instance as argument.
      *
      * @return self

@@ -597,6 +597,10 @@ abstract class BaseBuilder implements
     {
         $this->multipartFormat();
 
+        if (is_array($attachment)) {
+            $attachment = $this->makeAttachment($attachment);
+        }
+
         if (is_callable($attachment)) {
             $attachment = $this->resolveCallbackAttachment($attachment);
         }
@@ -605,9 +609,8 @@ abstract class BaseBuilder implements
             throw new InvalidAttachmentFormat('Argument must be an Attachment instance or callback');
         }
 
-        // Get the name of attachment and add it to list of attachments
-        $name = $attachment->getName();
-        $this->attachments[$name] = $attachment;
+        // Add to list of attachments
+        $this->attachments[$attachment->getName()] = $attachment;
 
         return $this;
     }

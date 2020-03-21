@@ -177,6 +177,48 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    public function canAttachUsingArray(string $profile)
+    {
+        $file = $this->attachmentsPath() . 'lipsum.txt';
+
+        $attachment = [
+            'name' => 'arr',
+            'contents' => fopen($file, 'r')
+        ];
+
+        $builder = $this->client($profile)
+            ->withOption('handler', $this->makeRespondsOkMock())
+            ->withAttachment($attachment);
+
+        $builder->post('/records');
+
+        // --------------------------------------------------------------- //
+
+        $this->assertTrue($builder->hasAttachment('arr'), 'file not in builder');
+
+        // --------------------------------------------------------------- //
+
+        $request = $this->lastRequest;
+        $contents = $request->getBody()->getContents();
+        ConsoleDebugger::output($contents);
+
+        $this->assertAttachmentInPayload(
+            $contents,
+            'arr',
+            file_get_contents($file),
+            [],
+            'lipsum.txt'
+        );
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
     public function canAttachUsingOptions(string $profile)
     {
         $file = $this->attachmentsPath() . 'test.md';
