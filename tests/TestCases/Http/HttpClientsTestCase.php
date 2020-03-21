@@ -181,13 +181,13 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     /**
      * Creates a new attachment instance
      *
-     * @param string $name
+     * @param array $data [optional]
      *
      * @return AttachmentInterface
      */
-    protected function makeAttachment(string $name): AttachmentInterface
+    protected function makeAttachment(array $data = []): AttachmentInterface
     {
-        return new Attachment($name);
+        return new Attachment($data);
     }
 
     /*****************************************************************

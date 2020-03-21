@@ -675,17 +675,14 @@ interface Builder extends HttpClientAware,
     /**
      * Add an attachment to the next request
      *
-     * @param string $name Form input name
      * @param Attachment|callable $attachment If a callback is provided, a new attachment
      *                          instance will be given as the callback's argument.
-     *                          If Attachment is given, then it's name is overwritten with
-     *                          the form input name given to this method.
      *
      * @return self
      *
      * @throws InvalidAttachmentFormatException
      */
-    public function withAttachment(string $name, $attachment): self;
+    public function withAttachment($attachment): self;
 
     /**
      * Add one or more attachments to the next request

@@ -20,12 +20,6 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 class F0_AttachmentsTest extends HttpClientsTestCase
 {
     /*****************************************************************
-     * Helpers
-     ****************************************************************/
-
-
-
-    /*****************************************************************
      * Actual Tests
      ****************************************************************/
 
@@ -101,14 +95,15 @@ class F0_AttachmentsTest extends HttpClientsTestCase
     {
         $file = $this->attachmentsPath() . 'config.ini';
 
-        $attachment = $this->makeAttachment('fileA')
+        $attachment = $this->makeAttachment()
+            ->name('setup')
             ->attachFile($file)
             ->headers([ 'X-Foo' => 'bar' ])
             ->filename('setup.ini');
 
         $builder = $this->client($profile)
             ->withOption('handler', $this->makeRespondsOkMock())
-            ->withAttachment('setup', $attachment);
+            ->withAttachment($attachment);
 
         $builder->post('/records');
 
@@ -145,13 +140,13 @@ class F0_AttachmentsTest extends HttpClientsTestCase
 
         $attachment = function (Attachment $att) use ($file) {
             $att
-                ->name('text.txt')
+                ->name('text')
                 ->contents(fopen($file, 'r'));
         };
 
         $builder = $this->client($profile)
             ->withOption('handler', $this->makeRespondsOkMock())
-            ->withAttachment('text', $attachment);
+            ->withAttachment($attachment);
 
         $builder->post('/records');
 
@@ -234,7 +229,8 @@ class F0_AttachmentsTest extends HttpClientsTestCase
         $fileC = $pathPrefix . 'data';
 
         // File as attachment instance
-        $attachmentA = $this->makeAttachment('fileA')
+        $attachmentA = $this->makeAttachment()
+            ->name('setup')
             ->attachFile($fileA)
             ->headers([ 'X-Foo' => 'bar' ])
             ->filename('setup.ini');
@@ -242,7 +238,7 @@ class F0_AttachmentsTest extends HttpClientsTestCase
         // File as callback
         $attachmentB = function (Attachment $file) use ($fileB) {
             $file
-                ->name('text.txt')
+                ->name('text')
                 ->contents(fopen($fileB, 'r'));
         };
 
@@ -255,10 +251,10 @@ class F0_AttachmentsTest extends HttpClientsTestCase
             ->withOption('handler', $this->makeRespondsOkMock())
 
             // Attachment instance
-            ->withAttachment('setup', $attachmentA)
+            ->withAttachment($attachmentA)
 
             // Callback
-            ->withAttachment('text', $attachmentB)
+            ->withAttachment($attachmentB)
 
             // Using attach-file method
             ->attachFile('data', $fileC, [ 'X-Swing' => 'sweet'], 'data.txt')

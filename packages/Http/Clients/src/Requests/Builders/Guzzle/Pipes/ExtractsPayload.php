@@ -126,12 +126,14 @@ class ExtractsPayload
      */
     protected function addAttachment(array $entry, Builder $builder)
     {
-        $builder->withAttachment($entry['name'], function (Attachment $file) use ($entry) {
+        $builder->withAttachment(function (Attachment $file) use ($entry) {
+            $name = $entry['name'] ?? null;
             $contents = $entry['contents'] ?? null;
             $headers = $entry['headers'] ?? [];
             $filename = $entry['filename'] ?? null;
 
             $file
+                ->name($name)
                 ->contents($contents)
                 ->headers($headers)
                 ->filename($filename);

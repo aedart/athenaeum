@@ -7,6 +7,7 @@ use Aedart\Contracts\Http\Clients\Requests\Attachment as AttachmentInterface;
 use Aedart\Http\Clients\Requests\Attachment;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Codeception\Configuration;
+use Throwable;
 
 /**
  * AttachmentTest
@@ -26,15 +27,15 @@ class AttachmentTest extends UnitTestCase
     /**
      * Creates a new attachment instance
      *
-     * @param string|null $name [optional] If none given, a name will be generated
+     * @param array $data [optional]
      *
      * @return AttachmentInterface
+     *
+     * @throws Throwable
      */
-    public function makeAttachment(?string $name = null): AttachmentInterface
+    public function makeAttachment(array $data = []): AttachmentInterface
     {
-        $name = $name ?? $this->getFaker()->word;
-
-        return new Attachment($name);
+        return new Attachment($data);
     }
 
     /*****************************************************************
@@ -46,7 +47,7 @@ class AttachmentTest extends UnitTestCase
      */
     public function canPopulateAttachment()
     {
-        $attachment = $this->makeAttachment()
+        $attachment = $this->makeAttachment([ 'name' => $this->getFaker()->word ])
             ->headers(['X-Foo' => 'bar'])
             ->contents('Hi there')
             ->filename('my_file.txt');
@@ -62,13 +63,15 @@ class AttachmentTest extends UnitTestCase
     /**
      * @test
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException
+     * @throws InvalidFilePathException
+     * @throws Throwable
      */
     public function canAttachFile()
     {
         $path = Configuration::dataDir() . 'http/clients/attachments/test.md';
 
         $contents = $this->makeAttachment()
+                    ->name($this->getFaker()->word)
                     ->attachFile($path)
                     ->getContents();
 
@@ -78,7 +81,8 @@ class AttachmentTest extends UnitTestCase
     /**
      * @test
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException
+     * @throws InvalidFilePathException
+     * @throws Throwable
      */
     public function failsIfPathToFileIsInvalid()
     {

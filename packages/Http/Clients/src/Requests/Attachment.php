@@ -4,7 +4,9 @@ namespace Aedart\Http\Clients\Requests;
 
 use Aedart\Contracts\Http\Clients\Requests\Attachment as AttachmentInterface;
 use Aedart\Http\Clients\Exceptions\InvalidFilePath;
+use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
+use Throwable;
 
 /**
  * Request Attachment
@@ -48,11 +50,23 @@ class Attachment implements AttachmentInterface
     /**
      * Attachment constructor.
      *
-     * @param string $name
+     * @param array $data [optional]
+     *
+     * @throws Throwable
      */
-    public function __construct(string $name)
+    public function __construct(array $data = [])
     {
-        $this->name($name);
+        $this->populate($data);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function populate(array $data = []): void
+    {
+        foreach ($data as $property => $value) {
+            $this->populateProperty($property, $value);
+        }
     }
 
     /**
@@ -150,5 +164,26 @@ class Attachment implements AttachmentInterface
             'contents' => $this->getContents(),
             'filename' => $this->getFilename()
         ];
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Set a given property's value
+     *
+     * @param string $property
+     * @param mixed $value
+     *
+     * @throws InvalidArgumentException If property does not exist
+     */
+    protected function populateProperty(string $property, $value)
+    {
+        if (!method_exists($this, $property)) {
+            throw new InvalidArgumentException(sprintf('Property %s does not exist', $property));
+        }
+
+        $this->{$property}($value);
     }
 }

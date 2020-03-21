@@ -4,6 +4,7 @@
 namespace Aedart\Contracts\Http\Clients\Requests;
 
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
+use Aedart\Contracts\Utils\Populatable;
 use Illuminate\Contracts\Support\Arrayable;
 use Psr\Http\Message\StreamInterface;
 
@@ -16,7 +17,8 @@ use Psr\Http\Message\StreamInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Clients\Requests
  */
-interface Attachment extends Arrayable
+interface Attachment extends Populatable,
+    Arrayable
 {
     /**
      * Set this attachment's form input name

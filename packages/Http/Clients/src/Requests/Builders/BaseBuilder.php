@@ -593,27 +593,20 @@ abstract class BaseBuilder implements
     /**
      * @inheritdoc
      */
-    public function withAttachment(string $name, $attachment): Builder
+    public function withAttachment($attachment): Builder
     {
         $this->multipartFormat();
 
         if (is_callable($attachment)) {
-            $attachment = $this->resolveCallbackAttachment($attachment, $name);
+            $attachment = $this->resolveCallbackAttachment($attachment);
         }
 
         if (!($attachment instanceof Attachment)) {
             throw new InvalidAttachmentFormat('Argument must be an Attachment instance or callback');
         }
 
-        // Resolve the name, in case that it matches "no name"
-        if ($name === static::NO_ATTACHMENT_NAME) {
-            $name = $attachment->getName();
-        }
-
-        // Overwrite the name of the attachment
-        $attachment->name($name);
-
-        // Finally add the attachment
+        // Get the name of attachment and add it to list of attachments
+        $name = $attachment->getName();
         $this->attachments[$name] = $attachment;
 
         return $this;
@@ -624,12 +617,8 @@ abstract class BaseBuilder implements
      */
     public function withAttachments(array $attachments = []): Builder
     {
-        foreach ($attachments as $key => $attachment) {
-            $key = is_string($key)
-                ? $key
-                : static::NO_ATTACHMENT_NAME;
-
-            $this->withAttachment($key, $attachment);
+        foreach ($attachments as $attachment) {
+            $this->withAttachment($attachment);
         }
 
         return $this;
@@ -682,13 +671,13 @@ abstract class BaseBuilder implements
         array $headers = [],
         ?string $filename = null
     ): Builder {
-        $attachment = $this
-            ->makeAttachment($name)
-            ->attachFile($path)
-            ->headers($headers)
-            ->filename($filename);
+        $attachment = $this->makeAttachment([
+            'name' => $name,
+            'headers' => $headers,
+            'filename' => $filename
+        ])->attachFile($path);
 
-        return $this->withAttachment($name, $attachment);
+        return $this->withAttachment($attachment);
     }
 
     /**
@@ -806,17 +795,13 @@ abstract class BaseBuilder implements
      * Resolves an attachment from given callback
      *
      * @param callable $callback New attachment instance is given as callback argument
-     * @param string|null $name [optional] Defaults to a "no name" identifier, if none given
      *
      * @return Attachment
      */
-    protected function resolveCallbackAttachment(callable $callback, ?string $name = null): Attachment
+    protected function resolveCallbackAttachment(callable $callback): Attachment
     {
-        // Resolve name, if none given
-        $name = $name ?? static::NO_ATTACHMENT_NAME;
-
         // Create attachment
-        $attachment = $this->makeAttachment($name);
+        $attachment = $this->makeAttachment();
 
         // Invoke callback
         $callback($attachment);
@@ -885,12 +870,12 @@ abstract class BaseBuilder implements
     /**
      * Creates a new attachment instance
      *
-     * @param string $name
+     * @param array $data [optional]
      *
      * @return Attachment
      */
-    protected function makeAttachment(string $name): Attachment
+    protected function makeAttachment(array $data = []): Attachment
     {
-        return new RequestAttachment($name);
+        return new RequestAttachment($data);
     }
 }
