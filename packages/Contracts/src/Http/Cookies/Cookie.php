@@ -18,7 +18,7 @@ interface Cookie extends Populatable,
 {
     /**
      * Set the cookie-name
-     * 
+     *
      * @param string $name
      *
      * @return self
