@@ -14,5 +14,4 @@ use Throwable;
  */
 interface InvalidCookieFormatException extends Throwable
 {
-
 }

@@ -13,5 +13,4 @@ use InvalidArgumentException;
  */
 class InvalidCookieFormat extends InvalidArgumentException implements InvalidCookieFormatException
 {
-
 }
