@@ -94,18 +94,6 @@ interface SetCookie extends Cookie
     public function getMaxAge(): ?int;
 
     /**
-     * Determine if cookie is a "session-cookie"
-     *
-     * A cookie is considered a session-cookie, when neither
-     * a {@see expires} or {@see maxAge} is specified.
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Session_cookies
-     *
-     * @return bool
-     */
-    public function isSessionCookie(): bool;
-
-    /**
      * Set the host(s) where the cookie will be sent to
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Scope_of_cookies
