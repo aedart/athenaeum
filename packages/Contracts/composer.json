@@ -21,7 +21,7 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "illuminate/contracts": "^7.1"
+        "illuminate/contracts": "^7.2"
     },
     "autoload": {
         "psr-4": {

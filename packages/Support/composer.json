@@ -23,13 +23,13 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "illuminate/config": "^7.1",
-        "illuminate/support": "^7.1",
+        "illuminate/config": "^7.2",
+        "illuminate/support": "^7.2",
         "aedart/athenaeum-contracts": "dev-master",
         "aedart/athenaeum-utils": "dev-master"
     },
     "require-dev": {
-        "twig/twig": "^2.11",
+        "twig/twig": "^2.12",
         "predis/predis": "~1.1",
         "symfony/console": "^5.0"
     },
