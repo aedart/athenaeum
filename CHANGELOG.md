@@ -11,7 +11,7 @@
 **Breaking Changes**
 
 * Required PHP version changed to `v7.4.x`.
-* Upgraded Laravel dependencies to `v7.1.x`, Symfony to `v5.0.x`, Codeception to `v4.1.x`, and various other dependencies.
+* Upgraded Laravel dependencies to `v7.2.x`, Symfony to `v5.0.x`, Codeception to `v4.1.x`, and various other dependencies.
 * All class properties now have their [types declared](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties), if possible.
 * `dto:create` command now generates traits with class [type declarations](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties) for it's properties (_former `dto:create-aware-of` command_).
 * `Dto` and `ArrayDto` now implements the `__serialize()` and `__unserialize()` magic methods.
