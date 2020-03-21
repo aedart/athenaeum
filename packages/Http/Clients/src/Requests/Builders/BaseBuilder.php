@@ -606,7 +606,7 @@ abstract class BaseBuilder implements
         }
 
         if (!($attachment instanceof Attachment)) {
-            throw new InvalidAttachmentFormat('Argument must be an Attachment instance or callback');
+            throw new InvalidAttachmentFormat('Argument must be an Attachment instance, array, or callback');
         }
 
         // Add to list of attachments
