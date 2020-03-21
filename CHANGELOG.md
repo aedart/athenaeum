@@ -85,6 +85,7 @@ It will highjack the `app` binding, which will cause your application to behave 
 * `ApplicationInitiator` and `AthenaeumTestHelper`, testing utilities for the custom adaptation of Laravel's Application.
 * `MailManagerAware` and `MailManagerTrait` Laravel Aware-of Helper.
 * Http- `ClientFactoryAware` and `ClientFactoryTrait` Laravel Aware-of Helper.
+* `Cookie` and `SetCookie` DTOs.
 
 #### Fixed
 
