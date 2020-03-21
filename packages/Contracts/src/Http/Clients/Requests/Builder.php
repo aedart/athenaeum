@@ -4,9 +4,11 @@ namespace Aedart\Contracts\Http\Clients\Requests;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidAttachmentFormatException;
+use Aedart\Contracts\Http\Clients\Exceptions\InvalidCookieFormatException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
+use Aedart\Contracts\Http\Cookies\Cookie;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -675,7 +677,7 @@ interface Builder extends HttpClientAware,
     /**
      * Add an attachment to the next request
      *
-     * @param Attachment|array|callable $attachment If a callback is provided, a new attachment
+     * @param Attachment|array|callable $attachment If a callback is provided, a new {@see Attachment}
      *                          instance will be given as the callback's argument.
      *
      * @return self
@@ -689,8 +691,8 @@ interface Builder extends HttpClientAware,
      *
      * @see withAttachment
      *
-     * @param Attachment[]|callable[][] $attachments List of attachments, callbacks or data-arrays
-     *                              Callbacks are given new attachment instance as argument.
+     * @param Attachment[]|callable[] $attachments List of attachments, callbacks or data-arrays
+     *                              Callbacks are given new {@see Attachment} instance as argument.
      *
      * @return self
      *
@@ -735,6 +737,8 @@ interface Builder extends HttpClientAware,
     /**
      * Attach a file to the next request
      *
+     * @see withAttachment
+     *
      * @param string $name Form input name
      * @param string $path Path to file
      * @param array $headers [optional] Http headers for attachment
@@ -751,6 +755,85 @@ interface Builder extends HttpClientAware,
         array $headers = [],
         ?string $filename = null
     ): self;
+
+    /**
+     * Add a cookie for the next request
+     *
+     * If a Cookie with the same name has already been added,
+     * it will be overwritten.
+     *
+     * @param Cookie|array|callable $cookie If a callback is provided, a new {@see Cookie}
+     *                          instance will be given as the callback's argument.
+     *
+     * @return self
+     *
+     * @throws InvalidCookieFormatException
+     */
+    public function withCookie($cookie): self;
+
+    /**
+     * Add one or more cookies to the next request
+     *
+     * @see withCookie
+     *
+     * @param Cookie[]|callable[] $cookies List of cookies, callbacks or data-arrays
+     *                              Callbacks are given new {@see Cookie} instance as argument.
+     *
+     * @return self
+     *
+     * @throws InvalidCookieFormatException
+     */
+    public function withCookies(array $cookies = []): self;
+
+    /**
+     * Remove the Cookie that matches given name,
+     * for the next request
+     *
+     * @param string $name
+     *
+     * @return self
+     */
+    public function withoutCookie(string $name): self;
+
+    /**
+     * Determine if a Cookie has been set, with the
+     * given name
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasCookie(string $name): bool;
+
+    /**
+     * Get the Cookie with the given name
+     *
+     * @param string $name
+     *
+     * @return Cookie|null
+     */
+    public function getCookie(string $name): ?Cookie;
+
+    /**
+     * Get the cookies for the next request
+     *
+     * @return Cookie[]
+     */
+    public function getCookies(): array;
+
+    /**
+     * Add a cookie for the next request
+     *
+     * @see withCookie
+     *
+     * @param string $name
+     * @param string|null $value [optional]
+     *
+     * @return self
+     *
+     * @throws InvalidCookieFormatException
+     */
+    public function addCookie(string $name, ?string $value = null): self;
 
     /**
      * Apply a set of options for the next request

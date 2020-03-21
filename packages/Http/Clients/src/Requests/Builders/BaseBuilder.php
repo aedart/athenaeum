@@ -3,13 +3,17 @@
 namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
+use Aedart\Contracts\Http\Clients\Exceptions\InvalidCookieFormatException;
 use Aedart\Contracts\Http\Clients\Requests\Attachment;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Http\Cookies\Cookie;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use Aedart\Http\Clients\Exceptions\InvalidAttachmentFormat;
+use Aedart\Http\Clients\Exceptions\InvalidCookieFormat;
 use Aedart\Http\Clients\Exceptions\InvalidUri;
 use Aedart\Http\Clients\Requests\Attachment as RequestAttachment;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
+use Aedart\Http\Cookies\SetCookie;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
@@ -135,6 +139,13 @@ abstract class BaseBuilder implements
      * @var Attachment[] Key = form input name, value = attachment instance
      */
     protected array $attachments = [];
+
+    /**
+     * Cookies
+     *
+     * @var Cookie[] Key = cookie name, value = cookie instance
+     */
+    protected array $cookies = [];
 
     /**
      * BaseBuilder constructor.
@@ -684,6 +695,87 @@ abstract class BaseBuilder implements
     }
 
     /**
+     * @inheritdoc
+     */
+    public function withCookie($cookie): Builder
+    {
+        if(is_array($cookie)){
+            $cookie = $this->makeCookie($cookie);
+        }
+
+        if(is_callable($cookie)){
+            $cookie = $this->resolveCallbackCookie($cookie);
+        }
+
+        if(!($cookie instanceof Cookie)){
+            throw new InvalidCookieFormat('Argument must be a Cookie instance, array, or callback');
+        }
+
+        // Add to list of cookies
+        $this->cookies[$cookie->getName()] = $cookie;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function withCookies(array $cookies = []): Builder
+    {
+        foreach ($cookies as $cookie){
+            $this->withCookie($cookie);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function withoutCookie(string $name): Builder
+    {
+        unset($this->cookies[$name]);
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function hasCookie(string $name): bool
+    {
+        return isset($this->cookies[$name]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCookie(string $name): ?Cookie
+    {
+        if($this->hasCookie($name)){
+            return $this->cookies[$name];
+        }
+
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCookies(): array
+    {
+        return array_values($this->cookies);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addCookie(string $name, ?string $value = null): Builder
+    {
+        return $this->withCookie([ 'name' => $name, 'value' => $value ]);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function withOptions(array $options = []): Builder
@@ -797,7 +889,7 @@ abstract class BaseBuilder implements
     /**
      * Resolves an attachment from given callback
      *
-     * @param callable $callback New attachment instance is given as callback argument
+     * @param callable $callback New {@see Attachment} instance is given as callback argument
      *
      * @return Attachment
      */
@@ -811,6 +903,25 @@ abstract class BaseBuilder implements
 
         // Finally, return attachment
         return $attachment;
+    }
+
+    /**
+     * Resolves a cookie from given callback
+     *
+     * @param callable $callback New {@see Cookie} instance is given as callback argument
+     *
+     * @return Cookie
+     */
+    protected function resolveCallbackCookie(callable $callback): Cookie
+    {
+        // Create cookie
+        $cookie = $this->makeCookie();
+
+        // Invoke the callback
+        $callback($cookie);
+
+        // Finally, return cookie
+        return $cookie;
     }
 
     /**
@@ -880,5 +991,21 @@ abstract class BaseBuilder implements
     protected function makeAttachment(array $data = []): Attachment
     {
         return new RequestAttachment($data);
+    }
+
+    /**
+     * Creates a new Cookie instance
+     *
+     * @param array $data [optional]
+     *
+     * @return Cookie
+     */
+    protected function makeCookie(array $data = []): Cookie
+    {
+        // NOTE: The SetCookie inherits from Cookie. While this
+        // shouldn't be used for requests, it might be useful
+        // for responses, should such be required, e.g.
+        // response formatting, ...etc.
+        return new SetCookie($data);
     }
 }
