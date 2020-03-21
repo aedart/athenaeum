@@ -4,6 +4,7 @@ namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Http\Clients\Requests\Builders\Guzzle\CookieJarAware;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers\CaptureHandler;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesBaseUrl;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHeaders;
@@ -15,8 +16,11 @@ use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHttpProtocolVersion;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsPayload;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsQuery;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Traits\CookieJarTrait;
 use Aedart\Http\Clients\Requests\Builders\Pipes\MergeWithBuilderOptions;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Cookie\CookieJar;
+use GuzzleHttp\Cookie\CookieJarInterface;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -27,8 +31,10 @@ use Psr\Http\Message\ResponseInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders
  */
-class GuzzleRequestBuilder extends BaseBuilder
+class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
 {
+    use CookieJarTrait;
+
     /**
      * The data format to use
      *
@@ -262,6 +268,18 @@ class GuzzleRequestBuilder extends BaseBuilder
     public function driver()
     {
         return parent::driver();
+    }
+
+    /*****************************************************************
+     * Defaults
+     ****************************************************************/
+
+    /**
+     * @inheritdoc
+     */
+    public function getDefaultCookieJar(): ?CookieJarInterface
+    {
+        return new CookieJar();
     }
 
     /*****************************************************************
