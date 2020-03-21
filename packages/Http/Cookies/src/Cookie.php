@@ -47,7 +47,7 @@ class Cookie implements CookieInterface
      */
     public function populate(array $data = []): void
     {
-        foreach ($data as $property => $value){
+        foreach ($data as $property => $value) {
             $this->populateProperty($property, $value);
         }
     }

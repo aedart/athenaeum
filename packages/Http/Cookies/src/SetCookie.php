@@ -75,7 +75,7 @@ class SetCookie extends Cookie implements SetCookieInterface
      */
     public function expires($expiresAt = null)
     {
-        if(isset($expiresAt) && is_int($expiresAt)){
+        if (isset($expiresAt) && is_int($expiresAt)) {
             $expiresAt = gmdate(DateTime::RFC7231, $expiresAt);
         }
 

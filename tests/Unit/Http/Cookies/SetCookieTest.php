@@ -45,7 +45,7 @@ class SetCookieTest extends UnitTestCase
      *
      * @return array
      */
-    protected function cookieData(array $data = []) : array
+    protected function cookieData(array $data = []): array
     {
         $faker = $this->getFaker();
 
