@@ -114,6 +114,15 @@ module.exports.sidebar = function(){
                         'http/clients/custom',
                     ]
                 },
+                {
+                    title: 'Cookies',
+                    collapsable: true,
+                    children: [
+                        'http/cookies/',
+                        'http/cookies/install',
+                        'http/cookies/usage',
+                    ]
+                },
             ]
         },
         {
