@@ -48,9 +48,8 @@ class Factory implements
      */
     protected function obtainCompositeHandler(): CompositeExceptionHandlerInterface
     {
-        return IoCFacade::tryMake(
-            ExceptionHandler::class,
-            new CompositeExceptionHandler()
-        );
+        return IoCFacade::tryMake(ExceptionHandler::class, function () {
+            return new CompositeExceptionHandler();
+        });
     }
 }
