@@ -37,6 +37,10 @@ A Service Provider that [registers Event Listeners and Subscribers](events) via 
 The [Http Clients](http/clients) package has been redesigned, adding several new features to allow a more fluent experience.
 See the [migration guide](upgrade-guide.md) for details. 
 
+### Http Cookies
+
+New package that contains two simple DTOs, a `Cookie` and `SetCookie`.
+
 ### Upgraded Dependencies
 
 All dependencies have been upgraded to use the latest version.
