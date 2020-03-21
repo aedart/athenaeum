@@ -41,8 +41,23 @@ class IoCFacadeTest extends IntegrationTestCase
         $abstract = 'my_binding';
         $default = 'nothing there...';
 
-        $resolved = IoCFacade::tryMake($abstract, $default, []);
+        $resolved = IoCFacade::tryMake($abstract, $default);
 
         $this->assertSame($default, $resolved, 'incorrect default resolved');
+    }
+
+    /**
+     * @test
+     */
+    public function resolvesCallbackValueAsDefault()
+    {
+        $abstract = 'my_binding';
+        $default = function () {
+            return 'my_default';
+        };
+
+        $resolved = IoCFacade::tryMake($abstract, $default);
+
+        $this->assertSame('my_default', $resolved, 'incorrect default resolved');
     }
 }
