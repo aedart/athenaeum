@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Builders\Guzzle\CookieJarAware;
 use Aedart\Contracts\Http\Cookies\Cookie;
 use Aedart\Contracts\Http\Cookies\SetCookie;
+use DateTime;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Cookie\CookieJarInterface;
 use GuzzleHttp\Cookie\SetCookie as GuzzleCookie;
@@ -38,6 +39,18 @@ class CookiesHelper
     }
 
     /**
+     * Creates a new helpers instance
+     *
+     * @param Builder $builder
+     *
+     * @return static
+     */
+    public static function make(Builder $builder)
+    {
+        return new static($builder);
+    }
+
+    /**
      * Extracts Cookies from the driver options and converts them
      * into Cookie-objects that the request builder accepts
      *
@@ -53,7 +66,7 @@ class CookiesHelper
      */
     public static function extract(array $options, Builder $builder): array
     {
-        return (new static($builder))->extractFromDriverOptions($options);
+        return static::make($builder)->extractFromDriverOptions($options);
     }
 
     /**
@@ -71,7 +84,7 @@ class CookiesHelper
      */
     public static function fromCookieJar(CookieJarInterface $cookieJar, Builder $builder): array
     {
-        return (new static($builder))->convertFromCookieJar($cookieJar);
+        return static::make($builder)->convertFromCookieJar($cookieJar);
     }
 
     /**
@@ -120,6 +133,44 @@ class CookiesHelper
     }
 
     /**
+     * Converts all {@see Cookie}s into {@see GuzzleCookie} and populates
+     * a {@see CookieJarInterface}.
+     *
+     * Method resolves the {@see CookieJarInterface} from given driver options
+     * or from the builder via the {@see resolveCookieJar} method
+     *
+     * @see resolveCookieJar
+     *
+     * @param array $options [optional]
+     *
+     * @return CookieJarInterface
+     */
+    public function convertFromBuilder(array $options = []): CookieJarInterface
+    {
+        return $this->populateJar(
+            $this->resolveCookieJar($options),
+            $this->builder()->getCookies()
+        );
+    }
+
+    /**
+     * Populates Cookie Jar with given list of {@see Cookie}
+     *
+     * @param CookieJarInterface $cookieJar
+     * @param Cookie[] $cookies [optional]
+     *
+     * @return CookieJarInterface Populated Cookie Jar
+     */
+    public function populateJar(CookieJarInterface $cookieJar, array $cookies = []): CookieJarInterface
+    {
+        foreach ($cookies as $cookie){
+            $cookieJar->setCookie($this->convertToGuzzle($cookie));
+        }
+
+        return $cookieJar;
+    }
+
+    /**
      * Convert the {@see GuzzleCookie} into a {@see Cookie}
      *
      * @param GuzzleCookie $cookie
@@ -162,18 +213,46 @@ class CookiesHelper
     }
 
     /**
-     * Returns the request builder used by this helper
+     * Converts given {@see Cookie} into a {@see GuzzleCookie}
      *
-     * @return Builder
+     * @param Cookie $cookie
+     *
+     * @return GuzzleCookie
      */
-    public function builder(): Builder
+    public function convertToGuzzle(Cookie $cookie): GuzzleCookie
     {
-        return $this->builder;
+        $guzzleCookie = $this->makeGuzzleCookie();
+
+        // Set name and value
+        $guzzleCookie->setName($cookie->getName());
+        $guzzleCookie->setValue($cookie->getValue());
+
+        // Set the domain to 0, so that Guzzle does not fail when
+        // setting or populating the cookie.
+        // (Am I missing something about Cookies vs. domains in general?)
+        $guzzleCookie->setDomain(0);
+
+        // In case that the Cookie is a "Set-Cookie", populate
+        // remaining directives.
+        if($cookie instanceof SetCookie){
+            $guzzleCookie = $this->applyExpiresOnGuzzleCookie($guzzleCookie, $cookie->getExpires());
+            $guzzleCookie->setMaxAge($cookie->getMaxAge());
+
+            $domain = $cookie->getDomain() ?? $guzzleCookie->getDomain();
+            $guzzleCookie->setDomain($domain);
+
+            $guzzleCookie->setPath($cookie->getPath());
+            $guzzleCookie->setSecure($cookie->isSecure());
+            $guzzleCookie->setHttpOnly($cookie->isHttpOnly());
+
+            // Same site policy does not appear to be supported
+            // by Guzzle. Thus, nothing we can do...
+        }
+
+        return $guzzleCookie;
     }
 
-    /*****************************************************************
-     * Internals
-     ****************************************************************/
+
 
     /**
      * Resolves a Cookie Jar instance from given options.
@@ -191,7 +270,7 @@ class CookiesHelper
      *
      * @throws InvalidArgumentException
      */
-    protected function resolveCookieJar(array $options = []): CookieJarInterface
+    public function resolveCookieJar(array $options = []): CookieJarInterface
     {
         // According to Guzzle's documentation, the "cookies" options is either
         // a boolean value or instance of "Cookie Jar". Therefore, we must
@@ -216,6 +295,20 @@ class CookiesHelper
     }
 
     /**
+     * Returns the request builder used by this helper
+     *
+     * @return Builder
+     */
+    public function builder(): Builder
+    {
+        return $this->builder;
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
      * Obtains a cookie jar from the builder or creates a default
      * instance.
      *
@@ -235,12 +328,62 @@ class CookiesHelper
     }
 
     /**
+     * Sets the expires directory on given {@see GuzzleCookie}, if a valid
+     * expires at date is provided.
+     *
+     * @param GuzzleCookie $guzzleCookie
+     * @param string|null $expiresAt [optional]
+     *
+     * @return GuzzleCookie
+     */
+    protected function applyExpiresOnGuzzleCookie(GuzzleCookie $guzzleCookie, $expiresAt = null): GuzzleCookie
+    {
+        if (!isset($expiresAt)){
+            return $guzzleCookie;
+        }
+
+        $guzzleCookie->setExpires(
+            $this->rfcDateToTimestamp($expiresAt)
+        );
+
+        return $guzzleCookie;
+    }
+
+    /**
+     * Converts a RFC7231 formatted string date into a timestamp
+     *
+     * @param string|null $date [optional]
+     *
+     * @return int|null Null if no date is given
+     */
+    protected function rfcDateToTimestamp(?string $date = null): ?int
+    {
+        if (!isset($date)){
+            return null;
+        }
+
+        return DateTime::createFromFormat(DateTime::RFC7231, $date)->getTimestamp();
+    }
+
+    /**
+     * Creates a new Guzzle Set-Cookie instance
+     *
+     * @param array $data [optional]
+     *
+     * @return GuzzleCookie
+     */
+    protected function makeGuzzleCookie(array $data = []): GuzzleCookie
+    {
+        return new GuzzleCookie($data);
+    }
+
+    /**
      * Creates a default Cookie Jar instance
      *
      * @return CookieJarInterface
      */
     protected function makeDefaultCookieJar(): CookieJarInterface
     {
-        return new CookieJar();
+        return new CookieJar(true);
     }
 }
