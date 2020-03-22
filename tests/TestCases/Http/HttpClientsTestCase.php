@@ -7,15 +7,19 @@ use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Requests\Attachment as AttachmentInterface;
+use Aedart\Contracts\Http\Cookies\Cookie;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Http\Clients\Requests\Attachment;
 use Aedart\Http\Clients\Traits\HttpClientsManagerTrait;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
+use Aedart\Http\Cookies\SetCookie;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Closure;
 use Codeception\Configuration;
+use GuzzleHttp\Cookie\CookieJar;
+use GuzzleHttp\Cookie\CookieJarInterface;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
@@ -190,6 +194,32 @@ abstract class HttpClientsTestCase extends LaravelTestCase
         return new Attachment($data);
     }
 
+    /**
+     * Creates a new cookie instance
+     *
+     * @param array $data [optional]
+     *
+     * @return Cookie
+     */
+    protected function makeCookie(array $data = []): Cookie
+    {
+        return new SetCookie($data);
+    }
+
+    /**
+     * Creates a new Guzzle Cookie Jar instance
+     *
+     * @param array $cookies [optional]
+     * @param string $domain [optional] A "0" is not a valid internet domain, but may
+     *                          be used as server name in a private network. (source: Guzzle's SetCookie)
+     *
+     * @return CookieJarInterface
+     */
+    protected function makeCookieJar(array $cookies = [], string $domain = '0'): CookieJarInterface
+    {
+        return CookieJar::fromArray($cookies, $domain);
+    }
+    
     /*****************************************************************
      * Data Providers
      ****************************************************************/
