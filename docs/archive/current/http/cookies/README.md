@@ -36,6 +36,8 @@ $cookie = new SetCookie([
 ## Motivation
 
 At the time of this writing, when searching for [packages](https://packagist.org/?query=cookies) that contain the keyword "cookie", there seems to be an abundance of vendors.
-Even so, it appears that there is a lack of packages, in which "cookie" objects are not stuffed with all kinds of additional behavioural or creational logic. 
-This package attempts to keep these DTOs as simple as possible.
- 
+Many of them appear to have "cookie" objects with all kinds of behavioural or creational logic, each serving their respectful purpose.
+Unfortunately, it can be difficult to reuse some of those packages, without introducing various side-effects, such as additional behavioural logic that might not be favourable in certain circumstances.
+
+For the above mentioned reason, this package was created, in hopes to offer only the data-placeholder aspects for Http Cookies.
+How you choose to use these, is entirely up to you. 
