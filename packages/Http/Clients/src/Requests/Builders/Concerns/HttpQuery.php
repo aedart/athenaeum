@@ -27,19 +27,7 @@ trait HttpQuery
     protected array $query = [];
 
     /**
-     * Add query string values to the next request
-     *
-     * Method merges given values with existing.
-     *
-     * NOTE: When this method used, evt. query string
-     * applied on the Uri is ignored.
-     *
-     * @see setQuery
-     * @see https://en.wikipedia.org/wiki/Query_string
-     *
-     * @param array $query Key-value pair
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withQuery(array $query): Builder
     {
@@ -49,18 +37,7 @@ trait HttpQuery
     }
 
     /**
-     * Set the Http query string for the next request
-     *
-     * Method will overwrite existing query.
-     *
-     * NOTE: When this method used, evt. query string
-     * applied on the Uri is ignored.
-     *
-     * @see https://en.wikipedia.org/wiki/Query_string
-     *
-     * @param array $query Key-value pair
-     *
-     * @return self
+     * @inheritdoc
      */
     public function setQuery(array $query): Builder
     {
@@ -70,10 +47,7 @@ trait HttpQuery
     }
 
     /**
-     * Determine if Http query string values have been set
-     * for the next request
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function hasQuery(): bool
     {
@@ -81,10 +55,7 @@ trait HttpQuery
     }
 
     /**
-     * Get the Http query string values for the next
-     * request
-     *
-     * @return array Key-value pairs
+     * @inheritdoc
      */
     public function getQuery(): array
     {
@@ -92,31 +63,7 @@ trait HttpQuery
     }
 
     /**
-     * Add a Http query value, for the given field
-     *
-     * Method attempts to merge field values recursively, with
-     * existing query values.
-     *
-     * When only two arguments are provided, the second argument
-     * acts as the value, and the last argument is omitted.
-     *
-     * When all three arguments are provided, the second arguments
-     * acts either as a "sparse field type" identifier, as described
-     * by Json API v1.x.
-     *
-     * If the first argument is a list of fields with values, then
-     * both `$type` and `$value` arguments are ignored.
-     *
-     * @see setQuery
-     * @see withQuery
-     * @see https://en.wikipedia.org/wiki/Query_string
-     * @see https://jsonapi.org/format/#fetching-sparse-fieldsets
-     *
-     * @param string|array $field Field name or List of fields with values
-     * @param mixed $type [optional] Sparse fieldset identifier (string) or field value
-     * @param mixed $value [optional] Field value. Only used if `$type` argument is provided
-     *
-     * @return self
+     * @inheritdoc
      */
     public function where($field, $type = null, $value = null): Builder
     {

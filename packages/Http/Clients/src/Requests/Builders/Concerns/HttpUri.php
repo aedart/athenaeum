@@ -3,7 +3,6 @@
 
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
-use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Http\Clients\Exceptions\InvalidUri;
 use GuzzleHttp\Psr7\Uri;
@@ -33,17 +32,7 @@ trait HttpUri
     protected ?UriInterface $uri;
 
     /**
-     * Set the Uri for the next request
-     *
-     * If the given uri string of {@see UriInterface} contain a
-     * http query, then it is extracted and applied onto this
-     * builder, via the {@see Builder::withQuery} method.
-     *
-     * @param string|UriInterface $uri
-     *
-     * @return self
-     *
-     * @throws InvalidUriException If given Uri argument is invalid
+     * @inheritdoc
      */
     public function withUri($uri): Builder
     {
@@ -71,9 +60,7 @@ trait HttpUri
     }
 
     /**
-     * Get Uri for the next request
-     *
-     * @return UriInterface|null
+     * @inheritdoc
      */
     public function getUri(): ?UriInterface
     {
@@ -81,13 +68,7 @@ trait HttpUri
     }
 
     /**
-     * Alias for {@see withUri}
-     *
-     * @param string|UriInterface $uri
-     *
-     * @return self
-     *
-     * @throws InvalidUriException If given Uri argument is invalid
+     * @inheritdoc
      */
     public function from($uri): Builder
     {
@@ -95,13 +76,7 @@ trait HttpUri
     }
 
     /**
-     * Alias for {@see withUri}
-     *
-     * @param string|UriInterface $uri
-     *
-     * @return self
-     *
-     * @throws InvalidUriException If given Uri argument is invalid
+     * @inheritdoc
      */
     public function into($uri): Builder
     {

@@ -41,21 +41,7 @@ trait HttpBody
     protected $rawPayload;
 
     /**
-     * Add data to the next request's payload (body).
-     *
-     * Method will merge given data with existing payload.
-     *
-     * Depending on driver, method might not allow setting
-     * data if a raw payload has been set.
-     *
-     * @see setData
-     * @see getData
-     *
-     * @param array $data Decoded payload, key-value pairs
-     *
-     * @return self
-     *
-     * @throws Throwable
+     * @inheritdoc
      */
     public function withData(array $data): Builder
     {
@@ -65,21 +51,7 @@ trait HttpBody
     }
 
     /**
-     * Set the next request's payload (body).
-     *
-     * Method will overwrite existing data.
-     *
-     * Depending on driver, method might not allow setting
-     * data if a raw payload has been set.
-     *
-     * @see withData
-     * @see getData
-     *
-     * @param array $data Decoded payload, key-value pairs
-     *
-     * @return self
-     *
-     * @throws Throwable
+     * @inheritdoc
      */
     public function setData(array $data): Builder
     {
@@ -89,9 +61,7 @@ trait HttpBody
     }
 
     /**
-     * Determine if next request has payload data
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function hasData(): bool
     {
@@ -99,9 +69,7 @@ trait HttpBody
     }
 
     /**
-     * Get the next request's payload (body)
-     *
-     * @return array Decoded payload, key-value pairs
+     * @inheritdoc
      */
     public function getData(): array
     {
@@ -109,23 +77,7 @@ trait HttpBody
     }
 
     /**
-     * Set the next request's raw payload (body)
-     *
-     * Depending on driver, method might not allow setting
-     * the raw payload, if data has already been set.
-     *
-     * If a raw payload has already been set, invoking this
-     * method will result in existing payload being
-     * overwritten.
-     *
-     * @see getRawPayload
-     * @see withData
-     *
-     * @param mixed $body
-     *
-     * @return self
-     *
-     * @throws Throwable
+     * @inheritdoc
      */
     public function withRawPayload($body): Builder
     {
@@ -135,15 +87,7 @@ trait HttpBody
     }
 
     /**
-     * Get the next request's raw payload (body)
-     *
-     * If data has been set via {@see withData} or {@see setData},
-     * then this method will not return anything (null).
-     *
-     * @see withData
-     * @see withRawPayload
-     *
-     * @return mixed Null if raw payload not set
+     * @inheritdoc
      */
     public function getRawPayload()
     {
@@ -151,10 +95,7 @@ trait HttpBody
     }
 
     /**
-     * Determine if the next request has a raw
-     * payload (body) set
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function hasRawPayload(): bool
     {

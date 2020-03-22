@@ -31,14 +31,7 @@ trait DriverOptions
     protected array $options = [];
 
     /**
-     * Set a specific option for the next request
-     *
-     * Method will merge given options with Client's default options
-     *
-     * @param string $name
-     * @param mixed $value
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withOption(string $name, $value): Builder
     {
@@ -46,13 +39,7 @@ trait DriverOptions
     }
 
     /**
-     * Apply a set of options for the next request
-     *
-     * Method will merge given options with Client's default options
-     *
-     * @param array $options [optional]
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withOptions(array $options = []): Builder
     {
@@ -62,11 +49,7 @@ trait DriverOptions
     }
 
     /**
-     * Remove given option for the next request
-     *
-     * @param string $name
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withoutOption(string $name): Builder
     {
@@ -76,12 +59,7 @@ trait DriverOptions
     }
 
     /**
-     * Determine if a given option exists for the next
-     * request
-     *
-     * @param string $name
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function hasOption(string $name): bool
     {
@@ -89,11 +67,7 @@ trait DriverOptions
     }
 
     /**
-     * Get a specific option for the next request
-     *
-     * @param string $name
-     *
-     * @return mixed
+     * @inheritdoc
      */
     public function getOption(string $name)
     {
@@ -105,9 +79,7 @@ trait DriverOptions
     }
 
     /**
-     * Get all the options for the next request
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getOptions(): array
     {

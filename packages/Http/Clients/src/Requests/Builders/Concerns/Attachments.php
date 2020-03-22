@@ -2,8 +2,6 @@
 
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
-use Aedart\Contracts\Http\Clients\Exceptions\InvalidAttachmentFormatException;
-use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
 use Aedart\Contracts\Http\Clients\Requests\Attachment;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Http\Clients\Exceptions\InvalidAttachmentFormat;
@@ -35,14 +33,7 @@ trait Attachments
     protected array $attachments = [];
 
     /**
-     * Add an attachment to the next request
-     *
-     * @param Attachment|array|callable $attachment If a callback is provided, a new {@see Attachment}
-     *                          instance will be given as the callback's argument.
-     *
-     * @return self
-     *
-     * @throws InvalidAttachmentFormatException
+     * @inheritdoc
      */
     public function withAttachment($attachment): Builder
     {
@@ -67,16 +58,7 @@ trait Attachments
     }
 
     /**
-     * Add one or more attachments to the next request
-     *
-     * @see withAttachment
-     *
-     * @param Attachment[]|callable[] $attachments List of attachments, callbacks or data-arrays
-     *                              Callbacks are given new {@see Attachment} instance as argument.
-     *
-     * @return self
-     *
-     * @throws InvalidAttachmentFormatException
+     * @inheritdoc
      */
     public function withAttachments(array $attachments = []): Builder
     {
@@ -88,11 +70,7 @@ trait Attachments
     }
 
     /**
-     * Remove an attachment from the next request
-     *
-     * @param string $name Form input name
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withoutAttachment(string $name): Builder
     {
@@ -102,11 +80,7 @@ trait Attachments
     }
 
     /**
-     * Determine if an attachment exists
-     *
-     * @param string $name Form input name
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function hasAttachment(string $name): bool
     {
@@ -114,11 +88,7 @@ trait Attachments
     }
 
     /**
-     * Get the attachment with the given name
-     *
-     * @param string $name Form input name
-     *
-     * @return Attachment|null
+     * @inheritdoc
      */
     public function getAttachment(string $name): ?Attachment
     {
@@ -130,9 +100,7 @@ trait Attachments
     }
 
     /**
-     * Get the attachments for the next request
-     *
-     * @return Attachment[]
+     * @inheritdoc
      */
     public function getAttachments(): array
     {
@@ -140,19 +108,7 @@ trait Attachments
     }
 
     /**
-     * Attach a file to the next request
-     *
-     * @see withAttachment
-     *
-     * @param string $name Form input name
-     * @param string $path Path to file
-     * @param array $headers [optional] Http headers for attachment
-     * @param string|null $filename [optional] Filename to be used by request
-     *
-     * @return self
-     *
-     * @throws InvalidFilePathException If path to file is invalid
-     * @throws InvalidAttachmentFormatException
+     * @inheritdoc
      */
     public function attachFile(
         string $name,
@@ -170,14 +126,7 @@ trait Attachments
     }
 
     /**
-     * Creates a new attachment instance.
-     *
-     * Method does NOT add the attachment into builder's
-     * list of attachments.
-     *
-     * @param array $data [optional]
-     *
-     * @return Attachment
+     * @inheritdoc
      */
     public function makeAttachment(array $data = []): Attachment
     {

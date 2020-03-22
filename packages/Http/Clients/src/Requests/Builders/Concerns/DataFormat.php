@@ -25,11 +25,7 @@ trait DataFormat
     protected string $dataFormat = RequestOptions::FORM_PARAMS;
 
     /**
-     * Use the given data format for the next request
-     *
-     * @param string $format Driver specific format identifier
-     *
-     * @return self
+     * @inheritdoc
      */
     public function useDataFormat(string $format): Builder
     {
@@ -39,9 +35,7 @@ trait DataFormat
     }
 
     /**
-     * Get the data format to use for the next request
-     *
-     * @return string Driver specific format identifier
+     * @inheritdoc
      */
     public function getDataFormat(): string
     {

@@ -44,13 +44,7 @@ trait HttpHeaders
     protected string $jsonContentType = 'application/json';
 
     /**
-     * Set the Http headers for the next request
-     *
-     * Method will merge with existing headers, if client has any predefined
-     *
-     * @param array $headers [optional] Key-value pair
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withHeaders(array $headers = []): Builder
     {
@@ -60,14 +54,7 @@ trait HttpHeaders
     }
 
     /**
-     * Set a Http header for the next request
-     *
-     * Method will merge with existing headers, if client has any predefined
-     *
-     * @param string $name
-     * @param mixed $value
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withHeader(string $name, $value): Builder
     {
@@ -75,11 +62,7 @@ trait HttpHeaders
     }
 
     /**
-     * Remove a Http header from the next request
-     *
-     * @param string $name
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withoutHeader(string $name): Builder
     {
@@ -97,9 +80,7 @@ trait HttpHeaders
     }
 
     /**
-     * Get all the Http headers for the next request
-     *
-     * @return array
+     * @inheritdoc
      */
     public function getHeaders(): array
     {
@@ -107,11 +88,7 @@ trait HttpHeaders
     }
 
     /**
-     * Get the desired Http header, for the next request
-     *
-     * @param string $name Case-insensitive
-     *
-     * @return mixed
+     * @inheritdoc
      */
     public function getHeader(string $name)
     {
@@ -126,16 +103,7 @@ trait HttpHeaders
     }
 
     /**
-     * Use given Accept header for the next request
-     *
-     * Method remove already set Accept header, before
-     * applying new value.
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept
-     *
-     * @param string $contentType
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withAccept(string $contentType): Builder
     {
@@ -145,16 +113,7 @@ trait HttpHeaders
     }
 
     /**
-     * Use given Content-Type for the next request
-     *
-     * Method remove already set Content-Type header, before
-     * applying new value.
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
-     *
-     * @param string $contentType
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withContentType(string $contentType): Builder
     {
@@ -164,14 +123,7 @@ trait HttpHeaders
     }
 
     /**
-     * Use a token as authentication, for the next request
-     *
-     * @see https://tools.ietf.org/html/rfc6750
-     *
-     * @param string $token
-     * @param string $scheme [optional] Basic Authentication Scheme
-     *
-     * @return self
+     * @inheritdoc
      */
     public function useTokenAuth(string $token, string $scheme = 'Bearer'): Builder
     {

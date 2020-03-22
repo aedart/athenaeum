@@ -17,19 +17,7 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 trait Conditions
 {
     /**
-     * Apply a callback, when result is true
-     *
-     * Method is inverse of {@see unless}.
-     *
-     * Any value returned by the callback methods, is ignored.
-     *
-     * @param bool $result E.g. the boolean result of a condition
-     * @param callable $callback The callback to apply, if result is `true`.
-     *                          Request builder instance is given as callback's argument.
-     * @param callable|null $otherwise [optional] Callback to apply, if result evaluates is `false`.
-     *                          Request builder instance is given as callback's argument.
-     *
-     * @return self
+     * @inheritdoc
      */
     public function when(bool $result, callable $callback, ?callable $otherwise = null): Builder
     {
@@ -43,19 +31,7 @@ trait Conditions
     }
 
     /**
-     * Apply a callback, unless result is true
-     *
-     * Method is inverse of {@see when}.
-     *
-     * Any value returned by the callback methods, is ignored.
-     *
-     * @param bool $result E.g. the boolean result of a condition
-     * @param callable $callback The callback to apply, if result is `false`.
-     *                          Request builder instance is given as callback's argument.
-     * @param callable|null $otherwise [optional] Callback to apply, if result evaluates is `true`.
-     *                          Request builder instance is given as callback's argument.
-     *
-     * @return self
+     * @inheritdoc
      */
     public function unless(bool $result, callable $callback, ?callable $otherwise = null): Builder
     {

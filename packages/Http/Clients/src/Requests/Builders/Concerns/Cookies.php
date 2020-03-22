@@ -3,7 +3,6 @@
 
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
-use Aedart\Contracts\Http\Clients\Exceptions\InvalidCookieFormatException;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Cookies\Cookie;
 use Aedart\Http\Clients\Exceptions\InvalidCookieFormat;
@@ -35,17 +34,7 @@ trait Cookies
     protected array $cookies = [];
 
     /**
-     * Add a cookie for the next request
-     *
-     * If a Cookie with the same name has already been added,
-     * it will be overwritten.
-     *
-     * @param Cookie|array|callable $cookie If a callback is provided, a new {@see Cookie}
-     *                          instance will be given as the callback's argument.
-     *
-     * @return self
-     *
-     * @throws InvalidCookieFormatException
+     * @inheritdoc
      */
     public function withCookie($cookie): Builder
     {
@@ -68,16 +57,7 @@ trait Cookies
     }
 
     /**
-     * Add one or more cookies to the next request
-     *
-     * @see withCookie
-     *
-     * @param Cookie[]|callable[] $cookies List of cookies, callbacks or data-arrays
-     *                              Callbacks are given new {@see Cookie} instance as argument.
-     *
-     * @return self
-     *
-     * @throws InvalidCookieFormatException
+     * @inheritdoc
      */
     public function withCookies(array $cookies = []): Builder
     {
@@ -89,12 +69,7 @@ trait Cookies
     }
 
     /**
-     * Remove the Cookie that matches given name,
-     * for the next request
-     *
-     * @param string $name
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withoutCookie(string $name): Builder
     {
@@ -104,12 +79,7 @@ trait Cookies
     }
 
     /**
-     * Determine if a Cookie has been set, with the
-     * given name
-     *
-     * @param string $name
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function hasCookie(string $name): bool
     {
@@ -117,11 +87,7 @@ trait Cookies
     }
 
     /**
-     * Get the Cookie with the given name
-     *
-     * @param string $name
-     *
-     * @return Cookie|null
+     * @inheritdoc
      */
     public function getCookie(string $name): ?Cookie
     {
@@ -133,9 +99,7 @@ trait Cookies
     }
 
     /**
-     * Get the cookies for the next request
-     *
-     * @return Cookie[]
+     * @inheritdoc
      */
     public function getCookies(): array
     {
@@ -143,16 +107,7 @@ trait Cookies
     }
 
     /**
-     * Add a cookie for the next request
-     *
-     * @see withCookie
-     *
-     * @param string $name
-     * @param string|null $value [optional]
-     *
-     * @return self
-     *
-     * @throws InvalidCookieFormatException
+     * @inheritdoc
      */
     public function addCookie(string $name, ?string $value = null): Builder
     {
@@ -160,14 +115,7 @@ trait Cookies
     }
 
     /**
-     * Creates a new cookie instance.
-     *
-     * Method does NOT add the cookie into builder's list of
-     * cookies.
-     *
-     * @param array $data [optional]
-     *
-     * @return Cookie
+     * @inheritdoc
      */
     public function makeCookie(array $data = []): Cookie
     {

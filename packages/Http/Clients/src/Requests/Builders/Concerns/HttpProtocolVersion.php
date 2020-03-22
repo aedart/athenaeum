@@ -24,13 +24,7 @@ trait HttpProtocolVersion
     protected string $httpProtocolVersion = '1.1';
 
     /**
-     * Set the HTTP protocol version, for the next request
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages
-     *
-     * @param string $version
-     *
-     * @return self
+     * @inheritdoc
      */
     public function useProtocolVersion(string $version): Builder
     {
@@ -40,9 +34,7 @@ trait HttpProtocolVersion
     }
 
     /**
-     * Get the HTTP protocol version, for the next request
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getProtocolVersion(): string
     {

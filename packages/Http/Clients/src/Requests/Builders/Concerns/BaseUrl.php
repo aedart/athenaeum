@@ -26,11 +26,7 @@ trait BaseUrl
     protected string $baseUrl = '';
 
     /**
-     * Set the base url for the next request
-     *
-     * @param string $url
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withBaseUrl(string $url): Builder
     {
@@ -40,9 +36,7 @@ trait BaseUrl
     }
 
     /**
-     * Determine if base url is set for next request
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function hasBaseUrl(): bool
     {
@@ -50,9 +44,7 @@ trait BaseUrl
     }
 
     /**
-     * Get the base url for the next request
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getBaseUrl(): string
     {

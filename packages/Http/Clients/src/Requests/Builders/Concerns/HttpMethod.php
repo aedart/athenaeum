@@ -24,13 +24,7 @@ trait HttpMethod
     protected string $method = 'GET';
 
     /**
-     * Set the Http method, for the next request
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
-     *
-     * @param string $method
-     *
-     * @return self
+     * @inheritdoc
      */
     public function withMethod(string $method): Builder
     {
@@ -40,11 +34,7 @@ trait HttpMethod
     }
 
     /**
-     * Returns the Http method, for the next request
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getMethod(): string
     {
