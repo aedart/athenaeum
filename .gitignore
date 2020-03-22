@@ -13,6 +13,9 @@ yarn.lock
 /node_modules
 .build/
 
+# Ignore internal todo-list
+.todo.md
+
 # Ignore various environment files in root directory
 .env
 .testing
