@@ -38,11 +38,6 @@ abstract class BaseBuilder implements
     use Concerns\HttpUri;
 
     /**
-     * Default attachment name given, when no name provided
-     */
-    protected const NO_ATTACHMENT_NAME = '@:_no_att_name_:@';
-
-    /**
      * BaseBuilder constructor.
      *
      * @param Client $client
