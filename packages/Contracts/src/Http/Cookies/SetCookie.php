@@ -53,7 +53,7 @@ interface SetCookie extends Cookie
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Date
      * @see https://tools.ietf.org/html/rfc7231#section-7.1.1.2
      *
-     * @param string|int $expiresAt [optional] RFC7231 Formatted string date or timestamp
+     * @param string|int|null $expiresAt [optional] RFC7231 Formatted string date or timestamp
      *
      * @return self
      */
