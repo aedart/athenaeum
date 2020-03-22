@@ -195,6 +195,13 @@ class CookiesHelper
         if ($builderCookie instanceof SetCookie){
             $secure = $cookie->getSecure() ?? false;
 
+            // SameSite directive might be included into Guzzle's
+            // Set-Cookie instance. But it can only be obtained via
+            // the toArray() method.
+            // @see https://github.com/aedart/athenaeum/issues/8
+            $data = $cookie->toArray();
+            $sameSite = $data['SameSite'] ?? null;
+
             $builderCookie->populate([
                 'expires' => $cookie->getExpires(),
                 'maxAge' => $cookie->getMaxAge(),
@@ -202,10 +209,7 @@ class CookiesHelper
                 'path' => $cookie->getPath(),
                 'secure' => $secure,
                 'httpOnly' => $cookie->getHttpOnly(),
-
-                // Same site policy does not appear to be supported
-                // by Guzzle. Therefore, we default it to null.
-                //'sameSite' => SetCookie::SAME_SITE_LAX
+                'sameSite' => $sameSite
             ]);
         }
 
@@ -221,7 +225,18 @@ class CookiesHelper
      */
     public function convertToGuzzle(Cookie $cookie): GuzzleCookie
     {
-        $guzzleCookie = $this->makeGuzzleCookie();
+        // Same site might be obtainable from Guzzle's Set-Cookie,
+        // but can only be when creating a new instance, directly
+        // via the data array. I do miss a "setSameSite" method,
+        // but this will have to do for now...
+        // @see https://github.com/aedart/athenaeum/issues/8
+        $data = [];
+        if ($cookie instanceof SetCookie && !is_null($cookie->getSameSite())){
+            $data['SameSite'] = $cookie->getSameSite();
+        }
+
+        // Create Guzzle Set-Cookie
+        $guzzleCookie = $this->makeGuzzleCookie($data);
 
         // Set name and value
         $guzzleCookie->setName($cookie->getName());
@@ -244,9 +259,6 @@ class CookiesHelper
             $guzzleCookie->setPath($cookie->getPath());
             $guzzleCookie->setSecure($cookie->isSecure());
             $guzzleCookie->setHttpOnly($cookie->isHttpOnly());
-
-            // Same site policy does not appear to be supported
-            // by Guzzle. Thus, nothing we can do...
         }
 
         return $guzzleCookie;
