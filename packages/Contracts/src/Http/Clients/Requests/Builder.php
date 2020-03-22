@@ -525,20 +525,47 @@ interface Builder extends HttpClientAware,
      * When only two arguments are provided, the second argument
      * acts as the value, and the last argument is omitted.
      *
+     * ```
+     * $builder
+     *      ->where('age', 23)
+     *      ->get('/users');
+     *
+     * // HTTP/1.1 GET /users?age=23
+     * ```
+     *
      * When all three arguments are provided, the second arguments
-     * acts either as a "sparse field type" identifier, as described
-     * by Json API v1.x.
+     * acts either as a "type" identifier, similar to those used
+     * by {@link https://jsonapi.org/format/1.1/#query-parameters}.
+     *
+     * ```
+     * $builder
+     *      ->where('age', 'gt', 23)
+     *      ->get('/users');
+     *
+     * // HTTP/1.1 GET /users?age[gt]=23
+     * ```
      *
      * If the first argument is a list of fields with values, then
      * both `$type` and `$value` arguments are ignored.
      *
+     * ```
+     * $builder
+     *      ->where([
+     *          'age' => 23,
+     *          'created_at' => [ 'gt' => 2020 ]
+     *      ])
+     *      ->get('/users');
+     *
+     * // HTTP/1.1 GET /users?age=23&created_at[gt]=2020
+     * ```
+     *
      * @see setQuery
      * @see withQuery
      * @see https://en.wikipedia.org/wiki/Query_string
-     * @see https://jsonapi.org/format/#fetching-sparse-fieldsets
+     * @see https://jsonapi.org/format/1.1/#query-parameters
      *
      * @param string|array $field Field name or List of fields with values
-     * @param mixed $type [optional] Sparse fieldset identifier (string) or field value
+     * @param mixed $type [optional] Identifier (string) or field value
      * @param mixed $value [optional] Field value. Only used if `$type` argument is provided
      *
      * @return self
