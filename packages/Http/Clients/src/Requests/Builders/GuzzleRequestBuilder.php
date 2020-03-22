@@ -7,11 +7,13 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Builders\Guzzle\CookieJarAware;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers\CaptureHandler;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesBaseUrl;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesCookies;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHttpProtocolVersion;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesPayload;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesQuery;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsBaseUrl;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsCookies;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHttpProtocolVersion;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsPayload;
@@ -53,6 +55,7 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         ExtractsHeaders::class,
         ExtractsHttpProtocolVersion::class,
         ExtractsQuery::class,
+        ExtractsCookies::class,
         ExtractsPayload::class
     ];
 
@@ -68,6 +71,7 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         AppliesHeaders::class,
         AppliesHttpProtocolVersion::class,
         AppliesQuery::class,
+        AppliesCookies::class,
         AppliesPayload::class,
     ];
 
@@ -279,7 +283,7 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
      */
     public function getDefaultCookieJar(): ?CookieJarInterface
     {
-        return new CookieJar();
+        return new CookieJar(true);
     }
 
     /*****************************************************************
