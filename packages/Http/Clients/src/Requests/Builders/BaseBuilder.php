@@ -3,14 +3,12 @@
 namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
-use Aedart\Contracts\Http\Clients\Requests\Attachment;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
-
 
 /**
  * Http Request Base Builder
