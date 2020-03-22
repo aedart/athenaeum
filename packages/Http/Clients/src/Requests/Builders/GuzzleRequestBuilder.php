@@ -35,7 +35,9 @@ use Psr\Http\Message\ResponseInterface;
  */
 class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
 {
-    use CookieJarTrait;
+    use CookieJarTrait {
+        setCookieJar as traitSetCookieJar;
+    }
 
     /**
      * The data format to use
@@ -277,6 +279,19 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
     /*****************************************************************
      * Defaults
      ****************************************************************/
+
+    /**
+     * @inheritdoc
+     */
+    public function setCookieJar(?CookieJarInterface $jar)
+    {
+        // Ensure that we overwrite the "cookies" option for
+        // Guzzle with the new cookie jar instance. Otherwise
+        // this might not have any effect.
+        return $this
+            ->withOption('cookies', $jar)
+            ->traitSetCookieJar($jar);
+    }
 
     /**
      * @inheritdoc
