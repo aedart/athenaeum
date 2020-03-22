@@ -696,6 +696,14 @@ abstract class BaseBuilder implements
     /**
      * @inheritdoc
      */
+    public function makeAttachment(array $data = []): Attachment
+    {
+        return new RequestAttachment($data);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function withCookie($cookie): Builder
     {
         if (is_array($cookie)) {
@@ -772,6 +780,18 @@ abstract class BaseBuilder implements
     public function addCookie(string $name, ?string $value = null): Builder
     {
         return $this->withCookie([ 'name' => $name, 'value' => $value ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function makeCookie(array $data = []): Cookie
+    {
+        // NOTE: The SetCookie inherits from Cookie. While this
+        // shouldn't be used for requests, it might be useful
+        // for responses, should such be required, e.g.
+        // response formatting, ...etc.
+        return new SetCookie($data);
     }
 
     /**
@@ -978,33 +998,5 @@ abstract class BaseBuilder implements
     protected function makePipeline(): PipelineInterface
     {
         return new Pipeline($this->getContainer());
-    }
-
-    /**
-     * Creates a new attachment instance
-     *
-     * @param array $data [optional]
-     *
-     * @return Attachment
-     */
-    protected function makeAttachment(array $data = []): Attachment
-    {
-        return new RequestAttachment($data);
-    }
-
-    /**
-     * Creates a new Cookie instance
-     *
-     * @param array $data [optional]
-     *
-     * @return Cookie
-     */
-    protected function makeCookie(array $data = []): Cookie
-    {
-        // NOTE: The SetCookie inherits from Cookie. While this
-        // shouldn't be used for requests, it might be useful
-        // for responses, should such be required, e.g.
-        // response formatting, ...etc.
-        return new SetCookie($data);
     }
 }

@@ -757,6 +757,18 @@ interface Builder extends HttpClientAware,
     ): self;
 
     /**
+     * Creates a new attachment instance.
+     *
+     * Method does NOT add the attachment into builder's
+     * list of attachments.
+     *
+     * @param array $data [optional]
+     *
+     * @return Attachment
+     */
+    public function makeAttachment(array $data = []): Attachment;
+
+    /**
      * Add a cookie for the next request
      *
      * If a Cookie with the same name has already been added,
@@ -834,6 +846,18 @@ interface Builder extends HttpClientAware,
      * @throws InvalidCookieFormatException
      */
     public function addCookie(string $name, ?string $value = null): self;
+
+    /**
+     * Creates a new cookie instance.
+     *
+     * Method does NOT add the cookie into builder's list of
+     * cookies.
+     *
+     * @param array $data [optional]
+     *
+     * @return Cookie
+     */
+    public function makeCookie(array $data = []): Cookie;
 
     /**
      * Apply a set of options for the next request
