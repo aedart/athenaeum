@@ -535,7 +535,6 @@ interface Builder extends HttpClientAware,
      * @see setQuery
      * @see withQuery
      * @see https://en.wikipedia.org/wiki/Query_string
-     * @see https://jsonapi.org/format/#fetching-pagination
      * @see https://jsonapi.org/format/#fetching-sparse-fieldsets
      *
      * @param string|array $field Field name or List of fields with values
