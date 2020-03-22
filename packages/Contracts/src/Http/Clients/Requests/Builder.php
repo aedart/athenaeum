@@ -859,17 +859,6 @@ interface Builder extends HttpClientAware,
     public function makeCookie(array $data = []): Cookie;
 
     /**
-     * Apply a set of options for the next request
-     *
-     * Method will merge given options with Client's default options
-     *
-     * @param array $options [optional]
-     *
-     * @return self
-     */
-    public function withOptions(array $options = []): self;
-
-    /**
      * Set a specific option for the next request
      *
      * Method will merge given options with Client's default options
@@ -882,6 +871,17 @@ interface Builder extends HttpClientAware,
     public function withOption(string $name, $value): self;
 
     /**
+     * Apply a set of options for the next request
+     *
+     * Method will merge given options with Client's default options
+     *
+     * @param array $options [optional]
+     *
+     * @return self
+     */
+    public function withOptions(array $options = []): self;
+
+    /**
      * Remove given option for the next request
      *
      * @param string $name
@@ -891,11 +891,14 @@ interface Builder extends HttpClientAware,
     public function withoutOption(string $name): self;
 
     /**
-     * Get all the options for the next request
+     * Determine if a given option exists for the next
+     * request
      *
-     * @return array
+     * @param string $name
+     *
+     * @return bool
      */
-    public function getOptions(): array;
+    public function hasOption(string $name): bool;
 
     /**
      * Get a specific option for the next request
@@ -905,6 +908,13 @@ interface Builder extends HttpClientAware,
      * @return mixed
      */
     public function getOption(string $name);
+
+    /**
+     * Get all the options for the next request
+     *
+     * @return array
+     */
+    public function getOptions(): array;
 
     /**
      * Alias for getHttpClient
