@@ -103,7 +103,7 @@ class CookiesHelper
         // Resolve Cookie Jar instance from the options. Abort if it
         // does not contain any cookies.
         $cookieJar = $this->resolveCookieJar($options);
-        if ($cookieJar->count() === 0){
+        if ($cookieJar->count() === 0) {
             return [];
         }
 
@@ -125,7 +125,7 @@ class CookiesHelper
     public function convertFromCookieJar(CookieJarInterface $jar): array
     {
         $cookies = [];
-        foreach ($jar as $cookie){
+        foreach ($jar as $cookie) {
             $cookies[] = $this->convertFromGuzzle($cookie);
         }
 
@@ -163,7 +163,7 @@ class CookiesHelper
      */
     public function populateJar(CookieJarInterface $cookieJar, array $cookies = []): CookieJarInterface
     {
-        foreach ($cookies as $cookie){
+        foreach ($cookies as $cookie) {
             $cookieJar->setCookie($this->convertToGuzzle($cookie));
         }
 
@@ -192,7 +192,7 @@ class CookiesHelper
         // In case that a "Set-Cookie" instance is given, we
         // attempt to populate it. This is SHOULD only be
         // required when working with cookies from responses.
-        if ($builderCookie instanceof SetCookie){
+        if ($builderCookie instanceof SetCookie) {
             $secure = $cookie->getSecure() ?? false;
 
             // SameSite directive might be included into Guzzle's
@@ -231,7 +231,7 @@ class CookiesHelper
         // but this will have to do for now...
         // @see https://github.com/aedart/athenaeum/issues/8
         $data = [];
-        if ($cookie instanceof SetCookie && !is_null($cookie->getSameSite())){
+        if ($cookie instanceof SetCookie && !is_null($cookie->getSameSite())) {
             $data['SameSite'] = $cookie->getSameSite();
         }
 
@@ -249,7 +249,7 @@ class CookiesHelper
 
         // In case that the Cookie is a "Set-Cookie", populate
         // remaining directives.
-        if($cookie instanceof SetCookie){
+        if ($cookie instanceof SetCookie) {
             $guzzleCookie = $this->applyExpiresOnGuzzleCookie($guzzleCookie, $cookie->getExpires());
             $guzzleCookie->setMaxAge($cookie->getMaxAge());
 
@@ -291,13 +291,13 @@ class CookiesHelper
 
         // If a cookie jar instance has been provided in the options, then
         // we simple return it.
-        if($cookieJar instanceof CookieJarInterface){
+        if ($cookieJar instanceof CookieJarInterface) {
             return $cookieJar;
         }
 
         // Otherwise, we expect a boolean value. If this isn't the case, then
         // an invalid value has been provided and we abort.
-        if(!is_bool($cookieJar)){
+        if (!is_bool($cookieJar)) {
             throw new InvalidArgumentException('"cookies" option MUST be a boolean value or instance of Guzzle\'s CookieJarInterface');
         }
 
@@ -332,7 +332,7 @@ class CookiesHelper
      */
     protected function obtainCookieJar(Builder $builder): CookieJarInterface
     {
-        if($builder instanceof CookieJarAware){
+        if ($builder instanceof CookieJarAware) {
             return $builder->getCookieJar();
         }
 
@@ -350,7 +350,7 @@ class CookiesHelper
      */
     protected function applyExpiresOnGuzzleCookie(GuzzleCookie $guzzleCookie, $expiresAt = null): GuzzleCookie
     {
-        if (!isset($expiresAt)){
+        if (!isset($expiresAt)) {
             return $guzzleCookie;
         }
 
@@ -370,7 +370,7 @@ class CookiesHelper
      */
     protected function rfcDateToTimestamp(?string $date = null): ?int
     {
-        if (!isset($date)){
+        if (!isset($date)) {
             return null;
         }
 

@@ -41,7 +41,7 @@ class AppliesCookies
         // from the driver options. We abort and go to next pipe, if there
         // are no cookies available.
         $cookies = array_merge($builder->getCookies(), $cookiesFromOptions);
-        if (empty($cookies)){
+        if (empty($cookies)) {
             return $next($processed);
         }
 
@@ -53,7 +53,7 @@ class AppliesCookies
         // by setting it onto the builder - provided that it has support for such.
         // In theory, the resolved Cookie Jar could be the same as the one already set,
         // but we have no way of knowing this for sure.
-        if($builder instanceof CookieJarAware){
+        if ($builder instanceof CookieJarAware) {
             $builder->setCookieJar($cookieJar);
         }
 

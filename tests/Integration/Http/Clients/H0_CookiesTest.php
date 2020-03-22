@@ -125,7 +125,7 @@ class H0_CookiesTest extends HttpClientsTestCase
      */
     public function canAddCookieUsingCallback(string $profile)
     {
-        $cookie = function(Cookie $cookie){
+        $cookie = function (Cookie $cookie) {
             $cookie
                 ->name('foo')
                 ->value('bar');
@@ -234,7 +234,7 @@ class H0_CookiesTest extends HttpClientsTestCase
         // this way, but interface offers no other method.
         /** @var \GuzzleHttp\Cookie\SetCookie $cookie */
         $cookie = null;
-        foreach ($cookieJar as $storedCookie){
+        foreach ($cookieJar as $storedCookie) {
             $cookie = $storedCookie;
         }
 
