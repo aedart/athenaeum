@@ -27,11 +27,11 @@ interface Builder extends HttpClientAware,
     /**
      * Make a GET request
      *
+     * MUST use the {@see request} method to perform actual request.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET
      *
-     * @see withUri
-     *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     * @param string|UriInterface|null $uri [optional] If none given, then Uri from {@see getQuery} MUST be used.
      *                                  Http query is ignored if it is set via builder's {@see withQuery},
      *                                  {@see setQuery}, {@see where}, or other http query method.
      *
@@ -42,11 +42,11 @@ interface Builder extends HttpClientAware,
     /**
      * Make a HEAD request
      *
+     * MUST use the {@see request} method to perform actual request.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD
      *
-     * @see withUri
-     *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     * @param string|UriInterface|null $uri [optional] If none given, then Uri from {@see getQuery} MUST be used.
      *                                  Http query is ignored if it is set via builder's {@see withQuery},
      *                                  {@see setQuery}, {@see where}, or other http query method.
      *
@@ -57,11 +57,11 @@ interface Builder extends HttpClientAware,
     /**
      * Make a POST request
      *
+     * MUST use the {@see request} method to perform actual request.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST
      *
-     * @see withUri
-     *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     * @param string|UriInterface|null $uri [optional] If none given, then Uri from {@see getQuery} MUST be used.
      *                                  Http query is ignored if it is set via builder's {@see withQuery},
      *                                  {@see setQuery}, {@see where}, or other http query method.
      * @param array $body [optional]
@@ -73,11 +73,11 @@ interface Builder extends HttpClientAware,
     /**
      * Make a PUT request
      *
+     * MUST use the {@see request} method to perform actual request.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT
      *
-     * @see withUri
-     *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     * @param string|UriInterface|null $uri [optional] If none given, then Uri from {@see getQuery} MUST be used.
      *                                  Http query is ignored if it is set via builder's {@see withQuery},
      *                                  {@see setQuery}, {@see where}, or other http query method.
      * @param array $body [optional]
@@ -89,11 +89,11 @@ interface Builder extends HttpClientAware,
     /**
      * Make a DELETE request
      *
+     * MUST use the {@see request} method to perform actual request.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE
      *
-     * @see withUri
-     *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     * @param string|UriInterface|null $uri [optional] If none given, then Uri from {@see getQuery} MUST be used.
      *                                  Http query is ignored if it is set via builder's {@see withQuery},
      *                                  {@see setQuery}, {@see where}, or other http query method.
      * @param array $body [optional]
@@ -105,11 +105,11 @@ interface Builder extends HttpClientAware,
     /**
      * Make a OPTIONS request
      *
+     * MUST use the {@see request} method to perform actual request.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS
      *
-     * @see withUri
-     *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     * @param string|UriInterface|null $uri [optional] If none given, then Uri from {@see getQuery} MUST be used.
      *                                  Http query is ignored if it is set via builder's {@see withQuery},
      *                                  {@see setQuery}, {@see where}, or other http query method.
      *
@@ -120,11 +120,11 @@ interface Builder extends HttpClientAware,
     /**
      * Make a PATCH request
      *
+     * MUST use the {@see request} method to perform actual request.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH
      *
-     * @see withUri
-     *
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     * @param string|UriInterface|null $uri [optional] If none given, then Uri from {@see getQuery} MUST be used.
      *                                  Http query is ignored if it is set via builder's {@see withQuery},
      *                                  {@see setQuery}, {@see where}, or other http query method.
      * @param array $body [optional]
@@ -136,14 +136,22 @@ interface Builder extends HttpClientAware,
     /**
      * Make a http request
      *
-     * @see withUri
+     * MUST use the PSR-17 {@see createRequest} method to create a request, prior to sending
+     * it via the {@see send} method.
      *
-     * @param string|null $method [optional] Http method name. If none given, builder's method is used
-     * @param string|UriInterface|null $uri [optional] If none given, then builder's Uri is used.
+     * SHOULD prepare the request and underlying driver (e.g. transport mechanism) with all
+     * required setup and configuration.
+     *
+     * @param string|null $method [optional] Http method. If none given, then {@see getMethod} MUST be
+     *                              used to obtain the desired Http method.
+     * @param string|UriInterface|null $uri [optional] If none given, then Uri from {@see getQuery} MUST be used.
      *                                  Http query is ignored if it is set via builder's {@see withQuery},
      *                                  {@see setQuery}, {@see where}, or other http query method.
-     * @param array $options [optional] Driver specific options. These options are merged with
-     *                       builder's already set options, if any given.
+     * @param array $options [optional] Driver specific options. These options SHOULD be merged with
+     *                       builder's already set options, which SHOULD be obtain via {@see getOptions}.
+     *                       The options provided here SHOULD take precedence over the builder's already
+     *                       set options, when merging them together.
+     *
      *
      * @return ResponseInterface
      */
@@ -153,8 +161,8 @@ interface Builder extends HttpClientAware,
      * Send the given request
      *
      * @param RequestInterface $request
-     * @param array $options [optional] Driver specific options.
-     *                       NOTE: Builder's options are NOT applied, nor merged with given options!
+     * @param array $options [optional] Driver specific options. These options SHOULD NOT be merged
+     *                       with builder's already set options, but applied as given.
      *
      * @return ResponseInterface
      */
