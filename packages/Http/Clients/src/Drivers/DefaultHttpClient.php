@@ -2,7 +2,6 @@
 
 namespace Aedart\Http\Clients\Drivers;
 
-use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Http\Clients\Requests\Builders\GuzzleRequestBuilder;
 use GuzzleHttp\Client as GuzzleClient;
