@@ -5,6 +5,7 @@ namespace Aedart\Http\Clients\Requests\Builders;
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Builders\Guzzle\CookieJarAware;
+use Aedart\Http\Clients\Requests\AdaptedRequest;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers\CaptureHandler;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesBaseUrl;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesCookies;
@@ -104,16 +105,13 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         $uri = $uri ?? $this->getUri();
 
         // Set the next response's options
+        // NOTE: This is automatically reset via "createRequest".
         $this->nextRequestOptions = $options;
 
-        $response = $this->send(
-            $this->createRequest($method, $uri), // NOTE: Alters the next request options!
-            $this->nextRequestOptions
+        // Send the request
+        $response = $this->client()->sendRequest(
+            $this->createRequest($method, $uri)
         );
-
-        // Reset the next request options, to avoid memory leaks or
-        // other unwanted behaviour
-        $this->nextRequestOptions = [];
 
         // Finally, return the response
         return $response;
@@ -130,6 +128,10 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
             $this->nextRequestOptions
         );
 
+        // Reset the next request options, to avoid memory leaks or
+        // other unwanted behaviour
+        $this->nextRequestOptions = [];
+
         // Obtain original handler
         $originalHandler = $options['handler'] ?? null;
 
@@ -138,31 +140,26 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         $options['handler'] = $captured;
 
         // Perform a request, which is NOT sent, but rather captured,
-        // once it has been built.
+        // once it has been built. This should NOT yield any useful
+        // response, nor side-effects.
         $this->driver()->request($method, $uri, $options);
 
         // Overwrite the next request options, with the processed options
         // from Guzzle. This should limit processing time if the builder's
         // "request()" is sending the captured request.
-        $this->nextRequestOptions = $captured->options();
+        $options = $captured->options();
 
-        // Restore original handler option
-        unset($this->nextRequestOptions['handler']);
+        // Restore original handler option.
+        unset($options['handler']);
         if (isset($originalHandler)) {
-            $this->nextRequestOptions['handler'] = $originalHandler;
+            $options['handler'] = $originalHandler;
         }
 
-        // Finally, return the built request
-        return $captured->request();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function send(RequestInterface $request, array $options = []): ResponseInterface
-    {
-        return $this->driver()->send(
-            $request,
+        // Finally, adapt the captured request and add the driver
+        // specific options, so that the client is able to pass them
+        // on to Guzzle.
+        return new AdaptedRequest(
+            $captured->request(),
             $options
         );
     }

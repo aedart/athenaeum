@@ -45,14 +45,6 @@ abstract class BaseClient implements Client
     }
 
     /**
-     * @inheritDoc
-     */
-    public function sendRequest(RequestInterface $request): ResponseInterface
-    {
-        return $this->send($request);
-    }
-
-    /**
      * Returns evt. initial options for this Http Client
      *
      * These options can be overwritten via the regular options

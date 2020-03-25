@@ -3,10 +3,13 @@
 namespace Aedart\Http\Clients\Drivers;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Http\Clients\Requests\HasDriverOptions;
 use Aedart\Http\Clients\Requests\Builders\GuzzleRequestBuilder;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Container\Container;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Default Http Client
@@ -57,6 +60,21 @@ class DefaultHttpClient extends BaseClient
                 'track_redirects' => false
             ]
         ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function sendRequest(RequestInterface $request): ResponseInterface
+    {
+        // Extract driver specific options, if available
+        $options = [];
+        if($request instanceof HasDriverOptions){
+            $options = $request->getDriverOptions();
+        }
+
+        // Perform actual request
+        return $this->driver()->send($request, $options);
     }
 
     /**

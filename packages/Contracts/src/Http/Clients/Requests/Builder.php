@@ -137,7 +137,7 @@ interface Builder extends HttpClientAware,
      * Make a http request
      *
      * MUST use the PSR-17 {@see createRequest} method to create a request, prior to sending
-     * it via the {@see send} method.
+     * it via the PSR-18 {@see Client::sendRequest} method.
      *
      * SHOULD prepare the request and underlying driver (e.g. transport mechanism) with all
      * required setup and configuration.
@@ -156,17 +156,6 @@ interface Builder extends HttpClientAware,
      * @return ResponseInterface
      */
     public function request(?string $method = null, $uri = null, array $options = []): ResponseInterface;
-
-    /**
-     * Send the given request
-     *
-     * @param RequestInterface $request
-     * @param array $options [optional] Driver specific options. These options SHOULD NOT be merged
-     *                       with builder's already set options, but applied as given.
-     *
-     * @return ResponseInterface
-     */
-    public function send(RequestInterface $request, array $options = []): ResponseInterface;
 
     /**
      * Set the Http method, for the next request
