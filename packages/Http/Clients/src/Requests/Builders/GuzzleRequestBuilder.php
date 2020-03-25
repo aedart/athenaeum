@@ -134,8 +134,8 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         $originalHandler = $options['handler'] ?? null;
 
         // Create a "capture" handler
-        $handler = new CaptureHandler();
-        $options['handler'] = $handler;
+        $captured = new CaptureHandler();
+        $options['handler'] = $captured;
 
         // Perform a request, which is NOT sent, but rather captured,
         // once it has been built.
@@ -144,7 +144,7 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         // Overwrite the next request options, with the processed options
         // from Guzzle. This should limit processing time if the builder's
         // "request()" is sending the captured request.
-        $this->nextRequestOptions = $handler->options();
+        $this->nextRequestOptions = $captured->options();
 
         // Restore original handler option
         unset($this->nextRequestOptions['handler']);
@@ -153,7 +153,7 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         }
 
         // Finally, return the built request
-        return $handler->request();
+        return $captured->request();
     }
 
     /**
