@@ -63,7 +63,12 @@ class DefaultHttpClient extends BaseClient
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * If given request contains driver specific options, via {@see HasDriverOptions}, then
+     * these options are passed on to Guzzle.
+     *
+     * @see HasDriverOptions
      */
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
