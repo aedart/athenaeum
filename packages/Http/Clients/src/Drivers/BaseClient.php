@@ -6,8 +6,6 @@ use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use Illuminate\Contracts\Container\Container;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * Base Http Client

@@ -109,12 +109,9 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         $this->nextRequestOptions = $options;
 
         // Send the request
-        $response = $this->client()->sendRequest(
+        return $this->client()->sendRequest(
             $this->createRequest($method, $uri)
         );
-
-        // Finally, return the response
-        return $response;
     }
 
     /**

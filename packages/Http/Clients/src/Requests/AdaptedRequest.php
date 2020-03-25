@@ -17,7 +17,8 @@ use Psr\Http\Message\UriInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests
  */
-class AdaptedRequest implements RequestInterface,
+class AdaptedRequest implements
+    RequestInterface,
     HasDriverOptions
 {
     /**

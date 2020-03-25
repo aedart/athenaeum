@@ -74,7 +74,7 @@ class DefaultHttpClient extends BaseClient
     {
         // Extract driver specific options, if available
         $options = [];
-        if($request instanceof HasDriverOptions){
+        if ($request instanceof HasDriverOptions) {
             $options = $request->getDriverOptions();
         }
 

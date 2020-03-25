@@ -18,7 +18,8 @@ use Psr\Http\Message\ResponseInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders
  */
-abstract class BaseBuilder implements Builder,
+abstract class BaseBuilder implements
+    Builder,
     ContainerAware
 {
     use HttpClientTrait;

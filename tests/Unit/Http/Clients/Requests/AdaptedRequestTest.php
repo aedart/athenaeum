@@ -47,8 +47,7 @@ class AdaptedRequestTest extends UnitTestCase
         array $driverOptions = [],
         $body = null,
         $version = '1.1'
-    )
-    {
+    ) {
         return new AdaptedRequest(
             new Request($method, $uri, $headers, $body, $version),
             $driverOptions
