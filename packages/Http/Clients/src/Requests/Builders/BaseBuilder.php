@@ -36,6 +36,7 @@ abstract class BaseBuilder implements
     use Concerns\HttpProtocolVersion;
     use Concerns\HttpQuery;
     use Concerns\HttpUri;
+    use Concerns\ResponseExpectations;
 
     /**
      * BaseBuilder constructor.

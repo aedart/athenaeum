@@ -108,10 +108,16 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         // NOTE: This is automatically reset via "createRequest".
         $this->nextRequestOptions = $options;
 
-        // Send the request
-        return $this->client()->sendRequest(
-            $this->createRequest($method, $uri)
-        );
+        // Create the request and send it
+        $request = $this->createRequest($method, $uri);
+        $response = $this->client()->sendRequest($request);
+
+        // Apply request expectations, if any added. If any of the expectation
+        // fail, the then that exception is allowed to bubble upwards.
+        $this->applyExpectations($request, $response);
+
+        // Finally, return the response
+        return $response;
     }
 
     /**

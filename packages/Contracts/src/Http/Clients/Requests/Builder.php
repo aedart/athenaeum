@@ -8,8 +8,10 @@ use Aedart\Contracts\Http\Clients\Exceptions\InvalidCookieFormatException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
+use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Http\Cookies\Cookie;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 use Throwable;
@@ -141,6 +143,9 @@ interface Builder extends HttpClientAware,
      * SHOULD prepare the request and underlying driver (e.g. transport mechanism) with all
      * required setup and configuration.
      *
+     * MUST invoke added response expectation callbacks delivered by {@see getExpectations}, prior to
+     * returning the received response.
+     *
      * @param string|null $method [optional] Http method. If none given, then {@see getMethod} MUST be
      *                              used to obtain the desired Http method.
      * @param string|UriInterface|null $uri [optional] If none given, then Uri from {@see getQuery} MUST be used.
@@ -153,6 +158,8 @@ interface Builder extends HttpClientAware,
      *
      *
      * @return ResponseInterface
+     *
+     * @throws Throwable
      */
     public function request(?string $method = null, $uri = null, array $options = []): ResponseInterface;
 
@@ -880,6 +887,59 @@ interface Builder extends HttpClientAware,
      * @return Cookie
      */
     public function makeCookie(array $data = []): Cookie;
+
+    /**
+     * Add an expectation for the next response.
+     *
+     * An "expectation" is a callback that verifies the received
+     * response's Http status code, Http headers, and possibly the
+     * it's payload body. If the response is considered invalid,
+     * the callback SHOULD throw an exception.
+     *
+     * Given callback will be invoked after a response has been received,
+     * in the {@see request} method.
+     *
+     * @param callable $expectation Expectation callback. When invoked, it is given a
+     *                  {@see Status}, {@see ResponseInterface} and {@see RequestInterface} as
+     *                  argument, in the stated order.
+     *
+     * @return self
+     */
+    public function withExpectation(callable $expectation): self;
+
+    /**
+     * Add one or more expectations for the next request.
+     *
+     * MUST add given list of expectations via the {@see withExpectation} method.
+     *
+     * @param callable[] $expectations [optional]
+     *
+     * @return self
+     */
+    public function withExpectations(array $expectations = []): self;
+
+    /**
+     * Determine if any expectations have been added for
+     * the next request.
+     *
+     * @see withExpectation
+     *
+     * @return bool
+     */
+    public function hasExpectations(): bool;
+
+    /**
+     * Returns list of expectations for the next
+     * request.
+     *
+     * @see withExpectation
+     *
+     * @return callable[]
+     */
+    public function getExpectations(): array;
+
+    // TODO: ...
+    public function expect($status, $otherwise = null): self;
 
     /**
      * Set a specific option for the next request
