@@ -1,7 +1,8 @@
 <?php
 
-
 namespace Aedart\Contracts\Http\Clients\Exceptions;
+
+use Throwable;
 
 /**
  * Invalid Attachment Format Exception
@@ -11,6 +12,6 @@ namespace Aedart\Contracts\Http\Clients\Exceptions;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Clients\Exceptions
  */
-interface InvalidAttachmentFormatException
+interface InvalidAttachmentFormatException extends Throwable
 {
 }
