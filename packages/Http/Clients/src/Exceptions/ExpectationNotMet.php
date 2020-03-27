@@ -1,0 +1,84 @@
+<?php
+
+namespace Aedart\Http\Clients\Exceptions;
+
+use Aedart\Contracts\Http\Clients\Exceptions\ExpectationNotMetException;
+use Aedart\Contracts\Http\Clients\Requests\Builders\Expectations\ExpectationNotFulfilled;
+use Aedart\Contracts\Http\Clients\Responses\Status;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
+use Throwable;
+
+/**
+ * Response Expectation Not Met Exception
+ *
+ * @see \Aedart\Contracts\Http\Clients\Exceptions\ExpectationNotMetException
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Http\Clients\Exceptions
+ */
+class ExpectationNotMet extends RuntimeException implements ExpectationNotMetException
+{
+    /**
+     * Details about why expectation was not met
+     *
+     * @var ExpectationNotFulfilled
+     */
+    protected ExpectationNotFulfilled $expectation;
+
+    /**
+     * ExpectationNotMet constructor.
+     *
+     * @param ExpectationNotFulfilled $expectation
+     * @param string $message [optional] Defaults to reason stated in {@see ExpectationNotFulfilled}, if not given.
+     * @param int $code [optional]
+     * @param Throwable|null $previous [optional]
+     */
+    public function __construct(
+        ExpectationNotFulfilled $expectation,
+        $message = "",
+        $code = 0,
+        Throwable $previous = null
+    ) {
+        $this->expectation = $expectation;
+
+        if(empty($message)){
+            $message = $expectation->reason();
+        }
+
+        parent::__construct($message, $code, $previous);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getExpectation(): ExpectationNotFulfilled
+    {
+        return $this->expectation;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getStatus(): Status
+    {
+        return $this->getExpectation()->status();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getResponse(): ResponseInterface
+    {
+        return $this->getExpectation()->response();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRequest(): ?RequestInterface
+    {
+        return $this->getExpectation()->request();
+    }
+}
