@@ -29,6 +29,14 @@ interface ExpectationNotMetException extends Throwable
     public function getExpectation(): ExpectationNotFulfilled;
 
     /**
+     * Returns the reason why expectation was not
+     * fulfilled, in a human readable format
+     *
+     * @return string
+     */
+    public function getReason(): string;
+
+    /**
      * Returns the response Http Status
      *
      * @return Status

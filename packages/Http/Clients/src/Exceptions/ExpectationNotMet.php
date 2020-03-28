@@ -5,6 +5,7 @@ namespace Aedart\Http\Clients\Exceptions;
 use Aedart\Contracts\Http\Clients\Exceptions\ExpectationNotMetException;
 use Aedart\Contracts\Http\Clients\Requests\Builders\Expectations\ExpectationNotFulfilled;
 use Aedart\Contracts\Http\Clients\Responses\Status;
+use Aedart\Http\Clients\Requests\Builders\Expectations\ExpectationNotFulfilled as Expectation;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
@@ -51,6 +52,29 @@ class ExpectationNotMet extends RuntimeException implements ExpectationNotMetExc
     }
 
     /**
+     * Create a new instance
+     *
+     * @param string $reason
+     * @param Status $status
+     * @param ResponseInterface $response
+     * @param RequestInterface $request
+     *
+     * @return static
+     */
+    public static function make(
+        string $reason,
+        Status $status,
+        ResponseInterface $response,
+        RequestInterface $request
+    ): ExpectationNotMetException {
+        // Create a new expectation from arguments
+        $expectation = new Expectation($reason, $status, $response, $request);
+
+        // Create new exception instance
+        return new static($expectation);
+    }
+
+    /**
      * @inheritDoc
      */
     public function getExpectation(): ExpectationNotFulfilled
@@ -64,6 +88,14 @@ class ExpectationNotMet extends RuntimeException implements ExpectationNotMetExc
     public function getStatus(): Status
     {
         return $this->getExpectation()->status();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getReason(): string
+    {
+        return $this->getExpectation()->reason();
     }
 
     /**
