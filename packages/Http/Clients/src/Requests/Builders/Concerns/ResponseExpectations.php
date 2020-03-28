@@ -5,6 +5,7 @@ namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidStatusCodeException;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Responses\Status;
+use Aedart\Http\Clients\Requests\Builders\Expectations\StatusCodesExpectation;
 use Aedart\Http\Clients\Responses\ResponseStatus;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -73,9 +74,15 @@ trait ResponseExpectations
     /**
      * @inheritdoc
      */
-    public function expect($status, $otherwise = null): Builder
+    public function expect($status, ?callable $otherwise = null): Builder
     {
-        // TODO: Implement expect() method.
+        if(is_callable($status)){
+            return $this->withExpectation($status);
+        }
+
+        return $this->withExpectation(
+            $this->buildStatusCodesExpectation($status, $otherwise)
+        );
     }
 
     /*****************************************************************
@@ -126,6 +133,25 @@ trait ResponseExpectations
         // Invoke the callback, with the status, response and request, in mentioned
         // order. Hopefully that order is the most convenient way to deal with them.
         $callback($status, $response, $request);
+    }
+
+    /**
+     * Builds a http status code(s) expectation callback
+     *
+     * @param int|int[] $expectedStatusCodes
+     * @param callable|null $otherwise [optional]
+     *
+     * @return callable
+     */
+    protected function buildStatusCodesExpectation($expectedStatusCodes, ?callable $otherwise = null): callable
+    {
+        return function(
+            Status $status,
+            ResponseInterface $response,
+            RequestInterface $request
+        ) use ($expectedStatusCodes, $otherwise) {
+            (new StatusCodesExpectation($expectedStatusCodes, $otherwise))->expect($status, $response, $request);
+        };
     }
 
     /**
