@@ -44,7 +44,7 @@ class ExpectationNotMet extends RuntimeException implements ExpectationNotMetExc
     ) {
         $this->expectation = $expectation;
 
-        if(empty($message)){
+        if (empty($message)) {
             $message = $expectation->reason();
         }
 

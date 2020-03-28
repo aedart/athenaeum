@@ -76,7 +76,7 @@ trait ResponseExpectations
      */
     public function expect($status, ?callable $otherwise = null): Builder
     {
-        if(is_callable($status)){
+        if (is_callable($status)) {
             return $this->withExpectation($status);
         }
 
@@ -145,7 +145,7 @@ trait ResponseExpectations
      */
     protected function buildStatusCodesExpectation($expectedStatusCodes, ?callable $otherwise = null): callable
     {
-        return function(
+        return function (
             Status $status,
             ResponseInterface $response,
             RequestInterface $request

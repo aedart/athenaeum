@@ -96,7 +96,7 @@ class I0_ResponseExpectationsTest extends HttpClientsTestCase
     {
         $hasApplied = false;
 
-        $expectation = function() use(&$hasApplied) {
+        $expectation = function () use (&$hasApplied) {
             $hasApplied = true;
         };
 
@@ -146,7 +146,7 @@ class I0_ResponseExpectationsTest extends HttpClientsTestCase
 
         $hasApplied = false;
 
-        $otherwise = function() use(&$hasApplied) {
+        $otherwise = function () use (&$hasApplied) {
             $hasApplied = true;
         };
 

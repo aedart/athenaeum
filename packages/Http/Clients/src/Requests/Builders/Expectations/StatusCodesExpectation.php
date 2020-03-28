@@ -57,7 +57,7 @@ class StatusCodesExpectation
      */
     public function setExpectedStatusCodes($codes)
     {
-        if (!is_array($codes)){
+        if (!is_array($codes)) {
             $codes = [$codes];
         }
 
@@ -99,7 +99,7 @@ class StatusCodesExpectation
     public function expect(Status $status, ResponseInterface $response, RequestInterface $request)
     {
         // Abort if the http status code matches expected
-        if(in_array($status->code(), $this->expectedStatusCodes)){
+        if (in_array($status->code(), $this->expectedStatusCodes)) {
             return;
         }
 
@@ -137,7 +137,7 @@ class StatusCodesExpectation
      */
     protected function buildDefaultOtherwiseCallback(): callable
     {
-        return function(Status $status, ResponseInterface $response, RequestInterface $request){
+        return function (Status $status, ResponseInterface $response, RequestInterface $request) {
             // Make a default "reason" message
             $expectedStatusCodes = implode('or ', $this->expectedStatusCodes);
             $receivedStatusCode = $status->code();
