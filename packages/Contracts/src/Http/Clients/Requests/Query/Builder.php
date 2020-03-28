@@ -185,9 +185,9 @@ interface Builder extends Identifiers,
      * Method MUST use {@see Grammar} provided by the {@see getGrammar}
      * to build a http query, which can be applied on a request
      *
-     * @return mixed
+     * @return string Http query string.
      */
-    public function build();
+    public function build(): string;
 
     /**
      * Set the grammar responsible for building this http query

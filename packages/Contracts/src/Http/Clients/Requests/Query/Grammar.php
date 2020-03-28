@@ -11,5 +11,12 @@ namespace Aedart\Contracts\Http\Clients\Requests\Query;
  */
 interface Grammar
 {
-
+    /**
+     * Compiles a http query string
+     *
+     * @param Builder $builder
+     *
+     * @return string
+     */
+    public function compile(Builder $builder): string;
 }
