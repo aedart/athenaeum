@@ -163,12 +163,12 @@ class A1_RequestTest extends HttpClientsTestCase
         // as intended.
         $client = $this->client($profile);
 
-        $response = $client->get('https://jsonplaceholder.typicode.com/posts/42');
+        $response = $client->get('https://raw.githubusercontent.com/aedart/athenaeum/master/composer.json');
 
         $content = $response->getBody()->getContents();
         ConsoleDebugger::output($content);
 
-        $this->assertSame(200, $response->getStatusCode());
+        $this->assertTrue(in_array($response->getStatusCode(), [200, 304]));
         $this->assertNotEmpty($content);
     }
 }
