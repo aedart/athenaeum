@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Http\Clients\Requests;
 
 use Aedart\Contracts\Http\Clients\Client;
+use Aedart\Contracts\Http\Clients\Exceptions\ExpectationNotMetException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidAttachmentFormatException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidCookieFormatException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
@@ -938,8 +939,31 @@ interface Builder extends HttpClientAware,
      */
     public function getExpectations(): array;
 
-    // TODO: ...
-    public function expect($status, $otherwise = null): self;
+    /**
+     * Expect the received response's http status code to match given code(s)
+     *
+     * Once a response has been received, it's http status code is matched
+     * against given expected status code(s). If it it does not match, then
+     * it MUST invoke provided `$otherwise` callback.
+     *
+     * Method MUST build and add expectation via the {@see withExpectation} method.
+     *
+     * @param int|int[]|callback $status Expected http status code(s). If a callback is provided,
+     *                                  then it MUST be added as an expectation via {@see withExpectation}.
+     *                                  Second argument is ignored, if callback is given.
+     * @param callable|null $otherwise [optional] Callback to be invoked if received http status code
+     *                              does not match. When invoked, it is given a {@see Status},
+     *                              {@see ResponseInterface} and {@see RequestInterface} as argument, in the
+     *                              stated order. If no callback is given, a {@see ExpectationNotMetException}
+     *                              will be thrown, if received status code does not match.
+     *                              This argument is ignored, if first argument is a callback.
+     *
+     * @return self
+     *
+     * @throws ExpectationNotMetException
+     * @throws Throwable
+     */
+    public function expect($status, ?callable $otherwise = null): self;
 
     /**
      * Set a specific option for the next request
