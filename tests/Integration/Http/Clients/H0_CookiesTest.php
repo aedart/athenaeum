@@ -12,6 +12,7 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use DateTime;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Carbon;
+use Teapot\StatusCode;
 
 /**
  * H0_CookiesTest
@@ -203,7 +204,7 @@ class H0_CookiesTest extends HttpClientsTestCase
         $sameSite = SetCookie::SAME_SITE_STRICT;
         $header = "$name=$value; Domain=$domain; Path=$path; Expires=$expires; Max-Age=$maxAge; Secure; HttpOnly; SameSite=$sameSite;";
 
-        $mockedResponse = new Response(200, [
+        $mockedResponse = new Response(StatusCode::OK, [
             'Set-Cookie' => $header
         ]);
 

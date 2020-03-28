@@ -7,6 +7,7 @@ use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use GuzzleHttp\Psr7\Response;
+use Teapot\StatusCode;
 
 /**
  * I0_ResponseExpectationsTest
@@ -141,7 +142,7 @@ class I0_ResponseExpectationsTest extends HttpClientsTestCase
     public function appliesOtherwiseCallbackWhenExpectationNotMet(string $profile)
     {
         $mock = $this->makeResponseMock([
-            new Response(301)
+            new Response(StatusCode::MOVED_PERMANENTLY)
         ]);
 
         $hasApplied = false;
@@ -152,7 +153,7 @@ class I0_ResponseExpectationsTest extends HttpClientsTestCase
 
         $this->client($profile)
             ->withOption('handler', $mock)
-            ->expect(200, $otherwise)
+            ->expect(StatusCode::OK, $otherwise)
             ->get('/users');
 
         $this->assertTrue($hasApplied, 'Otherwise callback not invoked');
@@ -170,7 +171,7 @@ class I0_ResponseExpectationsTest extends HttpClientsTestCase
     {
         $this->client($profile)
             ->withOption('handler', $this->makeRespondsOkMock())
-            ->expect([201, 204, 200])
+            ->expect([StatusCode::CREATED, StatusCode::ACCEPTED, StatusCode::OK])
             ->get('/users');
     }
 }

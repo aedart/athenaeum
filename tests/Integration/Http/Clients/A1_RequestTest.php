@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use Psr\Http\Message\ResponseInterface;
+use Teapot\StatusCode;
 
 /**
  * A0_RequestTest
@@ -168,7 +169,7 @@ class A1_RequestTest extends HttpClientsTestCase
         $content = $response->getBody()->getContents();
         ConsoleDebugger::output($content);
 
-        $this->assertTrue(in_array($response->getStatusCode(), [200, 304]));
+        $this->assertTrue(in_array($response->getStatusCode(), [StatusCode::OK, StatusCode::NOT_MODIFIED]));
         $this->assertNotEmpty($content);
     }
 }

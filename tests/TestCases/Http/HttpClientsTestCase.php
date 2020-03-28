@@ -24,6 +24,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
+use Teapot\StatusCode;
 
 /**
  * Http Clients Test Case
@@ -149,7 +150,7 @@ abstract class HttpClientsTestCase extends LaravelTestCase
      */
     protected function makeRespondsOkMock()
     {
-        return $this->makeResponseMock([ new Response(200) ]);
+        return $this->makeResponseMock([ new Response(StatusCode::OK) ]);
     }
 
     /**

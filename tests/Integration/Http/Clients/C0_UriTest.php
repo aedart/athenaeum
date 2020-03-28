@@ -7,6 +7,7 @@ use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
+use Teapot\StatusCode;
 
 /**
  * C0_UriTest
@@ -50,7 +51,7 @@ class C0_UriTest extends HttpClientsTestCase
 
         $sentToUri = $this->lastRequest->getUri();
         $this->assertSame($uri, $sentToUri->getPath(), 'Request did not send to correct uri');
-        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame(StatusCode::OK, $response->getStatusCode());
     }
 
     /**

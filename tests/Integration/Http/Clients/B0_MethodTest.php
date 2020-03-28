@@ -6,6 +6,7 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use Psr\Http\Message\ResponseInterface;
+use Teapot\StatusCode;
 
 /**
  * B0_MethodTest
@@ -48,6 +49,6 @@ class B0_MethodTest extends HttpClientsTestCase
 
         $methodsSent = $this->lastRequest->getMethod();
         $this->assertSame($method, $methodsSent, 'Request did not send correct Http method');
-        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame(StatusCode::OK, $response->getStatusCode());
     }
 }
