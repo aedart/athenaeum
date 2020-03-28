@@ -2,13 +2,16 @@
 
 namespace Aedart\Contracts\Http\Clients\Requests\Query;
 
+use Illuminate\Contracts\Support\Arrayable;
+
 /**
  * Http Query Builder
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Clients\Requests\Query
  */
-interface Builder extends Identifiers
+interface Builder extends Identifiers,
+    Arrayable
 {
     /**
      * Select the fields to be returned
@@ -178,6 +181,9 @@ interface Builder extends Identifiers
 
     /**
      * Build this http query
+     *
+     * Method MUST use {@see Grammar} provided by the {@see getGrammar}
+     * to build a http query, which can be applied on a request
      *
      * @return mixed
      */
