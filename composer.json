@@ -22,6 +22,7 @@
         "psr/http-factory": "^1.0",
         "psr/http-message": "^1.0",
         "psr/log": "^1.1",
+        "shrikeh/teapot": "^2.3",
         "symfony/console": "^5.0",
         "vlucas/phpdotenv": "^4.1"
     },
@@ -34,7 +35,6 @@
         "orchestra/testbench": "^5.1",
         "predis/predis": "~1.1",
         "roave/security-advisories": "dev-master",
-        "shrikeh/teapot": "^2.3",
         "symfony/var-dumper": "^5.0",
         "symfony/yaml": "^5.0",
         "twig/twig": "^2.12"
