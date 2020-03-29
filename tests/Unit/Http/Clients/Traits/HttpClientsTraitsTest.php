@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Unit\Http\Clients\Traits;
 
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Traits\CookieJarTrait as GuzzleCookieJarTrait;
+use Aedart\Http\Clients\Traits\GrammarTrait;
 use Aedart\Http\Clients\Traits\HttpClientsManagerTrait;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
@@ -31,7 +32,8 @@ class HttpClientsTraitsTest extends TraitTestCase
         return [
             'HttpClientsManagerTrait' => [ HttpClientsManagerTrait::class ],
             'HttpClientTrait' => [ HttpClientTrait::class ],
-            'CookieJarTrait (Guzzle)' => [GuzzleCookieJarTrait::class]
+            'CookieJarTrait (Guzzle)' => [GuzzleCookieJarTrait::class],
+            'GrammarTrait' => [GrammarTrait::class]
         ];
     }
 
