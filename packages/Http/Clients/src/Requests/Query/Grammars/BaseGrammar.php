@@ -39,6 +39,13 @@ abstract class BaseGrammar implements Grammar,
     protected string $selectKey = 'select';
 
     /**
+     * Binding key prefix
+     *
+     * @var string
+     */
+    protected string $bindingKeyPrefix = ':';
+
+    /**
      * BaseGrammar constructor.
      *
      * @param array $options [optional]
@@ -108,7 +115,7 @@ abstract class BaseGrammar implements Grammar,
             $output[] = $this->compileSelect($select);
         }
 
-        return $this->selectKey . '=' . implode('', $output);
+        return $this->selectKey . '=' . implode(',', $output);
     }
 
     /**
@@ -145,25 +152,73 @@ abstract class BaseGrammar implements Grammar,
         foreach ($fields as $field => $from){
             // When an expression is given
             if(is_numeric($field)){
-                $output[] = $from;
+                $output[] = trim($from);
                 continue;
             }
 
             // When "from resource" isn't provided
             if(empty($from)){
-                $output[] = $field;
+                $output[] = trim($field);
                 continue;
             }
 
             // When "from resource" and field is given
+            $field = trim($field);
+            $from = trim($from);
+
             $output[] = "{$from}.{$field}";
         }
 
         return implode(',', $output);
     }
 
+    /**
+     * Compiles a raw select (expression)
+     *
+     * @param array $select
+     *
+     * @return string
+     */
     protected function compileRawSelect(array $select): string
     {
+        return $this->compileExpression(
+            $this->compileRegularSelect($select),
+            $select[self::BINDINGS]
+        );
+    }
 
+    /**
+     * Compiles given expression
+     *
+     * Method will inject bindings into given expression, if any bindings
+     * are given.
+     *
+     * @param string $expression
+     * @param array $bindings [optional]
+     *
+     * @return string
+     */
+    protected function compileExpression(string $expression, array $bindings = []): string
+    {
+        if(empty($bindings)){
+            return $expression;
+        }
+
+        $keys = $this->prepareBindingKeys(array_keys($bindings));
+        $values = array_values($bindings);
+
+        return str_replace($keys, $values, $expression);
+    }
+
+    /**
+     * Prepares the binding keys
+     *
+     * @param string[] $keys
+     *
+     * @return string[]
+     */
+    protected function prepareBindingKeys(array $keys = []): array
+    {
+        return array_map(fn ($key) => $this->bindingKeyPrefix . $key, $keys);
     }
 }
