@@ -3,7 +3,9 @@
 namespace Aedart\Http\Clients\Providers;
 
 use Aedart\Contracts\Http\Clients\Manager as HttpClientsManager;
-use Aedart\Http\Clients\Manager;
+use Aedart\Contracts\Http\Clients\Requests\Query\Grammars\Manager as HttpQueryGrammarsManager;
+use Aedart\Http\Clients\Manager as ClientsManager;
+use Aedart\Http\Clients\Requests\Query\Grammars\Manager as GrammarsManager;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,7 +18,8 @@ use Illuminate\Support\ServiceProvider;
 class HttpClientServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     public array $singletons = [
-        HttpClientsManager::class => Manager::class
+        HttpClientsManager::class => ClientsManager::class,
+        HttpQueryGrammarsManager::class => GrammarsManager::class
     ];
 
     /**
@@ -34,6 +37,6 @@ class HttpClientServiceProvider extends ServiceProvider implements DeferrablePro
      */
     public function provides()
     {
-        return [ HttpClientsManager::class ];
+        return [ HttpClientsManager::class, HttpQueryGrammarsManager::class ];
     }
 }
