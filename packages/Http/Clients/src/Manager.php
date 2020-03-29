@@ -3,11 +3,9 @@
 namespace Aedart\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Client;
-use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Manager as HttpClientsManager;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
-use Aedart\Http\Clients\Exceptions\ProfileNotFound;
 use Aedart\Http\Clients\Requests\Helpers\ManagerHelper;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use Illuminate\Contracts\Container\Container;
@@ -41,6 +39,7 @@ class Manager implements
     public function __construct(?Container $container = null)
     {
         $this->defaultProfileKey = 'http-clients.default';
+        $this->profilesKey = 'http-clients.profiles';
 
         $this->setContainer($container);
     }
@@ -59,7 +58,7 @@ class Manager implements
         }
 
         // Obtain profile configuration
-        $configuration = $this->findOrFailConfiguration($profile);
+        $configuration = $this->findOrFailConfiguration($profile, 'Http Client profile "%s" does not exist');
         $driver = $configuration['driver'];
         $options = array_merge_recursive($configuration['options'], $options);
 
@@ -68,30 +67,5 @@ class Manager implements
             $this->getContainer(),
             $options
         );
-    }
-
-    /*****************************************************************
-     * Internals
-     ****************************************************************/
-
-    /**
-     * Find Http Client's profile configuration or fail
-     *
-     * @param string $profile
-     *
-     * @return array
-     *
-     * @throws ProfileNotFoundException
-     */
-    protected function findOrFailConfiguration(string $profile): array
-    {
-        $config = $this->getConfig();
-        $key = 'http-clients.profiles.' . $profile;
-
-        if (!$config->has($key)) {
-            throw new ProfileNotFound(sprintf('Http Client profile "%s" does not exist', $profile));
-        }
-
-        return $config->get($key);
     }
 }

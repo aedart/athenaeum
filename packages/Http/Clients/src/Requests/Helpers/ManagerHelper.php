@@ -2,6 +2,8 @@
 
 namespace Aedart\Http\Clients\Requests\Helpers;
 
+use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
+use Aedart\Http\Clients\Exceptions\ProfileNotFound;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 
 /**
@@ -21,6 +23,14 @@ trait ManagerHelper
      * @var string|null
      */
     protected ?string $defaultProfileKey = null;
+
+    /**
+     * Location where "profiles" are found in
+     * configuration
+     *
+     * @var string|null
+     */
+    protected ?string $profilesKey = null;
 
     /**
      * Resolve the requested profile
@@ -53,5 +63,32 @@ trait ManagerHelper
         }
 
         return $this->getConfig()->get($this->defaultProfileKey, $fallback);
+    }
+
+    /**
+     * Find profile configuration or fail
+     *
+     * @param string $profile
+     * @param string|null $notFoundMsg [optional] Fail message.
+     *
+     * @return array
+     *
+     * @throws ProfileNotFoundException
+     */
+    protected function findOrFailConfiguration(string $profile, ?string $notFoundMsg = null): array
+    {
+        if (!isset($this->profilesKey)){
+            throw new ProfileNotFound('Missing profiles-key: location where profiles are found in configuration');
+        }
+
+        $config = $this->getConfig();
+        $key = $this->profilesKey . '.' . $profile;
+
+        if (!$config->has($key)) {
+            $notFoundMsg = $notFoundMsg ?? 'Profile "%s" does not exist';
+            throw new ProfileNotFound(sprintf($notFoundMsg, $profile));
+        }
+
+        return $config->get($key);
     }
 }
