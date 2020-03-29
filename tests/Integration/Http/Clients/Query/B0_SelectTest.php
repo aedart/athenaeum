@@ -151,7 +151,7 @@ class B0_SelectTest extends HttpClientsTestCase
 
     /**
      * @test
-     * @dataProvider providesMultipleFieldsData
+     * @dataProvider providesMultipleFieldsFromResourcesData
      *
      * @param string $grammar
      * @param string $expected
