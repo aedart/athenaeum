@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Http\Clients\Requests\Query;
 
+use Aedart\Contracts\Http\Clients\Requests\Query\Grammars\GrammarAware;
 use Illuminate\Contracts\Support\Arrayable;
 
 /**
@@ -11,6 +12,7 @@ use Illuminate\Contracts\Support\Arrayable;
  * @package Aedart\Contracts\Http\Clients\Requests\Query
  */
 interface Builder extends Identifiers,
+    GrammarAware,
     Arrayable
 {
     /**
@@ -188,20 +190,4 @@ interface Builder extends Identifiers,
      * @return string Http query string.
      */
     public function build(): string;
-
-    /**
-     * Set the grammar responsible for building this http query
-     *
-     * @param Grammar $grammar
-     *
-     * @return self
-     */
-    public function setGrammar(Grammar $grammar): self;
-
-    /**
-     * Get the grammar responsible for building this http query
-     *
-     * @return Grammar
-     */
-    public function getGrammar(): Grammar;
 }
