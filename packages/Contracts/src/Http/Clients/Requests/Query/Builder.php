@@ -113,16 +113,6 @@ interface Builder extends Identifiers,
     public function whereRaw($query, array $bindings = []): self;
 
     /**
-     * Add a raw "or where" condition or filter
-     *
-     * @param string|array $query Raw query string, or array of query parameters
-     * @param array $bindings [optional] Evt. values to be injected into the raw query string
-     *
-     * @return self
-     */
-    public function orWhereRaw($query, array $bindings = []): self;
-
-    /**
      * Include one or more related resources in the response
      *
      * @see https://jsonapi.org/format/1.1/#fetching-includes
