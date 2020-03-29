@@ -18,6 +18,26 @@ interface Builder extends Identifiers,
     /**
      * Select the fields to be returned
      *
+     * Examples:
+     *
+     * ```php
+     * // Select single field
+     * $query->select('name');
+     *
+     * // Select multiple fields
+     * $query->select(['name', 'age']);
+     *
+     * // Select field from a resource
+     * $query->select('name', 'person');
+     *
+     * // Select multiple fields from resources
+     * $query->select([
+     *      // field => from resource
+     *      'name' => 'person',
+     *      'income' => 'job'
+     * ]);
+     * ```
+     *
      * @see https://jsonapi.org/format/1.1/#fetching-sparse-fieldsets
      * @see http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part2-url-conventions.html#sec_SystemQueryOptionselect
      *
