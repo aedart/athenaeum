@@ -10,6 +10,7 @@ use Aedart\Contracts\Http\Clients\Requests\Attachment as AttachmentInterface;
 use Aedart\Contracts\Http\Cookies\Cookie;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Http\Clients\Requests\Attachment;
+use Aedart\Http\Clients\Traits\GrammarManagerTrait;
 use Aedart\Http\Clients\Traits\HttpClientsManagerTrait;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
 use Aedart\Http\Cookies\SetCookie;
@@ -38,6 +39,7 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     use ConfigTrait;
     use HttpClientsManagerTrait;
     use HttpClientTrait;
+    use GrammarManagerTrait;
 
     /**
      * Instance of the last request performed
