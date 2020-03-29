@@ -101,6 +101,7 @@ This resulting in `$instance` still containing reference to the application, ins
 * Default return type of `MailerTrait` and `MailQueueTrait` (Laravel `v7.x` changed return of `Mail` Facade to `MailManager`).
 * `withOptions()` incorrectly merged options, in `DefaultHttpClient` and `JsonHttpClient`.
 This caused strange behaviour, when attempting to overwrite an already set option.
+* Http Client `Manager` does not use default profile name from configuration, it always returns "default", when no profile name given.
 
 ## v3.x
 
