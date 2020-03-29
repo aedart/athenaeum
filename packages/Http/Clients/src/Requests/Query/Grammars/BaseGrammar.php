@@ -163,13 +163,23 @@ abstract class BaseGrammar implements Grammar,
             }
 
             // When "from resource" and field is given
-            $field = trim($field);
-            $from = trim($from);
-
-            $output[] = "{$from}.{$field}";
+            $output[] = $this->compileFieldFromResource(trim($field), trim($from));
         }
 
         return implode(',', $output);
+    }
+
+    /**
+     * Compiles a "field from a resource"
+     *
+     * @param string $field
+     * @param string $resource
+     *
+     * @return string
+     */
+    protected function compileFieldFromResource(string $field, string $resource): string
+    {
+        return "{$resource}.{$field}";
     }
 
     /**
