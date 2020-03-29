@@ -7,9 +7,12 @@ use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Requests\Attachment as AttachmentInterface;
+use Aedart\Contracts\Http\Clients\Requests\Query\Builder as QueryBuilderInterface;
+use Aedart\Contracts\Http\Clients\Requests\Query\Grammar;
 use Aedart\Contracts\Http\Cookies\Cookie;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Http\Clients\Requests\Attachment;
+use Aedart\Http\Clients\Requests\Query\Builder as QueryBuilder;
 use Aedart\Http\Clients\Traits\GrammarManagerTrait;
 use Aedart\Http\Clients\Traits\HttpClientsManagerTrait;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
@@ -123,6 +126,20 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     public function client(?string $profile = null, array $options = []): Client
     {
         return $this->getHttpClientsManager()->profile($profile, $options);
+    }
+
+    /**
+     * Creates a new Http Query instance
+     *
+     * @param string|Grammar|null $grammar [optional]
+     *
+     * @return QueryBuilderInterface
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function query($grammar = null): QueryBuilderInterface
+    {
+        return new QueryBuilder($grammar);
     }
 
     /**
