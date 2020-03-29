@@ -31,9 +31,19 @@ interface Identifiers
     public const TYPE = '@:type:@';
 
     /**
+     * Field identifier
+     */
+    public const FIELD = '@:field:@';
+
+    /**
      * Fields identifier
      */
     public const FIELDS = '@:fields:@';
+
+    /**
+     * Value identifier
+     */
+    public const VALUE = '@:value:@';
 
     /**
      * Selects identifier
@@ -49,4 +59,39 @@ interface Identifiers
      * Raw field selection type identifier
      */
     public const SELECT_TYPE_RAW = '@:select_raw:@';
+
+    /**
+     * And / Or type identifier
+     */
+    public const AND_OR = '@:and_or:@';
+
+    /**
+     * "And" identifier
+     */
+    public const AND = '@:and:@';
+
+    /**
+     * "Or" identifier
+     */
+    public const OR = '@:or:@';
+
+    /**
+     * Wheres (conditions) identifier
+     */
+    public const WHERES = '@:wheres:@';
+
+    /**
+     * Regular where type identifier
+     */
+    public const WHERE_TYPE_REGULAR = '@:where_regular:@';
+
+    /**
+     * Raw where type identifier
+     */
+    public const WHERE_TYPE_RAW = '@:where_raw:@';
+
+    /**
+     * Operator identifier
+     */
+    public const OPERATOR = '@:operator:@';
 }
