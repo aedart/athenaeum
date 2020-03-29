@@ -39,5 +39,41 @@ return [
 
             ]
         ]
+    ],
+
+
+    /*
+     |--------------------------------------------------------------------------
+     | Http Query Grammars
+     |--------------------------------------------------------------------------
+    */
+
+    'grammars' => [
+
+        /*
+         |--------------------------------------------------------------------------
+         | Default Http Query Grammar Client
+         |--------------------------------------------------------------------------
+         |
+         | The default Http Query Grammar profile to use, when none specified
+        */
+
+        'default' => env('HTTP_QUERY_GRAMMAR', 'default'),
+
+        /*
+         |--------------------------------------------------------------------------
+         | Http Query Grammar Profiles
+         |--------------------------------------------------------------------------
+         |
+         | List of available Http Query Grammar "profiles".
+        */
+
+        'profiles' => [
+
+            'default' => [
+                'driver' => \Aedart\Http\Clients\Requests\Query\Grammars\DefaultGrammar::class,
+                'options' => []
+            ],
+        ]
     ]
 ];
