@@ -8,7 +8,7 @@ use Aedart\Contracts\Http\Clients\Manager as HttpClientsManager;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use Aedart\Http\Clients\Exceptions\ProfileNotFound;
-use Aedart\Support\Helpers\Config\ConfigTrait;
+use Aedart\Http\Clients\Requests\Helpers\ManagerHelper;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use Illuminate\Contracts\Container\Container;
 
@@ -24,7 +24,7 @@ class Manager implements
     ConfigAware
 {
     use ContainerTrait;
-    use ConfigTrait;
+    use ManagerHelper;
 
     /**
      * List of created Http Clients
@@ -40,6 +40,8 @@ class Manager implements
      */
     public function __construct(?Container $container = null)
     {
+        $this->defaultProfileKey = 'http-clients.default';
+
         $this->setContainer($container);
     }
 
@@ -49,7 +51,7 @@ class Manager implements
     public function profile(?string $profile = null, array $options = []): Client
     {
         // Resolve requested profile name
-        $profile = $profile ?? 'default';
+        $profile = $this->resolveProfile($profile);
 
         // Return client if already created
         if (isset($this->clients[$profile])) {
