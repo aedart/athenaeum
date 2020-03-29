@@ -10,5 +10,4 @@ namespace Aedart\Http\Clients\Requests\Query\Grammars;
  */
 class DefaultGrammar extends BaseGrammar
 {
-
 }

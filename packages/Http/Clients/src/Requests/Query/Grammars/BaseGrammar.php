@@ -14,7 +14,8 @@ use Aedart\Contracts\Http\Clients\Requests\Query\Identifiers;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Query\Grammars
  */
-abstract class BaseGrammar implements Grammar,
+abstract class BaseGrammar implements
+    Grammar,
     Identifiers
 {
     /**
@@ -88,7 +89,7 @@ abstract class BaseGrammar implements Grammar,
      */
     protected function compileHttpQueryParts(array $parts = []): string
     {
-        if(empty($parts)){
+        if (empty($parts)) {
             return '';
         }
 
@@ -106,12 +107,12 @@ abstract class BaseGrammar implements Grammar,
      */
     protected function compileSelects(array $selects = []): string
     {
-        if(empty($selects)){
+        if (empty($selects)) {
             return '';
         }
 
         $output = [];
-        foreach ($selects as $select){
+        foreach ($selects as $select) {
             $output[] = $this->compileSelect($select);
         }
 
@@ -130,7 +131,7 @@ abstract class BaseGrammar implements Grammar,
      */
     protected function compileSelect(array $select): string
     {
-        if($select[self::TYPE] === self::SELECT_TYPE_RAW){
+        if ($select[self::TYPE] === self::SELECT_TYPE_RAW) {
             return $this->compileRawSelect($select);
         }
 
@@ -149,15 +150,15 @@ abstract class BaseGrammar implements Grammar,
         $output = [];
 
         $fields = $select[self::FIELDS];
-        foreach ($fields as $field => $from){
+        foreach ($fields as $field => $from) {
             // When an expression is given
-            if(is_numeric($field)){
+            if (is_numeric($field)) {
                 $output[] = trim($from);
                 continue;
             }
 
             // When "from resource" isn't provided
-            if(empty($from)){
+            if (empty($from)) {
                 $output[] = trim($field);
                 continue;
             }
@@ -210,7 +211,7 @@ abstract class BaseGrammar implements Grammar,
      */
     protected function compileExpression(string $expression, array $bindings = []): string
     {
-        if(empty($bindings)){
+        if (empty($bindings)) {
             return $expression;
         }
 

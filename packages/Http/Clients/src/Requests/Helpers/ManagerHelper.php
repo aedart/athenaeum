@@ -77,7 +77,7 @@ trait ManagerHelper
      */
     protected function findOrFailConfiguration(string $profile, ?string $notFoundMsg = null): array
     {
-        if (!isset($this->profilesKey)){
+        if (!isset($this->profilesKey)) {
             throw new ProfileNotFound('Missing profiles-key: location where profiles are found in configuration');
         }
 

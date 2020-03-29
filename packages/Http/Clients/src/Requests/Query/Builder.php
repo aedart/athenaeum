@@ -19,7 +19,8 @@ use Illuminate\Contracts\Container\Container;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Query
  */
-class Builder implements QueryBuilder,
+class Builder implements
+    QueryBuilder,
     ContainerAware,
     GrammarManagerAware
 {
@@ -62,7 +63,7 @@ class Builder implements QueryBuilder,
      */
     public function select($field, ?string $resource = null): QueryBuilder
     {
-        if(is_array($field)){
+        if (is_array($field)) {
             return $this->addSelect($field);
         }
 
@@ -225,13 +226,13 @@ class Builder implements QueryBuilder,
     {
         // If no grammar has been given, then abort and allow the
         // default to be set via "getDefaultGrammar" ~ default profile.
-        if (!isset($grammar)){
+        if (!isset($grammar)) {
             return $this;
         }
 
         // If identifier (profile) has been given, obtain it via the
         // manager, so it can be used.
-        if(is_string($grammar)){
+        if (is_string($grammar)) {
             $grammar = $this->getGrammarManager()->profile($grammar);
         }
 
@@ -277,13 +278,13 @@ class Builder implements QueryBuilder,
     ): QueryBuilder {
         // When field is an array, we assume that multiple where conditions is
         // desired added
-        if(is_array($field)){
+        if (is_array($field)) {
             return $this->addMultipleWhere($field, $andOr);
         }
 
         // Set value to be operator, in case that only two arguments
         // have been provided
-        if(func_num_args() === 2){
+        if (func_num_args() === 2) {
             $value = $operator;
             $operator = '=';
         }
@@ -302,18 +303,18 @@ class Builder implements QueryBuilder,
      */
     protected function addMultipleWhere(array $conditions = [], string $andOr = self::AND): QueryBuilder
     {
-        foreach ($conditions as $field => $value){
+        foreach ($conditions as $field => $value) {
             // Determine if one or more operators has been given
             // via the value of the field. If so, then we consider these
             // to be multiple where conditions, with an operator.
-            if(Arr::isAssoc($value)){
+            if (Arr::isAssoc($value)) {
                 $this->addMultipleWhereForField($field, $value, $andOr);
                 continue;
             }
 
             // Otherwise, we assume that an equals operator is intended
             // and add it as a regular "where" condition
-            $this->addRegularWhere($field, '=', $value. $andOr);
+            $this->addRegularWhere($field, '=', $value . $andOr);
         }
 
         return $this;
@@ -333,7 +334,7 @@ class Builder implements QueryBuilder,
         array $operatorsAndValues,
         string $andOr = self::AND
     ): QueryBuilder {
-        foreach ($operatorsAndValues as $operator => $value){
+        foreach ($operatorsAndValues as $operator => $value) {
             $this->addRegularWhere($field, $operator, $value, $andOr);
         }
 
