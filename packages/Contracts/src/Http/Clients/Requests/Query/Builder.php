@@ -53,6 +53,14 @@ interface Builder extends Identifiers,
     /**
      * Select a raw expression
      *
+     * Examples:
+     *
+     * ```php
+     * // Injects binding values into expression,
+     * // e.g. ":number" becomes 42
+     * $query->selectRaw('account(:number)', [ 'number' => 42]);
+     * ```
+     *
      * @param string $expression
      * @param array $bindings [optional] Evt. values to be injected into the raw query string
      *
