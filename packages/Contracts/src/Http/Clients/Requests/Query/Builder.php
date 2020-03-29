@@ -105,7 +105,7 @@ interface Builder extends Identifiers,
     /**
      * Add a raw "where" condition or filter
      *
-     * @param string $query Raw query string. MUST NOT be url-encoded.
+     * @param string|array $query Raw query string, or array of query parameters
      * @param array $bindings [optional] Evt. values to be injected into the raw query string
      *
      * @return self
@@ -115,7 +115,7 @@ interface Builder extends Identifiers,
     /**
      * Add a raw "or where" condition or filter
      *
-     * @param string $query Raw query string. MUST NOT be url-encoded.
+     * @param string|array $query Raw query string, or array of query parameters
      * @param array $bindings [optional] Evt. values to be injected into the raw query string
      *
      * @return self
