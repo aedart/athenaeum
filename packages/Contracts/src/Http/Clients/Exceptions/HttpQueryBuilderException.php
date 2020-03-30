@@ -12,5 +12,4 @@ use Throwable;
  */
 interface HttpQueryBuilderException extends Throwable
 {
-
 }

@@ -340,7 +340,7 @@ class Builder implements
             self::FIELD => $expression,
             self::OPERATOR => null,
             self::VALUE => null
-        ], $bindings,self::WHERE_TYPE_RAW);
+        ], $bindings, self::WHERE_TYPE_RAW);
     }
 
     /**

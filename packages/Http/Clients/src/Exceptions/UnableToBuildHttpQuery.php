@@ -15,5 +15,4 @@ use RuntimeException;
  */
 class UnableToBuildHttpQuery extends RuntimeException implements HttpQueryBuilderException
 {
-
 }

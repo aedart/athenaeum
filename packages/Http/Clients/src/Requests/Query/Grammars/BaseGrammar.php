@@ -266,13 +266,13 @@ abstract class BaseGrammar implements
 
         // Compile as an array, when value matches an associative array and
         // equals operator is used.
-        if(is_array($value) && Arr::isAssoc($value) && $operator === '='){
+        if (is_array($value) && Arr::isAssoc($value) && $operator === '=') {
             return $this->compileArray([ $field => $value ]);
         }
 
         // When no equals operator has been provided, then we append the
         // operator.
-        if(is_array($value) && Arr::isAssoc($value)){
+        if (is_array($value) && Arr::isAssoc($value)) {
             return $this->compileArray([ $field => [ $operator => $value ] ]);
         }
 
@@ -283,7 +283,7 @@ abstract class BaseGrammar implements
         }
 
         // Omit operator if it matches equals sign
-        if($operator === '='){
+        if ($operator === '=') {
             return "{$field}={$value}";
         }
 
@@ -302,11 +302,11 @@ abstract class BaseGrammar implements
     {
         $expression = $where[self::FIELD];
 
-        if(is_string($expression)){
+        if (is_string($expression)) {
             return $this->compileExpression($expression, $where[self::BINDINGS]);
         }
 
-        if(is_array($expression)){
+        if (is_array($expression)) {
             return $this->compileArray($expression);
         }
 
