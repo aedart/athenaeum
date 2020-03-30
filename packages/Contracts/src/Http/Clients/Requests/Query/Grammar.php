@@ -1,7 +1,8 @@
 <?php
 
-
 namespace Aedart\Contracts\Http\Clients\Requests\Query;
+
+use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 
 /**
  * Http Query Grammar
@@ -17,6 +18,8 @@ interface Grammar
      * @param Builder $builder
      *
      * @return string
+     *
+     * @throws HttpQueryBuilderException
      */
     public function compile(Builder $builder): string;
 }
