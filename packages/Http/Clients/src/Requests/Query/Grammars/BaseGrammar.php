@@ -99,10 +99,12 @@ abstract class BaseGrammar implements
             return '';
         }
 
-        return '?' . implode('&', [
+        $compiled = array_filter([
             $this->compileSelects($parts[self::SELECTS]),
             $this->compileWheres($parts[self::WHERES])
-        ]);
+        ], fn ($element) => !empty($element));
+
+        return '?' . implode('&', $compiled);
     }
 
     /**
