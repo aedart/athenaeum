@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Http\Clients\Requests\Query;
 
+use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammars\GrammarAware;
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -206,6 +207,8 @@ interface Builder extends Identifiers,
      * to build a http query, which can be applied on a request
      *
      * @return string Http query string.
+     *
+     * @throws HttpQueryBuilderException If unable to build http query
      */
     public function build(): string;
 }
