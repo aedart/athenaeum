@@ -71,12 +71,29 @@ interface Builder extends Identifiers,
     /**
      * Add a "where" condition or filter
      *
+     * Examples:
+     *
+     * ```php
+     * // field = value
+     * $query->where('name', 'john');
+     *
+     * // Specific operator
+     * $query->where('year', 'gt', 2020);
+     *
+     * // Multiple where conditions
+     * $query->where([
+     *      'name' => 'john'
+     *      'year' => [ 'gt' => 2020 ]
+     * ]);
+     * ```
+     *
      * @see https://jsonapi.org/format/1.1/#fetching-filtering
      * @see https://jsonapi.org/format/1.1/#query-parameters
      * @see http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part2-url-conventions.html#sec_CommonExpressionSyntax
      * @see http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part2-url-conventions.html#sec_SystemQueryOptionfilter
      *
-     * @param string|array $field Name of field or list of fields
+     * @param string|array $field Name of field or filter. If an array is given, then every entry is treated as a where
+     *                            condition.
      * @param mixed $operator [optional] Operator or value
      * @param mixed $value [optional] Value. If omitted, then second argument is considered
      *                      to act as the value.
@@ -84,23 +101,6 @@ interface Builder extends Identifiers,
      * @return self
      */
     public function where($field, $operator = null, $value = null): self;
-
-    /**
-     * Add a "or where" condition or filter
-     *
-     * @see https://jsonapi.org/format/1.1/#fetching-filtering
-     * @see https://jsonapi.org/format/1.1/#query-parameters
-     * @see http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part2-url-conventions.html#sec_CommonExpressionSyntax
-     * @see http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part2-url-conventions.html#sec_SystemQueryOptionfilter
-     *
-     * @param string|array $field Name of field or list of fields
-     * @param mixed $operator [optional] Operator or value
-     * @param mixed $value [optional] Value. If omitted, then second argument is considered
-     *                      to act as the value.
-     *
-     * @return self
-     */
-    public function orWhere($field, $operator = null, $value = null): self;
 
     /**
      * Add a raw "where" condition or filter

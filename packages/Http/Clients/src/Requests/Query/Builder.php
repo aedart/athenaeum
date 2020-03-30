@@ -83,15 +83,21 @@ class Builder implements
      */
     public function where($field, $operator = null, $value = null): QueryBuilder
     {
-        return $this->addWhere($field, $operator, $value, self::AND);
-    }
+        // When field is an array, we assume that multiple where conditions is
+        // desired added
+        if (is_array($field)) {
+            return $this->addMultipleWhere($field);
+        }
 
-    /**
-     * @inheritDoc
-     */
-    public function orWhere($field, $operator = null, $value = null): QueryBuilder
-    {
-        return $this->addWhere($field, $operator, $value, self::OR);
+        // Set value to be operator, in case that only two arguments
+        // have been provided
+        if (func_num_args() === 2) {
+            $value = $operator;
+            $operator = '=';
+        }
+
+        // Finally, add a regular where condition
+        return $this->addRegularWhere($field, $operator, $value);
     }
 
     /**
@@ -260,61 +266,26 @@ class Builder implements
     }
 
     /**
-     * Add a "and where"/"or where" condition
-     *
-     * @param string|array $field If array given, then multiple where conditions are added
-     *                      from argument, via {@see addMultipleWhere}
-     * @param string|null $operator [optional] Defaults to "equals" operator, when none given
-     * @param mixed $value [optional]
-     * @param string $andOr [optional]
-     *
-     * @return QueryBuilder
-     */
-    protected function addWhere(
-        $field,
-        $operator = null,
-        $value = null,
-        string $andOr = self::AND
-    ): QueryBuilder {
-        // When field is an array, we assume that multiple where conditions is
-        // desired added
-        if (is_array($field)) {
-            return $this->addMultipleWhere($field, $andOr);
-        }
-
-        // Set value to be operator, in case that only two arguments
-        // have been provided
-        if (func_num_args() === 2) {
-            $value = $operator;
-            $operator = '=';
-        }
-
-        // Finally, add a regular where condition
-        return $this->addRegularWhere($field, $operator, $value, $andOr);
-    }
-
-    /**
      * Add multiple "where" conditions
      *
      * @param array $conditions [optional]
-     * @param string $andOr [optional]
      *
      * @return QueryBuilder
      */
-    protected function addMultipleWhere(array $conditions = [], string $andOr = self::AND): QueryBuilder
+    protected function addMultipleWhere(array $conditions = []): QueryBuilder
     {
         foreach ($conditions as $field => $value) {
             // Determine if one or more operators has been given
             // via the value of the field. If so, then we consider these
             // to be multiple where conditions, with an operator.
             if (Arr::isAssoc($value)) {
-                $this->addMultipleWhereForField($field, $value, $andOr);
+                $this->addMultipleWhereForField($field, $value);
                 continue;
             }
 
             // Otherwise, we assume that an equals operator is intended
             // and add it as a regular "where" condition
-            $this->addRegularWhere($field, '=', $value . $andOr);
+            $this->addRegularWhere($field, '=', $value);
         }
 
         return $this;
@@ -325,17 +296,13 @@ class Builder implements
      *
      * @param string $field
      * @param array $operatorsAndValues Key-value pair, where key = operator
-     * @param string $andOr [optional]
      *
      * @return QueryBuilder
      */
-    protected function addMultipleWhereForField(
-        string $field,
-        array $operatorsAndValues,
-        string $andOr = self::AND
-    ): QueryBuilder {
+    protected function addMultipleWhereForField(string $field, array $operatorsAndValues): QueryBuilder
+    {
         foreach ($operatorsAndValues as $operator => $value) {
-            $this->addRegularWhere($field, $operator, $value, $andOr);
+            $this->addRegularWhere($field, $operator, $value);
         }
 
         return $this;
@@ -347,21 +314,16 @@ class Builder implements
      * @param string $field
      * @param string $operator [optional]
      * @param mixed $value [optional]
-     * @param string $andOr [optional]
      *
      * @return QueryBuilder
      */
-    protected function addRegularWhere(
-        string $field,
-        string $operator = '=',
-        $value = null,
-        string $andOr = self::AND
-    ): QueryBuilder {
+    protected function addRegularWhere(string $field, string $operator = '=', $value = null): QueryBuilder
+    {
         return $this->appendWhereCondition([
             self::FIELD => $field,
             self::OPERATOR => $operator,
             self::VALUE => $value
-        ], [], $andOr);
+        ], []);
     }
 
     /**
@@ -372,23 +334,20 @@ class Builder implements
      *
      * @return QueryBuilder
      */
-    protected function addRawWhere(
-        string $expression,
-        array $bindings = []
-    ): QueryBuilder {
+    protected function addRawWhere(string $expression, array $bindings = []): QueryBuilder
+    {
         return $this->appendWhereCondition([
             self::FIELD => $expression,
             self::OPERATOR => null,
             self::VALUE => null
-        ], $bindings, self::AND, self::WHERE_TYPE_RAW);
+        ], $bindings,self::WHERE_TYPE_RAW);
     }
 
     /**
-     * Appends a "where" condition
+     * Appends a "where" condition to builder's list of conditions
      *
      * @param array $where
      * @param array $bindings [optional]
-     * @param string $andOr [optional]
      * @param string $type [optional]
      *
      * @return QueryBuilder
@@ -396,12 +355,10 @@ class Builder implements
     protected function appendWhereCondition(
         array $where,
         array $bindings = [],
-        string $andOr = self::AND,
         string $type = self::WHERE_TYPE_REGULAR
     ): QueryBuilder {
         // Add bindings, type, ...etc to where condition
         $where[self::BINDINGS] = $bindings;
-        $where[self::AND_OR] = $andOr;
         $where[self::TYPE] = $type;
 
         // Finally, add the where condition to list of conditions

@@ -61,21 +61,6 @@ interface Identifiers
     public const SELECT_TYPE_RAW = '@:select_raw:@';
 
     /**
-     * And / Or type identifier
-     */
-    public const AND_OR = '@:and_or:@';
-
-    /**
-     * "And" identifier
-     */
-    public const AND = '@:and:@';
-
-    /**
-     * "Or" identifier
-     */
-    public const OR = '@:or:@';
-
-    /**
      * Wheres (conditions) identifier
      */
     public const WHERES = '@:wheres:@';
