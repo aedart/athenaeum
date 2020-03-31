@@ -266,13 +266,13 @@ abstract class BaseGrammar implements
 
         // If provided value isn't an array, and the operator isn't the default
         // equals operator, simply compile field = value
-        if(!is_array($value) && $operator === self::EQUALS){
+        if (!is_array($value) && $operator === self::EQUALS) {
             return $this->compileFieldEqualsValue($field, $value);
         }
 
         // If operator isn't the default equals operator, then we add it to
         // the array structure and compile it.
-        if($operator !== self::EQUALS){
+        if ($operator !== self::EQUALS) {
             return $this->compileArray([ $field => [ $operator => $value ]]);
         }
 
