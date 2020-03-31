@@ -31,6 +31,11 @@ interface Identifiers
     public const TYPE = '@:type:@';
 
     /**
+     * Default equals identifier
+     */
+    public const EQUALS = '=';
+
+    /**
      * Field identifier
      */
     public const FIELD = '@:field:@';

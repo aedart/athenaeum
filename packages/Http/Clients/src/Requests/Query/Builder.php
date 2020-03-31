@@ -93,7 +93,7 @@ class Builder implements
         // have been provided
         if (func_num_args() === 2) {
             $value = $operator;
-            $operator = '=';
+            $operator = self::EQUALS;
         }
 
         // Finally, add a regular where condition
@@ -285,7 +285,7 @@ class Builder implements
 
             // Otherwise, we assume that an equals operator is intended
             // and add it as a regular "where" condition
-            $this->addRegularWhere($field, '=', $value);
+            $this->addRegularWhere($field, self::EQUALS, $value);
         }
 
         return $this;
