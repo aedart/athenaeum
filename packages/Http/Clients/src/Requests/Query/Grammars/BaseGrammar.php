@@ -7,8 +7,6 @@ use Aedart\Contracts\Http\Clients\Requests\Query\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammar;
 use Aedart\Contracts\Http\Clients\Requests\Query\Identifiers;
 use Aedart\Http\Clients\Exceptions\UnableToBuildHttpQuery;
-use Aedart\Utils\Arr;
-use function GuzzleHttp\Psr7\build_query;
 
 /**
  * Base Http Query Grammar
@@ -266,31 +264,34 @@ abstract class BaseGrammar implements
         $operator = $this->resolveOperator($where[self::OPERATOR], $field);
         $value = $where[self::VALUE];
 
-        // Compile as an array, when value matches an associative array and
-        // equals operator is used.
-        if (is_array($value) && Arr::isAssoc($value) && $operator === '=') {
-            return $this->compileArray([ $field => $value ]);
+        // If provided value isn't an array, and the operator isn't the default
+        // equals operator, simply compile field = value
+        if(!is_array($value) && $operator === self::EQUALS){
+            return $this->compileFieldEqualsValue($field, $value);
         }
 
-        // When no equals operator has been provided, then we append the
-        // operator.
-        if (is_array($value) && Arr::isAssoc($value)) {
-            return $this->compileArray([ $field => [ $operator => $value ] ]);
+        // If operator isn't the default equals operator, then we add it to
+        // the array structure and compile it.
+        if($operator !== self::EQUALS){
+            return $this->compileArray([ $field => [ $operator => $value ]]);
         }
 
-        // Otherwise when just a list of values has been given, then we just
-        // convert it into a comma separated list.
-        if (is_array($value)) {
-            $value = implode(',', $value);
-        }
+        // Otherwise, it means that the default equals operator has been given,
+        // yet the value is an array and must therefore also be compiled as such.
+        return $this->compileArray([ $field => $value ]);
+    }
 
-        // Omit operator if it matches equals sign
-        if ($operator === '=') {
-            return "{$field}={$value}";
-        }
-
-        // Lastly, assemble field, operator and value
-        return "{$field}[{$operator}]={$value}";
+    /**
+     * Compiles field equals value
+     *
+     * @param string $field
+     * @param string|int|float $value
+     *
+     * @return string
+     */
+    protected function compileFieldEqualsValue(string $field, $value): string
+    {
+        return "{$field}={$value}";
     }
 
     /**
@@ -381,9 +382,9 @@ abstract class BaseGrammar implements
      */
     protected function compileArray(array $params): string
     {
-        // Use Guzzle's build-query method, but avoid url
-        // encoding it. Url encoding should be handled at
-        // a later point...
-        return build_query($params, false);
+        // Build a http query using PHP's native method.
+        // However, decode the output or we risk that the
+        // Request Builder's driver might dual url-encode it.
+        return urldecode(http_build_query($params));
     }
 }
