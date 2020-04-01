@@ -43,6 +43,13 @@ class Builder implements
     protected array $wheres = [];
 
     /**
+     * Includes
+     *
+     * @var array
+     */
+    protected array $includes = [];
+
+    /**
      * Builder constructor.
      *
      * @param string|Grammar|null $grammar [optional] String profile name, {@see Grammar} instance or null.
@@ -113,7 +120,13 @@ class Builder implements
      */
     public function include($resource): QueryBuilder
     {
-        // TODO: Implement include() method.
+        if (!is_array($resource)) {
+            $resource = [$resource];
+        }
+
+        $this->includes = array_merge($this->includes, $resource);
+
+        return $this;
     }
 
     /**
@@ -180,6 +193,7 @@ class Builder implements
         return [
             self::SELECTS => $this->selects,
             self::WHERES => $this->wheres,
+            self::INCLUDES => $this->includes
         ];
     }
 

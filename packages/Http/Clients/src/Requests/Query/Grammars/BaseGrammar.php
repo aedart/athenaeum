@@ -35,11 +35,18 @@ abstract class BaseGrammar implements
     protected ?Builder $query = null;
 
     /**
-     * Select key
+     * Select key, prefix for selects
      *
      * @var string
      */
     protected string $selectKey = 'select';
+
+    /**
+     * Include key, prefix for includes
+     *
+     * @var string
+     */
+    protected string $includeKey = 'include';
 
     /**
      * Binding key prefix
@@ -117,7 +124,8 @@ abstract class BaseGrammar implements
     {
         return [
             $this->compileSelects($parts[self::SELECTS]),
-            $this->compileWheres($parts[self::WHERES])
+            $this->compileWheres($parts[self::WHERES]),
+            $this->compileIncludes($parts[self::INCLUDES])
         ];
     }
 
@@ -307,6 +315,39 @@ abstract class BaseGrammar implements
     protected function compileRawWhere(array $where): string
     {
         return $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]);
+    }
+
+    /**
+     * Compiles a list of resources to be included
+     *
+     * @param string[] $includes [optional]
+     *
+     * @return string
+     */
+    protected function compileIncludes(array $includes = []): string
+    {
+        if (empty($includes)) {
+            return '';
+        }
+
+        $output = [];
+        foreach ($includes as $resource) {
+            $output[] = $this->compileInclude($resource);
+        }
+
+        return $this->includeKey . '=' . implode(',', $output);
+    }
+
+    /**
+     * Compiles a single resource to be included
+     *
+     * @param string $resource
+     *
+     * @return string
+     */
+    protected function compileInclude(string $resource): string
+    {
+        return trim($resource);
     }
 
     /**

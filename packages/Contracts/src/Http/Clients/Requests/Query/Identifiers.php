@@ -84,4 +84,9 @@ interface Identifiers
      * Operator identifier
      */
     public const OPERATOR = '@:operator:@';
+
+    /**
+     * Includes identifier
+     */
+    public const INCLUDES = '@:includes:@';
 }
