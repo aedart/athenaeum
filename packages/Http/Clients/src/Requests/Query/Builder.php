@@ -50,6 +50,20 @@ class Builder implements
     protected array $includes = [];
 
     /**
+     * Limit
+     *
+     * @var int|null
+     */
+    protected ?int $limit = null;
+
+    /**
+     * Offset
+     *
+     * @var int|null
+     */
+    protected ?int $offset = null;
+
+    /**
      * Builder constructor.
      *
      * @param string|Grammar|null $grammar [optional] String profile name, {@see Grammar} instance or null.
@@ -134,7 +148,9 @@ class Builder implements
      */
     public function limit(int $amount): QueryBuilder
     {
-        // TODO: Implement limit() method.
+        $this->limit = $amount;
+
+        return $this;
     }
 
     /**
@@ -142,7 +158,9 @@ class Builder implements
      */
     public function offset(int $offset): QueryBuilder
     {
-        // TODO: Implement offset() method.
+        $this->offset = $offset;
+
+        return $this;
     }
 
     /**
@@ -150,7 +168,7 @@ class Builder implements
      */
     public function take(int $amount): QueryBuilder
     {
-        // TODO: Implement take() method.
+        return $this->limit($amount);
     }
 
     /**
@@ -158,7 +176,7 @@ class Builder implements
      */
     public function skip(int $offset): QueryBuilder
     {
-        // TODO: Implement skip() method.
+        return $this->offset($offset);
     }
 
     /**
@@ -193,7 +211,9 @@ class Builder implements
         return [
             self::SELECTS => $this->selects,
             self::WHERES => $this->wheres,
-            self::INCLUDES => $this->includes
+            self::INCLUDES => $this->includes,
+            self::LIMIT => $this->limit,
+            self::OFFSET => $this->offset
         ];
     }
 

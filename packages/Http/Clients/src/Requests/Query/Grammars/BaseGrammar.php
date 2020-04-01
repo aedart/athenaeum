@@ -49,6 +49,20 @@ abstract class BaseGrammar implements
     protected string $includeKey = 'include';
 
     /**
+     * Limit key, prefix
+     *
+     * @var string
+     */
+    protected string $limitKey = 'limit';
+
+    /**
+     * Offset key, prefix
+     *
+     * @var string
+     */
+    protected string $offsetKey = 'offset';
+
+    /**
      * Binding key prefix
      *
      * @var string
@@ -125,7 +139,9 @@ abstract class BaseGrammar implements
         return [
             $this->compileSelects($parts[self::SELECTS]),
             $this->compileWheres($parts[self::WHERES]),
-            $this->compileIncludes($parts[self::INCLUDES])
+            $this->compileIncludes($parts[self::INCLUDES]),
+            $this->compileLimit($parts[self::LIMIT]),
+            $this->compileOffset($parts[self::OFFSET]),
         ];
     }
 
@@ -348,6 +364,38 @@ abstract class BaseGrammar implements
     protected function compileInclude(string $resource): string
     {
         return trim($resource);
+    }
+
+    /**
+     * Compiles limit, if any given
+     *
+     * @param int|null $amount [optional]
+     *
+     * @return string Limit or empty string if no amount given
+     */
+    protected function compileLimit(?int $amount = null): string
+    {
+        if(empty($amount)){
+            return '';
+        }
+
+        return $this->limitKey . '=' . $amount;
+    }
+
+    /**
+     * Compiles offset, if any given
+     *
+     * @param int|null $offset [optional]
+     *
+     * @return string Limit or empty string if no offset given
+     */
+    protected function compileOffset(?int $offset = null): string
+    {
+        if(empty($offset)){
+            return '';
+        }
+
+        return $this->offsetKey . '=' . $offset;
     }
 
     /**

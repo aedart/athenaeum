@@ -89,4 +89,14 @@ interface Identifiers
      * Includes identifier
      */
     public const INCLUDES = '@:includes:@';
+
+    /**
+     * Limit identifier
+     */
+    public const LIMIT = '@:limit:@';
+
+    /**
+     * Offset identifier
+     */
+    public const OFFSET = '@:offset:@';
 }
