@@ -375,7 +375,7 @@ abstract class BaseGrammar implements
      */
     protected function compileLimit(?int $amount = null): string
     {
-        if(empty($amount)){
+        if (empty($amount)) {
             return '';
         }
 
@@ -391,7 +391,7 @@ abstract class BaseGrammar implements
      */
     protected function compileOffset(?int $offset = null): string
     {
-        if(empty($offset)){
+        if (empty($offset)) {
             return '';
         }
 
