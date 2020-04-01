@@ -124,10 +124,20 @@ interface Builder extends Identifiers,
     /**
      * Include one or more related resources in the response
      *
+     * Examples:
+     *
+     * ```php
+     * // Include single resource
+     * $query->include('job');
+     *
+     * // Include multiple fields
+     * $query->include(['job', 'posts']);
+     * ```
+     * 
      * @see https://jsonapi.org/format/1.1/#fetching-includes
      * @see http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part2-url-conventions.html#sec_SystemQueryOptionexpand
      *
-     * @param string|array $resource
+     * @param string|string[] $resource
      *
      * @return self
      */
