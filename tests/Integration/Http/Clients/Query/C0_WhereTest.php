@@ -67,6 +67,51 @@ class C0_WhereTest extends HttpClientsTestCase
         ];
     }
 
+    /**
+     * Provides data for multiple conditions via array test
+     *
+     * @return array
+     */
+    public function providesMultipleConditionsViaArray(): array
+    {
+        return [
+            'default' => [
+                'default',
+                '?year[gt]=2021&year[lt]=2031&name=john'
+            ]
+        ];
+    }
+
+    /**
+     * Provides data for where with array values test
+     *
+     * @return array
+     */
+    public function providesWhereWithArrayValue(): array
+    {
+        return [
+            'default' => [
+                'default',
+                '?users[0]=1&users[1]=2&users[2]=3&users[3]=4'
+            ]
+        ];
+    }
+
+    /**
+     * Provides data for where with operator and array values test
+     *
+     * @return array
+     */
+    public function providesWhereWithOperatorAndArrayValue(): array
+    {
+        return [
+            'default' => [
+                'default',
+                '?users[in][0]=1&users[in][1]=2&users[in][2]=3&users[in][3]=4'
+            ]
+        ];
+    }
+
     /*****************************************************************
      * Actual Tests
      ****************************************************************/
@@ -131,6 +176,78 @@ class C0_WhereTest extends HttpClientsTestCase
             ->query($grammar)
             ->where('year', 'gt', 2020)
             ->where('year', 'lt', 2051)
+            ->build();
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider providesMultipleConditionsViaArray
+     *
+     * @param string $grammar
+     * @param string $expected
+     *
+     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
+     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     */
+    public function canAddMultipleConditionsViaArray(string $grammar, string $expected)
+    {
+        $result = $this
+            ->query($grammar)
+            ->where([
+                'year' => [
+                    'gt' => 2021,
+                    'lt' => 2031
+                ],
+                'name' => 'john'
+            ])
+            ->build();
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider providesWhereWithArrayValue
+     *
+     * @param string $grammar
+     * @param string $expected
+     *
+     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
+     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     */
+    public function canAddWhereWithArrayValue(string $grammar, string $expected)
+    {
+        $result = $this
+            ->query($grammar)
+            ->where('users', [1, 2, 3, 4])
+            ->build();
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider providesWhereWithOperatorAndArrayValue
+     *
+     * @param string $grammar
+     * @param string $expected
+     *
+     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
+     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     */
+    public function canAddWhereWithOperatorAndArrayValue(string $grammar, string $expected)
+    {
+        $result = $this
+            ->query($grammar)
+            ->where('users', 'in', [1, 2, 3, 4])
             ->build();
 
         ConsoleDebugger::output($result);
