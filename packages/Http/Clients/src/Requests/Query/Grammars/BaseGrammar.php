@@ -258,7 +258,7 @@ abstract class BaseGrammar implements
      */
     protected function compileWhere(array $where): string
     {
-        if ($where[self::TYPE] === self::SELECT_TYPE_RAW) {
+        if ($where[self::TYPE] === self::WHERE_TYPE_RAW) {
             return $this->compileRawWhere($where);
         }
 
@@ -306,20 +306,7 @@ abstract class BaseGrammar implements
      */
     protected function compileRawWhere(array $where): string
     {
-        $expression = $where[self::FIELD];
-
-        if (is_string($expression)) {
-            return $this->compileExpression($expression, $where[self::BINDINGS]);
-        }
-
-        if (is_array($expression)) {
-            return $this->compileArray($expression);
-        }
-
-        throw new UnableToBuildHttpQuery(sprintf(
-            'Expected raw where condition to be either string or array. %s given',
-            gettype($expression)
-        ));
+        return $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]);
     }
 
     /**
