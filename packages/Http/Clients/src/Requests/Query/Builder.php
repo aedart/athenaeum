@@ -278,7 +278,7 @@ class Builder implements
             // Determine if one or more operators has been given
             // via the value of the field. If so, then we consider these
             // to be multiple where conditions, with an operator.
-            if (Arr::isAssoc($value)) {
+            if (is_array($value) && Arr::isAssoc($value)) {
                 $this->addMultipleWhereForField($field, $value);
                 continue;
             }
