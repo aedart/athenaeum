@@ -67,7 +67,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function selectRaw($expression, array $bindings = []): self;
+    public function selectRaw(string $expression, array $bindings = []): self;
 
     /**
      * Add a "where" condition or filter
@@ -106,12 +106,20 @@ interface Builder extends Identifiers,
     /**
      * Add a raw "where" condition or filter
      *
-     * @param string|array $query Raw query string, or array of query parameters
-     * @param array $bindings [optional] Evt. values to be injected into the raw query string
+     * Examples:
+     *
+     * ```php
+     * // Injects binding values into expression,
+     * // e.g. ":amount" becomes 10
+     * $query->whereRaw('filter=Users eq :amount', [ 'amount' => 10]);
+     * ```
+     *
+     * @param string $query Raw query string or filter
+     * @param array $bindings [optional] Evt. values to be injected into the raw query string.
      *
      * @return self
      */
-    public function whereRaw($query, array $bindings = []): self;
+    public function whereRaw(string $query, array $bindings = []): self;
 
     /**
      * Include one or more related resources in the response

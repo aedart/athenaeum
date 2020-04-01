@@ -73,7 +73,7 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function selectRaw($expression, array $bindings = []): QueryBuilder
+    public function selectRaw(string $expression, array $bindings = []): QueryBuilder
     {
         return $this->addSelect([$expression], $bindings, self::SELECT_TYPE_RAW);
     }
@@ -103,7 +103,7 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function whereRaw($query, array $bindings = []): QueryBuilder
+    public function whereRaw(string $query, array $bindings = []): QueryBuilder
     {
         return $this->addRawWhere($query, $bindings);
     }
