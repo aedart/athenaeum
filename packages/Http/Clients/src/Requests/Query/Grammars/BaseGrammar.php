@@ -65,7 +65,7 @@ abstract class BaseGrammar implements
     {
         $this->query = $builder;
 
-        return $this->compileHttpQueryParts($builder->toArray());
+        return $this->compileHttpQuery($builder->toArray());
     }
 
     /**
@@ -91,18 +91,34 @@ abstract class BaseGrammar implements
      *
      * @throws HttpQueryBuilderException
      */
-    protected function compileHttpQueryParts(array $parts = []): string
+    protected function compileHttpQuery(array $parts = []): string
     {
         if (empty($parts)) {
             return '';
         }
 
-        $compiled = array_filter([
-            $this->compileSelects($parts[self::SELECTS]),
-            $this->compileWheres($parts[self::WHERES])
-        ], fn ($element) => !empty($element));
+        $compiled = array_filter(
+            $this->compileFragments($parts),
+            fn ($element) => !empty($element)
+        );
 
         return '?' . implode('&', $compiled);
+    }
+
+    /**
+     * Compiles the individual fragments of the http query
+     *
+     * @param array $parts
+     * @return string[] Compiled fragments of the http query
+     *
+     * @throws HttpQueryBuilderException
+     */
+    protected function compileFragments(array $parts): array
+    {
+        return [
+            $this->compileSelects($parts[self::SELECTS]),
+            $this->compileWheres($parts[self::WHERES])
+        ];
     }
 
     /**
@@ -282,19 +298,6 @@ abstract class BaseGrammar implements
     }
 
     /**
-     * Compiles field equals value
-     *
-     * @param string $field
-     * @param string|int|float $value
-     *
-     * @return string
-     */
-    protected function compileFieldEqualsValue(string $field, $value): string
-    {
-        return "{$field}={$value}";
-    }
-
-    /**
      * Compiles a "raw where" condition (expression)
      *
      * @param array $where
@@ -317,6 +320,19 @@ abstract class BaseGrammar implements
             'Expected raw where condition to be either string or array. %s given',
             gettype($expression)
         ));
+    }
+
+    /**
+     * Compiles field equals value
+     *
+     * @param string $field
+     * @param string|int|float|bool $value
+     *
+     * @return string
+     */
+    protected function compileFieldEqualsValue(string $field, $value): string
+    {
+        return "{$field}={$value}";
     }
 
     /**
