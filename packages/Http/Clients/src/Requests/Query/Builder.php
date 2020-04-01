@@ -182,22 +182,6 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function page(int $number): QueryBuilder
-    {
-        // TODO: Implement page() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function show(int $amount): QueryBuilder
-    {
-        // TODO: Implement show() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function orderBy($field, string $direction = QueryBuilder::ASCENDING): QueryBuilder
     {
         // TODO: Implement orderBy() method.

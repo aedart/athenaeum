@@ -186,26 +186,6 @@ interface Builder extends Identifiers,
     public function skip(int $offset): self;
 
     /**
-     * Return results on given page number
-     *
-     * @param int $number
-     *
-     * @return self
-     */
-    public function page(int $number): self;
-
-    /**
-     * Limit the amount of results per page
-     *
-     * @see page
-     *
-     * @param int $amount
-     *
-     * @return self
-     */
-    public function show(int $amount): self;
-
-    /**
      * Order results by given field or fields
      *
      * @see https://jsonapi.org/format/1.1/#fetching-sorting
