@@ -65,7 +65,7 @@ class JsonApiGrammar extends BaseGrammar
                 $from = '';
             }
 
-            if(!isset($sparseFields[$from])){
+            if (!isset($sparseFields[$from])) {
                 $sparseFields[$from] = [];
             }
 
@@ -74,7 +74,7 @@ class JsonApiGrammar extends BaseGrammar
         }
 
         $output = [];
-        foreach ($sparseFields as $type => $fields){
+        foreach ($sparseFields as $type => $fields) {
             $output[] = $this->compileFieldFromResource(implode(',', $fields), $type);
         }
 
