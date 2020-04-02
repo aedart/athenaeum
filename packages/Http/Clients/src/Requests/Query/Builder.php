@@ -64,6 +64,13 @@ class Builder implements
     protected ?int $offset = null;
 
     /**
+     * Sorting order criteria
+     *
+     * @var array
+     */
+    protected array $orderBy = [];
+
+    /**
      * Builder constructor.
      *
      * @param string|Grammar|null $grammar [optional] String profile name, {@see Grammar} instance or null.
@@ -184,7 +191,11 @@ class Builder implements
      */
     public function orderBy($field, string $direction = QueryBuilder::ASCENDING): QueryBuilder
     {
-        // TODO: Implement orderBy() method.
+        if(is_array($field)){
+            return $this->addMultipleOrderBy($field);
+        }
+
+        return $this->addOrderBy($field, $direction);
     }
 
     /**
@@ -197,7 +208,8 @@ class Builder implements
             self::WHERES => $this->wheres,
             self::INCLUDES => $this->includes,
             self::LIMIT => $this->limit,
-            self::OFFSET => $this->offset
+            self::OFFSET => $this->offset,
+            self::ORDER_BY => $this->orderBy
         ];
     }
 
@@ -381,6 +393,47 @@ class Builder implements
 
         // Finally, add the where condition to list of conditions
         $this->wheres[] = $where;
+
+        return $this;
+    }
+
+    /**
+     * Add multiple sorting order criteria
+     *
+     * @see addOrderBy
+     *
+     * @param array $criteria
+     *
+     * @return QueryBuilder
+     */
+    protected function addMultipleOrderBy(array $criteria): QueryBuilder
+    {
+        foreach ($criteria as $field => $direction){
+            if(is_int($field)){
+                $field = $direction;
+                $direction = self::ASCENDING;
+            }
+
+            $this->addOrderBy($field, $direction);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add sorting order criteria for a field
+     *
+     * @param string $field
+     * @param string $direction
+     *
+     * @return QueryBuilder
+     */
+    protected function addOrderBy(string $field, string $direction): QueryBuilder
+    {
+        $this->orderBy[] = [
+            self::FIELD => $field,
+            self::DIRECTION => $direction
+        ];
 
         return $this;
     }

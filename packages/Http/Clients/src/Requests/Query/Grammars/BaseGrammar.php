@@ -63,6 +63,13 @@ abstract class BaseGrammar implements
     protected string $offsetKey = 'offset';
 
     /**
+     * Sorting key, prefix for "order by" criteria
+     *
+     * @var string
+     */
+    protected string $orderByKey = 'sort';
+
+    /**
      * Binding key prefix
      *
      * @var string
@@ -142,6 +149,7 @@ abstract class BaseGrammar implements
             $this->compileIncludes($parts[self::INCLUDES]),
             $this->compileLimit($parts[self::LIMIT]),
             $this->compileOffset($parts[self::OFFSET]),
+            $this->compileOrderBy($parts[self::ORDER_BY])
         ];
     }
 
@@ -396,6 +404,42 @@ abstract class BaseGrammar implements
         }
 
         return $this->offsetKey . '=' . $offset;
+    }
+
+    /**
+     * Compiles the sorting criteria
+     *
+     * @param array $orderBy [optional]
+     *
+     * @return string
+     */
+    protected function compileOrderBy(array $orderBy = []): string
+    {
+        if(empty($orderBy)){
+            return '';
+        }
+
+        $output = [];
+        foreach ($orderBy as $criteria) {
+            $output[] = $this->compileSortingCriteria($criteria);
+        }
+
+        return $this->orderByKey . '=' . implode(',', $output);
+    }
+
+    /**
+     * Compiles a single sorting criteria (field and direction)
+     *
+     * @param array $criteria
+     *
+     * @return string
+     */
+    protected function compileSortingCriteria(array $criteria): string
+    {
+        $field = $criteria[self::FIELD];
+        $direction = $criteria[self::DIRECTION];
+
+        return "{$field} {$direction}";
     }
 
     /**

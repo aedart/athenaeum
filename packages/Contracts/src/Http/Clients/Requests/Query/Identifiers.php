@@ -99,4 +99,14 @@ interface Identifiers
      * Offset identifier
      */
     public const OFFSET = '@:offset:@';
+
+    /**
+     * Sorting order criteria identifier
+     */
+    public const ORDER_BY = '@:order_by:@';
+
+    /**
+     * Sorting order direction identifier
+     */
+    public const DIRECTION = '@:direction:@';
 }
