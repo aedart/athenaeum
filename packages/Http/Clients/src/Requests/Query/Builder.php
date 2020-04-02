@@ -191,7 +191,7 @@ class Builder implements
      */
     public function orderBy($field, string $direction = QueryBuilder::ASCENDING): QueryBuilder
     {
-        if(is_array($field)){
+        if (is_array($field)) {
             return $this->addMultipleOrderBy($field);
         }
 
@@ -408,8 +408,8 @@ class Builder implements
      */
     protected function addMultipleOrderBy(array $criteria): QueryBuilder
     {
-        foreach ($criteria as $field => $direction){
-            if(is_int($field)){
+        foreach ($criteria as $field => $direction) {
+            if (is_int($field)) {
                 $field = $direction;
                 $direction = self::ASCENDING;
             }

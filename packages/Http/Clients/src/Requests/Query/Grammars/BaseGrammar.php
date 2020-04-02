@@ -415,7 +415,7 @@ abstract class BaseGrammar implements
      */
     protected function compileOrderBy(array $orderBy = []): string
     {
-        if(empty($orderBy)){
+        if (empty($orderBy)) {
             return '';
         }
 
