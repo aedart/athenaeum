@@ -74,6 +74,11 @@ return [
                 'driver' => \Aedart\Http\Clients\Requests\Query\Grammars\DefaultGrammar::class,
                 'options' => []
             ],
+
+            'json_api' => [
+                'driver' => \Aedart\Http\Clients\Requests\Query\Grammars\JsonApiGrammar::class,
+                'options' => []
+            ]
         ]
     ]
 ];
