@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Integration\Http\Clients\Query;
 
+use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammar;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
@@ -31,7 +32,8 @@ class A0_InstanceTest extends HttpClientsTestCase
     public function providesGrammars(): array
     {
         return [
-            'default' => [ 'default' ]
+            'default' => [ 'default' ],
+            'json api' => [ 'json_api' ],
         ];
     }
 
@@ -45,7 +47,7 @@ class A0_InstanceTest extends HttpClientsTestCase
      *
      * @param string $grammar
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws ProfileNotFoundException
      */
     public function canObtainInstance(string $grammar)
     {
@@ -60,7 +62,7 @@ class A0_InstanceTest extends HttpClientsTestCase
      *
      * @param string $grammar
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws ProfileNotFoundException
      */
     public function hasGrammarInstance(string $grammar)
     {
