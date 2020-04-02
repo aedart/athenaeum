@@ -2,6 +2,7 @@
 
 namespace Aedart\Http\Clients\Requests\Query;
 
+use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as QueryBuilder;
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammar;
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammars\GrammarManagerAware;
@@ -77,7 +78,7 @@ class Builder implements
      *                          If null is given, then a default Grammar is resolved
      * @param Container|null $container [optional]
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws ProfileNotFoundException
      */
     public function __construct($grammar = null, ?Container $container = null)
     {
@@ -256,7 +257,7 @@ class Builder implements
      *
      * @return self
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws ProfileNotFoundException
      */
     protected function resolveGrammar($grammar = null)
     {
