@@ -2,6 +2,8 @@
 
 namespace Aedart\Tests\Integration\Http\Clients\Query;
 
+use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
+use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 
@@ -33,6 +35,10 @@ class B0_SelectTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?select=name'
+            ],
+            'json api' => [
+                'json_api',
+                '?fields[]=name'
             ]
         ];
     }
@@ -48,6 +54,10 @@ class B0_SelectTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?select=person.name'
+            ],
+            'json api' => [
+                'json_api',
+                '?fields[person]=name'
             ]
         ];
     }
@@ -63,6 +73,10 @@ class B0_SelectTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?select=name,age,jobTitle'
+            ],
+            'json api' => [
+                'json_api',
+                '?fields[]=name,age,jobTitle'
             ]
         ];
     }
@@ -78,6 +92,10 @@ class B0_SelectTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?select=person.name,person.age,position.jobTitle'
+            ],
+            'json api' => [
+                'json_api',
+                '?fields[person]=name,age&fields[position]=jobTitle'
             ]
         ];
     }
@@ -93,7 +111,8 @@ class B0_SelectTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
      */
     public function canSelectSingleField(string $grammar, string $expected)
     {
@@ -114,7 +133,8 @@ class B0_SelectTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
      */
     public function canSelectSingleFieldFromResource(string $grammar, string $expected)
     {
@@ -135,7 +155,8 @@ class B0_SelectTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
      */
     public function canSelectMultipleFields(string $grammar, string $expected)
     {
@@ -156,7 +177,8 @@ class B0_SelectTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
      */
     public function canSelectMultipleFieldsFromResources(string $grammar, string $expected)
     {
