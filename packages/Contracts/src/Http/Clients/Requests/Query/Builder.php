@@ -188,6 +188,22 @@ interface Builder extends Identifiers,
     /**
      * Order results by given field or fields
      *
+     * Examples:
+     *
+     * ```php
+     * // Order by name, ascending
+     * $query->orderBy('name');
+     *
+     * // Order by name, descending
+     * $query->orderBy('name', 'desc');
+     *
+     * // Order by multiple fields, each with own sorting order
+     * $query->orderBy([
+     *      'name' => 'desc',
+     *      'age' => 'asc'
+     * ]);
+     * ```
+     *
      * @see https://jsonapi.org/format/1.1/#fetching-sorting
      * @see http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part2-url-conventions.html#sec_SystemQueryOptionorderby
      *
