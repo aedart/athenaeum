@@ -2,6 +2,8 @@
 
 namespace Aedart\Tests\Integration\Http\Clients\Query;
 
+use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
+use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 
@@ -33,7 +35,11 @@ class C0_WhereTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?name=john'
-            ]
+            ],
+            'json api' => [
+                'json_api',
+                '?filter[name]=john'
+            ],
         ];
     }
 
@@ -48,7 +54,11 @@ class C0_WhereTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?year[gt]=2020'
-            ]
+            ],
+            'json api' => [
+                'json_api',
+                '?filter[year][gt]=2020'
+            ],
         ];
     }
 
@@ -63,7 +73,11 @@ class C0_WhereTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?year[gt]=2020&year[lt]=2051'
-            ]
+            ],
+            'json api' => [
+                'json_api',
+                '?filter[year][gt]=2020&filter[year][lt]=2051'
+            ],
         ];
     }
 
@@ -78,7 +92,11 @@ class C0_WhereTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?year[gt]=2021&year[lt]=2031&name=john'
-            ]
+            ],
+            'json api' => [
+                'json_api',
+                '?filter[year][gt]=2021&filter[year][lt]=2031&filter[name]=john'
+            ],
         ];
     }
 
@@ -93,7 +111,11 @@ class C0_WhereTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?users[0]=1&users[1]=2&users[2]=3&users[3]=4'
-            ]
+            ],
+            'json api' => [
+                'json_api',
+                '?filter[users][0]=1&filter[users][1]=2&filter[users][2]=3&filter[users][3]=4'
+            ],
         ];
     }
 
@@ -108,7 +130,11 @@ class C0_WhereTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?users[in][0]=1&users[in][1]=2&users[in][2]=3&users[in][3]=4'
-            ]
+            ],
+            'json api' => [
+                'json_api',
+                '?filter[users][in][0]=1&filter[users][in][1]=2&filter[users][in][2]=3&filter[users][in][3]=4'
+            ],
         ];
     }
 
@@ -123,8 +149,8 @@ class C0_WhereTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     * @throws ProfileNotFoundException
      */
     public function canAddWhereFieldEqualsValue(string $grammar, string $expected)
     {
@@ -145,8 +171,8 @@ class C0_WhereTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     * @throws ProfileNotFoundException
      */
     public function canAddWhereWithOperatorAndValue(string $grammar, string $expected)
     {
@@ -167,8 +193,8 @@ class C0_WhereTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     * @throws ProfileNotFoundException
      */
     public function canAddMultipleConditionsOnSameField(string $grammar, string $expected)
     {
@@ -190,8 +216,8 @@ class C0_WhereTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     * @throws ProfileNotFoundException
      */
     public function canAddMultipleConditionsViaArray(string $grammar, string $expected)
     {
@@ -218,8 +244,8 @@ class C0_WhereTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     * @throws ProfileNotFoundException
      */
     public function canAddWhereWithArrayValue(string $grammar, string $expected)
     {
@@ -240,8 +266,8 @@ class C0_WhereTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     * @throws ProfileNotFoundException
      */
     public function canAddWhereWithOperatorAndArrayValue(string $grammar, string $expected)
     {

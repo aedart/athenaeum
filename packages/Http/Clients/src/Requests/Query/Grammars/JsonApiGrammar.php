@@ -22,6 +22,13 @@ class JsonApiGrammar extends BaseGrammar
      */
     protected string $selectKey = 'fields';
 
+    /**
+     * Filter key
+     *
+     * @var string
+     */
+    protected string $filterKey = 'filter';
+
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -82,5 +89,20 @@ class JsonApiGrammar extends BaseGrammar
         $prefix = $this->selectKey;
 
         return "{$prefix}[{$resource}]={$field}";
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function compileRegularWhere(array $where): string
+    {
+        $prefix = $this->filterKey;
+        $field = $where[self::FIELD];
+
+        return parent::compileRegularWhere([
+            self::FIELD => "{$prefix}[{$field}]",
+            self::OPERATOR => $where[self::OPERATOR],
+            self::VALUE => $where[self::VALUE]
+        ]);
     }
 }
