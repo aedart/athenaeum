@@ -6,7 +6,7 @@ namespace Aedart\Http\Clients\Requests\Query\Grammars;
 /**
  * Json Api Grammar
  *
- * Offers basic support for the Json API grammar.
+ * Offers basic support for the Json API v1.x grammar.
  *
  * @see https://jsonapi.org/
  *
