@@ -29,6 +29,34 @@ class JsonApiGrammar extends BaseGrammar
      */
     protected string $filterKey = 'filter';
 
+    /**
+     * Limit key, prefix
+     *
+     * @var string
+     */
+    protected string $limitKey = 'page[limit]';
+
+    /**
+     * Offset key, prefix
+     *
+     * @var string
+     */
+    protected string $offsetKey = 'page[offset]';
+
+    /**
+     * Page number key, prefix
+     *
+     * @var string
+     */
+    protected string $pageNumberKey = 'page[number]';
+
+    /**
+     * Page size, prefix
+     *
+     * @var string
+     */
+    protected string $pageSizeKey = 'page[size]';
+
     /*****************************************************************
      * Internals
      ****************************************************************/
