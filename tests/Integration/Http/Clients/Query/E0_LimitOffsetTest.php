@@ -2,6 +2,8 @@
 
 namespace Aedart\Tests\Integration\Http\Clients\Query;
 
+use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
+use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 
@@ -90,8 +92,8 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
      */
     public function canSetLimit(string $grammar, string $expected)
     {
@@ -112,8 +114,8 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
      */
     public function canSetOffset(string $grammar, string $expected)
     {
@@ -134,8 +136,8 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
      */
     public function canSetLimitAndOffset(string $grammar, string $expected)
     {
