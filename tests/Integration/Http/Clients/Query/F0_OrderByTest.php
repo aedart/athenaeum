@@ -33,6 +33,10 @@ class F0_OrderByTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?sort=name asc'
+            ],
+            'json api' => [
+                'json_api',
+                '?sort=name'
             ]
         ];
     }
@@ -48,6 +52,10 @@ class F0_OrderByTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?sort=name desc'
+            ],
+            'json api' => [
+                'json_api',
+                '?sort=-name'
             ]
         ];
     }
@@ -63,6 +71,10 @@ class F0_OrderByTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?sort=name asc,age desc'
+            ],
+            'json api' => [
+                'json_api',
+                '?sort=name,-age'
             ]
         ];
     }
@@ -78,6 +90,10 @@ class F0_OrderByTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?sort=name desc,age asc,jobs asc'
+            ],
+            'json api' => [
+                'json_api',
+                '?sort=-name,age,jobs'
             ]
         ];
     }
