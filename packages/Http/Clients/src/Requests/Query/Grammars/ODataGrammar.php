@@ -53,6 +53,13 @@ class ODataGrammar extends BaseGrammar
     protected string $offsetKey = '$skip';
 
     /**
+     * Sorting key, prefix for "order by" criteria
+     *
+     * @var string
+     */
+    protected string $orderByKey = '$orderby';
+
+    /**
      * Operator map
      *
      * NOTE: Intended to contain only a comparison
