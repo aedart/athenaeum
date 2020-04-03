@@ -133,4 +133,21 @@ class JsonApiGrammar extends BaseGrammar
             self::VALUE => $where[self::VALUE]
         ]);
     }
+
+    /**
+     * @inheritdoc
+     */
+    protected function compileSortingCriteria(array $criteria): string
+    {
+        $field = $criteria[self::FIELD];
+        $direction = $criteria[self::DIRECTION];
+
+        if($direction === self::DESCENDING){
+            return "-{$field}";
+        }
+
+        return $field;
+    }
+
+
 }
