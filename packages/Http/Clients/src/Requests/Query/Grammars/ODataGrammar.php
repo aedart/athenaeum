@@ -134,6 +134,27 @@ class ODataGrammar extends BaseGrammar
     }
 
     /**
+     * {@inheritdoc}
+     *
+     * Not supported
+     */
+    protected function compilePageNumber(?int $number = null): string
+    {
+        return '';
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Not supported
+     */
+    protected function compilePageSize(?int $amount = null): string
+    {
+        return '';
+    }
+
+
+    /**
      * @inheritdoc
      */
     protected function compileArray(array $params): string
