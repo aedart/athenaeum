@@ -34,6 +34,10 @@ class D0_IncludeTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?include=jobs'
+            ],
+            'json api' => [
+                'json_api',
+                '?include=jobs'
             ]
         ];
     }
@@ -48,6 +52,10 @@ class D0_IncludeTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
+                '?include=jobs,posts,friends.name'
+            ],
+            'json api' => [
+                'json_api',
                 '?include=jobs,posts,friends.name'
             ]
         ];
