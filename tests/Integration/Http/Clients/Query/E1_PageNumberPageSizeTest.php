@@ -41,7 +41,7 @@ class E1_PageNumberPageSizeTest extends HttpClientsTestCase
                 'json_api',
                 '?page[number]=3&page[size]=25'
             ],
-            
+
             // Not supported
             'odata' => [
                 'odata',
