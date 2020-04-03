@@ -15,5 +15,10 @@ namespace Aedart\Http\Clients\Requests\Query\Grammars;
  */
 class ODataGrammar extends BaseGrammar
 {
-
+    /**
+     * Select key, prefix for selects
+     *
+     * @var string
+     */
+    protected string $selectKey = '$select';
 }
