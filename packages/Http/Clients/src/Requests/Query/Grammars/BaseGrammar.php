@@ -185,7 +185,7 @@ abstract class BaseGrammar implements
 
         $output = [];
         foreach ($expressions as $expression){
-            $output[] = $this->compileExpression($expression[self::EXPRESSION], $expressions[self::BINDINGS]);
+            $output[] = $this->compileExpression($expression[self::EXPRESSION], $expression[self::BINDINGS]);
         }
 
         return implode('&', $output);
