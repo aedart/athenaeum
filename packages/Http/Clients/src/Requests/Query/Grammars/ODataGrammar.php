@@ -32,6 +32,13 @@ class ODataGrammar extends BaseGrammar
     protected string $filterKey = '$filter';
 
     /**
+     * Include key, prefix for includes
+     *
+     * @var string
+     */
+    protected string $includeKey = '$expand';
+
+    /**
      * Operator map
      *
      * NOTE: Intended to contain only a comparison
@@ -64,6 +71,9 @@ class ODataGrammar extends BaseGrammar
     protected function compileWheres(array $wheres = []): string
     {
         $compiled = parent::compileWheres($wheres);
+        if(empty($compiled)){
+            return '';
+        }
 
         $compiled = str_replace('&', ' and ', $compiled);
 
