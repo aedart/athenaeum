@@ -78,6 +78,11 @@ return [
             'json_api' => [
                 'driver' => \Aedart\Http\Clients\Requests\Query\Grammars\JsonApiGrammar::class,
                 'options' => []
+            ],
+
+            'odata' => [
+                'driver' => \Aedart\Http\Clients\Requests\Query\Grammars\ODataGrammar::class,
+                'options' => []
             ]
         ]
     ]
