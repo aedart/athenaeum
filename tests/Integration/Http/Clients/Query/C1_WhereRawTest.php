@@ -2,6 +2,8 @@
 
 namespace Aedart\Tests\Integration\Http\Clients\Query;
 
+use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
+use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 
@@ -29,10 +31,16 @@ class C1_WhereRawTest extends HttpClientsTestCase
      */
     public function providesWhereRawData(): array
     {
+        $expected = '?user=john';
+
         return [
             'default' => [
                 'default',
-                '?user=john'
+                $expected
+            ],
+            'json api' => [
+                'json_api',
+                $expected
             ]
         ];
     }
@@ -44,10 +52,16 @@ class C1_WhereRawTest extends HttpClientsTestCase
      */
     public function providesInjectsBindingsData(): array
     {
+        $expected = '?filter=user eq 10';
+
         return [
             'default' => [
                 'default',
-                '?filter=user eq 10'
+                $expected
+            ],
+            'json api' => [
+                'json_api',
+                $expected
             ]
         ];
     }
@@ -63,6 +77,10 @@ class C1_WhereRawTest extends HttpClientsTestCase
             'default' => [
                 'default',
                 '?name[like]=john&filter=age gt 25'
+            ],
+            'json api' => [
+                'json_api',
+                '?filter[name][like]=john&filter=age gt 25'
             ]
         ];
     }
@@ -78,8 +96,8 @@ class C1_WhereRawTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
      */
     public function canAddWhereRawExpression(string $grammar, string $expected)
     {
@@ -100,8 +118,8 @@ class C1_WhereRawTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
      */
     public function injectsBindings(string $grammar, string $expected)
     {
@@ -122,8 +140,8 @@ class C1_WhereRawTest extends HttpClientsTestCase
      * @param string $grammar
      * @param string $expected
      *
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
-     * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
      */
     public function canCombineWhereWithRawWhere(string $grammar, string $expected)
     {
