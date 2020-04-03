@@ -39,7 +39,11 @@ class B0_SelectTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?fields[]=name'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$select=name'
+            ],
         ];
     }
 
@@ -58,7 +62,11 @@ class B0_SelectTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?fields[person]=name'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$select=person.name'
+            ],
         ];
     }
 
@@ -77,7 +85,11 @@ class B0_SelectTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?fields[]=name,age,jobTitle'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$select=name,age,jobTitle'
+            ],
         ];
     }
 
@@ -96,7 +108,11 @@ class B0_SelectTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?fields[person]=name,age&fields[position]=jobTitle'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$select=person.name,person.age,position.jobTitle'
+            ],
         ];
     }
 
