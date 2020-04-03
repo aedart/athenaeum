@@ -37,7 +37,11 @@ class F0_OrderByTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?sort=name'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$orderby=name asc'
+            ],
         ];
     }
 
@@ -56,7 +60,11 @@ class F0_OrderByTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?sort=-name'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$orderby=name desc'
+            ],
         ];
     }
 
@@ -75,7 +83,11 @@ class F0_OrderByTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?sort=name,-age'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$orderby=name asc,age desc'
+            ],
         ];
     }
 
@@ -94,7 +106,11 @@ class F0_OrderByTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?sort=-name,age,jobs'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$orderby=name desc,age asc,jobs asc'
+            ],
         ];
     }
 
