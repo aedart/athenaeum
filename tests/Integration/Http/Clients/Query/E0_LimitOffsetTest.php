@@ -39,7 +39,11 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?page[limit]=10'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$top=10'
+            ],
         ];
     }
 
@@ -58,7 +62,11 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?page[offset]=5'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$skip=5'
+            ],
         ];
     }
 
@@ -77,7 +85,11 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?page[limit]=50&page[offset]=2'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$top=50&$skip=2'
+            ],
         ];
     }
 
