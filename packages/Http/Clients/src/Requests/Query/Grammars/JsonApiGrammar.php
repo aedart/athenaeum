@@ -142,12 +142,10 @@ class JsonApiGrammar extends BaseGrammar
         $field = $criteria[self::FIELD];
         $direction = $criteria[self::DIRECTION];
 
-        if($direction === self::DESCENDING){
+        if ($direction === self::DESCENDING) {
             return "-{$field}";
         }
 
         return $field;
     }
-
-
 }
