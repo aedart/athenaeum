@@ -38,7 +38,11 @@ class D0_IncludeTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?include=jobs'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$expand=jobs'
+            ],
         ];
     }
 
@@ -57,7 +61,11 @@ class D0_IncludeTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?include=jobs,posts,friends.name'
-            ]
+            ],
+            'odata' => [
+                'odata',
+                '?$expand=jobs,posts,friends.name'
+            ],
         ];
     }
 
