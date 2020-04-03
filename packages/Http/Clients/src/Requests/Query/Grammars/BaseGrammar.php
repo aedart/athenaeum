@@ -179,12 +179,12 @@ abstract class BaseGrammar implements
      */
     protected function compileRawExpressions(array $expressions = []): string
     {
-        if(empty($expressions)){
+        if (empty($expressions)) {
             return '';
         }
 
         $output = [];
-        foreach ($expressions as $expression){
+        foreach ($expressions as $expression) {
             $output[] = $this->compileExpression($expression[self::EXPRESSION], $expression[self::BINDINGS]);
         }
 

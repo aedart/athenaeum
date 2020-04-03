@@ -92,7 +92,7 @@ class ODataGrammar extends BaseGrammar
     protected function compileWheres(array $wheres = []): string
     {
         $compiled = parent::compileWheres($wheres);
-        if(empty($compiled)){
+        if (empty($compiled)) {
             return '';
         }
 
@@ -111,7 +111,7 @@ class ODataGrammar extends BaseGrammar
         $value = $where[self::VALUE];
 
         // Compile the value, should it be an array
-        if(is_array($value)){
+        if (is_array($value)) {
             $value = '(' . $this->compileArray($value) . ')';
         } elseif (is_string($value)) {
             $value = $this->quote($value);
@@ -132,7 +132,7 @@ class ODataGrammar extends BaseGrammar
 
         // Convert operator, if possible
         $operator = trim($operator);
-        if(isset($this->operatorMap[$operator])){
+        if (isset($this->operatorMap[$operator])) {
             return $this->operatorMap[$operator];
         }
 
@@ -166,8 +166,8 @@ class ODataGrammar extends BaseGrammar
      */
     protected function compileArray(array $params): string
     {
-        array_walk($params, function($value){
-            if(is_string($value)){
+        array_walk($params, function ($value) {
+            if (is_string($value)) {
                 return $this->quote($value);
             }
 
