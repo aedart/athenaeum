@@ -51,6 +51,16 @@ interface Identifiers
     public const VALUE = '@:value:@';
 
     /**
+     * Raw expression identifier
+     */
+    public const RAW = '@:raw:@';
+
+    /**
+     * Expression identifier
+     */
+    public const EXPRESSION = '@:expression:@';
+
+    /**
      * Selects identifier
      */
     public const SELECTS = '@:selects:@';

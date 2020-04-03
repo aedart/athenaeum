@@ -247,6 +247,19 @@ interface Builder extends Identifiers,
     public function orderBy($field, string $direction = self::ASCENDING): self;
 
     /**
+     * Add a raw expression
+     *
+     * Raw expressions are NOT allowed to be processed, other than injecting
+     * binding values into the expression, by the {@see Grammar}.
+     *
+     * @param string $expression
+     * @param array $bindings [optional] Evt. values to be injected into the raw query string
+     *
+     * @return self
+     */
+    public function raw(string $expression, array $bindings = []): self;
+
+    /**
      * Build this http query
      *
      * Method MUST use {@see Grammar} provided by the {@see getGrammar}

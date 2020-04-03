@@ -86,6 +86,13 @@ class Builder implements
     protected array $orderBy = [];
 
     /**
+     * Raw expressions
+     *
+     * @var array
+     */
+    protected array $rawExpressions = [];
+
+    /**
      * Builder constructor.
      *
      * @param string|Grammar|null $grammar [optional] String profile name, {@see Grammar} instance or null.
@@ -234,6 +241,19 @@ class Builder implements
     }
 
     /**
+     * @inheritdoc
+     */
+    public function raw(string $expression, array $bindings = []): QueryBuilder
+    {
+        $this->rawExpressions[] = [
+            self::EXPRESSION => $expression,
+            self::BINDINGS => $bindings
+        ];
+
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toArray()
@@ -246,7 +266,8 @@ class Builder implements
             self::OFFSET => $this->offset,
             self::PAGE_NUMBER => $this->pageNumber,
             self::PAGE_SIZE => $this->pageSize,
-            self::ORDER_BY => $this->orderBy
+            self::ORDER_BY => $this->orderBy,
+            self::RAW => $this->rawExpressions
         ];
     }
 

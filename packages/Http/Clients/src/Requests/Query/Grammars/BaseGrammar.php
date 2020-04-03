@@ -165,8 +165,30 @@ abstract class BaseGrammar implements
             $this->compileOffset($parts[self::OFFSET]),
             $this->compilePageNumber($parts[self::PAGE_NUMBER]),
             $this->compilePageSize($parts[self::PAGE_SIZE]),
-            $this->compileOrderBy($parts[self::ORDER_BY])
+            $this->compileOrderBy($parts[self::ORDER_BY]),
+            $this->compileRawExpressions($parts[self::RAW]),
         ];
+    }
+
+    /**
+     * Compiles raw expressions
+     *
+     * @param array $expressions [optional]
+     *
+     * @return string Compiled expressions or empty string if none given
+     */
+    protected function compileRawExpressions(array $expressions = []): string
+    {
+        if(empty($expressions)){
+            return '';
+        }
+
+        $output = [];
+        foreach ($expressions as $expression){
+            $output[] = $this->compileExpression($expression[self::EXPRESSION], $expressions[self::BINDINGS]);
+        }
+
+        return implode('&', $output);
     }
 
     /**
