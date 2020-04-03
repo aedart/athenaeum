@@ -39,6 +39,20 @@ class ODataGrammar extends BaseGrammar
     protected string $includeKey = '$expand';
 
     /**
+     * Limit key, prefix
+     *
+     * @var string
+     */
+    protected string $limitKey = '$top';
+
+    /**
+     * Offset key, prefix
+     *
+     * @var string
+     */
+    protected string $offsetKey = '$skip';
+
+    /**
      * Operator map
      *
      * NOTE: Intended to contain only a comparison
