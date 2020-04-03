@@ -34,6 +34,7 @@ class A0_InstanceTest extends HttpClientsTestCase
         return [
             'default' => [ 'default' ],
             'json api' => [ 'json_api' ],
+            'odata' => [ 'odata' ],
         ];
     }
 
