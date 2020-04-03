@@ -63,6 +63,20 @@ abstract class BaseGrammar implements
     protected string $offsetKey = 'offset';
 
     /**
+     * Page number key, prefix
+     *
+     * @var string
+     */
+    protected string $pageNumberKey = 'page';
+
+    /**
+     * Page size, prefix
+     *
+     * @var string
+     */
+    protected string $pageSizeKey = 'show';
+
+    /**
      * Sorting key, prefix for "order by" criteria
      *
      * @var string
@@ -149,6 +163,8 @@ abstract class BaseGrammar implements
             $this->compileIncludes($parts[self::INCLUDES]),
             $this->compileLimit($parts[self::LIMIT]),
             $this->compileOffset($parts[self::OFFSET]),
+            $this->compilePageNumber($parts[self::PAGE_NUMBER]),
+            $this->compilePageSize($parts[self::PAGE_SIZE]),
             $this->compileOrderBy($parts[self::ORDER_BY])
         ];
     }
@@ -404,6 +420,38 @@ abstract class BaseGrammar implements
         }
 
         return $this->offsetKey . '=' . $offset;
+    }
+
+    /**
+     * Compiles page number, if any given
+     *
+     * @param int|null $number [optional]
+     *
+     * @return string Page number or empty string if page number given
+     */
+    protected function compilePageNumber(?int $number = null): string
+    {
+        if (empty($number)) {
+            return '';
+        }
+
+        return $this->pageNumberKey . '=' . $number;
+    }
+
+    /**
+     * Compiles page size, if any given
+     *
+     * @param int|null $amount [optional]
+     *
+     * @return string Page size or empty string if no amount given
+     */
+    protected function compilePageSize(?int $amount = null): string
+    {
+        if (empty($amount)) {
+            return '';
+        }
+
+        return $this->pageSizeKey . '=' . $amount;
     }
 
     /**

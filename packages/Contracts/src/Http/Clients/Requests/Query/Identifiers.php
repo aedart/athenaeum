@@ -101,6 +101,16 @@ interface Identifiers
     public const OFFSET = '@:offset:@';
 
     /**
+     * Page number identifier
+     */
+    public const PAGE_NUMBER = '@:page_number:@';
+
+    /**
+     * Page size identifier
+     */
+    public const PAGE_SIZE = '@:page_size:@';
+
+    /**
      * Sorting order criteria identifier
      */
     public const ORDER_BY = '@:order_by:@';

@@ -65,6 +65,20 @@ class Builder implements
     protected ?int $offset = null;
 
     /**
+     * Page number
+     *
+     * @var int|null
+     */
+    protected ?int $pageNumber = null;
+
+    /**
+     * Page size
+     *
+     * @var int|null
+     */
+    protected ?int $pageSize = null;
+
+    /**
      * Sorting order criteria
      *
      * @var array
@@ -188,6 +202,26 @@ class Builder implements
     }
 
     /**
+     * @inheritdoc
+     */
+    public function page(int $number, ?int $size = null): QueryBuilder
+    {
+        $this->pageNumber = $number;
+
+        return $this->show($size);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function show(?int $amount = null): QueryBuilder
+    {
+        $this->pageSize = $amount;
+
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function orderBy($field, string $direction = QueryBuilder::ASCENDING): QueryBuilder
@@ -210,6 +244,8 @@ class Builder implements
             self::INCLUDES => $this->includes,
             self::LIMIT => $this->limit,
             self::OFFSET => $this->offset,
+            self::PAGE_NUMBER => $this->pageNumber,
+            self::PAGE_SIZE => $this->pageSize,
             self::ORDER_BY => $this->orderBy
         ];
     }

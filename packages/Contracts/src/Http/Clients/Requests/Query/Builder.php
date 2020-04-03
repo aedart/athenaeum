@@ -146,6 +146,7 @@ interface Builder extends Identifiers,
     /**
      * Limit the amount of results to be returned
      *
+     * @see page Page-based pagination
      * @see https://jsonapi.org/format/1.1/#fetching-pagination
      * @see http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part2-url-conventions.html#sec_SystemQueryOptionstopandskip
      *
@@ -158,6 +159,7 @@ interface Builder extends Identifiers,
     /**
      * Skip over given amount of results
      *
+     * @see page Page-based pagination
      * @see https://jsonapi.org/format/1.1/#fetching-pagination
      * @see http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part2-url-conventions.html#sec_SystemQueryOptionstopandskip
      *
@@ -184,6 +186,36 @@ interface Builder extends Identifiers,
      * @return self
      */
     public function skip(int $offset): self;
+
+    /**
+     * Return result for requested page number
+     *
+     * Depending on {@see Grammar}, this method might be converted
+     * to limit / offset, if page-based pagination isn't supported.
+     *
+     * @see https://jsonapi.org/format/1.1/#fetching-pagination
+     *
+     * @param int $number Page number
+     * @param int|null $size [optional] Amount to show per page.
+     *                       Must use {@see show} to set page size, if given.
+     *
+     * @return self
+     */
+    public function page(int $number, ?int $size = null): self;
+
+    /**
+     * Set amount of results to be returned per page
+     *
+     * Depending on {@see Grammar}, this method might be converted
+     * to limit / offset, if page-based pagination isn't supported.
+     *
+     * @see https://jsonapi.org/format/1.1/#fetching-pagination
+     *
+     * @param int|null $amount [optional] Amount of results per page
+     *
+     * @return self
+     */
+    public function show(?int $amount = null): self;
 
     /**
      * Order results by given field or fields
