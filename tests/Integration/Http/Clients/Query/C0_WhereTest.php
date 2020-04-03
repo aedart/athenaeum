@@ -40,6 +40,10 @@ class C0_WhereTest extends HttpClientsTestCase
                 'json_api',
                 '?filter[name]=john'
             ],
+            'odata' => [
+                'odata',
+                '?$filter=name eq \'john\''
+            ],
         ];
     }
 
@@ -58,6 +62,10 @@ class C0_WhereTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?filter[year][gt]=2020'
+            ],
+            'odata' => [
+                'odata',
+                '?$filter=year gt 2020'
             ],
         ];
     }
@@ -78,6 +86,10 @@ class C0_WhereTest extends HttpClientsTestCase
                 'json_api',
                 '?filter[year][gt]=2020&filter[year][lt]=2051'
             ],
+            'odata' => [
+                'odata',
+                '?$filter=year gt 2020 and year lt 2051'
+            ],
         ];
     }
 
@@ -96,6 +108,10 @@ class C0_WhereTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?filter[year][gt]=2021&filter[year][lt]=2031&filter[name]=john'
+            ],
+            'odata' => [
+                'odata',
+                '?$filter=year gt 2021 and year lt 2031 and name eq \'john\''
             ],
         ];
     }
@@ -116,6 +132,13 @@ class C0_WhereTest extends HttpClientsTestCase
                 'json_api',
                 '?filter[users][0]=1&filter[users][1]=2&filter[users][2]=3&filter[users][3]=4'
             ],
+
+            // NOTE: This IS not a correct syntax, but difficult to guess what operator
+            // to use, when an field = array is provided!
+            'odata' => [
+                'odata',
+                '?$filter=users eq (1,2,3,4)'
+            ],
         ];
     }
 
@@ -134,6 +157,10 @@ class C0_WhereTest extends HttpClientsTestCase
             'json api' => [
                 'json_api',
                 '?filter[users][in][0]=1&filter[users][in][1]=2&filter[users][in][2]=3&filter[users][in][3]=4'
+            ],
+            'odata' => [
+                'odata',
+                '?$filter=users in (1,2,3,4)'
             ],
         ];
     }
