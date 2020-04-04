@@ -108,14 +108,7 @@ class ODataGrammar extends BaseGrammar
     {
         $field = $where[self::FIELD];
         $operator = $this->resolveOperator($where[self::OPERATOR], $field);
-        $value = $where[self::VALUE];
-
-        // Compile the value, should it be an array
-        if (is_array($value)) {
-            $value = '(' . $this->compileArray($value) . ')';
-        } elseif (is_string($value)) {
-            $value = $this->quote($value);
-        }
+        $value = $this->resolveValue($where[self::VALUE]);
 
         // Compile the filter...
         return "{$field} {$operator} {$value}";
@@ -138,6 +131,22 @@ class ODataGrammar extends BaseGrammar
 
         // Otherwise, we just return the given operator
         return $operator;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function resolveValue($value)
+    {
+        if (is_array($value)) {
+            return '(' . $this->compileArray($value) . ')';
+        }
+
+        if (is_string($value)) {
+            return $this->quote($value);
+        }
+
+        return parent::resolveValue($value);
     }
 
     /**

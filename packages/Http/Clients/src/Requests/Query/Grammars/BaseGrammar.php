@@ -327,7 +327,7 @@ abstract class BaseGrammar implements
     {
         $field = $where[self::FIELD];
         $operator = $this->resolveOperator($where[self::OPERATOR], $field);
-        $value = $where[self::VALUE];
+        $value = $this->resolveValue($where[self::VALUE]);
 
         // If provided value isn't an array, and the operator isn't the default
         // equals operator, simply compile field = value
@@ -563,6 +563,8 @@ abstract class BaseGrammar implements
     /**
      * Resolves the given operator
      *
+     * Method might alter the given operator, if required.
+     *
      * @param mixed $operator
      * @param string $field
      *
@@ -577,6 +579,26 @@ abstract class BaseGrammar implements
         }
 
         return trim($operator);
+    }
+
+    /**
+     * Resolves the given value
+     *
+     * Method might alter the given value, if required.
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     *
+     * @throws HttpQueryBuilderException
+     */
+    protected function resolveValue($value)
+    {
+        if(is_null($value)){
+            return 'null';
+        }
+
+        return $value;
     }
 
     /**
