@@ -602,6 +602,10 @@ abstract class BaseGrammar implements
             return ($value) ? 'true' : 'false';
         }
 
+        if(is_callable($value)){
+            return $value();
+        }
+
         return $value;
     }
 
