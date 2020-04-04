@@ -72,5 +72,4 @@ class C2_WhereNullTest extends HttpClientsTestCase
 
         $this->assertSame($expected, $result);
     }
-
 }

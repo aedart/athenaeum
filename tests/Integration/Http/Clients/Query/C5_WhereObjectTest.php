@@ -67,8 +67,7 @@ class C5_WhereObjectTest extends HttpClientsTestCase
      */
     public function canAddWhereObject(string $grammar, string $expected)
     {
-        $address = new class()
-        {
+        $address = new class() {
             public function __toString()
             {
                 return 'Somewhere Str. 41';

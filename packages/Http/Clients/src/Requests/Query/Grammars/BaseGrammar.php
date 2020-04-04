@@ -581,15 +581,15 @@ abstract class BaseGrammar implements
      */
     protected function resolveValue($value)
     {
-        if(is_null($value)){
+        if (is_null($value)) {
             return 'null';
         }
 
-        if(is_bool($value)){
-            return ($value) ? 'true' : 'false';
+        if (is_bool($value)) {
+            return $value ? 'true' : 'false';
         }
 
-        if(is_callable($value)){
+        if (is_callable($value)) {
             return $value();
         }
 

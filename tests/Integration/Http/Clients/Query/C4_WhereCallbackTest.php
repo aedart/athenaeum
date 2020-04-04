@@ -3,7 +3,6 @@
 
 namespace Aedart\Tests\Integration\Http\Clients\Query;
 
-
 use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
@@ -67,10 +66,10 @@ class C4_WhereCallbackTest extends HttpClientsTestCase
     {
         $result = $this
             ->query($grammar)
-            ->where('box_size', function(){
+            ->where('box_size', function () {
                 return 5 * 2;
             })
-            ->where('shirt_size', function(){
+            ->where('shirt_size', function () {
                 return 'large';
             })
             ->build();
