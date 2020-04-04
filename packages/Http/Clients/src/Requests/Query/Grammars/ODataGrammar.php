@@ -176,11 +176,7 @@ class ODataGrammar extends BaseGrammar
     protected function compileArray(array $params): string
     {
         array_walk($params, function ($value) {
-            if (is_string($value)) {
-                return $this->quote($value);
-            }
-
-            return $value;
+            return $this->resolveValue($value);
         });
 
         return implode(',', $params);
