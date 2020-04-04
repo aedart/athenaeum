@@ -332,7 +332,7 @@ abstract class BaseGrammar implements
         // If provided value isn't an array, and the operator isn't the default
         // equals operator, simply compile field = value
         if (!is_array($value) && $operator === self::EQUALS) {
-            return $this->compileFieldEqualsValue($field, $value);
+            return "{$field}={$value}";
         }
 
         // If operator isn't the default equals operator, then we add it to
@@ -510,19 +510,6 @@ abstract class BaseGrammar implements
         }
 
         return implode('&', $output);
-    }
-
-    /**
-     * Compiles field equals value
-     *
-     * @param string $field
-     * @param string|int|float|bool $value
-     *
-     * @return string
-     */
-    protected function compileFieldEqualsValue(string $field, $value): string
-    {
-        return "{$field}={$value}";
     }
 
     /**
