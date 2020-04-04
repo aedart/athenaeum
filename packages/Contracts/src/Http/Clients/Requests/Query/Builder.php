@@ -192,6 +192,7 @@ interface Builder extends Identifiers,
      *
      * Depending on {@see Grammar}, this method might be converted
      * to limit / offset, if page-based pagination isn't supported.
+     * Otherwise, it might be omitted.
      *
      * @see https://jsonapi.org/format/1.1/#fetching-pagination
      *
@@ -208,6 +209,7 @@ interface Builder extends Identifiers,
      *
      * Depending on {@see Grammar}, this method might be converted
      * to limit / offset, if page-based pagination isn't supported.
+     * Otherwise, it might be omitted.
      *
      * @see https://jsonapi.org/format/1.1/#fetching-pagination
      *
