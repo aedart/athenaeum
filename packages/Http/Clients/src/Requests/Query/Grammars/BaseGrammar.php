@@ -598,6 +598,10 @@ abstract class BaseGrammar implements
             return 'null';
         }
 
+        if(is_bool($value)){
+            return ($value) ? 'true' : 'false';
+        }
+
         return $value;
     }
 
