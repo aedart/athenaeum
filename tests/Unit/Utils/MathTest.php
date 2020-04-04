@@ -29,9 +29,9 @@ class MathTest extends UnitTestCase
 
         ConsoleDebugger::output($resultA, $resultB, $resultC);
 
-        $this->assertNotEmpty($resultA);
-        $this->assertNotEmpty($resultB);
-        $this->assertNotEmpty($resultC);
+        $this->assertGreaterThanOrEqual(0, $resultA);
+        $this->assertGreaterThanOrEqual(0, $resultB);
+        $this->assertGreaterThanOrEqual(0, $resultC);
     }
 
     /**
