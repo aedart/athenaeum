@@ -171,27 +171,6 @@ abstract class BaseGrammar implements
     }
 
     /**
-     * Compiles raw expressions
-     *
-     * @param array $expressions [optional]
-     *
-     * @return string Compiled expressions or empty string if none given
-     */
-    protected function compileRawExpressions(array $expressions = []): string
-    {
-        if (empty($expressions)) {
-            return '';
-        }
-
-        $output = [];
-        foreach ($expressions as $expression) {
-            $output[] = $this->compileExpression($expression[self::EXPRESSION], $expression[self::BINDINGS]);
-        }
-
-        return implode('&', $output);
-    }
-
-    /**
      * Compiles the various selects
      *
      * @param array $selects [optional]
@@ -510,6 +489,27 @@ abstract class BaseGrammar implements
         $direction = $criteria[self::DIRECTION];
 
         return "{$field} {$direction}";
+    }
+
+    /**
+     * Compiles raw expressions
+     *
+     * @param array $expressions [optional]
+     *
+     * @return string Compiled expressions or empty string if none given
+     */
+    protected function compileRawExpressions(array $expressions = []): string
+    {
+        if (empty($expressions)) {
+            return '';
+        }
+
+        $output = [];
+        foreach ($expressions as $expression) {
+            $output[] = $this->compileExpression($expression[self::EXPRESSION], $expression[self::BINDINGS]);
+        }
+
+        return implode('&', $output);
     }
 
     /**
