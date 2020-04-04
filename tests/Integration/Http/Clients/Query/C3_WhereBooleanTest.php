@@ -25,11 +25,11 @@ class C3_WhereBooleanTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * Provides data for where true test
+     * Provides data for where boolean test
      *
      * @return array
      */
-    public function providesWhereTrue()
+    public function providesWhereBoolean()
     {
         return [
             'default' => [
@@ -53,7 +53,7 @@ class C3_WhereBooleanTest extends HttpClientsTestCase
 
     /**
      * @test
-     * @dataProvider providesWhereTrue
+     * @dataProvider providesWhereBoolean
      *
      * @param string $grammar
      * @param string $expected
