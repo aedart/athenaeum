@@ -251,8 +251,10 @@ interface Builder extends Identifiers,
     /**
      * Add a raw expression
      *
-     * Raw expressions are NOT allowed to be processed, other than injecting
-     * binding values into the expression, by the {@see Grammar}.
+     * Unlike {@see selectRaw} or {@see whereRaw}, this method does NOT prefix,
+     * affix or in any way process the expression. The only exception to this,
+     * is that binding values MUST be injected into the expression, if any are
+     * given.
      *
      * @param string $expression
      * @param array $bindings [optional] Evt. values to be injected into the raw query string
