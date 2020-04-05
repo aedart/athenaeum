@@ -51,6 +51,11 @@ interface Identifiers
     public const TIME_FORMAT = 'time_format';
 
     /**
+     * Http query parameter separator identifier
+     */
+    public const PARAMETER_SEPARATOR = 'parameter_separator';
+
+    /**
      * Bindings identifier
      */
     public const BINDINGS = '@:bindings:@';

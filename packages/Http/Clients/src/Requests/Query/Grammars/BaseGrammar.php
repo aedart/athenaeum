@@ -44,7 +44,7 @@ abstract class BaseGrammar implements
      *
      * @var string
      */
-    protected string $parameterSeparator = '&';
+    protected string $defaultParameterSeparator = '&';
 
     /**
      * Select key, prefix for selects
@@ -156,7 +156,7 @@ abstract class BaseGrammar implements
             fn ($element) => !empty($element)
         );
 
-        return '?' . implode($this->parameterSeparator, $compiled);
+        return '?' . implode($this->resolveParameterSeparator(), $compiled);
     }
 
     /**
@@ -302,7 +302,7 @@ abstract class BaseGrammar implements
             $output[] = $this->compileWhere($where);
         }
 
-        return implode('&', $output);
+        return implode($this->resolveParameterSeparator(), $output);
     }
 
     /**
@@ -521,7 +521,7 @@ abstract class BaseGrammar implements
             $output[] = $this->compileExpression($expression[self::EXPRESSION], $expression[self::BINDINGS]);
         }
 
-        return implode('&', $output);
+        return implode($this->resolveParameterSeparator(), $output);
     }
 
     /**
@@ -690,5 +690,15 @@ abstract class BaseGrammar implements
             default:
                 return $this->options[$format] ?? DateTimeInterface::ISO8601;
         }
+    }
+
+    /**
+     * Resolves the http query parameter separator symbol
+     *
+     * @return string
+     */
+    protected function resolveParameterSeparator(): string
+    {
+        return $this->options[self::PARAMETER_SEPARATOR] ?? $this->defaultParameterSeparator;
     }
 }

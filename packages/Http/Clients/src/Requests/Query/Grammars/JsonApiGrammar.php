@@ -75,7 +75,7 @@ class JsonApiGrammar extends BaseGrammar
             $output[] = $this->compileSelect($select);
         }
 
-        return implode('&', $output);
+        return implode($this->resolveParameterSeparator(), $output);
     }
 
     /**
@@ -106,7 +106,7 @@ class JsonApiGrammar extends BaseGrammar
             $output[] = $this->compileFieldFromResource(implode(',', $fields), $type);
         }
 
-        return implode('&', $output);
+        return implode($this->resolveParameterSeparator(), $output);
     }
 
     /**

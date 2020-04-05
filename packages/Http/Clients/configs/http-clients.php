@@ -83,6 +83,13 @@ return [
                     'month_format' => 'm',
                     'day_format' => 'd',
                     'time_format' => 'H:i:s',
+
+                    /**
+                     * Query parameter separator symbol
+                     *
+                     * @see https://www.w3.org/TR/html401/appendix/notes.html#h-B.2.2
+                     */
+                    'parameter_separator' => '&',
                 ]
             ],
 
@@ -99,6 +106,13 @@ return [
                     'month_format' => 'm',
                     'day_format' => 'd',
                     'time_format' => 'H:i:s',
+
+                    /**
+                     * Query parameter separator symbol
+                     *
+                     * @see https://www.w3.org/TR/html401/appendix/notes.html#h-B.2.2
+                     */
+                    'parameter_separator' => '&',
                 ]
             ],
 
@@ -121,6 +135,13 @@ return [
                     'month_format' => 'm',
                     'day_format' => 'd',
                     'time_format' => 'H:i:s',
+
+                    /**
+                     * Query parameter separator symbol
+                     *
+                     * @see https://www.w3.org/TR/html401/appendix/notes.html#h-B.2.2
+                     */
+                    'parameter_separator' => '&',
                 ]
             ]
         ]

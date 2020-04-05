@@ -107,7 +107,7 @@ class ODataGrammar extends BaseGrammar
             return '';
         }
 
-        $compiled = str_replace('&', ' and ', $compiled);
+        $compiled = str_replace($this->resolveParameterSeparator(), ' and ', $compiled);
 
         return $this->filterKey . '=' . $compiled;
     }
