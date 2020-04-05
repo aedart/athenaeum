@@ -12,13 +12,13 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  *
  * @group http-clients
  * @group http-query
- * @group http-query-c1
+ * @group http-query-c2
  * @group http-query-grammars
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
-class C1_WhereRawTest extends HttpClientsTestCase
+class C2_WhereRawTest extends HttpClientsTestCase
 {
     /*****************************************************************
      * Data Providers
