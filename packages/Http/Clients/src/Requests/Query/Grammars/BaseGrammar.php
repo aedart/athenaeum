@@ -40,6 +40,13 @@ abstract class BaseGrammar implements
     protected ?Builder $query = null;
 
     /**
+     * The default parameter separator
+     *
+     * @var string
+     */
+    protected string $parameterSeparator = '&';
+
+    /**
      * Select key, prefix for selects
      *
      * @var string
@@ -149,7 +156,7 @@ abstract class BaseGrammar implements
             fn ($element) => !empty($element)
         );
 
-        return '?' . implode('&', $compiled);
+        return '?' . implode($this->parameterSeparator, $compiled);
     }
 
     /**
