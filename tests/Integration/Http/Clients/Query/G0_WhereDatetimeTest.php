@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Date;
  *
  * @group http-clients
  * @group http-query
- * @group http-query-c6
+ * @group http-query-g0
  * @group http-query-grammars
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
-class C6_WhereDatetimeTest extends HttpClientsTestCase
+class G0_WhereDatetimeTest extends HttpClientsTestCase
 {
 
     /*****************************************************************

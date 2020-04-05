@@ -8,17 +8,17 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 
 /**
- * C11_WhereTimeTest
+ * C7_WhereDateTest
  *
  * @group http-clients
  * @group http-query
- * @group http-query-c11
+ * @group http-query-g1
  * @group http-query-grammars
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
-class C11_WhereTimeTest extends HttpClientsTestCase
+class G1_WhereDateTest extends HttpClientsTestCase
 {
 
     /*****************************************************************
@@ -26,24 +26,26 @@ class C11_WhereTimeTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * Provides data for where time test
+     * Provides data for where date test
      *
      * @return array
      */
-    public function providesWhereTime()
+    public function providesWhereDate()
     {
+        $expected = now()->format('Y-m-d');
+
         return [
             'default' => [
                 'default',
-                '?created=16:58:00'
+                '?created=' . $expected
             ],
             'json api' => [
                 'json_api',
-                '?filter[created]=16:58:00'
+                '?filter[created]=' . $expected
             ],
             'odata' => [
                 'odata',
-                '?$filter=created eq 16:58:00'
+                '?$filter=created eq ' . $expected
             ],
         ];
     }
@@ -54,7 +56,7 @@ class C11_WhereTimeTest extends HttpClientsTestCase
 
     /**
      * @test
-     * @dataProvider providesWhereTime
+     * @dataProvider providesWhereDate
      *
      * @param string $grammar
      * @param string $expected
@@ -62,11 +64,11 @@ class C11_WhereTimeTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
-    public function canAddWhereTime(string $grammar, string $expected)
+    public function canAddWhereDate(string $grammar, string $expected)
     {
         $result = $this
             ->query($grammar)
-            ->whereTime('created', '2020-04-05 16:58')
+            ->whereDate('created', now())
             ->build();
 
         ConsoleDebugger::output($result);

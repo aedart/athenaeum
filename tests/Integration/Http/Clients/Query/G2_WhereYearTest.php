@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Aedart\Tests\Integration\Http\Clients\Query;
 
 use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
@@ -8,17 +9,17 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 
 /**
- * C7_WhereDateTest
+ * C8_WhereYearTest
  *
  * @group http-clients
  * @group http-query
- * @group http-query-c7
+ * @group http-query-g2
  * @group http-query-grammars
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
-class C7_WhereDateTest extends HttpClientsTestCase
+class G2_WhereYearTest extends HttpClientsTestCase
 {
 
     /*****************************************************************
@@ -26,13 +27,13 @@ class C7_WhereDateTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * Provides data for where date test
+     * Provides data for where year test
      *
      * @return array
      */
-    public function providesWhereDate()
+    public function providesWhereYear()
     {
-        $expected = now()->format('Y-m-d');
+        $expected = now()->format('Y');
 
         return [
             'default' => [
@@ -56,7 +57,7 @@ class C7_WhereDateTest extends HttpClientsTestCase
 
     /**
      * @test
-     * @dataProvider providesWhereDate
+     * @dataProvider providesWhereYear
      *
      * @param string $grammar
      * @param string $expected
@@ -64,11 +65,11 @@ class C7_WhereDateTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
-    public function canAddWhereDate(string $grammar, string $expected)
+    public function canAddWhereYear(string $grammar, string $expected)
     {
         $result = $this
             ->query($grammar)
-            ->whereDate('created', now())
+            ->whereYear('created', now())
             ->build();
 
         ConsoleDebugger::output($result);

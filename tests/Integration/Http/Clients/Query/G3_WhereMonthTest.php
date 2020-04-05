@@ -12,13 +12,13 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  *
  * @group http-clients
  * @group http-query
- * @group http-query-c9
+ * @group http-query-g3
  * @group http-query-grammars
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
-class C9_WhereMonthTest extends HttpClientsTestCase
+class G3_WhereMonthTest extends HttpClientsTestCase
 {
 
     /*****************************************************************

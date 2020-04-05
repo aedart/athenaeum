@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Aedart\Tests\Integration\Http\Clients\Query;
 
 use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
@@ -9,17 +8,17 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 
 /**
- * C8_WhereYearTest
+ * C11_WhereTimeTest
  *
  * @group http-clients
  * @group http-query
- * @group http-query-c8
+ * @group http-query-g5
  * @group http-query-grammars
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
-class C8_WhereYearTest extends HttpClientsTestCase
+class G5_WhereTimeTest extends HttpClientsTestCase
 {
 
     /*****************************************************************
@@ -27,26 +26,24 @@ class C8_WhereYearTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * Provides data for where year test
+     * Provides data for where time test
      *
      * @return array
      */
-    public function providesWhereYear()
+    public function providesWhereTime()
     {
-        $expected = now()->format('Y');
-
         return [
             'default' => [
                 'default',
-                '?created=' . $expected
+                '?created=16:58:00'
             ],
             'json api' => [
                 'json_api',
-                '?filter[created]=' . $expected
+                '?filter[created]=16:58:00'
             ],
             'odata' => [
                 'odata',
-                '?$filter=created eq ' . $expected
+                '?$filter=created eq 16:58:00'
             ],
         ];
     }
@@ -57,7 +54,7 @@ class C8_WhereYearTest extends HttpClientsTestCase
 
     /**
      * @test
-     * @dataProvider providesWhereYear
+     * @dataProvider providesWhereTime
      *
      * @param string $grammar
      * @param string $expected
@@ -65,11 +62,11 @@ class C8_WhereYearTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
-    public function canAddWhereYear(string $grammar, string $expected)
+    public function canAddWhereTime(string $grammar, string $expected)
     {
         $result = $this
             ->query($grammar)
-            ->whereYear('created', now())
+            ->whereTime('created', '2020-04-05 16:58')
             ->build();
 
         ConsoleDebugger::output($result);
