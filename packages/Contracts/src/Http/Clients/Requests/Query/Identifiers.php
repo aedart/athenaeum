@@ -21,6 +21,36 @@ interface Identifiers
     public const DESCENDING = 'desc';
 
     /**
+     * Datetime date-format identifier
+     */
+    public const DATETIME_FORMAT = 'datetime_format';
+
+    /**
+     * Date date-format identifier
+     */
+    public const DATE_FORMAT = 'date_format';
+
+    /**
+     * Year date-format identifier
+     */
+    public const YEAR_FORMAT = 'year_format';
+
+    /**
+     * Month date-format identifier
+     */
+    public const MONTH_FORMAT = 'month_format';
+
+    /**
+     * Day date-format identifier
+     */
+    public const DAY_FORMAT = 'day_format';
+
+    /**
+     * Time date-format identifier
+     */
+    public const TIME_FORMAT = 'time_format';
+
+    /**
      * Bindings identifier
      */
     public const BINDINGS = '@:bindings:@';

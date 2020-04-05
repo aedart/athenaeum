@@ -7,6 +7,11 @@ use Aedart\Contracts\Http\Clients\Requests\Query\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammar;
 use Aedart\Contracts\Http\Clients\Requests\Query\Identifiers;
 use Aedart\Http\Clients\Exceptions\UnableToBuildHttpQuery;
+use Aedart\Http\Clients\Requests\Query\Grammars\Dates\DateValue;
+use DateTime;
+use DateTimeInterface;
+use Exception;
+use Throwable;
 
 /**
  * Base Http Query Grammar
@@ -581,19 +586,27 @@ abstract class BaseGrammar implements
      */
     protected function resolveValue($value)
     {
-        if (is_null($value)) {
-            return 'null';
-        }
+        try {
+            if (is_null($value)) {
+                return 'null';
+            }
 
-        if (is_bool($value)) {
-            return $value ? 'true' : 'false';
-        }
+            if (is_bool($value)) {
+                return $value ? 'true' : 'false';
+            }
 
-        if (is_callable($value)) {
-            return $value();
-        }
+            if($value instanceof DateValue){
+                return $this->compileDate($value);
+            }
 
-        return $value;
+            if (is_callable($value)) {
+                return $value();
+            }
+
+            return $value;
+        } catch (Throwable $e) {
+            throw new UnableToBuildHttpQuery('Value cannot be resolved: ' . $e->getMessage(), $e->getCode(), $e);
+        }
     }
 
     /**
@@ -609,5 +622,66 @@ abstract class BaseGrammar implements
         // However, decode the output or we risk that the
         // Request Builder's driver might dual url-encode it.
         return urldecode(http_build_query($params));
+    }
+
+    /**
+     * Compile given date-value
+     *
+     * Method will format the given date according to the requested
+     * format.
+     *
+     * @param DateValue $value
+     * @return string
+     *
+     * @throws Exception
+     */
+    protected function compileDate(DateValue $value): string
+    {
+        // Resolve the date given. Note that a string date might
+        // have been provided. If this is the case, then we need
+        // to build a valid DateTime instance, so it can be formatted.
+        $date = $value->date() ?? new DateTime('now');
+        if(is_string($date)){
+            $date = new DateTime($date);
+        }
+
+        // Format the date according to the requested date format.
+        return $date->format(
+            $this->resolveDateFormat($value->format())
+        );
+    }
+
+    /**
+     * Returns a valid PHP date format, based on the requested
+     * format
+     *
+     * @see https://www.php.net/manual/en/function.date.php
+     *
+     * @param string $format Requested format
+     *
+     * @return string
+     */
+    protected function resolveDateFormat(string $format): string
+    {
+        switch ($format){
+            case self::DATE_FORMAT:
+                return $this->options[$format] ?? 'Y-m-d';
+
+            case self::YEAR_FORMAT:
+                return $this->options[$format] ?? 'Y';
+
+            case self::MONTH_FORMAT:
+                return $this->options[$format] ?? 'm';
+
+            case self::DAY_FORMAT:
+                return $this->options[$format] ?? 'd';
+
+            case self::TIME_FORMAT:
+                return $this->options[$format] ?? 'H:i:s';
+
+            case self::DATETIME_FORMAT:
+            default:
+                return $this->options[$format] ?? DateTimeInterface::ISO8601;
+        }
     }
 }

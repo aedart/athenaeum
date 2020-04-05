@@ -72,12 +72,34 @@ return [
 
             'default' => [
                 'driver' => \Aedart\Http\Clients\Requests\Query\Grammars\DefaultGrammar::class,
-                'options' => []
+                'options' => [
+
+                    /**
+                     * Date formats
+                     */
+                    'datetime_format' => \DateTimeInterface::ISO8601,
+                    'date_format' => 'Y-m-d',
+                    'year_format' => 'Y',
+                    'month_format' => 'm',
+                    'day_format' => 'd',
+                    'time_format' => 'H:i:s',
+                ]
             ],
 
             'json_api' => [
                 'driver' => \Aedart\Http\Clients\Requests\Query\Grammars\JsonApiGrammar::class,
-                'options' => []
+                'options' => [
+
+                    /**
+                     * Date formats
+                     */
+                    'datetime_format' => \DateTimeInterface::ISO8601,
+                    'date_format' => 'Y-m-d',
+                    'year_format' => 'Y',
+                    'month_format' => 'm',
+                    'day_format' => 'd',
+                    'time_format' => 'H:i:s',
+                ]
             ],
 
             'odata' => [
@@ -89,6 +111,16 @@ return [
                      * single-quotes
                      */
                     'quote_strings' => true,
+
+                    /**
+                     * Date formats
+                     */
+                    'datetime_format' => \DateTimeInterface::ISO8601,
+                    'date_format' => 'Y-m-d',
+                    'year_format' => 'Y',
+                    'month_format' => 'm',
+                    'day_format' => 'd',
+                    'time_format' => 'H:i:s',
                 ]
             ]
         ]

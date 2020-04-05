@@ -8,6 +8,7 @@ use Aedart\Contracts\Http\Clients\Requests\Query\Grammar;
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammars\GrammarManagerAware;
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammars\Manager;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
+use Aedart\Http\Clients\Requests\Query\Grammars\Dates\DateValue;
 use Aedart\Http\Clients\Traits\GrammarManagerTrait;
 use Aedart\Http\Clients\Traits\GrammarTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
@@ -139,12 +140,14 @@ class Builder implements
             return $this->addMultipleWhere($field);
         }
 
-        // Set value to be operator, in case that only two arguments
-        // have been provided
+        // Resolve arguments...
         if (func_num_args() === 2) {
             $value = $operator;
             $operator = self::EQUALS;
         }
+
+        // In case only a field is provided.
+        $operator = $operator ?? self::EQUALS;
 
         // Finally, add a regular where condition
         return $this->addRegularWhere($field, $operator, $value);
@@ -156,6 +159,114 @@ class Builder implements
     public function whereRaw(string $query, array $bindings = []): QueryBuilder
     {
         return $this->addRawWhere($query, $bindings);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function whereDatetime(string $field, $operator = null, $value = null): QueryBuilder
+    {
+        // Resolve arguments...
+        if (func_num_args() === 2) {
+            $value = $operator;
+            $operator = self::EQUALS;
+        }
+
+        // In case only a field is provided.
+        $operator = $operator ?? self::EQUALS;
+
+        // Add where date expression...
+        return $this->addWhereDateExpression(self::DATETIME_FORMAT, $field, $operator, $value);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function whereDate(string $field, $operator = null, $value = null): QueryBuilder
+    {
+        // Resolve arguments...
+        if (func_num_args() === 2) {
+            $value = $operator;
+            $operator = self::EQUALS;
+        }
+
+        // In case only a field is provided.
+        $operator = $operator ?? self::EQUALS;
+
+        // Add where date expression...
+        return $this->addWhereDateExpression(self::DATE_FORMAT, $field, $operator, $value);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function whereYear(string $field, $operator = null, $value = null): QueryBuilder
+    {
+        // Resolve arguments...
+        if (func_num_args() === 2) {
+            $value = $operator;
+            $operator = self::EQUALS;
+        }
+
+        // In case only a field is provided.
+        $operator = $operator ?? self::EQUALS;
+
+        // Add where date expression...
+        return $this->addWhereDateExpression(self::YEAR_FORMAT, $field, $operator, $value);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function whereMonth(string $field, $operator = null, $value = null): QueryBuilder
+    {
+        // Resolve arguments...
+        if (func_num_args() === 2) {
+            $value = $operator;
+            $operator = self::EQUALS;
+        }
+
+        // In case only a field is provided.
+        $operator = $operator ?? self::EQUALS;
+
+        // Add where date expression...
+        return $this->addWhereDateExpression(self::MONTH_FORMAT, $field, $operator, $value);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function whereDay(string $field, $operator = null, $value = null): QueryBuilder
+    {
+        // Resolve arguments...
+        if (func_num_args() === 2) {
+            $value = $operator;
+            $operator = self::EQUALS;
+        }
+
+        // In case only a field is provided.
+        $operator = $operator ?? self::EQUALS;
+
+        // Add where date expression...
+        return $this->addWhereDateExpression(self::DAY_FORMAT, $field, $operator, $value);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function whereTime(string $field, $operator = null, $value = null): QueryBuilder
+    {
+        // Resolve arguments...
+        if (func_num_args() === 2) {
+            $value = $operator;
+            $operator = self::EQUALS;
+        }
+
+        // In case only a field is provided.
+        $operator = $operator ?? self::EQUALS;
+
+        // Add where date expression...
+        return $this->addWhereDateExpression(self::TIME_FORMAT, $field, $operator, $value);
     }
 
     /**
@@ -453,6 +564,27 @@ class Builder implements
         $this->wheres[] = $where;
 
         return $this;
+    }
+
+    /**
+     * Add a where date expression
+     *
+     * @param string $format
+     * @param string $field
+     * @param null $operator [optional]
+     * @param null $value [optional]
+     *
+     * @return QueryBuilder
+     */
+    protected function addWhereDateExpression(
+        string $format,
+        string $field,
+        $operator = null,
+        $value = null
+    ): QueryBuilder {
+        $dateValue = new DateValue($value, $format);
+
+        return $this->where($field, $operator, $dateValue);
     }
 
     /**

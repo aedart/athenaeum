@@ -4,6 +4,7 @@ namespace Aedart\Contracts\Http\Clients\Requests\Query;
 
 use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammars\GrammarAware;
+use DateTimeInterface;
 use Illuminate\Contracts\Support\Arrayable;
 
 /**
@@ -120,6 +121,72 @@ interface Builder extends Identifiers,
      * @return self
      */
     public function whereRaw(string $query, array $bindings = []): self;
+
+    /**
+     * Add a "where datetime" condition or filter
+     *
+     * @param string $field Name of field or filter
+     * @param mixed $operator [optional] Operator or value
+     * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
+     *
+     * @return self
+     */
+    public function whereDatetime(string $field, $operator = null, $value = null): self;
+
+    /**
+     * Add a "where date" condition or filter
+     *
+     * @param string $field Name of field or filter
+     * @param mixed $operator [optional] Operator or value
+     * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
+     *
+     * @return self
+     */
+    public function whereDate(string $field, $operator = null, $value = null): self;
+
+    /**
+     * Add a "where year" condition or filter
+     *
+     * @param string $field Name of field or filter
+     * @param mixed $operator [optional] Operator or value
+     * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
+     *
+     * @return self
+     */
+    public function whereYear(string $field, $operator = null, $value = null): self;
+
+    /**
+     * Add a "where month" condition or filter
+     *
+     * @param string $field Name of field or filter
+     * @param mixed $operator [optional] Operator or value
+     * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
+     *
+     * @return self
+     */
+    public function whereMonth(string $field, $operator = null, $value = null): self;
+
+    /**
+     * Add a "where day" condition or filter
+     *
+     * @param string $field Name of field or filter
+     * @param mixed $operator [optional] Operator or value
+     * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
+     *
+     * @return self
+     */
+    public function whereDay(string $field, $operator = null, $value = null): self;
+
+    /**
+     * Add a "where time" condition or filter
+     *
+     * @param string $field Name of field or filter
+     * @param mixed $operator [optional] Operator or value
+     * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
+     *
+     * @return self
+     */
+    public function whereTime(string $field, $operator = null, $value = null): self;
 
     /**
      * Include one or more related resources in the response
