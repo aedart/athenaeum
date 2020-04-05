@@ -82,7 +82,14 @@ return [
 
             'odata' => [
                 'driver' => \Aedart\Http\Clients\Requests\Query\Grammars\ODataGrammar::class,
-                'options' => []
+                'options' => [
+
+                    /**
+                     * If true, string values are automatically quoted with
+                     * single-quotes
+                     */
+                    'quote_strings' => false,
+                ]
             ]
         ]
     ]

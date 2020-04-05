@@ -82,6 +82,17 @@ class ODataGrammar extends BaseGrammar
         '!' => 'not'
     ];
 
+    /**
+     * Determine if string values should be quoted with
+     * single quotes
+     *
+     * @return bool
+     */
+    public function mustQuoteStringValues(): bool
+    {
+        return $this->options['quote_strings'] ?? false;
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -142,7 +153,7 @@ class ODataGrammar extends BaseGrammar
             return '(' . $this->compileArray($value) . ')';
         }
 
-        if (is_string($value)) {
+        if (is_string($value) && $this->mustQuoteStringValues()) {
             return $this->quote($value);
         }
 
