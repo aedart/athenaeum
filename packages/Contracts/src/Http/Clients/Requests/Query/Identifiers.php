@@ -126,6 +126,21 @@ interface Identifiers
     public const WHERE_TYPE_RAW = '@:where_raw:@';
 
     /**
+     * Conjunction identifier
+     */
+    public const CONJUNCTION = '@:conjunction:@';
+
+    /**
+     * "And" conjunction identifier
+     */
+    public const AND_CONJUNCTION = '@:and:@';
+
+    /**
+     * "Or" conjunction identifier
+     */
+    public const OR_CONJUNCTION = '@:or:@';
+
+    /**
      * Operator identifier
      */
     public const OPERATOR = '@:operator:@';
