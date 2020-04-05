@@ -127,11 +127,25 @@ class JsonApiGrammar extends BaseGrammar
         $prefix = $this->filterKey;
         $field = $where[self::FIELD];
 
-        return parent::compileRegularWhere([
-            self::FIELD => "{$prefix}[{$field}]",
-            self::OPERATOR => $where[self::OPERATOR],
-            self::VALUE => $where[self::VALUE]
-        ]);
+        // Resolve condition conjunction
+        $conjunction = $where[self::CONJUNCTION];
+        $andSymbol = $this->resolveConjunction(self::AND_CONJUNCTION);
+        $orSymbol = $this->resolveConjunction(self::OR_CONJUNCTION);
+
+        if ($conjunction === self::AND_CONJUNCTION){
+            $field = "{$andSymbol}{$prefix}[{$field}]";
+        } elseif ($conjunction === self::OR_CONJUNCTION) {
+            $field = "{$andSymbol}{$prefix}[{$orSymbol}{$field}]";
+        } else {
+            $field = "{$prefix}[{$field}]";
+        }
+
+        // Overwrite the field and remove conjunction, so that the parent
+        // is able to compile am output without additional conjunctions.
+        $where[self::FIELD] = $field;
+        $where[self::CONJUNCTION] = '';
+
+        return parent::compileRegularWhere($where);
     }
 
     /**

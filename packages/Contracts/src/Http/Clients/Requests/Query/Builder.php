@@ -105,6 +105,21 @@ interface Builder extends Identifiers,
     public function where($field, $operator = null, $value = null): self;
 
     /**
+     * Add a "or where" condition or filter
+     *
+     * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
+     *
+     * @param string|array $field Name of field or filter. If an array is given, then every entry is treated as a where
+     *                            condition.
+     * @param mixed $operator [optional] Operator or value
+     * @param mixed $value [optional] Value. If omitted, then second argument is considered
+     *                      to act as the value.
+     *
+     * @return self
+     */
+    public function orWhere($field, $operator = null, $value = null): self;
+
+    /**
      * Add a raw "where" condition or filter
      *
      * Examples:

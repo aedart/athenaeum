@@ -154,6 +154,30 @@ class Builder implements
     }
 
     /**
+     * @inheritdoc
+     */
+    public function orWhere($field, $operator = null, $value = null): QueryBuilder
+    {
+        // When field is an array, we assume that multiple where conditions is
+        // desired added
+        if (is_array($field)) {
+            return $this->addMultipleWhere($field, self::OR_CONJUNCTION);
+        }
+
+        // Resolve arguments...
+        if (func_num_args() === 2) {
+            $value = $operator;
+            $operator = self::EQUALS;
+        }
+
+        // In case only a field is provided.
+        $operator = $operator ?? self::EQUALS;
+
+        // Finally, add a regular where condition
+        return $this->addRegularWhere($field, $operator, $value, self::OR_CONJUNCTION);
+    }
+
+    /**
      * @inheritDoc
      */
     public function whereRaw(string $query, array $bindings = []): QueryBuilder
@@ -468,23 +492,24 @@ class Builder implements
      * Add multiple "where" conditions
      *
      * @param array $conditions [optional]
+     * @param string $conjunction [optional]
      *
      * @return QueryBuilder
      */
-    protected function addMultipleWhere(array $conditions = []): QueryBuilder
+    protected function addMultipleWhere(array $conditions = [], string $conjunction = self::AND_CONJUNCTION): QueryBuilder
     {
         foreach ($conditions as $field => $value) {
             // Determine if one or more operators has been given
             // via the value of the field. If so, then we consider these
             // to be multiple where conditions, with an operator.
             if (is_array($value) && Arr::isAssoc($value)) {
-                $this->addMultipleWhereForField($field, $value);
+                $this->addMultipleWhereForField($field, $value, $conjunction);
                 continue;
             }
 
             // Otherwise, we assume that an equals operator is intended
             // and add it as a regular "where" condition
-            $this->addRegularWhere($field, self::EQUALS, $value);
+            $this->addRegularWhere($field, self::EQUALS, $value, $conjunction);
         }
 
         return $this;
@@ -495,13 +520,17 @@ class Builder implements
      *
      * @param string $field
      * @param array $operatorsAndValues Key-value pair, where key = operator
+     * @param string $conjunction [optional]
      *
      * @return QueryBuilder
      */
-    protected function addMultipleWhereForField(string $field, array $operatorsAndValues): QueryBuilder
-    {
+    protected function addMultipleWhereForField(
+        string $field,
+        array $operatorsAndValues,
+        string $conjunction = self::AND_CONJUNCTION
+    ): QueryBuilder {
         foreach ($operatorsAndValues as $operator => $value) {
-            $this->addRegularWhere($field, $operator, $value);
+            $this->addRegularWhere($field, $operator, $value, $conjunction);
         }
 
         return $this;
@@ -513,16 +542,22 @@ class Builder implements
      * @param string $field
      * @param string $operator [optional]
      * @param mixed $value [optional]
+     * @param string $conjunction [optional]
      *
      * @return QueryBuilder
      */
-    protected function addRegularWhere(string $field, string $operator = '=', $value = null): QueryBuilder
+    protected function addRegularWhere(
+        string $field,
+        string $operator = self::EQUALS,
+        $value = null,
+        string $conjunction = self::AND_CONJUNCTION
+    ): QueryBuilder
     {
         return $this->appendWhereCondition([
             self::FIELD => $field,
             self::OPERATOR => $operator,
             self::VALUE => $value
-        ], []);
+        ], [], self::WHERE_TYPE_REGULAR, $conjunction);
     }
 
     /**
@@ -530,16 +565,20 @@ class Builder implements
      *
      * @param string $expression
      * @param array $bindings [optional]
+     * @param string $conjunction [optional]
      *
      * @return QueryBuilder
      */
-    protected function addRawWhere(string $expression, array $bindings = []): QueryBuilder
-    {
+    protected function addRawWhere(
+        string $expression,
+        array $bindings = [],
+        string $conjunction = self::AND_CONJUNCTION
+    ): QueryBuilder {
         return $this->appendWhereCondition([
             self::FIELD => $expression,
             self::OPERATOR => null,
-            self::VALUE => null
-        ], $bindings, self::WHERE_TYPE_RAW);
+            self::VALUE => null,
+        ], $bindings, self::WHERE_TYPE_RAW, $conjunction);
     }
 
     /**
@@ -548,17 +587,20 @@ class Builder implements
      * @param array $where
      * @param array $bindings [optional]
      * @param string $type [optional]
+     * @param string $conjunction [optional]
      *
      * @return QueryBuilder
      */
     protected function appendWhereCondition(
         array $where,
         array $bindings = [],
-        string $type = self::WHERE_TYPE_REGULAR
+        string $type = self::WHERE_TYPE_REGULAR,
+        string $conjunction = self::AND_CONJUNCTION
     ): QueryBuilder {
         // Add bindings, type, ...etc to where condition
         $where[self::BINDINGS] = $bindings;
         $where[self::TYPE] = $type;
+        $where[self::CONJUNCTION] = $conjunction;
 
         // Finally, add the where condition to list of conditions
         $this->wheres[] = $where;
@@ -571,8 +613,9 @@ class Builder implements
      *
      * @param string $format
      * @param string $field
-     * @param null $operator [optional]
-     * @param null $value [optional]
+     * @param mixed $operator [optional]
+     * @param mixed $value [optional]
+     * @param string $conjunction [optional]
      *
      * @return QueryBuilder
      */
@@ -580,7 +623,8 @@ class Builder implements
         string $format,
         string $field,
         $operator = null,
-        $value = null
+        $value = null,
+        string $conjunction = self::AND_CONJUNCTION
     ): QueryBuilder {
         $dateValue = new DateValue($value, $format);
 

@@ -56,6 +56,16 @@ interface Identifiers
     public const PARAMETER_SEPARATOR = 'parameter_separator';
 
     /**
+     * "And where" conjunction separator identifier
+     */
+    public const AND_SEPARATOR = 'and_separator';
+
+    /**
+     * "Or where" conjunction separator identifier
+     */
+    public const OR_SEPARATOR = 'or_separator';
+
+    /**
      * Bindings identifier
      */
     public const BINDINGS = '@:bindings:@';
