@@ -602,7 +602,7 @@ abstract class BaseGrammar implements
                 return $value ? 'true' : 'false';
             }
 
-            if($value instanceof DateValue){
+            if ($value instanceof DateValue) {
                 return $this->compileDate($value);
             }
 
@@ -648,7 +648,7 @@ abstract class BaseGrammar implements
         // have been provided. If this is the case, then we need
         // to build a valid DateTime instance, so it can be formatted.
         $date = $value->date() ?? new DateTime('now');
-        if(is_string($date)){
+        if (is_string($date)) {
             $date = new DateTime($date);
         }
 
@@ -670,7 +670,7 @@ abstract class BaseGrammar implements
      */
     protected function resolveDateFormat(string $format): string
     {
-        switch ($format){
+        switch ($format) {
             case self::DATE_FORMAT:
                 return $this->options[$format] ?? 'Y-m-d';
 

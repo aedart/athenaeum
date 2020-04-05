@@ -20,7 +20,6 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  */
 class G1_WhereDateTest extends HttpClientsTestCase
 {
-
     /*****************************************************************
      * Data Providers
      ****************************************************************/

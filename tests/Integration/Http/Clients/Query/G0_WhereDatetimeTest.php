@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Date;
  */
 class G0_WhereDatetimeTest extends HttpClientsTestCase
 {
-
     /*****************************************************************
      * Data Providers
      ****************************************************************/

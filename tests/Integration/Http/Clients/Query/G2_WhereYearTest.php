@@ -21,7 +21,6 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  */
 class G2_WhereYearTest extends HttpClientsTestCase
 {
-
     /*****************************************************************
      * Data Providers
      ****************************************************************/
