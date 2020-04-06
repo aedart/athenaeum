@@ -56,6 +56,16 @@ interface Identifiers
     public const PARAMETER_SEPARATOR = 'parameter_separator';
 
     /**
+     * "And where" conjunction separator identifier
+     */
+    public const AND_SEPARATOR = 'and_separator';
+
+    /**
+     * "Or where" conjunction separator identifier
+     */
+    public const OR_SEPARATOR = 'or_separator';
+
+    /**
      * Bindings identifier
      */
     public const BINDINGS = '@:bindings:@';
@@ -124,6 +134,21 @@ interface Identifiers
      * Raw where type identifier
      */
     public const WHERE_TYPE_RAW = '@:where_raw:@';
+
+    /**
+     * Conjunction identifier
+     */
+    public const CONJUNCTION = '@:conjunction:@';
+
+    /**
+     * "And" conjunction identifier
+     */
+    public const AND_CONJUNCTION = '@:and:@';
+
+    /**
+     * "Or" conjunction identifier
+     */
+    public const OR_CONJUNCTION = '@:or:@';
 
     /**
      * Operator identifier

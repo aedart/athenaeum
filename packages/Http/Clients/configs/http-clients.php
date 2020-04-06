@@ -90,6 +90,23 @@ return [
                      * @see https://www.w3.org/TR/html401/appendix/notes.html#h-B.2.2
                      */
                     'parameter_separator' => '&',
+
+                    /**
+                     * "And where" conjunction separator.
+                     *
+                     * This SHOULD use same symbol as the query
+                     * parameter separator.
+                     */
+                    'and_separator' => '&',
+
+                    /**
+                     * "or where" conjunction separator.
+                     *
+                     * WARNING: This is NOT a standard convention.
+                     * Symbol is added after the "and separator".
+                     * E.q. "?gender=male&|name=john" (where gender eq male or name eq john)
+                     */
+                    'or_separator' => '|',
                 ]
             ],
 
@@ -113,6 +130,23 @@ return [
                      * @see https://www.w3.org/TR/html401/appendix/notes.html#h-B.2.2
                      */
                     'parameter_separator' => '&',
+
+                    /**
+                     * "And where" conjunction separator.
+                     *
+                     * This SHOULD use same symbol as the query
+                     * parameter separator.
+                     */
+                    'and_separator' => '&',
+
+                    /**
+                     * "or where" conjunction separator.
+                     *
+                     * WARNING: This is NOT a standard convention.
+                     * Symbol is added BEFORE a field / filter identifier.
+                     * E.g. "?filter[gender]=male&filter[|name]=john" (where gender eq male or name eq john)
+                     */
+                    'or_separator' => '|',
                 ]
             ],
 

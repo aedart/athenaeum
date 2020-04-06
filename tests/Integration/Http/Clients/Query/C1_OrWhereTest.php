@@ -8,64 +8,64 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 
 /**
- * C11_WhereTimeTest
+ * C6_OrWhereTest
  *
  * @group http-clients
  * @group http-query
- * @group http-query-g5
+ * @group http-query-c1
  * @group http-query-grammars
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
-class G5_WhereTimeTest extends HttpClientsTestCase
+class C1_OrWhereTest extends HttpClientsTestCase
 {
     /*****************************************************************
      * Data Providers
      ****************************************************************/
 
     /**
-     * Provides data for where time test
+     * Provides data for or-where test
      *
      * @return array
      */
-    public function providesWhereTime()
+    public function providesOrWhere()
     {
         return [
             'default' => [
                 'default',
-                '?created=16:58:00'
+                '?name=john&|gender=male'
             ],
             'json api' => [
                 'json_api',
-                '?filter[created]=16:58:00'
+                '?filter[name]=john&filter[|gender]=male'
             ],
             'odata' => [
                 'odata',
-                '?$filter=created eq 16:58:00'
+                '?$filter=name eq \'john\' or gender eq \'male\''
             ],
         ];
     }
 
     /**
-     * Provides data for or where time test
+     * Provides data for multiple conditions via array test
      *
      * @return array
      */
-    public function providesOrWhereTime()
+    public function providesMultipleConditionsViaArray(): array
     {
         return [
             'default' => [
                 'default',
-                '?created=16:58:00&|created=18:58:00'
+                '?year[gt]=2021&|year[lt]=2031&|name=john'
             ],
             'json api' => [
                 'json_api',
-                '?filter[created]=16:58:00&filter[|created]=18:58:00'
+                '?filter[year][gt]=2021&filter[|year][lt]=2031&filter[|name]=john'
             ],
             'odata' => [
                 'odata',
-                '?$filter=created eq 16:58:00 or created eq 18:58:00'
+                '?$filter=year gt 2021 or year lt 2031 or name eq \'john\''
             ],
         ];
     }
@@ -76,7 +76,7 @@ class G5_WhereTimeTest extends HttpClientsTestCase
 
     /**
      * @test
-     * @dataProvider providesWhereTime
+     * @dataProvider providesOrWhere
      *
      * @param string $grammar
      * @param string $expected
@@ -84,11 +84,12 @@ class G5_WhereTimeTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
-    public function canAddWhereTime(string $grammar, string $expected)
+    public function canAddOrWhere(string $grammar, string $expected)
     {
         $result = $this
             ->query($grammar)
-            ->whereTime('created', '2020-04-05 16:58')
+            ->where('name', 'john')
+            ->orWhere('gender', 'male')
             ->build();
 
         ConsoleDebugger::output($result);
@@ -98,20 +99,25 @@ class G5_WhereTimeTest extends HttpClientsTestCase
 
     /**
      * @test
-     * @dataProvider providesOrWhereTime
+     * @dataProvider providesMultipleConditionsViaArray
      *
      * @param string $grammar
      * @param string $expected
      *
-     * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
+     * @throws ProfileNotFoundException
      */
-    public function canAddOrWhereTime(string $grammar, string $expected)
+    public function canAddMultipleConditionsViaArray(string $grammar, string $expected)
     {
         $result = $this
             ->query($grammar)
-            ->whereTime('created', '2020-04-05 16:58')
-            ->orWhereTime('created', '2020-04-07 18:58')
+            ->orWhere([
+                'year' => [
+                    'gt' => 2021,
+                    'lt' => 2031
+                ],
+                'name' => 'john'
+            ])
             ->build();
 
         ConsoleDebugger::output($result);

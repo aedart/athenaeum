@@ -90,6 +90,9 @@ return [
                      * @see https://www.w3.org/TR/html401/appendix/notes.html#h-B.2.2
                      */
                     'parameter_separator' => '&',
+
+                    'and_separator' => '&',
+                    'or_separator' => '&|',
                 ]
             ],
 
@@ -113,6 +116,9 @@ return [
                      * @see https://www.w3.org/TR/html401/appendix/notes.html#h-B.2.2
                      */
                     'parameter_separator' => '&',
+
+                    'and_separator' => '&',
+                    'or_separator' => '|',
                 ]
             ],
 

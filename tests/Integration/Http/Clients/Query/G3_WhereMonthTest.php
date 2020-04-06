@@ -49,6 +49,32 @@ class G3_WhereMonthTest extends HttpClientsTestCase
         ];
     }
 
+    /**
+     * Provides data for or where month test
+     *
+     * @return array
+     */
+    public function providesOrWhereMonth()
+    {
+        $expectedA = now()->format('m');
+        $expectedB = now()->addMonths(2)->format('m');
+
+        return [
+            'default' => [
+                'default',
+                '?created=' . $expectedA . '&|created=' . $expectedB
+            ],
+            'json api' => [
+                'json_api',
+                '?filter[created]=' . $expectedA . '&filter[|created]=' . $expectedB
+            ],
+            'odata' => [
+                'odata',
+                '?$filter=created eq ' . $expectedA . ' or created eq ' . $expectedB
+            ],
+        ];
+    }
+
     /*****************************************************************
      * Actual Tests
      ****************************************************************/
@@ -68,6 +94,29 @@ class G3_WhereMonthTest extends HttpClientsTestCase
         $result = $this
             ->query($grammar)
             ->whereMonth('created', now())
+            ->build();
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider providesOrWhereMonth
+     *
+     * @param string $grammar
+     * @param string $expected
+     *
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     */
+    public function canAddOrWhereMonth(string $grammar, string $expected)
+    {
+        $result = $this
+            ->query($grammar)
+            ->whereMonth('created', now())
+            ->orWhereMonth('created', now()->addMonths(2))
             ->build();
 
         ConsoleDebugger::output($result);

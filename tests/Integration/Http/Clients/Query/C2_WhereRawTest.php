@@ -12,13 +12,13 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  *
  * @group http-clients
  * @group http-query
- * @group http-query-c1
+ * @group http-query-c2
  * @group http-query-grammars
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
-class C1_WhereRawTest extends HttpClientsTestCase
+class C2_WhereRawTest extends HttpClientsTestCase
 {
     /*****************************************************************
      * Data Providers
@@ -48,6 +48,32 @@ class C1_WhereRawTest extends HttpClientsTestCase
             'odata' => [
                 'odata',
                 '?$filter=user=john'
+            ],
+        ];
+    }
+
+    /**
+     * Provides or where raw test data
+     *
+     * @return array
+     */
+    public function providesOrWhereRawData(): array
+    {
+        return [
+            'default' => [
+                'default',
+                '?user=john&|gender=male'
+            ],
+            'json api' => [
+                'json_api',
+                '?user=john&gender=male'
+            ],
+
+            // NOTE: Here too the syntax is wrong, but have to allow it, e.g. in order
+            // to allow advanced filters via OData.
+            'odata' => [
+                'odata',
+                '?$filter=user=john or gender=male'
             ],
         ];
     }
@@ -125,6 +151,29 @@ class C1_WhereRawTest extends HttpClientsTestCase
         $result = $this
             ->query($grammar)
             ->whereRaw('user=john')
+            ->build();
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider providesOrWhereRawData
+     *
+     * @param string $grammar
+     * @param string $expected
+     *
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     */
+    public function canAddOrWhereRawExpression(string $grammar, string $expected)
+    {
+        $result = $this
+            ->query($grammar)
+            ->whereRaw('user=john')
+            ->orWhereRaw('gender=male')
             ->build();
 
         ConsoleDebugger::output($result);

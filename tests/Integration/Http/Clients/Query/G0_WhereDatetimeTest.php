@@ -85,6 +85,29 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
         ];
     }
 
+    /**
+     * Provides data for or where datetime test
+     *
+     * @return array
+     */
+    public function providesOrWhereDatetime()
+    {
+        return [
+            'default' => [
+                'default',
+                '?created=2020-04-05T00:00:00+0000&|created=2020-04-06T00:00:00+0000'
+            ],
+            'json api' => [
+                'json_api',
+                '?filter[created]=2020-04-05T00:00:00+0000&filter[|created]=2020-04-06T00:00:00+0000'
+            ],
+            'odata' => [
+                'odata',
+                '?$filter=created eq 2020-04-05T00:00:00+0000 or created eq 2020-04-06T00:00:00+0000'
+            ],
+        ];
+    }
+
     /*****************************************************************
      * Actual Tests
      ****************************************************************/
@@ -157,5 +180,28 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
         $expected = now()->format('Y-m-d');
 
         $this->assertStringContainsString($expected, $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider providesOrWhereDatetime
+     *
+     * @param string $grammar
+     * @param string $expected
+     *
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     */
+    public function canAddOrWhereDatetime(string $grammar, string $expected)
+    {
+        $result = $this
+            ->query($grammar)
+            ->whereDatetime('created', '2020-04-05')
+            ->orWhereDatetime('created', '2020-04-06')
+            ->build();
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame($expected, $result);
     }
 }

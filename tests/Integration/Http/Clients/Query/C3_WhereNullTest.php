@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Aedart\Tests\Integration\Http\Clients\Query;
 
 use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
@@ -9,41 +8,41 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 
 /**
- * C4_WhereCallbackTest
+ * C2_WhereNullTest
  *
  * @group http-clients
  * @group http-query
- * @group http-query-c4
+ * @group http-query-c3
  * @group http-query-grammars
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
-class C4_WhereCallbackTest extends HttpClientsTestCase
+class C3_WhereNullTest extends HttpClientsTestCase
 {
     /*****************************************************************
      * Data Providers
      ****************************************************************/
 
     /**
-     * Provides data for where callback test
+     * Provides data for where null test
      *
      * @return array
      */
-    public function providesWhereCallback()
+    public function providesWhereNull()
     {
         return [
             'default' => [
                 'default',
-                '?box_size=10&shirt_size=large'
+                '?name=null'
             ],
             'json api' => [
                 'json_api',
-                '?filter[box_size]=10&filter[shirt_size]=large'
+                '?filter[name]=null'
             ],
             'odata' => [
                 'odata',
-                '?$filter=box_size eq 10 and shirt_size eq large'
+                '?$filter=name eq null'
             ],
         ];
     }
@@ -54,7 +53,7 @@ class C4_WhereCallbackTest extends HttpClientsTestCase
 
     /**
      * @test
-     * @dataProvider providesWhereCallback
+     * @dataProvider providesWhereNull
      *
      * @param string $grammar
      * @param string $expected
@@ -62,16 +61,11 @@ class C4_WhereCallbackTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
-    public function canAddWhereCallback(string $grammar, string $expected)
+    public function canAddWhereNull(string $grammar, string $expected)
     {
         $result = $this
             ->query($grammar)
-            ->where('box_size', function () {
-                return 5 * 2;
-            })
-            ->where('shirt_size', function () {
-                return 'large';
-            })
+            ->where('name', null)
             ->build();
 
         ConsoleDebugger::output($result);

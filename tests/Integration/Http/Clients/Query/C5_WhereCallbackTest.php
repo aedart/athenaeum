@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Aedart\Tests\Integration\Http\Clients\Query;
 
 use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
@@ -8,7 +9,7 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 
 /**
- * C5_WhereObjectTest
+ * C4_WhereCallbackTest
  *
  * @group http-clients
  * @group http-query
@@ -18,35 +19,31 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
-class C5_WhereObjectTest extends HttpClientsTestCase
+class C5_WhereCallbackTest extends HttpClientsTestCase
 {
     /*****************************************************************
      * Data Providers
      ****************************************************************/
 
     /**
-     * Provides data for where object test
+     * Provides data for where callback test
      *
      * @return array
      */
-    public function providesWhereObject()
+    public function providesWhereCallback()
     {
         return [
             'default' => [
                 'default',
-                '?address=Somewhere Str. 41'
+                '?box_size=10&shirt_size=large'
             ],
             'json api' => [
                 'json_api',
-                '?filter[address]=Somewhere Str. 41'
+                '?filter[box_size]=10&filter[shirt_size]=large'
             ],
-
-            // Note: Here the syntax is not right, yet this matters not for
-            // this test, where we just want to see that objects are cast
-            // into strings.
             'odata' => [
                 'odata',
-                '?$filter=address eq Somewhere Str. 41'
+                '?$filter=box_size eq 10 and shirt_size eq large'
             ],
         ];
     }
@@ -57,7 +54,7 @@ class C5_WhereObjectTest extends HttpClientsTestCase
 
     /**
      * @test
-     * @dataProvider providesWhereObject
+     * @dataProvider providesWhereCallback
      *
      * @param string $grammar
      * @param string $expected
@@ -65,18 +62,16 @@ class C5_WhereObjectTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
-    public function canAddWhereObject(string $grammar, string $expected)
+    public function canAddWhereCallback(string $grammar, string $expected)
     {
-        $address = new class() {
-            public function __toString()
-            {
-                return 'Somewhere Str. 41';
-            }
-        };
-
         $result = $this
             ->query($grammar)
-            ->where('address', $address)
+            ->where('box_size', function () {
+                return 5 * 2;
+            })
+            ->where('shirt_size', function () {
+                return 'large';
+            })
             ->build();
 
         ConsoleDebugger::output($result);

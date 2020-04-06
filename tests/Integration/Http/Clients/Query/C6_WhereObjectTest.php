@@ -8,41 +8,45 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 
 /**
- * C2_WhereNullTest
+ * C5_WhereObjectTest
  *
  * @group http-clients
  * @group http-query
- * @group http-query-c2
+ * @group http-query-c6
  * @group http-query-grammars
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
-class C2_WhereNullTest extends HttpClientsTestCase
+class C6_WhereObjectTest extends HttpClientsTestCase
 {
     /*****************************************************************
      * Data Providers
      ****************************************************************/
 
     /**
-     * Provides data for where null test
+     * Provides data for where object test
      *
      * @return array
      */
-    public function providesWhereNull()
+    public function providesWhereObject()
     {
         return [
             'default' => [
                 'default',
-                '?name=null'
+                '?address=Somewhere Str. 41'
             ],
             'json api' => [
                 'json_api',
-                '?filter[name]=null'
+                '?filter[address]=Somewhere Str. 41'
             ],
+
+            // Note: Here the syntax is not right, yet this matters not for
+            // this test, where we just want to see that objects are cast
+            // into strings.
             'odata' => [
                 'odata',
-                '?$filter=name eq null'
+                '?$filter=address eq Somewhere Str. 41'
             ],
         ];
     }
@@ -53,7 +57,7 @@ class C2_WhereNullTest extends HttpClientsTestCase
 
     /**
      * @test
-     * @dataProvider providesWhereNull
+     * @dataProvider providesWhereObject
      *
      * @param string $grammar
      * @param string $expected
@@ -61,11 +65,18 @@ class C2_WhereNullTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
-    public function canAddWhereNull(string $grammar, string $expected)
+    public function canAddWhereObject(string $grammar, string $expected)
     {
+        $address = new class() {
+            public function __toString()
+            {
+                return 'Somewhere Str. 41';
+            }
+        };
+
         $result = $this
             ->query($grammar)
-            ->where('name', null)
+            ->where('address', $address)
             ->build();
 
         ConsoleDebugger::output($result);

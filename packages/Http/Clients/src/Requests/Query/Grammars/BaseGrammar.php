@@ -47,6 +47,20 @@ abstract class BaseGrammar implements
     protected string $defaultParameterSeparator = '&';
 
     /**
+     * Default "and where" separator
+     *
+     * @var string
+     */
+    protected string $defaultAndSeparator = '&';
+
+    /**
+     * Default "or where" separator
+     *
+     * @var string
+     */
+    protected string $defaultOrSeparator = '&|';
+
+    /**
      * Select key, prefix for selects
      *
      * @var string
@@ -298,11 +312,17 @@ abstract class BaseGrammar implements
         }
 
         $output = [];
+        $first = true;
         foreach ($wheres as $where) {
+            // Remove conjunction from first condition...
+            $where[self::CONJUNCTION] = $first ? '' : $where[self::CONJUNCTION];
+
             $output[] = $this->compileWhere($where);
+            $first = false;
         }
 
-        return implode($this->resolveParameterSeparator(), $output);
+        //return implode($this->resolveParameterSeparator(), $output);
+        return implode('', $output);
     }
 
     /**
@@ -340,22 +360,23 @@ abstract class BaseGrammar implements
         $field = $where[self::FIELD];
         $operator = $this->resolveOperator($where[self::OPERATOR], $field);
         $value = $this->resolveValue($where[self::VALUE]);
+        $conjunction = $this->resolveConjunction($where[self::CONJUNCTION]);
 
         // If provided value isn't an array, and the operator isn't the default
         // equals operator, simply compile field = value
         if (!is_array($value) && $operator === self::EQUALS) {
-            return "{$field}={$value}";
+            return "{$conjunction}{$field}={$value}";
         }
 
         // If operator isn't the default equals operator, then we add it to
         // the array structure and compile it.
         if ($operator !== self::EQUALS) {
-            return $this->compileArray([ $field => [ $operator => $value ]]);
+            return $conjunction . $this->compileArray([ $field => [ $operator => $value ]]);
         }
 
         // Otherwise, it means that the default equals operator has been given,
         // yet the value is an array and must therefore also be compiled as such.
-        return $this->compileArray([ $field => $value ]);
+        return $conjunction . $this->compileArray([ $field => $value ]);
     }
 
     /**
@@ -367,7 +388,9 @@ abstract class BaseGrammar implements
      */
     protected function compileRawWhere(array $where): string
     {
-        return $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]);
+        $conjunction = $this->resolveConjunction($where[self::CONJUNCTION]);
+
+        return trim($conjunction . $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]));
     }
 
     /**
@@ -578,6 +601,24 @@ abstract class BaseGrammar implements
         }
 
         return trim($operator);
+    }
+
+    /**
+     * Resolve the conjunction for "where" conditions
+     *
+     * @param string $conjunction Conjunction identifier or special symbol
+     *
+     * @return string
+     */
+    protected function resolveConjunction(string $conjunction): string
+    {
+        if ($conjunction === self::AND_CONJUNCTION) {
+            return $this->options[self::AND_SEPARATOR] ?? $this->defaultAndSeparator;
+        } elseif ($conjunction === self::OR_CONJUNCTION) {
+            return $this->options[self::OR_SEPARATOR] ?? $this->defaultOrSeparator;
+        } else {
+            return $conjunction;
+        }
     }
 
     /**

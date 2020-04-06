@@ -18,6 +18,20 @@ use Aedart\Http\Clients\Exceptions\UnableToBuildHttpQuery;
 class ODataGrammar extends BaseGrammar
 {
     /**
+     * Default "and where" separator
+     *
+     * @var string
+     */
+    protected string $defaultAndSeparator = 'and';
+
+    /**
+     * Default "or where" separator
+     *
+     * @var string
+     */
+    protected string $defaultOrSeparator = 'or';
+
+    /**
      * Select key, prefix for selects
      *
      * @var string
@@ -107,9 +121,7 @@ class ODataGrammar extends BaseGrammar
             return '';
         }
 
-        $compiled = str_replace($this->resolveParameterSeparator(), ' and ', $compiled);
-
-        return $this->filterKey . '=' . $compiled;
+        return $this->filterKey . '=' . trim($compiled);
     }
 
     /**
@@ -120,9 +132,20 @@ class ODataGrammar extends BaseGrammar
         $field = $where[self::FIELD];
         $operator = $this->resolveOperator($where[self::OPERATOR], $field);
         $value = $this->resolveValue($where[self::VALUE]);
+        $conjunction = $this->resolveConjunction($where[self::CONJUNCTION]);
 
         // Compile the filter...
-        return "{$field} {$operator} {$value}";
+        return " {$conjunction} {$field} {$operator} {$value}";
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function compileRawWhere(array $where): string
+    {
+        $conjunction = ' ' . $this->resolveConjunction($where[self::CONJUNCTION]) . ' ';
+
+        return rtrim($conjunction . $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]));
     }
 
     /**
@@ -161,25 +184,20 @@ class ODataGrammar extends BaseGrammar
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * Not supported
+     * @inheritdoc
      */
-    protected function compilePageNumber(?int $number = null): string
+    protected function resolveConjunction(string $conjunction): string
     {
-        return '';
+        // Unlike other grammars, we do not allow custom symbols to be
+        // specified for and / or conjunctions.
+        if ($conjunction === self::AND_CONJUNCTION) {
+            return $this->defaultAndSeparator;
+        } elseif ($conjunction === self::OR_CONJUNCTION) {
+            return $this->defaultOrSeparator;
+        } else {
+            return $conjunction;
+        }
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * Not supported
-     */
-    protected function compilePageSize(?int $amount = null): string
-    {
-        return '';
-    }
-
 
     /**
      * @inheritdoc
@@ -203,5 +221,25 @@ class ODataGrammar extends BaseGrammar
     protected function quote(string $value): string
     {
         return "'{$value}'";
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Not supported
+     */
+    protected function compilePageNumber(?int $number = null): string
+    {
+        return '';
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Not supported
+     */
+    protected function compilePageSize(?int $amount = null): string
+    {
+        return '';
     }
 }
