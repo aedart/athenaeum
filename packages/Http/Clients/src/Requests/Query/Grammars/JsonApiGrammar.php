@@ -132,7 +132,7 @@ class JsonApiGrammar extends BaseGrammar
         $andSymbol = $this->resolveConjunction(self::AND_CONJUNCTION);
         $orSymbol = $this->resolveConjunction(self::OR_CONJUNCTION);
 
-        if ($conjunction === self::AND_CONJUNCTION){
+        if ($conjunction === self::AND_CONJUNCTION) {
             $field = "{$andSymbol}{$prefix}[{$field}]";
         } elseif ($conjunction === self::OR_CONJUNCTION) {
             $field = "{$andSymbol}{$prefix}[{$orSymbol}{$field}]";

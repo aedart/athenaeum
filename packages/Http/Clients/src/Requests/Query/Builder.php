@@ -13,7 +13,6 @@ use Aedart\Http\Clients\Traits\GrammarManagerTrait;
 use Aedart\Http\Clients\Traits\GrammarTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use Aedart\Utils\Arr;
-use DateTimeInterface;
 use Illuminate\Contracts\Container\Container;
 
 /**
@@ -584,8 +583,7 @@ class Builder implements
         string $operator = self::EQUALS,
         $value = null,
         string $conjunction = self::AND_CONJUNCTION
-    ): QueryBuilder
-    {
+    ): QueryBuilder {
         return $this->appendWhereCondition([
             self::FIELD => $field,
             self::OPERATOR => $operator,
@@ -660,7 +658,7 @@ class Builder implements
         string $conjunction = self::AND_CONJUNCTION
     ): QueryBuilder {
         // Resolve arguments
-        if (!isset($value)){
+        if (!isset($value)) {
             $value = $operator;
             $operator = self::EQUALS;
         }

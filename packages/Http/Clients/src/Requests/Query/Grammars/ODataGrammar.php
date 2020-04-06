@@ -190,7 +190,7 @@ class ODataGrammar extends BaseGrammar
     {
         // Unlike other grammars, we do not allow custom symbols to be
         // specified for and / or conjunctions.
-        if($conjunction === self::AND_CONJUNCTION){
+        if ($conjunction === self::AND_CONJUNCTION) {
             return $this->defaultAndSeparator;
         } elseif ($conjunction === self::OR_CONJUNCTION) {
             return $this->defaultOrSeparator;

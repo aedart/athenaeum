@@ -315,7 +315,7 @@ abstract class BaseGrammar implements
         $first = true;
         foreach ($wheres as $where) {
             // Remove conjunction from first condition...
-            $where[self::CONJUNCTION] = ($first) ? '' : $where[self::CONJUNCTION];
+            $where[self::CONJUNCTION] = $first ? '' : $where[self::CONJUNCTION];
 
             $output[] = $this->compileWhere($where);
             $first = false;
@@ -612,7 +612,7 @@ abstract class BaseGrammar implements
      */
     protected function resolveConjunction(string $conjunction): string
     {
-        if($conjunction === self::AND_CONJUNCTION){
+        if ($conjunction === self::AND_CONJUNCTION) {
             return $this->options[self::AND_SEPARATOR] ?? $this->defaultAndSeparator;
         } elseif ($conjunction === self::OR_CONJUNCTION) {
             return $this->options[self::OR_SEPARATOR] ?? $this->defaultOrSeparator;
