@@ -47,6 +47,29 @@ class G5_WhereTimeTest extends HttpClientsTestCase
         ];
     }
 
+    /**
+     * Provides data for or where time test
+     *
+     * @return array
+     */
+    public function providesOrWhereTime()
+    {
+        return [
+            'default' => [
+                'default',
+                '?created=16:58:00&|created=18:58:00'
+            ],
+            'json api' => [
+                'json_api',
+                '?filter[created]=16:58:00&filter[|created]=18:58:00'
+            ],
+            'odata' => [
+                'odata',
+                '?$filter=created eq 16:58:00 or created eq 18:58:00'
+            ],
+        ];
+    }
+
     /*****************************************************************
      * Actual Tests
      ****************************************************************/
@@ -66,6 +89,29 @@ class G5_WhereTimeTest extends HttpClientsTestCase
         $result = $this
             ->query($grammar)
             ->whereTime('created', '2020-04-05 16:58')
+            ->build();
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider providesOrWhereTime
+     *
+     * @param string $grammar
+     * @param string $expected
+     *
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     */
+    public function canAddOrWhereTime(string $grammar, string $expected)
+    {
+        $result = $this
+            ->query($grammar)
+            ->whereTime('created', '2020-04-05 16:58')
+            ->orWhereTime('created', '2020-04-07 18:58')
             ->build();
 
         ConsoleDebugger::output($result);

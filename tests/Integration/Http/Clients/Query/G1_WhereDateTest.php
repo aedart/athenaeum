@@ -49,6 +49,32 @@ class G1_WhereDateTest extends HttpClientsTestCase
         ];
     }
 
+    /**
+     * Provides data for or where date test
+     *
+     * @return array
+     */
+    public function providesOrWhereDate()
+    {
+        $expectedA = now()->format('Y-m-d');
+        $expectedB = now()->addYears(1)->format('Y-m-d');
+
+        return [
+            'default' => [
+                'default',
+                '?created=' . $expectedA . '&|created=' . $expectedB
+            ],
+            'json api' => [
+                'json_api',
+                '?filter[created]=' . $expectedA . '&filter[|created]=' . $expectedB
+            ],
+            'odata' => [
+                'odata',
+                '?$filter=created eq ' . $expectedA . ' or created eq ' . $expectedB
+            ],
+        ];
+    }
+
     /*****************************************************************
      * Actual Tests
      ****************************************************************/
@@ -68,6 +94,29 @@ class G1_WhereDateTest extends HttpClientsTestCase
         $result = $this
             ->query($grammar)
             ->whereDate('created', now())
+            ->build();
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider providesOrWhereDate
+     *
+     * @param string $grammar
+     * @param string $expected
+     *
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     */
+    public function canAddOrWhereDate(string $grammar, string $expected)
+    {
+        $result = $this
+            ->query($grammar)
+            ->whereDate('created', now())
+            ->orWhereDate('created', now()->addYears(1))
             ->build();
 
         ConsoleDebugger::output($result);

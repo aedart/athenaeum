@@ -159,6 +159,17 @@ interface Builder extends Identifiers,
     public function whereDatetime(string $field, $operator = null, $value = null): self;
 
     /**
+     * Add a "or where datetime" condition or filter
+     *
+     * @param string $field Name of field or filter
+     * @param mixed $operator [optional] Operator or value
+     * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
+     *
+     * @return self
+     */
+    public function orWhereDatetime(string $field, $operator = null, $value = null): self;
+
+    /**
      * Add a "where date" condition or filter
      *
      * @param string $field Name of field or filter
@@ -168,6 +179,17 @@ interface Builder extends Identifiers,
      * @return self
      */
     public function whereDate(string $field, $operator = null, $value = null): self;
+
+    /**
+     * Add a "or where date" condition or filter
+     *
+     * @param string $field Name of field or filter
+     * @param mixed $operator [optional] Operator or value
+     * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
+     *
+     * @return self
+     */
+    public function orWhereDate(string $field, $operator = null, $value = null): self;
 
     /**
      * Add a "where year" condition or filter
@@ -181,6 +203,17 @@ interface Builder extends Identifiers,
     public function whereYear(string $field, $operator = null, $value = null): self;
 
     /**
+     * Add a "or where year" condition or filter
+     *
+     * @param string $field Name of field or filter
+     * @param mixed $operator [optional] Operator or value
+     * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
+     *
+     * @return self
+     */
+    public function orWhereYear(string $field, $operator = null, $value = null): self;
+
+    /**
      * Add a "where month" condition or filter
      *
      * @param string $field Name of field or filter
@@ -190,6 +223,17 @@ interface Builder extends Identifiers,
      * @return self
      */
     public function whereMonth(string $field, $operator = null, $value = null): self;
+
+    /**
+     * Add a "or where month" condition or filter
+     *
+     * @param string $field Name of field or filter
+     * @param mixed $operator [optional] Operator or value
+     * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
+     *
+     * @return self
+     */
+    public function orWhereMonth(string $field, $operator = null, $value = null): self;
 
     /**
      * Add a "where day" condition or filter
@@ -203,6 +247,17 @@ interface Builder extends Identifiers,
     public function whereDay(string $field, $operator = null, $value = null): self;
 
     /**
+     * Add a "or where day" condition or filter
+     *
+     * @param string $field Name of field or filter
+     * @param mixed $operator [optional] Operator or value
+     * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
+     *
+     * @return self
+     */
+    public function orWhereDay(string $field, $operator = null, $value = null): self;
+
+    /**
      * Add a "where time" condition or filter
      *
      * @param string $field Name of field or filter
@@ -212,6 +267,17 @@ interface Builder extends Identifiers,
      * @return self
      */
     public function whereTime(string $field, $operator = null, $value = null): self;
+
+    /**
+     * Add a "or where time" condition or filter
+     *
+     * @param string $field Name of field or filter
+     * @param mixed $operator [optional] Operator or value
+     * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
+     *
+     * @return self
+     */
+    public function orWhereTime(string $field, $operator = null, $value = null): self;
 
     /**
      * Include one or more related resources in the response

@@ -13,6 +13,7 @@ use Aedart\Http\Clients\Traits\GrammarManagerTrait;
 use Aedart\Http\Clients\Traits\GrammarTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use Aedart\Utils\Arr;
+use DateTimeInterface;
 use Illuminate\Contracts\Container\Container;
 
 /**
@@ -204,9 +205,37 @@ class Builder implements
     /**
      * @inheritdoc
      */
+    public function orWhereDatetime(string $field, $operator = null, $value = null): QueryBuilder
+    {
+        return $this->addWhereDateExpression(
+            self::DATETIME_FORMAT,
+            $field,
+            $operator,
+            $value,
+            self::OR_CONJUNCTION
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function whereDate(string $field, $operator = null, $value = null): QueryBuilder
     {
         return $this->addWhereDateExpression(self::DATE_FORMAT, $field, $operator, $value);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function orWhereDate(string $field, $operator = null, $value = null): QueryBuilder
+    {
+        return $this->addWhereDateExpression(
+            self::DATE_FORMAT,
+            $field,
+            $operator,
+            $value,
+            self::OR_CONJUNCTION
+        );
     }
 
     /**
@@ -220,9 +249,37 @@ class Builder implements
     /**
      * @inheritdoc
      */
+    public function orWhereYear(string $field, $operator = null, $value = null): QueryBuilder
+    {
+        return $this->addWhereDateExpression(
+            self::YEAR_FORMAT,
+            $field,
+            $operator,
+            $value,
+            self::OR_CONJUNCTION
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function whereMonth(string $field, $operator = null, $value = null): QueryBuilder
     {
         return $this->addWhereDateExpression(self::MONTH_FORMAT, $field, $operator, $value);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function orWhereMonth(string $field, $operator = null, $value = null): QueryBuilder
+    {
+        return $this->addWhereDateExpression(
+            self::MONTH_FORMAT,
+            $field,
+            $operator,
+            $value,
+            self::OR_CONJUNCTION
+        );
     }
 
     /**
@@ -236,9 +293,37 @@ class Builder implements
     /**
      * @inheritdoc
      */
+    public function orWhereDay(string $field, $operator = null, $value = null): QueryBuilder
+    {
+        return $this->addWhereDateExpression(
+            self::DAY_FORMAT,
+            $field,
+            $operator,
+            $value,
+            self::OR_CONJUNCTION
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function whereTime(string $field, $operator = null, $value = null): QueryBuilder
     {
         return $this->addWhereDateExpression(self::TIME_FORMAT, $field, $operator, $value);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function orWhereTime(string $field, $operator = null, $value = null): QueryBuilder
+    {
+        return $this->addWhereDateExpression(
+            self::TIME_FORMAT,
+            $field,
+            $operator,
+            $value,
+            self::OR_CONJUNCTION
+        );
     }
 
     /**

@@ -49,6 +49,32 @@ class G4_WhereDayTest extends HttpClientsTestCase
         ];
     }
 
+    /**
+     * Provides data for or where day test
+     *
+     * @return array
+     */
+    public function providesOrWhereDay()
+    {
+        $expectedA = now()->format('d');
+        $expectedB = now()->addDays(2)->format('d');
+
+        return [
+            'default' => [
+                'default',
+                '?created=' . $expectedA . '&|created=' . $expectedB
+            ],
+            'json api' => [
+                'json_api',
+                '?filter[created]=' . $expectedA . '&filter[|created]=' . $expectedB
+            ],
+            'odata' => [
+                'odata',
+                '?$filter=created eq ' . $expectedA . ' or created eq ' . $expectedB
+            ],
+        ];
+    }
+
     /*****************************************************************
      * Actual Tests
      ****************************************************************/
@@ -68,6 +94,29 @@ class G4_WhereDayTest extends HttpClientsTestCase
         $result = $this
             ->query($grammar)
             ->whereDay('created', now())
+            ->build();
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider providesOrWhereDay
+     *
+     * @param string $grammar
+     * @param string $expected
+     *
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     */
+    public function canAddOrWhereDay(string $grammar, string $expected)
+    {
+        $result = $this
+            ->query($grammar)
+            ->whereDay('created', now())
+            ->orWhereDay('created', now()->addDays(2))
             ->build();
 
         ConsoleDebugger::output($result);
