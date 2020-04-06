@@ -141,6 +141,16 @@ class ODataGrammar extends BaseGrammar
     /**
      * @inheritdoc
      */
+    protected function compileRawWhere(array $where): string
+    {
+        $conjunction = ' ' . $this->resolveConjunction($where[self::CONJUNCTION]) . ' ';
+
+        return rtrim($conjunction . $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]));
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function resolveOperator($operator, string $field): string
     {
         if (!is_string($operator)) {

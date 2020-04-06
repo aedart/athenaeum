@@ -151,6 +151,23 @@ class JsonApiGrammar extends BaseGrammar
     /**
      * @inheritdoc
      */
+    protected function compileRawWhere(array $where): string
+    {
+        $expression = $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]);
+
+        // Sadly, since there is no good way to resolve "or" conjunction here, we have to
+        // default using the "and" conjunction.
+        if (!empty($where[self::CONJUNCTION])) {
+            $andSymbol = $this->resolveConjunction(self::AND_CONJUNCTION);
+            return trim($andSymbol . $expression);
+        }
+
+        return $expression;
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function compileSortingCriteria(array $criteria): string
     {
         $field = $criteria[self::FIELD];

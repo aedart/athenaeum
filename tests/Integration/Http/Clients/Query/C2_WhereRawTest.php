@@ -53,6 +53,32 @@ class C2_WhereRawTest extends HttpClientsTestCase
     }
 
     /**
+     * Provides or where raw test data
+     *
+     * @return array
+     */
+    public function providesOrWhereRawData(): array
+    {
+        return [
+            'default' => [
+                'default',
+                '?user=john&|gender=male'
+            ],
+            'json api' => [
+                'json_api',
+                '?user=john&gender=male'
+            ],
+
+            // NOTE: Here too the syntax is wrong, but have to allow it, e.g. in order
+            // to allow advanced filters via OData.
+            'odata' => [
+                'odata',
+                '?$filter=user=john or gender=male'
+            ],
+        ];
+    }
+
+    /**
      * Provides injects bindings test data
      *
      * @return array
@@ -125,6 +151,29 @@ class C2_WhereRawTest extends HttpClientsTestCase
         $result = $this
             ->query($grammar)
             ->whereRaw('user=john')
+            ->build();
+
+        ConsoleDebugger::output($result);
+
+        $this->assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     * @dataProvider providesOrWhereRawData
+     *
+     * @param string $grammar
+     * @param string $expected
+     *
+     * @throws ProfileNotFoundException
+     * @throws HttpQueryBuilderException
+     */
+    public function canAddOrWhereRawExpression(string $grammar, string $expected)
+    {
+        $result = $this
+            ->query($grammar)
+            ->whereRaw('user=john')
+            ->orWhereRaw('gender=male')
             ->build();
 
         ConsoleDebugger::output($result);

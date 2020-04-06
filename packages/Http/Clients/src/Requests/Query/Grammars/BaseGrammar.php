@@ -388,7 +388,9 @@ abstract class BaseGrammar implements
      */
     protected function compileRawWhere(array $where): string
     {
-        return $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]);
+        $conjunction = $this->resolveConjunction($where[self::CONJUNCTION]);
+
+        return trim($conjunction . $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]));
     }
 
     /**

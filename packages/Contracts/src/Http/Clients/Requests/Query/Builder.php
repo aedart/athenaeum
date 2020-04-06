@@ -138,6 +138,16 @@ interface Builder extends Identifiers,
     public function whereRaw(string $query, array $bindings = []): self;
 
     /**
+     * Add a raw "or where" condition or filter
+     *
+     * @param string $query Raw query string or filter
+     * @param array $bindings [optional] Evt. values to be injected into the raw query string.
+     *
+     * @return self
+     */
+    public function orWhereRaw(string $query, array $bindings = []): self;
+
+    /**
      * Add a "where datetime" condition or filter
      *
      * @param string $field Name of field or filter

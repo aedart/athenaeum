@@ -188,6 +188,14 @@ class Builder implements
     /**
      * @inheritdoc
      */
+    public function orWhereRaw(string $query, array $bindings = []): QueryBuilder
+    {
+        return $this->addRawWhere($query, $bindings, self::OR_CONJUNCTION);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function whereDatetime(string $field, $operator = null, $value = null): QueryBuilder
     {
         // Resolve arguments...
