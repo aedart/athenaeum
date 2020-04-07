@@ -33,7 +33,7 @@ trait HttpQuery
      */
     public function query(): Query
     {
-        if(isset($this->query)){
+        if (isset($this->query)) {
             return $this->query;
         }
 

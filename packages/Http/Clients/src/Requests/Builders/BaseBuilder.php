@@ -154,7 +154,7 @@ abstract class BaseBuilder implements
         // be continued. Only if anything other than a query is returned,
         // then the result is returned instead.
         $result = $this->forwardCallTo($this->query(), $method, $parameters);
-        if($result instanceof Query){
+        if ($result instanceof Query) {
             return $this;
         }
 
