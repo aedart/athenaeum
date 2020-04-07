@@ -36,6 +36,20 @@ trait ResponseExpectations
     /**
      * @inheritdoc
      */
+    public function expect($status, ?callable $otherwise = null): Builder
+    {
+        if (is_callable($status)) {
+            return $this->withExpectation($status);
+        }
+
+        return $this->withExpectation(
+            $this->buildStatusCodesExpectation($status, $otherwise)
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function withExpectation(callable $expectation): Builder
     {
         $this->expectations[] = $expectation;
@@ -69,20 +83,6 @@ trait ResponseExpectations
     public function getExpectations(): array
     {
         return $this->expectations;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function expect($status, ?callable $otherwise = null): Builder
-    {
-        if (is_callable($status)) {
-            return $this->withExpectation($status);
-        }
-
-        return $this->withExpectation(
-            $this->buildStatusCodesExpectation($status, $otherwise)
-        );
     }
 
     /*****************************************************************
