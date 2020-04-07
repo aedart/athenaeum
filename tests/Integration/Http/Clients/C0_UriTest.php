@@ -4,6 +4,7 @@
 namespace Aedart\Tests\Integration\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
+use Aedart\Contracts\Http\Clients\Requests\Query\Builder;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
@@ -72,8 +73,11 @@ class C0_UriTest extends HttpClientsTestCase
 
         // ------------------------------------------------------- //
 
-        $this->assertTrue($builder->hasQuery(), 'Builder has not extracted query from uri');
-        $this->assertSame([ 'foo' => 'bar' ], $builder->getQuery(), 'Incorrect query extraction');
+        $query = $builder->query();
+        $raw = $query->toArray()[Builder::RAW];
+
+        $this->assertNotEmpty($raw, 'No raw expression available');
+        $this->assertSame([ Builder::EXPRESSION => 'foo=bar', Builder::BINDINGS => [] ], array_pop($raw), 'Incorrect query extraction');
         $this->assertEmpty($builder->getUri()->getQuery(), 'Uri instance still has a http query');
     }
 }

@@ -8,8 +8,6 @@ use Aedart\Http\Clients\Exceptions\InvalidUri;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\UriInterface;
 
-use function GuzzleHttp\Psr7\parse_query;
-
 /**
  * Concerns Http Uri
  *
@@ -47,8 +45,7 @@ trait HttpUri
         }
 
         // Extract http query, if uri contains such and apply
-        // it onto this builder.
-        $this->withQuery(
+        $this->raw(
             $this->extractQueryFromUri($uri)
         );
 
@@ -92,15 +89,15 @@ trait HttpUri
      *
      * @param UriInterface $uri
      *
-     * @return array Empty if Uri does not contain a Http query
+     * @return string
      */
-    protected function extractQueryFromUri(UriInterface $uri): array
+    protected function extractQueryFromUri(UriInterface $uri): string
     {
         $query = $uri->getQuery();
         if (!empty($query)) {
-            return parse_query($query);
+            return $query;
         }
 
-        return [];
+        return '';
     }
 }

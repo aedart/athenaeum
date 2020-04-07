@@ -30,7 +30,16 @@ return [
         'default' => [
             'driver' => \Aedart\Http\Clients\Drivers\DefaultHttpClient::class,
             'options' => [
-                'data_format' => \GuzzleHttp\RequestOptions::FORM_PARAMS
+
+                /**
+                 * Data format to use
+                 */
+                'data_format' => \GuzzleHttp\RequestOptions::FORM_PARAMS,
+
+                /**
+                 * Http Query Grammar to use
+                 */
+                'grammar-profile' => env('HTTP_QUERY_GRAMMAR', 'default'),
             ]
         ],
 
@@ -38,6 +47,10 @@ return [
             'driver' => \Aedart\Http\Clients\Drivers\JsonHttpClient::class,
             'options' => [
 
+                /**
+                 * Http Query Grammar to use
+                 */
+                'grammar-profile' => 'json_api',
             ]
         ]
     ],

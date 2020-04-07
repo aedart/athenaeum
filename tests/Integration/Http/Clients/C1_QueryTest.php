@@ -36,12 +36,7 @@ class C1_QueryTest extends HttpClientsTestCase
             'query' => $query
         ]);
 
-        $this->assertTrue($client->hasQuery(), 'No query set on builder');
-        $this->assertSame([
-            'name' => 'Rudy',
-            'age[gt]' => '23',
-            'age[lt]' => '42'
-        ], $client->getQuery(), 'Incorrect query values');
+        $this->assertStringContainsString($query, (string) $client->query(), 'Query not extracted from options');
     }
 
     /**
@@ -68,8 +63,8 @@ class C1_QueryTest extends HttpClientsTestCase
             'query' => $query
         ]);
 
-        $this->assertTrue($client->hasQuery(), 'No query set on builder');
-        $this->assertSame($query, $client->getQuery(), 'Incorrect query values');
+        $expected = 'name=Matt&has_pets=false&items[0]=a&items[1]=b&items[2]=c&date[gt]=2020&date[lt]=2054';
+        $this->assertStringContainsString($expected, (string) $client->query(), 'Query not extracted from options');
     }
 
     /**
@@ -97,7 +92,7 @@ class C1_QueryTest extends HttpClientsTestCase
         /** @var ResponseInterface $response */
         $client
             ->withOption('handler', $this->makeRespondsOkMock())
-            ->withQuery($query)
+            ->where($query)
             ->request('get', '/users');
 
         // --------------------------------------------------- //
@@ -109,12 +104,45 @@ class C1_QueryTest extends HttpClientsTestCase
 
         $this->assertSame([
             'name' => 'Matt',
-            'has_pets' => '0',
+            'has_pets' => 'false',
             'items[0]' => 'a',
             'items[1]' => 'b',
             'items[2]' => 'c',
             'date[gt]' => '2020',
             'date[lt]' => '2054',
         ], $sentQuery, 'Incorrect query string values sent');
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function canBuildHttpQueryViaFluentMethods(string $profile)
+    {
+        $client = $this->client($profile);
+
+        /** @var ResponseInterface $response */
+        $client
+            ->withOption('handler', $this->makeRespondsOkMock())
+            ->select('name', 'person')
+            ->where('age', 'gt', 32)
+            ->include('friends')
+            ->orderBy('age', 'desc')
+            ->take(5)
+            ->skip(3)
+            ->request('get', '/users');
+
+        // --------------------------------------------------- //
+
+        $sentQuery = urldecode($this->lastRequest->getUri()->getQuery());
+
+        ConsoleDebugger::output($sentQuery);
+
+        $expected = 'select=person.name&age[gt]=32&include=friends&limit=5&offset=3&sort=age desc';
+        $this->assertStringContainsString($expected, $sentQuery, 'Incorrect query built');
     }
 }

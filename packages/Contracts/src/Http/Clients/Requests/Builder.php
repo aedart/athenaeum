@@ -11,6 +11,7 @@ use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Http\Cookies\Cookie;
+use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -212,7 +213,8 @@ interface Builder extends HttpClientAware,
      *
      * If the given uri string of {@see UriInterface} contain a
      * http query, then it is extracted and applied onto this
-     * builder, via the {@see withQuery} method.
+     * builder, via the Http Query Builder provided by the
+     * {@see query} method.
      *
      * @param string|UriInterface $uri
      *
@@ -472,109 +474,21 @@ interface Builder extends HttpClientAware,
     public function getTimeout(): float;
 
     /**
-     * Add query string values to the next request
+     * Returns the existing Http Query Builder
      *
-     * Method merges given values with existing.
+     * Method MUST create a new Http Query Builder instance, via
+     * {@see newQuery} if an instance has not yet been created
      *
-     * NOTE: When this method used, evt. query string
-     * applied on the Uri is ignored.
-     *
-     * @see setQuery
-     * @see https://en.wikipedia.org/wiki/Query_string
-     *
-     * @param array $query Key-value pair
-     *
-     * @return self
+     * @return Query
      */
-    public function withQuery(array $query): self;
+    public function query(): Query;
 
     /**
-     * Set the Http query string for the next request
+     * Returns a new Http Query Builder instance
      *
-     * Method will overwrite existing query.
-     *
-     * NOTE: When this method used, evt. query string
-     * applied on the Uri is ignored.
-     *
-     * @see https://en.wikipedia.org/wiki/Query_string
-     *
-     * @param array $query Key-value pair
-     *
-     * @return self
+     * @return Query
      */
-    public function setQuery(array $query): self;
-
-    /**
-     * Determine if Http query string values have been set
-     * for the next request
-     *
-     * @return bool
-     */
-    public function hasQuery(): bool;
-
-    /**
-     * Get the Http query string values for the next
-     * request
-     *
-     * @return array Key-value pairs
-     */
-    public function getQuery(): array;
-
-    /**
-     * Add a Http query value, for the given field
-     *
-     * Method attempts to merge field values recursively, with
-     * existing query values.
-     *
-     * When only two arguments are provided, the second argument
-     * acts as the value, and the last argument is omitted.
-     *
-     * ```
-     * $builder
-     *      ->where('age', 23)
-     *      ->get('/users');
-     *
-     * // HTTP/1.1 GET /users?age=23
-     * ```
-     *
-     * When all three arguments are provided, the second arguments
-     * acts either as a "type" identifier, similar to those used
-     * by {@link https://jsonapi.org/format/1.1/#query-parameters}.
-     *
-     * ```
-     * $builder
-     *      ->where('age', 'gt', 23)
-     *      ->get('/users');
-     *
-     * // HTTP/1.1 GET /users?age[gt]=23
-     * ```
-     *
-     * If the first argument is a list of fields with values, then
-     * both `$type` and `$value` arguments are ignored.
-     *
-     * ```
-     * $builder
-     *      ->where([
-     *          'age' => 23,
-     *          'created_at' => [ 'gt' => 2020 ]
-     *      ])
-     *      ->get('/users');
-     *
-     * // HTTP/1.1 GET /users?age=23&created_at[gt]=2020
-     * ```
-     *
-     * @see setQuery
-     * @see withQuery
-     * @see https://en.wikipedia.org/wiki/Query_string
-     * @see https://jsonapi.org/format/1.1/#query-parameters
-     *
-     * @param string|array $field Field name or List of fields with values
-     * @param mixed $type [optional] Identifier (string) or field value
-     * @param mixed $value [optional] Field value. Only used if `$type` argument is provided
-     *
-     * @return self
-     */
-    public function where($field, $type = null, $value = null): self;
+    public function newQuery(): Query;
 
     /**
      * Apply a callback, when result is true

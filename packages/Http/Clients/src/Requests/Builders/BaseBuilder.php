@@ -4,10 +4,12 @@ namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Support\Traits\ForwardsCalls;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -37,6 +39,7 @@ abstract class BaseBuilder implements
     use Concerns\HttpQuery;
     use Concerns\HttpUri;
     use Concerns\ResponseExpectations;
+    use ForwardsCalls;
 
     /**
      * BaseBuilder constructor.
@@ -134,5 +137,27 @@ abstract class BaseBuilder implements
     public function driver()
     {
         return $this->client()->driver();
+    }
+
+    /**
+     * Forwards dynamic calls to the Http Query Builder
+     *
+     * @param string $method
+     * @param array $parameters
+     *
+     * @return mixed
+     */
+    public function __call($method, $parameters)
+    {
+        // Forward calls to the Http Query Builder, but return this
+        // request builder instance, so that request building can
+        // be continued. Only if anything other than a query is returned,
+        // then the result is returned instead.
+        $result = $this->forwardCallTo($this->query(), $method, $parameters);
+        if($result instanceof Query){
+            return $this;
+        }
+
+        return $result;
     }
 }

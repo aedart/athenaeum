@@ -3,6 +3,8 @@
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
+use Aedart\Http\Clients\Requests\Query\Builder as QueryBuilder;
 
 /**
  * Concerns Http Query
@@ -20,77 +22,32 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 trait HttpQuery
 {
     /**
-     * Http query string values
+     * Http query builder for next request
      *
-     * @var array Key-value pairs
+     * @var Query|null
      */
-    protected array $query = [];
+    protected ?Query $query = null;
 
     /**
      * @inheritdoc
      */
-    public function withQuery(array $query): Builder
+    public function query(): Query
     {
-        return $this->setQuery(
-            array_merge($this->getQuery(), $query)
-        );
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setQuery(array $query): Builder
-    {
-        $this->query = $query;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function hasQuery(): bool
-    {
-        return !empty($this->query);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getQuery(): array
-    {
-        return $this->query;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function where($field, $type = null, $value = null): Builder
-    {
-        // When list of fields => values is given.
-        if (is_array($field)) {
-            return $this->addQueryFieldsWithValues($field);
+        if(isset($this->query)){
+            return $this->query;
         }
 
-        // Prepare the value to be used. We assume that only two arguments are
-        // provided, at this point. This means that the "type" argument acts as
-        // the field's value.
-        $appliedValue = $type;
+        return $this->query = $this->newQuery();
+    }
 
-        // When all arguments are provided, then we change the structure of the
-        // applied value, to match that of "Sparse Fieldset", as described by
-        // Json Api v1.x.
-        if (func_num_args() === 3) {
-            $appliedValue = [ $type => $value ];
-        }
-
-        // Prepare the "query" field and value to be added.
-        $query = [ $field => $appliedValue];
-
-        // Merge the query recursively, with the existing query values.
-        // This allows multiple calls to the same field to be performed.
-        return $this->setQuery(
-            array_merge_recursive($this->getQuery(), $query)
+    /**
+     * @inheritdoc
+     */
+    public function newQuery(): Query
+    {
+        return new QueryBuilder(
+            $this->resolveHttpQueryGrammar(),
+            $this->getContainer()
         );
     }
 
@@ -99,20 +56,12 @@ trait HttpQuery
      ****************************************************************/
 
     /**
-     * Add multiple Http query values for list of fields
+     * Resolves the Http Query Grammar to be used
      *
-     * @see where
-     *
-     * @param array $fields
-     *
-     * @return self
+     * @return string
      */
-    protected function addQueryFieldsWithValues(array $fields): Builder
+    protected function resolveHttpQueryGrammar(): string
     {
-        foreach ($fields as $field => $value) {
-            $this->where($field, $value);
-        }
-
-        return $this;
+        return $this->getOption('grammar-profile') ?? 'default';
     }
 }

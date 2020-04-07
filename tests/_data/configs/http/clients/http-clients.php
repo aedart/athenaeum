@@ -29,14 +29,14 @@ return [
         'default' => [
             'driver'    => \Aedart\Http\Clients\Drivers\DefaultHttpClient::class,
             'options'   => [
-
+                'grammar-profile' => 'default',
             ]
         ],
 
         'json' => [
             'driver'    => \Aedart\Http\Clients\Drivers\JsonHttpClient::class,
             'options'   => [
-
+                'grammar-profile' => 'default',
             ]
         ]
     ],
