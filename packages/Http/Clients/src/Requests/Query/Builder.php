@@ -2,6 +2,7 @@
 
 namespace Aedart\Http\Clients\Requests\Query;
 
+use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as QueryBuilder;
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammar;
@@ -444,6 +445,18 @@ class Builder implements
     public function build(): string
     {
         return $this->getGrammar()->compile($this);
+    }
+
+    /**
+     * Builds this http query
+     *
+     * @return string
+     *
+     * @throws HttpQueryBuilderException
+     */
+    public function __toString()
+    {
+        return $this->build();
     }
 
     /*****************************************************************
