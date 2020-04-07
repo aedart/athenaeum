@@ -34,15 +34,15 @@ class C3_WhereNullTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?name=null'
+                'name=null'
             ],
             'json api' => [
                 'json_api',
-                '?filter[name]=null'
+                'filter[name]=null'
             ],
             'odata' => [
                 'odata',
-                '?$filter=name eq null'
+                '$filter=name eq null'
             ],
         ];
     }

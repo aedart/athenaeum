@@ -170,7 +170,7 @@ abstract class BaseGrammar implements
             fn ($element) => !empty($element)
         );
 
-        return '?' . implode($this->resolveParameterSeparator(), $compiled);
+        return implode($this->resolveParameterSeparator(), $compiled);
     }
 
     /**

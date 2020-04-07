@@ -34,15 +34,15 @@ class C1_OrWhereTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?name=john&|gender=male'
+                'name=john&|gender=male'
             ],
             'json api' => [
                 'json_api',
-                '?filter[name]=john&filter[|gender]=male'
+                'filter[name]=john&filter[|gender]=male'
             ],
             'odata' => [
                 'odata',
-                '?$filter=name eq \'john\' or gender eq \'male\''
+                '$filter=name eq \'john\' or gender eq \'male\''
             ],
         ];
     }
@@ -57,15 +57,15 @@ class C1_OrWhereTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?year[gt]=2021&|year[lt]=2031&|name=john'
+                'year[gt]=2021&|year[lt]=2031&|name=john'
             ],
             'json api' => [
                 'json_api',
-                '?filter[year][gt]=2021&filter[|year][lt]=2031&filter[|name]=john'
+                'filter[year][gt]=2021&filter[|year][lt]=2031&filter[|name]=john'
             ],
             'odata' => [
                 'odata',
-                '?$filter=year gt 2021 or year lt 2031 or name eq \'john\''
+                '$filter=year gt 2021 or year lt 2031 or name eq \'john\''
             ],
         ];
     }

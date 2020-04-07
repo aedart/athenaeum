@@ -34,15 +34,15 @@ class C0_WhereTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?name=john'
+                'name=john'
             ],
             'json api' => [
                 'json_api',
-                '?filter[name]=john'
+                'filter[name]=john'
             ],
             'odata' => [
                 'odata',
-                '?$filter=name eq \'john\''
+                '$filter=name eq \'john\''
             ],
         ];
     }
@@ -57,15 +57,15 @@ class C0_WhereTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?year[gt]=2020'
+                'year[gt]=2020'
             ],
             'json api' => [
                 'json_api',
-                '?filter[year][gt]=2020'
+                'filter[year][gt]=2020'
             ],
             'odata' => [
                 'odata',
-                '?$filter=year gt 2020'
+                '$filter=year gt 2020'
             ],
         ];
     }
@@ -80,15 +80,15 @@ class C0_WhereTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?year[gt]=2020&year[lt]=2051'
+                'year[gt]=2020&year[lt]=2051'
             ],
             'json api' => [
                 'json_api',
-                '?filter[year][gt]=2020&filter[year][lt]=2051'
+                'filter[year][gt]=2020&filter[year][lt]=2051'
             ],
             'odata' => [
                 'odata',
-                '?$filter=year gt 2020 and year lt 2051'
+                '$filter=year gt 2020 and year lt 2051'
             ],
         ];
     }
@@ -103,15 +103,15 @@ class C0_WhereTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?year[gt]=2021&year[lt]=2031&name=john'
+                'year[gt]=2021&year[lt]=2031&name=john'
             ],
             'json api' => [
                 'json_api',
-                '?filter[year][gt]=2021&filter[year][lt]=2031&filter[name]=john'
+                'filter[year][gt]=2021&filter[year][lt]=2031&filter[name]=john'
             ],
             'odata' => [
                 'odata',
-                '?$filter=year gt 2021 and year lt 2031 and name eq \'john\''
+                '$filter=year gt 2021 and year lt 2031 and name eq \'john\''
             ],
         ];
     }
@@ -126,18 +126,18 @@ class C0_WhereTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?users[0]=1&users[1]=2&users[2]=3&users[3]=4'
+                'users[0]=1&users[1]=2&users[2]=3&users[3]=4'
             ],
             'json api' => [
                 'json_api',
-                '?filter[users][0]=1&filter[users][1]=2&filter[users][2]=3&filter[users][3]=4'
+                'filter[users][0]=1&filter[users][1]=2&filter[users][2]=3&filter[users][3]=4'
             ],
 
             // NOTE: This IS not a correct syntax, but difficult to guess what operator
             // to use, when an field = array is provided!
             'odata' => [
                 'odata',
-                '?$filter=users eq (1,2,3,4)'
+                '$filter=users eq (1,2,3,4)'
             ],
         ];
     }
@@ -152,15 +152,15 @@ class C0_WhereTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?users[in][0]=1&users[in][1]=2&users[in][2]=3&users[in][3]=4'
+                'users[in][0]=1&users[in][1]=2&users[in][2]=3&users[in][3]=4'
             ],
             'json api' => [
                 'json_api',
-                '?filter[users][in][0]=1&filter[users][in][1]=2&filter[users][in][2]=3&filter[users][in][3]=4'
+                'filter[users][in][0]=1&filter[users][in][1]=2&filter[users][in][2]=3&filter[users][in][3]=4'
             ],
             'odata' => [
                 'odata',
-                '?$filter=users in (1,2,3,4)'
+                '$filter=users in (1,2,3,4)'
             ],
         ];
     }

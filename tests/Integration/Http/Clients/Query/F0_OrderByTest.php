@@ -32,15 +32,15 @@ class F0_OrderByTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?sort=name asc'
+                'sort=name asc'
             ],
             'json api' => [
                 'json_api',
-                '?sort=name'
+                'sort=name'
             ],
             'odata' => [
                 'odata',
-                '?$orderby=name asc'
+                '$orderby=name asc'
             ],
         ];
     }
@@ -55,15 +55,15 @@ class F0_OrderByTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?sort=name desc'
+                'sort=name desc'
             ],
             'json api' => [
                 'json_api',
-                '?sort=-name'
+                'sort=-name'
             ],
             'odata' => [
                 'odata',
-                '?$orderby=name desc'
+                '$orderby=name desc'
             ],
         ];
     }
@@ -78,15 +78,15 @@ class F0_OrderByTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?sort=name asc,age desc'
+                'sort=name asc,age desc'
             ],
             'json api' => [
                 'json_api',
-                '?sort=name,-age'
+                'sort=name,-age'
             ],
             'odata' => [
                 'odata',
-                '?$orderby=name asc,age desc'
+                '$orderby=name asc,age desc'
             ],
         ];
     }
@@ -101,15 +101,15 @@ class F0_OrderByTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?sort=name desc,age asc,jobs asc'
+                'sort=name desc,age asc,jobs asc'
             ],
             'json api' => [
                 'json_api',
-                '?sort=-name,age,jobs'
+                'sort=-name,age,jobs'
             ],
             'odata' => [
                 'odata',
-                '?$orderby=name desc,age asc,jobs asc'
+                '$orderby=name desc,age asc,jobs asc'
             ],
         ];
     }

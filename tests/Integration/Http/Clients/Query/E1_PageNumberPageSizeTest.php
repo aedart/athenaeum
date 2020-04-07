@@ -35,17 +35,17 @@ class E1_PageNumberPageSizeTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?page=3&show=25'
+                'page=3&show=25'
             ],
             'json api' => [
                 'json_api',
-                '?page[number]=3&page[size]=25'
+                'page[number]=3&page[size]=25'
             ],
 
             // Not supported
             'odata' => [
                 'odata',
-                '?'
+                ''
             ],
         ];
     }

@@ -34,11 +34,11 @@ class C6_WhereObjectTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?address=Somewhere Str. 41'
+                'address=Somewhere Str. 41'
             ],
             'json api' => [
                 'json_api',
-                '?filter[address]=Somewhere Str. 41'
+                'filter[address]=Somewhere Str. 41'
             ],
 
             // Note: Here the syntax is not right, yet this matters not for
@@ -46,7 +46,7 @@ class C6_WhereObjectTest extends HttpClientsTestCase
             // into strings.
             'odata' => [
                 'odata',
-                '?$filter=address eq Somewhere Str. 41'
+                '$filter=address eq Somewhere Str. 41'
             ],
         ];
     }

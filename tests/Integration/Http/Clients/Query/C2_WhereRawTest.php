@@ -31,7 +31,7 @@ class C2_WhereRawTest extends HttpClientsTestCase
      */
     public function providesWhereRawData(): array
     {
-        $expected = '?user=john';
+        $expected = 'user=john';
 
         return [
             'default' => [
@@ -47,7 +47,7 @@ class C2_WhereRawTest extends HttpClientsTestCase
             // to allow advanced filters via OData.
             'odata' => [
                 'odata',
-                '?$filter=user=john'
+                '$filter=user=john'
             ],
         ];
     }
@@ -62,18 +62,18 @@ class C2_WhereRawTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?user=john&|gender=male'
+                'user=john&|gender=male'
             ],
             'json api' => [
                 'json_api',
-                '?user=john&gender=male'
+                'user=john&gender=male'
             ],
 
             // NOTE: Here too the syntax is wrong, but have to allow it, e.g. in order
             // to allow advanced filters via OData.
             'odata' => [
                 'odata',
-                '?$filter=user=john or gender=male'
+                '$filter=user=john or gender=male'
             ],
         ];
     }
@@ -85,7 +85,7 @@ class C2_WhereRawTest extends HttpClientsTestCase
      */
     public function providesInjectsBindingsData(): array
     {
-        $expected = '?filter=user eq 10';
+        $expected = 'filter=user eq 10';
 
         return [
             'default' => [
@@ -101,7 +101,7 @@ class C2_WhereRawTest extends HttpClientsTestCase
             // for building advanced filtering.
             'odata' => [
                 'odata',
-                '?$filter=filter=user eq 10'
+                '$filter=filter=user eq 10'
             ],
         ];
     }
@@ -116,18 +116,18 @@ class C2_WhereRawTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?name[like]=john&filter=age gt 25'
+                'name[like]=john&filter=age gt 25'
             ],
             'json api' => [
                 'json_api',
-                '?filter[name][like]=john&filter=age gt 25'
+                'filter[name][like]=john&filter=age gt 25'
             ],
 
             // NOTE: Same as previous, generates invalid Odata query syntax, but still
             // have to allow it, for the benefit of advanced filters.
             'odata' => [
                 'odata',
-                '?$filter=name like \'john\' and filter=age gt 25'
+                '$filter=name like \'john\' and filter=age gt 25'
             ],
         ];
     }

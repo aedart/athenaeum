@@ -33,15 +33,15 @@ class D0_IncludeTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?include=jobs'
+                'include=jobs'
             ],
             'json api' => [
                 'json_api',
-                '?include=jobs'
+                'include=jobs'
             ],
             'odata' => [
                 'odata',
-                '?$expand=jobs'
+                '$expand=jobs'
             ],
         ];
     }
@@ -56,15 +56,15 @@ class D0_IncludeTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?include=jobs,posts,friends.name'
+                'include=jobs,posts,friends.name'
             ],
             'json api' => [
                 'json_api',
-                '?include=jobs,posts,friends.name'
+                'include=jobs,posts,friends.name'
             ],
             'odata' => [
                 'odata',
-                '?$expand=jobs,posts,friends.name'
+                '$expand=jobs,posts,friends.name'
             ],
         ];
     }

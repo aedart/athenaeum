@@ -34,15 +34,15 @@ class B1_SelectRawTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?select=account(42)'
+                'select=account(42)'
             ],
             'json api' => [
                 'json_api',
-                '?fields[]=account(42)'
+                'fields[]=account(42)'
             ],
             'odata' => [
                 'odata',
-                '?$select=account(42)'
+                '$select=account(42)'
             ],
         ];
     }
@@ -57,15 +57,15 @@ class B1_SelectRawTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?select=account(3214)'
+                'select=account(3214)'
             ],
             'json api' => [
                 'json_api',
-                '?fields[]=account(3214)'
+                'fields[]=account(3214)'
             ],
             'odata' => [
                 'odata',
-                '?$select=account(3214)'
+                '$select=account(3214)'
             ],
         ];
     }
@@ -80,15 +80,15 @@ class B1_SelectRawTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?select=person.name,account(7)'
+                'select=person.name,account(7)'
             ],
             'json api' => [
                 'json_api',
-                '?fields[person]=name&fields[]=account(7)'
+                'fields[person]=name&fields[]=account(7)'
             ],
             'odata' => [
                 'odata',
-                '?$select=person.name,account(7)'
+                '$select=person.name,account(7)'
             ],
         ];
     }

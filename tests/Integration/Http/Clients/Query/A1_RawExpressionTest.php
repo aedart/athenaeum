@@ -31,7 +31,7 @@ class A1_RawExpressionTest extends HttpClientsTestCase
      */
     public function providesWhereRawData(): array
     {
-        $expected = '?search=person from (a,b,c)';
+        $expected = 'search=person from (a,b,c)';
 
         // NOTE: We do NOT care about if the syntax is correct or not for each
         // grammar. We only care that the expression is added exactly as stated.

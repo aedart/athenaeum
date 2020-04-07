@@ -34,15 +34,15 @@ class G5_WhereTimeTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?created=16:58:00'
+                'created=16:58:00'
             ],
             'json api' => [
                 'json_api',
-                '?filter[created]=16:58:00'
+                'filter[created]=16:58:00'
             ],
             'odata' => [
                 'odata',
-                '?$filter=created eq 16:58:00'
+                '$filter=created eq 16:58:00'
             ],
         ];
     }
@@ -57,15 +57,15 @@ class G5_WhereTimeTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?created=16:58:00&|created=18:58:00'
+                'created=16:58:00&|created=18:58:00'
             ],
             'json api' => [
                 'json_api',
-                '?filter[created]=16:58:00&filter[|created]=18:58:00'
+                'filter[created]=16:58:00&filter[|created]=18:58:00'
             ],
             'odata' => [
                 'odata',
-                '?$filter=created eq 16:58:00 or created eq 18:58:00'
+                '$filter=created eq 16:58:00 or created eq 18:58:00'
             ],
         ];
     }

@@ -35,15 +35,15 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?created=2020-04-05T00:00:00+0000'
+                'created=2020-04-05T00:00:00+0000'
             ],
             'json api' => [
                 'json_api',
-                '?filter[created]=2020-04-05T00:00:00+0000'
+                'filter[created]=2020-04-05T00:00:00+0000'
             ],
             'odata' => [
                 'odata',
-                '?$filter=created eq 2020-04-05T00:00:00+0000'
+                '$filter=created eq 2020-04-05T00:00:00+0000'
             ],
         ];
     }
@@ -58,15 +58,15 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?created=2020-04-05T12:29:01+0200'
+                'created=2020-04-05T12:29:01+0200'
             ],
             'json api' => [
                 'json_api',
-                '?filter[created]=2020-04-05T12:29:01+0200'
+                'filter[created]=2020-04-05T12:29:01+0200'
             ],
             'odata' => [
                 'odata',
-                '?$filter=created eq 2020-04-05T12:29:01+0200'
+                '$filter=created eq 2020-04-05T12:29:01+0200'
             ],
         ];
     }
@@ -95,15 +95,15 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?created=2020-04-05T00:00:00+0000&|created=2020-04-06T00:00:00+0000'
+                'created=2020-04-05T00:00:00+0000&|created=2020-04-06T00:00:00+0000'
             ],
             'json api' => [
                 'json_api',
-                '?filter[created]=2020-04-05T00:00:00+0000&filter[|created]=2020-04-06T00:00:00+0000'
+                'filter[created]=2020-04-05T00:00:00+0000&filter[|created]=2020-04-06T00:00:00+0000'
             ],
             'odata' => [
                 'odata',
-                '?$filter=created eq 2020-04-05T00:00:00+0000 or created eq 2020-04-06T00:00:00+0000'
+                '$filter=created eq 2020-04-05T00:00:00+0000 or created eq 2020-04-06T00:00:00+0000'
             ],
         ];
     }

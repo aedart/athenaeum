@@ -34,15 +34,15 @@ class B0_SelectTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?select=name'
+                'select=name'
             ],
             'json api' => [
                 'json_api',
-                '?fields[]=name'
+                'fields[]=name'
             ],
             'odata' => [
                 'odata',
-                '?$select=name'
+                '$select=name'
             ],
         ];
     }
@@ -57,15 +57,15 @@ class B0_SelectTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?select=person.name'
+                'select=person.name'
             ],
             'json api' => [
                 'json_api',
-                '?fields[person]=name'
+                'fields[person]=name'
             ],
             'odata' => [
                 'odata',
-                '?$select=person.name'
+                '$select=person.name'
             ],
         ];
     }
@@ -80,15 +80,15 @@ class B0_SelectTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?select=name,age,jobTitle'
+                'select=name,age,jobTitle'
             ],
             'json api' => [
                 'json_api',
-                '?fields[]=name,age,jobTitle'
+                'fields[]=name,age,jobTitle'
             ],
             'odata' => [
                 'odata',
-                '?$select=name,age,jobTitle'
+                '$select=name,age,jobTitle'
             ],
         ];
     }
@@ -103,15 +103,15 @@ class B0_SelectTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?select=person.name,person.age,position.jobTitle'
+                'select=person.name,person.age,position.jobTitle'
             ],
             'json api' => [
                 'json_api',
-                '?fields[person]=name,age&fields[position]=jobTitle'
+                'fields[person]=name,age&fields[position]=jobTitle'
             ],
             'odata' => [
                 'odata',
-                '?$select=person.name,person.age,position.jobTitle'
+                '$select=person.name,person.age,position.jobTitle'
             ],
         ];
     }

@@ -36,15 +36,15 @@ class G4_WhereDayTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?created=' . $expected
+                'created=' . $expected
             ],
             'json api' => [
                 'json_api',
-                '?filter[created]=' . $expected
+                'filter[created]=' . $expected
             ],
             'odata' => [
                 'odata',
-                '?$filter=created eq ' . $expected
+                '$filter=created eq ' . $expected
             ],
         ];
     }
@@ -62,15 +62,15 @@ class G4_WhereDayTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?created=' . $expectedA . '&|created=' . $expectedB
+                'created=' . $expectedA . '&|created=' . $expectedB
             ],
             'json api' => [
                 'json_api',
-                '?filter[created]=' . $expectedA . '&filter[|created]=' . $expectedB
+                'filter[created]=' . $expectedA . '&filter[|created]=' . $expectedB
             ],
             'odata' => [
                 'odata',
-                '?$filter=created eq ' . $expectedA . ' or created eq ' . $expectedB
+                '$filter=created eq ' . $expectedA . ' or created eq ' . $expectedB
             ],
         ];
     }

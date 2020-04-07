@@ -34,15 +34,15 @@ class C4_WhereBooleanTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?has_children=true&has_posts=false'
+                'has_children=true&has_posts=false'
             ],
             'json api' => [
                 'json_api',
-                '?filter[has_children]=true&filter[has_posts]=false'
+                'filter[has_children]=true&filter[has_posts]=false'
             ],
             'odata' => [
                 'odata',
-                '?$filter=has_children eq true and has_posts eq false'
+                '$filter=has_children eq true and has_posts eq false'
             ],
         ];
     }

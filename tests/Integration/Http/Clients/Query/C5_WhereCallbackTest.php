@@ -35,15 +35,15 @@ class C5_WhereCallbackTest extends HttpClientsTestCase
         return [
             'default' => [
                 'default',
-                '?box_size=10&shirt_size=large'
+                'box_size=10&shirt_size=large'
             ],
             'json api' => [
                 'json_api',
-                '?filter[box_size]=10&filter[shirt_size]=large'
+                'filter[box_size]=10&filter[shirt_size]=large'
             ],
             'odata' => [
                 'odata',
-                '?$filter=box_size eq 10 and shirt_size eq large'
+                '$filter=box_size eq 10 and shirt_size eq large'
             ],
         ];
     }
