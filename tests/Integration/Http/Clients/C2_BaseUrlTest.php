@@ -10,12 +10,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * C3_BaseUrlTest
  *
  * @group http-clients
- * @group http-clients-c3
+ * @group http-clients-c2
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
-class C3_BaseUrlTest extends HttpClientsTestCase
+class C2_BaseUrlTest extends HttpClientsTestCase
 {
     /**
      * @test
