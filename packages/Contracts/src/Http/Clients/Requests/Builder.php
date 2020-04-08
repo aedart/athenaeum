@@ -12,6 +12,7 @@ use Aedart\Contracts\Http\Clients\HttpClientAware;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Http\Cookies\Cookie;
+use DateTimeInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -20,6 +21,37 @@ use Throwable;
 
 /**
  * Http Request Builder
+ *
+ * @method self select(string|string[] $field, string|null $resource = null) Select the fields to be returned.
+ * @method self selectRaw(string $expression, array $bindings = []) Select a raw expression.
+ * @method self where(string|array $field, mixed $operator = null, mixed $value = null) Add a "where" condition or filter.
+ * @method self orWhere(string|array $field, mixed $operator = null, mixed $value = null) Add a "or where" condition or filter.
+ * @method self whereRaw(string $query, array $bindings = []) Add a raw "where" condition or filter.
+ * @method self orWhereRaw(string $query, array $bindings = []) Add a raw "or where" condition or filter.
+ * @method self whereDatetime(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null) Add a "where datetime" condition or filter.
+ * @method self orWhereDatetime(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null) Add a "or where datetime" condition or filter.
+ * @method self whereDate(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null) Add a "where date" condition or filter.
+ * @method self orWhereDate(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null) Add a "or where date" condition or filter.
+ * @method self whereYear(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null) Add a "where year" condition or filter.
+ * @method self orWhereYear(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null) Add a "or where year" condition or filter.
+ * @method self whereMonth(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null) Add a "where month" condition or filter.
+ * @method self orWhereMonth(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null) Add a "or where month" condition or filter.
+ * @method self whereDay(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null) Add a "where day" condition or filter.
+ * @method self orWhereDay(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null) Add a "or where day" condition or filter.
+ * @method self whereTime(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null) Add a "where time" condition or filter.
+ * @method self orWhereTime(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null) Add a "where time" condition or filter.
+ * @method self include(string|string[] $resource) Include one or more related resources in the response.
+ * @method self limit(int $amount) Limit the amount of results to be returned.
+ * @method self offset(int $offset) Skip over given amount of results.
+ * @method self take(int $amount) Alias for limit.
+ * @method self skip(int $offset) Alias for offset.
+ * @method self page(int $number, int|null $size = null) Return result for requested page number.
+ * @method self show(int|null $amount = null) Set amount of results to be returned per page.
+ * @method self orderBy(string|string[] $field, string $direction = 'asc') Order results by given field or fields.
+ * @method self raw(string $expression, array $bindings = []) Add a raw expression.
+ * @method string build() Build http query string.
+ *
+ * @see \Aedart\Contracts\Http\Clients\Requests\Query\Builder
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Clients\Requests
