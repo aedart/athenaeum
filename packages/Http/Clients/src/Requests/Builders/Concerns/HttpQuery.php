@@ -37,7 +37,9 @@ trait HttpQuery
             return $this->query;
         }
 
-        return $this->query = $this->newQuery();
+        $this->setQuery($this->newQuery());
+
+        return $this->query;
     }
 
     /**
@@ -49,6 +51,16 @@ trait HttpQuery
             $this->resolveHttpQueryGrammar(),
             $this->getContainer()
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setQuery(Query $query): Builder
+    {
+        $this->query = $query;
+
+        return $this;
     }
 
     /*****************************************************************

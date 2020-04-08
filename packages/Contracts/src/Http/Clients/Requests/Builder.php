@@ -501,7 +501,9 @@ interface Builder extends HttpClientAware,
      * Returns the existing Http Query Builder
      *
      * Method MUST create a new Http Query Builder instance, via
-     * {@see newQuery} if an instance has not yet been created
+     * {@see newQuery} if an instance has not yet been created.
+     * Additionally, method MUST use {@see setQuery} to set the
+     * query builder internally for this request builder.
      *
      * @return Query
      */
@@ -513,6 +515,15 @@ interface Builder extends HttpClientAware,
      * @return Query
      */
     public function newQuery(): Query;
+
+    /**
+     * Set the Http Query Builder
+     *
+     * @param Query $query
+     *
+     * @return self
+     */
+    public function setQuery(Query $query): self;
 
     /**
      * Apply a callback, when result is true

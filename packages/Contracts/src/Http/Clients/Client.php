@@ -55,6 +55,7 @@ use Psr\Http\Message\UriInterface;
  * @method float getTimeout() Get the next request's timeout.
  * @method Query query() Returns the existing Http Query Builder.
  * @method Query newQuery() Returns a new Http Query Builder instance.
+ * @method Builder setQuery(Query $query) Set the Http Query Builder.
  * @method Builder when(bool $result, callable $callback, callable|null $otherwise = null) Apply a callback, when result is true.
  * @method Builder unless(bool $result, callable $callback, callable|null $otherwise = null) Apply a callback, unless result is true.
  * @method Builder withData(array $data) Add data to the next request's payload (body).
