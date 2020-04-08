@@ -140,6 +140,8 @@ interface Builder extends Identifiers,
     /**
      * Add a raw "or where" condition or filter
      *
+     * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
+     *
      * @param string $query Raw query string or filter
      * @param array $bindings [optional] Evt. values to be injected into the raw query string.
      *
@@ -160,6 +162,8 @@ interface Builder extends Identifiers,
 
     /**
      * Add a "or where datetime" condition or filter
+     *
+     * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
      *
      * @param string $field Name of field or filter
      * @param mixed $operator [optional] Operator or value
@@ -183,6 +187,8 @@ interface Builder extends Identifiers,
     /**
      * Add a "or where date" condition or filter
      *
+     * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
+     *
      * @param string $field Name of field or filter
      * @param mixed $operator [optional] Operator or value
      * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
@@ -204,6 +210,8 @@ interface Builder extends Identifiers,
 
     /**
      * Add a "or where year" condition or filter
+     *
+     * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
      *
      * @param string $field Name of field or filter
      * @param mixed $operator [optional] Operator or value
@@ -227,6 +235,8 @@ interface Builder extends Identifiers,
     /**
      * Add a "or where month" condition or filter
      *
+     * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
+     *
      * @param string $field Name of field or filter
      * @param mixed $operator [optional] Operator or value
      * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
@@ -249,6 +259,8 @@ interface Builder extends Identifiers,
     /**
      * Add a "or where day" condition or filter
      *
+     * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
+     *
      * @param string $field Name of field or filter
      * @param mixed $operator [optional] Operator or value
      * @param string|DateTimeInterface|null $value [optional] If no value given, then current date ('now') is used
@@ -270,6 +282,8 @@ interface Builder extends Identifiers,
 
     /**
      * Add a "or where time" condition or filter
+     *
+     * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
      *
      * @param string $field Name of field or filter
      * @param mixed $operator [optional] Operator or value
