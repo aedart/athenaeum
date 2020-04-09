@@ -3,7 +3,6 @@
 
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
-
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Criteria;
 
@@ -20,12 +19,12 @@ trait RequestCriteria
      */
     public function applyCriteria($criteria): Builder
     {
-        if(!is_array($criteria)){
+        if (!is_array($criteria)) {
             $criteria = [ $criteria ];
         }
 
         /** @var Criteria[] $criteria */
-        foreach ($criteria as $criterion){
+        foreach ($criteria as $criterion) {
             $criterion->apply($this);
         }
 

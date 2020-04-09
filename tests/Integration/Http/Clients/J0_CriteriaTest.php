@@ -34,8 +34,7 @@ class J0_CriteriaTest extends HttpClientsTestCase
      */
     public function makeCriteria(string $field, $operator = null, $value = null): Criteria
     {
-        return new class($field, $operator, $value) implements Criteria
-        {
+        return new class($field, $operator, $value) implements Criteria {
             /**
              * @var string
              */

@@ -4,7 +4,6 @@ namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
-use Aedart\Contracts\Http\Clients\Requests\Criteria;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
