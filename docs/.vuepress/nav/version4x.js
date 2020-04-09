@@ -109,10 +109,18 @@ module.exports.sidebar = function(){
                         'http/clients/install',
                         'http/clients/setup',
                         'http/clients/usage',
-                        'http/clients/base_uri',
-                        'http/clients/method_and_uri',
-                        'http/clients/headers',
-                        'http/clients/protocol_version',
+                        {
+                            title: 'Available Methods',
+                            collapsable: true,
+                            children: [
+                                'http/clients/methods/',
+                                'http/clients/methods/protocol_version',
+                                'http/clients/methods/base_uri',
+                                'http/clients/methods/method_and_uri',
+                                'http/clients/methods/headers',
+                                'http/clients/methods/content_type',
+                            ]
+                        },
                         'http/clients/methods',
                     ]
                 },
