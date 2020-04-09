@@ -120,6 +120,7 @@ module.exports.sidebar = function(){
                                 'http/clients/methods/headers',
                                 'http/clients/methods/content_type',
                                 'http/clients/methods/auth',
+                                'http/clients/methods/query',
                                 'http/clients/methods/data_format',
                                 'http/clients/methods/data',
                                 'http/clients/methods/attachments',
@@ -131,6 +132,13 @@ module.exports.sidebar = function(){
                                 'http/clients/methods/timeout',
                                 'http/clients/methods/driver_options',
                                 'http/clients/methods/driver',
+                            ]
+                        },
+                        {
+                            title: 'Http Query Builder',
+                            collapsable: true,
+                            children: [
+                                'http/clients/query/',
                             ]
                         },
                         'http/clients/methods',
