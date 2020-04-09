@@ -5,6 +5,8 @@ sidebarDepth: 0
 
 # Headers
 
+[[TOC]]
+
 ## Set a Single Http Header
 
 In order to set a single Http header, for your next request, use the `withHeader()` method.
@@ -35,4 +37,30 @@ It accepts a name argument, which must match the name of an already set header.
 ```php
 $builder = $client
     ->withoutHeader('X-Foo');
+```
+
+## Via options
+
+You can also predefine Http headers via you Http Client options, in your `configs/http-clients.php`.
+
+```php
+<?php
+
+return [
+
+    'profiles' => [
+
+        'default' => [
+            'driver' => \Aedart\Http\Clients\Drivers\DefaultHttpClient::class,
+            'options' => [
+                
+                'headers' => [
+                    'X-Foo' => 'bar'
+                ]
+
+                // ... remaining not shown ...
+            ]
+        ],
+    ],
+];
 ```
