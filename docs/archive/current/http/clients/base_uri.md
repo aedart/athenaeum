@@ -6,7 +6,7 @@ sidebarDepth: 0
 # Base Uri
 
 You can specify the [base uri](http://docs.guzzlephp.org/en/stable/quickstart.html) using either the `withBaseUrl()` method or directly via the driver options, in your `configs/http-clients.php`.
-Doing so will result in each request's uri being prefixed, with the stated "base uri" 
+This will result in each request's uri being prefixed, with the stated "base uri" 
 
 ## Via `withBaseUrl()`
 
