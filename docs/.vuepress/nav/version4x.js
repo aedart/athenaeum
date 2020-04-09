@@ -140,6 +140,7 @@ module.exports.sidebar = function(){
                             children: [
                                 'http/clients/query/',
                                 'http/clients/query/select',
+                                'http/clients/query/where',
                             ]
                         },
                         'http/clients/methods',
