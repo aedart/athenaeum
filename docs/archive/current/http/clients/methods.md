@@ -3,7 +3,7 @@ sidebarDepth: 0
 description: Available Methods for Http Client
 ---
 
-# Available Methods
+# DEPRECATED - Available Methods
 
 All provided Http Clients offer a common set of methods. These are shortly described below.
 In general, all methods that perform a HTTP request will return a `ResponseInterface` that adheres to [PSR-7 Http Message](https://www.php-fig.org/psr/psr-7/). 
