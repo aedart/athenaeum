@@ -141,6 +141,7 @@ module.exports.sidebar = function(){
                                 'http/clients/query/',
                                 'http/clients/query/select',
                                 'http/clients/query/where',
+                                'http/clients/query/dates',
                             ]
                         },
                         'http/clients/methods',
