@@ -139,6 +139,7 @@ module.exports.sidebar = function(){
                             collapsable: true,
                             children: [
                                 'http/clients/query/',
+                                'http/clients/query/select',
                             ]
                         },
                         'http/clients/methods',
