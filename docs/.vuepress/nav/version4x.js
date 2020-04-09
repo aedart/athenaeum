@@ -143,6 +143,7 @@ module.exports.sidebar = function(){
                                 'http/clients/query/where',
                                 'http/clients/query/dates',
                                 'http/clients/query/include',
+                                'http/clients/query/pagination',
                             ]
                         },
                         'http/clients/methods',
