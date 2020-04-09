@@ -4,6 +4,8 @@ description: How to setup Http Clients
 
 # Setup
 
+[[TOC]]
+
 ## Register Service Provider
 
 Register `HttpClientServiceProvider` inside your `configs/app.php`. 
@@ -76,14 +78,17 @@ return [
         'default' => [
             'driver'    => \Aedart\Http\Clients\Drivers\DefaultHttpClient::class,
             'options'   => [
-                // Http Client options
+
+                'data_format' => \GuzzleHttp\RequestOptions::FORM_PARAMS,                
+                'grammar-profile' => env('HTTP_QUERY_GRAMMAR', 'default'),
             ]
         ],
 
         'json' => [
             'driver'    => \Aedart\Http\Clients\Drivers\JsonHttpClient::class,
             'options'   => [
-                // Http Client options
+                
+                'grammar-profile' => 'json_api',
             ]
         ],
 
@@ -91,9 +96,71 @@ return [
         'flights-api-client' => [
             'driver'    => \Aedart\Http\Clients\Drivers\JsonHttpClient::class,
             'options'   => [
-                'base_uri' => 'https://acme.com/api/v2/flights'
+                'base_uri' => 'https://acme.com/api/v2/flights',
+                'grammar-profile' => 'odata',
             ]
         ],
     ]
+    
+    // ... remaining not shown ...
 ];
 ```
+
+### Http Query Grammars
+
+Each Http Client profile can specify it's desired Http Query Grammars profile to use.
+The following are offered by default:
+
+- `DefaultGrammar`: Does not follow any specific syntax or convention.
+- `JsonApiGrammar`: Adheres to [Json API's](https://jsonapi.org/format/1.1/#fetching) syntax for Http Queries.
+- `ODataGrammar`: Adheres to [OData's](https://www.odata.org/getting-started/basic-tutorial/#queryData) syntax for Http Queries.
+
+You can find a matching profile, inside your `configs/http-clients.php`, where you may change any of the available options, for each Http Query Grammar.
+
+```php
+<?php
+
+return [
+    // ... previous not shown ...
+
+    'profiles' => [
+
+        'json' => [
+            'driver' => \Aedart\Http\Clients\Drivers\JsonHttpClient::class,
+            'options' => [
+                // Http Query grammar profile to use
+                'grammar-profile' => 'json_api',
+            ]
+        ]
+    ],
+
+    /*
+     |--------------------------------------------------------------------------
+     | Http Query Grammars
+     |--------------------------------------------------------------------------
+    */
+
+    'grammars' => [
+
+        'profiles' => [
+
+            'json_api' => [
+                'driver' => \Aedart\Http\Clients\Requests\Query\Grammars\JsonApiGrammar::class,
+                'options' => [
+
+                    'datetime_format' => \DateTimeInterface::ISO8601,
+                    'date_format' => 'Y-m-d',
+                    'year_format' => 'Y',
+                    'month_format' => 'm',
+                    'day_format' => 'd',
+                    'time_format' => 'H:i:s',
+
+                    // ... remaining not shown ...
+                ]
+            ],
+
+            // ... remaining not shown ...
+        ]
+    ]
+];
+``` 
