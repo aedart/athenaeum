@@ -1,5 +1,6 @@
 ---
 description: Setting the Http Method and Uri
+sidebarDepth: 0
 ---
 
 # Http Method and Uri
