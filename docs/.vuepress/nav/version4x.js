@@ -112,6 +112,7 @@ module.exports.sidebar = function(){
                         'http/clients/base_uri',
                         'http/clients/method_and_uri',
                         'http/clients/headers',
+                        'http/clients/protocol_version',
                         'http/clients/methods',
                     ]
                 },
