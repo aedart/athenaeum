@@ -194,4 +194,20 @@ class ResponseStatusTest extends UnitTestCase
         $this->assertSame($response->getStatusCode(), $status->code(), 'Incorrect status code');
         $this->assertSame($response->getReasonPhrase(), $status->phrase(), 'Incorrect status code');
     }
+
+    /**
+     * @test
+     *
+     * @throws InvalidStatusCodeException
+     */
+    public function canConvertIntoString()
+    {
+        $response = new Response(204);
+
+        $status = $this->fromResponse($response);
+
+        ConsoleDebugger::output((string) $status);
+
+        $this->assertSame('204 No Content', (string) $status);
+    }
 }

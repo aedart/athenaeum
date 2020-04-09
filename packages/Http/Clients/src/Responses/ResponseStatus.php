@@ -123,4 +123,17 @@ class ResponseStatus implements Status
             $response->getReasonPhrase()
         );
     }
+
+    /**
+     * Returns the Http Response status as a string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $code = $this->code();
+        $phrase = $this->phrase();
+
+        return "{$code} {$phrase}";
+    }
 }
