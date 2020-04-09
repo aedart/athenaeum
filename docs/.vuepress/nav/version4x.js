@@ -109,6 +109,7 @@ module.exports.sidebar = function(){
                         'http/clients/install',
                         'http/clients/setup',
                         'http/clients/usage',
+                        'http/clients/method_and_uri',
                         'http/clients/methods',
                     ]
                 },
