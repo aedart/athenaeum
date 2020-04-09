@@ -145,6 +145,7 @@ module.exports.sidebar = function(){
                                 'http/clients/query/include',
                                 'http/clients/query/pagination',
                                 'http/clients/query/sorting',
+                                'http/clients/query/raw',
                             ]
                         },
                         'http/clients/methods',
