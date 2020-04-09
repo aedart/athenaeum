@@ -4,11 +4,11 @@ description: About the Http Clients Package
 
 # Http Clients
 
-Provides a Http Client wrapper along with a Manager that is able to handle multiple "profiles".
+This package offers a Http Client wrapper, with a powerful fluent request builder that is able to use different Http Query grammars, supporting both [Json Api](https://jsonapi.org/) and [OData](https://www.odata.org/).
+In addition, it also comes with a manager that allows you to handle multiple http client "profiles."
 This allows you to segment each api you communicate with, into it's own client instance.
 
-By default, [Guzzle Http Client](http://docs.guzzlephp.org/en/stable/index.html) is used as the default Http Client.
-However, this package does not limit you to using only Guzzle. You can [create your own wrapper](./custom.md).
+By default, [Guzzle Http Client](http://docs.guzzlephp.org/en/stable/index.html) is used behind the scene.
 
 ## Example
 
@@ -27,6 +27,8 @@ return [
             ]
         ],
     ]
+    
+    // ... remaining not shown ...
 ];
 ```
 
@@ -34,6 +36,9 @@ return [
 
 ```php
 use Aedart\Http\Clients\Traits\HttpClientsManagerTrait;
+use Aedart\Contracts\Http\Clients\Responses\Status;
+use Teapot\StatusCode;
+use DateTime;
 
 class CurrencyController
 {
@@ -44,7 +49,14 @@ class CurrencyController
         $client = $this->getHttpClientsManager()->profile('my-client');
         
         // Perform a GET requeset
-        $response = $client->get('/currencies');
+        $response = $client
+            ->useTokenAuth('my-secret-api-token')
+            ->where('currency', 'DKK')
+            ->whereDate('date', new DateTime('now'))
+            ->expect(StatusCode::OK, function(Status $status){
+                throw new RuntimeException('API is not available: ' . $status);
+            })
+            ->get('/currencies');
         
         // ...remaining not shown
     }
