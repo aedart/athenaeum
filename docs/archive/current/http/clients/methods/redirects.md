@@ -13,4 +13,4 @@ TODO: ...coming soon...
 
 ## Disable Redirects
 
-## Via options
+## Via Configuration

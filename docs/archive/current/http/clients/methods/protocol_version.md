@@ -13,7 +13,7 @@ $builder = $client
         ->useProtocolVersion('1.0');
 ```
 
-## Via options
+## Via Configuration
 
 The protocol version number can also be set via `configs/http-clients.php`.
 

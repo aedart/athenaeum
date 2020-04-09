@@ -11,4 +11,4 @@ TODO: ...coming soon...
 
 ## Set Request Timeout
 
-## Via options
+## Via Configuration

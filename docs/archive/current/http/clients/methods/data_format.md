@@ -17,4 +17,4 @@ TODO: ...coming soon...
 
 ## Other Format
 
-## Via options
+## Via Configuration

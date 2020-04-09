@@ -15,5 +15,5 @@ TODO: ...coming soon...
 
 ## Remove Options
 
-## Via configuration
+## Via Configuration
 

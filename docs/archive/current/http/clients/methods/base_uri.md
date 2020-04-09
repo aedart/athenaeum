@@ -15,7 +15,7 @@ $builder = $client
         ->withBaseUrl('https://acme.org/api/v1');
 ```
 
-## Via options
+## Via Configuration
 
 Add the `base_uri` in your `options` list, to set the base uri.
 

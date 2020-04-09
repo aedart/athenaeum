@@ -39,7 +39,7 @@ $builder = $client
     ->withoutHeader('X-Foo');
 ```
 
-## Via options
+## Via Configuration
 
 You can also predefine Http headers via you Http Client options, in your `configs/http-clients.php`.
 
