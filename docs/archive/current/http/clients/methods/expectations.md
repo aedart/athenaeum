@@ -13,5 +13,3 @@ TODO: ...coming soon...
 
 ## Add Expectation
 
-## Remove Cookie
-
