@@ -109,9 +109,7 @@ module.exports.sidebar = function(){
                         'http/clients/install',
                         'http/clients/setup',
                         'http/clients/usage',
-                        'http/clients/json',
                         'http/clients/methods',
-                        'http/clients/custom',
                     ]
                 },
                 {
