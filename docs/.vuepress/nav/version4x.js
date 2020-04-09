@@ -129,6 +129,7 @@ module.exports.sidebar = function(){
                                 'http/clients/methods/criteria',
                                 'http/clients/methods/redirects',
                                 'http/clients/methods/timeout',
+                                'http/clients/methods/driver_options',
                             ]
                         },
                         'http/clients/methods',
