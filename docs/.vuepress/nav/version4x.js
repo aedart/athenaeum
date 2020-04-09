@@ -119,6 +119,7 @@ module.exports.sidebar = function(){
                                 'http/clients/methods/method_and_uri',
                                 'http/clients/methods/headers',
                                 'http/clients/methods/content_type',
+                                'http/clients/methods/data_format',
                             ]
                         },
                         'http/clients/methods',
