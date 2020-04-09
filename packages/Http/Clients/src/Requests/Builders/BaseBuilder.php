@@ -4,6 +4,7 @@ namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Http\Clients\Requests\Criteria;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
@@ -37,6 +38,7 @@ abstract class BaseBuilder implements
     use Concerns\HttpMethod;
     use Concerns\HttpProtocolVersion;
     use Concerns\HttpQuery;
+    use Concerns\RequestCriteria;
     use Concerns\HttpUri;
     use Concerns\ResponseExpectations;
     use ForwardsCalls;

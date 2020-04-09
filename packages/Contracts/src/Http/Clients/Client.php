@@ -4,6 +4,7 @@ namespace Aedart\Contracts\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Requests\Attachment;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Http\Clients\Requests\Criteria;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Aedart\Contracts\Http\Cookies\Cookie;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
@@ -56,6 +57,7 @@ use Psr\Http\Message\UriInterface;
  * @method Query query() Returns the existing Http Query Builder.
  * @method Query newQuery() Returns a new Http Query Builder instance.
  * @method Builder setQuery(Query $query) Set the Http Query Builder.
+ * @method Builder applyCriteria(Criteria|Criteria[] $criteria) Apply one or more criteria for the next request.
  * @method Builder when(bool $result, callable $callback, callable|null $otherwise = null) Apply a callback, when result is true.
  * @method Builder unless(bool $result, callable $callback, callable|null $otherwise = null) Apply a callback, unless result is true.
  * @method Builder withData(array $data) Add data to the next request's payload (body).

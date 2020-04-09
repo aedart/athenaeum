@@ -526,6 +526,17 @@ interface Builder extends HttpClientAware,
     public function setQuery(Query $query): self;
 
     /**
+     * Apply one or more criteria for the next request
+     *
+     * @see Criteria
+     *
+     * @param Criteria|Criteria[] $criteria
+     *
+     * @return self
+     */
+    public function applyCriteria($criteria): self;
+
+    /**
      * Apply a callback, when result is true
      *
      * Method is inverse of {@see unless}.
