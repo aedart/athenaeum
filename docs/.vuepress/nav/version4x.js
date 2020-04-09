@@ -122,6 +122,7 @@ module.exports.sidebar = function(){
                                 'http/clients/methods/auth',
                                 'http/clients/methods/data_format',
                                 'http/clients/methods/data',
+                                'http/clients/methods/attachments',
                                 'http/clients/methods/conditions',
                                 'http/clients/methods/criteria',
                                 'http/clients/methods/redirects',
