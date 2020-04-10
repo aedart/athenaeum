@@ -453,7 +453,7 @@ interface Builder extends HttpClientAware,
      * @see https://tools.ietf.org/html/rfc6750
      *
      * @param string $token
-     * @param string $scheme [optional] Basic Authentication Scheme
+     * @param string $scheme [optional] Authentication Scheme
      *
      * @return self
      */
