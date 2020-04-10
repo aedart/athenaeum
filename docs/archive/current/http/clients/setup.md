@@ -60,8 +60,6 @@ Each profile consists of two keys:
 * `driver` : Class patch to the Http Client "driver" to be used
 * `options` : Http Client options.
 
-The `DefaultHttpClient` and `JsonHttpClient` accept the following [options](http://docs.guzzlephp.org/en/stable/request-options.html)
-
 ```php
 return [
 
