@@ -2,10 +2,10 @@
 
 
 This package offers a Http Client wrapper, with a powerful fluent request builder that is able to use different Http Query grammars, supporting both [Json Api](https://jsonapi.org/) and [OData](https://www.odata.org/).
-In addition, it also comes with a manager that allows you to handle multiple http client "profiles."
+In addition, it also comes with a manager that allows you to handle multiple http client "profiles".
 This allows you to segment each api you communicate with, into it's own client instance.
 
-By default, [Guzzle Http Client](http://docs.guzzlephp.org/en/stable/index.html) is used behind the scene.
+[Guzzle Http Client](http://docs.guzzlephp.org/en/stable/index.html) is used behind the scene.
 
 ## Example
 
