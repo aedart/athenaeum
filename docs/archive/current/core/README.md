@@ -5,7 +5,7 @@ description: About the Athenaeum Core Application Package
 # Athenaeum Core Application
 
 The Athenaeum Core Application is a custom implementation of [Laravel's](https://laravel.com/) [`\Illuminate\Contracts\Foundation\Application`](https://github.com/laravel/framework/blob/6.x/src/Illuminate/Contracts/Foundation/Application.php).
-It is intended to bring some of Laravel's service and components into your [legacy application](https://en.wikipedia.org/wiki/Legacy_system).
+It is intended to bring some of Laravel's services and components into your [legacy application](https://en.wikipedia.org/wiki/Legacy_system).
 It offers the following features:
 
 - Registration and booting of [Service Providers](https://laravel.com/docs/7.x/providers)
