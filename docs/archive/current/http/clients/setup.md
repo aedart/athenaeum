@@ -60,6 +60,8 @@ Each profile consists of two keys:
 * `driver` : Class patch to the Http Client "driver" to be used
 * `options` : Http Client options.
 
+You can use [Guzzle's Request Options](http://docs.guzzlephp.org/en/stable/request-options.html), for each client profile.
+
 ```php
 return [
 
@@ -107,13 +109,13 @@ return [
 ### Http Query Grammars
 
 Each Http Client profile can specify it's desired Http Query Grammars profile to use.
-The following are offered by default:
+The following grammars are offered by default:
 
 - `DefaultGrammar`: Does not follow any specific syntax or convention.
 - `JsonApiGrammar`: Adheres to [Json API's](https://jsonapi.org/format/1.1/#fetching) syntax for Http Queries.
 - `ODataGrammar`: Adheres to [OData's](https://www.odata.org/getting-started/basic-tutorial/#queryData) syntax for Http Queries.
 
-You can find a matching profile, inside your `configs/http-clients.php`, where you may change any of the available options, for each Http Query Grammar.
+You can find a matching profile, inside your `configs/http-clients.php`, where you may change any of the available options.
 
 ```php
 <?php

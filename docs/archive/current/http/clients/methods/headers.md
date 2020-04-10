@@ -41,7 +41,7 @@ $builder = $client
 
 ## Via Configuration
 
-You can also predefine Http headers via you Http Client options, in your `configs/http-clients.php`.
+You can also predefine Http headers via your Http Client profile's options, in your configuration file.
 
 ```php
 <?php

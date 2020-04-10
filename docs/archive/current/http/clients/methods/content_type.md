@@ -5,9 +5,11 @@ sidebarDepth: 0
 
 # Accept & Content-Type
 
+The `withAccept()` and `withContentType()` are shortcut methods for setting the `Accept` and `Content-Type` headers.
+
 ## Accept
 
-To set the [Accept](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept) Http Header, use the `withAccept()` method.  
+Use `withAccept()` to set the [Accept](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept) Http Header.  
 
 ```php
 $builder = $client
@@ -16,7 +18,7 @@ $builder = $client
 
 ## Content-Type
 
-Similarly, you can specify what your request's [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is, with the `withContentType()` method.
+Use `withContentType()` to set your request's [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type).
 
 ```php
 $builder = $client

@@ -5,8 +5,8 @@ sidebarDepth: 0
 
 # Protocol Version
 
-By default, Http protocol version `1.1` is used as the default version, for each of your requests.
-Should you require to send a request with a different version, then `useProtocolVersion()` will allow you to do so.
+By default, Http protocol version `1.1` is used for each of your requests.
+Should you need to send a request with a different version, then `useProtocolVersion()` will allow you to do so.
 
 ```php
 $builder = $client

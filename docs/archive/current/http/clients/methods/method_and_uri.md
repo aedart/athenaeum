@@ -18,7 +18,7 @@ $response = $client
 
 ## Uri
 
-`withUri()` accepts either a `string` uri or a [PSR-7](https://www.php-fig.org/psr/psr-7/) `UriInterface` instance as argument.
+`withUri()` accepts either a `string` uri or a [PSR-7](https://www.php-fig.org/psr/psr-7/) `UriInterface` as argument.
 
 ```php
 use GuzzleHttp\Psr7\Uri;
