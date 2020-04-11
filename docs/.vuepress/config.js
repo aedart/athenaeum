@@ -59,6 +59,11 @@ module.exports = {
         [ '@vuepress/search', {
             searchMaxSuggestions: 10,
             test: '/archive\/current/'
+        }],
+        [ '@vuepress/last-updated', {
+            transformer: (timestamp, lang) => {
+                return (new Date(timestamp)).toUTCString();
+            }
         }]
     ]
 };
