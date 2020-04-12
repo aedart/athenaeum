@@ -7,7 +7,7 @@ It allows you to test laravel components using various testing-frameworks, like 
 
 To use this component, you must install [Orchestral Testbench](https://github.com/orchestral/testbench):
 
-``` console
+```shell
 composer require --dev "orchestra/testbench=~3.0"
 ```
 
