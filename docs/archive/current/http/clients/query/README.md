@@ -51,5 +51,3 @@ GET https://acme.org/api/v1/users?$filter=last_name eq `thomsen` and age gt 31
 :::
  
 ::::
-
-_Throughout the remaining of this chapter, only the http query parameters will be shown, as example outcome of using each of the provided Http Query Grammars._
