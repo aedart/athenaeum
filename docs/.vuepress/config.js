@@ -64,7 +64,8 @@ module.exports = {
             transformer: (timestamp, lang) => {
                 return (new Date(timestamp)).toUTCString();
             }
-        }]
+        }],
+        [ 'tabs', true ]
     ]
 };
 
