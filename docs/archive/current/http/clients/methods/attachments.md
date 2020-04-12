@@ -27,7 +27,7 @@ $response = $client
 ## Alternative Methods
 
 The `withAttachment()` method provides an alternative way of adding an attachment.
-It allows you to specify a callback, with is provided an `Attachment` instance.
+It allows you to specify a callback, which is provided an `Attachment` instance.
 This is useful when you wish to specify a stream, rather than a path to a file.
 E.g. when you are dynamically creating the contents of an attachment.
 
