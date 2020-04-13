@@ -35,7 +35,7 @@ GET https://acme.org/api/v1/users?last_name=thomsen&age[gt]=31
 ```
 :::
 
-::: tab jsonapi
+::: tab json api
 Builds query strings according to [Json API's recommendations](https://jsonapi.org/format/1.1/#fetching).
 
 ```http
