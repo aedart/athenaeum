@@ -5,9 +5,10 @@ sidebarDepth: 0
 
 # Introduction
 
-The Http Client offers a powerful Http Query Builder, which gives you the possibility to set query parameters fluently.
-It comes with a few grammars, which are responsible for assembling (_or building_) the actual http query string.
-All of these grammars offer some options, which can be specified via your `configs/http-clients.php` configuration.
+The Http Client contains a powerful Http Query Builder.
+It gives you the possibility to set query parameters fluently, and it supports a few grammars.
+These grammars are responsible for assembling (_or building_) the actual http query string.
+Each offer a few options, which can be specified via your `configs/http-clients.php` configuration.
 Read the [configuration](../setup.md#http-query-grammars) chapter, for additional information about how to configure your desired grammar.
 
 ## Example
