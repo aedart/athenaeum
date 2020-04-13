@@ -65,7 +65,7 @@ module.exports = {
                 return (new Date(timestamp)).toUTCString();
             }
         }],
-        [ 'tabs', true ]
+        [ 'vuepress-plugin-element-tabs', true ]
     ]
 };
 

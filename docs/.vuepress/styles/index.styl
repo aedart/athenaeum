@@ -1,4 +1,3 @@
-@require '~vuepress-plugin-tabs/dist/themes/default.styl'
 @import url('https://fonts.googleapis.com/css?family=Dosis:400,600|Roboto:400,400i,700|Source+Code+Pro:400,500i&display=swap');
 
 body {
@@ -226,4 +225,12 @@ code {
 .token.entity,
 .token.url {
     color: lighten($secondary, 25%)
+}
+
+/* Tabs */
+.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+    color: $tabTitleColour;
+}
+.el-tabs--border-card > .el-tabs__header .el-tabs__item:not(.is-disabled):hover {
+    color: $tabTitleColour;
 }
