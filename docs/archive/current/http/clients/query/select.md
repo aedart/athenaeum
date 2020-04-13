@@ -28,7 +28,7 @@ $response = $client
 ```
 :::
 
-::: tab jsonapi
+::: tab json api
 ```http
 /users?fields[]=name
 ```
@@ -60,7 +60,7 @@ $response = $client
 ```
 :::
 
-::: tab jsonapi
+::: tab json api
 ```http
 /users?fields[friends]=name
 ```
@@ -97,7 +97,7 @@ $response = $client
 ```
 :::
 
-::: tab jsonapi
+::: tab json api
 ```http
 /users?fields[friends]=name,age&fields[position]=job_title
 ```
@@ -130,7 +130,7 @@ $response = $client
 ```
 :::
 
-::: tab jsonapi
+::: tab json api
 ```http
 /users?fields[]=account(7)
 ```
