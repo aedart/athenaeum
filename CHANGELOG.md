@@ -19,7 +19,7 @@
 You need to require these packages, if you depended on them[2].
 * (_Fix_) `IoC` no longer highjacks Laravel's `app` binding automatically, when `getInstance()` is invoked.
 This was used to get some of Laravel's components to work outside the scope of a Laravel application.
-Yet, this was "hack" solution that potentially conflicted with Laravel. This was never intended[3]!
+Yet, this was a "hack" that potentially could lead to conflicted with Laravel. This was never intended[3]!
 * Deprecated `\Aedart\Console\CommandBase`, `\Aedart\Console\AwareOfScaffoldCommand` and `\Aedart\Console\CreateAwareOfCommand` components.
 Commands have been replaced with updated versions within the [`aedart/athenaeum-support `](https://packagist.org/packages/aedart/athenaeum-support) package.
 The original commands are still available using the `athenaeum` console application.
