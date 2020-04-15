@@ -2,13 +2,13 @@
 
 ## v4.x
 
-### [v4.0.1](https://github.com/aedart/athenaeum/compare/4.0.0...4.0.1)
+### [v4.0.1](https://github.com/aedart/athenaeum/compare/4.0...4.0.1)
 
 #### Fixed
 
 * Broken inter-dependencies in all packages. Removed version `v4.0` from packagist.org to prevent conflicts. 
 
-### [v4.0.0](https://github.com/aedart/athenaeum/compare/3.1.0...4.0.0)
+### [v4.0.0](https://github.com/aedart/athenaeum/compare/3.1.0...4.0)
 
 #### Changed
 
