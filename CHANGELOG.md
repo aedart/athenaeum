@@ -2,8 +2,6 @@
 
 ## v4.x
 
-**NOT YET RELEASED**
-
 ### [v4.0.0](https://github.com/aedart/athenaeum/compare/3.1.0...4.0.0)
 
 #### Changed
@@ -11,7 +9,7 @@
 **Breaking Changes**
 
 * Required PHP version changed to `v7.4.x`.
-* Upgraded Laravel dependencies to `v7.2.x`, Symfony to `v5.0.x`, Codeception to `v4.1.x`, and various other dependencies.
+* Upgraded Laravel dependencies to `v7.6.x`, Symfony to `v5.0.x`, Codeception to `v4.1.x`, and various other dependencies.
 * All class properties now have their [types declared](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties), if possible.
 * `dto:create` command now generates traits with class [type declarations](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties) for it's properties (_former `dto:create-aware-of` command_).
 * `Dto` and `ArrayDto` now implements the `__serialize()` and `__unserialize()` magic methods.
@@ -25,16 +23,7 @@ Yet, this was "hack" solution that potentially conflicted with Laravel. This was
 * Deprecated `\Aedart\Console\CommandBase`, `\Aedart\Console\AwareOfScaffoldCommand` and `\Aedart\Console\CreateAwareOfCommand` components.
 Commands have been replaced with updated versions within the [`aedart/athenaeum-support `](https://packagist.org/packages/aedart/athenaeum-support) package.
 The original commands are still available using the `athenaeum` console application.
-* Http `Client` has been heavily redesigned, adding several new features, but also breaking some backwards compatibility. 
-(_This is especially true if you implemented your own client, using the offered interface_)
-* Http `Client` (implicit also the `Manager`) now depends on the Service `Container`.
-* `DefaultHttpClient` and `JsonHttpClient` have the following [options](http://docs.guzzlephp.org/en/stable/request-options.html) set as default.
-(_Can be overwritten via configuration or via `withOption()` method_)
-  * `http_errors` set to `false`.
-  * `connect_timeout` set to `5` seconds and `timeout` to 10 seconds.
-  * `allow_redirects` set to maximum of `1` redirect.
-* `JsonHttpClient` now sets `Accept` and `Content-Type` to `application/json` if not specified.
-(_Previously only the `Content-Type` header was automatically set._)
+* Redesign entire Http `Client` package, now makes use of a Request Builder and Http Query Builder.
 * Deprecated all aware-of helpers that contained `*\Mixed\*` in their namespace.
 These will be removed in next major version.
 Replacement components are available within the `*\Mixes\*` namespace.
@@ -74,6 +63,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 * `ConsoleServiceProvider`, offers console commands to be registered via configuration.
 * `BaseExeptionHandler` abstraction along with a few default exception handlers that can be used with `Application`, if enabled.
 * `Builder`, a Http request builder used by the Http `Client`.
+* Http Query `Builder`, used by the request builder.
+* `Grammar` abstraction to compile Http Query string - three grammars are offered: `DefaultGrammar`, `JsonApiGrammar` and `ODataGrammar`.
 * `FakerAware` component that can be used for testing purposes.
 * `FakerPartial`, offers basic setup for [Faker](https://github.com/fzaninotto/Faker).
 * `callOrReturn()` utility method in `MethodHelper`.
