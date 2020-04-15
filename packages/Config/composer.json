@@ -27,9 +27,9 @@
         "php": ">=7.4.0",
         "illuminate/config": "^7.6",
         "illuminate/filesystem": "^7.6",
-        "aedart/athenaeum-contracts": "dev-master",
-        "aedart/athenaeum-support": "dev-master",
-        "aedart/athenaeum-utils": "dev-master"
+        "aedart/athenaeum-contracts": "^4.0",
+        "aedart/athenaeum-support": "^4.0",
+        "aedart/athenaeum-utils": "^4.0"
     },
     "require-dev": {
         "symfony/yaml": "^5.0"
