@@ -23,7 +23,7 @@ _Data Transfer Object abstraction._
 
 ### [Http Clients](archive/current/http/clients) 
 
-_Http Client wrapper, with a Manager able to handle multiple "profiles"._
+_Http Client wrapper, with a Manager able to handle multiple "profiles". It also comes with a powerful request builder, supporting Json API and OData http queries._
 
 ### [Support](archive/current/support) 
 
