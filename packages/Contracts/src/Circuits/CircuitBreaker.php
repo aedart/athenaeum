@@ -52,7 +52,7 @@ interface CircuitBreaker
      *
      * @return int
      */
-    public function state() : int;
+    public function state(): int;
 
     /**
      * Change Circuit Breaker state
