@@ -15,5 +15,4 @@ use Aedart\Contracts\Circuits\CircuitBreaker;
  */
 interface UnableToChangeStateException extends CircuitBreaker
 {
-
 }
