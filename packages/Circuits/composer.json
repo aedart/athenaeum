@@ -1,0 +1,44 @@
+{
+    "name": "aedart/athenaeum-circuits",
+    "description": "Athenaeum circuits package",
+    "keywords": [
+        "Athenaeum",
+        "Circuit Breaker"
+    ],
+    "homepage": "https://aedart.github.io/athenaeum/",
+    "support": {
+        "issues": "https://github.com/aedart/athenaeum/issues",
+        "source": "https://github.com/aedart/athenaeum"
+    },
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "illuminate/cache": "^7.6",
+        "illuminate/events": "^7.6",
+        "aedart/athenaeum-contracts": "^4.0.1",
+        "aedart/athenaeum-support": "^4.0.1",
+        "aedart/athenaeum-utils": "^4.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\Circuits\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.1.x-dev"
+        }
+    }
+}
