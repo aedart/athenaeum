@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Circuits;
 
 use Aedart\Contracts\Circuits\Exceptions\UnableToChangeStateException;
+use Throwable;
 
 /**
  * Circuit Breaker
@@ -80,6 +81,58 @@ interface CircuitBreaker
      * @return self
      */
     public function reportFailure(?string $reason = null): self;
+
+    /**
+     * Attempt to execute callback, e.g. request a resource or invoke action
+     * from 3rd party service.
+     *
+     * If state is {@see CLOSED}, then `$callback` MUST be invoked. Should the
+     * callback fail, then the internal failure count will be increased. If
+     * internal failure count reaches the failure threshold, method MUST
+     * change the state to {@see OPEN} (circuit tripped).
+     *
+     * If circuit breaker is {@see OPEN}, then `$callback` MUST NOT be invoked. The
+     * `$otherwise` callback MUST be invoked, if one is provided. If no `$otherwise`
+     * callback is provided, then an exception MUST be raised
+     * (fast failure principle).
+     *
+     * Should the circuit breaker's state be {@see HALF_OPEN}, then `$callback`
+     * MUST be invoked. If the callback does not fail, then the state MUST
+     * be changed to {@see CLOSED}. Internal failure count and timeouts MUST be
+     * reset, if this is the case.
+     *
+     * Whenever a failure is detected, it MUST be reported via {@see reportFailure}.
+     * Consequently, the {@see reportSuccess} method MUST be used upon success.
+     *
+     * @param callable $callback Request or action to invoke on 3rd party service
+     * @param callable|null $otherwise [optional] This callback is invoked if state is {@see OPEN}
+     *                      or if `$callback` fails. If not provided and `$callback` fails, then an
+     *                      exception will be thrown (fast failure principle).
+     *
+     * @return mixed Callback's resulting output. If `$otherwise` callback is provided,
+     *               and it is invoked, then it's resulting output is returned.
+     *
+     * @throws Throwable
+     */
+    public function attempt(callable $callback, ?callable $otherwise = null);
+
+    /**
+     * Set the name
+     *
+     * @param string $service E.g. name of 3rd party service or action this
+     *                        circuit breaker is handling
+     *
+     * @return self
+     */
+    public function name(string $service): self;
+
+    /**
+     * Returns the name
+     *
+     * @return string E.g. name of 3rd party service or action this
+     *                circuit breaker is handling
+     */
+    public function getName(): string;
 
     /**
      * Returns the last reason for failure, if available
