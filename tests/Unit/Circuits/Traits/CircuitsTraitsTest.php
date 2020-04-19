@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Unit\Circuits\Traits;
 
+use Aedart\Circuits\Traits\CircuitBreakerManagerTrait;
 use Aedart\Circuits\Traits\CircuitBreakerTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
 
@@ -28,6 +29,7 @@ class CircuitsTraitsTest extends TraitTestCase
     {
         return [
             'CircuitBreakerTrait' => [ CircuitBreakerTrait::class ],
+            'CircuitBreakerManagerTrait' => [ CircuitBreakerManagerTrait::class ],
         ];
     }
 
