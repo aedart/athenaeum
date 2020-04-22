@@ -23,10 +23,10 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "illuminate/config": "^7.6",
-        "illuminate/support": "^7.6",
-        "aedart/athenaeum-contracts": "^4.0.1",
-        "aedart/athenaeum-utils": "^4.0.1"
+        "illuminate/config": "^7.7",
+        "illuminate/support": "^7.7",
+        "aedart/athenaeum-contracts": "^4.2",
+        "aedart/athenaeum-utils": "^4.2"
     },
     "require-dev": {
         "twig/twig": "^2.12",
@@ -54,7 +54,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "4.1.x-dev"
+            "dev-master": "4.2.x-dev"
         }
     }
 }

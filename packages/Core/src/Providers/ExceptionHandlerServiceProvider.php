@@ -4,8 +4,10 @@ namespace Aedart\Core\Providers;
 
 use Aedart\Contracts\Exceptions\ExceptionHandler;
 use Aedart\Contracts\Exceptions\Factory as ExceptionHandlerFactory;
+use Aedart\Core\Exceptions\Handlers\Adaptors\LaravelExceptionHandler;
 use Aedart\Core\Exceptions\Handlers\CompositeExceptionHandler;
 use Aedart\Core\Exceptions\Handlers\Factory;
+use Illuminate\Contracts\Debug\ExceptionHandler as LaravelExceptionHandlerInterface;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,7 +21,8 @@ class ExceptionHandlerServiceProvider extends ServiceProvider implements Deferra
 {
     public array $singletons = [
         ExceptionHandler::class => CompositeExceptionHandler::class,
-        ExceptionHandlerFactory::class => Factory::class
+        ExceptionHandlerFactory::class => Factory::class,
+        LaravelExceptionHandlerInterface::class => LaravelExceptionHandler::class,
     ];
 
     /**
@@ -39,7 +42,8 @@ class ExceptionHandlerServiceProvider extends ServiceProvider implements Deferra
     {
         return [
             ExceptionHandler::class,
-            ExceptionHandlerFactory::class
+            ExceptionHandlerFactory::class,
+            LaravelExceptionHandlerInterface::class
         ];
     }
 }
