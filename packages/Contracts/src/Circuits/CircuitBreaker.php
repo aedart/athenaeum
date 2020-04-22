@@ -219,16 +219,16 @@ interface CircuitBreaker
     /**
      * Returns the current state
      *
-     * @return int
+     * @return State
      */
-    public function state(): int;
+    public function state(): State;
 
     /**
      * Change Circuit Breaker state
      *
-     * @param int $newState
+     * @param State $newState
      *
      * @return bool True if state changed, false otherwise
      */
-    public function changeState(int $newState): bool;
+    public function changeState(State $newState): bool;
 }
