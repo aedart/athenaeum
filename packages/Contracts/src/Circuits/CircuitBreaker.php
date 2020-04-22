@@ -117,6 +117,22 @@ interface CircuitBreaker
     public function attempt(callable $callback, ?callable $otherwise = null);
 
     /**
+     * Set the amount of retries
+     *
+     * @param int $amount
+     *
+     * @return self
+     */
+    public function retry(int $amount): self;
+
+    /**
+     * Returns the amount of retries
+     *
+     * @return int
+     */
+    public function retryAmount(): int ;
+
+    /**
      * Set the name
      *
      * @param string $service E.g. name of 3rd party service or action this
