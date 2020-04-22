@@ -152,9 +152,9 @@ interface CircuitBreaker
      *
      * @see reportFailure
      *
-     * @return string|null
+     * @return Failure|null
      */
-    public function lastFailure(): ?string;
+    public function lastFailure(): ?Failure;
 
     /**
      * Returns the current amount of failures
