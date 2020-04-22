@@ -2,7 +2,6 @@
 
 namespace Aedart\Contracts\Circuits;
 
-use Aedart\Contracts\Circuits\Exceptions\UnableToChangeStateException;
 use Throwable;
 
 /**
