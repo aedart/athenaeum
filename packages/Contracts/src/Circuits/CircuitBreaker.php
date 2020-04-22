@@ -59,7 +59,6 @@ interface CircuitBreaker
      * Upon successful state change, this method MUST reset internal
      * failure count.
      *
-     * @see attemptStateChange
      * @see changeState
      *
      * @return self
@@ -73,7 +72,6 @@ interface CircuitBreaker
      * failure count reaches the failure threshold.
      *
      * @see lastFailure
-     * @see attemptStateChange
      * @see changeState
      *
      * @param string|int $reason [optional] Failure reason
@@ -229,24 +227,9 @@ interface CircuitBreaker
     /**
      * Change Circuit Breaker state
      *
-     * @see attemptStateChange
-     *
-     * @param int $newState
-     *
-     * @return self
-     *
-     * @throws UnableToChangeStateException
-     */
-    public function changeState(int $newState): self;
-
-    /**
-     * Attempt to change the circuit breaker's state
-     *
-     * @see changeState
-     *
      * @param int $newState
      *
      * @return bool True if state changed, false otherwise
      */
-    public function attemptStateChange(int $newState): bool;
+    public function changeState(int $newState): bool;
 }
