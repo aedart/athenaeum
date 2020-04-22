@@ -127,7 +127,7 @@ interface CircuitBreaker
      *
      * @return int
      */
-    public function retryAmount(): int ;
+    public function retryAmount(): int;
 
     /**
      * Set the name
