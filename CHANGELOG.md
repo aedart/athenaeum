@@ -2,6 +2,20 @@
 
 ## v4.x
 
+### [v4.1.0](https://github.com/aedart/athenaeum/compare/4.0.1...4.1.0)
+
+#### Fixed
+
+* (Core) Unable to run `schedule:run` command. [#10](https://github.com/aedart/athenaeum/issues/10)
+
+#### Changed
+
+* Minimum required Laravel packages version set to version `^7.7`
+
+#### Added
+
+* `LaravelExceptionHandler` adaptor
+
 ### [v4.0.1](https://github.com/aedart/athenaeum/compare/v4.0...4.0.1)
 
 #### Fixed
