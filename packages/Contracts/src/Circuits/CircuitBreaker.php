@@ -160,6 +160,45 @@ interface CircuitBreaker
     public function lastFailure(): ?string;
 
     /**
+     * Returns the current amount of failures
+     *
+     * @return int
+     */
+    public function amountFailures(): int;
+
+    /**
+     * Determine if the failure threshold has been reached
+     *
+     * @see getFailureThreshold
+     * @see amountFailures
+     *
+     * @return bool
+     */
+    public function isFailureThresholdReached(): bool;
+
+    /**
+     * Set the failure threshold
+     *
+     * Failure threshold means the maximum amount of failures,
+     * before this circuit breaker trips ~ switches state to
+     * {@see OPEN}.
+     *
+     * @param int $amount
+     *
+     * @return self
+     */
+    public function failureThreshold(int $amount): self;
+
+    /**
+     * Returns the failure threshold
+     *
+     * @see failureThreshold
+     *
+     * @return int
+     */
+    public function getFailureThreshold(): int;
+
+    /**
      * Determine if Circuit Breaker is in {@see CLOSED} state
      *
      * @return bool
