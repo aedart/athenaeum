@@ -27,9 +27,9 @@
         "php": ">=7.4.0",
         "illuminate/config": "^7.7",
         "illuminate/filesystem": "^7.7",
-        "aedart/athenaeum-contracts": "^4.1",
-        "aedart/athenaeum-support": "^4.1",
-        "aedart/athenaeum-utils": "^4.1"
+        "aedart/athenaeum-contracts": "^4.2",
+        "aedart/athenaeum-support": "^4.2",
+        "aedart/athenaeum-utils": "^4.2"
     },
     "require-dev": {
         "symfony/yaml": "^5.0"
@@ -46,7 +46,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "4.1.x-dev"
+            "dev-master": "4.2.x-dev"
         }
     }
 }
