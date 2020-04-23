@@ -101,6 +101,8 @@ interface CircuitBreaker
      * Whenever a failure is detected, it MUST be reported via {@see reportFailure}.
      * Consequently, the {@see reportSuccess} method MUST be used upon success.
      *
+     * @see mustTripOn
+     *
      * @param callable $callback Request or action to invoke on 3rd party service
      * @param callable|null $otherwise [optional] This callback is invoked if state is {@see OPEN}
      *                      or if `$callback` fails. If not provided and `$callback` fails, then an
@@ -186,6 +188,37 @@ interface CircuitBreaker
      * @return int
      */
     public function getFailureThreshold(): int;
+
+    /**
+     * Determine when this circuit breaker should trip, e.g. when
+     * it must change it's state to {@see OPEN}.
+     *
+     * Method accepts class path to one or multiple exceptions.
+     * If {@see attempt} method's `$callback` fails with given exception(s),
+     * then it will be reported via {@see reportFailure}.
+     *
+     * If {@see attempt} method's `$callback` should fail with an exception other
+     * than those stated here (e.g. not instance of check), then it will NOT be
+     * reported as a failure - rather it's interpreted as implementation error.
+     *
+     * @see attempt
+     * @see tripsOn
+     *
+     * @param string|string[] $exceptions Exception class path or list of class paths
+     *
+     * @return self
+     */
+    public function mustTripOn($exceptions = Throwable::class): self;
+
+    /**
+     * Returns list of exception class paths, which will
+     * cause this circuit breaker to trip
+     *
+     * @see mustTripOn
+     *
+     * @return string[] Exception class paths
+     */
+    public function tripsOn(): array;
 
     /**
      * Determine if Circuit Breaker is in {@see CLOSED} state
