@@ -256,4 +256,12 @@ interface CircuitBreaker
      * @return bool True if state changed, false otherwise
      */
     public function changeState(State $newState): bool;
+
+    /**
+     * Returns the store that is responsible for
+     * persisting this circuit breaker's state
+     *
+     * @return Store
+     */
+    public function store(): Store;
 }
