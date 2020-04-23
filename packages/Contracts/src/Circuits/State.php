@@ -2,7 +2,6 @@
 
 namespace Aedart\Contracts\Circuits;
 
-use Aedart\Contracts\Utils\Populatable;
 use DateTimeInterface;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
@@ -14,8 +13,7 @@ use JsonSerializable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Circuits
  */
-interface State extends Populatable,
-    Arrayable,
+interface State extends Arrayable,
     JsonSerializable,
     Jsonable
 {
