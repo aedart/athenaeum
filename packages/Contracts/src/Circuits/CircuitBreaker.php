@@ -130,22 +130,14 @@ interface CircuitBreaker
     public function retryAmount(): int;
 
     /**
-     * Set the name
-     *
-     * @param string $service E.g. name of 3rd party service or action this
-     *                        circuit breaker is handling
-     *
-     * @return self
-     */
-    public function name(string $service): self;
-
-    /**
      * Returns the name
+     *
+     * This name can be used to identify circuit breaker
      *
      * @return string E.g. name of 3rd party service or action this
      *                circuit breaker is handling
      */
-    public function getName(): string;
+    public function name(): string;
 
     /**
      * Returns the last reason for failure, if available
