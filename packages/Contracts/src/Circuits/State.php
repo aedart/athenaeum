@@ -22,7 +22,7 @@ interface State extends Arrayable,
      *
      * @return int
      */
-    public function identifier(): int;
+    public function id(): int;
 
     /**
      * Returns the name of this state
