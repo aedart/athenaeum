@@ -40,6 +40,20 @@ interface State extends Arrayable,
     public function createAt(): DateTimeInterface;
 
     /**
+     * Date and time of when this state expires
+     *
+     * @return DateTimeInterface|null Null if state does not expire
+     */
+    public function expiresAt(): ?DateTimeInterface;
+
+    /**
+     * Determine if this state has expired
+     *
+     * @return bool
+     */
+    public function hasExpired(): bool;
+
+    /**
      * Returns the previous state's identifier, if
      * any is available
      *
