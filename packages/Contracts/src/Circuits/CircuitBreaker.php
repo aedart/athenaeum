@@ -142,7 +142,7 @@ interface CircuitBreaker
     public function name(): string;
 
     /**
-     * Returns the last reason for failure, if available
+     * Returns the last reported for failure, if available
      *
      * @see reportFailure
      *
