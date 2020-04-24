@@ -3,6 +3,7 @@
 namespace Aedart\Circuits\States;
 
 use Aedart\Circuits\Concerns;
+use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\State;
 use DateTimeInterface;
 use Illuminate\Support\Facades\Date;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Date;
  */
 abstract class BaseState implements State
 {
+    use Concerns\Identifiers;
     use Concerns\Dates;
     use Concerns\Importable;
     use Concerns\Exportable;
@@ -51,6 +53,8 @@ abstract class BaseState implements State
      * BaseState constructor.
      *
      * @param array $data [optional]
+     *
+     * @throws UnknownStateException
      */
     public function __construct(array $data = [])
     {
@@ -63,6 +67,8 @@ abstract class BaseState implements State
      * @param array $data [optional]
      *
      * @return static
+     *
+     * @throws UnknownStateException
      */
     public static function make(array $data = [])
     {
@@ -128,6 +134,8 @@ abstract class BaseState implements State
      * Populate this state
      *
      * @param array $data
+     *
+     * @throws UnknownStateException
      */
     protected function populate(array $data)
     {
@@ -143,9 +151,13 @@ abstract class BaseState implements State
      * @param int|null $id [optional]
      *
      * @return self
+     *
+     * @throws UnknownStateException
      */
     protected function setPrevious(?int $id = null)
     {
+        $this->assertStateIdentifier($id);
+
         $this->previous = $id;
 
         return $this;
