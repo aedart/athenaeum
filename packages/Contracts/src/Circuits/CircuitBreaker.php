@@ -39,6 +39,16 @@ interface CircuitBreaker
     public const HALF_OPEN = 4;
 
     /**
+     * Returns the name
+     *
+     * This name can be used to identify circuit breaker
+     *
+     * @return string E.g. name of 3rd party service or action this
+     *                circuit breaker is handling
+     */
+    public function name(): string;
+
+    /**
      * Determine if the service is available
      *
      * Method returns true if the circuit breaker's state is {@see CLOSED}.
@@ -102,6 +112,8 @@ interface CircuitBreaker
      * Consequently, the {@see reportSuccess} method MUST be used upon success.
      *
      * @see mustTripOn
+     * @see times
+     * @see retryDelay
      *
      * @param callable $callback Request or action to invoke on 3rd party service
      * @param callable|null $otherwise [optional] This callback is invoked if state is {@see OPEN}
@@ -116,30 +128,34 @@ interface CircuitBreaker
     public function attempt(callable $callback, ?callable $otherwise = null);
 
     /**
-     * Set the amount of retries
+     * Set the maximum amount of times that a callback should
+     * be attempted
      *
-     * @param int $amount
+     * @param int $times
+     * @param int $delay [optional] Milliseconds to wait before each try
      *
      * @return self
      */
-    public function retry(int $amount): self;
+    public function retry(int $times, int $delay = 0): self;
 
     /**
-     * Returns the amount of retries
+     * Returns the maximum amount of times a callback should
+     * be attempted
+     *
+     * @see retry
      *
      * @return int
      */
-    public function retryAmount(): int;
+    public function times(): int;
 
     /**
-     * Returns the name
+     * Returns milliseconds to wait before each try
      *
-     * This name can be used to identify circuit breaker
+     * @see retry
      *
-     * @return string E.g. name of 3rd party service or action this
-     *                circuit breaker is handling
+     * @return int
      */
-    public function name(): string;
+    public function retryDelay(): int;
 
     /**
      * Returns the last reported for failure, if available
@@ -155,13 +171,13 @@ interface CircuitBreaker
      *
      * @return int
      */
-    public function amountFailures(): int;
+    public function totalFailures(): int;
 
     /**
      * Determine if the failure threshold has been reached
      *
-     * @see getFailureThreshold
-     * @see amountFailures
+     * @see failureThreshold
+     * @see totalFailures
      *
      * @return bool
      */
@@ -178,16 +194,16 @@ interface CircuitBreaker
      *
      * @return self
      */
-    public function failureThreshold(int $amount): self;
+    public function withFailureThreshold(int $amount): self;
 
     /**
      * Returns the failure threshold
      *
-     * @see failureThreshold
+     * @see withFailureThreshold
      *
      * @return int
      */
-    public function getFailureThreshold(): int;
+    public function failureThreshold(): int;
 
     /**
      * Determine when this circuit breaker should trip, e.g. when
