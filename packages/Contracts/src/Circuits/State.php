@@ -37,7 +37,7 @@ interface State extends Arrayable,
      *
      * @return DateTimeInterface
      */
-    public function createAt(): DateTimeInterface;
+    public function createdAt(): DateTimeInterface;
 
     /**
      * Date and time of when this state expires
