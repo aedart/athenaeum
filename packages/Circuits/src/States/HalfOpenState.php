@@ -21,12 +21,4 @@ class HalfOpenState extends BaseState
     {
         return CircuitBreaker::HALF_OPEN;
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function name(): string
-    {
-        return 'half open';
-    }
 }

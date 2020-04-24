@@ -21,12 +21,4 @@ class OpenState extends BaseState
     {
         return CircuitBreaker::OPEN;
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function name(): string
-    {
-        return 'open';
-    }
 }

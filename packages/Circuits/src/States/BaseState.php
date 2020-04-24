@@ -22,13 +22,6 @@ abstract class BaseState implements State
     use Concerns\Exportable;
 
     /**
-     * State's name
-     *
-     * @var string
-     */
-    protected string $name;
-
-    /**
      * Previous state identifier
      *
      * @var int|null
@@ -73,6 +66,16 @@ abstract class BaseState implements State
     public static function make(array $data = [])
     {
         return new static($data);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function name(): string
+    {
+        return $this->getIdentifierName(
+            $this->id()
+        );
     }
 
     /**

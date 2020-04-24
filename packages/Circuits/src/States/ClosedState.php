@@ -21,12 +21,4 @@ class ClosedState extends BaseState
     {
         return CircuitBreaker::CLOSED;
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function name(): string
-    {
-        return 'closed';
-    }
 }
