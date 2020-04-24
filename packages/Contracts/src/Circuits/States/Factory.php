@@ -20,7 +20,7 @@ interface Factory
      *
      * @param string $name
      * @param int|null $previous [optional] Previous state identifier
-     * @param string|DateTimeInterface|null $createAt [optional]
+     * @param string|DateTimeInterface|null $createdAt [optional]
      * @param string|DateTimeInterface|null $expiresAt [optional]
      *
      * @return State
@@ -28,7 +28,7 @@ interface Factory
     public function makeClosedState(
         string $name,
         ?int $previous = null,
-        $createAt = null,
+        $createdAt = null,
         $expiresAt = null
     ): State;
 
@@ -37,7 +37,7 @@ interface Factory
      *
      * @param string $name
      * @param int|null $previous [optional] Previous state identifier
-     * @param string|DateTimeInterface|null $createAt [optional]
+     * @param string|DateTimeInterface|null $createdAt [optional]
      * @param string|DateTimeInterface|null $expiresAt [optional]
      *
      * @return State
@@ -45,7 +45,7 @@ interface Factory
     public function makeOpenState(
         string $name,
         ?int $previous = null,
-        $createAt = null,
+        $createdAt = null,
         $expiresAt = null
     ): State;
 
@@ -54,7 +54,7 @@ interface Factory
      *
      * @param string $name
      * @param int|null $previous [optional] Previous state identifier
-     * @param string|DateTimeInterface|null $createAt [optional]
+     * @param string|DateTimeInterface|null $createdAt [optional]
      * @param string|DateTimeInterface|null $expiresAt [optional]
      *
      * @return State
@@ -62,7 +62,7 @@ interface Factory
     public function makeHalfOpenState(
         string $name,
         ?int $previous = null,
-        $createAt = null,
+        $createdAt = null,
         $expiresAt = null
     ): State;
 
