@@ -38,9 +38,11 @@ trait Dates
      */
     protected function resolveDate($date = null, $default = 'now'): ?DateTimeInterface
     {
-        if (isset($date)) {
+        if($date instanceof DateTimeInterface){
+            return $date;
+        } elseif (is_string($date)) {
             return Date::make($date);
-        } elseif ($default === 'now') {
+        } elseif (!isset($date) && $default === 'now') {
             return Date::now($this->timezone);
         } else {
             return Date::make($default);
