@@ -25,6 +25,13 @@ interface Failure extends Arrayable,
     public function reason(): ?string;
 
     /**
+     * Arbitrary data associated with this failure
+     *
+     * @return mixed[]
+     */
+    public function context(): array;
+
+    /**
      * Date and time of when this failure was reported
      *
      * @return DateTimeInterface
