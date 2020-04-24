@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Circuits;
 
+use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Throwable;
 
 /**
@@ -270,6 +271,8 @@ interface CircuitBreaker
      * @param State $newState
      *
      * @return bool True if state changed, false otherwise
+     *
+     * @throws UnknownStateException
      */
     public function changeState(State $newState): bool;
 

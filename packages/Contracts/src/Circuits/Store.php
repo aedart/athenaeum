@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Circuits;
 
+use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\States\Locked;
 
 /**
@@ -26,6 +27,8 @@ interface Store
      * @param State $state
      *
      * @return bool True if successful, false otherwise
+     *
+     * @throws UnknownStateException
      */
     public function setState(State $state): bool;
 
