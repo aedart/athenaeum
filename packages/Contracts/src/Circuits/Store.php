@@ -2,6 +2,8 @@
 
 namespace Aedart\Contracts\Circuits;
 
+use Aedart\Contracts\Circuits\States\Locked;
+
 /**
  * Circuit Breaker Store
  *
@@ -15,6 +17,11 @@ interface Store
 {
     /**
      * Set circuit breaker's state
+     *
+     * If given state inherits from {@see Locked}, method
+     * SHOULD (implementation specific) attempt to lock
+     * the state, so that other instances are NOT able to
+     * set / obtain given state.
      *
      * @param State $state
      *
@@ -33,7 +40,7 @@ interface Store
     public function getState(): State;
 
     /**
-     * Report a failure
+     * Set last detected failure
      *
      * Method MUST increment failures count, using {@see incrementFailures},
      * when a failure is registered.
@@ -42,14 +49,14 @@ interface Store
      *
      * @return self
      */
-    public function reportFailure(Failure $failure): self;
+    public function setFailure(Failure $failure): self;
 
     /**
-     * Returns last registered failure reason, if available
+     * Returns last detected failure, if available
      *
      * @return Failure|null
      */
-    public function lastReportedFailure(): ?Failure;
+    public function getFailure(): ?Failure;
 
     /**
      * Increment amount of failures
@@ -65,10 +72,11 @@ interface Store
      *
      * @return int
      */
-    public function amountFailures(): int;
+    public function totalFailures(): int;
 
     /**
-     * Reset amount of registered failures
+     * Reset last detected failure and total amount
+     * of failures
      *
      * @return self
      */
