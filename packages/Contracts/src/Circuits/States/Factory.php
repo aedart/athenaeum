@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Circuits\States;
 
 use Aedart\Contracts\Circuits\CircuitBreaker;
+use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\State;
 use DateTimeInterface;
 use Throwable;
@@ -15,6 +16,25 @@ use Throwable;
  */
 interface Factory
 {
+    /**
+     * Returns a new state instance that matches given identifier
+     *
+     * @param int $id
+     * @param int|null $previous [optional] Previous state identifier
+     * @param string|DateTimeInterface|null $createdAt [optional]
+     * @param string|DateTimeInterface|null $expiresAt [optional]
+     *
+     * @return State
+     *
+     * @throws UnknownStateException
+     */
+    public function makeById(
+        int $id,
+        ?int $previous = null,
+        $createdAt = null,
+        $expiresAt = null
+    ): State;
+
     /**
      * Returns a new {@see CircuitBreaker::CLOSED} state
      *
@@ -61,32 +81,13 @@ interface Factory
     ): State;
 
     /**
-     * Returns a new state instance that matches given identifier
-     *
-     * @param int $id
-     * @param int|null $previous [optional] Previous state identifier
-     * @param string|DateTimeInterface|null $createdAt [optional]
-     * @param string|DateTimeInterface|null $expiresAt [optional]
-     *
-     * @return State
-     *
-     * @throws Throwable
-     */
-    public function makeById(
-        int $id,
-        ?int $previous = null,
-        $createdAt = null,
-        $expiresAt = null
-    ): State;
-
-    /**
      * Returns a new state instance
      *
      * @param array $data
      *
      * @return State
      *
-     * @throws Throwable
+     * @throws UnknownStateException
      */
     public function make(array $data): State;
 }
