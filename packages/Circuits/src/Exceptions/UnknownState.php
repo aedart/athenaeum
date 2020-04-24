@@ -14,5 +14,4 @@ use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
  */
 class UnknownState extends CircuitBreakerException implements UnknownStateException
 {
-
 }

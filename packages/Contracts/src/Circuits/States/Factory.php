@@ -6,7 +6,6 @@ use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\State;
 use DateTimeInterface;
-use Throwable;
 
 /**
  * State Factory

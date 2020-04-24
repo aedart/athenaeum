@@ -14,5 +14,4 @@ namespace Aedart\Contracts\Circuits\Exceptions;
  */
 interface UnknownStateException extends CircuitBreakerException
 {
-
 }

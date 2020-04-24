@@ -38,7 +38,7 @@ trait Dates
      */
     protected function resolveDate($date = null, $default = 'now'): ?DateTimeInterface
     {
-        if($date instanceof DateTimeInterface){
+        if ($date instanceof DateTimeInterface) {
             return $date;
         } elseif (is_string($date)) {
             return Date::make($date);

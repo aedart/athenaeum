@@ -2,7 +2,6 @@
 
 namespace Aedart\Tests\Unit\Circuits\States;
 
-use Aedart\Circuits\States\BaseState;
 use Aedart\Circuits\States\ClosedState;
 use Aedart\Circuits\States\HalfOpenState;
 use Aedart\Circuits\States\OpenState;
@@ -34,7 +33,7 @@ class StatesTest extends UnitTestCase
     /**
      * Provides state instances
      *
-     * @return array|array[]
+     * @return array[]
      */
     public function providesStates(): array
     {

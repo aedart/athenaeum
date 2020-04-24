@@ -47,9 +47,9 @@ trait Identifiers
      */
     protected function getIdentifierName(int $id): string
     {
-         $this->assertStateIdentifier($id);
+        $this->assertStateIdentifier($id);
 
-         return $this->validStates[$id];
+        return $this->validStates[$id];
     }
 
     /**

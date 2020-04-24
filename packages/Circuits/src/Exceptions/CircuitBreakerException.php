@@ -15,5 +15,4 @@ use RuntimeException;
  */
 class CircuitBreakerException extends RuntimeException implements CircuitBreakerExceptionInterface
 {
-
 }
