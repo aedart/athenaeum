@@ -18,7 +18,6 @@ interface Factory
     /**
      * Returns a new {@see CircuitBreaker::CLOSED} state
      *
-     * @param string $name
      * @param int|null $previous [optional] Previous state identifier
      * @param string|DateTimeInterface|null $createdAt [optional]
      * @param string|DateTimeInterface|null $expiresAt [optional]
@@ -26,7 +25,6 @@ interface Factory
      * @return State
      */
     public function makeClosedState(
-        string $name,
         ?int $previous = null,
         $createdAt = null,
         $expiresAt = null
@@ -35,7 +33,6 @@ interface Factory
     /**
      * Returns a new {@see CircuitBreaker::OPEN} state
      *
-     * @param string $name
      * @param int|null $previous [optional] Previous state identifier
      * @param string|DateTimeInterface|null $createdAt [optional]
      * @param string|DateTimeInterface|null $expiresAt [optional]
@@ -43,7 +40,6 @@ interface Factory
      * @return State
      */
     public function makeOpenState(
-        string $name,
         ?int $previous = null,
         $createdAt = null,
         $expiresAt = null
@@ -52,7 +48,6 @@ interface Factory
     /**
      * Returns a new {@see CircuitBreaker::HALF_OPEN} state
      *
-     * @param string $name
      * @param int|null $previous [optional] Previous state identifier
      * @param string|DateTimeInterface|null $createdAt [optional]
      * @param string|DateTimeInterface|null $expiresAt [optional]
@@ -60,7 +55,25 @@ interface Factory
      * @return State
      */
     public function makeHalfOpenState(
-        string $name,
+        ?int $previous = null,
+        $createdAt = null,
+        $expiresAt = null
+    ): State;
+
+    /**
+     * Returns a new state instance that matches given identifier
+     *
+     * @param int $id
+     * @param int|null $previous [optional] Previous state identifier
+     * @param string|DateTimeInterface|null $createdAt [optional]
+     * @param string|DateTimeInterface|null $expiresAt [optional]
+     *
+     * @return State
+     *
+     * @throws Throwable
+     */
+    public function makeById(
+        int $id,
         ?int $previous = null,
         $createdAt = null,
         $expiresAt = null
