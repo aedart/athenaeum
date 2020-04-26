@@ -3,11 +3,10 @@
 namespace Aedart\Circuits\Stores;
 
 use Aedart\Circuits\Concerns;
+use Aedart\Circuits\Stores\Options\StoreOptions;
 use Aedart\Circuits\Traits\FailureFactoryTrait;
 use Aedart\Circuits\Traits\StateFactoryTrait;
-use Aedart\Contracts\Circuits\Failures\Factory as FailureFactory;
 use Aedart\Contracts\Circuits\Failures\FailureFactoryAware;
-use Aedart\Contracts\Circuits\States\Factory as StatesFactory;
 use Aedart\Contracts\Circuits\States\StateFactoryAware;
 use Aedart\Contracts\Circuits\Store;
 

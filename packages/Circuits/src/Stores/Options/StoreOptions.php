@@ -1,6 +1,6 @@
 <?php
 
-namespace Aedart\Circuits\Stores;
+namespace Aedart\Circuits\Stores\Options;
 
 use Aedart\Contracts\Circuits\Failures\Factory as FailureFactory;
 use Aedart\Contracts\Circuits\States\Factory as StateFactory;
