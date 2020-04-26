@@ -36,7 +36,7 @@ trait Options
      *
      * @param array $options [optional]
      *
-     * @return Options
+     * @return self
      */
     public function withOptions(array $options = [])
     {
