@@ -43,7 +43,7 @@ interface Store
     public function getState(): State;
 
     /**
-     * Set last detected failure
+     * Register a detected failure
      *
      * Method MUST increment failures count, using {@see incrementFailures},
      * when a failure is registered.
@@ -52,7 +52,7 @@ interface Store
      *
      * @return bool True if successful, false otherwise
      */
-    public function setFailure(Failure $failure): bool;
+    public function registerFailure(Failure $failure): bool;
 
     /**
      * Returns last detected failure, if available
