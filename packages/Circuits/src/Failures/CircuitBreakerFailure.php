@@ -97,7 +97,7 @@ class CircuitBreakerFailure implements Failure
         return [
             'reason' => $this->reason(),
             'context' => $this->context(),
-            'reported_at' => $this->reportedAt(),
+            'reported_at' => $this->formatDate($this->reportedAt()),
             'total_failures' => $this->totalFailures()
         ];
     }
