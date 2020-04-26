@@ -2,7 +2,6 @@
 
 namespace Aedart\Contracts\Circuits\States;
 
-use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\State;
 use DateTimeInterface;
@@ -16,7 +15,7 @@ use DateTimeInterface;
 interface Factory
 {
     /**
-     * Returns a new state instance that matches given identifier
+     * Creates a new state instance that matches given identifier
      *
      * @param int $id
      * @param int|null $previous [optional] Previous state identifier
@@ -27,7 +26,7 @@ interface Factory
      *
      * @throws UnknownStateException
      */
-    public function makeById(
+    public function make(
         int $id,
         ?int $previous = null,
         $createdAt = null,
@@ -35,52 +34,7 @@ interface Factory
     ): State;
 
     /**
-     * Returns a new {@see CircuitBreaker::CLOSED} state
-     *
-     * @param int|null $previous [optional] Previous state identifier
-     * @param string|DateTimeInterface|null $createdAt [optional]
-     * @param string|DateTimeInterface|null $expiresAt [optional]
-     *
-     * @return State
-     */
-    public function makeClosedState(
-        ?int $previous = null,
-        $createdAt = null,
-        $expiresAt = null
-    ): State;
-
-    /**
-     * Returns a new {@see CircuitBreaker::OPEN} state
-     *
-     * @param int|null $previous [optional] Previous state identifier
-     * @param string|DateTimeInterface|null $createdAt [optional]
-     * @param string|DateTimeInterface|null $expiresAt [optional]
-     *
-     * @return State
-     */
-    public function makeOpenState(
-        ?int $previous = null,
-        $createdAt = null,
-        $expiresAt = null
-    ): State;
-
-    /**
-     * Returns a new {@see CircuitBreaker::HALF_OPEN} state
-     *
-     * @param int|null $previous [optional] Previous state identifier
-     * @param string|DateTimeInterface|null $createdAt [optional]
-     * @param string|DateTimeInterface|null $expiresAt [optional]
-     *
-     * @return State
-     */
-    public function makeHalfOpenState(
-        ?int $previous = null,
-        $createdAt = null,
-        $expiresAt = null
-    ): State;
-
-    /**
-     * Returns a new state instance
+     * Creates a new state instance
      *
      * @param array $data
      *
@@ -88,5 +42,5 @@ interface Factory
      *
      * @throws UnknownStateException
      */
-    public function make(array $data): State;
+    public function makeByArray(array $data): State;
 }
