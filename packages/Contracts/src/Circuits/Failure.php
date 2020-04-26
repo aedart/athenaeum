@@ -39,5 +39,5 @@ interface Failure extends HasContext,
      *
      * @return int
      */
-    public function amountFailures(): int;
+    public function totalFailures(): int;
 }
