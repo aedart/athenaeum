@@ -38,7 +38,7 @@ class Factory implements StatesFactory
      */
     public function makeByArray(array $data): State
     {
-        if (!isset($data['id'])){
+        if (!isset($data['id'])) {
             throw new UnknownState('Cannot create state, missing "id"; state identifier');
         }
 

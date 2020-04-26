@@ -23,7 +23,8 @@ use Illuminate\Support\Str;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Circuits\Stores
  */
-abstract class BaseStore implements Store,
+abstract class BaseStore implements
+    Store,
     StateFactoryAware,
     FailureFactoryAware
 {
@@ -60,7 +61,8 @@ abstract class BaseStore implements Store,
      * @param string $service
      * @param StoreOptions $options
      */
-    public function __construct(string $service, StoreOptions $options) {
+    public function __construct(string $service, StoreOptions $options)
+    {
         $this
             ->setService($service)
             ->withOptions($options->options)

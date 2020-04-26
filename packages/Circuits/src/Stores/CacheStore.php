@@ -21,7 +21,8 @@ use Illuminate\Contracts\Cache\Store as LaravelCacheStore;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Circuits\Stores
  */
-class CacheStore extends BaseStore implements CacheFactoryAware,
+class CacheStore extends BaseStore implements
+    CacheFactoryAware,
     CacheStoreAware
 {
     use CacheFactoryTrait;
@@ -61,7 +62,8 @@ class CacheStore extends BaseStore implements CacheFactoryAware,
      * @param string $service
      * @param CacheStoreOptions $options
      */
-    public function __construct(string $service, CacheStoreOptions $options) {
+    public function __construct(string $service, CacheStoreOptions $options)
+    {
         parent::__construct($service, $options);
 
         $this
@@ -88,7 +90,7 @@ class CacheStore extends BaseStore implements CacheFactoryAware,
     {
         $state = $this->getCacheStore()->get($this->stateKey);
 
-        if (!isset($state)){
+        if (!isset($state)) {
             return $this->getStateFactory()->make(CircuitBreaker::CLOSED);
         }
 
@@ -118,7 +120,7 @@ class CacheStore extends BaseStore implements CacheFactoryAware,
     {
         $failure = $this->getCacheStore()->get($this->lastFailureKey);
 
-        if (!isset($failure)){
+        if (!isset($failure)) {
             return null;
         }
 
@@ -132,7 +134,7 @@ class CacheStore extends BaseStore implements CacheFactoryAware,
     {
         $total = $this->getCacheStore()->increment($this->totalFailuresKey, $amount);
 
-        if($total === false){
+        if ($total === false) {
             throw new StoreException('Unable to increment total amount of failures');
         }
 
@@ -145,7 +147,7 @@ class CacheStore extends BaseStore implements CacheFactoryAware,
     public function totalFailures(): int
     {
         $total = $this->getCacheStore()->get($this->totalFailuresKey);
-        if (!isset($total)){
+        if (!isset($total)) {
             return 0;
         }
 
@@ -162,7 +164,7 @@ class CacheStore extends BaseStore implements CacheFactoryAware,
         $forgotTotal = $store->forget($this->totalFailuresKey);
         $forgotFailure = $store->forget($this->lastFailureKey);
 
-        if($forgotFailure === false || $forgotTotal === false){
+        if ($forgotFailure === false || $forgotTotal === false) {
             throw new StoreException('Unable reset last registered failure / total failure amount');
         }
 
@@ -193,7 +195,7 @@ class CacheStore extends BaseStore implements CacheFactoryAware,
         );
 
         $store = $repository->getStore();
-        if (!($store instanceof LockProvider)){
+        if (!($store instanceof LockProvider)) {
             throw new StoreException('Only "Lock Provider" cache-stores can be used by Circuit Breaker Cache Store');
         }
 
