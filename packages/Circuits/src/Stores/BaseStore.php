@@ -23,19 +23,44 @@ abstract class BaseStore implements Store,
 {
     use StateFactoryTrait;
     use FailureFactoryTrait;
+    use Concerns\Options;
+
+    /**
+     * Name of service
+     *
+     * @var string
+     */
+    protected string $service;
 
     /**
      * BaseStore constructor.
      *
-     * @param StatesFactory|null $statesFactory [optional]
-     * @param FailureFactory|null $failureFactory [optional]
+     * @param string $service
+     * @param StoreOptions $options
      */
-    public function __construct(
-        ?StatesFactory $statesFactory = null,
-        ?FailureFactory $failureFactory = null
-    ) {
+    public function __construct(string $service, StoreOptions $options) {
         $this
-            ->setStateFactory($statesFactory)
-            ->setFailureFactory($failureFactory);
+            ->setService($service)
+            ->withOptions($options->options)
+            ->setStateFactory($options->stateFactory)
+            ->setFailureFactory($options->failureFactory);
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Set the service's name
+     *
+     * @param string $name
+     *
+     * @return self
+     */
+    protected function setService(string $name)
+    {
+        $this->service = $name;
+
+        return $this;
     }
 }
