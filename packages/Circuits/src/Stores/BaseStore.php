@@ -3,10 +3,16 @@
 namespace Aedart\Circuits\Stores;
 
 use Aedart\Circuits\Concerns;
+use Aedart\Circuits\Failures\CircuitBreakerFailure;
+use Aedart\Circuits\States\ClosedState;
+use Aedart\Circuits\States\HalfOpenState;
+use Aedart\Circuits\States\OpenState;
 use Aedart\Circuits\Stores\Options\StoreOptions;
 use Aedart\Circuits\Traits\FailureFactoryTrait;
 use Aedart\Circuits\Traits\StateFactoryTrait;
+use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\Failures\FailureFactoryAware;
+use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\States\StateFactoryAware;
 use Aedart\Contracts\Circuits\Store;
 use Illuminate\Support\Str;
@@ -38,6 +44,15 @@ abstract class BaseStore implements Store,
      * @var string
      */
     protected string $keyPrefix = '';
+
+    protected array $allowedClasses = [
+        State::class,
+//        ClosedState::class,
+//        OpenState::class,
+//        HalfOpenState::class,
+        Failure::class,
+//        CircuitBreakerFailure::class
+    ];
 
     /**
      * BaseStore constructor.
@@ -96,5 +111,31 @@ abstract class BaseStore implements Store,
     protected function key(string $name): string
     {
         return Str::snake($this->keyPrefix . '_' . $name);
+    }
+
+    /**
+     * Convert, e.g. serialise, value so that store can
+     * persist it.
+     *
+     * @param mixed $value
+     *
+     * @return string
+     */
+    public function toStore($value)
+    {
+        return serialize($value);
+    }
+
+    /**
+     * Convert, e.g. unserialize, value so store
+     * can return it to circuit breaker
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public function fromStore($value)
+    {
+        return unserialize($value, [ 'allowed_classes' => $this->allowedClasses ]);
     }
 }
