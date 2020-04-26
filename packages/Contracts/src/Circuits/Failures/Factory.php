@@ -24,7 +24,7 @@ interface Factory
      * @return Failure
      */
     public function make(
-        ?string $reason,
+        ?string $reason = null,
         array $context = [],
         $reportedAt = null,
         int $totalFailures = 0
