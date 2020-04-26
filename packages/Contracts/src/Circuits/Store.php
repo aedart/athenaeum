@@ -50,9 +50,9 @@ interface Store
      *
      * @param Failure $failure
      *
-     * @return self
+     * @return bool True if successful, false otherwise
      */
-    public function setFailure(Failure $failure): self;
+    public function setFailure(Failure $failure): bool;
 
     /**
      * Returns last detected failure, if available
