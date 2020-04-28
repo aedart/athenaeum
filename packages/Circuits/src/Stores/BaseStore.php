@@ -71,6 +71,32 @@ abstract class BaseStore implements
             ->setKeyPrefix($service);
     }
 
+    /**
+     * Convert, e.g. serialise, value so that store can
+     * persist it.
+     *
+     * @param mixed $value
+     *
+     * @return string
+     */
+    public function toStore($value)
+    {
+        return serialize($value);
+    }
+
+    /**
+     * Convert, e.g. unserialize, value so store
+     * can return it to circuit breaker
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public function fromStore($value)
+    {
+        return unserialize($value, [ 'allowed_classes' => $this->allowedClasses ]);
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -113,31 +139,5 @@ abstract class BaseStore implements
     protected function key(string $name): string
     {
         return Str::snake($this->keyPrefix . '_' . $name);
-    }
-
-    /**
-     * Convert, e.g. serialise, value so that store can
-     * persist it.
-     *
-     * @param mixed $value
-     *
-     * @return string
-     */
-    public function toStore($value)
-    {
-        return serialize($value);
-    }
-
-    /**
-     * Convert, e.g. unserialize, value so store
-     * can return it to circuit breaker
-     *
-     * @param mixed $value
-     *
-     * @return mixed
-     */
-    public function fromStore($value)
-    {
-        return unserialize($value, [ 'allowed_classes' => $this->allowedClasses ]);
     }
 }
