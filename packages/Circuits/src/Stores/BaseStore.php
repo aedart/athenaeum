@@ -15,6 +15,8 @@ use Aedart\Contracts\Circuits\Failures\FailureFactoryAware;
 use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\States\StateFactoryAware;
 use Aedart\Contracts\Circuits\Store;
+use Aedart\Contracts\Support\Helpers\Events\DispatcherAware;
+use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Str;
 
@@ -27,10 +29,12 @@ use Illuminate\Support\Str;
 abstract class BaseStore implements
     Store,
     StateFactoryAware,
-    FailureFactoryAware
+    FailureFactoryAware,
+    DispatcherAware
 {
     use StateFactoryTrait;
     use FailureFactoryTrait;
+    use DispatcherTrait;
     use Concerns\Options;
 
     /**
@@ -76,6 +80,7 @@ abstract class BaseStore implements
             ->withOptions($options->options)
             ->setStateFactory($options->stateFactory)
             ->setFailureFactory($options->failureFactory)
+            ->setDispatcher($options->dispatcher)
             ->setKeyPrefix($service);
     }
 
