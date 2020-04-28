@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Circuits;
 
+use Aedart\Contracts\Circuits\Events\FailureReported;
 use Aedart\Contracts\Circuits\Events\HasClosed;
 use Aedart\Contracts\Circuits\Events\HasHalfOpened;
 use Aedart\Contracts\Circuits\Events\HasOpened;
@@ -72,6 +73,9 @@ interface Store
      * Method MUST increment failures count, using {@see incrementFailures},
      * when a failure is registered.
      *
+     * Method MUST dispatch {@see FailureReported} event, upon successful
+     * registration of failure.
+     * 
      * @param Failure $failure
      *
      * @return bool True if successful, false otherwise
