@@ -3,6 +3,9 @@
 namespace Aedart\Circuits\Stores;
 
 use Aedart\Circuits\Concerns;
+use Aedart\Circuits\Events\ChangedToClosed;
+use Aedart\Circuits\Events\ChangedToOpen;
+use Aedart\Circuits\Events\FailureWasReported;
 use Aedart\Circuits\Failures\CircuitBreakerFailure;
 use Aedart\Circuits\States\ClosedState;
 use Aedart\Circuits\States\HalfOpenState;
@@ -10,6 +13,12 @@ use Aedart\Circuits\States\OpenState;
 use Aedart\Circuits\Stores\Options\StoreOptions;
 use Aedart\Circuits\Traits\FailureFactoryTrait;
 use Aedart\Circuits\Traits\StateFactoryTrait;
+use Aedart\Contracts\Circuits\CircuitBreaker;
+use Aedart\Contracts\Circuits\Events\CircuitBreakerEvent;
+use Aedart\Contracts\Circuits\Events\FailureReported;
+use Aedart\Contracts\Circuits\Events\HasClosed;
+use Aedart\Contracts\Circuits\Events\HasHalfOpened;
+use Aedart\Contracts\Circuits\Events\HasOpened;
 use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\Failures\FailureFactoryAware;
 use Aedart\Contracts\Circuits\State;
@@ -191,5 +200,68 @@ abstract class BaseStore implements
         );
 
         return (int) $diff->format('%s');
+    }
+
+    /**
+     * Dispatch a state changed to {@see CircuitBreaker::CLOSED} event
+     *
+     * @param State $closed
+     */
+    protected function dispatchHasClosed(State $closed)
+    {
+        $this->dispatchEvent(
+            HasClosed::class,
+            new ChangedToClosed($closed, $this->getFailure())
+        );
+    }
+
+    /**
+     * Dispatch a state changed to {@see CircuitBreaker::OPEN} event
+     *
+     * @param State $opened
+     */
+    protected function dispatchHasOpened(State $opened)
+    {
+        $this->dispatchEvent(
+            HasOpened::class,
+            new ChangedToOpen($opened, $this->getFailure())
+        );
+    }
+
+    /**
+     * Dispatch a state changed to {@see CircuitBreaker::HALF_OPEN} event
+     *
+     * @param State $halfOpened
+     */
+    protected function dispatchHalfOpened(State $halfOpened)
+    {
+        $this->dispatchEvent(
+            HasHalfOpened::class,
+            new ChangedToOpen($halfOpened, $this->getFailure())
+        );
+    }
+
+    /**
+     * Dispatch a failure was reported {@see CircuitBreaker::CLOSED} event
+     *
+     * @param Failure $failure
+     */
+    protected function dispatchFailureReported(Failure $failure)
+    {
+        $this->dispatchEvent(
+            FailureReported::class,
+            new FailureWasReported($this->getState(), $failure, $this->getFailure())
+        );
+    }
+
+    /**
+     * Dispatch circuit breaker event
+     *
+     * @param string $event Identifier
+     * @param CircuitBreakerEvent $payload
+     */
+    protected function dispatchEvent(string $event, CircuitBreakerEvent $payload)
+    {
+        $this->getDispatcher()->dispatch($event, $payload);
     }
 }
