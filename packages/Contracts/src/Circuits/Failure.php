@@ -35,7 +35,7 @@ interface Failure extends HasContext,
 
     /**
      * Total amount of failures reported, at the
-     * time of this failure
+     * time when this failure occurred
      *
      * @return int
      */
