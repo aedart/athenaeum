@@ -2,6 +2,9 @@
 
 namespace Aedart\Contracts\Circuits;
 
+use Aedart\Contracts\Circuits\Events\HasClosed;
+use Aedart\Contracts\Circuits\Events\HasHalfOpened;
+use Aedart\Contracts\Circuits\Events\HasOpened;
 use Aedart\Contracts\Circuits\Exceptions\StateCannotBeLockedException;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\States\Lockable;
@@ -19,6 +22,13 @@ interface Store
 {
     /**
      * Set circuit breaker's state
+     *
+     * Upon successful state change, method MUST dispatch
+     * appropriate event.
+     *
+     * @see HasClosed
+     * @see HasOpened
+     * @see HasHalfOpened
      *
      * @param State $state
      *
@@ -41,8 +51,8 @@ interface Store
     /**
      * Attempt to obtain a lock for given state
      *
-     * This method is intended for intermediate states, e.g. like the
-     * {@see CircuitBreaker::HALF_OPEN} state.
+     * This method is intended for setting intermediate states,
+     * e.g. like the {@see CircuitBreaker::HALF_OPEN} state.
      *
      * @param State|Lockable $state Lockable state
      * @param callable $callback Invoked if locked is successfully acquired.
