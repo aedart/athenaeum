@@ -2,11 +2,13 @@
 
 namespace Aedart\Circuits\Stores;
 
+use Aedart\Circuits\Exceptions\StateCannotBeLocked;
 use Aedart\Circuits\Exceptions\StoreException;
 use Aedart\Circuits\Stores\Options\CacheStoreOptions;
 use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\State;
+use Aedart\Contracts\Circuits\States\Lockable;
 use Aedart\Contracts\Circuits\Store;
 use Aedart\Contracts\Support\Helpers\Cache\CacheFactoryAware;
 use Aedart\Contracts\Support\Helpers\Cache\CacheStoreAware;
@@ -34,6 +36,13 @@ class CacheStore extends BaseStore implements
      * @var string
      */
     protected string $stateKey;
+
+    /**
+     * Locked state key
+     *
+     * @var string
+     */
+    protected string $lockedStateKey;
 
     /**
      * Total failures key
@@ -93,6 +102,28 @@ class CacheStore extends BaseStore implements
     /**
      * @inheritDoc
      */
+    public function lockState(State $state, callable $callback)
+    {
+        if (!($state instanceof Lockable)){
+            throw new StateCannotBeLocked(sprintf('%s state cannot be locked', $state->name()));
+        }
+
+        /** @var \Illuminate\Contracts\Cache\Store|LockProvider $store */
+        $store = $this->getCacheStore();
+        $lock = $store->lock(
+            $this->lockedStateKey,
+            $this->stateTtl($state),
+            $this->service
+        );
+
+        // Attempt acquire lock. If successfully, then the callback is invoked and
+        // released. If not, then "false" is returned.
+        return $lock->get($callback);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function registerFailure(Failure $failure): bool
     {
         $persisted = $this->getCacheStore()->forever(
@@ -143,7 +174,7 @@ class CacheStore extends BaseStore implements
             return 0;
         }
 
-        return (int) $total;
+        return (int)$total;
     }
 
     /**
@@ -196,6 +227,7 @@ class CacheStore extends BaseStore implements
     protected function prepareKeys()
     {
         $this->stateKey = $this->key('state');
+        $this->lockedStateKey = $this->key('locked');
         $this->totalFailuresKey = $this->key('total_failures');
         $this->lastFailureKey = $this->key('last_failure');
 

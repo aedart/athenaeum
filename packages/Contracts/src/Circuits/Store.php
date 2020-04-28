@@ -2,8 +2,9 @@
 
 namespace Aedart\Contracts\Circuits;
 
+use Aedart\Contracts\Circuits\Exceptions\StateCannotBeLockedException;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
-use Aedart\Contracts\Circuits\States\Locked;
+use Aedart\Contracts\Circuits\States\Lockable;
 
 /**
  * Circuit Breaker Store
@@ -18,11 +19,6 @@ interface Store
 {
     /**
      * Set circuit breaker's state
-     *
-     * If given state inherits from {@see Locked}, method
-     * SHOULD (implementation specific) attempt to lock
-     * the state, so that other instances are NOT able to
-     * set / obtain given state.
      *
      * @param State $state
      *
@@ -41,6 +37,24 @@ interface Store
      * @return State
      */
     public function getState(): State;
+
+    /**
+     * Attempt to obtain a lock for given state
+     *
+     * This method is intended for intermediate states, e.g. like the
+     * {@see CircuitBreaker::HALF_OPEN} state.
+     *
+     * @param State|Lockable $state Lockable state
+     * @param callable $callback Invoked if locked is successfully acquired.
+     *                           Once callback has been invoked, the lock MUST
+     *                           automatically be released.
+     *
+     * @return mixed Callback's resulting output or False if lock was not acquired
+     *
+     * @throws StateCannotBeLockedException If given state cannot be locked, e.g. not
+     *                               supported.
+     */
+    public function lockState(State $state, callable $callback);
 
     /**
      * Register a detected failure
