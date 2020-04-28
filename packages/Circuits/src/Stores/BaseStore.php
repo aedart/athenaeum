@@ -4,8 +4,10 @@ namespace Aedart\Circuits\Stores;
 
 use Aedart\Circuits\Concerns;
 use Aedart\Circuits\Events\ChangedToClosed;
+use Aedart\Circuits\Events\ChangedToHalfOpen;
 use Aedart\Circuits\Events\ChangedToOpen;
 use Aedart\Circuits\Events\FailureWasReported;
+use Aedart\Circuits\Exceptions\UnknownState;
 use Aedart\Circuits\Failures\CircuitBreakerFailure;
 use Aedart\Circuits\States\ClosedState;
 use Aedart\Circuits\States\HalfOpenState;
@@ -203,42 +205,43 @@ abstract class BaseStore implements
     }
 
     /**
-     * Dispatch a state changed to {@see CircuitBreaker::CLOSED} event
+     * Dispatch an "state has changed" event
      *
-     * @param State $closed
+     * @see HasClosed
+     * @see HasOpened
+     * @see HasHalfOpened
+     *
+     * @param State $state
+     *
+     * @return self
      */
-    protected function dispatchHasClosed(State $closed)
+    protected function dispatchStateChange(State $state)
     {
-        $this->dispatchEvent(
-            HasClosed::class,
-            new ChangedToClosed($closed, $this->getFailure())
-        );
-    }
+        switch ($state->id()) {
+            case CircuitBreaker::CLOSED:
+                $event = HasClosed::class;
+                $payload = new ChangedToClosed($state, $this->getFailure());
+                break;
 
-    /**
-     * Dispatch a state changed to {@see CircuitBreaker::OPEN} event
-     *
-     * @param State $opened
-     */
-    protected function dispatchHasOpened(State $opened)
-    {
-        $this->dispatchEvent(
-            HasOpened::class,
-            new ChangedToOpen($opened, $this->getFailure())
-        );
-    }
+            case CircuitBreaker::OPEN:
+                $event = HasOpened::class;
+                $payload = new ChangedToOpen($state, $this->getFailure());
+                break;
 
-    /**
-     * Dispatch a state changed to {@see CircuitBreaker::HALF_OPEN} event
-     *
-     * @param State $halfOpened
-     */
-    protected function dispatchHalfOpened(State $halfOpened)
-    {
-        $this->dispatchEvent(
-            HasHalfOpened::class,
-            new ChangedToOpen($halfOpened, $this->getFailure())
-        );
+            case CircuitBreaker::HALF_OPEN:
+                $event = HasHalfOpened::class;
+                $payload = new ChangedToHalfOpen($state, $this->getFailure());
+                break;
+
+            default:
+                // N/A -  we could fail here, but might not be suitable
+                // when considering that this method is "only" intended to
+                // dispatch state change events.
+                return $this;
+        }
+
+        // Finally, dispatch the event
+        return $this->dispatchEvent($event, $payload);
     }
 
     /**
@@ -259,9 +262,13 @@ abstract class BaseStore implements
      *
      * @param string $event Identifier
      * @param CircuitBreakerEvent $payload
+     *
+     * @return self;
      */
     protected function dispatchEvent(string $event, CircuitBreakerEvent $payload)
     {
         $this->getDispatcher()->dispatch($event, $payload);
+
+        return $this;
     }
 }
