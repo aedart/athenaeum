@@ -3,11 +3,11 @@
 namespace Aedart\Contracts\Circuits\States;
 
 /**
- * Locked
+ * Lockable
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Circuits\States
  */
-interface Locked
+interface Lockable
 {
 }
