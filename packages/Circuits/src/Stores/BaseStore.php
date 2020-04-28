@@ -15,6 +15,7 @@ use Aedart\Contracts\Circuits\Failures\FailureFactoryAware;
 use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\States\StateFactoryAware;
 use Aedart\Contracts\Circuits\Store;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Str;
 
 /**
@@ -45,6 +46,13 @@ abstract class BaseStore implements
      * @var string
      */
     protected string $keyPrefix = '';
+
+    /**
+     * Default state time-to-live
+     *
+     * @var int Duration in seconds
+     */
+    protected int $defaultTtl = 3600;
 
     protected array $allowedClasses = [
         State::class,
@@ -97,6 +105,16 @@ abstract class BaseStore implements
         return unserialize($value, [ 'allowed_classes' => $this->allowedClasses ]);
     }
 
+    /**
+     * Returns time-to-live for states
+     *
+     * @return int Duration in seconds
+     */
+    public function ttl(): int
+    {
+        return $this->getOption('ttl', $this->defaultTtl);
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -139,5 +157,34 @@ abstract class BaseStore implements
     protected function key(string $name): string
     {
         return Str::snake($this->keyPrefix . '_' . $name);
+    }
+
+    /**
+     * Returns the ttl of given state
+     *
+     * If state does not have en expiration date and time, the
+     * method will return a default ttl via {@see ttl} method.
+     *
+     * @param State $state
+     *
+     * @return int Duration in seconds
+     */
+    protected function stateTtl(State $state): int
+    {
+        $expiresAt = $state->expiresAt();
+        if (!isset($expiresAt)) {
+            return $this->ttl();
+        }
+
+        if($state->hasExpired()){
+            return 0;
+        }
+
+        $diff = $expiresAt->diff(
+            Date::now($expiresAt->getTimezone()),
+            true
+        );
+
+        return (int) $diff->format('%s');
     }
 }

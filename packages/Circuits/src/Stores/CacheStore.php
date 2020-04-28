@@ -29,13 +29,6 @@ class CacheStore extends BaseStore implements
     use CacheStoreTrait;
 
     /**
-     * Default cached item time-to-live
-     *
-     * @var int Duration in seconds
-     */
-    protected int $defaultTtl = 3600;
-
-    /**
      * State key
      *
      * @var string
@@ -79,7 +72,7 @@ class CacheStore extends BaseStore implements
         return $this->getCacheStore()->put(
             $this->stateKey,
             $this->toStore($state),
-            $this->ttl()
+            $this->stateTtl($state)
         );
     }
 
@@ -168,16 +161,6 @@ class CacheStore extends BaseStore implements
         }
 
         return $this;
-    }
-
-    /**
-     * Returns time-to-live for cached items
-     *
-     * @return int Duration in seconds
-     */
-    public function ttl(): int
-    {
-        return $this->getOption('ttl', $this->defaultTtl);
     }
 
     /*****************************************************************
