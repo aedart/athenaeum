@@ -69,6 +69,11 @@ abstract class BaseStore implements
      */
     protected int $defaultTtl = 3600;
 
+    /**
+     * Allowed classes to be unserialized
+     *
+     * @var string[]
+     */
     protected array $allowedClasses = [
         State::class,
 //        ClosedState::class,
@@ -205,7 +210,7 @@ abstract class BaseStore implements
     }
 
     /**
-     * Dispatch an "state has changed" event
+     * Dispatch "state has changed" event
      *
      * @see HasClosed
      * @see HasOpened
