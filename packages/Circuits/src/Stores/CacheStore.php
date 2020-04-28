@@ -78,11 +78,17 @@ class CacheStore extends BaseStore implements
      */
     public function setState(State $state): bool
     {
-        return $this->getCacheStore()->put(
+        $wasChanged = $this->getCacheStore()->put(
             $this->stateKey,
             $this->toStore($state),
             $this->stateTtl($state)
         );
+
+        if($wasChanged){
+            $this->dispatchStateChange($state);
+        }
+
+        return $wasChanged;
     }
 
     /**
@@ -118,7 +124,11 @@ class CacheStore extends BaseStore implements
 
         // Attempt acquire lock. If successfully, then the callback is invoked and
         // released. If not, then "false" is returned.
-        return $lock->get($callback);
+        return $lock->get(function() use($state, $callback){
+            $this->dispatchStateChange($state);
+
+            return $callback();
+        });
     }
 
     /**
@@ -131,7 +141,10 @@ class CacheStore extends BaseStore implements
             $this->toStore($failure)
         );
 
-        $this->incrementFailures();
+        if($persisted){
+            $this->incrementFailures();
+            $this->dispatchFailureReported($failure);
+        }
 
         return $persisted;
     }
