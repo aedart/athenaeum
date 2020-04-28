@@ -158,10 +158,13 @@ class CacheStore extends BaseStore implements
      */
     public function resetFailures(): Store
     {
-        $forgotTotal = $this->getCacheStore()->forget($this->totalFailuresKey);
+        $store = $this->getCacheStore();
 
-        if ($forgotTotal === false) {
-            throw new StoreException('Unable reset total failure amount');
+        $forgotTotal = $store->forget($this->totalFailuresKey);
+        $forgotFailure = $store->forget($this->lastFailureKey);
+
+        if ($forgotFailure === false || $forgotTotal === false) {
+            throw new StoreException('Unable reset last registered failure / total failure amount');
         }
 
         return $this;
