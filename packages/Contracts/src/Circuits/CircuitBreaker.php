@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Circuits;
 
+use Aedart\Contracts\Circuits\Exceptions\HasContext;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Throwable;
 
@@ -76,7 +77,7 @@ interface CircuitBreaker
     public function reportSuccess(): self;
 
     /**
-     * Increments internal failure count.
+     * Report failure and increments internal failure count.
      *
      * Method MUST change the state to {@see OPEN}, if the internal
      * failure count reaches the failure threshold.
@@ -84,11 +85,24 @@ interface CircuitBreaker
      * @see lastFailure
      * @see changeState
      *
-     * @param string|int $reason [optional] Failure reason
+     * @param Failure $failure
      *
      * @return self
      */
-    public function reportFailure(?string $reason = null): self;
+    public function reportFailure(Failure $failure): self;
+
+    /**
+     * Report a failure via an exception
+     *
+     * Method MUST create a {@see Failure} instance and use
+     * the {@see reportFailure} method to report the failure.
+     *
+     * @param Throwable $exception If provided exception inherits from {@see HasContext},
+     *                             then the failure context is set from exception.
+     *
+     * @return self
+     */
+    public function reportFailureViaException(Throwable $exception): self;
 
     /**
      * Attempt to execute callback, e.g. request a resource or invoke action
