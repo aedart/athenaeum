@@ -75,7 +75,7 @@ interface Store
      *
      * Method MUST dispatch {@see FailureReported} event, upon successful
      * registration of failure.
-     * 
+     *
      * @param Failure $failure
      *
      * @return bool True if successful, false otherwise
