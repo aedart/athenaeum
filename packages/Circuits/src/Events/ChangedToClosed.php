@@ -14,5 +14,4 @@ use Aedart\Contracts\Circuits\Events\HasClosed;
  */
 class ChangedToClosed extends BaseEvent implements HasClosed
 {
-
 }

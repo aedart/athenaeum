@@ -14,5 +14,4 @@ use Aedart\Contracts\Circuits\Events\HasOpened;
  */
 class ChangedToOpen extends BaseEvent implements HasOpened
 {
-
 }

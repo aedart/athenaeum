@@ -14,5 +14,4 @@ use Aedart\Contracts\Circuits\Events\HasHalfOpened;
  */
 class ChangedToHalfOpen extends BaseEvent implements HasHalfOpened
 {
-
 }

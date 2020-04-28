@@ -84,7 +84,7 @@ class CacheStore extends BaseStore implements
             $this->stateTtl($state)
         );
 
-        if($wasChanged){
+        if ($wasChanged) {
             $this->dispatchStateChange($state);
         }
 
@@ -110,7 +110,7 @@ class CacheStore extends BaseStore implements
      */
     public function lockState(State $state, callable $callback)
     {
-        if (!($state instanceof Lockable)){
+        if (!($state instanceof Lockable)) {
             throw new StateCannotBeLocked(sprintf('%s state cannot be locked', $state->name()));
         }
 
@@ -124,7 +124,7 @@ class CacheStore extends BaseStore implements
 
         // Attempt acquire lock. If successfully, then the callback is invoked and
         // released. If not, then "false" is returned.
-        return $lock->get(function() use($state, $callback){
+        return $lock->get(function () use ($state, $callback) {
             $this->dispatchStateChange($state);
 
             return $callback();
@@ -141,7 +141,7 @@ class CacheStore extends BaseStore implements
             $this->toStore($failure)
         );
 
-        if($persisted){
+        if ($persisted) {
             $this->incrementFailures();
             $this->dispatchFailureReported($failure);
         }

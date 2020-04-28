@@ -7,7 +7,6 @@ use Aedart\Circuits\Events\ChangedToClosed;
 use Aedart\Circuits\Events\ChangedToHalfOpen;
 use Aedart\Circuits\Events\ChangedToOpen;
 use Aedart\Circuits\Events\FailureWasReported;
-use Aedart\Circuits\Exceptions\UnknownState;
 use Aedart\Circuits\Failures\CircuitBreakerFailure;
 use Aedart\Circuits\States\ClosedState;
 use Aedart\Circuits\States\HalfOpenState;
@@ -197,7 +196,7 @@ abstract class BaseStore implements
             return $this->ttl();
         }
 
-        if($state->hasExpired()){
+        if ($state->hasExpired()) {
             return 0;
         }
 

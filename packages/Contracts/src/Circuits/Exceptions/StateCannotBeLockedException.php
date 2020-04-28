@@ -13,5 +13,4 @@ namespace Aedart\Contracts\Circuits\Exceptions;
  */
 interface StateCannotBeLockedException extends StoreException
 {
-
 }
