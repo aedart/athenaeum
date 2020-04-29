@@ -108,20 +108,8 @@ interface CircuitBreaker
      * Attempt to execute callback, e.g. request a resource or invoke action
      * from 3rd party service.
      *
-     * If state is {@see CLOSED}, then `$callback` MUST be invoked. Should the
-     * callback fail, then the internal failure count will be increased. If
-     * internal failure count reaches the failure threshold, method MUST
-     * change the state to {@see OPEN} (circuit tripped).
-     *
-     * If circuit breaker is {@see OPEN}, then `$callback` MUST NOT be invoked. The
-     * `$otherwise` callback MUST be invoked, if one is provided. If no `$otherwise`
-     * callback is provided, then an exception MUST be raised
-     * (fast failure principle).
-     *
-     * Should the circuit breaker's state be {@see HALF_OPEN}, then `$callback`
-     * MUST be invoked. If the callback does not fail, then the state MUST
-     * be changed to {@see CLOSED}. Internal failure count and timeouts MUST be
-     * reset, if this is the case.
+     * Must invoke `$callback`, if state is {@see CLOSED} or {@see HALF_OPEN}.
+     * Must invoke `$otherwise` callback if provided, when state is {@see OPEN}.
      *
      * Whenever a failure is detected, it MUST be reported via {@see reportFailure}.
      * Consequently, the {@see reportSuccess} method MUST be used upon success.
