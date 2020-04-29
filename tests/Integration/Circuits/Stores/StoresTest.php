@@ -168,7 +168,7 @@ class StoresTest extends CircuitBreakerTestCase
 
         $lockObtained = false;
         $expected = $this->getFaker()->sentence;
-        $callback = function() use(&$lockObtained, $expected){
+        $callback = function () use (&$lockObtained, $expected) {
             $lockObtained = true;
             return $expected;
         };

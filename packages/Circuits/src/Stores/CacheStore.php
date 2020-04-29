@@ -4,7 +4,6 @@ namespace Aedart\Circuits\Stores;
 
 use Aedart\Circuits\Exceptions\StateCannotBeLocked;
 use Aedart\Circuits\Exceptions\StoreException;
-use Aedart\Circuits\Stores\Options\CacheStoreOptions;
 use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\State;
