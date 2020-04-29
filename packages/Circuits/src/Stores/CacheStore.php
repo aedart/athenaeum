@@ -62,14 +62,13 @@ class CacheStore extends BaseStore implements
      * CacheStore constructor.
      *
      * @param string $service
-     * @param CacheStoreOptions $options
+     * @param array $options [optional]
      */
-    public function __construct(string $service, CacheStoreOptions $options)
+    public function __construct(string $service, array $options = [])
     {
         parent::__construct($service, $options);
 
         $this
-            ->setCacheFactory($options->cacheFactory)
             ->prepareKeys();
     }
 

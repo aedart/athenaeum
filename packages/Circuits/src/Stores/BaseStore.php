@@ -86,16 +86,12 @@ abstract class BaseStore implements
      * BaseStore constructor.
      *
      * @param string $service
-     * @param StoreOptions $options
+     * @param array $options [optional]
      */
-    public function __construct(string $service, StoreOptions $options)
+    public function __construct(string $service, array $options = [])
     {
         $this
             ->setService($service)
-            ->withOptions($options->options)
-            ->setStateFactory($options->stateFactory)
-            ->setFailureFactory($options->failureFactory)
-            ->setDispatcher($options->dispatcher)
             ->setKeyPrefix($service);
     }
 
