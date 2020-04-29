@@ -11,7 +11,6 @@ use Aedart\Circuits\Failures\CircuitBreakerFailure;
 use Aedart\Circuits\States\ClosedState;
 use Aedart\Circuits\States\HalfOpenState;
 use Aedart\Circuits\States\OpenState;
-use Aedart\Circuits\Stores\Options\StoreOptions;
 use Aedart\Circuits\Traits\FailureFactoryTrait;
 use Aedart\Circuits\Traits\StateFactoryTrait;
 use Aedart\Contracts\Circuits\CircuitBreaker;
@@ -74,12 +73,10 @@ abstract class BaseStore implements
      * @var string[]
      */
     protected array $allowedClasses = [
-        State::class,
-//        ClosedState::class,
-//        OpenState::class,
-//        HalfOpenState::class,
-        Failure::class,
-//        CircuitBreakerFailure::class
+        ClosedState::class,
+        OpenState::class,
+        HalfOpenState::class,
+        CircuitBreakerFailure::class
     ];
 
     /**
