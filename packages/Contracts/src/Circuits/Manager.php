@@ -15,7 +15,7 @@ interface Manager
     /**
      * Create or obtain Circuit Breaker
      *
-     * @param string $name [optional] Name (profile) of Circuit Breaker to obtain or create
+     * @param string $name Name (profile) of Circuit Breaker to obtain or create
      * @param array $options [optional] Circuit Breaker options
      * @param bool $autoCreate [optional] When true, new circuit breaker is created, even
      *                       if a "profile" does not exist.
