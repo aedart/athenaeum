@@ -3,6 +3,7 @@
 namespace Aedart\Tests\TestCases\Circuits;
 
 use Aedart\Circuits\Providers\CircuitBreakerServiceProvider;
+use Aedart\Circuits\Traits\CircuitBreakerManagerTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 
 /**
@@ -13,6 +14,8 @@ use Aedart\Testing\TestCases\LaravelTestCase;
  */
 abstract class CircuitBreakerTestCase extends LaravelTestCase
 {
+    use CircuitBreakerManagerTrait;
+
     /*****************************************************************
      * Setup
      ****************************************************************/
