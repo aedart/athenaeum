@@ -89,6 +89,7 @@ abstract class BaseStore implements
     {
         $this
             ->setService($service)
+            ->withOptions($options)
             ->setKeyPrefix($service);
     }
 
