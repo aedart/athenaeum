@@ -25,7 +25,7 @@ class Factory implements StatesFactory
      */
     public function make(int $id, ?int $previous = null, $createdAt = null, $expiresAt = null): State
     {
-        return $this->makeByArray([
+        return $this->makeFromArray([
             'id' => $id,
             'previous' => $previous,
             'created_at' => $createdAt,
@@ -36,7 +36,7 @@ class Factory implements StatesFactory
     /**
      * @inheritDoc
      */
-    public function makeByArray(array $data): State
+    public function makeFromArray(array $data): State
     {
         if (!isset($data['id'])) {
             throw new UnknownState('Cannot create state, missing "id"; state identifier');

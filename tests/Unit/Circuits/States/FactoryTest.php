@@ -71,7 +71,7 @@ class FactoryTest extends UnitTestCase
     {
         $this->expectException(UnknownStateException::class);
 
-        $this->makeStatesFactory()->makeByArray([]);
+        $this->makeStatesFactory()->makeFromArray([]);
     }
 
     /**

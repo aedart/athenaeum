@@ -37,5 +37,5 @@ interface Factory
      *
      * @return Failure
      */
-    public function makeByArray(array $data): Failure;
+    public function makeFromArray(array $data): Failure;
 }

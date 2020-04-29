@@ -42,5 +42,5 @@ interface Factory
      *
      * @throws UnknownStateException
      */
-    public function makeByArray(array $data): State;
+    public function makeFromArray(array $data): State;
 }

@@ -24,7 +24,7 @@ class Factory implements FailureFactory
         $reportedAt = null,
         int $totalFailures = 0
     ): Failure {
-        return $this->makeByArray([
+        return $this->makeFromArray([
             'reason' => $reason,
             'context' => $context,
             'reported_at' => $reportedAt,
@@ -35,7 +35,7 @@ class Factory implements FailureFactory
     /**
      * @inheritDoc
      */
-    public function makeByArray(array $data): Failure
+    public function makeFromArray(array $data): Failure
     {
         return new CircuitBreakerFailure($data);
     }
