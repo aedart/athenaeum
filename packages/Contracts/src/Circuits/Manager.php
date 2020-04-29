@@ -37,7 +37,7 @@ interface Manager
      *
      * @return Store
      */
-    public function store(string $service, $driver = null, array $options = []): Store;
+    public function store(string $service, string $driver = null, array $options = []): Store;
 
     /**
      * Returns a default store
