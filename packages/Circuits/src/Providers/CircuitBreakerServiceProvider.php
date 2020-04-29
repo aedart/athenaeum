@@ -3,8 +3,10 @@
 namespace Aedart\Circuits\Providers;
 
 use Aedart\Circuits\Failures\Factory as DefaultFailureFactory;
+use Aedart\Circuits\Manager;
 use Aedart\Circuits\States\Factory;
 use Aedart\Contracts\Circuits\Failures\Factory as FailureFactory;
+use Aedart\Contracts\Circuits\Manager as CircuitBreakerManager;
 use Aedart\Contracts\Circuits\States\Factory as StatesFactory;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
@@ -18,6 +20,7 @@ use Illuminate\Support\ServiceProvider;
 class CircuitBreakerServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     public array $singletons = [
+        CircuitBreakerManager::class => Manager::class,
         StatesFactory::class => Factory::class,
         FailureFactory::class => DefaultFailureFactory::class
     ];
@@ -38,6 +41,7 @@ class CircuitBreakerServiceProvider extends ServiceProvider implements Deferrabl
     public function provides()
     {
         return [
+            CircuitBreakerManager::class,
             StatesFactory::class,
             FailureFactory::class
         ];
