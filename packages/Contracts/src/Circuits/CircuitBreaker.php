@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Circuits;
 
 use Aedart\Contracts\Circuits\Exceptions\HasContext;
+use Aedart\Contracts\Circuits\Exceptions\ServiceUnavailableException;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Throwable;
 
@@ -120,13 +121,12 @@ interface CircuitBreaker
      *
      * @param callable $callback Request or action to invoke on 3rd party service
      * @param callable|null $otherwise [optional] This callback is invoked if state is {@see OPEN}
-     *                      or if `$callback` fails. If not provided and `$callback` fails, then an
-     *                      exception will be thrown (fast failure principle).
+     *                      or if `$callback` fails.
      *
      * @return mixed Callback's resulting output. If `$otherwise` callback is provided,
      *               and it is invoked, then it's resulting output is returned.
      *
-     * @throws Throwable
+     * @throws ServiceUnavailableException If state is {@see OPEN} and no `$otherwise` callback provided
      */
     public function attempt(callable $callback, ?callable $otherwise = null);
 
