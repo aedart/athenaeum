@@ -50,6 +50,16 @@ trait Dates
     }
 
     /**
+     * Returns current date and time
+     *
+     * @return DateTimeInterface
+     */
+    protected function now(): DateTimeInterface
+    {
+        return Date::now($this->timezone);
+    }
+
+    /**
      * Format given date
      *
      * @param DateTimeInterface|null $date [optional]
