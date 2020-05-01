@@ -199,7 +199,7 @@ class CircuitBreaker implements
             // TODO: expires at / ttl
         );
 
-        $result = $this->store()->lockState($halfOpen, function () {
+        return $this->store()->lockState($halfOpen, function () {
             // When reached here, it means that we have successfully change state to half-open.
             // Thus, we retry to invoke the callback.
 
