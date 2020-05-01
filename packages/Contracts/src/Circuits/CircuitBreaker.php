@@ -240,6 +240,15 @@ interface CircuitBreaker
     public function tripsOn(): array;
 
     /**
+     * Trip this circuit breaker
+     *
+     * Method must change state to {@see OPEN}
+     * 
+     * @return self
+     */
+    public function trip(): self;
+
+    /**
      * Determine if Circuit Breaker is in {@see CLOSED} state
      *
      * @return bool
