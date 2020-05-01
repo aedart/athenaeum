@@ -243,7 +243,7 @@ interface CircuitBreaker
      * Trip this circuit breaker
      *
      * Method must change state to {@see OPEN}
-     * 
+     *
      * @return self
      */
     public function trip(): self;

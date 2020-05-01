@@ -22,7 +22,8 @@ use Aedart\Contracts\Circuits\Stores\StoreAware;
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  */
-class CircuitBreaker implements CircuitBreakerInterface,
+class CircuitBreaker implements
+    CircuitBreakerInterface,
     StoreAware,
     StateFactoryAware,
     FailureFactoryAware
@@ -149,7 +150,7 @@ class CircuitBreaker implements CircuitBreakerInterface,
     public function reportFailureViaException(Throwable $exception): CircuitBreakerInterface
     {
         $context = [];
-        if($exception instanceof HasContext){
+        if ($exception instanceof HasContext) {
             $context = $exception->context();
         }
 
@@ -198,7 +199,7 @@ class CircuitBreaker implements CircuitBreakerInterface,
             // TODO: expires at / ttl
         );
 
-        $result = $this->store()->lockState($halfOpen, function() use($callback, $otherwise){
+        $result = $this->store()->lockState($halfOpen, function () {
             // When reached here, it means that we have successfully change state to half-open.
             // Thus, we retry to invoke the callback.
 
@@ -424,7 +425,7 @@ class CircuitBreaker implements CircuitBreakerInterface,
      */
     protected function defaultOtherwiseCallback(): callable
     {
-        return function(){
+        return function () {
             throw ServiceUnavailable::make(
                 $this->name(),
                 $this->state(),

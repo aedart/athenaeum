@@ -16,5 +16,4 @@ use Aedart\Contracts\Circuits\CircuitBreaker;
  */
 interface ServiceUnavailableException extends CircuitBreakerException
 {
-
 }
