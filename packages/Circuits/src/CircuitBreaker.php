@@ -378,16 +378,22 @@ class CircuitBreaker implements
         // TODO: expires at / ttl
         );
 
-        // TODO: What if unable to lock state !!!!
-        return $this->store()->lockState($halfOpen, function () use ($callback, $otherwise){
+        $wasLocked = false;
+
+        $result = $this->store()->lockState($halfOpen, function () use (&$wasLocked, $callback, $otherwise){
             // When reached here, it means that we have successfully change state to half-open.
             // Thus, we retry to invoke the callback.
-
-            // TODO: If successfully change state to half-open
-            // TODO: reset grace period? E.g. (re)trip
+            $wasLocked = true;
 
             return $this->performAttempt($callback, $otherwise);
         });
+
+        // Invoke the otherwise callback, if unable to obtain lock
+        if(!$wasLocked){
+            return $this->invokeCallback($otherwise);
+        }
+
+        return $result;
     }
 
     /**
