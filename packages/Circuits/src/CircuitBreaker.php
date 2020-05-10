@@ -2,7 +2,6 @@
 
 namespace Aedart\Circuits;
 
-use Aedart\Circuits\Concerns;
 use Aedart\Circuits\Exceptions\ServiceUnavailable;
 use Aedart\Circuits\Traits\FailureFactoryTrait;
 use Aedart\Circuits\Traits\StateFactoryTrait;
@@ -380,7 +379,7 @@ class CircuitBreaker implements
 
         $wasLocked = false;
 
-        $result = $this->store()->lockState($halfOpen, function () use (&$wasLocked, $callback, $otherwise){
+        $result = $this->store()->lockState($halfOpen, function () use (&$wasLocked, $callback, $otherwise) {
             // When reached here, it means that we have successfully change state to half-open.
             // Thus, we retry to invoke the callback.
             $wasLocked = true;
@@ -389,7 +388,7 @@ class CircuitBreaker implements
         });
 
         // Invoke the otherwise callback, if unable to obtain lock
-        if(!$wasLocked){
+        if (!$wasLocked) {
             return $this->invokeCallback($otherwise);
         }
 
@@ -463,7 +462,7 @@ class CircuitBreaker implements
      */
     protected function hasGracePeriodPast(State $open): bool
     {
-        if($open->id() !== static::OPEN){
+        if ($open->id() !== static::OPEN) {
             return false;
         }
 
