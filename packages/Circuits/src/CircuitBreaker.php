@@ -16,6 +16,7 @@ use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\States\StateFactoryAware;
 use Aedart\Contracts\Circuits\Store;
 use Aedart\Contracts\Circuits\Stores\StoreAware;
+use Throwable;
 
 /**
  * Circuit Breaker
@@ -66,14 +67,6 @@ class CircuitBreaker implements
     protected int $threshold = 1;
 
     /**
-     * List of exception class paths that will trip
-     * this circuit breaker
-     *
-     * @var string[]
-     */
-    protected array $mustTripOn = [ Throwable::class ];
-
-    /**
      * CircuitBreaker constructor.
      *
      * @param string $service
@@ -106,9 +99,7 @@ class CircuitBreaker implements
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @throws UnknownStateException
+     * @inheritDoc
      */
     public function reportSuccess(): CircuitBreakerInterface
     {
@@ -181,39 +172,14 @@ class CircuitBreaker implements
             return $this->tryHalfOpen($state, $callback, $otherwise);
         }
 
-        // Abort if unable to change state to half-open, e.g. grace period has yet
-        // not past or other circuit breaker has already changed it's state to
-        // half-open.
+        // When unavailable (state is open and unable to chance state to half-open),
+        // the otherwise callback must be invoked.
         if (!$available) {
             return $this->invokeCallback($otherwise);
         }
 
-        // TODO: try / retry, catch... etc.
-    }
-
-    // TODO:
-    protected function tryHalfOpen(State $state, callable $callback, callable $otherwise)
-    {
-        $halfOpen = $this->getStateFactory()->make(
-            static::HALF_OPEN,
-            $state->id(),
-            $this->now(),
-            // TODO: expires at / ttl
-        );
-
-        return $this->store()->lockState($halfOpen, function () {
-            // When reached here, it means that we have successfully change state to half-open.
-            // Thus, we retry to invoke the callback.
-
-            // TODO: Cannot just re-invoke attempt here... Might cause issues + store will NOT
-            // TODO: just return "half-open" state when reading it, due to lock!
-
-            // TODO: If successfully change state to half-open
-            // TODO: reset grace period? E.g. (re)trip
-        });
-
-        // TODO: Problem is, if callback / lock callback returns false, we are not really able to
-        // TODO: know if this is what we desired?
+        // Finally, perform the attempt (state is closed or half-open).
+        return $this->performAttempt($callback, $otherwise);
     }
 
     /**
@@ -283,28 +249,6 @@ class CircuitBreaker implements
     public function failureThreshold(): int
     {
         return $this->threshold;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function mustTripOn($exceptions = Throwable::class): CircuitBreakerInterface
-    {
-        if (!is_array($exceptions)) {
-            $exceptions = [ $exceptions ];
-        }
-
-        $this->mustTripOn = $exceptions;
-
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function tripsOn(): array
-    {
-        return $this->mustTripOn;
     }
 
     /**
@@ -379,6 +323,74 @@ class CircuitBreaker implements
      ****************************************************************/
 
     /**
+     * Perform attempt
+     *
+     * Method retries certain amount of times, before invoking
+     * `$otherwise` callback.
+     *
+     * Reports success, if `$callback` succeeds, otherwise method
+     * will report failure.
+     *
+     * @param callable $callback
+     * @param callable $otherwise
+     *
+     * @return mixed
+     */
+    protected function performAttempt(callable $callback, callable $otherwise)
+    {
+        $delay = $this->retryDelay() * 1000;
+        $times = $this->times();
+
+        beginning:
+        $times--;
+
+        try {
+            $result = $this->invokeCallback($callback);
+            $this->reportSuccess();
+
+            return $result;
+        } catch (Throwable $e) {
+            // At this point, the captured exception is expected and we will
+            // treat it accordingly; report failure and retry, until it succeeds,
+            // run out of retries or the state has changed to open.
+            $this->reportFailureViaException($e);
+
+            if ($times < 1 || $this->isOpen()) {
+                return $this->invokeCallback($otherwise);
+            }
+
+            if ($delay) {
+                usleep($delay);
+            }
+
+            // Retry...
+            goto beginning;
+        }
+    }
+
+    // TODO:
+    protected function tryHalfOpen(State $state, callable $callback, callable $otherwise)
+    {
+        $halfOpen = $this->getStateFactory()->make(
+            static::HALF_OPEN,
+            $state->id(),
+            $this->now(),
+        // TODO: expires at / ttl
+        );
+
+        // TODO: What if unable to lock state !!!!
+        return $this->store()->lockState($halfOpen, function () use ($callback, $otherwise){
+            // When reached here, it means that we have successfully change state to half-open.
+            // Thus, we retry to invoke the callback.
+
+            // TODO: If successfully change state to half-open
+            // TODO: reset grace period? E.g. (re)trip
+
+            return $this->performAttempt($callback, $otherwise);
+        });
+    }
+
+    /**
      * Set this circuit breaker's name
      *
      * @param string $name
@@ -445,8 +457,10 @@ class CircuitBreaker implements
      */
     protected function hasGracePeriodPast(State $open): bool
     {
-        // TODO: Abort if state is not "open"
+        if($open->id() !== static::OPEN){
+            return false;
+        }
 
-        // TODO: Can be now >= determined via created_at + grace period
+        return $this->getStore()->hasGracePeriodPast();
     }
 }
