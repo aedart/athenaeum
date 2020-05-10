@@ -1,5 +1,7 @@
 <?php
 
+namespace Aedart\Circuits;
+
 use Aedart\Circuits\Concerns;
 use Aedart\Circuits\Exceptions\ServiceUnavailable;
 use Aedart\Circuits\Traits\FailureFactoryTrait;
