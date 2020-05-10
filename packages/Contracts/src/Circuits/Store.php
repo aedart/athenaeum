@@ -76,6 +76,9 @@ interface Store
      * Method MUST dispatch {@see FailureReported} event, upon successful
      * registration of failure.
      *
+     * Must MUST measure time past, so that {@see hasGracePeriodPast} can
+     * determine if a grace period has past.
+     *
      * @param Failure $failure
      *
      * @return bool True if successful, false otherwise
@@ -106,8 +109,33 @@ interface Store
     public function totalFailures(): int;
 
     /**
+     * Returns grace period for this store
+     *
+     * A grace period is measured from the time of
+     * the first registered failure and until an time
+     * interval has past.
+     *
+     * @return int Duration in seconds
+     */
+    public function gracePeriod(): int;
+
+    /**
+     * Determine if a grace period has past
+     *
+     * A grace period is measured from the time of
+     * the first registered failure and until an time
+     * interval has past.
+     *
+     * @return bool
+     */
+    public function hasGracePeriodPast(): bool;
+
+    /**
      * Reset last detected failure and total amount
      * of failures
+     *
+     * Grace period measurement MIGHT also be reset by
+     * this method.
      *
      * @return self
      */

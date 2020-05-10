@@ -68,6 +68,13 @@ abstract class BaseStore implements
     protected int $defaultTtl = 3600;
 
     /**
+     * Grace period (ttl)
+     *
+     * @var int
+     */
+    protected int $defaultGracePeriod = 60;
+
+    /**
      * Allowed classes to be unserialized
      *
      * @var string[]
@@ -127,6 +134,14 @@ abstract class BaseStore implements
     public function ttl(): int
     {
         return $this->getOption('ttl', $this->defaultTtl);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function gracePeriod(): int
+    {
+        return $this->getOption('grace_period', $this->defaultGracePeriod);
     }
 
     /*****************************************************************

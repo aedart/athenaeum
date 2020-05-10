@@ -35,7 +35,7 @@ class StoresTest extends CircuitBreakerTestCase
         return [
             'cache store' => [
                 CacheStore::class,
-                [ 'ttl' => 5 ]
+                [ 'ttl' => 5, 'grace_period' => 5 ]
             ]
         ];
     }
@@ -98,6 +98,35 @@ class StoresTest extends CircuitBreakerTestCase
         ConsoleDebugger::output((string) $lastFailure);
 
         $this->assertSame($failure->reason(), $lastFailure->reason(), 'Incorrect last failure obtained');
+
+        // Cleanup...
+        $store->resetFailures();
+    }
+
+    /**
+     * @test
+     * @dataProvider providesStores
+     *
+     * @param string $driver
+     * @param array $options
+     */
+    public function registersGracePeriodOnFailure(string $driver, array $options)
+    {
+        $store = $this->makeStoreWithService($driver, $options);
+
+        // ------------------------------------------------ //
+        // Default, grace period has past (none was registered)
+        $this->assertTrue($store->hasGracePeriodPast(), 'A grace period should notexist');
+
+        // ------------------------------------------------ //
+        // When a failure is reported, time measurement should be
+        // registered. Thus, a grace period exists and should not have
+        // past.
+
+        $failure = $this->makeFailure($this->getFaker()->sentence);
+        $store->registerFailure($failure);
+
+        $this->assertFalse($store->hasGracePeriodPast(), 'Grace period should not have past!');
 
         // Cleanup...
         $store->resetFailures();

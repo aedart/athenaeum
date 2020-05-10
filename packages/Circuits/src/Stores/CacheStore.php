@@ -51,6 +51,13 @@ class CacheStore extends BaseStore implements
     protected string $totalFailuresKey;
 
     /**
+     * Grace period key
+     *
+     * @var string
+     */
+    protected string $gracePeriodKey;
+
+    /**
      * Last detected (or reported) failure key
      *
      * @var string
@@ -140,7 +147,10 @@ class CacheStore extends BaseStore implements
         );
 
         if ($persisted) {
-            $this->incrementFailures();
+            $this
+                ->registerGracePeriod()
+                ->incrementFailures();
+
             $this->dispatchFailureReported($failure);
         }
 
@@ -186,9 +196,19 @@ class CacheStore extends BaseStore implements
     /**
      * @inheritDoc
      */
+    public function hasGracePeriodPast(): bool
+    {
+        return $this->getCache()->get($this->gracePeriodKey, true);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function resetFailures(): Store
     {
         $repository = $this->getCache();
+
+        $repository->forget($this->gracePeriodKey);
 
         $forgotTotal = $repository->forget($this->totalFailuresKey);
         $forgotFailure = $repository->forget($this->lastFailureKey);
@@ -225,6 +245,23 @@ class CacheStore extends BaseStore implements
      ****************************************************************/
 
     /**
+     * Add a grace period, but only if
+     *
+     * @return self
+     */
+    protected function registerGracePeriod()
+    {
+        // Add a grace period ONLY if one does not already exist.
+        $this->getCache()->add(
+            $this->gracePeriodKey,
+            false,
+            $this->gracePeriod()
+        );
+
+        return $this;
+    }
+
+    /**
      * Prepares keys - cache item identifiers
      *
      * @return self
@@ -235,6 +272,7 @@ class CacheStore extends BaseStore implements
         $this->lockedStateKey = $this->key('locked');
         $this->totalFailuresKey = $this->key('total_failures');
         $this->lastFailureKey = $this->key('last_failure');
+        $this->gracePeriodKey = $this->key('grace_period');
 
         return $this;
     }
