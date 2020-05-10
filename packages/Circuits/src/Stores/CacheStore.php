@@ -15,7 +15,6 @@ use Aedart\Support\Helpers\Cache\CacheFactoryTrait;
 use Aedart\Support\Helpers\Cache\CacheTrait;
 use Illuminate\Contracts\Cache\LockProvider;
 use Illuminate\Contracts\Cache\Repository;
-use Illuminate\Support\Facades\Date;
 
 /**
  * Cache Store
