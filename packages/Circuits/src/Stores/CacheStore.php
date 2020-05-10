@@ -15,6 +15,7 @@ use Aedart\Support\Helpers\Cache\CacheFactoryTrait;
 use Aedart\Support\Helpers\Cache\CacheTrait;
 use Illuminate\Contracts\Cache\LockProvider;
 use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Support\Facades\Date;
 
 /**
  * Cache Store
@@ -209,7 +210,6 @@ class CacheStore extends BaseStore implements
         $repository = $this->getCache();
 
         $repository->forget($this->gracePeriodKey);
-
         $forgotTotal = $repository->forget($this->totalFailuresKey);
         $forgotFailure = $repository->forget($this->lastFailureKey);
 
@@ -245,7 +245,7 @@ class CacheStore extends BaseStore implements
      ****************************************************************/
 
     /**
-     * Add a grace period, but only if
+     * Add a grace period, if one does not exist
      *
      * @return self
      */

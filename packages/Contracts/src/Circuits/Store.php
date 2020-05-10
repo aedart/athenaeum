@@ -131,11 +131,8 @@ interface Store
     public function hasGracePeriodPast(): bool;
 
     /**
-     * Reset last detected failure and total amount
-     * of failures
-     *
-     * Grace period measurement MIGHT also be reset by
-     * this method.
+     * Reset last detected failure, total amount
+     * of failures and grace period time measurement
      *
      * @return self
      */

@@ -116,7 +116,7 @@ class StoresTest extends CircuitBreakerTestCase
 
         // ------------------------------------------------ //
         // Default, grace period has past (none was registered)
-        $this->assertTrue($store->hasGracePeriodPast(), 'A grace period should notexist');
+        $this->assertTrue($store->hasGracePeriodPast(), 'A grace period should not exist');
 
         // ------------------------------------------------ //
         // When a failure is reported, time measurement should be
@@ -128,8 +128,12 @@ class StoresTest extends CircuitBreakerTestCase
 
         $this->assertFalse($store->hasGracePeriodPast(), 'Grace period should not have past!');
 
-        // Cleanup...
+        // ------------------------------------------------ //
+        // When resetting, grace period measurement should also be
+        // removed.
         $store->resetFailures();
+
+        $this->assertTrue($store->hasGracePeriodPast(), 'Grace period should be reset');
     }
 
     /**
