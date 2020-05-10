@@ -30,6 +30,6 @@ class CacheStoreTest extends CircuitBreakerTestCase
             'cache-store' => 'file'
         ]);
 
-        $store->getCacheStore();
+        $store->getCache();
     }
 }

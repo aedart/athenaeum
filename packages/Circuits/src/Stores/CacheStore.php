@@ -9,12 +9,12 @@ use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\States\Lockable;
 use Aedart\Contracts\Circuits\Store;
+use Aedart\Contracts\Support\Helpers\Cache\CacheAware;
 use Aedart\Contracts\Support\Helpers\Cache\CacheFactoryAware;
-use Aedart\Contracts\Support\Helpers\Cache\CacheStoreAware;
 use Aedart\Support\Helpers\Cache\CacheFactoryTrait;
-use Aedart\Support\Helpers\Cache\CacheStoreTrait;
+use Aedart\Support\Helpers\Cache\CacheTrait;
 use Illuminate\Contracts\Cache\LockProvider;
-use Illuminate\Contracts\Cache\Store as LaravelCacheStore;
+use Illuminate\Contracts\Cache\Repository;
 
 /**
  * Cache Store
@@ -24,10 +24,10 @@ use Illuminate\Contracts\Cache\Store as LaravelCacheStore;
  */
 class CacheStore extends BaseStore implements
     CacheFactoryAware,
-    CacheStoreAware
+    CacheAware
 {
     use CacheFactoryTrait;
-    use CacheStoreTrait;
+    use CacheTrait;
 
     /**
      * State key
@@ -76,7 +76,7 @@ class CacheStore extends BaseStore implements
      */
     public function setState(State $state): bool
     {
-        $wasChanged = $this->getCacheStore()->put(
+        $wasChanged = $this->getCache()->put(
             $this->stateKey,
             $this->toStore($state),
             $this->stateTtl($state)
@@ -94,7 +94,7 @@ class CacheStore extends BaseStore implements
      */
     public function getState(): State
     {
-        $state = $this->getCacheStore()->get($this->stateKey);
+        $state = $this->getCache()->get($this->stateKey);
 
         if (!isset($state)) {
             return $this->getStateFactory()->make(CircuitBreaker::CLOSED);
@@ -113,7 +113,7 @@ class CacheStore extends BaseStore implements
         }
 
         /** @var \Illuminate\Contracts\Cache\Store|LockProvider $store */
-        $store = $this->getCacheStore();
+        $store = $this->getCache()->getStore();
         $lock = $store->lock(
             $this->lockedStateKey,
             $this->stateTtl($state),
@@ -134,7 +134,7 @@ class CacheStore extends BaseStore implements
      */
     public function registerFailure(Failure $failure): bool
     {
-        $persisted = $this->getCacheStore()->forever(
+        $persisted = $this->getCache()->forever(
             $this->lastFailureKey,
             $this->toStore($failure)
         );
@@ -152,7 +152,7 @@ class CacheStore extends BaseStore implements
      */
     public function getFailure(): ?Failure
     {
-        $failure = $this->getCacheStore()->get($this->lastFailureKey);
+        $failure = $this->getCache()->get($this->lastFailureKey);
 
         if (!isset($failure)) {
             return null;
@@ -166,7 +166,7 @@ class CacheStore extends BaseStore implements
      */
     public function incrementFailures(int $amount = 1): int
     {
-        $total = $this->getCacheStore()->increment($this->totalFailuresKey, $amount);
+        $total = $this->getCache()->increment($this->totalFailuresKey, $amount);
 
         if ($total === false) {
             throw new StoreException('Unable to increment total amount of failures');
@@ -180,12 +180,7 @@ class CacheStore extends BaseStore implements
      */
     public function totalFailures(): int
     {
-        $total = $this->getCacheStore()->get($this->totalFailuresKey);
-        if (!isset($total)) {
-            return 0;
-        }
-
-        return (int)$total;
+        return $this->getCache()->get($this->totalFailuresKey, 0);
     }
 
     /**
@@ -193,10 +188,10 @@ class CacheStore extends BaseStore implements
      */
     public function resetFailures(): Store
     {
-        $store = $this->getCacheStore();
+        $repository = $this->getCache();
 
-        $forgotTotal = $store->forget($this->totalFailuresKey);
-        $forgotFailure = $store->forget($this->lastFailureKey);
+        $forgotTotal = $repository->forget($this->totalFailuresKey);
+        $forgotFailure = $repository->forget($this->lastFailureKey);
 
         if ($forgotFailure === false || $forgotTotal === false) {
             throw new StoreException('Unable reset last registered failure / total failure amount');
@@ -212,18 +207,17 @@ class CacheStore extends BaseStore implements
     /**
      * @inheritDoc
      */
-    public function getDefaultCacheStore(): ?LaravelCacheStore
+    public function getDefaultCache(): ?Repository
     {
         $repository = $this->getCacheFactory()->store(
             $this->getOption('cache-store')
         );
 
-        $store = $repository->getStore();
-        if (!($store instanceof LockProvider)) {
+        if (!($repository->getStore() instanceof LockProvider)) {
             throw new StoreException('Only "Lock Provider" cache-stores can be used by Circuit Breaker Cache Store');
         }
 
-        return $store;
+        return $repository;
     }
 
     /*****************************************************************
