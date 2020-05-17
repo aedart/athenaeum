@@ -27,7 +27,9 @@ class CacheStore extends BaseStore implements
     CacheAware
 {
     use CacheFactoryTrait;
-    use CacheTrait;
+    use CacheTrait {
+        setCache as traitSetCache;
+    }
 
     /**
      * State key
@@ -234,17 +236,23 @@ class CacheStore extends BaseStore implements
     /**
      * @inheritDoc
      */
-    public function getDefaultCache(): ?Repository
+    public function setCache(?Repository $repository)
     {
-        $repository = $this->getCacheFactory()->store(
-            $this->getOption('cache-store')
-        );
-
         if (!($repository->getStore() instanceof LockProvider)) {
             throw new StoreException('Only "Lock Provider" cache-stores can be used by Circuit Breaker Cache Store');
         }
 
-        return $repository;
+        return $this->traitSetCache($repository);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDefaultCache(): ?Repository
+    {
+        return $this->getCacheFactory()->store(
+            $this->getOption('cache-store')
+        );
     }
 
     /*****************************************************************
