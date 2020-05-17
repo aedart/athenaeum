@@ -13,7 +13,10 @@ use Aedart\Contracts\Circuits\Exceptions\ProfileNotFoundException;
 interface Manager
 {
     /**
-     * Create or obtain Circuit Breaker
+     * Create or obtain existing Circuit Breaker
+     *
+     * Method MUST return existing circuit breaker instance, if one was previously
+     * created for the given service (profile)
      *
      * @param string $service Name (profile) of Circuit Breaker to obtain or create
      * @param array $options [optional] Circuit Breaker options
