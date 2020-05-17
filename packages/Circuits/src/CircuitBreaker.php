@@ -565,7 +565,7 @@ class CircuitBreaker implements
      */
     protected function resolveStateExpiresAt(): ?DateTimeInterface
     {
-        if(!isset($this->stateTtl)){
+        if (!isset($this->stateTtl)) {
             return null;
         }
 
