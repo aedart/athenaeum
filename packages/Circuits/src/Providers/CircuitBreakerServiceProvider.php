@@ -28,12 +28,12 @@ class CircuitBreakerServiceProvider extends ServiceProvider implements Deferrabl
     /**
      * Bootstrap this service
      */
-//    public function boot()
-//    {
-//        $this->publishes([
-//            __DIR__ . '/../../configs/circuit-breakers.php' => config_path('circuit-breakers.php')
-//        ], 'config');
-//    }
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/../../configs/circuit-breakers.php' => config_path('circuit-breakers.php')
+        ], 'config');
+    }
 
     /**
      * @inheritDoc
