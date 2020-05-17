@@ -92,10 +92,8 @@ class CircuitBreaker implements
     {
         $this
             ->setName($service)
-            ->withOptions($options);
-
-        // TODO: Prepare values from options
-        // TODO: E.g. set timezone
+            ->withOptions($options)
+            ->prepareFromOptions();
     }
 
     /**
@@ -346,6 +344,28 @@ class CircuitBreaker implements
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * Prepare circuit breaker, set it's properties according
+     * to received options
+     */
+    protected function prepareFromOptions()
+    {
+        $this->timezone = $this->getOption('timezone', $this->timezone);
+        $this->stateTtl = $this->getOption('state_ttl', $this->stateTtl);
+
+        $this
+            ->retry(
+                $this->getOption('retries', $this->times()),
+                $this->getOption('delay', $this->retryDelay())
+            )
+            ->withFailureThreshold(
+                $this->getOption('failure_threshold', $this->failureThreshold()),
+            )
+            ->withGracePeriod(
+                $this->getOption('grace_period', $this->gracePeriod()),
+            );
+    }
 
     /**
      * Perform attempt
