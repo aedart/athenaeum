@@ -210,11 +210,35 @@ interface CircuitBreaker
     /**
      * Trip this circuit breaker
      *
-     * Method must change state to {@see OPEN}
+     * Method must change state to {@see OPEN} and start
+     * a grace period time measurement, if one isn't already
+     * started.
      *
      * @return self
      */
     public function trip(): self;
+
+    /**
+     * Set the grace period duration
+     *
+     * A grace period is started whenever circuit breaker is tripped.
+     * It is used to determine if circuit breaker can attempt to change
+     * state to {@see HALF_OPEN}.
+     *
+     * @param int $seconds
+     *
+     * @return self
+     */
+    public function withGracePeriod(int $seconds): self;
+
+    /**
+     * Returns the grace period duration
+     *
+     * @see withGracePeriod
+     *
+     * @return int
+     */
+    public function gracePeriod(): int;
 
     /**
      * Determine if Circuit Breaker is in {@see CLOSED} state

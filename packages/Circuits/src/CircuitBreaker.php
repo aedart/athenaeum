@@ -76,6 +76,13 @@ class CircuitBreaker implements
     protected ?int $stateTtl = 60;
 
     /**
+     * Grace period duration in seconds
+     *
+     * @var int
+     */
+    protected int $gracePeriod = 10;
+
+    /**
      * CircuitBreaker constructor.
      *
      * @param string $service
@@ -268,6 +275,24 @@ class CircuitBreaker implements
 
         // Register a grace period time measurement
         return $this->startGracePeriod();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function withGracePeriod(int $seconds): CircuitBreakerInterface
+    {
+        $this->gracePeriod = $seconds;
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function gracePeriod(): int
+    {
+        return $this->gracePeriod;
     }
 
     /**
@@ -469,7 +494,7 @@ class CircuitBreaker implements
     protected function startGracePeriod(): self
     {
         $this->getStore()->startGracePeriod(
-            // TODO: Grace period duration
+            $this->gracePeriod()
         );
 
         return $this;
