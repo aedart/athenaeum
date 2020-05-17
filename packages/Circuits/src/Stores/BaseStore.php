@@ -136,14 +136,6 @@ abstract class BaseStore implements
         return $this->getOption('ttl', $this->defaultTtl);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function gracePeriod(): int
-    {
-        return $this->getOption('grace_period', $this->defaultGracePeriod);
-    }
-
     /*****************************************************************
      * Internals
      ****************************************************************/

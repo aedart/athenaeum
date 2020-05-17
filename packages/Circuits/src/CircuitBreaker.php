@@ -102,19 +102,13 @@ class CircuitBreaker implements
      */
     public function reportSuccess(): CircuitBreakerInterface
     {
-        // Create closed state
-        $closed = $this->getStateFactory()->make(
-            static::CLOSED,
-            $this->state()->id(),
-            $this->now(),
-            // TODO: expires at / a default ttl?
-        );
-
         // Reset last known failures
-        $this->store()->resetFailures();
+        $this->store()->reset();
 
         // Change to closed state
-        $this->changeState($closed);
+        $this->changeState(
+            $this->makeState(static::CLOSED)
+        );
 
         return $this;
     }
@@ -257,16 +251,13 @@ class CircuitBreaker implements
      */
     public function trip(): CircuitBreakerInterface
     {
-        $open = $this->getStateFactory()->make(
-            static::OPEN,
-            $this->state()->id(),
-            $this->now(),
-        // TODO: expires at / a default ttl?
+        // Change state to open
+        $this->changeState(
+            $this->makeState(static::OPEN)
         );
 
-        $this->changeState($open);
-
-        return $this;
+        // Register a grace period time measurement
+        return $this->startGracePeriod();
     }
 
     /**
@@ -349,9 +340,8 @@ class CircuitBreaker implements
 
             return $result;
         } catch (Throwable $e) {
-            // At this point, the captured exception is expected and we will
-            // treat it accordingly; report failure and retry, until it succeeds,
-            // run out of retries or the state has changed to open.
+            // Report failure and retry, until it succeeds,
+            // run out of retries, or the state has changed to open.
             $this->reportFailureViaException($e);
 
             if ($times < 1 || $this->isOpen()) {
@@ -370,13 +360,7 @@ class CircuitBreaker implements
     // TODO:
     protected function tryHalfOpen(State $state, callable $callback, callable $otherwise)
     {
-        $halfOpen = $this->getStateFactory()->make(
-            static::HALF_OPEN,
-            $state->id(),
-            $this->now(),
-        // TODO: expires at / ttl
-        );
-
+        $halfOpen = $this->makeState(static::HALF_OPEN, $state);
         $wasLocked = false;
 
         $result = $this->store()->lockState($halfOpen, function () use (&$wasLocked, $callback, $otherwise) {
@@ -454,18 +438,54 @@ class CircuitBreaker implements
     }
 
     /**
+     * Starts measuring a "grace period" (time past)
+     *
+     * @return self
+     */
+    protected function startGracePeriod(): self
+    {
+        $this->getStore()->startGracePeriod(
+            // TODO: Grace period duration
+        );
+
+        return $this;
+    }
+
+    /**
      * Determine if a grace period has past
      *
-     * @param State $open Open state
+     * @param State $current Current state
      *
      * @return bool
      */
-    protected function hasGracePeriodPast(State $open): bool
+    protected function hasGracePeriodPast(State $current): bool
     {
-        if ($open->id() !== static::OPEN) {
+        if ($current->id() !== static::OPEN) {
             return false;
         }
 
         return $this->getStore()->hasGracePeriodPast();
+    }
+
+    /**
+     * Creates a new state instance
+     *
+     * @param int $id State identifier
+     * @param State|null $state [optional] Resolves to current state if none given
+     *
+     * @return State
+     *
+     * @throws UnknownStateException
+     */
+    protected function makeState(int $id, ?State $state = null): State
+    {
+        $state = $state ?? $this->state();
+
+        return $this->getStateFactory()->make(
+            $id,
+            $state->id(),
+            $this->now(),
+            // TODO: expires at / a default ttl?
+        );
     }
 }

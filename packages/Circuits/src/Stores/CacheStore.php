@@ -147,10 +147,7 @@ class CacheStore extends BaseStore implements
         );
 
         if ($persisted) {
-            $this
-                ->registerGracePeriod()
-                ->incrementFailures();
-
+            $this->incrementFailures();
             $this->dispatchFailureReported($failure);
         }
 
@@ -196,6 +193,21 @@ class CacheStore extends BaseStore implements
     /**
      * @inheritDoc
      */
+    public function startGracePeriod(int $duration = 10): Store
+    {
+        // Add a grace period ONLY if one does not already exist.
+        $this->getCache()->add(
+            $this->gracePeriodKey,
+            false,
+            $duration
+        );
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function hasGracePeriodPast(): bool
     {
         return $this->getCache()->get($this->gracePeriodKey, true);
@@ -204,17 +216,13 @@ class CacheStore extends BaseStore implements
     /**
      * @inheritDoc
      */
-    public function resetFailures(): Store
+    public function reset(): Store
     {
-        $repository = $this->getCache();
-
-        $repository->forget($this->gracePeriodKey);
-        $forgotTotal = $repository->forget($this->totalFailuresKey);
-        $forgotFailure = $repository->forget($this->lastFailureKey);
-
-        if ($forgotFailure === false || $forgotTotal === false) {
-            throw new StoreException('Unable reset last registered failure / total failure amount');
-        }
+        $this->getCache()->deleteMultiple([
+            $this->gracePeriodKey,
+            $this->totalFailuresKey,
+            $this->lastFailureKey
+        ]);
 
         return $this;
     }
@@ -242,23 +250,6 @@ class CacheStore extends BaseStore implements
     /*****************************************************************
      * Internals
      ****************************************************************/
-
-    /**
-     * Add a grace period, if one does not exist
-     *
-     * @return self
-     */
-    protected function registerGracePeriod()
-    {
-        // Add a grace period ONLY if one does not already exist.
-        $this->getCache()->add(
-            $this->gracePeriodKey,
-            false,
-            $this->gracePeriod()
-        );
-
-        return $this;
-    }
 
     /**
      * Prepares keys - cache item identifiers

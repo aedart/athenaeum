@@ -100,40 +100,7 @@ class StoresTest extends CircuitBreakerTestCase
         $this->assertSame($failure->reason(), $lastFailure->reason(), 'Incorrect last failure obtained');
 
         // Cleanup...
-        $store->resetFailures();
-    }
-
-    /**
-     * @test
-     * @dataProvider providesStores
-     *
-     * @param string $driver
-     * @param array $options
-     */
-    public function registersGracePeriodOnFailure(string $driver, array $options)
-    {
-        $store = $this->makeStoreWithService($driver, $options);
-
-        // ------------------------------------------------ //
-        // Default, grace period has past (none was registered)
-        $this->assertTrue($store->hasGracePeriodPast(), 'A grace period should not exist');
-
-        // ------------------------------------------------ //
-        // When a failure is reported, time measurement should be
-        // registered. Thus, a grace period exists and should not have
-        // past.
-
-        $failure = $this->makeFailure($this->getFaker()->sentence);
-        $store->registerFailure($failure);
-
-        $this->assertFalse($store->hasGracePeriodPast(), 'Grace period should not have past!');
-
-        // ------------------------------------------------ //
-        // When resetting, grace period measurement should also be
-        // removed.
-        $store->resetFailures();
-
-        $this->assertTrue($store->hasGracePeriodPast(), 'Grace period should be reset');
+        $store->reset();
     }
 
     /**
@@ -177,7 +144,7 @@ class StoresTest extends CircuitBreakerTestCase
         $this->assertSame(3, $totalFailures, 'Incorrect last failure obtained');
 
         // Cleanup...
-        $store->resetFailures();
+        $store->reset();
         $totalFailures = $store->totalFailures();
         ConsoleDebugger::output((string) $totalFailures);
 
@@ -230,5 +197,36 @@ class StoresTest extends CircuitBreakerTestCase
         $store = $this->makeStoreWithService($driver, $options);
 
         $store->lockState($state, fn () => '');
+    }
+
+    /**
+     * @test
+     * @dataProvider providesStores
+     *
+     * @param string $driver
+     * @param array $options
+     *
+     * @throws UnknownStateException
+     * @throws StateCannotBeLockedException
+     */
+    public function canStartGracePeriod(string $driver, array $options)
+    {
+        $store = $this->makeStoreWithService($driver, $options);
+
+        // ------------------------------------------------- //
+        // By default, when no grace period has been started,
+        // when asked if "has past", store should return true.
+        $this->assertTrue($store->hasGracePeriodPast(), 'Default grace period past incorrect');
+
+        // ------------------------------------------------- //
+        // Once a period has been started, store must return false,
+        // when asked if "has past".
+        $store->startGracePeriod();
+        $this->assertFalse($store->hasGracePeriodPast(), 'Grace period should not have past');
+
+        // ------------------------------------------------- //
+        // Cleanup
+        $store->reset();
+        $this->assertTrue($store->hasGracePeriodPast(), 'Grace period should had been reset');
     }
 }

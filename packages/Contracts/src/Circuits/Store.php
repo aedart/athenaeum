@@ -76,9 +76,6 @@ interface Store
      * Method MUST dispatch {@see FailureReported} event, upon successful
      * registration of failure.
      *
-     * Must MUST measure time past, so that {@see hasGracePeriodPast} can
-     * determine if a grace period has past.
-     *
      * @param Failure $failure
      *
      * @return bool True if successful, false otherwise
@@ -109,15 +106,20 @@ interface Store
     public function totalFailures(): int;
 
     /**
-     * Returns grace period for this store
+     * Starts measuring a "grace period" (time past)
      *
-     * A grace period is measured from the time of
-     * the first registered failure and until an time
-     * interval has past.
+     * Method is intended to be invoked whenever a
+     * circuit breaker failure threshold has been
+     * reached and it's state is changed to {@see CircuitBreaker::OPEN}.
      *
-     * @return int Duration in seconds
+     * Method MUST not (re)start time measurement, if
+     * a grace period measurement has already been started.
+     *
+     * @param int $duration Duration of grace period, in seconds
+     *
+     * @return self
      */
-    public function gracePeriod(): int;
+    public function startGracePeriod(int $duration = 10): self;
 
     /**
      * Determine if a grace period has past
@@ -136,5 +138,5 @@ interface Store
      *
      * @return self
      */
-    public function resetFailures(): self;
+    public function reset(): self;
 }
