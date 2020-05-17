@@ -17,7 +17,8 @@ use Aedart\Support\Helpers\Config\ConfigTrait;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Circuits
  */
-class Manager implements CircuitBreakerManager,
+class Manager implements
+    CircuitBreakerManager,
     ConfigAware
 {
     use ConfigTrait;
