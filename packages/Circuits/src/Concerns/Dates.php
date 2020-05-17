@@ -60,6 +60,19 @@ trait Dates
     }
 
     /**
+     * Returns a future date (current date and time + seconds into
+     * the future)
+     *
+     * @param int $seconds
+     *
+     * @return DateTimeInterface
+     */
+    protected function futureDate(int $seconds): DateTimeInterface
+    {
+        return Date::now($this->timezone)->addRealSeconds($seconds);
+    }
+
+    /**
      * Format given date
      *
      * @param DateTimeInterface|null $date [optional]

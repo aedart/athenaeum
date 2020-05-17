@@ -8,6 +8,7 @@ use Aedart\Circuits\Traits\StateFactoryTrait;
 use Aedart\Circuits\Traits\StoreTrait;
 use Aedart\Contracts\Circuits\CircuitBreaker as CircuitBreakerInterface;
 use Aedart\Contracts\Circuits\Exceptions\HasContext;
+use Aedart\Contracts\Circuits\Exceptions\StateCannotBeLockedException;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\Failures\FailureFactoryAware;
@@ -15,6 +16,7 @@ use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\States\StateFactoryAware;
 use Aedart\Contracts\Circuits\Store;
 use Aedart\Contracts\Circuits\Stores\StoreAware;
+use DateTimeInterface;
 use Throwable;
 
 /**
@@ -64,6 +66,14 @@ class CircuitBreaker implements
      * @var int
      */
     protected int $threshold = 1;
+
+    /**
+     * A state's time-to-live (ttl)
+     *
+     *
+     * @var int|null Duration in seconds. Null if disabled
+     */
+    protected ?int $stateTtl = 60;
 
     /**
      * CircuitBreaker constructor.
@@ -357,7 +367,21 @@ class CircuitBreaker implements
         }
     }
 
-    // TODO:
+    /**
+     * Tries to change state to {@see CircuitBreakerInterface::HALF_OPEN} and execute
+     * given callback.
+     *
+     * If unable to change state, the `$otherwise` callback is invoked.
+     *
+     * @param State $state Current state
+     * @param callable $callback
+     * @param callable $otherwise
+     *
+     * @return mixed
+     *
+     * @throws UnknownStateException
+     * @throws StateCannotBeLockedException
+     */
     protected function tryHalfOpen(State $state, callable $callback, callable $otherwise)
     {
         $halfOpen = $this->makeState(static::HALF_OPEN, $state);
@@ -471,21 +495,35 @@ class CircuitBreaker implements
      * Creates a new state instance
      *
      * @param int $id State identifier
-     * @param State|null $state [optional] Resolves to current state if none given
+     * @param State|null $previous [optional] Resolves to current state if none given
      *
      * @return State
      *
      * @throws UnknownStateException
      */
-    protected function makeState(int $id, ?State $state = null): State
+    protected function makeState(int $id, ?State $previous = null): State
     {
-        $state = $state ?? $this->state();
+        $previous = $previous ?? $this->state();
 
         return $this->getStateFactory()->make(
             $id,
-            $state->id(),
+            $previous->id(),
             $this->now(),
-            // TODO: expires at / a default ttl?
+            $this->resolveStateExpiresAt()
         );
+    }
+
+    /**
+     * Resolves a date's expires at
+     *
+     * @return DateTimeInterface|null
+     */
+    protected function resolveStateExpiresAt(): ?DateTimeInterface
+    {
+        if(!isset($this->stateTtl)){
+            return null;
+        }
+
+        return $this->futureDate($this->stateTtl);
     }
 }
