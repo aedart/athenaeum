@@ -20,15 +20,12 @@ interface Manager
      *
      * @param string $service Name (profile) of Circuit Breaker to obtain or create
      * @param array $options [optional] Circuit Breaker options
-     * @param bool $autoCreate [optional] When true, new circuit breaker is created, even
-     *                       if a "profile" does not exist.
      *
      * @return CircuitBreaker
      *
-     * @throws ProfileNotFoundException Only when `$autoCreate` is set to false and requested
-     *                                  circuit breaker does not exist.
+     * @throws ProfileNotFoundException
      */
-    public function create(string $service, array $options = [], bool $autoCreate = false): CircuitBreaker;
+    public function create(string $service, array $options = []): CircuitBreaker;
 
     /**
      * Creates a new store instance
