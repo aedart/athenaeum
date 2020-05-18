@@ -2,8 +2,10 @@
 
 namespace Aedart\Circuits;
 
+use Aedart\Circuits\Exceptions\ProfileNotFound;
 use Aedart\Circuits\Stores\CacheStore;
-use Aedart\Contracts\Circuits\CircuitBreaker;
+use Aedart\Contracts\Circuits\CircuitBreaker as CircuitBreakerInterface;
+use Aedart\Contracts\Circuits\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Circuits\Manager as CircuitBreakerManager;
 use Aedart\Contracts\Circuits\Store;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
@@ -33,7 +35,7 @@ class Manager implements
     /**
      * @inheritDoc
      */
-    public function create(string $service, array $options = [], bool $autoCreate = false): CircuitBreaker
+    public function create(string $service, array $options = []): CircuitBreakerInterface
     {
         // Return existing circuit breaker, if available
         if (isset($this->circuitBreakers[$service])) {
@@ -41,11 +43,7 @@ class Manager implements
         }
 
         // Create new instance, if possible
-        return $this->circuitBreakers[$service] = $this->createCircuitBreaker(
-            $service,
-            $options,
-            $autoCreate
-        );
+        return $this->circuitBreakers[$service] = $this->createCircuitBreaker($service, $options);
     }
 
     /**
@@ -70,16 +68,92 @@ class Manager implements
      * Internals
      ****************************************************************/
 
-    // TODO: ...
-    protected function createCircuitBreaker(string $service, array $options = [], bool $autoCreate = false): CircuitBreaker
+    /**
+     * Create circuit breaker instance
+     *
+     * @param string $service
+     * @param array $options [optional]
+     *
+     * @return CircuitBreakerInterface
+     *
+     * @throws ProfileNotFoundException
+     */
+    protected function createCircuitBreaker(string $service, array $options = []): CircuitBreakerInterface
     {
-        // TODO: Find service in config
-            // TODO: If not found, fail when auto create = false
+        // Obtain "service" configuration
+        $options = array_merge(
+            $this->findOrFailServiceConfiguration($service),
+            $options
+        );
 
-        // TODO: Merge options...
+        // Create store
+        $store = $this->createStore($service, $options['store'] ?? null);
 
-        // TODO: Find & create store...
+        // Finally, create circuit breaker
+        return (new CircuitBreaker($service, $options))
+            ->setStore($store);
+    }
 
-        // TODO: etc...
+    /**
+     * Creates new store instance, using predefined configuration.
+     * Fails if unable to find configuration for store.
+     *
+     * @param string $service
+     * @param string $driver
+     * @return Store
+     *
+     * @throws ProfileNotFoundException
+     */
+    protected function createStore(string $service, string $driver): Store
+    {
+        $configuration = $this->findOrFailStoreConfiguration($driver);
+        $driver = $configuration['driver'] ?? null;
+        $options = $configuration['options'] ?? [];
+
+        return $this->store($service, $driver, $options);
+    }
+
+    /**
+     * Find circuit breaker store configuration for given store (driver)
+     * or fail
+     *
+     * @param string $store
+     * @return array
+     *
+     * @throws ProfileNotFoundException
+     */
+    protected function findOrFailStoreConfiguration(string $store): array
+    {
+        $config = $this->getConfig();
+        $key = 'circuit-breakers.stores.' . $store;
+
+        if (!$config->has($key)) {
+            $notFoundMsg = $notFoundMsg ?? 'Store (profile) "%s" does not exist';
+            throw new ProfileNotFound(sprintf($notFoundMsg, $store));
+        }
+
+        return $config->get($key);
+    }
+
+    /**
+     * Find circuit breaker configuration for given service (profile)
+     * or fail
+     *
+     * @param string $service
+     * @return array
+     *
+     * @throws ProfileNotFoundException
+     */
+    protected function findOrFailServiceConfiguration(string $service): array
+    {
+        $config = $this->getConfig();
+        $key = 'circuit-breakers.services.' . $service;
+
+        if (!$config->has($key)) {
+            $notFoundMsg = $notFoundMsg ?? 'Service (profile) "%s" does not exist';
+            throw new ProfileNotFound(sprintf($notFoundMsg, $service));
+        }
+
+        return $config->get($key);
     }
 }
