@@ -6,11 +6,14 @@ use Aedart\Circuits\Providers\CircuitBreakerServiceProvider;
 use Aedart\Circuits\Traits\CircuitBreakerManagerTrait;
 use Aedart\Circuits\Traits\FailureFactoryTrait;
 use Aedart\Circuits\Traits\StateFactoryTrait;
+use Aedart\Config\Providers\ConfigLoaderServiceProvider;
+use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\Store;
 use Aedart\Testing\TestCases\LaravelTestCase;
+use Codeception\Configuration;
 use DateTimeInterface;
 use Illuminate\Support\Facades\Date;
 
@@ -22,6 +25,7 @@ use Illuminate\Support\Facades\Date;
  */
 abstract class CircuitBreakerTestCase extends LaravelTestCase
 {
+    use ConfigLoaderTrait;
     use CircuitBreakerManagerTrait;
     use StateFactoryTrait;
     use FailureFactoryTrait;
@@ -31,13 +35,40 @@ abstract class CircuitBreakerTestCase extends LaravelTestCase
      ****************************************************************/
 
     /**
+     * @inheritDoc
+     */
+    protected function _before()
+    {
+        parent::_before();
+
+        $this->getConfigLoader()
+            ->setDirectory($this->configDir())
+            ->load();
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getPackageProviders($app)
     {
         return [
+            ConfigLoaderServiceProvider::class,
             CircuitBreakerServiceProvider::class
         ];
+    }
+
+    /*****************************************************************
+     * Paths
+     ****************************************************************/
+
+    /**
+     * Returns path to configuration directory
+     *
+     * @return string
+     */
+    public function configDir(): string
+    {
+        return Configuration::dataDir() . 'configs/circuits/';
     }
 
     /*****************************************************************
