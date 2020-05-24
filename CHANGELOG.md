@@ -6,7 +6,7 @@
 
 #### Added
 
-* Circuit Breaker package
+* Circuits package that offers a `CircuitBreaker`, with a `Manager` (profile-based).
 
 ### [v4.1.0](https://github.com/aedart/athenaeum/compare/4.0.1...4.1.0)
 
