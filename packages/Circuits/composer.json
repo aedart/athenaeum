@@ -1,6 +1,6 @@
 {
     "name": "aedart/athenaeum-circuits",
-    "description": "Athenaeum circuits package",
+    "description": "Circuit Breaker for Laravel",
     "keywords": [
         "Athenaeum",
         "Circuit Breaker"
