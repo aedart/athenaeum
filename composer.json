@@ -46,6 +46,7 @@
         ],
         "psr-4": {
             "Aedart\\": "src",
+            "Aedart\\Circuits\\": "packages/Circuits/src",
             "Aedart\\Config\\": "packages/Config/src",
             "Aedart\\Console\\": "packages/Console/src",
             "Aedart\\Container\\": "packages/Container/src",
@@ -68,6 +69,7 @@
         }
     },
     "replace": {
+        "aedart/athenaeum-circuits": "self.version",
         "aedart/athenaeum-config": "self.version",
         "aedart/athenaeum-console": "self.version",
         "aedart/athenaeum-container": "self.version",
