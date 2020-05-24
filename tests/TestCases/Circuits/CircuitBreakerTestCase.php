@@ -8,6 +8,8 @@ use Aedart\Circuits\Traits\FailureFactoryTrait;
 use Aedart\Circuits\Traits\StateFactoryTrait;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
+use Aedart\Contracts\Circuits\CircuitBreaker;
+use Aedart\Contracts\Circuits\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\State;
@@ -74,6 +76,21 @@ abstract class CircuitBreakerTestCase extends LaravelTestCase
     /*****************************************************************
      * Helpers
      ****************************************************************/
+
+    /**
+     * Creates a new circuit breaker instance
+     *
+     * @param string $service Name of service (profile name)
+     * @param array $options [optional]
+     *
+     * @return CircuitBreaker
+     *
+     * @throws ProfileNotFoundException
+     */
+    protected function makeCircuitBreaker(string $service, array $options = []): CircuitBreaker
+    {
+        return $this->getCircuitBreakerManager()->create($service, $options);
+    }
 
     /**
      * Creates a new circuit breaker store instance, with a random generated
