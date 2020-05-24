@@ -67,6 +67,13 @@ class CacheStore extends BaseStore implements
     protected string $lastFailureKey;
 
     /**
+     * Locked state
+     *
+     * @var State|null
+     */
+    protected ?State $lockedState = null;
+
+    /**
      * CacheStore constructor.
      *
      * @param string $service
@@ -103,6 +110,12 @@ class CacheStore extends BaseStore implements
      */
     public function getState(): State
     {
+        // Return locked state, if available in this instance
+        if (isset($this->lockedState)) {
+            return $this->lockedState;
+        }
+
+        // Otherwise obtain from cache store
         $state = $this->getCache()->get($this->stateKey);
 
         if (!isset($state)) {
@@ -132,9 +145,19 @@ class CacheStore extends BaseStore implements
         // Attempt acquire lock. If successfully, then the callback is invoked and
         // released. If not, then "false" is returned.
         return $lock->get(function () use ($state, $callback) {
+            // Set the locked state, so that "getState" is able to
+            // return it, should the circuit breaker require it.
+            $this->lockedState = $state;
             $this->dispatchStateChange($state);
 
-            return $callback();
+            // Invoke callback
+            $result = $callback();
+
+            // Reset the locked state instance and return
+            // callback's result
+            $this->lockedState = null;
+
+            return $result;
         });
     }
 
