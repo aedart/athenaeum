@@ -82,14 +82,26 @@ abstract class CircuitBreakerTestCase extends LaravelTestCase
      *
      * @param string $service Name of service (profile name)
      * @param array $options [optional]
+     * @param bool $reset [optional] If true, last failure, amount failures, and state is
+     *                               reset.
      *
      * @return CircuitBreaker
      *
      * @throws ProfileNotFoundException
      */
-    protected function makeCircuitBreaker(string $service, array $options = []): CircuitBreaker
+    protected function makeCircuitBreaker(string $service, array $options = [], bool $reset = true): CircuitBreaker
     {
-        return $this->getCircuitBreakerManager()->create($service, $options);
+        $circuitBreaker = $this->getCircuitBreakerManager()->create($service, $options);
+
+        // Reset state, failures, etc., to avoid unintended side effects per test
+        if ($reset) {
+            $circuitBreaker->store()->reset();
+            $circuitBreaker->changeState(
+                $this->makeState(CircuitBreaker::CLOSED)
+            );
+        }
+
+        return $circuitBreaker;
     }
 
     /**
