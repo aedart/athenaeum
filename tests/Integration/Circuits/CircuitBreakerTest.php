@@ -3,8 +3,6 @@
 
 namespace Aedart\Tests\Integration\Circuits;
 
-
-use Aedart\Circuits\Exceptions\ServiceUnavailable;
 use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Circuits\Exceptions\ServiceUnavailableException;
@@ -46,7 +44,7 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      */
     public function invokesCallback()
     {
-        $callback = fn() => true;
+        $callback = fn () => true;
 
         $circuitBreaker = $this->makeCircuitBreaker('my_service');
         $result = $circuitBreaker->attempt($callback);
@@ -65,7 +63,7 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     {
         $this->expectException(ServiceUnavailableException::class);
 
-        $callback = function() {
+        $callback = function () {
             throw new RuntimeException('Test Failure');
         };
 
@@ -81,11 +79,11 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      */
     public function invokesOtherwiseCallbackWhenServiceUnavailable()
     {
-        $callback = function() {
+        $callback = function () {
             throw new RuntimeException('Test Failure');
         };
 
-        $otherwise = fn() => true;
+        $otherwise = fn () => true;
 
         $circuitBreaker = $this->makeCircuitBreaker('my_service');
         $result = $circuitBreaker->attempt($callback, $otherwise);
@@ -102,7 +100,7 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     public function tripsWhenFailureThresholdReached()
     {
         $amount = 0;
-        $callback = function() use(&$amount) {
+        $callback = function () use (&$amount) {
             $amount++;
             throw new RuntimeException('Test Failure');
         };
@@ -134,12 +132,12 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     public function invokesOtherwiseCallbackWhenTripped()
     {
         $amount = 0;
-        $callback = function() use(&$amount) {
+        $callback = function () use (&$amount) {
             $amount++;
             throw new RuntimeException('Test Failure');
         };
 
-        $otherwise = fn() => true;
+        $otherwise = fn () => true;
 
         $result = $this->makeCircuitBreaker('my_service')
                 ->retry(3, 0)
@@ -159,10 +157,10 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      */
     public function failsFastWhenStateIsOpen()
     {
-        $callback = function() {
+        $callback = function () {
             throw new RuntimeException('Test failure');
         };
-        $otherwise = fn() => true;
+        $otherwise = fn () => true;
 
         $circuitBreaker = $this->makeCircuitBreaker('my_service')
             ->retry(1, 0)
@@ -188,15 +186,15 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
             ->withFailureThreshold(1)
             ->withGracePeriod(0);
 
-        $circuitBreaker->attempt(function() {
+        $circuitBreaker->attempt(function () {
             throw new RuntimeException('Test failure');
-        }, fn() => false);
+        }, fn () => false);
 
         // ---------------------------------------------------- //
         // Circuit Breaker attempt to change state to "half-open"
         // after a grace period has past.
 
-        $result = $circuitBreaker->attempt(function(CircuitBreaker $circuitBreaker) {
+        $result = $circuitBreaker->attempt(function (CircuitBreaker $circuitBreaker) {
             // State SHOULD be changed to half-open
             if (!$circuitBreaker->isHalfOpen()) {
                 throw new LogicException(sprintf(
