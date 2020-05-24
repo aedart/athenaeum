@@ -11,6 +11,16 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Circuits',
+            collapsable: true,
+            children: [
+                'circuits/',
+                'circuits/install',
+                'circuits/setup',
+                'circuits/usage',
+            ]
+        },
+        {
             title: 'Config',
             collapsable: true,
             children: [
