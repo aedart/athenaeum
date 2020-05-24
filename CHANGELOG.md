@@ -2,6 +2,12 @@
 
 ## v4.x
 
+### Unreleased
+
+#### Added
+
+* Circuit Breaker package
+
 ### [v4.1.0](https://github.com/aedart/athenaeum/compare/4.0.1...4.1.0)
 
 #### Fixed
