@@ -94,7 +94,7 @@ return [
                  *
                  * @see \Illuminate\Contracts\Cache\LockProvider
                  */
-                'cache-store' => 'redis',
+                'cache-store' => 'array',
 
                 /*
                  * Default time-to-live (ttl) for a state.
