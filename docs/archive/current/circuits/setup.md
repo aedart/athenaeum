@@ -52,8 +52,8 @@ php {your-cli-app} vendor:publish-all
 
 ## Configuration
 
-The `configs/circuit-breakers.php` configuration file is intended to contain a list of "services".
-Each service has a list settings (_options_) for it's corresponding circuit breaker instance.
+The `configs/circuit-breakers.php` configuration file, is intended to contain a list of "services".
+Each service has a list of settings (_options_) for it's corresponding circuit breaker instance.
 Add or change these settings as you see fit.
 
 ```php
@@ -120,6 +120,10 @@ return [
 Each Circuit Breaker uses a `Store` to keep track of it's state (_closed, open, half-open_).
 In your configuration, you can specify the profile-name of the store to use.
 Additional store configuration can be specified in your configuration file (`configs/circuit-breakers.php`).
+
+::: warning
+Currently, only cache stores that inherit from [`LockProvider`](https://laravel.com/docs/7.x/cache#atomic-locks) can be used.
+:::
 
 ```php
 <?php
