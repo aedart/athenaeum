@@ -38,7 +38,7 @@ Run `vendor:publish` to publish this package's assets.
 php artisan vendor:publish
 ```
 
-After the publish command has completed, you should see the following configuration file in your `/configs` directory:
+After the command has completed, you should see the following configuration file in your `/configs` directory:
 
 - `http-clients.php`
 
@@ -57,8 +57,8 @@ Feel free to add as many profiles as your application requires.
 
 Each profile consists of two keys:
 
-* `driver` : Class patch to the Http Client "driver" to be used
-* `options` : Http Client options.
+* `driver`: Class patch to the Http Client "driver" to be used.
+* `options`: Http Client options.
 
 You can use [Guzzle's Request Options](http://docs.guzzlephp.org/en/stable/request-options.html), for each client profile.
 
