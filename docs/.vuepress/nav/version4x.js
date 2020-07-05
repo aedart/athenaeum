@@ -18,6 +18,7 @@ module.exports.sidebar = function(){
                 'circuits/install',
                 'circuits/setup',
                 'circuits/usage',
+                'circuits/events',
             ]
         },
         {
