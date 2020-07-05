@@ -2,7 +2,7 @@
 
 ## v4.x
 
-### Unreleased
+### [v4.2.0](https://github.com/aedart/athenaeum/compare/4.1.0...4.2.0)
 
 #### Added
 
