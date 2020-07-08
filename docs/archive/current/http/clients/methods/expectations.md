@@ -158,5 +158,5 @@ $response = $client
 
 ### Response Manipulation
 
-The `expect()` method method is not design nor intended to manipulate the received response.
+The `expect()` method is not design nor intended to manipulate the received response.
 This falls outside the scope of the given method. It's only purpose is to allow status code and response validation.
