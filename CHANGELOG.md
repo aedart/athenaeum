@@ -2,6 +2,10 @@
 
 ## v4.x
 
+### [v4.2.1](https://github.com/aedart/athenaeum/compare/4.2.0...4.2.1)
+
+* Bumped minimum required dependencies, due to [security issue / release from Laravel](https://blog.laravel.com/laravel-cookie-security-releases).
+
 ### [v4.2.0](https://github.com/aedart/athenaeum/compare/4.1.0...4.2.0)
 
 #### Added
