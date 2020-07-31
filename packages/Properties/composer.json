@@ -22,8 +22,8 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "aedart/athenaeum-contracts": "^4.2.1",
-        "aedart/athenaeum-utils": "^4.2.1"
+        "aedart/athenaeum-contracts": "^4.3",
+        "aedart/athenaeum-utils": "^4.3"
     },
     "autoload": {
         "psr-4": {
