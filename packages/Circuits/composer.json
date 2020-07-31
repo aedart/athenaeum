@@ -22,9 +22,9 @@
         "php": ">=7.4.0",
         "illuminate/cache": "^7.22.4",
         "illuminate/events": "^7.22.4",
-        "aedart/athenaeum-contracts": "^4.3",
-        "aedart/athenaeum-support": "^4.3",
-        "aedart/athenaeum-utils": "^4.3"
+        "aedart/athenaeum-contracts": "^4.2.1",
+        "aedart/athenaeum-support": "^4.2.1",
+        "aedart/athenaeum-utils": "^4.2.1"
     },
     "autoload": {
         "psr-4": {
