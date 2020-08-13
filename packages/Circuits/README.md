@@ -2,7 +2,7 @@
 
 This package offers a Circuit Breaker that can be used to "_[...] detect failures and encapsulates the logic of preventing a failure from constantly recurring, during maintenance, temporary external system failure or unexpected system difficulties[...]_" ([wiki](https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern)).
 
-A detailed explanation of how the Circuit Breaker Pattern works, can be found on [Medium](https://medium.com/@soumendrak/circuit-breaker-design-pattern-997c3521c1c4) and [Martin Flower's blog](https://martinfowler.com/bliki/CircuitBreaker.html)
+A detailed explanation of how the Circuit Breaker Pattern works, can be found on [Medium](https://medium.com/@soumendrak/circuit-breaker-design-pattern-997c3521c1c4) and [Martin Fowler's blog](https://martinfowler.com/bliki/CircuitBreaker.html)
 
 ## Example
 
