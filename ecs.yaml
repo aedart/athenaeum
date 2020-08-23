@@ -2,7 +2,7 @@
 parameters:
     sets:
         - 'clean-code'
-        - 'psr12'
+        - 'psr-12'
     paths:
         - 'packages'
         - 'tests/Helpers'
