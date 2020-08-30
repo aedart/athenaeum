@@ -135,7 +135,7 @@ class TraitTester
      * `get-default-property` method
      *
      * @param MockObject $mock
-     * @param string $method [optional] Method name is guessed if none provided
+     * @param string|null $method [optional] Method name is guessed if none provided
      * @param string $failMessage [optional]
      *
      * @throws ExpectationFailedException
@@ -157,7 +157,7 @@ class TraitTester
      * `has-property` method
      *
      * @param MockObject $mock
-     * @param string $method [optional] Method name is guessed if none provided
+     * @param string|null $method [optional] Method name is guessed if none provided
      * @param string $failMessage [optional]
      *
      * @throws ExpectationFailedException
