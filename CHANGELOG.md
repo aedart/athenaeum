@@ -1,5 +1,11 @@
 # Release Notes
 
+### Unreleased
+
+#### Fixed
+
+* Codeception broken after update (_in codeception version 4.1.x series_).
+
 ## v4.x
 
 ### [v4.2.1](https://github.com/aedart/athenaeum/compare/4.2.0...4.2.1)
