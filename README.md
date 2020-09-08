@@ -19,6 +19,10 @@ _A configuration loader, supporting *.ini, *.json, *.php and *.yml._
 
 _A custom Laravel Application implementation, intended to be integrated into legacy applications._
 
+### [Circuits](https://aedart.github.io/athenaeum/archive/current/circuits)
+
+_A Circuit Breaker to encapsulate failure prevention logic._
+
 ### [Dto](https://aedart.github.io/athenaeum/archive/current/dto/)
 
 _Data Transfer Object abstraction._
