@@ -25,11 +25,12 @@ This change only affects you, if a custom implementation of the Console `Kernel`
 
 The following deprecated components have been removed:
 
-* `Aedart\Dto` (_replaced by `Aedart\Dto\Dto`_) 
-* `Aedart\ArrayDto` (_replaced by `Aedart\Dto\ArrayDto`_) 
-* `Aedart\Console\CreateAwareOfCommand` (_replaced by `Aedart\Support\AwareOf\Console\CreateCommand`_)
-* `Aedart\Console\CommandBase` (_replaced by `Aedart\Support\AwareOf\Console\CommandBase`_)
-* `Aedart\Console\AwareOfScaffoldCommand` (_replaced by `Aedart\Support\AwareOf\Console\ScaffoldCommand`_)
+* `Aedart\Dto` (_replaced by `Aedart\Dto\Dto`_).
+* `Aedart\ArrayDto` (_replaced by `Aedart\Dto\ArrayDto`_).
+* `Aedart\Console\CreateAwareOfCommand` (_replaced by `Aedart\Support\AwareOf\Console\CreateCommand`_).
+* `Aedart\Console\CommandBase` (_replaced by `Aedart\Support\AwareOf\Console\CommandBase`_).
+* `Aedart\Console\AwareOfScaffoldCommand` (_replaced by `Aedart\Support\AwareOf\Console\ScaffoldCommand`_).
+* Removed all aware-of helpers in `Aedart\Support\Properties\Mixed\*` and `Aedart\Contracts\Support\Properties\Mixed\*` namespaces (_replaced by `Aedart\Support\Properties\Mixes\*` and `Aedart\Contracts\Support\Properties\Mixes\*`_).
 
 ### Onward
 
