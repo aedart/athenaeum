@@ -18,6 +18,10 @@
 
 **Non-breaking Changes**
 
+#### Added
+
+* PHP Compatibility check in Travis.
+
 #### Fixed
 
 * Codeception broken after update (_in codeception version 4.1.x series_).
