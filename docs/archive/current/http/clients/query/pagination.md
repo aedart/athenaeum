@@ -43,7 +43,7 @@ $response = $client
 ### Take & Skip
 
 `take()` and `skip()` are aliases for `limit()` and `offset()`.
-These have been added for the sake of convenience and are inspired by Laravel's [Query Builder](https://laravel.com/docs/7.x/queries#ordering-grouping-limit-and-offset).  
+These have been added for the sake of convenience and are inspired by Laravel's [Query Builder](https://laravel.com/docs/8.x/queries#ordering-grouping-limit-and-offset).  
 
 ```php
 $response = $client

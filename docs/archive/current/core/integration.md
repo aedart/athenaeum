@@ -49,12 +49,12 @@ Please configure your web server to deny access to those paths, when requested v
 :::
 
 ::: tip
-You can read more about the directory structure, e.g. what each directory is intended for, inside [Laravel's documentation](https://laravel.com/docs/7.x/structure#the-bootstrap-directory).
+You can read more about the directory structure, e.g. what each directory is intended for, inside [Laravel's documentation](https://laravel.com/docs/8.x/structure#the-bootstrap-directory).
 :::
 
 ## The Environment File (`.env`)
 
-In your `environmentPath`, create an [environment file](https://laravel.com/docs/7.x/configuration#environment-configuration) (`.env`).
+In your `environmentPath`, create an [environment file](https://laravel.com/docs/8.x/configuration#environment-configuration) (`.env`).
 At the very minimum, it should contain the following:
 
 ```ini
@@ -77,7 +77,7 @@ EXCEPTION_HANDLING_ENABLED=false
 ## The Console Application (`cli.php`)
 
 Create a `cli.php` file inside your `basePath`. Once again, the naming of the file does not matter.
-This file is where Laravel's [Console Application](https://laravel.com/docs/7.x/artisan) (_a light version of Artisan_) is going to be created.
+This file is where Laravel's [Console Application](https://laravel.com/docs/8.x/artisan) (_a light version of Artisan_) is going to be created.
 
 ```php
 <?php
@@ -156,7 +156,7 @@ For now, it's important that these are available in your application.
 ::: tip Note
 _If you are familiar with Laravel's `vendor:publish` command, you will immediately notice that this publish assets command does not offer the same features, as the one provided by Laravel.
 The `vendor:publish-all` is inspired by Laravel's publish command, yet it is not intended to offer the exact same features.
-Should you require more advanced publish features, then you will have to [create your own](https://laravel.com/docs/7.x/artisan#writing-commands) publish command._
+Should you require more advanced publish features, then you will have to [create your own](https://laravel.com/docs/8.x/artisan#writing-commands) publish command._
 :::
 
 -----
@@ -191,7 +191,7 @@ $app->destroy();
 
 #### Bootstrap, Register and Boot
 
-In the above example, when the `run()` method is invoked, the Athenaeum Core Application will bootstrap, register and boot it's registered [Service Providers](https://laravel.com/docs/7.x/providers). 
+In the above example, when the `run()` method is invoked, the Athenaeum Core Application will bootstrap, register and boot it's registered [Service Providers](https://laravel.com/docs/8.x/providers). 
 If this is done before your legacy application's logic, then all registered services are made available throughout the remaining of the incoming Http request.
 
 #### Graceful Shutdown

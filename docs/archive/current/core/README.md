@@ -8,12 +8,12 @@ The Athenaeum Core Application is a custom implementation of [Laravel's](https:/
 It is intended to bring some of Laravel's services and components into your [legacy application](https://en.wikipedia.org/wiki/Legacy_system).
 It offers the following features:
 
-- Registration and booting of [Service Providers](https://laravel.com/docs/7.x/providers)
-- Laravel's [Service Container](https://laravel.com/docs/7.x/container)
-- Laravel's [Configuration Repository](https://laravel.com/docs/7.x/configuration)
-- Laravel's [Event Dispatcher](https://laravel.com/docs/7.x/events)
-- Laravel's [Cache Repository](https://laravel.com/docs/7.x/cache)
-- Laravel's [Console Application](https://laravel.com/docs/7.x/artisan) (_lightweight version of Artisan_)
+- Registration and booting of [Service Providers](https://laravel.com/docs/8.x/providers)
+- Laravel's [Service Container](https://laravel.com/docs/8.x/container)
+- Laravel's [Configuration Repository](https://laravel.com/docs/8.x/configuration)
+- Laravel's [Event Dispatcher](https://laravel.com/docs/8.x/events)
+- Laravel's [Cache Repository](https://laravel.com/docs/8.x/cache)
+- Laravel's [Console Application](https://laravel.com/docs/8.x/artisan) (_lightweight version of Artisan_)
 - Exception Handling (_optional_)
 
 Please read the "Motivation" and "Limitations" section before continuing.
@@ -61,14 +61,14 @@ In other words, it does not impose you to change your already established reques
 ### No Frontend Support
 
 For the same reasons as Http Request / Response handling, no frontend related features are directly offered.
-This means that [Blade](https://laravel.com/docs/7.x/blade) isn't directly supported.
+This means that [Blade](https://laravel.com/docs/8.x/blade) isn't directly supported.
 
 ### No Database Support
 
 Most legacy applications already have some kind of database abstraction layer.
 Perhaps [PDO](https://www.php.net/manual/en/class.pdo) or [mysqli](https://www.php.net/manual/en/class.mysqli.php) is used directly.
 Regardless of such, redesigning your entire database abstraction layer can be extremely overwhelming and perhaps also ill advised. 
-As such, [Eloquent](https://laravel.com/docs/7.x/eloquent) is not directly support by this application.
+As such, [Eloquent](https://laravel.com/docs/8.x/eloquent) is not directly support by this application.
 Yet, should you still desire to attempt incorporating Eloquent into your legacy application, then please read [Laravel's documentation](https://packagist.org/packages/illuminate/database).  
 
 ### Other Limitations
