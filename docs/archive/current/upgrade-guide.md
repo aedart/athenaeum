@@ -21,6 +21,13 @@ The `runCore()` method now invokes the new bootstrap method.
 
 This change only affects you, if a custom implementation of the Console `Kernel` is used.
 
+## Removed Deprecated Components
+
+The following deprecated components have been removed:
+
+- `Aedart\Dto` (_replaced by `\Aedart\Dto\Dto`_) 
+- `Aedart\ArrayDto` (_replaced by `\Aedart\Dto\ArrayDto`_) 
+
 ### Onward
 
 You can review other changes in the [changelog](https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md).
