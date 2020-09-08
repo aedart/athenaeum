@@ -8,6 +8,8 @@
 
 * Upgraded Laravel dependencies to `v8.x`
 * Added `bootstrap()` method in `\Aedart\Core\Console\Kernel`, due to Laravel's Console `Kernal` interface change. `runCore()` method will now invoke new bootstrap method.
+* Removed `Aedart\Dto` (_was deprecated in `v4.x`_)
+* Removed `Aedart\ArrayDto` (_was deprecated in `v4.x`_)
 
 **Non-breaking Changes**
 
