@@ -59,6 +59,23 @@ class Kernel implements
     /**
      * @inheritDoc
      */
+    public function bootstrap()
+    {
+        $app = $this->getCoreApplication();
+        if ($app->isRunning()) {
+            return $this;
+        }
+
+        // Bootstrap, boot and run the core application
+        $app->run();
+
+        // Ensure that deferred services are registered immediately
+        $app->loadDeferredProviders();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function handle($input, $output = null)
     {
         return $this->attempt(function (ConsoleKernelInterface $kernel, $output) use ($input) {
@@ -291,16 +308,7 @@ class Kernel implements
      */
     protected function runCore()
     {
-        $app = $this->getCoreApplication();
-        if ($app->isRunning()) {
-            return $this;
-        }
-
-        // Bootstrap, boot and run the core application
-        $app->run();
-
-        // Ensure that deferred services are registered immediately
-        $app->loadDeferredProviders();
+        $this->bootstrap();
 
         return $this;
     }
