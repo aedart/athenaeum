@@ -6,14 +6,15 @@
 
 **Breaking Changes**
 
-* Upgraded Laravel dependencies to `v8.x`
+* Upgraded Laravel dependencies to `v8.x`.
 * Added `bootstrap()` method in `\Aedart\Core\Console\Kernel`, due to Laravel's Console `Kernal` interface change. `runCore()` method will now invoke new bootstrap method.
-* Removed `Aedart\Dto` (_was deprecated in `v4.x`_)
-* Removed `Aedart\ArrayDto` (_was deprecated in `v4.x`_)
-* Removed `Aedart\Console\CreateAwareOfCommand` (_was deprecated in `v4.x`_)
-* Removed `Aedart\Console\CommandBase` (_was deprecated in `v4.x`_)
-* Removed `Aedart\Console\AwareOfScaffoldCommand` (_was deprecated in `v4.x`_)
-
+* Removed `Aedart\Dto` (_was deprecated in `v4.x`_).
+* Removed `Aedart\ArrayDto` (_was deprecated in `v4.x`_).
+* Removed `Aedart\Console\CreateAwareOfCommand` (_was deprecated in `v4.x`_).
+* Removed `Aedart\Console\CommandBase` (_was deprecated in `v4.x`_).
+* Removed `Aedart\Console\AwareOfScaffoldCommand` (_was deprecated in `v4.x`_).
+* Removed all helpers in `Aedart\Support\Properties\Mixed\*` namespace (_was deprecated in `v4.x`_).
+* Removed all contracts in `Aedart\Contracts\Support\Properties\Mixed\*` namespace (_was deprecated in `v4.x`_).
 
 **Non-breaking Changes**
 
