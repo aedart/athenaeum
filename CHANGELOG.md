@@ -2,6 +2,14 @@
 
 ### Unreleased
 
+#### Changed
+
+**Breaking Changes**
+
+* Upgraded Laravel dependencies to `v8.x`
+
+**Non-breaking Changes**
+
 #### Fixed
 
 * Codeception broken after update (_in codeception version 4.1.x series_).
