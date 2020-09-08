@@ -21,7 +21,7 @@ The `runCore()` method now invokes the new bootstrap method.
 
 This change only affects you, if a custom implementation of the Console `Kernel` is used.
 
-## Removed Deprecated Components
+### Removed Deprecated Components
 
 The following deprecated components have been removed:
 
