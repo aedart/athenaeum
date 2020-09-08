@@ -25,8 +25,11 @@ This change only affects you, if a custom implementation of the Console `Kernel`
 
 The following deprecated components have been removed:
 
-- `Aedart\Dto` (_replaced by `\Aedart\Dto\Dto`_) 
-- `Aedart\ArrayDto` (_replaced by `\Aedart\Dto\ArrayDto`_) 
+* `Aedart\Dto` (_replaced by `Aedart\Dto\Dto`_) 
+* `Aedart\ArrayDto` (_replaced by `Aedart\Dto\ArrayDto`_) 
+* `Aedart\Console\CreateAwareOfCommand` (_replaced by `Aedart\Support\AwareOf\Console\CreateCommand`_)
+* `Aedart\Console\CommandBase` (_replaced by `Aedart\Support\AwareOf\Console\CommandBase`_)
+* `Aedart\Console\AwareOfScaffoldCommand` (_replaced by `Aedart\Support\AwareOf\Console\ScaffoldCommand`_)
 
 ### Onward
 
