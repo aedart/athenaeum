@@ -13,7 +13,7 @@ Some of the key packages that are offered by Athenaeum, are the following:
 
 ### [Config](https://aedart.github.io/athenaeum/archive/current/config/)
 
-_A configuration loader, supporting *.ini, *.json, *.php and *.yml._
+_A configuration loader, supporting *.ini, *.json, *.php, *.yml and *.toml._
 
 ### [Core](https://aedart.github.io/athenaeum/archive/current/core/)
 

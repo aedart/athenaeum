@@ -1,0 +1,8 @@
+# Example TOML document.
+
+[servers]
+
+# Indentation (tabs and/or spaces) is allowed but not required
+    [servers.omega]
+    ip = "10.0.0.5"
+
