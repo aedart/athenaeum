@@ -6,7 +6,9 @@ description: Athenaeum Release Notes
 
 ## `v5.x` Highlights
 
+### Support for TOML configuration files
 
+Added configuration file parser for [TOML](https://en.wikipedia.org/wiki/TOML) format.
 
 ## Changelog
 
