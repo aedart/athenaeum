@@ -6,6 +6,7 @@ use Aedart\Config\Parsers\Exceptions\NoFileParserFound;
 use Aedart\Config\Parsers\Files\Ini;
 use Aedart\Config\Parsers\Files\Json;
 use Aedart\Config\Parsers\Files\PhpArray;
+use Aedart\Config\Parsers\Files\Toml;
 use Aedart\Config\Parsers\Files\Yaml;
 use Aedart\Contracts\Config\Parsers\Factories\FileParserFactory as FileParserFactoryInterface;
 use Aedart\Contracts\Config\Parsers\FileParser;
@@ -41,6 +42,10 @@ class FileParserFactory implements FileParserFactoryInterface
             case Yaml::getFileType():
             case 'yaml':
                 return new Yaml();
+                break;
+
+            case Toml::getFileType():
+                return new Toml();
                 break;
 
             default:
