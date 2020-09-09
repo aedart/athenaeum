@@ -2,6 +2,11 @@
 
 ### Unreleased
 
+#### Added
+
+* Support for loading [TOML](https://en.wikipedia.org/wiki/TOML) configuration files.
+* PHP Compatibility check in Travis.
+
 #### Changed
 
 **Breaking Changes**
@@ -17,10 +22,6 @@
 * Removed all contracts in `Aedart\Contracts\Support\Properties\Mixed\*` namespace (_was deprecated in `v4.x`_).
 
 **Non-breaking Changes**
-
-#### Added
-
-* PHP Compatibility check in Travis.
 
 #### Fixed
 
