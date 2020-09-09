@@ -37,7 +37,8 @@
         "roave/security-advisories": "dev-master",
         "symfony/var-dumper": "^5.1",
         "symfony/yaml": "^5.1",
-        "twig/twig": "^3.0.5"
+        "twig/twig": "^3.0.5",
+        "yosymfony/toml": "^1.0.4"
     },
     "autoload": {
         "files": [

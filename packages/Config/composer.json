@@ -32,7 +32,8 @@
         "aedart/athenaeum-utils": "^4.3"
     },
     "require-dev": {
-        "symfony/yaml": "^5.1"
+        "symfony/yaml": "^5.1",
+        "yosymfony/toml":  "^1.0.4"
     },
     "autoload": {
         "psr-4": {
