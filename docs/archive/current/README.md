@@ -6,6 +6,22 @@ description: Athenaeum Release Notes
 
 ## `v5.x` Highlights
 
+### Default otherwise callback
+
+The [Circuit Breaker](./circuits) now supports setting a default otherwise callback, via the `otherwise()` method.
+
+```php
+use Aedart\Contracts\Circuits\CircuitBreaker;
+
+$result = $circuitBreaker
+    ->otherwise(function(CircuitBreaker $cb) {
+        // ...not shown...
+    })
+    ->attempt(function(CircuitBreaker $cb) {
+        // ...callback not shown...
+    });
+```
+
 ### Support for TOML configuration files
 
 Added configuration file parser for [TOML](https://en.wikipedia.org/wiki/TOML) format.

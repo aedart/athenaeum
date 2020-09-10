@@ -78,6 +78,22 @@ return $circuitBreaker->attempt(function(CircuitBreaker $cb) {
 Behind the scenes, if the circuit breaker has detected too many failed attempts, across instances, then the `$otherwise` callback can be invoked immidiatly, allowing a [fast-failure](https://en.wikipedia.org/wiki/Fail-fast) to occur.
 This happens when the `failure_threshold` has been reached.
 
+### Default Otherwise Callback
+
+You may also specify a default otherwise callback to be invoked, when none provided via the `attempt()` method.
+
+```php
+use Aedart\Contracts\Circuits\CircuitBreaker;
+
+$result = $circuitBreaker
+    ->otherwise(function(CircuitBreaker $cb) {
+        // ...not shown...
+    })
+    ->attempt(function(CircuitBreaker $cb) {
+        // ...callback not shown...
+    });
+```
+
 ## Retries & Failure Threshold
 
 It is very important to understand that, **each failed attempt increases the failure count**.
