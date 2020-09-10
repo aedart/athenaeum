@@ -130,6 +130,30 @@ interface CircuitBreaker
     public function attempt(callable $callback, ?callable $otherwise = null);
 
     /**
+     * Set the default callback to be invoked, when state is {@see OPEN} or
+     * if an attempt callback fails, in the {@see attempt} method.
+     *
+     * This callback is only invoked if not `$otherwise` callback is provided,
+     * when {@see attempt} is invoked.
+     *
+     * @param  callable|null  $otherwise  [optional] Default callback to invoke, if state is {@see OPEN}
+     *
+     * @return self
+     */
+    public function otherwise(?callable $otherwise = null): self;
+
+    /**
+     * Returns the default callback to be invoked, when state is {@see OPEN} or
+     * if an attempt callback fails, in the {@see attempt} method.
+     *
+     * @see otherwise
+     *
+     * @return callable If no default was set, a built-in default callback MUST
+     *                  be returned.
+     */
+    public function getOtherwise(): callable;
+
+    /**
      * Set the maximum amount of times that a callback should
      * be attempted
      *
