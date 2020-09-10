@@ -153,6 +153,32 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
+     */
+    public function invokesDefaultOtherwiseCallbackWhenServiceUnavailable()
+    {
+        $amount = 0;
+        $callback = function () use (&$amount) {
+            $amount++;
+            throw new RuntimeException('Test Failure');
+        };
+
+        $otherwise = fn () => 'default_otherwise';
+
+        $result = $this->makeCircuitBreaker('my_service')
+            ->retry(3, 0)
+            ->withFailureThreshold(3)
+            ->otherwise($otherwise)
+            ->attempt($callback);
+
+        $this->assertSame('default_otherwise', $result, 'Otherwise callback not invoked');
+        $this->assertSame(3, $amount, 'Incorrect amount of attempts');
+    }
+
+    /**
+     * @test
+     *
+     * @throws ProfileNotFoundException
+     * @throws ServiceUnavailableException
      * @throws UnknownStateException
      */
     public function failsFastWhenStateIsOpen()
