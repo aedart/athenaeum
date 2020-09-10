@@ -8,7 +8,8 @@ description: Athenaeum Release Notes
 
 ### Default otherwise callback
 
-The [Circuit Breaker](./circuits) now supports setting a default otherwise callback, via the `otherwise()` method.
+The [Circuit Breaker](./circuits) now supports setting a default "otherwise" callback, via the `otherwise()` method.
+When no "otherwise" callback is provided to the `attempt()` method, the default "otherwise" callback will be used.
 
 ```php
 use Aedart\Contracts\Circuits\CircuitBreaker;
@@ -24,7 +25,7 @@ $result = $circuitBreaker
 
 ### Support for TOML configuration files
 
-Added configuration file parser for [TOML](https://en.wikipedia.org/wiki/TOML) format.
+Added configuration file parser for [TOML](https://en.wikipedia.org/wiki/TOML) format, for the [configuration loader](./config).
 
 ### Upgraded Dependencies
 
