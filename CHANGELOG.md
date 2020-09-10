@@ -4,6 +4,7 @@
 
 #### Added
 
+* Added `otherwise()` and `getOtherwise()` methods to Circuit Breaker.
 * Support for loading [TOML](https://en.wikipedia.org/wiki/TOML) configuration files.
 * PHP Compatibility check in Travis.
 
