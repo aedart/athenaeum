@@ -2,7 +2,6 @@
 
 namespace Aedart\Contracts\Http\Clients\Responses;
 
-use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;

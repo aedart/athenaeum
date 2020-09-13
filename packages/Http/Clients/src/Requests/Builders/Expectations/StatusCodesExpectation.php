@@ -7,7 +7,6 @@ use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Http\Clients\Exceptions\ExpectationNotMet;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Throwable;
 
 /**
  * Http Status Codes Expectation
