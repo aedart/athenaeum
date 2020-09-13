@@ -2,11 +2,11 @@
 
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
-use Aedart\Contracts\Http\Clients\Exceptions\InvalidStatusCodeException;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
-use Aedart\Contracts\Http\Clients\Responses\Status;
+use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation as ResponseExpectationInterface;
+use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
 use Aedart\Http\Clients\Requests\Builders\Expectations\StatusCodesExpectation;
-use Aedart\Http\Clients\Responses\ResponseStatus;
+use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -26,10 +26,12 @@ use Throwable;
  */
 trait ResponseExpectations
 {
+    use ResponseStatus;
+
     /**
      * Response Expectations
      *
-     * @var callable[]
+     * @var ResponseExpectationInterface[]
      */
     protected array $expectations = [];
 
@@ -38,21 +40,21 @@ trait ResponseExpectations
      */
     public function expect($status, ?callable $otherwise = null): Builder
     {
-        if (is_callable($status)) {
+        if (is_callable($status) || $status instanceof ResponseExpectationInterface) {
             return $this->withExpectation($status);
         }
 
         return $this->withExpectation(
-            $this->buildStatusCodesExpectation($status, $otherwise)
+            new StatusCodesExpectation($status, $otherwise)
         );
     }
 
     /**
      * @inheritdoc
      */
-    public function withExpectation(callable $expectation): Builder
+    public function withExpectation($expectation): Builder
     {
-        $this->expectations[] = $expectation;
+        $this->expectations[] = $this->resolveExpectation($expectation);
 
         return $this;
     }
@@ -92,8 +94,8 @@ trait ResponseExpectations
     /**
      * Apply the registered response expectations
      *
-     * @param RequestInterface $request
-     * @param ResponseInterface $response
+     * @param  RequestInterface  $request
+     * @param  ResponseInterface  $response
      * @return Builder
      *
      * @throws Throwable
@@ -105,65 +107,30 @@ trait ResponseExpectations
         }
 
         $expectations = $this->getExpectations();
-        $status = $this->makeResponseStatus($response);
-
         foreach ($expectations as $expectation) {
-            $this->invokeExpectationCallback($expectation, $request, $response, $status);
+            $expectation->apply($request, $response);
         }
 
         return $this;
     }
 
     /**
-     * Invokes the given expectation callback
+     * Resolve given response expectation
      *
-     * @param callable $callback
-     * @param RequestInterface $request
-     * @param ResponseInterface $response
-     * @param Status $status
+     * @param  callable|ResponseExpectationInterface  $callback
      *
-     * @throws Throwable
+     * @return ResponseExpectationInterface
      */
-    protected function invokeExpectationCallback(
-        callable $callback,
-        RequestInterface $request,
-        ResponseInterface $response,
-        Status $status
-    ): void {
-        // Invoke the callback, with the status, response and request, in mentioned
-        // order. Hopefully that order is the most convenient way to deal with them.
-        $callback($status, $response, $request);
-    }
-
-    /**
-     * Builds a http status code(s) expectation callback
-     *
-     * @param int|int[] $expectedStatusCodes
-     * @param callable|null $otherwise [optional]
-     *
-     * @return callable
-     */
-    protected function buildStatusCodesExpectation($expectedStatusCodes, ?callable $otherwise = null): callable
+    protected function resolveExpectation($callback): ResponseExpectationInterface
     {
-        return function (
-            Status $status,
-            ResponseInterface $response,
-            RequestInterface $request
-        ) use ($expectedStatusCodes, $otherwise) {
-            (new StatusCodesExpectation($expectedStatusCodes, $otherwise))->expect($status, $response, $request);
-        };
-    }
+        if ($callback instanceof ResponseExpectationInterface) {
+            return $callback;
+        }
 
-    /**
-     * Creates a new Http Response Status instance from given response
-     *
-     * @param ResponseInterface $response
-     * @return Status
-     *
-     * @throws InvalidStatusCodeException
-     */
-    protected function makeResponseStatus(ResponseInterface $response): Status
-    {
-        return ResponseStatus::fromResponse($response);
+        if (is_callable($callback)) {
+            return new ResponseExpectation($callback);
+        }
+
+        throw new InvalidArgumentException('Response Expectation must be a valid callable or instance of "ResponseExpectation"');
     }
 }

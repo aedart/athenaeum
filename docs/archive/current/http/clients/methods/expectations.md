@@ -168,6 +168,49 @@ $response = $client
         ->get('/users');
 ```
 
+### Custom Response Expectation Classes
+
+You may also extract your expectation logic into a separate class, if you wish so.
+Simply extend the `ResponseExpectation` class and implement the `expectation()` method.
+The benefit of doing so, is that you can encapsulate more complex response validation logic.
+For instance, you can use Laravel's [Validator](https://laravel.com/docs/8.x/validation#manually-creating-validators) to perform validation of a response's payload.  
+
+```php
+use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
+use Aedart\Contracts\Http\Clients\Responses\Status;
+use Aedart\Utils\Json;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Teapot\StatusCode;
+use Acme\Exceptions\UserWasNotCreatedException;
+use Illuminate\Support\Facades\Validator;
+
+class UserWasCreated extends ResponseExpectations
+{
+    public function expectation(
+        Status $status,
+        ResponseInterface $response,
+        RequestInterface $request
+    ): void {
+        $payload = Json::decode($response->getBody()->getContents(), true);
+        $validator = Validator::make($payload, [
+            'uuid' => 'required|uuid',
+            'name' => 'required|string'
+        ]);    
+
+        if ($validator->fails()) {
+            throw new UserWasNotCreatedException();
+        }
+    }
+}
+
+// --------------------------------------- /
+// Use expectation when you send your request
+$response = $client
+        ->expect(new UserWasCreated())
+        ->post('/users', [ 'name' => 'John Snow' ]);
+```
+
 ### Response Manipulation
 
 The `expect()` method is not design nor intended to manipulate the received response.
