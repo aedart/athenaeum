@@ -4,6 +4,7 @@ namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidStatusCodeException;
 use Aedart\Contracts\Http\Clients\Responses\Status;
+use Aedart\Http\Clients\Responses\ResponseStatus as ResponseStatusDto;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -24,6 +25,6 @@ trait ResponseStatus
      */
     protected function makeResponseStatus(ResponseInterface $response): Status
     {
-        return \Aedart\Http\Clients\Responses\ResponseStatus::fromResponse($response);
+        return ResponseStatusDto::fromResponse($response);
     }
 }
