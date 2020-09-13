@@ -46,7 +46,7 @@ class I0_ResponseExpectationsTest extends HttpClientsTestCase
             ->withExpectations($expectations);
 
         $this->assertTrue($builder->hasExpectations(), 'No expectations registered');
-        $this->assertSame($expectations, $builder->getExpectations(), 'Incorrect expectations returned');
+        $this->assertCount(count($expectations), $builder->getExpectations(), 'Incorrect amount of expectations');
     }
 
     /**

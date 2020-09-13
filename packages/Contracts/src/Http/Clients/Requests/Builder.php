@@ -10,6 +10,7 @@ use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
+use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Http\Cookies\Cookie;
 use DateTimeInterface;
@@ -887,20 +888,20 @@ interface Builder extends HttpClientAware,
      * Given callback will be invoked after a response has been received,
      * in the {@see request} method.
      *
-     * @param callable $expectation Expectation callback. When invoked, it is given a
+     * @param callable|ResponseExpectation $expectation Expectation callback. When invoked, it is given a
      *                  {@see Status}, {@see ResponseInterface} and {@see RequestInterface} as
      *                  argument, in the stated order.
      *
      * @return self
      */
-    public function withExpectation(callable $expectation): self;
+    public function withExpectation($expectation): self;
 
     /**
      * Add one or more expectations for the next request.
      *
      * MUST add given list of expectations via the {@see withExpectation} method.
      *
-     * @param callable[] $expectations [optional]
+     * @param callable[]|ResponseExpectation[] $expectations [optional]
      *
      * @return self
      */
@@ -922,7 +923,7 @@ interface Builder extends HttpClientAware,
      *
      * @see withExpectation
      *
-     * @return callable[]
+     * @return ResponseExpectation[]
      */
     public function getExpectations(): array;
 

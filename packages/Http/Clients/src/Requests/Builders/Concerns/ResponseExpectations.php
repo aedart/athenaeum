@@ -3,8 +3,11 @@
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation as ResponseExpectationInterface;
 use Aedart\Contracts\Http\Clients\Responses\Status;
+use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
 use Aedart\Http\Clients\Requests\Builders\Expectations\StatusCodesExpectation;
+use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -29,7 +32,7 @@ trait ResponseExpectations
     /**
      * Response Expectations
      *
-     * @var callable[]
+     * @var ResponseExpectationInterface[]
      */
     protected array $expectations = [];
 
@@ -38,7 +41,7 @@ trait ResponseExpectations
      */
     public function expect($status, ?callable $otherwise = null): Builder
     {
-        if (is_callable($status)) {
+        if (is_callable($status) || $status instanceof ResponseExpectationInterface) {
             return $this->withExpectation($status);
         }
 
@@ -50,9 +53,9 @@ trait ResponseExpectations
     /**
      * @inheritdoc
      */
-    public function withExpectation(callable $expectation): Builder
+    public function withExpectation($expectation): Builder
     {
-        $this->expectations[] = $expectation;
+        $this->expectations[] = $this->resolveExpectation($expectation);
 
         return $this;
     }
@@ -92,8 +95,8 @@ trait ResponseExpectations
     /**
      * Apply the registered response expectations
      *
-     * @param RequestInterface $request
-     * @param ResponseInterface $response
+     * @param  RequestInterface  $request
+     * @param  ResponseInterface  $response
      * @return Builder
      *
      * @throws Throwable
@@ -105,41 +108,18 @@ trait ResponseExpectations
         }
 
         $expectations = $this->getExpectations();
-        $status = $this->makeResponseStatus($response);
-
         foreach ($expectations as $expectation) {
-            $this->invokeExpectationCallback($expectation, $request, $response, $status);
+            $expectation->apply($request, $response);
         }
 
         return $this;
     }
 
     /**
-     * Invokes the given expectation callback
-     *
-     * @param callable $callback
-     * @param RequestInterface $request
-     * @param ResponseInterface $response
-     * @param Status $status
-     *
-     * @throws Throwable
-     */
-    protected function invokeExpectationCallback(
-        callable $callback,
-        RequestInterface $request,
-        ResponseInterface $response,
-        Status $status
-    ): void {
-        // Invoke the callback, with the status, response and request, in mentioned
-        // order. Hopefully that order is the most convenient way to deal with them.
-        $callback($status, $response, $request);
-    }
-
-    /**
      * Builds a http status code(s) expectation callback
      *
-     * @param int|int[] $expectedStatusCodes
-     * @param callable|null $otherwise [optional]
+     * @param  int|int[]  $expectedStatusCodes
+     * @param  callable|null  $otherwise  [optional]
      *
      * @return callable
      */
@@ -152,5 +132,25 @@ trait ResponseExpectations
         ) use ($expectedStatusCodes, $otherwise) {
             (new StatusCodesExpectation($expectedStatusCodes, $otherwise))->expect($status, $response, $request);
         };
+    }
+
+    /**
+     * Resolve given response expectation
+     *
+     * @param  callable|ResponseExpectationInterface  $callback
+     *
+     * @return ResponseExpectationInterface
+     */
+    protected function resolveExpectation($callback): ResponseExpectationInterface
+    {
+        if ($callback instanceof ResponseExpectationInterface) {
+            return $callback;
+        }
+
+        if (is_callable($callback)) {
+            return new ResponseExpectation($callback);
+        }
+
+        throw new InvalidArgumentException('Response Expectation must be a valid callable or instance of "ResponseExpectation"');
     }
 }
