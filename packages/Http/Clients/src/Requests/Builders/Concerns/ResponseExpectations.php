@@ -4,7 +4,6 @@ namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation as ResponseExpectationInterface;
-use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
 use Aedart\Http\Clients\Requests\Builders\Expectations\StatusCodesExpectation;
 use InvalidArgumentException;
@@ -46,7 +45,7 @@ trait ResponseExpectations
         }
 
         return $this->withExpectation(
-            $this->buildStatusCodesExpectation($status, $otherwise)
+            new StatusCodesExpectation($status, $otherwise)
         );
     }
 
@@ -113,25 +112,6 @@ trait ResponseExpectations
         }
 
         return $this;
-    }
-
-    /**
-     * Builds a http status code(s) expectation callback
-     *
-     * @param  int|int[]  $expectedStatusCodes
-     * @param  callable|null  $otherwise  [optional]
-     *
-     * @return callable
-     */
-    protected function buildStatusCodesExpectation($expectedStatusCodes, ?callable $otherwise = null): callable
-    {
-        return function (
-            Status $status,
-            ResponseInterface $response,
-            RequestInterface $request
-        ) use ($expectedStatusCodes, $otherwise) {
-            (new StatusCodesExpectation($expectedStatusCodes, $otherwise))->expect($status, $response, $request);
-        };
     }
 
     /**
