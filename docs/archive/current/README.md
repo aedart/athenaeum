@@ -6,6 +6,35 @@ description: Athenaeum Release Notes
 
 ## `v5.x` Highlights
 
+### Extract Response Expectations
+
+A `ResponseExpectations` class has been added, which you can use as a base class to extract complex expectations into separate classes.
+See [documentation](./http/clients/methods/expectations.md) for additional information.
+
+```php
+use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
+use Aedart\Contracts\Http\Clients\Responses\Status;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+
+class UserWasCreated extends ResponseExpectations
+{
+    public function expectation(
+        Status $status,
+        ResponseInterface $response,
+        RequestInterface $request
+    ): void {
+        // ...validation not shown here...
+    }
+}
+
+// --------------------------------------- /
+// Use expectation when you send your request
+$response = $client
+        ->expect(new UserWasCreated())
+        ->post('/users', [ 'name' => 'John Snow' ]);
+```
+
 ### Default otherwise callback
 
 The [Circuit Breaker](./circuits) now supports setting a default "otherwise" callback, via the `otherwise()` method.
