@@ -5,6 +5,7 @@
 #### Added
 
 * Added `otherwise()` and `getOtherwise()` methods to Circuit Breaker.
+* Added `ResponseExpectation` component.
 * Support for loading [TOML](https://en.wikipedia.org/wiki/TOML) configuration files.
 * PHP Compatibility check in Travis.
 
@@ -14,6 +15,8 @@
 
 * Upgraded Laravel dependencies to `v8.x`.
 * Added `bootstrap()` method in `\Aedart\Core\Console\Kernel`, due to Laravel's Console `Kernal` interface change. `runCore()` method will now invoke new bootstrap method.
+* Changed `StatusCodesExpectation`, now inherits from `ResponseExpectation`. Some internal methods have been redesigned. This change should not affect your code, unless you have custom Http Request `Builder` implementation.
+* Changed `withExpectation()`, in Request `Builder`. Now accepts both a `callable` and a `ResponseExpectation` instance. This change should not affect your code, unless you have custom Http Request `Builder` implementation.
 * Removed `Aedart\Dto` (_was deprecated in `v4.x`_).
 * Removed `Aedart\ArrayDto` (_was deprecated in `v4.x`_).
 * Removed `Aedart\Console\CreateAwareOfCommand` (_was deprecated in `v4.x`_).
