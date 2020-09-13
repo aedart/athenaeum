@@ -75,7 +75,7 @@ class ResponseExpectation implements ResponseExpectationInterface
     {
         // Resolve status and expectation callback.
         $status = $this->makeResponseStatus($response);
-        $callback = $this->expectationCallback ?? fn() => true;
+        $callback = $this->getExpectation();
 
         // Invoke the callback, with the status, response and request, in mentioned
         // order. Hopefully that order is the most convenient way to deal with them.
