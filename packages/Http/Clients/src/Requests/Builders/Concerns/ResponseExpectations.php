@@ -2,11 +2,9 @@
 
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
-use Aedart\Contracts\Http\Clients\Exceptions\InvalidStatusCodeException;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Http\Clients\Requests\Builders\Expectations\StatusCodesExpectation;
-use Aedart\Http\Clients\Responses\ResponseStatus;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -26,6 +24,8 @@ use Throwable;
  */
 trait ResponseExpectations
 {
+    use ResponseStatus;
+
     /**
      * Response Expectations
      *
@@ -152,18 +152,5 @@ trait ResponseExpectations
         ) use ($expectedStatusCodes, $otherwise) {
             (new StatusCodesExpectation($expectedStatusCodes, $otherwise))->expect($status, $response, $request);
         };
-    }
-
-    /**
-     * Creates a new Http Response Status instance from given response
-     *
-     * @param ResponseInterface $response
-     * @return Status
-     *
-     * @throws InvalidStatusCodeException
-     */
-    protected function makeResponseStatus(ResponseInterface $response): Status
-    {
-        return ResponseStatus::fromResponse($response);
     }
 }
