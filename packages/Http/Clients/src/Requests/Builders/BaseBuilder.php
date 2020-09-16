@@ -3,6 +3,7 @@
 namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
+use Aedart\Contracts\Http\Clients\Middleware;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
@@ -40,6 +41,7 @@ abstract class BaseBuilder implements
     use Concerns\RequestCriteria;
     use Concerns\HttpUri;
     use Concerns\ResponseExpectations;
+    use Concerns\Middleware;
     use ForwardsCalls;
 
     /**
@@ -53,6 +55,9 @@ abstract class BaseBuilder implements
         $this
             ->setHttpClient($client)
             ->setContainer($client->getContainer());
+
+        // Create new middleware collection
+        $this->middleware = $this->makeMiddlewareCollation();
 
         // Prepare this builder, using the following options
         $this->options = $this->prepareBuilderFromOptions($options);

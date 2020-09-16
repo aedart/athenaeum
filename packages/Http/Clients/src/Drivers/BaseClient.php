@@ -98,6 +98,7 @@ abstract class BaseClient implements Client
      */
     protected function makeMiddlewareHandler(Handler $fallbackHandler): Handler
     {
-        return new QueueHandler($fallbackHandler);
+        return (new QueueHandler($fallbackHandler))
+            ->addMultiple($this->getMiddleware());
     }
 }

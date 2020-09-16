@@ -9,6 +9,7 @@ use Aedart\Contracts\Http\Clients\Exceptions\InvalidCookieFormatException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
+use Aedart\Contracts\Http\Clients\Middleware;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation;
 use Aedart\Contracts\Http\Clients\Responses\Status;
@@ -926,6 +927,59 @@ interface Builder extends HttpClientAware,
      * @return ResponseExpectation[]
      */
     public function getExpectations(): array;
+
+    /**
+     * Add middleware to process next outgoing request and it's
+     * incoming response
+     *
+     * @param string|Middleware|string[]|Middleware[] $middleware Class path, Middleware instance or list hereof
+     *
+     * @return self
+     */
+    public function withMiddleware($middleware): self;
+
+    /**
+     * Add middleware at the beginning of the middleware list
+     *
+     * @param string|Middleware $middleware Class path or Middleware instance
+     *
+     * @return self
+     */
+    public function prependMiddleware($middleware): self;
+
+    /**
+     * Append middleware to the end of the middleware list
+     *
+     * @param string|Middleware $middleware Class path or Middleware instance
+     *
+     * @return self
+     */
+    public function pushMiddleware($middleware): self;
+
+    /**
+     * Determine whether or not middleware has been assign
+     * for the next request
+     *
+     * @see withMiddleware
+     *
+     * @return bool
+     */
+    public function hasMiddleware(): bool;
+
+    /**
+     * Returns list of middleware that must process next outgoing
+     * request and it's incoming response
+     *
+     * @return Middleware[]
+     */
+    public function getMiddleware(): array;
+
+    /**
+     * Removes assigned middleware for the next request
+     *
+     * @return self
+     */
+    public function withoutMiddleware(): self;
 
     /**
      * Set a specific option for the next request
