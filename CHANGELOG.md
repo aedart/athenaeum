@@ -6,6 +6,7 @@
 
 * Added `otherwise()` and `getOtherwise()` methods to Circuit Breaker.
 * Added `ResponseExpectation` component.
+* Added `QueueHandler`, a middleware processing component for Http Client Requests.
 * Support for loading [TOML](https://en.wikipedia.org/wiki/TOML) configuration files.
 * PHP Compatibility check in Travis.
 
