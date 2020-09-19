@@ -112,7 +112,7 @@ class ListResolverTest extends IntegrationTestCase
         $list = $this->makeList();
 
         $resolved = $this->makeResolver()
-            ->with(function($instance) {
+            ->with(function ($instance) {
                 $instance->callbackApplied = true;
 
                 return $instance;

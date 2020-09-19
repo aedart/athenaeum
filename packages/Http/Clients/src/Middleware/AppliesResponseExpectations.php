@@ -21,7 +21,8 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Middleware
  */
-class AppliesResponseExpectations implements Middleware,
+class AppliesResponseExpectations implements
+    Middleware,
     HttpClientAware
 {
     use HttpClientTrait;

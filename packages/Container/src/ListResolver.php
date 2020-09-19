@@ -16,8 +16,9 @@ use Illuminate\Contracts\Container\Container;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Container
  */
-class ListResolver implements Resolver,
-                              ContainerAware
+class ListResolver implements
+    Resolver,
+    ContainerAware
 {
     use ContainerTrait;
 

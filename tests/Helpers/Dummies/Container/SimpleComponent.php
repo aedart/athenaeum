@@ -13,5 +13,4 @@ namespace Aedart\Tests\Helpers\Dummies\Container;
  */
 class SimpleComponent extends BaseComponent
 {
-
 }
