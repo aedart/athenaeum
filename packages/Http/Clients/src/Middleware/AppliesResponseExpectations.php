@@ -27,16 +27,6 @@ class AppliesResponseExpectations implements Middleware,
     use HttpClientTrait;
 
     /**
-     * ResponseExpectations constructor.
-     *
-     * @param  Client|null  $client  [optional]
-     */
-    public function __construct(?Client $client = null)
-    {
-        $this->setHttpClient($client);
-    }
-
-    /**
      * {@inheritDoc}
      *
      * @throws Throwable If response did not meet an expectation
