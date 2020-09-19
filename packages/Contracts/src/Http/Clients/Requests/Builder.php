@@ -861,7 +861,7 @@ interface Builder extends HttpClientAware,
      *
      * Method MUST build and add expectation via the {@see withExpectation} method.
      *
-     * @param int|int[]|callback|ResponseExpectation $status Expected http status code(s). If a callback is provided,
+     * @param int|int[]|callable|ResponseExpectation $status Expected http status code(s). If a callback is provided,
      *                                  then it MUST be added as an expectation via {@see withExpectation}.
      *                                  Second argument is ignored, if callback is given.
      * @param callable|null $otherwise [optional] Callback to be invoked if received http status code
