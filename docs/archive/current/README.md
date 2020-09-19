@@ -6,6 +6,8 @@ description: Athenaeum Release Notes
 
 ## `v5.x` Highlights
 
+These are the new features and additions of Athenaeum `v5.x`.
+
 ### Extract Response Expectations
 
 A `ResponseExpectations` class has been added, which you can use as a base class to extract complex expectations into separate classes.
@@ -55,6 +57,27 @@ $result = $circuitBreaker
 ### Support for TOML configuration files
 
 Added configuration file parser for [TOML](https://en.wikipedia.org/wiki/TOML) format, for the [configuration loader](./config).
+
+### Resolve list of dependencies
+
+Using the new `ListResolver`, you can resolve a list of dependencies, including custom arguments.
+(_Component is available in the [Service Container package](./container/list-resolver.md)_).
+
+```php
+use Aedart\Container\ListResolver;
+
+$list = [
+    \Acme\Filters\SanitizeInput::class,
+    \Acme\Filters\ConvertEmptyToNull::class,
+    \Acme\Filters\ApplySorting::class => [
+        'sortBy' => 'age',
+        'direction' => 'desc'
+    ]
+];
+
+// Resolve list of dependencies
+$filters = (new ListResolver())->make($list);
+```
 
 ### Upgraded Dependencies
 
