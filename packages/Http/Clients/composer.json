@@ -29,6 +29,7 @@
         "psr/http-factory": "^1.0",
         "illuminate/pipeline": "^8.5",
         "shrikeh/teapot": "^2.3",
+        "aedart/athenaeum-container": "^4.3",
         "aedart/athenaeum-contracts": "^4.3",
         "aedart/athenaeum-http-cookies": "^4.3",
         "aedart/athenaeum-support": "^4.3"
