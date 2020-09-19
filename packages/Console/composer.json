@@ -22,8 +22,8 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "illuminate/cache": "^8.0",
-        "illuminate/console": "^8.0",
+        "illuminate/cache": "^8.5",
+        "illuminate/console": "^8.5",
         "dragonmantank/cron-expression": "^3.0",
         "aedart/athenaeum-contracts": "^4.3",
         "aedart/athenaeum-support": "^4.3"

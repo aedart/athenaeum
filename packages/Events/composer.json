@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "illuminate/events": "^8.0",
+        "illuminate/events": "^8.5",
         "aedart/athenaeum-support": "^4.3"
     },
     "autoload": {

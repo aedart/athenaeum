@@ -26,15 +26,15 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "illuminate/config": "^8.0",
-        "illuminate/filesystem": "^8.0",
+        "illuminate/config": "^8.5",
+        "illuminate/filesystem": "^8.5",
         "aedart/athenaeum-contracts": "^4.3",
         "aedart/athenaeum-support": "^4.3",
         "aedart/athenaeum-utils": "^4.3"
     },
     "require-dev": {
         "symfony/yaml": "^5.1",
-        "yosymfony/toml":  "^1.0.4"
+        "yosymfony/toml": "^1.0.4"
     },
     "autoload": {
         "psr-4": {
