@@ -49,8 +49,10 @@ module.exports.sidebar = function(){
             children: [
                 'container/',
                 'container/install',
-                'container/reg-as-app',
-                'container/destroy',
+                //'container/reg-as-app',
+                //'container/destroy',
+                'container/service-container',
+                'container/list-resolver',
             ]
         },
         {
