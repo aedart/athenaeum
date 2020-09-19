@@ -2,10 +2,11 @@
 
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
+use Aedart\Container\ListResolver;
+use Aedart\Contracts\Http\Clients\HttpClientAware;
 use Aedart\Contracts\Http\Clients\Middleware as MiddlewareInterface;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Illuminate\Support\Collection;
-use InvalidArgumentException;
 
 /**
  * Concerns Middleware
@@ -28,12 +29,15 @@ trait Middleware
     public function withMiddleware($middleware): Builder
     {
         if (!is_array($middleware)) {
-            $middleware = [$middleware];
+            return $this->pushMiddleware($middleware);
         }
 
-        foreach ($middleware as $item) {
-            $this->pushMiddleware($item);
-        }
+        // Resolve list of middleware
+        $resolved = (new ListResolver())
+            ->with([$this, 'setupMiddleware'])
+            ->make($middleware);
+
+        $this->middleware->push($resolved);
 
         return $this;
     }
@@ -43,9 +47,9 @@ trait Middleware
      */
     public function prependMiddleware($middleware): Builder
     {
-        $middleware = $this->resolveMiddleware($middleware);
-
-        $this->middleware->prepend($middleware);
+        $this->middleware->prepend(
+            $this->resolveMiddleware($middleware)
+        );
 
         return $this;
     }
@@ -55,9 +59,9 @@ trait Middleware
      */
     public function pushMiddleware($middleware): Builder
     {
-        $middleware = $this->resolveMiddleware($middleware);
-
-        $this->middleware->push($middleware);
+        $this->middleware->push(
+            $this->resolveMiddleware($middleware)
+        );
 
         return $this;
     }
@@ -101,14 +105,24 @@ trait Middleware
      */
     protected function resolveMiddleware($middleware): MiddlewareInterface
     {
-        // Resolve via Service Container
         if (is_string($middleware)) {
             $middleware = $this->getContainer()->make($middleware);
         }
 
-        // Fail if not a valid type
-        if (!($middleware instanceof MiddlewareInterface)) {
-            throw new InvalidArgumentException('Unable to resolve middleware. Please provide valid class path or instance.');
+        return $this->setupMiddleware($middleware);
+    }
+
+    /**
+     * Setup the provided middleware instance
+     *
+     * @param  MiddlewareInterface  $middleware
+     *
+     * @return MiddlewareInterface
+     */
+    protected function setupMiddleware(MiddlewareInterface $middleware): MiddlewareInterface
+    {
+        if ($middleware instanceof HttpClientAware) {
+            $middleware->setHttpClient($this);
         }
 
         return $middleware;
