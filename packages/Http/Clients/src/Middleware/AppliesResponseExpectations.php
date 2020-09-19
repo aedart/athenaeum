@@ -1,0 +1,56 @@
+<?php
+
+namespace Aedart\Http\Clients\Middleware;
+
+use Aedart\Contracts\Http\Clients\Client;
+use Aedart\Contracts\Http\Clients\HttpClientAware;
+use Aedart\Contracts\Http\Clients\Middleware;
+use Aedart\Contracts\Http\Clients\Requests\Handler;
+use Aedart\Http\Clients\Traits\HttpClientTrait;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Throwable;
+
+/**
+ * Applies Response Expectations Middleware
+ *
+ * Applies assigned response expectations to the incoming response.
+ *
+ * @see \Aedart\Contracts\Http\Clients\Client::getExpectations
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Http\Clients\Middleware
+ */
+class AppliesResponseExpectations implements Middleware,
+    HttpClientAware
+{
+    use HttpClientTrait;
+
+    /**
+     * ResponseExpectations constructor.
+     *
+     * @param  Client|null  $client  [optional]
+     */
+    public function __construct(?Client $client = null)
+    {
+        $this->setHttpClient($client);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @throws Throwable If response did not meet an expectation
+     */
+    public function process(RequestInterface $request, Handler $handler): ResponseInterface
+    {
+        $response = $handler->handle($request);
+
+        // Obtain assigned response expectations from client
+        $expectations = $this->getHttpClient()->getExpectations();
+        foreach ($expectations as $expectation) {
+            $expectation->apply($request, $response);
+        }
+
+        return $response;
+    }
+}
