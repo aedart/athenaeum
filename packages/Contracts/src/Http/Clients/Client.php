@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Clients\Requests\Attachment;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Criteria;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
+use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation;
 use Aedart\Contracts\Http\Cookies\Cookie;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use DateTimeInterface;
@@ -83,11 +84,11 @@ use Psr\Http\Message\UriInterface;
  * @method Cookie[] getCookies() Get the cookies for the next request.
  * @method Builder addCookie(string $name, string|null $value = null) Add a cookie for the next request.
  * @method Cookie makeCookie(array $data = []) Creates a new cookie instance.
- * @method Builder expect(int|int[] $status, callable|null $otherwise = null) Expect response's http status code to match given code or be amongst a list of valid codes.
- * @method Builder withExpectation(callable $expectation) Add an expectation for the next response.
- * @method Builder withExpectations(callable[] $expectations = []) Add one or more expectations for the next request.
+ * @method Builder expect(int|int[] $status, callable|ResponseExpectation|null $otherwise = null) Expect response's http status code to match given code or be amongst a list of valid codes.
+ * @method Builder withExpectation(callable|ResponseExpectation $expectation) Add an expectation for the next response.
+ * @method Builder withExpectations(callable[]|ResponseExpectation[] $expectations = []) Add one or more expectations for the next request.
  * @method bool hasExpectations() Determine if any expectations have been added for the next request.
- * @method callable[] getExpectations() Returns list of expectations for the next request.
+ * @method ResponseExpectation[] getExpectations() Returns list of expectations for the next request.
  * @method Builder withMiddleware(string|Middleware|string[]|Middleware[] $middleware) Add middleware to process next outgoing request and it's incoming response.
  * @method Builder prependMiddleware(string|Middleware $middleware) Add middleware at the beginning of the middleware list
  * @method Builder pushMiddleware(string|Middleware $middleware) Append middleware to the end of the middleware list
