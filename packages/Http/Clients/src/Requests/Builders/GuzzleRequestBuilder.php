@@ -19,6 +19,7 @@ use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsBaseUrl;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsCookies;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHttpProtocolVersion;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsMiddleware;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsPayload;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsQuery;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Traits\CookieJarTrait;
@@ -61,7 +62,8 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         ExtractsHttpProtocolVersion::class,
         ExtractsQuery::class,
         ExtractsCookies::class,
-        ExtractsPayload::class
+        ExtractsPayload::class,
+        ExtractsMiddleware::class
     ];
 
     /**
