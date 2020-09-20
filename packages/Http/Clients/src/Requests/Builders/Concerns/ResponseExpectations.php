@@ -92,29 +92,6 @@ trait ResponseExpectations
      ****************************************************************/
 
     /**
-     * Apply the registered response expectations
-     *
-     * @param  RequestInterface  $request
-     * @param  ResponseInterface  $response
-     * @return Builder
-     *
-     * @throws Throwable
-     */
-    protected function applyExpectations(RequestInterface $request, ResponseInterface $response): Builder
-    {
-        if (!$this->hasExpectations()) {
-            return $this;
-        }
-
-        $expectations = $this->getExpectations();
-        foreach ($expectations as $expectation) {
-            $expectation->apply($request, $response);
-        }
-
-        return $this;
-    }
-
-    /**
      * Resolve given response expectation
      *
      * @param  callable|ResponseExpectationInterface  $callback
