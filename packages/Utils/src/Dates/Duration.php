@@ -25,6 +25,11 @@ class Duration
         return new static($seconds);
     }
 
+    static public function fromDifference(\DateTime $start, \DateTime $stop) : self
+    {
+        return new static($start->diff($stop));
+    }
+
     public function __construct($time)
     {
 

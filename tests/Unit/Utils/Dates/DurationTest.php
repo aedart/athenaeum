@@ -17,5 +17,14 @@ use Aedart\Utils\Dates\Duration;
  */
 class DurationTest extends UnitTestCase
 {
-    // TODO
+    /**
+     * @test
+     */
+    public function canInstatiate()
+    {
+        $duration = new Duration(42);
+
+        $this->assertEqual($duration->format("S"), "42");
+    }
+
 }
