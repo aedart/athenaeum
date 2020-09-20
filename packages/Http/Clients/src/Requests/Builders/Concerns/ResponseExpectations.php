@@ -7,9 +7,6 @@ use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation as ResponseExpec
 use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
 use Aedart\Http\Clients\Requests\Builders\Expectations\StatusCodesExpectation;
 use InvalidArgumentException;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Throwable;
 
 /**
  * Concerns Response Expectations
