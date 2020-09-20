@@ -122,7 +122,7 @@ trait Middleware
     protected function setupMiddleware(MiddlewareInterface $middleware): MiddlewareInterface
     {
         if ($middleware instanceof HttpClientAware) {
-            $middleware->setHttpClient($this);
+            $middleware->setHttpClient($this->client());
         }
 
         return $middleware;
