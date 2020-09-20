@@ -8,10 +8,23 @@ description: Athenaeum Release Notes
 
 These are the new features and additions of Athenaeum `v5.x`.
 
+### Http Client Middleware
+
+You can now assign middleware to process your outgoing requests and incoming responses. 
+See [Http Client Middleware](./http/clients/methods/middleware) for more examples.
+
+```php
+use Acme\Middleware\MeasuresResponseTime;
+
+$response = $client
+        ->withMiddleware(new MeasuresResponseTime())
+        ->get('/weather');
+```
+
 ### Extract Response Expectations
 
 A `ResponseExpectations` class has been added, which you can use as a base class to extract complex expectations into separate classes.
-See [documentation](./http/clients/methods/expectations.md) for additional information.
+See [documentation](./http/clients/methods/expectations) for additional information.
 
 ```php
 use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
