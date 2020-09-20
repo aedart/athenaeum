@@ -2,7 +2,6 @@
 
 namespace Aedart\Http\Clients\Middleware;
 
-use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
 use Aedart\Contracts\Http\Clients\Middleware;
 use Aedart\Contracts\Http\Clients\Requests\Handler;
