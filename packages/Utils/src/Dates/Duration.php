@@ -10,12 +10,24 @@ class Duration
      */
     protected $duration;
 
-    static public function from($time) : self {
+    static public function from($time) : self
+    {
         return new static($time);
     }
 
-    public function __construct($time) {
-        
+    static public function fromString(string $timeStr) : self
+    {
+        return new static(strtotime($timeStr));
+    }
+
+    static public function fromSeconds(int $seconds) : self
+    {
+        return new static($seconds);
+    }
+
+    public function __construct($time)
+    {
+
         if ($time instanceof \DateTime) {
             $dt = new \DateTime("@0");
             $this->duration = $dt->diff($time);
@@ -24,7 +36,18 @@ class Duration
             $this->duration = $time;
         }
         elseif (is_integer($time)) {
-            $this->duration = new \DateInterval("PT$timeS");
+            $this->duration = new \DateInterval("PT{$time}S");
         }
+    }
+
+    /**
+     * @see \DateInterval::format()
+     *
+     * @param string $format
+     * @return string
+     */
+    public function format(string $format) : string
+    {
+        return $this->duration->format($format);
     }
 }
