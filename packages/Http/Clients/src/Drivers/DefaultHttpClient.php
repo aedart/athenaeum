@@ -2,6 +2,7 @@
 
 namespace Aedart\Http\Clients\Drivers;
 
+use Aedart\Contracts\Http\Clients\Middleware;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Handler;
 use Aedart\Contracts\Http\Clients\Requests\HasDriverOptions;
@@ -80,13 +81,11 @@ class DefaultHttpClient extends BaseClient
             $options = $request->getDriverOptions();
         }
 
-        // Prepare middleware
-        $middlewareHandler = $this->makeMiddlewareHandler(
-            $this->makeFallbackHandler($options)
-        );
-
-        // Finally, handle outgoing request and incoming response
-        return $middlewareHandler->handle($request);
+        // Prepare middleware handling and handle outgoing
+        // request and incoming response
+        return $this
+            ->prepareMiddlewareHandler($options)
+            ->handle($request);
     }
 
     /**
@@ -110,6 +109,21 @@ class DefaultHttpClient extends BaseClient
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * Prepares the middleware handler
+     *
+     * @param  array  $options Driver options
+     *
+     * @return Handler
+     */
+    protected function prepareMiddlewareHandler(array $options): Handler
+    {
+        return $this->makeMiddlewareHandler(
+            $this->makeFallbackHandler($options),
+            $this->middlewareFromOptions($options)
+        );
+    }
 
     /**
      * Make the fallback handler for when processing middleware.

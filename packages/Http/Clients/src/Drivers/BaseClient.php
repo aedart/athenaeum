@@ -93,12 +93,25 @@ abstract class BaseClient implements Client
      * @see Middleware
      *
      * @param  Handler  $fallbackHandler The fallback handler
+     * @param  Middleware[] $middleware [optional] Middleware to be executed
      *
      * @return Handler
      */
-    protected function makeMiddlewareHandler(Handler $fallbackHandler): Handler
+    protected function makeMiddlewareHandler(Handler $fallbackHandler, array $middleware = []): Handler
     {
         return (new QueueHandler($fallbackHandler))
-            ->addMultiple($this->getMiddleware());
+            ->addMultiple($middleware);
+    }
+
+    /**
+     * Extracts middleware from driver options
+     *
+     * @param  array  $options Driver options
+     *
+     * @return Middleware[] Empty if none available in options
+     */
+    protected function middlewareFromOptions(array $options): array
+    {
+        return $options['middleware'] ?? [];
     }
 }

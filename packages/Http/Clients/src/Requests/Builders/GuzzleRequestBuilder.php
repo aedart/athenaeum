@@ -9,8 +9,10 @@ use Aedart\Http\Clients\Requests\AdaptedRequest;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers\CaptureHandler;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesBaseUrl;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesCookies;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesExpectations;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHttpProtocolVersion;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesMiddleware;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesPayload;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesQuery;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsBaseUrl;
@@ -76,6 +78,8 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         AppliesQuery::class,
         AppliesCookies::class,
         AppliesPayload::class,
+        AppliesExpectations::class,
+        AppliesMiddleware::class
     ];
 
     /**
@@ -108,16 +112,10 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         // NOTE: This is automatically reset via "createRequest".
         $this->nextRequestOptions = $options;
 
-        // Create the request and send it
-        $request = $this->createRequest($method, $uri);
-        $response = $this->client()->sendRequest($request);
-
-        // Apply request expectations, if any added. If any of the expectation
-        // fail, the then that exception is allowed to bubble upwards.
-        $this->applyExpectations($request, $response);
-
-        // Finally, return the response
-        return $response;
+        // Finally, send the request and return incoming response
+        return $this->client()->sendRequest(
+            $this->createRequest($method, $uri)
+        );
     }
 
     /**
