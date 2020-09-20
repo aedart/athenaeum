@@ -35,6 +35,7 @@
 **Non-breaking Changes**
 
 * Added shortcut methods (_`getClient()` and `client()`_) for obtaining Http Client instance in `ProcessOptions`. 
+* Removed internal `applyExpectations()` method from `Expectations` concern, in Http Client `Builder`. Has been replaced by `AppliesResponseExpectations` middleware.
 
 #### Fixed
 
