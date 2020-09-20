@@ -3,9 +3,9 @@
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
 use Aedart\Container\ListResolver;
-use Aedart\Contracts\Http\Clients\HttpClientAware;
 use Aedart\Contracts\Http\Clients\Middleware as MiddlewareInterface;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Http\Clients\Requests\Builders\HttpRequestBuilderAware;
 use Illuminate\Support\Collection;
 
 /**
@@ -121,8 +121,8 @@ trait Middleware
      */
     protected function setupMiddleware(MiddlewareInterface $middleware): MiddlewareInterface
     {
-        if ($middleware instanceof HttpClientAware) {
-            $middleware->setHttpClient($this->client());
+        if ($middleware instanceof HttpRequestBuilderAware) {
+            $middleware->setHttpRequestBuilder($this);
         }
 
         return $middleware;

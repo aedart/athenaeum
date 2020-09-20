@@ -4,8 +4,10 @@ namespace Aedart\Http\Clients\Middleware;
 
 use Aedart\Contracts\Http\Clients\HttpClientAware;
 use Aedart\Contracts\Http\Clients\Middleware;
+use Aedart\Contracts\Http\Clients\Requests\Builders\HttpRequestBuilderAware;
 use Aedart\Contracts\Http\Clients\Requests\Handler;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
+use Aedart\Http\Clients\Traits\HttpRequestBuilderTrait;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -22,9 +24,9 @@ use Throwable;
  */
 class AppliesResponseExpectations implements
     Middleware,
-    HttpClientAware
+    HttpRequestBuilderAware
 {
-    use HttpClientTrait;
+    use HttpRequestBuilderTrait;
 
     /**
      * {@inheritDoc}
@@ -36,7 +38,7 @@ class AppliesResponseExpectations implements
         $response = $handler->handle($request);
 
         // Obtain assigned response expectations from client
-        $expectations = $this->getHttpClient()->getExpectations();
+        $expectations = $this->getHttpRequestBuilder()->getExpectations();
         foreach ($expectations as $expectation) {
             $expectation->apply($request, $response);
         }
