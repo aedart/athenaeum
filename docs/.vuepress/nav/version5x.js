@@ -137,6 +137,7 @@ module.exports.sidebar = function(){
                                 'http/clients/methods/attachments',
                                 'http/clients/methods/cookies',
                                 'http/clients/methods/expectations',
+                                'http/clients/methods/middleware',
                                 'http/clients/methods/conditions',
                                 'http/clients/methods/criteria',
                                 'http/clients/methods/redirects',
