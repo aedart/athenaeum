@@ -33,6 +33,8 @@
 
 **Non-breaking Changes**
 
+* Added shortcut methods (_`getClient()` and `client()`_) for obtaining Http Client instance in `ProcessOptions`. 
+
 #### Fixed
 
 * Fixed incorrect type declarations in PHPDoc (_throughout various components_). 
