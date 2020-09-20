@@ -11,6 +11,7 @@
 * Added `QueueHandler`, a middleware processing component for Http Client Requests.
 * Added `AppliesResponseExpectations` middleware. Replacement for internal response expectations handling in Http `Client`.
 * Support for loading [TOML](https://en.wikipedia.org/wiki/TOML) configuration files.
+* Added Http Request `Builder` aware of component.
 * PHP Compatibility check in Travis.
 
 #### Changed
