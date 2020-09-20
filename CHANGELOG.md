@@ -6,10 +6,11 @@
 
 * Added `ListResolver` component.
 * Added `otherwise()` and `getOtherwise()` methods to Circuit Breaker.
-* Added `ResponseExpectation` component.
+* Http `Client` (_via Request `Builder`_) is now able to process `Middleware`.
 * Added `Middleware` and `Handler` components for Http Client. Inspired by [PSR-15](https://www.php-fig.org/psr/psr-15/).
 * Added `QueueHandler`, a middleware processing component for Http Client Requests.
 * Added `AppliesResponseExpectations` middleware. Replacement for internal response expectations handling in Http `Client`.
+* Added `ResponseExpectation` component.
 * Support for loading [TOML](https://en.wikipedia.org/wiki/TOML) configuration files.
 * Added Http Request `Builder` aware of component.
 * PHP Compatibility check in Travis.
