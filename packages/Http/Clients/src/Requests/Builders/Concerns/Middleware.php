@@ -37,7 +37,7 @@ trait Middleware
             ->with([$this, 'setupMiddleware'])
             ->make($middleware);
 
-        $this->middleware->push($resolved);
+        $this->middleware = $this->middleware->union($resolved);
 
         return $this;
     }
@@ -92,6 +92,22 @@ trait Middleware
         return $this;
     }
 
+    /**
+     * Setup the provided middleware instance
+     *
+     * @param  MiddlewareInterface  $middleware
+     *
+     * @return MiddlewareInterface
+     */
+    public function setupMiddleware(MiddlewareInterface $middleware): MiddlewareInterface
+    {
+        if ($middleware instanceof HttpRequestBuilderAware) {
+            $middleware->setHttpRequestBuilder($this);
+        }
+
+        return $middleware;
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -110,22 +126,6 @@ trait Middleware
         }
 
         return $this->setupMiddleware($middleware);
-    }
-
-    /**
-     * Setup the provided middleware instance
-     *
-     * @param  MiddlewareInterface  $middleware
-     *
-     * @return MiddlewareInterface
-     */
-    protected function setupMiddleware(MiddlewareInterface $middleware): MiddlewareInterface
-    {
-        if ($middleware instanceof HttpRequestBuilderAware) {
-            $middleware->setHttpRequestBuilder($this);
-        }
-
-        return $middleware;
     }
 
     /**
