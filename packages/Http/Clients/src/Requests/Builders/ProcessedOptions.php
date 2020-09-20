@@ -2,6 +2,7 @@
 
 namespace Aedart\Http\Clients\Requests\Builders;
 
+use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 
 /**
@@ -100,14 +101,32 @@ class ProcessedOptions
     }
 
     /**
-     * Alias for getBuilder
+     * Returns the Http Client used by the {@see Builder}
      *
-     * @see getBuilder
+     * @return Client
+     */
+    public function getClient(): Client
+    {
+        return $this->getBuilder()->client();
+    }
+
+    /**
+     * Alias for {@see getBuilder}
      *
      * @return Builder
      */
     public function builder(): Builder
     {
         return $this->getBuilder();
+    }
+
+    /**
+     * Alias for {@see getClient}
+     *
+     * @return Client
+     */
+    public function client(): Client
+    {
+        return $this->getClient();
     }
 }
