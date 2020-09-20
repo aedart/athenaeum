@@ -91,6 +91,12 @@ class ListResolver implements
             $arguments = $value;
         }
 
+        // If given target is already a created instance, pass it on
+        // to the callback.
+        if (is_object($target)) {
+            return $callback($target);
+        }
+
         // Arguments might have been provided. If so, we must ensure that
         // there are formatted as an array. This will allow the Service
         // Container to apply them to the constructor.

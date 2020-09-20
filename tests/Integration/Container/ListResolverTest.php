@@ -123,4 +123,38 @@ class ListResolverTest extends IntegrationTestCase
             $this->assertTrue($instance->callbackApplied, "Callback not applied for instance no. $key");
         }
     }
+
+    /**
+     * @test
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function skipsResolveIfAlreadyInstantiated()
+    {
+        // In this example the list consists of class paths and
+        // a single created instance. While this might not be a
+        // nice data structure, it could happen that someone
+        // appends to a list, without realising that an instance
+        // has already been created.
+        $list = [
+            SimpleComponent::class,
+            SimpleComponent::class,
+            new SimpleComponent()
+        ];
+
+        $resolved = $this->makeResolver()
+            ->with(function ($instance) {
+                $instance->callbackApplied = true;
+
+                return $instance;
+            })
+            ->make($list);
+
+        // We expect that the created instance skips the Service Container
+        // `make()` call and is just passed on to the callback. Thus, all
+        // instances should be processed.
+        foreach ($resolved as $key => $instance) {
+            $this->assertTrue($instance->callbackApplied, "Callback not applied for instance no. $key");
+        }
+    }
 }
