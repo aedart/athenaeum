@@ -3,8 +3,6 @@
 
 namespace Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes;
 
-
-use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Http\Clients\Requests\Builders\ProcessedOptions;
 
 /**
