@@ -12,6 +12,8 @@ use Aedart\Utils\Dates\Duration;
  * @group date
  * @group duration
  *
+ * Example: codecept run Unit Utils
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Dates
  */
@@ -20,11 +22,11 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
-    public function canInstatiate()
+    public function canInstantiate()
     {
         $duration = new Duration(42);
 
-        $this->assertEqual($duration->format("S"), "42");
+        $this->assertSame($duration->format("%S"), "42");
     }
 
 }
