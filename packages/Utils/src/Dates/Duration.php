@@ -148,6 +148,16 @@ class Duration
     }
 
     /**
+     * Return duration as integer minutes.
+     *
+     * @return int
+     */
+    public function asMinutes() : int
+    {
+        return intval($this->asSeconds() / 60);
+    }
+
+    /**
      * @see \DateInterval::format()
      *
      * @param string $format
