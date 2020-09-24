@@ -37,7 +37,6 @@ class DurationTest extends UnitTestCase
         $seconds = 10*365*24*3600; // 10 years of seconds
         $duration = Duration::fromSeconds($seconds);
 
-        $this->assertSame($duration->format("%S"), strval($seconds));
         $this->assertSame($duration->asSeconds(), $seconds);
         $this->assertSame($duration->asFloatSeconds(), floatval($seconds));
     }
@@ -84,7 +83,22 @@ class DurationTest extends UnitTestCase
         $duration = Duration::fromDifference($then, $when);
 
         $this->assertSame($duration->asSeconds(), (5 * 3600) + (6 * 60) + 42);
-        $this->assertSame($duration->format('%Y-%M-%D %H:%I:%S.%F'), '00-00-00 05:06:42.023456');
+        $this->assertSame($duration->format('%r%Y-%M-%D %H:%I:%S.%F'), '00-00-00 05:06:42.023456');
+    }
+
+    /**
+     * @test
+     */
+    public function instantiateFromInvertedDifference()
+    {
+        $now = '2020-09-23';
+        $then = new \DateTime("$now - 5 hours - 6 minutes");
+        $when = new \DateTime("$now + 42 seconds + 23456 microseconds");
+
+        $duration = Duration::fromDifference($when, $then);
+
+        $this->assertSame($duration->asSeconds(), -(5 * 3600) - (6 * 60) - 42);
+        $this->assertSame($duration->format('%r%Y-%M-%D %H:%I:%S.%F'), '-00-00-00 05:06:42.023456');
     }
 
     /**
@@ -108,4 +122,30 @@ class DurationTest extends UnitTestCase
 
         $this->assertSame($duration->asSeconds(), 42);
     }
+
+    /**
+     * @test
+     */
+    public function measureInterval()
+    {
+        $duration = new Duration();
+        $duration->start();
+        sleep(2);
+        $duration->stop();
+
+        $this->assertSame($duration->asSeconds(), 2);
+    }
+
+    /**
+     * @test
+     */
+    public function requestedTestCase()
+    {
+        $duration = Duration::from(52200);
+
+        $this->assertSame($duration->format('%H:%i'), '14:30'); // Should out 14:30 (hours and minutes)
+//        $this->assertSame($duration->format('%D'), 0.6042); // Should output ~0.6042 days
+        $this->assertSame($duration->asMinutes(), 870); // 870 minutes
+    }
+
 }

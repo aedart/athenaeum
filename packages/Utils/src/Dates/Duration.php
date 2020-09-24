@@ -4,34 +4,32 @@ namespace Aedart\Utils\Dates;
 
 
 /**
- * Duration class to easen usage of the DateInterval class.
+ * Duration class to handle time intervals with microsecond precision.
+ *
+ * Needed because DateInterval has not so funny quirks.
  *
  * @author steffen
  *
  */
 class Duration
 {
-    /**
-     * Note:
-     *  The DateInterval object is a bit funny:
-     *   It has internal properties for year, month, day, hours, minutes, seconds and microseconds.
-     *   They are populated as one would expect if instantiated from a DateTime or DateTime->diff() call.
-     *   But if instantiated from seconds, all seconds are simply put into the seconds property.
-     *   E.g. dd(new \DateInterval('PT4200S'));
-     *   The same will happen if instatiated from any other direct value.
-     * @var \DateInterval
-     */
-    protected $duration;
 
     /**
-     * Create instance from either a DateTime, a DateInterval or integer seconds
+     *
+     * @var MicroTimeStamp $microTimeStamp
+     */
+    protected $microTimeStamp;
+
+
+    /**
+     * Create instance from either a DateTime, a DateInterval, a MicroTimeStamp or integer seconds
      *
      * @param mixed $time
      * @return self
      */
-    static public function from($time) : self
+    static public function from($interval)
     {
-        return new static($time);
+        return new static($interval);
     }
 
     /**
@@ -57,6 +55,18 @@ class Duration
     }
 
     /**
+     * Create instance from integer minutes and optional microseconds.
+     *
+     * @param int $minutes
+     * @param int $microSeconds
+     * @return self
+     */
+    static public function fromMinutes(int $minutes, int $microSeconds=0) : self
+    {
+        return new static(new MicroTimeStamp($minutes, $microSeconds));
+    }
+
+    /**
      * Create instance from difference of two DateTime objects.
      *
      * @param \DateTime $start
@@ -69,22 +79,36 @@ class Duration
     }
 
     /**
-     * Constructor that cane take a DateTime, a DateInterval or integer seconds
+     * Constructor that can take a DateTime, a DateInterval, a MicroTimeStamp or integer seconds
      *
      * @param mixed|null $time
      */
     public function __construct($time=null)
     {
         if ($time instanceof \DateTime) {
-            $dt = new \DateTime("@0");
-            $this->duration = $dt->diff($time);
+            $this->microTimeStamp = MicroTimeStamp::fromDateTime($time);
         }
         elseif ($time instanceof \DateInterval) {
-            $this->duration = $time;
+            $this->microTimeStamp = MicroTimeStamp::fromDateInterval($time);
+        }
+        elseif ($time instanceof MicroTimeStamp) {
+            $this->microTimeStamp = $time;
         }
         elseif (is_integer($time)) {
-            $this->duration = new \DateInterval("PT{$time}S");
+            $this->microTimeStamp = MicroTimeStamp::fromSeconds($time);
         }
+    }
+
+    public function start()
+    {
+        $this->microTimeStamp = MicroTimeStamp::fromDateTime(new \DateTime());
+    }
+
+    public function stop()
+    {
+        $stop = MicroTimeStamp::fromDateTime(new \DateTime());
+
+        $this->microTimeStamp = MicroTimeStamp::fromSecondsFloat($stop->getAsSecondsFloat() - $this->microTimeStamp->getAsSecondsFloat());
     }
 
     /**
@@ -95,12 +119,7 @@ class Duration
      */
     public function add(Duration $duration) : self
     {
-        $temp = new \DateTime('@0');
-        $temp->add($this->duration);
-
-        $temp->add($duration->duration);
-
-        $this->duration = $temp->diff(new \DateTime('@0'));
+        $this->microTimeStamp = MicroTimeStamp::fromSecondsFloat($this->microTimeStamp->getAsSecondsFloat() + $duration->asFloatSeconds());
 
         return $this;
     }
@@ -113,13 +132,7 @@ class Duration
      */
     public function subtract(Duration $duration) : self
     {
-        $temp = new \DateTime('@0');
-        $temp->add($this->duration);
-
-        $duration->duration->invert = 1;
-        $temp->add($duration->duration);
-
-        $this->duration = $temp->diff(new \DateTime('@0'));
+        $this->microTimeStamp = MicroTimeStamp::fromSecondsFloat($this->microTimeStamp->getAsSecondsFloat() - $duration->asFloatSeconds());
 
         return $this;
     }
@@ -131,10 +144,7 @@ class Duration
      */
     public function asSeconds() : int
     {
-        return (($this->duration->d * 24 * 3600)
-            + ($this->duration->h * 3600)
-            + ($this->duration->i * 60)
-            + ($this->duration->s));
+        return $this->microTimeStamp->getAsSeconds();
     }
 
     /**
@@ -144,7 +154,7 @@ class Duration
      */
     public function asFloatSeconds() : float
     {
-        return $this->asSeconds() + $this->duration->f;
+        return $this->microTimeStamp->getAsSecondsFloat();
     }
 
     /**
@@ -154,10 +164,12 @@ class Duration
      */
     public function asMinutes() : int
     {
-        return intval($this->asSeconds() / 60);
+        return intval($this->microTimeStamp->getAsSeconds() / 60);
     }
 
     /**
+     * Same as \DateInterval::format().
+     *
      * @see \DateInterval::format()
      *
      * @param string $format
@@ -165,6 +177,6 @@ class Duration
      */
     public function format(string $format) : string
     {
-        return $this->duration->format($format);
+        return $this->microTimeStamp->getAsDateInterval()->format($format);
     }
 }
