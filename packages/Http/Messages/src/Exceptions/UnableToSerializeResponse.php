@@ -15,5 +15,4 @@ namespace Aedart\Http\Messages\Exceptions;
  */
 class UnableToSerializeResponse extends HttpMessageSerializationException
 {
-
 }

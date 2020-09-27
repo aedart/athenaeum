@@ -16,5 +16,4 @@ use Aedart\Contracts\Http\Messages\Serializer;
 interface RequestSerializer extends Serializer,
     HttpRequestAware
 {
-
 }

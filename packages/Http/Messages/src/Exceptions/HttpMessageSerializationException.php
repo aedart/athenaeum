@@ -15,5 +15,4 @@ use RuntimeException;
  */
 class HttpMessageSerializationException extends RuntimeException implements SerializationException
 {
-
 }

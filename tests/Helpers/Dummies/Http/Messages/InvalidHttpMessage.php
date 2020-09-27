@@ -18,7 +18,6 @@ use function GuzzleHttp\Psr7\stream_for;
  */
 class InvalidHttpMessage implements MessageInterface
 {
-
     /**
      * @inheritDoc
      */

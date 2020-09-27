@@ -2,7 +2,6 @@
 
 namespace Aedart\Tests\Integration\Http\Messages;
 
-
 use Aedart\Contracts\Http\Messages\Exceptions\SerializationException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpSerializationTestCase;
