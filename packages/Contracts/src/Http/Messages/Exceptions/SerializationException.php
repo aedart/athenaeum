@@ -7,7 +7,7 @@ use Throwable;
 /**
  * Serialization Exception
  *
- * Should be thrown if unable to serialise a Http Message.
+ * General purpose exception for Http Message serialization exceptions.
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Messages\Exceptions
