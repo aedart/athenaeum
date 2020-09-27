@@ -31,5 +31,42 @@ abstract class BaseSerializer implements Serializer
     /*****************************************************************
      * Internals
      ****************************************************************/
-    
+
+    /**
+     * Serialize Http Headers to a string
+     *
+     * @param  array  $headers  [optional]
+     *
+     * @return string
+     */
+    protected function serialiseHeaders(array $headers = []): string
+    {
+        // Inspired by Laminas "Abstract Serialiser"
+        // @see https://github.com/laminas/laminas-diactoros/blob/2.5.x/src/AbstractSerializer.php#L128
+
+        $output = [];
+
+        foreach ($headers as $header => $values) {
+            $name = $this->normaliseHeaderName($header);
+            foreach ($values as $value) {
+                $output[] = sprintf('%s: %s', $name, $value);
+            }
+        }
+
+        return implode(PHP_EOL, $output);
+    }
+
+    /**
+     * Normalises the Http Header name
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function normaliseHeaderName(string $name): string
+    {
+        $filtered = ucwords(str_replace('-', ' ', $name));
+        return str_replace(' ', '-', $filtered);
+    }
+
 }

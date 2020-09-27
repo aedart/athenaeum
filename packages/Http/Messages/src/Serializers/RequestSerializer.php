@@ -1,0 +1,90 @@
+<?php
+
+namespace Aedart\Http\Messages\Serializers;
+
+use Aedart\Contracts\Http\Messages\Serializers\RequestSerializer as RequestSerializerInterface;
+use Psr\Http\Message\RequestInterface;
+
+/**
+ * Request Serializer
+ *
+ * @see \Aedart\Contracts\Http\Messages\Serializers\RequestSerializer
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Http\Messages\Serializers
+ */
+class RequestSerializer extends BaseSerializer implements RequestSerializerInterface
+{
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        $request = $this->getHttpRequest();
+
+        return [
+            'method' => $request->getMethod(),
+            'target' => $request->getRequestTarget(),
+            'uri' => (string) $request->getUri(),
+            'protocol_version' => $request->getProtocolVersion(),
+            'headers' => $request->getHeaders(),
+            'body' => (string) $request->getBody()
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toString(): string
+    {
+        $request = $this->getHttpRequest();
+
+        $format = '%s %s HTTP/%s %s  %s';
+        $method = $request->getMethod();
+        $target = $request->getRequestTarget();
+        $protocol = $request->getProtocolVersion();
+        $headers = $this->serialiseHeaders($request->getHeaders());
+        $body = (string) $request->getBody();
+
+        return sprintf(
+            $format,
+            $method,
+            $target,
+            $protocol,
+            $headers,
+            $body
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setHttpRequest(?RequestInterface $request)
+    {
+        return $this->setHttpMessage($request);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getHttpRequest(): ?RequestInterface
+    {
+        return $this->getHttpMessage();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function hasHttpRequest(): bool
+    {
+        return $this->hasHttpMessage();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDefaultHttpRequest(): ?RequestInterface
+    {
+        return $this->getDefaultHttpMessage();
+    }
+}
