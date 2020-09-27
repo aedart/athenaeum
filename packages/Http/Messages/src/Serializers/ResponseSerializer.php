@@ -38,11 +38,11 @@ class ResponseSerializer extends BaseSerializer implements ResponseSerializerInt
     {
         $response = $this->getHttpResponse();
 
-        $format = 'HTTP/%s %d %s %s  %s';
+        $format = 'HTTP/%s %d %s%s%s';
         $protocol = $response->getProtocolVersion();
         $status = $response->getStatusCode();
-        $reason = $response->getReasonPhrase();
-        $headers = $this->serialiseHeaders($response->getHeaders());
+        $reason = $response->getReasonPhrase() . PHP_EOL;
+        $headers = $this->serialiseHeaders($response->getHeaders()) . str_repeat(PHP_EOL, 2);
         $body = (string) $response->getBody();
 
         return sprintf(

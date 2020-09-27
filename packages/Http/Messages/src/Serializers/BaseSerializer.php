@@ -69,4 +69,11 @@ abstract class BaseSerializer implements Serializer
         return str_replace(' ', '-', $filtered);
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function __toString()
+    {
+        return $this->toString();
+    }
 }

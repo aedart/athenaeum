@@ -39,11 +39,11 @@ class RequestSerializer extends BaseSerializer implements RequestSerializerInter
     {
         $request = $this->getHttpRequest();
 
-        $format = '%s %s HTTP/%s %s  %s';
+        $format = '%s %s HTTP/%s%s%s';
         $method = $request->getMethod();
         $target = $request->getRequestTarget();
-        $protocol = $request->getProtocolVersion();
-        $headers = $this->serialiseHeaders($request->getHeaders());
+        $protocol = $request->getProtocolVersion() . PHP_EOL;
+        $headers = $this->serialiseHeaders($request->getHeaders()) . str_repeat(PHP_EOL, 2);
         $body = (string) $request->getBody();
 
         return sprintf(
