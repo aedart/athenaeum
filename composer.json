@@ -57,7 +57,7 @@
             "Aedart\\Events\\": "packages/Events/src",
             "Aedart\\Http\\Clients\\": "packages/Http/Clients/src",
             "Aedart\\Http\\Cookies\\": "packages/Http/Cookies/src",
-            "Aedart\\Http\\Message\\": "packages/Http/Messages/src",
+            "Aedart\\Http\\Messages\\": "packages/Http/Messages/src",
             "Aedart\\Properties\\": "packages/Properties/src",
             "Aedart\\Service\\": "packages/Service/src",
             "Aedart\\Support\\": "packages/Support/src",
