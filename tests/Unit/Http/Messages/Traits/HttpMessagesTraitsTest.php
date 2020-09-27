@@ -5,6 +5,7 @@ namespace Aedart\Tests\Unit\Http\Messages\Traits;
 use Aedart\Http\Messages\Traits\HttpMessageTrait;
 use Aedart\Http\Messages\Traits\HttpRequestTrait;
 use Aedart\Http\Messages\Traits\HttpResponseTrait;
+use Aedart\Http\Messages\Traits\HttpSerializerFactoryTrait;
 use Aedart\Http\Messages\Traits\HttpServerRequestTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
 
@@ -34,6 +35,7 @@ class HttpMessagesTraitsTest extends TraitTestCase
             'HttpRequestTrait' => [ HttpRequestTrait::class ],
             'HttpResponseTrait' => [ HttpResponseTrait::class ],
             'HttpServerRequestTrait' => [ HttpServerRequestTrait::class ],
+            'HttpSerializerFactoryTrait' => [ HttpSerializerFactoryTrait::class ],
         ];
     }
 
