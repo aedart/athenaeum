@@ -11,12 +11,15 @@ use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesBaseUrl;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesCookies;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHttpProtocolVersion;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesMiddleware;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesPayload;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesQuery;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AssignsPredefinedMiddleware;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsBaseUrl;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsCookies;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHttpProtocolVersion;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsMiddleware;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsPayload;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsQuery;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Traits\CookieJarTrait;
@@ -59,7 +62,8 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         ExtractsHttpProtocolVersion::class,
         ExtractsQuery::class,
         ExtractsCookies::class,
-        ExtractsPayload::class
+        ExtractsPayload::class,
+        ExtractsMiddleware::class
     ];
 
     /**
@@ -76,6 +80,8 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         AppliesQuery::class,
         AppliesCookies::class,
         AppliesPayload::class,
+        AssignsPredefinedMiddleware::class,
+        AppliesMiddleware::class
     ];
 
     /**
@@ -108,16 +114,10 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         // NOTE: This is automatically reset via "createRequest".
         $this->nextRequestOptions = $options;
 
-        // Create the request and send it
-        $request = $this->createRequest($method, $uri);
-        $response = $this->client()->sendRequest($request);
-
-        // Apply request expectations, if any added. If any of the expectation
-        // fail, the then that exception is allowed to bubble upwards.
-        $this->applyExpectations($request, $response);
-
-        // Finally, return the response
-        return $response;
+        // Finally, send the request and return incoming response
+        return $this->client()->sendRequest(
+            $this->createRequest($method, $uri)
+        );
     }
 
     /**

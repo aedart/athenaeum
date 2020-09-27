@@ -7,9 +7,6 @@ use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation as ResponseExpec
 use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
 use Aedart\Http\Clients\Requests\Builders\Expectations\StatusCodesExpectation;
 use InvalidArgumentException;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Throwable;
 
 /**
  * Concerns Response Expectations
@@ -90,29 +87,6 @@ trait ResponseExpectations
     /*****************************************************************
      * Internals
      ****************************************************************/
-
-    /**
-     * Apply the registered response expectations
-     *
-     * @param  RequestInterface  $request
-     * @param  ResponseInterface  $response
-     * @return Builder
-     *
-     * @throws Throwable
-     */
-    protected function applyExpectations(RequestInterface $request, ResponseInterface $response): Builder
-    {
-        if (!$this->hasExpectations()) {
-            return $this;
-        }
-
-        $expectations = $this->getExpectations();
-        foreach ($expectations as $expectation) {
-            $expectation->apply($request, $response);
-        }
-
-        return $this;
-    }
 
     /**
      * Resolve given response expectation

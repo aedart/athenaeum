@@ -21,6 +21,34 @@ The `runCore()` method now invokes the new bootstrap method.
 
 This change only affects you, if a custom implementation of the Console `Kernel` is used.
 
+### Response Expectations
+
+The response expectations in Http `Client` have changed. They are now encapsulated in a `ResponseExpectation` instance.
+This means that if you wish to obtain an expectation, you will no longer receive the original callback method. 
+
+```php
+// Before (version 4.x)
+$containsUserId = function($status, $response) {
+    // ... not shown
+};
+
+$expectations = $client 
+            ->expect($containsUserId)
+            ->getExpectations(); // [ $containsUserId ] Array with provided callable method.
+
+var_dump($containsUserId === $expectations[0]); // true
+
+// Now (version 5.x)
+$expectations = $client 
+            ->expect($containsUserId)
+            ->getExpectations(); // [ ResponseExpectation ] Array with response expectation instance
+
+var_dump($containsUserId === $expectations[0]); // false
+var_dump($containsUserId === $expectations[0]->getExpectation()); // true
+```
+
+Please review `\Aedart\Contracts\Http\Clients\Responses\ResponseExpectation` for more details.
+
 ### Removed Deprecated Components
 
 The following deprecated components have been removed:

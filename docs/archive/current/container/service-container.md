@@ -1,16 +1,38 @@
 ---
-description: Register Container as Application
+description: About the IoC Service Container
 ---
 
-# `registerAsApplication()`
+# Container
 
-Sometimes, when testing your custom Laravel components and services, it can be useful to "trick" them in believing that the `Container` is the `Application`.
-This can be achieved via the `registerAsApplication()`.
+The `\Aedart\Container\IoC` is a slightly adapted version of [Laravel's Service Container](https://laravel.com/docs/8.x/container).
+Please make sure to read their documentation, before attempting to use this version.
+
+::: tip Info
+IoC stands for [Inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control).
+:::
+
+The motivation behind this adaptation is development outside a normal Laravel Application.
+E.g. testing and development of Laravel dependent packages.
+In other words, you will most likely not find this useful within your Laravel Application!
+
+[[toc]]
+
+## How to obtain instance
+
+To obtain the instance of the IoC Service Container, use the `getInstance()` method.
 
 ```php
 use \Aedart\Container\IoC;
 
 $ioc = IoC::getInstance();
+```
+
+## `registerAsApplication()`
+
+Sometimes, when testing your custom Laravel components and services, it can be useful to "trick" them in believing that the `Container` is the `Application`.
+This can be achieved via the `registerAsApplication()`.
+
+```php
 $ioc->registerAsApplication();
 ```
 
@@ -30,3 +52,12 @@ However, using this method when the `IoC` is not a superclass to a Laravel [`App
 Be careful how you choose to make use of this, if at all!
 :::
 
+## `destroy()`
+
+This method ensures that all bindings are unset, including those located within the [`Facade`](https://laravel.com/docs/8.x/facades).
+In addition, when invoked the `Facade`'s application is also unset.
+
+```php
+// ...destroy ioc and all of it's bindings.
+$ioc->destroy();
+```

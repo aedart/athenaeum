@@ -4,9 +4,15 @@
 
 #### Added
 
+* Added `ListResolver` component.
 * Added `otherwise()` and `getOtherwise()` methods to Circuit Breaker.
+* Http `Client` (_via Request `Builder`_) is now able to process `Middleware`.
+* Added `Middleware` and `Handler` components for Http Client. Inspired by [PSR-15](https://www.php-fig.org/psr/psr-15/).
+* Added `QueueHandler`, a middleware processing component for Http Client Requests.
+* Added `AppliesResponseExpectations` middleware. Replacement for internal response expectations handling in Http `Client`.
 * Added `ResponseExpectation` component.
 * Support for loading [TOML](https://en.wikipedia.org/wiki/TOML) configuration files.
+* Added Http Request `Builder` aware of component.
 * PHP Compatibility check in Travis.
 
 #### Changed
@@ -15,8 +21,10 @@
 
 * Upgraded Laravel dependencies to `v8.x`.
 * Added `bootstrap()` method in `\Aedart\Core\Console\Kernel`, due to Laravel's Console `Kernal` interface change. `runCore()` method will now invoke new bootstrap method.
+* `getExpectations()` now returns array of `ResponseExpectation` instances, in Request `Builder`.
 * Changed `StatusCodesExpectation`, now inherits from `ResponseExpectation`. Some internal methods have been redesigned. This change should not affect your code, unless you have custom Http Request `Builder` implementation.
 * Changed `withExpectation()`, in Request `Builder`. Now accepts both a `callable` and a `ResponseExpectation` instance. This change should not affect your code, unless you have custom Http Request `Builder` implementation.
+* Changed Request `Builder` and Http `Client` interfaces and concrete implementations. Now offers methods for adding `Middleware`. This change only affects you if you have a custom Http `Client` or Request `Builder` implementation.
 * Removed `Aedart\Dto` (_was deprecated in `v4.x`_).
 * Removed `Aedart\ArrayDto` (_was deprecated in `v4.x`_).
 * Removed `Aedart\Console\CreateAwareOfCommand` (_was deprecated in `v4.x`_).
@@ -27,8 +35,12 @@
 
 **Non-breaking Changes**
 
+* Added shortcut methods (_`getClient()` and `client()`_) for obtaining Http Client instance in `ProcessOptions`. 
+* Removed internal `applyExpectations()` method from `Expectations` concern, in Http Client `Builder`. Has been replaced by `AppliesResponseExpectations` middleware.
+
 #### Fixed
 
+* Fixed incorrect type declarations in PHPDoc (_throughout various components_). 
 * Codeception broken after update (_in codeception version 4.1.x series_).
 
 ## v4.x

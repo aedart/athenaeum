@@ -7,6 +7,7 @@ use Aedart\Http\Clients\Traits\GrammarManagerTrait;
 use Aedart\Http\Clients\Traits\GrammarTrait;
 use Aedart\Http\Clients\Traits\HttpClientsManagerTrait;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
+use Aedart\Http\Clients\Traits\HttpRequestBuilderTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
 
 /**
@@ -33,6 +34,7 @@ class HttpClientsTraitsTest extends TraitTestCase
         return [
             'HttpClientsManagerTrait' => [ HttpClientsManagerTrait::class ],
             'HttpClientTrait' => [ HttpClientTrait::class ],
+            'HttpRequestBuilderTrait' => [ HttpRequestBuilderTrait::class ],
             'CookieJarTrait (Guzzle)' => [GuzzleCookieJarTrait::class],
             'GrammarManagerTrait' => [GrammarManagerTrait::class],
             'GrammarTrait' => [GrammarTrait::class]
