@@ -66,7 +66,7 @@ class AssignsPredefinedMiddleware
     protected function assignMiddleware($middleware)
     {
         // Skip if middleware has already been assigned
-        if ($this->isAlreadyAssigned($middleware)){
+        if ($this->isAlreadyAssigned($middleware)) {
             return;
         }
 
