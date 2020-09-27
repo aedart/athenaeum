@@ -9,12 +9,12 @@ use Aedart\Http\Clients\Requests\AdaptedRequest;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers\CaptureHandler;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesBaseUrl;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesCookies;
-use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesExpectations;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHeaders;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesHttpProtocolVersion;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesMiddleware;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesPayload;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesQuery;
+use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AssignsPredefinedMiddleware;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsBaseUrl;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsCookies;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\ExtractsHeaders;
@@ -80,7 +80,7 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
         AppliesQuery::class,
         AppliesCookies::class,
         AppliesPayload::class,
-        AppliesExpectations::class,
+        AssignsPredefinedMiddleware::class,
         AppliesMiddleware::class
     ];
 
