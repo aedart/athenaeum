@@ -172,6 +172,15 @@ module.exports.sidebar = function(){
                         'http/cookies/usage',
                     ]
                 },
+                {
+                    title: 'Messages',
+                    collapsable: true,
+                    children: [
+                        'http/messages/',
+                        'http/messages/install',
+                        'http/messages/serializers',
+                    ]
+                },
             ]
         },
         {

@@ -104,6 +104,7 @@ class SerializationTest extends HttpSerializationTestCase
 
         $serialized = $factory->make($request)->toArray();
         ConsoleDebugger::output($serialized);
+        dd($serialized);
 
         $this->assertArrayHasKey('method', $serialized);
         $this->assertSame('GET', $serialized['method']);
