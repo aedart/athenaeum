@@ -8,6 +8,8 @@ description: Athenaeum Release Notes
 
 These are the new features and additions of Athenaeum `v5.x`.
 
+[[toc]]
+
 ### Http Client Middleware
 
 You can now assign middleware to process your outgoing requests and incoming responses. 
@@ -91,6 +93,11 @@ $list = [
 // Resolve list of dependencies
 $filters = (new ListResolver())->make($list);
 ```
+
+### Http Messages Package
+
+A new package for that offers PSR-7 Http Messages utilities.
+See [documentation](./http/messages) for additional information.
 
 ### Upgraded Dependencies
 
