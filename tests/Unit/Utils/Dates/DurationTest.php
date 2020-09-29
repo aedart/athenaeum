@@ -148,4 +148,57 @@ class DurationTest extends UnitTestCase
         $this->assertSame($duration->asMinutes(), 870); // 870 minutes
     }
 
+    /**
+     * @test
+     */
+    public function toHoursMinutes()
+    {
+        $duration = Duration::from(52200);
+
+        $this->assertSame($duration->toHoursMinutes(), '14:30'); // Should out 14:30 (hours and minutes)
+        $this->assertSame($duration->toHoursMinutes(true), '14 hours 30 minutes');
+    }
+
+    /**
+     * @test
+     */
+    public function toDaysHoursMinutes()
+    {
+        $duration = Duration::from(225000);
+
+        $this->assertSame($duration->asSeconds(), 225000);
+        $this->assertSame($duration->toDaysHoursMinutes(), '2-14:30'); // Should out 14:30 (hours and minutes)
+        $this->assertSame($duration->toDaysHoursMinutes(true), '2 days 14 hours 30 minutes');
+    }
+
+    /**
+     * @test
+     */
+    public function toSignedHoursMinutes()
+    {
+        $duration = Duration::from(-52200);
+
+        $this->assertSame($duration->asSeconds(), -52200);
+        $this->assertSame($duration->toHoursMinutes(), '-14:30'); // Should out 14:30 (hours and minutes)
+        $this->assertSame($duration->toHoursMinutes(true), '-14 hours 30 minutes');
+    }
+
+    /**
+     * @test
+     */
+    public function testToString()
+    {
+        $duration = Duration::from(225000);
+        $this->assertSame('2-14:30', $duration->toString());
+        $this->assertSame('2 days 14 hours 30 minutes', (string)$duration);
+
+        $duration->subtract(Duration::from(200000));
+        $this->assertSame('6:56', $duration->toString());
+        $this->assertSame('6 hours 56 minutes', (string)$duration);
+
+        $duration->subtract(Duration::from(24641));
+        $this->assertSame('05:59', $duration->toString());
+        $this->assertSame('05 minutes 59 seconds', (string)$duration);
+    }
+
 }

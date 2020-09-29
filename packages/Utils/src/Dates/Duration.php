@@ -6,7 +6,7 @@ namespace Aedart\Utils\Dates;
 /**
  * Duration class to handle time intervals with microsecond precision.
  *
- * Needed because DateInterval has not so funny quirks.
+ * Needed because DateInterval has some not so funny quirks.
  *
  * @author steffen
  *
@@ -81,7 +81,7 @@ class Duration
     /**
      * Constructor that can take a DateTime, a DateInterval, a MicroTimeStamp or integer seconds
      *
-     * @param mixed|null $time
+     * @param \DateTime|\DateInterval|MicroTimeStamp|int|null $time
      */
     public function __construct($time=null)
     {
@@ -178,5 +178,83 @@ class Duration
     public function format(string $format) : string
     {
         return $this->microTimeStamp->getAsDateInterval()->format($format);
+    }
+
+    /**
+     * Format duration as minutes and seconds
+     *
+     * @param bool $long
+     * @return string
+     */
+    public function toMinutesSeconds(bool $long=false) : string
+    {
+        $format = ($long) ? '%02d minutes %02u seconds' : '%02d:%02u';
+
+        $seconds = $this->microTimeStamp->getAsSeconds();
+        $minutes = intval(($seconds % 3600) / 60);
+        $seconds = intval(abs($seconds) % 60);
+
+        return sprintf($format, $minutes, $seconds);
+    }
+
+    /**
+     * Format duration as hours and minutes
+     *
+     * @param bool $long
+     * @return string
+     */
+    public function toHoursMinutes(bool $long=false) : string
+    {
+        $format = ($long) ? '%d hours %u minutes' : '%d:%02u';
+
+        $seconds = $this->microTimeStamp->getAsSeconds();
+        $hours = intval(($seconds % (24*3600)) / 3600);
+        $minutes = intval((abs($seconds) % 3600) / 60);
+
+        return sprintf($format, $hours, $minutes);
+    }
+
+    /**
+     * Format duration as days, hours and minutes.
+     *
+     * @param bool $long
+     * @return string
+     */
+    public function toDaysHoursMinutes(bool $long=false) : string
+    {
+        $format = ($long) ? '%d days %d hours %u minutes' : '%d-%02u:%02u';
+
+        $seconds = $this->microTimeStamp->getAsSeconds();
+        $days = intval($seconds / (24*3600));
+        $hours = intval((abs($seconds) % (24*3600)) / 3600);
+        $minutes = intval((abs($seconds) % (60*60)) / 60);
+
+        return sprintf($format, $days, $hours, $minutes);
+    }
+
+    /**
+     * Format duration to a string.
+     * Shortest text according to duration length.
+     *
+     * @param bool $long
+     * @return string
+     */
+    public function toString(bool $long=false) : string
+    {
+        $seconds = $this->microTimeStamp->getAsSeconds();
+        if ($seconds > (24*3600)) {
+            return $this->toDaysHoursMinutes($long);
+        } elseif ($seconds > 3600) {
+            return $this->toHoursMinutes($long);
+        }
+        return $this->toMinutesSeconds($long);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function __toString()
+    {
+        return $this->toString(true);
     }
 }
