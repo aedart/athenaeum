@@ -1040,6 +1040,47 @@ interface Builder extends HttpClientAware,
     public function getOptions(): array;
 
     /**
+     * Dumps the next outgoing request and received response
+     *
+     * WARNING: Method SHOULD NOT be used in a production
+     * environment.
+     *
+     * @return self
+     */
+    public function debug(): self;
+
+    /**
+     * Determine whether or not the next outgoing request and
+     * received response must be dumped.
+     *
+     * @see debug
+     *
+     * @return bool
+     */
+    public function mustDebug(): bool;
+
+    /**
+     * Dumps the next outgoing request and exists the
+     * running script.
+     *
+     * WARNING: Method SHOULD NOT be used in a production
+     * environment.
+     *
+     * @return self
+     */
+    public function dd(): self;
+
+    /**
+     * Determine whether or not the next outgoing request
+     * should be dumped and running script exited.
+     *
+     * @see dd
+     *
+     * @return bool
+     */
+    public function mustDumpAndDie(): bool;
+
+    /**
      * Alias for getHttpClient
      *
      * @see getHttpClient

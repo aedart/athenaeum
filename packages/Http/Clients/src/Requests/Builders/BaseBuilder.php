@@ -42,6 +42,7 @@ abstract class BaseBuilder implements
     use Concerns\HttpUri;
     use Concerns\ResponseExpectations;
     use Concerns\Middleware;
+    use Concerns\Debugging;
     use ForwardsCalls;
 
     /**
