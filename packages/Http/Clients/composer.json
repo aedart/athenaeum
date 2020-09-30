@@ -32,6 +32,7 @@
         "aedart/athenaeum-container": "^4.3",
         "aedart/athenaeum-contracts": "^4.3",
         "aedart/athenaeum-http-cookies": "^4.3",
+        "aedart/athenaeum-http-messages": "^4.3",
         "aedart/athenaeum-support": "^4.3"
     },
     "autoload": {
