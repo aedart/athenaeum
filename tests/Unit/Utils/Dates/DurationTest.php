@@ -132,10 +132,10 @@ class DurationTest extends UnitTestCase
     {
         $duration = new Duration();
         $duration->start();
-        sleep(2);
+        sleep(1);
         $duration->stop();
 
-        $this->assertSame($duration->asSeconds(), 2);
+        $this->assertSame($duration->asSeconds(), 1);
     }
 
     /**
