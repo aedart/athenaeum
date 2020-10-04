@@ -96,7 +96,7 @@ trait Debugging
     }
 
     /**
-     * Returns a "null" callback method.
+     * Returns a "null" debug callback method.
      *
      * @return callable
      */
