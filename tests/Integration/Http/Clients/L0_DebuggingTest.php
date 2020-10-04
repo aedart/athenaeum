@@ -2,7 +2,6 @@
 
 namespace Aedart\Tests\Integration\Http\Clients;
 
-use Aedart\Http\Clients\Middleware\RequestResponseDebugging;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use GuzzleHttp\Psr7\Response;
@@ -151,7 +150,7 @@ class L0_DebuggingTest extends HttpClientsTestCase
         $this
             ->client($profile)
             ->withOption('handler', $this->makeResponseMock([ new Response(StatusCode::INTERNAL_SERVER_ERROR) ]))
-            ->expect(StatusCode::OK, function() use (&$callbackOrder) {
+            ->expect(StatusCode::OK, function () use (&$callbackOrder) {
                 $callbackOrder[] = 'expectation';
             })
             ->debug(function () use (&$callbackOrder) {
@@ -162,6 +161,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
         ConsoleDebugger::output($callbackOrder);
 
         // Debug should be invoked twice (for request and then for response)
-        $this->assertSame([ 'debug', 'debug' , 'expectation' ], $callbackOrder, 'Debug was not invoked before expectation callback!');
+        $this->assertSame([ 'debug', 'debug', 'expectation' ], $callbackOrder, 'Debug was not invoked before expectation callback!');
     }
 }
