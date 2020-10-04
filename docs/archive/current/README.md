@@ -8,6 +8,8 @@ description: Athenaeum Release Notes
 
 These are the new features and additions of Athenaeum `v5.x`.
 
+[[toc]]
+
 ### Http Client Middleware
 
 You can now assign middleware to process your outgoing requests and incoming responses. 
@@ -48,6 +50,24 @@ class UserWasCreated extends ResponseExpectations
 $response = $client
         ->expect(new UserWasCreated())
         ->post('/users', [ 'name' => 'John Snow' ]);
+```
+
+### Debugging Request and Response
+
+[Debugging](./http/clients/methods/debugging) and [logging](./http/clients/methods/logging) utilities have been added for a quick way to dump outgoing request and incoming response.
+
+```php
+// Dump request / response.
+$response = $client
+        ->debug()
+        ->get('/users');
+
+// --------------------------------------------
+
+// Logs the request / response.
+$response = $client
+        ->log()
+        ->get('/users');
 ```
 
 ### Default otherwise callback
@@ -91,6 +111,11 @@ $list = [
 // Resolve list of dependencies
 $filters = (new ListResolver())->make($list);
 ```
+
+### Http Messages Package
+
+A new package for that offers PSR-7 Http Messages utilities.
+See [documentation](./http/messages) for additional information.
 
 ### Upgraded Dependencies
 

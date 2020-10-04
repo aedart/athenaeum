@@ -142,6 +142,8 @@ module.exports.sidebar = function(){
                                 'http/clients/methods/criteria',
                                 'http/clients/methods/redirects',
                                 'http/clients/methods/timeout',
+                                'http/clients/methods/debugging',
+                                'http/clients/methods/logging',
                                 'http/clients/methods/driver_options',
                                 'http/clients/methods/driver',
                             ]
@@ -170,6 +172,15 @@ module.exports.sidebar = function(){
                         'http/cookies/',
                         'http/cookies/install',
                         'http/cookies/usage',
+                    ]
+                },
+                {
+                    title: 'Messages',
+                    collapsable: true,
+                    children: [
+                        'http/messages/',
+                        'http/messages/install',
+                        'http/messages/serializers',
                     ]
                 },
             ]

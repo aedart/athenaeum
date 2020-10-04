@@ -49,6 +49,7 @@ parameters:
         packages/Events: 'git@github.com:aedart/athenaeum-events.git'
         packages/Http/Clients: 'git@github.com:aedart/athenaeum-http-clients.git'
         packages/Http/Cookies: 'git@github.com:aedart/athenaeum-http-cookies.git'
+        packages/Http/Messages: 'git@github.com:aedart/athenaeum-http-messages.git'
         packages/Properties: 'git@github.com:aedart/athenaeum-properties.git'
         packages/Service: 'git@github.com:aedart/athenaeum-service.git'
         packages/Support: 'git@github.com:aedart/athenaeum-support.git'

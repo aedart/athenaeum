@@ -1040,6 +1040,99 @@ interface Builder extends HttpClientAware,
     public function getOptions(): array;
 
     /**
+     * Log the next outgoing request and received response
+     *
+     * Note: This method is intended for "selective" logging
+     * of requests / responses. E.g. for debugging.
+     * If you require more logging control, then consider
+     * using custom {@see Middleware} instead of this method.
+     *
+     * @param callable|null $callback  [optional] Custom callback for logging Http message.
+     *                                 Callback is given a `string` type, the Http Message instance as arguments, and
+     *                                 instance of the request builder.
+     *                                 If no callback is provided, then a default logging callback is applied.
+     *
+     * @return self
+     */
+    public function log(?callable $callback = null): self;
+
+    /**
+     * Returns the last assigned logging callback.
+     * If no method was assigned, method returns
+     * a callback that does not do anything.
+     *
+     * @see log
+     *
+     * @return callable
+     */
+    public function logCallback(): callable;
+
+    /**
+     * Dumps the next outgoing request and received response
+     *
+     * WARNING: Method SHOULD NOT be used in a production
+     * environment.
+     *
+     * Example:
+     * ```
+     * $client
+     *      ->debug(function($type, $httpMessage, $requestBuilder) {
+     *          // $type is either 'request' or 'response'
+     *          // ... perform debugging of http message ...
+     *      })
+     *      ->get('/users');
+     * ```
+     *
+     * @param callable|null $callback  [optional] Custom callback for performing Http message debugging.
+     *                                 Callback is given a `string` type, the Http Message instance as arguments, and
+     *                                 instance of the request builder.
+     *                                 If no callback is provided, then a default debugging callback is applied.
+     *
+     * @return self
+     */
+    public function debug(?callable $callback = null): self;
+
+    /**
+     * Dumps the next outgoing request and exists the
+     * running script.
+     *
+     * WARNING: Method SHOULD NOT be used in a production
+     * environment.
+     *
+     * Example:
+     * ```
+     * $client
+     *      ->dd(function($type, $httpMessage, $requestBuilder) {
+     *          // $type is either 'request' or 'response'
+     *          // ... perform debugging of http message ...
+     *
+     *          exit(1); // Manual exit of script!
+     *      })
+     *      ->get('/users');
+     * ```
+     *
+     * @param callable|null $callback  [optional] Custom callback for performing Http message debugging.
+     *                                 Callback is given a `string` type, the Http Message instance as arguments, and
+     *                                 instance of the request builder.
+     *                                 If no callback is provided, then a default debugging callback is applied.
+     *
+     * @return self
+     */
+    public function dd(?callable $callback = null): self;
+
+    /**
+     * Returns the last assigned debugging callback.
+     * If no debugging method was assigned, method returns
+     * a callback that does not do anything.
+     *
+     * @see debug
+     * @see dd
+     *
+     * @return callable
+     */
+    public function debugCallback(): callable;
+
+    /**
      * Alias for getHttpClient
      *
      * @see getHttpClient
