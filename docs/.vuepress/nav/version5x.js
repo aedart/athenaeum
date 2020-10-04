@@ -143,6 +143,7 @@ module.exports.sidebar = function(){
                                 'http/clients/methods/redirects',
                                 'http/clients/methods/timeout',
                                 'http/clients/methods/debugging',
+                                'http/clients/methods/logging',
                                 'http/clients/methods/driver_options',
                                 'http/clients/methods/driver',
                             ]

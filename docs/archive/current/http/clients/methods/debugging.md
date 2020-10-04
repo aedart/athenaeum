@@ -23,7 +23,6 @@ The `debug()` method will dump the outgoing request before it is sent.
 When the corresponding response has been received, the method will also dump it.  
 
 ```php
-// Will automatically resolve provided class paths...
 $response = $client
         ->where('date', 'today')
         ->debug()
@@ -82,7 +81,6 @@ Unlike `debug()`, The `dd()` method will only dump the outgoing request.
 Afterwards the method **will exit** the entire script!
 
 ```php
-// Will automatically resolve provided class paths...
 $response = $client
         ->where('date', 'today')
         ->dd() // Dumps request and exists the script!
@@ -111,8 +109,6 @@ Consider the following example:
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Psr\Http\Message\MessageInterface;
 
-
-// Will automatically resolve provided class paths...
 $response = $client
         ->where('date', 'today')
         ->debug(function(string $type, MessageInterface $message, Builder $builder) {

@@ -54,11 +54,19 @@ $response = $client
 
 ### Debugging Request and Response
 
-[Debugging utilities](./http/clients/methods/debugging) have been added for a quick way to dump outgoing request and incoming response.
+[Debugging](./http/clients/methods/debugging) and [logging](./http/clients/methods/logging) utilities have been added for a quick way to dump outgoing request and incoming response.
 
 ```php
+// Dump request / response.
 $response = $client
         ->debug()
+        ->get('/users');
+
+// --------------------------------------------
+
+// Logs the request / response.
+$response = $client
+        ->log()
         ->get('/users');
 ```
 
