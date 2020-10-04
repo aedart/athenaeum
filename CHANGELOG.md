@@ -27,7 +27,7 @@
 * Changed `StatusCodesExpectation`, now inherits from `ResponseExpectation`. Some internal methods have been redesigned. This change should not affect your code, unless you have custom Http Request `Builder` implementation.
 * Changed `withExpectation()`, in Request `Builder`. Now accepts both a `callable` and a `ResponseExpectation` instance. This change should not affect your code, unless you have custom Http Request `Builder` implementation.
 * Changed Request `Builder` and Http `Client` interfaces and concrete implementations. Now offers methods for adding `Middleware`. This change only affects you if you have a custom Http `Client` or Request `Builder` implementation.
-* Changed Http `Client` and Request `Builder`, added debugging methods (`debug()`, `dd()`, and `debugCallback()`). This change only affects you if you have a custom Http `Client` or Request `Builder` implementation.
+* Changed Http `Client` and Request `Builder`, added debugging methods (`debug()`, `dd()`, `log()`...etc). This change only affects you if you have a custom Http `Client` or Request `Builder` implementation.
 * Removed `Aedart\Dto` (_was deprecated in `v4.x`_).
 * Removed `Aedart\ArrayDto` (_was deprecated in `v4.x`_).
 * Removed `Aedart\Console\CreateAwareOfCommand` (_was deprecated in `v4.x`_).
