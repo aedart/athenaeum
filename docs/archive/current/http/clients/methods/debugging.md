@@ -99,20 +99,23 @@ The method **WILL EXIST YOUR SCRIPT**, which is not favourable within a producti
 ## Custom debugging callback
 
 If the default provided debugging methods are not to your liking, then you can provide your own custom callback, in which you can perform whatever debugging logic you may wish.
-Both `debug()` and `dd()` accept a callback, which is provided with two arguments, when invoked.
+Both `debug()` and `dd()` accept a callback, which is provided with the following arguments, when invoked.
 
 * `string $type`, e.g. `'request'` or `'response'`.
 * `MessageInterface $message`, [PSR-7 Message](https://www.php-fig.org/psr/psr-7/#31-psrhttpmessagemessageinterface) instance. Either a request or response.
+* `Builder $builder`, Http request builder instance.
 
 Consider the following example:
 
 ```php
+use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Psr\Http\Message\MessageInterface;
+
 
 // Will automatically resolve provided class paths...
 $response = $client
         ->where('date', 'today')
-        ->debug(function(string $type, MessageInterface $message) {
+        ->debug(function(string $type, MessageInterface $message, Builder $builder) {
             if ($type === 'request') {
                 // debug a request...
             } else {

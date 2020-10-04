@@ -57,6 +57,25 @@ trait Debugging
         return $this->debugCallback;
     }
 
+    /**
+     * Creates a context array for given Http Message
+     *
+     * @param string $type E.g. request or response
+     * @param  MessageInterface  $message
+     * @return array
+     *
+     * @throws SerializationException
+     */
+    public function makeDebugContext(string $type, MessageInterface $message): array
+    {
+        $serialized = $this
+            ->getHttpSerializerFactory()
+            ->make($message)
+            ->toArray();
+
+        return [ $type => $serialized ];
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -83,7 +102,8 @@ trait Debugging
      */
     protected function makeNullDebugCallback(): callable
     {
-        return function () {
+        return function (string $type, MessageInterface $message, Builder $builder) {
+            // N/A...
         };
     }
 
@@ -94,8 +114,8 @@ trait Debugging
      */
     protected function makeDumpCallback(): callable
     {
-        return function (string $type, MessageInterface $message) {
-            VarDumper::dump($this->makeContext($type, $message));
+        return function (string $type, MessageInterface $message, Builder $builder) {
+            VarDumper::dump($this->makeDebugContext($type, $message));
         };
     }
 
@@ -106,13 +126,13 @@ trait Debugging
      */
     protected function makeDumpAndDieCallback(): callable
     {
-        return function (string $type, MessageInterface $message) {
+        return function (string $type, MessageInterface $message, Builder $builder) {
             // Obtain reference to var dumper handler.
             $originalHandler = VarDumper::setHandler(null);
             VarDumper::setHandler($originalHandler);
 
             // Dump...
-            VarDumper::dump($this->makeContext($type, $message));
+            VarDumper::dump($this->makeDebugContext($type, $message));
 
             // Exist script, if original handler is null. Otherwise
             // we have to assume that something else is going on, e.g.
@@ -121,24 +141,5 @@ trait Debugging
                 exit(1);
             }
         };
-    }
-
-    /**
-     * Creates a context array for given Http Message
-     *
-     * @param string $type E.g. request or response
-     * @param  MessageInterface  $message
-     * @return array
-     *
-     * @throws SerializationException
-     */
-    protected function makeContext(string $type, MessageInterface $message): array
-    {
-        $serialized = $this
-            ->getHttpSerializerFactory()
-            ->make($message)
-            ->toArray();
-
-        return [ $type => $serialized ];
     }
 }

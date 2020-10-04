@@ -54,16 +54,17 @@ class RequestResponseDebugging implements
     public function process(RequestInterface $request, Handler $handler): ResponseInterface
     {
         // Obtain debugging callback
-        $callback = $this->getHttpRequestBuilder()->debugCallback();
+        $builder = $this->getHttpRequestBuilder();
+        $callback = $builder->debugCallback();
 
         // Invoke debug for request...
-        $callback(static::TYPE_REQUEST, $request);
+        $callback(static::TYPE_REQUEST, $request, $builder);
 
         // Perform request and obtain response.
         $response = $handler->handle($request);
 
         // Invoke debug for response...
-        $callback(static::TYPE_RESPONSE, $response);
+        $callback(static::TYPE_RESPONSE, $response, $builder);
 
         return $response;
     }

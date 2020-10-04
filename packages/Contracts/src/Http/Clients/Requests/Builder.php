@@ -1048,7 +1048,7 @@ interface Builder extends HttpClientAware,
      * Example:
      * ```
      * $client
-     *      ->debug(function($type, $httpMessage) {
+     *      ->debug(function($type, $httpMessage, $requestBuilder) {
      *          // $type is either 'request' or 'response'
      *          // ... perform debugging of http message ...
      *      })
@@ -1056,7 +1056,8 @@ interface Builder extends HttpClientAware,
      * ```
      *
      * @param callable|null $callback  [optional] Custom callback for performing Http message debugging.
-     *                                 Callback is given a `string` type, and Http Message instance as arguments.
+     *                                 Callback is given a `string` type, the Http Message instance as arguments, and
+     *                                 instance of the request builder.
      *                                 If no callback is provided, then a default debugging callback is applied.
      *
      * @return self
@@ -1073,7 +1074,7 @@ interface Builder extends HttpClientAware,
      * Example:
      * ```
      * $client
-     *      ->dd(function($type, $httpMessage) {
+     *      ->dd(function($type, $httpMessage, $requestBuilder) {
      *          // $type is either 'request' or 'response'
      *          // ... perform debugging of http message ...
      *
@@ -1083,8 +1084,9 @@ interface Builder extends HttpClientAware,
      * ```
      *
      * @param callable|null $callback  [optional] Custom callback for performing Http message debugging.
-     *                                 Callback is given a `string` type, and Http Message instance as arguments.
-     *                                 If no callback is provided, then a default dump & die callback is applied.
+     *                                 Callback is given a `string` type, the Http Message instance as arguments, and
+     *                                 instance of the request builder.
+     *                                 If no callback is provided, then a default debugging callback is applied.
      *
      * @return self
      */
