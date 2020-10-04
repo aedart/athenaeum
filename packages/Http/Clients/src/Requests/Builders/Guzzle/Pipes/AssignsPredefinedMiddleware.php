@@ -5,6 +5,7 @@ namespace Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes;
 use Aedart\Contracts\Http\Clients\Middleware;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Http\Clients\Middleware\AppliesResponseExpectations;
+use Aedart\Http\Clients\Middleware\RequestResponseDebugging;
 use Aedart\Http\Clients\Requests\Builders\ProcessedOptions;
 
 /**
@@ -22,7 +23,8 @@ class AssignsPredefinedMiddleware
      * @var string[]|Middleware[]
      */
     protected array $middleware = [
-        AppliesResponseExpectations::class
+        AppliesResponseExpectations::class,
+        RequestResponseDebugging::class,
     ];
 
     /**

@@ -5,7 +5,9 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Http\Clients\Middleware\RequestResponseDebugging;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use GuzzleHttp\Psr7\Response;
 use Symfony\Component\VarDumper\VarDumper;
+use Teapot\StatusCode;
 
 /**
  * L0_DebuggingTest
@@ -28,10 +30,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
      */
     public function canDebugRequestAndResponse(string $profile)
     {
-        $middleware = [
-            RequestResponseDebugging::class
-        ];
-
         // Amount of times debug method has been invoked.
         $debugInvoked = 0;
 
@@ -44,7 +42,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
         $this
             ->client($profile)
             ->withOption('handler', $this->makeRespondsOkMock())
-            ->withMiddleware($middleware)
             ->where('created_at', '2020')
             ->debug()
             ->get('/users');
@@ -65,10 +62,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
      */
     public function canDumpAndDie(string $profile)
     {
-        $middleware = [
-            RequestResponseDebugging::class
-        ];
-
         // Amount of times debug method has been invoked.
         $ddInvoked = 0;
 
@@ -81,7 +74,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
         $this
             ->client($profile)
             ->withOption('handler', $this->makeRespondsOkMock())
-            ->withMiddleware($middleware)
             ->where('created_at', '2020')
             ->dd()
             ->get('/users');
@@ -106,16 +98,11 @@ class L0_DebuggingTest extends HttpClientsTestCase
      */
     public function canDebugUsingCustomCallback(string $profile)
     {
-        $middleware = [
-            RequestResponseDebugging::class
-        ];
-
         $callbackInvoked = false;
 
         $this
             ->client($profile)
             ->withOption('handler', $this->makeRespondsOkMock())
-            ->withMiddleware($middleware)
             ->where('created_at', '2020')
             ->debug(function () use (&$callbackInvoked) {
                 $callbackInvoked = true;
@@ -135,16 +122,11 @@ class L0_DebuggingTest extends HttpClientsTestCase
      */
     public function canDumpAndDieUsingCustomCallback(string $profile)
     {
-        $middleware = [
-            RequestResponseDebugging::class
-        ];
-
         $callbackInvoked = false;
 
         $this
             ->client($profile)
             ->withOption('handler', $this->makeRespondsOkMock())
-            ->withMiddleware($middleware)
             ->where('created_at', '2020')
             ->dd(function () use (&$callbackInvoked) {
                 $callbackInvoked = true;
@@ -152,5 +134,34 @@ class L0_DebuggingTest extends HttpClientsTestCase
             ->get('/users');
 
         $this->assertTrue($callbackInvoked, 'Custom dump & die not invoked');
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param  string  $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function debugsBeforeResponseExpectations(string $profile)
+    {
+        $callbackOrder = [];
+
+        $this
+            ->client($profile)
+            ->withOption('handler', $this->makeResponseMock([ new Response(StatusCode::INTERNAL_SERVER_ERROR) ]))
+            ->expect(StatusCode::OK, function() use (&$callbackOrder) {
+                $callbackOrder[] = 'expectation';
+            })
+            ->debug(function () use (&$callbackOrder) {
+                $callbackOrder[] = 'debug';
+            })
+            ->get('/users');
+
+        ConsoleDebugger::output($callbackOrder);
+
+        // Debug should be invoked twice (for request and then for response)
+        $this->assertSame([ 'debug', 'debug' , 'expectation' ], $callbackOrder, 'Debug was not invoked before expectation callback!');
     }
 }
