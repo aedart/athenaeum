@@ -1,6 +1,6 @@
 # Release Notes
 
-### Unreleased
+### 5.0.0 - 2020-10-04
 
 * N/A
 
