@@ -4,6 +4,7 @@ namespace Aedart\Tests\Unit\Utils\Dates;
 
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Dates\Duration;
+use DateInterval;
 use DateTime;
 
 /**
@@ -47,7 +48,7 @@ class DurationTest extends UnitTestCase
      */
     public function instantiateFromDateInterval()
     {
-        $duration = Duration::from(new \DateInterval('P10Y7DT4H5M34S'));
+        $duration = Duration::from(new DateInterval('P10Y7DT4H5M34S'));
 
         $this->assertSame($duration->format('%Y-%M-%D %H:%I:%S'), '10-00-07 04:05:34');
     }
