@@ -43,7 +43,7 @@ class Duration
     /**
      * Create instance from either a DateTime, a DateInterval, a MicroTimeStamp or integer seconds
      *
-     * @param  mixed  $interval
+     * @param  DateTime|DateInterval|MicroTimeStamp|int  $interval
      * @return static
      */
     public static function from($interval)
