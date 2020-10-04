@@ -1,9 +1,5 @@
 # Release Notes
 
-### 5.0.0 - 2020-10-04
-
-* N/A
-
 ### [v5.0.0](https://github.com/aedart/athenaeum/compare/4.2.1...5.0.0)
 
 #### Added
