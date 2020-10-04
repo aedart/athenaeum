@@ -15,6 +15,7 @@
 * Added `RequestResponseDebugging` Middleware for Http `Client`.
 * Support for loading [TOML](https://en.wikipedia.org/wiki/TOML) configuration files.
 * Added Http Request `Builder` aware of component.
+* Added `Duration` utility.
 * PHP Compatibility check in Travis.
 
 #### Changed
