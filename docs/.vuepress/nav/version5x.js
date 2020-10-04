@@ -248,6 +248,7 @@ module.exports.sidebar = function(){
             collapsable: true,
             children: [
                 'utils/',
+                'utils/duration',
                 'utils/install',
                 'utils/array',
                 'utils/json',
