@@ -17,7 +17,6 @@ use Aedart\Http\Clients\Traits\GrammarManagerTrait;
 use Aedart\Http\Clients\Traits\HttpClientsManagerTrait;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
 use Aedart\Http\Cookies\SetCookie;
-use Aedart\Http\Messages\Providers\HttpSerializationServiceProvider;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\LaravelTestCase;
@@ -87,7 +86,6 @@ abstract class HttpClientsTestCase extends LaravelTestCase
         return [
             ConfigLoaderServiceProvider::class,
             HttpClientServiceProvider::class,
-            HttpSerializationServiceProvider::class
         ];
     }
 
