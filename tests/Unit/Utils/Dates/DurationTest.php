@@ -34,7 +34,7 @@ class DurationTest extends UnitTestCase
      */
     public function longDuration()
     {
-        $seconds = 10*365*24*3600; // 10 years of seconds
+        $seconds = 10 * 365 * 24 * 3600; // 10 years of seconds
         $duration = Duration::fromSeconds($seconds);
 
         $this->assertSame($duration->asSeconds(), $seconds);
@@ -56,9 +56,9 @@ class DurationTest extends UnitTestCase
      */
     public function instantiateFromDateTime()
     {
-        $duration = Duration::from(new \DateTime('@'.(42*60)));
+        $duration = Duration::from(new \DateTime('@' . (42 * 60)));
 
-        $this->assertSame($duration->asSeconds(), 42*60);
+        $this->assertSame($duration->asSeconds(), 42 * 60);
     }
 
     /**
@@ -66,9 +66,9 @@ class DurationTest extends UnitTestCase
      */
     public function instantiateFromString()
     {
-        $duration = Duration::fromString('@'.(42*60));
+        $duration = Duration::fromString('@' . (42 * 60));
 
-        $this->assertSame($duration->asSeconds(), 42*60);
+        $this->assertSame($duration->asSeconds(), 42 * 60);
     }
 
     /**
@@ -200,5 +200,4 @@ class DurationTest extends UnitTestCase
         $this->assertSame('05:59', $duration->toString());
         $this->assertSame('05 minutes 59 seconds', (string)$duration);
     }
-
 }

@@ -2,6 +2,8 @@
 
 namespace Aedart\Utils\Dates;
 
+use DateInterval;
+use DateTime;
 
 /**
  * Duration class to handle time intervals with microsecond precision.
@@ -9,25 +11,42 @@ namespace Aedart\Utils\Dates;
  * Needed because DateInterval has some not so funny quirks.
  *
  * @author steffen
- *
+ * @package Aedart\Utils\Dates
  */
 class Duration
 {
-
     /**
+     * Micro Timestamp instance
      *
-     * @var MicroTimeStamp $microTimeStamp
+     * @var MicroTimeStamp
      */
     protected $microTimeStamp;
 
+    /**
+     * Constructor that can take a DateTime, a DateInterval, a MicroTimeStamp or integer seconds
+     *
+     * @param  DateTime|DateInterval|MicroTimeStamp|int|null  $time
+     */
+    public function __construct($time = null)
+    {
+        if ($time instanceof DateTime) {
+            $this->microTimeStamp = MicroTimeStamp::fromDateTime($time);
+        } elseif ($time instanceof DateInterval) {
+            $this->microTimeStamp = MicroTimeStamp::fromDateInterval($time);
+        } elseif ($time instanceof MicroTimeStamp) {
+            $this->microTimeStamp = $time;
+        } elseif (is_integer($time)) {
+            $this->microTimeStamp = MicroTimeStamp::fromSeconds($time);
+        }
+    }
 
     /**
      * Create instance from either a DateTime, a DateInterval, a MicroTimeStamp or integer seconds
      *
-     * @param mixed $time
-     * @return self
+     * @param  mixed  $interval
+     * @return static
      */
-    static public function from($interval)
+    public static function from($interval)
     {
         return new static($interval);
     }
@@ -35,10 +54,10 @@ class Duration
     /**
      * Create instance from time string.
      *
-     * @param string $timeStr
-     * @return self
+     * @param  string  $timeStr
+     * @return static
      */
-    static public function fromString(string $timeStr) : self
+    public static function fromString(string $timeStr): self
     {
         return new static(strtotime($timeStr));
     }
@@ -46,10 +65,10 @@ class Duration
     /**
      * Create instance from integer seconds
      *
-     * @param int $seconds
-     * @return self
+     * @param  int  $seconds
+     * @return static
      */
-    static public function fromSeconds(int $seconds) : self
+    public static function fromSeconds(int $seconds): self
     {
         return new static($seconds);
     }
@@ -57,11 +76,11 @@ class Duration
     /**
      * Create instance from integer minutes and optional microseconds.
      *
-     * @param int $minutes
-     * @param int $microSeconds
-     * @return self
+     * @param  int  $minutes
+     * @param  int  $microSeconds
+     * @return static
      */
-    static public function fromMinutes(int $minutes, int $microSeconds=0) : self
+    public static function fromMinutes(int $minutes, int $microSeconds = 0): self
     {
         return new static(new MicroTimeStamp($minutes, $microSeconds));
     }
@@ -69,44 +88,29 @@ class Duration
     /**
      * Create instance from difference of two DateTime objects.
      *
-     * @param \DateTime $start
-     * @param \DateTime $stop
-     * @return self
+     * @param  DateTime  $start
+     * @param  DateTime  $stop
+     * @return static
      */
-    static public function fromDifference(\DateTime $start, \DateTime $stop) : self
+    public static function fromDifference(DateTime $start, DateTime $stop): self
     {
         return new static($start->diff($stop));
     }
 
     /**
-     * Constructor that can take a DateTime, a DateInterval, a MicroTimeStamp or integer seconds
-     *
-     * @param \DateTime|\DateInterval|MicroTimeStamp|int|null $time
+     * Start timer
      */
-    public function __construct($time=null)
-    {
-        if ($time instanceof \DateTime) {
-            $this->microTimeStamp = MicroTimeStamp::fromDateTime($time);
-        }
-        elseif ($time instanceof \DateInterval) {
-            $this->microTimeStamp = MicroTimeStamp::fromDateInterval($time);
-        }
-        elseif ($time instanceof MicroTimeStamp) {
-            $this->microTimeStamp = $time;
-        }
-        elseif (is_integer($time)) {
-            $this->microTimeStamp = MicroTimeStamp::fromSeconds($time);
-        }
-    }
-
     public function start()
     {
-        $this->microTimeStamp = MicroTimeStamp::fromDateTime(new \DateTime());
+        $this->microTimeStamp = MicroTimeStamp::fromDateTime(new DateTime());
     }
 
+    /**
+     * Stop timer
+     */
     public function stop()
     {
-        $stop = MicroTimeStamp::fromDateTime(new \DateTime());
+        $stop = MicroTimeStamp::fromDateTime(new DateTime());
 
         $this->microTimeStamp = MicroTimeStamp::fromSecondsFloat($stop->getAsSecondsFloat() - $this->microTimeStamp->getAsSecondsFloat());
     }
@@ -114,10 +118,10 @@ class Duration
     /**
      * Add another Duration to this.
      *
-     * @param Duration $duration
+     * @param  Duration  $duration
      * @return self
      */
-    public function add(Duration $duration) : self
+    public function add(Duration $duration): self
     {
         $this->microTimeStamp = MicroTimeStamp::fromSecondsFloat($this->microTimeStamp->getAsSecondsFloat() + $duration->asFloatSeconds());
 
@@ -127,10 +131,10 @@ class Duration
     /**
      * Subtract another Duration from this.
      *
-     * @param Duration $duration
+     * @param  Duration  $duration
      * @return self
      */
-    public function subtract(Duration $duration) : self
+    public function subtract(Duration $duration): self
     {
         $this->microTimeStamp = MicroTimeStamp::fromSecondsFloat($this->microTimeStamp->getAsSecondsFloat() - $duration->asFloatSeconds());
 
@@ -142,7 +146,7 @@ class Duration
      *
      * @return int
      */
-    public function asSeconds() : int
+    public function asSeconds(): int
     {
         return $this->microTimeStamp->getAsSeconds();
     }
@@ -152,7 +156,7 @@ class Duration
      *
      * @return float
      */
-    public function asFloatSeconds() : float
+    public function asFloatSeconds(): float
     {
         return $this->microTimeStamp->getAsSecondsFloat();
     }
@@ -162,7 +166,7 @@ class Duration
      *
      * @return int
      */
-    public function asMinutes() : int
+    public function asMinutes(): int
     {
         return intval($this->microTimeStamp->getAsSeconds() / 60);
     }
@@ -170,12 +174,12 @@ class Duration
     /**
      * Same as \DateInterval::format().
      *
-     * @see \DateInterval::format()
+     * @see DateInterval::format()
      *
-     * @param string $format
+     * @param  string  $format
      * @return string
      */
-    public function format(string $format) : string
+    public function format(string $format): string
     {
         return $this->microTimeStamp->getAsDateInterval()->format($format);
     }
@@ -183,12 +187,14 @@ class Duration
     /**
      * Format duration as minutes and seconds
      *
-     * @param bool $long
+     * @param  bool  $long
      * @return string
      */
-    public function toMinutesSeconds(bool $long=false) : string
+    public function toMinutesSeconds(bool $long = false): string
     {
-        $format = ($long) ? '%02d minutes %02u seconds' : '%02d:%02u';
+        $format = $long
+            ? '%02d minutes %02u seconds'
+            : '%02d:%02u';
 
         $seconds = $this->microTimeStamp->getAsSeconds();
         $minutes = intval(($seconds % 3600) / 60);
@@ -200,15 +206,17 @@ class Duration
     /**
      * Format duration as hours and minutes
      *
-     * @param bool $long
+     * @param  bool  $long
      * @return string
      */
-    public function toHoursMinutes(bool $long=false) : string
+    public function toHoursMinutes(bool $long = false): string
     {
-        $format = ($long) ? '%d hours %u minutes' : '%d:%02u';
+        $format = $long
+            ? '%d hours %u minutes'
+            : '%d:%02u';
 
         $seconds = $this->microTimeStamp->getAsSeconds();
-        $hours = intval(($seconds % (24*3600)) / 3600);
+        $hours = intval(($seconds % (24 * 3600)) / 3600);
         $minutes = intval((abs($seconds) % 3600) / 60);
 
         return sprintf($format, $hours, $minutes);
@@ -217,17 +225,19 @@ class Duration
     /**
      * Format duration as days, hours and minutes.
      *
-     * @param bool $long
+     * @param  bool  $long
      * @return string
      */
-    public function toDaysHoursMinutes(bool $long=false) : string
+    public function toDaysHoursMinutes(bool $long = false): string
     {
-        $format = ($long) ? '%d days %d hours %u minutes' : '%d-%02u:%02u';
+        $format = $long
+            ? '%d days %d hours %u minutes'
+            : '%d-%02u:%02u';
 
         $seconds = $this->microTimeStamp->getAsSeconds();
-        $days = intval($seconds / (24*3600));
-        $hours = intval((abs($seconds) % (24*3600)) / 3600);
-        $minutes = intval((abs($seconds) % (60*60)) / 60);
+        $days = intval($seconds / (24 * 3600));
+        $hours = intval((abs($seconds) % (24 * 3600)) / 3600);
+        $minutes = intval((abs($seconds) % (60 * 60)) / 60);
 
         return sprintf($format, $days, $hours, $minutes);
     }
@@ -236,13 +246,13 @@ class Duration
      * Format duration to a string.
      * Shortest text according to duration length.
      *
-     * @param bool $long
+     * @param  bool  $long
      * @return string
      */
-    public function toString(bool $long=false) : string
+    public function toString(bool $long = false): string
     {
         $seconds = $this->microTimeStamp->getAsSeconds();
-        if ($seconds > (24*3600)) {
+        if ($seconds > 24 * 3600) {
             return $this->toDaysHoursMinutes($long);
         } elseif ($seconds > 3600) {
             return $this->toHoursMinutes($long);
@@ -251,7 +261,9 @@ class Duration
     }
 
     /**
-     * @inheritdoc
+     * Returns string representation of this duration
+     *
+     * @return string
      */
     public function __toString()
     {
