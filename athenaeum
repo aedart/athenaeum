@@ -16,7 +16,6 @@ if (file_exists(__DIR__.'/vendor/autoload.php')) {
  * Imports
  ****************************************************************/
 
-use Aedart\Console\CreateAwareOfCommand;
 use Aedart\Support\AwareOf\Console\CreateCommand;
 use Aedart\Support\AwareOf\Console\ScaffoldCommand;
 use Aedart\Utils\Version;
@@ -30,7 +29,6 @@ $app = new Application('Athenaeum', Version::package('aedart/athenaeum'));
 
 // Dto related commands
 $app->addCommands([
-    new CreateAwareOfCommand(),
     new CreateCommand(),
     new ScaffoldCommand()
 ]);
