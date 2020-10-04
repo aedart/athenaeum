@@ -101,10 +101,9 @@ use Psr\Http\Message\UriInterface;
  * @method bool hasOption(string $name) Determine if a given option exists for the next request.
  * @method mixed getOption(string $name) Get a specific option for the next request.
  * @method array getOptions() Get all the options for the next request.
- * @method Builder debug() Dumps the next outgoing request and received response.
- * @method bool mustDebug() Determine whether or not the next outgoing request and received response must be dumped.
- * @method Builder dd() Dumps the next outgoing request and exists the running script.
- * @method bool mustDumpAndDie() Determine whether or not the next outgoing request should be dumped and running script exited.
+ * @method Builder debug(callable|null $callback = null) Dumps the next outgoing request and received response.
+ * @method Builder dd(callable|null $callback = null) Dumps the next outgoing request and exists the running script.
+ * @method callable debugCallback() Returns the last assigned debugging callback. If no debugging method was assigned, method returns a callback that does not do anything.
  * @method self client() Get the http client.
  *
  * @method Builder select(string|string[] $field, string|null $resource = null) Select the fields to be returned.

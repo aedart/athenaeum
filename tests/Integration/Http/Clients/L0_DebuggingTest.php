@@ -95,4 +95,62 @@ class L0_DebuggingTest extends HttpClientsTestCase
         // exited before ever reaching this assert!
         $this->assertGreaterThanOrEqual(1, $ddInvoked, 'Incorrect amount of dd method invoked.');
     }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param  string  $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function canDebugUsingCustomCallback(string $profile)
+    {
+        $middleware = [
+            RequestResponseDebugging::class
+        ];
+
+        $callbackInvoked = false;
+
+        $this
+            ->client($profile)
+            ->withOption('handler', $this->makeRespondsOkMock())
+            ->withMiddleware($middleware)
+            ->where('created_at', '2020')
+            ->debug(function () use (&$callbackInvoked) {
+                $callbackInvoked = true;
+            })
+            ->get('/users');
+
+        $this->assertTrue($callbackInvoked, 'Custom debug not invoked');
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param  string  $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function canDumpAndDieUsingCustomCallback(string $profile)
+    {
+        $middleware = [
+            RequestResponseDebugging::class
+        ];
+
+        $callbackInvoked = false;
+
+        $this
+            ->client($profile)
+            ->withOption('handler', $this->makeRespondsOkMock())
+            ->withMiddleware($middleware)
+            ->where('created_at', '2020')
+            ->dd(function () use (&$callbackInvoked) {
+                $callbackInvoked = true;
+            })
+            ->get('/users');
+
+        $this->assertTrue($callbackInvoked, 'Custom dump & die not invoked');
+    }
 }

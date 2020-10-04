@@ -1045,19 +1045,23 @@ interface Builder extends HttpClientAware,
      * WARNING: Method SHOULD NOT be used in a production
      * environment.
      *
+     * Example:
+     * ```
+     * $client
+     *      ->debug(function($type, $httpMessage) {
+     *          // $type is either 'request' or 'response'
+     *          // ... perform debugging of http message ...
+     *      })
+     *      ->get('/users');
+     * ```
+     *
+     * @param callable|null $callback  [optional] Custom callback for performing Http message debugging.
+     *                                 Callback is given a `string` type, and Http Message instance as arguments.
+     *                                 If no callback is provided, then a default debugging callback is applied.
+     *
      * @return self
      */
-    public function debug(): self;
-
-    /**
-     * Determine whether or not the next outgoing request and
-     * received response must be dumped.
-     *
-     * @see debug
-     *
-     * @return bool
-     */
-    public function mustDebug(): bool;
+    public function debug(?callable $callback = null): self;
 
     /**
      * Dumps the next outgoing request and exists the
@@ -1066,19 +1070,37 @@ interface Builder extends HttpClientAware,
      * WARNING: Method SHOULD NOT be used in a production
      * environment.
      *
+     * Example:
+     * ```
+     * $client
+     *      ->dd(function($type, $httpMessage) {
+     *          // $type is either 'request' or 'response'
+     *          // ... perform debugging of http message ...
+     *
+     *          exit(1); // Manual exit of script!
+     *      })
+     *      ->get('/users');
+     * ```
+     *
+     * @param callable|null $callback  [optional] Custom callback for performing Http message debugging.
+     *                                 Callback is given a `string` type, and Http Message instance as arguments.
+     *                                 If no callback is provided, then a default dump & die callback is applied.
+     *
      * @return self
      */
-    public function dd(): self;
+    public function dd(?callable $callback = null): self;
 
     /**
-     * Determine whether or not the next outgoing request
-     * should be dumped and running script exited.
+     * Returns the last assigned debugging callback.
+     * If no debugging method was assigned, method returns
+     * a callback that does not do anything.
      *
+     * @see debug
      * @see dd
      *
-     * @return bool
+     * @return callable
      */
-    public function mustDumpAndDie(): bool;
+    public function debugCallback(): callable;
 
     /**
      * Alias for getHttpClient

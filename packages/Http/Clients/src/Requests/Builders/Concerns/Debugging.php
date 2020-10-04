@@ -3,6 +3,10 @@
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Http\Messages\Exceptions\SerializationException;
+use Aedart\Http\Messages\Traits\HttpSerializerFactoryTrait;
+use Psr\Http\Message\MessageInterface;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Concerns Debugging
@@ -12,54 +16,129 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
  */
 trait Debugging
 {
-    /**
-     * State whether or not to dump next request / response
-     *
-     * @var bool
-     */
-    protected bool $mustDebug = false;
+    use HttpSerializerFactoryTrait;
 
     /**
-     * State whether or not to dump next  next request / response
-     * and exist script.
+     * Request / Response callback to be applied.
      *
-     * @var bool
+     * @var callable|null
      */
-    protected bool $mustDumpAndDie = false;
+    protected $debugCallback = null;
 
     /**
      * @inheritDoc
      */
-    public function debug(): Builder
+    public function debug(?callable $callback = null): Builder
     {
-        $this->mustDebug = true;
+        $callback = $callback ?? $this->makeDumpCallback();
+
+        return $this->setDebugCallback($callback);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function dd(?callable $callback = null): Builder
+    {
+        $callback = $callback ?? $this->makeDumpAndDieCallback();
+
+        return $this->setDebugCallback($callback);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function debugCallback(): callable
+    {
+        if (!isset($this->debugCallback)) {
+            return $this->makeNullDebugCallback();
+        }
+
+        return $this->debugCallback;
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Set the request / response debug callback to be
+     * applied.
+     *
+     * @param  callable  $callback
+     *
+     * @return Builder
+     */
+    protected function setDebugCallback(callable $callback): Builder
+    {
+        $this->debugCallback = $callback;
 
         return $this;
     }
 
     /**
-     * @inheritDoc
+     * Returns a "null" callback method.
+     *
+     * @return callable
      */
-    public function mustDebug(): bool
+    protected function makeNullDebugCallback(): callable
     {
-        return $this->mustDebug;
+        return function () {
+        };
     }
 
     /**
-     * @inheritDoc
+     * Returns a default "dump" callback
+     *
+     * @return callable
      */
-    public function dd(): Builder
+    protected function makeDumpCallback(): callable
     {
-        $this->mustDumpAndDie = true;
-
-        return $this;
+        return function (string $type, MessageInterface $message) {
+            VarDumper::dump($this->makeContext($type, $message));
+        };
     }
 
     /**
-     * @inheritDoc
+     * Returns a default "dump and die" callback
+     *
+     * @return callable
      */
-    public function mustDumpAndDie(): bool
+    protected function makeDumpAndDieCallback(): callable
     {
-        return $this->mustDumpAndDie;
+        return function (string $type, MessageInterface $message) {
+            // Obtain reference to var dumper handler.
+            $originalHandler = VarDumper::setHandler(null);
+            VarDumper::setHandler($originalHandler);
+
+            // Dump...
+            VarDumper::dump($this->makeContext($type, $message));
+
+            // Exist script, if original handler is null. Otherwise
+            // we have to assume that something else is going on, e.g.
+            // a running test or other special kind of debugging.
+            if (null === $originalHandler) {
+                exit(1);
+            }
+        };
+    }
+
+    /**
+     * Creates a context array for given Http Message
+     *
+     * @param string $type E.g. request or response
+     * @param  MessageInterface  $message
+     * @return array
+     *
+     * @throws SerializationException
+     */
+    protected function makeContext(string $type, MessageInterface $message): array
+    {
+        $serialized = $this
+            ->getHttpSerializerFactory()
+            ->make($message)
+            ->toArray();
+
+        return [ $type => $serialized ];
     }
 }
