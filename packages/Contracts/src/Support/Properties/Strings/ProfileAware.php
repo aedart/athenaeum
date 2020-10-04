@@ -15,7 +15,7 @@ interface ProfileAware
     /**
      * Set profile
      *
-     * @param string|null $profile The profile or someone or something
+     * @param string|null $profile The profile of someone or something
      *
      * @return self
      */

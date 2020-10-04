@@ -1999,7 +1999,7 @@ ___
 ## Profile
 
 ___
-`string` The profile or someone or something
+`string` The profile of someone or something
 
 *Interface*: `Aedart\Contracts\Support\Properties\Strings\ProfileAware`
 

@@ -1183,7 +1183,7 @@ return [
         ),
         stringProperty(
             'profile',
-            'The profile or someone or something',
+            'The profile of someone or something',
             'profile'
         ),
         stringProperty(
