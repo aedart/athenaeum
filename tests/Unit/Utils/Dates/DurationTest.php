@@ -4,6 +4,7 @@ namespace Aedart\Tests\Unit\Utils\Dates;
 
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Dates\Duration;
+use DateTime;
 
 /**
  * DurationTest
@@ -56,7 +57,7 @@ class DurationTest extends UnitTestCase
      */
     public function instantiateFromDateTime()
     {
-        $duration = Duration::from(new \DateTime('@' . (42 * 60)));
+        $duration = Duration::from(new DateTime('@' . (42 * 60)));
 
         $this->assertSame($duration->asSeconds(), 42 * 60);
     }
@@ -77,8 +78,8 @@ class DurationTest extends UnitTestCase
     public function instantiateFromDifference()
     {
         $now = '2020-09-23';
-        $then = new \DateTime("$now - 5 hours - 6 minutes");
-        $when = new \DateTime("$now + 42 seconds + 23456 microseconds");
+        $then = new DateTime("$now - 5 hours - 6 minutes");
+        $when = new DateTime("$now + 42 seconds + 23456 microseconds");
 
         $duration = Duration::fromDifference($then, $when);
 
@@ -92,8 +93,8 @@ class DurationTest extends UnitTestCase
     public function instantiateFromInvertedDifference()
     {
         $now = '2020-09-23';
-        $then = new \DateTime("$now - 5 hours - 6 minutes");
-        $when = new \DateTime("$now + 42 seconds + 23456 microseconds");
+        $then = new DateTime("$now - 5 hours - 6 minutes");
+        $when = new DateTime("$now + 42 seconds + 23456 microseconds");
 
         $duration = Duration::fromDifference($when, $then);
 
