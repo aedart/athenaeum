@@ -117,6 +117,11 @@ $filters = (new ListResolver())->make($list);
 A new package for that offers PSR-7 Http Messages utilities.
 See [documentation](./http/messages) for additional information.
 
+### Duration
+
+Added `Duration` utility; a small component able to help with dealing with relative date and time. 
+See [utilities](./utils/duration) for more information.
+
 ### Upgraded Dependencies
 
 Upgraded several dependencies, here amongst Laravel which is now running on `v8.x`.
