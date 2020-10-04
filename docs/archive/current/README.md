@@ -52,6 +52,16 @@ $response = $client
         ->post('/users', [ 'name' => 'John Snow' ]);
 ```
 
+### Debugging Request and Response
+
+[Debugging utilities](./http/clients/methods/debugging) have been added for a quick way to dump outgoing request and incoming response.
+
+```php
+$response = $client
+        ->debug()
+        ->get('/users');
+```
+
 ### Default otherwise callback
 
 The [Circuit Breaker](./circuits) now supports setting a default "otherwise" callback, via the `otherwise()` method.

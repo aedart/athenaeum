@@ -49,6 +49,13 @@ var_dump($containsUserId === $expectations[0]->getExpectation()); // true
 
 Please review `\Aedart\Contracts\Http\Clients\Responses\ResponseExpectation` for more details.
 
+### Http Client Changes
+
+Several changes have been made to the Http `Client` and it's request `Builder`.
+These changes _should not_ affect you directly.
+However, if you have custom implementation of the provided interfaces, then you may have to refactor parts of your code.
+Review the source code and [changes made](https://github.com/aedart/athenaeum/compare) for additional information.
+
 ### Removed Deprecated Components
 
 The following deprecated components have been removed:
