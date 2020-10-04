@@ -5,7 +5,6 @@ namespace Aedart\Http\Clients\Requests\Builders;
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Builders\Guzzle\CookieJarAware;
-use Aedart\Contracts\Http\Messages\Serializers\HttpSerializerFactoryAware;
 use Aedart\Http\Clients\Requests\AdaptedRequest;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers\CaptureHandler;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\Pipes\AppliesBaseUrl;
@@ -38,9 +37,7 @@ use Psr\Http\Message\ResponseInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders
  */
-class GuzzleRequestBuilder extends BaseBuilder implements
-    CookieJarAware,
-    HttpSerializerFactoryAware
+class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
 {
     use CookieJarTrait {
         setCookieJar as traitSetCookieJar;

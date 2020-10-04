@@ -6,7 +6,9 @@ use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Middleware;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
+use Aedart\Contracts\Http\Messages\Serializers\HttpSerializerFactoryAware;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
+use Aedart\Contracts\Support\Helpers\Logging\LogAware;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use GuzzleHttp\RequestOptions;
@@ -23,7 +25,9 @@ use Psr\Http\Message\ResponseInterface;
  */
 abstract class BaseBuilder implements
     Builder,
-    ContainerAware
+    ContainerAware,
+    HttpSerializerFactoryAware,
+    LogAware
 {
     use HttpClientTrait;
     use ContainerTrait;
@@ -43,6 +47,7 @@ abstract class BaseBuilder implements
     use Concerns\ResponseExpectations;
     use Concerns\Middleware;
     use Concerns\Debugging;
+    use Concerns\Logging;
     use ForwardsCalls;
 
     /**

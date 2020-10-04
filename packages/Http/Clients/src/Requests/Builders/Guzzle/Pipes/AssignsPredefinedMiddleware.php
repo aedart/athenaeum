@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Clients\Middleware;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Http\Clients\Middleware\AppliesResponseExpectations;
 use Aedart\Http\Clients\Middleware\RequestResponseDebugging;
+use Aedart\Http\Clients\Middleware\RequestResponseLogging;
 use Aedart\Http\Clients\Requests\Builders\ProcessedOptions;
 
 /**
@@ -24,6 +25,7 @@ class AssignsPredefinedMiddleware
      */
     protected array $middleware = [
         AppliesResponseExpectations::class,
+        RequestResponseLogging::class,
         RequestResponseDebugging::class,
     ];
 

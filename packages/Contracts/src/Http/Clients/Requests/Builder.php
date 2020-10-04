@@ -1040,6 +1040,34 @@ interface Builder extends HttpClientAware,
     public function getOptions(): array;
 
     /**
+     * Log the next outgoing request and received response
+     *
+     * Note: This method is intended for "selective" logging
+     * of requests / responses. E.g. for debugging.
+     * If you require more logging control, then consider
+     * using custom {@see Middleware} instead of this method.
+     *
+     * @param callable|null $callback  [optional] Custom callback for logging Http message.
+     *                                 Callback is given a `string` type, the Http Message instance as arguments, and
+     *                                 instance of the request builder.
+     *                                 If no callback is provided, then a default logging callback is applied.
+     *
+     * @return self
+     */
+    public function log(?callable $callback = null): self;
+
+    /**
+     * Returns the last assigned logging callback.
+     * If no method was assigned, method returns
+     * a callback that does not do anything.
+     *
+     * @see log
+     *
+     * @return callable
+     */
+    public function logCallback(): callable;
+
+    /**
      * Dumps the next outgoing request and received response
      *
      * WARNING: Method SHOULD NOT be used in a production

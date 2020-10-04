@@ -104,6 +104,8 @@ use Psr\Http\Message\UriInterface;
  * @method Builder debug(callable|null $callback = null) Dumps the next outgoing request and received response.
  * @method Builder dd(callable|null $callback = null) Dumps the next outgoing request and exists the running script.
  * @method callable debugCallback() Returns the last assigned debugging callback. If no debugging method was assigned, method returns a callback that does not do anything.
+ * @method Builder log(callable|null $callback = null)  Log the next outgoing request and received response.
+ * @method callable logCallback() Returns the last assigned logging callback. If no method was assigned, method returns a callback that does not do anything.
  * @method self client() Get the http client.
  *
  * @method Builder select(string|string[] $field, string|null $resource = null) Select the fields to be returned.
