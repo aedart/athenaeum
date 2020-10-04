@@ -22,3 +22,6 @@ yarn.lock
 .production
 .locale
 .development
+/.buildpath
+/.project
+/.settings
