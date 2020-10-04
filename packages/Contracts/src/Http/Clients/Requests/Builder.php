@@ -9,7 +9,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\InvalidCookieFormatException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
+use Aedart\Contracts\Http\Clients\Middleware;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
+use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Http\Cookies\Cookie;
 use DateTimeInterface;
@@ -859,7 +861,7 @@ interface Builder extends HttpClientAware,
      *
      * Method MUST build and add expectation via the {@see withExpectation} method.
      *
-     * @param int|int[]|callback $status Expected http status code(s). If a callback is provided,
+     * @param int|int[]|callable|ResponseExpectation $status Expected http status code(s). If a callback is provided,
      *                                  then it MUST be added as an expectation via {@see withExpectation}.
      *                                  Second argument is ignored, if callback is given.
      * @param callable|null $otherwise [optional] Callback to be invoked if received http status code
@@ -867,7 +869,7 @@ interface Builder extends HttpClientAware,
      *                              {@see ResponseInterface} and {@see RequestInterface} as argument, in the
      *                              stated order. If no callback is given, a {@see ExpectationNotMetException}
      *                              will be thrown, if received status code does not match.
-     *                              This argument is ignored, if first argument is a callback.
+     *                              This argument is IGNORED, if first argument is a callback or
      *
      * @return self
      *
@@ -887,20 +889,20 @@ interface Builder extends HttpClientAware,
      * Given callback will be invoked after a response has been received,
      * in the {@see request} method.
      *
-     * @param callable $expectation Expectation callback. When invoked, it is given a
+     * @param callable|ResponseExpectation $expectation Expectation callback. When invoked, it is given a
      *                  {@see Status}, {@see ResponseInterface} and {@see RequestInterface} as
      *                  argument, in the stated order.
      *
      * @return self
      */
-    public function withExpectation(callable $expectation): self;
+    public function withExpectation($expectation): self;
 
     /**
      * Add one or more expectations for the next request.
      *
      * MUST add given list of expectations via the {@see withExpectation} method.
      *
-     * @param callable[] $expectations [optional]
+     * @param callable[]|ResponseExpectation[] $expectations [optional]
      *
      * @return self
      */
@@ -922,9 +924,62 @@ interface Builder extends HttpClientAware,
      *
      * @see withExpectation
      *
-     * @return callable[]
+     * @return ResponseExpectation[]
      */
     public function getExpectations(): array;
+
+    /**
+     * Add middleware to process next outgoing request and it's
+     * incoming response
+     *
+     * @param string|Middleware|string[]|Middleware[] $middleware Class path, Middleware instance or list hereof
+     *
+     * @return self
+     */
+    public function withMiddleware($middleware): self;
+
+    /**
+     * Add middleware at the beginning of the middleware list
+     *
+     * @param string|Middleware $middleware Class path or Middleware instance
+     *
+     * @return self
+     */
+    public function prependMiddleware($middleware): self;
+
+    /**
+     * Append middleware to the end of the middleware list
+     *
+     * @param string|Middleware $middleware Class path or Middleware instance
+     *
+     * @return self
+     */
+    public function pushMiddleware($middleware): self;
+
+    /**
+     * Determine whether or not middleware has been assign
+     * for the next request
+     *
+     * @see withMiddleware
+     *
+     * @return bool
+     */
+    public function hasMiddleware(): bool;
+
+    /**
+     * Returns list of middleware that must process next outgoing
+     * request and it's incoming response
+     *
+     * @return Middleware[]
+     */
+    public function getMiddleware(): array;
+
+    /**
+     * Removes assigned middleware for the next request
+     *
+     * @return self
+     */
+    public function withoutMiddleware(): self;
 
     /**
      * Set a specific option for the next request
@@ -983,6 +1038,99 @@ interface Builder extends HttpClientAware,
      * @return array
      */
     public function getOptions(): array;
+
+    /**
+     * Log the next outgoing request and received response
+     *
+     * Note: This method is intended for "selective" logging
+     * of requests / responses. E.g. for debugging.
+     * If you require more logging control, then consider
+     * using custom {@see Middleware} instead of this method.
+     *
+     * @param callable|null $callback  [optional] Custom callback for logging Http message.
+     *                                 Callback is given a `string` type, the Http Message instance as arguments, and
+     *                                 instance of the request builder.
+     *                                 If no callback is provided, then a default logging callback is applied.
+     *
+     * @return self
+     */
+    public function log(?callable $callback = null): self;
+
+    /**
+     * Returns the last assigned logging callback.
+     * If no method was assigned, method returns
+     * a callback that does not do anything.
+     *
+     * @see log
+     *
+     * @return callable
+     */
+    public function logCallback(): callable;
+
+    /**
+     * Dumps the next outgoing request and received response
+     *
+     * WARNING: Method SHOULD NOT be used in a production
+     * environment.
+     *
+     * Example:
+     * ```
+     * $client
+     *      ->debug(function($type, $httpMessage, $requestBuilder) {
+     *          // $type is either 'request' or 'response'
+     *          // ... perform debugging of http message ...
+     *      })
+     *      ->get('/users');
+     * ```
+     *
+     * @param callable|null $callback  [optional] Custom callback for performing Http message debugging.
+     *                                 Callback is given a `string` type, the Http Message instance as arguments, and
+     *                                 instance of the request builder.
+     *                                 If no callback is provided, then a default debugging callback is applied.
+     *
+     * @return self
+     */
+    public function debug(?callable $callback = null): self;
+
+    /**
+     * Dumps the next outgoing request and exists the
+     * running script.
+     *
+     * WARNING: Method SHOULD NOT be used in a production
+     * environment.
+     *
+     * Example:
+     * ```
+     * $client
+     *      ->dd(function($type, $httpMessage, $requestBuilder) {
+     *          // $type is either 'request' or 'response'
+     *          // ... perform debugging of http message ...
+     *
+     *          exit(1); // Manual exit of script!
+     *      })
+     *      ->get('/users');
+     * ```
+     *
+     * @param callable|null $callback  [optional] Custom callback for performing Http message debugging.
+     *                                 Callback is given a `string` type, the Http Message instance as arguments, and
+     *                                 instance of the request builder.
+     *                                 If no callback is provided, then a default debugging callback is applied.
+     *
+     * @return self
+     */
+    public function dd(?callable $callback = null): self;
+
+    /**
+     * Returns the last assigned debugging callback.
+     * If no debugging method was assigned, method returns
+     * a callback that does not do anything.
+     *
+     * @see debug
+     * @see dd
+     *
+     * @return callable
+     */
+    public function debugCallback(): callable;
 
     /**
      * Alias for getHttpClient

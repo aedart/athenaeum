@@ -11,11 +11,15 @@ Some of the key packages that are offered by Athenaeum, are the following:
 
 ### [Config](archive/current/config)
 
-_A configuration loader, supporting *.ini, *.json, *.php and *.yml._
+_A configuration loader, supporting *.ini, *.json, *.php, *.yml and *.toml._
 
 ### [Core](archive/current/core)
 
 _A custom Laravel Application implementation, intended to be integrated into legacy applications._
+
+### [Circuits](archive/current/circuits)
+
+_A Circuit Breaker to encapsulate failure prevention logic._
 
 ### [Dto](archive/current/dto)
 

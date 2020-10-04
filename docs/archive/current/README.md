@@ -4,54 +4,127 @@ description: Athenaeum Release Notes
 
 # Release Notes
 
-## `v4.x` Highlights
+## `v5.x` Highlights
 
-The following highlights some of the new features, available from this version.
+These are the new features and additions of Athenaeum `v5.x`.
 
-### Mono Repository
+[[toc]]
 
-Athenaeum has now been converted into a true [mono repository](https://en.wikipedia.org/wiki/Monorepo).
-This means that you are now able to obtain your desired components, via individual packages.
-This has been made possible using [Symplify's Monorepo Builder](https://github.com/symplify/monorepo-builder).
-You can now switch your `aedart/athenaeum` dependency to a more specific package, e.g. `aedart/athenaeum-dto`.
+### Http Client Middleware
 
-### Core Application
+You can now assign middleware to process your outgoing requests and incoming responses. 
+See [Http Client Middleware](./http/clients/methods/middleware) for more examples.
 
-A new package that offers a [custom Laravel Application](core).
-It is intended to be used within legacy applications, and act as a bridge that allows you to use some of Laravel's services and components.
+```php
+use Acme\Middleware\MeasuresResponseTime;
 
-### Service Registrar
+$response = $client
+        ->withMiddleware(new MeasuresResponseTime())
+        ->get('/weather');
+```
 
-A component that allows you to [register and boot](service) Laravel Service Providers.
+### Extract Response Expectations
 
-### Console
+A `ResponseExpectations` class has been added, which you can use as a base class to extract complex expectations into separate classes.
+See [documentation](./http/clients/methods/expectations) for additional information.
 
-A Service Provider that [registers Console Commands and Schedules](console) via configuration files.
+```php
+use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
+use Aedart\Contracts\Http\Clients\Responses\Status;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
-### Events
+class UserWasCreated extends ResponseExpectations
+{
+    public function expectation(
+        Status $status,
+        ResponseInterface $response,
+        RequestInterface $request
+    ): void {
+        // ...validation not shown here...
+    }
+}
 
-A Service Provider that [registers Event Listeners and Subscribers](events) via configuration files. 
+// --------------------------------------- /
+// Use expectation when you send your request
+$response = $client
+        ->expect(new UserWasCreated())
+        ->post('/users', [ 'name' => 'John Snow' ]);
+```
 
-### Http Clients
+### Debugging Request and Response
 
-The [Http Clients](http/clients) package has been redesigned, adding several new features to allow a more fluent experience.
-See the [migration guide](upgrade-guide.md) for details. 
+[Debugging](./http/clients/methods/debugging) and [logging](./http/clients/methods/logging) utilities have been added for a quick way to dump outgoing request and incoming response.
 
-### Http Cookies
+```php
+// Dump request / response.
+$response = $client
+        ->debug()
+        ->get('/users');
 
-New package that contains two simple DTOs; `Cookie` and `SetCookie`.
+// --------------------------------------------
+
+// Logs the request / response.
+$response = $client
+        ->log()
+        ->get('/users');
+```
+
+### Default otherwise callback
+
+The [Circuit Breaker](./circuits) now supports setting a default "otherwise" callback, via the `otherwise()` method.
+When no "otherwise" callback is provided to the `attempt()` method, the default "otherwise" callback will be used.
+
+```php
+use Aedart\Contracts\Circuits\CircuitBreaker;
+
+$result = $circuitBreaker
+    ->otherwise(function(CircuitBreaker $cb) {
+        // ...not shown...
+    })
+    ->attempt(function(CircuitBreaker $cb) {
+        // ...callback not shown...
+    });
+```
+
+### Support for TOML configuration files
+
+Added configuration file parser for [TOML](https://en.wikipedia.org/wiki/TOML) format, for the [configuration loader](./config).
+
+### Resolve list of dependencies
+
+Using the new `ListResolver`, you can resolve a list of dependencies, including custom arguments.
+(_Component is available in the [Service Container package](./container/list-resolver.md)_).
+
+```php
+use Aedart\Container\ListResolver;
+
+$list = [
+    \Acme\Filters\SanitizeInput::class,
+    \Acme\Filters\ConvertEmptyToNull::class,
+    \Acme\Filters\ApplySorting::class => [
+        'sortBy' => 'age',
+        'direction' => 'desc'
+    ]
+];
+
+// Resolve list of dependencies
+$filters = (new ListResolver())->make($list);
+```
+
+### Http Messages Package
+
+A new package for that offers PSR-7 Http Messages utilities.
+See [documentation](./http/messages) for additional information.
+
+### Duration
+
+Added `Duration` utility; a small component able to help with dealing with relative date and time. 
+See [utilities](./utils/duration) for more information.
 
 ### Upgraded Dependencies
 
-All dependencies have been upgraded to use the latest version.
-Athenaeum packages now make use of Laravel `v7.x`, Symfony `v5.x`, Codeception `v4.x`, ...etc.
-
-### Improved Documentation
-
-The documentation has been greatly improved.
-Each package has it's own set of chapters, including install and usage guides.
-Additionally, previous documentation has been restored and can be found in the [Archive](../README.md) section.
-
+Upgraded several dependencies, here amongst Laravel which is now running on `v8.x`.
 
 ## Changelog
 

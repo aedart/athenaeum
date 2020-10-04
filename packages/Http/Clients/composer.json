@@ -23,14 +23,16 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "guzzlehttp/guzzle": "^6.5|^7.0",
+        "guzzlehttp/guzzle": "^7.1",
         "psr/http-message": "^1.0",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
-        "illuminate/pipeline": "^7.22.4",
+        "illuminate/pipeline": "^8.6",
         "shrikeh/teapot": "^2.3",
+        "aedart/athenaeum-container": "^4.3",
         "aedart/athenaeum-contracts": "^4.3",
         "aedart/athenaeum-http-cookies": "^4.3",
+        "aedart/athenaeum-http-messages": "^4.3",
         "aedart/athenaeum-support": "^4.3"
     },
     "autoload": {

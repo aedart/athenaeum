@@ -85,7 +85,7 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     {
         return [
             ConfigLoaderServiceProvider::class,
-            HttpClientServiceProvider::class
+            HttpClientServiceProvider::class,
         ];
     }
 

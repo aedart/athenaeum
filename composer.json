@@ -4,27 +4,27 @@
     "license": "BSD-3-Clause",
     "require": {
         "php": ">=7.4.0",
-        "dragonmantank/cron-expression": "^2.3",
+        "dragonmantank/cron-expression": "^3.0",
         "fzaninotto/faker": "1.9.*",
-        "guzzlehttp/guzzle": "^6.5|^7.0",
-        "illuminate/cache": "^7.22.4",
-        "illuminate/config": "^7.22.4",
-        "illuminate/console": "^7.22.4",
-        "illuminate/container": "^7.22.4",
-        "illuminate/contracts": "^7.22.4",
-        "illuminate/events": "^7.22.4",
-        "illuminate/filesystem": "^7.22.4",
-        "illuminate/pipeline": "^7.22.4",
-        "illuminate/support": "^7.22.4",
+        "guzzlehttp/guzzle": "^7.1",
+        "illuminate/cache": "^8.6",
+        "illuminate/config": "^8.6",
+        "illuminate/console": "^8.6",
+        "illuminate/container": "^8.6",
+        "illuminate/contracts": "^8.6",
+        "illuminate/events": "^8.6",
+        "illuminate/filesystem": "^8.6",
+        "illuminate/pipeline": "^8.6",
+        "illuminate/support": "^8.6",
         "jean85/pretty-package-versions": "~1.5",
-        "mockery/mockery": "1.3.*",
+        "mockery/mockery": "1.4.*",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
         "psr/http-message": "^1.0",
         "psr/log": "^1.1",
         "shrikeh/teapot": "^2.3",
         "symfony/console": "^5.1",
-        "vlucas/phpdotenv": "^4.1"
+        "vlucas/phpdotenv": "^5.1"
     },
     "require-dev": {
         "ext-curl": "*",
@@ -32,12 +32,13 @@
         "bamarni/composer-bin-plugin": "^1.4",
         "codeception/codeception": "4.1.*",
         "codeception/module-asserts": "^1.3",
-        "orchestra/testbench": "^5.3",
-        "predis/predis": "~1.1",
+        "orchestra/testbench": "^6.0",
+        "predis/predis": "^1.1.4",
         "roave/security-advisories": "dev-master",
         "symfony/var-dumper": "^5.1",
         "symfony/yaml": "^5.1",
-        "twig/twig": "^2.13"
+        "twig/twig": "^3.0.5",
+        "yosymfony/toml": "^1.0.4"
     },
     "autoload": {
         "files": [
@@ -56,6 +57,7 @@
             "Aedart\\Events\\": "packages/Events/src",
             "Aedart\\Http\\Clients\\": "packages/Http/Clients/src",
             "Aedart\\Http\\Cookies\\": "packages/Http/Cookies/src",
+            "Aedart\\Http\\Messages\\": "packages/Http/Messages/src",
             "Aedart\\Properties\\": "packages/Properties/src",
             "Aedart\\Service\\": "packages/Service/src",
             "Aedart\\Support\\": "packages/Support/src",
@@ -79,6 +81,7 @@
         "aedart/athenaeum-events": "self.version",
         "aedart/athenaeum-http-clients": "self.version",
         "aedart/athenaeum-http-cookies": "self.version",
+        "aedart/athenaeum-http-messages": "self.version",
         "aedart/athenaeum-properties": "self.version",
         "aedart/athenaeum-service": "self.version",
         "aedart/athenaeum-support": "self.version",
@@ -100,7 +103,7 @@
             "@composer bin all update --ansi"
         ],
         "check": [
-            "vendor/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary ./packages ./src ./tests"
+            "vendor/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary ./packages ./tests"
         ],
         "cs": "vendor/bin/ecs check --ansi",
         "cs-fix": "vendor/bin/ecs check --fix --ansi"
@@ -110,7 +113,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.3.x-dev"
+            "dev-master": "5.0.x-dev"
         }
     },
     "minimum-stability": "dev",

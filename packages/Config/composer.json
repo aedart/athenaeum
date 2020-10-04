@@ -8,7 +8,8 @@
         "ini",
         "Json",
         "PHP Array",
-        "yaml"
+        "yaml",
+        "toml"
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "support": {
@@ -25,14 +26,15 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "illuminate/config": "^7.22.4",
-        "illuminate/filesystem": "^7.22.4",
+        "illuminate/config": "^8.6",
+        "illuminate/filesystem": "^8.6",
         "aedart/athenaeum-contracts": "^4.3",
         "aedart/athenaeum-support": "^4.3",
         "aedart/athenaeum-utils": "^4.3"
     },
     "require-dev": {
-        "symfony/yaml": "^5.1"
+        "symfony/yaml": "^5.1",
+        "yosymfony/toml": "^1.0.4"
     },
     "autoload": {
         "psr-4": {

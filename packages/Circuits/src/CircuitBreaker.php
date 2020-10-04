@@ -83,6 +83,13 @@ class CircuitBreaker implements
     protected int $gracePeriod = 10;
 
     /**
+     * The default otherwise callback
+     *
+     * @var callable|null
+     */
+    protected $otherwise = null;
+
+    /**
      * CircuitBreaker constructor.
      *
      * @param string $service
@@ -170,7 +177,7 @@ class CircuitBreaker implements
      */
     public function attempt(callable $callback, ?callable $otherwise = null)
     {
-        $otherwise = $otherwise ?? $this->defaultOtherwiseCallback();
+        $otherwise = $otherwise ?? $this->getOtherwise();
         $state = $this->state();
         $available = $this->isStateAvailable($state);
 
@@ -188,6 +195,24 @@ class CircuitBreaker implements
 
         // Finally, perform the attempt (state is closed or half-open).
         return $this->performAttempt($callback, $otherwise);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function otherwise(?callable $otherwise = null): CircuitBreakerInterface
+    {
+        $this->otherwise = $otherwise;
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getOtherwise(): callable
+    {
+        return $this->otherwise ?? $this->defaultOtherwiseCallback();
     }
 
     /**

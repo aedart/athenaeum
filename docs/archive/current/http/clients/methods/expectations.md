@@ -12,6 +12,18 @@ In this section, the `expect()` method is introduced.
 
 ## Status Code Expectations
 
+### PSR-18
+
+::: warning Caution
+When applying response expectations, the [PST-18: HTTP Client's](https://www.php-fig.org/psr/psr-18/#error-handling) is no longer upheld.
+The standard recommendation states the following:
+
+"_[...] A Client MUST NOT treat a well-formed HTTP request or HTTP response as an error condition. For example, response status codes in the 400 and 500 range MUST NOT cause an exception and MUST be returned to the Calling Library as normal. [...]_"
+
+This client offers you way to react to status codes, e.g. by throwing exceptions. This mechanism is entirely optional.
+In other words, as a developer you have to decide whether to make use of this mechanism, or not.
+:::
+
 ### Expect Http Status Code
 
 In order to assert that a received response has a specific Http Status Code, e.g. [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200), state your expected/desired status code, as the first argument for the `expect()` method.
@@ -156,7 +168,52 @@ $response = $client
         ->get('/users');
 ```
 
+### Custom Response Expectation Classes
+
+You may also extract your expectation logic into a separate class, if you wish so.
+Simply extend the `ResponseExpectation` class and implement the `expectation()` method.
+The benefit of doing so, is that you can encapsulate more complex response validation logic.
+For instance, you can use Laravel's [Validator](https://laravel.com/docs/8.x/validation#manually-creating-validators) to perform validation of a response's payload.  
+
+```php
+use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
+use Aedart\Contracts\Http\Clients\Responses\Status;
+use Aedart\Utils\Json;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Teapot\StatusCode;
+use Acme\Exceptions\UserWasNotCreatedException;
+use Illuminate\Support\Facades\Validator;
+
+class UserWasCreated extends ResponseExpectations
+{
+    public function expectation(
+        Status $status,
+        ResponseInterface $response,
+        RequestInterface $request
+    ): void {
+        $payload = Json::decode($response->getBody()->getContents(), true);
+        $validator = Validator::make($payload, [
+            'uuid' => 'required|uuid',
+            'name' => 'required|string'
+        ]);    
+
+        if ($validator->fails()) {
+            throw new UserWasNotCreatedException();
+        }
+    }
+}
+
+// --------------------------------------- /
+// Use expectation when you send your request
+$response = $client
+        ->expect(new UserWasCreated())
+        ->post('/users', [ 'name' => 'John Snow' ]);
+```
+
 ### Response Manipulation
 
 The `expect()` method is not design nor intended to manipulate the received response.
 This falls outside the scope of the given method. It's only purpose is to allow status code and response validation.
+
+If you require a way to modify the incoming response or perhaps the outgoing request, then consider using [custom middleware](./middleware). 

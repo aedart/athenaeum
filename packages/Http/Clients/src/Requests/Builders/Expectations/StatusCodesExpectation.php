@@ -7,7 +7,6 @@ use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Http\Clients\Exceptions\ExpectationNotMet;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Throwable;
 
 /**
  * Http Status Codes Expectation
@@ -15,7 +14,7 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders\Expectations
  */
-class StatusCodesExpectation
+class StatusCodesExpectation extends ResponseExpectation
 {
     /**
      * The expected http status codes
@@ -40,6 +39,8 @@ class StatusCodesExpectation
      */
     public function __construct($expectedStatusCodes, ?callable $otherwise = null)
     {
+        parent::__construct();
+
         $this
             ->setExpectedStatusCodes($expectedStatusCodes)
             ->setOtherwise($otherwise);
@@ -82,6 +83,8 @@ class StatusCodesExpectation
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Matches the expected http status codes against received response's http status code.
      *
      * Method aborts - does nothing - if there is a match. If not there is no match, then
@@ -89,14 +92,8 @@ class StatusCodesExpectation
      *
      * If no callback is provided, then this method will build a default callback that
      * throws {@see ExpectationNotMetException}.
-     *
-     * @param Status $status
-     * @param ResponseInterface $response
-     * @param RequestInterface $request
-     *
-     * @throws Throwable
      */
-    public function expect(Status $status, ResponseInterface $response, RequestInterface $request)
+    public function expectation(Status $status, ResponseInterface $response, RequestInterface $request): void
     {
         // Abort if the http status code matches expected
         if (in_array($status->code(), $this->expectedStatusCodes)) {
@@ -110,6 +107,32 @@ class StatusCodesExpectation
         // Invoke the callback, with the provided arguments.
         // This callback is expected to throw an exception, but not strictly required...
         $callback($status, $response, $request);
+    }
+
+    /**
+     * Default method to be invoked, if no {@see otherwise} callback has been provided
+     *
+     * @param  Status  $status
+     * @param  ResponseInterface  $response
+     * @param  RequestInterface  $request
+     *
+     * @throws ExpectationNotMetException
+     */
+    public function defaultOtherwise(Status $status, ResponseInterface $response, RequestInterface $request): void
+    {
+        // Make a default "reason" message
+        $expectedStatusCodes = implode('or ', $this->expectedStatusCodes);
+        $receivedStatusCode = $status->code();
+
+        $reason = "Received http status $receivedStatusCode, but expected: $expectedStatusCodes";
+
+        // Create default exception and throw it
+        throw ExpectationNotMet::make(
+            $reason,
+            $status,
+            $response,
+            $request
+        );
     }
 
     /*****************************************************************
@@ -127,30 +150,6 @@ class StatusCodesExpectation
      */
     protected function resolveOtherwiseCallback(): callable
     {
-        return $this->otherwise ?? $this->buildDefaultOtherwiseCallback();
-    }
-
-    /**
-     * Builds a default otherwise callback
-     *
-     * @return callable
-     */
-    protected function buildDefaultOtherwiseCallback(): callable
-    {
-        return function (Status $status, ResponseInterface $response, RequestInterface $request) {
-            // Make a default "reason" message
-            $expectedStatusCodes = implode('or ', $this->expectedStatusCodes);
-            $receivedStatusCode = $status->code();
-
-            $reason = "Received http status $receivedStatusCode, but expected: $expectedStatusCodes";
-
-            // Create default exception and throw it
-            throw ExpectationNotMet::make(
-                $reason,
-                $status,
-                $response,
-                $request
-            );
-        };
+        return $this->otherwise ?? [$this, 'defaultOtherwise'];
     }
 }
