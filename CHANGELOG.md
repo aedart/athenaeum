@@ -2,18 +2,11 @@
 
 ## v5.x
 
-### Unreleased
-
-#### Added
-
-* N/A
-
-#### Changed
-
-* N/A
+### [v5.0.1](https://github.com/aedart/athenaeum/compare/5.0.0...5.0.1)
 
 #### Fixed 
 
+* Http Message stream not rewound after serialization, when using `debug()`, `dd()` or `log()`. See #19 for details. 
 * Removed deprecated `CreateAwareOfCommand` reference from `athenaeum` console application. 
 * Fixed a few typos.
 
