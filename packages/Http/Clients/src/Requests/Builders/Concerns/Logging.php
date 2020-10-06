@@ -85,8 +85,6 @@ trait Logging
     protected function makeLogCallback(): callable
     {
         return function (string $type, MessageInterface $message, Builder $builder) {
-//            dd('YUP', get_class($this->getLog()));
-
             $this->getLog()->info(
                 Str::ucfirst($type),
                 $this->makeDebugContext($type, $message)
