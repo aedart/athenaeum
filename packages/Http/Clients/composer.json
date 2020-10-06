@@ -40,6 +40,10 @@
             "Aedart\\Http\\Clients\\": "src"
         }
     },
+    "suggest": {
+        "symfony/var-dumper": "Required for using debugging utilities",
+        "illuminate/log": "Required for logging requests / response"
+    },
     "config": {
         "sort-packages": true
     },
