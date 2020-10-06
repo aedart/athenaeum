@@ -6,7 +6,7 @@
 
 #### Fixed 
 
-* Http Message stream not rewound after serialization, when using `debug()`, `dd()` or `log()`. See #19 for details. 
+* Http Message stream not rewound after serialization, when using `debug()`, `dd()` or `log()`. See [#19](https://github.com/aedart/athenaeum/issues/19) for details. 
 * Removed deprecated `CreateAwareOfCommand` reference from `athenaeum` console application. 
 * Fixed a few typos.
 
