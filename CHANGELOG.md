@@ -2,6 +2,12 @@
 
 ## v5.x
 
+### [v5.0.2](https://github.com/aedart/athenaeum/compare/5.0.1...5.0.2)
+
+#### Fixed
+
+* Incorrect code style caused CI failure.
+
 ### [v5.0.1](https://github.com/aedart/athenaeum/compare/5.0.0...5.0.1)
 
 #### Fixed 
