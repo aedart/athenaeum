@@ -2,9 +2,12 @@
 
 namespace Aedart\Tests\Integration\Http\Clients;
 
+use Aedart\Http\Messages\Traits\HttpSerializerFactoryTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Aedart\Utils\Json;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\MessageInterface;
 use Symfony\Component\VarDumper\VarDumper;
 use Teapot\StatusCode;
 
@@ -19,6 +22,8 @@ use Teapot\StatusCode;
  */
 class L0_DebuggingTest extends HttpClientsTestCase
 {
+    use HttpSerializerFactoryTrait;
+
     /**
      * @test
      * @dataProvider providesClientProfiles
@@ -162,5 +167,87 @@ class L0_DebuggingTest extends HttpClientsTestCase
 
         // Debug should be invoked twice (for request and then for response)
         $this->assertSame([ 'debug', 'debug', 'expectation' ], $callbackOrder, 'Debug was not invoked before expectation callback!');
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param  string  $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function canReadStreamAfterDebugUsingStr(string $profile)
+    {
+        $mockContent = Json::encode(['message' => 'With pumpkin seeds drink hollandaise sauce.']);
+        $mockResponse = new Response(
+            StatusCode::OK,
+            [],
+            $mockContent
+        );
+
+        $response = $this
+            ->client($profile)
+            ->withOption('handler', $this->makeResponseMock([ $mockResponse ]))
+            ->debug(function(string $type, MessageInterface $message){
+                // Simulated var dump, using toString
+                $serialized = $this->getHttpSerializerFactory()
+                    ->make($message)
+                    ->toString();
+
+                ConsoleDebugger::output('SIMULATED DUMP: ' . $serialized);
+            })
+            ->get('/users');
+
+        // Stream is not rewind and causes, in this context, Json Exception.
+        // See https://github.com/aedart/athenaeum/issues/19
+        $content = Json::decode($response->getBody()->getContents(), true);
+
+        $this->assertStringContainsString(
+            Json::decode($mockContent, true)['message'],
+            $content['message'],
+            'Incorrect stream handling of request / response content'
+        );
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param  string  $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function canReadStreamAfterDebugUsingArr(string $profile)
+    {
+        $mockContent = Json::encode(['message' => 'With pumpkin seeds drink hollandaise sauce.']);
+        $mockResponse = new Response(
+            StatusCode::OK,
+            [],
+            $mockContent
+        );
+
+        $response = $this
+            ->client($profile)
+            ->withOption('handler', $this->makeResponseMock([ $mockResponse ]))
+            ->debug(function(string $type, MessageInterface $message){
+                // Simulated var dump, using toArray
+                $serialized = $this->getHttpSerializerFactory()
+                    ->make($message)
+                    ->toArray();
+
+                ConsoleDebugger::output('SIMULATED DUMP:', $serialized);
+            })
+            ->get('/users');
+
+        // Stream is not rewind and causes, in this context, Json Exception.
+        // See https://github.com/aedart/athenaeum/issues/19
+        $content = Json::decode($response->getBody()->getContents(), true);
+
+        $this->assertSame(
+            Json::decode($mockContent, true)['message'],
+            $content['message'],
+            'Incorrect stream handling of request / response content'
+        );
     }
 }

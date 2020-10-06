@@ -5,6 +5,8 @@ namespace Aedart\Http\Messages\Serializers;
 use Aedart\Contracts\Http\Messages\Serializer;
 use Aedart\Http\Messages\Traits\HttpMessageTrait;
 use Psr\Http\Message\MessageInterface;
+use Psr\Http\Message\StreamInterface;
+use RuntimeException;
 
 /**
  * Base Serializer
@@ -67,6 +69,36 @@ abstract class BaseSerializer implements Serializer
     {
         $filtered = ucwords(str_replace('-', ' ', $name));
         return str_replace(' ', '-', $filtered);
+    }
+
+    /**
+     * Safely extracts the message's content and returns it
+     *
+     * @param  MessageInterface  $message
+     *
+     * @return string
+     *
+     * @throws RuntimeException If unable to read stream
+     */
+    protected function messageContent(MessageInterface $message): string
+    {
+        $stream = $message->getBody();
+
+        // Rewind before obtaining content
+        $isSeekable = $stream->isSeekable();
+        if ($isSeekable) {
+            $stream->rewind();
+        }
+
+        // Read content, fail otherwise.
+        $content = $stream->getContents();
+
+        // Rewind again, if seekable...
+        if ($isSeekable) {
+            $stream->rewind();
+        }
+
+        return $content;
     }
 
     /**

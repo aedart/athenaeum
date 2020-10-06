@@ -28,7 +28,7 @@ class RequestSerializer extends BaseSerializer implements RequestSerializerInter
             'uri' => (string) $request->getUri(),
             'protocol_version' => $request->getProtocolVersion(),
             'headers' => $request->getHeaders(),
-            'body' => (string) $request->getBody()
+            'body' => $this->messageContent($request)
         ];
     }
 
@@ -44,7 +44,7 @@ class RequestSerializer extends BaseSerializer implements RequestSerializerInter
         $target = $request->getRequestTarget();
         $protocol = $request->getProtocolVersion() . PHP_EOL;
         $headers = $this->serialiseHeaders($request->getHeaders()) . str_repeat(PHP_EOL, 2);
-        $body = (string) $request->getBody();
+        $body = $this->messageContent($request);
 
         return sprintf(
             $format,

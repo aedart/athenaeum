@@ -27,7 +27,7 @@ class ResponseSerializer extends BaseSerializer implements ResponseSerializerInt
             'reason' => $response->getReasonPhrase(),
             'protocol_version' => $response->getProtocolVersion(),
             'headers' => $response->getHeaders(),
-            'body' => (string) $response->getBody()
+            'body' => $this->messageContent($response)
         ];
     }
 
@@ -43,7 +43,7 @@ class ResponseSerializer extends BaseSerializer implements ResponseSerializerInt
         $status = $response->getStatusCode();
         $reason = $response->getReasonPhrase() . PHP_EOL;
         $headers = $this->serialiseHeaders($response->getHeaders()) . str_repeat(PHP_EOL, 2);
-        $body = (string) $response->getBody();
+        $body = $this->messageContent($response);
 
         return sprintf(
             $format,
