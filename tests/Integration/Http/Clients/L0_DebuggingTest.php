@@ -189,7 +189,7 @@ class L0_DebuggingTest extends HttpClientsTestCase
         $response = $this
             ->client($profile)
             ->withOption('handler', $this->makeResponseMock([ $mockResponse ]))
-            ->debug(function(string $type, MessageInterface $message){
+            ->debug(function (string $type, MessageInterface $message) {
                 // Simulated var dump, using toString
                 $serialized = $this->getHttpSerializerFactory()
                     ->make($message)
@@ -230,7 +230,7 @@ class L0_DebuggingTest extends HttpClientsTestCase
         $response = $this
             ->client($profile)
             ->withOption('handler', $this->makeResponseMock([ $mockResponse ]))
-            ->debug(function(string $type, MessageInterface $message){
+            ->debug(function (string $type, MessageInterface $message) {
                 // Simulated var dump, using toArray
                 $serialized = $this->getHttpSerializerFactory()
                     ->make($message)

@@ -5,7 +5,6 @@ namespace Aedart\Http\Messages\Serializers;
 use Aedart\Contracts\Http\Messages\Serializer;
 use Aedart\Http\Messages\Traits\HttpMessageTrait;
 use Psr\Http\Message\MessageInterface;
-use Psr\Http\Message\StreamInterface;
 use RuntimeException;
 
 /**
