@@ -9,6 +9,8 @@ use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithExceptionHandling;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithRedis;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithSession;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithTime;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
 use Illuminate\Foundation\Testing\Concerns\MocksApplicationServices;
 
@@ -28,6 +30,8 @@ trait LaravelTestHelper
     use InteractsWithExceptionHandling;
     use InteractsWithRedis;
     use InteractsWithSession;
+    use InteractsWithTime;
+    use InteractsWithViews;
     use MakesHttpRequests;
     use MocksApplicationServices;
 }
