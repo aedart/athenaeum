@@ -6,6 +6,9 @@ The `Aedart_Athenaeum.xml` contains a few [live templates](https://www.jetbrains
 
 The file should be placed in the following directory (_Ubuntu_)
 
+Example:
 ```console
-/home/{user}/.PhpStorm{version}/config/templates
+~/.config/JetBrains/PhpStorm2020.2
 ```
+
+Reference: https://www.jetbrains.com/help/phpstorm/tuning-the-ide.html#config-directory
