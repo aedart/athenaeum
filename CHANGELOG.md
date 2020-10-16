@@ -2,6 +2,16 @@
 
 ## v5.x
 
+### [v5.1.0](https://github.com/aedart/athenaeum/compare/5.0.2...5.1.0)
+
+#### Added
+
+* Added `DuskTestHelper` and `BrowserTestCase` helpers, which offers integration to [Laravel Dusk](https://laravel.com/docs/8.x/dusk).
+
+#### Changed
+
+* Changed `LaravelTestHelper`, added `InteractsWithTime` ([Laravel's helper](https://laravel.com/docs/8.x/mocking#interacting-with-time)) and `InteractsWithViews`. [#20](https://github.com/aedart/athenaeum/issues/20).
+
 ### [v5.0.2](https://github.com/aedart/athenaeum/compare/5.0.1...5.0.2)
 
 #### Fixed
