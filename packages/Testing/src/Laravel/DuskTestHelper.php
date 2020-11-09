@@ -150,10 +150,20 @@ trait DuskTestHelper
         return RemoteWebDriver::create(
             'http://localhost:9515',
             DesiredCapabilities::chrome()->setCapability(
-                ChromeOptions::CAPABILITY_W3C,
-                DuskOptions::getChromeOptions()
+                ChromeOptions::CAPABILITY,
+                $this->makeChromeOptions()
             )
         );
+    }
+
+    /**
+     * Creates options for Chrome browser
+     *
+     * @return mixed
+     */
+    protected function makeBrowserOptions()
+    {
+        return DuskOptions::getChromeOptions();
     }
 
     /**
