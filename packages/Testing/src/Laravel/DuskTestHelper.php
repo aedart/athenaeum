@@ -123,9 +123,11 @@ trait DuskTestHelper
             return;
         }
 
-        register_shutdown_function(function () {
-            $this->closeAll();
-        });
+        register_shutdown_function(
+            function () {
+                $this->closeAll();
+            }
+        );
 
         static::$hasRegisteredShutdown = true;
     }
@@ -135,12 +137,15 @@ trait DuskTestHelper
      */
     protected function resolveApplication()
     {
-        return tap(new Application($this->getBasePath()), static function (Application  $app) {
-            $app->bind(
-                'Illuminate\Foundation\Bootstrap\LoadConfiguration',
-                $this->resolveConfigurationLoaderBinding()
-            );
-        });
+        return tap(
+            new Application($this->getBasePath()),
+            static function (Application $app) {
+                $app->bind(
+                    'Illuminate\Foundation\Bootstrap\LoadConfiguration',
+                    $this->resolveConfigurationLoaderBinding()
+                );
+            }
+        );
     }
 
     /**
