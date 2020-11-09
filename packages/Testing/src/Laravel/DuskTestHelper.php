@@ -2,6 +2,7 @@
 
 namespace Aedart\Testing\Laravel;
 
+use Closure;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -83,13 +84,6 @@ trait DuskTestHelper
      */
     protected string $browserSourceOutput = 'tests/_output/browser/source';
 
-    /**
-     * Configuration Loader bootstrapper
-     *
-     * @var string Class path
-     */
-    protected string $configurationLoader = LoadConfiguration::class;
-
     /*****************************************************************
      * Setup Application & Browser
      ****************************************************************/
@@ -141,12 +135,22 @@ trait DuskTestHelper
      */
     protected function resolveApplication()
     {
-        return tap(new Application($this->getBasePath()), static function ($app) {
+        return tap(new Application($this->getBasePath()), static function (Application  $app) {
             $app->bind(
                 'Illuminate\Foundation\Bootstrap\LoadConfiguration',
-                $this->configurationLoader
+                $this->resolveConfigurationLoaderBinding()
             );
         });
+    }
+
+    /**
+     * Returns configuration loader 'bootstrapper' binding
+     *
+     * @return Closure|string|null
+     */
+    protected function resolveConfigurationLoaderBinding()
+    {
+        return LoadConfiguration::class;
     }
 
     /**
