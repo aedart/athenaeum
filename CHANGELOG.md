@@ -2,6 +2,18 @@
 
 ## v5.x
 
+### [v5.2.0](https://github.com/aedart/athenaeum/compare/5.1.0...5.2.0)
+
+#### Added
+
+* `LoadSpecifiedConfiguration` bootstrapper, in `Testing` package. Intended for Laravel and Laravel Dusk tests.
+* `$browserSourceOutput` property. Location where a page's source code is to be stored, in `DuskTestHelper`. 
+
+#### Changed
+
+* Switched back to `ChromeOptions::CAPABILITY` (_which is deprecated_), because `ChromeOptions::CAPABILITY_W3C` ignores command line arguments for Chrome Driver, in `DuskTestHelper`. 
+* Extracted configuration loader binding into own method / property, in `DuskTestHelper`. This makes it easier to overwrite, when needed.
+
 ### [v5.1.0](https://github.com/aedart/athenaeum/compare/5.0.2...5.1.0)
 
 #### Added
