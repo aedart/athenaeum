@@ -139,7 +139,7 @@ trait DuskTestHelper
     {
         return tap(
             new Application($this->getBasePath()),
-            static function (Application $app) {
+            function (Application $app) {
                 $app->bind(
                     'Illuminate\Foundation\Bootstrap\LoadConfiguration',
                     $this->resolveConfigurationLoaderBinding()
@@ -177,7 +177,7 @@ trait DuskTestHelper
      *
      * @return mixed
      */
-    protected function makeBrowserOptions()
+    protected function makeChromeOptions()
     {
         return DuskOptions::getChromeOptions();
     }
