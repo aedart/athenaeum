@@ -2,6 +2,13 @@
 
 ## v5.x
 
+### [v5.2.1](https://github.com/aedart/athenaeum/compare/5.2.0...5.2.1)
+
+#### Fixed
+
+* Invalid `$this` reference in `static function`, in `DuskTestHelper`.
+* Call to unknown `makeChromeOptions()` method.
+
 ### [v5.2.0](https://github.com/aedart/athenaeum/compare/5.1.0...5.2.0)
 
 #### Added
