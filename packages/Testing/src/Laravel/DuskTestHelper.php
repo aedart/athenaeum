@@ -77,6 +77,13 @@ trait DuskTestHelper
     protected string $browserConsoleLogs = 'tests/_output/browser/console';
 
     /**
+     * Location where a page's source code is stored
+     *
+     * @var string
+     */
+    protected string $browserSourceOutput = 'tests/_output/browser/source';
+
+    /**
      * Configuration Loader bootstrapper
      *
      * @var string Class path
@@ -226,6 +233,7 @@ trait DuskTestHelper
 
         Browser::$storeScreenshotsAt = $this->browserScreenshots;
         Browser::$storeConsoleLogAt = $this->browserConsoleLogs;
+        Browser::$storeSourceAt = $this->browserSourceOutput;
     }
 
     /**
@@ -233,7 +241,11 @@ trait DuskTestHelper
      */
     protected function prepareBrowserDirectories()
     {
-        $directories = [ $this->browserScreenshots, $this->browserConsoleLogs ];
+        $directories = [
+            $this->browserScreenshots,
+            $this->browserConsoleLogs,
+            $this->browserSourceOutput
+        ];
 
         foreach ($directories as $dir) {
             if (!is_dir($dir)) {
