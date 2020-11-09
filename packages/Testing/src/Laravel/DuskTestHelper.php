@@ -76,6 +76,13 @@ trait DuskTestHelper
      */
     protected string $browserConsoleLogs = 'tests/_output/browser/console';
 
+    /**
+     * Configuration Loader bootstrapper
+     *
+     * @var string Class path
+     */
+    protected string $configurationLoader = LoadConfiguration::class;
+
     /*****************************************************************
      * Setup Application & Browser
      ****************************************************************/
@@ -130,7 +137,7 @@ trait DuskTestHelper
         return tap(new Application($this->getBasePath()), static function ($app) {
             $app->bind(
                 'Illuminate\Foundation\Bootstrap\LoadConfiguration',
-                LoadConfiguration::class
+                $this->configurationLoader
             );
         });
     }
