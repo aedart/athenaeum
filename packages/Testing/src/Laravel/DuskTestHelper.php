@@ -2,6 +2,7 @@
 
 namespace Aedart\Testing\Laravel;
 
+use Closure;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -76,6 +77,13 @@ trait DuskTestHelper
      */
     protected string $browserConsoleLogs = 'tests/_output/browser/console';
 
+    /**
+     * Location where a page's source code is stored
+     *
+     * @var string
+     */
+    protected string $browserSourceOutput = 'tests/_output/browser/source';
+
     /*****************************************************************
      * Setup Application & Browser
      ****************************************************************/
@@ -115,9 +123,11 @@ trait DuskTestHelper
             return;
         }
 
-        register_shutdown_function(function () {
-            $this->closeAll();
-        });
+        register_shutdown_function(
+            function () {
+                $this->closeAll();
+            }
+        );
 
         static::$hasRegisteredShutdown = true;
     }
@@ -127,12 +137,25 @@ trait DuskTestHelper
      */
     protected function resolveApplication()
     {
-        return tap(new Application($this->getBasePath()), static function ($app) {
-            $app->bind(
-                'Illuminate\Foundation\Bootstrap\LoadConfiguration',
-                LoadConfiguration::class
-            );
-        });
+        return tap(
+            new Application($this->getBasePath()),
+            function (Application $app) {
+                $app->bind(
+                    'Illuminate\Foundation\Bootstrap\LoadConfiguration',
+                    $this->resolveConfigurationLoaderBinding()
+                );
+            }
+        );
+    }
+
+    /**
+     * Returns configuration loader 'bootstrapper' binding
+     *
+     * @return Closure|string|null
+     */
+    protected function resolveConfigurationLoaderBinding()
+    {
+        return LoadConfiguration::class;
     }
 
     /**
@@ -143,10 +166,20 @@ trait DuskTestHelper
         return RemoteWebDriver::create(
             'http://localhost:9515',
             DesiredCapabilities::chrome()->setCapability(
-                ChromeOptions::CAPABILITY_W3C,
-                DuskOptions::getChromeOptions()
+                ChromeOptions::CAPABILITY,
+                $this->makeChromeOptions()
             )
         );
+    }
+
+    /**
+     * Creates options for Chrome browser
+     *
+     * @return mixed
+     */
+    protected function makeChromeOptions()
+    {
+        return DuskOptions::getChromeOptions();
     }
 
     /**
@@ -209,6 +242,7 @@ trait DuskTestHelper
 
         Browser::$storeScreenshotsAt = $this->browserScreenshots;
         Browser::$storeConsoleLogAt = $this->browserConsoleLogs;
+        Browser::$storeSourceAt = $this->browserSourceOutput;
     }
 
     /**
@@ -216,11 +250,15 @@ trait DuskTestHelper
      */
     protected function prepareBrowserDirectories()
     {
-        $directories = [ $this->browserScreenshots, $this->browserConsoleLogs ];
+        $directories = [
+            $this->browserScreenshots,
+            $this->browserConsoleLogs,
+            $this->browserSourceOutput
+        ];
 
         foreach ($directories as $dir) {
             if (!is_dir($dir)) {
-                mkdir($dir, 0777, true);
+                mkdir($dir, 0775, true);
             }
         }
     }
