@@ -2,6 +2,19 @@
 
 ## v5.x
 
+### [v5.2.0](https://github.com/aedart/athenaeum/compare/5.1.0...5.2.0)
+
+#### Added
+
+* `fromHoursMinutes` and `fromStringHoursMinutes` methods in `Duration` utility.
+
+#### Changed
+
+* Laravel `v8.15.x` packages are now required as a minimum.
+* Updated [Orchesta Testbench](https://github.com/orchestral/testbench-core) dependencies to `v6.9.x`.
+* Added leading zero for `Durataion::toHoursMinutes` short format.
+* Disabled `failsIfCacheIsNotLockProvider` test, since botch file and null cache drivers [now support locks](https://github.com/laravel/framework/blob/8.x/CHANGELOG-8.x.md#v8150-2020-11-17).
+
 ### [v5.1.0](https://github.com/aedart/athenaeum/compare/5.0.2...5.1.0)
 
 #### Added
