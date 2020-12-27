@@ -23,6 +23,8 @@ class CacheStoreTest extends CircuitBreakerTestCase
      */
     public function failsIfCacheIsNotLockProvider()
     {
+        $this->markTestSkipped('Laravel file cache store now supports locks, since v8.15');
+
         $this->expectException(StoreException::class);
 
         /** @var CacheStore $store */

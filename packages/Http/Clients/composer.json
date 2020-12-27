@@ -27,7 +27,7 @@
         "psr/http-message": "^1.0",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
-        "illuminate/pipeline": "^8.6",
+        "illuminate/pipeline": "^8.15",
         "shrikeh/teapot": "^2.3",
         "aedart/athenaeum-container": "^5.2",
         "aedart/athenaeum-contracts": "^5.2",

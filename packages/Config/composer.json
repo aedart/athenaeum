@@ -26,8 +26,8 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "illuminate/config": "^8.6",
-        "illuminate/filesystem": "^8.6",
+        "illuminate/config": "^8.15",
+        "illuminate/filesystem": "^8.15",
         "aedart/athenaeum-contracts": "^5.2",
         "aedart/athenaeum-support": "^5.2",
         "aedart/athenaeum-utils": "^5.2"

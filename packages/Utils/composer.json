@@ -25,7 +25,7 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "illuminate/support": "^8.6",
+        "illuminate/support": "^8.15",
         "jean85/pretty-package-versions": "~1.5",
         "aedart/athenaeum-contracts": "^5.2"
     },
