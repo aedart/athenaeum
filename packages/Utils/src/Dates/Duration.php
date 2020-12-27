@@ -25,7 +25,7 @@ class Duration
     /**
      * Constructor that can take a DateTime, a DateInterval, a MicroTimeStamp or integer seconds
      *
-     * @param  DateTime|DateInterval|MicroTimeStamp|int|null  $time
+     * @param  DateTime|DateInterval|MicroTimeStamp|int|null  $time  [optional]
      */
     public function __construct($time = null)
     {
@@ -77,12 +77,46 @@ class Duration
      * Create instance from integer minutes and optional microseconds.
      *
      * @param  int  $minutes
-     * @param  int  $microSeconds
+     * @param  int  $microSeconds  [optional]
      * @return static
      */
     public static function fromMinutes(int $minutes, int $microSeconds = 0): self
     {
         return new static(new MicroTimeStamp($minutes, $microSeconds));
+    }
+
+    /**
+     * Create instance from integer hours and optional minutes
+     *
+     * @param  int  $hours
+     * @param  int  $minutes  [optional]
+     * @return static
+     */
+    public static function fromHoursMinutes(int $hours, int $minutes = 0): self
+    {
+        // Convert minutes to negative minutes, in case negative hours
+        // are provided.
+        if ($hours < 0) {
+            $minutes *= -1;
+        }
+
+        $totalMinutes = ($hours * 60) + $minutes;
+
+        return static::fromMinutes($totalMinutes);
+    }
+
+    /**
+     * Create instance from string hours and minutes
+     *
+     * @param  string  $hoursMinutes E.g. 00:30, 1:56, -2:30... etc
+     * @param  string  $separator  [optional] Hours / minutes separator symbol
+     * @return static
+     */
+    public static function fromStringHoursMinutes(string $hoursMinutes, string $separator = ':'): self
+    {
+        list($hours, $minutes) = explode($separator, $hoursMinutes);
+
+        return static::fromHoursMinutes($hours, $minutes);
     }
 
     /**
@@ -187,7 +221,7 @@ class Duration
     /**
      * Format duration as minutes and seconds
      *
-     * @param  bool  $long
+     * @param  bool  $long  [optional]
      * @return string
      */
     public function toMinutesSeconds(bool $long = false): string
@@ -206,7 +240,7 @@ class Duration
     /**
      * Format duration as hours and minutes
      *
-     * @param  bool  $long
+     * @param  bool  $long  [optional]
      * @return string
      */
     public function toHoursMinutes(bool $long = false): string
@@ -225,7 +259,7 @@ class Duration
     /**
      * Format duration as days, hours and minutes.
      *
-     * @param  bool  $long
+     * @param  bool  $long  [optional]
      * @return string
      */
     public function toDaysHoursMinutes(bool $long = false): string
@@ -246,7 +280,7 @@ class Duration
      * Format duration to a string.
      * Shortest text according to duration length.
      *
-     * @param  bool  $long
+     * @param  bool  $long  [optional]
      * @return string
      */
     public function toString(bool $long = false): string

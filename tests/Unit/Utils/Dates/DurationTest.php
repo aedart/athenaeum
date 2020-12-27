@@ -106,6 +106,24 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    public function instantiateFromStringHoursMinutes()
+    {
+        $a = '00:30';
+        $durationA = Duration::fromStringHoursMinutes($a);
+        $this->assertSame(1800, $durationA->asSeconds());
+
+        $b = '1:25';
+        $durationB = Duration::fromStringHoursMinutes($b);
+        $this->assertSame(5100, $durationB->asSeconds());
+
+        $c = '-01:25';
+        $durationC = Duration::fromStringHoursMinutes($c);
+        $this->assertSame(-5100, $durationC->asSeconds());
+    }
+
+    /**
+     * @test
+     */
     public function addInterval()
     {
         $duration = Duration::fromString('@40');
