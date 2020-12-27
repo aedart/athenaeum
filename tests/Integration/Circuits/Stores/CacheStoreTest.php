@@ -19,7 +19,9 @@ use Aedart\Tests\TestCases\Circuits\CircuitBreakerTestCase;
 class CacheStoreTest extends CircuitBreakerTestCase
 {
     /**
-     * @test
+     * test
+     *
+     * @see https://github.com/laravel/framework/blob/8.x/CHANGELOG-8.x.md#v8150-2020-11-17
      */
     public function failsIfCacheIsNotLockProvider()
     {
