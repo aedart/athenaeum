@@ -195,7 +195,7 @@ class DurationTest extends UnitTestCase
         $this->assertSame('2 days 14 hours 30 minutes', (string)$duration);
 
         $duration->subtract(Duration::from(200000));
-        $this->assertSame('6:56', $duration->toString());
+        $this->assertSame('06:56', $duration->toString());
         $this->assertSame('6 hours 56 minutes', (string)$duration);
 
         $duration->subtract(Duration::from(24641));

@@ -213,7 +213,7 @@ class Duration
     {
         $format = $long
             ? '%d hours %u minutes'
-            : '%d:%02u';
+            : '%02d:%02u';
 
         $seconds = $this->microTimeStamp->getAsSeconds();
         $hours = intval(($seconds % (24 * 3600)) / 3600);
