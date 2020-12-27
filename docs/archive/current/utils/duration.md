@@ -65,6 +65,20 @@ To create a new Instance from minutes, use `fromMinutes()`.
 $duration = Duration::fromMinutes(5);
 ```
 
+### `fromHoursMinutes()`
+
+To create an instance from hours and _optional_ minutes, use the `fromHoursMinutes()` method.
+
+```php
+$duration = Duration::fromHoursMinutes(2, 30); // Minutes are optional
+```
+
+Should you have a hours and minutes string, like `02:30` or `1:25`, then use the `fromStringHoursMinutes()` method to create duration instance.
+
+```php
+$duration = Duration::fromStringHoursMinutes('02:25');
+```
+
 ### `fromDifference()`
 
 When you wish to calculate the difference between two dates (_or times_), use the `fromDifference()`.
