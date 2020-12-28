@@ -221,6 +221,9 @@ class Duration
     /**
      * Format duration as minutes and seconds
      *
+     * NOTE: Method will show value above 60 minutes, if initial
+     * duration surpasses such.
+     *
      * @param  bool  $long  [optional]
      * @return string
      */
@@ -230,9 +233,16 @@ class Duration
             ? '%02d minutes %02u seconds'
             : '%02d:%02u';
 
-        $seconds = $this->microTimeStamp->getAsSeconds();
-        $minutes = intval(($seconds % 3600) / 60);
-        $seconds = intval(abs($seconds) % 60);
+        $duration = $this->microTimeStamp->getAsSeconds();
+
+        // Convert to minutes and seconds, using absolute seconds
+        $minutes = floor((abs($duration) / 60));
+        $seconds = floor((abs($duration) % 60));
+
+        // Convert to negative minutes, if negative seconds given.
+        if ($duration < 0) {
+            $minutes *= -1;
+        }
 
         return sprintf($format, $minutes, $seconds);
     }
@@ -258,8 +268,7 @@ class Duration
         $hours = floor(abs($seconds) / 3600);
         $minutes = floor((abs($seconds) / 60) % 60);
 
-        // Convert to negative hours, if negative seconds
-        // given.
+        // Convert to negative hours, if negative seconds given.
         if ($seconds < 0) {
             $hours *= -1;
         }

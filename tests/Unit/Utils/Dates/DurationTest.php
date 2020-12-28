@@ -172,6 +172,30 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    public function toMinutesSeconds()
+    {
+        $duration = Duration::from(65);
+
+        $this->assertSame('01:05', $duration->toMinutesSeconds());
+    }
+
+    /**
+     * @test
+     */
+    public function canShowAbove60Minutes()
+    {
+        $duration = Duration::from(3600);
+        ConsoleDebugger::output([ '3600 seconds' => $duration->toMinutesSeconds() ]);
+        $this->assertSame('60:00', $duration->toMinutesSeconds());
+
+        $duration = Duration::from(52200);
+        ConsoleDebugger::output([ '52200 seconds' => $duration->toMinutesSeconds() ]);
+        $this->assertSame('870:00', $duration->toMinutesSeconds());
+    }
+
+    /**
+     * @test
+     */
     public function toHoursMinutes()
     {
         $duration = Duration::from(52200);
@@ -213,9 +237,13 @@ class DurationTest extends UnitTestCase
     {
         $duration = Duration::from(-52200);
 
-        $this->assertSame($duration->asSeconds(), -52200);
-        $this->assertSame($duration->toHoursMinutes(), '-14:30'); // Should out 14:30 (hours and minutes)
-        $this->assertSame($duration->toHoursMinutes(true), '-14 hours 30 minutes');
+        $this->assertSame(-52200, $duration->asSeconds());
+
+        $this->assertSame('-14:30', $duration->toHoursMinutes()); // Should out 14:30 (hours and minutes)
+        $this->assertSame('-14 hours 30 minutes', $duration->toHoursMinutes(true));
+
+        $this->assertSame('-870:00', $duration->toMinutesSeconds());
+        $this->assertSame('-870 minutes 00 seconds', $duration->toMinutesSeconds(true));
     }
 
     /**
