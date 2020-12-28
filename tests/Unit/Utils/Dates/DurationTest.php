@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Unit\Utils\Dates;
 
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Dates\Duration;
 use DateInterval;
@@ -177,6 +178,20 @@ class DurationTest extends UnitTestCase
 
         $this->assertSame($duration->toHoursMinutes(), '14:30'); // Should out 14:30 (hours and minutes)
         $this->assertSame($duration->toHoursMinutes(true), '14 hours 30 minutes');
+    }
+
+    /**
+     * @test
+     */
+    public function canShowAbove24Hours()
+    {
+        $duration = Duration::from(86400);
+        ConsoleDebugger::output([ '86400 seconds' => $duration->toHoursMinutes() ]);
+        $this->assertSame('24:00', $duration->toHoursMinutes());
+
+        $duration = Duration::from(111600);
+        ConsoleDebugger::output([ '111600 seconds' => $duration->toHoursMinutes() ]);
+        $this->assertSame('31:00', $duration->toHoursMinutes());
     }
 
     /**
