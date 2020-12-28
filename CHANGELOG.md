@@ -2,6 +2,14 @@
 
 ## v5.x
 
+### [v5.3.2](https://github.com/aedart/athenaeum/compare/5.3.1...5.3.2)
+
+#### Fixed
+
+* Boundary values incorrectly shown when using `toHoursMinutes()` and `toMinutesSeconds()`, in `Duration` utility. 
+
+E.g. when attempting to convert -2700 seconds to hours and minutes, the `toHoursMinutes()` method return 00:45, instead of -00:45.
+
 ### [v5.3.1](https://github.com/aedart/athenaeum/compare/5.3.0...5.3.1)
 
 #### Fixed
