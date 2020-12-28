@@ -2,6 +2,14 @@
 
 ## v5.x
 
+### [v5.3.1](https://github.com/aedart/athenaeum/compare/5.3.0...5.3.1)
+
+#### Fixed
+
+* `toHoursMinutes()` not able to show above 24 hours, in `Duration` utility.
+* `toMinutesSeconds()` not able to show above 60 minutes, in `Duration` utility.
+
+Both methods failed showing a correct amount, whenever the initial value surpassed 24 hours (_or 60 minutes for `toMinutesSeconds()`_).
 
 ### [v5.3.0](https://github.com/aedart/athenaeum/compare/5.2.1...5.3.0)
 
