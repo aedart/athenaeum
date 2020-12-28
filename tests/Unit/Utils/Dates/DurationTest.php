@@ -15,8 +15,6 @@ use DateTime;
  * @group date
  * @group duration
  *
- * Example: codecept run Unit Utils
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Dates
  */
@@ -29,7 +27,7 @@ class DurationTest extends UnitTestCase
     {
         $duration = new Duration(42);
 
-        $this->assertSame($duration->format("%S"), "42");
+        $this->assertSame("42", $duration->format("%S"));
     }
 
     /**
@@ -40,8 +38,8 @@ class DurationTest extends UnitTestCase
         $seconds = 10 * 365 * 24 * 3600; // 10 years of seconds
         $duration = Duration::fromSeconds($seconds);
 
-        $this->assertSame($duration->asSeconds(), $seconds);
-        $this->assertSame($duration->asFloatSeconds(), floatval($seconds));
+        $this->assertSame($seconds, $duration->asSeconds());
+        $this->assertSame(floatval($seconds), $duration->asFloatSeconds());
     }
 
     /**
@@ -51,7 +49,7 @@ class DurationTest extends UnitTestCase
     {
         $duration = Duration::from(new DateInterval('P10Y7DT4H5M34S'));
 
-        $this->assertSame($duration->format('%Y-%M-%D %H:%I:%S'), '10-00-07 04:05:34');
+        $this->assertSame('10-00-07 04:05:34', $duration->format('%Y-%M-%D %H:%I:%S'));
     }
 
     /**
@@ -61,7 +59,7 @@ class DurationTest extends UnitTestCase
     {
         $duration = Duration::from(new DateTime('@' . (42 * 60)));
 
-        $this->assertSame($duration->asSeconds(), 42 * 60);
+        $this->assertSame(42 * 60, $duration->asSeconds());
     }
 
     /**
@@ -71,7 +69,7 @@ class DurationTest extends UnitTestCase
     {
         $duration = Duration::fromString('@' . (42 * 60));
 
-        $this->assertSame($duration->asSeconds(), 42 * 60);
+        $this->assertSame(42 * 60, $duration->asSeconds());
     }
 
     /**
@@ -85,8 +83,8 @@ class DurationTest extends UnitTestCase
 
         $duration = Duration::fromDifference($then, $when);
 
-        $this->assertSame($duration->asSeconds(), (5 * 3600) + (6 * 60) + 42);
-        $this->assertSame($duration->format('%r%Y-%M-%D %H:%I:%S.%F'), '00-00-00 05:06:42.023456');
+        $this->assertSame((5 * 3600) + (6 * 60) + 42, $duration->asSeconds());
+        $this->assertSame('00-00-00 05:06:42.023456', $duration->format('%r%Y-%M-%D %H:%I:%S.%F'));
     }
 
     /**
@@ -100,8 +98,8 @@ class DurationTest extends UnitTestCase
 
         $duration = Duration::fromDifference($when, $then);
 
-        $this->assertSame($duration->asSeconds(), -(5 * 3600) - (6 * 60) - 42);
-        $this->assertSame($duration->format('%r%Y-%M-%D %H:%I:%S.%F'), '-00-00-00 05:06:42.023456');
+        $this->assertSame(-(5 * 3600) - (6 * 60) - 42, $duration->asSeconds());
+        $this->assertSame('-00-00-00 05:06:42.023456', $duration->format('%r%Y-%M-%D %H:%I:%S.%F'));
     }
 
     /**
@@ -130,7 +128,7 @@ class DurationTest extends UnitTestCase
         $duration = Duration::fromString('@40');
         $duration->add(Duration::fromString('@2'));
 
-        $this->assertSame($duration->asSeconds(), 42);
+        $this->assertSame(42, $duration->asSeconds());
     }
 
     /**
@@ -141,7 +139,7 @@ class DurationTest extends UnitTestCase
         $duration = Duration::fromString('@44');
         $duration->subtract(Duration::fromString('@2'));
 
-        $this->assertSame($duration->asSeconds(), 42);
+        $this->assertSame(42, $duration->asSeconds());
     }
 
     /**
@@ -154,7 +152,7 @@ class DurationTest extends UnitTestCase
         sleep(1);
         $duration->stop();
 
-        $this->assertSame($duration->asSeconds(), 1);
+        $this->assertSame(1, $duration->asSeconds());
     }
 
     /**
@@ -164,9 +162,9 @@ class DurationTest extends UnitTestCase
     {
         $duration = Duration::from(52200);
 
-        $this->assertSame($duration->format('%H:%i'), '14:30'); // Should out 14:30 (hours and minutes)
-//        $this->assertSame($duration->format('%D'), 0.6042); // Should output ~0.6042 days
-        $this->assertSame($duration->asMinutes(), 870); // 870 minutes
+        $this->assertSame('14:30', $duration->format('%H:%i')); // Should out 14:30 (hours and minutes)
+//        $this->assertSame(0.6042, $duration->format('%D')); // Should output ~0.6042 days
+        $this->assertSame(870, $duration->asMinutes()); // 870 minutes
     }
 
     /**
@@ -200,8 +198,8 @@ class DurationTest extends UnitTestCase
     {
         $duration = Duration::from(52200);
 
-        $this->assertSame($duration->toHoursMinutes(), '14:30'); // Should out 14:30 (hours and minutes)
-        $this->assertSame($duration->toHoursMinutes(true), '14 hours 30 minutes');
+        $this->assertSame('14:30', $duration->toHoursMinutes()); // Should out 14:30 (hours and minutes)
+        $this->assertSame('14 hours 30 minutes', $duration->toHoursMinutes(true));
     }
 
     /**
@@ -225,9 +223,9 @@ class DurationTest extends UnitTestCase
     {
         $duration = Duration::from(225000);
 
-        $this->assertSame($duration->asSeconds(), 225000);
-        $this->assertSame($duration->toDaysHoursMinutes(), '2-14:30'); // Should out 14:30 (hours and minutes)
-        $this->assertSame($duration->toDaysHoursMinutes(true), '2 days 14 hours 30 minutes');
+        $this->assertSame(225000, $duration->asSeconds());
+        $this->assertSame('2-14:30', $duration->toDaysHoursMinutes()); // Should out 14:30 (hours and minutes)
+        $this->assertSame('2 days 14 hours 30 minutes', $duration->toDaysHoursMinutes(true));
     }
 
     /**
