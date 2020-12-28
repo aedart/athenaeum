@@ -230,21 +230,24 @@ class Duration
     public function toMinutesSeconds(bool $long = false): string
     {
         $format = $long
-            ? '%02d minutes %02u seconds'
-            : '%02d:%02u';
+            ? '%s%02d minutes %02u seconds'
+            : '%s%02d:%02u';
+        $prefix = '';
 
         $duration = $this->microTimeStamp->getAsSeconds();
 
         // Convert to minutes and seconds, using absolute seconds
-        $minutes = floor((abs($duration) / 60));
-        $seconds = floor((abs($duration) % 60));
+        $minutes = intval(floor((abs($duration) / 60)));
+        $seconds = intval(floor((abs($duration) % 60)));
 
         // Convert to negative minutes, if negative seconds given.
-        if ($duration < 0) {
+        if ($duration < 0 && $minutes === 0) {
+            $prefix = '-';
+        } elseif ($duration < 0) {
             $minutes *= -1;
         }
 
-        return sprintf($format, $minutes, $seconds);
+        return sprintf($format, $prefix, $minutes, $seconds);
     }
 
     /**
@@ -259,21 +262,25 @@ class Duration
     public function toHoursMinutes(bool $long = false): string
     {
         $format = $long
-            ? '%d hours %u minutes'
-            : '%02d:%02u';
+            ? '%s%d hours %u minutes'
+            : '%s%02d:%02u';
+        $prefix = '';
 
         $seconds = $this->microTimeStamp->getAsSeconds();
 
         // Convert to hours and minutes, using absolute seconds
-        $hours = floor(abs($seconds) / 3600);
-        $minutes = floor((abs($seconds) / 60) % 60);
+        $hours = intval(floor(abs($seconds) / 3600));
+        $minutes = intval(floor((abs($seconds) / 60) % 60));
 
         // Convert to negative hours, if negative seconds given.
-        if ($seconds < 0) {
+        // NOTE: Edge case, when 0 hours then we use a prefix symbol.
+        if ($seconds < 0 && $hours === 0) {
+            $prefix = '-';
+        } elseif ($seconds < 0) {
             $hours *= -1;
         }
 
-        return sprintf($format, $hours, $minutes);
+        return sprintf($format, $prefix, $hours, $minutes);
     }
 
     /**

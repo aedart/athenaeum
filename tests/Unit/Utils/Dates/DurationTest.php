@@ -242,6 +242,17 @@ class DurationTest extends UnitTestCase
 
         $this->assertSame('-870:00', $duration->toMinutesSeconds());
         $this->assertSame('-870 minutes 00 seconds', $duration->toMinutesSeconds(true));
+
+        // ------------------------------------------------ //
+
+        $duration = Duration::from(-2700); // -45 minutes
+        $this->assertSame(-2700, $duration->asSeconds());
+        $this->assertSame('-00:45', $duration->toHoursMinutes());
+
+        $duration = Duration::from(-5); // -5 seconds
+        $this->assertSame(-5, $duration->asSeconds());
+        $this->assertSame('-00:05', $duration->toMinutesSeconds());
+
     }
 
     /**
