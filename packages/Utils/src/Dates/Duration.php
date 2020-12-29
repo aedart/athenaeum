@@ -237,8 +237,8 @@ class Duration
         $duration = $this->microTimeStamp->getAsSeconds();
 
         // Convert to minutes and seconds, using absolute seconds
-        $minutes = intval(floor((abs($duration) / 60)));
-        $seconds = intval(floor((abs($duration) % 60)));
+        $minutes = intval(floor(abs($duration) / 60));
+        $seconds = intval(floor(abs($duration) % 60));
 
         // Convert to negative minutes, if negative seconds given.
         if ($duration < 0 && $minutes === 0) {

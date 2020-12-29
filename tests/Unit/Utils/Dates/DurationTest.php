@@ -252,7 +252,6 @@ class DurationTest extends UnitTestCase
         $duration = Duration::from(-5); // -5 seconds
         $this->assertSame(-5, $duration->asSeconds());
         $this->assertSame('-00:05', $duration->toMinutesSeconds());
-
     }
 
     /**
