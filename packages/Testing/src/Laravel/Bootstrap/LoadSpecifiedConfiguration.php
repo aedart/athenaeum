@@ -58,7 +58,7 @@ class LoadSpecifiedConfiguration extends BaseLoadConfiguration
         $path = $this->getConfigurationPath();
 
         foreach (Finder::create()->files()->name('*.php')->in($path) as $file) {
-            yield $files[basename($file->getRealPath(), '.php')] = $file->getRealPath();
+            yield basename($file->getRealPath(), '.php') => $file->getRealPath();
         }
     }
 }
