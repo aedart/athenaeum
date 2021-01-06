@@ -2,6 +2,7 @@
 
 namespace Aedart\Testing\Laravel\Bootstrap;
 
+use Generator;
 use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Testbench\Bootstrap\LoadConfiguration as BaseLoadConfiguration;
 use Symfony\Component\Finder\Finder;
@@ -52,7 +53,7 @@ class LoadSpecifiedConfiguration extends BaseLoadConfiguration
     /**
      * @inheritdoc
      */
-    protected function getConfigurationFiles(Application $app): array
+    protected function getConfigurationFiles(Application $app): Generator
     {
         $files = [];
 
