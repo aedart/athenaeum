@@ -2,6 +2,12 @@
 
 ## v5.x
 
+### [v5.3.4](https://github.com/aedart/athenaeum/compare/5.3.3...5.3.4)
+
+#### Fixed
+
+* `getConfigurationFiles` method still returned `array` instead of specified `Generator`, in `LoadSpecifiedConfiguration` Testing utility.
+
 ### [v5.3.3](https://github.com/aedart/athenaeum/compare/5.3.2...5.3.3)
 
 #### Fixed
