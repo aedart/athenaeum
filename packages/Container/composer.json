@@ -23,8 +23,8 @@
     "require": {
         "php": ">=7.4.0",
         "illuminate/container": "^8.15",
-        "aedart/athenaeum-contracts": "^5.4",
-        "aedart/athenaeum-support": "^5.4"
+        "aedart/athenaeum-contracts": "^5.3.4",
+        "aedart/athenaeum-support": "^5.3.4"
     },
     "autoload": {
         "psr-4": {
