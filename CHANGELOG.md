@@ -2,6 +2,12 @@
 
 ## v5.x
 
+### [v5.3.3](https://github.com/aedart/athenaeum/compare/5.3.2...5.3.3)
+
+#### Fixed
+
+* Incorrect return type for `getConfigurationFiles` method, in `LoadSpecifiedConfiguration` Testing utility.
+
 ### [v5.3.2](https://github.com/aedart/athenaeum/compare/5.3.1...5.3.2)
 
 #### Fixed
