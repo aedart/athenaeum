@@ -29,11 +29,11 @@
         "psr/http-factory": "^1.0",
         "illuminate/pipeline": "^8.15",
         "shrikeh/teapot": "^2.3",
-        "aedart/athenaeum-container": "^5.4",
-        "aedart/athenaeum-contracts": "^5.4",
-        "aedart/athenaeum-http-cookies": "^5.4",
-        "aedart/athenaeum-http-messages": "^5.4",
-        "aedart/athenaeum-support": "^5.4"
+        "aedart/athenaeum-container": "^5.3.3",
+        "aedart/athenaeum-contracts": "^5.3.3",
+        "aedart/athenaeum-http-cookies": "^5.3.3",
+        "aedart/athenaeum-http-messages": "^5.3.3",
+        "aedart/athenaeum-support": "^5.3.3"
     },
     "autoload": {
         "psr-4": {
