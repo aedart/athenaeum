@@ -2,6 +2,14 @@
 
 ## v5.x
 
+### [v5.3.5](https://github.com/aedart/athenaeum/compare/5.3.4...5.3.5)
+
+#### Fixed
+
+* Incorrect format yield from `getConfigurationFiles` method, in `LoadSpecifiedConfiguration` Testing utility*.
+
+*: _Was in a hurry to fix a "minor" defect, which just caused several other minor defects._
+
 ### [v5.3.4](https://github.com/aedart/athenaeum/compare/5.3.3...5.3.4)
 
 #### Fixed
