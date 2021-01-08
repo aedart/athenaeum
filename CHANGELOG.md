@@ -2,15 +2,15 @@
 
 ## v5.x
 
-### Unreleased
+### [v5.4.0](https://github.com/aedart/athenaeum/compare/5.3.5...5.4.0)
 
 #### Changed
 
 * `ApplicationInitiator` now makes use of custom `LoadSpecifiedConfiguration`.
   A previously added, but not applied specialisation of Orchetra `LoadConfiguration`.
-  Custom component allows specifying the location of configuration files to be loaded, via `getBasePath()` and `getConfigPath()` methods.  
+  Custom component allows specifying the location of configuration files to be loaded, via `getBasePath()` and `getConfigPath()` methods*.  
 
-
+*: _This change will implicit ensure that changes to `LoadConfiguration` will be caught by tests and thereby prevent defects that resulted in patches `v5.3.3` to `v5.3.5`._
 
 ### [v5.3.5](https://github.com/aedart/athenaeum/compare/5.3.4...5.3.5)
 
