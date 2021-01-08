@@ -26,8 +26,8 @@
         "mockery/mockery": "1.4.*",
         "orchestra/testbench": "^6.9.1",
         "orchestra/testbench-dusk": "^v6.7.0",
-        "aedart/athenaeum-contracts": "^5.4",
-        "aedart/athenaeum-container": "^5.4"
+        "aedart/athenaeum-contracts": "^5.5",
+        "aedart/athenaeum-container": "^5.5"
     },
     "autoload": {
         "psr-4": {
@@ -41,7 +41,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "5.4.x-dev"
+            "dev-master": "5.5.x-dev"
         }
     }
 }
