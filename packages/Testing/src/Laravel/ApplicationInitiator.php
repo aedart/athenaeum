@@ -2,7 +2,8 @@
 
 namespace Aedart\Testing\Laravel;
 
-use Illuminate\Contracts\Foundation\Application;
+use Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Facade;
 use Orchestra\Testbench\Concerns\Testing;
 
@@ -104,6 +105,16 @@ trait ApplicationInitiator
         return isset($this->app);
     }
 
+    /**
+     * Returns path to configuration files to be loaded
+     *
+     * @return string
+     */
+    public function getConfigPath(): string
+    {
+        return $this->getBasePath() . '/config';
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -150,5 +161,33 @@ trait ApplicationInitiator
         putenv('APP_ENV=' . $environment);
 
         return $this;
+    }
+
+    /**
+     * Resolve application implementation.
+     *
+     * @return Application
+     */
+    protected function resolveApplication()
+    {
+        return tap(new Application($this->getBasePath()), function ($app) {
+            $app->bind(
+                'Illuminate\Foundation\Bootstrap\LoadConfiguration',
+                $this->resolveConfigurationLoaderBinding()
+            );
+        });
+    }
+
+    /**
+     * Returns configuration loader 'bootstrapper' binding
+     *
+     * @return Closure|string|null
+     */
+    protected function resolveConfigurationLoaderBinding()
+    {
+        return function () {
+            return (new LoadSpecifiedConfiguration())
+                ->setConfigurationPath($this->getConfigPath());
+        };
     }
 }
