@@ -13,17 +13,21 @@ use Aedart\Contracts\Collections\Summation;
 interface ProcessingRule
 {
     /**
-     * Process given item and return the resulting summation
+     * Process item and return the resulting summation
      *
      * Method is responsible for adding or manipulating values
      * in the Summation instance, if deemed appropriate.
      *
-     * @param mixed $item
-     *
-     * @return Summation Summation with results from processing or
-     *                   unchanged Summation if rule was not applicable
+     * @return Summation Summation with results from processing item
      */
-    public function process($item): Summation;
+    public function process(): Summation;
+
+    /**
+     * Returns the item to be processed
+     *
+     * @return mixed
+     */
+    public function item();
 
     /**
      * Returns the summation assigned for this
