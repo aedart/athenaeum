@@ -15,8 +15,8 @@ interface ProcessingRule
     /**
      * Process given item and return the resulting summation
      *
-     * Method is responsible for determining whether or not
-     * it can process the item.
+     * Method is responsible for adding or manipulating values
+     * in the Summation instance, if deemed appropriate.
      *
      * @see isApplicable
      *
@@ -26,16 +26,6 @@ interface ProcessingRule
      *                   unchanged Summation if rule was not applicable
      */
     public function process($item): Summation;
-
-    /**
-     * Determine whether or not this processing rule
-     * is applicable for given item
-     *
-     * @param mixed $item
-     *
-     * @return bool
-     */
-    public function isApplicable($item): bool;
 
     /**
      * Returns the summation assigned for this
