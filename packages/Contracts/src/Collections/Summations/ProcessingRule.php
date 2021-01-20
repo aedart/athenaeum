@@ -18,8 +18,6 @@ interface ProcessingRule
      * Method is responsible for adding or manipulating values
      * in the Summation instance, if deemed appropriate.
      *
-     * @see isApplicable
-     *
      * @param mixed $item
      *
      * @return Summation Summation with results from processing or
