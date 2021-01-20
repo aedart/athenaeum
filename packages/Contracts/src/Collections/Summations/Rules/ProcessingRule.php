@@ -18,7 +18,8 @@ interface ProcessingRule
      * Method is responsible for adding or manipulating values
      * in the Summation instance, if deemed appropriate.
      *
-     * @return Summation Summation with results from processing item
+     * @return Summation Summation with results from having processed
+     *                   the assigned item
      */
     public function process(): Summation;
 
