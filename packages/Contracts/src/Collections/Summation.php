@@ -40,7 +40,7 @@ interface Summation extends
      *
      * @throws SummationException
      */
-    public function make($items, ProcessingRulesFactory $factory): Summation;
+    public static function make($items, ProcessingRulesFactory $factory): Summation;
 
     /**
      * Creates new Summation instance with given items and processing
