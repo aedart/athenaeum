@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Collections\Summations\Rules;
 
+use Aedart\Contracts\Collections\Exceptions\SummationException;
 use Aedart\Contracts\Collections\Summation;
 
 /**
@@ -20,6 +21,8 @@ interface ProcessingRule
      *
      * @return Summation Summation with results from having processed
      *                   the assigned item
+     *
+     * @throws SummationException
      */
     public function process(): Summation;
 
