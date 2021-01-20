@@ -12,5 +12,4 @@ use Throwable;
  */
 interface SummationException extends Throwable
 {
-
 }

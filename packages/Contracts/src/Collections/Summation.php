@@ -3,7 +3,6 @@
 namespace Aedart\Contracts\Collections;
 
 use Aedart\Contracts\Collections\Exceptions\SummationException;
-use Aedart\Contracts\Collections\Summations\ProcessingRule;
 use Aedart\Contracts\Collections\Summations\Rules\Factory as ProcessingRulesFactory;
 use ArrayAccess;
 use Countable;
