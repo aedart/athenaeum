@@ -1,6 +1,6 @@
 <?php
 
-namespace Aedart\Contracts\Collections\Summations;
+namespace Aedart\Contracts\Collections\Summations\Rules;
 
 use Aedart\Contracts\Collections\Summation;
 
@@ -8,7 +8,7 @@ use Aedart\Contracts\Collections\Summation;
  * Summation Item Processing Rule
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
- * @package Aedart\Contracts\Collections\Summations
+ * @package Aedart\Contracts\Collections\Summations\Rules
  */
 interface ProcessingRule
 {
