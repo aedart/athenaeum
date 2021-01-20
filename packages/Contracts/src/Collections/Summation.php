@@ -34,25 +34,29 @@ interface Summation extends
      * rules factory
      *
      * @param array|Traversable $items
-     * @param  ProcessingRulesFactory  $factory
+     * @param  ProcessingRulesFactory|null  $factory  [optional]
      *
      * @return static
      *
      * @throws SummationException
      */
-    public static function make($items, ProcessingRulesFactory $factory): Summation;
+    public static function make($items, ?ProcessingRulesFactory $factory = null): Summation;
 
     /**
      * Creates new Summation instance with given items and processing
      * rules factory. Once instance is created, method will process
      * all items according to the resulting processing rules
      *
+     * @see process
+     *
      * @param array|Traversable $items
-     * @param  ProcessingRulesFactory  $factory
+     * @param  ProcessingRulesFactory|null  $factory  [optional]
      *
      * @return static
+     *
+     * @throws SummationException
      */
-    public static function build($items, ProcessingRulesFactory $factory): Summation;
+    public static function build($items, ?ProcessingRulesFactory $factory = null): Summation;
 
     /**
      * Applies processing rules on items and builds
@@ -71,6 +75,25 @@ interface Summation extends
      * @return array|Traversable
      */
     public function items();
+
+    /**
+     * Returns rules factory
+     *
+     * @return ProcessingRulesFactory
+     */
+    public function rulesFactory(): ProcessingRulesFactory;
+
+    /**
+     * Creates new Summation instance assigned items and given
+     * processing rules factory
+     *
+     * @param  ProcessingRulesFactory  $factory
+     *
+     * @return static
+     * 
+     * @throws SummationException
+     */
+    public function withRulesFactory(ProcessingRulesFactory $factory): Summation;
 
     /**
      * Set the value for a given key
