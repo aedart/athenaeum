@@ -2,7 +2,7 @@
 
 namespace Aedart\Contracts\Collections;
 
-use Aedart\Contracts\Collections\Exceptions\SummationException;
+use Aedart\Contracts\Collections\Exceptions\SummationCollectionException;
 use Aedart\Contracts\Collections\Summations\Rules\Factory as ProcessingRulesFactory;
 use ArrayAccess;
 use Countable;
@@ -38,7 +38,7 @@ interface Summation extends
      *
      * @return static
      *
-     * @throws SummationException
+     * @throws SummationCollectionException
      */
     public static function make($items, ?ProcessingRulesFactory $factory = null): Summation;
 
@@ -47,14 +47,14 @@ interface Summation extends
      * rules factory. Once instance is created, method will process
      * all items according to the resulting processing rules
      *
-     * @see process
-     *
      * @param array|Traversable $items
      * @param  ProcessingRulesFactory|null  $factory  [optional]
      *
      * @return static
      *
-     * @throws SummationException
+     * @throws SummationCollectionException
+     * @see process
+     *
      */
     public static function build($items, ?ProcessingRulesFactory $factory = null): Summation;
 
@@ -64,7 +64,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationException
+     * @throws SummationCollectionException
      */
     public function process(): self;
 
@@ -90,8 +90,8 @@ interface Summation extends
      * @param  ProcessingRulesFactory  $factory
      *
      * @return static
-     * 
-     * @throws SummationException
+     *
+     * @throws SummationCollectionException
      */
     public function withRulesFactory(ProcessingRulesFactory $factory): Summation;
 
@@ -130,7 +130,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationException If key does not exist, if value is not numeric,
+     * @throws SummationCollectionException If key does not exist, if value is not numeric,
      *                            or invalid amount argument
      */
     public function increase(string $key, $amount = 1): self;
@@ -146,7 +146,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationException If key does not exist, if value is not numeric,
+     * @throws SummationCollectionException If key does not exist, if value is not numeric,
      *                            or invalid amount argument
      */
     public function decrease(string $key, $amount = 1): self;
@@ -162,7 +162,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationException If key does not exist, if value is not numeric,
+     * @throws SummationCollectionException If key does not exist, if value is not numeric,
      *                            or invalid amount argument
      */
     public function add(string $key, $amount): self;
@@ -178,7 +178,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationException If key does not exist, if value is not numeric,
+     * @throws SummationCollectionException If key does not exist, if value is not numeric,
      *                            or invalid amount argument
      */
     public function subtract(string $key, $amount): self;
@@ -194,7 +194,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationException If key does not exist, if value is not numeric,
+     * @throws SummationCollectionException If key does not exist, if value is not numeric,
      *                            or invalid amount argument
      */
     public function multiply(string $key, $amount): self;
@@ -210,7 +210,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationException If key does not exist, if value is not numeric,
+     * @throws SummationCollectionException If key does not exist, if value is not numeric,
      *                            or invalid amount argument
      */
     public function divide(string $key, $amount): self;

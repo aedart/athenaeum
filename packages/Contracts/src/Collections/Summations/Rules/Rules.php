@@ -2,7 +2,7 @@
 
 namespace Aedart\Contracts\Collections\Summations\Rules;
 
-use Aedart\Contracts\Collections\Exceptions\SummationException;
+use Aedart\Contracts\Collections\Exceptions\SummationCollectionException;
 use Aedart\Contracts\Collections\Summation;
 use Countable;
 use Illuminate\Contracts\Support\Arrayable;
@@ -31,7 +31,7 @@ interface Rules extends
      * @return Summation Summation with results from having processed
      *                   the assigned item
      *
-     * @throws SummationException
+     * @throws SummationCollectionException
      */
     public function process(): Summation;
 

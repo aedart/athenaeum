@@ -2,7 +2,7 @@
 
 namespace Aedart\Contracts\Collections\Summations\Rules;
 
-use Aedart\Contracts\Collections\Exceptions\SummationException;
+use Aedart\Contracts\Collections\Exceptions\SummationCollectionException;
 use Aedart\Contracts\Collections\Summation;
 
 /**
@@ -26,7 +26,7 @@ interface Factory
      *
      * @return Rules
      *
-     * @throws SummationException
+     * @throws SummationCollectionException
      */
     public function make($item, Summation $summation): Rules;
 }
