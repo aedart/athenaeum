@@ -2,6 +2,12 @@
 
 ## v5.x
 
+### [Unreleased]
+
+#### Changed
+
+* Bumped license year, in `LICENSE` files.
+
 ### [v5.4.0](https://github.com/aedart/athenaeum/compare/5.3.5...5.4.0)
 
 #### Changed
