@@ -19,25 +19,13 @@ interface ProcessingRule
      * Method is responsible for adding or manipulating values
      * in the Summation instance, if deemed appropriate.
      *
+     * @param mixed $item The item in question
+     * @param Summation $summation The Summation Collection instance
+     *
      * @return Summation Summation with results from having processed
      *                   the assigned item
      *
      * @throws SummationCollectionException
      */
-    public function process(): Summation;
-
-    /**
-     * Returns the item to be processed
-     *
-     * @return mixed
-     */
-    public function item();
-
-    /**
-     * Returns the summation assigned for this
-     * processing rule
-     *
-     * @return Summation
-     */
-    public function summation(): Summation;
+    public function process($item, Summation $summation): Summation;
 }

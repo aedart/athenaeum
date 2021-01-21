@@ -3,6 +3,7 @@
 namespace Aedart\Collections\Summations\Rules;
 
 use Aedart\Contracts\Collections\Summation;
+use Aedart\Contracts\Collections\Summations\Rules\ProcessingRule;
 
 /**
  * Null Processing Rule
@@ -13,13 +14,13 @@ use Aedart\Contracts\Collections\Summation;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Collections\Summations\Rules
  */
-class NullProcessingRule extends BaseProcessingRule
+class NullProcessingRule implements ProcessingRule
 {
     /**
      * @inheritDoc
      */
-    public function process(): Summation
+    public function process($item, Summation $summation): Summation
     {
-        return $this->summation();
+        return $summation;
     }
 }
