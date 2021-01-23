@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Collections;
 
 use Aedart\Contracts\Collections\Exceptions\SummationCollectionException;
+use Aedart\Contracts\Collections\Summations\ItemsProcessor;
 use ArrayAccess;
 use Countable;
 use Illuminate\Contracts\Support\Arrayable;
@@ -13,8 +14,10 @@ use JsonSerializable;
 /**
  * Summation Collection
  *
- * A collection of results based on the processing of items according
- * to various processing rules.
+ * A collection of results, which typically are a product of
+ * processing multiple items, e.g. database records.
+ *
+ * @see ItemsProcessor
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Collections
@@ -188,7 +191,7 @@ interface Summation extends
      *
      * @return bool
      */
-    public function isEmpty(string $key): bool;
+    public function hasValue(string $key): bool;
 
     /**
      * Determine if key exists and if it's value is not empty (e.g. not zero)
@@ -197,7 +200,21 @@ interface Summation extends
      *
      * @return bool
      */
-    public function isNotEmpty(string $key): bool;
+    public function hasNoValue(string $key): bool;
+
+    /**
+     * Determine if collection is empty or not
+     *
+     * @return bool
+     */
+    public function isEmpty(): bool;
+
+    /**
+     * Determine if collection is not empty
+     *
+     * @return bool
+     */
+    public function isNotEmpty(): bool;
 
     /**
      * Remove a key and it's value
@@ -208,4 +225,17 @@ interface Summation extends
      *              exist
      */
     public function remove(string $key): bool;
+
+    /**
+     * Dumps collection and stops script
+     * from further execution
+     */
+    public function dd(): void;
+
+    /**
+     * Dumps collection
+     *
+     * @return self
+     */
+    public function dump(): self;
 }
