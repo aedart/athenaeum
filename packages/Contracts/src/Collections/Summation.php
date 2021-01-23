@@ -33,7 +33,7 @@ interface Summation extends
     /**
      * Creates new Summation instance with given results
      *
-     * @param array $results  [optional]
+     * @param array $results  [optional] Key-value pairs
      *
      * @return static
      *
