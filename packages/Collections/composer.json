@@ -30,6 +30,9 @@
             "Aedart\\Collections\\": "src"
         }
     },
+    "suggest": {
+        "symfony/var-dumper": "symfony/var-dumper: Required to use the dd and dump functions."
+    },
     "config": {
         "sort-packages": true
     },
