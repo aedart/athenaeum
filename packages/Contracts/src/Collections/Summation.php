@@ -10,6 +10,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use IteratorAggregate;
 use JsonSerializable;
+use Stringable;
 
 /**
  * Summation Collection
@@ -28,18 +29,19 @@ interface Summation extends
     ArrayAccess,
     Arrayable,
     JsonSerializable,
-    Jsonable
+    Jsonable,
+    Stringable
 {
     /**
      * Creates new Summation instance with given results
      *
-     * @param array $results  [optional] Key-value pairs
+     * @param mixed $results  [optional]
      *
      * @return static
      *
      * @throws SummationCollectionException
      */
-    public static function make(array $results = []): Summation;
+    public static function make($results = []): Summation;
 
     /**
      * Set the value for a given key
