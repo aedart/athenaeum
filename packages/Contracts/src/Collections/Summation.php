@@ -3,14 +3,12 @@
 namespace Aedart\Contracts\Collections;
 
 use Aedart\Contracts\Collections\Exceptions\SummationCollectionException;
-use Aedart\Contracts\Collections\Summations\Rules\Factory as ProcessingRulesFactory;
 use ArrayAccess;
 use Countable;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use IteratorAggregate;
 use JsonSerializable;
-use Traversable;
 
 /**
  * Summation Collection
@@ -30,70 +28,15 @@ interface Summation extends
     Jsonable
 {
     /**
-     * Creates new Summation instance with given items and processing
-     * rules factory
+     * Creates new Summation instance with given results
      *
-     * @param array|Traversable $items
-     * @param  ProcessingRulesFactory|null  $factory  [optional]
+     * @param array $results  [optional]
      *
      * @return static
      *
      * @throws SummationCollectionException
      */
-    public static function make($items, ?ProcessingRulesFactory $factory = null): Summation;
-
-    /**
-     * Creates new Summation instance with given items and processing
-     * rules factory. Once instance is created, method will process
-     * all items according to the resulting processing rules
-     *
-     * @see process
-     *
-     * @param array|Traversable $items
-     * @param  ProcessingRulesFactory|null  $factory  [optional]
-     *
-     * @return static
-     *
-     * @throws SummationCollectionException
-     */
-    public static function build($items, ?ProcessingRulesFactory $factory = null): Summation;
-
-    /**
-     * Creates new Summation instance assigned items and given
-     * processing rules factory
-     *
-     * @param  ProcessingRulesFactory  $factory
-     *
-     * @return static
-     *
-     * @throws SummationCollectionException
-     */
-    public function withRulesFactory(ProcessingRulesFactory $factory): Summation;
-
-    /**
-     * Returns rules factory
-     *
-     * @return ProcessingRulesFactory
-     */
-    public function rulesFactory(): ProcessingRulesFactory;
-
-    /**
-     * Returns the items that form the basis for
-     * this Summation's results
-     *
-     * @return array|Traversable
-     */
-    public function items();
-
-    /**
-     * Applies processing rules on items and builds
-     * this summation's result
-     *
-     * @return self
-     *
-     * @throws SummationCollectionException
-     */
-    public function process(): self;
+    public static function make(array $results = []): Summation;
 
     /**
      * Set the value for a given key
