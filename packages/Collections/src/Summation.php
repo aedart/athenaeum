@@ -5,17 +5,14 @@ namespace Aedart\Collections;
 use Aedart\Collections\Exceptions\KeyNotFound;
 use Aedart\Collections\Exceptions\UnsupportedArithmeticOperator;
 use Aedart\Collections\Exceptions\ValueNotNumeric;
-use Aedart\Contracts\Collections\Exceptions\SummationCollectionException;
 use Aedart\Contracts\Collections\Summation as SummationInterface;
 use Aedart\Utils\Arr;
 use Aedart\Utils\Json;
 use ArrayIterator;
-use Exception;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use JsonSerializable;
 use Symfony\Component\VarDumper\VarDumper;
-use Traversable;
 
 /**
  * Summation Collection
@@ -159,7 +156,7 @@ class Summation implements SummationInterface
      */
     public function hasNoValue(string $key): bool
     {
-        return ! $this->hasValue($key);
+        return !$this->hasValue($key);
     }
 
     /**
@@ -175,7 +172,7 @@ class Summation implements SummationInterface
      */
     public function isNotEmpty(): bool
     {
-        return ! $this->isEmpty();
+        return !$this->isEmpty();
     }
 
     /**

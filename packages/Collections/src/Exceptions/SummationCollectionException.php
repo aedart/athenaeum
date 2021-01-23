@@ -9,11 +9,10 @@ use RuntimeException;
  * Summation Collection Exception
  *
  * @see \Aedart\Contracts\Collections\Exceptions\SummationCollectionException
- * 
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Collections\Exceptions
  */
 class SummationCollectionException extends RuntimeException implements SummationCollectionExceptionInterface
 {
-
 }

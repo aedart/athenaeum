@@ -13,5 +13,4 @@ namespace Aedart\Collections\Exceptions;
  */
 class KeyNotFound extends SummationCollectionException
 {
-
 }

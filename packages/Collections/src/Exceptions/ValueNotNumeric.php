@@ -13,5 +13,4 @@ namespace Aedart\Collections\Exceptions;
  */
 class ValueNotNumeric extends SummationCollectionException
 {
-
 }
