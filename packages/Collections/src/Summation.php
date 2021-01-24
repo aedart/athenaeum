@@ -328,14 +328,13 @@ class Summation implements SummationInterface
      * @return self
      *
      * @throws KeyNotFound
-     * @throws ValueNotNumeric
      * @throws UnsupportedArithmeticOperator
      */
     protected function arithmeticOperation(string $key, $amount, string $operator = '+'): SummationInterface
     {
         $value = $this
             ->assertKeyExists($key)
-            ->getNumericValue($key);
+            ->get($key);
 
         if (is_callable($amount)) {
             return $this->applyCallback($key, $amount, $value);
@@ -379,28 +378,6 @@ class Summation implements SummationInterface
     protected function applyCallback(string $key, callable $callback, $value = null): SummationInterface
     {
         return $this->set($key, $callback($value, $this));
-    }
-
-    /**
-     * Returns the value for given key, if it is numeric.
-     * Fails if key's value is not numeric.
-     *
-     * @see assertKeyExists
-     *
-     * @param  string  $key
-     *
-     * @return int|float
-     *
-     * @throws ValueNotNumeric
-     */
-    protected function getNumericValue(string $key)
-    {
-        $value = $this->get($key);
-        if (!is_numeric($value)) {
-            throw new ValueNotNumeric(sprintf('Value for key %s is not numeric.', $key));
-        }
-
-        return $value;
     }
 
     /**

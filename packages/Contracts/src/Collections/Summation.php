@@ -78,8 +78,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationCollectionException If key does not exist, if value is not numeric,
-     *                            or invalid amount argument
+     * @throws SummationCollectionException If key does not exist
      */
     public function increase(string $key, $amount = 1): self;
 
@@ -94,8 +93,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationCollectionException If key does not exist, if value is not numeric,
-     *                            or invalid amount argument
+     * @throws SummationCollectionException If key does not exist
      */
     public function decrease(string $key, $amount = 1): self;
 
@@ -110,8 +108,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationCollectionException If key does not exist, if value is not numeric,
-     *                            or invalid amount argument
+     * @throws SummationCollectionException If key does not exist
      */
     public function add(string $key, $amount): self;
 
@@ -126,8 +123,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationCollectionException If key does not exist, if value is not numeric,
-     *                            or invalid amount argument
+     * @throws SummationCollectionException If key does not exist
      */
     public function subtract(string $key, $amount): self;
 
@@ -142,8 +138,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationCollectionException If key does not exist, if value is not numeric,
-     *                            or invalid amount argument
+     * @throws SummationCollectionException If key does not exist
      */
     public function multiply(string $key, $amount): self;
 
@@ -158,8 +153,7 @@ interface Summation extends
      *
      * @return self
      *
-     * @throws SummationCollectionException If key does not exist, if value is not numeric,
-     *                            or invalid amount argument
+     * @throws SummationCollectionException If key does not exist
      */
     public function divide(string $key, $amount): self;
 
