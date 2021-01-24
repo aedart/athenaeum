@@ -312,7 +312,9 @@ class Summation implements SummationInterface
     protected function retrieveResultsFrom($source = []): array
     {
         // Use Laravel's Collection to resolve results.
-        return Collection::make($source)->all();
+        return Arr::undot(
+            Collection::make($source)->all()
+        );
     }
 
     /**
