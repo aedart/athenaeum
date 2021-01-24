@@ -4,7 +4,6 @@ namespace Aedart\Collections;
 
 use Aedart\Collections\Exceptions\KeyNotFound;
 use Aedart\Collections\Exceptions\UnsupportedArithmeticOperator;
-use Aedart\Collections\Exceptions\ValueNotNumeric;
 use Aedart\Contracts\Collections\Summation as SummationInterface;
 use Aedart\Utils\Arr;
 use Aedart\Utils\Json;
