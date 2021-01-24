@@ -148,7 +148,7 @@ class Summation implements SummationInterface
 
         $value = $this->get($key);
 
-        return empty($value);
+        return !empty($value);
     }
 
     /**
