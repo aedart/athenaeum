@@ -4,6 +4,10 @@
 
 ### [Unreleased]
 
+#### Added
+
+* `undot()` method in `Arr` utility.
+
 #### Changed
 
 * Bumped license year, in `LICENSE` files.
