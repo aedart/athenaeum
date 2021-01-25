@@ -1,6 +1,6 @@
 <?php
 
-namespace Aedart\Tests\Unit\Collections;
+namespace Aedart\Tests\Unit\Collections\Summations;
 
 use Aedart\Collections\Exceptions\KeyNotFound;
 use Aedart\Collections\Summation;
