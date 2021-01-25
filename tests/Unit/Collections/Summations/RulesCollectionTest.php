@@ -76,13 +76,13 @@ class RulesCollectionTest extends UnitTestCase
     public function makeProcessingRuleMocks(int $amount = 3, ?callable $callback = null): array
     {
         // Resolve callback
-        $callback = $callback ?? function($mock) {
+        $callback = $callback ?? function ($mock) {
             return $mock;
         };
 
         $output = [];
 
-        while($amount--) {
+        while ($amount--) {
             $output[] = $callback($this->makeProcessingRuleMock());
         }
 
@@ -203,12 +203,12 @@ class RulesCollectionTest extends UnitTestCase
         $summation = $this->makeSummationCollection();
         $amountRulesInvoked = 0;
 
-        $rules = $this->makeProcessingRuleMocks(3, function(m\MockInterface $mock) use($item, $summation, &$amountRulesInvoked) {
+        $rules = $this->makeProcessingRuleMocks(3, function (m\MockInterface $mock) use ($item, $summation, &$amountRulesInvoked) {
             return $mock
                 ->shouldReceive('process')
                 ->once()
                 ->with($item, $summation)
-                ->andReturnUsing(function() use($summation, &$amountRulesInvoked) {
+                ->andReturnUsing(function () use ($summation, &$amountRulesInvoked) {
                     ConsoleDebugger::output('Invoking Processing Rule...');
                     $amountRulesInvoked++;
 
