@@ -23,6 +23,7 @@
         "illuminate/collections": "^8.15",
         "aedart/athenaeum-container": "^5.5",
         "aedart/athenaeum-contracts": "^5.5",
+        "aedart/athenaeum-support": "^5.5",
         "aedart/athenaeum-utils": "^5.5"
     },
     "autoload": {
