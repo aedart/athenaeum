@@ -73,9 +73,9 @@ interface Rules extends
      * Returns the summation assigned for this
      * collection of processing rules
      *
-     * @return Summation
+     * @return Summation|null
      */
-    public function summation(): Summation;
+    public function summation(): ?Summation;
 
     /**
      * Creates a new collection with given summation

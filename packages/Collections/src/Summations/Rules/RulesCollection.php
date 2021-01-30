@@ -27,9 +27,9 @@ class RulesCollection implements Rules
     /**
      * The Summation Collection instance
      *
-     * @var Summation
+     * @var Summation|null
      */
-    protected Summation $summation;
+    protected ?Summation $summation;
 
     /**
      * List of processing rules
@@ -41,11 +41,11 @@ class RulesCollection implements Rules
     /**
      * RulesCollection constructor.
      *
-     * @param  mixed $item
-     * @param  ProcessingRule[]  $rules
-     * @param  Summation  $summation
+     * @param  mixed $item  [optional]
+     * @param  ProcessingRule[]  $rules  [optional]
+     * @param  Summation|null  $summation  [optional]
      */
-    public function __construct($item, array  $rules, Summation $summation)
+    public function __construct($item = null, array  $rules = [], ?Summation $summation = null)
     {
         $this->item = $item;
         $this->rules = $rules;
@@ -103,7 +103,7 @@ class RulesCollection implements Rules
     /**
      * @inheritDoc
      */
-    public function summation(): Summation
+    public function summation(): ?Summation
     {
         return $this->summation;
     }
