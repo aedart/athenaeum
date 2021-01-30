@@ -20,15 +20,44 @@ interface ItemsProcessor
      * Process given items and return resulting summation collection
      *
      * @param  array|Traversable  $items List of items to be processed
-     * @param  ProcessingRule[]|string[]|Repository  $rules Processing Rules instances, class paths or Repository of
-     *                                                processing rules.
-     * @param  Summation|null  $summation [optional] Summation instance to be passed on to processing rules.
-     *                                    If none given, then a new Summation instance
-     *                                    will be created.
      *
      * @return Summation
      *
      * @throws SummationCollectionException
      */
-    public function process($items, $rules, ?Summation $summation = null): Summation;
+    public function process($items): Summation;
+
+    /**
+     * Returns a Repository of Processing Rules
+     *
+     * @return Repository
+     */
+    public function rules(): Repository;
+
+    /**
+     * Creates a new items processor with given processing rules
+     *
+     * @param  ProcessingRule[]|string[]|Repository  $rules Processing Rules instances, class paths or Repository of
+     *                                                processing rules.
+     *
+     * @return static
+     */
+    public function withRules($rules): ItemsProcessor;
+
+    /**
+     * Returns the summation collection to be passed
+     * on to each processing rule
+     *
+     * @return Summation
+     */
+    public function summation(): Summation;
+
+    /**
+     * Creates a new items processor with given summation collection
+     *
+     * @param  Summation  $summation
+     *
+     * @return static
+     */
+    public function withSummation(Summation $summation): ItemsProcessor;
 }
