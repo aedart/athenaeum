@@ -44,6 +44,15 @@ interface Rules extends
     public function rules(): array;
 
     /**
+     * Creates a new collection with given processing rules
+     *
+     * @param  ProcessingRule[]  $rules
+     *
+     * @return static
+     */
+    public function withRules(array $rules): Rules;
+
+    /**
      * Returns the item to be processed by this
      * collection's processing rules
      *
@@ -52,10 +61,28 @@ interface Rules extends
     public function item();
 
     /**
+     * Creates a new collection with given item.
+     *
+     * @param mixed $item
+     *
+     * @return static
+     */
+    public function withItem($item): Rules;
+
+    /**
      * Returns the summation assigned for this
      * collection of processing rules
      *
      * @return Summation
      */
     public function summation(): Summation;
+
+    /**
+     * Creates a new collection with given summation
+     *
+     * @param  Summation  $summation
+     *
+     * @return static
+     */
+    public function withSummation(Summation $summation): Rules;
 }

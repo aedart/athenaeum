@@ -129,6 +129,21 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    public function canCreateNewInstanceWithItem()
+    {
+        $item = $this->makeItemMock();
+
+        $collectionA = $this->makeCollection();
+        $collectionB = $collectionA
+            ->withItem($item);
+
+        $this->assertSame($item, $collectionB->item());
+        $this->assertNotSame($collectionA, $collectionB);
+    }
+
+    /**
+     * @test
+     */
     public function canObtainSummationCollection()
     {
         $summation = $this->makeSummationCollection();
@@ -142,6 +157,21 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    public function canCreateNewInstanceWithSummation()
+    {
+        $summation = $this->makeSummationCollection();
+
+        $collectionA = $this->makeCollection();
+        $collectionB = $collectionA
+            ->withSummation($summation);
+
+        $this->assertSame($summation, $collectionB->summation());
+        $this->assertNotSame($collectionA, $collectionB);
+    }
+
+    /**
+     * @test
+     */
     public function canObtainRules()
     {
         $rules = $this->makeProcessingRuleMocks();
@@ -150,6 +180,21 @@ class RulesCollectionTest extends UnitTestCase
             ->rules();
 
         $this->assertSame($rules, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function canCreateNewInstanceWithRules()
+    {
+        $rules = $this->makeProcessingRuleMocks();
+
+        $collectionA = $this->makeCollection();
+        $collectionB = $collectionA
+            ->withRules($rules);
+
+        $this->assertSame($rules, $collectionB->rules());
+        $this->assertNotSame($collectionA, $collectionB);
     }
 
     /**

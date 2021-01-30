@@ -79,6 +79,14 @@ class RulesCollection implements Rules
     /**
      * @inheritDoc
      */
+    public function withRules(array $rules): Rules
+    {
+        return new static($this->item(), $rules, $this->summation());
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function item()
     {
         return $this->item;
@@ -87,9 +95,25 @@ class RulesCollection implements Rules
     /**
      * @inheritDoc
      */
+    public function withItem($item): Rules
+    {
+        return new static($item, $this->rules(), $this->summation());
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function summation(): Summation
     {
         return $this->summation;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function withSummation(Summation $summation): Rules
+    {
+        return new static($this->item(), $this->rules(), $summation);
     }
 
     /**
