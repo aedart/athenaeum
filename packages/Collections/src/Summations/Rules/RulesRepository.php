@@ -55,6 +55,9 @@ class RulesRepository implements
      */
     public function matching($item): Rules
     {
+        // To ensure that processing rules are as "stateless" as possible,
+        // we create new instances here. This will provide the cleanest
+        // use-case for when processing an item.
         $rules = $this->resolveRules();
 
         // Determine whether or not processing rule can process given
@@ -67,7 +70,7 @@ class RulesRepository implements
 
             return true;
         });
-        
+
         return $this->makeRulesCollection()
             ->withItem($item)
             ->withRules($matching);
@@ -78,6 +81,9 @@ class RulesRepository implements
      */
     public function all(): Rules
     {
+        // Same principle here, as for with matching.
+        // New instances are more favourable rather than
+        // existing.
         $rules = $this->resolveRules();
 
         return $this->makeRulesCollection()->withRules($rules);
