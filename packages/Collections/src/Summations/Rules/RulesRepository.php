@@ -63,7 +63,7 @@ class RulesRepository implements
         // Determine whether or not processing rule can process given
         // item. If the rule in question is not able to determine this,
         // we assume that the rule always can process given item.
-        $matching = array_filter($rules, function(ProcessingRule $rule) use($item) {
+        $matching = array_filter($rules, function (ProcessingRule $rule) use ($item) {
             if ($rule instanceof Determinable) {
                 return $rule->canProcess($item);
             }
