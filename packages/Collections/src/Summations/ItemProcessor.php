@@ -3,7 +3,6 @@
 
 namespace Aedart\Collections\Summations;
 
-
 use Aedart\Collections\Exceptions\NotTraversable;
 use Aedart\Collections\Summation as SummationCollection;
 use Aedart\Collections\Summations\Rules\RulesRepository;

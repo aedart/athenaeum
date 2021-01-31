@@ -14,5 +14,4 @@ namespace Aedart\Collections\Exceptions;
  */
 class NotTraversable extends SummationCollectionException
 {
-
 }
