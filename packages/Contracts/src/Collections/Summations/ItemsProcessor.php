@@ -19,6 +19,11 @@ interface ItemsProcessor
     /**
      * Process given items and return resulting summation collection
      *
+     * Method will invoke `before` and `after` callbacks, if available.
+     *
+     * @see before
+     * @see after
+     *
      * @param  array|Traversable  $items List of items to be processed
      *
      * @return Summation
@@ -26,6 +31,30 @@ interface ItemsProcessor
      * @throws SummationCollectionException
      */
     public function process($items): Summation;
+
+    /**
+     * Apply a callback onto the Summation Collection, before
+     * items are processed.
+     *
+     * @param  callable|null  $callback  [optional] Summation Collection is given
+     *                                   as argument to callback, when invoked.
+     *                                   Callback MUST return a Summation Collection!
+     *
+     * @return self
+     */
+    public function before(?callable $callback = null): self;
+
+    /**
+     * Apply a callback onto the Summation Collection, before
+     * items are processed.
+     *
+     * @param  callable|null  $callback  [optional] Summation Collection is given
+     *                                   as argument to callback, when invoked.
+     *                                   Callback MUST return a Summation Collection!
+     *
+     * @return self
+     */
+    public function after(?callable $callback = null): self;
 
     /**
      * Returns a Repository of Processing Rules

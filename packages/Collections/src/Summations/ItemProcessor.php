@@ -53,6 +53,20 @@ class ItemProcessor implements
     protected string $defaultRepository = RulesRepository::class;
 
     /**
+     * Before callback
+     *
+     * @var callable|null
+     */
+    protected $before = null;
+
+    /**
+     * After callback
+     *
+     * @var callable|null
+     */
+    protected $after = null;
+
+    /**
      * ItemProcessor constructor.
      *
      * @param  ProcessingRule[]|string[]|Repository  $rules Processing Rules instances, class paths or Repository of
@@ -74,18 +88,42 @@ class ItemProcessor implements
      */
     public function process($items): Summation
     {
+        // Abort if unable to traverse
         if (!(is_array($items) || $items instanceof Traversable)) {
             throw new NotTraversable('Unable to process items. List is not an array or traversable.');
         }
 
-        $rules = $this->rules();
-        $summation = $this->summation();
+        // Apply the "before" callback, if required
+        $summation = $this->applyCallback($this->summation(), $this->before);
 
+        // Process items
+        $rules = $this->rules();
         foreach ($items as $item) {
             $summation = $this->processSingleItem($item, $rules, $summation);
         }
 
-        return $summation;
+        // Apply "after" callback, if required and return summation.
+        return $this->applyCallback($summation, $this->after);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function before(?callable $callback = null): ItemsProcessor
+    {
+        $this->before = $callback;
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function after(?callable $callback = null): ItemsProcessor
+    {
+        $this->after = $callback;
+
+        return $this;
     }
 
     /**
@@ -103,7 +141,9 @@ class ItemProcessor implements
      */
     public function withRules($rules): ItemsProcessor
     {
-        return new static($rules, $this->summation(), $this->getContainer());
+        return (new static($rules, $this->summation(), $this->getContainer()))
+            ->before($this->before)
+            ->after($this->after);
     }
 
     /**
@@ -121,7 +161,9 @@ class ItemProcessor implements
      */
     public function withSummation(Summation $summation): ItemsProcessor
     {
-        return new static($this->rules(), $summation, $this->getContainer());
+        return (new static($this->rules(), $summation, $this->getContainer()))
+            ->before($this->before)
+            ->after($this->after);
     }
 
     /*****************************************************************
@@ -145,6 +187,23 @@ class ItemProcessor implements
             ->matching($item)
             ->withSummation($summation)
             ->process();
+    }
+
+    /**
+     * Applies given callback and returns resulting Summation
+     *
+     * @param  Summation  $summation
+     * @param  callable|null  $callback  [optional]
+     *
+     * @return Summation
+     */
+    protected function applyCallback(Summation $summation, callable $callback = null): Summation
+    {
+        if (!isset($callback)) {
+            return $summation;
+        }
+
+        return $callback($summation);
     }
 
     /**
