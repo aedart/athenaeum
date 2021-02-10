@@ -3,6 +3,7 @@
 namespace Aedart\Testing\Laravel;
 
 use Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration;
+use Illuminate\Container\Container;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Facade;
 use Orchestra\Testbench\Concerns\Testing;
@@ -75,6 +76,10 @@ trait ApplicationInitiator
 
         // Tear down test environment
         $this->tearDownTheTestEnvironment();
+
+        // Clear the service container's own instance, which
+        // is set to Laravel's Application at this point.
+        Container::setInstance(null);
 
         // Clear Facade instances
         Facade::clearResolvedInstances();
