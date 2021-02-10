@@ -6,6 +6,7 @@ use Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Facade;
 use Orchestra\Testbench\Concerns\Testing;
+use Orchestra\Testbench\Foundation\PackageManifest;
 
 /**
  * Application Initiator
@@ -71,9 +72,6 @@ trait ApplicationInitiator
         if (!$this->hasApplicationBeenStarted()) {
             return false;
         }
-
-        // Clear service container instance
-        $this->app->setInstance(null);
 
         // Tear down test environment
         $this->tearDownTheTestEnvironment();
@@ -175,6 +173,8 @@ trait ApplicationInitiator
                 'Illuminate\Foundation\Bootstrap\LoadConfiguration',
                 $this->resolveConfigurationLoaderBinding()
             );
+
+            PackageManifest::swap($app, $this);
         });
     }
 
