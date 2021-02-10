@@ -4,9 +4,20 @@
 
 ### [Unreleased]
 
+### [v5.5.0](https://github.com/aedart/athenaeum/compare/5.4.0...5.5.0)
+
+#### Fixed
+
+* Facade root not set during test teardown, in `LaravelTestCase` and `ApplicationInitiator`¹.
+* Laravel's `Application` still bound as `IoC`'s static instance, causing strange behaviour in some tests². 
+
+¹: _The happened sometime after Laravel released the "parallel testing" feature and Orchestra Testbench enabled it._
+²: _Unintended side effect of fixing the `ApplicationInitiator`._
+
 #### Changed
 
 * Bumped license year, in `LICENSE` files.
+* Minimum required [Orchestra Testbench](https://packagist.org/packages/orchestra/testbench) set to `v6.12.x`.
 
 ### [v5.4.0](https://github.com/aedart/athenaeum/compare/5.3.5...5.4.0)
 
