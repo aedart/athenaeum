@@ -48,9 +48,9 @@ abstract class BrowserTestCase extends IntegrationTestCase
      */
     protected function _after()
     {
-        parent::_after();
-
         $this->stopApplication();
+
+        parent::_after();
     }
 
     /**
