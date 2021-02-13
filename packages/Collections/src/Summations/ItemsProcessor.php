@@ -8,7 +8,7 @@ use Aedart\Collections\Summation as SummationCollection;
 use Aedart\Collections\Summations\Rules\RulesRepository;
 use Aedart\Contracts\Collections\Exceptions\SummationCollectionException;
 use Aedart\Contracts\Collections\Summation;
-use Aedart\Contracts\Collections\Summations\ItemsProcessor;
+use Aedart\Contracts\Collections\Summations\ItemsProcessor as ItemsProcessorInterface;
 use Aedart\Contracts\Collections\Summations\Rules\ProcessingRule;
 use Aedart\Contracts\Collections\Summations\Rules\Repository;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
@@ -24,8 +24,8 @@ use Traversable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Collections\Summations
  */
-class ItemProcessor implements
-    ItemsProcessor,
+class ItemsProcessor implements
+    ItemsProcessorInterface,
     ContainerAware
 {
     use ContainerTrait;
