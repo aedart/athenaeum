@@ -21,7 +21,7 @@ use Aedart\Tests\Helpers\Dummies\Collections\Summations\Rules\WalkingRule;
  * @group collections
  * @group summations
  * @group items-processor
- * 
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Collections\Summations
  */
@@ -117,14 +117,14 @@ class ItemsProcessorTest extends IntegrationTestCase
 
         // Process items... apply before / after callbacks
         $results = $processor
-            ->before(function(Summation $summation) {
+            ->before(function (Summation $summation) {
                 return $summation
                     ->set('amount', 0)
                     ->set('points', 0);
             })
-            ->after(function(Summation $summation) {
+            ->after(function (Summation $summation) {
                 return $summation
-                    ->set('average', function($value, Summation $summation) {
+                    ->set('average', function ($value, Summation $summation) {
                         return $summation->get('points') / $summation->get('amount');
                     });
             })

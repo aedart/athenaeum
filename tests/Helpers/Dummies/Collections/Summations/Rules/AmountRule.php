@@ -22,7 +22,7 @@ class AmountRule implements
      */
     public function process($item, Summation $summation): Summation
     {
-        $result =  $summation->increase('amount', 1);
+        $result = $summation->increase('amount', 1);
 
         ConsoleDebugger::output('- - - - - - - - - - - - - - - - ');
         ConsoleDebugger::output('Amount Rule', $item['activity'], 'amount: ' . $result->get('amount'));
