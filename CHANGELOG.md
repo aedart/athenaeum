@@ -7,8 +7,11 @@
 #### Added
 
 * `undot()` method in `Arr` utility.
+
 ### [v5.5.1](https://github.com/aedart/athenaeum/compare/5.5.0...5.5.1)
+
 #### Fixed
+
 * Incorrect teardown order in `BrowserTestCase`
 
 ### [v5.5.0](https://github.com/aedart/athenaeum/compare/5.4.0...5.5.0)
