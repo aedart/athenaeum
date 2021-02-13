@@ -22,6 +22,22 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Collections',
+            collapsable: true,
+            children: [
+                'collections/',
+                'collections/install',
+                {
+                    title: 'Summation',
+                    collapsable: true,
+                    children: [
+                        'collections/summation/',
+                        'collections/summation/items-processor'
+                    ]
+                },
+            ]
+        },
+        {
             title: 'Config',
             collapsable: true,
             children: [
