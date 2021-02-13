@@ -40,9 +40,9 @@ class ApplicationInitiatorTest extends Test
      */
     protected function _after()
     {
-        $this->stopApplication();
-
         parent::_after();
+
+        $this->stopApplication();
     }
 
     /*****************************************************************
