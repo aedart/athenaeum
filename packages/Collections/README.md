@@ -1,6 +1,10 @@
 # Athenaeum Collections
 
-TODO: 
+This package offers a few collections and data processing related utilities.
+Among them are the following components:
+
+* [Summation](https://aedart.github.io/athenaeum/archive/current/collections/summation/)
+* [Item Processor](https://aedart.github.io/athenaeum/archive/current/collections/summation/items-processor)
 
 ## Documentation
 

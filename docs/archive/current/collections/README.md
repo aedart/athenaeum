@@ -6,7 +6,10 @@ sidebarDepth: 0
 
 _**Available since** `v5.6.0`_
 
-This package offers a few and collections related utilities. Among them are the following:
+This package offers a few collections and data processing related utilities.
+Among them are the following components:
 
 * [Summation](./summation/README.md)
+* [Item Processor](./summation/items-processor.md)
+
 
