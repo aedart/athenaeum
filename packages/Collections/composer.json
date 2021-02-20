@@ -1,9 +1,10 @@
 {
     "name": "aedart/athenaeum-collections",
-    "description": "Collections and Helpers",
+    "description": "Collections and data processing utilities",
     "keywords": [
         "Athenaeum",
-        "Collections"
+        "Collections",
+        "Items Processor"
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "support": {
