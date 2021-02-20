@@ -8,6 +8,7 @@
         "fzaninotto/faker": "1.9.*",
         "guzzlehttp/guzzle": "^7.1",
         "illuminate/cache": "^8.15",
+        "illuminate/collections": "^8.15",
         "illuminate/config": "^8.15",
         "illuminate/console": "^8.15",
         "illuminate/container": "^8.15",
@@ -49,6 +50,7 @@
         "psr-4": {
             "Aedart\\": "src",
             "Aedart\\Circuits\\": "packages/Circuits/src",
+            "Aedart\\Collections\\": "packages/Collections/src",
             "Aedart\\Config\\": "packages/Config/src",
             "Aedart\\Console\\": "packages/Console/src",
             "Aedart\\Container\\": "packages/Container/src",
@@ -73,6 +75,7 @@
     },
     "replace": {
         "aedart/athenaeum-circuits": "self.version",
+        "aedart/athenaeum-collections": "self.version",
         "aedart/athenaeum-config": "self.version",
         "aedart/athenaeum-console": "self.version",
         "aedart/athenaeum-container": "self.version",
