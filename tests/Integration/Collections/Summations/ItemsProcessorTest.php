@@ -88,6 +88,22 @@ class ItemsProcessorTest extends IntegrationTestCase
         ];
     }
 
+    /**
+     * Returns a list of "activity" records
+     *
+     * @see makeActivityRecord
+     *
+     * @param  int  $amount  [optional]
+     *
+     * @return \Generator
+     */
+    public function yieldedActivities(int $amount = 10)
+    {
+        while($amount--) {
+            yield $this->makeActivityRecord('running');
+        }
+    }
+
     /*****************************************************************
      * Actual Tests
      ****************************************************************/
@@ -135,5 +151,28 @@ class ItemsProcessorTest extends IntegrationTestCase
         $this->assertSame(10, $results->get('amount'));
         $this->assertSame(29, $results->get('points'));
         $this->assertSame(2.9, $results->get('average'));
+    }
+
+    /**
+     * @test
+     */
+    public function canProcessYieldedItems()
+    {
+        // Create new processor with given rules (testing if they can be resolved...)
+        $processor = $this->makeProcessor([
+            RunningRule::class,
+        ]);
+
+        // Process items... apply before / after callbacks
+        $results = $processor
+            ->before(function (Summation $summation) {
+                return $summation
+                    ->set('points', 0);
+            })
+            ->process($this->yieldedActivities());
+
+        ConsoleDebugger::output($results);
+
+        $this->assertSame(50, $results->get('points'));
     }
 }
