@@ -4,8 +4,11 @@
 
 ### [Unreleased]
 
+### [v5.6.0](https://github.com/aedart/athenaeum/compare/5.5.1...5.6.0)
+
 #### Added
 
+* Collections package, with `Summation` and `ItemProcessor` components. [#27](https://github.com/aedart/athenaeum/issues/27) 
 * `undot()` method in `Arr` utility.
 
 ### [v5.5.1](https://github.com/aedart/athenaeum/compare/5.5.0...5.5.1)
