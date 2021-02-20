@@ -99,7 +99,7 @@ class ItemsProcessorTest extends IntegrationTestCase
      */
     public function yieldedActivities(int $amount = 10)
     {
-        while($amount--) {
+        while ($amount--) {
             yield $this->makeActivityRecord('running');
         }
     }
