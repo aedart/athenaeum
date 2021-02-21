@@ -20,6 +20,8 @@
     ],
     "require": {
         "php": ">=7.4.0",
+        "league/commonmark": "^1.5.7",
+        "league/html-to-markdown": "^4.10.",
         "aedart/athenaeum-support": "^5.7"
     },
     "autoload": {
