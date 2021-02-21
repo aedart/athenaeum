@@ -4,6 +4,10 @@
 
 ### [Unreleased]
 
+#### Added
+
+* `application()` method in `\Aedart\Utils\Version`, which is able to return application's version. [#25](https://github.com/aedart/athenaeum/issues/25)
+
 ### [v5.6.0](https://github.com/aedart/athenaeum/compare/5.5.1...5.6.0)
 
 #### Added
