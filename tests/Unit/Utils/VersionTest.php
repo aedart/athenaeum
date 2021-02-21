@@ -82,4 +82,16 @@ class VersionTest extends UnitTestCase
         $resultB = Version::hasFor('acme/unknown-pgk-' . $this->getFaker()->word);
         $this->assertFalse($resultB, 'Should not exist for B');
     }
+
+    /**
+     * @test
+     */
+    public function canGetApplicationVersion()
+    {
+        $version = Version::application();
+
+        ConsoleDebugger::output((string)$version);
+
+        $this->assertNotEmpty($version);
+    }
 }
