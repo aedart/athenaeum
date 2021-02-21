@@ -60,7 +60,7 @@ class Version
             }
         } catch (OutOfBoundsException $e) {
             // This means that the package was not installed / found.
-            // This we can safely ignore.
+            // So we can safely ignore this exception.
         }
 
         return false;
