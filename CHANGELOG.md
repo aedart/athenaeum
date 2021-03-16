@@ -4,9 +4,15 @@
 
 ### [Unreleased]
 
+### [v5.7.0](https://github.com/aedart/athenaeum/compare/5.6.0...5.7.0)
+
 #### Added
 
 * `application()` method in `\Aedart\Utils\Version`, which is able to return application's version. [#25](https://github.com/aedart/athenaeum/issues/25)
+
+#### Fixed
+
+* Too many Chrome driver processes started in `BrowserTestCase`, possibly causing a `Connection Refused` error. [#33](https://github.com/aedart/athenaeum/issues/33)
 
 ### [v5.6.0](https://github.com/aedart/athenaeum/compare/5.5.1...5.6.0)
 
