@@ -60,6 +60,11 @@ abstract class BrowserTestCase extends IntegrationTestCase
      */
     public static function prepare()
     {
+        // Avoid starting multiple chrome driver processes
+        if (isset(static::$chromeProcess) && static::$chromeProcess->isRunning()) {
+            return;
+        }
+
         ConsoleDebugger::output('Starting Chrome Driver');
 
         static::startChromeDriver([
