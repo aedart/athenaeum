@@ -37,7 +37,7 @@ class CreateAclTables extends Migration
             $table->id();
 
             $table->foreignIdFor(Group::class)
-                ->constrained()
+                ->constrained($this->aclTable('groups'))
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
 
