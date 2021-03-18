@@ -1,5 +1,6 @@
 <?php
 
+use Aedart\Acl\Models\Permissions\Group;
 use Aedart\Acl\Traits\AclComponentsTrait;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -30,6 +31,22 @@ class CreateAclTables extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        // Create Permissions table
+        Schema::create($this->aclTable('permissions'), function(Blueprint $table) {
+            $table->id();
+
+            $table->foreignIdFor(Group::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
+            $table->string('slug')->unique('permissions_slug');
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -39,6 +56,7 @@ class CreateAclTables extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists($this->aclTable('permissions'));
         Schema::dropIfExists($this->aclTable('groups'));
     }
 }
