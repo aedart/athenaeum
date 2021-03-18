@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Integration\Acl\Models;
 
+use Aedart\Acl\Models\Permission;
 use Aedart\Acl\Models\Permissions\Group;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Acl\AclTestCase;
@@ -68,14 +69,62 @@ class PermissionGroupModelTest extends AclTestCase
     /**
      * @test
      *
-     * @throws \Throwable
+     * @throws \Exception
      */
-    public function canCreateGroupWithPermissions()
+    public function canSoftDeleteGroup()
     {
-        $group = Group::createWithPermissions('users', [
-
+        /** @var group $group */
+        $group = Group::create([
+            'slug' => 'users',
+            'name' => 'Users',
         ]);
 
+        $result = $group->delete();
+
+        $this->assertTrue($result, 'Group was not deleted');
+        $this->assertTrue($group->trashed(), 'Group is not soft-deleted (not trashed)');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function canCreateWithPermissions()
+    {
+        $permissions = $this->makePermissionsForGroupCreate();
+
+        /** @var Group $group */
+        $group = Group::createWithPermissions('users', $permissions);
+
+        // Reload with permissions
+        $group = $group::with('permissions')->first();
+
         ConsoleDebugger::output($group->toArray());
+
+        $this->assertCount(count($permissions), $group->permissions, 'Incorrect amount of permissions created');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function deletesPermissionsWhenGroupForcedDeleted()
+    {
+        $table = (new Permission())->getTable();
+        $permissions = $this->makePermissionsForGroupCreate();
+
+        /** @var Group $group */
+        $group = Group::createWithPermissions('users', $permissions);
+
+        // Control test
+        $this->assertDatabaseCount($table, count($permissions), 'testing');
+
+        // Force delete
+        $result = $group->forceDelete();
+
+        $this->assertTrue($result, 'Group was not force deleted');
+        $this->assertDatabaseCount($table, 0, 'testing');
     }
 }

@@ -96,4 +96,23 @@ abstract class AclTestCase extends LaravelTestCase
         return $this;
     }
 
+    /*****************************************************************
+     * Data Providers
+     ****************************************************************/
+
+    /**
+     * Returns permissions data to be used by \Aedart\Acl\Models\Permissions\Group::createWithPermissions
+     *
+     * @return \string[][]
+     */
+    public function makePermissionsForGroupCreate(): array
+    {
+        return [
+            'index' => [ 'name' => 'List', 'description' => 'Ability to see list of users' ],
+            'show' => [ 'name' => 'Read', 'description' => 'Ability to see individual users' ],
+            'store' => [ 'name' => 'Create', 'description' => 'Ability to create new users' ],
+            'update' => [ 'name' => 'Update', 'description' => 'Ability to update existing users' ],
+            'delete' => [ 'name' => 'Delete', 'description' => 'Ability to delete existing users' ],
+        ];
+    }
 }
