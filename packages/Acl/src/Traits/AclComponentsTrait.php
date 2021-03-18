@@ -17,6 +17,18 @@ trait AclComponentsTrait
     use ConfigTrait;
 
     /**
+     * Returns the model class path that corresponds to given identifier
+     *
+     * @param string $identifier
+     *
+     * @return string|null
+     */
+    protected function aclModel(string $identifier): ?string
+    {
+        return $this->getConfig()->get("acl.models.{$identifier}");
+    }
+
+    /**
      * Returns the database table name that corresponds to given identifier
      *
      * @param string $identifier

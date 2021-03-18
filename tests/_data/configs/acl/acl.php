@@ -12,7 +12,9 @@ return [
 
     'models' => [
 
-        'permission_group' => \Aedart\Acl\Models\Permissions\Group::class
+        'permission' => \Aedart\Acl\Models\Permission::class,
+
+        'group' => \Aedart\Acl\Models\Permissions\Group::class
     ],
 
     /*
