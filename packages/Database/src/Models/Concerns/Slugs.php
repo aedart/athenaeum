@@ -45,7 +45,7 @@ trait Slugs
      * Find model by given slug
      *
      * @param string $slug
-     * @param array|string[] $columns [optional]
+     * @param string[] $columns [optional]
      *
      * @return \Illuminate\Database\Eloquent\Model|static|null
      */
@@ -58,7 +58,7 @@ trait Slugs
      * Find model by given slug or fail
      *
      * @param string $slug
-     * @param array|string[] $columns [optional]
+     * @param string[] $columns [optional]
      *
      * @return \Illuminate\Database\Eloquent\Model|static
      *

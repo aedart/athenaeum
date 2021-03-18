@@ -23,7 +23,7 @@ class CreateAclTables extends Migration
     public function up()
     {
         // Create Permission Groups table
-        Schema::create($this->aclTable('groups'), function(Blueprint $table) {
+        Schema::create($this->aclTable('groups'), function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique('permission_groups_slug');
             $table->string('name');
@@ -33,7 +33,7 @@ class CreateAclTables extends Migration
         });
 
         // Create Permissions table
-        Schema::create($this->aclTable('permissions'), function(Blueprint $table) {
+        Schema::create($this->aclTable('permissions'), function (Blueprint $table) {
             $table->id();
 
             $table->foreignIdFor(Group::class)

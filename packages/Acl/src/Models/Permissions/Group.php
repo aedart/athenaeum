@@ -152,7 +152,7 @@ class Group extends Model implements Sluggable
         $output = [];
 
         foreach ($permissions as $key => $value) {
-            $slug = ($prefix) ? $group->slug . '.' . $key : $key;
+            $slug = $prefix ? $group->slug . '.' . $key : $key;
             $name = $value['name'] ?? (string) Str::slugToWords($slug)->ucfirst();
             $description = $value['description'] ?? null;
             $now = Carbon::now();
