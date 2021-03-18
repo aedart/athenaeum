@@ -77,7 +77,7 @@ class PermissionModelTest extends AclTestCase
     /**
      * @test
      */
-    public function eagerLoadsPermissionGroup()
+    public function canEagerLoadGroup()
     {
         /** @var Group $group */
         $group = Group::create([
@@ -99,7 +99,7 @@ class PermissionModelTest extends AclTestCase
         // ------------------------------------------------------------- //
 
         /** @var Permission $found */
-        $found = Permission::first();
+        $found = Permission::with('group')->first();
 
         ConsoleDebugger::output($found->toArray());
 
