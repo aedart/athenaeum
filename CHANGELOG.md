@@ -4,6 +4,10 @@
 
 ### [Unreleased]
 
+#### Added
+
+* `Sluggable` interface and `Slug` concern in new Database package. 
+
 #### Fixed
 
 * Unable to run database migrations via `LaravelTestCase`. Now implements `\Orchestra\Testbench\Contracts\TestCase`, which resolves the issue¹.
