@@ -6,7 +6,8 @@
 
 #### Added
 
-* `Sluggable` interface and `Slug` concern in new Database package. 
+* `Sluggable` interface and `Slug` concern in new Database package.
+* `Str` utility, which offers a few additional string manipulation methods.
 
 #### Fixed
 
