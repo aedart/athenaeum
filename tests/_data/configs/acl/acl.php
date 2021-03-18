@@ -25,6 +25,8 @@ return [
 
     'tables' => [
 
+        'permissions' => 'permissions',
+
         'groups' => 'permission_groups'
 
     ]
