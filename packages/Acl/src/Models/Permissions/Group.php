@@ -27,6 +27,13 @@ class Group extends Model
     use SoftDeletes;
 
     /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var string[]|bool
+     */
+    protected $guarded = ['id'];
+
+    /**
      * @inheritdoc
      */
     public function __construct(array $attributes = [])
