@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\Acl\Models;
 use Aedart\Acl\Models\Permissions\Group;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Acl\AclTestCase;
+use Aedart\Utils\Str;
 
 /**
  * PermissionGroupModelTest
@@ -62,5 +63,19 @@ class PermissionGroupModelTest extends AclTestCase
         $this->assertSame($desc, $group->description);
         $this->assertNotEmpty($group->created_at, 'Created at timestamp not set');
         $this->assertNotEmpty($group->updated_at, 'Updated at timestamp not set');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function canCreateGroupWithPermissions()
+    {
+        $group = Group::createWithPermissions('users', [
+
+        ]);
+
+        ConsoleDebugger::output($group->toArray());
     }
 }
