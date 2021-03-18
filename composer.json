@@ -13,6 +13,7 @@
         "illuminate/console": "^8.15",
         "illuminate/container": "^8.15",
         "illuminate/contracts": "^8.15",
+        "illuminate/database": "^8.15",
         "illuminate/events": "^8.15",
         "illuminate/filesystem": "^8.15",
         "illuminate/pipeline": "^8.15",

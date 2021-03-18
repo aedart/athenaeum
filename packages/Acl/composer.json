@@ -23,6 +23,7 @@
     ],
     "require": {
         "php": ">=7.4.0",
+        "illuminate/database": "^8.15",
         "aedart/athenaeum-contracts": "^5.8",
         "aedart/athenaeum-support": "^5.8",
         "aedart/athenaeum-utils": "^5.8"
