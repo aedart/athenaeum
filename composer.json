@@ -7,6 +7,7 @@
         "dragonmantank/cron-expression": "^3.0",
         "fzaninotto/faker": "1.9.*",
         "guzzlehttp/guzzle": "^7.1",
+        "illuminate/auth": "^8.15",
         "illuminate/cache": "^8.15",
         "illuminate/collections": "^8.15",
         "illuminate/config": "^8.15",
