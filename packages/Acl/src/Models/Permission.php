@@ -63,6 +63,6 @@ class Permission extends Model
      */
     public function group(): BelongsTo
     {
-        return $this->belongsTo($this->aclModel('group'));
+        return $this->belongsTo($this->aclPermissionsGroupModel());
     }
 }
