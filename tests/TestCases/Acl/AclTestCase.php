@@ -49,6 +49,9 @@ abstract class AclTestCase extends LaravelTestCase
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('database.default', 'testing');
+
+        // Enable foreign key constraints for SQLite testing database
+        $app['config']->set('database.connections.testing.foreign_key_constraints', true);
     }
 
     /*****************************************************************
