@@ -1,0 +1,44 @@
+{
+    "name": "aedart/athenaeum-database",
+    "description": "Database utilities for Laravel",
+    "keywords": [
+        "Athenaeum",
+        "Database",
+        "Db"
+    ],
+    "homepage": "https://aedart.github.io/athenaeum/",
+    "support": {
+        "issues": "https://github.com/aedart/athenaeum/issues",
+        "source": "https://github.com/aedart/athenaeum"
+    },
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "illuminate/database": "^8.15",
+        "aedart/athenaeum-contracts": "^5.8",
+        "aedart/athenaeum-support": "^5.8",
+        "aedart/athenaeum-utils": "^5.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\Database\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.8.x-dev"
+        }
+    }
+}
