@@ -41,6 +41,7 @@ parameters:
 
     # for "split" command
     directories_to_repositories:
+        packages/Acl: 'git@github.com:aedart/athenaeum-acl.git'
         packages/Circuits: 'git@github.com:aedart/athenaeum-circuits.git'
         packages/Collections: 'git@github.com:aedart/athenaeum-collections.git'
         packages/Config: 'git@github.com:aedart/athenaeum-config.git'
