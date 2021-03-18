@@ -10,7 +10,7 @@ use Illuminate\Support\Carbon;
 /**
  * Permission Group
  *
- * @property  int $id Unique identifier
+ * @property int $id Unique identifier
  * @property string $slug Unique string identifier
  * @property string $name Name of permission group
  * @property string|null $description Evt. description of permission group
