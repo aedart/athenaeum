@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Acl;
 
+use Aedart\Acl\Traits\HasRoles;
 use Aedart\Contracts\Database\Models\Instantiatable;
 use Aedart\Database\Models\Concerns;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,4 +18,5 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements Instantiatable
 {
     use Concerns\Instance;
+    use HasRoles;
 }
