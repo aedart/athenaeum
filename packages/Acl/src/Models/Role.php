@@ -163,7 +163,10 @@ class Role extends Model implements Sluggable
     {
         $ids = $this->obtainPermissionIds($permissions);
 
-        $this->permissions()->sync($ids, false);
+        $this
+            ->permissions()
+            ->withTimestamps()
+            ->sync($ids, false);
 
         return $this;
     }
