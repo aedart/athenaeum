@@ -39,8 +39,8 @@ trait HasRoles
      */
     public function hasRole($roles): bool
     {
-        /** @var Model|Role $roleModel */
-        $roleModel = $this->aclRoleModel()::newInstance();
+        /** @var Model|\Aedart\Acl\Models\Role $roleModel */
+        $roleModel = $this->aclRoleModelInstance();
 
         // When a role's id is given
         if (is_numeric($roles)) {
