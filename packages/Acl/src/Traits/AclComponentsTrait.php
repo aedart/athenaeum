@@ -17,6 +17,16 @@ trait AclComponentsTrait
     use ConfigTrait;
 
     /**
+     * Returns the class path to the user eloquent model
+     *
+     * @return string
+     */
+    public function aclUserModel(): string
+    {
+        return $this->aclModel('user');
+    }
+
+    /**
      * Returns class path to role eloquent model
      *
      * @return string
