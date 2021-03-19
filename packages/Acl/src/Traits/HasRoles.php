@@ -43,14 +43,14 @@ trait HasRoles
         /** @var Model|Role $roleModel */
         $roleModel = $this->aclRoleModel()::newInstance();
 
+        // When a role's id is given
+        if (is_numeric($roles)) {
+            return $this->roles->contains($roleModel->getKeyName(), $roles);
+        }
+
         // When a role's slug is given
         if (is_string($roles)) {
             return $this->roles->contains($roleModel->getSlugKeyName(), $roles);
-        }
-
-        // When a role's id is given
-        if (is_int($roles)) {
-            return $this->roles->contains($roleModel->getKeyName(), $roles);
         }
 
         // When a role instance is given
