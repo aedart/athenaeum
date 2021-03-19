@@ -26,10 +26,10 @@ trait HasRoles
     /**
      * Determine if model is assigned given role
      *
-     * If an array of roles is given, then method will return true, if
-     * any of the given roles are assigned.
+     * If an array of roles is given, then method will return true,
+     * ONLY if all roles are assigned to this model!
      *
-     * @see hasAnyRole
+     * @see hasAllRoles
      *
      * @param string|int|\Aedart\Acl\Models\Role|Collection|string[]|int[]|\Aedart\Acl\Models\Role[] $roles Slugs, ids or Role instances or list of roles
      *
@@ -65,7 +65,7 @@ trait HasRoles
 
         // When an array of roles is given
         if (is_array($roles)) {
-            return $this->hasAnyRole($roles);
+            return $this->hasAllRoles($roles);
         }
 
         // Unable to determine how to check given role, thus we must fail...
@@ -76,15 +76,15 @@ trait HasRoles
     }
 
     /**
-     * Determine if model is assigned any of the given roles
+     * Determine if model is assigned any (one of) of the given roles
      *
-     * @param string[]|int[]|\Aedart\Acl\Models\Role[] $roles Slugs, ids or Role instances
+     * @param string[]|int[]|\Aedart\Acl\Models\Role[]|Collection $roles Slugs, ids or Role instances
      *
      * @return bool
      *
      * @throws InvalidArgumentException
      */
-    public function hasAnyRole(array $roles): bool
+    public function hasAnyRoles($roles): bool
     {
         foreach ($roles as $role) {
             if ($this->hasRole($role)) {
@@ -101,13 +101,13 @@ trait HasRoles
      * Method will return false is any of given roles are not assigned
      * to this model.
      *
-     * @param string[]|int[]|\Aedart\Acl\Models\Role[] $roles Slugs, ids or Role instances
+     * @param string[]|int[]|\Aedart\Acl\Models\Role[]|Collection $roles Slugs, ids or Role instances
      *
      * @return bool
      *
      * @throws InvalidArgumentException
      */
-    public function hasAllRoles(array $roles): bool
+    public function hasAllRoles($roles): bool
     {
         foreach ($roles as $role) {
             if (!$this->hasRole($role)) {
@@ -116,6 +116,68 @@ trait HasRoles
         }
 
         return true;
+    }
+
+    /**
+     * Assign given roles to this model
+     *
+     * @param string|int|\Aedart\Acl\Models\Role ...$roles
+     *
+     * @return self
+     */
+    public function assignRoles(...$roles)
+    {
+        $ids = $this->obtainRoleIds($roles);
+
+        $this
+            ->roles()
+            ->withTimestamps()
+            ->sync($ids, false);
+
+        return $this;
+    }
+
+    /**
+     * Revokes all existing permissions and grants given permissions
+     * to this role
+     *
+     * @param string|int|\Aedart\Acl\Models\Role ...$roles
+     *
+     * @return self
+     */
+    public function syncRoles(...$roles)
+    {
+        return $this
+            ->unassignAllRoles()
+            ->assignRoles($roles);
+    }
+
+    /**
+     * Unassign all given roles for this model
+     *
+     * @param string|int|\Aedart\Acl\Models\Role ...$roles
+     *
+     * @return self
+     */
+    public function unassignRoles(...$roles)
+    {
+        $ids = $this->obtainRoleIds($roles);
+
+        $this->roles()->detach($ids);
+
+        return $this;
+    }
+
+    /**
+     * Revokes all roles for this model
+     *
+     * @return self
+     */
+    public function unassignAllRoles()
+    {
+        $this->roles()->detach();
+
+        return $this;
     }
 
     /*****************************************************************
@@ -137,5 +199,77 @@ trait HasRoles
             $this->getForeignKey(),
             $role->getForeignKey()
         );
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Obtains ids for given roles
+     *
+     * @param mixed ...$roles
+     *
+     * @return int[]
+     */
+    protected function obtainRoleIds(...$roles): array
+    {
+        return collect($roles)
+            ->flatten()
+            ->map(function($role) {
+                return $this->resolveOrFindRoles($role);
+            })
+            ->map->id
+            ->all();
+    }
+
+    /**
+     * Resolves or finds given roles
+     *
+     * @param string|int|\Aedart\Acl\Models\Role|string[]|int[]|\Aedart\Acl\Models\Role[]|Collection $roles
+     *
+     * @return Collection|\Aedart\Acl\Models\Role[]]
+     */
+    protected function resolveOrFindRoles($roles)
+    {
+        $roleClass = $this->aclRoleModel();
+        if ($roles instanceof $roleClass) {
+            return $roles;
+        }
+
+        // When id is given
+        if (is_numeric($roles)) {
+            return $roleClass::find($roles);
+        }
+
+        // When slug is given
+        if (is_string($roles)) {
+            return $roleClass::findBySlug($roles);
+        }
+
+        // When a collection of roles is given
+        if ($roles instanceof Collection) {
+            // Ensure all instances are of type role
+            return $roles->filter(function($role) use ($roleClass) {
+                return $role instanceof $roleClass;
+            });
+        }
+
+        // When an array of roles is given...
+        if (is_array($roles)) {
+            $model = $this->aclRoleModelInstance();
+
+            return $model
+                ->newQuery()
+                ->whereSlugIn($roles)
+                ->orWhereIn($model->getKeyName(), $roles)
+                ->get();
+        }
+
+        // Unable to resolve
+        throw new InvalidArgumentException(sprintf(
+        'Unable to resolve or find requested roles. Accepted values are slugs, ids or role instances. %s given',
+            gettype($roles)
+        ));
     }
 }
