@@ -64,6 +64,16 @@ interface Sluggable
     public static function findOrCreateBySlug(string $slug, array $values = []);
 
     /**
+     * Find multiple models by given slugs
+     *
+     * @param mixed $slugs
+     * @param string[] $columns [optional]
+     *
+     * @return static[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function findManyBySlugs($slugs, array $columns = ['*']);
+
+    /**
      * Query scope for finding model via given slug
      *
      * @param \Illuminate\Database\Eloquent\Builder $scope
@@ -72,4 +82,14 @@ interface Sluggable
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeWhereSlug($scope, string $slug);
+
+    /**
+     * Query scope for finding models that match given slugs
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $scope
+     * @param mixed $slugs
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWhereSlugIn($scope, $slugs);
 }

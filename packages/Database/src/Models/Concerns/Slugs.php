@@ -10,6 +10,7 @@ use Aedart\Contracts\Database\Models\Sluggable;
  * @see \Aedart\Contracts\Database\Models\Sluggable
  *
  * @method static \Illuminate\Database\Eloquent\Builder whereSlug(string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder whereSlugIn(mixed $slugs)
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Database\Models\Concerns
@@ -92,6 +93,19 @@ trait Slugs
     }
 
     /**
+     * Find multiple models by given slugs
+     *
+     * @param mixed $slugs
+     * @param string[] $columns [optional]
+     *
+     * @return static[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function findManyBySlugs($slugs, array $columns = ['*'])
+    {
+        return static::whereSlugIn($slugs)->get($columns);
+    }
+
+    /**
      * Query scope for finding model via given slug
      *
      * @param \Illuminate\Database\Eloquent\Builder $scope
@@ -102,5 +116,18 @@ trait Slugs
     public function scopeWhereSlug($scope, string $slug)
     {
         return $scope->where($this->getSlugKeyName(), $slug);
+    }
+
+    /**
+     * Query scope for finding models that match given slugs
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $scope
+     * @param mixed $slugs
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWhereSlugIn($scope, $slugs)
+    {
+        return $scope->whereIn($this->getSlugKeyName(), $slugs);
     }
 }
