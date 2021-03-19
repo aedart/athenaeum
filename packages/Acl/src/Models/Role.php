@@ -2,7 +2,7 @@
 
 namespace Aedart\Acl\Models;
 
-use Aedart\Acl\Traits\AclComponentsTrait;
+use Aedart\Acl\Traits\AclTrait;
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Database\Model;
 use Aedart\Database\Models\Concerns;
@@ -32,7 +32,7 @@ use InvalidArgumentException;
  */
 class Role extends Model implements Sluggable
 {
-    use AclComponentsTrait;
+    use AclTrait;
     use SoftDeletes;
     use Concerns\Slugs;
 

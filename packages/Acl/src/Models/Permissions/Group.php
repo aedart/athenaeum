@@ -3,7 +3,7 @@
 namespace Aedart\Acl\Models\Permissions;
 
 use Aedart\Acl\Models\Permission;
-use Aedart\Acl\Traits\AclComponentsTrait;
+use Aedart\Acl\Traits\AclTrait;
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Database\Model;
 use Aedart\Database\Models\Concerns;
@@ -33,7 +33,7 @@ use Throwable;
  */
 class Group extends Model implements Sluggable
 {
-    use AclComponentsTrait;
+    use AclTrait;
     use SoftDeletes;
     use Concerns\Slugs;
 

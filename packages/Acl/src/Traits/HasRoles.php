@@ -17,7 +17,7 @@ use InvalidArgumentException;
  */
 trait HasRoles
 {
-    use AclComponentsTrait;
+    use AclTrait;
 
     /*****************************************************************
      * Operations

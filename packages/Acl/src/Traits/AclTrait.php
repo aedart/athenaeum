@@ -6,14 +6,14 @@ use Aedart\Support\Helpers\Config\ConfigTrait;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 /**
- * Acl Components Trait
+ * Acl Trait
  *
  * Utility for obtaining various ACL components.
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Acl\Traits
  */
-trait AclComponentsTrait
+trait AclTrait
 {
     use ConfigTrait;
 
