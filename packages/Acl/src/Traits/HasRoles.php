@@ -238,7 +238,7 @@ trait HasRoles
     {
         return collect($roles)
             ->flatten()
-            ->map(function($role) {
+            ->map(function ($role) {
                 return $this->resolveOrFindRoles($role);
             })
             ->map->id
@@ -272,7 +272,7 @@ trait HasRoles
         // When a collection of roles is given
         if ($roles instanceof Collection) {
             // Ensure all instances are of type role
-            return $roles->filter(function($role) use ($roleClass) {
+            return $roles->filter(function ($role) use ($roleClass) {
                 return $role instanceof $roleClass;
             });
         }
@@ -290,7 +290,7 @@ trait HasRoles
 
         // Unable to resolve
         throw new InvalidArgumentException(sprintf(
-        'Unable to resolve or find requested roles. Accepted values are slugs, ids or role instances. %s given',
+            'Unable to resolve or find requested roles. Accepted values are slugs, ids or role instances. %s given',
             gettype($roles)
         ));
     }

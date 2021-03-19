@@ -267,7 +267,7 @@ class Role extends Model implements Sluggable
     {
         return collect($permissions)
             ->flatten()
-            ->map(function($permission) {
+            ->map(function ($permission) {
                 return $this->resolveOrFindPermissions($permission);
             })
             ->map->id
@@ -301,7 +301,7 @@ class Role extends Model implements Sluggable
         // When a collection of permissions is given
         if ($permissions instanceof Collection) {
             // Ensure all instances are of type permission
-            return $permissions->filter(function($permission) use ($permissionClass) {
+            return $permissions->filter(function ($permission) use ($permissionClass) {
                 return $permission instanceof $permissionClass;
             });
         }

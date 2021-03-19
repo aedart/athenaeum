@@ -94,7 +94,7 @@ abstract class AclTestCase extends LaravelTestCase
     public function installAclMigrations(): self
     {
         // Install default migrations
-        $this->loadLaravelMigrations();;
+        $this->loadLaravelMigrations();
 
         // Install custom migrations
         $this->loadMigrationsFrom(
@@ -167,8 +167,7 @@ abstract class AclTestCase extends LaravelTestCase
         ?string $name = null,
         ?string $description = null,
         bool $prefix = true
-    ): Group
-    {
+    ): Group {
         $permissions = $permissions ?? $this->makePermissionsForGroupCreate();
 
         return Group::createWithPermissions($slug, $permissions, $name, $description, $prefix);
@@ -192,6 +191,5 @@ abstract class AclTestCase extends LaravelTestCase
         ], $attributes);
 
         return Role::create($attributes);
-
     }
 }
