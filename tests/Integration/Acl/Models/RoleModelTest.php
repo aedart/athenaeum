@@ -496,4 +496,32 @@ class RoleModelTest extends AclTestCase
             'New permissions have not been granted'
         );
     }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function canRevokeAllPermissions()
+    {
+        $group = $this->createPermissionGroupWithPermissions('users');
+        $permissions = $group->permissions;
+
+        $role = $this->createRole();
+        $role->grantPermissions($permissions);
+
+        // ---------------------------------------------------------------- //
+        // Revoke all permissions and verify that no permissions are granted
+        $role->revokeAllPermissions();
+
+        $related = $role->refresh()->permissions;
+
+        ConsoleDebugger::output($related->toArray());
+
+        $this->assertCount(0, $related, 'All permissions are NOT invoked');
+        $this->assertFalse(
+            $role->hasAnyPermissions($permissions),
+            'Original permissions have not been revoked'
+        );
+    }
 }

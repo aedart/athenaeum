@@ -202,6 +202,18 @@ class Role extends Model implements Sluggable
         return $this;
     }
 
+    /**
+     * Revokes all permissions for this role
+     *
+     * @return self
+     */
+    public function revokeAllPermissions()
+    {
+        $this->permissions()->detach();
+
+        return $this;
+    }
+
     /*****************************************************************
      * Relations
      ****************************************************************/
