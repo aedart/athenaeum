@@ -4,6 +4,8 @@ namespace Aedart\Acl\Models;
 
 use Aedart\Acl\Models\Permissions\Group;
 use Aedart\Acl\Traits\AclComponentsTrait;
+use Aedart\Contracts\Database\Models\Sluggable;
+use Aedart\Database\Models\Concerns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
@@ -24,9 +26,10 @@ use Illuminate\Support\Carbon;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Acl\Models
  */
-class Permission extends Model
+class Permission extends Model implements Sluggable
 {
     use AclComponentsTrait;
+    use Concerns\Slugs;
 
     /**
      * The attributes that aren't mass assignable.
