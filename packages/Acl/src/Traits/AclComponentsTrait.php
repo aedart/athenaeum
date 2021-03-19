@@ -17,7 +17,17 @@ trait AclComponentsTrait
     use ConfigTrait;
 
     /**
-     * Returns class path to permissions model
+     * Returns class path to role eloquent model
+     *
+     * @return string
+     */
+    public function aclRoleModel(): string
+    {
+        return $this->aclModel('role');
+    }
+
+    /**
+     * Returns class path to permissions eloquent model
      *
      * @return string
      */
@@ -27,7 +37,7 @@ trait AclComponentsTrait
     }
 
     /**
-     * Returns class path to permission group model
+     * Returns class path to permission group eloquent model
      *
      * @return string
      */
