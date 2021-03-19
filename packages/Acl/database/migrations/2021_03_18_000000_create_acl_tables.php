@@ -111,6 +111,7 @@ class CreateAclTables extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists($this->aclTable('users_roles'));
         Schema::dropIfExists($this->aclTable('roles_permissions'));
         Schema::dropIfExists($this->aclTable('roles'));
         Schema::dropIfExists($this->aclTable('permissions'));
