@@ -12,7 +12,7 @@ return [
 
     'models' => [
 
-        'user' => \App\Models\User::class,
+        'user' => \Aedart\Tests\Helpers\Dummies\Acl\User::class,
 
         'role' => \Aedart\Acl\Models\Role::class,
 
