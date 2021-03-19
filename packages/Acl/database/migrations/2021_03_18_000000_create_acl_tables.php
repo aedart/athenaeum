@@ -69,6 +69,10 @@ class CreateAclTables extends Migration
                 ->cascadeOnDelete();
 
             $table->timestamps();
+
+            $roleId = (new ($this->aclRoleModel()))->getForeignKey();
+            $permissionId = (new ($this->aclPermissionsModel()))->getForeignKey();
+            $table->unique([$roleId, $permissionId], 'role_permission');
         });
     }
 
