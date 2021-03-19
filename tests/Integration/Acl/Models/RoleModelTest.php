@@ -524,4 +524,48 @@ class RoleModelTest extends AclTestCase
             'Original permissions have not been revoked'
         );
     }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function doesNotRevokePermissionsWhenRoleIsSoftDeleted()
+    {
+        $group = $this->createPermissionGroupWithPermissions('users');
+        $permissions = $group->permissions;
+
+        $role = $this->createRole();
+        $role->grantPermissions($permissions);
+
+        // ---------------------------------------------------------------- //
+        // Delete role... should NOT result in roles & permissions relations
+        // to be removed from the pivot table
+        $role->delete();
+
+        $table = $this->aclTable('roles_permissions');
+        $this->assertDatabaseCount($table, $permissions->count(), 'testing');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function revokesPermissionsWhenRoleIsForceDeleted()
+    {
+        $group = $this->createPermissionGroupWithPermissions('users');
+        $permissions = $group->permissions;
+
+        $role = $this->createRole();
+        $role->grantPermissions($permissions);
+
+        // ---------------------------------------------------------------- //
+        // Force delete role... Should result in pivot table not having any
+        // roles & permissions relations stored.
+        $role->forceDelete();
+
+        $table = $this->aclTable('roles_permissions');
+        $this->assertDatabaseCount($table, 0, 'testing');
+    }
 }
