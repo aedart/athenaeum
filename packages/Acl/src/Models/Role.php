@@ -112,13 +112,13 @@ class Role extends Model implements Sluggable
     /**
      * Determine if role has any of given permissions granted
      *
-     * @param string[]|int[]|\Aedart\Acl\Models\Permission[] $permissions Slugs, ids or Permission instances
+     * @param string[]|int[]|\Aedart\Acl\Models\Permission[]|Collection $permissions Slugs, ids or Permission instances
      *
      * @return bool
      *
      * @throws InvalidArgumentException
      */
-    public function hasAnyPermissions(array $permissions): bool
+    public function hasAnyPermissions($permissions): bool
     {
         foreach ($permissions as $permission) {
             if ($this->hasPermission($permission)) {
@@ -135,13 +135,13 @@ class Role extends Model implements Sluggable
      * Method will return false is any of given permissions are not granted
      * to this role
      *
-     * @param string[]|int[]|\Aedart\Acl\Models\Permission[] $permissions Slugs, ids or Permission instances
+     * @param string[]|int[]|\Aedart\Acl\Models\Permission[]|Collection $permissions Slugs, ids or Permission instances
      *
      * @return bool
      *
      * @throws InvalidArgumentException
      */
-    public function hasAllPermissions(array $permissions): bool
+    public function hasAllPermissions($permissions): bool
     {
         foreach ($permissions as $role) {
             if (!$this->hasPermission($role)) {
