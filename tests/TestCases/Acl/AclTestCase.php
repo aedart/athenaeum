@@ -89,6 +89,10 @@ abstract class AclTestCase extends LaravelTestCase
      */
     public function installAclMigrations(): self
     {
+        // Install default migrations
+        $this->loadLaravelMigrations();;
+
+        // Install custom migrations
         $this->loadMigrationsFrom(
             $this->migrationsDir()
         );
