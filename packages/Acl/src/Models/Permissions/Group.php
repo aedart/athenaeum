@@ -110,7 +110,7 @@ class Group extends Model implements Sluggable
             $prepared = static::preparePermissionsForBulkInsert($permissions, $group, $prefix);
 
             // Perform bulk insert
-            (new static())->aclPermissionsModel()::insert($prepared);
+            static::make()->aclPermissionsModel()::insert($prepared);
 
             DB::commit();
             return $group;

@@ -73,7 +73,7 @@ class Permission extends Model implements Sluggable
     public function roles(): BelongsToMany
     {
         /** @var Model $role */
-        $role = $this->aclRoleModel()::newInstance();
+        $role = $this->aclRoleModel()::make();
 
         return $this->belongsToMany(
             $this->aclRoleModel(),

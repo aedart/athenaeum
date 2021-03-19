@@ -70,9 +70,13 @@ class CreateAclTables extends Migration
 
             $table->timestamps();
 
-            $roleKey = (new ($this->aclRoleModel()))->getForeignKey();
-            $permissionKey = (new ($this->aclPermissionsModel()))->getForeignKey();
-            $table->unique([$roleKey, $permissionKey], 'role_permission_unq');
+            /** @var \Aedart\Database\Model $roleModel */
+            $roleModel = $this->aclRoleModel()::make();
+
+            /** @var \Illuminate\Database\Eloquent\Model $permissionModel */
+            $permissionModel = $this->aclPermissionsModel()::make();
+
+            $table->unique([$roleModel->getForeignKey(), $permissionModel->getForeignKey()], 'role_permission_unq');
         });
 
         // Create Users Roles pivot table
@@ -80,7 +84,7 @@ class CreateAclTables extends Migration
             $table->id();
 
             /** @var \Illuminate\Database\Eloquent\Model $user */
-            $user = new ($this->aclUserModel());
+            $user = $this->aclUserModel()::make();
 
             $table->foreignIdFor($this->aclUserModel())
                 ->constrained($user->getTable())
@@ -93,8 +97,10 @@ class CreateAclTables extends Migration
             $table->timestamps();
 
             $userKey = $user->getForeignKey();
-            $roleKey = (new ($this->aclRoleModel()))->getForeignKey();
-            $table->unique([$userKey, $roleKey], 'user_role_unq');
+
+            /** @var \Illuminate\Database\Eloquent\Model $roleModel */
+            $roleModel = $this->aclRoleModel()::make();
+            $table->unique([$userKey, $roleModel->getForeignKey()], 'user_role_unq');
         });
     }
 
