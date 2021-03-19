@@ -37,7 +37,7 @@ trait HasRoles
      *
      * @throws InvalidArgumentException
      */
-    public function hasRole($roles): bool
+    public function hasRoles($roles): bool
     {
         /** @var Model|\Aedart\Acl\Models\Role $roleModel */
         $roleModel = $this->aclRoleModelInstance();
@@ -87,7 +87,7 @@ trait HasRoles
     public function hasAnyRoles($roles): bool
     {
         foreach ($roles as $role) {
-            if ($this->hasRole($role)) {
+            if ($this->hasRoles($role)) {
                 return true;
             }
         }
@@ -110,7 +110,7 @@ trait HasRoles
     public function hasAllRoles($roles): bool
     {
         foreach ($roles as $role) {
-            if (!$this->hasRole($role)) {
+            if (!$this->hasRoles($role)) {
                 return false;
             }
         }
@@ -178,6 +178,28 @@ trait HasRoles
         $this->roles()->detach();
 
         return $this;
+    }
+
+    /**
+     * Determine if this model is granted given permission
+     *
+     * Method searches throughout this model's assigned roles and
+     * determines if given permission's roles is among them.
+     *
+     * @param \Aedart\Acl\Models\Permission $permission
+     *
+     * @return bool
+     *
+     * @throws InvalidArgumentException
+     */
+    public function hasPermission($permission): bool
+    {
+        $permissionClass = $this->aclPermissionsModel();
+        if (!($permission instanceof $permissionClass)) {
+            throw new InvalidArgumentException(sprintf('Permission must be instance of %s', $permissionClass));
+        }
+
+        return $this->hasRoles($permission->roles);
     }
 
     /*****************************************************************
