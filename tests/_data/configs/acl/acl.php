@@ -12,6 +12,8 @@ return [
 
     'models' => [
 
+        'user' => \App\Models\User::class,
+
         'role' => \Aedart\Acl\Models\Role::class,
 
         'permission' => \Aedart\Acl\Models\Permission::class,
@@ -29,12 +31,19 @@ return [
 
     'tables' => [
 
+        // Table name for pivot table between users and roles
+        'users_roles' => 'user_role_pivot',
+
+        // Roles table name
         'roles' => 'roles',
 
-        'roles_permissions' => 'roles_permissions',
+        // Table name for pivot table between roles and permissions
+        'roles_permissions' => 'role_permission_pivot',
 
+        // Permissions table name
         'permissions' => 'permissions',
 
+        // Permission groups table name
         'groups' => 'permission_groups'
 
     ]
