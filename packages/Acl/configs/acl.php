@@ -12,6 +12,8 @@ return [
 
     'models' => [
 
+        'role' => \Aedart\Acl\Models\Role::class,
+
         'permission' => \Aedart\Acl\Models\Permission::class,
 
         'group' => \Aedart\Acl\Models\Permissions\Group::class
@@ -26,6 +28,10 @@ return [
     */
 
     'tables' => [
+
+        'roles' => 'roles',
+
+        'roles_permissions' => 'roles_permissions',
 
         'permissions' => 'permissions',
 
