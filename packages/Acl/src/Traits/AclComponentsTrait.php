@@ -3,6 +3,7 @@
 namespace Aedart\Acl\Traits;
 
 use Aedart\Support\Helpers\Config\ConfigTrait;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 /**
  * Acl Components Trait
@@ -27,6 +28,20 @@ trait AclComponentsTrait
     }
 
     /**
+     * Creates a new user eloquent model instance
+     *
+     * @return \Illuminate\Database\Eloquent\Model|Authenticatable
+     */
+    public function aclUserModelInstance()
+    {
+        // NOTE: We cannot rely on the "make()" method being available
+        // for the user model. So we create a new instance the old
+        // fashion way...
+        $class = $this->aclUserModel();
+        return new $class();
+    }
+
+    /**
      * Returns class path to role eloquent model
      *
      * @return string
@@ -34,6 +49,16 @@ trait AclComponentsTrait
     public function aclRoleModel(): string
     {
         return $this->aclModel('role');
+    }
+
+    /**
+     * Creates a new role eloquent model instance
+     *
+     * @return \Aedart\Acl\Models\Role
+     */
+    public function aclRoleModelInstance()
+    {
+        return $this->aclRoleModel()::make();
     }
 
     /**
@@ -47,6 +72,16 @@ trait AclComponentsTrait
     }
 
     /**
+     * Creates a new permission eloquent model instance
+     *
+     * @return \Aedart\Acl\Models\Permission
+     */
+    public function aclPermissionsModelInstance()
+    {
+        return $this->aclPermissionsModel()::make();
+    }
+
+    /**
      * Returns class path to permission group eloquent model
      *
      * @return string
@@ -54,6 +89,16 @@ trait AclComponentsTrait
     public function aclPermissionsGroupModel(): string
     {
         return $this->aclModel('group');
+    }
+
+    /**
+     * Creates a new permission group eloquent model instance
+     *
+     * @return \Aedart\Acl\Models\Permissions\Group
+     */
+    public function aclPermissionsGroupModelInstance()
+    {
+        return $this->aclPermissionsGroupModel()::make();
     }
 
     /**

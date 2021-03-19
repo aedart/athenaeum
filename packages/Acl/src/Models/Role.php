@@ -108,8 +108,7 @@ class Role extends Model implements Sluggable
      */
     public function permissions(): BelongsToMany
     {
-        /** @var Model $permission */
-        $permission = $this->aclPermissionsModel()::make();
+        $permission = $this->aclPermissionsModelInstance();
 
         return $this->belongsToMany(
             $this->aclRoleModel(),
@@ -126,8 +125,7 @@ class Role extends Model implements Sluggable
      */
     public function users(): BelongsToMany
     {
-        /** @var Model $user */
-        $user = $this->aclUserModel()::make();
+        $user = $this->aclUserModelInstance();
 
         return $this->belongsToMany(
             $this->aclUserModel(),
