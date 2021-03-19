@@ -18,6 +18,20 @@ trait AclComponentsTrait
     use ConfigTrait;
 
     /**
+     * In-memory Cache of acl models' class paths
+     *
+     * @var array key = identifier, value = class path
+     */
+    protected static array $aclModels = [];
+
+    /**
+     * In-memory Cache of acl table names
+     *
+     * @var array key = identifier, value = table name
+     */
+    protected static array $aclTables = [];
+
+    /**
      * Returns the class path to the user eloquent model
      *
      * @return string
@@ -110,7 +124,11 @@ trait AclComponentsTrait
      */
     public function aclModel(string $identifier): ?string
     {
-        return $this->getConfig()->get("acl.models.{$identifier}");
+        if (isset(static::$aclModels[$identifier])) {
+            return static::$aclModels[$identifier];
+        }
+
+        return static::$aclModels[$identifier] = $this->getConfig()->get("acl.models.{$identifier}");
     }
 
     /**
@@ -122,6 +140,10 @@ trait AclComponentsTrait
      */
     public function aclTable(string $identifier): ?string
     {
-        return $this->getConfig()->get("acl.tables.{$identifier}");
+        if (isset(static::$aclTables[$identifier])) {
+            return static::$aclTables[$identifier];
+        }
+
+        return static::$aclTables[$identifier] = $this->getConfig()->get("acl.tables.{$identifier}");
     }
 }
