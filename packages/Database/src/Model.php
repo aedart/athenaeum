@@ -2,6 +2,8 @@
 
 namespace Aedart\Database;
 
+use Aedart\Contracts\Database\Models\Instantiatable;
+use Aedart\Database\Models\Concerns;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 /**
@@ -14,21 +16,9 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Database
  */
-abstract class Model extends BaseModel
+abstract class Model extends BaseModel implements Instantiatable
 {
-    /**
-     * Create a new instance of this model
-     *
-     * @param array $attributes [optional]
-     * @param string|null $connection [optional]
-     *
-     * @return static
-     */
-    public static function make(array $attributes = [], ?string $connection = null)
-    {
-        return (new static($attributes))
-                    ->setConnection($connection);
-    }
+    use Concerns\Instance;
 
     /**
      * Returns the database table name for this model
