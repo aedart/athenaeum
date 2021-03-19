@@ -2,7 +2,6 @@
 
 namespace Aedart\Acl\Traits;
 
-use Aedart\Acl\Models\Role;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,7 +10,7 @@ use InvalidArgumentException;
 /**
  * Has Roles
  *
- * @property Role[]|Collection $roles The roles assigned to this model
+ * @property \Aedart\Acl\Models\Role[]|Collection $roles The roles assigned to this model
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Acl\Traits
@@ -32,7 +31,7 @@ trait HasRoles
      *
      * @see hasAnyRole
      *
-     * @param string|int|Role|Collection|string[]|int[]|Role[] $roles Slugs, ids or Role instances or list of roles
+     * @param string|int|\Aedart\Acl\Models\Role|Collection|string[]|int[]|\Aedart\Acl\Models\Role[] $roles Slugs, ids or Role instances or list of roles
      *
      * @return bool
      *
@@ -54,7 +53,8 @@ trait HasRoles
         }
 
         // When a role instance is given
-        if ($roles instanceof Role) {
+        $roleClass = $this->aclRoleModel();
+        if ($roles instanceof $roleClass) {
             return $this->roles->contains($roleModel->getKeyName(), $roles->id);
         }
 
@@ -78,7 +78,7 @@ trait HasRoles
     /**
      * Determine if model is assigned any of the given roles
      *
-     * @param string[]|int[]|Role[] $roles Slugs, ids or Role instances
+     * @param string[]|int[]|\Aedart\Acl\Models\Role[] $roles Slugs, ids or Role instances
      *
      * @return bool
      *
@@ -101,7 +101,7 @@ trait HasRoles
      * Method will return false is any of given roles are not assigned
      * to this model.
      *
-     * @param string[]|int[]|Role[] $roles Slugs, ids or Role instances
+     * @param string[]|int[]|\Aedart\Acl\Models\Role[] $roles Slugs, ids or Role instances
      *
      * @return bool
      *
@@ -129,8 +129,7 @@ trait HasRoles
      */
     public function roles(): BelongsToMany
     {
-        /** @var Model $role */
-        $role = $this->aclRoleModel()::newInstance();
+        $role = $this->aclRoleModelInstance();
 
         return $this->belongsToMany(
             $this->aclRoleModel(),
