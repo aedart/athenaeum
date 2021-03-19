@@ -181,9 +181,9 @@ class Role extends Model implements Sluggable
      */
     public function syncPermissions(...$permissions)
     {
-        $this->permissions()->detach();
-
-        return $this->grantPermissions($permissions);
+        $this
+            ->revokeAllPermissions()
+            ->grantPermissions($permissions);
     }
 
     /**
