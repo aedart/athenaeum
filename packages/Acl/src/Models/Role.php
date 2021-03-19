@@ -213,7 +213,7 @@ class Role extends Model implements Sluggable
         $permission = $this->aclPermissionsModelInstance();
 
         return $this->belongsToMany(
-            $this->aclRoleModel(),
+            $this->aclPermissionsModel(),
             $this->aclTable('roles_permissions'),
             $this->getForeignKey(),
             $permission->getForeignKey()
