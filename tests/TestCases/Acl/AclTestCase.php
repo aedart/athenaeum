@@ -2,6 +2,8 @@
 
 namespace Aedart\Tests\TestCases\Acl;
 
+use Aedart\Acl\Models\Permissions\Group;
+use Aedart\Acl\Models\Role;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
@@ -118,5 +120,76 @@ abstract class AclTestCase extends LaravelTestCase
             'update' => [ 'name' => 'Update', 'description' => 'Ability to update existing users' ],
             'delete' => [ 'name' => 'Delete', 'description' => 'Ability to delete existing users' ],
         ];
+    }
+
+    /*****************************************************************
+     * Factories
+     ****************************************************************/
+
+    /**
+     * Creates and persists a new permission group
+     *
+     * @param array $attributes [optional]
+     *
+     * @return Group
+     */
+    public function createPermissionGroup(array $attributes = []): Group
+    {
+        $faker = $this->getFaker();
+
+        $attributes = array_merge([
+            'slug' => $faker->unique()->slug,
+            'name' => $faker->words(3, true),
+            'description' => $faker->words(20, true)
+        ], $attributes);
+
+        return Group::create($attributes);
+    }
+
+    /**
+     * Creates and persists a new permission group with given permissions
+     *
+     * @param string $slug
+     * @param array|null $permissions [optional] If none given then a default set of permissions is used
+     * @param string|null $name [optional]
+     * @param string|null $description [optional]
+     * @param bool $prefix [optional]
+     *
+     * @return Group
+     *
+     * @throws \Throwable
+     */
+    public function createPermissionGroupWithPermissions(
+        string $slug,
+        ?array $permissions = null,
+        ?string $name = null,
+        ?string $description = null,
+        bool $prefix = true
+    ): Group
+    {
+        $permissions = $permissions ?? $this->makePermissionsForGroupCreate();
+
+        return Group::createWithPermissions($slug, $permissions, $name, $description, $prefix);
+    }
+
+    /**
+     * Creates and persists a new role
+     *
+     * @param array $attributes [optional]
+     *
+     * @return Role
+     */
+    public function createRole(array $attributes = []): Role
+    {
+        $faker = $this->getFaker();
+
+        $attributes = array_merge([
+            'slug' => $faker->unique()->slug,
+            'name' => $faker->words(3, true),
+            'description' => $faker->words(20, true)
+        ], $attributes);
+
+        return Role::create($attributes);
+
     }
 }
