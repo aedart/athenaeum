@@ -24,7 +24,7 @@ class CreateAclTables extends Migration
         // Create Permission Groups table
         Schema::create($this->aclTable('groups'), function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique('permission_groups_slug')->comment('Unique string identifier');
+            $table->string('slug')->unique('permission_groups_slug_unq')->comment('Unique string identifier');
             $table->string('name')->comment('Name of permission group');
             $table->text('description')->nullable()->comment('Evt. description of group');
             $table->timestamps();
@@ -40,7 +40,7 @@ class CreateAclTables extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
 
-            $table->string('slug')->unique('permissions_slug')->comment('Unique string identifier');
+            $table->string('slug')->unique('permissions_slug_unq')->comment('Unique string identifier');
             $table->string('name')->comment('Name of permission');
             $table->text('description')->nullable()->comment('Evt. description of permission');
             $table->timestamps();
@@ -49,7 +49,7 @@ class CreateAclTables extends Migration
         // Create Roles table
         Schema::create($this->aclTable('roles'), function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique('roles_slug')->comment('Unique string identifier');
+            $table->string('slug')->unique('roles_slug_unq')->comment('Unique string identifier');
             $table->string('name')->comment('Name of role');
             $table->text('description')->nullable()->comment('Evt. description of role');
             $table->timestamps();
@@ -70,9 +70,31 @@ class CreateAclTables extends Migration
 
             $table->timestamps();
 
-            $roleId = (new ($this->aclRoleModel()))->getForeignKey();
-            $permissionId = (new ($this->aclPermissionsModel()))->getForeignKey();
-            $table->unique([$roleId, $permissionId], 'role_permission');
+            $roleKey = (new ($this->aclRoleModel()))->getForeignKey();
+            $permissionKey = (new ($this->aclPermissionsModel()))->getForeignKey();
+            $table->unique([$roleKey, $permissionKey], 'role_permission_unq');
+        });
+
+        // Create Users Roles pivot table
+        Schema::create($this->aclTable('users_roles'), function (Blueprint $table) {
+            $table->id();
+
+            /** @var \Illuminate\Database\Eloquent\Model $user */
+            $user = new ($this->aclUserModel());
+
+            $table->foreignIdFor($this->aclUserModel())
+                ->constrained($user->getTable())
+                ->cascadeOnDelete();
+
+            $table->foreignIdFor($this->aclRoleModel())
+                ->constrained($this->aclTable('roles'))
+                ->cascadeOnDelete();
+
+            $table->timestamps();
+
+            $userKey = $user->getForeignKey();
+            $roleKey = (new ($this->aclRoleModel()))->getForeignKey();
+            $table->unique([$userKey, $roleKey], 'user_role_unq');
         });
     }
 
