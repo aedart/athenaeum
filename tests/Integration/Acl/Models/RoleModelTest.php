@@ -530,6 +530,47 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    public function canDetermineIfHasAllOrAnyPermissionsGranted()
+    {
+        // In this test, we ensure that model is able to distinguish exactly
+        // between what is granted and not - a double proof of the has, has any,
+        // and has all methods.
+
+        $group = $this->createPermissionGroupWithPermissions('users');
+        $permissions = $group->permissions;
+
+        $grantedPermissionA = $permissions[0];
+        $grantedPermissionB = $permissions[1];
+        $notGrantedPermission = $permissions[2];
+
+        $role = $this->createRole();
+        $role->grantPermissions($grantedPermissionA, $grantedPermissionB);
+
+        // ---------------------------------------------------------------- //
+        // Has - expected to be precise in that it must match ALL...
+
+        $this->assertTrue($role->hasPermission([$grantedPermissionA, $grantedPermissionB]), 'Permissions SHOULD be matched');
+        $this->assertFalse($role->hasPermission([$grantedPermissionA, $grantedPermissionB, $notGrantedPermission]), 'Permissions SHOULD NOT be matched');
+
+        // ---------------------------------------------------------------- //
+        // Has All - expected to be precise in that it must match ALL...
+
+        $this->assertTrue($role->hasAllPermissions([$grantedPermissionA, $grantedPermissionB]), 'All permissions SHOULD be matched');
+        $this->assertFalse($role->hasAllPermissions([$grantedPermissionA, $grantedPermissionB, $notGrantedPermission]), 'All permissions SHOULD NOT be matched');
+
+        // ---------------------------------------------------------------- //
+        // Has Any - expected to match any, meaning less strict than match all...
+
+        $this->assertTrue($role->hasAnyPermissions([$grantedPermissionA, $grantedPermissionB]), 'Any permissions SHOULD be matched');
+        $this->assertTrue($role->hasAnyPermissions([$grantedPermissionA, $grantedPermissionB, $notGrantedPermission]), 'Any permissions SHOULD NOT be matched');
+        $this->assertFalse($role->hasAnyPermissions([$notGrantedPermission]), 'Permission is not granted, should NOT be matched');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
     public function doesNotRevokePermissionsWhenRoleIsSoftDeleted()
     {
         $group = $this->createPermissionGroupWithPermissions('users');

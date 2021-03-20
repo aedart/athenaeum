@@ -457,6 +457,46 @@ class UserModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    public function canDetermineIfHasAllOrAnyRolesAssigned()
+    {
+        // In this test, we ensure that model is able to distinguish exactly
+        // between what is granted and not - a double proof of the has, has any,
+        // and has all methods.
+
+        $roles = $this->createRoles();
+
+        $assignedRoleA = $roles[0];
+        $assignedRoleB = $roles[1];
+        $notAssignedRole = $roles[2];
+
+        $user = $this->createUser();
+        $user->assignRoles($assignedRoleA, $assignedRoleB);
+
+        // ---------------------------------------------------------------- //
+        // Has - expected to be precise in that it must match ALL...
+
+        $this->assertTrue($user->hasRoles([$assignedRoleA, $assignedRoleB]), 'Roles SHOULD be matched');
+        $this->assertFalse($user->hasRoles([$assignedRoleA, $assignedRoleB, $notAssignedRole]), 'Roles SHOULD NOT be matched');
+
+        // ---------------------------------------------------------------- //
+        // Has All - expected to be precise in that it must match ALL...
+
+        $this->assertTrue($user->hasAllRoles([$assignedRoleA, $assignedRoleB]), 'All roles SHOULD be matched');
+        $this->assertFalse($user->hasAllRoles([$assignedRoleA, $assignedRoleB, $notAssignedRole]), 'All roles SHOULD NOT be matched');
+
+        // ---------------------------------------------------------------- //
+        // Has Any - expected to match any, meaning less strict than match all...
+
+        $this->assertTrue($user->hasAnyRoles([$assignedRoleA, $assignedRoleB]), 'Any roles SHOULD be matched');
+        $this->assertTrue($user->hasAnyRoles([$assignedRoleA, $assignedRoleB, $notAssignedRole]), 'Any roles SHOULD NOT be matched');
+        $this->assertFalse($user->hasAnyRoles([$notAssignedRole]), 'Role is not assigned, should NOT be matched');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
     public function unassignsRolesWhenUserIsDeleted()
     {
         $roles = $this->createRoles();
@@ -485,9 +525,18 @@ class UserModelTest extends AclTestCase
         $group = $this->createPermissionGroupWithPermissions('users');
         $permissions = $group->permissions;
 
-        $permissionsToGrant = $permissions->take(2);
+        $grantedPermissionA = $permissions[0];
+        $grantedPermissionB = $permissions[1];
+        $notGrantedPermission = $permissions[2];
+
+        $granted = [$grantedPermissionA, $grantedPermissionB];
+        $notGranted = [$notGrantedPermission];
+
+        // ---------------------------------------------------------------- //
+        // Grant permissions and assign role
+
         $role = $this->createRole();
-        $role->grantPermissions($permissionsToGrant);
+        $role->grantPermissions($granted);
 
         $user = $this->createUser();
         $user->assignRoles($role);
@@ -495,15 +544,14 @@ class UserModelTest extends AclTestCase
         // ---------------------------------------------------------------- //
         // Determine if user has specific permissions granted
 
-        foreach ($permissionsToGrant as $permission) {
+        foreach ($granted as $permission) {
             $this->assertTrue($user->hasPermission($permission), 'User was expected to have permission, but does not!');
         }
 
         // ---------------------------------------------------------------- //
         // Ensure that user does NOT have permission to remaining
 
-        $permissionsNotGranted = $permissions->skip(2);
-        foreach ($permissionsNotGranted as $permission) {
+        foreach ($notGranted as $permission) {
             $this->assertFalse($user->hasPermission($permission), 'User SHOULD NOT have given permission granted');
         }
     }
