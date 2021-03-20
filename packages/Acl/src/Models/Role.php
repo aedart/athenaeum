@@ -73,46 +73,17 @@ class Role extends Model implements Sluggable
      */
     public function hasPermission($permissions): bool
     {
-        /** @var \Illuminate\Database\Eloquent\Model|\Aedart\Acl\Models\Permission $permissionModel */
-        $permissionModel = $this->aclPermissionsModelInstance();
-
-        // When a permission's id is given
-        if (is_numeric($permissions)) {
-            return $this->permissions->contains($permissionModel->getKeyName(), $permissions);
-        }
-
-        // When a permission's slug is given
-        if (is_string($permissions)) {
-            return $this->permissions->contains($permissionModel->getSlugKeyName(), $permissions);
-        }
-
-        // When a permission instance is given
-        $permissionClass = $this->aclPermissionsModel();
-        if ($permissions instanceof $permissionClass) {
-            return $this->permissions->contains($permissionModel->getKeyName(), $permissions->id);
-        }
-
-        // When a collection of permissions is given
-        if ($permissions instanceof Collection) {
-            return $permissions->intersect($this->permissions)->isNotEmpty();
-        }
-
-        // When an array of permissions is given
-        if (is_array($permissions)) {
-            return $this->hasAllPermissions($permissions);
-        }
-
-        // Unable to determine how to check given permission, thus we must fail...
-        throw new InvalidArgumentException(sprintf(
-            'Unable to determine is given permission(s) are granted. Accepted values are slugs, ids, permission instance or array. %s given',
-            gettype($permissions)
-        ));
+        return $this->hasRelatedModels(
+            $permissions,
+            $this->aclPermissionsModelInstance(),
+            'permissions'
+        );
     }
 
     /**
      * Determine if role has any of given permissions granted
      *
-     * @param string[]|int[]|\Aedart\Acl\Models\Permission[]|Collection $permissions Slugs, ids or Permission instances
+     * @param string[]|int[]|\Aedart\Acl\Models\Permission[]|Collection $permissions Slugs, ids or collection or Permission instances
      *
      * @return bool
      *
@@ -120,13 +91,7 @@ class Role extends Model implements Sluggable
      */
     public function hasAnyPermissions($permissions): bool
     {
-        foreach ($permissions as $permission) {
-            if ($this->hasPermission($permission)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->hasAnyOf($permissions, $this->aclPermissionsModelInstance(), 'permissions');
     }
 
     /**
@@ -135,7 +100,7 @@ class Role extends Model implements Sluggable
      * Method will return false is any of given permissions are not granted
      * to this role
      *
-     * @param string[]|int[]|\Aedart\Acl\Models\Permission[]|Collection $permissions Slugs, ids or Permission instances
+     * @param string[]|int[]|\Aedart\Acl\Models\Permission[]|Collection $permissions Slugs, ids or collection or Permission instances
      *
      * @return bool
      *
@@ -143,13 +108,7 @@ class Role extends Model implements Sluggable
      */
     public function hasAllPermissions($permissions): bool
     {
-        foreach ($permissions as $role) {
-            if (!$this->hasPermission($role)) {
-                return false;
-            }
-        }
-
-        return true;
+        return $this->hasAllOf($permissions, $this->aclPermissionsModelInstance(), 'permissions');
     }
 
     /**

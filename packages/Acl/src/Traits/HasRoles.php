@@ -40,46 +40,17 @@ trait HasRoles
      */
     public function hasRoles($roles): bool
     {
-        /** @var Model|\Aedart\Acl\Models\Role $roleModel */
-        $roleModel = $this->aclRoleModelInstance();
-
-        // When a role's id is given
-        if (is_numeric($roles)) {
-            return $this->roles->contains($roleModel->getKeyName(), $roles);
-        }
-
-        // When a role's slug is given
-        if (is_string($roles)) {
-            return $this->roles->contains($roleModel->getSlugKeyName(), $roles);
-        }
-
-        // When a role instance is given
-        $roleClass = $this->aclRoleModel();
-        if ($roles instanceof $roleClass) {
-            return $this->roles->contains($roleModel->getKeyName(), $roles->id);
-        }
-
-        // When a collection of roles is given
-        if ($roles instanceof Collection) {
-            return $roles->intersect($this->roles)->isNotEmpty();
-        }
-
-        // When an array of roles is given
-        if (is_array($roles)) {
-            return $this->hasAllRoles($roles);
-        }
-
-        // Unable to determine how to check given role, thus we must fail...
-        throw new InvalidArgumentException(sprintf(
-            'Unable to determine is given role(s) are assigned. Accepted values are slugs, ids, role instance or array. %s given',
-            gettype($roles)
-        ));
+        return $this->hasRelatedModels(
+            $roles,
+            $this->aclRoleModelInstance(),
+            'roles'
+        );
     }
 
     /**
      * Determine if model is assigned any (one of) of the given roles
      *
-     * @param string[]|int[]|\Aedart\Acl\Models\Role[]|Collection $roles Slugs, ids or Role instances
+     * @param string[]|int[]|\Aedart\Acl\Models\Role[]|Collection $roles Slugs, ids or collection or Role instances
      *
      * @return bool
      *
@@ -87,13 +58,7 @@ trait HasRoles
      */
     public function hasAnyRoles($roles): bool
     {
-        foreach ($roles as $role) {
-            if ($this->hasRoles($role)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->hasAnyOf($roles, $this->aclRoleModelInstance(), 'roles');
     }
 
     /**
@@ -102,7 +67,7 @@ trait HasRoles
      * Method will return false is any of given roles are not assigned
      * to this model.
      *
-     * @param string[]|int[]|\Aedart\Acl\Models\Role[]|Collection $roles Slugs, ids or Role instances
+     * @param string[]|int[]|\Aedart\Acl\Models\Role[]|Collection $roles Slugs, ids or collection or Role instances
      *
      * @return bool
      *
@@ -110,13 +75,7 @@ trait HasRoles
      */
     public function hasAllRoles($roles): bool
     {
-        foreach ($roles as $role) {
-            if (!$this->hasRoles($role)) {
-                return false;
-            }
-        }
-
-        return true;
+        return $this->hasAllOf($roles, $this->aclRoleModelInstance(), 'roles');
     }
 
     /**
