@@ -19,4 +19,15 @@ class User extends Authenticatable implements Instantiatable
 {
     use Concerns\Instance;
     use HasRoles;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password'
+    ];
 }

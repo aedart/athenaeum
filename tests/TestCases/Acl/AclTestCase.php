@@ -8,7 +8,10 @@ use Aedart\Acl\Traits\AclTrait;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
+use Aedart\Tests\Helpers\Dummies\Acl\User;
 use Codeception\Configuration;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * AclTestCase
@@ -191,5 +194,42 @@ abstract class AclTestCase extends LaravelTestCase
         ], $attributes);
 
         return Role::create($attributes);
+    }
+
+    /**
+     * Creates multiple roles
+     *
+     * @param int $amount [optional]
+     *
+     * @return Collection|Role[]
+     */
+    public function createRoles(int $amount = 3)
+    {
+        $roles = [];
+        while($amount--) {
+            $roles[] = $this->createRole();
+        }
+
+        return new Collection($roles);
+    }
+
+    /**
+     * Creates and persists a new dummy user
+     *
+     * @param array $attributes [optional]
+     *
+     * @return User
+     */
+    public function createUser(array $attributes = []): User
+    {
+        $faker = $this->getFaker();
+
+        $attributes = array_merge([
+            'email' => $faker->unique()->email,
+            'name' => $faker->name,
+            'password' => Hash::make('password')
+        ], $attributes);
+
+        return User::create($attributes);
     }
 }
