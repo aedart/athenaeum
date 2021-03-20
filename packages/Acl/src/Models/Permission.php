@@ -2,8 +2,8 @@
 
 namespace Aedart\Acl\Models;
 
+use Aedart\Acl\Models\Concerns as AclConcerns;
 use Aedart\Acl\Models\Permissions\Group;
-use Aedart\Acl\Traits\AclTrait;
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Database\Model;
 use Aedart\Database\Models\Concerns;
@@ -31,7 +31,7 @@ use Illuminate\Support\Carbon;
  */
 class Permission extends Model implements Sluggable
 {
-    use AclTrait;
+    use AclConcerns\AclModels;
     use Concerns\Slugs;
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Aedart\Acl\Traits;
 
+use Aedart\Acl\Models\Concerns;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -17,7 +18,7 @@ use InvalidArgumentException;
  */
 trait HasRoles
 {
-    use AclTrait;
+    use Concerns\AclModels;
 
     /*****************************************************************
      * Operations
@@ -127,7 +128,7 @@ trait HasRoles
      */
     public function assignRoles(...$roles)
     {
-        $ids = $this->obtainRoleIds($roles);
+        $ids = $this->obtainModelIds($this->aclRoleModelInstance(), $roles);
 
         $this
             ->roles()
@@ -161,7 +162,7 @@ trait HasRoles
      */
     public function unassignRoles(...$roles)
     {
-        $ids = $this->obtainRoleIds($roles);
+        $ids = $this->obtainModelIds($this->aclRoleModelInstance(), $roles);
 
         $this->roles()->detach($ids);
 
@@ -221,77 +222,5 @@ trait HasRoles
             $this->getForeignKey(),
             $role->getForeignKey()
         );
-    }
-
-    /*****************************************************************
-     * Internals
-     ****************************************************************/
-
-    /**
-     * Obtains ids for given roles
-     *
-     * @param mixed ...$roles
-     *
-     * @return int[]
-     */
-    protected function obtainRoleIds(...$roles): array
-    {
-        return collect($roles)
-            ->flatten()
-            ->map(function ($role) {
-                return $this->resolveOrFindRoles($role);
-            })
-            ->map->id
-            ->all();
-    }
-
-    /**
-     * Resolves or finds given roles
-     *
-     * @param string|int|\Aedart\Acl\Models\Role|string[]|int[]|\Aedart\Acl\Models\Role[]|Collection $roles
-     *
-     * @return Collection|\Aedart\Acl\Models\Role[]]
-     */
-    protected function resolveOrFindRoles($roles)
-    {
-        $roleClass = $this->aclRoleModel();
-        if ($roles instanceof $roleClass) {
-            return $roles;
-        }
-
-        // When id is given
-        if (is_numeric($roles)) {
-            return $roleClass::find($roles);
-        }
-
-        // When slug is given
-        if (is_string($roles)) {
-            return $roleClass::findBySlug($roles);
-        }
-
-        // When a collection of roles is given
-        if ($roles instanceof Collection) {
-            // Ensure all instances are of type role
-            return $roles->filter(function ($role) use ($roleClass) {
-                return $role instanceof $roleClass;
-            });
-        }
-
-        // When an array of roles is given...
-        if (is_array($roles)) {
-            $model = $this->aclRoleModelInstance();
-
-            return $model
-                ->newQuery()
-                ->whereSlugIn($roles)
-                ->orWhereIn($model->getKeyName(), $roles)
-                ->get();
-        }
-
-        // Unable to resolve
-        throw new InvalidArgumentException(sprintf(
-            'Unable to resolve or find requested roles. Accepted values are slugs, ids or role instances. %s given',
-            gettype($roles)
-        ));
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Aedart\Acl\Models;
 
-use Aedart\Acl\Traits\AclTrait;
+use Aedart\Acl\Models\Concerns as AclConcerns;
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Database\Model;
 use Aedart\Database\Models\Concerns;
@@ -32,8 +32,8 @@ use InvalidArgumentException;
  */
 class Role extends Model implements Sluggable
 {
-    use AclTrait;
     use SoftDeletes;
+    use AclConcerns\AclModels;
     use Concerns\Slugs;
 
     /**
@@ -161,7 +161,7 @@ class Role extends Model implements Sluggable
      */
     public function grantPermissions(...$permissions)
     {
-        $ids = $this->obtainPermissionIds($permissions);
+        $ids = $this->obtainModelIds($this->aclPermissionsModelInstance(), $permissions);
 
         $this
             ->permissions()
@@ -195,7 +195,7 @@ class Role extends Model implements Sluggable
      */
     public function revokePermissions(...$permissions)
     {
-        $ids = $this->obtainPermissionIds($permissions);
+        $ids = $this->obtainModelIds($this->aclPermissionsModelInstance(), $permissions);
 
         $this->permissions()->detach($ids);
 
@@ -250,77 +250,5 @@ class Role extends Model implements Sluggable
             $this->getForeignKey(),
             $user->getForeignKey()
         );
-    }
-
-    /*****************************************************************
-     * Internals
-     ****************************************************************/
-
-    /**
-     * Obtains ids for given permissions
-     *
-     * @param mixed ...$permissions
-     *
-     * @return int[]
-     */
-    protected function obtainPermissionIds(...$permissions): array
-    {
-        return collect($permissions)
-            ->flatten()
-            ->map(function ($permission) {
-                return $this->resolveOrFindPermissions($permission);
-            })
-            ->map->id
-            ->all();
-    }
-
-    /**
-     * Resolves or finds given permissions
-     *
-     * @param string|int|\Aedart\Acl\Models\Permission|string[]|int[]|\Aedart\Acl\Models\Permission[]|Collection $permissions
-     *
-     * @return Collection|\Aedart\Acl\Models\Permission[]]
-     */
-    protected function resolveOrFindPermissions($permissions)
-    {
-        $permissionClass = $this->aclPermissionsModel();
-        if ($permissions instanceof $permissionClass) {
-            return $permissions;
-        }
-
-        // When id is given
-        if (is_numeric($permissions)) {
-            return $permissionClass::find($permissions);
-        }
-
-        // When slug is given
-        if (is_string($permissions)) {
-            return $permissionClass::findBySlug($permissions);
-        }
-
-        // When a collection of permissions is given
-        if ($permissions instanceof Collection) {
-            // Ensure all instances are of type permission
-            return $permissions->filter(function ($permission) use ($permissionClass) {
-                return $permission instanceof $permissionClass;
-            });
-        }
-
-        // When an array of permissions is given...
-        if (is_array($permissions)) {
-            $model = $this->aclPermissionsModelInstance();
-
-            return $model
-                ->newQuery()
-                ->whereSlugIn($permissions)
-                ->orWhereIn($model->getKeyName(), $permissions)
-                ->get();
-        }
-
-        // Unable to resolve
-        throw new InvalidArgumentException(sprintf(
-            'Unable to resolve or find requested permissions. Accepted values are slugs, ids or permission instances. %s given',
-            gettype($permissions)
-        ));
     }
 }
