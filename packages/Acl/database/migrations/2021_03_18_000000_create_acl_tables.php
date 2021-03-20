@@ -1,6 +1,6 @@
 <?php
 
-use Aedart\Acl\Traits\AclTrait;
+use Aedart\Acl\Models\Concerns\Configuration;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Schema;
  */
 class CreateAclTables extends Migration
 {
-    use AclTrait;
+    use Configuration;
 
     /**
      * Run the migrations.

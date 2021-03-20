@@ -2,7 +2,6 @@
 
 namespace Aedart\Acl\Models\Concerns;
 
-use Aedart\Acl\Traits\AclTrait;
 use Aedart\Contracts\Database\Models\Sluggable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +15,7 @@ use InvalidArgumentException;
  */
 trait AclModels
 {
-    use AclTrait;
+    use Configuration;
 
     /*****************************************************************
      * Find methods

@@ -1,19 +1,18 @@
 <?php
 
-namespace Aedart\Acl\Traits;
+namespace Aedart\Acl\Models\Concerns;
 
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Acl Trait
- *
- * Utility for obtaining various ACL components.
+ * Concerns Acl Configuration
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
- * @package Aedart\Acl\Traits
+ * @package Aedart\Acl\Models\Concerns
  */
-trait AclTrait
+trait Configuration
 {
     use ConfigTrait;
 
@@ -44,7 +43,7 @@ trait AclTrait
     /**
      * Creates a new user eloquent model instance
      *
-     * @return \Illuminate\Database\Eloquent\Model|Authenticatable
+     * @return Model|Authenticatable
      */
     public function aclUserModelInstance()
     {
@@ -68,7 +67,7 @@ trait AclTrait
     /**
      * Creates a new role eloquent model instance
      *
-     * @return \Aedart\Acl\Models\Role
+     * @return \Aedart\Acl\Models\Role|Model
      */
     public function aclRoleModelInstance()
     {
@@ -88,7 +87,7 @@ trait AclTrait
     /**
      * Creates a new permission eloquent model instance
      *
-     * @return \Aedart\Acl\Models\Permission
+     * @return \Aedart\Acl\Models\Permission|Model
      */
     public function aclPermissionsModelInstance()
     {
@@ -108,7 +107,7 @@ trait AclTrait
     /**
      * Creates a new permission group eloquent model instance
      *
-     * @return \Aedart\Acl\Models\Permissions\Group
+     * @return \Aedart\Acl\Models\Permissions\Group|Model
      */
     public function aclPermissionsGroupModelInstance()
     {
