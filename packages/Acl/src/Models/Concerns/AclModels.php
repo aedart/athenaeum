@@ -61,7 +61,7 @@ trait AclModels
 
         // When a collection of models is given
         if ($models instanceof Collection) {
-            return $models->intersect($this->{$relation})->isNotEmpty();
+            return $models->intersect($this->{$relation})->count() === $models->count();
         }
 
         // Unable to determine how to check given model, thus we must fail...
