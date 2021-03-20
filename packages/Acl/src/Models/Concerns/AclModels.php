@@ -104,7 +104,7 @@ trait AclModels
      *
      * @throws InvalidArgumentException
      */
-    public function hasAllOf($models, $type, string $relation): bool
+    protected function hasAllOf($models, $type, string $relation): bool
     {
         foreach ($models as $model) {
             if (!$this->hasRelatedModels($model, $type, $relation)) {
