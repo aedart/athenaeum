@@ -67,7 +67,7 @@ trait AclModels
 
         // Unable to determine how to check given model, thus we must fail...
         throw new InvalidArgumentException(sprintf(
-        'Unable to determine is given models are related. Accepted values are slugs, ids, collection of models or model instance. %s given',
+            'Unable to determine is given models are related. Accepted values are slugs, ids, collection of models or model instance. %s given',
             gettype($models)
         ));
     }
@@ -130,7 +130,7 @@ trait AclModels
     {
         return collect($models)
             ->flatten()
-            ->map(function ($model) use($type) {
+            ->map(function ($model) use ($type) {
                 return $this->resolveOrFindModels($model, $type);
             })
             ->map->id
@@ -196,7 +196,7 @@ trait AclModels
 
         // Unable to resolve
         throw new InvalidArgumentException(sprintf(
-        'Unable to resolve or find requested models. Accepted values are slugs, ids or collection or model instances. %s given',
+            'Unable to resolve or find requested models. Accepted values are slugs, ids or collection or model instances. %s given',
             gettype($models)
         ));
     }

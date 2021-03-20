@@ -206,7 +206,7 @@ abstract class AclTestCase extends LaravelTestCase
     public function createRoles(int $amount = 3)
     {
         $roles = [];
-        while($amount--) {
+        while ($amount--) {
             $roles[] = $this->createRole();
         }
 
