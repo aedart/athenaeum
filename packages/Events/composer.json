@@ -23,7 +23,7 @@
     "require": {
         "php": ">=7.4.0",
         "illuminate/events": "^8.15",
-        "aedart/athenaeum-support": "^5.8"
+        "aedart/athenaeum-support": "^5.9"
     },
     "autoload": {
         "psr-4": {
@@ -37,7 +37,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "5.8.x-dev"
+            "dev-master": "5.9.x-dev"
         }
     }
 }
