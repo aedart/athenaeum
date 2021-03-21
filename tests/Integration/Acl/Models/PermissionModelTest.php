@@ -20,25 +20,6 @@ use Aedart\Tests\TestCases\Acl\AclTestCase;
  */
 class PermissionModelTest extends AclTestCase
 {
-    /*****************************************************************
-     * Setup
-     ****************************************************************/
-
-    /**
-     * @inheritdoc
-     */
-    protected function _before()
-    {
-        parent::_before();
-
-        $this->installAclMigrations();
-    }
-
-    /*****************************************************************
-     * Actual tests
-     ****************************************************************/
-
-
     /**
      * @test
      */

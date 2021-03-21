@@ -38,6 +38,8 @@ abstract class AclTestCase extends LaravelTestCase
         $this->getConfigLoader()
             ->setDirectory($this->configDir())
             ->load();
+
+        $this->installAclMigrations();
     }
 
     /**

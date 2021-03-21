@@ -18,24 +18,6 @@ use Aedart\Tests\TestCases\Acl\AclTestCase;
  */
 class RoleModelTest extends AclTestCase
 {
-    /*****************************************************************
-     * Setup
-     ****************************************************************/
-
-    /**
-     * @inheritdoc
-     */
-    protected function _before()
-    {
-        parent::_before();
-
-        $this->installAclMigrations();
-    }
-
-    /*****************************************************************
-     * Actual tests
-     ****************************************************************/
-
     /**
      * @test
      */
