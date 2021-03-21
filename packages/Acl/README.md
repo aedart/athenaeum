@@ -1,6 +1,6 @@
 # Athenaeum Acl
 
-TODO ... package is under development!
+Offers a small [ACL](https://da.wikipedia.org/wiki/Access_control_list) implementation for Laravel, with roles and permissions (grouped) that are stored in a database.
 
 ## Documentation
 

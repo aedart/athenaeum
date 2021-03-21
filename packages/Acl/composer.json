@@ -1,10 +1,11 @@
 {
     "name": "aedart/athenaeum-acl",
-    "description": "ACL package for Laravel",
+    "description": "ACL package for Laravel, with roles and permissions (grouped)",
     "keywords": [
         "Athenaeum",
         "Acl",
         "Access Controll List",
+        "Roles",
         "Permissions",
         "Authorization"
     ],
