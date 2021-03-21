@@ -1,6 +1,6 @@
 # Athenaeum Database
 
-TODO ... package is under development!
+Utilities for Laravel's [Database](https://github.com/illuminate/database) package. 
 
 ## Documentation
 
