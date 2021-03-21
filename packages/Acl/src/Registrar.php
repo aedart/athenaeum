@@ -74,6 +74,10 @@ class Registrar implements RegistrarInterface,
             return $this->permissions;
         }
 
+        if ($force) {
+            $this->flush();
+        }
+
         $key = $this->resolveKey();
         $ttl = $this->resolveTtl();
 
