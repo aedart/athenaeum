@@ -4,8 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.8.0](https://github.com/aedart/athenaeum/compare/5.7.0...5.8.0)
+
 #### Added
 
+* ACL package which offers a way to store roles and permissions (grouped) in a database. [#34](https://github.com/aedart/athenaeum/pull/34).
+* Database utilities package. [#34](https://github.com/aedart/athenaeum/pull/34).
 * `Sluggable` interface and `Slug` concern in new Database package.
 * `Str` utility, which offers a few additional string manipulation methods.
 
