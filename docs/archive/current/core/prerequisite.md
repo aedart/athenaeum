@@ -15,7 +15,7 @@ Therefore, please ensure that composer is installed and available inside your le
 ## PHP v7.4.x
 
 Unfortunately this package is only available from Athenaeum `v4.x`, meaning that it requires PHP `v7.4.x` or higher.
-If you application only runs on older versions of PHP, then you should spend the time it requires to upgrade.
+If your application only runs on older versions of PHP, then you should spend the time upgrading it.
 Your application stands to benefit greatly from this, both in terms of security, performance and new language features.
 
 Please consult yourself with [PHP Migration Guides](https://www.php.net/manual/en/migration74.php), for additional information.
