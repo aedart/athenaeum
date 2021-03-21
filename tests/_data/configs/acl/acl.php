@@ -58,7 +58,7 @@ return [
     'cache' => [
 
         // Name of the cache store (driver profile) to use.
-        'store' => 'redis',
+        'store' => 'array',
 
         // Time-to-live for cached permissions. (seconds)
         'ttl' => 60 * 60,
