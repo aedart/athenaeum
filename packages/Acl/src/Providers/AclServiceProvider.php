@@ -20,5 +20,7 @@ class AclServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../configs/acl.php' => config_path('acl.php')
         ], 'config');
+
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
     }
 }
