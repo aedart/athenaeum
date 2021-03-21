@@ -26,7 +26,7 @@
         "php": ">=7.4.0",
         "illuminate/auth": "^8.15",
         "aedart/athenaeum-contracts": "^5.8",
-        "aedart/athenaeum-database": "^8.8",
+        "aedart/athenaeum-database": "^5.8",
         "aedart/athenaeum-support": "^5.8",
         "aedart/athenaeum-utils": "^5.8"
     },
