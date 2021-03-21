@@ -6,6 +6,7 @@ use Aedart\Acl\Models\Concerns\Configuration as AclConfiguration;
 use Aedart\Acl\Models\Permissions\Group;
 use Aedart\Acl\Models\Role;
 use Aedart\Acl\Providers\AclServiceProvider;
+use Aedart\Acl\Traits\RegistrarTrait;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
@@ -24,6 +25,7 @@ abstract class AclTestCase extends LaravelTestCase
 {
     use ConfigLoaderTrait;
     use AclConfiguration;
+    use RegistrarTrait;
 
     /*****************************************************************
      * Setup
