@@ -19,16 +19,5 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
 abstract class Model extends BaseModel implements Instantiatable
 {
     use Concerns\Instance;
-
-    /**
-     * Returns the database table name for this model
-     *
-     * @see getTable
-     *
-     * @return string
-     */
-    public static function tableName(): string
-    {
-        return static::make()->getTable();
-    }
+    use Concerns\Table;
 }
