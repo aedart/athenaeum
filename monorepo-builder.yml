@@ -41,6 +41,7 @@ parameters:
 
     # for "split" command
     directories_to_repositories:
+        packages/Acl: 'git@github.com:aedart/athenaeum-acl.git'
         packages/Circuits: 'git@github.com:aedart/athenaeum-circuits.git'
         packages/Collections: 'git@github.com:aedart/athenaeum-collections.git'
         packages/Config: 'git@github.com:aedart/athenaeum-config.git'
@@ -48,6 +49,7 @@ parameters:
         packages/Container: 'git@github.com:aedart/athenaeum-container.git'
         packages/Contracts: 'git@github.com:aedart/athenaeum-contracts.git'
         packages/Core: 'git@github.com:aedart/athenaeum-core.git'
+        packages/Database: 'git@github.com:aedart/athenaeum-database.git'
         packages/Dto: 'git@github.com:aedart/athenaeum-dto.git'
         packages/Events: 'git@github.com:aedart/athenaeum-events.git'
         packages/Http/Clients: 'git@github.com:aedart/athenaeum-http-clients.git'

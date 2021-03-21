@@ -1,0 +1,111 @@
+<?php
+
+namespace Aedart\Tests\Integration\Acl\Models;
+
+use Aedart\Acl\Models\Permission;
+use Aedart\Acl\Models\Permissions\Group;
+use Aedart\Testing\Helpers\ConsoleDebugger;
+use Aedart\Tests\TestCases\Acl\AclTestCase;
+
+/**
+ * PermissionGroupModelTest
+ *
+ * @group acl
+ * @group acl-models
+ * @group acl-permission-group
+ * @group acl-permission-group-model
+ *
+ * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @package Aedart\Tests\Integration\Acl\Models
+ */
+class PermissionGroupModelTest extends AclTestCase
+{
+    /**
+     * @test
+     */
+    public function canCreateAndObtain()
+    {
+        $faker = $this->getFaker();
+        $slug = $faker->slug(2);
+        $name = $faker->name;
+        $desc = $faker->text(20);
+
+        /** @var Group $group */
+        $group = Group::create([
+            'slug' => $slug,
+            'name' => $name,
+            'description' => $desc
+        ]);
+
+        ConsoleDebugger::output($group->toArray());
+
+        $this->assertNotEmpty($group->id, 'Permission group was not created');
+        $this->assertSame($slug, $group->slug);
+        $this->assertSame($name, $group->name);
+        $this->assertSame($desc, $group->description);
+        $this->assertNotEmpty($group->created_at, 'Created at timestamp not set');
+        $this->assertNotEmpty($group->updated_at, 'Updated at timestamp not set');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Exception
+     */
+    public function canSoftDeleteGroup()
+    {
+        /** @var group $group */
+        $group = Group::create([
+            'slug' => 'users',
+            'name' => 'Users',
+        ]);
+
+        $result = $group->delete();
+
+        $this->assertTrue($result, 'Group was not deleted');
+        $this->assertTrue($group->trashed(), 'Group is not soft-deleted (not trashed)');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function canCreateWithPermissions()
+    {
+        $permissions = $this->makePermissionsForGroupCreate();
+
+        /** @var Group $group */
+        $group = Group::createWithPermissions('users', $permissions);
+
+        // Reload with permissions
+        $group = $group::with('permissions')->first();
+
+        ConsoleDebugger::output($group->toArray());
+
+        $this->assertCount(count($permissions), $group->permissions, 'Incorrect amount of permissions created');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function deletesPermissionsWhenGroupForcedDeleted()
+    {
+        $table = (new Permission())->getTable();
+        $permissions = $this->makePermissionsForGroupCreate();
+
+        /** @var Group $group */
+        $group = Group::createWithPermissions('users', $permissions);
+
+        // Control test
+        $this->assertDatabaseCount($table, count($permissions), 'testing');
+
+        // Force delete
+        $result = $group->forceDelete();
+
+        $this->assertTrue($result, 'Group was not force deleted');
+        $this->assertDatabaseCount($table, 0, 'testing');
+    }
+}
