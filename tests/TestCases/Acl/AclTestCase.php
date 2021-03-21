@@ -5,6 +5,7 @@ namespace Aedart\Tests\TestCases\Acl;
 use Aedart\Acl\Models\Concerns\Configuration as AclConfiguration;
 use Aedart\Acl\Models\Permissions\Group;
 use Aedart\Acl\Models\Role;
+use Aedart\Acl\Providers\AclServiceProvider;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
@@ -49,6 +50,10 @@ abstract class AclTestCase extends LaravelTestCase
     {
         return [
             ConfigLoaderServiceProvider::class,
+
+            // NOTE: migrations are not automatically executed for this service provider!
+            // Still has to be done manually - see installAclMigrations()
+            AclServiceProvider::class
         ];
     }
 
