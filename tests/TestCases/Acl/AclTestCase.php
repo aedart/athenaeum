@@ -9,6 +9,7 @@ use Aedart\Acl\Providers\AclServiceProvider;
 use Aedart\Acl\Traits\RegistrarTrait;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
+use Aedart\Support\Helpers\Auth\Access\GateTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Acl\User;
 use Codeception\Configuration;
@@ -26,6 +27,7 @@ abstract class AclTestCase extends LaravelTestCase
     use ConfigLoaderTrait;
     use AclConfiguration;
     use RegistrarTrait;
+    use GateTrait;
 
     /*****************************************************************
      * Setup
