@@ -23,7 +23,8 @@ use Illuminate\Contracts\Cache\Repository;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Acl
  */
-class Registrar implements RegistrarInterface,
+class Registrar implements
+    RegistrarInterface,
     ConfigAware,
     CacheFactoryAware
 {
@@ -81,7 +82,7 @@ class Registrar implements RegistrarInterface,
         $key = $this->resolveKey();
         $ttl = $this->resolveTtl();
 
-        return $this->permissions = $this->getCache()->remember($key, $ttl, function() {
+        return $this->permissions = $this->getCache()->remember($key, $ttl, function () {
             return $this->aclPermissionsModel()::with('roles')->get();
         });
     }
@@ -144,7 +145,7 @@ class Registrar implements RegistrarInterface,
      */
     protected function defineAbility(Gate $gate, $permission): void
     {
-        $gate->define($permission->getSlugKey(), function($user) use($permission) {
+        $gate->define($permission->getSlugKey(), function ($user) use ($permission) {
             /** @var Authenticatable|HasRoles $user */
 
             return $user->hasPermission($permission);
