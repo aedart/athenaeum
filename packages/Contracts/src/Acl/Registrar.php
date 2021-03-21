@@ -42,7 +42,7 @@ interface Registrar extends CacheAware
      *                    from data storage. If false, then cached
      *                    permissions are used.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection|\Aedart\Acl\Models\Permission[]
      */
     public function getPermissions(bool $force = false);
 
@@ -61,4 +61,13 @@ interface Registrar extends CacheAware
      * @return self
      */
     public function expires($ttl = null): self;
+
+    /**
+     * Set the cache key to use when caching permissions
+     *
+     * @param string|null $name [optional]
+     *
+     * @return self
+     */
+    public function key(?string $name = null): self;
 }
