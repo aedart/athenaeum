@@ -2,6 +2,8 @@
 
 namespace Aedart\Acl\Providers;
 
+use Aedart\Acl\Registrar;
+use Aedart\Contracts\Acl\Registrar as RegistrarInterface;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -12,6 +14,10 @@ use Illuminate\Support\ServiceProvider;
  */
 class AclServiceProvider extends ServiceProvider
 {
+    public array $singletons = [
+        RegistrarInterface::class => Registrar::class,
+    ];
+
     /**
      * Bootstrap this service
      */
