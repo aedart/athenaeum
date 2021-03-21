@@ -144,7 +144,7 @@ class RegistrarTest extends AclTestCase
     /**
      * @test
      */
-    public function registrarCachesPermissions()
+    public function cachesPermissions()
     {
         $registrar = $this->getRegistrar();
 
