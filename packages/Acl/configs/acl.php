@@ -45,6 +45,25 @@ return [
 
         // Permission groups table name
         'groups' => 'permission_groups'
+    ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Cache
+    |--------------------------------------------------------------------------
+    |
+    | Permissions cache settings for the Acl registrar.
+    */
+
+    'cache' => [
+
+        // Name of the cache store (driver profile) to use.
+        'store' => 'default',
+
+        // Time-to-live for cached permissions. (seconds)
+        'ttl' => 60 * 60,
+
+        // Cache key name to use for permissions
+        'key' => 'acl.permissions'
     ]
 ];
