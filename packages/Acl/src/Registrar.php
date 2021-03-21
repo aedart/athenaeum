@@ -78,7 +78,7 @@ class Registrar implements RegistrarInterface,
         $ttl = $this->resolveTtl();
 
         return $this->permissions = $this->getCache()->remember($key, $ttl, function() {
-            return $this->aclPermissionsModel()::with('permissions')->get();
+            return $this->aclPermissionsModel()::with('roles')->get();
         });
     }
 
