@@ -1,0 +1,43 @@
+{
+    "name": "aedart/athenaeum-validation",
+    "description": "Validation rules and utilities for Laravel",
+    "keywords": [
+        "Athenaeum",
+        "Validation"
+    ],
+    "homepage": "https://aedart.github.io/athenaeum/",
+    "support": {
+        "issues": "https://github.com/aedart/athenaeum/issues",
+        "source": "https://github.com/aedart/athenaeum"
+    },
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "illuminate/validation": "^8.15",
+        "aedart/athenaeum-contracts": "^5.9",
+        "aedart/athenaeum-support": "^5.9",
+        "aedart/athenaeum-utils": "^5.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\Validation\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.9.x-dev"
+        }
+    }
+}
