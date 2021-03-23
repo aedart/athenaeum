@@ -60,6 +60,7 @@ parameters:
         packages/Support: 'git@github.com:aedart/athenaeum-support.git'
         packages/Testing: 'git@github.com:aedart/athenaeum-testing.git'
         packages/Utils: 'git@github.com:aedart/athenaeum-utils.git'
+        packages/Validation: 'git@github.com:aedart/athenaeum-validation.git'
 
     # Package alias format
     package_alias_format: '<major>.<minor>.x-dev'

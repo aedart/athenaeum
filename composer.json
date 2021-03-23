@@ -19,6 +19,7 @@
         "illuminate/filesystem": "^8.15",
         "illuminate/pipeline": "^8.15",
         "illuminate/support": "^8.15",
+        "illuminate/validation": "^8.15",
         "jean85/pretty-package-versions": "~1.5",
         "mockery/mockery": "1.4.*",
         "psr/http-client": "^1.0",
@@ -51,7 +52,10 @@
         ],
         "psr-4": {
             "Aedart\\": "src",
-            "Aedart\\Acl\\": "packages/Acl/src",
+            "Aedart\\Acl\\": [
+                "packages/Acl/src",
+                "packages/Validation/src"
+            ],
             "Aedart\\Circuits\\": "packages/Circuits/src",
             "Aedart\\Collections\\": "packages/Collections/src",
             "Aedart\\Config\\": "packages/Config/src",
@@ -69,7 +73,8 @@
             "Aedart\\Service\\": "packages/Service/src",
             "Aedart\\Support\\": "packages/Support/src",
             "Aedart\\Testing\\": "packages/Testing/src",
-            "Aedart\\Utils\\": "packages/Utils/src"
+            "Aedart\\Utils\\": "packages/Utils/src",
+            "Aedart\\Validation\\": "packages/Validation/src"
         }
     },
     "autoload-dev": {
@@ -96,7 +101,8 @@
         "aedart/athenaeum-service": "self.version",
         "aedart/athenaeum-support": "self.version",
         "aedart/athenaeum-testing": "self.version",
-        "aedart/athenaeum-utils": "self.version"
+        "aedart/athenaeum-utils": "self.version",
+        "aedart/athenaeum-validation": "self.version"
     },
     "scripts": {
         "post-install-cmd": [
