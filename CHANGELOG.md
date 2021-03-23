@@ -4,6 +4,10 @@
 
 ### [Unreleased]
 
+#### Changed
+
+* Removed unnecessary `$slug` merge into `$values` parameter in `Slugs::findOrCreateBySlug`, in Database package. [#40](https://github.com/aedart/athenaeum/pull/40).
+
 ### [v5.9.0](https://github.com/aedart/athenaeum/compare/5.8.0...5.9.0)
 
 #### Added
