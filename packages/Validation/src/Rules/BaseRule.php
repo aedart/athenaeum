@@ -22,6 +22,13 @@ abstract class BaseRule implements
     use TranslatorTrait;
 
     /**
+     * Name of the attribute in question
+     *
+     * @var string
+     */
+    protected string $attribute;
+
+    /**
      * Get the translation for a given key.
      *
      * Method ensures to vendor-prefix the given translation key, so that
