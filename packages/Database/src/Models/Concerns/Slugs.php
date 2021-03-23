@@ -83,11 +83,6 @@ trait Slugs
     {
         $slugName = (new static())->getSlugKeyName();
 
-        // Ensure that slug is part of values, in case that new model must be created
-        $values = array_merge($values, [
-            $slugName => $slug
-        ]);
-
         // Find or create
         return static::firstOrCreate([ $slugName => $slug ], $values);
     }
