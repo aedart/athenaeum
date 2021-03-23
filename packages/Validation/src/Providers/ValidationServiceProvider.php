@@ -17,10 +17,10 @@ class ValidationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'athenaeum-validation');
+        $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'athenaeum-validation');
 
         $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/athenaeum-validation'),
+            __DIR__ . '/../../resources/lang' => resource_path('lang/vendor/athenaeum-validation'),
         ]);
     }
 }
