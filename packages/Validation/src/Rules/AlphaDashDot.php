@@ -21,7 +21,7 @@ class AlphaDashDot extends BaseRule
         $this->attribute = $attribute;
 
         // Ensure that value is string or numeric
-        if (! is_string($value) && ! is_numeric($value)) {
+        if (!is_string($value) && !is_numeric($value)) {
             return false;
         }
 
