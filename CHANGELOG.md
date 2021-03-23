@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.9.0](https://github.com/aedart/athenaeum/compare/5.8.0...5.9.0)
+
+#### Added
+
+* Validation package that is intended to offer various rules and other validation related utilities. Presently, it only contains an `AlphaDashDot` rule.
+
 ### [v5.8.0](https://github.com/aedart/athenaeum/compare/5.7.0...5.8.0)
 
 #### Added
