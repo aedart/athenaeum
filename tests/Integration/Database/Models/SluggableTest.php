@@ -6,6 +6,7 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Database\DatabaseTestCase;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Carbon;
 
 /**
@@ -138,6 +139,32 @@ class SluggableTest extends DatabaseTestCase
         // Check all records in database
         //$all = Category::all();
         $this->assertDatabaseCount('categories', 1, 'testing');
+    }
+
+    /**
+     * @test
+     *
+     * @see https://github.com/aedart/athenaeum/issues/39
+     */
+    public function failsCreationWhenAlreadyExists()
+    {
+        // This is a control test, which should ensure that creation
+        // of a new model, with identical slug, will fail.
+        // Creation is done via Eloquent's regular create method.
+
+        $this->expectException(QueryException::class);
+        $this->expectExceptionMessageMatches('/Integrity constraint violation:/');
+
+        $data = [
+            'slug' => 'products',
+            'name' => 'Products',
+            'description' => $this->getFaker()->text()
+        ];
+
+        Category::create($data);
+
+        // This should trigger a unique index violation in the database
+        Category::create($data);
     }
 
     /**
