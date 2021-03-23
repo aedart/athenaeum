@@ -4,6 +4,10 @@
 
 ### [Unreleased]
 
+#### Added
+
+* Several tests to verify behaviour of `Slugs` concern, in Database package. [#39](https://github.com/aedart/athenaeum/issues/39).
+
 #### Changed
 
 * Removed unnecessary `$slug` merge into `$values` parameter in `Slugs::findOrCreateBySlug`, in Database package. [#40](https://github.com/aedart/athenaeum/pull/40).
