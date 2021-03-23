@@ -2,8 +2,10 @@
 
 namespace Aedart\Tests\Integration\Database\Models;
 
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Database\DatabaseTestCase;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
 
 /**
@@ -19,6 +21,78 @@ use Illuminate\Support\Carbon;
  */
 class SluggableTest extends DatabaseTestCase
 {
+    /**
+     * @test
+     */
+    public function canFindBySlug()
+    {
+        $slug = 'products';
+        $data = [
+            'slug' => $slug,
+            'name' => 'Products',
+            'description' => $this->getFaker()->text()
+        ];
+
+        // ------------------------------------------------------- //
+        // Create...
+
+        $first = Category::create($data);
+
+        // ------------------------------------------------------- //
+        // Find...
+        $second = Category::findBySlug($slug);
+
+        $this->assertNotNull($second, 'Failed to find model via slug');
+        $this->assertSame($first->id, $second->id, 'Incorrect model found');
+    }
+
+    /**
+     * @test
+     */
+    public function canFindBySlugOrFail()
+    {
+        $slug = 'products';
+        $data = [
+            'slug' => $slug,
+            'name' => 'Products',
+            'description' => $this->getFaker()->text()
+        ];
+
+        // ------------------------------------------------------- //
+        // Create...
+
+        $first = Category::create($data);
+
+        // ------------------------------------------------------- //
+        // Find...
+        $second = Category::findBySlugOrFail($slug);
+        $this->assertNotNull($second, 'Failed to find model via slug');
+    }
+
+    /**
+     * @test
+     */
+    public function failsWhenUnableToFindBySlug()
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        $slug = 'products';
+        $data = [
+            'slug' => $slug,
+            'name' => 'Products',
+            'description' => $this->getFaker()->text()
+        ];
+
+        // ------------------------------------------------------- //
+        // Create...
+
+        $first = Category::create($data);
+
+        // ------------------------------------------------------- //
+        // Find... which SHOULD fail
+        Category::findBySlugOrFail('unknown');
+    }
+
     /**
      * @test
      *
@@ -64,5 +138,51 @@ class SluggableTest extends DatabaseTestCase
         // Check all records in database
         //$all = Category::all();
         $this->assertDatabaseCount('categories', 1, 'testing');
+    }
+
+    /**
+     * @test
+     */
+    public function canFindByManySlugs()
+    {
+        // ------------------------------------------------------- //
+        // Create...
+
+        /** @var Category $first */
+        $first = Category::create([
+            'slug' => 'products',
+            'name' => 'Products',
+            'description' => $this->getFaker()->text()
+        ]);
+
+        /** @var Category $second */
+        $second = Category::create([
+            'slug' => 'services',
+            'name' => 'Services',
+            'description' => $this->getFaker()->text()
+        ]);
+
+        /** @var Category $third */
+        $third = Category::create([
+            'slug' => 'contacts',
+            'name' => 'Contacts',
+            'description' => $this->getFaker()->text()
+        ]);
+
+        // ------------------------------------------------------- //
+        // Find
+        $results = Category::findManyBySlugs([$second->slug, $third->slug]);
+        $this->assertTrue($results->isNotEmpty(), 'No results found');
+        $this->assertCount(2, $results, 'Incorrect amount of results found');
+
+        ConsoleDebugger::output($results->toArray());
+
+        $a = $results->where('slug', $third->slug)->first();
+        $b = $results->where('slug', $second->slug)->first();
+        $this->assertSame($second->slug, $b['slug']);
+        $this->assertSame($third->slug, $a['slug']);
+
+        $c = $results->where('slug', $first->slug)->first();
+        $this->assertNull($c, 'Collection contains unexpected model!');
     }
 }
