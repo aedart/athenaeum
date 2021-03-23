@@ -61,7 +61,7 @@ class SluggableTest extends DatabaseTestCase
         // ------------------------------------------------------- //
         // Create...
 
-        $first = Category::create($data);
+        Category::create($data);
 
         // ------------------------------------------------------- //
         // Find...
@@ -86,7 +86,7 @@ class SluggableTest extends DatabaseTestCase
         // ------------------------------------------------------- //
         // Create...
 
-        $first = Category::create($data);
+        Category::create($data);
 
         // ------------------------------------------------------- //
         // Find... which SHOULD fail

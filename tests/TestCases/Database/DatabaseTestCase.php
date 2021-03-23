@@ -72,5 +72,4 @@ abstract class DatabaseTestCase extends LaravelTestCase
 
         return $this;
     }
-
 }
