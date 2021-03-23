@@ -4,9 +4,36 @@
 
 ### [Unreleased]
 
+### [v5.9.0](https://github.com/aedart/athenaeum/compare/5.8.0...5.9.0)
+
+#### Added
+
+* Validation package that is intended to offer various rules and other validation related utilities. Presently, it only contains an `AlphaDashDot` rule. [#37](https://github.com/aedart/athenaeum/pull/37).
+
+### [v5.8.0](https://github.com/aedart/athenaeum/compare/5.7.0...5.8.0)
+
+#### Added
+
+* ACL package which offers a way to store roles and permissions (grouped) in a database. [#34](https://github.com/aedart/athenaeum/pull/34).
+* Database utilities package. [#34](https://github.com/aedart/athenaeum/pull/34).
+* `Sluggable` interface and `Slug` concern in new Database package.
+* `Str` utility, which offers a few additional string manipulation methods.
+
+#### Fixed
+
+* Unable to run database migrations via `LaravelTestCase`. Now implements `\Orchestra\Testbench\Contracts\TestCase`, which resolves the issue¹.
+
+¹: _Orchestra's `MigrateProcessor` component, which is used behind the scene, has an explicit `TestCase` dependency. This cannot be circumvented without exensive overwrites of several migration helper methods._
+
+### [v5.7.0](https://github.com/aedart/athenaeum/compare/5.6.0...5.7.0)
+
 #### Added
 
 * `application()` method in `\Aedart\Utils\Version`, which is able to return application's version. [#25](https://github.com/aedart/athenaeum/issues/25)
+
+#### Fixed
+
+* Too many Chrome driver processes started in `BrowserTestCase`, possibly causing a `Connection Refused` error. [#33](https://github.com/aedart/athenaeum/issues/33)
 
 ### [v5.6.0](https://github.com/aedart/athenaeum/compare/5.5.1...5.6.0)
 

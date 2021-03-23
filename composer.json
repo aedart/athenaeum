@@ -7,16 +7,19 @@
         "dragonmantank/cron-expression": "^3.0",
         "fzaninotto/faker": "1.9.*",
         "guzzlehttp/guzzle": "^7.1",
+        "illuminate/auth": "^8.15",
         "illuminate/cache": "^8.15",
         "illuminate/collections": "^8.15",
         "illuminate/config": "^8.15",
         "illuminate/console": "^8.15",
         "illuminate/container": "^8.15",
         "illuminate/contracts": "^8.15",
+        "illuminate/database": "^8.15",
         "illuminate/events": "^8.15",
         "illuminate/filesystem": "^8.15",
         "illuminate/pipeline": "^8.15",
         "illuminate/support": "^8.15",
+        "illuminate/validation": "^8.15",
         "jean85/pretty-package-versions": "~1.5",
         "league/commonmark": "^1.5.7",
         "league/html-to-markdown": "^4.10.",
@@ -51,6 +54,10 @@
         ],
         "psr-4": {
             "Aedart\\": "src",
+            "Aedart\\Acl\\": [
+                "packages/Acl/src",
+                "packages/Validation/src"
+            ],
             "Aedart\\Circuits\\": "packages/Circuits/src",
             "Aedart\\Collections\\": "packages/Collections/src",
             "Aedart\\Config\\": "packages/Config/src",
@@ -58,6 +65,7 @@
             "Aedart\\Container\\": "packages/Container/src",
             "Aedart\\Contracts\\": "packages/Contracts/src",
             "Aedart\\Core\\": "packages/Core/src",
+            "Aedart\\Database\\": "packages/Database/src",
             "Aedart\\Dto\\": "packages/Dto/src",
             "Aedart\\Events\\": "packages/Events/src",
             "Aedart\\Http\\Clients\\": "packages/Http/Clients/src",
@@ -68,7 +76,8 @@
             "Aedart\\Service\\": "packages/Service/src",
             "Aedart\\Support\\": "packages/Support/src",
             "Aedart\\Testing\\": "packages/Testing/src",
-            "Aedart\\Utils\\": "packages/Utils/src"
+            "Aedart\\Utils\\": "packages/Utils/src",
+            "Aedart\\Validation\\": "packages/Validation/src"
         }
     },
     "autoload-dev": {
@@ -77,6 +86,7 @@
         }
     },
     "replace": {
+        "aedart/athenaeum-acl": "self.version",
         "aedart/athenaeum-circuits": "self.version",
         "aedart/athenaeum-collections": "self.version",
         "aedart/athenaeum-config": "self.version",
@@ -84,6 +94,7 @@
         "aedart/athenaeum-container": "self.version",
         "aedart/athenaeum-contracts": "self.version",
         "aedart/athenaeum-core": "self.version",
+        "aedart/athenaeum-database": "self.version",
         "aedart/athenaeum-dto": "self.version",
         "aedart/athenaeum-events": "self.version",
         "aedart/athenaeum-http-clients": "self.version",
@@ -94,7 +105,8 @@
         "aedart/athenaeum-service": "self.version",
         "aedart/athenaeum-support": "self.version",
         "aedart/athenaeum-testing": "self.version",
-        "aedart/athenaeum-utils": "self.version"
+        "aedart/athenaeum-utils": "self.version",
+        "aedart/athenaeum-validation": "self.version"
     },
     "scripts": {
         "post-install-cmd": [
@@ -121,7 +133,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.7.x-dev"
+            "dev-master": "5.10.x-dev"
         }
     },
     "minimum-stability": "dev",

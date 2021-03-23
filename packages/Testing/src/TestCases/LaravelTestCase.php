@@ -3,6 +3,7 @@
 namespace Aedart\Testing\TestCases;
 
 use Aedart\Testing\Laravel\LaravelTestHelper;
+use Orchestra\Testbench\Contracts\TestCase;
 
 /**
  * Laravel Test Case
@@ -14,7 +15,7 @@ use Aedart\Testing\Laravel\LaravelTestHelper;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Testing\TestCases
  */
-abstract class LaravelTestCase extends IntegrationTestCase
+abstract class LaravelTestCase extends IntegrationTestCase implements TestCase
 {
     use LaravelTestHelper;
 

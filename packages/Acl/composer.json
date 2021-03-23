@@ -1,0 +1,48 @@
+{
+    "name": "aedart/athenaeum-acl",
+    "description": "ACL package for Laravel, with roles and permissions (grouped)",
+    "keywords": [
+        "Athenaeum",
+        "Acl",
+        "Access Controll List",
+        "Roles",
+        "Permissions",
+        "Authorization"
+    ],
+    "homepage": "https://aedart.github.io/athenaeum/",
+    "support": {
+        "issues": "https://github.com/aedart/athenaeum/issues",
+        "source": "https://github.com/aedart/athenaeum"
+    },
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "illuminate/auth": "^8.15",
+        "aedart/athenaeum-contracts": "^5.10",
+        "aedart/athenaeum-database": "^5.10",
+        "aedart/athenaeum-support": "^5.10",
+        "aedart/athenaeum-utils": "^5.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\Acl\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.10.x-dev"
+        }
+    }
+}

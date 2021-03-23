@@ -15,14 +15,14 @@ Therefore, please ensure that composer is installed and available inside your le
 ## PHP v7.4.x
 
 Unfortunately this package is only available from Athenaeum `v4.x`, meaning that it requires PHP `v7.4.x` or higher.
-If you application only runs on older versions of PHP, then you should spend the time it requires to upgrade.
+If your application only runs on older versions of PHP, then you should spend the time upgrading it.
 Your application stands to benefit greatly from this, both in terms of security, performance and new language features.
 
 Please consult yourself with [PHP Migration Guides](https://www.php.net/manual/en/migration74.php), for additional information.
 
 _As the author of this package, I apologise if you somehow feel mislead.
 I have been working on this and many other packages by myself.
-There are limits to how much backwards compatibility I can offer._
+There are limits as to how much backwards compatibility I can offer._
 
 ### Other Requirements
 
@@ -47,7 +47,7 @@ Fortunately, [Symfony Polyfill](https://github.com/symfony/polyfill) has a great
 
 ### Rector
 
-This is probably the coolest, and most powerful tool for upgrading outdated code. It able to do so automatically!
+This is probably the coolest, and most powerful tool for upgrading outdated code. It's able to do so automatically!
 Based on a few rules, [Rector](https://getrector.org/) will automatically refactor your code.
 According to their documentation, it can upgrade code from PHP `v5.3.x`, all the way to PHP `v7.4.x`.
 Check out their [online demo](https://getrector.org/demo) to see it in action.
@@ -69,7 +69,7 @@ It allows you to install your binary dependencies in a different folder, whilst 
 
 ## Testing...?
 
-Depending on your end-goals, perhaps it would be better that you start adding a few automated high-level tests to your legacy application, before starting to refactor, redesign or add several new features.
+Depending on your end-goals, perhaps it would be better if you start adding a few automated high-level tests for your legacy application. Afterwards, then you can start to refactor, redesign or add several new features.
 Nevertheless, bringing automated tests into your legacy application, is beyond the scope of this package.
 You may find some inspiration by reviewing the following testing frameworks [Codeception](https://codeception.com/), [PHP Spec](http://www.phpspec.net), [Behat](https://docs.behat.org), [PHPUnit](https://phpunit.de/)... [etc](https://www.google.com/search?q=php+testing+frameworks).
 
