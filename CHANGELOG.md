@@ -41,7 +41,7 @@
 
 * Unable to run database migrations via `LaravelTestCase`. Now implements `\Orchestra\Testbench\Contracts\TestCase`, which resolves the issue¹.
 
-¹: _Orchestra's `MigrateProcessor` component, which is used behind the scene, has an explicit `TestCase` dependency. This cannot be circumvented without exensive overwrites of several migration helper methods._
+¹: _Orchestra's `MigrateProcessor` component, which is used behind the scene, has an explicit `TestCase` dependency. This cannot be circumvented without extensive overwrites of several migration helper methods._
 
 ### [v5.7.0](https://github.com/aedart/athenaeum/compare/5.6.0...5.7.0)
 
