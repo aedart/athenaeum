@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use Throwable;
 
@@ -186,7 +185,7 @@ class Role extends Model implements Sluggable
      */
     public static function createWithPermissions(array $attributes, ...$permissions)
     {
-        return DB::transaction(function () use ($attributes, $permissions) {
+        return (new static())->getConnection()->transaction(function () use ($attributes, $permissions) {
             /** @var static $role */
             return static::create($attributes)
                     ->grantPermissions($permissions);
@@ -243,7 +242,7 @@ class Role extends Model implements Sluggable
      */
     public function updateWithPermissions(array $attributes, bool $sync, ...$permissions): bool
     {
-        return DB::transaction(function () use ($attributes, $sync, $permissions) {
+        return $this->getConnection()->transaction(function () use ($attributes, $sync, $permissions) {
             $saved = $this
                 ->fill($attributes)
                 ->save();
