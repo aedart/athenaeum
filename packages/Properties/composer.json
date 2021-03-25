@@ -22,8 +22,8 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "aedart/athenaeum-contracts": "^5.10",
-        "aedart/athenaeum-utils": "^5.10"
+        "aedart/athenaeum-contracts": "^5.11",
+        "aedart/athenaeum-utils": "^5.11"
     },
     "autoload": {
         "psr-4": {
@@ -37,7 +37,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "5.10.x-dev"
+            "dev-master": "5.11.x-dev"
         }
     }
 }
