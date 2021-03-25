@@ -4,13 +4,17 @@
 
 ### [Unreleased]
 
+### [v5.10.0](https://github.com/aedart/athenaeum/compare/5.9.0...5.10.0)
+
 #### Added
 
 * Several tests to verify behaviour of `Slugs` concern, in Database package. [#39](https://github.com/aedart/athenaeum/issues/39).
+* `createWithPermissions()` and `updateWithPermissions()` helper methods in ACL `Role` Eloquent model. [#41](https://github.com/aedart/athenaeum/pull/41).
 
 #### Changed
 
 * Removed unnecessary `$slug` merge into `$values` parameter in `Slugs::findOrCreateBySlug`, in Database package. [#40](https://github.com/aedart/athenaeum/pull/40).
+* Replaced manual transaction rollback handling in `createWithPermissions()` method, inside ACL Permissions `Group` model. Now using Laravel's `DB::transaction()` method instead. [#41](https://github.com/aedart/athenaeum/pull/41).
 
 ### [v5.9.0](https://github.com/aedart/athenaeum/compare/5.8.0...5.9.0)
 
