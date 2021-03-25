@@ -22,10 +22,10 @@
     "require": {
         "php": ">=7.4.0",
         "illuminate/collections": "^8.15",
-        "aedart/athenaeum-container": "^5.11",
-        "aedart/athenaeum-contracts": "^5.11",
-        "aedart/athenaeum-support": "^5.11",
-        "aedart/athenaeum-utils": "^5.11"
+        "aedart/athenaeum-container": "^5.10.1",
+        "aedart/athenaeum-contracts": "^5.10.1",
+        "aedart/athenaeum-support": "^5.10.1",
+        "aedart/athenaeum-utils": "^5.10.1"
     },
     "autoload": {
         "psr-4": {
