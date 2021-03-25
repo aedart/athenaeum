@@ -11,7 +11,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
+use Throwable;
 
 /**
  * Role
@@ -171,6 +173,70 @@ class Role extends Model implements Sluggable
         $this->permissions()->detach();
 
         return $this;
+    }
+
+    /**
+     * Create a new role and grant it the given permissions
+     *
+     * @param array $attributes
+     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     * @return static
+     *
+     * @throws Throwable
+     */
+    public static function createWithPermissions(array $attributes, ...$permissions)
+    {
+        DB::beginTransaction();
+        try {
+            // First, we create the role with given data and thereafter
+            // grant all given permissions.
+
+            /** @var static $role */
+            $role = static::create($attributes);
+
+            return $role->grantPermissions($permissions);
+        } catch (Throwable $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    /**
+     * Update this role, grant or sync the given permissions
+     *
+     * @see syncPermissions
+     * @see grantPermissions
+     *
+     * @param array $attributes
+     * @param bool $sync If true, then permissions are synced. If false, then given permissions are attempted granted.
+     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     *
+     * @return bool
+     *
+     * @throws Throwable
+     */
+    public function updateWithPermissions(array $attributes, bool $sync, ...$permissions)
+    {
+        DB::beginTransaction();
+        try {
+            // Similar to the custom create method, we first update the role
+            // and thereafter either grant or sync the given permissions
+
+            $saved = $this
+                ->fill($attributes)
+                ->save();
+
+            if ($sync) {
+                $this->syncPermissions($permissions);
+                return $saved;
+            }
+
+            $this->grantPermissions($permissions);
+            return $saved;
+        } catch (Throwable $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 
     /*****************************************************************
