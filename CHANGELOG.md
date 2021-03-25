@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.10.1](https://github.com/aedart/athenaeum/compare/5.10.0...5.10.1)
+
+#### Fixed
+
+* Fix ACL models not respecting database connection in transactions. In situations when a custom connection was set or resolved, the ALC Permissions `Group` and `Role` didn't use that given connection in their custom creation or update methods.  
+
 ### [v5.10.0](https://github.com/aedart/athenaeum/compare/5.9.0...5.10.0)
 
 #### Added
