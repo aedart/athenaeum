@@ -202,6 +202,40 @@ class Role extends Model implements Sluggable
     }
 
     /**
+     * Update this role and grant given permissions
+     *
+     * @see updateWithPermissions
+     *
+     * @param array $attributes
+     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     *
+     * @return bool
+     *
+     * @throws Throwable
+     */
+    public function updateAndGrantPermissions(array $attributes, ...$permissions): bool
+    {
+        return $this->updateWithPermissions($attributes, false, $permissions);
+    }
+
+    /**
+     * Update this role and sync given permissions
+     *
+     * @see updateWithPermissions
+     *
+     * @param array $attributes
+     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     *
+     * @return bool
+     *
+     * @throws Throwable
+     */
+    public function updateAndSyncPermissions(array $attributes, ...$permissions): bool
+    {
+        return $this->updateWithPermissions($attributes, true, $permissions);
+    }
+
+    /**
      * Update this role, grant or sync the given permissions
      *
      * @see syncPermissions
@@ -215,7 +249,7 @@ class Role extends Model implements Sluggable
      *
      * @throws Throwable
      */
-    public function updateWithPermissions(array $attributes, bool $sync, ...$permissions)
+    public function updateWithPermissions(array $attributes, bool $sync, ...$permissions): bool
     {
         DB::beginTransaction();
         try {

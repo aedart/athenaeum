@@ -637,7 +637,7 @@ class RoleModelTest extends AclTestCase
             'name' => $faker->words(3, true),
         ];
 
-        $role->updateWithPermissions($data, false, $permissions);
+        $role->updateAndGrantPermissions($data, $permissions);
 
         // ---------------------------------------------------------------- //
         // Ensure role was updated and desired permissions have been granted
@@ -672,7 +672,7 @@ class RoleModelTest extends AclTestCase
             'name' => $faker->words(3, true),
         ];
 
-        $role->updateWithPermissions($data, true, $newPermissions);
+        $role->updateAndSyncPermissions($data, $newPermissions);
 
         // ---------------------------------------------------------------- //
         // Ensure role was updated and desired permissions have been granted
@@ -706,7 +706,7 @@ class RoleModelTest extends AclTestCase
             'name' => $faker->words(3, true),
         ];
 
-        $role->updateWithPermissions($data, true, []);
+        $role->updateAndSyncPermissions($data, []);
 
         // ---------------------------------------------------------------- //
         // Ensure role was updated and desired permissions have been granted
