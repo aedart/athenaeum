@@ -192,9 +192,11 @@ class Role extends Model implements Sluggable
             // grant all given permissions.
 
             /** @var static $role */
-            $role = static::create($attributes);
+            $role = static::create($attributes)
+                ->grantPermissions($permissions);
 
-            return $role->grantPermissions($permissions);
+            Db::commit();
+            return $role;
         } catch (Throwable $e) {
             DB::rollBack();
             throw $e;
@@ -262,10 +264,11 @@ class Role extends Model implements Sluggable
 
             if ($sync) {
                 $this->syncPermissions($permissions);
-                return $saved;
+            } else {
+                $this->grantPermissions($permissions);
             }
 
-            $this->grantPermissions($permissions);
+            Db::commit();
             return $saved;
         } catch (Throwable $e) {
             DB::rollBack();
