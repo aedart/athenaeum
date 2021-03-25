@@ -11,7 +11,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
+use Throwable;
 
 /**
  * Role
@@ -171,6 +173,89 @@ class Role extends Model implements Sluggable
         $this->permissions()->detach();
 
         return $this;
+    }
+
+    /**
+     * Create a new role and grant it the given permissions
+     *
+     * @param array $attributes
+     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     * @return static
+     *
+     * @throws Throwable
+     */
+    public static function createWithPermissions(array $attributes, ...$permissions)
+    {
+        return DB::transaction(function () use ($attributes, $permissions) {
+            /** @var static $role */
+            return static::create($attributes)
+                    ->grantPermissions($permissions);
+        });
+    }
+
+    /**
+     * Update this role and grant given permissions
+     *
+     * @see updateWithPermissions
+     *
+     * @param array $attributes
+     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     *
+     * @return bool
+     *
+     * @throws Throwable
+     */
+    public function updateAndGrantPermissions(array $attributes, ...$permissions): bool
+    {
+        return $this->updateWithPermissions($attributes, false, $permissions);
+    }
+
+    /**
+     * Update this role and sync given permissions
+     *
+     * @see updateWithPermissions
+     *
+     * @param array $attributes
+     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     *
+     * @return bool
+     *
+     * @throws Throwable
+     */
+    public function updateAndSyncPermissions(array $attributes, ...$permissions): bool
+    {
+        return $this->updateWithPermissions($attributes, true, $permissions);
+    }
+
+    /**
+     * Update this role, grant or sync the given permissions
+     *
+     * @see syncPermissions
+     * @see grantPermissions
+     *
+     * @param array $attributes
+     * @param bool $sync If true, then permissions are synced. If false, then given permissions are attempted granted.
+     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     *
+     * @return bool
+     *
+     * @throws Throwable
+     */
+    public function updateWithPermissions(array $attributes, bool $sync, ...$permissions): bool
+    {
+        return DB::transaction(function () use ($attributes, $sync, $permissions) {
+            $saved = $this
+                ->fill($attributes)
+                ->save();
+
+            if ($sync) {
+                $this->syncPermissions($permissions);
+            } else {
+                $this->grantPermissions($permissions);
+            }
+
+            return $saved;
+        });
     }
 
     /*****************************************************************

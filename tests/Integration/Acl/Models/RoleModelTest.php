@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Integration\Acl\Models;
 
+use Aedart\Acl\Models\Role;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Acl\AclTestCase;
 
@@ -590,5 +591,128 @@ class RoleModelTest extends AclTestCase
 
         $table = $this->aclTable('roles_permissions');
         $this->assertDatabaseCount($table, 0, 'testing');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function canCreateRoleWithPermissions()
+    {
+        $group = $this->createPermissionGroupWithPermissions('users');
+        $permissions = $group->permissions->take(3);
+
+        $faker = $this->getFaker();
+        $data = [
+            'slug' => $faker->unique()->slug,
+            'name' => $faker->words(3, true),
+            'description' => $faker->words(20, true)
+        ];
+
+        $role = Role::createWithPermissions($data, $permissions);
+
+        // ---------------------------------------------------------------- //
+        // Ensure role was created and desired permissions have been granted
+
+        $this->assertNotNull($role, 'Role was not created!');
+        $this->assertSame($data['slug'], $role->slug, 'Incorrect attributes appear to have been used!?');
+
+        $this->assertTrue($role->hasAllPermissions($permissions), 'Permissions do not appear to have been granted');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function canUpdateRoleWithPermissions()
+    {
+        $group = $this->createPermissionGroupWithPermissions('users');
+        $permissions = $group->permissions->take(2);
+        $role = $this->createRole();
+
+        $faker = $this->getFaker();
+        $data = [
+            'name' => $faker->words(3, true),
+        ];
+
+        $role->updateAndGrantPermissions($data, $permissions);
+
+        // ---------------------------------------------------------------- //
+        // Ensure role was updated and desired permissions have been granted
+
+        $this->assertSame($data['name'], $role->name, 'Incorrect attributes appear to have been used!?');
+
+        $this->assertTrue($role->hasAllPermissions($permissions), 'Permissions do not appear to have been granted');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function canUpdateRoleAndSyncPermissions()
+    {
+        $group = $this->createPermissionGroupWithPermissions('users');
+        $permissions = $group->permissions;
+        $role = $this->createRole();
+
+        // ---------------------------------------------------------------- //
+        // Initially, we grant a few permissions
+        $role->grantPermissions($permissions);
+
+        // ---------------------------------------------------------------- //
+        // Update and sync with new Permissions
+
+        $newPermissions = $this->createPermissionGroupWithPermissions('products')->permissions;
+
+        $faker = $this->getFaker();
+        $data = [
+            'name' => $faker->words(3, true),
+        ];
+
+        $role->updateAndSyncPermissions($data, $newPermissions);
+
+        // ---------------------------------------------------------------- //
+        // Ensure role was updated and desired permissions have been granted
+
+        $this->assertSame($data['name'], $role->name, 'Incorrect attributes appear to have been used!?');
+
+        $this->assertTrue($role->hasAllPermissions($newPermissions), 'New permissions NOT synced');
+        $this->assertFalse($role->hasAllPermissions($permissions), 'Old permissions NOT revoked');
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Throwable
+     */
+    public function revokesAllPermissionsWhenSyncUpdating()
+    {
+        $group = $this->createPermissionGroupWithPermissions('users');
+        $permissions = $group->permissions;
+        $role = $this->createRole();
+
+        // ---------------------------------------------------------------- //
+        // Initially, we grant a few permissions
+        $role->grantPermissions($permissions);
+
+        // ---------------------------------------------------------------- //
+        // Update and sync with no permissions
+
+        $faker = $this->getFaker();
+        $data = [
+            'name' => $faker->words(3, true),
+        ];
+
+        $role->updateAndSyncPermissions($data, []);
+
+        // ---------------------------------------------------------------- //
+        // Ensure role was updated and desired permissions have been granted
+
+        $this->assertSame($data['name'], $role->name, 'Incorrect attributes appear to have been used!?');
+
+        $this->assertFalse($role->hasAllPermissions($permissions), 'Old permissions NOT revoked');
     }
 }
