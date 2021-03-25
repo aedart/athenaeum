@@ -97,8 +97,7 @@ class Group extends Model implements Sluggable
         // a specific group. Since multiple permissions can be requested
         // created, we use database transactions for this method.
 
-        DB::beginTransaction();
-        try {
+        return DB::transaction(function () use ($slug, $permissions, $name, $description, $prefix) {
             // Find or create permissions group
             $group = static::findOrCreateBySlug($slug, [
                 'name' => $name ?? (string) Str::slugToWords($slug)->ucfirst(),
@@ -112,12 +111,8 @@ class Group extends Model implements Sluggable
             // Perform bulk insert
             static::make()->aclPermissionsModel()::insert($prepared);
 
-            DB::commit();
             return $group;
-        } catch (Throwable $e) {
-            DB::rollBack();
-            throw $e;
-        }
+        });
     }
 
     /*****************************************************************

@@ -186,21 +186,11 @@ class Role extends Model implements Sluggable
      */
     public static function createWithPermissions(array $attributes, ...$permissions)
     {
-        DB::beginTransaction();
-        try {
-            // First, we create the role with given data and thereafter
-            // grant all given permissions.
-
+        return DB::transaction(function () use ($attributes, $permissions) {
             /** @var static $role */
-            $role = static::create($attributes)
-                ->grantPermissions($permissions);
-
-            Db::commit();
-            return $role;
-        } catch (Throwable $e) {
-            DB::rollBack();
-            throw $e;
-        }
+            return static::create($attributes)
+                    ->grantPermissions($permissions);
+        });
     }
 
     /**
@@ -253,11 +243,7 @@ class Role extends Model implements Sluggable
      */
     public function updateWithPermissions(array $attributes, bool $sync, ...$permissions): bool
     {
-        DB::beginTransaction();
-        try {
-            // Similar to the custom create method, we first update the role
-            // and thereafter either grant or sync the given permissions
-
+        return DB::transaction(function () use ($attributes, $sync, $permissions) {
             $saved = $this
                 ->fill($attributes)
                 ->save();
@@ -268,12 +254,8 @@ class Role extends Model implements Sluggable
                 $this->grantPermissions($permissions);
             }
 
-            Db::commit();
             return $saved;
-        } catch (Throwable $e) {
-            DB::rollBack();
-            throw $e;
-        }
+        });
     }
 
     /*****************************************************************
