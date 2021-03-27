@@ -4,6 +4,10 @@
 
 ### [Unreleased]
 
+#### Added
+
+* Documentation for validation package. [#38](https://github.com/aedart/athenaeum/issues/38).
+
 ### [v5.10.1](https://github.com/aedart/athenaeum/compare/5.10.0...5.10.1)
 
 #### Fixed
