@@ -274,5 +274,21 @@ module.exports.sidebar = function(){
                 'utils/version',
             ]
         },
+        {
+            title: 'Validation',
+            collapsable: true,
+            children: [
+                'validation/',
+                'validation/install',
+                'validation/setup',
+                {
+                    title: 'Rules',
+                    collapsable: true,
+                    children: [
+                        'validation/rules/alpha-dash-dot',
+                    ]
+                },
+            ]
+        },
     ]
 };
