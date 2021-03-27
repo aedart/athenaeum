@@ -11,6 +11,17 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'ACL',
+            collapsable: true,
+            children: [
+                'acl/',
+                'acl/install',
+                'acl/setup',
+                'acl/permissions',
+                'acl/roles',
+            ]
+        },
+        {
             title: 'Circuits',
             collapsable: true,
             children: [
