@@ -97,6 +97,22 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Database',
+            collapsable: true,
+            children: [
+                'database/',
+                'database/install',
+                {
+                    title: 'Models',
+                    collapsable: true,
+                    children: [
+                        'database/models/instantiatable',
+                        'database/models/sluggable',
+                    ]
+                },
+            ]
+        },
+        {
             title: 'Dto',
             collapsable: true,
             children: [
