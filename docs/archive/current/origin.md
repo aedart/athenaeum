@@ -8,7 +8,7 @@ sidebarDepth: 0
 ## The Origin of Athenaeum
 
 Some years ago, I started to develop packages and make them public via [packagist](https://packagist.org/).
-They were nothing special, but they helped me achieve a few tasks a bit faster or more desirable.
+They were nothing special, but they helped me achieve a few tasks a bit faster or in a more desirable manner.
 After a while, a few packages became many.
 Whenever I had to upgrade them, it took more and more of my spare time.
 Therefore, I decided to create a single repository, in hopes that it would become much easier to maintain.
