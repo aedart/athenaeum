@@ -19,6 +19,8 @@ module.exports.sidebar = function(){
                 'acl/setup',
                 'acl/permissions',
                 'acl/roles',
+                'acl/users',
+                'acl/cache',
             ]
         },
         {

@@ -4,6 +4,8 @@ description: How to setup ACL
 
 # Setup
 
+In this section, setup of the ACL package is covered. It goes without saying, you should have some prior knowledge about how to work with Laravel's [Authorization](https://laravel.com/docs/8.x/authorization), before attempting to use this package's components.
+
 [[TOC]]
 
 ## Register Service Provider
@@ -86,9 +88,9 @@ return [
 ];
 ```
 
-## Use the `HasRoles` trait
+## The `HasRoles` trait
 
-Your Eloquent `User` model must make use of the `HasRoles` trait. This will ensure that users can be assigned roles.
+Your Eloquent `User` model must make use of the `HasRoles` trait. This will ensure that users can be assigned roles and thereby be granted permissions.
 
 ```php
 <?php
