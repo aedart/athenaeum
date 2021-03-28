@@ -6,6 +6,7 @@
 
 #### Added
 
+* Documentation for the ACL package. [#35](https://github.com/aedart/athenaeum/issues/35).
 * Documentation for the validation package. [#38](https://github.com/aedart/athenaeum/issues/38).
 * Documentation for the database package. [#36](https://github.com/aedart/athenaeum/issues/36).
 
