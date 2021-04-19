@@ -159,7 +159,7 @@ trait HasRoles
             throw new InvalidArgumentException(sprintf('Permission must be instance of %s', $permissionClass));
         }
 
-        return $this->hasRoles($permission->roles);
+        return $this->hasAnyRoles($permission->roles);
     }
 
     /*****************************************************************
