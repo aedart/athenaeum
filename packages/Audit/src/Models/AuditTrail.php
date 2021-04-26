@@ -21,7 +21,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $message Eventual description or message about why action or event was caused
  * @property array|null $original_data The original data, before any changes were made
  * @property array|null $changed_data Data after changes have been made
- * @property Carbon $performed_at Date and time of when action or event happened
+ * @property Carbon $performed_at Date and time of when action or event happened (when user caused a action...)
  * @property Carbon $created_at Date and time of when record was created
  *
  * @property-read Model|Authenticatable|null $user The user that caused audit trail entry
