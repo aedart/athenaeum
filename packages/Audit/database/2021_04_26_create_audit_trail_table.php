@@ -34,7 +34,7 @@ class CreateAuditTrailTable extends Migration
                 ->nullOnDelete();
 
             // Target model that has changed
-            $table->morphs('model');
+            $table->morphs('auditable');
 
             $table->string('type')
                 ->comment('Action or event type, e.g. created, updated... etc');
