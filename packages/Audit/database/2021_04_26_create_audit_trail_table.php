@@ -21,7 +21,7 @@ class CreateAuditTrailTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->auditTrailTable(), function(Blueprint $table) {
+        Schema::create($this->auditTrailTable(), function (Blueprint $table) {
             $table->id();
 
             // User foreign-key. NOTE: Must be nullable, in case that user

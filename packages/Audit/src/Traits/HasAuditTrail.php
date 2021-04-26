@@ -3,7 +3,6 @@
 
 namespace Aedart\Audit\Traits;
 
-
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Audit\Models\Concerns\AuditTrailConfiguration;
 use Aedart\Audit\Observers\ModelObserver;
@@ -38,7 +37,7 @@ trait HasAuditTrail
      *
      * @return void
      */
-    static public function bootHasAuditTrail()
+    public static function bootHasAuditTrail()
     {
         // Obtain class path to observer. Note: since we are in a static method,
         // we need to obtain this from the configuration via a facade.

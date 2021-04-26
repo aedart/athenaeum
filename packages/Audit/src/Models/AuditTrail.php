@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 
-
 /**
  * Audit Trail
  *
@@ -69,12 +68,12 @@ class AuditTrail extends Model
     /**
      * @inheritdoc
      */
-    static protected function boot()
+    protected static function boot()
     {
         parent::boot();
 
         // Automatically set the "created_at" timestamp
-        static::creating(function(self $model) {
+        static::creating(function (self $model) {
             $model->created_at = $model->freshTimestamp();
         });
     }

@@ -79,7 +79,7 @@ class ModelHasChanged
         $this->type = $type;
         $this->message = $message;
 
-        $this->performedAt = (isset($performedAt))
+        $this->performedAt = isset($performedAt)
             ? Carbon::make($performedAt)
             : Carbon::now();
     }

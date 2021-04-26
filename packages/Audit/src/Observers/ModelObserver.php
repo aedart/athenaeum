@@ -2,7 +2,6 @@
 
 namespace Aedart\Audit\Observers;
 
-use Aedart\Audit\Observers\Concerns;
 use Aedart\Contracts\Audit\Types;
 use Illuminate\Database\Eloquent\Model;
 

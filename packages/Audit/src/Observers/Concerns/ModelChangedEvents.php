@@ -57,7 +57,7 @@ trait ModelChangedEvents
         $message = $this->resolveAuditTrailMessage($model, $type, $message);
 
         // Resolve performed at date time
-        $performedAt = (!empty($model->update_at))
+        $performedAt = !empty($model->update_at)
             ? $model->update_at
             : Carbon::now();
 

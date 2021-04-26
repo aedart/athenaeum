@@ -57,11 +57,11 @@ class RecordAuditTrailEntry implements ShouldQueue
         $model = $event->model;
 
         // Obtain original and changed data
-        $original = $this->resolveModelData($model, 'originalData', function(Model $model) {
+        $original = $this->resolveModelData($model, 'originalData', function (Model $model) {
             return $model->getOriginal();
         });
 
-        $changed = $this->resolveModelData($model, 'changedData', function(Model $model) {
+        $changed = $this->resolveModelData($model, 'changedData', function (Model $model) {
             return $model->getAttributes();
         });
 
