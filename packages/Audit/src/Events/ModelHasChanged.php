@@ -31,7 +31,7 @@ class ModelHasChanged
     /**
      * The user that caused the change
      *
-     * @var Model|Authenticatable|\App\Models\User
+     * @var Model|Authenticatable|\App\Models\User|null
      */
     public $user;
 
@@ -62,7 +62,7 @@ class ModelHasChanged
      * ModelHasChanged constructor.
      *
      * @param Model $model The model that has changed
-     * @param Model|Authenticatable|\App\Models\User $user The user that caused the change
+     * @param Model|Authenticatable|\App\Models\User|null $user The user that caused the change
      * @param string $type [optional] The event type
      * @param DateTimeInterface|null $performedAt [optional] Date and time of when the event happened
      * @param string|null $message [optional] Eventual user provided message associated with the event
