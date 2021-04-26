@@ -2,6 +2,8 @@
 
 namespace Aedart\Audit\Observers;
 
+use Aedart\Audit\Observers\Concerns;
+use Aedart\Contracts\Audit\Types;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,6 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ModelObserver
 {
+    use Concerns\ModelChangedEvents;
+
     /**
      * Handle events after all transactions are committed.
      *
@@ -31,7 +35,7 @@ class ModelObserver
      */
     public function created(Model $model)
     {
-        //
+        $this->dispatchModelChanged($model, Types::CREATED);
     }
 
     /**
@@ -43,7 +47,7 @@ class ModelObserver
      */
     public function updated(Model $model)
     {
-        //
+        $this->dispatchModelChanged($model, Types::UPDATED);
     }
 
     /**
@@ -55,7 +59,7 @@ class ModelObserver
      */
     public function deleted(Model $model)
     {
-        //
+        $this->dispatchModelChanged($model, Types::DELETED);
     }
 
     /**
@@ -67,7 +71,7 @@ class ModelObserver
      */
     public function restored(Model $model)
     {
-        //
+        $this->dispatchModelChanged($model, Types::RESTORED);
     }
 
     /**
@@ -79,6 +83,6 @@ class ModelObserver
      */
     public function forceDeleted(Model $model)
     {
-        //
+        $this->dispatchModelChanged($model, Types::FORCE_DELETED);
     }
 }
