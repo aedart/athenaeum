@@ -4,7 +4,7 @@
 namespace Aedart\Audit\Observers\Concerns;
 
 use Aedart\Audit\Events\ModelHasChanged;
-use Aedart\Audit\Traits\HasAuditTrail;
+use Aedart\Audit\Traits\RecordsChanges;
 use Aedart\Support\Helpers\Auth\AuthTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Carbon\Carbon;
@@ -100,7 +100,7 @@ trait ModelChangedEvents
             return $message;
         }
 
-        if (in_array(HasAuditTrail::class, class_uses($model))) {
+        if (in_array(RecordsChanges::class, class_uses($model))) {
             return $model->getAuditTrailMessage($type);
         }
 
