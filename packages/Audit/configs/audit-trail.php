@@ -10,7 +10,14 @@ return [
     | The Eloquent model to be used for audit trail
     */
 
-    'model' => 'TODO',
+    'models' => [
+
+        // Your application's user model
+        'user' => \App\Models\User::class,
+
+        // The Audit Trail model
+        'audit_trail' => \Aedart\Audit\Models\AuditTrail::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -20,8 +27,5 @@ return [
     | Name of the database table that contains audit trail
     */
 
-    'table' => 'audit_trails'
-
-
-
+    'table' => 'audit_trails',
 ];
