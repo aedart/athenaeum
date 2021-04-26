@@ -52,10 +52,7 @@
         ],
         "psr-4": {
             "Aedart\\": "src",
-            "Aedart\\Acl\\": [
-                "packages/Acl/src",
-                "packages/Validation/src"
-            ],
+            "Aedart\\Acl\\": "packages/Acl/src",
             "Aedart\\Audit\\": "packages/Audit/src",
             "Aedart\\Circuits\\": "packages/Circuits/src",
             "Aedart\\Collections\\": "packages/Collections/src",
