@@ -4,7 +4,7 @@ namespace Aedart\Audit\Events;
 
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
-use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -64,14 +64,14 @@ class ModelHasChanged
      * @param Model $model The model that has changed
      * @param Model|Authenticatable|\App\Models\User|null $user The user that caused the change
      * @param string $type [optional] The event type
-     * @param DateTimeInterface|null $performedAt [optional] Date and time of when the event happened
+     * @param DateTimeInterface|Carbon|string|null $performedAt [optional] Date and time of when the event happened
      * @param string|null $message [optional] Eventual user provided message associated with the event
      */
     public function __construct(
         Model $model,
         $user,
         string $type = Types::UPDATED,
-        ?DateTimeInterface $performedAt = null,
+        $performedAt = null,
         ?string $message = null
     ) {
         $this->model = $model;
