@@ -2,6 +2,10 @@
 
 namespace Aedart\Audit\Providers;
 
+use Aedart\Audit\Events\ModelHasChanged;
+use Aedart\Audit\Listeners\RecordAuditTrailEntry;
+use Aedart\Support\Helpers\Config\ConfigTrait;
+use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -12,6 +16,9 @@ use Illuminate\Support\ServiceProvider;
  */
 class AuditTrailServiceProvider extends ServiceProvider
 {
+    use ConfigTrait;
+    use DispatcherTrait;
+
     /**
      * Bootstrap this service
      */
@@ -22,5 +29,17 @@ class AuditTrailServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+
+        $this->registerEventListener();
+    }
+
+    /**
+     * Registers the "model has changed" event listener
+     */
+    protected function registerEventListener()
+    {
+        $listener = $this->getConfig()->get('audit-trail.listener', RecordAuditTrailEntry::class);
+
+        $this->getDispatcher()->listen(ModelHasChanged::class, $listener);
     }
 }
