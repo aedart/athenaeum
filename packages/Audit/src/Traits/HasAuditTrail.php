@@ -6,8 +6,10 @@ namespace Aedart\Audit\Traits;
 
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Audit\Models\Concerns\AuditTrailConfiguration;
+use Aedart\Audit\Observers\ModelObserver;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\Config;
 
 /**
  * Has Audit Trail
@@ -23,6 +25,19 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 trait HasAuditTrail
 {
     use AuditTrailConfiguration;
+
+    /**
+     * Boots has audit trail functionality for this model
+     *
+     * @return void
+     */
+    static public function bootHasAuditTrail()
+    {
+        // Obtain class path to observer. Note: since we are in a static method,
+        // we need to obtain this from the configuration via a facade.
+        $observer = Config::get('audit-trail.observer', ModelObserver::class);
+        static::observe($observer);
+    }
 
     /*****************************************************************
      * Relations
