@@ -52,5 +52,28 @@ return [
     | Entry, based on received "model has changed" event.
     */
 
-    'listener' => \Aedart\Audit\Listeners\RecordAuditTrailEntry::class
+    'listener' => \Aedart\Audit\Listeners\RecordAuditTrailEntry::class,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Queue Settings
+    |--------------------------------------------------------------------------
+    |
+    | Default queue settings for the "model has changed" event listener
+    */
+
+    'queue' => [
+
+        // Queue connection that the job should be sent to
+        'connection' => env('QUEUE_CONNECTION', 'sync'),
+
+        // Name of the queue the job should be sent to
+        'queue' => 'default',
+
+        // Time (seconds) before the job should be processed
+        'delay' => null,
+
+        // Maximum amount of retries before job is marked as failed
+        'retries' => 1
+    ]
 ];

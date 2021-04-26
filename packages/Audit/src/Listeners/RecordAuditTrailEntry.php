@@ -5,6 +5,7 @@ namespace Aedart\Audit\Listeners;
 
 use Aedart\Audit\Events\ModelHasChanged;
 use Aedart\Audit\Models\Concerns;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\InteractsWithQueue;
@@ -18,6 +19,7 @@ use Illuminate\Queue\InteractsWithQueue;
 class RecordAuditTrailEntry implements ShouldQueue
 {
     use InteractsWithQueue;
+    use Queueable;
     use Concerns\AuditTrailConfiguration;
 
     /**
@@ -25,7 +27,7 @@ class RecordAuditTrailEntry implements ShouldQueue
      *
      * @var int
      */
-    public $tries = 3;
+    public $tries;
 
     /**
      * Handle listener after all transactions are committed.
@@ -33,6 +35,14 @@ class RecordAuditTrailEntry implements ShouldQueue
      * @var bool
      */
     public $afterCommit = true;
+
+    /**
+     * RecordAuditTrailEntry constructor.
+     */
+    public function __construct()
+    {
+        $this->configureQueueSettings();
+    }
 
     /**
      * Records an new Audit Trail Entry, based on given
@@ -73,6 +83,23 @@ class RecordAuditTrailEntry implements ShouldQueue
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * Configure queue settings for this listener
+     *
+     * @return self
+     */
+    protected function configureQueueSettings()
+    {
+        $config = $this->getConfig()->get('audit-trail.queue', []);
+
+        $this->connection = $config['connection'] ?? 'sync';
+        $this->queue = $config['queue'] ?? 'default';
+        $this->delay = $config['delay'] ?? null;
+        $this->tries = $config['retries'] ?? 1;
+
+        return $this;
+    }
 
     /**
      * Returns model data via given method, or invokes the fallback callback
