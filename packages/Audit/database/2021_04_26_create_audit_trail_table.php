@@ -28,7 +28,6 @@ class CreateAuditTrailTable extends Migration
             // is deleted / force-deleted.
             $user = $this->auditTrailUserModelInstance();
             $table->foreignIdFor($this->auditTrailUserModel())
-                ->nullable()
                 ->comment('The user that caused this action, event or data change')
                 ->constrained($user->getTable())
                 ->nullOnDelete();
