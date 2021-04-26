@@ -21,6 +21,6 @@ class AuditTrailServiceProvider extends ServiceProvider
             __DIR__ . '/../../configs/audit-trail.php' => config_path('audit-trail.php')
         ], 'config');
 
-//        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
     }
 }
