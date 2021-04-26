@@ -40,6 +40,23 @@ trait HasAuditTrail
     }
 
     /*****************************************************************
+     * Audit Trail Message
+     ****************************************************************/
+
+    /**
+     * Returns evt. message to be stored in Audit Trail Entry, for
+     * the given entry type
+     *
+     * @param string $type Audit Trail Entry type, e.g. created, updated, deleted... etc
+     *
+     * @return string|null
+     */
+    public function getAuditTrailMessage(string $type): ?string
+    {
+        return null;
+    }
+
+    /*****************************************************************
      * Relations
      ****************************************************************/
 
