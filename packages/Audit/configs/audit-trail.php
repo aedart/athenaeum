@@ -42,4 +42,15 @@ return [
     */
 
     'observer' => \Aedart\Audit\Observers\ModelObserver::class,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Model Has Changed Listener
+    |--------------------------------------------------------------------------
+    |
+    | Class path to event listener that is responsible for recording Audit Trail
+    | Entry, based on received "model has changed" event.
+    */
+
+    'listener' => \Aedart\Audit\Listeners\RecordAuditTrailEntry::class
 ];
