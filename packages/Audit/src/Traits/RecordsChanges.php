@@ -8,6 +8,7 @@ use Aedart\Audit\Models\Concerns\AuditTrailConfiguration;
 use Aedart\Audit\Observers\ModelObserver;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Config;
 
 /**
@@ -28,9 +29,13 @@ trait RecordsChanges
     /**
      * The attributes that should be hidden for Audit Trail Entries
      *
+     * @see attributesToHideForAudit
+     * @see makeHiddenForAudit
+     * @see getHiddenForAudit
+     *
      * @var string[]
      */
-    protected $hiddenInAuditTrail = [];
+    protected ?array $hiddenInAuditTrail = null;
 
     /**
      * Boots has audit trail functionality for this model
@@ -115,6 +120,12 @@ trait RecordsChanges
      */
     public function getHiddenForAudit(): array
     {
+        if (!isset($this->hiddenInAuditTrail)) {
+            $this->makeHiddenForAudit(
+                $this->attributesToHideForAudit()
+            );
+        }
+
         return $this->hiddenInAuditTrail;
     }
 
@@ -132,11 +143,33 @@ trait RecordsChanges
             : func_get_args();
 
         $this->hiddenInAuditTrail = array_merge(
-            $this->hiddenInAuditTrail,
+            $this->hiddenInAuditTrail ?? [],
             $attributes
         );
 
         return $this;
+    }
+
+    /**
+     * Returns list of attribute names that are NOT to be included
+     * in Audit Trail Entries
+     *
+     * @see makeHiddenForAudit
+     *
+     * @return string[]
+     */
+    public function attributesToHideForAudit(): array
+    {
+        $default = [
+            $this->getCreatedAtColumn(),
+            $this->getUpdatedAtColumn(),
+        ];
+
+        if (in_array(SoftDeletes::class, class_uses($this))) {
+            $default[] = $this->getDeletedAtColumn();
+        }
+
+        return $default;
     }
 
     /*****************************************************************
