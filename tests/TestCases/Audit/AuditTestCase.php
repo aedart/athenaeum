@@ -6,6 +6,7 @@ use Aedart\Audit\Providers\AuditTrailServiceProvider;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
+use Aedart\Tests\Helpers\Dummies\Audit\Category;
 use Codeception\Configuration;
 
 /**
@@ -111,5 +112,27 @@ abstract class AuditTestCase extends LaravelTestCase
         $this->loadMigrationsFrom($this->migrationsDirForTests());
 
         return $this;
+    }
+
+    /*****************************************************************
+     * Factories
+     ****************************************************************/
+
+    /**
+     * Returns a new Category instance, populated with dummy data
+     *
+     * @param array $data [optional]
+     *
+     * @return Category
+     */
+    public function makeCategory(array $data = []): Category
+    {
+        $faker = $this->getFaker();
+
+        return new Category(array_merge([
+            'slug' => $faker->unique()->slug(3),
+            'name' => $faker->words(4, true),
+            'description' => $faker->sentence
+        ], $data));
     }
 }
