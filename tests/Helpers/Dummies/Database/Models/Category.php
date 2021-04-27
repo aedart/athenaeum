@@ -5,6 +5,7 @@ namespace Aedart\Tests\Helpers\Dummies\Database\Models;
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Database\Model;
 use Aedart\Database\Models\Concerns;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
@@ -26,6 +27,7 @@ use Illuminate\Support\Carbon;
 class Category extends Model implements Sluggable
 {
     use Concerns\Slugs;
+    use SoftDeletes;
 
     /**
      * The attributes that aren't mass assignable.
