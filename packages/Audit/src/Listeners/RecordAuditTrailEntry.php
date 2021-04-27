@@ -82,7 +82,7 @@ class RecordAuditTrailEntry implements ShouldQueue
         $model = $event->model;
 
         // Insert new Audit Trail Entry
-        $this->auditTrailUserModelInstance()
+        $this->auditTrailModelInstance()
             ->fill([
                'user_id' => optional($event->user)->id,
                'auditable_type' => get_class($model),
