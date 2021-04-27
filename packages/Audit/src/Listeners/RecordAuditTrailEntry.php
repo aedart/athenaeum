@@ -30,17 +30,12 @@ class RecordAuditTrailEntry implements ShouldQueue
     public $tries;
 
     /**
-     * Handle listener after all transactions are committed.
-     *
-     * @var bool
-     */
-    public $afterCommit = true;
-
-    /**
      * RecordAuditTrailEntry constructor.
      */
     public function __construct()
     {
+        $this->afterCommit = true;
+
         $this->configureQueueSettings();
     }
 
