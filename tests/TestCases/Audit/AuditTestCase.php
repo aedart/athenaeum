@@ -43,9 +43,6 @@ abstract class AuditTestCase extends LaravelTestCase
     {
         return [
             ConfigLoaderServiceProvider::class,
-
-            // NOTE: migrations are not automatically executed for this service provider!
-            // Still has to be done manually - see installAclMigrations()
             AuditTrailServiceProvider::class,
         ];
     }
@@ -110,10 +107,8 @@ abstract class AuditTestCase extends LaravelTestCase
         $this->loadLaravelMigrations();
 
         // Install custom migrations
-        $this->loadMigrationsFrom([
-                $this->packageMigrationsDir(),
-                $this->testsMigrationsDir()
-        ]);
+//        $this->loadMigrationsFrom($this->packageMigrationsDir()); // NOT needed!
+        $this->loadMigrationsFrom($this->testsMigrationsDir());
 
         return $this;
     }
