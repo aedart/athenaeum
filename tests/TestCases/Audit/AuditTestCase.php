@@ -87,7 +87,7 @@ abstract class AuditTestCase extends LaravelTestCase
      *
      * @return string
      */
-    public function testsMigrationsDir(): string
+    public function migrationsDirForTests(): string
     {
         return __DIR__ . '/../../_data/database/migrations';
     }
@@ -107,8 +107,8 @@ abstract class AuditTestCase extends LaravelTestCase
         $this->loadLaravelMigrations();
 
         // Install custom migrations
-//        $this->loadMigrationsFrom($this->packageMigrationsDir()); // NOT needed!
-        $this->loadMigrationsFrom($this->testsMigrationsDir());
+        $this->loadMigrationsFrom($this->packageMigrationsDir()); // NOT needed!
+        $this->loadMigrationsFrom($this->migrationsDirForTests());
 
         return $this;
     }

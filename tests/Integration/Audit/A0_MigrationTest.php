@@ -1,7 +1,6 @@
 <?php
 
-
-namespace Aedart\Tests\TestCases\Audit;
+namespace Aedart\Tests\Integration\Audit;
 
 use Illuminate\Support\Facades\Schema;
 
@@ -22,6 +21,10 @@ class A0_MigrationTest extends AuditTestCase
      */
     public function hasInstalledMigration()
     {
-        $this->assertTrue(Schema::hasTable('audit_table'), 'table not migrated');
+        // By Laravel application
+        $this->assertTrue(Schema::hasTable('users'), 'users table not migrated');
+
+        // Audit package...
+        $this->assertTrue(Schema::hasTable('audit_trails'), 'audit trails table not migrated');
     }
 }
