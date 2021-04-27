@@ -53,20 +53,13 @@ trait ModelChangedEvents
      */
     public function makeHasChangedEvent(Model $model, string $type, ?string $message = null): ModelHasChanged
     {
-        // Resolve evt. message
-        $message = $this->resolveAuditTrailMessage($model, $type, $message);
-
-        // Resolve performed at date time
-        $performedAt = !empty($model->update_at)
-            ? $model->update_at
-            : Carbon::now();
-
         // Create new model has changed event
         return new ModelHasChanged(
             $model,
             $this->user(),
             $type,
-            $performedAt,
+            null, // Original data is resolved from model in this context
+            null, // Changed data is resolved from model in this context
             $message
         );
     }
@@ -79,31 +72,5 @@ trait ModelChangedEvents
     public function user(): ?Authenticatable
     {
         return $this->getAuth()->user();
-    }
-
-    /*****************************************************************
-     * Internals
-     ****************************************************************/
-
-    /**
-     * Resolve the Audit Trail Message, if possible
-     *
-     * @param Model $model
-     * @param string $type
-     * @param string|null $message [optional]
-     *
-     * @return string|null
-     */
-    protected function resolveAuditTrailMessage(Model $model, string $type, ?string $message = null): ?string
-    {
-        if (isset($message)) {
-            return $message;
-        }
-
-        if (in_array(RecordsChanges::class, class_uses($model))) {
-            return $model->getAuditTrailMessage($type);
-        }
-
-        return null;
     }
 }
