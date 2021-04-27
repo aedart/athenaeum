@@ -19,4 +19,12 @@ use Aedart\Tests\Helpers\Dummies\Database\Models\Category as BaseCategory;
 class Category extends BaseCategory
 {
     use RecordsChanges;
+
+    /**
+     * @inheritdoc
+     */
+    public function getAuditTrailMessage(string $type): ?string
+    {
+        return "Recording {$type} event";
+    }
 }
