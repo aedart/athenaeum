@@ -3,7 +3,6 @@
 
 namespace Aedart\Audit\Observers\Concerns;
 
-use Aedart\Audit\Traits\RecordsChanges;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -45,7 +44,7 @@ trait ModelAttributes
      */
     protected function resolveAuditTrailMessage(Model $model, string $type): ?string
     {
-        if (in_array(RecordsChanges::class, class_uses($model))) {
+        if (method_exists($model, 'getAuditTrailMessage')) {
             return $model->getAuditTrailMessage($type);
         }
 
