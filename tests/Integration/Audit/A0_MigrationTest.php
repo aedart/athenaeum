@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Integration\Audit;
 
+use Aedart\Tests\TestCases\Audit\AuditTestCase;
 use Illuminate\Support\Facades\Schema;
 
 /**
