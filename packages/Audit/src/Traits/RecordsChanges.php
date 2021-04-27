@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Config;
  * Intended to be used by models that must keep an audit trail of it's
  * changes.
  *
- * @property-read AuditTrail[]|Collection $recordChanges Audit trail entries for this model
+ * @property-read AuditTrail[]|Collection $recordedChanges Audit trail entries for this model
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Audit\Traits
@@ -159,11 +159,11 @@ trait RecordsChanges
      ****************************************************************/
 
     /**
-     * Returns audit trail entries for this model
+     * Returns of recorded audit trail entries for this model
      *
      * @return MorphMany
      */
-    public function recordChanges(): MorphMany
+    public function recordedChanges(): MorphMany
     {
         return $this->morphMany($this->auditTrailModel(), 'auditable');
     }
