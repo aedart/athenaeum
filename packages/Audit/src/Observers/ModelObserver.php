@@ -38,13 +38,13 @@ class ModelObserver
     }
 
     /**
-     * Handle model "updated" event.
+     * Handle model "updating" event. (Just before model is updated)
      *
      * @param Model $model
      *
      * @return void
      */
-    public function updated(Model $model)
+    public function updating(Model $model)
     {
         $this->dispatchModelChanged($model, Types::UPDATED);
     }

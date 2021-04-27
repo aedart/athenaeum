@@ -56,7 +56,7 @@ class RecordAuditTrailEntry implements ShouldQueue
     {
         $model = $event->model;
 
-        // Obtain original and changed data
+        // Obtain the original and changed data (attributes) of the given model.
         $original = $this->resolveModelData($model, 'originalData', function (Model $model) {
             return $model->getOriginal();
         });
@@ -65,17 +65,38 @@ class RecordAuditTrailEntry implements ShouldQueue
             return $model->getAttributes();
         });
 
+        // Reduce original attributes, by excluding attributes that have not been changed.
+        // This should reduce amount of data stored per entry.
+        if (!empty($original) && !empty($changed)) {
+            $original = $this->pluck(array_keys($changed), $original);
+        }
+
+        // Insert new Audit Trail Entry
+        $this->saveEntry($event, $original, $changed);
+    }
+
+    /**
+     * Save a new Audit Trail entry in the database
+     *
+     * @param ModelHasChanged $event
+     * @param array|null $original [optional]
+     * @param array|null $changed [optional]
+     */
+    public function saveEntry(ModelHasChanged $event, ?array $original = null, ?array $changed = null)
+    {
+        $model = $event->model;
+
         // Insert new Audit Trail Entry
         $this->auditTrailUserModelInstance()
             ->fill([
-                'user_id' => optional($event->user)->id,
-                'auditable_type' => get_class($model),
-                'auditable_id' => $model->getKey(),
-                'type' => $event->type,
-                'message' => $event->message,
-                'original_data' => $original,
-                'changed_data' => $changed,
-                'performed_at' => $event->performedAt
+               'user_id' => optional($event->user)->id,
+               'auditable_type' => get_class($model),
+               'auditable_id' => $model->getKey(),
+               'type' => $event->type,
+               'message' => $event->message,
+               'original_data' => $original,
+               'changed_data' => $changed,
+               'performed_at' => $event->performedAt
             ])
             ->save();
     }
@@ -117,5 +138,20 @@ class RecordAuditTrailEntry implements ShouldQueue
         }
 
         return $fallback($model);
+    }
+
+    /**
+     * Plucks items from target that match given keys
+     *
+     * @param string[] $keys The keys to pluck from target
+     * @param array $target
+     *
+     * @return array
+     */
+    protected function pluck(array $keys, array $target): array
+    {
+        return collect($target)
+            ->pluck($keys)
+            ->toArray();
     }
 }

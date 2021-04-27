@@ -68,7 +68,13 @@ trait RecordsChanges
      */
     public function changedData(): ?array
     {
-        return $this->filterAuditData($this->getAttributes());
+        // Tip: You can use "getAttributes()", if you wish to store all
+        // attributes into the Audit Trail entry.
+        // @see \Illuminate\Database\Eloquent\Concerns\HasAttributes::getAttributes
+        //
+        // By default, we only save the changed (dirty) attributes.
+
+        return $this->filterAuditData($this->getDirty());
     }
 
     /**
