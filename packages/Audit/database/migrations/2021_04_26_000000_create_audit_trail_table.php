@@ -3,6 +3,7 @@
 use Aedart\Audit\Models\Concerns;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\ColumnDefinition;
 use Illuminate\Support\Facades\Schema;
 
 /**
@@ -43,11 +44,11 @@ class CreateAuditTrailTable extends Migration
                 ->nullable()
                 ->comment('Eventual description or message about why action or event was caused');
 
-            $table->json('original_data')
+            $this->makeAttributesColumn($table, 'original_data')
                 ->nullable()
                 ->comment('The original data, before any changes were made');
 
-            $table->json('changed_data')
+            $this->makeAttributesColumn($table, 'changed_data')
                 ->nullable()
                 ->comment('Data after changes have been made');
 
@@ -64,5 +65,24 @@ class CreateAuditTrailTable extends Migration
     public function down()
     {
         Schema::dropIfExists($this->auditTrailTable());
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Returns a new "attributes" column
+     *
+     * @param Blueprint $table
+     * @param string $name
+     *
+     * @return ColumnDefinition
+     */
+    protected function makeAttributesColumn(Blueprint $table, string $name): ColumnDefinition
+    {
+        $type = $this->auditTableAttributesColumnType();
+
+        return $table->{$type}($name);
     }
 }

@@ -31,6 +31,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Attributes Column Datatype
+    |--------------------------------------------------------------------------
+    |
+    | Table column datatype of the "original_data" and "changed_data" attributes.
+    | Accepts json, jsonb or text.
+    |
+    | NOTE: Changing this value after migration has run will have no effect!
+    |
+    | @see https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/
+    */
+
+    'attributes_column_type' => 'json',
+
+    /*
+    |--------------------------------------------------------------------------
     | Eloquent Model Observer
     |--------------------------------------------------------------------------
     |

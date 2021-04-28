@@ -72,4 +72,14 @@ trait AuditTrailConfiguration
     {
         return $this->getConfig()->get('audit-trail.table');
     }
+
+    /**
+     * Returns table attributes column datatype
+     *
+     * @return string
+     */
+    public function auditTableAttributesColumnType(): string
+    {
+        return $this->getConfig()->get('audit-trail.attributes_column_type');
+    }
 }
