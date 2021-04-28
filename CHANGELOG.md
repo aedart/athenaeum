@@ -4,6 +4,13 @@
 
 ### [Unreleased]
 
+### [v5.12.0](https://github.com/aedart/athenaeum/compare/5.11.0...5.12.0)
+
+### Added
+
+* Audit package; a way to automatically record Eloquent Model changes. [#43](https://github.com/aedart/athenaeum/pull/43)
+* `Invoker` component, in `Utils` package. 
+
 ### [v5.11.0](https://github.com/aedart/athenaeum/compare/5.10.1...5.11.0)
 
 #### Added
