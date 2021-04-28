@@ -6,7 +6,6 @@ namespace Aedart\Tests\Integration\Audit;
 use Aedart\Audit\Events\ModelHasChanged;
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Contracts\Audit\Types;
-use Aedart\Tests\Helpers\Dummies\Audit\User;
 use Aedart\Tests\TestCases\Audit\AuditTestCase;
 use Illuminate\Support\Facades\Auth;
 

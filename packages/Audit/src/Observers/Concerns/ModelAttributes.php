@@ -30,7 +30,7 @@ trait ModelAttributes
     {
         return Invoker::invoke([$model, 'originalData'])
             ->with($type)
-            ->fallback(function() use($model) {
+            ->fallback(function () use ($model) {
                 return $model->getOriginal();
             })
             ->call();
@@ -50,7 +50,7 @@ trait ModelAttributes
     {
         return Invoker::invoke([$model, 'changedData'])
             ->with($type)
-            ->fallback(function() use($model) {
+            ->fallback(function () use ($model) {
                 return $model->getChanges();
             })
             ->call();

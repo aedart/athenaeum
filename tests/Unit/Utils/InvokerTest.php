@@ -24,7 +24,7 @@ class InvokerTest extends UnitTestCase
      */
     public function invokesCallback()
     {
-        $callback = function() {
+        $callback = function () {
             return true;
         };
 
@@ -42,7 +42,7 @@ class InvokerTest extends UnitTestCase
     public function callsFallbackWhenCallbackNotCallable()
     {
         $callback = []; // Invalid callback
-        $fallback = function() {
+        $fallback = function () {
             return true;
         };
 
@@ -77,7 +77,7 @@ class InvokerTest extends UnitTestCase
      */
     public function callsCallbackWithArguments()
     {
-        $callback = function($a, $b, $c) {
+        $callback = function ($a, $b, $c) {
             return [$a, $b, $c];
         };
 

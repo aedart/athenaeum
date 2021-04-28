@@ -6,8 +6,8 @@ use Aedart\Audit\Providers\AuditTrailServiceProvider;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
-use Aedart\Tests\Helpers\Dummies\Audit\User;
 use Aedart\Tests\Helpers\Dummies\Audit\Category;
+use Aedart\Tests\Helpers\Dummies\Audit\User;
 use Codeception\Configuration;
 use Illuminate\Support\Facades\Hash;
 

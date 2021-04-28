@@ -4,10 +4,8 @@
 namespace Aedart\Audit\Observers\Concerns;
 
 use Aedart\Audit\Events\ModelHasChanged;
-use Aedart\Audit\Traits\RecordsChanges;
 use Aedart\Support\Helpers\Auth\AuthTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
-use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
