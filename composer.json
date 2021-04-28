@@ -52,10 +52,8 @@
         ],
         "psr-4": {
             "Aedart\\": "src",
-            "Aedart\\Acl\\": [
-                "packages/Acl/src",
-                "packages/Validation/src"
-            ],
+            "Aedart\\Acl\\": "packages/Acl/src",
+            "Aedart\\Audit\\": "packages/Audit/src",
             "Aedart\\Circuits\\": "packages/Circuits/src",
             "Aedart\\Collections\\": "packages/Collections/src",
             "Aedart\\Config\\": "packages/Config/src",
@@ -84,6 +82,7 @@
     },
     "replace": {
         "aedart/athenaeum-acl": "self.version",
+        "aedart/athenaeum-audit": "self.version",
         "aedart/athenaeum-circuits": "self.version",
         "aedart/athenaeum-collections": "self.version",
         "aedart/athenaeum-config": "self.version",
