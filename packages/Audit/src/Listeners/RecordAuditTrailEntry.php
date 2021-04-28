@@ -7,7 +7,6 @@ use Aedart\Audit\Events\ModelHasChanged;
 use Aedart\Audit\Models\Concerns;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\InteractsWithQueue;
 
 /**
@@ -49,14 +48,12 @@ class RecordAuditTrailEntry implements ShouldQueue
      */
     public function handle(ModelHasChanged $event)
     {
-        $model = $event->model;
-
         // Insert new Audit Trail Entry
         $this->auditTrailModelInstance()
             ->fill([
-                'user_id' => optional($event->user)->id,
-                'auditable_type' => get_class($model),
-                'auditable_id' => $model->getKey(),
+                'user_id' => $event->user,
+                'auditable_type' => $event->model,
+                'auditable_id' => $event->id,
                 'type' => $event->type,
                 'message' => $event->message,
                 'original_data' => $event->original,

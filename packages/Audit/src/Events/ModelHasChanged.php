@@ -6,11 +6,8 @@ use Aedart\Audit\Observers\Concerns;
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Contracts\Database\ModelIdentifier;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
 use Throwable;
 
@@ -23,22 +20,26 @@ use Throwable;
 class ModelHasChanged
 {
     use Dispatchable;
-    use SerializesModels {
-        getRestoredPropertyValue as traitGetRestoredPropertyValue;
-    }
     use Concerns\ModelAttributes;
 
     /**
-     * The model that has been changed
+     * Class path of model that was changed
      *
-     * @var Model
+     * @var string
      */
-    public Model $model;
+    public string $model;
 
     /**
-     * The user that caused the change
+     * Model's primary identifier value
      *
-     * @var Model|Authenticatable|null
+     * @var string|int
+     */
+    public $id;
+
+    /**
+     * Unique user identifier that caused change
+     *
+     * @var string|int|null
      */
     public $user;
 
@@ -105,8 +106,9 @@ class ModelHasChanged
         ?string $message = null,
         $performedAt = null
     ) {
-        $this->model = $model;
-        $this->user = $user;
+        $this->model = get_class($model);
+        $this->id = $model->getKey();
+        $this->user = optional($user)->getKey();
         $this->type = $type;
 
         // Resolve the original and changed data (attributes). It's important that this is done during
@@ -158,37 +160,5 @@ class ModelHasChanged
         $this->changed = $data;
 
         return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function getRestoredPropertyValue($value)
-    {
-        // In most situations, a "model identifier" consistent of a class path,
-        // model identifier and connection name will be used to query the model
-        // from the database, during "un-serialisation". However, when a model
-        // has been permanently removed (e.g. force deleted), this process will
-        // fail - "model not found" exception will be raised.
-        //
-        // To deal with that kind of situation, a new "empty" model instance is
-        // created here, along with the model identifier. It may not be the
-        // "best" solution, but it should be sufficient.
-
-        try {
-            return $this->traitGetRestoredPropertyValue($value);
-        } catch (ModelNotFoundException $e) {
-            /** @var \Illuminate\Contracts\Database\ModelIdentifier $value */
-
-            // Create empty model with it's primary identifier set.
-            /** @var Model $model */
-            $model = (new $value->class)
-                ->setConnection($value->connection);
-
-            // Set model key (primary key)
-            $model->{$model->getKeyName()} = $value->id;
-
-            return $model;
-        }
     }
 }
