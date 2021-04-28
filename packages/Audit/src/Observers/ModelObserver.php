@@ -58,6 +58,12 @@ class ModelObserver
      */
     public function deleted(Model $model)
     {
+        // Avoid dispatching, if model is being force-deleted.
+        // Force-deletes are handled in different method.
+        if (method_exists($model, 'isForceDeleting') && $model->isForceDeleting()) {
+            return;
+        }
+
         $this->dispatchModelChanged($model, Types::DELETED);
     }
 

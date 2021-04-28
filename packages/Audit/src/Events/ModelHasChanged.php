@@ -4,10 +4,11 @@ namespace Aedart\Audit\Events;
 
 use Aedart\Audit\Observers\Concerns;
 use Aedart\Contracts\Audit\Types;
-use Aedart\Utils\Helpers\Invoker;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Database\ModelIdentifier;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
@@ -22,7 +23,9 @@ use Throwable;
 class ModelHasChanged
 {
     use Dispatchable;
-    use SerializesModels;
+    use SerializesModels {
+        getRestoredPropertyValue as traitGetRestoredPropertyValue;
+    }
     use Concerns\ModelAttributes;
 
     /**
@@ -155,5 +158,37 @@ class ModelHasChanged
         $this->changed = $data;
 
         return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getRestoredPropertyValue($value)
+    {
+        // In most situations, a "model identifier" consistent of a class path,
+        // model identifier and connection name will be used to query the model
+        // from the database, during "un-serialisation". However, when a model
+        // has been permanently removed (e.g. force deleted), this process will
+        // fail - "model not found" exception will be raised.
+        //
+        // To deal with that kind of situation, a new "empty" model instance is
+        // created here, along with the model identifier. It may not be the
+        // "best" solution, but it should be sufficient.
+
+        try {
+            return $this->traitGetRestoredPropertyValue($value);
+        } catch (ModelNotFoundException $e) {
+            /** @var \Illuminate\Contracts\Database\ModelIdentifier $value */
+
+            // Create empty model with it's primary identifier set.
+            /** @var Model $model */
+            $model = (new $value->class)
+                ->setConnection($value->connection);
+
+            // Set model key (primary key)
+            $model->{$model->getKeyName()} = $value->id;
+
+            return $model;
+        }
     }
 }
