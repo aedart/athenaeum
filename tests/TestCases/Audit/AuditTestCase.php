@@ -6,8 +6,10 @@ use Aedart\Audit\Providers\AuditTrailServiceProvider;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
+use Aedart\Tests\Helpers\Dummies\Audit\User;
 use Aedart\Tests\Helpers\Dummies\Audit\Category;
 use Codeception\Configuration;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Audit Test Case
@@ -134,5 +136,25 @@ abstract class AuditTestCase extends LaravelTestCase
             'name' => $faker->words(4, true),
             'description' => $faker->sentence
         ], $data));
+    }
+
+    /**
+     * Creates and persists a new dummy user
+     *
+     * @param array $attributes [optional]
+     *
+     * @return User
+     */
+    public function createUser(array $attributes = []): User
+    {
+        $faker = $this->getFaker();
+
+        $attributes = array_merge([
+            'email' => $faker->unique()->email,
+            'name' => $faker->name,
+            'password' => Hash::make('password')
+        ], $attributes);
+
+        return User::create($attributes);
     }
 }
