@@ -4,12 +4,14 @@ namespace Aedart\Audit\Events;
 
 use Aedart\Audit\Observers\Concerns;
 use Aedart\Contracts\Audit\Types;
+use Aedart\Utils\Helpers\Invoker;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
+use Throwable;
 
 /**
  * Model Has Changed Event
@@ -88,6 +90,8 @@ class ModelHasChanged
      * @param DateTimeInterface|Carbon|string|null $performedAt [optional] Date and time of when the event happened.
      *                                                          Defaults to model's "updated at" value, if available,
      *                                                          If not, then current date time is used.
+     *
+     * @throws Throwable
      */
     public function __construct(
         Model $model,
@@ -106,19 +110,12 @@ class ModelHasChanged
         // event instance creation, because once this event is serialised / unserialised, the
         // "dirty / changed" attributes are lost on given model.
         // Furthermore, we use given original and changed, if provided.
-        $original = $original ?? $this->resolveModelData($model, 'originalData', function (Model $model) {
-            return $model->getOriginal();
-        });
-
-        $changed = $changed ?? $this->resolveModelData($model, 'changedData', function (Model $model) {
-            return $model->getAttributes();
-        });
+        $original = $original ?? $this->resolveOriginalData($model, $type);
+        $changed = $changed ?? $this->resolveChangedData($model, $type);
 
         // Reduce original attributes, by excluding attributes that have not been changed.
         // This should reduce amount of data stored per entry.
-        if (!empty($original) && !empty($changed)) {
-            $original = $this->pluck(array_keys($changed), $original);
-        }
+        $original = $this->reduceOriginal($original, $changed);
 
         // Finally, set the original and changed attributes.
         $this

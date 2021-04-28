@@ -6,6 +6,7 @@ namespace Aedart\Audit\Traits;
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Audit\Models\Concerns\AuditTrailConfiguration;
 use Aedart\Audit\Observers\ModelObserver;
+use Aedart\Contracts\Audit\Types;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Config;
@@ -57,10 +58,16 @@ trait RecordsChanges
      * Returns the original data (attributes) to be saved
      * in Audit Trail Entry
      *
+     * @param string $type Event type
+     *
      * @return array|null
      */
-    public function originalData(): ?array
+    public function originalData(string $type): ?array
     {
+        if ($this->shouldOmitDataFor($type)) {
+            return null;
+        }
+
         return $this->filterAuditData($this->getOriginal());
     }
 
@@ -68,10 +75,16 @@ trait RecordsChanges
      * Returns the changed data (attributes) to be saved
      * in Audit Trail Entry
      *
+     * @param string $type Event type
+     *
      * @return array|null
      */
-    public function changedData(): ?array
+    public function changedData(string $type): ?array
     {
+        if ($this->shouldOmitDataFor($type)) {
+            return null;
+        }
+
         // Tip: You can use "getAttributes()", if you wish to store all
         // attributes into the Audit Trail entry.
         // @see \Illuminate\Database\Eloquent\Concerns\HasAttributes::getAttributes
@@ -169,6 +182,25 @@ trait RecordsChanges
         }
 
         return $default;
+    }
+
+    /**
+     * Determine whether data (attributes) should be omitted for
+     * the given event type or not
+     *
+     * @param string $type
+     *
+     * @return bool
+     */
+    public function shouldOmitDataFor(string $type): bool
+    {
+        $skipOn = [
+            Types::DELETED,
+            Types::FORCE_DELETED,
+            Types::RESTORED
+        ];
+
+        return in_array($type, $skipOn);
     }
 
     /*****************************************************************

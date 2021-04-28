@@ -3,6 +3,7 @@
 
 namespace Aedart\Audit\Observers\Concerns;
 
+use Aedart\Utils\Helpers\Invoker;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -16,22 +17,60 @@ use Illuminate\Support\Carbon;
 trait ModelAttributes
 {
     /**
-     * Returns model data via given method, or invokes the fallback callback
+     * Resolves the given model's original data (attributes)
      *
      * @param Model $model
-     * @param string $method Method to use for obtaining model's data (attributes)
-     * @param callable $fallback Fallback method to use, in case method does not exist in given
-     *                           model.
+     * @param string $type
+     *
+     * @return mixed
+     *
+     * @throws \Throwable
+     */
+    protected function resolveOriginalData(Model $model, string $type)
+    {
+        return Invoker::invoke([$model, 'originalData'])
+            ->with($type)
+            ->fallback(function() use($model) {
+                return $model->getOriginal();
+            })
+            ->call();
+    }
+
+    /**
+     * Resolves the given model's changed data (attributes)
+     *
+     * @param Model $model
+     * @param string $type
+     *
+     * @return mixed
+     *
+     * @throws \Throwable
+     */
+    protected function resolveChangedData(Model $model, string $type)
+    {
+        return Invoker::invoke([$model, 'changedData'])
+            ->with($type)
+            ->fallback(function() use($model) {
+                return $model->getChanges();
+            })
+            ->call();
+    }
+
+    /**
+     * Reduce original attributes, by excluding attributes that have not been changed.
+     *
+     * @param array|null $original
+     * @param array|null $changed
      *
      * @return array|null
      */
-    protected function resolveModelData(Model $model, string $method, callable $fallback): ?array
+    protected function reduceOriginal(?array $original, ?array $changed): ?array
     {
-        if (method_exists($model, $method)) {
-            return $model->{$method}();
+        if (!empty($original) && !empty($changed)) {
+            return $this->pluck(array_keys($changed), $original);
         }
 
-        return $fallback($model);
+        return $original;
     }
 
     /**
