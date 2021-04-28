@@ -27,7 +27,7 @@ class Invoker
      * Fallback callback to invoke, if
      * primary callback is not callable
      *
-     * @var callable|null
+     * @var callable|mixed
      */
     protected $fallback = null;
 
@@ -61,7 +61,20 @@ class Invoker
     }
 
     /**
+     * Returns the callback
+     *
+     * @return callable|mixed
+     */
+    public function getCallback()
+    {
+        return $this->callback;
+    }
+
+    /**
      * Add arguments that must be passed to callback
+     *
+     * Method merges given arguments with et. already added
+     * arguments.
      *
      * @param ...$arguments
      *
@@ -75,6 +88,16 @@ class Invoker
         );
 
         return $this;
+    }
+
+    /**
+     * Returns the arguments
+     *
+     * @return array
+     */
+    public function getArguments(): array
+    {
+        return $this->arguments;
     }
 
     /**
@@ -93,6 +116,16 @@ class Invoker
     }
 
     /**
+     * Return evt. fallback callback
+     *
+     * @return callable|mixed
+     */
+    public function getFallback()
+    {
+        return $this->fallback;
+    }
+
+    /**
      * Invokes the primary callback or fallback method
      *
      * If no fallback method is given, then this method will
@@ -104,14 +137,32 @@ class Invoker
      */
     public function call()
     {
-        if (is_callable($this->callback)) {
-            $callback = $this->callback;
-        } elseif (isset($this->fallback) && is_callable($this->fallback)) {
-            $callback = $this->fallback;
-        } else {
-            throw new RuntimeException('Unable to invoke callback or fallback');
+        $arguments = $this->getArguments();
+
+        $callback = $this->getCallback();
+        if (is_callable($callback)) {
+            return $this->callCallback($callback, $arguments);
         }
 
-        return $callback(...$this->arguments);
+        $fallback = $this->getFallback();
+        if (isset($fallback) && is_callable($fallback)) {
+            return $this->callCallback($fallback, $arguments);
+        }
+
+        throw new RuntimeException('Unable to invoke callback or fallback');
+    }
+
+    /**
+     * Calls the given callback with given arguments and returns it's
+     * resulting output
+     *
+     * @param callable $callback
+     * @param array $arguments [optional]
+     *
+     * @return mixed
+     */
+    protected function callCallback(callable $callback, array $arguments = [])
+    {
+        return $callback(...$arguments);
     }
 }
