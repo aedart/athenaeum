@@ -4,9 +4,15 @@
 
 ### [Unreleased]
 
+### [v5.13.0](https://github.com/aedart/athenaeum/compare/5.12.0...5.13.0)
+
+#### Changed
+
+* Extracted timestamp attributes names into own method, in `RecordsChanges` trait (_Audit package_), so that they can be obtained easier. This should allow better customisation of which fields to hide for Audit Trail entries.
+
 ### [v5.12.0](https://github.com/aedart/athenaeum/compare/5.11.0...5.12.0)
 
-### Added
+#### Added
 
 * Audit package; a way to automatically record Eloquent Model changes. [#43](https://github.com/aedart/athenaeum/pull/43)
 * `Invoker` component, in `Utils` package. 
