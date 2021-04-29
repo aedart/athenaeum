@@ -172,16 +172,27 @@ trait RecordsChanges
      */
     public function attributesToHideForAudit(): array
     {
-        $default = [
+        // Use this method to hide attributes from Audit Trail entry
+        return $this->auditTimestampAttributes();
+    }
+
+    /**
+     * Returns the model timestamp attribute names
+     *
+     * @return string[]
+     */
+    public function auditTimestampAttributes(): array
+    {
+        $attributes = [
             $this->getCreatedAtColumn(),
             $this->getUpdatedAtColumn(),
         ];
 
         if (method_exists($this, 'getDeletedAtColumn')) {
-            $default[] = $this->getDeletedAtColumn();
+            $attributes[] = $this->getDeletedAtColumn();
         }
 
-        return $default;
+        return $attributes;
     }
 
     /**
