@@ -91,25 +91,15 @@ trait ModelAttributes
     }
 
     /**
-     * Resolves the performed at datetime, using given model
+     * Format the given date time
      *
-     * @param Model $model
-     * @param DateTimeInterface|Carbon|string|null $performedAt [optional]
+     * @param DateTimeInterface $date
      *
-     * @return Carbon|DateTimeInterface|string
+     * @return string
      */
-    protected function resolvePerformedAtUsing(Model $model, $performedAt = null)
+    protected function formatDatetime(DateTimeInterface $date): string
     {
-        if (isset($performedAt)) {
-            return Carbon::make($performedAt);
-        }
-
-        $column = $model->getUpdatedAtColumn();
-        if (!empty($model->{$column})) {
-            return $model->{$column};
-        }
-
-        return Carbon::now();
+        return $date->format(DateTimeInterface::RFC3339);
     }
 
     /**

@@ -131,7 +131,7 @@ class ModelHasChanged
         $this->message = $message ?? $this->resolveAuditTrailMessage($model, $type);
 
         // Resolve performed at...
-        $this->performedAt = $this->resolvePerformedAtUsing($model, $performedAt);
+        $this->performedAt = $this->formatDatetime(Carbon::now());
     }
 
     /**
