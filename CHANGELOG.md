@@ -4,6 +4,14 @@
 
 ### [Unreleased]
 
+### [v5.13.1](https://github.com/aedart/athenaeum/compare/5.13.0...5.13.1)
+
+#### Fixed
+
+* Incorrect `performed_at` date time value for `AuditTrail` records. Previously relied on a model's `updated_at` value, which might not be accurate due depending upon when a "model has changed" event is dispatched (E.g. before or after an operation).
+In other words, a previous / past `updated_at` value could be applied, which would be incorrect and inconsistent of with when a given event or action was performed.
+`performed_at` value no defaults to current date time.
+
 ### [v5.13.0](https://github.com/aedart/athenaeum/compare/5.12.0...5.13.0)
 
 #### Changed
