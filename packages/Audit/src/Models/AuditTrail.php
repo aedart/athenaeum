@@ -7,6 +7,7 @@ use Aedart\Database\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Carbon;
 
 /**
@@ -89,7 +90,9 @@ class AuditTrail extends Model
      */
     public function auditable(): MorphTo
     {
-        return $this->morphTo();
+        return $this
+            ->morphTo()
+            ->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     /**
