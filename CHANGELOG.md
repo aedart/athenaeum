@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.13.2](https://github.com/aedart/athenaeum/compare/5.13.1...5.13.2)
+
+#### Fixed
+
+* Soft-deleted models not able to be eager-loaded in `AuditTrail` model (_auditable relation_). 
+
 ### [v5.13.1](https://github.com/aedart/athenaeum/compare/5.13.0...5.13.1)
 
 #### Fixed
