@@ -6,7 +6,6 @@ namespace Aedart\Audit\Observers\Concerns;
 use Aedart\Utils\Helpers\Invoker;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 
 /**
  * Concerns Model Attributes
