@@ -23,7 +23,7 @@ class ModelObserver
      *
      * @var bool
      */
-    public $afterCommit = true;
+    public bool $afterCommit = false;
 
     /**
      * Handle model "created" event.
