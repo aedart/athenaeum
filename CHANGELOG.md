@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.14.0](https://github.com/aedart/athenaeum/compare/5.13.2...5.14.0)
+
+#### Added
+
+* Possibility to skip recording a model's changes, via the `skipRecordingNextChange` method, in `RecordsChanges` trait.
+
 ### [v5.13.2](https://github.com/aedart/athenaeum/compare/5.13.1...5.13.2)
 
 #### Fixed
