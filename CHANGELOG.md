@@ -4,6 +4,13 @@
 
 ### [Unreleased]
 
+### [v5.14.1](https://github.com/aedart/athenaeum/compare/5.14.0...5.14.1)
+
+#### Fixed
+
+* Update events were not triggered / dispatched correctly, because they were invoked after database transactions, in `ModelObserver` from the Audit package.
+Changed the `$afterCommit` to `false` as the default value, to overcome this issue.
+
 ### [v5.14.0](https://github.com/aedart/athenaeum/compare/5.13.2...5.14.0)
 
 #### Added
