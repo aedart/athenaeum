@@ -32,6 +32,11 @@ trait ModelChangedEvents
      */
     public function dispatchModelChanged(Model $model, string $type, ?string $message = null)
     {
+        // Abort if model does not wish to record it's next change
+        if (method_exists($model, 'mustRecordNextChange') && !$model->mustRecordNextChange()) {
+            return $this;
+        }
+
         $event = $this->makeHasChangedEvent($model, $type, $message);
 
         $this->getDispatcher()->dispatch($event);

@@ -38,6 +38,14 @@ trait RecordsChanges
     protected ?array $hiddenInAuditTrail = null;
 
     /**
+     * State whether "model has changed" events should
+     * be skipped (e.g. skip recording changes)
+     *
+     * @var bool
+     */
+    protected bool $skipNextRecording = false;
+
+    /**
      * Boots has audit trail functionality for this model
      *
      * @return void
@@ -233,6 +241,48 @@ trait RecordsChanges
     public function getAuditTrailMessage(string $type): ?string
     {
         return null;
+    }
+
+    /*****************************************************************
+     * Skip Audit Trail Recording
+     ****************************************************************/
+
+    /**
+     * Skip recording next change
+     *
+     * @param bool $skip [optional]
+     *
+     * @return self
+     */
+    public function skipRecordingNextChange(bool $skip = true)
+    {
+        $this->skipNextRecording = $skip;
+
+        return $this;
+    }
+
+    /**
+     * Opposite of skip recording next change
+     *
+     * @see skipRecordingNextChange
+     *
+     * @param bool $record [optional]
+     *
+     * @return self
+     */
+    public function recordNextChange(bool $record = true)
+    {
+        return $this->skipRecordingNextChange(!$record);
+    }
+
+    /**
+     * Determine whether next change should be recorded or not
+     *
+     * @return bool
+     */
+    public function mustRecordNextChange(): bool
+    {
+        return !$this->skipNextRecording;
     }
 
     /*****************************************************************

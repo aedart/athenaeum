@@ -270,4 +270,22 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertSame($description, $original['description']);
         $this->assertSame($newDescription, $changed['description']);
     }
+
+    /**
+     * @test
+     */
+    public function canSkipNextRecordingChange()
+    {
+        $category = $this->makeCategory();
+        $category
+            ->skipRecordingNextChange()
+            ->save();
+
+        // ---------------------------------------------------------- //
+
+        /** @var AuditTrail $history */
+        $history = $category->recordedChanges()->get();
+
+        $this->assertEmpty($history);
+    }
 }
