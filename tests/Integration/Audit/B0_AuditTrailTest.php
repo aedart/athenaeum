@@ -203,6 +203,37 @@ class B0_AuditTrailTest extends AuditTestCase
     /**
      * @test
      */
+    public function nullsUserIdWhenUserNoLongerExists()
+    {
+        $user = $this->createUser();
+        Auth::login($user);
+
+        // ---------------------------------------------------------- //
+        // Delete user in the database, yet ensure that the user instance
+        // is still authenticated
+        $user->forceDelete();
+
+        $authenticatedUser = Auth::user();
+        $this->assertNotNull($authenticatedUser, 'Authenticated is not available, but should be...');
+
+        // ---------------------------------------------------------- //
+
+        $category = $this->makeCategory();
+        $category->save();
+
+        // ---------------------------------------------------------- //
+
+        /** @var AuditTrail $history */
+        $history = $category->recordedChanges()->first();
+
+        // ---------------------------------------------------------- //
+
+        $this->assertNull($history->user_id, 'User id should be null');
+    }
+
+    /**
+     * @test
+     */
     public function canObtainUserAuditTrail()
     {
         $user = $this->createUser();
