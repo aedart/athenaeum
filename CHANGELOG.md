@@ -4,6 +4,21 @@
 
 ### [Unreleased]
 
+### [v5.15.0](https://github.com/aedart/athenaeum/compare/5.14.1...5.15.0)
+
+#### Changed
+
+**Breaking Changes**
+
+* `AuditTrailServiceProvider` now publishes migrations rather than loading them directly. This allows changing to installation order (_migration file's timestamp_).
+
+**Caution**: _These changes can affect rolling back migrations. Please (re)publish service provider's assets to ensure your application is able to rollback the `create_audit_trail_table` migration._  
+
+#### Fixed
+
+* Fails inserting a new audit trail entry into database when user no longer exists, in `RecordAuditTrailEntry` listener.
+User existence is now checked before inserting new entry. If the user does not exist, then `null` is set as the audit trail entry's user reference.
+
 ### [v5.14.1](https://github.com/aedart/athenaeum/compare/5.14.0...5.14.1)
 
 #### Fixed
