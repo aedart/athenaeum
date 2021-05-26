@@ -4,6 +4,16 @@
 
 ### [Unreleased]
 
+### [v5.16.0](https://github.com/aedart/athenaeum/compare/5.15.0...5.16.0)
+
+#### Added
+
+* `formatOriginalData()` and `formatChangedData()`, in  the `RecordsChanges` trait. This allows easier changes to the attributes / data to be stored in an Audit Trail entry.
+
+#### Changed
+
+* `originalData()` and `changedData()` now invoke the new format data methods, in the `RecordsChanges` trait, Audit package.
+
 ### [v5.15.0](https://github.com/aedart/athenaeum/compare/5.14.1...5.15.0)
 
 #### Changed
