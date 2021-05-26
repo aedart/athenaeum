@@ -23,10 +23,10 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "aedart/athenaeum-contracts": "^5.16",
-        "aedart/athenaeum-database": "^5.16",
-        "aedart/athenaeum-support": "^5.16",
-        "aedart/athenaeum-utils": "^5.16"
+        "aedart/athenaeum-contracts": "^5.17",
+        "aedart/athenaeum-database": "^5.17",
+        "aedart/athenaeum-support": "^5.17",
+        "aedart/athenaeum-utils": "^5.17"
     },
     "autoload": {
         "psr-4": {
@@ -40,7 +40,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "5.16.x-dev"
+            "dev-master": "5.17.x-dev"
         }
     }
 }
