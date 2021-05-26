@@ -76,7 +76,26 @@ trait RecordsChanges
             return null;
         }
 
-        return $this->filterAuditData($this->getOriginal());
+        return $this->formatOriginalData(
+            $this->filterAuditData($this->getOriginal()),
+            $type
+        );
+    }
+
+    /**
+     * Formats the original data (attributes) to be saved in
+     * Audit Trail Entry
+     *
+     * @see originalData
+     *
+     * @param array|null $filtered The filtered original data (if any)
+     * @param string $type Event type
+     *
+     * @return array|null
+     */
+    public function formatOriginalData(?array $filtered, string $type): ?array
+    {
+        return $filtered;
     }
 
     /**
@@ -99,7 +118,26 @@ trait RecordsChanges
         //
         // By default, we only save the changed (dirty) attributes.
 
-        return $this->filterAuditData($this->getDirty());
+        return $this->formatChangedData(
+            $this->filterAuditData($this->getDirty()),
+            $type
+        );
+    }
+
+    /**
+     * Formats the changed data (attributes) to be saved in
+     * Audit Trail Entry
+     *
+     * @see changedData
+     *
+     * @param array|null $filtered The filtered changed data (if any)
+     * @param string $type Event type
+     *
+     * @return array|null
+     */
+    public function formatChangedData(?array $filtered, string $type): ?array
+    {
+        return $filtered;
     }
 
     /**
