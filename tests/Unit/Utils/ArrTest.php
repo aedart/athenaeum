@@ -74,4 +74,49 @@ class ArrTest extends UnitTestCase
         $this->assertArrayHasKey('dexterity', $nested);
         $this->assertArrayHasKey('intelligence', $nested);
     }
+
+    /**
+     * @test
+     */
+    public function canReturnDifferenceOfAssociate()
+    {
+        $original = [
+            'key' => 'person',
+            'value' => 'John Snow',
+            'settings' => [
+                'validation' => [
+                    'required' => true,
+                    'nullable' => true,
+                    'min' => 2,
+                    'max' => 50,
+                ]
+            ]
+        ];
+
+        $changed = [
+            'key' => 'person',
+            'value' => 'Smith Snow', // Changed
+            'settings' => [
+                'validation' => [
+                    'required' => false, // Changed
+                    'nullable' => true,
+                    'min' => 2,
+                    'max' => 100, // Changed
+                ]
+            ]
+        ];
+
+        $result = Arr::differenceAssoc($original, $changed);
+        ConsoleDebugger::output($result);
+
+        $this->assertArrayHasKey('value', $result);
+        $this->assertArrayHasKey('settings', $result);
+
+        $settings = $result['settings'];
+        $this->assertArrayHasKey('validation', $settings);
+
+        $validation = $settings['validation'];
+        $this->assertArrayHasKey('required', $validation);
+        $this->assertArrayHasKey('max', $validation);
+    }
 }
