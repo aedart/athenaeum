@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.17.0](https://github.com/aedart/athenaeum/compare/5.16.0...5.17.0)
+
+#### Added
+
+* `differenceAssoc()` method in `Arr`. Able to compute the difference of multi-dimensional arrays.
+
 ### [v5.16.0](https://github.com/aedart/athenaeum/compare/5.15.0...5.16.0)
 
 #### Added
