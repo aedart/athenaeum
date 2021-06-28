@@ -72,7 +72,7 @@ class Arr extends ArrBase
 
         $array = static::dot($array);
 
-        $arrays = array_map(function($item) {
+        $arrays = array_map(function ($item) {
             return static::dot($item);
         }, $arrays);
 
