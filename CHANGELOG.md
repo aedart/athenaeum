@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.18.0](https://github.com/aedart/athenaeum/compare/5.17.0...5.18.0)
+
+#### Added
+
+* `SemanticVersion` validation rule.
+
 ### [v5.17.0](https://github.com/aedart/athenaeum/compare/5.16.0...5.17.0)
 
 #### Added
