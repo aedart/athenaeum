@@ -30,7 +30,7 @@ class SemanticVersion extends BaseRule
     {
         $this->attribute = $attribute;
 
-        if (! preg_match(static::REGEX_PATTERN, $value)) {
+        if (!preg_match(static::REGEX_PATTERN, $value)) {
             return false;
         }
 
