@@ -30,7 +30,7 @@ class SemanticVersionRuleTest extends ValidationTestCase
      *
      * @return \string[][]
      */
-    public function validVersionNumbers(): array
+    public function validInput(): array
     {
         return [
             'major.minor.patch' => [ '6.3.14' ],
@@ -44,7 +44,7 @@ class SemanticVersionRuleTest extends ValidationTestCase
      *
      * @return \string[][]
      */
-    public function invalidVersionNumbers(): array
+    public function invalidInput(): array
     {
         return [
             'major only' => [ '1' ],
@@ -77,7 +77,7 @@ class SemanticVersionRuleTest extends ValidationTestCase
 
     /**
      * @test
-     * @dataProvider validVersionNumbers
+     * @dataProvider validInput
      *
      * @param mixed $input
      *
@@ -90,7 +90,7 @@ class SemanticVersionRuleTest extends ValidationTestCase
 
     /**
      * @test
-     * @dataProvider invalidVersionNumbers
+     * @dataProvider invalidInput
      *
      * @param mixed $input
      *
