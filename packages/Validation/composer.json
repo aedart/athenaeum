@@ -23,7 +23,8 @@
         "illuminate/validation": "^8.15",
         "aedart/athenaeum-contracts": "^5.18",
         "aedart/athenaeum-support": "^5.18",
-        "aedart/athenaeum-utils": "^5.18"
+        "aedart/athenaeum-utils": "^5.18",
+        "composer/semver": "^3.2.5"
     },
     "autoload": {
         "psr-4": {
