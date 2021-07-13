@@ -119,4 +119,46 @@ class ArrTest extends UnitTestCase
         $this->assertArrayHasKey('required', $validation);
         $this->assertArrayHasKey('max', $validation);
     }
+
+    /**
+     * @test
+     */
+    public function doesNotFailDiffOfAssocWhenEmptyNestedArrays()
+    {
+        $original = [
+            'key' => 'person',
+            'value' => 'John Snow',
+            'settings' => []
+        ];
+
+        $changed = [
+            'key' => 'person',
+            'value' => 'Jack Snow', // Changed
+            'settings' => [] // Can cause array to string conversion!, using php's array_diff_assoc
+        ];
+
+        $result = Arr::differenceAssoc($changed, $original);
+        ConsoleDebugger::output($result);
+
+        $this->assertArrayHasKey('value', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function doesNotFailDiffOfAssocWhenEmptyNullValues()
+    {
+        $original = [
+            'key' => null,
+        ];
+
+        $changed = [
+            'key' => null,
+        ];
+
+        $result = Arr::differenceAssoc($changed, $original);
+        ConsoleDebugger::output($result);
+
+        $this->assertEmpty($result);
+    }
 }
