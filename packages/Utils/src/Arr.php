@@ -70,12 +70,39 @@ class Arr extends ArrBase
             throw new InvalidArgumentException('You need at least 2 arrays for computing difference');
         }
 
-        $array = static::dot($array);
+        $array = static::clearNestedEmptyArrays(
+            static::dot($array)
+        );
 
-        $arrays = array_map(function ($item) {
-            return static::dot($item);
+        $arrays = array_map(function ($array) {
+            return static::clearNestedEmptyArrays(
+                static::dot($array)
+            );
         }, $arrays);
 
         return static::undot(array_diff_assoc($array, ...$arrays));
+    }
+
+    /**
+     * Replaces nested empty array values
+     *
+     * @param array $array
+     * @param mixed $replaceValue [optional] Value to replace empty arrays with
+     *
+     * @return array
+     */
+    protected static function clearNestedEmptyArrays(array $array, $replaceValue = null): array
+    {
+        $output = [];
+
+        foreach ($array as $key => $value) {
+            if (is_array($value) && empty($value)) {
+                $value = $replaceValue;
+            }
+
+            $output[$key] = $value;
+        }
+
+        return $output;
     }
 }
