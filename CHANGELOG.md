@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.18.1](https://github.com/aedart/athenaeum/compare/5.18.0...5.18.1)
+
+#### Fixed
+
+* Array to string conversion error when comparing arrays, that contain nested empty arrays - in `Arr::differenceAssoc()`. [#47](https://github.com/aedart/athenaeum/issues/47).
+
 ### [v5.18.0](https://github.com/aedart/athenaeum/compare/5.17.0...5.18.0)
 
 #### Added
