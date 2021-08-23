@@ -5,9 +5,8 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use GuzzleHttp\Psr7\Query;
 use Psr\Http\Message\ResponseInterface;
-
-use function GuzzleHttp\Psr7\parse_query;
 
 /**
  * C1_QueryTest
@@ -98,7 +97,7 @@ class C1_QueryTest extends HttpClientsTestCase
         // --------------------------------------------------- //
 
         $sentQuery = $this->lastRequest->getUri()->getQuery();
-        $sentQuery = parse_query($sentQuery);
+        $sentQuery = Query::parse($sentQuery);
 
         ConsoleDebugger::output($sentQuery);
 
