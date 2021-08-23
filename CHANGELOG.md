@@ -4,6 +4,10 @@
 
 ### [Unreleased]
 
+#### Fixed
+
+* Call to undefined `GuzzleHttp\Psr7\parse_query()`, in the `C1_QueryTest` Http Client tests. [#49](https://github.com/aedart/athenaeum/issues/49).
+
 ### [v5.18.1](https://github.com/aedart/athenaeum/compare/5.18.0...5.18.1)
 
 #### Fixed
