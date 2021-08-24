@@ -1,0 +1,41 @@
+{
+    "name": "aedart/athenaeum-redmine",
+    "description": "Redmine API Client",
+    "keywords": [
+        "Athenaeum",
+        "Redmine",
+        "API"
+    ],
+    "homepage": "https://aedart.github.io/athenaeum/",
+    "support": {
+        "issues": "https://github.com/aedart/athenaeum/issues",
+        "source": "https://github.com/aedart/athenaeum"
+    },
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "aedart/athenaeum-http-clients": "^5.19"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\Redmine\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.19.x-dev"
+        }
+    }
+}
