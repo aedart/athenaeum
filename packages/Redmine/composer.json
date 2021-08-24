@@ -21,7 +21,8 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "aedart/athenaeum-http-clients": "^5.19"
+        "aedart/athenaeum-http-clients": "^5.19",
+        "aedart/athenaeum-dto": "^5.19"
     },
     "autoload": {
         "psr-4": {
