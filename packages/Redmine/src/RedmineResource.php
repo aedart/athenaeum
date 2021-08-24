@@ -15,6 +15,7 @@ use Aedart\Redmine\Exceptions\UnprocessableEntity;
 use Aedart\Redmine\Traits\ConnectionTrait;
 use Aedart\Utils\Json;
 use Aedart\Utils\Str;
+use Illuminate\Support\Traits\ForwardsCalls;
 use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -32,6 +33,7 @@ abstract class RedmineResource extends ArrayDto implements
     ConnectionAware
 {
     use ConnectionTrait;
+    use ForwardsCalls;
 
     /**
      * Name of the resource's identifier attribute
@@ -96,9 +98,34 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     // TODO: ...
-    public function list(int $limit = 10, int $offset = 0)
+    static public function list(int $limit = 10, int $offset = 0, $connection = null)
     {
+        $resource = static::make([], $connection);
+        $name = $resource->resourceName();
 
+        $response = $resource
+            ->client()
+
+            // Expect found, ...fail otherwise
+            ->expect(StatusCodes::OK, function(Status $status, ResponseInterface $response) use($resource) {
+                if ($status->code() === StatusCodes::NOT_FOUND) {
+                    throw NotFound::fromResponse($response, sprintf('%s was not found', $resource->resourceName()));
+                }
+
+                throw UnexpectedResponse::fromResponse($response);
+            })
+
+            // Paginate
+            ->limit($limit)
+            ->offset($offset)
+
+            // Perform request...
+            ->get($resource->endpoint());
+
+        // Extract and populate resource
+        $payload =  $resource->decode($response, $name);
+
+        // TODO: Paginated Results
     }
 
     /**
@@ -368,6 +395,32 @@ abstract class RedmineResource extends ArrayDto implements
         $key = $this->keyName();
 
         return isset($this->{$key});
+    }
+
+    /**
+     * Forward calls to the Http Client
+     *
+     * @param string $name method name
+     * @param mixed $arguments
+     *
+     * @return mixed
+     */
+    public function __call(string $name, $arguments)
+    {
+        return $this->forwardCallTo($this->client(), $name, $arguments);
+    }
+
+    /**
+     * Forward static calls to the Http Client
+     *
+     * @param string $name method name
+     * @param mixed $arguments
+     *
+     * @return mixed
+     */
+    public static function __callStatic(string $name, $arguments)
+    {
+        return static::make()->$name(...$arguments);
     }
 
     /*****************************************************************
