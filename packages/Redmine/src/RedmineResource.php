@@ -21,6 +21,7 @@ use Aedart\Utils\Json;
 use Aedart\Utils\Str;
 use Illuminate\Support\Traits\ForwardsCalls;
 use JsonException;
+use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Teapot\StatusCode\All as StatusCodes;
@@ -58,6 +59,14 @@ abstract class RedmineResource extends ArrayDto implements
     protected bool $enableExpectations = true;
 
     /**
+     * When set to true, then {@see Builder::debug()} added
+     * to all requests
+     *
+     * @var bool
+     */
+    public static bool $debug = false;
+
+    /**
      * List of expected Http Status Codes
      *
      * Applied only when {@see $enableExpectations} is enabled
@@ -71,6 +80,8 @@ abstract class RedmineResource extends ArrayDto implements
 
     /**
      * General failed expectation handler
+     *
+     * Applied only when {@see $enableExpectations} is enabled
      *
      * @var callable
      */
@@ -163,15 +174,6 @@ abstract class RedmineResource extends ArrayDto implements
             // Paginate
             ->limit($limit)
             ->offset($offset)
-
-            // Debug
-//            ->debug(function($type, $msg) {
-//                if ($type !== 'request') {
-//                    $content = $msg->getBody()->getContents();
-//                    dump(Json::decode($content, true));
-//                    $msg->getBody()->rewind();
-//                }
-//            })
 
             // Perform request...
             ->get($resource->endpoint());
@@ -476,6 +478,11 @@ abstract class RedmineResource extends ArrayDto implements
         if ($this->enableExpectations) {
             $request = $request
                 ->expect($this->expectedStatusCodes, $this->failedExpectationHandler());
+        }
+
+        // Debug, when required
+        if (static::$debug) {
+            $request = $request->debug();
         }
 
         return $request;
