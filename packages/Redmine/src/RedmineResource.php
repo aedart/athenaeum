@@ -162,23 +162,15 @@ abstract class RedmineResource extends ArrayDto implements
     ): PaginatedResultsInterface {
         $resource = static::make([], $connection);
 
-        $response = $resource
+        $request = $resource
             ->request()
 
             // Include related data
             ->when(!empty($include), function (Builder $request) use ($include) {
                 $request->include($include);
-            })
+            });
 
-            // Paginate
-            ->limit($limit)
-            ->offset($offset)
-
-            // Perform request...
-            ->get($resource->endpoint());
-
-        // Return paginated results
-        return PaginatedResults::fromResponse($response, $resource);
+        return $resource->paginate($request, $limit, $offset);
     }
 
     /**
@@ -238,6 +230,29 @@ abstract class RedmineResource extends ArrayDto implements
         $payload = $resource->decode($response, $name);
 
         return $resource->fill($payload);
+    }
+
+    /**
+     * Paginate the given request
+     *
+     * @param  Builder  $request
+     * @param int $limit [optional]
+     * @param int $offset [optional]
+     * 
+     * @return PaginatedResultsInterface<static>
+     *
+     * @throws JsonException
+     * @throws Throwable
+     */
+    public function paginate(Builder $request, int $limit = 10, int $offset = 0): PaginatedResultsInterface
+    {
+        return PaginatedResults::fromResponse(
+            $request
+                ->limit($limit)
+                ->offset($offset)
+                ->get($this->endpoint()),
+            $this
+        );
     }
 
     /**
