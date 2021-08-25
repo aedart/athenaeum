@@ -4,6 +4,7 @@
     "license": "BSD-3-Clause",
     "require": {
         "php": ">=7.4.0",
+        "ext-json": "*",
         "dragonmantank/cron-expression": "^3.0",
         "fzaninotto/faker": "1.9.*",
         "guzzlehttp/guzzle": "^7.3",
