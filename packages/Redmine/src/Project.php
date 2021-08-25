@@ -5,7 +5,9 @@ namespace Aedart\Redmine;
 use Carbon\Carbon;
 
 /**
- * Project
+ * Project Resource
+ *
+ * @see https://www.redmine.org/projects/redmine/wiki/Rest_Projects
  *
  * @property int $id
  * @property string $name
