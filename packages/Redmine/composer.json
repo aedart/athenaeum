@@ -21,7 +21,9 @@
     ],
     "require": {
         "php": ">=7.4.0",
+        "ext-json": "*",
         "aedart/athenaeum-http-clients": "^5.19",
+        "aedart/athenaeum-pagination": "^5.19",
         "aedart/athenaeum-dto": "^5.19"
     },
     "autoload": {
