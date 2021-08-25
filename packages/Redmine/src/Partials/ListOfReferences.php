@@ -3,7 +3,10 @@
 namespace Aedart\Redmine\Partials;
 
 use Aedart\Contracts\Utils\Populatable;
+use Aedart\Utils\Json;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+use JsonSerializable;
 
 /**
  * List Of References
@@ -14,7 +17,9 @@ use Illuminate\Contracts\Support\Arrayable;
  * @package Aedart\Redmine\Partials
  */
 class ListOfReferences implements Populatable,
-    Arrayable
+    Arrayable,
+    Jsonable,
+    JsonSerializable
 {
     /**
      * Actual list of references
@@ -53,5 +58,21 @@ class ListOfReferences implements Populatable,
     public function toArray()
     {
         return $this->references;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toJson($options = 0)
+    {
+        return Json::encode($this->jsonSerialize(), $options);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 }
