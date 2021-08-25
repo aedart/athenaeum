@@ -56,6 +56,7 @@ parameters:
         packages/Http/Clients: 'git@github.com:aedart/athenaeum-http-clients.git'
         packages/Http/Cookies: 'git@github.com:aedart/athenaeum-http-cookies.git'
         packages/Http/Messages: 'git@github.com:aedart/athenaeum-http-messages.git'
+        packages/Pagination: 'git@github.com:aedart/athenaeum-pagination.git'
         packages/Properties: 'git@github.com:aedart/athenaeum-properties.git'
         packages/Redmine: 'git@github.com:aedart/athenaeum-redmine.git'
         packages/Service: 'git@github.com:aedart/athenaeum-service.git'

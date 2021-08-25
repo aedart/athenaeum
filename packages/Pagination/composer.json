@@ -1,0 +1,41 @@
+{
+    "name": "aedart/athenaeum-pagination",
+    "description": "Pagination utility",
+    "keywords": [
+        "Athenaeum",
+        "Pagination"
+    ],
+    "homepage": "https://aedart.github.io/athenaeum/",
+    "support": {
+        "issues": "https://github.com/aedart/athenaeum/issues",
+        "source": "https://github.com/aedart/athenaeum"
+    },
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "aedart/athenaeum-contracts": "^5.19",
+        "aedart/athenaeum-utils": "^5.19"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\Pagination\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.19.x-dev"
+        }
+    }
+}
