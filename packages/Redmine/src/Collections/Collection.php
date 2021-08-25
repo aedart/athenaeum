@@ -43,11 +43,11 @@ class Collection extends BaseCollection
      *
      * @throws \Throwable
      */
-    static public function fromResponsePayload(array $payload, RedmineResource $resource): Collection
+    public static function fromResponsePayload(array $payload, RedmineResource $resource): Collection
     {
         $list = $resource->extractFromPayload($resource->resourceName(), $payload);
 
-        $resources = array_map(function($item) use($resource) {
+        $resources = array_map(function ($item) use ($resource) {
             return $resource::make($item, $resource->getConnection());
         }, $list);
 

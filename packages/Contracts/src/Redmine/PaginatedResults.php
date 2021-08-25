@@ -35,7 +35,7 @@ interface PaginatedResults extends Paginator,
      * @throws \JsonException
      * @throws \Throwable
      */
-    static public function fromResponse(ResponseInterface $response, $resource): PaginatedResults;
+    public static function fromResponse(ResponseInterface $response, $resource): PaginatedResults;
 
     /**
      * Returns the result set

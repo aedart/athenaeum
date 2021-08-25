@@ -3,7 +3,6 @@
 namespace Aedart\Pagination;
 
 use Aedart\Contracts\Pagination\Paginator as PaginatorInterface;
-use Aedart\Pagination\Concerns;
 
 /**
  * Paginator

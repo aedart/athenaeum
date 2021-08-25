@@ -2,10 +2,6 @@
 
 namespace Aedart\Redmine\Exceptions;
 
-use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
-use Psr\Http\Message\ResponseInterface;
-use Throwable;
-
 /**
  * Not Found Exception
  *

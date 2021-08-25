@@ -30,7 +30,7 @@ class ErrorResponse extends RedmineException implements ErrorResponseException
     /**
      * @inheritDoc
      */
-    static public function fromResponse(
+    public static function fromResponse(
         ResponseInterface $response,
         ?string $message = null,
         ?Throwable $previous = null

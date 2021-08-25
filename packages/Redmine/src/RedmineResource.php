@@ -8,20 +8,20 @@ use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
 use Aedart\Contracts\Redmine\ConnectionAware;
 use Aedart\Contracts\Redmine\PaginatedResults as PaginatedResultsInterface;
 use Aedart\Dto\ArrayDto;
-use Aedart\Redmine\Pagination\PaginatedResults;
 use Aedart\Redmine\Connections\Connection;
 use Aedart\Redmine\Exceptions\NotFound;
 use Aedart\Redmine\Exceptions\RedmineException;
 use Aedart\Redmine\Exceptions\UnexpectedResponse;
 use Aedart\Redmine\Exceptions\UnprocessableEntity;
+use Aedart\Redmine\Pagination\PaginatedResults;
 use Aedart\Redmine\Traits\ConnectionTrait;
 use Aedart\Utils\Json;
 use Aedart\Utils\Str;
 use Illuminate\Support\Traits\ForwardsCalls;
 use JsonException;
 use Psr\Http\Message\ResponseInterface;
-use Throwable;
 use Teapot\StatusCode\All as StatusCodes;
+use Throwable;
 
 /**
  * Redmine Resource
@@ -71,7 +71,7 @@ abstract class RedmineResource extends ArrayDto implements
      *
      * @throws Throwable
      */
-    static public function make(array $data = [], $connection = null)
+    public static function make(array $data = [], $connection = null)
     {
         return new static($data, $connection);
     }
@@ -111,7 +111,7 @@ abstract class RedmineResource extends ArrayDto implements
      * @throws JsonException
      * @throws Throwable
      */
-    static public function list(int $limit = 10, int $offset = 0, $connection = null): PaginatedResultsInterface
+    public static function list(int $limit = 10, int $offset = 0, $connection = null): PaginatedResultsInterface
     {
         $resource = static::make([], $connection);
 
@@ -119,7 +119,7 @@ abstract class RedmineResource extends ArrayDto implements
             ->client()
 
             // Expect found, ...fail otherwise
-            ->expect(StatusCodes::OK, function(Status $status, ResponseInterface $response) use($resource) {
+            ->expect(StatusCodes::OK, function (Status $status, ResponseInterface $response) use ($resource) {
                 if ($status->code() === StatusCodes::NOT_FOUND) {
                     throw NotFound::fromResponse($response, sprintf('%s was not found', $resource->resourceName()));
                 }
@@ -150,7 +150,7 @@ abstract class RedmineResource extends ArrayDto implements
      * @throws JsonException
      * @throws Throwable
      */
-    static public function find($id, $connection = null)
+    public static function find($id, $connection = null)
     {
         try {
             return static::findOrFail($id, $connection);
@@ -173,7 +173,7 @@ abstract class RedmineResource extends ArrayDto implements
      * @throws JsonException
      * @throws Throwable
      */
-    static public function findOrFail($id, $connection = null)
+    public static function findOrFail($id, $connection = null)
     {
         $resource = static::make([], $connection);
         $name = $resource->resourceNameSingular();
@@ -182,7 +182,7 @@ abstract class RedmineResource extends ArrayDto implements
             ->client()
 
             // Expect found, ...fail otherwise
-            ->expect(StatusCodes::OK, function(Status $status, ResponseInterface $response) use($id, $name) {
+            ->expect(StatusCodes::OK, function (Status $status, ResponseInterface $response) use ($id, $name) {
                 if ($status->code() === StatusCodes::NOT_FOUND) {
                     throw NotFound::fromResponse($response, sprintf('%s (id: %s) was not found', $name, $id));
                 }
@@ -194,7 +194,7 @@ abstract class RedmineResource extends ArrayDto implements
             ->get($resource->endpoint($id));
 
         // Extract and populate resource
-        $payload =  $resource->decode($response, $name);
+        $payload = $resource->decode($response, $name);
 
         return $resource->fill($payload);
     }
@@ -210,7 +210,7 @@ abstract class RedmineResource extends ArrayDto implements
      * @throws JsonException
      * @throws Throwable
      */
-    static public function create(array $data, $connection = null)
+    public static function create(array $data, $connection = null)
     {
         $resource = static::make($data, $connection);
 
@@ -277,7 +277,7 @@ abstract class RedmineResource extends ArrayDto implements
             ->client()
 
             // Expect okay... or fail
-            ->expect(StatusCodes::OK, function(Status $status, ResponseInterface $response) use($name, $id) {
+            ->expect(StatusCodes::OK, function (Status $status, ResponseInterface $response) use ($name, $id) {
                 if ($status->code() === StatusCodes::NOT_FOUND) {
                     throw NotFound::fromResponse($response, sprintf('%s (id: %s) was not found', $name, $id));
                 }
@@ -470,7 +470,7 @@ abstract class RedmineResource extends ArrayDto implements
             ->client()
 
             // Expect created,... fail otherwise
-            ->expect(StatusCodes::CREATED, function(Status $status, ResponseInterface $response) {
+            ->expect(StatusCodes::CREATED, function (Status $status, ResponseInterface $response) {
                 if ($status->code() === StatusCodes::UNPROCESSABLE_ENTITY) {
                     throw UnprocessableEntity::fromResponse($response);
                 }
@@ -508,7 +508,7 @@ abstract class RedmineResource extends ArrayDto implements
             ->client()
 
             // Expect okay... or fail
-            ->expect(StatusCodes::OK, function(Status $status, ResponseInterface $response) use($name, $id) {
+            ->expect(StatusCodes::OK, function (Status $status, ResponseInterface $response) use ($name, $id) {
                 if ($status->code() === StatusCodes::UNPROCESSABLE_ENTITY) {
                     throw UnprocessableEntity::fromResponse($response);
                 }
