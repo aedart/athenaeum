@@ -9,7 +9,7 @@ use Aedart\Redmine\Providers\RedmineServiceProvider;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Codeception\Configuration;
-use Psr\Http\Message\RequestInterface;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 
 /**
  * Redmine Test Case
@@ -73,5 +73,16 @@ abstract class RedmineTestCase extends LaravelTestCase
     public function directory(): string
     {
         return Configuration::dataDir() . 'configs/redmine';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getEnvironmentSetUp($app)
+    {
+        // Ensure .env is loaded
+        $app->useEnvironmentPath(__DIR__ . '/../../../');
+        $app->loadEnvironmentFrom('.testing');
+        $app->bootstrapWith([LoadEnvironmentVariables::class]);
     }
 }
