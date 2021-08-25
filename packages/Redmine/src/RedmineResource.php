@@ -143,6 +143,15 @@ abstract class RedmineResource extends ArrayDto implements
             ->limit($limit)
             ->offset($offset)
 
+            // Debug
+//            ->debug(function($type, $msg) {
+//                if ($type !== 'request') {
+//                    $content = $msg->getBody()->getContents();
+//                    dump(Json::decode($content, true));
+//                    $msg->getBody()->rewind();
+//                }
+//            })
+
             // Perform request...
             ->get($resource->endpoint());
 
