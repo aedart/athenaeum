@@ -7,6 +7,7 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
 use Aedart\Contracts\Redmine\ConnectionAware;
+use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
 use Aedart\Contracts\Redmine\PaginatedResults as PaginatedResultsInterface;
 use Aedart\Dto\ArrayDto;
 use Aedart\Redmine\Connections\Connection;
@@ -20,6 +21,7 @@ use Aedart\Utils\Json;
 use Aedart\Utils\Str;
 use Illuminate\Support\Traits\ForwardsCalls;
 use JsonException;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Teapot\StatusCode\All as StatusCodes;
 use Throwable;
@@ -44,6 +46,35 @@ abstract class RedmineResource extends ArrayDto implements
      * @var string
      */
     protected string $identifierKey = 'id';
+
+    /**
+     * When enabled, general response expectations
+     * are automatically added to the Http Client
+     *
+     * @see https://aedart.github.io/athenaeum/archive/current/http/clients/methods/expectations.html
+     *
+     * @var bool
+     */
+    protected bool $enableExpectations = true;
+
+    /**
+     * List of expected Http Status Codes
+     *
+     * Applied only when {@see $enableExpectations} is enabled
+     *
+     * @var int[]
+     */
+    protected array $expectedStatusCodes = [
+        StatusCodes::OK,
+        StatusCodes::CREATED
+    ];
+
+    /**
+     * General failed expectation handler
+     *
+     * @var callable
+     */
+    protected $failedExpectationHandler;
 
     /**
      * Redmine Resource
@@ -122,16 +153,7 @@ abstract class RedmineResource extends ArrayDto implements
         $resource = static::make([], $connection);
 
         $response = $resource
-            ->client()
-
-            // Expect found, ...fail otherwise
-            ->expect(StatusCodes::OK, function (Status $status, ResponseInterface $response) use ($resource) {
-                if ($status->code() === StatusCodes::NOT_FOUND) {
-                    throw NotFound::fromResponse($response, sprintf('%s was not found', $resource->resourceName()));
-                }
-
-                throw UnexpectedResponse::fromResponse($response);
-            })
+            ->request()
 
             // Include related data
             ->when(!empty($include), function (Builder $request) use ($include) {
@@ -201,16 +223,7 @@ abstract class RedmineResource extends ArrayDto implements
         $name = $resource->resourceNameSingular();
 
         $response = $resource
-            ->client()
-
-            // Expect found, ...fail otherwise
-            ->expect(StatusCodes::OK, function (Status $status, ResponseInterface $response) use ($id, $name) {
-                if ($status->code() === StatusCodes::NOT_FOUND) {
-                    throw NotFound::fromResponse($response, sprintf('%s (id: %s) was not found', $name, $id));
-                }
-
-                throw UnexpectedResponse::fromResponse($response);
-            })
+            ->request()
 
             // Include related data
             ->when(!empty($include), function (Builder $request) use ($include) {
@@ -297,24 +310,25 @@ abstract class RedmineResource extends ArrayDto implements
             return false;
         }
 
-        $id = $this->id();
-        $name = $this->resourceNameSingular();
-
         $this
-            ->client()
-
-            // Expect okay... or fail
-            ->expect(StatusCodes::OK, function (Status $status, ResponseInterface $response) use ($name, $id) {
-                if ($status->code() === StatusCodes::NOT_FOUND) {
-                    throw NotFound::fromResponse($response, sprintf('%s (id: %s) was not found', $name, $id));
-                }
-
-                throw UnexpectedResponse::fromResponse($response);
-            })
-
-            ->delete($this->endpoint($id));
+            ->request()
+            ->delete($this->endpoint(
+                $this->id()
+            ));
 
         return true;
+    }
+
+    /**
+     * Returns a prepared request builder
+     *
+     * @return Builder
+     */
+    public function request(): Builder
+    {
+        return $this->prepareNextRequest(
+            $this->client()
+        );
     }
 
     /**
@@ -450,6 +464,55 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
+     * Prepares the next request
+     *
+     * @param Client|Builder $request
+     *
+     * @return Builder
+     */
+    public function prepareNextRequest($request): Builder
+    {
+        // Add general response expectations, if required
+        if ($this->enableExpectations) {
+            $request = $request
+                ->expect($this->expectedStatusCodes, $this->failedExpectationHandler());
+        }
+
+        return $request;
+    }
+
+    /**
+     * Set the general failed expecation handler
+     *
+     * @param  callable  $handler
+     *
+     * @return $this
+     */
+    public function useFailedExpectationHandler(callable $handler): self
+    {
+        $this->failedExpectationHandler = $handler;
+
+        return $this;
+    }
+
+    /**
+     * Returns the general failed expectation handler
+     *
+     * @return callable
+     */
+    public function failedExpectationHandler(): callable
+    {
+        // Set a default failed expectation handler when none given...
+        if (!isset($this->failedExpectationHandler)) {
+            $this->failedExpectationHandler = function () {
+                $this->defaultFailedExpectationHandler(...func_get_args());
+            };
+        }
+
+        return $this->failedExpectationHandler;
+    }
+
+    /**
      * Forward calls to the Http Client
      *
      * @param string $name method name
@@ -494,17 +557,7 @@ abstract class RedmineResource extends ArrayDto implements
         $payload = $this->toArray();
 
         $response = $this
-            ->client()
-
-            // Expect created,... fail otherwise
-            ->expect(StatusCodes::CREATED, function (Status $status, ResponseInterface $response) {
-                if ($status->code() === StatusCodes::UNPROCESSABLE_ENTITY) {
-                    throw UnprocessableEntity::fromResponse($response);
-                }
-
-                throw UnexpectedResponse::fromResponse($response);
-            })
-
+            ->request()
             ->post($this->endpoint(), $payload);
 
         // Extract and (re)populate resource
@@ -532,21 +585,7 @@ abstract class RedmineResource extends ArrayDto implements
         $payload = $this->toArray();
 
         $response = $this
-            ->client()
-
-            // Expect okay... or fail
-            ->expect(StatusCodes::OK, function (Status $status, ResponseInterface $response) use ($name, $id) {
-                if ($status->code() === StatusCodes::UNPROCESSABLE_ENTITY) {
-                    throw UnprocessableEntity::fromResponse($response);
-                }
-
-                if ($status->code() === StatusCodes::NOT_FOUND) {
-                    throw NotFound::fromResponse($response, sprintf('%s (id: %s) was not found', $name, $id));
-                }
-
-                throw UnexpectedResponse::fromResponse($response);
-            })
-
+            ->request()
             ->put($this->endpoint($id), $payload);
 
         // Extract and (re)populate resource
@@ -555,5 +594,30 @@ abstract class RedmineResource extends ArrayDto implements
         );
 
         return true;
+    }
+
+    /**
+     * The default "general" failed expectation handler
+     *
+     * @param  Status  $status
+     * @param  ResponseInterface  $response
+     * @param  RequestInterface  $request
+     *
+     * @throws ErrorResponseException
+     */
+    protected function defaultFailedExpectationHandler(Status $status, ResponseInterface $response, RequestInterface $request)
+    {
+        $code = $status->code();
+
+        if ($code === StatusCodes::NOT_FOUND) {
+            throw NotFound::fromResponse($response, sprintf('%s was not found', (string) $request->getUri()));
+        }
+
+        if ($code === StatusCodes::UNPROCESSABLE_ENTITY) {
+            throw UnprocessableEntity::fromResponse($response);
+        }
+
+        // Otherwise,
+        throw UnexpectedResponse::fromResponse($response);
     }
 }
