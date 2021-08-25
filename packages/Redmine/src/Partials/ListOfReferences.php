@@ -4,8 +4,11 @@ namespace Aedart\Redmine\Partials;
 
 use Aedart\Contracts\Utils\Populatable;
 use Aedart\Utils\Json;
+use ArrayIterator;
+use Countable;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
+use IteratorAggregate;
 use JsonSerializable;
 
 /**
@@ -18,6 +21,8 @@ use JsonSerializable;
  */
 class ListOfReferences implements Populatable,
     Arrayable,
+    IteratorAggregate,
+    Countable,
     Jsonable,
     JsonSerializable
 {
@@ -55,6 +60,14 @@ class ListOfReferences implements Populatable,
     /**
      * @inheritDoc
      */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->references);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function toArray()
     {
         return $this->references;
@@ -74,5 +87,13 @@ class ListOfReferences implements Populatable,
     public function jsonSerialize()
     {
         return $this->toArray();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function count()
+    {
+        return count($this->references);
     }
 }
