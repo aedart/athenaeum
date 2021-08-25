@@ -118,8 +118,7 @@ abstract class RedmineResource extends ArrayDto implements
         int $offset = 0,
         array $include = [],
         $connection = null
-    ): PaginatedResultsInterface
-    {
+    ): PaginatedResultsInterface {
         $resource = static::make([], $connection);
 
         $response = $resource
@@ -135,7 +134,7 @@ abstract class RedmineResource extends ArrayDto implements
             })
 
             // Include related data
-            ->when(!empty($include), function(Builder $request) use($include) {
+            ->when(!empty($include), function (Builder $request) use ($include) {
                 $request->include($include);
             })
 
@@ -214,7 +213,7 @@ abstract class RedmineResource extends ArrayDto implements
             })
 
             // Include related data
-            ->when(!empty($include), function(Builder $request) use($include) {
+            ->when(!empty($include), function (Builder $request) use ($include) {
                 $request->include($include);
             })
 

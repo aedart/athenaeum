@@ -19,7 +19,8 @@ use JsonSerializable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine\Partials
  */
-class ListOfReferences implements Populatable,
+class ListOfReferences implements
+    Populatable,
     Arrayable,
     IteratorAggregate,
     Countable,
@@ -36,7 +37,7 @@ class ListOfReferences implements Populatable,
     /**
      * ListOfReferences
      *
-     * @param array|Reference[] $references
+     * @param Reference[] $references
      */
     public function __construct(array $references = [])
     {
@@ -48,7 +49,7 @@ class ListOfReferences implements Populatable,
      */
     public function populate(array $data = []): void
     {
-        $this->references = array_map(function($reference) {
+        $this->references = array_map(function ($reference) {
             if ($reference instanceof Reference) {
                 return $reference;
             }
