@@ -4,6 +4,10 @@
 
 ### [Unreleased]
 
+#### Changed
+
+* `BaseSerializer` (_Http Message package_) will now re-encode json payloads with the `JSON_PRETTY_PRINT` set, if a message's if `content-type` header contains `/json` or `+json`. This makes it easier to read json payloads, in debugging situations.
+
 #### Fixed
 
 * Call to undefined `GuzzleHttp\Psr7\parse_query()`, in the `C1_QueryTest` Http Client tests. [#49](https://github.com/aedart/athenaeum/issues/49).
