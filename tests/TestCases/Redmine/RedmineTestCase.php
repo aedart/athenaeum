@@ -3,8 +3,10 @@
 namespace Aedart\Tests\TestCases\Redmine;
 
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
+use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Redmine\Providers\RedmineServiceProvider;
+use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Codeception\Configuration;
 use Psr\Http\Message\RequestInterface;
@@ -19,6 +21,9 @@ use Psr\Http\Message\RequestInterface;
  */
 abstract class RedmineTestCase extends LaravelTestCase
 {
+    use ConfigLoaderTrait;
+    use ConfigTrait;
+
     /*****************************************************************
      * Setup Methods
      ****************************************************************/
