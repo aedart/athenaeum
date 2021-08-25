@@ -3,6 +3,7 @@
 namespace Aedart\Redmine;
 
 use Aedart\Contracts\Http\Clients\Client;
+use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
 use Aedart\Contracts\Redmine\ConnectionAware;
@@ -104,6 +105,7 @@ abstract class RedmineResource extends ArrayDto implements
      *
      * @param int $limit [optional]
      * @param int $offset [optional]
+     * @param string[] $include [optional] List of associated data to include
      * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
      *
      * @return PaginatedResultsInterface<static>
@@ -111,7 +113,12 @@ abstract class RedmineResource extends ArrayDto implements
      * @throws JsonException
      * @throws Throwable
      */
-    public static function list(int $limit = 10, int $offset = 0, $connection = null): PaginatedResultsInterface
+    public static function list(
+        int $limit = 10,
+        int $offset = 0,
+        array $include = [],
+        $connection = null
+    ): PaginatedResultsInterface
     {
         $resource = static::make([], $connection);
 
@@ -125,6 +132,11 @@ abstract class RedmineResource extends ArrayDto implements
                 }
 
                 throw UnexpectedResponse::fromResponse($response);
+            })
+
+            // Include related data
+            ->when(!empty($include), function(Builder $request) use($include) {
+                $request->include($include);
             })
 
             // Paginate
@@ -142,6 +154,7 @@ abstract class RedmineResource extends ArrayDto implements
      * Finds resource that matches given id
      *
      * @param string|int $id Redmine resource id
+     * @param string[] $include [optional] List of associated data to include
      * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
      *
      * @return static|null
@@ -150,10 +163,10 @@ abstract class RedmineResource extends ArrayDto implements
      * @throws JsonException
      * @throws Throwable
      */
-    public static function find($id, $connection = null)
+    public static function find($id, array $include = [], $connection = null)
     {
         try {
-            return static::findOrFail($id, $connection);
+            return static::findOrFail($id, $include, $connection);
         } catch (NotFound $e) {
             // We can safely ignore this here and just return null
             return null;
@@ -164,6 +177,7 @@ abstract class RedmineResource extends ArrayDto implements
      * Finds resource that matches given id or fails
      *
      * @param string|int $id Redmine resource id
+     * @param string[] $include [optional] List of associated data to include
      * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
      *
      * @return static
@@ -173,7 +187,7 @@ abstract class RedmineResource extends ArrayDto implements
      * @throws JsonException
      * @throws Throwable
      */
-    public static function findOrFail($id, $connection = null)
+    public static function findOrFail($id, array $include = [], $connection = null)
     {
         $resource = static::make([], $connection);
         $name = $resource->resourceNameSingular();
@@ -188,6 +202,11 @@ abstract class RedmineResource extends ArrayDto implements
                 }
 
                 throw UnexpectedResponse::fromResponse($response);
+            })
+
+            // Include related data
+            ->when(!empty($include), function(Builder $request) use($include) {
+                $request->include($include);
             })
 
             // Fetch the resource
