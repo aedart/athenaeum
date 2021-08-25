@@ -1,6 +1,6 @@
 # Athenaeum Pagination
 
-TOOD....
+Pagination utilities.
 
 ## Documentation
 
