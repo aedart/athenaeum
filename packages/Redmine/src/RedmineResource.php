@@ -6,7 +6,9 @@ use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
 use Aedart\Contracts\Redmine\ConnectionAware;
+use Aedart\Contracts\Redmine\PaginatedResults as PaginatedResultsInterface;
 use Aedart\Dto\ArrayDto;
+use Aedart\Redmine\Pagination\PaginatedResults;
 use Aedart\Redmine\Connections\Connection;
 use Aedart\Redmine\Exceptions\NotFound;
 use Aedart\Redmine\Exceptions\RedmineException;
@@ -97,11 +99,21 @@ abstract class RedmineResource extends ArrayDto implements
         return Str::singular($this->resourceName());
     }
 
-    // TODO: ...
-    static public function list(int $limit = 10, int $offset = 0, $connection = null)
+    /**
+     * Fetch list of resources
+     *
+     * @param int $limit [optional]
+     * @param int $offset [optional]
+     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
+     *
+     * @return PaginatedResultsInterface<static>
+     *
+     * @throws JsonException
+     * @throws Throwable
+     */
+    static public function list(int $limit = 10, int $offset = 0, $connection = null): PaginatedResultsInterface
     {
         $resource = static::make([], $connection);
-        $name = $resource->resourceName();
 
         $response = $resource
             ->client()
@@ -122,10 +134,8 @@ abstract class RedmineResource extends ArrayDto implements
             // Perform request...
             ->get($resource->endpoint());
 
-        // Extract and populate resource
-        $payload =  $resource->decode($response, $name);
-
-        // TODO: Paginated Results
+        // Return paginated results
+        return PaginatedResults::fromResponse($response, $resource);
     }
 
     /**
@@ -353,11 +363,26 @@ abstract class RedmineResource extends ArrayDto implements
             return $payload;
         }
 
-        if (!isset($payload[$extract])) {
-            throw new RedmineException(sprintf('Unable to extract "%s" from response payload. Attribute does not exist', $extract));
+        return $this->extractFromPayload($extract, $payload);
+    }
+
+    /**
+     * Extract a key's value from given payload
+     *
+     * @param string $key
+     * @param array $payload Decoded response payload
+     *
+     * @return mixed
+     *
+     * @throws RedmineException When unable to extract from payload, e.g. key does not exist
+     */
+    public function extractFromPayload(string $key, array $payload)
+    {
+        if (!isset($payload[$key])) {
+            throw new RedmineException(sprintf('Unable to extract "%s" from response payload. Attribute does not exist', $key));
         }
 
-        return $payload[$extract];
+        return $payload[$key];
     }
 
     /**
