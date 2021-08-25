@@ -2,6 +2,8 @@
 
 namespace Aedart\Redmine;
 
+use Aedart\Redmine\Partials\ListOfReferences;
+use Aedart\Redmine\Partials\Reference;
 use Carbon\Carbon;
 
 /**
@@ -16,9 +18,16 @@ use Carbon\Carbon;
  * @property string $homepage
  * @property int $status
  * @property bool $is_public
- * @property bool $inherit_members TODO: ??? where does this come from!
+ * @property Reference|null $parent
+ * @property Reference|null $default_version
+ * @property Reference|null $default_assignee
  * @property Carbon $created_om
  * @property Carbon $updated_on
+ *
+ * @property ListOfReferences<Reference>|null $trackers
+ * @property ListOfReferences<Reference>|null $issue_categories
+ * @property ListOfReferences<Reference>|null $enabled_modules
+ * @property ListOfReferences<Reference>|null $time_entry_activities
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
@@ -33,12 +42,17 @@ class Project extends RedmineResource
         'homepage' => 'string',
         'status' => 'int',
         'is_public' => 'bool',
-        'inherit_members' => 'bool', // TODO: Where does this come from????
-        // TODO: default_version
-        // TODO: default_assignee
-        // TODO: parent
+        'parent' => Reference::class,
+        'default_version' => Reference::class,
+        'default_assignee' => Reference::class,
         'created_on' => 'date',
-        'updated_on' => 'date'
+        'updated_on' => 'date',
+
+        // Related (can be included)
+        'trackers' => ListOfReferences::class,
+        'issue_categories' => ListOfReferences::class,
+        'enabled_modules' => ListOfReferences::class,
+        'time_entry_activities' => ListOfReferences::class,
     ];
 
     /**
