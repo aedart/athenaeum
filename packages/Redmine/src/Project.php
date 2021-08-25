@@ -48,6 +48,15 @@ class Project extends RedmineResource
         'created_on' => 'date',
         'updated_on' => 'date',
 
+        // Only when creating or updating
+        'parent_id' => 'int',
+        'inherit_members' => 'bool',
+        'default_assigned_to_id' => 'int',
+        'default_version_id' => 'int',
+        'tracker_ids' => 'array',
+        'enabled_module_names' => 'array',
+        'issue_custom_field_ids' => 'array',
+
         // Related (can be included)
         'trackers' => ListOfReferences::class,
         'issue_categories' => ListOfReferences::class,
