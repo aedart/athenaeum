@@ -53,7 +53,7 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
     public static function fromResponse(ResponseInterface $response, $resource): PaginatedResultsInterface
     {
         // Decode entire payload
-        $payload = $resource->decode($response);
+        $payload = $resource->decodeMultiple($response);
 
         // Extract list (found results)
         $results = Collection::fromResponsePayload($payload, $resource);

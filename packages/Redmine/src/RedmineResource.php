@@ -214,7 +214,6 @@ abstract class RedmineResource extends ArrayDto implements
     public static function findOrFail($id, array $include = [], $connection = null)
     {
         $resource = static::make([], $connection);
-        $name = $resource->resourceNameSingular();
 
         $response = $resource
             ->request()
@@ -228,9 +227,9 @@ abstract class RedmineResource extends ArrayDto implements
             ->get($resource->endpoint($id));
 
         // Extract and populate resource
-        $payload = $resource->decode($response, $name);
-
-        return $resource->fill($payload);
+        return $resource->fill(
+            $resource->decodeSingle($response)
+        );
     }
 
     /**
@@ -398,6 +397,34 @@ abstract class RedmineResource extends ArrayDto implements
         }
 
         return $this->resourceName() . $parts . '.json';
+    }
+
+    /**
+     * Decode a single resource from given response
+     *
+     * @param ResponseInterface $response
+     *
+     * @return array Response payload
+     *
+     * @throws JsonException
+     */
+    public function decodeSingle(ResponseInterface $response): array
+    {
+        return $this->decode($response, $this->resourceNameSingular());
+    }
+
+    /**
+     * Decode multiple resource from given response
+     *
+     * @param ResponseInterface $response
+     *
+     * @return array Response payload, containing multiple resources
+     *
+     * @throws JsonException
+     */
+    public function decodeMultiple(ResponseInterface $response): array
+    {
+        return $this->decode($response, $this->resourceName());
     }
 
     /**
@@ -575,7 +602,6 @@ abstract class RedmineResource extends ArrayDto implements
      */
     protected function performCreate(): bool
     {
-        $name = $this->resourceNameSingular();
         $payload = $this->toArray();
 
         $response = $this
@@ -584,7 +610,7 @@ abstract class RedmineResource extends ArrayDto implements
 
         // Extract and (re)populate resource
         $this->fill(
-            $this->decode($response, $name)
+            $this->decodeSingle($response)
         );
 
         return true;
@@ -603,7 +629,6 @@ abstract class RedmineResource extends ArrayDto implements
     protected function performUpdate(): bool
     {
         $id = $this->id();
-        $name = $this->resourceNameSingular();
         $payload = $this->toArray();
 
         $response = $this
@@ -612,7 +637,7 @@ abstract class RedmineResource extends ArrayDto implements
 
         // Extract and (re)populate resource
         $this->fill(
-            $this->decode($response, $name)
+            $this->decodeSingle($response)
         );
 
         return true;
