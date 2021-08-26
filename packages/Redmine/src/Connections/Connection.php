@@ -93,7 +93,7 @@ class Connection implements ConnectionInterface
         } catch (ProfileNotFoundException $e) {
             throw new InvalidConnection(sprintf(
                 'Unable to resolve Redmine connection "%s". Http Client profile "%s" does not exist',
-                $this->profile,
+                $this->getProfile(),
                 $httpProfile
             ), $e->getCode(), $e);
         }
@@ -137,7 +137,7 @@ class Connection implements ConnectionInterface
      */
     protected function option(string $key, $default = null)
     {
-        $profile = $this->profile;
+        $profile = $this->getProfile();
         $config = $this->getConfig();
 
         $prefix = "redmine.connections.{$profile}";
