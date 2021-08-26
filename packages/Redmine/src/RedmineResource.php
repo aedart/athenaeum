@@ -562,7 +562,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Forward calls to the Http Client
+     * Forward calls to the Http Client's request builder
      *
      * @param string $name method name
      * @param mixed $arguments
@@ -571,11 +571,11 @@ abstract class RedmineResource extends ArrayDto implements
      */
     public function __call(string $name, $arguments)
     {
-        return $this->forwardCallTo($this->client(), $name, $arguments);
+        return $this->forwardCallTo($this->request(), $name, $arguments);
     }
 
     /**
-     * Forward static calls to the Http Client
+     * Forward static calls to the Http Client's request builder
      *
      * @param string $name method name
      * @param mixed $arguments
