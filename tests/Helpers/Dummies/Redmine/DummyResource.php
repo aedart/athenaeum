@@ -27,6 +27,6 @@ class DummyResource extends RedmineResource
      */
     public function resourceName(): string
     {
-        return 'dummy';
+        return 'dummies';
     }
 }
