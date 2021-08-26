@@ -9,6 +9,9 @@ use Aedart\Http\Clients\Traits\HttpClientsManagerTrait;
 use Aedart\Http\Clients\Traits\HttpClientTrait;
 use Aedart\Redmine\Exceptions\InvalidConnection;
 use Aedart\Support\Helpers\Config\ConfigTrait;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Redmine API Connection
@@ -97,6 +100,18 @@ class Connection implements ConnectionInterface
                 $httpProfile
             ), $e->getCode(), $e);
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function mock(ResponseInterface $response): ConnectionInterface
+    {
+        $handler = HandlerStack::create(new MockHandler([ $response ]));
+
+        $this->client()->withOption('handler', $handler);
+
+        return $this;
     }
 
     /*****************************************************************

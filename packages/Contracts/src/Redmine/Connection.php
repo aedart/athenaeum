@@ -5,6 +5,7 @@ namespace Aedart\Contracts\Redmine;
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\HttpClientAware;
 use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Redmine API Connection
@@ -40,4 +41,15 @@ interface Connection extends HttpClientAware
      * @return string
      */
     public function getProfile(): string;
+
+    /**
+     * Mock (fake) the next response
+     *
+     * Method is intended to for testing purposes only
+     *
+     * @param ResponseInterface $response
+     *
+     * @return self
+     */
+    public function mock(ResponseInterface $response): self;
 }
