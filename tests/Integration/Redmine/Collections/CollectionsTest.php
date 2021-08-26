@@ -17,52 +17,6 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  */
 class CollectionsTest extends RedmineTestCase
 {
-    /*****************************************************************
-     * Helpers
-     ****************************************************************/
-
-    /**
-     * Makes a new dummy resource payload
-     *
-     * @param array $data [optional]
-     *
-     * @return array
-     */
-    public function makeDummyPayload(array $data = []): array
-    {
-        $faker = $this->getFaker();
-
-        return array_merge([
-            'id' => $faker->unique()->randomNumber(4, true),
-            'name' => $faker->name
-        ], $data);
-    }
-
-    /**
-     * Returns a list of dummies...
-     *
-     * @param int $amount [optional]
-     *
-     * @return array
-     */
-    public function makeDummyList(int $amount = 3): array
-    {
-        $name = (new DummyResource())->resourceName();
-
-        $list = [];
-        while ($amount--) {
-            $list[] = $this->makeDummyPayload();
-        }
-
-        return [
-            $name => $list
-        ];
-    }
-
-    /*****************************************************************
-     * Actual Tests
-     ****************************************************************/
-
     /**
      * @test
      *
