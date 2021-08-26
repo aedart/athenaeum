@@ -4,6 +4,7 @@ namespace Aedart\Tests\TestCases\Redmine;
 
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
+use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Redmine\Providers\RedmineServiceProvider;
 use Aedart\Support\Helpers\Config\ConfigTrait;
@@ -116,6 +117,21 @@ abstract class RedmineTestCase extends LaravelTestCase
     }
 
     /**
+     * Makes a new Dummy Resource instance
+     *
+     * @param array $data [optional]
+     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
+     *
+     * @return DummyResource
+     *
+     * @throws \Throwable
+     */
+    public function makeDummyResource(array $data = [], $connection = null): DummyResource
+    {
+        return DummyResource::make($data, $connection);
+    }
+
+    /**
      * Makes a new dummy resource payload
      *
      * @param array $data [optional]
@@ -141,7 +157,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      */
     public function makeDummyList(int $amount = 3): array
     {
-        $name = (new DummyResource())->resourceName();
+        $name = $this->makeDummyResource()->resourceName();
 
         $list = [];
         while ($amount--) {
@@ -151,5 +167,30 @@ abstract class RedmineTestCase extends LaravelTestCase
         return [
             $name => $list
         ];
+    }
+
+    /**
+     * Returns a "paginated" results payload from redmine
+     *
+     * @param int $amount [optional] Amount of dummies to generate for response
+     * @param int $total [optional] Total results to state available in response
+     * @param int $limit [optional] Limit to state in response
+     * @param int $offset [optional] Offset to state in response
+     *
+     * @return array
+     */
+    public function makePaginatedDummyPayload(
+        int $amount = 3,
+        int $total = 50,
+        int $limit = 10,
+        int $offset = 0
+    ): array {
+        $payload = $this->makeDummyList($amount);
+
+        $payload['total_count'] = $total;
+        $payload['limit'] = $limit;
+        $payload['offset'] = $offset;
+
+        return $payload;
     }
 }
