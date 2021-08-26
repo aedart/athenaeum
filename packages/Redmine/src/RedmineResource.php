@@ -11,6 +11,7 @@ use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
 use Aedart\Contracts\Redmine\PaginatedResults as PaginatedResultsInterface;
 use Aedart\Dto\ArrayDto;
 use Aedart\Redmine\Connections\Connection;
+use Aedart\Redmine\Exceptions\Conflict;
 use Aedart\Redmine\Exceptions\NotFound;
 use Aedart\Redmine\Exceptions\RedmineException;
 use Aedart\Redmine\Exceptions\UnexpectedResponse;
@@ -503,7 +504,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Set the general failed expecation handler
+     * Set the general failed expectation handler
      *
      * @param  callable  $handler
      *
@@ -636,6 +637,10 @@ abstract class RedmineResource extends ArrayDto implements
 
         if ($code === StatusCodes::UNPROCESSABLE_ENTITY) {
             throw UnprocessableEntity::from($response, $request);
+        }
+
+        if ($code === StatusCodes::CONFLICT) {
+            throw Conflict::from($response, $request);
         }
 
         // Otherwise,
