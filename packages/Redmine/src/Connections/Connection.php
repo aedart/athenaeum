@@ -86,12 +86,16 @@ class Connection implements ConnectionInterface
      */
     public function getDefaultHttpClient(): ?Client
     {
-        try {
-            $profile = $this->option('http_client');
+        $httpProfile = $this->option('http_client');
 
-            return $this->getHttpClientsManager()->profile($profile, $this->httpClientOptions());
+        try {
+            return $this->getHttpClientsManager()->profile($httpProfile, $this->httpClientOptions());
         } catch (ProfileNotFoundException $e) {
-            throw new InvalidConnection(sprintf('Unable to resolve Redmine connection "%s"', $this->profile), $e->getCode(), $e);
+            throw new InvalidConnection(sprintf(
+                'Unable to resolve Redmine connection "%s". Http Client profile "%s" does not exist',
+                $this->profile,
+                $httpProfile
+            ), $e->getCode(), $e);
         }
     }
 
@@ -134,6 +138,13 @@ class Connection implements ConnectionInterface
     protected function option(string $key, $default = null)
     {
         $profile = $this->profile;
-        return $this->getConfig()->get("redmine.connections.{$profile}.{$key}", $default);
+        $config = $this->getConfig();
+
+        $prefix = "redmine.connections.{$profile}";
+        if (!$config->has($prefix)) {
+            throw new InvalidConnection(sprintf('Redmine connection "%s" does not exist', $profile));
+        }
+
+        return $config->get("{$prefix}.{$key}", $default);
     }
 }
