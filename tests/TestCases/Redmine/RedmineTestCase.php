@@ -5,7 +5,9 @@ namespace Aedart\Tests\TestCases\Redmine;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
+use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
+use Aedart\Redmine\Connections\Connection;
 use Aedart\Redmine\Providers\RedmineServiceProvider;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
@@ -114,6 +116,34 @@ abstract class RedmineTestCase extends LaravelTestCase
         ], $headers);
 
         return Http::response($encoded, $status, $headers)->wait();
+    }
+
+    /**
+     * Mock the next response for a Redmine Resource
+     *
+     * Method applies a mocked response handling onto the resource
+     * connection, which then MUST be passed on to the actual Redmine
+     * Resource.
+     *
+     * @param array $body [optional] Body to be json encoded
+     * @param int $status [optional] Http Status code
+     * @param array $headers [optional] Evt. headers
+     * @param string|null $profile [optional] Connection profile name
+     *
+     * @return ConnectionInterface
+     * @throws ConnectionException
+     * @throws \JsonException
+     */
+    public function mockResponseConnection(
+        array $body = [],
+        int $status = StatusCodes::OK,
+        array $headers = [],
+        ?string $profile = null
+    ): ConnectionInterface
+    {
+        $response = $this->mockJsonResponse($body, $status, $headers);
+
+        return Connection::resolve($profile)->mock($response);
     }
 
     /**
