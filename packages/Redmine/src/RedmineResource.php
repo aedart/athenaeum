@@ -161,17 +161,12 @@ abstract class RedmineResource extends ArrayDto implements
         array $include = [],
         $connection = null
     ): PaginatedResultsInterface {
-        $resource = static::make([], $connection);
-
-        $request = $resource
-            ->request()
-
-            // Include related data
-            ->when(!empty($include), function (Builder $request) use ($include) {
-                $request->include($include);
-            });
-
-        return $resource->paginate($request, $limit, $offset);
+        return static::fetchMultiple(function (Builder $request) use ($include) {
+            return $request
+                ->when(!empty($include), function (Builder $request) use ($include) {
+                    $request->include($include);
+                });
+        }, $limit, $offset, $connection);
     }
 
     /**
@@ -213,22 +208,85 @@ abstract class RedmineResource extends ArrayDto implements
      */
     public static function findOrFail($id, array $include = [], $connection = null)
     {
+        return static::fetch($id, function (Builder $request) use ($include) {
+            return $request
+                ->when(!empty($include), function (Builder $request) use ($include) {
+                    $request->include($include);
+                });
+        }, $connection);
+    }
+
+    /**
+     * Fetch a single resource, with given filters or conditions set
+     *
+     * Example:
+     * <pre>
+     *      $project = Project::fetch(42, function($request) {
+     *          return $request->include(['trackers']);
+     *      });
+     * </pre>
+     *
+     * @param string|int $id Redmine resource id
+     * @param callable $filters Callback that applies filters on the given Request {@see Builder}.
+     *                          The callback MUST return a valid {@see Builder}
+     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
+     *
+     * @return RedmineResource
+     *
+     * @throws RedmineException If filters callback does not return a valid Request Builder
+     * @throws ErrorResponseException
+     * @throws JsonException
+     * @throws Throwable
+     */
+    public static function fetch($id, callable $filters, $connection = null)
+    {
         $resource = static::make([], $connection);
 
         $response = $resource
-            ->request()
-
-            // Include related data
-            ->when(!empty($include), function (Builder $request) use ($include) {
-                $request->include($include);
-            })
-
-            // Fetch the resource
+            ->applyFiltersCallback($filters)
             ->get($resource->endpoint($id));
 
-        // Extract and populate resource
         return $resource->fill(
             $resource->decodeSingle($response)
+        );
+    }
+
+    /**
+     * Fetch multiple resources, with given filters or conditions set.
+     * Method will automatically perform paginated request.
+     *
+     * Example:
+     * <pre>
+     *      $projects = Project::fetchMultiple(function($request) {
+     *          return $request->include(['trackers']);
+     *      }, 5, 10);
+     * </pre>
+     *
+     * @param callable $filters Callback that applies filters on the given Request {@see Builder}.
+     *                          The callback MUST return a valid {@see Builder}
+     * @param int $limit [optional]
+     * @param int $offset [optional]
+     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
+     *
+     * @return PaginatedResultsInterface<static>|static[]
+     *
+     * @throws RedmineException If filters callback does not return a valid Request Builder
+     * @throws ErrorResponseException
+     * @throws JsonException
+     * @throws Throwable
+     */
+    public static function fetchMultiple(
+        callable $filters,
+        int $limit = 10,
+        int $offset = 0,
+        $connection = null
+    ): PaginatedResultsInterface {
+        $resource = static::make([], $connection);
+
+        return $resource->paginate(
+            $resource->applyFiltersCallback($filters),
+            $limit,
+            $offset
         );
     }
 
@@ -333,6 +391,34 @@ abstract class RedmineResource extends ArrayDto implements
             ));
 
         return true;
+    }
+
+    /**
+     * Applies a filter or conditions callback
+     *
+     * @param callable $filters Callback that applies filters on the given Request {@see Builder}.
+     *                          The callback MUST return a valid {@see Builder}
+     * @param Builder|null $request [optional] Defaults to a new Request Builder, if none given
+     *
+     * @return Builder
+     *
+     * @throws RedmineException If filters callback does not return a valid Request Builder
+     */
+    public function applyFiltersCallback(callable $filters, ?Builder $request = null): Builder
+    {
+        // Resolve the request builder
+        $request = $request ?? $this->request();
+
+        // Apply the filters and conditions callback
+        $modified = $filters($request);
+
+        // Assert that a request builder was returned
+        if (!isset($modified) || !($modified instanceof Builder)) {
+            throw new RedmineException('Conditions callback MUST return a valid Request Builder instance');
+        }
+
+        // Finally, return the modified builder
+        return $modified;
     }
 
     /**
