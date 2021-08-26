@@ -16,6 +16,8 @@ use JsonSerializable;
  *
  * @see \Aedart\Redmine\Partials\Reference
  *
+ * @template T
+ *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine\Partials
  */
@@ -30,14 +32,14 @@ class ListOfReferences implements
     /**
      * Actual list of references
      *
-     * @var Reference[]
+     * @var array<T|Reference>
      */
     protected array $references = [];
 
     /**
      * ListOfReferences
      *
-     * @param Reference[] $references
+     * @param array<T|Reference> $references
      */
     public function __construct(array $references = [])
     {

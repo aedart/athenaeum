@@ -14,6 +14,8 @@ use Stringable;
 /**
  * Paginated Results
  *
+ * @template T
+ *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Contracts\Redmine
  */
@@ -30,7 +32,7 @@ interface PaginatedResults extends Paginator,
      * @param ResponseInterface $response
      * @param \Aedart\Redmine\RedmineResource $resource
      *
-     * @return static
+     * @return static<T>
      *
      * @throws \JsonException
      * @throws \Throwable
