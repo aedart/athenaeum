@@ -104,6 +104,10 @@ class CollectionsTest extends RedmineTestCase
      */
     public function canFilterResourcesFromCollection()
     {
+        // This test ensures that the Redmine Resource (DTO)'s
+        // properties are accessible by Laravel's collection and
+        // thus allows filtering.
+
         $name = (new DummyResource())->resourceName();
         $payload = [
             $name => [
