@@ -42,7 +42,15 @@ return [
              | the appropriate Http Header (X-Redmine-API-Key)
             */
             'authentication' => env('REDMINE_TOKEN')
-        ]
+        ],
 
+        'my_custom_connection' => [
+            'http_client' => 'redmine',
+            'authentication' => env('REDMINE_TOKEN')
+        ],
+
+        'connection_with_invalid_http_client' => [
+            'http_client' => 'client_that_does_not_exist',
+        ]
     ]
 ];
