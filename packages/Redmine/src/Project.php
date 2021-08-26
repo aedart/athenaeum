@@ -24,10 +24,18 @@ use Carbon\Carbon;
  * @property Carbon $created_om
  * @property Carbon $updated_on
  *
- * @property ListOfReferences<Reference>|null $trackers
- * @property ListOfReferences<Reference>|null $issue_categories
- * @property ListOfReferences<Reference>|null $enabled_modules
- * @property ListOfReferences<Reference>|null $time_entry_activities
+ * @property int|null $parent_id Property only available or expected when creating or updating resource.
+ * @property bool|null $inherit_members Property only available or expected when creating or updating resource.
+ * @property int|null $default_assigned_to_id Property only available or expected when creating or updating resource.
+ * @property int|null $default_version_id Property only available or expected when creating or updating resource.
+ * @property int[]|null $tracker_ids Property only available or expected when creating or updating resource.
+ * @property string[]|null $enabled_module_names Property only available or expected when creating or updating resource.
+ * @property int[]|null $issue_custom_field_ids Property only available or expected when creating or updating resource.
+ *
+ * @property ListOfReferences<Reference>|Reference[]|null $trackers Related data that can be requested included.
+ * @property ListOfReferences<Reference>|Reference[]|null $issue_categories Related data that can be requested included.
+ * @property ListOfReferences<Reference>|Reference[]|null $enabled_modules Related data that can be requested included.
+ * @property ListOfReferences<Reference>|Reference[]|null $time_entry_activities Related data that can be requested included.
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine

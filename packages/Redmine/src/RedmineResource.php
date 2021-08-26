@@ -150,7 +150,7 @@ abstract class RedmineResource extends ArrayDto implements
      * @param string[] $include [optional] List of associated data to include
      * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
      *
-     * @return PaginatedResultsInterface<static>
+     * @return PaginatedResultsInterface<static>|static[]
      *
      * @throws JsonException
      * @throws Throwable
@@ -240,7 +240,7 @@ abstract class RedmineResource extends ArrayDto implements
      * @param int $limit [optional]
      * @param int $offset [optional]
      *
-     * @return PaginatedResultsInterface<static>
+     * @return PaginatedResultsInterface<static>|static[]
      *
      * @throws JsonException
      * @throws Throwable
