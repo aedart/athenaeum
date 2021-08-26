@@ -2,7 +2,9 @@
 
 namespace Aedart\Contracts\Redmine\Exceptions;
 
+use Aedart\Contracts\Http\Messages\HttpRequestAware;
 use Aedart\Contracts\Http\Messages\HttpResponseAware;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
@@ -16,16 +18,23 @@ use Throwable;
  * @package Aedart\Contracts\Redmine\Exceptions
  */
 interface ErrorResponseException extends RedmineException,
-    HttpResponseAware
+    HttpResponseAware,
+    HttpRequestAware
 {
     /**
      * Create a new error response exception from given response
      *
      * @param ResponseInterface $response Received response from the Redmine Api
+     * @param RequestInterface $request The request that caused the error response
      * @param string|null $message [optional] Evt. custom error message
      * @param Throwable|null $previous [optional] Evt. previous exception
      *
      * @return ErrorResponseException
      */
-    public static function fromResponse(ResponseInterface $response, ?string $message = null, ?Throwable $previous = null): ErrorResponseException;
+    public static function from(
+        ResponseInterface $response,
+        RequestInterface $request,
+        ?string $message = null,
+        ?Throwable $previous = null
+    ): ErrorResponseException;
 }

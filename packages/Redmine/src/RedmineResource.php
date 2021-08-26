@@ -238,7 +238,7 @@ abstract class RedmineResource extends ArrayDto implements
      * @param  Builder  $request
      * @param int $limit [optional]
      * @param int $offset [optional]
-     * 
+     *
      * @return PaginatedResultsInterface<static>
      *
      * @throws JsonException
@@ -507,7 +507,7 @@ abstract class RedmineResource extends ArrayDto implements
      *
      * @param  callable  $handler
      *
-     * @return $this
+     * @return self
      */
     public function useFailedExpectationHandler(callable $handler): self
     {
@@ -631,14 +631,14 @@ abstract class RedmineResource extends ArrayDto implements
         $code = $status->code();
 
         if ($code === StatusCodes::NOT_FOUND) {
-            throw NotFound::fromResponse($response, sprintf('%s was not found', (string) $request->getUri()));
+            throw NotFound::from($response, $request, sprintf('%s was not found', (string) $request->getUri()));
         }
 
         if ($code === StatusCodes::UNPROCESSABLE_ENTITY) {
-            throw UnprocessableEntity::fromResponse($response);
+            throw UnprocessableEntity::from($response, $request);
         }
 
         // Otherwise,
-        throw UnexpectedResponse::fromResponse($response);
+        throw UnexpectedResponse::from($response, $request);
     }
 }

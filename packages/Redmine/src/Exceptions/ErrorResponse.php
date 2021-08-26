@@ -3,7 +3,9 @@
 namespace Aedart\Redmine\Exceptions;
 
 use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
+use Aedart\Http\Messages\Traits\HttpRequestTrait;
 use Aedart\Http\Messages\Traits\HttpResponseTrait;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
@@ -16,27 +18,48 @@ use Throwable;
 class ErrorResponse extends RedmineException implements ErrorResponseException
 {
     use HttpResponseTrait;
+    use HttpRequestTrait;
 
     /**
-     * @inheritDoc
+     * ErrorResponse
+     *
+     * @param ResponseInterface $response Response from Redmine
+     * @param RequestInterface $request The request that caused the error response
+     * @param string $message [optional]
+     * @param int $code [optional]
+     * @param Throwable|null $previous [optional]
      */
-    public function __construct(ResponseInterface $response, $message = "", $code = 0, Throwable $previous = null)
-    {
+    public function __construct(
+        ResponseInterface $response,
+        RequestInterface $request,
+        $message = "",
+        $code = 0,
+        Throwable $previous = null
+    ) {
         parent::__construct($message, $code, $previous);
 
-        $this->setHttpResponse($response);
+        $this
+            ->setHttpRequest($request)
+            ->setHttpResponse($response);
     }
 
     /**
      * @inheritDoc
      */
-    public static function fromResponse(
+    public static function from(
         ResponseInterface $response,
+        RequestInterface $request,
         ?string $message = null,
         ?Throwable $previous = null
     ): ErrorResponseException {
         $message = $message ?? 'Received unexpected response from Redmine: ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase();
 
-        return new static($response, $message, 0, $previous);
+        return new static(
+            $response,
+            $request,
+            $message,
+            0,
+            $previous
+        );
     }
 }
