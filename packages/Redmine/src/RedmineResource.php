@@ -227,7 +227,7 @@ abstract class RedmineResource extends ArrayDto implements
      * </pre>
      *
      * @param string|int $id Redmine resource id
-     * @param callable $filters Callback that applies filters on the given Request {@see Builder}.
+     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
      *                          The callback MUST return a valid {@see Builder}
      * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
      *
@@ -238,7 +238,7 @@ abstract class RedmineResource extends ArrayDto implements
      * @throws JsonException
      * @throws Throwable
      */
-    public static function fetch($id, callable $filters, $connection = null)
+    public static function fetch($id, ?callable $filters = null, $connection = null)
     {
         $resource = static::make([], $connection);
 
@@ -262,8 +262,8 @@ abstract class RedmineResource extends ArrayDto implements
      *      }, 5, 10);
      * </pre>
      *
-     * @param callable $filters Callback that applies filters on the given Request {@see Builder}.
-     *                          The callback MUST return a valid {@see Builder}
+     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
+     *                               The callback MUST return a valid {@see Builder}
      * @param int $limit [optional]
      * @param int $offset [optional]
      * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
@@ -276,7 +276,7 @@ abstract class RedmineResource extends ArrayDto implements
      * @throws Throwable
      */
     public static function fetchMultiple(
-        callable $filters,
+        ?callable $filters = null,
         int $limit = 10,
         int $offset = 0,
         $connection = null
@@ -396,7 +396,7 @@ abstract class RedmineResource extends ArrayDto implements
     /**
      * Applies a filter or conditions callback
      *
-     * @param callable $filters Callback that applies filters on the given Request {@see Builder}.
+     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
      *                          The callback MUST return a valid {@see Builder}
      * @param Builder|null $request [optional] Defaults to a new Request Builder, if none given
      *
@@ -404,13 +404,17 @@ abstract class RedmineResource extends ArrayDto implements
      *
      * @throws RedmineException If filters callback does not return a valid Request Builder
      */
-    public function applyFiltersCallback(callable $filters, ?Builder $request = null): Builder
+    public function applyFiltersCallback(?callable $filters = null, ?Builder $request = null): Builder
     {
         // Resolve the request builder
         $request = $request ?? $this->request();
 
-        // Apply the filters and conditions callback
-        $modified = $filters($request);
+        // Apply the filters and conditions callback, if any given
+        if (is_callable($filters)) {
+            $modified = $filters($request);
+        } else {
+            $modified = $request;
+        }
 
         // Assert that a request builder was returned
         if (!isset($modified) || !($modified instanceof Builder)) {
