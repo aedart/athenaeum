@@ -692,7 +692,9 @@ abstract class RedmineResource extends ArrayDto implements
      */
     protected function performCreate(): bool
     {
-        $payload = $this->toArray();
+        $payload = [
+            $this->resourceNameSingular() => $this->toArray()
+        ];
 
         $response = $this
             ->request()
@@ -719,7 +721,9 @@ abstract class RedmineResource extends ArrayDto implements
     protected function performUpdate(): bool
     {
         $id = $this->id();
-        $payload = $this->toArray();
+        $payload = [
+            $this->resourceNameSingular() => $this->toArray()
+        ];
 
         $response = $this
             ->request()
