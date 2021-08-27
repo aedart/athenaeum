@@ -106,7 +106,6 @@ abstract class BaseSerializer implements Serializer
 
         // Re-encode as pretty print, if message payload is json
         if ($this->isJson($message)) {
-
             try {
                 $content = Json::encode(Json::decode($content, true), JSON_PRETTY_PRINT);
             } catch (JsonException $exception) {

@@ -3,7 +3,6 @@
 namespace Aedart\Tests\Integration\Redmine;
 
 use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
-use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use Teapot\StatusCode\All as StatusCodes;
 
