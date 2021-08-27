@@ -139,8 +139,7 @@ abstract class RedmineTestCase extends LaravelTestCase
         int $status = StatusCodes::OK,
         array $headers = [],
         ?string $profile = null
-    ): ConnectionInterface
-    {
+    ): ConnectionInterface {
         $response = $this->mockJsonResponse($body, $status, $headers);
 
         return Connection::resolve($profile)->mock($response);
