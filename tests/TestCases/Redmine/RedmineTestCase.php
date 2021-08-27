@@ -147,6 +147,21 @@ abstract class RedmineTestCase extends LaravelTestCase
     }
 
     /**
+     * Mock the next responses for a Redmine Resource
+     *
+     * @param ResponseInterface[] $responses
+     * @param string|null $profile [optional] Connection profile name
+     *
+     * @return ConnectionInterface
+     *
+     * @throws ConnectionException
+     */
+    public function connectWithMultipleMocks(array $responses, ?string $profile = null): ConnectionInterface
+    {
+        return Connection::resolve($profile)->mock($responses);
+    }
+
+    /**
      * Makes a new Dummy Resource instance
      *
      * @param array $data [optional]
