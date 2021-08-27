@@ -131,10 +131,11 @@ abstract class RedmineTestCase extends LaravelTestCase
      * @param string|null $profile [optional] Connection profile name
      *
      * @return ConnectionInterface
+     *
      * @throws ConnectionException
      * @throws \JsonException
      */
-    public function mockResponseConnection(
+    public function connectionWithMock(
         array $body = [],
         int $status = StatusCodes::OK,
         array $headers = [],
@@ -195,6 +196,24 @@ abstract class RedmineTestCase extends LaravelTestCase
 
         return [
             $name => $list
+        ];
+    }
+
+    /**
+     * Makes a new dummy response payload
+     *
+     * @param array $data [optional]
+     *
+     * @return array
+     *
+     * @throws \Throwable
+     */
+    public function makeSingleDummyResponsePayload(array $data = []): array
+    {
+        $name = $this->makeDummyResource()->resourceNameSingular();
+
+        return [
+            $name => $this->makeDummyPayload($data)
         ];
     }
 
