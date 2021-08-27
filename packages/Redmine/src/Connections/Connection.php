@@ -42,9 +42,9 @@ class Connection implements ConnectionInterface
     /**
      * Mocked response, if any was set
      *
-     * @var ResponseInterface|null
+     * @var ResponseInterface[]
      */
-    protected ?ResponseInterface $mockedResponse = null;
+    protected array $mockedResponse = [];
 
     /**
      * Connection
@@ -112,8 +112,12 @@ class Connection implements ConnectionInterface
     /**
      * @inheritDoc
      */
-    public function mock(ResponseInterface $response): ConnectionInterface
+    public function mock($response): ConnectionInterface
     {
+        if (!is_array($response)) {
+            $response = [ $response ];
+        }
+
         $this->mockedResponse = $response;
 
         return $this;
@@ -124,13 +128,13 @@ class Connection implements ConnectionInterface
      */
     public function mustMockNextResponse(): bool
     {
-        return isset($this->mockedResponse);
+        return !empty($this->mockedResponse);
     }
 
     /**
      * @inheritDoc
      */
-    public function getMockedResponse(): ?ResponseInterface
+    public function getMockedResponse(): array
     {
         return $this->mockedResponse;
     }
@@ -155,7 +159,7 @@ class Connection implements ConnectionInterface
 
         // Handler Stack / Mocked response
         if ($this->mustMockNextResponse()) {
-            $output['handler'] = HandlerStack::create(new MockHandler([ $this->getMockedResponse() ]));
+            $output['handler'] = HandlerStack::create(new MockHandler($this->getMockedResponse()));
         }
 
         return $output;

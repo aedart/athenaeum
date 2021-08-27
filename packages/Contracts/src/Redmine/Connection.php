@@ -43,15 +43,15 @@ interface Connection extends HttpClientAware
     public function getProfile(): string;
 
     /**
-     * Mock (fake) the next response
+     * Mock (fake) the next response(s)
      *
      * Method is intended to for testing purposes only
      *
-     * @param ResponseInterface $response
+     * @param ResponseInterface|ResponseInterface[] $response
      *
      * @return self
      */
-    public function mock(ResponseInterface $response): self;
+    public function mock($response): self;
 
     /**
      * Determine if next response should be mocked
@@ -61,11 +61,11 @@ interface Connection extends HttpClientAware
     public function mustMockNextResponse(): bool;
 
     /**
-     * Returns a mocked response, if one was previously set
+     * Returns mocked response(s), if any set
      *
      * @see mock()
      *
-     * @return ResponseInterface|null
+     * @return ResponseInterface[] Empty when no mocked responses have been set
      */
-    public function getMockedResponse(): ?ResponseInterface;
+    public function getMockedResponse(): array;
 }
