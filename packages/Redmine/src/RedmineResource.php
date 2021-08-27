@@ -538,12 +538,19 @@ abstract class RedmineResource extends ArrayDto implements
             return [];
         }
 
+        // Decode response, but abort if payload is empty
         $payload = Json::decode($content, true);
+        if (empty($payload)) {
+            return [];
+        }
 
+        // When nothing requested extracted from the payload, just return
+        // the entire decoded content.
         if (!isset($extract)) {
             return $payload;
         }
 
+        // Otherwise, extract whatever key has been requested...
         return $this->extractFromPayload($extract, $payload);
     }
 
