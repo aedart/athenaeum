@@ -106,7 +106,17 @@ abstract class BaseSerializer implements Serializer
 
         // Re-encode as pretty print, if message payload is json
         if ($this->isJson($message)) {
-            $content = Json::encode(Json::decode($content, true), JSON_PRETTY_PRINT);
+
+            try {
+                $content = Json::encode(Json::decode($content, true), JSON_PRETTY_PRINT);
+            } catch (JsonException $exception) {
+                // When unable to re-encode, it could mean a bad response has
+                // been received. The only thing we can do is to set the content
+                // back to it's originally content and allow higher level application
+                // logic to deal with this.
+                $stream->rewind();
+                $content = $stream->getContents();
+            }
         }
 
         // Rewind again, if seekable...
