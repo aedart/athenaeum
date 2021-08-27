@@ -22,6 +22,7 @@ use Aedart\Utils\Json;
 use Aedart\Utils\Str;
 use Illuminate\Support\Traits\ForwardsCalls;
 use JsonException;
+use LogicException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Teapot\StatusCode\All as StatusCodes;
@@ -340,35 +341,56 @@ abstract class RedmineResource extends ArrayDto implements
      * then this method will create it. Otherwise, the existing
      * resource will be updated.
      *
+     * @param bool $reload [optional] Resource is force reloaded from
+     *                     Redmine's API. This is applied ONLY when
+     *                     existing resource is updated. See {@see update()}
+     *                     method for details.
+     *
      * @return bool
      *
      * @throws RedmineException
      * @throws JsonException
      */
-    public function save(): bool
+    public function save(bool $reload = false): bool
     {
         if (!$this->exists()) {
             return $this->performCreate();
         }
 
-        return $this->performUpdate();
+        $wasUpdated = $this->performUpdate();
+
+        // If requested reloaded, then force reload this
+        // resource.
+        if ($wasUpdated && $reload) {
+            return $this->reload();
+        }
+
+        return $wasUpdated;
     }
 
     /**
      * Update this resource
      *
+     * **Caution**: resource's properties are NOT updated automatically from Redmine,
+     * when update request is successfully (Redmine only returns http status 200 Ok).
+     * Set the `$reload` argument to `true`, to ensure that all properties are updated
+     * from source, e.g. to ensure "updated on" date is updated...etc. Or you can
+     * manually invoke the {@see reload()} method.
+     *
      * @param array $data [optional]
+     * @param bool $reload [optional] Resource is force reloaded from
+     *                     Redmine's API.
      *
      * @return bool
      */
-    public function update(array $data = []): bool
+    public function update(array $data = [], bool $reload = false): bool
     {
         // Abort if resource does not yet exist
         if (!$this->exists()) {
             return false;
         }
 
-        return $this->fill($data)->save();
+        return $this->fill($data)->save($reload);
     }
 
     /**
@@ -389,6 +411,30 @@ abstract class RedmineResource extends ArrayDto implements
             ->delete($this->endpoint(
                 $this->id()
             ));
+
+        return true;
+    }
+
+    /**
+     * Reload this resource from Redmine's API
+     *
+     * @return bool
+     *
+     * @throws JsonException
+     */
+    public function reload(): bool
+    {
+        if (!$this->exists()) {
+            return false;
+        }
+
+        $response = $this
+            ->request()
+            ->get($this->endpoint($this->id()));
+
+        $this->fill(
+            $this->decodeSingle($response)
+        );
 
         return true;
     }
