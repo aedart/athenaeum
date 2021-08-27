@@ -532,7 +532,13 @@ abstract class RedmineResource extends ArrayDto implements
      */
     public function decode(ResponseInterface $response, ?string $extract = null): array
     {
-        $payload = Json::decode($response->getBody()->getContents(), true);
+        // Get response body - abort if it's empty
+        $content = $response->getBody()->getContents();
+        if (empty($content)) {
+            return [];
+        }
+
+        $payload = Json::decode($content, true);
 
         if (!isset($extract)) {
             return $payload;
@@ -729,7 +735,10 @@ abstract class RedmineResource extends ArrayDto implements
             ->request()
             ->put($this->endpoint($id), $payload);
 
-        // Extract and (re)populate resource
+        // Extract and (re)populate resource (if possible)
+        // Note: Unlike the "create" method, Redmine does NOT
+        // appear to send back a full resource when it has been
+        // successfully updated.
         $this->fill(
             $this->decodeSingle($response)
         );
