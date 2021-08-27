@@ -40,6 +40,13 @@ class Connection implements ConnectionInterface
     protected static string $authenticationHeader = 'X-Redmine-API-Key';
 
     /**
+     * Mocked response, if any was set
+     *
+     * @var ResponseInterface|null
+     */
+    protected ?ResponseInterface $mockedResponse = null;
+
+    /**
      * Connection
      *
      * @param string|null $connection [optional] Profile name. Defaults to a default connection
@@ -107,11 +114,25 @@ class Connection implements ConnectionInterface
      */
     public function mock(ResponseInterface $response): ConnectionInterface
     {
-        $handler = HandlerStack::create(new MockHandler([ $response ]));
-
-        $this->client()->withOption('handler', $handler);
+        $this->mockedResponse = $response;
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function mustMockNextResponse(): bool
+    {
+        return isset($this->mockedResponse);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getMockedResponse(): ?ResponseInterface
+    {
+        return $this->mockedResponse;
     }
 
     /*****************************************************************
@@ -125,11 +146,19 @@ class Connection implements ConnectionInterface
      */
     protected function httpClientOptions(): array
     {
-        return [
+        $output = [
+            // Authentication headers for Redmine
             'headers' => [
                 static::$authenticationHeader => $this->option('authentication')
             ]
         ];
+
+        // Handler Stack / Mocked response
+        if ($this->mustMockNextResponse()) {
+            $output['handler'] = HandlerStack::create(new MockHandler([ $this->getMockedResponse() ]));
+        }
+
+        return $output;
     }
 
     /**

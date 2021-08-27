@@ -6,7 +6,9 @@ use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
 use Aedart\Redmine\Connections\Connection;
 use Aedart\Redmine\Exceptions\InvalidConnection;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Aedart\Utils\Json;
 
 /**
  * ConnectionTest
@@ -67,6 +69,35 @@ class ConnectionTest extends RedmineTestCase
         $client = Connection::resolve()->client();
 
         $this->assertInstanceOf(Client::class, $client);
+    }
+
+    /**
+     * @test
+     *
+     * @throws ConnectionException
+     * @throws \JsonException
+     */
+    public function canMockResponse()
+    {
+        $data = [
+            'name' => 'Timmy J. Olsen'
+        ];
+
+        $connection = Connection::resolve()->mock(
+            $this->mockJsonResponse($data)
+        );
+
+        $response = $connection
+                ->client()
+                ->get('something');
+
+        $content = Json::decode($response->getBody()->getContents(), true);
+
+        ConsoleDebugger::output($content);
+
+        $this->assertIsArray($content, 'Decoded content is not an array');
+        $this->assertArrayHasKey('name', $content, 'Incorrect content');
+        $this->assertSame($data['name'], $content['name'], 'Incorrect value decoded');
     }
 
     /**

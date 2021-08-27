@@ -52,4 +52,20 @@ interface Connection extends HttpClientAware
      * @return self
      */
     public function mock(ResponseInterface $response): self;
+
+    /**
+     * Determine if next response should be mocked
+     *
+     * @return bool
+     */
+    public function mustMockNextResponse(): bool;
+
+    /**
+     * Returns a mocked response, if one was previously set
+     *
+     * @see mock()
+     *
+     * @return ResponseInterface|null
+     */
+    public function getMockedResponse(): ?ResponseInterface;
 }
