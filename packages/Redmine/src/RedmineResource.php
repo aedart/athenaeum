@@ -347,7 +347,7 @@ abstract class RedmineResource extends ArrayDto implements
      */
     public function save(): bool
     {
-        if ($this->exists()) {
+        if (!$this->exists()) {
             return $this->performCreate();
         }
 
