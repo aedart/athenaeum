@@ -56,7 +56,7 @@ class FetchAndFindTest extends RedmineTestCase
         $this->assertSame($limit, $list->limit(), 'Incorrect limit returned');
         $this->assertSame($offset, $list->offset(), 'Incorrect offset returned');
     }
-    
+
     /**
      * @test
      *
