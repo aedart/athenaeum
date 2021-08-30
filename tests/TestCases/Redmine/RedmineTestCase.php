@@ -123,6 +123,16 @@ abstract class RedmineTestCase extends LaravelTestCase
     }
 
     /**
+     * Returns path to a dummy file (for upload tests)
+     *
+     * @return string
+     */
+    public function dummyFile(): string
+    {
+        return Configuration::dataDir() . '/redmine/test.txt';
+    }
+
+    /**
      * Mock a json response
      *
      * Mock will automatically have it's content-type header set
@@ -251,6 +261,31 @@ abstract class RedmineTestCase extends LaravelTestCase
     public function mockDeletedResourceResponse(): ResponseInterface
     {
         return $this->mockJsonResponse([], StatusCodes::OK);
+    }
+
+    /**
+     * Mock a successful "file uploaded" response
+     *
+     * @param int|null $id [optional]
+     * @param string|null $token [optional]
+     *
+     * @return ResponseInterface
+     *
+     * @throws \JsonException
+     */
+    public function mockUploadedResponse(?int $id = null, ?string $token = null): ResponseInterface
+    {
+        $faker = $this->getFaker();
+
+        $id = $id ?? $faker->randomNumber(4, true);
+        $token = $token ?? $faker->sha256;
+
+        return $this->mockJsonResponse([
+            'upload' => [
+                'id' => $id,
+                'token' => $token
+            ]
+        ], StatusCodes::CREATED);
     }
 
     /**
