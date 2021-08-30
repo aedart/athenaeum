@@ -3,6 +3,8 @@
 namespace Aedart\Tests\Integration\Redmine;
 
 use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
+use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
+use Aedart\Redmine\RedmineResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use Teapot\StatusCode\All as StatusCodes;
 
@@ -52,5 +54,32 @@ class DeleteTest extends RedmineTestCase
 
         $result = $resource->delete();
         $this->assertFalse($result);
+    }
+
+    /**
+     * @test
+     *
+     * @throws UnsupportedOperationException
+     * @throws \JsonException
+     * @throws \Throwable
+     */
+    public function failsIfDoesNotSupportDeleteOperation()
+    {
+        $this->expectException(UnsupportedOperationException::class);
+
+        $resourceClass = new class() extends RedmineResource {
+            protected array $allowed = [
+                'id' => 'string',
+                'name' => 'string'
+            ];
+
+            public function resourceName(): string
+            {
+                return 'some-resources';
+            }
+        };
+
+        $resource = $resourceClass::make([ 'id' => 1234, 'name' => 'Jane' ]);
+        $resource->delete();
     }
 }

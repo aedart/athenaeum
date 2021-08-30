@@ -3,6 +3,8 @@
 namespace Aedart\Tests\Integration\Redmine;
 
 use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
+use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
+use Aedart\Redmine\RedmineResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use Teapot\StatusCode\All as StatusCodes;
 
@@ -73,5 +75,32 @@ class UpdateTest extends RedmineTestCase
 
         $this->assertTrue($result, 'Failed to update resource');
         $this->assertSame($reloadedName, $resource->name);
+    }
+
+    /**
+     * @test
+     *
+     * @throws UnsupportedOperationException
+     * @throws \JsonException
+     * @throws \Throwable
+     */
+    public function failsIfDoesNotSupportUpdateOperation()
+    {
+        $this->expectException(UnsupportedOperationException::class);
+
+        $resourceClass = new class() extends RedmineResource {
+            protected array $allowed = [
+                'id' => 'string',
+                'name' => 'string'
+            ];
+
+            public function resourceName(): string
+            {
+                return 'some-resources';
+            }
+        };
+
+        $resource = $resourceClass::make([ 'id' => 1234, 'name' => 'Brian' ]);
+        $resource->update([ 'name' => 'Brian Jr.' ]);
     }
 }

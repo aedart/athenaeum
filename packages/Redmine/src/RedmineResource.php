@@ -19,6 +19,7 @@ use Aedart\Redmine\Exceptions\NotFound;
 use Aedart\Redmine\Exceptions\RedmineException;
 use Aedart\Redmine\Exceptions\UnexpectedResponse;
 use Aedart\Redmine\Exceptions\UnprocessableEntity;
+use Aedart\Redmine\Exceptions\UnsupportedOperation;
 use Aedart\Redmine\Pagination\PaginatedResults;
 use Aedart\Redmine\Traits\ConnectionTrait;
 use Aedart\Utils\Json;
@@ -264,7 +265,10 @@ abstract class RedmineResource extends ArrayDto implements
      */
     public function delete(): bool
     {
-        // TODO: Throw if API does not support operation
+        // Abort if resource does not support delete operations
+        if (!$this->isDeletable()) {
+            throw new UnsupportedOperation(sprintf('API does not support delete operation for %s resources', $this->resourceNameSingular()));
+        }
 
         // Abort if resource does not have an id - meaning that we are
         // unable to perform a delete request
@@ -579,7 +583,10 @@ abstract class RedmineResource extends ArrayDto implements
      */
     protected function performCreate(): bool
     {
-        // TODO: Throw if API does not support operation
+        // Abort if resource does not support create operations
+        if (!$this->isCreatable()) {
+            throw new UnsupportedOperation(sprintf('API does not support create operation for %s resources', $this->resourceNameSingular()));
+        }
 
         $payload = [
             $this->resourceNameSingular() => $this->toArray()
@@ -609,7 +616,10 @@ abstract class RedmineResource extends ArrayDto implements
      */
     protected function performUpdate(): bool
     {
-        // TODO: Throw if API does not support operation
+        // Abort if resource does not support update operations
+        if (!$this->isUpdatable()) {
+            throw new UnsupportedOperation(sprintf('API does not support update operation for %s resources', $this->resourceNameSingular()));
+        }
 
         $id = $this->id();
         $payload = [
