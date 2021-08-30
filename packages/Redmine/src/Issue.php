@@ -44,6 +44,7 @@ use Carbon\Carbon;
  * @property float|null $estimated_hours
  * @property float|null $total_estimated_hours
  * @property float|null $spent_hours
+ * @property float|null $total_spent_hours
  * @property ListOfCustomFieldReferences<CustomFieldReference>|CustomFieldReference[]|null custom_fields
  * @property Carbon $created_on
  * @property Carbon $updated_on
@@ -94,6 +95,7 @@ class Issue extends RedmineResource implements
         'estimated_hours' => 'float',
         'total_estimated_hours' => 'float',
         'spent_hours' => 'float',
+        'total_spent_hours' => 'float',
         'custom_fields' => ListOfCustomFieldReferences::class,
         'created_on' => 'date',
         'updated_on' => 'date',
