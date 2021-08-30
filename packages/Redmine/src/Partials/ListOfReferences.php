@@ -2,15 +2,6 @@
 
 namespace Aedart\Redmine\Partials;
 
-use Aedart\Contracts\Utils\Populatable;
-use Aedart\Utils\Json;
-use ArrayIterator;
-use Countable;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Jsonable;
-use IteratorAggregate;
-use JsonSerializable;
-
 /**
  * List Of References
  *
@@ -19,8 +10,8 @@ use JsonSerializable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine\Partials
  */
-class ListOfReferences extends NestedList {
-
+class ListOfReferences extends NestedList
+{
     /**
      * @inheritDoc
      */
