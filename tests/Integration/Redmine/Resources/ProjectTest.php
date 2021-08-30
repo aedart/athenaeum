@@ -17,23 +17,6 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  */
 class ProjectTest extends RedmineTestCase
 {
-//    public function canListProjects()
-//    {
-//        $data = [
-//            'name' => 'Created via @aedart/athenaeum-redmine',
-//            'identifier' => 'test-auto-created-' . now()->timestamp,
-//            'description' => 'Projects are been created via Redmine API Client, in [Athenaeum](https://github.com/aedart/athenaeum) package.'
-//        ];
-//
-//        $connection = $this->liveOrMockedConnection([
-//
-//        ]);
-//
-//        $list = Project::list(5, 0, [], $connection);
-//
-//        $this->assertNotEmpty($list->results(), 'No projects were obtained from API');
-//    }
-
     /**
      * @test
      *
