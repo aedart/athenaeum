@@ -145,6 +145,40 @@ abstract class RedmineTestCase extends LaravelTestCase
     }
 
     /**
+     * Mock a "list of resources" response from Redmine
+     *
+     * @param array $list List of resource (NOTE: each entry must be formatted accordingly)
+     * @param string $resourceClass
+     * @param int $total [optional]
+     * @param int $limit [optional]
+     * @param int $offset [optional]
+     *
+     * @return ResponseInterface
+     * @throws \JsonException
+     */
+    public function mockListOfResourcesResponse(
+        array $list,
+        string $resourceClass,
+        int $total = 50,
+        int $limit = 10,
+        int $offset = 0
+    ): ResponseInterface
+    {
+        /** @var RedmineResource $resource */
+        $resource = $resourceClass::make();
+
+        $data = [
+            $resource->resourceName() => $list,
+        ];
+
+        $data['total_count'] = $total;
+        $data['limit'] = $limit;
+        $data['offset'] = $offset;
+
+        return $this->mockJsonResponse($data);
+    }
+
+    /**
      * Mock a "created" response from Redmine
      *
      * @param array $data
@@ -162,7 +196,7 @@ abstract class RedmineTestCase extends LaravelTestCase
         // Pretend that data was created, but adding an id
         $data = array_merge($data, [
             $resource->keyName() => $id,
-        ], $data);
+        ]);
 
         return $this->mockJsonResponse([
             $resource->resourceNameSingular() => $data
@@ -187,7 +221,7 @@ abstract class RedmineTestCase extends LaravelTestCase
         // Pretend that data was created, but adding an id
         $data = array_merge($data, [
             $resource->keyName() => $id,
-        ], $data);
+        ]);
 
         return $this->mockJsonResponse([
             $resource->resourceNameSingular() => $data
