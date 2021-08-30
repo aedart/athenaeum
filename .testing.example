@@ -3,3 +3,10 @@ APP_NAME="Athenaeum"
 
 # Application environment
 APP_ENV="testing"
+
+# Redmine LIVE testing
+# When enabled, the API from the given Redmine instance will be
+# used by some of the integration tests.
+REDMINE_LIVE_TEST=false
+REDMINE_API_URI=https://your-redmine-url.com/
+REDMINE_TOKEN=your-redmine-api-token

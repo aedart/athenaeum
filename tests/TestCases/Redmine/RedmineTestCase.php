@@ -9,6 +9,7 @@ use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Redmine\Connections\Connection;
 use Aedart\Redmine\Providers\RedmineServiceProvider;
+use Aedart\Redmine\RedmineResource;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
@@ -32,6 +33,17 @@ abstract class RedmineTestCase extends LaravelTestCase
     use ConfigLoaderTrait;
     use ConfigTrait;
 
+    /**
+     * WARNING: When true, then some tests will perform actual
+     * requests to a Redmine API instance.
+     *
+     * If so, ensure that REDMINE_API_URI and REDMINE_TOKEN
+     * environment variables are set inside .testing file
+     *
+     * @var bool
+     */
+    protected bool $live = false;
+
     /*****************************************************************
      * Setup Methods
      ****************************************************************/
@@ -46,6 +58,9 @@ abstract class RedmineTestCase extends LaravelTestCase
         $this->getConfigLoader()
             ->setDirectory($this->directory())
             ->load();
+
+        // Read the "live" test state from the environment file
+        $this->live = env('REDMINE_LIVE_TEST', false);
     }
 
     /**
@@ -78,6 +93,17 @@ abstract class RedmineTestCase extends LaravelTestCase
         $app->useEnvironmentPath(__DIR__ . '/../../../');
         $app->loadEnvironmentFrom('.testing');
         $app->bootstrapWith([LoadEnvironmentVariables::class]);
+    }
+
+    /**
+     * Determine if "real" (live) API requests should
+     * be undertaken!
+     *
+     * @return bool
+     */
+    protected function isLive(): bool
+    {
+        return $this->live;
     }
 
     /*****************************************************************
@@ -116,6 +142,80 @@ abstract class RedmineTestCase extends LaravelTestCase
         ], $headers);
 
         return Http::response($encoded, $status, $headers)->wait();
+    }
+
+    /**
+     * Mock a "created" response from Redmine
+     *
+     * @param array $data
+     * @param string|int $id
+     * @param string $resourceClass Class path to resource
+     *
+     * @return ResponseInterface
+     * @throws \JsonException
+     */
+    public function mockCreatedResourceResponse(array $data, $id, string $resourceClass): ResponseInterface
+    {
+        /** @var RedmineResource $resource */
+        $resource = $resourceClass::make();
+
+        // Pretend that data was created, but adding an id
+        $data = array_merge($data, [
+            $resource->keyName() => $id,
+        ], $data);
+
+        return $this->mockJsonResponse([
+            $resource->resourceNameSingular() => $data
+        ], StatusCodes::CREATED);
+    }
+
+    /**
+     * Mock a "reloaded" response from Redmine
+     *
+     * @param array $data
+     * @param string|int $id
+     * @param string $resourceClass Class path to resource
+     *
+     * @return ResponseInterface
+     * @throws \JsonException
+     */
+    public function mockReloadedResourceResponse(array $data, $id, string $resourceClass): ResponseInterface
+    {
+        /** @var RedmineResource $resource */
+        $resource = $resourceClass::make();
+
+        // Pretend that data was created, but adding an id
+        $data = array_merge($data, [
+            $resource->keyName() => $id,
+        ], $data);
+
+        return $this->mockJsonResponse([
+            $resource->resourceNameSingular() => $data
+        ]);
+    }
+
+    /**
+     * Mock a successful "updated" response
+     *
+     * @return ResponseInterface
+     *
+     * @throws \JsonException
+     */
+    public function mockUpdatedResourceResponse(): ResponseInterface
+    {
+        return $this->mockJsonResponse([], StatusCodes::OK);
+    }
+
+    /**
+     * Mock a successful "deleted" response
+     *
+     * @return ResponseInterface
+     *
+     * @throws \JsonException
+     */
+    public function mockDeletedResourceResponse(): ResponseInterface
+    {
+        return $this->mockJsonResponse([], StatusCodes::OK);
     }
 
     /**
@@ -158,6 +258,15 @@ abstract class RedmineTestCase extends LaravelTestCase
      */
     public function connectWithMultipleMocks(array $responses, ?string $profile = null): ConnectionInterface
     {
+        return Connection::resolve($profile)->mock($responses);
+    }
+
+    public function liveOrMockedConnection(array $responses, ?string $profile = null)
+    {
+        if ($this->isLive()) {
+            return Connection::resolve($profile);
+        }
+
         return Connection::resolve($profile)->mock($responses);
     }
 
