@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
+use Aedart\Contracts\Redmine\ConnectionAware;
 use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
@@ -370,6 +371,22 @@ abstract class RedmineResource extends ArrayDto implements
     public function client(): Client
     {
         return $this->getConnection()->client();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function populate(array $data = []): void
+    {
+        parent::populate($data);
+
+        // Resolve connection for evt. nested Resources / DTOs that
+        // require such...
+        foreach ($this->properties as $property) {
+            if ($property instanceof ConnectionAware) {
+                $property->setConnection($this->getConnection());
+            }
+        }
     }
 
     /**

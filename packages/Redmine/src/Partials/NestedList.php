@@ -2,8 +2,11 @@
 
 namespace Aedart\Redmine\Partials;
 
+use Aedart\Contracts\Redmine\Connection;
+use Aedart\Contracts\Redmine\ConnectionAware;
 use Aedart\Contracts\Utils\Populatable;
 use Aedart\Dto\ArrayDto;
+use Aedart\Redmine\Traits\ConnectionTrait;
 use Aedart\Utils\Json;
 use ArrayIterator;
 use Countable;
@@ -23,6 +26,7 @@ use JsonSerializable;
  * @package Aedart\Redmine\Partials
  */
 abstract class NestedList implements
+    ConnectionAware,
     Populatable,
     Arrayable,
     IteratorAggregate,
@@ -30,6 +34,10 @@ abstract class NestedList implements
     Jsonable,
     JsonSerializable
 {
+    use ConnectionTrait {
+        setConnection as traitSetConnection;
+    }
+
     /**
      * Actual list of nested DTOs
      *
@@ -67,8 +75,26 @@ abstract class NestedList implements
                 return $reference;
             }
 
-            return $type::makeNew($reference);
+            $nested = $type::makeNew($reference);
+
+            // Set connection, if nested DTO expects one
+            return $this->resolveItemConnection($nested);
         }, $data);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setConnection(?Connection $connection)
+    {
+       $this->traitSetConnection($connection);
+
+       // Apply new connection on all items that require it
+        foreach ($this->list as $item) {
+            $this->resolveItemConnection($item);
+        }
+
+        return $this;
     }
 
     /**
@@ -109,5 +135,24 @@ abstract class NestedList implements
     public function count()
     {
         return count($this->list);
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Resolves connection for item
+     *
+     * @param T $item
+     *
+     * @return T|ConnectionAware
+     */
+    protected function resolveItemConnection($item) {
+        if ($item instanceof ConnectionAware) {
+            $item->setConnection($this->getConnection());
+        }
+
+        return $item;
     }
 }
