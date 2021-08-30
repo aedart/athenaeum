@@ -87,9 +87,9 @@ abstract class NestedList implements
      */
     public function setConnection(?Connection $connection)
     {
-       $this->traitSetConnection($connection);
+        $this->traitSetConnection($connection);
 
-       // Apply new connection on all items that require it
+        // Apply new connection on all items that require it
         foreach ($this->list as $item) {
             $this->resolveItemConnection($item);
         }
@@ -148,7 +148,8 @@ abstract class NestedList implements
      *
      * @return T|ConnectionAware
      */
-    protected function resolveItemConnection($item) {
+    protected function resolveItemConnection($item)
+    {
         if ($item instanceof ConnectionAware) {
             $item->setConnection($this->getConnection());
         }
