@@ -9,6 +9,7 @@ use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
 use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
+use Aedart\Contracts\Redmine\Listable;
 use Aedart\Contracts\Redmine\PaginatedResults as PaginatedResultsInterface;
 use Aedart\Contracts\Redmine\Resource;
 use Aedart\Contracts\Redmine\Updatable;
@@ -206,6 +207,11 @@ abstract class RedmineResource extends ArrayDto implements
      */
     public function paginate(Builder $request, int $limit = 10, int $offset = 0): PaginatedResultsInterface
     {
+        // Abort if API does not support listing of this kind of resource
+        if (!$this->isListable()) {
+            throw new UnsupportedOperation(sprintf('API does not support listing multiple %s resources', $this->resourceNameSingular()));
+        }
+
         return PaginatedResults::fromResponse(
             $request
                 ->limit($limit)
@@ -489,6 +495,14 @@ abstract class RedmineResource extends ArrayDto implements
         }
 
         return $payload[$key];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isListable(): bool
+    {
+        return $this instanceof Listable;
     }
 
     /**
