@@ -3,6 +3,7 @@
 namespace Aedart\Redmine\Pagination;
 
 use Aedart\Contracts\Redmine\PaginatedResults as PaginatedResultsInterface;
+use Aedart\Contracts\Redmine\Resource;
 use Aedart\Pagination\Paginator;
 use Aedart\Redmine\Collections\Collection;
 use Aedart\Redmine\RedmineResource;
@@ -50,7 +51,7 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
     /**
      * @inheritdoc
      */
-    public static function fromResponse(ResponseInterface $response, $resource): PaginatedResultsInterface
+    public static function fromResponse(ResponseInterface $response, Resource $resource): PaginatedResultsInterface
     {
         // Decode entire payload - we do not need to determine between single or multiple
         // resources here.
