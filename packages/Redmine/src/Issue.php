@@ -124,4 +124,47 @@ class Issue extends RedmineResource implements
     {
         return 'issues';
     }
+
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * @inheritDoc
+     */
+    protected function prepareBeforeCreate(array $data): array
+    {
+        return $this->prepareDates($data);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function prepareBeforeUpdate(array $data): array
+    {
+        return $this->prepareDates($data);
+    }
+
+    /**
+     * Formats some data fields
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function prepareDates(array $data): array
+    {
+        $dateFields = ['start_date', 'due_date'];
+        $format = 'Y-m-d';
+
+        foreach ($data as $property => $value) {
+            if (in_array($property, $dateFields) && $value instanceof Carbon) {
+                $data[$property] = $value->format($format);
+            }
+        }
+
+        return $data;
+    }
+
 }

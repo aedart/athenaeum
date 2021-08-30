@@ -619,8 +619,10 @@ abstract class RedmineResource extends ArrayDto implements
             throw new UnsupportedOperation(sprintf('API does not support create operation for %s resources', $this->resourceNameSingular()));
         }
 
+        $prepared = $this->prepareBeforeCreate($this->toArray());
+
         $payload = [
-            $this->resourceNameSingular() => $this->toArray()
+            $this->resourceNameSingular() => $prepared
         ];
 
         $response = $this
@@ -653,8 +655,10 @@ abstract class RedmineResource extends ArrayDto implements
         }
 
         $id = $this->id();
+        $prepared = $this->prepareBeforeUpdate($this->toArray());
+
         $payload = [
-            $this->resourceNameSingular() => $this->toArray()
+            $this->resourceNameSingular() => $prepared
         ];
 
         $response = $this
@@ -670,6 +674,30 @@ abstract class RedmineResource extends ArrayDto implements
         );
 
         return true;
+    }
+
+    /**
+     * Prepares the data before new create resource request is sent
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function prepareBeforeCreate(array $data): array
+    {
+        return $data;
+    }
+
+    /**
+     * Prepares the data before existing resource update request is sent
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function prepareBeforeUpdate(array $data): array
+    {
+        return $data;
     }
 
     /**
