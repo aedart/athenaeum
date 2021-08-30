@@ -170,5 +170,4 @@ class Issue extends RedmineResource implements
 
         return $data;
     }
-
 }
