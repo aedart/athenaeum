@@ -13,10 +13,12 @@ use Aedart\Redmine\Project;
 use Aedart\Redmine\Providers\RedmineServiceProvider;
 use Aedart\Redmine\RedmineResource;
 use Aedart\Support\Helpers\Config\ConfigTrait;
+use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Utils\Json;
 use Codeception\Configuration;
+use Codeception\Exception\ConfigurationException;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Illuminate\Support\Facades\Http;
 use Psr\Http\Message\ResponseInterface;
@@ -34,6 +36,7 @@ abstract class RedmineTestCase extends LaravelTestCase
 {
     use ConfigLoaderTrait;
     use ConfigTrait;
+    use FileTrait;
 
     /**
      * WARNING: When true, then some tests will perform actual
@@ -61,6 +64,16 @@ abstract class RedmineTestCase extends LaravelTestCase
             ->setDirectory($this->directory())
             ->load();
 
+        // Create directories
+        $fs = $this->getFile();
+
+        if (!$fs->exists($this->downloadDir())) {
+            $fs->makeDirectory($this->downloadDir());
+        }
+
+        // Empty directories - if needed
+        $fs->deleteDirectory($this->downloadDir(), true);
+
         // Read the "live" test state from the environment file
         $this->live = env('REDMINE_LIVE_TEST', false);
     }
@@ -72,7 +85,6 @@ abstract class RedmineTestCase extends LaravelTestCase
     {
         parent::_after();
     }
-
 
     /**
      * {@inheritdoc}
@@ -130,6 +142,18 @@ abstract class RedmineTestCase extends LaravelTestCase
     public function dummyFile(): string
     {
         return Configuration::dataDir() . '/redmine/test.txt';
+    }
+
+    /**
+     * Returns the download directory path
+     *
+     * @return string
+     *
+     * @throws ConfigurationException
+     */
+    public function downloadDir(): string
+    {
+        return Configuration::outputDir() . '/redmine/';
     }
 
     /**
@@ -237,6 +261,24 @@ abstract class RedmineTestCase extends LaravelTestCase
         return $this->mockJsonResponse([
             $resource->resourceNameSingular() => $data
         ]);
+    }
+
+    /**
+     * Mock a "file download" response
+     *
+     * @param string $sourceFile
+     * @param string $contentType
+     *
+     * @return ResponseInterface
+     */
+    public function mockDownloadFileResponse(string $sourceFile, string $contentType): ResponseInterface
+    {
+        $content = file_get_contents($sourceFile);
+        $headers = [
+            'Content-Type' => $contentType
+        ];
+
+        return Http::response($content, StatusCodes::OK, $headers)->wait();
     }
 
     /**

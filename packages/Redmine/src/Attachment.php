@@ -2,6 +2,7 @@
 
 namespace Aedart\Redmine;
 
+use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Redmine\Connection;
 use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Updatable;
@@ -9,6 +10,7 @@ use Aedart\Redmine\Partials\Reference;
 use Aedart\Utils\Json;
 use Carbon\Carbon;
 use InvalidArgumentException;
+use RuntimeException;
 
 /**
  * Attachment Resource
@@ -104,5 +106,38 @@ class Attachment extends RedmineResource implements
         }
 
         return $resource;
+    }
+
+    /**
+     * Download this attachment from the Redmine instance
+     *
+     * @param string $directory Path to directory where downloaded file must be saved.
+     *                          The downloaded file will have the same name as the
+     *                          attachment's `filename` property.
+     *
+     * @return bool
+     *
+     * @throws RuntimeException If content_url is not specified
+     * @throws InvalidArgumentException If directory is invalid
+     * @throws InvalidUriException
+     */
+    public function download(string $directory): bool
+    {
+        if (empty($this->content_url)) {
+            throw new RuntimeException('Unable to download attachment, no content_url specified');
+        }
+
+        if (!is_dir($directory)) {
+            throw new InvalidArgumentException(sprintf('directory "%s" does not exist', $directory));
+        }
+
+        // Download the file
+        $this
+            ->request()
+            ->withUri($this->content_url)
+            ->withOption('sink', $directory . DIRECTORY_SEPARATOR . $this->filename)
+            ->get();
+
+        return true;
     }
 }
