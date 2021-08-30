@@ -4,7 +4,6 @@ namespace Aedart\Tests\Integration\Redmine\Resources;
 
 use Aedart\Redmine\Project;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
-use Teapot\StatusCode\All as StatusCodes;
 
 /**
  * ProjectTest

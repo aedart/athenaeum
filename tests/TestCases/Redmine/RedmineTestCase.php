@@ -162,8 +162,7 @@ abstract class RedmineTestCase extends LaravelTestCase
         int $total = 50,
         int $limit = 10,
         int $offset = 0
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         /** @var RedmineResource $resource */
         $resource = $resourceClass::make();
 
