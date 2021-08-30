@@ -6,8 +6,10 @@ use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
 use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
+use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Redmine\Connections\Connection;
+use Aedart\Redmine\Project;
 use Aedart\Redmine\Providers\RedmineServiceProvider;
 use Aedart\Redmine\RedmineResource;
 use Aedart\Support\Helpers\Config\ConfigTrait;
@@ -397,5 +399,35 @@ abstract class RedmineTestCase extends LaravelTestCase
         $payload['offset'] = $offset;
 
         return $payload;
+    }
+
+    /**
+     * Creates a placeholder project resource for issues
+     *
+     * NOTE: The project is expected to be deleted upton test
+     * completion - THIS MUST BE DONE MANUALLY!
+     *
+     * @return Project
+     *
+     * @throws UnsupportedOperationException
+     * @throws \JsonException
+     * @throws \Throwable
+     */
+    public function createProject(): Project
+    {
+        $data = [
+            'name' => 'Test project via @aedart/athenaeum-redmine',
+            'identifier' => 'test-auto-created-' . now()->timestamp,
+            'description' => 'Projects are been created via Redmine API Client, in [Athenaeum](https://github.com/aedart/athenaeum) package.'
+        ];
+
+        $connection = $this->liveOrMockedConnection([
+            $this->mockCreatedResourceResponse($data, 1234, Project::class),
+            $this->mockDeletedResourceResponse()
+        ]);
+
+        // ----------------------------------------------------------------------- //
+
+        return Project::create($data, $connection);
     }
 }
