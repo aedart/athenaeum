@@ -6,9 +6,12 @@ use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
-use Aedart\Contracts\Redmine\ConnectionAware;
+use Aedart\Contracts\Redmine\Creatable;
+use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
 use Aedart\Contracts\Redmine\PaginatedResults as PaginatedResultsInterface;
+use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Dto\ArrayDto;
 use Aedart\Redmine\Connections\Connection;
 use Aedart\Redmine\Exceptions\Conflict;
@@ -36,7 +39,7 @@ use Throwable;
  * @package Aedart\Redmine
  */
 abstract class RedmineResource extends ArrayDto implements
-    ConnectionAware
+    Resource
 {
     use ConnectionTrait;
     use ForwardsCalls;
@@ -105,14 +108,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Creates a new resource instance
-     *
-     * @param array $data [optional]
-     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
-     *
-     * @return static
-     *
-     * @throws Throwable
+     * @inheritdoc
      */
     public static function make(array $data = [], $connection = null)
     {
@@ -120,22 +116,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Returns Redmine resource name in plural form
-     * E.g. issues, projects, relations, etc.
-     *
-     * @see https://www.redmine.org/projects/redmine/wiki/rest_api
-     *
-     * @return string
-     */
-    abstract public function resourceName(): string;
-
-    /**
-     * Returns Redmine resource name in singular form
-     * E.g. issue, project, relation, etc.
-     *
-     * @see resourceName
-     *
-     * @return string
+     * @inheritdoc
      */
     public function resourceNameSingular(): string
     {
@@ -143,17 +124,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Fetch list of resources
-     *
-     * @param int $limit [optional]
-     * @param int $offset [optional]
-     * @param string[] $include [optional] List of associated data to include
-     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
-     *
-     * @return PaginatedResultsInterface<static>|static[]
-     *
-     * @throws JsonException
-     * @throws Throwable
+     * @inheritdoc
      */
     public static function list(
         int $limit = 10,
@@ -170,17 +141,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Finds resource that matches given id
-     *
-     * @param string|int $id Redmine resource id
-     * @param string[] $include [optional] List of associated data to include
-     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
-     *
-     * @return static|null
-     *
-     * @throws UnexpectedResponse
-     * @throws JsonException
-     * @throws Throwable
+     * @inheritdoc
      */
     public static function find($id, array $include = [], $connection = null)
     {
@@ -193,18 +154,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Finds resource that matches given id or fails
-     *
-     * @param string|int $id Redmine resource id
-     * @param string[] $include [optional] List of associated data to include
-     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
-     *
-     * @return static
-     *
-     * @throws NotFound
-     * @throws UnexpectedResponse
-     * @throws JsonException
-     * @throws Throwable
+     * @inheritdoc
      */
     public static function findOrFail($id, array $include = [], $connection = null)
     {
@@ -217,26 +167,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Fetch a single resource, with given filters or conditions set
-     *
-     * Example:
-     * <pre>
-     *      $project = Project::fetch(42, function($request) {
-     *          return $request->include(['trackers']);
-     *      });
-     * </pre>
-     *
-     * @param string|int $id Redmine resource id
-     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
-     *                          The callback MUST return a valid {@see Builder}
-     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
-     *
-     * @return RedmineResource
-     *
-     * @throws RedmineException If filters callback does not return a valid Request Builder
-     * @throws ErrorResponseException
-     * @throws JsonException
-     * @throws Throwable
+     * @inheritdoc
      */
     public static function fetch($id, ?callable $filters = null, $connection = null)
     {
@@ -252,28 +183,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Fetch multiple resources, with given filters or conditions set.
-     * Method will automatically perform paginated request.
-     *
-     * Example:
-     * <pre>
-     *      $projects = Project::fetchMultiple(function($request) {
-     *          return $request->include(['trackers']);
-     *      }, 5, 10);
-     * </pre>
-     *
-     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
-     *                               The callback MUST return a valid {@see Builder}
-     * @param int $limit [optional]
-     * @param int $offset [optional]
-     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
-     *
-     * @return PaginatedResultsInterface<static>|static[]
-     *
-     * @throws RedmineException If filters callback does not return a valid Request Builder
-     * @throws ErrorResponseException
-     * @throws JsonException
-     * @throws Throwable
+     * @inheritdoc
      */
     public static function fetchMultiple(
         ?callable $filters = null,
@@ -291,16 +201,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Paginate the given request
-     *
-     * @param  Builder  $request
-     * @param int $limit [optional]
-     * @param int $offset [optional]
-     *
-     * @return PaginatedResultsInterface<static>|static[]
-     *
-     * @throws JsonException
-     * @throws Throwable
+     * @inheritdoc
      */
     public function paginate(Builder $request, int $limit = 10, int $offset = 0): PaginatedResultsInterface
     {
@@ -314,15 +215,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Create a new resource
-     *
-     * @param array $data
-     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
-     *
-     * @return static
-     *
-     * @throws JsonException
-     * @throws Throwable
+     * @inheritdoc
      */
     public static function create(array $data, $connection = null)
     {
@@ -334,21 +227,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Save this resource.
-     *
-     * If the resource does not exist (does not have an id),
-     * then this method will create it. Otherwise, the existing
-     * resource will be updated.
-     *
-     * @param bool $reload [optional] Resource is force reloaded from
-     *                     Redmine's API. This is applied ONLY when
-     *                     existing resource is updated. See {@see update()}
-     *                     method for details.
-     *
-     * @return bool
-     *
-     * @throws RedmineException
-     * @throws JsonException
+     * @inheritdoc
      */
     public function save(bool $reload = false): bool
     {
@@ -368,19 +247,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Update this resource
-     *
-     * **Caution**: resource's properties are NOT updated automatically from Redmine,
-     * when update request is successfully (Redmine only returns http status 200 Ok).
-     * Set the `$reload` argument to `true`, to ensure that all properties are updated
-     * from source, e.g. to ensure "updated on" date is updated...etc. Or you can
-     * manually invoke the {@see reload()} method.
-     *
-     * @param array $data [optional]
-     * @param bool $reload [optional] Resource is force reloaded from
-     *                     Redmine's API.
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function update(array $data = [], bool $reload = false): bool
     {
@@ -393,12 +260,12 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Delete this resource
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function delete(): bool
     {
+        // TODO: Throw if API does not support operation
+
         // Abort if resource does not have an id - meaning that we are
         // unable to perform a delete request
         if (!$this->exists()) {
@@ -415,11 +282,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Reload this resource from Redmine's API
-     *
-     * @return bool
-     *
-     * @throws JsonException
+     * @inheritdoc
      */
     public function reload(): bool
     {
@@ -439,15 +302,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Applies a filter or conditions callback
-     *
-     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
-     *                          The callback MUST return a valid {@see Builder}
-     * @param Builder|null $request [optional] Defaults to a new Request Builder, if none given
-     *
-     * @return Builder
-     *
-     * @throws RedmineException If filters callback does not return a valid Request Builder
+     * @inheritdoc
      */
     public function applyFiltersCallback(?callable $filters = null, ?Builder $request = null): Builder
     {
@@ -471,9 +326,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Returns a prepared request builder
-     *
-     * @return Builder
+     * @inheritdoc
      */
     public function request(): Builder
     {
@@ -483,11 +336,26 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Returns the Http Client set in the connection
-     *
-     * @see getConnection()
-     *
-     * @return Client
+     * @inheritdoc
+     */
+    public function prepareNextRequest($request): Builder
+    {
+        // Add general response expectations, if required
+        if ($this->enableExpectations) {
+            $request = $request
+                ->expect($this->expectedStatusCodes, $this->failedExpectationHandler());
+        }
+
+        // Debug, when required
+        if (static::$debug) {
+            $request = $request->debug();
+        }
+
+        return $request;
+    }
+
+    /**
+     * @inheritdoc
      */
     public function client(): Client
     {
@@ -495,13 +363,9 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Alias for {@see populate}
-     *
-     * @param array $data [optional]
-     *
-     * @return self
+     * @inheritdoc
      */
-    public function fill(array $data = []): self
+    public function fill(array $data = [])
     {
         $this->populate($data);
 
@@ -509,20 +373,7 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Creates resource endpoint address
-     *
-     * Example:
-     * <pre>
-     * // Without parameters
-     * $resource->endpoint(); // issues.json
-     *
-     * // With parameters
-     * $resource->endpoint(123, 'relations'); // issues/123/relations.json
-     * </pre>
-     *
-     * @param string ...$params Url parameters
-     *
-     * @return string
+     * @inheritdoc
      */
     public function endpoint(...$params): string
     {
@@ -532,6 +383,61 @@ abstract class RedmineResource extends ArrayDto implements
         }
 
         return $this->resourceName() . $parts . '.json';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function keyName(): string
+    {
+        return $this->identifierKey;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function id()
+    {
+        $key = $this->keyName();
+
+        return $this->{$key};
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function exists(): bool
+    {
+        $key = $this->keyName();
+
+        return isset($this->{$key});
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function decode(ResponseInterface $response, ?string $extract = null): array
+    {
+        // Get response body - abort if it's empty
+        $content = $response->getBody()->getContents();
+        if (empty($content)) {
+            return [];
+        }
+
+        // Decode response, but abort if payload is empty
+        $payload = Json::decode($content, true);
+        if (empty($payload)) {
+            return [];
+        }
+
+        // When nothing requested extracted from the payload, just return
+        // the entire decoded content.
+        if (!isset($extract)) {
+            return $payload;
+        }
+
+        // Otherwise, extract whatever key has been requested...
+        return $this->extractFromPayload($extract, $payload);
     }
 
     /**
@@ -563,43 +469,6 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Decodes the given response's Json payload
-     *
-     * @param ResponseInterface $response
-     * @param string|null [$extract] Name of top-level attribute to extract from payload,
-     *                              E.g. "issue". If none given, then entire response
-     *                              payload is returned.
-     *
-     * @return array Response payload or extracted payload
-     *
-     * @throws JsonException
-     * @throws RedmineException When unable to extract from payload, e.g. key does not exist
-     */
-    public function decode(ResponseInterface $response, ?string $extract = null): array
-    {
-        // Get response body - abort if it's empty
-        $content = $response->getBody()->getContents();
-        if (empty($content)) {
-            return [];
-        }
-
-        // Decode response, but abort if payload is empty
-        $payload = Json::decode($content, true);
-        if (empty($payload)) {
-            return [];
-        }
-
-        // When nothing requested extracted from the payload, just return
-        // the entire decoded content.
-        if (!isset($extract)) {
-            return $payload;
-        }
-
-        // Otherwise, extract whatever key has been requested...
-        return $this->extractFromPayload($extract, $payload);
-    }
-
-    /**
      * Extract a key's value from given payload
      *
      * @param string $key
@@ -619,83 +488,43 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
-     * Returns name of the resource's identifier attribute
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function keyName(): string
+    public function isCreatable(): bool
     {
-        return $this->identifierKey;
+        return $this instanceof Creatable;
     }
 
     /**
-     * Returns the resource's identifier
-     *
-     * @return string|int|null
+     * @inheritdoc
      */
-    public function id()
+    public function isUpdatable(): bool
     {
-        $key = $this->keyName();
-
-        return $this->{$key};
+        return $this instanceof Updatable;
     }
 
     /**
-     * Determine if this resource exists or not
-     *
-     * Method assumes that a resource exists if
-     * it has an id set.
-     *
-     * @return bool
+     * @inheritdoc
      */
-    public function exists(): bool
+    public function isDeletable(): bool
     {
-        $key = $this->keyName();
-
-        return isset($this->{$key});
+        return $this instanceof Deletable;
     }
 
     /**
-     * Prepares the next request
-     *
-     * @param Client|Builder $request
-     *
-     * @return Builder
+     * @inheritdoc
      */
-    public function prepareNextRequest($request): Builder
+    public function useFailedExpectationHandler(callable $handler): callable
     {
-        // Add general response expectations, if required
-        if ($this->enableExpectations) {
-            $request = $request
-                ->expect($this->expectedStatusCodes, $this->failedExpectationHandler());
-        }
+        $previous = $this->failedExpectationHandler();
 
-        // Debug, when required
-        if (static::$debug) {
-            $request = $request->debug();
-        }
-
-        return $request;
-    }
-
-    /**
-     * Set the general failed expectation handler
-     *
-     * @param  callable  $handler
-     *
-     * @return self
-     */
-    public function useFailedExpectationHandler(callable $handler): self
-    {
         $this->failedExpectationHandler = $handler;
 
-        return $this;
+        return $previous;
     }
 
     /**
-     * Returns the general failed expectation handler
-     *
-     * @return callable
+     * @inheritdoc
      */
     public function failedExpectationHandler(): callable
     {
@@ -750,6 +579,8 @@ abstract class RedmineResource extends ArrayDto implements
      */
     protected function performCreate(): bool
     {
+        // TODO: Throw if API does not support operation
+
         $payload = [
             $this->resourceNameSingular() => $this->toArray()
         ];
@@ -778,6 +609,8 @@ abstract class RedmineResource extends ArrayDto implements
      */
     protected function performUpdate(): bool
     {
+        // TODO: Throw if API does not support operation
+
         $id = $this->id();
         $payload = [
             $this->resourceNameSingular() => $this->toArray()
