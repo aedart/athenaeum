@@ -3,7 +3,9 @@
 namespace Aedart\Tests\Integration\Redmine;
 
 use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
+use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Exceptions\NotFound;
+use Aedart\Redmine\RedmineResource;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use Teapot\StatusCode\All as StatusCodes;
@@ -109,5 +111,31 @@ class FetchAndFindTest extends RedmineTestCase
         $result = DummyResource::find(4321, [], $connection);
 
         $this->assertNull($result);
+    }
+
+    /**
+     * @test
+     *
+     * @throws UnsupportedOperationException
+     * @throws \JsonException
+     * @throws \Throwable
+     */
+    public function failsIfDoesNotSupportListingOperation()
+    {
+        $this->expectException(UnsupportedOperationException::class);
+
+        $resourceClass = new class() extends RedmineResource {
+            protected array $allowed = [
+                'id' => 'string',
+                'name' => 'string'
+            ];
+
+            public function resourceName(): string
+            {
+                return 'some-resources';
+            }
+        };
+
+        $resourceClass::fetchMultiple();
     }
 }

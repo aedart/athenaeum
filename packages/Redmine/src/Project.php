@@ -4,6 +4,7 @@ namespace Aedart\Redmine;
 
 use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
+use Aedart\Contracts\Redmine\Listable;
 use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;
@@ -44,6 +45,7 @@ use Carbon\Carbon;
  * @package Aedart\Redmine
  */
 class Project extends RedmineResource implements
+    Listable,
     Creatable,
     Updatable,
     Deletable

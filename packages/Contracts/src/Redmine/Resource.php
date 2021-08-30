@@ -56,6 +56,8 @@ interface Resource extends Dto,
     /**
      * Fetch list of resources
      *
+     * @see isListable
+     *
      * @param int $limit [optional]
      * @param int $offset [optional]
      * @param string[] $include [optional] List of associated data to include
@@ -63,6 +65,7 @@ interface Resource extends Dto,
      *
      * @return PaginatedResults<static>|static[]
      *
+     * @throws UnsupportedOperationException If Redmine's API does not support listing this kind of resource.
      * @throws JsonException
      * @throws Throwable
      */
@@ -138,6 +141,8 @@ interface Resource extends Dto,
      *      }, 5, 10);
      * </pre>
      *
+     * @see isListable
+     *
      * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
      *                               The callback MUST return a valid {@see Builder}
      * @param int $limit [optional]
@@ -146,6 +151,7 @@ interface Resource extends Dto,
      *
      * @return PaginatedResults<static>|static[]
      *
+     * @throws UnsupportedOperationException If Redmine's API does not support listing this kind of resource.
      * @throws RedmineException If filters callback does not return a valid Request Builder
      * @throws ErrorResponseException
      * @throws JsonException
@@ -161,12 +167,15 @@ interface Resource extends Dto,
     /**
      * Paginate the given request
      *
+     * @see isListable
+     *
      * @param  Builder  $request
      * @param int $limit [optional]
      * @param int $offset [optional]
      *
      * @return PaginatedResults<static>|static[]
      *
+     * @throws UnsupportedOperationException If Redmine's API does not support listing this kind of resource.
      * @throws JsonException
      * @throws Throwable
      */
@@ -361,6 +370,15 @@ interface Resource extends Dto,
      * @throws RedmineException When unable to extract from payload, e.g. key does not exist
      */
     public function decode(ResponseInterface $response, ?string $extract = null): array;
+
+    /**
+     * Determine if this resource can be listed via the API
+     *
+     * @see Listable
+     *
+     * @return bool
+     */
+    public function isListable(): bool;
 
     /**
      * Determine if this resource can be created via the API
