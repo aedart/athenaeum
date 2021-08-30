@@ -42,6 +42,7 @@ use Carbon\Carbon;
  * @property int $done_ratio
  * @property bool $is_private
  * @property float|null $estimated_hours
+ * @property float|null $total_estimated_hours
  * @property ListOfCustomFieldReferences<CustomFieldReference>|CustomFieldReference[]|null custom_fields
  * @property Carbon $created_on
  * @property Carbon $updated_on
@@ -90,6 +91,7 @@ class Issue extends RedmineResource implements
         'done_ratio' => 'int',
         'is_private' => 'bool',
         'estimated_hours' => 'float',
+        'total_estimated_hours' => 'float',
         'custom_fields' => ListOfCustomFieldReferences::class,
         'created_on' => 'date',
         'updated_on' => 'date',
