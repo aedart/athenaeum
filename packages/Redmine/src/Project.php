@@ -24,7 +24,7 @@ use Carbon\Carbon;
  * @property Reference|null $parent
  * @property Reference|null $default_version
  * @property Reference|null $default_assignee
- * @property Carbon $created_om
+ * @property Carbon $created_on
  * @property Carbon $updated_on
  *
  * @property int|null $parent_id Property only available or expected when creating or updating resource.
