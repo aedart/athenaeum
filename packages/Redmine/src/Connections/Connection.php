@@ -99,7 +99,7 @@ class Connection implements ConnectionInterface
         $httpProfile = $this->option('http_client');
 
         try {
-            return $this->getHttpClientsManager()->profile($httpProfile, $this->httpClientOptions());
+            return $this->getHttpClientsManager()->fresh($httpProfile, $this->httpClientOptions());
         } catch (ProfileNotFoundException $e) {
             throw new InvalidConnection(sprintf(
                 'Unable to resolve Redmine connection "%s". Http Client profile "%s" does not exist',
