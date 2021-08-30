@@ -2,6 +2,9 @@
 
 namespace Aedart\Redmine;
 
+use Aedart\Contracts\Redmine\Creatable;
+use Aedart\Contracts\Redmine\Deletable;
+use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;
 use Carbon\Carbon;
@@ -40,7 +43,10 @@ use Carbon\Carbon;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class Project extends RedmineResource
+class Project extends RedmineResource implements
+    Creatable,
+    Updatable,
+    Deletable
 {
     protected array $allowed = [
         'id' => 'int',
