@@ -135,11 +135,8 @@ abstract class RedmineResource extends ArrayDto implements
         array $include = [],
         $connection = null
     ): PaginatedResultsInterface {
-        return static::fetchMultiple(function (Builder $request) use ($include) {
-            return $request
-                ->when(!empty($include), function (Builder $request) use ($include) {
-                    $request->include($include);
-                });
+        return static::fetchMultiple(function (Builder $request, Resource $resource) use ($include) {
+            return $resource->applyIncludes($include, $request);
         }, $limit, $offset, $connection);
     }
 
@@ -161,11 +158,8 @@ abstract class RedmineResource extends ArrayDto implements
      */
     public static function findOrFail($id, array $include = [], $connection = null)
     {
-        return static::fetch($id, function (Builder $request) use ($include) {
-            return $request
-                ->when(!empty($include), function (Builder $request) use ($include) {
-                    $request->include($include);
-                });
+        return static::fetch($id, function (Builder $request, Resource $resource) use ($include) {
+            return $resource->applyIncludes($include, $request);
         }, $connection);
     }
 
@@ -322,7 +316,7 @@ abstract class RedmineResource extends ArrayDto implements
 
         // Apply the filters and conditions callback, if any given
         if (is_callable($filters)) {
-            $modified = $filters($request);
+            $modified = $filters($request, $this);
         } else {
             $modified = $request;
         }
@@ -334,6 +328,20 @@ abstract class RedmineResource extends ArrayDto implements
 
         // Finally, return the modified builder
         return $modified;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function applyIncludes(array $include = [], ?Builder $request = null): Builder
+    {
+        // Resolve the request builder
+        $request = $request ?? $this->request();
+
+        return $request
+            ->when(!empty($include), function (Builder $request) use ($include) {
+                $request->include($include);
+            });
     }
 
     /**

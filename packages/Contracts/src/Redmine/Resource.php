@@ -276,6 +276,16 @@ interface Resource extends Dto,
     public function applyFiltersCallback(?callable $filters = null, ?Builder $request = null): Builder;
 
     /**
+     * Applies "include" filter on request
+     *
+     * @param string[] $include
+     * @param Builder|null $request [optional]
+     *
+     * @return Builder
+     */
+    public function applyIncludes(array $include = [], ?Builder $request = null): Builder;
+
+    /**
      * Returns a prepared request builder
      *
      * @see prepareNextRequest
