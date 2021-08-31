@@ -2,10 +2,14 @@
 
 namespace Aedart\Redmine;
 
+use Aedart\Contracts\Redmine\Connection;
 use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
+use Aedart\Contracts\Redmine\Exceptions\RedmineException;
+use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Contracts\Redmine\Listable;
 use Aedart\Contracts\Redmine\Updatable;
+use Aedart\Redmine\Attachments\PendingAttachment;
 use Aedart\Redmine\Partials\Changeset;
 use Aedart\Redmine\Partials\ChildIssueReference;
 use Aedart\Redmine\Partials\CustomFieldReference;
@@ -20,6 +24,9 @@ use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\ListOfRelatedIssues;
 use Aedart\Redmine\Partials\Reference;
 use Carbon\Carbon;
+use InvalidArgumentException;
+use JsonException;
+use Throwable;
 
 /**
  * Issue Resource
@@ -59,6 +66,7 @@ use Carbon\Carbon;
  * @property int $assigned_to_id Property only available or expected when creating or updating resource.
  * @property int $parent_issue_id Property only available or expected when creating or updating resource.
  * @property int[] $watcher_user_ids Property only available or expected when creating or updating resource.
+ * @property array $uploads Property only available or expected when creating or updating resource.
  *
  * @property ListOfAttachments<Attachment>|Attachment[]|null $attachments Related data that can be requested included.
  * @property ListOfChildIssueReferences<ChildIssueReference>|ChildIssueReference[]|null $children Related data that can be requested included.
@@ -111,6 +119,7 @@ class Issue extends RedmineResource implements
         'assigned_to_id' => 'int',
         'parent_issue_id' => 'int',
         'watcher_user_ids' => 'array',
+        'uploads' => 'array',
 
         // Related (can be included)
         'attachments' => ListOfAttachments::class,
@@ -122,6 +131,14 @@ class Issue extends RedmineResource implements
     ];
 
     /**
+     * List of pending attachments to be associated
+     * with this Issue.
+     *
+     * @var PendingAttachment[]
+     */
+    protected array $pendingAttachments = [];
+
+    /**
      * @inheritDoc
      */
     public function resourceName(): string
@@ -129,6 +146,112 @@ class Issue extends RedmineResource implements
         return 'issues';
     }
 
+    /*****************************************************************
+     * Attachments
+     ****************************************************************/
+
+    /**
+     * Create a new issue with given attachments
+     *
+     * @param array $data
+     * @param Attachment[] $attachments
+     * @param string[] $include [optional] List of associated data to include
+     * @param string|Connection|null $connection [optional] Redmine connection profile
+     *
+     * @return static
+     *
+     * @throws RedmineException
+     * @throws UnsupportedOperationException
+     * @throws JsonException
+     * @throws Throwable
+     */
+    public static function createWithAttachments(
+        array $data,
+        array $attachments,
+        array $include = [],
+        $connection = null
+    ) {
+        $resource = static::make($data, $connection);
+
+        // Ensure that "attachments" are automatically included,
+        // if not already requested.
+        $include = array_merge($include, [ 'attachments' ]);
+
+        // Create new issue
+        $resource
+            ->withAttachments($attachments)
+            ->withIncludes($include)
+            ->save();
+
+        return $resource;
+    }
+
+    /**
+     * Associate attachment with this resource
+     *
+     * Note: Method does not perform request, you must invoke
+     * {@see save()} before association takes effect.
+     *
+     * @param Attachment $attachment
+     *
+     * @return self
+     *
+     * @throws InvalidArgumentException If attachment does not have a token or id
+     */
+    public function withAttachment(Attachment $attachment): self
+    {
+        $this->pendingAttachments[] = PendingAttachment::make($attachment);
+
+        return $this;
+    }
+
+    /**
+     * Associate multiple attachments with this resource
+     *
+     * Note: Method does not perform request, you must invoke
+     * {@see save()} before association takes effect.
+     *
+     * @see withAttachment
+     *
+     * @param Attachment[] $attachments
+     *
+     * @return self
+     *
+     * @throws InvalidArgumentException If attachment does not have a token or id
+     */
+    public function withAttachments(array $attachments): self
+    {
+        foreach ($attachments as $attachment) {
+            $this->withAttachment($attachment);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Prepare the attachments in given payload data
+     *
+     * @param array $data Payload data
+     *
+     * @return array Payload with attachments
+     */
+    protected function prepareAttachments(array $data): array
+    {
+        // List of attachment to associate with this resources
+        $uploads = [];
+
+        foreach ($this->pendingAttachments as $pending) {
+            $uploads[] = $pending->toArray();
+        }
+
+        // Assign to payload
+        $data['uploads'] = $uploads;
+
+        // Clear pending attachments
+        $this->pendingAttachments = [];
+
+        return $data;
+    }
 
     /*****************************************************************
      * Internals
@@ -139,7 +262,9 @@ class Issue extends RedmineResource implements
      */
     protected function prepareBeforeCreate(array $data): array
     {
-        return $this->prepareDates($data);
+        return $this->prepareAttachments(
+            $this->prepareDates($data)
+        );
     }
 
     /**
@@ -147,7 +272,9 @@ class Issue extends RedmineResource implements
      */
     protected function prepareBeforeUpdate(array $data): array
     {
-        return $this->prepareDates($data);
+        return $this->prepareAttachments(
+            $this->prepareDates($data)
+        );
     }
 
     /**
