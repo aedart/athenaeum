@@ -42,6 +42,7 @@ use Throwable;
  * @property Reference $priority
  * @property Reference $author
  * @property Reference|null $assigned_to
+ * @property Reference|null $category
  * @property Reference|null $fixed_version
  * @property IssueParentReference|null $parent
  * @property string $subject
@@ -95,6 +96,7 @@ class Issue extends RedmineResource implements
         'priority' => Reference::class,
         'author' => Reference::class,
         'assigned_to' => Reference::class,
+        'category' => Reference::class,
         'fixed_version' => Reference::class,
         'parent' => IssueParentReference::class,
         'subject' => 'string',
