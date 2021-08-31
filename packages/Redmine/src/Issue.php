@@ -283,7 +283,7 @@ class Issue extends RedmineResource implements
     }
 
     /*****************************************************************
-     * Relations
+     * Issue Relations
      ****************************************************************/
 
     /**
@@ -325,7 +325,7 @@ class Issue extends RedmineResource implements
     }
 
     /*****************************************************************
-     * Project
+     * Relations
      ****************************************************************/
 
     /**
@@ -343,10 +343,6 @@ class Issue extends RedmineResource implements
     {
         return Project::findOrFail($this->project->id, $include, $this->getConnection());
     }
-
-    /*****************************************************************
-     * Parent Issue
-     ****************************************************************/
 
     /**
      * Fetch this issue's parent issue
