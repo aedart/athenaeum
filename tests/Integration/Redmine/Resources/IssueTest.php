@@ -50,7 +50,7 @@ class IssueTest extends RedmineTestCase
 
         // ----------------------------------------------------------------------- //
 
-        $issue = Issue::create($data, $connection);
+        $issue = Issue::create($data, [], $connection);
 
         $this->assertNotEmpty($issue->id(), 'Issue was not created');
 
@@ -101,7 +101,7 @@ class IssueTest extends RedmineTestCase
         // ----------------------------------------------------------------------- //
         // More prerequisites
 
-        $issue = Issue::create($data, $connection);
+        $issue = Issue::create($data, [], $connection);
 
         $this->assertNotEmpty($issue->id(), 'Issue was not created');
 
@@ -177,7 +177,7 @@ class IssueTest extends RedmineTestCase
         // ----------------------------------------------------------------------- //
         // More prerequisites
 
-        $issue = Issue::create($data, $connection);
+        $issue = Issue::create($data, [], $connection);
 
         $this->assertNotEmpty($issue->id(), 'Issue was not created');
 

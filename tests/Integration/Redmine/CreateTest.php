@@ -38,7 +38,7 @@ class CreateTest extends RedmineTestCase
 
         $connection = $this->connectionWithMock($responsePayload, StatusCodes::CREATED);
 
-        $resource = DummyResource::create([ 'name' => $name ], $connection);
+        $resource = DummyResource::create([ 'name' => $name ], [], $connection);
 
         // ----------------------------------------------------------------- //
 

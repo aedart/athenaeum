@@ -43,7 +43,7 @@ class ProjectTest extends RedmineTestCase
 
         // ----------------------------------------------------------------------- //
 
-        $project = Project::create($data, $connection);
+        $project = Project::create($data, [], $connection);
 
         $this->assertNotEmpty($project->id(), 'Project was not created');
 
@@ -86,7 +86,7 @@ class ProjectTest extends RedmineTestCase
         // ----------------------------------------------------------------------- //
         // Prerequisites
 
-        $project = Project::create($data, $connection);
+        $project = Project::create($data, [], $connection);
 
         $this->assertNotEmpty($project->id(), 'Project was not created');
 
@@ -150,7 +150,7 @@ class ProjectTest extends RedmineTestCase
         // ----------------------------------------------------------------------- //
         // Prerequisites
 
-        $project = Project::create($data, $connection);
+        $project = Project::create($data, [], $connection);
 
         $this->assertNotEmpty($project->id(), 'Project was not created');
 

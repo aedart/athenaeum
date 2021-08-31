@@ -187,6 +187,7 @@ interface Resource extends Dto,
      * @see isCreatable
      *
      * @param array $data
+     * @param string[] $include [optional] List of associated data to include
      * @param string|Connection|null $connection [optional] Redmine connection profile
      *
      * @return static
@@ -195,7 +196,7 @@ interface Resource extends Dto,
      * @throws JsonException
      * @throws Throwable
      */
-    public static function create(array $data, $connection = null);
+    public static function create(array $data, array $include = [], $connection = null);
 
     /**
      * Save this resource.
@@ -261,6 +262,15 @@ interface Resource extends Dto,
      * @throws JsonException
      */
     public function reload(): bool;
+
+    /**
+     * Add associated data to be included in the next request
+     *
+     * @param string[] $includes [optional] List of associated data to include
+     *
+     * @return self
+     */
+    public function withIncludes(array $includes = []);
 
     /**
      * Applies a filter or conditions callback

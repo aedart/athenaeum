@@ -505,6 +505,6 @@ abstract class RedmineTestCase extends LaravelTestCase
 
         // ----------------------------------------------------------------------- //
 
-        return Project::create($data, $connection);
+        return Project::create($data, [], $connection);
     }
 }

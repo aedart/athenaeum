@@ -94,6 +94,13 @@ abstract class RedmineResource extends ArrayDto implements
     protected $failedExpectationHandler;
 
     /**
+     * List of associated data to be included in next request
+     *
+     * @var string[]
+     */
+    protected array $pendingIncludes = [];
+
+    /**
      * Redmine Resource
      *
      * @param array $data [optional]
@@ -219,11 +226,13 @@ abstract class RedmineResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public static function create(array $data, $connection = null)
+    public static function create(array $data, array $include = [], $connection = null)
     {
         $resource = static::make($data, $connection);
 
-        $resource->save();
+        $resource
+            ->withIncludes($include)
+            ->save();
 
         return $resource;
     }
@@ -309,6 +318,19 @@ abstract class RedmineResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
+    public function withIncludes(array $includes = [])
+    {
+        $this->pendingIncludes = array_merge(
+            $this->pendingIncludes,
+            $includes
+        );
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function applyFiltersCallback(?callable $filters = null, ?Builder $request = null): Builder
     {
         // Resolve the request builder
@@ -363,6 +385,14 @@ abstract class RedmineResource extends ArrayDto implements
         if ($this->enableExpectations) {
             $request = $request
                 ->expect($this->expectedStatusCodes, $this->failedExpectationHandler());
+        }
+
+        // Apply includes, if requested
+        if (!empty($this->pendingIncludes)) {
+            $request = $this->applyIncludes($this->pendingIncludes, $request);
+
+            // Clear pending includes
+            $this->pendingIncludes = [];
         }
 
         // Debug, when required
