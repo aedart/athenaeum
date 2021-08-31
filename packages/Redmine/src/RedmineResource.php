@@ -564,6 +564,25 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
+     * Extract a key's value from given payload or default to
+     * given value if it does not exist
+     *
+     * @param string $key
+     * @param array $payload Decoded response payload
+     * @param mixed $default [optional]
+     *
+     * @return mixed
+     */
+    public function extractOrDefault(string $key, array $payload, $default = null)
+    {
+        if (!isset($payload[$key])) {
+            return $default;
+        }
+
+        return $payload[$key];
+    }
+
+    /**
      * @inheritdoc
      */
     public function isListable(): bool

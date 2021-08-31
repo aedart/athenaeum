@@ -61,9 +61,9 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
         $results = Collection::fromResponsePayload($payload, $resource);
 
         // Extract pagination details
-        $total = $resource->extractFromPayload('total_count', $payload);
-        $limit = $resource->extractFromPayload('limit', $payload);
-        $offset = $resource->extractFromPayload('offset', $payload);
+        $total = $resource->extractOrDefault('total_count', $payload, count($results));
+        $limit = $resource->extractOrDefault('limit', $payload, count($results));
+        $offset = $resource->extractOrDefault('offset', $payload, 0);
 
         return new static($results, $total, $limit, $offset);
     }
