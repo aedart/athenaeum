@@ -68,6 +68,7 @@ use Throwable;
  * @property int $parent_issue_id Property only available or expected when creating or updating resource.
  * @property int[] $watcher_user_ids Property only available or expected when creating or updating resource.
  * @property array $uploads Property only available or expected when creating or updating resource.
+ * @property string $notes Property only available or expected when creating or updating resource.
  *
  * @property ListOfAttachments<Attachment>|Attachment[]|null $attachments Related data that can be requested included.
  * @property ListOfChildIssueReferences<ChildIssueReference>|ChildIssueReference[]|null $children Related data that can be requested included.
@@ -121,6 +122,7 @@ class Issue extends RedmineResource implements
         'parent_issue_id' => 'int',
         'watcher_user_ids' => 'array',
         'uploads' => 'array',
+        'notes' => 'string',
 
         // Related (can be included)
         'attachments' => ListOfAttachments::class,
@@ -252,6 +254,29 @@ class Issue extends RedmineResource implements
         $this->pendingAttachments = [];
 
         return $data;
+    }
+
+    /*****************************************************************
+     * Notes (Journal)
+     ****************************************************************/
+
+    /**
+     * Add a note to be this issue
+     *
+     * Note: Method does not perform request, you must invoke
+     * {@see save()} before note is persisted.
+     *
+     * To include notes in issue, you must include "journals"
+     *
+     * @param string $note
+     *
+     * @return self
+     */
+    public function withNote(string $note): self
+    {
+        $this->properties['notes'] = $note;
+
+        return $this;
     }
 
     /*****************************************************************
