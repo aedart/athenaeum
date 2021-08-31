@@ -26,6 +26,7 @@ use Aedart\Redmine\Partials\Reference;
 use Carbon\Carbon;
 use InvalidArgumentException;
 use JsonException;
+use RuntimeException;
 use Throwable;
 
 /**
@@ -251,6 +252,48 @@ class Issue extends RedmineResource implements
         $this->pendingAttachments = [];
 
         return $data;
+    }
+
+    /*****************************************************************
+     * Relations
+     ****************************************************************/
+
+    /**
+     * Add a new relation for this issue
+     *
+     * @param int|Issue $related Related Issue id or instance
+     * @param string $type [optional] Type of relation
+     * @param float|null $delay [optional] The delay (days) for a "precedes" or "follows" relation
+     *
+     * @return Relation
+     *
+     * @throws InvalidArgumentException If related argument is invalid
+     * @throws RuntimeException If this issue (parent) does not exist
+     * @throws JsonException
+     * @throws Throwable
+     */
+    public function addRelation($related, string $type = Relation::RELATES, ?float $delay = null): Relation
+    {
+        $relatedId = $related;
+        if ($related instanceof self) {
+            $relatedId = $related->id();
+        }
+
+        if (!is_int($relatedId)) {
+            throw new InvalidArgumentException('Invalid related argument. Expected id or Issue instance');
+        }
+
+        if (!$this->exists()) {
+            throw new RuntimeException('Unable to relate to Issue; parent issue has no id specified');
+        }
+
+        return Relation::createRelation(
+            $this->id(),
+            $relatedId,
+            $type,
+            $delay,
+            $this->getConnection()
+        );
     }
 
     /*****************************************************************

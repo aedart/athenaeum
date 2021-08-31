@@ -2,7 +2,12 @@
 
 namespace Aedart\Redmine;
 
+use Aedart\Contracts\Redmine\Connection;
 use Aedart\Contracts\Redmine\Deletable;
+use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
+use InvalidArgumentException;
+use JsonException;
+use Throwable;
 
 /**
  * Issue Relation Resource
@@ -21,6 +26,66 @@ use Aedart\Contracts\Redmine\Deletable;
 class Relation extends RedmineResource implements
     Deletable
 {
+    /**
+     * Relates relation type (default)
+     */
+    public const RELATES = 'relates';
+
+    /**
+     * Duplicates relation type
+     */
+    public const DUPLICATES = 'duplicates';
+
+    /**
+     * Duplicated relation type
+     */
+    public const DUPLICATED = 'duplicated';
+
+    /**
+     * Blocks relation type
+     */
+    public const BLOCKS = 'blocks';
+
+    /**
+     * Blocked relation type
+     */
+    public const BLOCKED = 'blocked';
+
+    /**
+     * Precedes relation type
+     */
+    public const PRECEDES = 'precedes';
+
+    /**
+     * Follows relation type
+     */
+    public const FOLLOWS = 'follows';
+
+    /**
+     * Copied to relation type
+     */
+    public const COPIED_TO = 'copied_to';
+
+    /**
+     * Copied from relation type
+     */
+    public const COPIED_FROM = 'copied_from';
+
+    /**
+     * Supported relation types
+     */
+    public const RELATION_TYPES = [
+        self::RELATES,
+        self::DUPLICATES,
+        self::DUPLICATED,
+        self::BLOCKS,
+        self::BLOCKED,
+        self::PRECEDES,
+        self::FOLLOWS,
+        self::COPIED_TO,
+        self::COPIED_FROM,
+    ];
+
     protected array $allowed = [
         'id' => 'int',
         'issue_id' => 'int',
@@ -37,5 +102,119 @@ class Relation extends RedmineResource implements
         return 'relations';
     }
 
-    // TODO: Create new relation - for a specific issue
+    /**
+     * Create a new relation between two issues
+     *
+     * @param int $parent Parent issue id
+     * @param int $related Related issue id
+     * @param string $type [optional] Type of relation
+     * @param float|null $delay [optional] The delay (days) for a "precedes" or "follows" relation
+     * @param string|Connection|null $connection [optional] Redmine connection profile
+     *
+     * @return static
+     *
+     * @throws JsonException
+     * @throws Throwable
+     */
+    public static function createRelation(
+        int $parent,
+        int $related,
+        string $type = self::RELATES,
+        ?float $delay = null,
+        $connection = null
+    ) {
+        $resource = static::make([
+            'issue_id' => $parent,
+            'issue_to_id' => $related,
+            'relation_type' => $type,
+            'delay' => $delay,
+        ], $connection);
+
+        $url = "issues/{$parent}/relations.json";
+        $payload = [
+            $resource->resourceNameSingular() => $resource->toArray()
+        ];
+
+        $response = $resource
+            ->request()
+            ->post($url, $payload);
+
+        return $resource->fill(
+            $resource->decodeSingle($response)
+        );
+    }
+
+    /**
+     * Fetch the parent issue
+     *
+     * @param string[] $include [optional] List of associated data to include
+     * @param string|Connection|null $connection [optional] Redmine connection profile
+     *
+     * @return Issue
+     *
+     * @throws ErrorResponseException
+     * @throws JsonException
+     * @throws Throwable
+     */
+    public function parent(array $include = [], $connection = null): Issue
+    {
+        return $this->findOrFailIssue($this->issue_id, $include, $connection);
+    }
+
+    /**
+     * Fetch the related issue
+     *
+     * @param string[] $include [optional] List of associated data to include
+     * @param string|Connection|null $connection [optional] Redmine connection profile
+     *
+     * @return Issue
+     *
+     * @throws ErrorResponseException
+     * @throws JsonException
+     * @throws Throwable
+     */
+    public function related(array $include = [], $connection = null): Issue
+    {
+        return $this->findOrFailIssue($this->issue_to_id, $include, $connection);
+    }
+
+    /**
+     * Set the relation type property
+     *
+     * @param string|null $type [optional]
+     *
+     * @return self
+     */
+    public function setRelationType(?string $type = null)
+    {
+        if (isset($type) && !in_array($type, static::RELATION_TYPES)) {
+            throw new InvalidArgumentException(sprintf('%s is not a supported relation type', $type));
+        }
+
+        $this->properties['relation_type'] = $type;
+
+        return $this;
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Find or fail issue
+     *
+     * @param string|int $id Redmine resource id
+     * @param string[] $include [optional] List of associated data to include
+     * @param string|Connection|null $connection [optional] Redmine connection profile
+     *
+     * @return Issue
+     *
+     * @throws JsonException
+     * @throws Throwable
+     * @throws ErrorResponseException
+     */
+    protected function findOrFailIssue(int $id, array $include = [], $connection = null): Issue
+    {
+        return Issue::findOrFail($id, $include, $connection);
+    }
 }
