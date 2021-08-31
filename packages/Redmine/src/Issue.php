@@ -5,6 +5,7 @@ namespace Aedart\Redmine;
 use Aedart\Contracts\Redmine\Connection;
 use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
+use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
 use Aedart\Contracts\Redmine\Exceptions\RedmineException;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Contracts\Redmine\Listable;
@@ -334,7 +335,7 @@ class Issue extends RedmineResource implements
      *
      * @throws JsonException
      * @throws Throwable
-     * @throws \Aedart\Contracts\Redmine\Exceptions\ErrorResponseException
+     * @throws ErrorResponseException
      */
     public function project(array $include = []): Project
     {
