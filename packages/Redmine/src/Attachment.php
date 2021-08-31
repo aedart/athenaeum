@@ -140,4 +140,20 @@ class Attachment extends RedmineResource implements
 
         return true;
     }
+
+    /**
+     * Determine if this attachment has a token
+     * set.
+     *
+     * A token is only set on an attachment after it
+     * has been uploaded.
+     *
+     * @see upload()
+     *
+     * @return bool
+     */
+    public function hasToken(): bool
+    {
+        return !empty($this->token);
+    }
 }
