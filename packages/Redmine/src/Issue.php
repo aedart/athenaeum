@@ -322,6 +322,26 @@ class Issue extends RedmineResource implements
     }
 
     /*****************************************************************
+     * Project
+     ****************************************************************/
+
+    /**
+     * Fetch this issue's project
+     *
+     * @param string[] $include [optional] List of associated data to include
+     *
+     * @return Project
+     *
+     * @throws JsonException
+     * @throws Throwable
+     * @throws \Aedart\Contracts\Redmine\Exceptions\ErrorResponseException
+     */
+    public function project(array $include = []): Project
+    {
+        return Project::findOrFail($this->project->id, $include, $this->getConnection());
+    }
+
+    /*****************************************************************
      * Internals
      ****************************************************************/
 
