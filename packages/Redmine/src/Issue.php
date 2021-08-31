@@ -360,6 +360,22 @@ class Issue extends RedmineResource implements
         return static::findOrFail($this->parent->id, $include, $this->getConnection());
     }
 
+    /**
+     * Fetch the author of this issue
+     *
+     * @param string[] $include [optional] List of associated data to include
+     *
+     * @return User
+     *
+     * @throws ErrorResponseException
+     * @throws JsonException
+     * @throws Throwable
+     */
+    public function author(array $include = []): User
+    {
+        return User::findOrFail($this->author->id, $include, $this->getConnection());
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
