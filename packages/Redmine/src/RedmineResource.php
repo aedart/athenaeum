@@ -242,16 +242,27 @@ abstract class RedmineResource extends ArrayDto implements
      */
     public function save(bool $reload = false): bool
     {
+        // Create if does not exist
         if (!$this->exists()) {
             return $this->performCreate();
         }
 
+        // Obtain evt. pending includes, as they will be reset
+        // during the update request. Redmine does not appear
+        // to support includes for when updating resources.
+        // In any case, these will have to be reapplied,
+        // if reload is requested.
+        $includes = $this->pendingIncludes;
+
+        // Perform the update
         $wasUpdated = $this->performUpdate();
 
         // If requested reloaded, then force reload this
         // resource.
         if ($wasUpdated && $reload) {
-            return $this->reload();
+            return $this
+                ->withIncludes($includes)
+                ->reload();
         }
 
         return $wasUpdated;
