@@ -8,6 +8,7 @@ use Aedart\Contracts\Utils\Populatable;
 use Aedart\Dto\ArrayDto;
 use Aedart\Redmine\Traits\ConnectionTrait;
 use Aedart\Utils\Json;
+use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use Illuminate\Contracts\Support\Arrayable;
@@ -30,6 +31,7 @@ abstract class NestedList implements
     Populatable,
     Arrayable,
     IteratorAggregate,
+    ArrayAccess,
     Countable,
     Jsonable,
     JsonSerializable
@@ -135,6 +137,38 @@ abstract class NestedList implements
     public function count()
     {
         return count($this->list);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->list[$offset]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetGet($offset)
+    {
+        return $this->list[$offset];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->list[$offset] = $value;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->list[$offset]);
     }
 
     /*****************************************************************
