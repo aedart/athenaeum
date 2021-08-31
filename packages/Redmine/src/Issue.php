@@ -343,6 +343,26 @@ class Issue extends RedmineResource implements
     }
 
     /*****************************************************************
+     * Parent Issue
+     ****************************************************************/
+
+    /**
+     * Fetch this issue's parent issue
+     *
+     * @param string[] $include [optional] List of associated data to include
+     *
+     * @return Issue
+     *
+     * @throws ErrorResponseException
+     * @throws JsonException
+     * @throws Throwable
+     */
+    public function parent(array $include = []): Issue
+    {
+        return static::findOrFail($this->parent->id, $include, $this->getConnection());
+    }
+
+    /*****************************************************************
      * Internals
      ****************************************************************/
 
