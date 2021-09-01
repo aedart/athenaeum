@@ -26,6 +26,7 @@ use Aedart\Redmine\Pagination\PaginatedResults;
 use Aedart\Redmine\Traits\ConnectionTrait;
 use Aedart\Utils\Json;
 use Aedart\Utils\Str;
+use Carbon\Carbon;
 use Illuminate\Support\Traits\ForwardsCalls;
 use JsonException;
 use Psr\Http\Message\RequestInterface;
@@ -796,5 +797,25 @@ abstract class RedmineResource extends ArrayDto implements
 
         // Otherwise,
         throw UnexpectedResponse::from($response, $request);
+    }
+
+    /**
+     * Formats specified date fields to given format
+     *
+     * @param string[] $dateFields List of date properties
+     * @param array $data Payload data
+     * @param string $format [optional] Date format
+     *
+     * @return array
+     */
+    protected function formatDateFields(array $dateFields, array $data, string $format = 'Y-n-d'): array
+    {
+        foreach ($data as $property => $value) {
+            if (in_array($property, $dateFields) && $value instanceof Carbon) {
+                $data[$property] = $value->format($format);
+            }
+        }
+
+        return $data;
     }
 }

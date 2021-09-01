@@ -395,15 +395,6 @@ class Issue extends RedmineResource implements
      */
     protected function prepareDates(array $data): array
     {
-        $dateFields = ['start_date', 'due_date'];
-        $format = 'Y-m-d';
-
-        foreach ($data as $property => $value) {
-            if (in_array($property, $dateFields) && $value instanceof Carbon) {
-                $data[$property] = $value->format($format);
-            }
-        }
-
-        return $data;
+        return $this->formatDateFields(['start_date', 'due_date'], $data, 'Y-m-d');
     }
 }
