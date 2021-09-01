@@ -40,7 +40,7 @@ class OneFromList extends BelongsTo
         // Fetch the list
         $list = $related::fetchMultiple(
             $this->wrapFilters(), // It's uncertain if at all applicable here...
-            100,
+            100, // Redmine ignores this for resources that only return a predefined list!
             0,
             $this->getConnection()
         );
