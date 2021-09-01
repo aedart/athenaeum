@@ -3,7 +3,6 @@
 namespace Aedart\Tests\Integration\Redmine\Relations;
 
 use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
-use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Issue;
 use Aedart\Redmine\Project;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
@@ -20,43 +19,6 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  */
 class HasManyRelationTest extends RedmineTestCase
 {
-    /*****************************************************************
-     * Helpers
-     ****************************************************************/
-
-    /**
-     * Create an issue for given project
-     *
-     * @param int $projectId
-     * @return Issue
-     *
-     * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
-     */
-    public function createIssue(int $projectId): Issue
-    {
-        $data = [
-            'project_id' => $projectId,
-            'status_id' => 1,
-            'tracker_id' => 1,
-            'subject' => 'Project issue - via @aedart/athenaeum-redmine',
-            'description' => 'Projects are been created via Redmine API Client, in [Athenaeum](https://github.com/aedart/athenaeum) package.'
-        ];
-
-        $id = $this->getFaker()->unique()->randomNumber(4, true);
-
-        return Issue::create($data, [], $this->liveOrMockedConnection([
-            $this->mockCreatedResourceResponse($data, $id, Issue::class),
-            $this->mockDeletedResourceResponse()
-        ]));
-    }
-
-    /*****************************************************************
-     * Actual Tests
-     ****************************************************************/
-
-
     /**
      * @test
      *

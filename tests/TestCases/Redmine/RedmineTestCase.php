@@ -9,6 +9,7 @@ use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Redmine\Connections\Connection;
+use Aedart\Redmine\Issue;
 use Aedart\Redmine\Project;
 use Aedart\Redmine\Providers\RedmineServiceProvider;
 use Aedart\Redmine\RedmineResource;
@@ -521,5 +522,35 @@ abstract class RedmineTestCase extends LaravelTestCase
         // ----------------------------------------------------------------------- //
 
         return Project::create($data, [], $connection);
+    }
+
+    /**
+     * Create an issue for given project
+     *
+     * @param int $projectId
+     * @param array $data [optional]
+     *
+     * @return Issue
+     *
+     * @throws UnsupportedOperationException
+     * @throws \JsonException
+     * @throws \Throwable
+     */
+    public function createIssue(int $projectId, array $data = []): Issue
+    {
+        $data = array_merge([
+            'project_id' => $projectId,
+            'status_id' => 1,
+            'tracker_id' => 1,
+            'subject' => 'Project issue - via @aedart/athenaeum-redmine',
+            'description' => 'Projects are been created via Redmine API Client, in [Athenaeum](https://github.com/aedart/athenaeum) package.'
+        ], $data);
+
+        $id = $this->getFaker()->unique()->randomNumber(4, true);
+
+        return Issue::create($data, [], $this->liveOrMockedConnection([
+            $this->mockCreatedResourceResponse($data, $id, Issue::class),
+            $this->mockDeletedResourceResponse()
+        ]));
     }
 }

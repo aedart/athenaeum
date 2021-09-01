@@ -24,6 +24,7 @@ use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\ListOfRelatedIssues;
 use Aedart\Redmine\Partials\Reference;
 use Aedart\Redmine\Relations\BelongsTo;
+use Aedart\Redmine\Relations\OneFromList;
 use Carbon\Carbon;
 use InvalidArgumentException;
 use JsonException;
@@ -336,6 +337,16 @@ class Issue extends RedmineResource implements
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class, $this->project);
+    }
+
+    /**
+     * This issue's status
+     *
+     * @return OneFromList<IssueStatus>
+     */
+    public function status(): OneFromList
+    {
+        return $this->oneFrom(IssueStatus::class, $this->status);
     }
 
     /**
