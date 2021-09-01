@@ -250,6 +250,21 @@ abstract class RedmineTestCase extends LaravelTestCase
      */
     public function mockReloadedResourceResponse(array $data, $id, string $resourceClass): ResponseInterface
     {
+        return $this->mockSingleResourceResponse($data, $id, $resourceClass);
+    }
+
+    /**
+     * Mock a successful single response from Redmine
+     *
+     * @param array $data
+     * @param string|int $id
+     * @param string $resourceClass Class path to resource
+     *
+     * @return ResponseInterface
+     * @throws \JsonException
+     */
+    public function mockSingleResourceResponse(array $data, $id, string $resourceClass): ResponseInterface
+    {
         /** @var RedmineResource $resource */
         $resource = $resourceClass::make();
 

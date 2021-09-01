@@ -44,6 +44,7 @@ use Throwable;
 abstract class RedmineResource extends ArrayDto implements
     Resource
 {
+    use Concerns\ResourceRelations;
     use ConnectionTrait;
     use ForwardsCalls;
 

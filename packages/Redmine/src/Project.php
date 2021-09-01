@@ -8,6 +8,7 @@ use Aedart\Contracts\Redmine\Listable;
 use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;
+use Aedart\Redmine\Relations\BelongsTo;
 use Carbon\Carbon;
 
 /**
@@ -86,5 +87,19 @@ class Project extends RedmineResource implements
     public function resourceName(): string
     {
         return 'projects';
+    }
+
+    /*****************************************************************
+     * Relations
+     ****************************************************************/
+
+    /**
+     * This project's parent project
+     *
+     * @return BelongsTo<static>
+     */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(static::class, $this->parent);
     }
 }
