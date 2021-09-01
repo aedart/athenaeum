@@ -360,6 +360,16 @@ class Issue extends RedmineResource implements
     }
 
     /**
+     * This issue's priority
+     *
+     * @return OneFromList<IssuePriority>
+     */
+    public function priority(): OneFromList
+    {
+        return $this->oneFrom(IssuePriority::class, $this->priority);
+    }
+
+    /**
      * This issue's parent issue
      *
      * @return BelongsTo<static>
