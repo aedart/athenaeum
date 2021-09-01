@@ -87,7 +87,7 @@ class BelongsToRelationTest extends RedmineTestCase
             ->fetch();
 
         // ------------------------------------------------------------------- //
-        // Obtain related resource
+        // Assert found relation
 
         $this->assertSame($parent->id(), $related->id(), 'Invalid parent relation returned!');
         $this->assertTrue(isset($related->trackers), 'Include filter not applied');
