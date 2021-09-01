@@ -5,7 +5,6 @@ namespace Aedart\Redmine;
 use Aedart\Contracts\Redmine\Connection;
 use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
-use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
 use Aedart\Contracts\Redmine\Exceptions\RedmineException;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Contracts\Redmine\Listable;
@@ -24,6 +23,7 @@ use Aedart\Redmine\Partials\ListOfJournals;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\ListOfRelatedIssues;
 use Aedart\Redmine\Partials\Reference;
+use Aedart\Redmine\Relations\BelongsTo;
 use Carbon\Carbon;
 use InvalidArgumentException;
 use JsonException;
@@ -329,51 +329,33 @@ class Issue extends RedmineResource implements
      ****************************************************************/
 
     /**
-     * Fetch this issue's project
+     * The project this issue belongs to
      *
-     * @param string[] $include [optional] List of associated data to include
-     *
-     * @return Project
-     *
-     * @throws JsonException
-     * @throws Throwable
-     * @throws ErrorResponseException
+     * @return BelongsTo
      */
-    public function project(array $include = []): Project
+    public function project(): BelongsTo
     {
-        return Project::findOrFail($this->project->id, $include, $this->getConnection());
+        return $this->belongsTo(Project::class, $this->project);
     }
 
     /**
-     * Fetch this issue's parent issue
+     * This issue's parent issue
      *
-     * @param string[] $include [optional] List of associated data to include
-     *
-     * @return Issue
-     *
-     * @throws ErrorResponseException
-     * @throws JsonException
-     * @throws Throwable
+     * @return BelongsTo
      */
-    public function parent(array $include = []): Issue
+    public function parent(): BelongsTo
     {
-        return static::findOrFail($this->parent->id, $include, $this->getConnection());
+        return $this->belongsTo(static::class, $this->parent);
     }
 
     /**
-     * Fetch the author of this issue
+     * The author (user) of this issue
      *
-     * @param string[] $include [optional] List of associated data to include
-     *
-     * @return User
-     *
-     * @throws ErrorResponseException
-     * @throws JsonException
-     * @throws Throwable
+     * @return BelongsTo
      */
-    public function author(array $include = []): User
+    public function author(): BelongsTo
     {
-        return User::findOrFail($this->author->id, $include, $this->getConnection());
+        return $this->belongsTo(User::class, $this->author);
     }
 
     /*****************************************************************
