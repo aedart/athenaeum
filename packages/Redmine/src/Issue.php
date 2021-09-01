@@ -331,7 +331,7 @@ class Issue extends RedmineResource implements
     /**
      * The project this issue belongs to
      *
-     * @return BelongsTo
+     * @return BelongsTo<Project>
      */
     public function project(): BelongsTo
     {
@@ -341,7 +341,7 @@ class Issue extends RedmineResource implements
     /**
      * This issue's parent issue
      *
-     * @return BelongsTo
+     * @return BelongsTo<static>
      */
     public function parent(): BelongsTo
     {
@@ -351,7 +351,7 @@ class Issue extends RedmineResource implements
     /**
      * The author (user) of this issue
      *
-     * @return BelongsTo
+     * @return BelongsTo<User>
      */
     public function author(): BelongsTo
     {
