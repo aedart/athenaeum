@@ -53,6 +53,36 @@ class Project extends RedmineResource implements
     Updatable,
     Deletable
 {
+    /**
+     * Active project status
+     *
+     * @see https://www.redmine.org/projects/redmine/repository/entry/trunk/app/models/project.rb
+     */
+    public const STATUS_ACTIVE = 1;
+
+    /**
+     * Closed project status
+     *
+     * @see https://www.redmine.org/projects/redmine/repository/entry/trunk/app/models/project.rb
+     */
+    public const STATUS_CLOSED = 5;
+
+    /**
+     * Archived project status
+     *
+     * @see https://www.redmine.org/projects/redmine/repository/entry/trunk/app/models/project.rb
+     */
+    public const STATUS_ARCHIVED = 9;
+
+    /**
+     * List of available predefined statuses
+     */
+    public const STATUS_LIST = [
+        self::STATUS_ACTIVE,
+        self::STATUS_CLOSED,
+        self::STATUS_ARCHIVED
+    ];
+
     protected array $allowed = [
         'id' => 'int',
         'name' => 'string',
