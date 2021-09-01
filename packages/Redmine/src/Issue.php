@@ -358,6 +358,18 @@ class Issue extends RedmineResource implements
         return $this->belongsTo(User::class, $this->author);
     }
 
+    /**
+     * The version this issue has been assigned to
+     *
+     * @return BelongsTo<Version>
+     */
+    public function fixedVersion(): BelongsTo
+    {
+        return $this->belongsTo(Version::class, $this->fixed_version);
+    }
+
+    // TODO: Assignee can also be a group! No way to tell what is return... ty Redmine!
+
     /*****************************************************************
      * Utils
      ****************************************************************/

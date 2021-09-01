@@ -228,7 +228,6 @@ class Version extends RedmineResource implements
         return $this->belongsTo(Project::class, $this->project);
     }
 
-
     /*****************************************************************
      * Utils
      ****************************************************************/

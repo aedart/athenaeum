@@ -130,8 +130,35 @@ class Project extends RedmineResource implements
         return $this->hasMany(Issue::class);
     }
 
+    /**
+     * The default version of this project
+     *
+     * @return BelongsTo<Version>
+     */
+    public function defaultVersion(): BelongsTo
+    {
+        return $this->belongsTo(Version::class, $this->default_version);
+    }
+
+    /**
+     * Versions belonging to this project
+     *
+     * @return HasMany<Version>
+     */
     public function versions(): HasMany
     {
         return new ProjectVersions($this, Version::class);
     }
+
+    // TODO: Assignee can also be a group! No way to tell what is return... ty Redmine!
+//    /**
+//     * The default assignee when issues are created in
+//     * this project
+//     *
+//     * @return BelongsTo<User>
+//     */
+//    public function defaultAssignee(): BelongsTo
+//    {
+//        return $this->belongsTo(User::class, $this->default_assignee);
+//    }
 }

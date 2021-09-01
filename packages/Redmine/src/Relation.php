@@ -4,7 +4,7 @@ namespace Aedart\Redmine;
 
 use Aedart\Contracts\Redmine\Connection;
 use Aedart\Contracts\Redmine\Deletable;
-use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
+use Aedart\Redmine\Relations\BelongsTo;
 use InvalidArgumentException;
 use JsonException;
 use Throwable;
@@ -145,40 +145,6 @@ class Relation extends RedmineResource implements
     }
 
     /**
-     * Fetch the parent issue
-     *
-     * @param string[] $include [optional] List of associated data to include
-     * @param string|Connection|null $connection [optional] Redmine connection profile
-     *
-     * @return Issue
-     *
-     * @throws ErrorResponseException
-     * @throws JsonException
-     * @throws Throwable
-     */
-    public function parent(array $include = [], $connection = null): Issue
-    {
-        return $this->findOrFailIssue($this->issue_id, $include, $connection);
-    }
-
-    /**
-     * Fetch the related issue
-     *
-     * @param string[] $include [optional] List of associated data to include
-     * @param string|Connection|null $connection [optional] Redmine connection profile
-     *
-     * @return Issue
-     *
-     * @throws ErrorResponseException
-     * @throws JsonException
-     * @throws Throwable
-     */
-    public function related(array $include = [], $connection = null): Issue
-    {
-        return $this->findOrFailIssue($this->issue_to_id, $include, $connection);
-    }
-
-    /**
      * Set the relation type property
      *
      * @param string|null $type [optional]
@@ -197,24 +163,28 @@ class Relation extends RedmineResource implements
     }
 
     /*****************************************************************
-     * Internals
+     * Relations
      ****************************************************************/
 
     /**
-     * Find or fail issue
+     * The parent issue
      *
-     * @param string|int $id Redmine resource id
-     * @param string[] $include [optional] List of associated data to include
-     * @param string|Connection|null $connection [optional] Redmine connection profile
-     *
-     * @return Issue
-     *
-     * @throws JsonException
-     * @throws Throwable
-     * @throws ErrorResponseException
+     * @return BelongsTo<Issue>
      */
-    protected function findOrFailIssue(int $id, array $include = [], $connection = null): Issue
+    public function parent(): BelongsTo
     {
-        return Issue::findOrFail($id, $include, $connection);
+        return $this->belongsTo(Issue::class)
+            ->foreignKey($this->issue_id);
+    }
+
+    /**
+     * The related issue
+     *
+     * @return BelongsTo<Issue>
+     */
+    public function related(): BelongsTo
+    {
+        return $this->belongsTo(Issue::class)
+            ->foreignKey($this->issue_to_id);
     }
 }
