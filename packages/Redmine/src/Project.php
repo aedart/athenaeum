@@ -9,6 +9,7 @@ use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;
 use Aedart\Redmine\Relations\BelongsTo;
+use Aedart\Redmine\Relations\HasMany;
 use Carbon\Carbon;
 
 /**
@@ -101,5 +102,15 @@ class Project extends RedmineResource implements
     public function parent(): BelongsTo
     {
         return $this->belongsTo(static::class, $this->parent);
+    }
+
+    /**
+     * Issues that are owned by this project
+     *
+     * @return HasMany<Issue>
+     */
+    public function issues(): HasMany
+    {
+        return $this->hasMany(Issue::class);
     }
 }
