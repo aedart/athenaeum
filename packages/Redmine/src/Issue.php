@@ -340,6 +340,16 @@ class Issue extends RedmineResource implements
     }
 
     /**
+     * The tracker used by this issue (the type of issue)
+     *
+     * @return OneFromList<Tracker>
+     */
+    public function tracker(): OneFromList
+    {
+        return $this->oneFrom(Tracker::class, $this->tracker);
+    }
+
+    /**
      * This issue's status
      *
      * @return OneFromList<IssueStatus>
