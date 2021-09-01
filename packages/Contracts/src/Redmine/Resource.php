@@ -446,4 +446,22 @@ interface Resource extends Dto,
      * @return callable
      */
     public function failedExpectationHandler(): callable;
+
+    /**
+     * Prepares the data before new create resource request is sent
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function prepareBeforeCreate(array $data): array;
+
+    /**
+     * Prepares the data before existing resource update request is sent
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function prepareBeforeUpdate(array $data): array;
 }

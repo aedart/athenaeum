@@ -359,13 +359,13 @@ class Issue extends RedmineResource implements
     }
 
     /*****************************************************************
-     * Internals
+     * Utils
      ****************************************************************/
 
     /**
      * @inheritDoc
      */
-    protected function prepareBeforeCreate(array $data): array
+    public function prepareBeforeCreate(array $data): array
     {
         return $this->prepareAttachments(
             $this->prepareDates($data)
@@ -375,12 +375,16 @@ class Issue extends RedmineResource implements
     /**
      * @inheritDoc
      */
-    protected function prepareBeforeUpdate(array $data): array
+    public function prepareBeforeUpdate(array $data): array
     {
         return $this->prepareAttachments(
             $this->prepareDates($data)
         );
     }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
 
     /**
      * Formats some data fields

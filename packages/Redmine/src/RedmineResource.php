@@ -643,6 +643,30 @@ abstract class RedmineResource extends ArrayDto implements
     }
 
     /**
+     * Prepares the data before new create resource request is sent
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function prepareBeforeCreate(array $data): array
+    {
+        return $data;
+    }
+
+    /**
+     * Prepares the data before existing resource update request is sent
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function prepareBeforeUpdate(array $data): array
+    {
+        return $data;
+    }
+
+    /**
      * Forward calls to the Http Client's request builder
      *
      * @param string $name method name
@@ -743,30 +767,6 @@ abstract class RedmineResource extends ArrayDto implements
         );
 
         return true;
-    }
-
-    /**
-     * Prepares the data before new create resource request is sent
-     *
-     * @param array $data
-     *
-     * @return array
-     */
-    protected function prepareBeforeCreate(array $data): array
-    {
-        return $data;
-    }
-
-    /**
-     * Prepares the data before existing resource update request is sent
-     *
-     * @param array $data
-     *
-     * @return array
-     */
-    protected function prepareBeforeUpdate(array $data): array
-    {
-        return $data;
     }
 
     /**
