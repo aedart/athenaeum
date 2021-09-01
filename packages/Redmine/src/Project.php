@@ -9,6 +9,7 @@ use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;
 use Aedart\Redmine\Relations\BelongsTo;
+use Aedart\Redmine\Relations\Custom\ProjectVersions;
 use Aedart\Redmine\Relations\HasMany;
 use Carbon\Carbon;
 
@@ -90,6 +91,21 @@ class Project extends RedmineResource implements
         return 'projects';
     }
 
+    /**
+     * Create a new version for this project
+     *
+     * @param array $data
+     *
+     * @return Version
+     *
+     * @throws \JsonException
+     * @throws \Throwable
+     */
+    public function createVersion(array $data): Version
+    {
+        return Version::createForProject($this, $data, $this->getConnection());
+    }
+
     /*****************************************************************
      * Relations
      ****************************************************************/
@@ -112,5 +128,10 @@ class Project extends RedmineResource implements
     public function issues(): HasMany
     {
         return $this->hasMany(Issue::class);
+    }
+
+    public function versions(): HasMany
+    {
+        return new ProjectVersions($this, Version::class);
     }
 }
