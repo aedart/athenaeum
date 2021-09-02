@@ -390,6 +390,16 @@ class Issue extends RedmineResource implements
     }
 
     /**
+     * The category assigned to this issue
+     *
+     * @return BelongsTo<IssueCategory>
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(IssueCategory::class, $this->category);
+    }
+
+    /**
      * The version this issue has been assigned to
      *
      * @return BelongsTo<Version>
