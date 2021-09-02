@@ -9,9 +9,12 @@ use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;
 use Aedart\Redmine\Relations\BelongsTo;
+use Aedart\Redmine\Relations\Custom\ProjectIssueCategories;
 use Aedart\Redmine\Relations\Custom\ProjectVersions;
 use Aedart\Redmine\Relations\HasMany;
 use Carbon\Carbon;
+use JsonException;
+use Throwable;
 
 /**
  * Project Resource
@@ -128,12 +131,26 @@ class Project extends RedmineResource implements
      *
      * @return Version
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
     public function createVersion(array $data): Version
     {
         return Version::createForProject($this, $data, $this->getConnection());
+    }
+
+    /**
+     * Create a new issue category for this project
+     *
+     * @param array $data
+     *
+     * @return IssueCategory
+     *
+     * @throws Throwable
+     */
+    public function createIssueCategory(array $data): IssueCategory
+    {
+        return IssueCategory::createForProject($this, $data, $this->getConnection());
     }
 
     /*****************************************************************
@@ -178,6 +195,16 @@ class Project extends RedmineResource implements
     public function versions(): HasMany
     {
         return new ProjectVersions($this, Version::class);
+    }
+
+    /**
+     * Issue categories used by this project
+     *
+     * @return HasMany<IssueCategory>
+     */
+    public function issueCategories(): HasMany
+    {
+        return new ProjectIssueCategories($this, IssueCategory::class);
     }
 
     // TODO: Assignee can also be a group! No way to tell what is return... ty Redmine!
