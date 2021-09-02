@@ -13,6 +13,7 @@ use Aedart\Redmine\Issue;
 use Aedart\Redmine\Project;
 use Aedart\Redmine\Providers\RedmineServiceProvider;
 use Aedart\Redmine\RedmineResource;
+use Aedart\Redmine\User;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
@@ -550,6 +551,35 @@ abstract class RedmineTestCase extends LaravelTestCase
 
         return Issue::create($data, [], $this->liveOrMockedConnection([
             $this->mockCreatedResourceResponse($data, $id, Issue::class),
+            $this->mockDeletedResourceResponse()
+        ]));
+    }
+
+    /**
+     * Create a new user
+     *
+     * @param array $data [optional]
+     *
+     * @return User
+     *
+     * @throws UnsupportedOperationException
+     * @throws \JsonException
+     * @throws \Throwable
+     */
+    public function createUser(array $data = []): User
+    {
+        $faker = $this->getFaker();
+
+        $data = array_merge([
+            'login' => $faker->userName,
+            'password' => $faker->password(15),
+            'firstname' => 'Test User',
+            'lastname' => 'Athenaeum Redmine',
+            'mail' => 'athenaeum-test-' . $faker->randomNumber(6, true) . '@example.org'
+        ], $data);
+
+        return User::create($data, [], $this->liveOrMockedConnection([
+            $this->mockCreatedResourceResponse($data, 1234, User::class),
             $this->mockDeletedResourceResponse()
         ]));
     }
