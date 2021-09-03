@@ -12,6 +12,7 @@ use Aedart\Redmine\Connections\Connection;
 use Aedart\Redmine\Group;
 use Aedart\Redmine\Issue;
 use Aedart\Redmine\Project;
+use Aedart\Redmine\ProjectMembership;
 use Aedart\Redmine\Providers\RedmineServiceProvider;
 use Aedart\Redmine\RedmineResource;
 use Aedart\Redmine\Role;
@@ -530,6 +531,96 @@ abstract class RedmineTestCase extends LaravelTestCase
     }
 
     /**
+     * Create a new user member for given project
+     *
+     * @param Project $project
+     * @param User $user
+     * @param Role[] $roles
+     *
+     * @return ProjectMembership
+     *
+     * @throws JsonException
+     * @throws Throwable
+     * @throws UnsupportedOperationException
+     */
+    public function createProjectUserMember(Project $project, User $user, array $roles): ProjectMembership
+    {
+        $data = [
+            'project' => [ 'id' => $project->id, 'name' => $project->name ],
+            'user' => [ 'id' => $user->id() ],
+            'roles' => []
+        ];
+
+        foreach ($roles as $role) {
+            $data['roles'][] = [
+                'id' => $role->id(),
+                'name' => $role->name
+            ];
+        }
+
+        // (Re)Mock connection on project, to return new membership response.
+        // Connection is passed on to related resource...
+        $originalConnection = $project->getConnection();
+
+        $project->setConnection($this->liveOrMockedConnection([
+            $this->mockCreatedResourceResponse($data, 1234, ProjectMembership::class),
+            $this->mockDeletedResourceResponse()
+        ]));
+
+        // Create membership via the project's helper method!
+        $member = $project->addUserMember($user, collect($roles)->pluck('id')->toArray());
+
+        $project->setConnection($originalConnection);
+
+        return $member;
+    }
+
+    /**
+     * Create a new group member for given project
+     *
+     * @param Project $project
+     * @param Group $group
+     * @param Role[] $roles
+     *
+     * @return ProjectMembership
+     *
+     * @throws JsonException
+     * @throws Throwable
+     * @throws UnsupportedOperationException
+     */
+    public function createProjectGroupMember(Project $project, Group $group, array $roles): ProjectMembership
+    {
+        $data = [
+            'project' => [ 'id' => $project->id, 'name' => $project->name ],
+            'group' => [ 'id' => $group->id() ],
+            'roles' => []
+        ];
+
+        foreach ($roles as $role) {
+            $data['roles'][] = [
+                'id' => $role->id(),
+                'name' => $role->name
+            ];
+        }
+
+        // (Re)Mock connection on project, to return new membership response.
+        // Connection is passed on to related resource...
+        $originalConnection = $project->getConnection();
+
+        $project->setConnection($this->liveOrMockedConnection([
+            $this->mockCreatedResourceResponse($data, 1234, ProjectMembership::class),
+            $this->mockDeletedResourceResponse()
+        ]));
+
+        // Create membership via the project's helper method!
+        $member = $project->addGroupMember($group, collect($roles)->pluck('id')->toArray());
+
+        $project->setConnection($originalConnection);
+
+        return $member;
+    }
+
+    /**
      * Create an issue for given project
      *
      * @param int $projectId
@@ -570,7 +661,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      * @throws JsonException
      * @throws Throwable
      */
-    protected function createGroup(array $data = []): Group
+    public function createGroup(array $data = []): Group
     {
         $data = array_merge([
             'name' => 'Test Group ' . $this->getFaker()->unique()->randomNumber(4, true) . ' @aedart/athenaeum-redmine'
@@ -591,7 +682,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      * @throws JsonException
      * @throws Throwable
      */
-    protected function randomRole(): Role
+    public function randomRole(): Role
     {
         $list = [
             [

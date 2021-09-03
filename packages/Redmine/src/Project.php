@@ -5,11 +5,14 @@ namespace Aedart\Redmine;
 use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Listable;
+use Aedart\Contracts\Redmine\Resource;
 use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;
 use Aedart\Redmine\Relations\BelongsTo;
+//use Aedart\Redmine\Relations\Custom\AssignedTo;
 use Aedart\Redmine\Relations\Custom\ProjectIssueCategories;
+use Aedart\Redmine\Relations\Custom\ProjectMemberships;
 use Aedart\Redmine\Relations\Custom\ProjectVersions;
 use Aedart\Redmine\Relations\HasMany;
 use Carbon\Carbon;
@@ -125,6 +128,60 @@ class Project extends RedmineResource implements
     }
 
     /**
+     * Add a user as a project member
+     *
+     * @param int|User|Reference $user user identifier, instance or user reference
+     * @param int[] $roles The role(s) the given user is to be granted for this project
+     *
+     * @return ProjectMembership
+     *
+     * @throws Throwable
+     */
+    public function addUserMember($user, array $roles): ProjectMembership
+    {
+        $id = $user;
+        if ($user instanceof Resource || $user instanceof Reference) {
+            $id = $user->id;
+        }
+
+        return $this->createMembership([
+            'user_id' => $id,
+            'role_ids' => $roles
+        ]);
+    }
+
+    /**
+     * Add a group as project member
+     *
+     * @param int|Group|Reference $group group identifier, instance or group reference
+     * @param int[] $roles The role(s) the given user is to be granted for this project
+     *
+     * @return ProjectMembership
+     *
+     * @throws Throwable
+     */
+    public function addGroupMember($group, array $roles): ProjectMembership
+    {
+        // Project membership accepts a group id as the "user_id", for membership,
+        // so it's safe enough to use the exact same method for achieving the same...
+        return $this->addUserMember($group, $roles);
+    }
+
+    /**
+     * Create a new membership for this project
+     *
+     * @param array $data
+     *
+     * @return ProjectMembership
+     *
+     * @throws Throwable
+     */
+    public function createMembership(array $data): ProjectMembership
+    {
+        return ProjectMembership::createForProject($this, $data, $this->getConnection());
+    }
+
+    /**
      * Create a new version for this project
      *
      * @param array $data
@@ -207,15 +264,24 @@ class Project extends RedmineResource implements
         return new ProjectIssueCategories($this, IssueCategory::class);
     }
 
-    // TODO: Assignee can also be a group! No way to tell what is return... ty Redmine!
+    /**
+     * This project's memberships
+     *
+     * @return HasMany<ProjectMembership>
+     */
+    public function members(): HasMany
+    {
+        return new ProjectMemberships($this, ProjectMembership::class);
+    }
+
 //    /**
 //     * The default assignee when issues are created in
-//     * this project
+//     * this project - can either be a user or a group
 //     *
-//     * @return BelongsTo<User>
+//     * @return BelongsTo<User|Group>
 //     */
 //    public function defaultAssignee(): BelongsTo
 //    {
-//        return $this->belongsTo(User::class, $this->default_assignee);
+//        return new AssignedTo($this, $this->default_assignee);
 //    }
 }
