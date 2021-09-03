@@ -1,6 +1,6 @@
 {
     "name": "aedart/athenaeum-redmine",
-    "description": "Redmine API Client",
+    "description": "Redmine API Client for Laravel",
     "keywords": [
         "Athenaeum",
         "Redmine",
