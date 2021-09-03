@@ -47,7 +47,7 @@ class Tracker extends RedmineResource implements
     /**
      * Teh default issue status of this tracker
      *
-     * @return OneFromList
+     * @return OneFromList<IssueStatus>
      */
     public function defaultStatus(): OneFromList
     {
