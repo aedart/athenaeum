@@ -452,7 +452,7 @@ class Issue extends RedmineResource implements
     public function allChildren($subProject = '*', $status = '*'): HasMany
     {
         return $this->children()
-            ->filter(function(Builder $request) use($subProject, $status) {
+            ->filter(function (Builder $request) use ($subProject, $status) {
                 return $request
                     ->where('subproject_id', $subProject)
                     ->where('status_id', $status);
