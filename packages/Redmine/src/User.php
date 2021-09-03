@@ -12,6 +12,7 @@ use Aedart\Redmine\Partials\ListOfMembershipReferences;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\MembershipReference;
 use Aedart\Redmine\Partials\Reference;
+use Aedart\Redmine\Relations\HasMany;
 use Carbon\Carbon;
 
 /**
@@ -165,5 +166,29 @@ class User extends RedmineResource implements
     public function resourceName(): string
     {
         return 'users';
+    }
+
+    /*****************************************************************
+     * Relations
+     ****************************************************************/
+
+    /**
+     * Issues that have been authored by this user
+     *
+     * @return HasMany<Issue>
+     */
+    public function authoredIssues(): HasMany
+    {
+        return $this->hasMany(Issue::class, 'author_id');
+    }
+
+    /**
+     * Issues that are assigned directly to this user
+     *
+     * @return HasMany<Issue>
+     */
+    public function assignedIssues(): HasMany
+    {
+        return $this->hasMany(Issue::class, 'assigned_to_id');
     }
 }

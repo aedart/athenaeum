@@ -3,6 +3,7 @@
 namespace Aedart\Redmine;
 
 use Aedart\Contracts\Redmine\Listable;
+use Aedart\Redmine\Relations\HasMany;
 
 /**
  * Issue Status Resource
@@ -31,5 +32,19 @@ class IssueStatus extends RedmineResource implements
     public function resourceName(): string
     {
         return 'issue_statuses';
+    }
+
+    /*****************************************************************
+     * Relations
+     ****************************************************************/
+
+    /**
+     * Issues with this status
+     *
+     * @return HasMany<Issue>
+     */
+    public function issues(): HasMany
+    {
+        return $this->hasMany(Issue::class, 'status_id');
     }
 }

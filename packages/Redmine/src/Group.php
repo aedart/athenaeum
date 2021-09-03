@@ -8,6 +8,7 @@ use Aedart\Contracts\Redmine\Listable;
 use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;
+use Aedart\Redmine\Relations\HasMany;
 use InvalidArgumentException;
 
 /**
@@ -115,6 +116,20 @@ class Group extends RedmineResource implements
         }
 
         return true;
+    }
+
+    /*****************************************************************
+     * Relations
+     ****************************************************************/
+
+    /**
+     * Issues that are assigned directly to this group
+     *
+     * @return HasMany<Issue>
+     */
+    public function assignedIssues(): HasMany
+    {
+        return $this->hasMany(Issue::class, 'assigned_to_id');
     }
 
     /*****************************************************************

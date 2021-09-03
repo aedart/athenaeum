@@ -7,6 +7,7 @@ use Aedart\Redmine\Partials\ListOfPossibleValues;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\PossibleValue;
 use Aedart\Redmine\Partials\Reference;
+use Aedart\Redmine\Relations\HasMany;
 
 /**
  * Custom Field Resource
@@ -63,5 +64,26 @@ class CustomField extends RedmineResource implements
     public function resourceName(): string
     {
         return 'custom_fields';
+    }
+
+    /*****************************************************************
+     * Relations
+     ****************************************************************/
+
+    /**
+     * Issues using this custom field, matching the given value
+     *
+     * @see https://www.redmine.org/projects/redmine/wiki/Rest_Issues
+     *
+     * @param string|int $value
+     *
+     * @return HasMany<Issue>
+     */
+    public function issuesMatching($value): HasMany
+    {
+        $filterKey = 'cf_' . $this->id();
+
+        return $this->hasMany(Issue::class, $filterKey)
+            ->ownKey($value);
     }
 }

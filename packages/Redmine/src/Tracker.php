@@ -4,6 +4,7 @@ namespace Aedart\Redmine;
 
 use Aedart\Contracts\Redmine\Listable;
 use Aedart\Redmine\Partials\Reference;
+use Aedart\Redmine\Relations\HasMany;
 use Aedart\Redmine\Relations\OneFromList;
 
 /**
@@ -51,5 +52,15 @@ class Tracker extends RedmineResource implements
     public function defaultStatus(): OneFromList
     {
         return $this->oneFrom(IssueStatus::class, $this->default_status);
+    }
+
+    /**
+     * Issues of this tracker type
+     *
+     * @return HasMany<Issue>
+     */
+    public function issues(): HasMany
+    {
+        return $this->hasMany(Issue::class, 'tracker_id');
     }
 }

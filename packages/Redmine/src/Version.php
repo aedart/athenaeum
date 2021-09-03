@@ -6,6 +6,7 @@ use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\Reference;
 use Aedart\Redmine\Relations\BelongsTo;
+use Aedart\Redmine\Relations\HasMany;
 use Carbon\Carbon;
 
 /**
@@ -129,6 +130,16 @@ class Version extends RedmineResource implements
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class, $this->project);
+    }
+
+    /**
+     * Issues assigned to this version
+     *
+     * @return HasMany<Issue>
+     */
+    public function issues(): HasMany
+    {
+        return $this->hasMany(Issue::class, 'fixed_version_id');
     }
 
     /*****************************************************************
