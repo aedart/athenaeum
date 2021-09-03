@@ -261,6 +261,18 @@ abstract class RedmineTestCase extends LaravelTestCase
     }
 
     /**
+     * Mock a "not found" response
+     *
+     * @return ResponseInterface
+     *
+     * @throws JsonException
+     */
+    public function mockNotFoundResponse(): ResponseInterface
+    {
+        return $this->mockJsonResponse([], StatusCodes::NOT_FOUND);
+    }
+
+    /**
      * Mock a successful single response from Redmine
      *
      * @param array $data

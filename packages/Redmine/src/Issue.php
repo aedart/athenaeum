@@ -24,6 +24,7 @@ use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\ListOfRelatedIssues;
 use Aedart\Redmine\Partials\Reference;
 use Aedart\Redmine\Relations\BelongsTo;
+use Aedart\Redmine\Relations\Custom\AssignedTo;
 use Aedart\Redmine\Relations\OneFromList;
 use Carbon\Carbon;
 use InvalidArgumentException;
@@ -409,7 +410,15 @@ class Issue extends RedmineResource implements
         return $this->belongsTo(Version::class, $this->fixed_version);
     }
 
-    // TODO: Assignee can also be a group! No way to tell what is return... ty Redmine!
+    /**
+     * The user or group this issue is assigned to
+     *
+     * @return BelongsTo<User|Group>
+     */
+    public function assignedTo(): BelongsTo
+    {
+        return new AssignedTo($this, $this->assigned_to);
+    }
 
     /*****************************************************************
      * Utils

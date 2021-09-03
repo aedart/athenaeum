@@ -10,7 +10,7 @@ use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;
 use Aedart\Redmine\Relations\BelongsTo;
-//use Aedart\Redmine\Relations\Custom\AssignedTo;
+use Aedart\Redmine\Relations\Custom\AssignedTo;
 use Aedart\Redmine\Relations\Custom\ProjectDependentResources;
 use Aedart\Redmine\Relations\HasMany;
 use Carbon\Carbon;
@@ -272,14 +272,14 @@ class Project extends RedmineResource implements
         return new ProjectDependentResources($this, ProjectMembership::class);
     }
 
-//    /**
-//     * The default assignee when issues are created in
-//     * this project - can either be a user or a group
-//     *
-//     * @return BelongsTo<User|Group>
-//     */
-//    public function defaultAssignee(): BelongsTo
-//    {
-//        return new AssignedTo($this, $this->default_assignee);
-//    }
+    /**
+     * The default assignee when issues are created in
+     * this project - can either be a user or a group
+     *
+     * @return BelongsTo<User|Group>
+     */
+    public function defaultAssignee(): BelongsTo
+    {
+        return new AssignedTo($this, $this->default_assignee);
+    }
 }
