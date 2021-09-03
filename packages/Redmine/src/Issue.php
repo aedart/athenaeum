@@ -2,6 +2,7 @@
 
 namespace Aedart\Redmine;
 
+use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Redmine\Connection;
 use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
@@ -25,6 +26,7 @@ use Aedart\Redmine\Partials\ListOfRelatedIssues;
 use Aedart\Redmine\Partials\Reference;
 use Aedart\Redmine\Relations\BelongsTo;
 use Aedart\Redmine\Relations\Custom\AssignedTo;
+use Aedart\Redmine\Relations\HasMany;
 use Aedart\Redmine\Relations\OneFromList;
 use Carbon\Carbon;
 use InvalidArgumentException;
@@ -418,6 +420,43 @@ class Issue extends RedmineResource implements
     public function assignedTo(): BelongsTo
     {
         return new AssignedTo($this, $this->assigned_to);
+    }
+
+    /**
+     * Child issues
+     *
+     * NOTE: By default, this relation will NOT return all children,
+     * if child issues are spread across multiple sub-projects.
+     * Furthermore, closed issues also not part of the response,
+     * by default.
+     *
+     * You can include "children", to obtain references to child issues.
+     * Or you can use the {@see allChildren} relation to specify evt.
+     * sub-project and status.
+     *
+     * @return HasMany<static>
+     */
+    public function children(): HasMany
+    {
+        return $this->hasMany(static::class, 'parent_id');
+    }
+
+    /**
+     * All child issues
+     *
+     * @param string|int $subProject [optional] Project identifier, or '*' = wildcard for all nested sub-projects
+     * @param string|int $status [optional] {@see IssueStatus} identifier, name, or '*' = wildcard for all issues status
+     *
+     * @return HasMany<static>
+     */
+    public function allChildren($subProject = '*', $status = '*'): HasMany
+    {
+        return $this->children()
+            ->filter(function(Builder $request) use($subProject, $status) {
+                return $request
+                    ->where('subproject_id', $subProject)
+                    ->where('status_id', $status);
+            });
     }
 
     /*****************************************************************
