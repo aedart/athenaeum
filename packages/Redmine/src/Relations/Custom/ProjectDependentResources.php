@@ -2,26 +2,27 @@
 
 namespace Aedart\Redmine\Relations\Custom;
 
-use Aedart\Redmine\ProjectMembership;
 use Aedart\Redmine\Relations\HasMany;
 
 /**
- * Project Memberships - custom relation
+ * Project Dependent Resources - custom relation
+ *
+ * @see \Aedart\Redmine\Concerns\ProjectDependentResource
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine\Relations\Custom
  */
-class ProjectMemberships extends HasMany
+class ProjectDependentResources extends HasMany
 {
     /**
      * @inheritDoc
      */
     public function fetch()
     {
-        /** @var string|ProjectMembership $membership */
-        $membership = $this->related();
+        /** @var string|\Aedart\Redmine\Concerns\ProjectDependentResource $resource */
+        $resource = $this->related();
 
-        return $membership::fetchForProject(
+        return $resource::fetchForProject(
             $this->parent()->id(),
             $this->wrapFilters(),
             $this->getLimit(),

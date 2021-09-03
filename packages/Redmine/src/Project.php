@@ -11,9 +11,7 @@ use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;
 use Aedart\Redmine\Relations\BelongsTo;
 //use Aedart\Redmine\Relations\Custom\AssignedTo;
-use Aedart\Redmine\Relations\Custom\ProjectIssueCategories;
-use Aedart\Redmine\Relations\Custom\ProjectMemberships;
-use Aedart\Redmine\Relations\Custom\ProjectVersions;
+use Aedart\Redmine\Relations\Custom\ProjectDependentResources;
 use Aedart\Redmine\Relations\HasMany;
 use Carbon\Carbon;
 use JsonException;
@@ -251,7 +249,7 @@ class Project extends RedmineResource implements
      */
     public function versions(): HasMany
     {
-        return new ProjectVersions($this, Version::class);
+        return new ProjectDependentResources($this, Version::class);
     }
 
     /**
@@ -261,7 +259,7 @@ class Project extends RedmineResource implements
      */
     public function issueCategories(): HasMany
     {
-        return new ProjectIssueCategories($this, IssueCategory::class);
+        return new ProjectDependentResources($this, IssueCategory::class);
     }
 
     /**
@@ -271,7 +269,7 @@ class Project extends RedmineResource implements
      */
     public function members(): HasMany
     {
-        return new ProjectMemberships($this, ProjectMembership::class);
+        return new ProjectDependentResources($this, ProjectMembership::class);
     }
 
 //    /**
