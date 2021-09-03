@@ -38,7 +38,7 @@ return [
             'http_client' => 'redmine',
 
             /*
-             | Redmine Authentication token. This option automatically be set as
+             | Redmine Authentication token. This option is automatically set as
              | the appropriate Http Header (X-Redmine-API-Key)
             */
             'authentication' => env('REDMINE_TOKEN')
