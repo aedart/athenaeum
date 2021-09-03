@@ -9,10 +9,12 @@ use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Redmine\Connections\Connection;
+use Aedart\Redmine\Group;
 use Aedart\Redmine\Issue;
 use Aedart\Redmine\Project;
 use Aedart\Redmine\Providers\RedmineServiceProvider;
 use Aedart\Redmine\RedmineResource;
+use Aedart\Redmine\Role;
 use Aedart\Redmine\User;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
@@ -23,8 +25,10 @@ use Codeception\Configuration;
 use Codeception\Exception\ConfigurationException;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Illuminate\Support\Facades\Http;
+use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use Teapot\StatusCode\All as StatusCodes;
+use Throwable;
 
 /**
  * Redmine Test Case
@@ -169,7 +173,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      * @param array $headers [optional] Evt. headers
      *
      * @return ResponseInterface
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function mockJsonResponse(array $body = [], int $status = StatusCodes::OK, array $headers = []): ResponseInterface
     {
@@ -192,7 +196,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      * @param int $offset [optional]
      *
      * @return ResponseInterface
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function mockListOfResourcesResponse(
         array $list,
@@ -223,7 +227,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      * @param string $resourceClass Class path to resource
      *
      * @return ResponseInterface
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function mockCreatedResourceResponse(array $data, $id, string $resourceClass): ResponseInterface
     {
@@ -248,7 +252,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      * @param string $resourceClass Class path to resource
      *
      * @return ResponseInterface
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function mockReloadedResourceResponse(array $data, $id, string $resourceClass): ResponseInterface
     {
@@ -263,7 +267,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      * @param string $resourceClass Class path to resource
      *
      * @return ResponseInterface
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function mockSingleResourceResponse(array $data, $id, string $resourceClass): ResponseInterface
     {
@@ -303,7 +307,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      *
      * @return ResponseInterface
      *
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function mockUpdatedResourceResponse(): ResponseInterface
     {
@@ -315,7 +319,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      *
      * @return ResponseInterface
      *
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function mockDeletedResourceResponse(): ResponseInterface
     {
@@ -330,7 +334,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      *
      * @return ResponseInterface
      *
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function mockUploadedResponse(?int $id = null, ?string $token = null): ResponseInterface
     {
@@ -362,7 +366,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      * @return ConnectionInterface
      *
      * @throws ConnectionException
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function connectionWithMock(
         array $body = [],
@@ -407,7 +411,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      *
      * @return DummyResource
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function makeDummyResource(array $data = [], $connection = null): DummyResource
     {
@@ -459,7 +463,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      *
      * @return array
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function makeSingleDummyResponsePayload(array $data = []): array
     {
@@ -504,8 +508,8 @@ abstract class RedmineTestCase extends LaravelTestCase
      * @return Project
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
     public function createProject(): Project
     {
@@ -534,8 +538,8 @@ abstract class RedmineTestCase extends LaravelTestCase
      * @return Issue
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
     public function createIssue(int $projectId, array $data = []): Issue
     {
@@ -556,6 +560,64 @@ abstract class RedmineTestCase extends LaravelTestCase
     }
 
     /**
+     * Creates a new group
+     *
+     * @param array $data [optional]
+     *
+     * @return Group
+     *
+     * @throws UnsupportedOperationException
+     * @throws JsonException
+     * @throws Throwable
+     */
+    protected function createGroup(array $data = []): Group
+    {
+        $data = array_merge([
+            'name' => 'Test Group ' . $this->getFaker()->unique()->randomNumber(4, true) . ' @aedart/athenaeum-redmine'
+        ], $data);
+
+        return Group::create($data, [], $this->liveOrMockedConnection([
+            $this->mockCreatedResourceResponse($data, 1234, Group::class),
+            $this->mockDeletedResourceResponse()
+        ]));
+    }
+
+    /**
+     * Returns a random role
+     *
+     * @return Role
+     *
+     * @throws UnsupportedOperationException
+     * @throws JsonException
+     * @throws Throwable
+     */
+    protected function randomRole(): Role
+    {
+        $list = [
+            [
+                'id' => 1,
+                'name' => 'manager',
+            ],
+            [
+                'id' => 2,
+                'name' => 'developer',
+            ],
+            [
+                'id' => 3,
+                'name' => 'reporter',
+            ],
+        ];
+
+        $roles = Role::list(10, 0, [], $this->liveOrMockedConnection([
+            $this->mockListOfResourcesResponse($list, Role::class)
+        ]));
+
+        // Select a random target
+        /** @var Role $target */
+        return $roles->results()->random(1)->first();
+    }
+
+    /**
      * Create a new user
      *
      * @param array $data [optional]
@@ -563,8 +625,8 @@ abstract class RedmineTestCase extends LaravelTestCase
      * @return User
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
     public function createUser(array $data = []): User
     {

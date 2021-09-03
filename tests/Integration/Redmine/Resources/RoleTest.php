@@ -76,31 +76,10 @@ class RoleTest extends RedmineTestCase
 //        Role::$debug = true;
 
         // ---------------------------------------------------------- //
-        // Prerequisites - fetch entire list of roles and randomly select
-        // one.
-
-        $list = [
-            [
-                'id' => 1,
-                'name' => 'manager',
-            ],
-            [
-                'id' => 2,
-                'name' => 'developer',
-            ],
-            [
-                'id' => 3,
-                'name' => 'reporter',
-            ],
-        ];
-
-        $roles = Role::list(10, 0, [], $this->liveOrMockedConnection([
-            $this->mockListOfResourcesResponse($list, Role::class)
-        ]));
+        // Prerequisites - fetch random role
 
         // Select a random target
-        /** @var Role $target */
-        $target = $roles->results()->random(1)->first();
+        $target = $this->randomRole();
 
         // ---------------------------------------------------------- //
         // Fetch single role (which should contain more information than the list)
