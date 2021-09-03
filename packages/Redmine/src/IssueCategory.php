@@ -6,6 +6,7 @@ use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\Reference;
 use Aedart\Redmine\Relations\BelongsTo;
+use Aedart\Redmine\Relations\Custom\AssignedTo;
 
 /**
  * Issue Category Resource
@@ -58,5 +59,16 @@ class IssueCategory extends RedmineResource implements
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class, $this->project);
+    }
+
+    /**
+     * The user or group this issue category to be assigned to
+     * by default
+     *
+     * @return BelongsTo<User|Group>
+     */
+    public function assignedTo(): BelongsTo
+    {
+        return new AssignedTo($this, $this->assigned_to);
     }
 }
