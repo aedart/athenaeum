@@ -242,6 +242,15 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Redmine',
+            collapsable: true,
+            children: [
+                'redmine/',
+                'redmine/install',
+                'redmine/setup',
+            ]
+        },
+        {
             title: 'Service',
             collapsable: true,
             children: [
