@@ -268,6 +268,7 @@ module.exports.sidebar = function(){
                     children: [
                         'redmine/resources/',
                         'redmine/resources/attachments',
+                        'redmine/resources/enumerations',
 
                     ]
                 },
