@@ -6,11 +6,12 @@ sidebarDepth: 0
 # Predefined Resources
 
 In this section you will find a list of the predefined "resources", that are available in this package.
-Some of these resource offer slightly different / custom operations, which is explained in greater details where relevant.
+Where it is appropriate, custom functionality is explained in detail. However, this documentation is not exhaustive.
+Please review the source for code for additional information.
 
 ## Make you own Resource
 
-Despite this package's intent to provide as much flexibility as possible, when working with Redmin's API, it will certainly not cover every use-case.
+Despite this package's intent to provide as much flexibility as possible, when working with Redmine's API, it will certainly not cover every use-case.
 You are therefore encouraged to either extend the existing resources or simply create your own.
 
 ### Extending Predefined
