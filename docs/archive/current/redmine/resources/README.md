@@ -5,8 +5,8 @@ sidebarDepth: 0
 
 # Predefined Resources
 
-In this section you will find a list of the predefined "resources", that are available in this package.
-Where it is appropriate, custom functionality is explained in detail. However, this documentation is not exhaustive.
+In this section you will find some information about the predefined "resources".
+Where it is appropriate, custom functionality is explained in detail. However, this documentation is not exhaustive and not all resources are covered.
 Please review the source for code for additional information.
 
 ## Make you own Resource
