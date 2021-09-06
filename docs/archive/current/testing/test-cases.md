@@ -108,7 +108,7 @@ class MyTest extends IntegrationTestCase
 }
 ```
 
-See [`registerAsApplication()`](../container/reg-as-app.md) for additional information.
+See [`registerAsApplication()`](../container/service-container.md) for additional information.
 
 :::
 

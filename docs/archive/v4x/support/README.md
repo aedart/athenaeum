@@ -36,7 +36,7 @@ class MyApiService
 ## Aware-of Properties
 
 In addition to the Laravel Aware-of Helpers, this package comes with an abundance of "aware-of xyz" helpers.
-These are [generated](properties/generator.md) traits that offer getters and setter methods for various types properties.
+These are [generated](properties/) traits that offer getters and setter methods for various types properties.
 They are mostly useful when creating [DTOs](../dto).
 
 ```php

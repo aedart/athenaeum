@@ -72,7 +72,7 @@ EXCEPTION_HANDLING_ENABLED=false
 | ------------- |-------------|
 | `APP_NAME`    | Your application's name. |
 | `APP_ENV`     | The application's environment, e.g. "production", "testing", "development"...etc. |
-| `EXCEPTION_HANDLING_ENABLED`     | Enabling or disabling of Athenaeum Core Application's [exception handling](advanced/). |
+| `EXCEPTION_HANDLING_ENABLED`     | Enabling or disabling of Athenaeum Core Application's [exception handling](./usage/exceptions.md). |
 
 ## The Console Application (`cli.php`)
 
