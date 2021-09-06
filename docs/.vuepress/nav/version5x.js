@@ -248,6 +248,28 @@ module.exports.sidebar = function(){
                 'redmine/',
                 'redmine/install',
                 'redmine/setup',
+                {
+                    title: 'General Usage',
+                    collapsable: true,
+                    children: [
+                        'redmine/usage/', // Supported Operations
+                        'redmine/usage/list',
+                        'redmine/usage/find',
+                        'redmine/usage/fetch',
+                        'redmine/usage/create',
+                        'redmine/usage/update',
+                        'redmine/usage/delete',
+                        'redmine/usage/relations',
+                    ]
+                },
+                {
+                    title: 'Available Resources',
+                    collapsable: true,
+                    children: [
+                        'redmine/resources/',
+
+                    ]
+                },
             ]
         },
         {
