@@ -6,26 +6,45 @@ description: Redmine API Client
 
 _**Available since** `v5.19.x`_
 
-A Laravel [Redmine](https://www.redmine.org/) API Client, that has been designed as look and feel like an [active record](https://en.wikipedia.org/wiki/Active_record_pattern).  
+A Laravel [Redmine](https://www.redmine.org/) API Client, that has been designed to look and feel like an [active record](https://en.wikipedia.org/wiki/Active_record_pattern).  
 
 **Example**: 
 
 ```php
 use Aedart\Redmine\Issue;
+use Aedart\Redmine\Project;
+use Aedart\Redmine\IssueCategory;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 
-// Fetch issues that are assigned to your account...
+// Create resources
+$project = Project::create([
+    'name' => 'Deus Ex',
+    'identifier' => 'deus-ex'
+]);
+
+// Fetch list of resources, apply filters to http request...
 $issues = Issue::fetchMultiple(function(Builder $request) {
     return $request->where('assigned_to_id', 'me');
 });
+
+// Change existing resources
+$category = IssueCategory::findOrFail(1344);
+$category->update([
+    'name' => 'Business Goals'
+]);
+
+// ...or remove them
+Issue::findOrFail(9874)
+    ->delete();
 ```
 
 ## Compatibility
 
 | Athenaeum Redmine Client | Redmine version |
 |--------------------------|-----------------|
-| From `v5.19`             | `4.x`           |
+| From `v5.19`             | `>= v4.x`*      |
 
+*:_This package might also work with newer versions of Redmine._
 
 ## Limitations
 
