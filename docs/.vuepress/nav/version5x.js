@@ -267,6 +267,7 @@ module.exports.sidebar = function(){
                     collapsable: true,
                     children: [
                         'redmine/resources/',
+                        'redmine/resources/attachments',
 
                     ]
                 },
