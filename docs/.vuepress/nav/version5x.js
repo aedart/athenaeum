@@ -271,6 +271,7 @@ module.exports.sidebar = function(){
                         'redmine/resources/enumerations',
                         'redmine/resources/issue_relations',
                         'redmine/resources/groups',
+                        'redmine/resources/memberships',
 
                     ]
                 },
