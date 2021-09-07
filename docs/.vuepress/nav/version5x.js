@@ -276,6 +276,7 @@ module.exports.sidebar = function(){
                         'redmine/resources/memberships',
                         'redmine/resources/versions',
                         'redmine/resources/categories',
+                        'redmine/resources/trackers',
 
                     ]
                 },
