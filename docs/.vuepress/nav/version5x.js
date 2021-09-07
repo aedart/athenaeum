@@ -242,6 +242,47 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Redmine',
+            collapsable: true,
+            children: [
+                'redmine/',
+                'redmine/install',
+                'redmine/setup',
+                {
+                    title: 'General Usage',
+                    collapsable: true,
+                    children: [
+                        'redmine/usage/', // Supported Operations
+                        'redmine/usage/list',
+                        'redmine/usage/find',
+                        'redmine/usage/fetch',
+                        'redmine/usage/create',
+                        'redmine/usage/update',
+                        'redmine/usage/delete',
+                        'redmine/usage/relations',
+                    ]
+                },
+                {
+                    title: 'Available Resources',
+                    collapsable: true,
+                    children: [
+                        'redmine/resources/',
+                        'redmine/resources/attachments',
+                        'redmine/resources/enumerations',
+                        'redmine/resources/issue_relations',
+                        'redmine/resources/users',
+                        'redmine/resources/groups',
+                        'redmine/resources/roles',
+                        'redmine/resources/memberships',
+                        'redmine/resources/versions',
+                        'redmine/resources/categories',
+                        'redmine/resources/trackers',
+
+                    ]
+                },
+            ]
+        },
+        {
             title: 'Service',
             collapsable: true,
             children: [

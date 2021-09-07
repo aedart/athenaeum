@@ -4,9 +4,18 @@
 
 ### [Unreleased]
 
+#### Added
+
+* `fresh()` method in the Http Clients `Manger`; able to return a fresh Http `Client` instance, without having the instance cached. _The method is not yet supported by the `\Aedart\Contracts\Http\Clients\Manager` interface_.
+
+#### Changed
+
+* `BaseSerializer` (_Http Message package_) will now re-encode json payloads with the `JSON_PRETTY_PRINT` set, if a message's if `content-type` header contains `/json` or `+json`. This makes it easier to read json payloads, in debugging situations.
+
 #### Fixed
 
 * Call to undefined `GuzzleHttp\Psr7\parse_query()`, in the `C1_QueryTest` Http Client tests. [#49](https://github.com/aedart/athenaeum/issues/49).
+* A few broken links (_incorrect paths_) in the documentation.
 
 ### [v5.18.1](https://github.com/aedart/athenaeum/compare/5.18.0...5.18.1)
 

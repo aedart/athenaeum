@@ -76,7 +76,11 @@ class SerializationTest extends HttpSerializationTestCase
         $this->assertStringContainsString('HTTP/1.1', $serialized);
         $this->assertStringContainsString('Host: acme.org', $serialized);
         $this->assertStringContainsString('Content-Type: application/json', $serialized);
-        $this->assertStringContainsString((string) $request->getBody(), $serialized);
+
+        $body = (string) $request->getBody();
+        $body = Json::encode(Json::decode($body), JSON_PRETTY_PRINT);
+
+        $this->assertStringContainsString($body, $serialized);
     }
 
     /**
@@ -122,7 +126,7 @@ class SerializationTest extends HttpSerializationTestCase
         $this->assertSame($request->getHeaders(), $serialized['headers']);
 
         $this->assertArrayHasKey('body', $serialized);
-        $this->assertSame((string) $request->getBody(), $serialized['body']);
+        $this->assertSame((string) $request->getBody(), Json::encode(Json::decode($serialized['body']))); // Removes pretty print option
     }
 
     /**
@@ -152,7 +156,11 @@ class SerializationTest extends HttpSerializationTestCase
         $this->assertStringContainsString($response->getStatusCode(), $serialized);
         $this->assertStringContainsString($response->getReasonPhrase(), $serialized);
         $this->assertStringContainsString('Content-Type: application/json', $serialized);
-        $this->assertStringContainsString((string) $response->getBody(), $serialized);
+
+        $body = (string) $response->getBody();
+        $body = Json::encode(Json::decode($body), JSON_PRETTY_PRINT);
+
+        $this->assertStringContainsString($body, $serialized);
     }
 
     /**
@@ -191,6 +199,6 @@ class SerializationTest extends HttpSerializationTestCase
         $this->assertSame($response->getHeaders(), $serialized['headers']);
 
         $this->assertArrayHasKey('body', $serialized);
-        $this->assertSame((string) $response->getBody(), $serialized['body']);
+        $this->assertSame((string) $response->getBody(), Json::encode(Json::decode($serialized['body']))); // Removes pretty print option
     }
 }

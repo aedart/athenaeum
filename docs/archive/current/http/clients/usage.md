@@ -36,6 +36,17 @@ In order to obtain a Http Client profile, state the profile name as argument for
 $myClient = $this->getHttpClientsManager()->profile('my-client-profile');
 ```
 
+## Fresh Client instance
+
+_**Available since** `v5.19.0`_
+
+The `profile()` method will return the same `Client` instance, if it was previously requested (_it caches the created instance for the profile name_).
+If you need a fresh instance, without having it cached by the client manager, then use the `fresh()` method.  
+
+```php
+$client = $this->getHttpClientsManager()->fresh('my-client-profile');
+```
+
 ## Perform Http Requests
 
 Each method that performs a request will return a [PSR-7](https://www.php-fig.org/psr/psr-7/) `ResponseInterface`.

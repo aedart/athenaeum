@@ -67,6 +67,23 @@ class HttpClientsManagerTest extends HttpClientsTestCase
         $clientB = $manager->profile();
 
         // Expecting exact same http client to be returned
-        $this->assertSame($clientA, $clientB);
+        $this->assertTrue($clientA === $clientB);
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
+     */
+    public function returnFreshInstance()
+    {
+        $manager = $this->getHttpClientsManager();
+
+        // "fresh" instance should not be the same as the one that was cached!
+        $clientA = $manager->profile();
+        $clientB = $manager->fresh();
+
+        // Expecting different instances
+        $this->assertFalse($clientA === $clientB);
     }
 }

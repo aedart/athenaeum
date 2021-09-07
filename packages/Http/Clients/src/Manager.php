@@ -3,6 +3,7 @@
 namespace Aedart\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Client;
+use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Manager as HttpClientsManager;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
@@ -57,13 +58,35 @@ class Manager implements
             return $this->clients[$profile];
         }
 
+        // Finally, create and cache the Http Client
+        return $this->clients[$profile] = $this->fresh($profile, $options);
+    }
+
+    /**
+     * Creates a new client instance for the given profile
+     *
+     * Unlike the {@see profile()} method, this method always returns a new client
+     * instance.
+     *
+     * @param string|null $profile [optional]
+     * @param array $options [optional]
+     *
+     * @return Client
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function fresh(?string $profile = null, array $options = []): Client
+    {
+        // Resolve requested profile name
+        $profile = $this->resolveProfile($profile);
+
         // Obtain profile configuration
         $configuration = $this->findOrFailConfiguration($profile, 'Http Client profile "%s" does not exist');
         $driver = $configuration['driver'];
         $options = array_merge_recursive($configuration['options'], $options);
 
         // Finally, create the Http Client
-        return $this->clients[$profile] = new $driver(
+        return new $driver(
             $this->getContainer(),
             $options
         );
