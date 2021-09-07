@@ -2,10 +2,10 @@
 
 namespace Aedart\Redmine;
 
+use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Listable;
-use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;

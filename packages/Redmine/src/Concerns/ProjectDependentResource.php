@@ -2,9 +2,9 @@
 
 namespace Aedart\Redmine\Concerns;
 
+use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Contracts\Redmine\Connection;
 use Aedart\Contracts\Redmine\PaginatedResults as PaginatedResultsInterface;
-use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Redmine\Exceptions\RedmineException;
 use Aedart\Redmine\Pagination\PaginatedResults;
 use Aedart\Redmine\Project;

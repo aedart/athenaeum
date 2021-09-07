@@ -3,8 +3,8 @@
 namespace Aedart\Contracts\Redmine\Relations;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
-use Aedart\Contracts\Redmine\Connection;
 use Aedart\Contracts\Redmine\ApiResource;
+use Aedart\Contracts\Redmine\Connection;
 use Throwable;
 
 /**
