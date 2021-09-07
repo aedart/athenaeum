@@ -19,7 +19,7 @@ use Aedart\Redmine\Role;
 $roles = Role::list(); 
 ```
 
-**Note**: _The roles API resource ignores pagination!_
+**Note**: _The roles API resource does not support pagination!_
 
 ## Fetch single role
 
