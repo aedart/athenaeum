@@ -4,8 +4,11 @@
 
 ### [Unreleased]
 
+### [v5.19.0](https://github.com/aedart/athenaeum/compare/5.18.1...5.19.0)
+
 #### Added
 
+* Redmine API Client package. [#52](https://github.com/aedart/athenaeum/pull/52).
 * `fresh()` method in the Http Clients `Manger`; able to return a fresh Http `Client` instance, without having the instance cached. _The method is not yet supported by the `\Aedart\Contracts\Http\Clients\Manager` interface_.
 
 #### Changed
