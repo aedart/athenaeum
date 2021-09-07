@@ -272,6 +272,7 @@ module.exports.sidebar = function(){
                         'redmine/resources/issue_relations',
                         'redmine/resources/groups',
                         'redmine/resources/memberships',
+                        'redmine/resources/versions',
 
                     ]
                 },
