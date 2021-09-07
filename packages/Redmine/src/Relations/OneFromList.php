@@ -2,7 +2,7 @@
 
 namespace Aedart\Redmine\Relations;
 
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Redmine\Exceptions\RelationException;
 
 /**
@@ -33,7 +33,7 @@ class OneFromList extends BelongsTo
             throw new RelationException('Unable to fetch relation, foreign key could not be resolved or was not specified');
         }
 
-        /** @var string|Resource $related */
+        /** @var string|ApiResource $related */
         $related = $this->related();
         $primaryKeyName = $related::make()->keyName();
 

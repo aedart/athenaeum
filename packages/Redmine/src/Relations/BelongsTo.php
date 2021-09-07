@@ -3,7 +3,7 @@
 namespace Aedart\Redmine\Relations;
 
 use Aedart\Contracts\Dto;
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Redmine\Exceptions\RelationException;
 
 /**
@@ -38,15 +38,15 @@ class BelongsTo extends ResourceRelation
     protected $foreignKeyValue = null;
 
     /**
-     * @param Resource $parent
-     * @param string|Resource $related Class path
+     * @param ApiResource $parent
+     * @param string|ApiResource $related Class path
      * @param Dto|null $reference [optional] Reference Dto in parent resource that holds foreign key to
      *                                       related resource
      *
      * @param string $key [optional] Name of key / property in reference that holds
      *                               the foreign key value
      */
-    public function __construct(Resource $parent, $related, ?Dto $reference = null, string $key = 'id')
+    public function __construct(ApiResource $parent, $related, ?Dto $reference = null, string $key = 'id')
     {
         parent::__construct($parent, $related);
 

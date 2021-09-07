@@ -30,7 +30,7 @@ use RuntimeException;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class Attachment extends RedmineResource implements
+class Attachment extends RedmineApiResource implements
     Updatable,
     Deletable
 {

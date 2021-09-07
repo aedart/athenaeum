@@ -45,7 +45,7 @@ use Carbon\Carbon;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class User extends RedmineResource implements
+class User extends RedmineApiResource implements
     Listable,
     Creatable,
     Updatable,

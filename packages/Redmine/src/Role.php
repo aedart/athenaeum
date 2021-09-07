@@ -20,7 +20,7 @@ use Aedart\Contracts\Redmine\Listable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class Role extends RedmineResource implements
+class Role extends RedmineApiResource implements
     Listable
 {
     protected array $allowed = [

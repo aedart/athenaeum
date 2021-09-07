@@ -30,14 +30,14 @@ interface PaginatedResults extends Paginator,
      * Creates a new paginated results set, from given response
      *
      * @param ResponseInterface $response
-     * @param Resource $resource
+     * @param ApiResource $resource
      *
      * @return static<T>
      *
      * @throws \JsonException
      * @throws \Throwable
      */
-    public static function fromResponse(ResponseInterface $response, Resource $resource): PaginatedResults;
+    public static function fromResponse(ResponseInterface $response, ApiResource $resource): PaginatedResults;
 
     /**
      * Returns the result set

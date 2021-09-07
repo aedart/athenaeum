@@ -23,7 +23,7 @@ use Aedart\Redmine\Relations\Custom\AssignedTo;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class IssueCategory extends RedmineResource implements
+class IssueCategory extends RedmineApiResource implements
     Updatable,
     Deletable
 {

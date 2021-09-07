@@ -23,7 +23,7 @@ use Throwable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class Relation extends RedmineResource implements
+class Relation extends RedmineApiResource implements
     Deletable
 {
     /**

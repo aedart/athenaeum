@@ -4,7 +4,7 @@ namespace Aedart\Redmine\Concerns;
 
 use Aedart\Contracts\Redmine\Connection;
 use Aedart\Contracts\Redmine\PaginatedResults as PaginatedResultsInterface;
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Redmine\Exceptions\RedmineException;
 use Aedart\Redmine\Pagination\PaginatedResults;
 use Aedart\Redmine\Project;
@@ -104,7 +104,7 @@ trait ProjectDependentResource
     public static function projectRelatedEndpoint($project): string
     {
         $id = $project;
-        if ($project instanceof Resource) {
+        if ($project instanceof ApiResource) {
             $id = $project->id();
         }
 

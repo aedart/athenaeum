@@ -5,7 +5,7 @@ namespace Aedart\Tests\Integration\Redmine;
 use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Exceptions\NotFound;
-use Aedart\Redmine\RedmineResource;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use Teapot\StatusCode\All as StatusCodes;
@@ -124,7 +124,7 @@ class FetchAndFindTest extends RedmineTestCase
     {
         $this->expectException(UnsupportedOperationException::class);
 
-        $resourceClass = new class() extends RedmineResource {
+        $resourceClass = new class() extends RedmineApiResource {
             protected array $allowed = [
                 'id' => 'string',
                 'name' => 'string'

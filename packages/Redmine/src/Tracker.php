@@ -21,7 +21,7 @@ use Aedart\Redmine\Relations\OneFromList;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class Tracker extends RedmineResource implements
+class Tracker extends RedmineApiResource implements
     Listable
 {
     protected array $allowed = [

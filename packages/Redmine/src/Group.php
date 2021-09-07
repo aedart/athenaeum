@@ -26,7 +26,7 @@ use InvalidArgumentException;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class Group extends RedmineResource implements
+class Group extends RedmineApiResource implements
     Listable,
     Creatable,
     Updatable,

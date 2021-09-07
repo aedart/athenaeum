@@ -2,7 +2,7 @@
 
 namespace Aedart\Redmine\Collections;
 
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 use Illuminate\Support\Collection as BaseCollection;
 
 /**
@@ -37,13 +37,13 @@ class Collection extends BaseCollection
      * Creates a new collection of Redmine API Resources, from given response payload
      *
      * @param array $payload Decoded response payload
-     * @param Resource $resource The type of resource new collection must consist of
+     * @param ApiResource $resource The type of resource new collection must consist of
      *
-     * @return Collection<Resource>
+     * @return Collection<ApiResource>
      *
      * @throws \Throwable
      */
-    public static function fromResponsePayload(array $payload, Resource $resource): Collection
+    public static function fromResponsePayload(array $payload, ApiResource $resource): Collection
     {
         $list = $resource->extractFromPayload($resource->resourceName(), $payload);
 

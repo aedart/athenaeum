@@ -5,7 +5,7 @@ namespace Aedart\Redmine\Relations;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Redmine\Connection;
 use Aedart\Contracts\Redmine\Relations\ResourceRelation as ResourceRelationInterface;
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 
 /**
  * Resource Relation
@@ -20,14 +20,14 @@ abstract class ResourceRelation implements ResourceRelationInterface
     /**
      * The parent resource
      *
-     * @var Resource
+     * @var ApiResource
      */
-    protected Resource $parent;
+    protected ApiResource $parent;
 
     /**
      * Class path to the related resource
      *
-     * @var string|Resource Class path
+     * @var string|ApiResource Class path
      */
     protected $related;
 
@@ -55,10 +55,10 @@ abstract class ResourceRelation implements ResourceRelationInterface
     /**
      * ResourceRelation
      *
-     * @param Resource $parent
-     * @param string|Resource $related Class path
+     * @param ApiResource $parent
+     * @param string|ApiResource $related Class path
      */
-    public function __construct(Resource $parent, $related)
+    public function __construct(ApiResource $parent, $related)
     {
         $this->parent = $parent;
         $this->related = $related;
@@ -127,7 +127,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
     /**
      * @inheritdoc
      */
-    public function parent(): Resource
+    public function parent(): ApiResource
     {
         return $this->parent;
     }
@@ -155,7 +155,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
      */
     protected function wrapFilters(): callable
     {
-        return function (Builder $request, Resource $resource) {
+        return function (Builder $request, ApiResource $resource) {
 
             // Apply includes
             $applied = $resource->applyIncludes(

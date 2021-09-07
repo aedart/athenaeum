@@ -18,8 +18,8 @@ use Throwable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Contracts\Redmine
  */
-interface Resource extends Dto,
-   ConnectionAware
+interface ApiResource extends Dto,
+    ConnectionAware
 {
     /**
      * Creates a new resource instance

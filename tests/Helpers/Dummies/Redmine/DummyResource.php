@@ -6,7 +6,7 @@ use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Listable;
 use Aedart\Contracts\Redmine\Updatable;
-use Aedart\Redmine\RedmineResource;
+use Aedart\Redmine\RedmineApiResource;
 
 /**
  * Dummy Resource
@@ -19,7 +19,7 @@ use Aedart\Redmine\RedmineResource;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Helpers\Dummies\Redmine
  */
-class DummyResource extends RedmineResource implements
+class DummyResource extends RedmineApiResource implements
     Listable,
     Creatable,
     Updatable,

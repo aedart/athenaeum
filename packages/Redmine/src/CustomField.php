@@ -36,7 +36,7 @@ use Aedart\Redmine\Relations\HasMany;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class CustomField extends RedmineResource implements
+class CustomField extends RedmineApiResource implements
     Listable
 {
     protected array $allowed = [

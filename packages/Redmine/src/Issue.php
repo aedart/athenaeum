@@ -86,7 +86,7 @@ use Throwable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class Issue extends RedmineResource implements
+class Issue extends RedmineApiResource implements
     Listable,
     Creatable,
     Updatable,

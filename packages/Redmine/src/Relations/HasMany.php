@@ -3,7 +3,7 @@
 namespace Aedart\Redmine\Relations;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Redmine\Exceptions\RelationException;
 use Aedart\Utils\Str;
 use ReflectionClass;
@@ -48,7 +48,7 @@ class HasMany extends ResourceRelation
     /**
      * @inheritDoc
      */
-    public function __construct(Resource $parent, $related, ?string $filterKey = null)
+    public function __construct(ApiResource $parent, $related, ?string $filterKey = null)
     {
         parent::__construct($parent, $related);
 

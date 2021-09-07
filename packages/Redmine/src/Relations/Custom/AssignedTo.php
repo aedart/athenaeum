@@ -3,7 +3,7 @@
 namespace Aedart\Redmine\Relations\Custom;
 
 use Aedart\Contracts\Dto;
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Redmine\Exceptions\NotFound;
 use Aedart\Redmine\Group;
 use Aedart\Redmine\Relations\BelongsTo;
@@ -28,14 +28,14 @@ class AssignedTo extends BelongsTo
     /**
      * AssignedTo
      *
-     * @param Resource $parent
+     * @param ApiResource $parent
      * @param Dto|null $reference [optional] Reference Dto in parent resource that holds foreign key to
      *                                       related resource
      *
      * @param string $key [optional] Name of key / property in reference that holds
      *                               the foreign key value
      */
-    public function __construct(Resource $parent, ?Dto $reference = null, string $key = 'id')
+    public function __construct(ApiResource $parent, ?Dto $reference = null, string $key = 'id')
     {
         // First we try the group, because we might be able to match against it's name...
         $related = Group::class;

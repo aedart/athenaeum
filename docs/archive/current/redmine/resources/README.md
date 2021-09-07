@@ -30,13 +30,13 @@ class Issue extends BaseIssue
 Should you wish to create an entirely new type of Resource, then you can choose to extend the `\Aedart\Redmine\RedmineResource` abstraction:
 
 ```php
-use Aedart\Redmine\RedmineResource;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Contracts\Redmine\Listable,
 use Aedart\Contracts\Redmine\Creatable,
 use Aedart\Contracts\Redmine\Updatable,
 use Aedart\Contracts\Redmine\Deletable
 
-class MyCustomResource extends RedmineResource implements 
+class MyCustomResource extends RedmineApiResource implements 
     Listable,
     Creatable,
     Updatable,

@@ -12,7 +12,7 @@ use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
 use Aedart\Contracts\Redmine\Listable;
 use Aedart\Contracts\Redmine\PaginatedResults as PaginatedResultsInterface;
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Dto\ArrayDto;
 use Aedart\Redmine\Connections\Connection;
@@ -42,8 +42,8 @@ use Throwable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-abstract class RedmineResource extends ArrayDto implements
-    Resource
+abstract class RedmineApiResource extends ArrayDto implements
+    ApiResource
 {
     use Concerns\ResourceRelations;
     use ConnectionTrait;
@@ -144,7 +144,7 @@ abstract class RedmineResource extends ArrayDto implements
         array $include = [],
         $connection = null
     ): PaginatedResultsInterface {
-        return static::fetchMultiple(function (Builder $request, Resource $resource) use ($include) {
+        return static::fetchMultiple(function (Builder $request, ApiResource $resource) use ($include) {
             return $resource->applyIncludes($include, $request);
         }, $limit, $offset, $connection);
     }
@@ -167,7 +167,7 @@ abstract class RedmineResource extends ArrayDto implements
      */
     public static function findOrFail($id, array $include = [], $connection = null)
     {
-        return static::fetch($id, function (Builder $request, Resource $resource) use ($include) {
+        return static::fetch($id, function (Builder $request, ApiResource $resource) use ($include) {
             return $resource->applyIncludes($include, $request);
         }, $connection);
     }

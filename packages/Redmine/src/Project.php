@@ -5,7 +5,7 @@ namespace Aedart\Redmine;
 use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Listable;
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;
@@ -51,7 +51,7 @@ use Throwable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class Project extends RedmineResource implements
+class Project extends RedmineApiResource implements
     Listable,
     Creatable,
     Updatable,
@@ -138,7 +138,7 @@ class Project extends RedmineResource implements
     public function addUserMember($user, array $roles): ProjectMembership
     {
         $id = $user;
-        if ($user instanceof Resource || $user instanceof Reference) {
+        if ($user instanceof ApiResource || $user instanceof Reference) {
             $id = $user->id;
         }
 

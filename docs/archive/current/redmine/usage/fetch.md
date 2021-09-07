@@ -6,13 +6,13 @@ sidebarDepth: 0
 # Fetch
 
 Should you require more advanced filtering capabilities when fetching a single or multiple resources, then you can use the `fetch()` or `fetchMultiple()` methods. 
-They accept a callback which allows you to specify a [query filter](../../http/clients/query) to be applied onto the request. 
+They accept a callback which allows you to specify a [query filter](../../http/clients/query) to be applied onto the request.
 
 ```php
 use Aedart\Contracts\Http\Clients\Requests\Builder;
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 
-$issue = Issue::fetch(1234, function(Builder $request, Resource $resource) {
+$issue = Issue::fetch(1234, function(Builder $request, ApiResource $resource) {
     return $request->where('include', 'relations');
 });
 ```

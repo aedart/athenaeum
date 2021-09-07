@@ -31,7 +31,7 @@ use Carbon\Carbon;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class Version extends RedmineResource implements
+class Version extends RedmineApiResource implements
     Updatable,
     Deletable
 {

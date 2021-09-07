@@ -25,10 +25,10 @@ namespace Aedart\Redmine;
 use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Listable;
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Contracts\Redmine\Updatable;
 
-class Project extends RedmineResource implements
+class Project extends RedmineApiResource implements
     Listable,
     Creatable,
     Updatable,

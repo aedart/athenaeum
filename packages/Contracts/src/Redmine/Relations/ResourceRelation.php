@@ -4,7 +4,7 @@ namespace Aedart\Contracts\Redmine\Relations;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Redmine\Connection;
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 use Throwable;
 
 /**
@@ -79,14 +79,14 @@ interface ResourceRelation
     /**
      * Get the parent resource
      *
-     * @return Resource
+     * @return ApiResource
      */
-    public function parent(): Resource;
+    public function parent(): ApiResource;
 
     /**
      * Get the related resource
      *
-     * @return Resource|string Class path
+     * @return ApiResource|string Class path
      */
     public function related();
 }

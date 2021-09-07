@@ -14,7 +14,7 @@ use Aedart\Redmine\Issue;
 use Aedart\Redmine\Project;
 use Aedart\Redmine\ProjectMembership;
 use Aedart\Redmine\Providers\RedmineServiceProvider;
-use Aedart\Redmine\RedmineResource;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Redmine\Role;
 use Aedart\Redmine\User;
 use Aedart\Support\Helpers\Config\ConfigTrait;
@@ -206,7 +206,7 @@ abstract class RedmineTestCase extends LaravelTestCase
         int $limit = 10,
         int $offset = 0
     ): ResponseInterface {
-        /** @var RedmineResource $resource */
+        /** @var RedmineApiResource $resource */
         $resource = $resourceClass::make();
 
         $data = [
@@ -232,7 +232,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      */
     public function mockCreatedResourceResponse(array $data, $id, string $resourceClass): ResponseInterface
     {
-        /** @var RedmineResource $resource */
+        /** @var RedmineApiResource $resource */
         $resource = $resourceClass::make();
 
         // Pretend that data was created, but adding an id
@@ -284,7 +284,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      */
     public function mockSingleResourceResponse(array $data, $id, string $resourceClass): ResponseInterface
     {
-        /** @var RedmineResource $resource */
+        /** @var RedmineApiResource $resource */
         $resource = $resourceClass::make();
 
         // Pretend that data was created, but adding an id

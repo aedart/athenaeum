@@ -26,7 +26,7 @@ use Aedart\Redmine\Relations\BelongsTo;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-class ProjectMembership extends RedmineResource implements
+class ProjectMembership extends RedmineApiResource implements
     Updatable,
     Deletable
 {

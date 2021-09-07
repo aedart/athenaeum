@@ -3,10 +3,10 @@
 namespace Aedart\Redmine\Pagination;
 
 use Aedart\Contracts\Redmine\PaginatedResults as PaginatedResultsInterface;
-use Aedart\Contracts\Redmine\Resource;
+use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Pagination\Paginator;
 use Aedart\Redmine\Collections\Collection;
-use Aedart\Redmine\RedmineResource;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Utils\Json;
 use Illuminate\Support\Enumerable;
 use JsonException;
@@ -25,14 +25,14 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
     /**
      * Results collection
      *
-     * @var Collection<RedmineResource>
+     * @var Collection<RedmineApiResource>
      */
     protected Collection $results;
 
     /**
      * PaginatedResults
      *
-     * @param Collection<RedmineResource> $results
+     * @param Collection<RedmineApiResource> $results
      * @param int $total [optional] Total amount of results
      * @param int $limit [optional] The results limit
      * @param int $offset [optional] Results offset
@@ -51,7 +51,7 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
     /**
      * @inheritdoc
      */
-    public static function fromResponse(ResponseInterface $response, Resource $resource): PaginatedResultsInterface
+    public static function fromResponse(ResponseInterface $response, ApiResource $resource): PaginatedResultsInterface
     {
         // Decode entire payload - we do not need to determine between single or multiple
         // resources here.
@@ -79,7 +79,7 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
     /**
      * {@inheritDoc}
      *
-     * @return Collection<RedmineResource>
+     * @return Collection<RedmineApiResource>
      */
     public function results(): Enumerable
     {

@@ -18,7 +18,7 @@ use Aedart\Contracts\Redmine\Listable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine
  */
-abstract class Enumeration extends RedmineResource implements
+abstract class Enumeration extends RedmineApiResource implements
     Listable
 {
     protected array $allowed = [
