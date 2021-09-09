@@ -3,9 +3,11 @@
 namespace Aedart\Testing\Laravel;
 
 use Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration;
+use Aedart\Testing\Laravel\Database\MigrateProcessor;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Facade;
+use InvalidArgumentException;
 use Orchestra\Testbench\Concerns\Testing;
 use Orchestra\Testbench\Foundation\PackageManifest;
 
@@ -194,5 +196,72 @@ trait ApplicationInitiator
             return (new LoadSpecifiedConfiguration())
                 ->setConfigurationPath($this->getConfigPath());
         };
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function loadMigrationsFrom($paths): void
+    {
+        $options = \is_array($paths) ? $paths : ['--path' => $paths];
+
+        if (isset($options['--realpath']) && !\is_bool($options['--realpath'])) {
+            throw new InvalidArgumentException('Expect --realpath to be a boolean.');
+        }
+
+        $options['--realpath'] = true;
+
+        $this->performMigration($options);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function loadLaravelMigrations($database = []): void
+    {
+        $options = \is_array($database) ? $database : ['--database' => $database];
+
+        $options['--path'] = 'migrations';
+
+        $this->performMigration($options);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function runLaravelMigrations($database = []): void
+    {
+        $options = \is_array($database) ? $database : ['--database' => $database];
+
+        $this->performMigration($options);
+    }
+
+    /**
+     * Runs the migrations
+     *
+     * @param array $options [optional]
+     */
+    protected function performMigration(array $options = [])
+    {
+        $migrator = $this->makeMigratorProcessor($options);
+        $migrator->up();
+
+        $this->resetApplicationArtisanCommands($this->app);
+
+        $this->beforeApplicationDestroyed(static function () use ($migrator) {
+            $migrator->rollback();
+        });
+    }
+
+    /**
+     * Creates a new custom migrate processor instance
+     *
+     * @param array $options [optional]
+     *
+     * @return MigrateProcessor
+     */
+    protected function makeMigratorProcessor(array $options = []): MigrateProcessor
+    {
+        return new MigrateProcessor($this, $options);
     }
 }
