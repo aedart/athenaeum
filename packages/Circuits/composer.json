@@ -22,9 +22,9 @@
         "php": ">=7.4.0",
         "illuminate/cache": "^8.15",
         "illuminate/events": "^8.15",
-        "aedart/athenaeum-contracts": "^5.20",
-        "aedart/athenaeum-support": "^5.20",
-        "aedart/athenaeum-utils": "^5.20"
+        "aedart/athenaeum-contracts": "^5.21",
+        "aedart/athenaeum-support": "^5.21",
+        "aedart/athenaeum-utils": "^5.21"
     },
     "autoload": {
         "psr-4": {
@@ -38,7 +38,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "5.20.x-dev"
+            "dev-master": "5.21.x-dev"
         }
     }
 }
