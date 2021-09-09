@@ -4,6 +4,16 @@
 
 ### [Unreleased]
 
+### [v5.20.0](https://github.com/aedart/athenaeum/compare/5.19.0...5.20.0)
+
+#### Added
+
+* `all()` method in `RedmineApiResource`, which is able to automatically paginate through all available results. [#53](https://github.com/aedart/athenaeum/pull/53).
+
+#### Fixed
+
+* Unable to run database migrations in tests. [#55](https://github.com/aedart/athenaeum/issues/55).
+
 ### [v5.19.0](https://github.com/aedart/athenaeum/compare/5.18.1...5.19.0)
 
 #### Added
