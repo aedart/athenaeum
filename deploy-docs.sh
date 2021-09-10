@@ -4,7 +4,12 @@
 set -e
 
 # build
-yarn run docs:build-prod
+if command -v "yarn" > /dev/null;
+then
+    yarn run docs:build-prod
+else
+    npm run docs:build-prod
+fi
 
 # navigate into the build output directory
 cd .build
