@@ -81,8 +81,6 @@ echo count($issues); // E.g. 348
 foreach ($issues as $issue) {
     // ...do something with issue ... //
 }
-
-// Bonus:
-// This example will cost 7 http request, given a total amount
-// of 348 records and pool size of 50!
 ```
+
+The above example will cost 7 requests, given a total of 348 records and a pool size of 50.
