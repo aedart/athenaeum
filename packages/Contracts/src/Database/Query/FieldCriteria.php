@@ -39,8 +39,10 @@ interface FieldCriteria extends Criteria
      * @param string $field
      *
      * @return self
+     *
+     * @throws CriteriaException
      */
-    public function setField(string $field): self;
+    public function setField(string $field);
 
     /**
      * Get the field (column) criteria must be applied on
@@ -65,7 +67,7 @@ interface FieldCriteria extends Criteria
      *
      * @throws InvalidOperatorException
      */
-    public function setOperator(string $operator): self;
+    public function setOperator(string $operator);
 
     /**
      * Get the operator to be used
@@ -90,7 +92,7 @@ interface FieldCriteria extends Criteria
      *
      * @throws CriteriaException
      */
-    public function setValue($value): self;
+    public function setValue($value);
 
     /**
      * Get the field value to be matched against
@@ -116,7 +118,7 @@ interface FieldCriteria extends Criteria
      *
      * @throws InvalidOperatorException
      */
-    public function setLogical(string $operator = self::AND): self;
+    public function setLogical(string $operator = self::AND);
 
     /**
      * Get the logical operator that determines how criteria
