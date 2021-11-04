@@ -13,7 +13,7 @@ use Aedart\Contracts\Database\Query\Exceptions\InvalidOperatorException;
  * the operator, value and how the criteria should be applied, e.g. via "AND" / "OR"
  * logical operator.
  *
- * The final query filter that is being built will resemble an SQL `"[logical operator] where <expression>"`,
+ * The final query filter that is built, will resemble the following: `"[logical operator] where <expression>"`,
  * e.g. `"or where name LIKE '%John%'"`
  *
  * @see Criteria
