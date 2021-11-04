@@ -123,6 +123,13 @@ module.exports.sidebar = function(){
                         'database/models/sluggable',
                     ]
                 },
+                {
+                    title: 'Query',
+                    collapsable: true,
+                    children: [
+                        'database/query/criteria',
+                    ]
+                },
             ]
         },
         {
