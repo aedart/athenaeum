@@ -107,7 +107,7 @@ $result = Category::applyFilters([
 
 ## Field Criteria (Field Filter)
 
-Should you require filters that are specific for a single field (_column_), then you can choose to inherit from the `FieldFilter`.
+If you require filters that add `where <expression>` constraints for a single field (_column_) on your query, then you can choose to inherit from the `FieldFilter`.
 This abstraction allows you to create slightly more constraints to be applied using either `AND` or `OR` logical operator.
 
 ```php
