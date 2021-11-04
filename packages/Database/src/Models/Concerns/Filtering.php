@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  *
  * @see Criteria
  *
- * @method static \Illuminate\Database\Eloquent\Builder apply(Criteria|Criteria[] $filters)
+ * @method static \Illuminate\Database\Eloquent\Builder applyFilters(Criteria|Criteria[] $filters) Apply one or more filters (criteria). Method will not apply filters that are not applicable.
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Database\Models\Concerns
@@ -23,12 +23,16 @@ trait Filtering
     /**
      * Scope query to apply one or more filters (criteria)
      *
+     * Method will not apply filters that are not applicable.
+     *
+     * @see Criteria::isApplicable
+     *
      * @param Builder|Relation $query
      * @param Criteria|Criteria[] $filters
      *
      * @return Builder|Relation
      */
-    public function scopeApply($query, $filters)
+    public function scopeApplyFilters($query, $filters)
     {
         if (!is_array($filters)) {
             $filters = [ $filters ];
