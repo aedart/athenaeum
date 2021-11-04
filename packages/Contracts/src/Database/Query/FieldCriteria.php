@@ -34,6 +34,25 @@ interface FieldCriteria extends Criteria
     public const OR = 'or';
 
     /**
+     * Creates a new field criteria instance
+     *
+     * @param string $field
+     * @param string $operator [optional]
+     * @param mixed $value [optional]
+     * @param string $logical [optional]
+     *
+     * @return static
+     *
+     * @throws CriteriaException
+     */
+    public static function make(
+        string $field,
+        string $operator = '=',
+        $value = null,
+        string $logical = self::AND
+    );
+
+    /**
      * Set the field (column) criteria must be applied on
      *
      * @param string $field
