@@ -110,13 +110,13 @@ interface FieldCriteria extends Criteria
      * Set the logical operator that determines how criteria
      * must be added in relation to other criteria
      *
-     * @param string $boolean AND, OR
+     * @param string $operator AND, OR
      *
      * @return self
      *
      * @throws InvalidOperatorException
      */
-    public function setLogical(string $boolean = self::AND): self;
+    public function setLogical(string $operator = self::AND): self;
 
     /**
      * Get the logical operator that determines how criteria
