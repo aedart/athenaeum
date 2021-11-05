@@ -4,6 +4,8 @@
 
 ### [Unreleased]
 
+### [v5.21.0](https://github.com/aedart/athenaeum/compare/5.20.0...5.21.0)
+
 #### Added
 
 * Query `Filter` and `FieldFilter` abstractions, in database package.
