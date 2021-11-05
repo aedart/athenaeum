@@ -20,7 +20,7 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "aedart/athenaeum-contracts": "^5.21"
+        "aedart/athenaeum-contracts": "^5.22"
     },
     "autoload": {
         "psr-4": {
@@ -34,7 +34,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "5.21.x-dev"
+            "dev-master": "5.22.x-dev"
         }
     }
 }

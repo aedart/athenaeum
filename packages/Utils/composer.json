@@ -27,7 +27,7 @@
         "php": ">=7.4.0",
         "illuminate/support": "^8.15",
         "jean85/pretty-package-versions": "~1.5",
-        "aedart/athenaeum-contracts": "^5.21"
+        "aedart/athenaeum-contracts": "^5.22"
     },
     "autoload": {
         "psr-4": {
@@ -41,7 +41,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "5.21.x-dev"
+            "dev-master": "5.22.x-dev"
         }
     }
 }
