@@ -20,4 +20,5 @@ abstract class Model extends BaseModel implements Instantiatable
 {
     use Concerns\Instance;
     use Concerns\Table;
+    use Concerns\Filtering;
 }

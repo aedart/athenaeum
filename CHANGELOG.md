@@ -4,6 +4,11 @@
 
 ### [Unreleased]
 
+#### Added
+
+* Query `Filter` and `FieldFilter` abstractions, in database package.
+* `Filtering` concern for Eloquent models, in database package.
+
 ### [v5.20.0](https://github.com/aedart/athenaeum/compare/5.19.0...5.20.0)
 
 #### Added
