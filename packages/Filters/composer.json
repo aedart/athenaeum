@@ -27,6 +27,7 @@
         "aedart/athenaeum-database": "^5.22",
         "aedart/athenaeum-support": "^5.22",
         "aedart/athenaeum-utils": "^5.22",
+        "aedart/athenaeum-validation": "^5.22",
         "illuminate/http": "^8.15",
         "illuminate/pipeline": "^8.15"
     },
