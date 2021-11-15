@@ -30,7 +30,8 @@
         "psr/log": "^1.1",
         "shrikeh/teapot": "^2.3",
         "symfony/console": "^5.1",
-        "vlucas/phpdotenv": "^5.1"
+        "vlucas/phpdotenv": "^5.1",
+        "voku/stop-words": "^2.0.1"
     },
     "require-dev": {
         "ext-curl": "*",
