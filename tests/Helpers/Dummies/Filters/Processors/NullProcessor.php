@@ -4,6 +4,7 @@ namespace Aedart\Tests\Helpers\Dummies\Filters\Processors;
 
 use Aedart\Contracts\Filters\BuiltFiltersMap;
 use Aedart\Filters\BaseProcessor;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 
 /**
  * Null Processor
@@ -29,6 +30,8 @@ class NullProcessor extends BaseProcessor
     public function process(BuiltFiltersMap $built, callable $next)
     {
         $this->isProcessed = true;
+
+        ConsoleDebugger::output(sprintf('Null processor for %s processed', $this->parameter()));
 
         return $next($built);
     }
