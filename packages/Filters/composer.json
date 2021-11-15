@@ -1,6 +1,6 @@
 {
     "name": "aedart/athenaeum-filters",
-    "description": "Search filters utilities, based on http query parameters",
+    "description": "Search filters utils, based on http query parameters",
     "keywords": [
         "Athenaeum",
         "Search",
