@@ -34,13 +34,6 @@ class BaseProcessorTest extends UnitTestCase
     {
         return NullProcessor::make($options);
     }
-
-    /**
-     * Creates a new request instance
-     *
-     * @return Request
-     */
-
     /**
      * Creates a new request instance
      *
