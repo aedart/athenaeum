@@ -1,0 +1,46 @@
+{
+    "name": "aedart/athenaeum-filters",
+    "description": "Search filters utilities, based on http query parameters",
+    "keywords": [
+        "Athenaeum",
+        "Search",
+        "Filters",
+        "Http",
+        "API"
+    ],
+    "homepage": "https://aedart.github.io/athenaeum/",
+    "support": {
+        "issues": "https://github.com/aedart/athenaeum/issues",
+        "source": "https://github.com/aedart/athenaeum"
+    },
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "aedart/athenaeum-contracts": "^5.22",
+        "aedart/athenaeum-database": "^5.22",
+        "aedart/athenaeum-support": "^5.22",
+        "aedart/athenaeum-utils": "^5.22"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\Filters\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.22.x-dev"
+        }
+    }
+}
