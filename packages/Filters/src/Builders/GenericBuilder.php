@@ -32,7 +32,23 @@ class GenericBuilder extends BaseBuilder
     {
         parent::__construct($request);
 
+        $this->setProcessors($processors);
+    }
+
+    /**
+     * Set the processors to be applied
+     *
+     * @see processors
+     *
+     * @param array $processors [optional]
+     *
+     * @return self
+     */
+    public function setProcessors(array $processors = [])
+    {
         $this->processors = $processors;
+
+        return $this;
     }
 
     /**
