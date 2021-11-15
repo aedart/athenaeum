@@ -2,7 +2,9 @@
 
 namespace Aedart\Tests\TestCases\Filters;
 
+use Aedart\Contracts\Filters\Builder;
 use Aedart\Contracts\Filters\Processor;
+use Aedart\Filters\Builders\GenericBuilder;
 use Aedart\Filters\Providers\FiltersServiceProvider;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Filters\Processors\NullProcessor;
@@ -33,6 +35,22 @@ abstract class FiltersTestCase extends LaravelTestCase
     /*****************************************************************
      * Helpers
      ****************************************************************/
+
+    /**
+     * Creates a new generic filters builder
+     *
+     * @param array $processors [optional]
+     * @param Request|null $request [optional] Defaults to new request when none given
+     *
+     * @return Builder
+     */
+    public function makeGenericBuilder(array $processors = [], ?Request $request = null): Builder
+    {
+        $request = $request ?? $this->makeRequest();
+
+        return GenericBuilder::make($request)
+            ->setProcessors($processors);
+    }
 
     /**
      * Creates a new "null" processor instance
