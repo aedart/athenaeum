@@ -1,0 +1,170 @@
+<?php
+
+namespace Aedart\Tests\Unit\Filters;
+
+use Aedart\Contracts\Filters\Processor;
+use Aedart\Testing\TestCases\UnitTestCase;
+use Aedart\Tests\Helpers\Dummies\Filters\Processors\NullProcessor;
+use Illuminate\Http\Request;
+use RuntimeException;
+
+/**
+ * BaseProcessorTest
+ *
+ * @group filters
+ * @group base-processor
+ *
+ * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @package Aedart\Tests\Unit\Filters
+ */
+class BaseProcessorTest extends UnitTestCase
+{
+    /*****************************************************************
+     * Helpers
+     ****************************************************************/
+
+    /**
+     * Creates a new processor instance
+     *
+     * @param array $options [optional]
+     *
+     * @return Processor
+     */
+    public function makeProcessor(array $options = []): Processor
+    {
+        return NullProcessor::make($options);
+    }
+
+    /**
+     * Creates a new request instance
+     *
+     * @return Request
+     */
+
+    /**
+     * Creates a new request instance
+     *
+     * @param string $uri [optional]
+     * @param string $method [optional]
+     * @param array $parameters [optional]
+     * @param array $cookies [optional]
+     * @param array $files [optional]
+     * @param array $server [optional]
+     * @param null $content [optional]
+     *
+     * @return Request
+     */
+    public function makeRequest(
+        string $uri = 'https://some-url.org/api/v1',
+        string $method = 'GET',
+        array $parameters = [],
+        array $cookies = [],
+        array $files = [],
+        array $server = [],
+        $content = null
+    ): Request {
+        return Request::create($uri, $method, $parameters, $cookies, $files, $server, $content);
+    }
+
+    /*****************************************************************
+     * Actual Tests
+     ****************************************************************/
+
+    /**
+     * @test
+     */
+    public function canCreateInstance()
+    {
+        $processor = $this->makeProcessor();
+
+        $this->assertNotNull($processor);
+    }
+
+    /**
+     * @test
+     */
+    public function canAssignRequest()
+    {
+        $request = $this->makeRequest();
+
+        $processor = $this
+            ->makeProcessor()
+            ->fromRequest($request);
+
+        $this->assertSame($request, $processor->request());
+    }
+
+    /**
+     * @test
+     */
+    public function failsWhenRequestNotSpecified()
+    {
+        $this->expectException(RuntimeException::class);
+
+        $this
+            ->makeProcessor()
+            ->request();
+    }
+
+    /**
+     * @test
+     */
+    public function canAssignParameter()
+    {
+        $param = $this->getFaker()->slug;
+
+        $processor = $this
+            ->makeProcessor()
+            ->usingParameter($param);
+
+        $this->assertSame($param, $processor->parameter());
+    }
+
+    /**
+     * @test
+     */
+    public function failsWhenNoParameterAssigned()
+    {
+        $this->expectException(RuntimeException::class);
+
+        $this
+            ->makeProcessor()
+            ->parameter();
+    }
+
+    /**
+     * @test
+     */
+    public function canObtainValue()
+    {
+        $expected = $this->getFaker()->name;
+
+        $request = $this
+            ->makeRequest('https://some-url.org/api/v1', 'GET', [
+                'name' => $expected
+            ]);
+
+        $processor = $this
+            ->makeProcessor()
+            ->fromRequest($request)
+            ->usingParameter('name');
+
+        $value = $processor->value();
+
+        $this->assertSame($expected, $value);
+    }
+
+    /**
+     * @test
+     */
+    public function canSetForceState()
+    {
+        $processor = $this->makeProcessor();
+
+        // Default force state should be false
+        $this->assertFalse($processor->mustBeApplied(), 'Incorrect default force state');
+
+        $processor->force();
+        $this->assertTrue($processor->mustBeApplied());
+    }
+}
