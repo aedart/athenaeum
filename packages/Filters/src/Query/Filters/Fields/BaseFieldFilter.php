@@ -5,6 +5,7 @@ namespace Aedart\Filters\Query\Filters\Fields;
 use Aedart\Contracts\Database\Query\FieldCriteria;
 use Aedart\Database\Query\FieldFilter;
 use Aedart\Filters\Query\Filters\Concerns;
+use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
 
 /**
@@ -18,15 +19,16 @@ use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
 abstract class BaseFieldFilter extends FieldFilter
 {
     use ValidatorFactoryTrait;
+    use TranslatorTrait;
     use Concerns\DatabaseDriver;
 
     /**
      * Map of operators (aliases) and corresponding database
      * sql operator.
      *
-     * @return array Key-value pair, key = operator alias, value = sql operator or
-     *               other kind token that determines how filter must build it
-     *               query.
+     * @return array Key-value pair, key = operator submitted in http query parameters,
+     *               value = sql operator or other kind token that determines how
+     *               filter must build it query.
      */
     abstract public function operatorAliases(): array;
 
