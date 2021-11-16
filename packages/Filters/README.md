@@ -10,7 +10,6 @@ By extending the `BaseBuilder` abstraction, you can encapsulate a custom filters
 Whenever a http query parameter is matched, a corresponding "processor" is invoked, which is responsible for creating one or more query filters.
 
 ```php
-
 namespace Acme\Filters;
 
 use Aedart\Filters\BaseBuilder;
@@ -45,7 +44,6 @@ class UserFilterBuilder extends BaseBuilder
 To use your custom filters builder, create a new instance in your request, e.g. in the [after validation hook](https://laravel.com/docs/8.x/validation#after-validation-hook).
 
 ```php
-
 namespace Acme\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -73,7 +71,6 @@ class ListUsersRequest exends FormRequest
 Lastly, apply the filters directly on your model.
 
 ```php
-
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Acme\Requests\ListUsersRequest;
