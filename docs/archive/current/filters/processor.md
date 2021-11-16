@@ -111,7 +111,7 @@ class SimpleSearchProcessor extends BaseProcessor
 
 ## Built Filters Map
 
-The `BuiltFiltersMap` dto is intended be used as a temporary placeholder of all the filters that processors created.
+The `BuiltFiltersMap` DTO is intended be used as a temporary placeholder of all the filters that processors created.
 
 ### Add filters
 
