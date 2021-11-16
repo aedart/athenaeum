@@ -161,6 +161,15 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Filters',
+            collapsable: true,
+            children: [
+                'filters/',
+                // 'filters/install',
+                // 'filters/setup',
+            ]
+        },
+        {
             title: 'Http',
             collapsable: true,
             children: [
