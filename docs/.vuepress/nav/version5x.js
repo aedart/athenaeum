@@ -165,8 +165,11 @@ module.exports.sidebar = function(){
             collapsable: true,
             children: [
                 'filters/',
-                // 'filters/install',
-                // 'filters/setup',
+                'filters/prerequisites',
+                'filters/install',
+                'filters/setup',
+                'filters/processor',
+                'filters/builder',
             ]
         },
         {
