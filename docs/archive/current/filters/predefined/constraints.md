@@ -116,3 +116,51 @@ These operators are either mapped directly to an SQL comparison operator or func
 
 If an unsupported operator is requested, then the request is aborted - a `422 Unprocessable Entity` response is returned.
 Please review each filter's source for a full list of supported operators.
+
+### Create your own filters
+
+If the available filters are not sufficient, then you can create your own filters, which can be supported by the "constraints" processor.
+The easiest way of doing so, is by extending the `BaseFieldFilter` abstraction.
+
+**Example**:
+
+```php
+use Aedart\Filters\Query\Filters\Fields\BaseFieldFilter;
+
+class MyFilter extends BaseFieldFilter
+{
+    public function apply($query)
+    {
+        $operator = $this->operator();
+
+        switch ($operator) {
+            case 'special':
+                return $query->where($this->field(), '%', $this->value());
+
+            default:
+                return $this->buildDefaultConstraint($query);
+        }
+    }
+
+    public function operatorAliases(): array
+    {
+        return [
+            'eq' => '=',
+            'ne' => '!=',
+
+            'special' => 'special' 
+        ];
+    }
+    
+    protected function assertValue($value)
+    {
+        // The assert method can be used to validate the requested value.
+        // Throw an InvalidArgumentException, if value is invalid.
+        // The processor will take care of the rest...
+    
+        if ((int) $value < 1) {
+            throw new InvalidArgumentException('Value must be above 1');
+        }
+    }
+}
+```
