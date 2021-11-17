@@ -170,6 +170,17 @@ module.exports.sidebar = function(){
                 'filters/setup',
                 'filters/processor',
                 'filters/builder',
+                {
+                    title: 'Predefined Resources',
+                    collapsable: true,
+                    children: [
+                        'filters/predefined/',
+                        'filters/predefined/search',
+                        'filters/predefined/sort',
+                        'filters/predefined/constraints',
+                        'filters/predefined/match',
+                    ]
+                }
             ]
         },
         {
