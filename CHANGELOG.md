@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.22.0](https://github.com/aedart/athenaeum/compare/5.21.0...5.22.0)
+
+#### Added
+
+* Filters package. Offers a way to create query filters, based on received http query parameters. [#59](https://github.com/aedart/athenaeum/pull/59).
+
 ### [v5.21.0](https://github.com/aedart/athenaeum/compare/5.20.0...5.21.0)
 
 #### Added
