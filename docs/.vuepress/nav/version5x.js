@@ -174,13 +174,14 @@ module.exports.sidebar = function(){
                     title: 'Predefined Resources',
                     collapsable: true,
                     children: [
-                        'filters/predefined/',
+                        // 'filters/predefined/', // N/A - no need for an index here...
                         'filters/predefined/search',
                         'filters/predefined/sort',
                         'filters/predefined/constraints',
                         'filters/predefined/match',
                     ]
-                }
+                },
+                'filters/tip'
             ]
         },
         {
