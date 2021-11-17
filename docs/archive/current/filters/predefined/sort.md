@@ -1,5 +1,6 @@
 ---
 description: Sorting Processor
+sidebarDepth: 0
 ---
 
 # Sorting Processor

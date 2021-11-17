@@ -1,5 +1,6 @@
 ---
 description: Search Processor
+sidebarDepth: 0
 ---
 
 # Search Processor
