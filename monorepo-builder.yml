@@ -53,6 +53,7 @@ parameters:
         packages/Database: 'git@github.com:aedart/athenaeum-database.git'
         packages/Dto: 'git@github.com:aedart/athenaeum-dto.git'
         packages/Events: 'git@github.com:aedart/athenaeum-events.git'
+        packages/Filters: 'git@github.com:aedart/athenaeum-filters.git'
         packages/Http/Clients: 'git@github.com:aedart/athenaeum-http-clients.git'
         packages/Http/Cookies: 'git@github.com:aedart/athenaeum-http-cookies.git'
         packages/Http/Messages: 'git@github.com:aedart/athenaeum-http-messages.git'

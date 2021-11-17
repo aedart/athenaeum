@@ -18,6 +18,7 @@
         "illuminate/database": "^8.15",
         "illuminate/events": "^8.15",
         "illuminate/filesystem": "^8.15",
+        "illuminate/http": "^8.15",
         "illuminate/pipeline": "^8.15",
         "illuminate/support": "^8.15",
         "illuminate/validation": "^8.15",
@@ -29,7 +30,8 @@
         "psr/log": "^1.1",
         "shrikeh/teapot": "^2.3",
         "symfony/console": "^5.1",
-        "vlucas/phpdotenv": "^5.1"
+        "vlucas/phpdotenv": "^5.1",
+        "voku/stop-words": "^2.0.1"
     },
     "require-dev": {
         "ext-curl": "*",
@@ -65,6 +67,7 @@
             "Aedart\\Database\\": "packages/Database/src",
             "Aedart\\Dto\\": "packages/Dto/src",
             "Aedart\\Events\\": "packages/Events/src",
+            "Aedart\\Filters\\": "packages/Filters/src",
             "Aedart\\Http\\Clients\\": "packages/Http/Clients/src",
             "Aedart\\Http\\Cookies\\": "packages/Http/Cookies/src",
             "Aedart\\Http\\Messages\\": "packages/Http/Messages/src",
@@ -96,6 +99,7 @@
         "aedart/athenaeum-database": "self.version",
         "aedart/athenaeum-dto": "self.version",
         "aedart/athenaeum-events": "self.version",
+        "aedart/athenaeum-filters": "self.version",
         "aedart/athenaeum-http-clients": "self.version",
         "aedart/athenaeum-http-cookies": "self.version",
         "aedart/athenaeum-http-messages": "self.version",

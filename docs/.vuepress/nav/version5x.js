@@ -161,6 +161,30 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Filters',
+            collapsable: true,
+            children: [
+                'filters/',
+                'filters/prerequisites',
+                'filters/install',
+                'filters/setup',
+                'filters/processor',
+                'filters/builder',
+                {
+                    title: 'Predefined Resources',
+                    collapsable: true,
+                    children: [
+                        // 'filters/predefined/', // N/A - no need for an index here...
+                        'filters/predefined/search',
+                        'filters/predefined/sort',
+                        'filters/predefined/constraints',
+                        'filters/predefined/match',
+                    ]
+                },
+                'filters/tip'
+            ]
+        },
+        {
             title: 'Http',
             collapsable: true,
             children: [
