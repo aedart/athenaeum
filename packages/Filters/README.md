@@ -1,6 +1,6 @@
 # Athenaeum Filters
 
-Offers a way to create search and constraint [query filters](https://aedart.github.io/athenaeum/archive/current/database/query), based on received http query parameters.
+Offers a way to create search and constraint [query filters](https://aedart.github.io/athenaeum/archive/current/database/query), based on received http query parameters, for your [Laravel](https://laravel.com/) application.
 
 ## Example
 
