@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.22.1](https://github.com/aedart/athenaeum/compare/5.22.0...5.22.1)
+
+### Fixed
+
+* Too aggressive stop-word removal, removes more than it should, in Filters package's `StopWords` concern.
+
 ### [v5.22.0](https://github.com/aedart/athenaeum/compare/5.21.0...5.22.0)
 
 #### Added
