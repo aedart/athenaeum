@@ -33,7 +33,13 @@ trait StopWords
     {
         $stopWords = $this->stopWordsList($language);
 
-        return Str::replace($stopWords, '', $search);
+        // Wrap each stop-word with white-spaces or the given
+        // search term might be manipulated in an undesirable fashion.
+        $formatted = array_map(function ($word) {
+            return " {$word} ";
+        }, $stopWords);
+
+        return Str::replace($formatted, '', $search);
     }
 
     /**
