@@ -67,8 +67,8 @@ abstract class FieldFilter extends Filter implements FieldCriteria
         $this
             ->setField($field)
             ->setOperator($operator)
-            ->setValue($value)
-            ->setLogical($logical);
+            ->setLogical($logical)
+            ->setValue($value);
     }
 
     /**
