@@ -26,8 +26,8 @@
         "mockery/mockery": "1.4.*",
         "orchestra/testbench": "^6.12.0",
         "orchestra/testbench-dusk": "^v6.12.0",
-        "aedart/athenaeum-contracts": "^5.22.2",
-        "aedart/athenaeum-container": "^5.22.2"
+        "aedart/athenaeum-contracts": "^5.23",
+        "aedart/athenaeum-container": "^5.23"
     },
     "autoload": {
         "psr-4": {
