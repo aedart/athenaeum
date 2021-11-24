@@ -27,7 +27,7 @@
         "php": ">=7.4.0",
         "illuminate/support": "^8.15",
         "jean85/pretty-package-versions": "~1.5",
-        "aedart/athenaeum-contracts": "^5.23"
+        "aedart/athenaeum-contracts": "^5.22.2"
     },
     "autoload": {
         "psr-4": {
