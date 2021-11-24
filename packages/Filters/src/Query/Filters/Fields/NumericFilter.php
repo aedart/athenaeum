@@ -69,17 +69,36 @@ class NumericFilter extends BaseFieldFilter
      */
     protected function assertValue($value)
     {
+        // Allow empty values, when "is null / not null" operators are
+        // chosen.
+        $operator = $this->operator();
+        if (empty($value) && in_array($operator, [ 'is_null', 'not_null' ])) {
+            return;
+        }
+
         // Allow list of numeric values...
-        if (Str::contains($value, ',')) {
+        if (in_array($operator, [ 'in', 'not_in' ]) && Str::contains($value, ',')) {
             $values = $this->valueToList($value);
 
             foreach ($values as $v) {
-                $this->assertValue($v);
+                $this->assertNumericValue($v);
             }
 
             return;
         }
 
+        $this->assertNumericValue($value);
+    }
+
+    /**
+     * Assert given value is numeric
+     *
+     * @param mixed $value
+     *
+     * @throws InvalidArgumentException
+     */
+    protected function assertNumericValue($value)
+    {
         if (!is_numeric($value)) {
             $translator = $this->getTranslator();
 

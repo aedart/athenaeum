@@ -47,6 +47,20 @@ class FieldFiltersTest extends FiltersTestCase
                 $faker->randomDigitNotNull
             ],
 
+            'numeric (null)' => [
+                NumericFilter::class,
+                'id',
+                'is_null',
+                null
+            ],
+
+            'numeric (in)' => [
+                NumericFilter::class,
+                'id',
+                'in',
+                '1,2,3,4'
+            ],
+
             'boolean' => [
                 BooleanFilter::class,
                 'is_admin',
