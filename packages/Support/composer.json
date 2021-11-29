@@ -25,8 +25,8 @@
         "php": ">=7.4.0",
         "illuminate/config": "^8.15",
         "illuminate/support": "^8.15",
-        "aedart/athenaeum-contracts": "^5.22.3",
-        "aedart/athenaeum-utils": "^5.22.3"
+        "aedart/athenaeum-contracts": "^5.23",
+        "aedart/athenaeum-utils": "^5.23"
     },
     "require-dev": {
         "twig/twig": "^3.0.5",
