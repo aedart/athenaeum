@@ -4,16 +4,22 @@
 
 ### [Unreleased]
 
+### [v5.22.3](https://github.com/aedart/athenaeum/compare/5.22.2...5.22.3)
+
+#### Fixed
+
+* `SearchProcessor` not applied when `'0'` given as search term.
+
 ### [v5.22.2](https://github.com/aedart/athenaeum/compare/5.22.1...5.22.2)
 
-### Fixed
+#### Fixed
 
 * Incorrect value assertion for `NumericFilter`, when `is_null` or `not_null` operators used.
 * Applies list of numeric values validation, when neither `in` or `not_in` operator set, in `NumericFilter`.
 
 ### [v5.22.1](https://github.com/aedart/athenaeum/compare/5.22.0...5.22.1)
 
-### Fixed
+#### Fixed
 
 * Too aggressive stop-word removal, removes more than it should, in Filters package's `StopWords` concern.
 
