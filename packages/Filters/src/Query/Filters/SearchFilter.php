@@ -65,7 +65,7 @@ class SearchFilter extends Filter
             // in case that nothing is returned, then we must abort the
             // search.
             $search = $this->removeStopWords($this->search, $this->language);
-            if (empty($search)) {
+            if (mb_strlen($search) === 0) {
                 return;
             }
 
