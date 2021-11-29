@@ -56,4 +56,43 @@ class SearchProcessorTest extends FiltersTestCase
 
         $this->assertNotEmpty($sql, 'Query was not built');
     }
+
+    /**
+     * @test
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function canSearchForZero()
+    {
+        $key = 'search';
+        $processors = [
+            $key => SearchProcessor::make()
+                ->columns(['name', 'description'])
+        ];
+
+        $builder = $this->makeGenericBuilder($processors, $this->makeRequest(
+            'https://some-url.org/api/v1',
+            'GET',
+            [
+                'search' => '0'
+            ]
+        ));
+
+        $built = $builder->build();
+        $this->assertTrue($built->has($key), 'Filter was not built');
+
+        // --------------------------------------------------------------- //
+
+        $filters = $built->get($key);
+        $this->assertCount(1, $filters);
+
+        // Apply filter and assert that sql can be generated...
+        $filter = $filters[0];
+        $query = $filter->apply(Category::query());
+
+        $sql = $query->toSql();
+        ConsoleDebugger::output($sql);
+
+        $this->assertNotEmpty($sql, 'Query was not built');
+    }
 }

@@ -50,7 +50,8 @@ class SearchProcessor extends BaseProcessor
     {
         // Skip if empty value given
         $value = $this->value();
-        if (empty($value)) {
+
+        if ((is_string($value) && mb_strlen($value) === 0) || is_null($value)) {
             return $next($built);
         }
 
