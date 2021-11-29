@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.22.4](https://github.com/aedart/athenaeum/compare/5.22.3...5.22.4)
+
+#### Fixed
+
+* `SearchFilter` not applied when `'0'` given as search term.
+
 ### [v5.22.3](https://github.com/aedart/athenaeum/compare/5.22.2...5.22.3)
 
 #### Fixed
