@@ -23,11 +23,11 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "aedart/athenaeum-contracts": "^5.23",
-        "aedart/athenaeum-database": "^5.23",
-        "aedart/athenaeum-support": "^5.23",
-        "aedart/athenaeum-utils": "^5.23",
-        "aedart/athenaeum-validation": "^5.23",
+        "aedart/athenaeum-contracts": "^5.22.4",
+        "aedart/athenaeum-database": "^5.22.4",
+        "aedart/athenaeum-support": "^5.22.4",
+        "aedart/athenaeum-utils": "^5.22.4",
+        "aedart/athenaeum-validation": "^5.22.4",
         "illuminate/http": "^8.15",
         "illuminate/pipeline": "^8.15",
         "voku/stop-words": "^2.0.1"
