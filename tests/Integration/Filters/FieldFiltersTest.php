@@ -4,9 +4,11 @@ namespace Aedart\Tests\Integration\Filters;
 
 use Aedart\Contracts\Database\Query\FieldCriteria;
 use Aedart\Filters\Query\Filters\Fields\BooleanFilter;
+use Aedart\Filters\Query\Filters\Fields\DateFilter;
 use Aedart\Filters\Query\Filters\Fields\DatetimeFilter;
 use Aedart\Filters\Query\Filters\Fields\NumericFilter;
 use Aedart\Filters\Query\Filters\Fields\StringFilter;
+use Aedart\Filters\Query\Filters\Fields\UTCDatetimeFilter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
@@ -68,11 +70,25 @@ class FieldFiltersTest extends FiltersTestCase
                 'yes'
             ],
 
+            'date' => [
+                DateFilter::class,
+                'created_at',
+                'eq',
+                $faker->date('Y-m-d')
+            ],
+
             'datetime' => [
                 DatetimeFilter::class,
                 'updated_at',
-                'lt',
-                $faker->date('Y-m-d')
+                'eq',
+                $faker->date('Y-m-d H:i:s')
+            ],
+
+            'UTC datetime' => [
+                UTCDatetimeFilter::class,
+                'deleted_at',
+                'gt',
+                $faker->date('Y-m-d H:i:s')
             ],
 
             'string' => [
