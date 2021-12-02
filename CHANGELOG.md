@@ -4,6 +4,17 @@
 
 ### [Unreleased]
 
+### [v5.23.0](https://github.com/aedart/athenaeum/compare/5.22.4...5.23.0)
+
+#### Added
+
+* `DateFilter` that is able to match dates stated in `Y-m-d` format.
+* `UTCDatetimeFilter` converts given date to UTC, before attempts to match against database value.
+
+#### Fixed
+
+* `DatetimeFilter` fails matching full date and time. New comparison logic has been added. Previously used Laravel's `whereDate()` query, which yielded incorrect results.
+
 ### [v5.22.4](https://github.com/aedart/athenaeum/compare/5.22.3...5.22.4)
 
 #### Fixed
