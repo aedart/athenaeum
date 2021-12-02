@@ -98,7 +98,9 @@ These can be applied per allowed filterable property.
 * `NumericFilter` matches value against numeric column
 * `StringFilter` matches value against string column
 * `BooleanFilter` marches value against boolean column
-* `DatetimeFilter` matches value against datetime column
+* `DateFilter` matches value against date column (_`Y-m-d`_) - **Available since `v5.23.x`**
+* `DatetimeFilter` matches value against datetime column (_`Y-m-d H:i:s`_)
+* `UTCDatetimeFilter` matches value against datetime column (_`Y-m-d H:i:s`_). Given date is converted to UTC, before matched against database value - **Available since `v5.23.x`**
 
 ### Operators
 
