@@ -23,11 +23,11 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "aedart/athenaeum-contracts": "^5.23",
-        "aedart/athenaeum-database": "^5.23",
-        "aedart/athenaeum-support": "^5.23",
-        "aedart/athenaeum-utils": "^5.23",
-        "aedart/athenaeum-validation": "^5.23",
+        "aedart/athenaeum-contracts": "^5.24",
+        "aedart/athenaeum-database": "^5.24",
+        "aedart/athenaeum-support": "^5.24",
+        "aedart/athenaeum-utils": "^5.24",
+        "aedart/athenaeum-validation": "^5.24",
         "illuminate/http": "^8.15",
         "illuminate/pipeline": "^8.15",
         "voku/stop-words": "^2.0.1"
@@ -44,7 +44,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "5.23.x-dev"
+            "dev-master": "5.24.x-dev"
         }
     }
 }
