@@ -3,7 +3,6 @@
 namespace Aedart\Filters\Query\Filters\Fields;
 
 use DateTimeInterface;
-use InvalidArgumentException;
 
 /**
  * Datetime Filter
@@ -11,8 +10,16 @@ use InvalidArgumentException;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Filters\Query\Filters\Fields
  */
-class DatetimeFilter extends BaseFieldFilter
+class DatetimeFilter extends DateFilter
 {
+    /**
+     * State whether given datetime must be converted
+     * to UTC or not
+     *
+     * @var bool
+     */
+    protected bool $utc = false;
+
     /**
      * @inheritDoc
      */
@@ -28,58 +35,13 @@ class DatetimeFilter extends BaseFieldFilter
                 return $this->buildWhereNotNullConstraint($query);
 
             default:
-                return $this->buildWhereDateConstraint($query);
+                return $this->buildWhereDatetimeConstraint($query, $this->utc);
         }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function operatorAliases(): array
-    {
-        return [
-            'eq' => '=',
-            'ne' => '!=',
-            'gt' => '>',
-            'gte' => '>=',
-            'lt' => '<',
-            'lte' => '<=',
-
-            // NOTE: Values do NOT correspond directly to sql operators for these...
-            'is_null' => 'is_null',
-            'not_null' => 'not_null',
-        ];
     }
 
     /*****************************************************************
      * Internals
      ****************************************************************/
-
-    /**
-     * @inheritDoc
-     */
-    protected function assertValue($value)
-    {
-        // Allow empty values, when "is null / not null" operators are
-        // chosen.
-        if (empty($value) && in_array($this->operator(), [ 'is_null', 'not_null' ])) {
-            return;
-        }
-
-        $field = $this->field();
-
-        // To ensure that the submitted date is valid, we
-        // will rely on Laravel's validator - it's by far the
-        // simplest way of ensuring the input is as desired.
-        $validator = $this->getValidatorFactory()->make([ $field => $value ], [
-            $field => 'required|date_format:' . implode(',', $this->allowedDateFormats())
-        ]);
-
-        if ($validator->fails()) {
-            $reason = $validator->errors()->first($field);
-            throw new InvalidArgumentException($reason);
-        }
-    }
 
     /**
      * Returns list of allowed date formats

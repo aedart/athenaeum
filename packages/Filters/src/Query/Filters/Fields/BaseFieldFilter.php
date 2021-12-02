@@ -7,6 +7,7 @@ use Aedart\Database\Query\FieldFilter;
 use Aedart\Filters\Query\Filters\Concerns;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
+use Illuminate\Support\Carbon;
 
 /**
  * Base Field Filter
@@ -21,6 +22,13 @@ abstract class BaseFieldFilter extends FieldFilter
     use ValidatorFactoryTrait;
     use TranslatorTrait;
     use Concerns\DatabaseDriver;
+
+    /**
+     * The datetime format used by the database
+     *
+     * @var string
+     */
+    protected string $datetimeFormat = 'Y-m-d H:i:s';
 
     /**
      * Map of operators (aliases) and corresponding database
@@ -230,7 +238,99 @@ abstract class BaseFieldFilter extends FieldFilter
     }
 
     /**
-     * Builds "where [field] [operator] [date / datetime value]" constraint
+     * Builds "where [field] [operator] [datetime value]" constraint
+     *
+     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     *
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     */
+    protected function buildWhereDatetimeConstraint($query, bool $utc = false)
+    {
+        $field = $this->field();
+        $operator = $this->operator();
+
+        // Parse date and convert to UTC, if required.
+        $date = Carbon::parse($this->value());
+        if ($utc) {
+            $date = $date->utc();
+        }
+
+        // If equals or not equals operators are chosen, then we need to build
+        // a range search for the given date, with a -/+ seconds offset, due
+        // to the database's datetime precision. IF not, then chances are that
+        // a submitted datetime can never be matched precisely, especially if
+        // seconds precision required.
+        if (in_array($operator, ['=', '!='])) {
+            // Operators to be used for range comparison
+            $low = '>=';
+            $high = '<=';
+
+            if ($operator === '!=') {
+                $low = '<';
+                $high = '>';
+            }
+
+            // Callback that builds the actual datetime comparison, with a -/+ seconds offset...
+            $dateComparisonCallback = function ($query) use ($date, $low, $high) {
+                return $this->datetimeRangeComparison($query, $date, $low, $high);
+            };
+
+            if ($this->logical() === FieldCriteria::OR) {
+                return $query->orWhere($dateComparisonCallback);
+            }
+
+            return $query->where($dateComparisonCallback);
+        }
+
+        // Otherwise, for regular comparisons operators (<,>, <=, and >=)
+        if ($this->logical() === FieldCriteria::OR) {
+            return $query->orWhere($field, $operator, $date->format($this->datetimeFormat));
+        }
+
+        return $query->where($field, $operator, $date->format($this->datetimeFormat));
+    }
+
+    /**
+     * Returns a datetime range comparison
+     *
+     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Carbon $date
+     * @param string $low [optional] Low end datetime comparison operator
+     * @param string $high [optional] High end datetime comparison operator
+     * @param int $offset [optional] Evt. -/+ seconds offset. If date has zero second
+     *                     then this offset will be multiplied with 60, to match a full
+     *                     minute...
+     *
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     */
+    protected function datetimeRangeComparison(
+        $query,
+        Carbon $date,
+        string $low = '>=',
+        string $high = '<=',
+        int $offset = 1
+    ) {
+        // The general database datetime format to use.
+        $format = $this->datetimeFormat;
+
+        // In case that no "seconds" precision is given, then ensure
+        // that we increase the offset and adapt the format. This should
+        // give a more acceptable result, rather than having "equals / not equals"
+        // fail finding anything...
+        if ($date->second === 0) {
+            $format = 'Y-m-d H:i:00';
+            $offset *= 60; // Seconds
+        }
+
+        $field = $this->getField();
+
+        return $query
+            ->where($field, $low, $date->format($format))
+            ->where($field, $high, $date->addSeconds($offset)->format($format));
+    }
+
+    /**
+     * Builds "where [field] [operator] [date value]" constraint
      *
      * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
      *
