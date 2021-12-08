@@ -101,6 +101,7 @@ These can be applied per allowed filterable property.
 * `DateFilter` matches value against date column (_`Y-m-d`_) - **Available since `v5.23.x`**
 * `DatetimeFilter` matches value against datetime column (_`Y-m-d H:i:s`_)
 * `UTCDatetimeFilter` matches value against datetime column (_`Y-m-d H:i:s`_). Given date is converted to UTC, before matched against database value - **Available since `v5.23.x`**
+* `BelongsToFilter` able to constrain relations of the type "belongs to" (_see further below for example_) - **Available since `v5.24.x`**
 
 ### Operators
 
@@ -165,4 +166,45 @@ class MyFilter extends BaseFieldFilter
         }
     }
 }
+```
+
+### `BelongsToFilter` Example
+
+The `BelongsToFilter` is slightly more special in that you need to create an instance and specify the name of the relation you wish to constrain.
+
+```php
+use Aedart\Filters\Query\Filters\Fields\BelongsToFilter;
+
+return [
+    'filter' => ConstraintsProcessor::make()
+        ->filters([
+            'user' => BelongsToFilter::make()
+                ->setRelation('owner'),
+                
+            // ...remaining not shown...
+        ])
+        ->propertiesToColumns([
+            'user' => 'owner.id', // relation + name of column in related model
+        ]);
+];
+```
+
+#### String relation
+
+By default, the belongs to filter assumes that the relation value to constrain is an integer. If you wish to constrain a string value instead, e.g. a string column, then use the `usingStringValue()` method.
+
+```php
+return [
+    'filter' => ConstraintsProcessor::make()
+        ->filters([
+            'category' => BelongsToFilter::make()
+                ->setRelation('categories')
+                ->usingStringValue(),
+                
+            // ...remaining not shown...
+        ])
+        ->propertiesToColumns([
+            'category' => 'categories.slug',
+        ]);
+];
 ```
