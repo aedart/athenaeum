@@ -7,6 +7,7 @@
 #### Changed
 
 * Allowing `FieldCriteria` instances to be given in the `fitlers()`, in `ConstraintsProcessor`. This allows for more advanced filters setup.
+* Example of `BaseFiltersBuilder` now uses a custom method for the sortable properties to columns map, in documentation.
 
 ### [v5.23.0](https://github.com/aedart/athenaeum/compare/5.22.4...5.23.0)
 
