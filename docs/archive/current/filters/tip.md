@@ -35,7 +35,7 @@ abstract class BaseFiltersBuilder extends Builder
 
             'sort' => SortingProcessor::make()
                 ->sortable($this->sortable())
-                ->propertiesToColumns($this->propertiesColumnsMap())
+                ->propertiesToColumns($this->sortingPropertiesColumnsMap())
                 ->defaultSort($this->defaultSorting())
                 ->force()
         ];
@@ -64,6 +64,19 @@ abstract class BaseFiltersBuilder extends Builder
      * @return array
      */
     abstract public function propertiesColumnsMap(): array;
+
+    /**
+     * Map of properties and their corresponding table column name,
+     * to be used for sorting.
+     *
+     * @see propertiesColumnsMap
+     *
+     * @return array Key-value pairs, key = requested property, value = database table column
+     */
+    public function sortingPropertiesColumnsMap(): array
+    {
+        return $this->propertiesColumnsMap();
+    }
 
     /**
      * Get list of sortable properties
