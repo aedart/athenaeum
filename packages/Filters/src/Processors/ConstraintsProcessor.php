@@ -2,6 +2,7 @@
 
 namespace Aedart\Filters\Processors;
 
+use Aedart\Contracts\Database\Query\Exceptions\CriteriaException;
 use Aedart\Contracts\Database\Query\Exceptions\InvalidOperatorException;
 use Aedart\Contracts\Database\Query\FieldCriteria;
 use Aedart\Contracts\Filters\BuiltFiltersMap;
@@ -9,6 +10,7 @@ use Aedart\Filters\BaseProcessor;
 use Aedart\Filters\Exceptions\InvalidParameter;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use InvalidArgumentException;
+use LogicException;
 
 /**
  * Constraints Processor
@@ -199,6 +201,9 @@ class ConstraintsProcessor extends BaseProcessor
      * @return FieldCriteria
      *
      * @throws InvalidParameter
+     * @throws LogicException If filter is invalid, e.g. not class path or FieldCriteria instance
+     * @throws CriteriaException
+     * @throws \Aedart\Contracts\Filters\Exceptions\ProcessorException
      */
     protected function buildFilter(
         string $property,
@@ -211,9 +216,24 @@ class ConstraintsProcessor extends BaseProcessor
 
         // Attempt to build the filter for the requested property.
         try {
-            $filterClass = $this->filtersMap[$property];
+            $filter = $this->filtersMap[$property];
 
-            return $filterClass::make($column, $operator, $value, $logical);
+            // Create instance if class path provided
+            if (is_string($filter)) {
+                return $filter::make($column, $operator, $value, $logical);
+            }
+
+            // (Re)-configure if instance was provided
+            if ($filter instanceof FieldCriteria) {
+                return $filter
+                    ->setField($column)
+                    ->setOperator($operator)
+                    ->setLogical($logical)
+                    ->setValue($value);
+            }
+
+            // Fail otherwise...
+            throw new LogicException(sprintf('Invalid filter for property %s. Expected a class path or FieldCriteria instance', $property));
         } catch (InvalidOperatorException $e) {
             // To ensure that the correct parameter (e.g. filter.[property]) is specified,
             // we need to create the correct parameter name,
