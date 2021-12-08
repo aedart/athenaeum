@@ -71,7 +71,7 @@ abstract class BaseFiltersBuilder extends Builder
      *
      * @see propertiesColumnsMap
      *
-     * @return array Key-value pairs, key = requested property, value = database table column
+     * @return array
      */
     public function sortingPropertiesColumnsMap(): array
     {
