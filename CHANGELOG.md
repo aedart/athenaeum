@@ -4,6 +4,10 @@
 
 ### [Unreleased]
 
+#### Changed
+
+* Allowing `FieldCriteria` instances to be given in the `fitlers()`, in `ConstraintsProcessor`. This allows for more advanced filters setup.
+
 ### [v5.23.0](https://github.com/aedart/athenaeum/compare/5.22.4...5.23.0)
 
 #### Added
