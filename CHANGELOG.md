@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.23.0](https://github.com/aedart/athenaeum/compare/5.23.0...5.24.0)
+
+#### Added
+
+* `BelongsToFilter` that is able to constrain relations of the type "belongs to", in filters package.
+
 #### Changed
 
 * Allowing `FieldCriteria` instances to be given in the `fitlers()`, in `ConstraintsProcessor`. This allows for more advanced filters setup.
