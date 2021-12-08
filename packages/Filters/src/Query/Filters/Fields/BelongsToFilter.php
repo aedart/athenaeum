@@ -323,12 +323,12 @@ class BelongsToFilter extends BaseFieldFilter
     protected function buildWhereHasMorph(MorphTo $query, string $field): MorphTo
     {
         if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereHasMorph($this->relation(), '*', function($query) use($field) {
+            return $query->orWhereHasMorph($this->relation(), '*', function ($query) use ($field) {
                 $query->where($field, $this->operator(), $this->value());
             });
         }
 
-        return $query->whereHasMorph($this->relation(), '*', function($query) use($field) {
+        return $query->whereHasMorph($this->relation(), '*', function ($query) use ($field) {
             $query->where($field, $this->operator(), $this->value());
         });
     }
@@ -346,12 +346,12 @@ class BelongsToFilter extends BaseFieldFilter
         $value = $this->valueToList($this->value());
 
         if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereHasMorph($this->relation(), '*', function($query) use($field, $value) {
+            return $query->orWhereHasMorph($this->relation(), '*', function ($query) use ($field, $value) {
                 $query->whereIn($field, $value);
             });
         }
 
-        return $query->whereHasMorph($this->relation(), '*', function($query) use($field, $value) {
+        return $query->whereHasMorph($this->relation(), '*', function ($query) use ($field, $value) {
             $query->whereIn($field, $value);
         });
     }
@@ -369,12 +369,12 @@ class BelongsToFilter extends BaseFieldFilter
         $value = $this->valueToList($this->value());
 
         if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereHasMorph($this->relation(), '*', function($query) use($field, $value) {
+            return $query->orWhereHasMorph($this->relation(), '*', function ($query) use ($field, $value) {
                 $query->whereNotIn($field, $value);
             });
         }
 
-        return $query->whereHasMorph($this->relation(), '*', function($query) use($field, $value) {
+        return $query->whereHasMorph($this->relation(), '*', function ($query) use ($field, $value) {
             $query->whereNotIn($field, $value);
         });
     }
@@ -390,12 +390,12 @@ class BelongsToFilter extends BaseFieldFilter
     protected function buildWhereHas($query, string $field)
     {
         if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereHas($this->relation(), function($query) use($field) {
+            return $query->orWhereHas($this->relation(), function ($query) use ($field) {
                 $query->where($field, $this->operator(), $this->value());
             });
         }
 
-        return $query->whereHas($this->relation(), function($query) use($field) {
+        return $query->whereHas($this->relation(), function ($query) use ($field) {
             $query->where($field, $this->operator(), $this->value());
         });
     }
@@ -413,12 +413,12 @@ class BelongsToFilter extends BaseFieldFilter
         $value = $this->valueToList($this->value());
 
         if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereHas($this->relation(), function($query) use($field, $value) {
+            return $query->orWhereHas($this->relation(), function ($query) use ($field, $value) {
                 $query->whereIn($field, $value);
             });
         }
 
-        return $query->whereHas($this->relation(), function($query) use($field, $value) {
+        return $query->whereHas($this->relation(), function ($query) use ($field, $value) {
             $query->whereIn($field, $value);
         });
     }
@@ -436,12 +436,12 @@ class BelongsToFilter extends BaseFieldFilter
         $value = $this->valueToList($this->value());
 
         if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereHas($this->relation(), function($query) use($field, $value) {
+            return $query->orWhereHas($this->relation(), function ($query) use ($field, $value) {
                 $query->whereNotIn($field, $value);
             });
         }
 
-        return $query->whereHas($this->relation(), function($query) use($field, $value) {
+        return $query->whereHas($this->relation(), function ($query) use ($field, $value) {
             $query->whereNotIn($field, $value);
         });
     }
