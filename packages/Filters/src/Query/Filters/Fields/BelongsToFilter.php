@@ -272,7 +272,7 @@ class BelongsToFilter extends BaseFieldFilter
             return;
         }
 
-        if ($this->usingNumericValue()) {
+        if ($this->isNumericValue()) {
             $this->assertInteger($value);
             return;
         }
