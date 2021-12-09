@@ -4,7 +4,13 @@
 
 ### [Unreleased]
 
-### [v5.23.0](https://github.com/aedart/athenaeum/compare/5.23.0...5.24.0)
+### [v5.24.1](https://github.com/aedart/athenaeum/compare/5.24.0...5.24.1)
+
+#### Fixed
+
+* Unable to use string value in `BelongsToFilter`, due to incorrect assertion.
+
+### [v5.24.0](https://github.com/aedart/athenaeum/compare/5.23.0...5.24.0)
 
 #### Added
 
