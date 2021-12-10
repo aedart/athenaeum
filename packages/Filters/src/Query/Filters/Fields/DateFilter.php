@@ -2,6 +2,7 @@
 
 namespace Aedart\Filters\Query\Filters\Fields;
 
+use Aedart\Utils\Arr;
 use InvalidArgumentException;
 
 /**
@@ -67,10 +68,11 @@ class DateFilter extends BaseFieldFilter
 
         $field = $this->field();
 
-        // To ensure that the submitted date is valid, we
-        // will rely on Laravel's validator - it's by far the
-        // simplest way of ensuring the input is as desired.
-        $validator = $this->getValidatorFactory()->make([ $field => $value ], [
+        // To ensure that the submitted date is valid, we will rely on Laravel's validator.
+        // It's by far the simplest way of ensuring the input is as desired. Note the
+        // array-undot call. This is done in case of evt. table name prefixes, then we must
+        // ensure that the "data" is associative, or the applied validation rule might fail.
+        $validator = $this->getValidatorFactory()->make(Arr::undot([ $field => $value ]), [
             $field => 'required|date_format:' . implode(',', $this->allowedDateFormats())
         ]);
 
