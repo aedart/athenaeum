@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.24.2](https://github.com/aedart/athenaeum/compare/5.24.1...5.24.2)
+
+#### Fixed
+
+* `required` validation rule triggered, despite valid value given in `DateFilter`. This happened only when field contained a table name prefix, e.g. "users.created_at".
+
 ### [v5.24.1](https://github.com/aedart/athenaeum/compare/5.24.0...5.24.1)
 
 #### Fixed
