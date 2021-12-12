@@ -1,9 +1,9 @@
 {
     "require": {
-        "squizlabs/php_codesniffer": "^3.5",
-        "symplify/easy-coding-standard": "^8.2",
+        "squizlabs/php_codesniffer": "^3.6.1",
+        "symplify/easy-coding-standard": "^10.0.2",
         "phpcompatibility/php-compatibility": "^9.3.5",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
-        "migrify/config-transformer":  "^0.3"
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+        "symplify/config-transformer": "^10.0.2"
     }
 }
