@@ -41,4 +41,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'tests/Helpers/Dummies/Properties/Accessibility/Person.php'
         ]
     ]);
+
+    // Run all checks parallel (should be much faster)
+    $parameters->set(Option::PARALLEL, true);
 };
