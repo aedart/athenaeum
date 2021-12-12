@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
-use Symplify\EasyCodingStandard\Configuration\Option;
+use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -29,6 +29,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'tests/TestCases',
         'tests/Integration',
         'tests/Unit',
+        'tests/Helpers',
         //'src',
     ]);
 
