@@ -54,8 +54,15 @@ class ArgumentFaker
                 continue;
             }
 
-            // Otherwise, attempt to fake argument for type
-            $output[] = static::fakeForType($type->getName(), $faker);
+            // Attempt to fake argument for type primitive type
+            if (isset($type) && $type->isBuiltin()) {
+                $output[] = static::fakeForType($type->getName(), $faker);
+                continue;
+            }
+
+            // Otherwise, we request 'null' as a type, which is the same as
+            // for a string, in this case...
+            $output[] = static::fakeForType('null', $faker);
         }
 
         if (count($output) == 1) {
