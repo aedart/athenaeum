@@ -6,8 +6,8 @@
 
 #### Changed
 
-* Replaced [`ReflectionParameter::getClass`](https://www.php.net/manual/en/reflectionparameter.getclass.php) call in `IoCPartial` with an alternative, because it's deprecated since PHP `v8.0`. [#61](https://github.com/aedart/athenaeum/issues/61).
-* Upgraded phpcs, easy-coding-standard and other vendor-bin dependencies
+* Replaced [`ReflectionParameter::getClass`](https://www.php.net/manual/en/reflectionparameter.getclass.php) call in `IoCPartial` and `ArgumentFaker` with an alternative, because it's deprecated since PHP `v8.0`. [#61](https://github.com/aedart/athenaeum/issues/61).
+* Upgraded phpcs, easy-coding-standard and other vendor-bin dependencies.
 
 ### [v5.24.2](https://github.com/aedart/athenaeum/compare/5.24.1...5.24.2)
 
