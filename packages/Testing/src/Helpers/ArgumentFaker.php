@@ -48,15 +48,14 @@ class ArgumentFaker
         foreach ($parameters as $parameter) {
 
             // Create a mock as "faked" argument, if needed
-            $typeClass = $parameter->getClass();
-            if (isset($typeClass)) {
-                $output[] = static::makeMockFor($typeClass->getName());
+            $type = $parameter->getType();
+            if (isset($type) && !$type->isBuiltin()) {
+                $output[] = static::makeMockFor($type->getName());
                 continue;
             }
 
             // Otherwise, attempt to fake argument for type
-            $type = (string) $parameter->getType();
-            $output[] = static::fakeForType($type, $faker);
+            $output[] = static::fakeForType($type->getName(), $faker);
         }
 
         if (count($output) == 1) {
