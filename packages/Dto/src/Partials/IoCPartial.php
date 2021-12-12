@@ -109,15 +109,15 @@ trait IoCPartial
         // If there is no class for the given parameter
         // then some kind of primitive data has been provided
         // and thus we need only to return it.
-        $paramClass = $parameter->getClass();
-        if (!isset($paramClass)) {
+        $type = $parameter->getType();
+        if (!isset($type) || $type->isBuiltin()) {
             return $value;
         }
 
         // If the value corresponds to the given expected class,
         // then there is no need to resolve anything from the
         // IoC service container.
-        $className = $paramClass->getName();
+        $className = $type->getName();
         if ($value instanceof $className) {
             return $value;
         }
@@ -171,7 +171,7 @@ trait IoCPartial
     /**
      * Attempts to populate instance, if possible
      *
-     * @param object $instance The instance that must be populated
+     * @param mixed $instance The instance that must be populated
      * @param ReflectionParameter|string $parameter Name of property or property reflection
      * @param mixed $value The value to be passed to the setter method
      *

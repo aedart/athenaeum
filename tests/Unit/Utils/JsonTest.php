@@ -50,9 +50,7 @@ class JsonTest extends UnitTestCase
     {
         $this->expectException(JsonException::class);
 
-        $socket = socket_create(AF_UNIX, SOCK_STREAM, 0);
-
-        Json::encode($socket);
+        Json::encode(tmpfile());
     }
 
     /**

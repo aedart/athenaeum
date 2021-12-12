@@ -121,7 +121,9 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertNull($history->original_data, 'Original data should be null!');
         $this->assertNull($history->changed_data, 'Changed data should be null!');
 
-        $this->assertSame((string)$category->getKey(), $history->auditable_id, 'Id of deleted model not persisted');
+        // Note that we explicitly cast key and auditable id to string, since we do not know
+        // whether an integer or string value is expected.
+        $this->assertSame((string)$category->getKey(), (string)$history->auditable_id, 'Id of deleted model not persisted');
     }
 
     /**
@@ -148,7 +150,9 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertNull($history->original_data, 'Original data should be null!');
         $this->assertNull($history->changed_data, 'Changed data should be null!');
 
-        $this->assertSame((string)$category->getKey(), $history->auditable_id, 'Id of deleted model not persisted');
+        // Note that we explicitly cast key and auditable id to string, since we do not know
+        // whether an integer or string value is expected.
+        $this->assertSame((string)$category->getKey(), (string)$history->auditable_id, 'Id of deleted model not persisted');
     }
 
     /**
@@ -174,7 +178,9 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertNull($history->original_data, 'Original data should be null!');
         $this->assertNull($history->changed_data, 'Changed data should be null!');
 
-        $this->assertSame((string)$category->getKey(), $history->auditable_id, 'Id of deleted model not persisted');
+        // Note that we explicitly cast key and auditable id to string, since we do not know
+        // whether an integer or string value is expected.
+        $this->assertSame((string)$category->getKey(), (string)$history->auditable_id, 'Id of deleted model not persisted');
     }
 
     /**

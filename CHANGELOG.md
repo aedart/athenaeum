@@ -4,6 +4,13 @@
 
 ### [Unreleased]
 
+#### Changed
+
+* Replaced [`ReflectionParameter::getClass`](https://www.php.net/manual/en/reflectionparameter.getclass.php) call in `IoCPartial` and `ArgumentFaker` with an alternative, because it's deprecated since PHP `v8.0`. [#61](https://github.com/aedart/athenaeum/issues/61).
+* Replaced `socket_create()` call with `tempfile()`, in `JsonTest`. From PHP `v8.0`, the `socket_create()` method returns an object, which can be encoded to Json and thus defeats the purpose of the test. [#61](https://github.com/aedart/athenaeum/issues/61).
+* Converting test model's primary key and auditable id to `string`, to avoid incorrect value comparison in PHP `v8.1`, in the `B0_AuditTrailTest`. [#61](https://github.com/aedart/athenaeum/issues/61).
+* Upgraded phpcs, easy-coding-standard and other vendor-bin dependencies.
+
 ### [v5.24.2](https://github.com/aedart/athenaeum/compare/5.24.1...5.24.2)
 
 #### Fixed
