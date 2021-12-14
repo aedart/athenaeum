@@ -33,6 +33,8 @@ class SearchFilter extends Filter
     protected array $columns;
 
     /**
+     * @deprecated Since v5.25.x - stop words language no longer supported, due to undesired behaviour.
+     *
      * Language to be used
      *
      * @var string
@@ -44,7 +46,7 @@ class SearchFilter extends Filter
      *
      * @param string $search
      * @param string[] $columns
-     * @param string $language [optional]
+     * @param string $language [optional] @deprecated Since v5.25.x - stop words language no longer supported, due to undesired behaviour.
      */
     public function __construct(string $search, array $columns, string $language = 'en')
     {
@@ -61,10 +63,7 @@ class SearchFilter extends Filter
         return $query->where(function ($query) {
             /** @var \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query */
 
-            // Remove evt. stop words from search term(s). However,
-            // in case that nothing is returned, then we must abort the
-            // search.
-            $search = $this->removeStopWords($this->search, $this->language);
+            $search = trim($this->search);
             if (mb_strlen($search) === 0) {
                 return;
             }

@@ -6,6 +6,8 @@ use Aedart\Utils\Str;
 use voku\helper\StopWords as StopWordsRepository;
 
 /**
+ * @deprecated Since v5.25.x - stop words language no longer supported, due to undesired behaviour.
+ *
  * Concerns Stop Words
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
