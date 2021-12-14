@@ -27,15 +27,15 @@
         "vlucas/phpdotenv": "^5.1",
         "illuminate/cache": "^8.15",
         "illuminate/filesystem": "^8.15",
-        "aedart/athenaeum-config": "^5.25",
-        "aedart/athenaeum-console": "^5.25",
-        "aedart/athenaeum-container": "^5.25",
-        "aedart/athenaeum-contracts": "^5.25",
-        "aedart/athenaeum-dto": "^5.25",
-        "aedart/athenaeum-events": "^5.25",
-        "aedart/athenaeum-service": "^5.25",
-        "aedart/athenaeum-support": "^5.25",
-        "aedart/athenaeum-utils": "^5.25"
+        "aedart/athenaeum-config": "^5.26",
+        "aedart/athenaeum-console": "^5.26",
+        "aedart/athenaeum-container": "^5.26",
+        "aedart/athenaeum-contracts": "^5.26",
+        "aedart/athenaeum-dto": "^5.26",
+        "aedart/athenaeum-events": "^5.26",
+        "aedart/athenaeum-service": "^5.26",
+        "aedart/athenaeum-support": "^5.26",
+        "aedart/athenaeum-utils": "^5.26"
     },
     "require-dev": {
         "symfony/var-dumper": "^5.1"
@@ -55,7 +55,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "5.25.x-dev"
+            "dev-master": "5.26.x-dev"
         }
     }
 }
