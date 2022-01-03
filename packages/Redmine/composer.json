@@ -22,9 +22,9 @@
     "require": {
         "php": ">=7.4.0",
         "ext-json": "*",
-        "aedart/athenaeum-http-clients": "^5.26",
-        "aedart/athenaeum-pagination": "^5.26",
-        "aedart/athenaeum-dto": "^5.26"
+        "aedart/athenaeum-http-clients": "^5.27",
+        "aedart/athenaeum-pagination": "^5.27",
+        "aedart/athenaeum-dto": "^5.27"
     },
     "autoload": {
         "psr-4": {
@@ -38,7 +38,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "5.26.x-dev"
+            "dev-master": "5.27.x-dev"
         }
     }
 }
