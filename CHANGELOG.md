@@ -4,6 +4,12 @@
 
 ### [Unreleased]
 
+### [v5.26.0](https://github.com/aedart/athenaeum/compare/5.25.0...5.26.0)
+
+#### Changed
+
+* Bumped license year.
+
 ### [v5.25.0](https://github.com/aedart/athenaeum/compare/5.24.2...5.25.0)
 
 #### Changed
