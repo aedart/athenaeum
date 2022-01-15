@@ -6,7 +6,6 @@ use Generator;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Config\Repository as RepositoryContract;
 use Illuminate\Contracts\Foundation\Application;
-//use Orchestra\Testbench\Bootstrap\LoadConfiguration as BaseLoadConfiguration;
 use Symfony\Component\Finder\Finder;
 
 /**
