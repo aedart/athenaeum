@@ -1,7 +1,10 @@
+#
+# DEPRECATED - To be removed before release of Athenaeum version 6.x
+#
 parameters:
     # Project directories
-    package_directories:
-        - 'packages'
+#    package_directories:
+#        - 'packages'
 
     # Sections to merge into root composer.json
     merge_sections:
@@ -12,32 +15,32 @@ parameters:
         - 'suggest'
 
     # for "merge" command
-    data_to_remove:
-        require:
-            'hanneskod/classtools': '*'
-            'codeception/codeception': '*'
-            'orchestra/testbench': '*'
-            'orchestra/testbench-dusk': '*'
-            'codeception/module-asserts': '*'
+#    data_to_remove:
+#        require:
+#            'hanneskod/classtools': '*'
+#            'codeception/codeception': '*'
+#            'orchestra/testbench': '*'
+#            'orchestra/testbench-dusk': '*'
+#            'codeception/module-asserts': '*'
 
     # for "merge" command
-    data_to_append:
-        require-dev:
-            'ext-sockets': "*"
-            'ext-curl': "*"
-            'bamarni/composer-bin-plugin': '^1.4'
-            'roave/security-advisories': 'dev-master'
-#            'hanneskod/classtools': '~1.2'
-            'codeception/codeception': '4.1.*'
-            'codeception/module-asserts': '^1.3'
-            'orchestra/testbench': '^6.12.0'
-            'orchestra/testbench-dusk': '^v6.12.0'
-        autoload:
-            psr-4:
-                'Aedart\': 'src'
-        autoload-dev:
-            psr-4:
-                'Aedart\Tests\': 'tests/'
+#    data_to_append:
+#        require-dev:
+#            'ext-sockets': "*"
+#            'ext-curl': "*"
+#            'bamarni/composer-bin-plugin': '^1.4'
+#            'roave/security-advisories': 'dev-master'
+##            'hanneskod/classtools': '~1.2'
+#            'codeception/codeception': '4.1.*'
+#            'codeception/module-asserts': '^1.3'
+#            'orchestra/testbench': '^6.12.0'
+#            'orchestra/testbench-dusk': '^v6.12.0'
+#        autoload:
+#            psr-4:
+#                'Aedart\': 'src'
+#        autoload-dev:
+#            psr-4:
+#                'Aedart\Tests\': 'tests/'
 
     # for "split" command
     directories_to_repositories:
@@ -66,35 +69,35 @@ parameters:
         packages/Utils: 'git@github.com:aedart/athenaeum-utils.git'
         packages/Validation: 'git@github.com:aedart/athenaeum-validation.git'
 
-    # Package alias format
-    package_alias_format: '<major>.<minor>.x-dev'
+#    # Package alias format
+#    package_alias_format: '<major>.<minor>.x-dev'
 
     # Inline section
     inline_sections: []
 
     # How to sort root composer.json
-    section_order:
-      - 'name'
-      - 'type'
-      - 'description'
-      - 'keywords'
-      - 'homepage'
-      - 'support'
-      - 'license'
-      - 'authors'
-      - 'repositories'
-      - 'require'
-      - 'require-dev'
-      - 'autoload'
-      - 'autoload-dev'
-      - 'replace'
-      - 'provide'
-      - 'bin'
-      - 'conflict'
-      - 'suggest'
-      - 'scripts'
-      - 'scripts-descriptions'
-      - 'config'
-      - 'minimum-stability'
-      - 'prefer-stable'
-      - 'extra'
+#    section_order:
+#      - 'name'
+#      - 'type'
+#      - 'description'
+#      - 'keywords'
+#      - 'homepage'
+#      - 'support'
+#      - 'license'
+#      - 'authors'
+#      - 'repositories'
+#      - 'require'
+#      - 'require-dev'
+#      - 'autoload'
+#      - 'autoload-dev'
+#      - 'replace'
+#      - 'provide'
+#      - 'bin'
+#      - 'conflict'
+#      - 'suggest'
+#      - 'scripts'
+#      - 'scripts-descriptions'
+#      - 'config'
+#      - 'minimum-stability'
+#      - 'prefer-stable'
+#      - 'extra'

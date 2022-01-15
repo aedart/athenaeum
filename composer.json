@@ -2,6 +2,12 @@
     "name": "aedart/athenaeum",
     "description": "Athenaeum is a mono repository; a collection of various PHP packages",
     "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
     "require": {
         "php": ">=7.4.0",
         "ext-json": "*",
