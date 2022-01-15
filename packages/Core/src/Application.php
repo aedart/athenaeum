@@ -285,6 +285,14 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
+    public function maintenanceMode()
+    {
+        // TODO: Implement maintenanceMode() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function isDownForMaintenance()
     {
         return file_exists($this->basePath('.down'));
