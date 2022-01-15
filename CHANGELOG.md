@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Non-breaking Changes**
 
 * `CHANGELOG.md` is now formatted according to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+* Replaced `fzaninotto/faker` package with `fakerphp/faker`. [#23](https://github.com/aedart/athenaeum/issues/23).
 * Upgraded to [Symplify Monorepo Builder](https://github.com/symplify/monorepo-builder) `v10.x`. [#60](https://github.com/aedart/athenaeum/issues/60), [#65](https://github.com/aedart/athenaeum/pull/65).
 
 ### Removed
