@@ -22,14 +22,14 @@
         "aedart/athenaeum-service": "^5.27",
         "aedart/athenaeum-support": "^5.27",
         "aedart/athenaeum-utils": "^5.27",
-        "illuminate/cache": "^8.15",
-        "illuminate/filesystem": "^8.15",
+        "illuminate/cache": "^v9.0.0-beta.1",
+        "illuminate/filesystem": "^v9.0.0-beta.1",
         "psr/log": "^1.1",
-        "symfony/console": "^5.1",
+        "symfony/console": "^v6.0.2",
         "vlucas/phpdotenv": "^5.1"
     },
     "require-dev": {
-        "symfony/var-dumper": "^5.1"
+        "symfony/var-dumper": "^v6.0.2"
     },
     "autoload": {
         "psr-4": {

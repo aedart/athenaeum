@@ -34,9 +34,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'ext-curl' => '*',
             'bamarni/composer-bin-plugin' => '^1.4',
             'roave/security-advisories' => 'dev-master',
-            'codeception/codeception' => '4.1.*',
-            'orchestra/testbench' => '^6.12.0',
-            'orchestra/testbench-dusk' => '^v6.12.0',
+            'codeception/codeception' => '5.0.x-dev',
+            'orchestra/testbench' => '7.x-dev',
+            'orchestra/testbench-dusk' => '7.0.x-dev',
         ],
 
         ComposerJsonSection::AUTOLOAD => [

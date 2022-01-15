@@ -14,8 +14,8 @@
     "require": {
         "php": "^8.0.2",
         "aedart/athenaeum-contracts": "^5.27",
-        "illuminate/support": "^8.15",
-        "jean85/pretty-package-versions": "~1.5"
+        "illuminate/support": "^v9.0.0-beta.1",
+        "jean85/pretty-package-versions": "^2.0.5"
     },
     "autoload": {
         "psr-4": {

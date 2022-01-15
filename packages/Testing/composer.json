@@ -15,12 +15,12 @@
         "php": "^8.0.2",
         "aedart/athenaeum-container": "^5.27",
         "aedart/athenaeum-contracts": "^5.27",
-        "codeception/codeception": "4.1.*",
-        "codeception/module-asserts": "^1.3",
+        "codeception/codeception": "5.0.x-dev",
+        "codeception/module-asserts": "dev-master",
         "fakerphp/faker": "^v1.17.0",
         "mockery/mockery": "1.4.*",
-        "orchestra/testbench": "^6.12.0",
-        "orchestra/testbench-dusk": "^v6.12.0"
+        "orchestra/testbench": "7.x-dev",
+        "orchestra/testbench-dusk": "7.0.x-dev"
     },
     "autoload": {
         "psr-4": {
