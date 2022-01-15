@@ -108,5 +108,6 @@ class VersionTest extends UnitTestCase
         ConsoleDebugger::output((string)$version);
 
         $this->assertNotEmpty($version);
+        $this->assertStringNotContainsString('no version', $version);
     }
 }
