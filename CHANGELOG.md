@@ -9,7 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+**Breaking Changes**
+
+* `SearchFilter` no longer uses `StopWords` concern (_concern has been removed_). [#63](https://github.com/aedart/athenaeum/issues/63).
+
+**Non-breaking Changes**
+
 * `CHANGELOG.md` is now formatted according to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+### Removed
+
+* `\Aedart\Filters\Query\Filters\Concerns\StopWords` has been removed. Component didn't work as intended and caused several issues. [#63](https://github.com/aedart/athenaeum/issues/63).
 
 ## [5.26.0] - 2022-01-03
 
