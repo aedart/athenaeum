@@ -16,7 +16,6 @@ use Aedart\Database\Query\Filter;
 class SearchFilter extends Filter
 {
     use Concerns\DatabaseDriver;
-    use Concerns\StopWords;
 
     /**
      * Full search string
