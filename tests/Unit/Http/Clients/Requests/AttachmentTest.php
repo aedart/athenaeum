@@ -47,7 +47,7 @@ class AttachmentTest extends UnitTestCase
      */
     public function canPopulateAttachment()
     {
-        $attachment = $this->makeAttachment([ 'name' => $this->getFaker()->word ])
+        $attachment = $this->makeAttachment([ 'name' => $this->getFaker()->word() ])
             ->headers(['X-Foo' => 'bar'])
             ->contents('Hi there')
             ->filename('my_file.txt');
@@ -71,7 +71,7 @@ class AttachmentTest extends UnitTestCase
         $path = Configuration::dataDir() . 'http/clients/attachments/test.md';
 
         $contents = $this->makeAttachment()
-                    ->name($this->getFaker()->word)
+                    ->name($this->getFaker()->word())
                     ->attachFile($path)
                     ->getContents();
 

@@ -24,7 +24,7 @@ class JsonTest extends UnitTestCase
     public function canEncodeAndDecodeJson()
     {
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'age' => $this->faker->randomNumber()
         ];
 

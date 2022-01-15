@@ -25,8 +25,8 @@ class GetterSetterTesterTest extends TraitTestCase
     {
         $this->assertGetterSetterTraitMethods(
             NameTrait::class,
-            $this->faker->name,
-            $this->faker->name
+            $this->faker->name(),
+            $this->faker->name()
         );
     }
 

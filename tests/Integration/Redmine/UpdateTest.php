@@ -29,7 +29,7 @@ class UpdateTest extends RedmineTestCase
      */
     public function canUpdateExistingResource()
     {
-        $name = $this->getFaker()->name;
+        $name = $this->getFaker()->name();
 
         $connection = $this->connectionWithMock([], StatusCodes::OK);
 
@@ -51,7 +51,7 @@ class UpdateTest extends RedmineTestCase
      */
     public function canUpdateAndReload()
     {
-        $name = $this->getFaker()->name;
+        $name = $this->getFaker()->name();
         $reloadedName = strtoupper($name); // Just for the sake of the test... Not expecting Redmine to do this...
         $payload = $this->makeSingleDummyResponsePayload([ 'name' => $reloadedName ]);
 

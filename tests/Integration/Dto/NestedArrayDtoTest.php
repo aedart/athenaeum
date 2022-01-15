@@ -114,12 +114,12 @@ class NestedArrayDtoTest extends DtoTestCase
     public function canSerialiseNestedInstances()
     {
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'age' => $this->faker->randomNumber(),
             'address' => [
-                'street' => $this->faker->streetName,
+                'street' => $this->faker->streetName(),
                 'city' => [
-                    'name' => $this->faker->city,
+                    'name' => $this->faker->city(),
                     'zipCode' => $this->faker->randomNumber(4),
                 ]
             ]
@@ -171,7 +171,7 @@ class NestedArrayDtoTest extends DtoTestCase
         });
 
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'address' => [
                 'street' => $this->faker->streetName,
                 'city' => [
@@ -183,7 +183,7 @@ class NestedArrayDtoTest extends DtoTestCase
             // Here, the interface is bound, thus this should
             // not fail
             'note' => [
-                'content' => $this->faker->sentence
+                'content' => $this->faker->sentence()
             ]
         ];
 
@@ -206,7 +206,7 @@ class NestedArrayDtoTest extends DtoTestCase
         $this->expectException(BindingResolutionException::class);
 
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'address' => [
                 'street' => $this->faker->streetName,
                 'city' => [
@@ -216,7 +216,7 @@ class NestedArrayDtoTest extends DtoTestCase
             ],
 
             'note' => [
-                'content' => $this->faker->sentence
+                'content' => $this->faker->sentence()
             ]
         ];
 

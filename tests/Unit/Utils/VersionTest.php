@@ -37,7 +37,7 @@ class VersionTest extends UnitTestCase
     {
         $this->expectException(OutOfBoundsException::class);
 
-        Version::package('acme/unknown-pgk-' . $this->getFaker()->word);
+        Version::package('acme/unknown-pgk-' . $this->getFaker()->word());
     }
 
     /**
@@ -79,7 +79,7 @@ class VersionTest extends UnitTestCase
         $resultA = Version::hasFor('aedart/athenaeum');
         $this->assertTrue($resultA, 'Should exist for A');
 
-        $resultB = Version::hasFor('acme/unknown-pgk-' . $this->getFaker()->word);
+        $resultB = Version::hasFor('acme/unknown-pgk-' . $this->getFaker()->word());
         $this->assertFalse($resultB, 'Should not exist for B');
     }
 

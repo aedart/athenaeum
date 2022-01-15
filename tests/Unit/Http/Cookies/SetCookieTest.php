@@ -50,14 +50,14 @@ class SetCookieTest extends UnitTestCase
         $faker = $this->getFaker();
 
         return array_merge([
-            'name' => $faker->word,
-            'value' => $faker->sha1,
-            'expires' => $faker->unixTime,
-            'maxAge' => $faker->randomDigitNotNull,
-            'domain' => $faker->domainName,
-            'path' => '/' . $faker->word,
-            'secure' => $faker->boolean,
-            'httpOnly' => $faker->boolean,
+            'name' => $faker->word(),
+            'value' => $faker->sha1(),
+            'expires' => $faker->unixTime(),
+            'maxAge' => $faker->randomDigitNotNull(),
+            'domain' => $faker->domainName(),
+            'path' => '/' . $faker->word(),
+            'secure' => $faker->boolean(),
+            'httpOnly' => $faker->boolean(),
             'sameSite' => $faker->randomElement([
                 SetCookieInterface::SAME_SITE_NONE,
                 SetCookieInterface::SAME_SITE_LAX,

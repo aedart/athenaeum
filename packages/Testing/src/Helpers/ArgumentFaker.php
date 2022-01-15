@@ -107,7 +107,7 @@ class ArgumentFaker
             case 'string':
             case 'null':
             default:
-                return $faker->name;
+                return $faker->name();
         }
     }
 

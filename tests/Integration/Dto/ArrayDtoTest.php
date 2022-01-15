@@ -61,7 +61,7 @@ class ArrayDtoTest extends DtoTestCase
      */
     public function canGetAndSetProperty()
     {
-        $name = $this->faker->name;
+        $name = $this->faker->name();
         $employees = $this->faker->randomNumber();
 
         $dto = $this->makeArrayDto();
@@ -141,7 +141,7 @@ class ArrayDtoTest extends DtoTestCase
     public function canBeSerialisedAndUnserialised()
     {
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'age' => $this->faker->randomNumber()
         ];
 

@@ -30,7 +30,7 @@ class FilteringTest extends DatabaseTestCase
         // Create dummy data
         $faker = $this->getFaker();
         Category::create([
-            'slug' => $faker->slug,
+            'slug' => $faker->slug(),
             'name' => 'Products',
             'description' => $faker->text()
         ]);
@@ -51,7 +51,7 @@ class FilteringTest extends DatabaseTestCase
         // Create dummy data
         $faker = $this->getFaker();
         Category::create([
-            'slug' => $faker->slug,
+            'slug' => $faker->slug(),
             'name' => 'Products',
             'description' => $faker->text()
         ]);
@@ -63,7 +63,7 @@ class FilteringTest extends DatabaseTestCase
         ]);
 
         Category::create([
-            'slug' => $faker->slug,
+            'slug' => $faker->slug(),
             'name' => 'Other',
             'description' => $faker->text()
         ]);
@@ -88,14 +88,14 @@ class FilteringTest extends DatabaseTestCase
         // Create dummy data
         $faker = $this->getFaker();
         Category::create([
-            'slug' => $faker->slug,
+            'slug' => $faker->slug(),
             'name' => 'Products',
             'description' => $faker->text()
         ]);
 
         $desc = 'lorum lipsum esta buno';
         Category::create([
-            'slug' => $faker->slug,
+            'slug' => $faker->slug(),
             'name' => 'Products',
             'description' => $desc
         ]);

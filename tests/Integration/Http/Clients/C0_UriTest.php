@@ -33,7 +33,7 @@ class C0_UriTest extends HttpClientsTestCase
     {
         $client = $this->client($profile);
 
-        $uri = '/' . $this->getFaker()->word;
+        $uri = '/' . $this->getFaker()->word();
 
         // --------------------------------------------- //
 
@@ -67,7 +67,7 @@ class C0_UriTest extends HttpClientsTestCase
     {
         $client = $this->client($profile);
 
-        $uri = '/' . $this->getFaker()->word . '?foo=bar';
+        $uri = '/' . $this->getFaker()->word() . '?foo=bar';
 
         $builder = $client->from($uri);
 

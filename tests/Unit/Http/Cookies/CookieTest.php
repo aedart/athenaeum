@@ -47,7 +47,7 @@ class CookieTest extends UnitTestCase
     public function canPopulate()
     {
         $name = 'token';
-        $value = $this->getFaker()->sha1;
+        $value = $this->getFaker()->sha1();
 
         $cookie = $this->makeCookie([
             'name' => $name,
@@ -66,7 +66,7 @@ class CookieTest extends UnitTestCase
     public function canExportToArray()
     {
         $name = 'token';
-        $value = $this->getFaker()->sha1;
+        $value = $this->getFaker()->sha1();
 
         $cookie = $this->makeCookie([
             'name' => $name,

@@ -158,7 +158,7 @@ class BuiltFiltersTest extends UnitTestCase
         $map = $this->makeMap();
 
         $key = 'my-filter';
-        $value = $this->getFaker()->slug;
+        $value = $this->getFaker()->slug();
 
         $map->setMeta($key, $value);
 
@@ -176,7 +176,7 @@ class BuiltFiltersTest extends UnitTestCase
         $map = $this->makeMap();
 
         $key = 'my-filter';
-        $default = $this->getFaker()->slug;
+        $default = $this->getFaker()->slug();
 
         $result = $map->getMeta($key, $default);
 
@@ -191,7 +191,7 @@ class BuiltFiltersTest extends UnitTestCase
         $map = $this->makeMap();
 
         $key = 'my-filter';
-        $value = $this->getFaker()->slug;
+        $value = $this->getFaker()->slug();
 
         $map->setMeta($key, $value);
 
@@ -212,8 +212,8 @@ class BuiltFiltersTest extends UnitTestCase
 
         $keyA = 'my-filter';
         $keyB = 'my-other-filter';
-        $valueA = $this->getFaker()->slug;
-        $valueB = $this->getFaker()->slug;
+        $valueA = $this->getFaker()->slug();
+        $valueB = $this->getFaker()->slug();
 
         $map
             ->setMeta($keyA, $valueA)
@@ -241,8 +241,8 @@ class BuiltFiltersTest extends UnitTestCase
         $filterA = $this->makeCriteria();
         $filterB = $this->makeCriteria();
 
-        $valueA = $this->getFaker()->slug;
-        $valueB = $this->getFaker()->slug;
+        $valueA = $this->getFaker()->slug();
+        $valueB = $this->getFaker()->slug();
 
         $map
             ->add($keyA, $filterA)

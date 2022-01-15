@@ -104,7 +104,7 @@ class BaseProcessorTest extends UnitTestCase
      */
     public function canAssignParameter()
     {
-        $param = $this->getFaker()->slug;
+        $param = $this->getFaker()->slug();
 
         $processor = $this
             ->makeProcessor()
@@ -130,7 +130,7 @@ class BaseProcessorTest extends UnitTestCase
      */
     public function canObtainValue()
     {
-        $expected = $this->getFaker()->name;
+        $expected = $this->getFaker()->name();
 
         $request = $this
             ->makeRequest('https://some-url.org/api/v1', 'GET', [

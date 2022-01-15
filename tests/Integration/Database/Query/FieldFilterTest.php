@@ -30,7 +30,7 @@ class FieldFilterTest extends DatabaseTestCase
         // Create dummy data
         $faker = $this->getFaker();
         Category::create([
-            'slug' => $faker->slug,
+            'slug' => $faker->slug(),
             'name' => 'Books',
             'description' => $faker->text()
         ]);

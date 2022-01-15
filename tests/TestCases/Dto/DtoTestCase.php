@@ -56,9 +56,9 @@ abstract class DtoTestCase extends IntegrationTestCase
     public function arrayDtoData(): array
     {
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'slogan' => $this->faker->words(3, true),
-            'employees' => $this->faker->randomDigitNotNull,
+            'employees' => $this->faker->randomDigitNotNull(),
             'hasInsurance' => $this->faker->boolean,
             'profitScore' => (string) $this->faker->randomFloat(2, 0, 10),
             'persons' => $this->faker->randomElements([

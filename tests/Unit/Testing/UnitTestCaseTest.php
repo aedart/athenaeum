@@ -28,7 +28,7 @@ class UnitTestCaseTest extends UnitTestCase
      */
     public function hasFakerDependency()
     {
-        $value = $this->faker->address;
+        $value = $this->faker->address();
 
         $this->assertNotEmpty($value);
     }

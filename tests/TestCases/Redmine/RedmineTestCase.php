@@ -354,7 +354,7 @@ abstract class RedmineTestCase extends LaravelTestCase
         $faker = $this->getFaker();
 
         $id = $id ?? $faker->randomNumber(4, true);
-        $token = $token ?? $faker->sha256;
+        $token = $token ?? $faker->sha256();
 
         return $this->mockJsonResponse([
             'upload' => [

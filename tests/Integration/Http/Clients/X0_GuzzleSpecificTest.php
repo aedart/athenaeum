@@ -67,7 +67,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
     {
         $client = $this->client();
 
-        $seconds = (float) $this->getFaker()->randomDigitNotNull;
+        $seconds = (float) $this->getFaker()->randomDigitNotNull();
 
         $result = $client
             ->withTimeout($seconds)

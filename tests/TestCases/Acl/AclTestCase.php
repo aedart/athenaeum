@@ -236,8 +236,8 @@ abstract class AclTestCase extends LaravelTestCase
         $faker = $this->getFaker();
 
         $attributes = array_merge([
-            'email' => $faker->unique()->email,
-            'name' => $faker->name,
+            'email' => $faker->unique()->email(),
+            'name' => $faker->name(),
             'password' => Hash::make('password')
         ], $attributes);
 
