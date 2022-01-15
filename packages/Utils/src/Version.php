@@ -48,7 +48,7 @@ class Version
         // But its seems sometimes to be unreliable - sadly - so we just create a new version instance manually,
         // using the information available from git.
 
-        return static::$versions[$name] = new \Jean85\Version($name, "{$tag}@{$commit}");
+        return static::$versions[$name] = new \Jean85\Version($name, $tag, $commit);
     }
 
     /**
