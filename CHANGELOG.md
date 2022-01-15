@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+* `storagePath()` must be compatible with interface declared method, in `\Aedart\Core\Application` (_method was changed in Laravel `v9.x`_).
 * `Codeception\TestCase\Test` class not found, in `\Aedart\Tests\Integration\Laravel\ApplicationInitiatorTest` (_happened after upgrade to the latest version of Codeception_). 
 * `LoadSpecifiedConfiguration` may nor inherit from final class. `\Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration` no longer inherits from `Orchestra\Testbench\Bootstrap\LoadConfiguration`, which has been declared final (_happened after upgrade to the latest version of Orchestra_).
 
