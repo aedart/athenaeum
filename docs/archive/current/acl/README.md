@@ -4,8 +4,6 @@ description: About the ACL Package
 
 # Introduction
 
-_**Available since** `v5.10.x`_
-
 Offers a small [ACL](https://da.wikipedia.org/wiki/Access_control_list) implementation for Laravel, with roles and permissions (grouped) that are stored in a database.
 
 ## Database tables

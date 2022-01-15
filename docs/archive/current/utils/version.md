@@ -36,8 +36,6 @@ $hasVersion = Version::hasFor('aedart/athenaeum-utils');
 
 ## `application()`
 
-`Available since v5.7.0`
-
 The `application()` method returns the root level package's version (_your application_).
 
 ```php
