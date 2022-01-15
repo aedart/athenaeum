@@ -247,9 +247,9 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
-    public function storagePath()
+    public function storagePath($path = '')
     {
-        return $this->getPathsContainer()->storagePath();
+        return $this->getPathsContainer()->storagePath($path);
     }
 
     /**
