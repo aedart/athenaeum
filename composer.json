@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": ">=7.4.0",
+        "php": "^8.0.2",
         "ext-json": "*",
         "dragonmantank/cron-expression": "^3.0",
         "fzaninotto/faker": "1.9.*",
