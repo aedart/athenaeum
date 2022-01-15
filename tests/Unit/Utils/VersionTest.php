@@ -5,6 +5,7 @@ namespace Aedart\Tests\Unit\Utils;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Version;
+use Jean85\Exception\VersionMissingExceptionInterface;
 use OutOfBoundsException;
 
 /**
@@ -89,6 +90,20 @@ class VersionTest extends UnitTestCase
     public function canGetApplicationVersion()
     {
         $version = Version::application();
+
+        ConsoleDebugger::output((string)$version);
+
+        $this->assertNotEmpty($version);
+    }
+
+    /**
+     * @test
+     *
+     * @throws VersionMissingExceptionInterface
+     */
+    public function canObtainAthenaeumPackageVersion()
+    {
+        $version = Version::package('aedart/athenaeum-support');
 
         ConsoleDebugger::output((string)$version);
 
