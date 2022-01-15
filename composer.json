@@ -12,7 +12,7 @@
         "php": "^8.0.2",
         "ext-json": "*",
         "dragonmantank/cron-expression": "^3.0",
-        "fzaninotto/faker": "1.9.*",
+        "fakerphp/faker": "^v1.17.0",
         "guzzlehttp/guzzle": "^7.3",
         "illuminate/auth": "^8.15",
         "illuminate/cache": "^8.15",
