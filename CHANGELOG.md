@@ -24,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * `\Aedart\Filters\Query\Filters\Concerns\StopWords` has been removed. Component didn't work as intended and caused several issues. [#63](https://github.com/aedart/athenaeum/issues/63).
 
+### Fixed
+
+* `Codeception\TestCase\Test` class not found, in `\Aedart\Tests\Integration\Laravel\ApplicationInitiatorTest` (_happened after upgrade to the latest version of codeception_). 
+
 ## [5.26.0] - 2022-01-03
 
 ### Changed
