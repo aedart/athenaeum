@@ -3,7 +3,7 @@
 namespace Aedart\Tests\Integration\Laravel;
 
 use Aedart\Testing\Laravel\LaravelTestHelper;
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
 
@@ -17,7 +17,7 @@ use Illuminate\Contracts\Foundation\Application;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Laravel
  */
-class ApplicationInitiatorTest extends Test
+class ApplicationInitiatorTest extends Unit
 {
     use LaravelTestHelper;
 
