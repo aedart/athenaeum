@@ -2,6 +2,7 @@
 
 namespace Aedart\Utils;
 
+use Jean85\Exception\VersionMissingExceptionInterface;
 use Jean85\PrettyVersions;
 use OutOfBoundsException;
 
@@ -44,7 +45,7 @@ class Version
         }
 
         // Usually, we should be able to obtain the application's version via "PrettyVersions::getRootPackageVersion".
-        // But it's seems sometimes to be unreliable - sadly - so we just create a new version instance manually,
+        // But its seems sometimes to be unreliable - sadly - so we just create a new version instance manually,
         // using the information available from git.
 
         return static::$versions[$name] = new \Jean85\Version($name, "{$tag}@{$commit}");
@@ -59,7 +60,7 @@ class Version
      *
      * @return \Jean85\Version
      *
-     * @throws OutOfBoundsException If a version cannot be located
+     * @throws VersionMissingExceptionInterface If a version cannot be located
      */
     public static function package(string $name)
     {
@@ -73,9 +74,11 @@ class Version
     /**
      * Determine if a version is available for given package
      *
-     * @param string $package Name of package
+     * @param  string  $package  Name of package
      *
      * @return bool
+     *
+     * @throws VersionMissingExceptionInterface
      */
     public static function hasFor(string $package): bool
     {
