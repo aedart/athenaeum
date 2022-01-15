@@ -52,20 +52,21 @@ module.exports = {
     plugins: [
         // Back-to-top
         // @see https://v1.vuepress.vuejs.org/plugin/official/plugin-back-to-top.html
-        [ '@vuepress/back-to-top', true ],
-
-        // Search Box
-        // @see https://vuepress.vuejs.org/plugin/official/plugin-search.html
-        [ '@vuepress/search', {
-            searchMaxSuggestions: 10,
-            test: '/archive\/current/'
-        }],
-        [ '@vuepress/last-updated', {
-            transformer: (timestamp, lang) => {
-                return (new Date(timestamp)).toUTCString();
-            }
-        }],
-        [ 'vuepress-plugin-element-tabs', true ]
+        // TODO:
+        // [ '@vuepress/back-to-top', true ],
+        //
+        // // Search Box
+        // // @see https://vuepress.vuejs.org/plugin/official/plugin-search.html
+        // [ '@vuepress/search', {
+        //     searchMaxSuggestions: 10,
+        //     test: '/archive\/current/'
+        // }],
+        // [ '@vuepress/last-updated', {
+        //     transformer: (timestamp, lang) => {
+        //         return (new Date(timestamp)).toUTCString();
+        //     }
+        // }],
+        // [ 'vuepress-plugin-element-tabs', true ]
     ]
 };
 
