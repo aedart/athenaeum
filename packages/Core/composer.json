@@ -19,6 +19,7 @@
         "aedart/athenaeum-contracts": "^5.27",
         "aedart/athenaeum-dto": "^5.27",
         "aedart/athenaeum-events": "^5.27",
+        "aedart/athenaeum-maintenance-modes": "^5.27",
         "aedart/athenaeum-service": "^5.27",
         "aedart/athenaeum-support": "^5.27",
         "aedart/athenaeum-utils": "^5.27",
