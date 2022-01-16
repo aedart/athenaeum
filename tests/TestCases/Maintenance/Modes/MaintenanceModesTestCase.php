@@ -9,6 +9,7 @@ use Aedart\Maintenance\Modes\FallbackManager;
 use Aedart\Maintenance\Modes\Providers\MaintenanceModeServiceProvider;
 use Aedart\Maintenance\Modes\Traits\MaintenanceModeManagerTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
+use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Codeception\Configuration;
 
@@ -23,6 +24,7 @@ abstract class MaintenanceModesTestCase extends LaravelTestCase
     use MaintenanceModeManagerTrait;
     use ConfigLoaderTrait;
     use ContainerTrait;
+    use FileTrait;
 
     /*****************************************************************
      * Setup Methods
@@ -38,6 +40,12 @@ abstract class MaintenanceModesTestCase extends LaravelTestCase
         $this->getConfigLoader()
             ->setDirectory($this->directory())
             ->load();
+
+        $fs = $this->getFile();
+        $outputDir = $this->outputDir();
+
+        $fs->ensureDirectoryExists($outputDir);
+        $fs->cleanDirectory($outputDir);
     }
 
     /**
@@ -67,6 +75,18 @@ abstract class MaintenanceModesTestCase extends LaravelTestCase
     public function directory(): string
     {
         return Configuration::dataDir() . 'configs/maintenance/modes';
+    }
+
+    /**
+     * Output directory
+     *
+     * @return string
+     *
+     * @throws \Codeception\Exception\ConfigurationException
+     */
+    public function outputDir(): string
+    {
+        return Configuration::outputDir() . 'maintenance/modes';
     }
 
     /*****************************************************************
