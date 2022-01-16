@@ -3,6 +3,7 @@
 namespace Aedart\Maintenance\Modes;
 
 use Aedart\Maintenance\Modes\Drivers\ArrayBasedMode;
+use Aedart\Maintenance\Modes\Drivers\JsonFileBasedMode;
 use Illuminate\Support\Manager;
 
 /**
@@ -29,10 +30,22 @@ class FallbackManager extends Manager
     }
 
     /**
+     * Creates an instance of the json file based maintenance mode driver
+     *
+     * @return JsonFileBasedMode
+     */
+    protected function createJsonDriver(): JsonFileBasedMode
+    {
+        return new JsonFileBasedMode(
+            storage_path('framework/down.json')
+        );
+    }
+
+    /**
      * @inheritDoc
      */
     public function getDefaultDriver()
     {
-        return $this->config->get('app.maintenance.driver', 'array');
+        return $this->config->get('app.maintenance.driver', 'json');
     }
 }
