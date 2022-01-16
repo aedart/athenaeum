@@ -44,7 +44,7 @@ class MaintenanceModeServiceProvider extends ServiceProvider
         $app->singleton(static::$laravelManager, function() {
             return $this->createFallbackManager();
         });
-        $app->alias(static::$laravelManager, FallbackManager::class);
+        $app->alias(FallbackManager::class, static::$laravelManager);
 
         // Bind a default maintenance mode
         $app->bind(
