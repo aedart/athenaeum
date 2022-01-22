@@ -6,11 +6,13 @@ description: Athenaeum Release Notes
 
 ## `v6.x` Highlights
 
-These are the new features and additions of Athenaeum `v6.x`.
+These are some the new features of Athenaeum `v6.x`.
 
 [[toc]]
 
-TODO
+### Maintenance Modes
+
+A new [Maintenance Modes](./maintenance/modes) package has been added, which offers a few additional drivers that can be used for [storing application down](https://laravel.com/docs/8.x/configuration#maintenance-mode) state. 
 
 ## Changelog
 
