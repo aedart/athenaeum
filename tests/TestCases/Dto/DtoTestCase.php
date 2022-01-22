@@ -59,7 +59,7 @@ abstract class DtoTestCase extends IntegrationTestCase
             'name' => $this->faker->name(),
             'slogan' => $this->faker->words(3, true),
             'employees' => $this->faker->randomDigitNotNull(),
-            'hasInsurance' => $this->faker->boolean,
+            'hasInsurance' => $this->faker->boolean(),
             'profitScore' => (string) $this->faker->randomFloat(2, 0, 10),
             'persons' => $this->faker->randomElements([
                 'Jessey',

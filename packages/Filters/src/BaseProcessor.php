@@ -118,9 +118,14 @@ abstract class BaseProcessor implements Processor
      */
     public function value()
     {
-        return $this->request()->query(
-            $this->parameter()
-        );
+        $request = $this->request();
+        $param = $this->parameter();
+
+        if ($request->query->has($param)) {
+            return $request->query->all()[$param];
+        }
+
+        return null;
     }
 
     /**

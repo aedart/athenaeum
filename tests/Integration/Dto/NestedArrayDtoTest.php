@@ -30,10 +30,10 @@ class NestedArrayDtoTest extends DtoTestCase
     {
         $data = $this->arrayDtoData();
         $data['address'] = new Address([
-            'street' => $this->faker->streetName,
+            'street' => $this->faker->streetName(),
 
             'city' => new City([
-                'name' => $this->faker->city,
+                'name' => $this->faker->city(),
                 'zipCode' => $this->faker->randomNumber(4),
             ])
         ]);
@@ -52,9 +52,9 @@ class NestedArrayDtoTest extends DtoTestCase
     {
         $data = $this->arrayDtoData();
         $data['address'] = [
-            'street' => $this->faker->streetName,
+            'street' => $this->faker->streetName(),
             'city' => [
-                'name' => $this->faker->city,
+                'name' => $this->faker->city(),
                 'zipCode' => $this->faker->randomNumber(4),
             ]
         ];
@@ -77,9 +77,9 @@ class NestedArrayDtoTest extends DtoTestCase
 
         $data = $this->arrayDtoData();
         $data['address'] = [
-            'street' => $this->faker->streetName,
+            'street' => $this->faker->streetName(),
             'city' => [
-                'name' => $this->faker->city,
+                'name' => $this->faker->city(),
                 'zipCode' => $this->faker->randomNumber(4),
             ]
         ];
@@ -94,9 +94,9 @@ class NestedArrayDtoTest extends DtoTestCase
     {
         $data = $this->arrayDtoData();
         $data['address'] = [
-            'street' => $this->faker->streetName,
+            'street' => $this->faker->streetName(),
             'city' => [
-                'name' => $this->faker->city,
+                'name' => $this->faker->city(),
                 'zipCode' => $this->faker->randomNumber(4),
             ]
         ];
@@ -147,9 +147,9 @@ class NestedArrayDtoTest extends DtoTestCase
         $dto = $this->makeArrayDto();
 
         $data = [
-            'street' => $this->faker->streetName,
+            'street' => $this->faker->streetName(),
             'city' => [
-                'name' => $this->faker->city,
+                'name' => $this->faker->city(),
                 'zipCode' => $this->faker->randomNumber(4)
             ]
         ];
@@ -173,10 +173,10 @@ class NestedArrayDtoTest extends DtoTestCase
         $data = [
             'name' => $this->faker->name(),
             'address' => [
-                'street' => $this->faker->streetName,
+                'street' => $this->faker->streetName(),
                 'city' => [
-                    'name' => $this->faker->city,
-                    'zipCode' => (int) $this->faker->postcode
+                    'name' => $this->faker->city(),
+                    'zipCode' => (int) $this->faker->postcode()
                 ]
             ],
 
@@ -208,10 +208,10 @@ class NestedArrayDtoTest extends DtoTestCase
         $data = [
             'name' => $this->faker->name(),
             'address' => [
-                'street' => $this->faker->streetName,
+                'street' => $this->faker->streetName(),
                 'city' => [
-                    'name' => $this->faker->city,
-                    'zipCode' => (int) $this->faker->postcode
+                    'name' => $this->faker->city(),
+                    'zipCode' => (int) $this->faker->postcode()
                 ]
             ],
 
