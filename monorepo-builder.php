@@ -36,7 +36,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'roave/security-advisories' => 'dev-master',
             'codeception/codeception' => '5.0.x-dev',
             'orchestra/testbench' => '7.x-dev',
-            'orchestra/testbench-dusk' => '7.0.x-dev',
+            'orchestra/testbench-dusk' => 'dev-master',
         ],
 
         ComposerJsonSection::AUTOLOAD => [

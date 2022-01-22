@@ -45,7 +45,7 @@
         "codeception/codeception": "5.0.x-dev",
         "codeception/module-asserts": "dev-master",
         "orchestra/testbench": "7.x-dev",
-        "orchestra/testbench-dusk": "7.0.x-dev",
+        "orchestra/testbench-dusk": "dev-master",
         "predis/predis": "^1.1.4",
         "roave/security-advisories": "dev-master",
         "symfony/var-dumper": "^v6.0.2",
@@ -138,7 +138,10 @@
         "cs-fix": "vendor/bin/ecs check --fix --ansi"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true
+        }
     },
     "extra": {
         "branch-alias": {
