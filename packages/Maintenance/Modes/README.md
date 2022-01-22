@@ -1,6 +1,23 @@
 # Athenaeum Maintenance Modes
 
-TODO: ...
+# Maintenance Modes
+
+Offers a few additional [maintenance modes "drivers"](https://laravel.com/docs/9.x/configuration#maintenance-mode) for Laravel.
+
+```php
+// ...somewhere inside your application
+$mode = $app->maintenanceMode();
+$mode->activate([
+    'secret' => '1630542a-246b-4b66-afa1-dd72a4c43515'
+]);
+
+// ...etc
+```
+
+## Available Modes
+
+* `'array'`: _stores application down state in an array - useful for testing purposes._
+* `'json'`: _stores application down state in a json file - very similar to Laravel's default "file based" maintenance mode._
 
 ## Documentation
 
