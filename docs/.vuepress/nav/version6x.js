@@ -262,6 +262,23 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Maintenance',
+            collapsable: true,
+            children: [
+                {
+                    title: 'Modes',
+                    collapsable: true,
+                    children: [
+                        'maintenance/modes/',
+                        'maintenance/modes/install',
+                        'maintenance/modes/setup',
+                        'maintenance/modes/usage',
+                        'maintenance/modes/drivers',
+                    ]
+                },
+            ]
+        },
+        {
             title: 'Properties',
             collapsable: true,
             children: [
