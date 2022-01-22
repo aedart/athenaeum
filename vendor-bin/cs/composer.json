@@ -5,5 +5,10 @@
         "phpcompatibility/php-compatibility": "^9.3.5",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
         "symplify/config-transformer": "^10.0.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }
