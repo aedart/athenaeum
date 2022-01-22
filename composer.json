@@ -76,6 +76,7 @@
             "Aedart\\Http\\Clients\\": "packages/Http/Clients/src",
             "Aedart\\Http\\Cookies\\": "packages/Http/Cookies/src",
             "Aedart\\Http\\Messages\\": "packages/Http/Messages/src",
+            "Aedart\\Maintenance\\Modes\\": "packages/Maintenance/Modes/src",
             "Aedart\\Pagination\\": "packages/Pagination/src",
             "Aedart\\Properties\\": "packages/Properties/src",
             "Aedart\\Redmine\\": "packages/Redmine/src",
@@ -108,6 +109,7 @@
         "aedart/athenaeum-http-clients": "self.version",
         "aedart/athenaeum-http-cookies": "self.version",
         "aedart/athenaeum-http-messages": "self.version",
+        "aedart/athenaeum-maintenance-modes": "self.version",
         "aedart/athenaeum-pagination": "self.version",
         "aedart/athenaeum-properties": "self.version",
         "aedart/athenaeum-redmine": "self.version",
@@ -135,7 +137,8 @@
             "vendor/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary --runtime-set testVersion 8.0- ./packages ./tests"
         ],
         "cs": "vendor/bin/ecs check --ansi",
-        "cs-fix": "vendor/bin/ecs check --fix --ansi"
+        "cs-fix": "vendor/bin/ecs check --fix --ansi",
+        "docs:dev": "npm run docs:dev --ansi"
     },
     "config": {
         "sort-packages": true,

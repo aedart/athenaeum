@@ -2,6 +2,7 @@
 
 namespace Aedart\Testing\TestCases;
 
+use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Testing\Athenaeum\AthenaeumTestHelper;
 use Codeception\Configuration;
 
@@ -19,6 +20,7 @@ use Codeception\Configuration;
 abstract class AthenaeumTestCase extends IntegrationTestCase
 {
     use AthenaeumTestHelper;
+    use FileTrait;
 
     /*****************************************************************
      * Setup
@@ -37,6 +39,13 @@ abstract class AthenaeumTestCase extends IntegrationTestCase
 
         $this->startApplication();
         $this->ioc = $this->app;
+
+        // Ensure directory for default maintenance mode storage path!
+        $maintenancePath = storage_path('framework');
+
+        $fs = $this->getFile();
+        $fs->ensureDirectoryExists($maintenancePath);
+        $fs->cleanDirectory($maintenancePath);
     }
 
     /**

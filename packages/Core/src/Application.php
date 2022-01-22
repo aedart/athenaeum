@@ -34,12 +34,15 @@ use Aedart\Core\Traits\ExceptionHandlerFactoryTrait;
 use Aedart\Core\Traits\NamespaceDetectorTrait;
 use Aedart\Core\Traits\PathsContainerTrait;
 use Aedart\Events\Providers\ListenersViaConfigServiceProvider;
+use Aedart\Maintenance\Modes\Providers\MaintenanceModeServiceProvider;
+use Aedart\Maintenance\Modes\Traits\MaintenanceModeManagerTrait;
 use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Closure;
 use Illuminate\Contracts\Foundation\Application as LaravelApplicationInterface;
+use Illuminate\Contracts\Foundation\MaintenanceMode;
 use Illuminate\Support\ServiceProvider;
 use LogicException;
 use Throwable;
@@ -67,6 +70,7 @@ class Application extends IoC implements
     use DispatcherTrait;
     use NamespaceDetectorTrait;
     use ExceptionHandlerFactoryTrait;
+    use MaintenanceModeManagerTrait;
 
     /**
      * Application's version
@@ -161,6 +165,7 @@ class Application extends IoC implements
     protected array $defaultCoreServiceProviders = [
         CoreServiceProvider::class,
         ExceptionHandlerServiceProvider::class,
+        MaintenanceModeServiceProvider::class,
         NativeFilesystemServiceProvider::class,
         EventServiceProvider::class,
         ListenersViaConfigServiceProvider::class,
@@ -287,7 +292,7 @@ class Application extends IoC implements
      */
     public function maintenanceMode()
     {
-        // TODO: Implement maintenanceMode() method.
+        return $this->make(MaintenanceMode::class);
     }
 
     /**
@@ -295,7 +300,7 @@ class Application extends IoC implements
      */
     public function isDownForMaintenance()
     {
-        return file_exists($this->basePath('.down'));
+        return $this->maintenanceMode()->active();
     }
 
     /**
