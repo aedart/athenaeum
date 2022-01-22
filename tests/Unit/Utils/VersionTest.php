@@ -103,6 +103,11 @@ class VersionTest extends UnitTestCase
      */
     public function canObtainAthenaeumPackageVersion()
     {
+//        dump([
+//            'target' => 'aedart/athenaeum-support',
+//            'is_installed' => \Composer\InstalledVersions::isInstalled('aedart/athenaeum-support'),
+//            'version' => \Composer\InstalledVersions::getVersion('aedart/athenaeum-support')
+//        ]);
         $version = Version::package('aedart/athenaeum-support');
 
         ConsoleDebugger::output((string)$version);
