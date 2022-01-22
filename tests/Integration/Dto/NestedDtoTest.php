@@ -31,10 +31,10 @@ class NestedDtoTest extends DtoTestCase
             'age' => $this->faker->randomNumber(),
 
             'address' => new Address([
-                'street' => $this->faker->streetName()(),
+                'street' => $this->faker->streetName(),
 
                 'city' => new City([
-                    'name' => $this->faker->city()(),
+                    'name' => $this->faker->city(),
                     'zipCode' => $this->faker->randomNumber(4),
                 ])
             ])
@@ -187,14 +187,14 @@ class NestedDtoTest extends DtoTestCase
                 'street' => $this->faker->streetName(),
                 'city' => [
                     'name' => $this->faker->city(),
-                    'zipCode' => (int) $this->faker->postcode
+                    'zipCode' => (int) $this->faker->postcode()
                 ]
             ],
 
             // Here, the interface is bound, thus this should
             // not fail
             'note' => [
-                'content' => $this->faker->sentence
+                'content' => $this->faker->sentence()
             ]
         ];
 
@@ -222,14 +222,14 @@ class NestedDtoTest extends DtoTestCase
                 'street' => $this->faker->streetName(),
                 'city' => [
                     'name' => $this->faker->city(),
-                    'zipCode' => (int) $this->faker->postcode
+                    'zipCode' => (int) $this->faker->postcode()
                 ]
             ],
 
             // Here, the interface is bound, thus this should
             // not fail
             'note' => [
-                'content' => $this->faker->sentence
+                'content' => $this->faker->sentence()
             ]
         ];
 
