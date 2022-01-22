@@ -137,7 +137,8 @@
             "vendor/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary --runtime-set testVersion 8.0- ./packages ./tests"
         ],
         "cs": "vendor/bin/ecs check --ansi",
-        "cs-fix": "vendor/bin/ecs check --fix --ansi"
+        "cs-fix": "vendor/bin/ecs check --fix --ansi",
+        "docs:dev": "npm run docs:dev --ansi"
     },
     "config": {
         "sort-packages": true,
