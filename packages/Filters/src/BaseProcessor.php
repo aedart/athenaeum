@@ -122,7 +122,7 @@ abstract class BaseProcessor implements Processor
         $param = $this->parameter();
 
         if ($request->query->has($param)) {
-            return $request->query->all($param);
+            return $request->query->all()[$param];
         }
 
         return null;
