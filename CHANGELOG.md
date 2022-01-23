@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Minimum required PHP version changed to `8.0`.
 * `SearchFilter` no longer uses `StopWords` concern (_concern has been removed_). [#63](https://github.com/aedart/athenaeum/issues/63).
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Dates\Duration`.
+* Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Helpers\Invoker`.
 
 **Non-breaking Changes**
 
