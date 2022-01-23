@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Breaking Changes**
 
 * Minimum required PHP version changed to `8.0`.
+* `populate()` method now returns `static` instead of `void`, in `\Aedart\Contracts\Utils\Populatable` interface.
 * `SearchFilter` no longer uses `StopWords` concern (_concern has been removed_). [#63](https://github.com/aedart/athenaeum/issues/63).
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Dates\Duration`.
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Helpers\Invoker`.
