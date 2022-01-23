@@ -2,12 +2,10 @@
 
 namespace Aedart\Utils\Helpers;
 
-use Illuminate\Support\Str;
+use Aedart\Utils\Str;
 
 /**
  * Method Helper
- *
- * <br />
  *
  * Offers various component methods or functions utilities.
  *
@@ -19,11 +17,11 @@ class MethodHelper
     /**
      * Generates a 'getter' name for given property
      *
-     * <b>Example</b><br />
-     * <pre>
+     * Example:
+     * ```
      *        $propertyName = 'logger';
      *        return makeGetterName($propertyName) // Returns getLogger
-     * </pre>
+     * ```
      *
      * @param string $property
      *
@@ -39,11 +37,11 @@ class MethodHelper
     /**
      * Generates a 'setter' name for given property
      *
-     * <b>Example</b><br />
-     * <pre>
+     * Example:
+     * ```
      *        $propertyName = 'logger';
      *        return makeGetterName($propertyName) // Returns setLogger
-     * </pre>
+     * ```
      *
      * @param string $property
      *
@@ -67,7 +65,7 @@ class MethodHelper
      *
      * @return mixed Return value of given method or whatever was given if not callable
      */
-    public static function callOrReturn($method = null, array $parameters = [])
+    public static function callOrReturn(mixed $method = null, array $parameters = []): mixed
     {
         if (is_callable($method)) {
             return $method(...$parameters);
