@@ -62,11 +62,13 @@ class Attachment implements AttachmentInterface
     /**
      * @inheritDoc
      */
-    public function populate(array $data = []): void
+    public function populate(array $data = []): static
     {
         foreach ($data as $property => $value) {
             $this->populateProperty($property, $value);
         }
+
+        return $this;
     }
 
     /**

@@ -32,9 +32,9 @@ interface Populatable
      *
      * @param array $data [optional] Key-value pair, key = property name, value = property value
      *
-     * @return void
+     * @return self
      *
      * @throws Throwable In case that one or more of the given array entries are invalid
      */
-    public function populate(array $data = []): void;
+    public function populate(array $data = []): static;
 }

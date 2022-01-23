@@ -185,9 +185,7 @@ trait IoCPartial
         // Check if instance is populatable and if the given value
         // is an array.
         if ($instance instanceof Populatable && is_array($value)) {
-            $instance->populate($value);
-
-            return $instance;
+            return $instance->populate($value);
         }
 
         // If we reach this part, then we are simply going to fail.

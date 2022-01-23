@@ -67,7 +67,7 @@ abstract class NestedList implements
     /**
      * @inheritDoc
      */
-    public function populate(array $data = []): void
+    public function populate(array $data = []): static
     {
         $this->list = array_map(function ($reference) {
             /** @var ArrayDto $type */
@@ -82,6 +82,8 @@ abstract class NestedList implements
             // Set connection, if nested DTO expects one
             return $this->resolveItemConnection($nested);
         }, $data);
+
+        return $this;
     }
 
     /**
