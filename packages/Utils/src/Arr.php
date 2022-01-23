@@ -35,26 +35,6 @@ class Arr extends ArrBase
     }
 
     /**
-     * Un-flatten an array that has been flatten via "dot"
-     *
-     * @see dot
-     *
-     * @param  array|iterable  $array
-     *
-     * @return array
-     */
-    public static function undot($array): array
-    {
-        $output = [];
-
-        foreach ($array as $key => $value) {
-            static::set($output, $key, $value);
-        }
-
-        return $output;
-    }
-
-    /**
      * Computes the difference of multi-dimensional arrays
      *
      * @param array $array The array to compare from

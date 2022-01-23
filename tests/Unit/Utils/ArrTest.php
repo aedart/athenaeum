@@ -55,29 +55,6 @@ class ArrTest extends UnitTestCase
     /**
      * @test
      */
-    public function canUnFlatten()
-    {
-        $source = [
-            'player.strength' => 15,
-            'player.dexterity' => 22,
-            'player.intelligence' => 19
-        ];
-
-        $result = Arr::undot($source);
-        ConsoleDebugger::output($result);
-
-        $this->assertArrayHasKey('player', $result);
-        $this->assertIsArray($result['player']);
-
-        $nested = $result['player'];
-        $this->assertArrayHasKey('strength', $nested);
-        $this->assertArrayHasKey('dexterity', $nested);
-        $this->assertArrayHasKey('intelligence', $nested);
-    }
-
-    /**
-     * @test
-     */
     public function canReturnDifferenceOfAssociate()
     {
         $original = [
