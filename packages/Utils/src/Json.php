@@ -7,8 +7,6 @@ use JsonException;
 /**
  * Json Utility
  *
- * <br />
- *
  * Offers various Json utilities.
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
@@ -29,7 +27,7 @@ class Json
      *
      * @throws JsonException
      */
-    public static function encode($value, int $options = 0, int $depth = 512): string
+    public static function encode(mixed $value, int $options = 0, int $depth = 512): string
     {
         return json_encode($value, $options |= JSON_THROW_ON_ERROR, $depth);
     }
@@ -53,7 +51,8 @@ class Json
         bool $assoc = false,
         int $depth = 512,
         int $options = 0
-    ) {
+    ): mixed
+    {
         return json_decode($json, $assoc, $depth, $options |= JSON_THROW_ON_ERROR);
     }
 }
