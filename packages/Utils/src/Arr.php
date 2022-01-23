@@ -22,7 +22,7 @@ class Arr extends ArrBase
      *
      * @return mixed
      */
-    public static function randomElement(array $list, int $seed = null)
+    public static function randomElement(array $list, int|null $seed = null): mixed
     {
         // Seed generator if required
         if (isset($seed)) {
@@ -35,7 +35,7 @@ class Arr extends ArrBase
     }
 
     /**
-     * Computes the difference of multi-dimensional arrays
+     * Computes the difference of multidimensional arrays
      *
      * @param array $array The array to compare from
      * @param array ...$arrays Arrays to compare against
@@ -71,7 +71,7 @@ class Arr extends ArrBase
      *
      * @return array
      */
-    protected static function clearNestedEmptyArrays(array $array, $replaceValue = null): array
+    protected static function clearNestedEmptyArrays(array $array, mixed $replaceValue = null): array
     {
         $output = [];
 
