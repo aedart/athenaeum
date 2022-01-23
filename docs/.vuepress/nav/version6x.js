@@ -388,6 +388,7 @@ module.exports.sidebar = function(){
                 'utils/json',
                 'utils/math',
                 'utils/method-helper',
+                'utils/invoker',
                 'utils/populatable',
                 'utils/version',
             ]
