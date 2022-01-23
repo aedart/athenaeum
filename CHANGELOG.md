@@ -10,13 +10,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Maintenance Mode package that offers additional drivers for Laravel's Application, when using `php artisan down`. Available drivers: `'array'` and `'json'`. [#67](https://github.com/aedart/athenaeum/issues/67).
+* Optional `$mode` argument has been added to `\Aedart\Utils\Math::applySeed()`, which specifies the seeding algorithm to use. 
+* Optional seeding algorithm `$mode` argument has been added to `\Aedart\Utils\Arr::randomElement()`.
+* Documentation for `\Aedart\Utils\Arr::differenceAssoc()` (_previously undocumented, method was added in `v5.17`_). [#45](https://github.com/aedart/athenaeum/issues/45).
 
 ### Changed
 
 **Breaking Changes**
 
 * Minimum required PHP version changed to `8.0`.
+* `populate()` method now returns `static` instead of `void`, in `\Aedart\Contracts\Utils\Populatable` interface.
 * `SearchFilter` no longer uses `StopWords` concern (_concern has been removed_). [#63](https://github.com/aedart/athenaeum/issues/63).
+* Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Dates\Duration`.
+* Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Helpers\Invoker`.
+* `$seed` argument can no longer be `null` in `\Aedart\Utils\Math::applySeed()` method.
 
 **Non-breaking Changes**
 
@@ -26,10 +33,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Replaced `fzaninotto/faker` package with `fakerphp/faker`. [#23](https://github.com/aedart/athenaeum/issues/23).
 * Replaced property calls with method calls, on faker instance throughout many tests (_PHP faker deprecated several properties since `v1.14`_). [#23](https://github.com/aedart/athenaeum/issues/23).  
 * Upgraded to [Symplify Monorepo Builder](https://github.com/symplify/monorepo-builder) `v10.x`. [#60](https://github.com/aedart/athenaeum/issues/60), [#65](https://github.com/aedart/athenaeum/pull/65).
+* `\Aedart\Utils\Dates\Duration` now inherits from `Stringable`.
 
 ### Removed
 
 * `\Aedart\Filters\Query\Filters\Concerns\StopWords` has been removed. Component didn't work as intended and caused several issues. [#63](https://github.com/aedart/athenaeum/issues/63).
+* `undot()` from `\Aedart\Utils\Arr`. The `undot()` method has been implemented in Laravel's `Arr`, which acts as the base class for `\Aedart\Utils\Arr`. This change is not breaking.
 
 ### Fixed
 

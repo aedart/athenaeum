@@ -461,7 +461,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public function populate(array $data = []): void
+    public function populate(array $data = []): static
     {
         parent::populate($data);
 
@@ -472,6 +472,8 @@ abstract class RedmineApiResource extends ArrayDto implements
                 $property->setConnection($this->getConnection());
             }
         }
+
+        return $this;
     }
 
     /**
@@ -479,9 +481,7 @@ abstract class RedmineApiResource extends ArrayDto implements
      */
     public function fill(array $data = [])
     {
-        $this->populate($data);
-
-        return $this;
+        return $this->populate($data);
     }
 
     /**

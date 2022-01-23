@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Math
 
-Offers a few math related utility methods.
+Offers math related utility methods.
 
 [[TOC]]
 
@@ -33,9 +33,7 @@ mt_srand($seed);
 
 ## `applySeed()`
 
-Seeds the Mersenne Twister Random Number Generator.
-
-See [PHP's documentation](https://www.php.net/manual/en/function.mt-srand) for additional information.
+A wrapper for [PHP's `mt_srand()`](https://www.php.net/manual/en/function.mt-srand) method, which seeds the Mersenne Twister Random Number Generator.
 
 ```php
 use Aedart\Utils\Math;
@@ -51,4 +49,20 @@ $resultB = $list[ array_rand($list, 1) ];
 
 echo $resultA; // b
 echo $resultB; // b
+```
+
+### Seed mode
+
+Use the 3rd argument to specify the seeding algorithm mode: 
+
+```php
+use Aedart\Utils\Math;
+
+$seed = 123456;
+$list = ['a', 'b', 'c', 'd'];
+
+Math::applySeed($seed, MT_RAND_PHP);
+$resultA = $list[ array_rand($list, 1) ];
+
+// ...etc
 ```

@@ -5,9 +5,7 @@ namespace Aedart\Contracts\Utils;
 /**
  * Clearable
  *
- * <br />
- *
- * Component is able to clear it's data, e.g. it's internal collection,
+ * Component is able to clear its data, e.g. it's internal collection,
  * list, set, map,... etc.
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
