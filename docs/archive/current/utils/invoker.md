@@ -56,3 +56,21 @@ $invoker = Invoker::invoke($unknownCallback)
 // ...Later in your application
 echo $invoker->call(); // throws exception
 ```
+
+## Caveat
+
+::: warning
+If neither the "core" callback nor fallback are [`callable`](https://www.php.net/manual/en/function.is-callable), then the invoker component will throw a `RuntimeException` when invoked.
+:::
+
+```php
+use \Aedart\Utils\Helpers\Invoker;
+
+$callback = null;
+$fallback = null
+
+// Throws RuntimeException
+$result = Invoker::invoke($callback)
+    ->fallback($fallback)
+    ->call();
+```
