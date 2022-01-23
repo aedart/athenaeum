@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 * `\Aedart\Filters\Query\Filters\Concerns\StopWords` has been removed. Component didn't work as intended and caused several issues. [#63](https://github.com/aedart/athenaeum/issues/63).
+* `undot()` from `\Aedart\Utils\Arr`. The `undot()` method has been implemented in Laravel's `Arr`, which acts as the base class for `\Aedart\Utils\Arr`. This change is not breaking.
 
 ### Fixed
 
