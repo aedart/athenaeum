@@ -19,17 +19,17 @@ class Invoker
     /**
      * The callback to invoke
      *
-     * @var callable|mixed
+     * @var mixed
      */
-    protected $callback;
+    protected mixed $callback;
 
     /**
      * Fallback callback to invoke, if
      * primary callback is not callable
      *
-     * @var callable|mixed
+     * @var mixed
      */
-    protected $fallback = null;
+    protected mixed $fallback = null;
 
     /**
      * Arguments to be passed on to callback
@@ -41,9 +41,9 @@ class Invoker
     /**
      * Invoker constructor.
      *
-     * @param callable|mixed $callback
+     * @param mixed $callback
      */
-    public function __construct($callback)
+    public function __construct(mixed $callback)
     {
         $this->callback = $callback;
     }
@@ -51,11 +51,11 @@ class Invoker
     /**
      * Creates a new invoker instance with given callback
      *
-     * @param callable|mixed $callback
+     * @param mixed $callback
      *
      * @return static
      */
-    public static function invoke($callback): Invoker
+    public static function invoke(mixed $callback): static
     {
         return new static($callback);
     }
@@ -63,11 +63,21 @@ class Invoker
     /**
      * Returns the callback
      *
-     * @return callable|mixed
+     * @return mixed
      */
-    public function getCallback()
+    public function getCallback(): mixed
     {
         return $this->callback;
+    }
+
+    /**
+     * Determine if a callback was set and that it is callable
+     *
+     * @return bool
+     */
+    public function hasCallback(): bool
+    {
+        return isset($this->callback) && is_callable($this->callback);
     }
 
     /**
@@ -76,11 +86,11 @@ class Invoker
      * Method merges given arguments with et. already added
      * arguments.
      *
-     * @param ...$arguments
+     * @param mixed ...$arguments
      *
      * @return self
      */
-    public function with(...$arguments): self
+    public function with(...$arguments): static
     {
         $this->arguments = array_merge(
             $this->arguments,
@@ -104,11 +114,11 @@ class Invoker
      * Add fallback callback to be used, in case that given
      * callback is not callable
      *
-     * @param callable|mixed $callback
+     * @param mixed $callback
      *
      * @return self
      */
-    public function fallback($callback): self
+    public function fallback(mixed $callback): static
     {
         $this->fallback = $callback;
 
@@ -118,11 +128,21 @@ class Invoker
     /**
      * Return evt. fallback callback
      *
-     * @return callable|mixed
+     * @return mixed
      */
-    public function getFallback()
+    public function getFallback(): mixed
     {
         return $this->fallback;
+    }
+
+    /**
+     * Determine if a fallback callback has been set
+     *
+     * @return bool
+     */
+    public function hasFallback(): bool
+    {
+        return isset($this->fallback) && is_callable($this->fallback);
     }
 
     /**
@@ -135,25 +155,23 @@ class Invoker
      *
      * @throws Throwable
      */
-    public function call()
+    public function call(): mixed
     {
         $arguments = $this->getArguments();
 
-        $callback = $this->getCallback();
-        if (is_callable($callback)) {
-            return $this->callCallback($callback, $arguments);
+        if ($this->hasCallback()) {
+            return $this->callCallback($this->getCallback(), $arguments);
         }
 
-        $fallback = $this->getFallback();
-        if (isset($fallback) && is_callable($fallback)) {
-            return $this->callCallback($fallback, $arguments);
+        if ($this->hasFallback()) {
+            return $this->callCallback($this->getFallback(), $arguments);
         }
 
         throw new RuntimeException('Unable to invoke callback or fallback');
     }
 
     /**
-     * Calls the given callback with given arguments and returns it's
+     * Calls the given callback with given arguments and returns its
      * resulting output
      *
      * @param callable $callback
@@ -161,7 +179,7 @@ class Invoker
      *
      * @return mixed
      */
-    protected function callCallback(callable $callback, array $arguments = [])
+    protected function callCallback(callable $callback, array $arguments = []): mixed
     {
         return $callback(...$arguments);
     }
