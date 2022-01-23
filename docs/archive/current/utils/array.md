@@ -7,6 +7,8 @@ sidebarDepth: 0
 
 Extended version of Laravel's [`Arr` component](https://laravel.com/docs/8.x/helpers#arrays).
 
+[[TOC]]
+
 ## `randomElement()`
 
 Returns a single random element from a given list.
@@ -27,7 +29,11 @@ You can also provide a [seed for the random number generator](https://www.php.ne
 use Aedart\Utils\Arr;
 use Aedart\Utils\Math;
 
-$element = Arr::randomElement(['Jim', 'Sine', 'Ally', 'Gordon'], Math::seed(), MT_RAND_PHP);
+$element = Arr::randomElement(
+    ['Jim', 'Sine', 'Ally', 'Gordon'],
+    Math::seed(),
+    MT_RAND_PHP
+);
 ```
 
 See [`Math::seed()` and `Math::applySeed()` methods ](math.md) for additional information about seeding.
