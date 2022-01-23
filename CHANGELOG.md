@@ -12,7 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Maintenance Mode package that offers additional drivers for Laravel's Application, when using `php artisan down`. Available drivers: `'array'` and `'json'`. [#67](https://github.com/aedart/athenaeum/issues/67).
 * Optional `$mode` argument has been added to `\Aedart\Utils\Math::applySeed()`, which specifies the seeding algorithm to use. 
 * Optional seeding algorithm `$mode` argument has been added to `\Aedart\Utils\Arr::randomElement()`.
-* Documentation for `\Aedart\Utils\Arr::differenceAssoc()` (_previously undocumented, method was added in `v5.17`_). [#45](https://github.com/aedart/athenaeum/issues/45).
+* `hasCallback()` and `hasFallback()` methods added in `\Aedart\Utils\Helpers\Invoker`.
+* Documentation for `\Aedart\Utils\Arr::differenceAssoc()` (_previously undocumented. Method was added in `v5.17`_). [#45](https://github.com/aedart/athenaeum/issues/45).
+* Documentation for `\Aedart\Utils\Helpers\Invoker` (_previously undocumented. Helper was added in `v5.12`_).
 
 ### Changed
 
