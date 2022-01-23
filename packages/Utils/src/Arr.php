@@ -4,6 +4,7 @@
 namespace Aedart\Utils;
 
 use Illuminate\Support\Arr as ArrBase;
+use Aedart\Utils\Math;
 use InvalidArgumentException;
 
 /**
@@ -17,16 +18,19 @@ class Arr extends ArrBase
     /**
      * Returns a single random element from given list
      *
+     * @see \Aedart\Utils\Math::applySeed
+     *
      * @param array $list
      * @param int|null $seed [optional] Number to seed the random generator.
+     * @param int $mode [optional] The seeding algorithm to use
      *
      * @return mixed
      */
-    public static function randomElement(array $list, int|null $seed = null): mixed
+    public static function randomElement(array $list, int|null $seed = null, int $mode = MT_RAND_MT19937): mixed
     {
         // Seed generator if required
         if (isset($seed)) {
-            mt_srand($seed);
+            Math::applySeed($seed, $mode);
         }
 
         $index = array_rand($list, 1);
