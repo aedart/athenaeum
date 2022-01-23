@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Maintenance Mode package that offers additional drivers for Laravel's Application, when using `php artisan down`. Available drivers: `'array'` and `'json'`. [#67](https://github.com/aedart/athenaeum/issues/67).
+* Optional `$mode` argument has been added to `\Aedart\Utils\Math::applySeed()`, which specifies the seeding algorithm to use. 
 
 ### Changed
 
@@ -19,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `SearchFilter` no longer uses `StopWords` concern (_concern has been removed_). [#63](https://github.com/aedart/athenaeum/issues/63).
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Dates\Duration`.
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Helpers\Invoker`.
+* `$seed` argument can no longer be `null` in `\Aedart\Utils\Math::applySeed()` method.
 
 **Non-breaking Changes**
 
