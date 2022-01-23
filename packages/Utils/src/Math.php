@@ -49,22 +49,23 @@ class Math
         // Source is from php.net's documentation:
         // @see https://www.php.net/manual/en/function.mt-srand.php#refsect1-function.mt-srand-examples
         list($usec, $sec) = explode(' ', microtime());
-        return $sec + $usec * 1000000;
+        return (int) $sec + $usec * 1000000;
     }
 
     /**
      * Seeds the Mersenne Twister Random Number Generator
      *
-     * <b>WARNING</b>: If you choose to seed the random number generator,
+     * **WARNING**: If you choose to seed the random number generator,
      * all methods that depend on it will be affected.
      *
      * @see seed
      * @see https://www.php.net/manual/en/function.mt-srand.php
      *
-     * @param int|null $seed [optional] Seed value
+     * @param int $seed [optional] Seed value
+     * @param int $mode [optional] The algorithm to use
      */
-    public static function applySeed(int $seed = null)
+    public static function applySeed(int $seed = 0, int $mode = MT_RAND_MT19937): void
     {
-        mt_srand($seed);
+        mt_srand($seed, $mode);
     }
 }
