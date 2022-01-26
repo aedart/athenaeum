@@ -29,7 +29,7 @@ trait CacheFactoryTrait
      *
      * @return self
      */
-    public function setCacheFactory(?Factory $factory)
+    public function setCacheFactory(Factory|null $factory): static
     {
         $this->cacheFactory = $factory;
 
@@ -47,7 +47,7 @@ trait CacheFactoryTrait
      *
      * @return Factory|null cache factory or null if none cache factory has been set
      */
-    public function getCacheFactory(): ?Factory
+    public function getCacheFactory(): Factory|null
     {
         if (!$this->hasCacheFactory()) {
             $this->setCacheFactory($this->getDefaultCacheFactory());
@@ -70,7 +70,7 @@ trait CacheFactoryTrait
      *
      * @return Factory|null A default cache factory value or Null if no default value is available
      */
-    public function getDefaultCacheFactory(): ?Factory
+    public function getDefaultCacheFactory(): Factory|null
     {
         return Cache::getFacadeRoot();
     }

@@ -19,7 +19,7 @@ interface CacheFactoryAware
      *
      * @return self
      */
-    public function setCacheFactory(?Factory $factory);
+    public function setCacheFactory(Factory|null $factory): static;
 
     /**
      * Get cache factory
@@ -32,7 +32,7 @@ interface CacheFactoryAware
      *
      * @return Factory|null cache factory or null if none cache factory has been set
      */
-    public function getCacheFactory(): ?Factory;
+    public function getCacheFactory(): Factory|null;
 
     /**
      * Check if cache factory has been set
@@ -46,5 +46,5 @@ interface CacheFactoryAware
      *
      * @return Factory|null A default cache factory value or Null if no default value is available
      */
-    public function getDefaultCacheFactory(): ?Factory;
+    public function getDefaultCacheFactory(): Factory|null;
 }

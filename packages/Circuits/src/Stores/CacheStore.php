@@ -259,7 +259,7 @@ class CacheStore extends BaseStore implements
     /**
      * @inheritDoc
      */
-    public function setCache(?Repository $repository)
+    public function setCache(Repository|null $repository): static
     {
         if (!($repository->getStore() instanceof LockProvider)) {
             throw new StoreException('Only "Lock Provider" cache-stores can be used by Circuit Breaker Cache Store');
@@ -271,7 +271,7 @@ class CacheStore extends BaseStore implements
     /**
      * @inheritDoc
      */
-    public function getDefaultCache(): ?Repository
+    public function getDefaultCache(): Repository|null
     {
         return $this->getCacheFactory()->store(
             $this->getOption('cache-store')

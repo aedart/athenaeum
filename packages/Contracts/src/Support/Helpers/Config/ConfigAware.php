@@ -19,7 +19,7 @@ interface ConfigAware
      *
      * @return self
      */
-    public function setConfig(?Repository $repository);
+    public function setConfig(Repository|null $repository): static;
 
     /**
      * Get config
@@ -32,7 +32,7 @@ interface ConfigAware
      *
      * @return Repository|null config or null if none config has been set
      */
-    public function getConfig(): ?Repository;
+    public function getConfig(): Repository|null;
 
     /**
      * Check if config has been set
@@ -46,5 +46,5 @@ interface ConfigAware
      *
      * @return Repository|null A default config value or Null if no default value is available
      */
-    public function getDefaultConfig(): ?Repository;
+    public function getDefaultConfig(): Repository|null;
 }
