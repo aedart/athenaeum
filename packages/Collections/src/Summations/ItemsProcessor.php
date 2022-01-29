@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Aedart\Collections\Summations;
 
 use Aedart\Collections\Exceptions\NotTraversable;
@@ -13,6 +12,7 @@ use Aedart\Contracts\Collections\Summations\Rules\ProcessingRule;
 use Aedart\Contracts\Collections\Summations\Rules\Repository;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use Aedart\Support\Helpers\Container\ContainerTrait;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
 use Traversable;
 
@@ -68,14 +68,14 @@ class ItemsProcessor implements
     /**
      * ItemProcessor constructor.
      *
-     * @param  ProcessingRule[]|string[]|Repository  $rules Processing Rules instances, class paths or Repository of
+     * @param  ProcessingRule[]|Repository|string[]  $rules Processing Rules instances, class paths or Repository of
      *                                                processing rules.
      * @param  Summation|null  $summation  [optional]
      * @param  Container|null  $container  [optional]
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
-    public function __construct($rules, ?Summation $summation = null, ?Container $container = null)
+    public function __construct(array|Repository $rules, Summation|null $summation = null, Container|null $container = null)
     {
         $this->setContainer($container);
         $this->rules = $this->resolveRulesRepository($rules);
@@ -108,7 +108,7 @@ class ItemsProcessor implements
     /**
      * @inheritDoc
      */
-    public function before(?callable $callback = null): ItemsProcessor
+    public function before(callable|null $callback = null): static
     {
         $this->before = $callback;
 
@@ -118,7 +118,7 @@ class ItemsProcessor implements
     /**
      * @inheritDoc
      */
-    public function after(?callable $callback = null): ItemsProcessor
+    public function after(callable|null $callback = null): static
     {
         $this->after = $callback;
 
@@ -136,9 +136,9 @@ class ItemsProcessor implements
     /**
      * @inheritDoc
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
-    public function withRules($rules): ItemsProcessor
+    public function withRules(array|Repository $rules): static
     {
         return (new static($rules, $this->summation(), $this->getContainer()))
             ->before($this->before)
@@ -156,9 +156,9 @@ class ItemsProcessor implements
     /**
      * @inheritDoc
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
-    public function withSummation(Summation $summation): ItemsProcessor
+    public function withSummation(Summation $summation): static
     {
         return (new static($this->rules(), $summation, $this->getContainer()))
             ->before($this->before)
@@ -180,7 +180,7 @@ class ItemsProcessor implements
      *
      * @throws SummationCollectionException
      */
-    protected function processSingleItem($item, Repository $rules, Summation $summation): Summation
+    protected function processSingleItem(mixed $item, Repository $rules, Summation $summation): Summation
     {
         return $rules
             ->matching($item)
@@ -196,7 +196,7 @@ class ItemsProcessor implements
      *
      * @return Summation
      */
-    protected function applyCallback(Summation $summation, callable $callback = null): Summation
+    protected function applyCallback(Summation $summation, callable|null $callback = null): Summation
     {
         if (!isset($callback)) {
             return $summation;
@@ -208,13 +208,13 @@ class ItemsProcessor implements
     /**
      * Resolves the Rules Repository
      *
-     * @param ProcessingRule[]|string[]|Repository $rules
+     * @param  ProcessingRule[]|Repository|string[]  $rules
      *
      * @return Repository
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
-    protected function resolveRulesRepository($rules): Repository
+    protected function resolveRulesRepository(array|Repository $rules): Repository
     {
         if ($rules instanceof Repository) {
             return $rules;
@@ -236,9 +236,9 @@ class ItemsProcessor implements
      *
      * @return Summation
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
-    protected function resolveSummation(?Summation $summation = null): Summation
+    protected function resolveSummation(Summation|null $summation = null): Summation
     {
         if (isset($summation)) {
             return $summation;

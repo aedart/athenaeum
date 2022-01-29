@@ -6,6 +6,7 @@ use Aedart\Contracts\Collections\Summation;
 use Aedart\Contracts\Collections\Summations\Rules\ProcessingRule;
 use Aedart\Contracts\Collections\Summations\Rules\Rules;
 use ArrayIterator;
+use Traversable;
 
 /**
  * Rules Collection
@@ -22,14 +23,14 @@ class RulesCollection implements Rules
      *
      * @var mixed
      */
-    protected $item;
+    protected mixed $item;
 
     /**
      * The Summation Collection instance
      *
      * @var Summation|null
      */
-    protected ?Summation $summation;
+    protected Summation|null $summation;
 
     /**
      * List of processing rules
@@ -45,7 +46,7 @@ class RulesCollection implements Rules
      * @param  ProcessingRule[]  $rules  [optional]
      * @param  Summation|null  $summation  [optional]
      */
-    public function __construct($item = null, array  $rules = [], ?Summation $summation = null)
+    public function __construct(mixed $item = null, array $rules = [], Summation|null $summation = null)
     {
         $this->item = $item;
         $this->rules = $rules;
@@ -79,7 +80,7 @@ class RulesCollection implements Rules
     /**
      * @inheritDoc
      */
-    public function withRules(array $rules): Rules
+    public function withRules(array $rules): static
     {
         return new static($this->item(), $rules, $this->summation());
     }
@@ -87,7 +88,7 @@ class RulesCollection implements Rules
     /**
      * @inheritDoc
      */
-    public function item()
+    public function item(): mixed
     {
         return $this->item;
     }
@@ -95,7 +96,7 @@ class RulesCollection implements Rules
     /**
      * @inheritDoc
      */
-    public function withItem($item): Rules
+    public function withItem(mixed $item): static
     {
         return new static($item, $this->rules(), $this->summation());
     }
@@ -103,7 +104,7 @@ class RulesCollection implements Rules
     /**
      * @inheritDoc
      */
-    public function summation(): ?Summation
+    public function summation(): Summation|null
     {
         return $this->summation;
     }
@@ -111,7 +112,7 @@ class RulesCollection implements Rules
     /**
      * @inheritDoc
      */
-    public function withSummation(Summation $summation): Rules
+    public function withSummation(Summation $summation): static
     {
         return new static($this->item(), $this->rules(), $summation);
     }
@@ -119,7 +120,7 @@ class RulesCollection implements Rules
     /**
      * @inheritDoc
      */
-    public function count()
+    public function count(): int
     {
         return count($this->rules);
     }
@@ -127,7 +128,7 @@ class RulesCollection implements Rules
     /**
      * @inheritDoc
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->rules);
     }

@@ -27,5 +27,5 @@ interface ProcessingRule
      *
      * @throws SummationCollectionException
      */
-    public function process($item, Summation $summation): Summation;
+    public function process(mixed $item, Summation $summation): Summation;
 }
