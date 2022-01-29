@@ -8,6 +8,7 @@ use Illuminate\Console\Events\ArtisanStarting;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Console\Scheduling\ScheduleFinishCommand;
 use Illuminate\Console\Scheduling\ScheduleRunCommand;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use LogicException;
@@ -25,6 +26,8 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
 
     /**
      * @inheritdoc
+     *
+     * @throws BindingResolutionException
      */
     public function register()
     {
@@ -33,6 +36,8 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
 
     /**
      * Bootstrap this service
+     *
+     * @throws BindingResolutionException
      */
     public function boot()
     {
@@ -48,7 +53,7 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     public function when()
     {
-        // Ensure that this provider does not triggered unless artisan
+        // Ensure that provider does not trigger unless artisan
         // is starting
         return [
             ArtisanStarting::class
@@ -66,7 +71,7 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
      *
      * @throws RuntimeException If no register command method available
      */
-    protected function registerAvailableCommands()
+    protected function registerAvailableCommands(): static
     {
         $commands = $this->getConfig()->get('commands', []);
 
@@ -80,7 +85,7 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
      *
      * @return self
      */
-    protected function registerScheduleCommands()
+    protected function registerScheduleCommands(): static
     {
         $this->commands([
             ScheduleRunCommand::class,
@@ -95,10 +100,10 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
      *
      * @return self
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      * @throws LogicException If given schedules cannot be resolved
      */
-    protected function registerSchedulesFromConfig()
+    protected function registerSchedulesFromConfig(): static
     {
         /** @var Schedule $schedule */
         $schedule = $this->app->make(Schedule::class);
@@ -118,10 +123,10 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
      * @param string $schedules Class path
      * @param Schedule $schedule
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      * @throws LogicException If given schedules cannot be resolved
      */
-    protected function addSchedules($schedules, Schedule $schedule)
+    protected function addSchedules(string $schedules, Schedule $schedule)
     {
         $scheduler = $this->app->make($schedules);
         if (!($scheduler instanceof SchedulesTasks)) {
@@ -136,9 +141,9 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
      *
      * @return self
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
-    protected function registerSchedule()
+    protected function registerSchedule(): static
     {
         $config = $this->getConfig();
         $timezone = $config->get('schedule.timezone', $config->get('app.timezone'));
@@ -172,7 +177,7 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
      *
      * @return self
      */
-    protected function publishConfig()
+    protected function publishConfig(): static
     {
         $this->publishes([
             __DIR__ . '/../../configs/commands.php' => config_path('commands.php'),

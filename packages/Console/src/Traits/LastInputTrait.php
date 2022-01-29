@@ -19,7 +19,7 @@ trait LastInputTrait
      *
      * @var InputInterface|null
      */
-    protected ?InputInterface $lastInput = null;
+    protected InputInterface|null $lastInput = null;
 
     /**
      * Set last input
@@ -28,7 +28,7 @@ trait LastInputTrait
      *
      * @return self
      */
-    public function setLastInput(?InputInterface $input)
+    public function setLastInput(InputInterface|null $input): static
     {
         $this->lastInput = $input;
 
@@ -44,7 +44,7 @@ trait LastInputTrait
      *
      * @return InputInterface|null last input or null if none last input has been set
      */
-    public function getLastInput(): ?InputInterface
+    public function getLastInput(): InputInterface|null
     {
         if (!$this->hasLastInput()) {
             $this->setLastInput($this->getDefaultLastInput());
@@ -67,7 +67,7 @@ trait LastInputTrait
      *
      * @return InputInterface|null A default last input value or Null if no default value is available
      */
-    public function getDefaultLastInput(): ?InputInterface
+    public function getDefaultLastInput(): InputInterface|null
     {
         return null;
     }

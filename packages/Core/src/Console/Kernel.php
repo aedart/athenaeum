@@ -174,7 +174,7 @@ class Kernel implements
     /**
      * @inheritDoc
      */
-    public function setArtisan($artisan)
+    public function setArtisan($artisan): static
     {
         $this->artisan = $artisan;
 
@@ -227,7 +227,7 @@ class Kernel implements
      *
      * @throws Throwable In case exceptions must be thrown
      */
-    protected function attempt(callable $callback, OutputInterface $output = null)
+    protected function attempt(callable $callback, OutputInterface $output = null): mixed
     {
         $output = $output ?? $this->resolveDefaultOutput();
 
@@ -251,6 +251,8 @@ class Kernel implements
     }
 
     /**
+     * Handle given exception via registered exception handler
+     *
      * @param Throwable $e
      * @param OutputInterface $output
      *
@@ -306,7 +308,7 @@ class Kernel implements
      *
      * @throws Throwable
      */
-    protected function runCore()
+    protected function runCore(): static
     {
         $this->bootstrap();
 
@@ -318,7 +320,7 @@ class Kernel implements
      *
      * @return Artisan
      */
-    protected function makeArtisan()
+    protected function makeArtisan(): Artisan
     {
         $console = new Artisan(
             $this->getCoreApplication(),

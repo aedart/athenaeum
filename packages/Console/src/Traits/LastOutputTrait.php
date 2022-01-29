@@ -19,7 +19,7 @@ trait LastOutputTrait
      *
      * @var OutputInterface|null
      */
-    protected ?OutputInterface $lastOutput = null;
+    protected OutputInterface|null $lastOutput = null;
 
     /**
      * Set last output
@@ -28,7 +28,7 @@ trait LastOutputTrait
      *
      * @return self
      */
-    public function setLastOutput(?OutputInterface $output)
+    public function setLastOutput(OutputInterface|null $output): static
     {
         $this->lastOutput = $output;
 
@@ -44,7 +44,7 @@ trait LastOutputTrait
      *
      * @return OutputInterface|null last output or null if none last output has been set
      */
-    public function getLastOutput(): ?OutputInterface
+    public function getLastOutput(): OutputInterface|null
     {
         if (!$this->hasLastOutput()) {
             $this->setLastOutput($this->getDefaultLastOutput());
@@ -67,7 +67,7 @@ trait LastOutputTrait
      *
      * @return OutputInterface|null A default last output value or Null if no default value is available
      */
-    public function getDefaultLastOutput(): ?OutputInterface
+    public function getDefaultLastOutput(): OutputInterface|null
     {
         return null;
     }

@@ -19,7 +19,7 @@ interface LastOutputAware
      *
      * @return self
      */
-    public function setLastOutput(?OutputInterface $output);
+    public function setLastOutput(OutputInterface|null $output): static;
 
     /**
      * Get last output
@@ -30,7 +30,7 @@ interface LastOutputAware
      *
      * @return OutputInterface|null last output or null if none last output has been set
      */
-    public function getLastOutput(): ?OutputInterface;
+    public function getLastOutput(): OutputInterface|null;
 
     /**
      * Check if last output has been set
@@ -44,5 +44,5 @@ interface LastOutputAware
      *
      * @return OutputInterface|null A default last output value or Null if no default value is available
      */
-    public function getDefaultLastOutput(): ?OutputInterface;
+    public function getDefaultLastOutput(): OutputInterface|null;
 }
