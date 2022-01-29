@@ -26,7 +26,7 @@ class RecordAuditTrailEntry implements ShouldQueue
      *
      * @var int
      */
-    public $tries;
+    public int $tries;
 
     /**
      * RecordAuditTrailEntry constructor.
@@ -88,12 +88,16 @@ class RecordAuditTrailEntry implements ShouldQueue
     /**
      * Determine if a user exists with the given id
      *
-     * @param string|int $id
+     * @param string|int|null $id
      *
      * @return bool
      */
-    protected function userExists($id): bool
+    protected function userExists(string|int|null $id): bool
     {
+        if (!isset($id)) {
+            return false;
+        }
+
         $model = $this->auditTrailUserModelInstance();
 
         return $model
@@ -107,7 +111,7 @@ class RecordAuditTrailEntry implements ShouldQueue
      *
      * @return self
      */
-    protected function configureQueueSettings()
+    protected function configureQueueSettings(): static
     {
         $config = $this->getConfig()->get('audit-trail.queue', []);
 

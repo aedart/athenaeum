@@ -34,14 +34,14 @@ class ModelHasChanged
      *
      * @var string|int
      */
-    public $id;
+    public string|int $id;
 
     /**
      * Unique user identifier that caused change
      *
      * @var string|int|null
      */
-    public $user;
+    public string|int|null $user;
 
     /**
      * Date and time of when the event happened
@@ -50,7 +50,7 @@ class ModelHasChanged
      *
      * @var DateTimeInterface|Carbon|string
      */
-    public $performedAt;
+    public DateTimeInterface|Carbon|string $performedAt;
 
     /**
      * The event type
@@ -64,21 +64,21 @@ class ModelHasChanged
      *
      * @var array|null
      */
-    public ?array $original = null;
+    public array|null $original = null;
 
     /**
      * Changed data (attributes) after change occurred
      *
      * @var array|null
      */
-    public ?array $changed = null;
+    public array|null $changed = null;
 
     /**
      * Eventual user provided message associated with the event
      *
      * @var string|null
      */
-    public ?string $message = null;
+    public string|null $message = null;
 
     /**
      * ModelHasChanged constructor.
@@ -99,12 +99,12 @@ class ModelHasChanged
      */
     public function __construct(
         Model $model,
-        $user,
+        Model|Authenticatable|null $user,
         string $type = Types::UPDATED,
-        ?array $original = null,
-        ?array $changed = null,
-        ?string $message = null,
-        $performedAt = null
+        array|null $original = null,
+        array|null $changed = null,
+        string|null $message = null,
+        DateTimeInterface|Carbon|string|null $performedAt = null
     ) {
         $this->model = get_class($model);
         $this->id = $model->getKey();
@@ -141,7 +141,7 @@ class ModelHasChanged
      *
      * @return self
      */
-    public function withOriginalData(?array $data = null): self
+    public function withOriginalData(array|null $data = null): static
     {
         $this->original = $data;
 
@@ -155,7 +155,7 @@ class ModelHasChanged
      *
      * @return self
      */
-    public function withChangedData(?array $data = null): self
+    public function withChangedData(array|null $data = null): static
     {
         $this->changed = $data;
 

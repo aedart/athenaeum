@@ -2,6 +2,7 @@
 
 namespace Aedart\Audit\Models\Concerns;
 
+use Aedart\Audit\Models\AuditTrail;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -29,9 +30,9 @@ trait AuditTrailConfiguration
     /**
      * Returns Audit Trail model instance
      *
-     * @return \Aedart\Audit\Models\AuditTrail
+     * @return AuditTrail|Model
      */
-    public function auditTrailModelInstance()
+    public function auditTrailModelInstance(): Model|AuditTrail
     {
         return $this->auditTrailModel()::make();
     }
@@ -54,7 +55,7 @@ trait AuditTrailConfiguration
      *
      * @return Model|Authenticatable
      */
-    public function auditTrailUserModelInstance()
+    public function auditTrailUserModelInstance(): Model|Authenticatable
     {
         // NOTE: We cannot rely on the "make()" method being available
         // for the user model. So we create a new instance the old
