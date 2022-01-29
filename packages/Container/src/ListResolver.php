@@ -35,7 +35,7 @@ class ListResolver implements
      *
      * @param  Container|null  $container  [optional]
      */
-    public function __construct(?Container $container = null)
+    public function __construct(Container|null $container = null)
     {
         $this->setContainer($container);
     }
@@ -57,7 +57,7 @@ class ListResolver implements
     /**
      * @inheritDoc
      */
-    public function with(callable $callback): Resolver
+    public function with(callable $callback): static
     {
         $this->callback = $callback;
 
@@ -79,7 +79,7 @@ class ListResolver implements
      *
      * @throws BindingResolutionException
      */
-    protected function resolve($key, $value)
+    protected function resolve(string|int $key, mixed $value): mixed
     {
         $target = $value;
         $arguments = null;
@@ -120,7 +120,7 @@ class ListResolver implements
      *
      * @return mixed
      */
-    protected function defaultCallback($instance)
+    protected function defaultCallback(mixed $instance): mixed
     {
         return $instance;
     }

@@ -791,7 +791,7 @@ class Application extends IoC implements
     /**
      * @inheritdoc
      */
-    public function registerAsApplication()
+    public function registerAsApplication(): static
     {
         parent::registerAsApplication();
 
