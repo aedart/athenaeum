@@ -5,6 +5,7 @@ namespace Aedart\Circuits\Stores;
 use Aedart\Circuits\Exceptions\StateCannotBeLocked;
 use Aedart\Circuits\Exceptions\StoreException;
 use Aedart\Contracts\Circuits\CircuitBreaker;
+use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\States\Lockable;
@@ -15,6 +16,7 @@ use Aedart\Support\Helpers\Cache\CacheFactoryTrait;
 use Aedart\Support\Helpers\Cache\CacheTrait;
 use Illuminate\Contracts\Cache\LockProvider;
 use Illuminate\Contracts\Cache\Repository;
+use Psr\SimpleCache\InvalidArgumentException;
 
 /**
  * Cache Store
@@ -71,7 +73,7 @@ class CacheStore extends BaseStore implements
      *
      * @var State|null
      */
-    protected ?State $lockedState = null;
+    protected State|null $lockedState = null;
 
     /**
      * CacheStore constructor.
@@ -127,8 +129,10 @@ class CacheStore extends BaseStore implements
 
     /**
      * @inheritDoc
+     *
+     * @throws UnknownStateException
      */
-    public function lockState(State $state, callable $callback)
+    public function lockState(State|Lockable $state, callable $callback): mixed
     {
         if (!($state instanceof Lockable)) {
             throw new StateCannotBeLocked(sprintf('%s state cannot be locked', $state->name()));
@@ -142,7 +146,7 @@ class CacheStore extends BaseStore implements
             $this->service
         );
 
-        // Attempt acquire lock. If successfully, then the callback is invoked and
+        // Attempt to acquire lock. If successfully, then the callback is invoked and
         // released. If not, then "false" is returned.
         return $lock->get(function () use ($state, $callback) {
             // Set the locked state, so that "getState" is able to
@@ -181,8 +185,10 @@ class CacheStore extends BaseStore implements
 
     /**
      * @inheritDoc
+     *
+     * @throws InvalidArgumentException
      */
-    public function getFailure(): ?Failure
+    public function getFailure(): Failure|null
     {
         $failure = $this->getCache()->get($this->lastFailureKey);
 
@@ -209,6 +215,8 @@ class CacheStore extends BaseStore implements
 
     /**
      * @inheritDoc
+     *
+     * @throws InvalidArgumentException
      */
     public function totalFailures(): int
     {
@@ -218,7 +226,7 @@ class CacheStore extends BaseStore implements
     /**
      * @inheritDoc
      */
-    public function startGracePeriod(int $duration = 10): Store
+    public function startGracePeriod(int $duration = 10): static
     {
         // Add a grace period ONLY if one does not already exist.
         $this->getCache()->add(
@@ -232,6 +240,8 @@ class CacheStore extends BaseStore implements
 
     /**
      * @inheritDoc
+     *
+     * @throws InvalidArgumentException
      */
     public function hasGracePeriodPast(): bool
     {
@@ -240,8 +250,10 @@ class CacheStore extends BaseStore implements
 
     /**
      * @inheritDoc
+     *
+     * @throws InvalidArgumentException
      */
-    public function reset(): Store
+    public function reset(): static
     {
         $this->getCache()->deleteMultiple([
             $this->gracePeriodKey,
@@ -287,7 +299,7 @@ class CacheStore extends BaseStore implements
      *
      * @return self
      */
-    protected function prepareKeys()
+    protected function prepareKeys(): static
     {
         $this->stateKey = $this->key('state');
         $this->lockedStateKey = $this->key('locked');

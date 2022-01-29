@@ -73,7 +73,7 @@ class CircuitBreaker implements
      *
      * @var int|null Duration in seconds. Null if disabled
      */
-    protected ?int $stateTtl = 60;
+    protected int|null $stateTtl = 60;
 
     /**
      * Grace period duration in seconds
@@ -121,8 +121,10 @@ class CircuitBreaker implements
 
     /**
      * @inheritDoc
+     *
+     * @throws UnknownStateException
      */
-    public function reportSuccess(): CircuitBreakerInterface
+    public function reportSuccess(): static
     {
         // Reset last known failures
         $this->store()->reset();
@@ -137,8 +139,10 @@ class CircuitBreaker implements
 
     /**
      * @inheritDoc
+     *
+     * @throws UnknownStateException
      */
-    public function reportFailure(Failure $failure): CircuitBreakerInterface
+    public function reportFailure(Failure $failure): static
     {
         // Register failure (increases failure count)
         $this->store()->registerFailure($failure);
@@ -148,14 +152,16 @@ class CircuitBreaker implements
             return $this;
         }
 
-        // Otherwise we have to change open state
+        // Otherwise, we have to change open state
         return $this->trip();
     }
 
     /**
      * @inheritDoc
+     *
+     * @throws UnknownStateException
      */
-    public function reportFailureViaException(Throwable $exception): CircuitBreakerInterface
+    public function reportFailureViaException(Throwable $exception): static
     {
         $context = [];
         if ($exception instanceof HasContext) {
@@ -174,14 +180,17 @@ class CircuitBreaker implements
 
     /**
      * @inheritDoc
+     *
+     * @throws UnknownStateException
+     * @throws StateCannotBeLockedException
      */
-    public function attempt(callable $callback, ?callable $otherwise = null)
+    public function attempt(callable $callback, callable|null $otherwise = null): mixed
     {
         $otherwise = $otherwise ?? $this->getOtherwise();
         $state = $this->state();
         $available = $this->isStateAvailable($state);
 
-        // When circuit is tripped, it becomes unavailable and we must attempt
+        // When circuit is tripped, it becomes unavailable. Then we must attempt
         // to change the state to half-open, if a grace period has past.
         if (!$available && $this->hasGracePeriodPast($state)) {
             return $this->tryHalfOpen($state, $callback, $otherwise);
@@ -200,7 +209,7 @@ class CircuitBreaker implements
     /**
      * @inheritDoc
      */
-    public function otherwise(?callable $otherwise = null): CircuitBreakerInterface
+    public function otherwise(callable|null $otherwise = null): static
     {
         $this->otherwise = $otherwise;
 
@@ -218,7 +227,7 @@ class CircuitBreaker implements
     /**
      * @inheritDoc
      */
-    public function retry(int $times, int $delay = 0): CircuitBreakerInterface
+    public function retry(int $times, int $delay = 0): static
     {
         $this->retryTimes = $times;
         $this->retryDelay = $delay;
@@ -245,7 +254,7 @@ class CircuitBreaker implements
     /**
      * @inheritDoc
      */
-    public function lastFailure(): ?Failure
+    public function lastFailure(): Failure|null
     {
         return $this->store()->getFailure();
     }
@@ -269,7 +278,7 @@ class CircuitBreaker implements
     /**
      * @inheritDoc
      */
-    public function withFailureThreshold(int $amount): CircuitBreakerInterface
+    public function withFailureThreshold(int $amount): static
     {
         $this->threshold = $amount;
 
@@ -289,7 +298,7 @@ class CircuitBreaker implements
      *
      * @throws UnknownStateException
      */
-    public function trip(): CircuitBreakerInterface
+    public function trip(): static
     {
         // Change state to open
         $this->changeState(
@@ -303,7 +312,7 @@ class CircuitBreaker implements
     /**
      * @inheritDoc
      */
-    public function withGracePeriod(int $seconds): CircuitBreakerInterface
+    public function withGracePeriod(int $seconds): static
     {
         $this->gracePeriod = $seconds;
 
@@ -371,7 +380,7 @@ class CircuitBreaker implements
      ****************************************************************/
 
     /**
-     * Prepare circuit breaker, set it's properties according
+     * Prepare circuit breaker, set its properties according
      * to received options
      */
     protected function prepareFromOptions()
@@ -401,12 +410,14 @@ class CircuitBreaker implements
      * Reports success, if `$callback` succeeds, otherwise method
      * will report failure.
      *
-     * @param callable $callback
-     * @param callable $otherwise
+     * @param  callable  $callback
+     * @param  callable  $otherwise
      *
      * @return mixed
+     *
+     * @throws UnknownStateException
      */
-    protected function performAttempt(callable $callback, callable $otherwise)
+    protected function performAttempt(callable $callback, callable $otherwise): mixed
     {
         $delay = $this->retryDelay() * 1000;
         $times = $this->times();
@@ -452,7 +463,7 @@ class CircuitBreaker implements
      * @throws UnknownStateException
      * @throws StateCannotBeLockedException
      */
-    protected function tryHalfOpen(State $state, callable $callback, callable $otherwise)
+    protected function tryHalfOpen(State $state, callable $callback, callable $otherwise): mixed
     {
         $halfOpen = $this->makeState(static::HALF_OPEN, $state);
         $wasLocked = false;
@@ -480,7 +491,7 @@ class CircuitBreaker implements
      *
      * @return self
      */
-    protected function setName(string $name)
+    protected function setName(string $name): static
     {
         $this->name = $name;
 
@@ -508,7 +519,7 @@ class CircuitBreaker implements
      *
      * @return mixed Resulting output of callback
      */
-    protected function invokeCallback(callable $callback)
+    protected function invokeCallback(callable $callback): mixed
     {
         return $callback($this);
     }
@@ -536,7 +547,7 @@ class CircuitBreaker implements
      *
      * @return self
      */
-    protected function startGracePeriod(): self
+    protected function startGracePeriod(): static
     {
         $this->getStore()->startGracePeriod(
             $this->gracePeriod()
@@ -571,7 +582,7 @@ class CircuitBreaker implements
      *
      * @throws UnknownStateException
      */
-    protected function makeState(int $id, ?State $previous = null): State
+    protected function makeState(int $id, State|null $previous = null): State
     {
         $previous = $previous ?? $this->state();
 
@@ -588,7 +599,7 @@ class CircuitBreaker implements
      *
      * @return DateTimeInterface|null
      */
-    protected function resolveStateExpiresAt(): ?DateTimeInterface
+    protected function resolveStateExpiresAt(): DateTimeInterface|null
     {
         if (!isset($this->stateTtl)) {
             return null;

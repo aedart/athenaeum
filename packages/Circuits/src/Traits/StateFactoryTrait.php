@@ -20,7 +20,7 @@ trait StateFactoryTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $stateFactory = null;
+    protected Factory|null $stateFactory = null;
 
     /**
      * Set state factory
@@ -29,7 +29,7 @@ trait StateFactoryTrait
      *
      * @return self
      */
-    public function setStateFactory(?Factory $factory)
+    public function setStateFactory(Factory|null $factory): static
     {
         $this->stateFactory = $factory;
 
@@ -45,7 +45,7 @@ trait StateFactoryTrait
      *
      * @return Factory|null state factory or null if none state factory has been set
      */
-    public function getStateFactory(): ?Factory
+    public function getStateFactory(): Factory|null
     {
         if (!$this->hasStateFactory()) {
             $this->setStateFactory($this->getDefaultStateFactory());
@@ -68,7 +68,7 @@ trait StateFactoryTrait
      *
      * @return Factory|null A default state factory value or Null if no default value is available
      */
-    public function getDefaultStateFactory(): ?Factory
+    public function getDefaultStateFactory(): Factory|null
     {
         return IoCFacade::tryMake(Factory::class);
     }

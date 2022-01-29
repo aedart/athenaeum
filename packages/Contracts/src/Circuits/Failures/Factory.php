@@ -18,15 +18,15 @@ interface Factory
      *
      * @param string|null $reason [optional]
      * @param array $context [optional]
-     * @param string|DateTimeInterface|null $reportedAt [optional]
+     * @param  DateTimeInterface|string|null  $reportedAt [optional]
      * @param int $totalFailures [optional]
      *
      * @return Failure
      */
     public function make(
-        ?string $reason = null,
+        string|null $reason = null,
         array $context = [],
-        $reportedAt = null,
+        DateTimeInterface|string|null $reportedAt = null,
         int $totalFailures = 0
     ): Failure;
 

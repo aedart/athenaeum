@@ -19,7 +19,7 @@ interface FailureFactoryAware
      *
      * @return self
      */
-    public function setFailureFactory(?Factory $factory);
+    public function setFailureFactory(Factory|null $factory): static;
 
     /**
      * Get failure factory
@@ -30,7 +30,7 @@ interface FailureFactoryAware
      *
      * @return Factory|null failure factory or null if none failure factory has been set
      */
-    public function getFailureFactory(): ?Factory;
+    public function getFailureFactory(): Factory|null;
 
     /**
      * Check if failure factory has been set
@@ -44,5 +44,5 @@ interface FailureFactoryAware
      *
      * @return Factory|null A default failure factory value or Null if no default value is available
      */
-    public function getDefaultFailureFactory(): ?Factory;
+    public function getDefaultFailureFactory(): Factory|null;
 }

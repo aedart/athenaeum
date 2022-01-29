@@ -59,7 +59,7 @@ trait Identifiers
      *
      * @throws UnknownStateException
      */
-    protected function assertStateIdentifier(?int $id = null)
+    protected function assertStateIdentifier(int|null $id = null)
     {
         $id = $id ?? CircuitBreaker::CLOSED;
 

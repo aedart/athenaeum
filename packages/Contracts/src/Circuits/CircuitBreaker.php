@@ -75,7 +75,7 @@ interface CircuitBreaker
      *
      * @return self
      */
-    public function reportSuccess(): self;
+    public function reportSuccess(): static;
 
     /**
      * Report failure and increments internal failure count.
@@ -90,7 +90,7 @@ interface CircuitBreaker
      *
      * @return self
      */
-    public function reportFailure(Failure $failure): self;
+    public function reportFailure(Failure $failure): static;
 
     /**
      * Report a failure via an exception
@@ -103,7 +103,7 @@ interface CircuitBreaker
      *
      * @return self
      */
-    public function reportFailureViaException(Throwable $exception): self;
+    public function reportFailureViaException(Throwable $exception): static;
 
     /**
      * Attempt to execute callback, e.g. request a resource or invoke action
@@ -127,7 +127,7 @@ interface CircuitBreaker
      *
      * @throws ServiceUnavailableException If state is {@see OPEN} and no `$otherwise` callback provided
      */
-    public function attempt(callable $callback, ?callable $otherwise = null);
+    public function attempt(callable $callback, callable|null $otherwise = null): mixed;
 
     /**
      * Set the default callback to be invoked, when state is {@see OPEN} or
@@ -140,7 +140,7 @@ interface CircuitBreaker
      *
      * @return self
      */
-    public function otherwise(?callable $otherwise = null): self;
+    public function otherwise(callable|null $otherwise = null): self;
 
     /**
      * Returns the default callback to be invoked, when state is {@see OPEN} or
@@ -162,7 +162,7 @@ interface CircuitBreaker
      *
      * @return self
      */
-    public function retry(int $times, int $delay = 0): self;
+    public function retry(int $times, int $delay = 0): static;
 
     /**
      * Returns the maximum amount of times a callback should
@@ -190,7 +190,7 @@ interface CircuitBreaker
      *
      * @return Failure|null
      */
-    public function lastFailure(): ?Failure;
+    public function lastFailure(): Failure|null;
 
     /**
      * Returns the current amount of failures

@@ -16,7 +16,7 @@ trait Options
      *
      * @var array|null
      */
-    protected ?array $options = null;
+    protected array|null $options = null;
 
     /**
      * Set an option's value
@@ -26,7 +26,7 @@ trait Options
      *
      * @return self
      */
-    public function withOption(string $key, $value)
+    public function withOption(string $key, mixed $value): static
     {
         return $this->withOptions([ $key => $value ]);
     }
@@ -38,7 +38,7 @@ trait Options
      *
      * @return self
      */
-    public function withOptions(array $options = [])
+    public function withOptions(array $options = []): static
     {
         return $this->setOptions(
             array_merge($this->getOptions(), $options)
@@ -52,7 +52,7 @@ trait Options
      *
      * @return self
      */
-    public function setOptions(array $options = [])
+    public function setOptions(array $options = []): static
     {
         $this->options = $options;
 
@@ -92,7 +92,7 @@ trait Options
      *
      * @return mixed
      */
-    public function getOption(string $key, $default = null)
+    public function getOption(string $key, mixed $default = null): mixed
     {
         return $this->options[$key] ?? $default;
     }
@@ -110,9 +110,9 @@ trait Options
     /**
      * Get a default options
      *
-     * @return array
+     * @return array|null
      */
-    public function getDefaultOptions(): ?array
+    public function getDefaultOptions(): array|null
     {
         return [];
     }

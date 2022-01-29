@@ -21,7 +21,7 @@ interface DispatcherAware
      *
      * @return self
      */
-    public function setDispatcher(?Dispatcher $dispatcher);
+    public function setDispatcher(Dispatcher|null $dispatcher): static;
 
     /**
      * Get dispatcher
@@ -32,7 +32,7 @@ interface DispatcherAware
      *
      * @return Dispatcher|null dispatcher or null if none dispatcher has been set
      */
-    public function getDispatcher(): ?Dispatcher;
+    public function getDispatcher(): Dispatcher|null;
 
     /**
      * Check if dispatcher has been set
@@ -46,5 +46,5 @@ interface DispatcherAware
      *
      * @return Dispatcher|null A default dispatcher value or Null if no default value is available
      */
-    public function getDefaultDispatcher(): ?Dispatcher;
+    public function getDefaultDispatcher(): Dispatcher|null;
 }

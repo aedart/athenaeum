@@ -14,7 +14,7 @@ interface HasContext
      * Arbitrary data associated with exception
      * or failure
      *
-     * @return mixed[]
+     * @return array
      */
     public function context(): array;
 }
