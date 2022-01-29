@@ -3,6 +3,8 @@
 namespace Aedart\Tests\Helpers\Dummies\Database\Query\Filters;
 
 use Aedart\Database\Query\Filter;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 /**
  * Products Category Filter
@@ -34,7 +36,7 @@ class CategoryNameFilter extends Filter
     /**
      * @inheritDoc
      */
-    public function apply($query)
+    public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         return $query->where('name', $this->name);
     }

@@ -3,6 +3,8 @@
 namespace Aedart\Filters\Query\Filters;
 
 use Aedart\Database\Query\Filter;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 /**
  * Sort Query Filter
@@ -32,7 +34,7 @@ class SortFilter extends Filter
     /**
      * @inheritDoc
      */
-    public function apply($query)
+    public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         foreach ($this->columns as $column => $direction) {
             $query = $query->orderBy($column, $direction);

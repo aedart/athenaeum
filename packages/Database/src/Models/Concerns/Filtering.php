@@ -3,8 +3,8 @@
 namespace Aedart\Database\Models\Concerns;
 
 use Aedart\Contracts\Database\Query\Criteria;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 /**
  * Concerns Filtering
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  *
  * @see Criteria
  *
- * @method static \Illuminate\Database\Eloquent\Builder applyFilters(Criteria|Criteria[] $filters) Apply one or more filters (criteria). Method will not apply filters that are not applicable.
+ * @method static Builder|EloquentBuilder applyFilters(Criteria|Criteria[] $filters) Apply one or more filters (criteria). Method will not apply filters that are not applicable.
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Database\Models\Concerns
@@ -27,12 +27,12 @@ trait Filtering
      *
      * @see Criteria::isApplicable
      *
-     * @param Builder|Relation $query
+     * @param Builder|EloquentBuilder $query
      * @param Criteria|Criteria[] $filters
      *
-     * @return Builder|Relation
+     * @return Builder|EloquentBuilder
      */
-    public function scopeApplyFilters($query, $filters)
+    public function scopeApplyFilters(Builder|EloquentBuilder $query, Criteria|array $filters = []): Builder|EloquentBuilder
     {
         if (!is_array($filters)) {
             $filters = [ $filters ];

@@ -64,7 +64,7 @@ abstract class BaseProcessor implements Processor
     /**
      * @inheritDoc
      */
-    public static function make(array $options = [])
+    public static function make(array $options = []): static
     {
         return new static($options);
     }
@@ -72,7 +72,7 @@ abstract class BaseProcessor implements Processor
     /**
      * @inheritDoc
      */
-    public function fromRequest($request)
+    public function fromRequest($request): static
     {
         $this->request = $request;
 
@@ -94,7 +94,7 @@ abstract class BaseProcessor implements Processor
     /**
      * @inheritDoc
      */
-    public function usingParameter(string $parameter)
+    public function usingParameter(string $parameter): static
     {
         $this->parameter = $parameter;
 
@@ -116,7 +116,7 @@ abstract class BaseProcessor implements Processor
     /**
      * @inheritDoc
      */
-    public function value()
+    public function value(): array|string|int|float|null
     {
         $request = $this->request();
         $param = $this->parameter();
@@ -131,7 +131,7 @@ abstract class BaseProcessor implements Processor
     /**
      * @inheritDoc
      */
-    public function force(bool $force = true)
+    public function force(bool $force = true): static
     {
         $this->force = $force;
 

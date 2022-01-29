@@ -2,6 +2,9 @@
 
 namespace Aedart\Filters\Query\Filters\Fields;
 
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
+
 /**
  * String Filter
  *
@@ -13,44 +16,23 @@ class StringFilter extends BaseFieldFilter
     /**
      * @inheritDoc
      */
-    public function apply($query)
+    public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         $operator = $this->operator();
 
-        switch ($operator) {
-            case 'contains':
-                return $this->buildWhereContainsConstraint($query);
-
-            case 'not_contains':
-                return $this->buildWhereNotContainsConstraint($query);
-
-            case 'starts_with':
-                return $this->buildWhereStartsWithConstraint($query);
-
-            case 'not_starts_with':
-                return $this->buildWhereNotStartsWithConstraint($query);
-
-            case 'ends_with':
-                return $this->buildWhereEndsWithConstraint($query);
-
-            case 'not_ends_with':
-                return $this->buildWhereNotEndsWithConstraint($query);
-
-            case 'in':
-                return $this->buildWhereInConstraint($query);
-
-            case 'not_in':
-                return $this->buildWhereNotInConstraint($query);
-
-            case 'is_null':
-                return $this->buildWhereNullConstraint($query);
-
-            case 'not_null':
-                return $this->buildWhereNotNullConstraint($query);
-
-            default:
-                return $this->buildDefaultConstraint($query);
-        }
+        return match ($operator) {
+            'contains' => $this->buildWhereContainsConstraint($query),
+            'not_contains' => $this->buildWhereNotContainsConstraint($query),
+            'starts_with' => $this->buildWhereStartsWithConstraint($query),
+            'not_starts_with' => $this->buildWhereNotStartsWithConstraint($query),
+            'ends_with' => $this->buildWhereEndsWithConstraint($query),
+            'not_ends_with' => $this->buildWhereNotEndsWithConstraint($query),
+            'in' => $this->buildWhereInConstraint($query),
+            'not_in' => $this->buildWhereNotInConstraint($query),
+            'is_null' => $this->buildWhereNullConstraint($query),
+            'not_null' => $this->buildWhereNotNullConstraint($query),
+            default => $this->buildDefaultConstraint($query)
+        };
     }
 
     /**

@@ -15,15 +15,9 @@ use Illuminate\Support\ServiceProvider;
  */
 class FiltersServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-     * @inheritdoc
-     */
-    public function register()
-    {
-        $this->app->bind(BuiltFiltersMap::class, function () {
-            return new BuiltFilters();
-        });
-    }
+    public array $bindings = [
+        BuiltFiltersMap::class => BuiltFilters::class,
+    ];
 
     /**
      * {@inheritdoc}

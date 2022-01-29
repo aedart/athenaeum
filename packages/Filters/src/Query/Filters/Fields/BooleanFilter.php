@@ -2,6 +2,8 @@
 
 namespace Aedart\Filters\Query\Filters\Fields;
 
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 use InvalidArgumentException;
 
 /**
@@ -15,7 +17,7 @@ class BooleanFilter extends BaseFieldFilter
     /**
      * @inheritDoc
      */
-    public function apply($query)
+    public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         return $this->buildDefaultConstraint($query);
     }
@@ -34,7 +36,7 @@ class BooleanFilter extends BaseFieldFilter
     /**
      * @inheritDoc
      */
-    public function setValue($value)
+    public function setValue(mixed $value): static
     {
         $this->assertValue($value);
 

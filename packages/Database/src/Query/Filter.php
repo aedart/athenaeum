@@ -3,6 +3,8 @@
 namespace Aedart\Database\Query;
 
 use Aedart\Contracts\Database\Query\Criteria;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 /**
  * Query Filter
@@ -19,7 +21,7 @@ abstract class Filter implements Criteria
     /**
      * @inheritdoc
      */
-    public function isApplicable($query = null, $filters = []): bool
+    public function isApplicable(Builder|EloquentBuilder|null $query = null, array $filters = []): bool
     {
         // By default, we assume that criteria can be applied. However,
         // you should overwrite this method, if a different determination logic

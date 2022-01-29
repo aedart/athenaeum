@@ -3,6 +3,8 @@
 namespace Aedart\Filters\Query\Filters\Fields;
 
 use Aedart\Utils\Str;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 use InvalidArgumentException;
 
 /**
@@ -16,26 +18,17 @@ class NumericFilter extends BaseFieldFilter
     /**
      * @inheritDoc
      */
-    public function apply($query)
+    public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         $operator = $this->operator();
 
-        switch ($operator) {
-            case 'in':
-                return $this->buildWhereInConstraint($query);
-
-            case 'not_in':
-                return $this->buildWhereNotInConstraint($query);
-
-            case 'is_null':
-                return $this->buildWhereNullConstraint($query);
-
-            case 'not_null':
-                return $this->buildWhereNotNullConstraint($query);
-
-            default:
-                return $this->buildDefaultConstraint($query);
-        }
+        return match ($operator) {
+            'in' => $this->buildWhereInConstraint($query),
+            'not_in' => $this->buildWhereNotInConstraint($query),
+            'is_null' => $this->buildWhereNullConstraint($query),
+            'not_null' => $this->buildWhereNotNullConstraint($query),
+            default => $this->buildDefaultConstraint($query),
+        };
     }
 
     /**
@@ -67,7 +60,7 @@ class NumericFilter extends BaseFieldFilter
     /**
      * @inheritDoc
      */
-    protected function assertValue($value)
+    protected function assertValue(mixed $value)
     {
         // Allow empty values, when "is null / not null" operators are
         // chosen.
@@ -97,7 +90,7 @@ class NumericFilter extends BaseFieldFilter
      *
      * @throws InvalidArgumentException
      */
-    protected function assertNumericValue($value)
+    protected function assertNumericValue(mixed $value)
     {
         if (!is_numeric($value)) {
             $translator = $this->getTranslator();

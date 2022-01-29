@@ -28,17 +28,17 @@ interface BuiltFiltersMap
      *
      * @retrun self
      */
-    public function add(string $key, Criteria $filter);
+    public function add(string $key, Criteria $filter): static;
 
     /**
      * Get built filters that match given key
      *
      * @param string $key
-     * @param mixed $default [optional]
+     * @param Criteria[] $default [optional]
      *
-     * @return Criteria[]|mixed
+     * @return Criteria[]
      */
-    public function get(string $key, $default = []);
+    public function get(string $key, array $default = []): array;
 
     /**
      * Determine if filters exist for given key
@@ -56,7 +56,7 @@ interface BuiltFiltersMap
      *
      * @return self
      */
-    public function forget(string $key);
+    public function forget(string $key): static;
 
     /**
      * Get all built filters
@@ -73,7 +73,7 @@ interface BuiltFiltersMap
      *
      * @return self
      */
-    public function setMeta(string $key, $meta);
+    public function setMeta(string $key, mixed $meta): static;
 
     /**
      * Get arbitrary meta data for given key
@@ -83,7 +83,7 @@ interface BuiltFiltersMap
      *
      * @return mixed
      */
-    public function getMeta(string $key, $default = null);
+    public function getMeta(string $key, mixed $default = null): mixed;
 
     /**
      * Determine if arbitrary meta data exists for given key
@@ -101,7 +101,7 @@ interface BuiltFiltersMap
      *
      * @return self
      */
-    public function forgetMeta(string $key);
+    public function forgetMeta(string $key): static;
 
     /**
      * Get all arbitrary meta data
@@ -115,5 +115,5 @@ interface BuiltFiltersMap
      *
      * @return self
      */
-    public function forgetAll();
+    public function forgetAll(): static;
 }

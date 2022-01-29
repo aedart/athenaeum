@@ -21,7 +21,7 @@ interface Processor
      *
      * @return static
      */
-    public static function make(array $options = []);
+    public static function make(array $options = []): static;
 
     /**
      * Process the assigned request and build query filters, based
@@ -35,7 +35,7 @@ interface Processor
      * @throws InvalidParameterException If http query parameters are invalid
      * @throws Throwable
      */
-    public function process(BuiltFiltersMap $built, callable $next);
+    public function process(BuiltFiltersMap $built, callable $next): mixed;
 
     /**
      * Set the current request from which the http query parameter
@@ -45,7 +45,7 @@ interface Processor
      *
      * @return self
      */
-    public function fromRequest($request);
+    public function fromRequest($request): static;
 
     /**
      * Get the current request
@@ -64,7 +64,7 @@ interface Processor
      *
      * @return self
      */
-    public function usingParameter(string $parameter);
+    public function usingParameter(string $parameter): static;
 
     /**
      * Get the name of the http query parameter
@@ -78,9 +78,9 @@ interface Processor
     /**
      * Returns the http query parameters value
      *
-     * @return array|string|null
+     * @return array|string|int|float|null
      */
-    public function value();
+    public function value(): array|string|int|float|null;
 
     /**
      * Set state of whether processors most be forced
@@ -91,7 +91,7 @@ interface Processor
      *
      * @return self
      */
-    public function force(bool $force = true);
+    public function force(bool $force = true): static;
 
     /**
      * Determine whether processors most be forced

@@ -87,7 +87,7 @@ class BuiltFiltersTest extends UnitTestCase
         $map = $this->makeMap();
 
         $key = 'my-filter';
-        $default = $this->makeCriteria();
+        $default = [$this->makeCriteria()];
 
         $result = $map->get($key, $default);
 

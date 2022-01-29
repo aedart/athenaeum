@@ -33,7 +33,7 @@ trait PropertiesToColumns
      *
      * @return self
      */
-    public function propertiesToColumns(array $map)
+    public function propertiesToColumns(array $map): static
     {
         $this->propertiesToColumnsMap = $map;
 

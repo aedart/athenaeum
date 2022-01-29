@@ -2,6 +2,8 @@
 
 namespace Aedart\Contracts\Database\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
+
 /**
  * Sluggable
  *
@@ -28,7 +30,7 @@ interface Sluggable
      *
      * @return string|null
      */
-    public function getSlugKey(): ?string;
+    public function getSlugKey(): string|null;
 
     /**
      * Find model by given slug
@@ -66,30 +68,30 @@ interface Sluggable
     /**
      * Find multiple models by given slugs
      *
-     * @param mixed $slugs
+     * @param string|string[] $slugs
      * @param string[] $columns [optional]
      *
      * @return static[]|\Illuminate\Database\Eloquent\Collection
      */
-    public static function findManyBySlugs($slugs, array $columns = ['*']);
+    public static function findManyBySlugs(string|array $slugs, array $columns = ['*']);
 
     /**
      * Query scope for finding model via given slug
      *
-     * @param \Illuminate\Database\Eloquent\Builder $scope
+     * @param Builder $scope
      * @param string $slug
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
-    public function scopeWhereSlug($scope, string $slug);
+    public function scopeWhereSlug(Builder $scope, string $slug): Builder;
 
     /**
      * Query scope for finding models that match given slugs
      *
-     * @param \Illuminate\Database\Eloquent\Builder $scope
-     * @param mixed $slugs
+     * @param Builder $scope
+     * @param string|string[] $slugs
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
-    public function scopeWhereSlugIn($scope, $slugs);
+    public function scopeWhereSlugIn(Builder $scope, string|array $slugs): Builder;
 }

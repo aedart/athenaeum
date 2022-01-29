@@ -20,7 +20,7 @@ interface Builder
      *
      * @return static
      */
-    public static function make($request);
+    public static function make($request): static;
 
     /**
      * Returns map of http query parameters and their
