@@ -19,7 +19,7 @@ interface ConfigLoaderAware
      *
      * @return self
      */
-    public function setConfigLoader(?Loader $loader);
+    public function setConfigLoader(Loader|null $loader): static;
 
     /**
      * Get config loader
@@ -32,7 +32,7 @@ interface ConfigLoaderAware
      *
      * @return Loader|null config loader or null if none config loader has been set
      */
-    public function getConfigLoader(): ?Loader;
+    public function getConfigLoader(): Loader|null;
 
     /**
      * Check if config loader has been set
@@ -46,5 +46,5 @@ interface ConfigLoaderAware
      *
      * @return Loader|null A default config loader value or Null if no default value is available
      */
-    public function getDefaultConfigLoader(): ?Loader;
+    public function getDefaultConfigLoader(): Loader|null;
 }

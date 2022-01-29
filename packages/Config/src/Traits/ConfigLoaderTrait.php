@@ -20,7 +20,7 @@ trait ConfigLoaderTrait
      *
      * @var Loader|null
      */
-    protected ?Loader $configLoader = null;
+    protected Loader|null $configLoader = null;
 
     /**
      * Set config loader
@@ -29,7 +29,7 @@ trait ConfigLoaderTrait
      *
      * @return self
      */
-    public function setConfigLoader(?Loader $loader)
+    public function setConfigLoader(Loader|null $loader): static
     {
         $this->configLoader = $loader;
 
@@ -47,7 +47,7 @@ trait ConfigLoaderTrait
      *
      * @return Loader|null config loader or null if none config loader has been set
      */
-    public function getConfigLoader(): ?Loader
+    public function getConfigLoader(): Loader|null
     {
         if (!$this->hasConfigLoader()) {
             $this->setConfigLoader($this->getDefaultConfigLoader());
@@ -70,7 +70,7 @@ trait ConfigLoaderTrait
      *
      * @return Loader|null A default config loader value or Null if no default value is available
      */
-    public function getDefaultConfigLoader(): ?Loader
+    public function getDefaultConfigLoader(): Loader|null
     {
         return ConfigLoader::getFacadeRoot();
     }

@@ -16,19 +16,8 @@ use Illuminate\Support\ServiceProvider;
  */
 class ConfigLoaderServiceProvider extends ServiceProvider
 {
-    /**
-     * Register configuration loader service
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->app->singleton(FileParserFactoryInterface::class, function () {
-            return new FileParserFactory();
-        });
-
-        $this->app->singleton(LoaderInterface::class, function () {
-            return new Loader();
-        });
-    }
+    public array $singletons = [
+        FileParserFactoryInterface::class => FileParserFactory::class,
+        LoaderInterface::class => Loader::class,
+    ];
 }

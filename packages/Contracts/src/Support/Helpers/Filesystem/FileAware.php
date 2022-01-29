@@ -19,7 +19,7 @@ interface FileAware
      *
      * @return self
      */
-    public function setFile(?Filesystem $filesystem);
+    public function setFile(Filesystem|null $filesystem): static;
 
     /**
      * Get file
@@ -32,7 +32,7 @@ interface FileAware
      *
      * @return Filesystem|null file or null if none file has been set
      */
-    public function getFile(): ?Filesystem;
+    public function getFile(): Filesystem|null;
 
     /**
      * Check if file has been set
@@ -46,5 +46,5 @@ interface FileAware
      *
      * @return Filesystem|null A default file value or Null if no default value is available
      */
-    public function getDefaultFile(): ?Filesystem;
+    public function getDefaultFile(): Filesystem|null;
 }

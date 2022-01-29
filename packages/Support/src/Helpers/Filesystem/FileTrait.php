@@ -20,7 +20,7 @@ trait FileTrait
      *
      * @var Filesystem|null
      */
-    protected ?Filesystem $file = null;
+    protected Filesystem|null $file = null;
 
     /**
      * Set file
@@ -29,7 +29,7 @@ trait FileTrait
      *
      * @return self
      */
-    public function setFile(?Filesystem $filesystem)
+    public function setFile(Filesystem|null $filesystem): static
     {
         $this->file = $filesystem;
 
@@ -47,7 +47,7 @@ trait FileTrait
      *
      * @return Filesystem|null file or null if none file has been set
      */
-    public function getFile(): ?Filesystem
+    public function getFile(): Filesystem|null
     {
         if (!$this->hasFile()) {
             $this->setFile($this->getDefaultFile());
@@ -70,7 +70,7 @@ trait FileTrait
      *
      * @return Filesystem|null A default file value or Null if no default value is available
      */
-    public function getDefaultFile(): ?Filesystem
+    public function getDefaultFile(): Filesystem|null
     {
         return File::getFacadeRoot();
     }
