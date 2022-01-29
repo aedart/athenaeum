@@ -28,7 +28,7 @@ class Factory implements
     {
         $handler = $this->obtainCompositeHandler();
 
-        // Determine if composite has been configure before.
+        // Determine if composite has been configured before.
         // This might happen if an exception has been handled
         // and another exception is raised, causing the handling
         // process again.

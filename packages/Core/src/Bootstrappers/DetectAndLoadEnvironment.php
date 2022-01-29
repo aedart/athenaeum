@@ -105,7 +105,7 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
         }
 
         // Otherwise, default attempting reading APP_ENV, which might be
-        // set via the web server. Should this too fail, then default
+        // set via the web server. Should this also fail, then default
         // to whatever the application's default environment file is.
         return Env::get('APP_ENV', $this->app->environmentFile());
     }
@@ -115,7 +115,7 @@ class DetectAndLoadEnvironment implements CanBeBootstrapped
      *
      * @return string|null Filename of environment file or null if unable to determine
      */
-    protected function getEnvFromConsole(): ?string
+    protected function getEnvFromConsole(): string|null
     {
         if (!$this->app->runningInConsole()) {
             return null;

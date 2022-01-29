@@ -19,7 +19,7 @@ interface LogAware
      *
      * @return self
      */
-    public function setLog(?LoggerInterface $logger);
+    public function setLog(LoggerInterface|null $logger): static;
 
     /**
      * Get log
@@ -32,7 +32,7 @@ interface LogAware
      *
      * @return LoggerInterface|null log or null if none log has been set
      */
-    public function getLog(): ?LoggerInterface;
+    public function getLog(): LoggerInterface|null;
 
     /**
      * Check if log has been set
@@ -46,5 +46,5 @@ interface LogAware
      *
      * @return LoggerInterface|null A default log value or Null if no default value is available
      */
-    public function getDefaultLog(): ?LoggerInterface;
+    public function getDefaultLog(): LoggerInterface|null;
 }

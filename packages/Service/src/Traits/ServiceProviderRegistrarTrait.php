@@ -20,7 +20,7 @@ trait ServiceProviderRegistrarTrait
      *
      * @var Registrar|null
      */
-    protected ?Registrar $serviceProviderRegistrar = null;
+    protected Registrar|null $serviceProviderRegistrar = null;
 
     /**
      * Set service provider registrar
@@ -29,7 +29,7 @@ trait ServiceProviderRegistrarTrait
      *
      * @return self
      */
-    public function setServiceProviderRegistrar(?Registrar $registrar)
+    public function setServiceProviderRegistrar(Registrar|null $registrar): static
     {
         $this->serviceProviderRegistrar = $registrar;
 
@@ -45,7 +45,7 @@ trait ServiceProviderRegistrarTrait
      *
      * @return Registrar|null service provider registrar or null if none service provider registrar has been set
      */
-    public function getServiceProviderRegistrar(): ?Registrar
+    public function getServiceProviderRegistrar(): Registrar|null
     {
         if (!$this->hasServiceProviderRegistrar()) {
             $this->setServiceProviderRegistrar($this->getDefaultServiceProviderRegistrar());
@@ -68,7 +68,7 @@ trait ServiceProviderRegistrarTrait
      *
      * @return Registrar|null A default service provider registrar value or Null if no default value is available
      */
-    public function getDefaultServiceProviderRegistrar(): ?Registrar
+    public function getDefaultServiceProviderRegistrar(): Registrar|null
     {
         return IoCFacade::tryMake(Registrar::class);
     }

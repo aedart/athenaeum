@@ -17,7 +17,7 @@ interface NamespaceDetectorAware
      *
      * @return self
      */
-    public function setNamespaceDetector(?NamespaceDetector $detector);
+    public function setNamespaceDetector(NamespaceDetector|null $detector): static;
 
     /**
      * Get namespace detector
@@ -28,7 +28,7 @@ interface NamespaceDetectorAware
      *
      * @return NamespaceDetector|null namespace detector or null if none namespace detector has been set
      */
-    public function getNamespaceDetector(): ?NamespaceDetector;
+    public function getNamespaceDetector(): NamespaceDetector|null;
 
     /**
      * Check if namespace detector has been set
@@ -42,5 +42,5 @@ interface NamespaceDetectorAware
      *
      * @return NamespaceDetector|null A default namespace detector value or Null if no default value is available
      */
-    public function getDefaultNamespaceDetector(): ?NamespaceDetector;
+    public function getDefaultNamespaceDetector(): NamespaceDetector|null;
 }

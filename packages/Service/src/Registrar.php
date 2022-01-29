@@ -151,7 +151,7 @@ class Registrar implements RegistrarInterface
     /**
      * @inheritdoc
      */
-    public function hasBooted(ServiceProvider $provider): bool
+    public function hasBooted($provider): bool
     {
         return in_array($provider, $this->booted());
     }
@@ -194,7 +194,7 @@ class Registrar implements RegistrarInterface
      *
      * @return ServiceProvider
      */
-    public function resolveProvider($provider): ServiceProvider
+    public function resolveProvider($provider)
     {
         if ($provider instanceof ServiceProvider) {
             return $provider;

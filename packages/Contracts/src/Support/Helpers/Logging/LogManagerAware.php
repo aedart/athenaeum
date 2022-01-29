@@ -19,7 +19,7 @@ interface LogManagerAware
      *
      * @return self
      */
-    public function setLogManager(?LogManager $manager);
+    public function setLogManager(LogManager|null $manager): static;
 
     /**
      * Get log manager
@@ -32,7 +32,7 @@ interface LogManagerAware
      *
      * @return LogManager|null log manager or null if none log manager has been set
      */
-    public function getLogManager(): ?LogManager;
+    public function getLogManager(): LogManager|null;
 
     /**
      * Check if log manager has been set
@@ -46,5 +46,5 @@ interface LogManagerAware
      *
      * @return LogManager|null A default log manager value or Null if no default value is available
      */
-    public function getDefaultLogManager(): ?LogManager;
+    public function getDefaultLogManager(): LogManager|null;
 }

@@ -24,7 +24,7 @@ class NamespaceDetector implements Detector
     public function detect(string $composerPath): string
     {
         // Laravel's version of namespace detection differs from the one below.
-        // Here, we guess that the the first found PSR-4 namespace is the one
+        // Here, we guess that the first found PSR-4 namespace is the one
         // that the application should use...
         // See https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L1222
 

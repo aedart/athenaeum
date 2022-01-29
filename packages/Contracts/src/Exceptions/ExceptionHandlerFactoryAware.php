@@ -17,7 +17,7 @@ interface ExceptionHandlerFactoryAware
      *
      * @return self
      */
-    public function setExceptionHandlerFactory(?Factory $factory);
+    public function setExceptionHandlerFactory(Factory|null $factory): static;
 
     /**
      * Get exception handler factory
@@ -28,7 +28,7 @@ interface ExceptionHandlerFactoryAware
      *
      * @return Factory|null exception handler factory or null if none exception handler factory has been set
      */
-    public function getExceptionHandlerFactory(): ?Factory;
+    public function getExceptionHandlerFactory(): Factory|null;
 
     /**
      * Check if exception handler factory has been set
@@ -42,5 +42,5 @@ interface ExceptionHandlerFactoryAware
      *
      * @return Factory|null A default exception handler factory value or Null if no default value is available
      */
-    public function getDefaultExceptionHandlerFactory(): ?Factory;
+    public function getDefaultExceptionHandlerFactory(): Factory|null;
 }

@@ -19,7 +19,7 @@ trait NamespaceDetectorTrait
      *
      * @var NamespaceDetector|null
      */
-    protected ?NamespaceDetector $namespaceDetector = null;
+    protected NamespaceDetector|null $namespaceDetector = null;
 
     /**
      * Set namespace detector
@@ -28,7 +28,7 @@ trait NamespaceDetectorTrait
      *
      * @return self
      */
-    public function setNamespaceDetector(?NamespaceDetector $detector)
+    public function setNamespaceDetector(NamespaceDetector|null $detector): static
     {
         $this->namespaceDetector = $detector;
 
@@ -44,7 +44,7 @@ trait NamespaceDetectorTrait
      *
      * @return NamespaceDetector|null namespace detector or null if none namespace detector has been set
      */
-    public function getNamespaceDetector(): ?NamespaceDetector
+    public function getNamespaceDetector(): NamespaceDetector|null
     {
         if (!$this->hasNamespaceDetector()) {
             $this->setNamespaceDetector($this->getDefaultNamespaceDetector());
@@ -67,7 +67,7 @@ trait NamespaceDetectorTrait
      *
      * @return NamespaceDetector|null A default namespace detector value or Null if no default value is available
      */
-    public function getDefaultNamespaceDetector(): ?NamespaceDetector
+    public function getDefaultNamespaceDetector(): NamespaceDetector|null
     {
         return null;
     }

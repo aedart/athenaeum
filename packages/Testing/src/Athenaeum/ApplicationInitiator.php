@@ -125,7 +125,7 @@ trait ApplicationInitiator
      *
      * @throws Throwable
      */
-    protected function createApplication($paths = null)
+    protected function createApplication(PathsContainer|array|null $paths = null): Application
     {
         // Resolve paths
         $paths = $paths ?? $this->applicationPaths();

@@ -48,20 +48,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertSame($paths, $app->getPathsContainer());
     }
 
-    /**
-     * @test
-     *
-     * @throws \Throwable
-     */
-    public function failsWhenInvalidPathsContainerGiven()
-    {
-        $this->expectException(LogicException::class);
-
-        $this->app->destroy();
-
-        $this->createApplication('invalid-paths-arg');
-    }
-
     /*****************************************************************
      * Paths that can be specified via Patch Container
      ****************************************************************/

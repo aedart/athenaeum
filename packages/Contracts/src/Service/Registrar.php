@@ -87,7 +87,7 @@ interface Registrar
      *
      * @return bool
      */
-    public function hasBooted(ServiceProvider $provider): bool;
+    public function hasBooted($provider): bool;
 
     /**
      * Get the registered service providers
@@ -120,5 +120,5 @@ interface Registrar
      *
      * @return ServiceProvider
      */
-    public function resolveProvider($provider): ServiceProvider;
+    public function resolveProvider($provider);
 }
