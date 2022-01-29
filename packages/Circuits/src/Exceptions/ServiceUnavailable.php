@@ -26,9 +26,9 @@ class ServiceUnavailable extends CircuitBreakerException implements ServiceUnava
      *
      * @return ServiceUnavailableException
      */
-    public static function make(string $service, State $lastState, ?Failure $lastFailure = null): ServiceUnavailableException
+    public static function make(string $service, State $lastState, Failure|null $lastFailure = null): ServiceUnavailableException
     {
-        $reason = isset($lastState)
+        $reason = isset($lastFailure)
             ? $lastFailure->reason()
             : 'unknown';
 
