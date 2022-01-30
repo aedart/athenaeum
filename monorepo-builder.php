@@ -21,9 +21,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             // the line is removed by key, so version is irrelevant, thus *
             'hanneskod/classtools' => '*',
             'codeception/codeception' => '*',
+            'codeception/module-asserts' => '*',
             'orchestra/testbench' => '*',
             'orchestra/testbench-dusk' => '*',
-            'codeception/module-asserts' => '*',
         ],
     ]);
 
@@ -35,6 +35,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'bamarni/composer-bin-plugin' => '^1.4',
             'roave/security-advisories' => 'dev-master',
             'codeception/codeception' => '5.0.x-dev',
+            'codeception/module-asserts' => '*@dev',
             'orchestra/testbench' => '7.x-dev',
             'orchestra/testbench-dusk' => 'dev-master',
         ],
