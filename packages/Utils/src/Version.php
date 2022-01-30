@@ -3,6 +3,7 @@
 namespace Aedart\Utils;
 
 use Aedart\Contracts\Utils\Packages\Exceptions\PackageNotInstalledException;
+use Aedart\Contracts\Utils\Packages\Exceptions\PackageVersionException;
 use Aedart\Contracts\Utils\Packages\Version as PackageVersionInterface;
 use Aedart\Utils\Packages\Exceptions\NotInstalled;
 use Aedart\Utils\Packages\Exceptions\UnableToResolveVersion;
@@ -53,7 +54,7 @@ class Version
      *
      * @return PackageVersionInterface
      *
-     * @throws PackageNotInstalledException
+     * @throws PackageVersionException
      */
     public static function package(string $name): PackageVersionInterface
     {
