@@ -19,7 +19,7 @@ trait HttpResponseTrait
      *
      * @var ResponseInterface|null
      */
-    protected ?ResponseInterface $httpResponse = null;
+    protected ResponseInterface|null $httpResponse = null;
 
     /**
      * Set http response
@@ -28,7 +28,7 @@ trait HttpResponseTrait
      *
      * @return self
      */
-    public function setHttpResponse(?ResponseInterface $response)
+    public function setHttpResponse(ResponseInterface|null $response): static
     {
         $this->httpResponse = $response;
 
@@ -44,7 +44,7 @@ trait HttpResponseTrait
      *
      * @return ResponseInterface|null http response or null if none http response has been set
      */
-    public function getHttpResponse(): ?ResponseInterface
+    public function getHttpResponse(): ResponseInterface|null
     {
         if (!$this->hasHttpResponse()) {
             $this->setHttpResponse($this->getDefaultHttpResponse());
@@ -67,7 +67,7 @@ trait HttpResponseTrait
      *
      * @return ResponseInterface|null A default http response value or Null if no default value is available
      */
-    public function getDefaultHttpResponse(): ?ResponseInterface
+    public function getDefaultHttpResponse(): ResponseInterface|null
     {
         return null;
     }

@@ -19,7 +19,7 @@ trait HttpServerRequestTrait
      *
      * @var ServerRequestInterface|null
      */
-    protected ?ServerRequestInterface $httpServerRequest = null;
+    protected ServerRequestInterface|null $httpServerRequest = null;
 
     /**
      * Set http server request
@@ -28,7 +28,7 @@ trait HttpServerRequestTrait
      *
      * @return self
      */
-    public function setHttpServerRequest(?ServerRequestInterface $serverRequest)
+    public function setHttpServerRequest(ServerRequestInterface|null $serverRequest): static
     {
         $this->httpServerRequest = $serverRequest;
 
@@ -44,7 +44,7 @@ trait HttpServerRequestTrait
      *
      * @return ServerRequestInterface|null http server request or null if none http server request has been set
      */
-    public function getHttpServerRequest(): ?ServerRequestInterface
+    public function getHttpServerRequest(): ServerRequestInterface|null
     {
         if (!$this->hasHttpServerRequest()) {
             $this->setHttpServerRequest($this->getDefaultHttpServerRequest());
@@ -67,7 +67,7 @@ trait HttpServerRequestTrait
      *
      * @return ServerRequestInterface|null A default http server request value or Null if no default value is available
      */
-    public function getDefaultHttpServerRequest(): ?ServerRequestInterface
+    public function getDefaultHttpServerRequest(): ServerRequestInterface|null
     {
         return null;
     }

@@ -27,7 +27,7 @@ abstract class BaseSerializer implements Serializer
      *
      * @param  MessageInterface|null  $message  [optional]
      */
-    public function __construct(?MessageInterface $message = null)
+    public function __construct(MessageInterface|null $message = null)
     {
         $this->setHttpMessage($message);
     }
@@ -35,7 +35,7 @@ abstract class BaseSerializer implements Serializer
     /**
      * @inheritDoc
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toString();
     }
@@ -89,7 +89,6 @@ abstract class BaseSerializer implements Serializer
      * @return string
      *
      * @throws RuntimeException If unable to read stream
-     * @throws JsonException
      */
     protected function messageContent(MessageInterface $message): string
     {
