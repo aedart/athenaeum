@@ -16,20 +16,6 @@ use Throwable;
 /**
  * Abstract Data Transfer Object (Array version)
  *
- * <br />
- *
- * This DTO abstraction offers default implementation of the following;
- *
- * <ul>
- *      <li>Invoking of property mutator or accessor, if defined</li>
- *      <li>Auto casting of values</li>
- *      <li>Array-accessibility of properties, if properties have getters and setters defined</li>
- *      <li>Population of properties via array</li>
- *      <li>Resolving nested dependencies, via a IoC service container, if one is available</li>
- *      <li>Exportation of properties to an array</li>
- *      <li>Serialization of properties to json</li>
- * </ul>
- *
  * @see \Aedart\Contracts\Dto
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
@@ -72,7 +58,7 @@ abstract class ArrayDto implements Dto
      *
      * @throws Throwable
      */
-    public function __construct(array $properties = [], ?Container $container = null)
+    public function __construct(array $properties = [], Container|null $container = null)
     {
         $this
             ->setContainer($container)
@@ -100,14 +86,14 @@ abstract class ArrayDto implements Dto
      * @param string $name
      * @param mixed $value
      *
-     * @return mixed
+     * @return void
      *
      * @throws UndefinedProperty
      * @throws BindingResolutionException
      * @throws ReflectionException
      * @throws Throwable
      */
-    public function __set(string $name, $value)
+    public function __set(string $name, mixed $value): void
     {
         // Abort if not allowed.
         if (!array_key_exists($name, $this->allowed)) {
@@ -117,13 +103,12 @@ abstract class ArrayDto implements Dto
         // Invoke mutator, if one exists.
         $mutator = MethodHelper::makeSetterName($name);
         if (method_exists($this, $mutator)) {
-            return $this->$mutator($this->resolveValue($mutator, $value));
+            $this->$mutator($this->resolveValue($mutator, $value));
+            return;
         }
 
         // Otherwise, cast value and set it.
         $this->properties[$name] = $this->castPropertyValue($name, $value);
-
-        return $this;
     }
 
     /**
@@ -135,7 +120,7 @@ abstract class ArrayDto implements Dto
      *
      * @throws UndefinedProperty
      */
-    public function __get(string $name)
+    public function __get(string $name): mixed
     {
         // Abort if not allowed.
         if (!array_key_exists($name, $this->allowed)) {
@@ -186,7 +171,7 @@ abstract class ArrayDto implements Dto
     /**
      * @inheritdoc
      */
-    protected function isPropertyUnset(string $property)
+    protected function isPropertyUnset(string $property): bool
     {
         return !isset($this->{$property});
     }

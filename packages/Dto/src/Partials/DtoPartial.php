@@ -11,12 +11,7 @@ use JsonSerializable;
 /**
  * Dto Partial
  *
- * <br />
- *
  * Contains common Dto methods.
- *
- * <br />
- *
  * This partial is intended for the Dto abstraction(s)
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
@@ -63,7 +58,7 @@ trait DtoPartial
      *
      * @return static
      */
-    public static function makeNew(array $properties = [], ?Container $container = null)
+    public static function makeNew(array $properties = [], Container|null $container = null): static
     {
         return new static($properties, $container);
     }
@@ -78,7 +73,7 @@ trait DtoPartial
      *
      * @throws JsonException
      */
-    public static function fromJson(string $json)
+    public static function fromJson(string $json): static
     {
         return static::makeNew(Json::decode($json, true));
     }
@@ -120,12 +115,9 @@ trait DtoPartial
     }
 
     /**
-     * Specify data which should be serialized to JSON
-     * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
+     * @inheritdoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return array_map(function ($value) {
             if ($value instanceof JsonSerializable) {
@@ -168,7 +160,7 @@ trait DtoPartial
      *
      * @throws JsonException
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toJson();
     }
@@ -190,7 +182,7 @@ trait DtoPartial
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->$offset);
     }
@@ -198,7 +190,7 @@ trait DtoPartial
     /**
      * {@inheritdoc}
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->$offset;
     }
@@ -206,7 +198,7 @@ trait DtoPartial
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->$offset = $value;
     }
@@ -214,7 +206,7 @@ trait DtoPartial
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->$offset);
     }
@@ -230,7 +222,7 @@ trait DtoPartial
      *
      * @return bool
      */
-    protected function isPropertyUnset(string $property)
+    protected function isPropertyUnset(string $property): bool
     {
         return !property_exists($this, $property);
     }

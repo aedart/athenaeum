@@ -10,6 +10,7 @@ use Illuminate\Contracts\Support\Jsonable;
 use JsonException;
 use JsonSerializable;
 use Serializable;
+use Stringable;
 
 /**
  * Data Transfer Object (DTO)
@@ -37,7 +38,8 @@ interface Dto extends ArrayAccess,
     Arrayable,
     Populatable,
     Jsonable,
-    JsonSerializable
+    JsonSerializable,
+    Stringable
 {
     /**
      * Returns a list of the properties / attributes that
@@ -54,7 +56,7 @@ interface Dto extends ArrayAccess,
      *
      * @return Container|null IoC service Container or null if none defined
      */
-    public function container(): ?Container;
+    public function container(): Container|null;
 
     /**
      * Returns a new instance of this Dto
@@ -64,7 +66,7 @@ interface Dto extends ArrayAccess,
      *
      * @return static
      */
-    public static function makeNew(array $properties = [], ?Container $container = null);
+    public static function makeNew(array $properties = [], Container|null $container = null): static;
 
     /**
      * Create a new populated instance of this Dto from a
@@ -76,5 +78,5 @@ interface Dto extends ArrayAccess,
      *
      * @throws JsonException
      */
-    public static function fromJson(string $json);
+    public static function fromJson(string $json): static;
 }
