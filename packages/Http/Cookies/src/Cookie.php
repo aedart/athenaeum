@@ -21,14 +21,14 @@ class Cookie implements CookieInterface
      *
      * @var string|null
      */
-    protected ?string $name = null;
+    protected string|null $name = null;
 
     /**
      * Cookie-value
      *
      * @var string|null
      */
-    protected ?string $value = null;
+    protected string|null $value = null;
 
     /**
      * Cookie constructor.
@@ -57,7 +57,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function name(string $name)
+    public function name(string $name): static
     {
         $this->name = $name;
 
@@ -67,7 +67,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
@@ -75,7 +75,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function value(?string $value = null)
+    public function value(string|null $value = null): static
     {
         $this->value = $value;
 
@@ -85,7 +85,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getValue(): ?string
+    public function getValue(): string|null
     {
         return $this->value;
     }
@@ -113,7 +113,7 @@ class Cookie implements CookieInterface
      *
      * @throws InvalidArgumentException If property does not exist
      */
-    protected function populateProperty(string $property, $value)
+    protected function populateProperty(string $property, mixed $value)
     {
         if (!method_exists($this, $property)) {
             throw new InvalidArgumentException(sprintf('Property %s does not exist', $property));

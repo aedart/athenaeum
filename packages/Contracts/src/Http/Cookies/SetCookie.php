@@ -57,7 +57,7 @@ interface SetCookie extends Cookie
      *
      * @return self
      */
-    public function expires($expiresAt = null);
+    public function expires(string|int|null $expiresAt = null): static;
 
     /**
      * Returns the maximum lifetime of the cookie
@@ -68,7 +68,7 @@ interface SetCookie extends Cookie
      *
      * @return string|null RFC7231 Formatted string date
      */
-    public function getExpires(): ?string;
+    public function getExpires(): string|null;
 
     /**
      * Set the number of seconds until the cookie expires.
@@ -84,7 +84,7 @@ interface SetCookie extends Cookie
      *
      * @return self
      */
-    public function maxAge(?int $seconds = null);
+    public function maxAge(int|null $seconds = null): static;
 
     /**
      * Returns the number of seconds until the cookie expires
@@ -93,7 +93,7 @@ interface SetCookie extends Cookie
      *
      * @return int|null
      */
-    public function getMaxAge(): ?int;
+    public function getMaxAge(): int|null;
 
     /**
      * Set the host(s) where the cookie will be sent to
@@ -104,7 +104,7 @@ interface SetCookie extends Cookie
      *
      * @return self
      */
-    public function domain(?string $domain = null);
+    public function domain(string|null $domain = null): static;
 
     /**
      * Returns the host(s) where the cookie will be sent to
@@ -113,7 +113,7 @@ interface SetCookie extends Cookie
      *
      * @return string|null
      */
-    public function getDomain(): ?string;
+    public function getDomain(): string|null;
 
     /**
      * Set the cookie path that must exist on the requested url
@@ -124,7 +124,7 @@ interface SetCookie extends Cookie
      *
      * @return self
      */
-    public function path(?string $path = null);
+    public function path(string|null $path = null): static;
 
     /**
      * Returns the cookie path that must exist on the requested url
@@ -133,7 +133,7 @@ interface SetCookie extends Cookie
      *
      * @return string|null
      */
-    public function getPath(): ?string;
+    public function getPath(): string|null;
 
     /**
      * Set the state of whether the cookie should be sent via https
@@ -144,7 +144,7 @@ interface SetCookie extends Cookie
      *
      * @return self
      */
-    public function secure(bool $isSecure = false);
+    public function secure(bool $isSecure = false): static;
 
     /**
      * Returns the cookie-secure state
@@ -174,7 +174,7 @@ interface SetCookie extends Cookie
      *
      * @return self
      */
-    public function httpOnly(bool $httpOnly = false);
+    public function httpOnly(bool $httpOnly = false): static;
 
     /**
      * Get the http only state
@@ -207,7 +207,7 @@ interface SetCookie extends Cookie
      *
      * @return self
      */
-    public function sameSite(?string $policy = null);
+    public function sameSite(string|null $policy = null): static;
 
     /**
      * Get the same-site policy; whether cookie should be available for cross-site requests
@@ -219,5 +219,5 @@ interface SetCookie extends Cookie
      *
      * @return string|null
      */
-    public function getSameSite(): ?string;
+    public function getSameSite(): string|null;
 }
