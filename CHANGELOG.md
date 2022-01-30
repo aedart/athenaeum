@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Minimum required PHP version changed to `v8.0.2`.
 * `populate()` method now returns `static` instead of `void`, in `\Aedart\Contracts\Utils\Populatable` interface.
 * `SearchFilter` no longer uses `StopWords` concern (_concern has been removed_). [#63](https://github.com/aedart/athenaeum/issues/63).
+* Return type of `package()` and `application()` is now set to `\Aedart\Contracts\Utils\Packages\Version`, in `\Aedart\Utils\Version`.  [#68](https://github.com/aedart/athenaeum/issues/68).
+* `PackageVersionException` is now thrown, when version cannot be obtained for a package, in `\Aedart\Utils\Version::package()`. [#68](https://github.com/aedart/athenaeum/issues/68).
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Dates\Duration`.
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Helpers\Invoker`.
 * `$seed` argument can no longer be `null` in `\Aedart\Utils\Math::applySeed()` method.
@@ -32,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `CHANGELOG.md` is now formatted according to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * `storage_path()` helper in Core package will now pass `$path` argument to application `storagePath()` method, when application is available (_`$path` argument added in Laravel `v9.x`_).
 * Core `Application` uses `'json'` file based maintenance mode as driver, when application state is "down". [#67](https://github.com/aedart/athenaeum/issues/67).
+* `application()` method no longer uses git to obtain application's version. It now relies on Composer's `InstalledVersions::getRootPackage()`, in `\Aedart\Utils\Version`. [#68](https://github.com/aedart/athenaeum/issues/68).
 * Replaced `fzaninotto/faker` package with `fakerphp/faker`. [#23](https://github.com/aedart/athenaeum/issues/23).
 * Replaced property calls with method calls, on faker instance throughout many tests (_PHP faker deprecated several properties since `v1.14`_). [#23](https://github.com/aedart/athenaeum/issues/23).  
 * Upgraded to [Symplify Monorepo Builder](https://github.com/symplify/monorepo-builder) `v10.x`. [#60](https://github.com/aedart/athenaeum/issues/60), [#65](https://github.com/aedart/athenaeum/pull/65).

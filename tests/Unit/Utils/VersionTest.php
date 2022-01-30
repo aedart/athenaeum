@@ -2,11 +2,10 @@
 
 namespace Aedart\Tests\Unit\Utils;
 
+use Aedart\Contracts\Utils\Packages\Exceptions\PackageNotInstalledException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Version;
-use Jean85\Exception\VersionMissingExceptionInterface;
-use OutOfBoundsException;
 
 /**
  * VersionTest
@@ -24,7 +23,7 @@ class VersionTest extends UnitTestCase
      */
     public function canDetermineVersionOfPackage()
     {
-        $version = Version::package('aedart/athenaeum');
+        $version = Version::package('illuminate/support');
 
         ConsoleDebugger::output((string) $version);
 
@@ -36,7 +35,7 @@ class VersionTest extends UnitTestCase
      */
     public function failsDeterminingVersionOfUnknownPackage()
     {
-        $this->expectException(OutOfBoundsException::class);
+        $this->expectException(PackageNotInstalledException::class);
 
         Version::package('acme/unknown-pgk-' . $this->getFaker()->word());
     }
@@ -98,16 +97,9 @@ class VersionTest extends UnitTestCase
 
     /**
      * @test
-     *
-     * @throws VersionMissingExceptionInterface
      */
     public function canObtainAthenaeumPackageVersion()
     {
-//        dump([
-//            'target' => 'aedart/athenaeum-support',
-//            'is_installed' => \Composer\InstalledVersions::isInstalled('aedart/athenaeum-support'),
-//            'version' => \Composer\InstalledVersions::getVersion('aedart/athenaeum-support')
-//        ]);
         $version = Version::package('aedart/athenaeum-support');
 
         ConsoleDebugger::output((string)$version);

@@ -2,9 +2,13 @@
 
 namespace Aedart\Utils;
 
-use Jean85\Exception\VersionMissingExceptionInterface;
-use Jean85\PrettyVersions;
-use OutOfBoundsException;
+use Aedart\Contracts\Utils\Packages\Exceptions\PackageNotInstalledException;
+use Aedart\Contracts\Utils\Packages\Exceptions\PackageVersionException;
+use Aedart\Contracts\Utils\Packages\Version as PackageVersionInterface;
+use Aedart\Utils\Packages\Exceptions\NotInstalled;
+use Aedart\Utils\Packages\Exceptions\UnableToResolveVersion;
+use Aedart\Utils\Packages\PackageVersion;
+use Composer\InstalledVersions;
 
 /**
  * Version Utility
@@ -17,86 +21,99 @@ class Version
     /**
      * Cache of packages and version
      *
-     * @var array Key-value pair, key = package name, value = \Jean85\Version instance
+     * @var array Key-value pair, key = package name, value = PackageVersionInterface
      */
     protected static array $versions = [];
 
     /**
      * Returns the application's version
      *
-     * @return \Jean85\Version
+     * @return PackageVersionInterface
      */
-    public static function application()
+    public static function application(): PackageVersionInterface
     {
-        $name = 'root@' . PrettyVersions::getRootPackageName();
+        $root = InstalledVersions::getRootPackage();
+        $name = $root['name'];
 
         if (isset(static::$versions[$name])) {
             return static::$versions[$name];
         }
 
-        // Obtain the current commit, tag and tag's commit from git
-        $commit = trim(shell_exec('git rev-parse HEAD'));
-        $tag = trim(shell_exec('git describe --tags $(git rev-list --tags --max-count=1)'));
-        $tagCommit = trim(shell_exec("git rev-list -n 1 {$tag}"));
-
-        // Append a "-dev" if current commit does not match the tag's commit
-        if ($commit !== $tagCommit) {
-            $tag = "{$tag}-dev";
-        }
-
-        // Usually, we should be able to obtain the application's version via "PrettyVersions::getRootPackageVersion".
-        // But its seems sometimes to be unreliable - sadly - so we just create a new version instance manually,
-        // using the information available from git.
-
-        return static::$versions[$name] = new \Jean85\Version($name, $tag, $commit);
+        return static::$versions[$name] = static::makePackageVersion(
+            name: $name,
+            version: $root['pretty_version'],
+            fullVersion: $root['version'],
+            reference: $root['reference']
+        );
     }
 
     /**
      * Returns the version of the given package
      *
-     * @see \Jean85\PrettyVersions::getVersion
-     *
      * @param string $name Name of package
      *
-     * @return \Jean85\Version
+     * @return PackageVersionInterface
      *
-     * @throws VersionMissingExceptionInterface If a version cannot be located
+     * @throws PackageVersionException
      */
-    public static function package(string $name)
+    public static function package(string $name): PackageVersionInterface
     {
         if (isset(static::$versions[$name])) {
             return static::$versions[$name];
         }
 
-        return static::$versions[$name] = PrettyVersions::getVersion($name);
+        if (!static::hasFor($name)) {
+            throw new NotInstalled(sprintf('package %s does not appear to be installed', $name));
+        }
+
+        // Obtain raw information about installed packages from composer
+        $raw = InstalledVersions::getAllRawData();
+        $package = [];
+        foreach ($raw as $installed) {
+            if (isset($installed['versions'][$name])) {
+                $package = $installed['versions'][$name];
+                break;
+            }
+        }
+
+        // Abort if for some reason package information is not available
+        if (empty($package)) {
+            throw new UnableToResolveVersion(sprintf('no meta information is available for package %s. Unable to determine version!', $name));
+        }
+
+        // Package is replaced, so we are only able to show the first version
+        // that is listed in the "replaced" entry.
+        if (isset($package['replaced'])) {
+            return static::$versions[$name] = static::makePackageVersion(
+                name: $name,
+                version: $package['replaced'][0]
+            );
+        }
+
+        // Finally, return the package version information
+        return static::$versions[$name] = static::makePackageVersion(
+            name: $name,
+            version: $package['pretty_version'],
+            fullVersion: $package['version'],
+            reference: $package['reference']
+        );
     }
 
     /**
      * Determine if a version is available for given package
      *
-     * @param  string  $package  Name of package
+     * @param  string  $package
+     * @param  bool  $includeDevRequirements  [optional]
      *
      * @return bool
-     *
-     * @throws VersionMissingExceptionInterface
      */
-    public static function hasFor(string $package): bool
+    public static function hasFor(string $package, bool $includeDevRequirements = true): bool
     {
         if (isset(static::$versions[$package])) {
             return true;
         }
 
-        try {
-            $version = static::package($package);
-            if (isset($version)) {
-                return true;
-            }
-        } catch (OutOfBoundsException $e) {
-            // This means that the package was not installed / found.
-            // So we can safely ignore this exception.
-        }
-
-        return false;
+        return InstalledVersions::isInstalled($package, $includeDevRequirements);
     }
 
     /**
@@ -119,5 +136,21 @@ class Version
         static::$versions = [];
 
         return true;
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Creates a new package version dto
+     *
+     * @param ...$args
+     *
+     * @return PackageVersionInterface
+     */
+    protected static function makePackageVersion(...$args): PackageVersionInterface
+    {
+        return new PackageVersion(...$args);
     }
 }
