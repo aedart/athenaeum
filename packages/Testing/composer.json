@@ -16,7 +16,7 @@
         "aedart/athenaeum-container": "^5.27",
         "aedart/athenaeum-contracts": "^5.27",
         "codeception/codeception": "5.0.x-dev",
-        "codeception/module-asserts": "dev-master",
+        "codeception/module-asserts": "*@dev",
         "fakerphp/faker": "^v1.17.0",
         "mockery/mockery": "1.4.*",
         "orchestra/testbench": "7.x-dev",
