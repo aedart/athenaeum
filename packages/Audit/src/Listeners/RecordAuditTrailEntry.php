@@ -39,7 +39,7 @@ class RecordAuditTrailEntry implements ShouldQueue
     }
 
     /**
-     * Records an new Audit Trail Entry, based on given
+     * Records a new Audit Trail Entry, based on given
      * "model has changed" event
      *
      * @param ModelHasChanged $event
