@@ -6,35 +6,36 @@ use Aedart\Audit\Observers\Concerns;
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Support\Carbon;
+use RuntimeException;
 use Throwable;
 
 /**
- * Model Has Changed Event
+ * Multiple Models Changed Event
+ *
+ * Intended to be dispatched when multiple models have the same
+ * type of change performed, e.g.:
+ * - all records have an attribute set to specific value.
+ * - all records are soft-deleted.
+ * - all records are recovered.
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Audit\Events
  */
-class ModelHasChanged
+class MultipleModelsChanged
 {
     use Dispatchable;
     use Concerns\ModelAttributes;
 
     /**
-     * Class path of model that was changed
+     * The models that have changed
      *
-     * @var string
+     * @var Collection|Model[]
      */
-    public string $model;
-
-    /**
-     * Model's primary identifier value
-     *
-     * @var string|int
-     */
-    public $id;
+    public $models;
 
     /**
      * Unique user identifier that caused change
@@ -81,9 +82,9 @@ class ModelHasChanged
     public ?string $message = null;
 
     /**
-     * ModelHasChanged constructor.
+     * Creates new "multiple models changed" event instance
      *
-     * @param Model $model The model that has changed
+     * @param Collection<Model>|Model[] $models The changed models
      * @param Model|Authenticatable|null $user The user that caused the change
      * @param string $type [optional] The event type
      * @param array|null $original [optional] Original data (attributes) before change occurred.
@@ -94,35 +95,44 @@ class ModelHasChanged
      * @param DateTimeInterface|Carbon|string|null $performedAt [optional] Date and time of when the event happened.
      *                                                          Defaults to model's "updated at" value, if available,
      *                                                          If not, then current date time is used.
-     *
      * @throws Throwable
      */
     public function __construct(
-        Model $model,
+        $models,
         $user,
         string $type = Types::UPDATED,
         ?array $original = null,
         ?array $changed = null,
         ?string $message = null,
         $performedAt = null
-    ) {
-        $this->model = get_class($model);
-        $this->id = $model->getKey();
+    )
+    {
+        // Resolve models argument
+        if (!($models instanceof Collection) && is_iterable($models)) {
+            $models = collect($models);
+        }
+
+        // Abort if no models are given
+        if ($models->isEmpty()) {
+            throw new RuntimeException('No models are given. Unable to create "multiple models changed" event');
+        }
+
+        $this->models = $models;
         $this->user = optional($user)->getKey();
         $this->type = $type;
 
-        // Resolve the original and changed data (attributes). It's important that this is done during
-        // event instance creation, because once this event is serialised / unserialised, the
-        // "dirty / changed" attributes are lost on given model.
-        // Furthermore, we use given original and changed, if provided.
+        // Resolve the original and changed data (attributes). Must be done before
+        // event is serialised. Here, we assume that the same kind of change is made
+        // for all models. So we obtain the first model and use to determine original
+        // and changed data, if nothing specific is given.
+
+        /** @var Model $model */
+        $model = $models->first();
         $original = $original ?? $this->resolveOriginalData($model, $type);
         $changed = $changed ?? $this->resolveChangedData($model, $type);
 
-        // Reduce original attributes, by excluding attributes that have not been changed.
-        // This should reduce amount of data stored per entry.
+        // Reduce original attributes, and set original and changed
         $original = $this->reduceOriginal($original, $changed);
-
-        // Finally, set the original and changed attributes.
         $this
             ->withOriginalData($original)
             ->withChangedData($changed);

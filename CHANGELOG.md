@@ -4,6 +4,25 @@
 
 ### [Unreleased]
 
+#### Added
+
+* `MultipleModelsChanged` event in Audit package.  
+* `RecordMultipleAuditTrailEntries` listener that handles `MultipleModelsChanged` events. Performs a mass insert of audit trail entries.
+* `AuditTrailEventSubscriber` that will handle registration of Audit Trail related event listeners.
+
+#### Deprecated
+
+* The `audit-trail.listener` configuration setting has been replaced with `audit-trail.subscriber`, in `configs/audit-trail.php`. 
+Will be removed in next major version (_in audit package_).
+
+#### Changed
+
+* `ModelChangedEvents` concern is now able to dispatch "multiple models changed" event, via `dispatchMultipleModelsChanged()` (_in audit package_). 
+
+#### Fixed
+
+* `$performedAt` argument ignored in `\Aedart\Audit\Events\ModelHasChanged`.
+
 ### [v5.26.0](https://github.com/aedart/athenaeum/compare/5.25.0...5.26.0)
 
 #### Changed
