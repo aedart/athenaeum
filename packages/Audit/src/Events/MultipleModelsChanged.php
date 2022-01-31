@@ -4,10 +4,10 @@ namespace Aedart\Audit\Events;
 
 use Aedart\Audit\Observers\Concerns;
 use Aedart\Contracts\Audit\Types;
-use Aedart\Database\Model;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Support\Carbon;
 use RuntimeException;
