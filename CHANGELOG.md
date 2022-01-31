@@ -4,6 +4,8 @@
 
 ### [Unreleased]
 
+### [v5.27.0](https://github.com/aedart/athenaeum/compare/5.26.0...5.27.0)
+
 #### Added
 
 * `MultipleModelsChanged` event in Audit package.  
