@@ -49,7 +49,7 @@ class RecordAuditTrailEntry implements ShouldQueue
     public function handle(ModelHasChanged $event)
     {
         // In rare situations, the provided user that caused the event might be force-deleted,
-        // in which case inserting the audit trail entry will fail, due to it's foreign-key
+        // in which case inserting the audit trail entry will fail, due to its foreign-key
         // constraint.
         //
         // Depending on your perspective, you might see this as a design flaw. However, the
@@ -60,7 +60,7 @@ class RecordAuditTrailEntry implements ShouldQueue
         //
         // Nevertheless, to ensure that the insert operation does not fail, we must check
         // whether the user exists or not. If the latter is the case, then we set the user
-        // is to null.
+        // to null.
         $userId = $event->user;
         if (!$this->userExists($userId)) {
             $userId = null;
