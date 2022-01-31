@@ -3,7 +3,9 @@
 namespace Aedart\Audit\Subscribers;
 
 use Aedart\Audit\Events\ModelHasChanged;
+use Aedart\Audit\Events\MultipleModelsChanged;
 use Aedart\Audit\Listeners\RecordAuditTrailEntry;
+use Aedart\Audit\Listeners\RecordMultipleAuditTrailEntries;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Illuminate\Contracts\Events\Dispatcher;
 
@@ -35,6 +37,12 @@ class AuditTrailEventSubscriber
         $dispatcher->listen(
             ModelHasChanged::class,
             [$recordSingleEntryListener, 'handle']
+        );
+
+        // Handle multiple models changed event
+        $dispatcher->listen(
+            MultipleModelsChanged::class,
+            [RecordMultipleAuditTrailEntries::class, 'handle']
         );
     }
 }
