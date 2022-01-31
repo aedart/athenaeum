@@ -4,6 +4,7 @@ namespace Aedart\Audit\Subscribers;
 
 use Aedart\Audit\Events\ModelHasChanged;
 use Aedart\Audit\Listeners\RecordAuditTrailEntry;
+use Aedart\Support\Helpers\Config\ConfigTrait;
 use Illuminate\Contracts\Events\Dispatcher;
 
 /**
@@ -14,6 +15,8 @@ use Illuminate\Contracts\Events\Dispatcher;
  */
 class AuditTrailEventSubscriber
 {
+    use ConfigTrait;
+
     /**
      * Register the listeners for the subscriber.
      *
@@ -23,10 +26,15 @@ class AuditTrailEventSubscriber
      */
     public function subscribe(Dispatcher $dispatcher)
     {
+        // TODO: This can safely be removed in next major version
+        // To ensure that we keep backwards compatibility, we load evt. custom listener that has
+        // been specified.
+        $recordSingleEntryListener = $this->getConfig()->get('audit-trail.listener', RecordAuditTrailEntry::class);
+
         // Handle change event for a single model
         $dispatcher->listen(
             ModelHasChanged::class,
-            [RecordAuditTrailEntry::class, 'handle']
+            [$recordSingleEntryListener, 'handle']
         );
     }
 }
