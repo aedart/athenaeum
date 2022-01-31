@@ -139,6 +139,30 @@ abstract class AuditTestCase extends LaravelTestCase
     }
 
     /**
+     * Generates multiple "categories" records data
+     *
+     * @param int $amount [optional]
+     * @param array $data [optional]
+     *
+     * @return array
+     */
+    public function makeCategoriesData(int $amount = 3, array $data = []): array
+    {
+        $faker = $this->getFaker();
+
+        $output = [];
+        while($amount--) {
+            $output[] = array_merge([
+                'slug' => $faker->unique()->slug(3),
+                'name' => $faker->words(4, true),
+                'description' => $faker->sentence()
+            ], $data);
+        }
+
+        return $output;
+    }
+
+    /**
      * Creates and persists a new dummy user
      *
      * @param array $attributes [optional]
