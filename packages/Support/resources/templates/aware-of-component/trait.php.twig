@@ -13,7 +13,7 @@ namespace {{ traitNamespace }};
 trait {{ traitClassName }}
 {
     {{ include('partials/property-description.twig') }}
-    protected {{- dataType in ['callable'] ? ' ' : " #{dataType}|null " -}} ${{ coreProperty }} = null;
+    protected {{- dataType in ['mixed', 'callable'] ? ' ' : " #{dataType}|null " -}} ${{ coreProperty }} = null;
 
     {{ include('partials/set-method-description.twig') }}
     {{ include('partials/set-method.twig')|replace({"\n": ""}) }}
