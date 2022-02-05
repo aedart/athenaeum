@@ -28,12 +28,12 @@ class IoCFacade extends Facade
      *
      * @param string $abstract The type to attempt resolving
      * @param mixed $default [optional] Default value to return. Is NOT processed by IoC.
-     *                      If callback is provided, the callback is invoked and it's resulting value is returned.
+     *                      If callback is provided, the callback is invoked and resulting value is returned.
      * @param array $parameters [optional] Evt. parameters to be passed on to given type (contextual binding)
      *
      * @return mixed
      */
-    public static function tryMake(string $abstract, $default = null, array $parameters = [])
+    public static function tryMake(string $abstract, mixed $default = null, array $parameters = []): mixed
     {
         /** @var Container|IoC $container */
         $container = static::getFacadeRoot();
@@ -73,7 +73,7 @@ class IoCFacade extends Facade
      *
      * @return mixed
      */
-    protected static function resolveDefault($default = null)
+    protected static function resolveDefault(mixed $default = null): mixed
     {
         if (is_callable($default)) {
             return $default();
