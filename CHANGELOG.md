@@ -54,8 +54,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Input value "filter" contains a non-scalar value, when attempting get array value from http query via inside `\Aedart\Filters\BaseProcessor::value()` (_happened after upgrade to the latest version Laravel / Symfony_). [#69](https://github.com/aedart/athenaeum/issues/69).
 * Unexpected value for parameter "name": expecting "array". [#71](https://github.com/aedart/athenaeum/issues/71).
 * Incorrect commit reference passed on to `\Jean85\Version`, in `\Aedart\Utils\Version` (_happened after upgrade to the latest version of "Pretty Package Versions"_).
-* `\Illuminate\Support\ServiceProvider` imported into `\Aedart\Contracts\Service\Registrar` interface.
-* `\Illuminate\Filesystem\Filesystem` imported into `\Aedart\Contracts\Support\Helpers\Filesystem\FileAware` interface.
+* `\Illuminate\Support\ServiceProvider` imported into `\Aedart\Contracts\Service\Registrar` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Filesystem\Filesystem` imported into `\Aedart\Contracts\Support\Helpers\Filesystem\FileAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Http\Request` imported into `\Aedart\Contracts\Support\Helpers\Http\RequestAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Log\LogManager` imported into `\Aedart\Contracts\Support\Helpers\Logging\LogManagerAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Routing\Redirector` imported into `\Aedart\Contracts\Support\Helpers\Routing\RedirectAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Session\SessionManager` imported into `\Aedart\Contracts\Support\Helpers\Session\SessionManagerAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\View\Compilers\BladeCompiler` imported into `\Aedart\Contracts\Support\Helpers\View\BladeAware` interface. This created unintended dependency on Laravel package.
 * `Codeception\TestCase\Test` class not found, in `\Aedart\Tests\Integration\Laravel\ApplicationInitiatorTest` (_happened after upgrade to the latest version of Codeception_). 
 * `LoadSpecifiedConfiguration` may nor inherit from final class. `\Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration` no longer inherits from `Orchestra\Testbench\Bootstrap\LoadConfiguration`, which has been declared final (_happened after upgrade to the latest version of Orchestra_).
 
