@@ -2,7 +2,7 @@
 
 namespace Aedart\Audit\Events;
 
-use Aedart\Audit\Observers\Concerns;
+use Aedart\Audit\Events\Concerns;
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -19,8 +19,7 @@ use Throwable;
  */
 class ModelHasChanged
 {
-    use Dispatchable;
-    use Concerns\ModelAttributes;
+    use Concerns\EventData;
 
     /**
      * Class path of model that was changed
@@ -35,50 +34,6 @@ class ModelHasChanged
      * @var string|int
      */
     public string|int $id;
-
-    /**
-     * Unique user identifier that caused change
-     *
-     * @var string|int|null
-     */
-    public string|int|null $user;
-
-    /**
-     * Date and time of when the event happened
-     *
-     * (When user performed action that caused model change)
-     *
-     * @var DateTimeInterface|Carbon|string
-     */
-    public DateTimeInterface|Carbon|string $performedAt;
-
-    /**
-     * The event type
-     *
-     * @var string
-     */
-    public string $type;
-
-    /**
-     * Original data (attributes) before change occurred
-     *
-     * @var array|null
-     */
-    public array|null $original = null;
-
-    /**
-     * Changed data (attributes) after change occurred
-     *
-     * @var array|null
-     */
-    public array|null $changed = null;
-
-    /**
-     * Eventual user provided message associated with the event
-     *
-     * @var string|null
-     */
-    public string|null $message = null;
 
     /**
      * ModelHasChanged constructor.
@@ -108,8 +63,6 @@ class ModelHasChanged
     ) {
         $this->model = get_class($model);
         $this->id = $model->getKey();
-        $this->user = optional($user)->getKey();
-        $this->type = $type;
 
         // Resolve the original and changed data (attributes). It's important that this is done during
         // event instance creation, because once this event is serialised / unserialised, the
@@ -122,44 +75,12 @@ class ModelHasChanged
         // This should reduce amount of data stored per entry.
         $original = $this->reduceOriginal($original, $changed);
 
-        // Finally, set the original and changed attributes.
         $this
+            ->byUser($user)
+            ->type($type)
             ->withOriginalData($original)
-            ->withChangedData($changed);
-
-        // Resolve evt. message
-        $this->message = $message ?? $this->resolveAuditTrailMessage($model, $type);
-
-        // Resolve performed at...
-        $performedAt = $performedAt ?? Carbon::now();
-        $this->performedAt = $this->formatDatetime($performedAt);
-    }
-
-    /**
-     * Set the original data (attributes) before changed occurred
-     *
-     * @param array|null $data [optional]
-     *
-     * @return self
-     */
-    public function withOriginalData(array|null $data = null): static
-    {
-        $this->original = $data;
-
-        return $this;
-    }
-
-    /**
-     * Set the changed data (attributes) after changed occurred
-     *
-     * @param array|null $data [optional]
-     *
-     * @return self
-     */
-    public function withChangedData(array|null $data = null): static
-    {
-        $this->changed = $data;
-
-        return $this;
+            ->withChangedData($changed)
+            ->withMessage($message ?? $this->resolveAuditTrailMessage($model, $type))
+            ->performedAt($performedAt);
     }
 }
