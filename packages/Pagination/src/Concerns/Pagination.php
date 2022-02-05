@@ -44,7 +44,7 @@ trait Pagination
      *
      * @throws LogicException
      */
-    public function setTotal(int $total)
+    public function setTotal(int $total): static
     {
         if ($total < 0) {
             throw new LogicException(sprintf('Total cannot be negative. %d provided', $total));
@@ -64,7 +64,7 @@ trait Pagination
      *
      * @throws LogicException
      */
-    public function setLimit(int $limit)
+    public function setLimit(int $limit): static
     {
         if ($limit < 1) {
             throw new LogicException(sprintf('Limit cannot be less than 1. %d provided', $limit));
@@ -86,7 +86,7 @@ trait Pagination
      *
      * @throws LogicException
      */
-    public function show(int $amount)
+    public function show(int $amount): static
     {
         return $this->setLimit($amount);
     }
@@ -100,7 +100,7 @@ trait Pagination
      *
      * @throws LogicException
      */
-    public function setOffset(int $offset)
+    public function setOffset(int $offset): static
     {
         if ($offset < 0) {
             throw new LogicException(sprintf('Offset cannot be negative. %d provided', $offset));
@@ -120,7 +120,7 @@ trait Pagination
      *
      * @throws LogicException
      */
-    public function setPage(int $page)
+    public function setPage(int $page): static
     {
         return $this->setOffset(
             $this->offsetForPage($page)
@@ -202,7 +202,7 @@ trait Pagination
      *
      * @return int|null Page number or null if there is no previous page
      */
-    public function previousPage(): ?int
+    public function previousPage(): int|null
     {
         if ($this->hasPreviousPage()) {
             return $this->currentPage() - 1;
@@ -216,7 +216,7 @@ trait Pagination
      *
      * @return int|null Page number or null if there is no next page
      */
-    public function nextPage(): ?int
+    public function nextPage(): int|null
     {
         if ($this->hasNextPage()) {
             return $this->currentPage() + 1;
