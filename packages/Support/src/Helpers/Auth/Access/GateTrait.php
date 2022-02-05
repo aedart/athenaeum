@@ -20,7 +20,7 @@ trait GateTrait
      *
      * @var Gate|null
      */
-    protected ?Gate $gate = null;
+    protected Gate|null $gate = null;
 
     /**
      * Set gate
@@ -29,7 +29,7 @@ trait GateTrait
      *
      * @return self
      */
-    public function setGate(?Gate $gate)
+    public function setGate(Gate|null $gate): static
     {
         $this->gate = $gate;
 
@@ -47,7 +47,7 @@ trait GateTrait
      *
      * @return Gate|null gate or null if none gate has been set
      */
-    public function getGate(): ?Gate
+    public function getGate(): Gate|null
     {
         if (!$this->hasGate()) {
             $this->setGate($this->getDefaultGate());
@@ -70,7 +70,7 @@ trait GateTrait
      *
      * @return Gate|null A default gate value or Null if no default value is available
      */
-    public function getDefaultGate(): ?Gate
+    public function getDefaultGate(): Gate|null
     {
         return GateFacade::getFacadeRoot();
     }

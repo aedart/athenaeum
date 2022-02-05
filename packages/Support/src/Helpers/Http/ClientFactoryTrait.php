@@ -20,7 +20,7 @@ trait ClientFactoryTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $clientFactory = null;
+    protected Factory|null $clientFactory = null;
 
     /**
      * Set client factory
@@ -29,7 +29,7 @@ trait ClientFactoryTrait
      *
      * @return self
      */
-    public function setClientFactory(?Factory $factory)
+    public function setClientFactory(Factory|null $factory): static
     {
         $this->clientFactory = $factory;
 
@@ -45,7 +45,7 @@ trait ClientFactoryTrait
      *
      * @return Factory|null client factory or null if none client factory has been set
      */
-    public function getClientFactory(): ?Factory
+    public function getClientFactory(): Factory|null
     {
         if (!$this->hasClientFactory()) {
             $this->setClientFactory($this->getDefaultClientFactory());
@@ -68,7 +68,7 @@ trait ClientFactoryTrait
      *
      * @return Factory|null A default client factory value or Null if no default value is available
      */
-    public function getDefaultClientFactory(): ?Factory
+    public function getDefaultClientFactory(): Factory|null
     {
         return Http::getFacadeRoot();
     }

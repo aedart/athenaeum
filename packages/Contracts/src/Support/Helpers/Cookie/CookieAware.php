@@ -19,7 +19,7 @@ interface CookieAware
      *
      * @return self
      */
-    public function setCookie(?Factory $factory);
+    public function setCookie(Factory|null $factory): static;
 
     /**
      * Get cookie
@@ -32,7 +32,7 @@ interface CookieAware
      *
      * @return Factory|null cookie or null if none cookie has been set
      */
-    public function getCookie(): ?Factory;
+    public function getCookie(): Factory|null;
 
     /**
      * Check if cookie has been set
@@ -46,5 +46,5 @@ interface CookieAware
      *
      * @return Factory|null A default cookie value or Null if no default value is available
      */
-    public function getDefaultCookie(): ?Factory;
+    public function getDefaultCookie(): Factory|null;
 }

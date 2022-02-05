@@ -20,7 +20,7 @@ trait RedisTrait
      *
      * @var Connection|null
      */
-    protected ?Connection $redis = null;
+    protected Connection|null $redis = null;
 
     /**
      * Set redis
@@ -29,7 +29,7 @@ trait RedisTrait
      *
      * @return self
      */
-    public function setRedis(?Connection $connection)
+    public function setRedis(Connection|null $connection): static
     {
         $this->redis = $connection;
 
@@ -47,7 +47,7 @@ trait RedisTrait
      *
      * @return Connection|null redis or null if none redis has been set
      */
-    public function getRedis(): ?Connection
+    public function getRedis(): Connection|null
     {
         if (!$this->hasRedis()) {
             $this->setRedis($this->getDefaultRedis());
@@ -70,7 +70,7 @@ trait RedisTrait
      *
      * @return Connection|null A default redis value or Null if no default value is available
      */
-    public function getDefaultRedis(): ?Connection
+    public function getDefaultRedis(): Connection|null
     {
         $factory = Redis::getFacadeRoot();
         if (isset($factory)) {

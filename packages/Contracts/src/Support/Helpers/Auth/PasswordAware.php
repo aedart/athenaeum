@@ -19,7 +19,7 @@ interface PasswordAware
      *
      * @return self
      */
-    public function setPassword(?PasswordBroker $broker);
+    public function setPassword(PasswordBroker|null $broker): static;
 
     /**
      * Get password
@@ -32,7 +32,7 @@ interface PasswordAware
      *
      * @return PasswordBroker|null password or null if none password has been set
      */
-    public function getPassword(): ?PasswordBroker;
+    public function getPassword(): PasswordBroker|null;
 
     /**
      * Check if password has been set
@@ -46,5 +46,5 @@ interface PasswordAware
      *
      * @return PasswordBroker|null A default password value or Null if no default value is available
      */
-    public function getDefaultPassword(): ?PasswordBroker;
+    public function getDefaultPassword(): PasswordBroker|null;
 }

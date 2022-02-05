@@ -19,7 +19,7 @@ interface RedisAware
      *
      * @return self
      */
-    public function setRedis(?Connection $connection);
+    public function setRedis(Connection|null $connection): static;
 
     /**
      * Get redis
@@ -32,7 +32,7 @@ interface RedisAware
      *
      * @return Connection|null redis or null if none redis has been set
      */
-    public function getRedis(): ?Connection;
+    public function getRedis(): Connection|null;
 
     /**
      * Check if redis has been set
@@ -46,5 +46,5 @@ interface RedisAware
      *
      * @return Connection|null A default redis value or Null if no default value is available
      */
-    public function getDefaultRedis(): ?Connection;
+    public function getDefaultRedis(): Connection|null;
 }

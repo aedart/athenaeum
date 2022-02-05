@@ -20,7 +20,7 @@ trait ResponseFactoryTrait
      *
      * @var ResponseFactory|null
      */
-    protected ?ResponseFactory $responseFactory = null;
+    protected ResponseFactory|null $responseFactory = null;
 
     /**
      * Set response factory
@@ -29,7 +29,7 @@ trait ResponseFactoryTrait
      *
      * @return self
      */
-    public function setResponseFactory(?ResponseFactory $factory)
+    public function setResponseFactory(ResponseFactory|null $factory): static
     {
         $this->responseFactory = $factory;
 
@@ -47,7 +47,7 @@ trait ResponseFactoryTrait
      *
      * @return ResponseFactory|null response factory or null if none response factory has been set
      */
-    public function getResponseFactory(): ?ResponseFactory
+    public function getResponseFactory(): ResponseFactory|null
     {
         if (!$this->hasResponseFactory()) {
             $this->setResponseFactory($this->getDefaultResponseFactory());
@@ -70,7 +70,7 @@ trait ResponseFactoryTrait
      *
      * @return ResponseFactory|null A default response factory value or Null if no default value is available
      */
-    public function getDefaultResponseFactory(): ?ResponseFactory
+    public function getDefaultResponseFactory(): ResponseFactory|null
     {
         return Response::getFacadeRoot();
     }

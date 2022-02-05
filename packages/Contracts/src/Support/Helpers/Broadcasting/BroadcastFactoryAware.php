@@ -19,7 +19,7 @@ interface BroadcastFactoryAware
      *
      * @return self
      */
-    public function setBroadcastFactory(?Factory $factory);
+    public function setBroadcastFactory(Factory|null $factory): static;
 
     /**
      * Get broadcast factory
@@ -32,7 +32,7 @@ interface BroadcastFactoryAware
      *
      * @return Factory|null broadcast factory or null if none broadcast factory has been set
      */
-    public function getBroadcastFactory(): ?Factory;
+    public function getBroadcastFactory(): Factory|null;
 
     /**
      * Check if broadcast factory has been set
@@ -46,5 +46,5 @@ interface BroadcastFactoryAware
      *
      * @return Factory|null A default broadcast factory value or Null if no default value is available
      */
-    public function getDefaultBroadcastFactory(): ?Factory;
+    public function getDefaultBroadcastFactory(): Factory|null;
 }

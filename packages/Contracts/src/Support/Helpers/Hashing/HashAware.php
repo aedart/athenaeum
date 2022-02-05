@@ -19,7 +19,7 @@ interface HashAware
      *
      * @return self
      */
-    public function setHash(?Hasher $hasher);
+    public function setHash(Hasher|null $hasher): static;
 
     /**
      * Get hash
@@ -32,7 +32,7 @@ interface HashAware
      *
      * @return Hasher|null hash or null if none hash has been set
      */
-    public function getHash(): ?Hasher;
+    public function getHash(): Hasher|null;
 
     /**
      * Check if hash has been set
@@ -46,5 +46,5 @@ interface HashAware
      *
      * @return Hasher|null A default hash value or Null if no default value is available
      */
-    public function getDefaultHash(): ?Hasher;
+    public function getDefaultHash(): Hasher|null;
 }

@@ -19,7 +19,7 @@ interface NotificationDispatcherAware
      *
      * @return self
      */
-    public function setNotificationDispatcher(?Dispatcher $dispatcher);
+    public function setNotificationDispatcher(Dispatcher|null $dispatcher): static;
 
     /**
      * Get notification dispatcher
@@ -32,7 +32,7 @@ interface NotificationDispatcherAware
      *
      * @return Dispatcher|null notification dispatcher or null if none notification dispatcher has been set
      */
-    public function getNotificationDispatcher(): ?Dispatcher;
+    public function getNotificationDispatcher(): Dispatcher|null;
 
     /**
      * Check if notification dispatcher has been set
@@ -46,5 +46,5 @@ interface NotificationDispatcherAware
      *
      * @return Dispatcher|null A default notification dispatcher value or Null if no default value is available
      */
-    public function getDefaultNotificationDispatcher(): ?Dispatcher;
+    public function getDefaultNotificationDispatcher(): Dispatcher|null;
 }

@@ -20,7 +20,7 @@ trait SessionManagerTrait
      *
      * @var SessionManager|null
      */
-    protected ?SessionManager $sessionManager = null;
+    protected SessionManager|null $sessionManager = null;
 
     /**
      * Set session manager
@@ -29,7 +29,7 @@ trait SessionManagerTrait
      *
      * @return self
      */
-    public function setSessionManager(?SessionManager $manager)
+    public function setSessionManager($manager): static
     {
         $this->sessionManager = $manager;
 
@@ -47,7 +47,7 @@ trait SessionManagerTrait
      *
      * @return SessionManager|null session manager or null if none session manager has been set
      */
-    public function getSessionManager(): ?SessionManager
+    public function getSessionManager()
     {
         if (!$this->hasSessionManager()) {
             $this->setSessionManager($this->getDefaultSessionManager());
@@ -70,7 +70,7 @@ trait SessionManagerTrait
      *
      * @return SessionManager|null A default session manager value or Null if no default value is available
      */
-    public function getDefaultSessionManager(): ?SessionManager
+    public function getDefaultSessionManager()
     {
         return Session::getFacadeRoot();
     }

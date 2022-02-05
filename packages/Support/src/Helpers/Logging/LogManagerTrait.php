@@ -29,7 +29,7 @@ trait LogManagerTrait
      *
      * @return self
      */
-    public function setLogManager(LogManager|null $manager): static
+    public function setLogManager($manager): static
     {
         $this->logManager = $manager;
 
@@ -47,7 +47,7 @@ trait LogManagerTrait
      *
      * @return LogManager|null log manager or null if none log manager has been set
      */
-    public function getLogManager(): LogManager|null
+    public function getLogManager()
     {
         if (!$this->hasLogManager()) {
             $this->setLogManager($this->getDefaultLogManager());
@@ -70,7 +70,7 @@ trait LogManagerTrait
      *
      * @return LogManager|null A default log manager value or Null if no default value is available
      */
-    public function getDefaultLogManager(): LogManager|null
+    public function getDefaultLogManager()
     {
         return Log::getFacadeRoot();
     }

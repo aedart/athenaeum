@@ -19,7 +19,7 @@ interface CacheStoreAware
      *
      * @return self
      */
-    public function setCacheStore(?Store $store);
+    public function setCacheStore(Store|null $store): static;
 
     /**
      * Get cache store
@@ -32,7 +32,7 @@ interface CacheStoreAware
      *
      * @return Store|null cache store or null if none cache store has been set
      */
-    public function getCacheStore(): ?Store;
+    public function getCacheStore(): Store|null;
 
     /**
      * Check if cache store has been set
@@ -46,5 +46,5 @@ interface CacheStoreAware
      *
      * @return Store|null A default cache store value or Null if no default value is available
      */
-    public function getDefaultCacheStore(): ?Store;
+    public function getDefaultCacheStore(): Store|null;
 }

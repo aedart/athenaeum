@@ -20,7 +20,7 @@ trait CookieTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $cookie = null;
+    protected Factory|null $cookie = null;
 
     /**
      * Set cookie
@@ -29,7 +29,7 @@ trait CookieTrait
      *
      * @return self
      */
-    public function setCookie(?Factory $factory)
+    public function setCookie(Factory|null $factory): static
     {
         $this->cookie = $factory;
 
@@ -47,7 +47,7 @@ trait CookieTrait
      *
      * @return Factory|null cookie or null if none cookie has been set
      */
-    public function getCookie(): ?Factory
+    public function getCookie(): Factory|null
     {
         if (!$this->hasCookie()) {
             $this->setCookie($this->getDefaultCookie());
@@ -70,7 +70,7 @@ trait CookieTrait
      *
      * @return Factory|null A default cookie value or Null if no default value is available
      */
-    public function getDefaultCookie(): ?Factory
+    public function getDefaultCookie(): Factory|null
     {
         return Cookie::getFacadeRoot();
     }

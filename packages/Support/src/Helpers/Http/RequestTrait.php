@@ -20,7 +20,7 @@ trait RequestTrait
      *
      * @var Request|null
      */
-    protected ?Request $request = null;
+    protected Request|null $request = null;
 
     /**
      * Set request
@@ -29,7 +29,7 @@ trait RequestTrait
      *
      * @return self
      */
-    public function setRequest(?Request $request)
+    public function setRequest($request): static
     {
         $this->request = $request;
 
@@ -47,7 +47,7 @@ trait RequestTrait
      *
      * @return Request|null request or null if none request has been set
      */
-    public function getRequest(): ?Request
+    public function getRequest()
     {
         if (!$this->hasRequest()) {
             $this->setRequest($this->getDefaultRequest());
@@ -70,7 +70,7 @@ trait RequestTrait
      *
      * @return Request|null A default request value or Null if no default value is available
      */
-    public function getDefaultRequest(): ?Request
+    public function getDefaultRequest()
     {
         return RequestFacade::getFacadeRoot();
     }

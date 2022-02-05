@@ -20,7 +20,7 @@ trait StorageTrait
      *
      * @var Filesystem|null
      */
-    protected ?Filesystem $storage = null;
+    protected Filesystem|null $storage = null;
 
     /**
      * Set storage
@@ -29,7 +29,7 @@ trait StorageTrait
      *
      * @return self
      */
-    public function setStorage(?Filesystem $disk)
+    public function setStorage(Filesystem|null $disk): static
     {
         $this->storage = $disk;
 
@@ -47,7 +47,7 @@ trait StorageTrait
      *
      * @return Filesystem|null storage or null if none storage has been set
      */
-    public function getStorage(): ?Filesystem
+    public function getStorage(): Filesystem|null
     {
         if (!$this->hasStorage()) {
             $this->setStorage($this->getDefaultStorage());
@@ -70,7 +70,7 @@ trait StorageTrait
      *
      * @return Filesystem|null A default storage value or Null if no default value is available
      */
-    public function getDefaultStorage(): ?Filesystem
+    public function getDefaultStorage(): Filesystem|null
     {
         $manager = Storage::getFacadeRoot();
         if (isset($manager)) {

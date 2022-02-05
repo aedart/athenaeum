@@ -19,7 +19,7 @@ interface CloudStorageAware
      *
      * @return self
      */
-    public function setCloudStorage(?Cloud $disk);
+    public function setCloudStorage(Cloud|null $disk): static;
 
     /**
      * Get cloud storage
@@ -32,7 +32,7 @@ interface CloudStorageAware
      *
      * @return Cloud|null cloud storage or null if none cloud storage has been set
      */
-    public function getCloudStorage(): ?Cloud;
+    public function getCloudStorage(): Cloud|null;
 
     /**
      * Check if cloud storage has been set
@@ -46,5 +46,5 @@ interface CloudStorageAware
      *
      * @return Cloud|null A default cloud storage value or Null if no default value is available
      */
-    public function getDefaultCloudStorage(): ?Cloud;
+    public function getDefaultCloudStorage(): Cloud|null;
 }

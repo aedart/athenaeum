@@ -20,7 +20,7 @@ trait AuthTrait
      *
      * @var Guard|null
      */
-    protected ?Guard $auth = null;
+    protected Guard|null $auth = null;
 
     /**
      * Set auth
@@ -29,7 +29,7 @@ trait AuthTrait
      *
      * @return self
      */
-    public function setAuth(?Guard $guard)
+    public function setAuth(Guard|null $guard): static
     {
         $this->auth = $guard;
 
@@ -47,7 +47,7 @@ trait AuthTrait
      *
      * @return Guard|null auth or null if none auth has been set
      */
-    public function getAuth(): ?Guard
+    public function getAuth(): Guard|null
     {
         if (!$this->hasAuth()) {
             $this->setAuth($this->getDefaultAuth());
@@ -70,7 +70,7 @@ trait AuthTrait
      *
      * @return Guard|null A default auth value or Null if no default value is available
      */
-    public function getDefaultAuth(): ?Guard
+    public function getDefaultAuth(): Guard|null
     {
         $manager = Auth::getFacadeRoot();
         if (isset($manager)) {

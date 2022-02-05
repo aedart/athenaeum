@@ -20,7 +20,7 @@ trait DbTrait
      *
      * @var ConnectionInterface|null
      */
-    protected ?ConnectionInterface $db = null;
+    protected ConnectionInterface|null $db = null;
 
     /**
      * Set db
@@ -29,7 +29,7 @@ trait DbTrait
      *
      * @return self
      */
-    public function setDb(?ConnectionInterface $connection)
+    public function setDb(ConnectionInterface|null $connection)
     {
         $this->db = $connection;
 
@@ -47,7 +47,7 @@ trait DbTrait
      *
      * @return ConnectionInterface|null db or null if none db has been set
      */
-    public function getDb(): ?ConnectionInterface
+    public function getDb(): ConnectionInterface|null
     {
         if (!$this->hasDb()) {
             $this->setDb($this->getDefaultDb());
@@ -70,7 +70,7 @@ trait DbTrait
      *
      * @return ConnectionInterface|null A default db value or Null if no default value is available
      */
-    public function getDefaultDb(): ?ConnectionInterface
+    public function getDefaultDb(): ConnectionInterface|null
     {
         $manager = DB::getFacadeRoot();
         if (isset($manager)) {

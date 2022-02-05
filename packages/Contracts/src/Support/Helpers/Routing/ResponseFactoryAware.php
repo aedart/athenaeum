@@ -19,7 +19,7 @@ interface ResponseFactoryAware
      *
      * @return self
      */
-    public function setResponseFactory(?ResponseFactory $factory);
+    public function setResponseFactory(ResponseFactory|null $factory): static;
 
     /**
      * Get response factory
@@ -32,7 +32,7 @@ interface ResponseFactoryAware
      *
      * @return ResponseFactory|null response factory or null if none response factory has been set
      */
-    public function getResponseFactory(): ?ResponseFactory;
+    public function getResponseFactory(): ResponseFactory|null;
 
     /**
      * Check if response factory has been set
@@ -46,5 +46,5 @@ interface ResponseFactoryAware
      *
      * @return ResponseFactory|null A default response factory value or Null if no default value is available
      */
-    public function getDefaultResponseFactory(): ?ResponseFactory;
+    public function getDefaultResponseFactory(): ResponseFactory|null;
 }

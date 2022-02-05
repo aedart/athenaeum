@@ -20,7 +20,7 @@ trait BroadcastTrait
      *
      * @var Broadcaster|null
      */
-    protected ?Broadcaster $broadcast = null;
+    protected Broadcaster|null $broadcast = null;
 
     /**
      * Set broadcast
@@ -29,7 +29,7 @@ trait BroadcastTrait
      *
      * @return self
      */
-    public function setBroadcast(?Broadcaster $broadcaster)
+    public function setBroadcast(Broadcaster|null $broadcaster): static
     {
         $this->broadcast = $broadcaster;
 
@@ -47,7 +47,7 @@ trait BroadcastTrait
      *
      * @return Broadcaster|null broadcast or null if none broadcast has been set
      */
-    public function getBroadcast(): ?Broadcaster
+    public function getBroadcast(): Broadcaster|null
     {
         if (!$this->hasBroadcast()) {
             $this->setBroadcast($this->getDefaultBroadcast());
@@ -70,7 +70,7 @@ trait BroadcastTrait
      *
      * @return Broadcaster|null A default broadcast value or Null if no default value is available
      */
-    public function getDefaultBroadcast(): ?Broadcaster
+    public function getDefaultBroadcast(): Broadcaster|null
     {
         $manager = Broadcast::getFacadeRoot();
         if (isset($manager)) {

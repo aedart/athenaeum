@@ -2,8 +2,6 @@
 
 namespace Aedart\Contracts\Support\Helpers\Session;
 
-use Illuminate\Session\SessionManager;
-
 /**
  * Session Manager Aware
  *
@@ -15,11 +13,11 @@ interface SessionManagerAware
     /**
      * Set session manager
      *
-     * @param SessionManager|null $manager Session Manager instance
+     * @param \Illuminate\Session\SessionManager|null $manager Session Manager instance
      *
      * @return self
      */
-    public function setSessionManager(?SessionManager $manager);
+    public function setSessionManager($manager): static;
 
     /**
      * Get session manager
@@ -30,9 +28,9 @@ interface SessionManagerAware
      *
      * @see getDefaultSessionManager()
      *
-     * @return SessionManager|null session manager or null if none session manager has been set
+     * @return \Illuminate\Session\SessionManager|null session manager or null if none session manager has been set
      */
-    public function getSessionManager(): ?SessionManager;
+    public function getSessionManager();
 
     /**
      * Check if session manager has been set
@@ -44,7 +42,7 @@ interface SessionManagerAware
     /**
      * Get a default session manager value, if any is available
      *
-     * @return SessionManager|null A default session manager value or Null if no default value is available
+     * @return \Illuminate\Session\SessionManager|null A default session manager value or Null if no default value is available
      */
-    public function getDefaultSessionManager(): ?SessionManager;
+    public function getDefaultSessionManager();
 }

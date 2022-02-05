@@ -20,7 +20,7 @@ trait QueueTrait
      *
      * @var Queue|null
      */
-    protected ?Queue $queue = null;
+    protected Queue|null $queue = null;
 
     /**
      * Set queue
@@ -29,7 +29,7 @@ trait QueueTrait
      *
      * @return self
      */
-    public function setQueue(?Queue $queue)
+    public function setQueue(Queue|null $queue): static
     {
         $this->queue = $queue;
 
@@ -47,7 +47,7 @@ trait QueueTrait
      *
      * @return Queue|null queue or null if none queue has been set
      */
-    public function getQueue(): ?Queue
+    public function getQueue(): Queue|null
     {
         if (!$this->hasQueue()) {
             $this->setQueue($this->getDefaultQueue());
@@ -70,7 +70,7 @@ trait QueueTrait
      *
      * @return Queue|null A default queue value or Null if no default value is available
      */
-    public function getDefaultQueue(): ?Queue
+    public function getDefaultQueue(): Queue|null
     {
         $manager = QueueFacade::getFacadeRoot();
         if (isset($manager)) {

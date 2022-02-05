@@ -20,7 +20,7 @@ trait RedirectTrait
      *
      * @var Redirector|null
      */
-    protected ?Redirector $redirect = null;
+    protected Redirector|null $redirect = null;
 
     /**
      * Set redirect
@@ -29,7 +29,7 @@ trait RedirectTrait
      *
      * @return self
      */
-    public function setRedirect(?Redirector $redirector)
+    public function setRedirect($redirector): static
     {
         $this->redirect = $redirector;
 
@@ -47,7 +47,7 @@ trait RedirectTrait
      *
      * @return Redirector|null redirect or null if none redirect has been set
      */
-    public function getRedirect(): ?Redirector
+    public function getRedirect()
     {
         if (!$this->hasRedirect()) {
             $this->setRedirect($this->getDefaultRedirect());
@@ -70,7 +70,7 @@ trait RedirectTrait
      *
      * @return Redirector|null A default redirect value or Null if no default value is available
      */
-    public function getDefaultRedirect(): ?Redirector
+    public function getDefaultRedirect()
     {
         return Redirect::getFacadeRoot();
     }

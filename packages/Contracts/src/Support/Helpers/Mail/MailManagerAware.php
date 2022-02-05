@@ -21,7 +21,7 @@ interface MailManagerAware
      *
      * @return self
      */
-    public function setMailManager(?Factory $manager);
+    public function setMailManager(Factory|null $manager): static;
 
     /**
      * Get mail manager
@@ -32,7 +32,7 @@ interface MailManagerAware
      *
      * @return Factory|null mail manager or null if none mail manager has been set
      */
-    public function getMailManager(): ?Factory;
+    public function getMailManager(): Factory|null;
 
     /**
      * Check if mail manager has been set
@@ -46,5 +46,5 @@ interface MailManagerAware
      *
      * @return Factory|null A default mail manager value or Null if no default value is available
      */
-    public function getDefaultMailManager(): ?Factory;
+    public function getDefaultMailManager(): Factory|null;
 }

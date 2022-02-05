@@ -2,8 +2,6 @@
 
 namespace Aedart\Contracts\Support\Helpers\View;
 
-use Illuminate\View\Compilers\BladeCompiler;
-
 /**
  * Blade Aware
  *
@@ -15,11 +13,11 @@ interface BladeAware
     /**
      * Set blade
      *
-     * @param BladeCompiler|null $compiler Laravel Blade Compiler instance
+     * @param \Illuminate\View\Compilers\BladeCompiler|null $compiler Laravel Blade Compiler instance
      *
      * @return self
      */
-    public function setBlade(?BladeCompiler $compiler);
+    public function setBlade($compiler): static;
 
     /**
      * Get blade
@@ -30,9 +28,9 @@ interface BladeAware
      *
      * @see getDefaultBlade()
      *
-     * @return BladeCompiler|null blade or null if none blade has been set
+     * @return \Illuminate\View\Compilers\BladeCompiler|null blade or null if none blade has been set
      */
-    public function getBlade(): ?BladeCompiler;
+    public function getBlade();
 
     /**
      * Check if blade has been set
@@ -44,7 +42,7 @@ interface BladeAware
     /**
      * Get a default blade value, if any is available
      *
-     * @return BladeCompiler|null A default blade value or Null if no default value is available
+     * @return \Illuminate\View\Compilers\BladeCompiler|null A default blade value or Null if no default value is available
      */
-    public function getDefaultBlade(): ?BladeCompiler;
+    public function getDefaultBlade();
 }
