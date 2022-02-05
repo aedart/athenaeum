@@ -60,14 +60,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Model Has Changed Listener
+    | Event Listeners
     |--------------------------------------------------------------------------
     |
-    | Class path to event listener that is responsible for recording Audit Trail
-    | Entry, based on received "model has changed" event.
+    | Class path to event subscriber that is responsible for recording Audit Trail
+    | Entry, based on received events.
     */
 
-    'listener' => \Aedart\Audit\Listeners\RecordAuditTrailEntry::class,
+    'subscriber' => \Aedart\Audit\Subscribers\AuditTrailEventSubscriber::class,
 
     /*
     |--------------------------------------------------------------------------

@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<<<<<<< HEAD
 ## [Unreleased]
+=======
 #### Added
 
 * `MultipleModelsChanged` event in Audit package.  
@@ -25,6 +27,8 @@ Will be removed in next major version (_in audit package_).
 
 * `$performedAt` argument ignored in `\Aedart\Audit\Events\ModelHasChanged`.
 
+### [v5.26.0](https://github.com/aedart/athenaeum/compare/5.25.0...5.26.0)
+>>>>>>> add-mass-audit-trail-recording
 
 ### Added
 
