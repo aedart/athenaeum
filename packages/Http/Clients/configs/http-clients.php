@@ -90,7 +90,7 @@ return [
                     /**
                      * Date formats
                      */
-                    'datetime_format' => \DateTimeInterface::ISO8601,
+                    'datetime_format' => \DateTimeInterface::RFC3339,
                     'date_format' => 'Y-m-d',
                     'year_format' => 'Y',
                     'month_format' => 'm',
@@ -130,7 +130,7 @@ return [
                     /**
                      * Date formats
                      */
-                    'datetime_format' => \DateTimeInterface::ISO8601,
+                    'datetime_format' => \DateTimeInterface::RFC3339,
                     'date_format' => 'Y-m-d',
                     'year_format' => 'Y',
                     'month_format' => 'm',
@@ -176,7 +176,7 @@ return [
                     /**
                      * Date formats
                      */
-                    'datetime_format' => \DateTimeInterface::ISO8601,
+                    'datetime_format' => \DateTimeInterface::RFC3339,
                     'date_format' => 'Y-m-d',
                     'year_format' => 'Y',
                     'month_format' => 'm',

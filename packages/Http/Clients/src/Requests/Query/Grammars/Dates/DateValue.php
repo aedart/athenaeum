@@ -19,7 +19,7 @@ class DateValue
      *
      * @var string|DateTimeInterface|null
      */
-    protected $date;
+    protected string|DateTimeInterface|null $date;
 
     /**
      * The date format
@@ -34,7 +34,7 @@ class DateValue
      * @param string|DateTimeInterface|null $date
      * @param string $format
      */
-    public function __construct($date, string $format)
+    public function __construct(string|DateTimeInterface|null $date, string $format)
     {
         $this->date = $date;
         $this->format = $format;
@@ -45,7 +45,7 @@ class DateValue
      *
      * @return DateTimeInterface|string|null
      */
-    public function date()
+    public function date(): string|DateTimeInterface|null
     {
         return $this->date;
     }

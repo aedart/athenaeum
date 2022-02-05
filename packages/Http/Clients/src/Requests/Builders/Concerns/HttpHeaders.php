@@ -46,7 +46,7 @@ trait HttpHeaders
     /**
      * @inheritdoc
      */
-    public function withHeaders(array $headers = []): Builder
+    public function withHeaders(array $headers = []): static
     {
         $this->headers = array_merge_recursive($this->headers, $headers);
 
@@ -56,7 +56,7 @@ trait HttpHeaders
     /**
      * @inheritdoc
      */
-    public function withHeader(string $name, $value): Builder
+    public function withHeader(string $name, $value): static
     {
         return $this->withHeaders([ $name => $value ]);
     }
@@ -64,7 +64,7 @@ trait HttpHeaders
     /**
      * @inheritdoc
      */
-    public function withoutHeader(string $name): Builder
+    public function withoutHeader(string $name): static
     {
         $name = $this->normaliseHeaderName($name);
 
@@ -90,7 +90,7 @@ trait HttpHeaders
     /**
      * @inheritdoc
      */
-    public function getHeader(string $name)
+    public function getHeader(string $name): mixed
     {
         $name = $this->normaliseHeaderName($name);
         foreach ($this->headers as $header => $value) {
@@ -105,7 +105,7 @@ trait HttpHeaders
     /**
      * @inheritdoc
      */
-    public function withAccept(string $contentType): Builder
+    public function withAccept(string $contentType): static
     {
         return $this
             ->withoutHeader('Accept')
@@ -115,7 +115,7 @@ trait HttpHeaders
     /**
      * @inheritdoc
      */
-    public function withContentType(string $contentType): Builder
+    public function withContentType(string $contentType): static
     {
         return $this
             ->withoutHeader('Content-Type')
@@ -125,7 +125,7 @@ trait HttpHeaders
     /**
      * @inheritdoc
      */
-    public function useTokenAuth(string $token, string $scheme = 'Bearer'): Builder
+    public function useTokenAuth(string $token, string $scheme = 'Bearer'): static
     {
         return $this
             ->withoutHeader('Authorization')

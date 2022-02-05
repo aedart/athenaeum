@@ -28,7 +28,7 @@ trait BaseUrl
     /**
      * @inheritdoc
      */
-    public function withBaseUrl(string $url): Builder
+    public function withBaseUrl(string $url): static
     {
         $this->baseUrl = $url;
 

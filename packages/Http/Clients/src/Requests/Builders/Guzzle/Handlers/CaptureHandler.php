@@ -2,6 +2,7 @@
 
 namespace Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers;
 
+use GuzzleHttp\Promise\Create;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
@@ -22,7 +23,7 @@ class CaptureHandler
      *
      * @var RequestInterface|null
      */
-    protected ?RequestInterface $request;
+    protected RequestInterface|null $request;
 
     /**
      * The processed options
@@ -36,7 +37,7 @@ class CaptureHandler
      *
      * @return RequestInterface|null
      */
-    public function request(): ?RequestInterface
+    public function request(): RequestInterface|null
     {
         return $this->request;
     }
@@ -66,6 +67,6 @@ class CaptureHandler
         $this->options = $options;
 
         // Resolve with empty response
-        return \GuzzleHttp\Promise\promise_for(new Response());
+        return Create::promiseFor(new Response());
     }
 }

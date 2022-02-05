@@ -19,7 +19,7 @@ trait Conditions
     /**
      * @inheritdoc
      */
-    public function when(bool $result, callable $callback, ?callable $otherwise = null): Builder
+    public function when(bool $result, callable $callback, callable|null $otherwise = null): static
     {
         if ($result === true) {
             $callback($this);
@@ -33,7 +33,7 @@ trait Conditions
     /**
      * @inheritdoc
      */
-    public function unless(bool $result, callable $callback, ?callable $otherwise = null): Builder
+    public function unless(bool $result, callable $callback, callable|null $otherwise = null): static
     {
         return $this->when(!$result, $callback, $otherwise);
     }

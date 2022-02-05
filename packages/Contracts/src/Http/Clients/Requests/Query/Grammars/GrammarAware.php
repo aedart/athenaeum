@@ -19,7 +19,7 @@ interface GrammarAware
      *
      * @return self
      */
-    public function setGrammar(?Grammar $grammar);
+    public function setGrammar(Grammar|null $grammar): static;
 
     /**
      * Get grammar
@@ -30,7 +30,7 @@ interface GrammarAware
      *
      * @return Grammar|null grammar or null if none grammar has been set
      */
-    public function getGrammar(): ?Grammar;
+    public function getGrammar(): Grammar|null;
 
     /**
      * Check if grammar has been set
@@ -44,5 +44,5 @@ interface GrammarAware
      *
      * @return Grammar|null A default grammar value or Null if no default value is available
      */
-    public function getDefaultGrammar(): ?Grammar;
+    public function getDefaultGrammar(): Grammar|null;
 }

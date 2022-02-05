@@ -4,6 +4,7 @@ namespace Aedart\Http\Clients\Requests\Builders\Guzzle\Handlers;
 
 use Aedart\Contracts\Http\Clients\Requests\Handler;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -45,6 +46,8 @@ class SendRequestHandler implements Handler
 
     /**
      * @inheritDoc
+     *
+     * @throws GuzzleException
      */
     public function handle(RequestInterface $request): ResponseInterface
     {

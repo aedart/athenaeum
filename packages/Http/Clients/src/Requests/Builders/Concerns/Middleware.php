@@ -6,10 +6,19 @@ use Aedart\Container\ListResolver;
 use Aedart\Contracts\Http\Clients\Middleware as MiddlewareInterface;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Builders\HttpRequestBuilderAware;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Collection;
 
 /**
  * Concerns Middleware
+ *
+ * @see Builder
+ * @see Builder::withMiddleware
+ * @see Builder::prependMiddleware
+ * @see Builder::pushMiddleware
+ * @see Builder::hasMiddleware
+ * @see Builder::getMiddleware
+ * @see Builder::withoutMiddleware
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders\Concerns
@@ -21,12 +30,14 @@ trait Middleware
      *
      * @var Collection|null
      */
-    protected ?Collection $middleware = null;
+    protected Collection|null $middleware = null;
 
     /**
      * @inheritDoc
+     *
+     * @throws BindingResolutionException
      */
-    public function withMiddleware($middleware): Builder
+    public function withMiddleware(array|string|MiddlewareInterface $middleware): static
     {
         if (!is_array($middleware)) {
             return $this->pushMiddleware($middleware);
@@ -44,8 +55,10 @@ trait Middleware
 
     /**
      * @inheritDoc
+     *
+     * @throws BindingResolutionException
      */
-    public function prependMiddleware($middleware): Builder
+    public function prependMiddleware(string|MiddlewareInterface $middleware): static
     {
         $this->middleware->prepend(
             $this->resolveMiddleware($middleware)
@@ -56,8 +69,10 @@ trait Middleware
 
     /**
      * @inheritDoc
+     *
+     * @throws BindingResolutionException
      */
-    public function pushMiddleware($middleware): Builder
+    public function pushMiddleware(string|MiddlewareInterface $middleware): static
     {
         $this->middleware->push(
             $this->resolveMiddleware($middleware)
@@ -85,7 +100,7 @@ trait Middleware
     /**
      * @inheritDoc
      */
-    public function withoutMiddleware(): Builder
+    public function withoutMiddleware(): static
     {
         $this->middleware = $this->makeMiddlewareCollation();
 
@@ -93,7 +108,7 @@ trait Middleware
     }
 
     /**
-     * Setup the provided middleware instance
+     * Configure the provided middleware instance
      *
      * @param  MiddlewareInterface  $middleware
      *
@@ -115,11 +130,13 @@ trait Middleware
     /**
      * Resolve middleware instance
      *
-     * @param string|MiddlewareInterface $middleware
+     * @param  string|MiddlewareInterface  $middleware
      *
      * @return MiddlewareInterface
+     *
+     * @throws BindingResolutionException
      */
-    protected function resolveMiddleware($middleware): MiddlewareInterface
+    protected function resolveMiddleware(string|MiddlewareInterface $middleware): MiddlewareInterface
     {
         if (is_string($middleware)) {
             $middleware = $this->getContainer()->make($middleware);

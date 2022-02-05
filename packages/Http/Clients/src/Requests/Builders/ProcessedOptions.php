@@ -47,7 +47,7 @@ class ProcessedOptions
      *
      * @return self
      */
-    public function setOptions(array $options = [])
+    public function setOptions(array $options = []): static
     {
         $this->options = $options;
 
@@ -83,7 +83,7 @@ class ProcessedOptions
      *
      * @return self
      */
-    public function setBuilder(Builder $builder)
+    public function setBuilder(Builder $builder): static
     {
         $this->builder = $builder;
 

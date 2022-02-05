@@ -30,7 +30,7 @@ class ExtractsPayload
      * @throws Throwable
      * @throws InvalidAttachmentFormatException
      */
-    public function handle(ProcessedOptions $processed, $next)
+    public function handle(ProcessedOptions $processed, mixed $next): mixed
     {
         $options = $processed->options();
         $builder = $processed->builder();
@@ -74,7 +74,7 @@ class ExtractsPayload
      * @throws Throwable
      * @throws InvalidAttachmentFormatException
      */
-    protected function extractAndApplyPayload(array $options, Builder $builder)
+    protected function extractAndApplyPayload(array $options, Builder $builder): Builder
     {
         // Extract data from options
         $data = PayloadData::extract($options);

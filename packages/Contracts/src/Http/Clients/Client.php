@@ -41,7 +41,7 @@ use Psr\Http\Message\UriInterface;
  * @method mixed getHeader(string $name) Get the desired Http header, for the next request.
  * @method Builder useProtocolVersion(string $version) Set the HTTP protocol version, for the next request.
  * @method string getProtocolVersion() Get the HTTP protocol version, for the next request.
- * @method Builder withAccept(string $contentType) Use given Accept header for the next request.
+ * @method Builder withAccept(string $contentType) Use given "Accept" header for the next request.
  * @method Builder withContentType(string $contentType) Use given Content-Type for the next request.
  * @method Builder formFormat() Use application/x-www-form-urlencoded as next request's body format.
  * @method Builder jsonFormat() Use json as data format as next request's body format.
@@ -89,11 +89,11 @@ use Psr\Http\Message\UriInterface;
  * @method Builder withExpectations(callable[]|ResponseExpectation[] $expectations = []) Add one or more expectations for the next request.
  * @method bool hasExpectations() Determine if any expectations have been added for the next request.
  * @method ResponseExpectation[] getExpectations() Returns list of expectations for the next request.
- * @method Builder withMiddleware(string|Middleware|string[]|Middleware[] $middleware) Add middleware to process next outgoing request and it's incoming response.
+ * @method Builder withMiddleware(string|Middleware|string[]|Middleware[] $middleware) Add middleware to process next outgoing request, and its incoming response.
  * @method Builder prependMiddleware(string|Middleware $middleware) Add middleware at the beginning of the middleware list
  * @method Builder pushMiddleware(string|Middleware $middleware) Append middleware to the end of the middleware list
- * @method bool hasMiddleware() Determine whether or not middleware has been assign for the next request.
- * @method Middleware[] getMiddleware() Returns list of middleware that must process next outgoing request and it's incoming response.
+ * @method bool hasMiddleware() Determine whether middleware has been assign for the next request or not
+ * @method Middleware[] getMiddleware() Returns list of middleware that must process next outgoing request, and its incoming response.
  * @method Builder withoutMiddleware() Removes assigned middleware for the next request.
  * @method Builder withOption(string $name, mixed $value) Set a specific option for the next request.
  * @method Builder withOptions(array $options = []) Apply a set of options for the next request.
@@ -159,7 +159,7 @@ interface Client extends
      *
      * @return mixed
      */
-    public function driver();
+    public function driver(): mixed;
 
     /**
      * Creates and returns a new Http Request Builder

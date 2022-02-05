@@ -21,7 +21,7 @@ class AppliesHttpProtocolVersion
      *
      * @return mixed
      */
-    public function handle(ProcessedOptions $processed, $next)
+    public function handle(ProcessedOptions $processed, mixed $next): mixed
     {
         $options = $processed->options();
 

@@ -26,7 +26,7 @@ class AppliesCookies
      *
      * @throws Throwable
      */
-    public function handle(ProcessedOptions $processed, $next)
+    public function handle(ProcessedOptions $processed, mixed $next): mixed
     {
         $options = $processed->options();
         $builder = $processed->builder();

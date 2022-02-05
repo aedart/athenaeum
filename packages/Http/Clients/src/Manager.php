@@ -37,7 +37,7 @@ class Manager implements
      *
      * @param Container|null $container [optional]
      */
-    public function __construct(?Container $container = null)
+    public function __construct(Container|null $container = null)
     {
         $this->defaultProfileKey = 'http-clients.default';
         $this->profilesKey = 'http-clients.profiles';
@@ -48,7 +48,7 @@ class Manager implements
     /**
      * {@inheritdoc}
      */
-    public function profile(?string $profile = null, array $options = []): Client
+    public function profile(string|null $profile = null, array $options = []): Client
     {
         // Resolve requested profile name
         $profile = $this->resolveProfile($profile);
@@ -75,7 +75,7 @@ class Manager implements
      *
      * @throws ProfileNotFoundException
      */
-    public function fresh(?string $profile = null, array $options = []): Client
+    public function fresh(string|null $profile = null, array $options = []): Client
     {
         // Resolve requested profile name
         $profile = $this->resolveProfile($profile);

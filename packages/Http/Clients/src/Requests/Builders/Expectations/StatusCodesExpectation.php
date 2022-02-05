@@ -37,7 +37,7 @@ class StatusCodesExpectation extends ResponseExpectation
      * @param callable|null $otherwise [optional] Callback to be invoked when received http status code does not
      *                                 match either of the expected codes.
      */
-    public function __construct($expectedStatusCodes, ?callable $otherwise = null)
+    public function __construct($expectedStatusCodes, callable|null $otherwise = null)
     {
         parent::__construct();
 
@@ -56,7 +56,7 @@ class StatusCodesExpectation extends ResponseExpectation
      *
      * @return self
      */
-    public function setExpectedStatusCodes($codes)
+    public function setExpectedStatusCodes(array|int $codes): static
     {
         if (!is_array($codes)) {
             $codes = [$codes];
@@ -75,7 +75,7 @@ class StatusCodesExpectation extends ResponseExpectation
      *
      * @return self
      */
-    public function setOtherwise(?callable $otherwise = null)
+    public function setOtherwise(callable|null $otherwise = null): static
     {
         $this->otherwise = $otherwise;
 

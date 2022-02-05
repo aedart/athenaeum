@@ -38,7 +38,7 @@ class PayloadData
      *
      * @return mixed Array if form_params, json or multipart.
      */
-    public static function extract(array $options)
+    public static function extract(array $options): mixed
     {
         $targets = static::dataIdentifiers();
 
@@ -70,7 +70,7 @@ class PayloadData
     protected static function mergeIfExists(string $key, array $from, array $target): array
     {
         if (array_key_exists($key, $from)) {
-            return $target = array_merge($target, $from[$key]);
+            return array_merge($target, $from[$key]);
         }
 
         return $target;

@@ -76,7 +76,7 @@ abstract class BaseClient implements Client
      *
      * @return mixed
      */
-    public function __call($method, $arguments)
+    public function __call(string $method, array $arguments): mixed
     {
         return $this->makeBuilder()->{$method}(...$arguments);
     }

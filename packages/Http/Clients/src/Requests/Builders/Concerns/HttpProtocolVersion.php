@@ -26,7 +26,7 @@ trait HttpProtocolVersion
     /**
      * @inheritdoc
      */
-    public function useProtocolVersion(string $version): Builder
+    public function useProtocolVersion(string $version): static
     {
         $this->httpProtocolVersion = $version;
 

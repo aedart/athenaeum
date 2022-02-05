@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Clients\Requests\Attachment;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Http\Clients\Exceptions\InvalidAttachmentFormat;
 use Aedart\Http\Clients\Requests\Attachment as RequestAttachment;
+use Throwable;
 
 /**
  * Concerns Attachments
@@ -34,8 +35,10 @@ trait Attachments
 
     /**
      * @inheritdoc
+     *
+     * @throws Throwable
      */
-    public function withAttachment($attachment): Builder
+    public function withAttachment(Attachment|array|callable $attachment): static
     {
         $this->multipartFormat();
 
@@ -59,8 +62,10 @@ trait Attachments
 
     /**
      * @inheritdoc
+     *
+     * @throws Throwable
      */
-    public function withAttachments(array $attachments = []): Builder
+    public function withAttachments(array $attachments = []): static
     {
         foreach ($attachments as $attachment) {
             $this->withAttachment($attachment);
@@ -72,7 +77,7 @@ trait Attachments
     /**
      * @inheritdoc
      */
-    public function withoutAttachment(string $name): Builder
+    public function withoutAttachment(string $name): static
     {
         unset($this->attachments[$name]);
 
@@ -90,7 +95,7 @@ trait Attachments
     /**
      * @inheritdoc
      */
-    public function getAttachment(string $name): ?Attachment
+    public function getAttachment(string $name): Attachment|null
     {
         if ($this->hasAttachment($name)) {
             return $this->attachments[$name];
@@ -109,13 +114,16 @@ trait Attachments
 
     /**
      * @inheritdoc
+     *
+     * @throws Throwable
      */
     public function attachFile(
         string $name,
         string $path,
         array $headers = [],
-        ?string $filename = null
-    ): Builder {
+        string|null $filename = null
+    ): static
+    {
         $attachment = $this->makeAttachment([
             'name' => $name,
             'headers' => $headers,
@@ -127,6 +135,8 @@ trait Attachments
 
     /**
      * @inheritdoc
+     *
+     * @throws Throwable
      */
     public function makeAttachment(array $data = []): Attachment
     {
@@ -140,9 +150,11 @@ trait Attachments
     /**
      * Resolves an attachment from given callback
      *
-     * @param callable $callback New {@see Attachment} instance is given as callback argument
+     * @param  callable  $callback  New {@see Attachment} instance is given as callback argument
      *
      * @return Attachment
+     *
+     * @throws Throwable
      */
     protected function resolveCallbackAttachment(callable $callback): Attachment
     {

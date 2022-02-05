@@ -10,11 +10,9 @@ use Aedart\Http\Clients\Requests\Query\Builder as QueryBuilder;
  * Concerns Http Query
  *
  * @see Builder
- * @see Builder::withQuery
+ * @see Builder::query
+ * @see Builder::newQuery
  * @see Builder::setQuery
- * @see Builder::hasQuery
- * @see Builder::getQuery
- * @see Builder::where
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders\Concerns
@@ -26,7 +24,7 @@ trait HttpQuery
      *
      * @var Query|null
      */
-    protected ?Query $query = null;
+    protected Query|null $query = null;
 
     /**
      * @inheritdoc
@@ -56,7 +54,7 @@ trait HttpQuery
     /**
      * @inheritdoc
      */
-    public function setQuery(Query $query): Builder
+    public function setQuery(Query $query): static
     {
         $this->query = $query;
 

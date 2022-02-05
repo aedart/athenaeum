@@ -19,7 +19,7 @@ trait HttpRequestBuilderTrait
      *
      * @var Builder|null
      */
-    protected ?Builder $httpRequestBuilder = null;
+    protected Builder|null $httpRequestBuilder = null;
 
     /**
      * Set http request builder
@@ -28,7 +28,7 @@ trait HttpRequestBuilderTrait
      *
      * @return self
      */
-    public function setHttpRequestBuilder(?Builder $builder)
+    public function setHttpRequestBuilder(Builder|null $builder): static
     {
         $this->httpRequestBuilder = $builder;
 
@@ -44,7 +44,7 @@ trait HttpRequestBuilderTrait
      *
      * @return Builder|null http request builder or null if none http request builder has been set
      */
-    public function getHttpRequestBuilder(): ?Builder
+    public function getHttpRequestBuilder(): Builder|null
     {
         if (!$this->hasHttpRequestBuilder()) {
             $this->setHttpRequestBuilder($this->getDefaultHttpRequestBuilder());
@@ -67,7 +67,7 @@ trait HttpRequestBuilderTrait
      *
      * @return Builder|null A default http request builder value or Null if no default value is available
      */
-    public function getDefaultHttpRequestBuilder(): ?Builder
+    public function getDefaultHttpRequestBuilder(): Builder|null
     {
         return null;
     }

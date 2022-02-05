@@ -32,7 +32,7 @@ class ResponseExpectation implements ResponseExpectationInterface
      *
      * @param  callable|null  $callback  [optional]
      */
-    public function __construct(?callable $callback = null)
+    public function __construct(callable|null $callback = null)
     {
         if (isset($callback)) {
             $this->expect($callback);
@@ -42,7 +42,7 @@ class ResponseExpectation implements ResponseExpectationInterface
     /**
      * @inheritdoc
      */
-    public function expect(callable $expectation): ResponseExpectationInterface
+    public function expect(callable $expectation): static
     {
         $this->expectationCallback = $expectation;
 

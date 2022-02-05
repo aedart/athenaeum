@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Clients\Exceptions\InvalidStatusCodeException;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Http\Clients\Exceptions\InvalidStatusCode;
 use Psr\Http\Message\ResponseInterface;
+use Stringable;
 
 /**
  * Http Response Status
@@ -15,7 +16,9 @@ use Psr\Http\Message\ResponseInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Responses
  */
-class ResponseStatus implements Status
+class ResponseStatus implements
+    Status,
+    Stringable
 {
     /**
      * Response Http status code
@@ -129,7 +132,7 @@ class ResponseStatus implements Status
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $code = $this->code();
         $phrase = $this->phrase();
