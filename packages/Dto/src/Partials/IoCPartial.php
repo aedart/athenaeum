@@ -8,7 +8,10 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Facades\App;
 use ReflectionClass;
 use ReflectionException;
+use ReflectionNamedType;
 use ReflectionParameter;
+use ReflectionType;
+use ReflectionUnionType;
 use Throwable;
 
 /**
@@ -103,11 +106,33 @@ trait IoCPartial
      */
     protected function resolveParameter(ReflectionParameter $parameter, mixed $value): mixed
     {
-        // If there is no class for the given parameter
-        // then some kind of primitive data has been provided
-        // and thus we need only to return it.
         $type = $parameter->getType();
-        if (!isset($type) || $type->isBuiltin()) {
+
+        // When no type is available...
+        if (!isset($type)) {
+            return $value;
+        }
+
+        // When union type given...
+        if ($type instanceof ReflectionUnionType) {
+            $types = $type->getTypes();
+
+            $allAreBuiltIn = true;
+            foreach ($types as $t){
+                if (!$t->isBuiltin()) {
+                    $allAreBuiltIn = false;
+                    break;
+                }
+            }
+
+            // Return value if all union types are builtin
+            if ($allAreBuiltIn) {
+                return $value;
+            }
+        }
+
+        // When a reflection type
+        if ($type instanceof ReflectionType && $type->isBuiltin()) {
             return $value;
         }
 
@@ -127,7 +152,7 @@ trait IoCPartial
      * Builds the given class and populates it
      *
      * @param string $class Class path to instantiate / resolve from IoC
-     * @param ReflectionParameter|string $parameter Name of property or property reflection
+     * @param ReflectionParameter|ReflectionNamedType|string $parameter Name of property or property reflection
      * @param mixed $value The value to be passed to the setter method
      *
      * @return mixed
@@ -135,7 +160,7 @@ trait IoCPartial
      * @throws BindingResolutionException
      * @throws Throwable
      */
-    protected function resolveClassAndPopulate(string $class, ReflectionParameter|string $parameter, mixed $value): mixed
+    protected function resolveClassAndPopulate(string $class, ReflectionParameter|ReflectionNamedType|string $parameter, mixed $value): mixed
     {
         // In some situations, the given value is already an instance of the
         // given class. If such, then there is no need to do anything.
@@ -144,7 +169,7 @@ trait IoCPartial
         }
 
         $name = $parameter;
-        if ($parameter instanceof ReflectionParameter) {
+        if ($parameter instanceof ReflectionParameter || $parameter instanceof ReflectionNamedType) {
             $name = $parameter->getName();
         }
 
