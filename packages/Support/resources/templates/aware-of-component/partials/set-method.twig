@@ -1,1 +1,1 @@
-public function set{{ propertyName }}({{- dataType == 'mixed' ? '' : "?#{dataType} " -}} ${{ inputArgument }})
+public function set{{ propertyName }}({{ dataType }}|null ${{ inputArgument }}): static
