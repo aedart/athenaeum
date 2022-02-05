@@ -19,31 +19,31 @@ interface DatabasePathAware
      *
      * @return self
      */
-    public function setDatabasePath(?string $path);
+    public function setDatabasePath(string|null $path): static;
 
     /**
      * Get database path
      *
-     * If no "database path" value set, method
-     * sets and returns a default "database path".
+     * If no database path value set, method
+     * sets and returns a default database path.
      *
      * @see getDefaultDatabasePath()
      *
      * @return string|null database path or null if no database path has been set
      */
-    public function getDatabasePath(): ?string;
+    public function getDatabasePath(): string|null;
 
     /**
-     * Check if "database path" has been set
+     * Check if database path has been set
      *
-     * @return bool True if "database path" has been set, false if not
+     * @return bool True if database path has been set, false if not
      */
     public function hasDatabasePath(): bool;
 
     /**
-     * Get a default "database path" value, if any is available
+     * Get a default database path value, if any is available
      *
-     * @return string|null Default "database path" value or null if no default value is available
+     * @return string|null Default database path value or null if no default value is available
      */
-    public function getDefaultDatabasePath(): ?string;
+    public function getDefaultDatabasePath(): string|null;
 }

@@ -19,31 +19,31 @@ interface WidthAware
      *
      * @return self
      */
-    public function setWidth(?float $amount);
+    public function setWidth(float|null $amount): static;
 
     /**
      * Get width
      *
-     * If no "width" value set, method
-     * sets and returns a default "width".
+     * If no width value set, method
+     * sets and returns a default width.
      *
      * @see getDefaultWidth()
      *
      * @return float|null width or null if no width has been set
      */
-    public function getWidth(): ?float;
+    public function getWidth(): float|null;
 
     /**
-     * Check if "width" has been set
+     * Check if width has been set
      *
-     * @return bool True if "width" has been set, false if not
+     * @return bool True if width has been set, false if not
      */
     public function hasWidth(): bool;
 
     /**
-     * Get a default "width" value, if any is available
+     * Get a default width value, if any is available
      *
-     * @return float|null Default "width" value or null if no default value is available
+     * @return float|null Default width value or null if no default value is available
      */
-    public function getDefaultWidth(): ?float;
+    public function getDefaultWidth(): float|null;
 }

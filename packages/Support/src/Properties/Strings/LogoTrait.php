@@ -17,7 +17,7 @@ trait LogoTrait
      *
      * @var string|null
      */
-    protected ?string $logo = null;
+    protected string|null $logo = null;
 
     /**
      * Set logo
@@ -26,7 +26,7 @@ trait LogoTrait
      *
      * @return self
      */
-    public function setLogo(?string $location)
+    public function setLogo(string|null $location): static
     {
         $this->logo = $location;
 
@@ -36,14 +36,14 @@ trait LogoTrait
     /**
      * Get logo
      *
-     * If no "logo" value set, method
-     * sets and returns a default "logo".
+     * If no logo value set, method
+     * sets and returns a default logo.
      *
      * @see getDefaultLogo()
      *
      * @return string|null logo or null if no logo has been set
      */
-    public function getLogo(): ?string
+    public function getLogo(): string|null
     {
         if (!$this->hasLogo()) {
             $this->setLogo($this->getDefaultLogo());
@@ -52,9 +52,9 @@ trait LogoTrait
     }
 
     /**
-     * Check if "logo" has been set
+     * Check if logo has been set
      *
-     * @return bool True if "logo" has been set, false if not
+     * @return bool True if logo has been set, false if not
      */
     public function hasLogo(): bool
     {
@@ -62,11 +62,11 @@ trait LogoTrait
     }
 
     /**
-     * Get a default "logo" value, if any is available
+     * Get a default logo value, if any is available
      *
-     * @return string|null Default "logo" value or null if no default value is available
+     * @return string|null Default logo value or null if no default value is available
      */
-    public function getDefaultLogo(): ?string
+    public function getDefaultLogo(): string|null
     {
         return null;
     }

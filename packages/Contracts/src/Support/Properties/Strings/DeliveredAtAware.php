@@ -19,31 +19,31 @@ interface DeliveredAtAware
      *
      * @return self
      */
-    public function setDeliveredAt(?string $date);
+    public function setDeliveredAt(string|null $date): static;
 
     /**
      * Get delivered at
      *
-     * If no "delivered at" value set, method
-     * sets and returns a default "delivered at".
+     * If no delivered at value set, method
+     * sets and returns a default delivered at.
      *
      * @see getDefaultDeliveredAt()
      *
      * @return string|null delivered at or null if no delivered at has been set
      */
-    public function getDeliveredAt(): ?string;
+    public function getDeliveredAt(): string|null;
 
     /**
-     * Check if "delivered at" has been set
+     * Check if delivered at has been set
      *
-     * @return bool True if "delivered at" has been set, false if not
+     * @return bool True if delivered at has been set, false if not
      */
     public function hasDeliveredAt(): bool;
 
     /**
-     * Get a default "delivered at" value, if any is available
+     * Get a default delivered at value, if any is available
      *
-     * @return string|null Default "delivered at" value or null if no default value is available
+     * @return string|null Default delivered at value or null if no default value is available
      */
-    public function getDefaultDeliveredAt(): ?string;
+    public function getDefaultDeliveredAt(): string|null;
 }

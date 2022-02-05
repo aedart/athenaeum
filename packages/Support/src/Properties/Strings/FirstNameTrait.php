@@ -17,7 +17,7 @@ trait FirstNameTrait
      *
      * @var string|null
      */
-    protected ?string $firstName = null;
+    protected string|null $firstName = null;
 
     /**
      * Set first name
@@ -26,7 +26,7 @@ trait FirstNameTrait
      *
      * @return self
      */
-    public function setFirstName(?string $name)
+    public function setFirstName(string|null $name): static
     {
         $this->firstName = $name;
 
@@ -36,14 +36,14 @@ trait FirstNameTrait
     /**
      * Get first name
      *
-     * If no "first name" value set, method
-     * sets and returns a default "first name".
+     * If no first name value set, method
+     * sets and returns a default first name.
      *
      * @see getDefaultFirstName()
      *
      * @return string|null first name or null if no first name has been set
      */
-    public function getFirstName(): ?string
+    public function getFirstName(): string|null
     {
         if (!$this->hasFirstName()) {
             $this->setFirstName($this->getDefaultFirstName());
@@ -52,9 +52,9 @@ trait FirstNameTrait
     }
 
     /**
-     * Check if "first name" has been set
+     * Check if first name has been set
      *
-     * @return bool True if "first name" has been set, false if not
+     * @return bool True if first name has been set, false if not
      */
     public function hasFirstName(): bool
     {
@@ -62,11 +62,11 @@ trait FirstNameTrait
     }
 
     /**
-     * Get a default "first name" value, if any is available
+     * Get a default first name value, if any is available
      *
-     * @return string|null Default "first name" value or null if no default value is available
+     * @return string|null Default first name value or null if no default value is available
      */
-    public function getDefaultFirstName(): ?string
+    public function getDefaultFirstName(): string|null
     {
         return null;
     }

@@ -17,7 +17,7 @@ trait PurchasedAtTrait
      *
      * @var \DateTime|null
      */
-    protected ?\DateTime $purchasedAt = null;
+    protected \DateTime|null $purchasedAt = null;
 
     /**
      * Set purchased at
@@ -26,7 +26,7 @@ trait PurchasedAtTrait
      *
      * @return self
      */
-    public function setPurchasedAt(?\DateTime $date)
+    public function setPurchasedAt(\DateTime|null $date): static
     {
         $this->purchasedAt = $date;
 
@@ -36,14 +36,14 @@ trait PurchasedAtTrait
     /**
      * Get purchased at
      *
-     * If no "purchased at" value set, method
-     * sets and returns a default "purchased at".
+     * If no purchased at value set, method
+     * sets and returns a default purchased at.
      *
      * @see getDefaultPurchasedAt()
      *
      * @return \DateTime|null purchased at or null if no purchased at has been set
      */
-    public function getPurchasedAt(): ?\DateTime
+    public function getPurchasedAt(): \DateTime|null
     {
         if (!$this->hasPurchasedAt()) {
             $this->setPurchasedAt($this->getDefaultPurchasedAt());
@@ -52,9 +52,9 @@ trait PurchasedAtTrait
     }
 
     /**
-     * Check if "purchased at" has been set
+     * Check if purchased at has been set
      *
-     * @return bool True if "purchased at" has been set, false if not
+     * @return bool True if purchased at has been set, false if not
      */
     public function hasPurchasedAt(): bool
     {
@@ -62,11 +62,11 @@ trait PurchasedAtTrait
     }
 
     /**
-     * Get a default "purchased at" value, if any is available
+     * Get a default purchased at value, if any is available
      *
-     * @return \DateTime|null Default "purchased at" value or null if no default value is available
+     * @return \DateTime|null Default purchased at value or null if no default value is available
      */
-    public function getDefaultPurchasedAt(): ?\DateTime
+    public function getDefaultPurchasedAt(): \DateTime|null
     {
         return null;
     }

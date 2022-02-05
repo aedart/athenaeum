@@ -19,31 +19,31 @@ interface BirthdateAware
      *
      * @return self
      */
-    public function setBirthdate(?string $date);
+    public function setBirthdate(string|null $date): static;
 
     /**
      * Get birthdate
      *
-     * If no "birthdate" value set, method
-     * sets and returns a default "birthdate".
+     * If no birthdate value set, method
+     * sets and returns a default birthdate.
      *
      * @see getDefaultBirthdate()
      *
      * @return string|null birthdate or null if no birthdate has been set
      */
-    public function getBirthdate(): ?string;
+    public function getBirthdate(): string|null;
 
     /**
-     * Check if "birthdate" has been set
+     * Check if birthdate has been set
      *
-     * @return bool True if "birthdate" has been set, false if not
+     * @return bool True if birthdate has been set, false if not
      */
     public function hasBirthdate(): bool;
 
     /**
-     * Get a default "birthdate" value, if any is available
+     * Get a default birthdate value, if any is available
      *
-     * @return string|null Default "birthdate" value or null if no default value is available
+     * @return string|null Default birthdate value or null if no default value is available
      */
-    public function getDefaultBirthdate(): ?string;
+    public function getDefaultBirthdate(): string|null;
 }

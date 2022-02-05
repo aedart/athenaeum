@@ -17,7 +17,7 @@ trait DeceasedAtTrait
      *
      * @var \DateTime|null
      */
-    protected ?\DateTime $deceasedAt = null;
+    protected \DateTime|null $deceasedAt = null;
 
     /**
      * Set deceased at
@@ -26,7 +26,7 @@ trait DeceasedAtTrait
      *
      * @return self
      */
-    public function setDeceasedAt(?\DateTime $date)
+    public function setDeceasedAt(\DateTime|null $date): static
     {
         $this->deceasedAt = $date;
 
@@ -36,14 +36,14 @@ trait DeceasedAtTrait
     /**
      * Get deceased at
      *
-     * If no "deceased at" value set, method
-     * sets and returns a default "deceased at".
+     * If no deceased at value set, method
+     * sets and returns a default deceased at.
      *
      * @see getDefaultDeceasedAt()
      *
      * @return \DateTime|null deceased at or null if no deceased at has been set
      */
-    public function getDeceasedAt(): ?\DateTime
+    public function getDeceasedAt(): \DateTime|null
     {
         if (!$this->hasDeceasedAt()) {
             $this->setDeceasedAt($this->getDefaultDeceasedAt());
@@ -52,9 +52,9 @@ trait DeceasedAtTrait
     }
 
     /**
-     * Check if "deceased at" has been set
+     * Check if deceased at has been set
      *
-     * @return bool True if "deceased at" has been set, false if not
+     * @return bool True if deceased at has been set, false if not
      */
     public function hasDeceasedAt(): bool
     {
@@ -62,11 +62,11 @@ trait DeceasedAtTrait
     }
 
     /**
-     * Get a default "deceased at" value, if any is available
+     * Get a default deceased at value, if any is available
      *
-     * @return \DateTime|null Default "deceased at" value or null if no default value is available
+     * @return \DateTime|null Default deceased at value or null if no default value is available
      */
-    public function getDefaultDeceasedAt(): ?\DateTime
+    public function getDefaultDeceasedAt(): \DateTime|null
     {
         return null;
     }

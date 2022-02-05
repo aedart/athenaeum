@@ -17,7 +17,7 @@ trait PhotoTrait
      *
      * @var string|null
      */
-    protected ?string $photo = null;
+    protected string|null $photo = null;
 
     /**
      * Set photo
@@ -26,7 +26,7 @@ trait PhotoTrait
      *
      * @return self
      */
-    public function setPhoto(?string $location)
+    public function setPhoto(string|null $location): static
     {
         $this->photo = $location;
 
@@ -36,14 +36,14 @@ trait PhotoTrait
     /**
      * Get photo
      *
-     * If no "photo" value set, method
-     * sets and returns a default "photo".
+     * If no photo value set, method
+     * sets and returns a default photo.
      *
      * @see getDefaultPhoto()
      *
      * @return string|null photo or null if no photo has been set
      */
-    public function getPhoto(): ?string
+    public function getPhoto(): string|null
     {
         if (!$this->hasPhoto()) {
             $this->setPhoto($this->getDefaultPhoto());
@@ -52,9 +52,9 @@ trait PhotoTrait
     }
 
     /**
-     * Check if "photo" has been set
+     * Check if photo has been set
      *
-     * @return bool True if "photo" has been set, false if not
+     * @return bool True if photo has been set, false if not
      */
     public function hasPhoto(): bool
     {
@@ -62,11 +62,11 @@ trait PhotoTrait
     }
 
     /**
-     * Get a default "photo" value, if any is available
+     * Get a default photo value, if any is available
      *
-     * @return string|null Default "photo" value or null if no default value is available
+     * @return string|null Default photo value or null if no default value is available
      */
-    public function getDefaultPhoto(): ?string
+    public function getDefaultPhoto(): string|null
     {
         return null;
     }

@@ -19,31 +19,31 @@ interface ContentAware
      *
      * @return self
      */
-    public function setContent(?string $content);
+    public function setContent(string|null $content): static;
 
     /**
      * Get content
      *
-     * If no "content" value set, method
-     * sets and returns a default "content".
+     * If no content value set, method
+     * sets and returns a default content.
      *
      * @see getDefaultContent()
      *
      * @return string|null content or null if no content has been set
      */
-    public function getContent(): ?string;
+    public function getContent(): string|null;
 
     /**
-     * Check if "content" has been set
+     * Check if content has been set
      *
-     * @return bool True if "content" has been set, false if not
+     * @return bool True if content has been set, false if not
      */
     public function hasContent(): bool;
 
     /**
-     * Get a default "content" value, if any is available
+     * Get a default content value, if any is available
      *
-     * @return string|null Default "content" value or null if no default value is available
+     * @return string|null Default content value or null if no default value is available
      */
-    public function getDefaultContent(): ?string;
+    public function getDefaultContent(): string|null;
 }

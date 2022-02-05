@@ -19,31 +19,31 @@ interface PasswordAware
      *
      * @return self
      */
-    public function setPassword(?string $password);
+    public function setPassword(string|null $password): static;
 
     /**
      * Get password
      *
-     * If no "password" value set, method
-     * sets and returns a default "password".
+     * If no password value set, method
+     * sets and returns a default password.
      *
      * @see getDefaultPassword()
      *
      * @return string|null password or null if no password has been set
      */
-    public function getPassword(): ?string;
+    public function getPassword(): string|null;
 
     /**
-     * Check if "password" has been set
+     * Check if password has been set
      *
-     * @return bool True if "password" has been set, false if not
+     * @return bool True if password has been set, false if not
      */
     public function hasPassword(): bool;
 
     /**
-     * Get a default "password" value, if any is available
+     * Get a default password value, if any is available
      *
-     * @return string|null Default "password" value or null if no default value is available
+     * @return string|null Default password value or null if no default value is available
      */
-    public function getDefaultPassword(): ?string;
+    public function getDefaultPassword(): string|null;
 }

@@ -17,7 +17,7 @@ trait PurchaseDateTrait
      *
      * @var int|null
      */
-    protected ?int $purchaseDate = null;
+    protected int|null $purchaseDate = null;
 
     /**
      * Set purchase date
@@ -26,7 +26,7 @@ trait PurchaseDateTrait
      *
      * @return self
      */
-    public function setPurchaseDate(?int $date)
+    public function setPurchaseDate(int|null $date): static
     {
         $this->purchaseDate = $date;
 
@@ -36,14 +36,14 @@ trait PurchaseDateTrait
     /**
      * Get purchase date
      *
-     * If no "purchase date" value set, method
-     * sets and returns a default "purchase date".
+     * If no purchase date value set, method
+     * sets and returns a default purchase date.
      *
      * @see getDefaultPurchaseDate()
      *
      * @return int|null purchase date or null if no purchase date has been set
      */
-    public function getPurchaseDate(): ?int
+    public function getPurchaseDate(): int|null
     {
         if (!$this->hasPurchaseDate()) {
             $this->setPurchaseDate($this->getDefaultPurchaseDate());
@@ -52,9 +52,9 @@ trait PurchaseDateTrait
     }
 
     /**
-     * Check if "purchase date" has been set
+     * Check if purchase date has been set
      *
-     * @return bool True if "purchase date" has been set, false if not
+     * @return bool True if purchase date has been set, false if not
      */
     public function hasPurchaseDate(): bool
     {
@@ -62,11 +62,11 @@ trait PurchaseDateTrait
     }
 
     /**
-     * Get a default "purchase date" value, if any is available
+     * Get a default purchase date value, if any is available
      *
-     * @return int|null Default "purchase date" value or null if no default value is available
+     * @return int|null Default purchase date value or null if no default value is available
      */
-    public function getDefaultPurchaseDate(): ?int
+    public function getDefaultPurchaseDate(): int|null
     {
         return null;
     }

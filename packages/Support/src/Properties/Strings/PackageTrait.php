@@ -17,7 +17,7 @@ trait PackageTrait
      *
      * @var string|null
      */
-    protected ?string $package = null;
+    protected string|null $package = null;
 
     /**
      * Set package
@@ -26,7 +26,7 @@ trait PackageTrait
      *
      * @return self
      */
-    public function setPackage(?string $name)
+    public function setPackage(string|null $name): static
     {
         $this->package = $name;
 
@@ -36,14 +36,14 @@ trait PackageTrait
     /**
      * Get package
      *
-     * If no "package" value set, method
-     * sets and returns a default "package".
+     * If no package value set, method
+     * sets and returns a default package.
      *
      * @see getDefaultPackage()
      *
      * @return string|null package or null if no package has been set
      */
-    public function getPackage(): ?string
+    public function getPackage(): string|null
     {
         if (!$this->hasPackage()) {
             $this->setPackage($this->getDefaultPackage());
@@ -52,9 +52,9 @@ trait PackageTrait
     }
 
     /**
-     * Check if "package" has been set
+     * Check if package has been set
      *
-     * @return bool True if "package" has been set, false if not
+     * @return bool True if package has been set, false if not
      */
     public function hasPackage(): bool
     {
@@ -62,11 +62,11 @@ trait PackageTrait
     }
 
     /**
-     * Get a default "package" value, if any is available
+     * Get a default package value, if any is available
      *
-     * @return string|null Default "package" value or null if no default value is available
+     * @return string|null Default package value or null if no default value is available
      */
-    public function getDefaultPackage(): ?string
+    public function getDefaultPackage(): string|null
     {
         return null;
     }

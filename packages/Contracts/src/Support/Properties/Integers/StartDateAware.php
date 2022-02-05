@@ -19,31 +19,31 @@ interface StartDateAware
      *
      * @return self
      */
-    public function setStartDate(?int $date);
+    public function setStartDate(int|null $date): static;
 
     /**
      * Get start date
      *
-     * If no "start date" value set, method
-     * sets and returns a default "start date".
+     * If no start date value set, method
+     * sets and returns a default start date.
      *
      * @see getDefaultStartDate()
      *
      * @return int|null start date or null if no start date has been set
      */
-    public function getStartDate(): ?int;
+    public function getStartDate(): int|null;
 
     /**
-     * Check if "start date" has been set
+     * Check if start date has been set
      *
-     * @return bool True if "start date" has been set, false if not
+     * @return bool True if start date has been set, false if not
      */
     public function hasStartDate(): bool;
 
     /**
-     * Get a default "start date" value, if any is available
+     * Get a default start date value, if any is available
      *
-     * @return int|null Default "start date" value or null if no default value is available
+     * @return int|null Default start date value or null if no default value is available
      */
-    public function getDefaultStartDate(): ?int;
+    public function getDefaultStartDate(): int|null;
 }

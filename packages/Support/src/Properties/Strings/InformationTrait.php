@@ -17,7 +17,7 @@ trait InformationTrait
      *
      * @var string|null
      */
-    protected ?string $information = null;
+    protected string|null $information = null;
 
     /**
      * Set information
@@ -26,7 +26,7 @@ trait InformationTrait
      *
      * @return self
      */
-    public function setInformation(?string $text)
+    public function setInformation(string|null $text): static
     {
         $this->information = $text;
 
@@ -36,14 +36,14 @@ trait InformationTrait
     /**
      * Get information
      *
-     * If no "information" value set, method
-     * sets and returns a default "information".
+     * If no information value set, method
+     * sets and returns a default information.
      *
      * @see getDefaultInformation()
      *
      * @return string|null information or null if no information has been set
      */
-    public function getInformation(): ?string
+    public function getInformation(): string|null
     {
         if (!$this->hasInformation()) {
             $this->setInformation($this->getDefaultInformation());
@@ -52,9 +52,9 @@ trait InformationTrait
     }
 
     /**
-     * Check if "information" has been set
+     * Check if information has been set
      *
-     * @return bool True if "information" has been set, false if not
+     * @return bool True if information has been set, false if not
      */
     public function hasInformation(): bool
     {
@@ -62,11 +62,11 @@ trait InformationTrait
     }
 
     /**
-     * Get a default "information" value, if any is available
+     * Get a default information value, if any is available
      *
-     * @return string|null Default "information" value or null if no default value is available
+     * @return string|null Default information value or null if no default value is available
      */
-    public function getDefaultInformation(): ?string
+    public function getDefaultInformation(): string|null
     {
         return null;
     }

@@ -15,18 +15,18 @@ trait ZTrait
     /**
      * Co-ordinate or value
      *
-     * @var mixed|null
+     * @var mixed
      */
     protected $z = null;
 
     /**
      * Set z
      *
-     * @param mixed|null $value Co-ordinate or value
+     * @param mixed $value Co-ordinate or value
      *
      * @return self
      */
-    public function setZ($value)
+    public function setZ(mixed $value): static
     {
         $this->z = $value;
 
@@ -36,14 +36,14 @@ trait ZTrait
     /**
      * Get z
      *
-     * If no "z" value set, method
-     * sets and returns a default "z".
+     * If no z value set, method
+     * sets and returns a default z.
      *
      * @see getDefaultZ()
      *
-     * @return mixed|null z or null if no z has been set
+     * @return mixed z or null if no z has been set
      */
-    public function getZ()
+    public function getZ(): mixed
     {
         if (!$this->hasZ()) {
             $this->setZ($this->getDefaultZ());
@@ -52,9 +52,9 @@ trait ZTrait
     }
 
     /**
-     * Check if "z" has been set
+     * Check if z has been set
      *
-     * @return bool True if "z" has been set, false if not
+     * @return bool True if z has been set, false if not
      */
     public function hasZ(): bool
     {
@@ -62,11 +62,11 @@ trait ZTrait
     }
 
     /**
-     * Get a default "z" value, if any is available
+     * Get a default z value, if any is available
      *
-     * @return mixed|null Default "z" value or null if no default value is available
+     * @return mixed Default z value or null if no default value is available
      */
-    public function getDefaultZ()
+    public function getDefaultZ(): mixed
     {
         return null;
     }

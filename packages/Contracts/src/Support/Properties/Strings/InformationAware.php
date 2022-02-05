@@ -19,31 +19,31 @@ interface InformationAware
      *
      * @return self
      */
-    public function setInformation(?string $text);
+    public function setInformation(string|null $text): static;
 
     /**
      * Get information
      *
-     * If no "information" value set, method
-     * sets and returns a default "information".
+     * If no information value set, method
+     * sets and returns a default information.
      *
      * @see getDefaultInformation()
      *
      * @return string|null information or null if no information has been set
      */
-    public function getInformation(): ?string;
+    public function getInformation(): string|null;
 
     /**
-     * Check if "information" has been set
+     * Check if information has been set
      *
-     * @return bool True if "information" has been set, false if not
+     * @return bool True if information has been set, false if not
      */
     public function hasInformation(): bool;
 
     /**
-     * Get a default "information" value, if any is available
+     * Get a default information value, if any is available
      *
-     * @return string|null Default "information" value or null if no default value is available
+     * @return string|null Default information value or null if no default value is available
      */
-    public function getDefaultInformation(): ?string;
+    public function getDefaultInformation(): string|null;
 }

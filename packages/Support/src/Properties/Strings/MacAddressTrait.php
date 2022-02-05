@@ -17,7 +17,7 @@ trait MacAddressTrait
      *
      * @var string|null
      */
-    protected ?string $macAddress = null;
+    protected string|null $macAddress = null;
 
     /**
      * Set mac address
@@ -26,7 +26,7 @@ trait MacAddressTrait
      *
      * @return self
      */
-    public function setMacAddress(?string $address)
+    public function setMacAddress(string|null $address): static
     {
         $this->macAddress = $address;
 
@@ -36,14 +36,14 @@ trait MacAddressTrait
     /**
      * Get mac address
      *
-     * If no "mac address" value set, method
-     * sets and returns a default "mac address".
+     * If no mac address value set, method
+     * sets and returns a default mac address.
      *
      * @see getDefaultMacAddress()
      *
      * @return string|null mac address or null if no mac address has been set
      */
-    public function getMacAddress(): ?string
+    public function getMacAddress(): string|null
     {
         if (!$this->hasMacAddress()) {
             $this->setMacAddress($this->getDefaultMacAddress());
@@ -52,9 +52,9 @@ trait MacAddressTrait
     }
 
     /**
-     * Check if "mac address" has been set
+     * Check if mac address has been set
      *
-     * @return bool True if "mac address" has been set, false if not
+     * @return bool True if mac address has been set, false if not
      */
     public function hasMacAddress(): bool
     {
@@ -62,11 +62,11 @@ trait MacAddressTrait
     }
 
     /**
-     * Get a default "mac address" value, if any is available
+     * Get a default mac address value, if any is available
      *
-     * @return string|null Default "mac address" value or null if no default value is available
+     * @return string|null Default mac address value or null if no default value is available
      */
-    public function getDefaultMacAddress(): ?string
+    public function getDefaultMacAddress(): string|null
     {
         return null;
     }

@@ -17,7 +17,7 @@ trait DeliveryDateTrait
      *
      * @var string|null
      */
-    protected ?string $deliveryDate = null;
+    protected string|null $deliveryDate = null;
 
     /**
      * Set delivery date
@@ -26,7 +26,7 @@ trait DeliveryDateTrait
      *
      * @return self
      */
-    public function setDeliveryDate(?string $date)
+    public function setDeliveryDate(string|null $date): static
     {
         $this->deliveryDate = $date;
 
@@ -36,14 +36,14 @@ trait DeliveryDateTrait
     /**
      * Get delivery date
      *
-     * If no "delivery date" value set, method
-     * sets and returns a default "delivery date".
+     * If no delivery date value set, method
+     * sets and returns a default delivery date.
      *
      * @see getDefaultDeliveryDate()
      *
      * @return string|null delivery date or null if no delivery date has been set
      */
-    public function getDeliveryDate(): ?string
+    public function getDeliveryDate(): string|null
     {
         if (!$this->hasDeliveryDate()) {
             $this->setDeliveryDate($this->getDefaultDeliveryDate());
@@ -52,9 +52,9 @@ trait DeliveryDateTrait
     }
 
     /**
-     * Check if "delivery date" has been set
+     * Check if delivery date has been set
      *
-     * @return bool True if "delivery date" has been set, false if not
+     * @return bool True if delivery date has been set, false if not
      */
     public function hasDeliveryDate(): bool
     {
@@ -62,11 +62,11 @@ trait DeliveryDateTrait
     }
 
     /**
-     * Get a default "delivery date" value, if any is available
+     * Get a default delivery date value, if any is available
      *
-     * @return string|null Default "delivery date" value or null if no default value is available
+     * @return string|null Default delivery date value or null if no default value is available
      */
-    public function getDefaultDeliveryDate(): ?string
+    public function getDefaultDeliveryDate(): string|null
     {
         return null;
     }

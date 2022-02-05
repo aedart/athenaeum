@@ -17,7 +17,7 @@ trait BasePathTrait
      *
      * @var string|null
      */
-    protected ?string $basePath = null;
+    protected string|null $basePath = null;
 
     /**
      * Set base path
@@ -26,7 +26,7 @@ trait BasePathTrait
      *
      * @return self
      */
-    public function setBasePath(?string $path)
+    public function setBasePath(string|null $path): static
     {
         $this->basePath = $path;
 
@@ -36,14 +36,14 @@ trait BasePathTrait
     /**
      * Get base path
      *
-     * If no "base path" value set, method
-     * sets and returns a default "base path".
+     * If no base path value set, method
+     * sets and returns a default base path.
      *
      * @see getDefaultBasePath()
      *
      * @return string|null base path or null if no base path has been set
      */
-    public function getBasePath(): ?string
+    public function getBasePath(): string|null
     {
         if (!$this->hasBasePath()) {
             $this->setBasePath($this->getDefaultBasePath());
@@ -52,9 +52,9 @@ trait BasePathTrait
     }
 
     /**
-     * Check if "base path" has been set
+     * Check if base path has been set
      *
-     * @return bool True if "base path" has been set, false if not
+     * @return bool True if base path has been set, false if not
      */
     public function hasBasePath(): bool
     {
@@ -62,11 +62,11 @@ trait BasePathTrait
     }
 
     /**
-     * Get a default "base path" value, if any is available
+     * Get a default base path value, if any is available
      *
-     * @return string|null Default "base path" value or null if no default value is available
+     * @return string|null Default base path value or null if no default value is available
      */
-    public function getDefaultBasePath(): ?string
+    public function getDefaultBasePath(): string|null
     {
         return null;
     }

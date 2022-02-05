@@ -17,7 +17,7 @@ trait AmountTrait
      *
      * @var float|null
      */
-    protected ?float $amount = null;
+    protected float|null $amount = null;
 
     /**
      * Set amount
@@ -26,7 +26,7 @@ trait AmountTrait
      *
      * @return self
      */
-    public function setAmount(?float $amount)
+    public function setAmount(float|null $amount): static
     {
         $this->amount = $amount;
 
@@ -36,14 +36,14 @@ trait AmountTrait
     /**
      * Get amount
      *
-     * If no "amount" value set, method
-     * sets and returns a default "amount".
+     * If no amount value set, method
+     * sets and returns a default amount.
      *
      * @see getDefaultAmount()
      *
      * @return float|null amount or null if no amount has been set
      */
-    public function getAmount(): ?float
+    public function getAmount(): float|null
     {
         if (!$this->hasAmount()) {
             $this->setAmount($this->getDefaultAmount());
@@ -52,9 +52,9 @@ trait AmountTrait
     }
 
     /**
-     * Check if "amount" has been set
+     * Check if amount has been set
      *
-     * @return bool True if "amount" has been set, false if not
+     * @return bool True if amount has been set, false if not
      */
     public function hasAmount(): bool
     {
@@ -62,11 +62,11 @@ trait AmountTrait
     }
 
     /**
-     * Get a default "amount" value, if any is available
+     * Get a default amount value, if any is available
      *
-     * @return float|null Default "amount" value or null if no default value is available
+     * @return float|null Default amount value or null if no default value is available
      */
-    public function getDefaultAmount(): ?float
+    public function getDefaultAmount(): float|null
     {
         return null;
     }

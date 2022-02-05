@@ -17,7 +17,7 @@ trait LanguageTrait
      *
      * @var string|null
      */
-    protected ?string $language = null;
+    protected string|null $language = null;
 
     /**
      * Set language
@@ -26,7 +26,7 @@ trait LanguageTrait
      *
      * @return self
      */
-    public function setLanguage(?string $identifier)
+    public function setLanguage(string|null $identifier): static
     {
         $this->language = $identifier;
 
@@ -36,14 +36,14 @@ trait LanguageTrait
     /**
      * Get language
      *
-     * If no "language" value set, method
-     * sets and returns a default "language".
+     * If no language value set, method
+     * sets and returns a default language.
      *
      * @see getDefaultLanguage()
      *
      * @return string|null language or null if no language has been set
      */
-    public function getLanguage(): ?string
+    public function getLanguage(): string|null
     {
         if (!$this->hasLanguage()) {
             $this->setLanguage($this->getDefaultLanguage());
@@ -52,9 +52,9 @@ trait LanguageTrait
     }
 
     /**
-     * Check if "language" has been set
+     * Check if language has been set
      *
-     * @return bool True if "language" has been set, false if not
+     * @return bool True if language has been set, false if not
      */
     public function hasLanguage(): bool
     {
@@ -62,11 +62,11 @@ trait LanguageTrait
     }
 
     /**
-     * Get a default "language" value, if any is available
+     * Get a default language value, if any is available
      *
-     * @return string|null Default "language" value or null if no default value is available
+     * @return string|null Default language value or null if no default value is available
      */
-    public function getDefaultLanguage(): ?string
+    public function getDefaultLanguage(): string|null
     {
         return null;
     }

@@ -19,31 +19,31 @@ interface SwiftAware
      *
      * @return self
      */
-    public function setSwift(?string $code);
+    public function setSwift(string|null $code): static;
 
     /**
      * Get swift
      *
-     * If no "swift" value set, method
-     * sets and returns a default "swift".
+     * If no swift value set, method
+     * sets and returns a default swift.
      *
      * @see getDefaultSwift()
      *
      * @return string|null swift or null if no swift has been set
      */
-    public function getSwift(): ?string;
+    public function getSwift(): string|null;
 
     /**
-     * Check if "swift" has been set
+     * Check if swift has been set
      *
-     * @return bool True if "swift" has been set, false if not
+     * @return bool True if swift has been set, false if not
      */
     public function hasSwift(): bool;
 
     /**
-     * Get a default "swift" value, if any is available
+     * Get a default swift value, if any is available
      *
-     * @return string|null Default "swift" value or null if no default value is available
+     * @return string|null Default swift value or null if no default value is available
      */
-    public function getDefaultSwift(): ?string;
+    public function getDefaultSwift(): string|null;
 }

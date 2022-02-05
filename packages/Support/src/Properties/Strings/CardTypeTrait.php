@@ -17,7 +17,7 @@ trait CardTypeTrait
      *
      * @var string|null
      */
-    protected ?string $cardType = null;
+    protected string|null $cardType = null;
 
     /**
      * Set card type
@@ -26,7 +26,7 @@ trait CardTypeTrait
      *
      * @return self
      */
-    public function setCardType(?string $type)
+    public function setCardType(string|null $type): static
     {
         $this->cardType = $type;
 
@@ -36,14 +36,14 @@ trait CardTypeTrait
     /**
      * Get card type
      *
-     * If no "card type" value set, method
-     * sets and returns a default "card type".
+     * If no card type value set, method
+     * sets and returns a default card type.
      *
      * @see getDefaultCardType()
      *
      * @return string|null card type or null if no card type has been set
      */
-    public function getCardType(): ?string
+    public function getCardType(): string|null
     {
         if (!$this->hasCardType()) {
             $this->setCardType($this->getDefaultCardType());
@@ -52,9 +52,9 @@ trait CardTypeTrait
     }
 
     /**
-     * Check if "card type" has been set
+     * Check if card type has been set
      *
-     * @return bool True if "card type" has been set, false if not
+     * @return bool True if card type has been set, false if not
      */
     public function hasCardType(): bool
     {
@@ -62,11 +62,11 @@ trait CardTypeTrait
     }
 
     /**
-     * Get a default "card type" value, if any is available
+     * Get a default card type value, if any is available
      *
-     * @return string|null Default "card type" value or null if no default value is available
+     * @return string|null Default card type value or null if no default value is available
      */
-    public function getDefaultCardType(): ?string
+    public function getDefaultCardType(): string|null
     {
         return null;
     }

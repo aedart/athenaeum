@@ -17,7 +17,7 @@ trait ReleasedAtTrait
      *
      * @var int|null
      */
-    protected ?int $releasedAt = null;
+    protected int|null $releasedAt = null;
 
     /**
      * Set released at
@@ -26,7 +26,7 @@ trait ReleasedAtTrait
      *
      * @return self
      */
-    public function setReleasedAt(?int $date)
+    public function setReleasedAt(int|null $date): static
     {
         $this->releasedAt = $date;
 
@@ -36,14 +36,14 @@ trait ReleasedAtTrait
     /**
      * Get released at
      *
-     * If no "released at" value set, method
-     * sets and returns a default "released at".
+     * If no released at value set, method
+     * sets and returns a default released at.
      *
      * @see getDefaultReleasedAt()
      *
      * @return int|null released at or null if no released at has been set
      */
-    public function getReleasedAt(): ?int
+    public function getReleasedAt(): int|null
     {
         if (!$this->hasReleasedAt()) {
             $this->setReleasedAt($this->getDefaultReleasedAt());
@@ -52,9 +52,9 @@ trait ReleasedAtTrait
     }
 
     /**
-     * Check if "released at" has been set
+     * Check if released at has been set
      *
-     * @return bool True if "released at" has been set, false if not
+     * @return bool True if released at has been set, false if not
      */
     public function hasReleasedAt(): bool
     {
@@ -62,11 +62,11 @@ trait ReleasedAtTrait
     }
 
     /**
-     * Get a default "released at" value, if any is available
+     * Get a default released at value, if any is available
      *
-     * @return int|null Default "released at" value or null if no default value is available
+     * @return int|null Default released at value or null if no default value is available
      */
-    public function getDefaultReleasedAt(): ?int
+    public function getDefaultReleasedAt(): int|null
     {
         return null;
     }

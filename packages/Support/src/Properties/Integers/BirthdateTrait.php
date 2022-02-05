@@ -17,7 +17,7 @@ trait BirthdateTrait
      *
      * @var int|null
      */
-    protected ?int $birthdate = null;
+    protected int|null $birthdate = null;
 
     /**
      * Set birthdate
@@ -26,7 +26,7 @@ trait BirthdateTrait
      *
      * @return self
      */
-    public function setBirthdate(?int $date)
+    public function setBirthdate(int|null $date): static
     {
         $this->birthdate = $date;
 
@@ -36,14 +36,14 @@ trait BirthdateTrait
     /**
      * Get birthdate
      *
-     * If no "birthdate" value set, method
-     * sets and returns a default "birthdate".
+     * If no birthdate value set, method
+     * sets and returns a default birthdate.
      *
      * @see getDefaultBirthdate()
      *
      * @return int|null birthdate or null if no birthdate has been set
      */
-    public function getBirthdate(): ?int
+    public function getBirthdate(): int|null
     {
         if (!$this->hasBirthdate()) {
             $this->setBirthdate($this->getDefaultBirthdate());
@@ -52,9 +52,9 @@ trait BirthdateTrait
     }
 
     /**
-     * Check if "birthdate" has been set
+     * Check if birthdate has been set
      *
-     * @return bool True if "birthdate" has been set, false if not
+     * @return bool True if birthdate has been set, false if not
      */
     public function hasBirthdate(): bool
     {
@@ -62,11 +62,11 @@ trait BirthdateTrait
     }
 
     /**
-     * Get a default "birthdate" value, if any is available
+     * Get a default birthdate value, if any is available
      *
-     * @return int|null Default "birthdate" value or null if no default value is available
+     * @return int|null Default birthdate value or null if no default value is available
      */
-    public function getDefaultBirthdate(): ?int
+    public function getDefaultBirthdate(): int|null
     {
         return null;
     }

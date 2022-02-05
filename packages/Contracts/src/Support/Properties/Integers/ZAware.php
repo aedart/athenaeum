@@ -19,31 +19,31 @@ interface ZAware
      *
      * @return self
      */
-    public function setZ(?int $value);
+    public function setZ(int|null $value): static;
 
     /**
      * Get z
      *
-     * If no "z" value set, method
-     * sets and returns a default "z".
+     * If no z value set, method
+     * sets and returns a default z.
      *
      * @see getDefaultZ()
      *
      * @return int|null z or null if no z has been set
      */
-    public function getZ(): ?int;
+    public function getZ(): int|null;
 
     /**
-     * Check if "z" has been set
+     * Check if z has been set
      *
-     * @return bool True if "z" has been set, false if not
+     * @return bool True if z has been set, false if not
      */
     public function hasZ(): bool;
 
     /**
-     * Get a default "z" value, if any is available
+     * Get a default z value, if any is available
      *
-     * @return int|null Default "z" value or null if no default value is available
+     * @return int|null Default z value or null if no default value is available
      */
-    public function getDefaultZ(): ?int;
+    public function getDefaultZ(): int|null;
 }

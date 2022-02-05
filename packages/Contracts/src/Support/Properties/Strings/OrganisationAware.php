@@ -19,31 +19,31 @@ interface OrganisationAware
      *
      * @return self
      */
-    public function setOrganisation(?string $name);
+    public function setOrganisation(string|null $name): static;
 
     /**
      * Get organisation
      *
-     * If no "organisation" value set, method
-     * sets and returns a default "organisation".
+     * If no organisation value set, method
+     * sets and returns a default organisation.
      *
      * @see getDefaultOrganisation()
      *
      * @return string|null organisation or null if no organisation has been set
      */
-    public function getOrganisation(): ?string;
+    public function getOrganisation(): string|null;
 
     /**
-     * Check if "organisation" has been set
+     * Check if organisation has been set
      *
-     * @return bool True if "organisation" has been set, false if not
+     * @return bool True if organisation has been set, false if not
      */
     public function hasOrganisation(): bool;
 
     /**
-     * Get a default "organisation" value, if any is available
+     * Get a default organisation value, if any is available
      *
-     * @return string|null Default "organisation" value or null if no default value is available
+     * @return string|null Default organisation value or null if no default value is available
      */
-    public function getDefaultOrganisation(): ?string;
+    public function getDefaultOrganisation(): string|null;
 }

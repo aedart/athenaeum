@@ -19,31 +19,31 @@ interface PurchasedAtAware
      *
      * @return self
      */
-    public function setPurchasedAt(?\DateTime $date);
+    public function setPurchasedAt(\DateTime|null $date): static;
 
     /**
      * Get purchased at
      *
-     * If no "purchased at" value set, method
-     * sets and returns a default "purchased at".
+     * If no purchased at value set, method
+     * sets and returns a default purchased at.
      *
      * @see getDefaultPurchasedAt()
      *
      * @return \DateTime|null purchased at or null if no purchased at has been set
      */
-    public function getPurchasedAt(): ?\DateTime;
+    public function getPurchasedAt(): \DateTime|null;
 
     /**
-     * Check if "purchased at" has been set
+     * Check if purchased at has been set
      *
-     * @return bool True if "purchased at" has been set, false if not
+     * @return bool True if purchased at has been set, false if not
      */
     public function hasPurchasedAt(): bool;
 
     /**
-     * Get a default "purchased at" value, if any is available
+     * Get a default purchased at value, if any is available
      *
-     * @return \DateTime|null Default "purchased at" value or null if no default value is available
+     * @return \DateTime|null Default purchased at value or null if no default value is available
      */
-    public function getDefaultPurchasedAt(): ?\DateTime;
+    public function getDefaultPurchasedAt(): \DateTime|null;
 }

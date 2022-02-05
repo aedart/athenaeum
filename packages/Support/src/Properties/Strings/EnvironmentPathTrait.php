@@ -17,7 +17,7 @@ trait EnvironmentPathTrait
      *
      * @var string|null
      */
-    protected ?string $environmentPath = null;
+    protected string|null $environmentPath = null;
 
     /**
      * Set environment path
@@ -26,7 +26,7 @@ trait EnvironmentPathTrait
      *
      * @return self
      */
-    public function setEnvironmentPath(?string $path)
+    public function setEnvironmentPath(string|null $path): static
     {
         $this->environmentPath = $path;
 
@@ -36,14 +36,14 @@ trait EnvironmentPathTrait
     /**
      * Get environment path
      *
-     * If no "environment path" value set, method
-     * sets and returns a default "environment path".
+     * If no environment path value set, method
+     * sets and returns a default environment path.
      *
      * @see getDefaultEnvironmentPath()
      *
      * @return string|null environment path or null if no environment path has been set
      */
-    public function getEnvironmentPath(): ?string
+    public function getEnvironmentPath(): string|null
     {
         if (!$this->hasEnvironmentPath()) {
             $this->setEnvironmentPath($this->getDefaultEnvironmentPath());
@@ -52,9 +52,9 @@ trait EnvironmentPathTrait
     }
 
     /**
-     * Check if "environment path" has been set
+     * Check if environment path has been set
      *
-     * @return bool True if "environment path" has been set, false if not
+     * @return bool True if environment path has been set, false if not
      */
     public function hasEnvironmentPath(): bool
     {
@@ -62,11 +62,11 @@ trait EnvironmentPathTrait
     }
 
     /**
-     * Get a default "environment path" value, if any is available
+     * Get a default environment path value, if any is available
      *
-     * @return string|null Default "environment path" value or null if no default value is available
+     * @return string|null Default environment path value or null if no default value is available
      */
-    public function getDefaultEnvironmentPath(): ?string
+    public function getDefaultEnvironmentPath(): string|null
     {
         return null;
     }

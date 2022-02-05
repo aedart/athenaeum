@@ -17,7 +17,7 @@ trait GroupTrait
      *
      * @var int|null
      */
-    protected ?int $group = null;
+    protected int|null $group = null;
 
     /**
      * Set group
@@ -26,7 +26,7 @@ trait GroupTrait
      *
      * @return self
      */
-    public function setGroup(?int $identity)
+    public function setGroup(int|null $identity): static
     {
         $this->group = $identity;
 
@@ -36,14 +36,14 @@ trait GroupTrait
     /**
      * Get group
      *
-     * If no "group" value set, method
-     * sets and returns a default "group".
+     * If no group value set, method
+     * sets and returns a default group.
      *
      * @see getDefaultGroup()
      *
      * @return int|null group or null if no group has been set
      */
-    public function getGroup(): ?int
+    public function getGroup(): int|null
     {
         if (!$this->hasGroup()) {
             $this->setGroup($this->getDefaultGroup());
@@ -52,9 +52,9 @@ trait GroupTrait
     }
 
     /**
-     * Check if "group" has been set
+     * Check if group has been set
      *
-     * @return bool True if "group" has been set, false if not
+     * @return bool True if group has been set, false if not
      */
     public function hasGroup(): bool
     {
@@ -62,11 +62,11 @@ trait GroupTrait
     }
 
     /**
-     * Get a default "group" value, if any is available
+     * Get a default group value, if any is available
      *
-     * @return int|null Default "group" value or null if no default value is available
+     * @return int|null Default group value or null if no default value is available
      */
-    public function getDefaultGroup(): ?int
+    public function getDefaultGroup(): int|null
     {
         return null;
     }

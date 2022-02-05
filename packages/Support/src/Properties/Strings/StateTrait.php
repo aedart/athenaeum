@@ -17,7 +17,7 @@ trait StateTrait
      *
      * @var string|null
      */
-    protected ?string $state = null;
+    protected string|null $state = null;
 
     /**
      * Set state
@@ -26,7 +26,7 @@ trait StateTrait
      *
      * @return self
      */
-    public function setState(?string $state)
+    public function setState(string|null $state): static
     {
         $this->state = $state;
 
@@ -36,14 +36,14 @@ trait StateTrait
     /**
      * Get state
      *
-     * If no "state" value set, method
-     * sets and returns a default "state".
+     * If no state value set, method
+     * sets and returns a default state.
      *
      * @see getDefaultState()
      *
      * @return string|null state or null if no state has been set
      */
-    public function getState(): ?string
+    public function getState(): string|null
     {
         if (!$this->hasState()) {
             $this->setState($this->getDefaultState());
@@ -52,9 +52,9 @@ trait StateTrait
     }
 
     /**
-     * Check if "state" has been set
+     * Check if state has been set
      *
-     * @return bool True if "state" has been set, false if not
+     * @return bool True if state has been set, false if not
      */
     public function hasState(): bool
     {
@@ -62,11 +62,11 @@ trait StateTrait
     }
 
     /**
-     * Get a default "state" value, if any is available
+     * Get a default state value, if any is available
      *
-     * @return string|null Default "state" value or null if no default value is available
+     * @return string|null Default state value or null if no default value is available
      */
-    public function getDefaultState(): ?string
+    public function getDefaultState(): string|null
     {
         return null;
     }

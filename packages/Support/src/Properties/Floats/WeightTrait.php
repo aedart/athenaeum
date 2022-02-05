@@ -17,7 +17,7 @@ trait WeightTrait
      *
      * @var float|null
      */
-    protected ?float $weight = null;
+    protected float|null $weight = null;
 
     /**
      * Set weight
@@ -26,7 +26,7 @@ trait WeightTrait
      *
      * @return self
      */
-    public function setWeight(?float $amount)
+    public function setWeight(float|null $amount): static
     {
         $this->weight = $amount;
 
@@ -36,14 +36,14 @@ trait WeightTrait
     /**
      * Get weight
      *
-     * If no "weight" value set, method
-     * sets and returns a default "weight".
+     * If no weight value set, method
+     * sets and returns a default weight.
      *
      * @see getDefaultWeight()
      *
      * @return float|null weight or null if no weight has been set
      */
-    public function getWeight(): ?float
+    public function getWeight(): float|null
     {
         if (!$this->hasWeight()) {
             $this->setWeight($this->getDefaultWeight());
@@ -52,9 +52,9 @@ trait WeightTrait
     }
 
     /**
-     * Check if "weight" has been set
+     * Check if weight has been set
      *
-     * @return bool True if "weight" has been set, false if not
+     * @return bool True if weight has been set, false if not
      */
     public function hasWeight(): bool
     {
@@ -62,11 +62,11 @@ trait WeightTrait
     }
 
     /**
-     * Get a default "weight" value, if any is available
+     * Get a default weight value, if any is available
      *
-     * @return float|null Default "weight" value or null if no default value is available
+     * @return float|null Default weight value or null if no default value is available
      */
-    public function getDefaultWeight(): ?float
+    public function getDefaultWeight(): float|null
     {
         return null;
     }

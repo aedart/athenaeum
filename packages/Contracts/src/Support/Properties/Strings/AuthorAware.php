@@ -19,31 +19,31 @@ interface AuthorAware
      *
      * @return self
      */
-    public function setAuthor(?string $name);
+    public function setAuthor(string|null $name): static;
 
     /**
      * Get author
      *
-     * If no "author" value set, method
-     * sets and returns a default "author".
+     * If no author value set, method
+     * sets and returns a default author.
      *
      * @see getDefaultAuthor()
      *
      * @return string|null author or null if no author has been set
      */
-    public function getAuthor(): ?string;
+    public function getAuthor(): string|null;
 
     /**
-     * Check if "author" has been set
+     * Check if author has been set
      *
-     * @return bool True if "author" has been set, false if not
+     * @return bool True if author has been set, false if not
      */
     public function hasAuthor(): bool;
 
     /**
-     * Get a default "author" value, if any is available
+     * Get a default author value, if any is available
      *
-     * @return string|null Default "author" value or null if no default value is available
+     * @return string|null Default author value or null if no default value is available
      */
-    public function getDefaultAuthor(): ?string;
+    public function getDefaultAuthor(): string|null;
 }

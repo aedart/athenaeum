@@ -17,7 +17,7 @@ trait DateTrait
      *
      * @var int|null
      */
-    protected ?int $date = null;
+    protected int|null $date = null;
 
     /**
      * Set date
@@ -26,7 +26,7 @@ trait DateTrait
      *
      * @return self
      */
-    public function setDate(?int $date)
+    public function setDate(int|null $date): static
     {
         $this->date = $date;
 
@@ -36,14 +36,14 @@ trait DateTrait
     /**
      * Get date
      *
-     * If no "date" value set, method
-     * sets and returns a default "date".
+     * If no date value set, method
+     * sets and returns a default date.
      *
      * @see getDefaultDate()
      *
      * @return int|null date or null if no date has been set
      */
-    public function getDate(): ?int
+    public function getDate(): int|null
     {
         if (!$this->hasDate()) {
             $this->setDate($this->getDefaultDate());
@@ -52,9 +52,9 @@ trait DateTrait
     }
 
     /**
-     * Check if "date" has been set
+     * Check if date has been set
      *
-     * @return bool True if "date" has been set, false if not
+     * @return bool True if date has been set, false if not
      */
     public function hasDate(): bool
     {
@@ -62,11 +62,11 @@ trait DateTrait
     }
 
     /**
-     * Get a default "date" value, if any is available
+     * Get a default date value, if any is available
      *
-     * @return int|null Default "date" value or null if no default value is available
+     * @return int|null Default date value or null if no default value is available
      */
-    public function getDefaultDate(): ?int
+    public function getDefaultDate(): int|null
     {
         return null;
     }

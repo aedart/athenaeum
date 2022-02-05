@@ -19,31 +19,31 @@ interface RevisionAware
      *
      * @return self
      */
-    public function setRevision(?string $revision);
+    public function setRevision(string|null $revision): static;
 
     /**
      * Get revision
      *
-     * If no "revision" value set, method
-     * sets and returns a default "revision".
+     * If no revision value set, method
+     * sets and returns a default revision.
      *
      * @see getDefaultRevision()
      *
      * @return string|null revision or null if no revision has been set
      */
-    public function getRevision(): ?string;
+    public function getRevision(): string|null;
 
     /**
-     * Check if "revision" has been set
+     * Check if revision has been set
      *
-     * @return bool True if "revision" has been set, false if not
+     * @return bool True if revision has been set, false if not
      */
     public function hasRevision(): bool;
 
     /**
-     * Get a default "revision" value, if any is available
+     * Get a default revision value, if any is available
      *
-     * @return string|null Default "revision" value or null if no default value is available
+     * @return string|null Default revision value or null if no default value is available
      */
-    public function getDefaultRevision(): ?string;
+    public function getDefaultRevision(): string|null;
 }

@@ -19,31 +19,31 @@ interface YAware
      *
      * @return self
      */
-    public function setY(?float $value);
+    public function setY(float|null $value): static;
 
     /**
      * Get y
      *
-     * If no "y" value set, method
-     * sets and returns a default "y".
+     * If no y value set, method
+     * sets and returns a default y.
      *
      * @see getDefaultY()
      *
      * @return float|null y or null if no y has been set
      */
-    public function getY(): ?float;
+    public function getY(): float|null;
 
     /**
-     * Check if "y" has been set
+     * Check if y has been set
      *
-     * @return bool True if "y" has been set, false if not
+     * @return bool True if y has been set, false if not
      */
     public function hasY(): bool;
 
     /**
-     * Get a default "y" value, if any is available
+     * Get a default y value, if any is available
      *
-     * @return float|null Default "y" value or null if no default value is available
+     * @return float|null Default y value or null if no default value is available
      */
-    public function getDefaultY(): ?float;
+    public function getDefaultY(): float|null;
 }

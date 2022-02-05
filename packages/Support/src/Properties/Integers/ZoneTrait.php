@@ -17,7 +17,7 @@ trait ZoneTrait
      *
      * @var int|null
      */
-    protected ?int $zone = null;
+    protected int|null $zone = null;
 
     /**
      * Set zone
@@ -26,7 +26,7 @@ trait ZoneTrait
      *
      * @return self
      */
-    public function setZone(?int $identifier)
+    public function setZone(int|null $identifier): static
     {
         $this->zone = $identifier;
 
@@ -36,14 +36,14 @@ trait ZoneTrait
     /**
      * Get zone
      *
-     * If no "zone" value set, method
-     * sets and returns a default "zone".
+     * If no zone value set, method
+     * sets and returns a default zone.
      *
      * @see getDefaultZone()
      *
      * @return int|null zone or null if no zone has been set
      */
-    public function getZone(): ?int
+    public function getZone(): int|null
     {
         if (!$this->hasZone()) {
             $this->setZone($this->getDefaultZone());
@@ -52,9 +52,9 @@ trait ZoneTrait
     }
 
     /**
-     * Check if "zone" has been set
+     * Check if zone has been set
      *
-     * @return bool True if "zone" has been set, false if not
+     * @return bool True if zone has been set, false if not
      */
     public function hasZone(): bool
     {
@@ -62,11 +62,11 @@ trait ZoneTrait
     }
 
     /**
-     * Get a default "zone" value, if any is available
+     * Get a default zone value, if any is available
      *
-     * @return int|null Default "zone" value or null if no default value is available
+     * @return int|null Default zone value or null if no default value is available
      */
-    public function getDefaultZone(): ?int
+    public function getDefaultZone(): int|null
     {
         return null;
     }

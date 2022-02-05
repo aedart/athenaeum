@@ -17,7 +17,7 @@ trait UpdatedAtTrait
      *
      * @var string|null
      */
-    protected ?string $updatedAt = null;
+    protected string|null $updatedAt = null;
 
     /**
      * Set updated at
@@ -26,7 +26,7 @@ trait UpdatedAtTrait
      *
      * @return self
      */
-    public function setUpdatedAt(?string $date)
+    public function setUpdatedAt(string|null $date): static
     {
         $this->updatedAt = $date;
 
@@ -36,14 +36,14 @@ trait UpdatedAtTrait
     /**
      * Get updated at
      *
-     * If no "updated at" value set, method
-     * sets and returns a default "updated at".
+     * If no updated at value set, method
+     * sets and returns a default updated at.
      *
      * @see getDefaultUpdatedAt()
      *
      * @return string|null updated at or null if no updated at has been set
      */
-    public function getUpdatedAt(): ?string
+    public function getUpdatedAt(): string|null
     {
         if (!$this->hasUpdatedAt()) {
             $this->setUpdatedAt($this->getDefaultUpdatedAt());
@@ -52,9 +52,9 @@ trait UpdatedAtTrait
     }
 
     /**
-     * Check if "updated at" has been set
+     * Check if updated at has been set
      *
-     * @return bool True if "updated at" has been set, false if not
+     * @return bool True if updated at has been set, false if not
      */
     public function hasUpdatedAt(): bool
     {
@@ -62,11 +62,11 @@ trait UpdatedAtTrait
     }
 
     /**
-     * Get a default "updated at" value, if any is available
+     * Get a default updated at value, if any is available
      *
-     * @return string|null Default "updated at" value or null if no default value is available
+     * @return string|null Default updated at value or null if no default value is available
      */
-    public function getDefaultUpdatedAt(): ?string
+    public function getDefaultUpdatedAt(): string|null
     {
         return null;
     }

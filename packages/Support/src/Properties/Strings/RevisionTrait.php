@@ -17,7 +17,7 @@ trait RevisionTrait
      *
      * @var string|null
      */
-    protected ?string $revision = null;
+    protected string|null $revision = null;
 
     /**
      * Set revision
@@ -26,7 +26,7 @@ trait RevisionTrait
      *
      * @return self
      */
-    public function setRevision(?string $revision)
+    public function setRevision(string|null $revision): static
     {
         $this->revision = $revision;
 
@@ -36,14 +36,14 @@ trait RevisionTrait
     /**
      * Get revision
      *
-     * If no "revision" value set, method
-     * sets and returns a default "revision".
+     * If no revision value set, method
+     * sets and returns a default revision.
      *
      * @see getDefaultRevision()
      *
      * @return string|null revision or null if no revision has been set
      */
-    public function getRevision(): ?string
+    public function getRevision(): string|null
     {
         if (!$this->hasRevision()) {
             $this->setRevision($this->getDefaultRevision());
@@ -52,9 +52,9 @@ trait RevisionTrait
     }
 
     /**
-     * Check if "revision" has been set
+     * Check if revision has been set
      *
-     * @return bool True if "revision" has been set, false if not
+     * @return bool True if revision has been set, false if not
      */
     public function hasRevision(): bool
     {
@@ -62,11 +62,11 @@ trait RevisionTrait
     }
 
     /**
-     * Get a default "revision" value, if any is available
+     * Get a default revision value, if any is available
      *
-     * @return string|null Default "revision" value or null if no default value is available
+     * @return string|null Default revision value or null if no default value is available
      */
-    public function getDefaultRevision(): ?string
+    public function getDefaultRevision(): string|null
     {
         return null;
     }

@@ -19,31 +19,31 @@ interface EmailAware
      *
      * @return self
      */
-    public function setEmail(?string $email);
+    public function setEmail(string|null $email): static;
 
     /**
      * Get email
      *
-     * If no "email" value set, method
-     * sets and returns a default "email".
+     * If no email value set, method
+     * sets and returns a default email.
      *
      * @see getDefaultEmail()
      *
      * @return string|null email or null if no email has been set
      */
-    public function getEmail(): ?string;
+    public function getEmail(): string|null;
 
     /**
-     * Check if "email" has been set
+     * Check if email has been set
      *
-     * @return bool True if "email" has been set, false if not
+     * @return bool True if email has been set, false if not
      */
     public function hasEmail(): bool;
 
     /**
-     * Get a default "email" value, if any is available
+     * Get a default email value, if any is available
      *
-     * @return string|null Default "email" value or null if no default value is available
+     * @return string|null Default email value or null if no default value is available
      */
-    public function getDefaultEmail(): ?string;
+    public function getDefaultEmail(): string|null;
 }

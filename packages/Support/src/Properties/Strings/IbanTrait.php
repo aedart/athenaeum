@@ -17,7 +17,7 @@ trait IbanTrait
      *
      * @var string|null
      */
-    protected ?string $iban = null;
+    protected string|null $iban = null;
 
     /**
      * Set iban
@@ -26,7 +26,7 @@ trait IbanTrait
      *
      * @return self
      */
-    public function setIban(?string $number)
+    public function setIban(string|null $number): static
     {
         $this->iban = $number;
 
@@ -36,14 +36,14 @@ trait IbanTrait
     /**
      * Get iban
      *
-     * If no "iban" value set, method
-     * sets and returns a default "iban".
+     * If no iban value set, method
+     * sets and returns a default iban.
      *
      * @see getDefaultIban()
      *
      * @return string|null iban or null if no iban has been set
      */
-    public function getIban(): ?string
+    public function getIban(): string|null
     {
         if (!$this->hasIban()) {
             $this->setIban($this->getDefaultIban());
@@ -52,9 +52,9 @@ trait IbanTrait
     }
 
     /**
-     * Check if "iban" has been set
+     * Check if iban has been set
      *
-     * @return bool True if "iban" has been set, false if not
+     * @return bool True if iban has been set, false if not
      */
     public function hasIban(): bool
     {
@@ -62,11 +62,11 @@ trait IbanTrait
     }
 
     /**
-     * Get a default "iban" value, if any is available
+     * Get a default iban value, if any is available
      *
-     * @return string|null Default "iban" value or null if no default value is available
+     * @return string|null Default iban value or null if no default value is available
      */
-    public function getDefaultIban(): ?string
+    public function getDefaultIban(): string|null
     {
         return null;
     }

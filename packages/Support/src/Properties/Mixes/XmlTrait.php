@@ -15,18 +15,18 @@ trait XmlTrait
     /**
      * Extensible Markup Language (XML)
      *
-     * @var mixed|null
+     * @var mixed
      */
     protected $xml = null;
 
     /**
      * Set xml
      *
-     * @param mixed|null $xml Extensible Markup Language (XML)
+     * @param mixed $xml Extensible Markup Language (XML)
      *
      * @return self
      */
-    public function setXml($xml)
+    public function setXml(mixed $xml): static
     {
         $this->xml = $xml;
 
@@ -36,14 +36,14 @@ trait XmlTrait
     /**
      * Get xml
      *
-     * If no "xml" value set, method
-     * sets and returns a default "xml".
+     * If no xml value set, method
+     * sets and returns a default xml.
      *
      * @see getDefaultXml()
      *
-     * @return mixed|null xml or null if no xml has been set
+     * @return mixed xml or null if no xml has been set
      */
-    public function getXml()
+    public function getXml(): mixed
     {
         if (!$this->hasXml()) {
             $this->setXml($this->getDefaultXml());
@@ -52,9 +52,9 @@ trait XmlTrait
     }
 
     /**
-     * Check if "xml" has been set
+     * Check if xml has been set
      *
-     * @return bool True if "xml" has been set, false if not
+     * @return bool True if xml has been set, false if not
      */
     public function hasXml(): bool
     {
@@ -62,11 +62,11 @@ trait XmlTrait
     }
 
     /**
-     * Get a default "xml" value, if any is available
+     * Get a default xml value, if any is available
      *
-     * @return mixed|null Default "xml" value or null if no default value is available
+     * @return mixed Default xml value or null if no default value is available
      */
-    public function getDefaultXml()
+    public function getDefaultXml(): mixed
     {
         return null;
     }

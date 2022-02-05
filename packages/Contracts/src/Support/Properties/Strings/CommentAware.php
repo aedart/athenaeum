@@ -19,31 +19,31 @@ interface CommentAware
      *
      * @return self
      */
-    public function setComment(?string $content);
+    public function setComment(string|null $content): static;
 
     /**
      * Get comment
      *
-     * If no "comment" value set, method
-     * sets and returns a default "comment".
+     * If no comment value set, method
+     * sets and returns a default comment.
      *
      * @see getDefaultComment()
      *
      * @return string|null comment or null if no comment has been set
      */
-    public function getComment(): ?string;
+    public function getComment(): string|null;
 
     /**
-     * Check if "comment" has been set
+     * Check if comment has been set
      *
-     * @return bool True if "comment" has been set, false if not
+     * @return bool True if comment has been set, false if not
      */
     public function hasComment(): bool;
 
     /**
-     * Get a default "comment" value, if any is available
+     * Get a default comment value, if any is available
      *
-     * @return string|null Default "comment" value or null if no default value is available
+     * @return string|null Default comment value or null if no default value is available
      */
-    public function getDefaultComment(): ?string;
+    public function getDefaultComment(): string|null;
 }

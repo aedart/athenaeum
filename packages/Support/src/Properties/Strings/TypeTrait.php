@@ -17,7 +17,7 @@ trait TypeTrait
      *
      * @var string|null
      */
-    protected ?string $type = null;
+    protected string|null $type = null;
 
     /**
      * Set type
@@ -26,7 +26,7 @@ trait TypeTrait
      *
      * @return self
      */
-    public function setType(?string $identifier)
+    public function setType(string|null $identifier): static
     {
         $this->type = $identifier;
 
@@ -36,14 +36,14 @@ trait TypeTrait
     /**
      * Get type
      *
-     * If no "type" value set, method
-     * sets and returns a default "type".
+     * If no type value set, method
+     * sets and returns a default type.
      *
      * @see getDefaultType()
      *
      * @return string|null type or null if no type has been set
      */
-    public function getType(): ?string
+    public function getType(): string|null
     {
         if (!$this->hasType()) {
             $this->setType($this->getDefaultType());
@@ -52,9 +52,9 @@ trait TypeTrait
     }
 
     /**
-     * Check if "type" has been set
+     * Check if type has been set
      *
-     * @return bool True if "type" has been set, false if not
+     * @return bool True if type has been set, false if not
      */
     public function hasType(): bool
     {
@@ -62,11 +62,11 @@ trait TypeTrait
     }
 
     /**
-     * Get a default "type" value, if any is available
+     * Get a default type value, if any is available
      *
-     * @return string|null Default "type" value or null if no default value is available
+     * @return string|null Default type value or null if no default value is available
      */
-    public function getDefaultType(): ?string
+    public function getDefaultType(): string|null
     {
         return null;
     }

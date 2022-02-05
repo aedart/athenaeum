@@ -19,31 +19,31 @@ interface EditionAware
      *
      * @return self
      */
-    public function setEdition(?int $edition);
+    public function setEdition(int|null $edition): static;
 
     /**
      * Get edition
      *
-     * If no "edition" value set, method
-     * sets and returns a default "edition".
+     * If no edition value set, method
+     * sets and returns a default edition.
      *
      * @see getDefaultEdition()
      *
      * @return int|null edition or null if no edition has been set
      */
-    public function getEdition(): ?int;
+    public function getEdition(): int|null;
 
     /**
-     * Check if "edition" has been set
+     * Check if edition has been set
      *
-     * @return bool True if "edition" has been set, false if not
+     * @return bool True if edition has been set, false if not
      */
     public function hasEdition(): bool;
 
     /**
-     * Get a default "edition" value, if any is available
+     * Get a default edition value, if any is available
      *
-     * @return int|null Default "edition" value or null if no default value is available
+     * @return int|null Default edition value or null if no default value is available
      */
-    public function getDefaultEdition(): ?int;
+    public function getDefaultEdition(): int|null;
 }

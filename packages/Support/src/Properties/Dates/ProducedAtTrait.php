@@ -17,7 +17,7 @@ trait ProducedAtTrait
      *
      * @var \DateTime|null
      */
-    protected ?\DateTime $producedAt = null;
+    protected \DateTime|null $producedAt = null;
 
     /**
      * Set produced at
@@ -26,7 +26,7 @@ trait ProducedAtTrait
      *
      * @return self
      */
-    public function setProducedAt(?\DateTime $date)
+    public function setProducedAt(\DateTime|null $date): static
     {
         $this->producedAt = $date;
 
@@ -36,14 +36,14 @@ trait ProducedAtTrait
     /**
      * Get produced at
      *
-     * If no "produced at" value set, method
-     * sets and returns a default "produced at".
+     * If no produced at value set, method
+     * sets and returns a default produced at.
      *
      * @see getDefaultProducedAt()
      *
      * @return \DateTime|null produced at or null if no produced at has been set
      */
-    public function getProducedAt(): ?\DateTime
+    public function getProducedAt(): \DateTime|null
     {
         if (!$this->hasProducedAt()) {
             $this->setProducedAt($this->getDefaultProducedAt());
@@ -52,9 +52,9 @@ trait ProducedAtTrait
     }
 
     /**
-     * Check if "produced at" has been set
+     * Check if produced at has been set
      *
-     * @return bool True if "produced at" has been set, false if not
+     * @return bool True if produced at has been set, false if not
      */
     public function hasProducedAt(): bool
     {
@@ -62,11 +62,11 @@ trait ProducedAtTrait
     }
 
     /**
-     * Get a default "produced at" value, if any is available
+     * Get a default produced at value, if any is available
      *
-     * @return \DateTime|null Default "produced at" value or null if no default value is available
+     * @return \DateTime|null Default produced at value or null if no default value is available
      */
-    public function getDefaultProducedAt(): ?\DateTime
+    public function getDefaultProducedAt(): \DateTime|null
     {
         return null;
     }

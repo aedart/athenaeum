@@ -17,7 +17,7 @@ trait VendorTrait
      *
      * @var string|null
      */
-    protected ?string $vendor = null;
+    protected string|null $vendor = null;
 
     /**
      * Set vendor
@@ -26,7 +26,7 @@ trait VendorTrait
      *
      * @return self
      */
-    public function setVendor(?string $vendor)
+    public function setVendor(string|null $vendor): static
     {
         $this->vendor = $vendor;
 
@@ -36,14 +36,14 @@ trait VendorTrait
     /**
      * Get vendor
      *
-     * If no "vendor" value set, method
-     * sets and returns a default "vendor".
+     * If no vendor value set, method
+     * sets and returns a default vendor.
      *
      * @see getDefaultVendor()
      *
      * @return string|null vendor or null if no vendor has been set
      */
-    public function getVendor(): ?string
+    public function getVendor(): string|null
     {
         if (!$this->hasVendor()) {
             $this->setVendor($this->getDefaultVendor());
@@ -52,9 +52,9 @@ trait VendorTrait
     }
 
     /**
-     * Check if "vendor" has been set
+     * Check if vendor has been set
      *
-     * @return bool True if "vendor" has been set, false if not
+     * @return bool True if vendor has been set, false if not
      */
     public function hasVendor(): bool
     {
@@ -62,11 +62,11 @@ trait VendorTrait
     }
 
     /**
-     * Get a default "vendor" value, if any is available
+     * Get a default vendor value, if any is available
      *
-     * @return string|null Default "vendor" value or null if no default value is available
+     * @return string|null Default vendor value or null if no default value is available
      */
-    public function getDefaultVendor(): ?string
+    public function getDefaultVendor(): string|null
     {
         return null;
     }

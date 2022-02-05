@@ -17,7 +17,7 @@ trait HostTrait
      *
      * @var string|null
      */
-    protected ?string $host = null;
+    protected string|null $host = null;
 
     /**
      * Set host
@@ -26,7 +26,7 @@ trait HostTrait
      *
      * @return self
      */
-    public function setHost(?string $identifier)
+    public function setHost(string|null $identifier): static
     {
         $this->host = $identifier;
 
@@ -36,14 +36,14 @@ trait HostTrait
     /**
      * Get host
      *
-     * If no "host" value set, method
-     * sets and returns a default "host".
+     * If no host value set, method
+     * sets and returns a default host.
      *
      * @see getDefaultHost()
      *
      * @return string|null host or null if no host has been set
      */
-    public function getHost(): ?string
+    public function getHost(): string|null
     {
         if (!$this->hasHost()) {
             $this->setHost($this->getDefaultHost());
@@ -52,9 +52,9 @@ trait HostTrait
     }
 
     /**
-     * Check if "host" has been set
+     * Check if host has been set
      *
-     * @return bool True if "host" has been set, false if not
+     * @return bool True if host has been set, false if not
      */
     public function hasHost(): bool
     {
@@ -62,11 +62,11 @@ trait HostTrait
     }
 
     /**
-     * Get a default "host" value, if any is available
+     * Get a default host value, if any is available
      *
-     * @return string|null Default "host" value or null if no default value is available
+     * @return string|null Default host value or null if no default value is available
      */
-    public function getDefaultHost(): ?string
+    public function getDefaultHost(): string|null
     {
         return null;
     }

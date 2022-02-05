@@ -19,31 +19,31 @@ interface WeightAware
      *
      * @return self
      */
-    public function setWeight(?float $amount);
+    public function setWeight(float|null $amount): static;
 
     /**
      * Get weight
      *
-     * If no "weight" value set, method
-     * sets and returns a default "weight".
+     * If no weight value set, method
+     * sets and returns a default weight.
      *
      * @see getDefaultWeight()
      *
      * @return float|null weight or null if no weight has been set
      */
-    public function getWeight(): ?float;
+    public function getWeight(): float|null;
 
     /**
-     * Check if "weight" has been set
+     * Check if weight has been set
      *
-     * @return bool True if "weight" has been set, false if not
+     * @return bool True if weight has been set, false if not
      */
     public function hasWeight(): bool;
 
     /**
-     * Get a default "weight" value, if any is available
+     * Get a default weight value, if any is available
      *
-     * @return float|null Default "weight" value or null if no default value is available
+     * @return float|null Default weight value or null if no default value is available
      */
-    public function getDefaultWeight(): ?float;
+    public function getDefaultWeight(): float|null;
 }

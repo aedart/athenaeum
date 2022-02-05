@@ -19,31 +19,31 @@ interface AgentAware
      *
      * @return self
      */
-    public function setAgent(?string $agent);
+    public function setAgent(string|null $agent): static;
 
     /**
      * Get agent
      *
-     * If no "agent" value set, method
-     * sets and returns a default "agent".
+     * If no agent value set, method
+     * sets and returns a default agent.
      *
      * @see getDefaultAgent()
      *
      * @return string|null agent or null if no agent has been set
      */
-    public function getAgent(): ?string;
+    public function getAgent(): string|null;
 
     /**
-     * Check if "agent" has been set
+     * Check if agent has been set
      *
-     * @return bool True if "agent" has been set, false if not
+     * @return bool True if agent has been set, false if not
      */
     public function hasAgent(): bool;
 
     /**
-     * Get a default "agent" value, if any is available
+     * Get a default agent value, if any is available
      *
-     * @return string|null Default "agent" value or null if no default value is available
+     * @return string|null Default agent value or null if no default value is available
      */
-    public function getDefaultAgent(): ?string;
+    public function getDefaultAgent(): string|null;
 }

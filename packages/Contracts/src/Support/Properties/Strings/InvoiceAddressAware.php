@@ -19,31 +19,31 @@ interface InvoiceAddressAware
      *
      * @return self
      */
-    public function setInvoiceAddress(?string $address);
+    public function setInvoiceAddress(string|null $address): static;
 
     /**
      * Get invoice address
      *
-     * If no "invoice address" value set, method
-     * sets and returns a default "invoice address".
+     * If no invoice address value set, method
+     * sets and returns a default invoice address.
      *
      * @see getDefaultInvoiceAddress()
      *
      * @return string|null invoice address or null if no invoice address has been set
      */
-    public function getInvoiceAddress(): ?string;
+    public function getInvoiceAddress(): string|null;
 
     /**
-     * Check if "invoice address" has been set
+     * Check if invoice address has been set
      *
-     * @return bool True if "invoice address" has been set, false if not
+     * @return bool True if invoice address has been set, false if not
      */
     public function hasInvoiceAddress(): bool;
 
     /**
-     * Get a default "invoice address" value, if any is available
+     * Get a default invoice address value, if any is available
      *
-     * @return string|null Default "invoice address" value or null if no default value is available
+     * @return string|null Default invoice address value or null if no default value is available
      */
-    public function getDefaultInvoiceAddress(): ?string;
+    public function getDefaultInvoiceAddress(): string|null;
 }

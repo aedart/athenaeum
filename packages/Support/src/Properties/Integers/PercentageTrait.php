@@ -17,7 +17,7 @@ trait PercentageTrait
      *
      * @var int|null
      */
-    protected ?int $percentage = null;
+    protected int|null $percentage = null;
 
     /**
      * Set percentage
@@ -26,7 +26,7 @@ trait PercentageTrait
      *
      * @return self
      */
-    public function setPercentage(?int $percentage)
+    public function setPercentage(int|null $percentage): static
     {
         $this->percentage = $percentage;
 
@@ -36,14 +36,14 @@ trait PercentageTrait
     /**
      * Get percentage
      *
-     * If no "percentage" value set, method
-     * sets and returns a default "percentage".
+     * If no percentage value set, method
+     * sets and returns a default percentage.
      *
      * @see getDefaultPercentage()
      *
      * @return int|null percentage or null if no percentage has been set
      */
-    public function getPercentage(): ?int
+    public function getPercentage(): int|null
     {
         if (!$this->hasPercentage()) {
             $this->setPercentage($this->getDefaultPercentage());
@@ -52,9 +52,9 @@ trait PercentageTrait
     }
 
     /**
-     * Check if "percentage" has been set
+     * Check if percentage has been set
      *
-     * @return bool True if "percentage" has been set, false if not
+     * @return bool True if percentage has been set, false if not
      */
     public function hasPercentage(): bool
     {
@@ -62,11 +62,11 @@ trait PercentageTrait
     }
 
     /**
-     * Get a default "percentage" value, if any is available
+     * Get a default percentage value, if any is available
      *
-     * @return int|null Default "percentage" value or null if no default value is available
+     * @return int|null Default percentage value or null if no default value is available
      */
-    public function getDefaultPercentage(): ?int
+    public function getDefaultPercentage(): int|null
     {
         return null;
     }

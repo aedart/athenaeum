@@ -17,7 +17,7 @@ trait DescriptionTrait
      *
      * @var string|null
      */
-    protected ?string $description = null;
+    protected string|null $description = null;
 
     /**
      * Set description
@@ -26,7 +26,7 @@ trait DescriptionTrait
      *
      * @return self
      */
-    public function setDescription(?string $description)
+    public function setDescription(string|null $description): static
     {
         $this->description = $description;
 
@@ -36,14 +36,14 @@ trait DescriptionTrait
     /**
      * Get description
      *
-     * If no "description" value set, method
-     * sets and returns a default "description".
+     * If no description value set, method
+     * sets and returns a default description.
      *
      * @see getDefaultDescription()
      *
      * @return string|null description or null if no description has been set
      */
-    public function getDescription(): ?string
+    public function getDescription(): string|null
     {
         if (!$this->hasDescription()) {
             $this->setDescription($this->getDefaultDescription());
@@ -52,9 +52,9 @@ trait DescriptionTrait
     }
 
     /**
-     * Check if "description" has been set
+     * Check if description has been set
      *
-     * @return bool True if "description" has been set, false if not
+     * @return bool True if description has been set, false if not
      */
     public function hasDescription(): bool
     {
@@ -62,11 +62,11 @@ trait DescriptionTrait
     }
 
     /**
-     * Get a default "description" value, if any is available
+     * Get a default description value, if any is available
      *
-     * @return string|null Default "description" value or null if no default value is available
+     * @return string|null Default description value or null if no default value is available
      */
-    public function getDefaultDescription(): ?string
+    public function getDefaultDescription(): string|null
     {
         return null;
     }

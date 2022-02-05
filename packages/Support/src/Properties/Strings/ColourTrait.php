@@ -17,7 +17,7 @@ trait ColourTrait
      *
      * @var string|null
      */
-    protected ?string $colour = null;
+    protected string|null $colour = null;
 
     /**
      * Set colour
@@ -26,7 +26,7 @@ trait ColourTrait
      *
      * @return self
      */
-    public function setColour(?string $colour)
+    public function setColour(string|null $colour): static
     {
         $this->colour = $colour;
 
@@ -36,14 +36,14 @@ trait ColourTrait
     /**
      * Get colour
      *
-     * If no "colour" value set, method
-     * sets and returns a default "colour".
+     * If no colour value set, method
+     * sets and returns a default colour.
      *
      * @see getDefaultColour()
      *
      * @return string|null colour or null if no colour has been set
      */
-    public function getColour(): ?string
+    public function getColour(): string|null
     {
         if (!$this->hasColour()) {
             $this->setColour($this->getDefaultColour());
@@ -52,9 +52,9 @@ trait ColourTrait
     }
 
     /**
-     * Check if "colour" has been set
+     * Check if colour has been set
      *
-     * @return bool True if "colour" has been set, false if not
+     * @return bool True if colour has been set, false if not
      */
     public function hasColour(): bool
     {
@@ -62,11 +62,11 @@ trait ColourTrait
     }
 
     /**
-     * Get a default "colour" value, if any is available
+     * Get a default colour value, if any is available
      *
-     * @return string|null Default "colour" value or null if no default value is available
+     * @return string|null Default colour value or null if no default value is available
      */
-    public function getDefaultColour(): ?string
+    public function getDefaultColour(): string|null
     {
         return null;
     }

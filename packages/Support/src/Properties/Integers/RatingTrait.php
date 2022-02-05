@@ -17,7 +17,7 @@ trait RatingTrait
      *
      * @var int|null
      */
-    protected ?int $rating = null;
+    protected int|null $rating = null;
 
     /**
      * Set rating
@@ -26,7 +26,7 @@ trait RatingTrait
      *
      * @return self
      */
-    public function setRating(?int $score)
+    public function setRating(int|null $score): static
     {
         $this->rating = $score;
 
@@ -36,14 +36,14 @@ trait RatingTrait
     /**
      * Get rating
      *
-     * If no "rating" value set, method
-     * sets and returns a default "rating".
+     * If no rating value set, method
+     * sets and returns a default rating.
      *
      * @see getDefaultRating()
      *
      * @return int|null rating or null if no rating has been set
      */
-    public function getRating(): ?int
+    public function getRating(): int|null
     {
         if (!$this->hasRating()) {
             $this->setRating($this->getDefaultRating());
@@ -52,9 +52,9 @@ trait RatingTrait
     }
 
     /**
-     * Check if "rating" has been set
+     * Check if rating has been set
      *
-     * @return bool True if "rating" has been set, false if not
+     * @return bool True if rating has been set, false if not
      */
     public function hasRating(): bool
     {
@@ -62,11 +62,11 @@ trait RatingTrait
     }
 
     /**
-     * Get a default "rating" value, if any is available
+     * Get a default rating value, if any is available
      *
-     * @return int|null Default "rating" value or null if no default value is available
+     * @return int|null Default rating value or null if no default value is available
      */
-    public function getDefaultRating(): ?int
+    public function getDefaultRating(): int|null
     {
         return null;
     }

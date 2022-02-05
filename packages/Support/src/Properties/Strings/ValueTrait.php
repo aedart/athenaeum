@@ -17,7 +17,7 @@ trait ValueTrait
      *
      * @var string|null
      */
-    protected ?string $value = null;
+    protected string|null $value = null;
 
     /**
      * Set value
@@ -26,7 +26,7 @@ trait ValueTrait
      *
      * @return self
      */
-    public function setValue(?string $value)
+    public function setValue(string|null $value): static
     {
         $this->value = $value;
 
@@ -36,14 +36,14 @@ trait ValueTrait
     /**
      * Get value
      *
-     * If no "value" value set, method
-     * sets and returns a default "value".
+     * If no value value set, method
+     * sets and returns a default value.
      *
      * @see getDefaultValue()
      *
      * @return string|null value or null if no value has been set
      */
-    public function getValue(): ?string
+    public function getValue(): string|null
     {
         if (!$this->hasValue()) {
             $this->setValue($this->getDefaultValue());
@@ -52,9 +52,9 @@ trait ValueTrait
     }
 
     /**
-     * Check if "value" has been set
+     * Check if value has been set
      *
-     * @return bool True if "value" has been set, false if not
+     * @return bool True if value has been set, false if not
      */
     public function hasValue(): bool
     {
@@ -62,11 +62,11 @@ trait ValueTrait
     }
 
     /**
-     * Get a default "value" value, if any is available
+     * Get a default value value, if any is available
      *
-     * @return string|null Default "value" value or null if no default value is available
+     * @return string|null Default value value or null if no default value is available
      */
-    public function getDefaultValue(): ?string
+    public function getDefaultValue(): string|null
     {
         return null;
     }

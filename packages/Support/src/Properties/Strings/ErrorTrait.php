@@ -17,7 +17,7 @@ trait ErrorTrait
      *
      * @var string|null
      */
-    protected ?string $error = null;
+    protected string|null $error = null;
 
     /**
      * Set error
@@ -26,7 +26,7 @@ trait ErrorTrait
      *
      * @return self
      */
-    public function setError(?string $identifier)
+    public function setError(string|null $identifier): static
     {
         $this->error = $identifier;
 
@@ -36,14 +36,14 @@ trait ErrorTrait
     /**
      * Get error
      *
-     * If no "error" value set, method
-     * sets and returns a default "error".
+     * If no error value set, method
+     * sets and returns a default error.
      *
      * @see getDefaultError()
      *
      * @return string|null error or null if no error has been set
      */
-    public function getError(): ?string
+    public function getError(): string|null
     {
         if (!$this->hasError()) {
             $this->setError($this->getDefaultError());
@@ -52,9 +52,9 @@ trait ErrorTrait
     }
 
     /**
-     * Check if "error" has been set
+     * Check if error has been set
      *
-     * @return bool True if "error" has been set, false if not
+     * @return bool True if error has been set, false if not
      */
     public function hasError(): bool
     {
@@ -62,11 +62,11 @@ trait ErrorTrait
     }
 
     /**
-     * Get a default "error" value, if any is available
+     * Get a default error value, if any is available
      *
-     * @return string|null Default "error" value or null if no default value is available
+     * @return string|null Default error value or null if no default value is available
      */
-    public function getDefaultError(): ?string
+    public function getDefaultError(): string|null
     {
         return null;
     }

@@ -19,31 +19,31 @@ interface MediaTypeAware
      *
      * @return self
      */
-    public function setMediaType(?string $type);
+    public function setMediaType(string|null $type): static;
 
     /**
      * Get media type
      *
-     * If no "media type" value set, method
-     * sets and returns a default "media type".
+     * If no media type value set, method
+     * sets and returns a default media type.
      *
      * @see getDefaultMediaType()
      *
      * @return string|null media type or null if no media type has been set
      */
-    public function getMediaType(): ?string;
+    public function getMediaType(): string|null;
 
     /**
-     * Check if "media type" has been set
+     * Check if media type has been set
      *
-     * @return bool True if "media type" has been set, false if not
+     * @return bool True if media type has been set, false if not
      */
     public function hasMediaType(): bool;
 
     /**
-     * Get a default "media type" value, if any is available
+     * Get a default media type value, if any is available
      *
-     * @return string|null Default "media type" value or null if no default value is available
+     * @return string|null Default media type value or null if no default value is available
      */
-    public function getDefaultMediaType(): ?string;
+    public function getDefaultMediaType(): string|null;
 }

@@ -19,31 +19,31 @@ interface DataAware
      *
      * @return self
      */
-    public function setData(?array $values);
+    public function setData(array|null $values): static;
 
     /**
      * Get data
      *
-     * If no "data" value set, method
-     * sets and returns a default "data".
+     * If no data value set, method
+     * sets and returns a default data.
      *
      * @see getDefaultData()
      *
      * @return array|null data or null if no data has been set
      */
-    public function getData(): ?array;
+    public function getData(): array|null;
 
     /**
-     * Check if "data" has been set
+     * Check if data has been set
      *
-     * @return bool True if "data" has been set, false if not
+     * @return bool True if data has been set, false if not
      */
     public function hasData(): bool;
 
     /**
-     * Get a default "data" value, if any is available
+     * Get a default data value, if any is available
      *
-     * @return array|null Default "data" value or null if no default value is available
+     * @return array|null Default data value or null if no default value is available
      */
-    public function getDefaultData(): ?array;
+    public function getDefaultData(): array|null;
 }

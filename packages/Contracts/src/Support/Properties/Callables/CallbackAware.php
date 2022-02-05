@@ -19,31 +19,31 @@ interface CallbackAware
      *
      * @return self
      */
-    public function setCallback(?callable $callback);
+    public function setCallback(callable|null $callback): static;
 
     /**
      * Get callback
      *
-     * If no "callback" value set, method
-     * sets and returns a default "callback".
+     * If no callback value set, method
+     * sets and returns a default callback.
      *
      * @see getDefaultCallback()
      *
      * @return callable|null callback or null if no callback has been set
      */
-    public function getCallback(): ?callable;
+    public function getCallback(): callable|null;
 
     /**
-     * Check if "callback" has been set
+     * Check if callback has been set
      *
-     * @return bool True if "callback" has been set, false if not
+     * @return bool True if callback has been set, false if not
      */
     public function hasCallback(): bool;
 
     /**
-     * Get a default "callback" value, if any is available
+     * Get a default callback value, if any is available
      *
-     * @return callable|null Default "callback" value or null if no default value is available
+     * @return callable|null Default callback value or null if no default value is available
      */
-    public function getDefaultCallback(): ?callable;
+    public function getDefaultCallback(): callable|null;
 }

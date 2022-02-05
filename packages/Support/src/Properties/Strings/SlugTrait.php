@@ -17,7 +17,7 @@ trait SlugTrait
      *
      * @var string|null
      */
-    protected ?string $slug = null;
+    protected string|null $slug = null;
 
     /**
      * Set slug
@@ -26,7 +26,7 @@ trait SlugTrait
      *
      * @return self
      */
-    public function setSlug(?string $slug)
+    public function setSlug(string|null $slug): static
     {
         $this->slug = $slug;
 
@@ -36,14 +36,14 @@ trait SlugTrait
     /**
      * Get slug
      *
-     * If no "slug" value set, method
-     * sets and returns a default "slug".
+     * If no slug value set, method
+     * sets and returns a default slug.
      *
      * @see getDefaultSlug()
      *
      * @return string|null slug or null if no slug has been set
      */
-    public function getSlug(): ?string
+    public function getSlug(): string|null
     {
         if (!$this->hasSlug()) {
             $this->setSlug($this->getDefaultSlug());
@@ -52,9 +52,9 @@ trait SlugTrait
     }
 
     /**
-     * Check if "slug" has been set
+     * Check if slug has been set
      *
-     * @return bool True if "slug" has been set, false if not
+     * @return bool True if slug has been set, false if not
      */
     public function hasSlug(): bool
     {
@@ -62,11 +62,11 @@ trait SlugTrait
     }
 
     /**
-     * Get a default "slug" value, if any is available
+     * Get a default slug value, if any is available
      *
-     * @return string|null Default "slug" value or null if no default value is available
+     * @return string|null Default slug value or null if no default value is available
      */
-    public function getDefaultSlug(): ?string
+    public function getDefaultSlug(): string|null
     {
         return null;
     }

@@ -17,7 +17,7 @@ trait CreatedAtTrait
      *
      * @var \DateTime|null
      */
-    protected ?\DateTime $createdAt = null;
+    protected \DateTime|null $createdAt = null;
 
     /**
      * Set created at
@@ -26,7 +26,7 @@ trait CreatedAtTrait
      *
      * @return self
      */
-    public function setCreatedAt(?\DateTime $date)
+    public function setCreatedAt(\DateTime|null $date): static
     {
         $this->createdAt = $date;
 
@@ -36,14 +36,14 @@ trait CreatedAtTrait
     /**
      * Get created at
      *
-     * If no "created at" value set, method
-     * sets and returns a default "created at".
+     * If no created at value set, method
+     * sets and returns a default created at.
      *
      * @see getDefaultCreatedAt()
      *
      * @return \DateTime|null created at or null if no created at has been set
      */
-    public function getCreatedAt(): ?\DateTime
+    public function getCreatedAt(): \DateTime|null
     {
         if (!$this->hasCreatedAt()) {
             $this->setCreatedAt($this->getDefaultCreatedAt());
@@ -52,9 +52,9 @@ trait CreatedAtTrait
     }
 
     /**
-     * Check if "created at" has been set
+     * Check if created at has been set
      *
-     * @return bool True if "created at" has been set, false if not
+     * @return bool True if created at has been set, false if not
      */
     public function hasCreatedAt(): bool
     {
@@ -62,11 +62,11 @@ trait CreatedAtTrait
     }
 
     /**
-     * Get a default "created at" value, if any is available
+     * Get a default created at value, if any is available
      *
-     * @return \DateTime|null Default "created at" value or null if no default value is available
+     * @return \DateTime|null Default created at value or null if no default value is available
      */
-    public function getDefaultCreatedAt(): ?\DateTime
+    public function getDefaultCreatedAt(): \DateTime|null
     {
         return null;
     }

@@ -19,31 +19,31 @@ interface IcaoAware
      *
      * @return self
      */
-    public function setIcao(?string $code);
+    public function setIcao(string|null $code): static;
 
     /**
      * Get icao
      *
-     * If no "icao" value set, method
-     * sets and returns a default "icao".
+     * If no icao value set, method
+     * sets and returns a default icao.
      *
      * @see getDefaultIcao()
      *
      * @return string|null icao or null if no icao has been set
      */
-    public function getIcao(): ?string;
+    public function getIcao(): string|null;
 
     /**
-     * Check if "icao" has been set
+     * Check if icao has been set
      *
-     * @return bool True if "icao" has been set, false if not
+     * @return bool True if icao has been set, false if not
      */
     public function hasIcao(): bool;
 
     /**
-     * Get a default "icao" value, if any is available
+     * Get a default icao value, if any is available
      *
-     * @return string|null Default "icao" value or null if no default value is available
+     * @return string|null Default icao value or null if no default value is available
      */
-    public function getDefaultIcao(): ?string;
+    public function getDefaultIcao(): string|null;
 }

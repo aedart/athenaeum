@@ -19,31 +19,31 @@ interface PurchaseDateAware
      *
      * @return self
      */
-    public function setPurchaseDate(?\DateTime $date);
+    public function setPurchaseDate(\DateTime|null $date): static;
 
     /**
      * Get purchase date
      *
-     * If no "purchase date" value set, method
-     * sets and returns a default "purchase date".
+     * If no purchase date value set, method
+     * sets and returns a default purchase date.
      *
      * @see getDefaultPurchaseDate()
      *
      * @return \DateTime|null purchase date or null if no purchase date has been set
      */
-    public function getPurchaseDate(): ?\DateTime;
+    public function getPurchaseDate(): \DateTime|null;
 
     /**
-     * Check if "purchase date" has been set
+     * Check if purchase date has been set
      *
-     * @return bool True if "purchase date" has been set, false if not
+     * @return bool True if purchase date has been set, false if not
      */
     public function hasPurchaseDate(): bool;
 
     /**
-     * Get a default "purchase date" value, if any is available
+     * Get a default purchase date value, if any is available
      *
-     * @return \DateTime|null Default "purchase date" value or null if no default value is available
+     * @return \DateTime|null Default purchase date value or null if no default value is available
      */
-    public function getDefaultPurchaseDate(): ?\DateTime;
+    public function getDefaultPurchaseDate(): \DateTime|null;
 }

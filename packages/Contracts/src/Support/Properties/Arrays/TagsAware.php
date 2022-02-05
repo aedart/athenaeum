@@ -19,31 +19,31 @@ interface TagsAware
      *
      * @return self
      */
-    public function setTags(?array $tags);
+    public function setTags(array|null $tags): static;
 
     /**
      * Get tags
      *
-     * If no "tags" value set, method
-     * sets and returns a default "tags".
+     * If no tags value set, method
+     * sets and returns a default tags.
      *
      * @see getDefaultTags()
      *
      * @return array|null tags or null if no tags has been set
      */
-    public function getTags(): ?array;
+    public function getTags(): array|null;
 
     /**
-     * Check if "tags" has been set
+     * Check if tags has been set
      *
-     * @return bool True if "tags" has been set, false if not
+     * @return bool True if tags has been set, false if not
      */
     public function hasTags(): bool;
 
     /**
-     * Get a default "tags" value, if any is available
+     * Get a default tags value, if any is available
      *
-     * @return array|null Default "tags" value or null if no default value is available
+     * @return array|null Default tags value or null if no default value is available
      */
-    public function getDefaultTags(): ?array;
+    public function getDefaultTags(): array|null;
 }

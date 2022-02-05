@@ -19,31 +19,31 @@ interface ImageAware
      *
      * @return self
      */
-    public function setImage(?string $location);
+    public function setImage(string|null $location): static;
 
     /**
      * Get image
      *
-     * If no "image" value set, method
-     * sets and returns a default "image".
+     * If no image value set, method
+     * sets and returns a default image.
      *
      * @see getDefaultImage()
      *
      * @return string|null image or null if no image has been set
      */
-    public function getImage(): ?string;
+    public function getImage(): string|null;
 
     /**
-     * Check if "image" has been set
+     * Check if image has been set
      *
-     * @return bool True if "image" has been set, false if not
+     * @return bool True if image has been set, false if not
      */
     public function hasImage(): bool;
 
     /**
-     * Get a default "image" value, if any is available
+     * Get a default image value, if any is available
      *
-     * @return string|null Default "image" value or null if no default value is available
+     * @return string|null Default image value or null if no default value is available
      */
-    public function getDefaultImage(): ?string;
+    public function getDefaultImage(): string|null;
 }

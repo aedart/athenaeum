@@ -17,7 +17,7 @@ trait Ean8Trait
      *
      * @var string|null
      */
-    protected ?string $ean8 = null;
+    protected string|null $ean8 = null;
 
     /**
      * Set ean8
@@ -26,7 +26,7 @@ trait Ean8Trait
      *
      * @return self
      */
-    public function setEan8(?string $ean8)
+    public function setEan8(string|null $ean8): static
     {
         $this->ean8 = $ean8;
 
@@ -36,14 +36,14 @@ trait Ean8Trait
     /**
      * Get ean8
      *
-     * If no "ean8" value set, method
-     * sets and returns a default "ean8".
+     * If no ean8 value set, method
+     * sets and returns a default ean8.
      *
      * @see getDefaultEan8()
      *
      * @return string|null ean8 or null if no ean8 has been set
      */
-    public function getEan8(): ?string
+    public function getEan8(): string|null
     {
         if (!$this->hasEan8()) {
             $this->setEan8($this->getDefaultEan8());
@@ -52,9 +52,9 @@ trait Ean8Trait
     }
 
     /**
-     * Check if "ean8" has been set
+     * Check if ean8 has been set
      *
-     * @return bool True if "ean8" has been set, false if not
+     * @return bool True if ean8 has been set, false if not
      */
     public function hasEan8(): bool
     {
@@ -62,11 +62,11 @@ trait Ean8Trait
     }
 
     /**
-     * Get a default "ean8" value, if any is available
+     * Get a default ean8 value, if any is available
      *
-     * @return string|null Default "ean8" value or null if no default value is available
+     * @return string|null Default ean8 value or null if no default value is available
      */
-    public function getDefaultEan8(): ?string
+    public function getDefaultEan8(): string|null
     {
         return null;
     }

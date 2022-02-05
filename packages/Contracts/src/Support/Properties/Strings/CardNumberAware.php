@@ -19,31 +19,31 @@ interface CardNumberAware
      *
      * @return self
      */
-    public function setCardNumber(?string $number);
+    public function setCardNumber(string|null $number): static;
 
     /**
      * Get card number
      *
-     * If no "card number" value set, method
-     * sets and returns a default "card number".
+     * If no card number value set, method
+     * sets and returns a default card number.
      *
      * @see getDefaultCardNumber()
      *
      * @return string|null card number or null if no card number has been set
      */
-    public function getCardNumber(): ?string;
+    public function getCardNumber(): string|null;
 
     /**
-     * Check if "card number" has been set
+     * Check if card number has been set
      *
-     * @return bool True if "card number" has been set, false if not
+     * @return bool True if card number has been set, false if not
      */
     public function hasCardNumber(): bool;
 
     /**
-     * Get a default "card number" value, if any is available
+     * Get a default card number value, if any is available
      *
-     * @return string|null Default "card number" value or null if no default value is available
+     * @return string|null Default card number value or null if no default value is available
      */
-    public function getDefaultCardNumber(): ?string;
+    public function getDefaultCardNumber(): string|null;
 }

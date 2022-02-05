@@ -17,7 +17,7 @@ trait FileExtensionTrait
      *
      * @var string|null
      */
-    protected ?string $fileExtension = null;
+    protected string|null $fileExtension = null;
 
     /**
      * Set file extension
@@ -26,7 +26,7 @@ trait FileExtensionTrait
      *
      * @return self
      */
-    public function setFileExtension(?string $extension)
+    public function setFileExtension(string|null $extension): static
     {
         $this->fileExtension = $extension;
 
@@ -36,14 +36,14 @@ trait FileExtensionTrait
     /**
      * Get file extension
      *
-     * If no "file extension" value set, method
-     * sets and returns a default "file extension".
+     * If no file extension value set, method
+     * sets and returns a default file extension.
      *
      * @see getDefaultFileExtension()
      *
      * @return string|null file extension or null if no file extension has been set
      */
-    public function getFileExtension(): ?string
+    public function getFileExtension(): string|null
     {
         if (!$this->hasFileExtension()) {
             $this->setFileExtension($this->getDefaultFileExtension());
@@ -52,9 +52,9 @@ trait FileExtensionTrait
     }
 
     /**
-     * Check if "file extension" has been set
+     * Check if file extension has been set
      *
-     * @return bool True if "file extension" has been set, false if not
+     * @return bool True if file extension has been set, false if not
      */
     public function hasFileExtension(): bool
     {
@@ -62,11 +62,11 @@ trait FileExtensionTrait
     }
 
     /**
-     * Get a default "file extension" value, if any is available
+     * Get a default file extension value, if any is available
      *
-     * @return string|null Default "file extension" value or null if no default value is available
+     * @return string|null Default file extension value or null if no default value is available
      */
-    public function getDefaultFileExtension(): ?string
+    public function getDefaultFileExtension(): string|null
     {
         return null;
     }

@@ -19,31 +19,31 @@ interface UuidAware
      *
      * @return self
      */
-    public function setUuid(?string $identifier);
+    public function setUuid(string|null $identifier): static;
 
     /**
      * Get uuid
      *
-     * If no "uuid" value set, method
-     * sets and returns a default "uuid".
+     * If no uuid value set, method
+     * sets and returns a default uuid.
      *
      * @see getDefaultUuid()
      *
      * @return string|null uuid or null if no uuid has been set
      */
-    public function getUuid(): ?string;
+    public function getUuid(): string|null;
 
     /**
-     * Check if "uuid" has been set
+     * Check if uuid has been set
      *
-     * @return bool True if "uuid" has been set, false if not
+     * @return bool True if uuid has been set, false if not
      */
     public function hasUuid(): bool;
 
     /**
-     * Get a default "uuid" value, if any is available
+     * Get a default uuid value, if any is available
      *
-     * @return string|null Default "uuid" value or null if no default value is available
+     * @return string|null Default uuid value or null if no default value is available
      */
-    public function getDefaultUuid(): ?string;
+    public function getDefaultUuid(): string|null;
 }

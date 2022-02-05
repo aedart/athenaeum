@@ -19,31 +19,31 @@ interface ChoicesAware
      *
      * @return self
      */
-    public function setChoices(?array $list);
+    public function setChoices(array|null $list): static;
 
     /**
      * Get choices
      *
-     * If no "choices" value set, method
-     * sets and returns a default "choices".
+     * If no choices value set, method
+     * sets and returns a default choices.
      *
      * @see getDefaultChoices()
      *
      * @return array|null choices or null if no choices has been set
      */
-    public function getChoices(): ?array;
+    public function getChoices(): array|null;
 
     /**
-     * Check if "choices" has been set
+     * Check if choices has been set
      *
-     * @return bool True if "choices" has been set, false if not
+     * @return bool True if choices has been set, false if not
      */
     public function hasChoices(): bool;
 
     /**
-     * Get a default "choices" value, if any is available
+     * Get a default choices value, if any is available
      *
-     * @return array|null Default "choices" value or null if no default value is available
+     * @return array|null Default choices value or null if no default value is available
      */
-    public function getDefaultChoices(): ?array;
+    public function getDefaultChoices(): array|null;
 }

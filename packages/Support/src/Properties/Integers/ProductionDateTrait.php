@@ -17,7 +17,7 @@ trait ProductionDateTrait
      *
      * @var int|null
      */
-    protected ?int $productionDate = null;
+    protected int|null $productionDate = null;
 
     /**
      * Set production date
@@ -26,7 +26,7 @@ trait ProductionDateTrait
      *
      * @return self
      */
-    public function setProductionDate(?int $date)
+    public function setProductionDate(int|null $date): static
     {
         $this->productionDate = $date;
 
@@ -36,14 +36,14 @@ trait ProductionDateTrait
     /**
      * Get production date
      *
-     * If no "production date" value set, method
-     * sets and returns a default "production date".
+     * If no production date value set, method
+     * sets and returns a default production date.
      *
      * @see getDefaultProductionDate()
      *
      * @return int|null production date or null if no production date has been set
      */
-    public function getProductionDate(): ?int
+    public function getProductionDate(): int|null
     {
         if (!$this->hasProductionDate()) {
             $this->setProductionDate($this->getDefaultProductionDate());
@@ -52,9 +52,9 @@ trait ProductionDateTrait
     }
 
     /**
-     * Check if "production date" has been set
+     * Check if production date has been set
      *
-     * @return bool True if "production date" has been set, false if not
+     * @return bool True if production date has been set, false if not
      */
     public function hasProductionDate(): bool
     {
@@ -62,11 +62,11 @@ trait ProductionDateTrait
     }
 
     /**
-     * Get a default "production date" value, if any is available
+     * Get a default production date value, if any is available
      *
-     * @return int|null Default "production date" value or null if no default value is available
+     * @return int|null Default production date value or null if no default value is available
      */
-    public function getDefaultProductionDate(): ?int
+    public function getDefaultProductionDate(): int|null
     {
         return null;
     }

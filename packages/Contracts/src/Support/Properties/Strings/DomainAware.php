@@ -19,31 +19,31 @@ interface DomainAware
      *
      * @return self
      */
-    public function setDomain(?string $domain);
+    public function setDomain(string|null $domain): static;
 
     /**
      * Get domain
      *
-     * If no "domain" value set, method
-     * sets and returns a default "domain".
+     * If no domain value set, method
+     * sets and returns a default domain.
      *
      * @see getDefaultDomain()
      *
      * @return string|null domain or null if no domain has been set
      */
-    public function getDomain(): ?string;
+    public function getDomain(): string|null;
 
     /**
-     * Check if "domain" has been set
+     * Check if domain has been set
      *
-     * @return bool True if "domain" has been set, false if not
+     * @return bool True if domain has been set, false if not
      */
     public function hasDomain(): bool;
 
     /**
-     * Get a default "domain" value, if any is available
+     * Get a default domain value, if any is available
      *
-     * @return string|null Default "domain" value or null if no default value is available
+     * @return string|null Default domain value or null if no default value is available
      */
-    public function getDefaultDomain(): ?string;
+    public function getDefaultDomain(): string|null;
 }

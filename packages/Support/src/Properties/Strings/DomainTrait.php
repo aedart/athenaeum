@@ -17,7 +17,7 @@ trait DomainTrait
      *
      * @var string|null
      */
-    protected ?string $domain = null;
+    protected string|null $domain = null;
 
     /**
      * Set domain
@@ -26,7 +26,7 @@ trait DomainTrait
      *
      * @return self
      */
-    public function setDomain(?string $domain)
+    public function setDomain(string|null $domain): static
     {
         $this->domain = $domain;
 
@@ -36,14 +36,14 @@ trait DomainTrait
     /**
      * Get domain
      *
-     * If no "domain" value set, method
-     * sets and returns a default "domain".
+     * If no domain value set, method
+     * sets and returns a default domain.
      *
      * @see getDefaultDomain()
      *
      * @return string|null domain or null if no domain has been set
      */
-    public function getDomain(): ?string
+    public function getDomain(): string|null
     {
         if (!$this->hasDomain()) {
             $this->setDomain($this->getDefaultDomain());
@@ -52,9 +52,9 @@ trait DomainTrait
     }
 
     /**
-     * Check if "domain" has been set
+     * Check if domain has been set
      *
-     * @return bool True if "domain" has been set, false if not
+     * @return bool True if domain has been set, false if not
      */
     public function hasDomain(): bool
     {
@@ -62,11 +62,11 @@ trait DomainTrait
     }
 
     /**
-     * Get a default "domain" value, if any is available
+     * Get a default domain value, if any is available
      *
-     * @return string|null Default "domain" value or null if no default value is available
+     * @return string|null Default domain value or null if no default value is available
      */
-    public function getDefaultDomain(): ?string
+    public function getDefaultDomain(): string|null
     {
         return null;
     }

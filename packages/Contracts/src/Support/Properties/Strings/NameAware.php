@@ -19,31 +19,31 @@ interface NameAware
      *
      * @return self
      */
-    public function setName(?string $name);
+    public function setName(string|null $name): static;
 
     /**
      * Get name
      *
-     * If no "name" value set, method
-     * sets and returns a default "name".
+     * If no name value set, method
+     * sets and returns a default name.
      *
      * @see getDefaultName()
      *
      * @return string|null name or null if no name has been set
      */
-    public function getName(): ?string;
+    public function getName(): string|null;
 
     /**
-     * Check if "name" has been set
+     * Check if name has been set
      *
-     * @return bool True if "name" has been set, false if not
+     * @return bool True if name has been set, false if not
      */
     public function hasName(): bool;
 
     /**
-     * Get a default "name" value, if any is available
+     * Get a default name value, if any is available
      *
-     * @return string|null Default "name" value or null if no default value is available
+     * @return string|null Default name value or null if no default value is available
      */
-    public function getDefaultName(): ?string;
+    public function getDefaultName(): string|null;
 }
