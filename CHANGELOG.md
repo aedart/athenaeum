@@ -6,25 +6,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-#### Added
-
-* `MultipleModelsChanged` event in Audit package.  
-* `RecordMultipleAuditTrailEntries` listener that handles `MultipleModelsChanged` events. Performs a mass insert of audit trail entries.
-* `AuditTrailEventSubscriber` that will handle registration of Audit Trail related event listeners.
-
-#### Deprecated
-
-* The `audit-trail.listener` configuration setting has been replaced with `audit-trail.subscriber`, in `configs/audit-trail.php`. 
-Will be removed in next major version (_in audit package_).
-
-#### Changed
-
-* `ModelChangedEvents` concern is now able to dispatch "multiple models changed" event, via `dispatchMultipleModelsChanged()` (_in audit package_). 
-
-#### Fixed
-
-* `$performedAt` argument ignored in `\Aedart\Audit\Events\ModelHasChanged`.
-
 
 ### Added
 
@@ -72,6 +53,27 @@ Will be removed in next major version (_in audit package_).
 * Incorrect commit reference passed on to `\Jean85\Version`, in `\Aedart\Utils\Version` (_happened after upgrade to the latest version of "Pretty Package Versions"_).
 * `Codeception\TestCase\Test` class not found, in `\Aedart\Tests\Integration\Laravel\ApplicationInitiatorTest` (_happened after upgrade to the latest version of Codeception_). 
 * `LoadSpecifiedConfiguration` may nor inherit from final class. `\Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration` no longer inherits from `Orchestra\Testbench\Bootstrap\LoadConfiguration`, which has been declared final (_happened after upgrade to the latest version of Orchestra_).
+
+## [5.27.0] - 2022-01-31
+
+### Added
+
+* `MultipleModelsChanged` event in Audit package.
+* `RecordMultipleAuditTrailEntries` listener that handles `MultipleModelsChanged` events. Performs a mass insert of audit trail entries.
+* `AuditTrailEventSubscriber` that will handle registration of Audit Trail related event listeners.
+
+### Deprecated
+
+* The `audit-trail.listener` configuration setting has been replaced with `audit-trail.subscriber`, in `configs/audit-trail.php`.
+  Will be removed in next major version (_in audit package_).
+
+### Changed
+
+* `ModelChangedEvents` concern is now able to dispatch "multiple models changed" event, via `dispatchMultipleModelsChanged()` (_in audit package_).
+
+### Fixed
+
+* `$performedAt` argument ignored in `\Aedart\Audit\Events\ModelHasChanged`.
 
 ## [5.26.0] - 2022-01-03
 
@@ -717,7 +719,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/5.26.0...HEAD
+[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/5.27.0...HEAD
+[5.27.0]: https://github.com/aedart/athenaeum/compare/5.26.0...5.27.0
 [5.26.0]: https://github.com/aedart/athenaeum/compare/5.25.0...5.26.0
 [5.25.0]: https://github.com/aedart/athenaeum/compare/5.24.2...5.25.0
 [5.24.2]: https://github.com/aedart/athenaeum/compare/5.24.1...5.24.2
