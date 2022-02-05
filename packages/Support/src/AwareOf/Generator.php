@@ -6,6 +6,7 @@ use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\Support\AwareOf\Partials\TwigPartial;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Str;
+use Throwable;
 
 /**
  * Aware-Of Generator
@@ -41,7 +42,7 @@ class Generator implements ConfigAware
      *
      * @param Repository|null $configuration [optional]
      */
-    public function __construct(?Repository $configuration = null)
+    public function __construct(Repository|null $configuration = null)
     {
         $this
             ->setConfig($configuration)
@@ -54,7 +55,7 @@ class Generator implements ConfigAware
      * @param array $component [optional]
      * @param bool $force [optional] If true, then existing file is overwritten
      *
-     * @throws \Throwable
+     * @throws Throwable
      *
      * @return array Data about the generated aware-of component
      */
