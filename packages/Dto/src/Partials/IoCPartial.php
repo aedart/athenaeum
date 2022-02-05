@@ -8,7 +8,6 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Facades\App;
 use ReflectionClass;
 use ReflectionException;
-use ReflectionNamedType;
 use ReflectionParameter;
 use ReflectionType;
 use ReflectionUnionType;
@@ -152,7 +151,7 @@ trait IoCPartial
      * Builds the given class and populates it
      *
      * @param string $class Class path to instantiate / resolve from IoC
-     * @param ReflectionParameter|ReflectionNamedType|string $parameter Name of property or property reflection
+     * @param ReflectionParameter|string $parameter Name of property or property reflection
      * @param mixed $value The value to be passed to the setter method
      *
      * @return mixed
@@ -160,7 +159,7 @@ trait IoCPartial
      * @throws BindingResolutionException
      * @throws Throwable
      */
-    protected function resolveClassAndPopulate(string $class, ReflectionParameter|ReflectionNamedType|string $parameter, mixed $value): mixed
+    protected function resolveClassAndPopulate(string $class, ReflectionParameter|string $parameter, mixed $value): mixed
     {
         // In some situations, the given value is already an instance of the
         // given class. If such, then there is no need to do anything.
@@ -169,7 +168,7 @@ trait IoCPartial
         }
 
         $name = $parameter;
-        if ($parameter instanceof ReflectionParameter || $parameter instanceof ReflectionNamedType) {
+        if ($parameter instanceof ReflectionParameter) {
             $name = $parameter->getName();
         }
 
