@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `SearchFilter` no longer uses `StopWords` concern (_concern has been removed_). [#63](https://github.com/aedart/athenaeum/issues/63).
 * Return type of `package()` and `application()` is now set to `\Aedart\Contracts\Utils\Packages\Version`, in `\Aedart\Utils\Version`.  [#68](https://github.com/aedart/athenaeum/issues/68).
 * `PackageVersionException` is now thrown, when version cannot be obtained for a package, in `\Aedart\Utils\Version::package()`. [#68](https://github.com/aedart/athenaeum/issues/68).
+* Default datetime format is now [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), when no format is specified, for all Http Query Grammars, in Http Clients package.
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Dates\Duration`.
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Helpers\Invoker`.
 * `$seed` argument can no longer be `null` in `\Aedart\Utils\Math::applySeed()` method.
