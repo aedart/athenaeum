@@ -6,8 +6,10 @@ use Aedart\Support\AwareOf\Documenter;
 use Aedart\Support\AwareOf\Generator;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Illuminate\Config\Repository;
+use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Throwable;
 
 /**
  * Create Command
@@ -57,7 +59,7 @@ class CreateCommand extends CommandBase
     /**
      * {@inheritdoc}
      */
-    public function runCommand(): ?int
+    public function runCommand(): int|null
     {
         $this->output->title('Creating Aware-Of Properties');
 
@@ -79,7 +81,7 @@ class CreateCommand extends CommandBase
     /**
      * Builds the aware-of components
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function build()
     {
@@ -114,7 +116,7 @@ class CreateCommand extends CommandBase
      *
      * @param array $component
      *
-     * @throws \Throwable
+     * @throws Throwable
      *
      * @return array
      */
@@ -133,7 +135,7 @@ class CreateCommand extends CommandBase
      *
      * @param array $awareOfComponents [optional]
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function buildDocs(array $awareOfComponents = [])
     {
@@ -150,7 +152,7 @@ class CreateCommand extends CommandBase
      *
      * @throws InvalidArgumentException If path is invalid
      */
-    protected function loadConfiguration()
+    protected function loadConfiguration(): static
     {
         $path = $this->input->getArgument('config');
         if (!file_exists($path)) {
@@ -172,7 +174,7 @@ class CreateCommand extends CommandBase
      *
      * @return self
      */
-    protected function setupGenerator()
+    protected function setupGenerator(): static
     {
         $this->generator = new Generator($this->getConfig());
 
@@ -184,7 +186,7 @@ class CreateCommand extends CommandBase
      *
      * @return self
      */
-    protected function setupDocumenter()
+    protected function setupDocumenter(): static
     {
         $this->documenter = new Documenter($this->getConfig());
 
@@ -210,7 +212,7 @@ class CreateCommand extends CommandBase
      *
      * @return string
      */
-    protected function formatHelp()
+    protected function formatHelp(): string
     {
         return <<<EOT
 Generates a series of aware-of components, based on given configuration
