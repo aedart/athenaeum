@@ -3,11 +3,6 @@
 namespace Aedart\Audit\Listeners;
 
 use Aedart\Audit\Events\MultipleModelsChanged;
-use Aedart\Audit\Models\Concerns;
-use Aedart\Utils\Json;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Carbon;
 use JsonException;
 use Throwable;
@@ -18,18 +13,8 @@ use Throwable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Audit\Listeners
  */
-class RecordMultipleAuditTrailEntries implements ShouldQueue
+class RecordMultipleAuditTrailEntries extends RecordsEntries
 {
-    use InteractsWithQueue;
-    use Queueable;
-    use Concerns\AuditTrailConfiguration;
-
-    /**
-     * The number of times the queued listener may be attempted.
-     *
-     * @var int
-     */
-    public $tries;
 
     /**
      * RecordMultipleAuditTrailEntries constructor.
@@ -80,7 +65,7 @@ class RecordMultipleAuditTrailEntries implements ShouldQueue
      *
      * @throws JsonException
      */
-    protected function prepareEntries(MultipleModelsChanged $event, ?int $userId = null): array
+    protected function prepareEntries(MultipleModelsChanged $event, int|null $userId = null): array
     {
         $output = [];
 
@@ -107,57 +92,5 @@ class RecordMultipleAuditTrailEntries implements ShouldQueue
         }
 
         return $output;
-    }
-
-    /**
-     * Convert given data to json
-     *
-     * @param array|null $data [optional]
-     *
-     * @return string|null
-     *
-     * @throws JsonException
-     */
-    protected function convertToJson(?array $data = null): ?string
-    {
-        if (!isset($data)) {
-            return null;
-        }
-
-        return Json::encode($data);
-    }
-
-    /**
-     * Determine if a user exists with the given id
-     *
-     * @param string|int $id
-     *
-     * @return bool
-     */
-    protected function userExists($id): bool
-    {
-        $model = $this->auditTrailUserModelInstance();
-
-        return $model
-            ->newQuery()
-            ->where($model->getKeyName(), $id)
-            ->exists();
-    }
-
-    /**
-     * Configure queue settings for this listener
-     *
-     * @return self
-     */
-    protected function configureQueueSettings()
-    {
-        $config = $this->getConfig()->get('audit-trail.queue', []);
-
-        $this->connection = $config['connection'] ?? 'sync';
-        $this->queue = $config['queue'] ?? 'default';
-        $this->delay = $config['delay'] ?? null;
-        $this->tries = $config['retries'] ?? 1;
-
-        return $this;
     }
 }
