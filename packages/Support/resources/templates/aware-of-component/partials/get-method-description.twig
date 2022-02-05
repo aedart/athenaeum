@@ -6,5 +6,5 @@
      *
      * @see getDefault{{ propertyName }}()
      *
-     * @return {{ dataType }}|null {{ propertyInDescription }} or null if no {{ propertyInDescription }} has been set
+     * @return {{- dataType == 'mixed' ? "mixed " : "#{dataType}|null " -}} {{ propertyInDescription }} or null if no {{ propertyInDescription }} has been set
      */

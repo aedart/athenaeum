@@ -1,7 +1,7 @@
 /**
      * Set {{ propertyInDescription|trim }}
      *
-     * @param {{ dataType }}|null ${{ inputArgument }} {{ propertyDescription|trim }}
+     * @param {{- dataType == 'mixed' ? "mixed " : "#{dataType}|null " -}} ${{ inputArgument }} {{ propertyDescription|trim }}
      *
      * @return self
      */
