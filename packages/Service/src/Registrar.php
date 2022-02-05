@@ -38,7 +38,7 @@ class Registrar implements RegistrarInterface
      *
      * @param Application|null $application [optional]
      */
-    public function __construct(?Application $application = null)
+    public function __construct(Application|null $application = null)
     {
         $this->setApp($application);
     }
@@ -90,7 +90,7 @@ class Registrar implements RegistrarInterface
     /**
      * @inheritdoc
      */
-    public function boot(ServiceProvider $provider): bool
+    public function boot($provider): bool
     {
         if ($this->hasBooted($provider)) {
             return false;
