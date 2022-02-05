@@ -2,8 +2,6 @@
 
 namespace Aedart\Contracts\Support\Helpers\Filesystem;
 
-use Illuminate\Filesystem\Filesystem;
-
 /**
  * File Aware
  *
@@ -15,11 +13,11 @@ interface FileAware
     /**
      * Set file
      *
-     * @param Filesystem|null $filesystem Filesystem instance
+     * @param \Illuminate\Filesystem\Filesystem|null $filesystem Filesystem instance
      *
      * @return self
      */
-    public function setFile(Filesystem|null $filesystem): static;
+    public function setFile($filesystem): static;
 
     /**
      * Get file
@@ -30,9 +28,9 @@ interface FileAware
      *
      * @see getDefaultFile()
      *
-     * @return Filesystem|null file or null if none file has been set
+     * @return \Illuminate\Filesystem\Filesystem|null file or null if none file has been set
      */
-    public function getFile(): Filesystem|null;
+    public function getFile();
 
     /**
      * Check if file has been set
@@ -44,7 +42,7 @@ interface FileAware
     /**
      * Get a default file value, if any is available
      *
-     * @return Filesystem|null A default file value or Null if no default value is available
+     * @return \Illuminate\Filesystem\Filesystem|null A default file value or Null if no default value is available
      */
-    public function getDefaultFile(): Filesystem|null;
+    public function getDefaultFile();
 }
