@@ -19,7 +19,7 @@ trait ConnectionTrait
      *
      * @var Connection|null
      */
-    protected ?Connection $connection = null;
+    protected Connection|null $connection = null;
 
     /**
      * Set connection
@@ -28,7 +28,7 @@ trait ConnectionTrait
      *
      * @return self
      */
-    public function setConnection(?Connection $connection)
+    public function setConnection(Connection|null $connection): static
     {
         $this->connection = $connection;
 
@@ -44,7 +44,7 @@ trait ConnectionTrait
      *
      * @return Connection|null connection or null if none connection has been set
      */
-    public function getConnection(): ?Connection
+    public function getConnection(): Connection|null
     {
         if (!$this->hasConnection()) {
             $this->setConnection($this->getDefaultConnection());
@@ -67,7 +67,7 @@ trait ConnectionTrait
      *
      * @return Connection|null A default connection value or Null if no default value is available
      */
-    public function getDefaultConnection(): ?Connection
+    public function getDefaultConnection(): Connection|null
     {
         return null;
     }

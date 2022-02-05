@@ -29,12 +29,12 @@ interface ErrorResponseException extends RedmineException,
      * @param string|null $message [optional] Evt. custom error message
      * @param Throwable|null $previous [optional] Evt. previous exception
      *
-     * @return ErrorResponseException
+     * @return static
      */
     public static function from(
         ResponseInterface $response,
         RequestInterface $request,
-        ?string $message = null,
-        ?Throwable $previous = null
-    ): ErrorResponseException;
+        string|null $message = null,
+        Throwable|null $previous = null
+    ): static;
 }

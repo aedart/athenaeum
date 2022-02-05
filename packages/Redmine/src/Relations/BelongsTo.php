@@ -20,7 +20,7 @@ class BelongsTo extends ResourceRelation
      *
      * @var Dto|null
      */
-    protected ?Dto $reference = null;
+    protected Dto|null $reference = null;
 
     /**
      * Name of key / property in reference that holds
@@ -35,9 +35,11 @@ class BelongsTo extends ResourceRelation
      *
      * @var string|int|null
      */
-    protected $foreignKeyValue = null;
+    protected string|int|null $foreignKeyValue = null;
 
     /**
+     * Creates new belongs to resource relation instance
+     *
      * @param ApiResource $parent
      * @param string|ApiResource $related Class path
      * @param Dto|null $reference [optional] Reference Dto in parent resource that holds foreign key to
@@ -46,8 +48,12 @@ class BelongsTo extends ResourceRelation
      * @param string $key [optional] Name of key / property in reference that holds
      *                               the foreign key value
      */
-    public function __construct(ApiResource $parent, $related, ?Dto $reference = null, string $key = 'id')
-    {
+    public function __construct(
+        ApiResource $parent,
+        string|ApiResource $related,
+        Dto|null $reference = null,
+        string $key = 'id'
+    ) {
         parent::__construct($parent, $related);
 
         $this
@@ -84,7 +90,7 @@ class BelongsTo extends ResourceRelation
      *
      * @return self
      */
-    public function foreignKey($value)
+    public function foreignKey(string|int $value): static
     {
         $this->foreignKeyValue = $value;
 
@@ -99,7 +105,7 @@ class BelongsTo extends ResourceRelation
      *
      * @return self
      */
-    public function usingReference(?Dto $reference = null)
+    public function usingReference(Dto|null $reference = null): static
     {
         $this->reference = $reference;
 
@@ -112,7 +118,7 @@ class BelongsTo extends ResourceRelation
      *
      * @return Dto|null
      */
-    public function getReference(): ?Dto
+    public function getReference(): Dto|null
     {
         return $this->reference;
     }
@@ -125,7 +131,7 @@ class BelongsTo extends ResourceRelation
      *
      * @return self
      */
-    public function usingKey(string $key)
+    public function usingKey(string $key): static
     {
         $this->key = $key;
 
@@ -148,7 +154,7 @@ class BelongsTo extends ResourceRelation
      *
      * @return int|string|null
      */
-    public function key()
+    public function key(): int|string|null
     {
         if (!isset($this->foreignKeyValue)) {
             $this->foreignKey(
@@ -168,7 +174,7 @@ class BelongsTo extends ResourceRelation
      *
      * @return string|int|null
      */
-    protected function resolveForeignKeyFromReference()
+    protected function resolveForeignKeyFromReference(): int|string|null
     {
         $key = $this->keyName();
 

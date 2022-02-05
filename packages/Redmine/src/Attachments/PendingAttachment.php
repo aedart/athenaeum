@@ -50,7 +50,7 @@ class PendingAttachment implements Arrayable
      *
      * @throws InvalidArgumentException If attachment does not have a token or id
      */
-    public static function make(Attachment $attachment)
+    public static function make(Attachment $attachment): static
     {
         return new static($attachment);
     }

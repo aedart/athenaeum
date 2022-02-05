@@ -179,8 +179,9 @@ class Issue extends RedmineApiResource implements
         array $data,
         array $attachments,
         array $include = [],
-        $connection = null
-    ) {
+        string|Connection|null $connection = null
+    ): static
+    {
         $resource = static::make($data, $connection);
 
         // Ensure that "attachments" are automatically included,
@@ -208,7 +209,7 @@ class Issue extends RedmineApiResource implements
      *
      * @throws InvalidArgumentException If attachment does not have a token or id
      */
-    public function withAttachment(Attachment $attachment): self
+    public function withAttachment(Attachment $attachment): static
     {
         $this->pendingAttachments[] = PendingAttachment::make($attachment);
 
@@ -229,7 +230,7 @@ class Issue extends RedmineApiResource implements
      *
      * @throws InvalidArgumentException If attachment does not have a token or id
      */
-    public function withAttachments(array $attachments): self
+    public function withAttachments(array $attachments): static
     {
         foreach ($attachments as $attachment) {
             $this->withAttachment($attachment);
@@ -279,7 +280,7 @@ class Issue extends RedmineApiResource implements
      *
      * @return self
      */
-    public function withNote(string $note): self
+    public function withNote(string $note): static
     {
         $this->properties['notes'] = $note;
 
@@ -304,10 +305,10 @@ class Issue extends RedmineApiResource implements
      * @throws JsonException
      * @throws Throwable
      */
-    public function addRelation($related, string $type = Relation::RELATES, ?float $delay = null): Relation
+    public function addRelation(int|Issue $related, string $type = Relation::RELATES, float|null $delay = null): Relation
     {
         $relatedId = $related;
-        if ($related instanceof self) {
+        if ($related instanceof static) {
             $relatedId = $related->id();
         }
 
@@ -449,7 +450,7 @@ class Issue extends RedmineApiResource implements
      *
      * @return HasMany<static>
      */
-    public function allChildren($subProject = '*', $status = '*'): HasMany
+    public function allChildren(string|int $subProject = '*', string|int $status = '*'): HasMany
     {
         return $this->children()
             ->filter(function (Builder $request) use ($subProject, $status) {
@@ -496,6 +497,6 @@ class Issue extends RedmineApiResource implements
      */
     protected function prepareDates(array $data): array
     {
-        return $this->formatDateFields(['start_date', 'due_date'], $data, 'Y-m-d');
+        return $this->formatDateFields(['start_date', 'due_date'], $data);
     }
 }

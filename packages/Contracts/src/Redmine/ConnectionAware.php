@@ -17,7 +17,7 @@ interface ConnectionAware
      *
      * @return self
      */
-    public function setConnection(?Connection $connection);
+    public function setConnection(Connection|null $connection): static;
 
     /**
      * Get connection
@@ -28,7 +28,7 @@ interface ConnectionAware
      *
      * @return Connection|null connection or null if none connection has been set
      */
-    public function getConnection(): ?Connection;
+    public function getConnection(): Connection|null;
 
     /**
      * Check if connection has been set
@@ -42,5 +42,5 @@ interface ConnectionAware
      *
      * @return Connection|null A default connection value or Null if no default value is available
      */
-    public function getDefaultConnection(): ?Connection;
+    public function getDefaultConnection(): Connection|null;
 }

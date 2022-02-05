@@ -105,18 +105,6 @@ class ConnectionTest extends RedmineTestCase
      *
      * @throws ConnectionException
      */
-    public function failsResolveWhenInvalidTypeGiven()
-    {
-        $this->expectException(InvalidConnection::class);
-
-        Connection::resolve(true);
-    }
-
-    /**
-     * @test
-     *
-     * @throws ConnectionException
-     */
     public function failsWhenConnectionProfileDoesNotExist()
     {
         $this->expectException(InvalidConnection::class);

@@ -52,7 +52,7 @@ class Connection implements ConnectionInterface
      * @param string|null $connection [optional] Profile name. Defaults to a default connection
      *                                profile when none is given
      */
-    public function __construct(?string $connection = null)
+    public function __construct(string|null $connection = null)
     {
         $this->profile = $connection ?? $this->defaultProfile();
     }
@@ -60,17 +60,13 @@ class Connection implements ConnectionInterface
     /**
      * @inheritDoc
      */
-    public static function resolve($connection = null): ConnectionInterface
+    public static function resolve(string|ConnectionInterface|null $connection = null): ConnectionInterface
     {
         if ($connection instanceof ConnectionInterface) {
             return $connection;
         }
 
-        if (is_string($connection) || is_null($connection)) {
-            return new static($connection);
-        }
-
-        throw new InvalidConnection('Connection must be a valid profile name, Connection instance or null');
+        return new static($connection);
     }
 
     /**
@@ -94,7 +90,7 @@ class Connection implements ConnectionInterface
      *
      * @throws InvalidConnection
      */
-    public function getDefaultHttpClient(): ?Client
+    public function getDefaultHttpClient(): Client|null
     {
         $httpProfile = $this->option('http_client');
 
@@ -112,7 +108,7 @@ class Connection implements ConnectionInterface
     /**
      * @inheritDoc
      */
-    public function mock($response): ConnectionInterface
+    public function mock(array|ResponseInterface $response): static
     {
         if (!is_array($response)) {
             $response = [ $response ];
@@ -179,11 +175,11 @@ class Connection implements ConnectionInterface
      * Returns an option for the connection profile
      *
      * @param string $key
-     * @param mixed|null $default [optional]
+     * @param mixed $default [optional]
      *
      * @return mixed
      */
-    protected function option(string $key, $default = null)
+    protected function option(string $key, mixed $default = null): mixed
     {
         $profile = $this->getProfile();
         $config = $this->getConfig();

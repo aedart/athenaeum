@@ -120,9 +120,10 @@ class Relation extends RedmineApiResource implements
         int $parent,
         int $related,
         string $type = self::RELATES,
-        ?float $delay = null,
-        $connection = null
-    ) {
+        float|null $delay = null,
+        string|Connection|null $connection = null
+    ): static
+    {
         $resource = static::make([
             'issue_id' => $parent,
             'issue_to_id' => $related,
@@ -151,7 +152,7 @@ class Relation extends RedmineApiResource implements
      *
      * @return self
      */
-    public function setRelationType(?string $type = null)
+    public function setRelationType(string|null $type = null): static
     {
         if (isset($type) && !in_array($type, static::RELATION_TYPES)) {
             throw new InvalidArgumentException(sprintf('%s is not a supported relation type', $type));

@@ -135,7 +135,7 @@ class Project extends RedmineApiResource implements
      *
      * @throws Throwable
      */
-    public function addUserMember($user, array $roles): ProjectMembership
+    public function addUserMember(int|User|Reference $user, array $roles): ProjectMembership
     {
         $id = $user;
         if ($user instanceof ApiResource || $user instanceof Reference) {
@@ -158,10 +158,14 @@ class Project extends RedmineApiResource implements
      *
      * @throws Throwable
      */
-    public function addGroupMember($group, array $roles): ProjectMembership
+    public function addGroupMember(int|Group|Reference $group, array $roles): ProjectMembership
     {
         // Project membership accepts a group id as the "user_id", for membership,
         // so it's safe enough to use the exact same method for achieving the same...
+        if ($group instanceof Group) {
+            $group = $group->id;
+        }
+
         return $this->addUserMember($group, $roles);
     }
 

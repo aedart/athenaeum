@@ -79,7 +79,7 @@ class ResultsIterator implements ResultsIteratorInterface
     /**
      * @inheritDoc
      */
-    public function current()
+    public function current(): mixed
     {
         $this->rewindIfRequired();
 
@@ -92,7 +92,7 @@ class ResultsIterator implements ResultsIteratorInterface
     /**
      * @inheritDoc
      */
-    public function next()
+    public function next(): void
     {
         $resultsSet = $this->resultsSet;
 
@@ -127,7 +127,7 @@ class ResultsIterator implements ResultsIteratorInterface
     /**
      * @inheritDoc
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->absolutePosition;
     }
@@ -135,7 +135,7 @@ class ResultsIterator implements ResultsIteratorInterface
     /**
      * @inheritDoc
      */
-    public function valid()
+    public function valid(): bool
     {
         $this->rewindIfRequired();
 
@@ -145,7 +145,7 @@ class ResultsIterator implements ResultsIteratorInterface
     /**
      * @inheritDoc
      */
-    public function rewind()
+    public function rewind(): void
     {
         // Skip rewind, if we already are at the first results set.
         if (isset($this->resultsSet) && $this->resultsSet->currentPage() === $this->resultsSet->firstPage()) {
@@ -162,7 +162,7 @@ class ResultsIterator implements ResultsIteratorInterface
     /**
      * @inheritDoc
      */
-    public function count()
+    public function count(): int
     {
         $this->rewindIfRequired();
 
@@ -199,7 +199,7 @@ class ResultsIterator implements ResultsIteratorInterface
      *
      * @return self
      */
-    protected function rewindIfRequired(): self
+    protected function rewindIfRequired(): static
     {
         if (!isset($this->resultsSet)) {
             $this->rewind();
