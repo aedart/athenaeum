@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `hasCallback()` and `hasFallback()` methods added in `\Aedart\Utils\Helpers\Invoker`.
 * Documentation for `\Aedart\Utils\Arr::differenceAssoc()` (_previously undocumented. Method was added in `v5.17`_). [#45](https://github.com/aedart/athenaeum/issues/45).
 * Documentation for `\Aedart\Utils\Helpers\Invoker` (_previously undocumented. Helper was added in `v5.12`_).
+* `InteractsWithDeprecationHandling` added to `LaravelTestHelper`.
 
 ### Changed
 
@@ -29,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Dates\Duration`.
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Helpers\Invoker`.
 * `$seed` argument can no longer be `null` in `\Aedart\Utils\Math::applySeed()` method.
+* `MocksApplicationServices` from `AthenaeumTestHelper` and `LaravelTestHelper`. The "mock application services" helper has been deprecated by Laravel.
 
 **Non-breaking Changes**
 
