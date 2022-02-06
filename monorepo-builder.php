@@ -19,7 +19,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::DATA_TO_REMOVE, [
         ComposerJsonSection::REQUIRE => [
             // the line is removed by key, so version is irrelevant, thus *
-            'hanneskod/classtools' => '*',
             'codeception/codeception' => '*',
             'codeception/module-asserts' => '*',
             'orchestra/testbench' => '*',
