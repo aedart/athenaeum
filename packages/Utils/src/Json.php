@@ -20,7 +20,7 @@ class Json
      * @link https://secure.php.net/manual/en/function.json-encode.php
      *
      * @param mixed $value The value being encoded. Can be any type except a resource
-     * @param int $options [optional] Bitmask
+     * @param int $options [optional] {@see JSON_THROW_ON_ERROR} always added to given options
      * @param int $depth [optional] Maximum depth. Must be greater than zero
      *
      * @return string
@@ -29,7 +29,9 @@ class Json
      */
     public static function encode(mixed $value, int $options = 0, int $depth = 512): string
     {
-        return json_encode($value, $options |= JSON_THROW_ON_ERROR, $depth);
+        $options |= JSON_THROW_ON_ERROR;
+
+        return json_encode($value, $options, $depth);
     }
 
     /**
@@ -40,7 +42,7 @@ class Json
      * @param string $json The json string being decoded
      * @param bool $assoc [optional] Returns array, if true
      * @param int $depth [optional] Recursion depth
-     * @param int $options [optional] Bitmask
+     * @param int $options [optional] {@see JSON_THROW_ON_ERROR} always added to given options
      *
      * @return mixed
      *
@@ -53,6 +55,8 @@ class Json
         int $options = 0
     ): mixed
     {
-        return json_decode($json, $assoc, $depth, $options |= JSON_THROW_ON_ERROR);
+        $options |= JSON_THROW_ON_ERROR;
+
+        return json_decode($json, $assoc, $depth, $options);
     }
 }
