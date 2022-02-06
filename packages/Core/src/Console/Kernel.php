@@ -44,7 +44,7 @@ class Kernel implements
      *
      * @var Artisan|null
      */
-    protected ?Artisan $artisan = null;
+    protected Artisan|null $artisan = null;
 
     /**
      * Console Kernel constructor.
