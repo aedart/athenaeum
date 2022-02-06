@@ -14,7 +14,7 @@
     "require": {
         "php": "^8.0.2",
         "aedart/athenaeum-support": "^5.27",
-        "illuminate/events": "^v9.0.0-beta.1"
+        "illuminate/events": "^v9.0.0-beta.5"
     },
     "autoload": {
         "psr-4": {
