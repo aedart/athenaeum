@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Maintenance Mode package that offers additional drivers for Laravel's Application, when using `php artisan down`. Available drivers: `'array'` and `'json'`. [#67](https://github.com/aedart/athenaeum/issues/67).
+* `environmentPath()` added in `\Aedart\Contracts\Core\Application`. Method was previously defined by Laravel's foundation `Application` interface, but was removed in version `9.x`.
 * Optional `$mode` argument has been added to `\Aedart\Utils\Math::applySeed()`, which specifies the seeding algorithm to use. 
 * Optional seeding algorithm `$mode` argument has been added to `\Aedart\Utils\Arr::randomElement()`.
 * `hasCallback()` and `hasFallback()` methods added in `\Aedart\Utils\Helpers\Invoker`.
