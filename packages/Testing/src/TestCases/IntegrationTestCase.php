@@ -21,9 +21,9 @@ abstract class IntegrationTestCase extends UnitTestCase
     /**
      * Service Container instance
      *
-     * @var IoCInterface|Application null
+     * @var IoCInterface|Application|null
      */
-    protected $ioc = null;
+    protected IoCInterface|Application|null $ioc = null;
 
     /**
      * If true, the Service Container instance

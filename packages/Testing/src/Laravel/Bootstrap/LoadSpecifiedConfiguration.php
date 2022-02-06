@@ -25,7 +25,7 @@ class LoadSpecifiedConfiguration
      *
      * @var string|null
      */
-    protected ?string $configurationPath = null;
+    protected string|null $configurationPath = null;
 
     /**
      * Set path to where configuration must be loaded from
@@ -34,7 +34,7 @@ class LoadSpecifiedConfiguration
      *
      * @return self
      */
-    public function setConfigurationPath(?string $path = null)
+    public function setConfigurationPath(string|null $path = null): static
     {
         $this->configurationPath = $path;
 
@@ -46,7 +46,7 @@ class LoadSpecifiedConfiguration
      *
      * @return string|null
      */
-    public function getConfigurationPath(): ?string
+    public function getConfigurationPath(): string|null
     {
         return $this->configurationPath;
     }
@@ -54,7 +54,7 @@ class LoadSpecifiedConfiguration
     /**
      * Bootstrap the given application.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  Application  $app
      *
      * @return void
      */
@@ -72,10 +72,12 @@ class LoadSpecifiedConfiguration
      ****************************************************************/
 
     /**
-     * Load the configuration items from all of the files.
+     * Load the configuration items from all files.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @param  \Illuminate\Contracts\Config\Repository  $config
+     * @see getConfigurationFiles
+     *
+     * @param  Application  $app
+     * @param  RepositoryContract  $config
      *
      * @return void
      */

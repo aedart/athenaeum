@@ -2,6 +2,7 @@
 
 namespace Aedart\Testing\Helpers;
 
+use Closure;
 use Faker\Factory;
 use Faker\Generator;
 use Mockery as m;
@@ -11,8 +12,6 @@ use ReflectionMethod;
 
 /**
  * Argument Faker
- *
- * <br />
  *
  * Offers various faker utilities.
  *
@@ -33,11 +32,12 @@ class ArgumentFaker
      * @param string $target Class path
      * @param string $method
      * @param Generator|null $faker [optional] If none given, a generator is automatically created
-     * @return array|mixed
+     *
+     * @return mixed
      *
      * @throws ReflectionException
      */
-    public static function fakeFor($target, string $method, ?Generator $faker = null)
+    public static function fakeFor(string $target, string $method, Generator|null $faker = null): mixed
     {
         $faker = $faker ?? static::makeFakerGenerator();
 
@@ -78,37 +78,21 @@ class ArgumentFaker
      * @param string $type array, bool, float, int, string, or null.
      * @param Generator|null $faker [optional] If none given, a generator is automatically created
      *
-     * @return array|bool|float|int|string Returns a string for "null" type
+     * @return string|Closure|int|bool|array|float Returns a string for "null" type
      */
-    public static function fakeForType(string $type, ?Generator $faker = null)
+    public static function fakeForType(string $type, Generator|null $faker = null): string|Closure|int|bool|array|float
     {
         $faker = $faker ?? static::makeFakerGenerator();
 
-        switch (strtolower($type)) {
-
-            case 'int':
-            case 'integer':
-                return $faker->randomNumber();
-
-            case 'bool':
-            case 'boolean':
-                return $faker->boolean();
-
-            case 'float':
-                return $faker->randomFloat();
-
-            case 'array':
-                return $faker->randomElements();
-
-            case 'callable':
-                return function () {
-                };
-
-            case 'string':
-            case 'null':
-            default:
-                return $faker->name();
-        }
+        return match ($type) {
+            'int', 'integer' => $faker->randomNumber(),
+            'bool', 'boolean' => $faker->boolean(),
+            'float' => $faker->randomFloat(),
+            'array' => $faker->randomElements(),
+            'callable' => fn () => true,
+            'string', 'null' => $faker->name(),
+            default => $faker->name()
+        };
     }
 
     /**

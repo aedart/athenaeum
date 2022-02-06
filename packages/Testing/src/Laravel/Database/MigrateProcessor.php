@@ -23,7 +23,7 @@ class MigrateProcessor
      *
      * @var mixed
      */
-    protected $test;
+    protected mixed $test;
 
     /**
      * The migrator options.
@@ -38,7 +38,7 @@ class MigrateProcessor
      * @param mixed $test
      * @param array $options [optional]
      */
-    public function __construct($test, array $options = [])
+    public function __construct(mixed $test, array $options = [])
     {
         $this->test = $test;
         $this->options = $options;

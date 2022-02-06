@@ -3,7 +3,6 @@
 namespace Aedart\Testing\TestCases;
 
 use Aedart\Testing\TestCases\Partials\FakerPartial;
-use Codeception\Actor;
 use Codeception\Test\Unit;
 use Mockery as m;
 
@@ -22,9 +21,11 @@ abstract class UnitTestCase extends Unit
     use FakerPartial;
 
     /**
-     * @var \UnitTester|Actor
+     * The current tester
+     *
+     * @var mixed
      */
-    protected $tester;
+    protected mixed $tester;
 
     /**
      * {@inheritdoc}

@@ -21,7 +21,7 @@ interface FakerAware
      *
      * @return self
      */
-    public function setFaker(?Generator $generator);
+    public function setFaker(Generator|null $generator): static;
 
     /**
      * Get faker
@@ -32,7 +32,7 @@ interface FakerAware
      *
      * @return Generator|null faker or null if none faker has been set
      */
-    public function getFaker(): ?Generator;
+    public function getFaker(): Generator|null;
 
     /**
      * Check if faker has been set
@@ -46,5 +46,5 @@ interface FakerAware
      *
      * @return Generator|null A default faker value or Null if no default value is available
      */
-    public function getDefaultFaker(): ?Generator;
+    public function getDefaultFaker(): Generator|null;
 }
