@@ -18,6 +18,7 @@ use Throwable;
  * @package Aedart\Contracts\Core
  */
 interface Application extends IoC,
+    EnvironmentHandler,
     LaravelApplication
 {
     /**
@@ -26,13 +27,6 @@ interface Application extends IoC,
      * @return string
      */
     public function publicPath();
-
-    /**
-     * Get the fully qualified path to the environment file.
-     *
-     * @return string
-     */
-    public function environmentPath();
 
     /**
      * Determine if running in "local" environment
