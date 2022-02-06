@@ -22,13 +22,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Breaking Changes**
 
 * Minimum required PHP version changed to `v8.0.2`.
+* Method arguments and return data types are changed (_all packages_), in accordance with PHP `v8.0`. Most fluent methods now return `static`. [#83](https://github.com/aedart/athenaeum/pull/83), [#77](https://github.com/aedart/athenaeum/issues/77).
 * `populate()` method now returns `static` instead of `void`, in `\Aedart\Contracts\Utils\Populatable` interface.
 * `SearchFilter` no longer uses `StopWords` concern (_concern has been removed_). [#63](https://github.com/aedart/athenaeum/issues/63).
 * Return type of `package()` and `application()` is now set to `\Aedart\Contracts\Utils\Packages\Version`, in `\Aedart\Utils\Version`.  [#68](https://github.com/aedart/athenaeum/issues/68).
 * `PackageVersionException` is now thrown, when version cannot be obtained for a package, in `\Aedart\Utils\Version::package()`. [#68](https://github.com/aedart/athenaeum/issues/68).
 * Default datetime format is now [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), when no format is specified, for all Http Query Grammars, in Http Clients package.
-* Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Dates\Duration`.
-* Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Helpers\Invoker`.
 * `$seed` argument can no longer be `null` in `\Aedart\Utils\Math::applySeed()` method.
 * `MocksApplicationServices` from `AthenaeumTestHelper` and `LaravelTestHelper`. The "mock application services" helper has been deprecated by Laravel.
 
