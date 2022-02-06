@@ -247,48 +247,4 @@ class A2_PathsTest extends AthenaeumCoreTestCase
 
         $this->assertStringContainsString($path, $result);
     }
-
-    /*****************************************************************
-     * Unsupported "cache" paths
-     ****************************************************************/
-
-    /**
-     * @test
-     */
-    public function canReadCachedConfigPath()
-    {
-        $path = $this->app->getCachedConfigPath();
-
-        $this->assertEmpty($path);
-    }
-
-    /**
-     * @test
-     */
-    public function canReadCachedServicesPath()
-    {
-        $path = $this->app->getCachedServicesPath();
-
-        $this->assertEmpty($path);
-    }
-
-    /**
-     * @test
-     */
-    public function canReadCachedPackagesPath()
-    {
-        $path = $this->app->getCachedPackagesPath();
-
-        $this->assertEmpty($path);
-    }
-
-    /**
-     * @test
-     */
-    public function canReadCachedRoutesPath()
-    {
-        $path = $this->app->getCachedRoutesPath();
-
-        $this->assertEmpty($path);
-    }
 }
