@@ -42,7 +42,7 @@
         "ext-curl": "*",
         "ext-sockets": "*",
         "bamarni/composer-bin-plugin": "^1.4",
-        "codeception/codeception": "5.0.x-dev",
+        "codeception/codeception": "5.0.0-alpha1",
         "codeception/module-asserts": "*@dev",
         "phpunit/phpunit": "dev-master as 9.5.99",
         "orchestra/testbench": "7.x-dev",

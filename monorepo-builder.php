@@ -34,7 +34,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'ext-curl' => '*',
             'bamarni/composer-bin-plugin' => '^1.4',
             'roave/security-advisories' => 'dev-master',
-            'codeception/codeception' => '5.0.x-dev',
+            'codeception/codeception' => '5.0.0-alpha1',
             'codeception/module-asserts' => '*@dev',
             'orchestra/testbench' => '7.x-dev',
             'orchestra/testbench-dusk' => 'dev-master',
