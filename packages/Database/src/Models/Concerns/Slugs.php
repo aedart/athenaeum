@@ -126,4 +126,17 @@ trait Slugs
     {
         return $scope->whereIn($this->getSlugKeyName(), $slugs);
     }
+
+    /**
+     * Query scope for finding models that do not match given slugs
+     *
+     * @param Builder $scope
+     * @param string|string[] $slugs
+     *
+     * @return Builder
+     */
+    public function scopeWhereSlugNotIn(Builder $scope, string|array $slugs): Builder
+    {
+        return $scope->whereNotIn($this->getSlugKeyName(), $slugs);
+    }
 }
