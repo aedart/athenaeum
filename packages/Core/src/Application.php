@@ -45,7 +45,6 @@ use Closure;
 use Illuminate\Contracts\Foundation\Application as LaravelApplicationInterface;
 use Illuminate\Contracts\Foundation\MaintenanceMode;
 use Illuminate\Support\ServiceProvider;
-use LogicException;
 use Throwable;
 
 /**
