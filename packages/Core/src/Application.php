@@ -236,7 +236,7 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
-    public function environmentPath()
+    public function environmentPath(): string
     {
         return $this->getPathsContainer()->environmentPath();
     }
@@ -260,7 +260,7 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
-    public function environment(...$environments)
+    public function environment(...$environments): string|bool
     {
         if (count($environments) > 0) {
             $search = is_array($environments[0])
@@ -428,38 +428,25 @@ class Application extends IoC implements
     }
 
     /**
-     * TODO: Extract into own interface?
-     *
-     * Detect the application's current environment.
-     *
-     * @param  Closure  $callback
-     * @return string
+     * @inheritdoc
      */
-    public function detectEnvironment(Closure $callback)
+    public function detectEnvironment(Closure $callback): string
     {
         return $this['env'] = $callback();
     }
 
     /**
-     * TODO: Extract into own interface?
-     *
-     * Get the environment file the application is using.
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function environmentFile()
+    public function environmentFile(): string
     {
         return $this->environmentFile;
     }
 
     /**
-     * TODO: Extract into own interface?
-     *
-     * Get the fully qualified path to the environment file.
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function environmentFilePath()
+    public function environmentFilePath(): string
     {
         return $this->getPathsContainer()->environmentPath($this->environmentPath());
     }
@@ -560,14 +547,9 @@ class Application extends IoC implements
     }
 
     /**
-     * TODO: Extract into own interface?
-     *
-     * Set the environment file to be loaded during bootstrapping.
-     *
-     * @param  string  $file
-     * @return self
+     * @inheritdoc
      */
-    public function loadEnvironmentFrom($file)
+    public function loadEnvironmentFrom(string $file): static
     {
         $this->environmentFile = $file;
 
