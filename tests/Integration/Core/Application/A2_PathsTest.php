@@ -141,7 +141,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInBaseDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = base_path($path);
 
@@ -155,7 +155,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInBootstrapDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = bootstrap_path($path);
 
@@ -169,7 +169,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInConfigDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = config_path($path);
 
@@ -183,7 +183,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInDatabaseDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = database_path($path);
 
@@ -197,7 +197,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInEnvironmentDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = environment_path($path);
 
@@ -211,7 +211,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInResourceDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = resource_path($path);
 
@@ -225,7 +225,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInStorageDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = storage_path($path);
 
@@ -239,7 +239,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInPublicDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = public_path($path);
 

@@ -40,11 +40,11 @@ use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
+use Aedart\Utils\Str;
 use Closure;
 use Illuminate\Contracts\Foundation\Application as LaravelApplicationInterface;
 use Illuminate\Contracts\Foundation\MaintenanceMode;
 use Illuminate\Support\ServiceProvider;
-use LogicException;
 use Throwable;
 
 /**
@@ -236,7 +236,7 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
-    public function environmentPath()
+    public function environmentPath(): string
     {
         return $this->getPathsContainer()->environmentPath();
     }
@@ -260,12 +260,14 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
-    public function environment(...$environments)
+    public function environment(...$environments): string|bool
     {
         if (count($environments) > 0) {
-            $search = is_array($environments) ? $environments : [ $environments ];
+            $search = is_array($environments[0])
+                ? $environments[0]
+                : $environments;
 
-            return in_array($this['env'], $search);
+            return Str::is($search, $this['env']);
         }
 
         return $this['env'];
@@ -426,38 +428,25 @@ class Application extends IoC implements
     }
 
     /**
-     * TODO: Extract into own interface?
-     *
-     * Detect the application's current environment.
-     *
-     * @param  Closure  $callback
-     * @return string
+     * @inheritdoc
      */
-    public function detectEnvironment(Closure $callback)
+    public function detectEnvironment(Closure $callback): string
     {
         return $this['env'] = $callback();
     }
 
     /**
-     * TODO: Extract into own interface?
-     *
-     * Get the environment file the application is using.
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function environmentFile()
+    public function environmentFile(): string
     {
         return $this->environmentFile;
     }
 
     /**
-     * TODO: Extract into own interface?
-     *
-     * Get the fully qualified path to the environment file.
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function environmentFilePath()
+    public function environmentFilePath(): string
     {
         return $this->getPathsContainer()->environmentPath($this->environmentPath());
     }
@@ -558,14 +547,9 @@ class Application extends IoC implements
     }
 
     /**
-     * TODO: Extract into own interface?
-     *
-     * Set the environment file to be loaded during bootstrapping.
-     *
-     * @param  string  $file
-     * @return self
+     * @inheritdoc
      */
-    public function loadEnvironmentFrom($file)
+    public function loadEnvironmentFrom(string $file): static
     {
         $this->environmentFile = $file;
 
@@ -742,7 +726,7 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
-    public function run(?callable $callback = null): void
+    public function run(callable|null $callback = null): void
     {
         if ($this->isRunning()) {
             return;

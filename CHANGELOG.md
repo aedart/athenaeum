@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Maintenance Mode package that offers additional drivers for Laravel's Application, when using `php artisan down`. Available drivers: `'array'` and `'json'`. [#67](https://github.com/aedart/athenaeum/issues/67).
+* `EnvironmentHandler` interface in Core package, as a replacement for the application environment related methods, that were removed from Laravel's foundation `Application` interface in version `9.x`.
 * Optional `$mode` argument has been added to `\Aedart\Utils\Math::applySeed()`, which specifies the seeding algorithm to use. 
 * Optional seeding algorithm `$mode` argument has been added to `\Aedart\Utils\Arr::randomElement()`.
 * `hasCallback()` and `hasFallback()` methods added in `\Aedart\Utils\Helpers\Invoker`.
@@ -64,6 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `\Illuminate\Routing\Redirector` imported into `\Aedart\Contracts\Support\Helpers\Routing\RedirectAware` interface. This created unintended dependency on Laravel package.
 * `\Illuminate\Session\SessionManager` imported into `\Aedart\Contracts\Support\Helpers\Session\SessionManagerAware` interface. This created unintended dependency on Laravel package.
 * `\Illuminate\View\Compilers\BladeCompiler` imported into `\Aedart\Contracts\Support\Helpers\View\BladeAware` interface. This created unintended dependency on Laravel package.
+* `$_ENV['APP_ENV']` and `$_SERVER['APP_ENV']` not unset after each Application test, causing environment detecting tests to fail, in `\Aedart\Testing\Athenaeum\ApplicationInitiator`.
 * `Codeception\TestCase\Test` class not found, in `\Aedart\Tests\Integration\Laravel\ApplicationInitiatorTest` (_happened after upgrade to the latest version of Codeception_). 
 * `LoadSpecifiedConfiguration` may nor inherit from final class. `\Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration` no longer inherits from `Orchestra\Testbench\Bootstrap\LoadConfiguration`, which has been declared final (_happened after upgrade to the latest version of Orchestra_).
 

@@ -18,6 +18,7 @@ use Throwable;
  * @package Aedart\Contracts\Core
  */
 interface Application extends IoC,
+    EnvironmentHandler,
     LaravelApplication
 {
     /**
@@ -114,7 +115,7 @@ interface Application extends IoC,
      *
      * @throws Throwable
      */
-    public function run(?callable $callback = null): void;
+    public function run(callable|null $callback = null): void;
 
     /**
      * Get the application's core "bootstrappers"
