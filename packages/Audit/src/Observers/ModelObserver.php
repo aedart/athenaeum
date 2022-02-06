@@ -4,6 +4,7 @@ namespace Aedart\Audit\Observers;
 
 use Aedart\Contracts\Audit\Types;
 use Illuminate\Database\Eloquent\Model;
+use Throwable;
 
 /**
  * Model Observer
@@ -28,9 +29,11 @@ class ModelObserver
     /**
      * Handle model "created" event.
      *
-     * @param Model $model
+     * @param  Model  $model
      *
      * @return void
+     *
+     * @throws Throwable
      */
     public function created(Model $model)
     {
@@ -40,9 +43,11 @@ class ModelObserver
     /**
      * Handle model "updating" event. (Just before model is updated)
      *
-     * @param Model $model
+     * @param  Model  $model
      *
      * @return void
+     *
+     * @throws Throwable
      */
     public function updating(Model $model)
     {
@@ -52,9 +57,11 @@ class ModelObserver
     /**
      * Handle model "deleted" event.
      *
-     * @param Model $model
+     * @param  Model  $model
      *
      * @return void
+     *
+     * @throws Throwable
      */
     public function deleted(Model $model)
     {
@@ -70,9 +77,11 @@ class ModelObserver
     /**
      * Handle model "restored" event.
      *
-     * @param Model $model
+     * @param  Model  $model
      *
      * @return void
+     *
+     * @throws Throwable
      */
     public function restored(Model $model)
     {
@@ -82,9 +91,11 @@ class ModelObserver
     /**
      * Handle model "force deleted" event.
      *
-     * @param Model $model
+     * @param  Model  $model
      *
      * @return void
+     *
+     * @throws Throwable
      */
     public function forceDeleted(Model $model)
     {

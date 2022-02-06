@@ -1,13 +1,8 @@
 <?php
 
-
 namespace Aedart\Audit\Listeners;
 
 use Aedart\Audit\Events\ModelHasChanged;
-use Aedart\Audit\Models\Concerns;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 /**
  * Record Audit Trail Entry - Event Listener
@@ -15,19 +10,8 @@ use Illuminate\Queue\InteractsWithQueue;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Audit\Listeners
  */
-class RecordAuditTrailEntry implements ShouldQueue
+class RecordAuditTrailEntry extends RecordsEntries
 {
-    use InteractsWithQueue;
-    use Queueable;
-    use Concerns\AuditTrailConfiguration;
-
-    /**
-     * The number of times the queued listener may be attempted.
-     *
-     * @var int
-     */
-    public $tries;
-
     /**
      * RecordAuditTrailEntry constructor.
      */
@@ -39,7 +23,7 @@ class RecordAuditTrailEntry implements ShouldQueue
     }
 
     /**
-     * Records an new Audit Trail Entry, based on given
+     * Records a new Audit Trail Entry, based on given
      * "model has changed" event
      *
      * @param ModelHasChanged $event
@@ -49,7 +33,7 @@ class RecordAuditTrailEntry implements ShouldQueue
     public function handle(ModelHasChanged $event)
     {
         // In rare situations, the provided user that caused the event might be force-deleted,
-        // in which case inserting the audit trail entry will fail, due to it's foreign-key
+        // in which case inserting the audit trail entry will fail, due to its foreign-key
         // constraint.
         //
         // Depending on your perspective, you might see this as a design flaw. However, the
@@ -60,7 +44,7 @@ class RecordAuditTrailEntry implements ShouldQueue
         //
         // Nevertheless, to ensure that the insert operation does not fail, we must check
         // whether the user exists or not. If the latter is the case, then we set the user
-        // is to null.
+        // to null.
         $userId = $event->user;
         if (!$this->userExists($userId)) {
             $userId = null;
@@ -79,43 +63,5 @@ class RecordAuditTrailEntry implements ShouldQueue
                 'performed_at' => $event->performedAt
             ])
             ->save();
-    }
-
-    /*****************************************************************
-     * Internals
-     ****************************************************************/
-
-    /**
-     * Determine if a user exists with the given id
-     *
-     * @param string|int $id
-     *
-     * @return bool
-     */
-    protected function userExists($id): bool
-    {
-        $model = $this->auditTrailUserModelInstance();
-
-        return $model
-            ->newQuery()
-            ->where($model->getKeyName(), $id)
-            ->exists();
-    }
-
-    /**
-     * Configure queue settings for this listener
-     *
-     * @return self
-     */
-    protected function configureQueueSettings()
-    {
-        $config = $this->getConfig()->get('audit-trail.queue', []);
-
-        $this->connection = $config['connection'] ?? 'sync';
-        $this->queue = $config['queue'] ?? 'default';
-        $this->delay = $config['delay'] ?? null;
-        $this->tries = $config['retries'] ?? 1;
-
-        return $this;
     }
 }

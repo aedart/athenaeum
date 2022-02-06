@@ -29,10 +29,11 @@ class InvalidParameter extends ProcessorException implements InvalidParameterExc
     public static function forParameter(
         string $parameter,
         Processor $processor,
-        $message = "",
-        $code = 0,
-        Throwable $previous = null
-    ) {
+        string $message = "",
+        int $code = 0,
+        Throwable|null $previous = null
+    ): static
+    {
         return static::make($processor, $message, $code, $previous)
             ->setParameter($parameter);
     }
@@ -40,7 +41,7 @@ class InvalidParameter extends ProcessorException implements InvalidParameterExc
     /**
      * @inheritDoc
      */
-    public function setParameter(string $parameter)
+    public function setParameter(string $parameter): static
     {
         $this->param = $parameter;
 

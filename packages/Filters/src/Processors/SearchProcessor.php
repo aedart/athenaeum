@@ -46,7 +46,7 @@ class SearchProcessor extends BaseProcessor
     /**
      * @inheritDoc
      */
-    public function process(BuiltFiltersMap $built, callable $next)
+    public function process(BuiltFiltersMap $built, callable $next): mixed
     {
         // Skip if empty value given
         $value = $this->value();
@@ -79,7 +79,7 @@ class SearchProcessor extends BaseProcessor
      *
      * @return self
      */
-    public function columns(array $columns)
+    public function columns(array $columns): static
     {
         $this->columns = $columns;
 
@@ -93,7 +93,7 @@ class SearchProcessor extends BaseProcessor
      *
      * @return self
      */
-    public function maxSearchLength(int $length = 100)
+    public function maxSearchLength(int $length = 100): static
     {
         $this->maxSearchTermLength = $length;
 
@@ -110,7 +110,7 @@ class SearchProcessor extends BaseProcessor
      *
      * @return self
      */
-    public function language(string $language = 'en')
+    public function language(string $language = 'en'): static
     {
         $this->language = $language;
 

@@ -45,7 +45,7 @@ class CookiesHelper
      *
      * @return static
      */
-    public static function make(Builder $builder)
+    public static function make(Builder $builder): static
     {
         return new static($builder);
     }
@@ -190,7 +190,7 @@ class CookiesHelper
         ]);
 
         // In case that a "Set-Cookie" instance is given, we
-        // attempt to populate it. This is SHOULD only be
+        // attempt to populate it. This SHOULD only be
         // required when working with cookies from responses.
         if ($builderCookie instanceof SetCookie) {
             $secure = $cookie->getSecure() ?? false;

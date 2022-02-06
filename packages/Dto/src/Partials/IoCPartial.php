@@ -9,18 +9,16 @@ use Illuminate\Support\Facades\App;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionParameter;
+use ReflectionType;
+use ReflectionUnionType;
 use Throwable;
 
 /**
  * IoC Partial
  *
- * <br />
- *
  * Keeps track of the assigned (or default) Service Container
  * and offers utils for resolving dependencies for mutator
  * methods.
- *
- * <br />
  *
  * This partial is intended for the Dto abstraction(s)
  *
@@ -34,7 +32,7 @@ trait IoCPartial
      *
      * @var null|Container
      */
-    private ?Container $ioc = null;
+    private Container|null $ioc = null;
 
     /**
      * Returns the container that is responsible for
@@ -43,7 +41,7 @@ trait IoCPartial
      *
      * @return Container|null IoC service Container or null if none defined
      */
-    public function container(): ?Container
+    public function container(): Container|null
     {
         if (!isset($this->ioc)) {
             $this->ioc = App::getFacadeApplication();
@@ -63,7 +61,7 @@ trait IoCPartial
      *
      * @return self
      */
-    protected function setContainer(?Container $ioc = null)
+    protected function setContainer(Container|null $ioc = null): static
     {
         $this->ioc = $ioc;
 
@@ -82,7 +80,7 @@ trait IoCPartial
      * @throws ReflectionException
      * @throws Throwable
      */
-    protected function resolveValue(string $setterMethodName, $value)
+    protected function resolveValue(string $setterMethodName, mixed $value): mixed
     {
         $reflection = new ReflectionClass($this);
         $method = $reflection->getMethod($setterMethodName);
@@ -98,19 +96,42 @@ trait IoCPartial
      * @param mixed $value The value to be passed to the setter method
      *
      * @return mixed
+     *
      * @throws BindingResolutionException   a) If no concrete instance could be resolved from the IoC, or
      *                                      b) If the instance is not populatable and or the given value is not an
      *                                      array that can be passed to the populatable instance
      *                                      c) No service container is available
      * @throws Throwable
      */
-    protected function resolveParameter(ReflectionParameter $parameter, $value)
+    protected function resolveParameter(ReflectionParameter $parameter, mixed $value): mixed
     {
-        // If there is no class for the given parameter
-        // then some kind of primitive data has been provided
-        // and thus we need only to return it.
         $type = $parameter->getType();
-        if (!isset($type) || $type->isBuiltin()) {
+
+        // When no type is available...
+        if (!isset($type)) {
+            return $value;
+        }
+
+        // When union type given...
+        if ($type instanceof ReflectionUnionType) {
+            $types = $type->getTypes();
+
+            $allAreBuiltIn = true;
+            foreach ($types as $t){
+                if (!$t->isBuiltin()) {
+                    $allAreBuiltIn = false;
+                    break;
+                }
+            }
+
+            // Return value if all union types are builtin
+            if ($allAreBuiltIn) {
+                return $value;
+            }
+        }
+
+        // When a reflection type
+        if ($type instanceof ReflectionType && $type->isBuiltin()) {
             return $value;
         }
 
@@ -138,7 +159,7 @@ trait IoCPartial
      * @throws BindingResolutionException
      * @throws Throwable
      */
-    protected function resolveClassAndPopulate(string $class, $parameter, $value)
+    protected function resolveClassAndPopulate(string $class, ReflectionParameter|string $parameter, mixed $value): mixed
     {
         // In some situations, the given value is already an instance of the
         // given class. If such, then there is no need to do anything.
@@ -175,12 +196,12 @@ trait IoCPartial
      * @param ReflectionParameter|string $parameter Name of property or property reflection
      * @param mixed $value The value to be passed to the setter method
      *
-     * @return mixed
+     * @return Populatable
      * @throws BindingResolutionException If the instance is not populatable and or the given value is not an
      *                                    array that can be passed to the populatable instance
      * @throws Throwable
      */
-    protected function resolveInstancePopulation($instance, $parameter, $value)
+    protected function resolveInstancePopulation(mixed $instance, ReflectionParameter|string $parameter, mixed $value): Populatable
     {
         // Check if instance is populatable and if the given value
         // is an array.

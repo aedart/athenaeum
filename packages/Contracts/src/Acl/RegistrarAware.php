@@ -19,7 +19,7 @@ interface RegistrarAware
      *
      * @return self
      */
-    public function setRegistrar(?Registrar $registrar);
+    public function setRegistrar(Registrar|null $registrar): static;
 
     /**
      * Get registrar
@@ -30,7 +30,7 @@ interface RegistrarAware
      *
      * @return Registrar|null registrar or null if none registrar has been set
      */
-    public function getRegistrar(): ?Registrar;
+    public function getRegistrar(): Registrar|null;
 
     /**
      * Check if registrar has been set
@@ -44,5 +44,5 @@ interface RegistrarAware
      *
      * @return Registrar|null A default registrar value or Null if no default value is available
      */
-    public function getDefaultRegistrar(): ?Registrar;
+    public function getDefaultRegistrar(): Registrar|null;
 }

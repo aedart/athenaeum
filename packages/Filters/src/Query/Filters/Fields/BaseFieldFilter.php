@@ -7,6 +7,8 @@ use Aedart\Database\Query\FieldFilter;
 use Aedart\Filters\Query\Filters\Concerns;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Support\Carbon;
 
 /**
@@ -43,7 +45,7 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * @inheritDoc
      */
-    public function setOperator(string $operator)
+    public function setOperator(string $operator): static
     {
         // Assert if "alias" is allowed
         $this->assertOperator($operator, $this->allowedOperators());
@@ -72,11 +74,11 @@ abstract class BaseFieldFilter extends FieldFilter
      * Caution: This is the most generic where clause build method. It assumes that assigned
      * operator is a native supported sql operator.
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildDefaultConstraint($query)
+    protected function buildDefaultConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         if ($this->logical() === FieldCriteria::OR) {
             return $query->orWhere($this->field(), $this->operator(), $this->value());
@@ -88,11 +90,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] IS NULL" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereNullConstraint($query)
+    protected function buildWhereNullConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         if ($this->logical() === FieldCriteria::OR) {
             return $query->orWhereNull($this->field());
@@ -104,11 +106,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] NOT NULL" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereNotNullConstraint($query)
+    protected function buildWhereNotNullConstraint(Builder|EloquentBuilder $query)
     {
         if ($this->logical() === FieldCriteria::OR) {
             return $query->orWhereNotNull($this->field());
@@ -120,11 +122,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] IN [...]" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereInConstraint($query)
+    protected function buildWhereInConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         $value = $this->valueToList($this->value());
 
@@ -138,11 +140,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] NOT IN [...]" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereNotInConstraint($query)
+    protected function buildWhereNotInConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         $value = $this->valueToList($this->value());
 
@@ -156,11 +158,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] LIKE %xxxx%" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereContainsConstraint($query)
+    protected function buildWhereContainsConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         $value = "%{$this->value()}%";
 
@@ -170,11 +172,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] NOT LIKE %xxxx%" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereNotContainsConstraint($query)
+    protected function buildWhereNotContainsConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         $value = "%{$this->value()}%";
 
@@ -184,11 +186,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] LIKE xxxx%" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereStartsWithConstraint($query)
+    protected function buildWhereStartsWithConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         $value = "{$this->value()}%";
 
@@ -198,11 +200,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] NOT LIKE xxxx%" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereNotStartsWithConstraint($query)
+    protected function buildWhereNotStartsWithConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         $value = "{$this->value()}%";
 
@@ -212,11 +214,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] LIKE %xxxx" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereEndsWithConstraint($query)
+    protected function buildWhereEndsWithConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         $value = "%{$this->value()}";
 
@@ -226,11 +228,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] NOT LIKE %xxxx" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereNotEndsWithConstraint($query)
+    protected function buildWhereNotEndsWithConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         $value = "%{$this->value()}";
 
@@ -240,11 +242,12 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] [operator] [datetime value]" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
+     * @param bool $utc  [optional]
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereDatetimeConstraint($query, bool $utc = false)
+    protected function buildWhereDatetimeConstraint(Builder|EloquentBuilder $query, bool $utc = false): Builder|EloquentBuilder
     {
         $field = $this->field();
         $operator = $this->operator();
@@ -293,7 +296,7 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Returns a datetime range comparison
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      * @param Carbon $date
      * @param string $low [optional] Low end datetime comparison operator
      * @param string $high [optional] High end datetime comparison operator
@@ -301,15 +304,16 @@ abstract class BaseFieldFilter extends FieldFilter
      *                     then this offset will be multiplied with 60, to match a full
      *                     minute...
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
     protected function datetimeRangeComparison(
-        $query,
+        Builder|EloquentBuilder $query,
         Carbon $date,
         string $low = '>=',
         string $high = '<=',
         int $offset = 1
-    ) {
+    ): Builder|EloquentBuilder
+    {
         // The general database datetime format to use.
         $format = $this->datetimeFormat;
 
@@ -332,11 +336,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] [operator] [date value]" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereDateConstraint($query)
+    protected function buildWhereDateConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         if ($this->logical() === FieldCriteria::OR) {
             return $query->orWhereDate($this->field(), $this->operator(), $this->value());
@@ -348,12 +352,12 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] LIKE [value]" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      * @param string $value
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereLike($query, string $value)
+    protected function buildWhereLike(Builder|EloquentBuilder $query, string $value): Builder|EloquentBuilder
     {
         $like = $this->resolveLikeOperator($query);
 
@@ -367,12 +371,12 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Builds "where [field] NOT LIKE [value]" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      * @param string $value
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereNotLike($query, string $value)
+    protected function buildWhereNotLike(Builder|EloquentBuilder $query, string $value): Builder|EloquentBuilder
     {
         $like = $this->resolveNotLikeOperator($query);
 
@@ -387,11 +391,11 @@ abstract class BaseFieldFilter extends FieldFilter
      * Resolves the "like" operator to be used, for the given
      * query's database connection driver
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
      * @return string
      */
-    protected function resolveLikeOperator($query): string
+    protected function resolveLikeOperator(Builder|EloquentBuilder $query): string
     {
         $driver = $this->determineDriver($query);
 
@@ -410,11 +414,11 @@ abstract class BaseFieldFilter extends FieldFilter
      * Resolves the "not like" operator to be used, for the given query's
      * database connection driver
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
      * @return string
      */
-    protected function resolveNotLikeOperator($query): string
+    protected function resolveNotLikeOperator(Builder|EloquentBuilder $query): string
     {
         $like = $this->resolveLikeOperator($query);
 
@@ -446,7 +450,7 @@ abstract class BaseFieldFilter extends FieldFilter
      *
      * @return bool
      */
-    protected function convertToBoolean($value): bool
+    protected function convertToBoolean(mixed $value): bool
     {
         return (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }

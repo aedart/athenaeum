@@ -19,7 +19,7 @@ interface MailQueueAware
      *
      * @return self
      */
-    public function setMailQueue(?MailQueue $queue);
+    public function setMailQueue(MailQueue|null $queue): static;
 
     /**
      * Get mail queue
@@ -32,7 +32,7 @@ interface MailQueueAware
      *
      * @return MailQueue|null mail queue or null if none mail queue has been set
      */
-    public function getMailQueue(): ?MailQueue;
+    public function getMailQueue(): MailQueue|null;
 
     /**
      * Check if mail queue has been set
@@ -46,5 +46,5 @@ interface MailQueueAware
      *
      * @return MailQueue|null A default mail queue value or Null if no default value is available
      */
-    public function getDefaultMailQueue(): ?MailQueue;
+    public function getDefaultMailQueue(): MailQueue|null;
 }

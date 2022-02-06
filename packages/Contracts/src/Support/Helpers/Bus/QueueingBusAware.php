@@ -19,7 +19,7 @@ interface QueueingBusAware
      *
      * @return self
      */
-    public function setQueueingBus(?QueueingDispatcher $dispatcher);
+    public function setQueueingBus(QueueingDispatcher|null $dispatcher): static;
 
     /**
      * Get queueing bus
@@ -32,7 +32,7 @@ interface QueueingBusAware
      *
      * @return QueueingDispatcher|null queueing bus or null if none queueing bus has been set
      */
-    public function getQueueingBus(): ?QueueingDispatcher;
+    public function getQueueingBus(): QueueingDispatcher|null;
 
     /**
      * Check if queueing bus has been set
@@ -46,5 +46,5 @@ interface QueueingBusAware
      *
      * @return QueueingDispatcher|null A default queueing bus value or Null if no default value is available
      */
-    public function getDefaultQueueingBus(): ?QueueingDispatcher;
+    public function getDefaultQueueingBus(): QueueingDispatcher|null;
 }

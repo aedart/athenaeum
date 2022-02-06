@@ -19,31 +19,31 @@ interface HtmlAware
      *
      * @return self
      */
-    public function setHtml(?string $html);
+    public function setHtml(string|null $html): static;
 
     /**
      * Get html
      *
-     * If no "html" value set, method
-     * sets and returns a default "html".
+     * If no html value set, method
+     * sets and returns a default html.
      *
      * @see getDefaultHtml()
      *
      * @return string|null html or null if no html has been set
      */
-    public function getHtml(): ?string;
+    public function getHtml(): string|null;
 
     /**
-     * Check if "html" has been set
+     * Check if html has been set
      *
-     * @return bool True if "html" has been set, false if not
+     * @return bool True if html has been set, false if not
      */
     public function hasHtml(): bool;
 
     /**
-     * Get a default "html" value, if any is available
+     * Get a default html value, if any is available
      *
-     * @return string|null Default "html" value or null if no default value is available
+     * @return string|null Default html value or null if no default value is available
      */
-    public function getDefaultHtml(): ?string;
+    public function getDefaultHtml(): string|null;
 }

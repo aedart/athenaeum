@@ -17,7 +17,7 @@ trait XTrait
      *
      * @var int|null
      */
-    protected ?int $x = null;
+    protected int|null $x = null;
 
     /**
      * Set x
@@ -26,7 +26,7 @@ trait XTrait
      *
      * @return self
      */
-    public function setX(?int $value)
+    public function setX(int|null $value): static
     {
         $this->x = $value;
 
@@ -36,14 +36,14 @@ trait XTrait
     /**
      * Get x
      *
-     * If no "x" value set, method
-     * sets and returns a default "x".
+     * If no x value set, method
+     * sets and returns a default x.
      *
      * @see getDefaultX()
      *
      * @return int|null x or null if no x has been set
      */
-    public function getX(): ?int
+    public function getX(): int|null
     {
         if (!$this->hasX()) {
             $this->setX($this->getDefaultX());
@@ -52,9 +52,9 @@ trait XTrait
     }
 
     /**
-     * Check if "x" has been set
+     * Check if x has been set
      *
-     * @return bool True if "x" has been set, false if not
+     * @return bool True if x has been set, false if not
      */
     public function hasX(): bool
     {
@@ -62,11 +62,11 @@ trait XTrait
     }
 
     /**
-     * Get a default "x" value, if any is available
+     * Get a default x value, if any is available
      *
-     * @return int|null Default "x" value or null if no default value is available
+     * @return int|null Default x value or null if no default value is available
      */
-    public function getDefaultX(): ?int
+    public function getDefaultX(): int|null
     {
         return null;
     }

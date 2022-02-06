@@ -19,7 +19,7 @@ interface ConnectionResolverAware
      *
      * @return self
      */
-    public function setConnectionResolver(?ConnectionResolverInterface $resolver);
+    public function setConnectionResolver(ConnectionResolverInterface|null $resolver): static;
 
     /**
      * Get connection resolver
@@ -32,7 +32,7 @@ interface ConnectionResolverAware
      *
      * @return ConnectionResolverInterface|null connection resolver or null if none connection resolver has been set
      */
-    public function getConnectionResolver(): ?ConnectionResolverInterface;
+    public function getConnectionResolver(): ConnectionResolverInterface|null;
 
     /**
      * Check if connection resolver has been set
@@ -46,5 +46,5 @@ interface ConnectionResolverAware
      *
      * @return ConnectionResolverInterface|null A default connection resolver value or Null if no default value is available
      */
-    public function getDefaultConnectionResolver(): ?ConnectionResolverInterface;
+    public function getDefaultConnectionResolver(): ConnectionResolverInterface|null;
 }

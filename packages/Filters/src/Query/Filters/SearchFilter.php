@@ -3,6 +3,8 @@
 namespace Aedart\Filters\Query\Filters;
 
 use Aedart\Database\Query\Filter;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 /**
  * Search Filter
@@ -57,11 +59,9 @@ class SearchFilter extends Filter
     /**
      * @inheritDoc
      */
-    public function apply($query)
+    public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
-        return $query->where(function ($query) {
-            /** @var \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query */
-
+        return $query->where(function (Builder|EloquentBuilder $query) {
             $search = trim($this->search);
             if (mb_strlen($search) === 0) {
                 return;
@@ -82,11 +82,11 @@ class SearchFilter extends Filter
      * specified columns
      *
      * @param string $searchTerm
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function searchFor(string $searchTerm, $query)
+    protected function searchFor(string $searchTerm, Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         foreach ($this->columns as $column) {
             $query = $this->matchColumn($column, $searchTerm, $query);
@@ -100,24 +100,20 @@ class SearchFilter extends Filter
      *
      * @param string $column
      * @param string $search
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function matchColumn(string $column, string $search, $query)
+    protected function matchColumn(string $column, string $search, Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         return $query
-            ->orWhere(function ($query) use ($column, $search) {
-                /** @var \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query */
-
+            ->orWhere(function (Builder|EloquentBuilder $query) use ($column, $search) {
                 $driver = $this->determineDriver($query);
-                switch ($driver) {
-                    case 'pgsql':
-                        return $this->buildPsqlWhereLike($column, $search, $query);
 
-                    default:
-                        return $this->buildDefaultWhereLike($column, $search, $query);
-                }
+                return match ($driver) {
+                    'psql' => $this->buildPsqlWhereLike($column, $search, $query),
+                    default => $this->buildDefaultWhereLike($column, $search, $query)
+                };
             });
     }
 
@@ -126,11 +122,11 @@ class SearchFilter extends Filter
      *
      * @param string $column
      * @param string $search
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildPsqlWhereLike(string $column, string $search, $query)
+    protected function buildPsqlWhereLike(string $column, string $search, Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         // Sadly Postgres' way of performing "simple" case-insensitive searches, is
         // via a none-standard "ilike" operator. Alternatives are available, yet
@@ -150,11 +146,11 @@ class SearchFilter extends Filter
      *
      * @param string $column
      * @param string $search
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildDefaultWhereLike(string $column, string $search, $query)
+    protected function buildDefaultWhereLike(string $column, string $search, Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         return $query
             ->orWhere($column, 'like', "{$search}")

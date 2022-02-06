@@ -17,7 +17,7 @@ trait DeletedAtTrait
      *
      * @var string|null
      */
-    protected ?string $deletedAt = null;
+    protected string|null $deletedAt = null;
 
     /**
      * Set deleted at
@@ -26,7 +26,7 @@ trait DeletedAtTrait
      *
      * @return self
      */
-    public function setDeletedAt(?string $date)
+    public function setDeletedAt(string|null $date): static
     {
         $this->deletedAt = $date;
 
@@ -36,14 +36,14 @@ trait DeletedAtTrait
     /**
      * Get deleted at
      *
-     * If no "deleted at" value set, method
-     * sets and returns a default "deleted at".
+     * If no deleted at value set, method
+     * sets and returns a default deleted at.
      *
      * @see getDefaultDeletedAt()
      *
      * @return string|null deleted at or null if no deleted at has been set
      */
-    public function getDeletedAt(): ?string
+    public function getDeletedAt(): string|null
     {
         if (!$this->hasDeletedAt()) {
             $this->setDeletedAt($this->getDefaultDeletedAt());
@@ -52,9 +52,9 @@ trait DeletedAtTrait
     }
 
     /**
-     * Check if "deleted at" has been set
+     * Check if deleted at has been set
      *
-     * @return bool True if "deleted at" has been set, false if not
+     * @return bool True if deleted at has been set, false if not
      */
     public function hasDeletedAt(): bool
     {
@@ -62,11 +62,11 @@ trait DeletedAtTrait
     }
 
     /**
-     * Get a default "deleted at" value, if any is available
+     * Get a default deleted at value, if any is available
      *
-     * @return string|null Default "deleted at" value or null if no default value is available
+     * @return string|null Default deleted at value or null if no default value is available
      */
-    public function getDefaultDeletedAt(): ?string
+    public function getDefaultDeletedAt(): string|null
     {
         return null;
     }

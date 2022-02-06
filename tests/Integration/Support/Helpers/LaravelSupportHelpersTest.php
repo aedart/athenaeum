@@ -54,10 +54,18 @@ use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
 use Aedart\Support\Helpers\View\BladeTrait;
 use Aedart\Support\Helpers\View\ViewFactoryTrait;
+use Aedart\Testing\Helpers\ArgumentFaker;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Http\Request;
+use Illuminate\Log\LogManager;
+use Illuminate\Routing\Redirector;
+use Illuminate\Session\SessionManager;
 use Illuminate\Support\Facades\Config;
+use Illuminate\View\Compilers\BladeCompiler;
 use Mockery as m;
+use ReflectionException;
 
 /**
  * LaravelSupportHelpersTest
@@ -149,7 +157,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Filesystem
             'CloudStorageTrait' => [ CloudStorageTrait::class ],
-            'FileTrait' => [ FileTrait::class ],
+            'FileTrait' => [ FileTrait::class, Filesystem::class ],
             'StorageFactoryTrait' => [ StorageFactoryTrait::class ],
             'StorageTrait' => [ StorageTrait::class ],
 
@@ -161,10 +169,10 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Http
             'ClientFactoryTrait' => [ ClientFactoryTrait::class ],
-            'RequestTrait' => [ RequestTrait::class ],
+            'RequestTrait' => [ RequestTrait::class, Request::class ],
 
             // Logging
-            'LogManagerTrait' => [ LogManagerTrait::class ],
+            'LogManagerTrait' => [ LogManagerTrait::class, LogManager::class ],
             'LogTrait' => [ LogTrait::class ],
 
             // Mail
@@ -186,13 +194,13 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'RedisTrait' => [ RedisTrait::class ],
 
             // Routing
-            'RedirectTrait' => [ RedirectTrait::class ],
+            'RedirectTrait' => [ RedirectTrait::class, Redirector::class ],
             'ResponseFactoryTrait' => [ ResponseFactoryTrait::class ],
             'RouteRegistrarTrait' => [ RouteRegistrarTrait::class ],
             'UrlGeneratorTrait' => [ UrlGeneratorTrait::class ],
 
             // Session
-            'SessionManagerTrait' => [ SessionManagerTrait::class ],
+            'SessionManagerTrait' => [ SessionManagerTrait::class, SessionManager::class ],
             'SessionTrait' => [ SessionTrait::class ],
 
             // Translation
@@ -202,7 +210,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'ValidatorFactory' => [ ValidatorFactoryTrait::class ],
 
             // View
-            'BladeTrait' => [ BladeTrait::class ],
+            'BladeTrait' => [ BladeTrait::class, BladeCompiler::class ],
             'ViewFactoryTrait' => [ ViewFactoryTrait::class ],
         ];
     }
@@ -216,13 +224,19 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
      * @dataProvider awareOfComponentsProvider
      *
      * @param string $awareOfTrait
+     * @param string|null $laravelComponent  [optional] Class path to Laravel component that must be mocked.
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
-    public function canInvokeAwareOfMethods(string $awareOfTrait)
+    public function canInvokeAwareOfMethods(string $awareOfTrait, string|null $laravelComponent = null)
     {
+        $mockedValue = null;
+        if (isset($laravelComponent)) {
+            $mockedValue = ArgumentFaker::makeMockFor($laravelComponent);
+        }
+
         // Assert getter and setter methods
-        $this->assertTraitMethods($awareOfTrait, null, null, false);
+        $this->assertTraitMethods($awareOfTrait, $mockedValue, $mockedValue, false);
 
         // Assert a default method
         $tester = new TraitTester($this, $awareOfTrait, null);

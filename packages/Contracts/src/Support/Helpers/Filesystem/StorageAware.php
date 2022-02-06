@@ -19,7 +19,7 @@ interface StorageAware
      *
      * @return self
      */
-    public function setStorage(?Filesystem $disk);
+    public function setStorage(Filesystem|null $disk): static;
 
     /**
      * Get storage
@@ -32,7 +32,7 @@ interface StorageAware
      *
      * @return Filesystem|null storage or null if none storage has been set
      */
-    public function getStorage(): ?Filesystem;
+    public function getStorage(): Filesystem|null;
 
     /**
      * Check if storage has been set
@@ -46,5 +46,5 @@ interface StorageAware
      *
      * @return Filesystem|null A default storage value or Null if no default value is available
      */
-    public function getDefaultStorage(): ?Filesystem;
+    public function getDefaultStorage(): Filesystem|null;
 }

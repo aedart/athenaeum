@@ -17,7 +17,7 @@ trait TagTrait
      *
      * @var string|null
      */
-    protected ?string $tag = null;
+    protected string|null $tag = null;
 
     /**
      * Set tag
@@ -26,7 +26,7 @@ trait TagTrait
      *
      * @return self
      */
-    public function setTag(?string $name)
+    public function setTag(string|null $name): static
     {
         $this->tag = $name;
 
@@ -36,14 +36,14 @@ trait TagTrait
     /**
      * Get tag
      *
-     * If no "tag" value set, method
-     * sets and returns a default "tag".
+     * If no tag value set, method
+     * sets and returns a default tag.
      *
      * @see getDefaultTag()
      *
      * @return string|null tag or null if no tag has been set
      */
-    public function getTag(): ?string
+    public function getTag(): string|null
     {
         if (!$this->hasTag()) {
             $this->setTag($this->getDefaultTag());
@@ -52,9 +52,9 @@ trait TagTrait
     }
 
     /**
-     * Check if "tag" has been set
+     * Check if tag has been set
      *
-     * @return bool True if "tag" has been set, false if not
+     * @return bool True if tag has been set, false if not
      */
     public function hasTag(): bool
     {
@@ -62,11 +62,11 @@ trait TagTrait
     }
 
     /**
-     * Get a default "tag" value, if any is available
+     * Get a default tag value, if any is available
      *
-     * @return string|null Default "tag" value or null if no default value is available
+     * @return string|null Default tag value or null if no default value is available
      */
-    public function getDefaultTag(): ?string
+    public function getDefaultTag(): string|null
     {
         return null;
     }

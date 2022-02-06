@@ -19,31 +19,31 @@ interface BrandAware
      *
      * @return self
      */
-    public function setBrand(?string $identifier);
+    public function setBrand(string|null $identifier): static;
 
     /**
      * Get brand
      *
-     * If no "brand" value set, method
-     * sets and returns a default "brand".
+     * If no brand value set, method
+     * sets and returns a default brand.
      *
      * @see getDefaultBrand()
      *
      * @return string|null brand or null if no brand has been set
      */
-    public function getBrand(): ?string;
+    public function getBrand(): string|null;
 
     /**
-     * Check if "brand" has been set
+     * Check if brand has been set
      *
-     * @return bool True if "brand" has been set, false if not
+     * @return bool True if brand has been set, false if not
      */
     public function hasBrand(): bool;
 
     /**
-     * Get a default "brand" value, if any is available
+     * Get a default brand value, if any is available
      *
-     * @return string|null Default "brand" value or null if no default value is available
+     * @return string|null Default brand value or null if no default value is available
      */
-    public function getDefaultBrand(): ?string;
+    public function getDefaultBrand(): string|null;
 }

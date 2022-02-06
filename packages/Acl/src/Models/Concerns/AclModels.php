@@ -27,15 +27,15 @@ trait AclModels
     /**
      * Determine if given models are related (granted or assigned) to this model
      *
-     * @param string|int|Model|Collection|string[]|int[]|Model[] $models
-     * @param Model|Sluggable $type Instance of the acl model type
+     * @param  int|string|Collection|int[]|Model|Model[]|string[]  $models
+     * @param  Model|Sluggable  $type Instance of the acl model type
      * @param string $relation Name of target relation to match against (has many / belongs to many)
      *
      * @return bool
      *
      * @throws InvalidArgumentException
      */
-    protected function hasRelatedModels($models, $type, string $relation): bool
+    protected function hasRelatedModels(array|Model|Collection|int|string $models, Model|Sluggable $type, string $relation): bool
     {
         // When a model's id is given
         if (is_numeric($models)) {
@@ -75,15 +75,15 @@ trait AclModels
     /**
      * Determine if any (one of) given models is assigned or granted
      *
-     * @param string[]|int[]|Model[]|Collection $models Slugs, ids or collection or model instances
-     * @param Model|Sluggable $type Instance of the acl model type
+     * @param  Collection|int[]|Model[]|string[]  $models Slugs, ids or collection or model instances
+     * @param  Model|Sluggable  $type Instance of the acl model type
      * @param string $relation Name of target relation to match against (has many / belongs to many)
      *
      * @return bool
      *
      * @throws InvalidArgumentException
      */
-    protected function hasAnyOf($models, $type, string $relation): bool
+    protected function hasAnyOf(array|Collection $models, Model|Sluggable $type, string $relation): bool
     {
         foreach ($models as $model) {
             if ($this->hasRelatedModels($model, $type, $relation)) {
@@ -95,17 +95,17 @@ trait AclModels
     }
 
     /**
-     * Determine if all of given models is assigned or granted
+     * Determine if all given models is assigned or granted
      *
-     * @param string[]|int[]|Model[]|Collection $models Slugs, ids or collection or model instances
-     * @param Model|Sluggable $type Instance of the acl model type
+     * @param  Collection|int[]|Model[]|string[]  $models Slugs, ids or collection or model instances
+     * @param  Model|Sluggable  $type Instance of the acl model type
      * @param string $relation Name of target relation to match against (has many / belongs to many)
      *
      * @return bool
      *
      * @throws InvalidArgumentException
      */
-    protected function hasAllOf($models, $type, string $relation): bool
+    protected function hasAllOf(array|Collection $models, Model|Sluggable $type, string $relation): bool
     {
         foreach ($models as $model) {
             if (!$this->hasRelatedModels($model, $type, $relation)) {
@@ -119,14 +119,14 @@ trait AclModels
     /**
      * Obtains ids for given models
      *
-     * @param Model|Sluggable $type Instance of the acl model type
+     * @param  Model|Sluggable  $type Instance of the acl model type
      * @param mixed ...$models
      *
      * @return int[]
      *
      * @throws InvalidArgumentException
      */
-    protected function obtainModelIds($type, ...$models): array
+    protected function obtainModelIds(Model|Sluggable $type, ...$models): array
     {
         return collect($models)
             ->flatten()
@@ -140,14 +140,14 @@ trait AclModels
     /**
      * Resolves or finds given models
      *
-     * @param string|int|Model|string[]|int[]|Model[]|Collection $models
-     * @param Model|Sluggable $type Instance of the acl model type
+     * @param  int|string|Collection|int[]|Model|Model[]|string[]  $models
+     * @param  Model|Sluggable  $type Instance of the acl model type
      *
-     * @return Collection|Model[]
+     * @return Collection|Model[]|Model|null
      *
      * @throws InvalidArgumentException
      */
-    protected function resolveOrFindModels($models, $type)
+    protected function resolveOrFindModels(array|Model|Collection|int|string $models, Model|Sluggable $type): Collection|array|Model|null
     {
         $class = get_class($type);
         if ($models instanceof $class) {

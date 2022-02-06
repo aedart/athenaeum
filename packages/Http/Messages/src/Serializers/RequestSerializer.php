@@ -59,7 +59,7 @@ class RequestSerializer extends BaseSerializer implements RequestSerializerInter
     /**
      * @inheritDoc
      */
-    public function setHttpRequest(?RequestInterface $request)
+    public function setHttpRequest(RequestInterface|null $request): static
     {
         return $this->setHttpMessage($request);
     }
@@ -67,7 +67,7 @@ class RequestSerializer extends BaseSerializer implements RequestSerializerInter
     /**
      * @inheritDoc
      */
-    public function getHttpRequest(): ?RequestInterface
+    public function getHttpRequest(): RequestInterface|null
     {
         return $this->getHttpMessage();
     }
@@ -83,7 +83,7 @@ class RequestSerializer extends BaseSerializer implements RequestSerializerInter
     /**
      * @inheritDoc
      */
-    public function getDefaultHttpRequest(): ?RequestInterface
+    public function getDefaultHttpRequest(): RequestInterface|null
     {
         return $this->getDefaultHttpMessage();
     }

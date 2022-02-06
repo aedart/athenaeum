@@ -17,7 +17,7 @@ trait Isbn13Trait
      *
      * @var string|null
      */
-    protected ?string $isbn13 = null;
+    protected string|null $isbn13 = null;
 
     /**
      * Set isbn13
@@ -26,7 +26,7 @@ trait Isbn13Trait
      *
      * @return self
      */
-    public function setIsbn13(?string $ibn13)
+    public function setIsbn13(string|null $ibn13): static
     {
         $this->isbn13 = $ibn13;
 
@@ -36,14 +36,14 @@ trait Isbn13Trait
     /**
      * Get isbn13
      *
-     * If no "isbn13" value set, method
-     * sets and returns a default "isbn13".
+     * If no isbn13 value set, method
+     * sets and returns a default isbn13.
      *
      * @see getDefaultIsbn13()
      *
      * @return string|null isbn13 or null if no isbn13 has been set
      */
-    public function getIsbn13(): ?string
+    public function getIsbn13(): string|null
     {
         if (!$this->hasIsbn13()) {
             $this->setIsbn13($this->getDefaultIsbn13());
@@ -52,9 +52,9 @@ trait Isbn13Trait
     }
 
     /**
-     * Check if "isbn13" has been set
+     * Check if isbn13 has been set
      *
-     * @return bool True if "isbn13" has been set, false if not
+     * @return bool True if isbn13 has been set, false if not
      */
     public function hasIsbn13(): bool
     {
@@ -62,11 +62,11 @@ trait Isbn13Trait
     }
 
     /**
-     * Get a default "isbn13" value, if any is available
+     * Get a default isbn13 value, if any is available
      *
-     * @return string|null Default "isbn13" value or null if no default value is available
+     * @return string|null Default isbn13 value or null if no default value is available
      */
-    public function getDefaultIsbn13(): ?string
+    public function getDefaultIsbn13(): string|null
     {
         return null;
     }

@@ -19,31 +19,31 @@ interface PublicPathAware
      *
      * @return self
      */
-    public function setPublicPath(?string $path);
+    public function setPublicPath(string|null $path): static;
 
     /**
      * Get public path
      *
-     * If no "public path" value set, method
-     * sets and returns a default "public path".
+     * If no public path value set, method
+     * sets and returns a default public path.
      *
      * @see getDefaultPublicPath()
      *
      * @return string|null public path or null if no public path has been set
      */
-    public function getPublicPath(): ?string;
+    public function getPublicPath(): string|null;
 
     /**
-     * Check if "public path" has been set
+     * Check if public path has been set
      *
-     * @return bool True if "public path" has been set, false if not
+     * @return bool True if public path has been set, false if not
      */
     public function hasPublicPath(): bool;
 
     /**
-     * Get a default "public path" value, if any is available
+     * Get a default public path value, if any is available
      *
-     * @return string|null Default "public path" value or null if no default value is available
+     * @return string|null Default public path value or null if no default value is available
      */
-    public function getDefaultPublicPath(): ?string;
+    public function getDefaultPublicPath(): string|null;
 }

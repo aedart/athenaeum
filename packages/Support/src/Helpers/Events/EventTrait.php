@@ -20,7 +20,7 @@ trait EventTrait
      *
      * @var Dispatcher|null
      */
-    protected ?Dispatcher $event = null;
+    protected Dispatcher|null $event = null;
 
     /**
      * Set event
@@ -29,7 +29,7 @@ trait EventTrait
      *
      * @return self
      */
-    public function setEvent(?Dispatcher $dispatcher)
+    public function setEvent(Dispatcher|null $dispatcher): static
     {
         $this->event = $dispatcher;
 
@@ -47,7 +47,7 @@ trait EventTrait
      *
      * @return Dispatcher|null event or null if none event has been set
      */
-    public function getEvent(): ?Dispatcher
+    public function getEvent(): Dispatcher|null
     {
         if (!$this->hasEvent()) {
             $this->setEvent($this->getDefaultEvent());
@@ -70,7 +70,7 @@ trait EventTrait
      *
      * @return Dispatcher|null A default event value or Null if no default value is available
      */
-    public function getDefaultEvent(): ?Dispatcher
+    public function getDefaultEvent(): Dispatcher|null
     {
         return Event::getFacadeRoot();
     }

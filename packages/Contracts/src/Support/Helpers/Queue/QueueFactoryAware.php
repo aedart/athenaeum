@@ -19,7 +19,7 @@ interface QueueFactoryAware
      *
      * @return self
      */
-    public function setQueueFactory(?Factory $factory);
+    public function setQueueFactory(Factory|null $factory): static;
 
     /**
      * Get queue factory
@@ -32,7 +32,7 @@ interface QueueFactoryAware
      *
      * @return Factory|null queue factory or null if none queue factory has been set
      */
-    public function getQueueFactory(): ?Factory;
+    public function getQueueFactory(): Factory|null;
 
     /**
      * Check if queue factory has been set
@@ -46,5 +46,5 @@ interface QueueFactoryAware
      *
      * @return Factory|null A default queue factory value or Null if no default value is available
      */
-    public function getDefaultQueueFactory(): ?Factory;
+    public function getDefaultQueueFactory(): Factory|null;
 }

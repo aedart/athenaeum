@@ -65,7 +65,7 @@ interface Store
      * @throws StateCannotBeLockedException If given state cannot be locked, e.g. not
      *                               supported.
      */
-    public function lockState(State $state, callable $callback);
+    public function lockState(State|Lockable $state, callable $callback): mixed;
 
     /**
      * Register a detected failure
@@ -87,7 +87,7 @@ interface Store
      *
      * @return Failure|null
      */
-    public function getFailure(): ?Failure;
+    public function getFailure(): Failure|null;
 
     /**
      * Increment amount of failures
@@ -110,7 +110,7 @@ interface Store
      *
      * Method is intended to be invoked whenever a
      * circuit breaker failure threshold has been
-     * reached and it's state is changed to {@see CircuitBreaker::OPEN}.
+     * reached, and it's state is changed to {@see CircuitBreaker::OPEN}.
      *
      * Method MUST not (re)start time measurement, if
      * a grace period measurement has already been started.
@@ -119,13 +119,13 @@ interface Store
      *
      * @return self
      */
-    public function startGracePeriod(int $duration = 10): self;
+    public function startGracePeriod(int $duration = 10): static;
 
     /**
      * Determine if a grace period has past
      *
      * A grace period is measured from the time of
-     * the first registered failure and until an time
+     * the first registered failure and until a time
      * interval has past.
      *
      * @return bool
@@ -138,5 +138,5 @@ interface Store
      *
      * @return self
      */
-    public function reset(): self;
+    public function reset(): static;
 }

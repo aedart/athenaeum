@@ -19,7 +19,7 @@ interface GrammarManagerAware
      *
      * @return self
      */
-    public function setGrammarManager(?Manager $manager);
+    public function setGrammarManager(Manager|null $manager): static;
 
     /**
      * Get grammar manager
@@ -30,7 +30,7 @@ interface GrammarManagerAware
      *
      * @return Manager|null grammar manager or null if none grammar manager has been set
      */
-    public function getGrammarManager(): ?Manager;
+    public function getGrammarManager(): Manager|null;
 
     /**
      * Check if grammar manager has been set
@@ -44,5 +44,5 @@ interface GrammarManagerAware
      *
      * @return Manager|null A default grammar manager value or Null if no default value is available
      */
-    public function getDefaultGrammarManager(): ?Manager;
+    public function getDefaultGrammarManager(): Manager|null;
 }

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `hasCallback()` and `hasFallback()` methods added in `\Aedart\Utils\Helpers\Invoker`.
 * Documentation for `\Aedart\Utils\Arr::differenceAssoc()` (_previously undocumented. Method was added in `v5.17`_). [#45](https://github.com/aedart/athenaeum/issues/45).
 * Documentation for `\Aedart\Utils\Helpers\Invoker` (_previously undocumented. Helper was added in `v5.12`_).
+* `InteractsWithDeprecationHandling` added to `LaravelTestHelper`.
 
 ### Changed
 
@@ -25,9 +26,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `SearchFilter` no longer uses `StopWords` concern (_concern has been removed_). [#63](https://github.com/aedart/athenaeum/issues/63).
 * Return type of `package()` and `application()` is now set to `\Aedart\Contracts\Utils\Packages\Version`, in `\Aedart\Utils\Version`.  [#68](https://github.com/aedart/athenaeum/issues/68).
 * `PackageVersionException` is now thrown, when version cannot be obtained for a package, in `\Aedart\Utils\Version::package()`. [#68](https://github.com/aedart/athenaeum/issues/68).
+* Default datetime format is now [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), when no format is specified, for all Http Query Grammars, in Http Clients package.
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Dates\Duration`.
 * Replaced `self` return type with `static` for some methods in `\Aedart\Utils\Helpers\Invoker`.
 * `$seed` argument can no longer be `null` in `\Aedart\Utils\Math::applySeed()` method.
+* `MocksApplicationServices` from `AthenaeumTestHelper` and `LaravelTestHelper`. The "mock application services" helper has been deprecated by Laravel.
 
 **Non-breaking Changes**
 
@@ -35,6 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `storage_path()` helper in Core package will now pass `$path` argument to application `storagePath()` method, when application is available (_`$path` argument added in Laravel `v9.x`_).
 * Core `Application` uses `'json'` file based maintenance mode as driver, when application state is "down". [#67](https://github.com/aedart/athenaeum/issues/67).
 * `application()` method no longer uses git to obtain application's version. It now relies on Composer's `InstalledVersions::getRootPackage()`, in `\Aedart\Utils\Version`. [#68](https://github.com/aedart/athenaeum/issues/68).
+* Refactored `ModelHasChanged` and `MultipleModelsChanged` events. Both events are now a bit more fluent, in Audit package.
+* Refactored event listeners for Audit package. Listeners now inherit from base `RecordsEntries` abstraction.
 * Replaced `fzaninotto/faker` package with `fakerphp/faker`. [#23](https://github.com/aedart/athenaeum/issues/23).
 * Replaced property calls with method calls, on faker instance throughout many tests (_PHP faker deprecated several properties since `v1.14`_). [#23](https://github.com/aedart/athenaeum/issues/23).  
 * Upgraded to [Symplify Monorepo Builder](https://github.com/symplify/monorepo-builder) `v10.x`. [#60](https://github.com/aedart/athenaeum/issues/60), [#65](https://github.com/aedart/athenaeum/pull/65).
@@ -51,8 +56,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Input value "filter" contains a non-scalar value, when attempting get array value from http query via inside `\Aedart\Filters\BaseProcessor::value()` (_happened after upgrade to the latest version Laravel / Symfony_). [#69](https://github.com/aedart/athenaeum/issues/69).
 * Unexpected value for parameter "name": expecting "array". [#71](https://github.com/aedart/athenaeum/issues/71).
 * Incorrect commit reference passed on to `\Jean85\Version`, in `\Aedart\Utils\Version` (_happened after upgrade to the latest version of "Pretty Package Versions"_).
+* `\Illuminate\Support\ServiceProvider` imported into `\Aedart\Contracts\Service\Registrar` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Filesystem\Filesystem` imported into `\Aedart\Contracts\Support\Helpers\Filesystem\FileAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Http\Request` imported into `\Aedart\Contracts\Support\Helpers\Http\RequestAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Log\LogManager` imported into `\Aedart\Contracts\Support\Helpers\Logging\LogManagerAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Routing\Redirector` imported into `\Aedart\Contracts\Support\Helpers\Routing\RedirectAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Session\SessionManager` imported into `\Aedart\Contracts\Support\Helpers\Session\SessionManagerAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\View\Compilers\BladeCompiler` imported into `\Aedart\Contracts\Support\Helpers\View\BladeAware` interface. This created unintended dependency on Laravel package.
 * `Codeception\TestCase\Test` class not found, in `\Aedart\Tests\Integration\Laravel\ApplicationInitiatorTest` (_happened after upgrade to the latest version of Codeception_). 
 * `LoadSpecifiedConfiguration` may nor inherit from final class. `\Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration` no longer inherits from `Orchestra\Testbench\Bootstrap\LoadConfiguration`, which has been declared final (_happened after upgrade to the latest version of Orchestra_).
+
+## [5.27.0] - 2022-01-31
+
+### Added
+
+* `MultipleModelsChanged` event in Audit package.
+* `RecordMultipleAuditTrailEntries` listener that handles `MultipleModelsChanged` events. Performs a mass insert of audit trail entries.
+* `AuditTrailEventSubscriber` that will handle registration of Audit Trail related event listeners.
+
+### Deprecated
+
+* The `audit-trail.listener` configuration setting has been replaced with `audit-trail.subscriber`, in `configs/audit-trail.php`.
+Will be removed in next major version (_in audit package_).
+
+### Changed
+
+* `ModelChangedEvents` concern is now able to dispatch "multiple models changed" event, via `dispatchMultipleModelsChanged()` (_in audit package_).
+
+### Fixed
+
+* `$performedAt` argument ignored in `\Aedart\Audit\Events\ModelHasChanged`.
 
 ## [5.26.0] - 2022-01-03
 
@@ -698,7 +731,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/5.26.0...HEAD
+[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/5.27.0...HEAD
+[5.27.0]: https://github.com/aedart/athenaeum/compare/5.26.0...5.27.0
 [5.26.0]: https://github.com/aedart/athenaeum/compare/5.25.0...5.26.0
 [5.25.0]: https://github.com/aedart/athenaeum/compare/5.24.2...5.25.0
 [5.24.2]: https://github.com/aedart/athenaeum/compare/5.24.1...5.24.2

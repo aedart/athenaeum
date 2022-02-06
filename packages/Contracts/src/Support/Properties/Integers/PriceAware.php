@@ -19,31 +19,31 @@ interface PriceAware
      *
      * @return self
      */
-    public function setPrice(?int $amount);
+    public function setPrice(int|null $amount): static;
 
     /**
      * Get price
      *
-     * If no "price" value set, method
-     * sets and returns a default "price".
+     * If no price value set, method
+     * sets and returns a default price.
      *
      * @see getDefaultPrice()
      *
      * @return int|null price or null if no price has been set
      */
-    public function getPrice(): ?int;
+    public function getPrice(): int|null;
 
     /**
-     * Check if "price" has been set
+     * Check if price has been set
      *
-     * @return bool True if "price" has been set, false if not
+     * @return bool True if price has been set, false if not
      */
     public function hasPrice(): bool;
 
     /**
-     * Get a default "price" value, if any is available
+     * Get a default price value, if any is available
      *
-     * @return int|null Default "price" value or null if no default value is available
+     * @return int|null Default price value or null if no default value is available
      */
-    public function getDefaultPrice(): ?int;
+    public function getDefaultPrice(): int|null;
 }

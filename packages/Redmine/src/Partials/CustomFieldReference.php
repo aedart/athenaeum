@@ -31,7 +31,7 @@ class CustomFieldReference extends ArrayDto
      *
      * @return self
      */
-    public function setValue($value = null)
+    public function setValue(mixed $value = null): static
     {
         $this->properties['value'] = $value;
 
@@ -43,7 +43,7 @@ class CustomFieldReference extends ArrayDto
      *
      * @return mixed
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->properties['value'] ?? null;
     }

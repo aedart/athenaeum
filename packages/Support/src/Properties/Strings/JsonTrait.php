@@ -17,7 +17,7 @@ trait JsonTrait
      *
      * @var string|null
      */
-    protected ?string $json = null;
+    protected string|null $json = null;
 
     /**
      * Set json
@@ -26,7 +26,7 @@ trait JsonTrait
      *
      * @return self
      */
-    public function setJson(?string $json)
+    public function setJson(string|null $json): static
     {
         $this->json = $json;
 
@@ -36,14 +36,14 @@ trait JsonTrait
     /**
      * Get json
      *
-     * If no "json" value set, method
-     * sets and returns a default "json".
+     * If no json value set, method
+     * sets and returns a default json.
      *
      * @see getDefaultJson()
      *
      * @return string|null json or null if no json has been set
      */
-    public function getJson(): ?string
+    public function getJson(): string|null
     {
         if (!$this->hasJson()) {
             $this->setJson($this->getDefaultJson());
@@ -52,9 +52,9 @@ trait JsonTrait
     }
 
     /**
-     * Check if "json" has been set
+     * Check if json has been set
      *
-     * @return bool True if "json" has been set, false if not
+     * @return bool True if json has been set, false if not
      */
     public function hasJson(): bool
     {
@@ -62,11 +62,11 @@ trait JsonTrait
     }
 
     /**
-     * Get a default "json" value, if any is available
+     * Get a default json value, if any is available
      *
-     * @return string|null Default "json" value or null if no default value is available
+     * @return string|null Default json value or null if no default value is available
      */
-    public function getDefaultJson(): ?string
+    public function getDefaultJson(): string|null
     {
         return null;
     }

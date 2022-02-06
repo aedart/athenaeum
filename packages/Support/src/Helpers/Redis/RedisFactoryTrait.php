@@ -20,7 +20,7 @@ trait RedisFactoryTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $redisFactory = null;
+    protected Factory|null $redisFactory = null;
 
     /**
      * Set redis factory
@@ -29,7 +29,7 @@ trait RedisFactoryTrait
      *
      * @return self
      */
-    public function setRedisFactory(?Factory $factory)
+    public function setRedisFactory(Factory|null $factory): static
     {
         $this->redisFactory = $factory;
 
@@ -47,7 +47,7 @@ trait RedisFactoryTrait
      *
      * @return Factory|null redis factory or null if none redis factory has been set
      */
-    public function getRedisFactory(): ?Factory
+    public function getRedisFactory(): Factory|null
     {
         if (!$this->hasRedisFactory()) {
             $this->setRedisFactory($this->getDefaultRedisFactory());
@@ -70,7 +70,7 @@ trait RedisFactoryTrait
      *
      * @return Factory|null A default redis factory value or Null if no default value is available
      */
-    public function getDefaultRedisFactory(): ?Factory
+    public function getDefaultRedisFactory(): Factory|null
     {
         return Redis::getFacadeRoot();
     }

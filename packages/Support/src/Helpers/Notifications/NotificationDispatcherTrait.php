@@ -20,7 +20,7 @@ trait NotificationDispatcherTrait
      *
      * @var Dispatcher|null
      */
-    protected ?Dispatcher $notificationDispatcher = null;
+    protected Dispatcher|null $notificationDispatcher = null;
 
     /**
      * Set notification dispatcher
@@ -29,7 +29,7 @@ trait NotificationDispatcherTrait
      *
      * @return self
      */
-    public function setNotificationDispatcher(?Dispatcher $dispatcher)
+    public function setNotificationDispatcher(Dispatcher|null $dispatcher): static
     {
         $this->notificationDispatcher = $dispatcher;
 
@@ -47,7 +47,7 @@ trait NotificationDispatcherTrait
      *
      * @return Dispatcher|null notification dispatcher or null if none notification dispatcher has been set
      */
-    public function getNotificationDispatcher(): ?Dispatcher
+    public function getNotificationDispatcher(): Dispatcher|null
     {
         if (!$this->hasNotificationDispatcher()) {
             $this->setNotificationDispatcher($this->getDefaultNotificationDispatcher());
@@ -70,7 +70,7 @@ trait NotificationDispatcherTrait
      *
      * @return Dispatcher|null A default notification dispatcher value or Null if no default value is available
      */
-    public function getDefaultNotificationDispatcher(): ?Dispatcher
+    public function getDefaultNotificationDispatcher(): Dispatcher|null
     {
         return Notification::getFacadeRoot();
     }

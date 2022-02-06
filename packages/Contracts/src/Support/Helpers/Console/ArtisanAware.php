@@ -19,7 +19,7 @@ interface ArtisanAware
      *
      * @return self
      */
-    public function setArtisan(?Kernel $kernel);
+    public function setArtisan(Kernel|null $kernel): static;
 
     /**
      * Get artisan
@@ -32,7 +32,7 @@ interface ArtisanAware
      *
      * @return Kernel|null artisan or null if none artisan has been set
      */
-    public function getArtisan(): ?Kernel;
+    public function getArtisan(): Kernel|null;
 
     /**
      * Check if artisan has been set
@@ -46,5 +46,5 @@ interface ArtisanAware
      *
      * @return Kernel|null A default artisan value or Null if no default value is available
      */
-    public function getDefaultArtisan(): ?Kernel;
+    public function getDefaultArtisan(): Kernel|null;
 }

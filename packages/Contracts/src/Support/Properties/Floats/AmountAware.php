@@ -19,31 +19,31 @@ interface AmountAware
      *
      * @return self
      */
-    public function setAmount(?float $amount);
+    public function setAmount(float|null $amount): static;
 
     /**
      * Get amount
      *
-     * If no "amount" value set, method
-     * sets and returns a default "amount".
+     * If no amount value set, method
+     * sets and returns a default amount.
      *
      * @see getDefaultAmount()
      *
      * @return float|null amount or null if no amount has been set
      */
-    public function getAmount(): ?float;
+    public function getAmount(): float|null;
 
     /**
-     * Check if "amount" has been set
+     * Check if amount has been set
      *
-     * @return bool True if "amount" has been set, false if not
+     * @return bool True if amount has been set, false if not
      */
     public function hasAmount(): bool;
 
     /**
-     * Get a default "amount" value, if any is available
+     * Get a default amount value, if any is available
      *
-     * @return float|null Default "amount" value or null if no default value is available
+     * @return float|null Default amount value or null if no default value is available
      */
-    public function getDefaultAmount(): ?float;
+    public function getDefaultAmount(): float|null;
 }

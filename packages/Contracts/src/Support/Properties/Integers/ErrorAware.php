@@ -19,31 +19,31 @@ interface ErrorAware
      *
      * @return self
      */
-    public function setError(?int $identifier);
+    public function setError(int|null $identifier): static;
 
     /**
      * Get error
      *
-     * If no "error" value set, method
-     * sets and returns a default "error".
+     * If no error value set, method
+     * sets and returns a default error.
      *
      * @see getDefaultError()
      *
      * @return int|null error or null if no error has been set
      */
-    public function getError(): ?int;
+    public function getError(): int|null;
 
     /**
-     * Check if "error" has been set
+     * Check if error has been set
      *
-     * @return bool True if "error" has been set, false if not
+     * @return bool True if error has been set, false if not
      */
     public function hasError(): bool;
 
     /**
-     * Get a default "error" value, if any is available
+     * Get a default error value, if any is available
      *
-     * @return int|null Default "error" value or null if no default value is available
+     * @return int|null Default error value or null if no default value is available
      */
-    public function getDefaultError(): ?int;
+    public function getDefaultError(): int|null;
 }

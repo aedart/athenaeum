@@ -17,7 +17,7 @@ trait ExpiresAtTrait
      *
      * @var int|null
      */
-    protected ?int $expiresAt = null;
+    protected int|null $expiresAt = null;
 
     /**
      * Set expires at
@@ -26,7 +26,7 @@ trait ExpiresAtTrait
      *
      * @return self
      */
-    public function setExpiresAt(?int $date)
+    public function setExpiresAt(int|null $date): static
     {
         $this->expiresAt = $date;
 
@@ -36,14 +36,14 @@ trait ExpiresAtTrait
     /**
      * Get expires at
      *
-     * If no "expires at" value set, method
-     * sets and returns a default "expires at".
+     * If no expires at value set, method
+     * sets and returns a default expires at.
      *
      * @see getDefaultExpiresAt()
      *
      * @return int|null expires at or null if no expires at has been set
      */
-    public function getExpiresAt(): ?int
+    public function getExpiresAt(): int|null
     {
         if (!$this->hasExpiresAt()) {
             $this->setExpiresAt($this->getDefaultExpiresAt());
@@ -52,9 +52,9 @@ trait ExpiresAtTrait
     }
 
     /**
-     * Check if "expires at" has been set
+     * Check if expires at has been set
      *
-     * @return bool True if "expires at" has been set, false if not
+     * @return bool True if expires at has been set, false if not
      */
     public function hasExpiresAt(): bool
     {
@@ -62,11 +62,11 @@ trait ExpiresAtTrait
     }
 
     /**
-     * Get a default "expires at" value, if any is available
+     * Get a default expires at value, if any is available
      *
-     * @return int|null Default "expires at" value or null if no default value is available
+     * @return int|null Default expires at value or null if no default value is available
      */
-    public function getDefaultExpiresAt(): ?int
+    public function getDefaultExpiresAt(): int|null
     {
         return null;
     }

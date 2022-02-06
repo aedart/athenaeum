@@ -33,7 +33,7 @@ trait DriverOptions
     /**
      * @inheritdoc
      */
-    public function withOption(string $name, $value): Builder
+    public function withOption(string $name, mixed $value): static
     {
         return $this->withOptions([ $name => $value ]);
     }
@@ -41,7 +41,7 @@ trait DriverOptions
     /**
      * @inheritdoc
      */
-    public function withOptions(array $options = []): Builder
+    public function withOptions(array $options = []): static
     {
         $this->options = array_merge($this->options, $options);
 
@@ -51,7 +51,7 @@ trait DriverOptions
     /**
      * @inheritdoc
      */
-    public function withoutOption(string $name): Builder
+    public function withoutOption(string $name): static
     {
         unset($this->options[$name]);
 
@@ -69,7 +69,7 @@ trait DriverOptions
     /**
      * @inheritdoc
      */
-    public function getOption(string $name)
+    public function getOption(string $name): mixed
     {
         if ($this->hasOption($name)) {
             return $this->options[$name];
@@ -109,7 +109,7 @@ trait DriverOptions
      * Processes the driver's options via given set of pipes
      *
      * Depending on the given pipes and options, both the
-     * provided options as well as this builder's properties
+     * provided options, and this builder's properties
      * and state can be mutated by the pipes.
      *
      * @see makePipeline

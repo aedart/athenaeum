@@ -58,7 +58,7 @@ interface Rules extends
      *
      * @return mixed
      */
-    public function item();
+    public function item(): mixed;
 
     /**
      * Creates a new collection with given item.
@@ -67,7 +67,7 @@ interface Rules extends
      *
      * @return static
      */
-    public function withItem($item): Rules;
+    public function withItem(mixed $item): static;
 
     /**
      * Returns the summation assigned for this
@@ -75,7 +75,7 @@ interface Rules extends
      *
      * @return Summation|null
      */
-    public function summation(): ?Summation;
+    public function summation(): Summation|null;
 
     /**
      * Creates a new collection with given summation
@@ -84,5 +84,5 @@ interface Rules extends
      *
      * @return static
      */
-    public function withSummation(Summation $summation): Rules;
+    public function withSummation(Summation $summation): static;
 }

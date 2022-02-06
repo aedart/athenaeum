@@ -12,6 +12,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use JsonSerializable;
 use Symfony\Component\VarDumper\VarDumper;
+use Traversable;
 
 /**
  * Summation Collection
@@ -33,9 +34,9 @@ class Summation implements SummationInterface
     /**
      * Summation constructor.
      *
-     * @param  mixed  $results  [optional]
+     * @param  Arrayable|iterable  $results  [optional]
      */
-    public function __construct($results = [])
+    public function __construct(Arrayable|iterable $results = [])
     {
         $this->results = $this->retrieveResultsFrom($results);
     }
@@ -43,7 +44,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public static function make($results = []): SummationInterface
+    public static function make(Arrayable|iterable $results = []): static
     {
         return new static($results);
     }
@@ -51,7 +52,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function set(string $key, $value): SummationInterface
+    public function set(string $key, mixed $value): static
     {
         if (is_callable($value)) {
             return $this->apply($key, $value);
@@ -65,7 +66,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function get(string $key, $default = null)
+    public function get(string $key, mixed $default = null): mixed
     {
         return Arr::get($this->results, $key, $default);
     }
@@ -73,7 +74,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function increase(string $key, $amount = 1): SummationInterface
+    public function increase(string $key, callable|float|int $amount = 1): static
     {
         return $this->add($key, $amount);
     }
@@ -81,7 +82,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function decrease(string $key, $amount = 1): SummationInterface
+    public function decrease(string $key, callable|float|int $amount = 1): static
     {
         return $this->subtract($key, $amount);
     }
@@ -89,7 +90,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function add(string $key, $amount): SummationInterface
+    public function add(string $key, callable|float|int $amount): static
     {
         return $this->arithmeticOperation($key, $amount, '+');
     }
@@ -97,7 +98,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function subtract(string $key, $amount): SummationInterface
+    public function subtract(string $key, callable|float|int $amount): static
     {
         return $this->arithmeticOperation($key, $amount, '-');
     }
@@ -105,7 +106,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function multiply(string $key, $amount): SummationInterface
+    public function multiply(string $key, callable|float|int $amount): static
     {
         return $this->arithmeticOperation($key, $amount, '*');
     }
@@ -113,7 +114,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function divide(string $key, $amount): SummationInterface
+    public function divide(string $key, callable|float|int $amount): static
     {
         return $this->arithmeticOperation($key, $amount, '/');
     }
@@ -121,7 +122,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function apply(string $key, callable $callback): SummationInterface
+    public function apply(string $key, callable $callback): static
     {
         $original = $this->get($key);
 
@@ -190,7 +191,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function count()
+    public function count(): int
     {
         return count($this->results);
     }
@@ -208,7 +209,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function dump(): SummationInterface
+    public function dump(): static
     {
         VarDumper::dump($this->results);
 
@@ -218,7 +219,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->results);
     }
@@ -244,7 +245,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return array_map(function ($value) {
             if ($value instanceof JsonSerializable) {
@@ -260,7 +261,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toJson();
     }
@@ -268,7 +269,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return $this->has($offset);
     }
@@ -276,7 +277,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->get($offset);
     }
@@ -284,7 +285,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->set($offset, $value);
     }
@@ -292,7 +293,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         $this->remove($offset);
     }
@@ -308,7 +309,7 @@ class Summation implements SummationInterface
      *
      * @return array
      */
-    protected function retrieveResultsFrom($source = []): array
+    protected function retrieveResultsFrom(Arrayable|iterable $source = []): array
     {
         // Use Laravel's Collection to resolve results.
         return Arr::undot(
@@ -320,7 +321,7 @@ class Summation implements SummationInterface
      * Performs an arithmetic operation on key's value.
      *
      * @param  string  $key
-     * @param  int|float|callable $amount If amount is a callback, then
+     * @param  callable|float|int  $amount If amount is a callback, then
      *                                    callback is invoked with key's value and this
      *                                    Summation as arguments. The resulting output is
      *                                    set as key's new value.
@@ -331,7 +332,7 @@ class Summation implements SummationInterface
      * @throws KeyNotFound
      * @throws UnsupportedArithmeticOperator
      */
-    protected function arithmeticOperation(string $key, $amount, string $operator = '+'): SummationInterface
+    protected function arithmeticOperation(string $key, callable|float|int $amount, string $operator = '+'): static
     {
         $value = $this
             ->assertKeyExists($key)
@@ -341,27 +342,13 @@ class Summation implements SummationInterface
             return $this->applyCallback($key, $amount, $value);
         }
 
-        $result = null;
-        switch ($operator) {
-            case '+':
-                $result = $value + $amount;
-                break;
-
-            case '-':
-                $result = $value - $amount;
-                break;
-
-            case '*':
-                $result = $value * $amount;
-                break;
-
-            case '/':
-                $result = $value / $amount;
-                break;
-
-            default:
-                throw new UnsupportedArithmeticOperator(sprintf('Operator %s is not supported', $operator));
-        }
+        $result = match ($operator) {
+            '+' => $value + $amount,
+            '-' => $value - $amount,
+            '*' => $value * $amount,
+            '/' => $value / $amount,
+            default => throw new UnsupportedArithmeticOperator(sprintf('Operator %s is not supported', $operator))
+        };
 
         return $this->set($key, $result);
     }
@@ -376,7 +363,7 @@ class Summation implements SummationInterface
      *
      * @return self
      */
-    protected function applyCallback(string $key, callable $callback, $value = null): SummationInterface
+    protected function applyCallback(string $key, callable $callback, mixed $value = null): static
     {
         return $this->set($key, $callback($value, $this));
     }
@@ -390,7 +377,7 @@ class Summation implements SummationInterface
      *
      * @throws KeyNotFound
      */
-    protected function assertKeyExists(string $key): SummationInterface
+    protected function assertKeyExists(string $key): static
     {
         if (!$this->has($key)) {
             throw new KeyNotFound(sprintf('Key %s does not exist', $key));

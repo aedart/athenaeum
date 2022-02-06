@@ -21,7 +21,7 @@ interface CircuitBreakerManagerAware
      *
      * @return self
      */
-    public function setCircuitBreakerManager(?Manager $manager);
+    public function setCircuitBreakerManager(Manager|null $manager): static;
 
     /**
      * Get circuit breaker manager
@@ -32,7 +32,7 @@ interface CircuitBreakerManagerAware
      *
      * @return Manager|null circuit breaker manager or null if none circuit breaker manager has been set
      */
-    public function getCircuitBreakerManager(): ?Manager;
+    public function getCircuitBreakerManager(): Manager|null;
 
     /**
      * Check if circuit breaker manager has been set
@@ -46,5 +46,5 @@ interface CircuitBreakerManagerAware
      *
      * @return Manager|null A default circuit breaker manager value or Null if no default value is available
      */
-    public function getDefaultCircuitBreakerManager(): ?Manager;
+    public function getDefaultCircuitBreakerManager(): Manager|null;
 }

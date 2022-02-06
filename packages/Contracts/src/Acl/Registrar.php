@@ -33,7 +33,7 @@ interface Registrar extends CacheAware
      *
      * @return self
      */
-    public function define(Gate $gate, bool $force = false): self;
+    public function define(Gate $gate, bool $force = false): static;
 
     /**
      * Returns the abilities (permissions) to be used
@@ -60,7 +60,7 @@ interface Registrar extends CacheAware
      *
      * @return self
      */
-    public function expires($ttl = null): self;
+    public function expires($ttl = null): static;
 
     /**
      * Set the cache key to use when caching permissions
@@ -69,5 +69,5 @@ interface Registrar extends CacheAware
      *
      * @return self
      */
-    public function key(?string $name = null): self;
+    public function key(string|null $name = null): static;
 }

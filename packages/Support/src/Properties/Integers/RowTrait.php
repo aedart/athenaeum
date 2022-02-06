@@ -17,7 +17,7 @@ trait RowTrait
      *
      * @var int|null
      */
-    protected ?int $row = null;
+    protected int|null $row = null;
 
     /**
      * Set row
@@ -26,7 +26,7 @@ trait RowTrait
      *
      * @return self
      */
-    public function setRow(?int $identifier)
+    public function setRow(int|null $identifier): static
     {
         $this->row = $identifier;
 
@@ -36,14 +36,14 @@ trait RowTrait
     /**
      * Get row
      *
-     * If no "row" value set, method
-     * sets and returns a default "row".
+     * If no row value set, method
+     * sets and returns a default row.
      *
      * @see getDefaultRow()
      *
      * @return int|null row or null if no row has been set
      */
-    public function getRow(): ?int
+    public function getRow(): int|null
     {
         if (!$this->hasRow()) {
             $this->setRow($this->getDefaultRow());
@@ -52,9 +52,9 @@ trait RowTrait
     }
 
     /**
-     * Check if "row" has been set
+     * Check if row has been set
      *
-     * @return bool True if "row" has been set, false if not
+     * @return bool True if row has been set, false if not
      */
     public function hasRow(): bool
     {
@@ -62,11 +62,11 @@ trait RowTrait
     }
 
     /**
-     * Get a default "row" value, if any is available
+     * Get a default row value, if any is available
      *
-     * @return int|null Default "row" value or null if no default value is available
+     * @return int|null Default row value or null if no default value is available
      */
-    public function getDefaultRow(): ?int
+    public function getDefaultRow(): int|null
     {
         return null;
     }

@@ -21,7 +21,7 @@ interface StoreAware
      *
      * @return self
      */
-    public function setStore(?Store $store);
+    public function setStore(Store|null $store): static;
 
     /**
      * Get store
@@ -32,7 +32,7 @@ interface StoreAware
      *
      * @return Store|null store or null if none store has been set
      */
-    public function getStore(): ?Store;
+    public function getStore(): Store|null;
 
     /**
      * Check if store has been set
@@ -46,5 +46,5 @@ interface StoreAware
      *
      * @return Store|null A default store value or Null if no default value is available
      */
-    public function getDefaultStore(): ?Store;
+    public function getDefaultStore(): Store|null;
 }

@@ -10,7 +10,9 @@ use Aedart\Redmine\Partials\Reference;
 use Aedart\Utils\Json;
 use Carbon\Carbon;
 use InvalidArgumentException;
+use JsonException;
 use RuntimeException;
+use Throwable;
 
 /**
  * Attachment Resource
@@ -74,10 +76,10 @@ class Attachment extends RedmineApiResource implements
      *                needed to associate attachment with issues or other resources.
      *
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
-    public static function upload(string $file, bool $reload = false, $connection = null)
+    public static function upload(string $file, bool $reload = false, string|Connection|null $connection = null): static
     {
         // Abort if file does not exist...
         if (!is_file($file)) {

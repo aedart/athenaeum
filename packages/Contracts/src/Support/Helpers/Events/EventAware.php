@@ -19,7 +19,7 @@ interface EventAware
      *
      * @return self
      */
-    public function setEvent(?Dispatcher $dispatcher);
+    public function setEvent(Dispatcher|null $dispatcher): static;
 
     /**
      * Get event
@@ -32,7 +32,7 @@ interface EventAware
      *
      * @return Dispatcher|null event or null if none event has been set
      */
-    public function getEvent(): ?Dispatcher;
+    public function getEvent(): Dispatcher|null;
 
     /**
      * Check if event has been set
@@ -46,5 +46,5 @@ interface EventAware
      *
      * @return Dispatcher|null A default event value or Null if no default value is available
      */
-    public function getDefaultEvent(): ?Dispatcher;
+    public function getDefaultEvent(): Dispatcher|null;
 }

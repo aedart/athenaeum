@@ -19,7 +19,7 @@ interface QueueMonitorAware
      *
      * @return self
      */
-    public function setQueueMonitor(?Monitor $monitor);
+    public function setQueueMonitor(Monitor|null $monitor): static;
 
     /**
      * Get queue monitor
@@ -32,7 +32,7 @@ interface QueueMonitorAware
      *
      * @return Monitor|null queue monitor or null if none queue monitor has been set
      */
-    public function getQueueMonitor(): ?Monitor;
+    public function getQueueMonitor(): Monitor|null;
 
     /**
      * Check if queue monitor has been set
@@ -46,5 +46,5 @@ interface QueueMonitorAware
      *
      * @return Monitor|null A default queue monitor value or Null if no default value is available
      */
-    public function getDefaultQueueMonitor(): ?Monitor;
+    public function getDefaultQueueMonitor(): Monitor|null;
 }

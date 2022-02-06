@@ -19,31 +19,31 @@ interface OnAware
      *
      * @return self
      */
-    public function setOn(?bool $isOn);
+    public function setOn(bool|null $isOn): static;
 
     /**
      * Get on
      *
-     * If no "on" value set, method
-     * sets and returns a default "on".
+     * If no on value set, method
+     * sets and returns a default on.
      *
      * @see getDefaultOn()
      *
      * @return bool|null on or null if no on has been set
      */
-    public function getOn(): ?bool;
+    public function getOn(): bool|null;
 
     /**
-     * Check if "on" has been set
+     * Check if on has been set
      *
-     * @return bool True if "on" has been set, false if not
+     * @return bool True if on has been set, false if not
      */
     public function hasOn(): bool;
 
     /**
-     * Get a default "on" value, if any is available
+     * Get a default on value, if any is available
      *
-     * @return bool|null Default "on" value or null if no default value is available
+     * @return bool|null Default on value or null if no default value is available
      */
-    public function getDefaultOn(): ?bool;
+    public function getDefaultOn(): bool|null;
 }

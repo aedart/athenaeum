@@ -19,31 +19,31 @@ interface AddressAware
      *
      * @return self
      */
-    public function setAddress(?string $address);
+    public function setAddress(string|null $address): static;
 
     /**
      * Get address
      *
-     * If no "address" value set, method
-     * sets and returns a default "address".
+     * If no address value set, method
+     * sets and returns a default address.
      *
      * @see getDefaultAddress()
      *
      * @return string|null address or null if no address has been set
      */
-    public function getAddress(): ?string;
+    public function getAddress(): string|null;
 
     /**
-     * Check if "address" has been set
+     * Check if address has been set
      *
-     * @return bool True if "address" has been set, false if not
+     * @return bool True if address has been set, false if not
      */
     public function hasAddress(): bool;
 
     /**
-     * Get a default "address" value, if any is available
+     * Get a default address value, if any is available
      *
-     * @return string|null Default "address" value or null if no default value is available
+     * @return string|null Default address value or null if no default value is available
      */
-    public function getDefaultAddress(): ?string;
+    public function getDefaultAddress(): string|null;
 }

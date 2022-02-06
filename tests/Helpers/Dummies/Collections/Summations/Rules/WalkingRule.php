@@ -22,7 +22,7 @@ class WalkingRule implements
     /**
      * @inheritDoc
      */
-    public function canProcess($item): bool
+    public function canProcess(mixed $item): bool
     {
         return isset($item['activity']) && $item['activity'] === 'walking';
     }
@@ -30,7 +30,7 @@ class WalkingRule implements
     /**
      * @inheritDoc
      */
-    public function process($item, Summation $summation): Summation
+    public function process(mixed $item, Summation $summation): Summation
     {
         $result = $summation->increase('points', 2);
 

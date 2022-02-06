@@ -17,7 +17,7 @@ trait FilenameTrait
      *
      * @var string|null
      */
-    protected ?string $filename = null;
+    protected string|null $filename = null;
 
     /**
      * Set filename
@@ -26,7 +26,7 @@ trait FilenameTrait
      *
      * @return self
      */
-    public function setFilename(?string $name)
+    public function setFilename(string|null $name): static
     {
         $this->filename = $name;
 
@@ -36,14 +36,14 @@ trait FilenameTrait
     /**
      * Get filename
      *
-     * If no "filename" value set, method
-     * sets and returns a default "filename".
+     * If no filename value set, method
+     * sets and returns a default filename.
      *
      * @see getDefaultFilename()
      *
      * @return string|null filename or null if no filename has been set
      */
-    public function getFilename(): ?string
+    public function getFilename(): string|null
     {
         if (!$this->hasFilename()) {
             $this->setFilename($this->getDefaultFilename());
@@ -52,9 +52,9 @@ trait FilenameTrait
     }
 
     /**
-     * Check if "filename" has been set
+     * Check if filename has been set
      *
-     * @return bool True if "filename" has been set, false if not
+     * @return bool True if filename has been set, false if not
      */
     public function hasFilename(): bool
     {
@@ -62,11 +62,11 @@ trait FilenameTrait
     }
 
     /**
-     * Get a default "filename" value, if any is available
+     * Get a default filename value, if any is available
      *
-     * @return string|null Default "filename" value or null if no default value is available
+     * @return string|null Default filename value or null if no default value is available
      */
-    public function getDefaultFilename(): ?string
+    public function getDefaultFilename(): string|null
     {
         return null;
     }

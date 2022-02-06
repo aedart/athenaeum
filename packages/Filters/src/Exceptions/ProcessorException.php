@@ -22,17 +22,18 @@ class ProcessorException extends RuntimeException implements ProcessorExceptionI
      *
      * @var Processor|null
      */
-    protected ?Processor $processor = null;
+    protected Processor|null $processor = null;
 
     /**
      * @inheritDoc
      */
     public static function make(
         Processor $processor,
-        $message = "",
-        $code = 0,
-        Throwable $previous = null
-    ) {
+        string $message = "",
+        int $code = 0,
+        Throwable|null $previous = null
+    ): static
+    {
         return (new static($message, $code, $previous))
             ->setProcessor($processor);
     }
@@ -40,7 +41,7 @@ class ProcessorException extends RuntimeException implements ProcessorExceptionI
     /**
      * @inheritDoc
      */
-    public function setProcessor(Processor $processor)
+    public function setProcessor(Processor $processor): static
     {
         $this->processor = $processor;
 

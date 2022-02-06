@@ -19,7 +19,7 @@ interface CacheAware
      *
      * @return self
      */
-    public function setCache(?Repository $repository);
+    public function setCache(Repository|null $repository): static;
 
     /**
      * Get cache
@@ -32,7 +32,7 @@ interface CacheAware
      *
      * @return Repository|null cache or null if none cache has been set
      */
-    public function getCache(): ?Repository;
+    public function getCache(): Repository|null;
 
     /**
      * Check if cache has been set
@@ -46,5 +46,5 @@ interface CacheAware
      *
      * @return Repository|null A default cache value or Null if no default value is available
      */
-    public function getDefaultCache(): ?Repository;
+    public function getDefaultCache(): Repository|null;
 }

@@ -3,6 +3,7 @@
 namespace Aedart\Redmine\Concerns;
 
 use Aedart\Contracts\Dto;
+use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Contracts\Redmine\PaginatedResults;
 use Aedart\Redmine\Relations\BelongsTo;
 use Aedart\Redmine\Relations\HasMany;
@@ -21,7 +22,7 @@ trait ResourceRelations
     /**
      * Returns new belongs to relation
      *
-     * @param string|Resource $related Class path to related resource
+     * @param string|ApiResource $related Class path to related resource
      * @param Dto|null $reference [optional] Reference Dto in parent resource that holds foreign key to
      *                                       related resource
      *
@@ -30,7 +31,7 @@ trait ResourceRelations
      *
      * @return BelongsTo<T>
      */
-    public function belongsTo($related, ?Dto $reference = null, string $key = 'id'): BelongsTo
+    public function belongsTo(string|ApiResource $related, Dto|null $reference = null, string $key = 'id'): BelongsTo
     {
         return new BelongsTo($this, $related, $reference, $key);
     }
@@ -38,7 +39,7 @@ trait ResourceRelations
     /**
      * Returns new one from list relation
      *
-     * @param string|Resource $related Class path to related resource
+     * @param string|ApiResource $related Class path to related resource
      * @param Dto|null $reference [optional] Reference Dto in parent resource that holds foreign key to
      *                                       related resource
      *
@@ -47,7 +48,7 @@ trait ResourceRelations
      *
      * @return OneFromList
      */
-    public function oneFrom($related, ?Dto $reference = null, string $key = 'id'): OneFromList
+    public function oneFrom(string|ApiResource $related, Dto|null $reference = null, string $key = 'id'): OneFromList
     {
         return new OneFromList($this, $related, $reference, $key);
     }
@@ -55,12 +56,12 @@ trait ResourceRelations
     /**
      * Returns new has many relation
      *
-     * @param string|Resource $related Class path to related resource
+     * @param string|ApiResource $related Class path to related resource
      * @param string|null $filterKey [optional]
      *
      * @return HasMany<PaginatedResults<T>|array<T>>
      */
-    public function hasMany($related, ?string $filterKey = null): HasMany
+    public function hasMany(string|ApiResource $related, string|null $filterKey = null): HasMany
     {
         return new HasMany($this, $related, $filterKey);
     }

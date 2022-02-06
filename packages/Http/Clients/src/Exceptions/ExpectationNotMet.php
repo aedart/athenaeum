@@ -38,9 +38,9 @@ class ExpectationNotMet extends RuntimeException implements ExpectationNotMetExc
      */
     public function __construct(
         ExpectationNotFulfilled $expectation,
-        $message = "",
-        $code = 0,
-        Throwable $previous = null
+        string $message = "",
+        int $code = 0,
+        Throwable|null $previous = null
     ) {
         $this->expectation = $expectation;
 

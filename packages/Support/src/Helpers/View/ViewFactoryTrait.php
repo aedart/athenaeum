@@ -20,7 +20,7 @@ trait ViewFactoryTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $viewFactory = null;
+    protected Factory|null $viewFactory = null;
 
     /**
      * Set view factory
@@ -29,7 +29,7 @@ trait ViewFactoryTrait
      *
      * @return self
      */
-    public function setViewFactory(?Factory $factory)
+    public function setViewFactory(Factory|null $factory): static
     {
         $this->viewFactory = $factory;
 
@@ -47,7 +47,7 @@ trait ViewFactoryTrait
      *
      * @return Factory|null view factory or null if none view factory has been set
      */
-    public function getViewFactory(): ?Factory
+    public function getViewFactory(): Factory|null
     {
         if (!$this->hasViewFactory()) {
             $this->setViewFactory($this->getDefaultViewFactory());
@@ -70,7 +70,7 @@ trait ViewFactoryTrait
      *
      * @return Factory|null A default view factory value or Null if no default value is available
      */
-    public function getDefaultViewFactory(): ?Factory
+    public function getDefaultViewFactory(): Factory|null
     {
         return View::getFacadeRoot();
     }

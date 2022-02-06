@@ -19,31 +19,31 @@ interface FormattedNameAware
      *
      * @return self
      */
-    public function setFormattedName(?string $name);
+    public function setFormattedName(string|null $name): static;
 
     /**
      * Get formatted name
      *
-     * If no "formatted name" value set, method
-     * sets and returns a default "formatted name".
+     * If no formatted name value set, method
+     * sets and returns a default formatted name.
      *
      * @see getDefaultFormattedName()
      *
      * @return string|null formatted name or null if no formatted name has been set
      */
-    public function getFormattedName(): ?string;
+    public function getFormattedName(): string|null;
 
     /**
-     * Check if "formatted name" has been set
+     * Check if formatted name has been set
      *
-     * @return bool True if "formatted name" has been set, false if not
+     * @return bool True if formatted name has been set, false if not
      */
     public function hasFormattedName(): bool;
 
     /**
-     * Get a default "formatted name" value, if any is available
+     * Get a default formatted name value, if any is available
      *
-     * @return string|null Default "formatted name" value or null if no default value is available
+     * @return string|null Default formatted name value or null if no default value is available
      */
-    public function getDefaultFormattedName(): ?string;
+    public function getDefaultFormattedName(): string|null;
 }

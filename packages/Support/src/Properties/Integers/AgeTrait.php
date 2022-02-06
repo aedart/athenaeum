@@ -17,7 +17,7 @@ trait AgeTrait
      *
      * @var int|null
      */
-    protected ?int $age = null;
+    protected int|null $age = null;
 
     /**
      * Set age
@@ -26,7 +26,7 @@ trait AgeTrait
      *
      * @return self
      */
-    public function setAge(?int $age)
+    public function setAge(int|null $age): static
     {
         $this->age = $age;
 
@@ -36,14 +36,14 @@ trait AgeTrait
     /**
      * Get age
      *
-     * If no "age" value set, method
-     * sets and returns a default "age".
+     * If no age value set, method
+     * sets and returns a default age.
      *
      * @see getDefaultAge()
      *
      * @return int|null age or null if no age has been set
      */
-    public function getAge(): ?int
+    public function getAge(): int|null
     {
         if (!$this->hasAge()) {
             $this->setAge($this->getDefaultAge());
@@ -52,9 +52,9 @@ trait AgeTrait
     }
 
     /**
-     * Check if "age" has been set
+     * Check if age has been set
      *
-     * @return bool True if "age" has been set, false if not
+     * @return bool True if age has been set, false if not
      */
     public function hasAge(): bool
     {
@@ -62,11 +62,11 @@ trait AgeTrait
     }
 
     /**
-     * Get a default "age" value, if any is available
+     * Get a default age value, if any is available
      *
-     * @return int|null Default "age" value or null if no default value is available
+     * @return int|null Default age value or null if no default value is available
      */
-    public function getDefaultAge(): ?int
+    public function getDefaultAge(): int|null
     {
         return null;
     }

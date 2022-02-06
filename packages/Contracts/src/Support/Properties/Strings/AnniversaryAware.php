@@ -19,31 +19,31 @@ interface AnniversaryAware
      *
      * @return self
      */
-    public function setAnniversary(?string $anniversary);
+    public function setAnniversary(string|null $anniversary): static;
 
     /**
      * Get anniversary
      *
-     * If no "anniversary" value set, method
-     * sets and returns a default "anniversary".
+     * If no anniversary value set, method
+     * sets and returns a default anniversary.
      *
      * @see getDefaultAnniversary()
      *
      * @return string|null anniversary or null if no anniversary has been set
      */
-    public function getAnniversary(): ?string;
+    public function getAnniversary(): string|null;
 
     /**
-     * Check if "anniversary" has been set
+     * Check if anniversary has been set
      *
-     * @return bool True if "anniversary" has been set, false if not
+     * @return bool True if anniversary has been set, false if not
      */
     public function hasAnniversary(): bool;
 
     /**
-     * Get a default "anniversary" value, if any is available
+     * Get a default anniversary value, if any is available
      *
-     * @return string|null Default "anniversary" value or null if no default value is available
+     * @return string|null Default anniversary value or null if no default value is available
      */
-    public function getDefaultAnniversary(): ?string;
+    public function getDefaultAnniversary(): string|null;
 }

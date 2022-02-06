@@ -17,7 +17,7 @@ trait DirectoryTrait
      *
      * @var string|null
      */
-    protected ?string $directory = null;
+    protected string|null $directory = null;
 
     /**
      * Set directory
@@ -26,7 +26,7 @@ trait DirectoryTrait
      *
      * @return self
      */
-    public function setDirectory(?string $path)
+    public function setDirectory(string|null $path): static
     {
         $this->directory = $path;
 
@@ -36,14 +36,14 @@ trait DirectoryTrait
     /**
      * Get directory
      *
-     * If no "directory" value set, method
-     * sets and returns a default "directory".
+     * If no directory value set, method
+     * sets and returns a default directory.
      *
      * @see getDefaultDirectory()
      *
      * @return string|null directory or null if no directory has been set
      */
-    public function getDirectory(): ?string
+    public function getDirectory(): string|null
     {
         if (!$this->hasDirectory()) {
             $this->setDirectory($this->getDefaultDirectory());
@@ -52,9 +52,9 @@ trait DirectoryTrait
     }
 
     /**
-     * Check if "directory" has been set
+     * Check if directory has been set
      *
-     * @return bool True if "directory" has been set, false if not
+     * @return bool True if directory has been set, false if not
      */
     public function hasDirectory(): bool
     {
@@ -62,11 +62,11 @@ trait DirectoryTrait
     }
 
     /**
-     * Get a default "directory" value, if any is available
+     * Get a default directory value, if any is available
      *
-     * @return string|null Default "directory" value or null if no default value is available
+     * @return string|null Default directory value or null if no default value is available
      */
-    public function getDefaultDirectory(): ?string
+    public function getDefaultDirectory(): string|null
     {
         return null;
     }

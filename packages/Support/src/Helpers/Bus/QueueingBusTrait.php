@@ -20,7 +20,7 @@ trait QueueingBusTrait
      *
      * @var QueueingDispatcher|null
      */
-    protected ?QueueingDispatcher $queueingBus = null;
+    protected QueueingDispatcher|null $queueingBus = null;
 
     /**
      * Set queueing bus
@@ -29,7 +29,7 @@ trait QueueingBusTrait
      *
      * @return self
      */
-    public function setQueueingBus(?QueueingDispatcher $dispatcher)
+    public function setQueueingBus(QueueingDispatcher|null $dispatcher): static
     {
         $this->queueingBus = $dispatcher;
 
@@ -47,7 +47,7 @@ trait QueueingBusTrait
      *
      * @return QueueingDispatcher|null queueing bus or null if none queueing bus has been set
      */
-    public function getQueueingBus(): ?QueueingDispatcher
+    public function getQueueingBus(): QueueingDispatcher|null
     {
         if (!$this->hasQueueingBus()) {
             $this->setQueueingBus($this->getDefaultQueueingBus());
@@ -70,7 +70,7 @@ trait QueueingBusTrait
      *
      * @return QueueingDispatcher|null A default queueing bus value or Null if no default value is available
      */
-    public function getDefaultQueueingBus(): ?QueueingDispatcher
+    public function getDefaultQueueingBus(): QueueingDispatcher|null
     {
         return Bus::getFacadeRoot();
     }

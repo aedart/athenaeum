@@ -35,7 +35,7 @@ trait RecordsChanges
      *
      * @var string[]
      */
-    protected ?array $hiddenInAuditTrail = null;
+    protected array|null $hiddenInAuditTrail = null;
 
     /**
      * State whether "model has changed" events should
@@ -70,7 +70,7 @@ trait RecordsChanges
      *
      * @return array|null
      */
-    public function originalData(string $type): ?array
+    public function originalData(string $type): array|null
     {
         if ($this->shouldOmitDataFor($type)) {
             return null;
@@ -93,7 +93,7 @@ trait RecordsChanges
      *
      * @return array|null
      */
-    public function formatOriginalData(?array $filtered, string $type): ?array
+    public function formatOriginalData(?array $filtered, string $type): array|null
     {
         return $filtered;
     }
@@ -106,7 +106,7 @@ trait RecordsChanges
      *
      * @return array|null
      */
-    public function changedData(string $type): ?array
+    public function changedData(string $type): array|null
     {
         if ($this->shouldOmitDataFor($type)) {
             return null;
@@ -135,7 +135,7 @@ trait RecordsChanges
      *
      * @return array|null
      */
-    public function formatChangedData(?array $filtered, string $type): ?array
+    public function formatChangedData(array|null $filtered, string $type): array|null
     {
         return $filtered;
     }
@@ -153,7 +153,7 @@ trait RecordsChanges
      *
      * @return array|null
      */
-    public function filterAuditData(?array $attributes = null): ?array
+    public function filterAuditData(array|null $attributes = null): array|null
     {
         if (empty($attributes)) {
             return null;
@@ -190,11 +190,11 @@ trait RecordsChanges
     /**
      * Mark given attributes hidden for Audit Trail Entries
      *
-     * @param string|string[]|null $attributes
+     * @param  string|string[]|null  $attributes
      *
      * @return self
      */
-    public function makeHiddenForAudit($attributes)
+    public function makeHiddenForAudit(array|string|null $attributes): static
     {
         $attributes = is_array($attributes)
             ? $attributes
@@ -276,7 +276,7 @@ trait RecordsChanges
      *
      * @return string|null
      */
-    public function getAuditTrailMessage(string $type): ?string
+    public function getAuditTrailMessage(string $type): string|null
     {
         return null;
     }
@@ -292,7 +292,7 @@ trait RecordsChanges
      *
      * @return self
      */
-    public function skipRecordingNextChange(bool $skip = true)
+    public function skipRecordingNextChange(bool $skip = true): static
     {
         $this->skipNextRecording = $skip;
 
@@ -308,7 +308,7 @@ trait RecordsChanges
      *
      * @return self
      */
-    public function recordNextChange(bool $record = true)
+    public function recordNextChange(bool $record = true): static
     {
         return $this->skipRecordingNextChange(!$record);
     }

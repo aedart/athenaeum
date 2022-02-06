@@ -19,7 +19,7 @@ interface CoreApplicationAware
      *
      * @return self
      */
-    public function setCoreApplication(?Application $core);
+    public function setCoreApplication(Application|null $core): static;
 
     /**
      * Get core application
@@ -30,7 +30,7 @@ interface CoreApplicationAware
      *
      * @return Application|null core application or null if none core application has been set
      */
-    public function getCoreApplication(): ?Application;
+    public function getCoreApplication(): Application|null;
 
     /**
      * Check if core application has been set
@@ -44,5 +44,5 @@ interface CoreApplicationAware
      *
      * @return Application|null A default core application value or Null if no default value is available
      */
-    public function getDefaultCoreApplication(): ?Application;
+    public function getDefaultCoreApplication(): Application|null;
 }

@@ -19,31 +19,31 @@ interface CompanyAware
      *
      * @return self
      */
-    public function setCompany(?string $name);
+    public function setCompany(string|null $name): static;
 
     /**
      * Get company
      *
-     * If no "company" value set, method
-     * sets and returns a default "company".
+     * If no company value set, method
+     * sets and returns a default company.
      *
      * @see getDefaultCompany()
      *
      * @return string|null company or null if no company has been set
      */
-    public function getCompany(): ?string;
+    public function getCompany(): string|null;
 
     /**
-     * Check if "company" has been set
+     * Check if company has been set
      *
-     * @return bool True if "company" has been set, false if not
+     * @return bool True if company has been set, false if not
      */
     public function hasCompany(): bool;
 
     /**
-     * Get a default "company" value, if any is available
+     * Get a default company value, if any is available
      *
-     * @return string|null Default "company" value or null if no default value is available
+     * @return string|null Default company value or null if no default value is available
      */
-    public function getDefaultCompany(): ?string;
+    public function getDefaultCompany(): string|null;
 }

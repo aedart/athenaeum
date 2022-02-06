@@ -3,6 +3,7 @@
 namespace Aedart\Circuits\Concerns;
 
 use Aedart\Utils\Json;
+use JsonException;
 
 /**
  * Concerns Exportable
@@ -25,7 +26,7 @@ trait Exportable
     /**
      * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }
@@ -45,7 +46,7 @@ trait Exportable
      *
      * @throws JsonException
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toJson();
     }

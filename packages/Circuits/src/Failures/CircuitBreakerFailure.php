@@ -26,7 +26,7 @@ class CircuitBreakerFailure implements Failure
      *
      * @var string|null
      */
-    protected ?string $reason = null;
+    protected string|null $reason = null;
 
     /**
      * Date and time of when this failure was reported
@@ -60,7 +60,7 @@ class CircuitBreakerFailure implements Failure
      *
      * @return static
      */
-    public static function make(array $data = [])
+    public static function make(array $data = []): static
     {
         return new static($data);
     }
@@ -68,7 +68,7 @@ class CircuitBreakerFailure implements Failure
     /**
      * @inheritDoc
      */
-    public function reason(): ?string
+    public function reason(): string|null
     {
         return $this->reason;
     }
@@ -109,9 +109,9 @@ class CircuitBreakerFailure implements Failure
     /**
      * @inheritDoc
      */
-    protected function populate(array $data)
+    protected function populate(array $data): static
     {
-        $this
+        return $this
             ->setReason($data['reason'] ?? null)
             ->setContext($data['context'] ?? [])
             ->setReportedAt($data['reported_at'] ?? null)
@@ -125,7 +125,7 @@ class CircuitBreakerFailure implements Failure
      *
      * @return self
      */
-    protected function setReason(?string $reason = null)
+    protected function setReason(string|null $reason = null): static
     {
         $this->reason = $reason;
 
@@ -135,11 +135,11 @@ class CircuitBreakerFailure implements Failure
     /**
      * Set the date and time of when this failure was reported
      *
-     * @param string|DateTimeInterface|null $reportedAt [optional]
+     * @param  DateTimeInterface|string|null  $reportedAt [optional]
      *
      * @return self
      */
-    protected function setReportedAt($reportedAt = null)
+    protected function setReportedAt(DateTimeInterface|string|null $reportedAt = null): static
     {
         $this->reportedAt = $this->resolveDate($reportedAt);
 
@@ -154,7 +154,7 @@ class CircuitBreakerFailure implements Failure
      *
      * @return self
      */
-    protected function setTotalFailures(int $amount = 0)
+    protected function setTotalFailures(int $amount = 0): static
     {
         $this->totalFailures = $amount;
 

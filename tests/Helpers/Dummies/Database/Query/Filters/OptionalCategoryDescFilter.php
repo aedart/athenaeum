@@ -3,6 +3,8 @@
 namespace Aedart\Tests\Helpers\Dummies\Database\Query\Filters;
 
 use Aedart\Database\Query\Filter;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 class OptionalCategoryDescFilter extends Filter
 {
@@ -34,7 +36,7 @@ class OptionalCategoryDescFilter extends Filter
     /**
      * @inheritDoc
      */
-    public function isApplicable($query = null, $filters = []): bool
+    public function isApplicable(Builder|EloquentBuilder|null $query = null, array $filters = []): bool
     {
         return $this->shouldApplyFilter;
     }
@@ -43,7 +45,7 @@ class OptionalCategoryDescFilter extends Filter
     /**
      * @inheritDoc
      */
-    public function apply($query)
+    public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         return $query->where('description', 'LIKE', "%{$this->search}%");
     }

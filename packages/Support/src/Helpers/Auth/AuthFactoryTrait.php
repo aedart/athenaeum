@@ -20,7 +20,7 @@ trait AuthFactoryTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $authFactory = null;
+    protected Factory|null $authFactory = null;
 
     /**
      * Set auth factory
@@ -29,7 +29,7 @@ trait AuthFactoryTrait
      *
      * @return self
      */
-    public function setAuthFactory(?Factory $factory)
+    public function setAuthFactory(Factory|null $factory): static
     {
         $this->authFactory = $factory;
 
@@ -47,7 +47,7 @@ trait AuthFactoryTrait
      *
      * @return Factory|null auth factory or null if none auth factory has been set
      */
-    public function getAuthFactory(): ?Factory
+    public function getAuthFactory(): Factory|null
     {
         if (!$this->hasAuthFactory()) {
             $this->setAuthFactory($this->getDefaultAuthFactory());
@@ -70,7 +70,7 @@ trait AuthFactoryTrait
      *
      * @return Factory|null A default auth factory value or Null if no default value is available
      */
-    public function getDefaultAuthFactory(): ?Factory
+    public function getDefaultAuthFactory(): Factory|null
     {
         return Auth::getFacadeRoot();
     }

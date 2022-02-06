@@ -17,7 +17,7 @@ trait ZTrait
      *
      * @var int|null
      */
-    protected ?int $z = null;
+    protected int|null $z = null;
 
     /**
      * Set z
@@ -26,7 +26,7 @@ trait ZTrait
      *
      * @return self
      */
-    public function setZ(?int $value)
+    public function setZ(int|null $value): static
     {
         $this->z = $value;
 
@@ -36,14 +36,14 @@ trait ZTrait
     /**
      * Get z
      *
-     * If no "z" value set, method
-     * sets and returns a default "z".
+     * If no z value set, method
+     * sets and returns a default z.
      *
      * @see getDefaultZ()
      *
      * @return int|null z or null if no z has been set
      */
-    public function getZ(): ?int
+    public function getZ(): int|null
     {
         if (!$this->hasZ()) {
             $this->setZ($this->getDefaultZ());
@@ -52,9 +52,9 @@ trait ZTrait
     }
 
     /**
-     * Check if "z" has been set
+     * Check if z has been set
      *
-     * @return bool True if "z" has been set, false if not
+     * @return bool True if z has been set, false if not
      */
     public function hasZ(): bool
     {
@@ -62,11 +62,11 @@ trait ZTrait
     }
 
     /**
-     * Get a default "z" value, if any is available
+     * Get a default z value, if any is available
      *
-     * @return int|null Default "z" value or null if no default value is available
+     * @return int|null Default z value or null if no default value is available
      */
-    public function getDefaultZ(): ?int
+    public function getDefaultZ(): int|null
     {
         return null;
     }

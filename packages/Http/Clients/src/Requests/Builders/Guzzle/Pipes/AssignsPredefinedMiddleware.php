@@ -44,7 +44,7 @@ class AssignsPredefinedMiddleware
      *
      * @return mixed
      */
-    public function handle(ProcessedOptions $processed, $next)
+    public function handle(ProcessedOptions $processed, mixed $next): mixed
     {
         $this->builder = $builder = $processed->builder();
 
@@ -67,7 +67,7 @@ class AssignsPredefinedMiddleware
      *
      * @param string|Middleware $middleware Class path or Middleware instance
      */
-    protected function assignMiddleware($middleware)
+    protected function assignMiddleware(string|Middleware $middleware)
     {
         // Skip if middleware has already been assigned
         if ($this->isAlreadyAssigned($middleware)) {
@@ -84,7 +84,7 @@ class AssignsPredefinedMiddleware
      *
      * @return bool
      */
-    protected function isAlreadyAssigned($middleware): bool
+    protected function isAlreadyAssigned(string|Middleware $middleware): bool
     {
         $list = $this->builder->getMiddleware();
 

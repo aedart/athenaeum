@@ -19,7 +19,7 @@ interface ApplicationAware
      *
      * @return self
      */
-    public function setApplication(?Application $application);
+    public function setApplication(Application|null $application): static;
 
     /**
      * Get application
@@ -30,7 +30,7 @@ interface ApplicationAware
      *
      * @return Application|null application or null if none application has been set
      */
-    public function getApplication(): ?Application;
+    public function getApplication(): Application|null;
 
     /**
      * Check if application has been set
@@ -44,5 +44,5 @@ interface ApplicationAware
      *
      * @return Application|null A default application value or Null if no default value is available
      */
-    public function getDefaultApplication(): ?Application;
+    public function getDefaultApplication(): Application|null;
 }

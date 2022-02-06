@@ -50,7 +50,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function select($field, ?string $resource = null): self;
+    public function select(string|array $field, string|null $resource = null): static;
 
     /**
      * Select a raw expression
@@ -68,7 +68,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function selectRaw(string $expression, array $bindings = []): self;
+    public function selectRaw(string $expression, array $bindings = []): static;
 
     /**
      * Add a "where" condition or filter
@@ -102,10 +102,10 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function where($field, $operator = null, $value = null): self;
+    public function where(string|array $field, mixed $operator = null, mixed $value = null): static;
 
     /**
-     * Add a "or where" condition or filter
+     * Add an "or where" condition or filter
      *
      * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
      *
@@ -117,7 +117,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function orWhere($field, $operator = null, $value = null): self;
+    public function orWhere(string|array $field, mixed $operator = null, mixed $value = null): static;
 
     /**
      * Add a raw "where" condition or filter
@@ -135,7 +135,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function whereRaw(string $query, array $bindings = []): self;
+    public function whereRaw(string $query, array $bindings = []): static;
 
     /**
      * Add a raw "or where" condition or filter
@@ -147,7 +147,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function orWhereRaw(string $query, array $bindings = []): self;
+    public function orWhereRaw(string $query, array $bindings = []): static;
 
     /**
      * Add a "where datetime" condition or filter
@@ -158,10 +158,10 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function whereDatetime(string $field, $operator = null, $value = null): self;
+    public function whereDatetime(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static;
 
     /**
-     * Add a "or where datetime" condition or filter
+     * Add an "or where datetime" condition or filter
      *
      * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
      *
@@ -171,7 +171,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function orWhereDatetime(string $field, $operator = null, $value = null): self;
+    public function orWhereDatetime(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static;
 
     /**
      * Add a "where date" condition or filter
@@ -182,7 +182,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function whereDate(string $field, $operator = null, $value = null): self;
+    public function whereDate(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static;
 
     /**
      * Add a "or where date" condition or filter
@@ -195,7 +195,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function orWhereDate(string $field, $operator = null, $value = null): self;
+    public function orWhereDate(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static;
 
     /**
      * Add a "where year" condition or filter
@@ -206,10 +206,10 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function whereYear(string $field, $operator = null, $value = null): self;
+    public function whereYear(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static;
 
     /**
-     * Add a "or where year" condition or filter
+     * Add an "or where year" condition or filter
      *
      * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
      *
@@ -219,7 +219,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function orWhereYear(string $field, $operator = null, $value = null): self;
+    public function orWhereYear(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static;
 
     /**
      * Add a "where month" condition or filter
@@ -230,10 +230,10 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function whereMonth(string $field, $operator = null, $value = null): self;
+    public function whereMonth(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static;
 
     /**
-     * Add a "or where month" condition or filter
+     * Add an "or where month" condition or filter
      *
      * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
      *
@@ -243,7 +243,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function orWhereMonth(string $field, $operator = null, $value = null): self;
+    public function orWhereMonth(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static;
 
     /**
      * Add a "where day" condition or filter
@@ -254,10 +254,10 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function whereDay(string $field, $operator = null, $value = null): self;
+    public function whereDay(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static;
 
     /**
-     * Add a "or where day" condition or filter
+     * Add an "or where day" condition or filter
      *
      * CAUTION: Many APIs do not support "or" conjunctions via Http Query strings.
      *
@@ -267,7 +267,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function orWhereDay(string $field, $operator = null, $value = null): self;
+    public function orWhereDay(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static;
 
     /**
      * Add a "where time" condition or filter
@@ -278,7 +278,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function whereTime(string $field, $operator = null, $value = null): self;
+    public function whereTime(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static;
 
     /**
      * Add a "or where time" condition or filter
@@ -291,7 +291,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function orWhereTime(string $field, $operator = null, $value = null): self;
+    public function orWhereTime(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static;
 
     /**
      * Include one or more related resources in the response
@@ -313,7 +313,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function include($resource): self;
+    public function include(string|array $resource): static;
 
     /**
      * Limit the amount of results to be returned
@@ -326,7 +326,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function limit(int $amount): self;
+    public function limit(int $amount): static;
 
     /**
      * Skip over given amount of results
@@ -339,7 +339,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function offset(int $offset): self;
+    public function offset(int $offset): static;
 
     /**
      * Alias for {@see limit}
@@ -348,7 +348,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function take(int $amount): self;
+    public function take(int $amount): static;
 
     /**
      * Alias for {@see offset}
@@ -357,7 +357,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function skip(int $offset): self;
+    public function skip(int $offset): static;
 
     /**
      * Return result for requested page number
@@ -374,7 +374,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function page(int $number, ?int $size = null): self;
+    public function page(int $number, int|null $size = null): static;
 
     /**
      * Set amount of results to be returned per page
@@ -389,7 +389,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function show(?int $amount = null): self;
+    public function show(int|null $amount = null): static;
 
     /**
      * Order results by given field or fields
@@ -418,7 +418,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function orderBy($field, string $direction = self::ASCENDING): self;
+    public function orderBy(string|array $field, string $direction = self::ASCENDING): static;
 
     /**
      * Add a raw expression
@@ -433,7 +433,7 @@ interface Builder extends Identifiers,
      *
      * @return self
      */
-    public function raw(string $expression, array $bindings = []): self;
+    public function raw(string $expression, array $bindings = []): static;
 
     /**
      * Build this http query

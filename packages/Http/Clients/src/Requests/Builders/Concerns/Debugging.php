@@ -11,6 +11,11 @@ use Symfony\Component\VarDumper\VarDumper;
 /**
  * Concerns Debugging
  *
+ * @see Builder
+ * @see Builder::debug
+ * @see Builder::dd
+ * @see Builder::debugCallback
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders\Concerns
  */
@@ -28,7 +33,7 @@ trait Debugging
     /**
      * @inheritDoc
      */
-    public function debug(?callable $callback = null): Builder
+    public function debug(callable|null $callback = null): static
     {
         $callback = $callback ?? $this->makeDumpCallback();
 
@@ -38,7 +43,7 @@ trait Debugging
     /**
      * @inheritDoc
      */
-    public function dd(?callable $callback = null): Builder
+    public function dd(callable|null $callback = null): static
     {
         $callback = $callback ?? $this->makeDumpAndDieCallback();
 
@@ -134,7 +139,7 @@ trait Debugging
             // Dump...
             VarDumper::dump($this->makeDebugContext($type, $message));
 
-            // Exist script, if original handler is null. Otherwise
+            // Exist script, if original handler is null. Otherwise,
             // we have to assume that something else is going on, e.g.
             // a running test or other special kind of debugging.
             if (null === $originalHandler) {

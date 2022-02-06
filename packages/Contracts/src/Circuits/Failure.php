@@ -24,7 +24,7 @@ interface Failure extends HasContext,
      *
      * @return string|null
      */
-    public function reason(): ?string;
+    public function reason(): string|null;
 
     /**
      * Date and time of when this failure was reported

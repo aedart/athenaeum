@@ -17,7 +17,7 @@ trait OrganisationTrait
      *
      * @var string|null
      */
-    protected ?string $organisation = null;
+    protected string|null $organisation = null;
 
     /**
      * Set organisation
@@ -26,7 +26,7 @@ trait OrganisationTrait
      *
      * @return self
      */
-    public function setOrganisation(?string $name)
+    public function setOrganisation(string|null $name): static
     {
         $this->organisation = $name;
 
@@ -36,14 +36,14 @@ trait OrganisationTrait
     /**
      * Get organisation
      *
-     * If no "organisation" value set, method
-     * sets and returns a default "organisation".
+     * If no organisation value set, method
+     * sets and returns a default organisation.
      *
      * @see getDefaultOrganisation()
      *
      * @return string|null organisation or null if no organisation has been set
      */
-    public function getOrganisation(): ?string
+    public function getOrganisation(): string|null
     {
         if (!$this->hasOrganisation()) {
             $this->setOrganisation($this->getDefaultOrganisation());
@@ -52,9 +52,9 @@ trait OrganisationTrait
     }
 
     /**
-     * Check if "organisation" has been set
+     * Check if organisation has been set
      *
-     * @return bool True if "organisation" has been set, false if not
+     * @return bool True if organisation has been set, false if not
      */
     public function hasOrganisation(): bool
     {
@@ -62,11 +62,11 @@ trait OrganisationTrait
     }
 
     /**
-     * Get a default "organisation" value, if any is available
+     * Get a default organisation value, if any is available
      *
-     * @return string|null Default "organisation" value or null if no default value is available
+     * @return string|null Default organisation value or null if no default value is available
      */
-    public function getDefaultOrganisation(): ?string
+    public function getDefaultOrganisation(): string|null
     {
         return null;
     }

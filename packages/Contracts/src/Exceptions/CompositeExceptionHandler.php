@@ -18,13 +18,13 @@ interface CompositeExceptionHandler extends ExceptionHandler
     /**
      * Add a "leaf" exception handler
      *
-     * @param string|ExceptionHandler $handler Class path or instance
-     *
-     * @throws Throwable If given handler is invalid
+     * @param string|ExceptionHandler  $handler Class path or exception handler instance
      *
      * @return self
+     *
+     * @throws Throwable If given handler is invalid
      */
-    public function addHandler($handler);
+    public function addHandler(ExceptionHandler|string $handler): static;
 
     /**
      * Set the "leaf" exception handlers
@@ -35,7 +35,7 @@ interface CompositeExceptionHandler extends ExceptionHandler
      *
      * @throws Throwable If a handler is invalid
      */
-    public function setHandlers(array $handlers = []);
+    public function setHandlers(array $handlers = []): static;
 
     /**
      * Returns the list of "leaf" exception handlers

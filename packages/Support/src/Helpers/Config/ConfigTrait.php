@@ -20,7 +20,7 @@ trait ConfigTrait
      *
      * @var Repository|null
      */
-    protected ?Repository $config = null;
+    protected Repository|null $config = null;
 
     /**
      * Set config
@@ -29,7 +29,7 @@ trait ConfigTrait
      *
      * @return self
      */
-    public function setConfig(?Repository $repository)
+    public function setConfig(Repository|null $repository): static
     {
         $this->config = $repository;
 
@@ -47,7 +47,7 @@ trait ConfigTrait
      *
      * @return Repository|null config or null if none config has been set
      */
-    public function getConfig(): ?Repository
+    public function getConfig(): Repository|null
     {
         if (!$this->hasConfig()) {
             $this->setConfig($this->getDefaultConfig());
@@ -70,7 +70,7 @@ trait ConfigTrait
      *
      * @return Repository|null A default config value or Null if no default value is available
      */
-    public function getDefaultConfig(): ?Repository
+    public function getDefaultConfig(): Repository|null
     {
         return Config::getFacadeRoot();
     }

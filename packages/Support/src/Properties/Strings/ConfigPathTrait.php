@@ -17,7 +17,7 @@ trait ConfigPathTrait
      *
      * @var string|null
      */
-    protected ?string $configPath = null;
+    protected string|null $configPath = null;
 
     /**
      * Set config path
@@ -26,7 +26,7 @@ trait ConfigPathTrait
      *
      * @return self
      */
-    public function setConfigPath(?string $path)
+    public function setConfigPath(string|null $path): static
     {
         $this->configPath = $path;
 
@@ -36,14 +36,14 @@ trait ConfigPathTrait
     /**
      * Get config path
      *
-     * If no "config path" value set, method
-     * sets and returns a default "config path".
+     * If no config path value set, method
+     * sets and returns a default config path.
      *
      * @see getDefaultConfigPath()
      *
      * @return string|null config path or null if no config path has been set
      */
-    public function getConfigPath(): ?string
+    public function getConfigPath(): string|null
     {
         if (!$this->hasConfigPath()) {
             $this->setConfigPath($this->getDefaultConfigPath());
@@ -52,9 +52,9 @@ trait ConfigPathTrait
     }
 
     /**
-     * Check if "config path" has been set
+     * Check if config path has been set
      *
-     * @return bool True if "config path" has been set, false if not
+     * @return bool True if config path has been set, false if not
      */
     public function hasConfigPath(): bool
     {
@@ -62,11 +62,11 @@ trait ConfigPathTrait
     }
 
     /**
-     * Get a default "config path" value, if any is available
+     * Get a default config path value, if any is available
      *
-     * @return string|null Default "config path" value or null if no default value is available
+     * @return string|null Default config path value or null if no default value is available
      */
-    public function getDefaultConfigPath(): ?string
+    public function getDefaultConfigPath(): string|null
     {
         return null;
     }

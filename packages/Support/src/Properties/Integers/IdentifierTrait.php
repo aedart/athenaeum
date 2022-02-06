@@ -17,7 +17,7 @@ trait IdentifierTrait
      *
      * @var int|null
      */
-    protected ?int $identifier = null;
+    protected int|null $identifier = null;
 
     /**
      * Set identifier
@@ -26,7 +26,7 @@ trait IdentifierTrait
      *
      * @return self
      */
-    public function setIdentifier(?int $identifier)
+    public function setIdentifier(int|null $identifier): static
     {
         $this->identifier = $identifier;
 
@@ -36,14 +36,14 @@ trait IdentifierTrait
     /**
      * Get identifier
      *
-     * If no "identifier" value set, method
-     * sets and returns a default "identifier".
+     * If no identifier value set, method
+     * sets and returns a default identifier.
      *
      * @see getDefaultIdentifier()
      *
      * @return int|null identifier or null if no identifier has been set
      */
-    public function getIdentifier(): ?int
+    public function getIdentifier(): int|null
     {
         if (!$this->hasIdentifier()) {
             $this->setIdentifier($this->getDefaultIdentifier());
@@ -52,9 +52,9 @@ trait IdentifierTrait
     }
 
     /**
-     * Check if "identifier" has been set
+     * Check if identifier has been set
      *
-     * @return bool True if "identifier" has been set, false if not
+     * @return bool True if identifier has been set, false if not
      */
     public function hasIdentifier(): bool
     {
@@ -62,11 +62,11 @@ trait IdentifierTrait
     }
 
     /**
-     * Get a default "identifier" value, if any is available
+     * Get a default identifier value, if any is available
      *
-     * @return int|null Default "identifier" value or null if no default value is available
+     * @return int|null Default identifier value or null if no default value is available
      */
-    public function getDefaultIdentifier(): ?int
+    public function getDefaultIdentifier(): int|null
     {
         return null;
     }

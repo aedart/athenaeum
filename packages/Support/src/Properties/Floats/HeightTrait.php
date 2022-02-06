@@ -17,7 +17,7 @@ trait HeightTrait
      *
      * @var float|null
      */
-    protected ?float $height = null;
+    protected float|null $height = null;
 
     /**
      * Set height
@@ -26,7 +26,7 @@ trait HeightTrait
      *
      * @return self
      */
-    public function setHeight(?float $amount)
+    public function setHeight(float|null $amount): static
     {
         $this->height = $amount;
 
@@ -36,14 +36,14 @@ trait HeightTrait
     /**
      * Get height
      *
-     * If no "height" value set, method
-     * sets and returns a default "height".
+     * If no height value set, method
+     * sets and returns a default height.
      *
      * @see getDefaultHeight()
      *
      * @return float|null height or null if no height has been set
      */
-    public function getHeight(): ?float
+    public function getHeight(): float|null
     {
         if (!$this->hasHeight()) {
             $this->setHeight($this->getDefaultHeight());
@@ -52,9 +52,9 @@ trait HeightTrait
     }
 
     /**
-     * Check if "height" has been set
+     * Check if height has been set
      *
-     * @return bool True if "height" has been set, false if not
+     * @return bool True if height has been set, false if not
      */
     public function hasHeight(): bool
     {
@@ -62,11 +62,11 @@ trait HeightTrait
     }
 
     /**
-     * Get a default "height" value, if any is available
+     * Get a default height value, if any is available
      *
-     * @return float|null Default "height" value or null if no default value is available
+     * @return float|null Default height value or null if no default value is available
      */
-    public function getDefaultHeight(): ?float
+    public function getDefaultHeight(): float|null
     {
         return null;
     }

@@ -4,6 +4,7 @@ namespace Aedart\Testing\Laravel;
 
 use Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration;
 use Aedart\Testing\Laravel\Database\MigrateProcessor;
+use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Facade;
@@ -44,7 +45,7 @@ trait ApplicationInitiator
      *
      * @return self
      */
-    public function startApplication()
+    public function startApplication(): static
     {
         // Abort if already running
         if ($this->hasApplicationBeenStarted()) {
@@ -161,7 +162,7 @@ trait ApplicationInitiator
      *
      * @return self
      */
-    protected function setApplicationEnvironment(string $environment)
+    protected function setApplicationEnvironment(string $environment): static
     {
         putenv('APP_ENV=' . $environment);
 
@@ -190,7 +191,7 @@ trait ApplicationInitiator
      *
      * @return Closure|string|null
      */
-    protected function resolveConfigurationLoaderBinding()
+    protected function resolveConfigurationLoaderBinding(): Closure|string|null
     {
         return function () {
             return (new LoadSpecifiedConfiguration())

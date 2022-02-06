@@ -79,7 +79,7 @@ class CustomField extends RedmineApiResource implements
      *
      * @return HasMany<Issue>
      */
-    public function issuesMatching($value): HasMany
+    public function issuesMatching(string|int $value): HasMany
     {
         $filterKey = 'cf_' . $this->id();
 

@@ -27,12 +27,12 @@ trait HttpUri
      *
      * @var UriInterface|null
      */
-    protected ?UriInterface $uri;
+    protected UriInterface|null $uri;
 
     /**
      * @inheritdoc
      */
-    public function withUri($uri): Builder
+    public function withUri(string|UriInterface $uri): static
     {
         // Build a new query, if a string uri has been provided.
         if (is_string($uri)) {
@@ -59,7 +59,7 @@ trait HttpUri
     /**
      * @inheritdoc
      */
-    public function getUri(): ?UriInterface
+    public function getUri(): UriInterface|null
     {
         return $this->uri;
     }
@@ -67,7 +67,7 @@ trait HttpUri
     /**
      * @inheritdoc
      */
-    public function from($uri): Builder
+    public function from(string|UriInterface $uri): static
     {
         return $this->withUri($uri);
     }
@@ -75,7 +75,7 @@ trait HttpUri
     /**
      * @inheritdoc
      */
-    public function into($uri): Builder
+    public function into(string|UriInterface $uri): static
     {
         return $this->withUri($uri);
     }

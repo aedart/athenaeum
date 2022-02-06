@@ -17,7 +17,7 @@ trait ChoicesTrait
      *
      * @var array|null
      */
-    protected ?array $choices = null;
+    protected array|null $choices = null;
 
     /**
      * Set choices
@@ -26,7 +26,7 @@ trait ChoicesTrait
      *
      * @return self
      */
-    public function setChoices(?array $list)
+    public function setChoices(array|null $list): static
     {
         $this->choices = $list;
 
@@ -36,14 +36,14 @@ trait ChoicesTrait
     /**
      * Get choices
      *
-     * If no "choices" value set, method
-     * sets and returns a default "choices".
+     * If no choices value set, method
+     * sets and returns a default choices.
      *
      * @see getDefaultChoices()
      *
      * @return array|null choices or null if no choices has been set
      */
-    public function getChoices(): ?array
+    public function getChoices(): array|null
     {
         if (!$this->hasChoices()) {
             $this->setChoices($this->getDefaultChoices());
@@ -52,9 +52,9 @@ trait ChoicesTrait
     }
 
     /**
-     * Check if "choices" has been set
+     * Check if choices has been set
      *
-     * @return bool True if "choices" has been set, false if not
+     * @return bool True if choices has been set, false if not
      */
     public function hasChoices(): bool
     {
@@ -62,11 +62,11 @@ trait ChoicesTrait
     }
 
     /**
-     * Get a default "choices" value, if any is available
+     * Get a default choices value, if any is available
      *
-     * @return array|null Default "choices" value or null if no default value is available
+     * @return array|null Default choices value or null if no default value is available
      */
-    public function getDefaultChoices(): ?array
+    public function getDefaultChoices(): array|null
     {
         return null;
     }

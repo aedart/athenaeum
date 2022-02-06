@@ -3,6 +3,8 @@
 namespace Aedart\Core\Bootstrappers;
 
 use Aedart\Config\Traits\ConfigLoaderTrait;
+use Aedart\Contracts\Config\Loaders\Exceptions\InvalidPathException;
+use Aedart\Contracts\Config\Parsers\Exceptions\FileParserException;
 use Aedart\Contracts\Core\Application;
 use Aedart\Contracts\Core\Helpers\CanBeBootstrapped;
 
@@ -18,6 +20,9 @@ class LoadConfiguration implements CanBeBootstrapped
 
     /**
      * @inheritDoc
+     *
+     * @throws InvalidPathException
+     * @throws FileParserException
      */
     public function bootstrap(Application $application): void
     {

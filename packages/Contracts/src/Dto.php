@@ -10,45 +10,17 @@ use Illuminate\Contracts\Support\Jsonable;
 use JsonException;
 use JsonSerializable;
 use Serializable;
+use Stringable;
 
 /**
  * Data Transfer Object (DTO)
  *
- * <br />
- *
  * Variation / Interpretation of the Data Transfer Object (DTO) design pattern (Distribution Pattern).
  * A DTO is responsible for;
  *
- * <ul>
- *      <li>Holding data (properties / attributes) for remote calls, e.g. client server communication</li>
- *      <li>Be serializable</li>
- *      <li>Contain NO additional behaviour, e.g. business logic</li>
- * </ul>
- *
- * This DTO ensures that its belonging properties / attributes can be <b>overloaded</b>,
- * if those properties / attributes have corresponding <b>getters and setters</b> (accessors and mutators).
- *
- * <br />
- *
- * In this variation of the DTO, <b>serialization defaults to Json</b>.
- *
- * <br />
- *
- * Each DTO holds an instance of a Inversion of Control (<b>IoC</b>) service container, which can be
- * used for resolving nested dependencies, when populating the DTO with data. E.g. when a DTO's property is a
- * class object instance type. However, this is implementation specific.
- *
- * <br />
- *
- * When to use a DTO:
- *
- * <ul>
- *      <li>When there is a strong need to interface DTOs, e.g. what properties must be available via getters and setters</li>
- *      <li>When you need to encapsulate data that needs to be communicated between systems and or component instances</li>
- * </ul>
- *
- * There are probably many more reasons why and when you should use DTOs. However, you should know that <b>using DTOs can / will
- * increase complexity of your project!</b>
+ * - Holding data (properties / attributes) for remote calls, e.g. client server communication
+ * - Be serializable
+ * - Contain NO additional behaviour, e.g. business logic
  *
  * @link https://martinfowler.com/eaaCatalog/dataTransferObject.html
  * @link https://en.wikipedia.org/wiki/Data_transfer_object
@@ -66,7 +38,8 @@ interface Dto extends ArrayAccess,
     Arrayable,
     Populatable,
     Jsonable,
-    JsonSerializable
+    JsonSerializable,
+    Stringable
 {
     /**
      * Returns a list of the properties / attributes that
@@ -83,7 +56,7 @@ interface Dto extends ArrayAccess,
      *
      * @return Container|null IoC service Container or null if none defined
      */
-    public function container(): ?Container;
+    public function container(): Container|null;
 
     /**
      * Returns a new instance of this Dto
@@ -93,7 +66,7 @@ interface Dto extends ArrayAccess,
      *
      * @return static
      */
-    public static function makeNew(array $properties = [], ?Container $container = null);
+    public static function makeNew(array $properties = [], Container|null $container = null): static;
 
     /**
      * Create a new populated instance of this Dto from a
@@ -105,5 +78,5 @@ interface Dto extends ArrayAccess,
      *
      * @throws JsonException
      */
-    public static function fromJson(string $json);
+    public static function fromJson(string $json): static;
 }

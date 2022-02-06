@@ -19,31 +19,31 @@ interface GenderAware
      *
      * @return self
      */
-    public function setGender(?string $identity);
+    public function setGender(string|null $identity): static;
 
     /**
      * Get gender
      *
-     * If no "gender" value set, method
-     * sets and returns a default "gender".
+     * If no gender value set, method
+     * sets and returns a default gender.
      *
      * @see getDefaultGender()
      *
      * @return string|null gender or null if no gender has been set
      */
-    public function getGender(): ?string;
+    public function getGender(): string|null;
 
     /**
-     * Check if "gender" has been set
+     * Check if gender has been set
      *
-     * @return bool True if "gender" has been set, false if not
+     * @return bool True if gender has been set, false if not
      */
     public function hasGender(): bool;
 
     /**
-     * Get a default "gender" value, if any is available
+     * Get a default gender value, if any is available
      *
-     * @return string|null Default "gender" value or null if no default value is available
+     * @return string|null Default gender value or null if no default value is available
      */
-    public function getDefaultGender(): ?string;
+    public function getDefaultGender(): string|null;
 }

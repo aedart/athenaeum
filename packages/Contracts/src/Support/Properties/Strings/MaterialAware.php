@@ -19,31 +19,31 @@ interface MaterialAware
      *
      * @return self
      */
-    public function setMaterial(?string $identifier);
+    public function setMaterial(string|null $identifier): static;
 
     /**
      * Get material
      *
-     * If no "material" value set, method
-     * sets and returns a default "material".
+     * If no material value set, method
+     * sets and returns a default material.
      *
      * @see getDefaultMaterial()
      *
      * @return string|null material or null if no material has been set
      */
-    public function getMaterial(): ?string;
+    public function getMaterial(): string|null;
 
     /**
-     * Check if "material" has been set
+     * Check if material has been set
      *
-     * @return bool True if "material" has been set, false if not
+     * @return bool True if material has been set, false if not
      */
     public function hasMaterial(): bool;
 
     /**
-     * Get a default "material" value, if any is available
+     * Get a default material value, if any is available
      *
-     * @return string|null Default "material" value or null if no default value is available
+     * @return string|null Default material value or null if no default value is available
      */
-    public function getDefaultMaterial(): ?string;
+    public function getDefaultMaterial(): string|null;
 }

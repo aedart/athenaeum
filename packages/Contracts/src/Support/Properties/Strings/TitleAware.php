@@ -19,31 +19,31 @@ interface TitleAware
      *
      * @return self
      */
-    public function setTitle(?string $title);
+    public function setTitle(string|null $title): static;
 
     /**
      * Get title
      *
-     * If no "title" value set, method
-     * sets and returns a default "title".
+     * If no title value set, method
+     * sets and returns a default title.
      *
      * @see getDefaultTitle()
      *
      * @return string|null title or null if no title has been set
      */
-    public function getTitle(): ?string;
+    public function getTitle(): string|null;
 
     /**
-     * Check if "title" has been set
+     * Check if title has been set
      *
-     * @return bool True if "title" has been set, false if not
+     * @return bool True if title has been set, false if not
      */
     public function hasTitle(): bool;
 
     /**
-     * Get a default "title" value, if any is available
+     * Get a default title value, if any is available
      *
-     * @return string|null Default "title" value or null if no default value is available
+     * @return string|null Default title value or null if no default value is available
      */
-    public function getDefaultTitle(): ?string;
+    public function getDefaultTitle(): string|null;
 }

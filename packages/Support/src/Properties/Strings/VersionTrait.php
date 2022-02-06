@@ -17,7 +17,7 @@ trait VersionTrait
      *
      * @var string|null
      */
-    protected ?string $version = null;
+    protected string|null $version = null;
 
     /**
      * Set version
@@ -26,7 +26,7 @@ trait VersionTrait
      *
      * @return self
      */
-    public function setVersion(?string $version)
+    public function setVersion(string|null $version): static
     {
         $this->version = $version;
 
@@ -36,14 +36,14 @@ trait VersionTrait
     /**
      * Get version
      *
-     * If no "version" value set, method
-     * sets and returns a default "version".
+     * If no version value set, method
+     * sets and returns a default version.
      *
      * @see getDefaultVersion()
      *
      * @return string|null version or null if no version has been set
      */
-    public function getVersion(): ?string
+    public function getVersion(): string|null
     {
         if (!$this->hasVersion()) {
             $this->setVersion($this->getDefaultVersion());
@@ -52,9 +52,9 @@ trait VersionTrait
     }
 
     /**
-     * Check if "version" has been set
+     * Check if version has been set
      *
-     * @return bool True if "version" has been set, false if not
+     * @return bool True if version has been set, false if not
      */
     public function hasVersion(): bool
     {
@@ -62,11 +62,11 @@ trait VersionTrait
     }
 
     /**
-     * Get a default "version" value, if any is available
+     * Get a default version value, if any is available
      *
-     * @return string|null Default "version" value or null if no default value is available
+     * @return string|null Default version value or null if no default value is available
      */
-    public function getDefaultVersion(): ?string
+    public function getDefaultVersion(): string|null
     {
         return null;
     }

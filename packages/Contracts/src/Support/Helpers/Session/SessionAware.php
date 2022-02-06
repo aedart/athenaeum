@@ -19,7 +19,7 @@ interface SessionAware
      *
      * @return self
      */
-    public function setSession(?Session $session);
+    public function setSession(Session|null $session): static;
 
     /**
      * Get session
@@ -32,7 +32,7 @@ interface SessionAware
      *
      * @return Session|null session or null if none session has been set
      */
-    public function getSession(): ?Session;
+    public function getSession(): Session|null;
 
     /**
      * Check if session has been set
@@ -46,5 +46,5 @@ interface SessionAware
      *
      * @return Session|null A default session value or Null if no default value is available
      */
-    public function getDefaultSession(): ?Session;
+    public function getDefaultSession(): Session|null;
 }

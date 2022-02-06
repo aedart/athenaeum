@@ -17,7 +17,7 @@ trait CodeTrait
      *
      * @var string|null
      */
-    protected ?string $code = null;
+    protected string|null $code = null;
 
     /**
      * Set code
@@ -26,7 +26,7 @@ trait CodeTrait
      *
      * @return self
      */
-    public function setCode(?string $code)
+    public function setCode(string|null $code): static
     {
         $this->code = $code;
 
@@ -36,14 +36,14 @@ trait CodeTrait
     /**
      * Get code
      *
-     * If no "code" value set, method
-     * sets and returns a default "code".
+     * If no code value set, method
+     * sets and returns a default code.
      *
      * @see getDefaultCode()
      *
      * @return string|null code or null if no code has been set
      */
-    public function getCode(): ?string
+    public function getCode(): string|null
     {
         if (!$this->hasCode()) {
             $this->setCode($this->getDefaultCode());
@@ -52,9 +52,9 @@ trait CodeTrait
     }
 
     /**
-     * Check if "code" has been set
+     * Check if code has been set
      *
-     * @return bool True if "code" has been set, false if not
+     * @return bool True if code has been set, false if not
      */
     public function hasCode(): bool
     {
@@ -62,11 +62,11 @@ trait CodeTrait
     }
 
     /**
-     * Get a default "code" value, if any is available
+     * Get a default code value, if any is available
      *
-     * @return string|null Default "code" value or null if no default value is available
+     * @return string|null Default code value or null if no default value is available
      */
-    public function getDefaultCode(): ?string
+    public function getDefaultCode(): string|null
     {
         return null;
     }

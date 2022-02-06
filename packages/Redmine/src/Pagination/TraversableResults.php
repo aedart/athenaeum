@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Redmine\ApiResource;
 use Aedart\Contracts\Redmine\TraversableResults as TraversableResultsInterface;
 use Aedart\Redmine\Pagination\Iterators\ResultsIterator;
+use Traversable;
 
 /**
  * Traversable Results
@@ -37,7 +38,7 @@ class TraversableResults implements TraversableResultsInterface
     /**
      * @inheritDoc
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return $this->iterator;
     }
@@ -45,7 +46,7 @@ class TraversableResults implements TraversableResultsInterface
     /**
      * @inheritDoc
      */
-    public function count()
+    public function count(): int
     {
         return $this->iterator->count();
     }

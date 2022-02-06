@@ -19,7 +19,7 @@ interface DbAware
      *
      * @return self
      */
-    public function setDb(?ConnectionInterface $connection);
+    public function setDb(ConnectionInterface|null $connection): static;
 
     /**
      * Get db
@@ -32,7 +32,7 @@ interface DbAware
      *
      * @return ConnectionInterface|null db or null if none db has been set
      */
-    public function getDb(): ?ConnectionInterface;
+    public function getDb(): ConnectionInterface|null;
 
     /**
      * Check if db has been set
@@ -46,5 +46,5 @@ interface DbAware
      *
      * @return ConnectionInterface|null A default db value or Null if no default value is available
      */
-    public function getDefaultDb(): ?ConnectionInterface;
+    public function getDefaultDb(): ConnectionInterface|null;
 }

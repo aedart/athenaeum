@@ -20,7 +20,7 @@ trait FakerTrait
      *
      * @var Generator|null
      */
-    protected ?Generator $faker = null;
+    protected Generator|null $faker = null;
 
     /**
      * Set faker
@@ -29,7 +29,7 @@ trait FakerTrait
      *
      * @return self
      */
-    public function setFaker(?Generator $generator)
+    public function setFaker(Generator|null $generator): static
     {
         $this->faker = $generator;
 
@@ -45,7 +45,7 @@ trait FakerTrait
      *
      * @return Generator|null faker or null if none faker has been set
      */
-    public function getFaker(): ?Generator
+    public function getFaker(): Generator|null
     {
         if (!$this->hasFaker()) {
             $this->setFaker($this->getDefaultFaker());
@@ -68,7 +68,7 @@ trait FakerTrait
      *
      * @return Generator|null A default faker value or Null if no default value is available
      */
-    public function getDefaultFaker(): ?Generator
+    public function getDefaultFaker(): Generator|null
     {
         return Factory::create();
     }

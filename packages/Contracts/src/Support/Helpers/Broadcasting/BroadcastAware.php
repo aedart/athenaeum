@@ -19,7 +19,7 @@ interface BroadcastAware
      *
      * @return self
      */
-    public function setBroadcast(?Broadcaster $broadcaster);
+    public function setBroadcast(Broadcaster|null $broadcaster): static;
 
     /**
      * Get broadcast
@@ -32,7 +32,7 @@ interface BroadcastAware
      *
      * @return Broadcaster|null broadcast or null if none broadcast has been set
      */
-    public function getBroadcast(): ?Broadcaster;
+    public function getBroadcast(): Broadcaster|null;
 
     /**
      * Check if broadcast has been set
@@ -46,5 +46,5 @@ interface BroadcastAware
      *
      * @return Broadcaster|null A default broadcast value or Null if no default value is available
      */
-    public function getDefaultBroadcast(): ?Broadcaster;
+    public function getDefaultBroadcast(): Broadcaster|null;
 }

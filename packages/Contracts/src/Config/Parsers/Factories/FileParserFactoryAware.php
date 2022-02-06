@@ -17,7 +17,7 @@ interface FileParserFactoryAware
      *
      * @return self
      */
-    public function setFileParserFactory(?FileParserFactory $factory);
+    public function setFileParserFactory(FileParserFactory|null $factory): static;
 
     /**
      * Get file parser factory
@@ -30,7 +30,7 @@ interface FileParserFactoryAware
      *
      * @return FileParserFactory|null file parser factory or null if none file parser factory has been set
      */
-    public function getFileParserFactory(): ?FileParserFactory;
+    public function getFileParserFactory(): FileParserFactory|null;
 
     /**
      * Check if file parser factory has been set
@@ -44,5 +44,5 @@ interface FileParserFactoryAware
      *
      * @return FileParserFactory|null A default file parser factory value or Null if no default value is available
      */
-    public function getDefaultFileParserFactory(): ?FileParserFactory;
+    public function getDefaultFileParserFactory(): FileParserFactory|null;
 }

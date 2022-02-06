@@ -19,7 +19,7 @@ interface MailerAware
      *
      * @return self
      */
-    public function setMailer(?Mailer $mailer);
+    public function setMailer(Mailer|null $mailer): static;
 
     /**
      * Get mailer
@@ -32,7 +32,7 @@ interface MailerAware
      *
      * @return Mailer|null mailer or null if none mailer has been set
      */
-    public function getMailer(): ?Mailer;
+    public function getMailer(): Mailer|null;
 
     /**
      * Check if mailer has been set
@@ -46,5 +46,5 @@ interface MailerAware
      *
      * @return Mailer|null A default mailer value or Null if no default value is available
      */
-    public function getDefaultMailer(): ?Mailer;
+    public function getDefaultMailer(): Mailer|null;
 }

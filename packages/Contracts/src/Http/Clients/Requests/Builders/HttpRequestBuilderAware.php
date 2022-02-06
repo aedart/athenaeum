@@ -19,7 +19,7 @@ interface HttpRequestBuilderAware
      *
      * @return self
      */
-    public function setHttpRequestBuilder(?Builder $builder);
+    public function setHttpRequestBuilder(Builder|null $builder): static;
 
     /**
      * Get http request builder
@@ -30,7 +30,7 @@ interface HttpRequestBuilderAware
      *
      * @return Builder|null http request builder or null if none http request builder has been set
      */
-    public function getHttpRequestBuilder(): ?Builder;
+    public function getHttpRequestBuilder(): Builder|null;
 
     /**
      * Check if http request builder has been set
@@ -44,5 +44,5 @@ interface HttpRequestBuilderAware
      *
      * @return Builder|null A default http request builder value or Null if no default value is available
      */
-    public function getDefaultHttpRequestBuilder(): ?Builder;
+    public function getDefaultHttpRequestBuilder(): Builder|null;
 }

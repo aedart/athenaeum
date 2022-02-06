@@ -20,7 +20,7 @@ trait QueueFactoryTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $queueFactory = null;
+    protected Factory|null $queueFactory = null;
 
     /**
      * Set queue factory
@@ -29,7 +29,7 @@ trait QueueFactoryTrait
      *
      * @return self
      */
-    public function setQueueFactory(?Factory $factory)
+    public function setQueueFactory(Factory|null $factory): static
     {
         $this->queueFactory = $factory;
 
@@ -47,7 +47,7 @@ trait QueueFactoryTrait
      *
      * @return Factory|null queue factory or null if none queue factory has been set
      */
-    public function getQueueFactory(): ?Factory
+    public function getQueueFactory(): Factory|null
     {
         if (!$this->hasQueueFactory()) {
             $this->setQueueFactory($this->getDefaultQueueFactory());
@@ -70,7 +70,7 @@ trait QueueFactoryTrait
      *
      * @return Factory|null A default queue factory value or Null if no default value is available
      */
-    public function getDefaultQueueFactory(): ?Factory
+    public function getDefaultQueueFactory(): Factory|null
     {
         return Queue::getFacadeRoot();
     }

@@ -19,7 +19,7 @@ interface AuthFactoryAware
      *
      * @return self
      */
-    public function setAuthFactory(?Factory $factory);
+    public function setAuthFactory(Factory|null $factory): static;
 
     /**
      * Get auth factory
@@ -32,7 +32,7 @@ interface AuthFactoryAware
      *
      * @return Factory|null auth factory or null if none auth factory has been set
      */
-    public function getAuthFactory(): ?Factory;
+    public function getAuthFactory(): Factory|null;
 
     /**
      * Check if auth factory has been set
@@ -46,5 +46,5 @@ interface AuthFactoryAware
      *
      * @return Factory|null A default auth factory value or Null if no default value is available
      */
-    public function getDefaultAuthFactory(): ?Factory;
+    public function getDefaultAuthFactory(): Factory|null;
 }

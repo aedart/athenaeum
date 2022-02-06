@@ -21,7 +21,7 @@ interface Paginator
      *
      * @throws LogicException
      */
-    public function setTotal(int $total);
+    public function setTotal(int $total): static;
 
     /**
      * Set amount shown per page
@@ -32,7 +32,7 @@ interface Paginator
      *
      * @throws LogicException
      */
-    public function setLimit(int $limit);
+    public function setLimit(int $limit): static;
 
     /**
      * Set amount shown per page
@@ -45,7 +45,7 @@ interface Paginator
      *
      * @throws LogicException
      */
-    public function show(int $amount);
+    public function show(int $amount): static;
 
     /**
      * Set the offset that corresponds to the given page number
@@ -56,7 +56,7 @@ interface Paginator
      *
      * @throws LogicException
      */
-    public function setPage(int $page);
+    public function setPage(int $page): static;
 
     /**
      * Total amount of results
@@ -112,14 +112,14 @@ interface Paginator
      *
      * @return int|null Page number or null if there is no previous page
      */
-    public function previousPage(): ?int;
+    public function previousPage(): int|null;
 
     /**
      * Next page number
      *
      * @return int|null Page number or null if there is no next page
      */
-    public function nextPage(): ?int;
+    public function nextPage(): int|null;
 
     /**
      * Determine if there is a previous page with results

@@ -25,32 +25,14 @@ class FileParserFactory implements FileParserFactoryInterface
     public function make(string $type): FileParser
     {
         $type = strtolower(trim($type));
-        switch ($type) {
 
-            case PhpArray::getFileType():
-                return new PhpArray();
-                break;
-
-            case Json::getFileType():
-                return new Json();
-                break;
-
-            case Ini::getFileType():
-                return new Ini();
-                break;
-
-            case Yaml::getFileType():
-            case 'yaml':
-                return new Yaml();
-                break;
-
-            case Toml::getFileType():
-                return new Toml();
-                break;
-
-            default:
-                throw new NoFileParserFound(sprintf('No parser found for "%s"', $type));
-                break;
-        }
+        return match ($type) {
+            PhpArray::getFileType() => new PhpArray(),
+            Json::getFileType() => new Json(),
+            Ini::getFileType() => new Ini(),
+            Yaml::getFileType() => new Yaml(),
+            Toml::getFileType() => new Toml(),
+            default => throw new NoFileParserFound(sprintf('No parser found for "%s"', $type))
+        };
     }
 }

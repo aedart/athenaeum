@@ -20,7 +20,7 @@ trait BusTrait
      *
      * @var Dispatcher|null
      */
-    protected ?Dispatcher $bus = null;
+    protected Dispatcher|null $bus = null;
 
     /**
      * Set bus
@@ -29,7 +29,7 @@ trait BusTrait
      *
      * @return self
      */
-    public function setBus(?Dispatcher $dispatcher)
+    public function setBus(Dispatcher|null $dispatcher): static
     {
         $this->bus = $dispatcher;
 
@@ -47,7 +47,7 @@ trait BusTrait
      *
      * @return Dispatcher|null bus or null if none bus has been set
      */
-    public function getBus(): ?Dispatcher
+    public function getBus(): Dispatcher|null
     {
         if (!$this->hasBus()) {
             $this->setBus($this->getDefaultBus());
@@ -70,7 +70,7 @@ trait BusTrait
      *
      * @return Dispatcher|null A default bus value or Null if no default value is available
      */
-    public function getDefaultBus(): ?Dispatcher
+    public function getDefaultBus(): Dispatcher|null
     {
         return Bus::getFacadeRoot();
     }

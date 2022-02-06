@@ -17,7 +17,7 @@ trait ManufacturerTrait
      *
      * @var string|null
      */
-    protected ?string $manufacturer = null;
+    protected string|null $manufacturer = null;
 
     /**
      * Set manufacturer
@@ -26,7 +26,7 @@ trait ManufacturerTrait
      *
      * @return self
      */
-    public function setManufacturer(?string $identifier)
+    public function setManufacturer(string|null $identifier): static
     {
         $this->manufacturer = $identifier;
 
@@ -36,14 +36,14 @@ trait ManufacturerTrait
     /**
      * Get manufacturer
      *
-     * If no "manufacturer" value set, method
-     * sets and returns a default "manufacturer".
+     * If no manufacturer value set, method
+     * sets and returns a default manufacturer.
      *
      * @see getDefaultManufacturer()
      *
      * @return string|null manufacturer or null if no manufacturer has been set
      */
-    public function getManufacturer(): ?string
+    public function getManufacturer(): string|null
     {
         if (!$this->hasManufacturer()) {
             $this->setManufacturer($this->getDefaultManufacturer());
@@ -52,9 +52,9 @@ trait ManufacturerTrait
     }
 
     /**
-     * Check if "manufacturer" has been set
+     * Check if manufacturer has been set
      *
-     * @return bool True if "manufacturer" has been set, false if not
+     * @return bool True if manufacturer has been set, false if not
      */
     public function hasManufacturer(): bool
     {
@@ -62,11 +62,11 @@ trait ManufacturerTrait
     }
 
     /**
-     * Get a default "manufacturer" value, if any is available
+     * Get a default manufacturer value, if any is available
      *
-     * @return string|null Default "manufacturer" value or null if no default value is available
+     * @return string|null Default manufacturer value or null if no default value is available
      */
-    public function getDefaultManufacturer(): ?string
+    public function getDefaultManufacturer(): string|null
     {
         return null;
     }

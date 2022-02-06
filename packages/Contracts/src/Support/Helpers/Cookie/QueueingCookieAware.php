@@ -19,7 +19,7 @@ interface QueueingCookieAware
      *
      * @return self
      */
-    public function setQueueingCookie(?QueueingFactory $factory);
+    public function setQueueingCookie(QueueingFactory|null $factory): static;
 
     /**
      * Get queueing cookie
@@ -32,7 +32,7 @@ interface QueueingCookieAware
      *
      * @return QueueingFactory|null queueing cookie or null if none queueing cookie has been set
      */
-    public function getQueueingCookie(): ?QueueingFactory;
+    public function getQueueingCookie(): QueueingFactory|null;
 
     /**
      * Check if queueing cookie has been set
@@ -46,5 +46,5 @@ interface QueueingCookieAware
      *
      * @return QueueingFactory|null A default queueing cookie value or Null if no default value is available
      */
-    public function getDefaultQueueingCookie(): ?QueueingFactory;
+    public function getDefaultQueueingCookie(): QueueingFactory|null;
 }

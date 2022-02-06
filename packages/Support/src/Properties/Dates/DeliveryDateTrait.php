@@ -17,7 +17,7 @@ trait DeliveryDateTrait
      *
      * @var \DateTime|null
      */
-    protected ?\DateTime $deliveryDate = null;
+    protected \DateTime|null $deliveryDate = null;
 
     /**
      * Set delivery date
@@ -26,7 +26,7 @@ trait DeliveryDateTrait
      *
      * @return self
      */
-    public function setDeliveryDate(?\DateTime $date)
+    public function setDeliveryDate(\DateTime|null $date): static
     {
         $this->deliveryDate = $date;
 
@@ -36,14 +36,14 @@ trait DeliveryDateTrait
     /**
      * Get delivery date
      *
-     * If no "delivery date" value set, method
-     * sets and returns a default "delivery date".
+     * If no delivery date value set, method
+     * sets and returns a default delivery date.
      *
      * @see getDefaultDeliveryDate()
      *
      * @return \DateTime|null delivery date or null if no delivery date has been set
      */
-    public function getDeliveryDate(): ?\DateTime
+    public function getDeliveryDate(): \DateTime|null
     {
         if (!$this->hasDeliveryDate()) {
             $this->setDeliveryDate($this->getDefaultDeliveryDate());
@@ -52,9 +52,9 @@ trait DeliveryDateTrait
     }
 
     /**
-     * Check if "delivery date" has been set
+     * Check if delivery date has been set
      *
-     * @return bool True if "delivery date" has been set, false if not
+     * @return bool True if delivery date has been set, false if not
      */
     public function hasDeliveryDate(): bool
     {
@@ -62,11 +62,11 @@ trait DeliveryDateTrait
     }
 
     /**
-     * Get a default "delivery date" value, if any is available
+     * Get a default delivery date value, if any is available
      *
-     * @return \DateTime|null Default "delivery date" value or null if no default value is available
+     * @return \DateTime|null Default delivery date value or null if no default value is available
      */
-    public function getDefaultDeliveryDate(): ?\DateTime
+    public function getDefaultDeliveryDate(): \DateTime|null
     {
         return null;
     }

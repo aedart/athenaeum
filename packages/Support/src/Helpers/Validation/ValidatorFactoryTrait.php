@@ -20,7 +20,7 @@ trait ValidatorFactoryTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $validatorFactory = null;
+    protected Factory|null $validatorFactory = null;
 
     /**
      * Set validator factory
@@ -29,7 +29,7 @@ trait ValidatorFactoryTrait
      *
      * @return self
      */
-    public function setValidatorFactory(?Factory $factory)
+    public function setValidatorFactory(Factory|null $factory): static
     {
         $this->validatorFactory = $factory;
 
@@ -47,7 +47,7 @@ trait ValidatorFactoryTrait
      *
      * @return Factory|null validator factory or null if none validator factory has been set
      */
-    public function getValidatorFactory(): ?Factory
+    public function getValidatorFactory(): Factory|null
     {
         if (!$this->hasValidatorFactory()) {
             $this->setValidatorFactory($this->getDefaultValidatorFactory());
@@ -70,7 +70,7 @@ trait ValidatorFactoryTrait
      *
      * @return Factory|null A default validator factory value or Null if no default value is available
      */
-    public function getDefaultValidatorFactory(): ?Factory
+    public function getDefaultValidatorFactory(): Factory|null
     {
         return Validator::getFacadeRoot();
     }

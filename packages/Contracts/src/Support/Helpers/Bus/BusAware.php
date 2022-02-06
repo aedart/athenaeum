@@ -19,7 +19,7 @@ interface BusAware
      *
      * @return self
      */
-    public function setBus(?Dispatcher $dispatcher);
+    public function setBus(Dispatcher|null $dispatcher): static;
 
     /**
      * Get bus
@@ -32,7 +32,7 @@ interface BusAware
      *
      * @return Dispatcher|null bus or null if none bus has been set
      */
-    public function getBus(): ?Dispatcher;
+    public function getBus(): Dispatcher|null;
 
     /**
      * Check if bus has been set
@@ -46,5 +46,5 @@ interface BusAware
      *
      * @return Dispatcher|null A default bus value or Null if no default value is available
      */
-    public function getDefaultBus(): ?Dispatcher;
+    public function getDefaultBus(): Dispatcher|null;
 }

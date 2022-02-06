@@ -8,6 +8,7 @@ use Aedart\Contracts\Exceptions\ExceptionHandler;
 use Aedart\Core\Exceptions\ExceptionHandlerFailure;
 use Aedart\Core\Traits\ApplicationTrait;
 use Aedart\Support\Facades\IoCFacade;
+use LogicException;
 use Psr\Log\LogLevel;
 use Throwable;
 
@@ -83,7 +84,7 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements
             throw $exception;
         }
 
-        return $wasHandled;
+        return true;
     }
 
     /**
@@ -104,7 +105,7 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements
     /**
      * @inheritDoc
      */
-    public function addHandler($handler)
+    public function addHandler(ExceptionHandler|string $handler): static
     {
         $this->handlers[] = $this->resolveHandler($handler);
 
@@ -114,7 +115,7 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements
     /**
      * @inheritDoc
      */
-    public function setHandlers(array $handlers = [])
+    public function setHandlers(array $handlers = []): static
     {
         foreach ($handlers as $handler) {
             $this->addHandler($handler);
@@ -160,13 +161,13 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements
     /**
      * Resolves the given exception handler
      *
-     * @param string|ExceptionHandler $handler
+     * @param  string|ExceptionHandler  $handler
      *
      * @return ExceptionHandler
      *
      * @throws LogicException If handler is invalid
      */
-    protected function resolveHandler($handler): ExceptionHandler
+    protected function resolveHandler(ExceptionHandler|string $handler): ExceptionHandler
     {
         $resolved = $handler;
         if (is_string($handler)) {

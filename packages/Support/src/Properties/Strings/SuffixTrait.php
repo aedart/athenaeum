@@ -17,7 +17,7 @@ trait SuffixTrait
      *
      * @var string|null
      */
-    protected ?string $suffix = null;
+    protected string|null $suffix = null;
 
     /**
      * Set suffix
@@ -26,7 +26,7 @@ trait SuffixTrait
      *
      * @return self
      */
-    public function setSuffix(?string $suffix)
+    public function setSuffix(string|null $suffix): static
     {
         $this->suffix = $suffix;
 
@@ -36,14 +36,14 @@ trait SuffixTrait
     /**
      * Get suffix
      *
-     * If no "suffix" value set, method
-     * sets and returns a default "suffix".
+     * If no suffix value set, method
+     * sets and returns a default suffix.
      *
      * @see getDefaultSuffix()
      *
      * @return string|null suffix or null if no suffix has been set
      */
-    public function getSuffix(): ?string
+    public function getSuffix(): string|null
     {
         if (!$this->hasSuffix()) {
             $this->setSuffix($this->getDefaultSuffix());
@@ -52,9 +52,9 @@ trait SuffixTrait
     }
 
     /**
-     * Check if "suffix" has been set
+     * Check if suffix has been set
      *
-     * @return bool True if "suffix" has been set, false if not
+     * @return bool True if suffix has been set, false if not
      */
     public function hasSuffix(): bool
     {
@@ -62,11 +62,11 @@ trait SuffixTrait
     }
 
     /**
-     * Get a default "suffix" value, if any is available
+     * Get a default suffix value, if any is available
      *
-     * @return string|null Default "suffix" value or null if no default value is available
+     * @return string|null Default suffix value or null if no default value is available
      */
-    public function getDefaultSuffix(): ?string
+    public function getDefaultSuffix(): string|null
     {
         return null;
     }

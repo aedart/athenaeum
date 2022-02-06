@@ -23,5 +23,5 @@ interface Manager
      *
      * @throws ProfileNotFoundException
      */
-    public function profile(?string $profile = null, array $options = []): Grammar;
+    public function profile(string|null $profile = null, array $options = []): Grammar;
 }

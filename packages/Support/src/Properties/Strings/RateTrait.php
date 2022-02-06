@@ -17,7 +17,7 @@ trait RateTrait
      *
      * @var string|null
      */
-    protected ?string $rate = null;
+    protected string|null $rate = null;
 
     /**
      * Set rate
@@ -26,7 +26,7 @@ trait RateTrait
      *
      * @return self
      */
-    public function setRate(?string $rate)
+    public function setRate(string|null $rate): static
     {
         $this->rate = $rate;
 
@@ -36,14 +36,14 @@ trait RateTrait
     /**
      * Get rate
      *
-     * If no "rate" value set, method
-     * sets and returns a default "rate".
+     * If no rate value set, method
+     * sets and returns a default rate.
      *
      * @see getDefaultRate()
      *
      * @return string|null rate or null if no rate has been set
      */
-    public function getRate(): ?string
+    public function getRate(): string|null
     {
         if (!$this->hasRate()) {
             $this->setRate($this->getDefaultRate());
@@ -52,9 +52,9 @@ trait RateTrait
     }
 
     /**
-     * Check if "rate" has been set
+     * Check if rate has been set
      *
-     * @return bool True if "rate" has been set, false if not
+     * @return bool True if rate has been set, false if not
      */
     public function hasRate(): bool
     {
@@ -62,11 +62,11 @@ trait RateTrait
     }
 
     /**
-     * Get a default "rate" value, if any is available
+     * Get a default rate value, if any is available
      *
-     * @return string|null Default "rate" value or null if no default value is available
+     * @return string|null Default rate value or null if no default value is available
      */
-    public function getDefaultRate(): ?string
+    public function getDefaultRate(): string|null
     {
         return null;
     }

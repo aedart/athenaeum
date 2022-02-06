@@ -20,7 +20,7 @@ trait GrammarManagerTrait
      *
      * @var Manager|null
      */
-    protected ?Manager $grammarManager = null;
+    protected Manager|null $grammarManager = null;
 
     /**
      * Set grammar manager
@@ -29,7 +29,7 @@ trait GrammarManagerTrait
      *
      * @return self
      */
-    public function setGrammarManager(?Manager $manager)
+    public function setGrammarManager(Manager|null $manager): static
     {
         $this->grammarManager = $manager;
 
@@ -45,7 +45,7 @@ trait GrammarManagerTrait
      *
      * @return Manager|null grammar manager or null if none grammar manager has been set
      */
-    public function getGrammarManager(): ?Manager
+    public function getGrammarManager(): Manager|null
     {
         if (!$this->hasGrammarManager()) {
             $this->setGrammarManager($this->getDefaultGrammarManager());
@@ -68,7 +68,7 @@ trait GrammarManagerTrait
      *
      * @return Manager|null A default grammar manager value or Null if no default value is available
      */
-    public function getDefaultGrammarManager(): ?Manager
+    public function getDefaultGrammarManager(): Manager|null
     {
         return IoCFacade::tryMake(Manager::class);
     }

@@ -39,7 +39,7 @@ class ExpectationNotFulfilled implements ExpectationNotFulfilledInterface
     protected ResponseInterface $response;
 
     /**
-     * The sent request
+     * The request that was sent
      *
      * @var RequestInterface
      */

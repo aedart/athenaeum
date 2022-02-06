@@ -19,31 +19,31 @@ interface TemplateAware
      *
      * @return self
      */
-    public function setTemplate(?string $template);
+    public function setTemplate(string|null $template): static;
 
     /**
      * Get template
      *
-     * If no "template" value set, method
-     * sets and returns a default "template".
+     * If no template value set, method
+     * sets and returns a default template.
      *
      * @see getDefaultTemplate()
      *
      * @return string|null template or null if no template has been set
      */
-    public function getTemplate(): ?string;
+    public function getTemplate(): string|null;
 
     /**
-     * Check if "template" has been set
+     * Check if template has been set
      *
-     * @return bool True if "template" has been set, false if not
+     * @return bool True if template has been set, false if not
      */
     public function hasTemplate(): bool;
 
     /**
-     * Get a default "template" value, if any is available
+     * Get a default template value, if any is available
      *
-     * @return string|null Default "template" value or null if no default value is available
+     * @return string|null Default template value or null if no default value is available
      */
-    public function getDefaultTemplate(): ?string;
+    public function getDefaultTemplate(): string|null;
 }

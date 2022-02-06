@@ -17,7 +17,7 @@ trait WidthTrait
      *
      * @var float|null
      */
-    protected ?float $width = null;
+    protected float|null $width = null;
 
     /**
      * Set width
@@ -26,7 +26,7 @@ trait WidthTrait
      *
      * @return self
      */
-    public function setWidth(?float $amount)
+    public function setWidth(float|null $amount): static
     {
         $this->width = $amount;
 
@@ -36,14 +36,14 @@ trait WidthTrait
     /**
      * Get width
      *
-     * If no "width" value set, method
-     * sets and returns a default "width".
+     * If no width value set, method
+     * sets and returns a default width.
      *
      * @see getDefaultWidth()
      *
      * @return float|null width or null if no width has been set
      */
-    public function getWidth(): ?float
+    public function getWidth(): float|null
     {
         if (!$this->hasWidth()) {
             $this->setWidth($this->getDefaultWidth());
@@ -52,9 +52,9 @@ trait WidthTrait
     }
 
     /**
-     * Check if "width" has been set
+     * Check if width has been set
      *
-     * @return bool True if "width" has been set, false if not
+     * @return bool True if width has been set, false if not
      */
     public function hasWidth(): bool
     {
@@ -62,11 +62,11 @@ trait WidthTrait
     }
 
     /**
-     * Get a default "width" value, if any is available
+     * Get a default width value, if any is available
      *
-     * @return float|null Default "width" value or null if no default value is available
+     * @return float|null Default width value or null if no default value is available
      */
-    public function getDefaultWidth(): ?float
+    public function getDefaultWidth(): float|null
     {
         return null;
     }

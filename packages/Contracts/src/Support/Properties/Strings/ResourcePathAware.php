@@ -19,31 +19,31 @@ interface ResourcePathAware
      *
      * @return self
      */
-    public function setResourcePath(?string $path);
+    public function setResourcePath(string|null $path): static;
 
     /**
      * Get resource path
      *
-     * If no "resource path" value set, method
-     * sets and returns a default "resource path".
+     * If no resource path value set, method
+     * sets and returns a default resource path.
      *
      * @see getDefaultResourcePath()
      *
      * @return string|null resource path or null if no resource path has been set
      */
-    public function getResourcePath(): ?string;
+    public function getResourcePath(): string|null;
 
     /**
-     * Check if "resource path" has been set
+     * Check if resource path has been set
      *
-     * @return bool True if "resource path" has been set, false if not
+     * @return bool True if resource path has been set, false if not
      */
     public function hasResourcePath(): bool;
 
     /**
-     * Get a default "resource path" value, if any is available
+     * Get a default resource path value, if any is available
      *
-     * @return string|null Default "resource path" value or null if no default value is available
+     * @return string|null Default resource path value or null if no default value is available
      */
-    public function getDefaultResourcePath(): ?string;
+    public function getDefaultResourcePath(): string|null;
 }

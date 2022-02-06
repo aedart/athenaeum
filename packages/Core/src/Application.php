@@ -109,14 +109,14 @@ class Application extends IoC implements
     protected array $deferredServices = [];
 
     /**
-     * State whether or not this application has been bootstrapped
+     * State whether this application has been bootstrapped or not
      *
      * @var bool
      */
     protected bool $hasBootstrapped = false;
 
     /**
-     * State whether or not the application's run method has triggered
+     * State whether the application's run method has triggered or not
      *
      * @var bool
      */
@@ -134,7 +134,7 @@ class Application extends IoC implements
      *
      * @var string|null
      */
-    protected ?string $namespace = null;
+    protected string|null $namespace = null;
 
     /**
      * State of exception handling
@@ -183,7 +183,7 @@ class Application extends IoC implements
      *
      * @throws Throwable
      */
-    public function __construct($paths = null, string $version = '1.0.0')
+    public function __construct(PathsContainer|array|null $paths = null, string $version = '1.0.0')
     {
         $this->version = $version;
 
@@ -415,6 +415,8 @@ class Application extends IoC implements
     }
 
     /**
+     * TODO: Can this be removed?
+     *
      * @inheritDoc
      */
     public function configurationIsCached()
@@ -424,7 +426,12 @@ class Application extends IoC implements
     }
 
     /**
-     * @inheritDoc
+     * TODO: Extract into own interface?
+     *
+     * Detect the application's current environment.
+     *
+     * @param  Closure  $callback
+     * @return string
      */
     public function detectEnvironment(Closure $callback)
     {
@@ -432,7 +439,11 @@ class Application extends IoC implements
     }
 
     /**
-     * @inheritDoc
+     * TODO: Extract into own interface?
+     *
+     * Get the environment file the application is using.
+     *
+     * @return string
      */
     public function environmentFile()
     {
@@ -440,7 +451,11 @@ class Application extends IoC implements
     }
 
     /**
-     * @inheritDoc
+     * TODO: Extract into own interface?
+     *
+     * Get the fully qualified path to the environment file.
+     *
+     * @return string
      */
     public function environmentFilePath()
     {
@@ -448,6 +463,8 @@ class Application extends IoC implements
     }
 
     /**
+     * TODO: Can this be removed?
+     *
      * @inheritDoc
      */
     public function getCachedConfigPath()
@@ -457,6 +474,8 @@ class Application extends IoC implements
     }
 
     /**
+     * TODO: Can this be removed?
+     *
      * @inheritDoc
      */
     public function getCachedServicesPath()
@@ -466,7 +485,11 @@ class Application extends IoC implements
     }
 
     /**
-     * @inheritDoc
+     * TODO: Is this needed?
+     *
+     * Get the path to the cached packages.php file.
+     *
+     * @return string
      */
     public function getCachedPackagesPath()
     {
@@ -475,6 +498,8 @@ class Application extends IoC implements
     }
 
     /**
+     * TODO: Can this be removed?
+     *
      * @inheritDoc
      */
     public function getCachedRoutesPath()
@@ -533,7 +558,12 @@ class Application extends IoC implements
     }
 
     /**
-     * @inheritDoc
+     * TODO: Extract into own interface?
+     *
+     * Set the environment file to be loaded during bootstrapping.
+     *
+     * @param  string  $file
+     * @return self
      */
     public function loadEnvironmentFrom($file)
     {
@@ -543,6 +573,8 @@ class Application extends IoC implements
     }
 
     /**
+     * TODO: Can this be removed?
+     *
      * @inheritDoc
      */
     public function routesAreCached()
@@ -791,7 +823,7 @@ class Application extends IoC implements
     /**
      * @inheritdoc
      */
-    public function registerAsApplication()
+    public function registerAsApplication(): static
     {
         parent::registerAsApplication();
 
@@ -810,8 +842,10 @@ class Application extends IoC implements
 
     /**
      * @inheritdoc
+     *
+     * @throws Throwable
      */
-    public function getDefaultPathsContainer(): ?PathsContainer
+    public function getDefaultPathsContainer(): PathsContainer|null
     {
         return new Paths([], $this);
     }
@@ -819,7 +853,7 @@ class Application extends IoC implements
     /**
      * @inheritdoc
      */
-    public function getDefaultServiceProviderRegistrar(): ?ServiceProviderRegistrar
+    public function getDefaultServiceProviderRegistrar(): ServiceProviderRegistrar|null
     {
         return new Registrar($this);
     }
@@ -827,7 +861,7 @@ class Application extends IoC implements
     /**
      * @inheritdoc
      */
-    public function getDefaultNamespaceDetector(): ?ApplicationNamespaceDetector
+    public function getDefaultNamespaceDetector(): ApplicationNamespaceDetector|null
     {
         return new NamespaceDetector();
     }
@@ -863,13 +897,13 @@ class Application extends IoC implements
     /**
      * Resolves this application's paths from given argument
      *
-     * @param null|PathsContainer|array $paths [optional]
-     *
-     * @throws Throwable If an invalid paths argument has been provided
+     * @param array|PathsContainer|null  $paths [optional]
      *
      * @return self
+     *
+     * @throws Throwable If an invalid paths argument has been provided
      */
-    protected function resolveApplicationPaths($paths = null)
+    protected function resolveApplicationPaths(PathsContainer|array|null $paths = null): static
     {
         $this->tryPopulatePathsContainer($paths);
 
@@ -885,7 +919,7 @@ class Application extends IoC implements
      *
      * @throws Throwable If an invalid paths argument has been provided
      */
-    protected function tryPopulatePathsContainer($paths = null)
+    protected function tryPopulatePathsContainer(PathsContainer|array|null $paths = null): void
     {
         // If nothing given, set and get default paths
         if (!isset($paths)) {
@@ -900,13 +934,7 @@ class Application extends IoC implements
         }
 
         // If a paths container has been provided, use it
-        if ($paths instanceof PathsContainer) {
-            $this->setPathsContainer($paths);
-            return;
-        }
-
-        // Lastly, an invalid paths argument has been provide...
-        throw new LogicException('Paths must either be a valid "Paths Container" instance, an "array" of paths or "null"');
+        $this->setPathsContainer($paths);
     }
 
     /**
@@ -949,7 +977,7 @@ class Application extends IoC implements
      *
      * @return self
      */
-    protected function registerCoreServiceProviders()
+    protected function registerCoreServiceProviders(): static
     {
         return $this->registerMultipleServiceProviders($this->getCoreServiceProviders());
     }
@@ -986,7 +1014,7 @@ class Application extends IoC implements
      * @param string[] $events
      * @param ServiceProvider $provider
      */
-    protected function listenWhenToRegister(array $events, ServiceProvider $provider)
+    protected function listenWhenToRegister(array $events, ServiceProvider $provider): void
     {
         if (empty($events)) {
             return;
@@ -1011,7 +1039,7 @@ class Application extends IoC implements
      *
      * @param ServiceProvider $provider Service Provider that provides given services
      */
-    protected function addDeferredServicesFrom(ServiceProvider $provider)
+    protected function addDeferredServicesFrom(ServiceProvider $provider): void
     {
         if (!$provider->isDeferred()) {
             return;
@@ -1030,7 +1058,7 @@ class Application extends IoC implements
      *
      * @throws Throwable
      */
-    protected function handleException(Throwable $exception)
+    protected function handleException(Throwable $exception): void
     {
         $handler = $this->getExceptionHandlerFactory()->make();
 

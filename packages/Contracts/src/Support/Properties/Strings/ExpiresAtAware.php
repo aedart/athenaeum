@@ -19,31 +19,31 @@ interface ExpiresAtAware
      *
      * @return self
      */
-    public function setExpiresAt(?string $date);
+    public function setExpiresAt(string|null $date): static;
 
     /**
      * Get expires at
      *
-     * If no "expires at" value set, method
-     * sets and returns a default "expires at".
+     * If no expires at value set, method
+     * sets and returns a default expires at.
      *
      * @see getDefaultExpiresAt()
      *
      * @return string|null expires at or null if no expires at has been set
      */
-    public function getExpiresAt(): ?string;
+    public function getExpiresAt(): string|null;
 
     /**
-     * Check if "expires at" has been set
+     * Check if expires at has been set
      *
-     * @return bool True if "expires at" has been set, false if not
+     * @return bool True if expires at has been set, false if not
      */
     public function hasExpiresAt(): bool;
 
     /**
-     * Get a default "expires at" value, if any is available
+     * Get a default expires at value, if any is available
      *
-     * @return string|null Default "expires at" value or null if no default value is available
+     * @return string|null Default expires at value or null if no default value is available
      */
-    public function getDefaultExpiresAt(): ?string;
+    public function getDefaultExpiresAt(): string|null;
 }

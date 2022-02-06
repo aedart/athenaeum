@@ -44,7 +44,7 @@ class GenericBuilder extends BaseBuilder
      *
      * @return self
      */
-    public function setProcessors(array $processors = [])
+    public function setProcessors(array $processors = []): static
     {
         $this->processors = $processors;
 

@@ -27,7 +27,7 @@ interface Attachment extends Populatable,
      *
      * @return self
      */
-    public function name(string $name): self;
+    public function name(string $name): static;
 
     /**
      * Get this attachment's form input name
@@ -43,7 +43,7 @@ interface Attachment extends Populatable,
      *
      * @return self
      */
-    public function headers(array $headers = []): self;
+    public function headers(array $headers = []): static;
 
     /**
      * Get all the Http headers for this attachment
@@ -59,7 +59,7 @@ interface Attachment extends Populatable,
      *
      * @return self
      */
-    public function contents($data): self;
+    public function contents($data): static;
 
     /**
      * Get this attachment's contents
@@ -80,7 +80,7 @@ interface Attachment extends Populatable,
      *
      * @throws InvalidFilePathException
      */
-    public function attachFile(string $path): self;
+    public function attachFile(string $path): static;
 
     /**
      * Set the attachment's filename to be used by a request
@@ -89,7 +89,7 @@ interface Attachment extends Populatable,
      *
      * @return self
      */
-    public function filename(?string $name = null): self;
+    public function filename(?string $name = null): static;
 
     /**
      * Get the attachment's filename to be used by a request

@@ -32,9 +32,9 @@ class ErrorResponse extends RedmineException implements ErrorResponseException
     public function __construct(
         ResponseInterface $response,
         RequestInterface $request,
-        $message = "",
-        $code = 0,
-        Throwable $previous = null
+        string $message = "",
+        int $code = 0,
+        Throwable|null $previous = null
     ) {
         parent::__construct($message, $code, $previous);
 
@@ -49,9 +49,10 @@ class ErrorResponse extends RedmineException implements ErrorResponseException
     public static function from(
         ResponseInterface $response,
         RequestInterface $request,
-        ?string $message = null,
-        ?Throwable $previous = null
-    ): ErrorResponseException {
+        string|null $message = null,
+        Throwable|null $previous = null
+    ): static
+    {
         $message = $message ?? 'Received unexpected response from Redmine: ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase();
 
         return new static(

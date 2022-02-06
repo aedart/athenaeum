@@ -17,7 +17,7 @@ trait BuildingNumberTrait
      *
      * @var string|null
      */
-    protected ?string $buildingNumber = null;
+    protected string|null $buildingNumber = null;
 
     /**
      * Set building number
@@ -26,7 +26,7 @@ trait BuildingNumberTrait
      *
      * @return self
      */
-    public function setBuildingNumber(?string $number)
+    public function setBuildingNumber(string|null $number): static
     {
         $this->buildingNumber = $number;
 
@@ -36,14 +36,14 @@ trait BuildingNumberTrait
     /**
      * Get building number
      *
-     * If no "building number" value set, method
-     * sets and returns a default "building number".
+     * If no building number value set, method
+     * sets and returns a default building number.
      *
      * @see getDefaultBuildingNumber()
      *
      * @return string|null building number or null if no building number has been set
      */
-    public function getBuildingNumber(): ?string
+    public function getBuildingNumber(): string|null
     {
         if (!$this->hasBuildingNumber()) {
             $this->setBuildingNumber($this->getDefaultBuildingNumber());
@@ -52,9 +52,9 @@ trait BuildingNumberTrait
     }
 
     /**
-     * Check if "building number" has been set
+     * Check if building number has been set
      *
-     * @return bool True if "building number" has been set, false if not
+     * @return bool True if building number has been set, false if not
      */
     public function hasBuildingNumber(): bool
     {
@@ -62,11 +62,11 @@ trait BuildingNumberTrait
     }
 
     /**
-     * Get a default "building number" value, if any is available
+     * Get a default building number value, if any is available
      *
-     * @return string|null Default "building number" value or null if no default value is available
+     * @return string|null Default building number value or null if no default value is available
      */
-    public function getDefaultBuildingNumber(): ?string
+    public function getDefaultBuildingNumber(): string|null
     {
         return null;
     }

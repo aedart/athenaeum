@@ -27,7 +27,7 @@ trait DataFormat
     /**
      * @inheritdoc
      */
-    public function useDataFormat(string $format): Builder
+    public function useDataFormat(string $format): static
     {
         $this->dataFormat = $format;
 

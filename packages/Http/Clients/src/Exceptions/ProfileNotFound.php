@@ -3,6 +3,7 @@
 namespace Aedart\Http\Clients\Exceptions;
 
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
+use RuntimeException;
 
 /**
  * Profile Not Found
@@ -10,6 +11,6 @@ use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Exceptions
  */
-class ProfileNotFound extends \RuntimeException implements ProfileNotFoundException
+class ProfileNotFound extends RuntimeException implements ProfileNotFoundException
 {
 }

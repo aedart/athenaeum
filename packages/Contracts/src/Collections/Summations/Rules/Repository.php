@@ -27,7 +27,7 @@ interface Repository extends
      *
      * @return Rules
      */
-    public function matching($item): Rules;
+    public function matching(mixed $item): Rules;
 
     /**
      * Returns collection of all processing rules,

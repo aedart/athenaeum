@@ -33,7 +33,7 @@ abstract class AthenaeumTestCase extends IntegrationTestCase
     {
         parent::_before();
 
-        // (Destroy Service Container, use application
+        // Destroy Service Container, use application
         // instead.
         $this->ioc->destroy();
 

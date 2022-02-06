@@ -19,31 +19,31 @@ interface HeightAware
      *
      * @return self
      */
-    public function setHeight(?int $amount);
+    public function setHeight(int|null $amount): static;
 
     /**
      * Get height
      *
-     * If no "height" value set, method
-     * sets and returns a default "height".
+     * If no height value set, method
+     * sets and returns a default height.
      *
      * @see getDefaultHeight()
      *
      * @return int|null height or null if no height has been set
      */
-    public function getHeight(): ?int;
+    public function getHeight(): int|null;
 
     /**
-     * Check if "height" has been set
+     * Check if height has been set
      *
-     * @return bool True if "height" has been set, false if not
+     * @return bool True if height has been set, false if not
      */
     public function hasHeight(): bool;
 
     /**
-     * Get a default "height" value, if any is available
+     * Get a default height value, if any is available
      *
-     * @return int|null Default "height" value or null if no default value is available
+     * @return int|null Default height value or null if no default value is available
      */
-    public function getDefaultHeight(): ?int;
+    public function getDefaultHeight(): int|null;
 }

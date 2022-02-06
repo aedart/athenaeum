@@ -15,6 +15,8 @@ use Aedart\Http\Clients\Traits\GrammarTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use Aedart\Utils\Arr;
 use Illuminate\Contracts\Container\Container;
+use DateTimeInterface;
+use Stringable;
 
 /**
  * Http Query Builder
@@ -25,7 +27,8 @@ use Illuminate\Contracts\Container\Container;
 class Builder implements
     QueryBuilder,
     ContainerAware,
-    GrammarManagerAware
+    GrammarManagerAware,
+    Stringable
 {
     use ContainerTrait;
     use GrammarManagerTrait;
@@ -57,28 +60,28 @@ class Builder implements
      *
      * @var int|null
      */
-    protected ?int $limit = null;
+    protected int|null $limit = null;
 
     /**
      * Offset
      *
      * @var int|null
      */
-    protected ?int $offset = null;
+    protected int|null $offset = null;
 
     /**
      * Page number
      *
      * @var int|null
      */
-    protected ?int $pageNumber = null;
+    protected int|null $pageNumber = null;
 
     /**
      * Page size
      *
      * @var int|null
      */
-    protected ?int $pageSize = null;
+    protected int|null $pageSize = null;
 
     /**
      * Sorting order criteria
@@ -103,7 +106,7 @@ class Builder implements
      *
      * @throws ProfileNotFoundException
      */
-    public function __construct($grammar = null, ?Container $container = null)
+    public function __construct(string|Grammar|null $grammar = null, Container|null $container = null)
     {
         $this
             ->setContainer($container)
@@ -113,7 +116,7 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function select($field, ?string $resource = null): QueryBuilder
+    public function select(string|array $field, string|null $resource = null): static
     {
         if (is_array($field)) {
             return $this->addSelect($field);
@@ -125,7 +128,7 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function selectRaw(string $expression, array $bindings = []): QueryBuilder
+    public function selectRaw(string $expression, array $bindings = []): static
     {
         return $this->addSelect([$expression], $bindings, self::SELECT_TYPE_RAW);
     }
@@ -133,9 +136,9 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function where($field, $operator = null, $value = null): QueryBuilder
+    public function where(string|array $field, mixed $operator = null, mixed $value = null): static
     {
-        // When field is an array, we assume that multiple where conditions is
+        // When field is an array, we assume that multiple where conditions are
         // desired added
         if (is_array($field)) {
             return $this->addMultipleWhere($field);
@@ -157,9 +160,9 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function orWhere($field, $operator = null, $value = null): QueryBuilder
+    public function orWhere(string|array $field, mixed $operator = null, mixed $value = null): static
     {
-        // When field is an array, we assume that multiple where conditions is
+        // When field is an array, we assume that multiple where conditions are
         // desired added
         if (is_array($field)) {
             return $this->addMultipleWhere($field, self::OR_CONJUNCTION);
@@ -181,7 +184,7 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function whereRaw(string $query, array $bindings = []): QueryBuilder
+    public function whereRaw(string $query, array $bindings = []): static
     {
         return $this->addRawWhere($query, $bindings);
     }
@@ -189,7 +192,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function orWhereRaw(string $query, array $bindings = []): QueryBuilder
+    public function orWhereRaw(string $query, array $bindings = []): static
     {
         return $this->addRawWhere($query, $bindings, self::OR_CONJUNCTION);
     }
@@ -197,7 +200,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function whereDatetime(string $field, $operator = null, $value = null): QueryBuilder
+    public function whereDatetime(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static
     {
         return $this->addWhereDateExpression(self::DATETIME_FORMAT, $field, $operator, $value);
     }
@@ -205,7 +208,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function orWhereDatetime(string $field, $operator = null, $value = null): QueryBuilder
+    public function orWhereDatetime(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static
     {
         return $this->addWhereDateExpression(
             self::DATETIME_FORMAT,
@@ -219,7 +222,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function whereDate(string $field, $operator = null, $value = null): QueryBuilder
+    public function whereDate(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static
     {
         return $this->addWhereDateExpression(self::DATE_FORMAT, $field, $operator, $value);
     }
@@ -227,7 +230,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function orWhereDate(string $field, $operator = null, $value = null): QueryBuilder
+    public function orWhereDate(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static
     {
         return $this->addWhereDateExpression(
             self::DATE_FORMAT,
@@ -241,7 +244,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function whereYear(string $field, $operator = null, $value = null): QueryBuilder
+    public function whereYear(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static
     {
         return $this->addWhereDateExpression(self::YEAR_FORMAT, $field, $operator, $value);
     }
@@ -249,7 +252,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function orWhereYear(string $field, $operator = null, $value = null): QueryBuilder
+    public function orWhereYear(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static
     {
         return $this->addWhereDateExpression(
             self::YEAR_FORMAT,
@@ -263,7 +266,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function whereMonth(string $field, $operator = null, $value = null): QueryBuilder
+    public function whereMonth(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static
     {
         return $this->addWhereDateExpression(self::MONTH_FORMAT, $field, $operator, $value);
     }
@@ -271,7 +274,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function orWhereMonth(string $field, $operator = null, $value = null): QueryBuilder
+    public function orWhereMonth(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static
     {
         return $this->addWhereDateExpression(
             self::MONTH_FORMAT,
@@ -285,7 +288,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function whereDay(string $field, $operator = null, $value = null): QueryBuilder
+    public function whereDay(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static
     {
         return $this->addWhereDateExpression(self::DAY_FORMAT, $field, $operator, $value);
     }
@@ -293,7 +296,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function orWhereDay(string $field, $operator = null, $value = null): QueryBuilder
+    public function orWhereDay(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static
     {
         return $this->addWhereDateExpression(
             self::DAY_FORMAT,
@@ -307,7 +310,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function whereTime(string $field, $operator = null, $value = null): QueryBuilder
+    public function whereTime(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static
     {
         return $this->addWhereDateExpression(self::TIME_FORMAT, $field, $operator, $value);
     }
@@ -315,7 +318,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function orWhereTime(string $field, $operator = null, $value = null): QueryBuilder
+    public function orWhereTime(string $field, mixed $operator = null, string|DateTimeInterface|null $value = null): static
     {
         return $this->addWhereDateExpression(
             self::TIME_FORMAT,
@@ -329,7 +332,7 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function include($resource): QueryBuilder
+    public function include(string|array $resource): static
     {
         if (!is_array($resource)) {
             $resource = [$resource];
@@ -343,7 +346,7 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function limit(int $amount): QueryBuilder
+    public function limit(int $amount): static
     {
         $this->limit = $amount;
 
@@ -353,7 +356,7 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function offset(int $offset): QueryBuilder
+    public function offset(int $offset): static
     {
         $this->offset = $offset;
 
@@ -363,7 +366,7 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function take(int $amount): QueryBuilder
+    public function take(int $amount): static
     {
         return $this->limit($amount);
     }
@@ -371,7 +374,7 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function skip(int $offset): QueryBuilder
+    public function skip(int $offset): static
     {
         return $this->offset($offset);
     }
@@ -379,7 +382,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function page(int $number, ?int $size = null): QueryBuilder
+    public function page(int $number, int|null $size = null): static
     {
         $this->pageNumber = $number;
 
@@ -389,7 +392,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function show(?int $amount = null): QueryBuilder
+    public function show(int|null $amount = null): static
     {
         $this->pageSize = $amount;
 
@@ -399,7 +402,7 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function orderBy($field, string $direction = QueryBuilder::ASCENDING): QueryBuilder
+    public function orderBy(string|array $field, string $direction = QueryBuilder::ASCENDING): static
     {
         if (is_array($field)) {
             return $this->addMultipleOrderBy($field);
@@ -411,7 +414,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function raw(string $expression, array $bindings = []): QueryBuilder
+    public function raw(string $expression, array $bindings = []): static
     {
         $this->rawExpressions[] = [
             self::EXPRESSION => $expression,
@@ -454,7 +457,7 @@ class Builder implements
      *
      * @throws HttpQueryBuilderException
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->build();
     }
@@ -466,7 +469,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function getDefaultGrammarManager(): ?Manager
+    public function getDefaultGrammarManager(): Manager|null
     {
         // We have to respect the IoC container instance
         // that MIGHT have been set via the constructor or
@@ -477,7 +480,7 @@ class Builder implements
     /**
      * @inheritdoc
      */
-    public function getDefaultGrammar(): ?Grammar
+    public function getDefaultGrammar(): Grammar|null
     {
         return $this->getGrammarManager()->profile();
     }
@@ -496,7 +499,7 @@ class Builder implements
      *
      * @throws ProfileNotFoundException
      */
-    protected function resolveGrammar($grammar = null)
+    protected function resolveGrammar(string|Grammar|null $grammar = null): static
     {
         // If no grammar has been given, then abort and allow the
         // default to be set via "getDefaultGrammar" ~ default profile.
@@ -520,9 +523,9 @@ class Builder implements
      * @param array $bindings [optional] Evt. bindings
      * @param string $type [optional] Select type
      *
-     * @return QueryBuilder
+     * @return self
      */
-    protected function addSelect(array $fields, array $bindings = [], string $type = self::SELECT_TYPE_REGULAR): QueryBuilder
+    protected function addSelect(array $fields, array $bindings = [], string $type = self::SELECT_TYPE_REGULAR): static
     {
         $this->selects[] = [
             self::TYPE => $type,
@@ -539,9 +542,9 @@ class Builder implements
      * @param array $conditions [optional]
      * @param string $conjunction [optional]
      *
-     * @return QueryBuilder
+     * @return self
      */
-    protected function addMultipleWhere(array $conditions = [], string $conjunction = self::AND_CONJUNCTION): QueryBuilder
+    protected function addMultipleWhere(array $conditions = [], string $conjunction = self::AND_CONJUNCTION): static
     {
         foreach ($conditions as $field => $value) {
             // Determine if one or more operators has been given
@@ -567,13 +570,14 @@ class Builder implements
      * @param array $operatorsAndValues Key-value pair, where key = operator
      * @param string $conjunction [optional]
      *
-     * @return QueryBuilder
+     * @return self
      */
     protected function addMultipleWhereForField(
         string $field,
         array $operatorsAndValues,
         string $conjunction = self::AND_CONJUNCTION
-    ): QueryBuilder {
+    ): static
+    {
         foreach ($operatorsAndValues as $operator => $value) {
             $this->addRegularWhere($field, $operator, $value, $conjunction);
         }
@@ -594,7 +598,7 @@ class Builder implements
     protected function addRegularWhere(
         string $field,
         string $operator = self::EQUALS,
-        $value = null,
+        mixed $value = null,
         string $conjunction = self::AND_CONJUNCTION
     ): QueryBuilder {
         return $this->appendWhereCondition([
@@ -611,13 +615,14 @@ class Builder implements
      * @param array $bindings [optional]
      * @param string $conjunction [optional]
      *
-     * @return QueryBuilder
+     * @return self
      */
     protected function addRawWhere(
         string $expression,
         array $bindings = [],
         string $conjunction = self::AND_CONJUNCTION
-    ): QueryBuilder {
+    ): static
+    {
         return $this->appendWhereCondition([
             self::FIELD => $expression,
             self::OPERATOR => null,
@@ -633,14 +638,15 @@ class Builder implements
      * @param string $type [optional]
      * @param string $conjunction [optional]
      *
-     * @return QueryBuilder
+     * @return self
      */
     protected function appendWhereCondition(
         array $where,
         array $bindings = [],
         string $type = self::WHERE_TYPE_REGULAR,
         string $conjunction = self::AND_CONJUNCTION
-    ): QueryBuilder {
+    ): static
+    {
         // Add bindings, type, ...etc to where condition
         $where[self::BINDINGS] = $bindings;
         $where[self::TYPE] = $type;
@@ -661,15 +667,16 @@ class Builder implements
      * @param mixed $value [optional]
      * @param string $conjunction [optional]
      *
-     * @return QueryBuilder
+     * @return self
      */
     protected function addWhereDateExpression(
         string $format,
         string $field,
-        $operator = null,
-        $value = null,
+        mixed $operator = null,
+        mixed $value = null,
         string $conjunction = self::AND_CONJUNCTION
-    ): QueryBuilder {
+    ): static
+    {
         // Resolve arguments
         if (!isset($value)) {
             $value = $operator;
@@ -693,9 +700,9 @@ class Builder implements
      *
      * @param array $criteria
      *
-     * @return QueryBuilder
+     * @return self
      */
-    protected function addMultipleOrderBy(array $criteria): QueryBuilder
+    protected function addMultipleOrderBy(array $criteria): static
     {
         foreach ($criteria as $field => $direction) {
             if (is_int($field)) {
@@ -715,9 +722,9 @@ class Builder implements
      * @param string $field
      * @param string $direction
      *
-     * @return QueryBuilder
+     * @return self
      */
-    protected function addOrderBy(string $field, string $direction): QueryBuilder
+    protected function addOrderBy(string $field, string $direction): static
     {
         $this->orderBy[] = [
             self::FIELD => $field,

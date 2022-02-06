@@ -103,7 +103,7 @@ class SetExceptionHandling implements CanBeBootstrapped
      * Handle shutdown
      *
      * If an error was detected during PHP shutdown, it will be passed on
-     * to the registered exception handler, provided it's severity is
+     * to the registered exception handler, provided its severity is
      * high enough.
      *
      * @see https://www.php.net/manual/en/function.register-shutdown-function.php

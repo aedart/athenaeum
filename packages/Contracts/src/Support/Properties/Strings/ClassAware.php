@@ -19,31 +19,31 @@ interface ClassAware
      *
      * @return self
      */
-    public function setClass(?string $class);
+    public function setClass(string|null $class): static;
 
     /**
      * Get class
      *
-     * If no "class" value set, method
-     * sets and returns a default "class".
+     * If no class value set, method
+     * sets and returns a default class.
      *
      * @see getDefaultClass()
      *
      * @return string|null class or null if no class has been set
      */
-    public function getClass(): ?string;
+    public function getClass(): string|null;
 
     /**
-     * Check if "class" has been set
+     * Check if class has been set
      *
-     * @return bool True if "class" has been set, false if not
+     * @return bool True if class has been set, false if not
      */
     public function hasClass(): bool;
 
     /**
-     * Get a default "class" value, if any is available
+     * Get a default class value, if any is available
      *
-     * @return string|null Default "class" value or null if no default value is available
+     * @return string|null Default class value or null if no default value is available
      */
-    public function getDefaultClass(): ?string;
+    public function getDefaultClass(): string|null;
 }

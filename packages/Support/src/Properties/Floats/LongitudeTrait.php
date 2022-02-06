@@ -13,20 +13,20 @@ namespace Aedart\Support\Properties\Floats;
 trait LongitudeTrait
 {
     /**
-     * East-West position on Earth&#039;s surface
+     * East-West position on Earth&amp;#039;s surface
      *
      * @var float|null
      */
-    protected ?float $longitude = null;
+    protected float|null $longitude = null;
 
     /**
      * Set longitude
      *
-     * @param float|null $value East-West position on Earth&#039;s surface
+     * @param float|null $value East-West position on Earth&amp;#039;s surface
      *
      * @return self
      */
-    public function setLongitude(?float $value)
+    public function setLongitude(float|null $value): static
     {
         $this->longitude = $value;
 
@@ -36,14 +36,14 @@ trait LongitudeTrait
     /**
      * Get longitude
      *
-     * If no "longitude" value set, method
-     * sets and returns a default "longitude".
+     * If no longitude value set, method
+     * sets and returns a default longitude.
      *
      * @see getDefaultLongitude()
      *
      * @return float|null longitude or null if no longitude has been set
      */
-    public function getLongitude(): ?float
+    public function getLongitude(): float|null
     {
         if (!$this->hasLongitude()) {
             $this->setLongitude($this->getDefaultLongitude());
@@ -52,9 +52,9 @@ trait LongitudeTrait
     }
 
     /**
-     * Check if "longitude" has been set
+     * Check if longitude has been set
      *
-     * @return bool True if "longitude" has been set, false if not
+     * @return bool True if longitude has been set, false if not
      */
     public function hasLongitude(): bool
     {
@@ -62,11 +62,11 @@ trait LongitudeTrait
     }
 
     /**
-     * Get a default "longitude" value, if any is available
+     * Get a default longitude value, if any is available
      *
-     * @return float|null Default "longitude" value or null if no default value is available
+     * @return float|null Default longitude value or null if no default value is available
      */
-    public function getDefaultLongitude(): ?float
+    public function getDefaultLongitude(): float|null
     {
         return null;
     }

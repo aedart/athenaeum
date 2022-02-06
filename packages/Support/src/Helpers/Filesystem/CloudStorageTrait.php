@@ -20,7 +20,7 @@ trait CloudStorageTrait
      *
      * @var Cloud|null
      */
-    protected ?Cloud $cloudStorage = null;
+    protected Cloud|null $cloudStorage = null;
 
     /**
      * Set cloud storage
@@ -29,7 +29,7 @@ trait CloudStorageTrait
      *
      * @return self
      */
-    public function setCloudStorage(?Cloud $disk)
+    public function setCloudStorage(Cloud|null $disk): static
     {
         $this->cloudStorage = $disk;
 
@@ -47,7 +47,7 @@ trait CloudStorageTrait
      *
      * @return Cloud|null cloud storage or null if none cloud storage has been set
      */
-    public function getCloudStorage(): ?Cloud
+    public function getCloudStorage(): Cloud|null
     {
         if (!$this->hasCloudStorage()) {
             $this->setCloudStorage($this->getDefaultCloudStorage());
@@ -70,7 +70,7 @@ trait CloudStorageTrait
      *
      * @return Cloud|null A default cloud storage value or Null if no default value is available
      */
-    public function getDefaultCloudStorage(): ?Cloud
+    public function getDefaultCloudStorage(): Cloud|null
     {
         $manager = Storage::getFacadeRoot();
         if (isset($manager)) {

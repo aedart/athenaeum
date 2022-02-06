@@ -17,7 +17,7 @@ trait StatusTrait
      *
      * @var string|null
      */
-    protected ?string $status = null;
+    protected string|null $status = null;
 
     /**
      * Set status
@@ -26,7 +26,7 @@ trait StatusTrait
      *
      * @return self
      */
-    public function setStatus(?string $status)
+    public function setStatus(string|null $status): static
     {
         $this->status = $status;
 
@@ -36,14 +36,14 @@ trait StatusTrait
     /**
      * Get status
      *
-     * If no "status" value set, method
-     * sets and returns a default "status".
+     * If no status value set, method
+     * sets and returns a default status.
      *
      * @see getDefaultStatus()
      *
      * @return string|null status or null if no status has been set
      */
-    public function getStatus(): ?string
+    public function getStatus(): string|null
     {
         if (!$this->hasStatus()) {
             $this->setStatus($this->getDefaultStatus());
@@ -52,9 +52,9 @@ trait StatusTrait
     }
 
     /**
-     * Check if "status" has been set
+     * Check if status has been set
      *
-     * @return bool True if "status" has been set, false if not
+     * @return bool True if status has been set, false if not
      */
     public function hasStatus(): bool
     {
@@ -62,11 +62,11 @@ trait StatusTrait
     }
 
     /**
-     * Get a default "status" value, if any is available
+     * Get a default status value, if any is available
      *
-     * @return string|null Default "status" value or null if no default value is available
+     * @return string|null Default status value or null if no default value is available
      */
-    public function getDefaultStatus(): ?string
+    public function getDefaultStatus(): string|null
     {
         return null;
     }

@@ -17,7 +17,7 @@ trait AreaTrait
      *
      * @var string|null
      */
-    protected ?string $area = null;
+    protected string|null $area = null;
 
     /**
      * Set area
@@ -26,7 +26,7 @@ trait AreaTrait
      *
      * @return self
      */
-    public function setArea(?string $name)
+    public function setArea(string|null $name): static
     {
         $this->area = $name;
 
@@ -36,14 +36,14 @@ trait AreaTrait
     /**
      * Get area
      *
-     * If no "area" value set, method
-     * sets and returns a default "area".
+     * If no area value set, method
+     * sets and returns a default area.
      *
      * @see getDefaultArea()
      *
      * @return string|null area or null if no area has been set
      */
-    public function getArea(): ?string
+    public function getArea(): string|null
     {
         if (!$this->hasArea()) {
             $this->setArea($this->getDefaultArea());
@@ -52,9 +52,9 @@ trait AreaTrait
     }
 
     /**
-     * Check if "area" has been set
+     * Check if area has been set
      *
-     * @return bool True if "area" has been set, false if not
+     * @return bool True if area has been set, false if not
      */
     public function hasArea(): bool
     {
@@ -62,11 +62,11 @@ trait AreaTrait
     }
 
     /**
-     * Get a default "area" value, if any is available
+     * Get a default area value, if any is available
      *
-     * @return string|null Default "area" value or null if no default value is available
+     * @return string|null Default area value or null if no default value is available
      */
-    public function getDefaultArea(): ?string
+    public function getDefaultArea(): string|null
     {
         return null;
     }

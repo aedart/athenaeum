@@ -12,10 +12,10 @@ namespace {{ traitNamespace }};
  */
 trait {{ traitClassName }}
 {
-    {{ include('partials/property-description.twig') }}
-    protected {{- dataType in ['mixed', 'callable'] ? ' ' : " ?#{dataType} " -}} ${{ coreProperty }} = null;
+    {{ include('partials/property-description.twig')|trim }}
+    protected {{- dataType in ['mixed', 'callable'] ? ' ' : " #{dataType}|null " -}} ${{ coreProperty }} = null;
 
-    {{ include('partials/set-method-description.twig') }}
+    {{ include('partials/set-method-description.twig')|trim }}
     {{ include('partials/set-method.twig')|replace({"\n": ""}) }}
     {
         $this->{{ coreProperty }} = ${{ inputArgument }};
@@ -23,7 +23,7 @@ trait {{ traitClassName }}
         return $this;
     }
 
-    {{ include('partials/get-method-description.twig') }}
+    {{ include('partials/get-method-description.twig')|trim }}
     {{ include('partials/get-method.twig')|replace({"\n": ""}) }}
     {
         if (!$this->has{{ propertyName }}()) {
@@ -32,13 +32,13 @@ trait {{ traitClassName }}
         return $this->{{ coreProperty }};
     }
 
-    {{ include('partials/has-method-description.twig') }}
+    {{ include('partials/has-method-description.twig')|trim }}
     {{ include('partials/has-method.twig')|replace({"\n": ""}) }}
     {
         return isset($this->{{ coreProperty }});
     }
 
-    {{ include('partials/get-default-method-description.twig') }}
+    {{ include('partials/get-default-method-description.twig')|trim }}
     {{ include('partials/get-default-method.twig')|replace({"\n": ""}) }}
     {
         return null;

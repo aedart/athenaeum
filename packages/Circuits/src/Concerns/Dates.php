@@ -26,17 +26,20 @@ trait Dates
      *
      * @var DateTimeZone|string|null
      */
-    public $timezone = 'UTC';
+    public string|DateTimeZone|null $timezone = 'UTC';
 
     /**
      * Resolve given date parameter
      *
-     * @param string|DateTimeInterface|null $date [optional]
-     * @param string|DateTimeInterface|null $default [optional]
+     * @param  DateTimeInterface|string|null  $date [optional]
+     * @param  DateTimeInterface|string|null  $default [optional]
      *
      * @return DateTimeInterface|null
      */
-    protected function resolveDate($date = null, $default = 'now'): ?DateTimeInterface
+    protected function resolveDate(
+        DateTimeInterface|string|null $date = null,
+        DateTimeInterface|string|null $default = 'now'
+    ): DateTimeInterface|null
     {
         if ($date instanceof DateTimeInterface) {
             return $date;
@@ -79,7 +82,7 @@ trait Dates
      *
      * @return string|null Null if no date given
      */
-    protected function formatDate(?DateTimeInterface $date = null): ?string
+    protected function formatDate(DateTimeInterface|null $date = null): string|null
     {
         return optional($date)->format($this->dateFormat);
     }

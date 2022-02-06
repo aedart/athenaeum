@@ -17,7 +17,7 @@ trait ColumnTrait
      *
      * @var string|null
      */
-    protected ?string $column = null;
+    protected string|null $column = null;
 
     /**
      * Set column
@@ -26,7 +26,7 @@ trait ColumnTrait
      *
      * @return self
      */
-    public function setColumn(?string $name)
+    public function setColumn(string|null $name): static
     {
         $this->column = $name;
 
@@ -36,14 +36,14 @@ trait ColumnTrait
     /**
      * Get column
      *
-     * If no "column" value set, method
-     * sets and returns a default "column".
+     * If no column value set, method
+     * sets and returns a default column.
      *
      * @see getDefaultColumn()
      *
      * @return string|null column or null if no column has been set
      */
-    public function getColumn(): ?string
+    public function getColumn(): string|null
     {
         if (!$this->hasColumn()) {
             $this->setColumn($this->getDefaultColumn());
@@ -52,9 +52,9 @@ trait ColumnTrait
     }
 
     /**
-     * Check if "column" has been set
+     * Check if column has been set
      *
-     * @return bool True if "column" has been set, false if not
+     * @return bool True if column has been set, false if not
      */
     public function hasColumn(): bool
     {
@@ -62,11 +62,11 @@ trait ColumnTrait
     }
 
     /**
-     * Get a default "column" value, if any is available
+     * Get a default column value, if any is available
      *
-     * @return string|null Default "column" value or null if no default value is available
+     * @return string|null Default column value or null if no default value is available
      */
-    public function getDefaultColumn(): ?string
+    public function getDefaultColumn(): string|null
     {
         return null;
     }

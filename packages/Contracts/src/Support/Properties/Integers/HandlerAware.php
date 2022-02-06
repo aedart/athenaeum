@@ -19,31 +19,31 @@ interface HandlerAware
      *
      * @return self
      */
-    public function setHandler(?int $identifier);
+    public function setHandler(int|null $identifier): static;
 
     /**
      * Get handler
      *
-     * If no "handler" value set, method
-     * sets and returns a default "handler".
+     * If no handler value set, method
+     * sets and returns a default handler.
      *
      * @see getDefaultHandler()
      *
      * @return int|null handler or null if no handler has been set
      */
-    public function getHandler(): ?int;
+    public function getHandler(): int|null;
 
     /**
-     * Check if "handler" has been set
+     * Check if handler has been set
      *
-     * @return bool True if "handler" has been set, false if not
+     * @return bool True if handler has been set, false if not
      */
     public function hasHandler(): bool;
 
     /**
-     * Get a default "handler" value, if any is available
+     * Get a default handler value, if any is available
      *
-     * @return int|null Default "handler" value or null if no default value is available
+     * @return int|null Default handler value or null if no default value is available
      */
-    public function getDefaultHandler(): ?int;
+    public function getDefaultHandler(): int|null;
 }

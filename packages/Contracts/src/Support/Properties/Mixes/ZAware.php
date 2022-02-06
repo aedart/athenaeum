@@ -15,35 +15,35 @@ interface ZAware
     /**
      * Set z
      *
-     * @param mixed|null $value Co-ordinate or value
+     * @param mixed $value Co-ordinate or value
      *
      * @return self
      */
-    public function setZ($value);
+    public function setZ(mixed $value): static;
 
     /**
      * Get z
      *
-     * If no "z" value set, method
-     * sets and returns a default "z".
+     * If no z value set, method
+     * sets and returns a default z.
      *
      * @see getDefaultZ()
      *
-     * @return mixed|null z or null if no z has been set
+     * @return mixed z or null if no z has been set
      */
-    public function getZ();
+    public function getZ(): mixed;
 
     /**
-     * Check if "z" has been set
+     * Check if z has been set
      *
-     * @return bool True if "z" has been set, false if not
+     * @return bool True if z has been set, false if not
      */
     public function hasZ(): bool;
 
     /**
-     * Get a default "z" value, if any is available
+     * Get a default z value, if any is available
      *
-     * @return mixed|null Default "z" value or null if no default value is available
+     * @return mixed Default z value or null if no default value is available
      */
-    public function getDefaultZ();
+    public function getDefaultZ(): mixed;
 }

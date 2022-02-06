@@ -31,7 +31,7 @@ interface ApiResource extends Dto,
      *
      * @throws Throwable
      */
-    public static function make(array $data = [], $connection = null);
+    public static function make(array $data = [], string|Connection|null $connection = null): static;
 
     /**
      * Returns Redmine resource name in plural form
@@ -73,7 +73,7 @@ interface ApiResource extends Dto,
         int $limit = 10,
         int $offset = 0,
         array $include = [],
-        $connection = null
+        string|Connection|null $connection = null
     ): PaginatedResults;
 
     /**
@@ -89,7 +89,7 @@ interface ApiResource extends Dto,
      * @throws JsonException
      * @throws Throwable
      */
-    public static function find($id, array $include = [], $connection = null);
+    public static function find(string|int $id, array $include = [], string|Connection|null $connection = null): static|null;
 
     /**
      * Finds resource that matches given id or fails
@@ -104,7 +104,7 @@ interface ApiResource extends Dto,
      * @throws JsonException
      * @throws Throwable
      */
-    public static function findOrFail($id, array $include = [], $connection = null);
+    public static function findOrFail(string|int $id, array $include = [], string|Connection|null $connection = null): static;
 
     /**
      * Fetch a single resource, with given filters or conditions set
@@ -128,7 +128,7 @@ interface ApiResource extends Dto,
      * @throws JsonException
      * @throws Throwable
      */
-    public static function fetch($id, ?callable $filters = null, $connection = null);
+    public static function fetch(string|int $id, callable|null $filters = null, string|Connection|null $connection = null): static;
 
     /**
      * Fetch multiple resources, with given filters or conditions set.
@@ -149,7 +149,7 @@ interface ApiResource extends Dto,
      * @param int $offset [optional]
      * @param string|Connection|null $connection [optional] Redmine connection profile
      *
-     * @return PaginatedResults<static>|static[]
+     * @return PaginatedResults<static>
      *
      * @throws UnsupportedOperationException If Redmine's API does not support listing this kind of resource.
      * @throws RedmineException If filters callback does not return a valid Request Builder
@@ -158,10 +158,10 @@ interface ApiResource extends Dto,
      * @throws Throwable
      */
     public static function fetchMultiple(
-        ?callable $filters = null,
+        callable|null $filters = null,
         int $limit = 10,
         int $offset = 0,
-        $connection = null
+        string|Connection|null $connection = null
     ): PaginatedResults;
 
     /**
@@ -173,7 +173,7 @@ interface ApiResource extends Dto,
      * @param int $limit [optional]
      * @param int $offset [optional]
      *
-     * @return PaginatedResults<static>|static[]
+     * @return PaginatedResults<static>
      *
      * @throws UnsupportedOperationException If Redmine's API does not support listing this kind of resource.
      * @throws JsonException
@@ -196,7 +196,7 @@ interface ApiResource extends Dto,
      * @throws JsonException
      * @throws Throwable
      */
-    public static function create(array $data, array $include = [], $connection = null);
+    public static function create(array $data, array $include = [], string|Connection|null $connection = null): static;
 
     /**
      * Save this resource.
@@ -270,7 +270,7 @@ interface ApiResource extends Dto,
      *
      * @return self
      */
-    public function withIncludes(array $includes = []);
+    public function withIncludes(array $includes = []): static;
 
     /**
      * Applies a filter or conditions callback
@@ -283,7 +283,7 @@ interface ApiResource extends Dto,
      *
      * @throws RedmineException If filters callback does not return a valid Request Builder
      */
-    public function applyFiltersCallback(?callable $filters = null, ?Builder $request = null): Builder;
+    public function applyFiltersCallback(callable|null $filters = null, Builder|null $request = null): Builder;
 
     /**
      * Applies "include" filter on request
@@ -293,7 +293,7 @@ interface ApiResource extends Dto,
      *
      * @return Builder
      */
-    public function applyIncludes(array $include = [], ?Builder $request = null): Builder;
+    public function applyIncludes(array $include = [], Builder|null $request = null): Builder;
 
     /**
      * Returns a prepared request builder
@@ -314,7 +314,7 @@ interface ApiResource extends Dto,
      *
      * @return Builder
      */
-    public function prepareNextRequest($request): Builder;
+    public function prepareNextRequest(Client|Builder $request): Builder;
 
     /**
      * Returns the Http Client set in the connection
@@ -332,7 +332,7 @@ interface ApiResource extends Dto,
      *
      * @return self
      */
-    public function fill(array $data = []);
+    public function fill(array $data = []): static;
 
     /**
      * Creates resource endpoint address
@@ -364,7 +364,7 @@ interface ApiResource extends Dto,
      *
      * @return string|int|null
      */
-    public function id();
+    public function id(): string|int|null;
 
     /**
      * Determine if this resource exists or not
@@ -389,7 +389,7 @@ interface ApiResource extends Dto,
      * @throws JsonException
      * @throws RedmineException When unable to extract from payload, e.g. key does not exist
      */
-    public function decode(ResponseInterface $response, ?string $extract = null): array;
+    public function decode(ResponseInterface $response, string|null $extract = null): array;
 
     /**
      * Determine if this resource can be listed via the API

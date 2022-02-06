@@ -26,7 +26,7 @@ trait ActionTrait
      *
      * @return self
      */
-    public function setAction(?callable $callback)
+    public function setAction(callable|null $callback): static
     {
         $this->action = $callback;
 
@@ -36,14 +36,14 @@ trait ActionTrait
     /**
      * Get action
      *
-     * If no "action" value set, method
-     * sets and returns a default "action".
+     * If no action value set, method
+     * sets and returns a default action.
      *
      * @see getDefaultAction()
      *
      * @return callable|null action or null if no action has been set
      */
-    public function getAction(): ?callable
+    public function getAction(): callable|null
     {
         if (!$this->hasAction()) {
             $this->setAction($this->getDefaultAction());
@@ -52,9 +52,9 @@ trait ActionTrait
     }
 
     /**
-     * Check if "action" has been set
+     * Check if action has been set
      *
-     * @return bool True if "action" has been set, false if not
+     * @return bool True if action has been set, false if not
      */
     public function hasAction(): bool
     {
@@ -62,11 +62,11 @@ trait ActionTrait
     }
 
     /**
-     * Get a default "action" value, if any is available
+     * Get a default action value, if any is available
      *
-     * @return callable|null Default "action" value or null if no default value is available
+     * @return callable|null Default action value or null if no default value is available
      */
-    public function getDefaultAction(): ?callable
+    public function getDefaultAction(): callable|null
     {
         return null;
     }

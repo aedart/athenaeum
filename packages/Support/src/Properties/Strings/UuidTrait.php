@@ -17,7 +17,7 @@ trait UuidTrait
      *
      * @var string|null
      */
-    protected ?string $uuid = null;
+    protected string|null $uuid = null;
 
     /**
      * Set uuid
@@ -26,7 +26,7 @@ trait UuidTrait
      *
      * @return self
      */
-    public function setUuid(?string $identifier)
+    public function setUuid(string|null $identifier): static
     {
         $this->uuid = $identifier;
 
@@ -36,14 +36,14 @@ trait UuidTrait
     /**
      * Get uuid
      *
-     * If no "uuid" value set, method
-     * sets and returns a default "uuid".
+     * If no uuid value set, method
+     * sets and returns a default uuid.
      *
      * @see getDefaultUuid()
      *
      * @return string|null uuid or null if no uuid has been set
      */
-    public function getUuid(): ?string
+    public function getUuid(): string|null
     {
         if (!$this->hasUuid()) {
             $this->setUuid($this->getDefaultUuid());
@@ -52,9 +52,9 @@ trait UuidTrait
     }
 
     /**
-     * Check if "uuid" has been set
+     * Check if uuid has been set
      *
-     * @return bool True if "uuid" has been set, false if not
+     * @return bool True if uuid has been set, false if not
      */
     public function hasUuid(): bool
     {
@@ -62,11 +62,11 @@ trait UuidTrait
     }
 
     /**
-     * Get a default "uuid" value, if any is available
+     * Get a default uuid value, if any is available
      *
-     * @return string|null Default "uuid" value or null if no default value is available
+     * @return string|null Default uuid value or null if no default value is available
      */
-    public function getDefaultUuid(): ?string
+    public function getDefaultUuid(): string|null
     {
         return null;
     }

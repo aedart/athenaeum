@@ -17,7 +17,7 @@ trait TopicTrait
      *
      * @var string|null
      */
-    protected ?string $topic = null;
+    protected string|null $topic = null;
 
     /**
      * Set topic
@@ -26,7 +26,7 @@ trait TopicTrait
      *
      * @return self
      */
-    public function setTopic(?string $name)
+    public function setTopic(string|null $name): static
     {
         $this->topic = $name;
 
@@ -36,14 +36,14 @@ trait TopicTrait
     /**
      * Get topic
      *
-     * If no "topic" value set, method
-     * sets and returns a default "topic".
+     * If no topic value set, method
+     * sets and returns a default topic.
      *
      * @see getDefaultTopic()
      *
      * @return string|null topic or null if no topic has been set
      */
-    public function getTopic(): ?string
+    public function getTopic(): string|null
     {
         if (!$this->hasTopic()) {
             $this->setTopic($this->getDefaultTopic());
@@ -52,9 +52,9 @@ trait TopicTrait
     }
 
     /**
-     * Check if "topic" has been set
+     * Check if topic has been set
      *
-     * @return bool True if "topic" has been set, false if not
+     * @return bool True if topic has been set, false if not
      */
     public function hasTopic(): bool
     {
@@ -62,11 +62,11 @@ trait TopicTrait
     }
 
     /**
-     * Get a default "topic" value, if any is available
+     * Get a default topic value, if any is available
      *
-     * @return string|null Default "topic" value or null if no default value is available
+     * @return string|null Default topic value or null if no default value is available
      */
-    public function getDefaultTopic(): ?string
+    public function getDefaultTopic(): string|null
     {
         return null;
     }

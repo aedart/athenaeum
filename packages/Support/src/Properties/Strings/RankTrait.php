@@ -17,7 +17,7 @@ trait RankTrait
      *
      * @var string|null
      */
-    protected ?string $rank = null;
+    protected string|null $rank = null;
 
     /**
      * Set rank
@@ -26,7 +26,7 @@ trait RankTrait
      *
      * @return self
      */
-    public function setRank(?string $position)
+    public function setRank(string|null $position): static
     {
         $this->rank = $position;
 
@@ -36,14 +36,14 @@ trait RankTrait
     /**
      * Get rank
      *
-     * If no "rank" value set, method
-     * sets and returns a default "rank".
+     * If no rank value set, method
+     * sets and returns a default rank.
      *
      * @see getDefaultRank()
      *
      * @return string|null rank or null if no rank has been set
      */
-    public function getRank(): ?string
+    public function getRank(): string|null
     {
         if (!$this->hasRank()) {
             $this->setRank($this->getDefaultRank());
@@ -52,9 +52,9 @@ trait RankTrait
     }
 
     /**
-     * Check if "rank" has been set
+     * Check if rank has been set
      *
-     * @return bool True if "rank" has been set, false if not
+     * @return bool True if rank has been set, false if not
      */
     public function hasRank(): bool
     {
@@ -62,11 +62,11 @@ trait RankTrait
     }
 
     /**
-     * Get a default "rank" value, if any is available
+     * Get a default rank value, if any is available
      *
-     * @return string|null Default "rank" value or null if no default value is available
+     * @return string|null Default rank value or null if no default value is available
      */
-    public function getDefaultRank(): ?string
+    public function getDefaultRank(): string|null
     {
         return null;
     }

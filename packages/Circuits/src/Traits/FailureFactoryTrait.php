@@ -20,7 +20,7 @@ trait FailureFactoryTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $failureFactory = null;
+    protected Factory|null $failureFactory = null;
 
     /**
      * Set failure factory
@@ -29,7 +29,7 @@ trait FailureFactoryTrait
      *
      * @return self
      */
-    public function setFailureFactory(?Factory $factory)
+    public function setFailureFactory(Factory|null $factory): static
     {
         $this->failureFactory = $factory;
 
@@ -45,7 +45,7 @@ trait FailureFactoryTrait
      *
      * @return Factory|null failure factory or null if none failure factory has been set
      */
-    public function getFailureFactory(): ?Factory
+    public function getFailureFactory(): Factory|null
     {
         if (!$this->hasFailureFactory()) {
             $this->setFailureFactory($this->getDefaultFailureFactory());
@@ -68,7 +68,7 @@ trait FailureFactoryTrait
      *
      * @return Factory|null A default failure factory value or Null if no default value is available
      */
-    public function getDefaultFailureFactory(): ?Factory
+    public function getDefaultFailureFactory(): Factory|null
     {
         return IoCFacade::tryMake(Factory::class);
     }

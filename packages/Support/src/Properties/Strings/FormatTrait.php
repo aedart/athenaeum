@@ -17,7 +17,7 @@ trait FormatTrait
      *
      * @var string|null
      */
-    protected ?string $format = null;
+    protected string|null $format = null;
 
     /**
      * Set format
@@ -26,7 +26,7 @@ trait FormatTrait
      *
      * @return self
      */
-    public function setFormat(?string $format)
+    public function setFormat(string|null $format): static
     {
         $this->format = $format;
 
@@ -36,14 +36,14 @@ trait FormatTrait
     /**
      * Get format
      *
-     * If no "format" value set, method
-     * sets and returns a default "format".
+     * If no format value set, method
+     * sets and returns a default format.
      *
      * @see getDefaultFormat()
      *
      * @return string|null format or null if no format has been set
      */
-    public function getFormat(): ?string
+    public function getFormat(): string|null
     {
         if (!$this->hasFormat()) {
             $this->setFormat($this->getDefaultFormat());
@@ -52,9 +52,9 @@ trait FormatTrait
     }
 
     /**
-     * Check if "format" has been set
+     * Check if format has been set
      *
-     * @return bool True if "format" has been set, false if not
+     * @return bool True if format has been set, false if not
      */
     public function hasFormat(): bool
     {
@@ -62,11 +62,11 @@ trait FormatTrait
     }
 
     /**
-     * Get a default "format" value, if any is available
+     * Get a default format value, if any is available
      *
-     * @return string|null Default "format" value or null if no default value is available
+     * @return string|null Default format value or null if no default value is available
      */
-    public function getDefaultFormat(): ?string
+    public function getDefaultFormat(): string|null
     {
         return null;
     }

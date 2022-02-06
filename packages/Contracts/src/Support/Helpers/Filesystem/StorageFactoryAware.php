@@ -19,7 +19,7 @@ interface StorageFactoryAware
      *
      * @return self
      */
-    public function setStorageFactory(?Factory $factory);
+    public function setStorageFactory(Factory|null $factory): static;
 
     /**
      * Get storage factory
@@ -32,7 +32,7 @@ interface StorageFactoryAware
      *
      * @return Factory|null storage factory or null if none storage factory has been set
      */
-    public function getStorageFactory(): ?Factory;
+    public function getStorageFactory(): Factory|null;
 
     /**
      * Check if storage factory has been set
@@ -46,5 +46,5 @@ interface StorageFactoryAware
      *
      * @return Factory|null A default storage factory value or Null if no default value is available
      */
-    public function getDefaultStorageFactory(): ?Factory;
+    public function getDefaultStorageFactory(): Factory|null;
 }

@@ -66,7 +66,7 @@ class SortingProcessor extends BaseProcessor
     /**
      * @inheritDoc
      */
-    public function process(BuiltFiltersMap $built, callable $next)
+    public function process(BuiltFiltersMap $built, callable $next): mixed
     {
         // Obtain requested or default
         $value = !empty($this->value())
@@ -100,7 +100,7 @@ class SortingProcessor extends BaseProcessor
      *
      * @return $this
      */
-    public function sortable(array $properties)
+    public function sortable(array $properties): static
     {
         $this->sortable = $properties;
 
@@ -125,7 +125,7 @@ class SortingProcessor extends BaseProcessor
      *
      * @return self
      */
-    public function directions(array $map)
+    public function directions(array $map): static
     {
         $this->directions = $map;
 
@@ -140,7 +140,7 @@ class SortingProcessor extends BaseProcessor
      *
      * @return self
      */
-    public function maxSortingProperties(int $max = 3)
+    public function maxSortingProperties(int $max = 3): static
     {
         $this->maxSortingProperties = $max;
 
@@ -157,7 +157,7 @@ class SortingProcessor extends BaseProcessor
      *
      * @return self
      */
-    public function defaultSort(string $value)
+    public function defaultSort(string $value): static
     {
         $this->defaultSortValue = $value;
 
@@ -191,7 +191,7 @@ class SortingProcessor extends BaseProcessor
      * @throws InvalidParameter
      * @throws LogicException When incorrect value format is given
      */
-    protected function extractRequestedSortBy($value): array
+    protected function extractRequestedSortBy(string|array $value): array
     {
         if (is_string($value)) {
             $value = $this->extractListFromRequested($value, $this->delimiter);
@@ -352,7 +352,7 @@ class SortingProcessor extends BaseProcessor
      *
      * @throws InvalidParameter
      */
-    protected function assertPropertyIsAllowed(string $property, array $allowed)
+    protected function assertPropertyIsAllowed(string $property, array $allowed): static
     {
         if (!in_array($property, $allowed)) {
             throw InvalidParameter::make(

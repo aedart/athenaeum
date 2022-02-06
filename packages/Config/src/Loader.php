@@ -36,7 +36,7 @@ class Loader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function setDirectory(string $path): LoaderInterface
+    public function setDirectory(string $path): static
     {
         $path = realpath($path);
 
@@ -56,7 +56,7 @@ class Loader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function getDirectory(): ?string
+    public function getDirectory(): string|null
     {
         return $this->directory;
     }
@@ -87,7 +87,7 @@ class Loader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function parse($file): Repository
+    public function parse(SplFileInfo|string $file): Repository
     {
         $file = $this->resolveFile($file);
 
@@ -127,21 +127,17 @@ class Loader implements LoaderInterface
     /**
      * Resolve the given file into a SplFileInfo obj
      *
-     * @param string|SplFileInfo $file
+     * @param  SplFileInfo|string  $file
      *
      * @return SplFileInfo
      */
-    protected function resolveFile($file): SplFileInfo
+    protected function resolveFile(SplFileInfo|string $file): SplFileInfo
     {
         if ($file instanceof SplFileInfo) {
             return $file;
         }
 
-        if (is_string($file)) {
-            return new SplFileInfo($file);
-        }
-
-        throw new UnableToParseFile(sprintf('Unable to parse file "%s"', var_export($file, true)));
+        return new SplFileInfo($file);
     }
 
     /**

@@ -20,7 +20,7 @@ trait FileParserFactoryTrait
      *
      * @var FileParserFactory|null
      */
-    protected ?FileParserFactory $fileParserFactory = null;
+    protected FileParserFactory|null $fileParserFactory = null;
 
     /**
      * Set file parser factory
@@ -29,7 +29,7 @@ trait FileParserFactoryTrait
      *
      * @return self
      */
-    public function setFileParserFactory(?FileParserFactory $factory)
+    public function setFileParserFactory(FileParserFactory|null $factory): static
     {
         $this->fileParserFactory = $factory;
 
@@ -47,7 +47,7 @@ trait FileParserFactoryTrait
      *
      * @return FileParserFactory|null file parser factory or null if none file parser factory has been set
      */
-    public function getFileParserFactory(): ?FileParserFactory
+    public function getFileParserFactory(): FileParserFactory|null
     {
         if (!$this->hasFileParserFactory()) {
             $this->setFileParserFactory($this->getDefaultFileParserFactory());
@@ -70,7 +70,7 @@ trait FileParserFactoryTrait
      *
      * @return FileParserFactory|null A default file parser factory value or Null if no default value is available
      */
-    public function getDefaultFileParserFactory(): ?FileParserFactory
+    public function getDefaultFileParserFactory(): FileParserFactory|null
     {
         return FileParserFactoryFacade::getFacadeRoot();
     }

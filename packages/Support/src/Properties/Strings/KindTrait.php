@@ -17,7 +17,7 @@ trait KindTrait
      *
      * @var string|null
      */
-    protected ?string $kind = null;
+    protected string|null $kind = null;
 
     /**
      * Set kind
@@ -26,7 +26,7 @@ trait KindTrait
      *
      * @return self
      */
-    public function setKind(?string $kind)
+    public function setKind(string|null $kind): static
     {
         $this->kind = $kind;
 
@@ -36,14 +36,14 @@ trait KindTrait
     /**
      * Get kind
      *
-     * If no "kind" value set, method
-     * sets and returns a default "kind".
+     * If no kind value set, method
+     * sets and returns a default kind.
      *
      * @see getDefaultKind()
      *
      * @return string|null kind or null if no kind has been set
      */
-    public function getKind(): ?string
+    public function getKind(): string|null
     {
         if (!$this->hasKind()) {
             $this->setKind($this->getDefaultKind());
@@ -52,9 +52,9 @@ trait KindTrait
     }
 
     /**
-     * Check if "kind" has been set
+     * Check if kind has been set
      *
-     * @return bool True if "kind" has been set, false if not
+     * @return bool True if kind has been set, false if not
      */
     public function hasKind(): bool
     {
@@ -62,11 +62,11 @@ trait KindTrait
     }
 
     /**
-     * Get a default "kind" value, if any is available
+     * Get a default kind value, if any is available
      *
-     * @return string|null Default "kind" value or null if no default value is available
+     * @return string|null Default kind value or null if no default value is available
      */
-    public function getDefaultKind(): ?string
+    public function getDefaultKind(): string|null
     {
         return null;
     }

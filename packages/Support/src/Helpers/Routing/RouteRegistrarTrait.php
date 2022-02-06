@@ -20,7 +20,7 @@ trait RouteRegistrarTrait
      *
      * @var Registrar|null
      */
-    protected ?Registrar $routeRegistrar = null;
+    protected Registrar|null $routeRegistrar = null;
 
     /**
      * Set route registrar
@@ -29,7 +29,7 @@ trait RouteRegistrarTrait
      *
      * @return self
      */
-    public function setRouteRegistrar(?Registrar $registrar)
+    public function setRouteRegistrar(Registrar|null $registrar): static
     {
         $this->routeRegistrar = $registrar;
 
@@ -47,7 +47,7 @@ trait RouteRegistrarTrait
      *
      * @return Registrar|null route registrar or null if none route registrar has been set
      */
-    public function getRouteRegistrar(): ?Registrar
+    public function getRouteRegistrar(): Registrar|null
     {
         if (!$this->hasRouteRegistrar()) {
             $this->setRouteRegistrar($this->getDefaultRouteRegistrar());
@@ -70,7 +70,7 @@ trait RouteRegistrarTrait
      *
      * @return Registrar|null A default route registrar value or Null if no default value is available
      */
-    public function getDefaultRouteRegistrar(): ?Registrar
+    public function getDefaultRouteRegistrar(): Registrar|null
     {
         return Route::getFacadeRoot();
     }

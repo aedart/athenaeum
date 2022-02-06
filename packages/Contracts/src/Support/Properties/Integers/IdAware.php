@@ -19,31 +19,31 @@ interface IdAware
      *
      * @return self
      */
-    public function setId(?int $identifier);
+    public function setId(int|null $identifier): static;
 
     /**
      * Get id
      *
-     * If no "id" value set, method
-     * sets and returns a default "id".
+     * If no id value set, method
+     * sets and returns a default id.
      *
      * @see getDefaultId()
      *
      * @return int|null id or null if no id has been set
      */
-    public function getId(): ?int;
+    public function getId(): int|null;
 
     /**
-     * Check if "id" has been set
+     * Check if id has been set
      *
-     * @return bool True if "id" has been set, false if not
+     * @return bool True if id has been set, false if not
      */
     public function hasId(): bool;
 
     /**
-     * Get a default "id" value, if any is available
+     * Get a default id value, if any is available
      *
-     * @return int|null Default "id" value or null if no default value is available
+     * @return int|null Default id value or null if no default value is available
      */
-    public function getDefaultId(): ?int;
+    public function getDefaultId(): int|null;
 }

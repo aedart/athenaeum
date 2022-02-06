@@ -5,17 +5,14 @@ namespace Aedart\Dto\Partials;
 use Aedart\Utils\Json;
 use Carbon\Carbon;
 use DateTimeInterface;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use JsonException;
+use Throwable;
 
 /**
  * Casting Partial
  *
- * <br />
- *
- * Deals with property value casting
- *
- * <br />
- *
+ * Deals with property value casting.
  * This partial is intended for the Dto abstraction(s)
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
@@ -28,11 +25,13 @@ trait CastingPartial
      *
      * @param string $name Name of property
      * @param mixed $value Value to cast
-     * @return bool|float|int|mixed|string
+     *
+     * @return mixed
      *
      * @throws JsonException
+     * @throws BindingResolutionException|Throwable
      */
-    protected function castPropertyValue(string $name, $value)
+    protected function castPropertyValue(string $name, mixed $value): mixed
     {
         // Get the type to cast to, if one exists.
         // If none type has been set, then just return
@@ -43,34 +42,17 @@ trait CastingPartial
 
         // Cast value to assigned type
         $type = $this->allowed[$name];
-        switch ($type) {
-            case 'string':
-            case 'str':
-                return $this->castAsString($value);
+        return match ($type) {
+            'string', 'str' => $this->castAsString($value),
+            'integer', 'int' => $this->castAsInteger($value),
+            'float', 'double' => $this->castAsFloat($value),
+            'boolean', 'bool' => $this->castAsBoolean($value),
+            'array' => $this->castAsArray($value),
+            'date' => $this->castAsDate($value),
 
-            case 'int':
-            case 'integer':
-                return $this->castAsInteger($value);
-
-            case 'float':
-            case 'double':
-                return $this->castAsFloat($value);
-
-            case 'bool':
-            case 'boolean':
-                return $this->castAsBoolean($value);
-
-            case 'array':
-                return $this->castAsArray($value);
-
-            case 'date':
-                return $this->castAsDate($value);
-
-            // We assume that it's an object that must be
-            // resolved via the IoC
-            default:
-                return $this->resolveClassAndPopulate($type, $name, $value);
-        }
+            // We assume that it's an object that must be resolved via the IoC
+            default => $this->resolveClassAndPopulate($type, $name, $value)
+        };
     }
 
     /**
@@ -80,7 +62,7 @@ trait CastingPartial
      *
      * @return string
      */
-    protected function castAsString($value): string
+    protected function castAsString(mixed $value): string
     {
         return (string) $value;
     }
@@ -92,7 +74,7 @@ trait CastingPartial
      *
      * @return int
      */
-    protected function castAsInteger($value): int
+    protected function castAsInteger(mixed $value): int
     {
         return (int) $value;
     }
@@ -104,7 +86,7 @@ trait CastingPartial
      *
      * @return float
      */
-    protected function castAsFloat($value): float
+    protected function castAsFloat(mixed $value): float
     {
         return (float) $value;
     }
@@ -116,7 +98,7 @@ trait CastingPartial
      *
      * @return bool
      */
-    protected function castAsBoolean($value): bool
+    protected function castAsBoolean(mixed $value): bool
     {
         return (bool) $value;
     }
@@ -129,7 +111,7 @@ trait CastingPartial
      *
      * @throws JsonException
      */
-    protected function castAsArray($value): array
+    protected function castAsArray(string|array $value): array
     {
         if (is_array($value)) {
             return $value;
@@ -145,7 +127,7 @@ trait CastingPartial
      *
      * @return Carbon|DateTimeInterface
      */
-    protected function castAsDate($value)
+    protected function castAsDate(string|null $value): Carbon|DateTimeInterface
     {
         return Carbon::parse($value);
     }

@@ -21,7 +21,7 @@ trait CacheStoreTrait
      *
      * @var Store|null
      */
-    protected ?Store $cacheStore = null;
+    protected Store|null $cacheStore = null;
 
     /**
      * Set cache store
@@ -30,7 +30,7 @@ trait CacheStoreTrait
      *
      * @return self
      */
-    public function setCacheStore(?Store $store)
+    public function setCacheStore(Store|null $store): static
     {
         $this->cacheStore = $store;
 
@@ -48,7 +48,7 @@ trait CacheStoreTrait
      *
      * @return Store|null cache store or null if none cache store has been set
      */
-    public function getCacheStore(): ?Store
+    public function getCacheStore(): Store|null
     {
         if (!$this->hasCacheStore()) {
             $this->setCacheStore($this->getDefaultCacheStore());
@@ -71,7 +71,7 @@ trait CacheStoreTrait
      *
      * @return Store|null A default cache store value or Null if no default value is available
      */
-    public function getDefaultCacheStore(): ?Store
+    public function getDefaultCacheStore(): Store|null
     {
         $manager = Cache::getFacadeRoot();
         if (isset($manager)) {

@@ -15,35 +15,35 @@ interface JsonAware
     /**
      * Set json
      *
-     * @param mixed|null $json JavaScript Object Notation (JSON)
+     * @param mixed $json JavaScript Object Notation (JSON)
      *
      * @return self
      */
-    public function setJson($json);
+    public function setJson(mixed $json): static;
 
     /**
      * Get json
      *
-     * If no "json" value set, method
-     * sets and returns a default "json".
+     * If no json value set, method
+     * sets and returns a default json.
      *
      * @see getDefaultJson()
      *
-     * @return mixed|null json or null if no json has been set
+     * @return mixed json or null if no json has been set
      */
-    public function getJson();
+    public function getJson(): mixed;
 
     /**
-     * Check if "json" has been set
+     * Check if json has been set
      *
-     * @return bool True if "json" has been set, false if not
+     * @return bool True if json has been set, false if not
      */
     public function hasJson(): bool;
 
     /**
-     * Get a default "json" value, if any is available
+     * Get a default json value, if any is available
      *
-     * @return mixed|null Default "json" value or null if no default value is available
+     * @return mixed Default json value or null if no default value is available
      */
-    public function getDefaultJson();
+    public function getDefaultJson(): mixed;
 }

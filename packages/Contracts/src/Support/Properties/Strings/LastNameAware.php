@@ -19,31 +19,31 @@ interface LastNameAware
      *
      * @return self
      */
-    public function setLastName(?string $name);
+    public function setLastName(string|null $name): static;
 
     /**
      * Get last name
      *
-     * If no "last name" value set, method
-     * sets and returns a default "last name".
+     * If no last name value set, method
+     * sets and returns a default last name.
      *
      * @see getDefaultLastName()
      *
      * @return string|null last name or null if no last name has been set
      */
-    public function getLastName(): ?string;
+    public function getLastName(): string|null;
 
     /**
-     * Check if "last name" has been set
+     * Check if last name has been set
      *
-     * @return bool True if "last name" has been set, false if not
+     * @return bool True if last name has been set, false if not
      */
     public function hasLastName(): bool;
 
     /**
-     * Get a default "last name" value, if any is available
+     * Get a default last name value, if any is available
      *
-     * @return string|null Default "last name" value or null if no default value is available
+     * @return string|null Default last name value or null if no default value is available
      */
-    public function getDefaultLastName(): ?string;
+    public function getDefaultLastName(): string|null;
 }

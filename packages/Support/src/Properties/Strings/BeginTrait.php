@@ -17,7 +17,7 @@ trait BeginTrait
      *
      * @var string|null
      */
-    protected ?string $begin = null;
+    protected string|null $begin = null;
 
     /**
      * Set begin
@@ -26,7 +26,7 @@ trait BeginTrait
      *
      * @return self
      */
-    public function setBegin(?string $location)
+    public function setBegin(string|null $location): static
     {
         $this->begin = $location;
 
@@ -36,14 +36,14 @@ trait BeginTrait
     /**
      * Get begin
      *
-     * If no "begin" value set, method
-     * sets and returns a default "begin".
+     * If no begin value set, method
+     * sets and returns a default begin.
      *
      * @see getDefaultBegin()
      *
      * @return string|null begin or null if no begin has been set
      */
-    public function getBegin(): ?string
+    public function getBegin(): string|null
     {
         if (!$this->hasBegin()) {
             $this->setBegin($this->getDefaultBegin());
@@ -52,9 +52,9 @@ trait BeginTrait
     }
 
     /**
-     * Check if "begin" has been set
+     * Check if begin has been set
      *
-     * @return bool True if "begin" has been set, false if not
+     * @return bool True if begin has been set, false if not
      */
     public function hasBegin(): bool
     {
@@ -62,11 +62,11 @@ trait BeginTrait
     }
 
     /**
-     * Get a default "begin" value, if any is available
+     * Get a default begin value, if any is available
      *
-     * @return string|null Default "begin" value or null if no default value is available
+     * @return string|null Default begin value or null if no default value is available
      */
-    public function getDefaultBegin(): ?string
+    public function getDefaultBegin(): string|null
     {
         return null;
     }

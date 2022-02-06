@@ -15,18 +15,18 @@ trait YTrait
     /**
      * Co-ordinate or value
      *
-     * @var mixed|null
+     * @var mixed
      */
     protected $y = null;
 
     /**
      * Set y
      *
-     * @param mixed|null $value Co-ordinate or value
+     * @param mixed $value Co-ordinate or value
      *
      * @return self
      */
-    public function setY($value)
+    public function setY(mixed $value): static
     {
         $this->y = $value;
 
@@ -36,14 +36,14 @@ trait YTrait
     /**
      * Get y
      *
-     * If no "y" value set, method
-     * sets and returns a default "y".
+     * If no y value set, method
+     * sets and returns a default y.
      *
      * @see getDefaultY()
      *
-     * @return mixed|null y or null if no y has been set
+     * @return mixed y or null if no y has been set
      */
-    public function getY()
+    public function getY(): mixed
     {
         if (!$this->hasY()) {
             $this->setY($this->getDefaultY());
@@ -52,9 +52,9 @@ trait YTrait
     }
 
     /**
-     * Check if "y" has been set
+     * Check if y has been set
      *
-     * @return bool True if "y" has been set, false if not
+     * @return bool True if y has been set, false if not
      */
     public function hasY(): bool
     {
@@ -62,11 +62,11 @@ trait YTrait
     }
 
     /**
-     * Get a default "y" value, if any is available
+     * Get a default y value, if any is available
      *
-     * @return mixed|null Default "y" value or null if no default value is available
+     * @return mixed Default y value or null if no default value is available
      */
-    public function getDefaultY()
+    public function getDefaultY(): mixed
     {
         return null;
     }

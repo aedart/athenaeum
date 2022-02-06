@@ -2,8 +2,6 @@
 
 namespace Aedart\Contracts\Support\Helpers\Logging;
 
-use Illuminate\Log\LogManager;
-
 /**
  * Log Manager Aware
  *
@@ -15,11 +13,11 @@ interface LogManagerAware
     /**
      * Set log manager
      *
-     * @param LogManager|null $manager Log Manager instance
+     * @param \Illuminate\Log\LogManager|null $manager Log Manager instance
      *
      * @return self
      */
-    public function setLogManager(?LogManager $manager);
+    public function setLogManager($manager): static;
 
     /**
      * Get log manager
@@ -30,9 +28,9 @@ interface LogManagerAware
      *
      * @see getDefaultLogManager()
      *
-     * @return LogManager|null log manager or null if none log manager has been set
+     * @return \Illuminate\Log\LogManager|null log manager or null if none log manager has been set
      */
-    public function getLogManager(): ?LogManager;
+    public function getLogManager();
 
     /**
      * Check if log manager has been set
@@ -44,7 +42,7 @@ interface LogManagerAware
     /**
      * Get a default log manager value, if any is available
      *
-     * @return LogManager|null A default log manager value or Null if no default value is available
+     * @return \Illuminate\Log\LogManager|null A default log manager value or Null if no default value is available
      */
-    public function getDefaultLogManager(): ?LogManager;
+    public function getDefaultLogManager();
 }

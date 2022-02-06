@@ -37,7 +37,7 @@ trait Overload
      * @throws ReflectionException
      * @throws UndefinedProperty
      */
-    public function __get(string $name)
+    public function __get(string $name): mixed
     {
         if (!$this->hasInternalProperty($name)) {
             throw new UndefinedProperty(sprintf('Failed reading Property "%s". It does not exist or is inaccessible', $name));
@@ -52,18 +52,18 @@ trait Overload
      * @param string $name
      * @param mixed $value
      *
-     * @return mixed
+     * @return void
      *
      * @throws ReflectionException
      * @throws UndefinedProperty
      */
-    public function __set(string $name, $value)
+    public function __set(string $name, mixed $value): void
     {
         if (!$this->hasInternalProperty($name)) {
             throw new UndefinedProperty(sprintf('Failed writing Property "%s". It does not exist or is inaccessible', $name));
         }
 
-        return $this->invokeSetter($this->getInternalProperty($name), $value);
+        $this->invokeSetter($this->getInternalProperty($name), $value);
     }
 
     /**
@@ -119,7 +119,7 @@ trait Overload
      * @throws ReflectionException
      * @throws UndefinedProperty
      */
-    protected function invokeGetter(ReflectionProperty $property)
+    protected function invokeGetter(ReflectionProperty $property): mixed
     {
         $methodName = MethodHelper::makeGetterName($property->getName());
         if ($this->hasInternalMethod($methodName)) {
@@ -144,7 +144,7 @@ trait Overload
      * @throws ReflectionException
      * @throws UndefinedProperty
      */
-    protected function invokeSetter(ReflectionProperty $property, $value)
+    protected function invokeSetter(ReflectionProperty $property, mixed $value): mixed
     {
         $methodName = MethodHelper::makeSetterName($property->getName());
         if ($this->hasInternalMethod($methodName)) {

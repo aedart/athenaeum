@@ -20,7 +20,7 @@ trait ContainerTrait
      *
      * @var Container|null
      */
-    protected ?Container $container = null;
+    protected Container|null $container = null;
 
     /**
      * Set container
@@ -29,7 +29,7 @@ trait ContainerTrait
      *
      * @return self
      */
-    public function setContainer(?Container $container)
+    public function setContainer(Container|null $container): static
     {
         $this->container = $container;
 
@@ -47,7 +47,7 @@ trait ContainerTrait
      *
      * @return Container|null container or null if none container has been set
      */
-    public function getContainer(): ?Container
+    public function getContainer(): Container|null
     {
         if (!$this->hasContainer()) {
             $this->setContainer($this->getDefaultContainer());
@@ -70,7 +70,7 @@ trait ContainerTrait
      *
      * @return Container|null A default container value or Null if no default value is available
      */
-    public function getDefaultContainer(): ?Container
+    public function getDefaultContainer(): Container|null
     {
         return IoCFacade::tryMake(Container::class);
     }

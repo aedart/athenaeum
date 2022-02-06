@@ -26,7 +26,7 @@ abstract class BaseEvent implements CircuitBreakerEvent
      *
      * @var Failure|null
      */
-    public ?Failure $lastFailure = null;
+    public Failure|null $lastFailure = null;
 
     /**
      * BaseEvent constructor.
@@ -34,7 +34,7 @@ abstract class BaseEvent implements CircuitBreakerEvent
      * @param State $state
      * @param Failure|null $lastFailure [optional]
      */
-    public function __construct(State $state, ?Failure $lastFailure = null)
+    public function __construct(State $state, Failure|null $lastFailure = null)
     {
         $this->state = $state;
         $this->lastFailure = $lastFailure;
@@ -51,7 +51,7 @@ abstract class BaseEvent implements CircuitBreakerEvent
     /**
      * @inheritDoc
      */
-    public function lastFailure(): ?Failure
+    public function lastFailure(): Failure|null
     {
         return $this->lastFailure;
     }

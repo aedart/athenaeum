@@ -6,6 +6,7 @@ namespace Aedart\Audit\Observers\Concerns;
 use Aedart\Utils\Helpers\Invoker;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
+use Throwable;
 
 /**
  * Concerns Model Attributes
@@ -23,9 +24,9 @@ trait ModelAttributes
      *
      * @return mixed
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
-    protected function resolveOriginalData(Model $model, string $type)
+    protected function resolveOriginalData(Model $model, string $type): mixed
     {
         return Invoker::invoke([$model, 'originalData'])
             ->with($type)
@@ -43,9 +44,9 @@ trait ModelAttributes
      *
      * @return mixed
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
-    protected function resolveChangedData(Model $model, string $type)
+    protected function resolveChangedData(Model $model, string $type): mixed
     {
         return Invoker::invoke([$model, 'changedData'])
             ->with($type)
@@ -63,7 +64,7 @@ trait ModelAttributes
      *
      * @return array|null
      */
-    protected function reduceOriginal(?array $original, ?array $changed): ?array
+    protected function reduceOriginal(array|null $original, array|null $changed): array|null
     {
         if (!empty($original) && !empty($changed)) {
             return $this->pluck(array_keys($changed), $original);
@@ -80,7 +81,7 @@ trait ModelAttributes
      *
      * @return string|null
      */
-    protected function resolveAuditTrailMessage(Model $model, string $type): ?string
+    protected function resolveAuditTrailMessage(Model $model, string $type): string|null
     {
         if (method_exists($model, 'getAuditTrailMessage')) {
             return $model->getAuditTrailMessage($type);

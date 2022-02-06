@@ -19,7 +19,7 @@ interface HttpRequestAware
      *
      * @return self
      */
-    public function setHttpRequest(?RequestInterface $request);
+    public function setHttpRequest(RequestInterface|null $request): static;
 
     /**
      * Get http request
@@ -30,7 +30,7 @@ interface HttpRequestAware
      *
      * @return RequestInterface|null http request or null if none http request has been set
      */
-    public function getHttpRequest(): ?RequestInterface;
+    public function getHttpRequest(): RequestInterface|null;
 
     /**
      * Check if http request has been set
@@ -44,5 +44,5 @@ interface HttpRequestAware
      *
      * @return RequestInterface|null A default http request value or Null if no default value is available
      */
-    public function getDefaultHttpRequest(): ?RequestInterface;
+    public function getDefaultHttpRequest(): RequestInterface|null;
 }

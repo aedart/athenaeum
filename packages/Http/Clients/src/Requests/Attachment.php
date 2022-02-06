@@ -74,7 +74,7 @@ class Attachment implements AttachmentInterface
     /**
      * @inheritDoc
      */
-    public function name(string $name): AttachmentInterface
+    public function name(string $name): static
     {
         $this->name = $name;
 
@@ -92,7 +92,7 @@ class Attachment implements AttachmentInterface
     /**
      * @inheritDoc
      */
-    public function headers(array $headers = []): AttachmentInterface
+    public function headers(array $headers = []): static
     {
         $this->headers = $headers;
 
@@ -110,7 +110,7 @@ class Attachment implements AttachmentInterface
     /**
      * @inheritDoc
      */
-    public function contents($data): AttachmentInterface
+    public function contents($data): static
     {
         $this->contents = $data;
 
@@ -128,7 +128,7 @@ class Attachment implements AttachmentInterface
     /**
      * @inheritDoc
      */
-    public function attachFile(string $path): AttachmentInterface
+    public function attachFile(string $path): static
     {
         if (!file_exists($path)) {
             throw new InvalidFilePath(sprintf('Cannot attach file %s, please check your path', $path));
@@ -140,7 +140,7 @@ class Attachment implements AttachmentInterface
     /**
      * @inheritDoc
      */
-    public function filename(?string $name = null): AttachmentInterface
+    public function filename(?string $name = null): static
     {
         $this->filename = $name;
 

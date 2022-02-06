@@ -19,7 +19,7 @@ class NullProcessingRule implements ProcessingRule
     /**
      * @inheritDoc
      */
-    public function process($item, Summation $summation): Summation
+    public function process(mixed $item, Summation $summation): Summation
     {
         return $summation;
     }

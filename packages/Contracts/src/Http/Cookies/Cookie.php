@@ -23,14 +23,14 @@ interface Cookie extends Populatable,
      *
      * @return self
      */
-    public function name(string $name);
+    public function name(string $name): static;
 
     /**
      * Returns the cookie-name
      *
      * @return string|null
      */
-    public function getName(): ?string;
+    public function getName(): string|null;
 
     /**
      * Set the cookie-value
@@ -39,12 +39,12 @@ interface Cookie extends Populatable,
      *
      * @return self
      */
-    public function value(?string $value = null);
+    public function value(string|null $value = null): static;
 
     /**
      * Returns the cookie-value
      *
      * @return string|null
      */
-    public function getValue(): ?string;
+    public function getValue(): string|null;
 }

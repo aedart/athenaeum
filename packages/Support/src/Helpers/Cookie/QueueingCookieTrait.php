@@ -20,7 +20,7 @@ trait QueueingCookieTrait
      *
      * @var QueueingFactory|null
      */
-    protected ?QueueingFactory $queueingCookie = null;
+    protected QueueingFactory|null $queueingCookie = null;
 
     /**
      * Set queueing cookie
@@ -29,7 +29,7 @@ trait QueueingCookieTrait
      *
      * @return self
      */
-    public function setQueueingCookie(?QueueingFactory $factory)
+    public function setQueueingCookie(QueueingFactory|null $factory): static
     {
         $this->queueingCookie = $factory;
 
@@ -47,7 +47,7 @@ trait QueueingCookieTrait
      *
      * @return QueueingFactory|null queueing cookie or null if none queueing cookie has been set
      */
-    public function getQueueingCookie(): ?QueueingFactory
+    public function getQueueingCookie(): QueueingFactory|null
     {
         if (!$this->hasQueueingCookie()) {
             $this->setQueueingCookie($this->getDefaultQueueingCookie());
@@ -70,7 +70,7 @@ trait QueueingCookieTrait
      *
      * @return QueueingFactory|null A default queueing cookie value or Null if no default value is available
      */
-    public function getDefaultQueueingCookie(): ?QueueingFactory
+    public function getDefaultQueueingCookie(): QueueingFactory|null
     {
         return Cookie::getFacadeRoot();
     }

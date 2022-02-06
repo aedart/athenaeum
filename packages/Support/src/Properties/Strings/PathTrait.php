@@ -17,7 +17,7 @@ trait PathTrait
      *
      * @var string|null
      */
-    protected ?string $path = null;
+    protected string|null $path = null;
 
     /**
      * Set path
@@ -26,7 +26,7 @@ trait PathTrait
      *
      * @return self
      */
-    public function setPath(?string $location)
+    public function setPath(string|null $location): static
     {
         $this->path = $location;
 
@@ -36,14 +36,14 @@ trait PathTrait
     /**
      * Get path
      *
-     * If no "path" value set, method
-     * sets and returns a default "path".
+     * If no path value set, method
+     * sets and returns a default path.
      *
      * @see getDefaultPath()
      *
      * @return string|null path or null if no path has been set
      */
-    public function getPath(): ?string
+    public function getPath(): string|null
     {
         if (!$this->hasPath()) {
             $this->setPath($this->getDefaultPath());
@@ -52,9 +52,9 @@ trait PathTrait
     }
 
     /**
-     * Check if "path" has been set
+     * Check if path has been set
      *
-     * @return bool True if "path" has been set, false if not
+     * @return bool True if path has been set, false if not
      */
     public function hasPath(): bool
     {
@@ -62,11 +62,11 @@ trait PathTrait
     }
 
     /**
-     * Get a default "path" value, if any is available
+     * Get a default path value, if any is available
      *
-     * @return string|null Default "path" value or null if no default value is available
+     * @return string|null Default path value or null if no default value is available
      */
-    public function getDefaultPath(): ?string
+    public function getDefaultPath(): string|null
     {
         return null;
     }

@@ -4,6 +4,8 @@ namespace Aedart\Filters\Query\Filters\Fields;
 
 use Aedart\Contracts\Database\Query\FieldCriteria;
 use Aedart\Utils\Str;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use InvalidArgumentException;
 use LogicException;
@@ -48,7 +50,7 @@ class BelongsToFilter extends BaseFieldFilter
     public function __construct(
         string $field = 'id',
         string $operator = 'eq',
-        $value = null,
+        mixed $value = null,
         string $logical = FieldCriteria::AND
     ) {
         // This filter is intended to be created as an instance, and not
@@ -73,16 +75,17 @@ class BelongsToFilter extends BaseFieldFilter
     public static function make(
         string $field = 'id',
         string $operator = 'eq',
-        $value = null,
+        mixed $value = null,
         string $logical = FieldCriteria::AND
-    ) {
+    ): static
+    {
         return new static($field, $operator, $value, $logical);
     }
 
     /**
      * @inheritDoc
      */
-    public function apply($query)
+    public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         $relation = $this->relation();
         $model = $query->getModel();
@@ -158,7 +161,7 @@ class BelongsToFilter extends BaseFieldFilter
      *
      * @return self
      */
-    public function setRelation(string $relation)
+    public function setRelation(string $relation): static
     {
         $this->relation = $relation;
 
@@ -190,7 +193,7 @@ class BelongsToFilter extends BaseFieldFilter
      *
      * @return self
      */
-    public function usingNumericValue(bool $isNumeric = true)
+    public function usingNumericValue(bool $isNumeric = true): static
     {
         $this->isNumericRelation = $isNumeric;
 
@@ -218,7 +221,7 @@ class BelongsToFilter extends BaseFieldFilter
      *
      * @return self
      */
-    public function usingStringValue(bool $isString = true)
+    public function usingStringValue(bool $isString = true): static
     {
         return $this->usingNumericValue(!$isString);
     }
@@ -241,7 +244,7 @@ class BelongsToFilter extends BaseFieldFilter
     /**
      * @inheritDoc
      */
-    protected function assertValue($value)
+    protected function assertValue(mixed $value)
     {
         // Skip value assertion if requested. Reset state when doing so...
         if ($this->skipValueAssert) {
@@ -287,7 +290,7 @@ class BelongsToFilter extends BaseFieldFilter
      *
      * @throws InvalidArgumentException
      */
-    protected function assertInteger($value)
+    protected function assertInteger(mixed $value)
     {
         if (!ctype_digit(strval($value))) {
             $translator = $this->getTranslator();
@@ -303,7 +306,7 @@ class BelongsToFilter extends BaseFieldFilter
      *
      * @throws InvalidArgumentException
      */
-    protected function assertString($value)
+    protected function assertString(mixed $value)
     {
         if (!(is_string($value) && !is_numeric($value))) {
             $translator = $this->getTranslator();
@@ -382,12 +385,12 @@ class BelongsToFilter extends BaseFieldFilter
     /**
      * Builds "where has relation..." constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      * @param string $field
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereHas($query, string $field)
+    protected function buildWhereHas(Builder|EloquentBuilder $query, string $field): Builder|EloquentBuilder
     {
         if ($this->logical() === FieldCriteria::OR) {
             return $query->orWhereHas($this->relation(), function ($query) use ($field) {
@@ -403,12 +406,12 @@ class BelongsToFilter extends BaseFieldFilter
     /**
      * Builds "where relation is in xyz" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      * @param string $field
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereRelationIn($query, string $field)
+    protected function buildWhereRelationIn(Builder|EloquentBuilder $query, string $field)
     {
         $value = $this->valueToList($this->value());
 
@@ -426,12 +429,12 @@ class BelongsToFilter extends BaseFieldFilter
     /**
      * Builds "where relation is NOT in xyz" constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      * @param string $field
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereRelationNotIn($query, string $field)
+    protected function buildWhereRelationNotIn(Builder|EloquentBuilder $query, string $field): Builder|EloquentBuilder
     {
         $value = $this->valueToList($this->value());
 
@@ -449,11 +452,11 @@ class BelongsToFilter extends BaseFieldFilter
     /**
      * Builds "where relation exists..." constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereRelationExists($query)
+    protected function buildWhereRelationExists(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         if ($this->logical() === FieldCriteria::OR) {
             return $query->orHas($this->relation());
@@ -465,11 +468,11 @@ class BelongsToFilter extends BaseFieldFilter
     /**
      * Builds "where relation does not exists..." constraint
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    protected function buildWhereRelationDoesNotExists($query)
+    protected function buildWhereRelationDoesNotExists(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         if ($this->logical() === FieldCriteria::OR) {
             return $query->orDoesntHave($this->relation());

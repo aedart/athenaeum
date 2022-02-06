@@ -20,7 +20,7 @@ interface ExpectationNotFulfilled
 {
     /**
      * Returns the reason why expectation was not
-     * fulfilled, in a human readable format
+     * fulfilled, in a human-readable format
      *
      * @return string
      */

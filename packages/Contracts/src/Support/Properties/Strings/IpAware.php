@@ -19,31 +19,31 @@ interface IpAware
      *
      * @return self
      */
-    public function setIp(?string $address);
+    public function setIp(string|null $address): static;
 
     /**
      * Get ip
      *
-     * If no "ip" value set, method
-     * sets and returns a default "ip".
+     * If no ip value set, method
+     * sets and returns a default ip.
      *
      * @see getDefaultIp()
      *
      * @return string|null ip or null if no ip has been set
      */
-    public function getIp(): ?string;
+    public function getIp(): string|null;
 
     /**
-     * Check if "ip" has been set
+     * Check if ip has been set
      *
-     * @return bool True if "ip" has been set, false if not
+     * @return bool True if ip has been set, false if not
      */
     public function hasIp(): bool;
 
     /**
-     * Get a default "ip" value, if any is available
+     * Get a default ip value, if any is available
      *
-     * @return string|null Default "ip" value or null if no default value is available
+     * @return string|null Default ip value or null if no default value is available
      */
-    public function getDefaultIp(): ?string;
+    public function getDefaultIp(): string|null;
 }

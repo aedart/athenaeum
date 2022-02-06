@@ -19,7 +19,7 @@ interface PathsContainerAware
      *
      * @return self
      */
-    public function setPathsContainer(?PathsContainer $container);
+    public function setPathsContainer(PathsContainer|null $container): static;
 
     /**
      * Get paths container
@@ -30,7 +30,7 @@ interface PathsContainerAware
      *
      * @return PathsContainer|null paths container or null if none paths container has been set
      */
-    public function getPathsContainer(): ?PathsContainer;
+    public function getPathsContainer(): PathsContainer|null;
 
     /**
      * Check if paths container has been set
@@ -44,5 +44,5 @@ interface PathsContainerAware
      *
      * @return PathsContainer|null A default paths container value or Null if no default value is available
      */
-    public function getDefaultPathsContainer(): ?PathsContainer;
+    public function getDefaultPathsContainer(): PathsContainer|null;
 }

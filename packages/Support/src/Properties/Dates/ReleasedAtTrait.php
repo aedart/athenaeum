@@ -17,7 +17,7 @@ trait ReleasedAtTrait
      *
      * @var \DateTime|null
      */
-    protected ?\DateTime $releasedAt = null;
+    protected \DateTime|null $releasedAt = null;
 
     /**
      * Set released at
@@ -26,7 +26,7 @@ trait ReleasedAtTrait
      *
      * @return self
      */
-    public function setReleasedAt(?\DateTime $date)
+    public function setReleasedAt(\DateTime|null $date): static
     {
         $this->releasedAt = $date;
 
@@ -36,14 +36,14 @@ trait ReleasedAtTrait
     /**
      * Get released at
      *
-     * If no "released at" value set, method
-     * sets and returns a default "released at".
+     * If no released at value set, method
+     * sets and returns a default released at.
      *
      * @see getDefaultReleasedAt()
      *
      * @return \DateTime|null released at or null if no released at has been set
      */
-    public function getReleasedAt(): ?\DateTime
+    public function getReleasedAt(): \DateTime|null
     {
         if (!$this->hasReleasedAt()) {
             $this->setReleasedAt($this->getDefaultReleasedAt());
@@ -52,9 +52,9 @@ trait ReleasedAtTrait
     }
 
     /**
-     * Check if "released at" has been set
+     * Check if released at has been set
      *
-     * @return bool True if "released at" has been set, false if not
+     * @return bool True if released at has been set, false if not
      */
     public function hasReleasedAt(): bool
     {
@@ -62,11 +62,11 @@ trait ReleasedAtTrait
     }
 
     /**
-     * Get a default "released at" value, if any is available
+     * Get a default released at value, if any is available
      *
-     * @return \DateTime|null Default "released at" value or null if no default value is available
+     * @return \DateTime|null Default released at value or null if no default value is available
      */
-    public function getDefaultReleasedAt(): ?\DateTime
+    public function getDefaultReleasedAt(): \DateTime|null
     {
         return null;
     }

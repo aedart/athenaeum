@@ -45,7 +45,7 @@ class BuiltFilters implements BuiltFiltersMap
     /**
      * @inheritDoc
      */
-    public function add(string $key, Criteria $filter)
+    public function add(string $key, Criteria $filter): static
     {
         if (!isset($this->map[$key])) {
             $this->map[$key] = [];
@@ -62,7 +62,7 @@ class BuiltFilters implements BuiltFiltersMap
     /**
      * @inheritDoc
      */
-    public function get(string $key, $default = [])
+    public function get(string $key, array $default = []): array
     {
         if (isset($this->map[$key])) {
             return $this->map[$key];
@@ -82,7 +82,7 @@ class BuiltFilters implements BuiltFiltersMap
     /**
      * @inheritDoc
      */
-    public function forget(string $key)
+    public function forget(string $key): static
     {
         unset($this->map[$key]);
 
@@ -100,7 +100,7 @@ class BuiltFilters implements BuiltFiltersMap
     /**
      * @inheritDoc
      */
-    public function setMeta(string $key, $meta)
+    public function setMeta(string $key, mixed $meta): static
     {
         $this->meta[$key] = $meta;
 
@@ -110,7 +110,7 @@ class BuiltFilters implements BuiltFiltersMap
     /**
      * @inheritDoc
      */
-    public function getMeta(string $key, $default = null)
+    public function getMeta(string $key, mixed $default = null): mixed
     {
         if (isset($this->meta[$key])) {
             return $this->meta[$key];
@@ -130,7 +130,7 @@ class BuiltFilters implements BuiltFiltersMap
     /**
      * @inheritDoc
      */
-    public function forgetMeta(string $key)
+    public function forgetMeta(string $key): static
     {
         unset($this->meta[$key]);
 
@@ -148,7 +148,7 @@ class BuiltFilters implements BuiltFiltersMap
     /**
      * @inheritDoc
      */
-    public function forgetAll()
+    public function forgetAll(): static
     {
         $this->map = [];
         $this->meta = [];

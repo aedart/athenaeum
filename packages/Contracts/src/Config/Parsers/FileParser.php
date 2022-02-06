@@ -36,7 +36,7 @@ interface FileParser extends FileAware
      *
      * @throws FileDoesNotExistException If the given file does not exist
      */
-    public function setFilePath(string $filePath): self;
+    public function setFilePath(string $filePath): static;
 
     /**
      * Get the path of the configuration file that
@@ -44,7 +44,7 @@ interface FileParser extends FileAware
      *
      * @return string|null
      */
-    public function getFilePath(): ?string;
+    public function getFilePath(): string|null;
 
     /**
      * Check if this parser has a configuration file path

@@ -17,7 +17,7 @@ trait CreatedAtTrait
      *
      * @var string|null
      */
-    protected ?string $createdAt = null;
+    protected string|null $createdAt = null;
 
     /**
      * Set created at
@@ -26,7 +26,7 @@ trait CreatedAtTrait
      *
      * @return self
      */
-    public function setCreatedAt(?string $date)
+    public function setCreatedAt(string|null $date): static
     {
         $this->createdAt = $date;
 
@@ -36,14 +36,14 @@ trait CreatedAtTrait
     /**
      * Get created at
      *
-     * If no "created at" value set, method
-     * sets and returns a default "created at".
+     * If no created at value set, method
+     * sets and returns a default created at.
      *
      * @see getDefaultCreatedAt()
      *
      * @return string|null created at or null if no created at has been set
      */
-    public function getCreatedAt(): ?string
+    public function getCreatedAt(): string|null
     {
         if (!$this->hasCreatedAt()) {
             $this->setCreatedAt($this->getDefaultCreatedAt());
@@ -52,9 +52,9 @@ trait CreatedAtTrait
     }
 
     /**
-     * Check if "created at" has been set
+     * Check if created at has been set
      *
-     * @return bool True if "created at" has been set, false if not
+     * @return bool True if created at has been set, false if not
      */
     public function hasCreatedAt(): bool
     {
@@ -62,11 +62,11 @@ trait CreatedAtTrait
     }
 
     /**
-     * Get a default "created at" value, if any is available
+     * Get a default created at value, if any is available
      *
-     * @return string|null Default "created at" value or null if no default value is available
+     * @return string|null Default created at value or null if no default value is available
      */
-    public function getDefaultCreatedAt(): ?string
+    public function getDefaultCreatedAt(): string|null
     {
         return null;
     }

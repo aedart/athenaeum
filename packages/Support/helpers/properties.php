@@ -24,7 +24,7 @@ if (!function_exists('awareOfProperty')) {
         string $property,
         string $description,
         string $dataType = DataTypes::STRING_TYPE,
-        ?string $inputArgName = null
+        string|null $inputArgName = null
     ): array {
         $inputArgName = $inputArgName ?? $property;
 
@@ -52,7 +52,7 @@ if (!function_exists('stringProperty')) {
      *
      * @return array
      */
-    function stringProperty(string $name, string $description, ?string $inputName = null): array
+    function stringProperty(string $name, string $description, string|null $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -77,7 +77,7 @@ if (!function_exists('integerProperty')) {
      *
      * @return array
      */
-    function integerProperty(string $name, string $description, ?string $inputName = null): array
+    function integerProperty(string $name, string $description, string|null $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -102,7 +102,7 @@ if (!function_exists('floatProperty')) {
      *
      * @return array
      */
-    function floatProperty(string $name, string $description, ?string $inputName = null): array
+    function floatProperty(string $name, string $description, string|null $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -127,7 +127,7 @@ if (!function_exists('booleanProperty')) {
      *
      * @return array
      */
-    function booleanProperty(string $name, string $description, ?string $inputName = null): array
+    function booleanProperty(string $name, string $description, string|null $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -152,7 +152,7 @@ if (!function_exists('arrayProperty')) {
      *
      * @return array
      */
-    function arrayProperty(string $name, string $description, ?string $inputName = null): array
+    function arrayProperty(string $name, string $description, string|null $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -177,7 +177,7 @@ if (!function_exists('callableProperty')) {
      *
      * @return array
      */
-    function callableProperty(string $name, string $description, ?string $inputName = null): array
+    function callableProperty(string $name, string $description, string|null $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -202,7 +202,7 @@ if (!function_exists('iterableProperty')) {
      *
      * @return array
      */
-    function iterableProperty(string $name, string $description, ?string $inputName = null): array
+    function iterableProperty(string $name, string $description, string|null $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -227,7 +227,7 @@ if (!function_exists('mixedProperty')) {
      *
      * @return array
      */
-    function mixedProperty(string $name, string $description, ?string $inputName = null): array
+    function mixedProperty(string $name, string $description, string|null $inputName = null): array
     {
         return awareOfProperty(
             $name,
@@ -252,7 +252,7 @@ if (!function_exists('dateTimeProperty')) {
      *
      * @return array
      */
-    function dateTimeProperty(string $name, string $description, ?string $inputName = null): array
+    function dateTimeProperty(string $name, string $description, string|null $inputName = null): array
     {
         return awareOfProperty(
             $name,

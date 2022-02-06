@@ -72,7 +72,7 @@ interface Kernel extends LaravelConsoleKernel,
      *
      * @return self
      */
-    public function setArtisan($artisan);
+    public function setArtisan($artisan): static;
 
     /**
      * Returns Laravel's Artisan Console Application instance

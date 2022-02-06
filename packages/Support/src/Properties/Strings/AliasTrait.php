@@ -17,7 +17,7 @@ trait AliasTrait
      *
      * @var string|null
      */
-    protected ?string $alias = null;
+    protected string|null $alias = null;
 
     /**
      * Set alias
@@ -26,7 +26,7 @@ trait AliasTrait
      *
      * @return self
      */
-    public function setAlias(?string $name)
+    public function setAlias(string|null $name): static
     {
         $this->alias = $name;
 
@@ -36,14 +36,14 @@ trait AliasTrait
     /**
      * Get alias
      *
-     * If no "alias" value set, method
-     * sets and returns a default "alias".
+     * If no alias value set, method
+     * sets and returns a default alias.
      *
      * @see getDefaultAlias()
      *
      * @return string|null alias or null if no alias has been set
      */
-    public function getAlias(): ?string
+    public function getAlias(): string|null
     {
         if (!$this->hasAlias()) {
             $this->setAlias($this->getDefaultAlias());
@@ -52,9 +52,9 @@ trait AliasTrait
     }
 
     /**
-     * Check if "alias" has been set
+     * Check if alias has been set
      *
-     * @return bool True if "alias" has been set, false if not
+     * @return bool True if alias has been set, false if not
      */
     public function hasAlias(): bool
     {
@@ -62,11 +62,11 @@ trait AliasTrait
     }
 
     /**
-     * Get a default "alias" value, if any is available
+     * Get a default alias value, if any is available
      *
-     * @return string|null Default "alias" value or null if no default value is available
+     * @return string|null Default alias value or null if no default value is available
      */
-    public function getDefaultAlias(): ?string
+    public function getDefaultAlias(): string|null
     {
         return null;
     }

@@ -20,7 +20,7 @@ trait HttpClientsManagerTrait
      *
      * @var Manager|null
      */
-    protected ?Manager $httpClientsManager = null;
+    protected Manager|null $httpClientsManager = null;
 
     /**
      * Set http clients manager
@@ -29,7 +29,7 @@ trait HttpClientsManagerTrait
      *
      * @return self
      */
-    public function setHttpClientsManager(?Manager $manager)
+    public function setHttpClientsManager(Manager|null $manager): static
     {
         $this->httpClientsManager = $manager;
 
@@ -45,7 +45,7 @@ trait HttpClientsManagerTrait
      *
      * @return Manager|null http clients manager or null if none http clients manager has been set
      */
-    public function getHttpClientsManager(): ?Manager
+    public function getHttpClientsManager(): Manager|null
     {
         if (!$this->hasHttpClientsManager()) {
             $this->setHttpClientsManager($this->getDefaultHttpClientsManager());
@@ -68,7 +68,7 @@ trait HttpClientsManagerTrait
      *
      * @return Manager|null A default http clients manager value or Null if no default value is available
      */
-    public function getDefaultHttpClientsManager(): ?Manager
+    public function getDefaultHttpClientsManager(): Manager|null
     {
         return IoCFacade::tryMake(Manager::class);
     }

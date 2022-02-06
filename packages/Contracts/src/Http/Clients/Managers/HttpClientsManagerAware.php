@@ -19,7 +19,7 @@ interface HttpClientsManagerAware
      *
      * @return self
      */
-    public function setHttpClientsManager(?Manager $manager);
+    public function setHttpClientsManager(Manager|null $manager): static;
 
     /**
      * Get http clients manager
@@ -30,7 +30,7 @@ interface HttpClientsManagerAware
      *
      * @return Manager|null http clients manager or null if none http clients manager has been set
      */
-    public function getHttpClientsManager(): ?Manager;
+    public function getHttpClientsManager(): Manager|null;
 
     /**
      * Check if http clients manager has been set
@@ -44,5 +44,5 @@ interface HttpClientsManagerAware
      *
      * @return Manager|null A default http clients manager value or Null if no default value is available
      */
-    public function getDefaultHttpClientsManager(): ?Manager;
+    public function getDefaultHttpClientsManager(): Manager|null;
 }

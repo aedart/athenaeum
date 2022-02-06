@@ -25,9 +25,9 @@ interface ProcessorException extends Throwable
      */
     public static function make(
         Processor $processor,
-        $message = "",
-        $code = 0,
-        Throwable $previous = null
+        string $message = "",
+        int $code = 0,
+        Throwable|null $previous = null
     );
 
     /**
@@ -37,12 +37,12 @@ interface ProcessorException extends Throwable
      *
      * @return self
      */
-    public function setProcessor(Processor $processor);
+    public function setProcessor(Processor $processor): static;
 
     /**
      * Get the processor that caused this exception
      *
      * @return Processor|null
      */
-    public function processor(): ?Processor;
+    public function processor(): Processor|null;
 }

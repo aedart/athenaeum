@@ -6,6 +6,9 @@ use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\Support\AwareOf\Partials\TwigPartial;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Arr;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class Documenter implements ConfigAware
 {
@@ -23,7 +26,7 @@ class Documenter implements ConfigAware
      *
      * @param Repository|null $configuration [optional]
      */
-    public function __construct(?Repository $configuration = null)
+    public function __construct(Repository|null $configuration = null)
     {
         $this
             ->setConfig($configuration)
@@ -37,9 +40,9 @@ class Documenter implements ConfigAware
      * @param array $awareOfComponents [optional]
      * @param bool $force [optional] If true, then existing file is overwritten
      *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @throws LoaderError  When the template cannot be found
+     * @throws SyntaxError  When an error occurred during compilation
+     * @throws RuntimeError When an error occurred during rendering
      */
     public function makeDocs(array $awareOfComponents = [], bool $force = false)
     {

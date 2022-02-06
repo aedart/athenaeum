@@ -20,7 +20,7 @@ trait ArtisanTrait
      *
      * @var Kernel|null
      */
-    protected ?Kernel $artisan = null;
+    protected Kernel|null $artisan = null;
 
     /**
      * Set artisan
@@ -29,7 +29,7 @@ trait ArtisanTrait
      *
      * @return self
      */
-    public function setArtisan(?Kernel $kernel)
+    public function setArtisan(Kernel|null $kernel): static
     {
         $this->artisan = $kernel;
 
@@ -47,7 +47,7 @@ trait ArtisanTrait
      *
      * @return Kernel|null artisan or null if none artisan has been set
      */
-    public function getArtisan(): ?Kernel
+    public function getArtisan(): Kernel|null
     {
         if (!$this->hasArtisan()) {
             $this->setArtisan($this->getDefaultArtisan());
@@ -70,7 +70,7 @@ trait ArtisanTrait
      *
      * @return Kernel|null A default artisan value or Null if no default value is available
      */
-    public function getDefaultArtisan(): ?Kernel
+    public function getDefaultArtisan(): Kernel|null
     {
         return Artisan::getFacadeRoot();
     }

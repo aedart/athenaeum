@@ -24,7 +24,7 @@ trait Context
      * Arbitrary data associated with exception
      * or failure
      *
-     * @return mixed[]
+     * @return array
      */
     public function context(): array
     {
@@ -39,7 +39,7 @@ trait Context
      *
      * @return self
      */
-    protected function setContext(array $context = [])
+    protected function setContext(array $context = []): static
     {
         $this->context = $context;
 

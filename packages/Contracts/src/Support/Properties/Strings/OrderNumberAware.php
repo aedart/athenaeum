@@ -19,31 +19,31 @@ interface OrderNumberAware
      *
      * @return self
      */
-    public function setOrderNumber(?string $number);
+    public function setOrderNumber(string|null $number): static;
 
     /**
      * Get order number
      *
-     * If no "order number" value set, method
-     * sets and returns a default "order number".
+     * If no order number value set, method
+     * sets and returns a default order number.
      *
      * @see getDefaultOrderNumber()
      *
      * @return string|null order number or null if no order number has been set
      */
-    public function getOrderNumber(): ?string;
+    public function getOrderNumber(): string|null;
 
     /**
-     * Check if "order number" has been set
+     * Check if order number has been set
      *
-     * @return bool True if "order number" has been set, false if not
+     * @return bool True if order number has been set, false if not
      */
     public function hasOrderNumber(): bool;
 
     /**
-     * Get a default "order number" value, if any is available
+     * Get a default order number value, if any is available
      *
-     * @return string|null Default "order number" value or null if no default value is available
+     * @return string|null Default order number value or null if no default value is available
      */
-    public function getDefaultOrderNumber(): ?string;
+    public function getDefaultOrderNumber(): string|null;
 }

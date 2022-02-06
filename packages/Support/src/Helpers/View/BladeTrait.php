@@ -21,7 +21,7 @@ trait BladeTrait
      *
      * @var BladeCompiler|null
      */
-    protected ?BladeCompiler $blade = null;
+    protected BladeCompiler|null $blade = null;
 
     /**
      * Set blade
@@ -30,7 +30,7 @@ trait BladeTrait
      *
      * @return self
      */
-    public function setBlade(?BladeCompiler $compiler)
+    public function setBlade($compiler): static
     {
         $this->blade = $compiler;
 
@@ -48,7 +48,7 @@ trait BladeTrait
      *
      * @return BladeCompiler|null blade or null if none blade has been set
      */
-    public function getBlade(): ?BladeCompiler
+    public function getBlade()
     {
         if (!$this->hasBlade()) {
             $this->setBlade($this->getDefaultBlade());
@@ -71,7 +71,7 @@ trait BladeTrait
      *
      * @return BladeCompiler|null A default blade value or Null if no default value is available
      */
-    public function getDefaultBlade(): ?BladeCompiler
+    public function getDefaultBlade()
     {
         $view = View::getFacadeRoot();
         if (isset($view)) {
