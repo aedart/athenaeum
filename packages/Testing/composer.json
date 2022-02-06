@@ -20,7 +20,7 @@
         "fakerphp/faker": "^v1.17.0",
         "mockery/mockery": "1.4.*",
         "orchestra/testbench": "7.x-dev",
-        "orchestra/testbench-dusk": "dev-master"
+        "orchestra/testbench-dusk": "7.x-dev"
     },
     "autoload": {
         "psr-4": {

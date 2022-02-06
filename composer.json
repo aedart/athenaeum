@@ -46,7 +46,7 @@
         "codeception/module-asserts": "*@dev",
         "phpunit/phpunit": "dev-master as 9.5.99",
         "orchestra/testbench": "7.x-dev",
-        "orchestra/testbench-dusk": "dev-master",
+        "orchestra/testbench-dusk": "7.x-dev",
         "predis/predis": "^1.1.4",
         "roave/security-advisories": "dev-master",
         "symfony/var-dumper": "^v6.0.2",

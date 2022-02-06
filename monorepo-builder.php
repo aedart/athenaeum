@@ -37,7 +37,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'codeception/codeception' => '5.0.0-alpha1',
             'codeception/module-asserts' => '*@dev',
             'orchestra/testbench' => '7.x-dev',
-            'orchestra/testbench-dusk' => 'dev-master',
+            'orchestra/testbench-dusk' => '7.x-dev',
         ],
 
         ComposerJsonSection::AUTOLOAD => [
