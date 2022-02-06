@@ -745,7 +745,7 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
-    public function run(?callable $callback = null): void
+    public function run(callable|null $callback = null): void
     {
         if ($this->isRunning()) {
             return;
