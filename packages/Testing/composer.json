@@ -18,7 +18,7 @@
         "codeception/codeception": "5.0.0-alpha1",
         "codeception/module-asserts": "*@dev",
         "fakerphp/faker": "^v1.17.0",
-        "mockery/mockery": "1.4.*",
+        "mockery/mockery": "1.5.*",
         "orchestra/testbench": "7.x-dev",
         "orchestra/testbench-dusk": "7.x-dev"
     },

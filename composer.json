@@ -29,7 +29,7 @@
         "illuminate/pipeline": "^v9.0.0-beta.5",
         "illuminate/support": "^v9.0.0-beta.5",
         "illuminate/validation": "^v9.0.0-beta.5",
-        "mockery/mockery": "1.4.*",
+        "mockery/mockery": "1.5.*",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
         "psr/http-message": "^1.0",
