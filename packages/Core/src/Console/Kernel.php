@@ -328,6 +328,8 @@ class Kernel implements
             Version::package('aedart/athenaeum-console')
         );
 
+        $console->setContainerCommandLoader();
+
         $console->setName(sprintf(
             '<fg=blue>Athenaeum</> (via. Laravel Artisan ~ <comment>illuminate/console</comment> %s)',
             $this->laravelVersion()
