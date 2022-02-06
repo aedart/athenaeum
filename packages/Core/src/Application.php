@@ -40,6 +40,7 @@ use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
+use Aedart\Utils\Str;
 use Closure;
 use Illuminate\Contracts\Foundation\Application as LaravelApplicationInterface;
 use Illuminate\Contracts\Foundation\MaintenanceMode;
@@ -263,9 +264,11 @@ class Application extends IoC implements
     public function environment(...$environments)
     {
         if (count($environments) > 0) {
-            $search = is_array($environments) ? $environments : [ $environments ];
+            $search = is_array($environments[0])
+                ? $environments[0]
+                : $environments;
 
-            return in_array($this['env'], $search);
+            return Str::is($search, $this['env']);
         }
 
         return $this['env'];
