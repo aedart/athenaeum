@@ -417,17 +417,6 @@ class Application extends IoC implements
     }
 
     /**
-     * TODO: Can this be removed?
-     *
-     * @inheritDoc
-     */
-    public function configurationIsCached()
-    {
-        // By default, this application does not cache configuration.
-        return false;
-    }
-
-    /**
      * @inheritdoc
      */
     public function detectEnvironment(Closure $callback): string
@@ -449,52 +438,6 @@ class Application extends IoC implements
     public function environmentFilePath(): string
     {
         return $this->getPathsContainer()->environmentPath($this->environmentPath());
-    }
-
-    /**
-     * TODO: Can this be removed?
-     *
-     * @inheritDoc
-     */
-    public function getCachedConfigPath()
-    {
-        // Not used by this application - overwrite if required
-        return '';
-    }
-
-    /**
-     * TODO: Can this be removed?
-     *
-     * @inheritDoc
-     */
-    public function getCachedServicesPath()
-    {
-        // Not used by this application - overwrite if required
-        return '';
-    }
-
-    /**
-     * TODO: Is this needed?
-     *
-     * Get the path to the cached packages.php file.
-     *
-     * @return string
-     */
-    public function getCachedPackagesPath()
-    {
-        // Not used by this application - overwrite if required
-        return '';
-    }
-
-    /**
-     * TODO: Can this be removed?
-     *
-     * @inheritDoc
-     */
-    public function getCachedRoutesPath()
-    {
-        // Not used by this application - overwrite if required
-        return '';
     }
 
     /**
@@ -554,17 +497,6 @@ class Application extends IoC implements
         $this->environmentFile = $file;
 
         return $this;
-    }
-
-    /**
-     * TODO: Can this be removed?
-     *
-     * @inheritDoc
-     */
-    public function routesAreCached()
-    {
-        // By default, this application does not offer routing
-        return false;
     }
 
     /**
