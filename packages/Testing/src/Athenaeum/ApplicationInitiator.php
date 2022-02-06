@@ -85,6 +85,10 @@ trait ApplicationInitiator
         $this->app->destroy();
         $this->app = null;
 
+        // Ensure to clear application environment. This is only need
+        // for tests - DO NOT DO THIS IN PRODUCTION!
+        unset($_ENV['APP_ENV'], $_SERVER['APP_ENV']);
+
         Env::enablePutenv();
 
         return true;
