@@ -28,6 +28,13 @@ interface Application extends IoC,
     public function publicPath();
 
     /**
+     * Get the fully qualified path to the environment file.
+     *
+     * @return string
+     */
+    public function environmentPath();
+
+    /**
      * Determine if running in "local" environment
      *
      * @return bool
