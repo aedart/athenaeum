@@ -10,8 +10,9 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
  *
  * @see \Aedart\Contracts\Database\Models\Sluggable
  *
- * @method static \Illuminate\Database\Eloquent\Builder whereSlug(string $slug)
- * @method static \Illuminate\Database\Eloquent\Builder whereSlugIn(mixed $slugs)
+ * @method static Builder whereSlug(string $slug)
+ * @method static Builder whereSlugIn(mixed $slugs)
+ * @method static Builder whereSlugNotIn(mixed $slugs)
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Database\Models\Concerns
