@@ -56,15 +56,6 @@ interface Application extends IoC,
     public function isBooted(): bool;
 
     /**
-     * Register a new terminating listener.
-     *
-     * @param callable $callback
-     *
-     * @return self
-     */
-    public function terminating(callable $callback);
-
-    /**
      * Register a list of service providers
      *
      * Method will automatically determine if a service provider needs

@@ -692,7 +692,7 @@ class Application extends IoC implements
     /**
      * @inheritdoc
      */
-    public function terminating(callable $callback)
+    public function terminating($callback)
     {
         $this->terminationCallbacks[] = $callback;
 

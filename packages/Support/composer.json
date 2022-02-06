@@ -15,8 +15,8 @@
         "php": "^8.0.2",
         "aedart/athenaeum-contracts": "^5.27",
         "aedart/athenaeum-utils": "^5.27",
-        "illuminate/config": "^v9.0.0-beta.1",
-        "illuminate/support": "^v9.0.0-beta.1"
+        "illuminate/config": "^v9.0.0-beta.5",
+        "illuminate/support": "^v9.0.0-beta.5"
     },
     "require-dev": {
         "predis/predis": "^1.1.4",

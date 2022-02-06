@@ -44,7 +44,7 @@ class Kernel implements
      *
      * @var Artisan|null
      */
-    protected ?Artisan $artisan = null;
+    protected Artisan|null $artisan = null;
 
     /**
      * Console Kernel constructor.
@@ -327,6 +327,8 @@ class Kernel implements
             $this->getDispatcher(),
             Version::package('aedart/athenaeum-console')
         );
+
+        $console->setContainerCommandLoader();
 
         $console->setName(sprintf(
             '<fg=blue>Athenaeum</> (via. Laravel Artisan ~ <comment>illuminate/console</comment> %s)',
