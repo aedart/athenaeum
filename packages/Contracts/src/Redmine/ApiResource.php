@@ -64,7 +64,7 @@ interface ApiResource extends Dto,
      * @param string[] $include [optional] List of associated data to include
      * @param string|Connection|null $connection [optional] Redmine connection profile
      *
-     * @return PaginatedResults<static>|static[]
+     * @return PaginatedResults<static>
      *
      * @throws UnsupportedOperationException If Redmine's API does not support listing this kind of resource.
      * @throws JsonException
