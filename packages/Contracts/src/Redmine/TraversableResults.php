@@ -8,6 +8,8 @@ use IteratorAggregate;
 /**
  * Traversable Results
  *
+ * @template T
+ *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Contracts\Redmine
  */
