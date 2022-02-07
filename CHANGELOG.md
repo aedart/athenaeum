@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Documentation for `\Aedart\Utils\Arr::differenceAssoc()` (_previously undocumented. Method was added in `v5.17`_). [#45](https://github.com/aedart/athenaeum/issues/45).
 * Documentation for `\Aedart\Utils\Helpers\Invoker` (_previously undocumented. Helper was added in `v5.12`_).
 * `InteractsWithDeprecationHandling` added to `LaravelTestHelper`.
+* `fetchAll()` method for the `HasMany` relation, in Redmine package. [#57](https://github.com/aedart/athenaeum/issues/57).
 
 ### Changed
 
@@ -26,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Minimum required PHP version changed to `v8.0.2`.
 * Method arguments and return data types are changed (_all packages_), in accordance with PHP `v8.0`. Most fluent methods now return `static`. [#83](https://github.com/aedart/athenaeum/pull/83), [#77](https://github.com/aedart/athenaeum/issues/77).
 * `populate()` method now returns `static` instead of `void`, in `\Aedart\Contracts\Utils\Populatable` interface.
+* `all()` method added in `ApiResource` interface (_only breaking if you have custom implementation of interface_). [#54](https://github.com/aedart/athenaeum/issues/54).
 * `SearchFilter` no longer uses `StopWords` concern (_concern has been removed_). [#63](https://github.com/aedart/athenaeum/issues/63).
 * Return type of `package()` and `application()` is now set to `\Aedart\Contracts\Utils\Packages\Version`, in `\Aedart\Utils\Version`.  [#68](https://github.com/aedart/athenaeum/issues/68).
 * `PackageVersionException` is now thrown, when version cannot be obtained for a package, in `\Aedart\Utils\Version::package()`. [#68](https://github.com/aedart/athenaeum/issues/68).
