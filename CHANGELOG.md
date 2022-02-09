@@ -50,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Replaced property calls with method calls, on faker instance throughout many tests (_PHP faker deprecated several properties since `v1.14`_). [#23](https://github.com/aedart/athenaeum/issues/23).  
 * Upgraded to [Symplify Monorepo Builder](https://github.com/symplify/monorepo-builder) `v10.x`. [#60](https://github.com/aedart/athenaeum/issues/60), [#65](https://github.com/aedart/athenaeum/pull/65).
 * `\Aedart\Utils\Dates\Duration` now inherits from `Stringable`.
+* Replaced `get_class()` calls with the use of new `::class` magic constant (_[introduced in PHP 8](https://www.php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class)_). Change is throughout all packages.
 
 ### Removed
 
