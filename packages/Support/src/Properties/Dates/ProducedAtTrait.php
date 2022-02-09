@@ -15,18 +15,18 @@ trait ProducedAtTrait
     /**
      * Date of when this component, entity or something was produced
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $producedAt = null;
+    protected \DateTimeInterface|null $producedAt = null;
 
     /**
      * Set produced at
      *
-     * @param \DateTime|null $date Date of when this component, entity or something was produced
+     * @param \DateTimeInterface|null $date Date of when this component, entity or something was produced
      *
      * @return self
      */
-    public function setProducedAt(\DateTime|null $date): static
+    public function setProducedAt(\DateTimeInterface|null $date): static
     {
         $this->producedAt = $date;
 
@@ -41,9 +41,9 @@ trait ProducedAtTrait
      *
      * @see getDefaultProducedAt()
      *
-     * @return \DateTime|null produced at or null if no produced at has been set
+     * @return \DateTimeInterface|null produced at or null if no produced at has been set
      */
-    public function getProducedAt(): \DateTime|null
+    public function getProducedAt(): \DateTimeInterface|null
     {
         if (!$this->hasProducedAt()) {
             $this->setProducedAt($this->getDefaultProducedAt());
@@ -64,9 +64,9 @@ trait ProducedAtTrait
     /**
      * Get a default produced at value, if any is available
      *
-     * @return \DateTime|null Default produced at value or null if no default value is available
+     * @return \DateTimeInterface|null Default produced at value or null if no default value is available
      */
-    public function getDefaultProducedAt(): \DateTime|null
+    public function getDefaultProducedAt(): \DateTimeInterface|null
     {
         return null;
     }

@@ -15,18 +15,18 @@ trait DateTrait
     /**
      * Date of event
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $date = null;
+    protected \DateTimeInterface|null $date = null;
 
     /**
      * Set date
      *
-     * @param \DateTime|null $date Date of event
+     * @param \DateTimeInterface|null $date Date of event
      *
      * @return self
      */
-    public function setDate(\DateTime|null $date): static
+    public function setDate(\DateTimeInterface|null $date): static
     {
         $this->date = $date;
 
@@ -41,9 +41,9 @@ trait DateTrait
      *
      * @see getDefaultDate()
      *
-     * @return \DateTime|null date or null if no date has been set
+     * @return \DateTimeInterface|null date or null if no date has been set
      */
-    public function getDate(): \DateTime|null
+    public function getDate(): \DateTimeInterface|null
     {
         if (!$this->hasDate()) {
             $this->setDate($this->getDefaultDate());
@@ -64,9 +64,9 @@ trait DateTrait
     /**
      * Get a default date value, if any is available
      *
-     * @return \DateTime|null Default date value or null if no default value is available
+     * @return \DateTimeInterface|null Default date value or null if no default value is available
      */
-    public function getDefaultDate(): \DateTime|null
+    public function getDefaultDate(): \DateTimeInterface|null
     {
         return null;
     }

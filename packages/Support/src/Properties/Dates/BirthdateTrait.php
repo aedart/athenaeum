@@ -15,18 +15,18 @@ trait BirthdateTrait
     /**
      * Date of birth
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $birthdate = null;
+    protected \DateTimeInterface|null $birthdate = null;
 
     /**
      * Set birthdate
      *
-     * @param \DateTime|null $date Date of birth
+     * @param \DateTimeInterface|null $date Date of birth
      *
      * @return self
      */
-    public function setBirthdate(\DateTime|null $date): static
+    public function setBirthdate(\DateTimeInterface|null $date): static
     {
         $this->birthdate = $date;
 
@@ -41,9 +41,9 @@ trait BirthdateTrait
      *
      * @see getDefaultBirthdate()
      *
-     * @return \DateTime|null birthdate or null if no birthdate has been set
+     * @return \DateTimeInterface|null birthdate or null if no birthdate has been set
      */
-    public function getBirthdate(): \DateTime|null
+    public function getBirthdate(): \DateTimeInterface|null
     {
         if (!$this->hasBirthdate()) {
             $this->setBirthdate($this->getDefaultBirthdate());
@@ -64,9 +64,9 @@ trait BirthdateTrait
     /**
      * Get a default birthdate value, if any is available
      *
-     * @return \DateTime|null Default birthdate value or null if no default value is available
+     * @return \DateTimeInterface|null Default birthdate value or null if no default value is available
      */
-    public function getDefaultBirthdate(): \DateTime|null
+    public function getDefaultBirthdate(): \DateTimeInterface|null
     {
         return null;
     }

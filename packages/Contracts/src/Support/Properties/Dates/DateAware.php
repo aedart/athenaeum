@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Date Aware
  *
- * Component is aware of \DateTime "date"
+ * Component is aware of \DateTimeInterface "date"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,11 +15,11 @@ interface DateAware
     /**
      * Set date
      *
-     * @param \DateTime|null $date Date of event
+     * @param \DateTimeInterface|null $date Date of event
      *
      * @return self
      */
-    public function setDate(\DateTime|null $date): static;
+    public function setDate(\DateTimeInterface|null $date): static;
 
     /**
      * Get date
@@ -29,9 +29,9 @@ interface DateAware
      *
      * @see getDefaultDate()
      *
-     * @return \DateTime|null date or null if no date has been set
+     * @return \DateTimeInterface|null date or null if no date has been set
      */
-    public function getDate(): \DateTime|null;
+    public function getDate(): \DateTimeInterface|null;
 
     /**
      * Check if date has been set
@@ -43,7 +43,7 @@ interface DateAware
     /**
      * Get a default date value, if any is available
      *
-     * @return \DateTime|null Default date value or null if no default value is available
+     * @return \DateTimeInterface|null Default date value or null if no default value is available
      */
-    public function getDefaultDate(): \DateTime|null;
+    public function getDefaultDate(): \DateTimeInterface|null;
 }

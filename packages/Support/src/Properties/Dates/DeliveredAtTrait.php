@@ -15,18 +15,18 @@ trait DeliveredAtTrait
     /**
      * Date of delivery
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $deliveredAt = null;
+    protected \DateTimeInterface|null $deliveredAt = null;
 
     /**
      * Set delivered at
      *
-     * @param \DateTime|null $date Date of delivery
+     * @param \DateTimeInterface|null $date Date of delivery
      *
      * @return self
      */
-    public function setDeliveredAt(\DateTime|null $date): static
+    public function setDeliveredAt(\DateTimeInterface|null $date): static
     {
         $this->deliveredAt = $date;
 
@@ -41,9 +41,9 @@ trait DeliveredAtTrait
      *
      * @see getDefaultDeliveredAt()
      *
-     * @return \DateTime|null delivered at or null if no delivered at has been set
+     * @return \DateTimeInterface|null delivered at or null if no delivered at has been set
      */
-    public function getDeliveredAt(): \DateTime|null
+    public function getDeliveredAt(): \DateTimeInterface|null
     {
         if (!$this->hasDeliveredAt()) {
             $this->setDeliveredAt($this->getDefaultDeliveredAt());
@@ -64,9 +64,9 @@ trait DeliveredAtTrait
     /**
      * Get a default delivered at value, if any is available
      *
-     * @return \DateTime|null Default delivered at value or null if no default value is available
+     * @return \DateTimeInterface|null Default delivered at value or null if no default value is available
      */
-    public function getDefaultDeliveredAt(): \DateTime|null
+    public function getDefaultDeliveredAt(): \DateTimeInterface|null
     {
         return null;
     }

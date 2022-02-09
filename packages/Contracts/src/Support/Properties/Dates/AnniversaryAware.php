@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Anniversary Aware
  *
- * Component is aware of \DateTime "anniversary"
+ * Component is aware of \DateTimeInterface "anniversary"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,11 +15,11 @@ interface AnniversaryAware
     /**
      * Set anniversary
      *
-     * @param \DateTime|null $anniversary Date of anniversary
+     * @param \DateTimeInterface|null $anniversary Date of anniversary
      *
      * @return self
      */
-    public function setAnniversary(\DateTime|null $anniversary): static;
+    public function setAnniversary(\DateTimeInterface|null $anniversary): static;
 
     /**
      * Get anniversary
@@ -29,9 +29,9 @@ interface AnniversaryAware
      *
      * @see getDefaultAnniversary()
      *
-     * @return \DateTime|null anniversary or null if no anniversary has been set
+     * @return \DateTimeInterface|null anniversary or null if no anniversary has been set
      */
-    public function getAnniversary(): \DateTime|null;
+    public function getAnniversary(): \DateTimeInterface|null;
 
     /**
      * Check if anniversary has been set
@@ -43,7 +43,7 @@ interface AnniversaryAware
     /**
      * Get a default anniversary value, if any is available
      *
-     * @return \DateTime|null Default anniversary value or null if no default value is available
+     * @return \DateTimeInterface|null Default anniversary value or null if no default value is available
      */
-    public function getDefaultAnniversary(): \DateTime|null;
+    public function getDefaultAnniversary(): \DateTimeInterface|null;
 }

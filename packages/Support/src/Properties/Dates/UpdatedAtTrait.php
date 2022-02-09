@@ -15,18 +15,18 @@ trait UpdatedAtTrait
     /**
      * Date of when this component, entity or resource was updated
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $updatedAt = null;
+    protected \DateTimeInterface|null $updatedAt = null;
 
     /**
      * Set updated at
      *
-     * @param \DateTime|null $date Date of when this component, entity or resource was updated
+     * @param \DateTimeInterface|null $date Date of when this component, entity or resource was updated
      *
      * @return self
      */
-    public function setUpdatedAt(\DateTime|null $date): static
+    public function setUpdatedAt(\DateTimeInterface|null $date): static
     {
         $this->updatedAt = $date;
 
@@ -41,9 +41,9 @@ trait UpdatedAtTrait
      *
      * @see getDefaultUpdatedAt()
      *
-     * @return \DateTime|null updated at or null if no updated at has been set
+     * @return \DateTimeInterface|null updated at or null if no updated at has been set
      */
-    public function getUpdatedAt(): \DateTime|null
+    public function getUpdatedAt(): \DateTimeInterface|null
     {
         if (!$this->hasUpdatedAt()) {
             $this->setUpdatedAt($this->getDefaultUpdatedAt());
@@ -64,9 +64,9 @@ trait UpdatedAtTrait
     /**
      * Get a default updated at value, if any is available
      *
-     * @return \DateTime|null Default updated at value or null if no default value is available
+     * @return \DateTimeInterface|null Default updated at value or null if no default value is available
      */
-    public function getDefaultUpdatedAt(): \DateTime|null
+    public function getDefaultUpdatedAt(): \DateTimeInterface|null
     {
         return null;
     }

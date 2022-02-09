@@ -15,18 +15,18 @@ trait ExpiresAtTrait
     /**
      * Date of when this component, entity or resource is going to expire
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $expiresAt = null;
+    protected \DateTimeInterface|null $expiresAt = null;
 
     /**
      * Set expires at
      *
-     * @param \DateTime|null $date Date of when this component, entity or resource is going to expire
+     * @param \DateTimeInterface|null $date Date of when this component, entity or resource is going to expire
      *
      * @return self
      */
-    public function setExpiresAt(\DateTime|null $date): static
+    public function setExpiresAt(\DateTimeInterface|null $date): static
     {
         $this->expiresAt = $date;
 
@@ -41,9 +41,9 @@ trait ExpiresAtTrait
      *
      * @see getDefaultExpiresAt()
      *
-     * @return \DateTime|null expires at or null if no expires at has been set
+     * @return \DateTimeInterface|null expires at or null if no expires at has been set
      */
-    public function getExpiresAt(): \DateTime|null
+    public function getExpiresAt(): \DateTimeInterface|null
     {
         if (!$this->hasExpiresAt()) {
             $this->setExpiresAt($this->getDefaultExpiresAt());
@@ -64,9 +64,9 @@ trait ExpiresAtTrait
     /**
      * Get a default expires at value, if any is available
      *
-     * @return \DateTime|null Default expires at value or null if no default value is available
+     * @return \DateTimeInterface|null Default expires at value or null if no default value is available
      */
-    public function getDefaultExpiresAt(): \DateTime|null
+    public function getDefaultExpiresAt(): \DateTimeInterface|null
     {
         return null;
     }

@@ -15,18 +15,18 @@ trait DeletedAtTrait
     /**
      * Date of when this component, entity or resource was deleted
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $deletedAt = null;
+    protected \DateTimeInterface|null $deletedAt = null;
 
     /**
      * Set deleted at
      *
-     * @param \DateTime|null $date Date of when this component, entity or resource was deleted
+     * @param \DateTimeInterface|null $date Date of when this component, entity or resource was deleted
      *
      * @return self
      */
-    public function setDeletedAt(\DateTime|null $date): static
+    public function setDeletedAt(\DateTimeInterface|null $date): static
     {
         $this->deletedAt = $date;
 
@@ -41,9 +41,9 @@ trait DeletedAtTrait
      *
      * @see getDefaultDeletedAt()
      *
-     * @return \DateTime|null deleted at or null if no deleted at has been set
+     * @return \DateTimeInterface|null deleted at or null if no deleted at has been set
      */
-    public function getDeletedAt(): \DateTime|null
+    public function getDeletedAt(): \DateTimeInterface|null
     {
         if (!$this->hasDeletedAt()) {
             $this->setDeletedAt($this->getDefaultDeletedAt());
@@ -64,9 +64,9 @@ trait DeletedAtTrait
     /**
      * Get a default deleted at value, if any is available
      *
-     * @return \DateTime|null Default deleted at value or null if no default value is available
+     * @return \DateTimeInterface|null Default deleted at value or null if no default value is available
      */
-    public function getDefaultDeletedAt(): \DateTime|null
+    public function getDefaultDeletedAt(): \DateTimeInterface|null
     {
         return null;
     }

@@ -15,18 +15,18 @@ trait CreatedAtTrait
     /**
      * Date of when this component, entity or resource was created
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $createdAt = null;
+    protected \DateTimeInterface|null $createdAt = null;
 
     /**
      * Set created at
      *
-     * @param \DateTime|null $date Date of when this component, entity or resource was created
+     * @param \DateTimeInterface|null $date Date of when this component, entity or resource was created
      *
      * @return self
      */
-    public function setCreatedAt(\DateTime|null $date): static
+    public function setCreatedAt(\DateTimeInterface|null $date): static
     {
         $this->createdAt = $date;
 
@@ -41,9 +41,9 @@ trait CreatedAtTrait
      *
      * @see getDefaultCreatedAt()
      *
-     * @return \DateTime|null created at or null if no created at has been set
+     * @return \DateTimeInterface|null created at or null if no created at has been set
      */
-    public function getCreatedAt(): \DateTime|null
+    public function getCreatedAt(): \DateTimeInterface|null
     {
         if (!$this->hasCreatedAt()) {
             $this->setCreatedAt($this->getDefaultCreatedAt());
@@ -64,9 +64,9 @@ trait CreatedAtTrait
     /**
      * Get a default created at value, if any is available
      *
-     * @return \DateTime|null Default created at value or null if no default value is available
+     * @return \DateTimeInterface|null Default created at value or null if no default value is available
      */
-    public function getDefaultCreatedAt(): \DateTime|null
+    public function getDefaultCreatedAt(): \DateTimeInterface|null
     {
         return null;
     }

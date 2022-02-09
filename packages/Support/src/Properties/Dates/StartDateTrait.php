@@ -15,18 +15,18 @@ trait StartDateTrait
     /**
      * Start date of event
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $startDate = null;
+    protected \DateTimeInterface|null $startDate = null;
 
     /**
      * Set start date
      *
-     * @param \DateTime|null $date Start date of event
+     * @param \DateTimeInterface|null $date Start date of event
      *
      * @return self
      */
-    public function setStartDate(\DateTime|null $date): static
+    public function setStartDate(\DateTimeInterface|null $date): static
     {
         $this->startDate = $date;
 
@@ -41,9 +41,9 @@ trait StartDateTrait
      *
      * @see getDefaultStartDate()
      *
-     * @return \DateTime|null start date or null if no start date has been set
+     * @return \DateTimeInterface|null start date or null if no start date has been set
      */
-    public function getStartDate(): \DateTime|null
+    public function getStartDate(): \DateTimeInterface|null
     {
         if (!$this->hasStartDate()) {
             $this->setStartDate($this->getDefaultStartDate());
@@ -64,9 +64,9 @@ trait StartDateTrait
     /**
      * Get a default start date value, if any is available
      *
-     * @return \DateTime|null Default start date value or null if no default value is available
+     * @return \DateTimeInterface|null Default start date value or null if no default value is available
      */
-    public function getDefaultStartDate(): \DateTime|null
+    public function getDefaultStartDate(): \DateTimeInterface|null
     {
         return null;
     }

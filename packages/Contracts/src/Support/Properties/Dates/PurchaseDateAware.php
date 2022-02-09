@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Purchase date Aware
  *
- * Component is aware of \DateTime "purchase date"
+ * Component is aware of \DateTimeInterface "purchase date"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,11 +15,11 @@ interface PurchaseDateAware
     /**
      * Set purchase date
      *
-     * @param \DateTime|null $date Date of planned purchase
+     * @param \DateTimeInterface|null $date Date of planned purchase
      *
      * @return self
      */
-    public function setPurchaseDate(\DateTime|null $date): static;
+    public function setPurchaseDate(\DateTimeInterface|null $date): static;
 
     /**
      * Get purchase date
@@ -29,9 +29,9 @@ interface PurchaseDateAware
      *
      * @see getDefaultPurchaseDate()
      *
-     * @return \DateTime|null purchase date or null if no purchase date has been set
+     * @return \DateTimeInterface|null purchase date or null if no purchase date has been set
      */
-    public function getPurchaseDate(): \DateTime|null;
+    public function getPurchaseDate(): \DateTimeInterface|null;
 
     /**
      * Check if purchase date has been set
@@ -43,7 +43,7 @@ interface PurchaseDateAware
     /**
      * Get a default purchase date value, if any is available
      *
-     * @return \DateTime|null Default purchase date value or null if no default value is available
+     * @return \DateTimeInterface|null Default purchase date value or null if no default value is available
      */
-    public function getDefaultPurchaseDate(): \DateTime|null;
+    public function getDefaultPurchaseDate(): \DateTimeInterface|null;
 }
