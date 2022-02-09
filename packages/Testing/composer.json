@@ -19,8 +19,9 @@
         "codeception/module-asserts": "*@dev",
         "fakerphp/faker": "^v1.17.0",
         "mockery/mockery": "1.5.*",
-        "orchestra/testbench": "7.x-dev",
-        "orchestra/testbench-dusk": "7.x-dev"
+        "orchestra/testbench": "^v7.0.0",
+        "orchestra/testbench-dusk": "^v7.0.0",
+        "phpunit/phpunit": "dev-master as 9.5.13"
     },
     "autoload": {
         "psr-4": {

@@ -15,7 +15,7 @@
         "php": "^8.0.2",
         "composer-runtime-api": "^2.0.0",
         "aedart/athenaeum-contracts": "^5.27",
-        "illuminate/support": "^v9.0.0-beta.5"
+        "illuminate/support": "v9.0.1"
     },
     "autoload": {
         "psr-4": {

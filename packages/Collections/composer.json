@@ -17,7 +17,7 @@
         "aedart/athenaeum-contracts": "^5.27",
         "aedart/athenaeum-support": "^5.27",
         "aedart/athenaeum-utils": "^5.27",
-        "illuminate/collections": "^v9.0.0-beta.5"
+        "illuminate/collections": "v9.0.1"
     },
     "autoload": {
         "psr-4": {
