@@ -138,7 +138,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
     public function related(): ApiResource|string
     {
         if (!is_string($this->related)) {
-            return get_class($this->related);
+            return $this->related::class;
         }
 
         return $this->related;

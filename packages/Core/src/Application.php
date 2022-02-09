@@ -483,7 +483,7 @@ class Application extends IoC implements
     public function loadDeferredProviders()
     {
         foreach ($this->deferredServices as $service => $provider) {
-            $this->registerDeferredProvider(get_class($provider), $service);
+            $this->registerDeferredProvider($provider::class, $service);
         }
 
         $this->deferredServices = [];
@@ -798,7 +798,7 @@ class Application extends IoC implements
         // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L212
 
         $dispatcher = $this->getDispatcher();
-        $class = get_class($bootstrapper);
+        $class = $bootstrapper::class;
 
         // Dispatch "before" event
         $dispatcher->dispatch('bootstrapping: ' . $class, [$this]);

@@ -33,6 +33,6 @@ trait DatabaseDriver
             return $connection->getDriverName();
         }
 
-        throw new RuntimeException(sprintf('Unable to determine shorthand connection driver name for %s', get_class($connection)));
+        throw new RuntimeException(sprintf('Unable to determine shorthand connection driver name for %s', $connection::class));
     }
 }

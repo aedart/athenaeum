@@ -197,7 +197,7 @@ class TraitTester
         $getMethod = $getMethod ?? $this->getPropertyMethodName();
 
         if (is_object($value)) {
-            ConsoleDebugger::output(sprintf(' testing %s(%s)', $setMethod, get_class($value)));
+            ConsoleDebugger::output(sprintf(' testing %s(%s)', $setMethod, $value::class));
         } else {
             ConsoleDebugger::output(sprintf(' testing %s(%s)', $setMethod, var_export($value, true)));
         }
@@ -233,7 +233,7 @@ class TraitTester
         $getMethod = $getMethod ?? $this->getPropertyMethodName();
 
         if (is_object($defaultValue)) {
-            ConsoleDebugger::output(sprintf(' mocking %s(), must return %s', $defaultMethod, get_class($defaultValue)));
+            ConsoleDebugger::output(sprintf(' mocking %s(), must return %s', $defaultMethod, $defaultValue::class));
         } else {
             ConsoleDebugger::output(sprintf(' mocking %s(), must return %s', $defaultMethod, var_export($defaultValue, true)));
         }

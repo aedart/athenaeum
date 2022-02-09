@@ -92,7 +92,7 @@ class BelongsToFilter extends BaseFieldFilter
 
         // Fail if relation does not exist in model.
         if (!method_exists($model, $relation)) {
-            throw new LogicException(sprintf('Relation %s does not exist in model %s', $relation, get_class($model)));
+            throw new LogicException(sprintf('Relation %s does not exist in model %s', $relation, $model::class));
         }
 
         // Determine the type of relation that the constraint must be built

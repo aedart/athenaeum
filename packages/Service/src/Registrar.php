@@ -248,6 +248,8 @@ class Registrar implements RegistrarInterface
      */
     protected function providerNamespace($provider): string
     {
-        return is_string($provider) ? $provider : get_class($provider);
+        return is_string($provider)
+            ? $provider
+            : $provider::class;
     }
 }

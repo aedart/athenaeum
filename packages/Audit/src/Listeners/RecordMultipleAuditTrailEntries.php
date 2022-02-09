@@ -72,7 +72,7 @@ class RecordMultipleAuditTrailEntries extends RecordsEntries
         // Obtain first model from collection. We need this to
         // determine the class path.
         $first = $event->models->first();
-        $type = get_class($first);
+        $type = $first::class;
 
         $original = $this->convertToJson($event->original);
         $changed = $this->convertToJson($event->changed);

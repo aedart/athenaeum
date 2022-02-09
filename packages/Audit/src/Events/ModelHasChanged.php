@@ -61,7 +61,7 @@ class ModelHasChanged
         string|null $message = null,
         DateTimeInterface|Carbon|string|null $performedAt = null
     ) {
-        $this->model = get_class($model);
+        $this->model = $model::class;
         $this->id = $model->getKey();
 
         // Resolve the original and changed data (attributes). It's important that this is done during

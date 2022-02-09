@@ -146,7 +146,7 @@ abstract class BaseExceptionHandler implements
                 [ 'exception' => $e ]
             );
 
-            $context = [ 'exception-throw' => get_class($exception) ];
+            $context = [ 'exception-throw' => $exception::class ];
         }
 
         // Finally, log the exception with desired level

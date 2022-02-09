@@ -48,7 +48,7 @@ trait AclModels
         }
 
         // When a model instance is given
-        $class = get_class($type);
+        $class = $type::class;
         if ($models instanceof $class) {
             return $this->{$relation}->contains($type->getKeyName(), $models->id);
         }
@@ -149,7 +149,7 @@ trait AclModels
      */
     protected function resolveOrFindModels(array|Model|Collection|int|string $models, Model|Sluggable $type): Collection|array|Model|null
     {
-        $class = get_class($type);
+        $class = $type::class;
         if ($models instanceof $class) {
             return $models;
         }

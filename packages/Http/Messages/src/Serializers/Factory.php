@@ -33,6 +33,6 @@ class Factory implements SerializerFactoryInterface
         }
 
         // Fail if unable to find fitting serializer
-        throw new HttpMessageSerializationException(sprintf('Unable to make serializer for %s', get_class($message)));
+        throw new HttpMessageSerializationException(sprintf('Unable to make serializer for %s', $message::class));
     }
 }

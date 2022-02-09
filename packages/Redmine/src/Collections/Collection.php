@@ -51,6 +51,6 @@ class Collection extends BaseCollection
             return $resource::make($item, $resource->getConnection());
         }, $list);
 
-        return new static($resources, get_class($resource));
+        return new static($resources, $resource::class);
     }
 }
