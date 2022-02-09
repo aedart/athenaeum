@@ -15,18 +15,18 @@ trait PurchasedAtTrait
     /**
      * Date of when this component, entity or resource was purchased
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $purchasedAt = null;
+    protected \DateTimeInterface|null $purchasedAt = null;
 
     /**
      * Set purchased at
      *
-     * @param \DateTime|null $date Date of when this component, entity or resource was purchased
+     * @param \DateTimeInterface|null $date Date of when this component, entity or resource was purchased
      *
      * @return self
      */
-    public function setPurchasedAt(\DateTime|null $date): static
+    public function setPurchasedAt(\DateTimeInterface|null $date): static
     {
         $this->purchasedAt = $date;
 
@@ -41,9 +41,9 @@ trait PurchasedAtTrait
      *
      * @see getDefaultPurchasedAt()
      *
-     * @return \DateTime|null purchased at or null if no purchased at has been set
+     * @return \DateTimeInterface|null purchased at or null if no purchased at has been set
      */
-    public function getPurchasedAt(): \DateTime|null
+    public function getPurchasedAt(): \DateTimeInterface|null
     {
         if (!$this->hasPurchasedAt()) {
             $this->setPurchasedAt($this->getDefaultPurchasedAt());
@@ -64,9 +64,9 @@ trait PurchasedAtTrait
     /**
      * Get a default purchased at value, if any is available
      *
-     * @return \DateTime|null Default purchased at value or null if no default value is available
+     * @return \DateTimeInterface|null Default purchased at value or null if no default value is available
      */
-    public function getDefaultPurchasedAt(): \DateTime|null
+    public function getDefaultPurchasedAt(): \DateTimeInterface|null
     {
         return null;
     }

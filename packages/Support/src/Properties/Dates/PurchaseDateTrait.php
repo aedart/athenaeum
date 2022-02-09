@@ -15,18 +15,18 @@ trait PurchaseDateTrait
     /**
      * Date of planned purchase
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $purchaseDate = null;
+    protected \DateTimeInterface|null $purchaseDate = null;
 
     /**
      * Set purchase date
      *
-     * @param \DateTime|null $date Date of planned purchase
+     * @param \DateTimeInterface|null $date Date of planned purchase
      *
      * @return self
      */
-    public function setPurchaseDate(\DateTime|null $date): static
+    public function setPurchaseDate(\DateTimeInterface|null $date): static
     {
         $this->purchaseDate = $date;
 
@@ -41,9 +41,9 @@ trait PurchaseDateTrait
      *
      * @see getDefaultPurchaseDate()
      *
-     * @return \DateTime|null purchase date or null if no purchase date has been set
+     * @return \DateTimeInterface|null purchase date or null if no purchase date has been set
      */
-    public function getPurchaseDate(): \DateTime|null
+    public function getPurchaseDate(): \DateTimeInterface|null
     {
         if (!$this->hasPurchaseDate()) {
             $this->setPurchaseDate($this->getDefaultPurchaseDate());
@@ -64,9 +64,9 @@ trait PurchaseDateTrait
     /**
      * Get a default purchase date value, if any is available
      *
-     * @return \DateTime|null Default purchase date value or null if no default value is available
+     * @return \DateTimeInterface|null Default purchase date value or null if no default value is available
      */
-    public function getDefaultPurchaseDate(): \DateTime|null
+    public function getDefaultPurchaseDate(): \DateTimeInterface|null
     {
         return null;
     }

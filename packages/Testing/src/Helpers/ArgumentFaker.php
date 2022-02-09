@@ -3,6 +3,7 @@
 namespace Aedart\Testing\Helpers;
 
 use Closure;
+use DateTime;
 use Faker\Factory;
 use Faker\Generator;
 use Mockery as m;
@@ -104,7 +105,13 @@ class ArgumentFaker
      */
     public static function makeMockFor(string $target): MockInterface
     {
-        return m::mock($target);
+        // Handle special case - DateTimeInterface
+        $resolved = match ($target) {
+            'DateTimeInterface' => DateTime::class,
+            default => $target
+        };
+
+        return m::mock($resolved);
     }
 
     /**

@@ -15,18 +15,18 @@ trait ReleasedAtTrait
     /**
      * Date of when this component, entity or something was released
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $releasedAt = null;
+    protected \DateTimeInterface|null $releasedAt = null;
 
     /**
      * Set released at
      *
-     * @param \DateTime|null $date Date of when this component, entity or something was released
+     * @param \DateTimeInterface|null $date Date of when this component, entity or something was released
      *
      * @return self
      */
-    public function setReleasedAt(\DateTime|null $date): static
+    public function setReleasedAt(\DateTimeInterface|null $date): static
     {
         $this->releasedAt = $date;
 
@@ -41,9 +41,9 @@ trait ReleasedAtTrait
      *
      * @see getDefaultReleasedAt()
      *
-     * @return \DateTime|null released at or null if no released at has been set
+     * @return \DateTimeInterface|null released at or null if no released at has been set
      */
-    public function getReleasedAt(): \DateTime|null
+    public function getReleasedAt(): \DateTimeInterface|null
     {
         if (!$this->hasReleasedAt()) {
             $this->setReleasedAt($this->getDefaultReleasedAt());
@@ -64,9 +64,9 @@ trait ReleasedAtTrait
     /**
      * Get a default released at value, if any is available
      *
-     * @return \DateTime|null Default released at value or null if no default value is available
+     * @return \DateTimeInterface|null Default released at value or null if no default value is available
      */
-    public function getDefaultReleasedAt(): \DateTime|null
+    public function getDefaultReleasedAt(): \DateTimeInterface|null
     {
         return null;
     }

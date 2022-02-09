@@ -15,18 +15,18 @@ trait DeliveryDateTrait
     /**
      * Date of planned delivery
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $deliveryDate = null;
+    protected \DateTimeInterface|null $deliveryDate = null;
 
     /**
      * Set delivery date
      *
-     * @param \DateTime|null $date Date of planned delivery
+     * @param \DateTimeInterface|null $date Date of planned delivery
      *
      * @return self
      */
-    public function setDeliveryDate(\DateTime|null $date): static
+    public function setDeliveryDate(\DateTimeInterface|null $date): static
     {
         $this->deliveryDate = $date;
 
@@ -41,9 +41,9 @@ trait DeliveryDateTrait
      *
      * @see getDefaultDeliveryDate()
      *
-     * @return \DateTime|null delivery date or null if no delivery date has been set
+     * @return \DateTimeInterface|null delivery date or null if no delivery date has been set
      */
-    public function getDeliveryDate(): \DateTime|null
+    public function getDeliveryDate(): \DateTimeInterface|null
     {
         if (!$this->hasDeliveryDate()) {
             $this->setDeliveryDate($this->getDefaultDeliveryDate());
@@ -64,9 +64,9 @@ trait DeliveryDateTrait
     /**
      * Get a default delivery date value, if any is available
      *
-     * @return \DateTime|null Default delivery date value or null if no default value is available
+     * @return \DateTimeInterface|null Default delivery date value or null if no default value is available
      */
-    public function getDefaultDeliveryDate(): \DateTime|null
+    public function getDefaultDeliveryDate(): \DateTimeInterface|null
     {
         return null;
     }

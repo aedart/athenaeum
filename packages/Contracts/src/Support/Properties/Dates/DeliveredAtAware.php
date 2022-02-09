@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Delivered at Aware
  *
- * Component is aware of \DateTime "delivered at"
+ * Component is aware of \DateTimeInterface "delivered at"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,11 +15,11 @@ interface DeliveredAtAware
     /**
      * Set delivered at
      *
-     * @param \DateTime|null $date Date of delivery
+     * @param \DateTimeInterface|null $date Date of delivery
      *
      * @return self
      */
-    public function setDeliveredAt(\DateTime|null $date): static;
+    public function setDeliveredAt(\DateTimeInterface|null $date): static;
 
     /**
      * Get delivered at
@@ -29,9 +29,9 @@ interface DeliveredAtAware
      *
      * @see getDefaultDeliveredAt()
      *
-     * @return \DateTime|null delivered at or null if no delivered at has been set
+     * @return \DateTimeInterface|null delivered at or null if no delivered at has been set
      */
-    public function getDeliveredAt(): \DateTime|null;
+    public function getDeliveredAt(): \DateTimeInterface|null;
 
     /**
      * Check if delivered at has been set
@@ -43,7 +43,7 @@ interface DeliveredAtAware
     /**
      * Get a default delivered at value, if any is available
      *
-     * @return \DateTime|null Default delivered at value or null if no default value is available
+     * @return \DateTimeInterface|null Default delivered at value or null if no default value is available
      */
-    public function getDefaultDeliveredAt(): \DateTime|null;
+    public function getDefaultDeliveredAt(): \DateTimeInterface|null;
 }

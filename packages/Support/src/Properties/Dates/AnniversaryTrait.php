@@ -15,18 +15,18 @@ trait AnniversaryTrait
     /**
      * Date of anniversary
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $anniversary = null;
+    protected \DateTimeInterface|null $anniversary = null;
 
     /**
      * Set anniversary
      *
-     * @param \DateTime|null $anniversary Date of anniversary
+     * @param \DateTimeInterface|null $anniversary Date of anniversary
      *
      * @return self
      */
-    public function setAnniversary(\DateTime|null $anniversary): static
+    public function setAnniversary(\DateTimeInterface|null $anniversary): static
     {
         $this->anniversary = $anniversary;
 
@@ -41,9 +41,9 @@ trait AnniversaryTrait
      *
      * @see getDefaultAnniversary()
      *
-     * @return \DateTime|null anniversary or null if no anniversary has been set
+     * @return \DateTimeInterface|null anniversary or null if no anniversary has been set
      */
-    public function getAnniversary(): \DateTime|null
+    public function getAnniversary(): \DateTimeInterface|null
     {
         if (!$this->hasAnniversary()) {
             $this->setAnniversary($this->getDefaultAnniversary());
@@ -64,9 +64,9 @@ trait AnniversaryTrait
     /**
      * Get a default anniversary value, if any is available
      *
-     * @return \DateTime|null Default anniversary value or null if no default value is available
+     * @return \DateTimeInterface|null Default anniversary value or null if no default value is available
      */
-    public function getDefaultAnniversary(): \DateTime|null
+    public function getDefaultAnniversary(): \DateTimeInterface|null
     {
         return null;
     }

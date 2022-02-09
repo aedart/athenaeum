@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Deleted at Aware
  *
- * Component is aware of \DateTime "deleted at"
+ * Component is aware of \DateTimeInterface "deleted at"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,11 +15,11 @@ interface DeletedAtAware
     /**
      * Set deleted at
      *
-     * @param \DateTime|null $date Date of when this component, entity or resource was deleted
+     * @param \DateTimeInterface|null $date Date of when this component, entity or resource was deleted
      *
      * @return self
      */
-    public function setDeletedAt(\DateTime|null $date): static;
+    public function setDeletedAt(\DateTimeInterface|null $date): static;
 
     /**
      * Get deleted at
@@ -29,9 +29,9 @@ interface DeletedAtAware
      *
      * @see getDefaultDeletedAt()
      *
-     * @return \DateTime|null deleted at or null if no deleted at has been set
+     * @return \DateTimeInterface|null deleted at or null if no deleted at has been set
      */
-    public function getDeletedAt(): \DateTime|null;
+    public function getDeletedAt(): \DateTimeInterface|null;
 
     /**
      * Check if deleted at has been set
@@ -43,7 +43,7 @@ interface DeletedAtAware
     /**
      * Get a default deleted at value, if any is available
      *
-     * @return \DateTime|null Default deleted at value or null if no default value is available
+     * @return \DateTimeInterface|null Default deleted at value or null if no default value is available
      */
-    public function getDefaultDeletedAt(): \DateTime|null;
+    public function getDefaultDeletedAt(): \DateTimeInterface|null;
 }

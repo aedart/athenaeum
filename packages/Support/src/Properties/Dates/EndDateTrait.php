@@ -15,18 +15,18 @@ trait EndDateTrait
     /**
      * Date for when some kind of event ends
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected \DateTime|null $endDate = null;
+    protected \DateTimeInterface|null $endDate = null;
 
     /**
      * Set end date
      *
-     * @param \DateTime|null $date Date for when some kind of event ends
+     * @param \DateTimeInterface|null $date Date for when some kind of event ends
      *
      * @return self
      */
-    public function setEndDate(\DateTime|null $date): static
+    public function setEndDate(\DateTimeInterface|null $date): static
     {
         $this->endDate = $date;
 
@@ -41,9 +41,9 @@ trait EndDateTrait
      *
      * @see getDefaultEndDate()
      *
-     * @return \DateTime|null end date or null if no end date has been set
+     * @return \DateTimeInterface|null end date or null if no end date has been set
      */
-    public function getEndDate(): \DateTime|null
+    public function getEndDate(): \DateTimeInterface|null
     {
         if (!$this->hasEndDate()) {
             $this->setEndDate($this->getDefaultEndDate());
@@ -64,9 +64,9 @@ trait EndDateTrait
     /**
      * Get a default end date value, if any is available
      *
-     * @return \DateTime|null Default end date value or null if no default value is available
+     * @return \DateTimeInterface|null Default end date value or null if no default value is available
      */
-    public function getDefaultEndDate(): \DateTime|null
+    public function getDefaultEndDate(): \DateTimeInterface|null
     {
         return null;
     }

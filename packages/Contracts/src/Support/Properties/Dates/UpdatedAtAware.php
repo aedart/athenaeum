@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Updated at Aware
  *
- * Component is aware of \DateTime "updated at"
+ * Component is aware of \DateTimeInterface "updated at"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,11 +15,11 @@ interface UpdatedAtAware
     /**
      * Set updated at
      *
-     * @param \DateTime|null $date Date of when this component, entity or resource was updated
+     * @param \DateTimeInterface|null $date Date of when this component, entity or resource was updated
      *
      * @return self
      */
-    public function setUpdatedAt(\DateTime|null $date): static;
+    public function setUpdatedAt(\DateTimeInterface|null $date): static;
 
     /**
      * Get updated at
@@ -29,9 +29,9 @@ interface UpdatedAtAware
      *
      * @see getDefaultUpdatedAt()
      *
-     * @return \DateTime|null updated at or null if no updated at has been set
+     * @return \DateTimeInterface|null updated at or null if no updated at has been set
      */
-    public function getUpdatedAt(): \DateTime|null;
+    public function getUpdatedAt(): \DateTimeInterface|null;
 
     /**
      * Check if updated at has been set
@@ -43,7 +43,7 @@ interface UpdatedAtAware
     /**
      * Get a default updated at value, if any is available
      *
-     * @return \DateTime|null Default updated at value or null if no default value is available
+     * @return \DateTimeInterface|null Default updated at value or null if no default value is available
      */
-    public function getDefaultUpdatedAt(): \DateTime|null;
+    public function getDefaultUpdatedAt(): \DateTimeInterface|null;
 }
