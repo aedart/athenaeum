@@ -40,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Non-breaking Changes**
 
 * `CHANGELOG.md` is now formatted according to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+* `when()` and `unless()` methods accept a `callable` as the result argument. [#81](https://github.com/aedart/athenaeum/issues/81). 
 * `storage_path()` helper in Core package will now pass `$path` argument to application `storagePath()` method, when application is available (_`$path` argument added in Laravel `v9.x`_).
 * Core `Application` uses `'json'` file based maintenance mode as driver, when application state is "down". [#67](https://github.com/aedart/athenaeum/issues/67).
 * `application()` method no longer uses git to obtain application's version. It now relies on Composer's `InstalledVersions::getRootPackage()`, in `\Aedart\Utils\Version`. [#68](https://github.com/aedart/athenaeum/issues/68).
