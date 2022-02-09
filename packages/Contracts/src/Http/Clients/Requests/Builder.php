@@ -545,7 +545,8 @@ interface Builder extends HttpClientAware,
      *
      * Any value returned by the callback methods, is ignored.
      *
-     * @param bool $result E.g. the boolean result of a condition
+     * @param bool|callable $result E.g. the boolean result of a condition. If callback is given, then its
+     *                              resulting value is used as result.
      * @param callable $callback The callback to apply, if result is `true`.
      *                          Request builder instance is given as callback's argument.
      * @param callable|null $otherwise [optional] Callback to apply, if result evaluates is `false`.
@@ -553,7 +554,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function when(bool $result, callable $callback, callable|null $otherwise = null): static;
+    public function when(bool|callable $result, callable $callback, callable|null $otherwise = null): static;
 
     /**
      * Apply a callback, unless result is true
@@ -562,7 +563,8 @@ interface Builder extends HttpClientAware,
      *
      * Any value returned by the callback methods, is ignored.
      *
-     * @param bool $result E.g. the boolean result of a condition
+     * @param bool|callable $result E.g. the boolean result of a condition. If callback is given, then its
+     *                              resulting value is used as result.
      * @param callable $callback The callback to apply, if result is `false`.
      *                          Request builder instance is given as callback's argument.
      * @param callable|null $otherwise [optional] Callback to apply, if result evaluates is `true`.
@@ -570,7 +572,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function unless(bool $result, callable $callback, callable|null $otherwise = null): static;
+    public function unless(bool|callable $result, callable $callback, callable|null $otherwise = null): static;
 
     /**
      * Add data to the next request's payload (body).

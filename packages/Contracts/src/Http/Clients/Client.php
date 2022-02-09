@@ -59,8 +59,8 @@ use Psr\Http\Message\UriInterface;
  * @method Query newQuery() Returns a new Http Query Builder instance.
  * @method Builder setQuery(Query $query) Set the Http Query Builder.
  * @method Builder applyCriteria(Criteria|Criteria[] $criteria) Apply one or more criteria for the next request.
- * @method Builder when(bool $result, callable $callback, callable|null $otherwise = null) Apply a callback, when result is true.
- * @method Builder unless(bool $result, callable $callback, callable|null $otherwise = null) Apply a callback, unless result is true.
+ * @method Builder when(bool|callable $result, callable $callback, callable|null $otherwise = null) Apply a callback, when result is true.
+ * @method Builder unless(bool|callable $result, callable $callback, callable|null $otherwise = null) Apply a callback, unless result is true.
  * @method Builder withData(array $data) Add data to the next request's payload (body).
  * @method Builder setData(array $data) Set the next request's payload (body).
  * @method bool hasData() Determine if next request has payload data.
