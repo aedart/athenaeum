@@ -63,17 +63,7 @@ class Manager implements
     }
 
     /**
-     * Creates a new client instance for the given profile
-     *
-     * Unlike the {@see profile()} method, this method always returns a new client
-     * instance.
-     *
-     * @param string|null $profile [optional]
-     * @param array $options [optional]
-     *
-     * @return Client
-     *
-     * @throws ProfileNotFoundException
+     * @inheritdoc
      */
     public function fresh(string|null $profile = null, array $options = []): Client
     {
