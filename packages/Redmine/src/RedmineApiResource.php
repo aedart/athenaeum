@@ -212,25 +212,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     }
 
     /**
-     * Fetch all resources
-     *
-     * Method returns a {@see TraversableResultsInterface} that automatically will perform
-     * paginated requests, as needed, when looping through the results. This is handy, when
-     * you do not wish to manually paginate through available result sets.
-     *
-     * **WARNING**: _Depending on amount of available results and "pool" size, this method
-     * can decrease performance a lot, due to many API requests.
-     * You SHOULD NOT set the pool size too small, if you wish to limit the amount of requests!_
-     *
-     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
-     *                               The callback MUST return a valid {@see Builder}
-     * @param int $size [optional] The "pool" size - maximum limit of results to fetch per request
-     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
-     *
-     * @return TraversableResultsInterface<static>
-     *
-     * @throws Throwable
-     * @throws RedmineExceptionInterface
+     * @inheritdoc
      */
     public static function all(callable|null $filters = null, int $size = 10, string|ConnectionInterface|null $connection = null): TraversableResultsInterface
     {

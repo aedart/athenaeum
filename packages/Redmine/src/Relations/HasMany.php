@@ -4,12 +4,17 @@ namespace Aedart\Redmine\Relations;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Redmine\ApiResource;
+use Aedart\Contracts\Redmine\Exceptions\RedmineException as RedmineExceptionInterface;
+use Aedart\Contracts\Redmine\TraversableResults;
 use Aedart\Redmine\Exceptions\RelationException;
 use Aedart\Utils\Str;
 use ReflectionClass;
+use Throwable;
 
 /**
  * Has Many Resources Relation
+ *
+ * @template T
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine\Relations
@@ -81,6 +86,38 @@ class HasMany extends ResourceRelation
             $this->wrapFilters(),
             $this->getLimit(),
             $this->getOffset(),
+            $this->getConnection()
+        );
+    }
+
+    /**
+     * Fetch all resources
+     *
+     * @see \Aedart\Contracts\Redmine\ApiResource::all
+     *
+     * @param int $size [optional] The "pool" size - maximum limit of results to fetch per request
+     *
+     * @return TraversableResults<T>
+     *
+     * @throws RedmineExceptionInterface
+     * @throws Throwable
+     */
+    public function fetchAll(int $size = 10): TraversableResults
+    {
+        // Resolve the own key value - or fail if no value obtained
+        $value = $this->key();
+        if (!isset($value)) {
+            throw new RelationException('Unable to fetch relation, own key (parent resource primary key) could not be resolved or was not specified');
+        }
+
+        // Build the constraint filter and add it to the filters
+        $this->filter(
+            $this->buildConstraintFilter($this->getFilterKey(), $value)
+        );
+
+        return $this->related()::all(
+            $this->wrapFilters(),
+            $size,
             $this->getConnection()
         );
     }

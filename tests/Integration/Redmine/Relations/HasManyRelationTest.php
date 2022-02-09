@@ -97,4 +97,99 @@ class HasManyRelationTest extends RedmineTestCase
 
         $project->delete();
     }
+
+    /**
+     * @test
+     *
+     * @throws ErrorResponseException
+     * @throws \JsonException
+     * @throws \Throwable
+     */
+    public function canFetchAllRelated()
+    {
+        // Similar to the "belongs to" relation test(s), we also use a real resource
+        // here, so that it can be testing in "live" mode.
+
+        // Debug
+//        Project::$debug = true;
+
+        // ------------------------------------------------------------------- //
+        // Prerequisites - create a project with a few issues
+
+        $projectId = 1234;
+        $projectData = [
+            'name' => 'Project with issues via @aedart/athenaeum-redmine',
+            'identifier' => 'test-auto-created-' . now()->timestamp,
+            'description' => 'Projects are been created via Redmine API Client, in [Athenaeum](https://github.com/aedart/athenaeum) package.'
+        ];
+
+        // Create the owning project
+        $project = Project::create($projectData, [], $this->liveOrMockedConnection([
+            $this->mockCreatedResourceResponse($projectData, $projectId, Project::class),
+            $this->mockDeletedResourceResponse()
+        ]));
+
+        // Create a few issues, owned by the project
+        $issueA = $this->createIssue($project->id());
+        $issueB = $this->createIssue($project->id());
+        $issueC = $this->createIssue($project->id());
+        $issueD = $this->createIssue($project->id());
+        $issueE = $this->createIssue($project->id());
+        $issueF = $this->createIssue($project->id());
+
+        // ------------------------------------------------------------------- //
+        // Obtain related resource
+
+        $allList = [
+            $issueA,
+            $issueB,
+            $issueC,
+            $issueD,
+            $issueE,
+            $issueF,
+        ];
+
+        // The total expected amount of results
+        $expectedTotal = count($allList);
+
+        // The max. pool size / amount of records per results set
+        // SHOULD result in exactly 4 requests.
+        $size = 2;
+
+        $relationConnection = $this->liveOrMockedConnection([
+            $this->mockListOfResourcesResponse([ $issueA->toArray(), $issueB->toArray() ], Issue::class, $expectedTotal, $size, 0),
+            $this->mockListOfResourcesResponse([ $issueC->toArray(), $issueD->toArray() ], Issue::class, $expectedTotal, $size, 2),
+            $this->mockListOfResourcesResponse([ $issueE->toArray(), $issueF->toArray() ], Issue::class, $expectedTotal, $size, 4),
+        ]);
+
+        // Finally, obtain the related resource
+        $issues = $project
+            ->issues()
+            ->usingConnection($relationConnection)
+            ->fetchAll($size);
+
+        // ----------------------------------------------------------------------- //
+        // Assert traversable...
+
+        // Ensure that it can be counted
+        $this->assertCount($expectedTotal, $issues, 'Invalid amount of results available');
+
+        // Ensure that we can loop through all results - that all requests are performed
+        $c = 0;
+        foreach ($issues as $issue) {
+            $this->assertNotEmpty($issue->id());
+            $c++;
+        }
+
+        $this->assertSame($expectedTotal, $c, 'Unexpected amount of iteration loops');
+
+        // ----------------------------------------------------------------------- //
+        // Cleanup
+
+        foreach ($allList as $issue) {
+            $issue->delete();
+        }
+
+        $project->delete();
+    }
 }
