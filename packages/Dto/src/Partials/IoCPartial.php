@@ -189,34 +189,10 @@ trait IoCPartial
             // then we attempt to resolve the class type and populate it, if the populatable
             // instance accepts the keys from given array value...
             if (!$isBuiltin && $valueType === 'array') {
-                $typeReflection = new ReflectionClass($typeName);
-                $userDefined = $typeReflection->isUserDefined();
-
-                if ($userDefined && $typeReflection->implementsInterface(Dto::class)) {
-
-                    // EDGE-CASE: when multiple DTOs are allowed and array data is provided, then we must ensure
-                    // that we only attempt to populate the instance that matches all keys from given array value.
-                    // Otherwise, we could end up attempting to populating an incorrect DTO.
-                    // This is not a 100% guarantee. If two different DTOs accept the same properties, then the
-                    // first DTO that is type-hinted will be populated, even though the developer might have
-                    // intended the second one to be populated.
-
-                    /** @var Dto $instance */
-                    $instance = $this->resolveInstanceFromIoC($typeName, $parameterName, $value);
-
-                    $populatable = $instance->populatableProperties();
-                    $keys = array_keys($value);
-
-                    if (count(array_intersect($keys, $populatable)) === count($keys)) {
-                        return $this->resolveInstancePopulation($instance, $parameterName, $value);
-                    }
-                } elseif ($userDefined && $typeReflection->implementsInterface(Populatable::class)) {
-                    // In case that it's not a DTO, yet still an object that is populatable, then attempt
-                    // to populate it.
-                    return $this->resolveClassAndPopulate($typeName, $parameterName, $value);
+                $resolved = $this->attemptPopulateUserDefinedClass($typeName, $parameterName, $value);
+                if (isset($resolved)) {
+                    return $resolved;
                 }
-
-                // Otherwise, we will allow loop to continue to next type...
             }
         }
 
@@ -231,6 +207,62 @@ trait IoCPartial
             $allowedTypes,
             var_export($value, true)
         ));
+    }
+
+    /**
+     * Attempt to populate user-defined class, e.g. DTO or populatable instance
+     *
+     * @param  string  $type
+     * @param  string  $parameter
+     * @param  mixed  $value
+     *
+     * @return mixed
+     *
+     * @throws BindingResolutionException
+     * @throws Throwable
+     */
+    protected function attemptPopulateUserDefinedClass(string $type, string $parameter, mixed $value): mixed
+    {
+        // Skip if type isn't a class
+        if (!class_exists($type)) {
+            return null;
+        }
+
+        // Obtain reflection class, but skip if it is a builtin class type
+        $typeReflection = new ReflectionClass($type);
+        if (!$typeReflection->isUserDefined()) {
+            return null;
+        }
+
+        // EDGE-CASE: when multiple DTOs are allowed and array data is provided, then we must ensure
+        // that we only attempt to populate the instance that matches all keys from given array value.
+        // Otherwise, we could end up attempting to populating an incorrect DTO.
+        // This is not a 100% guarantee. If two different DTOs accept the same properties, then the
+        // first DTO that is type-hinted will be populated, even though the developer might have
+        // intended the second one to be populated.
+        if ($typeReflection->implementsInterface(Dto::class)) {
+            /** @var Dto $instance */
+            $instance = $this->resolveInstanceFromIoC($type, $parameter, $value);
+
+            $populatable = $instance->populatableProperties();
+            $keys = array_keys($value);
+
+            if (count(array_intersect($keys, $populatable)) === count($keys)) {
+                return $this->resolveInstancePopulation($instance, $parameter, $value);
+            }
+
+            // Abort here, otherwise we might attempt to populate an incorrect DTO
+            return null;
+        }
+
+        // In case that it's not a DTO, yet still an object that is populatable, then attempt
+        // to populate it.
+        if ($typeReflection->implementsInterface(Populatable::class)) {
+            return $this->resolveClassAndPopulate($type, $parameter, $value);
+        }
+
+        // Unable to populate - we do not know how to...
+        return null;
     }
 
     /**
