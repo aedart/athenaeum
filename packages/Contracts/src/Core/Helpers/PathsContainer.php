@@ -7,6 +7,7 @@ use Aedart\Contracts\Support\Properties\Strings\BootstrapPathAware;
 use Aedart\Contracts\Support\Properties\Strings\ConfigPathAware;
 use Aedart\Contracts\Support\Properties\Strings\DatabasePathAware;
 use Aedart\Contracts\Support\Properties\Strings\EnvironmentPathAware;
+use Aedart\Contracts\Support\Properties\Strings\LangPathAware;
 use Aedart\Contracts\Support\Properties\Strings\PublicPathAware;
 use Aedart\Contracts\Support\Properties\Strings\ResourcePathAware;
 use Aedart\Contracts\Support\Properties\Strings\StoragePathAware;
@@ -26,6 +27,7 @@ use JsonSerializable;
 interface PathsContainer extends BasePathAware,
     BootstrapPathAware,
     ConfigPathAware,
+    LangPathAware,
     DatabasePathAware,
     EnvironmentPathAware,
     ResourcePathAware,
@@ -62,6 +64,15 @@ interface PathsContainer extends BasePathAware,
      * @return string
      */
     public function configPath(string $path = ''): string;
+
+    /**
+     * Get path to language files.
+     *
+     * @param  string  $path
+     *
+     * @return string
+     */
+    public function langPath(string $path = ''): string;
 
     /**
      * Get a path with the "database" directory

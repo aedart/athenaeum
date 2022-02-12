@@ -71,6 +71,20 @@ if (!function_exists('config_path')) {
     }
 }
 
+if (! function_exists('lang_path')) {
+    /**
+     * Get path to language files.
+     *
+     * @param  string  $path  [optional]
+     *
+     * @return string
+     */
+    function lang_path(string $path = ''): string
+    {
+        return paths()->langPath($path);
+    }
+}
+
 if (!function_exists('database_path')) {
 
     /**

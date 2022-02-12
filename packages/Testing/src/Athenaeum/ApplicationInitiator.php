@@ -158,6 +158,7 @@ trait ApplicationInitiator
             'basePath' => $root,
             'bootstrapPath' => $root . DIRECTORY_SEPARATOR . 'bootstrap',
             'configPath' => $root . DIRECTORY_SEPARATOR . 'config',
+            'langPath' => $root . DIRECTORY_SEPARATOR . 'lang',
             'databasePath' => $root . DIRECTORY_SEPARATOR . 'database',
             'environmentPath' => $root,
             'resourcePath' => $root . DIRECTORY_SEPARATOR . 'resources',
