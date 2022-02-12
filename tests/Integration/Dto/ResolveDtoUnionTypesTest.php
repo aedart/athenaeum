@@ -98,7 +98,7 @@ class ResolveDtoUnionTypesTest extends DtoTestCase
 
         // Note: keys only match properties in Organisation
         $dtoF = $this->makeDtoWithUnionTypes([ 'reference' => [ 'slogan' => $faker->sentence(4) ] ]);
-        $this->assertTrue(isset($dtoF->reference), 'Reference not set (g: array -> Organisation)');
+        $this->assertTrue(isset($dtoF->reference), 'Reference not set (f: array -> Organisation)');
         $this->assertInstanceOf(Organisation::class, $dtoF->reference);
     }
 
