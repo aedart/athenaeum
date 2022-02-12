@@ -228,6 +228,14 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
+    public function langPath(string $path = ''): string
+    {
+        return $this->getPathsContainer()->langPath($path);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function databasePath($path = '')
     {
         return $this->getPathsContainer()->databasePath($path);
@@ -867,6 +875,7 @@ class Application extends IoC implements
         $this->instance('path.base', $this->basePath());
         $this->instance('path.bootstrap', $this->bootstrapPath());
         $this->instance('path.config', $this->configPath());
+        $this->instance('path.lang', $this->langPath());
         $this->instance('path.database', $this->databasePath());
         $this->instance('path.environment', $this->environmentPath());
         $this->instance('path.resource', $this->resourcePath());

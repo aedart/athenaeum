@@ -29,6 +29,15 @@ interface Application extends IoC,
     public function publicPath();
 
     /**
+     * Get path to language files.
+     *
+     * @param  string  $path
+     *
+     * @return string
+     */
+    public function langPath(string $path = ''): string;
+
+    /**
      * Determine if running in "local" environment
      *
      * @return bool

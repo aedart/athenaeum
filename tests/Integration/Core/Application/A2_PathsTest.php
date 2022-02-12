@@ -84,6 +84,18 @@ class A2_PathsTest extends AthenaeumCoreTestCase
 
     /**
      * @test
+     *
+     * @return void
+     */
+    public function canReadLangPath()
+    {
+        $path = $this->app->langPath();
+
+        $this->assertNotEmpty($path);
+    }
+
+    /**
+     * @test
      */
     public function canReadDatabasePath()
     {
