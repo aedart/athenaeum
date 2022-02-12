@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* `Dto` and `ArrayDto` can now accept and resolve union types. [#82](https://github.com/aedart/athenaeum/issues/82).
 * Maintenance Mode package that offers additional drivers for Laravel's Application, when using `php artisan down`. Available drivers: `'array'` and `'json'`. [#67](https://github.com/aedart/athenaeum/issues/67).
 * `EnvironmentHandler` interface in Core package, as a replacement for the application environment related methods, that were removed from Laravel's foundation `Application` interface in version `9.x`. [#85](https://github.com/aedart/athenaeum/pull/85)
 * `whereSlugNotIn()` method in `\Aedart\Database\Models\Concerns\Slugs` (_`Sluggable` interface also defines method_). [#64](https://github.com/aedart/athenaeum/issues/64).
@@ -52,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Replaced property calls with method calls, on faker instance throughout many tests (_PHP faker deprecated several properties since `v1.14`_). [#23](https://github.com/aedart/athenaeum/issues/23).  
 * Upgraded to [Symplify Monorepo Builder](https://github.com/symplify/monorepo-builder) `v10.x`. [#60](https://github.com/aedart/athenaeum/issues/60), [#65](https://github.com/aedart/athenaeum/pull/65).
 * `\Aedart\Utils\Dates\Duration` now inherits from `Stringable`.
+* `castAsDate()` now also accepts `DateTimeInterface` as argument, in `ArrayDto`. [#82](https://github.com/aedart/athenaeum/issues/82)
 * Replaced `get_class()` calls with the use of new `::class` magic constant (_[introduced in PHP 8](https://www.php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class)_). Change is throughout all packages.
 
 ### Removed
