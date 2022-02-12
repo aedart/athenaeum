@@ -59,4 +59,22 @@ class Json
 
         return json_decode($json, $assoc, $depth, $options);
     }
+
+    /**
+     * Determine if given value is a valid json encoded string
+     *
+     * @param  mixed  $value
+     *
+     * @return bool False if not a string or if invalid encoded json
+     */
+    public static function isValid(mixed $value): bool
+    {
+        if (!is_string($value)) {
+            return false;
+        }
+
+        @json_decode($value);
+
+        return json_last_error() === JSON_ERROR_NONE;
+    }
 }
