@@ -3,6 +3,7 @@
 namespace Aedart\Tests\TestCases\Dto;
 
 use Aedart\Testing\TestCases\IntegrationTestCase;
+use Aedart\Tests\Helpers\Dummies\Dto\Article;
 use Aedart\Tests\Helpers\Dummies\Dto\Organisation;
 use Aedart\Tests\Helpers\Dummies\Dto\Person;
 use Aedart\Tests\Helpers\Dummies\Dto\Record;
@@ -55,6 +56,19 @@ abstract class DtoTestCase extends IntegrationTestCase
     public function makeDtoWithUnionTypes(array $data = []): Record
     {
         return Record::makeNew($data);
+    }
+
+    /**
+     * Returns new Array Dto instance that declares union types as allowed
+     * properties
+     *
+     * @param  array  $data  [optional]
+     *
+     * @return Article
+     */
+    public function makeArrayDtoWithUnionTypes(array $data = []): Article
+    {
+        return Article::makeNew($data);
     }
 
     /*****************************************************************
