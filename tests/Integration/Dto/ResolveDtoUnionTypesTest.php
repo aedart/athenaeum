@@ -34,10 +34,19 @@ class ResolveDtoUnionTypesTest extends DtoTestCase
         $dtoE = $this->makeDtoWithUnionTypes([ 'id' => null ]);
 
         $this->assertTrue(isset($dtoA->id), 'Id not set (a: string)');
+        $this->assertIsString($dtoA->id);
+
         $this->assertTrue(isset($dtoB->id), 'Id not set (b: int)');
+        $this->assertIsInt($dtoB->id);
+
         $this->assertTrue(isset($dtoC->id), 'Id not set (c: float)');
+        $this->assertIsFloat($dtoC->id);
+
         $this->assertTrue(isset($dtoD->id), 'Id not set (d: bool)');
+        $this->assertIsBool($dtoD->id);
+
         $this->assertFalse(isset($dtoE->id), 'Id set (c: null), but should be null');
+        $this->assertNull($dtoE->id);
     }
 
     /**
