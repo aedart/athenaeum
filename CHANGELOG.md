@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Documentation for `\Aedart\Utils\Arr::differenceAssoc()` (_previously undocumented. Method was added in `v5.17`_). [#45](https://github.com/aedart/athenaeum/issues/45).
 * Documentation for `\Aedart\Utils\Helpers\Invoker` (_previously undocumented. Helper was added in `v5.12`_).
 * `InteractsWithDeprecationHandling` added to `LaravelTestHelper`.
+* `isValid()` method in `Json` utility.
 
 ### Changed
 
