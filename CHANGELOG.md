@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `populate()` method now returns `static` instead of `void`, in `\Aedart\Contracts\Utils\Populatable` interface.
 * `all()` method added in `ApiResource` interface (_change is only breaking if you have custom implementation of interface_). [#54](https://github.com/aedart/athenaeum/issues/54).
 * `fresh()` method added in Http Client `Manager` (_change is only breaking if you have custom implementation of interface_). [#51](https://github.com/aedart/athenaeum/issues/51).
+* `PathsContainer` is now aware of "lang path" (_path to language files / directory_). The core application has also been modified to offer a `langPath()` method. [#76](https://github.com/aedart/athenaeum/issues/76).
 * Replaced `\DateTime` with `\DateTimeInterface` for all date related aware-of helpers. The `\Aedart\Contracts\Utils\DataTypes::DATE_TIME_TYPE` has also been changed. [#75](https://github.com/aedart/athenaeum/issues/75). 
 * `SearchFilter` no longer uses `StopWords` concern (_concern has been removed_). [#63](https://github.com/aedart/athenaeum/issues/63).
 * Return type of `package()` and `application()` is now set to `\Aedart\Contracts\Utils\Packages\Version`, in `\Aedart\Utils\Version`.  [#68](https://github.com/aedart/athenaeum/issues/68).
