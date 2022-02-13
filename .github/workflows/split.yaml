@@ -82,12 +82,12 @@ jobs:
           package_directory: 'packages/${{ matrix.package }}'
 
           # ↓ into https://github.com/aedart/xyz repository
-          repository_organization: "${ORGANISATION}"
+          repository_organization: "aedart"
           repository_name: '${{ matrix.package }}'
 
           # ↓ the user signed under the split commit
-          user_name: "${USER_NAME}"
-          user_email: "${USER_EMAIL}"
+          user_name: "aedart"
+          user_email: "aedart@gmail.com"
 
   # ------------------------------------------------------------------------------------------------------- #
   # TODO: Disabled for now... not sure if this will be needed
