@@ -79,7 +79,7 @@ jobs:
         uses: "symplify/monorepo-split-github-action@2.1"
         with:
           # ↓ split "packages/xyz" directory
-          package_directory: 'packages/${{ matrix.package }}'
+          package_directory: './packages/${{ matrix.package }}'
 
           # ↓ into https://github.com/aedart/xyz repository
           repository_organization: "aedart"
