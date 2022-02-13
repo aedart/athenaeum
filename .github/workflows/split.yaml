@@ -31,31 +31,32 @@ env:
 
 jobs:
 
-  # ------------------------------------------------------------------------------------------------------- #
-  # Extracts packages' names into
-  # ------------------------------------------------------------------------------------------------------- #
-
-  extract_packages:
-    name: "Extract Packages"
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.0
-          coverage: none
-
-      - uses: "ramsey/composer-install@v1"
-
-      # Get package json list
-      # NOTE: This means that packages' names MUST match their repository name!
-      - id: output_data
-        run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json)"
-
-    outputs:
-      matrix: ${{ steps.output_data.outputs.matrix }}
+# TODO: REMOVE THIS - the extract assumes that all packages' directory name matches the package's name!
+#  # ------------------------------------------------------------------------------------------------------- #
+#  # Extracts packages' names into
+#  # ------------------------------------------------------------------------------------------------------- #
+#
+#  extract_packages:
+#    name: "Extract Packages"
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - uses: shivammathur/setup-php@v2
+#        with:
+#          php-version: 8.0
+#          coverage: none
+#
+#      - uses: "ramsey/composer-install@v1"
+#
+#      # Get package json list
+#      # NOTE: This means that packages' names MUST match their repository name!
+#      - id: output_data
+#        run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json)"
+#
+#    outputs:
+#      matrix: ${{ steps.output_data.outputs.matrix }}
 
   # ------------------------------------------------------------------------------------------------------- #
   # Splits the mono-repository into packages...
@@ -63,27 +64,29 @@ jobs:
 
   split_monorepo:
     name: "Split mono-repository"
-    needs: extract_packages
 
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        package: ${{fromJson(needs.extract_packages.outputs.matrix)}}
+        # Define the local directory and remote repository for each package!
+        package:
+          - local: 'packages/Acl'
+            remote: 'athenaeum-acl'
 
     steps:
       - uses: actions/checkout@v2
 
       # When no tag available
-      - name: "Split of ${{ matrix.package }}"
+      - name: "Split of ${{ matrix.package.local_dir }} to remote ${{ matrix.package.remote }}"
         uses: "symplify/monorepo-split-github-action@2.1"
         with:
           # ↓ split "packages/xyz" directory
-          package_directory: './packages/${{ matrix.package }}'
+          package_directory: 'packages/${{ matrix.package.local }}'
 
           # ↓ into https://github.com/aedart/xyz repository
           repository_organization: "aedart"
-          repository_name: '${{ matrix.package }}'
+          repository_name: '${{ matrix.package.remote }}'
 
           # ↓ the user signed under the split commit
           user_name: "aedart"
