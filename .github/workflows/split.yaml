@@ -77,7 +77,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # When no tag available
-      - name: Split of ${{ matrix.package }} (no tag)
+      - name: "Split of ${{ matrix.package }} (no tag)"
         if: "!startsWith(github.ref, 'refs/tags/')"
         uses: "symplify/monorepo-split-github-action@2.1"
         with:
@@ -93,7 +93,7 @@ jobs:
           user_email: $USER_EMAIL
 
       # When tag available
-      - name: Split of ${{ matrix.package }} (${{ GITHUB_REF#refs/tags/ }})
+      - name: "Split of ${{ matrix.package }} (${GITHUB_REF})"
         if: "!startsWith(github.ref, 'refs/tags/')"
         uses: "symplify/monorepo-split-github-action@2.1"
         with:
