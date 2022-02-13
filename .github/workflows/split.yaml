@@ -130,7 +130,7 @@ jobs:
       # When no tag available
       - name: "Split of ${{ matrix.package.local_dir }} to remote ${{ matrix.package.remote }} - NO TAG"
         if: "!startsWith(github.ref, 'refs/tags/')"
-        uses: "${SPLIT_ACTION}"
+        uses: $SPLIT_ACTION
         with:
           # ↓ split "packages/xyz" directory
           package_directory: 'packages/${{ matrix.package.local }}'
@@ -146,7 +146,7 @@ jobs:
       # When tag available
       - name: "Split of ${{ matrix.package.local_dir }} to remote ${{ matrix.package.remote }} - WITH TAG"
         if: "startsWith(github.ref, 'refs/tags/')"
-        uses: "${SPLIT_ACTION}"
+        uses: $SPLIT_ACTION
         with:
           # Set tag
           tag: ${GITHUB_REF#refs/tags/}
