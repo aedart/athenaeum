@@ -34,26 +34,15 @@ class SearchFilter extends Filter
     protected array $columns;
 
     /**
-     * @deprecated Since v5.25.x - stop words language no longer supported, due to undesired behaviour.
-     *
-     * Language to be used
-     *
-     * @var string
-     */
-    protected string $language = 'en';
-
-    /**
      * SearchFilter
      *
      * @param string $search
      * @param string[] $columns
-     * @param string $language [optional] @deprecated Since v5.25.x - stop words language no longer supported, due to undesired behaviour.
      */
-    public function __construct(string $search, array $columns, string $language = 'en')
+    public function __construct(string $search, array $columns)
     {
         $this->search = $search;
         $this->columns = $columns;
-        $this->language = $language;
     }
 
     /**
