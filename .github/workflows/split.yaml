@@ -8,7 +8,7 @@ name: 'Split Packages'
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
     tags:
       - '*'
 
@@ -88,6 +88,9 @@ jobs:
           # ↓ the user signed under the split commit
           user_name: "aedart"
           user_email: "aedart@gmail.com"
+
+          # All READ-ONLY repositories must have "main" as default branch name...
+          branch: "main"
 
   # ------------------------------------------------------------------------------------------------------- #
   # TODO: Disabled for now... not sure if this will be needed
