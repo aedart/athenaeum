@@ -106,7 +106,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # When no tag available
-      - name: "Split of ${{ matrix.package.local_dir }} to remote ${{ matrix.package.remote }} - NO TAG"
+      - name: "Split of ${{ matrix.package.local }} to remote ${{ matrix.package.remote }} - NO TAG"
         if: "!startsWith(github.ref, 'refs/tags/')"
         uses: "symplify/monorepo-split-github-action@2.1"
         with:
@@ -122,7 +122,7 @@ jobs:
           user_email: "${USER_EMAIL}"
 
       # When tag available
-      - name: "Split of ${{ matrix.package.local_dir }} to remote ${{ matrix.package.remote }} - WITH TAG"
+      - name: "Split of ${{ matrix.package.local }} to remote ${{ matrix.package.remote }} - WITH TAG"
         if: "startsWith(github.ref, 'refs/tags/')"
         uses: "symplify/monorepo-split-github-action@2.1"
         with:
