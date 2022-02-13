@@ -1,0 +1,129 @@
+# --------------------------------------------------------------------------------------------------------- #
+# Split Packages Workflow
+#
+# Inspiration from: https://blog.logrocket.com/hosting-all-your-php-packages-together-in-a-monorepo/
+# Based on: https://github.com/symplify/monorepo-split-github-action
+# --------------------------------------------------------------------------------------------------------- #
+name: 'Split Packages'
+on:
+  push:
+    branches:
+      - 'master'
+    tags:
+      - '*'
+
+  # Avoid running on pull requests
+  pull_request: null
+
+env:
+  # 1. for Github split
+  GITHUB_TOKEN: ${{ secrets.SPLIT_ACCESS_TOKEN }}
+
+  # 2. for Gitlab split
+  # GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+
+  # Repository organisation
+  ORGANISATION: "aedart"
+
+  # Author and Email for signing split
+  USER_NAME: "aedart"
+  USER_EMAIL: "aedart@gmail.com"
+
+jobs:
+
+  # ------------------------------------------------------------------------------------------------------- #
+  # Extracts packages' names into
+  # ------------------------------------------------------------------------------------------------------- #
+
+  extract_packages:
+    name: "Extract Packages"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          coverage: none
+
+      - uses: "ramsey/composer-install@v1"
+
+      # Get package json list
+      # NOTE: This means that packages' names MUST match their repository name!
+      - id: output_data
+        run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json)"
+
+    outputs:
+      matrix: ${{ steps.output_data.outputs.matrix }}
+
+  # ------------------------------------------------------------------------------------------------------- #
+  # Splits the mono-repository into packages...
+  # ------------------------------------------------------------------------------------------------------- #
+
+  split_monorepo:
+    name: "Split mono-repository"
+    needs: extract_packages
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{fromJson(needs.extract_packages.outputs.matrix)}}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # When no tag available
+      - name: "Split of ${{ matrix.package }}"
+        uses: "symplify/monorepo-split-github-action@2.1"
+        with:
+          # ↓ split "packages/xyz" directory
+          package_directory: 'packages/${{ matrix.package }}'
+
+          # ↓ into https://github.com/aedart/xyz repository
+          repository_organization: $ORGANISATION
+          repository_name: '${{ matrix.package }}'
+
+          # ↓ the user signed under the split commit
+          user_name: $USER_NAME
+          user_email: $USER_EMAIL
+
+  # ------------------------------------------------------------------------------------------------------- #
+  # TODO: Disabled for now... not sure if this will be needed
+  # ------------------------------------------------------------------------------------------------------- #
+
+#      # When no tag available
+#      - name: "Split of ${{ matrix.package }} (no tag)"
+#        if: "!startsWith(github.ref, 'refs/tags/')"
+#        uses: "symplify/monorepo-split-github-action@2.1"
+#        with:
+#          # ↓ split "packages/xyz" directory
+#          package_directory: 'packages/${{ matrix.package }}'
+#
+#          # ↓ into https://github.com/aedart/xyz repository
+#          repository_organization: $ORGANISATION
+#          repository_name: '${{ matrix.package }}'
+#
+#          # ↓ the user signed under the split commit
+#          user_name: $USER_NAME
+#          user_email: $USER_EMAIL
+#
+#      # When tag available
+#      - name: "Split of ${{ matrix.package }} (${GITHUB_REF})"
+#        if: "!startsWith(github.ref, 'refs/tags/')"
+#        uses: "symplify/monorepo-split-github-action@2.1"
+#        with:
+#          # Tag
+#          tag: ${GITHUB_REF#refs/tags/}
+#
+#          # ↓ split "packages/xyz" directory
+#          package_directory: 'packages/${{ matrix.package }}'
+#
+#          # ↓ into https://github.com/aedart/xyz repository
+#          repository_organization: $ORGANISATION
+#          repository_name: '${{ matrix.package }}'
+#
+#          # ↓ the user signed under the split commit
+#          user_name: $USER_NAME
+#          user_email: $USER_EMAIL
