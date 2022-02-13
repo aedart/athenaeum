@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Documentation for `\Aedart\Utils\Helpers\Invoker` (_previously undocumented. Helper was added in `v5.12`_).
 * `InteractsWithDeprecationHandling` added to `LaravelTestHelper`.
 * `isValid()` method in `Json` utility.
+* `split.yaml` GitHub Action workflow as replacement for previous "split" command from [Symplify Monorepo Builder](https://github.com/symplify/monorepo-builder). [#66](https://github.com/aedart/athenaeum/issues/66).
 
 ### Changed
 
