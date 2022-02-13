@@ -19,31 +19,31 @@ interface BootstrapPathAware
      *
      * @return self
      */
-    public function setBootstrapPath(?string $path);
+    public function setBootstrapPath(string|null $path): static;
 
     /**
      * Get bootstrap path
      *
-     * If no "bootstrap path" value set, method
-     * sets and returns a default "bootstrap path".
+     * If no bootstrap path value set, method
+     * sets and returns a default bootstrap path.
      *
      * @see getDefaultBootstrapPath()
      *
      * @return string|null bootstrap path or null if no bootstrap path has been set
      */
-    public function getBootstrapPath(): ?string;
+    public function getBootstrapPath(): string|null;
 
     /**
-     * Check if "bootstrap path" has been set
+     * Check if bootstrap path has been set
      *
-     * @return bool True if "bootstrap path" has been set, false if not
+     * @return bool True if bootstrap path has been set, false if not
      */
     public function hasBootstrapPath(): bool;
 
     /**
-     * Get a default "bootstrap path" value, if any is available
+     * Get a default bootstrap path value, if any is available
      *
-     * @return string|null Default "bootstrap path" value or null if no default value is available
+     * @return string|null Default bootstrap path value or null if no default value is available
      */
-    public function getDefaultBootstrapPath(): ?string;
+    public function getDefaultBootstrapPath(): string|null;
 }

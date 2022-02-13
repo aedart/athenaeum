@@ -19,31 +19,31 @@ interface VendorAware
      *
      * @return self
      */
-    public function setVendor(?string $vendor);
+    public function setVendor(string|null $vendor): static;
 
     /**
      * Get vendor
      *
-     * If no "vendor" value set, method
-     * sets and returns a default "vendor".
+     * If no vendor value set, method
+     * sets and returns a default vendor.
      *
      * @see getDefaultVendor()
      *
      * @return string|null vendor or null if no vendor has been set
      */
-    public function getVendor(): ?string;
+    public function getVendor(): string|null;
 
     /**
-     * Check if "vendor" has been set
+     * Check if vendor has been set
      *
-     * @return bool True if "vendor" has been set, false if not
+     * @return bool True if vendor has been set, false if not
      */
     public function hasVendor(): bool;
 
     /**
-     * Get a default "vendor" value, if any is available
+     * Get a default vendor value, if any is available
      *
-     * @return string|null Default "vendor" value or null if no default value is available
+     * @return string|null Default vendor value or null if no default value is available
      */
-    public function getDefaultVendor(): ?string;
+    public function getDefaultVendor(): string|null;
 }

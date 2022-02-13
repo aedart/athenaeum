@@ -20,7 +20,7 @@ trait HttpSerializerFactoryTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $httpSerializerFactory = null;
+    protected Factory|null $httpSerializerFactory = null;
 
     /**
      * Set http serializer factory
@@ -29,7 +29,7 @@ trait HttpSerializerFactoryTrait
      *
      * @return self
      */
-    public function setHttpSerializerFactory(?Factory $factory)
+    public function setHttpSerializerFactory(Factory|null $factory): static
     {
         $this->httpSerializerFactory = $factory;
 
@@ -45,7 +45,7 @@ trait HttpSerializerFactoryTrait
      *
      * @return Factory|null http serializer factory or null if none http serializer factory has been set
      */
-    public function getHttpSerializerFactory(): ?Factory
+    public function getHttpSerializerFactory(): Factory|null
     {
         if (!$this->hasHttpSerializerFactory()) {
             $this->setHttpSerializerFactory($this->getDefaultHttpSerializerFactory());
@@ -68,7 +68,7 @@ trait HttpSerializerFactoryTrait
      *
      * @return Factory|null A default http serializer factory value or Null if no default value is available
      */
-    public function getDefaultHttpSerializerFactory(): ?Factory
+    public function getDefaultHttpSerializerFactory(): Factory|null
     {
         return IoCFacade::tryMake(Factory::class);
     }

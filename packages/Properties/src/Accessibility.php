@@ -44,9 +44,9 @@ trait Accessibility
      *
      * @see AccessibilityLevels
      *
-     * @var int
+     * @var int|null
      */
-    private ?int $propertyAccessibilityLevel = null;
+    private int|null $propertyAccessibilityLevel = null;
 
     /**
      * Set the maximum level of accessibility for allowing properties
@@ -60,7 +60,7 @@ trait Accessibility
      *
      * @throws RangeException If level is invalid
      */
-    protected function setPropertyAccessibilityLevel(int $level)
+    protected function setPropertyAccessibilityLevel(int $level): static
     {
         if (!$this->isPropertyAccessibilityLevelValid($level)) {
             throw new RangeException(sprintf('Property accessibility level "%s" is invalid', $level));
@@ -91,11 +91,11 @@ trait Accessibility
     }
 
     /**
-     * Returns a default highest property accessibility level
+     * Returns a default property accessibility level
      *
      * @see AccessibilityLevels
      *
-     * @return int Default property accessibility level (<b>protected level</b>)
+     * @return int Default property accessibility level
      */
     protected function getDefaultPropertyAccessibilityLevel(): int
     {
@@ -124,7 +124,8 @@ trait Accessibility
      * Check if a given property is accessible; if this component is allowed
      * to use __get() / __set() to read / write the given property
      *
-     * <b>Static properties</b><br />
+     * ### Static properties
+     *
      * Static properties are NOT considered to be accessible, in this
      * default implementation
      *

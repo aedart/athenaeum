@@ -17,7 +17,7 @@ trait PrefixTrait
      *
      * @var string|null
      */
-    protected ?string $prefix = null;
+    protected string|null $prefix = null;
 
     /**
      * Set prefix
@@ -26,7 +26,7 @@ trait PrefixTrait
      *
      * @return self
      */
-    public function setPrefix(?string $prefix)
+    public function setPrefix(string|null $prefix): static
     {
         $this->prefix = $prefix;
 
@@ -36,14 +36,14 @@ trait PrefixTrait
     /**
      * Get prefix
      *
-     * If no "prefix" value set, method
-     * sets and returns a default "prefix".
+     * If no prefix value set, method
+     * sets and returns a default prefix.
      *
      * @see getDefaultPrefix()
      *
      * @return string|null prefix or null if no prefix has been set
      */
-    public function getPrefix(): ?string
+    public function getPrefix(): string|null
     {
         if (!$this->hasPrefix()) {
             $this->setPrefix($this->getDefaultPrefix());
@@ -52,9 +52,9 @@ trait PrefixTrait
     }
 
     /**
-     * Check if "prefix" has been set
+     * Check if prefix has been set
      *
-     * @return bool True if "prefix" has been set, false if not
+     * @return bool True if prefix has been set, false if not
      */
     public function hasPrefix(): bool
     {
@@ -62,11 +62,11 @@ trait PrefixTrait
     }
 
     /**
-     * Get a default "prefix" value, if any is available
+     * Get a default prefix value, if any is available
      *
-     * @return string|null Default "prefix" value or null if no default value is available
+     * @return string|null Default prefix value or null if no default value is available
      */
-    public function getDefaultPrefix(): ?string
+    public function getDefaultPrefix(): string|null
     {
         return null;
     }

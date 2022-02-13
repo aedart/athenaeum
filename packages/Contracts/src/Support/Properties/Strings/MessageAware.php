@@ -19,31 +19,31 @@ interface MessageAware
      *
      * @return self
      */
-    public function setMessage(?string $message);
+    public function setMessage(string|null $message): static;
 
     /**
      * Get message
      *
-     * If no "message" value set, method
-     * sets and returns a default "message".
+     * If no message value set, method
+     * sets and returns a default message.
      *
      * @see getDefaultMessage()
      *
      * @return string|null message or null if no message has been set
      */
-    public function getMessage(): ?string;
+    public function getMessage(): string|null;
 
     /**
-     * Check if "message" has been set
+     * Check if message has been set
      *
-     * @return bool True if "message" has been set, false if not
+     * @return bool True if message has been set, false if not
      */
     public function hasMessage(): bool;
 
     /**
-     * Get a default "message" value, if any is available
+     * Get a default message value, if any is available
      *
-     * @return string|null Default "message" value or null if no default value is available
+     * @return string|null Default message value or null if no default value is available
      */
-    public function getDefaultMessage(): ?string;
+    public function getDefaultMessage(): string|null;
 }

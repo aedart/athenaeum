@@ -5,6 +5,7 @@ namespace Aedart\Contracts\Redmine;
 use Aedart\Contracts\Dto;
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
 use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
 use Aedart\Contracts\Redmine\Exceptions\RedmineException;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
@@ -31,7 +32,7 @@ interface ApiResource extends Dto,
      *
      * @throws Throwable
      */
-    public static function make(array $data = [], $connection = null);
+    public static function make(array $data = [], string|Connection|null $connection = null): static;
 
     /**
      * Returns Redmine resource name in plural form
@@ -63,7 +64,7 @@ interface ApiResource extends Dto,
      * @param string[] $include [optional] List of associated data to include
      * @param string|Connection|null $connection [optional] Redmine connection profile
      *
-     * @return PaginatedResults<static>|static[]
+     * @return PaginatedResults<static>
      *
      * @throws UnsupportedOperationException If Redmine's API does not support listing this kind of resource.
      * @throws JsonException
@@ -73,7 +74,7 @@ interface ApiResource extends Dto,
         int $limit = 10,
         int $offset = 0,
         array $include = [],
-        $connection = null
+        string|Connection|null $connection = null
     ): PaginatedResults;
 
     /**
@@ -89,7 +90,7 @@ interface ApiResource extends Dto,
      * @throws JsonException
      * @throws Throwable
      */
-    public static function find($id, array $include = [], $connection = null);
+    public static function find(string|int $id, array $include = [], string|Connection|null $connection = null): static|null;
 
     /**
      * Finds resource that matches given id or fails
@@ -104,7 +105,7 @@ interface ApiResource extends Dto,
      * @throws JsonException
      * @throws Throwable
      */
-    public static function findOrFail($id, array $include = [], $connection = null);
+    public static function findOrFail(string|int $id, array $include = [], string|Connection|null $connection = null): static;
 
     /**
      * Fetch a single resource, with given filters or conditions set
@@ -128,7 +129,7 @@ interface ApiResource extends Dto,
      * @throws JsonException
      * @throws Throwable
      */
-    public static function fetch($id, ?callable $filters = null, $connection = null);
+    public static function fetch(string|int $id, callable|null $filters = null, string|Connection|null $connection = null): static;
 
     /**
      * Fetch multiple resources, with given filters or conditions set.
@@ -149,7 +150,7 @@ interface ApiResource extends Dto,
      * @param int $offset [optional]
      * @param string|Connection|null $connection [optional] Redmine connection profile
      *
-     * @return PaginatedResults<static>|static[]
+     * @return PaginatedResults<static>
      *
      * @throws UnsupportedOperationException If Redmine's API does not support listing this kind of resource.
      * @throws RedmineException If filters callback does not return a valid Request Builder
@@ -158,11 +159,34 @@ interface ApiResource extends Dto,
      * @throws Throwable
      */
     public static function fetchMultiple(
-        ?callable $filters = null,
+        callable|null $filters = null,
         int $limit = 10,
         int $offset = 0,
-        $connection = null
+        string|Connection|null $connection = null
     ): PaginatedResults;
+
+    /**
+     * Fetch all resources
+     *
+     * Method returns a {@see TraversableResults} that automatically will perform
+     * paginated requests, as needed, when looping through the results. This is handy, when
+     * you do not wish to manually paginate through available result sets.
+     *
+     * **WARNING**: _Depending on amount of available results and "pool" size, this method
+     * can decrease performance a lot, due to many API requests.
+     * You SHOULD NOT set the pool size too small, if you wish to limit the amount of requests!_
+     *
+     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
+     *                               The callback MUST return a valid {@see Builder}
+     * @param int $size [optional] The "pool" size - maximum limit of results to fetch per request
+     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
+     *
+     * @return TraversableResults<static>
+     *
+     * @throws RedmineException
+     * @throws Throwable
+     */
+    public static function all(callable|null $filters = null, int $size = 10, string|Connection|null $connection = null): TraversableResults;
 
     /**
      * Paginate the given request
@@ -173,7 +197,7 @@ interface ApiResource extends Dto,
      * @param int $limit [optional]
      * @param int $offset [optional]
      *
-     * @return PaginatedResults<static>|static[]
+     * @return PaginatedResults<static>
      *
      * @throws UnsupportedOperationException If Redmine's API does not support listing this kind of resource.
      * @throws JsonException
@@ -196,7 +220,7 @@ interface ApiResource extends Dto,
      * @throws JsonException
      * @throws Throwable
      */
-    public static function create(array $data, array $include = [], $connection = null);
+    public static function create(array $data, array $include = [], string|Connection|null $connection = null): static;
 
     /**
      * Save this resource.
@@ -270,7 +294,7 @@ interface ApiResource extends Dto,
      *
      * @return self
      */
-    public function withIncludes(array $includes = []);
+    public function withIncludes(array $includes = []): static;
 
     /**
      * Applies a filter or conditions callback
@@ -283,7 +307,7 @@ interface ApiResource extends Dto,
      *
      * @throws RedmineException If filters callback does not return a valid Request Builder
      */
-    public function applyFiltersCallback(?callable $filters = null, ?Builder $request = null): Builder;
+    public function applyFiltersCallback(callable|null $filters = null, Builder|null $request = null): Builder;
 
     /**
      * Applies "include" filter on request
@@ -293,7 +317,7 @@ interface ApiResource extends Dto,
      *
      * @return Builder
      */
-    public function applyIncludes(array $include = [], ?Builder $request = null): Builder;
+    public function applyIncludes(array $include = [], Builder|null $request = null): Builder;
 
     /**
      * Returns a prepared request builder
@@ -314,7 +338,7 @@ interface ApiResource extends Dto,
      *
      * @return Builder
      */
-    public function prepareNextRequest($request): Builder;
+    public function prepareNextRequest(Client|Builder $request): Builder;
 
     /**
      * Returns the Http Client set in the connection
@@ -332,7 +356,7 @@ interface ApiResource extends Dto,
      *
      * @return self
      */
-    public function fill(array $data = []);
+    public function fill(array $data = []): static;
 
     /**
      * Creates resource endpoint address
@@ -364,7 +388,7 @@ interface ApiResource extends Dto,
      *
      * @return string|int|null
      */
-    public function id();
+    public function id(): string|int|null;
 
     /**
      * Determine if this resource exists or not
@@ -389,7 +413,7 @@ interface ApiResource extends Dto,
      * @throws JsonException
      * @throws RedmineException When unable to extract from payload, e.g. key does not exist
      */
-    public function decode(ResponseInterface $response, ?string $extract = null): array;
+    public function decode(ResponseInterface $response, string|null $extract = null): array;
 
     /**
      * Determine if this resource can be listed via the API

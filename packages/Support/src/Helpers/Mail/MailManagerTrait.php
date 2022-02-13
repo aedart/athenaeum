@@ -20,7 +20,7 @@ trait MailManagerTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $mailManager = null;
+    protected Factory|null $mailManager = null;
 
     /**
      * Set mail manager
@@ -29,7 +29,7 @@ trait MailManagerTrait
      *
      * @return self
      */
-    public function setMailManager(?Factory $manager)
+    public function setMailManager(Factory|null $manager): static
     {
         $this->mailManager = $manager;
 
@@ -45,7 +45,7 @@ trait MailManagerTrait
      *
      * @return Factory|null mail manager or null if none mail manager has been set
      */
-    public function getMailManager(): ?Factory
+    public function getMailManager(): Factory|null
     {
         if (!$this->hasMailManager()) {
             $this->setMailManager($this->getDefaultMailManager());
@@ -68,7 +68,7 @@ trait MailManagerTrait
      *
      * @return Factory|null A default mail manager value or Null if no default value is available
      */
-    public function getDefaultMailManager(): ?Factory
+    public function getDefaultMailManager(): Factory|null
     {
         return Mail::getFacadeRoot();
     }

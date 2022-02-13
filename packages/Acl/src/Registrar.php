@@ -3,6 +3,7 @@
 namespace Aedart\Acl;
 
 use Aedart\Acl\Models\Concerns\Configuration as AclConfiguration;
+use Aedart\Acl\Models\Permission;
 use Aedart\Acl\Traits\HasRoles;
 use Aedart\Contracts\Acl\Registrar as RegistrarInterface;
 use Aedart\Contracts\Support\Helpers\Cache\CacheFactoryAware;
@@ -14,6 +15,8 @@ use DateTimeInterface;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Acl Registrar
@@ -44,19 +47,19 @@ class Registrar implements
      *
      * @var DateTimeInterface|DateInterval|int|null
      */
-    protected $expires = null;
+    protected DateTimeInterface|DateInterval|int|null $expires = null;
 
     /**
      * Obtained permissions
      *
-     * @var \Illuminate\Database\Eloquent\Collection|\Aedart\Acl\Models\Permission[]|null
+     * @var Collection|Permission[]|null
      */
-    protected $permissions = null;
+    protected Collection|array|null $permissions = null;
 
     /**
      * @inheritDoc
      */
-    public function define(Gate $gate, bool $force = false): RegistrarInterface
+    public function define(Gate $gate, bool $force = false): static
     {
         $permissions = $this->getPermissions($force);
         foreach ($permissions as $permission) {
@@ -100,7 +103,7 @@ class Registrar implements
     /**
      * @inheritDoc
      */
-    public function expires($ttl = null): RegistrarInterface
+    public function expires($ttl = null): static
     {
         $this->expires = $ttl;
 
@@ -110,7 +113,7 @@ class Registrar implements
     /**
      * @inheritDoc
      */
-    public function key(?string $name = null): RegistrarInterface
+    public function key(string|null $name = null): static
     {
         $this->key = $name;
 
@@ -139,11 +142,11 @@ class Registrar implements
      * Define ability (permission) for given access gate
      *
      * @param Gate $gate
-     * @param \Illuminate\Database\Eloquent\Model|\Aedart\Acl\Models\Permission $permission
+     * @param  Model|Permission  $permission
      *
      * @return void
      */
-    protected function defineAbility(Gate $gate, $permission): void
+    protected function defineAbility(Gate $gate, Model|Permission $permission): void
     {
         $gate->define($permission->getSlugKey(), function ($user) use ($permission) {
             /** @var Authenticatable|HasRoles $user */
@@ -167,7 +170,7 @@ class Registrar implements
      *
      * @return DateInterval|DateTimeInterface|int|null
      */
-    protected function resolveTtl()
+    protected function resolveTtl(): DateInterval|DateTimeInterface|int|null
     {
         return $this->expires ?? $this->getConfig()->get('acl.cache.ttl', 60 * 60);
     }

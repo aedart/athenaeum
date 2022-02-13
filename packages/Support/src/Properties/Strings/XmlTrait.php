@@ -17,7 +17,7 @@ trait XmlTrait
      *
      * @var string|null
      */
-    protected ?string $xml = null;
+    protected string|null $xml = null;
 
     /**
      * Set xml
@@ -26,7 +26,7 @@ trait XmlTrait
      *
      * @return self
      */
-    public function setXml(?string $xml)
+    public function setXml(string|null $xml): static
     {
         $this->xml = $xml;
 
@@ -36,14 +36,14 @@ trait XmlTrait
     /**
      * Get xml
      *
-     * If no "xml" value set, method
-     * sets and returns a default "xml".
+     * If no xml value set, method
+     * sets and returns a default xml.
      *
      * @see getDefaultXml()
      *
      * @return string|null xml or null if no xml has been set
      */
-    public function getXml(): ?string
+    public function getXml(): string|null
     {
         if (!$this->hasXml()) {
             $this->setXml($this->getDefaultXml());
@@ -52,9 +52,9 @@ trait XmlTrait
     }
 
     /**
-     * Check if "xml" has been set
+     * Check if xml has been set
      *
-     * @return bool True if "xml" has been set, false if not
+     * @return bool True if xml has been set, false if not
      */
     public function hasXml(): bool
     {
@@ -62,11 +62,11 @@ trait XmlTrait
     }
 
     /**
-     * Get a default "xml" value, if any is available
+     * Get a default xml value, if any is available
      *
-     * @return string|null Default "xml" value or null if no default value is available
+     * @return string|null Default xml value or null if no default value is available
      */
-    public function getDefaultXml(): ?string
+    public function getDefaultXml(): string|null
     {
         return null;
     }

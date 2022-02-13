@@ -3,6 +3,7 @@
 namespace Aedart\Utils;
 
 use Illuminate\Support\Str as BaseStr;
+use Illuminate\Support\Stringable;
 
 /**
  * String utility
@@ -18,9 +19,9 @@ class Str extends BaseStr
      * @param string $slug
      * @param string|string[] $separator [optional]
      *
-     * @return \Illuminate\Support\Stringable
+     * @return Stringable
      */
-    public static function slugToWords(string $slug, $separator = ['-', '_', '.'])
+    public static function slugToWords(string $slug, string|array $separator = ['-', '_', '.']): Stringable
     {
         return static::of($slug)->replace($separator, ' ');
     }

@@ -19,31 +19,31 @@ interface RatingAware
      *
      * @return self
      */
-    public function setRating(?float $score);
+    public function setRating(float|null $score): static;
 
     /**
      * Get rating
      *
-     * If no "rating" value set, method
-     * sets and returns a default "rating".
+     * If no rating value set, method
+     * sets and returns a default rating.
      *
      * @see getDefaultRating()
      *
      * @return float|null rating or null if no rating has been set
      */
-    public function getRating(): ?float;
+    public function getRating(): float|null;
 
     /**
-     * Check if "rating" has been set
+     * Check if rating has been set
      *
-     * @return bool True if "rating" has been set, false if not
+     * @return bool True if rating has been set, false if not
      */
     public function hasRating(): bool;
 
     /**
-     * Get a default "rating" value, if any is available
+     * Get a default rating value, if any is available
      *
-     * @return float|null Default "rating" value or null if no default value is available
+     * @return float|null Default rating value or null if no default value is available
      */
-    public function getDefaultRating(): ?float;
+    public function getDefaultRating(): float|null;
 }

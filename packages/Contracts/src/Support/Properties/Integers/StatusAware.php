@@ -19,31 +19,31 @@ interface StatusAware
      *
      * @return self
      */
-    public function setStatus(?int $status);
+    public function setStatus(int|null $status): static;
 
     /**
      * Get status
      *
-     * If no "status" value set, method
-     * sets and returns a default "status".
+     * If no status value set, method
+     * sets and returns a default status.
      *
      * @see getDefaultStatus()
      *
      * @return int|null status or null if no status has been set
      */
-    public function getStatus(): ?int;
+    public function getStatus(): int|null;
 
     /**
-     * Check if "status" has been set
+     * Check if status has been set
      *
-     * @return bool True if "status" has been set, false if not
+     * @return bool True if status has been set, false if not
      */
     public function hasStatus(): bool;
 
     /**
-     * Get a default "status" value, if any is available
+     * Get a default status value, if any is available
      *
-     * @return int|null Default "status" value or null if no default value is available
+     * @return int|null Default status value or null if no default value is available
      */
-    public function getDefaultStatus(): ?int;
+    public function getDefaultStatus(): int|null;
 }

@@ -20,7 +20,7 @@ trait HashTrait
      *
      * @var Hasher|null
      */
-    protected ?Hasher $hash = null;
+    protected Hasher|null $hash = null;
 
     /**
      * Set hash
@@ -29,7 +29,7 @@ trait HashTrait
      *
      * @return self
      */
-    public function setHash(?Hasher $hasher)
+    public function setHash(Hasher|null $hasher): static
     {
         $this->hash = $hasher;
 
@@ -47,7 +47,7 @@ trait HashTrait
      *
      * @return Hasher|null hash or null if none hash has been set
      */
-    public function getHash(): ?Hasher
+    public function getHash(): Hasher|null
     {
         if (!$this->hasHash()) {
             $this->setHash($this->getDefaultHash());
@@ -70,7 +70,7 @@ trait HashTrait
      *
      * @return Hasher|null A default hash value or Null if no default value is available
      */
-    public function getDefaultHash(): ?Hasher
+    public function getDefaultHash(): Hasher|null
     {
         return Hash::getFacadeRoot();
     }

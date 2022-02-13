@@ -17,7 +17,7 @@ trait OnTrait
      *
      * @var bool|null
      */
-    protected ?bool $on = null;
+    protected bool|null $on = null;
 
     /**
      * Set on
@@ -26,7 +26,7 @@ trait OnTrait
      *
      * @return self
      */
-    public function setOn(?bool $isOn)
+    public function setOn(bool|null $isOn): static
     {
         $this->on = $isOn;
 
@@ -36,14 +36,14 @@ trait OnTrait
     /**
      * Get on
      *
-     * If no "on" value set, method
-     * sets and returns a default "on".
+     * If no on value set, method
+     * sets and returns a default on.
      *
      * @see getDefaultOn()
      *
      * @return bool|null on or null if no on has been set
      */
-    public function getOn(): ?bool
+    public function getOn(): bool|null
     {
         if (!$this->hasOn()) {
             $this->setOn($this->getDefaultOn());
@@ -52,9 +52,9 @@ trait OnTrait
     }
 
     /**
-     * Check if "on" has been set
+     * Check if on has been set
      *
-     * @return bool True if "on" has been set, false if not
+     * @return bool True if on has been set, false if not
      */
     public function hasOn(): bool
     {
@@ -62,11 +62,11 @@ trait OnTrait
     }
 
     /**
-     * Get a default "on" value, if any is available
+     * Get a default on value, if any is available
      *
-     * @return bool|null Default "on" value or null if no default value is available
+     * @return bool|null Default on value or null if no default value is available
      */
-    public function getDefaultOn(): ?bool
+    public function getDefaultOn(): bool|null
     {
         return null;
     }

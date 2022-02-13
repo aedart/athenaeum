@@ -2,6 +2,8 @@
 
 namespace Aedart\Filters\Query\Filters\Concerns;
 
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 use RuntimeException;
 
 /**
@@ -15,13 +17,13 @@ trait DatabaseDriver
     /**
      * Determines the "shorthand" database connection driver name
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
      * @return string
      *
      * @throws RuntimeException If unable to determine driver name
      */
-    protected function determineDriver($query): string
+    protected function determineDriver(Builder|EloquentBuilder $query): string
     {
         $connection = $query->getConnection();
 
@@ -31,6 +33,6 @@ trait DatabaseDriver
             return $connection->getDriverName();
         }
 
-        throw new RuntimeException(sprintf('Unable to determine shorthand connection driver name for %s', get_class($connection)));
+        throw new RuntimeException(sprintf('Unable to determine shorthand connection driver name for %s', $connection::class));
     }
 }

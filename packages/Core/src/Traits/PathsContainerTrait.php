@@ -20,7 +20,7 @@ trait PathsContainerTrait
      *
      * @var PathsContainer|null
      */
-    protected ?PathsContainer $pathsContainer = null;
+    protected PathsContainer|null $pathsContainer = null;
 
     /**
      * Set paths container
@@ -29,7 +29,7 @@ trait PathsContainerTrait
      *
      * @return self
      */
-    public function setPathsContainer(?PathsContainer $container)
+    public function setPathsContainer(PathsContainer|null $container): static
     {
         $this->pathsContainer = $container;
 
@@ -45,7 +45,7 @@ trait PathsContainerTrait
      *
      * @return PathsContainer|null paths container or null if none paths container has been set
      */
-    public function getPathsContainer(): ?PathsContainer
+    public function getPathsContainer(): PathsContainer|null
     {
         if (!$this->hasPathsContainer()) {
             $this->setPathsContainer($this->getDefaultPathsContainer());
@@ -68,7 +68,7 @@ trait PathsContainerTrait
      *
      * @return PathsContainer|null A default paths container value or Null if no default value is available
      */
-    public function getDefaultPathsContainer(): ?PathsContainer
+    public function getDefaultPathsContainer(): PathsContainer|null
     {
         return IoCFacade::tryMake(PathsContainer::class);
     }

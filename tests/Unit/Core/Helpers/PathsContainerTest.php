@@ -71,7 +71,7 @@ class PathsContainerTest extends UnitTestCase
     public function canResolvePathInBaseDir()
     {
         $container = $this->makePathsContainer();
-        $path = $this->getFaker()->word;
+        $path = $this->getFaker()->word();
 
         $result = $container->basePath($path);
         ConsoleDebugger::output($result);
@@ -88,7 +88,7 @@ class PathsContainerTest extends UnitTestCase
     public function canResolvePathInBootstrapDir()
     {
         $container = $this->makePathsContainer();
-        $path = $this->getFaker()->word;
+        $path = $this->getFaker()->word();
 
         $result = $container->bootstrapPath($path);
         ConsoleDebugger::output($result);
@@ -105,7 +105,7 @@ class PathsContainerTest extends UnitTestCase
     public function canResolvePathInConfigDir()
     {
         $container = $this->makePathsContainer();
-        $path = $this->getFaker()->word;
+        $path = $this->getFaker()->word();
 
         $result = $container->configPath($path);
         ConsoleDebugger::output($result);
@@ -122,7 +122,7 @@ class PathsContainerTest extends UnitTestCase
     public function canResolvePathInDatabaseDir()
     {
         $container = $this->makePathsContainer();
-        $path = $this->getFaker()->word;
+        $path = $this->getFaker()->word();
 
         $result = $container->databasePath($path);
         ConsoleDebugger::output($result);
@@ -139,7 +139,7 @@ class PathsContainerTest extends UnitTestCase
     public function canResolvePathInEnvironmentDir()
     {
         $container = $this->makePathsContainer();
-        $path = $this->getFaker()->word;
+        $path = $this->getFaker()->word();
 
         $result = $container->environmentPath($path);
         ConsoleDebugger::output($result);
@@ -156,7 +156,7 @@ class PathsContainerTest extends UnitTestCase
     public function canResolvePathInResourceDir()
     {
         $container = $this->makePathsContainer();
-        $path = $this->getFaker()->word;
+        $path = $this->getFaker()->word();
 
         $result = $container->resourcePath($path);
         ConsoleDebugger::output($result);
@@ -173,7 +173,7 @@ class PathsContainerTest extends UnitTestCase
     public function canResolvePathInStorageDir()
     {
         $container = $this->makePathsContainer();
-        $path = $this->getFaker()->word;
+        $path = $this->getFaker()->word();
 
         $result = $container->storagePath($path);
         ConsoleDebugger::output($result);
@@ -190,7 +190,7 @@ class PathsContainerTest extends UnitTestCase
     public function canResolvePathInPublicDir()
     {
         $container = $this->makePathsContainer();
-        $path = $this->getFaker()->word;
+        $path = $this->getFaker()->word();
 
         $result = $container->publicPath($path);
         ConsoleDebugger::output($result);

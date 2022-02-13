@@ -19,7 +19,7 @@ interface ContainerAware
      *
      * @return self
      */
-    public function setContainer(?Container $container);
+    public function setContainer(Container|null $container): static;
 
     /**
      * Get container
@@ -32,7 +32,7 @@ interface ContainerAware
      *
      * @return Container|null container or null if none container has been set
      */
-    public function getContainer(): ?Container;
+    public function getContainer(): Container|null;
 
     /**
      * Check if container has been set
@@ -46,5 +46,5 @@ interface ContainerAware
      *
      * @return Container|null A default container value or Null if no default value is available
      */
-    public function getDefaultContainer(): ?Container;
+    public function getDefaultContainer(): Container|null;
 }

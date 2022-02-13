@@ -35,7 +35,7 @@ trait ResponseExpectations
     /**
      * @inheritdoc
      */
-    public function expect($status, ?callable $otherwise = null): Builder
+    public function expect(callable|array|int|ResponseExpectationInterface $status, callable|null $otherwise = null): static
     {
         if (is_callable($status) || $status instanceof ResponseExpectationInterface) {
             return $this->withExpectation($status);
@@ -49,7 +49,7 @@ trait ResponseExpectations
     /**
      * @inheritdoc
      */
-    public function withExpectation($expectation): Builder
+    public function withExpectation(callable|ResponseExpectationInterface $expectation): static
     {
         $this->expectations[] = $this->resolveExpectation($expectation);
 
@@ -59,7 +59,7 @@ trait ResponseExpectations
     /**
      * @inheritdoc
      */
-    public function withExpectations(array $expectations = []): Builder
+    public function withExpectations(array $expectations = []): static
     {
         foreach ($expectations as $expectation) {
             $this->withExpectation($expectation);

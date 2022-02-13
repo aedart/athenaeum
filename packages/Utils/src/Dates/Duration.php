@@ -4,6 +4,7 @@ namespace Aedart\Utils\Dates;
 
 use DateInterval;
 use DateTime;
+use Stringable;
 
 /**
  * Duration class to handle time intervals with microsecond precision.
@@ -13,21 +14,21 @@ use DateTime;
  * @author steffen
  * @package Aedart\Utils\Dates
  */
-class Duration
+class Duration implements Stringable
 {
     /**
      * Micro Timestamp instance
      *
      * @var MicroTimeStamp
      */
-    protected $microTimeStamp;
+    protected MicroTimeStamp $microTimeStamp;
 
     /**
      * Constructor that can take a DateTime, a DateInterval, a MicroTimeStamp or integer seconds
      *
-     * @param  DateTime|DateInterval|MicroTimeStamp|int|null  $time  [optional]
+     * @param  DateInterval|DateTime|int|MicroTimeStamp|null  $time  [optional]
      */
-    public function __construct($time = null)
+    public function __construct(DateInterval|DateTime|MicroTimeStamp|int|null $time = null)
     {
         if ($time instanceof DateTime) {
             $this->microTimeStamp = MicroTimeStamp::fromDateTime($time);
@@ -44,9 +45,10 @@ class Duration
      * Create instance from either a DateTime, a DateInterval, a MicroTimeStamp or integer seconds
      *
      * @param  DateTime|DateInterval|MicroTimeStamp|int  $interval
+     *
      * @return static
      */
-    public static function from($interval)
+    public static function from(DateTime|DateInterval|MicroTimeStamp|int $interval): static
     {
         return new static($interval);
     }
@@ -55,9 +57,10 @@ class Duration
      * Create instance from time string.
      *
      * @param  string  $timeStr
+     *
      * @return static
      */
-    public static function fromString(string $timeStr): self
+    public static function fromString(string $timeStr): static
     {
         return new static(strtotime($timeStr));
     }
@@ -66,9 +69,10 @@ class Duration
      * Create instance from integer seconds
      *
      * @param  int  $seconds
+     *
      * @return static
      */
-    public static function fromSeconds(int $seconds): self
+    public static function fromSeconds(int $seconds): static
     {
         return new static($seconds);
     }
@@ -78,9 +82,10 @@ class Duration
      *
      * @param  int  $minutes
      * @param  int  $microSeconds  [optional]
+     *
      * @return static
      */
-    public static function fromMinutes(int $minutes, int $microSeconds = 0): self
+    public static function fromMinutes(int $minutes, int $microSeconds = 0): static
     {
         return new static(new MicroTimeStamp($minutes, $microSeconds));
     }
@@ -92,7 +97,7 @@ class Duration
      * @param  int  $minutes  [optional]
      * @return static
      */
-    public static function fromHoursMinutes(int $hours, int $minutes = 0): self
+    public static function fromHoursMinutes(int $hours, int $minutes = 0): static
     {
         // Convert minutes to negative minutes, in case negative hours
         // are provided.
@@ -110,9 +115,10 @@ class Duration
      *
      * @param  string  $hoursMinutes E.g. 00:30, 1:56, -2:30... etc
      * @param  string  $separator  [optional] Hours / minutes separator symbol
+     *
      * @return static
      */
-    public static function fromStringHoursMinutes(string $hoursMinutes, string $separator = ':'): self
+    public static function fromStringHoursMinutes(string $hoursMinutes, string $separator = ':'): static
     {
         list($hours, $minutes) = explode($separator, $hoursMinutes);
 
@@ -126,7 +132,7 @@ class Duration
      * @param  DateTime  $stop
      * @return static
      */
-    public static function fromDifference(DateTime $start, DateTime $stop): self
+    public static function fromDifference(DateTime $start, DateTime $stop): static
     {
         return new static($start->diff($stop));
     }
@@ -134,7 +140,7 @@ class Duration
     /**
      * Start timer
      */
-    public function start()
+    public function start(): void
     {
         $this->microTimeStamp = MicroTimeStamp::fromDateTime(new DateTime());
     }
@@ -142,7 +148,7 @@ class Duration
     /**
      * Stop timer
      */
-    public function stop()
+    public function stop(): void
     {
         $stop = MicroTimeStamp::fromDateTime(new DateTime());
 
@@ -153,9 +159,10 @@ class Duration
      * Add another Duration to this.
      *
      * @param  Duration  $duration
+     *
      * @return self
      */
-    public function add(Duration $duration): self
+    public function add(Duration $duration): static
     {
         $this->microTimeStamp = MicroTimeStamp::fromSecondsFloat($this->microTimeStamp->getAsSecondsFloat() + $duration->asFloatSeconds());
 
@@ -166,9 +173,10 @@ class Duration
      * Subtract another Duration from this.
      *
      * @param  Duration  $duration
+     *
      * @return self
      */
-    public function subtract(Duration $duration): self
+    public function subtract(Duration $duration): static
     {
         $this->microTimeStamp = MicroTimeStamp::fromSecondsFloat($this->microTimeStamp->getAsSecondsFloat() - $duration->asFloatSeconds());
 
@@ -211,6 +219,7 @@ class Duration
      * @see DateInterval::format()
      *
      * @param  string  $format
+     *
      * @return string
      */
     public function format(string $format): string
@@ -257,6 +266,7 @@ class Duration
      * duration surpasses such.
      *
      * @param  bool  $long  [optional]
+     *
      * @return string
      */
     public function toHoursMinutes(bool $long = false): string
@@ -287,6 +297,7 @@ class Duration
      * Format duration as days, hours and minutes.
      *
      * @param  bool  $long  [optional]
+     *
      * @return string
      */
     public function toDaysHoursMinutes(bool $long = false): string
@@ -308,6 +319,7 @@ class Duration
      * Shortest text according to duration length.
      *
      * @param  bool  $long  [optional]
+     *
      * @return string
      */
     public function toString(bool $long = false): string
@@ -326,7 +338,7 @@ class Duration
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toString(true);
     }

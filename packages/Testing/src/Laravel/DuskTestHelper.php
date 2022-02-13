@@ -91,12 +91,14 @@ trait DuskTestHelper
     /**
      * @inheritdoc
      */
-    public function startApplication()
+    public function startApplication(): static
     {
         $this->startLaravelApplication();
 
         $this->setUpTheBrowserEnvironment();
         $this->registerShutdown();
+
+        return $this;
     }
 
     /**
@@ -153,7 +155,7 @@ trait DuskTestHelper
      *
      * @return Closure|string|null
      */
-    protected function resolveConfigurationLoaderBinding()
+    protected function resolveConfigurationLoaderBinding(): Closure|string|null
     {
         return LoadConfiguration::class;
     }
@@ -175,9 +177,9 @@ trait DuskTestHelper
     /**
      * Creates options for Chrome browser
      *
-     * @return mixed
+     * @return ChromeOptions
      */
-    protected function makeChromeOptions()
+    protected function makeChromeOptions(): ChromeOptions
     {
         return DuskOptions::getChromeOptions();
     }

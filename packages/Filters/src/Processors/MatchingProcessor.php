@@ -40,7 +40,7 @@ class MatchingProcessor extends BaseProcessor
     /**
      * @inheritDoc
      */
-    public function process(BuiltFiltersMap $built, callable $next)
+    public function process(BuiltFiltersMap $built, callable $next): mixed
     {
         // Use requested logical operator or use default.
         $requested = $this->default;
@@ -70,7 +70,7 @@ class MatchingProcessor extends BaseProcessor
      *
      * @return self
      */
-    public function allows(string $value, string $logicalOperator)
+    public function allows(string $value, string $logicalOperator): static
     {
         $this->allowedMap[$value] = $logicalOperator;
 

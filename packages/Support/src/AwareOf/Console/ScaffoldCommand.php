@@ -36,7 +36,7 @@ class ScaffoldCommand extends CommandBase
     /**
      * {@inheritdoc}
      */
-    public function runCommand(): ?int
+    public function runCommand(): int|null
     {
         $target = __DIR__ . '/../../../configs/aware-of-properties.php';
         $output = $this->input->getOption('output');
@@ -78,7 +78,7 @@ class ScaffoldCommand extends CommandBase
      *
      * @return string
      */
-    protected function formatHelp()
+    protected function formatHelp(): string
     {
         return <<<EOT
 Creates a configuration file that can e used by the "create" command

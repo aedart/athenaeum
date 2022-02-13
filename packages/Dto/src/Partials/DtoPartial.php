@@ -11,12 +11,7 @@ use JsonSerializable;
 /**
  * Dto Partial
  *
- * <br />
- *
  * Contains common Dto methods.
- *
- * <br />
- *
  * This partial is intended for the Dto abstraction(s)
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
@@ -27,35 +22,32 @@ trait DtoPartial
     /**
      * Populate this component via an array
      *
-     * <br />
-     *
      * If an empty array is provided, nothing is populated.
-     *
-     * <br />
      *
      * If a value or property is not given via $data, then it
      * is NOT modified / changed.
      *
-     * <br />
-     *
-     * <pre>
+     * Example:
+     * ```
      *      $myComponent->populate([
      *          'myProperty' => 'myPropertyValue',
      *          'myOtherProperty' => 42.5
      *      ])
-     * </pre>
+     * ```
      *
      * @param array $data [optional] Key-value pair, key = property name, value = property value
      *
-     * @return void
+     * @return self
      *
      * @throws Throwable In case that one or more of the given array entries are invalid
      */
-    public function populate(array $data = []): void
+    public function populate(array $data = []): static
     {
         foreach ($data as $property => $value) {
             $this->__set($property, $value);
         }
+
+        return $this;
     }
 
     /**
@@ -66,7 +58,7 @@ trait DtoPartial
      *
      * @return static
      */
-    public static function makeNew(array $properties = [], ?Container $container = null)
+    public static function makeNew(array $properties = [], Container|null $container = null): static
     {
         return new static($properties, $container);
     }
@@ -81,7 +73,7 @@ trait DtoPartial
      *
      * @throws JsonException
      */
-    public static function fromJson(string $json)
+    public static function fromJson(string $json): static
     {
         return static::makeNew(Json::decode($json, true));
     }
@@ -123,12 +115,9 @@ trait DtoPartial
     }
 
     /**
-     * Specify data which should be serialized to JSON
-     * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
+     * @inheritdoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return array_map(function ($value) {
             if ($value instanceof JsonSerializable) {
@@ -171,7 +160,7 @@ trait DtoPartial
      *
      * @throws JsonException
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toJson();
     }
@@ -193,7 +182,7 @@ trait DtoPartial
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->$offset);
     }
@@ -201,7 +190,7 @@ trait DtoPartial
     /**
      * {@inheritdoc}
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->$offset;
     }
@@ -209,7 +198,7 @@ trait DtoPartial
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->$offset = $value;
     }
@@ -217,7 +206,7 @@ trait DtoPartial
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->$offset);
     }
@@ -233,7 +222,7 @@ trait DtoPartial
      *
      * @return bool
      */
-    protected function isPropertyUnset(string $property)
+    protected function isPropertyUnset(string $property): bool
     {
         return !property_exists($this, $property);
     }

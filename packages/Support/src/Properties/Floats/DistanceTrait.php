@@ -17,7 +17,7 @@ trait DistanceTrait
      *
      * @var float|null
      */
-    protected ?float $distance = null;
+    protected float|null $distance = null;
 
     /**
      * Set distance
@@ -26,7 +26,7 @@ trait DistanceTrait
      *
      * @return self
      */
-    public function setDistance(?float $length)
+    public function setDistance(float|null $length): static
     {
         $this->distance = $length;
 
@@ -36,14 +36,14 @@ trait DistanceTrait
     /**
      * Get distance
      *
-     * If no "distance" value set, method
-     * sets and returns a default "distance".
+     * If no distance value set, method
+     * sets and returns a default distance.
      *
      * @see getDefaultDistance()
      *
      * @return float|null distance or null if no distance has been set
      */
-    public function getDistance(): ?float
+    public function getDistance(): float|null
     {
         if (!$this->hasDistance()) {
             $this->setDistance($this->getDefaultDistance());
@@ -52,9 +52,9 @@ trait DistanceTrait
     }
 
     /**
-     * Check if "distance" has been set
+     * Check if distance has been set
      *
-     * @return bool True if "distance" has been set, false if not
+     * @return bool True if distance has been set, false if not
      */
     public function hasDistance(): bool
     {
@@ -62,11 +62,11 @@ trait DistanceTrait
     }
 
     /**
-     * Get a default "distance" value, if any is available
+     * Get a default distance value, if any is available
      *
-     * @return float|null Default "distance" value or null if no default value is available
+     * @return float|null Default distance value or null if no default value is available
      */
-    public function getDefaultDistance(): ?float
+    public function getDefaultDistance(): float|null
     {
         return null;
     }

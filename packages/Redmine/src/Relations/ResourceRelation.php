@@ -29,7 +29,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
      *
      * @var string|ApiResource Class path
      */
-    protected $related;
+    protected string|ApiResource $related;
 
     /**
      * List of associated data to be included
@@ -50,15 +50,15 @@ abstract class ResourceRelation implements ResourceRelationInterface
      *
      * @var string|Connection|null
      */
-    protected $connection = null;
+    protected string|Connection|null $connection = null;
 
     /**
      * ResourceRelation
      *
      * @param ApiResource $parent
-     * @param string|ApiResource $related Class path
+     * @param string|ApiResource $related Class path or Api resource instance
      */
-    public function __construct(ApiResource $parent, $related)
+    public function __construct(ApiResource $parent, string|ApiResource $related)
     {
         $this->parent = $parent;
         $this->related = $related;
@@ -70,7 +70,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
     /**
      * @inheritDoc
      */
-    public function include(array $include)
+    public function include(array $include): static
     {
         $this->includes = array_merge(
             $this->includes,
@@ -91,7 +91,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
     /**
      * @inheritDoc
      */
-    public function filter(callable $filter)
+    public function filter(callable $filter): static
     {
         $this->filters[] = $filter;
 
@@ -109,7 +109,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
     /**
      * @inheritDoc
      */
-    public function usingConnection($connection = null)
+    public function usingConnection(string|Connection|null $connection = null): static
     {
         $this->connection = $connection;
 
@@ -119,7 +119,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
     /**
      * @inheritDoc
      */
-    public function getConnection()
+    public function getConnection(): string|Connection|null
     {
         return $this->connection;
     }
@@ -135,10 +135,10 @@ abstract class ResourceRelation implements ResourceRelationInterface
     /**
      * @inheritdoc
      */
-    public function related()
+    public function related(): ApiResource|string
     {
         if (!is_string($this->related)) {
-            return get_class($this->related);
+            return $this->related::class;
         }
 
         return $this->related;

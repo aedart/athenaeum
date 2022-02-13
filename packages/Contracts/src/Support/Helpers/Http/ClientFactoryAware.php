@@ -21,7 +21,7 @@ interface ClientFactoryAware
      *
      * @return self
      */
-    public function setClientFactory(?Factory $factory);
+    public function setClientFactory(Factory|null $factory): static;
 
     /**
      * Get client factory
@@ -32,7 +32,7 @@ interface ClientFactoryAware
      *
      * @return Factory|null client factory or null if none client factory has been set
      */
-    public function getClientFactory(): ?Factory;
+    public function getClientFactory(): Factory|null;
 
     /**
      * Check if client factory has been set
@@ -46,5 +46,5 @@ interface ClientFactoryAware
      *
      * @return Factory|null A default client factory value or Null if no default value is available
      */
-    public function getDefaultClientFactory(): ?Factory;
+    public function getDefaultClientFactory(): Factory|null;
 }

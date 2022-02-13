@@ -30,7 +30,7 @@ interface ItemsProcessor
      *
      * @throws SummationCollectionException
      */
-    public function process($items): Summation;
+    public function process(array|Traversable $items): Summation;
 
     /**
      * Apply a callback onto the Summation Collection, before
@@ -42,7 +42,7 @@ interface ItemsProcessor
      *
      * @return self
      */
-    public function before(?callable $callback = null): self;
+    public function before(callable|null $callback = null): static;
 
     /**
      * Apply a callback onto the Summation Collection, before
@@ -54,7 +54,7 @@ interface ItemsProcessor
      *
      * @return self
      */
-    public function after(?callable $callback = null): self;
+    public function after(callable|null $callback = null): static;
 
     /**
      * Returns a Repository of Processing Rules
@@ -64,14 +64,14 @@ interface ItemsProcessor
     public function rules(): Repository;
 
     /**
-     * Creates a new items processor with given processing rules
+     * Creates a new items' processor with given processing rules
      *
-     * @param  ProcessingRule[]|string[]|Repository  $rules Processing Rules instances, class paths or Repository of
+     * @param  ProcessingRule[]|Repository|string[]  $rules Processing Rules instances, class paths or Repository of
      *                                                processing rules.
      *
      * @return static
      */
-    public function withRules($rules): ItemsProcessor;
+    public function withRules(array|Repository $rules): static;
 
     /**
      * Returns the summation collection to be passed
@@ -82,11 +82,11 @@ interface ItemsProcessor
     public function summation(): Summation;
 
     /**
-     * Creates a new items processor with given summation collection
+     * Creates a new items' processor with given summation collection
      *
      * @param  Summation  $summation
      *
      * @return static
      */
-    public function withSummation(Summation $summation): ItemsProcessor;
+    public function withSummation(Summation $summation): static;
 }

@@ -20,7 +20,7 @@ trait QueueMonitorTrait
      *
      * @var Monitor|null
      */
-    protected ?Monitor $queueMonitor = null;
+    protected Monitor|null $queueMonitor = null;
 
     /**
      * Set queue monitor
@@ -29,7 +29,7 @@ trait QueueMonitorTrait
      *
      * @return self
      */
-    public function setQueueMonitor(?Monitor $monitor)
+    public function setQueueMonitor(Monitor|null $monitor): static
     {
         $this->queueMonitor = $monitor;
 
@@ -47,7 +47,7 @@ trait QueueMonitorTrait
      *
      * @return Monitor|null queue monitor or null if none queue monitor has been set
      */
-    public function getQueueMonitor(): ?Monitor
+    public function getQueueMonitor(): Monitor|null
     {
         if (!$this->hasQueueMonitor()) {
             $this->setQueueMonitor($this->getDefaultQueueMonitor());
@@ -70,7 +70,7 @@ trait QueueMonitorTrait
      *
      * @return Monitor|null A default queue monitor value or Null if no default value is available
      */
-    public function getDefaultQueueMonitor(): ?Monitor
+    public function getDefaultQueueMonitor(): Monitor|null
     {
         return Queue::getFacadeRoot();
     }

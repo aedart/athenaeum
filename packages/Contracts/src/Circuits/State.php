@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Circuits;
 
+use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use DateTimeInterface;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
@@ -17,6 +18,17 @@ interface State extends Arrayable,
     JsonSerializable,
     Jsonable
 {
+    /**
+     * Create a new instance of this state
+     *
+     * @param array $data [optional]
+     *
+     * @return static
+     *
+     * @throws UnknownStateException
+     */
+    public static function make(array $data = []): static;
+
     /**
      * Returns the numeric identifier of this state
      *
@@ -44,7 +56,7 @@ interface State extends Arrayable,
      *
      * @return DateTimeInterface|null Null if state does not expire
      */
-    public function expiresAt(): ?DateTimeInterface;
+    public function expiresAt(): DateTimeInterface|null;
 
     /**
      * Determine if this state has expired
@@ -59,5 +71,5 @@ interface State extends Arrayable,
      *
      * @return int|null
      */
-    public function previous(): ?int;
+    public function previous(): int|null;
 }

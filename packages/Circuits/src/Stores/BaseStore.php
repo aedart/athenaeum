@@ -108,7 +108,7 @@ abstract class BaseStore implements
      *
      * @return string
      */
-    public function toStore($value)
+    public function toStore(mixed $value): string
     {
         return serialize($value);
     }
@@ -121,7 +121,7 @@ abstract class BaseStore implements
      *
      * @return mixed
      */
-    public function fromStore($value)
+    public function fromStore(mixed $value): mixed
     {
         return unserialize($value, [ 'allowed_classes' => $this->allowedClasses ]);
     }
@@ -147,7 +147,7 @@ abstract class BaseStore implements
      *
      * @return self
      */
-    protected function setService(string $name)
+    protected function setService(string $name): static
     {
         $this->service = $name;
 
@@ -161,7 +161,7 @@ abstract class BaseStore implements
      *
      * @return self
      */
-    protected function setKeyPrefix(string $prefix = '')
+    protected function setKeyPrefix(string $prefix = ''): static
     {
         $this->keyPrefix = $prefix;
 
@@ -220,7 +220,7 @@ abstract class BaseStore implements
      *
      * @return self
      */
-    protected function dispatchStateChange(State $state)
+    protected function dispatchStateChange(State $state): static
     {
         switch ($state->id()) {
             case CircuitBreaker::CLOSED:
@@ -253,10 +253,12 @@ abstract class BaseStore implements
      * Dispatch a failure was reported {@see CircuitBreaker::CLOSED} event
      *
      * @param Failure $failure
+     *
+     * @return self
      */
-    protected function dispatchFailureReported(Failure $failure)
+    protected function dispatchFailureReported(Failure $failure): static
     {
-        $this->dispatchEvent(
+        return $this->dispatchEvent(
             FailureReported::class,
             new FailureWasReported($this->getState(), $failure, $this->getFailure())
         );
@@ -270,7 +272,7 @@ abstract class BaseStore implements
      *
      * @return self;
      */
-    protected function dispatchEvent(string $event, CircuitBreakerEvent $payload)
+    protected function dispatchEvent(string $event, CircuitBreakerEvent $payload): static
     {
         $this->getDispatcher()->dispatch($event, $payload);
 

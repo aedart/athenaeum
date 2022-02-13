@@ -30,6 +30,7 @@ use GuzzleHttp\Cookie\CookieJarInterface;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 
 /**
  * Guzzle Http Request Builder
@@ -105,7 +106,7 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
     /**
      * {@inheritdoc}
      */
-    public function request(string $method = null, $uri = null, array $options = []): ResponseInterface
+    public function request(string|null $method = null, string|UriInterface|null $uri = null, array $options = []): ResponseInterface
     {
         $method = $method ?? $this->getMethod();
         $uri = $uri ?? $this->getUri();
@@ -217,7 +218,7 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
     /**
      * @inheritdoc
      */
-    public function withRawPayload($body): Builder
+    public function withRawPayload($body): static
     {
         $this->useDataFormat(RequestOptions::BODY);
 
@@ -271,7 +272,7 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
      *
      * @return GuzzleClient
      */
-    public function driver()
+    public function driver(): mixed
     {
         return parent::driver();
     }
@@ -283,10 +284,10 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
     /**
      * @inheritdoc
      */
-    public function setCookieJar(?CookieJarInterface $jar)
+    public function setCookieJar(CookieJarInterface|null $jar): static
     {
         // Ensure that we overwrite the "cookies" option for
-        // Guzzle with the new cookie jar instance. Otherwise
+        // Guzzle with the new cookie jar instance. Otherwise,
         // this might not have any effect.
         return $this
             ->withOption('cookies', $jar)
@@ -296,7 +297,7 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
     /**
      * @inheritdoc
      */
-    public function getDefaultCookieJar(): ?CookieJarInterface
+    public function getDefaultCookieJar(): CookieJarInterface|null
     {
         return new CookieJar(true);
     }

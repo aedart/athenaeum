@@ -20,7 +20,7 @@ trait SessionTrait
      *
      * @var Session|null
      */
-    protected ?Session $session = null;
+    protected Session|null $session = null;
 
     /**
      * Set session
@@ -29,7 +29,7 @@ trait SessionTrait
      *
      * @return self
      */
-    public function setSession(?Session $session)
+    public function setSession(Session|null $session): static
     {
         $this->session = $session;
 
@@ -47,7 +47,7 @@ trait SessionTrait
      *
      * @return Session|null session or null if none session has been set
      */
-    public function getSession(): ?Session
+    public function getSession(): Session|null
     {
         if (!$this->hasSession()) {
             $this->setSession($this->getDefaultSession());
@@ -70,7 +70,7 @@ trait SessionTrait
      *
      * @return Session|null A default session value or Null if no default value is available
      */
-    public function getDefaultSession(): ?Session
+    public function getDefaultSession(): Session|null
     {
         $manager = SessionFacade::getFacadeRoot();
         if (isset($manager)) {

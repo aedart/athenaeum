@@ -1,21 +1,8 @@
 {
     "name": "aedart/athenaeum-config",
     "description": "A loader that is able to load various types of configuration files",
-    "keywords": [
-        "Athenaeum",
-        "Configuration",
-        "Loader",
-        "ini",
-        "Json",
-        "PHP Array",
-        "yaml",
-        "toml"
-    ],
+    "keywords": ["Athenaeum", "Configuration", "Loader", "ini", "Json", "PHP Array", "yaml", "toml"],
     "homepage": "https://aedart.github.io/athenaeum/",
-    "support": {
-        "issues": "https://github.com/aedart/athenaeum/issues",
-        "source": "https://github.com/aedart/athenaeum"
-    },
     "license": "BSD-3-Clause",
     "type": "library",
     "authors": [
@@ -25,15 +12,15 @@
         }
     ],
     "require": {
-        "php": ">=7.4.0",
-        "illuminate/config": "^8.15",
-        "illuminate/filesystem": "^8.15",
+        "php": "^8.0.2",
         "aedart/athenaeum-contracts": "^5.28",
         "aedart/athenaeum-support": "^5.28",
         "aedart/athenaeum-utils": "^5.28"
+        "illuminate/config": "v9.0.1",
+        "illuminate/filesystem": "v9.0.1"
     },
     "require-dev": {
-        "symfony/yaml": "^5.1",
+        "symfony/yaml": "^v6.0.2",
         "yosymfony/toml": "^1.0.4"
     },
     "autoload": {
@@ -44,11 +31,11 @@
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "5.28.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

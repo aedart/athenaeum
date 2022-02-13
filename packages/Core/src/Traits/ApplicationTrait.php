@@ -20,7 +20,7 @@ trait ApplicationTrait
      *
      * @var Application|null
      */
-    protected ?Application $application = null;
+    protected Application|null $application = null;
 
     /**
      * Set application
@@ -29,7 +29,7 @@ trait ApplicationTrait
      *
      * @return self
      */
-    public function setApplication(?Application $application)
+    public function setApplication(Application|null $application): static
     {
         $this->application = $application;
 
@@ -45,7 +45,7 @@ trait ApplicationTrait
      *
      * @return Application|null application or null if none application has been set
      */
-    public function getApplication(): ?Application
+    public function getApplication(): Application|null
     {
         if (!$this->hasApplication()) {
             $this->setApplication($this->getDefaultApplication());
@@ -68,7 +68,7 @@ trait ApplicationTrait
      *
      * @return Application|null A default application value or Null if no default value is available
      */
-    public function getDefaultApplication(): ?Application
+    public function getDefaultApplication(): Application|null
     {
         return IoCFacade::tryMake(Application::class);
     }

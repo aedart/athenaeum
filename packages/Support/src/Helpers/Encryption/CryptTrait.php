@@ -20,7 +20,7 @@ trait CryptTrait
      *
      * @var Encrypter|null
      */
-    protected ?Encrypter $crypt = null;
+    protected Encrypter|null $crypt = null;
 
     /**
      * Set crypt
@@ -29,7 +29,7 @@ trait CryptTrait
      *
      * @return self
      */
-    public function setCrypt(?Encrypter $encrypter)
+    public function setCrypt(Encrypter|null $encrypter): static
     {
         $this->crypt = $encrypter;
 
@@ -47,7 +47,7 @@ trait CryptTrait
      *
      * @return Encrypter|null crypt or null if none crypt has been set
      */
-    public function getCrypt(): ?Encrypter
+    public function getCrypt(): Encrypter|null
     {
         if (!$this->hasCrypt()) {
             $this->setCrypt($this->getDefaultCrypt());
@@ -70,7 +70,7 @@ trait CryptTrait
      *
      * @return Encrypter|null A default crypt value or Null if no default value is available
      */
-    public function getDefaultCrypt(): ?Encrypter
+    public function getDefaultCrypt(): Encrypter|null
     {
         return Crypt::getFacadeRoot();
     }

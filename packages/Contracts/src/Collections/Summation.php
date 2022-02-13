@@ -35,13 +35,13 @@ interface Summation extends
     /**
      * Creates new Summation instance with given results
      *
-     * @param mixed $results  [optional]
+     * @param Arrayable|iterable $results  [optional]
      *
      * @return static
      *
      * @throws SummationCollectionException
      */
-    public static function make($results = []): Summation;
+    public static function make(Arrayable|iterable $results = []): static;
 
     /**
      * Set the value for a given key
@@ -54,7 +54,7 @@ interface Summation extends
      *
      * @return self
      */
-    public function set(string $key, $value): self;
+    public function set(string $key, mixed $value): static;
 
     /**
      * Get the value for given key
@@ -65,13 +65,13 @@ interface Summation extends
      *
      * @return mixed
      */
-    public function get(string $key, $default = null);
+    public function get(string $key, mixed $default = null): mixed;
 
     /**
      * Alias for {@see add}
      *
      * @param  string  $key
-     * @param int|float|callable $amount [optional] If amount is a callback, then
+     * @param  callable|float|int  $amount [optional] If amount is a callback, then
      *                      callback is invoked with key's value and this
      *                      Summation as arguments. The resulting output is
      *                      set as key's new value.
@@ -80,13 +80,13 @@ interface Summation extends
      *
      * @throws SummationCollectionException If key does not exist
      */
-    public function increase(string $key, $amount = 1): self;
+    public function increase(string $key, callable|float|int $amount = 1): static;
 
     /**
      * Alias for {@see subtract}
      *
      * @param  string  $key
-     * @param int|float|callable $amount [optional] If amount is a callback, then
+     * @param  callable|float|int  $amount [optional] If amount is a callback, then
      *                      callback is invoked with key's value and this
      *                      Summation as arguments. The resulting output is
      *                      set as key's new value.
@@ -95,13 +95,13 @@ interface Summation extends
      *
      * @throws SummationCollectionException If key does not exist
      */
-    public function decrease(string $key, $amount = 1): self;
+    public function decrease(string $key, callable|float|int $amount = 1): static;
 
     /**
      * Add amount to key's value
      *
      * @param  string  $key
-     * @param int|float|callable $amount If amount is a callback, then
+     * @param  callable|float|int  $amount If amount is a callback, then
      *                      callback is invoked with key's value and this
      *                      Summation as arguments. The resulting output is
      *                      set as key's new value.
@@ -110,13 +110,13 @@ interface Summation extends
      *
      * @throws SummationCollectionException If key does not exist
      */
-    public function add(string $key, $amount): self;
+    public function add(string $key, callable|float|int $amount): static;
 
     /**
      * Subtract amount from key's value
      *
      * @param  string  $key
-     * @param int|float|callable $amount If amount is a callback, then
+     * @param  callable|float|int  $amount If amount is a callback, then
      *                      callback is invoked with key's value and this
      *                      Summation as arguments. The resulting output is
      *                      set as key's new value.
@@ -125,13 +125,13 @@ interface Summation extends
      *
      * @throws SummationCollectionException If key does not exist
      */
-    public function subtract(string $key, $amount): self;
+    public function subtract(string $key, callable|float|int $amount): static;
 
     /**
      * Multiply a key's value by given amount
      *
      * @param  string  $key
-     * @param int|float|callable $amount If amount is a callback, then
+     * @param  callable|float|int  $amount If amount is a callback, then
      *                      callback is invoked with key's value and this
      *                      Summation as arguments. The resulting output is
      *                      set as key's new value.
@@ -140,13 +140,13 @@ interface Summation extends
      *
      * @throws SummationCollectionException If key does not exist
      */
-    public function multiply(string $key, $amount): self;
+    public function multiply(string $key, callable|float|int $amount): static;
 
     /**
      * Divide a key's value by given amount
      *
      * @param  string  $key
-     * @param int|float|callable $amount If amount is a callback, then
+     * @param  callable|float|int  $amount If amount is a callback, then
      *                      callback is invoked with key's value and this
      *                      Summation as arguments. The resulting output is
      *                      set as key's new value.
@@ -155,7 +155,7 @@ interface Summation extends
      *
      * @throws SummationCollectionException If key does not exist
      */
-    public function divide(string $key, $amount): self;
+    public function divide(string $key, callable|float|int $amount): static;
 
     /**
      * Apply a callback on key's value.
@@ -169,7 +169,7 @@ interface Summation extends
      *
      * @return self
      */
-    public function apply(string $key, callable $callback): self;
+    public function apply(string $key, callable $callback): static;
 
     /**
      * Determine is key exists
@@ -233,5 +233,5 @@ interface Summation extends
      *
      * @return self
      */
-    public function dump(): self;
+    public function dump(): static;
 }

@@ -9,7 +9,7 @@ use Aedart\Contracts\Redmine\Updatable;
 use Aedart\Redmine\Partials\ListOfReferences;
 use Aedart\Redmine\Partials\Reference;
 use Aedart\Redmine\Relations\HasMany;
-use InvalidArgumentException;
+use JsonException;
 
 /**
  * Group Resource
@@ -64,9 +64,9 @@ class Group extends RedmineApiResource implements
      *
      * @return bool
      *
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function addUser($user, bool $reload = false): bool
+    public function addUser(int|User|Reference $user, bool $reload = false): bool
     {
         $id = $this->resolveUserId($user);
 
@@ -97,9 +97,9 @@ class Group extends RedmineApiResource implements
      *
      * @return bool
      *
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function removeUser($user, bool $reload = false): bool
+    public function removeUser(int|User|Reference $user, bool $reload = false): bool
     {
         $id = $this->resolveUserId($user);
 
@@ -143,16 +143,12 @@ class Group extends RedmineApiResource implements
      *
      * @return int
      */
-    protected function resolveUserId($user): int
+    protected function resolveUserId(int|User|Reference $user): int
     {
         if ($user instanceof User || $user instanceof Reference) {
             return $user->id;
         }
 
-        if (is_int($user)) {
-            return $user;
-        }
-
-        throw new InvalidArgumentException('Invalid user - expected user instance, reference or id');
+        return $user;
     }
 }

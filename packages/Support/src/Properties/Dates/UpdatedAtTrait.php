@@ -15,18 +15,18 @@ trait UpdatedAtTrait
     /**
      * Date of when this component, entity or resource was updated
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected ?\DateTime $updatedAt = null;
+    protected \DateTimeInterface|null $updatedAt = null;
 
     /**
      * Set updated at
      *
-     * @param \DateTime|null $date Date of when this component, entity or resource was updated
+     * @param \DateTimeInterface|null $date Date of when this component, entity or resource was updated
      *
      * @return self
      */
-    public function setUpdatedAt(?\DateTime $date)
+    public function setUpdatedAt(\DateTimeInterface|null $date): static
     {
         $this->updatedAt = $date;
 
@@ -36,14 +36,14 @@ trait UpdatedAtTrait
     /**
      * Get updated at
      *
-     * If no "updated at" value set, method
-     * sets and returns a default "updated at".
+     * If no updated at value set, method
+     * sets and returns a default updated at.
      *
      * @see getDefaultUpdatedAt()
      *
-     * @return \DateTime|null updated at or null if no updated at has been set
+     * @return \DateTimeInterface|null updated at or null if no updated at has been set
      */
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt(): \DateTimeInterface|null
     {
         if (!$this->hasUpdatedAt()) {
             $this->setUpdatedAt($this->getDefaultUpdatedAt());
@@ -52,9 +52,9 @@ trait UpdatedAtTrait
     }
 
     /**
-     * Check if "updated at" has been set
+     * Check if updated at has been set
      *
-     * @return bool True if "updated at" has been set, false if not
+     * @return bool True if updated at has been set, false if not
      */
     public function hasUpdatedAt(): bool
     {
@@ -62,11 +62,11 @@ trait UpdatedAtTrait
     }
 
     /**
-     * Get a default "updated at" value, if any is available
+     * Get a default updated at value, if any is available
      *
-     * @return \DateTime|null Default "updated at" value or null if no default value is available
+     * @return \DateTimeInterface|null Default updated at value or null if no default value is available
      */
-    public function getDefaultUpdatedAt(): ?\DateTime
+    public function getDefaultUpdatedAt(): \DateTimeInterface|null
     {
         return null;
     }

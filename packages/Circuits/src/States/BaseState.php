@@ -26,7 +26,7 @@ abstract class BaseState implements State
      *
      * @var int|null
      */
-    protected ?int $previous = null;
+    protected int|null $previous = null;
 
     /**
      * Date and time of when this state was created
@@ -40,7 +40,7 @@ abstract class BaseState implements State
      *
      * @var DateTimeInterface|null
      */
-    protected ?DateTimeInterface $expiresAt = null;
+    protected DateTimeInterface|null $expiresAt = null;
 
     /**
      * BaseState constructor.
@@ -55,21 +55,17 @@ abstract class BaseState implements State
     }
 
     /**
-     * Create a new instance of this state
-     *
-     * @param array $data [optional]
-     *
-     * @return static
-     *
-     * @throws UnknownStateException
+     * @inheritdoc
      */
-    public static function make(array $data = [])
+    public static function make(array $data = []): static
     {
         return new static($data);
     }
 
     /**
      * @inheritDoc
+     *
+     * @throws UnknownStateException
      */
     public function name(): string
     {
@@ -89,7 +85,7 @@ abstract class BaseState implements State
     /**
      * @inheritDoc
      */
-    public function expiresAt(): ?DateTimeInterface
+    public function expiresAt(): DateTimeInterface|null
     {
         return $this->expiresAt;
     }
@@ -134,15 +130,13 @@ abstract class BaseState implements State
      ****************************************************************/
 
     /**
-     * Populate this state
-     *
-     * @param array $data
+     * @inheritdoc
      *
      * @throws UnknownStateException
      */
-    protected function populate(array $data)
+    protected function populate(array $data): static
     {
-        $this
+        return $this
             ->setPrevious($data['previous'] ?? null)
             ->setCreatedAt($data['created_at'] ?? null)
             ->setExpiresAt($data['expires_at'] ?? null);
@@ -157,7 +151,7 @@ abstract class BaseState implements State
      *
      * @throws UnknownStateException
      */
-    protected function setPrevious(?int $id = null)
+    protected function setPrevious(int|null $id = null): static
     {
         $this->assertStateIdentifier($id);
 
@@ -169,11 +163,11 @@ abstract class BaseState implements State
     /**
      * Set created at
      *
-     * @param string|DateTimeInterface|null $createdAt [optional] Date and time of when this state was created
+     * @param  DateTimeInterface|string|null  $createdAt [optional] Date and time of when this state was created
      *
      * @return self
      */
-    protected function setCreatedAt($createdAt = null)
+    protected function setCreatedAt(DateTimeInterface|string|null $createdAt = null): static
     {
         $this->createdAt = $this->resolveDate($createdAt);
 
@@ -183,11 +177,11 @@ abstract class BaseState implements State
     /**
      * Set expires at
      *
-     * @param string|DateTimeInterface|null $expiresAt [optional] Date and time of when this state expires
+     * @param  DateTimeInterface|string|null  $expiresAt [optional] Date and time of when this state expires
      *
      * @return self
      */
-    protected function setExpiresAt($expiresAt = null)
+    protected function setExpiresAt(DateTimeInterface|string|null $expiresAt = null): static
     {
         $this->expiresAt = $this->resolveDate($expiresAt, null);
 

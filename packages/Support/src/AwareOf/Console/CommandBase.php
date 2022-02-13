@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\StyleInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Throwable;
 
 /**
  * Command Base
@@ -28,12 +29,12 @@ abstract class CommandBase extends Command
      *
      * @var OutputInterface|StyleInterface
      */
-    protected $output;
+    protected OutputInterface|StyleInterface $output;
 
     /**
      * {@inheritdoc}
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -58,9 +59,9 @@ abstract class CommandBase extends Command
     /**
      * Execute this command
      *
-     * @throws \Throwable
+     * @throws Throwable
      *
      * @return int|null
      */
-    abstract public function runCommand(): ?int;
+    abstract public function runCommand(): int|null;
 }

@@ -17,7 +17,7 @@ trait AnniversaryTrait
      *
      * @var int|null
      */
-    protected ?int $anniversary = null;
+    protected int|null $anniversary = null;
 
     /**
      * Set anniversary
@@ -26,7 +26,7 @@ trait AnniversaryTrait
      *
      * @return self
      */
-    public function setAnniversary(?int $anniversary)
+    public function setAnniversary(int|null $anniversary): static
     {
         $this->anniversary = $anniversary;
 
@@ -36,14 +36,14 @@ trait AnniversaryTrait
     /**
      * Get anniversary
      *
-     * If no "anniversary" value set, method
-     * sets and returns a default "anniversary".
+     * If no anniversary value set, method
+     * sets and returns a default anniversary.
      *
      * @see getDefaultAnniversary()
      *
      * @return int|null anniversary or null if no anniversary has been set
      */
-    public function getAnniversary(): ?int
+    public function getAnniversary(): int|null
     {
         if (!$this->hasAnniversary()) {
             $this->setAnniversary($this->getDefaultAnniversary());
@@ -52,9 +52,9 @@ trait AnniversaryTrait
     }
 
     /**
-     * Check if "anniversary" has been set
+     * Check if anniversary has been set
      *
-     * @return bool True if "anniversary" has been set, false if not
+     * @return bool True if anniversary has been set, false if not
      */
     public function hasAnniversary(): bool
     {
@@ -62,11 +62,11 @@ trait AnniversaryTrait
     }
 
     /**
-     * Get a default "anniversary" value, if any is available
+     * Get a default anniversary value, if any is available
      *
-     * @return int|null Default "anniversary" value or null if no default value is available
+     * @return int|null Default anniversary value or null if no default value is available
      */
-    public function getDefaultAnniversary(): ?int
+    public function getDefaultAnniversary(): int|null
     {
         return null;
     }

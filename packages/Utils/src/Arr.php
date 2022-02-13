@@ -4,6 +4,7 @@
 namespace Aedart\Utils;
 
 use Illuminate\Support\Arr as ArrBase;
+use Aedart\Utils\Math;
 use InvalidArgumentException;
 
 /**
@@ -17,16 +18,19 @@ class Arr extends ArrBase
     /**
      * Returns a single random element from given list
      *
+     * @see \Aedart\Utils\Math::applySeed
+     *
      * @param array $list
      * @param int|null $seed [optional] Number to seed the random generator.
+     * @param int $mode [optional] The seeding algorithm to use
      *
      * @return mixed
      */
-    public static function randomElement(array $list, int $seed = null)
+    public static function randomElement(array $list, int|null $seed = null, int $mode = MT_RAND_MT19937): mixed
     {
         // Seed generator if required
         if (isset($seed)) {
-            mt_srand($seed);
+            Math::applySeed($seed, $mode);
         }
 
         $index = array_rand($list, 1);
@@ -35,27 +39,7 @@ class Arr extends ArrBase
     }
 
     /**
-     * Un-flatten an array that has been flatten via "dot"
-     *
-     * @see dot
-     *
-     * @param  array|iterable  $array
-     *
-     * @return array
-     */
-    public static function undot($array): array
-    {
-        $output = [];
-
-        foreach ($array as $key => $value) {
-            static::set($output, $key, $value);
-        }
-
-        return $output;
-    }
-
-    /**
-     * Computes the difference of multi-dimensional arrays
+     * Computes the difference of multidimensional arrays
      *
      * @param array $array The array to compare from
      * @param array ...$arrays Arrays to compare against
@@ -91,7 +75,7 @@ class Arr extends ArrBase
      *
      * @return array
      */
-    protected static function clearNestedEmptyArrays(array $array, $replaceValue = null): array
+    protected static function clearNestedEmptyArrays(array $array, mixed $replaceValue = null): array
     {
         $output = [];
 

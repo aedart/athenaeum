@@ -73,7 +73,7 @@ interface Builder extends HttpClientAware,
      *
      * @return ResponseInterface
      */
-    public function get($uri = null): ResponseInterface;
+    public function get(string|UriInterface|null $uri = null): ResponseInterface;
 
     /**
      * Make a HEAD request
@@ -87,7 +87,7 @@ interface Builder extends HttpClientAware,
      *
      * @return ResponseInterface
      */
-    public function head($uri = null): ResponseInterface;
+    public function head(string|UriInterface|null $uri = null): ResponseInterface;
 
     /**
      * Make a POST request
@@ -102,7 +102,7 @@ interface Builder extends HttpClientAware,
      *
      * @return ResponseInterface
      */
-    public function post($uri = null, array $body = []): ResponseInterface;
+    public function post(string|UriInterface|null $uri = null, array $body = []): ResponseInterface;
 
     /**
      * Make a PUT request
@@ -117,7 +117,7 @@ interface Builder extends HttpClientAware,
      *
      * @return ResponseInterface
      */
-    public function put($uri = null, array $body = []): ResponseInterface;
+    public function put(string|UriInterface|null $uri = null, array $body = []): ResponseInterface;
 
     /**
      * Make a DELETE request
@@ -132,7 +132,7 @@ interface Builder extends HttpClientAware,
      *
      * @return ResponseInterface
      */
-    public function delete($uri = null, array $body = []): ResponseInterface;
+    public function delete(string|UriInterface|null $uri = null, array $body = []): ResponseInterface;
 
     /**
      * Make a OPTIONS request
@@ -146,7 +146,7 @@ interface Builder extends HttpClientAware,
      *
      * @return ResponseInterface
      */
-    public function options($uri = null): ResponseInterface;
+    public function options(string|UriInterface|null $uri = null): ResponseInterface;
 
     /**
      * Make a PATCH request
@@ -161,7 +161,7 @@ interface Builder extends HttpClientAware,
      *
      * @return ResponseInterface
      */
-    public function patch($uri = null, array $body = []): ResponseInterface;
+    public function patch(string|UriInterface|null $uri = null, array $body = []): ResponseInterface;
 
     /**
      * Make a http request
@@ -189,7 +189,7 @@ interface Builder extends HttpClientAware,
      *
      * @throws Throwable
      */
-    public function request(?string $method = null, $uri = null, array $options = []): ResponseInterface;
+    public function request(string|null $method = null, string|UriInterface|null $uri = null, array $options = []): ResponseInterface;
 
     /**
      * Set the Http method, for the next request
@@ -200,7 +200,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withMethod(string $method): self;
+    public function withMethod(string $method): static;
 
     /**
      * Returns the Http method, for the next request
@@ -218,7 +218,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withBaseUrl(string $url): self;
+    public function withBaseUrl(string $url): static;
 
     /**
      * Determine if base url is set for next request
@@ -248,14 +248,14 @@ interface Builder extends HttpClientAware,
      *
      * @throws InvalidUriException If given Uri argument is invalid
      */
-    public function withUri($uri): self;
+    public function withUri(string|UriInterface $uri): static;
 
     /**
      * Get Uri for the next request
      *
      * @return UriInterface|null
      */
-    public function getUri(): ?UriInterface;
+    public function getUri(): UriInterface|null;
 
     /**
      * Alias for {@see withUri}
@@ -266,7 +266,7 @@ interface Builder extends HttpClientAware,
      *
      * @throws InvalidUriException If given Uri argument is invalid
      */
-    public function from($uri): self;
+    public function from(string|UriInterface $uri): static;
 
     /**
      * Alias for {@see withUri}
@@ -277,7 +277,7 @@ interface Builder extends HttpClientAware,
      *
      * @throws InvalidUriException If given Uri argument is invalid
      */
-    public function into($uri): self;
+    public function into(string|UriInterface $uri): static;
 
     /**
      * Set the Http headers for the next request
@@ -288,7 +288,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withHeaders(array $headers = []): self;
+    public function withHeaders(array $headers = []): static;
 
     /**
      * Set a Http header for the next request
@@ -300,7 +300,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withHeader(string $name, $value): self;
+    public function withHeader(string $name, mixed $value): static;
 
     /**
      * Remove a Http header from the next request
@@ -309,7 +309,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withoutHeader(string $name): self;
+    public function withoutHeader(string $name): static;
 
     /**
      * Get all the Http headers for the next request
@@ -325,7 +325,7 @@ interface Builder extends HttpClientAware,
      *
      * @return mixed
      */
-    public function getHeader(string $name);
+    public function getHeader(string $name): mixed;
 
     /**
      * Set the HTTP protocol version, for the next request
@@ -336,7 +336,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function useProtocolVersion(string $version): self;
+    public function useProtocolVersion(string $version): static;
 
     /**
      * Get the HTTP protocol version, for the next request
@@ -357,7 +357,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withAccept(string $contentType): self;
+    public function withAccept(string $contentType): static;
 
     /**
      * Use given Content-Type for the next request
@@ -371,7 +371,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withContentType(string $contentType): self;
+    public function withContentType(string $contentType): static;
 
     /**
      * Use application/x-www-form-urlencoded as next request's body format.
@@ -416,7 +416,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function useDataFormat(string $format): self;
+    public function useDataFormat(string $format): static;
 
     /**
      * Get the data format to use for the next request
@@ -459,7 +459,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function useTokenAuth(string $token, string $scheme = 'Bearer'): self;
+    public function useTokenAuth(string $token, string $scheme = 'Bearer'): static;
 
     /**
      * Set the maximum amount of redirects to follow,
@@ -525,7 +525,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function setQuery(Query $query): self;
+    public function setQuery(Query $query): static;
 
     /**
      * Apply one or more criteria for the next request
@@ -536,7 +536,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function applyCriteria($criteria): self;
+    public function applyCriteria(array|Criteria $criteria): static;
 
     /**
      * Apply a callback, when result is true
@@ -545,7 +545,8 @@ interface Builder extends HttpClientAware,
      *
      * Any value returned by the callback methods, is ignored.
      *
-     * @param bool $result E.g. the boolean result of a condition
+     * @param bool|callable $result E.g. the boolean result of a condition. If callback is given, then its
+     *                              resulting value is used as result.
      * @param callable $callback The callback to apply, if result is `true`.
      *                          Request builder instance is given as callback's argument.
      * @param callable|null $otherwise [optional] Callback to apply, if result evaluates is `false`.
@@ -553,7 +554,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function when(bool $result, callable $callback, ?callable $otherwise = null): self;
+    public function when(bool|callable $result, callable $callback, callable|null $otherwise = null): static;
 
     /**
      * Apply a callback, unless result is true
@@ -562,7 +563,8 @@ interface Builder extends HttpClientAware,
      *
      * Any value returned by the callback methods, is ignored.
      *
-     * @param bool $result E.g. the boolean result of a condition
+     * @param bool|callable $result E.g. the boolean result of a condition. If callback is given, then its
+     *                              resulting value is used as result.
      * @param callable $callback The callback to apply, if result is `false`.
      *                          Request builder instance is given as callback's argument.
      * @param callable|null $otherwise [optional] Callback to apply, if result evaluates is `true`.
@@ -570,7 +572,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function unless(bool $result, callable $callback, ?callable $otherwise = null): self;
+    public function unless(bool|callable $result, callable $callback, callable|null $otherwise = null): static;
 
     /**
      * Add data to the next request's payload (body).
@@ -589,7 +591,7 @@ interface Builder extends HttpClientAware,
      *
      * @throws Throwable
      */
-    public function withData(array $data): self;
+    public function withData(array $data): static;
 
     /**
      * Set the next request's payload (body).
@@ -608,7 +610,7 @@ interface Builder extends HttpClientAware,
      *
      * @throws Throwable
      */
-    public function setData(array $data): self;
+    public function setData(array $data): static;
 
     /**
      * Determine if next request has payload data
@@ -643,7 +645,7 @@ interface Builder extends HttpClientAware,
      *
      * @throws Throwable
      */
-    public function withRawPayload($body): self;
+    public function withRawPayload(mixed $body): static;
 
     /**
      * Get the next request's raw payload (body)
@@ -656,7 +658,7 @@ interface Builder extends HttpClientAware,
      *
      * @return mixed Null if raw payload not set
      */
-    public function getRawPayload();
+    public function getRawPayload(): mixed;
 
     /**
      * Determine if the next request has a raw
@@ -676,7 +678,7 @@ interface Builder extends HttpClientAware,
      *
      * @throws InvalidAttachmentFormatException
      */
-    public function withAttachment($attachment): self;
+    public function withAttachment(Attachment|array|callable $attachment): static;
 
     /**
      * Add one or more attachments to the next request
@@ -690,7 +692,7 @@ interface Builder extends HttpClientAware,
      *
      * @throws InvalidAttachmentFormatException
      */
-    public function withAttachments(array $attachments = []): self;
+    public function withAttachments(array $attachments = []): static;
 
     /**
      * Remove an attachment from the next request
@@ -699,7 +701,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withoutAttachment(string $name): self;
+    public function withoutAttachment(string $name): static;
 
     /**
      * Determine if an attachment exists
@@ -717,7 +719,7 @@ interface Builder extends HttpClientAware,
      *
      * @return Attachment|null
      */
-    public function getAttachment(string $name): ?Attachment;
+    public function getAttachment(string $name): Attachment|null;
 
     /**
      * Get the attachments for the next request
@@ -745,8 +747,8 @@ interface Builder extends HttpClientAware,
         string $name,
         string $path,
         array $headers = [],
-        ?string $filename = null
-    ): self;
+        string|null $filename = null
+    ): static;
 
     /**
      * Creates a new attachment instance.
@@ -773,7 +775,7 @@ interface Builder extends HttpClientAware,
      *
      * @throws InvalidCookieFormatException
      */
-    public function withCookie($cookie): self;
+    public function withCookie(Cookie|array|callable $cookie): static;
 
     /**
      * Add one or more cookies to the next request
@@ -787,7 +789,7 @@ interface Builder extends HttpClientAware,
      *
      * @throws InvalidCookieFormatException
      */
-    public function withCookies(array $cookies = []): self;
+    public function withCookies(array $cookies = []): static;
 
     /**
      * Remove the Cookie that matches given name,
@@ -797,7 +799,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withoutCookie(string $name): self;
+    public function withoutCookie(string $name): static;
 
     /**
      * Determine if a Cookie has been set, with the
@@ -816,7 +818,7 @@ interface Builder extends HttpClientAware,
      *
      * @return Cookie|null
      */
-    public function getCookie(string $name): ?Cookie;
+    public function getCookie(string $name): Cookie|null;
 
     /**
      * Get the cookies for the next request
@@ -837,7 +839,7 @@ interface Builder extends HttpClientAware,
      *
      * @throws InvalidCookieFormatException
      */
-    public function addCookie(string $name, ?string $value = null): self;
+    public function addCookie(string $name, string|null $value = null): static;
 
     /**
      * Creates a new cookie instance.
@@ -856,12 +858,12 @@ interface Builder extends HttpClientAware,
      * or be amongst a list of valid codes
      *
      * Once a response has been received, it's http status code is matched
-     * against given expected status code(s). If it it does not match, then
+     * against given expected status code(s). If it does not match, then
      * method MUST invoke `$otherwise` callback, if argument is provided.
      *
      * Method MUST build and add expectation via the {@see withExpectation} method.
      *
-     * @param int|int[]|callable|ResponseExpectation $status Expected http status code(s). If a callback is provided,
+     * @param  callable|int|int[]|ResponseExpectation  $status Expected http status code(s). If a callback is provided,
      *                                  then it MUST be added as an expectation via {@see withExpectation}.
      *                                  Second argument is ignored, if callback is given.
      * @param callable|null $otherwise [optional] Callback to be invoked if received http status code
@@ -876,26 +878,26 @@ interface Builder extends HttpClientAware,
      * @throws ExpectationNotMetException
      * @throws Throwable
      */
-    public function expect($status, ?callable $otherwise = null): self;
+    public function expect(callable|array|int|ResponseExpectation $status, callable|null $otherwise = null): static;
 
     /**
      * Add an expectation for the next response.
      *
      * An "expectation" is a callback that verifies the received
-     * response's Http status code, Http headers, and possibly the
-     * it's payload body. If the response is considered invalid,
+     * response's Http status code, Http headers, and possibly
+     * its payload body. If the response is considered invalid,
      * the callback SHOULD throw an exception.
      *
      * Given callback will be invoked after a response has been received,
      * in the {@see request} method.
      *
-     * @param callable|ResponseExpectation $expectation Expectation callback. When invoked, it is given a
+     * @param  callable|ResponseExpectation  $expectation Expectation callback. When invoked, it is given a
      *                  {@see Status}, {@see ResponseInterface} and {@see RequestInterface} as
      *                  argument, in the stated order.
      *
      * @return self
      */
-    public function withExpectation($expectation): self;
+    public function withExpectation(callable|ResponseExpectation $expectation): static;
 
     /**
      * Add one or more expectations for the next request.
@@ -906,7 +908,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withExpectations(array $expectations = []): self;
+    public function withExpectations(array $expectations = []): static;
 
     /**
      * Determine if any expectations have been added for
@@ -929,36 +931,36 @@ interface Builder extends HttpClientAware,
     public function getExpectations(): array;
 
     /**
-     * Add middleware to process next outgoing request and it's
+     * Add middleware to process next outgoing request, and it's
      * incoming response
      *
-     * @param string|Middleware|string[]|Middleware[] $middleware Class path, Middleware instance or list hereof
+     * @param  string|Middleware|Middleware[]|string[]  $middleware Class path, Middleware instance or list hereof
      *
      * @return self
      */
-    public function withMiddleware($middleware): self;
+    public function withMiddleware(array|string|Middleware $middleware): static;
 
     /**
      * Add middleware at the beginning of the middleware list
      *
-     * @param string|Middleware $middleware Class path or Middleware instance
+     * @param  string|Middleware  $middleware Class path or Middleware instance
      *
      * @return self
      */
-    public function prependMiddleware($middleware): self;
+    public function prependMiddleware(string|Middleware $middleware): static;
 
     /**
      * Append middleware to the end of the middleware list
      *
-     * @param string|Middleware $middleware Class path or Middleware instance
+     * @param  string|Middleware  $middleware Class path or Middleware instance
      *
      * @return self
      */
-    public function pushMiddleware($middleware): self;
+    public function pushMiddleware(string|Middleware $middleware): static;
 
     /**
-     * Determine whether or not middleware has been assign
-     * for the next request
+     * Determine whether middleware has been assign
+     * for the next request, or not
      *
      * @see withMiddleware
      *
@@ -968,7 +970,7 @@ interface Builder extends HttpClientAware,
 
     /**
      * Returns list of middleware that must process next outgoing
-     * request and it's incoming response
+     * request, and it's incoming response
      *
      * @return Middleware[]
      */
@@ -979,7 +981,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withoutMiddleware(): self;
+    public function withoutMiddleware(): static;
 
     /**
      * Set a specific option for the next request
@@ -991,7 +993,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withOption(string $name, $value): self;
+    public function withOption(string $name, mixed $value): static;
 
     /**
      * Apply a set of options for the next request
@@ -1002,7 +1004,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withOptions(array $options = []): self;
+    public function withOptions(array $options = []): static;
 
     /**
      * Remove given option for the next request
@@ -1011,7 +1013,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function withoutOption(string $name): self;
+    public function withoutOption(string $name): static;
 
     /**
      * Determine if a given option exists for the next
@@ -1030,7 +1032,7 @@ interface Builder extends HttpClientAware,
      *
      * @return mixed
      */
-    public function getOption(string $name);
+    public function getOption(string $name): mixed;
 
     /**
      * Get all the options for the next request
@@ -1054,7 +1056,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function log(?callable $callback = null): self;
+    public function log(callable|null $callback = null): static;
 
     /**
      * Returns the last assigned logging callback.
@@ -1090,7 +1092,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function debug(?callable $callback = null): self;
+    public function debug(callable|null $callback = null): static;
 
     /**
      * Dumps the next outgoing request and exists the
@@ -1118,7 +1120,7 @@ interface Builder extends HttpClientAware,
      *
      * @return self
      */
-    public function dd(?callable $callback = null): self;
+    public function dd(callable|null $callback = null): static;
 
     /**
      * Returns the last assigned debugging callback.
@@ -1146,5 +1148,5 @@ interface Builder extends HttpClientAware,
      *
      * @return mixed
      */
-    public function driver();
+    public function driver(): mixed;
 }

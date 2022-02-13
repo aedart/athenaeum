@@ -19,7 +19,7 @@ interface HttpSerializerFactoryAware
      *
      * @return self
      */
-    public function setHttpSerializerFactory(?Factory $factory);
+    public function setHttpSerializerFactory(Factory|null $factory): static;
 
     /**
      * Get http serializer factory
@@ -30,7 +30,7 @@ interface HttpSerializerFactoryAware
      *
      * @return Factory|null http serializer factory or null if none http serializer factory has been set
      */
-    public function getHttpSerializerFactory(): ?Factory;
+    public function getHttpSerializerFactory(): Factory|null;
 
     /**
      * Check if http serializer factory has been set
@@ -44,5 +44,5 @@ interface HttpSerializerFactoryAware
      *
      * @return Factory|null A default http serializer factory value or Null if no default value is available
      */
-    public function getDefaultHttpSerializerFactory(): ?Factory;
+    public function getDefaultHttpSerializerFactory(): Factory|null;
 }

@@ -19,7 +19,7 @@ interface HttpMessageAware
      *
      * @return self
      */
-    public function setHttpMessage(?MessageInterface $message);
+    public function setHttpMessage(MessageInterface|null $message): static;
 
     /**
      * Get http message
@@ -30,7 +30,7 @@ interface HttpMessageAware
      *
      * @return MessageInterface|null http message or null if none http message has been set
      */
-    public function getHttpMessage(): ?MessageInterface;
+    public function getHttpMessage(): MessageInterface|null;
 
     /**
      * Check if http message has been set
@@ -44,5 +44,5 @@ interface HttpMessageAware
      *
      * @return MessageInterface|null A default http message value or Null if no default value is available
      */
-    public function getDefaultHttpMessage(): ?MessageInterface;
+    public function getDefaultHttpMessage(): MessageInterface|null;
 }

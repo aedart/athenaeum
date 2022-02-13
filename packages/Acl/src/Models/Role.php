@@ -8,6 +8,7 @@ use Aedart\Database\Model;
 use Aedart\Database\Models\Concerns;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
@@ -25,8 +26,8 @@ use Throwable;
  * @property Carbon $updated_at Date and time of when record was last updated
  * @property Carbon|null $deleted_at Evt. date and time of when record was soft-deleted
  *
- * @property \Aedart\Acl\Models\Permission[]|Collection $permissions Permissions that are granted to this role
- * @property \Illuminate\Database\Eloquent\Model|Authenticatable $users Users that have this role are assigned to them
+ * @property Permission[]|Collection $permissions Permissions that are granted to this role
+ * @property BaseModel|Authenticatable $users Users that have this role are assigned to them
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Acl\Models
@@ -62,17 +63,17 @@ class Role extends Model implements Sluggable
      * Determine if role has given permission(s) granted
      *
      * If an array of permissions is given, then method will return true,
-     * ONLY if all of the permissions are granted!
+     * ONLY if all permissions are granted!
      *
      * @see hasAllPermissions
      *
-     * @param string|int|\Aedart\Acl\Models\Role|Collection|string[]|int[]|\Aedart\Acl\Models\Role[] $permissions Slugs, ids or Permission instances or list of roles
+     * @param int|string|Collection|BaseModel|BaseModel[]|int[]|Role|Role[]|string[]  $permissions Slugs, ids or Permission instances or list of roles
      *
      * @return bool
      *
      * @throws InvalidArgumentException
      */
-    public function hasPermission($permissions): bool
+    public function hasPermission(array|Collection|BaseModel|Role|int|string $permissions): bool
     {
         return $this->hasRelatedModels(
             $permissions,
@@ -84,13 +85,13 @@ class Role extends Model implements Sluggable
     /**
      * Determine if role has any of given permissions granted
      *
-     * @param string[]|int[]|\Aedart\Acl\Models\Permission[]|Collection $permissions Slugs, ids or collection or Permission instances
+     * @param  BaseModel[]|Collection|int[]|Permission[]|string[]  $permissions Slugs, ids or collection or Permission instances
      *
      * @return bool
      *
      * @throws InvalidArgumentException
      */
-    public function hasAnyPermissions($permissions): bool
+    public function hasAnyPermissions(array|Collection $permissions): bool
     {
         return $this->hasAnyOf($permissions, $this->aclPermissionsModelInstance(), 'permissions');
     }
@@ -101,13 +102,13 @@ class Role extends Model implements Sluggable
      * Method will return false is any of given permissions are not granted
      * to this role
      *
-     * @param string[]|int[]|\Aedart\Acl\Models\Permission[]|Collection $permissions Slugs, ids or collection or Permission instances
+     * @param  BaseModel[]|Collection|int[]|Permission[]|string[]  $permissions Slugs, ids or collection or Permission instances
      *
      * @return bool
      *
      * @throws InvalidArgumentException
      */
-    public function hasAllPermissions($permissions): bool
+    public function hasAllPermissions(array|Collection $permissions): bool
     {
         return $this->hasAllOf($permissions, $this->aclPermissionsModelInstance(), 'permissions');
     }
@@ -115,13 +116,13 @@ class Role extends Model implements Sluggable
     /**
      * Grant given permissions to this role
      *
-     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     * @param string|int|Permission  ...$permissions Permission slugs, ids or Permission instances
      *
      * @return self
      */
-    public function grantPermissions(...$permissions)
+    public function grantPermissions(...$permissions): static
     {
-        $ids = $this->obtainModelIds($this->aclPermissionsModelInstance(), $permissions);
+        $ids = $this->obtainModelIds($this->aclPermissionsModelInstance(), ...$permissions);
 
         $this
             ->permissions()
@@ -135,27 +136,27 @@ class Role extends Model implements Sluggable
      * Revokes all existing permissions and grants given permissions
      * to this role
      *
-     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     * @param string|int|Permission  ...$permissions Permission slugs, ids or Permission instances
      *
      * @return self
      */
-    public function syncPermissions(...$permissions)
+    public function syncPermissions(...$permissions): static
     {
         return $this
             ->revokeAllPermissions()
-            ->grantPermissions($permissions);
+            ->grantPermissions(...$permissions);
     }
 
     /**
      * Revoke all given permissions
      *
-     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     * @param string|int|Permission  ...$permissions Permission slugs, ids or Permission instances
      *
      * @return self
      */
-    public function revokePermissions(...$permissions)
+    public function revokePermissions(...$permissions): static
     {
-        $ids = $this->obtainModelIds($this->aclPermissionsModelInstance(), $permissions);
+        $ids = $this->obtainModelIds($this->aclPermissionsModelInstance(), ...$permissions);
 
         $this->permissions()->detach($ids);
 
@@ -167,7 +168,7 @@ class Role extends Model implements Sluggable
      *
      * @return self
      */
-    public function revokeAllPermissions()
+    public function revokeAllPermissions(): static
     {
         $this->permissions()->detach();
 
@@ -178,12 +179,12 @@ class Role extends Model implements Sluggable
      * Create a new role and grant it the given permissions
      *
      * @param array $attributes
-     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     * @param string|int|Permission  ...$permissions Permission slugs, ids or Permission instances
      * @return static
      *
      * @throws Throwable
      */
-    public static function createWithPermissions(array $attributes, ...$permissions)
+    public static function createWithPermissions(array $attributes, ...$permissions): static
     {
         return (new static())->getConnection()->transaction(function () use ($attributes, $permissions) {
             /** @var static $role */
@@ -198,7 +199,7 @@ class Role extends Model implements Sluggable
      * @see updateWithPermissions
      *
      * @param array $attributes
-     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     * @param string|int|Permission ...$permissions Permission slugs, ids or Permission instances
      *
      * @return bool
      *
@@ -206,7 +207,7 @@ class Role extends Model implements Sluggable
      */
     public function updateAndGrantPermissions(array $attributes, ...$permissions): bool
     {
-        return $this->updateWithPermissions($attributes, false, $permissions);
+        return $this->updateWithPermissions($attributes, false, ...$permissions);
     }
 
     /**
@@ -215,7 +216,7 @@ class Role extends Model implements Sluggable
      * @see updateWithPermissions
      *
      * @param array $attributes
-     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     * @param string|int|Permission ...$permissions Permission slugs, ids or Permission instances
      *
      * @return bool
      *
@@ -223,18 +224,18 @@ class Role extends Model implements Sluggable
      */
     public function updateAndSyncPermissions(array $attributes, ...$permissions): bool
     {
-        return $this->updateWithPermissions($attributes, true, $permissions);
+        return $this->updateWithPermissions($attributes, true, ...$permissions);
     }
 
     /**
      * Update this role, grant or sync the given permissions
      *
-     * @see syncPermissions
      * @see grantPermissions
+     * @see syncPermissions
      *
      * @param array $attributes
      * @param bool $sync If true, then permissions are synced. If false, then given permissions are attempted granted.
-     * @param string|int|\Aedart\Acl\Models\Permission ...$permissions Permission slugs, ids or Permission instances
+     * @param string|int|Permission ...$permissions Permission slugs, ids or Permission instances
      *
      * @return bool
      *
@@ -248,9 +249,9 @@ class Role extends Model implements Sluggable
                 ->save();
 
             if ($sync) {
-                $this->syncPermissions($permissions);
+                $this->syncPermissions(...$permissions);
             } else {
-                $this->grantPermissions($permissions);
+                $this->grantPermissions(...$permissions);
             }
 
             return $saved;

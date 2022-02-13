@@ -20,7 +20,7 @@ trait ConnectionResolverTrait
      *
      * @var ConnectionResolverInterface|null
      */
-    protected ?ConnectionResolverInterface $connectionResolver = null;
+    protected ConnectionResolverInterface|null $connectionResolver = null;
 
     /**
      * Set connection resolver
@@ -29,7 +29,7 @@ trait ConnectionResolverTrait
      *
      * @return self
      */
-    public function setConnectionResolver(?ConnectionResolverInterface $resolver)
+    public function setConnectionResolver(ConnectionResolverInterface|null $resolver): static
     {
         $this->connectionResolver = $resolver;
 
@@ -47,7 +47,7 @@ trait ConnectionResolverTrait
      *
      * @return ConnectionResolverInterface|null connection resolver or null if none connection resolver has been set
      */
-    public function getConnectionResolver(): ?ConnectionResolverInterface
+    public function getConnectionResolver(): ConnectionResolverInterface|null
     {
         if (!$this->hasConnectionResolver()) {
             $this->setConnectionResolver($this->getDefaultConnectionResolver());
@@ -70,7 +70,7 @@ trait ConnectionResolverTrait
      *
      * @return ConnectionResolverInterface|null A default connection resolver value or Null if no default value is available
      */
-    public function getDefaultConnectionResolver(): ?ConnectionResolverInterface
+    public function getDefaultConnectionResolver(): ConnectionResolverInterface|null
     {
         return DB::getFacadeRoot();
     }

@@ -17,7 +17,7 @@ trait SqlTrait
      *
      * @var string|null
      */
-    protected ?string $sql = null;
+    protected string|null $sql = null;
 
     /**
      * Set sql
@@ -26,7 +26,7 @@ trait SqlTrait
      *
      * @return self
      */
-    public function setSql(?string $query)
+    public function setSql(string|null $query): static
     {
         $this->sql = $query;
 
@@ -36,14 +36,14 @@ trait SqlTrait
     /**
      * Get sql
      *
-     * If no "sql" value set, method
-     * sets and returns a default "sql".
+     * If no sql value set, method
+     * sets and returns a default sql.
      *
      * @see getDefaultSql()
      *
      * @return string|null sql or null if no sql has been set
      */
-    public function getSql(): ?string
+    public function getSql(): string|null
     {
         if (!$this->hasSql()) {
             $this->setSql($this->getDefaultSql());
@@ -52,9 +52,9 @@ trait SqlTrait
     }
 
     /**
-     * Check if "sql" has been set
+     * Check if sql has been set
      *
-     * @return bool True if "sql" has been set, false if not
+     * @return bool True if sql has been set, false if not
      */
     public function hasSql(): bool
     {
@@ -62,11 +62,11 @@ trait SqlTrait
     }
 
     /**
-     * Get a default "sql" value, if any is available
+     * Get a default sql value, if any is available
      *
-     * @return string|null Default "sql" value or null if no default value is available
+     * @return string|null Default sql value or null if no default value is available
      */
-    public function getDefaultSql(): ?string
+    public function getDefaultSql(): string|null
     {
         return null;
     }

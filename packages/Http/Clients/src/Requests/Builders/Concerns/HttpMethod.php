@@ -26,7 +26,7 @@ trait HttpMethod
     /**
      * @inheritdoc
      */
-    public function withMethod(string $method): Builder
+    public function withMethod(string $method): static
     {
         $this->method = strtoupper(trim($method));
 

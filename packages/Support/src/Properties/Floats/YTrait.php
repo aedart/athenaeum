@@ -17,7 +17,7 @@ trait YTrait
      *
      * @var float|null
      */
-    protected ?float $y = null;
+    protected float|null $y = null;
 
     /**
      * Set y
@@ -26,7 +26,7 @@ trait YTrait
      *
      * @return self
      */
-    public function setY(?float $value)
+    public function setY(float|null $value): static
     {
         $this->y = $value;
 
@@ -36,14 +36,14 @@ trait YTrait
     /**
      * Get y
      *
-     * If no "y" value set, method
-     * sets and returns a default "y".
+     * If no y value set, method
+     * sets and returns a default y.
      *
      * @see getDefaultY()
      *
      * @return float|null y or null if no y has been set
      */
-    public function getY(): ?float
+    public function getY(): float|null
     {
         if (!$this->hasY()) {
             $this->setY($this->getDefaultY());
@@ -52,9 +52,9 @@ trait YTrait
     }
 
     /**
-     * Check if "y" has been set
+     * Check if y has been set
      *
-     * @return bool True if "y" has been set, false if not
+     * @return bool True if y has been set, false if not
      */
     public function hasY(): bool
     {
@@ -62,11 +62,11 @@ trait YTrait
     }
 
     /**
-     * Get a default "y" value, if any is available
+     * Get a default y value, if any is available
      *
-     * @return float|null Default "y" value or null if no default value is available
+     * @return float|null Default y value or null if no default value is available
      */
-    public function getDefaultY(): ?float
+    public function getDefaultY(): float|null
     {
         return null;
     }

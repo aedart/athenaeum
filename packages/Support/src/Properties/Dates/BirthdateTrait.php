@@ -15,18 +15,18 @@ trait BirthdateTrait
     /**
      * Date of birth
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected ?\DateTime $birthdate = null;
+    protected \DateTimeInterface|null $birthdate = null;
 
     /**
      * Set birthdate
      *
-     * @param \DateTime|null $date Date of birth
+     * @param \DateTimeInterface|null $date Date of birth
      *
      * @return self
      */
-    public function setBirthdate(?\DateTime $date)
+    public function setBirthdate(\DateTimeInterface|null $date): static
     {
         $this->birthdate = $date;
 
@@ -36,14 +36,14 @@ trait BirthdateTrait
     /**
      * Get birthdate
      *
-     * If no "birthdate" value set, method
-     * sets and returns a default "birthdate".
+     * If no birthdate value set, method
+     * sets and returns a default birthdate.
      *
      * @see getDefaultBirthdate()
      *
-     * @return \DateTime|null birthdate or null if no birthdate has been set
+     * @return \DateTimeInterface|null birthdate or null if no birthdate has been set
      */
-    public function getBirthdate(): ?\DateTime
+    public function getBirthdate(): \DateTimeInterface|null
     {
         if (!$this->hasBirthdate()) {
             $this->setBirthdate($this->getDefaultBirthdate());
@@ -52,9 +52,9 @@ trait BirthdateTrait
     }
 
     /**
-     * Check if "birthdate" has been set
+     * Check if birthdate has been set
      *
-     * @return bool True if "birthdate" has been set, false if not
+     * @return bool True if birthdate has been set, false if not
      */
     public function hasBirthdate(): bool
     {
@@ -62,11 +62,11 @@ trait BirthdateTrait
     }
 
     /**
-     * Get a default "birthdate" value, if any is available
+     * Get a default birthdate value, if any is available
      *
-     * @return \DateTime|null Default "birthdate" value or null if no default value is available
+     * @return \DateTimeInterface|null Default birthdate value or null if no default value is available
      */
-    public function getDefaultBirthdate(): ?\DateTime
+    public function getDefaultBirthdate(): \DateTimeInterface|null
     {
         return null;
     }

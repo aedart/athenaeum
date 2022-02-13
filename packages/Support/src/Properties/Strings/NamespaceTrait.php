@@ -17,7 +17,7 @@ trait NamespaceTrait
      *
      * @var string|null
      */
-    protected ?string $namespace = null;
+    protected string|null $namespace = null;
 
     /**
      * Set namespace
@@ -26,7 +26,7 @@ trait NamespaceTrait
      *
      * @return self
      */
-    public function setNamespace(?string $namespace)
+    public function setNamespace(string|null $namespace): static
     {
         $this->namespace = $namespace;
 
@@ -36,14 +36,14 @@ trait NamespaceTrait
     /**
      * Get namespace
      *
-     * If no "namespace" value set, method
-     * sets and returns a default "namespace".
+     * If no namespace value set, method
+     * sets and returns a default namespace.
      *
      * @see getDefaultNamespace()
      *
      * @return string|null namespace or null if no namespace has been set
      */
-    public function getNamespace(): ?string
+    public function getNamespace(): string|null
     {
         if (!$this->hasNamespace()) {
             $this->setNamespace($this->getDefaultNamespace());
@@ -52,9 +52,9 @@ trait NamespaceTrait
     }
 
     /**
-     * Check if "namespace" has been set
+     * Check if namespace has been set
      *
-     * @return bool True if "namespace" has been set, false if not
+     * @return bool True if namespace has been set, false if not
      */
     public function hasNamespace(): bool
     {
@@ -62,11 +62,11 @@ trait NamespaceTrait
     }
 
     /**
-     * Get a default "namespace" value, if any is available
+     * Get a default namespace value, if any is available
      *
-     * @return string|null Default "namespace" value or null if no default value is available
+     * @return string|null Default namespace value or null if no default value is available
      */
-    public function getDefaultNamespace(): ?string
+    public function getDefaultNamespace(): string|null
     {
         return null;
     }

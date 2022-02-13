@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Birthdate Aware
  *
- * Component is aware of \DateTime "birthdate"
+ * Component is aware of \DateTimeInterface "birthdate"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,35 +15,35 @@ interface BirthdateAware
     /**
      * Set birthdate
      *
-     * @param \DateTime|null $date Date of birth
+     * @param \DateTimeInterface|null $date Date of birth
      *
      * @return self
      */
-    public function setBirthdate(?\DateTime $date);
+    public function setBirthdate(\DateTimeInterface|null $date): static;
 
     /**
      * Get birthdate
      *
-     * If no "birthdate" value set, method
-     * sets and returns a default "birthdate".
+     * If no birthdate value set, method
+     * sets and returns a default birthdate.
      *
      * @see getDefaultBirthdate()
      *
-     * @return \DateTime|null birthdate or null if no birthdate has been set
+     * @return \DateTimeInterface|null birthdate or null if no birthdate has been set
      */
-    public function getBirthdate(): ?\DateTime;
+    public function getBirthdate(): \DateTimeInterface|null;
 
     /**
-     * Check if "birthdate" has been set
+     * Check if birthdate has been set
      *
-     * @return bool True if "birthdate" has been set, false if not
+     * @return bool True if birthdate has been set, false if not
      */
     public function hasBirthdate(): bool;
 
     /**
-     * Get a default "birthdate" value, if any is available
+     * Get a default birthdate value, if any is available
      *
-     * @return \DateTime|null Default "birthdate" value or null if no default value is available
+     * @return \DateTimeInterface|null Default birthdate value or null if no default value is available
      */
-    public function getDefaultBirthdate(): ?\DateTime;
+    public function getDefaultBirthdate(): \DateTimeInterface|null;
 }

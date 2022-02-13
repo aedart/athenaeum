@@ -17,7 +17,7 @@ trait DeliveryAddressTrait
      *
      * @var string|null
      */
-    protected ?string $deliveryAddress = null;
+    protected string|null $deliveryAddress = null;
 
     /**
      * Set delivery address
@@ -26,7 +26,7 @@ trait DeliveryAddressTrait
      *
      * @return self
      */
-    public function setDeliveryAddress(?string $address)
+    public function setDeliveryAddress(string|null $address): static
     {
         $this->deliveryAddress = $address;
 
@@ -36,14 +36,14 @@ trait DeliveryAddressTrait
     /**
      * Get delivery address
      *
-     * If no "delivery address" value set, method
-     * sets and returns a default "delivery address".
+     * If no delivery address value set, method
+     * sets and returns a default delivery address.
      *
      * @see getDefaultDeliveryAddress()
      *
      * @return string|null delivery address or null if no delivery address has been set
      */
-    public function getDeliveryAddress(): ?string
+    public function getDeliveryAddress(): string|null
     {
         if (!$this->hasDeliveryAddress()) {
             $this->setDeliveryAddress($this->getDefaultDeliveryAddress());
@@ -52,9 +52,9 @@ trait DeliveryAddressTrait
     }
 
     /**
-     * Check if "delivery address" has been set
+     * Check if delivery address has been set
      *
-     * @return bool True if "delivery address" has been set, false if not
+     * @return bool True if delivery address has been set, false if not
      */
     public function hasDeliveryAddress(): bool
     {
@@ -62,11 +62,11 @@ trait DeliveryAddressTrait
     }
 
     /**
-     * Get a default "delivery address" value, if any is available
+     * Get a default delivery address value, if any is available
      *
-     * @return string|null Default "delivery address" value or null if no default value is available
+     * @return string|null Default delivery address value or null if no default value is available
      */
-    public function getDefaultDeliveryAddress(): ?string
+    public function getDefaultDeliveryAddress(): string|null
     {
         return null;
     }

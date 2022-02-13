@@ -19,31 +19,31 @@ interface CategoriesAware
      *
      * @return self
      */
-    public function setCategories(?array $list);
+    public function setCategories(array|null $list): static;
 
     /**
      * Get categories
      *
-     * If no "categories" value set, method
-     * sets and returns a default "categories".
+     * If no categories value set, method
+     * sets and returns a default categories.
      *
      * @see getDefaultCategories()
      *
      * @return array|null categories or null if no categories has been set
      */
-    public function getCategories(): ?array;
+    public function getCategories(): array|null;
 
     /**
-     * Check if "categories" has been set
+     * Check if categories has been set
      *
-     * @return bool True if "categories" has been set, false if not
+     * @return bool True if categories has been set, false if not
      */
     public function hasCategories(): bool;
 
     /**
-     * Get a default "categories" value, if any is available
+     * Get a default categories value, if any is available
      *
-     * @return array|null Default "categories" value or null if no default value is available
+     * @return array|null Default categories value or null if no default value is available
      */
-    public function getDefaultCategories(): ?array;
+    public function getDefaultCategories(): array|null;
 }

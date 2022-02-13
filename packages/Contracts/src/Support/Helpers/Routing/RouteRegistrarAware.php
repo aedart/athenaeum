@@ -19,7 +19,7 @@ interface RouteRegistrarAware
      *
      * @return self
      */
-    public function setRouteRegistrar(?Registrar $registrar);
+    public function setRouteRegistrar(Registrar|null $registrar): static;
 
     /**
      * Get route registrar
@@ -32,7 +32,7 @@ interface RouteRegistrarAware
      *
      * @return Registrar|null route registrar or null if none route registrar has been set
      */
-    public function getRouteRegistrar(): ?Registrar;
+    public function getRouteRegistrar(): Registrar|null;
 
     /**
      * Check if route registrar has been set
@@ -46,5 +46,5 @@ interface RouteRegistrarAware
      *
      * @return Registrar|null A default route registrar value or Null if no default value is available
      */
-    public function getDefaultRouteRegistrar(): ?Registrar;
+    public function getDefaultRouteRegistrar(): Registrar|null;
 }

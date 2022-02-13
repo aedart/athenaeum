@@ -89,7 +89,7 @@ class StoresTest extends CircuitBreakerTestCase
      */
     public function canRegisterFailure(string $driver, array $options)
     {
-        $failure = $this->makeFailure($this->getFaker()->sentence);
+        $failure = $this->makeFailure($this->getFaker()->sentence());
         $store = $this->makeStoreWithService($driver, $options);
 
         $this->assertTrue($store->registerFailure($failure), 'Failure not registered');
@@ -129,9 +129,9 @@ class StoresTest extends CircuitBreakerTestCase
      */
     public function increasesFailuresCountWhenFailureRegistered(string $driver, array $options)
     {
-        $failureA = $this->makeFailure($this->getFaker()->sentence);
-        $failureB = $this->makeFailure($this->getFaker()->sentence);
-        $failureC = $this->makeFailure($this->getFaker()->sentence);
+        $failureA = $this->makeFailure($this->getFaker()->sentence());
+        $failureB = $this->makeFailure($this->getFaker()->sentence());
+        $failureC = $this->makeFailure($this->getFaker()->sentence());
 
         $store = $this->makeStoreWithService($driver, $options);
         $store->registerFailure($failureA);
@@ -167,7 +167,7 @@ class StoresTest extends CircuitBreakerTestCase
         $store = $this->makeStoreWithService($driver, $options);
 
         $lockObtained = false;
-        $expected = $this->getFaker()->sentence;
+        $expected = $this->getFaker()->sentence();
         $callback = function () use (&$lockObtained, $expected) {
             $lockObtained = true;
             return $expected;

@@ -50,7 +50,7 @@ abstract class Dto implements DtoInterface
      *
      * @throws Throwable
      */
-    public function __construct(array $properties = [], ?Container $container = null)
+    public function __construct(array $properties = [], Container|null $container = null)
     {
         $this
             ->setContainer($container)
@@ -64,7 +64,7 @@ abstract class Dto implements DtoInterface
      * @throws BindingResolutionException
      * @throws Throwable
      */
-    public function __set(string $name, $value)
+    public function __set(string $name, mixed $value): void
     {
         $resolvedValue = $value;
 
@@ -73,7 +73,7 @@ abstract class Dto implements DtoInterface
             $resolvedValue = $this->resolveValue($methodName, $value);
         }
 
-        return $this->__setFromOverload($name, $resolvedValue);
+        $this->__setFromOverload($name, $resolvedValue);
     }
 
     /**

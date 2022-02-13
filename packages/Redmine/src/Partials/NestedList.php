@@ -15,6 +15,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use IteratorAggregate;
 use JsonSerializable;
+use Traversable;
 
 /**
  * Base List
@@ -67,7 +68,7 @@ abstract class NestedList implements
     /**
      * @inheritDoc
      */
-    public function populate(array $data = []): void
+    public function populate(array $data = []): static
     {
         $this->list = array_map(function ($reference) {
             /** @var ArrayDto $type */
@@ -82,12 +83,14 @@ abstract class NestedList implements
             // Set connection, if nested DTO expects one
             return $this->resolveItemConnection($nested);
         }, $data);
+
+        return $this;
     }
 
     /**
      * @inheritdoc
      */
-    public function setConnection(?Connection $connection)
+    public function setConnection(Connection|null $connection): static
     {
         $this->traitSetConnection($connection);
 
@@ -102,7 +105,7 @@ abstract class NestedList implements
     /**
      * @inheritDoc
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->list);
     }
@@ -126,7 +129,7 @@ abstract class NestedList implements
     /**
      * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->toArray();
     }
@@ -134,7 +137,7 @@ abstract class NestedList implements
     /**
      * @inheritDoc
      */
-    public function count()
+    public function count(): int
     {
         return count($this->list);
     }
@@ -142,7 +145,7 @@ abstract class NestedList implements
     /**
      * @inheritDoc
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->list[$offset]);
     }
@@ -150,7 +153,7 @@ abstract class NestedList implements
     /**
      * @inheritDoc
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->list[$offset];
     }
@@ -158,7 +161,7 @@ abstract class NestedList implements
     /**
      * @inheritDoc
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->list[$offset] = $value;
     }
@@ -166,7 +169,7 @@ abstract class NestedList implements
     /**
      * @inheritDoc
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->list[$offset]);
     }

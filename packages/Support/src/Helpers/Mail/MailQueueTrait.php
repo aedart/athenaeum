@@ -20,7 +20,7 @@ trait MailQueueTrait
      *
      * @var MailQueue|null
      */
-    protected ?MailQueue $mailQueue = null;
+    protected MailQueue|null $mailQueue = null;
 
     /**
      * Set mail queue
@@ -29,7 +29,7 @@ trait MailQueueTrait
      *
      * @return self
      */
-    public function setMailQueue(?MailQueue $queue)
+    public function setMailQueue(MailQueue|null $queue): static
     {
         $this->mailQueue = $queue;
 
@@ -47,7 +47,7 @@ trait MailQueueTrait
      *
      * @return MailQueue|null mail queue or null if none mail queue has been set
      */
-    public function getMailQueue(): ?MailQueue
+    public function getMailQueue(): MailQueue|null
     {
         if (!$this->hasMailQueue()) {
             $this->setMailQueue($this->getDefaultMailQueue());
@@ -70,7 +70,7 @@ trait MailQueueTrait
      *
      * @return MailQueue|null A default mail queue value or Null if no default value is available
      */
-    public function getDefaultMailQueue(): ?MailQueue
+    public function getDefaultMailQueue(): MailQueue|null
     {
         /** @var \Illuminate\Contracts\Mail\Factory $manager */
         $manager = Mail::getFacadeRoot();

@@ -23,7 +23,7 @@ interface ListResolver
      * @param  array  $dependencies  List of class paths, identifiers or key-value pairs, where
      *                              key = class path, value = instance arguments.
      *
-     * @return mixed[]
+     * @return array
      *
      * @throws BindingResolutionException
      */
@@ -37,5 +37,5 @@ interface ListResolver
      *
      * @return self
      */
-    public function with(callable $callback): self;
+    public function with(callable $callback): static;
 }

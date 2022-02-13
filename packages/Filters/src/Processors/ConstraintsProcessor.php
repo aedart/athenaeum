@@ -6,6 +6,7 @@ use Aedart\Contracts\Database\Query\Exceptions\CriteriaException;
 use Aedart\Contracts\Database\Query\Exceptions\InvalidOperatorException;
 use Aedart\Contracts\Database\Query\FieldCriteria;
 use Aedart\Contracts\Filters\BuiltFiltersMap;
+use Aedart\Contracts\Filters\Exceptions\ProcessorException;
 use Aedart\Filters\BaseProcessor;
 use Aedart\Filters\Exceptions\InvalidParameter;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
@@ -54,7 +55,7 @@ class ConstraintsProcessor extends BaseProcessor
     /**
      * @inheritDoc
      */
-    public function process(BuiltFiltersMap $built, callable $next)
+    public function process(BuiltFiltersMap $built, callable $next): mixed
     {
         // Skip this processor, if no value was submitted; no filters requested!
         $requested = $this->value();
@@ -102,7 +103,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @return self
      */
-    public function filters(array $map)
+    public function filters(array $map): static
     {
         $this->filtersMap = $map;
 
@@ -116,7 +117,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @return self
      */
-    public function maxFilters(int $max = 10)
+    public function maxFilters(int $max = 10): static
     {
         $this->maxFilters = $max;
 
@@ -133,7 +134,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @return self
      */
-    public function matchFrom(string $metaKey = 'match')
+    public function matchFrom(string $metaKey = 'match'): static
     {
         $this->matchingKey = $metaKey;
 
@@ -148,22 +149,24 @@ class ConstraintsProcessor extends BaseProcessor
      * Builds constraint filters for requested property and adds them to the
      * provided built filters instance
      *
-     * @param string $property Name of requested property to build a constraint filter for
-     * @param array $criteria Key-value pair, key = operator, value = mixed
-     * @param string $logical Logical boolean operator that determines how filters'
+     * @param  string  $property  Name of requested property to build a constraint filter for
+     * @param  array  $criteria  Key-value pair, key = operator, value = mixed
+     * @param  string  $logical  Logical boolean operator that determines how filters'
      *                        where clauses should be applied, e.g. "AND" or "OR"
-     * @param BuiltFiltersMap $built
+     * @param  BuiltFiltersMap  $built
      *
      * @return BuiltFiltersMap
      *
-     * @throws InvalidParameter
+     * @throws CriteriaException
+     * @throws ProcessorException
      */
     protected function addFiltersForCriteria(
         string $property,
         array $criteria,
         string $logical,
         BuiltFiltersMap $built
-    ): BuiltFiltersMap {
+    ): BuiltFiltersMap
+    {
         $parameter = $this->parameter();
 
         foreach ($criteria as $operator => $value) {
@@ -203,14 +206,15 @@ class ConstraintsProcessor extends BaseProcessor
      * @throws InvalidParameter
      * @throws LogicException If filter is invalid, e.g. not class path or FieldCriteria instance
      * @throws CriteriaException
-     * @throws \Aedart\Contracts\Filters\Exceptions\ProcessorException
+     * @throws ProcessorException
      */
     protected function buildFilter(
         string $property,
         string $operator,
-        $value,
+        mixed $value,
         string $logical = FieldCriteria::AND
-    ): FieldCriteria {
+    ): FieldCriteria
+    {
         // Resolve column name from given property
         $column = $this->resolveColumnName($property);
 
@@ -276,7 +280,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @return string
      */
-    protected function resolveOperator($operator): string
+    protected function resolveOperator(mixed $operator): string
     {
         if (!is_int($operator)) {
             return $operator;
@@ -293,7 +297,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @return mixed
      */
-    protected function resolveValue($value)
+    protected function resolveValue(mixed $value): mixed
     {
         // By default, value is passed on as given. Overwrite this
         // method, in case that special value processing is required
@@ -318,7 +322,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @param mixed $requested
      */
-    protected function validateRequestedFilters($requested)
+    protected function validateRequestedFilters(mixed $requested)
     {
         $this
             ->assertArrayOfFiltersRequested($requested)
@@ -336,7 +340,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @throws InvalidParameter
      */
-    protected function assertProperties(array $requested)
+    protected function assertProperties(array $requested): static
     {
         $allowed = array_keys($this->filtersMap);
 
@@ -359,7 +363,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @throws InvalidParameter
      */
-    protected function assertPropertyIsAllowed(string $property, array $allowed)
+    protected function assertPropertyIsAllowed(string $property, array $allowed): static
     {
         if (!in_array($property, $allowed)) {
             throw InvalidParameter::forParameter(
@@ -387,7 +391,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @throws InvalidParameter
      */
-    protected function assertPropertyCriteria(string $property, $criteria)
+    protected function assertPropertyCriteria(string $property, mixed $criteria): static
     {
         // A property's criteria is intended to be an array consistent of
         // "operator => value". This might not always be the case, so here
@@ -414,7 +418,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @throws InvalidParameter
      */
-    protected function assertPropertyCriteriaValue(string $property, $value)
+    protected function assertPropertyCriteriaValue(string $property, mixed $value): static
     {
         // The "best" we can do here, is just ensure that value's content does
         // not exceed a certain character limit. Overwrite this method, if more
@@ -445,7 +449,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @throws InvalidParameter
      */
-    protected function assertNumericCriteriaValue(string $property, $value)
+    protected function assertNumericCriteriaValue(string $property, int|float $value): static
     {
         $parameter = $this->parameter() . '.' . $property;
         $min = PHP_INT_MIN;
@@ -474,7 +478,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @throws InvalidParameter
      */
-    protected function assertStringCriteriaValue(string $property, string $value)
+    protected function assertStringCriteriaValue(string $property, string $value): static
     {
         $parameter = $this->parameter() . '.' . $property;
         $min = 1;
@@ -503,7 +507,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @throws InvalidParameter
      */
-    protected function assertArrayOfFiltersRequested($requested)
+    protected function assertArrayOfFiltersRequested(mixed $requested): static
     {
         // We expect the requested constraint filters to be in array
         // format - fail if this is not the case.
@@ -526,7 +530,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @throws InvalidParameter
      */
-    protected function assertNotTooManyFiltersRequested(array $requested)
+    protected function assertNotTooManyFiltersRequested(array $requested): static
     {
         // Applying "where ..." clauses can quickly become a costly affair,
         // so here we ensure that requested amount of filters does not exceed

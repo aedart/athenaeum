@@ -48,9 +48,9 @@ interface FieldCriteria extends Criteria
     public static function make(
         string $field,
         string $operator = '=',
-        $value = null,
+        mixed $value = null,
         string $logical = self::AND
-    );
+    ): static;
 
     /**
      * Set the field (column) criteria must be applied on
@@ -61,7 +61,7 @@ interface FieldCriteria extends Criteria
      *
      * @throws CriteriaException
      */
-    public function setField(string $field);
+    public function setField(string $field): static;
 
     /**
      * Get the field (column) criteria must be applied on
@@ -86,7 +86,7 @@ interface FieldCriteria extends Criteria
      *
      * @throws InvalidOperatorException
      */
-    public function setOperator(string $operator);
+    public function setOperator(string $operator): static;
 
     /**
      * Get the operator to be used
@@ -111,21 +111,21 @@ interface FieldCriteria extends Criteria
      *
      * @throws CriteriaException
      */
-    public function setValue($value);
+    public function setValue(mixed $value): static;
 
     /**
      * Get the field value to be matched against
      *
      * @return mixed
      */
-    public function getValue();
+    public function getValue(): mixed;
 
     /**
      * Alias for {@see getValue()}
      *
      * @return mixed
      */
-    public function value();
+    public function value(): mixed;
 
     /**
      * Set the logical operator that determines how criteria
@@ -137,7 +137,7 @@ interface FieldCriteria extends Criteria
      *
      * @throws InvalidOperatorException
      */
-    public function setLogical(string $operator = self::AND);
+    public function setLogical(string $operator = self::AND): static;
 
     /**
      * Get the logical operator that determines how criteria

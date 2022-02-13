@@ -2,10 +2,10 @@
 
 namespace Aedart\Tests\Unit\Utils;
 
+use Aedart\Contracts\Utils\Packages\Exceptions\PackageNotInstalledException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Version;
-use OutOfBoundsException;
 
 /**
  * VersionTest
@@ -23,7 +23,7 @@ class VersionTest extends UnitTestCase
      */
     public function canDetermineVersionOfPackage()
     {
-        $version = Version::package('aedart/athenaeum');
+        $version = Version::package('illuminate/support');
 
         ConsoleDebugger::output((string) $version);
 
@@ -35,9 +35,9 @@ class VersionTest extends UnitTestCase
      */
     public function failsDeterminingVersionOfUnknownPackage()
     {
-        $this->expectException(OutOfBoundsException::class);
+        $this->expectException(PackageNotInstalledException::class);
 
-        Version::package('acme/unknown-pgk-' . $this->getFaker()->word);
+        Version::package('acme/unknown-pgk-' . $this->getFaker()->word());
     }
 
     /**
@@ -79,7 +79,7 @@ class VersionTest extends UnitTestCase
         $resultA = Version::hasFor('aedart/athenaeum');
         $this->assertTrue($resultA, 'Should exist for A');
 
-        $resultB = Version::hasFor('acme/unknown-pgk-' . $this->getFaker()->word);
+        $resultB = Version::hasFor('acme/unknown-pgk-' . $this->getFaker()->word());
         $this->assertFalse($resultB, 'Should not exist for B');
     }
 
@@ -93,5 +93,18 @@ class VersionTest extends UnitTestCase
         ConsoleDebugger::output((string)$version);
 
         $this->assertNotEmpty($version);
+    }
+
+    /**
+     * @test
+     */
+    public function canObtainAthenaeumPackageVersion()
+    {
+        $version = Version::package('aedart/athenaeum-support');
+
+        ConsoleDebugger::output((string)$version);
+
+        $this->assertNotEmpty($version);
+        $this->assertStringNotContainsString('no version', $version);
     }
 }

@@ -74,7 +74,7 @@ trait Reflections
     {
         static $methods = [];
 
-        $class = get_class($this);
+        $class = static::class;
         if (isset($methods[$class][$name])) {
             return $methods[$class][$name];
         }

@@ -19,7 +19,7 @@ interface ViewFactoryAware
      *
      * @return self
      */
-    public function setViewFactory(?Factory $factory);
+    public function setViewFactory(Factory|null $factory): static;
 
     /**
      * Get view factory
@@ -32,7 +32,7 @@ interface ViewFactoryAware
      *
      * @return Factory|null view factory or null if none view factory has been set
      */
-    public function getViewFactory(): ?Factory;
+    public function getViewFactory(): Factory|null;
 
     /**
      * Check if view factory has been set
@@ -46,5 +46,5 @@ interface ViewFactoryAware
      *
      * @return Factory|null A default view factory value or Null if no default value is available
      */
-    public function getDefaultViewFactory(): ?Factory;
+    public function getDefaultViewFactory(): Factory|null;
 }

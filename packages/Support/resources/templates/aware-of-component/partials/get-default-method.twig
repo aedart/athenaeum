@@ -1,1 +1,1 @@
-public function getDefault{{ propertyName }}() {{- dataType == 'mixed' ? '' : ": ?#{dataType}" -}}
+public function getDefault{{ propertyName }}(): {{- dataType == 'mixed' ? ' mixed' : " #{dataType}|null" -}}

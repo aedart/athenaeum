@@ -20,7 +20,7 @@ trait DispatcherTrait
      *
      * @var Dispatcher|null
      */
-    protected ?Dispatcher $dispatcher = null;
+    protected Dispatcher|null $dispatcher = null;
 
     /**
      * Set dispatcher
@@ -29,7 +29,7 @@ trait DispatcherTrait
      *
      * @return self
      */
-    public function setDispatcher(?Dispatcher $dispatcher)
+    public function setDispatcher(Dispatcher|null $dispatcher): static
     {
         $this->dispatcher = $dispatcher;
 
@@ -45,7 +45,7 @@ trait DispatcherTrait
      *
      * @return Dispatcher|null dispatcher or null if none dispatcher has been set
      */
-    public function getDispatcher(): ?Dispatcher
+    public function getDispatcher(): Dispatcher|null
     {
         if (!$this->hasDispatcher()) {
             $this->setDispatcher($this->getDefaultDispatcher());
@@ -68,7 +68,7 @@ trait DispatcherTrait
      *
      * @return Dispatcher|null A default dispatcher value or Null if no default value is available
      */
-    public function getDefaultDispatcher(): ?Dispatcher
+    public function getDefaultDispatcher(): Dispatcher|null
     {
         return Event::getFacadeRoot();
     }

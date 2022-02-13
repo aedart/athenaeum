@@ -17,7 +17,7 @@ trait VatTrait
      *
      * @var string|null
      */
-    protected ?string $vat = null;
+    protected string|null $vat = null;
 
     /**
      * Set vat
@@ -26,7 +26,7 @@ trait VatTrait
      *
      * @return self
      */
-    public function setVat(?string $amount)
+    public function setVat(string|null $amount): static
     {
         $this->vat = $amount;
 
@@ -36,14 +36,14 @@ trait VatTrait
     /**
      * Get vat
      *
-     * If no "vat" value set, method
-     * sets and returns a default "vat".
+     * If no vat value set, method
+     * sets and returns a default vat.
      *
      * @see getDefaultVat()
      *
      * @return string|null vat or null if no vat has been set
      */
-    public function getVat(): ?string
+    public function getVat(): string|null
     {
         if (!$this->hasVat()) {
             $this->setVat($this->getDefaultVat());
@@ -52,9 +52,9 @@ trait VatTrait
     }
 
     /**
-     * Check if "vat" has been set
+     * Check if vat has been set
      *
-     * @return bool True if "vat" has been set, false if not
+     * @return bool True if vat has been set, false if not
      */
     public function hasVat(): bool
     {
@@ -62,11 +62,11 @@ trait VatTrait
     }
 
     /**
-     * Get a default "vat" value, if any is available
+     * Get a default vat value, if any is available
      *
-     * @return string|null Default "vat" value or null if no default value is available
+     * @return string|null Default vat value or null if no default value is available
      */
-    public function getDefaultVat(): ?string
+    public function getDefaultVat(): string|null
     {
         return null;
     }

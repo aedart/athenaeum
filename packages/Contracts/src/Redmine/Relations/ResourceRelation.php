@@ -33,7 +33,7 @@ interface ResourceRelation
      *
      * @return self
      */
-    public function include(array $include);
+    public function include(array $include): static;
 
     /**
      * Returns list of associated data to be included
@@ -50,7 +50,7 @@ interface ResourceRelation
      *
      * @return self
      */
-    public function filter(callable $filter);
+    public function filter(callable $filter): static;
 
     /**
      * Returns the filters to be applied onto
@@ -67,14 +67,14 @@ interface ResourceRelation
      *
      * @return self
      */
-    public function usingConnection($connection = null);
+    public function usingConnection(string|Connection|null $connection = null): static;
 
     /**
      * Get the connection to be used when obtaining related resource
      *
      * @return string|Connection|null Defaults to {@see parent} resource's connection
      */
-    public function getConnection();
+    public function getConnection(): string|Connection|null;
 
     /**
      * Get the parent resource
@@ -88,5 +88,5 @@ interface ResourceRelation
      *
      * @return ApiResource|string Class path
      */
-    public function related();
+    public function related(): ApiResource|string;
 }

@@ -19,7 +19,7 @@ trait CookieJarTrait
      *
      * @var CookieJarInterface|null
      */
-    protected ?CookieJarInterface $cookieJar = null;
+    protected CookieJarInterface|null $cookieJar = null;
 
     /**
      * Set cookie jar
@@ -28,7 +28,7 @@ trait CookieJarTrait
      *
      * @return self
      */
-    public function setCookieJar(?CookieJarInterface $jar)
+    public function setCookieJar(CookieJarInterface|null $jar): static
     {
         $this->cookieJar = $jar;
 
@@ -44,7 +44,7 @@ trait CookieJarTrait
      *
      * @return CookieJarInterface|null cookie jar or null if none cookie jar has been set
      */
-    public function getCookieJar(): ?CookieJarInterface
+    public function getCookieJar(): CookieJarInterface|null
     {
         if (!$this->hasCookieJar()) {
             $this->setCookieJar($this->getDefaultCookieJar());
@@ -67,7 +67,7 @@ trait CookieJarTrait
      *
      * @return CookieJarInterface|null A default cookie jar value or Null if no default value is available
      */
-    public function getDefaultCookieJar(): ?CookieJarInterface
+    public function getDefaultCookieJar(): CookieJarInterface|null
     {
         return null;
     }

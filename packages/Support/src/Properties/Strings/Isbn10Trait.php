@@ -17,7 +17,7 @@ trait Isbn10Trait
      *
      * @var string|null
      */
-    protected ?string $isbn10 = null;
+    protected string|null $isbn10 = null;
 
     /**
      * Set isbn10
@@ -26,7 +26,7 @@ trait Isbn10Trait
      *
      * @return self
      */
-    public function setIsbn10(?string $isbn10)
+    public function setIsbn10(string|null $isbn10): static
     {
         $this->isbn10 = $isbn10;
 
@@ -36,14 +36,14 @@ trait Isbn10Trait
     /**
      * Get isbn10
      *
-     * If no "isbn10" value set, method
-     * sets and returns a default "isbn10".
+     * If no isbn10 value set, method
+     * sets and returns a default isbn10.
      *
      * @see getDefaultIsbn10()
      *
      * @return string|null isbn10 or null if no isbn10 has been set
      */
-    public function getIsbn10(): ?string
+    public function getIsbn10(): string|null
     {
         if (!$this->hasIsbn10()) {
             $this->setIsbn10($this->getDefaultIsbn10());
@@ -52,9 +52,9 @@ trait Isbn10Trait
     }
 
     /**
-     * Check if "isbn10" has been set
+     * Check if isbn10 has been set
      *
-     * @return bool True if "isbn10" has been set, false if not
+     * @return bool True if isbn10 has been set, false if not
      */
     public function hasIsbn10(): bool
     {
@@ -62,11 +62,11 @@ trait Isbn10Trait
     }
 
     /**
-     * Get a default "isbn10" value, if any is available
+     * Get a default isbn10 value, if any is available
      *
-     * @return string|null Default "isbn10" value or null if no default value is available
+     * @return string|null Default isbn10 value or null if no default value is available
      */
-    public function getDefaultIsbn10(): ?string
+    public function getDefaultIsbn10(): string|null
     {
         return null;
     }

@@ -15,18 +15,18 @@ trait HtmlTrait
     /**
      * HyperText Markup Language (HTML)
      *
-     * @var mixed|null
+     * @var mixed
      */
     protected $html = null;
 
     /**
      * Set html
      *
-     * @param mixed|null $html HyperText Markup Language (HTML)
+     * @param mixed $html HyperText Markup Language (HTML)
      *
      * @return self
      */
-    public function setHtml($html)
+    public function setHtml(mixed $html): static
     {
         $this->html = $html;
 
@@ -36,14 +36,14 @@ trait HtmlTrait
     /**
      * Get html
      *
-     * If no "html" value set, method
-     * sets and returns a default "html".
+     * If no html value set, method
+     * sets and returns a default html.
      *
      * @see getDefaultHtml()
      *
-     * @return mixed|null html or null if no html has been set
+     * @return mixed html or null if no html has been set
      */
-    public function getHtml()
+    public function getHtml(): mixed
     {
         if (!$this->hasHtml()) {
             $this->setHtml($this->getDefaultHtml());
@@ -52,9 +52,9 @@ trait HtmlTrait
     }
 
     /**
-     * Check if "html" has been set
+     * Check if html has been set
      *
-     * @return bool True if "html" has been set, false if not
+     * @return bool True if html has been set, false if not
      */
     public function hasHtml(): bool
     {
@@ -62,11 +62,11 @@ trait HtmlTrait
     }
 
     /**
-     * Get a default "html" value, if any is available
+     * Get a default html value, if any is available
      *
-     * @return mixed|null Default "html" value or null if no default value is available
+     * @return mixed Default html value or null if no default value is available
      */
-    public function getDefaultHtml()
+    public function getDefaultHtml(): mixed
     {
         return null;
     }

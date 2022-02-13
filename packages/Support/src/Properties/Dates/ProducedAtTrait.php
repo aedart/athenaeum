@@ -15,18 +15,18 @@ trait ProducedAtTrait
     /**
      * Date of when this component, entity or something was produced
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected ?\DateTime $producedAt = null;
+    protected \DateTimeInterface|null $producedAt = null;
 
     /**
      * Set produced at
      *
-     * @param \DateTime|null $date Date of when this component, entity or something was produced
+     * @param \DateTimeInterface|null $date Date of when this component, entity or something was produced
      *
      * @return self
      */
-    public function setProducedAt(?\DateTime $date)
+    public function setProducedAt(\DateTimeInterface|null $date): static
     {
         $this->producedAt = $date;
 
@@ -36,14 +36,14 @@ trait ProducedAtTrait
     /**
      * Get produced at
      *
-     * If no "produced at" value set, method
-     * sets and returns a default "produced at".
+     * If no produced at value set, method
+     * sets and returns a default produced at.
      *
      * @see getDefaultProducedAt()
      *
-     * @return \DateTime|null produced at or null if no produced at has been set
+     * @return \DateTimeInterface|null produced at or null if no produced at has been set
      */
-    public function getProducedAt(): ?\DateTime
+    public function getProducedAt(): \DateTimeInterface|null
     {
         if (!$this->hasProducedAt()) {
             $this->setProducedAt($this->getDefaultProducedAt());
@@ -52,9 +52,9 @@ trait ProducedAtTrait
     }
 
     /**
-     * Check if "produced at" has been set
+     * Check if produced at has been set
      *
-     * @return bool True if "produced at" has been set, false if not
+     * @return bool True if produced at has been set, false if not
      */
     public function hasProducedAt(): bool
     {
@@ -62,11 +62,11 @@ trait ProducedAtTrait
     }
 
     /**
-     * Get a default "produced at" value, if any is available
+     * Get a default produced at value, if any is available
      *
-     * @return \DateTime|null Default "produced at" value or null if no default value is available
+     * @return \DateTimeInterface|null Default produced at value or null if no default value is available
      */
-    public function getDefaultProducedAt(): ?\DateTime
+    public function getDefaultProducedAt(): \DateTimeInterface|null
     {
         return null;
     }

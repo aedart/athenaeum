@@ -1,17 +1,8 @@
 {
     "name": "aedart/athenaeum-console",
     "description": "Offers a way to register commands and schedules via configuration",
-    "keywords": [
-        "Athenaeum",
-        "Console",
-        "Command",
-        "Schedule"
-    ],
+    "keywords": ["Athenaeum", "Console", "Command", "Schedule"],
     "homepage": "https://aedart.github.io/athenaeum/",
-    "support": {
-        "issues": "https://github.com/aedart/athenaeum/issues",
-        "source": "https://github.com/aedart/athenaeum"
-    },
     "license": "BSD-3-Clause",
     "type": "library",
     "authors": [
@@ -21,12 +12,12 @@
         }
     ],
     "require": {
-        "php": ">=7.4.0",
-        "illuminate/cache": "^8.15",
-        "illuminate/console": "^8.15",
-        "dragonmantank/cron-expression": "^3.0",
+        "php": "^8.0.2",
         "aedart/athenaeum-contracts": "^5.28",
         "aedart/athenaeum-support": "^5.28"
+        "dragonmantank/cron-expression": "^3.3",
+        "illuminate/cache": "v9.0.1",
+        "illuminate/console": "v9.0.1"
     },
     "autoload": {
         "psr-4": {
@@ -36,11 +27,11 @@
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "5.28.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

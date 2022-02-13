@@ -20,7 +20,7 @@ trait NotificationFactoryTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $notificationFactory = null;
+    protected Factory|null $notificationFactory = null;
 
     /**
      * Set notification factory
@@ -29,7 +29,7 @@ trait NotificationFactoryTrait
      *
      * @return self
      */
-    public function setNotificationFactory(?Factory $factory)
+    public function setNotificationFactory(Factory|null $factory): static
     {
         $this->notificationFactory = $factory;
 
@@ -47,7 +47,7 @@ trait NotificationFactoryTrait
      *
      * @return Factory|null notification factory or null if none notification factory has been set
      */
-    public function getNotificationFactory(): ?Factory
+    public function getNotificationFactory(): Factory|null
     {
         if (!$this->hasNotificationFactory()) {
             $this->setNotificationFactory($this->getDefaultNotificationFactory());
@@ -70,7 +70,7 @@ trait NotificationFactoryTrait
      *
      * @return Factory|null A default notification factory value or Null if no default value is available
      */
-    public function getDefaultNotificationFactory(): ?Factory
+    public function getDefaultNotificationFactory(): Factory|null
     {
         return Notification::getFacadeRoot();
     }

@@ -24,11 +24,13 @@ class FailureWasReported extends BaseEvent implements FailureReported
     public Failure $failure;
 
     /**
-     * {@inheritDoc}
+     * Creates new instance of the failure that was reported event
      *
-     * @param Failure $failure The reported failure
+     * @param  State  $state
+     * @param  Failure  $failure The reported failure
+     * @param  Failure|null  $lastFailure  [optional]
      */
-    public function __construct(State $state, Failure $failure, ?Failure $lastFailure = null)
+    public function __construct(State $state, Failure $failure, Failure|null $lastFailure = null)
     {
         parent::__construct($state, $lastFailure);
 

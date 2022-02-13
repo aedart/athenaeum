@@ -4,6 +4,7 @@ namespace Aedart\Circuits\Failures;
 
 use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\Failures\Factory as FailureFactory;
+use DateTimeInterface;
 
 /**
  * Failure Factory
@@ -19,11 +20,12 @@ class Factory implements FailureFactory
      * @inheritDoc
      */
     public function make(
-        ?string $reason = null,
+        string|null $reason = null,
         array $context = [],
-        $reportedAt = null,
+        DateTimeInterface|string|null $reportedAt = null,
         int $totalFailures = 0
-    ): Failure {
+    ): Failure
+    {
         return $this->makeFromArray([
             'reason' => $reason,
             'context' => $context,

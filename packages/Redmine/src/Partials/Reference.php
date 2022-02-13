@@ -27,7 +27,7 @@ class Reference extends ArrayDto
      *
      * @return self
      */
-    public function setId($id = null)
+    public function setId(string|int|null $id = null): static
     {
         $this->properties['id'] = $id;
 
@@ -39,7 +39,7 @@ class Reference extends ArrayDto
      *
      * @return string|int|null
      */
-    public function getId()
+    public function getId(): string|int|null
     {
         return $this->properties['id'] ?? null;
     }

@@ -19,7 +19,7 @@ interface QueueAware
      *
      * @return self
      */
-    public function setQueue(?Queue $queue);
+    public function setQueue(Queue|null $queue): static;
 
     /**
      * Get queue
@@ -32,7 +32,7 @@ interface QueueAware
      *
      * @return Queue|null queue or null if none queue has been set
      */
-    public function getQueue(): ?Queue;
+    public function getQueue(): Queue|null;
 
     /**
      * Check if queue has been set
@@ -46,5 +46,5 @@ interface QueueAware
      *
      * @return Queue|null A default queue value or Null if no default value is available
      */
-    public function getDefaultQueue(): ?Queue;
+    public function getDefaultQueue(): Queue|null;
 }

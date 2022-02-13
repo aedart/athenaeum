@@ -17,7 +17,7 @@ trait RoleTrait
      *
      * @var string|null
      */
-    protected ?string $role = null;
+    protected string|null $role = null;
 
     /**
      * Set role
@@ -26,7 +26,7 @@ trait RoleTrait
      *
      * @return self
      */
-    public function setRole(?string $identifier)
+    public function setRole(string|null $identifier): static
     {
         $this->role = $identifier;
 
@@ -36,14 +36,14 @@ trait RoleTrait
     /**
      * Get role
      *
-     * If no "role" value set, method
-     * sets and returns a default "role".
+     * If no role value set, method
+     * sets and returns a default role.
      *
      * @see getDefaultRole()
      *
      * @return string|null role or null if no role has been set
      */
-    public function getRole(): ?string
+    public function getRole(): string|null
     {
         if (!$this->hasRole()) {
             $this->setRole($this->getDefaultRole());
@@ -52,9 +52,9 @@ trait RoleTrait
     }
 
     /**
-     * Check if "role" has been set
+     * Check if role has been set
      *
-     * @return bool True if "role" has been set, false if not
+     * @return bool True if role has been set, false if not
      */
     public function hasRole(): bool
     {
@@ -62,11 +62,11 @@ trait RoleTrait
     }
 
     /**
-     * Get a default "role" value, if any is available
+     * Get a default role value, if any is available
      *
-     * @return string|null Default "role" value or null if no default value is available
+     * @return string|null Default role value or null if no default value is available
      */
-    public function getDefaultRole(): ?string
+    public function getDefaultRole(): string|null
     {
         return null;
     }

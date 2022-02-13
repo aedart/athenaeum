@@ -17,7 +17,7 @@ trait DurationTrait
      *
      * @var float|null
      */
-    protected ?float $duration = null;
+    protected float|null $duration = null;
 
     /**
      * Set duration
@@ -26,7 +26,7 @@ trait DurationTrait
      *
      * @return self
      */
-    public function setDuration(?float $amount)
+    public function setDuration(float|null $amount): static
     {
         $this->duration = $amount;
 
@@ -36,14 +36,14 @@ trait DurationTrait
     /**
      * Get duration
      *
-     * If no "duration" value set, method
-     * sets and returns a default "duration".
+     * If no duration value set, method
+     * sets and returns a default duration.
      *
      * @see getDefaultDuration()
      *
      * @return float|null duration or null if no duration has been set
      */
-    public function getDuration(): ?float
+    public function getDuration(): float|null
     {
         if (!$this->hasDuration()) {
             $this->setDuration($this->getDefaultDuration());
@@ -52,9 +52,9 @@ trait DurationTrait
     }
 
     /**
-     * Check if "duration" has been set
+     * Check if duration has been set
      *
-     * @return bool True if "duration" has been set, false if not
+     * @return bool True if duration has been set, false if not
      */
     public function hasDuration(): bool
     {
@@ -62,11 +62,11 @@ trait DurationTrait
     }
 
     /**
-     * Get a default "duration" value, if any is available
+     * Get a default duration value, if any is available
      *
-     * @return float|null Default "duration" value or null if no default value is available
+     * @return float|null Default duration value or null if no default value is available
      */
-    public function getDefaultDuration(): ?float
+    public function getDefaultDuration(): float|null
     {
         return null;
     }

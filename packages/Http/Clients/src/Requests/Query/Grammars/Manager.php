@@ -38,7 +38,7 @@ class Manager implements
     /**
      * @inheritDoc
      */
-    public function profile(?string $profile = null, array $options = []): Grammar
+    public function profile(string|null $profile = null, array $options = []): Grammar
     {
         // Resolve requested profile name
         $profile = $this->resolveProfile($profile);

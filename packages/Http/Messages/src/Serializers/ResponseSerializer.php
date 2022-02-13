@@ -58,7 +58,7 @@ class ResponseSerializer extends BaseSerializer implements ResponseSerializerInt
     /**
      * @inheritDoc
      */
-    public function setHttpResponse(?ResponseInterface $response)
+    public function setHttpResponse(ResponseInterface|null $response): static
     {
         return $this->setHttpMessage($response);
     }
@@ -66,7 +66,7 @@ class ResponseSerializer extends BaseSerializer implements ResponseSerializerInt
     /**
      * @inheritDoc
      */
-    public function getHttpResponse(): ?ResponseInterface
+    public function getHttpResponse(): ResponseInterface|null
     {
         return $this->getHttpMessage();
     }
@@ -82,7 +82,7 @@ class ResponseSerializer extends BaseSerializer implements ResponseSerializerInt
     /**
      * @inheritDoc
      */
-    public function getDefaultHttpResponse(): ?ResponseInterface
+    public function getDefaultHttpResponse(): ResponseInterface|null
     {
         return $this->getDefaultHttpMessage();
     }

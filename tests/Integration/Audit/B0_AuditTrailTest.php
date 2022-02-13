@@ -60,11 +60,11 @@ class B0_AuditTrailTest extends AuditTestCase
      */
     public function recordsUpdateEvents()
     {
-        $description = $this->getFaker()->sentence;
+        $description = $this->getFaker()->sentence();
         $category = $this->makeCategory([ 'description' => $description ]);
         $category->save();
 
-        $newDescription = $this->getFaker()->sentence;
+        $newDescription = $this->getFaker()->sentence();
         $category->description = $newDescription;
         $category->save();
 
@@ -271,7 +271,7 @@ class B0_AuditTrailTest extends AuditTestCase
     public function canRecordCustomEvents()
     {
         $faker = $this->getFaker();
-        $description = $faker->sentence;
+        $description = $faker->sentence();
         $category = $this->makeCategory([ 'description' => $description ]);
         $category->save();
 

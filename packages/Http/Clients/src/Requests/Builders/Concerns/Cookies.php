@@ -7,6 +7,7 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Cookies\Cookie;
 use Aedart\Http\Clients\Exceptions\InvalidCookieFormat;
 use Aedart\Http\Cookies\SetCookie;
+use Throwable;
 
 /**
  * Concerns Cookies
@@ -35,8 +36,10 @@ trait Cookies
 
     /**
      * @inheritdoc
+     *
+     * @throws Throwable
      */
-    public function withCookie($cookie): Builder
+    public function withCookie(Cookie|array|callable $cookie): static
     {
         if (is_array($cookie)) {
             $cookie = $this->makeCookie($cookie);
@@ -58,8 +61,10 @@ trait Cookies
 
     /**
      * @inheritdoc
+     *
+     * @throws Throwable
      */
-    public function withCookies(array $cookies = []): Builder
+    public function withCookies(array $cookies = []): static
     {
         foreach ($cookies as $cookie) {
             $this->withCookie($cookie);
@@ -71,7 +76,7 @@ trait Cookies
     /**
      * @inheritdoc
      */
-    public function withoutCookie(string $name): Builder
+    public function withoutCookie(string $name): static
     {
         unset($this->cookies[$name]);
 
@@ -108,14 +113,18 @@ trait Cookies
 
     /**
      * @inheritdoc
+     *
+     * @throws Throwable
      */
-    public function addCookie(string $name, ?string $value = null): Builder
+    public function addCookie(string $name, string|null $value = null): static
     {
         return $this->withCookie([ 'name' => $name, 'value' => $value ]);
     }
 
     /**
      * @inheritdoc
+     *
+     * @throws Throwable
      */
     public function makeCookie(array $data = []): Cookie
     {
@@ -133,9 +142,11 @@ trait Cookies
     /**
      * Resolves a cookie from given callback
      *
-     * @param callable $callback New {@see Cookie} instance is given as callback argument
+     * @param  callable  $callback  New {@see Cookie} instance is given as callback argument
      *
      * @return Cookie
+     *
+     * @throws Throwable
      */
     protected function resolveCallbackCookie(callable $callback): Cookie
     {

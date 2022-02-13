@@ -46,7 +46,7 @@ class FieldFiltersTest extends FiltersTestCase
                 NumericFilter::class,
                 'id',
                 'gt',
-                $faker->randomDigitNotNull
+                $faker->randomDigitNotNull()
             ],
 
             'numeric (null)' => [

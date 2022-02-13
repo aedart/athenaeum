@@ -17,7 +17,7 @@ trait IpV4Trait
      *
      * @var string|null
      */
-    protected ?string $ipV4 = null;
+    protected string|null $ipV4 = null;
 
     /**
      * Set ip v4
@@ -26,7 +26,7 @@ trait IpV4Trait
      *
      * @return self
      */
-    public function setIpV4(?string $address)
+    public function setIpV4(string|null $address): static
     {
         $this->ipV4 = $address;
 
@@ -36,14 +36,14 @@ trait IpV4Trait
     /**
      * Get ip v4
      *
-     * If no "ip v4" value set, method
-     * sets and returns a default "ip v4".
+     * If no ip v4 value set, method
+     * sets and returns a default ip v4.
      *
      * @see getDefaultIpV4()
      *
      * @return string|null ip v4 or null if no ip v4 has been set
      */
-    public function getIpV4(): ?string
+    public function getIpV4(): string|null
     {
         if (!$this->hasIpV4()) {
             $this->setIpV4($this->getDefaultIpV4());
@@ -52,9 +52,9 @@ trait IpV4Trait
     }
 
     /**
-     * Check if "ip v4" has been set
+     * Check if ip v4 has been set
      *
-     * @return bool True if "ip v4" has been set, false if not
+     * @return bool True if ip v4 has been set, false if not
      */
     public function hasIpV4(): bool
     {
@@ -62,11 +62,11 @@ trait IpV4Trait
     }
 
     /**
-     * Get a default "ip v4" value, if any is available
+     * Get a default ip v4 value, if any is available
      *
-     * @return string|null Default "ip v4" value or null if no default value is available
+     * @return string|null Default ip v4 value or null if no default value is available
      */
-    public function getDefaultIpV4(): ?string
+    public function getDefaultIpV4(): string|null
     {
         return null;
     }

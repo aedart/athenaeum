@@ -121,7 +121,7 @@ class MethodHelperTest extends UnitTestCase
      */
     public function returnsValueIfNotCallable()
     {
-        $method = $this->faker->name;
+        $method = $this->faker->name();
 
         $result = MethodHelper::callOrReturn($method);
 

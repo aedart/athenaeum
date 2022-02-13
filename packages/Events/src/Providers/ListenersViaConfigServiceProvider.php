@@ -39,7 +39,7 @@ class ListenersViaConfigServiceProvider extends ServiceProvider
      *
      * @return self
      */
-    protected function registerEventListener()
+    protected function registerEventListener(): static
     {
         $list = $this->getConfig()->get('events.listeners', []);
         $dispatcher = $this->getDispatcher();
@@ -58,7 +58,7 @@ class ListenersViaConfigServiceProvider extends ServiceProvider
      *
      * @return self
      */
-    protected function registerSubscribers()
+    protected function registerSubscribers(): static
     {
         $subscribers = $this->getConfig()->get('events.subscribers', []);
         $dispatcher = $this->getDispatcher();
@@ -75,7 +75,7 @@ class ListenersViaConfigServiceProvider extends ServiceProvider
      *
      * @return self
      */
-    protected function publishConfiguration()
+    protected function publishConfiguration(): static
     {
         $this->publishes([
             __DIR__ . '/../../configs/events.php' => config_path('events.php')

@@ -151,7 +151,7 @@ class ODataGrammar extends BaseGrammar
     /**
      * @inheritdoc
      */
-    protected function resolveOperator($operator, string $field): string
+    protected function resolveOperator(mixed $operator, string $field): string
     {
         if (!is_string($operator)) {
             throw new UnableToBuildHttpQuery(sprintf('Expected string operator for %s, %s given', $field, gettype($operator)));
@@ -170,7 +170,7 @@ class ODataGrammar extends BaseGrammar
     /**
      * @inheritdoc
      */
-    protected function resolveValue($value)
+    protected function resolveValue(mixed $value): mixed
     {
         if (is_array($value)) {
             return '(' . $this->compileArray($value) . ')';

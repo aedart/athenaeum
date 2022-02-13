@@ -17,7 +17,7 @@ trait DiscountTrait
      *
      * @var string|null
      */
-    protected ?string $discount = null;
+    protected string|null $discount = null;
 
     /**
      * Set discount
@@ -26,7 +26,7 @@ trait DiscountTrait
      *
      * @return self
      */
-    public function setDiscount(?string $amount)
+    public function setDiscount(string|null $amount): static
     {
         $this->discount = $amount;
 
@@ -36,14 +36,14 @@ trait DiscountTrait
     /**
      * Get discount
      *
-     * If no "discount" value set, method
-     * sets and returns a default "discount".
+     * If no discount value set, method
+     * sets and returns a default discount.
      *
      * @see getDefaultDiscount()
      *
      * @return string|null discount or null if no discount has been set
      */
-    public function getDiscount(): ?string
+    public function getDiscount(): string|null
     {
         if (!$this->hasDiscount()) {
             $this->setDiscount($this->getDefaultDiscount());
@@ -52,9 +52,9 @@ trait DiscountTrait
     }
 
     /**
-     * Check if "discount" has been set
+     * Check if discount has been set
      *
-     * @return bool True if "discount" has been set, false if not
+     * @return bool True if discount has been set, false if not
      */
     public function hasDiscount(): bool
     {
@@ -62,11 +62,11 @@ trait DiscountTrait
     }
 
     /**
-     * Get a default "discount" value, if any is available
+     * Get a default discount value, if any is available
      *
-     * @return string|null Default "discount" value or null if no default value is available
+     * @return string|null Default discount value or null if no default value is available
      */
-    public function getDefaultDiscount(): ?string
+    public function getDefaultDiscount(): string|null
     {
         return null;
     }

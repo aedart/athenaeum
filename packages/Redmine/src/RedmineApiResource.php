@@ -11,6 +11,7 @@ use Aedart\Contracts\Redmine\ConnectionAware;
 use Aedart\Contracts\Redmine\Creatable;
 use Aedart\Contracts\Redmine\Deletable;
 use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
+use Aedart\Contracts\Redmine\Exceptions\RedmineException as RedmineExceptionInterface;
 use Aedart\Contracts\Redmine\Listable;
 use Aedart\Contracts\Redmine\PaginatedResults as PaginatedResultsInterface;
 use Aedart\Contracts\Redmine\TraversableResults as TraversableResultsInterface;
@@ -112,7 +113,7 @@ abstract class RedmineApiResource extends ArrayDto implements
      *
      * @throws Throwable
      */
-    public function __construct(array $data = [], $connection = null)
+    public function __construct(array $data = [], string|ConnectionInterface|null $connection = null)
     {
         $this->setConnection(
             Connection::resolve($connection)
@@ -124,7 +125,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public static function make(array $data = [], $connection = null)
+    public static function make(array $data = [], string|ConnectionInterface|null $connection = null): static
     {
         return new static($data, $connection);
     }
@@ -144,8 +145,9 @@ abstract class RedmineApiResource extends ArrayDto implements
         int $limit = 10,
         int $offset = 0,
         array $include = [],
-        $connection = null
-    ): PaginatedResultsInterface {
+        string|ConnectionInterface|null $connection = null
+    ): PaginatedResultsInterface
+    {
         return static::fetchMultiple(function (Builder $request, ApiResource $resource) use ($include) {
             return $resource->applyIncludes($include, $request);
         }, $limit, $offset, $connection);
@@ -154,7 +156,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public static function find($id, array $include = [], $connection = null)
+    public static function find(string|int $id, array $include = [], string|ConnectionInterface|null $connection = null): static|null
     {
         try {
             return static::findOrFail($id, $include, $connection);
@@ -167,7 +169,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public static function findOrFail($id, array $include = [], $connection = null)
+    public static function findOrFail(string|int $id, array $include = [], string|ConnectionInterface|null $connection = null): static
     {
         return static::fetch($id, function (Builder $request, ApiResource $resource) use ($include) {
             return $resource->applyIncludes($include, $request);
@@ -177,7 +179,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public static function fetch($id, ?callable $filters = null, $connection = null)
+    public static function fetch(string|int $id, callable|null $filters = null, string|ConnectionInterface|null $connection = null): static
     {
         $resource = static::make([], $connection);
 
@@ -194,11 +196,12 @@ abstract class RedmineApiResource extends ArrayDto implements
      * @inheritdoc
      */
     public static function fetchMultiple(
-        ?callable $filters = null,
+        callable|null $filters = null,
         int $limit = 10,
         int $offset = 0,
-        $connection = null
-    ): PaginatedResultsInterface {
+        string|ConnectionInterface|null $connection = null
+    ): PaginatedResultsInterface
+    {
         $resource = static::make([], $connection);
 
         return $resource->paginate(
@@ -209,27 +212,9 @@ abstract class RedmineApiResource extends ArrayDto implements
     }
 
     /**
-     * Fetch all resources
-     *
-     * Method returns a {@see TraversableResultsInterface} that automatically will perform
-     * paginated requests, as needed, when looping through the results. This is handy, when
-     * you do not wish to manually paginate through available result sets.
-     *
-     * **WARNING**: _Depending on amount of available results and "pool" size, this method
-     * can decrease performance a lot, due to many API requests.
-     * You SHOULD NOT set the pool size too small, if you wish to limit the amount of requests!_
-     *
-     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
-     *                               The callback MUST return a valid {@see Builder}
-     * @param int $size [optional] The "pool" size - maximum limit of results to fetch per request
-     * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
-     *
-     * @return TraversableResultsInterface<static>
-     *
-     * @throws Throwable
-     * @throws \Aedart\Contracts\Redmine\Exceptions\RedmineException
+     * @inheritdoc
      */
-    public static function all(?callable $filters = null, int $size = 10, $connection = null): TraversableResultsInterface
+    public static function all(callable|null $filters = null, int $size = 10, string|ConnectionInterface|null $connection = null): TraversableResultsInterface
     {
         $resource = static::make([], $connection);
 
@@ -262,7 +247,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public static function create(array $data, array $include = [], $connection = null)
+    public static function create(array $data, array $include = [], string|ConnectionInterface|null $connection = null): static
     {
         $resource = static::make($data, $connection);
 
@@ -278,7 +263,7 @@ abstract class RedmineApiResource extends ArrayDto implements
      */
     public function save(bool $reload = false): bool
     {
-        // Create if does not exist
+        // Create resource if it does not exist
         if (!$this->exists()) {
             return $this->performCreate();
         }
@@ -365,7 +350,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public function withIncludes(array $includes = [])
+    public function withIncludes(array $includes = []): static
     {
         $this->pendingIncludes = array_merge(
             $this->pendingIncludes,
@@ -378,7 +363,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public function applyFiltersCallback(?callable $filters = null, ?Builder $request = null): Builder
+    public function applyFiltersCallback(callable|null $filters = null, Builder|null $request = null): Builder
     {
         // Resolve the request builder
         $request = $request ?? $this->request();
@@ -402,7 +387,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public function applyIncludes(array $include = [], ?Builder $request = null): Builder
+    public function applyIncludes(array $include = [], Builder|null $request = null): Builder
     {
         // Resolve the request builder
         $request = $request ?? $this->request();
@@ -426,7 +411,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public function prepareNextRequest($request): Builder
+    public function prepareNextRequest(Client|Builder $request): Builder
     {
         // Add general response expectations, if required
         if ($this->enableExpectations) {
@@ -461,7 +446,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public function populate(array $data = []): void
+    public function populate(array $data = []): static
     {
         parent::populate($data);
 
@@ -472,16 +457,16 @@ abstract class RedmineApiResource extends ArrayDto implements
                 $property->setConnection($this->getConnection());
             }
         }
+
+        return $this;
     }
 
     /**
      * @inheritdoc
      */
-    public function fill(array $data = [])
+    public function fill(array $data = []): static
     {
-        $this->populate($data);
-
-        return $this;
+        return $this->populate($data);
     }
 
     /**
@@ -508,7 +493,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public function id()
+    public function id(): string|int|null
     {
         $key = $this->keyName();
 
@@ -528,7 +513,7 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * @inheritdoc
      */
-    public function decode(ResponseInterface $response, ?string $extract = null): array
+    public function decode(ResponseInterface $response, string|null $extract = null): array
     {
         // Get response body - abort if it's empty
         $content = $response->getBody()->getContents();
@@ -559,7 +544,8 @@ abstract class RedmineApiResource extends ArrayDto implements
      *
      * @return array Response payload
      *
-     * @throws JsonException
+     * @throws JsonException|
+     * @throws RedmineExceptionInterface
      */
     public function decodeSingle(ResponseInterface $response): array
     {
@@ -574,6 +560,7 @@ abstract class RedmineApiResource extends ArrayDto implements
      * @return array Response payload, containing multiple resources
      *
      * @throws JsonException
+     * @throws RedmineExceptionInterface
      */
     public function decodeMultiple(ResponseInterface $response): array
     {
@@ -590,7 +577,7 @@ abstract class RedmineApiResource extends ArrayDto implements
      *
      * @throws RedmineException When unable to extract from payload, e.g. key does not exist
      */
-    public function extractFromPayload(string $key, array $payload)
+    public function extractFromPayload(string $key, array $payload): mixed
     {
         if (!isset($payload[$key])) {
             throw new RedmineException(sprintf('Unable to extract "%s" from response payload. Attribute does not exist', $key));
@@ -609,7 +596,7 @@ abstract class RedmineApiResource extends ArrayDto implements
      *
      * @return mixed
      */
-    public function extractOrDefault(string $key, array $payload, $default = null)
+    public function extractOrDefault(string $key, array $payload, mixed $default = null): mixed
     {
         if (!isset($payload[$key])) {
             return $default;
@@ -709,7 +696,7 @@ abstract class RedmineApiResource extends ArrayDto implements
      *
      * @return mixed
      */
-    public function __call(string $name, $arguments)
+    public function __call(string $name, array $arguments): mixed
     {
         return $this->forwardCallTo($this->request(), $name, $arguments);
     }
@@ -717,12 +704,13 @@ abstract class RedmineApiResource extends ArrayDto implements
     /**
      * Forward static calls to the Http Client's request builder
      *
-     * @param string $name method name
-     * @param mixed $arguments
+     * @param  string  $name  method name
+     * @param  mixed  $arguments
      *
      * @return mixed
+     * @throws Throwable
      */
-    public static function __callStatic(string $name, $arguments)
+    public static function __callStatic(string $name, array $arguments): mixed
     {
         return static::make()->$name(...$arguments);
     }
@@ -739,6 +727,7 @@ abstract class RedmineApiResource extends ArrayDto implements
      * @throws UnprocessableEntity
      * @throws UnexpectedResponse
      * @throws JsonException
+     * @throws RedmineExceptionInterface
      */
     protected function performCreate(): bool
     {
@@ -774,6 +763,7 @@ abstract class RedmineApiResource extends ArrayDto implements
      * @throws NotFound
      * @throws UnexpectedResponse
      * @throws JsonException
+     * @throws RedmineExceptionInterface
      */
     protected function performUpdate(): bool
     {
@@ -842,7 +832,7 @@ abstract class RedmineApiResource extends ArrayDto implements
      *
      * @return array
      */
-    protected function formatDateFields(array $dateFields, array $data, string $format = 'Y-n-d'): array
+    protected function formatDateFields(array $dateFields, array $data, string $format = 'Y-m-d'): array
     {
         foreach ($data as $property => $value) {
             if (in_array($property, $dateFields) && $value instanceof Carbon) {

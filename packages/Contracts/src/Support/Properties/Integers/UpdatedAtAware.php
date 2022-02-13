@@ -19,31 +19,31 @@ interface UpdatedAtAware
      *
      * @return self
      */
-    public function setUpdatedAt(?int $date);
+    public function setUpdatedAt(int|null $date): static;
 
     /**
      * Get updated at
      *
-     * If no "updated at" value set, method
-     * sets and returns a default "updated at".
+     * If no updated at value set, method
+     * sets and returns a default updated at.
      *
      * @see getDefaultUpdatedAt()
      *
      * @return int|null updated at or null if no updated at has been set
      */
-    public function getUpdatedAt(): ?int;
+    public function getUpdatedAt(): int|null;
 
     /**
-     * Check if "updated at" has been set
+     * Check if updated at has been set
      *
-     * @return bool True if "updated at" has been set, false if not
+     * @return bool True if updated at has been set, false if not
      */
     public function hasUpdatedAt(): bool;
 
     /**
-     * Get a default "updated at" value, if any is available
+     * Get a default updated at value, if any is available
      *
-     * @return int|null Default "updated at" value or null if no default value is available
+     * @return int|null Default updated at value or null if no default value is available
      */
-    public function getDefaultUpdatedAt(): ?int;
+    public function getDefaultUpdatedAt(): int|null;
 }

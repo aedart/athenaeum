@@ -13,20 +13,20 @@ namespace Aedart\Support\Properties\Strings;
 trait TextTrait
 {
     /**
-     * The full text content for something, e.g. an article&#039;s body text
+     * The full text content for something, e.g. an article&amp;#039;s body text
      *
      * @var string|null
      */
-    protected ?string $text = null;
+    protected string|null $text = null;
 
     /**
      * Set text
      *
-     * @param string|null $text The full text content for something, e.g. an article&#039;s body text
+     * @param string|null $text The full text content for something, e.g. an article&amp;#039;s body text
      *
      * @return self
      */
-    public function setText(?string $text)
+    public function setText(string|null $text): static
     {
         $this->text = $text;
 
@@ -36,14 +36,14 @@ trait TextTrait
     /**
      * Get text
      *
-     * If no "text" value set, method
-     * sets and returns a default "text".
+     * If no text value set, method
+     * sets and returns a default text.
      *
      * @see getDefaultText()
      *
      * @return string|null text or null if no text has been set
      */
-    public function getText(): ?string
+    public function getText(): string|null
     {
         if (!$this->hasText()) {
             $this->setText($this->getDefaultText());
@@ -52,9 +52,9 @@ trait TextTrait
     }
 
     /**
-     * Check if "text" has been set
+     * Check if text has been set
      *
-     * @return bool True if "text" has been set, false if not
+     * @return bool True if text has been set, false if not
      */
     public function hasText(): bool
     {
@@ -62,11 +62,11 @@ trait TextTrait
     }
 
     /**
-     * Get a default "text" value, if any is available
+     * Get a default text value, if any is available
      *
-     * @return string|null Default "text" value or null if no default value is available
+     * @return string|null Default text value or null if no default value is available
      */
-    public function getDefaultText(): ?string
+    public function getDefaultText(): string|null
     {
         return null;
     }

@@ -26,7 +26,7 @@ class RoleModelTest extends AclTestCase
     {
         $faker = $this->getFaker();
         $slug = $faker->slug(2);
-        $name = $faker->name;
+        $name = $faker->name();
         $desc = $faker->text(20);
 
         $role = $this->createRole([

@@ -25,7 +25,7 @@ class LaravelExceptionHandler implements ExceptionHandler
      *
      * @var CoreExceptionHandler|null
      */
-    protected ?CoreExceptionHandler $coreHandler = null;
+    protected CoreExceptionHandler|null $coreHandler = null;
 
     /**
      * @inheritdoc

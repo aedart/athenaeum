@@ -39,11 +39,11 @@ trait ProjectDependentResource
      * @throws JsonException
      */
     public static function fetchForProject(
-        $project,
-        ?callable $filters = null,
+        int|string|Project $project,
+        callable|null $filters = null,
         int $limit = 10,
         int $offset = 0,
-        $connection = null
+        string|Connection|null $connection = null
     ): PaginatedResultsInterface {
         $endpoint = static::projectRelatedEndpoint($project);
 
@@ -69,7 +69,7 @@ trait ProjectDependentResource
      * @throws JsonException
      * @throws Throwable
      */
-    public static function createForProject($project, array $data, $connection = null)
+    public static function createForProject(int|string|Project $project, array $data, string|Connection|null $connection = null): static
     {
         $endpoint = static::projectRelatedEndpoint($project);
         $resource = static::make([], $connection);
@@ -101,7 +101,7 @@ trait ProjectDependentResource
      * @throws RedmineException
      * @throws Throwable
      */
-    public static function projectRelatedEndpoint($project): string
+    public static function projectRelatedEndpoint(int|string|Project $project): string
     {
         $id = $project;
         if ($project instanceof ApiResource) {

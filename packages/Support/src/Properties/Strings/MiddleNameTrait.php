@@ -17,7 +17,7 @@ trait MiddleNameTrait
      *
      * @var string|null
      */
-    protected ?string $middleName = null;
+    protected string|null $middleName = null;
 
     /**
      * Set middle name
@@ -26,7 +26,7 @@ trait MiddleNameTrait
      *
      * @return self
      */
-    public function setMiddleName(?string $name)
+    public function setMiddleName(string|null $name): static
     {
         $this->middleName = $name;
 
@@ -36,14 +36,14 @@ trait MiddleNameTrait
     /**
      * Get middle name
      *
-     * If no "middle name" value set, method
-     * sets and returns a default "middle name".
+     * If no middle name value set, method
+     * sets and returns a default middle name.
      *
      * @see getDefaultMiddleName()
      *
      * @return string|null middle name or null if no middle name has been set
      */
-    public function getMiddleName(): ?string
+    public function getMiddleName(): string|null
     {
         if (!$this->hasMiddleName()) {
             $this->setMiddleName($this->getDefaultMiddleName());
@@ -52,9 +52,9 @@ trait MiddleNameTrait
     }
 
     /**
-     * Check if "middle name" has been set
+     * Check if middle name has been set
      *
-     * @return bool True if "middle name" has been set, false if not
+     * @return bool True if middle name has been set, false if not
      */
     public function hasMiddleName(): bool
     {
@@ -62,11 +62,11 @@ trait MiddleNameTrait
     }
 
     /**
-     * Get a default "middle name" value, if any is available
+     * Get a default middle name value, if any is available
      *
-     * @return string|null Default "middle name" value or null if no default value is available
+     * @return string|null Default middle name value or null if no default value is available
      */
-    public function getDefaultMiddleName(): ?string
+    public function getDefaultMiddleName(): string|null
     {
         return null;
     }

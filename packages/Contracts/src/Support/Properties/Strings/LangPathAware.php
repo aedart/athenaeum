@@ -19,31 +19,31 @@ interface LangPathAware
      *
      * @return self
      */
-    public function setLangPath(?string $path);
+    public function setLangPath(string|null $path): static;
 
     /**
      * Get lang path
      *
-     * If no "lang path" value set, method
-     * sets and returns a default "lang path".
+     * If no lang path value set, method
+     * sets and returns a default lang path.
      *
      * @see getDefaultLangPath()
      *
      * @return string|null lang path or null if no lang path has been set
      */
-    public function getLangPath(): ?string;
+    public function getLangPath(): string|null;
 
     /**
-     * Check if "lang path" has been set
+     * Check if lang path has been set
      *
-     * @return bool True if "lang path" has been set, false if not
+     * @return bool True if lang path has been set, false if not
      */
     public function hasLangPath(): bool;
 
     /**
-     * Get a default "lang path" value, if any is available
+     * Get a default lang path value, if any is available
      *
-     * @return string|null Default "lang path" value or null if no default value is available
+     * @return string|null Default lang path value or null if no default value is available
      */
-    public function getDefaultLangPath(): ?string;
+    public function getDefaultLangPath(): string|null;
 }

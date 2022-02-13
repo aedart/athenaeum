@@ -1,13 +1,7 @@
 {
     "name": "aedart/athenaeum-audit",
     "description": "Audit trail package for Laravel Eloquent",
-    "keywords": [
-        "Athenaeum",
-        "Audit Trail",
-        "Audit Log",
-        "History",
-        "Eloquent"
-    ],
+    "keywords": ["Athenaeum", "Audit Trail", "Audit Log", "History", "Eloquent"],
     "homepage": "https://aedart.github.io/athenaeum/",
     "support": {
         "issues": "https://github.com/aedart/athenaeum/issues",
@@ -22,7 +16,7 @@
         }
     ],
     "require": {
-        "php": ">=7.4.0",
+        "php": "^8.0.2",
         "aedart/athenaeum-contracts": "^5.28",
         "aedart/athenaeum-database": "^5.28",
         "aedart/athenaeum-support": "^5.28",
@@ -36,11 +30,11 @@
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "5.28.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

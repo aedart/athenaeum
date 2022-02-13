@@ -39,7 +39,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
      *
      * @var mixed
      */
-    protected $value;
+    protected mixed $value;
 
     /**
      * The logical operator
@@ -61,7 +61,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     public function __construct(
         string $field,
         string $operator = '=',
-        $value = null,
+        mixed $value = null,
         string $logical = FieldCriteria::AND
     ) {
         $this
@@ -77,16 +77,17 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     public static function make(
         string $field,
         string $operator = '=',
-        $value = null,
+        mixed $value = null,
         string $logical = FieldCriteria::AND
-    ) {
+    ): static
+    {
         return new static($field, $operator, $value, $logical);
     }
 
     /**
      * @inheritDoc
      */
-    public function setField(string $field)
+    public function setField(string $field): static
     {
         $this->assertField($field);
 
@@ -114,7 +115,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     /**
      * @inheritDoc
      */
-    public function setOperator(string $operator)
+    public function setOperator(string $operator): static
     {
         $this->assertOperator($operator, $this->allowedOperators());
 
@@ -142,7 +143,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     /**
      * @inheritDoc
      */
-    public function setValue($value)
+    public function setValue(mixed $value): static
     {
         $this->assertValue($value);
 
@@ -154,7 +155,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     /**
      * @inheritDoc
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
@@ -162,7 +163,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     /**
      * @inheritDoc
      */
-    public function value()
+    public function value(): mixed
     {
         return $this->getValue();
     }
@@ -170,7 +171,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     /**
      * @inheritDoc
      */
-    public function setLogical(string $operator = self::AND)
+    public function setLogical(string $operator = self::AND): static
     {
         $this->assertOperator($operator, $this->allowedLogicalOperators());
 
@@ -265,7 +266,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
      *
      * @throws FilterException
      */
-    protected function assertValue($value)
+    protected function assertValue(mixed $value)
     {
         // N/A - by default no value assertion is done here.
         // Overwrite this method, if you wish to assert value,

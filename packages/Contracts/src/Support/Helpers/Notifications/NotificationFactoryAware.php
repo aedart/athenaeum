@@ -19,7 +19,7 @@ interface NotificationFactoryAware
      *
      * @return self
      */
-    public function setNotificationFactory(?Factory $factory);
+    public function setNotificationFactory(Factory|null $factory): static;
 
     /**
      * Get notification factory
@@ -32,7 +32,7 @@ interface NotificationFactoryAware
      *
      * @return Factory|null notification factory or null if none notification factory has been set
      */
-    public function getNotificationFactory(): ?Factory;
+    public function getNotificationFactory(): Factory|null;
 
     /**
      * Check if notification factory has been set
@@ -46,5 +46,5 @@ interface NotificationFactoryAware
      *
      * @return Factory|null A default notification factory value or Null if no default value is available
      */
-    public function getDefaultNotificationFactory(): ?Factory;
+    public function getDefaultNotificationFactory(): Factory|null;
 }

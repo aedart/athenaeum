@@ -19,7 +19,7 @@ interface StateFactoryAware
      *
      * @return self
      */
-    public function setStateFactory(?Factory $factory);
+    public function setStateFactory(Factory|null $factory): static;
 
     /**
      * Get state factory
@@ -30,7 +30,7 @@ interface StateFactoryAware
      *
      * @return Factory|null state factory or null if none state factory has been set
      */
-    public function getStateFactory(): ?Factory;
+    public function getStateFactory(): Factory|null;
 
     /**
      * Check if state factory has been set
@@ -44,5 +44,5 @@ interface StateFactoryAware
      *
      * @return Factory|null A default state factory value or Null if no default value is available
      */
-    public function getDefaultStateFactory(): ?Factory;
+    public function getDefaultStateFactory(): Factory|null;
 }

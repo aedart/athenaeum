@@ -17,7 +17,7 @@ trait Ean13Trait
      *
      * @var string|null
      */
-    protected ?string $ean13 = null;
+    protected string|null $ean13 = null;
 
     /**
      * Set ean13
@@ -26,7 +26,7 @@ trait Ean13Trait
      *
      * @return self
      */
-    public function setEan13(?string $ean13)
+    public function setEan13(string|null $ean13): static
     {
         $this->ean13 = $ean13;
 
@@ -36,14 +36,14 @@ trait Ean13Trait
     /**
      * Get ean13
      *
-     * If no "ean13" value set, method
-     * sets and returns a default "ean13".
+     * If no ean13 value set, method
+     * sets and returns a default ean13.
      *
      * @see getDefaultEan13()
      *
      * @return string|null ean13 or null if no ean13 has been set
      */
-    public function getEan13(): ?string
+    public function getEan13(): string|null
     {
         if (!$this->hasEan13()) {
             $this->setEan13($this->getDefaultEan13());
@@ -52,9 +52,9 @@ trait Ean13Trait
     }
 
     /**
-     * Check if "ean13" has been set
+     * Check if ean13 has been set
      *
-     * @return bool True if "ean13" has been set, false if not
+     * @return bool True if ean13 has been set, false if not
      */
     public function hasEan13(): bool
     {
@@ -62,11 +62,11 @@ trait Ean13Trait
     }
 
     /**
-     * Get a default "ean13" value, if any is available
+     * Get a default ean13 value, if any is available
      *
-     * @return string|null Default "ean13" value or null if no default value is available
+     * @return string|null Default ean13 value or null if no default value is available
      */
-    public function getDefaultEan13(): ?string
+    public function getDefaultEan13(): string|null
     {
         return null;
     }

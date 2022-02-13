@@ -20,7 +20,7 @@ trait RegistrarTrait
      *
      * @var Registrar|null
      */
-    protected ?Registrar $registrar = null;
+    protected Registrar|null $registrar = null;
 
     /**
      * Set registrar
@@ -29,7 +29,7 @@ trait RegistrarTrait
      *
      * @return self
      */
-    public function setRegistrar(?Registrar $registrar)
+    public function setRegistrar(Registrar|null $registrar): static
     {
         $this->registrar = $registrar;
 
@@ -45,7 +45,7 @@ trait RegistrarTrait
      *
      * @return Registrar|null registrar or null if none registrar has been set
      */
-    public function getRegistrar(): ?Registrar
+    public function getRegistrar(): Registrar|null
     {
         if (!$this->hasRegistrar()) {
             $this->setRegistrar($this->getDefaultRegistrar());
@@ -68,7 +68,7 @@ trait RegistrarTrait
      *
      * @return Registrar|null A default registrar value or Null if no default value is available
      */
-    public function getDefaultRegistrar(): ?Registrar
+    public function getDefaultRegistrar(): Registrar|null
     {
         return IoCFacade::tryMake(Registrar::class);
     }

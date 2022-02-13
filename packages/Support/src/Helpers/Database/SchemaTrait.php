@@ -21,7 +21,7 @@ trait SchemaTrait
      *
      * @var Builder|null
      */
-    protected ?Builder $schema = null;
+    protected Builder|null $schema = null;
 
     /**
      * Set schema
@@ -30,7 +30,7 @@ trait SchemaTrait
      *
      * @return self
      */
-    public function setSchema(?Builder $builder)
+    public function setSchema(Builder|null $builder): static
     {
         $this->schema = $builder;
 
@@ -48,7 +48,7 @@ trait SchemaTrait
      *
      * @return Builder|null schema or null if none schema has been set
      */
-    public function getSchema(): ?Builder
+    public function getSchema(): Builder|null
     {
         if (!$this->hasSchema()) {
             $this->setSchema($this->getDefaultSchema());
@@ -71,7 +71,7 @@ trait SchemaTrait
      *
      * @return Builder|null A default schema value or Null if no default value is available
      */
-    public function getDefaultSchema(): ?Builder
+    public function getDefaultSchema(): Builder|null
     {
         $manager = DB::getFacadeRoot();
         if (isset($manager) && !is_null($manager->connection())) {

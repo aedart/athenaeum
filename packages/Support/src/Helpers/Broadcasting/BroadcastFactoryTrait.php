@@ -20,7 +20,7 @@ trait BroadcastFactoryTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $broadcastFactory = null;
+    protected Factory|null $broadcastFactory = null;
 
     /**
      * Set broadcast factory
@@ -29,7 +29,7 @@ trait BroadcastFactoryTrait
      *
      * @return self
      */
-    public function setBroadcastFactory(?Factory $factory)
+    public function setBroadcastFactory(Factory|null $factory): static
     {
         $this->broadcastFactory = $factory;
 
@@ -47,7 +47,7 @@ trait BroadcastFactoryTrait
      *
      * @return Factory|null broadcast factory or null if none broadcast factory has been set
      */
-    public function getBroadcastFactory(): ?Factory
+    public function getBroadcastFactory(): Factory|null
     {
         if (!$this->hasBroadcastFactory()) {
             $this->setBroadcastFactory($this->getDefaultBroadcastFactory());
@@ -70,7 +70,7 @@ trait BroadcastFactoryTrait
      *
      * @return Factory|null A default broadcast factory value or Null if no default value is available
      */
-    public function getDefaultBroadcastFactory(): ?Factory
+    public function getDefaultBroadcastFactory(): Factory|null
     {
         return Broadcast::getFacadeRoot();
     }

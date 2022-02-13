@@ -4,12 +4,17 @@ namespace Aedart\Redmine\Relations;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Redmine\ApiResource;
+use Aedart\Contracts\Redmine\Exceptions\RedmineException as RedmineExceptionInterface;
+use Aedart\Contracts\Redmine\TraversableResults;
 use Aedart\Redmine\Exceptions\RelationException;
 use Aedart\Utils\Str;
 use ReflectionClass;
+use Throwable;
 
 /**
  * Has Many Resources Relation
+ *
+ * @template T
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Redmine\Relations
@@ -29,7 +34,7 @@ class HasMany extends ResourceRelation
      *
      * @var string|int|null
      */
-    protected $ownKeyValue = null;
+    protected string|int|null $ownKeyValue = null;
 
     /**
      * Pagination limit
@@ -46,9 +51,14 @@ class HasMany extends ResourceRelation
     protected int $offset = 0;
 
     /**
-     * @inheritDoc
+     * Creates new has many resource relation instance
+     *
+     * @param  ApiResource  $parent
+     * @param  string|ApiResource  $related Class path or Api resource instance
+     * @param  string|null  $filterKey  [optional] name of the filtering key to be applied
+     *                                  when obtaining the related resources
      */
-    public function __construct(ApiResource $parent, $related, ?string $filterKey = null)
+    public function __construct(ApiResource $parent, string|ApiResource $related, string|null $filterKey = null)
     {
         parent::__construct($parent, $related);
 
@@ -81,13 +91,45 @@ class HasMany extends ResourceRelation
     }
 
     /**
+     * Fetch all resources
+     *
+     * @see \Aedart\Contracts\Redmine\ApiResource::all
+     *
+     * @param int $size [optional] The "pool" size - maximum limit of results to fetch per request
+     *
+     * @return TraversableResults<T>
+     *
+     * @throws RedmineExceptionInterface
+     * @throws Throwable
+     */
+    public function fetchAll(int $size = 10): TraversableResults
+    {
+        // Resolve the own key value - or fail if no value obtained
+        $value = $this->key();
+        if (!isset($value)) {
+            throw new RelationException('Unable to fetch relation, own key (parent resource primary key) could not be resolved or was not specified');
+        }
+
+        // Build the constraint filter and add it to the filters
+        $this->filter(
+            $this->buildConstraintFilter($this->getFilterKey(), $value)
+        );
+
+        return $this->related()::all(
+            $this->wrapFilters(),
+            $size,
+            $this->getConnection()
+        );
+    }
+
+    /**
      * Set the max. amount of results to be returned
      *
      * @param int $limit [optional]
      *
      * @return self
      */
-    public function limit(int $limit = 10)
+    public function limit(int $limit = 10): static
     {
         $this->limit = $limit;
 
@@ -111,7 +153,7 @@ class HasMany extends ResourceRelation
      *
      * @return self
      */
-    public function offset(int $offset = 0)
+    public function offset(int $offset = 0): static
     {
         $this->offset = $offset;
 
@@ -135,7 +177,7 @@ class HasMany extends ResourceRelation
      *
      * @return self
      */
-    public function ownKey($value = null)
+    public function ownKey(string|int|null $value = null): static
     {
         $this->ownKeyValue = $value;
 
@@ -150,7 +192,7 @@ class HasMany extends ResourceRelation
      *
      * @return int|string|null
      */
-    public function key()
+    public function key(): int|string|null
     {
         if (!isset($this->ownKeyValue)) {
             $this->ownKey($this->parent()->id());
@@ -167,7 +209,7 @@ class HasMany extends ResourceRelation
      *
      * @return self
      */
-    public function filterKey(?string $filterKey = null)
+    public function filterKey(string|null $filterKey = null): static
     {
         $this->filterKey = $filterKey;
 
@@ -214,7 +256,7 @@ class HasMany extends ResourceRelation
      *
      * @return callable
      */
-    public function buildConstraintFilter(string $key, $value): callable
+    public function buildConstraintFilter(string $key, string|int $value): callable
     {
         return function (Builder $request) use ($key, $value) {
             return $request->where($key, $value);

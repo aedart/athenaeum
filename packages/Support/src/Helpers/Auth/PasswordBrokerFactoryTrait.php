@@ -20,7 +20,7 @@ trait PasswordBrokerFactoryTrait
      *
      * @var PasswordBrokerFactory|null
      */
-    protected ?PasswordBrokerFactory $passwordBrokerFactory = null;
+    protected PasswordBrokerFactory|null $passwordBrokerFactory = null;
 
     /**
      * Set password broker factory
@@ -29,7 +29,7 @@ trait PasswordBrokerFactoryTrait
      *
      * @return self
      */
-    public function setPasswordBrokerFactory(?PasswordBrokerFactory $factory)
+    public function setPasswordBrokerFactory(PasswordBrokerFactory|null $factory): static
     {
         $this->passwordBrokerFactory = $factory;
 
@@ -47,7 +47,7 @@ trait PasswordBrokerFactoryTrait
      *
      * @return PasswordBrokerFactory|null password broker factory or null if none password broker factory has been set
      */
-    public function getPasswordBrokerFactory(): ?PasswordBrokerFactory
+    public function getPasswordBrokerFactory(): PasswordBrokerFactory|null
     {
         if (!$this->hasPasswordBrokerFactory()) {
             $this->setPasswordBrokerFactory($this->getDefaultPasswordBrokerFactory());
@@ -70,7 +70,7 @@ trait PasswordBrokerFactoryTrait
      *
      * @return PasswordBrokerFactory|null A default password broker factory value or Null if no default value is available
      */
-    public function getDefaultPasswordBrokerFactory(): ?PasswordBrokerFactory
+    public function getDefaultPasswordBrokerFactory(): PasswordBrokerFactory|null
     {
         return Password::getFacadeRoot();
     }

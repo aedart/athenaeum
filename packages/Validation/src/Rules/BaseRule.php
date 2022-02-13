@@ -40,7 +40,7 @@ abstract class BaseRule implements
      *
      * @return string
      */
-    protected function trans($key, array $replace = [], $locale = null): string
+    protected function trans(string $key, array $replace = [], string|null $locale = null): string
     {
         // Vendor prefix key
         $key = "athenaeum-validation::messages.{$key}";

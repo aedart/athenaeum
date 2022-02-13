@@ -19,7 +19,7 @@ interface HttpResponseAware
      *
      * @return self
      */
-    public function setHttpResponse(?ResponseInterface $response);
+    public function setHttpResponse(ResponseInterface|null $response): static;
 
     /**
      * Get http response
@@ -30,7 +30,7 @@ interface HttpResponseAware
      *
      * @return ResponseInterface|null http response or null if none http response has been set
      */
-    public function getHttpResponse(): ?ResponseInterface;
+    public function getHttpResponse(): ResponseInterface|null;
 
     /**
      * Check if http response has been set
@@ -44,5 +44,5 @@ interface HttpResponseAware
      *
      * @return ResponseInterface|null A default http response value or Null if no default value is available
      */
-    public function getDefaultHttpResponse(): ?ResponseInterface;
+    public function getDefaultHttpResponse(): ResponseInterface|null;
 }

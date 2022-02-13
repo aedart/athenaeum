@@ -20,7 +20,7 @@ trait PasswordTrait
      *
      * @var PasswordBroker|null
      */
-    protected ?PasswordBroker $password = null;
+    protected PasswordBroker|null $password = null;
 
     /**
      * Set password
@@ -29,7 +29,7 @@ trait PasswordTrait
      *
      * @return self
      */
-    public function setPassword(?PasswordBroker $broker)
+    public function setPassword(PasswordBroker|null $broker): static
     {
         $this->password = $broker;
 
@@ -47,7 +47,7 @@ trait PasswordTrait
      *
      * @return PasswordBroker|null password or null if none password has been set
      */
-    public function getPassword(): ?PasswordBroker
+    public function getPassword(): PasswordBroker|null
     {
         if (!$this->hasPassword()) {
             $this->setPassword($this->getDefaultPassword());
@@ -70,7 +70,7 @@ trait PasswordTrait
      *
      * @return PasswordBroker|null A default password value or Null if no default value is available
      */
-    public function getDefaultPassword(): ?PasswordBroker
+    public function getDefaultPassword(): PasswordBroker|null
     {
         $manager = Password::getFacadeRoot();
         if (isset($manager)) {

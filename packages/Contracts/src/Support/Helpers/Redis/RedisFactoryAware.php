@@ -19,7 +19,7 @@ interface RedisFactoryAware
      *
      * @return self
      */
-    public function setRedisFactory(?Factory $factory);
+    public function setRedisFactory(Factory|null $factory): static;
 
     /**
      * Get redis factory
@@ -32,7 +32,7 @@ interface RedisFactoryAware
      *
      * @return Factory|null redis factory or null if none redis factory has been set
      */
-    public function getRedisFactory(): ?Factory;
+    public function getRedisFactory(): Factory|null;
 
     /**
      * Check if redis factory has been set
@@ -46,5 +46,5 @@ interface RedisFactoryAware
      *
      * @return Factory|null A default redis factory value or Null if no default value is available
      */
-    public function getDefaultRedisFactory(): ?Factory;
+    public function getDefaultRedisFactory(): Factory|null;
 }

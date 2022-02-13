@@ -35,7 +35,7 @@ class AssignedTo extends BelongsTo
      * @param string $key [optional] Name of key / property in reference that holds
      *                               the foreign key value
      */
-    public function __construct(ApiResource $parent, ?Dto $reference = null, string $key = 'id')
+    public function __construct(ApiResource $parent, Dto|null $reference = null, string $key = 'id')
     {
         // First we try the group, because we might be able to match against it's name...
         $related = Group::class;

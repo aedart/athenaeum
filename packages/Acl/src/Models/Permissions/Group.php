@@ -88,10 +88,11 @@ class Group extends Model implements Sluggable
     public static function createWithPermissions(
         string $slug,
         array $permissions,
-        ?string $name = null,
-        ?string $description = null,
+        string|null $name = null,
+        string|null $description = null,
         bool $prefix = true
-    ) {
+    ): static
+    {
         // Method is intended to streamline creation of permissions for
         // a specific group. Since multiple permissions can be requested
         // created, we use database transactions for this method.

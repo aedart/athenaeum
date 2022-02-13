@@ -17,7 +17,7 @@ trait TableTrait
      *
      * @var string|null
      */
-    protected ?string $table = null;
+    protected string|null $table = null;
 
     /**
      * Set table
@@ -26,7 +26,7 @@ trait TableTrait
      *
      * @return self
      */
-    public function setTable(?string $name)
+    public function setTable(string|null $name): static
     {
         $this->table = $name;
 
@@ -36,14 +36,14 @@ trait TableTrait
     /**
      * Get table
      *
-     * If no "table" value set, method
-     * sets and returns a default "table".
+     * If no table value set, method
+     * sets and returns a default table.
      *
      * @see getDefaultTable()
      *
      * @return string|null table or null if no table has been set
      */
-    public function getTable(): ?string
+    public function getTable(): string|null
     {
         if (!$this->hasTable()) {
             $this->setTable($this->getDefaultTable());
@@ -52,9 +52,9 @@ trait TableTrait
     }
 
     /**
-     * Check if "table" has been set
+     * Check if table has been set
      *
-     * @return bool True if "table" has been set, false if not
+     * @return bool True if table has been set, false if not
      */
     public function hasTable(): bool
     {
@@ -62,11 +62,11 @@ trait TableTrait
     }
 
     /**
-     * Get a default "table" value, if any is available
+     * Get a default table value, if any is available
      *
-     * @return string|null Default "table" value or null if no default value is available
+     * @return string|null Default table value or null if no default value is available
      */
-    public function getDefaultTable(): ?string
+    public function getDefaultTable(): string|null
     {
         return null;
     }

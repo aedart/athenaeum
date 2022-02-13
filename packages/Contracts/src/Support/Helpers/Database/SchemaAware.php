@@ -19,7 +19,7 @@ interface SchemaAware
      *
      * @return self
      */
-    public function setSchema(?Builder $builder);
+    public function setSchema(Builder|null $builder): static;
 
     /**
      * Get schema
@@ -32,7 +32,7 @@ interface SchemaAware
      *
      * @return Builder|null schema or null if none schema has been set
      */
-    public function getSchema(): ?Builder;
+    public function getSchema(): Builder|null;
 
     /**
      * Check if schema has been set
@@ -46,5 +46,5 @@ interface SchemaAware
      *
      * @return Builder|null A default schema value or Null if no default value is available
      */
-    public function getDefaultSchema(): ?Builder;
+    public function getDefaultSchema(): Builder|null;
 }

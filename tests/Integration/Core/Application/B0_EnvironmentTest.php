@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Integration\Core\Application;
 
 use Aedart\Contracts\Core\Application;
+use Aedart\Contracts\Core\Helpers\PathsContainer;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Exceptions\UnableToDetectOrLoadEnv;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
@@ -26,7 +27,7 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
     /**
      * @inheritdoc
      */
-    protected function createApplication($paths = null): Application
+    protected function createApplication(PathsContainer|array|null $paths = null): Application
     {
         $app = parent::createApplication($paths);
 

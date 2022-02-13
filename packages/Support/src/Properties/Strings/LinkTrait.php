@@ -17,7 +17,7 @@ trait LinkTrait
      *
      * @var string|null
      */
-    protected ?string $link = null;
+    protected string|null $link = null;
 
     /**
      * Set link
@@ -26,7 +26,7 @@ trait LinkTrait
      *
      * @return self
      */
-    public function setLink(?string $link)
+    public function setLink(string|null $link): static
     {
         $this->link = $link;
 
@@ -36,14 +36,14 @@ trait LinkTrait
     /**
      * Get link
      *
-     * If no "link" value set, method
-     * sets and returns a default "link".
+     * If no link value set, method
+     * sets and returns a default link.
      *
      * @see getDefaultLink()
      *
      * @return string|null link or null if no link has been set
      */
-    public function getLink(): ?string
+    public function getLink(): string|null
     {
         if (!$this->hasLink()) {
             $this->setLink($this->getDefaultLink());
@@ -52,9 +52,9 @@ trait LinkTrait
     }
 
     /**
-     * Check if "link" has been set
+     * Check if link has been set
      *
-     * @return bool True if "link" has been set, false if not
+     * @return bool True if link has been set, false if not
      */
     public function hasLink(): bool
     {
@@ -62,11 +62,11 @@ trait LinkTrait
     }
 
     /**
-     * Get a default "link" value, if any is available
+     * Get a default link value, if any is available
      *
-     * @return string|null Default "link" value or null if no default value is available
+     * @return string|null Default link value or null if no default value is available
      */
-    public function getDefaultLink(): ?string
+    public function getDefaultLink(): string|null
     {
         return null;
     }

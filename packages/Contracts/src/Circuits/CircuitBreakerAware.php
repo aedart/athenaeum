@@ -19,7 +19,7 @@ interface CircuitBreakerAware
      *
      * @return self
      */
-    public function setCircuitBreaker(?CircuitBreaker $circuitBreaker);
+    public function setCircuitBreaker(CircuitBreaker|null $circuitBreaker): static;
 
     /**
      * Get circuit breaker
@@ -30,7 +30,7 @@ interface CircuitBreakerAware
      *
      * @return CircuitBreaker|null circuit breaker or null if none circuit breaker has been set
      */
-    public function getCircuitBreaker(): ?CircuitBreaker;
+    public function getCircuitBreaker(): CircuitBreaker|null;
 
     /**
      * Check if circuit breaker has been set
@@ -44,5 +44,5 @@ interface CircuitBreakerAware
      *
      * @return CircuitBreaker|null A default circuit breaker value or Null if no default value is available
      */
-    public function getDefaultCircuitBreaker(): ?CircuitBreaker;
+    public function getDefaultCircuitBreaker(): CircuitBreaker|null;
 }

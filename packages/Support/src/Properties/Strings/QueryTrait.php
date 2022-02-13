@@ -17,7 +17,7 @@ trait QueryTrait
      *
      * @var string|null
      */
-    protected ?string $query = null;
+    protected string|null $query = null;
 
     /**
      * Set query
@@ -26,7 +26,7 @@ trait QueryTrait
      *
      * @return self
      */
-    public function setQuery(?string $query)
+    public function setQuery(string|null $query): static
     {
         $this->query = $query;
 
@@ -36,14 +36,14 @@ trait QueryTrait
     /**
      * Get query
      *
-     * If no "query" value set, method
-     * sets and returns a default "query".
+     * If no query value set, method
+     * sets and returns a default query.
      *
      * @see getDefaultQuery()
      *
      * @return string|null query or null if no query has been set
      */
-    public function getQuery(): ?string
+    public function getQuery(): string|null
     {
         if (!$this->hasQuery()) {
             $this->setQuery($this->getDefaultQuery());
@@ -52,9 +52,9 @@ trait QueryTrait
     }
 
     /**
-     * Check if "query" has been set
+     * Check if query has been set
      *
-     * @return bool True if "query" has been set, false if not
+     * @return bool True if query has been set, false if not
      */
     public function hasQuery(): bool
     {
@@ -62,11 +62,11 @@ trait QueryTrait
     }
 
     /**
-     * Get a default "query" value, if any is available
+     * Get a default query value, if any is available
      *
-     * @return string|null Default "query" value or null if no default value is available
+     * @return string|null Default query value or null if no default value is available
      */
-    public function getDefaultQuery(): ?string
+    public function getDefaultQuery(): string|null
     {
         return null;
     }

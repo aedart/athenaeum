@@ -38,12 +38,12 @@ trait HttpBody
      *
      * @var mixed
      */
-    protected $rawPayload;
+    protected mixed $rawPayload;
 
     /**
      * @inheritdoc
      */
-    public function withData(array $data): Builder
+    public function withData(array $data): static
     {
         return $this->setData(
             array_merge($this->getData(), $data)
@@ -53,7 +53,7 @@ trait HttpBody
     /**
      * @inheritdoc
      */
-    public function setData(array $data): Builder
+    public function setData(array $data): static
     {
         $this->data = $data;
 
@@ -79,7 +79,7 @@ trait HttpBody
     /**
      * @inheritdoc
      */
-    public function withRawPayload($body): Builder
+    public function withRawPayload(mixed $body): static
     {
         $this->rawPayload = $body;
 
@@ -89,7 +89,7 @@ trait HttpBody
     /**
      * @inheritdoc
      */
-    public function getRawPayload()
+    public function getRawPayload(): mixed
     {
         return $this->rawPayload;
     }

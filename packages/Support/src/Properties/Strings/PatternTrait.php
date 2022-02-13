@@ -17,7 +17,7 @@ trait PatternTrait
      *
      * @var string|null
      */
-    protected ?string $pattern = null;
+    protected string|null $pattern = null;
 
     /**
      * Set pattern
@@ -26,7 +26,7 @@ trait PatternTrait
      *
      * @return self
      */
-    public function setPattern(?string $pattern)
+    public function setPattern(string|null $pattern): static
     {
         $this->pattern = $pattern;
 
@@ -36,14 +36,14 @@ trait PatternTrait
     /**
      * Get pattern
      *
-     * If no "pattern" value set, method
-     * sets and returns a default "pattern".
+     * If no pattern value set, method
+     * sets and returns a default pattern.
      *
      * @see getDefaultPattern()
      *
      * @return string|null pattern or null if no pattern has been set
      */
-    public function getPattern(): ?string
+    public function getPattern(): string|null
     {
         if (!$this->hasPattern()) {
             $this->setPattern($this->getDefaultPattern());
@@ -52,9 +52,9 @@ trait PatternTrait
     }
 
     /**
-     * Check if "pattern" has been set
+     * Check if pattern has been set
      *
-     * @return bool True if "pattern" has been set, false if not
+     * @return bool True if pattern has been set, false if not
      */
     public function hasPattern(): bool
     {
@@ -62,11 +62,11 @@ trait PatternTrait
     }
 
     /**
-     * Get a default "pattern" value, if any is available
+     * Get a default pattern value, if any is available
      *
-     * @return string|null Default "pattern" value or null if no default value is available
+     * @return string|null Default pattern value or null if no default value is available
      */
-    public function getDefaultPattern(): ?string
+    public function getDefaultPattern(): string|null
     {
         return null;
     }

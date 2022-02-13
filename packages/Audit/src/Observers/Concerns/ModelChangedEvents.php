@@ -26,14 +26,16 @@ trait ModelChangedEvents
     /**
      * Dispatches model has changed event
      *
-     * @param Model $model The model that has changed
-     * @param string $type [optional] The event type
-     * @param string|null $message [optional] Eventual user provided message associated with the event.
+     * @param  Model  $model  The model that has changed
+     * @param  string  $type  [optional] The event type
+     * @param  string|null  $message  [optional] Eventual user provided message associated with the event.
      *                              Defaults to model's Audit Trail Message, if available
      *
      * @return self
+     *
+     * @throws Throwable
      */
-    public function dispatchModelChanged(Model $model, string $type, ?string $message = null)
+    public function dispatchModelChanged(Model $model, string $type, ?string $message = null): static
     {
         // Abort if model does not wish to record it's next change
         if (method_exists($model, 'mustRecordNextChange') && !$model->mustRecordNextChange()) {
@@ -94,14 +96,16 @@ trait ModelChangedEvents
     /**
      * Creates a new "model has changed" event
      *
-     * @param Model $model The model that has changed
-     * @param string $type [optional] The event type
-     * @param string|null $message [optional] Eventual user provided message associated with the event.
+     * @param  Model  $model  The model that has changed
+     * @param  string  $type  [optional] The event type
+     * @param  string|null  $message  [optional] Eventual user provided message associated with the event.
      *                              Defaults to model's Audit Trail Message, if available
      *
      * @return ModelHasChanged
+     *
+     * @throws Throwable
      */
-    public function makeHasChangedEvent(Model $model, string $type, ?string $message = null): ModelHasChanged
+    public function makeHasChangedEvent(Model $model, string $type, string|null $message = null): ModelHasChanged
     {
         // Create new model has changed event
         return new ModelHasChanged(
@@ -150,7 +154,7 @@ trait ModelChangedEvents
      *
      * @return Authenticatable|null
      */
-    public function user(): ?Authenticatable
+    public function user(): Authenticatable|null
     {
         return $this->getAuth()->user();
     }

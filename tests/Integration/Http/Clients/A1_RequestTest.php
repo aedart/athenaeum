@@ -40,7 +40,7 @@ class A1_RequestTest extends HttpClientsTestCase
 
         // Resolve method and uri
         $method = strtolower($method);
-        $uri = '/' . $this->getFaker()->word;
+        $uri = '/' . $this->getFaker()->word();
 
         // Perform request
         /** @var ResponseInterface $response */

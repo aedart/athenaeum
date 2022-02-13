@@ -17,7 +17,7 @@ trait EventTrait
      *
      * @var string|null
      */
-    protected ?string $event = null;
+    protected string|null $event = null;
 
     /**
      * Set event
@@ -26,7 +26,7 @@ trait EventTrait
      *
      * @return self
      */
-    public function setEvent(?string $identifier)
+    public function setEvent(string|null $identifier): static
     {
         $this->event = $identifier;
 
@@ -36,14 +36,14 @@ trait EventTrait
     /**
      * Get event
      *
-     * If no "event" value set, method
-     * sets and returns a default "event".
+     * If no event value set, method
+     * sets and returns a default event.
      *
      * @see getDefaultEvent()
      *
      * @return string|null event or null if no event has been set
      */
-    public function getEvent(): ?string
+    public function getEvent(): string|null
     {
         if (!$this->hasEvent()) {
             $this->setEvent($this->getDefaultEvent());
@@ -52,9 +52,9 @@ trait EventTrait
     }
 
     /**
-     * Check if "event" has been set
+     * Check if event has been set
      *
-     * @return bool True if "event" has been set, false if not
+     * @return bool True if event has been set, false if not
      */
     public function hasEvent(): bool
     {
@@ -62,11 +62,11 @@ trait EventTrait
     }
 
     /**
-     * Get a default "event" value, if any is available
+     * Get a default event value, if any is available
      *
-     * @return string|null Default "event" value or null if no default value is available
+     * @return string|null Default event value or null if no default value is available
      */
-    public function getDefaultEvent(): ?string
+    public function getDefaultEvent(): string|null
     {
         return null;
     }

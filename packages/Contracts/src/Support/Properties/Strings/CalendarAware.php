@@ -19,31 +19,31 @@ interface CalendarAware
      *
      * @return self
      */
-    public function setCalendar(?string $location);
+    public function setCalendar(string|null $location): static;
 
     /**
      * Get calendar
      *
-     * If no "calendar" value set, method
-     * sets and returns a default "calendar".
+     * If no calendar value set, method
+     * sets and returns a default calendar.
      *
      * @see getDefaultCalendar()
      *
      * @return string|null calendar or null if no calendar has been set
      */
-    public function getCalendar(): ?string;
+    public function getCalendar(): string|null;
 
     /**
-     * Check if "calendar" has been set
+     * Check if calendar has been set
      *
-     * @return bool True if "calendar" has been set, false if not
+     * @return bool True if calendar has been set, false if not
      */
     public function hasCalendar(): bool;
 
     /**
-     * Get a default "calendar" value, if any is available
+     * Get a default calendar value, if any is available
      *
-     * @return string|null Default "calendar" value or null if no default value is available
+     * @return string|null Default calendar value or null if no default value is available
      */
-    public function getDefaultCalendar(): ?string;
+    public function getDefaultCalendar(): string|null;
 }

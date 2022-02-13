@@ -19,5 +19,5 @@ interface Instantiatable
      *
      * @return static
      */
-    public static function make(array $attributes = [], ?string $connection = null);
+    public static function make(array $attributes = [], string|null $connection = null): static;
 }

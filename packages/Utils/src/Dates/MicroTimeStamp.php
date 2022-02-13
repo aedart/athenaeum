@@ -48,6 +48,7 @@ class MicroTimeStamp
      *
      * @param  int  $seconds
      * @param  int  $microSeconds
+     *
      * @return MicroTimeStamp
      */
     public static function fromSeconds(int $seconds, int $microSeconds = 0): MicroTimeStamp
@@ -60,6 +61,7 @@ class MicroTimeStamp
      * Time is relative to Unix epoch.
      *
      * @param  DateTime  $dt
+     *
      * @return MicroTimeStamp
      */
     public static function fromDateTime(DateTime $dt): MicroTimeStamp
@@ -74,6 +76,7 @@ class MicroTimeStamp
      * Only support intervals up to day field.
      *
      * @param  DateInterval  $dt
+     *
      * @return MicroTimeStamp
      */
     public static function fromDateInterval(DateInterval $dt): MicroTimeStamp
@@ -93,6 +96,7 @@ class MicroTimeStamp
      * Factory to create from seconds with fractions.
      *
      * @param  float  $seconds
+     *
      * @return MicroTimeStamp
      */
     public static function fromSecondsFloat(float $seconds): MicroTimeStamp

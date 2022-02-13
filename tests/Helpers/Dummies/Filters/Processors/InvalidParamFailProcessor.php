@@ -19,7 +19,7 @@ class InvalidParamFailProcessor extends BaseProcessor
     /**
      * @inheritDoc
      */
-    public function process(BuiltFiltersMap $built, callable $next)
+    public function process(BuiltFiltersMap $built, callable $next): mixed
     {
         throw InvalidParameter::make($this, sprintf('Test failure for %s parameter', $this->parameter()));
     }

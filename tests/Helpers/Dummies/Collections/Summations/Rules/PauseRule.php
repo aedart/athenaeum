@@ -22,7 +22,7 @@ class PauseRule implements
     /**
      * @inheritDoc
      */
-    public function canProcess($item): bool
+    public function canProcess(mixed $item): bool
     {
         return isset($item['activity']) && $item['activity'] === 'pause';
     }
@@ -30,7 +30,7 @@ class PauseRule implements
     /**
      * @inheritDoc
      */
-    public function process($item, Summation $summation): Summation
+    public function process(mixed $item, Summation $summation): Summation
     {
         $result = $summation->decrease('points', 1);
 

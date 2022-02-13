@@ -1,15 +1,8 @@
 {
     "name": "aedart/athenaeum-testing",
     "description": "Testing utilities built on top of Orchestra Testbench and Codeception",
-    "keywords": [
-        "Athenaeum",
-        "Testing"
-    ],
+    "keywords": ["Athenaeum", "Testing"],
     "homepage": "https://aedart.github.io/athenaeum/",
-    "support": {
-        "issues": "https://github.com/aedart/athenaeum/issues",
-        "source": "https://github.com/aedart/athenaeum"
-    },
     "license": "BSD-3-Clause",
     "type": "library",
     "authors": [
@@ -19,15 +12,16 @@
         }
     ],
     "require": {
-        "php": ">=7.4.0",
-        "codeception/codeception": "4.1.*",
-        "codeception/module-asserts": "^1.3",
-        "fzaninotto/faker": "1.9.*",
-        "mockery/mockery": "1.4.*",
-        "orchestra/testbench": "^6.12.0",
-        "orchestra/testbench-dusk": "^v6.12.0",
+        "php": "^8.0.2",
+        "aedart/athenaeum-container": "^5.27",
         "aedart/athenaeum-contracts": "^5.28",
-        "aedart/athenaeum-container": "^5.28"
+        "codeception/codeception": "5.0.0-alpha1",
+        "codeception/module-asserts": "*@dev",
+        "fakerphp/faker": "^v1.17.0",
+        "mockery/mockery": "1.5.*",
+        "orchestra/testbench": "^v7.0.0",
+        "orchestra/testbench-dusk": "^v7.0.0",
+        "phpunit/phpunit": "dev-master as 9.5.13"
     },
     "autoload": {
         "psr-4": {
@@ -37,11 +31,11 @@
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "5.28.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

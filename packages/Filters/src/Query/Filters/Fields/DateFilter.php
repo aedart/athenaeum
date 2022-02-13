@@ -3,6 +3,8 @@
 namespace Aedart\Filters\Query\Filters\Fields;
 
 use Aedart\Utils\Arr;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 use InvalidArgumentException;
 
 /**
@@ -16,20 +18,15 @@ class DateFilter extends BaseFieldFilter
     /**
      * @inheritDoc
      */
-    public function apply($query)
+    public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         $operator = $this->operator();
 
-        switch ($operator) {
-            case 'is_null':
-                return $this->buildWhereNullConstraint($query);
-
-            case 'not_null':
-                return $this->buildWhereNotNullConstraint($query);
-
-            default:
-                return $this->buildWhereDateConstraint($query);
-        }
+        return match ($operator) {
+            'is_null' => $this->buildWhereNullConstraint($query),
+            'not_null' => $this->buildWhereNotNullConstraint($query),
+            default => $this->buildWhereDateConstraint($query)
+        };
     }
 
     /**
@@ -58,7 +55,7 @@ class DateFilter extends BaseFieldFilter
     /**
      * @inheritDoc
      */
-    protected function assertValue($value)
+    protected function assertValue(mixed $value)
     {
         // Allow empty values, when "is null / not null" operators are
         // chosen.

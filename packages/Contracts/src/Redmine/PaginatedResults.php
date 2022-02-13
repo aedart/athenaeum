@@ -7,9 +7,11 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Enumerable;
 use IteratorAggregate;
+use JsonException;
 use JsonSerializable;
 use Psr\Http\Message\ResponseInterface;
 use Stringable;
+use Throwable;
 
 /**
  * Paginated Results
@@ -34,10 +36,10 @@ interface PaginatedResults extends Paginator,
      *
      * @return static<T>
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
-    public static function fromResponse(ResponseInterface $response, ApiResource $resource): PaginatedResults;
+    public static function fromResponse(ResponseInterface $response, ApiResource $resource): static;
 
     /**
      * Returns the result set

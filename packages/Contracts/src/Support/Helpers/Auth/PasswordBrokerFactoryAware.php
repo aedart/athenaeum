@@ -19,7 +19,7 @@ interface PasswordBrokerFactoryAware
      *
      * @return self
      */
-    public function setPasswordBrokerFactory(?PasswordBrokerFactory $factory);
+    public function setPasswordBrokerFactory(PasswordBrokerFactory|null $factory): static;
 
     /**
      * Get password broker factory
@@ -32,7 +32,7 @@ interface PasswordBrokerFactoryAware
      *
      * @return PasswordBrokerFactory|null password broker factory or null if none password broker factory has been set
      */
-    public function getPasswordBrokerFactory(): ?PasswordBrokerFactory;
+    public function getPasswordBrokerFactory(): PasswordBrokerFactory|null;
 
     /**
      * Check if password broker factory has been set
@@ -46,5 +46,5 @@ interface PasswordBrokerFactoryAware
      *
      * @return PasswordBrokerFactory|null A default password broker factory value or Null if no default value is available
      */
-    public function getDefaultPasswordBrokerFactory(): ?PasswordBrokerFactory;
+    public function getDefaultPasswordBrokerFactory(): PasswordBrokerFactory|null;
 }

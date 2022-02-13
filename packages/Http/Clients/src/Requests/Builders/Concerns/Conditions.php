@@ -19,8 +19,12 @@ trait Conditions
     /**
      * @inheritdoc
      */
-    public function when(bool $result, callable $callback, ?callable $otherwise = null): Builder
+    public function when(bool|callable $result, callable $callback, callable|null $otherwise = null): static
     {
+        if (is_callable($result)) {
+            $result = $result($this);
+        }
+
         if ($result === true) {
             $callback($this);
         } elseif (isset($otherwise)) {
@@ -33,8 +37,12 @@ trait Conditions
     /**
      * @inheritdoc
      */
-    public function unless(bool $result, callable $callback, ?callable $otherwise = null): Builder
+    public function unless(bool|callable $result, callable $callback, callable|null $otherwise = null): static
     {
+        if (is_callable($result)) {
+            $result = $result($this);
+        }
+
         return $this->when(!$result, $callback, $otherwise);
     }
 }

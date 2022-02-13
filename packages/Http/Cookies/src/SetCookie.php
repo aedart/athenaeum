@@ -20,28 +20,28 @@ class SetCookie extends Cookie implements SetCookieInterface
      *
      * @var string|null
      */
-    protected ?string $expires = null;
+    protected string|null $expires = null;
 
     /**
      * Number of seconds until the cookie expires
      *
      * @var int|null
      */
-    protected ?int $maxAge = null;
+    protected int|null $maxAge = null;
 
     /**
      * Host(s) where the cookie will be sent to
      *
      * @var string|null
      */
-    protected ?string $domain = null;
+    protected string|null $domain = null;
 
     /**
      * Cookie path that must exist on the requested url
      *
      * @var string|null
      */
-    protected ?string $path = '/';
+    protected string|null $path = '/';
 
     /**
      * Whether the cookie should be sent via https
@@ -68,12 +68,12 @@ class SetCookie extends Cookie implements SetCookieInterface
      *
      * @var string|null
      */
-    protected ?string $sameSite = null;
+    protected string|null $sameSite = null;
 
     /**
      * @inheritDoc
      */
-    public function expires($expiresAt = null)
+    public function expires(string|int|null $expiresAt = null): static
     {
         if (isset($expiresAt) && is_int($expiresAt)) {
             $expiresAt = gmdate(DateTime::RFC7231, $expiresAt);
@@ -87,7 +87,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function getExpires(): ?string
+    public function getExpires(): string|null
     {
         return $this->expires;
     }
@@ -95,7 +95,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function maxAge(?int $seconds = null)
+    public function maxAge(int|null $seconds = null): static
     {
         $this->maxAge = $seconds;
 
@@ -105,7 +105,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function getMaxAge(): ?int
+    public function getMaxAge(): int|null
     {
         return $this->maxAge;
     }
@@ -113,7 +113,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function domain(?string $domain = null)
+    public function domain(string|null $domain = null): static
     {
         $this->domain = $domain;
 
@@ -123,7 +123,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function getDomain(): ?string
+    public function getDomain(): string|null
     {
         return $this->domain;
     }
@@ -131,7 +131,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function path(?string $path = null)
+    public function path(string|null $path = null): static
     {
         $this->path = $path;
 
@@ -141,7 +141,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function getPath(): ?string
+    public function getPath(): string|null
     {
         return $this->path;
     }
@@ -149,7 +149,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function secure(bool $isSecure = false)
+    public function secure(bool $isSecure = false): static
     {
         $this->secure = $isSecure;
 
@@ -175,7 +175,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function httpOnly(bool $httpOnly = false)
+    public function httpOnly(bool $httpOnly = false): static
     {
         $this->httpOnly = $httpOnly;
 
@@ -201,7 +201,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function sameSite(?string $policy = null)
+    public function sameSite(string|null $policy = null): static
     {
         $this->sameSite = $policy;
 
@@ -211,7 +211,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function getSameSite(): ?string
+    public function getSameSite(): string|null
     {
         return $this->sameSite;
     }

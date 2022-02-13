@@ -59,10 +59,10 @@ class FailureTest extends UnitTestCase
         $faker = $this->getFaker();
 
         $data = [
-            'reason' => $faker->sentence,
+            'reason' => $faker->sentence(),
             'context' => $faker->words(),
             'reported_at' => (string) Date::now('UTC')->subRealMinutes(5),
-            'total_failures' => $faker->randomDigitNotNull
+            'total_failures' => $faker->randomDigitNotNull()
         ];
 
         $failure = $this->makeFailure($data);
@@ -94,10 +94,10 @@ class FailureTest extends UnitTestCase
         $faker = $this->getFaker();
 
         $data = [
-            'reason' => $faker->sentence,
+            'reason' => $faker->sentence(),
             'context' => $faker->words(),
             'reported_at' => (string) Date::now('UTC')->subRealMinutes(5),
-            'total_failures' => $faker->randomDigitNotNull
+            'total_failures' => $faker->randomDigitNotNull()
         ];
 
         $failure = $this->makeFailure($data);
@@ -119,10 +119,10 @@ class FailureTest extends UnitTestCase
         $faker = $this->getFaker();
 
         $data = [
-            'reason' => $faker->sentence,
+            'reason' => $faker->sentence(),
             'context' => $faker->words(),
             'reported_at' => (string) Date::now('UTC')->subRealMinutes(5),
-            'total_failures' => $faker->randomDigitNotNull
+            'total_failures' => $faker->randomDigitNotNull()
         ];
 
         $failure = $this->makeFailure($data);
@@ -141,10 +141,10 @@ class FailureTest extends UnitTestCase
         $faker = $this->getFaker();
 
         $data = [
-            'reason' => $faker->sentence,
+            'reason' => $faker->sentence(),
             'context' => $faker->words(),
             'reported_at' => (string) Date::now('UTC')->subRealMinutes(5),
-            'total_failures' => $faker->randomDigitNotNull
+            'total_failures' => $faker->randomDigitNotNull()
         ];
 
         $failure = $this->makeFailure($data);
@@ -174,10 +174,10 @@ class FailureTest extends UnitTestCase
         $faker = $this->getFaker();
 
         $data = [
-            'reason' => $faker->sentence,
+            'reason' => $faker->sentence(),
             'context' => $faker->words(),
             'reported_at' => (string) Date::now('UTC')->subRealMinutes(5),
-            'total_failures' => $faker->randomDigitNotNull
+            'total_failures' => $faker->randomDigitNotNull()
         ];
 
         $failure = $this->makeFailure($data);

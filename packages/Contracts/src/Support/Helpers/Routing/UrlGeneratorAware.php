@@ -19,7 +19,7 @@ interface UrlGeneratorAware
      *
      * @return self
      */
-    public function setUrlGenerator(?UrlGenerator $generator);
+    public function setUrlGenerator(UrlGenerator|null $generator): static;
 
     /**
      * Get url generator
@@ -32,7 +32,7 @@ interface UrlGeneratorAware
      *
      * @return UrlGenerator|null url generator or null if none url generator has been set
      */
-    public function getUrlGenerator(): ?UrlGenerator;
+    public function getUrlGenerator(): UrlGenerator|null;
 
     /**
      * Check if url generator has been set
@@ -46,5 +46,5 @@ interface UrlGeneratorAware
      *
      * @return UrlGenerator|null A default url generator value or Null if no default value is available
      */
-    public function getDefaultUrlGenerator(): ?UrlGenerator;
+    public function getDefaultUrlGenerator(): UrlGenerator|null;
 }

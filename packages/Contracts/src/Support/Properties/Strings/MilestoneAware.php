@@ -19,31 +19,31 @@ interface MilestoneAware
      *
      * @return self
      */
-    public function setMilestone(?string $identifier);
+    public function setMilestone(string|null $identifier): static;
 
     /**
      * Get milestone
      *
-     * If no "milestone" value set, method
-     * sets and returns a default "milestone".
+     * If no milestone value set, method
+     * sets and returns a default milestone.
      *
      * @see getDefaultMilestone()
      *
      * @return string|null milestone or null if no milestone has been set
      */
-    public function getMilestone(): ?string;
+    public function getMilestone(): string|null;
 
     /**
-     * Check if "milestone" has been set
+     * Check if milestone has been set
      *
-     * @return bool True if "milestone" has been set, false if not
+     * @return bool True if milestone has been set, false if not
      */
     public function hasMilestone(): bool;
 
     /**
-     * Get a default "milestone" value, if any is available
+     * Get a default milestone value, if any is available
      *
-     * @return string|null Default "milestone" value or null if no default value is available
+     * @return string|null Default milestone value or null if no default value is available
      */
-    public function getDefaultMilestone(): ?string;
+    public function getDefaultMilestone(): string|null;
 }

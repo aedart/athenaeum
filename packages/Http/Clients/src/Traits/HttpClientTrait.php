@@ -19,7 +19,7 @@ trait HttpClientTrait
      *
      * @var Client|null
      */
-    protected ?Client $httpClient = null;
+    protected Client|null $httpClient = null;
 
     /**
      * Set http client
@@ -28,7 +28,7 @@ trait HttpClientTrait
      *
      * @return self
      */
-    public function setHttpClient(?Client $client)
+    public function setHttpClient(Client|null $client): static
     {
         $this->httpClient = $client;
 
@@ -44,7 +44,7 @@ trait HttpClientTrait
      *
      * @return Client|null http client or null if none http client has been set
      */
-    public function getHttpClient(): ?Client
+    public function getHttpClient(): Client|null
     {
         if (!$this->hasHttpClient()) {
             $this->setHttpClient($this->getDefaultHttpClient());
@@ -67,7 +67,7 @@ trait HttpClientTrait
      *
      * @return Client|null A default http client value or Null if no default value is available
      */
-    public function getDefaultHttpClient(): ?Client
+    public function getDefaultHttpClient(): Client|null
     {
         return null;
     }

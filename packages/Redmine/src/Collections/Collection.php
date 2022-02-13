@@ -21,12 +21,12 @@ class Collection extends BaseCollection
      *
      * @var string|null
      */
-    public ?string $resourceClass = null;
+    public string|null $resourceClass = null;
 
     /**
      * @inheritDoc
      */
-    public function __construct($items = [], ?string $resourceClass = null)
+    public function __construct($items = [], string|null $resourceClass = null)
     {
         parent::__construct($items);
 
@@ -51,6 +51,6 @@ class Collection extends BaseCollection
             return $resource::make($item, $resource->getConnection());
         }, $list);
 
-        return new static($resources, get_class($resource));
+        return new static($resources, $resource::class);
     }
 }

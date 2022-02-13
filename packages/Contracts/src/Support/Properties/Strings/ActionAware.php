@@ -19,31 +19,31 @@ interface ActionAware
      *
      * @return self
      */
-    public function setAction(?string $action);
+    public function setAction(string|null $action): static;
 
     /**
      * Get action
      *
-     * If no "action" value set, method
-     * sets and returns a default "action".
+     * If no action value set, method
+     * sets and returns a default action.
      *
      * @see getDefaultAction()
      *
      * @return string|null action or null if no action has been set
      */
-    public function getAction(): ?string;
+    public function getAction(): string|null;
 
     /**
-     * Check if "action" has been set
+     * Check if action has been set
      *
-     * @return bool True if "action" has been set, false if not
+     * @return bool True if action has been set, false if not
      */
     public function hasAction(): bool;
 
     /**
-     * Get a default "action" value, if any is available
+     * Get a default action value, if any is available
      *
-     * @return string|null Default "action" value or null if no default value is available
+     * @return string|null Default action value or null if no default value is available
      */
-    public function getDefaultAction(): ?string;
+    public function getDefaultAction(): string|null;
 }

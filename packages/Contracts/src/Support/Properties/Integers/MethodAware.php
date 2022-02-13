@@ -19,31 +19,31 @@ interface MethodAware
      *
      * @return self
      */
-    public function setMethod(?int $identifier);
+    public function setMethod(int|null $identifier): static;
 
     /**
      * Get method
      *
-     * If no "method" value set, method
-     * sets and returns a default "method".
+     * If no method value set, method
+     * sets and returns a default method.
      *
      * @see getDefaultMethod()
      *
      * @return int|null method or null if no method has been set
      */
-    public function getMethod(): ?int;
+    public function getMethod(): int|null;
 
     /**
-     * Check if "method" has been set
+     * Check if method has been set
      *
-     * @return bool True if "method" has been set, false if not
+     * @return bool True if method has been set, false if not
      */
     public function hasMethod(): bool;
 
     /**
-     * Get a default "method" value, if any is available
+     * Get a default method value, if any is available
      *
-     * @return int|null Default "method" value or null if no default value is available
+     * @return int|null Default method value or null if no default value is available
      */
-    public function getDefaultMethod(): ?int;
+    public function getDefaultMethod(): int|null;
 }

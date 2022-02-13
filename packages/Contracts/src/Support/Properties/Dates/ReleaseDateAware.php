@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Release date Aware
  *
- * Component is aware of \DateTime "release date"
+ * Component is aware of \DateTimeInterface "release date"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,35 +15,35 @@ interface ReleaseDateAware
     /**
      * Set release date
      *
-     * @param \DateTime|null $date Date of planned release
+     * @param \DateTimeInterface|null $date Date of planned release
      *
      * @return self
      */
-    public function setReleaseDate(?\DateTime $date);
+    public function setReleaseDate(\DateTimeInterface|null $date): static;
 
     /**
      * Get release date
      *
-     * If no "release date" value set, method
-     * sets and returns a default "release date".
+     * If no release date value set, method
+     * sets and returns a default release date.
      *
      * @see getDefaultReleaseDate()
      *
-     * @return \DateTime|null release date or null if no release date has been set
+     * @return \DateTimeInterface|null release date or null if no release date has been set
      */
-    public function getReleaseDate(): ?\DateTime;
+    public function getReleaseDate(): \DateTimeInterface|null;
 
     /**
-     * Check if "release date" has been set
+     * Check if release date has been set
      *
-     * @return bool True if "release date" has been set, false if not
+     * @return bool True if release date has been set, false if not
      */
     public function hasReleaseDate(): bool;
 
     /**
-     * Get a default "release date" value, if any is available
+     * Get a default release date value, if any is available
      *
-     * @return \DateTime|null Default "release date" value or null if no default value is available
+     * @return \DateTimeInterface|null Default release date value or null if no default value is available
      */
-    public function getDefaultReleaseDate(): ?\DateTime;
+    public function getDefaultReleaseDate(): \DateTimeInterface|null;
 }

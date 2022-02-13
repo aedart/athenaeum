@@ -1,16 +1,8 @@
 {
     "name": "aedart/athenaeum-dto",
     "description": "Data Transfer Object (DTO) abstraction",
-    "keywords": [
-        "Athenaeum",
-        "DTO",
-        "Data transfer object"
-    ],
+    "keywords": ["Athenaeum", "DTO", "Data transfer object"],
     "homepage": "https://aedart.github.io/athenaeum/",
-    "support": {
-        "issues": "https://github.com/aedart/athenaeum/issues",
-        "source": "https://github.com/aedart/athenaeum"
-    },
     "license": "BSD-3-Clause",
     "type": "library",
     "authors": [
@@ -20,7 +12,7 @@
         }
     ],
     "require": {
-        "php": ">=7.4.0",
+        "php": "^8.0.2",
         "aedart/athenaeum-contracts": "^5.28",
         "aedart/athenaeum-properties": "^5.28",
         "aedart/athenaeum-utils": "^5.28"
@@ -33,11 +25,11 @@
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "5.28.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

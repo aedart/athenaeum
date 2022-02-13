@@ -17,7 +17,7 @@ trait ReleaseDateTrait
      *
      * @var int|null
      */
-    protected ?int $releaseDate = null;
+    protected int|null $releaseDate = null;
 
     /**
      * Set release date
@@ -26,7 +26,7 @@ trait ReleaseDateTrait
      *
      * @return self
      */
-    public function setReleaseDate(?int $date)
+    public function setReleaseDate(int|null $date): static
     {
         $this->releaseDate = $date;
 
@@ -36,14 +36,14 @@ trait ReleaseDateTrait
     /**
      * Get release date
      *
-     * If no "release date" value set, method
-     * sets and returns a default "release date".
+     * If no release date value set, method
+     * sets and returns a default release date.
      *
      * @see getDefaultReleaseDate()
      *
      * @return int|null release date or null if no release date has been set
      */
-    public function getReleaseDate(): ?int
+    public function getReleaseDate(): int|null
     {
         if (!$this->hasReleaseDate()) {
             $this->setReleaseDate($this->getDefaultReleaseDate());
@@ -52,9 +52,9 @@ trait ReleaseDateTrait
     }
 
     /**
-     * Check if "release date" has been set
+     * Check if release date has been set
      *
-     * @return bool True if "release date" has been set, false if not
+     * @return bool True if release date has been set, false if not
      */
     public function hasReleaseDate(): bool
     {
@@ -62,11 +62,11 @@ trait ReleaseDateTrait
     }
 
     /**
-     * Get a default "release date" value, if any is available
+     * Get a default release date value, if any is available
      *
-     * @return int|null Default "release date" value or null if no default value is available
+     * @return int|null Default release date value or null if no default value is available
      */
-    public function getDefaultReleaseDate(): ?int
+    public function getDefaultReleaseDate(): int|null
     {
         return null;
     }

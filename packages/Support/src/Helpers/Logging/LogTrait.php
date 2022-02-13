@@ -20,7 +20,7 @@ trait LogTrait
      *
      * @var LoggerInterface|null
      */
-    protected ?LoggerInterface $log = null;
+    protected LoggerInterface|null $log = null;
 
     /**
      * Set log
@@ -29,7 +29,7 @@ trait LogTrait
      *
      * @return self
      */
-    public function setLog(?LoggerInterface $logger)
+    public function setLog(LoggerInterface|null $logger): static
     {
         $this->log = $logger;
 
@@ -47,7 +47,7 @@ trait LogTrait
      *
      * @return LoggerInterface|null log or null if none log has been set
      */
-    public function getLog(): ?LoggerInterface
+    public function getLog(): LoggerInterface|null
     {
         if (!$this->hasLog()) {
             $this->setLog($this->getDefaultLog());
@@ -70,7 +70,7 @@ trait LogTrait
      *
      * @return LoggerInterface|null A default log value or Null if no default value is available
      */
-    public function getDefaultLog(): ?LoggerInterface
+    public function getDefaultLog(): LoggerInterface|null
     {
         return Log::getFacadeRoot();
     }

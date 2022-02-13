@@ -19,7 +19,7 @@ trait StoreTrait
      *
      * @var Store|null
      */
-    protected ?Store $store = null;
+    protected Store|null $store = null;
 
     /**
      * Set store
@@ -28,7 +28,7 @@ trait StoreTrait
      *
      * @return self
      */
-    public function setStore(?Store $store)
+    public function setStore(Store|null $store): static
     {
         $this->store = $store;
 
@@ -44,7 +44,7 @@ trait StoreTrait
      *
      * @return Store|null store or null if none store has been set
      */
-    public function getStore(): ?Store
+    public function getStore(): Store|null
     {
         if (!$this->hasStore()) {
             $this->setStore($this->getDefaultStore());
@@ -67,7 +67,7 @@ trait StoreTrait
      *
      * @return Store|null A default store value or Null if no default value is available
      */
-    public function getDefaultStore(): ?Store
+    public function getDefaultStore(): Store|null
     {
         return null;
     }

@@ -27,7 +27,7 @@ trait Logging
     /**
      * @inheritDoc
      */
-    public function log(?callable $callback = null): Builder
+    public function log(callable|null $callback = null): static
     {
         $callback = $callback ?? $this->makeLogCallback();
 
@@ -58,7 +58,7 @@ trait Logging
      *
      * @return Builder
      */
-    protected function setLogCallback(callable $callback): Builder
+    protected function setLogCallback(callable $callback): static
     {
         $this->logCallback = $callback;
 

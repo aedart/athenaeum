@@ -26,5 +26,5 @@ interface CircuitBreakerEvent
      *
      * @return Failure|null
      */
-    public function lastFailure(): ?Failure;
+    public function lastFailure(): Failure|null;
 }

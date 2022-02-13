@@ -19,31 +19,31 @@ interface IsbnAware
      *
      * @return self
      */
-    public function setIsbn(?string $isbn);
+    public function setIsbn(string|null $isbn): static;
 
     /**
      * Get isbn
      *
-     * If no "isbn" value set, method
-     * sets and returns a default "isbn".
+     * If no isbn value set, method
+     * sets and returns a default isbn.
      *
      * @see getDefaultIsbn()
      *
      * @return string|null isbn or null if no isbn has been set
      */
-    public function getIsbn(): ?string;
+    public function getIsbn(): string|null;
 
     /**
-     * Check if "isbn" has been set
+     * Check if isbn has been set
      *
-     * @return bool True if "isbn" has been set, false if not
+     * @return bool True if isbn has been set, false if not
      */
     public function hasIsbn(): bool;
 
     /**
-     * Get a default "isbn" value, if any is available
+     * Get a default isbn value, if any is available
      *
-     * @return string|null Default "isbn" value or null if no default value is available
+     * @return string|null Default isbn value or null if no default value is available
      */
-    public function getDefaultIsbn(): ?string;
+    public function getDefaultIsbn(): string|null;
 }

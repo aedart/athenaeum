@@ -7,6 +7,7 @@ use Aedart\Circuits\Exceptions\UnknownState;
 use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\States\Factory as StatesFactory;
+use DateTimeInterface;
 
 /**
  * States Factory
@@ -23,7 +24,12 @@ class Factory implements StatesFactory
     /**
      * @inheritDoc
      */
-    public function make(int $id, ?int $previous = null, $createdAt = null, $expiresAt = null): State
+    public function make(
+        int $id,
+        int|null $previous = null,
+        DateTimeInterface|string|null $createdAt = null,
+        DateTimeInterface|string|null $expiresAt = null
+    ): State
     {
         return $this->makeFromArray([
             'id' => $id,
@@ -45,25 +51,12 @@ class Factory implements StatesFactory
         $id = $data['id'];
         $this->assertStateIdentifier($id);
 
-        /** @var State $class */
-        $class = null;
+        return match ($id) {
+            CircuitBreaker::CLOSED => ClosedState::make($data),
+            CircuitBreaker::OPEN => OpenState::make($data),
+            CircuitBreaker::HALF_OPEN => HalfOpenState::make($data),
 
-        switch ($id) {
-
-            case CircuitBreaker::CLOSED:
-            default:
-                $class = ClosedState::class;
-                break;
-
-            case CircuitBreaker::OPEN:
-                $class = OpenState::class;
-                break;
-
-            case CircuitBreaker::HALF_OPEN:
-                $class = HalfOpenState::class;
-                break;
-        }
-
-        return $class::make($data);
+            default => ClosedState::make($data),
+        };
     }
 }

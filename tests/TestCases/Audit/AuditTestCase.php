@@ -134,7 +134,7 @@ abstract class AuditTestCase extends LaravelTestCase
         return new Category(array_merge([
             'slug' => $faker->unique()->slug(3),
             'name' => $faker->words(4, true),
-            'description' => $faker->sentence
+            'description' => $faker->sentence()
         ], $data));
     }
 
@@ -174,8 +174,8 @@ abstract class AuditTestCase extends LaravelTestCase
         $faker = $this->getFaker();
 
         $attributes = array_merge([
-            'email' => $faker->unique()->email,
-            'name' => $faker->name,
+            'email' => $faker->unique()->email(),
+            'name' => $faker->name(),
             'password' => Hash::make('password')
         ], $attributes);
 

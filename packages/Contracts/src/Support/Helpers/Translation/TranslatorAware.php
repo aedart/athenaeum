@@ -19,7 +19,7 @@ interface TranslatorAware
      *
      * @return self
      */
-    public function setTranslator(?Translator $translator);
+    public function setTranslator(Translator|null $translator): static;
 
     /**
      * Get translator
@@ -32,7 +32,7 @@ interface TranslatorAware
      *
      * @return Translator|null translator or null if none translator has been set
      */
-    public function getTranslator(): ?Translator;
+    public function getTranslator(): Translator|null;
 
     /**
      * Check if translator has been set
@@ -46,5 +46,5 @@ interface TranslatorAware
      *
      * @return Translator|null A default translator value or Null if no default value is available
      */
-    public function getDefaultTranslator(): ?Translator;
+    public function getDefaultTranslator(): Translator|null;
 }

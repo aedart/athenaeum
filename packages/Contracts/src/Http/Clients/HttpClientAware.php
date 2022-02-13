@@ -17,7 +17,7 @@ interface HttpClientAware
      *
      * @return self
      */
-    public function setHttpClient(?Client $client);
+    public function setHttpClient(Client|null $client): static;
 
     /**
      * Get http client
@@ -28,7 +28,7 @@ interface HttpClientAware
      *
      * @return Client|null http client or null if none http client has been set
      */
-    public function getHttpClient(): ?Client;
+    public function getHttpClient(): Client|null;
 
     /**
      * Check if http client has been set
@@ -42,5 +42,5 @@ interface HttpClientAware
      *
      * @return Client|null A default http client value or Null if no default value is available
      */
-    public function getDefaultHttpClient(): ?Client;
+    public function getDefaultHttpClient(): Client|null;
 }

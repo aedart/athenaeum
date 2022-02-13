@@ -20,7 +20,7 @@ class MergeWithBuilderOptions
      *
      * @return mixed
      */
-    public function handle(ProcessedOptions $processed, $next)
+    public function handle(ProcessedOptions $processed, mixed $next): mixed
     {
         // Obtain the builder's already set options
         $builderOptions = $processed->builder()->getOptions();

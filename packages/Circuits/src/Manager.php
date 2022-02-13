@@ -49,7 +49,7 @@ class Manager implements
     /**
      * @inheritDoc
      */
-    public function store(string $service, string $driver = null, array $options = []): Store
+    public function store(string $service, string|null $driver = null, array $options = []): Store
     {
         $driver = $driver ?? $this->defaultStore();
 

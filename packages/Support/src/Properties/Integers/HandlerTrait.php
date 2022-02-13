@@ -17,7 +17,7 @@ trait HandlerTrait
      *
      * @var int|null
      */
-    protected ?int $handler = null;
+    protected int|null $handler = null;
 
     /**
      * Set handler
@@ -26,7 +26,7 @@ trait HandlerTrait
      *
      * @return self
      */
-    public function setHandler(?int $identifier)
+    public function setHandler(int|null $identifier): static
     {
         $this->handler = $identifier;
 
@@ -36,14 +36,14 @@ trait HandlerTrait
     /**
      * Get handler
      *
-     * If no "handler" value set, method
-     * sets and returns a default "handler".
+     * If no handler value set, method
+     * sets and returns a default handler.
      *
      * @see getDefaultHandler()
      *
      * @return int|null handler or null if no handler has been set
      */
-    public function getHandler(): ?int
+    public function getHandler(): int|null
     {
         if (!$this->hasHandler()) {
             $this->setHandler($this->getDefaultHandler());
@@ -52,9 +52,9 @@ trait HandlerTrait
     }
 
     /**
-     * Check if "handler" has been set
+     * Check if handler has been set
      *
-     * @return bool True if "handler" has been set, false if not
+     * @return bool True if handler has been set, false if not
      */
     public function hasHandler(): bool
     {
@@ -62,11 +62,11 @@ trait HandlerTrait
     }
 
     /**
-     * Get a default "handler" value, if any is available
+     * Get a default handler value, if any is available
      *
-     * @return int|null Default "handler" value or null if no default value is available
+     * @return int|null Default handler value or null if no default value is available
      */
-    public function getDefaultHandler(): ?int
+    public function getDefaultHandler(): int|null
     {
         return null;
     }

@@ -63,7 +63,7 @@ class QueueHandler implements Handler
      *
      * @return self
      */
-    public function add(Middleware $middleware)
+    public function add(Middleware $middleware): static
     {
         $this->middleware[] = $middleware;
 
@@ -78,7 +78,7 @@ class QueueHandler implements Handler
      *
      * @return self
      */
-    public function addMultiple(array $list)
+    public function addMultiple(array $list): static
     {
         foreach ($list as $middleware) {
             $this->add($middleware);

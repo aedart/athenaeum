@@ -7,6 +7,7 @@ use Aedart\Contracts\Filters\BuiltFiltersMap;
 use Aedart\Contracts\Filters\Exceptions\InvalidParameterException;
 use Aedart\Contracts\Filters\Processor;
 use Aedart\Support\Helpers\Container\ContainerTrait;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Pipeline\Pipeline as PipelineInterface;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
@@ -44,7 +45,7 @@ abstract class BaseBuilder implements Builder
     /**
      * @inheritDoc
      */
-    public static function make($request)
+    public static function make($request): static
     {
         return new static($request);
     }
@@ -139,6 +140,8 @@ abstract class BaseBuilder implements Builder
      * Creates a new built filters instance
      *
      * @return BuiltFiltersMap
+     *
+     * @throws BindingResolutionException
      */
     protected function makeBuiltFilters(): BuiltFiltersMap
     {

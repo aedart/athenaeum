@@ -19,31 +19,31 @@ interface TypeAware
      *
      * @return self
      */
-    public function setType(?int $identifier);
+    public function setType(int|null $identifier): static;
 
     /**
      * Get type
      *
-     * If no "type" value set, method
-     * sets and returns a default "type".
+     * If no type value set, method
+     * sets and returns a default type.
      *
      * @see getDefaultType()
      *
      * @return int|null type or null if no type has been set
      */
-    public function getType(): ?int;
+    public function getType(): int|null;
 
     /**
-     * Check if "type" has been set
+     * Check if type has been set
      *
-     * @return bool True if "type" has been set, false if not
+     * @return bool True if type has been set, false if not
      */
     public function hasType(): bool;
 
     /**
-     * Get a default "type" value, if any is available
+     * Get a default type value, if any is available
      *
-     * @return int|null Default "type" value or null if no default value is available
+     * @return int|null Default type value or null if no default value is available
      */
-    public function getDefaultType(): ?int;
+    public function getDefaultType(): int|null;
 }

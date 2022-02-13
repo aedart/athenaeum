@@ -27,7 +27,7 @@ class PermissionGroupModelTest extends AclTestCase
     {
         $faker = $this->getFaker();
         $slug = $faker->slug(2);
-        $name = $faker->name;
+        $name = $faker->name();
         $desc = $faker->text(20);
 
         /** @var Group $group */

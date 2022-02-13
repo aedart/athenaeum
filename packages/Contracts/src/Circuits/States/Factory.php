@@ -19,8 +19,8 @@ interface Factory
      *
      * @param int $id
      * @param int|null $previous [optional] Previous state identifier
-     * @param string|DateTimeInterface|null $createdAt [optional]
-     * @param string|DateTimeInterface|null $expiresAt [optional]
+     * @param  DateTimeInterface|string|null  $createdAt [optional]
+     * @param  DateTimeInterface|string|null  $expiresAt [optional]
      *
      * @return State
      *
@@ -28,9 +28,9 @@ interface Factory
      */
     public function make(
         int $id,
-        ?int $previous = null,
-        $createdAt = null,
-        $expiresAt = null
+        int|null $previous = null,
+        DateTimeInterface|string|null $createdAt = null,
+        DateTimeInterface|string|null $expiresAt = null
     ): State;
 
     /**

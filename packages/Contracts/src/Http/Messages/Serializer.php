@@ -4,6 +4,8 @@ namespace Aedart\Contracts\Http\Messages;
 
 use Aedart\Contracts\Http\Messages\Exceptions\SerializationException;
 use Illuminate\Contracts\Support\Arrayable;
+use Stringable;
+
 
 /**
  * Http Message Serializer
@@ -14,7 +16,8 @@ use Illuminate\Contracts\Support\Arrayable;
  * @package Aedart\Contracts\Http\Messages
  */
 interface Serializer extends Arrayable,
-    HttpMessageAware
+    HttpMessageAware,
+    Stringable
 {
     /**
      * Returns string representation of the Http Message

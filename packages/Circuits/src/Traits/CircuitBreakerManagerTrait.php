@@ -20,7 +20,7 @@ trait CircuitBreakerManagerTrait
      *
      * @var Manager|null
      */
-    protected ?Manager $circuitBreakerManager = null;
+    protected Manager|null $circuitBreakerManager = null;
 
     /**
      * Set circuit breaker manager
@@ -29,7 +29,7 @@ trait CircuitBreakerManagerTrait
      *
      * @return self
      */
-    public function setCircuitBreakerManager(?Manager $manager)
+    public function setCircuitBreakerManager(Manager|null $manager): static
     {
         $this->circuitBreakerManager = $manager;
 
@@ -45,7 +45,7 @@ trait CircuitBreakerManagerTrait
      *
      * @return Manager|null circuit breaker manager or null if none circuit breaker manager has been set
      */
-    public function getCircuitBreakerManager(): ?Manager
+    public function getCircuitBreakerManager(): Manager|null
     {
         if (!$this->hasCircuitBreakerManager()) {
             $this->setCircuitBreakerManager($this->getDefaultCircuitBreakerManager());
@@ -68,7 +68,7 @@ trait CircuitBreakerManagerTrait
      *
      * @return Manager|null A default circuit breaker manager value or Null if no default value is available
      */
-    public function getDefaultCircuitBreakerManager(): ?Manager
+    public function getDefaultCircuitBreakerManager(): Manager|null
     {
         return IoCFacade::tryMake(Manager::class);
     }

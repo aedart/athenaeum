@@ -17,7 +17,7 @@ trait CountryTrait
      *
      * @var string|null
      */
-    protected ?string $country = null;
+    protected string|null $country = null;
 
     /**
      * Set country
@@ -26,7 +26,7 @@ trait CountryTrait
      *
      * @return self
      */
-    public function setCountry(?string $name)
+    public function setCountry(string|null $name): static
     {
         $this->country = $name;
 
@@ -36,14 +36,14 @@ trait CountryTrait
     /**
      * Get country
      *
-     * If no "country" value set, method
-     * sets and returns a default "country".
+     * If no country value set, method
+     * sets and returns a default country.
      *
      * @see getDefaultCountry()
      *
      * @return string|null country or null if no country has been set
      */
-    public function getCountry(): ?string
+    public function getCountry(): string|null
     {
         if (!$this->hasCountry()) {
             $this->setCountry($this->getDefaultCountry());
@@ -52,9 +52,9 @@ trait CountryTrait
     }
 
     /**
-     * Check if "country" has been set
+     * Check if country has been set
      *
-     * @return bool True if "country" has been set, false if not
+     * @return bool True if country has been set, false if not
      */
     public function hasCountry(): bool
     {
@@ -62,11 +62,11 @@ trait CountryTrait
     }
 
     /**
-     * Get a default "country" value, if any is available
+     * Get a default country value, if any is available
      *
-     * @return string|null Default "country" value or null if no default value is available
+     * @return string|null Default country value or null if no default value is available
      */
-    public function getDefaultCountry(): ?string
+    public function getDefaultCountry(): string|null
     {
         return null;
     }

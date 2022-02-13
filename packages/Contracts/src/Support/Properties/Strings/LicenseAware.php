@@ -19,31 +19,31 @@ interface LicenseAware
      *
      * @return self
      */
-    public function setLicense(?string $identifier);
+    public function setLicense(string|null $identifier): static;
 
     /**
      * Get license
      *
-     * If no "license" value set, method
-     * sets and returns a default "license".
+     * If no license value set, method
+     * sets and returns a default license.
      *
      * @see getDefaultLicense()
      *
      * @return string|null license or null if no license has been set
      */
-    public function getLicense(): ?string;
+    public function getLicense(): string|null;
 
     /**
-     * Check if "license" has been set
+     * Check if license has been set
      *
-     * @return bool True if "license" has been set, false if not
+     * @return bool True if license has been set, false if not
      */
     public function hasLicense(): bool;
 
     /**
-     * Get a default "license" value, if any is available
+     * Get a default license value, if any is available
      *
-     * @return string|null Default "license" value or null if no default value is available
+     * @return string|null Default license value or null if no default value is available
      */
-    public function getDefaultLicense(): ?string;
+    public function getDefaultLicense(): string|null;
 }

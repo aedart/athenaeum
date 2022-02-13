@@ -15,18 +15,18 @@ trait AnniversaryTrait
     /**
      * Date of anniversary
      *
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
-    protected ?\DateTime $anniversary = null;
+    protected \DateTimeInterface|null $anniversary = null;
 
     /**
      * Set anniversary
      *
-     * @param \DateTime|null $anniversary Date of anniversary
+     * @param \DateTimeInterface|null $anniversary Date of anniversary
      *
      * @return self
      */
-    public function setAnniversary(?\DateTime $anniversary)
+    public function setAnniversary(\DateTimeInterface|null $anniversary): static
     {
         $this->anniversary = $anniversary;
 
@@ -36,14 +36,14 @@ trait AnniversaryTrait
     /**
      * Get anniversary
      *
-     * If no "anniversary" value set, method
-     * sets and returns a default "anniversary".
+     * If no anniversary value set, method
+     * sets and returns a default anniversary.
      *
      * @see getDefaultAnniversary()
      *
-     * @return \DateTime|null anniversary or null if no anniversary has been set
+     * @return \DateTimeInterface|null anniversary or null if no anniversary has been set
      */
-    public function getAnniversary(): ?\DateTime
+    public function getAnniversary(): \DateTimeInterface|null
     {
         if (!$this->hasAnniversary()) {
             $this->setAnniversary($this->getDefaultAnniversary());
@@ -52,9 +52,9 @@ trait AnniversaryTrait
     }
 
     /**
-     * Check if "anniversary" has been set
+     * Check if anniversary has been set
      *
-     * @return bool True if "anniversary" has been set, false if not
+     * @return bool True if anniversary has been set, false if not
      */
     public function hasAnniversary(): bool
     {
@@ -62,11 +62,11 @@ trait AnniversaryTrait
     }
 
     /**
-     * Get a default "anniversary" value, if any is available
+     * Get a default anniversary value, if any is available
      *
-     * @return \DateTime|null Default "anniversary" value or null if no default value is available
+     * @return \DateTimeInterface|null Default anniversary value or null if no default value is available
      */
-    public function getDefaultAnniversary(): ?\DateTime
+    public function getDefaultAnniversary(): \DateTimeInterface|null
     {
         return null;
     }

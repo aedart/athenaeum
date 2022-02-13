@@ -17,7 +17,7 @@ trait MethodTrait
      *
      * @var int|null
      */
-    protected ?int $method = null;
+    protected int|null $method = null;
 
     /**
      * Set method
@@ -26,7 +26,7 @@ trait MethodTrait
      *
      * @return self
      */
-    public function setMethod(?int $identifier)
+    public function setMethod(int|null $identifier): static
     {
         $this->method = $identifier;
 
@@ -36,14 +36,14 @@ trait MethodTrait
     /**
      * Get method
      *
-     * If no "method" value set, method
-     * sets and returns a default "method".
+     * If no method value set, method
+     * sets and returns a default method.
      *
      * @see getDefaultMethod()
      *
      * @return int|null method or null if no method has been set
      */
-    public function getMethod(): ?int
+    public function getMethod(): int|null
     {
         if (!$this->hasMethod()) {
             $this->setMethod($this->getDefaultMethod());
@@ -52,9 +52,9 @@ trait MethodTrait
     }
 
     /**
-     * Check if "method" has been set
+     * Check if method has been set
      *
-     * @return bool True if "method" has been set, false if not
+     * @return bool True if method has been set, false if not
      */
     public function hasMethod(): bool
     {
@@ -62,11 +62,11 @@ trait MethodTrait
     }
 
     /**
-     * Get a default "method" value, if any is available
+     * Get a default method value, if any is available
      *
-     * @return int|null Default "method" value or null if no default value is available
+     * @return int|null Default method value or null if no default value is available
      */
-    public function getDefaultMethod(): ?int
+    public function getDefaultMethod(): int|null
     {
         return null;
     }

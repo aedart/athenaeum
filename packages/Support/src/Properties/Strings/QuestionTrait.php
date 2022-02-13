@@ -17,7 +17,7 @@ trait QuestionTrait
      *
      * @var string|null
      */
-    protected ?string $question = null;
+    protected string|null $question = null;
 
     /**
      * Set question
@@ -26,7 +26,7 @@ trait QuestionTrait
      *
      * @return self
      */
-    public function setQuestion(?string $question)
+    public function setQuestion(string|null $question): static
     {
         $this->question = $question;
 
@@ -36,14 +36,14 @@ trait QuestionTrait
     /**
      * Get question
      *
-     * If no "question" value set, method
-     * sets and returns a default "question".
+     * If no question value set, method
+     * sets and returns a default question.
      *
      * @see getDefaultQuestion()
      *
      * @return string|null question or null if no question has been set
      */
-    public function getQuestion(): ?string
+    public function getQuestion(): string|null
     {
         if (!$this->hasQuestion()) {
             $this->setQuestion($this->getDefaultQuestion());
@@ -52,9 +52,9 @@ trait QuestionTrait
     }
 
     /**
-     * Check if "question" has been set
+     * Check if question has been set
      *
-     * @return bool True if "question" has been set, false if not
+     * @return bool True if question has been set, false if not
      */
     public function hasQuestion(): bool
     {
@@ -62,11 +62,11 @@ trait QuestionTrait
     }
 
     /**
-     * Get a default "question" value, if any is available
+     * Get a default question value, if any is available
      *
-     * @return string|null Default "question" value or null if no default value is available
+     * @return string|null Default question value or null if no default value is available
      */
-    public function getDefaultQuestion(): ?string
+    public function getDefaultQuestion(): string|null
     {
         return null;
     }

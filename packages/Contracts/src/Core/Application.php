@@ -18,6 +18,7 @@ use Throwable;
  * @package Aedart\Contracts\Core
  */
 interface Application extends IoC,
+    EnvironmentHandler,
     LaravelApplication
 {
     /**
@@ -26,6 +27,15 @@ interface Application extends IoC,
      * @return string
      */
     public function publicPath();
+
+    /**
+     * Get path to language files.
+     *
+     * @param  string  $path
+     *
+     * @return string
+     */
+    public function langPath(string $path = ''): string;
 
     /**
      * Determine if running in "local" environment
@@ -54,15 +64,6 @@ interface Application extends IoC,
      * @return bool
      */
     public function isBooted(): bool;
-
-    /**
-     * Register a new terminating listener.
-     *
-     * @param callable $callback
-     *
-     * @return self
-     */
-    public function terminating(callable $callback);
 
     /**
      * Register a list of service providers
@@ -123,7 +124,7 @@ interface Application extends IoC,
      *
      * @throws Throwable
      */
-    public function run(?callable $callback = null): void;
+    public function run(callable|null $callback = null): void;
 
     /**
      * Get the application's core "bootstrappers"

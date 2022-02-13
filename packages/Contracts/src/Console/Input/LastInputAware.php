@@ -19,7 +19,7 @@ interface LastInputAware
      *
      * @return self
      */
-    public function setLastInput(?InputInterface $input);
+    public function setLastInput(InputInterface|null $input): static;
 
     /**
      * Get last input
@@ -30,7 +30,7 @@ interface LastInputAware
      *
      * @return InputInterface|null last input or null if none last input has been set
      */
-    public function getLastInput(): ?InputInterface;
+    public function getLastInput(): InputInterface|null;
 
     /**
      * Check if last input has been set
@@ -44,5 +44,5 @@ interface LastInputAware
      *
      * @return InputInterface|null A default last input value or Null if no default value is available
      */
-    public function getDefaultLastInput(): ?InputInterface;
+    public function getDefaultLastInput(): InputInterface|null;
 }

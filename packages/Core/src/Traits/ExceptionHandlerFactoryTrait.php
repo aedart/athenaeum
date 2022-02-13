@@ -20,7 +20,7 @@ trait ExceptionHandlerFactoryTrait
      *
      * @var Factory|null
      */
-    protected ?Factory $exceptionHandlerFactory = null;
+    protected Factory|null $exceptionHandlerFactory = null;
 
     /**
      * Set exception handler factory
@@ -29,7 +29,7 @@ trait ExceptionHandlerFactoryTrait
      *
      * @return self
      */
-    public function setExceptionHandlerFactory(?Factory $factory)
+    public function setExceptionHandlerFactory(Factory|null $factory): static
     {
         $this->exceptionHandlerFactory = $factory;
 
@@ -45,7 +45,7 @@ trait ExceptionHandlerFactoryTrait
      *
      * @return Factory|null exception handler factory or null if none exception handler factory has been set
      */
-    public function getExceptionHandlerFactory(): ?Factory
+    public function getExceptionHandlerFactory(): Factory|null
     {
         if (!$this->hasExceptionHandlerFactory()) {
             $this->setExceptionHandlerFactory($this->getDefaultExceptionHandlerFactory());
@@ -68,7 +68,7 @@ trait ExceptionHandlerFactoryTrait
      *
      * @return Factory|null A default exception handler factory value or Null if no default value is available
      */
-    public function getDefaultExceptionHandlerFactory(): ?Factory
+    public function getDefaultExceptionHandlerFactory(): Factory|null
     {
         return IoCFacade::tryMake(Factory::class);
     }

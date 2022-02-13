@@ -17,7 +17,7 @@ trait StreetTrait
      *
      * @var string|null
      */
-    protected ?string $street = null;
+    protected string|null $street = null;
 
     /**
      * Set street
@@ -26,7 +26,7 @@ trait StreetTrait
      *
      * @return self
      */
-    public function setStreet(?string $address)
+    public function setStreet(string|null $address): static
     {
         $this->street = $address;
 
@@ -36,14 +36,14 @@ trait StreetTrait
     /**
      * Get street
      *
-     * If no "street" value set, method
-     * sets and returns a default "street".
+     * If no street value set, method
+     * sets and returns a default street.
      *
      * @see getDefaultStreet()
      *
      * @return string|null street or null if no street has been set
      */
-    public function getStreet(): ?string
+    public function getStreet(): string|null
     {
         if (!$this->hasStreet()) {
             $this->setStreet($this->getDefaultStreet());
@@ -52,9 +52,9 @@ trait StreetTrait
     }
 
     /**
-     * Check if "street" has been set
+     * Check if street has been set
      *
-     * @return bool True if "street" has been set, false if not
+     * @return bool True if street has been set, false if not
      */
     public function hasStreet(): bool
     {
@@ -62,11 +62,11 @@ trait StreetTrait
     }
 
     /**
-     * Get a default "street" value, if any is available
+     * Get a default street value, if any is available
      *
-     * @return string|null Default "street" value or null if no default value is available
+     * @return string|null Default street value or null if no default value is available
      */
-    public function getDefaultStreet(): ?string
+    public function getDefaultStreet(): string|null
     {
         return null;
     }

@@ -19,31 +19,31 @@ interface PhoneAware
      *
      * @return self
      */
-    public function setPhone(?string $number);
+    public function setPhone(string|null $number): static;
 
     /**
      * Get phone
      *
-     * If no "phone" value set, method
-     * sets and returns a default "phone".
+     * If no phone value set, method
+     * sets and returns a default phone.
      *
      * @see getDefaultPhone()
      *
      * @return string|null phone or null if no phone has been set
      */
-    public function getPhone(): ?string;
+    public function getPhone(): string|null;
 
     /**
-     * Check if "phone" has been set
+     * Check if phone has been set
      *
-     * @return bool True if "phone" has been set, false if not
+     * @return bool True if phone has been set, false if not
      */
     public function hasPhone(): bool;
 
     /**
-     * Get a default "phone" value, if any is available
+     * Get a default phone value, if any is available
      *
-     * @return string|null Default "phone" value or null if no default value is available
+     * @return string|null Default phone value or null if no default value is available
      */
-    public function getDefaultPhone(): ?string;
+    public function getDefaultPhone(): string|null;
 }

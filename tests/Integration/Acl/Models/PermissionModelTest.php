@@ -33,7 +33,7 @@ class PermissionModelTest extends AclTestCase
 
         $faker = $this->getFaker();
         $slug = $faker->slug(2);
-        $name = $faker->name;
+        $name = $faker->name();
         $desc = $faker->text(20);
 
         /** @var Permission $permission */
@@ -68,7 +68,7 @@ class PermissionModelTest extends AclTestCase
 
         $faker = $this->getFaker();
         $slug = $faker->slug(2);
-        $name = $faker->name;
+        $name = $faker->name();
 
         /** @var Permission $permission */
         Permission::create([

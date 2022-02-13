@@ -3,7 +3,6 @@
 namespace Aedart\Http\Clients\Requests\Builders;
 
 use Aedart\Contracts\Http\Clients\Client;
-use Aedart\Contracts\Http\Clients\Middleware;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Aedart\Contracts\Http\Messages\Serializers\HttpSerializerFactoryAware;
@@ -14,6 +13,7 @@ use Aedart\Support\Helpers\Container\ContainerTrait;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 
 /**
  * Http Request Base Builder
@@ -72,7 +72,7 @@ abstract class BaseBuilder implements
     /**
      * {@inheritdoc}
      */
-    public function get($uri = null): ResponseInterface
+    public function get(string|UriInterface|null $uri = null): ResponseInterface
     {
         return $this->request('GET', $uri);
     }
@@ -80,7 +80,7 @@ abstract class BaseBuilder implements
     /**
      * {@inheritdoc}
      */
-    public function head($uri = null): ResponseInterface
+    public function head(string|UriInterface|null $uri = null): ResponseInterface
     {
         return $this->request('HEAD', $uri);
     }
@@ -88,7 +88,7 @@ abstract class BaseBuilder implements
     /**
      * {@inheritdoc}
      */
-    public function post($uri = null, array $body = []): ResponseInterface
+    public function post(string|UriInterface|null $uri = null, array $body = []): ResponseInterface
     {
         return $this->request('POST', $uri, [
             RequestOptions::FORM_PARAMS => $body
@@ -98,7 +98,7 @@ abstract class BaseBuilder implements
     /**
      * {@inheritdoc}
      */
-    public function put($uri = null, array $body = []): ResponseInterface
+    public function put(string|UriInterface|null $uri = null, array $body = []): ResponseInterface
     {
         return $this->request('PUT', $uri, [
             RequestOptions::FORM_PARAMS => $body
@@ -108,7 +108,7 @@ abstract class BaseBuilder implements
     /**
      * {@inheritdoc}
      */
-    public function delete($uri = null, array $body = []): ResponseInterface
+    public function delete(string|UriInterface|null $uri = null, array $body = []): ResponseInterface
     {
         return $this->request('DELETE', $uri, [
             RequestOptions::FORM_PARAMS => $body
@@ -118,7 +118,7 @@ abstract class BaseBuilder implements
     /**
      * {@inheritdoc}
      */
-    public function options($uri = null): ResponseInterface
+    public function options(string|UriInterface|null $uri = null): ResponseInterface
     {
         return $this->request('OPTIONS', $uri);
     }
@@ -126,7 +126,7 @@ abstract class BaseBuilder implements
     /**
      * {@inheritdoc}
      */
-    public function patch($uri = null, array $body = []): ResponseInterface
+    public function patch(string|UriInterface|null $uri = null, array $body = []): ResponseInterface
     {
         return $this->request('PATCH', $uri, [
             RequestOptions::FORM_PARAMS => $body
@@ -146,7 +146,7 @@ abstract class BaseBuilder implements
      *
      * @return mixed
      */
-    public function driver()
+    public function driver(): mixed
     {
         return $this->client()->driver();
     }
@@ -159,7 +159,7 @@ abstract class BaseBuilder implements
      *
      * @return mixed
      */
-    public function __call($method, $parameters)
+    public function __call(string $method, array $parameters): mixed
     {
         // Forward calls to the Http Query Builder, but return this
         // request builder instance, so that request building can

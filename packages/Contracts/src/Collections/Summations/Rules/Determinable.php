@@ -15,11 +15,11 @@ namespace Aedart\Contracts\Collections\Summations\Rules;
 interface Determinable
 {
     /**
-     * Determine whether or not given item can be processed
+     * Determine whether given item can be processed or not
      *
      * @param mixed $item
      *
      * @return bool
      */
-    public function canProcess($item): bool;
+    public function canProcess(mixed $item): bool;
 }

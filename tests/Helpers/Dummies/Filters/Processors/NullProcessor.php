@@ -27,7 +27,7 @@ class NullProcessor extends BaseProcessor
     /**
      * @inheritDoc
      */
-    public function process(BuiltFiltersMap $built, callable $next)
+    public function process(BuiltFiltersMap $built, callable $next): mixed
     {
         $this->isProcessed = true;
 

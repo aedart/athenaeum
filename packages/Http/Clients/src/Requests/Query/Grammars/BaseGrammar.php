@@ -37,7 +37,7 @@ abstract class BaseGrammar implements
      *
      * @var Builder|null
      */
-    protected ?Builder $query = null;
+    protected Builder|null $query = null;
 
     /**
      * The default parameter separator
@@ -594,7 +594,7 @@ abstract class BaseGrammar implements
      *
      * @throws HttpQueryBuilderException
      */
-    protected function resolveOperator($operator, string $field): string
+    protected function resolveOperator(mixed $operator, string $field): string
     {
         if (!is_string($operator)) {
             throw new UnableToBuildHttpQuery(sprintf('Expected string operator for %s, %s given', $field, gettype($operator)));
@@ -632,7 +632,7 @@ abstract class BaseGrammar implements
      *
      * @throws HttpQueryBuilderException
      */
-    protected function resolveValue($value)
+    protected function resolveValue(mixed $value): mixed
     {
         try {
             if (is_null($value)) {
@@ -711,26 +711,15 @@ abstract class BaseGrammar implements
      */
     protected function resolveDateFormat(string $format): string
     {
-        switch ($format) {
-            case self::DATE_FORMAT:
-                return $this->options[$format] ?? 'Y-m-d';
-
-            case self::YEAR_FORMAT:
-                return $this->options[$format] ?? 'Y';
-
-            case self::MONTH_FORMAT:
-                return $this->options[$format] ?? 'm';
-
-            case self::DAY_FORMAT:
-                return $this->options[$format] ?? 'd';
-
-            case self::TIME_FORMAT:
-                return $this->options[$format] ?? 'H:i:s';
-
-            case self::DATETIME_FORMAT:
-            default:
-                return $this->options[$format] ?? DateTimeInterface::ISO8601;
-        }
+        return match ($format) {
+            self::DATE_FORMAT => $this->options[$format] ?? 'Y-m-d',
+            self::YEAR_FORMAT => $this->options[$format] ?? 'Y',
+            self::MONTH_FORMAT => $this->options[$format] ?? 'm',
+            self::DAY_FORMAT => $this->options[$format] ?? 'd',
+            self::TIME_FORMAT => $this->options[$format] ?? 'H:i:s',
+            self::DATETIME_FORMAT => $this->options[$format] ?? DateTimeInterface::RFC3339,
+            default => $this->options[$format] ?? DateTimeInterface::RFC3339
+        };
     }
 
     /**

@@ -20,7 +20,7 @@ trait AppTrait
      *
      * @var Application|null
      */
-    protected ?Application $app = null;
+    protected Application|null $app = null;
 
     /**
      * Set app
@@ -29,7 +29,7 @@ trait AppTrait
      *
      * @return self
      */
-    public function setApp(?Application $application)
+    public function setApp(Application|null $application): static
     {
         $this->app = $application;
 
@@ -47,7 +47,7 @@ trait AppTrait
      *
      * @return Application|null app or null if none app has been set
      */
-    public function getApp(): ?Application
+    public function getApp(): Application|null
     {
         if (!$this->hasApp()) {
             $this->setApp($this->getDefaultApp());
@@ -70,7 +70,7 @@ trait AppTrait
      *
      * @return Application|null A default app value or Null if no default value is available
      */
-    public function getDefaultApp(): ?Application
+    public function getDefaultApp(): Application|null
     {
         return App::getFacadeRoot();
     }

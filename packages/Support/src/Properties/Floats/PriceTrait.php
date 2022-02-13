@@ -17,7 +17,7 @@ trait PriceTrait
      *
      * @var float|null
      */
-    protected ?float $price = null;
+    protected float|null $price = null;
 
     /**
      * Set price
@@ -26,7 +26,7 @@ trait PriceTrait
      *
      * @return self
      */
-    public function setPrice(?float $amount)
+    public function setPrice(float|null $amount): static
     {
         $this->price = $amount;
 
@@ -36,14 +36,14 @@ trait PriceTrait
     /**
      * Get price
      *
-     * If no "price" value set, method
-     * sets and returns a default "price".
+     * If no price value set, method
+     * sets and returns a default price.
      *
      * @see getDefaultPrice()
      *
      * @return float|null price or null if no price has been set
      */
-    public function getPrice(): ?float
+    public function getPrice(): float|null
     {
         if (!$this->hasPrice()) {
             $this->setPrice($this->getDefaultPrice());
@@ -52,9 +52,9 @@ trait PriceTrait
     }
 
     /**
-     * Check if "price" has been set
+     * Check if price has been set
      *
-     * @return bool True if "price" has been set, false if not
+     * @return bool True if price has been set, false if not
      */
     public function hasPrice(): bool
     {
@@ -62,11 +62,11 @@ trait PriceTrait
     }
 
     /**
-     * Get a default "price" value, if any is available
+     * Get a default price value, if any is available
      *
-     * @return float|null Default "price" value or null if no default value is available
+     * @return float|null Default price value or null if no default value is available
      */
-    public function getDefaultPrice(): ?float
+    public function getDefaultPrice(): float|null
     {
         return null;
     }

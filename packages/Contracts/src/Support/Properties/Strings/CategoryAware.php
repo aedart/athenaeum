@@ -19,31 +19,31 @@ interface CategoryAware
      *
      * @return self
      */
-    public function setCategory(?string $name);
+    public function setCategory(string|null $name): static;
 
     /**
      * Get category
      *
-     * If no "category" value set, method
-     * sets and returns a default "category".
+     * If no category value set, method
+     * sets and returns a default category.
      *
      * @see getDefaultCategory()
      *
      * @return string|null category or null if no category has been set
      */
-    public function getCategory(): ?string;
+    public function getCategory(): string|null;
 
     /**
-     * Check if "category" has been set
+     * Check if category has been set
      *
-     * @return bool True if "category" has been set, false if not
+     * @return bool True if category has been set, false if not
      */
     public function hasCategory(): bool;
 
     /**
-     * Get a default "category" value, if any is available
+     * Get a default category value, if any is available
      *
-     * @return string|null Default "category" value or null if no default value is available
+     * @return string|null Default category value or null if no default value is available
      */
-    public function getDefaultCategory(): ?string;
+    public function getDefaultCategory(): string|null;
 }

@@ -9,9 +9,9 @@ if (!function_exists('paths')) {
     /**
      * Get he paths container
      *
-     * @return mixed|PathsContainer|Application
+     * @return PathsContainer|Application
      */
-    function paths()
+    function paths(): PathsContainer|Application
     {
         // Try to resolve the Paths Container if possible. If not,
         // try to default to Laravel's application. This is in case
@@ -68,6 +68,20 @@ if (!function_exists('config_path')) {
     function config_path(string $path = ''): string
     {
         return paths()->configPath($path);
+    }
+}
+
+if (! function_exists('lang_path')) {
+    /**
+     * Get path to language files.
+     *
+     * @param  string  $path  [optional]
+     *
+     * @return string
+     */
+    function lang_path(string $path = ''): string
+    {
+        return paths()->langPath($path);
     }
 }
 
@@ -137,7 +151,7 @@ if (!function_exists('storage_path')) {
             return $app->storagePath($path);
         }
 
-        return $app->storagePath() . DIRECTORY_SEPARATOR . $path;
+        return $app->storagePath($path);
     }
 }
 

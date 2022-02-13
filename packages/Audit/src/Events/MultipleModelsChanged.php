@@ -2,13 +2,12 @@
 
 namespace Aedart\Audit\Events;
 
-use Aedart\Audit\Observers\Concerns;
+use Aedart\Audit\Events\Concerns;
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 use Throwable;
@@ -27,64 +26,19 @@ use Throwable;
  */
 class MultipleModelsChanged
 {
-    use Dispatchable;
-    use Concerns\ModelAttributes;
+    use Concerns\EventData;
 
     /**
      * The models that have changed
      *
      * @var Collection|Model[]
      */
-    public $models;
-
-    /**
-     * Unique user identifier that caused change
-     *
-     * @var string|int|null
-     */
-    public $user;
-
-    /**
-     * Date and time of when the event happened
-     *
-     * (When user performed action that caused model change)
-     *
-     * @var DateTimeInterface|Carbon|string
-     */
-    public $performedAt;
-
-    /**
-     * The event type
-     *
-     * @var string
-     */
-    public string $type;
-
-    /**
-     * Original data (attributes) before change occurred
-     *
-     * @var array|null
-     */
-    public ?array $original = null;
-
-    /**
-     * Changed data (attributes) after change occurred
-     *
-     * @var array|null
-     */
-    public ?array $changed = null;
-
-    /**
-     * Eventual user provided message associated with the event
-     *
-     * @var string|null
-     */
-    public ?string $message = null;
+    public Collection|array $models;
 
     /**
      * Creates new "multiple models changed" event instance
      *
-     * @param Collection<Model>|Model[] $models The changed models
+     * @param  Collection<Model>|Model[]  $models The changed models
      * @param Model|Authenticatable|null $user The user that caused the change
      * @param string $type [optional] The event type
      * @param array|null $original [optional] Original data (attributes) before change occurred.
@@ -98,17 +52,17 @@ class MultipleModelsChanged
      * @throws Throwable
      */
     public function __construct(
-        $models,
-        $user,
+        array|Collection $models,
+        Model|Authenticatable|null $user,
         string $type = Types::UPDATED,
         ?array $original = null,
         ?array $changed = null,
         ?string $message = null,
-        $performedAt = null
+        DateTimeInterface|Carbon|string|null $performedAt = null
     )
     {
         // Resolve models argument
-        if (!($models instanceof Collection) && is_iterable($models)) {
+        if (!($models instanceof Collection)) {
             $models = collect($models);
         }
 
@@ -118,8 +72,6 @@ class MultipleModelsChanged
         }
 
         $this->models = $models;
-        $this->user = optional($user)->getKey();
-        $this->type = $type;
 
         // Resolve the original and changed data (attributes). Must be done before
         // event is serialised. Here, we assume that the same kind of change is made
@@ -133,43 +85,13 @@ class MultipleModelsChanged
 
         // Reduce original attributes, and set original and changed
         $original = $this->reduceOriginal($original, $changed);
+
         $this
+            ->byUser($user)
+            ->type($type)
             ->withOriginalData($original)
-            ->withChangedData($changed);
-
-        // Resolve evt. message
-        $this->message = $message ?? $this->resolveAuditTrailMessage($model, $type);
-
-        // Resolve performed at...
-        $performedAt = $performedAt ?? Carbon::now();
-        $this->performedAt = $this->formatDatetime($performedAt);
-    }
-
-    /**
-     * Set the original data (attributes) before changed occurred
-     *
-     * @param array|null $data [optional]
-     *
-     * @return self
-     */
-    public function withOriginalData(?array $data = null): self
-    {
-        $this->original = $data;
-
-        return $this;
-    }
-
-    /**
-     * Set the changed data (attributes) after changed occurred
-     *
-     * @param array|null $data [optional]
-     *
-     * @return self
-     */
-    public function withChangedData(?array $data = null): self
-    {
-        $this->changed = $data;
-
-        return $this;
+            ->withChangedData($changed)
+            ->withMessage($message ?? $this->resolveAuditTrailMessage($model, $type))
+            ->performedAt($performedAt);
     }
 }

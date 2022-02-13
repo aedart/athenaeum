@@ -3,7 +3,6 @@
 namespace Aedart\Testing\Helpers;
 
 use Aedart\Testing\Exceptions\IncorrectPropertiesAmount;
-use Codeception\TestCase\Test;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -25,9 +24,9 @@ class TraitTester
     /**
      * The test-case to use
      *
-     * @var TestCase|Test
+     * @var TestCase
      */
-    protected $testCase;
+    protected TestCase $testCase;
 
     /**
      * Trait class path
@@ -39,9 +38,9 @@ class TraitTester
     /**
      * Name of getter-setter-trait property
      *
-     * @var string
+     * @var string|null
      */
-    protected ?string $property;
+    protected string|null $property;
 
     /**
      * The mocked trait
@@ -53,13 +52,13 @@ class TraitTester
     /**
      * TraitTester constructor.
      *
-     * @param TestCase|Test $testCase
+     * @param TestCase $testCase
      * @param string $trait Trait class path
-     * @param null|string $property [optional]
+     * @param string|null $property [optional]
      *
      * @throws ReflectionException
      */
-    public function __construct(TestCase $testCase, string $trait, ?string $property)
+    public function __construct(TestCase $testCase, string $trait, string|null $property = null)
     {
         $this->testCase = $testCase;
         $this->trait = $trait;
@@ -81,14 +80,14 @@ class TraitTester
      *
      * @see \Aedart\Testing\Helpers\ArgumentFaker::fakeFor
      *
-     * @param mixed|null $setValue [optional] Auto generated, if none given
-     * @param mixed|null $defaultValue [optional] Auto generated, if none given
+     * @param mixed $setValue [optional] Auto generated, if none given
+     * @param mixed $defaultValue [optional] Auto generated, if none given
      * @param bool $assertDefaultIsNull [optional] If true, then "get-default" will be asserted to
      *                                  return "null" on initial call
      *
      * @throws ReflectionException
      */
-    public function assert($setValue = null, $defaultValue = null, bool $assertDefaultIsNull = true)
+    public function assert(mixed $setValue = null, mixed $defaultValue = null, bool $assertDefaultIsNull = true)
     {
         $trait = $this->trait;
         $method = $this->setPropertyMethodName();
@@ -109,7 +108,7 @@ class TraitTester
      *
      * @throws ExpectationFailedException
      */
-    public function assertWithValues($setValue, $defaultValue, bool $assertDefaultIsNull = true)
+    public function assertWithValues(mixed $setValue, mixed $defaultValue, bool $assertDefaultIsNull = true)
     {
         $mock = $this->mock;
 
@@ -142,7 +141,7 @@ class TraitTester
      */
     public function assertDefaultValueIsNull(
         MockObject $mock,
-        ?string $method = null,
+        string|null $method = null,
         string $failMessage = 'Default value should be null'
     ) {
         $method = $method ?? $this->getDefaultPropertyMethodName();
@@ -164,7 +163,7 @@ class TraitTester
      */
     public function assertHasNoValue(
         MockObject $mock,
-        ?string $method = null,
+        string|null $method = null,
         string $failMessage = 'Should not have a value set'
     ) {
         $method = $method ?? $this->hasPropertyMethodName();
@@ -189,16 +188,16 @@ class TraitTester
      */
     public function assertCanSetAndGetValue(
         MockObject $mock,
-        $value,
-        ?string $setMethod = null,
-        ?string $getMethod = null,
+        mixed $value,
+        string|null $setMethod = null,
+        string|null $getMethod = null,
         string $failMessage = 'Incorrect value obtained'
     ) {
         $setMethod = $setMethod ?? $this->setPropertyMethodName();
         $getMethod = $getMethod ?? $this->getPropertyMethodName();
 
         if (is_object($value)) {
-            ConsoleDebugger::output(sprintf(' testing %s(%s)', $setMethod, get_class($value)));
+            ConsoleDebugger::output(sprintf(' testing %s(%s)', $setMethod, $value::class));
         } else {
             ConsoleDebugger::output(sprintf(' testing %s(%s)', $setMethod, var_export($value, true)));
         }
@@ -225,16 +224,16 @@ class TraitTester
      */
     public function assertCustomDefaultValue(
         string $trait,
-        $defaultValue,
-        ?string $defaultMethod = null,
-        ?string $getMethod = null,
+        mixed $defaultValue,
+        string|null $defaultMethod = null,
+        string|null $getMethod = null,
         string $failMessage = 'Incorrect default value returned'
     ) {
         $defaultMethod = $defaultMethod ?? $this->getDefaultPropertyMethodName();
         $getMethod = $getMethod ?? $this->getPropertyMethodName();
 
         if (is_object($defaultValue)) {
-            ConsoleDebugger::output(sprintf(' mocking %s(), must return %s', $defaultMethod, get_class($defaultValue)));
+            ConsoleDebugger::output(sprintf(' mocking %s(), must return %s', $defaultMethod, $defaultValue::class));
         } else {
             ConsoleDebugger::output(sprintf(' mocking %s(), must return %s', $defaultMethod, var_export($defaultValue, true)));
         }

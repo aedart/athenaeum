@@ -20,7 +20,7 @@ trait TranslatorTrait
      *
      * @var Translator|null
      */
-    protected ?Translator $translator = null;
+    protected Translator|null $translator = null;
 
     /**
      * Set translator
@@ -29,7 +29,7 @@ trait TranslatorTrait
      *
      * @return self
      */
-    public function setTranslator(?Translator $translator)
+    public function setTranslator(Translator|null $translator): static
     {
         $this->translator = $translator;
 
@@ -47,7 +47,7 @@ trait TranslatorTrait
      *
      * @return Translator|null translator or null if none translator has been set
      */
-    public function getTranslator(): ?Translator
+    public function getTranslator(): Translator|null
     {
         if (!$this->hasTranslator()) {
             $this->setTranslator($this->getDefaultTranslator());
@@ -70,7 +70,7 @@ trait TranslatorTrait
      *
      * @return Translator|null A default translator value or Null if no default value is available
      */
-    public function getDefaultTranslator(): ?Translator
+    public function getDefaultTranslator(): Translator|null
     {
         return Lang::getFacadeRoot();
     }

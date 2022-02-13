@@ -17,7 +17,7 @@ trait SizeTrait
      *
      * @var string|null
      */
-    protected ?string $size = null;
+    protected string|null $size = null;
 
     /**
      * Set size
@@ -26,7 +26,7 @@ trait SizeTrait
      *
      * @return self
      */
-    public function setSize(?string $size)
+    public function setSize(string|null $size): static
     {
         $this->size = $size;
 
@@ -36,14 +36,14 @@ trait SizeTrait
     /**
      * Get size
      *
-     * If no "size" value set, method
-     * sets and returns a default "size".
+     * If no size value set, method
+     * sets and returns a default size.
      *
      * @see getDefaultSize()
      *
      * @return string|null size or null if no size has been set
      */
-    public function getSize(): ?string
+    public function getSize(): string|null
     {
         if (!$this->hasSize()) {
             $this->setSize($this->getDefaultSize());
@@ -52,9 +52,9 @@ trait SizeTrait
     }
 
     /**
-     * Check if "size" has been set
+     * Check if size has been set
      *
-     * @return bool True if "size" has been set, false if not
+     * @return bool True if size has been set, false if not
      */
     public function hasSize(): bool
     {
@@ -62,11 +62,11 @@ trait SizeTrait
     }
 
     /**
-     * Get a default "size" value, if any is available
+     * Get a default size value, if any is available
      *
-     * @return string|null Default "size" value or null if no default value is available
+     * @return string|null Default size value or null if no default value is available
      */
-    public function getDefaultSize(): ?string
+    public function getDefaultSize(): string|null
     {
         return null;
     }

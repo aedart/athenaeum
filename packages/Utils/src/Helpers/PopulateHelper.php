@@ -7,8 +7,6 @@ use Exception;
 /**
  * Populate Helper
  *
- * <br />
- *
  * Offers populate (hydrate) utilities.
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
@@ -27,13 +25,13 @@ class PopulateHelper
      */
     public static function verifyRequired(array $data, array $required): void
     {
-        // Check if the provided data has less entries, than the
+        // Check if the provided data has fewer entries, than the
         // required
         if (count($data) < count($required)) {
             throw new Exception('Cannot populate %s, incorrect amount of properties given');
         }
 
-        // Check that all of the required are present
+        // Check that all the required are present
         foreach ($required as $requiredKey) {
             if (!isset($data[$requiredKey])) {
                 throw new Exception(sprintf('Cannot populate, missing %s', $requiredKey));

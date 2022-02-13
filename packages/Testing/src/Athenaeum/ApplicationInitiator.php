@@ -27,7 +27,7 @@ trait ApplicationInitiator
      *
      * @var CoreApplication|null
      */
-    protected ?CoreApplication $app = null;
+    protected CoreApplication|null $app = null;
 
     /**
      * State of application's exception handling.
@@ -46,7 +46,7 @@ trait ApplicationInitiator
      *
      * @throws Throwable
      */
-    public function startApplication()
+    public function startApplication(): static
     {
         if ($this->hasApplicationBeenStarted()) {
             return $this;
@@ -85,6 +85,10 @@ trait ApplicationInitiator
         $this->app->destroy();
         $this->app = null;
 
+        // Ensure to clear application environment. This is only need
+        // for tests - DO NOT DO THIS IN PRODUCTION!
+        unset($_ENV['APP_ENV'], $_SERVER['APP_ENV']);
+
         Env::enablePutenv();
 
         return true;
@@ -95,7 +99,7 @@ trait ApplicationInitiator
      *
      * @return Application|null
      */
-    public function getApplication(): ?Application
+    public function getApplication(): Application|null
     {
         return $this->app;
     }
@@ -125,7 +129,7 @@ trait ApplicationInitiator
      *
      * @throws Throwable
      */
-    protected function createApplication($paths = null)
+    protected function createApplication(PathsContainer|array|null $paths = null): Application
     {
         // Resolve paths
         $paths = $paths ?? $this->applicationPaths();
@@ -154,6 +158,7 @@ trait ApplicationInitiator
             'basePath' => $root,
             'bootstrapPath' => $root . DIRECTORY_SEPARATOR . 'bootstrap',
             'configPath' => $root . DIRECTORY_SEPARATOR . 'config',
+            'langPath' => $root . DIRECTORY_SEPARATOR . 'lang',
             'databasePath' => $root . DIRECTORY_SEPARATOR . 'database',
             'environmentPath' => $root,
             'resourcePath' => $root . DIRECTORY_SEPARATOR . 'resources',

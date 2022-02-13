@@ -13,11 +13,13 @@ use Aedart\Contracts\Utils\Populatable;
 
 class Box implements Populatable
 {
-    public function populate(array $data = []) : void
+    public function populate(array $data = []) : static
     {
         foreach($data as $name => $value){
             // Populate your object... not shown here
         }
+        
+        return $this;
     }
 }
 ```
@@ -35,7 +37,7 @@ use Aedart\Utils\Helpers\PopulateHelper;
 
 class Box implements Populatable
 {
-    public function populate(array $data = []) : void
+    public function populate(array $data = []) : static
     {
         // Fail if "width" and "height" properties are missing
         PopulateHelper::verifyRequired($data, [
@@ -43,7 +45,9 @@ class Box implements Populatable
             'height'
         ]);
         
-        // Do something with data.
+        // ...Do something with data...
+        
+        return $this;
     }
 }
 ```

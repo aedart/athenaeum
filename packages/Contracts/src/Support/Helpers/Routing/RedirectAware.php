@@ -2,8 +2,6 @@
 
 namespace Aedart\Contracts\Support\Helpers\Routing;
 
-use Illuminate\Routing\Redirector;
-
 /**
  * Redirect Aware
  *
@@ -15,11 +13,11 @@ interface RedirectAware
     /**
      * Set redirect
      *
-     * @param Redirector|null $redirector Redirector instance
+     * @param \Illuminate\Routing\Redirector|null $redirector Redirector instance
      *
      * @return self
      */
-    public function setRedirect(?Redirector $redirector);
+    public function setRedirect($redirector): static;
 
     /**
      * Get redirect
@@ -30,9 +28,9 @@ interface RedirectAware
      *
      * @see getDefaultRedirect()
      *
-     * @return Redirector|null redirect or null if none redirect has been set
+     * @return \Illuminate\Routing\Redirector|null redirect or null if none redirect has been set
      */
-    public function getRedirect(): ?Redirector;
+    public function getRedirect();
 
     /**
      * Check if redirect has been set
@@ -44,7 +42,7 @@ interface RedirectAware
     /**
      * Get a default redirect value, if any is available
      *
-     * @return Redirector|null A default redirect value or Null if no default value is available
+     * @return \Illuminate\Routing\Redirector|null A default redirect value or Null if no default value is available
      */
-    public function getDefaultRedirect(): ?Redirector;
+    public function getDefaultRedirect();
 }

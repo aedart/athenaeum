@@ -19,7 +19,7 @@ interface CryptAware
      *
      * @return self
      */
-    public function setCrypt(?Encrypter $encrypter);
+    public function setCrypt(Encrypter|null $encrypter): static;
 
     /**
      * Get crypt
@@ -32,7 +32,7 @@ interface CryptAware
      *
      * @return Encrypter|null crypt or null if none crypt has been set
      */
-    public function getCrypt(): ?Encrypter;
+    public function getCrypt(): Encrypter|null;
 
     /**
      * Check if crypt has been set
@@ -46,5 +46,5 @@ interface CryptAware
      *
      * @return Encrypter|null A default crypt value or Null if no default value is available
      */
-    public function getDefaultCrypt(): ?Encrypter;
+    public function getDefaultCrypt(): Encrypter|null;
 }

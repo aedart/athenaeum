@@ -19,31 +19,31 @@ interface ValueAware
      *
      * @return self
      */
-    public function setValue(?string $value);
+    public function setValue(string|null $value): static;
 
     /**
      * Get value
      *
-     * If no "value" value set, method
-     * sets and returns a default "value".
+     * If no value value set, method
+     * sets and returns a default value.
      *
      * @see getDefaultValue()
      *
      * @return string|null value or null if no value has been set
      */
-    public function getValue(): ?string;
+    public function getValue(): string|null;
 
     /**
-     * Check if "value" has been set
+     * Check if value has been set
      *
-     * @return bool True if "value" has been set, false if not
+     * @return bool True if value has been set, false if not
      */
     public function hasValue(): bool;
 
     /**
-     * Get a default "value" value, if any is available
+     * Get a default value value, if any is available
      *
-     * @return string|null Default "value" value or null if no default value is available
+     * @return string|null Default value value or null if no default value is available
      */
-    public function getDefaultValue(): ?string;
+    public function getDefaultValue(): string|null;
 }

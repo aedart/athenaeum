@@ -27,14 +27,14 @@ class NestedDtoTest extends DtoTestCase
     public function canPopulateWithObjects()
     {
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'age' => $this->faker->randomNumber(),
 
             'address' => new Address([
-                'street' => $this->faker->streetName,
+                'street' => $this->faker->streetName(),
 
                 'city' => new City([
-                    'name' => $this->faker->city,
+                    'name' => $this->faker->city(),
                     'zipCode' => $this->faker->randomNumber(4),
                 ])
             ])
@@ -53,12 +53,12 @@ class NestedDtoTest extends DtoTestCase
     public function canResolveUnboundInstances()
     {
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'age' => $this->faker->randomNumber(),
             'address' => [
-                'street' => $this->faker->streetName,
+                'street' => $this->faker->streetName(),
                 'city' => [
-                    'name' => $this->faker->city,
+                    'name' => $this->faker->city(),
                     'zipCode' => $this->faker->randomNumber(4),
                 ]
             ]
@@ -81,12 +81,12 @@ class NestedDtoTest extends DtoTestCase
         $this->ioc->destroy();
 
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'age' => $this->faker->randomNumber(),
             'address' => [
-                'street' => $this->faker->streetName,
+                'street' => $this->faker->streetName(),
                 'city' => [
-                    'name' => $this->faker->city,
+                    'name' => $this->faker->city(),
                     'zipCode' => $this->faker->randomNumber(4),
                 ]
             ]
@@ -101,12 +101,12 @@ class NestedDtoTest extends DtoTestCase
     public function canJsonSerialiseNestedInstances()
     {
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'age' => $this->faker->randomNumber(),
             'address' => [
-                'street' => $this->faker->streetName,
+                'street' => $this->faker->streetName(),
                 'city' => [
-                    'name' => $this->faker->city,
+                    'name' => $this->faker->city(),
                     'zipCode' => $this->faker->randomNumber(4),
                 ]
             ]
@@ -125,12 +125,12 @@ class NestedDtoTest extends DtoTestCase
     public function canSerialiseNestedInstances()
     {
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'age' => $this->faker->randomNumber(),
             'address' => [
-                'street' => $this->faker->streetName,
+                'street' => $this->faker->streetName(),
                 'city' => [
-                    'name' => $this->faker->city,
+                    'name' => $this->faker->city(),
                     'zipCode' => $this->faker->randomNumber(4),
                 ]
             ]
@@ -158,9 +158,9 @@ class NestedDtoTest extends DtoTestCase
         $dto = $this->makeDto();
 
         $data = [
-            'street' => $this->faker->streetName,
+            'street' => $this->faker->streetName(),
             'city' => [
-                'name' => $this->faker->city,
+                'name' => $this->faker->city(),
                 'zipCode' => $this->faker->randomNumber(4)
             ]
         ];
@@ -182,19 +182,19 @@ class NestedDtoTest extends DtoTestCase
         });
 
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'address' => [
-                'street' => $this->faker->streetName,
+                'street' => $this->faker->streetName(),
                 'city' => [
-                    'name' => $this->faker->city,
-                    'zipCode' => (int) $this->faker->postcode
+                    'name' => $this->faker->city(),
+                    'zipCode' => (int) $this->faker->postcode()
                 ]
             ],
 
             // Here, the interface is bound, thus this should
             // not fail
             'note' => [
-                'content' => $this->faker->sentence
+                'content' => $this->faker->sentence()
             ]
         ];
 
@@ -217,19 +217,19 @@ class NestedDtoTest extends DtoTestCase
         $this->expectException(BindingResolutionException::class);
 
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'address' => [
-                'street' => $this->faker->streetName,
+                'street' => $this->faker->streetName(),
                 'city' => [
-                    'name' => $this->faker->city,
-                    'zipCode' => (int) $this->faker->postcode
+                    'name' => $this->faker->city(),
+                    'zipCode' => (int) $this->faker->postcode()
                 ]
             ],
 
             // Here, the interface is bound, thus this should
             // not fail
             'note' => [
-                'content' => $this->faker->sentence
+                'content' => $this->faker->sentence()
             ]
         ];
 

@@ -20,7 +20,7 @@ trait CacheTrait
      *
      * @var Repository|null
      */
-    protected ?Repository $cache = null;
+    protected Repository|null $cache = null;
 
     /**
      * Set cache
@@ -29,7 +29,7 @@ trait CacheTrait
      *
      * @return self
      */
-    public function setCache(?Repository $repository)
+    public function setCache(Repository|null $repository): static
     {
         $this->cache = $repository;
 
@@ -47,7 +47,7 @@ trait CacheTrait
      *
      * @return Repository|null cache or null if none cache has been set
      */
-    public function getCache(): ?Repository
+    public function getCache(): Repository|null
     {
         if (!$this->hasCache()) {
             $this->setCache($this->getDefaultCache());
@@ -70,7 +70,7 @@ trait CacheTrait
      *
      * @return Repository|null A default cache value or Null if no default value is available
      */
-    public function getDefaultCache(): ?Repository
+    public function getDefaultCache(): Repository|null
     {
         $manager = Cache::getFacadeRoot();
         if (isset($manager)) {

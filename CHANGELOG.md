@@ -1,425 +1,508 @@
-# Release Notes
+# Changelog
 
-## v5.x
+All notable changes to this project will be documented in this file.
 
-### [Unreleased]
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### [v5.27.0](https://github.com/aedart/athenaeum/compare/5.26.0...5.27.0)
+## [Unreleased]
 
-#### Added
+### Added
 
-* `MultipleModelsChanged` event in Audit package.  
+* `Dto` and `ArrayDto` can now accept and resolve union types. [#82](https://github.com/aedart/athenaeum/issues/82).
+* Maintenance Mode package that offers additional drivers for Laravel's Application, when using `php artisan down`. Available drivers: `'array'` and `'json'`. [#67](https://github.com/aedart/athenaeum/issues/67).
+* `EnvironmentHandler` interface in Core package, as a replacement for the application environment related methods, that were removed from Laravel's foundation `Application` interface in version `9.x`. [#85](https://github.com/aedart/athenaeum/pull/85)
+* `whereSlugNotIn()` method in `\Aedart\Database\Models\Concerns\Slugs` (_`Sluggable` interface also defines method_). [#64](https://github.com/aedart/athenaeum/issues/64).
+* `fetchAll()` method for the `HasMany` relation, in Redmine package. [#57](https://github.com/aedart/athenaeum/issues/57).
+* Optional `$mode` argument has been added to `\Aedart\Utils\Math::applySeed()`, which specifies the seeding algorithm to use. 
+* Optional seeding algorithm `$mode` argument has been added to `\Aedart\Utils\Arr::randomElement()`.
+* `hasCallback()` and `hasFallback()` methods added in `\Aedart\Utils\Helpers\Invoker`.
+* Documentation for `\Aedart\Utils\Arr::differenceAssoc()` (_previously undocumented. Method was added in `v5.17`_). [#45](https://github.com/aedart/athenaeum/issues/45).
+* Documentation for `\Aedart\Utils\Helpers\Invoker` (_previously undocumented. Helper was added in `v5.12`_).
+* `InteractsWithDeprecationHandling` added to `LaravelTestHelper`.
+* `isValid()` method in `Json` utility.
+
+### Changed
+
+**Breaking Changes**
+
+* Minimum required PHP version changed to `v8.0.2`.
+* Method arguments and return data types are changed (_all packages_), in accordance with PHP `v8.0`. Most fluent methods now return `static`. [#83](https://github.com/aedart/athenaeum/pull/83), [#77](https://github.com/aedart/athenaeum/issues/77).
+* `populate()` method now returns `static` instead of `void`, in `\Aedart\Contracts\Utils\Populatable` interface.
+* `all()` method added in `ApiResource` interface (_change is only breaking if you have custom implementation of interface_). [#54](https://github.com/aedart/athenaeum/issues/54).
+* `fresh()` method added in Http Client `Manager` (_change is only breaking if you have custom implementation of interface_). [#51](https://github.com/aedart/athenaeum/issues/51).
+* `PathsContainer` is now aware of "lang path" (_path to language files / directory_). The core application has also been modified to offer a `langPath()` method. [#76](https://github.com/aedart/athenaeum/issues/76).
+* Replaced `\DateTime` with `\DateTimeInterface` for all date related aware-of helpers. The `\Aedart\Contracts\Utils\DataTypes::DATE_TIME_TYPE` has also been changed. [#75](https://github.com/aedart/athenaeum/issues/75). 
+* `SearchFilter` no longer uses `StopWords` concern (_concern has been removed_). [#63](https://github.com/aedart/athenaeum/issues/63).
+* Return type of `package()` and `application()` is now set to `\Aedart\Contracts\Utils\Packages\Version`, in `\Aedart\Utils\Version`.  [#68](https://github.com/aedart/athenaeum/issues/68).
+* `PackageVersionException` is now thrown, when version cannot be obtained for a package, in `\Aedart\Utils\Version::package()`. [#68](https://github.com/aedart/athenaeum/issues/68).
+* Default datetime format is now [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), when no format is specified, for all Http Query Grammars, in Http Clients package.
+* `$seed` argument can no longer be `null` in `\Aedart\Utils\Math::applySeed()` method.
+* `MocksApplicationServices` from `AthenaeumTestHelper` and `LaravelTestHelper`. The "mock application services" helper has been deprecated by Laravel.
+
+**Non-breaking Changes**
+
+* `CHANGELOG.md` is now formatted according to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+* `when()` and `unless()` methods accept a `callable` as the result argument. [#81](https://github.com/aedart/athenaeum/issues/81). 
+* `storage_path()` helper in Core package will now pass `$path` argument to application `storagePath()` method, when application is available (_`$path` argument added in Laravel `v9.x`_).
+* Core `Application` uses `'json'` file based maintenance mode as driver, when application state is "down". [#67](https://github.com/aedart/athenaeum/issues/67).
+* `application()` method no longer uses git to obtain application's version. It now relies on Composer's `InstalledVersions::getRootPackage()`, in `\Aedart\Utils\Version`. [#68](https://github.com/aedart/athenaeum/issues/68).
+* Refactored `ModelHasChanged` and `MultipleModelsChanged` events. Both events are now a bit more fluent, in Audit package.
+* Refactored event listeners for Audit package. Listeners now inherit from base `RecordsEntries` abstraction.
+* Replaced `fzaninotto/faker` package with `fakerphp/faker`. [#23](https://github.com/aedart/athenaeum/issues/23).
+* Replaced property calls with method calls, on faker instance throughout many tests (_PHP faker deprecated several properties since `v1.14`_). [#23](https://github.com/aedart/athenaeum/issues/23).  
+* Upgraded to [Symplify Monorepo Builder](https://github.com/symplify/monorepo-builder) `v10.x`. [#60](https://github.com/aedart/athenaeum/issues/60), [#65](https://github.com/aedart/athenaeum/pull/65).
+* `\Aedart\Utils\Dates\Duration` now inherits from `Stringable`.
+* `castAsDate()` now also accepts `DateTimeInterface` as argument, in `ArrayDto`. [#82](https://github.com/aedart/athenaeum/issues/82)
+* Replaced `get_class()` calls with the use of new `::class` magic constant (_[introduced in PHP 8](https://www.php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class)_). Change is throughout all packages.
+
+### Removed
+
+* `\Aedart\Filters\Query\Filters\Concerns\StopWords` has been removed. Component didn't work as intended and caused several issues. [#63](https://github.com/aedart/athenaeum/issues/63).
+* `$language` argument from `\Aedart\Filters\Query\Filters\SearchFilter` (_was deprecated in `v5.25`_). [#63](https://github.com/aedart/athenaeum/issues/63).
+* `undot()` from `\Aedart\Utils\Arr`. The `undot()` method has been implemented in Laravel's `Arr`, which acts as the base class for `\Aedart\Utils\Arr`. This change is not breaking.
+* `terminating()` method from `\Aedart\Contracts\Core\Application`. Method is defined in Laravel's Application interfaces, which the core application inherits from.
+* `configurationIsChanged()`, `getCachedConfigPath()`, `getCachedServicesPath()`, `getCachedPackagesPath()`, `getCachedRoutesPath()` and `routesAreCached()` methods from
+Core `Application` (_methods were not supported to begin with. They were defined by Laravel's `Applicaiton` interface, but extracted into separate interfaces from `v9.x`_). [#86](https://github.com/aedart/athenaeum/pull/86).
+* `audit-trail.listener` setting, in `/configs/audit-trail.php` configuration (_was deprecated in `v5.27`_).
+
+### Fixed
+
+* `storagePath()` must be compatible with interface declared method, in `\Aedart\Core\Application` (_method was changed in Laravel `v9.x`_).
+* Input value "filter" contains a non-scalar value, when attempting get array value from http query via inside `\Aedart\Filters\BaseProcessor::value()` (_happened after upgrade to the latest version Laravel / Symfony_). [#69](https://github.com/aedart/athenaeum/issues/69).
+* Unexpected value for parameter "name": expecting "array". [#71](https://github.com/aedart/athenaeum/issues/71).
+* Incorrect commit reference passed on to `\Jean85\Version`, in `\Aedart\Utils\Version` (_happened after upgrade to the latest version of "Pretty Package Versions"_).
+* Schedule commands not registered in Core Application's console `Kernel` / Artisan. [#84](https://github.com/aedart/athenaeum/pull/84).
+* `\Illuminate\Support\ServiceProvider` imported into `\Aedart\Contracts\Service\Registrar` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Filesystem\Filesystem` imported into `\Aedart\Contracts\Support\Helpers\Filesystem\FileAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Http\Request` imported into `\Aedart\Contracts\Support\Helpers\Http\RequestAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Log\LogManager` imported into `\Aedart\Contracts\Support\Helpers\Logging\LogManagerAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Routing\Redirector` imported into `\Aedart\Contracts\Support\Helpers\Routing\RedirectAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\Session\SessionManager` imported into `\Aedart\Contracts\Support\Helpers\Session\SessionManagerAware` interface. This created unintended dependency on Laravel package.
+* `\Illuminate\View\Compilers\BladeCompiler` imported into `\Aedart\Contracts\Support\Helpers\View\BladeAware` interface. This created unintended dependency on Laravel package.
+* `$_ENV['APP_ENV']` and `$_SERVER['APP_ENV']` not unset after each Application test, causing environment detecting tests to fail, in `\Aedart\Testing\Athenaeum\ApplicationInitiator`.
+* `Codeception\TestCase\Test` class not found, in `\Aedart\Tests\Integration\Laravel\ApplicationInitiatorTest` (_happened after upgrade to the latest version of Codeception_). 
+* `LoadSpecifiedConfiguration` may nor inherit from final class. `\Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration` no longer inherits from `Orchestra\Testbench\Bootstrap\LoadConfiguration`, which has been declared final (_happened after upgrade to the latest version of Orchestra_).
+
+## [5.27.0] - 2022-01-31
+
+### Added
+
+* `MultipleModelsChanged` event in Audit package.
 * `RecordMultipleAuditTrailEntries` listener that handles `MultipleModelsChanged` events. Performs a mass insert of audit trail entries.
 * `AuditTrailEventSubscriber` that will handle registration of Audit Trail related event listeners.
 
-#### Deprecated
+### Deprecated
 
-* The `audit-trail.listener` configuration setting has been replaced with `audit-trail.subscriber`, in `configs/audit-trail.php`. 
+* The `audit-trail.listener` configuration setting has been replaced with `audit-trail.subscriber`, in `configs/audit-trail.php`.
 Will be removed in next major version (_in audit package_).
 
-#### Changed
+### Changed
 
-* `ModelChangedEvents` concern is now able to dispatch "multiple models changed" event, via `dispatchMultipleModelsChanged()` (_in audit package_). 
+* `ModelChangedEvents` concern is now able to dispatch "multiple models changed" event, via `dispatchMultipleModelsChanged()` (_in audit package_).
 
-#### Fixed
+### Fixed
 
 * `$performedAt` argument ignored in `\Aedart\Audit\Events\ModelHasChanged`.
 
-### [v5.26.0](https://github.com/aedart/athenaeum/compare/5.25.0...5.26.0)
+## [5.26.0] - 2022-01-03
 
-#### Changed
+### Changed
 
 * Bumped license year.
 
-### [v5.25.0](https://github.com/aedart/athenaeum/compare/5.24.2...5.25.0)
+## [5.25.0] - 2021-12-14
 
-#### Changed
+### Changed
 
 * Replaced [`ReflectionParameter::getClass`](https://www.php.net/manual/en/reflectionparameter.getclass.php) call in `IoCPartial` and `ArgumentFaker` with an alternative, because it's deprecated since PHP `v8.0`. [#61](https://github.com/aedart/athenaeum/issues/61).
 * Replaced `socket_create()` call with `tempfile()`, in `JsonTest`. From PHP `v8.0`, the `socket_create()` method returns an object, which can be encoded to Json and thus defeats the purpose of the test. [#61](https://github.com/aedart/athenaeum/issues/61).
 * Converting test model's primary key and auditable id to `string`, to avoid incorrect value comparison in PHP `v8.1`, in the `B0_AuditTrailTest`. [#61](https://github.com/aedart/athenaeum/issues/61).
 * Upgraded phpcs, easy-coding-standard and other vendor-bin dependencies.
 
-#### Fixed
+### Fixed
 
-* Removal of stop words causes search results to become undesired. The `StopWords` concern has now been deprecated and `SearchFilter` no longer automatically removes anything from given search term. [#63](https://github.com/aedart/athenaeum/issues/63).
+* Removal of stop words causes search results to become undesired. `SearchFilter` no longer automatically removes stop words search term. [#63](https://github.com/aedart/athenaeum/issues/63).
 
-### [v5.24.2](https://github.com/aedart/athenaeum/compare/5.24.1...5.24.2)
+### Deprecated
 
-#### Fixed
+* The `StopWords` concern has now been deprecated and `SearchFilter` no longer automatically removes anything from given search term. [#63](https://github.com/aedart/athenaeum/issues/63).
+
+## [5.24.2] - 2021-12-10
+
+### Fixed
 
 * `required` validation rule triggered, despite valid value given in `DateFilter`. This happened only when field contained a table name prefix, e.g. "users.created_at".
 
-### [v5.24.1](https://github.com/aedart/athenaeum/compare/5.24.0...5.24.1)
+## [5.24.1] - 2021-12-09
 
-#### Fixed
+### Fixed
 
 * Unable to use string value in `BelongsToFilter`, due to incorrect assertion.
 
-### [v5.24.0](https://github.com/aedart/athenaeum/compare/5.23.0...5.24.0)
+## [5.24.0] - 2021-12-08
 
-#### Added
+### Added
 
 * `BelongsToFilter` that is able to constrain relations of the type "belongs to", in filters package.
 
-#### Changed
+### Changed
 
 * Allowing `FieldCriteria` instances to be given in the `fitlers()`, in `ConstraintsProcessor`. This allows for more advanced filters setup.
 * Example of `BaseFiltersBuilder` now uses a custom method for the sortable properties to columns map, in documentation.
 
-### [v5.23.0](https://github.com/aedart/athenaeum/compare/5.22.4...5.23.0)
+## [5.23.0] - 2021-12-02
 
-#### Added
+### Added
 
 * `DateFilter` that is able to match dates stated in `Y-m-d` format.
 * `UTCDatetimeFilter` converts given date to UTC, before attempts to match against database value.
 
-#### Fixed
+### Fixed
 
 * `DatetimeFilter` fails matching full date and time. New comparison logic has been added. Previously used Laravel's `whereDate()` query, which yielded incorrect results.
 
-### [v5.22.4](https://github.com/aedart/athenaeum/compare/5.22.3...5.22.4)
+## [5.22.4] - 2021-11-29
 
-#### Fixed
+### Fixed
 
 * `SearchFilter` not applied when `'0'` given as search term.
 
-### [v5.22.3](https://github.com/aedart/athenaeum/compare/5.22.2...5.22.3)
+## [5.22.3] - 2021-11-29
 
-#### Fixed
+### Fixed
 
 * `SearchProcessor` not applied when `'0'` given as search term.
 
-### [v5.22.2](https://github.com/aedart/athenaeum/compare/5.22.1...5.22.2)
+## [5.22.2] - 2021-11-24
 
-#### Fixed
+### Fixed
 
 * Incorrect value assertion for `NumericFilter`, when `is_null` or `not_null` operators used.
 * Applies list of numeric values validation, when neither `in` or `not_in` operator set, in `NumericFilter`.
 
-### [v5.22.1](https://github.com/aedart/athenaeum/compare/5.22.0...5.22.1)
+## [5.22.1] - 2021-11-18
 
-#### Fixed
+### Fixed
 
 * Too aggressive stop-word removal, removes more than it should, in Filters package's `StopWords` concern.
 
-### [v5.22.0](https://github.com/aedart/athenaeum/compare/5.21.0...5.22.0)
+## [5.22.0] - 2021-11-17
 
-#### Added
+### Added
 
 * Filters package. Offers a way to create query filters, based on received http query parameters. [#59](https://github.com/aedart/athenaeum/pull/59).
 
-### [v5.21.0](https://github.com/aedart/athenaeum/compare/5.20.0...5.21.0)
+## [5.21.0] - 2021-11-05
 
-#### Added
+### Added
 
 * Query `Filter` and `FieldFilter` abstractions, in database package.
 * `Filtering` concern for Eloquent models, in database package.
 
-### [v5.20.0](https://github.com/aedart/athenaeum/compare/5.19.0...5.20.0)
+## [5.20.0] - 2021-09-09
 
-#### Added
+### Added
 
 * `all()` method in `RedmineApiResource`, which is able to automatically paginate through all available results. [#53](https://github.com/aedart/athenaeum/pull/53).
 
-#### Fixed
+### Fixed
 
 * Unable to run database migrations in tests. [#55](https://github.com/aedart/athenaeum/issues/55).
 
-### [v5.19.0](https://github.com/aedart/athenaeum/compare/5.18.1...5.19.0)
+## [5.19.0] - 2021-09-07
 
-#### Added
+### Added
 
 * Redmine API Client package. [#52](https://github.com/aedart/athenaeum/pull/52).
 * `fresh()` method in the Http Clients `Manger`; able to return a fresh Http `Client` instance, without having the instance cached. _The method is not yet supported by the `\Aedart\Contracts\Http\Clients\Manager` interface_.
 
-#### Changed
+### Changed
 
 * `BaseSerializer` (_Http Message package_) will now re-encode json payloads with the `JSON_PRETTY_PRINT` set, if a message's if `content-type` header contains `/json` or `+json`. This makes it easier to read json payloads, in debugging situations.
 
-#### Fixed
+### Fixed
 
 * Call to undefined `GuzzleHttp\Psr7\parse_query()`, in the `C1_QueryTest` Http Client tests. [#49](https://github.com/aedart/athenaeum/issues/49).
 * A few broken links (_incorrect paths_) in the documentation.
 
-### [v5.18.1](https://github.com/aedart/athenaeum/compare/5.18.0...5.18.1)
+## [5.18.1] - 2021-07-13
 
-#### Fixed
+### Fixed
 
 * Array to string conversion error when comparing arrays, that contain nested empty arrays - in `Arr::differenceAssoc()`. [#47](https://github.com/aedart/athenaeum/issues/47).
 
-### [v5.18.0](https://github.com/aedart/athenaeum/compare/5.17.0...5.18.0)
+## [5.18.0] - 2021-06-30
 
-#### Added
+### Added
 
 * `SemanticVersion` validation rule.
 
-### [v5.17.0](https://github.com/aedart/athenaeum/compare/5.16.0...5.17.0)
+## [5.17.0] - 2021-06-28
 
-#### Added
+### Added
 
 * `differenceAssoc()` method in `Arr`. Able to compute the difference of multi-dimensional arrays.
 
-### [v5.16.0](https://github.com/aedart/athenaeum/compare/5.15.0...5.16.0)
+## [5.16.0] - 2021-05-26
 
-#### Added
+### Added
 
 * `formatOriginalData()` and `formatChangedData()`, in  the `RecordsChanges` trait. This allows easier changes to the attributes / data to be stored in an Audit Trail entry.
 
-#### Changed
+### Changed
 
 * `originalData()` and `changedData()` now invoke the new format data methods, in the `RecordsChanges` trait, Audit package.
 
-### [v5.15.0](https://github.com/aedart/athenaeum/compare/5.14.1...5.15.0)
+## [5.15.0] - 2021-05-07
 
-#### Changed
+### Changed
 
 **Breaking Changes**
 
 * `AuditTrailServiceProvider` now publishes migrations rather than loading them directly. This allows changing to installation order (_migration file's timestamp_).
 
-**Caution**: _These changes can affect rolling back migrations. Please (re)publish service provider's assets to ensure your application is able to rollback the `create_audit_trail_table` migration._  
+**Caution**: _These changes can affect rolling back migrations. Please (re)publish service provider's assets to ensure your application is able to rollback the `create_audit_trail_table` migration._
 
-#### Fixed
+### Fixed
 
 * Fails inserting a new audit trail entry into database when user no longer exists, in `RecordAuditTrailEntry` listener.
-User existence is now checked before inserting new entry. If the user does not exist, then `null` is set as the audit trail entry's user reference.
+  User existence is now checked before inserting new entry. If the user does not exist, then `null` is set as the audit trail entry's user reference.
 
-### [v5.14.1](https://github.com/aedart/athenaeum/compare/5.14.0...5.14.1)
+## [5.14.1] - 2021-05-06
 
-#### Fixed
+### Fixed
 
 * Update events were not triggered / dispatched correctly, because they were invoked after database transactions, in `ModelObserver` from the Audit package.
-Changed the `$afterCommit` to `false` as the default value, to overcome this issue.
+  Changed the `$afterCommit` to `false` as the default value, to overcome this issue.
 
-### [v5.14.0](https://github.com/aedart/athenaeum/compare/5.13.2...5.14.0)
+## [5.14.0] - 2021-05-06
 
-#### Added
+### Added
 
 * Possibility to skip recording a model's changes, via the `skipRecordingNextChange` method, in `RecordsChanges` trait.
 
-### [v5.13.2](https://github.com/aedart/athenaeum/compare/5.13.1...5.13.2)
+## [5.13.2] - 2021-05-05
 
-#### Fixed
+### Fixed
 
-* Soft-deleted models not able to be eager-loaded in `AuditTrail` model (_auditable relation_). 
+* Soft-deleted models not able to be eager-loaded in `AuditTrail` model (_auditable relation_).
 
-### [v5.13.1](https://github.com/aedart/athenaeum/compare/5.13.0...5.13.1)
+## [5.13.1] - 2021-05-04
 
-#### Fixed
+### Fixed
 
 * Incorrect `performed_at` date time value for `AuditTrail` records. Previously relied on a model's `updated_at` value, which might not be accurate due depending upon when a "model has changed" event is dispatched (E.g. before or after an operation).
-In other words, a previous / past `updated_at` value could be applied, which would be incorrect and inconsistent of with when a given event or action was performed.
-`performed_at` value no defaults to current date time.
+  In other words, a previous / past `updated_at` value could be applied, which would be incorrect and inconsistent of with when a given event or action was performed.
+  `performed_at` value no defaults to current date time.
 
-### [v5.13.0](https://github.com/aedart/athenaeum/compare/5.12.0...5.13.0)
+## [5.13.0] - 2021-04-29
 
-#### Changed
+### Changed
 
 * Extracted timestamp attributes names into own method, in `RecordsChanges` trait (_Audit package_), so that they can be obtained easier. This should allow better customisation of which fields to hide for Audit Trail entries.
 
-### [v5.12.0](https://github.com/aedart/athenaeum/compare/5.11.0...5.12.0)
+## [5.12.0] - 2021-04-28
 
-#### Added
+### Added
 
 * Audit package; a way to automatically record Eloquent Model changes. [#43](https://github.com/aedart/athenaeum/pull/43)
-* `Invoker` component, in `Utils` package. 
+* `Invoker` component, in `Utils` package.
 
-### [v5.11.0](https://github.com/aedart/athenaeum/compare/5.10.1...5.11.0)
+## [5.11.0] - 2021-04-19
 
-#### Added
+### Added
 
 * Documentation for the ACL package. [#35](https://github.com/aedart/athenaeum/issues/35).
 * Documentation for the validation package. [#38](https://github.com/aedart/athenaeum/issues/38).
 * Documentation for the database package. [#36](https://github.com/aedart/athenaeum/issues/36).
 
-#### Fixed
+### Fixed
 
 * Incorrect permissions check, in `\Aedart\Acl\Traits\HasRoles::hasPermission`. Was unable to grant permission to a user, if permission was granted to multiple roles.
 
-### [v5.10.1](https://github.com/aedart/athenaeum/compare/5.10.0...5.10.1)
+## [5.10.1] - 2021-03-25
 
-#### Fixed
+### Fixed
 
-* Fix ACL models not respecting database connection in transactions. In situations when a custom connection was set or resolved, the ALC Permissions `Group` and `Role` didn't use that given connection in their custom creation or update methods.  
+* Fix ACL models not respecting database connection in transactions. In situations when a custom connection was set or resolved, the ALC Permissions `Group` and `Role` didn't use that given connection in their custom creation or update methods.
 
-### [v5.10.0](https://github.com/aedart/athenaeum/compare/5.9.0...5.10.0)
+## [5.10.0] - 2021-03-25
 
-#### Added
+### Added
 
 * Several tests to verify behaviour of `Slugs` concern, in Database package. [#39](https://github.com/aedart/athenaeum/issues/39).
 * `createWithPermissions()` and `updateWithPermissions()` helper methods in ACL `Role` Eloquent model. [#41](https://github.com/aedart/athenaeum/pull/41).
 
-#### Changed
+### Changed
 
 * Removed unnecessary `$slug` merge into `$values` parameter in `Slugs::findOrCreateBySlug`, in Database package. [#40](https://github.com/aedart/athenaeum/pull/40).
 * Replaced manual transaction rollback handling in `createWithPermissions()` method, inside ACL Permissions `Group` model. Now using Laravel's `DB::transaction()` method instead. [#41](https://github.com/aedart/athenaeum/pull/41).
 
-### [v5.9.0](https://github.com/aedart/athenaeum/compare/5.8.0...5.9.0)
+## [5.9.0] - 2021-03-23
 
-#### Added
+### Added
 
 * Validation package that is intended to offer various rules and other validation related utilities. Presently, it only contains an `AlphaDashDot` rule. [#37](https://github.com/aedart/athenaeum/pull/37).
 
-### [v5.8.0](https://github.com/aedart/athenaeum/compare/5.7.0...5.8.0)
+## [5.8.0] - 2021-03-21
 
-#### Added
+### Added
 
 * ACL package which offers a way to store roles and permissions (grouped) in a database. [#34](https://github.com/aedart/athenaeum/pull/34).
 * Database utilities package. [#34](https://github.com/aedart/athenaeum/pull/34).
 * `Sluggable` interface and `Slug` concern in new Database package.
 * `Str` utility, which offers a few additional string manipulation methods.
 
-#### Fixed
+### Fixed
 
 * Unable to run database migrations via `LaravelTestCase`. Now implements `\Orchestra\Testbench\Contracts\TestCase`, which resolves the issue¹.
 
 ¹: _Orchestra's `MigrateProcessor` component, which is used behind the scene, has an explicit `TestCase` dependency. This cannot be circumvented without extensive overwrites of several migration helper methods._
 
-### [v5.7.0](https://github.com/aedart/athenaeum/compare/5.6.0...5.7.0)
+## [5.7.0] - 2021-03-16
 
-#### Added
+### Added
 
 * `application()` method in `\Aedart\Utils\Version`, which is able to return application's version. [#25](https://github.com/aedart/athenaeum/issues/25)
 
-#### Fixed
+### Fixed
 
 * Too many Chrome driver processes started in `BrowserTestCase`, possibly causing a `Connection Refused` error. [#33](https://github.com/aedart/athenaeum/issues/33)
 
-### [v5.6.0](https://github.com/aedart/athenaeum/compare/5.5.1...5.6.0)
+## [5.6.0] - 2021-02-20
 
-#### Added
+### Added
 
-* Collections package, with `Summation` and `ItemProcessor` components. [#27](https://github.com/aedart/athenaeum/issues/27) 
+* Collections package, with `Summation` and `ItemProcessor` components. [#27](https://github.com/aedart/athenaeum/issues/27)
 * `undot()` method in `Arr` utility.
 
-### [v5.5.1](https://github.com/aedart/athenaeum/compare/5.5.0...5.5.1)
+## [5.5.1] - 2021-02-10
 
-#### Fixed
+### Fixed
 
 * Incorrect teardown order in `BrowserTestCase`
 
-### [v5.5.0](https://github.com/aedart/athenaeum/compare/5.4.0...5.5.0)
+## [5.5.0] - 2021-02-10
 
-#### Fixed
+### Fixed
 
 * Facade root not set during test teardown, in `LaravelTestCase` and `ApplicationInitiator`¹.
-* Laravel's `Application` still bound as `IoC`'s static instance, causing strange behaviour in some tests². 
+* Laravel's `Application` still bound as `IoC`'s static instance, causing strange behaviour in some tests².
 
 ¹: _The happened sometime after Laravel released the "parallel testing" feature and Orchestra Testbench enabled it._
 ²: _Unintended side effect of fixing the `ApplicationInitiator`._
 
-#### Changed
+### Changed
 
 * Bumped license year, in `LICENSE` files.
 * Minimum required [Orchestra Testbench](https://packagist.org/packages/orchestra/testbench) set to `v6.12.x`.
 
-### [v5.4.0](https://github.com/aedart/athenaeum/compare/5.3.5...5.4.0)
+## [5.4.0] - 2021-01-08
 
-#### Changed
+### Changed
 
 * `ApplicationInitiator` now makes use of custom `LoadSpecifiedConfiguration`.
   A previously added, but not applied specialisation of Orchetra `LoadConfiguration`.
-  Custom component allows specifying the location of configuration files to be loaded, via `getBasePath()` and `getConfigPath()` methods*.  
+  Custom component allows specifying the location of configuration files to be loaded, via `getBasePath()` and `getConfigPath()` methods¹.
 
-*: _This change will implicit ensure that changes to `LoadConfiguration` will be caught by tests and thereby prevent defects that resulted in patches `v5.3.3` to `v5.3.5`._
+¹: _This change will implicit ensure that changes to `LoadConfiguration` will be caught by tests and thereby prevent defects that resulted in patches `v5.3.3` to `v5.3.5`._
 
-### [v5.3.5](https://github.com/aedart/athenaeum/compare/5.3.4...5.3.5)
+## [5.3.5] - 2021-01-06
 
-#### Fixed
+### Fixed
 
-* Incorrect format yield from `getConfigurationFiles` method, in `LoadSpecifiedConfiguration` Testing utility*.
+* Incorrect format yield from `getConfigurationFiles` method, in `LoadSpecifiedConfiguration` Testing utility¹.
 
-*: _Was in a hurry to fix a "minor" defect, which just caused several other minor defects._
+¹: _Was in a hurry to fix a "minor" defect, which just caused several other minor defects._
 
-### [v5.3.4](https://github.com/aedart/athenaeum/compare/5.3.3...5.3.4)
+## [5.3.4] - 2021-01-06
 
-#### Fixed
+### Fixed
 
 * `getConfigurationFiles` method still returned `array` instead of specified `Generator`, in `LoadSpecifiedConfiguration` Testing utility.
 
-### [v5.3.3](https://github.com/aedart/athenaeum/compare/5.3.2...5.3.3)
+## [5.3.3] - 2021-01-06
 
-#### Fixed
+### Fixed
 
 * Incorrect return type for `getConfigurationFiles` method, in `LoadSpecifiedConfiguration` Testing utility.
 
-### [v5.3.2](https://github.com/aedart/athenaeum/compare/5.3.1...5.3.2)
+## [5.3.2] - 2020-12-28
 
-#### Fixed
+### Fixed
 
 * Boundary values incorrectly shown when using `toHoursMinutes()` and `toMinutesSeconds()`, in `Duration` utility. 
-
 E.g. when attempting to convert -2700 seconds to hours and minutes, the `toHoursMinutes()` method return 00:45, instead of -00:45.
 
-### [v5.3.1](https://github.com/aedart/athenaeum/compare/5.3.0...5.3.1)
+## [5.3.1] - 2020-12-28
 
-#### Fixed
+### Fixed
 
 * `toHoursMinutes()` not able to show above 24 hours, in `Duration` utility.
 * `toMinutesSeconds()` not able to show above 60 minutes, in `Duration` utility.
 
 Both methods failed showing a correct amount, whenever the initial value surpassed 24 hours (_or 60 minutes for `toMinutesSeconds()`_).
 
-### [v5.3.0](https://github.com/aedart/athenaeum/compare/5.2.1...5.3.0)
+## [5.3.0] - 2020-12-27
 
-#### Added
+### Added
 
 * `fromHoursMinutes` and `fromStringHoursMinutes` methods in `Duration` utility.
 
-#### Changed
+### Changed
 
 * Laravel `v8.15.x` packages are now required as a minimum.
 * Updated [Orchesta Testbench](https://github.com/orchestral/testbench-core) dependencies to `v6.9.x`.
 * Added leading zero for `Durataion::toHoursMinutes` short format.
 * Disabled `failsIfCacheIsNotLockProvider` test, since botch file and null cache drivers [now support locks](https://github.com/laravel/framework/blob/8.x/CHANGELOG-8.x.md#v8150-2020-11-17).
 
-### [v5.2.1](https://github.com/aedart/athenaeum/compare/5.2.0...5.2.1)
+## [5.2.1] - 2020-11-09
 
-#### Fixed
+### Fixed
 
 * Invalid `$this` reference in `static function`, in `DuskTestHelper`.
 * Call to unknown `makeChromeOptions()` method.
 
-### [v5.2.0](https://github.com/aedart/athenaeum/compare/5.1.0...5.2.0)
+## [5.2.0] - 2020-11-09
 
-#### Added
+### Added
 
 * `LoadSpecifiedConfiguration` bootstrapper, in `Testing` package. Intended for Laravel and Laravel Dusk tests.
-* `$browserSourceOutput` property. Location where a page's source code is to be stored, in `DuskTestHelper`. 
+* `$browserSourceOutput` property. Location where a page's source code is to be stored, in `DuskTestHelper`.
 
-#### Changed
+### Changed
 
-* Switched back to `ChromeOptions::CAPABILITY` (_which is deprecated_), because `ChromeOptions::CAPABILITY_W3C` ignores command line arguments for Chrome Driver, in `DuskTestHelper`. 
+* Switched back to `ChromeOptions::CAPABILITY` (_which is deprecated_), because `ChromeOptions::CAPABILITY_W3C` ignores command line arguments for Chrome Driver, in `DuskTestHelper`.
 * Extracted configuration loader binding into own method / property, in `DuskTestHelper`. This makes it easier to overwrite, when needed.
 
-### [v5.1.0](https://github.com/aedart/athenaeum/compare/5.0.2...5.1.0)
+## [5.1.0] - 2020-10-16
 
-#### Added
+### Added
 
 * Added `DuskTestHelper` and `BrowserTestCase` helpers, which offers integration to [Laravel Dusk](https://laravel.com/docs/8.x/dusk).
 
-#### Changed
+### Changed
 
 * Changed `LaravelTestHelper`, added `InteractsWithTime` ([Laravel's helper](https://laravel.com/docs/8.x/mocking#interacting-with-time)) and `InteractsWithViews`. [#20](https://github.com/aedart/athenaeum/issues/20).
 
-### [v5.0.2](https://github.com/aedart/athenaeum/compare/5.0.1...5.0.2)
+## [5.0.2] - 2020-10-06
 
-#### Fixed
+### Fixed
 
 * Incorrect code style caused CI failure.
 
-### [v5.0.1](https://github.com/aedart/athenaeum/compare/5.0.0...5.0.1)
+## [5.0.1] - 2020-10-06
 
-#### Fixed 
+### Fixed
 
-* Http Message stream not rewound after serialization, when using `debug()`, `dd()` or `log()`. See [#19](https://github.com/aedart/athenaeum/issues/19) for details. 
-* Removed deprecated `CreateAwareOfCommand` reference from `athenaeum` console application. 
+* Http Message stream not rewound after serialization, when using `debug()`, `dd()` or `log()`. See [#19](https://github.com/aedart/athenaeum/issues/19) for details.
+* Removed deprecated `CreateAwareOfCommand` reference from `athenaeum` console application.
 * Fixed a few typos.
 
-### [v5.0.0](https://github.com/aedart/athenaeum/compare/4.2.1...5.0.0)
+## [5.0.0] - 2020-10-04
 
-#### Added
+### Added
 
 * Added `ListResolver` component.
 * Added `otherwise()` and `getOtherwise()` methods to Circuit Breaker.
@@ -435,7 +518,18 @@ Both methods failed showing a correct amount, whenever the initial value surpass
 * Added `Duration` utility.
 * PHP Compatibility check in Travis.
 
-#### Changed
+### Removed
+
+* Removed internal `applyExpectations()` method from `Expectations` concern, in Http Client `Builder`. Has been replaced by `AppliesResponseExpectations` middleware.
+* Removed `Aedart\Dto` (_was deprecated in `v4.x`_).
+* Removed `Aedart\ArrayDto` (_was deprecated in `v4.x`_).
+* Removed `Aedart\Console\CreateAwareOfCommand` (_was deprecated in `v4.x`_).
+* Removed `Aedart\Console\CommandBase` (_was deprecated in `v4.x`_).
+* Removed `Aedart\Console\AwareOfScaffoldCommand` (_was deprecated in `v4.x`_).
+* Removed all helpers in `Aedart\Support\Properties\Mixed\*` namespace (_was deprecated in `v4.x`_).
+* Removed all contracts in `Aedart\Contracts\Support\Properties\Mixed\*` namespace (_was deprecated in `v4.x`_).
+
+### Changed
 
 **Breaking Changes**
 
@@ -446,108 +540,53 @@ Both methods failed showing a correct amount, whenever the initial value surpass
 * Changed `withExpectation()`, in Request `Builder`. Now accepts both a `callable` and a `ResponseExpectation` instance. This change should not affect your code, unless you have custom Http Request `Builder` implementation.
 * Changed Request `Builder` and Http `Client` interfaces and concrete implementations. Now offers methods for adding `Middleware`. This change only affects you if you have a custom Http `Client` or Request `Builder` implementation.
 * Changed Http `Client` and Request `Builder`, added debugging methods (`debug()`, `dd()`, `log()`...etc). This change only affects you if you have a custom Http `Client` or Request `Builder` implementation.
-* Removed `Aedart\Dto` (_was deprecated in `v4.x`_).
-* Removed `Aedart\ArrayDto` (_was deprecated in `v4.x`_).
-* Removed `Aedart\Console\CreateAwareOfCommand` (_was deprecated in `v4.x`_).
-* Removed `Aedart\Console\CommandBase` (_was deprecated in `v4.x`_).
-* Removed `Aedart\Console\AwareOfScaffoldCommand` (_was deprecated in `v4.x`_).
-* Removed all helpers in `Aedart\Support\Properties\Mixed\*` namespace (_was deprecated in `v4.x`_).
-* Removed all contracts in `Aedart\Contracts\Support\Properties\Mixed\*` namespace (_was deprecated in `v4.x`_).
 
 **Non-breaking Changes**
 
-* Added shortcut methods (_`getClient()` and `client()`_) for obtaining Http Client instance in `ProcessOptions`. 
-* Removed internal `applyExpectations()` method from `Expectations` concern, in Http Client `Builder`. Has been replaced by `AppliesResponseExpectations` middleware.
+* Added shortcut methods (_`getClient()` and `client()`_) for obtaining Http Client instance in `ProcessOptions`.
 * Changed `HttpClientServiceProvider`, now inherits from the `AggregateServiceProvider` and registers the `HttpSerializationServiceProvider` automatically. This eliminates setup of debugging components, for the Http `Client`.
 
-#### Fixed
+### Fixed
 
-* Fixed incorrect type declarations in PHPDoc (_throughout various components_). 
+* Fixed incorrect type declarations in PHPDoc (_throughout various components_).
 * Codeception broken after update (_in codeception version 4.1.x series_).
 
-## v4.x
+## [4.2.1] - 2020-07-31
 
-### [v4.2.1](https://github.com/aedart/athenaeum/compare/4.2.0...4.2.1)
+### Security
 
 * Bumped minimum required dependencies, due to [security issue / release from Laravel](https://blog.laravel.com/laravel-cookie-security-releases).
 
-### [v4.2.0](https://github.com/aedart/athenaeum/compare/4.1.0...4.2.0)
+## [4.2.0] - 2020-07-05
 
-#### Added
+### Added
 
 * Circuits package that offers a `CircuitBreaker`, with a `Manager` (profile-based).
 
-### [v4.1.0](https://github.com/aedart/athenaeum/compare/4.0.1...4.1.0)
+## [4.1.0] - 2020-04-22
 
-#### Fixed
-
-* (Core) Unable to run `schedule:run` command. [#10](https://github.com/aedart/athenaeum/issues/10)
-
-#### Changed
-
-* Minimum required Laravel packages version set to version `^7.7`
-
-#### Added
+### Added
 
 * `LaravelExceptionHandler` adaptor
 
-### [v4.0.1](https://github.com/aedart/athenaeum/compare/v4.0...4.0.1)
+### Fixed
 
-#### Fixed
+* Unable to run `schedule:run` command. [#10](https://github.com/aedart/athenaeum/issues/10)
 
-* Broken inter-dependencies in all packages. Removed version `v4.0` from packagist.org to prevent conflicts. 
+### Changed
 
-### [v4.0.0](https://github.com/aedart/athenaeum/compare/3.1.0...v4.0)
+* Minimum required Laravel packages version set to version `^7.7`
 
-#### Changed
 
-**Breaking Changes**
+## [4.0.1] - 2020-04-15
 
-* Required PHP version changed to `v7.4.x`.
-* Upgraded Laravel dependencies to `v7.6.x`, Symfony to `v5.0.x`, Codeception to `v4.1.x`, and various other dependencies.
-* All class properties now have their [types declared](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties), if possible.
-* `dto:create` command now generates traits with class [type declarations](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties) for it's properties (_former `dto:create-aware-of` command_).
-* `Dto` and `ArrayDto` now implements the `__serialize()` and `__unserialize()` magic methods.
-* Replaced `\Aedart\Dto` with `\Aedart\Dto\Dto`[1].
-* Replaced `\Aedart\ArrayDto` with `\Aedart\Dto\ArrayDto`[1].
-* [Codeception](https://github.com/Codeception/Codeception) and [Orchestra Testbench](https://github.com/orchestral/testbench) are now defined as dev-dependencies.
-You need to require these packages, if you depended on them[2].
-* (_Fix_) `IoC` no longer highjacks Laravel's `app` binding automatically, when `getInstance()` is invoked.
-This was used to get some of Laravel's components to work outside the scope of a Laravel application.
-Yet, this was a "hack" that potentially could lead to conflicted with Laravel. This was never intended[3]!
-* Deprecated `\Aedart\Console\CommandBase`, `\Aedart\Console\AwareOfScaffoldCommand` and `\Aedart\Console\CreateAwareOfCommand` components.
-Commands have been replaced with updated versions within the [`aedart/athenaeum-support `](https://packagist.org/packages/aedart/athenaeum-support) package.
-The original commands are still available using the `athenaeum` console application.
-* Redesign entire Http `Client` package, now makes use of a Request Builder and Http Query Builder.
-* Deprecated all aware-of helpers that contained `*\Mixed\*` in their namespace.
-These will be removed in next major version.
-Replacement components are available within the `*\Mixes\*` namespace.
-The term `Mixed` has been a [soft-reserved keyword](https://www.php.net/manual/en/reserved.other-reserved-words.php) since PHP `v7.0`.
+### Fixed
 
-**Non-breaking Changes**
+* Broken inter-dependencies in all packages. Removed version `v4.0` from packagist.org to prevent conflicts.
 
-* Converted athenaeum into a true [mono repository](ttps://en.wikipedia.org/wiki/Monorepo). All major components are now available as separate packages, via composer.
-* Code style to [PSR-12](https://www.php-fig.org/psr/psr-12/).
-* Replaced deprecated `Twig` components, in `TwigPartial` trait.
-* `UnitTestCase` now uses `FakerPartial` to setup [Faker](https://github.com/fzaninotto/Faker).
-* `UnitTestCase` now inherits from Codeception's `Unit` test-case.
-* Using `IoCFacade` to resolve default Http Client `Manager`, in `HttpClientsManagerTrait`.
-* Added `\Aedart\Contracts\Container\IoC` and `\Illuminate\Contracts\Container\Container` as `app` binding aliases, in `IoC`[3].
-* Added possibility to specify specific `vendor` and `output` paths for `interfaces` and `traits`, in the aware-of `Generator`. 
-* `getHeader()` is now case-insensitive, in `DefaultHttpClient` and `JsonHttpClient`.
-Handling of headers is now more inline with [PSR-7](https://www.php-fig.org/psr/psr-7/#12-http-headers).
-* Added `data_format` option for Http Clients.
+## [4.0.0] - 2020-04-15 [YANKED]
 
-[1]: _Deprecation of existing abstractions or components is due to the conversion of this package into a [mono repository](ttps://en.wikipedia.org/wiki/Monorepo).
-Existing abstractions are still available, yet will be removed entirely in `v5.0`._
-
-[2]: _You can require packages separately or if you only use the "testing" components, then replace this package with [`aedart/athenaeum-testing`](https://packagist.org/packages/aedart/athenaeum-testing) as dev-dependency and the mentioned packages will all be installed._
-
-[3]: _You have to invoke `registerAsApplication()` explicitly to bind the `IoC` instance as `app`, should you require this during testing or outside a Laravel application.
-**Warning**: do NOT invoke mentioned method if you are using the `IoC` within a Laravel application.
-It will highjack the `app` binding, which will cause your application to behave unfavourable._
-
-#### Added
+### Added
 
 * `Application`, custom adaptation of Laravel's Application.
 * `Kernel`, custom adaptation of Laravel's Console Application (Artisan).
@@ -564,7 +603,7 @@ It will highjack the `app` binding, which will cause your application to behave 
 * `FakerPartial`, offers basic setup for [Faker](https://github.com/fzaninotto/Faker).
 * `callOrReturn()` utility method in `MethodHelper`.
 * `MessageBag` testing component. Intended to store test or debugging messages across components and tests.
-* `Version` utility. 
+* `Version` utility.
 * `Math` utility.
 * `Arr` utility.
 * `string` and `int` `Milestone` aware components
@@ -573,85 +612,202 @@ It will highjack the `app` binding, which will cause your application to behave 
 * Http- `ClientFactoryAware` and `ClientFactoryTrait` Laravel Aware-of Helper.
 * `Cookie` and `SetCookie` DTOs.
 
-#### Fixed
+### Deprecated
+
+* Deprecated `\Aedart\Console\CommandBase`, `\Aedart\Console\AwareOfScaffoldCommand` and `\Aedart\Console\CreateAwareOfCommand` components.
+  Commands have been replaced with updated versions within the [`aedart/athenaeum-support `](https://packagist.org/packages/aedart/athenaeum-support) package.
+  The original commands are still available using the `athenaeum` console application.
+* Deprecated all aware-of helpers that contained `*\Mixed\*` in their namespace.
+  These will be removed in next major version.
+  Replacement components are available within the `*\Mixes\*` namespace.
+  The term `Mixed` has been a [soft-reserved keyword](https://www.php.net/manual/en/reserved.other-reserved-words.php) since PHP `v7.0`.
+
+### Changed
+
+**Breaking Changes**
+
+* Required PHP version changed to `v7.4.x`.
+* Upgraded Laravel dependencies to `v7.6.x`, Symfony to `v5.0.x`, Codeception to `v4.1.x`, and various other dependencies.
+* All class properties now have their [types declared](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties), if possible.
+* `dto:create` command now generates traits with class [type declarations](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties) for it's properties (_former `dto:create-aware-of` command_).
+* `Dto` and `ArrayDto` now implements the `__serialize()` and `__unserialize()` magic methods.
+* Replaced `\Aedart\Dto` with `\Aedart\Dto\Dto`¹.
+* Replaced `\Aedart\ArrayDto` with `\Aedart\Dto\ArrayDto`¹.
+* [Codeception](https://github.com/Codeception/Codeception) and [Orchestra Testbench](https://github.com/orchestral/testbench) are now defined as dev-dependencies.
+  You need to require these packages, if you depended on them².
+* (_Fix_) `IoC` no longer highjacks Laravel's `app` binding automatically, when `getInstance()` is invoked.
+  This was used to get some of Laravel's components to work outside the scope of a Laravel application.
+  Yet, this was a "hack" that potentially could lead to conflicted with Laravel. This was never intended³!
+* Redesign entire Http `Client` package, now makes use of a Request Builder and Http Query Builder.
+
+**Non-breaking Changes**
+
+* Converted athenaeum into a true [mono repository](ttps://en.wikipedia.org/wiki/Monorepo). All major components are now available as separate packages, via composer.
+* Code style to [PSR-12](https://www.php-fig.org/psr/psr-12/).
+* Replaced deprecated `Twig` components, in `TwigPartial` trait.
+* `UnitTestCase` now uses `FakerPartial` to setup [Faker](https://github.com/fzaninotto/Faker).
+* `UnitTestCase` now inherits from Codeception's `Unit` test-case.
+* Using `IoCFacade` to resolve default Http Client `Manager`, in `HttpClientsManagerTrait`.
+* Added `\Aedart\Contracts\Container\IoC` and `\Illuminate\Contracts\Container\Container` as `app` binding aliases, in `IoC`³.
+* Added possibility to specify specific `vendor` and `output` paths for `interfaces` and `traits`, in the aware-of `Generator`.
+* `getHeader()` is now case-insensitive, in `DefaultHttpClient` and `JsonHttpClient`.
+  Handling of headers is now more inline with [PSR-7](https://www.php-fig.org/psr/psr-7/#12-http-headers).
+* Added `data_format` option for Http Clients.
+
+¹: _Deprecation of existing abstractions or components is due to the conversion of this package into a [mono repository](ttps://en.wikipedia.org/wiki/Monorepo).
+Existing abstractions are still available, yet will be removed entirely in `v5.0`._
+
+²: _You can require packages separately or if you only use the "testing" components, then replace this package with [`aedart/athenaeum-testing`](https://packagist.org/packages/aedart/athenaeum-testing) as dev-dependency and the mentioned packages will all be installed._
+
+³: _You have to invoke `registerAsApplication()` explicitly to bind the `IoC` instance as `app`, should you require this during testing or outside a Laravel application.
+**Warning**: do NOT invoke mentioned method if you are using the `IoC` within a Laravel application.
+It will highjack the `app` binding, which will cause your application to behave unfavourable._
+
+### Fixed
 
 * `Loader` fails to populate configuration correctly, adds initial directory path to each section.
-_This happens when relative paths are set as the loader's initial directory._
+  _This happens when relative paths are set as the loader's initial directory._
 * `Applicaiton` instance not destroyed after `stopApplication()` invoked, in `ApplocationInitiator`.
-This resulting in `$instance` still containing reference to the application, inside Laravel's Service Container, causing tests to fail.
+  This resulting in `$instance` still containing reference to the application, inside Laravel's Service Container, causing tests to fail.
 * `destroy()` does not flush bindings, in `IoC`. Instance is destroyed, yet formal Service Container `flush()` was not respected.
 * Default values not triggered when invoking `toArray()`, in `Dto` and `ArrayDto`, when using aware-of traits to create a Dto class.
 * `ContainerTrait`'s default value returns the `Facade` root application, instead of `Container`.
-(_Strictly speaking, this was not a defect. `Application` is an extended version of `Container`._)
+  (_Strictly speaking, this was not a defect. `Application` is an extended version of `Container`._)
 * Headers option not initially set in `DefaultHttpClient`.
 * Default return type of `MailerTrait` and `MailQueueTrait` (Laravel `v7.x` changed return of `Mail` Facade to `MailManager`).
 * `withOptions()` incorrectly merged options, in `DefaultHttpClient` and `JsonHttpClient`.
-This caused strange behaviour, when attempting to overwrite an already set option.
+  This caused strange behaviour, when attempting to overwrite an already set option.
 * Http Client `Manager` does not use default profile name from configuration, it always returns "default", when no profile name given.
 
-## v3.x
 
-### [v3.1.0](https://github.com/aedart/athenaeum/compare/3.0.1...3.1.0)
+## [3.1.0] - 2020-01-01
 
-#### Changed
+### Changed
 
 * Updated license
 
-### [v3.0.1](https://github.com/aedart/athenaeum/compare/3.0.0...3.0.1)
+## [3.0.1] - 2019-09-29
 
-#### Fixed
+### Fixed
 
 * `LogicalException` thrown during travis build (_tests only_), caused by `PhpRedisConnector`. Changed test to use `predis` as default laravel redis connection.
 
-### [v3.0.0](https://github.com/aedart/athenaeum/compare/2.3.0...3.0.0)
+## [3.0.0] - 2019-09-29
 
-#### Changed
+### Changed
 
 **Breaking Changes**
 
 * Upgraded to Laravel `v6.x`, Symfony `v4.3.x` and upgraded various other dependencies.
-* Removed custom `JsonException` (_deprecated_), in `Json` utility. Now defaults to php's native [`JsonException`](https://www.php.net/manual/en/class.jsonexception.php).
 
 **Non-breaking Changes**
 
 * Added `InteractsWithRedis` helper trait to the `LaravelTestHelper`.
 
-## v2.x
+### Removed
 
-### [v2.3.0](https://github.com/aedart/athenaeum/compare/2.2.0...2.3.0)
+* Removed custom `JsonException` (_deprecated_), in `Json` utility. Now defaults to php's native [`JsonException`](https://www.php.net/manual/en/class.jsonexception.php).
 
-#### Changed
+## [2.3.0] - 2019-07-28
+
+### Changed
 
 * Now supporting Symfony Console version 4.3.x, [#2](https://github.com/aedart/athenaeum/issues/2)
 
-### [v2.2.0](https://github.com/aedart/athenaeum/compare/2.1.0...2.2.0)
+## [2.2.0] - 2019-05-05
 
-#### Added
+### Added
 
-* Http Client package, a wrapper for the [Guzzle Http Client](http://docs.guzzlephp.org/en/stable/index.html), offering multiple "profile" based client instances, which can be configured via a `configs/http-clients.php` configuration file.
+* Http Client package, a wrapper for [Guzzle Http Client](http://docs.guzzlephp.org/en/stable/index.html), offering multiple "profile" based client instances, which can be configured via a `configs/http-clients.php` configuration file.
 
-#### Changed
+### Changed
 
 * Upgraded to codeception `v3.0.x` (_dev dependency_) and replaced deprecated assertions.
 
-### [v2.1.0](https://github.com/aedart/athenaeum/compare/2.0.0...2.1.0)
+## [2.1.0] - 2019-04-14
 
-#### Changed
+### Changed
 
 * Simplified the bitmask operation for the `\Aedart\Utils\Json`.
 
-### [v2.0.0](https://github.com/aedart/athenaeum/compare/1.2.0...2.0.0)
+## [2.0.0] - 2019-02-28
 
-#### Changed
+### Changed
 
 * Minimum required PHP version set to `v7.3.0`
 * Main dependencies changed to Laravel `v5.8.x`, Symfony `v4.2.x` and Orchestra Testbench `v.3.8.x`
 * `\Aedart\Utils\Json` automatically sets [`JSON_THROW_ON_ERROR`](http://php.net/manual/en/json.constants.php) bitmask option, if not set
-* Deprecated `Aedart\Utils\Exceptions\JsonEncoding`. Use native [`JsonException`](http://php.net/manual/en/class.jsonexception.php) instead
 * `Aedart\Utils\Exceptions\JsonEncoding` now inherits from [`JsonException`](http://php.net/manual/en/class.jsonexception.php)
-* Deprecated `\Aedart\Contracts\Utils\Exceptions\JsonEncodingException`, will be removed in next major version
 * Replaced deprecated `PHPUnit_Framework_MockObject_MockObject` with new `\PHPUnit\Framework\MockObject\MockObject`, in `TraitTester`
 
-## v1.x
+### Deprecated
+
+* Deprecated `\Aedart\Contracts\Utils\Exceptions\JsonEncodingException`, will be removed in next major version
+* Deprecated `Aedart\Utils\Exceptions\JsonEncoding`. Use native [`JsonException`](http://php.net/manual/en/class.jsonexception.php) instead
+
+## [1.0.0] - 2018-11-10
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
+
+[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/5.27.0...HEAD
+[5.27.0]: https://github.com/aedart/athenaeum/compare/5.26.0...5.27.0
+[5.26.0]: https://github.com/aedart/athenaeum/compare/5.25.0...5.26.0
+[5.25.0]: https://github.com/aedart/athenaeum/compare/5.24.2...5.25.0
+[5.24.2]: https://github.com/aedart/athenaeum/compare/5.24.1...5.24.2
+[5.24.1]: https://github.com/aedart/athenaeum/compare/5.24.0...5.24.1
+[5.24.0]: https://github.com/aedart/athenaeum/compare/5.23.0...5.24.0
+[5.23.0]: https://github.com/aedart/athenaeum/compare/5.22.4...5.23.0
+[5.22.4]: https://github.com/aedart/athenaeum/compare/5.22.3...5.22.4
+[5.22.3]: https://github.com/aedart/athenaeum/compare/5.22.2...5.22.3
+[5.22.2]: https://github.com/aedart/athenaeum/compare/5.22.1...5.22.2
+[5.22.1]: https://github.com/aedart/athenaeum/compare/5.22.0...5.22.1
+[5.22.0]: https://github.com/aedart/athenaeum/compare/5.21.0...5.22.0
+[5.21.0]: https://github.com/aedart/athenaeum/compare/5.20.0...5.21.0
+[5.20.0]: https://github.com/aedart/athenaeum/compare/5.19.0...5.20.0
+[5.19.0]: https://github.com/aedart/athenaeum/compare/5.18.1...5.19.0
+[5.18.1]: https://github.com/aedart/athenaeum/compare/5.18.0...5.18.1
+[5.18.0]: https://github.com/aedart/athenaeum/compare/5.17.0...5.18.0
+[5.17.0]: https://github.com/aedart/athenaeum/compare/5.16.0...5.17.0
+[5.16.0]: https://github.com/aedart/athenaeum/compare/5.15.0...5.16.0
+[5.15.0]: https://github.com/aedart/athenaeum/compare/5.14.1...5.15.0
+[5.14.1]: https://github.com/aedart/athenaeum/compare/5.14.0...5.14.1
+[5.14.0]: https://github.com/aedart/athenaeum/compare/5.13.2...5.14.0
+[5.13.2]: https://github.com/aedart/athenaeum/compare/5.13.1...5.13.2
+[5.13.1]: https://github.com/aedart/athenaeum/compare/5.13.0...5.13.1
+[5.13.0]: https://github.com/aedart/athenaeum/compare/5.12.0...5.13.0
+[5.12.0]: https://github.com/aedart/athenaeum/compare/5.11.0...5.12.0
+[5.11.0]: https://github.com/aedart/athenaeum/compare/5.10.1...5.11.0
+[5.10.1]: https://github.com/aedart/athenaeum/compare/5.10.0...5.10.1
+[5.10.0]: https://github.com/aedart/athenaeum/compare/5.9.0...5.10.0
+[5.9.0]: https://github.com/aedart/athenaeum/compare/5.8.0...5.9.0
+[5.8.0]: https://github.com/aedart/athenaeum/compare/5.7.0...5.8.0
+[5.7.0]: https://github.com/aedart/athenaeum/compare/5.6.0...5.7.0
+[5.6.0]: https://github.com/aedart/athenaeum/compare/5.5.1...5.6.0
+[5.5.1]: https://github.com/aedart/athenaeum/compare/5.5.0...5.5.1
+[5.5.0]: https://github.com/aedart/athenaeum/compare/5.4.0...5.5.0
+[5.4.0]: https://github.com/aedart/athenaeum/compare/5.3.5...5.4.0
+[5.3.5]: https://github.com/aedart/athenaeum/compare/5.3.4...5.3.5
+[5.3.4]: https://github.com/aedart/athenaeum/compare/5.3.3...5.3.4
+[5.3.3]: https://github.com/aedart/athenaeum/compare/5.3.2...5.3.3
+[5.3.2]: https://github.com/aedart/athenaeum/compare/5.3.1...5.3.2
+[5.3.1]: https://github.com/aedart/athenaeum/compare/5.3.0...5.3.1
+[5.3.0]: https://github.com/aedart/athenaeum/compare/5.2.1...5.3.0
+[5.2.1]: https://github.com/aedart/athenaeum/compare/5.2.0...5.2.1
+[5.2.0]: https://github.com/aedart/athenaeum/compare/5.1.0...5.2.0
+[5.1.0]: https://github.com/aedart/athenaeum/compare/5.0.2...5.1.0
+[5.0.2]: https://github.com/aedart/athenaeum/compare/5.0.1...5.0.2
+[5.0.1]: https://github.com/aedart/athenaeum/compare/5.0.0...5.0.1
+[5.0.0]: https://github.com/aedart/athenaeum/compare/4.2.1...5.0.0
+[4.2.1]: https://github.com/aedart/athenaeum/compare/4.2.0...4.2.1
+[4.2.0]: https://github.com/aedart/athenaeum/compare/4.1.0...4.2.0
+[4.1.0]: https://github.com/aedart/athenaeum/compare/4.0.1...4.1.0
+[4.0.1]: https://github.com/aedart/athenaeum/compare/v4.0...4.0.1
+[4.0.0]: https://github.com/aedart/athenaeum/compare/3.1.0...v4.0
+[3.1.0]: https://github.com/aedart/athenaeum/compare/3.0.1...3.1.0
+[3.0.1]: https://github.com/aedart/athenaeum/compare/3.0.0...3.0.1
+[3.0.0]: https://github.com/aedart/athenaeum/compare/2.3.0...3.0.0
+[2.3.0]: https://github.com/aedart/athenaeum/compare/2.2.0...2.3.0
+[2.2.0]: https://github.com/aedart/athenaeum/compare/2.1.0...2.2.0
+[2.1.0]: https://github.com/aedart/athenaeum/compare/2.0.0...2.1.0
+[2.0.0]: https://github.com/aedart/athenaeum/compare/1.0.0...2.0.0
+[1.0.0]: https://github.com/aedart/athenaeum/releases/tag/1.0.0

@@ -19,31 +19,31 @@ interface WildcardAware
      *
      * @return self
      */
-    public function setWildcard(?string $identifier);
+    public function setWildcard(string|null $identifier): static;
 
     /**
      * Get wildcard
      *
-     * If no "wildcard" value set, method
-     * sets and returns a default "wildcard".
+     * If no wildcard value set, method
+     * sets and returns a default wildcard.
      *
      * @see getDefaultWildcard()
      *
      * @return string|null wildcard or null if no wildcard has been set
      */
-    public function getWildcard(): ?string;
+    public function getWildcard(): string|null;
 
     /**
-     * Check if "wildcard" has been set
+     * Check if wildcard has been set
      *
-     * @return bool True if "wildcard" has been set, false if not
+     * @return bool True if wildcard has been set, false if not
      */
     public function hasWildcard(): bool;
 
     /**
-     * Get a default "wildcard" value, if any is available
+     * Get a default wildcard value, if any is available
      *
-     * @return string|null Default "wildcard" value or null if no default value is available
+     * @return string|null Default wildcard value or null if no default value is available
      */
-    public function getDefaultWildcard(): ?string;
+    public function getDefaultWildcard(): string|null;
 }

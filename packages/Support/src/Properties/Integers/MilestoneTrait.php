@@ -17,7 +17,7 @@ trait MilestoneTrait
      *
      * @var int|null
      */
-    protected ?int $milestone = null;
+    protected int|null $milestone = null;
 
     /**
      * Set milestone
@@ -26,7 +26,7 @@ trait MilestoneTrait
      *
      * @return self
      */
-    public function setMilestone(?int $identifier)
+    public function setMilestone(int|null $identifier): static
     {
         $this->milestone = $identifier;
 
@@ -36,14 +36,14 @@ trait MilestoneTrait
     /**
      * Get milestone
      *
-     * If no "milestone" value set, method
-     * sets and returns a default "milestone".
+     * If no milestone value set, method
+     * sets and returns a default milestone.
      *
      * @see getDefaultMilestone()
      *
      * @return int|null milestone or null if no milestone has been set
      */
-    public function getMilestone(): ?int
+    public function getMilestone(): int|null
     {
         if (!$this->hasMilestone()) {
             $this->setMilestone($this->getDefaultMilestone());
@@ -52,9 +52,9 @@ trait MilestoneTrait
     }
 
     /**
-     * Check if "milestone" has been set
+     * Check if milestone has been set
      *
-     * @return bool True if "milestone" has been set, false if not
+     * @return bool True if milestone has been set, false if not
      */
     public function hasMilestone(): bool
     {
@@ -62,11 +62,11 @@ trait MilestoneTrait
     }
 
     /**
-     * Get a default "milestone" value, if any is available
+     * Get a default milestone value, if any is available
      *
-     * @return int|null Default "milestone" value or null if no default value is available
+     * @return int|null Default milestone value or null if no default value is available
      */
-    public function getDefaultMilestone(): ?int
+    public function getDefaultMilestone(): int|null
     {
         return null;
     }

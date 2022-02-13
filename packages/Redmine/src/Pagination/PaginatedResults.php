@@ -11,6 +11,7 @@ use Aedart\Utils\Json;
 use Illuminate\Support\Enumerable;
 use JsonException;
 use Psr\Http\Message\ResponseInterface;
+use Traversable;
 
 /**
  * Paginated Results
@@ -51,7 +52,7 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
     /**
      * @inheritdoc
      */
-    public static function fromResponse(ResponseInterface $response, ApiResource $resource): PaginatedResultsInterface
+    public static function fromResponse(ResponseInterface $response, ApiResource $resource): static
     {
         // Decode entire payload - we do not need to determine between single or multiple
         // resources here.
@@ -71,7 +72,7 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
     /**
      * @inheritDoc
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return $this->results->getIterator();
     }
@@ -119,7 +120,7 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
     /**
      * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->toArray();
     }
@@ -131,7 +132,7 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
      *
      * @throws JsonException
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toJson();
     }

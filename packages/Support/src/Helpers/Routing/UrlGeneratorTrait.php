@@ -20,7 +20,7 @@ trait UrlGeneratorTrait
      *
      * @var UrlGenerator|null
      */
-    protected ?UrlGenerator $urlGenerator = null;
+    protected UrlGenerator|null $urlGenerator = null;
 
     /**
      * Set url generator
@@ -29,7 +29,7 @@ trait UrlGeneratorTrait
      *
      * @return self
      */
-    public function setUrlGenerator(?UrlGenerator $generator)
+    public function setUrlGenerator(UrlGenerator|null $generator): static
     {
         $this->urlGenerator = $generator;
 
@@ -47,7 +47,7 @@ trait UrlGeneratorTrait
      *
      * @return UrlGenerator|null url generator or null if none url generator has been set
      */
-    public function getUrlGenerator(): ?UrlGenerator
+    public function getUrlGenerator(): UrlGenerator|null
     {
         if (!$this->hasUrlGenerator()) {
             $this->setUrlGenerator($this->getDefaultUrlGenerator());
@@ -70,7 +70,7 @@ trait UrlGeneratorTrait
      *
      * @return UrlGenerator|null A default url generator value or Null if no default value is available
      */
-    public function getDefaultUrlGenerator(): ?UrlGenerator
+    public function getDefaultUrlGenerator(): UrlGenerator|null
     {
         return URL::getFacadeRoot();
     }

@@ -26,7 +26,7 @@ trait MethodTrait
      *
      * @return self
      */
-    public function setMethod(?callable $callback)
+    public function setMethod(callable|null $callback): static
     {
         $this->method = $callback;
 
@@ -36,14 +36,14 @@ trait MethodTrait
     /**
      * Get method
      *
-     * If no "method" value set, method
-     * sets and returns a default "method".
+     * If no method value set, method
+     * sets and returns a default method.
      *
      * @see getDefaultMethod()
      *
      * @return callable|null method or null if no method has been set
      */
-    public function getMethod(): ?callable
+    public function getMethod(): callable|null
     {
         if (!$this->hasMethod()) {
             $this->setMethod($this->getDefaultMethod());
@@ -52,9 +52,9 @@ trait MethodTrait
     }
 
     /**
-     * Check if "method" has been set
+     * Check if method has been set
      *
-     * @return bool True if "method" has been set, false if not
+     * @return bool True if method has been set, false if not
      */
     public function hasMethod(): bool
     {
@@ -62,11 +62,11 @@ trait MethodTrait
     }
 
     /**
-     * Get a default "method" value, if any is available
+     * Get a default method value, if any is available
      *
-     * @return callable|null Default "method" value or null if no default value is available
+     * @return callable|null Default method value or null if no default value is available
      */
-    public function getDefaultMethod(): ?callable
+    public function getDefaultMethod(): callable|null
     {
         return null;
     }

@@ -19,31 +19,31 @@ interface DirectoryAware
      *
      * @return self
      */
-    public function setDirectory(?string $path);
+    public function setDirectory(string|null $path): static;
 
     /**
      * Get directory
      *
-     * If no "directory" value set, method
-     * sets and returns a default "directory".
+     * If no directory value set, method
+     * sets and returns a default directory.
      *
      * @see getDefaultDirectory()
      *
      * @return string|null directory or null if no directory has been set
      */
-    public function getDirectory(): ?string;
+    public function getDirectory(): string|null;
 
     /**
-     * Check if "directory" has been set
+     * Check if directory has been set
      *
-     * @return bool True if "directory" has been set, false if not
+     * @return bool True if directory has been set, false if not
      */
     public function hasDirectory(): bool;
 
     /**
-     * Get a default "directory" value, if any is available
+     * Get a default directory value, if any is available
      *
-     * @return string|null Default "directory" value or null if no default value is available
+     * @return string|null Default directory value or null if no default value is available
      */
-    public function getDefaultDirectory(): ?string;
+    public function getDefaultDirectory(): string|null;
 }

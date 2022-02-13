@@ -19,31 +19,31 @@ interface LocationAware
      *
      * @return self
      */
-    public function setLocation(?string $identifier);
+    public function setLocation(string|null $identifier): static;
 
     /**
      * Get location
      *
-     * If no "location" value set, method
-     * sets and returns a default "location".
+     * If no location value set, method
+     * sets and returns a default location.
      *
      * @see getDefaultLocation()
      *
      * @return string|null location or null if no location has been set
      */
-    public function getLocation(): ?string;
+    public function getLocation(): string|null;
 
     /**
-     * Check if "location" has been set
+     * Check if location has been set
      *
-     * @return bool True if "location" has been set, false if not
+     * @return bool True if location has been set, false if not
      */
     public function hasLocation(): bool;
 
     /**
-     * Get a default "location" value, if any is available
+     * Get a default location value, if any is available
      *
-     * @return string|null Default "location" value or null if no default value is available
+     * @return string|null Default location value or null if no default value is available
      */
-    public function getDefaultLocation(): ?string;
+    public function getDefaultLocation(): string|null;
 }

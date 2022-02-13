@@ -22,7 +22,7 @@ trait ManagerHelper
      *
      * @var string|null
      */
-    protected ?string $defaultProfileKey = null;
+    protected string|null $defaultProfileKey = null;
 
     /**
      * Location where "profiles" are found in
@@ -30,7 +30,7 @@ trait ManagerHelper
      *
      * @var string|null
      */
-    protected ?string $profilesKey = null;
+    protected string|null $profilesKey = null;
 
     /**
      * Resolve the requested profile
@@ -40,7 +40,7 @@ trait ManagerHelper
      *
      * @return string
      */
-    protected function resolveProfile(?string $profile = null): string
+    protected function resolveProfile(string|null $profile = null): string
     {
         return $profile ?? $this->defaultProfile();
     }
@@ -75,7 +75,7 @@ trait ManagerHelper
      *
      * @throws ProfileNotFoundException
      */
-    protected function findOrFailConfiguration(string $profile, ?string $notFoundMsg = null): array
+    protected function findOrFailConfiguration(string $profile, string|null $notFoundMsg = null): array
     {
         if (!isset($this->profilesKey)) {
             throw new ProfileNotFound('Missing profiles-key: location where profiles are found in configuration');

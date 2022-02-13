@@ -24,7 +24,7 @@ class JsonTest extends UnitTestCase
     public function canEncodeAndDecodeJson()
     {
         $data = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'age' => $this->faker->randomNumber()
         ];
 
@@ -63,5 +63,29 @@ class JsonTest extends UnitTestCase
         $json = '{"name:fisk';
 
         Json::decode($json);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws JsonException
+     */
+    public function canDetermineIfValidJsonEncoded()
+    {
+        $validA = Json::encode('abc');
+        $validB = '{ "name": "Sven" }';
+
+        $invalidA = [];
+        $invalidB = 'not_json_encoded';
+        $invalidC = '{ "name": "Sven"';
+
+        $this->assertTrue(Json::isValid($validA), 'should be valid');
+        $this->assertTrue(Json::isValid($validB), 'well formed string should be valid');
+
+        $this->assertFalse(Json::isValid($invalidA), 'array value should not be valid json!');
+        $this->assertFalse(Json::isValid($invalidB), 'Pure string should not be valid json');
+        $this->assertFalse(Json::isValid($invalidC), 'Malformed string should not be valid json');
     }
 }

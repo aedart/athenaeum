@@ -28,7 +28,7 @@ abstract class ParserBase implements FileParser
      *
      * @var null|string
      */
-    protected ?string $filePath = null;
+    protected string|null $filePath = null;
 
     /**
      * ParserBase constructor.
@@ -47,7 +47,7 @@ abstract class ParserBase implements FileParser
     /**
      * {@inheritdoc}
      */
-    public function setFilePath(string $filePath): FileParser
+    public function setFilePath(string $filePath): static
     {
         if (!is_file($filePath)) {
             throw new FileDoesNotExist(sprintf('%s does not exist', $filePath));
@@ -61,7 +61,7 @@ abstract class ParserBase implements FileParser
     /**
      * {@inheritdoc}
      */
-    public function getFilePath(): ?string
+    public function getFilePath(): string|null
     {
         return $this->filePath;
     }

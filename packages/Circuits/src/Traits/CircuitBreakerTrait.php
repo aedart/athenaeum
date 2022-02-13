@@ -19,7 +19,7 @@ trait CircuitBreakerTrait
      *
      * @var CircuitBreaker|null
      */
-    protected ?CircuitBreaker $circuitBreaker = null;
+    protected CircuitBreaker|null $circuitBreaker = null;
 
     /**
      * Set circuit breaker
@@ -28,7 +28,7 @@ trait CircuitBreakerTrait
      *
      * @return self
      */
-    public function setCircuitBreaker(?CircuitBreaker $circuitBreaker)
+    public function setCircuitBreaker(CircuitBreaker|null $circuitBreaker): static
     {
         $this->circuitBreaker = $circuitBreaker;
 
@@ -44,7 +44,7 @@ trait CircuitBreakerTrait
      *
      * @return CircuitBreaker|null circuit breaker or null if none circuit breaker has been set
      */
-    public function getCircuitBreaker(): ?CircuitBreaker
+    public function getCircuitBreaker(): CircuitBreaker|null
     {
         if (!$this->hasCircuitBreaker()) {
             $this->setCircuitBreaker($this->getDefaultCircuitBreaker());
@@ -67,7 +67,7 @@ trait CircuitBreakerTrait
      *
      * @return CircuitBreaker|null A default circuit breaker value or Null if no default value is available
      */
-    public function getDefaultCircuitBreaker(): ?CircuitBreaker
+    public function getDefaultCircuitBreaker(): CircuitBreaker|null
     {
         return null;
     }

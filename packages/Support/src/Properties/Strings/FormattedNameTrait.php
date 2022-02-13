@@ -17,7 +17,7 @@ trait FormattedNameTrait
      *
      * @var string|null
      */
-    protected ?string $formattedName = null;
+    protected string|null $formattedName = null;
 
     /**
      * Set formatted name
@@ -26,7 +26,7 @@ trait FormattedNameTrait
      *
      * @return self
      */
-    public function setFormattedName(?string $name)
+    public function setFormattedName(string|null $name): static
     {
         $this->formattedName = $name;
 
@@ -36,14 +36,14 @@ trait FormattedNameTrait
     /**
      * Get formatted name
      *
-     * If no "formatted name" value set, method
-     * sets and returns a default "formatted name".
+     * If no formatted name value set, method
+     * sets and returns a default formatted name.
      *
      * @see getDefaultFormattedName()
      *
      * @return string|null formatted name or null if no formatted name has been set
      */
-    public function getFormattedName(): ?string
+    public function getFormattedName(): string|null
     {
         if (!$this->hasFormattedName()) {
             $this->setFormattedName($this->getDefaultFormattedName());
@@ -52,9 +52,9 @@ trait FormattedNameTrait
     }
 
     /**
-     * Check if "formatted name" has been set
+     * Check if formatted name has been set
      *
-     * @return bool True if "formatted name" has been set, false if not
+     * @return bool True if formatted name has been set, false if not
      */
     public function hasFormattedName(): bool
     {
@@ -62,11 +62,11 @@ trait FormattedNameTrait
     }
 
     /**
-     * Get a default "formatted name" value, if any is available
+     * Get a default formatted name value, if any is available
      *
-     * @return string|null Default "formatted name" value or null if no default value is available
+     * @return string|null Default formatted name value or null if no default value is available
      */
-    public function getDefaultFormattedName(): ?string
+    public function getDefaultFormattedName(): string|null
     {
         return null;
     }

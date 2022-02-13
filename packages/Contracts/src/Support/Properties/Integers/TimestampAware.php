@@ -19,31 +19,31 @@ interface TimestampAware
      *
      * @return self
      */
-    public function setTimestamp(?int $timestamp);
+    public function setTimestamp(int|null $timestamp): static;
 
     /**
      * Get timestamp
      *
-     * If no "timestamp" value set, method
-     * sets and returns a default "timestamp".
+     * If no timestamp value set, method
+     * sets and returns a default timestamp.
      *
      * @see getDefaultTimestamp()
      *
      * @return int|null timestamp or null if no timestamp has been set
      */
-    public function getTimestamp(): ?int;
+    public function getTimestamp(): int|null;
 
     /**
-     * Check if "timestamp" has been set
+     * Check if timestamp has been set
      *
-     * @return bool True if "timestamp" has been set, false if not
+     * @return bool True if timestamp has been set, false if not
      */
     public function hasTimestamp(): bool;
 
     /**
-     * Get a default "timestamp" value, if any is available
+     * Get a default timestamp value, if any is available
      *
-     * @return int|null Default "timestamp" value or null if no default value is available
+     * @return int|null Default timestamp value or null if no default value is available
      */
-    public function getDefaultTimestamp(): ?int;
+    public function getDefaultTimestamp(): int|null;
 }

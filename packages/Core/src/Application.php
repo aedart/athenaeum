@@ -34,14 +34,17 @@ use Aedart\Core\Traits\ExceptionHandlerFactoryTrait;
 use Aedart\Core\Traits\NamespaceDetectorTrait;
 use Aedart\Core\Traits\PathsContainerTrait;
 use Aedart\Events\Providers\ListenersViaConfigServiceProvider;
+use Aedart\Maintenance\Modes\Providers\MaintenanceModeServiceProvider;
+use Aedart\Maintenance\Modes\Traits\MaintenanceModeManagerTrait;
 use Aedart\Service\Registrar;
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
+use Aedart\Utils\Str;
 use Closure;
 use Illuminate\Contracts\Foundation\Application as LaravelApplicationInterface;
+use Illuminate\Contracts\Foundation\MaintenanceMode;
 use Illuminate\Support\ServiceProvider;
-use LogicException;
 use Throwable;
 
 /**
@@ -67,6 +70,7 @@ class Application extends IoC implements
     use DispatcherTrait;
     use NamespaceDetectorTrait;
     use ExceptionHandlerFactoryTrait;
+    use MaintenanceModeManagerTrait;
 
     /**
      * Application's version
@@ -105,14 +109,14 @@ class Application extends IoC implements
     protected array $deferredServices = [];
 
     /**
-     * State whether or not this application has been bootstrapped
+     * State whether this application has been bootstrapped or not
      *
      * @var bool
      */
     protected bool $hasBootstrapped = false;
 
     /**
-     * State whether or not the application's run method has triggered
+     * State whether the application's run method has triggered or not
      *
      * @var bool
      */
@@ -130,7 +134,7 @@ class Application extends IoC implements
      *
      * @var string|null
      */
-    protected ?string $namespace = null;
+    protected string|null $namespace = null;
 
     /**
      * State of exception handling
@@ -161,6 +165,7 @@ class Application extends IoC implements
     protected array $defaultCoreServiceProviders = [
         CoreServiceProvider::class,
         ExceptionHandlerServiceProvider::class,
+        MaintenanceModeServiceProvider::class,
         NativeFilesystemServiceProvider::class,
         EventServiceProvider::class,
         ListenersViaConfigServiceProvider::class,
@@ -178,7 +183,7 @@ class Application extends IoC implements
      *
      * @throws Throwable
      */
-    public function __construct($paths = null, string $version = '1.0.0')
+    public function __construct(PathsContainer|array|null $paths = null, string $version = '1.0.0')
     {
         $this->version = $version;
 
@@ -223,6 +228,14 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
+    public function langPath(string $path = ''): string
+    {
+        return $this->getPathsContainer()->langPath($path);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function databasePath($path = '')
     {
         return $this->getPathsContainer()->databasePath($path);
@@ -231,7 +244,7 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
-    public function environmentPath()
+    public function environmentPath(): string
     {
         return $this->getPathsContainer()->environmentPath();
     }
@@ -247,20 +260,22 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
-    public function storagePath()
+    public function storagePath($path = '')
     {
-        return $this->getPathsContainer()->storagePath();
+        return $this->getPathsContainer()->storagePath($path);
     }
 
     /**
      * @inheritDoc
      */
-    public function environment(...$environments)
+    public function environment(...$environments): string|bool
     {
         if (count($environments) > 0) {
-            $search = is_array($environments) ? $environments : [ $environments ];
+            $search = is_array($environments[0])
+                ? $environments[0]
+                : $environments;
 
-            return in_array($this['env'], $search);
+            return Str::is($search, $this['env']);
         }
 
         return $this['env'];
@@ -285,9 +300,17 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
+    public function maintenanceMode()
+    {
+        return $this->make(MaintenanceMode::class);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function isDownForMaintenance()
     {
-        return file_exists($this->basePath('.down'));
+        return $this->maintenanceMode()->active();
     }
 
     /**
@@ -402,72 +425,27 @@ class Application extends IoC implements
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
-    public function configurationIsCached()
-    {
-        // By default, this application does not cache configuration.
-        return false;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function detectEnvironment(Closure $callback)
+    public function detectEnvironment(Closure $callback): string
     {
         return $this['env'] = $callback();
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
-    public function environmentFile()
+    public function environmentFile(): string
     {
         return $this->environmentFile;
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
-    public function environmentFilePath()
+    public function environmentFilePath(): string
     {
         return $this->getPathsContainer()->environmentPath($this->environmentPath());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getCachedConfigPath()
-    {
-        // Not used by this application - overwrite if required
-        return '';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getCachedServicesPath()
-    {
-        // Not used by this application - overwrite if required
-        return '';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getCachedPackagesPath()
-    {
-        // Not used by this application - overwrite if required
-        return '';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getCachedRoutesPath()
-    {
-        // Not used by this application - overwrite if required
-        return '';
     }
 
     /**
@@ -513,29 +491,20 @@ class Application extends IoC implements
     public function loadDeferredProviders()
     {
         foreach ($this->deferredServices as $service => $provider) {
-            $this->registerDeferredProvider(get_class($provider), $service);
+            $this->registerDeferredProvider($provider::class, $service);
         }
 
         $this->deferredServices = [];
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
-    public function loadEnvironmentFrom($file)
+    public function loadEnvironmentFrom(string $file): static
     {
         $this->environmentFile = $file;
 
         return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function routesAreCached()
-    {
-        // By default, this application does not offer routing
-        return false;
     }
 
     /**
@@ -647,7 +616,7 @@ class Application extends IoC implements
     /**
      * @inheritdoc
      */
-    public function terminating(callable $callback)
+    public function terminating($callback)
     {
         $this->terminationCallbacks[] = $callback;
 
@@ -697,7 +666,7 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
-    public function run(?callable $callback = null): void
+    public function run(callable|null $callback = null): void
     {
         if ($this->isRunning()) {
             return;
@@ -778,7 +747,7 @@ class Application extends IoC implements
     /**
      * @inheritdoc
      */
-    public function registerAsApplication()
+    public function registerAsApplication(): static
     {
         parent::registerAsApplication();
 
@@ -797,8 +766,10 @@ class Application extends IoC implements
 
     /**
      * @inheritdoc
+     *
+     * @throws Throwable
      */
-    public function getDefaultPathsContainer(): ?PathsContainer
+    public function getDefaultPathsContainer(): PathsContainer|null
     {
         return new Paths([], $this);
     }
@@ -806,7 +777,7 @@ class Application extends IoC implements
     /**
      * @inheritdoc
      */
-    public function getDefaultServiceProviderRegistrar(): ?ServiceProviderRegistrar
+    public function getDefaultServiceProviderRegistrar(): ServiceProviderRegistrar|null
     {
         return new Registrar($this);
     }
@@ -814,7 +785,7 @@ class Application extends IoC implements
     /**
      * @inheritdoc
      */
-    public function getDefaultNamespaceDetector(): ?ApplicationNamespaceDetector
+    public function getDefaultNamespaceDetector(): ApplicationNamespaceDetector|null
     {
         return new NamespaceDetector();
     }
@@ -835,7 +806,7 @@ class Application extends IoC implements
         // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L212
 
         $dispatcher = $this->getDispatcher();
-        $class = get_class($bootstrapper);
+        $class = $bootstrapper::class;
 
         // Dispatch "before" event
         $dispatcher->dispatch('bootstrapping: ' . $class, [$this]);
@@ -850,13 +821,13 @@ class Application extends IoC implements
     /**
      * Resolves this application's paths from given argument
      *
-     * @param null|PathsContainer|array $paths [optional]
-     *
-     * @throws Throwable If an invalid paths argument has been provided
+     * @param array|PathsContainer|null  $paths [optional]
      *
      * @return self
+     *
+     * @throws Throwable If an invalid paths argument has been provided
      */
-    protected function resolveApplicationPaths($paths = null)
+    protected function resolveApplicationPaths(PathsContainer|array|null $paths = null): static
     {
         $this->tryPopulatePathsContainer($paths);
 
@@ -872,7 +843,7 @@ class Application extends IoC implements
      *
      * @throws Throwable If an invalid paths argument has been provided
      */
-    protected function tryPopulatePathsContainer($paths = null)
+    protected function tryPopulatePathsContainer(PathsContainer|array|null $paths = null): void
     {
         // If nothing given, set and get default paths
         if (!isset($paths)) {
@@ -887,13 +858,7 @@ class Application extends IoC implements
         }
 
         // If a paths container has been provided, use it
-        if ($paths instanceof PathsContainer) {
-            $this->setPathsContainer($paths);
-            return;
-        }
-
-        // Lastly, an invalid paths argument has been provide...
-        throw new LogicException('Paths must either be a valid "Paths Container" instance, an "array" of paths or "null"');
+        $this->setPathsContainer($paths);
     }
 
     /**
@@ -910,6 +875,7 @@ class Application extends IoC implements
         $this->instance('path.base', $this->basePath());
         $this->instance('path.bootstrap', $this->bootstrapPath());
         $this->instance('path.config', $this->configPath());
+        $this->instance('path.lang', $this->langPath());
         $this->instance('path.database', $this->databasePath());
         $this->instance('path.environment', $this->environmentPath());
         $this->instance('path.resource', $this->resourcePath());
@@ -936,7 +902,7 @@ class Application extends IoC implements
      *
      * @return self
      */
-    protected function registerCoreServiceProviders()
+    protected function registerCoreServiceProviders(): static
     {
         return $this->registerMultipleServiceProviders($this->getCoreServiceProviders());
     }
@@ -973,7 +939,7 @@ class Application extends IoC implements
      * @param string[] $events
      * @param ServiceProvider $provider
      */
-    protected function listenWhenToRegister(array $events, ServiceProvider $provider)
+    protected function listenWhenToRegister(array $events, ServiceProvider $provider): void
     {
         if (empty($events)) {
             return;
@@ -998,7 +964,7 @@ class Application extends IoC implements
      *
      * @param ServiceProvider $provider Service Provider that provides given services
      */
-    protected function addDeferredServicesFrom(ServiceProvider $provider)
+    protected function addDeferredServicesFrom(ServiceProvider $provider): void
     {
         if (!$provider->isDeferred()) {
             return;
@@ -1017,7 +983,7 @@ class Application extends IoC implements
      *
      * @throws Throwable
      */
-    protected function handleException(Throwable $exception)
+    protected function handleException(Throwable $exception): void
     {
         $handler = $this->getExceptionHandlerFactory()->make();
 

@@ -48,20 +48,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertSame($paths, $app->getPathsContainer());
     }
 
-    /**
-     * @test
-     *
-     * @throws \Throwable
-     */
-    public function failsWhenInvalidPathsContainerGiven()
-    {
-        $this->expectException(LogicException::class);
-
-        $this->app->destroy();
-
-        $this->createApplication('invalid-paths-arg');
-    }
-
     /*****************************************************************
      * Paths that can be specified via Patch Container
      ****************************************************************/
@@ -92,6 +78,18 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     public function canReadConfigPath()
     {
         $path = $this->app->configPath();
+
+        $this->assertNotEmpty($path);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canReadLangPath()
+    {
+        $path = $this->app->langPath();
 
         $this->assertNotEmpty($path);
     }
@@ -155,7 +153,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInBaseDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = base_path($path);
 
@@ -169,7 +167,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInBootstrapDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = bootstrap_path($path);
 
@@ -183,7 +181,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInConfigDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = config_path($path);
 
@@ -197,7 +195,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInDatabaseDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = database_path($path);
 
@@ -211,7 +209,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInEnvironmentDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = environment_path($path);
 
@@ -225,7 +223,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInResourceDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = resource_path($path);
 
@@ -239,7 +237,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInStorageDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = storage_path($path);
 
@@ -253,56 +251,12 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      */
     public function returnsPathInPublicDir()
     {
-        $path = 'readme.' . $this->getFaker()->fileExtension;
+        $path = 'readme.' . $this->getFaker()->fileExtension();
 
         $result = public_path($path);
 
         ConsoleDebugger::output($result);
 
         $this->assertStringContainsString($path, $result);
-    }
-
-    /*****************************************************************
-     * Unsupported "cache" paths
-     ****************************************************************/
-
-    /**
-     * @test
-     */
-    public function canReadCachedConfigPath()
-    {
-        $path = $this->app->getCachedConfigPath();
-
-        $this->assertEmpty($path);
-    }
-
-    /**
-     * @test
-     */
-    public function canReadCachedServicesPath()
-    {
-        $path = $this->app->getCachedServicesPath();
-
-        $this->assertEmpty($path);
-    }
-
-    /**
-     * @test
-     */
-    public function canReadCachedPackagesPath()
-    {
-        $path = $this->app->getCachedPackagesPath();
-
-        $this->assertEmpty($path);
-    }
-
-    /**
-     * @test
-     */
-    public function canReadCachedRoutesPath()
-    {
-        $path = $this->app->getCachedRoutesPath();
-
-        $this->assertEmpty($path);
     }
 }

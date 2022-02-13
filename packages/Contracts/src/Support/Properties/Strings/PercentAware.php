@@ -19,31 +19,31 @@ interface PercentAware
      *
      * @return self
      */
-    public function setPercent(?string $percent);
+    public function setPercent(string|null $percent): static;
 
     /**
      * Get percent
      *
-     * If no "percent" value set, method
-     * sets and returns a default "percent".
+     * If no percent value set, method
+     * sets and returns a default percent.
      *
      * @see getDefaultPercent()
      *
      * @return string|null percent or null if no percent has been set
      */
-    public function getPercent(): ?string;
+    public function getPercent(): string|null;
 
     /**
-     * Check if "percent" has been set
+     * Check if percent has been set
      *
-     * @return bool True if "percent" has been set, false if not
+     * @return bool True if percent has been set, false if not
      */
     public function hasPercent(): bool;
 
     /**
-     * Get a default "percent" value, if any is available
+     * Get a default percent value, if any is available
      *
-     * @return string|null Default "percent" value or null if no default value is available
+     * @return string|null Default percent value or null if no default value is available
      */
-    public function getDefaultPercent(): ?string;
+    public function getDefaultPercent(): string|null;
 }

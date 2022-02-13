@@ -10,7 +10,9 @@ use Aedart\Contracts\Collections\Summations\Rules\Rules;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use ArrayIterator;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
+use Traversable;
 
 /**
  * Processing Rules Repository
@@ -44,7 +46,7 @@ class RulesRepository implements
      * @param  string[]|ProcessingRule[]  $rules  [optional] List of class paths or Processing Rules instances
      * @param  Container|null  $container  [optional]
      */
-    public function __construct(array $rules = [], ?Container $container = null)
+    public function __construct(array $rules = [], Container|null $container = null)
     {
         $this->setContainer($container);
         $this->rules = $rules;
@@ -52,15 +54,17 @@ class RulesRepository implements
 
     /**
      * @inheritDoc
+     *
+     * @throws BindingResolutionException
      */
-    public function matching($item): Rules
+    public function matching(mixed $item): Rules
     {
         // To ensure that processing rules are as "stateless" as possible,
         // we create new instances here. This will provide the cleanest
         // use-case for when processing an item.
         $rules = $this->resolveRules();
 
-        // Determine whether or not processing rule can process given
+        // Determine if processing rule can process given
         // item. If the rule in question is not able to determine this,
         // we assume that the rule always can process given item.
         $matching = array_filter($rules, function (ProcessingRule $rule) use ($item) {
@@ -78,6 +82,8 @@ class RulesRepository implements
 
     /**
      * @inheritDoc
+     *
+     * @throws BindingResolutionException
      */
     public function all(): Rules
     {
@@ -92,7 +98,7 @@ class RulesRepository implements
     /**
      * @inheritDoc
      */
-    public function count()
+    public function count(): int
     {
         return count($this->rules);
     }
@@ -100,7 +106,7 @@ class RulesRepository implements
     /**
      * @inheritDoc
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->rules);
     }
@@ -122,7 +128,7 @@ class RulesRepository implements
      *
      * @return Rules
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     protected function makeRulesCollection(): Rules
     {
@@ -140,7 +146,7 @@ class RulesRepository implements
      *
      * @return ProcessingRule[]
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     protected function resolveRules(): array
     {

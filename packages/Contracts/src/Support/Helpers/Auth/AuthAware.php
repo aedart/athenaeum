@@ -19,7 +19,7 @@ interface AuthAware
      *
      * @return self
      */
-    public function setAuth(?Guard $guard);
+    public function setAuth(Guard|null $guard): static;
 
     /**
      * Get auth
@@ -32,7 +32,7 @@ interface AuthAware
      *
      * @return Guard|null auth or null if none auth has been set
      */
-    public function getAuth(): ?Guard;
+    public function getAuth(): Guard|null;
 
     /**
      * Check if auth has been set
@@ -46,5 +46,5 @@ interface AuthAware
      *
      * @return Guard|null A default auth value or Null if no default value is available
      */
-    public function getDefaultAuth(): ?Guard;
+    public function getDefaultAuth(): Guard|null;
 }

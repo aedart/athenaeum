@@ -67,6 +67,28 @@ class G0_WhenTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    public function resolvesCallableResultForWhen(string $profile)
+    {
+        $client = $this->client($profile);
+
+        $result = fn () => true;
+
+        $hasAppliedCallback = false;
+        $client->when($result, function (Builder $builder) use (&$hasAppliedCallback) {
+            $hasAppliedCallback = true;
+        });
+
+        $this->assertTrue($hasAppliedCallback);
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
     public function appliesCallbackUnlessFalse(string $profile)
     {
         $client = $this->client($profile);
@@ -95,6 +117,28 @@ class G0_WhenTest extends HttpClientsTestCase
         $client->unless(true, function (Builder $builder) {
             // Do nothing here...
         }, function (Builder $builder) use (&$hasAppliedCallback) {
+            $hasAppliedCallback = true;
+        });
+
+        $this->assertTrue($hasAppliedCallback);
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function resolvesCallableResultForUnless(string $profile)
+    {
+        $client = $this->client($profile);
+
+        $result = fn () => false;
+
+        $hasAppliedCallback = false;
+        $client->unless($result, function (Builder $builder) use (&$hasAppliedCallback) {
             $hasAppliedCallback = true;
         });
 

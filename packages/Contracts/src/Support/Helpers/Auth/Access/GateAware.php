@@ -19,7 +19,7 @@ interface GateAware
      *
      * @return self
      */
-    public function setGate(?Gate $gate);
+    public function setGate(Gate|null $gate): static;
 
     /**
      * Get gate
@@ -32,7 +32,7 @@ interface GateAware
      *
      * @return Gate|null gate or null if none gate has been set
      */
-    public function getGate(): ?Gate;
+    public function getGate(): Gate|null;
 
     /**
      * Check if gate has been set
@@ -46,5 +46,5 @@ interface GateAware
      *
      * @return Gate|null A default gate value or Null if no default value is available
      */
-    public function getDefaultGate(): ?Gate;
+    public function getDefaultGate(): Gate|null;
 }

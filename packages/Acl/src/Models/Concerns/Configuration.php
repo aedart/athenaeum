@@ -2,6 +2,9 @@
 
 namespace Aedart\Acl\Models\Concerns;
 
+use Aedart\Acl\Models\Permission;
+use Aedart\Acl\Models\Permissions\Group as PermissionGroup;
+use Aedart\Acl\Models\Role;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -45,7 +48,7 @@ trait Configuration
      *
      * @return Model|Authenticatable
      */
-    public function aclUserModelInstance()
+    public function aclUserModelInstance(): Model|Authenticatable
     {
         // NOTE: We cannot rely on the "make()" method being available
         // for the user model. So we create a new instance the old
@@ -67,9 +70,9 @@ trait Configuration
     /**
      * Creates a new role eloquent model instance
      *
-     * @return \Aedart\Acl\Models\Role|Model
+     * @return Role|Model
      */
-    public function aclRoleModelInstance()
+    public function aclRoleModelInstance(): Model|Role
     {
         return $this->aclRoleModel()::make();
     }
@@ -87,9 +90,9 @@ trait Configuration
     /**
      * Creates a new permission eloquent model instance
      *
-     * @return \Aedart\Acl\Models\Permission|Model
+     * @return Permission|Model
      */
-    public function aclPermissionsModelInstance()
+    public function aclPermissionsModelInstance(): Model|Permission
     {
         return $this->aclPermissionsModel()::make();
     }
@@ -107,9 +110,9 @@ trait Configuration
     /**
      * Creates a new permission group eloquent model instance
      *
-     * @return \Aedart\Acl\Models\Permissions\Group|Model
+     * @return PermissionGroup|Model
      */
-    public function aclPermissionsGroupModelInstance()
+    public function aclPermissionsGroupModelInstance(): Model|PermissionGroup
     {
         return $this->aclPermissionsGroupModel()::make();
     }
@@ -121,7 +124,7 @@ trait Configuration
      *
      * @return string|null
      */
-    public function aclModel(string $identifier): ?string
+    public function aclModel(string $identifier): string|null
     {
         if (isset(static::$aclModels[$identifier])) {
             return static::$aclModels[$identifier];
@@ -137,7 +140,7 @@ trait Configuration
      *
      * @return string|null
      */
-    public function aclTable(string $identifier): ?string
+    public function aclTable(string $identifier): string|null
     {
         if (isset(static::$aclTables[$identifier])) {
             return static::$aclTables[$identifier];

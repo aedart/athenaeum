@@ -2,6 +2,9 @@
 
 namespace Aedart\Contracts\Database\Query;
 
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
+
 /**
  * Criteria (Query Filter)
  *
@@ -26,19 +29,19 @@ interface Criteria
      * criteria intended to be applied. These parameters can be used
      * for determining if criteria should be applied or avoided.
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query [optional] Evt. current query scope
-     * @param Criteria|Criteria[] $filters [optional] List of intended criteria to be applied, along with this criteria
+     * @param Builder|EloquentBuilder|null $query [optional] Evt. current query scope
+     * @param Criteria[] $filters [optional] List of intended criteria to be applied, along with this criteria
      *
      * @return bool
      */
-    public function isApplicable($query = null, $filters = []): bool;
+    public function isApplicable(Builder|EloquentBuilder|null $query = null, array $filters = []): bool;
 
     /**
      * Apply criteria
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query
+     * @param Builder|EloquentBuilder $query
      *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation
+     * @return Builder|EloquentBuilder
      */
-    public function apply($query);
+    public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder;
 }

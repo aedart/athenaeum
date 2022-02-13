@@ -3,14 +3,16 @@
 namespace Aedart\Database\Models\Concerns;
 
 use Aedart\Contracts\Database\Models\Sluggable;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 /**
  * Concerns Slugs
  *
  * @see \Aedart\Contracts\Database\Models\Sluggable
  *
- * @method static \Illuminate\Database\Eloquent\Builder whereSlug(string $slug)
- * @method static \Illuminate\Database\Eloquent\Builder whereSlugIn(mixed $slugs)
+ * @method static Builder whereSlug(string $slug)
+ * @method static Builder whereSlugIn(mixed $slugs)
+ * @method static Builder whereSlugNotIn(mixed $slugs)
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Database\Models\Concerns
@@ -37,7 +39,7 @@ trait Slugs
      *
      * @return string|null
      */
-    public function getSlugKey(): ?string
+    public function getSlugKey(): string|null
     {
         return $this->getAttribute($this->getSlugKeyName());
     }
@@ -95,7 +97,7 @@ trait Slugs
      *
      * @return static[]|\Illuminate\Database\Eloquent\Collection
      */
-    public static function findManyBySlugs($slugs, array $columns = ['*'])
+    public static function findManyBySlugs(string|array $slugs, array $columns = ['*'])
     {
         return static::whereSlugIn($slugs)->get($columns);
     }
@@ -103,12 +105,12 @@ trait Slugs
     /**
      * Query scope for finding model via given slug
      *
-     * @param \Illuminate\Database\Eloquent\Builder $scope
+     * @param Builder $scope
      * @param string $slug
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
-    public function scopeWhereSlug($scope, string $slug)
+    public function scopeWhereSlug(Builder $scope, string $slug): Builder
     {
         return $scope->where($this->getSlugKeyName(), $slug);
     }
@@ -116,13 +118,26 @@ trait Slugs
     /**
      * Query scope for finding models that match given slugs
      *
-     * @param \Illuminate\Database\Eloquent\Builder $scope
-     * @param mixed $slugs
+     * @param Builder $scope
+     * @param string|string[] $slugs
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
-    public function scopeWhereSlugIn($scope, $slugs)
+    public function scopeWhereSlugIn(Builder $scope, string|array $slugs): Builder
     {
         return $scope->whereIn($this->getSlugKeyName(), $slugs);
+    }
+
+    /**
+     * Query scope for finding models that do not match given slugs
+     *
+     * @param Builder $scope
+     * @param string|string[] $slugs
+     *
+     * @return Builder
+     */
+    public function scopeWhereSlugNotIn(Builder $scope, string|array $slugs): Builder
+    {
+        return $scope->whereNotIn($this->getSlugKeyName(), $slugs);
     }
 }

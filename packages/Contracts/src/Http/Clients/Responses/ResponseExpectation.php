@@ -18,7 +18,7 @@ interface ResponseExpectation
      * Add an expectation for the next response.
      *
      * An "expectation" is a callback that verifies the received
-     * response's Http status code, Http headers, and possibly the
+     * response's Http status code, Http headers, and possibly
      * it's payload body. If the response is considered invalid,
      * the callback SHOULD throw an exception.
      *
@@ -28,7 +28,7 @@ interface ResponseExpectation
      *
      * @return self
      */
-    public function expect(callable $expectation): self;
+    public function expect(callable $expectation): static;
 
     /**
      * Returns the assigned expectation callback

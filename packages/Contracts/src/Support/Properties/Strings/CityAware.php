@@ -19,31 +19,31 @@ interface CityAware
      *
      * @return self
      */
-    public function setCity(?string $name);
+    public function setCity(string|null $name): static;
 
     /**
      * Get city
      *
-     * If no "city" value set, method
-     * sets and returns a default "city".
+     * If no city value set, method
+     * sets and returns a default city.
      *
      * @see getDefaultCity()
      *
      * @return string|null city or null if no city has been set
      */
-    public function getCity(): ?string;
+    public function getCity(): string|null;
 
     /**
-     * Check if "city" has been set
+     * Check if city has been set
      *
-     * @return bool True if "city" has been set, false if not
+     * @return bool True if city has been set, false if not
      */
     public function hasCity(): bool;
 
     /**
-     * Get a default "city" value, if any is available
+     * Get a default city value, if any is available
      *
-     * @return string|null Default "city" value or null if no default value is available
+     * @return string|null Default city value or null if no default value is available
      */
-    public function getDefaultCity(): ?string;
+    public function getDefaultCity(): string|null;
 }

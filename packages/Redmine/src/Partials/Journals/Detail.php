@@ -31,7 +31,7 @@ class Detail extends ArrayDto
      *
      * @return self
      */
-    public function setOldValue($value = null)
+    public function setOldValue(mixed $value = null): static
     {
         $this->properties['old_value'] = $value;
 
@@ -43,7 +43,7 @@ class Detail extends ArrayDto
      *
      * @return mixed
      */
-    public function getOldValue()
+    public function getOldValue(): mixed
     {
         return $this->properties['old_value'];
     }
@@ -55,7 +55,7 @@ class Detail extends ArrayDto
      *
      * @return self
      */
-    public function setNewValue($value = null)
+    public function setNewValue(mixed $value = null): static
     {
         $this->properties['new_value'] = $value;
 
@@ -67,7 +67,7 @@ class Detail extends ArrayDto
      *
      * @return mixed
      */
-    public function getNewValue()
+    public function getNewValue(): mixed
     {
         return $this->properties['new_value'];
     }

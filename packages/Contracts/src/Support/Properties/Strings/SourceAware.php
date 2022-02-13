@@ -19,31 +19,31 @@ interface SourceAware
      *
      * @return self
      */
-    public function setSource(?string $source);
+    public function setSource(string|null $source): static;
 
     /**
      * Get source
      *
-     * If no "source" value set, method
-     * sets and returns a default "source".
+     * If no source value set, method
+     * sets and returns a default source.
      *
      * @see getDefaultSource()
      *
      * @return string|null source or null if no source has been set
      */
-    public function getSource(): ?string;
+    public function getSource(): string|null;
 
     /**
-     * Check if "source" has been set
+     * Check if source has been set
      *
-     * @return bool True if "source" has been set, false if not
+     * @return bool True if source has been set, false if not
      */
     public function hasSource(): bool;
 
     /**
-     * Get a default "source" value, if any is available
+     * Get a default source value, if any is available
      *
-     * @return string|null Default "source" value or null if no default value is available
+     * @return string|null Default source value or null if no default value is available
      */
-    public function getDefaultSource(): ?string;
+    public function getDefaultSource(): string|null;
 }

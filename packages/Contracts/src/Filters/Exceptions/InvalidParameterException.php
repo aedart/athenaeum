@@ -30,9 +30,9 @@ interface InvalidParameterException extends ProcessorException
     public static function forParameter(
         string $parameter,
         Processor $processor,
-        $message = "",
-        $code = 0,
-        Throwable $previous = null
+        string $message = "",
+        int $code = 0,
+        Throwable|null $previous = null
     );
 
     /**

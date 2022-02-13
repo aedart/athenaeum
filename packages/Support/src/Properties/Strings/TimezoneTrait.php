@@ -17,7 +17,7 @@ trait TimezoneTrait
      *
      * @var string|null
      */
-    protected ?string $timezone = null;
+    protected string|null $timezone = null;
 
     /**
      * Set timezone
@@ -26,7 +26,7 @@ trait TimezoneTrait
      *
      * @return self
      */
-    public function setTimezone(?string $name)
+    public function setTimezone(string|null $name): static
     {
         $this->timezone = $name;
 
@@ -36,14 +36,14 @@ trait TimezoneTrait
     /**
      * Get timezone
      *
-     * If no "timezone" value set, method
-     * sets and returns a default "timezone".
+     * If no timezone value set, method
+     * sets and returns a default timezone.
      *
      * @see getDefaultTimezone()
      *
      * @return string|null timezone or null if no timezone has been set
      */
-    public function getTimezone(): ?string
+    public function getTimezone(): string|null
     {
         if (!$this->hasTimezone()) {
             $this->setTimezone($this->getDefaultTimezone());
@@ -52,9 +52,9 @@ trait TimezoneTrait
     }
 
     /**
-     * Check if "timezone" has been set
+     * Check if timezone has been set
      *
-     * @return bool True if "timezone" has been set, false if not
+     * @return bool True if timezone has been set, false if not
      */
     public function hasTimezone(): bool
     {
@@ -62,11 +62,11 @@ trait TimezoneTrait
     }
 
     /**
-     * Get a default "timezone" value, if any is available
+     * Get a default timezone value, if any is available
      *
-     * @return string|null Default "timezone" value or null if no default value is available
+     * @return string|null Default timezone value or null if no default value is available
      */
-    public function getDefaultTimezone(): ?string
+    public function getDefaultTimezone(): string|null
     {
         return null;
     }

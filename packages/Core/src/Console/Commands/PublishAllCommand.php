@@ -10,7 +10,7 @@ use RuntimeException;
 /**
  * Publish All Command
  *
- * Largely inspired by Laravel's "vendor:publish" command, but with less features...
+ * Largely inspired by Laravel's "vendor:publish" command, but with much fewer features...
  * @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Console/VendorPublishCommand.php
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
@@ -234,7 +234,7 @@ EOD;
     }
 
     /**
-     * Shortens the given assets path (for output purposes)
+     * Shortens the given asset path (for output purposes)
      *
      * @param string $asset
      *

@@ -27,7 +27,7 @@ trait FakerPartial
      *
      * @var string|null
      */
-    protected ?string $fakerLocale = Factory::DEFAULT_LOCALE;
+    protected string|null $fakerLocale = Factory::DEFAULT_LOCALE;
 
     /**
      * Setup the faker generator
@@ -44,9 +44,9 @@ trait FakerPartial
      *
      * @param string|null $locale [optional] Language locale. Defaults to "en_US" if none specified
      *
-     * @return Generator|null
+     * @return Generator
      */
-    protected function makeFaker(?string $locale = null): ?Generator
+    protected function makeFaker(string|null $locale = null): Generator
     {
         return Factory::create($locale);
     }
@@ -56,7 +56,7 @@ trait FakerPartial
      *
      * @return Generator|null A default faker value or Null if no default value is available
      */
-    public function getDefaultFaker(): ?Generator
+    public function getDefaultFaker(): Generator|null
     {
         return $this->makeFaker($this->fakerLocale);
     }

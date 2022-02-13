@@ -26,7 +26,7 @@ interface Connection extends HttpClientAware
      *
      * @throws ConnectionException
      */
-    public static function resolve($connection = null): Connection;
+    public static function resolve(string|Connection|null $connection = null): Connection;
 
     /**
      * Returns the Http Client for this connection
@@ -47,11 +47,11 @@ interface Connection extends HttpClientAware
      *
      * Method is intended to for testing purposes only
      *
-     * @param ResponseInterface|ResponseInterface[] $response
+     * @param  ResponseInterface|ResponseInterface[]  $response
      *
      * @return self
      */
-    public function mock($response): self;
+    public function mock(array|ResponseInterface $response): static;
 
     /**
      * Determine if next response should be mocked

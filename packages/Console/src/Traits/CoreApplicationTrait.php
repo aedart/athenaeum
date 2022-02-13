@@ -20,7 +20,7 @@ trait CoreApplicationTrait
      *
      * @var Application|null
      */
-    protected ?Application $coreApplication = null;
+    protected Application|null $coreApplication = null;
 
     /**
      * Set core application
@@ -29,7 +29,7 @@ trait CoreApplicationTrait
      *
      * @return self
      */
-    public function setCoreApplication(?Application $core)
+    public function setCoreApplication(Application|null $core): static
     {
         $this->coreApplication = $core;
 
@@ -45,7 +45,7 @@ trait CoreApplicationTrait
      *
      * @return Application|null core application or null if none core application has been set
      */
-    public function getCoreApplication(): ?Application
+    public function getCoreApplication(): Application|null
     {
         if (!$this->hasCoreApplication()) {
             $this->setCoreApplication($this->getDefaultCoreApplication());
@@ -68,7 +68,7 @@ trait CoreApplicationTrait
      *
      * @return Application|null A default core application value or Null if no default value is available
      */
-    public function getDefaultCoreApplication(): ?Application
+    public function getDefaultCoreApplication(): Application|null
     {
         return IoCFacade::tryMake(Application::class);
     }

@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Support\Properties\Dates;
 /**
  * Anniversary Aware
  *
- * Component is aware of \DateTime "anniversary"
+ * Component is aware of \DateTimeInterface "anniversary"
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Support\Properties\Dates
@@ -15,35 +15,35 @@ interface AnniversaryAware
     /**
      * Set anniversary
      *
-     * @param \DateTime|null $anniversary Date of anniversary
+     * @param \DateTimeInterface|null $anniversary Date of anniversary
      *
      * @return self
      */
-    public function setAnniversary(?\DateTime $anniversary);
+    public function setAnniversary(\DateTimeInterface|null $anniversary): static;
 
     /**
      * Get anniversary
      *
-     * If no "anniversary" value set, method
-     * sets and returns a default "anniversary".
+     * If no anniversary value set, method
+     * sets and returns a default anniversary.
      *
      * @see getDefaultAnniversary()
      *
-     * @return \DateTime|null anniversary or null if no anniversary has been set
+     * @return \DateTimeInterface|null anniversary or null if no anniversary has been set
      */
-    public function getAnniversary(): ?\DateTime;
+    public function getAnniversary(): \DateTimeInterface|null;
 
     /**
-     * Check if "anniversary" has been set
+     * Check if anniversary has been set
      *
-     * @return bool True if "anniversary" has been set, false if not
+     * @return bool True if anniversary has been set, false if not
      */
     public function hasAnniversary(): bool;
 
     /**
-     * Get a default "anniversary" value, if any is available
+     * Get a default anniversary value, if any is available
      *
-     * @return \DateTime|null Default "anniversary" value or null if no default value is available
+     * @return \DateTimeInterface|null Default anniversary value or null if no default value is available
      */
-    public function getDefaultAnniversary(): ?\DateTime;
+    public function getDefaultAnniversary(): \DateTimeInterface|null;
 }

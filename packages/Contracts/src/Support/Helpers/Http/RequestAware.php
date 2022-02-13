@@ -2,8 +2,6 @@
 
 namespace Aedart\Contracts\Support\Helpers\Http;
 
-use Illuminate\Http\Request;
-
 /**
  * Request Aware
  *
@@ -15,11 +13,11 @@ interface RequestAware
     /**
      * Set request
      *
-     * @param Request|null $request Http Request instance
+     * @param \Illuminate\Http\Request|null $request Http Request instance
      *
      * @return self
      */
-    public function setRequest(?Request $request);
+    public function setRequest($request): static;
 
     /**
      * Get request
@@ -30,9 +28,9 @@ interface RequestAware
      *
      * @see getDefaultRequest()
      *
-     * @return Request|null request or null if none request has been set
+     * @return \Illuminate\Http\Request|null request or null if none request has been set
      */
-    public function getRequest(): ?Request;
+    public function getRequest();
 
     /**
      * Check if request has been set
@@ -44,7 +42,7 @@ interface RequestAware
     /**
      * Get a default request value, if any is available
      *
-     * @return Request|null A default request value or Null if no default value is available
+     * @return \Illuminate\Http\Request|null A default request value or Null if no default value is available
      */
-    public function getDefaultRequest(): ?Request;
+    public function getDefaultRequest();
 }

@@ -17,7 +17,7 @@ trait TimeoutTrait
      *
      * @var int|null
      */
-    protected ?int $timeout = null;
+    protected int|null $timeout = null;
 
     /**
      * Set timeout
@@ -26,7 +26,7 @@ trait TimeoutTrait
      *
      * @return self
      */
-    public function setTimeout(?int $amount)
+    public function setTimeout(int|null $amount): static
     {
         $this->timeout = $amount;
 
@@ -36,14 +36,14 @@ trait TimeoutTrait
     /**
      * Get timeout
      *
-     * If no "timeout" value set, method
-     * sets and returns a default "timeout".
+     * If no timeout value set, method
+     * sets and returns a default timeout.
      *
      * @see getDefaultTimeout()
      *
      * @return int|null timeout or null if no timeout has been set
      */
-    public function getTimeout(): ?int
+    public function getTimeout(): int|null
     {
         if (!$this->hasTimeout()) {
             $this->setTimeout($this->getDefaultTimeout());
@@ -52,9 +52,9 @@ trait TimeoutTrait
     }
 
     /**
-     * Check if "timeout" has been set
+     * Check if timeout has been set
      *
-     * @return bool True if "timeout" has been set, false if not
+     * @return bool True if timeout has been set, false if not
      */
     public function hasTimeout(): bool
     {
@@ -62,11 +62,11 @@ trait TimeoutTrait
     }
 
     /**
-     * Get a default "timeout" value, if any is available
+     * Get a default timeout value, if any is available
      *
-     * @return int|null Default "timeout" value or null if no default value is available
+     * @return int|null Default timeout value or null if no default value is available
      */
-    public function getDefaultTimeout(): ?int
+    public function getDefaultTimeout(): int|null
     {
         return null;
     }

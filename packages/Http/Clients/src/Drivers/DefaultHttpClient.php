@@ -2,7 +2,6 @@
 
 namespace Aedart\Http\Clients\Drivers;
 
-use Aedart\Contracts\Http\Clients\Middleware;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Handler;
 use Aedart\Contracts\Http\Clients\Requests\HasDriverOptions;
@@ -27,7 +26,7 @@ class DefaultHttpClient extends BaseClient
      *
      * @var GuzzleClient|null
      */
-    protected ?GuzzleClient $client = null;
+    protected GuzzleClient|null $client = null;
 
     /**
      * DefaultHttpClient constructor.
@@ -93,7 +92,7 @@ class DefaultHttpClient extends BaseClient
      *
      * @return GuzzleClient
      */
-    public function driver()
+    public function driver(): GuzzleClient
     {
         return $this->client;
     }

@@ -19,31 +19,31 @@ interface DeceasedAtAware
      *
      * @return self
      */
-    public function setDeceasedAt(?string $date);
+    public function setDeceasedAt(string|null $date): static;
 
     /**
      * Get deceased at
      *
-     * If no "deceased at" value set, method
-     * sets and returns a default "deceased at".
+     * If no deceased at value set, method
+     * sets and returns a default deceased at.
      *
      * @see getDefaultDeceasedAt()
      *
      * @return string|null deceased at or null if no deceased at has been set
      */
-    public function getDeceasedAt(): ?string;
+    public function getDeceasedAt(): string|null;
 
     /**
-     * Check if "deceased at" has been set
+     * Check if deceased at has been set
      *
-     * @return bool True if "deceased at" has been set, false if not
+     * @return bool True if deceased at has been set, false if not
      */
     public function hasDeceasedAt(): bool;
 
     /**
-     * Get a default "deceased at" value, if any is available
+     * Get a default deceased at value, if any is available
      *
-     * @return string|null Default "deceased at" value or null if no default value is available
+     * @return string|null Default deceased at value or null if no default value is available
      */
-    public function getDefaultDeceasedAt(): ?string;
+    public function getDefaultDeceasedAt(): string|null;
 }

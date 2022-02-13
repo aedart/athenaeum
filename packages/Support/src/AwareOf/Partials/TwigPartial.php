@@ -24,14 +24,14 @@ trait TwigPartial
      *
      * @var Environment|null
      */
-    protected ?Environment $twig;
+    protected Environment|null $twig;
 
     /**
      * Setup the twig template engine
      *
      * @return self
      */
-    public function setupTwig()
+    public function setupTwig(): static
     {
         $path = $this->getConfig()->get('templates-path', $this->defaultTemplatesPath());
 
