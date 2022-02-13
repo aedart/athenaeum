@@ -29,37 +29,13 @@ env:
   USER_NAME: "aedart"
   USER_EMAIL: "aedart@gmail.com"
 
+  # The split action to use
+  SPLIT_ACTION: "symplify/monorepo-split-github-action@2.1"
+
 jobs:
 
-# TODO: REMOVE THIS - the extract assumes that all packages' directory name matches the package's name!
-#  # ------------------------------------------------------------------------------------------------------- #
-#  # Extracts packages' names into
-#  # ------------------------------------------------------------------------------------------------------- #
-#
-#  extract_packages:
-#    name: "Extract Packages"
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - uses: actions/checkout@v2
-#
-#      - uses: shivammathur/setup-php@v2
-#        with:
-#          php-version: 8.0
-#          coverage: none
-#
-#      - uses: "ramsey/composer-install@v1"
-#
-#      # Get package json list
-#      # NOTE: This means that packages' names MUST match their repository name!
-#      - id: output_data
-#        run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json)"
-#
-#    outputs:
-#      matrix: ${{ steps.output_data.outputs.matrix }}
-
   # ------------------------------------------------------------------------------------------------------- #
-  # Splits the mono-repository into packages...
+  # Split mono repository into several packages...
   # ------------------------------------------------------------------------------------------------------- #
 
   split_monorepo:
@@ -69,117 +45,119 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+
         # Define the local directory and remote repository for each package!
         # - local = Directory name inside packages
         # - remote = Repository name
+        #
+        # NOTE: When creating new packages, make sure to manually create the first
+        # commit ~ initialise the remote repo, or split will fail.
+        #
         package:
-          - local: 'Acl'
-            remote: 'athenaeum-acl'
-          - local: 'Audit'
-            remote: 'athenaeum-audit'
-          - local: 'Circuits'
-            remote: 'athenaeum-circuits'
-          - local: 'Collections'
-            remote: 'athenaeum-collections'
-          - local: 'Config'
-            remote: 'athenaeum-config'
-          - local: 'Console'
-            remote: 'athenaeum-console'
-          - local: 'Container'
-            remote: 'athenaeum-container'
-          - local: 'Contracts'
-            remote: 'athenaeum-contracts'
-          - local: 'Core'
-            remote: 'athenaeum-core'
-          - local: 'Database'
-            remote: 'athenaeum-database'
-          - local: 'Dto'
-            remote: 'athenaeum-dto'
-          - local: 'Events'
-            remote: 'athenaeum-events'
-          - local: 'Filters'
-            remote: 'athenaeum-filters'
-          - local: 'Http/Clients'
-            remote: 'athenaeum-http-clients'
-          - local: 'Http/Cookies'
-            remote: 'athenaeum-http-cookies'
-          - local: 'Http/Messages'
-            remote: 'athenaeum-http-messages'
+#          - local: 'Acl'
+#            remote: 'athenaeum-acl'
+#          - local: 'Audit'
+#            remote: 'athenaeum-audit'
+#          - local: 'Circuits'
+#            remote: 'athenaeum-circuits'
+#          - local: 'Collections'
+#            remote: 'athenaeum-collections'
+#          - local: 'Config'
+#            remote: 'athenaeum-config'
+#          - local: 'Console'
+#            remote: 'athenaeum-console'
+#          - local: 'Container'
+#            remote: 'athenaeum-container'
+#          - local: 'Contracts'
+#            remote: 'athenaeum-contracts'
+#          - local: 'Core'
+#            remote: 'athenaeum-core'
+#          - local: 'Database'
+#            remote: 'athenaeum-database'
+#          - local: 'Dto'
+#            remote: 'athenaeum-dto'
+#          - local: 'Events'
+#            remote: 'athenaeum-events'
+#          - local: 'Filters'
+#            remote: 'athenaeum-filters'
+#          - local: 'Http/Clients'
+#            remote: 'athenaeum-http-clients'
+#          - local: 'Http/Cookies'
+#            remote: 'athenaeum-http-cookies'
+#          - local: 'Http/Messages'
+#            remote: 'athenaeum-http-messages'
           - local: 'Maintenance/Modes'
             remote: 'athenaeum-maintenance-modes'
-          - local: 'Pagination'
-            remote: 'athenaeum-pagination'
-          - local: 'Properties'
-            remote: 'athenaeum-properties'
-          - local: 'Redmine'
-            remote: 'athenaeum-redmine'
-          - local: 'Service'
-            remote: 'athenaeum-service'
-          - local: 'Support'
-            remote: 'athenaeum-support'
-          - local: 'Testing'
-            remote: 'athenaeum-testing'
-          - local: 'Utils'
-            remote: 'athenaeum-utils'
-          - local: 'Validation'
-            remote: 'athenaeum-validation'
+#          - local: 'Pagination'
+#            remote: 'athenaeum-pagination'
+#          - local: 'Properties'
+#            remote: 'athenaeum-properties'
+#          - local: 'Redmine'
+#            remote: 'athenaeum-redmine'
+#          - local: 'Service'
+#            remote: 'athenaeum-service'
+#          - local: 'Support'
+#            remote: 'athenaeum-support'
+#          - local: 'Testing'
+#            remote: 'athenaeum-testing'
+#          - local: 'Utils'
+#            remote: 'athenaeum-utils'
+#          - local: 'Validation'
+#            remote: 'athenaeum-validation'
 
     steps:
       - uses: actions/checkout@v2
 
+      # TODO: Cleanup this, if other solution works
+#      # When no tag available
+#      - name: "Split of ${{ matrix.package.local_dir }} to remote ${{ matrix.package.remote }}"
+#        uses: "symplify/monorepo-split-github-action@2.1"
+#        with:
+#          # ↓ split "packages/xyz" directory
+#          package_directory: 'packages/${{ matrix.package.local }}'
+#
+#          # ↓ into https://github.com/aedart/xyz repository
+#          repository_organization: "aedart"
+#          repository_name: '${{ matrix.package.remote }}'
+#
+#          # ↓ the user signed under the split commit
+#          user_name: "aedart"
+#          user_email: "aedart@gmail.com"
+#
+#          # All READ-ONLY repositories must have "main" as default branch name...
+#          branch: "main"
+
       # When no tag available
-      - name: "Split of ${{ matrix.package.local_dir }} to remote ${{ matrix.package.remote }}"
-        uses: "symplify/monorepo-split-github-action@2.1"
+      - name: "Split of ${{ matrix.package.local_dir }} to remote ${{ matrix.package.remote }} - NO TAG"
+        if: "!startsWith(github.ref, 'refs/tags/')"
+        uses: "${SPLIT_ACTION}"
         with:
           # ↓ split "packages/xyz" directory
           package_directory: 'packages/${{ matrix.package.local }}'
 
           # ↓ into https://github.com/aedart/xyz repository
-          repository_organization: "aedart"
+          repository_organization: "${ORGANISATION}"
           repository_name: '${{ matrix.package.remote }}'
 
           # ↓ the user signed under the split commit
-          user_name: "aedart"
-          user_email: "aedart@gmail.com"
+          user_name: "${USER_NAME}"
+          user_email: "${USER_EMAIL}"
 
-          # All READ-ONLY repositories must have "main" as default branch name...
-          branch: "main"
+      # When tag available
+      - name: "Split of ${{ matrix.package.local_dir }} to remote ${{ matrix.package.remote }} - WITH TAG"
+        if: "startsWith(github.ref, 'refs/tags/')"
+        uses: "${SPLIT_ACTION}"
+        with:
+          # Set tag
+          tag: ${GITHUB_REF#refs/tags/}
 
-  # ------------------------------------------------------------------------------------------------------- #
-  # TODO: Disabled for now... not sure if this will be needed
-  # ------------------------------------------------------------------------------------------------------- #
+          # ↓ split "packages/xyz" directory
+          package_directory: 'packages/${{ matrix.package.local }}'
 
-#      # When no tag available
-#      - name: "Split of ${{ matrix.package }} (no tag)"
-#        if: "!startsWith(github.ref, 'refs/tags/')"
-#        uses: "symplify/monorepo-split-github-action@2.1"
-#        with:
-#          # ↓ split "packages/xyz" directory
-#          package_directory: 'packages/${{ matrix.package }}'
-#
-#          # ↓ into https://github.com/aedart/xyz repository
-#          repository_organization: $ORGANISATION
-#          repository_name: '${{ matrix.package }}'
-#
-#          # ↓ the user signed under the split commit
-#          user_name: $USER_NAME
-#          user_email: $USER_EMAIL
-#
-#      # When tag available
-#      - name: "Split of ${{ matrix.package }} (${GITHUB_REF})"
-#        if: "!startsWith(github.ref, 'refs/tags/')"
-#        uses: "symplify/monorepo-split-github-action@2.1"
-#        with:
-#          # Tag
-#          tag: ${GITHUB_REF#refs/tags/}
-#
-#          # ↓ split "packages/xyz" directory
-#          package_directory: 'packages/${{ matrix.package }}'
-#
-#          # ↓ into https://github.com/aedart/xyz repository
-#          repository_organization: $ORGANISATION
-#          repository_name: '${{ matrix.package }}'
-#
-#          # ↓ the user signed under the split commit
-#          user_name: $USER_NAME
-#          user_email: $USER_EMAIL
+          # ↓ into https://github.com/aedart/xyz repository
+          repository_organization: "${ORGANISATION}"
+          repository_name: '${{ matrix.package.remote }}'
+
+          # ↓ the user signed under the split commit
+          user_name: "${USER_NAME}"
+          user_email: "${USER_EMAIL}"
