@@ -25,8 +25,8 @@ env:
   ORGANISATION: "aedart"
 
   # Author and Email for signing split
-  USER_NAME = "aedart"
-  USER_EMAIL = "aedart@gmail.com"
+  USER_NAME: "aedart"
+  USER_EMAIL: "aedart@gmail.com"
 
 jobs:
 
