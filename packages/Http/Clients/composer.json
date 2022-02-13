@@ -13,11 +13,11 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "aedart/athenaeum-container": "^5.28",
-        "aedart/athenaeum-contracts": "^5.28",
-        "aedart/athenaeum-http-cookies": "^5.28",
-        "aedart/athenaeum-http-messages": "^5.28",
-        "aedart/athenaeum-support": "^5.28",
+        "aedart/athenaeum-container": "6.x-dev",
+        "aedart/athenaeum-contracts": "6.x-dev",
+        "aedart/athenaeum-http-cookies": "6.x-dev",
+        "aedart/athenaeum-http-messages": "6.x-dev",
+        "aedart/athenaeum-support": "6.x-dev",
         "guzzlehttp/guzzle": "^7.4.1",
         "illuminate/pipeline": "v9.0.1",
         "psr/http-client": "^1.0",
@@ -39,7 +39,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.28.x-dev"
+            "dev-master": "6.x-dev"
         }
     },
     "minimum-stability": "dev",

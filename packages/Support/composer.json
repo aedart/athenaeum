@@ -13,8 +13,8 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "aedart/athenaeum-contracts": "^5.28",
-        "aedart/athenaeum-utils": "^5.28",
+        "aedart/athenaeum-contracts": "6.x-dev",
+        "aedart/athenaeum-utils": "6.x-dev",
         "illuminate/config": "v9.0.1",
         "illuminate/support": "v9.0.1"
     },
@@ -42,7 +42,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.28.x-dev"
+            "dev-master": "6.x-dev"
         }
     },
     "minimum-stability": "dev",
