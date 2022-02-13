@@ -16,7 +16,7 @@
         "aedart/athenaeum-container": "^5.28",
         "aedart/athenaeum-contracts": "^5.28",
         "aedart/athenaeum-support": "^5.28",
-        "aedart/athenaeum-utils": "^5.28"
+        "aedart/athenaeum-utils": "^5.28",
         "illuminate/collections": "v9.0.1"
     },
     "autoload": {

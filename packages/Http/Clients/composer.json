@@ -17,7 +17,7 @@
         "aedart/athenaeum-contracts": "^5.28",
         "aedart/athenaeum-http-cookies": "^5.28",
         "aedart/athenaeum-http-messages": "^5.28",
-        "aedart/athenaeum-support": "^5.28"
+        "aedart/athenaeum-support": "^5.28",
         "guzzlehttp/guzzle": "^7.4.1",
         "illuminate/pipeline": "v9.0.1",
         "psr/http-client": "^1.0",

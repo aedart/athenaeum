@@ -14,7 +14,7 @@
     "require": {
         "php": "^8.0.2",
         "aedart/athenaeum-contracts": "^5.28",
-        "aedart/athenaeum-utils": "^5.28"
+        "aedart/athenaeum-utils": "^5.28",
         "illuminate/config": "v9.0.1",
         "illuminate/support": "v9.0.1"
     },
