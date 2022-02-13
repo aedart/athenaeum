@@ -70,8 +70,10 @@ jobs:
       fail-fast: false
       matrix:
         # Define the local directory and remote repository for each package!
+        # - local = Directory name inside packages
+        # - remote = Repository name
         package:
-          - local: 'packages/Acl'
+          - local: 'Acl'
             remote: 'athenaeum-acl'
 
     steps:
