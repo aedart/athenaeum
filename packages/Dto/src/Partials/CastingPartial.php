@@ -23,11 +23,6 @@ use TypeError;
 trait CastingPartial
 {
     /**
-     * "no match" identifier
-     */
-    private static string $noMatch = '|@no_match@|';
-
-    /**
      * Cast given property's value
      *
      * @param string $name Name of property
@@ -113,19 +108,18 @@ trait CastingPartial
                 in_array($type, ['boolean', 'bool']) && is_bool($value) => $this->castAsBoolean($value),
                 in_array($type, ['array', 'arr']) && (is_array($value) || is_string($value)) => $this->castAsArray($value),
                 $type === 'date' && ($value instanceof DateTimeInterface || is_string($value)) => $this->castAsDate($value),
-                $type === 'null' && is_null($value) => null,
 
                 // When type is a class path and value is an instance of the type...
                 class_exists($type) && is_object($value) && $value instanceof $type => $this->resolveClassAndPopulate($type, $name, $value),
 
                 // When type is a class and an array value is given, we assume that type is a DTO or populate instance.
-                class_exists($type) && is_array($value) => $this->attemptPopulateDtoWithArray($type, $name, $value),
+                class_exists($type) && is_array($value) => $this->attemptPopulateUserDefinedClass($type, $name, $value),
 
                 // Otherwise, we need to skip and allow next type to be processed
-                default => static::$noMatch
+                default => null
             };
 
-            if ($result !== static::$noMatch) {
+            if (isset($result) || $type === 'null' && is_null($value)) {
                 return $result;
             }
         }
@@ -137,29 +131,6 @@ trait CastingPartial
             implode('|', $allowedTypes),
             var_export($value, true)
         ));
-    }
-
-    /**
-     * Attempt to populate a user-defined class, e.g. DTO or populatable with array
-     * data
-     *
-     * @param  string  $type
-     * @param  string  $parameter
-     * @param  array  $value
-     *
-     * @return mixed Populated DTO or returns "no match" identifier when no able to populate given type
-     *
-     * @throws BindingResolutionException
-     * @throws Throwable
-     */
-    protected function attemptPopulateDtoWithArray(string $type, string $parameter, array $value): mixed
-    {
-        $resolved = $this->attemptPopulateUserDefinedClass($type, $parameter, $value);
-        if (!isset($resolved)) {
-            return static::$noMatch;
-        }
-
-        return $resolved;
     }
 
     /**
