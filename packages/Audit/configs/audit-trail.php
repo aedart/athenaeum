@@ -67,12 +67,6 @@ return [
     | Entry, based on received events.
     */
 
-    /**
-     * @deprecated Since 5.27.0, 'listener' option is replaced by 'subscriber' entry.
-     * Will be removed in next major version.
-     */
-    'listener' => \Aedart\Audit\Listeners\RecordAuditTrailEntry::class,
-
     'subscriber' => \Aedart\Audit\Subscribers\AuditTrailEventSubscriber::class,
 
     /*
