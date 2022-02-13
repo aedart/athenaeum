@@ -13,8 +13,8 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "aedart/athenaeum-contracts": "^5.27",
-        "aedart/athenaeum-support": "^5.27",
+        "aedart/athenaeum-contracts": "6.x-dev",
+        "aedart/athenaeum-support": "6.x-dev",
         "psr/http-message": "^1.0"
     },
     "autoload": {
@@ -27,7 +27,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.27.x-dev"
+            "dev-master": "6.x-dev"
         }
     },
     "minimum-stability": "dev",

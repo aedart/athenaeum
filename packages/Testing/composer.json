@@ -13,8 +13,8 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "aedart/athenaeum-container": "^5.27",
-        "aedart/athenaeum-contracts": "^5.27",
+        "aedart/athenaeum-container": "6.x-dev",
+        "aedart/athenaeum-contracts": "6.x-dev",
         "codeception/codeception": "5.0.0-alpha1",
         "codeception/module-asserts": "*@dev",
         "fakerphp/faker": "^v1.17.0",
@@ -33,7 +33,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.27.x-dev"
+            "dev-master": "6.x-dev"
         }
     },
     "minimum-stability": "dev",

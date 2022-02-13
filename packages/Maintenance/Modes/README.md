@@ -1,7 +1,5 @@
 # Athenaeum Maintenance Modes
 
-# Maintenance Modes
-
 Offers a few additional [maintenance modes "drivers"](https://laravel.com/docs/9.x/configuration#maintenance-mode) for Laravel.
 
 ```php
