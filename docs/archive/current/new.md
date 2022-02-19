@@ -18,12 +18,12 @@ If that's the case for you, then the bare minimum understanding you should gain,
 - Facades
 - Service Providers 
 
-If you manage to learn about these concepts, you stand a far better chance of understanding how some of the Athenaeum packages work. 
+If you manage to learn about these concepts, you stand a far better chance of understanding how the Athenaeum packages work. 
 
 ## Laravel's Official Documentation
 
 You could start by going through Laravel's [official documentation](https://laravel.com/docs/8.x).
-It has really good and up-to-date information, on all of the major aspects.
+It has good and up-to-date information, on all the major aspects.
 In particular, you should focus on [Architectural Concepts](https://laravel.com/docs/8.x/container).
 It contains everything you need to know, in order to satisfy the bare minimum.
 
@@ -31,7 +31,7 @@ It contains everything you need to know, in order to satisfy the bare minimum.
 
 [Laracast](https://laracasts.com) contains some of the best video tutorials, that I know.
 It contains over 1.500 lessons and will surely get you up to speed on Laravel, PHP, Testing, Vue.js and much more.
-Yes, it does **cost a bit of money**, but you do not have to commit for more than a month, if it is not to your liking[1].
+Yes, it does **cost a bit of money**, but you do not have to commit for more than a month, if it is not to your liking¹.
 
 If this is a viable option for you, then you could consider the following lessons, before going through all of the available lessons (_membership is required_).
 
@@ -42,7 +42,7 @@ If this is a viable option for you, then you could consider the following lesson
 
 The above tutorials are just about enough, to gain a basic understanding of the previous mentioned concepts.
 
-[1] _I'm not paid for endorsing Laracast nor Laravel. I do so out of sincerity!_
+¹: _I'm not paid for endorsing Laracast nor Laravel. I do so out of sincerity!_
 
 ## Other Concepts
 
