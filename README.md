@@ -3,7 +3,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/aedart/athenaeum/v/unstable)](https://packagist.org/packages/aedart/athenaeum)
 [![composer.lock](https://poser.pugx.org/aedart/athenaeum/composerlock)](https://packagist.org/packages/aedart/athenaeum)
 [![License](https://poser.pugx.org/aedart/athenaeum/license)](https://packagist.org/packages/aedart/athenaeum)
-[![Build Status](https://travis-ci.org/aedart/athenaeum.svg?branch=master)](https://travis-ci.org/aedart/athenaeum)
+[![Build Status](https://github.com/aedart/athenaeum/actions/workflows/tests.yaml/badge.svg?branch=main)](https://github.com/aedart/athenaeum/actions/workflows/tests.yaml)
 
 # Athenaeum
 
