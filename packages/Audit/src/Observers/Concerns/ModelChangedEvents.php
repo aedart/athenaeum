@@ -8,8 +8,8 @@ use Aedart\Audit\Events\MultipleModelsChanged;
 use Aedart\Support\Helpers\Auth\AuthTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Throwable;
 
 /**
@@ -35,9 +35,9 @@ trait ModelChangedEvents
      *
      * @throws Throwable
      */
-    public function dispatchModelChanged(Model $model, string $type, ?string $message = null): static
+    public function dispatchModelChanged(Model $model, string $type, string|null $message = null): static
     {
-        // Abort if model does not wish to record it's next change
+        // Abort if model does not wish to record its next change
         if (method_exists($model, 'mustRecordNextChange') && !$model->mustRecordNextChange()) {
             return $this;
         }
@@ -52,7 +52,7 @@ trait ModelChangedEvents
     /**
      * Dispatches multiple models changed event
      *
-     * @param Collection<Model>|Model[] $models The changed models
+     * @param  Collection<Model>|Model[]  $models The changed models
      * @param string $type [optional] The event type
      * @param array|null $original [optional] Original data (attributes) before change occurred.
      *                                        Default's to given model's original data, if none given.
@@ -65,12 +65,18 @@ trait ModelChangedEvents
      * @throws Throwable
      */
     public function dispatchMultipleModelsChanged(
-        $models,
+        array|Collection $models,
         string $type,
-        ?array $original = null,
-        ?array $changed = null,
-        ?string $message = null
-    ) {
+        array|null $original = null,
+        array|null $changed = null,
+        string|null $message = null
+    ): static
+    {
+        // Resolve models argument
+        if (!($models instanceof Collection)) {
+            $models = collect($models);
+        }
+
         // Determine if event dispatching should be aborted, based on first model's
         // "must record next change" state.
         $first = $models->first();
@@ -121,22 +127,24 @@ trait ModelChangedEvents
     /**
      * Creates a new "multiple models changed" event
      *
-     * @param Collection<Model>|Model[] $models The changed models
-     * @param string $type [optional] The event type
-     * @param array|null $original [optional] Original data (attributes) before change occurred.
+     * @param  Collection<Model>|Model[]  $models  The changed models
+     * @param  string  $type  [optional] The event type
+     * @param  array|null  $original  [optional] Original data (attributes) before change occurred.
      *                                        Default's to given model's original data, if none given.
-     * @param array|null $changed [optional] Changed data (attributes) after change occurred.
+     * @param  array|null  $changed  [optional] Changed data (attributes) after change occurred.
      *                                        Default's to given model's changed data, if none given.
-     * @param string|null $message [optional] Eventual user provided message associated with the event
+     * @param  string|null  $message  [optional] Eventual user provided message associated with the event
      *
      * @return MultipleModelsChanged
+     *
+     * @throws Throwable
      */
     public function makeMultipleModelsChangedEvent(
-        $models,
+        array|Collection $models,
         string $type,
-        ?array $original = null,
-        ?array $changed = null,
-        ?string $message = null
+        array|null $original = null,
+        array|null $changed = null,
+        string|null $message = null
     ): MultipleModelsChanged
     {
         return new MultipleModelsChanged(
