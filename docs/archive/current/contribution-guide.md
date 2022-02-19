@@ -25,6 +25,7 @@ When time permits it, I will review your issue and take action upon it.
 ## Feature Request
 
 If you have an idea for a new feature or perhaps changing an existing, feel free to create a [feature request](https://github.com/aedart/athenaeum/issues/new/choose).
+Should you be unsure whether your idea is good (_or acceptable_), then perhaps you could start a [discussion](https://github.com/aedart/athenaeum/discussions).
 
 ## Code Style
 
