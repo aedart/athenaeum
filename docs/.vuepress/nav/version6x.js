@@ -7,6 +7,8 @@ module.exports.sidebar = function(){
                 '',
                 'upgrade-guide',
                 'new',
+                'contribution-guide',
+                'code-of-conduct',
                 'origin',
             ]
         },

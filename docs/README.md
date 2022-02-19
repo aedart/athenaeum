@@ -1,13 +1,13 @@
 ---
 home: true
-actionText: Discover Packages →
+actionText: View available packages →
 actionLink: /archive/current/
 footer: Copyright © 2018-present Alin Eugen Deac, License BSD-3-Clause
 ---
 
 Athenaeum is a [mono repository](https://en.wikipedia.org/wiki/Monorepo); a collection of various packages. 
 The majority are based on well known components, such as those offered by [Laravel](https://laravel.com/).
-Some of the key packages that are offered by Athenaeum, are the following:
+A few of offered packages are:
 
 ### [Config](archive/current/config)
 
@@ -35,6 +35,5 @@ _Aware-of Helpers for Laravel and DTOs._
 
 ## Not a Framework
 
-Despite the amount of packages, you should not mistake Athenaeum for a framework.
-It is not the intent nor purpose of this mono repository to act as a framework.
-The majority of the offered packages, are merely helpers and utilities.
+Athenaeum shouldn't be mistaken for a framework, despite the amount of packages that are offered.
+The packages are merely helpers and utilities...

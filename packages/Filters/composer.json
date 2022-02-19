@@ -13,11 +13,11 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "aedart/athenaeum-contracts": "6.x-dev",
-        "aedart/athenaeum-database": "6.x-dev",
-        "aedart/athenaeum-support": "6.x-dev",
-        "aedart/athenaeum-utils": "6.x-dev",
-        "aedart/athenaeum-validation": "6.x-dev",
+        "aedart/athenaeum-contracts": "dev-main",
+        "aedart/athenaeum-database": "dev-main",
+        "aedart/athenaeum-support": "dev-main",
+        "aedart/athenaeum-utils": "dev-main",
+        "aedart/athenaeum-validation": "dev-main",
         "illuminate/http": "v9.0.1",
         "illuminate/pipeline": "v9.0.1"
     },

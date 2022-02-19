@@ -1,0 +1,98 @@
+# --------------------------------------------------------------------------------------------------------- #
+# Code analysis and tests workflow
+#
+# @see https://github.com/shivammathur/setup-php
+# @see https://github.com/laravel/framework/blob/9.x/.github/workflows/tests.yml
+# --------------------------------------------------------------------------------------------------------- #
+
+name: 'Code Analysis and Tests'
+on:
+  push:
+  pull_request:
+
+  # Schedule tests to run every day at 06:00 (if possible)
+  # Doing so should enable us to capture evt. changes in
+  # dependencies that are breaking...
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+  athenaeum_tests:
+    name: "Athenaeum (PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }})"
+    runs-on: ${{ matrix.operating-system }}
+
+    strategy:
+      fail-fast: true
+      matrix:
+
+        # See OS and PHP version options on https://github.com/shivammathur/setup-php
+        operating-system: [ 'ubuntu-20.04' ]
+        php-versions: [ '8.0', '8.1' ]
+
+    steps:
+
+      # ------------------------------------------------------------------------------------------------------- #
+      # Checkout code ...
+      # ------------------------------------------------------------------------------------------------------- #
+
+      - name: "Checkout"
+        uses: actions/checkout@v2
+
+      # ------------------------------------------------------------------------------------------------------- #
+      # Setup & configure PHP
+      # ------------------------------------------------------------------------------------------------------- #
+
+      - name: "Setup PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+
+          # PHP Extensions are based on those that Laravel also uses.args:
+          # @see https://github.com/laravel/framework/blob/9.x/.github/workflows/tests.yml
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, redis-phpredis/phpredis@5.3.5, igbinary, msgpack, lzf, zstd, lz4, memcached
+          tools: composer:v2
+          coverage: none
+
+      # ------------------------------------------------------------------------------------------------------- #
+      # Install dependencies
+      # ------------------------------------------------------------------------------------------------------- #
+
+      # Not sure that caching packages is a too good idea...
+#      - name: "Get composer cache directory"
+#        id: composer-cache
+#        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+#
+#      - name: "Cache composer dependencies"
+#        uses: actions/cache@v2
+#        with:
+#          path: ${{ steps.composer-cache.outputs.dir }}
+#
+#          # Use composer.json for key, if composer.lock is not committed.
+#          # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+#          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+#          restore-keys: ${{ runner.os }}-composer-
+
+      - name: "Install dependencies"
+        run: composer install --no-progress --prefer-dist --no-interaction --optimize-autoloader --ansi
+
+      # ------------------------------------------------------------------------------------------------------- #
+      # Run code analysis
+      # ------------------------------------------------------------------------------------------------------- #
+
+      - name: "Compatibility check"
+        run: composer run check
+
+      - name: "Code style check"
+        run: composer run cs
+
+      # ------------------------------------------------------------------------------------------------------- #
+      # Run tests
+      # ------------------------------------------------------------------------------------------------------- #
+
+      - name: "Prepare test environment"
+        run: |
+          composer run test-env --ansi
+          vendor/bin/codecept build
+
+      - name: "Run tests"
+        run: vendor/bin/codecept run

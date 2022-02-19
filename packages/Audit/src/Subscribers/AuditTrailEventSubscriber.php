@@ -28,15 +28,10 @@ class AuditTrailEventSubscriber
      */
     public function subscribe(Dispatcher $dispatcher)
     {
-        // TODO: This can safely be removed in next major version
-        // To ensure that we keep backwards compatibility, we load evt. custom listener that has
-        // been specified.
-        $recordSingleEntryListener = $this->getConfig()->get('audit-trail.listener', RecordAuditTrailEntry::class);
-
         // Handle change event for a single model
         $dispatcher->listen(
             ModelHasChanged::class,
-            [$recordSingleEntryListener, 'handle']
+            [RecordAuditTrailEntry::class, 'handle']
         );
 
         // Handle multiple models changed event

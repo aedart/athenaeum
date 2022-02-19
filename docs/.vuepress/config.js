@@ -9,7 +9,7 @@ module.exports = {
         '/': {
             lang: 'en-GB',
             title: 'Athenaeum',
-            description: 'Athenaeum Official Documentation'
+            description: 'Official Documentation'
         },
     },
     themeConfig: {

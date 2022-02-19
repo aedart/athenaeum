@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Config;
 /**
  * Records Changes
  *
- * Intended to be used by models that must keep an audit trail of it's
+ * Intended to be used by models that must keep an audit trail of its
  * changes.
  *
  * @property-read AuditTrail[]|Collection $recordedChanges Audit trail entries for this model
