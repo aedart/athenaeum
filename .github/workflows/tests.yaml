@@ -89,6 +89,3 @@ jobs:
 
       - name: "Run tests"
         run: vendor/bin/codecept run
-
-#      - name: Test with phpunit
-#        run: vendor/bin/phpunit --coverage-text
