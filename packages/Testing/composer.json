@@ -13,8 +13,8 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "aedart/athenaeum-container": "6.x-dev",
-        "aedart/athenaeum-contracts": "6.x-dev",
+        "aedart/athenaeum-container": "dev-main",
+        "aedart/athenaeum-contracts": "dev-main",
         "codeception/codeception": "5.0.0-alpha1",
         "codeception/module-asserts": "*@dev",
         "fakerphp/faker": "^v1.17.0",

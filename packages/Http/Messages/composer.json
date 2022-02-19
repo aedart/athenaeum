@@ -13,8 +13,8 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "aedart/athenaeum-contracts": "6.x-dev",
-        "aedart/athenaeum-support": "6.x-dev",
+        "aedart/athenaeum-contracts": "dev-main",
+        "aedart/athenaeum-support": "dev-main",
         "psr/http-message": "^1.0"
     },
     "autoload": {
