@@ -56,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `\Aedart\Utils\Dates\Duration` now inherits from `Stringable`.
 * `castAsDate()` now also accepts `DateTimeInterface` as argument, in `ArrayDto`. [#82](https://github.com/aedart/athenaeum/issues/82)
 * Replaced `get_class()` calls with the use of new `::class` magic constant (_[introduced in PHP 8](https://www.php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class)_). Change is throughout all packages.
+* Replaced [Travis](https://www.travis-ci.com/) with [GitHub Actions](https://docs.github.com/en/actions) as CI service. [#102](https://github.com/aedart/athenaeum/issues/102)
 
 ### Removed
 
