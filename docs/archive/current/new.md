@@ -49,4 +49,4 @@ The above tutorials are just about enough, to gain a basic understanding of the 
 There are many more concepts, components, packages, tips & tricks, all of which are worth knowing.
 But, ... in all honesty, you should just _take your time_ learning the basics and toy around with it, before jumping into more complex areas.
 
-> "Sometimes my own eagerness gets in the way of learning new things. Don't haste into new knowledge, and you will have more fun learning."
+> "Sometimes my own eagerness gets in the way of learning new things. Don't haste into new knowledge, and you will have more fun learning." (_unknown source_)
