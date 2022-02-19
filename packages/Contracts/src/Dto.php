@@ -9,7 +9,6 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use JsonException;
 use JsonSerializable;
-use Serializable;
 use Stringable;
 
 /**
