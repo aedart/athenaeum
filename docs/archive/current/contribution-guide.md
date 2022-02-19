@@ -16,11 +16,15 @@ If you have found a bug, please report it on [GitHub](https://github.com/aedart/
 When reporting the bug, do consider the following:
 
 * Where is the defect located
-* A good, short and precise description of the defect (Why is it a defect)
+* A good, short and precise description of the defect (_Why is it a defect_)
 * How to replicate the defect
 * (_A possible solution for how to resolve the defect_)
 
 When time permits it, I will review your issue and take action upon it.
+
+## Feature Request
+
+If you have an idea for a new feature or perhaps changing an existing, feel free to create a [feature request](https://github.com/aedart/athenaeum/issues/new/choose).
 
 ## Code Style
 
