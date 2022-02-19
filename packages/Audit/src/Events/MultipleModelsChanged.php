@@ -6,9 +6,9 @@ use Aedart\Audit\Events\Concerns;
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use RuntimeException;
 use Throwable;
 
@@ -55,9 +55,9 @@ class MultipleModelsChanged
         array|Collection $models,
         Model|Authenticatable|null $user,
         string $type = Types::UPDATED,
-        ?array $original = null,
-        ?array $changed = null,
-        ?string $message = null,
+        array|null $original = null,
+        array|null $changed = null,
+        string|null $message = null,
         DateTimeInterface|Carbon|string|null $performedAt = null
     )
     {

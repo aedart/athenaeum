@@ -24,7 +24,7 @@ trait AuditTrailConfiguration
      */
     public function auditTrailModel(): string
     {
-        return $this->getConfig()->get('audit-trail.models.audit_trail');
+        return $this->getConfig()->get('audit-trail.models.audit_trail', AuditTrail::class);
     }
 
     /**
@@ -44,7 +44,7 @@ trait AuditTrailConfiguration
      */
     public function auditTrailUserModel(): string
     {
-        return $this->getConfig()->get('audit-trail.models.user');
+        return $this->getConfig()->get('audit-trail.models.user', \App\Models\User::class);
     }
 
     /**
@@ -71,7 +71,7 @@ trait AuditTrailConfiguration
      */
     public function auditTrailTable(): string
     {
-        return $this->getConfig()->get('audit-trail.table');
+        return $this->getConfig()->get('audit-trail.table', 'audit_trails');
     }
 
     /**
@@ -81,6 +81,6 @@ trait AuditTrailConfiguration
      */
     public function auditTableAttributesColumnType(): string
     {
-        return $this->getConfig()->get('audit-trail.attributes_column_type');
+        return $this->getConfig()->get('audit-trail.attributes_column_type', 'json');
     }
 }
