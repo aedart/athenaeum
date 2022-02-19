@@ -9,7 +9,7 @@
 
 Athenaeum is a [mono repository](https://en.wikipedia.org/wiki/Monorepo); a collection of various packages. 
 The majority are based on well known components, such as those offered by [Laravel](https://laravel.com/).
-A few of offered packages are:
+A few of the offered packages are:
 
 **[Config](https://aedart.github.io/athenaeum/archive/current/config/)**
 
