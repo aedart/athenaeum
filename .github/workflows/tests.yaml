@@ -1,13 +1,20 @@
 # --------------------------------------------------------------------------------------------------------- #
-# CI Tests
+# Code analysis and tests workflow
 #
 # @see https://github.com/shivammathur/setup-php
+# @see https://github.com/laravel/framework/blob/9.x/.github/workflows/tests.yml
 # --------------------------------------------------------------------------------------------------------- #
 
 name: 'Code Analysis and Tests'
 on:
   push:
   pull_request:
+
+  # Schedule tests to run every day at 06:00 (if possible)
+  # Doing so should enable us to capture evt. changes in
+  # dependencies that are breaking...
+  schedule:
+    - cron: '0 6 * * *'
 
 jobs:
   athenaeum_tests:
