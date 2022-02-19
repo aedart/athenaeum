@@ -8,7 +8,9 @@ sidebarDepth: 0
 Have you found a defect ( [bug or design flaw](https://en.wikipedia.org/wiki/Software_bug) ), or do you wish improvements? In the following sections, you might find some useful information
 on how you can help this project. In any case, I thank you for taking the time to help me improve this project's deliverables and overall quality.
 
-### Bug Report
+[[TOC]]
+
+## Bug Report
 
 If you have found a bug, please report it on [GitHub](https://github.com/aedart/athenaeum/issues/new/choose).
 When reporting the bug, do consider the following:
@@ -20,14 +22,33 @@ When reporting the bug, do consider the following:
 
 When time permits it, I will review your issue and take action upon it.
 
-### Fork, code and send pull-request
+## Code Style
 
-A good and well written bug report can help me a lot. Nevertheless, if you can or wish to resolve the defect by yourself, here is how you can do so;
+On a general note, [PSR-12](https://www.php-fig.org/psr/psr-12/) is used as code style guide.
+
+### PHPDoc
+
+[PHPDoc](https://www.phpdoc.org/) us used to document source code, such as classes, interfaces, traits, methods...etc.
+Please make sure that your contributed code is documented accordingly. 
+
+### Easy Coding Standard
+
+[Easy Coding Standard](https://github.com/symplify/easy-coding-standard) is configured in the project, which is automatically triggered on every push and pull request.
+It ensures that [PSR-12](https://www.php-fig.org/psr/psr-12/) is upheld.
+To execute it locally, run the following command:
+
+```shell
+composer run cs
+```
+
+## Fork, code and send pull-request
+
+If you wish to fix a bug, add new feature, or perhaps change an existing, then please follow this guideline
 
 * Fork this project
-* Create a new local development branch for the given defect-fix
+* Create a new local development branch for the given fix, addition or change
 * Write your code / changes
-* Create executable test-cases (prove that your changes are solid!)
+* Create executable test-cases (_prove that your changes are solid!_)
 * Commit and push your changes to your fork-repository
 * Send a pull-request with your changes
 * _Drink a [Beer](https://en.wikipedia.org/wiki/Beer) - you earned it_ :)
