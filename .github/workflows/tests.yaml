@@ -83,7 +83,9 @@ jobs:
       # ------------------------------------------------------------------------------------------------------- #
 
       - name: "Prepare test environment"
-        run: vendor/bin/codecept build
+        run: |
+          composer run test-env --ansi
+          vendor/bin/codecept build
 
       - name: "Run tests"
         run: vendor/bin/codecept run
