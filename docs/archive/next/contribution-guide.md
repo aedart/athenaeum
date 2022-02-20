@@ -22,6 +22,10 @@ When reporting the bug, do consider the following:
 
 When time permits it, I will review your issue and take action upon it.
 
+## Security Vulnerability
+
+Please read the [Security Policy](./security.md).
+
 ## Feature Request
 
 If you have an idea for a new feature or perhaps changing an existing, feel free to create a [feature request](https://github.com/aedart/athenaeum/issues/new/choose).
