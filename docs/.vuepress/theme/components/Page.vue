@@ -6,14 +6,14 @@
       Custom version warning(s)
     -->
     <!-- When viewing docs. for next version -->
-    <version-warning v-if="showWarningForNextVersionDocs">
-      You are viewing documentation for a version that <strong>has not yet been released</strong>!
-    </version-warning>
+    <VersionWarning v-if="showWarningForNextVersionDocs" type="info">
+      You are viewing documentation for an upcoming version. <strong>It has not yet been released!</strong>!
+    </VersionWarning>
 
     <!-- When viewing docs. for outdated version -->
-    <version-warning v-if="showWarningForOutdatedVersionDocs">
+    <VersionWarning v-if="showWarningForOutdatedVersionDocs">
       You are viewing documentation for a version that is <strong>no longer supported!</strong>
-    </version-warning>
+    </VersionWarning>
 
     <Content class="theme-default-content" />
     <PageEdit />

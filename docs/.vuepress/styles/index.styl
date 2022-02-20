@@ -240,7 +240,7 @@ code {
 }
 
 /* Custom version warning */
-.version-warning {
+.version-disclaimer {
     position: fixed;
     top: 0;
     z-index: 999;
@@ -249,20 +249,36 @@ code {
     margin: auto;
     padding 22px;
 
-    border: 1px solid darken($badgeWarningColor, 50%);
-
-    background-color: $badgeWarningColor;
-
-    color: lighten($badgeWarningColor, 90%);
+    border: 1px solid black;
+    background-color white;
+    color: black;
 
     label {
-        color: darken($badgeWarningColor, 75%);
-
         font-weight: bold;
         margin-right: 0.2em;
 
         &:after {
             content ":"
+        }
+    }
+
+    &.info {
+        border: 1px solid darken($badgeTipColor, 50%);
+        border-left 6px solid $badgeTipColor
+        background-color: lighten($arrowBgColor, 85%);
+
+        label {
+            color: $badgeTipColor;
+        }
+    }
+
+    &.warning {
+        border: 1px solid darken($badgeWarningColor, 50%);
+        background-color: $badgeWarningColor;
+        color: lighten($badgeWarningColor, 90%);
+
+        label {
+            color: darken($badgeWarningColor, 75%);
         }
     }
 }
