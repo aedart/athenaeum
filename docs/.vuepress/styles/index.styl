@@ -238,3 +238,31 @@ code {
 .el-tabs--border-card > .el-tabs__header .el-tabs__item:not(.is-disabled):hover {
     color: $tabTitleColour;
 }
+
+/* Custom version warning */
+.version-warning {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+
+    display: block;
+    margin: auto;
+    padding 22px;
+
+    border: 1px solid darken($badgeWarningColor, 50%);
+
+    background-color: $badgeWarningColor;
+
+    color: lighten($badgeWarningColor, 90%);
+
+    label {
+        color: darken($badgeWarningColor, 75%);
+
+        font-weight: bold;
+        margin-right: 0.2em;
+
+        &:after {
+            content ":"
+        }
+    }
+}
