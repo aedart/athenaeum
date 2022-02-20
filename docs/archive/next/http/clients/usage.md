@@ -38,8 +38,6 @@ $myClient = $this->getHttpClientsManager()->profile('my-client-profile');
 
 ## Fresh Client instance
 
-_**Available since** `v5.19.0`_
-
 The `profile()` method will return the same `Client` instance, if it was previously requested (_it caches the created instance for the profile name_).
 If you need a fresh instance, without having it cached by the client manager, then use the `fresh()` method.  
 

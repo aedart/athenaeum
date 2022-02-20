@@ -4,8 +4,6 @@ description: Redmine API Client
 
 # Redmine Api Client
 
-_**Available since** `v5.19.x`_
-
 A Laravel [Redmine](https://www.redmine.org/) API Client, that has been designed to look and feel like an [active record](https://en.wikipedia.org/wiki/Active_record_pattern).  
 
 **Example**: 

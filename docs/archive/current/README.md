@@ -4,31 +4,127 @@ description: Athenaeum Release Notes
 
 # Release Notes
 
+## `v5.x` Highlights
+
+These are the new features and additions of Athenaeum `v5.x`.
+
 [[toc]]
 
-## Support Policy
+### Http Client Middleware
 
-Athenaeum attempts to follow a release cycle that matches closely to that of [Laravel](https://laravel.com/docs/9.x/releases).
-However, due to limited amount of project maintainers, no guarantees can be provided. 
+You can now assign middleware to process your outgoing requests and incoming responses. 
+See [Http Client Middleware](./http/clients/methods/middleware) for more examples.
 
-| Version | PHP         | Laravel | Release                    | Security Fixes Until |
-|---------|-------------|---------|----------------------------|----------------------|
-| `7.x`   | _TBD_       | _TBD_   | _TBD_                      | _TBD_                |
-| `6.x`*  | `8.0 - 8.1` | `v9.x`  | _Scheduled for March 2022_ | February 2023        |
-| `5.x`   | `7.4`       | `v8.x`  | October 4th, 2020          | N/A                  |
-| `< 4.x` | `7.4`       | `v7.x`  | April 15th, 2020           | N/A                  |
+```php
+use Acme\Middleware\MeasuresResponseTime;
 
-*: _current supported version._
+$response = $client
+        ->withMiddleware(new MeasuresResponseTime())
+        ->get('/weather');
+```
 
-_TBD: "To be decided"._
+### Extract Response Expectations
 
-## `v6.x` Highlights
+A `ResponseExpectations` class has been added, which you can use as a base class to extract complex expectations into separate classes.
+See [documentation](./http/clients/methods/expectations) for additional information.
 
-These are some the new features of Athenaeum `v6.x`.
+```php
+use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
+use Aedart\Contracts\Http\Clients\Responses\Status;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
-### Maintenance Modes
+class UserWasCreated extends ResponseExpectations
+{
+    public function expectation(
+        Status $status,
+        ResponseInterface $response,
+        RequestInterface $request
+    ): void {
+        // ...validation not shown here...
+    }
+}
 
-A new [Maintenance Modes](./maintenance/modes) package has been added, which offers a few additional drivers that can be used for [storing application down](https://laravel.com/docs/8.x/configuration#maintenance-mode) state. 
+// --------------------------------------- /
+// Use expectation when you send your request
+$response = $client
+        ->expect(new UserWasCreated())
+        ->post('/users', [ 'name' => 'John Snow' ]);
+```
+
+### Debugging Request and Response
+
+[Debugging](./http/clients/methods/debugging) and [logging](./http/clients/methods/logging) utilities have been added for a quick way to dump outgoing request and incoming response.
+
+```php
+// Dump request / response.
+$response = $client
+        ->debug()
+        ->get('/users');
+
+// --------------------------------------------
+
+// Logs the request / response.
+$response = $client
+        ->log()
+        ->get('/users');
+```
+
+### Default otherwise callback
+
+The [Circuit Breaker](./circuits) now supports setting a default "otherwise" callback, via the `otherwise()` method.
+When no "otherwise" callback is provided to the `attempt()` method, the default "otherwise" callback will be used.
+
+```php
+use Aedart\Contracts\Circuits\CircuitBreaker;
+
+$result = $circuitBreaker
+    ->otherwise(function(CircuitBreaker $cb) {
+        // ...not shown...
+    })
+    ->attempt(function(CircuitBreaker $cb) {
+        // ...callback not shown...
+    });
+```
+
+### Support for TOML configuration files
+
+Added configuration file parser for [TOML](https://en.wikipedia.org/wiki/TOML) format, for the [configuration loader](./config).
+
+### Resolve list of dependencies
+
+Using the new `ListResolver`, you can resolve a list of dependencies, including custom arguments.
+(_Component is available in the [Service Container package](./container/list-resolver.md)_).
+
+```php
+use Aedart\Container\ListResolver;
+
+$list = [
+    \Acme\Filters\SanitizeInput::class,
+    \Acme\Filters\ConvertEmptyToNull::class,
+    \Acme\Filters\ApplySorting::class => [
+        'sortBy' => 'age',
+        'direction' => 'desc'
+    ]
+];
+
+// Resolve list of dependencies
+$filters = (new ListResolver())->make($list);
+```
+
+### Http Messages Package
+
+A new package for that offers PSR-7 Http Messages utilities.
+See [documentation](./http/messages) for additional information.
+
+### Duration
+
+Added `Duration` utility; a small component able to help with dealing with relative date and time. 
+See [utilities](./utils/duration) for more information.
+
+### Upgraded Dependencies
+
+Upgraded several dependencies, here amongst Laravel which is now running on `v8.x`.
 
 ## Changelog
 

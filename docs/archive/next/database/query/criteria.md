@@ -4,8 +4,6 @@ description: Criteria / Query Filters
 
 # Criteria (Query Filter)
 
-_**Available since** `v5.21.x`_
-
 A way to encapsulate custom queries for your Eloquent models. These can be used as an alternative or complementary to Laravel's [query scopes](https://laravel.com/docs/8.x/eloquent#query-scopes). 
 
 [[TOC]]
