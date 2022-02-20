@@ -9,7 +9,15 @@ sidebarDepth: 1
 
 [[TOC]]
 
-TODO: ...
+### Laravel `v9.x`
+
+Since Athenaeum has upgraded to Laravel `v9.x`, you should read Laravel's [upgrade guide](https://laravel.com/docs/9.x/upgrade), before continuing here.
+
+::: warning Ongoing work...
+
+The upgrade guide is still a work-in-progress... Regular updates will be made available, as soon as possible.
+
+:::
 
 ### Onward
 
