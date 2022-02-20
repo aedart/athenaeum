@@ -32,6 +32,8 @@ $issues = Issue::fetchMultiple(function(Builder $request, Resource $resource) {
 
 ## All
 
+_**Available since** `v5.20.x`_
+
 You may encounter situations where you need to fetch all available results for a given resource. This could for instance be several hundreds of issues.
 If you use `fetchMultiple()`, then you will have to manually invoke again, and again, until you have paginated through all desired results.
 Therefore, as an alternative to manually performing paginated requests, you can use the `all()` method. It will automatically perform requests, as you iterate through the results.

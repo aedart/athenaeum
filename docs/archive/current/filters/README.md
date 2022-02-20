@@ -4,6 +4,8 @@ description: About the Filters Package
 
 # Search Filter Utilities
 
+_**Available since** `v5.22.x`_
+
 Offers a way to create search and constraint [query filters](../database/query/criteria.md), based on received http query parameters.
 
 ## Example

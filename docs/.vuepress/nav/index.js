@@ -8,9 +8,14 @@ const version6 = require('./version6x');
 module.exports = {
 
     /**
-     * The current version (navigation)
+     * The current version
      */
-    current : 'v6.x',
+    current : 'v5.x',
+
+    /**
+     * The next major version
+     */
+    next: 'v6.x',
 
     /**
      * List of available navigations
@@ -27,14 +32,24 @@ module.exports = {
     ],
 
     /**
-     * Label of current version
+     * "Current major version" label
      */
-    currentName : 'current',
+    currentName: 'current',
 
     /**
-     * Link to current version
+     * "Next major version" label
      */
-    currentLink : '/archive/current/',
+    nextName: 'next',
+
+    /**
+     * Link to "Current major version" version
+     */
+    currentLink: '/archive/current/',
+
+    /**
+     * Link to "Next major version" version
+     */
+    nextLink: '/archive/next/',
 
     /**
      * Returns the "archive" navigation items
@@ -45,6 +60,12 @@ module.exports = {
         let output = [];
 
         this.versions.forEach((item) => {
+            // If version is next
+            if(item.name === this.next){
+                item.name = this.nextName;
+                item.link = this.nextLink;
+            }
+
             // If version is current
             if(item.name === this.current){
                 item.name = this.currentName;
@@ -72,6 +93,11 @@ module.exports = {
         }
 
         this.versions.forEach((item) => {
+            // If version is next
+            if(item.name === this.next){
+                item.link = this.nextLink;
+            }
+
             // If version is current
             if(item.name === this.current){
                 item.link = this.currentLink;

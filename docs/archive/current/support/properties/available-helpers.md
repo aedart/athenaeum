@@ -122,7 +122,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of anniversary
+`\DateTime` Date of anniversary
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\AnniversaryAware`
 
@@ -196,7 +196,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of birth
+`\DateTime` Date of birth
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\BirthdateAware`
 
@@ -465,7 +465,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of when this component, entity or resource was created
+`\DateTime` Date of when this component, entity or resource was created
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\CreatedAtAware`
 
@@ -539,7 +539,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of event
+`\DateTime` Date of event
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\DateAware`
 
@@ -566,7 +566,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of when person, animal of something has died
+`\DateTime` Date of when person, animal of something has died
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\DeceasedAtAware`
 
@@ -593,7 +593,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of when this component, entity or resource was deleted
+`\DateTime` Date of when this component, entity or resource was deleted
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\DeletedAtAware`
 
@@ -620,7 +620,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of delivery
+`\DateTime` Date of delivery
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\DeliveredAtAware`
 
@@ -658,7 +658,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of planned delivery
+`\DateTime` Date of planned delivery
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\DeliveryDateAware`
 
@@ -895,7 +895,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date for when some kind of event ends
+`\DateTime` Date for when some kind of event ends
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\EndDateAware`
 
@@ -971,7 +971,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of when this component, entity or resource is going to expire
+`\DateTime` Date of when this component, entity or resource is going to expire
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\ExpiresAtAware`
 
@@ -2026,7 +2026,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of when this component, entity or something was produced
+`\DateTime` Date of when this component, entity or something was produced
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\ProducedAtAware`
 
@@ -2053,7 +2053,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of planned production
+`\DateTime` Date of planned production
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\ProductionDateAware`
 
@@ -2091,7 +2091,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of planned purchase
+`\DateTime` Date of planned purchase
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\PurchaseDateAware`
 
@@ -2118,7 +2118,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of when this component, entity or resource was purchased
+`\DateTime` Date of when this component, entity or resource was purchased
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\PurchasedAtAware`
 
@@ -2273,7 +2273,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of when this component, entity or something was released
+`\DateTime` Date of when this component, entity or something was released
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\ReleasedAtAware`
 
@@ -2300,7 +2300,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of planned release
+`\DateTime` Date of planned release
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\ReleaseDateAware`
 
@@ -2456,7 +2456,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Start date of event
+`\DateTime` Start date of event
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\StartDateAware`
 
@@ -2711,7 +2711,7 @@ ___
 
 
 ___
-`\DateTimeInterface` Date of when this component, entity or resource was updated
+`\DateTime` Date of when this component, entity or resource was updated
 
 *Interface*: `Aedart\Contracts\Support\Properties\Dates\UpdatedAtAware`
 

@@ -35,7 +35,6 @@ return new \Aedart\Core\Application([
     'basePath' => dirname(__DIR__),
     'bootstrapPath' => dirname(__DIR__),
     'configPath' => __DIR__ . '/../configs',
-    'langPath' => __DIR__ . '/../lang',
     'databasePath' => __DIR__ . '/../database',
     'environmentPath' => __DIR__ . '/../',
     'resourcePath' => __DIR__ . '/../resources',
