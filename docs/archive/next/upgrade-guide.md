@@ -81,6 +81,23 @@ $person->populate([
 ])->setAge(28);
 ```
 
+If you have a custom implementation of `populate()`, then you must now ensure that the method returns.
+
+```php
+use Aedart\Contracts\Utils\Populatable;
+
+class Person implements Populatable
+{
+    public function populate(array $data = []): static
+    {
+        // ...populate implementation not shown...
+        
+        // Make sure to return instance!
+        return $this;
+    }
+}
+```
+
 ### Listener option replaced, in Audit Trail package
 
 The `listener` option found in `configs/audit-trail.php` has been replaced by `subscriber`, which uses an [event subscriber](https://laravel.com/docs/9.x/events#event-subscribers) component instead.
