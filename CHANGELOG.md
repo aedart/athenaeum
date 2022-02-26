@@ -87,7 +87,7 @@ Core `Application` (_methods were not supported to begin with. They were defined
 * `\Illuminate\View\Compilers\BladeCompiler` imported into `\Aedart\Contracts\Support\Helpers\View\BladeAware` interface. This created unintended dependency on Laravel package.
 * `$_ENV['APP_ENV']` and `$_SERVER['APP_ENV']` not unset after each Application test, causing environment detecting tests to fail, in `\Aedart\Testing\Athenaeum\ApplicationInitiator`.
 * `Codeception\TestCase\Test` class not found, in `\Aedart\Tests\Integration\Laravel\ApplicationInitiatorTest` (_happened after upgrade to the latest version of Codeception_). 
-* `LoadSpecifiedConfiguration` may nor inherit from final class. `\Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration` no longer inherits from `Orchestra\Testbench\Bootstrap\LoadConfiguration`, which has been declared final (_happened after upgrade to the latest version of Orchestra_).
+* `LoadSpecifiedConfiguration` may not inherit from final class. `\Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration` no longer inherits from `Orchestra\Testbench\Bootstrap\LoadConfiguration`, which has been declared final (_happened after upgrade to the latest version of Orchestra_).
 
 ## [5.27.0] - 2022-01-31
 
