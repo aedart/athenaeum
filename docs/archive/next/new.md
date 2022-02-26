@@ -33,7 +33,7 @@ It contains everything you need to know, in order to satisfy the bare minimum.
 It contains over 1.500 lessons and will surely get you up to speed on Laravel, PHP, Testing, Vue.js and much more.
 Yes, it does **cost a bit of money**, but you do not have to commit for more than a month, if it is not to your liking¹.
 
-If this is a viable option for you, then you could consider the following lessons, before going through all of the available lessons (_membership is required_).
+If this is a viable option for you, then you could consider the following lessons, before going through all available lessons (_membership is required_).
 
 - [The Basics of the Service Container](https://laracasts.com/series/laravel-6-from-scratch/episodes/38), `~5` minutes
 - [Dependency Injection via Service Container](https://laracasts.com/series/laravel-6-from-scratch/episodes/39), `~11` minutes
