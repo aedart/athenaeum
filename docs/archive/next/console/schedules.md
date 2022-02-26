@@ -51,4 +51,4 @@ return [
 
 ## Onward
 
-You can read more about Task Scheduling in [Laravel's Documentation](https://laravel.com/docs/8.x/scheduling).
+You can read more about Task Scheduling in [Laravel's Documentation](https://laravel.com/docs/9.x/scheduling).
