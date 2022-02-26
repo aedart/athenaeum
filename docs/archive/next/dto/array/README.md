@@ -112,7 +112,7 @@ class Article extends ArrayDto
 }
 ```
 
-Review the [DTO "Union Types" documentation](../nested-dto.md##union-types) for details and additional examples.
+Review the [DTO "Union Types" documentation](../nested-dto.md#union-types) for details and additional examples.
 
 ## Getters and Setters
 
