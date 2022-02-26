@@ -91,7 +91,7 @@ public function getCoreBootstrappers(): array
 
 ## Application is a Service Container
 
-Just like Laravel's Foundation Application, the Athenaeum Core Application extends the [Service Container](https://laravel.com/docs/8.x/container).
+Just like Laravel's Foundation Application, the Athenaeum Core Application extends the [Service Container](https://laravel.com/docs/9.x/container).
 This means that, you can gain access to services and components.
 _But not before those service have been registered!_
 

@@ -40,6 +40,7 @@ Issue::findOrFail(9874)
 
 | Athenaeum Redmine Client | Redmine version |
 |--------------------------|-----------------|
+| `v6.x`                   | `>= v4.x`*      |
 | From `v5.19`             | `>= v4.x`*      |
 
 *:_This package might also work with newer versions of Redmine._
