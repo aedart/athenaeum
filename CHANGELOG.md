@@ -41,7 +41,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `PackageVersionException` is now thrown, when version cannot be obtained for a package, in `\Aedart\Utils\Version::package()`. [#68](https://github.com/aedart/athenaeum/issues/68).
 * Default datetime format is now [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), when no format is specified, for all Http Query Grammars, in Http Clients package.
 * `$seed` argument can no longer be `null` in `\Aedart\Utils\Math::applySeed()` method.
-* `MocksApplicationServices` from `AthenaeumTestHelper` and `LaravelTestHelper`. The "mock application services" helper has been deprecated by Laravel.
 
 **Non-breaking Changes**
 
@@ -70,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `configurationIsChanged()`, `getCachedConfigPath()`, `getCachedServicesPath()`, `getCachedPackagesPath()`, `getCachedRoutesPath()` and `routesAreCached()` methods from
 Core `Application` (_methods were not supported to begin with. They were defined by Laravel's `Applicaiton` interface, but extracted into separate interfaces from `v9.x`_). [#86](https://github.com/aedart/athenaeum/pull/86).
 * `audit-trail.listener` setting, in `/configs/audit-trail.php` configuration (_was deprecated in `v5.27`_).
+* `MocksApplicationServices` removed from `AthenaeumTestHelper` and `LaravelTestHelper`. The "mock application services" helper has been deprecated by Laravel.
 
 ### Fixed
 
