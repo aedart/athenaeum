@@ -13,7 +13,7 @@ However, due to limited amount of project maintainers, no guarantees can be prov
 
 | Version | PHP         | Laravel | Release                    | Security Fixes Until |
 |---------|-------------|---------|----------------------------|----------------------|
-| `7.x`   | _TBD_       | _TBD_   | _TBD_                      | _TBD_                |
+| `7.x`   | _`8.1`_     | _TBD_   | _TBD_                      | _TBD_                |
 | `6.x`*  | `8.0 - 8.1` | `v9.x`  | _Scheduled for March 2022_ | February 2023        |
 | `5.x`   | `7.4`       | `v8.x`  | October 4th, 2020          | N/A                  |
 | `4.x`   | `7.4`       | `v7.x`  | April 15th, 2020           | N/A                  |
@@ -27,9 +27,10 @@ _TBD: "To be decided"._
 
 These are some the new features of Athenaeum `v6.x`.
 
-### Laravel `v9.x`
+### PHP `v8` and Laravel `v9.x`
 
-Athenaeum has been upgraded to use [Laravel `v9.x`](https://laravel.com/docs/9.x/releases).
+Athenaeum has been upgraded to usePHP `v8.0` and [Laravel `v9.x`](https://laravel.com/docs/9.x/releases).
+Furthermore, PHP `v8.1` is also supported.
 
 ### Maintenance Modes
 
