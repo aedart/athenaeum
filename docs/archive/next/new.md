@@ -41,6 +41,7 @@ If this is a viable option for you, then you could consider the following lesson
 - [Service Providers](https://laracasts.com/series/laravel-6-from-scratch/episodes/41), `~11` minutes
 
 The above tutorials are just about enough, to gain a basic understanding of the previous mentioned concepts.
+(_Never episodes are most likely available on Laracast, yet the core principles remain the same._)
 
 ¹: _I'm not paid for endorsing Laracast nor Laravel. I do so out of sincerity!_
 
