@@ -1,4 +1,9 @@
-# Athenaeum Audit
+---
+description: About the Audit Package
+sidebarDepth: 0
+---
+
+# Audit
 
 An [audit trail](https://en.wikipedia.org/wiki/Audit_trail) package for Laravel Eloquent Model.
 It is able to store the changes made on a given model into an "audit trails" table, along with the attributes that have been changed.
@@ -44,19 +49,3 @@ print_r($changes->toArray());
 //      "created_at" => "2021-04-28T11:07:24.000000Z"
 //    ]
 ```
-
-## Documentation
-
-Please read the [official documentation](https://aedart.github.io/athenaeum/) for additional information.
-
-## Repository
-
-The mono repository is located at [github.com/aedart/athenaeum](https://github.com/aedart/athenaeum)
-
-## Versioning
-
-This package follows [Semantic Versioning 2.0.0](http://semver.org/)
-
-## License
-
-[BSD-3-Clause](http://spdx.org/licenses/BSD-3-Clause), Read the LICENSE file included in this package

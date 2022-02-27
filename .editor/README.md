@@ -8,7 +8,7 @@ The file should be placed in the following directory (_Ubuntu_)
 
 Example:
 ```console
-~/.config/JetBrains/PhpStorm2020.2
+~/.config/JetBrains/PhpStorm2021.3/templates
 ```
 
 Reference: https://www.jetbrains.com/help/phpstorm/tuning-the-ide.html#config-directory

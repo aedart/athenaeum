@@ -27,6 +27,17 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Audit',
+            collapsable: true,
+            children: [
+                'audit/',
+                'audit/install',
+                'audit/setup',
+                'audit/record-changes',
+                'audit/events',
+            ]
+        },
+        {
             title: 'Circuits',
             collapsable: true,
             children: [
@@ -392,6 +403,7 @@ module.exports.sidebar = function(){
                 'utils/method-helper',
                 'utils/invoker',
                 'utils/populatable',
+                'utils/string',
                 'utils/version',
             ]
         },
