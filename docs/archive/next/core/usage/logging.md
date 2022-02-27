@@ -4,10 +4,10 @@ description: How to add Logging
 
 # Logging
 
-Some of Laravel's services depend on the [Logging](https://packagist.org/packages/illuminate/log) package[1].
+Some of Laravel's services depend on the [Logging](https://packagist.org/packages/illuminate/log) package¹.
 Should you stumble across such a dependency, then you might be required to install it, in order to get the service to work as intended.
 
-[1]: _The `illuminate/log` package uses [MonoLog](https://github.com/Seldaek/monolog)._
+¹: _The `illuminate/log` package uses [MonoLog](https://github.com/Seldaek/monolog)._
 
 ## How to install
 

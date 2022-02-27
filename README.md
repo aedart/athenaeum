@@ -17,7 +17,7 @@ _A configuration loader, supporting *.ini, *.json, *.php, *.yml and *.toml._
 
 **[Core](https://aedart.github.io/athenaeum/archive/current/core/)**
 
-_A custom Laravel Application implementation, intended to be integrated into legacy applications._
+_A custom Laravel Application implementation, intended to be testing, tinkering or developing non-essential custom applications._
 
 **[Circuits](https://aedart.github.io/athenaeum/archive/current/circuits)**
 

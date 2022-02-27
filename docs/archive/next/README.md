@@ -104,6 +104,30 @@ $result = $query
     ->get();
 ```
 
+### Validate JSON
+
+The `Json` utility has been given a new method, which can be used to determine if a value is a valid JSON encoded string.
+
+```php
+use Aedart\Utils\Json;
+
+echo Json::isValid('{ "name": "Sven" }'); // true
+```
+
+### Purpose change of Core Application
+
+Perhaps a less important highlight, but still worth mentioning, is that the purpose of the [Core Application package](./core) has changed from Athenaeum `v6.x`.
+The Core Application package was originally developed to act as a "bridge" for integrating Laravel components and services into legacy applications.
+This is no longer the case. Version `6.x` requires a minimum of PHP `v8.0` and it does not feel right to presume that the Core Application can be used as originally intended (_see original motivation in [version `v4.x`](../v4x/core)_). 
+
+From version `6.x`, the Core Application is intended for the following purposes:
+
+* Testing
+* Tinkering
+* Development of **non-essential** standalone applications
+
+If you are using the Core Application, for its original intent, then you are **strongly encouraged** to consider redesigning your application, e.g. rewrite your application using [Laravel](https://laravel.com/) or other appropriate framework.  
+
 ## Changelog
 
 Make sure to read the [changelog](https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md) for additional information about the latest release, new features, changes and bug fixes. 

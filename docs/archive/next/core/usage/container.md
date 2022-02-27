@@ -4,7 +4,7 @@ description: How to use Service Container
 
 # Service Container
 
-The Athenaeum Core Application is essentially an extended version of Laravel's [Service Container](https://laravel.com/docs/9.x/container).
+The Core Application is essentially an extended version of Laravel's [Service Container](https://laravel.com/docs/9.x/container).
 It works exactly as you are used to, in your Laravel projects.
 This chapter only briefly highlights some of it's major features.
 For more saturated examples and information on how to use the Service Container, please review Laravel's [documentation](https://laravel.com/docs/9.x/container). 
@@ -92,7 +92,7 @@ To obtain (_resolve_) your desired bound components, use your `$app`.
 
 use Acme\Contracts\Weather\Station;
 
-// ... somewhere inside you legacy application
+// ... somewhere inside your custom application
 
 $weatherStation = $app->make(Station::class);
 ```
@@ -113,7 +113,7 @@ Such can be useful, in situations where you might not have direct access to your
 use Acme\Contracts\Weather\Station;
 use Illuminate\Support\Facades\App;
 
-// ... somewhere inside you legacy application
+// ... somewhere inside your custom application
 
 $weatherStation = App::make(Station::class);
 ```
@@ -126,7 +126,7 @@ You should take some time to read about their conceptual [benefits and limitatio
 ### Using the `IoCFacade`
 
 The `IoCFacade` is a custom Facade, which also provides access to your application instance.
-Just like Laravel's `App` Facade, it too offers the `make()` method.
+Just like Laravel's `App` facade, it too offers the `make()` method.
 In addition, it also comes with a `tryMake()` method, which does not fail, in case that a binding could not be resolved.
 When a binding cannot be resolved, it returns a default value that you can specify.
 
@@ -137,7 +137,7 @@ use Acme\Contracts\Weather\Station;
 use Acme\Weather\Stations\NullStation;
 use Aedart\Support\Facades\IoCFacade;
 
-// ... somewhere inside you legacy application
+// ... somewhere inside your custom application
 
 // Either resolves "station" binding or returns a default value.
 $weatherStation = IoCFacade::tryMake(Station::class, function(){
@@ -216,16 +216,16 @@ use Aedart\Support\Facades\IoCFacade;
 
 trait StationTrait
 {
-    protected ?Station $station = null;
+    protected Station|null $station = null;
 
-    public function setStation(?Station $station)
+    public function setStation(Station|null $station): static
     {
         $this->station = $station;
         
         return $this;
     }
     
-    public function getStation(): ?Station
+    public function getStation(): Station|null
     {
         if( ! $this->hasStation()){
             $this->setStation($this->getDefaultStation());
@@ -238,7 +238,7 @@ trait StationTrait
         return isset($this->station);
     }
     
-    public function getDefaultStation(): ?Station
+    public function getDefaultStation(): Station|null
     {
         return IoCFacade::tryMake(Station::class);
     }
@@ -246,6 +246,7 @@ trait StationTrait
 ```
 
 The benefit of using an "Aware-of" Helper approach, is that your component(s) can "lazy" resolve their dependencies.
-Furthermore, you always have the possibility to overwrite it's methods, meaning that a different implementation could be returned as a default, should you require such.
-Regardless, you as the developer have to make the choice, of how to resolve your dependencies within your legacy application.
-One approach might work for a particular situation, but not for another.
+Furthermore, you always have the possibility to overwrite its methods, meaning that a different implementation could be returned as a default, should you require such.
+
+
+In any case, you have the freedom to choose how, if at all, you wish to resolve dependencies in your custom application.
