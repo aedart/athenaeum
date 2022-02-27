@@ -14,10 +14,12 @@ Extend the `Filter` abstraction and implement the `apply()` method.
 
 ```php
 use Aedart\Database\Query\Filter;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 class VideoGamesCategoryFilter extends Filter
 {
-    public function apply($query)
+    public function apply(Builder|EloquentBuilder $query)
     {
         return $query->where('name', '=', 'Video Games');
     }
@@ -74,10 +76,12 @@ These parameters can be used for your determination logic, if it makes sense for
 ```php
 use Aedart\Database\Query\Filter;
 use Acme\Filters\IsDeleted;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 class OldRecords extends Filter
 {
-    public function isApplicable($query = null, $filters = []): bool
+    public function isApplicable(Builder|EloquentBuilder|null $query = null, $filters = []): bool
     {
         // Prevent this filter, if another specific filter is about
         // to be applied...
@@ -111,10 +115,12 @@ This abstraction allows you to create slightly more constraints to be applied us
 ```php
 use Aedart\Database\Query\FieldFilter;
 use Aedart\Contracts\Database\Query\FieldCriteria;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 class StringFilter extends FieldFilter
 {
-    public function apply($query)
+    public function apply(Builder|EloquentBuilder $query)
     {
         if ($this->logical() === FieldCriteria::OR) {
             return $query->orWhere($this->field(), $this->operator(), $this->value());
