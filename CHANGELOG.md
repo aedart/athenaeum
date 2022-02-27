@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `split.yaml` GitHub Action workflow as replacement for previous "split" command from [Symplify Monorepo Builder](https://github.com/symplify/monorepo-builder). [#66](https://github.com/aedart/athenaeum/issues/66).
 * Security and Support Policy. [#97](https://github.com/aedart/athenaeum/issues/97).
 * Code of Conduct. [#97](https://github.com/aedart/athenaeum/issues/97).
+* Documentation of Audit package. [#44](https://github.com/aedart/athenaeum/issues/44).
 
 ### Changed
 
