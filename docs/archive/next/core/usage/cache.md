@@ -148,16 +148,16 @@ use Illuminate\Support\Facades\Cache;
 
 trait UserTagsCache
 {
-    protected ?Repository $userTagsCache = null;
+    protected Repository|null $userTagsCache = null;
 
-    public function setUserTagsCache(?Repository $repository)
+    public function setUserTagsCache(Repository|null $repository): static
     {
         $this->userTagsCache = $repository;
         
         return $this;
     }
     
-    public function getUserTagsCache(): ?Repository
+    public function getUserTagsCache(): Repository|null
     {
         if( ! $this->hasUserTagsCache()){
             $this->setUserTagsCache($this->getDefaultUserTagsCache());
@@ -170,7 +170,7 @@ trait UserTagsCache
         return isset($this->userTagsCache);
     }
     
-    public function getDefaultUserTagsCache(): ?Repository
+    public function getDefaultUserTagsCache(): Repository|null
     {
         $factory = Cache::getFacadeRoot();
         if (isset($factory)) {

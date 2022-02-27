@@ -101,5 +101,4 @@ Consult yourself with Laravel's [documentation](https://laravel.com/docs/9.x/pro
 
 Unlike a regular Laravel application, the Athenaeum Core Application does not cache it's resolved list of service providers.
 This means that in terms of performance, this application isn't as fast as Laravel.
-Currently, there are no plans to offer enhancements of this particular part of the application.
 Should this prove to be a problem for you, then consider [extending the Athenaeum Core Application](ext) and overwrite the service provider registration and booting logic. 

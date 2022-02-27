@@ -4,9 +4,7 @@ description: How to extend the Athenaeum Core Application
 
 # Extending Core Application
 
-Every application serves a different purpose. If would not be too surprising, if the Athenaeum Core Application wouldn't be able to satisfy your evey need, when attempting to integrate it with your legacy application.
-Perhaps, you could extend the Core Application, to overcome your challenges.
-In this chapter, a few important concepts are briefly introduced, in hopes that it may help, when considering extending the Core Application.
+In this chapter, you will find a few hints if you choose to extend the Core Application.
 
 [[TOC]]
 
@@ -17,29 +15,35 @@ Some of these service providers are very essential and the application might not
 Should you wish to adapt the list of core service providers, overwrite the `getCoreServiceProviders()` method.
 
 ```php
-// In your extended Athenaeum Core Application
-public function getCoreServiceProviders(): array
-{
-    return [
-        CoreServiceProvider::class,
-        ExceptionHandlerServiceProvider::class,
-        NativeFilesystemServiceProvider::class,
-        EventServiceProvider::class,
-        ListenersViaConfigServiceProvider::class,
-        ConfigServiceProvider::class,
-        ConfigLoaderServiceProvider::class,
+use Aedart\Core\Application;
 
-        // ... etc
-    ];
-} 
+class AcmeApplication extends Application
+{
+    public function getCoreServiceProviders(): array
+    {
+        return [
+            CoreServiceProvider::class,
+            ExceptionHandlerServiceProvider::class,
+            NativeFilesystemServiceProvider::class,
+            EventServiceProvider::class,
+            ListenersViaConfigServiceProvider::class,
+            ConfigServiceProvider::class,
+            ConfigLoaderServiceProvider::class,
+    
+            // ... etc
+        ];
+    }
+    
+    // ... remaining not shown ...   
+}
 ```
 
 ## Core Bootstrappers
 
-In this context, a bootstrapper is a component that is able to perform some kind of "initial startup" logic.
+A "bootstrapper" is a component that is able to perform some kind of "initial startup" logic.
 It is what sets the entire application in motion.
-Bootstrappers are processed when you invoke the `bootstrapWith()` method (_automatically invoked by the `run()` method_).
-Furthermore, they are processed after the core service providers have registered.
+Bootstrappers are processed when you invoke the `bootstrapWith()` method (_automatically invoked by the application's `run()` method_).
+Furthermore, they are _processed after the core service providers have registered!_
 
 ```php
 $app->run(); // All bootstrappers are processed...
@@ -76,16 +80,23 @@ To use your custom bootstrappers, you need to overwrite the `getCoreBootstrapper
 Similar to the `getCoreServiceProviders()` method, this method returns an order list of class paths to the application's bootstrappers.
 
 ```php
-public function getCoreBootstrappers(): array
-{
-    return [
-        DetectAndLoadEnvironment::class,
-        LoadConfiguration::class,
-        SetDefaultTimezone::class,
-        SetExceptionHandling::class,
+use Aedart\Core\Application;
 
-        // ... etc
-    ];
+class AcmeApplication extends Application
+{
+    public function getCoreBootstrappers(): array
+    {
+        return [
+            DetectAndLoadEnvironment::class,
+            LoadConfiguration::class,
+            SetDefaultTimezone::class,
+            SetExceptionHandling::class,
+    
+            // ... etc
+        ];
+    }
+    
+    // ... remaining not shown ...   
 }
 ```
 
@@ -102,4 +113,4 @@ $config = $this->make('config'); // Might fail, if Config Service hasn't registe
 
 It is advisable that you keep your logic simple.
 If possible, try to encapsulate your needs into either service providers or bootstrappers.
-Otherwise you potentially risk of addition too much complexity, inside the actual application.
+Otherwise, you risk of adding too much complexity, inside the actual application.

@@ -1,19 +1,17 @@
 ---
-description: How to use Athenaeum Core Application
+description: How to setup Athenaeum Core Application
 ---
 
-# Integration
+# Setup
 
-In this chapter you will find information, on how to integrate the Athenaeum Core Application into your legacy application.
-Please take your time and read through this carefully.
+The following describes how to setup a new application.
 
 [[TOC]]
 
 ## Bootstrap Directory
 
-Create a new directory to contain a application file.
-The directory _SHOULD_ not be publicly available via the browser.
-You can call this directory for `bootstrap` or whatever makes sense to you.
+Create a new directory to contain your application file (_application entry-point_).
+You can name this directory `bootstrap`, or whatever makes sense to you.
 
 ```shell
 /bootstrap
@@ -22,11 +20,12 @@ You can call this directory for `bootstrap` or whatever makes sense to you.
 ## The Application file (`app.php`)
 
 Inside your newly created `/bootstrap` directory, create a `app.php` file (_The filename does not matter_).
-This application file will create a new `Application` instance.
-It accepts an `array` of various directory paths.
-These paths are used throughout the `Application` and many of Laravel's components.
-It is therefore important that these directories exist.
-Edit these paths as you see fit.
+This file is intended to instantiate a new `Application` instance and return it. 
+
+
+The `Application` accepts an `array` of various directory paths.
+These paths are used throughout many of Laravel's components and its important that they exist.
+Define the paths as you see fit.
 
 ```php
 <?php
@@ -44,18 +43,13 @@ return new \Aedart\Core\Application([
 ]);
 ```
 
-::: warning
-With the exception of the `publicPath`, all paths shouldn't be publicly available via a browser.
-Please configure your web server to deny access to those paths, when requested via Http. 
-:::
-
 ::: tip
 You can read more about the directory structure, e.g. what each directory is intended for, inside [Laravel's documentation](https://laravel.com/docs/9.x/structure#the-bootstrap-directory).
 :::
 
 ## The Environment File (`.env`)
 
-In your `environmentPath`, create an [environment file](https://laravel.com/docs/9.x/configuration#environment-configuration) (`.env`).
+In your `environmentPath` directory, create an [environment file](https://laravel.com/docs/9.x/configuration#environment-configuration) (`.env`).
 At the very minimum, it should contain the following:
 
 ```ini
@@ -69,16 +63,16 @@ APP_ENV="production"
 EXCEPTION_HANDLING_ENABLED=false
 ```
 
-| Name          | Description   |
-| ------------- |-------------|
-| `APP_NAME`    | Your application's name. |
-| `APP_ENV`     | The application's environment, e.g. "production", "testing", "development"...etc. |
-| `EXCEPTION_HANDLING_ENABLED`     | Enabling or disabling of Athenaeum Core Application's [exception handling](./usage/exceptions.md). |
+| Name                         | Description                                                                                        |
+|------------------------------|----------------------------------------------------------------------------------------------------|
+| `APP_NAME`                   | Your application's name.                                                                           |
+| `APP_ENV`                    | The application's environment, e.g. "production", "testing", "development"...etc.                  |
+| `EXCEPTION_HANDLING_ENABLED` | Enabling or disabling of Athenaeum Core Application's [exception handling](./usage/exceptions.md). |
 
 ## The Console Application (`cli.php`)
 
-Create a `cli.php` file inside your `basePath`. Once again, the naming of the file does not matter.
-This file is where Laravel's [Console Application](https://laravel.com/docs/9.x/artisan) (_a light version of Artisan_) is going to be created.
+Create a `cli.php` file inside your `basePath` directory. Once again, the naming of the file does not matter.
+This file is where Laravel's [Console Application](https://laravel.com/docs/9.x/artisan) (_a lightweight version of Artisan_) is going to be created.
 
 ```php
 <?php
@@ -112,7 +106,7 @@ php cli.php
 You should see an output similar to this:
 
 ```shell
-Athenaeum (via. Laravel Artisan ~ illuminate/console 6.16.0) 4.0.0
+Athenaeum (via. Laravel Artisan ~ illuminate/console 9.1.0) 6.0.0
 
 Usage:
   command [options] [arguments]
@@ -132,8 +126,8 @@ Options:
 
 ## Publish Assets
 
-This package, along with it's dependencies, requires certain assets in order to be fully functional, e.g. configuration files.
-To make these assets available in your legacy application, you need to run the `vendor:publish-all` command, via your Console Application (`cli.php`).
+This package, along with its dependencies, requires certain assets in order to be fully functional, e.g. configuration files.
+To make these assets available, you need to run the `vendor:publish-all` command, via your Console Application (`cli.php`).
 The command will publish all assets available assets into your application.
  
 ```shell
@@ -155,17 +149,17 @@ For now, it's important that these are available in your application.
 ```
 
 ::: tip Note
-_If you are familiar with Laravel's `vendor:publish` command, you will immediately notice that this publish assets command does not offer the same features, as the one provided by Laravel.
+_If you are familiar with Laravel's `vendor:publish` command, you will immediately notice that this "publish assets" command does not offer the same features, as the one provided by Laravel.
 The `vendor:publish-all` is inspired by Laravel's publish command, yet it is not intended to offer the exact same features.
 Should you require more advanced publish features, then you will have to [create your own](https://laravel.com/docs/9.x/artisan#writing-commands) publish command._
 :::
 
------
+## Web
 
-## Make the Application Available
+In this section, the application can be made available via the Web. Feel free to skip it, if you do not intend to offer any kind of web content, via your custom application.
 
-Ideally your legacy application has a single entry point, e.g. a single `index.php`, located in your `/public` directory.
-Should this not be the case, don't worry about it. Multiple entry points is covered a bit later.
+Ideally your application will only have a single entry point, e.g. a single `index.php`, located in your `/public` directory.
+(_Multiple entry points is covered a bit later._).
 
 ### Single Entry Point
 
@@ -182,7 +176,7 @@ $app = require_once __DIR__ . '/../bootstrap/app.php';
 // Run the application
 $app->run();
 
-// ... your legacy application logic here ...
+// ... your custom application logic here ...
 
 // Terminate and destroy the application instance
 $app->terminate();
@@ -190,20 +184,9 @@ $app->terminate();
 $app->destroy();
 ```
 
-#### Bootstrap, Register and Boot
-
-In the above example, when the `run()` method is invoked, the Athenaeum Core Application will bootstrap, register and boot it's registered [Service Providers](https://laravel.com/docs/9.x/providers). 
-If this is done before your legacy application's logic, then all registered services are made available throughout the remaining of the incoming Http request.
-
-#### Graceful Shutdown
-
-In the bottom path of the example, the `terminate()` and `destroy()` methods are invoked.
-This allows registered services to perform [graceful shutdown logic](https://en.wikipedia.org/wiki/Graceful_exit), before the application instance along with it's registered services are destroyed.
-Invoking these methods can be omitted, yet it is not advisable.  
-
 ### Multiple Entry Points
 
-Should your legacy application have multiple entry points, then you can add additional helper files within your `/bootstrap` directory.
+Should your custom application require multiple entry points (_**NOT RECOMMENDED!**_), then you can add additional helper files within your `/bootstrap` directory.
 The following illustrates a possible method, of how you could deal with multiple entry points.
 
 #### Header File

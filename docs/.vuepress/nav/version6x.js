@@ -90,9 +90,8 @@ module.exports.sidebar = function(){
             collapsable: true,
             children: [
                 'core/',
-                'core/prerequisite',
                 'core/install',
-                'core/integration',
+                'core/setup',
                 {
                     title: 'Usage',
                     collapsable: true,
