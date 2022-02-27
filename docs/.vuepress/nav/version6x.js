@@ -392,6 +392,7 @@ module.exports.sidebar = function(){
                 'utils/method-helper',
                 'utils/invoker',
                 'utils/populatable',
+                'utils/string',
                 'utils/version',
             ]
         },
