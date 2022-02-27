@@ -25,3 +25,13 @@ $encoded = Json::encode([
 
 $decoded = Json::decode('{"name":"Michele Rodriguez","age":4}');
 ```
+
+## Validation
+
+You can also validate if a value is a valid JSON encoded string, using the `isValid()` method.
+
+```php
+echo Json::isValid('{ "name": "Sven" }'); // true
+
+echo Json::isValid('{ "name": "Sven"');   // false
+```
