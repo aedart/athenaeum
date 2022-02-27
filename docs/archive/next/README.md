@@ -104,7 +104,7 @@ $result = $query
     ->get();
 ```
 
-### Check if value is a valid JSON string
+### Validate JSON
 
 The `Json` utility has been given a new method, which can be used to determine if a value is a valid JSON encoded string.
 
