@@ -408,6 +408,7 @@ module.exports.sidebar = function(){
                     collapsable: true,
                     children: [
                         'validation/rules/alpha-dash-dot',
+                        'validation/rules/semantic-version',
                     ]
                 },
             ]
