@@ -12,7 +12,7 @@ It offers the following features:
 - Laravel's [Console Application](https://laravel.com/docs/6.x/artisan) (_lightweight version of Artisan_)
 - Exception Handling (_optional_)
 
-It is encouraged that you read the ["Motivation" and "Limitations"](https://aedart.github.io/athenaeum/current/core/) section, before attempting to make use of this package.
+It is encouraged that you read the [Motivation and Limitations sections](https://aedart.github.io/athenaeum/current/core/), before attempting to make use of this package.
 
 ## Documentation
 
