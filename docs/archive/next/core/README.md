@@ -23,7 +23,7 @@ This is **no longer the case!** This package serves as a minimalistic applicatio
 
 * Testing
 * Tinkering
-* Development of **none-vital** standalone CLI applications  
+* Development of **non-essential** standalone applications  
 
 In other words, you are probably much better off using either [Laravel](https://laravel.com/), [Lumen](https://lumen.laravel.com/), or [other frameworks](https://en.wikipedia.org/wiki/Category:PHP_frameworks). 
 You _SHOULD NOT_ use this application, unless you are very familiar with Laravel's inner-workings, and you know exactly what you are doing!
