@@ -139,6 +139,41 @@ class MyTest extends LaravelTestCase
 }
 ```
 
+## Laravel Dusk Test-Case
+
+`BrowserTestCase` can be used for writing tests to be executed in a browser. [Laravel Dusk](https://laravel.com/docs/9.x/dusk) is used behind the scene.
+Please review the Test-Case's source code and Laravel documentation for additional information.
+
+```php
+use Aedart\Testing\TestCases\BrowserTestCase;
+use Laravel\Dusk\Browser;
+
+class MyBrowserTest extends BrowserTestCase
+{
+    public function canVisitPage()
+    {
+        $this->browse(function(Browser $browser) {
+            
+            $browser
+                ->visit('https://www.google.com/')
+                ->waitForText("I'm Feeling Lucky")
+
+        });    
+    }
+}
+```
+
+::: tip
+
+In order to run browser tests, you will be required to have the correct `ChromeDriver` binary installed.
+You can use the following to install the binary:
+
+```shell
+vendor/bin/dusk-updater update
+```
+
+:::
+
 ## Athenaeum Test-Case
 
 If you are using the [Athenaeum Core Application](../core), then you can use the `AthenaeumTestCase` to help you test your components or application.
