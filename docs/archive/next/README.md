@@ -104,6 +104,16 @@ $result = $query
     ->get();
 ```
 
+### Check if value is a valid JSON string
+
+The `Json` utility has been given a new method, which can be used to determine if a value is a valid JSON encoded string.
+
+```php
+use Aedart\Utils\Json;
+
+echo Json::isValid('{ "name": "Sven" }'); // true
+```
+
 ## Changelog
 
 Make sure to read the [changelog](https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md) for additional information about the latest release, new features, changes and bug fixes. 
