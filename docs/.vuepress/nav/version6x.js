@@ -27,6 +27,17 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Audit',
+            collapsable: true,
+            children: [
+                'audit/',
+                'audit/install',
+                'audit/setup',
+                'audit/record-changes',
+                'audit/events',
+            ]
+        },
+        {
             title: 'Circuits',
             collapsable: true,
             children: [
