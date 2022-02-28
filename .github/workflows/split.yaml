@@ -93,6 +93,8 @@ jobs:
             remote: 'athenaeum-redmine'
           - local: 'Service'
             remote: 'athenaeum-service'
+          - local: 'Streams'
+            remote: 'athenaeum-streams'
           - local: 'Support'
             remote: 'athenaeum-support'
           - local: 'Testing'
