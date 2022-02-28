@@ -56,6 +56,37 @@ interface Stream extends StreamInterface,
     ): static;
 
     /**
+     * Open a stream to 'php://memory' and wrap the resource into a new stream instance
+     *
+     * @see open
+     * @see https://www.php.net/manual/en/wrappers.php.php
+     *
+     * @param  string  $mode  [optional]
+     * @param  resource|null  $context  [optional]
+     *
+     * @return static
+     *
+     * @throws StreamException
+     */
+    public static function openMemory(string $mode = 'w+b', $context = null): static;
+
+    /**
+     * Open a stream to 'php://temp' and wrap the resource into a new stream instance
+     *
+     * @see open
+     * @see https://www.php.net/manual/en/wrappers.php.php
+     *
+     * @param  string  $mode  [optional]
+     * @param  int|null  $maxMemory  [optional] Maximum amount of data to keep in memory before using a temporary file, in bytes
+     * @param  resource|null  $context  [optional]
+     *
+     * @return static
+     *
+     * @throws StreamException
+     */
+    public static function openTemporary(string $mode = 'w+b', int|null $maxMemory = null, $context = null): static;
+
+    /**
      * Alias for {@see tell()}
      *
      * @return int

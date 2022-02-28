@@ -35,6 +35,27 @@ class Stream implements StreamInterface
         // TODO: Implement open() method.
     }
 
+    /**
+     * @inheritDoc
+     */
+    public static function openMemory(string $mode = 'w+b', $context = null): static
+    {
+        return static::open('php://memory', $mode, false, $context);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function openTemporary(string $mode = 'w+b', int|null $maxMemory = null, $context = null): static
+    {
+        $filename = 'php://temp';
+        if (isset($maxMemory)) {
+            $filename = $filename . "/maxmemory:{$maxMemory}";
+        }
+
+        return static::open($filename, $mode, false, $context);
+    }
+
 
     /**
      * @inheritDoc
