@@ -30,6 +30,8 @@ interface Meta extends ArrayAccess
      * Method attempts to obtain stream metadata using PHP's
      * builtin {@see stream_get_meta_data()} method.
      *
+     * @see https://www.php.net/manual/en/function.stream-get-meta-data
+     *
      * @param resource|Stream $stream
      *
      * @return static
