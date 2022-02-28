@@ -1,0 +1,93 @@
+<?php
+
+namespace Aedart\Tests\Unit\Streams;
+
+use Aedart\Testing\Helpers\ConsoleDebugger;
+use Aedart\Testing\TestCases\UnitTestCase;
+
+/**
+ * MemoryStreamTest
+ *
+ * @group streams
+ * @group streams-memory
+ * @group streams-temp
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Tests\Unit\Streams
+ */
+class MemoryTempStreamsTest extends UnitTestCase
+{
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function memoryStreamsAreNotShared()
+    {
+        $a = fopen('php://memory', 'w+');
+        $b = fopen('php://memory', 'w+');
+
+        // ------------------------------------------------------------------- //
+
+        $data = 'You have to wrestle, and experience living by your remaining.';
+        fwrite($a, $data);
+
+        // ------------------------------------------------------------------- //
+
+        rewind($a);
+        rewind($b);
+
+        // Get content of both streams - hopefully they are unique...
+        $resultA = stream_get_contents($a);
+        $resultB = stream_get_contents($b);
+
+        ConsoleDebugger::output([
+            'stream_a' => $resultA,
+            'stream_b' => $resultB
+        ]);
+
+        $this->assertNotSame($resultA, $resultB, 'Memory streams appear to be shared in the same PHP process!');
+        $this->assertSame($data, $resultA, 'Invalid content in stream a');
+        $this->assertEmpty($resultB, 'Stream b should had been empty');
+
+        fclose($a);
+        fclose($b);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function tempStreamsAreNotShared()
+    {
+        $a = fopen('php://temp', 'w+');
+        $b = fopen('php://temp', 'w+');
+
+        // ------------------------------------------------------------------- //
+
+        $data = 'After chopping the eggs, brush apple, pickles and lemon juice with it in a sauté pan.';
+        fwrite($a, $data);
+
+        // ------------------------------------------------------------------- //
+
+        rewind($a);
+        rewind($b);
+
+        // Get content of both streams - hopefully they are unique...
+        $resultA = stream_get_contents($a);
+        $resultB = stream_get_contents($b);
+
+        ConsoleDebugger::output([
+            'stream_a' => $resultA,
+            'stream_b' => $resultB
+        ]);
+
+        $this->assertNotSame($resultA, $resultB, 'Temp streams appear to be shared in the same PHP process!');
+        $this->assertSame($data, $resultA, 'Invalid content in stream a');
+        $this->assertEmpty($resultB, 'Stream b should had been empty');
+
+        fclose($a);
+        fclose($b);
+    }
+}
