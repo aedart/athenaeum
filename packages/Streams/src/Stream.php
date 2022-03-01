@@ -180,6 +180,14 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
+    public function count()
+    {
+        return $this->getSize();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function position(): int
     {
         return $this->tell();
