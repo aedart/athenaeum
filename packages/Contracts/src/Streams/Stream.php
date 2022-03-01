@@ -121,6 +121,32 @@ interface Stream extends StreamInterface,
     public function copy(Stream|null $target = null, int|null $length = null, int $offset = 0): static;
 
     /**
+     * Write content at the end of this stream's data
+     *
+     * @param  string|resource|StreamInterface $content
+     * @param  int  $bufferSize  [optional] Size of buffer in bytes for reading and writing.
+     *                           Default buffer size is 1 Mb.
+     *
+     * @return int Number of bytes written
+     *
+     * @throws StreamException
+     */
+    public function append($content, int $bufferSize = 1024 * 1024): int;
+
+    /**
+     * Write content at the beginning of this stream's data
+     *
+     * @param  string|resource|StreamInterface $content
+     * @param  int  $bufferSize  [optional] Size of buffer in bytes for reading and writing.
+     *                           Default buffer size is 1 Mb.
+     *
+     * @return int Number of bytes written
+     *
+     * @throws StreamException
+     */
+    public function prepend($content, int $bufferSize = 1024 * 1024): int;
+
+    /**
      * Alias for {@see tell()}
      *
      * @return int

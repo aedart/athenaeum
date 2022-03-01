@@ -204,6 +204,22 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
+    public function append($content, int $bufferSize = 1024 * 1024): int
+    {
+        // TODO: Implement append() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function prepend($content, int $bufferSize = 1024 * 1024): int
+    {
+        // TODO: Implement prepend() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function position(): int
     {
         return $this->tell();
