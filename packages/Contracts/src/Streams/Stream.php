@@ -23,7 +23,7 @@ interface Stream extends StreamInterface,
     /**
      * Creates a new stream instance for given resource
      *
-     * @param resource $stream
+     * @param  resource  $stream
      * @param  array|Meta|null  $meta  [optional]
      *
      * @return static
