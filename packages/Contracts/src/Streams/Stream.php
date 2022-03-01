@@ -195,6 +195,24 @@ interface Stream extends StreamInterface,
     public function uri(): string;
 
     /**
+     * Determine if stream is a local stream
+     *
+     * @see https://www.php.net/manual/en/function.stream-is-local.php
+     *
+     * @return bool
+     */
+    public function isLocal(): bool;
+
+    /**
+     * Determine if stream is a TTY
+     *
+     * @see https://www.php.net/manual/en/function.stream-isatty.php
+     *
+     * @return bool
+     */
+    public function isTTY(): bool;
+
+    /**
      * Returns meta for this steam
      *
      * @return Meta

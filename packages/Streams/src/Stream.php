@@ -284,6 +284,22 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
+    public function isLocal(): bool
+    {
+        // TODO: Implement isLocal() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isTTY(): bool
+    {
+        // TODO: Implement isTTY() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function meta(): Meta
     {
         // TODO: Implement meta() method.
