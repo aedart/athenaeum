@@ -121,6 +121,80 @@ interface Stream extends StreamInterface,
     public function resource();
 
     /**
+     * Determine if stream has timed out whilst waiting
+     * for data
+     *
+     * @see https://www.php.net/manual/en/function.stream-get-meta-data
+     *
+     * @return bool
+     */
+    public function timedOut(): bool;
+
+    /**
+     * Determine if stream is in blocking IO mode
+     *
+     * @see https://www.php.net/manual/en/function.stream-get-meta-data
+     *
+     * @return bool
+     */
+    public function blocked(): bool;
+
+    /**
+     * Returns number of bytes currently in PHP's own internal buffer
+     *
+     * @see https://www.php.net/manual/en/function.stream-get-meta-data
+     *
+     * @return int
+     */
+    public function unreadBytes(): int;
+
+    /**
+     * Returns a label that describes the underlying stream implementation
+     *
+     * @see https://www.php.net/manual/en/function.stream-get-meta-data
+     *
+     * @return string
+     */
+    public function streamType(): string;
+
+    /**
+     * Returns a label that describes the protocol wrapper
+     *
+     * @see https://www.php.net/manual/en/function.stream-get-meta-data
+     *
+     * @return string
+     */
+    public function wrapperType(): string;
+
+    /**
+     * Returns wrapper specific data that is attached to this stream
+     *
+     * @see https://www.php.net/manual/en/function.stream-get-meta-data
+     *
+     * @return mixed
+     */
+    public function wrapperData(): mixed;
+
+    /**
+     * Returns stream's access model
+     *
+     * @see https://www.php.net/manual/en/function.fopen.php
+     * @see https://www.php.net/manual/en/function.stream-get-meta-data
+     *
+     * @return string
+     */
+    public function mode(): string;
+
+    /**
+     * Returns the URI or filename associated with stream
+     *
+     * @see https://www.php.net/manual/en/function.stream-get-meta-data
+     *
+     * @return string
+     */
+    public function uri(): string;
+
+    /**
      * Returns meta for this steam
      *
      * @return Meta

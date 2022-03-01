@@ -220,6 +220,70 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
+    public function timedOut(): bool
+    {
+        // TODO: Implement timedOut() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function blocked(): bool
+    {
+        // TODO: Implement blocked() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function unreadBytes(): int
+    {
+        // TODO: Implement unreadBytes() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function streamType(): string
+    {
+        // TODO: Implement streamType() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function wrapperType(): string
+    {
+        // TODO: Implement wrapperType() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function wrapperData(): mixed
+    {
+        // TODO: Implement wrapperData() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function mode(): string
+    {
+        // TODO: Implement mode() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function uri(): string
+    {
+        // TODO: Implement uri() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function meta(): Meta
     {
         // TODO: Implement meta() method.
