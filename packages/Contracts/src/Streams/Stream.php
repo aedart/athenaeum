@@ -105,6 +105,22 @@ interface Stream extends StreamInterface,
     public static function openTemporary(string $mode = 'w+b', int|null $maxMemory = null, $context = null): static;
 
     /**
+     * Copy this stream into another stream
+     *
+     * @see https://www.php.net/manual/en/function.stream-copy-to-stream.php
+     *
+     * @param  Stream|null  $target  [optional] If `null` is given, then a new stream instance
+     *                              is automatically created, using {@see openMemory()}
+     * @param  int|null  $length  [optional] Maximum bytes to copy. By default, all bytes left are copied
+     * @param  int  $offset  [optional] The offset where to start to copy data
+     *
+     * @return static
+     *
+     * @throws StreamException
+     */
+    public function copy(Stream|null $target = null, int|null $length = null, int $offset = 0): static;
+
+    /**
      * Alias for {@see tell()}
      *
      * @return int

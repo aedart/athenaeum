@@ -65,7 +65,6 @@ class Stream implements StreamInterface
         return static::open($filename, $mode, false, $context);
     }
 
-
     /**
      * @inheritDoc
      */
@@ -192,6 +191,14 @@ class Stream implements StreamInterface
     public function count()
     {
         return $this->getSize();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function copy(StreamInterface|null $target = null, ?int $length = null, int $offset = 0): static
+    {
+        // TODO: Implement copy() method.
     }
 
     /**
