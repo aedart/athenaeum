@@ -35,6 +35,22 @@ interface Stream extends StreamInterface,
     public static function make($stream, array|Meta|null $meta = null): static;
 
     /**
+     * Creates a new stream instance using underlying resource from given
+     * stream object.
+     *
+     * **Warning**: _Method will {@see detach()} underlying resource from given stream,
+     * before creating a new stream instance!_
+     *
+     * @param  StreamInterface  $stream Psr-7 Stream instance
+     * @param  array|Meta|null  $meta  [optional]
+     *
+     * @return static
+     *
+     * @throws StreamException
+     */
+    public static function makeFrom(StreamInterface $stream, array|Meta|null $meta = null): static;
+
+    /**
      * Open file or URL and wrap the resource into a new stream instance
      *
      * Method is a wrapper for PHP's {@see fopen()}.
