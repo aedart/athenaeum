@@ -51,6 +51,37 @@ interface Stream extends StreamInterface,
     public static function makeFrom(StreamInterface $stream, array|Meta|null $meta = null): static;
 
     /**
+     * Returns a line from stream's content until end-of-line is reached
+     *
+     * @see https://www.php.net/manual/en/function.fgets.php
+     * @see readLineUntil
+     *
+     * @param  int|null  $length  [optional]
+     *
+     * @return string|null Line contents or null when no more data to read (EOF)
+     *
+     * @throws StreamException
+     */
+    public function readLine(int|null $length = null): string|null;
+
+    /**
+     * Returns a line from stream's content until length, delimiter is reached,
+     * or end-of-line is reached.
+     *
+     * @see https://www.php.net/manual/en/function.stream-get-line
+     * @see readLine
+     *
+     * @param  int  $length Maximum amount of bytes to read. If 0 is given, then
+     *                      default chunk size is applied (8 Kb)
+     * @param  string  $ending  [optional] Line ending delimiter
+     *
+     * @return string|null Line contents or null when no more data to read (EOF)
+     *
+     * @throws StreamException
+     */
+    public function readLineUntil(int $length, string $ending = ''): string|null;
+    
+    /**
      * Alias for {@see tell()}
      *
      * @return int

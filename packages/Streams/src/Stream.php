@@ -154,6 +154,22 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
+    public function readLine(?int $length = null): string|null
+    {
+        // TODO: Implement readLine() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function readLineUntil(int $length, string $ending = ''): string|null
+    {
+        // TODO: Implement readLineUntil() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function position(): int
     {
         return $this->tell();
