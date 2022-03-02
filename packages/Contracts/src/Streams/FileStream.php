@@ -129,7 +129,7 @@ interface FileStream extends Stream
      * Synchronizes changes to the file
      *
      * @see https://www.php.net/manual/en/function.fsync.php
-     * https://www.php.net/manual/en/function.fdatasync.php
+     * @see https://www.php.net/manual/en/function.fdatasync.php
      *
      * @param  bool  $includeMeta  [optional] When `true`, meta-data is also
      *                             synchronized to file.
