@@ -34,40 +34,6 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public static function open(
-        string $filename,
-        string $mode,
-        bool $useIncludePath = false,
-        $context = null
-    ): static
-    {
-        // TODO: Implement open() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public static function openMemory(string $mode = 'w+b', $context = null): static
-    {
-        return static::open('php://memory', $mode, false, $context);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public static function openTemporary(string $mode = 'w+b', int|null $maxMemory = null, $context = null): static
-    {
-        $filename = 'php://temp';
-        if (isset($maxMemory)) {
-            $filename = $filename . "/maxmemory:{$maxMemory}";
-        }
-
-        return static::open($filename, $mode, false, $context);
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function close()
     {
         // TODO: Implement close() method.
@@ -191,30 +157,6 @@ class Stream implements StreamInterface
     public function count()
     {
         return $this->getSize();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function copy(StreamInterface|null $target = null, ?int $length = null, int $offset = 0): static
-    {
-        // TODO: Implement copy() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function append($content, int $bufferSize = 1024 * 1024): int
-    {
-        // TODO: Implement append() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function prepend($content, int $bufferSize = 1024 * 1024): int
-    {
-        // TODO: Implement prepend() method.
     }
 
     /**
