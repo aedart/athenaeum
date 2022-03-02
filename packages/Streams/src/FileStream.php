@@ -42,6 +42,14 @@ class FileStream extends Stream implements FileStreamInterface
     /**
      * @inheritDoc
      */
+    public function close()
+    {
+        // TODO: Implement close() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function copy(StreamInterface|null $target = null, ?int $length = null, int $offset = 0): static
     {
         // TODO: Implement copy() method.

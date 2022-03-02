@@ -13,7 +13,7 @@ use Psr\Http\Message\StreamInterface as PsrStreamInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Streams
  */
-class Stream implements StreamInterface
+abstract class Stream implements StreamInterface
 {
     /**
      * @inheritDoc
@@ -29,14 +29,6 @@ class Stream implements StreamInterface
     public static function makeFrom(PsrStreamInterface $stream, array|Meta|null $meta = null): static
     {
         // TODO: Implement makeFrom() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function close()
-    {
-        // TODO: Implement close() method.
     }
 
     /**
