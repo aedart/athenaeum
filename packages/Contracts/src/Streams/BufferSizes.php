@@ -68,9 +68,4 @@ interface BufferSizes
      * 1 Mb / 1024 Kb buffer size
      */
     public const BUFFER_1MB = 1024 * self::BUFFER_1KB;
-
-    /**
-     * 2 Mb buffer size
-     */
-    public const BUFFER_2MB = 2 * self::BUFFER_1MB;
 }
