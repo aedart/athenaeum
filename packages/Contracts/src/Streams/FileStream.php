@@ -140,4 +140,15 @@ interface FileStream extends Stream
      * @throws StreamException
      */
     public function sync(bool $includeMeta = true): static;
+
+    /**
+     * Writes all buffered output to the open file
+     *
+     * @see https://www.php.net/manual/en/function.fflush.php
+     *
+     * @return self
+     *
+     * @throws StreamException
+     */
+    public function flush(): static;
 }

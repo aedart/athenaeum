@@ -86,4 +86,12 @@ class FileStream extends Stream implements FileStreamInterface
     {
         // TODO: Implement sync() method.
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function flush(): static
+    {
+        // TODO: Implement flush() method.
+    }
 }
