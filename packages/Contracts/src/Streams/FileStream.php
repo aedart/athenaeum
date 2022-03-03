@@ -63,14 +63,15 @@ interface FileStream extends Stream
      * @see https://www.php.net/manual/en/wrappers.php.php
      *
      * @param  string  $mode  [optional]
-     * @param  int|null  $maxMemory  [optional] Maximum amount of data to keep in memory before using a temporary file, in bytes
+     * @param  int|null  $maximumMemory  [optional] Maximum amount of bytes to keep in memory before writing to a
+     *                                   temporary file. If none specified, then defaults to 2 Mb.
      * @param  resource|null  $context  [optional]
      *
      * @return static
      *
      * @throws StreamException
      */
-    public static function openTemporary(string $mode = 'w+b', int|null $maxMemory = null, $context = null): static;
+    public static function openTemporary(string $mode = 'w+b', int|null $maximumMemory = null, $context = null): static;
 
     /**
      * Copy this stream into another stream
