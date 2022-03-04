@@ -3,6 +3,8 @@
 namespace Aedart\Contracts\Streams\Events;
 
 /**
+ * @deprecated
+ *
  * Stream Event Handler
  *
  * @see \Aedart\Contracts\Streams\Events\StreamHasChanged

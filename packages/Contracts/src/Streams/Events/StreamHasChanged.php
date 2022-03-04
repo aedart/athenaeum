@@ -5,6 +5,8 @@ namespace Aedart\Contracts\Streams\Events;
 use Aedart\Contracts\Streams\Stream;
 
 /**
+ * @deprecated 
+ *
  * Stream Has Changed Event
  *
  * Notification event is dispatched whenever changes occur on a stream.
