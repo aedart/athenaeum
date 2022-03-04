@@ -43,6 +43,27 @@ interface StreamHasChanged
     public function severity(): int;
 
     /**
+     * Determine if severity is of type "informational"
+     *
+     * @return bool True when severity is {@see STREAM_NOTIFY_SEVERITY_INFO}
+     */
+    public function isInformational(): bool;
+
+    /**
+     * Determine if severity is of type "warning"
+     *
+     * @return bool True when severity is {@see STREAM_NOTIFY_SEVERITY_WARN}
+     */
+    public function isWarning(): bool;
+
+    /**
+     * Determine if severity is of type "error"
+     *
+     * @return bool True when severity is {@see STREAM_NOTIFY_SEVERITY_ERR}
+     */
+    public function isError(): bool;
+    
+    /**
      * Returns a descriptive message if available.
      *
      * @see https://www.php.net/manual/en/function.stream-notification-callback.php
