@@ -186,6 +186,22 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
+    public function passThrough(): int
+    {
+        // TODO: Implement passThrough() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function perform(callable $callback, bool $restorePosition = true)
+    {
+        // TODO: Implement perform() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function resource()
     {
         // TODO: Implement resource() method.

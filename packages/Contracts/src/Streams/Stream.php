@@ -99,6 +99,33 @@ interface Stream extends StreamInterface,
     public function end(): bool;
 
     /**
+     * Output all remaining data
+     *
+     * Method will automatically rewind and restore position
+     * after completion of operation.
+     *
+     * @see https://www.php.net/manual/en/function.fpassthru
+     *
+     * @return int Amount of characters read and passed through to output buffer
+     *
+     * @throws StreamException
+     */
+    public function passThrough(): int;
+
+    /**
+     * Perform an operation on stream
+     *
+     * @param  callable  $callback Callback to invoke. This stream is given as callback argument
+     * @param  bool  $restorePosition  [optional] If true, read/write pointer position is
+     *                                 restored, after callback has been invoked.
+     *
+     * @return mixed Callback return value, if any
+     *
+     * @throws StreamException
+     */
+    public function perform(callable $callback, bool $restorePosition = true);
+
+    /**
      * Returns the underlying PHP stream, if not detached
      *
      * @return resource|null
