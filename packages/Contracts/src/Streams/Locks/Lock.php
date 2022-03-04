@@ -22,7 +22,7 @@ interface Lock
      *
      * Method attempts to acquire a lock on stream or fails if unable to.
      *
-     * @param  int  $type  [optional] {@see LockTypes::EXCLUSIVE} exclusive lock (writer) or {@see LockTypes::SHARED} shared lock (reader)
+     * @param  int  $type  [optional] {@see LockTypes::EXCLUSIVE} lock (writer) or {@see LockTypes::SHARED} lock (reader)
      * @param  int  $timeout  [optional] Timeout in microseconds. 1 second = 1.000.000 microseconds
      *
      * @return bool
