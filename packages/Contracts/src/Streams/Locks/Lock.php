@@ -1,8 +1,9 @@
 <?php
 
-namespace Aedart\Contracts\Streams;
+namespace Aedart\Contracts\Streams\Locks;
 
 use Aedart\Contracts\Streams\Exceptions\LockException;
+use Aedart\Contracts\Streams\Stream;
 use InvalidArgumentException;
 
 /**
