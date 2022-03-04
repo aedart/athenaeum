@@ -325,6 +325,14 @@ abstract class Stream implements StreamInterface
         // TODO: Implement meta() method.
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function __debugInfo(): array
+    {
+        // TODO: Implement __debugInfo() method.
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/

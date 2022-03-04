@@ -304,4 +304,11 @@ interface Stream extends StreamInterface,
      * @return Repository
      */
     public function meta(): Repository;
+
+    /**
+     * Debug info
+     *
+     * @return array
+     */
+    public function __debugInfo(): array;
 }
