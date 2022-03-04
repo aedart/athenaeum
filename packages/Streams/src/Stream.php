@@ -185,17 +185,17 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function isDetached(): bool
+    public function resource()
     {
-        // TODO: Implement isDetached() method.
+        // TODO: Implement resource() method.
     }
 
     /**
      * @inheritDoc
      */
-    public function resource()
+    public function isDetached(): bool
     {
-        // TODO: Implement resource() method.
+        // TODO: Implement isDetached() method.
     }
 
     /**

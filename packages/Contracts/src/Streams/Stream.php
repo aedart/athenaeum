@@ -99,6 +99,13 @@ interface Stream extends StreamInterface,
     public function end(): bool;
 
     /**
+     * Returns the underlying PHP stream, if not detached
+     *
+     * @return resource|null
+     */
+    public function resource();
+
+    /**
      * Determine if stream is detached
      *
      * @see detach
@@ -106,13 +113,6 @@ interface Stream extends StreamInterface,
      * @return bool
      */
     public function isDetached(): bool;
-
-    /**
-     * Returns the underlying PHP stream, if not detached
-     *
-     * @return resource|null
-     */
-    public function resource();
 
     /**
      * Determine if stream has timed out whilst waiting
