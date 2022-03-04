@@ -15,15 +15,6 @@ use ArrayAccess;
 interface Repository extends ArrayAccess
 {
     /**
-     * Creates a new stream meta store with given metadata
-     *
-     * @param  array  $meta  [optional] Key-value store
-     *
-     * @return static
-     */
-    public static function make(array $meta = []): static;
-
-    /**
      * Set meta value
      *
      * @param  string  $key
@@ -62,7 +53,7 @@ interface Repository extends ArrayAccess
     public function remove(string $key): bool;
 
     /**
-     * Merge new meta with existing
+     * Merge new meta into this repository
      *
      * @param  array  $meta
      *
