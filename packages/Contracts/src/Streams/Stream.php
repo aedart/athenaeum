@@ -115,6 +115,17 @@ interface Stream extends StreamInterface,
     public function isDetached(): bool;
 
     /**
+     * Determine if stream supports locking
+     *
+     * @see https://www.php.net/manual/en/function.stream-supports-lock
+     *
+     * @return bool
+     *
+     * @throws StreamException
+     */
+    public function supportsLocking(): bool;
+
+    /**
      * Determine if stream has timed out whilst waiting
      * for data
      *

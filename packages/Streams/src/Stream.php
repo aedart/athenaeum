@@ -2,6 +2,7 @@
 
 namespace Aedart\Streams;
 
+use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
@@ -196,6 +197,14 @@ abstract class Stream implements StreamInterface
     public function isDetached(): bool
     {
         // TODO: Implement isDetached() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function supportsLocking(): bool
+    {
+        // TODO: Implement supportsLocking() method.
     }
 
     /**
