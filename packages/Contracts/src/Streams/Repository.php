@@ -5,14 +5,14 @@ namespace Aedart\Contracts\Streams;
 use ArrayAccess;
 
 /**
- * Stream Meta
+ * Stream Meta Repository
  *
- * A key-value store of arbitrary data associated with a stream.
+ * A key-value repository of arbitrary data associated with a stream.
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Streams
  */
-interface Meta extends ArrayAccess
+interface Repository extends ArrayAccess
 {
     /**
      * Creates a new stream meta store with given metadata
