@@ -2,8 +2,7 @@
 
 namespace Aedart\Streams;
 
-use Aedart\Contracts\Streams\Exceptions\StreamException;
-use Aedart\Contracts\Streams\Meta;
+use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
 
@@ -18,7 +17,7 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public static function make($stream, array|Meta|null $meta = null): static
+    public static function make($stream, array|Repository|null $meta = null): static
     {
         // TODO: Implement make() method.
     }
@@ -26,7 +25,7 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public static function makeFrom(PsrStreamInterface $stream, array|Meta|null $meta = null): static
+    public static function makeFrom(PsrStreamInterface $stream, array|Repository|null $meta = null): static
     {
         // TODO: Implement makeFrom() method.
     }
@@ -282,7 +281,7 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function meta(): Meta
+    public function meta(): Repository
     {
         // TODO: Implement meta() method.
     }

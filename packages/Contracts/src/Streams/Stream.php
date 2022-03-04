@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Streams;
 
 use Aedart\Contracts\Streams\Exceptions\StreamException;
+use Aedart\Contracts\Streams\Meta\Repository;
 use Countable;
 use Psr\Http\Message\StreamInterface;
 use Stringable;
@@ -26,13 +27,13 @@ interface Stream extends StreamInterface,
      * Creates a new stream instance for given resource
      *
      * @param  resource  $stream
-     * @param  array|Meta|null  $meta  [optional]
+     * @param  array|Repository|null  $meta  [optional]
      *
      * @return static
      *
      * @throws StreamException
      */
-    public static function make($stream, array|Meta|null $meta = null): static;
+    public static function make($stream, array|Repository|null $meta = null): static;
 
     /**
      * Creates a new stream instance using underlying resource from given
@@ -42,13 +43,13 @@ interface Stream extends StreamInterface,
      * before creating a new stream instance!_
      *
      * @param  StreamInterface  $stream Psr-7 Stream instance
-     * @param  array|Meta|null  $meta  [optional]
+     * @param  array|Repository|null  $meta  [optional]
      *
      * @return static
      *
      * @throws StreamException
      */
-    public static function makeFrom(StreamInterface $stream, array|Meta|null $meta = null): static;
+    public static function makeFrom(StreamInterface $stream, array|Repository|null $meta = null): static;
 
     /**
      * Returns a line from stream's content until end-of-line is reached
@@ -208,7 +209,7 @@ interface Stream extends StreamInterface,
     /**
      * Returns meta for this steam
      *
-     * @return Meta
+     * @return Repository
      */
-    public function meta(): Meta;
+    public function meta(): Repository;
 }
