@@ -4,9 +4,12 @@ namespace Aedart\Streams;
 
 use Aedart\Contracts\Streams\Exceptions\LockException;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
+use Aedart\Contracts\Streams\Locks\Factory;
+use Aedart\Contracts\Streams\Locks\LockFactoryAware;
 use Aedart\Contracts\Streams\Locks\LockTypes;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
+use Aedart\Streams\Traits\LockFactoryTrait;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
 
 /**
@@ -15,8 +18,12 @@ use Psr\Http\Message\StreamInterface as PsrStreamInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Streams
  */
-abstract class Stream implements StreamInterface
+abstract class Stream implements
+    StreamInterface,
+    LockFactoryAware
 {
+    use LockFactoryTrait;
+
     /**
      * @inheritDoc
      */
@@ -331,6 +338,18 @@ abstract class Stream implements StreamInterface
     public function __debugInfo(): array
     {
         // TODO: Implement __debugInfo() method.
+    }
+
+    /*****************************************************************
+     * Defaults
+     ****************************************************************/
+
+    /**
+     * @inheritDoc
+     */
+    public function getDefaultLockFactory(): Factory|null
+    {
+        // TODO: Returns a default lock factory
     }
 
     /*****************************************************************
