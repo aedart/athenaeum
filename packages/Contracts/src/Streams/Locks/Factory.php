@@ -3,7 +3,6 @@
 namespace Aedart\Contracts\Streams\Locks;
 
 use Aedart\Contracts\Streams\Exceptions\LockException;
-use Aedart\Contracts\Streams\Lock;
 use Aedart\Contracts\Streams\Stream;
 
 /**
