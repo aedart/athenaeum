@@ -172,6 +172,20 @@ interface Stream extends StreamInterface,
      * @throws StreamException
      */
     public function setBlocking(bool $block): static;
+
+    /**
+     * Set stream timeout
+     *
+     * @see https://www.php.net/manual/en/function.stream-set-timeout.php
+     *
+     * @param  int  $seconds
+     * @param  int  $microseconds  [optional]
+     *
+     * @return self
+     *
+     * @throws StreamException
+     */
+    public function setTimeout(int $seconds, int $microseconds = 0): static;
     
     /**
      * Returns the underlying PHP stream, if not detached

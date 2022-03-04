@@ -223,6 +223,14 @@ abstract class Stream implements
     /**
      * @inheritDoc
      */
+    public function setTimeout(int $seconds, int $microseconds = 0): static
+    {
+        // TODO: Implement setTimeout() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function resource()
     {
         // TODO: Implement resource() method.
