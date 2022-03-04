@@ -194,7 +194,7 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function perform(callable $callback, bool $restorePosition = true)
+    public function perform(callable $callback, bool $restorePosition = true): mixed
     {
         // TODO: Implement perform() method.
     }

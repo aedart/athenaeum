@@ -123,7 +123,7 @@ interface Stream extends StreamInterface,
      *
      * @throws StreamException
      */
-    public function perform(callable $callback, bool $restorePosition = true);
+    public function perform(callable $callback, bool $restorePosition = true): mixed;
 
     /**
      * Returns the underlying PHP stream, if not detached
