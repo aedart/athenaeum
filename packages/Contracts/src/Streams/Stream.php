@@ -2,7 +2,10 @@
 
 namespace Aedart\Contracts\Streams;
 
+use Aedart\Contracts\Streams\Exceptions\LockException;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
+use Aedart\Contracts\Streams\Locks\Lock;
+use Aedart\Contracts\Streams\Locks\LockTypes;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Countable;
 use Psr\Http\Message\StreamInterface;
@@ -106,17 +109,50 @@ interface Stream extends StreamInterface,
     public function passThrough(): int;
 
     /**
-     * Perform an operation on stream
+     * Performs an operation on stream
      *
-     * @param  callable  $callback Callback to invoke. This stream is given as callback argument
+     * @param  callable  $operation Callback to invoke. This stream is given as callback argument
      * @param  bool  $restorePosition  [optional] If true, read/write pointer position is
      *                                 restored, after callback has been invoked.
      *
-     * @return mixed Callback return value, if any
+     * @return mixed Operation callback return value, if any
      *
      * @throws StreamException
      */
-    public function perform(callable $callback, bool $restorePosition = true): mixed;
+    public function perform(callable $operation, bool $restorePosition = true): mixed;
+
+    /**
+     * Performs an operation on stream safely
+     *
+     * Method attempts to acquire a lock before invoking given operation
+     * callback. Upon completion of operation, the lock is automatically
+     * released.
+     *
+     * In case that the operation callback fails (exception is thrown), then
+     * lock will also automatically be released, before re-throwing the
+     * exception.
+     *
+     * **Caution**: _Not all stream types can be locked. Use {@see supportsLocking()} to determine
+     * if stream can be locked._
+     *
+     * @param  callable  $operation Callback to invoke. This stream instance and acquired {@see Lock} are given
+     *                              as callback arguments.
+     * @param  bool  $restorePosition  [optional] If true, read/write pointer position is
+     *                                 restored, after callback has been invoked.
+     * @param  int  $lock  [optional] The type of lock. {@see LockTypes::EXCLUSIVE} lock (writer) or {@see LockTypes::SHARED} lock (reader)
+     * @param  int  $acquireLockTimeout  [optional] Timeout to acquire lock in microseconds. 1 second = 1.000.000 microseconds
+     *
+     * @return mixed Operation callback return value, if any
+     *
+     * @throws StreamException
+     * @throws LockException
+     */
+    public function performSafe(
+        callable $operation,
+        bool $restorePosition = true,
+        int $lock = LockTypes::EXCLUSIVE,
+        int $acquireLockTimeout = 500_000
+    ): mixed;
 
     /**
      * Returns the underlying PHP stream, if not detached

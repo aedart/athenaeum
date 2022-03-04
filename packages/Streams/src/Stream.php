@@ -2,7 +2,9 @@
 
 namespace Aedart\Streams;
 
+use Aedart\Contracts\Streams\Exceptions\LockException;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
+use Aedart\Contracts\Streams\Locks\LockTypes;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
@@ -186,9 +188,21 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function perform(callable $callback, bool $restorePosition = true): mixed
+    public function perform(callable $operation, bool $restorePosition = true): mixed
     {
         // TODO: Implement perform() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function performSafe(
+        callable $operation,
+        bool $restorePosition = true,
+        int $lock = LockTypes::EXCLUSIVE,
+        int $acquireLockTimeout = 500_000
+    ): mixed {
+        // TODO: Implement performSafe() method.
     }
 
     /**
