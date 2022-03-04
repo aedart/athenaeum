@@ -55,7 +55,7 @@ interface Stream extends StreamInterface,
      * Returns a line from stream's content until end-of-line is reached
      *
      * @see https://www.php.net/manual/en/function.fgets.php
-     * @see readLineUntil
+     * @see readLineUntil()
      *
      * @param  int|null  $length  [optional]
      *
@@ -70,7 +70,7 @@ interface Stream extends StreamInterface,
      * or end-of-line is reached.
      *
      * @see https://www.php.net/manual/en/function.stream-get-line
-     * @see readLine
+     * @see readLine()
      *
      * @param  int  $length Maximum amount of bytes to read. If 0 is given, then
      *                      default chunk size is applied (8 Kb)
@@ -135,7 +135,7 @@ interface Stream extends StreamInterface,
     /**
      * Determine if stream is detached
      *
-     * @see detach
+     * @see detach()
      *
      * @return bool
      */
@@ -246,6 +246,12 @@ interface Stream extends StreamInterface,
 
     /**
      * Returns meta for this steam
+     *
+     * Method is responsible for refreshing available meta-data,
+     * and merge it into the stream meta repository, before
+     * returning it.
+     *
+     * @see https://www.php.net/manual/en/function.stream-get-meta-data
      *
      * @return Repository
      */
