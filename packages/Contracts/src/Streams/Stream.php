@@ -92,13 +92,6 @@ interface Stream extends StreamInterface,
     public function position(): int;
 
     /**
-     * Alias for {@see eof()}
-     *
-     * @return bool
-     */
-    public function end(): bool;
-
-    /**
      * Output all remaining data
      *
      * Method will automatically rewind and restore position

@@ -178,14 +178,6 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function end(): bool
-    {
-        return $this->eof();
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function passThrough(): int
     {
         // TODO: Implement passThrough() method.
