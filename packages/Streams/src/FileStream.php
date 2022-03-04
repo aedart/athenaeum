@@ -94,4 +94,17 @@ class FileStream extends Stream implements FileStreamInterface
     {
         // TODO: Implement flush() method.
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function hash(
+        string $algo,
+        bool $binary = false,
+        int $flags = 0,
+        string $key = '',
+        array $options = []
+    ): string {
+        // TODO: Implement hash() method.
+    }
 }
