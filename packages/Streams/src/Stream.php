@@ -208,6 +208,14 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
+    public function setBlocking(bool $block): static
+    {
+        // TODO: Implement setBlocking() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function resource()
     {
         // TODO: Implement resource() method.

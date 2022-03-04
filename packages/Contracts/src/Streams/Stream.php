@@ -135,6 +135,11 @@ interface Stream extends StreamInterface,
      * **Caution**: _Not all stream types can be locked. Use {@see supportsLocking()} to determine
      * if stream can be locked._
      *
+     * **Block mode**: _Stream's blocking or non-blocking mode is NOT set by this method!_
+     *
+     * @see supportsLocking()
+     * @see setBlocking()
+     *
      * @param  callable  $operation Callback to invoke. This stream instance and acquired {@see Lock} are given
      *                              as callback arguments.
      * @param  bool  $restorePosition  [optional] If true, read/write pointer position is
@@ -154,6 +159,20 @@ interface Stream extends StreamInterface,
         int $acquireLockTimeout = 500_000
     ): mixed;
 
+    /**
+     * Set blocking or non-blocking mode for stream
+     *
+     * @see https://www.php.net/manual/en/function.stream-set-blocking.php
+     *
+     * @param  bool  $block True if stream must use blocking mode, false
+     *                      if stream must use non-blocking mode
+     *
+     * @return self
+     *
+     * @throws StreamException
+     */
+    public function setBlocking(bool $block): static;
+    
     /**
      * Returns the underlying PHP stream, if not detached
      *
