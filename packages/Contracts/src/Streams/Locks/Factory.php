@@ -20,10 +20,12 @@ interface Factory
      * Creates a new lock instance for stream
      *
      * @param  Stream  $stream
+     * @param  string|null  $driver  [optional] Name of driver to use. If none is given,
+     *                               then a default driver will be used.
      *
      * @return Lock
      *
      * @throws LockException
      */
-    public function create(Stream $stream): Lock;
+    public function create(Stream $stream, string|null $driver = null): Lock;
 }
