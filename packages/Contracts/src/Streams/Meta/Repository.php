@@ -1,6 +1,6 @@
 <?php
 
-namespace Aedart\Contracts\Streams;
+namespace Aedart\Contracts\Streams\Meta;
 
 use ArrayAccess;
 
