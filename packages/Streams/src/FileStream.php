@@ -26,7 +26,7 @@ class FileStream extends Stream implements FileStreamInterface
     /**
      * @inheritDoc
      */
-    public static function openMemory(string $mode = 'w+b', $context = null): static
+    public static function openMemory(string $mode = 'r+b', $context = null): static
     {
         // TODO: Implement openMemory() method.
     }
@@ -34,7 +34,7 @@ class FileStream extends Stream implements FileStreamInterface
     /**
      * @inheritDoc
      */
-    public static function openTemporary(string $mode = 'w+b', int|null $maximumMemory = null, $context = null): static
+    public static function openTemporary(string $mode = 'r+b', int|null $maximumMemory = null, $context = null): static
     {
         // TODO: Implement openTemporary() method.
     }
