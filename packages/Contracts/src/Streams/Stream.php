@@ -307,6 +307,17 @@ interface Stream extends StreamInterface,
     public function isTTY(): bool;
 
     /**
+     * Returns stream size as a human-readable string
+     *
+     * @see getSize()
+     *
+     * @param  int  $precision  [optional]
+     *
+     * @return string E.g. 12.72 MB
+     */
+    public function getFormattedSize(int $precision = 2): string;
+
+    /**
      * Returns meta for this steam
      *
      * Method is responsible for refreshing available meta-data,

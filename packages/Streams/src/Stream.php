@@ -335,6 +335,14 @@ abstract class Stream implements
     /**
      * @inheritDoc
      */
+    public function getFormattedSize(int $precision = 2): string
+    {
+        // TODO: Implement getFormattedSize() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function meta(): Repository
     {
         // TODO: Implement meta() method.
