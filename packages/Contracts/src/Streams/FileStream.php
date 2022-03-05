@@ -74,20 +74,37 @@ interface FileStream extends Stream
     public static function openTemporary(string $mode = 'r+b', int|null $maximumMemory = null, $context = null): static;
 
     /**
+     * Copy this stream
+     *
+     * Method is the equivalent of invoking {@see copyTo()} without a `$target`.
+     *
+     * @see copyTo()
+     *
+     * @param  int|null  $length  [optional] Maximum bytes to copy. By default, all bytes left are copied
+     * @param  int  $offset  [optional] The offset where to start to copy data
+     *
+     * @return static New stream created via {@see openTemporary()} with this stream's contents copied
+     *
+     * @throws StreamException
+     */
+    public function copy(int|null $length = null, int $offset = 0): static;
+
+    /**
      * Copy this stream into another stream
      *
      * @see https://www.php.net/manual/en/function.stream-copy-to-stream.php
      *
-     * @param  Stream|null  $target  [optional] If `null` is given, then a new stream instance
-     *                              is automatically created, using {@see openTemporary()}
+     * @param  Stream|null  $target  [optional] Target stream to copy this stream's content into.
+     *                               If `null` is given, then a new stream instance
+     *                               is automatically created, using {@see openTemporary()}
      * @param  int|null  $length  [optional] Maximum bytes to copy. By default, all bytes left are copied
      * @param  int  $offset  [optional] The offset where to start to copy data
      *
-     * @return static
+     * @return static Provided target stream with this stream's contents copied
      *
      * @throws StreamException
      */
-    public function copy(Stream|null $target = null, int|null $length = null, int $offset = 0): static;
+    public function copyTo(Stream|null $target = null, int|null $length = null, int $offset = 0): static;
 
     /**
      * Write content at the end of this stream's data

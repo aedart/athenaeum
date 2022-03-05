@@ -50,9 +50,17 @@ class FileStream extends Stream implements FileStreamInterface
     /**
      * @inheritDoc
      */
-    public function copy(StreamInterface|null $target = null, ?int $length = null, int $offset = 0): static
+    public function copy(int|null $length = null, int $offset = 0): static
     {
-        // TODO: Implement copy() method.
+        return $this->copyTo(null, $length, $offset);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function copyTo(StreamInterface|null $target = null, int|null $length = null, int $offset = 0): static
+    {
+        // TODO: Implement copyTo() method.
     }
 
     /**
