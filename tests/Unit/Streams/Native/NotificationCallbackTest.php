@@ -1,6 +1,6 @@
 <?php
 
-namespace Aedart\Tests\Unit\Streams;
+namespace Aedart\Tests\Unit\Streams\Native;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
