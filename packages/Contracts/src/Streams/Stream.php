@@ -62,11 +62,11 @@ interface Stream extends StreamInterface,
      *
      * @param  int|null  $length  [optional]
      *
-     * @return string|null Line contents or null when no more data to read (EOF)
+     * @return string|false Line contents or false when no more data to read (EOF)
      *
      * @throws StreamException
      */
-    public function readLine(int|null $length = null): string|null;
+    public function readLine(int|null $length = null): string|false;
 
     /**
      * Returns a line from stream's content until length, delimiter is reached,
@@ -79,12 +79,26 @@ interface Stream extends StreamInterface,
      *                      default chunk size is applied (8 Kb)
      * @param  string  $ending  [optional] Line ending delimiter
      *
-     * @return string|null Line contents or null when no more data to read (EOF)
+     * @return string|false Line contents or false when no more data to read (EOF)
      *
      * @throws StreamException
      */
-    public function readLineUntil(int $length, string $ending = ''): string|null;
-    
+    public function readLineUntil(int $length, string $ending = ''): string|false;
+
+    /**
+     * Parse stream contents according to the specified format
+     *
+     * @see https://www.php.net/manual/en/function.fscanf
+     *
+     * @param  string  $format
+     * @param  mixed  ...$vars
+     *
+     * @return array|int|false|null
+     *
+     * @throws StreamException
+     */
+    public function parse(string $format, mixed &...$vars): array|int|false|null;
+
     /**
      * Alias for {@see tell()}
      *

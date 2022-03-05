@@ -163,7 +163,7 @@ abstract class Stream implements
     /**
      * @inheritDoc
      */
-    public function readLine(?int $length = null): string|null
+    public function readLine(?int $length = null): string|false
     {
         // TODO: Implement readLine() method.
     }
@@ -171,9 +171,17 @@ abstract class Stream implements
     /**
      * @inheritDoc
      */
-    public function readLineUntil(int $length, string $ending = ''): string|null
+    public function readLineUntil(int $length, string $ending = ''): string|false
     {
         // TODO: Implement readLineUntil() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function parse(string $format, mixed &...$vars): array|int|false|null
+    {
+        // TODO: Implement scanFormat() method.
     }
 
     /**
