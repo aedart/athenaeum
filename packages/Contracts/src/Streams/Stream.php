@@ -101,29 +101,6 @@ interface Stream extends StreamInterface,
     public function parse(string $format, mixed &...$vars): array|int|false|null;
 
     /**
-     * Alias for {@see tell()}
-     *
-     * @return int
-     *
-     * @throws StreamException
-     */
-    public function position(): int;
-
-    /**
-     * Output all remaining data
-     *
-     * Method will automatically rewind and restore position
-     * after completion of operation.
-     *
-     * @see https://www.php.net/manual/en/function.fpassthru
-     *
-     * @return int Amount of characters read and passed through to output buffer
-     *
-     * @throws StreamException
-     */
-    public function passThrough(): int;
-
-    /**
      * Performs an operation on stream
      *
      * @param  callable  $operation Callback to invoke. This stream is given as callback argument
@@ -173,6 +150,29 @@ interface Stream extends StreamInterface,
         int $lock = LockTypes::EXCLUSIVE,
         int $acquireLockTimeout = 500_000
     ): mixed;
+
+    /**
+     * Alias for {@see tell()}
+     *
+     * @return int
+     *
+     * @throws StreamException
+     */
+    public function position(): int;
+
+    /**
+     * Output all remaining data
+     *
+     * Method will automatically rewind and restore position
+     * after completion of operation.
+     *
+     * @see https://www.php.net/manual/en/function.fpassthru
+     *
+     * @return int Amount of characters read and passed through to output buffer
+     *
+     * @throws StreamException
+     */
+    public function passThrough(): int;
 
     /**
      * Set blocking or non-blocking mode for stream

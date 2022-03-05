@@ -187,22 +187,6 @@ abstract class Stream implements
     /**
      * @inheritDoc
      */
-    public function position(): int
-    {
-        return $this->tell();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function passThrough(): int
-    {
-        // TODO: Implement passThrough() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function perform(callable $operation, bool $restorePosition = true): mixed
     {
         // TODO: Implement perform() method.
@@ -218,6 +202,22 @@ abstract class Stream implements
         int $acquireLockTimeout = 500_000
     ): mixed {
         // TODO: Implement performSafe() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function position(): int
+    {
+        return $this->tell();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function passThrough(): int
+    {
+        // TODO: Implement passThrough() method.
     }
 
     /**
