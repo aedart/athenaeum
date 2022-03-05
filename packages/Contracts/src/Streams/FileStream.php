@@ -79,7 +79,7 @@ interface FileStream extends Stream
      * @see https://www.php.net/manual/en/function.stream-copy-to-stream.php
      *
      * @param  Stream|null  $target  [optional] If `null` is given, then a new stream instance
-     *                              is automatically created, using {@see openMemory()}
+     *                              is automatically created, using {@see openTemporary()}
      * @param  int|null  $length  [optional] Maximum bytes to copy. By default, all bytes left are copied
      * @param  int  $offset  [optional] The offset where to start to copy data
      *
