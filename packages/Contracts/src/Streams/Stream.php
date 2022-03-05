@@ -55,7 +55,8 @@ interface Stream extends StreamInterface,
     public static function makeFrom(StreamInterface $stream, array|Repository|null $meta = null): static;
 
     /**
-     * Returns a line from stream's content until end-of-line is reached
+     * Returns a line from stream's content until length or newline is reached,
+     * or end-of-file (EOF)
      *
      * @see https://www.php.net/manual/en/function.fgets.php
      * @see readLineUntil()
@@ -69,8 +70,8 @@ interface Stream extends StreamInterface,
     public function readLine(int|null $length = null): string|false;
 
     /**
-     * Returns a line from stream's content until length, delimiter is reached,
-     * or end-of-line is reached.
+     * Returns a line from stream's content until length or delimiter is reached,
+     * or end-of-file (EOF) is reached.
      *
      * @see https://www.php.net/manual/en/function.stream-get-line
      * @see readLine()
