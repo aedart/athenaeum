@@ -293,7 +293,7 @@ abstract class Stream implements
     public function __toString(): string
     {
         if ($this->isSeekable()) {
-            $this->moveToStart();
+            $this->positionAtStart();
         }
 
         return $this->getContents();
@@ -368,7 +368,7 @@ abstract class Stream implements
     /**
      * @inheritDoc
      */
-    public function moveTo(int $offset, int $whence = SEEK_SET): static
+    public function positionAt(int $offset, int $whence = SEEK_SET): static
     {
         $this->seek($offset, $whence);
 
@@ -378,17 +378,17 @@ abstract class Stream implements
     /**
      * @inheritDoc
      */
-    public function moveToStart(): static
+    public function positionAtStart(): static
     {
-        return $this->moveTo(0);
+        return $this->positionAt(0);
     }
 
     /**
      * @inheritDoc
      */
-    public function moveToEnd(): static
+    public function positionAtEnd(): static
     {
-        return $this->moveTo(0, SEEK_END);
+        return $this->positionAt(0, SEEK_END);
     }
 
     /**

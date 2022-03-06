@@ -164,7 +164,7 @@ interface Stream extends StreamInterface,
      *
      * @throws StreamException
      */
-    public function moveTo(int $offset, int $whence = SEEK_SET): static;
+    public function positionAt(int $offset, int $whence = SEEK_SET): static;
 
     /**
      * Move position to the beginning of the stream
@@ -173,7 +173,7 @@ interface Stream extends StreamInterface,
      *
      * @throws StreamException
      */
-    public function moveToStart(): static;
+    public function positionAtStart(): static;
 
     /**
      * Move position to the end of the stream
@@ -182,7 +182,7 @@ interface Stream extends StreamInterface,
      *
      * @throws StreamException
      */
-    public function moveToEnd(): static;
+    public function positionAtEnd(): static;
 
     /**
      * Alias for {@see tell()}
