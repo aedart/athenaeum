@@ -346,6 +346,15 @@ interface Stream extends StreamInterface,
     public function meta(): Repository;
 
     /**
+     * Returns the raw meta-data from the stream
+     *
+     * @see https://www.php.net/manual/en/function.stream-get-meta-data
+     *
+     * @return array
+     */
+    public function rawMeta(): array;
+
+    /**
      * Debug info
      *
      * @return array

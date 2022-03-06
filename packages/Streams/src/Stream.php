@@ -359,6 +359,14 @@ abstract class Stream implements
     /**
      * @inheritDoc
      */
+    public function rawMeta(): array
+    {
+        // TODO: Implement rawMeta() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function __debugInfo(): array
     {
         // TODO: Implement __debugInfo() method.
