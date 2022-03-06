@@ -120,7 +120,7 @@ class RepositoryTest extends UnitTestCase
             'c' => 3
         ]);
 
-        $repo->merge([
+        $repo->populate([
             'a' => true,
             'd' => 4
         ]);
@@ -142,7 +142,7 @@ class RepositoryTest extends UnitTestCase
             'c.a' => 3
         ]);
 
-        $all = $repo->all();
+        $all = $repo->toArray();
 
         ConsoleDebugger::output($all);
 

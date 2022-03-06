@@ -2,7 +2,9 @@
 
 namespace Aedart\Contracts\Streams\Meta;
 
+use Aedart\Contracts\Utils\Populatable;
 use ArrayAccess;
+use Illuminate\Contracts\Support\Arrayable;
 
 /**
  * Stream Meta Repository
@@ -12,7 +14,10 @@ use ArrayAccess;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Streams
  */
-interface Repository extends ArrayAccess
+interface Repository extends
+    ArrayAccess,
+    Populatable,
+    Arrayable
 {
     /**
      * Set meta value
