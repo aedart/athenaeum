@@ -2,11 +2,11 @@
 
 namespace Aedart\Streams;
 
-use Aedart\Contracts\Streams\Locks\Factory;
-use Aedart\Contracts\Streams\Locks\LockFactoryAware;
+use Aedart\Contracts\Streams\Locks\Factory as LockFactory;
 use Aedart\Contracts\Streams\Locks\LockTypes;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
+use Aedart\Contracts\Streams\Transactions\Factory as TransactionFactory;
 use Aedart\Streams\Exceptions\InvalidStreamResource;
 use Aedart\Streams\Exceptions\StreamNotReadable;
 use Aedart\Streams\Exceptions\StreamNotSeekable;
@@ -15,6 +15,7 @@ use Aedart\Streams\Exceptions\StreamIsDetached;
 use Aedart\Streams\Exceptions\StreamNotWritable;
 use Aedart\Streams\Meta\Repository as DefaultMetaRepository;
 use Aedart\Streams\Traits\LockFactoryTrait;
+use Aedart\Streams\Traits\TransactionFactoryTrait;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Utils\Memory;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
@@ -25,11 +26,10 @@ use Psr\Http\Message\StreamInterface as PsrStreamInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Streams
  */
-abstract class Stream implements
-    StreamInterface,
-    LockFactoryAware
+abstract class Stream implements StreamInterface
 {
     use LockFactoryTrait;
+    use TransactionFactoryTrait;
 
     /**
      * Readable modes regex
@@ -644,9 +644,17 @@ abstract class Stream implements
     /**
      * @inheritDoc
      */
-    public function getDefaultLockFactory(): Factory|null
+    public function getDefaultLockFactory(): LockFactory|null
     {
-        // TODO: Returns a default lock factory
+        // TODO: Return a default lock factory
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDefaultTransactionFactory(): TransactionFactory|null
+    {
+        // TODO: Return a default transaction factory
     }
 
     /**

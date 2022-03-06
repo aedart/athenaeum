@@ -5,8 +5,10 @@ namespace Aedart\Contracts\Streams;
 use Aedart\Contracts\Streams\Exceptions\LockException;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\Locks\Lock;
+use Aedart\Contracts\Streams\Locks\LockFactoryAware;
 use Aedart\Contracts\Streams\Locks\LockTypes;
 use Aedart\Contracts\Streams\Meta\Repository;
+use Aedart\Contracts\Streams\Transactions\TransactionFactoryAware;
 use Countable;
 use Psr\Http\Message\StreamInterface;
 use Stringable;
@@ -23,6 +25,8 @@ use Stringable;
  * @package Aedart\Contracts\Streams
  */
 interface Stream extends StreamInterface,
+    LockFactoryAware,
+    TransactionFactoryAware,
     Countable,
     Stringable
 {
