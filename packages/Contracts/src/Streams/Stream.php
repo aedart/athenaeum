@@ -291,7 +291,9 @@ interface Stream extends StreamInterface,
     public function unreadBytes(): int;
 
     /**
-     * Alias for {@see streamId()}
+     * Returns the id of the underlying resource
+     *
+     * @see https://www.php.net/manual/en/function.get-resource-id
      *
      * @return int
      *
@@ -300,15 +302,15 @@ interface Stream extends StreamInterface,
     public function id(): int;
 
     /**
-     * Returns the id of the underlying stream
+     * Returns the type of the underlying resource
      *
-     * @see https://www.php.net/manual/en/function.get-resource-id
+     * @see https://www.php.net/manual/en/function.get-resource-type.php
      *
-     * @return int
+     * @return string
      *
      * @throws StreamException
      */
-    public function streamId(): int;
+    public function type(): string;
 
     /**
      * Returns a label that describes the underlying stream implementation
@@ -364,6 +366,8 @@ interface Stream extends StreamInterface,
      * @see https://www.php.net/manual/en/function.stream-is-local.php
      *
      * @return bool
+     *
+     * @throws StreamException
      */
     public function isLocal(): bool;
 
@@ -373,6 +377,8 @@ interface Stream extends StreamInterface,
      * @see https://www.php.net/manual/en/function.stream-isatty.php
      *
      * @return bool
+     *
+     * @throws StreamException
      */
     public function isTTY(): bool;
 
