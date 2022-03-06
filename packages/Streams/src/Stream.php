@@ -2,17 +2,21 @@
 
 namespace Aedart\Streams;
 
-use Aedart\Contracts\Streams\Exceptions\LockException;
-use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\Locks\Factory;
 use Aedart\Contracts\Streams\Locks\LockFactoryAware;
 use Aedart\Contracts\Streams\Locks\LockTypes;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Streams\Exceptions\InvalidStreamResource;
+use Aedart\Streams\Exceptions\StreamNotReadable;
+use Aedart\Streams\Exceptions\StreamNotSeekable;
+use Aedart\Streams\Exceptions\StreamException;
+use Aedart\Streams\Exceptions\StreamIsDetached;
+use Aedart\Streams\Exceptions\StreamNotWritable;
 use Aedart\Streams\Meta\Repository as DefaultMetaRepository;
 use Aedart\Streams\Traits\LockFactoryTrait;
 use Aedart\Support\Facades\IoCFacade;
+use Aedart\Utils\Memory;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
 
 /**
@@ -28,6 +32,24 @@ abstract class Stream implements
     use LockFactoryTrait;
 
     /**
+     * Readable modes regex
+     *
+     * Source from Guzzle's Stream component
+     *
+     * @see \GuzzleHttp\Psr7\Stream::READABLE_MODES
+     */
+    public const READABLE_MODES = '/r|a\+|ab\+|w\+|wb\+|x\+|xb\+|c\+|cb\+/';
+
+    /**
+     * Writeable modes regex
+     *
+     * Source from Guzzle's Stream component
+     *
+     * @see \GuzzleHttp\Psr7\Stream::WRITABLE_MODES
+     */
+    public const WRITABLE_MODES = '/a|w|r\+|rb\+|rw|x|c/';
+
+    /**
      * The actual resource stream
      *
      * @var resource
@@ -40,6 +62,20 @@ abstract class Stream implements
      * @var Repository
      */
     protected Repository $meta;
+
+    /**
+     * State whether stream is readable or not
+     *
+     * @var bool|null
+     */
+    protected bool|null $isReadable = null;
+
+    /**
+     * State whether stream is writable or not
+     *
+     * @var bool|null
+     */
+    protected bool|null $isWritable = null;
 
     /**
      * Creates a new stream instance
@@ -90,8 +126,12 @@ abstract class Stream implements
         }
 
         $resource = $this->stream;
-        unset($this->stream);
-        unset($this->meta);
+        unset(
+            $this->stream,
+            $this->meta,
+            $this->isReadable,
+            $this->isWritable
+        );
 
         return $resource;
     }
@@ -101,7 +141,7 @@ abstract class Stream implements
      */
     public function getSize(): int|null
     {
-        // TODO: Implement getSize() method.
+        return $this->meta()->get('size');
     }
 
     /**
@@ -109,7 +149,15 @@ abstract class Stream implements
      */
     public function tell(): int
     {
-        // TODO: Implement tell() method.
+        $this->assertNotDetached('Unable to tell stream position');
+
+        $position = ftell($this->resource());
+
+        if ($position === false) {
+            throw new StreamException('Stream position cannot be determined');
+        }
+
+        return $position;
     }
 
     /**
@@ -117,7 +165,9 @@ abstract class Stream implements
      */
     public function eof(): bool
     {
-        // TODO: Implement eof() method.
+        $this->assertNotDetached('Unable to determine if position is at end-of-file (EOF)');
+
+        return feof($this->resource());
     }
 
     /**
@@ -125,7 +175,7 @@ abstract class Stream implements
      */
     public function isSeekable(): bool
     {
-        // TODO: Implement isSeekable() method.
+        return $this->meta()->get('seekable', false);
     }
 
     /**
@@ -133,7 +183,17 @@ abstract class Stream implements
      */
     public function seek($offset, $whence = SEEK_SET)
     {
-        // TODO: Implement seek() method.
+        $msg = 'Unable to move stream position';
+
+        $this->assertNotDetached($msg);
+        if (!$this->isSeekable()) {
+            throw new StreamNotSeekable('Stream is not seekable: ' . $msg);
+        }
+
+        $result = fseek($this->resource(), $offset, $whence);
+        if ($result === -1) {
+            throw new StreamException(sprintf('Stream position could not be moved to offset %s (whence %s)', $offset, $whence));
+        }
     }
 
     /**
@@ -141,7 +201,7 @@ abstract class Stream implements
      */
     public function rewind()
     {
-        // TODO: Implement rewind() method.
+        $this->seek(0);
     }
 
     /**
@@ -149,7 +209,11 @@ abstract class Stream implements
      */
     public function isWritable(): bool
     {
-        // TODO: Implement isWritable() method.
+        if (isset($this->isWritable)) {
+            return $this->isWritable;
+        }
+
+        return $this->isWritable = (bool) preg_match(self::WRITABLE_MODES, $this->mode());
     }
 
     /**
@@ -157,7 +221,16 @@ abstract class Stream implements
      */
     public function write($string): int
     {
-        // TODO: Implement write() method.
+        $this
+            ->assertNotDetached('Unable to write')
+            ->assertIsWritable();
+
+        $written = fwrite($this->resource(), $string);
+        if ($written === false) {
+            throw new StreamException(sprintf('Could not write %s byte to stream', strlen($string)));
+        }
+
+        return $written;
     }
 
     /**
@@ -165,7 +238,11 @@ abstract class Stream implements
      */
     public function isReadable(): bool
     {
-        // TODO: Implement isReadable() method.
+        if (isset($this->isReadable)) {
+            return $this->isReadable;
+        }
+
+        return $this->isReadable = (bool) preg_match(self::READABLE_MODES, $this->mode());
     }
 
     /**
@@ -173,7 +250,16 @@ abstract class Stream implements
      */
     public function read($length): string
     {
-        // TODO: Implement read() method.
+        $this
+            ->assertNotDetached('Unable to read')
+            ->assertIsReadable();
+
+        $result = fread($this->resource(), $length);
+        if ($result === false) {
+            throw new StreamException(sprintf('Could not read %s bytes from stream', $length));
+        }
+
+        return $result;
     }
 
     /**
@@ -181,7 +267,16 @@ abstract class Stream implements
      */
     public function getContents(): string
     {
-        // TODO: Implement getContents() method.
+        $this
+            ->assertNotDetached('Unable to get stream result')
+            ->assertIsReadable();
+
+        $result = stream_get_contents($this->resource());
+        if ($result === false) {
+            throw new StreamException('Could not obtain stream contents');
+        }
+
+        return $result;
     }
 
     /**
@@ -189,7 +284,7 @@ abstract class Stream implements
      */
     public function getMetadata($key = null)
     {
-        // TODO: Implement getMetadata() method.
+        return $this->meta()->get($key);
     }
 
     /**
@@ -197,7 +292,11 @@ abstract class Stream implements
      */
     public function __toString(): string
     {
-        // TODO: Implement __toString() method.
+        if ($this->isSeekable()) {
+            $this->moveToStart();
+        }
+
+        return $this->getContents();
     }
 
     /**
@@ -213,7 +312,9 @@ abstract class Stream implements
      */
     public function readLine(?int $length = null): string|false
     {
-        // TODO: Implement readLine() method.
+        $this->assertNotDetached('Unable to read line');
+
+        return fgets($this->resource(), $length);
     }
 
     /**
@@ -221,7 +322,9 @@ abstract class Stream implements
      */
     public function readLineUntil(int $length, string $ending = ''): string|false
     {
-        // TODO: Implement readLineUntil() method.
+        $this->assertNotDetached('Unable to read line until ending');
+
+        return stream_get_line($this->resource(), $length, $ending);
     }
 
     /**
@@ -229,7 +332,9 @@ abstract class Stream implements
      */
     public function parse(string $format, mixed &...$vars): array|int|false|null
     {
-        // TODO: Implement scanFormat() method.
+        $this->assertNotDetached('Unable to parse according to format ' . $format);
+
+        return fscanf($this->resource(), $format, ...$vars);
     }
 
     /**
@@ -237,7 +342,15 @@ abstract class Stream implements
      */
     public function perform(callable $operation, bool $restorePosition = true): mixed
     {
-        // TODO: Implement perform() method.
+        $original = $this->tell();
+
+        $result = $operation($this);
+
+        if ($restorePosition) {
+            $this->seek($original);
+        }
+
+        return $result;
     }
 
     /**
@@ -255,6 +368,32 @@ abstract class Stream implements
     /**
      * @inheritDoc
      */
+    public function moveTo(int $offset, int $whence = SEEK_SET): static
+    {
+        $this->seek($offset, $whence);
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function moveToStart(): static
+    {
+        return $this->moveTo(0);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function moveToEnd(): static
+    {
+        return $this->moveTo(0, SEEK_END);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function position(): int
     {
         return $this->tell();
@@ -265,7 +404,9 @@ abstract class Stream implements
      */
     public function passThrough(): int
     {
-        // TODO: Implement passThrough() method.
+        $this->assertNotDetached('Unable output remaining data');
+
+        return fpassthru($this->resource());
     }
 
     /**
@@ -273,7 +414,14 @@ abstract class Stream implements
      */
     public function setBlocking(bool $block): static
     {
-        // TODO: Implement setBlocking() method.
+        $this->assertNotDetached('Unable set blocking mode');
+
+        $result = stream_set_blocking($this->resource(), $block);
+        if ($result === false) {
+            throw new StreamException(sprintf('Could not set stream blocking mode to %s', var_export($block, true)));
+        }
+
+        return $this;
     }
 
     /**
@@ -281,7 +429,14 @@ abstract class Stream implements
      */
     public function setTimeout(int $seconds, int $microseconds = 0): static
     {
-        // TODO: Implement setTimeout() method.
+        $this->assertNotDetached('Unable set timeout');
+
+        $result = stream_set_timeout($this->resource(), $seconds, $microseconds);
+        if ($result === false) {
+            throw new StreamException(sprintf('Could not set stream timeout to %d seconds and %d microseconds', $seconds, $microseconds));
+        }
+
+        return $this;
     }
 
     /**
@@ -289,7 +444,7 @@ abstract class Stream implements
      */
     public function resource()
     {
-        // TODO: Implement resource() method.
+        return $this->stream;
     }
 
     /**
@@ -305,7 +460,9 @@ abstract class Stream implements
      */
     public function supportsLocking(): bool
     {
-        // TODO: Implement supportsLocking() method.
+        $this->assertNotDetached('Unable to determine locking support');
+
+        return stream_supports_lock($this->resource());
     }
 
     /**
@@ -313,7 +470,7 @@ abstract class Stream implements
      */
     public function timedOut(): bool
     {
-        // TODO: Implement timedOut() method.
+        return $this->meta()->get('timed_out', false);
     }
 
     /**
@@ -321,7 +478,7 @@ abstract class Stream implements
      */
     public function blocked(): bool
     {
-        // TODO: Implement blocked() method.
+        return $this->meta()->get('blocked', false);
     }
 
     /**
@@ -329,7 +486,27 @@ abstract class Stream implements
      */
     public function unreadBytes(): int
     {
-        // TODO: Implement unreadBytes() method.
+        return $this->meta()->get('unread_bytes', 0);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function id(): int
+    {
+        $this->assertNotDetached('Unable to obtain resource id');
+
+        return get_resource_id($this->resource());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function type(): string
+    {
+        $this->assertNotDetached('Unable to obtain resource type');
+
+        return get_resource_type($this->resource());
     }
 
     /**
@@ -337,7 +514,7 @@ abstract class Stream implements
      */
     public function streamType(): string
     {
-        // TODO: Implement streamType() method.
+        return $this->meta()->get('stream_type', 'unknown');
     }
 
     /**
@@ -345,7 +522,7 @@ abstract class Stream implements
      */
     public function wrapperType(): string
     {
-        // TODO: Implement wrapperType() method.
+        return $this->meta()->get('wrapper_type', 'unknown');
     }
 
     /**
@@ -353,7 +530,7 @@ abstract class Stream implements
      */
     public function wrapperData(): mixed
     {
-        // TODO: Implement wrapperData() method.
+        return $this->meta()->get('wrapper_data');
     }
 
     /**
@@ -361,7 +538,7 @@ abstract class Stream implements
      */
     public function mode(): string
     {
-        // TODO: Implement mode() method.
+        return $this->meta()->get('mode', 'unknown');
     }
 
     /**
@@ -369,7 +546,7 @@ abstract class Stream implements
      */
     public function uri(): string
     {
-        // TODO: Implement uri() method.
+        return $this->meta()->get('uri', 'unknown');
     }
 
     /**
@@ -377,7 +554,9 @@ abstract class Stream implements
      */
     public function isLocal(): bool
     {
-        // TODO: Implement isLocal() method.
+        $this->assertNotDetached('Unable to determine if stream is local');
+
+        return stream_is_local($this->resource());
     }
 
     /**
@@ -385,7 +564,9 @@ abstract class Stream implements
      */
     public function isTTY(): bool
     {
-        // TODO: Implement isTTY() method.
+        $this->assertNotDetached('Unable to determine if stream is a TTY');
+
+        return stream_isatty($this->resource());
     }
 
     /**
@@ -393,7 +574,9 @@ abstract class Stream implements
      */
     public function getFormattedSize(int $precision = 2): string
     {
-        // TODO: Implement getFormattedSize() method.
+        $bytes = $this->getSize() ?? 0;
+
+        return Memory::format($bytes, $precision);
     }
 
     /**
@@ -421,7 +604,11 @@ abstract class Stream implements
      */
     public function rawMeta(): array
     {
-        return stream_get_meta_data($this->stream);
+        if ($this->isDetached()) {
+            return [];
+        }
+
+        return stream_get_meta_data($this->resource());
     }
 
     /**
@@ -429,7 +616,25 @@ abstract class Stream implements
      */
     public function __debugInfo(): array
     {
-        // TODO: Implement __debugInfo() method.
+        $id = null;
+        $type = null;
+        $local = null;
+        $isTTY = null;
+
+        if (!$this->isDetached()) {
+            $id = $this->id();
+            $type = $this->type();
+            $local = $this->isLocal();
+            $isTTY = $this->isTTY();
+        }
+
+        return array_merge([
+            'resource_id' => $id,
+            'resource_type' => $type,
+            'is_local' => $local,
+            'isTTY' => $isTTY,
+            'size_formatted' => $this->getFormattedSize()
+        ], $this->meta()->all());
     }
 
     /*****************************************************************
@@ -493,5 +698,59 @@ abstract class Stream implements
         }
 
         return $this->makeMetaRepository();
+    }
+
+    /**
+     * Assert stream is not detached
+     *
+     * @param  string  $message  [optional]
+     *
+     * @return self
+     *
+     * @throws StreamIsDetached
+     */
+    protected function assertNotDetached(string $message = 'cannot perform operation'): static
+    {
+        if ($this->isDetached()) {
+            throw new StreamIsDetached('Stream is detached: ' . $message);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Assert stream is writable
+     *
+     * @param  string  $message  [optional]
+     *
+     * @return self
+     *
+     * @throws StreamNotWritable
+     */
+    protected function assertIsWritable(string $message = 'cannot perform operation'): static
+    {
+        if (!$this->isWritable()) {
+            throw new StreamNotWritable('Stream is not writable: ' . $message);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Assert stream is readable
+     *
+     * @param  string  $message  [optional]
+     *
+     * @return self
+     *
+     * @throws StreamNotWritable
+     */
+    protected function assertIsReadable(string $message = 'cannot perform operation'): static
+    {
+        if (!$this->isReadable()) {
+            throw new StreamNotReadable('Stream is not readable: ' . $message);
+        }
+
+        return $this;
     }
 }
