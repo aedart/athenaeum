@@ -9,7 +9,9 @@ use Aedart\Contracts\Streams\Locks\LockFactoryAware;
 use Aedart\Contracts\Streams\Locks\LockTypes;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
+use Aedart\Streams\Meta\Repository as DefaultMetaRepository;
 use Aedart\Streams\Traits\LockFactoryTrait;
+use Aedart\Support\Facades\IoCFacade;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
 
 /**
@@ -382,6 +384,16 @@ abstract class Stream implements
     public function getDefaultLockFactory(): Factory|null
     {
         // TODO: Returns a default lock factory
+    }
+
+    /**
+     * Returns a new meta repository instance
+     *
+     * @return Repository
+     */
+    public function makeMetaRepository(): Repository
+    {
+        return IoCFacade::tryMake(Repository::class, new DefaultMetaRepository());
     }
 
     /*****************************************************************
