@@ -152,13 +152,28 @@ interface Stream extends StreamInterface,
     ): mixed;
 
     /**
+     * Alias for {@see seek()}
+     *
+     * Method return this stream instance after seek operation
+     * has been completed.
+     *
+     * @param  int  $offset
+     * @param  int  $whence  [optional]
+     *
+     * @return self
+     *
+     * @throws StreamException
+     */
+    public function moveTo(int $offset, int $whence = SEEK_SET): static;
+
+    /**
      * Move position to the beginning of the stream
      *
      * @return self
      *
      * @throws StreamException
      */
-    public function toStart(): static;
+    public function moveToStart(): static;
 
     /**
      * Move position to the end of the stream
@@ -167,7 +182,7 @@ interface Stream extends StreamInterface,
      *
      * @throws StreamException
      */
-    public function toEnd(): static;
+    public function moveToEnd(): static;
 
     /**
      * Alias for {@see tell()}
