@@ -333,6 +333,20 @@ interface Stream extends StreamInterface,
     public function getFormattedSize(int $precision = 2): string;
 
     /**
+     * Set the meta repository for this stream
+     *
+     * If a meta repository was previously set, then it will be
+     * overwritten.
+     *
+     * @param  array|Repository|null  $meta  [optional] If an `array` is given, then it will be
+     *                                       used to populate a new meta repository.
+     *                                       Default to a new empty repository if `null` is given.
+     *
+     * @return static
+     */
+    public function setMetaRepository(array|Repository|null $meta = null): static;
+
+    /**
      * Returns meta for this steam
      *
      * Method is responsible for refreshing available meta-data,
