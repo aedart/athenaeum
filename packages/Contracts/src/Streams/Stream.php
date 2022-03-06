@@ -152,6 +152,24 @@ interface Stream extends StreamInterface,
     ): mixed;
 
     /**
+     * Move position to the beginning of the stream
+     *
+     * @return self
+     *
+     * @throws StreamException
+     */
+    public function toStart(): static;
+
+    /**
+     * Move position to the end of the stream
+     *
+     * @return self
+     *
+     * @throws StreamException
+     */
+    public function toEnd(): static;
+
+    /**
      * Alias for {@see tell()}
      *
      * @return int
