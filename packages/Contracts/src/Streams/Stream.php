@@ -291,11 +291,33 @@ interface Stream extends StreamInterface,
     public function unreadBytes(): int;
 
     /**
+     * Alias for {@see streamId()}
+     *
+     * @return int
+     *
+     * @throws StreamException
+     */
+    public function id(): int;
+
+    /**
+     * Returns the id of the underlying stream
+     *
+     * @see https://www.php.net/manual/en/function.get-resource-id
+     *
+     * @return int
+     *
+     * @throws StreamException
+     */
+    public function streamId(): int;
+
+    /**
      * Returns a label that describes the underlying stream implementation
      *
      * @see https://www.php.net/manual/en/function.stream-get-meta-data
      *
      * @return string
+     *
+     * @throws StreamException
      */
     public function streamType(): string;
 
