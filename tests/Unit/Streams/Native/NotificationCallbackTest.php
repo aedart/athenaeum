@@ -41,7 +41,7 @@ class NotificationCallbackTest extends UnitTestCase
 
         // NOTE: It appears that notification callbacks are ONLY supported by
         // http(s):// and ftp(s):// stream wrappers!
-        $stream = fopen('http://localhost', 'r', false, $context);
+        $stream = fopen('https://google.com', 'r', false, $context);
         fclose($stream);
 
         $this->assertTrue($hasInvoked);
