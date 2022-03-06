@@ -9,6 +9,7 @@ use Aedart\Contracts\Streams\Locks\LockFactoryAware;
 use Aedart\Contracts\Streams\Locks\LockTypes;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
+use Aedart\Streams\Exceptions\InvalidStreamResource;
 use Aedart\Streams\Meta\Repository as DefaultMetaRepository;
 use Aedart\Streams\Traits\LockFactoryTrait;
 use Aedart\Support\Facades\IoCFacade;
@@ -27,11 +28,48 @@ abstract class Stream implements
     use LockFactoryTrait;
 
     /**
+     * The actual resource stream
+     *
+     * @var resource
+     */
+    protected $stream;
+
+    /**
+     * Stream meta
+     *
+     * @var Repository
+     */
+    protected Repository $meta;
+
+    /**
+     * Creates a new stream instance
+     *
+     * @param resource $stream
+     * @param  array|Repository|null  $meta  [optional]
+     *
+     * @throws InvalidStreamResource
+     */
+    public function __construct($stream, array|Repository|null $meta = null)
+    {
+        $this
+            ->setStream($stream)
+            ->setMetaRepository($meta);
+    }
+
+    /**
+     * Stream destructor
+     */
+    public function __destruct()
+    {
+        $this->close();
+    }
+
+    /**
      * @inheritDoc
      */
     public static function make($stream, array|Repository|null $meta = null): static
     {
-        // TODO: Implement make() method.
+        return new static($stream, $meta);
     }
 
     /**
@@ -39,7 +77,7 @@ abstract class Stream implements
      */
     public static function makeFrom(PsrStreamInterface $stream, array|Repository|null $meta = null): static
     {
-        // TODO: Implement makeFrom() method.
+        return static::make($stream->detach(), $meta);
     }
 
     /**
@@ -47,7 +85,15 @@ abstract class Stream implements
      */
     public function detach()
     {
-        // TODO: Implement detach() method.
+        if ($this->isDetached()) {
+            return null;
+        }
+
+        $resource = $this->stream;
+        unset($this->stream);
+        unset($this->meta);
+
+        return $resource;
     }
 
     /**
@@ -251,7 +297,7 @@ abstract class Stream implements
      */
     public function isDetached(): bool
     {
-        // TODO: Implement isDetached() method.
+        return !isset($this->stream);
     }
 
     /**
@@ -353,9 +399,21 @@ abstract class Stream implements
     /**
      * @inheritDoc
      */
+    public function setMetaRepository(Repository|array|null $meta = null): static
+    {
+        $this->meta = $this->resolveMeta($meta);
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function meta(): Repository
     {
-        // TODO: Implement meta() method.
+        return $this
+            ->meta
+            ->merge($this->rawMeta());
     }
 
     /**
@@ -363,7 +421,7 @@ abstract class Stream implements
      */
     public function rawMeta(): array
     {
-        // TODO: Implement rawMeta() method.
+        return stream_get_meta_data($this->stream);
     }
 
     /**
@@ -400,4 +458,40 @@ abstract class Stream implements
      * Internals
      ****************************************************************/
 
+    /**
+     * @param  mixed  $stream
+     *
+     * @return self
+     */
+    protected function setStream(mixed $stream): static
+    {
+        if (!is_resource($stream)) {
+            throw new InvalidStreamResource('provided stream is not a resource');
+        }
+
+        $this->stream = $stream;
+
+        return $this;
+    }
+
+    /**
+     * Resolves provided meta
+     *
+     * @param  array|Repository|null  $meta  [optional]
+     *
+     * @return Repository
+     */
+    protected function resolveMeta(array|Repository|null $meta = null): Repository
+    {
+        if (is_array($meta)) {
+            return $this->makeMetaRepository()
+                ->merge($meta);
+        }
+
+        if ($meta instanceof Repository) {
+            return $meta;
+        }
+
+        return $this->makeMetaRepository();
+    }
 }

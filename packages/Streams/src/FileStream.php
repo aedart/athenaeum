@@ -6,6 +6,7 @@ use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
+use Aedart\Streams\Exceptions\CannotOpenStream;
 
 /**
  * File Stream
@@ -20,7 +21,13 @@ class FileStream extends Stream implements FileStreamInterface
      */
     public static function open(string $filename, string $mode, bool $useIncludePath = false, $context = null): static
     {
-        // TODO: Implement open() method.
+        $stream = fopen($filename, $mode, $useIncludePath, $context);
+
+        if ($stream === false) {
+            throw new CannotOpenStream(sprintf('Stream could not be opened for %s (mode %s)', $filename, $mode));
+        }
+
+        return static::make($stream);
     }
 
     /**
@@ -28,7 +35,7 @@ class FileStream extends Stream implements FileStreamInterface
      */
     public static function openMemory(string $mode = 'r+b', $context = null): static
     {
-        // TODO: Implement openMemory() method.
+        return static::open('php://memory', $mode, false, $context);
     }
 
     /**
@@ -36,7 +43,11 @@ class FileStream extends Stream implements FileStreamInterface
      */
     public static function openTemporary(string $mode = 'r+b', int|null $maximumMemory = null, $context = null): static
     {
-        // TODO: Implement openTemporary() method.
+        $filename = isset($maximumMemory)
+            ? "php://temp/maxmemory:$maximumMemory"
+            : 'php://temp';
+
+        return static::open($filename, $mode, false, $context);
     }
 
     /**
@@ -44,7 +55,11 @@ class FileStream extends Stream implements FileStreamInterface
      */
     public function close()
     {
-        // TODO: Implement close() method.
+        $resource = $this->detach();
+
+        if (isset($resource) && is_resource($resource)) {
+            fclose($resource);
+        }
     }
 
     /**
