@@ -342,7 +342,7 @@ interface Stream extends StreamInterface,
      *                                       used to populate a new meta repository.
      *                                       Default to a new empty repository if `null` is given.
      *
-     * @return static
+     * @return self
      */
     public function setMetaRepository(array|Repository|null $meta = null): static;
 
