@@ -5,7 +5,9 @@ namespace Aedart\Streams;
 use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
+use Aedart\Contracts\Streams\Locks\LockOperations;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
+use Aedart\Streams\Concerns;
 use Aedart\Streams\Exceptions\CannotOpenStream;
 
 /**
@@ -14,8 +16,12 @@ use Aedart\Streams\Exceptions\CannotOpenStream;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Streams
  */
-class FileStream extends Stream implements FileStreamInterface
+class FileStream extends Stream implements
+    FileStreamInterface,
+    LockOperations
 {
+    use Concerns\Locking;
+
     /**
      * @inheritDoc
      */

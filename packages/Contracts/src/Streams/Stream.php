@@ -116,44 +116,6 @@ interface Stream extends StreamInterface,
     public function rewindAfter(callable $operation): mixed;
 
     /**
-     * Performs an operation on stream safely
-     *
-     * Method attempts to acquire a lock before invoking given operation
-     * callback. Upon completion of operation, the lock is automatically
-     * released.
-     *
-     * In case that the operation callback fails (exception is thrown), then
-     * lock will also automatically be released, before re-throwing the
-     * exception.
-     *
-     * **Caution**: _Not all stream types can be locked. Use {@see supportsLocking()} to determine
-     * if stream can be locked._
-     *
-     * **Block mode**: _Stream's blocking or non-blocking mode is NOT set by this method!_
-     *
-     * @see supportsLocking()
-     * @see setBlocking()
-     *
-     * @param  callable  $operation Callback to invoke. This stream instance and acquired {@see Lock} are given
-     *                              as callback arguments.
-     * @param  bool  $restorePosition  [optional] If true, read/write pointer position is
-     *                                 restored, after callback has been invoked.
-     * @param  int  $lock  [optional] The type of lock. {@see LockTypes::EXCLUSIVE} lock (writer) or {@see LockTypes::SHARED} lock (reader)
-     * @param  int  $acquireLockTimeout  [optional] Timeout to acquire lock in microseconds. 1 second = 1.000.000 microseconds
-     *
-     * @return mixed Operation callback return value, if any
-     *
-     * @throws StreamException
-     * @throws LockException
-     */
-    public function performSafe(
-        callable $operation,
-        bool $restorePosition = true,
-        int $lock = LockTypes::EXCLUSIVE,
-        int $acquireLockTimeout = 500_000
-    ): mixed;
-
-    /**
      * Alias for {@see seek()}
      *
      * Method return this stream instance after seek operation

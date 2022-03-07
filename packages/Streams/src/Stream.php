@@ -3,7 +3,6 @@
 namespace Aedart\Streams;
 
 use Aedart\Contracts\Streams\Locks\Factory as LockFactory;
-use Aedart\Contracts\Streams\Locks\LockTypes;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Contracts\Streams\Transactions\Factory as TransactionFactory;
@@ -14,7 +13,6 @@ use Aedart\Streams\Exceptions\StreamException;
 use Aedart\Streams\Exceptions\StreamIsDetached;
 use Aedart\Streams\Exceptions\StreamNotWritable;
 use Aedart\Streams\Meta\Repository as DefaultMetaRepository;
-use Aedart\Streams\Traits\LockFactoryTrait;
 use Aedart\Streams\Traits\TransactionFactoryTrait;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Utils\Memory;
@@ -28,7 +26,6 @@ use Psr\Http\Message\StreamInterface as PsrStreamInterface;
  */
 abstract class Stream implements StreamInterface
 {
-    use LockFactoryTrait;
     use TransactionFactoryTrait;
 
     /**
@@ -352,18 +349,6 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function performSafe(
-        callable $operation,
-        bool $restorePosition = true,
-        int $lock = LockTypes::EXCLUSIVE,
-        int $acquireLockTimeout = 500_000
-    ): mixed {
-        // TODO: Implement performSafe() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function positionAt(int $offset, int $whence = SEEK_SET): static
     {
         $this->seek($offset, $whence);
@@ -636,14 +621,6 @@ abstract class Stream implements StreamInterface
     /*****************************************************************
      * Defaults
      ****************************************************************/
-
-    /**
-     * @inheritDoc
-     */
-    public function getDefaultLockFactory(): LockFactory|null
-    {
-        // TODO: Return a default lock factory
-    }
 
     /**
      * @inheritDoc
