@@ -105,17 +105,16 @@ interface Stream extends StreamInterface,
     public function parse(string $format, mixed &...$vars): array|int|false|null;
 
     /**
-     * Performs an operation on stream
+     * Performs an operation and rewinds the position afterwards
      *
      * @param  callable  $operation Callback to invoke. This stream is given as callback argument
-     * @param  bool  $restorePosition  [optional] If true, read/write pointer position is
      *                                 restored, after callback has been invoked.
      *
-     * @return mixed Operation callback return value, if any
+     * @return mixed Callback return value, if any
      *
      * @throws StreamException
      */
-    public function perform(callable $operation, bool $restorePosition = true): mixed;
+    public function rewindAfter(callable $operation): mixed;
 
     /**
      * Performs an operation on stream safely
@@ -199,9 +198,6 @@ interface Stream extends StreamInterface,
 
     /**
      * Output all remaining data
-     *
-     * Method will automatically rewind and restore position
-     * after completion of operation.
      *
      * @see https://www.php.net/manual/en/function.fpassthru
      *

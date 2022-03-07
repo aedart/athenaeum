@@ -340,15 +340,11 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function perform(callable $operation, bool $restorePosition = true): mixed
+    public function rewindAfter(callable $operation): mixed
     {
-        $original = $this->tell();
-
         $result = $operation($this);
 
-        if ($restorePosition) {
-            $this->seek($original);
-        }
+        $this->rewind();
 
         return $result;
     }
