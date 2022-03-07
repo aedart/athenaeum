@@ -22,10 +22,11 @@ interface Factory
      * @param  Stream  $stream
      * @param  string|null  $driver  [optional] Name of driver to use. If none is given,
      *                               then a default driver will be used.
+     * @param  array  $options  [optional] Driver specific options
      *
      * @return Lock
      *
      * @throws LockException
      */
-    public function create(Stream $stream, string|null $driver = null): Lock;
+    public function create(Stream $stream, string|null $driver = null, array $options = []): Lock;
 }
