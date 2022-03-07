@@ -108,7 +108,6 @@ interface Stream extends StreamInterface,
      * Performs an operation and rewinds the position afterwards
      *
      * @param  callable  $operation Callback to invoke. This stream is given as callback argument
-     *                                 restored, after callback has been invoked.
      *
      * @return mixed Callback return value, if any
      *
