@@ -2,7 +2,6 @@
 
 namespace Aedart\Streams;
 
-use Aedart\Contracts\Streams\Locks\Factory as LockFactory;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Contracts\Streams\Transactions\Factory as TransactionFactory;
@@ -26,8 +25,6 @@ use Psr\Http\Message\StreamInterface as PsrStreamInterface;
  */
 abstract class Stream implements StreamInterface
 {
-    use TransactionFactoryTrait;
-
     /**
      * Readable modes regex
      *
@@ -621,14 +618,6 @@ abstract class Stream implements StreamInterface
     /*****************************************************************
      * Defaults
      ****************************************************************/
-
-    /**
-     * @inheritDoc
-     */
-    public function getDefaultTransactionFactory(): TransactionFactory|null
-    {
-        // TODO: Return a default transaction factory
-    }
 
     /**
      * Returns a new meta repository instance
