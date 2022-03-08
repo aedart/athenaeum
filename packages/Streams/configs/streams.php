@@ -26,8 +26,16 @@ return [
     'locks' => [
 
         'default' => [
-            'driver' => null, // TODO...
-            'options' => []
+            'driver' => \Aedart\Streams\Locks\Drivers\FlockLockDriver::class,
+            'options' => [
+
+                // Sleep duration between acquire lock polling.
+                // Duration in microseconds (default 0.01 seconds)
+                'sleep' => 10_000,
+
+                // State whether to throw exception if timeout reached, or not...
+                'fail_on_timeout' => true
+            ]
         ]
     ],
 
