@@ -26,6 +26,16 @@ class StreamServiceProvider extends ServiceProvider implements DeferrableProvide
     }
 
     /**
+     * Bootstrap this service
+     */
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/../../configs/streams.php' => config_path('streams.php')
+        ], 'config');
+    }
+
+    /**
      * @inheritDoc
      */
     public function provides()
