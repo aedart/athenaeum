@@ -35,7 +35,7 @@ interface LockOperations extends LockFactoryAware
      * @param  callable  $operation Callback to invoke. This stream instance and acquired lock are given
      *                              as callback arguments.
      * @param  int  $type  [optional] The type of lock. {@see LockTypes::EXCLUSIVE} lock (writer) or {@see LockTypes::SHARED} lock (reader).
-     * @param  int  $timeout  [optional] Timeout of acquiring lock in microseconds. 1 second = 1.000.000 microseconds.
+     * @param  float  $timeout  [optional] Timeout of acquiring lock in seconds.
      * @param  string|null  $profile  [optional] Lock profile driver to use. If `null`, then a default driver is used.
      * @param  array  $options  [optional] Lock driver specific options
      *
@@ -46,7 +46,7 @@ interface LockOperations extends LockFactoryAware
     public function lock(
         callable $operation,
         int $type = LockTypes::EXCLUSIVE,
-        int $timeout = 500_000,
+        float $timeout = 0.5,
         string|null $profile = null,
         array $options = []
     ): mixed;
@@ -59,7 +59,7 @@ interface LockOperations extends LockFactoryAware
      * @see lock()
      *
      * @param  callable  $operation
-     * @param  int  $timeout  [optional]
+     * @param  float  $timeout  [optional]
      * @param  string|null  $profile  [optional]
      * @param  array  $options  [optional]
      *
@@ -69,7 +69,7 @@ interface LockOperations extends LockFactoryAware
      */
     public function exclusiveLock(
         callable $operation,
-        int $timeout = 500_000,
+        float $timeout = 0.5,
         string|null $profile = null,
         array $options = []
     ): mixed;
@@ -82,7 +82,7 @@ interface LockOperations extends LockFactoryAware
      * @see lock()
      *
      * @param  callable  $operation
-     * @param  int  $timeout  [optional]
+     * @param  float  $timeout  [optional]
      * @param  string|null  $profile  [optional]
      * @param  array  $options  [optional]
      *
@@ -92,7 +92,7 @@ interface LockOperations extends LockFactoryAware
      */
     public function sharedLock(
         callable $operation,
-        int $timeout = 500_000,
+        float $timeout = 0.5,
         string|null $profile = null,
         array $options = []
     ): mixed;
