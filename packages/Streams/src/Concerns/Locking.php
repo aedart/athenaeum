@@ -25,7 +25,7 @@ trait Locking
     public function lock(
         callable $operation,
         int $type = LockTypes::EXCLUSIVE,
-        int $timeout = 500_000,
+        float $timeout = 0.5,
         string|null $profile = null,
         array $options = []
     ): mixed
@@ -38,7 +38,7 @@ trait Locking
      */
     public function exclusiveLock(
         callable $operation,
-        int $timeout = 500_000,
+        float $timeout = 0.5,
         string|null $profile = null,
         array $options = []
     ): mixed
@@ -57,7 +57,7 @@ trait Locking
      */
     public function sharedLock(
         callable $operation,
-        int $timeout = 500_000,
+        float $timeout = 0.5,
         string|null $profile = null,
         array $options = []
     ): mixed

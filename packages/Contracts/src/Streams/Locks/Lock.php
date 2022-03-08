@@ -23,14 +23,14 @@ interface Lock
      * Method attempts to acquire a lock on stream or fails if unable to.
      *
      * @param  int  $type  [optional] {@see LockTypes::EXCLUSIVE} lock (writer) or {@see LockTypes::SHARED} lock (reader)
-     * @param  int  $timeout  [optional] Timeout in microseconds. 1 second = 1.000.000 microseconds
+     * @param  float  $timeout  [optional] Timeout in seconds.
      *
      * @return bool
      *
      * @throws LockException If unable to acquire lock
      * @throws InvalidArgumentException If `$type` or `$timeout` are invalid
      */
-    public function acquire(int $type = LockTypes::EXCLUSIVE, int $timeout = 500_000): bool;
+    public function acquire(int $type = LockTypes::EXCLUSIVE, float $timeout = 0.5): bool;
 
     /**
      * Release the lock
