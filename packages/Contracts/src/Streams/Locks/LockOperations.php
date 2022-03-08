@@ -67,7 +67,7 @@ interface LockOperations extends LockFactoryAware
      *
      * @throws Throwable
      */
-    public function lockExclusive(
+    public function exclusiveLock(
         callable $operation,
         int $timeout = 500_000,
         string|null $driver = null,
@@ -90,7 +90,7 @@ interface LockOperations extends LockFactoryAware
      *
      * @throws Throwable
      */
-    public function lockShared(
+    public function sharedLock(
         callable $operation,
         int $timeout = 500_000,
         string|null $driver = null,

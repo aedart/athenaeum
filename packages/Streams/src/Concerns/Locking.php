@@ -36,7 +36,7 @@ trait Locking
     /**
      * @inheritdoc
      */
-    public function lockExclusive(
+    public function exclusiveLock(
         callable $operation,
         int $timeout = 500_000,
         string|null $driver = null,
@@ -55,7 +55,7 @@ trait Locking
     /**
      * @inheritdoc
      */
-    public function lockShared(
+    public function sharedLock(
         callable $operation,
         int $timeout = 500_000,
         string|null $driver = null,
