@@ -109,6 +109,42 @@ interface Stream extends StreamInterface,
     public function rewindAfter(callable $operation): mixed;
 
     /**
+     * Apply a callback, when result is true
+     *
+     * Method is inverse of {@see unless}.
+     *
+     * Any value returned by the callback methods, is ignored.
+     *
+     * @param  bool|callable  $result E.g. the boolean result of a condition. If callback is given, then its
+     *                              resulting value is used as result.
+     * @param  callable  $callback The callback to apply, if result is `true`.
+     *                          Stream instance is given as callback's argument.
+     * @param  callable|null  $otherwise [optional] Callback to apply, if result evaluates is `false`.
+     *                          Stream instance is given as callback's argument.
+     *
+     * @return self
+     */
+    public function when(bool|callable $result, callable $callback, callable|null $otherwise = null): static;
+
+    /**
+     * Apply a callback, unless result is true
+     *
+     * Method is inverse of {@see when}.
+     *
+     * Any value returned by the callback methods, is ignored.
+     *
+     * @param  bool|callable  $result E.g. the boolean result of a condition. If callback is given, then its
+     *                              resulting value is used as result.
+     * @param  callable  $callback The callback to apply, if result is `false`.
+     *                          Stream instance is given as callback's argument.
+     * @param  callable|null  $otherwise [optional] Callback to apply, if result evaluates is `true`.
+     *                          Stream instance is given as callback's argument.
+     *
+     * @return self
+     */
+    public function unless(bool|callable $result, callable $callback, callable|null $otherwise = null): static;
+
+    /**
      * Alias for {@see seek()}
      *
      * Method return this stream instance after seek operation

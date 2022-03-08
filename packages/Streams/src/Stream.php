@@ -344,6 +344,36 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
+    public function when(callable|bool $result, callable $callback, ?callable $otherwise = null): static
+    {
+        if (is_callable($result)) {
+            $result = $result($this);
+        }
+
+        if ($result === true) {
+            $callback($this);
+        } elseif (isset($otherwise)) {
+            $otherwise($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function unless(callable|bool $result, callable $callback, ?callable $otherwise = null): static
+    {
+        if (is_callable($result)) {
+            $result = $result($this);
+        }
+
+        return $this->when(!$result, $callback, $otherwise);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function positionAt(int $offset, int $whence = SEEK_SET): static
     {
         $this->seek($offset, $whence);
