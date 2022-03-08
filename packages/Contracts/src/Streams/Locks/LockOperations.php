@@ -36,7 +36,7 @@ interface LockOperations extends LockFactoryAware
      *                              as callback arguments.
      * @param  int  $type  [optional] The type of lock. {@see LockTypes::EXCLUSIVE} lock (writer) or {@see LockTypes::SHARED} lock (reader).
      * @param  int  $timeout  [optional] Timeout of acquiring lock in microseconds. 1 second = 1.000.000 microseconds.
-     * @param  string|null  $driver  [optional] Lock driver to use. If `null`, then a default driver is used.
+     * @param  string|null  $profile  [optional] Lock profile driver to use. If `null`, then a default driver is used.
      * @param  array  $options  [optional] Lock driver specific options
      *
      * @return mixed Callback return value, if any
@@ -47,7 +47,7 @@ interface LockOperations extends LockFactoryAware
         callable $operation,
         int $type = LockTypes::EXCLUSIVE,
         int $timeout = 500_000,
-        string|null $driver = null,
+        string|null $profile = null,
         array $options = []
     ): mixed;
 
@@ -60,7 +60,7 @@ interface LockOperations extends LockFactoryAware
      *
      * @param  callable  $operation
      * @param  int  $timeout  [optional]
-     * @param  string|null  $driver  [optional]
+     * @param  string|null  $profile  [optional]
      * @param  array  $options  [optional]
      *
      * @return mixed
@@ -70,7 +70,7 @@ interface LockOperations extends LockFactoryAware
     public function exclusiveLock(
         callable $operation,
         int $timeout = 500_000,
-        string|null $driver = null,
+        string|null $profile = null,
         array $options = []
     ): mixed;
 
@@ -83,7 +83,7 @@ interface LockOperations extends LockFactoryAware
      *
      * @param  callable  $operation
      * @param  int  $timeout  [optional]
-     * @param  string|null  $driver  [optional]
+     * @param  string|null  $profile  [optional]
      * @param  array  $options  [optional]
      *
      * @return mixed
@@ -93,7 +93,7 @@ interface LockOperations extends LockFactoryAware
     public function sharedLock(
         callable $operation,
         int $timeout = 500_000,
-        string|null $driver = null,
+        string|null $profile = null,
         array $options = []
     ): mixed;
 }
