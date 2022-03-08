@@ -4,7 +4,6 @@ namespace Aedart\Streams;
 
 use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
-use Aedart\Contracts\Streams\Transactions\Factory as TransactionFactory;
 use Aedart\Streams\Exceptions\InvalidStreamResource;
 use Aedart\Streams\Exceptions\StreamNotReadable;
 use Aedart\Streams\Exceptions\StreamNotSeekable;
@@ -12,7 +11,6 @@ use Aedart\Streams\Exceptions\StreamException;
 use Aedart\Streams\Exceptions\StreamIsDetached;
 use Aedart\Streams\Exceptions\StreamNotWritable;
 use Aedart\Streams\Meta\Repository as DefaultMetaRepository;
-use Aedart\Streams\Traits\TransactionFactoryTrait;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Utils\Memory;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
