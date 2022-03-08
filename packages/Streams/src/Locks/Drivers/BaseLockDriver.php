@@ -10,6 +10,7 @@ use Aedart\Streams\Exceptions\Locks\LockFailure;
 use Aedart\Streams\Exceptions\Locks\LockReleaseFailure;
 use Aedart\Streams\Exceptions\Locks\StreamCannotBeLocked;
 use Aedart\Utils\Arr;
+use InvalidArgumentException;
 use Throwable;
 
 /**
@@ -72,23 +73,25 @@ abstract class BaseLockDriver implements Lock
      */
     public function acquire(int $type = LockTypes::EXCLUSIVE, int $timeout = 500_000): bool
     {
+        // Skip if already acquired
+        if ($this->isAcquired()) {
+            return true;
+        }
+
         if (!$this->streamSupportsLocking()) {
             throw new StreamCannotBeLocked('Stream does not support locking');
         }
 
-        if ($this->isAcquired()) {
-            throw new StreamCannotBeLocked('Stream is already locked');
+        if ($timeout < 0) {
+            throw new InvalidArgumentException(sprintf('Timeout to acquire lock cannot be negative. %d given', $timeout));
         }
 
         try {
             $acquired = $this->acquireLock($this->getStream(), $type, $timeout);
 
-            if ($acquired) {
-                $this->setAcquired(true);
-                return true;
-            }
+            $this->setAcquired($acquired);
 
-            return false;
+            return $acquired;
         } catch (Throwable $e) {
             throw new LockFailure($e->getMessage(), $e->getCode(), $e);
         }
