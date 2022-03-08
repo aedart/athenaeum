@@ -11,6 +11,7 @@ use Aedart\Streams\Exceptions\Locks\LockReleaseFailure;
 use Aedart\Streams\Exceptions\Locks\StreamCannotBeLocked;
 use Aedart\Utils\Arr;
 use InvalidArgumentException;
+use RuntimeException;
 use Throwable;
 
 /**
@@ -47,31 +48,31 @@ abstract class BaseLockDriver implements Lock
      *
      * @param  Stream  $stream
      * @param  int  $type  {@see LockTypes::EXCLUSIVE} lock (writer) or {@see LockTypes::SHARED} lock (reader)
-     * @param  int  $timeout  Timeout in microseconds. 1 second = 1.000.000 microseconds
+     * @param  float  $timeout  Timeout in seconds.
      *
      * @return bool
      *
      * @throws Throwable
      */
-    abstract public function acquireLock(Stream $stream, int $type, int $timeout): bool;
+    abstract public function acquireLock(Stream $stream, int $type, float $timeout): bool;
 
     /**
      * Release lock
      *
      * @param  Stream  $stream
      *
-     * @return void
+     * @return bool
      *
      * @throws Throwable
      */
-    abstract public function releaseLock(Stream $stream): void;
+    abstract public function releaseLock(Stream $stream): bool;
 
     /**
      * @inheritDoc
      *
      * @throws StreamException
      */
-    public function acquire(int $type = LockTypes::EXCLUSIVE, int $timeout = 500_000): bool
+    public function acquire(int $type = LockTypes::EXCLUSIVE, float $timeout = 0.5): bool
     {
         // Skip if already acquired
         if ($this->isAcquired()) {
@@ -108,9 +109,13 @@ abstract class BaseLockDriver implements Lock
         }
 
         try {
-            $this->releaseLock($this->getStream());
+            $released = $this->releaseLock($this->getStream());
 
-            $this->setAcquired(false);
+            $this->setAcquired($released);
+
+            if (!$released) {
+                throw new RuntimeException('Failed to release lock');
+            }
         } catch (Throwable $e) {
             throw new LockReleaseFailure($e->getMessage(), $e->getCode(), $e);
         }
