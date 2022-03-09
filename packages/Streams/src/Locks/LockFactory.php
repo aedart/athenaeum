@@ -6,6 +6,7 @@ use Aedart\Contracts\Streams\Locks\Factory;
 use Aedart\Contracts\Streams\Locks\Lock;
 use Aedart\Contracts\Streams\Stream;
 use Aedart\Streams\Exceptions\Locks\ProfileNotFound;
+use Aedart\Streams\Locks\Drivers\FlockLockDriver;
 
 /**
  * Lock Factory
@@ -16,6 +17,21 @@ use Aedart\Streams\Exceptions\Locks\ProfileNotFound;
 class LockFactory implements Factory
 {
     /**
+     * Fallback profiles, when none given
+     *
+     * @var array
+     */
+    protected array $fallbackProfiles = [
+        'default' => [
+            'driver' => FlockLockDriver::class,
+            'options' => [
+                'sleep' => 10_000,
+                'fail_on_timeout' => true
+            ]
+        ]
+    ];
+
+    /**
      * Creates a new lock factory instance
      *
      * @param  array  $profiles  [optional] List of available profiles
@@ -25,7 +41,12 @@ class LockFactory implements Factory
         protected array $profiles = [],
         protected string $defaultProfile = 'default'
     )
-    {}
+    {
+        // Set fallback profiles, when none available
+        if (empty($this->profiles)) {
+            $this->usingProfiles($this->fallbackProfiles);
+        }
+    }
 
     /**
      * @inheritDoc
@@ -42,7 +63,7 @@ class LockFactory implements Factory
         // Resolve driver class and options
         $driver = $this->profiles[$profile]['driver'];
         $options = array_merge($this->profiles[$profile]['options'], $options);
-        
+
         // Build and return lock instance
         return new $driver($stream, $options);
     }
