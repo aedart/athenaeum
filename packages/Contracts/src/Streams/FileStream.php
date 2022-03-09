@@ -100,7 +100,7 @@ interface FileStream extends Stream
      * @param  int|null  $length  [optional] Maximum bytes to copy. By default, all bytes left are copied
      * @param  int  $offset  [optional] The offset where to start to copy data
      *
-     * @return static Provided target stream with this stream's contents copied
+     * @return static Provided target (the copied stream) with this stream's contents copied
      *
      * @throws StreamException
      */
