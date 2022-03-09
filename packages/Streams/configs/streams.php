@@ -50,8 +50,23 @@ return [
     'transactions' => [
 
         'default' => [
-            'driver' => null, // TODO...
-            'options' => []
+            'driver' => \Aedart\Streams\Transactions\Drivers\CopyWriteReplaceDriver::class,
+            'options' => [
+                // The maximum memory size, before processed stream is written to
+                // a temporary file by PHP.
+                'maxMemory' => 5 * \Aedart\Contracts\Streams\BufferSizes::BUFFER_1MB,
+
+                // When true, a physical backup of the target stream will be created.
+                // (This is NOT the same as the temporary file that is processed!)
+                'backup' => true,
+
+                // Location of where backup files are to be stored.
+                'backup_directory' => storage_path('backups'),
+
+                // When true and commit is successful, backup file is automatically
+                // removed. Has no effect if backup is set to false.
+                'remove_backup_after_commit' => false,
+            ]
         ]
     ]
 ];
