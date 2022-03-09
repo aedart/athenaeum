@@ -2,8 +2,11 @@
 
 namespace Aedart\Streams\Concerns;
 
+use Aedart\Contracts\Streams\Locks\Factory;
 use Aedart\Contracts\Streams\Locks\LockTypes;
+use Aedart\Streams\Locks\LockFactory;
 use Aedart\Streams\Traits\LockFactoryTrait;
+use Aedart\Support\Facades\IoCFacade;
 
 /**
  * Concerns Locking
@@ -16,8 +19,6 @@ use Aedart\Streams\Traits\LockFactoryTrait;
 trait Locking
 {
     use LockFactoryTrait;
-
-    // TODO: DEFAULT LOCK FACTORY...
 
     /**
      * @inheritdoc
@@ -69,5 +70,13 @@ trait Locking
             $profile,
             $options
         );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDefaultLockFactory(): Factory|null
+    {
+        return IoCFacade::tryMake(Factory::class, new LockFactory());
     }
 }

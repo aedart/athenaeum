@@ -3,6 +3,7 @@
 namespace Aedart\Streams\Traits;
 
 use Aedart\Contracts\Streams\Locks\Factory;
+use Aedart\Support\Facades\IoCFacade;
 
 /**
  * Lock Factory Trait
@@ -69,6 +70,6 @@ trait LockFactoryTrait
      */
     public function getDefaultLockFactory(): Factory|null
     {
-        return null;
+        return IoCFacade::tryMake(Factory::class);
     }
 }
