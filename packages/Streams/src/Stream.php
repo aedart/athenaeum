@@ -357,18 +357,6 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function rewindAfter(callable $operation): mixed
-    {
-        $result = $operation($this);
-
-        $this->rewind();
-
-        return $result;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function when(callable|bool $result, callable $callback, ?callable $otherwise = null): static
     {
         if (is_callable($result)) {
@@ -394,6 +382,32 @@ abstract class Stream implements StreamInterface
         }
 
         return $this->when(!$result, $callback, $otherwise);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function rewindAfter(callable $operation): mixed
+    {
+        $result = $operation($this);
+
+        $this->rewind();
+
+        return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function restorePositionAfter(callable $operation): mixed
+    {
+        $original = $this->position();
+
+        $result = $operation($this);
+
+        $this->positionAt($original);
+
+        return $result;
     }
 
     /**

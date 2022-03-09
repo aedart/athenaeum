@@ -111,17 +111,6 @@ interface Stream extends StreamInterface,
     public function parse(string $format, mixed &...$vars): array|int|false|null;
 
     /**
-     * Performs an operation and rewinds the position afterwards
-     *
-     * @param  callable  $operation Callback to invoke. This stream is given as callback argument
-     *
-     * @return mixed Callback return value, if any
-     *
-     * @throws StreamException
-     */
-    public function rewindAfter(callable $operation): mixed;
-
-    /**
      * Apply a callback, when result is true
      *
      * Method is inverse of {@see unless}.
@@ -156,6 +145,28 @@ interface Stream extends StreamInterface,
      * @return self
      */
     public function unless(bool|callable $result, callable $callback, callable|null $otherwise = null): static;
+
+    /**
+     * Performs an operation and rewinds the position afterwards
+     *
+     * @param  callable  $operation Callback to invoke. This stream is given as callback argument
+     *
+     * @return mixed Callback return value, if any
+     *
+     * @throws StreamException
+     */
+    public function rewindAfter(callable $operation): mixed;
+
+    /**
+     * Performs an operation and restores the position afterwards
+     *
+     * @param  callable  $operation Callback to invoke. This stream is given as callback argument
+     *
+     * @return mixed Callback return value, if any
+     *
+     * @throws StreamException
+     */
+    public function restorePositionAfter(callable $operation): mixed;
 
     /**
      * Alias for {@see seek()}
