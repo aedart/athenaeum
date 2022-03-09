@@ -31,7 +31,23 @@ trait Locking
         array $options = []
     ): mixed
     {
-        // TODO: Implement method
+        $lock = $this->getLockFactory()->create($this, $profile, $options);
+
+        try {
+            $acquired = $lock->acquire($type, $timeout);
+
+            // Depending on implementation, a lock might not throw an
+            // exception when unable to acquire a lock. This must also
+            // be respected here - we do not throw an exception, only
+            // return null...
+            if (!$acquired) {
+                return null;
+            }
+
+            return $operation($this, $lock);
+        } finally {
+            $lock->release();
+        }
     }
 
     /**
