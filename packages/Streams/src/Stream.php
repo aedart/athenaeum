@@ -71,6 +71,14 @@ abstract class Stream implements StreamInterface
     protected bool|null $isWritable = null;
 
     /**
+     * Callback that determines if stream's resource
+     * supports locking
+     *
+     * @var callable
+     */
+    protected $supportsLockingCallback = null;
+
+    /**
      * Creates a new stream instance
      *
      * @param resource|null $stream  [optional]
@@ -493,7 +501,49 @@ abstract class Stream implements StreamInterface
     {
         $this->assertNotDetached('Unable to determine locking support');
 
-        return stream_supports_lock($this->resource());
+        $callback = $this->getSupportsLockingCallback();
+
+        return $callback($this->resource());
+    }
+
+    /**
+     * Set callback that determines if stream's resource supports locking
+     *
+     * @param  callable  $callback
+     *
+     * @return self
+     */
+    public function setSupportsLockingCallback(callable $callback): static
+    {
+        $this->supportsLockingCallback = $callback;
+
+        return $this;
+    }
+
+    /**
+     * Get callback for determining if stream's resource supports locking
+     *
+     * @return callable
+     */
+    public function getSupportsLockingCallback(): callable
+    {
+        if (!isset($this->supportsLockingCallback)) {
+            $this->setSupportsLockingCallback($this->getDefaultSupportsLockingCallback());
+        }
+
+        return $this->supportsLockingCallback;
+    }
+
+    /**
+     * Returns default callback for determining if stream's resource supports locking
+     *
+     * @return callable
+     */
+    public function getDefaultSupportsLockingCallback(): callable
+    {
+        return function($resource) {
+            return stream_supports_lock($resource);
+        };
     }
 
     /**
