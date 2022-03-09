@@ -44,6 +44,16 @@ abstract class BaseLockDriver implements Lock
     {}
 
     /**
+     * Destructor
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     */
+    public function __destruct()
+    {
+        $this->release();
+    }
+
+    /**
      * Acquire lock
      *
      * @param  Stream  $stream
