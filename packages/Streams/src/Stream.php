@@ -5,6 +5,7 @@ namespace Aedart\Streams;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Streams\Exceptions\InvalidStreamResource;
+use Aedart\Streams\Exceptions\StreamAlreadyOpened;
 use Aedart\Streams\Exceptions\StreamNotReadable;
 use Aedart\Streams\Exceptions\StreamNotSeekable;
 use Aedart\Streams\Exceptions\StreamException;
@@ -72,16 +73,18 @@ abstract class Stream implements StreamInterface
     /**
      * Creates a new stream instance
      *
-     * @param resource $stream
+     * @param resource|null $stream  [optional]
      * @param  array|Repository|null  $meta  [optional]
      *
      * @throws InvalidStreamResource
      */
-    public function __construct($stream, array|Repository|null $meta = null)
+    public function __construct($stream = null, array|Repository|null $meta = null)
     {
-        $this
-            ->setStream($stream)
-            ->setMetaRepository($meta);
+        if (isset($stream)) {
+            $this->setStream($stream);
+        }
+
+        $this->setMetaRepository($meta);
     }
 
     /**
@@ -106,6 +109,20 @@ abstract class Stream implements StreamInterface
     public static function makeFrom(PsrStreamInterface $stream, array|Repository|null $meta = null): static
     {
         return static::make($stream->detach(), $meta);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function openUsing(callable $callback): static
+    {
+        if ($this->isOpen()) {
+            throw new StreamAlreadyOpened('A resource already opened. Please detach if you wish to open a different resource!');
+        }
+
+        return $this->setStream(
+            $callback($this)
+        );
     }
 
     /**
@@ -451,6 +468,14 @@ abstract class Stream implements StreamInterface
     public function resource()
     {
         return $this->stream;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isOpen(): bool
+    {
+        return !$this->isDetached();
     }
 
     /**

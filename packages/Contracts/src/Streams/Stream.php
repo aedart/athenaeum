@@ -52,6 +52,19 @@ interface Stream extends StreamInterface,
     public static function makeFrom(StreamInterface $stream, array|Repository|null $meta = null): static;
 
     /**
+     * Open stream using a callback
+     *
+     * Method will fail, if stream is already opened!
+     *
+     * @param  callable  $callback Callback must return a resource
+     *
+     * @return self
+     *
+     * @throws StreamException
+     */
+    public function openUsing(callable $callback): static;
+
+    /**
      * Returns a line from stream's content until length or newline is reached,
      * or end-of-file (EOF)
      *
@@ -231,6 +244,15 @@ interface Stream extends StreamInterface,
      * @return resource|null
      */
     public function resource();
+
+    /**
+     * Determine if stream is opened (not detached)
+     *
+     * @see isDetached()
+     *
+     * @return bool
+     */
+    public function isOpen(): bool;
 
     /**
      * Determine if stream is detached
