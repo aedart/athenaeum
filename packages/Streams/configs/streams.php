@@ -58,7 +58,7 @@ return [
 
                 // When true, a physical backup of the target stream will be created.
                 // (This is NOT the same as the temporary file that is processed!)
-                'backup' => true,
+                'backup' => false,
 
                 // Location of where backup files are to be stored.
                 'backup_directory' => storage_path('backups'),
