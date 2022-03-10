@@ -63,7 +63,7 @@ abstract class BaseTransactionDriver implements Transaction
      *
      * @return bool
      */
-    abstract public function canPerformTransaction(Stream $stream): bool;
+    abstract public function canStartTransaction(Stream $stream): bool;
 
     /**
      * Performs begin transaction
@@ -149,17 +149,14 @@ abstract class BaseTransactionDriver implements Transaction
      */
     public function begin(): void
     {
-        // Fail if already started
-        if ($this->started) {
-            throw new TransactionAlreadyRunning('Transaction has already been started');
-        }
-
         $this
-            ->failIfTransactionCannotBePerformed($this->originalStream())
-            ->failIfAlreadyProcessed();
+            ->failIfStarted()
+            ->failIfCannotBePerformed($this->originalStream())
+            ->failIfAlreadyCommitted();
 
         try {
             $this->processStream = $this->performBegin($this->originalStream());
+
             $this->started = true;
         } catch (Throwable $e) {
             throw new FailedToBeginTransaction($e->getMessage(), $e->getCode(), $e);
@@ -171,10 +168,14 @@ abstract class BaseTransactionDriver implements Transaction
      */
     public function commit(): void
     {
-        $this->failIfAlreadyProcessed();
+        $this->failIfAlreadyCommitted();
 
+        // Attempt to commit and close this transaction afterwards.
         try {
-            $this->performCommit($this->stream(), $this->originalStream());
+            $this->performCommit(
+                $this->stream(),
+                $this->originalStream()
+            );
 
             $this->hasCommitted = true;
 
@@ -189,10 +190,13 @@ abstract class BaseTransactionDriver implements Transaction
      */
     public function rollBack(): void
     {
-        $this->failIfAlreadyProcessed();
+        $this->failIfAlreadyCommitted();
 
         try {
-            $this->performRollback($this->stream(), $this->originalStream());
+            $this->performRollback(
+                $this->stream(),
+                $this->originalStream()
+            );
         } catch (Throwable $e) {
             throw new FailedToRollbackTransaction($e->getMessage(), $e->getCode(), $e);
         }
@@ -229,7 +233,7 @@ abstract class BaseTransactionDriver implements Transaction
             return;
         }
 
-        $this->wrapAndThrowException($e);
+        throw $this->wrapException($e);
     }
 
     /**
@@ -252,21 +256,19 @@ abstract class BaseTransactionDriver implements Transaction
     }
 
     /**
-     * Wraps and throws exception
+     * Wraps exception
      *
      * @param  Throwable  $e
      *
-     * @return void
-     *
-     * @throws TransactionException
+     * @return TransactionException
      */
-    protected function wrapAndThrowException(Throwable $e): void
+    protected function wrapException(Throwable $e): TransactionException
     {
         if ($e instanceof TransactionException) {
-            throw $e;
+            return $e;
         }
 
-        throw new TransactionException($e->getMessage(), $e->getCode(), $e);
+        return new TransactionException($e->getMessage(), $e->getCode(), $e);
     }
 
     /**
@@ -299,6 +301,9 @@ abstract class BaseTransactionDriver implements Transaction
      */
     protected function close(): static
     {
+        // This should render the transaction instance useless, so that
+        // it cannot be re-committed...
+
         $this->processStream = null;
         unset($this->originalStream);
 
@@ -314,9 +319,9 @@ abstract class BaseTransactionDriver implements Transaction
      *
      * @throws CannotPerformTransactionOnStream
      */
-    protected function failIfTransactionCannotBePerformed(Stream $stream): static
+    protected function failIfCannotBePerformed(Stream $stream): static
     {
-        if (!$this->canPerformTransaction($stream)) {
+        if (!$this->canStartTransaction($stream)) {
             throw new CannotPerformTransactionOnStream(sprintf('Unable to perform transaction on given stream instance %s', $stream::class));
         }
 
@@ -324,13 +329,27 @@ abstract class BaseTransactionDriver implements Transaction
     }
 
     /**
-     * Asserts that transaction has not been committed
+     * Fails if transaction has been started
+     *
+     * @return self
+     */
+    protected function failIfStarted(): static
+    {
+        if ($this->started) {
+            throw new TransactionAlreadyRunning('Transaction has already been started');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Fails if transaction has been committed
      *
      * @return self
      *
      * @throws TransactionAlreadyCommitted
      */
-    protected function failIfAlreadyProcessed(): static
+    protected function failIfAlreadyCommitted(): static
     {
         // Fail if already committed
         if ($this->hasCommitted) {

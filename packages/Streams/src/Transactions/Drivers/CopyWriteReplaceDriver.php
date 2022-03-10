@@ -30,9 +30,10 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
     /**
      * @inheritDoc
      */
-    public function canPerformTransaction(Stream $stream): bool
+    public function canStartTransaction(Stream $stream): bool
     {
-        return $stream->isReadable()
+        return $stream->isOpen()
+            && $stream->isReadable()
             && $stream->isWritable()
             && $stream instanceof FileStreamInterface;
     }
