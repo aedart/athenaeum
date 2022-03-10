@@ -28,7 +28,7 @@ abstract class BaseTransactionDriver implements Transaction
      *
      * @var Stream|null
      */
-    protected Stream|null $processStream = null;
+    protected Stream|null $processingStream = null;
 
     /**
      * State whether transaction has started or not
@@ -155,7 +155,7 @@ abstract class BaseTransactionDriver implements Transaction
             ->failIfAlreadyCommitted();
 
         try {
-            $this->processStream = $this->performBegin($this->originalStream());
+            $this->processingStream = $this->performBegin($this->originalStream());
 
             $this->started = true;
         } catch (Throwable $e) {
@@ -207,7 +207,7 @@ abstract class BaseTransactionDriver implements Transaction
      */
     public function stream(): Stream|null
     {
-        return $this->processStream;
+        return $this->processingStream;
     }
 
     /*****************************************************************
@@ -304,7 +304,7 @@ abstract class BaseTransactionDriver implements Transaction
         // This should render the transaction instance useless, so that
         // it cannot be re-committed...
 
-        $this->processStream = null;
+        $this->processingStream = null;
         unset($this->originalStream);
 
         return $this;
