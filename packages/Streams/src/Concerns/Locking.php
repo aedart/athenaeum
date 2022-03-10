@@ -11,7 +11,7 @@ use Aedart\Support\Facades\IoCFacade;
 /**
  * Concerns Locking
  *
- * @see \Aedart\Contracts\Streams\Locks\LockOperations
+ * @see \Aedart\Contracts\Streams\Locks\Lockable
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Streams\Concerns
