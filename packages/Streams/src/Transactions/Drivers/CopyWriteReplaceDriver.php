@@ -42,11 +42,15 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      */
     public function performBegin(Stream $originalStream): Stream
     {
-        $this->backupOriginalStream($originalStream);
+        // Create a backup of the original stream, if required
+        if ($this->mustBackup()) {
+            $this->backupFile = $this->backupOriginalStream($originalStream,
+                $this->backupDirectory()
+            );
+        }
 
         // Create a new temporary stream and copy original into it.
         // This will be the stream that the process method will operate on.
-
         $temp = FileStream::openTemporary(
             'r+b',
             $this->get('maxMemory', 5 * BufferSizes::BUFFER_1MB)
@@ -74,7 +78,9 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         )->positionAtEnd();
 
         // Automatically remove backup file, if any was made and requested...
-        $this->removeBackupFile();
+        if ($this->mustRemoveBackupAfterCommit()) {
+            $this->removeBackupFile($this->backupFile);
+        }
     }
 
     /**
@@ -108,35 +114,31 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      ****************************************************************/
 
     /**
-     * Creates a backup of given stream, if required
+     * Creates a backup of given stream
      *
      * @param  FileStreamInterface  $stream
+     * @param string $directory Location where backup-file must be stored
      *
-     * @return self
+     * @return string Path to backup-file
      *
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
-    protected function backupOriginalStream(FileStreamInterface $stream)
+    protected function backupOriginalStream(FileStreamInterface $stream, string $directory): string
     {
-        // Skip if backup not required
-        if (!$this->mustBackup()) {
-            return $this;
-        }
-
         // Create backup filename and ensure that directory is created, if it
         // does not already exist
-        $this->backupFile = $this->makeBackupFilename($stream);
+        $backupFile = $this->makeBackupFilename($stream, $directory);
         $this->ensureDirectoryExists(
-            pathinfo($this->backupFile, PATHINFO_DIRNAME)
+            pathinfo($backupFile, PATHINFO_DIRNAME)
         );
 
         // Copy and close the backup file stream
         $this->copyStream(
             $stream,
-            FileStream::open($this->backupFile, 'w+b')
+            FileStream::open($backupFile, 'w+b')
         )->close();
 
-        return $this;
+        return $backupFile;
     }
 
     /**
@@ -160,12 +162,12 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      * Returns a filename of the backup file
      *
      * @param  FileStreamInterface  $stream
+     * @param  string  $directory
      *
      * @return string
      */
-    protected function makeBackupFilename(FileStreamInterface $stream): string
+    protected function makeBackupFilename(FileStreamInterface $stream,  string $directory): string
     {
-        $directory = $this->get('backup_directory', getcwd());
         $uri = pathinfo($stream->uri(), PATHINFO_BASENAME);
         $filename = $uri . '_' . Carbon::now()->timestamp . '.bak';
 
@@ -173,20 +175,19 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
     }
 
     /**
-     * Removes backup file, if requested by settings and a backup
-     * file was created.
+     * Remove given backup file
      *
-     * @see mustRemoveBackupAfterCommit()
+     * @param  string|null  $backupFile Path to backup-file
      *
-     * @return self
+     * @return bool
      */
-    protected function removeBackupFile(): static
+    protected function removeBackupFile(string|null $backupFile): bool
     {
-        if ($this->mustRemoveBackupAfterCommit() && isset($this->backupFile)) {
-            unlink($this->backupFile);
+        if (isset($backupFile) && is_file($backupFile)) {
+            return unlink($backupFile);
         }
 
-        return $this;
+        return false;
     }
 
     /**
@@ -210,7 +211,17 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      */
     protected function mustBackup(): bool
     {
-        return $this->get('backup', false);
+        return $this->get('backup.enabled', false);
+    }
+
+    /**
+     * Returns the backup directory location
+     *
+     * @return string
+     */
+    protected function backupDirectory(): string
+    {
+        return $this->get('backup.directory', getcwd() . DIRECTORY_SEPARATOR . 'backup');
     }
 
     /**
@@ -220,6 +231,6 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      */
     public function mustRemoveBackupAfterCommit(): bool
     {
-        return $this->mustBackup() && $this->get('remove_backup_after_commit', false);
+        return $this->mustBackup() && $this->get('backup.remove_after_commit', false);
     }
 }
