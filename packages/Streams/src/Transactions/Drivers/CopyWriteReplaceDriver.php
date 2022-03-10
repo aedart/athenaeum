@@ -74,14 +74,11 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
 
         // Third, create a new temporary stream which will be used as the
         // "processing stream" for the operation callback.
-        $temp = FileStream::openTemporary(
-            'r+b',
-            $this->maxMemory()
-        );
+        $processingStream = $this->createProcessingStream();
 
         // Finally, copy the contents from the original stream into the
         // processing stream and return it.
-        return $this->copyStream($originalStream, $temp);
+        return $this->copyStream($originalStream, $processingStream);
     }
 
     /**
@@ -232,6 +229,21 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         )->close();
 
         return $backupFile;
+    }
+
+    /**
+     * Creates a new processing stream instance
+     *
+     * @return FileStreamInterface
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    protected function createProcessingStream(): FileStreamInterface
+    {
+        return FileStream::openTemporary(
+            'r+b',
+            $this->maxMemory()
+        );
     }
 
     /**
