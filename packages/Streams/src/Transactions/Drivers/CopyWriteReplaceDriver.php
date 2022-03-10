@@ -7,6 +7,7 @@ use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
 use Aedart\Contracts\Streams\Stream;
 use Aedart\Streams\FileStream;
 use Illuminate\Support\Carbon;
+use Throwable;
 
 /**
  * Copy Write Replace Transaction Driver
@@ -86,19 +87,20 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
 
         // When a rollback is issues, we do not know where in the process the operation
         // or transaction failed. Furthermore, additional operation attempts might still
-        // available. Therefore, the processed stream needs to be truncated and a new
+        // be available. Therefore, the processed stream needs to be truncated and a new
         // copy must be made.
 
         $originalStream->rewind();
 
-        // TODO: If max attempts reached, then this is a waste
-        // TODO: Perhaps overwrite the `handleCommitFailure`
         $this->copyStream(
             $originalStream,
             $processedStream->truncate(0)
         );
 
-        // TODO: Auto restore from backup.
+        // NOTE: We do NOT restore from evt. backup here. This could be a possibility,
+        // yet the method knows nothing about amount of attempts left, etc.
+        // Overwrite the "handleCommitFailure()", if even more advanced rollback
+        // logic is required.
     }
 
     /*****************************************************************
@@ -208,7 +210,7 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      */
     protected function mustBackup(): bool
     {
-        return $this->get('backup', true);
+        return $this->get('backup', false);
     }
 
     /**
