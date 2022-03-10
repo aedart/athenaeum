@@ -57,6 +57,22 @@ return [
                 // a temporary file by PHP.
                 'maxMemory' => 5 * \Aedart\Contracts\Streams\BufferSizes::BUFFER_1MB,
 
+                // Lock settings
+                'lock' => [
+
+                    // When true, the stream will be locked during transaction
+                    'enabled' => true,
+
+                    // Name of the lock profile to be used
+                    'profile' => env('STREAM_LOCK', 'default'),
+
+                    // Type of lock to be used
+                    'type' => \Aedart\Contracts\Streams\Locks\LockTypes::EXCLUSIVE,
+
+                    // Acquire lock timeout in seconds
+                    'timeout' => 0.5,
+                ],
+
                 // Backup settings
                 'backup' => [
 

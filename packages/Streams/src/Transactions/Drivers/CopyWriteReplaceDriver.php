@@ -4,6 +4,9 @@ namespace Aedart\Streams\Transactions\Drivers;
 
 use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
+use Aedart\Contracts\Streams\Locks\Lock;
+use Aedart\Contracts\Streams\Locks\Lockable;
+use Aedart\Contracts\Streams\Locks\LockTypes;
 use Aedart\Contracts\Streams\Stream;
 use Aedart\Streams\FileStream;
 use Illuminate\Support\Carbon;
@@ -28,6 +31,13 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
     protected string|null $backupFile = null;
 
     /**
+     * Acquired lock
+     *
+     * @var Lock|null
+     */
+    protected Lock|null $lock = null;
+
+    /**
      * @inheritDoc
      */
     public function canStartTransaction(Stream $stream): bool
@@ -43,20 +53,34 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      */
     public function performBegin(Stream $originalStream): Stream
     {
-        // Create a backup of the original stream, if required
+        // First, lock the original stream so that other processes
+        // do not interfere with its contents.
+        if ($this->mustLock()) {
+            $this->lock = $this->acquireLock(
+                $originalStream,
+                $this->lockProfile(),
+                $this->lockType(),
+                $this->lockTimeout()
+            );
+        }
+
+        // Secondly, create a backup of the original stream and store
+        // it inside a *.bak file.
         if ($this->mustBackup()) {
             $this->backupFile = $this->backupOriginalStream($originalStream,
                 $this->backupDirectory()
             );
         }
 
-        // Create a new temporary stream and copy original into it.
-        // This will be the stream that the process method will operate on.
+        // Third, create a new temporary stream which will be used as the
+        // "processing stream" for the operation callback.
         $temp = FileStream::openTemporary(
             'r+b',
-            $this->get('maxMemory', 5 * BufferSizes::BUFFER_1MB)
+            $this->maxMemory()
         );
 
+        // Finally, copy the contents from the original stream into the
+        // processing stream and return it.
         return $this->copyStream($originalStream, $temp);
     }
 
@@ -68,11 +92,12 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         /** @var FileStreamInterface $processedStream */
         /** @var FileStreamInterface $originalStream */
 
+        // Both streams must be rewound, before we can continue...
         $processedStream->rewind();
         $originalStream->rewind();
 
-        // First the original stream's contents must be flushed. Afterwards, we will copy
-        // the contents from the processed stream into the original.
+        // The original stream's contents must be truncated. Afterwards, we will
+        // copy the contents from the processing stream into the original.
         $this->copyStream(
             $processedStream,
             $originalStream->truncate(0)
@@ -82,6 +107,9 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         if ($this->mustRemoveBackupAfterCommit()) {
             $this->removeBackupFile($this->backupFile);
         }
+
+        // Finally, if a lock was acquired then it must be released
+        $this->releaseLock($this->lock);
     }
 
     /**
@@ -92,10 +120,9 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         /** @var FileStreamInterface $processedStream */
         /** @var FileStreamInterface $originalStream */
 
-        // When a rollback is issues, we do not know where in the process the operation
-        // or transaction failed. Furthermore, additional operation attempts might still
-        // be available. Therefore, the processed stream needs to be truncated and a new
-        // copy must be made.
+        // Since we do not know where in the process / operation a failure happened, we
+        // truncate the processed stream and copy the original stream's contents back
+        // into it.
 
         $originalStream->rewind();
 
@@ -105,14 +132,79 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         );
 
         // NOTE: We do NOT restore from evt. backup here. This could be a possibility,
-        // yet the method knows nothing about amount of attempts left, etc.
-        // Overwrite the "handleCommitFailure()", if even more advanced rollback
-        // logic is required.
+        // yet the method knows nothing about how many attempts are left and thus when
+        // to attempt restoring.
+        // Overwrite "handleCommitFailure()" if you need more advanced rollback logic,
+        // such as "restoring from backup"...
     }
 
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * @inheritDoc
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     */
+    protected function handleCommitFailure(Throwable $e, int $currentAttempt, int $maxAttempts)
+    {
+        try {
+            parent::handleCommitFailure($e, $currentAttempt, $maxAttempts);
+        } finally {
+            // If maximum attempts have been reached and an exception was thrown,
+            // then evt. acquired lock must be released.
+            $this->releaseLock($this->lock);
+        }
+    }
+
+    /**
+     * Acquire lock for stream
+     *
+     * @param  Lockable|Stream  $stream
+     * @param  string  $profile
+     * @param  int  $type
+     * @param  float  $timeout
+     *
+     * @return Lock
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     */
+    protected function acquireLock(
+        Lockable|Stream $stream,
+        string $profile,
+        int $type,
+        float $timeout
+    ): Lock
+    {
+        $lock = $stream
+            ->getLockFactory()
+            ->create($stream, $profile);
+
+        $lock->acquire($type, $timeout);
+
+        return $lock;
+    }
+
+    /**
+     * Release lock
+     *
+     * @param  Lock|null  $lock
+     *
+     * @return bool
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     */
+    protected function releaseLock(Lock|null $lock): bool
+    {
+        if (isset($lock) && !$lock->isReleased()) {
+            $lock->release();
+
+            return true;
+        }
+
+        return false;
+    }
 
     /**
      * Creates a backup of given stream
@@ -203,6 +295,57 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         if (!is_dir($path)) {
             mkdir($path, 0755, true);
         }
+    }
+
+    /**
+     * Determine if original stream must be locked during transaction
+     *
+     * @return bool
+     */
+    protected function mustLock(): bool
+    {
+        return $this->get('lock.enabled', true);
+    }
+
+    /**
+     * Returns the lock profile name
+     *
+     * @return string
+     */
+    protected function lockProfile(): string
+    {
+        return $this->get('lock.profile', 'default');
+    }
+
+    /**
+     * Returns lock type to use
+     *
+     * @return int
+     */
+    protected function lockType(): int
+    {
+        return $this->get('lock.type', LockTypes::EXCLUSIVE);
+    }
+
+    /**
+     * Returns acquire lock timeout
+     *
+     * @return float
+     */
+    protected function lockTimeout(): float
+    {
+        return $this->get('lock.timeout', 0.5);
+    }
+
+    /**
+     * Returns maximum amount of memory for temporary stream,
+     * before it is written to a physical file by PHP
+     *
+     * @return int Bytes
+     */
+    protected function maxMemory(): int
+    {
+        return $this->get('maxMemory', 5 * BufferSizes::BUFFER_1MB);
     }
 
     /**
