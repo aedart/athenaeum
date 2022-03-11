@@ -127,7 +127,13 @@ class FileStream extends Stream implements
         int $flags = 0,
         string $key = '',
         array $options = []
-    ): string {
+    ): string
+    {
+        $msg = 'Unable to compute stream\'s hash';
+        $this
+            ->assertNotDetached($msg)
+            ->assertIsReadable($msg);
+
         $context = hash_init($algo, $flags, $key, $options);
 
         $this->restorePositionAfter(function(StreamInterface $stream) use ($context) {
