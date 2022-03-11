@@ -131,7 +131,13 @@ class FileStream extends Stream implements
      */
     public function flush(): static
     {
-        // TODO: Implement flush() method.
+        $this->assertNotDetached('Unable to flush output');
+
+        if (fflush($this->resource()) === false) {
+            throw new StreamException('Flush output failed. Please check if stream is block or otherwise invalid');
+        }
+
+        return $this;
     }
 
     /**
