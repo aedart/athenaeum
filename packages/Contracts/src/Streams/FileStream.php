@@ -119,18 +119,6 @@ interface FileStream extends Stream
     public function append($content, int $bufferSize = BufferSizes::BUFFER_8KB): int;
 
     /**
-     * Write content at the beginning of this stream's data
-     *
-     * @param  string|resource|StreamInterface $content
-     * @param  int  $bufferSize  [optional] Size of buffer in bytes for reading and writing.
-     *
-     * @return int Number of bytes written
-     *
-     * @throws StreamException
-     */
-    public function prepend($content, int $bufferSize = BufferSizes::BUFFER_8KB): int;
-
-    /**
      * Truncates file pointer / stream to given size length
      *
      * @see https://www.php.net/manual/en/function.ftruncate

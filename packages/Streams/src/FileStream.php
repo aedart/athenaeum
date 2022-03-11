@@ -97,14 +97,6 @@ class FileStream extends Stream implements
     /**
      * @inheritDoc
      */
-    public function prepend($content, int $bufferSize = BufferSizes::BUFFER_8KB): int
-    {
-        // TODO: Implement prepend() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function truncate(int $size): static
     {
         // TODO: Implement truncate() method.
