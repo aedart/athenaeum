@@ -29,7 +29,10 @@ trait Transactions
         array $options = []
     ): mixed
     {
-        // TODO: Implement method...
+        return $this
+            ->getTransactionFactory()
+            ->create($this, $profile, $options)
+            ->process($operation, $attempts);
     }
 
     /**
