@@ -125,7 +125,7 @@ interface FileStream extends Stream
      *
      * @param  int  $size
      * @param  bool  $moveToEnd  [optional] Moves position to the end of
-     *                           the stream after truncate, if set to `true`
+     *                           the file after truncate, if set to `true`.
      *
      * @return self
      *
