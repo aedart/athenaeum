@@ -125,7 +125,7 @@ abstract class Stream implements StreamInterface
     public function openUsing(callable $callback): static
     {
         if ($this->isOpen()) {
-            throw new StreamAlreadyOpened('A resource already opened. Please detach if you wish to open a different resource!');
+            throw new StreamAlreadyOpened('A resource is already opened. Please detach it, if you wish to open a different resource!');
         }
 
         return $this->setStream(
