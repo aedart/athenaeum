@@ -119,17 +119,19 @@ interface FileStream extends Stream
     public function append($content, int $bufferSize = BufferSizes::BUFFER_8KB): int;
 
     /**
-     * Truncates file pointer / stream to given size length
+     * Truncates file stream to given size length
      *
      * @see https://www.php.net/manual/en/function.ftruncate
      *
      * @param  int  $size
+     * @param  bool  $moveToEnd  [optional] Moves position to the end of
+     *                           the stream after truncate, if set to `true`
      *
      * @return self
      *
      * @throws StreamException
      */
-    public function truncate(int $size): static;
+    public function truncate(int $size, bool $moveToEnd = true): static;
 
     /**
      * Synchronizes changes to the file
