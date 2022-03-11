@@ -128,6 +128,14 @@ class FileStream extends Stream implements
         string $key = '',
         array $options = []
     ): string {
-        // TODO: Implement hash() method.
+        $context = hash_init($algo, $flags, $key, $options);
+
+        $this->restorePositionAfter(function(StreamInterface $stream) use ($context) {
+            $stream->rewind();
+
+            hash_update_stream($context, $this->resource());
+        });
+
+        return hash_final($context, $binary);
     }
 }
