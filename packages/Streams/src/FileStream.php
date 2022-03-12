@@ -28,6 +28,7 @@ class FileStream extends Stream implements
     use Concerns\Hashing;
     use Concerns\Locking;
     use Concerns\Transactions;
+    use Concerns\Conversion;
 
     /**
      * @inheritDoc
@@ -108,7 +109,7 @@ class FileStream extends Stream implements
         $this
             ->positionAtEnd()
             ->performCopy(
-                $this->resolveStreamFrom($data, $maximumMemory),
+                $this->wrap($data, $maximumMemory),
                 $this,
                 $length,
                 $offset
@@ -175,32 +176,6 @@ class FileStream extends Stream implements
     /*****************************************************************
      * Internals
      ****************************************************************/
-
-    /**
-     * Resolve stream from given data
-     *
-     * Method converts given data into a stream, or fails if unable to
-     *
-     * @param  string|int|float|resource|StreamInterface  $data
-     * @param  int|null  $maximumMemory  [optional] When content is a string, then it will be wrapped into
-     *                                   a temporary stream using {@see openTemporary()}, with given
-     *                                   maximum amount of bytes, before written to a file by PHP.
-     * @param  resource|null  $context  [optional]
-     *
-     * @return StreamInterface
-     *
-     * @throws InvalidStreamResource
-     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
-     */
-    protected function resolveStreamFrom($data, int|null $maximumMemory = null, $context = null): StreamInterface
-    {
-        return match (true) {
-            is_string($data) || is_numeric($data) => static::openTemporary('r+b', $maximumMemory, $context)->put((string) $data),
-            is_resource($data) => static::make($data),
-            $data instanceof StreamInterface => $data,
-            default => Throw new InvalidStreamResource('Unable to convert data to stream. Data appears to be invalid')
-        };
-    }
 
     /**
      * Perform copy of this stream into given target

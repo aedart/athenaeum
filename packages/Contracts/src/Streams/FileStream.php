@@ -3,7 +3,7 @@
 namespace Aedart\Contracts\Streams;
 
 use Aedart\Contracts\Streams\Exceptions\StreamException;
-use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\StreamInterface as PsrStreamInterface;
 
 /**
  * File Stream
@@ -112,7 +112,10 @@ interface FileStream extends Stream
      * Unlike {@see write()} and {@see put()}, this method will automatically move
      * the position to the end, before appending data.
      *
-     * @param  string|int|float|resource|Stream  $data
+     * **Warning**: _Method will {@see detach()} underlying resource from given stream,
+     * if `$data` is a {@see PsrStreamInterface} instance is given!_
+     *
+     * @param  string|int|float|resource|PsrStreamInterface|Stream  $data
      * @param  int|null  $length  [optional] Maximum bytes to append. By default, all bytes left are appended
      * @param  int  $offset  [optional] The offset where to start to copy data (offset on `$data`)
      * @param  int|null  $maximumMemory  [optional] Maximum amount of bytes to keep in memory before writing to a
