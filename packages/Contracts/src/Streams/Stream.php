@@ -5,6 +5,7 @@ namespace Aedart\Contracts\Streams;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Countable;
+use IteratorAggregate;
 use Psr\Http\Message\StreamInterface;
 use Stringable;
 
@@ -20,6 +21,7 @@ use Stringable;
  * @package Aedart\Contracts\Streams
  */
 interface Stream extends StreamInterface,
+    IteratorAggregate,
     Countable,
     Stringable
 {

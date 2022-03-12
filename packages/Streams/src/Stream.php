@@ -15,7 +15,9 @@ use Aedart\Streams\Exceptions\StreamNotWritable;
 use Aedart\Streams\Meta\Repository as DefaultMetaRepository;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Utils\Memory;
+use Exception;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
+use Traversable;
 
 /**
  * Stream
@@ -425,6 +427,16 @@ abstract class Stream implements StreamInterface
         while(!feof($resource)) {
             yield $callback($resource);
         }
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public function getIterator(): Traversable
+    {
+        yield from $this->readAllLines();
     }
 
     /**
