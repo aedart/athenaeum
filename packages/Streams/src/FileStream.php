@@ -10,6 +10,7 @@ use Aedart\Contracts\Streams\Transactions\Transactions;
 use Aedart\Streams\Concerns;
 use Aedart\Streams\Exceptions\CannotCopyToTargetStream;
 use Aedart\Streams\Exceptions\CannotOpenStream;
+use Aedart\Streams\Exceptions\InvalidStreamResource;
 use Aedart\Streams\Exceptions\StreamException;
 
 /**
@@ -93,11 +94,25 @@ class FileStream extends Stream implements
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
-    public function append($content, int $bufferSize = BufferSizes::BUFFER_8KB): int
+    public function append(
+        $data,
+        int|null $length = null,
+        int $offset = 0,
+        int|null $maximumMemory = null
+    ): static
     {
-        // TODO: Implement append() method.
+        $this
+            ->positionAtEnd()
+            ->performCopy(
+                $this->resolveStreamFrom($data, $maximumMemory),
+                $this,
+                $length,
+                $offset
+            );
+
+        return $this;
     }
 
     /**
@@ -187,6 +202,32 @@ class FileStream extends Stream implements
      ****************************************************************/
 
     /**
+     * Resolve stream from given data
+     *
+     * Method converts given data into a stream, or fails if unable to
+     *
+     * @param  string|int|float|resource|StreamInterface  $data
+     * @param  int|null  $maximumMemory  [optional] When content is a string, then it will be wrapped into
+     *                                   a temporary stream using {@see openTemporary()}, with given
+     *                                   maximum amount of bytes, before written to a file by PHP.
+     * @param  resource|null  $context  [optional]
+     *
+     * @return StreamInterface
+     *
+     * @throws InvalidStreamResource
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    protected function resolveStreamFrom($data, int|null $maximumMemory = null, $context = null): StreamInterface
+    {
+        return match (true) {
+            is_string($data) || is_numeric($data) => static::openTemporary('r+b', $maximumMemory, $context)->put((string) $data),
+            is_resource($data) => static::make($data),
+            $data instanceof StreamInterface => $data,
+            default => Throw new InvalidStreamResource('Unable to convert data to stream. Data appears to be invalid')
+        };
+    }
+
+    /**
      * Perform copy of this stream into given target
      *
      * @param  StreamInterface  $source
@@ -200,14 +241,13 @@ class FileStream extends Stream implements
      */
     protected function performCopy(StreamInterface $source, StreamInterface $target, int|null $length = null, int $offset = 0): int
     {
-        // Abort if this stream is detached or not readable
-        $msg = 'Unable to copy to target stream';
-        $this
-            ->assertNotDetached($msg)
-            ->assertIsReadable($msg);
+        // Abort if source is detached or not readable
+        if ($source->isDetached() || !$target->isReadable()) {
+            throw new CannotCopyToTargetStream('Source stream is either detached or not readable.');
+        }
 
         // Abort if target is not writable or detached
-        if ($target->isDetached() || $target->isWritable()) {
+        if ($target->isDetached() || !$target->isWritable()) {
             throw new CannotCopyToTargetStream('Target stream is either detached or not writable.');
         }
 

@@ -107,16 +107,28 @@ interface FileStream extends Stream
     public function copyTo(Stream|null $target = null, int|null $length = null, int $offset = 0): static;
 
     /**
-     * Write content at the end of this stream's data
+     * Append data at the end of this stream
      *
-     * @param  string|resource|StreamInterface $content
-     * @param  int  $bufferSize  [optional] Size of buffer in bytes for reading and writing.
+     * Unlike {@see write()} and {@see put()}, this method will automatically move
+     * the position to the end, before appending data.
      *
-     * @return int Number of bytes written
+     * @param  string|int|float|resource|Stream  $data
+     * @param  int|null  $length  [optional] Maximum bytes to append. By default, all bytes left are appended
+     * @param  int  $offset  [optional] The offset where to start to copy data (offset on `$data`)
+     * @param  int|null  $maximumMemory  [optional] Maximum amount of bytes to keep in memory before writing to a
+     *                                   temporary file. If none specified, then defaults to 2 Mb.
+     *                                   Argument is only applied when `$data` is of type string or number.
+     *
+     * @return self
      *
      * @throws StreamException
      */
-    public function append($content, int $bufferSize = BufferSizes::BUFFER_8KB): int;
+    public function append(
+        $data,
+        int|null $length = null,
+        int $offset = 0,
+        int|null $maximumMemory = null
+    ): static;
 
     /**
      * Truncates file stream to given size length
