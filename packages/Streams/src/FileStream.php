@@ -2,7 +2,6 @@
 
 namespace Aedart\Streams;
 
-use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
 use Aedart\Contracts\Streams\Locks\Lockable;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
