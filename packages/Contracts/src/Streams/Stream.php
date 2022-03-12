@@ -65,6 +65,22 @@ interface Stream extends StreamInterface,
     public function openUsing(callable $callback): static;
 
     /**
+     * Put data into this stream
+     *
+     * Method acts as an alias for {@see write()}, but does not
+     * return amount of bytes written.
+     *
+     * @see write()
+     *
+     * @param  string  $data
+     *
+     * @return self
+     *
+     * @throws StreamException
+     */
+    public function put(string $data): static;
+
+    /**
      * Returns a line from stream's content until length or newline is reached,
      * or end-of-file (EOF)
      *

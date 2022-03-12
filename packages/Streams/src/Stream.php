@@ -327,6 +327,16 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
+    public function put(string $data): static
+    {
+        $this->write($data);
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function readLine(?int $length = null): string|false
     {
         $this->assertNotDetached('Unable to read line');
