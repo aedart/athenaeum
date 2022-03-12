@@ -87,7 +87,7 @@ class FileStream extends Stream implements
     {
         $target = $target ?? static::openTemporary();
 
-        $this->performCopy($target, $length, $offset);
+        $this->performCopy($this, $target, $length, $offset);
 
         return $this;
     }
@@ -189,6 +189,7 @@ class FileStream extends Stream implements
     /**
      * Perform copy of this stream into given target
      *
+     * @param  StreamInterface  $source
      * @param  StreamInterface  $target
      * @param  int|null  $length  [optional]
      * @param  int  $offset  [optional]
@@ -197,7 +198,7 @@ class FileStream extends Stream implements
      *
      * @throws StreamException
      */
-    protected function performCopy(StreamInterface $target, int|null $length = null, int $offset = 0): int
+    protected function performCopy(StreamInterface $source, StreamInterface $target, int|null $length = null, int $offset = 0): int
     {
         // Abort if this stream is detached or not readable
         $msg = 'Unable to copy to target stream';
@@ -211,7 +212,7 @@ class FileStream extends Stream implements
         }
 
         $bytesCopied = stream_copy_to_stream(
-            $this->resource(),
+            $source->resource(),
             $target->resource(),
             $length,
             $offset
