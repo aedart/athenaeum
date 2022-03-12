@@ -16,7 +16,6 @@ use Aedart\Streams\Meta\Repository as DefaultMetaRepository;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Utils\Memory;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
-use Traversable;
 
 /**
  * Stream
