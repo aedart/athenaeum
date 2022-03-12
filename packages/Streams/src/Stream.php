@@ -740,7 +740,7 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function getFormattedSize(int $precision = 2): string
+    public function getFormattedSize(int $precision = 1): string
     {
         $bytes = $this->getSize() ?? 0;
 

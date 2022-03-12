@@ -514,9 +514,9 @@ interface Stream extends StreamInterface,
      *
      * @param  int  $precision  [optional]
      *
-     * @return string E.g. 12.72 MB
+     * @return string E.g. 12.7 MB
      */
-    public function getFormattedSize(int $precision = 2): string;
+    public function getFormattedSize(int $precision = 1): string;
 
     /**
      * Set the meta repository for this stream
