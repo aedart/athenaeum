@@ -119,11 +119,26 @@ class FileStream extends Stream implements
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * **CAUTION**: _Method is only supported from PHP v8.1_
+     * TODO: @see https://github.com/aedart/athenaeum/issues/105
      */
     public function sync(bool $includeMeta = true): static
     {
-        // TODO: Implement sync() method.
+        $this->assertNotDetached('Unable to synchronizes data to file');
+
+        if ($includeMeta) {
+            $result = fsync($this->resource());
+        } else {
+            $result = fdatasync($this->resource());
+        }
+
+        if ($result === false) {
+            throw new StreamException('Failed to synchronize data to file. Please check if stream is block or otherwise invalid');
+        }
+
+        return $this;
     }
 
     /**
