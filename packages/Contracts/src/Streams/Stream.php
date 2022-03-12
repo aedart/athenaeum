@@ -85,7 +85,7 @@ interface Stream extends StreamInterface,
      * or end-of-file (EOF)
      *
      * @see https://www.php.net/manual/en/function.fgets.php
-     * @see readLineUntil()
+     * @see readAllLines()
      *
      * @param  int|null  $length  [optional]
      *
@@ -100,7 +100,7 @@ interface Stream extends StreamInterface,
      * or end-of-file (EOF) is reached.
      *
      * @see https://www.php.net/manual/en/function.stream-get-line
-     * @see readLine()
+     * @see readAllUsingDelimiter()
      *
      * @param  int  $length Maximum amount of bytes to read. If 0 is given, then
      *                      default chunk size is applied (8 Kb)
@@ -113,9 +113,10 @@ interface Stream extends StreamInterface,
     public function readLineUntil(int $length, string $ending = ''): string|false;
 
     /**
-     * Parse stream contents according to the specified format
+     * Parses stream contents according to the specified format
      *
      * @see https://www.php.net/manual/en/function.fscanf
+     * @see readAllUsingFormat()
      *
      * @param  string  $format
      * @param  mixed  ...$vars
@@ -124,7 +125,92 @@ interface Stream extends StreamInterface,
      *
      * @throws StreamException
      */
-    public function parse(string $format, mixed &...$vars): array|int|false|null;
+    public function scan(string $format, mixed &...$vars): array|int|false|null;
+
+    /**
+     * Returns an "iterator" that traverses through all lines of
+     * content in this stream.
+     *
+     * **Note**: _Each line is automatically trimmed before returned. This means
+     * that content does not contain new-line endings._
+     *
+     * Method automatically moves stream's position to its
+     * beginning, before traversable is returned.
+     *
+     * @see https://www.php.net/manual/en/function.fgets.php
+     *
+     * @return iterable
+     *
+     * @throws StreamException
+     */
+    public function readAllLines(): iterable;
+
+    /**
+     * Returns an "iterator" that traverses all of stream's content in
+     * chunks, delimited by given length or string delimiter.
+     *
+     * Method automatically moves stream's position to its
+     * beginning, before traversable is returned.
+     *
+     * @see https://www.php.net/manual/en/function.stream-get-line
+     *
+     * @param  int  $length Maximum amount of bytes to read. If 0 is given, then
+     *                      default chunk size is applied (8 Kb)
+     * @param  string  $ending  [optional] Line ending delimiter
+     *
+     * @return iterable
+     *
+     * @throws StreamException
+     */
+    public function readAllUsingDelimiter(int $length, string $ending = ''): iterable;
+
+    /**
+     * Returns an "iterator" that traverses stream's content in chunks
+     *
+     * **Note**: _chunk content is NOT trimmed!_
+     *
+     * Method automatically moves stream's position to its
+     * beginning, before traversable is returned.
+     *
+     * @see https://www.php.net/manual/en/function.fread.php
+     *
+     * @param  int  $size  [optional] Size of each chunk in bytes
+     *
+     * @return iterable
+     *
+     * @throws StreamException
+     */
+    public function readAllInChunks(int $size = BufferSizes::BUFFER_8KB): iterable;
+
+    /**
+     * Returns an "iterator" that traverses stream's content according to
+     * given format.
+     *
+     * @see https://www.php.net/manual/en/function.fscanf
+     *
+     * @param  string  $format
+     *
+     * @return iterable
+     *
+     * @throws StreamException
+     */
+    public function readAllUsingFormat(string $format): iterable;
+
+    /**
+     * Read all contents using given callback
+     *
+     * Method automatically moves stream's position to its
+     * beginning, before traversable is returned.
+     *
+     * @param  callable  $callback Callback is invoked until end-of-file is reached.
+     *                             This stream's resource as argument.
+     *                             Callback MUST read from stream resource return data!
+     *
+     * @return iterable
+     *
+     * @throws StreamException
+     */
+    public function readAllUsing(callable $callback): iterable;
 
     /**
      * Apply a callback, when result is true
