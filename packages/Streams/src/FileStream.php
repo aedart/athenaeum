@@ -3,6 +3,7 @@
 namespace Aedart\Streams;
 
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
+use Aedart\Contracts\Streams\Hashing\Hashable;
 use Aedart\Contracts\Streams\Locks\Lockable;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Contracts\Streams\Transactions\Transactions;
@@ -20,9 +21,11 @@ use Aedart\Streams\Exceptions\StreamException;
  */
 class FileStream extends Stream implements
     FileStreamInterface,
+    Hashable,
     Lockable,
     Transactions
 {
+    use Concerns\Hashing;
     use Concerns\Locking;
     use Concerns\Transactions;
 
@@ -167,33 +170,6 @@ class FileStream extends Stream implements
         }
 
         return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function hash(
-        string $algo,
-        bool $binary = false,
-        int $flags = 0,
-        string $key = '',
-        array $options = []
-    ): string
-    {
-        $msg = 'Unable to compute stream\'s hash';
-        $this
-            ->assertNotDetached($msg)
-            ->assertIsReadable($msg);
-
-        $context = hash_init($algo, $flags, $key, $options);
-
-        $this->restorePositionAfter(function(StreamInterface $stream) use ($context) {
-            $stream->rewind();
-
-            hash_update_stream($context, $this->resource());
-        });
-
-        return hash_final($context, $binary);
     }
 
     /*****************************************************************
