@@ -10,7 +10,6 @@ use Aedart\Contracts\Streams\Transactions\Transactions;
 use Aedart\Streams\Concerns;
 use Aedart\Streams\Exceptions\CannotCopyToTargetStream;
 use Aedart\Streams\Exceptions\CannotOpenStream;
-use Aedart\Streams\Exceptions\InvalidStreamResource;
 use Aedart\Streams\Exceptions\StreamException;
 
 /**
