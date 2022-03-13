@@ -24,7 +24,7 @@ abstract class BaseSampler implements Sampler
      *
      * @var int
      */
-    protected int $sampleSize;
+    protected int $sampleSize = 0;
 
     /**
      * Cached sample data
