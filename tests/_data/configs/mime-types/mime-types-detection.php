@@ -36,6 +36,14 @@ return [
                 // @see https://www.php.net/manual/en/function.finfo-open.php
                 'magic_database' => null,
             ]
+        ],
+
+        'file-info' => [
+            'driver' => \Aedart\MimeTypes\Drivers\FileInfoSampler::class,
+            'options' => [
+                'sample_size' => 512,
+                'magic_database' => null,
+            ]
         ]
     ]
 ];
