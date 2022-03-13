@@ -85,6 +85,8 @@ jobs:
             remote: 'athenaeum-http-messages'
           - local: 'Maintenance/Modes'
             remote: 'athenaeum-maintenance-modes'
+          - local: 'MimeTypes'
+            remote: 'athenaeum-mime-types'
           - local: 'Pagination'
             remote: 'athenaeum-pagination'
           - local: 'Properties'
