@@ -7,7 +7,7 @@ return [
      | Default Stream profiles
      |--------------------------------------------------------------------------
      |
-     | The default connection profiles to be used, when no specific transaction
+     | The default profiles to be used, when no specific transaction
      | or lock profile requested.
     */
 
