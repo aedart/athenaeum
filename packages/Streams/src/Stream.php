@@ -337,6 +337,19 @@ abstract class Stream implements StreamInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function readCharacter(): string|false
+    {
+        $msg = 'Unable to read character';
+        $this
+            ->assertNotDetached($msg)
+            ->assertIsReadable($msg);
+
+        return fgetc($this->resource());
+    }
+    
+    /**
      * @inheritDoc
      */
     public function readLine(?int $length = null): string|false
@@ -370,6 +383,22 @@ abstract class Stream implements StreamInterface
         $this->assertNotDetached('Unable to parse according to format ' . $format);
 
         return fscanf($this->resource(), $format, ...$vars);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function readAllCharacters(): iterable
+    {
+        $this
+            ->positionAtStart()
+            ->assertIsReadable();
+
+        $resource = $this->resource();
+
+        while(false !== ($char = fgetc($resource))) {
+            yield $char;
+        }
     }
 
     /**

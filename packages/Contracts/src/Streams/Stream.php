@@ -83,6 +83,18 @@ interface Stream extends StreamInterface,
     public function put(string $data): static;
 
     /**
+     * Returns a character from stream's content
+     *
+     * @see https://www.php.net/manual/en/function.fgetc
+     * @see readAllCharacters()
+     *
+     * @return string|false Character or false when no more data to read (EOF)
+     *
+     * @throws StreamException
+     */
+    public function readCharacter(): string|false;
+
+    /**
      * Returns a line from stream's content until length or newline is reached,
      * or end-of-file (EOF)
      *
@@ -130,14 +142,23 @@ interface Stream extends StreamInterface,
     public function scan(string $format, mixed &...$vars): array|int|false|null;
 
     /**
+     * Returns an "iterator" that traverses through all characters
+     * of this stream's content.
+     *
+     * @see https://www.php.net/manual/en/function.fgetc
+     *
+     * @return iterable
+     *
+     * @throws StreamException
+     */
+    public function readAllCharacters(): iterable;
+
+    /**
      * Returns an "iterator" that traverses through all lines of
      * content in this stream.
      *
      * **Note**: _Each line is automatically trimmed before returned. This means
      * that content does not contain new-line endings._
-     *
-     * Method automatically moves stream's position to its
-     * beginning, before traversable is returned.
      *
      * @see https://www.php.net/manual/en/function.fgets.php
      *
@@ -150,9 +171,6 @@ interface Stream extends StreamInterface,
     /**
      * Returns an "iterator" that traverses all of stream's content in
      * chunks, delimited by given length or string delimiter.
-     *
-     * Method automatically moves stream's position to its
-     * beginning, before traversable is returned.
      *
      * @see https://www.php.net/manual/en/function.stream-get-line
      *
@@ -170,9 +188,6 @@ interface Stream extends StreamInterface,
      * Returns an "iterator" that traverses stream's content in chunks
      *
      * **Note**: _chunk content is NOT trimmed!_
-     *
-     * Method automatically moves stream's position to its
-     * beginning, before traversable is returned.
      *
      * @see https://www.php.net/manual/en/function.fread.php
      *
@@ -200,9 +215,6 @@ interface Stream extends StreamInterface,
 
     /**
      * Read all contents using given callback
-     *
-     * Method automatically moves stream's position to its
-     * beginning, before traversable is returned.
      *
      * @param  callable  $callback Callback is invoked until end-of-file is reached.
      *                             This stream's resource as argument.
