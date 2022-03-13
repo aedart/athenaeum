@@ -2,7 +2,9 @@
 
 namespace Aedart\MimeTypes\Drivers;
 
+use Aedart\MimeTypes\Exceptions\MimeTypeDetectionException;
 use finfo;
+use Throwable;
 
 /**
  * File-Info Sampler
@@ -109,7 +111,11 @@ class FileInfoSampler extends BaseSampler
      */
     protected function makeDriver(): finfo
     {
-        return new finfo(FILEINFO_NONE, $this->magicDatabase());
+        try {
+            return new finfo(FILEINFO_NONE, $this->magicDatabase());
+        } catch (Throwable $e) {
+            throw new MimeTypeDetectionException(sprintf('Unable to instantiate File Info. Please check provided magic database path (provided: %s)', $this->magicDatabase()));
+        }
     }
 
     /**
