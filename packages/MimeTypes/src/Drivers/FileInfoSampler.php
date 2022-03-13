@@ -52,7 +52,16 @@ class FileInfoSampler extends BaseSampler
     {
         $extension = $this->fromBuffer($this->getSampleData(), FILEINFO_EXTENSION);
 
-        return explode('/', $extension);
+        $list = explode('/', $extension);
+
+        // Abort if extensions cannot be determined.
+        // `FILEINFO_EXTENSION` returns '???' when unable to detect supported extensions.
+        // @see https://www.php.net/manual/en/fileinfo.constants.php
+        if (count($list) === 1 && $list[0] === '???') {
+            return [];
+        }
+
+        return $list;
     }
 
     /**
