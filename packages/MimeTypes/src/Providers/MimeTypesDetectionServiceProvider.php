@@ -20,7 +20,6 @@ class MimeTypesDetectionServiceProvider extends ServiceProvider implements Defer
      */
     public function register()
     {
-
         $this->app->singleton(DetectorInterface::class, function() {
             $config = config();
 
