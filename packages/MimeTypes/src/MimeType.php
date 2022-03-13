@@ -4,6 +4,7 @@ namespace Aedart\MimeTypes;
 
 use Aedart\Contracts\MimeTypes\MimeType as MimeTypeInterface;
 use Aedart\Contracts\MimeTypes\Sampler;
+use Throwable;
 
 /**
  * Mime-Type
@@ -100,7 +101,20 @@ class MimeType implements MimeTypeInterface
      */
     public function __debugInfo(): array
     {
-        return array_merge($this->toArray(), [
+        $data = [
+            'type' => null,
+            'encoding' => null,
+            'extensions' => null,
+        ];
+
+        try {
+            $data = $this->toArray();
+        } catch (Throwable $e) {
+            // Ignore evt. failure here, so that debug information can be
+            // returned.
+        }
+
+        return array_merge($data, [
             'sampler' => $this->sampler()::class
         ]);
     }
