@@ -67,6 +67,21 @@ interface Stream extends StreamInterface,
     public function openUsing(callable $callback): static;
 
     /**
+     * Write formatted data to stream
+     *
+     * @see https://www.php.net/manual/en/function.fprintf
+     * @see putFormatted()
+     *
+     * @param  string  $format
+     * @param  mixed  ...$values
+     *
+     * @return int Amount bytes written to the stream
+     *
+     * @throws StreamException
+     */
+    public function writeFormatted(string $format, mixed ...$values): int;
+
+    /**
      * Put data into this stream
      *
      * Method acts as an alias for {@see write()}, but does not
@@ -81,6 +96,24 @@ interface Stream extends StreamInterface,
      * @throws StreamException
      */
     public function put(string $data): static;
+
+    /**
+     * Put formatted data into stream
+     *
+     * Method acts as an alias for {@see writeFormatted()}, but does not
+     * return amount of bytes written.
+     *
+     * @see https://www.php.net/manual/en/function.fprintf
+     * @see writeFormatted()
+     *
+     * @param  string  $format
+     * @param  mixed  ...$values
+     *
+     * @return self
+     *
+     * @throws StreamException
+     */
+    public function putFormatted(string $format, mixed ...$values): static;
 
     /**
      * Returns a character from stream's content

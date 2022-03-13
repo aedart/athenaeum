@@ -327,11 +327,33 @@ abstract class Stream implements StreamInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function writeFormatted(string $format, mixed ...$values): int
+    {
+        $this
+            ->assertNotDetached('Unable to write formatted')
+            ->assertIsWritable();
+
+        return fprintf($this->resource(), $format, ...$values);
+    }
+
+    /**
      * @inheritDoc
      */
     public function put(string $data): static
     {
         $this->write($data);
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function putFormatted(string $format, mixed ...$values): static
+    {
+        $this->writeFormatted($format, ...$values);
 
         return $this;
     }
