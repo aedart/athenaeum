@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.0.2",
         "ext-json": "*",
+        "ext-fileinfo": "*",
         "composer-runtime-api": "^2.0.0",
         "dragonmantank/cron-expression": "^3.3",
         "fakerphp/faker": "^v1.17.0",
