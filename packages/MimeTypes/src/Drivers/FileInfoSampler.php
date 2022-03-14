@@ -112,9 +112,9 @@ class FileInfoSampler extends BaseSampler
     protected function makeDriver(): finfo
     {
         try {
-            return new finfo(FILEINFO_NONE, $this->magicDatabase());
+            return new finfo(FILEINFO_MIME, $this->magicDatabase());
         } catch (Throwable $e) {
-            throw new MimeTypeDetectionException(sprintf('Unable to instantiate File Info. Please check provided magic database path (provided: %s)', $this->magicDatabase()));
+            throw new MimeTypeDetectionException(sprintf('Unable to instantiate File Info: %s', $e->getMessage()), $e->getCode(), $e);
         }
     }
 
