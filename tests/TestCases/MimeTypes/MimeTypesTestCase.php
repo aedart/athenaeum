@@ -245,10 +245,41 @@ abstract class MimeTypesTestCase extends LaravelTestCase
                 'application/x-7z-compressed',
                 'binary'
             ),
+            'doc' => $this->makeTestFileExpectation(
+                'doc',
+                'application/msword',
+                'binary'
+            ),
+            'docx' => $this->makeTestFileExpectation(
+                'docx',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'binary'
+            ),
+            // TODO: failure - Maybe wrong sample file?
+//            'dotx' => $this->makeTestFileExpectation(
+//                'dotx',
+//                'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
+//                'binary'
+//            ),
             'jpg' => $this->makeTestFileExpectation(
                 'jpg',
                 'image/jpeg',
                 'binary'
+            ),
+            'pdf' => $this->makeTestFileExpectation(
+                'pdf',
+                'application/pdf',
+                'binary'
+            ),
+            'png' => $this->makeTestFileExpectation(
+                'png',
+                'image/png',
+                'binary'
+            ),
+            'rtf' => $this->makeTestFileExpectation(
+                'rtf',
+                'text/rtf',
+                'us-ascii'
             ),
             'tar.xz' => $this->makeTestFileExpectation(
                 'tar.xz',
@@ -259,6 +290,16 @@ abstract class MimeTypesTestCase extends LaravelTestCase
                 'txt',
                 'text/plain',
                 'us-ascii'
+            ),
+            'xls' => $this->makeTestFileExpectation(
+                'xls',
+                'application/vnd.ms-excel',
+                'binary'
+            ),
+            'xlsx' => $this->makeTestFileExpectation(
+                'xlsx',
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'binary'
             ),
             'zip' => $this->makeTestFileExpectation(
                 'zip',
