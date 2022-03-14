@@ -42,7 +42,11 @@ return [
             'driver' => \Aedart\MimeTypes\Drivers\FileInfoSampler::class,
             'options' => [
                 'sample_size' => 512,
-                'magic_database' => null,
+                'magic_database' => null
+
+                // Attempt to use OS magic database... seems not to work in my case...
+//                'magic_database' => '/usr/lib/file/magic.mgc', // offset issue ???
+//                'magic_database' => '/usr/share/mime/magic', // offset issue ???
             ]
         ]
     ]
