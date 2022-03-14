@@ -33,55 +33,6 @@ class FileInfoSamplerTest extends MimeTypesTestCase
     }
 
     /*****************************************************************
-     * Data Providers
-     ****************************************************************/
-
-    /**
-     * Provides test files
-     *
-     * @return array
-     */
-    public function testFiles(): array
-    {
-        // Lookup mime types / content types:
-        // @see https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
-        // @see https://fileinfo.com/
-
-        return [
-            '7z' => $this->makeTestFileExpectation(
-                '7z',
-                'application/x-7z-compressed',
-                'binary',
-                extensions: [ '7z', 'cb7' ]
-            ),
-            'jpg' => $this->makeTestFileExpectation(
-                'jpg',
-                'image/jpeg',
-                'binary',
-                extensions: [ 'jpeg', 'jpg', 'jpe', 'jfif' ]
-            ),
-            'tar.xz' => $this->makeTestFileExpectation(
-                'tar.xz',
-                'application/x-xz',
-                'binary',
-                extensions: [  ]
-            ),
-            'txt' => $this->makeTestFileExpectation(
-                'txt',
-                'text/plain',
-                'us-ascii',
-                extensions: [  ] // Okay...? finfo does not offer any extensions for *.txt files!?!
-            ),
-            'zip' => $this->makeTestFileExpectation(
-                'zip',
-                'application/zip',
-                'binary',
-                extensions: [  ] // Hmmm...? finfo does not know zip either?
-            ),
-        ];
-    }
-
-    /*****************************************************************
      * Actual Tests
      ****************************************************************/
 
@@ -116,7 +67,7 @@ class FileInfoSamplerTest extends MimeTypesTestCase
      */
     public function canDetectFromString(array $expectation)
     {
-        list($ext, $type, $encoding, $extensions) = $expectation;
+        list($ext, $type, $encoding) = $expectation;
 
         $mimeType = $this->mimeTypeUsingStringContent($ext, $this->driverProfile());
 
@@ -124,13 +75,8 @@ class FileInfoSamplerTest extends MimeTypesTestCase
 
         $this->assertSame($type, $mimeType->type(), 'Incorrect typo');
         $this->assertSame($encoding, $mimeType->encoding(), 'Incorrect encoding');
-        $this->assertSame($extensions, $mimeType->fileExtensions(), 'Incorrect file extensions');
-
-        if (!empty($extensions)) {
-            $this->assertNotNull($mimeType->fileExtension(), 'File extension was not resolved');
-        } else {
-            $this->assertNull($mimeType->fileExtension(), 'Hmmm... extension was detected when none was expected');
-        }
+        $this->assertNotEmpty($mimeType->mime(), 'Empty mime');
+        $this->assertIsArray($mimeType->knownFileExtensions()); // A bit useless...
     }
 
     /**
@@ -145,7 +91,7 @@ class FileInfoSamplerTest extends MimeTypesTestCase
      */
     public function canDetectFromStream(array $expectation)
     {
-        list($ext, $type, $encoding, $extensions) = $expectation;
+        list($ext, $type, $encoding) = $expectation;
 
         $mimeType = $this->mimeTypeUsingStream($ext, $this->driverProfile());
 
@@ -153,12 +99,7 @@ class FileInfoSamplerTest extends MimeTypesTestCase
 
         $this->assertSame($type, $mimeType->type(), 'Incorrect typo');
         $this->assertSame($encoding, $mimeType->encoding(), 'Incorrect encoding');
-        $this->assertSame($extensions, $mimeType->fileExtensions(), 'Incorrect file extensions');
-
-        if (!empty($extensions)) {
-            $this->assertNotNull($mimeType->fileExtension(), 'File extension was not resolved');
-        } else {
-            $this->assertNull($mimeType->fileExtension(), 'Hmmm... extension was detected when none was expected');
-        }
+        $this->assertNotEmpty($mimeType->mime(), 'Empty mime');
+        $this->assertIsArray($mimeType->knownFileExtensions()); // A bit useless...
     }
 }

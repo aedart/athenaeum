@@ -207,22 +207,64 @@ abstract class MimeTypesTestCase extends LaravelTestCase
      * @param  string  $ext
      * @param  string  $type
      * @param  string  $encoding
-     * @param  array  $extensions  [optional]
      *
      * @return array
      */
     public function makeTestFileExpectation(
         string $ext,
         string $type,
-        string $encoding,
-        array $extensions = []
+        string $encoding
     ): array
     {
         return [[
             $ext,
             $type,
-            $encoding,
-            $extensions
+            $encoding
         ]];
+    }
+
+    /*****************************************************************
+     * Data Providers
+     ****************************************************************/
+
+    /**
+     * Provides test files
+     *
+     * @return array
+     */
+    public function testFiles(): array
+    {
+        // Lookup mime types / content types:
+        //
+        // @see https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
+        // @see https://fileinfo.com/
+
+        return [
+            '7z' => $this->makeTestFileExpectation(
+                '7z',
+                'application/x-7z-compressed',
+                'binary'
+            ),
+            'jpg' => $this->makeTestFileExpectation(
+                'jpg',
+                'image/jpeg',
+                'binary'
+            ),
+            'tar.xz' => $this->makeTestFileExpectation(
+                'tar.xz',
+                'application/x-xz',
+                'binary'
+            ),
+            'txt' => $this->makeTestFileExpectation(
+                'txt',
+                'text/plain',
+                'us-ascii'
+            ),
+            'zip' => $this->makeTestFileExpectation(
+                'zip',
+                'application/zip',
+                'binary'
+            ),
+        ];
     }
 }
