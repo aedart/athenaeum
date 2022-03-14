@@ -4,6 +4,7 @@ namespace Aedart\MimeTypes;
 
 use Aedart\Contracts\MimeTypes\MimeType as MimeTypeInterface;
 use Aedart\Contracts\MimeTypes\Sampler;
+use Aedart\Utils\Arr;
 use Throwable;
 
 /**
@@ -17,19 +18,29 @@ use Throwable;
 class MimeType implements MimeTypeInterface
 {
     /**
+     * In-memory cache of information
+     *
+     * @var array
+     */
+    protected array $cache;
+
+    /**
      * Creates a new mime-type instances
      *
      * @param  Sampler  $sampler
      */
-    public function __construct(protected Sampler $sampler)
-    {}
+    public function __construct(
+        protected Sampler $sampler
+    ) {
+        $this->flush();
+    }
 
     /**
      * @inheritDoc
      */
     public function type(): string|null
     {
-        return $this->sampler()->detectMimetype();
+        return $this->remember('type', fn() => $this->sampler()->detectMimetype());
     }
 
     /**
@@ -37,7 +48,7 @@ class MimeType implements MimeTypeInterface
      */
     public function encoding(): string|null
     {
-        return $this->sampler()->detectEncoding();
+        return $this->remember('encoding', fn() => $this->sampler()->detectEncoding());
     }
 
     /**
@@ -45,7 +56,7 @@ class MimeType implements MimeTypeInterface
      */
     public function mime(): string|null
     {
-        return $this->sampler()->detectMime();
+        return $this->remember('mime', fn() => $this->sampler()->detectMime());
     }
 
     /**
@@ -53,7 +64,7 @@ class MimeType implements MimeTypeInterface
      */
     public function knownFileExtensions(): array
     {
-        return $this->sampler()->detectFileExtensions();
+        return $this->remember('known_extensions', fn() => $this->sampler()->detectFileExtensions());
     }
 
     /**
@@ -104,10 +115,49 @@ class MimeType implements MimeTypeInterface
         } catch (Throwable $e) {
             // Ignore evt. failure here, so that debug information can be
             // returned.
+            dump($e->getMessage());
         }
 
         return array_merge($data, [
             'sampler' => $this->sampler()::class
         ]);
+    }
+
+    /**
+     * Flush internal cached values
+     *
+     * @return self
+     */
+    public function flush(): static
+    {
+        $this->cache = [];
+
+        return $this;
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Get value from cache, or execute callback and store value
+     *
+     * @param  string  $key
+     * @param  callable  $callback
+     *
+     * @return mixed
+     */
+    protected function remember(string $key, callable $callback): mixed
+    {
+        $value = Arr::get($this->cache, $key);
+        if (isset($value)) {
+            return $value;
+        }
+
+        $value = $callback($this);
+
+        Arr::set($this->cache, $key, $value);
+
+        return $value;
     }
 }
