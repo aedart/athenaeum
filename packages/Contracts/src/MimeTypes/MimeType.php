@@ -46,23 +46,8 @@ interface MimeType extends
     public function mime(): string|null;
 
     /**
-     * Returns first file-extensions that matches the
-     * detected mime-type
-     *
-     * **Note**: _Some mime-types support multiple file extension.
-     * Method only returns the first match, if any was detected._
-     *
-     * @see fileExtensions()
-     *
-     * @return string|null
-     *
-     * @throws MimeTypeDetectionException
-     */
-    public function fileExtension(): string|null;
-
-    /**
-     * Returns all identified file-extensions that matches the
-     * detected mime-type
+     * Returns list of known file-extensions that matches detected
+     * mime-type.
      *
      * **Note** _Some mime-types that are known to have multiple
      * extensions, e.g. JPEG images: jpeg, jpg, jpe, jfif, ...etc_
@@ -71,7 +56,7 @@ interface MimeType extends
      *
      * @throws MimeTypeDetectionException
      */
-    public function fileExtensions(): array;
+    public function knownFileExtensions(): array;
 
     /**
      * Returns the underlying sampler this mime-type uses

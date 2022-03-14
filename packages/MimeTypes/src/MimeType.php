@@ -51,17 +51,7 @@ class MimeType implements MimeTypeInterface
     /**
      * @inheritDoc
      */
-    public function fileExtension(): string|null
-    {
-        $extensions = $this->fileExtensions();
-
-        return $extensions[0] ?? null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function fileExtensions(): array
+    public function knownFileExtensions(): array
     {
         return $this->sampler()->detectFileExtensions();
     }
@@ -82,7 +72,7 @@ class MimeType implements MimeTypeInterface
         return [
             'type' => $this->type(),
             'encoding' => $this->encoding(),
-            'extensions' => $this->fileExtensions(),
+            'extensions' => $this->knownFileExtensions(),
         ];
     }
 
