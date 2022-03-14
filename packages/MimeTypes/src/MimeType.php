@@ -70,9 +70,10 @@ class MimeType implements MimeTypeInterface
     public function toArray()
     {
         return [
+            'mime' => $this->mime(),
             'type' => $this->type(),
             'encoding' => $this->encoding(),
-            'extensions' => $this->knownFileExtensions(),
+            'known_extensions' => $this->knownFileExtensions(),
         ];
     }
 
@@ -92,9 +93,10 @@ class MimeType implements MimeTypeInterface
     public function __debugInfo(): array
     {
         $data = [
+            'mime' => null,
             'type' => null,
             'encoding' => null,
-            'extensions' => null,
+            'known_extensions' => null,
         ];
 
         try {
