@@ -96,9 +96,12 @@ class FileInfoSamplerTest extends MimeTypesTestCase
     {
         $this->expectException(MimeTypeDetectionException::class);
 
-        $this->mimeTypeUsingStringContent('txt', $this->driverProfile(), [
-            'magic_database' => '/path/to/some/unknown/magic_db'
+        $mimeType = $this->mimeTypeUsingStringContent('txt', $this->driverProfile(), [
+            'magic_database' => '/path/to/some/unknown/magic_db.mgc'
         ]);
+
+        // This should trigger exception...
+        $mimeType->type();
     }
 
     /**
