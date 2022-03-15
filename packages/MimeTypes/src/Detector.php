@@ -53,8 +53,13 @@ class Detector implements DetectorInterface
      */
     public function detect($data, ?string $profile = null, array $options = []): MimeTypeInterface
     {
-        return $this->makeMimeType(
-            $this->makeSampler($data, $profile, $options)
+        $sampler = $this->makeSampler($data, $profile, $options);
+
+        return new MimeType(
+            type: $sampler->detectMimetype(),
+            encoding: $sampler->detectEncoding(),
+            mime: $sampler->detectMime(),
+            extensions: $sampler->detectFileExtensions()
         );
     }
 
@@ -76,18 +81,6 @@ class Detector implements DetectorInterface
 
         // Build and return sampler instance
         return new $driver($data, $options);
-    }
-
-    /**
-     * Returns a new mime-type object
-     *
-     * @param  Sampler  $sampler
-     *
-     * @return MimeTypeInterface
-     */
-    public function makeMimeType(Sampler $sampler): MimeTypeInterface
-    {
-        return new MimeType($sampler);
     }
 
     /**

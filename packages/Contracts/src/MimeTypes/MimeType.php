@@ -2,7 +2,6 @@
 
 namespace Aedart\Contracts\MimeTypes;
 
-use Aedart\Contracts\MimeTypes\Exceptions\MimeTypeDetectionException;
 use Illuminate\Contracts\Support\Arrayable;
 use Stringable;
 
@@ -20,8 +19,6 @@ interface MimeType extends
      * Returns the detected mime-type
      *
      * @return string|null
-     *
-     * @throws MimeTypeDetectionException
      */
     public function type(): string|null;
 
@@ -29,8 +26,6 @@ interface MimeType extends
      * Returns the detected mime encoding
      *
      * @return string|null
-     *
-     * @throws MimeTypeDetectionException
      */
     public function encoding(): string|null;
 
@@ -40,8 +35,6 @@ interface MimeType extends
      * @see https://datatracker.ietf.org/doc/html/rfc2045
      *
      * @return string|null
-     *
-     * @throws MimeTypeDetectionException
      */
     public function mime(): string|null;
 
@@ -53,15 +46,6 @@ interface MimeType extends
      * extensions, e.g. JPEG images: jpeg, jpg, jpe, jfif, ...etc_
      *
      * @return string[]
-     *
-     * @throws MimeTypeDetectionException
      */
     public function knownFileExtensions(): array;
-
-    /**
-     * Returns the underlying sampler this mime-type uses
-     *
-     * @return Sampler
-     */
-    public function sampler(): Sampler;
 }
