@@ -54,7 +54,7 @@ abstract class BaseSampler implements Sampler
             return $this->cachedSample;
         }
 
-        if ($this->useEntireDataAsSample()) {
+        if ($this->mustUseFullDataSample()) {
             $sample = $this->takeSample($this->getRawData());
         } else {
             $sample = $this->takeSample($this->getRawData(), $this->getSampleSize());
@@ -118,7 +118,7 @@ abstract class BaseSampler implements Sampler
      *
      * @return bool
      */
-    protected function useEntireDataAsSample(): bool
+    protected function mustUseFullDataSample(): bool
     {
         return $this->getSampleSize() === 0;
     }
