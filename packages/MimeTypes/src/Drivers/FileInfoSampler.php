@@ -9,7 +9,20 @@ use Throwable;
 /**
  * File-Info Sampler
  *
+ * On linux, using the PHP File Extension is almost the equivalent to invoking
+ * the following commands in terminal:
+ *
+ * ```shell
+ * # mime-type and encoding
+ * file -i -p [your-file.txt]
+ *
+ * # list of known file extensions
+ * file -p --extension [your-file.txt]
+ * ```
+ *
  * @see https://www.php.net/manual/en/class.finfo.php
+ * @see https://manpages.debian.org/bullseye/file/file.1.en.html
+ * @see https://github.com/file/file
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\MimeTypes\Drivers
