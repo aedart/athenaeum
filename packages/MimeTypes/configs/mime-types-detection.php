@@ -39,7 +39,7 @@ return [
                 // determine mime-type, ...etc
                 //
                 // @see https://manpages.debian.org/bullseye/file/file.1.en.html
-                'sample_size' => 512,
+                'sample_size' => 1048576,
 
                 // Magic database to be used.
                 //

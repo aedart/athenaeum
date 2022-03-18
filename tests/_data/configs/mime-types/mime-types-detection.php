@@ -30,7 +30,7 @@ return [
                 // Default sample size in bytes.
                 // If size is set to `0` then entire data / contents is used
                 // by sampler.
-                'sample_size' => 512,
+                'sample_size' => 1048576,
 
                 // Magic database to be used.
                 // @see https://www.php.net/manual/en/function.finfo-open.php
@@ -41,7 +41,7 @@ return [
         'file-info' => [
             'driver' => \Aedart\MimeTypes\Drivers\FileInfoSampler::class,
             'options' => [
-                'sample_size' => 512,
+                'sample_size' => 1048576,
                 'magic_database' => null
             ]
         ]
