@@ -21,18 +21,32 @@ class MimeType implements MimeTypeInterface
     /**
      * Creates a new Mime-Type instance
      *
+     * @param  string|null  $description  [optional]
      * @param  string|null  $type  [optional]
      * @param  string|null  $encoding  [optional]
      * @param  string|null  $mime  [optional]
      * @param  array  $extensions  [optional]
      */
     public function __construct(
+        protected string|null $description = null,
         protected string|null $type = null,
         protected string|null $encoding = null,
         protected string|null $mime = null,
         protected array $extensions = []
     )
     {}
+
+    /**
+     * @inheritDoc
+     */
+    public function description(): string|null
+    {
+        if (is_string($this->description) && empty(trim($this->description))) {
+            return null;
+        }
+
+        return trim($this->description);
+    }
 
     /**
      * @inheritDoc
@@ -72,6 +86,7 @@ class MimeType implements MimeTypeInterface
     public function toArray()
     {
         return [
+            'description' => $this->description(),
             'mime' => $this->mime(),
             'type' => $this->type(),
             'encoding' => $this->encoding(),

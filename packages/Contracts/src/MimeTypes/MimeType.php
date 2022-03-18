@@ -16,6 +16,13 @@ interface MimeType extends
     Stringable
 {
     /**
+     * Returns a short description of the mime-type
+     *
+     * @return string|null
+     */
+    public function description(): string|null;
+
+    /**
      * Returns the detected mime-type
      *
      * @return string|null

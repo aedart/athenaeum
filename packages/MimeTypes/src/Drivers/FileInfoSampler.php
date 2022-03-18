@@ -39,6 +39,14 @@ class FileInfoSampler extends BaseSampler
     /**
      * @inheritDoc
      */
+    public function getMimeTypeDescription(): string|null
+    {
+        return $this->fromBuffer($this->getSampleData(), FILEINFO_RAW);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function detectMimetype(): string|null
     {
         return $this->fromBuffer($this->getSampleData(), FILEINFO_MIME_TYPE);

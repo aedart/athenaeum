@@ -56,6 +56,7 @@ class Detector implements DetectorInterface
         $sampler = $this->makeSampler($data, $profile, $options);
 
         return new MimeType(
+            description: $sampler->getMimeTypeDescription(),
             type: $sampler->detectMimetype(),
             encoding: $sampler->detectEncoding(),
             mime: $sampler->detectMime(),

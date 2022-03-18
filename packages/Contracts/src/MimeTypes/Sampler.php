@@ -16,6 +16,17 @@ use InvalidArgumentException;
 interface Sampler
 {
     /**
+     * Returns a short description of the detected mime-type,
+     * if available
+     *
+     * @return string|null
+     *
+     *
+     * @throws MimeTypeDetectionException
+     */
+    public function getMimeTypeDescription(): string|null;
+
+    /**
      * Detects the mime-type
      *
      * @return string|null
