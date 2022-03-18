@@ -6,6 +6,8 @@ use Aedart\Contracts\MimeTypes\Detector as DetectorInterface;
 use Aedart\Contracts\MimeTypes\MimeType as MimeTypeInterface;
 use Aedart\Contracts\MimeTypes\Sampler;
 use Aedart\MimeTypes\Drivers\FileInfoSampler;
+use Aedart\MimeTypes\Exceptions\FileNotFound;
+use Aedart\MimeTypes\Exceptions\MimeTypeDetectionException;
 use Aedart\MimeTypes\Exceptions\ProfileNotFound;
 
 /**
@@ -62,6 +64,26 @@ class Detector implements DetectorInterface
             mime: $sampler->detectMime(),
             extensions: $sampler->detectFileExtensions()
         );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function detectForFile(string $file, ?string $profile = null, array $options = []): MimeTypeInterface
+    {
+        if (!is_file($file)) {
+            throw new FileNotFound(sprintf('File %s does not exist.', $file));
+        }
+
+        $stream = fopen($file, 'rb');
+        if ($stream === false) {
+            throw new MimeTypeDetectionException(sprintf('Unable to open file %s', $file));
+        }
+
+        $mimeType = $this->detect($stream, $profile, $options);
+        fclose($stream);
+
+        return $mimeType;
     }
 
     /**

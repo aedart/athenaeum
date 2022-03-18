@@ -4,8 +4,11 @@ namespace Aedart\Tests\Integration\MimeTypes;
 
 use Aedart\Contracts\MimeTypes\Detector;
 use Aedart\Contracts\MimeTypes\Exceptions\MimeTypeDetectionException;
+use Aedart\Contracts\MimeTypes\MimeType;
 use Aedart\Contracts\MimeTypes\Sampler;
+use Aedart\MimeTypes\Exceptions\FileNotFound;
 use Aedart\MimeTypes\Exceptions\ProfileNotFound;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\MimeTypes\MimeTypesTestCase;
 
 /**
@@ -63,5 +66,41 @@ class DetectorTest extends MimeTypesTestCase
         $this
             ->getMimeTypeDetector()
             ->makeSampler('', 'unknown_profile');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws MimeTypeDetectionException
+     */
+    public function canDetectMimeTypeUsingFilePath()
+    {
+        $file = $this->filePath('txt');
+        $mimeType = $this
+            ->getMimeTypeDetector()
+            ->detectForFile($file);
+
+        ConsoleDebugger::output($mimeType);
+
+        $this->assertInstanceOf(MimeType::class, $mimeType);
+        $this->assertSame('text/plain', $mimeType->type());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws MimeTypeDetectionException
+     */
+    public function failsIfFileNotFound()
+    {
+        $this->expectException(FileNotFound::class);
+
+        $this
+            ->getMimeTypeDetector()
+            ->detectForFile('some_unknown_file.txt');
     }
 }
