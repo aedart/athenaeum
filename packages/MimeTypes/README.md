@@ -1,6 +1,6 @@
 # Athenaeum Mime-Types
 
-A "profile" based [mime type](https://en.wikipedia.org/wiki/Media_type) detector, which uses a string or a `resource` as sample.
+A "profile" based [MIME-type](https://en.wikipedia.org/wiki/Media_type) detector, which uses a string or a `resource` as sample.
 
 ```php
 use Aedart\MimeTypes\Detector;
