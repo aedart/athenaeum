@@ -126,6 +126,50 @@ class Unit implements Stringable
     }
 
     /*****************************************************************
+     * Operations
+     ****************************************************************/
+
+    /**
+     * Returns a new memory unit instance with given value added
+     *
+     * @param  int|Unit  $value bytes or memory unit instance
+     *
+     * @return static
+     *
+     * @throws InvalidArgumentException
+     */
+    public function add(int|Unit $value): static
+    {
+        if (!($value instanceof Unit)) {
+            $value = static::make($value);
+        }
+
+        return static::make(
+            $this->bytes() + $value->bytes()
+        );
+    }
+
+    /**
+     * Returns a new memory unit instance with given value subtracted
+     *
+     * @param  int|Unit  $value bytes or memory unit instance
+     *
+     * @return static
+     *
+     * @throws InvalidArgumentException
+     */
+    public function subtract(int|Unit $value): static
+    {
+        if (!($value instanceof Unit)) {
+            $value = static::make($value);
+        }
+
+        return static::make(
+            $this->bytes() - $value->bytes()
+        );
+    }
+
+    /*****************************************************************
      * Bytes
      ****************************************************************/
     
