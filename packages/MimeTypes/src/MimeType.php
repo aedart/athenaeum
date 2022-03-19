@@ -39,6 +39,14 @@ class MimeType implements MimeTypeInterface
     /**
      * @inheritDoc
      */
+    public function isValid(): bool
+    {
+        return !empty($this->type);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function description(): string|null
     {
         if (is_string($this->description) && empty(trim($this->description))) {

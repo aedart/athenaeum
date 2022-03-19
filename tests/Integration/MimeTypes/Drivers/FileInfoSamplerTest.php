@@ -73,6 +73,7 @@ class FileInfoSamplerTest extends MimeTypesTestCase
 
         ConsoleDebugger::output($mimeType);
 
+        $this->assertTrue($mimeType->isValid());
         $this->assertSame($type, $mimeType->type(), 'Incorrect typo');
         $this->assertSame($encoding, $mimeType->encoding(), 'Incorrect encoding');
         $this->assertNotEmpty($mimeType->mime(), 'Empty mime');
@@ -97,6 +98,7 @@ class FileInfoSamplerTest extends MimeTypesTestCase
 
         ConsoleDebugger::output($mimeType);
 
+        $this->assertTrue($mimeType->isValid());
         $this->assertSame($type, $mimeType->type(), 'Incorrect typo');
         $this->assertSame($encoding, $mimeType->encoding(), 'Incorrect encoding');
         $this->assertNotEmpty($mimeType->mime(), 'Empty mime');

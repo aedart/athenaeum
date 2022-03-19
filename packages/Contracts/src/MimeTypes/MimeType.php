@@ -6,7 +6,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Stringable;
 
 /**
- * Mime-Type
+ * MIME-Type
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\MimeTypes
@@ -16,28 +16,38 @@ interface MimeType extends
     Stringable
 {
     /**
-     * Returns a short description of the mime-type
+     * Determines if this MIME-type instance is valid
+     *
+     * Method returns true if the {@see type()} returns
+     * a string MIME-type. Otherwise, false is returned.
+     *
+     * @return bool
+     */
+    public function isValid(): bool;
+
+    /**
+     * Returns a short description of the MIME-type
      *
      * @return string|null
      */
     public function description(): string|null;
 
     /**
-     * Returns the detected mime-type
+     * Returns the detected MIME-type
      *
      * @return string|null
      */
     public function type(): string|null;
 
     /**
-     * Returns the detected mime encoding
+     * Returns the detected MIME encoding
      *
      * @return string|null
      */
     public function encoding(): string|null;
 
     /**
-     * Returns the mime-type and encoding as defined by RFC 2045
+     * Returns the MIME-type and encoding as defined by RFC 2045
      *
      * @see https://datatracker.ietf.org/doc/html/rfc2045
      *
@@ -47,7 +57,7 @@ interface MimeType extends
 
     /**
      * Returns list of known file-extensions that matches detected
-     * mime-type.
+     * MIME-type.
      *
      * **Note** _Some mime-types that are known to have multiple
      * extensions, e.g. JPEG images: jpeg, jpg, jpe, jfif, ...etc_
