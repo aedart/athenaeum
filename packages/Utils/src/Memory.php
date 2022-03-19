@@ -2,6 +2,7 @@
 
 namespace Aedart\Utils;
 
+use Aedart\Utils\Memory\Unit;
 use InvalidArgumentException;
 
 /**
@@ -13,37 +14,143 @@ use InvalidArgumentException;
 class Memory
 {
     /**
-     * Default units on powers of 10
+     * Creates a new memory unit instance
      *
-     * Source: https://en.wikipedia.org/wiki/Byte
+     * @param  int  $bytes  [optional]
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException If negative or too large bytes value provided
      */
-    public const UNITS_POWER_OF_10 = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    public static function unit(int $bytes = 0): Unit
+    {
+        return Unit::make($bytes);
+    }
 
     /**
-     * Default units on powers of 2
+     * Create a new memory unit from given string value
      *
-     * Source: https://en.wikipedia.org/wiki/Byte
+     * Method expects string value to follow the given syntax:
+     *
+     * ```
+     * "[value][?space][unit]"
+     *
+     * value = digit or float
+     * space = optional whitespace character
+     * unit = name or symbol of unit (case-insensitive)
+     * ```
+     *
+     * @param  string  $value E.g. "1.32 MB", "5.12mib", "12 bytes"...etc
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException If format is invalid or unit is unknown
      */
-    public const UNITS_POWER_OF_2 = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+    public static function from(string $value): Unit
+    {
+        return Unit::from($value);
+    }
+
+    /*****************************************************************
+     * Kilobyte / Kibibyte
+     ****************************************************************/
 
     /**
-     * Units based on powers of 10, in which 1 kilobyte (symbol kB) is defined to equal 1,000 bytes
+     * Creates a new memory unit from kilobyte (power of 10)
      *
-     * Source: https://en.wikipedia.org/wiki/Byte#Multiple-byte_units
+     * @param  int|float  $kilobyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
      */
-    public const POWER_OF_10 = 1000;
+    public static function fromKilobyte(int|float $kilobyte): Unit
+    {
+        return Unit::fromKilobyte($kilobyte);
+    }
 
     /**
-     * Units based on powers of 2 in which 1 kibibyte (KiB) is equal to 1,024 (i.e., 2¹⁰) bytes
+     * Creates a new memory unit from legacy kilobyte (power of 2)
      *
-     * Source: https://en.wikipedia.org/wiki/Byte#Multiple-byte_units
+     * @param  int|float  $kilobyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
      */
-    public const POWER_OF_2 = 1024;
+    public static function fromLegacyKilobyte(int|float $kilobyte): Unit
+    {
+        return Unit::fromLegacyKilobyte($kilobyte);
+    }
+
+    /**
+     * Creates a new memory unit from kibibyte (power of 2)
+     *
+     * @param  int|float  $kibibyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromKibibyte(int|float $kibibyte): Unit
+    {
+        return Unit::fromKibibyte($kibibyte);
+    }
+
+    /*****************************************************************
+     * Megabyte / Mebibyte
+     ****************************************************************/
+
+    /**
+     * Creates a new memory unit from megabyte (power of 10)
+     *
+     * @param  int|float  $megabyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromMegabyte(int|float $megabyte): Unit
+    {
+        return Unit::fromMegabyte($megabyte);
+    }
+
+    /**
+     * Creates a new memory unit from legacy megabyte (power of 2)
+     *
+     * @param  int|float  $kilobyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromLegacyMegabyte(int|float $kilobyte): Unit
+    {
+        return Unit::fromLegacyMegabyte($kilobyte);
+    }
+
+    /**
+     * Creates a new memory unit from mebibyte (power of 2)
+     *
+     * @param  int|float  $mebibyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromMebibyte(int|float $mebibyte): Unit
+    {
+        return Unit::fromMebibyte($mebibyte);
+    }
+
+    /*****************************************************************
+     * Formatting
+     ****************************************************************/
 
     /**
      * Format bytes to human-readable string
      *
-     * @param  int|float  $bytes
+     * @param  int  $bytes
      * @param  int  $precision  [optional] Amount of decimals
      * @param  array  $units  [optional] List of symbols or units to be appended to the value
      * @param  int  $step  [optional] E.g. power of 2 (1024) or power of 10 (1000)
@@ -53,37 +160,12 @@ class Memory
      * @throws InvalidArgumentException
      */
     public static function format(
-        int|float $bytes,
+        int $bytes,
         int $precision = 1,
-        array $units = self::UNITS_POWER_OF_10,
-        int $step = self::POWER_OF_2
+        array $units = Unit::UNITS_POWER_OF_10,
+        int $step = Unit::POWER_OF_2
     ): string
     {
-        // Source inspired by: https://gist.github.com/liunian/9338301
-
-        // Fail when no units given
-        if (empty($units)) {
-            throw new InvalidArgumentException('No units provided for format bytes.');
-        }
-
-        // Fail when invalid step provided
-        if ($step < 1) {
-            throw new InvalidArgumentException(sprintf('Step value must be at least 1. %d provided', $step));
-        }
-
-        // Fail if negative value provided
-        if ($bytes < 0) {
-            throw new InvalidArgumentException('Negative bytes are not supported');
-        }
-
-        $i = 0;
-
-        $max = count($units) - 1;
-        while (($bytes / $step) > 0.99999 && $i < $max) {
-            $bytes = $bytes / $step;
-            $i++;
-        }
-
-        return round($bytes, $precision). ' ' . $units[$i];
+        return static::unit($bytes)->format($precision, $units, $step);
     }
 }
