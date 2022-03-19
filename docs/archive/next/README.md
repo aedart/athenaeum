@@ -88,6 +88,17 @@ echo ($record->reference instanceof Organisation); // true
 
 See [Union Type Handling documentation](./dto/nested-dto.md#union-types) for additional examples.
 
+### MIME-types detection
+
+The [MIME-types](./mime-types) packages offers a way to detect a file's MIME-type based on a small sample of its contents.
+
+```php
+use Aedart\MimeTypes\Detector;
+
+$file = fopen('my-picture.jpg', 'rb');
+$mimeType = (new Detector())->detect($file);
+```
+
 ### Maintenance Modes
 
 A new [Maintenance Modes](./maintenance/modes) package has been added, which offers a few additional drivers that can be used for [storing application down](https://laravel.com/docs/9.x/configuration#maintenance-mode) state.
