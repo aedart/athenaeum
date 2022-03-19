@@ -19,6 +19,7 @@ Output example:
 ```
 Aedart\MimeTypes\MimeType Object
 (
+    [description] => JPEG image data, JFIF standard 1.01, resolution (DPI),...
     [mime] => image/jpeg; charset=binary
     [type] => image/jpeg
     [encoding] => binary
