@@ -7,7 +7,7 @@ return [
      | Default Stream profiles
      |--------------------------------------------------------------------------
      |
-     | The default connection profiles to be used, when no specific transaction
+     | The default profiles to be used, when no specific transaction
      | or lock profile requested.
     */
 
@@ -52,20 +52,39 @@ return [
         'default' => [
             'driver' => \Aedart\Streams\Transactions\Drivers\CopyWriteReplaceDriver::class,
             'options' => [
+
                 // The maximum memory size, before processed stream is written to
                 // a temporary file by PHP.
                 'maxMemory' => 5 * \Aedart\Contracts\Streams\BufferSizes::BUFFER_1MB,
 
-                // When true, a physical backup of the target stream will be created.
-                // (This is NOT the same as the temporary file that is processed!)
-                'backup' => true,
+                // Lock settings
+                'lock' => [
 
-                // Location of where backup files are to be stored.
-                'backup_directory' => storage_path('backups'),
+                    // When true, the stream will be locked during transaction
+                    'enabled' => true,
 
-                // When true and commit is successful, backup file is automatically
-                // removed. Has no effect if backup is set to false.
-                'remove_backup_after_commit' => false,
+                    // Name of the lock profile to be used
+                    'profile' => env('STREAM_LOCK', 'default'),
+
+                    // Type of lock to be used
+                    'type' => \Aedart\Contracts\Streams\Locks\LockTypes::EXCLUSIVE,
+
+                    // Acquire lock timeout in seconds
+                    'timeout' => 0.5,
+                ],
+
+                // Backup settings
+                'backup' => [
+
+                    // When true, a backup of target stream (*.bak file) will be stored
+                    'enabled' => false,
+
+                    // Location of backup files
+                    'directory' => storage_path('backups'),
+
+                    // When true, backup file is automatically removed after commit.
+                    'remove_after_commit' => false,
+                ],
             ]
         ]
     ]

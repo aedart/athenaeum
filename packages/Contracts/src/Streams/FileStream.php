@@ -3,7 +3,7 @@
 namespace Aedart\Contracts\Streams;
 
 use Aedart\Contracts\Streams\Exceptions\StreamException;
-use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\StreamInterface as PsrStreamInterface;
 
 /**
  * File Stream
@@ -107,43 +107,51 @@ interface FileStream extends Stream
     public function copyTo(Stream|null $target = null, int|null $length = null, int $offset = 0): static;
 
     /**
-     * Write content at the end of this stream's data
+     * Append data at the end of this stream
      *
-     * @param  string|resource|StreamInterface $content
-     * @param  int  $bufferSize  [optional] Size of buffer in bytes for reading and writing.
+     * Unlike {@see write()} and {@see put()}, this method will automatically move
+     * the position to the end, before appending data.
      *
-     * @return int Number of bytes written
+     * **Warning**: _Method will {@see detach()} underlying resource from given stream,
+     * if `$data` is a {@see PsrStreamInterface} instance is given!_
      *
-     * @throws StreamException
-     */
-    public function append($content, int $bufferSize = BufferSizes::BUFFER_8KB): int;
-
-    /**
-     * Write content at the beginning of this stream's data
-     *
-     * @param  string|resource|StreamInterface $content
-     * @param  int  $bufferSize  [optional] Size of buffer in bytes for reading and writing.
-     *
-     * @return int Number of bytes written
-     *
-     * @throws StreamException
-     */
-    public function prepend($content, int $bufferSize = BufferSizes::BUFFER_8KB): int;
-
-    /**
-     * Truncates file pointer / stream to given size length
-     *
-     * @see https://www.php.net/manual/en/function.ftruncate
-     *
-     * @param  int  $size
+     * @param  string|int|float|resource|PsrStreamInterface|Stream  $data
+     * @param  int|null  $length  [optional] Maximum bytes to append. By default, all bytes left are appended
+     * @param  int  $offset  [optional] The offset where to start to copy data (offset on `$data`)
+     * @param  int|null  $maximumMemory  [optional] Maximum amount of bytes to keep in memory before writing to a
+     *                                   temporary file. If none specified, then defaults to 2 Mb.
+     *                                   Argument is only applied when `$data` is of type string or number.
      *
      * @return self
      *
      * @throws StreamException
      */
-    public function truncate(int $size): static;
+    public function append(
+        $data,
+        int|null $length = null,
+        int $offset = 0,
+        int|null $maximumMemory = null
+    ): static;
 
     /**
+     * Truncates file stream to given size length
+     *
+     * @see https://www.php.net/manual/en/function.ftruncate
+     *
+     * @param  int  $size
+     * @param  bool  $moveToEnd  [optional] Moves position to the end of
+     *                           the file after truncate, if set to `true`.
+     *
+     * @return self
+     *
+     * @throws StreamException
+     */
+    public function truncate(int $size, bool $moveToEnd = true): static;
+
+    /**
+     * TODO: Only available from for PHP v8.1 and upwards
+     * TODO: @see https://github.com/aedart/athenaeum/issues/105
+     *
      * Synchronizes changes to the file
      *
      * @see https://www.php.net/manual/en/function.fsync.php
@@ -151,12 +159,14 @@ interface FileStream extends Stream
      *
      * @param  bool  $includeMeta  [optional] When `true`, meta-data is also
      *                             synchronized to file.
+     *                             If `false`, meta-data is not synchronized
+     *                             (works only on POSIX systems).
      *
      * @return self
      *
      * @throws StreamException
      */
-    public function sync(bool $includeMeta = true): static;
+//    public function sync(bool $includeMeta = true): static;
 
     /**
      * Writes all buffered output to the open file
@@ -168,29 +178,4 @@ interface FileStream extends Stream
      * @throws StreamException
      */
     public function flush(): static;
-
-    /**
-     * Return a hash of streams contents
-     *
-     * @see https://www.php.net/manual/en/function.hash-init.php
-     * @see https://www.php.net/manual/en/function.hash-update-stream.php
-     * @see https://www.php.net/manual/en/function.hash-final.php
-     *
-     * @param  string  $algo Name of hashing algorithm
-     * @param  bool  $binary  [optional] If true, outputs raw binary data
-     * @param  int  $flags  [optional] Optional settings for hash generation
-     * @param  string  $key  [optional] Shared secret key, when HASH_HMAC specified in `$flags`
-     * @param  array  $options  [optional] Options for the specified hashing algorithm
-     *
-     * @return string
-     *
-     * @throws StreamException
-     */
-    public function hash(
-        string $algo,
-        bool $binary = false,
-        int $flags = 0,
-        string $key = '',
-        array $options = []
-    ): string;
 }

@@ -2,13 +2,15 @@
 
 namespace Aedart\Streams;
 
-use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
-use Aedart\Contracts\Streams\Locks\LockOperations;
+use Aedart\Contracts\Streams\Hashing\Hashable;
+use Aedart\Contracts\Streams\Locks\Lockable;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Contracts\Streams\Transactions\Transactions;
 use Aedart\Streams\Concerns;
+use Aedart\Streams\Exceptions\CannotCopyToTargetStream;
 use Aedart\Streams\Exceptions\CannotOpenStream;
+use Aedart\Streams\Exceptions\StreamException;
 
 /**
  * File Stream
@@ -18,11 +20,14 @@ use Aedart\Streams\Exceptions\CannotOpenStream;
  */
 class FileStream extends Stream implements
     FileStreamInterface,
-    LockOperations,
+    Hashable,
+    Lockable,
     Transactions
 {
+    use Concerns\Hashing;
     use Concerns\Locking;
     use Concerns\Transactions;
+    use Concerns\Conversion;
 
     /**
      * @inheritDoc
@@ -83,39 +88,74 @@ class FileStream extends Stream implements
      */
     public function copyTo(StreamInterface|null $target = null, int|null $length = null, int $offset = 0): static
     {
-        // TODO: Implement copyTo() method.
+        $target = $target ?? static::openTemporary();
+
+        $this->performCopy($this, $target, $length, $offset);
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function append(
+        $data,
+        int|null $length = null,
+        int $offset = 0,
+        int|null $maximumMemory = null
+    ): static
+    {
+        $this
+            ->positionAtEnd()
+            ->performCopy(
+                $this->wrap($data, $maximumMemory),
+                $this,
+                $length,
+                $offset
+            );
+
+        return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function append($content, int $bufferSize = BufferSizes::BUFFER_8KB): int
+    public function truncate(int $size, bool $moveToEnd = true): static
     {
-        // TODO: Implement append() method.
+        $this->assertNotDetached('Unable to truncate stream');
+
+        if (ftruncate($this->resource(), $size) === false) {
+            throw new StreamException(sprintf('Failed truncating stream to %d bytes', $size));
+        }
+
+        if ($moveToEnd) {
+            return $this->positionAtEnd();
+        }
+
+        return $this;
     }
 
     /**
-     * @inheritDoc
-     */
-    public function prepend($content, int $bufferSize = BufferSizes::BUFFER_8KB): int
-    {
-        // TODO: Implement prepend() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function truncate(int $size): static
-    {
-        // TODO: Implement truncate() method.
-    }
-
-    /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * **CAUTION**: _Method is only supported from PHP v8.1_
+     * TODO: @see https://github.com/aedart/athenaeum/issues/105
      */
     public function sync(bool $includeMeta = true): static
     {
-        // TODO: Implement sync() method.
+        $this->assertNotDetached('Unable to synchronizes data to file');
+
+        if ($includeMeta) {
+            $result = fsync($this->resource());
+        } else {
+            $result = fdatasync($this->resource());
+        }
+
+        if ($result === false) {
+            throw new StreamException('Failed to synchronize data to file. Please check if stream is block or otherwise invalid');
+        }
+
+        return $this;
     }
 
     /**
@@ -123,19 +163,54 @@ class FileStream extends Stream implements
      */
     public function flush(): static
     {
-        // TODO: Implement flush() method.
+        $this->assertNotDetached('Unable to flush output');
+
+        if (fflush($this->resource()) === false) {
+            throw new StreamException('Flush output failed. Please check if stream is block or otherwise invalid');
+        }
+
+        return $this;
     }
 
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
     /**
-     * @inheritDoc
+     * Perform copy of this stream into given target
+     *
+     * @param  StreamInterface  $source
+     * @param  StreamInterface  $target
+     * @param  int|null  $length  [optional]
+     * @param  int  $offset  [optional]
+     *
+     * @return int Bytes copied
+     *
+     * @throws StreamException
      */
-    public function hash(
-        string $algo,
-        bool $binary = false,
-        int $flags = 0,
-        string $key = '',
-        array $options = []
-    ): string {
-        // TODO: Implement hash() method.
+    protected function performCopy(StreamInterface $source, StreamInterface $target, int|null $length = null, int $offset = 0): int
+    {
+        // Abort if source is detached or not readable
+        if ($source->isDetached() || !$target->isReadable()) {
+            throw new CannotCopyToTargetStream('Source stream is either detached or not readable.');
+        }
+
+        // Abort if target is not writable or detached
+        if ($target->isDetached() || !$target->isWritable()) {
+            throw new CannotCopyToTargetStream('Target stream is either detached or not writable.');
+        }
+
+        $bytesCopied = stream_copy_to_stream(
+            $source->resource(),
+            $target->resource(),
+            $length,
+            $offset
+        );
+
+        if ($bytesCopied === false) {
+            throw new StreamException('Copy operation failed. Streams might be blocked or otherwise invalid, or "length" and "offset" are invalid');
+        }
+
+        return $bytesCopied;
     }
 }

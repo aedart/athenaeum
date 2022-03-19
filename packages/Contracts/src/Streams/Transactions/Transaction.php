@@ -93,8 +93,7 @@ interface Transaction
     public function rollBack(): void;
 
     /**
-     * Returns the stream that can be processed within
-     * this transaction.
+     * Returns the processing stream
      *
      * Method will typically return a copy of the original target stream,
      * which can be safely be manipulated.

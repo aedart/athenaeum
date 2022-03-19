@@ -5,6 +5,7 @@ namespace Aedart\Contracts\Streams;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Countable;
+use IteratorAggregate;
 use Psr\Http\Message\StreamInterface;
 use Stringable;
 
@@ -20,6 +21,7 @@ use Stringable;
  * @package Aedart\Contracts\Streams
  */
 interface Stream extends StreamInterface,
+    IteratorAggregate,
     Countable,
     Stringable
 {
@@ -65,11 +67,72 @@ interface Stream extends StreamInterface,
     public function openUsing(callable $callback): static;
 
     /**
+     * Write formatted data to stream
+     *
+     * @see https://www.php.net/manual/en/function.fprintf
+     * @see putFormatted()
+     *
+     * @param  string  $format
+     * @param  mixed  ...$values
+     *
+     * @return int Amount bytes written to the stream
+     *
+     * @throws StreamException
+     */
+    public function writeFormatted(string $format, mixed ...$values): int;
+
+    /**
+     * Put data into this stream
+     *
+     * Method acts as an alias for {@see write()}, but does not
+     * return amount of bytes written.
+     *
+     * @see write()
+     *
+     * @param  string  $data
+     *
+     * @return self
+     *
+     * @throws StreamException
+     */
+    public function put(string $data): static;
+
+    /**
+     * Put formatted data into stream
+     *
+     * Method acts as an alias for {@see writeFormatted()}, but does not
+     * return amount of bytes written.
+     *
+     * @see https://www.php.net/manual/en/function.fprintf
+     * @see writeFormatted()
+     *
+     * @param  string  $format
+     * @param  mixed  ...$values
+     *
+     * @return self
+     *
+     * @throws StreamException
+     */
+    public function putFormatted(string $format, mixed ...$values): static;
+
+    /**
+     * Returns a character from stream's content
+     *
+     * @see https://www.php.net/manual/en/function.fgetc
+     * @see readAllCharacters()
+     *
+     * @return string|false Character or false when no more data to read (EOF)
+     *
+     * @throws StreamException
+     */
+    public function readCharacter(): string|false;
+
+    /**
      * Returns a line from stream's content until length or newline is reached,
      * or end-of-file (EOF)
      *
      * @see https://www.php.net/manual/en/function.fgets.php
-     * @see readLineUntil()
+     * @see readAllLines()
      *
      * @param  int|null  $length  [optional]
      *
@@ -84,7 +147,7 @@ interface Stream extends StreamInterface,
      * or end-of-file (EOF) is reached.
      *
      * @see https://www.php.net/manual/en/function.stream-get-line
-     * @see readLine()
+     * @see readAllUsingDelimiter()
      *
      * @param  int  $length Maximum amount of bytes to read. If 0 is given, then
      *                      default chunk size is applied (8 Kb)
@@ -97,9 +160,10 @@ interface Stream extends StreamInterface,
     public function readLineUntil(int $length, string $ending = ''): string|false;
 
     /**
-     * Parse stream contents according to the specified format
+     * Parses stream contents according to the specified format
      *
      * @see https://www.php.net/manual/en/function.fscanf
+     * @see readAllUsingFormat()
      *
      * @param  string  $format
      * @param  mixed  ...$vars
@@ -108,7 +172,92 @@ interface Stream extends StreamInterface,
      *
      * @throws StreamException
      */
-    public function parse(string $format, mixed &...$vars): array|int|false|null;
+    public function scan(string $format, mixed &...$vars): array|int|false|null;
+
+    /**
+     * Returns an "iterator" that traverses through all characters
+     * of this stream's content.
+     *
+     * @see https://www.php.net/manual/en/function.fgetc
+     *
+     * @return iterable
+     *
+     * @throws StreamException
+     */
+    public function readAllCharacters(): iterable;
+
+    /**
+     * Returns an "iterator" that traverses through all lines of
+     * content in this stream.
+     *
+     * **Note**: _Each line is automatically trimmed before returned. This means
+     * that content does not contain new-line endings._
+     *
+     * @see https://www.php.net/manual/en/function.fgets.php
+     *
+     * @return iterable
+     *
+     * @throws StreamException
+     */
+    public function readAllLines(): iterable;
+
+    /**
+     * Returns an "iterator" that traverses all of stream's content in
+     * chunks, delimited by given length or string delimiter.
+     *
+     * @see https://www.php.net/manual/en/function.stream-get-line
+     *
+     * @param  int  $length Maximum amount of bytes to read. If 0 is given, then
+     *                      default chunk size is applied (8 Kb)
+     * @param  string  $ending  [optional] Line ending delimiter
+     *
+     * @return iterable
+     *
+     * @throws StreamException
+     */
+    public function readAllUsingDelimiter(int $length, string $ending = ''): iterable;
+
+    /**
+     * Returns an "iterator" that traverses stream's content in chunks
+     *
+     * **Note**: _chunk content is NOT trimmed!_
+     *
+     * @see https://www.php.net/manual/en/function.fread.php
+     *
+     * @param  int  $size  [optional] Size of each chunk in bytes
+     *
+     * @return iterable
+     *
+     * @throws StreamException
+     */
+    public function readAllInChunks(int $size = BufferSizes::BUFFER_8KB): iterable;
+
+    /**
+     * Returns an "iterator" that traverses stream's content according to
+     * given format.
+     *
+     * @see https://www.php.net/manual/en/function.fscanf
+     *
+     * @param  string  $format
+     *
+     * @return iterable
+     *
+     * @throws StreamException
+     */
+    public function readAllUsingFormat(string $format): iterable;
+
+    /**
+     * Read all contents using given callback
+     *
+     * @param  callable  $callback Callback is invoked until end-of-file is reached.
+     *                             This stream's resource as argument.
+     *                             Callback MUST read from stream resource return data!
+     *
+     * @return iterable
+     *
+     * @throws StreamException
+     */
+    public function readAllUsing(callable $callback): iterable;
 
     /**
      * Apply a callback, when result is true
@@ -412,9 +561,9 @@ interface Stream extends StreamInterface,
      *
      * @param  int  $precision  [optional]
      *
-     * @return string E.g. 12.72 MB
+     * @return string E.g. 12.7 MB
      */
-    public function getFormattedSize(int $precision = 2): string;
+    public function getFormattedSize(int $precision = 1): string;
 
     /**
      * Set the meta repository for this stream

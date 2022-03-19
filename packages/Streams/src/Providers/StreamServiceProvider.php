@@ -4,8 +4,10 @@ namespace Aedart\Streams\Providers;
 
 use Aedart\Contracts\Streams\Locks\Factory as LockFactoryInterface;
 use Aedart\Contracts\Streams\Meta\Repository as MetaRepositoryInterface;
+use Aedart\Contracts\Streams\Transactions\Factory as TransactionFactoryInterface;
 use Aedart\Streams\Locks\LockFactory;
 use Aedart\Streams\Meta\Repository;
+use Aedart\Streams\Transactions\TransactionFactory;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,6 +36,15 @@ class StreamServiceProvider extends ServiceProvider implements DeferrableProvide
                 $config->get('streams.default_lock'),
             );
         });
+
+        $this->app->singleton(TransactionFactoryInterface::class, function() {
+            $config = config();
+
+            return new TransactionFactory(
+                $config->get('streams.transactions'),
+                $config->get('streams.default_transaction'),
+            );
+        });
     }
 
     /**
@@ -53,7 +64,8 @@ class StreamServiceProvider extends ServiceProvider implements DeferrableProvide
     {
         return [
             MetaRepositoryInterface::class,
-            LockFactoryInterface::class
+            LockFactoryInterface::class,
+            TransactionFactoryInterface::class
         ];
     }
 }

@@ -4,9 +4,13 @@ namespace Aedart\Streams\Transactions\Drivers;
 
 use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
+use Aedart\Contracts\Streams\Locks\Lock;
+use Aedart\Contracts\Streams\Locks\Lockable;
+use Aedart\Contracts\Streams\Locks\LockTypes;
 use Aedart\Contracts\Streams\Stream;
 use Aedart\Streams\FileStream;
 use Illuminate\Support\Carbon;
+use Throwable;
 
 /**
  * Copy Write Replace Transaction Driver
@@ -27,11 +31,19 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
     protected string|null $backupFile = null;
 
     /**
+     * Acquired lock
+     *
+     * @var Lock|null
+     */
+    protected Lock|null $lock = null;
+
+    /**
      * @inheritDoc
      */
-    public function canPerformTransaction(Stream $stream): bool
+    public function canStartTransaction(Stream $stream): bool
     {
-        return $stream->isReadable()
+        return $stream->isOpen()
+            && $stream->isReadable()
             && $stream->isWritable()
             && $stream instanceof FileStreamInterface;
     }
@@ -41,17 +53,32 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      */
     public function performBegin(Stream $originalStream): Stream
     {
-        $this->backupOriginalStream($originalStream);
+        // First, lock the original stream so that other processes
+        // do not interfere with its contents.
+        if ($this->mustLock()) {
+            $this->lock = $this->acquireLock(
+                $originalStream,
+                $this->lockProfile(),
+                $this->lockType(),
+                $this->lockTimeout()
+            );
+        }
 
-        // Create a new temporary stream and copy original into it.
-        // This will be the stream that the process method will operate on.
+        // Secondly, create a backup of the original stream and store
+        // it inside a *.bak file.
+        if ($this->mustBackup()) {
+            $this->backupFile = $this->backupOriginalStream($originalStream,
+                $this->backupDirectory()
+            );
+        }
 
-        $temp = FileStream::openTemporary(
-            'r+b',
-            $this->get('maxMemory', 5 * BufferSizes::BUFFER_1MB)
-        );
+        // Third, create a new temporary stream which will be used as the
+        // "processing stream" for the operation callback.
+        $processingStream = $this->createProcessingStream();
 
-        return $this->copyStream($originalStream, $temp);
+        // Finally, copy the contents from the original stream into the
+        // processing stream and return it.
+        return $this->copyStream($originalStream, $processingStream);
     }
 
     /**
@@ -62,18 +89,24 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         /** @var FileStreamInterface $processedStream */
         /** @var FileStreamInterface $originalStream */
 
+        // Both streams must be rewound, before we can continue...
         $processedStream->rewind();
         $originalStream->rewind();
 
-        // First the original stream's contents must be flushed. Afterwards, we will copy
-        // the contents from the processed stream into the original.
+        // The original stream's contents must be truncated. Afterwards, we will
+        // copy the contents from the processing stream into the original.
         $this->copyStream(
             $processedStream,
             $originalStream->truncate(0)
         )->positionAtEnd();
 
         // Automatically remove backup file, if any was made and requested...
-        $this->removeBackupFile();
+        if ($this->mustRemoveBackupAfterCommit()) {
+            $this->removeBackupFile($this->backupFile);
+        }
+
+        // Finally, if a lock was acquired then it must be released
+        $this->releaseLock($this->lock);
     }
 
     /**
@@ -84,21 +117,22 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         /** @var FileStreamInterface $processedStream */
         /** @var FileStreamInterface $originalStream */
 
-        // When a rollback is issues, we do not know where in the process the operation
-        // or transaction failed. Furthermore, additional operation attempts might still
-        // available. Therefore, the processed stream needs to be truncated and a new
-        // copy must be made.
+        // Since we do not know where in the process / operation a failure happened, we
+        // truncate the processed stream and copy the original stream's contents back
+        // into it.
 
         $originalStream->rewind();
 
-        // TODO: If max attempts reached, then this is a waste
-        // TODO: Perhaps overwrite the `handleCommitFailure`
         $this->copyStream(
             $originalStream,
             $processedStream->truncate(0)
         );
 
-        // TODO: Auto restore from backup.
+        // NOTE: We do NOT restore from evt. backup here. This could be a possibility,
+        // yet the method knows nothing about how many attempts are left and thus when
+        // to attempt restoring.
+        // Overwrite "handleCommitFailure()" if you need more advanced rollback logic,
+        // such as "restoring from backup"...
     }
 
     /*****************************************************************
@@ -106,35 +140,110 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      ****************************************************************/
 
     /**
-     * Creates a backup of given stream, if required
+     * @inheritDoc
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     */
+    protected function handleCommitFailure(Throwable $e, int $currentAttempt, int $maxAttempts)
+    {
+        try {
+            parent::handleCommitFailure($e, $currentAttempt, $maxAttempts);
+        } finally {
+            // If maximum attempts have been reached and an exception was thrown,
+            // then evt. acquired lock must be released.
+            $this->releaseLock($this->lock);
+        }
+    }
+
+    /**
+     * Acquire lock for stream
+     *
+     * @param  Lockable|Stream  $stream
+     * @param  string  $profile
+     * @param  int  $type
+     * @param  float  $timeout
+     *
+     * @return Lock
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     */
+    protected function acquireLock(
+        Lockable|Stream $stream,
+        string $profile,
+        int $type,
+        float $timeout
+    ): Lock
+    {
+        $lock = $stream
+            ->getLockFactory()
+            ->create($stream, $profile);
+
+        $lock->acquire($type, $timeout);
+
+        return $lock;
+    }
+
+    /**
+     * Release lock
+     *
+     * @param  Lock|null  $lock
+     *
+     * @return bool
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     */
+    protected function releaseLock(Lock|null $lock): bool
+    {
+        if (isset($lock) && !$lock->isReleased()) {
+            $lock->release();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Creates a backup of given stream
      *
      * @param  FileStreamInterface  $stream
+     * @param string $directory Location where backup-file must be stored
      *
-     * @return self
+     * @return string Path to backup-file
      *
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
-    protected function backupOriginalStream(FileStreamInterface $stream)
+    protected function backupOriginalStream(FileStreamInterface $stream, string $directory): string
     {
-        // Skip if backup not required
-        if (!$this->mustBackup()) {
-            return $this;
-        }
-
         // Create backup filename and ensure that directory is created, if it
         // does not already exist
-        $this->backupFile = $this->makeBackupFilename($stream);
+        $backupFile = $this->makeBackupFilename($stream, $directory);
         $this->ensureDirectoryExists(
-            pathinfo($this->backupFile, PATHINFO_DIRNAME)
+            pathinfo($backupFile, PATHINFO_DIRNAME)
         );
 
         // Copy and close the backup file stream
         $this->copyStream(
             $stream,
-            FileStream::open($this->backupFile, 'w+b')
+            FileStream::open($backupFile, 'w+b')
         )->close();
 
-        return $this;
+        return $backupFile;
+    }
+
+    /**
+     * Creates a new processing stream instance
+     *
+     * @return FileStreamInterface
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    protected function createProcessingStream(): FileStreamInterface
+    {
+        return FileStream::openTemporary(
+            'r+b',
+            $this->maxMemory()
+        );
     }
 
     /**
@@ -158,12 +267,12 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      * Returns a filename of the backup file
      *
      * @param  FileStreamInterface  $stream
+     * @param  string  $directory
      *
      * @return string
      */
-    protected function makeBackupFilename(FileStreamInterface $stream): string
+    protected function makeBackupFilename(FileStreamInterface $stream,  string $directory): string
     {
-        $directory = $this->get('backup_directory', getcwd());
         $uri = pathinfo($stream->uri(), PATHINFO_BASENAME);
         $filename = $uri . '_' . Carbon::now()->timestamp . '.bak';
 
@@ -171,20 +280,19 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
     }
 
     /**
-     * Removes backup file, if requested by settings and a backup
-     * file was created.
+     * Remove given backup file
      *
-     * @see mustRemoveBackupAfterCommit()
+     * @param  string|null  $backupFile Path to backup-file
      *
-     * @return self
+     * @return bool
      */
-    protected function removeBackupFile(): static
+    protected function removeBackupFile(string|null $backupFile): bool
     {
-        if ($this->mustRemoveBackupAfterCommit() && isset($this->backupFile)) {
-            unlink($this->backupFile);
+        if (isset($backupFile) && is_file($backupFile)) {
+            return unlink($backupFile);
         }
 
-        return $this;
+        return false;
     }
 
     /**
@@ -202,13 +310,74 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
     }
 
     /**
+     * Determine if original stream must be locked during transaction
+     *
+     * @return bool
+     */
+    protected function mustLock(): bool
+    {
+        return $this->get('lock.enabled', true);
+    }
+
+    /**
+     * Returns the lock profile name
+     *
+     * @return string
+     */
+    protected function lockProfile(): string
+    {
+        return $this->get('lock.profile', 'default');
+    }
+
+    /**
+     * Returns lock type to use
+     *
+     * @return int
+     */
+    protected function lockType(): int
+    {
+        return $this->get('lock.type', LockTypes::EXCLUSIVE);
+    }
+
+    /**
+     * Returns acquire lock timeout
+     *
+     * @return float
+     */
+    protected function lockTimeout(): float
+    {
+        return $this->get('lock.timeout', 0.5);
+    }
+
+    /**
+     * Returns maximum amount of memory for temporary stream,
+     * before it is written to a physical file by PHP
+     *
+     * @return int Bytes
+     */
+    protected function maxMemory(): int
+    {
+        return $this->get('maxMemory', 5 * BufferSizes::BUFFER_1MB);
+    }
+
+    /**
      * Determine if a backup must be made
      *
      * @return bool
      */
     protected function mustBackup(): bool
     {
-        return $this->get('backup', true);
+        return $this->get('backup.enabled', false);
+    }
+
+    /**
+     * Returns the backup directory location
+     *
+     * @return string
+     */
+    protected function backupDirectory(): string
+    {
+        return $this->get('backup.directory', getcwd() . DIRECTORY_SEPARATOR . 'backup');
     }
 
     /**
@@ -218,6 +387,6 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      */
     public function mustRemoveBackupAfterCommit(): bool
     {
-        return $this->mustBackup() && $this->get('remove_backup_after_commit', false);
+        return $this->mustBackup() && $this->get('backup.remove_after_commit', false);
     }
 }

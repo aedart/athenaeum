@@ -6,12 +6,12 @@ use Aedart\Contracts\Streams\Stream;
 use Throwable;
 
 /**
- * Lock Operations
+ * Lockable
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Streams\Locks
  */
-interface LockOperations extends LockFactoryAware
+interface Lockable extends LockFactoryAware
 {
     /**
      * Locks stream and performs given operation.

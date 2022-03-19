@@ -3,6 +3,7 @@
 namespace Aedart\Streams\Traits;
 
 use Aedart\Contracts\Streams\Transactions\Factory;
+use Aedart\Support\Facades\IoCFacade;
 
 /**
  * Transaction Factory Trait
@@ -69,6 +70,6 @@ trait TransactionFactoryTrait
      */
     public function getDefaultTransactionFactory(): Factory|null
     {
-        return null;
+        return IoCFacade::tryMake(Factory::class);
     }
 }

@@ -292,6 +292,24 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Mime Types',
+            collapsable: true,
+            children: [
+                'mime-types/',
+                'mime-types/install',
+                'mime-types/setup',
+                'mime-types/usage',
+                {
+                    title: 'Drivers',
+                    collapsable: true,
+                    children: [
+                        'mime-types/drivers/',
+                        'mime-types/drivers/file-info',
+                    ]
+                },
+            ]
+        },
+        {
             title: 'Properties',
             collapsable: true,
             children: [

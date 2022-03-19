@@ -2,7 +2,10 @@
 
 namespace Aedart\Streams\Concerns;
 
+use Aedart\Contracts\Streams\Transactions\Factory;
 use Aedart\Streams\Traits\TransactionFactoryTrait;
+use Aedart\Streams\Transactions\TransactionFactory;
+use Aedart\Support\Facades\IoCFacade;
 
 /**
  * Transactions
@@ -16,8 +19,6 @@ trait Transactions
 {
     use TransactionFactoryTrait;
 
-    // TODO: Default Transaction Factory
-
     /**
      * @inheritdoc
      */
@@ -28,6 +29,17 @@ trait Transactions
         array $options = []
     ): mixed
     {
-        // TODO: Implement method...
+        return $this
+            ->getTransactionFactory()
+            ->create($this, $profile, $options)
+            ->process($operation, $attempts);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDefaultTransactionFactory(): Factory|null
+    {
+        return IoCFacade::tryMake(Factory::class, new TransactionFactory());
     }
 }

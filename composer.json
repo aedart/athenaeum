@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.0.2",
         "ext-json": "*",
+        "ext-fileinfo": "*",
         "composer-runtime-api": "^2.0.0",
         "dragonmantank/cron-expression": "^3.3",
         "fakerphp/faker": "^v1.17.0",
@@ -78,6 +79,7 @@
             "Aedart\\Http\\Cookies\\": "packages/Http/Cookies/src",
             "Aedart\\Http\\Messages\\": "packages/Http/Messages/src",
             "Aedart\\Maintenance\\Modes\\": "packages/Maintenance/Modes/src",
+            "Aedart\\MimeTypes\\": "packages/MimeTypes/src",
             "Aedart\\Pagination\\": "packages/Pagination/src",
             "Aedart\\Properties\\": "packages/Properties/src",
             "Aedart\\Redmine\\": "packages/Redmine/src",
@@ -112,6 +114,7 @@
         "aedart/athenaeum-http-cookies": "self.version",
         "aedart/athenaeum-http-messages": "self.version",
         "aedart/athenaeum-maintenance-modes": "self.version",
+        "aedart/athenaeum-mime-types": "self.version",
         "aedart/athenaeum-pagination": "self.version",
         "aedart/athenaeum-properties": "self.version",
         "aedart/athenaeum-redmine": "self.version",

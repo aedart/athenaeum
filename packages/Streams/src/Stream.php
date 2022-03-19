@@ -2,6 +2,7 @@
 
 namespace Aedart\Streams;
 
+use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Streams\Exceptions\InvalidStreamResource;
@@ -15,6 +16,7 @@ use Aedart\Streams\Meta\Repository as DefaultMetaRepository;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Utils\Memory;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
+use Traversable;
 
 /**
  * Stream
@@ -125,7 +127,7 @@ abstract class Stream implements StreamInterface
     public function openUsing(callable $callback): static
     {
         if ($this->isOpen()) {
-            throw new StreamAlreadyOpened('A resource already opened. Please detach if you wish to open a different resource!');
+            throw new StreamAlreadyOpened('A resource is already opened. Please detach it, if you wish to open a different resource!');
         }
 
         return $this->setStream(
@@ -325,11 +327,59 @@ abstract class Stream implements StreamInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function writeFormatted(string $format, mixed ...$values): int
+    {
+        $this
+            ->assertNotDetached('Unable to write formatted')
+            ->assertIsWritable();
+
+        return fprintf($this->resource(), $format, ...$values);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function put(string $data): static
+    {
+        $this->write($data);
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function putFormatted(string $format, mixed ...$values): static
+    {
+        $this->writeFormatted($format, ...$values);
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function readCharacter(): string|false
+    {
+        $msg = 'Unable to read character';
+        $this
+            ->assertNotDetached($msg)
+            ->assertIsReadable($msg);
+
+        return fgetc($this->resource());
+    }
+    
+    /**
      * @inheritDoc
      */
     public function readLine(?int $length = null): string|false
     {
-        $this->assertNotDetached('Unable to read line');
+        $msg = 'Unable to read line';
+        $this
+            ->assertNotDetached($msg)
+            ->assertIsReadable($msg);
 
         return fgets($this->resource(), $length);
     }
@@ -339,7 +389,10 @@ abstract class Stream implements StreamInterface
      */
     public function readLineUntil(int $length, string $ending = ''): string|false
     {
-        $this->assertNotDetached('Unable to read line until ending');
+        $msg = 'Unable to read line until ending';
+        $this
+            ->assertNotDetached($msg)
+            ->assertIsReadable($msg);
 
         return stream_get_line($this->resource(), $length, $ending);
     }
@@ -347,11 +400,93 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function parse(string $format, mixed &...$vars): array|int|false|null
+    public function scan(string $format, mixed &...$vars): array|int|false|null
     {
         $this->assertNotDetached('Unable to parse according to format ' . $format);
 
         return fscanf($this->resource(), $format, ...$vars);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function readAllCharacters(): iterable
+    {
+        $this
+            ->positionAtStart()
+            ->assertIsReadable();
+
+        $resource = $this->resource();
+
+        while(false !== ($char = fgetc($resource))) {
+            yield $char;
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function readAllLines(): iterable
+    {
+        return $this->readAllUsing(fn($resource) => trim(fgets($resource)));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function readAllUsingDelimiter(int $length, string $ending = ''): iterable
+    {
+        return $this->readAllUsing(fn($resource) => stream_get_line($resource, $length, $ending));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function readAllInChunks(int $size = BufferSizes::BUFFER_8KB): iterable
+    {
+        return $this->readAllUsing(fn($resource) => fread($resource, $size));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function readAllUsingFormat(string $format): iterable
+    {
+        $this
+            ->positionAtStart()
+            ->assertIsReadable();
+
+        $resource = $this->resource();
+
+        while($output = fscanf($resource, $format)) {
+            yield $output;
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function readAllUsing(callable $callback): iterable
+    {
+        $this
+            ->positionAtStart()
+            ->assertIsReadable();
+
+        $resource = $this->resource();
+
+        while(!feof($resource)) {
+            yield $callback($resource);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public function getIterator(): Traversable
+    {
+        yield from $this->readAllLines();
     }
 
     /**
@@ -667,7 +802,7 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function getFormattedSize(int $precision = 2): string
+    public function getFormattedSize(int $precision = 1): string
     {
         $bytes = $this->getSize() ?? 0;
 
