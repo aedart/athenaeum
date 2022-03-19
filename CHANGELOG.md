@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * `Dto` and `ArrayDto` can now accept and resolve union types. [#82](https://github.com/aedart/athenaeum/issues/82).
+* MIME-types detection package, based on file's contents via a string, resource of path.
 * Maintenance Mode package that offers additional drivers for Laravel's Application, when using `php artisan down`. Available drivers: `'array'` and `'json'`. [#67](https://github.com/aedart/athenaeum/issues/67).
 * `EnvironmentHandler` interface in Core package, as a replacement for the application environment related methods, that were removed from Laravel's foundation `Application` interface in version `9.x`. [#85](https://github.com/aedart/athenaeum/pull/85)
 * `whereSlugNotIn()` method in `\Aedart\Database\Models\Concerns\Slugs` (_`Sluggable` interface also defines method_). [#64](https://github.com/aedart/athenaeum/issues/64).
