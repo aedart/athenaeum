@@ -30,6 +30,7 @@ class FileStream extends Stream implements
     use Concerns\Hashing;
     use Concerns\Locking;
     use Concerns\Transactions;
+    use Concerns\Copying;
     use Concerns\Wrapping;
     use MimeTypeDetection;
 
@@ -188,43 +189,5 @@ class FileStream extends Stream implements
         $this->assertNotDetached('Unable to obtain MIME-type data');
 
         return $this->resource();
-    }
-
-    /**
-     * Perform copy of this stream into given target
-     *
-     * @param  StreamInterface  $source
-     * @param  StreamInterface  $target
-     * @param  int|null  $length  [optional]
-     * @param  int  $offset  [optional]
-     *
-     * @return int Bytes copied
-     *
-     * @throws StreamException
-     */
-    protected function performCopy(StreamInterface $source, StreamInterface $target, int|null $length = null, int $offset = 0): int
-    {
-        // Abort if source is detached or not readable
-        if ($source->isDetached() || !$target->isReadable()) {
-            throw new CannotCopyToTargetStream('Source stream is either detached or not readable.');
-        }
-
-        // Abort if target is not writable or detached
-        if ($target->isDetached() || !$target->isWritable()) {
-            throw new CannotCopyToTargetStream('Target stream is either detached or not writable.');
-        }
-
-        $bytesCopied = stream_copy_to_stream(
-            $source->resource(),
-            $target->resource(),
-            $length,
-            $offset
-        );
-
-        if ($bytesCopied === false) {
-            throw new StreamException('Copy operation failed. Streams might be blocked or otherwise invalid, or "length" and "offset" are invalid');
-        }
-
-        return $bytesCopied;
     }
 }
