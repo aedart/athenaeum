@@ -182,7 +182,7 @@ class Stream implements StreamInterface
      */
     public function getSize(): int|null
     {
-        return $this->meta()->get('size');
+        return $this->meta()->get('stats.size');
     }
 
     /**
@@ -862,7 +862,14 @@ class Stream implements StreamInterface
             return [];
         }
 
-        return stream_get_meta_data($this->resource());
+        $resource = $this->resource();
+        $rawMeta = stream_get_meta_data($resource);
+
+        // Add stats so that size and other info is
+        // made available...
+        $rawMeta['stats'] = fstat($resource);
+
+        return $rawMeta;
     }
 
     /**
