@@ -30,7 +30,7 @@ class FileStream extends Stream implements
     use Concerns\Hashing;
     use Concerns\Locking;
     use Concerns\Transactions;
-    use Concerns\Conversion;
+    use Concerns\Wrapping;
     use MimeTypeDetection;
 
     /**

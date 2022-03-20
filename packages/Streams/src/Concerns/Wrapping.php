@@ -8,12 +8,12 @@ use Aedart\Streams\Exceptions\InvalidStreamResource;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
 
 /**
- * Concerns Conversion
+ * Concerns Wrapping
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Streams\Concerns
  */
-trait Conversion
+trait Wrapping
 {
     /**
      * Wraps given data into a stream
