@@ -98,7 +98,7 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         $this->copyStream(
             $processedStream,
             $originalStream->truncate(0)
-        )->positionAtEnd();
+        )->positionToEnd();
 
         // Automatically remove backup file, if any was made and requested...
         if ($this->mustRemoveBackupAfterCommit()) {

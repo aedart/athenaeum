@@ -322,7 +322,7 @@ abstract class Stream implements StreamInterface
     public function __toString(): string
     {
         if ($this->isSeekable()) {
-            $this->positionAtStart();
+            $this->positionToStart();
         }
 
         return $this->getContents();
@@ -423,7 +423,7 @@ abstract class Stream implements StreamInterface
     public function readAllCharacters(): iterable
     {
         $this
-            ->positionAtStart()
+            ->positionToStart()
             ->assertIsReadable();
 
         $resource = $this->resource();
@@ -463,7 +463,7 @@ abstract class Stream implements StreamInterface
     public function readAllUsingFormat(string $format): iterable
     {
         $this
-            ->positionAtStart()
+            ->positionToStart()
             ->assertIsReadable();
 
         $resource = $this->resource();
@@ -479,7 +479,7 @@ abstract class Stream implements StreamInterface
     public function readAllUsing(callable $callback): iterable
     {
         $this
-            ->positionAtStart()
+            ->positionToStart()
             ->assertIsReadable();
 
         $resource = $this->resource();
@@ -568,7 +568,7 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function positionAtStart(): static
+    public function positionToStart(): static
     {
         return $this->positionAt(0);
     }
@@ -576,7 +576,7 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function positionAtEnd(): static
+    public function positionToEnd(): static
     {
         return $this->positionAt(0, SEEK_END);
     }

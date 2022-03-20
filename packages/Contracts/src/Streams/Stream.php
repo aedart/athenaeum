@@ -339,7 +339,7 @@ interface Stream extends StreamInterface,
      *
      * @throws StreamException
      */
-    public function positionAtStart(): static;
+    public function positionToStart(): static;
 
     /**
      * Move position to the end of the stream
@@ -348,7 +348,7 @@ interface Stream extends StreamInterface,
      *
      * @throws StreamException
      */
-    public function positionAtEnd(): static;
+    public function positionToEnd(): static;
 
     /**
      * Alias for {@see tell()}

@@ -112,7 +112,7 @@ class FileStream extends Stream implements
     ): static
     {
         $this
-            ->positionAtEnd()
+            ->positionToEnd()
             ->performCopy(
                 $this->wrap($data, $maximumMemory),
                 $this,
@@ -135,7 +135,7 @@ class FileStream extends Stream implements
         }
 
         if ($moveToEnd) {
-            return $this->positionAtEnd();
+            return $this->positionToEnd();
         }
 
         return $this;
