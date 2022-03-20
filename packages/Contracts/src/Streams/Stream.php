@@ -128,7 +128,7 @@ interface Stream extends StreamInterface,
     public function readCharacter(): string|false;
 
     /**
-     * Returns a line from stream's content until length or newline is reached,
+     * Returns a line from stream's content until length - 1 byte or newline is reached,
      * or end-of-file (EOF)
      *
      * @see https://www.php.net/manual/en/function.fgets.php
