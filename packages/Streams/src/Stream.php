@@ -83,7 +83,7 @@ abstract class Stream implements StreamInterface
     /**
      * Creates a new stream instance
      *
-     * @param resource|null $stream  [optional]
+     * @param  resource|null  $stream  [optional]
      * @param  array|Repository|null  $meta  [optional]
      *
      * @throws InvalidStreamResource
