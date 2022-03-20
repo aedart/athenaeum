@@ -7,6 +7,7 @@ use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Contracts\Config\Loaders\Exceptions\InvalidPathException;
 use Aedart\Contracts\Config\Parsers\Exceptions\FileParserException;
 use Aedart\Streams\Providers\StreamServiceProvider;
+use Aedart\Streams\Stream;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Codeception\Configuration;
@@ -86,5 +87,21 @@ abstract class StreamTestCase extends LaravelTestCase
     public function filePath(string $file): string
     {
         return $this->filesDir() . DIRECTORY_SEPARATOR . $file;
+    }
+
+    /**
+     * Returns a stream for a "text" testing file
+     *
+     * @param  string  $mode  [optional]
+     *
+     * @return Stream
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public function makeTextFileStream(string $mode = 'rb'): Stream
+    {
+        $path = $this->filePath('text.txt');
+
+        return Stream::make(fopen($path, $mode));
     }
 }
