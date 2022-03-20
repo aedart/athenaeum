@@ -9,10 +9,12 @@ use Aedart\Contracts\Streams\Locks\Lockable;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Contracts\Streams\Transactions\Transactions;
 use Aedart\MimeTypes\Concerns\MimeTypeDetection;
+use Aedart\MimeTypes\Exceptions\MimeTypeDetectionException;
 use Aedart\Streams\Concerns;
 use Aedart\Streams\Exceptions\CannotCopyToTargetStream;
 use Aedart\Streams\Exceptions\CannotOpenStream;
 use Aedart\Streams\Exceptions\StreamException;
+use Throwable;
 
 /**
  * File Stream
@@ -186,8 +188,12 @@ class FileStream extends Stream implements
      */
     protected function mimeTypeData()
     {
-        $this->assertNotDetached('Unable to obtain MIME-type data');
+        try {
+            $this->assertNotDetached('Unable to obtain MIME-type data');
 
-        return $this->resource();
+            return $this->resource();
+        } catch (Throwable $e) {
+            throw new MimeTypeDetectionException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }
