@@ -72,18 +72,6 @@ class FileStream extends Stream implements
     /**
      * @inheritDoc
      */
-    public function close()
-    {
-        $resource = $this->detach();
-
-        if (isset($resource) && is_resource($resource)) {
-            fclose($resource);
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function copy(int|null $length = null, int $offset = 0): static
     {
         return $this->copyTo(null, $length, $offset);

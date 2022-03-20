@@ -24,7 +24,7 @@ use Traversable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Streams
  */
-abstract class Stream implements StreamInterface
+class Stream implements StreamInterface
 {
     /**
      * Readable modes regex
@@ -113,6 +113,18 @@ abstract class Stream implements StreamInterface
     public function __clone(): void
     {
         throw new StreamException(sprintf('Cloning of %s is prohibited', static::class));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function close()
+    {
+        $resource = $this->detach();
+
+        if (isset($resource) && is_resource($resource)) {
+            fclose($resource);
+        }
     }
 
     /**
