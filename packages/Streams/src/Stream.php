@@ -106,6 +106,16 @@ abstract class Stream implements StreamInterface
     }
 
     /**
+     * Cloning of stream if prohibited!
+     *
+     * @throws StreamException
+     */
+    public function __clone(): void
+    {
+        throw new StreamException(sprintf('Cloning of %s is prohibited', static::class));
+    }
+
+    /**
      * @inheritDoc
      */
     public static function make($stream, array|Repository|null $meta = null): static
