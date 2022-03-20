@@ -318,6 +318,8 @@ abstract class Stream implements StreamInterface
 
     /**
      * @inheritDoc
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
     public function __toString(): string
     {
