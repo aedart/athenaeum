@@ -62,9 +62,29 @@ abstract class StreamTestCase extends LaravelTestCase
         return Configuration::dataDir() . 'configs/streams';
     }
 
+    /**
+     * Returns path to test files
+     *
+     * @return string
+     */
+    public function filesDir(): string
+    {
+        return Configuration::dataDir() . 'streams';
+    }
+
     /*****************************************************************
      * Helpers
      ****************************************************************/
 
-
+    /**
+     * Returns full path to file
+     *
+     * @param  string  $file
+     *
+     * @return string
+     */
+    public function filePath(string $file): string
+    {
+        return $this->filesDir() . DIRECTORY_SEPARATOR . $file;
+    }
 }
