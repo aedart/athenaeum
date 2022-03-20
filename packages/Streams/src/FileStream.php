@@ -11,7 +11,6 @@ use Aedart\Contracts\Streams\Transactions\Transactions;
 use Aedart\MimeTypes\Concerns\MimeTypeDetection;
 use Aedart\MimeTypes\Exceptions\MimeTypeDetectionException;
 use Aedart\Streams\Concerns;
-use Aedart\Streams\Exceptions\CannotCopyToTargetStream;
 use Aedart\Streams\Exceptions\CannotOpenStream;
 use Aedart\Streams\Exceptions\StreamException;
 use Throwable;
