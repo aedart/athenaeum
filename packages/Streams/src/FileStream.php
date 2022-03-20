@@ -40,7 +40,11 @@ class FileStream extends Stream implements
      */
     public static function open(string $filename, string $mode, bool $useIncludePath = false, $context = null): static
     {
-        $stream = fopen($filename, $mode, $useIncludePath, $context);
+        try {
+            $stream = fopen($filename, $mode, $useIncludePath, $context);
+        } catch (Throwable $e) {
+            throw new CannotOpenStream($e->getMessage(), $e->getCode(), $e);
+        }
 
         if ($stream === false) {
             throw new CannotOpenStream(sprintf('Stream could not be opened for %s (mode %s)', $filename, $mode));
