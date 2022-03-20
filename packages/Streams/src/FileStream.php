@@ -2,11 +2,13 @@
 
 namespace Aedart\Streams;
 
+use Aedart\Contracts\MimeTypes\Detectable;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
 use Aedart\Contracts\Streams\Hashing\Hashable;
 use Aedart\Contracts\Streams\Locks\Lockable;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Contracts\Streams\Transactions\Transactions;
+use Aedart\MimeTypes\Concerns\MimeTypeDetection;
 use Aedart\Streams\Concerns;
 use Aedart\Streams\Exceptions\CannotCopyToTargetStream;
 use Aedart\Streams\Exceptions\CannotOpenStream;
@@ -22,12 +24,14 @@ class FileStream extends Stream implements
     FileStreamInterface,
     Hashable,
     Lockable,
-    Transactions
+    Transactions,
+    Detectable
 {
     use Concerns\Hashing;
     use Concerns\Locking;
     use Concerns\Transactions;
     use Concerns\Conversion;
+    use MimeTypeDetection;
 
     /**
      * @inheritDoc
@@ -175,6 +179,16 @@ class FileStream extends Stream implements
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * @inheritDoc
+     */
+    protected function mimeTypeData()
+    {
+        $this->assertNotDetached('Unable to obtain MIME-type data');
+
+        return $this->resource();
+    }
 
     /**
      * Perform copy of this stream into given target
