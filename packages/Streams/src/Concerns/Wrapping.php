@@ -18,8 +18,8 @@ trait Wrapping
     /**
      * Wraps given data into a stream
      *
-     * **Warning**: _Method will {@see detach()} underlying resource from given stream,
-     * if `$data` is a {@see PsrStreamInterface} instance is given!_
+     * **Warning**: _Method will {@see detach()} `$data`'s underlying resource, if `$data` is a
+     * {@see PsrStreamInterface} instance!_
      *
      * @param  string|int|float|resource|PsrStreamInterface|StreamInterface  $data
      * @param  int|null  $maximumMemory  [optional] When content is a string, then it will be wrapped into
