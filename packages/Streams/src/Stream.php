@@ -892,9 +892,7 @@ abstract class Stream implements StreamInterface
      */
     protected function setStream(mixed $stream): static
     {
-        if (!is_resource($stream)) {
-            throw new InvalidStreamResource('provided stream is not a resource');
-        }
+        $this->assertIsValidStream($stream);
 
         $this->stream = $stream;
 
@@ -920,6 +918,29 @@ abstract class Stream implements StreamInterface
         }
 
         return $this->makeMetaRepository();
+    }
+
+    /**
+     * Assert stream is a valid resource
+     *
+     * @param  mixed  $stream
+     *
+     * @return self
+     *
+     * @throws InvalidStreamResource
+     */
+    protected function assertIsValidStream(mixed $stream): static
+    {
+        if (!is_resource($stream)) {
+            throw new InvalidStreamResource('Provided stream is not a resource');
+        }
+
+        $type = get_resource_type($stream);
+        if ($type !== 'stream') {
+            throw new InvalidStreamResource(sprintf('Provided stream must be of the type "stream". %s was provided', $type));
+        }
+
+        return $this;
     }
 
     /**
