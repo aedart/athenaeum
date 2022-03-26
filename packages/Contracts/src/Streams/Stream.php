@@ -544,7 +544,7 @@ interface Stream extends StreamInterface,
     public function isLocal(): bool;
 
     /**
-     * Determine if stream is a TTY
+     * Determine if stream is a TTY ("TeleTypewriter")
      *
      * @see https://www.php.net/manual/en/function.stream-isatty.php
      *
