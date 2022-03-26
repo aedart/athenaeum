@@ -57,7 +57,9 @@ trait Wrapping
      */
     protected function wrapRawData(string|int|float $data, int|null $maximumMemory = null, $context = null): StreamInterface
     {
-        return static::openTemporary('r+b', $maximumMemory, $context)->put((string) $data);
+        return static::openTemporary('r+b', $maximumMemory, $context)
+            ->put((string) $data)
+            ->positionToStart();
     }
 
     /**
