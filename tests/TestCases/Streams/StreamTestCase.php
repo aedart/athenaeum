@@ -8,6 +8,7 @@ use Aedart\Contracts\Config\Loaders\Exceptions\InvalidPathException;
 use Aedart\Contracts\Config\Parsers\Exceptions\FileParserException;
 use Aedart\Streams\Providers\StreamServiceProvider;
 use Aedart\Streams\Stream;
+use Aedart\Streams\Traits\LockFactoryTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Codeception\Configuration;
@@ -22,6 +23,7 @@ abstract class StreamTestCase extends LaravelTestCase
 {
     use ConfigLoaderTrait;
     use ConfigTrait;
+    use LockFactoryTrait;
 
     /*****************************************************************
      * Setup Methods
