@@ -12,6 +12,7 @@ use Aedart\Streams\FileStream;
 use Aedart\Streams\Providers\StreamServiceProvider;
 use Aedart\Streams\Stream;
 use Aedart\Streams\Traits\LockFactoryTrait;
+use Aedart\Streams\Traits\TransactionFactoryTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Codeception\Configuration;
@@ -27,6 +28,7 @@ abstract class StreamTestCase extends LaravelTestCase
     use ConfigLoaderTrait;
     use ConfigTrait;
     use LockFactoryTrait;
+    use TransactionFactoryTrait;
 
     /*****************************************************************
      * Setup Methods
