@@ -13,6 +13,7 @@ use RuntimeException;
  * CopyWriteReplaceDriverTest
  *
  * @group streams
+ * @group stream-transaction
  * @group stream-transaction-drivers
  * @group stream-transaction-driver-cwr
  *
