@@ -14,6 +14,7 @@ use Aedart\Streams\Stream;
 use Aedart\Streams\Traits\LockFactoryTrait;
 use Aedart\Streams\Traits\TransactionFactoryTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
+use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Codeception\Configuration;
 
@@ -29,6 +30,7 @@ abstract class StreamTestCase extends LaravelTestCase
     use ConfigTrait;
     use LockFactoryTrait;
     use TransactionFactoryTrait;
+    use FileTrait;
 
     /*****************************************************************
      * Setup Methods
@@ -80,6 +82,18 @@ abstract class StreamTestCase extends LaravelTestCase
         return Configuration::dataDir() . 'streams';
     }
 
+    /**
+     * returns path to output directory
+     *
+     * @return string
+     *
+     * @throws \Codeception\Exception\ConfigurationException
+     */
+    public function outputDir(): string
+    {
+        return Configuration::outputDir() . 'streams';
+    }
+
     /*****************************************************************
      * Helpers
      ****************************************************************/
@@ -127,6 +141,39 @@ abstract class StreamTestCase extends LaravelTestCase
         $path = $this->filePath($file);
 
         return FileStream::open($path, $mode);
+    }
+
+    /**
+     * Opens a "file stream" intended to be used for transactions tests
+     *
+     * @param  string  $file
+     * @param  string  $mode  [optional]
+     *
+     * @return FileStream
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     * @throws \Codeception\Exception\ConfigurationException
+     */
+    public function openFileStreamForTransaction(string $file, string $mode = 'r+b'): FileStream
+    {
+        $path = $this->filePath($file);
+        $target = $this->outputDir() . DIRECTORY_SEPARATOR . $file;
+
+        // Remove evt. previous file (can happen in case a previous executed test failed)
+        if (file_exists($target)) {
+            unlink($target);
+        }
+
+        // Ensure directory exists
+        $dir = dirname($target);
+        if (!is_dir($dir)) {
+            mkdir(dirname($target), 0755, true);
+        }
+
+        // Copy the target file into output dir, to avoid any accidental overwrites...
+        copy($path, $target);
+
+        return FileStream::open($target, $mode);
     }
 
     /**

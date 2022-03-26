@@ -78,7 +78,7 @@ return [
                     'type' => \Aedart\Contracts\Streams\Locks\LockTypes::EXCLUSIVE,
 
                     // Acquire lock timeout in seconds
-                    'timeout' => 0.5,
+                    'timeout' => 0.01,
                 ],
 
                 // Backup settings
@@ -88,9 +88,30 @@ return [
                     'enabled' => false,
 
                     // Location of backup files
-                    'directory' => storage_path('backups'),
+                    'directory' => 'tests/_output/streams/backup',
 
                     // When true, backup file is automatically removed after commit.
+                    'remove_after_commit' => false,
+                ],
+            ],
+        ],
+
+        'cwr' => [
+            'driver' => \Aedart\Streams\Transactions\Drivers\CopyWriteReplaceDriver::class,
+            'options' => [
+
+                'maxMemory' => 5 * \Aedart\Contracts\Streams\BufferSizes::BUFFER_1MB,
+                'lock' => [
+                    'enabled' => true,
+                    'profile' => env('STREAM_LOCK', 'default'),
+                    'type' => \Aedart\Contracts\Streams\Locks\LockTypes::EXCLUSIVE,
+                    'timeout' => 0.01,
+                ],
+
+                // Backup settings
+                'backup' => [
+                    'enabled' => true,
+                    'directory' => 'tests/_output/streams/backup',
                     'remove_after_commit' => false,
                 ],
             ]
