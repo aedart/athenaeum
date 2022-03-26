@@ -234,4 +234,23 @@ class X0_MiscTest extends StreamTestCase
         $this->assertTrue($streamA->isTTY(), 'Should be TTY');
         $this->assertFalse($streamB->isTTY(), 'Should not be TTY');
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public function canGetDebugInfo()
+    {
+        $streamA = new Stream();
+        $streamB = $this->makeTextFileStream();
+
+        $infoA = $streamA->__debugInfo();
+        $infoB = $streamA->__debugInfo();
+
+        // If no failure, then assumed success
+        $this->assertNotEmpty($infoA);
+        $this->assertNotEmpty($infoB);
+    }
 }
