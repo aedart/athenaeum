@@ -121,7 +121,7 @@ abstract class BaseLockDriver implements Lock
         try {
             $released = $this->releaseLock($this->getStream());
 
-            $this->setAcquired($released);
+            $this->setAcquired(!$released);
 
             if (!$released) {
                 throw new RuntimeException('Failed to release lock');
