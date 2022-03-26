@@ -31,6 +31,7 @@ class B0_CopyTest extends StreamTestCase
 
         $copy = $stream->copy();
 
+        $this->assertNotSame($stream, $copy, 'Same instance returned!');
         $this->assertSame($stream->getContents(), $copy->getContents());
     }
 
@@ -47,9 +48,12 @@ class B0_CopyTest extends StreamTestCase
         $target = FileStream::openMemory();
         $stream = FileStream::openMemory()
             ->put($data)
-            ->positionToStart()
-            ->copyTo($target);
+            ->positionToStart();
 
+        $copy = $stream->copyTo($target);
+
+        $this->assertNotSame($stream, $copy, 'Same instance returned!');
+        $this->assertSame($target, $copy, 'Copy and target should be the same instance');
         $this->assertSame($stream->getContents(), $target->getContents());
     }
 }

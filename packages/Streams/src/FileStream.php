@@ -90,7 +90,7 @@ class FileStream extends Stream implements
 
         $this->performCopy($this, $target, $length, $offset);
 
-        return $this;
+        return $target;
     }
 
     /**
