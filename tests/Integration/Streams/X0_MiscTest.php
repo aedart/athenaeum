@@ -222,7 +222,7 @@ class X0_MiscTest extends StreamTestCase
      */
     public function canDetermineIfTTY()
     {
-        $resource = fopen('php://stdout', 'w');
+        $resource = fopen('php://stderr', 'w');
         $streamA = Stream::make($resource);
         $streamB = $this->makeTextFileStream();
 
