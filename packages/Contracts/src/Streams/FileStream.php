@@ -113,7 +113,8 @@ interface FileStream extends Stream
      * the position to the end, before appending data.
      *
      * **Warning**: _Method will {@see detach()} `$data`'s underlying resource, if `$data` is a
-     * {@see PsrStreamInterface} instance!_
+     * pure {@see PsrStreamInterface} instance! If you wish for a continued valid resource reference in your
+     * stream instance, then you should wrap `$data` into a {@see Stream} instance using {@see Stream::makeFrom()}._
      *
      * @param  string|int|float|resource|PsrStreamInterface|Stream  $data
      * @param  int|null  $length  [optional] Maximum bytes to append. By default, all bytes left are appended

@@ -19,7 +19,8 @@ trait Wrapping
      * Wraps given data into a stream
      *
      * **Warning**: _Method will {@see detach()} `$data`'s underlying resource, if `$data` is a
-     * {@see PsrStreamInterface} instance!_
+     * pure {@see PsrStreamInterface} instance! If you wish for a continued valid resource reference in your
+     * stream instance, then you should wrap `$data` into a {@see Stream} instance using {@see Stream::makeFrom()}._
      *
      * @param  string|int|float|resource|PsrStreamInterface|StreamInterface  $data
      * @param  int|null  $maximumMemory  [optional] When content is a string, then it will be wrapped into
@@ -78,6 +79,8 @@ trait Wrapping
      *
      * **Warning**: _Method will {@see detach()} underlying resource from given stream,
      * before creating a new stream instance!_
+     *
+     * @see Stream::makeFrom()
      *
      * @param  PsrStreamInterface  $stream
      *
