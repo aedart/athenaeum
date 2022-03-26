@@ -226,7 +226,7 @@ class X0_MiscTest extends StreamTestCase
         $streamA = Stream::make($resource);
         $streamB = $this->makeTextFileStream();
 
-        $this->assertTrue($streamA->isTTY());
-        $this->assertFalse($streamB->isTTY());
+        $this->assertTrue($streamA->isTTY(), 'Should be TTY');
+        $this->assertFalse($streamB->isTTY(), 'Should not be TTY');
     }
 }
