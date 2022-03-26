@@ -259,7 +259,9 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
     protected function copyStream(FileStreamInterface $stream, FileStreamInterface $target): FileStreamInterface
     {
         return $stream->restorePositionAfter(function(FileStreamInterface $stream) use($target) {
-            return $stream->copyTo($target);
+            return $stream
+                ->positionToStart()
+                ->copyTo($target);
         });
     }
 
