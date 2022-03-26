@@ -118,8 +118,16 @@ abstract class BaseLockDriver implements Lock
             return;
         }
 
+        // Skip if stream has been detached
+        $stream = $this->getStream();
+        if ($stream->isDetached()) {
+            $this->setAcquired(false);
+            return;
+        }
+
+        // Attempt release lock...
         try {
-            $released = $this->releaseLock($this->getStream());
+            $released = $this->releaseLock($stream);
 
             $this->setAcquired(!$released);
 
