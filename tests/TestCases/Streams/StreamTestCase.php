@@ -6,6 +6,9 @@ use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Contracts\Config\Loaders\Exceptions\InvalidPathException;
 use Aedart\Contracts\Config\Parsers\Exceptions\FileParserException;
+use Aedart\Contracts\Streams\Locks\Lock;
+use Aedart\Contracts\Streams\Stream as StreamInterface;
+use Aedart\Streams\FileStream;
 use Aedart\Streams\Providers\StreamServiceProvider;
 use Aedart\Streams\Stream;
 use Aedart\Streams\Traits\LockFactoryTrait;
@@ -105,5 +108,38 @@ abstract class StreamTestCase extends LaravelTestCase
         $path = $this->filePath('text.txt');
 
         return Stream::make(fopen($path, $mode));
+    }
+
+    /**
+     * Open a "file stream" for given file
+     *
+     * @param  string  $file
+     * @param  string  $mode  [optional]
+     *
+     * @return FileStream
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public function openFileStreamFor(string $file, string $mode = 'rb'): FileStream
+    {
+        $path = $this->filePath($file);
+
+        return FileStream::open($path, $mode);
+    }
+
+    /**
+     * Creates a new lock instance for given stream
+     *
+     * @param  StreamInterface  $stream
+     * @param  string|null  $profile  [optional]
+     * @param  array  $options  [optional]
+     *
+     * @return Lock
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     */
+    public function makeLock(StreamInterface $stream, ?string $profile = null, array $options = []): Lock
+    {
+        return $this->getLockFactory()->create($stream, $profile, $options);
     }
 }

@@ -36,6 +36,14 @@ return [
                 // State whether to throw exception if timeout reached, or not...
                 'fail_on_timeout' => true
             ]
+        ],
+
+        'flock' => [
+            'driver' => \Aedart\Streams\Locks\Drivers\FlockLockDriver::class,
+            'options' => [
+                'sleep' => 10_000,
+                'fail_on_timeout' => true
+            ]
         ]
     ],
 
