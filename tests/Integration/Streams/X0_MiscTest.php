@@ -215,7 +215,12 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
+     * Disabled TTY tests due to lack of support from GitHub Actions.
+     * This may have to be addressed at some point, if relevant
+     *
+     * @see https://github.com/actions/runner/issues/241
+     *
+     * test
      *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
