@@ -316,7 +316,7 @@ foreach ($chunks as $chunk) {
 echo $buffer; // abc
 ```
 
-## Read All Using Callback
+## Read All using Callback
 
 Lastly, if none of the default offered "read all" methods are to your liking, then you can use `readAllUsing()` method to specify a custom callback for how to read the stream's underlying resource.
 The method returns an [`iterable`](https://www.php.net/manual/en/language.types.iterable.php) generator, just like the other "read-all" methods.
