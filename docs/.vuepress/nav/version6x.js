@@ -371,6 +371,26 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Streams',
+            collapsable: true,
+            children: [
+                'streams/',
+                'streams/install',
+                'streams/setup',
+                {
+                    title: 'How to use',
+                    collapsable: true,
+                    children: [
+                        'streams/usage/',
+                        'streams/usage/open-close',
+                        'streams/usage/raw-resource',
+                        'streams/usage/seeking',
+                        'streams/usage/reading',
+                    ]
+                },
+            ]
+        },
+        {
             title: 'Support',
             collapsable: true,
             children: [
