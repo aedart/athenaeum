@@ -386,6 +386,7 @@ module.exports.sidebar = function(){
                         'streams/usage/raw-resource',
                         'streams/usage/seeking',
                         'streams/usage/reading',
+                        'streams/usage/writing',
                     ]
                 },
             ]
