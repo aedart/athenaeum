@@ -24,7 +24,7 @@ use Traversable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Streams
  */
-abstract class Stream implements StreamInterface
+class Stream implements StreamInterface
 {
     /**
      * Readable modes regex
@@ -83,7 +83,7 @@ abstract class Stream implements StreamInterface
     /**
      * Creates a new stream instance
      *
-     * @param resource|null $stream  [optional]
+     * @param  resource|null  $stream  [optional]
      * @param  array|Repository|null  $meta  [optional]
      *
      * @throws InvalidStreamResource
@@ -103,6 +103,28 @@ abstract class Stream implements StreamInterface
     public function __destruct()
     {
         $this->close();
+    }
+
+    /**
+     * Cloning of stream if prohibited!
+     *
+     * @throws StreamException
+     */
+    public function __clone(): void
+    {
+        throw new StreamException(sprintf('Cloning of %s is prohibited', static::class));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function close()
+    {
+        $resource = $this->detach();
+
+        if (isset($resource) && is_resource($resource)) {
+            fclose($resource);
+        }
     }
 
     /**
@@ -160,7 +182,7 @@ abstract class Stream implements StreamInterface
      */
     public function getSize(): int|null
     {
-        return $this->meta()->get('size');
+        return $this->meta()->get('stats.size');
     }
 
     /**
@@ -308,11 +330,13 @@ abstract class Stream implements StreamInterface
 
     /**
      * @inheritDoc
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
     public function __toString(): string
     {
         if ($this->isSeekable()) {
-            $this->positionAtStart();
+            $this->positionToStart();
         }
 
         return $this->getContents();
@@ -413,7 +437,7 @@ abstract class Stream implements StreamInterface
     public function readAllCharacters(): iterable
     {
         $this
-            ->positionAtStart()
+            ->positionToStart()
             ->assertIsReadable();
 
         $resource = $this->resource();
@@ -453,7 +477,7 @@ abstract class Stream implements StreamInterface
     public function readAllUsingFormat(string $format): iterable
     {
         $this
-            ->positionAtStart()
+            ->positionToStart()
             ->assertIsReadable();
 
         $resource = $this->resource();
@@ -469,7 +493,7 @@ abstract class Stream implements StreamInterface
     public function readAllUsing(callable $callback): iterable
     {
         $this
-            ->positionAtStart()
+            ->positionToStart()
             ->assertIsReadable();
 
         $resource = $this->resource();
@@ -558,7 +582,7 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function positionAtStart(): static
+    public function positionToStart(): static
     {
         return $this->positionAt(0);
     }
@@ -566,7 +590,7 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function positionAtEnd(): static
+    public function positionToEnd(): static
     {
         return $this->positionAt(0, SEEK_END);
     }
@@ -792,6 +816,14 @@ abstract class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
+    public function isRemote(): bool
+    {
+        return !$this->isLocal();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function isTTY(): bool
     {
         $this->assertNotDetached('Unable to determine if stream is a TTY');
@@ -838,7 +870,14 @@ abstract class Stream implements StreamInterface
             return [];
         }
 
-        return stream_get_meta_data($this->resource());
+        $resource = $this->resource();
+        $rawMeta = stream_get_meta_data($resource);
+
+        // Add stats so that size and other info is
+        // made available...
+        $rawMeta['stats'] = fstat($resource);
+
+        return $rawMeta;
     }
 
     /**
@@ -892,9 +931,7 @@ abstract class Stream implements StreamInterface
      */
     protected function setStream(mixed $stream): static
     {
-        if (!is_resource($stream)) {
-            throw new InvalidStreamResource('provided stream is not a resource');
-        }
+        $this->assertIsValidStream($stream);
 
         $this->stream = $stream;
 
@@ -920,6 +957,29 @@ abstract class Stream implements StreamInterface
         }
 
         return $this->makeMetaRepository();
+    }
+
+    /**
+     * Assert stream is a valid resource
+     *
+     * @param  mixed  $stream
+     *
+     * @return self
+     *
+     * @throws InvalidStreamResource
+     */
+    protected function assertIsValidStream(mixed $stream): static
+    {
+        if (!is_resource($stream)) {
+            throw new InvalidStreamResource('Provided stream is not a resource');
+        }
+
+        $type = get_resource_type($stream);
+        if ($type !== 'stream') {
+            throw new InvalidStreamResource(sprintf('Provided stream must be of the type "stream". %s was provided', $type));
+        }
+
+        return $this;
     }
 
     /**

@@ -98,7 +98,7 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         $this->copyStream(
             $processedStream,
             $originalStream->truncate(0)
-        )->positionAtEnd();
+        )->positionToEnd();
 
         // Automatically remove backup file, if any was made and requested...
         if ($this->mustRemoveBackupAfterCommit()) {
@@ -259,7 +259,9 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
     protected function copyStream(FileStreamInterface $stream, FileStreamInterface $target): FileStreamInterface
     {
         return $stream->restorePositionAfter(function(FileStreamInterface $stream) use($target) {
-            return $stream->copyTo($target);
+            return $stream
+                ->positionToStart()
+                ->copyTo($target);
         });
     }
 
@@ -274,7 +276,8 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
     protected function makeBackupFilename(FileStreamInterface $stream,  string $directory): string
     {
         $uri = pathinfo($stream->uri(), PATHINFO_BASENAME);
-        $filename = $uri . '_' . Carbon::now()->timestamp . '.bak';
+        $date = Carbon::now()->format('Y_m_d_His_u');
+        $filename = $uri . '_' . $date . '.bak';
 
         return $directory . DIRECTORY_SEPARATOR . $filename;
     }

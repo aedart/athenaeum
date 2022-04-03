@@ -2,15 +2,18 @@
 
 namespace Aedart\Streams;
 
+use Aedart\Contracts\MimeTypes\Detectable;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
 use Aedart\Contracts\Streams\Hashing\Hashable;
 use Aedart\Contracts\Streams\Locks\Lockable;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Contracts\Streams\Transactions\Transactions;
+use Aedart\MimeTypes\Concerns\MimeTypeDetection;
+use Aedart\MimeTypes\Exceptions\MimeTypeDetectionException;
 use Aedart\Streams\Concerns;
-use Aedart\Streams\Exceptions\CannotCopyToTargetStream;
 use Aedart\Streams\Exceptions\CannotOpenStream;
 use Aedart\Streams\Exceptions\StreamException;
+use Throwable;
 
 /**
  * File Stream
@@ -22,19 +25,26 @@ class FileStream extends Stream implements
     FileStreamInterface,
     Hashable,
     Lockable,
-    Transactions
+    Transactions,
+    Detectable
 {
     use Concerns\Hashing;
     use Concerns\Locking;
     use Concerns\Transactions;
-    use Concerns\Conversion;
+    use Concerns\Copying;
+    use Concerns\Wrapping;
+    use MimeTypeDetection;
 
     /**
      * @inheritDoc
      */
     public static function open(string $filename, string $mode, bool $useIncludePath = false, $context = null): static
     {
-        $stream = fopen($filename, $mode, $useIncludePath, $context);
+        try {
+            $stream = fopen($filename, $mode, $useIncludePath, $context);
+        } catch (Throwable $e) {
+            throw new CannotOpenStream($e->getMessage(), $e->getCode(), $e);
+        }
 
         if ($stream === false) {
             throw new CannotOpenStream(sprintf('Stream could not be opened for %s (mode %s)', $filename, $mode));
@@ -66,18 +76,6 @@ class FileStream extends Stream implements
     /**
      * @inheritDoc
      */
-    public function close()
-    {
-        $resource = $this->detach();
-
-        if (isset($resource) && is_resource($resource)) {
-            fclose($resource);
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function copy(int|null $length = null, int $offset = 0): static
     {
         return $this->copyTo(null, $length, $offset);
@@ -92,7 +90,7 @@ class FileStream extends Stream implements
 
         $this->performCopy($this, $target, $length, $offset);
 
-        return $this;
+        return $target;
     }
 
     /**
@@ -106,7 +104,7 @@ class FileStream extends Stream implements
     ): static
     {
         $this
-            ->positionAtEnd()
+            ->positionToEnd()
             ->performCopy(
                 $this->wrap($data, $maximumMemory),
                 $this,
@@ -129,7 +127,7 @@ class FileStream extends Stream implements
         }
 
         if ($moveToEnd) {
-            return $this->positionAtEnd();
+            return $this->positionToEnd();
         }
 
         return $this;
@@ -141,22 +139,22 @@ class FileStream extends Stream implements
      * **CAUTION**: _Method is only supported from PHP v8.1_
      * TODO: @see https://github.com/aedart/athenaeum/issues/105
      */
-    public function sync(bool $includeMeta = true): static
-    {
-        $this->assertNotDetached('Unable to synchronizes data to file');
-
-        if ($includeMeta) {
-            $result = fsync($this->resource());
-        } else {
-            $result = fdatasync($this->resource());
-        }
-
-        if ($result === false) {
-            throw new StreamException('Failed to synchronize data to file. Please check if stream is block or otherwise invalid');
-        }
-
-        return $this;
-    }
+//    public function sync(bool $includeMeta = true): static
+//    {
+//        $this->assertNotDetached('Unable to synchronizes data to file');
+//
+//        if ($includeMeta) {
+//            $result = fsync($this->resource());
+//        } else {
+//            $result = fdatasync($this->resource());
+//        }
+//
+//        if ($result === false) {
+//            throw new StreamException('Failed to synchronize data to file. Please check if stream is block or otherwise invalid');
+//        }
+//
+//        return $this;
+//    }
 
     /**
      * @inheritDoc
@@ -177,40 +175,16 @@ class FileStream extends Stream implements
      ****************************************************************/
 
     /**
-     * Perform copy of this stream into given target
-     *
-     * @param  StreamInterface  $source
-     * @param  StreamInterface  $target
-     * @param  int|null  $length  [optional]
-     * @param  int  $offset  [optional]
-     *
-     * @return int Bytes copied
-     *
-     * @throws StreamException
+     * @inheritDoc
      */
-    protected function performCopy(StreamInterface $source, StreamInterface $target, int|null $length = null, int $offset = 0): int
+    protected function mimeTypeData()
     {
-        // Abort if source is detached or not readable
-        if ($source->isDetached() || !$target->isReadable()) {
-            throw new CannotCopyToTargetStream('Source stream is either detached or not readable.');
+        try {
+            $this->assertNotDetached('Unable to obtain MIME-type data');
+
+            return $this->resource();
+        } catch (Throwable $e) {
+            throw new MimeTypeDetectionException($e->getMessage(), $e->getCode(), $e);
         }
-
-        // Abort if target is not writable or detached
-        if ($target->isDetached() || !$target->isWritable()) {
-            throw new CannotCopyToTargetStream('Target stream is either detached or not writable.');
-        }
-
-        $bytesCopied = stream_copy_to_stream(
-            $source->resource(),
-            $target->resource(),
-            $length,
-            $offset
-        );
-
-        if ($bytesCopied === false) {
-            throw new StreamException('Copy operation failed. Streams might be blocked or otherwise invalid, or "length" and "offset" are invalid');
-        }
-
-        return $bytesCopied;
     }
 }

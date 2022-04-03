@@ -30,7 +30,12 @@ trait Hashing
             ->assertNotDetached($msg)
             ->assertIsReadable($msg);
 
-        $context = hash_init($algo, $flags, $key, $options);
+        // TODO: See https://github.com/aedart/athenaeum/issues/106
+        if (version_compare(PHP_VERSION, '8.1.0') >= 0) {
+            $context = hash_init($algo, $flags, $key, $options);
+        } else {
+            $context = hash_init($algo, $flags, $key);
+        }
 
         $this->restorePositionAfter(function(StreamInterface $stream) use ($context) {
             $stream->rewind();

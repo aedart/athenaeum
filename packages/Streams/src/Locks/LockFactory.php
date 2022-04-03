@@ -6,7 +6,7 @@ use Aedart\Contracts\Streams\Locks\Factory;
 use Aedart\Contracts\Streams\Locks\Lock;
 use Aedart\Contracts\Streams\Stream;
 use Aedart\Streams\Exceptions\Locks\ProfileNotFound;
-use Aedart\Streams\Locks\Drivers\FlockLockDriver;
+use Aedart\Streams\Locks\Drivers\FLockDriver;
 
 /**
  * Lock Factory
@@ -23,7 +23,7 @@ class LockFactory implements Factory
      */
     protected array $fallbackProfiles = [
         'default' => [
-            'driver' => FlockLockDriver::class,
+            'driver' => FLockDriver::class,
             'options' => [
                 'sleep' => 10_000,
                 'fail_on_timeout' => true

@@ -117,7 +117,10 @@ abstract class BaseTransactionDriver implements Transaction
         $result = null;
 
         for ($currentAttempt = 1; $currentAttempt <= $attempts; $currentAttempt++) {
-            $this->begin();
+            // Begin transaction, if not already started
+            if (!$this->started) {
+                $this->begin();
+            }
 
             // Perform provided operation callback, using the "process stream".
             // In case of failure, we roll back and try again, if attempts

@@ -26,7 +26,7 @@ return [
     'locks' => [
 
         'default' => [
-            'driver' => \Aedart\Streams\Locks\Drivers\FlockLockDriver::class,
+            'driver' => \Aedart\Streams\Locks\Drivers\FLockDriver::class,
             'options' => [
 
                 // Sleep duration between acquire lock polling.

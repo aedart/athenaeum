@@ -371,6 +371,37 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Streams',
+            collapsable: true,
+            children: [
+                'streams/',
+                'streams/install',
+                'streams/setup',
+                {
+                    title: 'How to use',
+                    collapsable: true,
+                    children: [
+                        'streams/usage/',
+                        'streams/usage/open-close',
+                        'streams/usage/raw-resource',
+                        'streams/usage/seeking',
+                        'streams/usage/reading',
+                        'streams/usage/writing',
+                        'streams/usage/size',
+                        'streams/usage/truncate',
+                        'streams/usage/flush',
+                        'streams/usage/hash',
+                        'streams/usage/mime-type',
+                        'streams/usage/output',
+                        'streams/usage/locking',
+                        'streams/usage/transactions',
+                        'streams/usage/meta',
+                        'streams/usage/misc',
+                    ]
+                },
+            ]
+        },
+        {
             title: 'Support',
             collapsable: true,
             children: [

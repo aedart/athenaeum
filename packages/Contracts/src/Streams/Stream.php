@@ -128,7 +128,7 @@ interface Stream extends StreamInterface,
     public function readCharacter(): string|false;
 
     /**
-     * Returns a line from stream's content until length or newline is reached,
+     * Returns a line from stream's content until length - 1 byte or newline is reached,
      * or end-of-file (EOF)
      *
      * @see https://www.php.net/manual/en/function.fgets.php
@@ -339,7 +339,7 @@ interface Stream extends StreamInterface,
      *
      * @throws StreamException
      */
-    public function positionAtStart(): static;
+    public function positionToStart(): static;
 
     /**
      * Move position to the end of the stream
@@ -348,7 +348,7 @@ interface Stream extends StreamInterface,
      *
      * @throws StreamException
      */
-    public function positionAtEnd(): static;
+    public function positionToEnd(): static;
 
     /**
      * Alias for {@see tell()}
@@ -544,7 +544,18 @@ interface Stream extends StreamInterface,
     public function isLocal(): bool;
 
     /**
-     * Determine if stream is a TTY
+     *  Determine if stream is a remote stream
+     *
+     * @see isLocal()
+     *
+     * @return bool
+     *
+     * @throws StreamException
+     */
+    public function isRemote(): bool;
+
+    /**
+     * Determine if stream is a TTY ("TeleTypewriter")
      *
      * @see https://www.php.net/manual/en/function.stream-isatty.php
      *

@@ -8,18 +8,19 @@ use Aedart\Streams\Exceptions\InvalidStreamResource;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
 
 /**
- * Concerns Conversion
+ * Concerns Wrapping
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Streams\Concerns
  */
-trait Conversion
+trait Wrapping
 {
     /**
      * Wraps given data into a stream
      *
-     * **Warning**: _Method will {@see detach()} underlying resource from given stream,
-     * if `$data` is a {@see PsrStreamInterface} instance is given!_
+     * **Warning**: _Method will {@see detach()} `$data`'s underlying resource, if `$data` is a
+     * pure {@see PsrStreamInterface} instance! If you wish for a continued valid resource reference in your
+     * stream instance, then you should wrap `$data` into a {@see Stream} instance using {@see Stream::makeFrom()}._
      *
      * @param  string|int|float|resource|PsrStreamInterface|StreamInterface  $data
      * @param  int|null  $maximumMemory  [optional] When content is a string, then it will be wrapped into
@@ -56,7 +57,9 @@ trait Conversion
      */
     protected function wrapRawData(string|int|float $data, int|null $maximumMemory = null, $context = null): StreamInterface
     {
-        return static::openTemporary('r+b', $maximumMemory, $context)->put((string) $data);
+        return static::openTemporary('r+b', $maximumMemory, $context)
+            ->put((string) $data)
+            ->positionToStart();
     }
 
     /**
@@ -78,6 +81,8 @@ trait Conversion
      *
      * **Warning**: _Method will {@see detach()} underlying resource from given stream,
      * before creating a new stream instance!_
+     *
+     * @see Stream::makeFrom()
      *
      * @param  PsrStreamInterface  $stream
      *

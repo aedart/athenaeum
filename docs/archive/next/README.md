@@ -88,6 +88,28 @@ echo ($record->reference instanceof Organisation); // true
 
 See [Union Type Handling documentation](./dto/nested-dto.md#union-types) for additional examples.
 
+### Streams
+
+A package that offers an extended version of [PSR-7's](https://www.php-fig.org/psr/psr-7/#13-streams) defined `StreamInterface`;
+a wrapper for common stream operations, mostly intended for file streams.
+
+```php
+use Aedart\Streams\FileStream;
+
+$stream = FileStream::open('my-file.txt')
+    ->put('Hi there');
+
+$more = FileStream::openMemory()
+    ->put("\nMore things to show...")
+    ->positionToStart();
+
+$stream
+    ->append($more);
+
+echo (string) $stream; // Hi there
+                       // More things to show...
+```
+
 ### MIME-types detection
 
 The [MIME-types](./mime-types) packages offers a way to detect a file's MIME-type based on a small sample of its contents.
