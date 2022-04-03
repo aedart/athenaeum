@@ -152,8 +152,9 @@ class Memory
      *
      * @param  int  $bytes
      * @param  int  $precision  [optional] Amount of decimals
-     * @param  array  $units  [optional] List of symbols or units to be appended to the value
-     * @param  int  $step  [optional] E.g. power of 2 (1024) or power of 10 (1000)
+     * @param  bool  $short  [optional] If true, then a symbol are affixed the formatted value
+     * @param  array  $units  [optional] List of symbols and units names to be appended to the value. Key = symbol, value = unit name
+     * @param  int  $step  [optional] E.g. binary value (power of 2: 1 KiB = 1024 bytes) or decimal value (power of 10: 1 KB  = 1000 bytes)
      *
      * @return string E.g. "14.7 MB"
      *
@@ -162,10 +163,11 @@ class Memory
     public static function format(
         int $bytes,
         int $precision = 1,
+        bool $short = true,
         array $units = Unit::BINARY_UNITS,
         int $step = Unit::BINARY_VALUE
     ): string
     {
-        return static::unit($bytes)->format($precision, $units, $step);
+        return static::unit($bytes)->format($precision, $short, $units, $step);
     }
 }

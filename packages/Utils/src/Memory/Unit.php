@@ -18,16 +18,40 @@ class Unit implements Stringable
     /**
      * Default decimal units (powers of 10)
      *
+     * Key = symbol, value = unit name (plural)
+     *
      * Source: https://en.wikipedia.org/wiki/Byte
      */
-    public const DECIMAL_UNITS = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    public const DECIMAL_UNITS = [
+        'B' => 'Bytes',
+        'kB' => 'Kilobytes',
+        'MB' => 'Megabytes',
+        'GB' => 'Gigabytes',
+        'TB' => 'Terabytes',
+        'PB' => 'Petabytes',
+        'EB' => 'Exabytes',
+        'ZB' => 'Zettabytes',
+        'YB' => 'Yottabytes'
+    ];
 
     /**
      * Default binary units (powers of 2)
      *
+     * Key = symbol, value = unit name (plural)
+     *
      * Source: https://en.wikipedia.org/wiki/Byte
      */
-    public const BINARY_UNITS = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+    public const BINARY_UNITS = [
+        'B' => 'Bytes',
+        'KiB' => 'Kibibytes',
+        'MiB' => 'Mebibytes',
+        'GiB' => 'Gibibytes',
+        'TiB' => 'Tebibytes',
+        'PiB' => 'Pebibytes',
+        'EiB' => 'Exbibytes',
+        'ZiB' => 'Zebibytes',
+        'YiB' => 'Yobibytes'
+    ];
 
     /**
      * Value based on powers of 10, in which 1 kilobyte (kB) is defined to equal 1,000 bytes
@@ -362,11 +386,61 @@ class Unit implements Stringable
      ****************************************************************/
 
     /**
+     * Format unit to human-readable string, using the binary units as order of magnitude
+     *
+     * @see https://en.wikipedia.org/wiki/Orders_of_magnitude_(data)
+     *
+     * @param  int  $precision  [optional] Amount of decimals
+     * @param  bool  $short  [optional] If true, then a symbol are affixed the formatted value
+     *
+     * @return string E.g. "14.7 MiB"
+     *
+     * @throws InvalidArgumentException
+     */
+    public function binaryFormat(int $precision = 1, bool $short = true): string
+    {
+        return $this->format($precision, $short, self::BINARY_UNITS, self::BINARY_VALUE);
+    }
+
+    /**
+     * Format unit to human-readable string, using the decimal units as order of magnitude
+     *
+     * @see https://en.wikipedia.org/wiki/Orders_of_magnitude_(data)
+     *
+     * @param  int  $precision  [optional] Amount of decimals
+     * @param  bool  $short  [optional] If true, then a symbol are affixed the formatted value
+     *
+     * @return string E.g. "14.7 MB"
+     *
+     * @throws InvalidArgumentException
+     */
+    public function decimalFormat(int $precision = 1, bool $short = true): string
+    {
+        return $this->format($precision, $short, self::DECIMAL_UNITS, self::DECIMAL_VALUE);
+    }
+
+    /**
+     * Format unit to human-readable string, using the legacy units as order of magnitude
+     *
+     * @param  int  $precision  [optional] Amount of decimals
+     * @param  bool  $short  [optional] If true, then a symbol are affixed the formatted value
+     *
+     * @return string E.g. "14.7 MB"
+     *
+     * @throws InvalidArgumentException
+     */
+    public function legacyFormat(int $precision = 1, bool $short = true): string
+    {
+        return $this->format($precision, $short, self::DECIMAL_UNITS, self::BINARY_VALUE);
+    }
+
+    /**
      * Format unit to human-readable string
      *
      * @param  int  $precision  [optional] Amount of decimals
-     * @param  array  $units  [optional] List of symbols or units to be appended to the value
-     * @param  int  $step  [optional] E.g. power of 2 (1024) or power of 10 (1000)
+     * @param  bool  $short  [optional] If true, then a symbol are affixed the formatted value
+     * @param  array  $units  [optional] List of symbols and units names to be appended to the value. Key = symbol, value = unit name
+     * @param  int  $step  [optional] E.g. binary value (power of 2: 1 KiB = 1024 bytes) or decimal value (power of 10: 1 KB  = 1000 bytes)
      *
      * @return string E.g. "14.7 MB"
      *
@@ -374,7 +448,8 @@ class Unit implements Stringable
      */
     public function format(
         int $precision = 1,
-        array $units = self::DECIMAL_UNITS,
+        bool $short = true,
+        array $units = self::BINARY_UNITS,
         int $step = self::BINARY_VALUE
     ): string
     {
@@ -384,6 +459,13 @@ class Unit implements Stringable
         // Fail when no units given
         if (empty($units)) {
             throw new InvalidArgumentException('No units provided for format bytes.');
+        }
+
+        // Obtain symbols, if short format requested
+        if ($short) {
+            $units = array_keys($units);
+        } else {
+            $units = array_values($units);
         }
 
         // Fail when invalid step provided

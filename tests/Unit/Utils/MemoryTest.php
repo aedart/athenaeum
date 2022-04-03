@@ -93,6 +93,6 @@ class MemoryTest extends UnitTestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        Memory::format(800, 0, []);
+        Memory::format(800, 0, false, []);
     }
 }
