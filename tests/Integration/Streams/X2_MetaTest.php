@@ -108,6 +108,22 @@ class X2_MetaTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    public function canSetMetaDataDirectly()
+    {
+        $resource = fopen('php://memory', 'rb');
+        $stream = Stream::make($resource);
+
+        $stream->meta()->set('acme.foo', 'bar');
+
+        $this->assertsame($stream->meta()->get('acme.foo'), 'bar');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
     public function canObtainRawMeta()
     {
         $resource = fopen('php://memory', 'rb');
