@@ -816,6 +816,14 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
+    public function isRemote(): bool
+    {
+        return !$this->isLocal();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function isTTY(): bool
     {
         $this->assertNotDetached('Unable to determine if stream is a TTY');
