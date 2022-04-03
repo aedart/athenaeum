@@ -15,7 +15,7 @@ use InvalidArgumentException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Streams\Locks\Drivers
  */
-class FlockLockDriver extends BaseLockDriver
+class FLockDriver extends BaseLockDriver
 {
     /**
      * Lock type map
