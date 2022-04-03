@@ -394,6 +394,7 @@ module.exports.sidebar = function(){
                         'streams/usage/mime-type',
                         'streams/usage/output',
                         'streams/usage/locking',
+                        'streams/usage/transactions',
                         'streams/usage/meta',
                         'streams/usage/misc',
                     ]
