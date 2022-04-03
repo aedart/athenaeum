@@ -16,32 +16,32 @@ use Stringable;
 class Unit implements Stringable
 {
     /**
-     * Default units on powers of 10
+     * Default decimal units (powers of 10)
      *
      * Source: https://en.wikipedia.org/wiki/Byte
      */
-    public const UNITS_POWER_OF_10 = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    public const DECIMAL_UNITS = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
     /**
-     * Default units on powers of 2
+     * Default binary units (powers of 2)
      *
      * Source: https://en.wikipedia.org/wiki/Byte
      */
-    public const UNITS_POWER_OF_2 = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+    public const BINARY_UNITS = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
 
     /**
-     * Units based on powers of 10, in which 1 kilobyte (symbol kB) is defined to equal 1,000 bytes
+     * Value based on powers of 10, in which 1 kilobyte (kB) is defined to equal 1,000 bytes
      *
      * Source: https://en.wikipedia.org/wiki/Byte#Multiple-byte_units
      */
-    public const POWER_OF_10 = 1000;
+    public const DECIMAL_VALUE = 1000;
 
     /**
-     * Units based on powers of 2 in which 1 kibibyte (KiB) is equal to 1,024 (i.e., 2¹⁰) bytes
+     * Value based on powers of 2 in which 1 kibibyte (KiB) is equal to 1024 bytes
      *
      * Source: https://en.wikipedia.org/wiki/Byte#Multiple-byte_units
      */
-    public const POWER_OF_2 = 1024;
+    public const BINARY_VALUE = 1024;
 
     /**
      * Creates a new memory unit of given size
@@ -200,7 +200,7 @@ class Unit implements Stringable
      */
     public static function fromKilobyte(int|float $kilobyte): static
     {
-        $bytes = round($kilobyte * static::POWER_OF_10);
+        $bytes = round($kilobyte * static::DECIMAL_VALUE);
 
         return static::make($bytes);
     }
@@ -230,7 +230,7 @@ class Unit implements Stringable
      */
     public static function fromKibibyte(int|float $kibibyte): static
     {
-        $bytes = round($kibibyte * static::POWER_OF_2);
+        $bytes = round($kibibyte * static::BINARY_VALUE);
 
         return static::make($bytes);
     }
@@ -244,7 +244,7 @@ class Unit implements Stringable
      */
     public function toKilobyte(int $precision = 1): float
     {
-        return $this->divideBytes(static::POWER_OF_10, $precision);
+        return $this->divideBytes(static::DECIMAL_VALUE, $precision);
     }
 
     /**
@@ -268,7 +268,7 @@ class Unit implements Stringable
      */
     public function toKibibyte(int $precision = 1): float
     {
-        return $this->divideBytes(static::POWER_OF_2, $precision);
+        return $this->divideBytes(static::BINARY_VALUE, $precision);
     }
 
     /*****************************************************************
@@ -286,7 +286,7 @@ class Unit implements Stringable
      */
     public static function fromMegabyte(int|float $megabyte): static
     {
-        $bytes = round($megabyte * pow(static::POWER_OF_10, 2));
+        $bytes = round($megabyte * pow(static::DECIMAL_VALUE, 2));
 
         return static::make($bytes);
     }
@@ -316,7 +316,7 @@ class Unit implements Stringable
      */
     public static function fromMebibyte(int|float $mebibyte): static
     {
-        $bytes = round($mebibyte * pow(static::POWER_OF_2, 2));
+        $bytes = round($mebibyte * pow(static::BINARY_VALUE, 2));
 
         return static::make($bytes);
     }
@@ -330,7 +330,7 @@ class Unit implements Stringable
      */
     public function toMegabyte(int $precision = 1): float
     {
-        return $this->divideBytes(pow(static::POWER_OF_10, 2), $precision);
+        return $this->divideBytes(pow(static::DECIMAL_VALUE, 2), $precision);
     }
 
     /**
@@ -354,7 +354,7 @@ class Unit implements Stringable
      */
     public function toMebibyte(int $precision = 1): float
     {
-        return $this->divideBytes(pow(static::POWER_OF_2, 2), $precision);
+        return $this->divideBytes(pow(static::BINARY_VALUE, 2), $precision);
     }
 
     /*****************************************************************
@@ -374,8 +374,8 @@ class Unit implements Stringable
      */
     public function format(
         int $precision = 1,
-        array $units = self::UNITS_POWER_OF_10,
-        int $step = self::POWER_OF_2
+        array $units = self::DECIMAL_UNITS,
+        int $step = self::BINARY_VALUE
     ): string
     {
         // Source inspired by: https://gist.github.com/liunian/9338301
