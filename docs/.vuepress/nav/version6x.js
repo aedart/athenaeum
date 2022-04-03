@@ -393,6 +393,7 @@ module.exports.sidebar = function(){
                         'streams/usage/hash',
                         'streams/usage/mime-type',
                         'streams/usage/output',
+                        'streams/usage/locking',
                         'streams/usage/meta',
                         'streams/usage/misc',
                     ]
