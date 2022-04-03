@@ -42,6 +42,7 @@ class MemoryTest extends UnitTestCase
         //$x = Memory::format(2.22 * pow(1024, 9)); // ???
         $y = Memory::format(0); // bytes
 
+        // Note: here the legacy terms are used...
         ConsoleDebugger::output([
             'bytes' => $a,
             'kilobytes' => $b,

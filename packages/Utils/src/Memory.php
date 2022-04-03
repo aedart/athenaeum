@@ -162,7 +162,7 @@ class Memory
     public static function format(
         int $bytes,
         int $precision = 1,
-        array $units = Unit::DECIMAL_UNITS,
+        array $units = Unit::BINARY_UNITS,
         int $step = Unit::BINARY_VALUE
     ): string
     {
