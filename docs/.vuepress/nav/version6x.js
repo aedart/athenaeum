@@ -387,6 +387,7 @@ module.exports.sidebar = function(){
                         'streams/usage/seeking',
                         'streams/usage/reading',
                         'streams/usage/writing',
+                        'streams/usage/size',
                     ]
                 },
             ]
