@@ -388,6 +388,7 @@ module.exports.sidebar = function(){
                         'streams/usage/reading',
                         'streams/usage/writing',
                         'streams/usage/size',
+                        'streams/usage/truncate',
                     ]
                 },
             ]
