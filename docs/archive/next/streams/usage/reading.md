@@ -15,8 +15,8 @@ The `isReadable()` determines if a stream is readable or not.
 $a = FileStream::open('people.txt', 'rb');
 $b = FileStream::open('contacts.txt', 'a');
 
-echo $a; // true
-echo $b; // false
+echo $a->isReadable(); // true
+echo $b->isReadable(); // false
 ```
 
 ## Read
