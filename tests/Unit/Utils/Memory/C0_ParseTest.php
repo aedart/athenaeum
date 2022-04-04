@@ -59,6 +59,17 @@ class C0_ParseTest extends UnitTestCase
             '2 mib' => [ '2 mib', 2_097_152 ],
             '3 mebibyte' => [ '3 mebibyte', 3_145_728 ],
             '8mebibytes' => [ '8mebibytes', 8_388_608 ],
+
+            // gigabyte / gibibyte
+            '1.1 g' => [ '1.1 g', 1_100_000_000 ],
+            '2 gb' => [ '2 gb', 2_000_000_000 ],
+            '5.3 gigabyte' => [ '5.3 gigabyte', 5_300_000_000 ],
+            '3gigabytes' => [ '3gigabytes', 3_000_000_000 ],
+
+            '1.1 gi' => [ '1.1 gi', 1_181_116_006 ],
+            '2 gib' => [ '2 gib', 2_147_483_648 ],
+            '5.3 gibibyte' => [ '5.3 gibibyte', 5_690_831_667 ],
+            '3gibibytes' => [ '3gibibytes', 3_221_225_472 ],
         ];
     }
 

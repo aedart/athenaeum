@@ -118,15 +118,15 @@ class Memory
     /**
      * Creates a new memory unit from legacy megabyte (power of 2)
      *
-     * @param  int|float  $kilobyte
+     * @param  int|float  $megabyte
      *
      * @return Unit
      *
      * @throws InvalidArgumentException
      */
-    public static function fromLegacyMegabyte(int|float $kilobyte): Unit
+    public static function fromLegacyMegabyte(int|float $megabyte): Unit
     {
-        return Unit::fromLegacyMegabyte($kilobyte);
+        return Unit::fromLegacyMegabyte($megabyte);
     }
 
     /**
@@ -141,6 +141,52 @@ class Memory
     public static function fromMebibyte(int|float $mebibyte): Unit
     {
         return Unit::fromMebibyte($mebibyte);
+    }
+
+    /*****************************************************************
+     * Gigabyte / Gibibyte
+     ****************************************************************/
+
+    /**
+     * Creates a new memory unit from gigabyte (power of 10)
+     *
+     * @param  int|float  $gigabyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromGigabyte(int|float $gigabyte): Unit
+    {
+        return Unit::fromGigabyte($gigabyte);
+    }
+
+    /**
+     * Creates a new memory unit from legacy gigabyte (power of 2)
+     *
+     * @param  int|float  $gigabyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromLegacyGigabyte(int|float $gigabyte): Unit
+    {
+        return Unit::fromLegacyGigabyte($gigabyte);
+    }
+
+    /**
+     * Creates a new memory unit from gibibyte (power of 2)
+     *
+     * @param  int|float  $gibibyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromGibibyte(int|float $gibibyte): Unit
+    {
+        return Unit::fromGibibyte($gibibyte);
     }
 
     /*****************************************************************

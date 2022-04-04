@@ -142,6 +142,10 @@ class Unit implements Stringable
             'm', 'mb', 'megabyte', 'megabytes' => static::fromMegabyte($parsedValue),
             'mi', 'mib', 'mebibyte', 'mebibytes' => static::fromMebibyte($parsedValue),
 
+            // Gigabyte / Gibibyte
+            'g', 'gb', 'gigabyte', 'gigabytes' => static::fromGigabyte($parsedValue),
+            'gi', 'gib', 'gibibyte', 'gibibytes' => static::fromGibibyte($parsedValue),
+
             // TODO: More to come...
 
             // Fail if unit is known...
@@ -379,6 +383,92 @@ class Unit implements Stringable
     public function toMebibyte(int $precision = 1): float
     {
         return $this->divideBytes(pow(static::BINARY_VALUE, 2), $precision);
+    }
+
+    /*****************************************************************
+     * Gigabyte / Gibibyte
+     ****************************************************************/
+
+    /**
+     * Creates a new memory unit from gigabyte (power of 10)
+     *
+     * @param  int|float  $gigabyte
+     *
+     * @return static
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromGigabyte(int|float $gigabyte): static
+    {
+        $bytes = round($gigabyte * pow(static::DECIMAL_VALUE, 3));
+
+        return static::make($bytes);
+    }
+
+    /**
+     * Creates a new memory unit from legacy gigabyte (power of 2)
+     *
+     * @param  int|float  $gigabyte
+     *
+     * @return static
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromLegacyGigabyte(int|float $gigabyte): static
+    {
+        return static::fromGibibyte($gigabyte);
+    }
+
+    /**
+     * Creates a new memory unit from gibibyte (power of 2)
+     *
+     * @param  int|float  $gibibyte
+     *
+     * @return static
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromGibibyte(int|float $gibibyte): static
+    {
+        $bytes = round($gibibyte * pow(static::BINARY_VALUE, 3));
+
+        return static::make($bytes);
+    }
+
+    /**
+     * Returns unit's value in gigabyte (power of 10)
+     *
+     * @param  int  $precision  [optional]
+     *
+     * @return float
+     */
+    public function toGigabyte(int $precision = 1): float
+    {
+        return $this->divideBytes(pow(static::DECIMAL_VALUE, 3), $precision);
+    }
+
+    /**
+     * Returns unit's value in legacy gigabyte (power of 2)
+     *
+     * @param  int  $precision  [optional]
+     *
+     * @return float
+     */
+    public function toLegacyGigabyte(int $precision = 1): float
+    {
+        return $this->toGibibyte($precision);
+    }
+
+    /**
+     * Returns unit's value in gibibyte (power of 2)
+     *
+     * @param  int  $precision  [optional]
+     *
+     * @return float
+     */
+    public function toGibibyte(int $precision = 1): float
+    {
+        return $this->divideBytes(pow(static::BINARY_VALUE, 3), $precision);
     }
 
     /*****************************************************************
