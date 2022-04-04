@@ -218,7 +218,7 @@ class Unit implements Stringable
      ****************************************************************/
 
     /**
-     * Creates a new memory unit from kilobyte (power of 10)
+     * Creates a new memory unit from kilobyte (decimal - power of 10)
      *
      * @param  int|float  $kilobyte
      *
@@ -234,7 +234,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Creates a new memory unit from legacy kilobyte (power of 2)
+     * Creates a new memory unit from legacy kilobyte (binary - power of 2)
      *
      * @param  int|float  $kilobyte
      *
@@ -248,7 +248,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Creates a new memory unit from kibibyte (power of 2)
+     * Creates a new memory unit from kibibyte (binary - power of 2)
      *
      * @param  int|float  $kibibyte
      *
@@ -264,7 +264,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Returns unit's value in kilobyte (power of 10)
+     * Returns unit's value in kilobyte (decimal - power of 10)
      *
      * @param  int  $precision  [optional]
      *
@@ -276,7 +276,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Returns unit's value in legacy kilobyte (power of 2)
+     * Returns unit's value in legacy kilobyte (binary - power of 2)
      *
      * @param  int  $precision  [optional]
      *
@@ -288,7 +288,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Returns unit's value in kibibyte (power of 2)
+     * Returns unit's value in kibibyte (binary - power of 2)
      *
      * @param  int  $precision  [optional]
      *
@@ -304,7 +304,7 @@ class Unit implements Stringable
      ****************************************************************/
 
     /**
-     * Creates a new memory unit from megabyte (power of 10)
+     * Creates a new memory unit from megabyte (decimal - power of 10)
      *
      * @param  int|float  $megabyte
      *
@@ -320,7 +320,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Creates a new memory unit from legacy megabyte (power of 2)
+     * Creates a new memory unit from legacy megabyte (binary - power of 2)
      *
      * @param  int|float  $megabyte
      *
@@ -350,7 +350,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Returns unit's value in megabyte (power of 10)
+     * Returns unit's value in megabyte (decimal - power of 10)
      *
      * @param  int  $precision  [optional]
      *
@@ -362,7 +362,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Returns unit's value in legacy megabyte (power of 2)
+     * Returns unit's value in legacy megabyte (binary - power of 2)
      *
      * @param  int  $precision  [optional]
      *
@@ -374,7 +374,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Returns unit's value in mebibyte (power of 2)
+     * Returns unit's value in mebibyte (binary - power of 2)
      *
      * @param  int  $precision  [optional]
      *
@@ -390,7 +390,7 @@ class Unit implements Stringable
      ****************************************************************/
 
     /**
-     * Creates a new memory unit from gigabyte (power of 10)
+     * Creates a new memory unit from gigabyte (decimal - power of 10)
      *
      * @param  int|float  $gigabyte
      *
@@ -406,7 +406,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Creates a new memory unit from legacy gigabyte (power of 2)
+     * Creates a new memory unit from legacy gigabyte (binary - power of 2)
      *
      * @param  int|float  $gigabyte
      *
@@ -420,7 +420,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Creates a new memory unit from gibibyte (power of 2)
+     * Creates a new memory unit from gibibyte (binary - power of 2)
      *
      * @param  int|float  $gibibyte
      *
@@ -436,7 +436,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Returns unit's value in gigabyte (power of 10)
+     * Returns unit's value in gigabyte (decimal - power of 10)
      *
      * @param  int  $precision  [optional]
      *
@@ -448,7 +448,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Returns unit's value in legacy gigabyte (power of 2)
+     * Returns unit's value in legacy gigabyte (binary - power of 2)
      *
      * @param  int  $precision  [optional]
      *
@@ -460,7 +460,7 @@ class Unit implements Stringable
     }
 
     /**
-     * Returns unit's value in gibibyte (power of 2)
+     * Returns unit's value in gibibyte (binary - power of 2)
      *
      * @param  int  $precision  [optional]
      *

@@ -8,6 +8,9 @@ use InvalidArgumentException;
 /**
  * Memory Util
  *
+ * @see \Aedart\Utils\Memory\Unit
+ * @see https://en.wikipedia.org/wiki/Byte#Multiple-byte_units
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Utils
  */
@@ -56,7 +59,7 @@ class Memory
      ****************************************************************/
 
     /**
-     * Creates a new memory unit from kilobyte (power of 10)
+     * Creates a new memory unit from kilobyte (decimal - power of 10)
      *
      * @param  int|float  $kilobyte
      *
@@ -70,7 +73,7 @@ class Memory
     }
 
     /**
-     * Creates a new memory unit from legacy kilobyte (power of 2)
+     * Creates a new memory unit from legacy kilobyte (binary- power of 2)
      *
      * @param  int|float  $kilobyte
      *
@@ -84,7 +87,7 @@ class Memory
     }
 
     /**
-     * Creates a new memory unit from kibibyte (power of 2)
+     * Creates a new memory unit from kibibyte (binary- power of 2)
      *
      * @param  int|float  $kibibyte
      *
@@ -102,7 +105,7 @@ class Memory
      ****************************************************************/
 
     /**
-     * Creates a new memory unit from megabyte (power of 10)
+     * Creates a new memory unit from megabyte (decimal - power of 10)
      *
      * @param  int|float  $megabyte
      *
@@ -116,7 +119,7 @@ class Memory
     }
 
     /**
-     * Creates a new memory unit from legacy megabyte (power of 2)
+     * Creates a new memory unit from legacy megabyte (binary - power of 2)
      *
      * @param  int|float  $megabyte
      *
@@ -130,7 +133,7 @@ class Memory
     }
 
     /**
-     * Creates a new memory unit from mebibyte (power of 2)
+     * Creates a new memory unit from mebibyte (binary - power of 2)
      *
      * @param  int|float  $mebibyte
      *
@@ -148,7 +151,7 @@ class Memory
      ****************************************************************/
 
     /**
-     * Creates a new memory unit from gigabyte (power of 10)
+     * Creates a new memory unit from gigabyte (decimal - power of 10)
      *
      * @param  int|float  $gigabyte
      *
@@ -162,7 +165,7 @@ class Memory
     }
 
     /**
-     * Creates a new memory unit from legacy gigabyte (power of 2)
+     * Creates a new memory unit from legacy gigabyte (binary - power of 2)
      *
      * @param  int|float  $gigabyte
      *
@@ -176,7 +179,7 @@ class Memory
     }
 
     /**
-     * Creates a new memory unit from gibibyte (power of 2)
+     * Creates a new memory unit from gibibyte (binary - power of 2)
      *
      * @param  int|float  $gibibyte
      *
