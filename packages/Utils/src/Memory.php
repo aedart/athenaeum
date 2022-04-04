@@ -239,6 +239,38 @@ class Memory
     }
 
     /*****************************************************************
+     * Petabyte / Pebibyte
+     ****************************************************************/
+
+    /**
+     * Creates a new memory unit from petabyte (decimal - power of 10)
+     *
+     * @param  int|float  $petabyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromPetabyte(int|float $petabyte): Unit
+    {
+        return Unit::fromPetabyte($petabyte);
+    }
+
+    /**
+     * Creates a new memory unit from pebibyte (binary - power of 2)
+     *
+     * @param  int|float  $pebibyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromPebibyte(int|float $pebibyte): Unit
+    {
+        return Unit::fromPebibyte($pebibyte);
+    }
+
+    /*****************************************************************
      * Formatting
      ****************************************************************/
 

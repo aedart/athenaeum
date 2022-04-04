@@ -153,6 +153,10 @@ class Unit implements
             't', 'tb', 'terabyte', 'terabytes' => static::fromTerabyte($parsedValue),
             'ti', 'tib', 'tebibyte', 'tebibytes' => static::fromTebibyte($parsedValue),
 
+            // Petabyte / Pebibyte
+            'p', 'pb', 'petabyte', 'petabytes' => static::fromPetabyte($parsedValue),
+            'pi', 'pib', 'pebibyte', 'pebibytes' => static::fromPebibyte($parsedValue),
+
             // TODO: More to come...
 
             // Fail if unit is known...
@@ -562,6 +566,66 @@ class Unit implements
     public function toTebibyte(int $precision = 1): float
     {
         return $this->divideBytes(pow(static::BINARY_VALUE, 4), $precision);
+    }
+
+    /*****************************************************************
+     * Petabyte / Pebibyte
+     ****************************************************************/
+
+    /**
+     * Creates a new memory unit from petabyte (decimal - power of 10)
+     *
+     * @param  int|float  $petabyte
+     *
+     * @return static
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromPetabyte(int|float $petabyte): static
+    {
+        $bytes = round($petabyte * pow(static::DECIMAL_VALUE, 5));
+
+        return static::make($bytes);
+    }
+
+    /**
+     * Creates a new memory unit from pebibyte (binary - power of 2)
+     *
+     * @param  int|float  $pebibyte
+     *
+     * @return static
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromPebibyte(int|float $pebibyte): static
+    {
+        $bytes = round($pebibyte * pow(static::BINARY_VALUE, 5));
+
+        return static::make($bytes);
+    }
+
+    /**
+     * Returns unit's value in petabyte (decimal - power of 10)
+     *
+     * @param  int  $precision  [optional]
+     *
+     * @return float
+     */
+    public function toPetabyte(int $precision = 1): float
+    {
+        return $this->divideBytes(pow(static::DECIMAL_VALUE, 5), $precision);
+    }
+
+    /**
+     * Returns unit's value in pebibyte (binary - power of 2)
+     *
+     * @param  int  $precision  [optional]
+     *
+     * @return float
+     */
+    public function toPebibyte(int $precision = 1): float
+    {
+        return $this->divideBytes(pow(static::BINARY_VALUE, 5), $precision);
     }
 
     /*****************************************************************
