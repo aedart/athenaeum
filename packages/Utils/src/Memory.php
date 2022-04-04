@@ -271,6 +271,38 @@ class Memory
     }
 
     /*****************************************************************
+     * Exabyte / Exbibyte
+     ****************************************************************/
+
+    /**
+     * Creates a new memory unit from exabyte (decimal - power of 10)
+     *
+     * @param  int|float  $exabyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromExabyte(int|float $exabyte): Unit
+    {
+        return Unit::fromExabyte($exabyte);
+    }
+
+    /**
+     * Creates a new memory unit from exbibyte (binary - power of 2)
+     *
+     * @param  int|float  $exbibyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromExbibyte(int|float $exbibyte): Unit
+    {
+        return Unit::fromExbibyte($exbibyte);
+    }
+
+    /*****************************************************************
      * Formatting
      ****************************************************************/
 

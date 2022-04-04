@@ -157,6 +157,10 @@ class Unit implements
             'p', 'pb', 'petabyte', 'petabytes' => static::fromPetabyte($parsedValue),
             'pi', 'pib', 'pebibyte', 'pebibytes' => static::fromPebibyte($parsedValue),
 
+            // Exabyte / Exbibyte
+            'e', 'eb', 'exabyte', 'exabytes' => static::fromExabyte($parsedValue),
+            'ei', 'eib', 'exbibyte', 'exbibytes' => static::fromExbibyte($parsedValue),
+
             // TODO: More to come...
 
             // Fail if unit is known...
@@ -626,6 +630,66 @@ class Unit implements
     public function toPebibyte(int $precision = 1): float
     {
         return $this->divideBytes(pow(static::BINARY_VALUE, 5), $precision);
+    }
+
+    /*****************************************************************
+     * Exabyte / Exbibyte
+     ****************************************************************/
+
+    /**
+     * Creates a new memory unit from exabyte (decimal - power of 10)
+     *
+     * @param  int|float  $exabyte
+     *
+     * @return static
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromExabyte(int|float $exabyte): static
+    {
+        $bytes = round($exabyte * pow(static::DECIMAL_VALUE, 6));
+
+        return static::make($bytes);
+    }
+
+    /**
+     * Creates a new memory unit from exbibyte (binary - power of 2)
+     *
+     * @param  int|float  $exbibyte
+     *
+     * @return static
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromExbibyte(int|float $exbibyte): static
+    {
+        $bytes = round($exbibyte * pow(static::BINARY_VALUE, 6));
+
+        return static::make($bytes);
+    }
+
+    /**
+     * Returns unit's value in exabyte (decimal - power of 10)
+     *
+     * @param  int  $precision  [optional]
+     *
+     * @return float
+     */
+    public function toExabyte(int $precision = 1): float
+    {
+        return $this->divideBytes(pow(static::DECIMAL_VALUE, 6), $precision);
+    }
+
+    /**
+     * Returns unit's value in exbibyte (binary - power of 2)
+     *
+     * @param  int  $precision  [optional]
+     *
+     * @return float
+     */
+    public function toExbibyte(int $precision = 1): float
+    {
+        return $this->divideBytes(pow(static::BINARY_VALUE, 6), $precision);
     }
 
     /*****************************************************************
