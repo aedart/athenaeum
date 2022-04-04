@@ -18,10 +18,6 @@ use InvalidArgumentException;
  */
 class MemoryTest extends UnitTestCase
 {
-    /*****************************************************************
-     * TODO: Following tests must be redesigned
-     ****************************************************************/
-
     /**
      * @test
      *
@@ -29,6 +25,9 @@ class MemoryTest extends UnitTestCase
      */
     public function canFormat()
     {
+        // NOTE: See tests in Aedart\Tests\Unit\Utils\Memory, rather than the tests in here.
+        // Here, the tests act as "tinkering"...
+
         $a = Memory::format(800); // bytes
         $b = Memory::format(1024); // kilobytes
         $c = Memory::format(5.84 * pow(1024, 2)); // megabytes
