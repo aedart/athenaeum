@@ -2,6 +2,7 @@
 
 namespace Aedart\Utils\Memory;
 
+use Countable;
 use InvalidArgumentException;
 use Stringable;
 
@@ -13,7 +14,9 @@ use Stringable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Utils\Memory
  */
-class Unit implements Stringable
+class Unit implements
+    Countable,
+    Stringable
 {
     /**
      * Default decimal units (powers of 10)
@@ -551,10 +554,11 @@ class Unit implements Stringable
             throw new InvalidArgumentException('No units provided for format bytes.');
         }
 
-        // Obtain symbols, if short format requested
+        // Obtain symbols, if short format requested.
         if ($short) {
             $units = array_keys($units);
         } else {
+            // Otherwise, use the full unit name...
             $units = array_values($units);
         }
 
@@ -577,6 +581,14 @@ class Unit implements Stringable
         }
 
         return round($bytes, $precision). ' ' . $units[$i];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function count()
+    {
+        return $this->bytes();
     }
 
     /**
