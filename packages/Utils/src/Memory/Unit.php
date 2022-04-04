@@ -149,6 +149,10 @@ class Unit implements
             'g', 'gb', 'gigabyte', 'gigabytes' => static::fromGigabyte($parsedValue),
             'gi', 'gib', 'gibibyte', 'gibibytes' => static::fromGibibyte($parsedValue),
 
+            // Terabyte / Tebibyte
+            't', 'tb', 'terabyte', 'terabytes' => static::fromTerabyte($parsedValue),
+            'ti', 'tib', 'tebibyte', 'tebibytes' => static::fromTebibyte($parsedValue),
+
             // TODO: More to come...
 
             // Fail if unit is known...
@@ -472,6 +476,92 @@ class Unit implements
     public function toGibibyte(int $precision = 1): float
     {
         return $this->divideBytes(pow(static::BINARY_VALUE, 3), $precision);
+    }
+
+    /*****************************************************************
+     * Terabyte / Tebibyte
+     ****************************************************************/
+
+    /**
+     * Creates a new memory unit from terabyte (decimal - power of 10)
+     *
+     * @param  int|float  $terabyte
+     *
+     * @return static
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromTerabyte(int|float $terabyte): static
+    {
+        $bytes = round($terabyte * pow(static::DECIMAL_VALUE, 4));
+
+        return static::make($bytes);
+    }
+
+    /**
+     * Creates a new memory unit from legacy terabyte (binary - power of 2)
+     *
+     * @param  int|float  $terabyte
+     *
+     * @return static
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromLegacyTerabyte(int|float $terabyte): static
+    {
+        return static::fromTebibyte($terabyte);
+    }
+
+    /**
+     * Creates a new memory unit from tebibyte (binary - power of 2)
+     *
+     * @param  int|float  $tebibyte
+     *
+     * @return static
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromTebibyte(int|float $tebibyte): static
+    {
+        $bytes = round($tebibyte * pow(static::BINARY_VALUE, 4));
+
+        return static::make($bytes);
+    }
+
+    /**
+     * Returns unit's value in terabyte (decimal - power of 10)
+     *
+     * @param  int  $precision  [optional]
+     *
+     * @return float
+     */
+    public function toTerabyte(int $precision = 1): float
+    {
+        return $this->divideBytes(pow(static::DECIMAL_VALUE, 4), $precision);
+    }
+
+    /**
+     * Returns unit's value in legacy terabyte (binary - power of 2)
+     *
+     * @param  int  $precision  [optional]
+     *
+     * @return float
+     */
+    public function toLegacyTerabyte(int $precision = 1): float
+    {
+        return $this->toTebibyte($precision);
+    }
+
+    /**
+     * Returns unit's value in tebibyte (binary - power of 2)
+     *
+     * @param  int  $precision  [optional]
+     *
+     * @return float
+     */
+    public function toTebibyte(int $precision = 1): float
+    {
+        return $this->divideBytes(pow(static::BINARY_VALUE, 4), $precision);
     }
 
     /*****************************************************************

@@ -193,6 +193,52 @@ class Memory
     }
 
     /*****************************************************************
+     * Terabyte / Tebibyte
+     ****************************************************************/
+
+    /**
+     * Creates a new memory unit from terabyte (decimal - power of 10)
+     *
+     * @param  int|float  $terabyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromTerabyte(int|float $terabyte): Unit
+    {
+        return Unit::fromTerabyte($terabyte);
+    }
+
+    /**
+     * Creates a new memory unit from legacy terabyte (binary - power of 2)
+     *
+     * @param  int|float  $terabyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromLegacyTerabyte(int|float $terabyte): Unit
+    {
+        return Unit::fromLegacyTerabyte($terabyte);
+    }
+
+    /**
+     * Creates a new memory unit from tebibyte (binary - power of 2)
+     *
+     * @param  int|float  $tebibyte
+     *
+     * @return Unit
+     *
+     * @throws InvalidArgumentException
+     */
+    public static function fromTebibyte(int|float $tebibyte): Unit
+    {
+        return Unit::fromTebibyte($tebibyte);
+    }
+
+    /*****************************************************************
      * Formatting
      ****************************************************************/
 
