@@ -23,8 +23,11 @@ class MemoryTest extends UnitTestCase
      *
      * @return void
      */
-    public function canFormatBytes()
+    public function canFormat()
     {
+        // NOTE: See tests in Aedart\Tests\Unit\Utils\Memory, rather than the tests in here.
+        // Here, the tests act as "tinkering"...
+
         $a = Memory::format(800); // bytes
         $b = Memory::format(1024); // kilobytes
         $c = Memory::format(5.84 * pow(1024, 2)); // megabytes
@@ -32,12 +35,13 @@ class MemoryTest extends UnitTestCase
         $e = Memory::format(1.4 * pow(1024, 4)); // terabytes
         $f = Memory::format(9.328 * pow(1024, 5)); // petabytes
         $g = Memory::format(6.297 * pow(1024, 6)); // exabytes
-        $h = Memory::format(1.251 * pow(1024, 7)); // zettabytes
-        $i = Memory::format(3.87 * pow(1024, 8)); // yottabytes
+        //$h = Memory::format(1.251 * pow(1024, 7)); // zettabytes
+        //$i = Memory::format(3.87 * pow(1024, 8)); // yottabytes
 
-        $x = Memory::format(2.22 * pow(1024, 9)); // ???
+        //$x = Memory::format(2.22 * pow(1024, 9)); // ???
         $y = Memory::format(0); // bytes
 
+        // Note: here the legacy terms are used...
         ConsoleDebugger::output([
             'bytes' => $a,
             'kilobytes' => $b,
@@ -46,10 +50,10 @@ class MemoryTest extends UnitTestCase
             'terabytes' => $e,
             'petabytes' => $f,
             'exabytes' => $g,
-            'zettabytes' => $h,
-            'yottabytes' => $i,
+            //'zettabytes' => $h,
+            //'yottabytes' => $i,
 
-            'x' => $x,
+            //'x' => $x,
             'y' => $y,
         ]);
 
@@ -60,10 +64,10 @@ class MemoryTest extends UnitTestCase
         $this->assertNotEmpty($e, 'e empty');
         $this->assertNotEmpty($f, 'f empty');
         $this->assertNotEmpty($g, 'g empty');
-        $this->assertNotEmpty($h, 'h empty');
-        $this->assertNotEmpty($i, 'i empty');
-
-        $this->assertNotEmpty($x, 'x empty');
+//        $this->assertNotEmpty($h, 'h empty');
+//        $this->assertNotEmpty($i, 'i empty');
+//
+//        $this->assertNotEmpty($x, 'x empty');
         $this->assertNotEmpty($y, 'y empty');
     }
 
@@ -88,6 +92,6 @@ class MemoryTest extends UnitTestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        Memory::format(800, 0, []);
+        Memory::format(800, 0, false, []);
     }
 }
