@@ -449,6 +449,7 @@ module.exports.sidebar = function(){
                 'utils/duration',
                 'utils/json',
                 'utils/math',
+                'utils/memory',
                 'utils/method-helper',
                 'utils/invoker',
                 'utils/populatable',
