@@ -14,7 +14,7 @@
     "require": {
         "php": "^8.0.2",
         "composer-runtime-api": "^2.0.0",
-        "aedart/athenaeum-contracts": "^6.0.1",
+        "aedart/athenaeum-contracts": "^6.1",
         "illuminate/support": "v9.0.1"
     },
     "autoload": {
