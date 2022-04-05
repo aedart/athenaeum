@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.1] - 2022-04-05
+
 ### Fixed
 
-* "src refspec master does not match any" in Monorepo builder
+* Missing `aedart/athenaeum-mime-types` dependency in streams package.
+* "src refspec master does not match any" in Monorepo builder script.
 
 ## [6.0.0] - 2022-04-05
 
@@ -764,7 +767,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/6.0.0...HEAD
+[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/6.0.1...HEAD
+[6.0.1]: https://github.com/aedart/athenaeum/compare/6.0.0...6.0.1
 [6.0.0]: https://github.com/aedart/athenaeum/compare/5.27.0...6.0.0
 [5.27.0]: https://github.com/aedart/athenaeum/compare/5.26.0...5.27.0
 [5.26.0]: https://github.com/aedart/athenaeum/compare/5.25.0...5.26.0
