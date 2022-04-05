@@ -13,9 +13,9 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "aedart/athenaeum-contracts": "^6.0",
-        "aedart/athenaeum-support": "^6.0",
-        "aedart/athenaeum-utils": "^6.0",
+        "aedart/athenaeum-contracts": "^6.1",
+        "aedart/athenaeum-support": "^6.1",
+        "aedart/athenaeum-utils": "^6.1",
         "illuminate/cache": "v9.0.1",
         "illuminate/events": "v9.0.1"
     },
@@ -29,7 +29,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.x-dev"
+            "dev-master": "6.1.x-dev"
         }
     },
     "minimum-stability": "dev",
