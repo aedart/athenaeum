@@ -33,8 +33,8 @@ class Unit implements
         'TB' => 'Terabytes',
         'PB' => 'Petabytes',
         'EB' => 'Exabytes',
-        'ZB' => 'Zettabytes',
-        'YB' => 'Yottabytes'
+        //'ZB' => 'Zettabytes',
+        //'YB' => 'Yottabytes'
     ];
 
     /**
@@ -52,8 +52,8 @@ class Unit implements
         'TiB' => 'Tebibytes',
         'PiB' => 'Pebibytes',
         'EiB' => 'Exbibytes',
-        'ZiB' => 'Zebibytes',
-        'YiB' => 'Yobibytes'
+        //'ZiB' => 'Zebibytes',
+        //'YiB' => 'Yobibytes'
     ];
 
     /**
@@ -160,8 +160,6 @@ class Unit implements
             // Exabyte / Exbibyte
             'e', 'eb', 'exabyte', 'exabytes' => static::fromExabyte($parsedValue),
             'ei', 'eib', 'exbibyte', 'exbibytes' => static::fromExbibyte($parsedValue),
-
-            // TODO: More to come...
 
             // Fail if unit is known...
             default => throw new InvalidArgumentException(sprintf('Unable to parse unit "%s" from %s', $unit, $value))
