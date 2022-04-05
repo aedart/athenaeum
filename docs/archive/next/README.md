@@ -19,7 +19,7 @@ However, due to limited amount of project maintainers, no guarantees can be prov
 | `4.x`   | `7.4`       | `v7.x`  | April 15th, 2020     | N/A                  |
 | `< 4.x` | _-_         | _-_     | _See `CHANGELOG.md`_ | N/A                  |
 
-*: _current supported version._
+_*: current supported version._
 
 _TBD: "To be decided"._
 
