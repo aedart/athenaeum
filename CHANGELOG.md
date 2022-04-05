@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* "src refspec master does not match any" in Monorepo builder
+
+## [6.0.0] - 2022-04-05
+
 ### Added
 
 * Streams package that offers wrappers for common stream operations.
@@ -758,7 +764,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/5.27.0...HEAD
+[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/6.0.0...HEAD
+[6.0.0]: https://github.com/aedart/athenaeum/compare/5.27.0...6.0.0
 [5.27.0]: https://github.com/aedart/athenaeum/compare/5.26.0...5.27.0
 [5.26.0]: https://github.com/aedart/athenaeum/compare/5.25.0...5.26.0
 [5.25.0]: https://github.com/aedart/athenaeum/compare/5.24.2...5.25.0
