@@ -147,6 +147,22 @@ use Aedart\Utils\Json;
 echo Json::isValid('{ "name": "Sven" }'); // true
 ```
 
+### Memory Util
+
+A new `Memory` util component has been added. It offers a few methods to help you deal with conversion and formatting.
+
+```php
+use Aedart\Utils\Memory;
+
+$unit = Memory::from('3 MB');
+echo $unit->toKibibyte(); // 2929.7
+
+// ...or create from bytes...
+echo Memory::unit(482504)->legacyFormat(); // 471.2 kB
+```
+
+See [component documentation](./utils/memory.md) for more examples.
+
 ### Purpose change of Core Application
 
 Perhaps a less important highlight, but still worth mentioning, is that the purpose of the [Core Application package](./core) has changed from Athenaeum `v6.x`.
