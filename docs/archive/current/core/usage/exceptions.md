@@ -4,26 +4,29 @@ description: How to use setup exception handling
 
 # Exception Handling
 
-Presumably, your legacy application already has some kind of [error](https://www.php.net/manual/en/function.set-error-handler.php), [exception](https://www.php.net/manual/en/function.set-exception-handler.php) and [shutdown handling](https://www.php.net/manual/en/function.register-shutdown-function.php)[1].
-Therefore, **exception handling in Athenaeum Core Application is disabled, by default**.
-Should you not be happy with your existing solution, then perhaps the possibilities offered here, could prove beneficial.
-At the very least, it might give you some inspiration.
+::: warning Caution
+
+For legacy reasons, **exception handling in Athenaeum Core Application is disabled, by default**. 
+You are encouraged to read carefully through this chapter and enable appropriate exception handling for your custom application.
+
+_Within this context, error, exception and shutdown handling will be referred to as "exception handling"._
+
+:::
 
 [[TOC]]
 
-[1]: _Error, exception and shutdown handling will be referred to as "exception handling", within this context._
 
 ## Laravel's Exception Handling?
 
-In the [limitations section](../README.md#limitations), it has been mentioned that the Athenaeum Core Application does not offer Http Request / Response Handling.
-Since Laravel's [Error & Exception Handling](https://laravel.com/docs/8.x/errors#the-exception-handler) mechanism depends on a Http Request and Response, it cannot be used directly with this application. 
+In the [limitations section](../README.md#limitations), it has been mentioned that the Core Application does not offer Http Request / Response Handling.
+Since Laravel's [Error & Exception Handling](https://laravel.com/docs/9.x/errors#the-exception-handler) mechanism depends on a Http Request and Response, it cannot be used directly with this application. 
 More specifically, the `render()` method, in Laravel's [Exception Handler](https://github.com/laravel/framework/blob/6.x/src/Illuminate/Contracts/Debug/ExceptionHandler.php), requires a request and must return a response.
-Such cannot be satisfied by the Athenaeum Core Application.
+Such cannot be satisfied by the Core Application.
 Therefore, a different mechanism is offered - _it is still inspired by that of Laravel!_
 
 ## How it Works
 
-This exception handling mechanism uses a pseudo [Composite Pattern](https://designpatternsphp.readthedocs.io/en/latest/Structural/Composite/README.html), where a captured exception is passed through a series of "leaf" exception handlers.
+The offered exception handling mechanism uses a pseudo [Composite Pattern](https://designpatternsphp.readthedocs.io/en/latest/Structural/Composite/README.html), where a captured exception is passed through a series of "leaf" exception handlers.
 The first handler to return `true`, will stop the process and the exception is considered handled.
 
 Behind the scene, a `CompositeExceptionHandler` is responsible for reporting (_e.g. logging_) and passing captured exceptions to the registered exception handlers.  
@@ -55,7 +58,7 @@ Similar logic is applied during PHP's shutdown, in case that an error was encoun
 
 ## Prerequisite
 
-This exception handling mechanism depends on Laravel's [Log](https://packagist.org/packages/illuminate/log)[2] package, as means of default reporting.
+This exception handling mechanism depends on Laravel's [Log](https://packagist.org/packages/illuminate/log) package, as means of default reporting.
 See [Logging chapter](logging.md) for how to install it.
 
 ## Enabling Exception Handling
@@ -72,7 +75,7 @@ EXCEPTION_HANDLING_ENABLED=true
 ## "Last Resort" Handler
 
 The first "leaf" exception handler that you _SHOULD_ create, is a "Last resort" exception handler;
-a handler that deals with any kind of exceptions, aka. your fallback mechanism. 
+a handler that deals with any kind of exceptions - aka. your fallback exception handler. 
 
 To create a "lead" exception handler, extend the `BaseExceptionHandler` abstraction.
 In the following example, a very simplified "last resort" exception handler is shown.
@@ -87,12 +90,9 @@ use Throwable;
 
 class LastResortExceptionHandler extends BaseExceptionHandler
 {
-    /**
-     * @inheritDoc
-     */
     public function handle(Throwable $exception): bool
     {
-        // When application is handling a Http request...
+        // If custom application is handling web / Http request...
         if( ! $this->runningInConsole()){
             http_response_code(500);
 
@@ -109,10 +109,8 @@ class LastResortExceptionHandler extends BaseExceptionHandler
 }
 ```
 
-If at all possible, you _should avoid sending output directly_ via your exception handlers.
+If your custom application is handling web content / Http requests, then you should you _should avoid sending output directly_ via your exception handlers.
 Consider assigning your desired Http output to a response handler, if such is possible for you.
-In any case, when creating an exception handler, you should try to accommodate the possibility that your application might be running in the console.
-This may require a different kind of exception handling.
 
 ### Register Your Exception Handler
 
@@ -141,7 +139,7 @@ Your "last resort" exception handler _SHOULD_ be placed last, in the `handlers` 
 ## Reporting
 
 By default, an exception is "reported" by the `CompositeExceptionHandler`, before it is passed through to the registered "leaf" exception handlers.
-Within this context, the term reporting means logging exceptions.
+Within this context, the "reporting" means logging exceptions.
 
 ### Don't Report
 
@@ -180,7 +178,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $app = require_once __DIR__ . '/../bootstrap/app.php';
 $app->run();
 
-// ... your legacy application's logic
+// ... your custom application's logic
 
 if( ! $user->hasSignedIn()){
     throw new \RuntimeException('User is not authenticated');
@@ -237,7 +235,7 @@ This could prove problematic, if your application depends on being able to perfo
 
 ### Encapsulate logic via `run()`
 
-A different solution could be, to encapsulate your legacy application's logic via the `run()` method.
+A different solution could be, to encapsulate your custom application's logic via the `run()` method.
 It accepts a single callback. If the callback should fail, e.g. an exception is thrown, it will be captured by the `run()` method and passed on to the exception handling mechanism.
 Once the exception has been handled, code execution is resumed and the `terminate()` method is triggered.
 
@@ -249,7 +247,7 @@ $app = require_once __DIR__ . '/../bootstrap/app.php';
 
 $app->run(function($app){
 
-    // E.g. include your legacy application's entry point    
+    // E.g. include your custom application's entry point    
     include 'my_legacy_app_index.php';
 
 });
@@ -264,7 +262,7 @@ If the above shown approach is possible for you to implement, then it could cont
 
 One could argue that you should avoid registering callbacks, via the `terminating()` method.
 But this might not always be possible.
-Imagine that for every request, _if all goes well_, you application needs to commit open database transactions, before closing it's connection gracefully.
+Imagine that for every request, _if all goes well_, your application needs to commit open database transactions, before closing it's connection gracefully.
 It makes sense to use the `terminate()`, in order to achieve such.
 
 ```php
@@ -283,7 +281,7 @@ $app->terminate();
 ```
 
 ::: tip
-Terminating callbacks can also be registered in your Service Provider's [boot method](https://laravel.com/docs/8.x/providers#the-boot-method).
+Terminating callbacks can also be registered in your Service Provider's [boot method](https://laravel.com/docs/9.x/providers#the-boot-method).
 
 ```php
 // In your service provider
@@ -302,11 +300,10 @@ public function boot(Application $app)
 ```
 :::
 
-### Use Handles to Cleanup 
+### Use Handlers to Cleanup 
 
-Now, if an exception is encountered, then you could use make use of an exception handler;
-one which ensures to rollback any open database transactions - _or perform other cleanup routines_ - but avoid actually dealing with any exception!
-Any exception would just be passed on to the next registered handler.
+A slightly different approach to handle "cleanup" routines, if by creating a special kind of exception handler, which is intended to perform "cleanup" - but **NOT** handle the captured exception!
+Such a handler, will simply pass the exception on to the next registered handler.
 
 ```php{5}
 <?php
@@ -330,13 +327,15 @@ class RollsBackTransactions extends CleanupHandler
 }
 ```
 
-If such an approach is used, then your `handlers` array could look something similar, to the below illustrated example.
-In the top section of the array, you would place handlers that explicitly deal with application cleanup routines, whereas the middle and bottom section of the array would place handlers that deal with exceptions.
+Should you make use of such "cleanup handlers", then you are recommended to **register them before other exception handlers**, in your `configs/exceptions.php`.
+Consider the following example:
 
 ```php
 <?php
 return [
 
+    // ... inside configs/exceptions.php...
+    
     // ... previous not shown ...
 
     'handlers' => [
@@ -357,12 +356,6 @@ return [
 ];
 ```
 
-Ultimately, the burden of ensuring graceful shutdown falls on your shoulders.
+Ultimately, ensuring graceful shutdown falls upon your shoulders.
 How you go about it, is entirely up to you.
 The above illustrated examples is nothing more than a possible solution.
-
-## Onward
-
-Error, exception & shutdown handling is by no means a trivial task.
-Perhaps your existing mechanism is sufficient and gets the job done.
-If not, perhaps this package's exception handling can offer a suitable alternative.

@@ -98,10 +98,10 @@ These can be applied per allowed filterable property.
 * `NumericFilter` matches value against numeric column
 * `StringFilter` matches value against string column
 * `BooleanFilter` marches value against boolean column
-* `DateFilter` matches value against date column (_`Y-m-d`_) - **Available since `v5.23.x`**
+* `DateFilter` matches value against date column (_`Y-m-d`_)
 * `DatetimeFilter` matches value against datetime column (_`Y-m-d H:i:s`_)
-* `UTCDatetimeFilter` matches value against datetime column (_`Y-m-d H:i:s`_). Given date is converted to UTC, before matched against database value - **Available since `v5.23.x`**
-* `BelongsToFilter` able to constrain relations of the type "belongs to" (_see further below for example_) - **Available since `v5.24.x`**
+* `UTCDatetimeFilter` matches value against datetime column (_`Y-m-d H:i:s`_). Given date is converted to UTC, before matched against database value
+* `BelongsToFilter` able to constrain relations of the type "belongs to" (_see further below for example_)
 
 ### Operators
 

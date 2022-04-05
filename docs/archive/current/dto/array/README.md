@@ -96,6 +96,24 @@ class Organisation extends ArrayDto
 }
 ```
 
+### Union Types
+
+The same union type handling is supported by the `ArrayDto` abstraction, as for the regular `Dto`. 
+
+```php
+class Article extends ArrayDto
+{
+    protected array $allowed = [
+        'id' => 'string|int|float|bool|null',
+        'content' => 'array|null',
+        'createdAt' => 'date|null',
+        'author' => ['string', Person::class, Organisation::class, 'null'],
+    ];
+}
+```
+
+Review the [DTO "Union Types" documentation](../nested-dto.md#union-types) for details and additional examples.
+
 ## Getters and Setters
 
 Should you require to mutate a property, then you can do so by defining an accessor or mutator method.

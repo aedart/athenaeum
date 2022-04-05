@@ -13,7 +13,7 @@ Just like within a regular Laravel application, you can register you service pro
 ## Register a Laravel Service Provider
 
 When you wish to make use of a Laravel's packages, then simply require the desired package and add the service's class path inside the `providers` array. 
-The following example take your though the steps it requires to add Laravel's [Redis Service](https://laravel.com/docs/8.x/redis).
+The following example take your though the steps it requires to add Laravel's [Redis Service](https://laravel.com/docs/9.x/redis).
 
 ### Require Package
 
@@ -93,13 +93,12 @@ The [next chapter](container) contains more information and examples on how to o
 
 ## Deferred Services
 
-The Athenaeum Core Application also supports [deferred providers](https://laravel.com/docs/8.x/providers#deferred-providers).
+The Athenaeum Core Application also supports [deferred providers](https://laravel.com/docs/9.x/providers#deferred-providers).
 Once registered, the services that are marked deferred, will only be registered and booted when required.
-Consult yourself with Laravel's [documentation](https://laravel.com/docs/8.x/providers#deferred-providers) for additional information.
+Consult yourself with Laravel's [documentation](https://laravel.com/docs/9.x/providers#deferred-providers) for additional information.
 
 ## Limitations
 
 Unlike a regular Laravel application, the Athenaeum Core Application does not cache it's resolved list of service providers.
 This means that in terms of performance, this application isn't as fast as Laravel.
-Currently, there are no plans to offer enhancements of this particular part of the application.
 Should this prove to be a problem for you, then consider [extending the Athenaeum Core Application](ext) and overwrite the service provider registration and booting logic. 

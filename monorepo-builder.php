@@ -20,7 +20,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ComposerJsonSection::REQUIRE => [
             // the line is removed by key, so version is irrelevant, thus *
             'codeception/codeception' => '*',
-            'codeception/module-asserts' => '*',
+            "codeception/module-asserts" => '*',
             'orchestra/testbench' => '*',
             'orchestra/testbench-dusk' => '*',
         ],
@@ -33,11 +33,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'ext-curl' => '*',
             'bamarni/composer-bin-plugin' => '^1.4',
             'roave/security-advisories' => 'dev-master',
-            'codeception/codeception' => '5.0.0-alpha2',
-            'codeception/module-asserts' => '*@dev',
+            'codeception/codeception' => '^5.0.0-RC1',
+            "codeception/module-asserts" => "*@dev",
             'orchestra/testbench' => '^v7.0.0',
             'orchestra/testbench-dusk' => '^v7.0.0',
-            'phpunit/phpunit' =>  'dev-master as 9.5.13',
         ],
 
         ComposerJsonSection::AUTOLOAD => [

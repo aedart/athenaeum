@@ -1,0 +1,35 @@
+{
+    "name": "aedart/athenaeum-mime-types",
+    "description": "Mime-Types",
+    "keywords": ["Athenaeum", "Utilities", "mime-type"],
+    "homepage": "https://aedart.github.io/athenaeum/",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "ext-fileinfo": "*",
+        "aedart/athenaeum-contracts": "dev-main",
+        "aedart/athenaeum-support": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\MimeTypes\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "6.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

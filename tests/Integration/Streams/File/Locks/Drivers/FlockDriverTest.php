@@ -1,0 +1,148 @@
+<?php
+
+namespace Aedart\Tests\Integration\Streams\File\Locks\Drivers;
+
+use Aedart\Contracts\Streams\Locks\LockTypes;
+use Aedart\Streams\Exceptions\Locks\LockFailure;
+use Aedart\Streams\Exceptions\Locks\StreamCannotBeLocked;
+use Aedart\Streams\FileStream;
+use Aedart\Testing\Helpers\ConsoleDebugger;
+use Aedart\Tests\TestCases\Streams\StreamTestCase;
+
+/**
+ * FlockDriverTest
+ *
+ * @group streams
+ * @group stream-lock
+ * @group stream-lock-drivers
+ * @group stream-lock-driver-flock
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Tests\Integration\Streams\File\Locks\Drivers
+ */
+class FlockDriverTest extends StreamTestCase
+{
+    /*****************************************************************
+     * Helpers
+     ****************************************************************/
+
+    /**
+     * Returns name of "flock" driver profile
+     *
+     * @return string
+     */
+    public function lockProfile(): string
+    {
+        return 'flock';
+    }
+
+    /*****************************************************************
+     * Actual Tests
+     ****************************************************************/
+
+    /**
+     * @test
+     *
+     * @return void
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public function canAcquireAndReleaseLock()
+    {
+        $stream = $this->openFileStreamFor('text.txt');
+        $lock = $this->makeLock($stream, $this->lockProfile());
+
+        $wasAcquired = $lock->acquire();
+
+        $this->assertTrue($wasAcquired);
+        $this->assertTrue($lock->isAcquired(), 'Should be acquired');
+        $this->assertFalse($lock->isReleased(), 'Should be not be released');
+
+        $lock->release();
+
+        $this->assertFalse($lock->isAcquired(), 'Should be no longer be acquired');
+        $this->assertTrue($lock->isReleased(), 'Should be released');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public function hasCorrectStreamReference()
+    {
+        $stream = $this->openFileStreamFor('text.txt');
+        $lock = $this->makeLock($stream, $this->lockProfile());
+
+        $this->assertSame($stream, $lock->getStream());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public function failsAcquireIfAlreadyLocked()
+    {
+        $streamA = $this->openFileStreamFor('text.txt');
+        $streamB = $this->openFileStreamFor('text.txt');
+
+        $lockA = $this->makeLock($streamA, $this->lockProfile());
+        $lockA->acquire();
+        $this->assertTrue($lockA->isAcquired(), 'First lock was not acquired');
+
+        $hasFailed = false;
+        $failureMsg = '';
+        try {
+            $lockB = $this->makeLock($streamB, $this->lockProfile());
+            $lockB->acquire(LockTypes::EXCLUSIVE, 0.01);
+        } catch (LockFailure $e) {
+            ConsoleDebugger::output($e->getMessage());
+
+            $failureMsg = $e->getMessage();
+            $hasFailed = true;
+        }
+
+        $this->assertTrue($hasFailed, 'Second lock did not fail, but should have');
+        $this->assertStringContainsString('Timeout has been reached', $failureMsg);
+        $lockA->release();
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public function failsAcquiringIfLockTypeIsUnknown()
+    {
+        $this->expectException(LockFailure::class);
+
+        $stream = $this->openFileStreamFor('text.txt');
+        $lock = $this->makeLock($stream, $this->lockProfile());
+
+        $lock->acquire(999999, 0.01);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     * @throws \Aedart\Contracts\Streams\Exceptions\LockException
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public function failsWhenStreamDoesNotSupportLocking()
+    {
+        $this->expectException(StreamCannotBeLocked::class);
+
+        $stream = FileStream::openMemory();
+        $lock = $this->makeLock($stream, $this->lockProfile());
+
+        $lock->acquire();
+    }
+}

@@ -122,7 +122,7 @@ In your configuration, you can specify the profile-name of the store to use.
 Additional store configuration can be specified in your configuration file (`configs/circuit-breakers.php`).
 
 ::: warning
-Currently, only cache stores that inherit from [`LockProvider`](https://laravel.com/docs/8.x/cache#atomic-locks) can be used.
+Currently, only cache stores that inherit from [`LockProvider`](https://laravel.com/docs/9.x/cache#atomic-locks) can be used.
 :::
 
 ```php

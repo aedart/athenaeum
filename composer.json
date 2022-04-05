@@ -10,6 +10,7 @@
     ],
     "require": {
         "php": "^8.0.2",
+        "ext-fileinfo": "*",
         "ext-json": "*",
         "composer-runtime-api": "^2.0.0",
         "dragonmantank/cron-expression": "^3.3",
@@ -42,11 +43,10 @@
         "ext-curl": "*",
         "ext-sockets": "*",
         "bamarni/composer-bin-plugin": "^1.4",
-        "codeception/codeception": "5.0.0-alpha2",
+        "codeception/codeception": "^5.0.0-RC1",
         "codeception/module-asserts": "*@dev",
         "orchestra/testbench": "^v7.0.0",
         "orchestra/testbench-dusk": "^v7.0.0",
-        "phpunit/phpunit": "dev-master as 9.5.13",
         "predis/predis": "^1.1.4",
         "roave/security-advisories": "dev-master",
         "symfony/var-dumper": "^v6.0.2",
@@ -78,10 +78,12 @@
             "Aedart\\Http\\Cookies\\": "packages/Http/Cookies/src",
             "Aedart\\Http\\Messages\\": "packages/Http/Messages/src",
             "Aedart\\Maintenance\\Modes\\": "packages/Maintenance/Modes/src",
+            "Aedart\\MimeTypes\\": "packages/MimeTypes/src",
             "Aedart\\Pagination\\": "packages/Pagination/src",
             "Aedart\\Properties\\": "packages/Properties/src",
             "Aedart\\Redmine\\": "packages/Redmine/src",
             "Aedart\\Service\\": "packages/Service/src",
+            "Aedart\\Streams\\": "packages/Streams/src",
             "Aedart\\Support\\": "packages/Support/src",
             "Aedart\\Testing\\": "packages/Testing/src",
             "Aedart\\Utils\\": "packages/Utils/src",
@@ -111,10 +113,12 @@
         "aedart/athenaeum-http-cookies": "self.version",
         "aedart/athenaeum-http-messages": "self.version",
         "aedart/athenaeum-maintenance-modes": "self.version",
+        "aedart/athenaeum-mime-types": "self.version",
         "aedart/athenaeum-pagination": "self.version",
         "aedart/athenaeum-properties": "self.version",
         "aedart/athenaeum-redmine": "self.version",
         "aedart/athenaeum-service": "self.version",
+        "aedart/athenaeum-streams": "self.version",
         "aedart/athenaeum-support": "self.version",
         "aedart/athenaeum-testing": "self.version",
         "aedart/athenaeum-utils": "self.version",
@@ -149,7 +153,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.x-dev"
+            "dev-master": "6.1-dev"
         }
     },
     "minimum-stability": "dev",

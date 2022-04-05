@@ -4,10 +4,10 @@ description: How to add Logging
 
 # Logging
 
-Some of Laravel's services depend on the [Logging](https://packagist.org/packages/illuminate/log) package[1].
+Some of Laravel's services depend on the [Logging](https://packagist.org/packages/illuminate/log) package¹.
 Should you stumble across such a dependency, then you might be required to install it, in order to get the service to work as intended.
 
-[1]: _The `illuminate/log` package uses [MonoLog](https://github.com/Seldaek/monolog)._
+¹: _The `illuminate/log` package uses [MonoLog](https://github.com/Seldaek/monolog)._
 
 ## How to install
 
@@ -18,7 +18,7 @@ composer require illuminate/log
 ## Logger Configuration
 
 Copy the `logging.php` configuration file from Laravel's [Repository](https://github.com/laravel/laravel/blob/master/config/logging.php), and place it within your `/configs` directory.
-You can read more about the configuration in Laravel's [documentation](https://laravel.com/docs/8.x/logging).
+You can read more about the configuration in Laravel's [documentation](https://laravel.com/docs/9.x/logging).
 
 ## Register `LogServiceProvider`
 
@@ -66,7 +66,7 @@ $logger->info('Logger works great');
 
 ### Via `Log` Facade
 
-You can also use Laravel's `Log` [Facade](https://laravel.com/docs/8.x/facades). 
+You can also use Laravel's `Log` [Facade](https://laravel.com/docs/9.x/facades). 
 
 ```php
 <?php

@@ -15,7 +15,7 @@ Please read their [documentation](https://codeception.com/docs/01-Introduction) 
 
 ## Unit Test-Case
 
-A basic unit test-case that has a [Faker](https://github.com/fzaninotto/Faker) instance setup. 
+A basic unit test-case that has a [Faker](https://packagist.org/packages/fakerphp/faker) instance setup. 
 Furthermore, [Mockery](https://github.com/mockery/mockery) is automatically closed after each test.
 This abstraction is mostly suited for testing single components in isolation.
 
@@ -29,7 +29,7 @@ class MyTest extends UnitTestCase
      */
     public function isFakerAvailable()
     {
-        $value = $this->getFaker()->address;
+        $value = $this->getFaker()->address();
 
         $this->assertNotEmpty($value);
     }
@@ -43,7 +43,7 @@ To change the [locale](https://github.com/fzaninotto/Faker#localization) that th
 ```php
 class MyTest extends UnitTestCase
 {
-    protected ?string $FakerLocale = 'da_DK';
+    protected string|null $FakerLocale = 'da_DK';
     
     // ... remaining not shown ...
 }
@@ -81,7 +81,7 @@ class MyTest extends IntegrationTestCase
 
         // Or perhaps... 
         $otherUserModel = new UserModel($this->ioc);
-        $otherUserModel->name = $this->getFaker()->name;
+        $otherUserModel->name = $this->getFaker()->name();
 
         // ... remaining not shown ...
     }
@@ -138,6 +138,41 @@ class MyTest extends LaravelTestCase
     }
 }
 ```
+
+## Browser Test-Case
+
+`BrowserTestCase` can be used for writing tests to be executed in a browser. [Laravel Dusk](https://laravel.com/docs/9.x/dusk) is used behind the scene.
+Please review the Test-Case's source code and Laravel documentation for additional information.
+
+```php
+use Aedart\Testing\TestCases\BrowserTestCase;
+use Laravel\Dusk\Browser;
+
+class MyBrowserTest extends BrowserTestCase
+{
+    public function canVisitPage()
+    {
+        $this->browse(function(Browser $browser) {
+            
+            $browser
+                ->visit('https://www.google.com/')
+                ->waitForText("I'm Feeling Lucky")
+
+        });    
+    }
+}
+```
+
+::: tip
+
+In order to run browser tests, you will be required to have the correct `ChromeDriver` binary installed.
+You can use the following to install the binary:
+
+```shell
+vendor/bin/dusk-updater update
+```
+
+:::
 
 ## Athenaeum Test-Case
 

@@ -4,127 +4,178 @@ description: Athenaeum Release Notes
 
 # Release Notes
 
-## `v5.x` Highlights
-
-These are the new features and additions of Athenaeum `v5.x`.
-
 [[toc]]
 
-### Http Client Middleware
+## Support Policy
 
-You can now assign middleware to process your outgoing requests and incoming responses. 
-See [Http Client Middleware](./http/clients/methods/middleware) for more examples.
+Athenaeum attempts to follow a release cycle that matches closely to that of [Laravel](https://laravel.com/docs/9.x/releases).
+However, due to limited amount of project maintainers, no guarantees can be provided. 
+
+| Version | PHP         | Laravel | Release              | Security Fixes Until |
+|---------|-------------|---------|----------------------|----------------------|
+| `7.x`   | _`8.1`_     | _TBD_   | _TBD_                | _TBD_                |
+| `6.x`*  | `8.0 - 8.1` | `v9.x`  | April 5th, 2022      | February 2023        |
+| `5.x`   | `7.4`       | `v8.x`  | October 4th, 2020    | N/A                  |
+| `4.x`   | `7.4`       | `v7.x`  | April 15th, 2020     | N/A                  |
+| `< 4.x` | _-_         | _-_     | _See `CHANGELOG.md`_ | N/A                  |
+
+_*: current supported version._
+
+_TBD: "To be decided"._
+
+## `v6.x` Highlights
+
+These are some the new features of Athenaeum `v6.x`.
+
+### PHP `v8` and Laravel `v9.x`
+
+Athenaeum has been upgraded to usePHP `v8.0` and [Laravel `v9.x`](https://laravel.com/docs/9.x/releases).
+Furthermore, PHP `v8.1` is also supported.
+
+### Improved Documentation
+
+Several improvements have been made throughout the documentation.
+From version `6.x`, a [Security Policy](./security.md), [Code of Conduct](./code-of-conduct.md) and an improved [Contribution Guide](./contribution-guide.md) is made available.
+
+### Union Types support in DTO
+
+The `Dto` and `ArrayDto` now support [union types](https://php.watch/versions/8.0/union-types) for their properties.
+When populating a DTO, the most suitable match will bre chosen.
 
 ```php
-use Acme\Middleware\MeasuresResponseTime;
-
-$response = $client
-        ->withMiddleware(new MeasuresResponseTime())
-        ->get('/weather');
-```
-
-### Extract Response Expectations
-
-A `ResponseExpectations` class has been added, which you can use as a base class to extract complex expectations into separate classes.
-See [documentation](./http/clients/methods/expectations) for additional information.
-
-```php
-use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
-use Aedart\Contracts\Http\Clients\Responses\Status;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-
-class UserWasCreated extends ResponseExpectations
+class Person extends ArrayDto
 {
-    public function expectation(
-        Status $status,
-        ResponseInterface $response,
-        RequestInterface $request
-    ): void {
-        // ...validation not shown here...
-    }
+    protected array $allowed = [
+        'name' => 'string|null',
+    ];
 }
 
-// --------------------------------------- /
-// Use expectation when you send your request
-$response = $client
-        ->expect(new UserWasCreated())
-        ->post('/users', [ 'name' => 'John Snow' ]);
+class Organisation extends Dto
+{
+    protected array $allowed = [
+        'name' => 'string|null',
+        'slogan' => 'string|null',
+    ];
+}
+
+class Record extends Dto
+{    
+    protected array $allowed = [
+        'reference' => ['string', Person::class, Organisation::class, 'null'],
+    ];
+}
+
+// ------------------------------------------------------------------------ //
+
+// Reference is a string...
+$record->populate([
+    'reference' => 'https:://google.com'
+]);
+echo gettype($record->reference); // string
+
+// Reference becomes a Person...
+$record->populate([
+    'reference' => [ 'name' => 'Jane Jensen' ]
+]);
+echo ($record->reference instanceof Person); // true
+
+// Reference becomes an Organisation...
+$record->populate([
+    'reference' => [ 'name' => 'Acme', 'slogan' => 'Building stuff...' ]
+]);
+echo ($record->reference instanceof Organisation); // true
 ```
 
-### Debugging Request and Response
+See [Union Type Handling documentation](./dto/nested-dto.md#union-types) for additional examples.
 
-[Debugging](./http/clients/methods/debugging) and [logging](./http/clients/methods/logging) utilities have been added for a quick way to dump outgoing request and incoming response.
+### Streams
+
+A package that offers an extended version of [PSR-7's](https://www.php-fig.org/psr/psr-7/#13-streams) defined `StreamInterface`;
+a wrapper for common stream operations, mostly intended for file streams.
 
 ```php
-// Dump request / response.
-$response = $client
-        ->debug()
-        ->get('/users');
+use Aedart\Streams\FileStream;
 
-// --------------------------------------------
+$stream = FileStream::open('my-file.txt')
+    ->put('Hi there');
 
-// Logs the request / response.
-$response = $client
-        ->log()
-        ->get('/users');
+$more = FileStream::openMemory()
+    ->put("\nMore things to show...")
+    ->positionToStart();
+
+$stream
+    ->append($more);
+
+echo (string) $stream; // Hi there
+                       // More things to show...
 ```
 
-### Default otherwise callback
+### MIME-types detection
 
-The [Circuit Breaker](./circuits) now supports setting a default "otherwise" callback, via the `otherwise()` method.
-When no "otherwise" callback is provided to the `attempt()` method, the default "otherwise" callback will be used.
+The [MIME-types](./mime-types) packages offers a way to detect a file's MIME-type based on a small sample of its contents.
 
 ```php
-use Aedart\Contracts\Circuits\CircuitBreaker;
+use Aedart\MimeTypes\Detector;
 
-$result = $circuitBreaker
-    ->otherwise(function(CircuitBreaker $cb) {
-        // ...not shown...
-    })
-    ->attempt(function(CircuitBreaker $cb) {
-        // ...callback not shown...
-    });
+$file = fopen('my-picture.jpg', 'rb');
+$mimeType = (new Detector())->detect($file);
 ```
 
-### Support for TOML configuration files
+### Maintenance Modes
 
-Added configuration file parser for [TOML](https://en.wikipedia.org/wiki/TOML) format, for the [configuration loader](./config).
+A new [Maintenance Modes](./maintenance/modes) package has been added, which offers a few additional drivers that can be used for [storing application down](https://laravel.com/docs/9.x/configuration#maintenance-mode) state.
 
-### Resolve list of dependencies
+### Where not in slug...
 
-Using the new `ListResolver`, you can resolve a list of dependencies, including custom arguments.
-(_Component is available in the [Service Container package](./container/list-resolver.md)_).
+The `\Aedart\Database\Models\Concerns\Slugs` concern now offers a `whereSlugNotIn()` [query scope](https://laravel.com/docs/9.x/eloquent#local-scopes) method.
 
 ```php
-use Aedart\Container\ListResolver;
+// ...inside your Eloquent model
 
-$list = [
-    \Acme\Filters\SanitizeInput::class,
-    \Acme\Filters\ConvertEmptyToNull::class,
-    \Acme\Filters\ApplySorting::class => [
-        'sortBy' => 'age',
-        'direction' => 'desc'
-    ]
-];
-
-// Resolve list of dependencies
-$filters = (new ListResolver())->make($list);
+$result = $query
+    ->whereSlugNotIn(['alpha', 'beta', 'gamma'])
+    ->get();
 ```
 
-### Http Messages Package
+### Validate JSON
 
-A new package for that offers PSR-7 Http Messages utilities.
-See [documentation](./http/messages) for additional information.
+The `Json` utility has been given a new method, which can be used to determine if a value is a valid JSON encoded string.
 
-### Duration
+```php
+use Aedart\Utils\Json;
 
-Added `Duration` utility; a small component able to help with dealing with relative date and time. 
-See [utilities](./utils/duration) for more information.
+echo Json::isValid('{ "name": "Sven" }'); // true
+```
 
-### Upgraded Dependencies
+### Memory Util
 
-Upgraded several dependencies, here amongst Laravel which is now running on `v8.x`.
+A new `Memory` util component has been added. It offers a few methods to help you deal with conversion and formatting.
+
+```php
+use Aedart\Utils\Memory;
+
+$unit = Memory::from('3 MB');
+echo $unit->toKibibyte(); // 2929.7
+
+// ...or create from bytes...
+echo Memory::unit(482504)->legacyFormat(); // 471.2 kB
+```
+
+See [component documentation](./utils/memory.md) for more examples.
+
+### Purpose change of Core Application
+
+Perhaps a less important highlight, but still worth mentioning, is that the purpose of the [Core Application package](./core) has changed from Athenaeum `v6.x`.
+The Core Application package was originally developed to act as a "bridge" for integrating Laravel components and services into legacy applications.
+This is no longer the case. Version `6.x` requires a minimum of PHP `v8.0` and it does not feel right to presume that the Core Application can be used as originally intended (_see original motivation in [version `v4.x`](../v4x/core)_). 
+
+From version `6.x`, the Core Application is intended for the following purposes:
+
+* Testing
+* Tinkering
+* Development of **non-essential** standalone applications
+
+If you are using the Core Application, for its original intent, then you are **strongly encouraged** to consider redesigning your application, e.g. rewrite your application using [Laravel](https://laravel.com/) or other appropriate framework.  
 
 ## Changelog
 

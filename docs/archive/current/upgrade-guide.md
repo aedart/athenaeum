@@ -5,68 +5,155 @@ sidebarDepth: 1
 
 # Upgrade Guide
 
-## From version 4.x to 5.x.
+## From version 5.x to 6.x.
 
 [[TOC]]
 
-### Laravel `v8.x`
+### PHP version `8` required
 
-Upgraded the `illuminate/*` packages to version `^8.x`.
-Please review Laravel's [upgrade guide](https://laravel.com/docs/8.x/upgrade) for additional information.
+You need PHP `v8.0.2` or higher to run Athenaeum packages.
 
-### Added `bootstrap()` in Console `Kernel`
+**Note**: _PHP `v8.1` is supported!_
 
-As a result of upgrading to Laravel `v8.x`, a new `bootstrap()` method was added to the `\Aedart\Core\Console\Kernel` component.
-The `runCore()` method now invokes the new bootstrap method.
+### Laravel `v9.x`
 
-This change only affects you, if a custom implementation of the Console `Kernel` is used.
+Since Athenaeum has upgraded to Laravel `v9.x`, you should read Laravel's [upgrade guide](https://laravel.com/docs/9.x/upgrade), before continuing here.
 
-### Response Expectations
+### Argument- and Return Types
 
-The response expectations in Http `Client` have changed. They are now encapsulated in a `ResponseExpectation` instance.
-This means that if you wish to obtain an expectation, you will no longer receive the original callback method. 
+Almost all components, throughout all packages, have their argument and return types changed. [Union Types](https://php.watch/versions/8.0/union-types) are now being used extensively, where appropriate.
+This means that you will most likely experience breaking changes if:
+
+* You implement an interface
+* You extend a component
+
+Some of these changes will be highlighted in this upgrade guide, yet there are too many to cover here.
+Please make sure to _test your code_ before using any Athenaeum package in a production environment!
+
+### Version util return type
+
+The `\Aedart\Utils\Version` utility now returns `\Aedart\Contracts\Utils\Packages\Version` for it's `application()` and `package()` methods.
 
 ```php
-// Before (version 4.x)
-$containsUserId = function($status, $response) {
-    // ... not shown
-};
+// Previously
+$version = Version::application(); // \Jean85\Version
 
-$expectations = $client 
-            ->expect($containsUserId)
-            ->getExpectations(); // [ $containsUserId ] Array with provided callable method.
-
-var_dump($containsUserId === $expectations[0]); // true
-
-// Now (version 5.x)
-$expectations = $client 
-            ->expect($containsUserId)
-            ->getExpectations(); // [ ResponseExpectation ] Array with response expectation instance
-
-var_dump($containsUserId === $expectations[0]); // false
-var_dump($containsUserId === $expectations[0]->getExpectation()); // true
+// Now...
+$version = Version::application(); // \Aedart\Contracts\Utils\Packages\Version
 ```
 
-Please review `\Aedart\Contracts\Http\Clients\Responses\ResponseExpectation` for more details.
+In addition, a `PackageVersionException` is now thrown from the `package()` method, if a version cannot be obtained.
 
-### Http Client Changes
+```php
+// Previously
+Version::package('acme/unknown-package');
+// OutOfBoundsException thrown
 
-Several changes have been made to the Http `Client` and it's request `Builder`.
-These changes _should not_ affect you directly.
-However, if you have custom implementation of the provided interfaces, then you may have to refactor parts of your code.
-Review the source code and [changes made](https://github.com/aedart/athenaeum/compare) for additional information.
+// Now...
+Version::package('acme/unknown-package');
+// \Aedart\Contracts\Utils\Packages\Exceptions\PackageVersionException thrown
+```
 
-### Removed Deprecated Components
+See [#68](https://github.com/aedart/athenaeum/issues/68) for additional details.
 
-The following deprecated components have been removed:
+### `populate()` now returns `static`
 
-* `Aedart\Dto` (_replaced by `Aedart\Dto\Dto`_).
-* `Aedart\ArrayDto` (_replaced by `Aedart\Dto\ArrayDto`_).
-* `Aedart\Console\CreateAwareOfCommand` (_replaced by `Aedart\Support\AwareOf\Console\CreateCommand`_).
-* `Aedart\Console\CommandBase` (_replaced by `Aedart\Support\AwareOf\Console\CommandBase`_).
-* `Aedart\Console\AwareOfScaffoldCommand` (_replaced by `Aedart\Support\AwareOf\Console\ScaffoldCommand`_).
-* Removed all aware-of helpers in `Aedart\Support\Properties\Mixed\*` and `Aedart\Contracts\Support\Properties\Mixed\*` namespaces (_replaced by `Aedart\Support\Properties\Mixes\*` and `Aedart\Contracts\Support\Properties\Mixes\*`_).
+The `\Aedart\Contracts\Utils\Populatable::populate()` method new returns `static`.
+This allows for a more fluent experience, when working with DTOs, e.g.
 
-### Onward
+```php
+// Previously
+$person->populate([
+    'name' => 'John Smith'
+]);
 
-You can review other changes in the [changelog](https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md).
+$person->setAge(28);
+
+// Now...
+$person->populate([
+    'name' => 'John Smith'
+])->setAge(28);
+```
+
+If you have a custom implementation of `populate()`, then you must now ensure that the method returns.
+
+```php
+use Aedart\Contracts\Utils\Populatable;
+
+class Person implements Populatable
+{
+    public function populate(array $data = []): static
+    {
+        // ...populate implementation not shown...
+        
+        // Make sure to return instance!
+        return $this;
+    }
+}
+```
+
+### Listener option replaced, in Audit Trail package
+
+The `listener` option found in `configs/audit-trail.php` has been replaced by `subscriber`, which uses an [event subscriber](https://laravel.com/docs/9.x/events#event-subscribers) component instead.
+
+```php
+return [
+    // ...previous not shown ...
+    
+    // 'listener' NO LONGER USED!
+    'listener' => \Aedart\Audit\Listeners\RecordAuditTrailEntry::class,
+
+    // Replacement
+    'subscriber' => \Aedart\Audit\Subscribers\AuditTrailEventSubscriber::class,
+
+    // ...remaining not shown ...
+];
+```
+
+### RFC3339 used as default format
+
+[RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) is now set as the default `datetime_format` option for the Http Query Grammar Profiles, in `configs/http-clients`.
+_If you already have a datetime format specified in `configs/http-clients.php`, then this change will not affect you._
+
+### Language directory path in Core `Application`
+
+The Core `Application` and `PathsContainer` now offer a `langPath()` method. This method has been added due to the addition and changes regarding language files in Laravel.
+By default, if your application has not specified a custom language path, it will return a default path in the root of the project (_previously lang directory was located in `resources/lang`_).
+
+```php
+echo $application->langPath(); // lang
+```
+
+The application will ensure that if you still use `resources/lang`, then languages files will be read from there.
+See [Laravel's upgrade guide](https://laravel.com/docs/9.x/upgrade#the-lang-directory) for details.
+
+### Replaced `\DateTime` with `\DateTimeInterface`
+
+Several "aware-of" helpers previously declared `\DateTime` as their value type, e.g. `\Aedart\Contracts\Support\Properties\Integers\DateAware`.
+These have all been changed to accept `\DateTimeInterface` instead.
+
+_This change can affect you if you have overwritten any getter, setter or default-value method, from the "aware-of" components._
+
+### `$seed` can no longer be `null`
+
+The `$seed` argument for `\Aedart\Utils\Math::applySeed()` no longer accepts `null` as value.
+
+```php
+// Previously
+Math::applySeed(null); // Was allowed
+
+// Now...
+Math::applySeed(null); // NOT allowed!
+
+// Use 0 instead, if needed!
+Math::applySeed(0); // allowed
+```
+
+### Removed `MocksApplicationServices` from testing utilities
+
+The `\Illuminate\Foundation\Testing\Concerns\MocksApplicationServices` helper has been deprecated by Laravel and therefore removed from `AthenaeumTestHelper` and `LaravelTestHelper` entirely.
+If you rely on this component, then you are strongly encouraged to refactor your tests, as it will not be supported in future versions of Laravel.
+
+## Onward
+
+More extensive details can be found in the [changelog](https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md).

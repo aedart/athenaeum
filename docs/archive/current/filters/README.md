@@ -4,8 +4,6 @@ description: About the Filters Package
 
 # Search Filter Utilities
 
-_**Available since** `v5.22.x`_
-
 Offers a way to create search and constraint [query filters](../database/query/criteria.md), based on received http query parameters.
 
 ## Example
@@ -47,7 +45,7 @@ class UserFilterBuilder extends BaseBuilder
 
 **In your request**
 
-To use your custom filters builder, create a new instance in your request, e.g. in the [after validation hook](https://laravel.com/docs/8.x/validation#after-validation-hook).
+To use your custom filters builder, create a new instance in your request, e.g. in the [after validation hook](https://laravel.com/docs/9.x/validation#after-validation-hook).
 
 ```php
 namespace Acme\Requests;

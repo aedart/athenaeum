@@ -7,9 +7,9 @@ description: About the Testing Package
 The Testing package offers various testing utilities, built on top of [Codeception](https://codeception.com/) and [Orchestra Testbench](https://packagist.org/packages/orchestra/testbench). 
 It allows you to test Laravel specific components, Laravel's application and offers a few utilities for testing the [Athenaeum Core Application](../core). 
 
-Lastly, this package also comes with [Mockery](https://packagist.org/packages/mockery/mockery) and [Faker](https://packagist.org/packages/fzaninotto/faker).
+Lastly, this package also comes with [Mockery](https://packagist.org/packages/mockery/mockery) and [Faker](https://packagist.org/packages/fakerphp/faker).
 
-## Exaxmple
+## Example
 
 ```php
 use \Aedart\Testing\TestCases\UnitTestCase;

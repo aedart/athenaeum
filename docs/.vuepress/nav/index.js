@@ -4,18 +4,19 @@ const version3 = require('./version3x');
 const version4 = require('./version4x');
 const version5 = require('./version5x');
 const version6 = require('./version6x');
+const version7 = require('./version7x');
 
 module.exports = {
 
     /**
      * The current version
      */
-    current : 'v5.x',
+    current : 'v6.x',
 
     /**
      * The next major version
      */
-    next: 'v6.x',
+    next: 'v7.x',
 
     /**
      * List of available navigations
@@ -23,6 +24,7 @@ module.exports = {
      * @var {Object[]}
      */
     versions : [
+        { name: 'v7.x', link: '/archive/v7x/', sidebar: version7.sidebar()  },
         { name: 'v6.x', link: '/archive/v6x/', sidebar: version6.sidebar()  },
         { name: 'v5.x', link: '/archive/v5x/', sidebar: version5.sidebar()  },
         { name: 'v4.x', link: '/archive/v4x/', sidebar: version4.sidebar()  },
