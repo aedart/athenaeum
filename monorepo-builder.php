@@ -17,6 +17,9 @@ use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateReplaceReleaseWorker;
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
+    // Set the default branch name (used to be "master")...
+    $parameters->set(Option::DEFAULT_BRANCH_NAME, 'main');
+
     // Location of packages...etc
     $parameters->set(Option::PACKAGE_DIRECTORIES, [
         // default value
