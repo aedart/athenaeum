@@ -9,7 +9,7 @@ A memory utility that is able to convert between various order of magnitude.
 It uses [bytes](https://en.wikipedia.org/wiki/Byte) as its lowest value and offers support upto [Exabyte or Exbibyte](https://en.wikipedia.org/wiki/Byte#Multiple-byte_units). 
 In addition, it is also able to format a size to a "human-readable".
 
-Both [SI](https://en.wikipedia.org/wiki/International_System_of_Units) "decimal" and "binary" values are supported.
+[SI](https://en.wikipedia.org/wiki/International_System_of_Units) "decimal" and "binary" values are supported.
 
 **Example**
 
