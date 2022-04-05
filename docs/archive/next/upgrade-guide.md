@@ -5,12 +5,6 @@ sidebarDepth: 1
 
 # Upgrade Guide
 
-::: warning Ongoing work...
-
-The upgrade guide is still a work-in-progress... Regular updates will be made available, as soon as possible.
-
-:::
-
 ## From version 5.x to 6.x.
 
 [[TOC]]
