@@ -11,13 +11,13 @@ description: Athenaeum Release Notes
 Athenaeum attempts to follow a release cycle that matches closely to that of [Laravel](https://laravel.com/docs/9.x/releases).
 However, due to limited amount of project maintainers, no guarantees can be provided. 
 
-| Version | PHP         | Laravel | Release                    | Security Fixes Until |
-|---------|-------------|---------|----------------------------|----------------------|
-| `7.x`   | _`8.1`_     | _TBD_   | _TBD_                      | _TBD_                |
-| `6.x`*  | `8.0 - 8.1` | `v9.x`  | _Scheduled for March 2022_ | February 2023        |
-| `5.x`   | `7.4`       | `v8.x`  | October 4th, 2020          | N/A                  |
-| `4.x`   | `7.4`       | `v7.x`  | April 15th, 2020           | N/A                  |
-| `< 4.x` | _-_         | _-_     | _See `CHANGELOG.md`_       | N/A                  |
+| Version | PHP         | Laravel | Release              | Security Fixes Until |
+|---------|-------------|---------|----------------------|----------------------|
+| `7.x`   | _`8.1`_     | _TBD_   | _TBD_                | _TBD_                |
+| `6.x`*  | `8.0 - 8.1` | `v9.x`  | April 5th, 2022      | February 2023        |
+| `5.x`   | `7.4`       | `v8.x`  | October 4th, 2020    | N/A                  |
+| `4.x`   | `7.4`       | `v7.x`  | April 15th, 2020     | N/A                  |
+| `< 4.x` | _-_         | _-_     | _See `CHANGELOG.md`_ | N/A                  |
 
 *: _current supported version._
 
