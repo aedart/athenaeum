@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* Streams package that offers wrappers for common stream operations.
 * `Dto` and `ArrayDto` can now accept and resolve union types. [#82](https://github.com/aedart/athenaeum/issues/82).
 * MIME-types detection package, based on file's contents via a string, resource of path.
 * Maintenance Mode package that offers additional drivers for Laravel's Application, when using `php artisan down`. Available drivers: `'array'` and `'json'`. [#67](https://github.com/aedart/athenaeum/issues/67).
@@ -22,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Documentation for `\Aedart\Utils\Helpers\Invoker` (_previously undocumented. Helper was added in `v5.12`_).
 * `InteractsWithDeprecationHandling` added to `LaravelTestHelper`.
 * `isValid()` method in `Json` utility.
+* `Memory` utility component.
 * `split.yaml` GitHub Action workflow as replacement for previous "split" command from [Symplify Monorepo Builder](https://github.com/symplify/monorepo-builder). [#66](https://github.com/aedart/athenaeum/issues/66).
 * Security and Support Policy. [#97](https://github.com/aedart/athenaeum/issues/97).
 * Code of Conduct. [#97](https://github.com/aedart/athenaeum/issues/97).
