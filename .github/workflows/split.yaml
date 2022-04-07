@@ -36,6 +36,8 @@ jobs:
   # ------------------------------------------------------------------------------------------------------- #
 
   split_monorepo:
+    if: github.repository == 'aedart/athenaeum'
+
     name: "Split mono-repository"
 
     runs-on: ubuntu-latest
