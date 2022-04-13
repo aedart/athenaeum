@@ -773,7 +773,7 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/6.0.2...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/6.0.2...HEAD
 [6.0.2]: https://github.com/aedart/athenaeum/compare/6.0.1...6.0.2
 [6.0.1]: https://github.com/aedart/athenaeum/compare/6.0.0...6.0.1
 [6.0.0]: https://github.com/aedart/athenaeum/compare/5.27.0...6.0.0
