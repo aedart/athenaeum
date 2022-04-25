@@ -45,11 +45,17 @@ class Version
 
         // Handle version file content, if given
         if (isset($versionFile) && file_exists($versionFile)) {
-            $root['pretty_version'] = file_get_contents($versionFile);
+            $contents = file_get_contents($versionFile);
 
-            // Clear the full version and reference when read from file...
-            $root['version'] = null;
-            $root['reference'] = null;
+            if (!empty($contents)) {
+                list($version, $reference) = explode('@', $contents);
+
+                $root['pretty_version'] = $version;
+                $root['reference'] = $reference;
+
+                // Clear the full version when read from file...
+                $root['version'] = null;
+            }
         }
 
         return static::$versions[$name] = static::makePackageVersion(
