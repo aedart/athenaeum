@@ -1,0 +1,76 @@
+#!/usr/bin/env php
+<?php
+
+/*****************************************************************
+ * Autoloader
+ ****************************************************************/
+
+$dir = getcwd();
+
+// Load the composer autoloader
+if (file_exists($dir . '/vendor/autoload.php')) {
+    require $dir . '/vendor/autoload.php';
+} else {
+    require $dir . '/../../../vendor/autoload.php';
+}
+
+/*****************************************************************
+ * Utilities
+ ****************************************************************/
+
+/**
+ * Run shell command
+ *
+ * @param string $command
+ *
+ * @return string
+ *
+ * @throws \RuntimeException
+ */
+function runCmd(string $command) {
+    $result = shell_exec($command);
+
+    if ($result === null) {
+        throw new RuntimeException(sprintf('Command %s failed. Pleas try to run command manually in terminal and check error output', $command));
+    }
+
+    return trim($result);
+}
+
+/*****************************************************************
+ * Handle arguments
+ ****************************************************************/
+
+$arguments = $argv;
+if (!isset($arguments[1])) {
+    throw new \InvalidArgumentException('You must specify a valid file path in which version must be stored!');
+}
+
+/**
+ * The file in which to store version
+ */
+$file = $dir . DIRECTORY_SEPARATOR . $arguments[1];
+
+/*****************************************************************
+ * Build version
+ ****************************************************************/
+
+// Default version to write in file...
+$version = 'unknown';
+
+// Obtain version via git
+$commit = runCmd('git rev-parse HEAD');
+$tag = runCmd('git describe --tags $(git rev-list --tags --max-count=1)');
+$tagCommit = runCmd("git rev-list -n 1 {$tag}");
+$version = "{$tag}@{$commit}";
+
+// Append a "-dev" if current commit does not match the tag's commit
+if ($commit !== $tagCommit) {
+//    $shortCommit = runCmd('git rev-parse --short HEAD');
+    $version = "{$tag}-dev@{$tagCommit}";
+}
+
+// Write version to file
+file_put_contents("{$file}", $version);
+
+exit(0);

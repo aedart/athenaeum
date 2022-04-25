@@ -22,6 +22,9 @@
             "Aedart\\Utils\\": "src"
         }
     },
+    "bin": [
+        "bin/build-version"
+    ],
     "config": {
         "sort-packages": true
     },
