@@ -6,6 +6,7 @@ use Aedart\Contracts\Utils\Packages\Exceptions\PackageNotInstalledException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Version;
+use Codeception\Configuration;
 
 /**
  * VersionTest
@@ -18,6 +19,24 @@ use Aedart\Utils\Version;
  */
 class VersionTest extends UnitTestCase
 {
+    /*****************************************************************
+     * Setup
+     ****************************************************************/
+
+    /**
+     * @inheritdoc
+     */
+    protected function _before()
+    {
+        parent::_before();
+
+        Version::clearCached();
+    }
+
+    /*****************************************************************
+     * Actual Tests
+     ****************************************************************/
+
     /**
      * @test
      */
@@ -106,5 +125,22 @@ class VersionTest extends UnitTestCase
 
         $this->assertNotEmpty($version);
         $this->assertStringNotContainsString('no version', $version);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canUseVersionFromFile()
+    {
+        $file = Configuration::dataDir() . '/utils/version/version.txt';
+
+        $version = Version::application($file);
+
+        ConsoleDebugger::output($version);
+
+        $this->assertNotEmpty($version);
+        $this->assertSame(file_get_contents($file), $version->version());
     }
 }
