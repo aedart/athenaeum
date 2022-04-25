@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.1.0] - 2022-04-25
+
+### Changed
+
+* `\Aedart\Utils\Version::application()` can now accept a path to a "version file" (_optional_), which replaces the default obtain version information from composer. [#108](https://github.com/aedart/athenaeum/issues/108) 
+
 ## [6.0.2] - 2022-04-07
 
 ### Fixed
@@ -773,7 +779,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/6.0.2...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/6.1.0...HEAD
+[6.1.0]: https://github.com/aedart/athenaeum/compare/6.0.2...6.1.0
 [6.0.2]: https://github.com/aedart/athenaeum/compare/6.0.1...6.0.2
 [6.0.1]: https://github.com/aedart/athenaeum/compare/6.0.0...6.0.1
 [6.0.0]: https://github.com/aedart/athenaeum/compare/5.27.0...6.0.0
