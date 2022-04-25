@@ -48,10 +48,10 @@ class Version
             $contents = file_get_contents($versionFile);
 
             if (!empty($contents)) {
-                list($version, $reference) = explode('@', $contents);
+                $parts = explode('@', $contents);
 
-                $root['pretty_version'] = $version;
-                $root['reference'] = $reference;
+                $root['pretty_version'] = $parts[0];
+                $root['reference'] = $parts[1] ?? null;
 
                 // Clear the full version when read from file...
                 $root['version'] = null;
