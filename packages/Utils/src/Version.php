@@ -27,15 +27,35 @@ class Version
     /**
      * Returns the application's version
      *
+     * If method is given a version file, then the "pretty" version from file's content
+     * will be used, instead of composer's obtained "root package" version.
+     *
+     * @param string|null $versionFile [optional] Path to a version file.
+     *
      * @return PackageVersionInterface
      */
-    public static function application(): PackageVersionInterface
+    public static function application(string|null $versionFile = null): PackageVersionInterface
     {
         $root = InstalledVersions::getRootPackage();
         $name = $root['name'];
 
         if (isset(static::$versions[$name])) {
             return static::$versions[$name];
+        }
+
+        // Handle version file content, if given
+        if (isset($versionFile) && file_exists($versionFile)) {
+            $contents = file_get_contents($versionFile);
+
+            if (!empty($contents)) {
+                $parts = explode('@', $contents);
+
+                $root['pretty_version'] = $parts[0];
+                $root['reference'] = $parts[1] ?? null;
+
+                // Clear the full version when read from file...
+                $root['version'] = null;
+            }
         }
 
         return static::$versions[$name] = static::makePackageVersion(
