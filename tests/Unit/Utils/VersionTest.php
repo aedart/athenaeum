@@ -143,4 +143,24 @@ class VersionTest extends UnitTestCase
         $this->assertNotEmpty($version);
         $this->assertSame(file_get_contents($file), $version->version());
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canReadBuiltVersionFile()
+    {
+        $file = Configuration::dataDir() . '/utils/version/built-version.txt';
+
+        $version = Version::application($file);
+
+        ConsoleDebugger::output($version);
+
+        list($versionInFile, $reference) = explode('@', file_get_contents($file));
+
+        $this->assertNotEmpty($version);
+        $this->assertSame($versionInFile, $version->version());
+        $this->assertSame($reference, $version->reference());
+    }
 }
