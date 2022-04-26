@@ -30,6 +30,7 @@
         "illuminate/pipeline": "^v9.7.0",
         "illuminate/support": "^v9.7.0",
         "illuminate/validation": "^v9.7.0",
+        "league/flysystem": "^3.0.18",
         "mockery/mockery": "1.5.*",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
