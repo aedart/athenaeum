@@ -8,7 +8,6 @@ use Aedart\Support\Helpers\Database\DbTrait;
 use Illuminate\Database\ConnectionInterface;
 use League\Flysystem\FilesystemAdapter;
 use League\Flysystem\PathPrefixer;
-use Packages\Filesystem\Flysystem\Adapters\Exceptions\UnableToResolveDatabaseConnection;
 
 /**
  * Base Adapter
