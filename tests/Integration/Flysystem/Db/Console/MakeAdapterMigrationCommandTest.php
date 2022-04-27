@@ -5,7 +5,6 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Console;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
 use Aedart\Utils\Str;
-use Codeception\Configuration;
 
 /**
  * MakeAdapterMigrationCommandTest
