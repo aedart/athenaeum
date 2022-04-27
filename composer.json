@@ -111,6 +111,7 @@
         "aedart/athenaeum-dto": "6.1.1",
         "aedart/athenaeum-events": "6.1.1",
         "aedart/athenaeum-filters": "6.1.1",
+        "aedart/athenaeum-flysystem-db": "6.1.1",
         "aedart/athenaeum-http-clients": "6.1.1",
         "aedart/athenaeum-http-cookies": "6.1.1",
         "aedart/athenaeum-http-messages": "6.1.1",
