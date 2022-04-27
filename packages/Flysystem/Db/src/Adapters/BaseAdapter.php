@@ -39,7 +39,9 @@ abstract class BaseAdapter implements
         ConnectionInterface|null $connection = null
     )
     {
-        $this->setDb($connection);
+        $this
+            ->setDb($connection)
+            ->setPathPrefix('');
     }
 
     /**
