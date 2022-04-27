@@ -99,4 +99,32 @@ abstract class BaseAdapter implements
     {
         return $this->prefixer;
     }
+
+    /**
+     * Applies path prefix for given path
+     *
+     * @see stripPrefix
+     *
+     * @param string $path
+     *
+     * @return string Prefixed path
+     */
+    public function applyPrefix(string $path): string
+    {
+        return $this->getPrefixer()->prefixPath($path);
+    }
+
+    /**
+     * Strips path prefix from given path
+     *
+     * @see applyPrefix
+     *
+     * @param string $path
+     *
+     * @return string Path without prefix
+     */
+    public function stripPrefix(string $path): string
+    {
+        return $this->getPrefixer()->stripPrefix($path);
+    }
 }
