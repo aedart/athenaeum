@@ -2,6 +2,9 @@
 
 namespace Aedart\Flysystem\Db\Adapters;
 
+use Aedart\Contracts\Support\Helpers\Database\DbAware;
+use Aedart\Support\Helpers\Database\DbTrait;
+use Illuminate\Database\ConnectionInterface;
 use League\Flysystem\FilesystemAdapter;
 
 /**
@@ -13,6 +16,20 @@ use League\Flysystem\FilesystemAdapter;
  * @package Aedart\Flysystem\Db\Adapters
  */
 abstract class BaseAdapter implements
-    FilesystemAdapter
+    FilesystemAdapter,
+    DbAware
 {
+    use DbTrait;
+
+    /**
+     * Creates a new adapter instance
+     *
+     * @param ConnectionInterface|null $connection [optional]
+     */
+    public function __construct(
+        ConnectionInterface|null $connection = null
+    )
+    {
+        $this->setDb($connection);
+    }
 }
