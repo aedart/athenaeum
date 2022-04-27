@@ -2,7 +2,7 @@
 
 namespace Aedart\Contracts\Flysystem\Db\Exceptions;
 
-use Throwable;
+use League\Flysystem\FilesystemException;
 
 /**
  * Database Adapter Exception
@@ -10,6 +10,6 @@ use Throwable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Contracts\Flysystem\Db\Exceptions
  */
-interface DatabaseAdapterException extends Throwable
+interface DatabaseAdapterException extends FilesystemException
 {
 }
