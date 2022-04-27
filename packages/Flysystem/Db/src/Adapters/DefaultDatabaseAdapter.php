@@ -2,6 +2,8 @@
 
 namespace Aedart\Flysystem\Db\Adapters;
 
+use Aedart\Contracts\Flysystem\Db\RecordTypes;
+use Illuminate\Database\ConnectionInterface;
 use League\Flysystem\Config;
 use League\Flysystem\FileAttributes;
 use League\Flysystem\FilesystemAdapter;
@@ -16,6 +18,8 @@ use League\Flysystem\UnableToMoveFile;
 use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\UnableToWriteFile;
+use RuntimeException;
+use Throwable;
 
 /**
  * Default Database Adapter
@@ -25,6 +29,23 @@ use League\Flysystem\UnableToWriteFile;
  */
 class DefaultDatabaseAdapter extends BaseAdapter
 {
+    /**
+     * {@inheritDoc}
+     *
+     * @param string $table Name of table where files are located
+     */
+    public function __construct(
+        protected string $table,
+        ConnectionInterface|null $connection = null
+    )
+    {
+        parent::__construct($connection);
+    }
+
+    /*****************************************************************
+     * Filesystem Adapter methods
+     ****************************************************************/
+
     /**
      * @inheritDoc
      */
@@ -38,7 +59,9 @@ class DefaultDatabaseAdapter extends BaseAdapter
      */
     public function directoryExists(string $path): bool
     {
-        // TODO: Implement directoryExists() method.
+        $dir = $this->fetchDirectory($path, $this->table);
+
+        return isset($dir);
     }
 
     /**
@@ -94,7 +117,41 @@ class DefaultDatabaseAdapter extends BaseAdapter
      */
     public function createDirectory(string $path, Config $config): void
     {
-        // TODO: Implement createDirectory() method.
+        try {
+            $connection = $config->get('connection', $this->connection());
+
+            $path = $this->applyPrefix($path);
+            $visibility = $this->resolveDirectoryVisibility($config);
+            $timestamp = $this->resolveTimestamp($config);
+
+            // Flysystem does not state anything about recursively creation of directories.
+            // We assume that a single entry is sufficient...
+            $result = $connection
+                ->table($this->table)
+                ->updateOrInsert(
+                    // Where matches
+                    [
+                        'type' => RecordTypes::DIRECTORY,
+                        'path' => $path,
+                        'visibility' => $visibility,
+                        'timestamp' => $timestamp
+                    ],
+
+                    // Values to be updated, if it exists.
+                    // Otherwise, both arrays are merged and inserted!
+                    [
+                        'path' => $path,
+                        'visibility' => $visibility,
+                        'timestamp' => $timestamp
+                    ]
+                );
+
+            if (!$result) {
+                throw new RuntimeException(sprintf('directory was not created in table: %s', $this->table));
+            }
+        } catch (Throwable $e) {
+            throw UnableToCreateDirectory::dueToFailure($path, $e);
+        }
     }
 
     /**
@@ -160,4 +217,12 @@ class DefaultDatabaseAdapter extends BaseAdapter
     {
         // TODO: Implement copy() method.
     }
+
+    /*****************************************************************
+     * Configuration methods
+     ****************************************************************/
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
 }

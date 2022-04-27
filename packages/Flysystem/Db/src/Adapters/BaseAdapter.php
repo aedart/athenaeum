@@ -2,12 +2,19 @@
 
 namespace Aedart\Flysystem\Db\Adapters;
 
+use Aedart\Contracts\Flysystem\Db\RecordTypes;
+use Aedart\Contracts\Flysystem\Visibility;
 use Aedart\Contracts\Support\Helpers\Database\DbAware;
 use Aedart\Flysystem\Db\Exceptions\ConnectionException;
+use Aedart\Flysystem\Db\Exceptions\DatabaseAdapterException;
 use Aedart\Support\Helpers\Database\DbTrait;
 use Illuminate\Database\ConnectionInterface;
+use League\Flysystem\Config;
 use League\Flysystem\FilesystemAdapter;
 use League\Flysystem\PathPrefixer;
+use League\Flysystem\UnableToCheckExistence;
+use stdClass;
+use Throwable;
 
 /**
  * Base Adapter
@@ -127,5 +134,73 @@ abstract class BaseAdapter implements
     public function stripPrefix(string $path): string
     {
         return $this->getPrefixer()->stripPrefix($path);
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Fetch a directory record from given table, which matches given path
+     *
+     * @param string $path
+     * @param string $table
+     * @param ConnectionInterface|null $connection [optional]
+     *
+     * @return stdClass|null
+     *
+     * @throws UnableToCheckExistence
+     */
+    protected function fetchDirectory(string $path, string $table, ConnectionInterface|null $connection = null): stdClass|null
+    {
+        try {
+            $connection = $connection ?? $this->connection();
+
+            $result = $connection
+                ->table($table)
+                ->select()
+                ->where('path', $this->applyPrefix($path))
+                ->where('type', RecordTypes::DIRECTORY)
+                ->limit(1)
+                ->get();
+
+            if ($result->isEmpty()) {
+                return null;
+            }
+
+            return $result->first();
+        } catch (Throwable $e) {
+            throw UnableToCheckExistence::forLocation($path, $e);
+        }
+    }
+
+    /**
+     * Resolves directory visibility, when writing to table record
+     *
+     * @param Config $config
+     *
+     * @return string
+     */
+    protected function resolveDirectoryVisibility(Config $config): string
+    {
+        return $config->get(
+            Config::OPTION_VISIBILITY,
+            $config->get(Config::OPTION_DIRECTORY_VISIBILITY, Visibility::PRIVATE)
+        );
+    }
+
+    /**
+     * Resolves timestamp, when writing to table record
+     *
+     * If "timestamp" is set in given configuration, then it will be returned.
+     * Otherwise, current unix timestamp is returned.
+     *
+     * @param Config $config
+     *
+     * @return int
+     */
+    protected function resolveTimestamp(Config $config): int
+    {
+        return $config->get('timestamp', time());
     }
 }
