@@ -3,6 +3,7 @@
 namespace Aedart\Flysystem\Db\Adapters;
 
 use Aedart\Contracts\Flysystem\Db\RecordTypes;
+use Aedart\Streams\FileStream;
 use Illuminate\Database\ConnectionInterface;
 use League\Flysystem\Config;
 use League\Flysystem\FileAttributes;
@@ -87,7 +88,12 @@ class DefaultDatabaseAdapter extends BaseAdapter
      */
     public function read(string $path): string
     {
-        // TODO: Implement read() method.
+        $resource = $this->readStream($path);
+
+        $contents = stream_get_contents($resource);
+        @fclose($resource);
+
+        return $contents;
     }
 
     /**
@@ -95,7 +101,25 @@ class DefaultDatabaseAdapter extends BaseAdapter
      */
     public function readStream(string $path)
     {
-        // TODO: Implement readStream() method.
+        try {
+            $file = $this->fetchFile($path, $this->table);
+            if (!isset($file)) {
+                throw new RuntimeException('File does not exist');
+            }
+
+            $contents = $file->contents;
+            if (is_resource($contents)) {
+                return $contents;
+            }
+
+            return $this
+                ->makeStream()
+                ->put($contents)
+                ->positionToStart()
+                ->detach();
+        } catch (Throwable $e) {
+            throw UnableToReadFile::fromLocation($path, $e->getMessage(), $e);
+        }
     }
 
     /**

@@ -4,9 +4,13 @@ namespace Aedart\Flysystem\Db\Adapters;
 
 use Aedart\Contracts\Flysystem\Db\RecordTypes;
 use Aedart\Contracts\Flysystem\Visibility;
+use Aedart\Contracts\Streams\BufferSizes;
+use Aedart\Contracts\Streams\Exceptions\StreamException;
+use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
 use Aedart\Contracts\Support\Helpers\Database\DbAware;
 use Aedart\Flysystem\Db\Exceptions\ConnectionException;
 use Aedart\Flysystem\Db\Exceptions\DatabaseAdapterException;
+use Aedart\Streams\FileStream;
 use Aedart\Support\Helpers\Database\DbTrait;
 use Illuminate\Database\ConnectionInterface;
 use League\Flysystem\Config;
@@ -280,5 +284,17 @@ abstract class BaseAdapter implements
     protected function resolveTimestamp(Config $config): int
     {
         return $config->get('timestamp', time());
+    }
+
+    /**
+     * Creates a new file stream instance
+     *
+     * @return FileStreamInterface
+     *
+     * @throws StreamException
+     */
+    protected function makeStream(): FileStreamInterface
+    {
+        return FileStream::openMemory('r+b');
     }
 }
