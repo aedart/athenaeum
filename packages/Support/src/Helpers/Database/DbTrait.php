@@ -29,7 +29,7 @@ trait DbTrait
      *
      * @return self
      */
-    public function setDb(ConnectionInterface|null $connection)
+    public function setDb(ConnectionInterface|null $connection): static
     {
         $this->db = $connection;
 
