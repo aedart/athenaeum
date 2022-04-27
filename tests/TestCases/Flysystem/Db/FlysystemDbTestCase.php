@@ -17,6 +17,11 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
 {
     use FileTrait;
 
+    /**
+     * Name of the console command
+     */
+    public const MAKE_MIGRATION_CMD = 'flysystem:make-adapter-migration';
+
     /*****************************************************************
      * Setup
      ****************************************************************/
@@ -43,6 +48,23 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
         return [
             FlysystemDatabaseAdapterServiceProvider::class
         ];
+    }
+
+    /*****************************************************************
+     * Helpers
+     ****************************************************************/
+
+    /**
+     * Returns relative path to migrations directory
+     *
+     * @return string
+     */
+    public function migrationsPath(): string
+    {
+        // Note: path is relative to the 'vendor/orchestra/testbench-core/laravel/' directory!
+        // This is needed for the "make adapter migration" command. Current version does not
+        // support real-path!
+        return '../../../../tests/_output/flysystem/db';
     }
 
     /**
