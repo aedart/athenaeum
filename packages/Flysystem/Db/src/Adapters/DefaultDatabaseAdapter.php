@@ -51,7 +51,9 @@ class DefaultDatabaseAdapter extends BaseAdapter
      */
     public function fileExists(string $path): bool
     {
-        // TODO: Implement fileExists() method.
+        $file = $this->fetchFile($path, $this->table);
+
+        return isset($file);
     }
 
     /**

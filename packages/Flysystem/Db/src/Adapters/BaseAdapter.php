@@ -38,6 +38,20 @@ abstract class BaseAdapter implements
     protected PathPrefixer $prefixer;
 
     /**
+     * Name of "path" column in table
+     *
+     * @var string
+     */
+    protected string $pathColumn = 'path';
+
+    /**
+     * Name of "type" column in table
+     *
+     * @var string
+     */
+    protected string $typeColumn = 'type';
+
+    /**
      * Creates a new adapter instance
      *
      * @param ConnectionInterface|null $connection [optional]
@@ -141,17 +155,23 @@ abstract class BaseAdapter implements
      ****************************************************************/
 
     /**
-     * Fetch a directory record from given table, which matches given path
+     * Fetch a directory record from given table that matches given path
      *
      * @param string $path
      * @param string $table
      * @param ConnectionInterface|null $connection [optional]
+     * @param Config|null $config [optional]
      *
      * @return stdClass|null
      *
      * @throws UnableToCheckExistence
      */
-    protected function fetchDirectory(string $path, string $table, ConnectionInterface|null $connection = null): stdClass|null
+    protected function fetchDirectory(
+        string $path,
+        string $table,
+        ConnectionInterface|null $connection = null,
+        Config|null $config = null
+    ): stdClass|null
     {
         try {
             $connection = $connection ?? $this->connection();
@@ -159,8 +179,48 @@ abstract class BaseAdapter implements
             $result = $connection
                 ->table($table)
                 ->select()
-                ->where('path', $this->applyPrefix($path))
-                ->where('type', RecordTypes::DIRECTORY)
+                ->where($this->pathColumn, $this->applyPrefix($path))
+                ->where($this->typeColumn, RecordTypes::DIRECTORY)
+                ->limit(1)
+                ->get();
+
+            if ($result->isEmpty()) {
+                return null;
+            }
+
+            return $result->first();
+        } catch (Throwable $e) {
+            throw UnableToCheckExistence::forLocation($path, $e);
+        }
+    }
+
+    /**
+     * Fetch a file record from given table that matches given path
+     *
+     * @param string $path
+     * @param string $table
+     * @param ConnectionInterface|null $connection [optional]
+     * @param Config|null $config [optional]
+     *
+     * @return stdClass|null
+     *
+     * @throws UnableToCheckExistence
+     */
+    protected function fetchFile(
+        string $path,
+        string $table,
+        ConnectionInterface|null $connection = null,
+        Config|null $config = null
+    ): stdClass|null
+    {
+        try {
+            $connection = $connection ?? $this->connection();
+
+            $result = $connection
+                ->table($table)
+                ->select()
+                ->where($this->pathColumn, $this->applyPrefix($path))
+                ->where($this->typeColumn, RecordTypes::FILE)
                 ->limit(1)
                 ->get();
 
