@@ -7,6 +7,7 @@ use Aedart\Flysystem\Db\Exceptions\ConnectionException;
 use Aedart\Support\Helpers\Database\DbTrait;
 use Illuminate\Database\ConnectionInterface;
 use League\Flysystem\FilesystemAdapter;
+use League\Flysystem\PathPrefixer;
 use Packages\Filesystem\Flysystem\Adapters\Exceptions\UnableToResolveDatabaseConnection;
 
 /**
@@ -22,6 +23,13 @@ abstract class BaseAdapter implements
     DbAware
 {
     use DbTrait;
+
+    /**
+     * Path prefixer
+     *
+     * @var PathPrefixer
+     */
+    protected PathPrefixer $prefixer;
 
     /**
      * Creates a new adapter instance
@@ -50,5 +58,45 @@ abstract class BaseAdapter implements
         }
 
         return $connection;
+    }
+
+    /**
+     * Set path prefix
+     *
+     * @param string $prefix
+     *
+     * @return self
+     */
+    public function setPathPrefix(string $prefix): static
+    {
+        return $this->setPrefixer(
+            new PathPrefixer($prefix)
+        );
+    }
+
+    /**
+     * Set path prefixer instance
+     *
+     * When invoking this method,
+     *
+     * @param PathPrefixer $prefixer
+     *
+     * @return self
+     */
+    public function setPrefixer(PathPrefixer $prefixer): static
+    {
+        $this->prefixer = $prefixer;
+
+        return $this;
+    }
+
+    /**
+     * Get path prefixer instance
+     *
+     * @return PathPrefixer
+     */
+    public function getPrefixer(): PathPrefixer
+    {
+        return $this->prefixer;
     }
 }
