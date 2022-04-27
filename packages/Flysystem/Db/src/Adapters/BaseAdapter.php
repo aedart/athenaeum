@@ -175,6 +175,24 @@ abstract class BaseAdapter implements
     }
 
     /**
+     * Execute callback within a transaction.
+     *
+     * @param callable $callback
+     *
+     * @return mixed
+     *
+     * @throws DatabaseAdapterException
+     */
+    protected function transaction(callable $callback): mixed
+    {
+        try {
+            return $this->connection()->transaction($callback);
+        } catch (Throwable $e) {
+            throw new DatabaseAdapterException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /**
      * Resolves directory visibility, when writing to table record
      *
      * @param Config $config
