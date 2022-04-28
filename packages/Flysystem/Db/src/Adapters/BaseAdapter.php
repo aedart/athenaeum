@@ -281,7 +281,7 @@ abstract class BaseAdapter implements
      *
      * @return int
      */
-    protected function resolveTimestamp(Config $config): int
+    protected function resolveLastModifiedTimestamp(Config $config): int
     {
         return $config->get('timestamp', time());
     }

@@ -148,7 +148,7 @@ class DefaultDatabaseAdapter extends BaseAdapter
 
             $path = $this->applyPrefix($path);
             $visibility = $this->resolveDirectoryVisibility($config);
-            $timestamp = $this->resolveTimestamp($config);
+            $timestamp = $this->resolveLastModifiedTimestamp($config);
 
             // Flysystem does not state anything about recursively creation of directories.
             // We assume that a single entry is sufficient...
@@ -160,7 +160,7 @@ class DefaultDatabaseAdapter extends BaseAdapter
                         'type' => RecordTypes::DIRECTORY,
                         'path' => $path,
                         'visibility' => $visibility,
-                        'timestamp' => $timestamp
+                        'last_modified' => $timestamp
                     ],
 
                     // Values to be updated, if it exists.
@@ -168,7 +168,7 @@ class DefaultDatabaseAdapter extends BaseAdapter
                     [
                         'path' => $path,
                         'visibility' => $visibility,
-                        'timestamp' => $timestamp
+                        'last_modified' => $timestamp
                     ]
                 );
 

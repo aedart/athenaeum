@@ -36,13 +36,13 @@ return new class extends Migration
                 ->comment('Unique path of file or directory');
 
             $table
-                ->bigInteger('size')
+                ->bigInteger('file_size')
                 ->default(0)
                 ->comment('Filesize in bytes');
 
             // File mimetype (Note: max size is acc. to https://datatracker.ietf.org/doc/html/rfc4288#section-4.2)
             $table
-                ->string('mimetype', 127)
+                ->string('mime_type', 127)
                 ->nullable()
                 ->comment('File media type / mimetype');
 
@@ -56,9 +56,14 @@ return new class extends Migration
                 ->comment('File contents');
 
             $table
-                ->bigInteger('timestamp')
+                ->bigInteger('last_modified')
                 ->default(0)
                 ->comment('Unix timestamp of when file or directory was last modified');
+
+            $table
+                ->json('extra_metadata')
+                ->nullable()
+                ->comment('Evt. custom extra meta data about file or directory');
         });
     }
 
