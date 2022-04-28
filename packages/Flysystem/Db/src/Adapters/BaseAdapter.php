@@ -14,11 +14,16 @@ use Aedart\Streams\FileStream;
 use Aedart\Support\Helpers\Database\DbTrait;
 use Aedart\Utils\Json;
 use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\Query\Builder;
 use JsonException;
 use League\Flysystem\Config;
+use League\Flysystem\DirectoryAttributes;
+use League\Flysystem\FileAttributes;
 use League\Flysystem\FilesystemAdapter;
 use League\Flysystem\PathPrefixer;
+use League\Flysystem\StorageAttributes;
 use League\Flysystem\UnableToCheckExistence;
+use LogicException;
 use stdClass;
 use Throwable;
 
@@ -241,6 +246,138 @@ abstract class BaseAdapter implements
     }
 
     /**
+     * Perform contents listing for given directory, using specified connection
+     *
+     * @param string $table
+     * @param string $directory [optional]
+     * @param bool $recursive [optional]
+     * @param ConnectionInterface|null $connection [optional]
+     *
+     * @return iterable<StorageAttributes>
+     */
+    protected function performContentsListing(
+        string $table,
+        string $directory = '',
+        bool $recursive = false,
+        ?ConnectionInterface $connection = null
+    ): iterable
+    {
+        try {
+            $connection = $connection ?? $this->connection();
+
+            $path = $this->applyPrefix($directory);
+
+            // TODO: Future perspective; create custom iterator that can paginate
+            // TODO: through results, so that very large "storage disks" can be handled!
+
+            $result = $connection
+                ->table($table)
+                ->select()
+                ->when(!empty($path), function (Builder $query) use ($path, $recursive) {
+                    $query->when($recursive, function (Builder $q) use ($path) {
+                        // When recursive
+                        $q
+                            ->where($this->pathColumn, '=', $path)
+                            ->orWhere($this->pathColumn, 'LIKE', "{$path}%");
+                    }, function (Builder $f) use ($path) {
+                        // When not recursive
+                        $f->where($this->pathColumn, '=', $path);
+
+                        // TODO: Not sure that files are included in via the query.
+                    });
+                })
+                ->get();
+
+            if ($result->isEmpty()) {
+                return [];
+            }
+
+            $records = $result->getIterator();
+            foreach ($records as $record){
+                yield $this->normaliseRecord($record);
+            }
+        } catch (Throwable $e) {
+            throw new DatabaseAdapterException(sprintf('Contents listing failed for: %s', $directory), $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * Normalise given record
+     *
+     * Method converts the given database record into a "file" or "directory"
+     * attribute instance.
+     *
+     * @see RecordTypes::FILE
+     * @see RecordTypes::DIRECTORY
+     *
+     * @param stdClass $record
+     *
+     * @return StorageAttributes
+     *
+     * @throws LogicException If record "type" is missing or unknown
+     * @throws JsonException If record's extra meta data cannot be decoded
+     */
+    protected function normaliseRecord(stdClass $record): StorageAttributes
+    {
+        // Convert to array.
+        $record = get_object_vars($record);
+
+        if (!isset($record[$this->typeColumn])) {
+            throw new LogicException('Record is missing "type" property');
+        }
+
+        return match($record[$this->typeColumn]) {
+            RecordTypes::FILE => $this->makeFileAttribute($record),
+            RecordTypes::DIRECTORY => $this->makeDirectoryAttribute($record),
+            default => throw new LogicException(sprintf('Unable to normalise record of type %s. Allowed types: %s',
+                $record[$this->typeColumn],
+                implode(', ', RecordTypes::ALLOWED)
+            ))
+        };
+    }
+
+    /**
+     * Creates a new file attribute, for given file record
+     *
+     * @param array $record
+     *
+     * @return StorageAttributes
+     *
+     * @throws JsonException
+     */
+    protected function makeFileAttribute(array $record): StorageAttributes
+    {
+        return FileAttributes::fromArray([
+            StorageAttributes::ATTRIBUTE_PATH => $this->stripPrefix($record[$this->pathColumn]),
+            StorageAttributes::ATTRIBUTE_FILE_SIZE => (int) $record['file_size'],
+            StorageAttributes::ATTRIBUTE_VISIBILITY => $record['visibility'],
+            StorageAttributes::ATTRIBUTE_LAST_MODIFIED => (int) $record['last_modified'],
+            StorageAttributes::ATTRIBUTE_MIME_TYPE => $record['mime_type'],
+            StorageAttributes::ATTRIBUTE_EXTRA_METADATA => $this->decodeExtraMetaData($record['extra_metadata']),
+        ]);
+    }
+
+    /**
+     * Creates a new directory attribute, for given directory record
+     *
+     * @param array $record
+     *
+     * @return StorageAttributes
+     *
+     * @throws JsonException
+     */
+    protected function makeDirectoryAttribute(array $record): StorageAttributes
+    {
+        return DirectoryAttributes::fromArray([
+            StorageAttributes::ATTRIBUTE_TYPE => $record[$this->typeColumn],
+            StorageAttributes::ATTRIBUTE_PATH => $this->stripPrefix($record[$this->pathColumn]),
+            StorageAttributes::ATTRIBUTE_VISIBILITY => $record['visibility'],
+            StorageAttributes::ATTRIBUTE_LAST_MODIFIED => (int) $record['last_modified'],
+            StorageAttributes::ATTRIBUTE_EXTRA_METADATA => $this->decodeExtraMetaData($record['extra_metadata']),
+        ]);
+    }
+
+    /**
      * Execute callback within a transaction.
      *
      * @param callable $callback
@@ -305,6 +442,24 @@ abstract class BaseAdapter implements
         }
 
         return Json::encode($extra);
+    }
+
+    /**
+     * Decode extra meta data from database table
+     *
+     * @param string|null $data
+     *
+     * @return array|null
+     *
+     * @throws JsonException
+     */
+    protected function decodeExtraMetaData(string|null $data): array|null
+    {
+        if (!isset($data)) {
+            return null;
+        }
+
+        return Json::decode($data, true);
     }
 
     /**

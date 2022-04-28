@@ -228,7 +228,7 @@ class DefaultDatabaseAdapter extends BaseAdapter
      */
     public function listContents(string $path, bool $deep): iterable
     {
-        // TODO: Implement listContents() method.
+        yield from $this->performContentsListing($this->table, $path, $deep);
     }
 
     /**
