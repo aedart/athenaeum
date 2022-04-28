@@ -2,6 +2,8 @@
 
 namespace Aedart\Contracts\Flysystem\Db;
 
+use League\Flysystem\StorageAttributes;
+
 /**
  * Record Types
  *
@@ -13,12 +15,12 @@ interface RecordTypes
     /**
      * Directory record type
      */
-    public const DIRECTORY = 'dir';
+    public const DIRECTORY = StorageAttributes::TYPE_DIRECTORY;
 
     /**
      * File record type
      */
-    public const FILE = 'file';
+    public const FILE = StorageAttributes::TYPE_FILE;
 
     /**
      * List of supported record types
