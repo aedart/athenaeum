@@ -59,8 +59,6 @@ return new class extends Migration
                 ->bigInteger('timestamp')
                 ->default(0)
                 ->comment('Unix timestamp of when file or directory was last modified');
-
-            $table->index('content_hash');
         });
     }
 
