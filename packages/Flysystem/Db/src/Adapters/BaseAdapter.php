@@ -12,7 +12,9 @@ use Aedart\Flysystem\Db\Exceptions\ConnectionException;
 use Aedart\Flysystem\Db\Exceptions\DatabaseAdapterException;
 use Aedart\Streams\FileStream;
 use Aedart\Support\Helpers\Database\DbTrait;
+use Aedart\Utils\Json;
 use Illuminate\Database\ConnectionInterface;
+use JsonException;
 use League\Flysystem\Config;
 use League\Flysystem\FilesystemAdapter;
 use League\Flysystem\PathPrefixer;
@@ -284,6 +286,25 @@ abstract class BaseAdapter implements
     protected function resolveLastModifiedTimestamp(Config $config): int
     {
         return $config->get('timestamp', time());
+    }
+
+    /**
+     * Resolves extra meta data from configuration
+     *
+     * @param Config $config
+     *
+     * @return string|null Json encoded string or null if no extra meta data
+     *
+     * @throws JsonException
+     */
+    protected function resolveExtraMetaData(Config $config): string|null
+    {
+        $extra = $config->get('extra_meta_data', null);
+        if (!isset($extra)) {
+            return null;
+        }
+
+        return Json::encode($extra);
     }
 
     /**
