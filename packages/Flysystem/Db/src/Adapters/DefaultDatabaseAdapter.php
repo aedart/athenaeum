@@ -151,6 +151,9 @@ class DefaultDatabaseAdapter extends BaseAdapter
             $timestamp = $this->resolveLastModifiedTimestamp($config);
             $extra = $this->resolveExtraMetaData($config);
 
+            // TODO: PROBLEM: We need to create directories recursively. A single entry is NOT good
+            // TODO: enough -> see listContents()'s implementation for details.
+
             // Flysystem does not state anything about recursively creation of directories.
             // We assume that a single entry is sufficient...
             $result = $connection
