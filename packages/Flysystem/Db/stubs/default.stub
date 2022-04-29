@@ -30,6 +30,8 @@ return new class extends Migration
                 ->enum('type', RecordTypes::ALLOWED)
                 ->comment('Whether this is a file or directory');
 
+            // Materialized Path pattern
+            // @see https://dzone.com/articles/materialized-paths-tree-structures-relational-database
             $table
                 ->string('path', 255)
                 ->unique()
