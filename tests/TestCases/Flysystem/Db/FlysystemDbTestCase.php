@@ -59,7 +59,7 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
      *
      * @return string
      */
-    public function migrationsPath(): string
+    public function migrationsOutputPath(): string
     {
         // Note: path is relative to the 'vendor/orchestra/testbench-core/laravel/' directory!
         // This is needed for the "make adapter migration" command. Current version does not
