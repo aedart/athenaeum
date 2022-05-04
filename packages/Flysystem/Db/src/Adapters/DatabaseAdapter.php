@@ -128,7 +128,24 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function deleteDirectory(string $path): void
     {
-        // TODO: Implement deleteDirectory() method.
+        try {
+            $this->transaction(function(ConnectionInterface $connection) use($path) {
+
+                $this->deleteDirectoryContents($path, new Config([
+                    'connection' => $connection
+                ]));
+
+                // Remove the requested directory itself
+                $connection
+                    ->table($this->filesTable)
+                    ->where('path', $this->applyPrefix($path))
+                    ->where('type', RecordTypes::DIRECTORY)
+                    ->limit(1)
+                    ->delete();
+            });
+        } catch (Throwable $e) {
+            throw UnableToDeleteDirectory::atLocation($path, $e->getMessage(), $e);
+        }
     }
 
     /**
@@ -269,6 +286,26 @@ class DatabaseAdapter implements FilesystemAdapter,
         return $connection;
     }
 
+    /**
+     * Cleanup file contents
+     *
+     * Method deletes all file contents records that have 0 or fewer
+     * references.
+     *
+     * @param Config|null $config [optional]
+     *
+     * @return int Affected rows
+     */
+    public function cleanupFileContents(Config|null $config = null): int
+    {
+        $connection = $this->resolveConnection($config);
+
+        return $connection
+            ->table($this->contentsTable)
+            ->where('reference_count', '<=', 0)
+            ->delete();
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -287,7 +324,12 @@ class DatabaseAdapter implements FilesystemAdapter,
         try {
             return $this->connection()->transaction($callback);
         } catch (Throwable $e) {
-            throw new DatabaseAdapterException($e->getMessage(), $e->getCode(), $e);
+            $code = $e->getCode();
+            if (!is_int($code)) {
+                $code = 0;
+            }
+
+            throw new DatabaseAdapterException($e->getMessage(), $code, $e);
         }
     }
 
@@ -341,6 +383,68 @@ class DatabaseAdapter implements FilesystemAdapter,
         } catch (Throwable $e) {
             throw UnableToCheckExistence::forLocation($path, $e);
         }
+    }
+
+    /**
+     * Delete all contents of given directory - nested directories and files
+     *
+     * @param string $path
+     * @param Config|null $config [optional]
+     *
+     * @return int Affected rows
+     */
+    protected function deleteDirectoryContents(string $path, Config|null $config = null): int
+    {
+        // List contents of directory
+        $list = $this->performContentsListing($path, true, $config);
+
+        // Abort if directory is empty
+        if (empty($list)) {
+            return 0;
+        }
+
+        // Process each record and save a reference to its path. When a file is
+        // encountered, then its contents hash is also saved. This will be
+        // needed for decrementing reference counts.
+        $root = $this->applyPrefix($path);
+        $recordPaths = [];
+        $fileHashes = [];
+        foreach ($list as $record) {
+            // Skip to next, if record matches requested directory
+            if ($record['path'] === $root) {
+                continue;
+            }
+
+            $recordPaths[] = $record['path'];
+
+            if ($record['type'] === RecordTypes::FILE) {
+                $fileHashes[] = $record['content_hash'];
+            }
+        }
+
+        // Deleted all nested files and directories.
+        $connection = $this->resolveConnection($config);
+        $affected = $connection
+            ->table($this->filesTable)
+            ->whereIn('path', $recordPaths)
+            ->limit(count($recordPaths))
+            ->delete();
+
+        if ($affected === 0) {
+            return 0;
+        }
+
+        // Mass-decrement reference counters in file contents records.
+        $connection
+            ->table($this->contentsTable)
+            ->whereIn('hash', $fileHashes)
+            ->limit(count($fileHashes))
+            ->decrement('reference_count');
+
+        // Finally, run cleanup
+        $this->cleanupFileContents($config);
+
+        return $affected;
     }
 
     /**
