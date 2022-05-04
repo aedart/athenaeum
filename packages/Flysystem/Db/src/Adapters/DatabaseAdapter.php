@@ -3,7 +3,11 @@
 namespace Aedart\Flysystem\Db\Adapters;
 
 use Aedart\Contracts\Support\Helpers\Database\DbAware;
+use Aedart\Flysystem\Db\Adapters\Concerns;
+use Aedart\Flysystem\Db\Exceptions\ConnectionException;
+use Aedart\Flysystem\Db\Exceptions\DatabaseAdapterException;
 use Aedart\Support\Helpers\Database\DbTrait;
+use Illuminate\Database\ConnectionInterface;
 use League\Flysystem\Config;
 use League\Flysystem\FileAttributes;
 use League\Flysystem\FilesystemAdapter;
@@ -18,6 +22,7 @@ use League\Flysystem\UnableToMoveFile;
 use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\UnableToWriteFile;
+use Throwable;
 
 /**
  * Database Adapter
@@ -28,7 +33,30 @@ use League\Flysystem\UnableToWriteFile;
 class DatabaseAdapter implements FilesystemAdapter,
     DbAware
 {
+    use Concerns\ExtraMetaData;
+    use Concerns\PathPrefixing;
+    use Concerns\Streams;
+    use Concerns\Timestamps;
+    use Concerns\Visibility;
     use DbTrait;
+
+    /**
+     * Creates a new database adapter instance
+     *
+     * @param string $filesTable
+     * @param string $contentsTable
+     * @param ConnectionInterface|null $connection [optional]
+     */
+    public function __construct(
+        protected string $filesTable,
+        protected string $contentsTable,
+        ConnectionInterface|null $connection = null,
+    )
+    {
+        $this
+            ->setDb($connection)
+            ->setPathPrefix('');
+    }
 
     /**
      * @inheritDoc
@@ -166,8 +194,42 @@ class DatabaseAdapter implements FilesystemAdapter,
         // TODO: Implement copy() method.
     }
 
+    /**
+     * Get the established database connection
+     *
+     * @return ConnectionInterface
+     *
+     * @throws ConnectionException
+     */
+    public function connection(): ConnectionInterface
+    {
+        $connection = $this->getDb();
+        if (!isset($connection)) {
+            throw new ConnectionException('Database connection could not be resolved. Please check your configuration.');
+        }
+
+        return $connection;
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
 
+    /**
+     * Execute callback within a transaction.
+     *
+     * @param callable $callback
+     *
+     * @return mixed
+     *
+     * @throws DatabaseAdapterException
+     */
+    protected function transaction(callable $callback): mixed
+    {
+        try {
+            return $this->connection()->transaction($callback);
+        } catch (Throwable $e) {
+            throw new DatabaseAdapterException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
 }
