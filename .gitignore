@@ -16,6 +16,7 @@ package-lock.json
 
 # Ignore internal todo-list
 .todo.md
+tmp.php
 
 # Ignore various environment files in root directory
 .env
