@@ -2,11 +2,17 @@
 
 namespace Aedart\Tests\TestCases\Flysystem\Db;
 
+use Aedart\Contracts\Flysystem\Db\RecordTypes;
+use Aedart\Flysystem\Db\Adapters\DatabaseAdapter;
 use Aedart\Flysystem\Db\Providers\FlysystemDatabaseAdapterServiceProvider;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Tests\TestCases\Flysystem\FlysystemTestCase;
 use Codeception\Configuration;
-use Tests\Integration\Packages\Filesystem\AdapterTestCase;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use League\Flysystem\Filesystem;
+use League\Flysystem\FilesystemInterface;
+use League\Flysystem\FilesystemOperator;
 
 /**
  * Flysystem Db Test Case
@@ -142,5 +148,59 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
     public function outputDir(): string
     {
         return Configuration::outputDir() . 'flysystem/db';
+    }
+
+    /**
+     * Creates a new filesystem instance, using the database adapter
+     *
+     * @param string $pathPrefix [optional]
+     *
+     * @return FilesystemOperator
+     */
+    public function filesystem(string $pathPrefix = ''): FilesystemOperator
+    {
+        $adapter = new DatabaseAdapter('files', 'file_contents', null);
+        $adapter
+            ->setPathPrefix($pathPrefix);
+
+        return new Filesystem($adapter);
+    }
+
+    /**
+     * Fetch all file records
+     *
+     * @return Collection
+     */
+    public function fetchAllFiles(): Collection
+    {
+        return DB::table('files')
+            ->select()
+            ->where('type', RecordTypes::FILE)
+            ->get();
+    }
+
+    /**
+     * Fetch all directory records
+     *
+     * @return Collection
+     */
+    public function fetchAllDirectories(): Collection
+    {
+        return DB::table('files')
+            ->select()
+            ->where('type', RecordTypes::DIRECTORY)
+            ->get();
+    }
+
+    /**
+     * Fetch all file contents records
+     *
+     * @return Collection
+     */
+    public function fetchAllFileContents(): Collection
+    {
+        return DB::table('file_contents')
+            ->select()
+            ->get();
     }
 }
