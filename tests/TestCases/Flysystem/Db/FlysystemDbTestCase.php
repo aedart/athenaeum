@@ -23,6 +23,13 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
      */
     public const MAKE_MIGRATION_CMD = 'flysystem:make-adapter-migration';
 
+    /**
+     * State whether migrations should be installed or not
+     *
+     * @var bool
+     */
+    protected bool $installAdapterMigrations = true;
+
     /*****************************************************************
      * Setup
      ****************************************************************/
@@ -42,7 +49,9 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
         $fs->cleanDirectory($outputDir);
 
         // Run migrations
-        $this->installFilesystemMigrations();
+        if ($this->installAdapterMigrations) {
+            $this->installFilesystemMigrations();
+        }
     }
 
     /**

@@ -19,6 +19,13 @@ use Aedart\Utils\Str;
 class MakeAdapterMigrationCommandTest extends FlysystemDbTestCase
 {
     /**
+     * State whether migrations should be installed or not
+     *
+     * @var bool
+     */
+    protected bool $installAdapterMigrations = false;
+
+    /**
      * @test
      *
      * @return void
