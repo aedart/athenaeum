@@ -10,11 +10,13 @@ use Aedart\Flysystem\Db\Exceptions\DatabaseAdapterException;
 use Aedart\Support\Helpers\Database\DbTrait;
 use Aedart\Utils\Str;
 use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\Query\Builder;
 use League\Flysystem\Config;
 use League\Flysystem\FileAttributes;
 use League\Flysystem\FilesystemAdapter;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\InvalidVisibilityProvided;
+use League\Flysystem\StorageAttributes;
 use League\Flysystem\UnableToCheckExistence;
 use League\Flysystem\UnableToCopyFile;
 use League\Flysystem\UnableToCreateDirectory;
@@ -39,6 +41,7 @@ class DatabaseAdapter implements FilesystemAdapter,
 {
     use Concerns\ExtraMetaData;
     use Concerns\PathPrefixing;
+    use Concerns\StorageAttributes;
     use Concerns\Streams;
     use Concerns\Timestamps;
     use Concerns\Visibility;
@@ -230,7 +233,7 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function listContents(string $path, bool $deep): iterable
     {
-        // TODO: Implement listContents() method.
+        return $this->performContentsListing($path, $deep);
     }
 
     /**
@@ -337,6 +340,69 @@ class DatabaseAdapter implements FilesystemAdapter,
             return $result->first();
         } catch (Throwable $e) {
             throw UnableToCheckExistence::forLocation($path, $e);
+        }
+    }
+
+    /**
+     * Perform contents listing for given directory, using specified connection
+     *
+     * @param string $directory [optional]
+     * @param bool $deep [optional]
+     * @param Config|null $config [optional]
+     *
+     * @return iterable<StorageAttributes>
+     */
+    protected function performContentsListing(
+        string $directory = '',
+        bool $deep = false,
+        Config|null $config = null
+    ): iterable
+    {
+        try {
+            $connection = $this->resolveConnection($config);
+
+            $path = $this->applyPrefix($directory);
+
+            // TODO: Future perspective; create custom iterator that can paginate
+            // TODO: through results, so that very large "storage disks" can be handled!
+
+            $result = $connection
+                ->table($this->filesTable)
+                ->select()
+                ->when(!empty($path), function(Builder $query) use($path, $deep) {
+                    $query->where(function(Builder $query) use($path) {
+                        $query
+                            ->where('path', '=', $path)
+                            ->orWhere('path', 'LIKE', "{$path}%");
+                    })
+
+                    // When deep listing requested
+                    ->when($deep, function(Builder $query) use($path) {
+                        $query->where('level', '>=', $this->directoryLevel($path) + 1);
+                    }, function(Builder $query) use($path) {
+                        // Otherwise...
+                        $query->where('level', $this->directoryLevel($path) + 1);
+                    });
+
+                }, function(Builder $query) use($deep) {
+                    $query->when(!$deep, function(Builder $query) {
+                        // When no directory is requested ~ root level, ensure that we only list
+                        // those placed at level 0 when "deep" isn't requested
+                        $query->where('level', 0);
+                    });
+                })
+                ->get();
+
+            if ($result->isEmpty()) {
+                return [];
+            }
+
+            $records = $result->getIterator();
+            foreach ($records as $record){
+                yield $this->normaliseRecord($record);
+            }
+        } catch (Throwable $e) {
+            throw new DatabaseAdapterException(sprintf('Contents listing failed for: %s', $directory), $e->getCode(), $e);
         }
     }
 
