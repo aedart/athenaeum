@@ -6,6 +6,7 @@ use Aedart\Flysystem\Db\Providers\FlysystemDatabaseAdapterServiceProvider;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Tests\TestCases\Flysystem\FlysystemTestCase;
 use Codeception\Configuration;
+use Tests\Integration\Packages\Filesystem\AdapterTestCase;
 
 /**
  * Flysystem Db Test Case
@@ -33,11 +34,35 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
     {
         parent::_before();
 
+        // Clean some directories
         $fs = $this->getFile();
         $outputDir = $this->outputDir();
 
         $fs->ensureDirectoryExists($outputDir);
         $fs->cleanDirectory($outputDir);
+
+        // Run migrations
+        $this->installFilesystemMigrations();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function _after()
+    {
+        parent::_after();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getEnvironmentSetUp($app)
+    {
+        // For these tests we will run against a sqlite in-memory database,
+        // so that we can safely clean up everything afterwards.
+        // NOTE: Configuration from orchestra test bench-core is used here!
+        $app['config']->set('database.default', 'testing');
+        $app['config']->set('database.connections.testing.foreign_key_constraints', true);
     }
 
     /**
@@ -50,9 +75,40 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
         ];
     }
 
+    /**
+     * Runs the database migrations for the filesystem package
+     *
+     * @return self
+     */
+    public function installFilesystemMigrations(): self
+    {
+        // Install default migrations
+        $this->loadLaravelMigrations();
+
+        // Install custom migrations
+        $this->loadMigrationsFrom(
+            [
+                '--path' => $this->migrations(),
+                '--realpath' => true
+            ]
+        );
+
+        return $this;
+    }
+
     /*****************************************************************
      * Helpers
      ****************************************************************/
+
+    /**
+     * Returns paths to where database migrations are located
+     *
+     * @return string
+     */
+    public function migrations(): string
+    {
+        return Configuration::dataDir() . 'flysystem/db/migrations';
+    }
 
     /**
      * Returns relative path to migrations directory
