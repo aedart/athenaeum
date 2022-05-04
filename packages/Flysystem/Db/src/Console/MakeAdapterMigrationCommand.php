@@ -20,8 +20,8 @@ class MakeAdapterMigrationCommand extends Command
      * @var string
      */
     protected $signature = 'flysystem:make-adapter-migration
-                            {--t|type= : The type of database adapter to create migrations for. Accepts "default" or "deduplicate".}
-                            {--name= : Name of the table to hold files.}
+                            {--files-table= : Name of the "files" table to hold files.}
+                            {--contents-table= : Name of the "files" table to hold files.}
                             {--path= : Path to where migration file must be created (Relative to project root). Defaults to Laravel\'s default migrations directory}
     ';
 
@@ -33,16 +33,6 @@ class MakeAdapterMigrationCommand extends Command
     protected $description = 'Creates a new migration file for a Flysystem database adapter';
 
     /**
-     * Allowed adapter types
-     *
-     * @var string[]
-     */
-    protected array $allowedAdapterTypes = [
-        'default',
-        'deduplicate'
-    ];
-
-    /**
      * Executes console command
      *
      * @return void
@@ -51,13 +41,18 @@ class MakeAdapterMigrationCommand extends Command
     {
         $this->output->title('Create new database adapter migration file');
 
-        // Resolve type, name... etc
-        $type = $this->resolveAdapterType();
-        $table = $this->resolveTableName();
+        // Resolve table names
+        $filesTable = $this->resolveFilesTableName();
+        $contentsTable = $this->resolveContentsTableName();
+        if ($filesTable == $contentsTable){
+            Throw new InvalidArgumentException(sprintf('"Files" and "contents" table names the same (%s == %s). Unable to create migration file!', $filesTable, $contentsTable));
+        }
 
         // Write migration file
-        $this->writeMigrationFile($type, $table, [
-            'table' => $table,
+        $type = 'default';
+        $this->writeMigrationFile($type, $filesTable, [
+            'files_table' => $filesTable,
+            'contents_table' => $contentsTable,
         ]);
 
         // Done...
@@ -73,9 +68,9 @@ Please add appropriate storage disk profile, in your `config/filesystems.php` co
     'database' => [
         'driver' => 'database',
         'connection' => env('DB_CONNECTION', 'mysql'),
-        'files_table' => '{$table}',
+        'files-table' => '{$filesTable}',
+        'contents-table' => '{$contentsTable}',
         'path_prefix' => '',
-        'throw_exceptions' => (bool) env('APP_DEBUG', false),
     ]
 ],
 EOF,
@@ -89,38 +84,39 @@ EOF,
      ****************************************************************/
 
     /**
-     * Resolves the database adapter type
+     * Resolve the "files" table name
      *
      * @return string
      *
      * @throws InvalidArgumentException
      */
-    protected function resolveAdapterType(): string
+    protected function resolveFilesTableName(): string
     {
-        // Obtain type or ask for it
-        $type = $this->option('type');
-        if (!isset($type)) {
-            $type = $this->choice('Type of database adapter?', $this->allowedAdapterTypes, 0);
-        }
-
-        $type = strtolower(trim($type));
-
-        // Ensure type is supported
-        if (!in_array($type, $this->allowedAdapterTypes)) {
-            throw new InvalidArgumentException(sprintf('Invalid adapter type. Accepted types are: %s', implode(', ', $this->allowedAdapterTypes)));
-        }
-
-        return $type;
+        return $this->resolveTableName('files-table', 'Name of "files" table?');
     }
 
     /**
-     * Resolve the table name
+     * Resolve the "files contents" table name
      *
      * @return string
      *
      * @throws InvalidArgumentException
      */
-    protected function resolveTableName(): string
+    protected function resolveContentsTableName(): string
+    {
+        return $this->resolveTableName('contents-table', 'Name of "files" table?');
+    }
+
+    /**
+     * Resolves a table name for given console argument
+     *
+     * @param string $argument Name of console argument
+     * @param string $question [optional]
+     * @param string|null $default [optional] Default value
+     *
+     * @return string
+     */
+    protected function resolveTableName(string $argument, string $question = 'Table name?', string|null $default = null): string
     {
         $validation = function($answer) {
             if (!preg_match('/^[a-zA-Z_][a-zA-Z\p{N}_]{0,127}$/', $answer)) {
@@ -130,10 +126,10 @@ EOF,
             return $answer;
         };
 
-        // Obtain table name or ask for it
-        $name = $this->option('name');
+        // Obtain argument (table name) or ask for it
+        $name = $this->option($argument);
         if (!isset($name)) {
-            $name = $this->output->ask('Table name?', null, $validation);
+            $name = $this->output->ask($question, $default, $validation);
         }
 
         // (Re)validate table name, when provided as option.

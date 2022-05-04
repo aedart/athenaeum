@@ -43,8 +43,8 @@ class MakeAdapterMigrationCommandTest extends FlysystemDbTestCase
     {
         $this
             ->artisan(self::MAKE_MIGRATION_CMD, [
-                '--type' => 'default',
-                '--name' => 'files',
+                '--files-table' => 'files',
+                '--contents-table' => 'files_contents',
                 '--path' => $this->migrationsPath()
             ])
             ->assertSuccessful();

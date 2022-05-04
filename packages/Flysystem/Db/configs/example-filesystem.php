@@ -21,7 +21,8 @@ return [
         'database' => [
             'driver' => 'database',
             'connection' => env('DB_CONNECTION', 'mysql'),
-            'table' => 'files',
+            'files-table' => 'files',
+            'contents-table' => 'files_contents',
             'path_prefix' => '',
         ]
     ],
