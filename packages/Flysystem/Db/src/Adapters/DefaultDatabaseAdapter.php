@@ -23,6 +23,8 @@ use RuntimeException;
 use Throwable;
 
 /**
+ * @deprecated 
+ *
  * Default Database Adapter
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>

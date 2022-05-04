@@ -28,6 +28,8 @@ use stdClass;
 use Throwable;
 
 /**
+ * @deprecated
+ *
  * Base Adapter
  *
  * Abstraction for database adapters
