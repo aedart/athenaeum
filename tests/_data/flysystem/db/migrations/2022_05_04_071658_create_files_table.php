@@ -21,7 +21,7 @@ return new class extends Migration
      *
      * @var string
      */
-    protected string $contentsTable = 'files_contents';
+    protected string $contentsTable = 'file_contents';
 
     /**
      * Run the migrations.
