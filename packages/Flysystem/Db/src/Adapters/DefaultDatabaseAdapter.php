@@ -23,7 +23,7 @@ use RuntimeException;
 use Throwable;
 
 /**
- * @deprecated 
+ * @deprecated
  *
  * Default Database Adapter
  *
