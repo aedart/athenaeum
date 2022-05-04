@@ -11,6 +11,7 @@ use Codeception\Configuration;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use League\Flysystem\Filesystem;
+use League\Flysystem\FilesystemException;
 use League\Flysystem\FilesystemInterface;
 use League\Flysystem\FilesystemOperator;
 
@@ -202,5 +203,24 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
         return DB::table('file_contents')
             ->select()
             ->get();
+    }
+
+    /**
+     * Creates given list of directories
+     *
+     * @param array $directories
+     * @param string $pathPrefix [optional]
+     *
+     * @return void
+     *
+     * @throws FilesystemException
+     */
+    public function createDirectories(array $directories, string $pathPrefix = ''): void
+    {
+        $fs = $this->filesystem($pathPrefix);
+
+        foreach ($directories as $directory) {
+            $fs->createDirectory($directory);
+        }
     }
 }
