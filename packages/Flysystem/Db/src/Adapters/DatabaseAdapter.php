@@ -624,9 +624,11 @@ class DatabaseAdapter implements FilesystemAdapter,
         $affected = $this
             ->resolveConnection($config)
             ->table($this->contentsTable)
-            ->upsert([
-                $record
-            ], [ 'hash' ], [ 'reference_count' => $this->makeIncrementExpression(1, $config) ]);
+            ->upsert(
+                values: [ $record ],
+                uniqueBy: [ 'hash' ],
+                update: [ 'reference_count' => $this->makeIncrementExpression(1, $config) ]
+            );
 
         if ($affected === 0) {
             return [];
