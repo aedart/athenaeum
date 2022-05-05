@@ -27,4 +27,16 @@ trait Visibility
             $config->get(Config::OPTION_DIRECTORY_VISIBILITY, VisibilityInterface::PRIVATE)
         );
     }
+
+    /**
+     * Resolves file visibility, when writing to table record
+     *
+     * @param Config $config
+     *
+     * @return string
+     */
+    protected function resolveFileVisibility(Config $config): string
+    {
+        return $config->get(Config::OPTION_VISIBILITY, VisibilityInterface::PRIVATE);
+    }
 }
