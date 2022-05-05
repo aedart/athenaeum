@@ -558,8 +558,8 @@ class DatabaseAdapter implements FilesystemAdapter,
 
             $path = $this->applyPrefix($directory);
 
-            // TODO: Future perspective; create custom iterator that can paginate
-            // TODO: through results, so that very large "storage disks" can be handled!
+            // FUTURE PERSPECTIVE: Create a custom iterator that automatically paginates
+            // through available results, to better support "large disks".
 
             $result = $connection
                 ->table($this->filesTable)
