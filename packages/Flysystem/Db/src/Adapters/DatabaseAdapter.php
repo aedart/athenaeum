@@ -76,7 +76,9 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function fileExists(string $path): bool
     {
-        // TODO: Implement fileExists() method.
+        $file = $this->fetchFile($path, false);
+
+        return isset($file);
     }
 
     /**
@@ -84,9 +86,9 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function directoryExists(string $path): bool
     {
-        $dir = $this->fetchDirectory($path);
+        $directory = $this->fetchDirectory($path);
 
-        return isset($dir);
+        return isset($directory);
     }
 
     /**
@@ -401,7 +403,7 @@ class DatabaseAdapter implements FilesystemAdapter,
     }
 
     /**
-     * Fetch a directory record from given table that matches given path
+     * Fetch a directory record that matches given path
      *
      * @param string $path
      * @param Config|null $config [optional]
@@ -420,6 +422,47 @@ class DatabaseAdapter implements FilesystemAdapter,
                 ->select()
                 ->where('path', $this->applyPrefix($path))
                 ->where('type', RecordTypes::DIRECTORY)
+                ->limit(1)
+                ->get();
+
+            if ($result->isEmpty()) {
+                return null;
+            }
+
+            return $result->first();
+        } catch (Throwable $e) {
+            throw UnableToCheckExistence::forLocation($path, $e);
+        }
+    }
+
+    /**
+     * Fetch a file record that matches given path
+     *
+     * @param string $path
+     * @param bool $withContents [optional] When true, then file's content is included in output.
+     * @param Config|null $config [optional]
+     *
+     * @return stdClass|null
+     */
+    protected function fetchFile(string $path, bool $withContents = true, Config|null $config = null): stdClass|null
+    {
+        try {
+            $connection = $this->resolveConnection($config);
+
+            $files = $this->filesTable;
+            $contents = $this->contentsTable;
+
+            $result = $connection
+                ->table($files)
+                ->select()
+
+                // Join with contents table, if requested
+                ->when($withContents, function (Builder $query) use ($files, $contents) {
+                    $query->join($contents, "{$files}.content_hash", '=', "{$contents}.hash");
+                })
+
+                ->where("{$files}.path", $this->applyPrefix($path))
+                ->where('type', RecordTypes::FILE)
                 ->limit(1)
                 ->get();
 
