@@ -434,7 +434,7 @@ class DatabaseAdapter implements FilesystemAdapter,
             return 0;
         }
 
-        // Mass-decrement reference counters in file contents records.
+        // Mass-decrement "reference count" in file content records.
         $connection
             ->table($this->contentsTable)
             ->whereIn('hash', $fileHashes)
