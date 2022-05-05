@@ -3,6 +3,9 @@
 namespace Aedart\Flysystem\Db\Adapters;
 
 use Aedart\Contracts\Flysystem\Db\RecordTypes;
+use Aedart\Contracts\MimeTypes\Exceptions\MimeTypeDetectionException;
+use Aedart\Contracts\Streams\Exceptions\StreamException;
+use Aedart\Contracts\Streams\FileStream;
 use Aedart\Contracts\Support\Helpers\Database\DbAware;
 use Aedart\Flysystem\Db\Adapters\Concerns;
 use Aedart\Flysystem\Db\Exceptions\ConnectionException;
@@ -39,7 +42,10 @@ use Throwable;
 class DatabaseAdapter implements FilesystemAdapter,
     DbAware
 {
+    use Concerns\Deduplication;
     use Concerns\ExtraMetaData;
+    use Concerns\Hashing;
+    use Concerns\MimeTypes;
     use Concerns\PathPrefixing;
     use Concerns\StorageAttributes;
     use Concerns\Streams;
@@ -88,7 +94,17 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function write(string $path, string $contents, Config $config): void
     {
-        // TODO: Implement write() method.
+        try {
+            $stream = $this
+                ->openTemporaryStream(
+                    $this->resolveMaxMemory($config)
+                )
+                ->put($contents);
+
+            $this->writeStream($path, $stream->detach(), $config);
+        } catch (Throwable $e) {
+            throw UnableToWriteFile::atLocation($path, $e->getMessage(), $e);
+        }
     }
 
     /**
@@ -96,7 +112,39 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function writeStream(string $path, $contents, Config $config): void
     {
-        // TODO: Implement writeStream() method.
+        try {
+            // Ensure directory is created for given file path.
+            $this->createDirectory(dirname($path), $config);
+
+            $this->transaction(function(ConnectionInterface $connection) use($path, $contents, $config) {
+                // Wrap resource into stream and rewind. This will automatically
+                // fail if stream is not seekable.
+                $stream = $this
+                    ->openStreamFrom($contents)
+                    ->positionToStart();
+
+                // Insert new "file" record
+                $record = $this->prepareFileRecord($path, $stream, $config);
+                $created = $connection
+                    ->table($this->filesTable)
+                    ->insert($record);
+
+                if ($created === false) {
+                    throw new RuntimeException(sprintf('File (%s) was not inserted in database. Please check database connection and permissions', $path));
+                }
+
+                // Insert new "contents" record. Set the "content hash" in config, to avoid
+                // re-hashing of file content.
+                $config = $config->extend([
+                    'hash' => $config->get('hash', $record['content_hash'])
+                ]);
+
+                $this->insertContentsRecord($path, $stream, $config);
+            });
+
+        } catch (Throwable $e) {
+            throw UnableToWriteFile::atLocation($path, $e->getMessage(), $e);
+        }
     }
 
     /**
@@ -508,6 +556,128 @@ class DatabaseAdapter implements FilesystemAdapter,
         } catch (Throwable $e) {
             throw new DatabaseAdapterException(sprintf('Contents listing failed for: %s', $directory), $e->getCode(), $e);
         }
+    }
+
+    /**
+     * Inserts a new file contents record
+     *
+     * @param string $path
+     * @param $stream
+     * @param Config $config
+     *
+     * @return array
+     *
+     * @throws StreamException
+     */
+    protected function insertContentsRecord(string $path, $stream, Config $config): array
+    {
+        // Prepare the file contents record
+        $record = $this->prepareContentsRecord($path, $stream, $config);
+
+        // Create new file content record or update existing. When a file content already exists,
+        // then its "reference count" is simply increased with +1. The "content hash" is used as
+        // unique identifier to determine if file content already exists or not (deduplication).
+        // @see https://en.wikipedia.org/wiki/Data_deduplication
+        $affected = $this
+            ->resolveConnection($config)
+            ->table($this->contentsTable)
+            ->upsert([
+                $record
+            ], [ 'hash' ], [ 'reference_count' => $this->makeIncrementExpression(1, $config) ]);
+
+        if ($affected === 0) {
+            return [];
+        }
+
+        // Unset the "reference count" property because it will most likely not
+        // be correct. A database query is required to obtain the resulting value.
+        unset($record['reference_count']);
+
+        // Finally, return record
+        return $record;
+    }
+
+    /**
+     * Prepares a new "file" record to be inserted into database table
+     *
+     * @param string $path
+     * @param FileStream $stream
+     * @param Config $config
+     * @return array
+     *
+     * @throws MimeTypeDetectionException
+     * @throws StreamException
+     * @throws \JsonException
+     */
+    protected function prepareFileRecord(string $path, FileStream $stream, Config $config): array
+    {
+        return [
+            'type' => RecordTypes::FILE,
+            'path' => $this->applyPrefix($path),
+            'level' => $this->directoryLevel($path),
+            'file_size' => $stream->getSize(),
+            'mime_type' => $this->resolveMimeType($stream, $config),
+            'visibility' => $this->resolveFileVisibility($config),
+            'content_hash' => $this->resolveContentHash($stream, $config),
+            'last_modified' => $this->resolveLastModifiedTimestamp($config),
+            'extra_metadata' => $this->resolveExtraMetaData($config)
+        ];
+    }
+
+    /**
+     * Prepares a new "file contents" record to be inserted into database table
+     *
+     * @param string $path
+     * @param FileStream $stream
+     * @param Config $config
+     *
+     * @return array
+     *
+     * @throws StreamException
+     */
+    protected function prepareContentsRecord(string $path, FileStream $stream, Config $config): array
+    {
+        // Note: path is not used here, but it is kept to allow eventual customisation / extended
+        // versions of this adapter!
+
+        return [
+            'hash' => $this->resolveContentHash($stream, $config),
+
+            // Initial reference count. This is ONLY valid when inserting a new
+            // record. It must be updated when existing record is updated.
+            'reference_count' => 1,
+
+            // Database driver should automatically deal with "resource".
+            // Alternatively, the resource should be converted to a string, but
+            // that COULD increase memory consumption a lot (depending on filesize).
+            'contents' => $stream
+                ->positionToStart()
+                ->resource()
+        ];
+    }
+
+    /**
+     * Returns a new "increment reference count" query expression
+     *
+     * @param int $amount [optional]
+     * @param Config|null $config [optional]
+     *
+     * @return mixed
+     */
+    protected function makeIncrementExpression(int $amount = 1, Config|null $config = null): mixed
+    {
+        $config = $config ?? new Config();
+        $connection = $this->resolveConnection($config);
+
+        $table = $this->contentsTable;
+        $query = $connection
+            ->table($table);
+
+        $wrapped = $query
+            ->getGrammar()
+            ->wrap("{$table}.reference_count");
+
+        return $query->raw("{$wrapped} + {$amount}");
     }
 
     /**
