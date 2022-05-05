@@ -154,7 +154,23 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function read(string $path): string
     {
-        // TODO: Implement read() method.
+        try {
+            $resource = $this->readStream($path);
+
+            $content = stream_get_contents($resource);
+            if ($content === false) {
+                throw new RuntimeException('Unable to read file contents');
+            }
+
+            $wasClosed = fclose($resource);
+            if (!$wasClosed) {
+                throw new RuntimeException('Failed to close file contents stream.');
+            }
+
+            return $content;
+        } catch (Throwable $e) {
+            throw UnableToReadFile::fromLocation($path, $e->getMessage(), $e);
+        }
     }
 
     /**
@@ -162,7 +178,26 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function readStream(string $path)
     {
-        // TODO: Implement readStream() method.
+        try {
+            $file = $this->fetchFile($path, true);
+
+            // Depending on database and PDO driver, contents could be a resource
+            // or a string. In any case, we need to respect Flysystem's interface
+            // and return a resource.
+            $contents = $file->contents;
+            if (is_resource($contents)) {
+                return $contents;
+            }
+
+            return $this
+                ->openMemoryStream()
+                ->put($contents)
+                ->positionToStart()
+                ->detach();
+
+        } catch (Throwable $e) {
+            throw UnableToReadFile::fromLocation($path, $e->getMessage(), $e);
+        }
     }
 
     /**
@@ -458,6 +493,9 @@ class DatabaseAdapter implements FilesystemAdapter,
 
                 // Join with contents table, if requested
                 ->when($withContents, function (Builder $query) use ($files, $contents) {
+                    // TODO: Select / Bind PDO::PARAM_LOB for file content, when requested.
+                    // TODO: @see https://www.php.net/manual/en/pdo.lobs.php
+
                     $query->join($contents, "{$files}.content_hash", '=', "{$contents}.hash");
                 })
 
