@@ -477,6 +477,8 @@ class DatabaseAdapter implements FilesystemAdapter,
 
             if (is_resource($contents)) {
                 $this->writeStream($destination, $contents, $config);
+                
+                fclose($contents);
             } else {
                 $this->write($destination, $contents, $config);
             }
