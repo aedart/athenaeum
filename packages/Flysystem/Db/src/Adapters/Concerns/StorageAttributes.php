@@ -55,6 +55,8 @@ trait StorageAttributes
     protected function makeFileAttribute(array $record): FlysystemStorageAttributes
     {
         $meta = $this->decodeExtraMetaData($record['extra_metadata']);
+        $meta['level'] = $record['level'];
+        $meta['hash'] = $record['content_hash'];
 
         return FileAttributes::fromArray([
             FlysystemStorageAttributes::ATTRIBUTE_PATH => $this->stripPrefix($record['path']),
