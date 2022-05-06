@@ -212,11 +212,14 @@ class DatabaseAdapter implements FilesystemAdapter,
 
             $this->transaction(function(ConnectionInterface $connection) use($path) {
 
+                // Create new configuration to pass connection into on...
+                $config = new Config([
+                    'connection' => $connection
+                ]);
+
                 // Obtain existing file record, so that we can use it the "content hash"
                 // to identify the contents record and decrease reference count.
-                $record = $this->fetchFile($path, false, new Config([
-                    'connection' => $connection
-                ]));
+                $record = $this->fetchFile($path, false, $config);
 
                 // Remove file record
                 $removed = $connection
@@ -229,8 +232,9 @@ class DatabaseAdapter implements FilesystemAdapter,
                     throw new RuntimeException('File record was not removed from database');
                 }
 
-                // TODO: Decrement ref_count
-                // TODO: Run cleanup
+                // Decrement reference count for file contents and cleanup...
+                $this->decrementReferenceCount($record->content_hash, $config);
+                $this->cleanupFileContents($config);
             });
 
         } catch (Throwable $e) {
@@ -405,7 +409,7 @@ class DatabaseAdapter implements FilesystemAdapter,
      * Cleanup file contents
      *
      * Method deletes all file contents records that have 0 or fewer
-     * references.
+     * in their `reference_count`.
      *
      * @param Config|null $config [optional]
      *
@@ -791,6 +795,25 @@ class DatabaseAdapter implements FilesystemAdapter,
             ->wrap("{$table}.reference_count");
 
         return $query->raw("{$wrapped} + {$amount}");
+    }
+
+    /**
+     * Decrement reference count in file contents record
+     *
+     * @param string $hash
+     * @param Config|null $config [optional]
+     *
+     * @return int Affected rows
+     */
+    protected function decrementReferenceCount(string $hash, Config|null $config = null): int
+    {
+        $connection = $this->resolveConnection($config);
+
+        return $connection
+            ->table($this->contentsTable)
+            ->where('hash', $hash)
+            ->limit(1)
+            ->decrement('reference_count');
     }
 
     /**
