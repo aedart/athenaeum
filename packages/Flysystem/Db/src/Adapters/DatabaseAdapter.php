@@ -3,6 +3,7 @@
 namespace Aedart\Flysystem\Db\Adapters;
 
 use Aedart\Contracts\Flysystem\Db\RecordTypes;
+use Aedart\Contracts\Flysystem\Visibility;
 use Aedart\Contracts\MimeTypes\Exceptions\MimeTypeDetectionException;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\FileStream;
@@ -329,7 +330,32 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function setVisibility(string $path, string $visibility): void
     {
-        // TODO: Implement setVisibility() method.
+        if (!in_array($visibility, Visibility::ALLOWED)) {
+            throw InvalidVisibilityProvided::withVisibility($visibility, implode('or ', Visibility::ALLOWED));
+        }
+
+        try {
+            $path = $this->applyPrefix($path);
+
+            $affected = $this
+                ->resolveConnection()
+                ->table($this->filesTable)
+                ->where('path', $path)
+                ->limit(1)
+                ->update([ 'visibility' => $visibility ]);
+
+            if ($affected === 0) {
+                throw new RuntimeException(sprintf('Visibility was not changed. Unable to find file or directory: %s', $path));
+            }
+
+        } catch (Throwable $e) {
+            $code = $e->getCode();
+            if (!is_int($code)) {
+                $code = 0;
+            }
+
+            throw new DatabaseAdapterException($e->getMessage(), $code, $e);
+        }
     }
 
     /**
@@ -337,7 +363,11 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function visibility(string $path): FileAttributes
     {
-        // TODO: Implement visibility() method.
+        try {
+            return $this->getFileMeta($path);
+        } catch (Throwable $e) {
+            throw UnableToRetrieveMetadata::visibility($path, $e->getMessage(), $e);
+        }
     }
 
     /**
@@ -345,7 +375,11 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function mimeType(string $path): FileAttributes
     {
-        // TODO: Implement mimeType() method.
+        try {
+            return $this->getFileMeta($path);
+        } catch (Throwable $e) {
+            throw UnableToRetrieveMetadata::mimeType($path, $e->getMessage(), $e);
+        }
     }
 
     /**
@@ -353,7 +387,11 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function lastModified(string $path): FileAttributes
     {
-        // TODO: Implement lastModified() method.
+        try {
+            return $this->getFileMeta($path);
+        } catch (Throwable $e) {
+            throw UnableToRetrieveMetadata::lastModified($path, $e->getMessage(), $e);
+        }
     }
 
     /**
@@ -361,7 +399,11 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function fileSize(string $path): FileAttributes
     {
-        // TODO: Implement fileSize() method.
+        try {
+            return $this->getFileMeta($path);
+        } catch (Throwable $e) {
+            throw UnableToRetrieveMetadata::fileSize($path, $e->getMessage(), $e);
+        }
     }
 
     /**
@@ -423,6 +465,30 @@ class DatabaseAdapter implements FilesystemAdapter,
             ->table($this->contentsTable)
             ->where('reference_count', '<=', 0)
             ->delete();
+    }
+
+    /**
+     * Retrieve meta information about given file
+     *
+     * @param string $path
+     *
+     * @return FileAttributes
+     *
+     * @throws UnableToCheckExistence
+     * @throws \LogicException If record "type" is missing or unknown
+     * @throws \JsonException If record's extra meta data cannot be decoded
+     */
+    public function getFileMeta(string $path): FileAttributes
+    {
+        $record = $this->fetchFile($path, false);
+
+        if (!isset($record)) {
+            throw UnableToCheckExistence::forLocation($path);
+        }
+
+        /** @var FileAttributes $normalised */
+        $normalised = $this->normaliseRecord($record);
+        return $normalised;
     }
 
     /*****************************************************************
