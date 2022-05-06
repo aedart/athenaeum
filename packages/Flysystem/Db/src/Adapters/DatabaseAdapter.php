@@ -205,7 +205,38 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function delete(string $path): void
     {
-        // TODO: Implement delete() method.
+        if (!$this->fileExists($path)) {
+            throw UnableToDeleteFile::atLocation($path, 'File does not exist');
+        }
+
+        try {
+
+            $this->transaction(function(ConnectionInterface $connection) use($path) {
+
+                // Obtain existing file record, so that we can use it the "content hash"
+                // to identify the contents record and decrease reference count.
+                $record = $this->fetchFile($path, false, new Config([
+                    'connection' => $connection
+                ]));
+
+                // Remove file record
+                $removed = $connection
+                    ->table($this->filesTable)
+                    ->where('type', RecordTypes::FILE)
+                    ->where('path', $path)
+                    ->delete();
+
+                if ($removed === 0) {
+                    throw new RuntimeException('File record was not removed from database');
+                }
+
+                // TODO: Decrement ref_count
+                // TODO: Run cleanup
+            });
+
+        } catch (Throwable $e) {
+            throw UnableToDeleteFile::atLocation($path, $e->getMessage(), $e);
+        }
     }
 
     /**
