@@ -119,29 +119,66 @@ class DatabaseAdapter implements FilesystemAdapter,
             $this->createDirectory(dirname($path), $config);
 
             $this->transaction(function(ConnectionInterface $connection) use($path, $contents, $config) {
+                // Set connection in config, so that it can be passed further.
+                $config = $config->extend([ 'connection' => $connection ]);
+
                 // Wrap resource into stream and rewind. This will automatically
                 // fail if stream is not seekable.
                 $stream = $this
                     ->openStreamFrom($contents)
                     ->positionToStart();
 
-                // Insert new "file" record
+                // Prepare file record...
                 $record = $this->prepareFileRecord($path, $stream, $config);
-                $created = $connection
-                    ->table($this->filesTable)
-                    ->insert($record);
 
-                if ($created === false) {
-                    throw new RuntimeException(sprintf('File (%s) was not inserted in database. Please check database connection and permissions', $path));
-                }
+                // Obtain eventual existing file's meta information. This will be needed to
+                // resolve content record's `reference count`.
+                $original = $this->fetchFile($path, false, $config);
 
-                // Insert new "contents" record. Set the "content hash" in config, to avoid
-                // re-hashing of file content.
+                // Add content hash to config, so that re-hashing is avoided.
                 $config = $config->extend([
                     'hash' => $config->get('hash', $record['content_hash'])
                 ]);
 
-                $this->insertContentsRecord($path, $stream, $config);
+                // Update existing file record and its contents
+                if (isset($original)) {
+
+                    $wasUpdated = (bool) $connection
+                        ->table($this->filesTable)
+                        ->where('path', $record['path'])
+                        ->where('type', RecordTypes::FILE)
+                        ->limit(1)
+                        ->update($record);
+
+                    if (!$wasUpdated) {
+                        throw new RuntimeException(sprintf('Existing file (%s) was not updated in database. Please check database connection and permissions', $path));
+                    }
+
+                    // If the original record's content hash does not match the content hash, then previous
+                    // content record's reference count MUST be decreased and a cleaned up.
+                    if ($record['content_hash'] !== $original->content_hash) {
+                        $this->decrementReferenceCount($original->content_hash, $config);
+                        $this->cleanupFileContents();
+
+                        // Also, write the changed file contents...
+                        $this->writeFileContentRecord($path, $stream, $config);
+                    }
+
+                    // Otherwise, the file's content was not changed - We can skip any further processing
+                    return;
+                }
+
+                // Otherwise, we insert a new file record
+                $wasCreated = $connection
+                    ->table($this->filesTable)
+                    ->insert($record);
+
+                if (!$wasCreated) {
+                    throw new RuntimeException(sprintf('File (%s) was not inserted in database. Please check database connection and permissions', $path));
+                }
+
+                // Finally, write file's contents.
+                $this->writeFileContentRecord($path, $stream, $config);
             });
 
         } catch (Throwable $e) {
@@ -427,7 +464,25 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function copy(string $source, string $destination, Config $config): void
     {
-        // TODO: Implement copy() method.
+        try {
+            $record = $this->fetchFile($source, true, $config);
+            if(!isset($record)) {
+                throw UnableToReadFile::fromLocation($source, 'File does not exist');
+            }
+
+            // Write a new file on given destination. NOTE: If the file already exists,
+            // then this will overwrite it - in accordance with Flysystem's API description:
+            // @see https://flysystem.thephpleague.com/docs/usage/filesystem-api/#moving-and-copying
+            $contents = $record->contents;
+
+            if (is_resource($contents)) {
+                $this->writeStream($destination, $contents, $config);
+            } else {
+                $this->write($destination, $contents, $config);
+            }
+        } catch (Throwable $e) {
+            throw UnableToCopyFile::fromLocationTo($source, $destination, $e);
+        }
     }
 
     /**
@@ -499,15 +554,18 @@ class DatabaseAdapter implements FilesystemAdapter,
      * Execute callback within a transaction.
      *
      * @param callable $callback
+     * @param Config|null $config [optional]
      *
      * @return mixed
      *
      * @throws DatabaseAdapterException
      */
-    protected function transaction(callable $callback): mixed
+    protected function transaction(callable $callback, Config|null $config = null): mixed
     {
         try {
-            return $this->connection()->transaction($callback);
+            $connection = $this->resolveConnection($config);
+
+            return $connection->transaction($callback);
         } catch (Throwable $e) {
             $code = $e->getCode();
             if (!is_int($code)) {
@@ -740,7 +798,7 @@ class DatabaseAdapter implements FilesystemAdapter,
     }
 
     /**
-     * Inserts a new file contents record
+     * Write file contents record
      *
      * @param string $path
      * @param $stream
@@ -750,7 +808,7 @@ class DatabaseAdapter implements FilesystemAdapter,
      *
      * @throws StreamException
      */
-    protected function insertContentsRecord(string $path, $stream, Config $config): array
+    protected function writeFileContentRecord(string $path, $stream, Config $config): array
     {
         // Prepare the file contents record
         $record = $this->prepareContentsRecord($path, $stream, $config);
