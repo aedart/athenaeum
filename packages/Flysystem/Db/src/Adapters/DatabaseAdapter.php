@@ -474,7 +474,7 @@ class DatabaseAdapter implements FilesystemAdapter,
      *
      * @return FileAttributes
      *
-     * @throws UnableToCheckExistence
+     * @throws UnableToReadFile
      * @throws \LogicException If record "type" is missing or unknown
      * @throws \JsonException If record's extra meta data cannot be decoded
      */
@@ -483,7 +483,7 @@ class DatabaseAdapter implements FilesystemAdapter,
         $record = $this->fetchFile($path, false);
 
         if (!isset($record)) {
-            throw UnableToCheckExistence::forLocation($path);
+            throw UnableToReadFile::fromLocation($path, 'File does not exist');
         }
 
         /** @var FileAttributes $normalised */
