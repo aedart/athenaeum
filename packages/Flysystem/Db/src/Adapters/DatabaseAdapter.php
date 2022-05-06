@@ -42,7 +42,6 @@ use Throwable;
 class DatabaseAdapter implements FilesystemAdapter,
     DbAware
 {
-    use Concerns\Deduplication;
     use Concerns\ExtraMetaData;
     use Concerns\Hashing;
     use Concerns\MimeTypes;
