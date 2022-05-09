@@ -776,6 +776,7 @@ class DatabaseAdapter implements FilesystemAdapter,
                         $query->where('level', 0);
                     });
                 })
+                ->orderBy('path', 'asc')
                 ->get();
 
             if ($result->isEmpty()) {
