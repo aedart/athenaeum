@@ -310,6 +310,11 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function createDirectory(string $path, Config $config): void
     {
+        // Skip creating if path is root directory (empty)
+        if (empty($path) || $path === '.') {
+            return;
+        }
+
         try {
             $connection = $this->resolveConnection($config);
 
