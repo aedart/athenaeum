@@ -18,6 +18,9 @@
         "league/flysystem": "^3.0.18",
         "illuminate/console": "^v9.7.0"
     },
+    "require-dev": {
+        "league/flysystem-adapter-test-utilities": "^3.0.18"
+    },
     "autoload": {
         "psr-4": {
             "Aedart\\Flysystem\\Db\\": "src"
