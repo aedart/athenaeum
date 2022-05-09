@@ -456,7 +456,15 @@ class DatabaseAdapter implements FilesystemAdapter,
      */
     public function move(string $source, string $destination, Config $config): void
     {
-        // TODO: Implement move() method.
+        try {
+            // Copy the file
+            $this->performCopy($source, $destination, $config);
+
+            // Remove file at source location
+            $this->delete($source);
+        } catch (Throwable $e) {
+            throw UnableToMoveFile::fromLocationTo($source, $destination, $e);
+        }
     }
 
     /**
@@ -465,23 +473,7 @@ class DatabaseAdapter implements FilesystemAdapter,
     public function copy(string $source, string $destination, Config $config): void
     {
         try {
-            $record = $this->fetchFile($source, true, $config);
-            if(!isset($record)) {
-                throw UnableToReadFile::fromLocation($source, 'File does not exist');
-            }
-
-            // Write a new file on given destination. NOTE: If the file already exists,
-            // then this will overwrite it - in accordance with Flysystem's API description:
-            // @see https://flysystem.thephpleague.com/docs/usage/filesystem-api/#moving-and-copying
-            $contents = $record->contents;
-
-            if (is_resource($contents)) {
-                $this->writeStream($destination, $contents, $config);
-                
-                fclose($contents);
-            } else {
-                $this->write($destination, $contents, $config);
-            }
+            $this->performCopy($source, $destination, $config);
         } catch (Throwable $e) {
             throw UnableToCopyFile::fromLocationTo($source, $destination, $e);
         }
@@ -796,6 +788,41 @@ class DatabaseAdapter implements FilesystemAdapter,
             }
         } catch (Throwable $e) {
             throw new DatabaseAdapterException(sprintf('Contents listing failed for: %s', $directory), $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * Copies the source file inti given destination
+     *
+     * Note: If the file already exists at the destination, then it will be
+     * overwritten!
+     *
+     * @param string $source
+     * @param string $destination
+     * @param Config $config
+     *
+     * @return void
+     *
+     * @throws FilesystemException
+     */
+    protected function performCopy(string $source, string $destination, Config $config): void
+    {
+        $record = $this->fetchFile($source, true, $config);
+        if(!isset($record)) {
+            throw UnableToReadFile::fromLocation($source, 'File does not exist');
+        }
+
+        // Write a new file on given destination. NOTE: If the file already exists,
+        // then this will overwrite it - in accordance with Flysystem's API description:
+        // @see https://flysystem.thephpleague.com/docs/usage/filesystem-api/#moving-and-copying
+        $contents = $record->contents;
+
+        if (is_resource($contents)) {
+            $this->writeStream($destination, $contents, $config);
+
+            fclose($contents);
+        } else {
+            $this->write($destination, $contents, $config);
         }
     }
 
