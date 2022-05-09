@@ -221,7 +221,7 @@ class DatabaseAdapter implements FilesystemAdapter,
             // Depending on database and PDO driver, contents could be a resource
             // or a string. In any case, we need to respect Flysystem's interface
             // and return a resource.
-            $contents = $file->contents;
+            $contents = $file->contents ?? '';
             if (is_resource($contents)) {
                 return $contents;
             }
