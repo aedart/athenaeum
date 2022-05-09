@@ -699,7 +699,7 @@ class DatabaseAdapter implements FilesystemAdapter,
             $recordPaths[] = $record['path'];
 
             if ($record['type'] === RecordTypes::FILE) {
-                $fileHashes[] = $record['content_hash'];
+                $fileHashes[] = $record->extraMetadata()['hash'];
             }
         }
 
