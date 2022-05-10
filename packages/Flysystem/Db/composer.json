@@ -26,6 +26,9 @@
             "Aedart\\Flysystem\\Db\\": "src"
         }
     },
+    "bin": [
+        "bin/table_schemas"
+    ],
     "config": {
         "sort-packages": true
     },
