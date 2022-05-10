@@ -819,6 +819,13 @@ class DatabaseAdapter implements FilesystemAdapter,
         // @see https://flysystem.thephpleague.com/docs/usage/filesystem-api/#moving-and-copying
         $contents = $record->contents;
 
+        // Resolve visibility, MIME-Type and extra meta-data of copied file...
+        $config = $config->extend([
+            Config::OPTION_VISIBILITY => $config->get(Config::OPTION_VISIBILITY, $record->visibility ?? null),
+            'mime_type' => $config->get('mime_type', $record->mime_type ?? null),
+            'extra_metadata' => $config->get('extra_metadata', $record->extra_metadata ?? null),
+        ]);
+
         if (is_resource($contents)) {
             $this->writeStream($destination, $contents, $config);
 

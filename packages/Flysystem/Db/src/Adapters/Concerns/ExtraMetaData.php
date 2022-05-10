@@ -25,7 +25,7 @@ trait ExtraMetaData
      */
     protected function resolveExtraMetaData(Config $config): string|null
     {
-        $extra = $config->get('extra_meta_data', null);
+        $extra = $config->get('extra_metadata', null);
         if (!isset($extra)) {
             return null;
         }
