@@ -111,7 +111,7 @@ class DatabaseAdapterTest extends BaseTestCase
         // file is of type "text/plain" - which apparently League's detector
         // ignores and only looks at the file extension. For this reason,
         // this test is "ignored"
-        
+
         $this->assertTrue(true);
 
         // Original:
