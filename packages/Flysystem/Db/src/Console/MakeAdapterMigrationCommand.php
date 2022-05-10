@@ -59,17 +59,20 @@ class MakeAdapterMigrationCommand extends Command
         $this->output->success([
             'Migration file created',
 
-            // TODO: Must be a bit more dynamic...
             <<<EOF
-Please add appropriate storage disk profile, in your `config/filesystems.php` configuration:
+Please add appropriate storage disk profile, in your `config/filesystems.php` configuration.
+Example:
 
 'disks' => [
+
+    // ...previous not shown ...
 
     'database' => [
         'driver' => 'database',
         'connection' => env('DB_CONNECTION', 'mysql'),
-        'files-table' => '{$filesTable}',
-        'contents-table' => '{$contentsTable}',
+        'files_table' => '{$filesTable}',
+        'contents_table' => '{$contentsTable}',
+        'hash_algo' => 'sha256',
         'path_prefix' => '',
     ]
 ],
