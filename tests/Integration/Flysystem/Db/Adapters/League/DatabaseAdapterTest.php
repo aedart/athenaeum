@@ -88,7 +88,7 @@ class DatabaseAdapterTest extends BaseTestCase
         });
 
         // Run migrations
-        $migrationClass = require_once Configuration::dataDir() . 'flysystem/db/migrations/2022_05_04_071658_create_files_table.php';
+        $migrationClass = require Configuration::dataDir() . 'flysystem/db/migrations/2022_05_04_071658_create_files_table.php';
         /** @var Migration $migration */
         $migration = new $migrationClass();
         $migration->up();
