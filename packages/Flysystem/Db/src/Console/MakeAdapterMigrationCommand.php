@@ -65,7 +65,7 @@ Example:
 
 'disks' => [
 
-    // ...previous not shown ...
+    // ...previous not shown...
 
     'database' => [
         'driver' => 'database',
