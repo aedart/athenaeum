@@ -24,7 +24,7 @@ trait Streams
      *
      * @var float|int
      */
-    protected $defaultMaxMemory = 2 * BufferSizes::BUFFER_1MB;
+    protected float|int $defaultMaxMemory = 2 * BufferSizes::BUFFER_1MB;
 
     /**
      * Creates a new in-memory file stream
