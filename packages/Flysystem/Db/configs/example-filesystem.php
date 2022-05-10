@@ -21,8 +21,9 @@ return [
         'database' => [
             'driver' => 'database',
             'connection' => env('DB_CONNECTION', 'mysql'),
-            'files-table' => 'files',
-            'contents-table' => 'files_contents',
+            'files_table' => 'files',
+            'contents_table' => 'files_contents',
+            'hash_algo' => 'sha256',
             'path_prefix' => '',
         ]
     ],
