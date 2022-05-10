@@ -198,6 +198,23 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Flysystem',
+            collapsable: true,
+            children: [
+                'flysystem/',
+                {
+                    title: 'Database Adapter',
+                    collapsable: true,
+                    children: [
+                        'flysystem/db/',
+                        'flysystem/db/install',
+                        'flysystem/db/setup',
+                        'flysystem/db/deduplication',
+                    ]
+                }
+            ]
+        },
+        {
             title: 'Http',
             collapsable: true,
             children: [
