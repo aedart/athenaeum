@@ -29,6 +29,7 @@ use League\Flysystem\UnableToDeleteFile;
 use League\Flysystem\UnableToMoveFile;
 use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToRetrieveMetadata;
+use League\Flysystem\UnableToSetVisibility;
 use League\Flysystem\UnableToWriteFile;
 use RuntimeException;
 use stdClass;
@@ -391,12 +392,7 @@ class DatabaseAdapter implements FilesystemAdapter,
             }
 
         } catch (Throwable $e) {
-            $code = $e->getCode();
-            if (!is_int($code)) {
-                $code = 0;
-            }
-
-            throw new DatabaseAdapterException($e->getMessage(), $code, $e);
+            throw UnableToSetVisibility::atLocation($path, $e->getMessage(), $e);
         }
     }
 
