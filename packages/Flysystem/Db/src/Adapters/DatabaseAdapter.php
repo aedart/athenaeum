@@ -243,7 +243,7 @@ class DatabaseAdapter implements FilesystemAdapter,
     public function delete(string $path): void
     {
         if (!$this->fileExists($path)) {
-            throw UnableToDeleteFile::atLocation($path, 'File does not exist');
+            return;
         }
 
         try {
