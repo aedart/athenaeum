@@ -20,7 +20,7 @@ interface Visibility
     /**
      * Private visibility
      */
-    public const PRIVATE = FlysystemVisibility::PUBLIC;
+    public const PRIVATE = FlysystemVisibility::PRIVATE;
 
     /**
      * Allowed visibility types
