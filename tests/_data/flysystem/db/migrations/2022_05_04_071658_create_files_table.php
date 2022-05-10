@@ -58,6 +58,7 @@ return new class extends Migration
             $table
                 ->string('mime_type', 127)
                 ->nullable()
+                ->default(null)
                 ->comment('File media type / mimetype');
 
             $table
@@ -78,6 +79,7 @@ return new class extends Migration
             $table
                 ->json('extra_metadata')
                 ->nullable()
+                ->default(null)
                 ->comment('Evt. custom extra meta data about file or directory');
 
             $table->index('path');
