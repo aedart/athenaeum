@@ -218,6 +218,9 @@ class DatabaseAdapter implements FilesystemAdapter,
     {
         try {
             $file = $this->fetchFile($path, true);
+            if (!isset($file)) {
+                throw new RuntimeException('File does not exist');
+            }
 
             // Depending on database and PDO driver, contents could be a resource
             // or a string. In any case, we need to respect Flysystem's interface
