@@ -10,7 +10,6 @@ use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Migrations\Migration;
 use League\Flysystem\AdapterTestUtilities\FilesystemAdapterTestCase as BaseTestCase;
 use League\Flysystem\FilesystemAdapter;
-use League\Flysystem\UnableToRetrieveMetadata;
 
 /**
  * DatabaseAdapterTest
