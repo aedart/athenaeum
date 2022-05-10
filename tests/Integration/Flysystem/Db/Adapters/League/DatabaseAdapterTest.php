@@ -8,7 +8,6 @@ use Codeception\Configuration;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Schema;
 use League\Flysystem\AdapterTestUtilities\FilesystemAdapterTestCase as BaseTestCase;
 use League\Flysystem\FilesystemAdapter;
 
