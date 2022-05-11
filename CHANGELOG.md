@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* `file` driver not found in Core application / Maintenance Mode. This was caused due to missing default configuration for maintenance mode, and after Laravel `v9.9` added a default value for their configuration. 
+
 ## [6.1.1] - 2022-04-27
 
 ### Fixed
