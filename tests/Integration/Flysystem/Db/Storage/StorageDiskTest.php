@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
  *
  * @group flysystem
  * @group flysystem-db
- * @group flysystem-dd-storage-disk
+ * @group flysystem-db-storage-disk
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Storage
