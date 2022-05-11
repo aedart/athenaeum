@@ -25,4 +25,36 @@ class Str extends BaseStr
     {
         return static::of($slug)->replace($separator, ' ');
     }
+
+    /**
+     * Returns an array that represents a "tree" structure for given string.
+     *
+     * Example:
+     * ```
+     * $tree = Str::tree('/home/user/projects')
+     *
+     * // [ '/home', '/home/user', '/home/user/projects' ]
+     * ```
+     *
+     * @param string $str
+     * @param string $delimiter [optional]
+     *
+     * @return string[]
+     */
+    public static function tree(string $str, string $delimiter = '/'): array
+    {
+        $output = [];
+        $parts = explode($delimiter, $str);
+
+        $previousElement = '';
+        foreach ($parts as $element) {
+            if (!empty($element)) {
+                $output[] = $previousElement . $element;
+            }
+
+            $previousElement .= $element . $delimiter;
+        }
+
+        return $output;
+    }
 }

@@ -1,0 +1,43 @@
+{
+    "name": "aedart/athenaeum-flysystem-db",
+    "description": "Flysystem Database Adapter",
+    "keywords": ["Athenaeum", "Flysystem", "Database", "Adapter", "Laravel"],
+    "homepage": "https://aedart.github.io/athenaeum/",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "aedart/athenaeum-container": "^6.2",
+        "aedart/athenaeum-database": "^6.2",
+        "aedart/athenaeum-streams": "^6.2",
+        "league/flysystem": "^3.0.18",
+        "illuminate/console": "^v9.7.0"
+    },
+    "require-dev": {
+        "league/flysystem-adapter-test-utilities": "^3.0.18"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\Flysystem\\Db\\": "src"
+        }
+    },
+    "bin": [
+        "bin/table_schemas"
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "6.1.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

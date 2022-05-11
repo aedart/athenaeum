@@ -79,6 +79,8 @@ jobs:
             remote: 'athenaeum-events'
           - local: 'Filters'
             remote: 'athenaeum-filters'
+          - local: 'Flysystem/Db'
+            remote: 'athenaeum-flysystem-db'
           - local: 'Http/Clients'
             remote: 'athenaeum-http-clients'
           - local: 'Http/Cookies'
