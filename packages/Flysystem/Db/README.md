@@ -1,21 +1,53 @@
-# Athenaeum Maintenance Modes
+# Athenaeum Flysystem Database Adapter
 
-Offers a few additional [maintenance modes "drivers"](https://laravel.com/docs/9.x/configuration#maintenance-mode) for Laravel.
+A [Flysystem](https://flysystem.thephpleague.com/docs/) adapter that store files and directories in your database.
+
+## Supported Databases
+
+Behind the scene, [Laravel's Database package](https://packagist.org/packages/illuminate/database) is used to execute queries, which grants support for the following databases:
+
+* MariaDB
+* MySQL
+* PostgreSQL
+* SQLite
+* SQL Server
 
 ```php
-// ...somewhere inside your application
-$mode = $app->maintenanceMode();
-$mode->activate([
-    'secret' => '1630542a-246b-4b66-afa1-dd72a4c43515'
+use Aedart\Flysystem\Db\Adapters\DatabaseAdapter;
+use Illuminate\Database\Capsule\Manager as Capsule;
+use League\Flysystem\Filesystem;
+
+// Establish database connection
+$capsule = new Capsule;
+$capsule->addConnection([
+    'driver' => 'mysql',
+    'host' => 'localhost',
+    'database' => 'database',
+    'username' => 'root',
+    'password' => 'password',
+    'charset' => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix' => '',
 ]);
 
-// ...etc
+$connection = $capsule->getConnection();
+
+// Create Database Adapter instance
+$adapter = new DatabaseAdapter(
+    filesTable: 'files',
+    contentsTable: 'files_contents',
+    connection: $connection
+);
+
+// Finally, create filesystem instance
+$filesystem = new Filesystem($adapter);
 ```
 
-## Available Modes
+**Note**: _If you wish to use this adapter within your Laravel Application, then you can choose register this package's Service Provider. See official documentation for more information._
 
-* `'array'`: _stores application down state in an array - useful for testing purposes._
-* `'json'`: _stores application down state in a json file - very similar to Laravel's default "file based" maintenance mode._
+## Data Deduplication
+
+The adapter makes use of [Data Deduplication](https://en.wikipedia.org/wiki/Data_deduplication) technique, which means that files that have the exact same content are only stored once.
 
 ## Documentation
 
