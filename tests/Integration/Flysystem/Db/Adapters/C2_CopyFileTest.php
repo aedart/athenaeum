@@ -1,0 +1,57 @@
+<?php
+
+namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
+
+use Aedart\Testing\Helpers\ConsoleDebugger;
+use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+
+/**
+ * C2_CopyFileTest
+ *
+ * @group flysystem
+ * @group flysystem-db
+ * @group flysystem-db-c2
+ *
+ * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
+ */
+class C2_CopyFileTest extends FlysystemDbTestCase
+{
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws \League\Flysystem\FilesystemException
+     */
+    public function canCopyFile(): void
+    {
+        $pathA = 'home/books/october_falls.txt';
+        $pathB = 'home/best_sellers/october_falls.txt';
+        $content = $this->getFaker()->sentence();
+
+        // ----------------------------------------------------------------- //
+
+        $fs = $this->filesystem();
+
+        $fs->write($pathA, $content);
+
+        // Copy file
+        $fs->copy($pathA, $pathB);
+
+        // ----------------------------------------------------------------- //
+
+        $this->assertTrue($fs->fileExists($pathA), 'Path A does not exist');
+        $this->assertTrue($fs->fileExists($pathB), 'Path B does not exist');
+
+        // ----------------------------------------------------------------- //
+        // Ensure that "contents record" has correct reference count!
+
+        $contentsList = $this->fetchAllFileContents();
+
+        ConsoleDebugger::output($contentsList);
+
+        $this->assertCount(1, $contentsList, 'Incorrect amount of contents persisted in database');
+        $this->assertSame(2, (int) $contentsList[0]->reference_count, 'Invalid reference_count');
+    }
+}
