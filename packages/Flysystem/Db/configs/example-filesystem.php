@@ -25,6 +25,7 @@ return [
             'contents_table' => 'files_contents',
             'hash_algo' => 'sha256',
             'path_prefix' => '',
+            'throw' => true
         ]
     ],
 
