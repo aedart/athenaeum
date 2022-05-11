@@ -5,9 +5,9 @@ sidebarDepth: 0
 
 # Data Deduplication
 
-Imagine that you are building a small application that allows users to upload small text files containing greeting messages (_or other types of files_).
-Chances are good that multiple users will upload the exact same greeting messages, as previously uploaded.
-Thus, your storage will contain duplicates.
+Imagine that you are building a small application that allows users to upload small text files containing greetings (_or other types of files_).
+Chances are good that multiple users will upload the exact same greeting messages.
+Thus, your storage will eventually contain duplicates.
 
 To avoid this kind of situation, the database adapter makes use of data deduplication: "_[...] a technique for eliminating duplicate copies of repeating data [...]_" ([_Wiki_](https://en.wikipedia.org/wiki/Data_deduplication))
 Consider the following:
@@ -23,9 +23,9 @@ In the above example, two files are written to the database. However, the adapte
 
 ## Content Hashing
 
-The adapter hashes each written file's content and performs a simple check.
-If the hash already exists, then an internal `reference_count` is incremented. Content is not inserted if this is the case.
-However, if the hash does not exist, then content is inserted.
+Data deduplication is achieved by hashing a file's content and checking if that hash already exists.
+If that is the case, then an internal `reference_count` is incremented. Content is not inserted if this is the case.
+However, if the hash does not exist, then content is inserted into the database.
 
 By default, `sha256` hashing algorithm is used when hashing contents. You can change this via the `setHashAlgorithm()`:
 
@@ -40,8 +40,9 @@ See [wiki](https://en.wikipedia.org/wiki/Hash_collision) for more information.
 
 ## When files are deleted
 
-When files are deleted, the adapter automatically cleans up its file-content records.
-Content records' `reference_count` is decreased when a file is deleted. When the reference counter reaches `0`, actual content is automatically removed.
+The adapter automatically cleans up its file-content records, when a file is requested deleted.
+In this process, the internal `reference_count` is decreased when a file is deleted. 
+When the reference counter reaches `0`, actual content is automatically removed.
 
 ## Performance Considerations
 
