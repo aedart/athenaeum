@@ -5,6 +5,7 @@ namespace Aedart\Flysystem\Db\Providers;
 use Aedart\Flysystem\Db\Adapters\DatabaseAdapter;
 use Aedart\Flysystem\Db\Console\MakeAdapterMigrationCommand;
 use Aedart\Support\Helpers\Database\ConnectionResolverTrait;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use League\Flysystem\Filesystem;
@@ -57,7 +58,11 @@ class FlysystemDatabaseAdapterServiceProvider extends ServiceProvider
                 ->setHashAlgorithm(data_get($settings, 'hash_algo', 'sha256'))
                 ->setPathPrefix(data_get($settings, 'path_prefix', ''));
 
-            return new Filesystem($adapter);
+            return new FilesystemAdapter(
+                new Filesystem($adapter),
+                $adapter,
+                $settings
+            );
         });
     }
 }
