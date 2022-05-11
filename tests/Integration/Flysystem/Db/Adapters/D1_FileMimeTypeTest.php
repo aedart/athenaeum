@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
+use Aedart\Flysystem\Db\Adapters\DatabaseAdapter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
 use Codeception\Configuration;
@@ -64,6 +65,36 @@ class D1_FileMimeTypeTest extends FlysystemDbTestCase
         $fs->write($path, $content, [
             'mime_type' => $customMimeType
         ]);
+
+        // ----------------------------------------------------------------- //
+
+        $result = $fs->mimeType($path);
+
+        $this->assertSame($customMimeType, $result);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws \League\Flysystem\FilesystemException
+     */
+    public function canSetCustomDetectCallback(): void
+    {
+        $path = 'home/books/october_falls.txt';
+        $content = $this->getFaker()->sentence();
+
+        // ----------------------------------------------------------------- //
+
+        $customMimeType = 'application/ext-other';
+        $adapter = new DatabaseAdapter('files', 'file_contents');
+        $adapter->detectMimeTypeUsing(function() use($customMimeType) {
+            return $customMimeType;
+        });
+
+        $fs = $this->filesystem('', $adapter);
+        $fs->write($path, $content);
 
         // ----------------------------------------------------------------- //
 

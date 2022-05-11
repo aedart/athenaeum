@@ -155,12 +155,13 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
      * Creates a new filesystem instance, using the database adapter
      *
      * @param string $pathPrefix [optional]
+     * @param DatabaseAdapter|null $adapter [optional] Evt. custom adapter.
      *
      * @return FilesystemOperator
      */
-    public function filesystem(string $pathPrefix = ''): FilesystemOperator
+    public function filesystem(string $pathPrefix = '', DatabaseAdapter|null $adapter = null): FilesystemOperator
     {
-        $adapter = new DatabaseAdapter('files', 'file_contents', null);
+        $adapter = $adapter ?? new DatabaseAdapter('files', 'file_contents', null);
         $adapter
             ->setPathPrefix($pathPrefix);
 
