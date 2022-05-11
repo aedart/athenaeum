@@ -210,6 +210,7 @@ module.exports.sidebar = function(){
                         'flysystem/db/install',
                         'flysystem/db/setup',
                         'flysystem/db/deduplication',
+                        'flysystem/db/mime-type',
                     ]
                 }
             ]
