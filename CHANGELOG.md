@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.2.0] - 2022-05-11
+
+### Added
+
+* Flysystem Database Adapter package.
+
 ### Fixed
 
 * `file` driver not found in Core application / Maintenance Mode. This was caused due to missing default configuration for maintenance mode, and after Laravel `v9.9` added a default value for their configuration. 
@@ -789,7 +795,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/6.1.1...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/6.2.0...HEAD
+[6.2.0]: https://github.com/aedart/athenaeum/compare/6.1.1...6.2.0
 [6.1.1]: https://github.com/aedart/athenaeum/compare/6.1.0...6.1.1
 [6.1.0]: https://github.com/aedart/athenaeum/compare/6.0.2...6.1.0
 [6.0.2]: https://github.com/aedart/athenaeum/compare/6.0.1...6.0.2
