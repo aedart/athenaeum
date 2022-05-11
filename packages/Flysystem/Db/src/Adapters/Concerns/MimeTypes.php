@@ -16,6 +16,49 @@ use League\Flysystem\Config;
 trait MimeTypes
 {
     /**
+     * MIME-Type detector callback
+     *
+     * @var callable|null
+     */
+    protected $detectorCallback = null;
+
+    /**
+     * Set a custom MIME-Type detector callback
+     *
+     * @param callable $callback Callback is given a {@see Detectable}|{@see FileStream} stream and
+     *                           {@see Config} as arguments. String MIME-Type or `null` must be
+     *                           returned by callback!
+     *
+     * @return self
+     */
+    public function detectMimeTypeUsing(callable $callback): static
+    {
+        $this->detectorCallback = $callback;
+
+        return $this;
+    }
+
+    /**
+     * Returns a default MIME-Type detector callback
+     *
+     * @return callable
+     */
+    public function defaultMimeTypeDetectorCallback(): callable
+    {
+        return function(Detectable|FileStream $stream, Config $config) {
+            $profile = $config->get('mime_type_detector', null);
+            $options = $config->get('mime_type_options', []);
+
+            $mimeType = $stream->mimeType($profile, $options);
+            if (!$mimeType->isValid()) {
+                return null;
+            }
+
+            return $mimeType->type();
+        };
+    }
+
+    /**
      * Resolve MIME-Type for given detectable file stream
      *
      * "mime_type" value from `$config` is returned, if provided.
@@ -38,15 +81,9 @@ trait MimeTypes
             return $providedMimeType;
         }
 
-        // Otherwise, use the detectable stream's MIME-Type detector
-        $profile = $config->get('mime_type_detector', null);
-        $options = $config->get('mime_type_options', []);
+        // Resolve detector callback and invoke it
+        $detectorCallback = $this->detectorCallback ?? $this->defaultMimeTypeDetectorCallback();
 
-        $mimeType = $stream->mimeType($profile, $options);
-        if (!$mimeType->isValid()) {
-            return null;
-        }
-
-        return $mimeType->type();
+        return $detectorCallback($stream, $config);
     }
 }
