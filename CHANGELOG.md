@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.2.1] - 2022-05-28
+
+### Fixed
+
+* Domain name set to `0`, when none provided for Cookie, in `CookiesHelper` (_Http Clients package_).
+* Broken Set Cookie tests.
+* `ContainerConfigurator` no longer supported, in `ecs.php` (_easy coding standard configuration_).
+
+### Changed
+
+* Upgraded min. required version of `guzzlehttp/guzzle` to `7.4.3`, due to [Cross-domain cookie leakage](https://github.com/guzzle/guzzle/security/advisories/GHSA-cwmx-hcrq-mhc3).
+
 ## [6.2.0] - 2022-05-11
 
 ### Added
@@ -795,7 +807,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/6.2.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/6.2.1...HEAD
+[6.2.1]: https://github.com/aedart/athenaeum/compare/6.2.0...6.2.1
 [6.2.0]: https://github.com/aedart/athenaeum/compare/6.1.1...6.2.0
 [6.1.1]: https://github.com/aedart/athenaeum/compare/6.1.0...6.1.1
 [6.1.0]: https://github.com/aedart/athenaeum/compare/6.0.2...6.1.0

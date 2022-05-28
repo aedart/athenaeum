@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\EasyCodingStandard\Config\ECSConfig;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
+return static function (ECSConfig $config): void {
     // A. standalone rule
-    $services = $containerConfigurator->services();
+    $services = $config->services();
     $services->set(ArraySyntaxFixer::class)
         ->call('configure', [[
             'syntax' => 'short',
         ]]);
 
     // B. full sets
-    $parameters = $containerConfigurator->parameters();
+    $parameters = $config->parameters();
     $parameters->set(Option::SETS, [
         SetList::CLEAN_CODE,
         SetList::PSR_12,
