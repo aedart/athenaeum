@@ -242,11 +242,6 @@ class CookiesHelper
         $guzzleCookie->setName($cookie->getName());
         $guzzleCookie->setValue($cookie->getValue());
 
-        // Set the domain to 0, so that Guzzle does not fail when
-        // setting or populating the cookie.
-        // (Am I missing something about Cookies vs. domains in general?)
-        $guzzleCookie->setDomain(0);
-
         // In case that the Cookie is a "Set-Cookie", populate
         // remaining directives.
         if ($cookie instanceof SetCookie) {
