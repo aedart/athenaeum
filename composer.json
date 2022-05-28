@@ -15,7 +15,7 @@
         "composer-runtime-api": "^2.0.0",
         "dragonmantank/cron-expression": "^3.3",
         "fakerphp/faker": "^v1.17.0",
-        "guzzlehttp/guzzle": "^7.4.1",
+        "guzzlehttp/guzzle": "^7.4.3",
         "illuminate/auth": "^v9.7.0",
         "illuminate/cache": "^v9.7.0",
         "illuminate/collections": "^v9.7.0",
