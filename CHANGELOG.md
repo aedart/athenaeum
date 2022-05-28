@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-* Fix `ContainerConfigurator` no longer supported, in `ecs.php` (_easy coding standard configuration_).
+* `ContainerConfigurator` no longer supported, in `ecs.php` (_easy coding standard configuration_).
+
+### Changed
+
+* Upgraded min. required version of `guzzlehttp/guzzle` to `7.4.3`, due to [Cross-domain cookie leakage](https://github.com/guzzle/guzzle/security/advisories/GHSA-cwmx-hcrq-mhc3).
 
 ## [6.2.0] - 2022-05-11
 
