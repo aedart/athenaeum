@@ -10,6 +10,7 @@ use Aedart\Contracts\Http\Clients\Requests\Attachment as AttachmentInterface;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as QueryBuilderInterface;
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammar;
 use Aedart\Contracts\Http\Cookies\Cookie;
+use Aedart\Contracts\Http\Cookies\SetCookie as SetCookieInterface;
 use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Http\Clients\Requests\Attachment;
 use Aedart\Http\Clients\Requests\Query\Builder as QueryBuilder;
@@ -219,7 +220,7 @@ abstract class HttpClientsTestCase extends LaravelTestCase
      *
      * @param array $data [optional]
      *
-     * @return Cookie
+     * @return Cookie|SetCookieInterface
      */
     protected function makeCookie(array $data = []): Cookie
     {
@@ -239,7 +240,7 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     {
         return CookieJar::fromArray($cookies, $domain);
     }
-    
+
     /*****************************************************************
      * Data Providers
      ****************************************************************/

@@ -10,6 +10,9 @@ use Aedart\Contracts\Http\Cookies\SetCookie;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use DateTime;
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Carbon;
 use Teapot\StatusCode;
@@ -59,15 +62,23 @@ class H0_CookiesTest extends HttpClientsTestCase
      */
     public function canAddCookieUsingInstance(string $profile)
     {
+        $domain = 'https://acme.com';
         $cookie = $this->makeCookie()
             ->name('foo')
+            ->domain($domain)
             ->value('bar');
 
-        $builder = $this->client($profile)
-            ->withOption('handler', $this->makeRespondsOkMock())
+        $mock = $this->makeResponseMock([
+            new Response(StatusCode::OK, ['Set-Cookie' => 'foo=bar']),
+            new Response()
+        ]);
+
+        $builder = $this->client($profile, [ 'cookies' => true ])
+            ->withOption('handler', $mock)
             ->withCookie($cookie);
 
-        $builder->post('/records');
+        $builder->post($domain . '/records');
+        $builder->post($domain . '/records');
 
         // --------------------------------------------------------------- //
 
@@ -92,16 +103,24 @@ class H0_CookiesTest extends HttpClientsTestCase
      */
     public function canAddCookieUsingArray(string $profile)
     {
+        $domain = 'https://acme.com';
         $cookie = [
             'name' => 'foo',
+            'domain' => $domain,
             'value' => 'bar'
         ];
 
+        $mock = $this->makeResponseMock([
+            new Response(StatusCode::OK, ['Set-Cookie' => 'foo=bar']),
+            new Response()
+        ]);
+
         $builder = $this->client($profile)
-            ->withOption('handler', $this->makeRespondsOkMock())
+            ->withOption('handler', $mock)
             ->withCookie($cookie);
 
-        $builder->post('/records');
+        $builder->post($domain . '/records');
+        $builder->post($domain . '/records');
 
         // --------------------------------------------------------------- //
 
@@ -126,17 +145,25 @@ class H0_CookiesTest extends HttpClientsTestCase
      */
     public function canAddCookieUsingCallback(string $profile)
     {
-        $cookie = function (Cookie $cookie) {
+        $domain = 'https://acme.com';
+        $cookie = function (Cookie|SetCookie $cookie) use($domain) {
             $cookie
                 ->name('foo')
+                ->domain($domain)
                 ->value('bar');
         };
 
+        $mock = $this->makeResponseMock([
+            new Response(StatusCode::OK, ['Set-Cookie' => 'foo=bar']),
+            new Response()
+        ]);
+
         $builder = $this->client($profile)
-            ->withOption('handler', $this->makeRespondsOkMock())
+            ->withOption('handler', $mock)
             ->withCookie($cookie);
 
-        $builder->post('/records');
+        $builder->post($domain . '/records');
+        $builder->post($domain . '/records');
 
         // --------------------------------------------------------------- //
 
@@ -161,14 +188,21 @@ class H0_CookiesTest extends HttpClientsTestCase
      */
     public function canAddCookieUsingOptions(string $profile)
     {
+        $domain = 'https://acme.com';
         $cookieJar = $this->makeCookieJar([
             'foo' => 'bar'
+        ], $domain);
+
+        $mock = $this->makeResponseMock([
+            new Response(StatusCode::OK, ['Set-Cookie' => 'foo=bar']),
+            new Response()
         ]);
 
         $builder = $this->client($profile)
-            ->withOption('handler', $this->makeRespondsOkMock());
+            ->withOption('handler', $mock);
 
-        $builder->request('get', '/records', [ 'cookies' => $cookieJar ]);
+        $builder->request('get', $domain . '/records', [ 'cookies' => $cookieJar ]);
+        $builder->request('get', $domain . '/records');
 
         // --------------------------------------------------------------- //
 
