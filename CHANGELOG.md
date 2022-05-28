@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* Fix `ContainerConfigurator` no longer supported, in `ecs.php` (_easy coding standard configuration_).
+
 ## [6.2.0] - 2022-05-11
 
 ### Added
