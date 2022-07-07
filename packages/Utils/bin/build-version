@@ -31,7 +31,7 @@ function runCmd(string $command) {
     $result = shell_exec($command);
 
     if ($result === null) {
-        throw new RuntimeException(sprintf('Command %s failed. Pleas try to run command manually in terminal and check error output', $command));
+        throw new RuntimeException(sprintf('Command %s failed. Please try to run command manually in terminal and check error output', $command));
     }
 
     return trim($result);
