@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* Uncaught Error: Class "Normalizer" not found, in monorepo builder (_vendor-bin dependency_) 
+
 ## [6.3.0] - 2022-07-14
 
 ### Changed
