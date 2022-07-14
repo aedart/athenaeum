@@ -9,6 +9,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Migrations\Migration;
 use League\Flysystem\AdapterTestUtilities\FilesystemAdapterTestCase as BaseTestCase;
+use League\Flysystem\Config;
 use League\Flysystem\FilesystemAdapter;
 
 /**
@@ -124,5 +125,17 @@ class DatabaseAdapterTest extends BaseTestCase
 //        $this->runScenario(function () {
 //            $this->adapter()->mimeType('unknown-mime-type.md5');
 //        });
+    }
+
+    /**
+     * @test
+     * @dataProvider filenameProvider
+     */
+    public function writing_and_reading_files_with_special_path(string $path): void
+    {
+        // NOTE: At some point, Codeception / PHPUnit started to fail the parent test,
+        // because it could NOT obtain the "data provider"... This simple overwrite
+        // somehow works...!?
+        parent::writing_and_reading_files_with_special_path($path);
     }
 }

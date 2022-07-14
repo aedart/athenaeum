@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* RFC3339 Extended datetime format is now also supported by default, in `DatetimeFilter`.
+* Codeception upgraded to `5.0.0-RC6`
+
 ## [6.2.1] - 2022-05-28
 
 ### Fixed

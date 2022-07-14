@@ -53,6 +53,7 @@ class DatetimeFilter extends DateFilter
             // should be URL encoded, when used submitted via http query parameters.
             // "+00:00" will then become "%2B00:00". Thus, "2021-06-17T06:33:00%2B00:00"
             // should pass the RFC3339 format validation.
+            DateTimeInterface::RFC3339_EXTENDED,
             DateTimeInterface::RFC3339,
             'Y-m-d H:i:s',
             'Y-m-d H:i',
