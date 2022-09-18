@@ -7,9 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Documentation for `\Aedart\Utils\Arr::tree()`.
+
+### Changed
+
+* Upgraded minimum required patch versions of all major dependencies (_Maintenance_).
+
+### Deprecated
+
+* `\Aedart\Utils\Str::tree()`, replaced by `\Aedart\Utils\Arr::tree()`. Method will be removed in next major version. 
+
 ### Fixed
 
-* Uncaught Error: Class "Normalizer" not found, in monorepo builder (_vendor-bin dependency_) 
+* Uncaught Error: Class "Normalizer" not found, in monorepo builder (_vendor-bin dependency_). 
 
 ## [6.3.0] - 2022-07-14
 
