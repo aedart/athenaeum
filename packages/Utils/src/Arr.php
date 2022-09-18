@@ -71,7 +71,7 @@ class Arr extends ArrBase
      *
      * Example:
      * ```
-     * $tree = Str::tree('/home/user/projects')
+     * $tree = Arr::tree('/home/user/projects')
      *
      * // [ '/home', '/home/user', '/home/user/projects' ]
      * ```
