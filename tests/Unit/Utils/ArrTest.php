@@ -138,4 +138,24 @@ class ArrTest extends UnitTestCase
 
         $this->assertEmpty($result);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canCreateTreeStructure()
+    {
+        $path = '/home/user/projects';
+        $output = Arr::tree($path);
+
+        ConsoleDebugger::output($output);
+
+        $this->assertIsArray($output);
+        $this->assertCount(3, $output);
+
+        $this->assertSame('/home', $output[0]);
+        $this->assertSame('/home/user', $output[1]);
+        $this->assertSame('/home/user/projects', $output[2]);
+    }
 }

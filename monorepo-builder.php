@@ -42,12 +42,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ComposerJsonSection::REQUIRE_DEV => [
             'ext-sockets' => '*',
             'ext-curl' => '*',
-            'bamarni/composer-bin-plugin' => '^1.4',
+            'bamarni/composer-bin-plugin' => '^1.8.1',
             'roave/security-advisories' => 'dev-master',
-            'codeception/codeception' => '^5.0.0-RC6',
-            "codeception/module-asserts" => "*@dev",
-            'orchestra/testbench' => '^v7.0.0',
-            'orchestra/testbench-dusk' => '^v7.0.0',
+            'codeception/codeception' => '^5.0.2',
+            "codeception/module-asserts" => "^3.0.0",
+            'orchestra/testbench' => '^v7.7.0',
+            'orchestra/testbench-dusk' => '^v7.7.0',
         ],
 
         ComposerJsonSection::AUTOLOAD => [

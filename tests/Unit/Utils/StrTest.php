@@ -33,6 +33,8 @@ class StrTest extends UnitTestCase
     }
 
     /**
+     * @deprecated Since v6.4. Replaced by {@see \Aedart\Tests\Unit\Utils\ArrTest::canCreateTreeStructure}. Will be removed in next major version.
+     *
      * @test
      *
      * @return void

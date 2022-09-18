@@ -67,6 +67,38 @@ class Arr extends ArrBase
     }
 
     /**
+     * Returns an array that represents a "tree" structure for given path.
+     *
+     * Example:
+     * ```
+     * $tree = Arr::tree('/home/user/projects')
+     *
+     * // [ '/home', '/home/user', '/home/user/projects' ]
+     * ```
+     *
+     * @param string $path
+     * @param string $delimiter [optional]
+     *
+     * @return string[]
+     */
+    public static function tree(string $path, string $delimiter = '/'): array
+    {
+        $output = [];
+        $parts = explode($delimiter, $path);
+
+        $previousElement = '';
+        foreach ($parts as $element) {
+            if (!empty($element)) {
+                $output[] = $previousElement . $element;
+            }
+
+            $previousElement .= $element . $delimiter;
+        }
+
+        return $output;
+    }
+
+    /**
      * Replaces nested empty array values
      *
      * @param array $array

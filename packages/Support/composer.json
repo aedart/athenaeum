@@ -15,13 +15,13 @@
         "php": "^8.0.2",
         "aedart/athenaeum-contracts": "^6.4",
         "aedart/athenaeum-utils": "^6.4",
-        "illuminate/config": "^v9.7.0",
-        "illuminate/support": "^v9.7.0"
+        "illuminate/config": "^v9.30.1",
+        "illuminate/support": "^v9.30.1"
     },
     "require-dev": {
-        "predis/predis": "^1.1.4",
-        "symfony/console": "^v6.0.2",
-        "twig/twig": "^3.3.7"
+        "predis/predis": "^1.1.10",
+        "symfony/console": "^v6.0.12",
+        "twig/twig": "^3.4.2"
     },
     "autoload": {
         "psr-4": {

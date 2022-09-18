@@ -12,7 +12,7 @@ use Aedart\Flysystem\Db\Adapters\Concerns;
 use Aedart\Flysystem\Db\Exceptions\ConnectionException;
 use Aedart\Flysystem\Db\Exceptions\DatabaseAdapterException;
 use Aedart\Support\Helpers\Database\DbTrait;
-use Aedart\Utils\Str;
+use Aedart\Utils\Arr;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Builder;
 use League\Flysystem\Config;
@@ -332,7 +332,7 @@ class DatabaseAdapter implements FilesystemAdapter,
             // directories must be created.
 
             // Create tree structure based on given directory path.
-            $directories = Str::tree($path, '/');
+            $directories = Arr::tree($path, '/');
 
             // Prepare directory records (the tree structure)
             $records = [];
