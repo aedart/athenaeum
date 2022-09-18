@@ -77,7 +77,7 @@ print_r($result);
 
 The output of the above shown example will be the following:
 
-```php
+```
 Array
 (
   ['value'] => 'John Snow'
@@ -89,5 +89,26 @@ Array
                   ['max'] => 50
               )
       )
+)
+```
+
+## `tree()`
+
+Returns an array that represents a "tree" structure for given path.
+
+```php
+use Aedart\Utils\Arr;
+
+$result = Arr::tree('/home/user/projects');
+
+print_r($result);
+```
+
+```
+Array
+(
+    [0] => /home
+    [1] => /home/user
+    [2] => /home/user/projects
 )
 ```
