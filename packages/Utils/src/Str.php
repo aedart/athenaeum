@@ -27,6 +27,8 @@ class Str extends BaseStr
     }
 
     /**
+     * @deprecated Since v6.4. Replaced by {@see \Aedart\Utils\Arr::tree}. Will be removed in next major version.
+     *
      * Returns an array that represents a "tree" structure for given string.
      *
      * Example:
@@ -43,18 +45,6 @@ class Str extends BaseStr
      */
     public static function tree(string $str, string $delimiter = '/'): array
     {
-        $output = [];
-        $parts = explode($delimiter, $str);
-
-        $previousElement = '';
-        foreach ($parts as $element) {
-            if (!empty($element)) {
-                $output[] = $previousElement . $element;
-            }
-
-            $previousElement .= $element . $delimiter;
-        }
-
-        return $output;
+        return Arr::tree($str, $delimiter);
     }
 }
