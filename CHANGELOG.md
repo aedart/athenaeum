@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.4.0] - 2022-09-18
+
 ### Added
 
 * Documentation for `\Aedart\Utils\Arr::tree()`.
@@ -834,7 +836,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/6.3.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/6.4.0...HEAD
+[6.4.0]: https://github.com/aedart/athenaeum/compare/6.3.0...6.4.0
 [6.3.0]: https://github.com/aedart/athenaeum/compare/6.2.1...6.3.0
 [6.2.1]: https://github.com/aedart/athenaeum/compare/6.2.0...6.2.1
 [6.2.0]: https://github.com/aedart/athenaeum/compare/6.1.1...6.2.0
