@@ -68,7 +68,7 @@ class ApiErrorResponse extends JsonResponse
             $message,
             $status,
             static::formatSourceForException($e, $request)
-        );
+        )->withException($e);
 
         // Add evt. http headers, if the exception offers any
         if ($isHttpException || method_exists($e, 'getHeaders')) {
