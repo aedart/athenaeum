@@ -132,11 +132,7 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "@test-env",
-            "@update-bin"
-        ],
-        "post-update-cmd": [
-            "@update-bin"
+            "@test-env"
         ],
         "test-env": [
             "@php -r \"file_exists('.testing') || copy('.testing.example', '.testing');\""
@@ -145,10 +141,10 @@
             "@composer bin all update --ansi"
         ],
         "check": [
-            "vendor/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary --runtime-set testVersion 8.0- ./packages ./tests"
+            "vendor-bin/cs/vendor/squizlabs/php_codesniffer/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary --runtime-set testVersion 8.0- ./packages ./tests"
         ],
-        "cs": "vendor/bin/ecs check --ansi",
-        "cs-fix": "vendor/bin/ecs check --fix --ansi",
+        "cs": "vendor-bin/cs/vendor/symplify/easy-coding-standard/bin/ecs check --ansi",
+        "cs-fix": "vendor-bin/cs/vendor/symplify/easy-coding-standard/bin/ecs check --fix --ansi",
         "docs:dev": "npm run docs:dev --ansi"
     },
     "config": {
@@ -160,6 +156,13 @@
     "extra": {
         "branch-alias": {
             "dev-master": "6.4-dev"
+        },
+        "extra": {
+            "bamarni-bin": {
+                "bin-links": false,
+                "target-directory": "vendor-bin",
+                "forward-command": true
+            }
         }
     },
     "minimum-stability": "dev",
