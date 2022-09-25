@@ -132,7 +132,11 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "@test-env"
+            "@test-env",
+            "@update-bin"
+        ],
+        "post-update-cmd": [
+            "@update-bin"
         ],
         "test-env": [
             "@php -r \"file_exists('.testing') || copy('.testing.example', '.testing');\""
