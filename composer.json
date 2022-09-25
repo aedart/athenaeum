@@ -163,7 +163,7 @@
             "bamarni-bin": {
                 "bin-links": false,
                 "target-directory": "vendor-bin",
-                "forward-command": true
+                "forward-command": false
             }
         }
     },
