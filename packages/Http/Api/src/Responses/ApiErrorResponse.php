@@ -146,7 +146,7 @@ class ApiErrorResponse extends JsonResponse
      *
      * @return bool
      */
-    protected static function isHttpException(Throwable $e)
+    protected static function isHttpException(Throwable $e): bool
     {
         return $e instanceof HttpExceptionInterface;
     }
