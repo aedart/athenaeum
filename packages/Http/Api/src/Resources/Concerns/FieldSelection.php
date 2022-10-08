@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Api\SelectedFieldsCollection as SelectedFieldsCollecti
 use Aedart\Http\Api\Resources\SelectedFieldsCollection;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Utils\Arr;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Concerns Field Selection
@@ -16,6 +17,23 @@ use Aedart\Utils\Arr;
 trait FieldSelection
 {
     /**
+     * State whether tho throw an exception whenever a
+     * "select" field does not exist in the resource's
+     * payload.
+     *
+     * @var bool
+     */
+    protected bool $shouldFailWhenFieldDoesNotExist = true;
+
+    /**
+     * Name of the query parameter that holds
+     * fields to be selected
+     *
+     * @var string
+     */
+    protected string $selectKeyName = 'select';
+
+    /**
      * Returns only selected fields from given payload
      *
      * @param  array  $payload
@@ -23,6 +41,8 @@ trait FieldSelection
      *                                          request's query parameters, when none given
      *
      * @return array
+     *
+     * @throws ValidationException
      */
     public function onlySelected(array $payload, array|null $fieldsToSelect = null): array
     {
@@ -39,9 +59,19 @@ trait FieldSelection
         // collect()->only() method will not help us. We need to loop through the fields
         // and use the array helpers to select desired fields, from the payload
         foreach ($fields as $key) {
-            if (Arr::has($payload, $key)) {
-                $value = Arr::get($payload, $key);
-                Arr::set($output, $key, $value);
+
+            // Determine if a field (or key) exists in payload
+            $hasField = Arr::has($payload, $key);
+
+            // When field does not exist and resource must fail, throw
+            // an exception. Otherwise, skip to next field.
+            if (!$hasField && $this->shouldFailWhenFieldDoesNotExist) {
+                $this->failWhenFieldDoesNotExist($key);
+            } elseif (!$hasField) {
+                continue;
+            } else {
+                // Requested field was found and must be added to the output.
+                $this->addFieldToPayload($key, $payload, $output);
             }
         }
 
@@ -51,6 +81,39 @@ trait FieldSelection
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * Add field to payload
+     *
+     * @param  string  $key Select field (or "dot" key)
+     * @param  array  $from Payload to take key from
+     * @param  array  $to Payload where key must be added to
+     *
+     * @return void
+     */
+    protected function addFieldToPayload(string $key, array $from, array &$to): void
+    {
+        $value = Arr::get($from, $key);
+
+        Arr::set($to, $key, $value);
+    }
+
+    /**
+     * Throws an exception regarding field that does not exist
+     * in this resource's payload.
+     *
+     * @param  string  $field Field that does not exist
+     *
+     * @return void
+     *
+     * @throws ValidationException
+     */
+    protected function failWhenFieldDoesNotExist(string $field): void
+    {
+        throw ValidationException::withMessages([
+            $this->selectKeyName => sprintf('Field %s does not exist', $field)
+        ]);
+    }
 
     /**
      * Returns a collection of captured fields to be selected

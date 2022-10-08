@@ -6,6 +6,7 @@ use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Http\Api\Resources\Concerns;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Api Resource
@@ -41,7 +42,9 @@ abstract class ApiResource extends JsonResource
     abstract public function formatPayload(Request $request): array;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
+     * @throws ValidationException
      */
     public function toArray($request): array
     {
