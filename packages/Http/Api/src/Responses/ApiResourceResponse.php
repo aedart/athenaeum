@@ -16,9 +16,13 @@ use Illuminate\Support\Collection;
 class ApiResourceResponse extends ResourceResponse
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
+     * @param array|Collection $data
+     * @param array $with  [optional]
+     * @param array $additional  [optional]
      */
-    protected function wrap($data, $with = [], $additional = [])
+    protected function wrap($data, $with = [], $additional = []): array
     {
         if ($data instanceof Collection) {
             $data = $data->all();

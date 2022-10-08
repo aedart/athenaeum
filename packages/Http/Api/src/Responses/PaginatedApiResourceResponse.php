@@ -47,7 +47,7 @@ class PaginatedApiResourceResponse extends PaginatedResourceResponse
     /**
      * @inheritdoc
      */
-    protected function paginationInformation($request)
+    protected function paginationInformation($request): array
     {
         $paginated = $this->resource->resource->toArray();
 
@@ -82,7 +82,7 @@ class PaginatedApiResourceResponse extends PaginatedResourceResponse
     /**
      * @inheritdoc
      */
-    protected function meta($paginated)
+    protected function meta($paginated): array
     {
         $output = parent::meta($paginated);
 
