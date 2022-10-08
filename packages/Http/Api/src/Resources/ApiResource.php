@@ -4,6 +4,7 @@ namespace Aedart\Http\Api\Resources;
 
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Http\Api\Resources\Concerns;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -21,6 +22,7 @@ abstract class ApiResource extends JsonResource
     use Concerns\ResourceType;
     use Concerns\SelfLink;
     use Concerns\Timestamps;
+    use Concerns\FieldSelection;
 
     /**
      * Returns the Api resource collection to be used
@@ -28,6 +30,25 @@ abstract class ApiResource extends JsonResource
      * @return string Class path
      */
     abstract public static function collectionResource(): string;
+
+    /**
+     * Format this resource's payload
+     *
+     * @param  Request  $request
+     *
+     * @return array
+     */
+    abstract public function formatPayload(Request $request): array;
+
+    /**
+     * @inheritdoc
+     */
+    public function toArray($request): array
+    {
+        return $this->onlySelected(
+            $this->formatPayload($request)
+        );
+    }
 
     /**
      * The resource's identifier
