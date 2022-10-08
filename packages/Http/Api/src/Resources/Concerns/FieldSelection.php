@@ -2,8 +2,8 @@
 
 namespace Aedart\Http\Api\Resources\Concerns;
 
-use Aedart\Contracts\Http\Api\SelectFieldsCollection as SelectFieldsCollectionInterface;
-use Aedart\Http\Api\Resources\SelectFieldsCollection;
+use Aedart\Contracts\Http\Api\SelectedFieldsCollection as SelectedFieldsCollectionInterface;
+use Aedart\Http\Api\Resources\SelectedFieldsCollection;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Utils\Arr;
 
@@ -57,12 +57,12 @@ trait FieldSelection
      *
      * @see \Aedart\Http\Api\Middleware\CaptureFieldsToSelect
      *
-     * @return SelectFieldsCollection
+     * @return SelectedFieldsCollection
      */
-    protected function fieldsToSelectCollection(): SelectFieldsCollection
+    protected function fieldsToSelectCollection(): SelectedFieldsCollectionInterface
     {
-        return IoCFacade::tryMake(SelectFieldsCollectionInterface::class, function() {
-            return new SelectFieldsCollection([]);
+        return IoCFacade::tryMake(SelectedFieldsCollectionInterface::class, function() {
+            return new SelectedFieldsCollection([]);
         });
     }
 }

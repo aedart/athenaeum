@@ -2,8 +2,8 @@
 
 namespace Aedart\Http\Api\Middleware;
 
-use Aedart\Contracts\Http\Api\SelectFieldsCollection as SelectFieldsCollectionInstance;
-use Aedart\Http\Api\Resources\SelectFieldsCollection;
+use Aedart\Contracts\Http\Api\SelectedFieldsCollection as SelectedFieldsCollectionInstance;
+use Aedart\Http\Api\Resources\SelectedFieldsCollection;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
 use Aedart\Validation\Rules\AlphaDashDot;
@@ -70,8 +70,8 @@ class CaptureFieldsToSelect
      */
     protected function save(array $fields): void
     {
-        $this->getContainer()->singleton(SelectFieldsCollectionInstance::class, function() use ($fields) {
-            return new SelectFieldsCollection($fields);
+        $this->getContainer()->singleton(SelectedFieldsCollectionInstance::class, function() use ($fields) {
+            return new SelectedFieldsCollection($fields);
         });
     }
 
@@ -82,7 +82,7 @@ class CaptureFieldsToSelect
      */
     protected function cleanup(): void
     {
-        $this->getContainer()->forgetInstance(SelectFieldsCollectionInstance::class);
+        $this->getContainer()->forgetInstance(SelectedFieldsCollectionInstance::class);
     }
 
     /**

@@ -6,13 +6,13 @@ use ArrayAccess;
 use Illuminate\Contracts\Support\Arrayable;
 
 /**
- * Select Fields Collection
+ * Selected Fields Collection
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Api
  */
-interface SelectFieldsCollection extends Arrayable,
-     ArrayAccess
+interface SelectedFieldsCollection extends Arrayable,
+                                           ArrayAccess
 {
     /**
      * Determine if this collection is empty

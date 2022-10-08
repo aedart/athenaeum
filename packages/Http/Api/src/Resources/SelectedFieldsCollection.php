@@ -2,7 +2,7 @@
 
 namespace Aedart\Http\Api\Resources;
 
-use Aedart\Contracts\Http\Api\SelectFieldsCollection as SelectFieldsCollectionInterface;
+use Aedart\Contracts\Http\Api\SelectedFieldsCollection as SelectedFieldsCollectionInterface;
 
 /**
  * Select Fields Collection
@@ -10,7 +10,7 @@ use Aedart\Contracts\Http\Api\SelectFieldsCollection as SelectFieldsCollectionIn
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Api\Resources
  */
-class SelectFieldsCollection implements SelectFieldsCollectionInterface
+class SelectedFieldsCollection implements SelectedFieldsCollectionInterface
 {
     /**
      * Creates a new collection instance
