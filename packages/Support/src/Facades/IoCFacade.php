@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Facade;
  *
  * @see \Illuminate\Support\Facades\Facade
  *
+ * @mixin \Illuminate\Support\Facades\App
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Support\Facades
  */
