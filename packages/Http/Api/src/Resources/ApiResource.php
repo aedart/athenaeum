@@ -66,4 +66,29 @@ abstract class ApiResource extends JsonResource
 
         return $this->resource->getKey();
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function with($request)
+    {
+        return array_merge([
+            'meta' => $this->meta($request)
+        ], parent::with($request));
+    }
+
+    /**
+     * Creates meta information for this resource
+     *
+     * @param  Request  $request
+     *
+     * @return array
+     */
+    public function meta(Request $request): array
+    {
+        return [
+            'type' => $this->type(),
+            'self' => $this->makeSelfLink($request)
+        ];
+    }
 }
