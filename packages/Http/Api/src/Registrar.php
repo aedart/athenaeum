@@ -133,10 +133,8 @@ class Registrar implements RegistrarInterface
      */
     protected function resolveClassPath(object|string $target): string
     {
-        if (is_string($target)) {
-            return $target;
-        }
-
-        return $target::class;
+        return is_string($target)
+            ? $target
+            : $target::class;
     }
 }
