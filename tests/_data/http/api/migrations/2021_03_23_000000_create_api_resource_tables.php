@@ -19,11 +19,19 @@ class CreateApiResourceTables extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique('slug_unq')->comment('Unique string identifier');
-            $table->string('name')->comment('Name of category');
-            $table->text('description')->nullable()->comment('Evt. description of category');
+
+            $table
+                ->string('slug')
+                ->unique();
+
+            $table
+                ->string('name');
+
+            $table->text('description')
+                ->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });
@@ -36,6 +44,6 @@ class CreateApiResourceTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('games');
     }
 }
