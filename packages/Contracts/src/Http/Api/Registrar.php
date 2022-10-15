@@ -64,4 +64,13 @@ interface Registrar
      * @return string|null Api Resource class path or null when none found
      */
     public function findResourceByType(string $type): string|null;
+
+    /**
+     * Forget Api Resource for given model
+     *
+     * @param string|\Illuminate\Database\Eloquent\Model $model class path or eloquent model instance
+     *
+     * @return bool
+     */
+    public function forget($model): bool;
 }

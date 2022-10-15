@@ -101,6 +101,20 @@ class Registrar implements RegistrarInterface
         return null;
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function forget($model): bool
+    {
+        if ($this->has($model)) {
+            unset($this->registry[$this->resolveClassPath($model)]);
+
+            return true;
+        }
+
+        return false;
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
