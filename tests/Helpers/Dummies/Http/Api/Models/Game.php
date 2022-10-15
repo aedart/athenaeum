@@ -1,0 +1,42 @@
+<?php
+
+namespace Aedart\Tests\Helpers\Dummies\Http\Api\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
+
+/**
+ * Game
+ *
+ * FOR TESTING PURPOSES ONLY!
+ *
+ * @property int $id
+ * @property string $slug
+ * @property string $name
+ * @property string $description
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon|null $deleted_at
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Tests\Helpers\Dummies\Http\Api\Models
+ */
+class Game extends Model
+{
+    use SoftDeletes;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'games';
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array<string>|bool
+     */
+    protected $guarded = [ 'id' ];
+}
