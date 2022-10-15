@@ -19,7 +19,7 @@ class GameResource extends ApiResource
     /**
      * @inheritDoc
      */
-    public static function collectionResource(): string
+    public static function resourceCollection(): string
     {
         return GamesCollection::class;
     }

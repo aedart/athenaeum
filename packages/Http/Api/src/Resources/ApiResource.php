@@ -5,6 +5,7 @@ namespace Aedart\Http\Api\Resources;
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Http\Api\Resources\Concerns;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Validation\ValidationException;
 
@@ -26,13 +27,6 @@ abstract class ApiResource extends JsonResource
     use Concerns\FieldSelection;
 
     /**
-     * Returns the Api resource collection to be used
-     *
-     * @return string Class path
-     */
-    abstract public static function collectionResource(): string;
-
-    /**
      * Format this resource's payload
      *
      * @param  Request  $request
@@ -40,6 +34,32 @@ abstract class ApiResource extends JsonResource
      * @return array
      */
     abstract public function formatPayload(Request $request): array;
+
+    /**
+     * Returns the Api resource collection to be used
+     *
+     * @return string Class path
+     */
+    public static function resourceCollection(): string
+    {
+        return AnonymousResourceCollection::class;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function collection($resource)
+    {
+        // Laravel's JsonResource is hardcoded to use `AnonymousResourceCollection`, which we
+        // overwrite here to allow customised collections to be used.
+        $resourceCollection = static::resourceCollection();
+
+        return tap(new $resourceCollection($resource, static::class), function ($collection) {
+            if (property_exists(static::class, 'preserveKeys')) {
+                $collection->preserveKeys = (new static([]))->preserveKeys === true;
+            }
+        });
+    }
 
     /**
      * {@inheritdoc}
