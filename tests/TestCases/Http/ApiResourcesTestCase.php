@@ -24,6 +24,14 @@ abstract class ApiResourcesTestCase extends LaravelTestCase
     use ConfigTrait;
     use ApiResourceRegistrarTrait;
 
+    /**
+     * When true, migrations for this test-case will
+     * be installed.
+     *
+     * @var bool
+     */
+    protected bool $installMigrations = true;
+
     /*****************************************************************
      * Setup Methods
      ****************************************************************/
@@ -38,7 +46,9 @@ abstract class ApiResourcesTestCase extends LaravelTestCase
     {
         parent::_before();
 
-        $this->installMigrations();
+        if ($this->installMigrations) {
+            $this->installMigrations();
+        }
 
         $this->getConfigLoader()
             ->setDirectory($this->directory())
