@@ -2,6 +2,9 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Http\Api\Models;
 
+use Aedart\Contracts\Database\Models\Sluggable;
+use Aedart\Database\Models\Concerns\Slugs;
+use Aedart\Support\Properties\Strings\SlugTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
@@ -22,8 +25,9 @@ use Illuminate\Support\Carbon;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Http\Api\Models
  */
-class Game extends Model
+class Game extends Model implements Sluggable
 {
+    use Slugs;
     use SoftDeletes;
 
     /**
