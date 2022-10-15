@@ -30,7 +30,7 @@ abstract class ApiResourcesTestCase extends LaravelTestCase
      *
      * @var bool
      */
-    protected bool $installMigrations = true;
+    protected bool $installMigrations = false;
 
     /*****************************************************************
      * Setup Methods

@@ -20,18 +20,6 @@ use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
 class RegistrarTest extends ApiResourcesTestCase
 {
     /**
-     * When true, migrations for this test-case will
-     * be installed.
-     *
-     * @var bool
-     */
-    protected bool $installMigrations = false;
-
-    /*****************************************************************
-     * Actual Tests
-     ****************************************************************/
-
-    /**
      * @test
      *
      * @return void
