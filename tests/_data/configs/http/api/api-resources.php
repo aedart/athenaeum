@@ -1,5 +1,8 @@
 <?php
 
+use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Game;
+use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\GameResource;
+
 return [
 
     /*
@@ -12,7 +15,7 @@ return [
 
     'registry' => [
 
-        // \App\Models\User::class => \App\Resources\UserResource::class,
+        Game::class => GameResource::class,
 
     ],
 ];

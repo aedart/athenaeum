@@ -35,6 +35,16 @@ class CreateApiResourceTables extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::create('owners', function (Blueprint $table) {
+            $table->id();
+
+            $table
+                ->string('name')
+                ->unique();
+
+            $table->timestamps();
+        });
     }
 
     /**
@@ -45,5 +55,6 @@ class CreateApiResourceTables extends Migration
     public function down()
     {
         Schema::dropIfExists('games');
+        Schema::dropIfExists('owners');
     }
 }
