@@ -30,7 +30,7 @@ class GameResource extends ApiResource
     public function formatPayload(Request $request): array
     {
         return $this->withTimestamps([
-            'slug' => $this->id,
+            'slug' => $this->getSlugKey(),
             'name' => $this->name,
             'description' => $this->description,
         ]);
