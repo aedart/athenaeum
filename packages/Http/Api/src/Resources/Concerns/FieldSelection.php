@@ -67,9 +67,7 @@ trait FieldSelection
             // an exception. Otherwise, skip to next field.
             if (!$hasField && $this->shouldFailWhenFieldDoesNotExist) {
                 $this->failWhenFieldDoesNotExist($key);
-            } elseif (!$hasField) {
-                continue;
-            } else {
+            } elseif ($hasField) {
                 // Requested field was found and must be added to the output.
                 $this->addFieldToPayload($key, $payload, $output);
             }
