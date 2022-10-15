@@ -60,15 +60,15 @@ trait FieldSelection
         // and use the array helpers to select desired fields, from the payload
         foreach ($fields as $key) {
 
-            // Determine if a field (or key) exists in payload
+            // When requested field exists, we add it to the output.
+            // If not, then an exception is thrown when Api resource
+            // requires such.
+
             $hasField = Arr::has($payload, $key);
 
-            // When field does not exist and resource must fail, throw
-            // an exception. Otherwise, skip to next field.
             if (!$hasField && $this->shouldFailWhenFieldDoesNotExist) {
                 $this->failWhenFieldDoesNotExist($key);
             } elseif ($hasField) {
-                // Requested field was found and must be added to the output.
                 $this->addFieldToPayload($key, $payload, $output);
             }
         }
