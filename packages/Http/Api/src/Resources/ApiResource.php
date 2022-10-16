@@ -35,29 +35,30 @@ abstract class ApiResource extends JsonResource
     abstract public function formatPayload(Request $request): array;
 
     /**
-     * Returns the Api resource collection to be used
-     *
-     * @return string Class path
-     */
-    public static function resourceCollection(): string
-    {
-        return AnonymousApiResourceCollection::class;
-    }
-
-    /**
      * @inheritdoc
      */
     public static function collection($resource)
     {
         // Laravel's JsonResource is hardcoded to use `AnonymousResourceCollection`, which we
         // overwrite here to allow customised collections to be used.
-        $resourceCollection = static::resourceCollection();
 
-        return tap(new $resourceCollection($resource, static::class), function ($collection) {
+        return tap(static::makeResourceCollection($resource), function ($collection) {
             if (property_exists(static::class, 'preserveKeys')) {
                 $collection->preserveKeys = (new static([]))->preserveKeys === true;
             }
         });
+    }
+
+    /**
+     * Returns a new Api Resource Collection instance
+     *
+     * @param  mixed  $resource
+     *
+     * @return ApiResourceCollection
+     */
+    public static function makeResourceCollection(mixed $resource): ApiResourceCollection
+    {
+        return new AnonymousApiResourceCollection($resource, static::class);
     }
 
     /**
