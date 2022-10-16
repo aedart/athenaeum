@@ -91,7 +91,7 @@ abstract class ApiResource extends JsonResource
      *
      * @return JsonResponse
      */
-    public function created(Request $request = null): JsonResponse
+    public function createdResponse(Request $request = null): JsonResponse
     {
         return $this
             ->response($request)
@@ -106,7 +106,7 @@ abstract class ApiResource extends JsonResource
      *
      * @return JsonResponse
      */
-    public function updated(Request $request = null): JsonResponse
+    public function updatedResponse(Request $request = null): JsonResponse
     {
         return $this
             ->response($request)
