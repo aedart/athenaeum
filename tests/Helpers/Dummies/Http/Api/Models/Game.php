@@ -5,6 +5,8 @@ namespace Aedart\Tests\Helpers\Dummies\Http\Api\Models;
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Database\Models\Concerns\Slugs;
 use Aedart\Support\Properties\Strings\SlugTrait;
+use Aedart\Tests\Helpers\Dummies\Http\Api\Factories\GameFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
@@ -29,6 +31,7 @@ class Game extends Model implements Sluggable
 {
     use Slugs;
     use SoftDeletes;
+    use HasFactory;
 
     /**
      * The table associated with the model.
@@ -43,4 +46,16 @@ class Game extends Model implements Sluggable
      * @var array<string>|bool
      */
     protected $guarded = [ 'id' ];
+
+    /*****************************************************************
+     * Model Factory
+     ****************************************************************/
+
+    /**
+     * @inheritdoc
+     */
+    protected static function newFactory()
+    {
+        return new GameFactory();
+    }
 }
