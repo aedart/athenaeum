@@ -19,14 +19,6 @@ class GameResource extends ApiResource
     /**
      * @inheritDoc
      */
-    public static function resourceCollection(): string
-    {
-        return GamesCollection::class;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function formatPayload(Request $request): array
     {
         return $this->withTimestamps([

@@ -5,7 +5,6 @@ namespace Aedart\Http\Api\Resources;
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Http\Api\Resources\Concerns;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Validation\ValidationException;
 
@@ -42,7 +41,7 @@ abstract class ApiResource extends JsonResource
      */
     public static function resourceCollection(): string
     {
-        return AnonymousResourceCollection::class;
+        return AnonymousApiResourceCollection::class;
     }
 
     /**

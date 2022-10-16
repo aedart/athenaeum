@@ -19,14 +19,6 @@ class OwnerResource extends ApiResource
     /**
      * @inheritDoc
      */
-    public static function resourceCollection(): string
-    {
-        return OwnersCollection::class;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function formatPayload(Request $request): array
     {
         return $this->withTimestamps([

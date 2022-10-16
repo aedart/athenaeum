@@ -36,21 +36,17 @@ abstract class ApiResourceCollection extends ResourceCollection
     protected string $paginatedResponseClass = PaginatedApiResourceResponse::class;
 
     /**
-     * @inheritdoc
+     * Creates a new Api Resource Collection instance
+     *
+     * @param  mixed  $resource
+     * @param  string  $collects Class path to Api Resource
      */
-    public function __construct($resource)
+    public function __construct(mixed $resource, string $collects)
     {
-        $this->collects = $this->resourceToCollect();
+        $this->collects = $collects;
 
         parent::__construct($resource);
     }
-
-    /**
-     * Returns the resource that this resource collects.
-     *
-     * @return string Class path
-     */
-    abstract public function resourceToCollect(): string;
 
     /**
      * Invoke a callback over each resource
