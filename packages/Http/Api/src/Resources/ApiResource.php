@@ -4,9 +4,12 @@ namespace Aedart\Http\Api\Resources;
 
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Http\Api\Resources\Concerns;
+use Aedart\Http\Api\Responses\ApiResourceResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Validation\ValidationException;
+use Teapot\StatusCode\All as HttpStatus;
 
 /**
  * Api Resource
@@ -71,6 +74,43 @@ abstract class ApiResource extends JsonResource
         return $this->onlySelected(
             $this->formatPayload($request)
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toResponse($request)
+    {
+        return (new ApiResourceResponse($this))->toResponse($request);
+    }
+
+    /**
+     * Create a "201 Created" HTTP response that represents the object.
+     *
+     * @param  Request|null  $request  [optional]
+     *
+     * @return JsonResponse
+     */
+    public function created(Request $request = null): JsonResponse
+    {
+        return $this
+            ->response($request)
+            ->setStatusCode(HttpStatus::CREATED);
+    }
+
+    /**
+     * Create an  HTTP response that represents the object, after
+     * the resource was updated
+     *
+     * @param  Request|null  $request  [optional]
+     *
+     * @return JsonResponse
+     */
+    public function updated(Request $request = null): JsonResponse
+    {
+        return $this
+            ->response($request)
+            ->setStatusCode(HttpStatus::OK);
     }
 
     /**
