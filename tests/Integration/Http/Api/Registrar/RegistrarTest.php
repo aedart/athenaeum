@@ -12,6 +12,7 @@ use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
  * RegistrarTest
  *
  * @group http-api
+ * @group api-resource
  * @group api-resource-registrar
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
