@@ -19,6 +19,16 @@ class CreateApiResourceTables extends Migration
      */
     public function up()
     {
+        Schema::create('owners', function (Blueprint $table) {
+            $table->id();
+
+            $table
+                ->string('name')
+                ->unique();
+
+            $table->timestamps();
+        });
+
         Schema::create('games', function (Blueprint $table) {
             $table->id();
 
@@ -32,18 +42,15 @@ class CreateApiResourceTables extends Migration
             $table->text('description')
                 ->nullable();
 
+            $table
+                ->foreignId('owner_id')
+                ->nullable()
+                ->constrained('owners')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
+
             $table->timestamps();
             $table->softDeletes();
-        });
-
-        Schema::create('owners', function (Blueprint $table) {
-            $table->id();
-
-            $table
-                ->string('name')
-                ->unique();
-
-            $table->timestamps();
         });
     }
 

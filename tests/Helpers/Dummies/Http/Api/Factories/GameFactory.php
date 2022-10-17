@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Helpers\Dummies\Http\Api\Factories;
 
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Game;
+use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Owner;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -32,7 +33,10 @@ class GameFactory extends Factory
         return [
             'slug' => $faker->unique()->slug(3),
             'name' => 'Game: ' . $faker->text(10),
-            'description' => $faker->realText(150)
+            'description' => $faker->realText(150),
+            'owner_id' => function() {
+                return Owner::factory()->create();
+            }
         ];
     }
 }
