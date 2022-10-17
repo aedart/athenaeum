@@ -8,6 +8,7 @@ use Aedart\Support\Properties\Strings\SlugTrait;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Factories\GameFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
@@ -20,9 +21,12 @@ use Illuminate\Support\Carbon;
  * @property string $slug
  * @property string $name
  * @property string $description
+ * @property int|null $owner_id Foreign key - owner of this game
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
+ *
+ * @property-read Owner|null $owner The owner of this game
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Http\Api\Models
@@ -57,5 +61,19 @@ class Game extends Model implements Sluggable
     protected static function newFactory()
     {
         return new GameFactory();
+    }
+
+    /*****************************************************************
+     * Relations
+     ****************************************************************/
+
+    /**
+     * The owner of this game
+     *
+     * @return BelongsTo
+     */
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(Owner::class, 'owner_id');
     }
 }
