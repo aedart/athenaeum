@@ -4,6 +4,8 @@ namespace Aedart\Tests\Helpers\Dummies\Http\Api\Models;
 
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Database\Models\Concerns\Slugs;
+use Aedart\Tests\Helpers\Dummies\Http\Api\Factories\OwnerFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -23,6 +25,7 @@ use Illuminate\Support\Carbon;
 class Owner extends Model implements Sluggable
 {
     use Slugs;
+    use HasFactory;
 
     /**
      * The table associated with the model.
@@ -44,4 +47,16 @@ class Owner extends Model implements Sluggable
      * @var string
      */
     protected string $slugKey = 'name';
+
+    /*****************************************************************
+     * Model Factory
+     ****************************************************************/
+
+    /**
+     * @inheritdoc
+     */
+    protected static function newFactory()
+    {
+        return new OwnerFactory();
+    }
 }
