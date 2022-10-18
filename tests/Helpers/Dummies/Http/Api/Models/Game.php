@@ -51,6 +51,15 @@ class Game extends Model implements Sluggable
      */
     protected $guarded = [ 'id' ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'owner_id' => 'integer'
+    ];
+
     /*****************************************************************
      * Model Factory
      ****************************************************************/

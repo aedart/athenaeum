@@ -19,6 +19,16 @@ class OwnerResource extends ApiResource
     /**
      * @inheritDoc
      */
+    public function __construct($resource)
+    {
+        parent::__construct($resource);
+
+        $this->useSlugAsPrimaryKey();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function formatPayload(Request $request): array
     {
         return $this->withTimestamps([

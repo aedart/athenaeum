@@ -19,12 +19,23 @@ class GameResource extends ApiResource
     /**
      * @inheritDoc
      */
+    public function __construct($resource)
+    {
+        parent::__construct($resource);
+
+        $this->useSlugAsPrimaryKey();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function formatPayload(Request $request): array
     {
         return $this->withTimestamps([
             'slug' => $this->getSlugKey(),
             'name' => $this->name,
             'description' => $this->description,
+            'owner' => $this->belongsToReference('owner'),
         ]);
     }
 
