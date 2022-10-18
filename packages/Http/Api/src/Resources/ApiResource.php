@@ -3,6 +3,7 @@
 namespace Aedart\Http\Api\Resources;
 
 use Aedart\Contracts\Database\Models\Sluggable;
+use Aedart\Contracts\Http\Api\Resources\Relations\Exceptions\RelationReferenceException;
 use Aedart\Http\Api\Resources\Concerns;
 use Aedart\Http\Api\Responses\ApiResourceResponse;
 use Illuminate\Http\JsonResponse;
@@ -27,6 +28,22 @@ abstract class ApiResource extends JsonResource
     use Concerns\SelfLink;
     use Concerns\Timestamps;
     use Concerns\FieldSelection;
+    use Concerns\Relations;
+
+    /**
+     * Additional payload formatting
+     *
+     * @var callable|null
+     */
+    protected $additionalFormatter = null;
+
+    /**
+     * When true and resource model is {@see Sluggable},
+     * then a slug will be used as primary key
+     *
+     * @var bool
+     */
+    protected bool $useSlugAsPrimaryKey = false;
 
     /**
      * Format this resource's payload
@@ -36,6 +53,21 @@ abstract class ApiResource extends JsonResource
      * @return array
      */
     abstract public function formatPayload(Request $request): array;
+
+    /**
+     * Set callback that applies additional formatting on payload
+     *
+     * @param  callable|null  $formatter (Pre)formatted payload, {@see Request} and this {@see ApiResource} are
+     *                                   given as callback arguments. Callback MUST return an array!
+     *
+     * @return self
+     */
+    public function format(callable|null $formatter): static
+    {
+        $this->additionalFormatter = $formatter;
+
+        return $this;
+    }
 
     /**
      * @inheritdoc
@@ -68,11 +100,21 @@ abstract class ApiResource extends JsonResource
      * {@inheritdoc}
      *
      * @throws ValidationException
+     * @throws RelationReferenceException
      */
     public function toArray($request): array
     {
-        return $this->onlySelected(
+        if (!isset($this->resource)) {
+            return [];
+        }
+
+        $formatted = $this->applyAdditionalPayloadFormatting(
+            $request,
             $this->formatPayload($request)
+        );
+
+        return $this->onlySelected(
+            $this->resolveRelations($formatted, $request)
         );
     }
 
@@ -114,17 +156,56 @@ abstract class ApiResource extends JsonResource
     }
 
     /**
+     * Set whether model's slug should be used as primary key or not
+     *
+     * The resource model must inherit from {@see Sluggable} before
+     * this takes effect!
+     *
+     * @param  bool  $use  [optional]
+     *
+     * @return self
+     */
+    public function useSlugAsPrimaryKey(bool $use = true): static
+    {
+        $this->useSlugAsPrimaryKey = $use;
+
+        return $this;
+    }
+
+    /**
+     * Determine if model's slug should be used as primary key
+     *
+     * @return bool
+     */
+    public function mustUseSlugAsPrimaryKey(): bool
+    {
+        return $this->useSlugAsPrimaryKey;
+    }
+
+    /**
      * The resource's identifier
      *
      * @return string|int|null
      */
     public function getResourceKey(): string|int|null
     {
-        if ($this->resource instanceof Sluggable) {
-            return $this->resource->getSlugKey();
+        $key = $this->getResourceKeyName();
+
+        return $this->resource->{$key};
+    }
+
+    /**
+     * The resource's identifier key name
+     *
+     * @return string
+     */
+    public function getResourceKeyName(): string
+    {
+        if ($this->mustUseSlugAsPrimaryKey() && $this->resource instanceof Sluggable) {
+            return $this->resource->getSlugKeyName();
         }
 
-        return $this->resource->getKey();
+        return $this->resource->getKeyName();
     }
 
     /**
@@ -150,5 +231,28 @@ abstract class ApiResource extends JsonResource
             'type' => $this->type(),
             'self' => $this->makeSelfLink($request)
         ];
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Applies evt. additional payload formatting
+     *
+     * @param  Request  $request
+     * @param  array  $payload
+     *
+     * @return array
+     */
+    protected function applyAdditionalPayloadFormatting(Request $request, array $payload): array
+    {
+        $callback = $this->additionalFormatter;
+
+        if (!isset($callback)) {
+            return $payload;
+        }
+
+        return $callback($payload, $request, $this);
     }
 }
