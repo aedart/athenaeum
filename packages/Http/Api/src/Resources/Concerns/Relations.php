@@ -5,6 +5,7 @@ namespace Aedart\Http\Api\Resources\Concerns;
 use Aedart\Contracts\Http\Api\Resources\Relations\Exceptions\RelationReferenceException;
 use Aedart\Contracts\Http\Api\Resources\Relations\RelationReference;
 use Aedart\Http\Api\Resources\Relations\BelongsTo;
+use Aedart\Http\Api\Resources\Relations\BelongsToMany;
 use Aedart\Http\Api\Resources\Relations\HasMany;
 use Aedart\Http\Api\Resources\Relations\HasOne;
 use Illuminate\Http\Request;
@@ -30,6 +31,18 @@ trait Relations
     }
 
     /**
+     * Creates a new relation reference that formats a "belongs to many" models relation
+     *
+     * @param  string  $relation
+     *
+     * @return BelongsToMany
+     */
+    public function belongsToManyReference(string $relation): BelongsToMany
+    {
+        return new BelongsToMany($this, $relation);
+    }
+
+    /**
      * Creates a new relation reference that formats a "has one" model relation
      *
      * @param  string  $relation
@@ -42,7 +55,7 @@ trait Relations
     }
 
     /**
-     * Creates a new relation reference that formats a "has many" model relation
+     * Creates a new relation reference that formats a "has many" models relation
      *
      * @param  string  $relation
      *
