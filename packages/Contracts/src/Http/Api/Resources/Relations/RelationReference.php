@@ -29,7 +29,9 @@ interface RelationReference
      *
      * @param  callable  $callback The eager-loaded relation model or collection is given
      *                             as callback argument, along with this relation reference.
-     *                             The callback MUST return some kind of value,
+     *                             The callback MUST return some kind of value. Null is a
+     *                             valid return value.
+     *
      *
      * @return self
      */
