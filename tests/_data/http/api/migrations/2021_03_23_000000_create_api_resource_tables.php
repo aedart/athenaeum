@@ -19,12 +19,34 @@ class CreateApiResourceTables extends Migration
      */
     public function up()
     {
+        Schema::create('addresses', function (Blueprint $table) {
+            $table->id();
+
+            $table
+                ->string('street');
+
+            $table
+                ->string('postal_code');
+
+            $table
+                ->string('city');
+
+            $table->timestamps();
+        });
+
         Schema::create('owners', function (Blueprint $table) {
             $table->id();
 
             $table
                 ->string('name')
                 ->unique();
+
+            $table
+                ->foreignId('address_id')
+                ->nullable()
+                ->constrained('addresses')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
 
             $table->timestamps();
         });
@@ -63,5 +85,6 @@ class CreateApiResourceTables extends Migration
     {
         Schema::dropIfExists('games');
         Schema::dropIfExists('owners');
+        Schema::dropIfExists('addresses');
     }
 }

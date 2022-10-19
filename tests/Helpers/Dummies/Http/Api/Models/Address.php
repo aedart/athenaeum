@@ -2,33 +2,30 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Http\Api\Models;
 
-use Aedart\Contracts\Database\Models\Sluggable;
-use Aedart\Database\Models\Concerns\Slugs;
-use Aedart\Tests\Helpers\Dummies\Http\Api\Factories\OwnerFactory;
+use Aedart\Tests\Helpers\Dummies\Http\Api\Factories\AddressFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
- * Owner
+ * Address
  *
  * FOR TESTING PURPOSES ONLY
  *
  * @property int $id
- * @property string $name
- * @property int|null $address_id Foreign Key - Owner's address
+ * @property string $street
+ * @property string $postal_code
+ * @property string $city
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
- * @property-read Address|null $address Owner's address
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Http\Api\Models
  */
-class Owner extends Model implements Sluggable
+class Address extends Model
 {
-    use Slugs;
+    use SoftDeletes;
     use HasFactory;
 
     /**
@@ -36,7 +33,7 @@ class Owner extends Model implements Sluggable
      *
      * @var string
      */
-    protected $table = 'owners';
+    protected $table = 'addresses';
 
     /**
      * The attributes that aren't mass assignable.
@@ -44,13 +41,6 @@ class Owner extends Model implements Sluggable
      * @var array<string>|bool
      */
     protected $guarded = [ 'id' ];
-
-    /**
-     * Name of slug key
-     *
-     * @var string
-     */
-    protected string $slugKey = 'name';
 
     /*****************************************************************
      * Model Factory
@@ -61,20 +51,11 @@ class Owner extends Model implements Sluggable
      */
     protected static function newFactory()
     {
-        return new OwnerFactory();
+        return new AddressFactory();
     }
 
     /*****************************************************************
      * Relations
      ****************************************************************/
 
-    /**
-     * Owner's address
-     *
-     * @return BelongsTo
-     */
-    public function address(): BelongsTo
-    {
-        return $this->belongsTo(Address::class, 'address_id');
-    }
 }

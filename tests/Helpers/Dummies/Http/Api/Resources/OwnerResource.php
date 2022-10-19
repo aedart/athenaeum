@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Helpers\Dummies\Http\Api\Resources;
 
 use Aedart\Http\Api\Resources\ApiResource;
+use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Address;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Owner;
 use Illuminate\Http\Request;
 
@@ -34,6 +35,14 @@ class OwnerResource extends ApiResource
         return $this->withTimestamps([
             'id' => $this->getKey(),
             'name' => $this->name,
+            'address' => $this->belongsToReference('address')
+                ->withLabel(function(Address $model) {
+                    $street = $model->street;
+                    $code = $model->postal_code;
+                    $city = $model->city;
+
+                    return "{$street}, {$code} {$city}";
+                })
         ]);
     }
 
