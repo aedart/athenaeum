@@ -9,6 +9,7 @@ use Aedart\Http\Api\Resources\Relations\Concerns;
 use Aedart\Http\Api\Resources\Relations\Exceptions\CannotInvokeCallback;
 use Aedart\Http\Api\Resources\Relations\Exceptions\RelationReferenceException;
 use Aedart\Http\Api\Traits\ApiResourceRegistrarTrait;
+use Aedart\Utils\Str;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -147,20 +148,14 @@ abstract class BaseRelationReference implements RelationReference
      */
     public function getEagerLoadedRelation()
     {
-        $name = $this->getRelationName();
-        $model = $this->getModel();
+        $relation = $this->getRelationName();
+        $parent = $this->getModel();
 
-        if (!isset($model)) {
+        if (!isset($parent)) {
             return null;
         }
 
-        // TODO: What if requested relation is nested, e.g. using dot syntax?!
-
-        if ($model->relationLoaded($name) && isset($model->{$name})) {
-            return $model->getRelation($name);
-        }
-
-        return null;
+        return $this->loadNestedRelation($parent, $relation);
     }
 
     /**
@@ -281,5 +276,44 @@ abstract class BaseRelationReference implements RelationReference
         }
 
         return $resourceClass::make($relation);
+    }
+
+    /**
+     * Load nested relation from parent model
+     *
+     * @param  Model  $parent
+     * @param  string  $relation Name of relation to load
+     *
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection<\Illuminate\Database\Eloquent\Model>|null
+     */
+    protected function loadNestedRelation(Model $parent, string $relation)
+    {
+        // Skip if the requested relation is empty... (edge case)
+        if (empty($relation)) {
+            return null;
+        }
+
+        // By default, we assume that requested relation name is not a nested
+        // relation and attempt to obtain it directly.
+        if ($parent->relationLoaded($relation) && isset($parent->{$relation})) {
+            return $parent->getRelation($relation);
+        }
+
+        // If no relation was obtained, we check if requested relation contains a dot.
+        // In such a case, it means that requested relation is a nested relation. We
+        // must traverse the chain to get it.
+        if (Str::contains($relation, '.')) {
+            $relations = explode('.', $relation);
+
+            // Get the name of the "top most" relation (parent). If it is loaded,
+            // obtain it and attempt to load it's nested relation.
+            $nested = array_shift($relations);
+
+            if ($parent->relationLoaded($nested) && isset($parent->{$nested})) {
+                return $this->loadNestedRelation($parent->getRelation($nested), implode('.', $relations));
+            }
+        }
+
+        return null;
     }
 }
