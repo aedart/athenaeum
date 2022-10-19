@@ -5,7 +5,7 @@ namespace Aedart\Tests\Helpers\Dummies\Http\Api\Models;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Factories\AddressFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 /**
@@ -19,6 +19,8 @@ use Illuminate\Support\Carbon;
  * @property string $city
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @property-read Owner|null $owner The owner of this address
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Http\Api\Models
@@ -57,4 +59,13 @@ class Address extends Model
      * Relations
      ****************************************************************/
 
+    /**
+     * Owner of this address
+     *
+     * @return HasOne
+     */
+    public function owner(): HasOne
+    {
+        return $this->hasOne(Owner::class, 'address_id');
+    }
 }

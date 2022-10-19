@@ -5,6 +5,7 @@ namespace Aedart\Http\Api\Resources\Concerns;
 use Aedart\Contracts\Http\Api\Resources\Relations\Exceptions\RelationReferenceException;
 use Aedart\Contracts\Http\Api\Resources\Relations\RelationReference;
 use Aedart\Http\Api\Resources\Relations\BelongsTo;
+use Aedart\Http\Api\Resources\Relations\HasOne;
 use Illuminate\Http\Request;
 
 /**
@@ -25,6 +26,18 @@ trait Relations
     public function belongsToReference(string $relation): BelongsTo
     {
         return new BelongsTo($this, $relation);
+    }
+
+    /**
+     * Creates a new relation reference that formats a "has one" model relation
+     *
+     * @param  string  $relation
+     *
+     * @return HasOne
+     */
+    public function hasOneReference(string $relation): HasOne
+    {
+        return new HasOne($this, $relation);
     }
 
     /**
