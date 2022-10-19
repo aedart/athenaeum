@@ -95,7 +95,7 @@ class HasOneReferenceTest extends ApiResourcesTestCase
             ->format(function(array $payload, $request, ApiResource $resource) {
                 // Manually add relation
                 $payload['owner'] = $resource
-                    ->belongsToReference('owner')
+                    ->hasOneReference('owner')
                     ->usePrimaryKey('id', 'ID')
                     ->withLabel(function(Owner $model) {
                         return $model->name;
