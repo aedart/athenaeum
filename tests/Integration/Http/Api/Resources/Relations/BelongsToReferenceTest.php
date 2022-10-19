@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /**
- * RelationReferencesTest
+ * BelongsToReferenceTest
  *
  * @group http-api
  * @group api-resource
@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources\Relations
  */
-class BelongsToRelationReferenceTest extends ApiResourcesTestCase
+class BelongsToReferenceTest extends ApiResourcesTestCase
 {
     /**
      * When true, migrations for this test-case will
