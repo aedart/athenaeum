@@ -95,7 +95,7 @@ class CreateApiResourceTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('user_role', function (Blueprint $table) {
+        Schema::create('role_user', function (Blueprint $table) {
             $table->id();
 
             $table
@@ -127,7 +127,7 @@ class CreateApiResourceTables extends Migration
         Schema::dropIfExists('owners');
         Schema::dropIfExists('addresses');
 
-        Schema::dropIfExists('user_role');
+        Schema::dropIfExists('role_user');
         Schema::dropIfExists('users');
         Schema::dropIfExists('roles');
     }
