@@ -173,38 +173,53 @@ abstract class BaseRelationReference implements RelationReference
     /**
      * Formats a single relation model as this reference's value
      *
-     * @param  Model  $relation
+     * @param  Model  $related
      * @param  static  $relationReference
      *
      * @return mixed Formatted reference value
      *
      * @throws RelationReferenceExceptionInterface
      */
-    public function formatSingleLoadedModel(Model $relation, $relationReference): mixed
+    public function formatSingleLoadedModel(Model $related, $relationReference): mixed
     {
         // Obtain the relation's primary identifier and return it directly,
         // when relation must be formatted as a primitive value.
-        $identifier = $this->resolveIdentifier($relation, $relationReference->getPrimaryKeyName(), $relationReference);
+        $identifier = $this->resolveIdentifier($related, $relationReference->getPrimaryKeyName(), $relationReference);
 
         if ($relationReference->mustReturnRawIdentifier()) {
             return $identifier;
         }
 
         // Format reference's value. Obtain attributes to be displayed.
-        $output = $this->addRelatedModelPrimaryKey([], $identifier, $relation, $relationReference);
+        $output = $this->addRelatedModelPrimaryKey([], $identifier, $related, $relationReference);
 
         // Add label, if needed
-        $output = $this->addLabel($output, $relation, $relationReference);
+        $output = $this->addLabel($output, $related, $relationReference);
 
         // Show Resource Type, if needed
-        $output = $this->addResourceType($output, $relation, $relationReference);
+        $output = $this->addResourceType($output, $related, $relationReference);
 
         // Show self link,...
-        $output = $this->addSelfLink($output, $relation, $relationReference);
+        $output = $this->addSelfLink($output, $related, $relationReference);
 
         // Finally, apply an evt. "additional" callback that allows developer
         // to add or change the final output entirely.
-        return $this->applyAdditionalFormatting($output, $relation, $relationReference);
+        return $this->applyAdditionalFormatting($output, $related, $relationReference);
+    }
+
+    /**
+     * Formats a multiple related model as this reference's value
+     *
+     * @param  Collection<Model>  $related
+     * @param  static  $relationReference
+     *
+     * @return array List of reference values, one for each related model
+     */
+    public function formatMultipleLoadedModels(Collection $related, $relationReference): array
+    {
+        return $related->map(function(Model $model) use($relationReference) {
+            return $relationReference->formatSingleLoadedModel($model, $relationReference);
+        })->toArray();
     }
 
     /*****************************************************************
