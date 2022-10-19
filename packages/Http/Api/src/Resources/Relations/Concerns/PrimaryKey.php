@@ -69,12 +69,14 @@ trait PrimaryKey
      * Set name of the key to use as the loaded relation's primary identifier
      *
      * @param  string|null  $name  [optional] E.g. id
+     * @param  string|null  $displayName  [optional] See {@see setPrimaryKeyDisplayName}
      *
      * @return self
      */
-    public function usePrimaryKey(string|null $name = null): static
+    public function usePrimaryKey(string|null $name = null, string|null $displayName = null): static
     {
         $this->primaryKeyName = $name;
+        $this->setPrimaryKeyDisplayName($displayName);
 
         return $this;
     }
