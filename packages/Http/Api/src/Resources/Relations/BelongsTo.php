@@ -2,9 +2,6 @@
 
 namespace Aedart\Http\Api\Resources\Relations;
 
-use Aedart\Contracts\Http\Api\Resources\Relations\Exceptions\RelationReferenceException as RelationReferenceExceptionInterface;
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Belongs To Relation Reference
  *
