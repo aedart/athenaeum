@@ -11,7 +11,7 @@ namespace Aedart\Http\Api\Resources\Relations;
 class BelongsTo extends BaseRelationReference
 {
     /**
-     * Creates a new "belongs to"  relation reference
+     * Creates a new "belongs to" relation reference
      *
      * {@inheritDoc}
      */

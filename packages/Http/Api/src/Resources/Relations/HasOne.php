@@ -11,7 +11,7 @@ namespace Aedart\Http\Api\Resources\Relations;
 class HasOne extends BaseRelationReference
 {
     /**
-     * Creates a new "has one"  relation reference
+     * Creates a new "has one" relation reference
      *
      * {@inheritDoc}
      */
