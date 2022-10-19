@@ -13,12 +13,11 @@ use Illuminate\Database\Eloquent\Model;
 trait Label
 {
     /**
-     * Name of attribute to be used as reference's
-     * display name
+     * Ev.t label to show for relation.
      *
-     * @var string|null
+     * @var string|callable|null
      */
-    protected string|null $labelKeyName = null;
+    protected $label = null;
 
     /**
      * Display name of the key to show relation's label
@@ -28,15 +27,16 @@ trait Label
     protected string $labelDisplayName = 'name';
 
     /**
-     * Set the attribute to use as relations display name or label
+     * Set the attribute to use a relation's display name, or label.
+     * Or specify a callback that creates a label.
      *
-     * @param  string|null  $attribute  [optional]
+     * @param  string|callable|null  $attribute  [optional]
      *
      * @return self
      */
-    public function withLabel(string|null $attribute = null): static
+    public function withLabel(string|callable|null $attribute = null): static
     {
-        $this->labelKeyName = $attribute;
+        $this->label = $attribute;
 
         return $this;
     }
@@ -58,17 +58,17 @@ trait Label
      */
     public function mustShowLabel(): bool
     {
-        return isset($this->labelKeyName);
+        return isset($this->label);
     }
 
     /**
-     * Returns attribute name to be used as display name or label
+     * Returns attribute name, or callback, to be used as display name or label
      *
-     * @return string|null
+     * @return string|callable|null
      */
-    public function getLabelKeyName(): string|null
+    public function getLabel(): string|callable|null
     {
-        return $this->labelKeyName;
+        return $this->label;
     }
 
     /**
@@ -110,8 +110,15 @@ trait Label
             return $output;
         }
 
-        $labelKey = $relationReference->getLabelKeyName();
-        $output[$relationReference->getLabelDisplayName()] = $relation->{$labelKey};
+        $displayName = $relationReference->getLabelDisplayName();
+        $label = $relationReference->getLabel();
+
+        // When label is a string, we assume that it's a attribute in related model
+        if (is_string($label)) {
+            $output[$displayName] = $relation->{$label};
+        } elseif (is_callable($label)) {
+            $output[$displayName] = $label($relation, $relationReference);
+        }
 
         return $output;
     }

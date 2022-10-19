@@ -351,6 +351,52 @@ class BelongsToRelationReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    public function canDisplayWithLabelCallback(): void
+    {
+        /** @var Game $record */
+        $record = Game::query()
+            ->with([ 'owner' ])
+            ->inRandomOrder()
+            ->first();
+
+        // -------------------------------------------------------------- //
+
+        $resource = (new GameResource($record))
+            ->format(function(array $payload, $request, ApiResource $resource) {
+                $payload['owner'] = $resource
+                    ->belongsToReference('owner')
+                    ->withLabel(function(Owner $model) {
+                        $id = $model->getKey();
+                        $name = $model->name;
+
+                        return "{$id} | {$name}";
+                    })
+                    ->setLabelDisplayName('label');
+
+                return $payload;
+            });
+
+        $result = $resource->resolve(Request::create('something'));
+
+        ConsoleDebugger::output($result);
+
+        // -------------------------------------------------------------- //
+
+        $this->assertArrayHasKey('owner', $result);
+
+        $owner = $result['owner'];
+        $this->assertArrayHasKey('label', $owner);
+
+        $id = $record->owner->getKey();
+        $name = $record->owner->name;
+        $this->assertSame("{$id} | {$name}", $owner['label']);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
     public function failsShowingResourceTypeWhenNotRegistered(): void
     {
         $this->expectException(RelationReferenceException::class);
