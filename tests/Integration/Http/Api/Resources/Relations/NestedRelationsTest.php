@@ -109,7 +109,9 @@ class NestedRelationsTest extends ApiResourcesTestCase
                     ->belongsToReference('owner.address')
                     ->withLabel(function(Address $model) {
                         return $model->street;
-                    });
+                    })
+                    ->withSelfLink()
+                    ->withResourceType();
 
                 return $payload;
             });
@@ -130,5 +132,11 @@ class NestedRelationsTest extends ApiResourcesTestCase
 
         $this->assertArrayHasKey('name', $address);
         $this->assertSame($addressModel->street, $address['name']);
+
+        $this->assertArrayHasKey('self', $address);
+        $this->assertNotEmpty($address['self']);
+
+        $this->assertArrayHasKey('type', $address);
+        $this->assertSame('address', $address['type']);
     }
 }
