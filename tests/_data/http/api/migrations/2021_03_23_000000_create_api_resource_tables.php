@@ -74,6 +74,46 @@ class CreateApiResourceTables extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        // ----------------------------------------------------------------------------- //
+
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+
+            $table
+                ->string('name');
+
+            $table->timestamps();
+        });
+
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+
+            $table
+                ->string('name');
+
+            $table->timestamps();
+        });
+
+        Schema::create('user_role', function (Blueprint $table) {
+            $table->id();
+
+            $table
+                ->foreignId('user_id')
+                ->constrained('users')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
+            $table
+                ->foreignId('role_id')
+                ->constrained('roles')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
+            $table->timestamps();
+
+            $table->unique([ 'user_id', 'role_id' ]);
+        });
     }
 
     /**
@@ -86,5 +126,9 @@ class CreateApiResourceTables extends Migration
         Schema::dropIfExists('games');
         Schema::dropIfExists('owners');
         Schema::dropIfExists('addresses');
+
+        Schema::dropIfExists('user_role');
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('roles');
     }
 }
