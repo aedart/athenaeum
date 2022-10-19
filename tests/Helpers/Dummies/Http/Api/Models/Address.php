@@ -25,7 +25,6 @@ use Illuminate\Support\Carbon;
  */
 class Address extends Model
 {
-    use SoftDeletes;
     use HasFactory;
 
     /**
