@@ -83,7 +83,6 @@ class NestedRelationsTest extends ApiResourcesTestCase
      * Actual Tests
      ****************************************************************/
 
-
     /**
      * @test
      *
