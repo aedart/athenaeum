@@ -22,6 +22,14 @@ class SelectedFieldsCollection implements SelectedFieldsCollectionInterface
     ){}
 
     /**
+     * @inheritDoc
+     */
+    public function has(string $field): bool
+    {
+        return in_array($field, $this->fields);
+    }
+
+    /**
      * @inheritdoc
      */
     public function isEmpty(): bool

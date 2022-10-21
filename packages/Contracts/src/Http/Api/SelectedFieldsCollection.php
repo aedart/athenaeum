@@ -18,6 +18,15 @@ interface SelectedFieldsCollection extends
     Countable
 {
     /**
+     * Determine if field is in this collection
+     *
+     * @param  string  $field
+     *
+     * @return bool
+     */
+    public function has(string $field): bool;
+
+    /**
      * Determine if this collection is empty
      *
      * @return bool
