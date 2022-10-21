@@ -23,6 +23,13 @@ class CaptureFieldsToSelect
     use ContainerTrait;
 
     /**
+     * Name of the query parameter that holds requested fields
+     *
+     * @var string
+     */
+    protected string $selectQueryKey;
+
+    /**
      * Captures "select" query parameter
      *
      * @param  Request  $request
@@ -35,6 +42,8 @@ class CaptureFieldsToSelect
      */
     public function handle(Request $request, Closure $next, string $key = 'select'): mixed
     {
+        $this->selectQueryKey = $key;
+
         $raw = $request->query($key);
 
         // When no "select" query parameter is received, skip to next...
@@ -115,9 +124,11 @@ class CaptureFieldsToSelect
      */
     protected function validateSelectedFields(array $fields): array
     {
-        $validator = $this->getValidatorFactory()->make([ 'select' => $fields ], [
-            'select' => 'array|min:1|max:20',
-            'select.*' => [
+        $key = $this->selectQueryKey;
+
+        $validator = $this->getValidatorFactory()->make([ $key => $fields ], [
+            $key => 'array|min:1|max:20',
+            "{$key}.*" => [
                 'string',
                 new AlphaDashDot(),
                 'min:1',
@@ -127,6 +138,6 @@ class CaptureFieldsToSelect
 
         $data = $validator->validate();
 
-        return $data['select'];
+        return $data[$key];
     }
 }
