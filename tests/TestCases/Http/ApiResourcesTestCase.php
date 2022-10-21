@@ -10,6 +10,7 @@ use Aedart\Http\Api\Providers\ApiResourceServiceProvider;
 use Aedart\Http\Api\Traits\ApiResourceRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
+use Aedart\Validation\Providers\ValidationServiceProvider;
 use Codeception\Configuration;
 
 /**
@@ -70,7 +71,8 @@ abstract class ApiResourcesTestCase extends LaravelTestCase
     {
         return [
             ConfigLoaderServiceProvider::class,
-            ApiResourceServiceProvider::class
+            ApiResourceServiceProvider::class,
+            ValidationServiceProvider::class
         ];
     }
 
