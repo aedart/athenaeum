@@ -82,7 +82,7 @@ class CaptureFieldsToSelect
      */
     protected function cleanup(): void
     {
-        $this->getContainer()->forgetInstance(SelectedFieldsCollectionInstance::class);
+        unset($this->getContainer()[SelectedFieldsCollectionInstance::class]);
     }
 
     /**
