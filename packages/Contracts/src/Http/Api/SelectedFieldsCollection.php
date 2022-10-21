@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Http\Api;
 
 use ArrayAccess;
+use Countable;
 use Illuminate\Contracts\Support\Arrayable;
 
 /**
@@ -11,8 +12,10 @@ use Illuminate\Contracts\Support\Arrayable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Api
  */
-interface SelectedFieldsCollection extends Arrayable,
-                                           ArrayAccess
+interface SelectedFieldsCollection extends
+    Arrayable,
+    ArrayAccess,
+    Countable
 {
     /**
      * Determine if this collection is empty

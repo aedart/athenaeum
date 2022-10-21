@@ -38,6 +38,14 @@ class SelectedFieldsCollection implements SelectedFieldsCollectionInterface
     }
 
     /**
+     * @inheritDoc
+     */
+    public function count()
+    {
+        return count($this->fields);
+    }
+
+    /**
      * @inheritdoc
      */
     public function toArray(): array
