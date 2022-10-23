@@ -138,41 +138,4 @@ class NestedRelationsTest extends ApiResourcesTestCase
         $this->assertArrayHasKey('type', $address);
         $this->assertSame('address', $address['type']);
     }
-
-    /**
-     * @test
-     *
-     * @return void
-     */
-    public function tmp(): void
-    {
-        /** @var Game $record */
-        $record = Address::query()
-            ->inRandomOrder()
-            ->first();
-
-        // -------------------------------------------------------------- //
-
-        $resource = (new AddressResource($record))
-            ->withSelfLink()
-            ->format(function(array $payload, $request, ApiResource $resource) {
-//                $payload['owner'] = $resource
-//                    ->belongsToReference('owner');
-//
-//                // Manually add a nested relation to the output
-//                $payload['owner_address'] = $resource
-//                    ->belongsToReference('owner.address')
-//                    ->withLabel(function(Address $model) {
-//                        return $model->street;
-//                    })
-//                    ->withSelfLink()
-//                    ->withResourceType();
-
-                return $payload;
-            });
-
-        $result = $resource->toResponse(Request::create('something'));
-
-        ConsoleDebugger::output((string) $result);
-    }
 }
