@@ -234,8 +234,16 @@ module.exports.sidebar = function(){
                                 'http/api/resources/timestamps',
                                 'http/api/resources/self-link',
                                 'http/api/resources/relations',
-                                'http/api/resources/fields-selection',
                                 'http/api/resources/registrar',
+                            ]
+                        },
+                        {
+                            title: 'Middleware',
+                            collapsable: true,
+                            children: [
+                                'http/api/middleware/',
+                                'http/api/middleware/must-be-json',
+                                'http/api/middleware/fields-to-select',
                             ]
                         }
                     ]
