@@ -81,6 +81,8 @@ jobs:
             remote: 'athenaeum-filters'
           - local: 'Flysystem/Db'
             remote: 'athenaeum-flysystem-db'
+          - local: 'Http/Api'
+            remote: 'athenaeum-http-api'
           - local: 'Http/Clients'
             remote: 'athenaeum-http-clients'
           - local: 'Http/Cookies'

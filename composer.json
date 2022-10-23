@@ -77,6 +77,7 @@
             "Aedart\\Events\\": "packages/Events/src",
             "Aedart\\Filters\\": "packages/Filters/src",
             "Aedart\\Flysystem\\Db\\": "packages/Flysystem/Db/src",
+            "Aedart\\Http\\Api\\": "packages/Http/Api/src",
             "Aedart\\Http\\Clients\\": "packages/Http/Clients/src",
             "Aedart\\Http\\Cookies\\": "packages/Http/Cookies/src",
             "Aedart\\Http\\Messages\\": "packages/Http/Messages/src",
@@ -113,6 +114,7 @@
         "aedart/athenaeum-events": "6.4.0",
         "aedart/athenaeum-filters": "6.4.0",
         "aedart/athenaeum-flysystem-db": "6.4.0",
+        "aedart/athenaeum-http-api": "6.4.0",
         "aedart/athenaeum-http-clients": "6.4.0",
         "aedart/athenaeum-http-cookies": "6.4.0",
         "aedart/athenaeum-http-messages": "6.4.0",
@@ -143,10 +145,10 @@
             "@composer bin all update --ansi"
         ],
         "check": [
-            "vendor/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary --runtime-set testVersion 8.0- ./packages ./tests"
+            "vendor-bin/cs/vendor/squizlabs/php_codesniffer/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary --runtime-set testVersion 8.0- ./packages ./tests"
         ],
-        "cs": "vendor/bin/ecs check --ansi",
-        "cs-fix": "vendor/bin/ecs check --fix --ansi",
+        "cs": "vendor-bin/cs/vendor/symplify/easy-coding-standard/bin/ecs check --ansi",
+        "cs-fix": "vendor-bin/cs/vendor/symplify/easy-coding-standard/bin/ecs check --fix --ansi",
         "docs:dev": "npm run docs:dev --ansi"
     },
     "config": {
@@ -158,6 +160,13 @@
     "extra": {
         "branch-alias": {
             "dev-master": "6.4-dev"
+        },
+        "extra": {
+            "bamarni-bin": {
+                "bin-links": false,
+                "target-directory": "vendor-bin",
+                "forward-command": false
+            }
         }
     },
     "minimum-stability": "dev",

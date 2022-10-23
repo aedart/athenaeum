@@ -43,5 +43,5 @@ return static function (ECSConfig $config): void {
     ]);
 
     // Run all checks parallel (should be much faster)
-    $parameters->set(Option::PARALLEL, true);
+    $config->parallel();
 };

@@ -1,5 +1,5 @@
 /vendor
-/vendor-bin/*/vendor
+/vendor-bin/**/vendor
 .DS_Store
 .idea/
 Thumbs.db
