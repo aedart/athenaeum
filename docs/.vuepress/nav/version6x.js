@@ -220,6 +220,35 @@ module.exports.sidebar = function(){
             collapsable: true,
             children: [
                 {
+                    title: 'Api',
+                    collapsable: true,
+                    children: [
+                        'http/api/',
+                        'http/api/install',
+                        'http/api/setup',
+                        {
+                            title: 'Resources',
+                            collapsable: true,
+                            children: [
+                                'http/api/resources/',
+                                'http/api/resources/timestamps',
+                                'http/api/resources/self-link',
+                                'http/api/resources/relations',
+                                'http/api/resources/registrar',
+                            ]
+                        },
+                        {
+                            title: 'Middleware',
+                            collapsable: true,
+                            children: [
+                                'http/api/middleware/',
+                                'http/api/middleware/must-be-json',
+                                'http/api/middleware/fields-to-select',
+                            ]
+                        }
+                    ]
+                },
+                {
                     title: 'Clients',
                     collapsable: true,
                     children: [
