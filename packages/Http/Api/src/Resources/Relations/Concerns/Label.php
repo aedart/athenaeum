@@ -113,7 +113,7 @@ trait Label
         $displayName = $relationReference->getLabelDisplayName();
         $label = $relationReference->getLabel();
 
-        // When label is a string, we assume that it's a attribute in related model
+        // When label is a string, we assume that it's an attribute in related model
         if (is_string($label)) {
             $output[$displayName] = $relation->{$label};
         } elseif (is_callable($label)) {
