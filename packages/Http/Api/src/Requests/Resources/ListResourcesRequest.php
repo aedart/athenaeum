@@ -15,6 +15,7 @@ use Illuminate\Contracts\Validation\Validator;
 abstract class ListResourcesRequest extends ValidatedApiRequest
 {
     use Concerns\Pagination;
+    use Concerns\Filtering;
 
     /**
      * @inheritdoc
@@ -40,6 +41,8 @@ abstract class ListResourcesRequest extends ValidatedApiRequest
     public function prepareForAfterValidation(Validator $validator): void
     {
         $this->preparePagination($validator);
+
+        $this->prepareFilters($validator);
 
         parent::prepareForAfterValidation($validator);
     }
