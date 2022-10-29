@@ -24,6 +24,9 @@
             "Aedart\\Http\\Api\\": "src"
         }
     },
+    "suggest": {
+        "laravel/framework": "Required if you want to make use of API Request abstractions"
+    },
     "config": {
         "sort-packages": true
     },
