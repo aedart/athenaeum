@@ -16,6 +16,7 @@
         "aedart/athenaeum-contracts": "^6.6",
         "aedart/athenaeum-database": "^6.6",
         "aedart/athenaeum-support": "^6.6",
+        "aedart/athenaeum-validation": "^6.6",
         "aedart/athenaeum-utils": "^6.6",
         "illuminate/auth": "^v9.30.1"
     },
