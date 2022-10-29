@@ -58,6 +58,9 @@ trait Pagination
     /**
      * Name of the query parameter that contains requested page
      *
+     * @see \Illuminate\Database\Eloquent\Builder::paginate
+     * @see \Illuminate\Database\Eloquent\Builder::simplePaginate
+     *
      * @var string
      */
     protected string $pageKey = 'page';
