@@ -28,6 +28,18 @@ return [
                 'hash_algo' => 'sha1',
                 'is_weak' => false,
             ],
+        ],
+
+        'model' => [
+            'driver' => \Aedart\ETags\Generators\EloquentModelGenerator::class,
+            'options' => [
+                'hash_algo' => 'crc32',
+                'is_weak' => true,
+
+                'attributes' => [
+                    'updated_at'
+                ],
+            ],
         ]
     ]
 ];
