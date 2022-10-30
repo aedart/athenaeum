@@ -17,6 +17,11 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest
     use Concerns\SingleRecord;
 
     /**
+     * @inheritdoc
+     */
+    protected bool $withRouteParameters = true;
+
+    /**
      * @inheritDoc
      */
     public function authorizeAfterValidation(): bool
