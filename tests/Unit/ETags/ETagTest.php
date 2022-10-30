@@ -44,6 +44,18 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    public function failsWhenEmptyRawValue(): void
+    {
+        ETag::make('');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
     public function canParseFromHttpHeaderValue(): void
     {
         $raw = '0815';

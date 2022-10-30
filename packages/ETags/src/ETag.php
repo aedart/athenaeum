@@ -3,6 +3,7 @@
 namespace Aedart\ETags;
 
 use Aedart\Contracts\ETags\ETag as ETagInterface;
+use Aedart\ETags\Exceptions\InvalidRawValue;
 use Aedart\ETags\Exceptions\UnableToParseETag;
 
 /**
@@ -29,7 +30,11 @@ class ETag implements ETagInterface
     public function __construct(
         protected string $rawValue,
         protected bool $isWeak = false
-    ) {}
+    ) {
+        if (empty($this->rawValue)) {
+            throw new InvalidRawValue('Cannot create ETag for empty string value');
+        }
+    }
 
     /**
      * @inheritDoc

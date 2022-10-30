@@ -22,6 +22,8 @@ interface ETag extends Stringable
      * @param  bool  $isWeak  [optional]
      *
      * @return static
+     *
+     * @throws ETagException If empty string provided as raw value
      */
     public static function make(string $rawValue, bool $isWeak = false): static;
 
