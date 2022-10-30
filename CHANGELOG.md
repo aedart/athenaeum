@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* Useless `$notFoundMsg` is now removed, inside Circuit Breaker Manager's internal "find or fail" methods (_cleanup_).
+
 ## [6.5.0] - 2022-10-23
 
 ### Added
