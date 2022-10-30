@@ -5,6 +5,7 @@ namespace Aedart\Tests\Unit\ETags;
 use Aedart\Contracts\ETags\ETag as ETagInterface;
 use Aedart\Contracts\ETags\Exceptions\ETagException;
 use Aedart\ETags\ETag;
+use Aedart\ETags\Exceptions\InvalidRawValue;
 use Aedart\ETags\Exceptions\UnableToParseETag;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
@@ -46,6 +47,8 @@ class ETagTest extends UnitTestCase
      */
     public function failsWhenEmptyRawValue(): void
     {
+        $this->expectException(InvalidRawValue::class);
+
         ETag::make('');
     }
 
