@@ -40,5 +40,21 @@ trait SingleRecord
     public function prepareRecord(Validator $validator): void
     {
         $this->record = $this->findRecordOrFail($validator);
+
+        $this->onRecordFound($this->record, $validator);
+    }
+
+    /**
+     * Hook method for when requested record was found
+     *
+     * @param \Illuminate\Database\Eloquent\Model $record
+     * @param  Validator  $validator
+     *
+     * @return void
+     */
+    public function onRecordFound($record, Validator $validator): void
+    {
+        // N/A - Overwrite this method if you need additional prepare or
+        // validation logic, immediately after requested record was found.
     }
 }
