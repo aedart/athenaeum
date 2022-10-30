@@ -1,0 +1,35 @@
+{
+    "name": "aedart/athenaeum-etags",
+    "description": "ETag Generator",
+    "keywords": ["Athenaeum", "ETag", "Generator", "Http"],
+    "homepage": "https://aedart.github.io/athenaeum/",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "aedart/athenaeum-contracts": "^6.6",
+        "aedart/athenaeum-support": "^6.6",
+        "aedart/athenaeum-utils": "^6.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\ETags\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "6.1.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
