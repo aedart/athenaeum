@@ -19,19 +19,9 @@ interface Generator
      *
      * @param  mixed  $content
      *
-     * @return string
+     * @return ETag
      *
      * @throws ETagGeneratorException If unable to generate ETag for given content
      */
-    public function make(mixed $content): string;
-
-    /**
-     * Compare two ETags against each other
-     *
-     * @param  string  $knownETag ETag of known resource or content
-     * @param  string  $userETag User provided ETag, e.g. from If-Match HTTP Header
-     *
-     * @return bool True if both ETags are equal
-     */
-    public function matches(string $knownETag, string $userETag): bool;
+    public function make(mixed $content): ETag;
 }
