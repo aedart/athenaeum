@@ -35,18 +35,23 @@ trait Filtering
     public function scopeApplyFilters(Builder|EloquentBuilder $query, Criteria|array $filters = []): Builder|EloquentBuilder
     {
         if (!is_array($filters)) {
-            $filters = [ $filters ];
+            $filters = [$filters];
         }
 
-        foreach ($filters as $filter) {
-            // Skip if filter is not applicable
-            if (!$filter->isApplicable($query, $filters)) {
-                continue;
+        // Apply filters in a logical group, so that they do not mess with
+        // evt. already applied criteria and expressions.
+
+        $query->where(function ($query) use ($filters) {
+            foreach ($filters as $filter) {
+                // Skip if filter is not applicable
+                if (!$filter->isApplicable($query, $filters)) {
+                    continue;
+                }
+
+                // Apply scope
+                $query = $filter->apply($query);
             }
-
-            // Apply scope
-            $query = $filter->apply($query);
-        }
+        });
 
         return $query;
     }
