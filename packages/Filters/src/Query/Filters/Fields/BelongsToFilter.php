@@ -259,7 +259,7 @@ class BelongsToFilter extends BaseFieldFilter
             return;
         }
 
-        // Allow list of numeric values...
+        // Allow list of numeric or string values...
         if (in_array($operator, [ 'in', 'not_in' ]) && Str::contains($value, ',')) {
             $values = $this->valueToList($value);
 
