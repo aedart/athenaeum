@@ -2,6 +2,7 @@
 
 namespace Aedart\ETags\Generators;
 
+use Aedart\ETags\Exceptions\UnableToGenerateETag;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 
@@ -21,14 +22,13 @@ class GenericGenerator extends BaseGenerator
         // Whatever content is given, this generator assumes that
         // it can be cast to a string value...
 
-        if (is_array($content)) {
-            return serialize($content);
-        } elseif ($content instanceof Arrayable) {
-            return serialize($content->toArray());
-        } elseif ($content instanceof Jsonable) {
-            return $content->toJson();
-        }
-
-        return (string) $content;
+        return match (true) {
+            is_string($content) => $content,
+            is_numeric($content) || is_bool($content) => (string) $content,
+            is_array($content) => serialize($content),
+            $content instanceof Arrayable => serialize($content->toArray()),
+            $content instanceof Jsonable => $content->toJson(),
+            default => throw new UnableToGenerateETag(sprintf('Unable to resolve content: %s', var_export($content, true)))
+        };
     }
 }

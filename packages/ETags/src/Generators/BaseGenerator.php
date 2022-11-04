@@ -57,6 +57,8 @@ abstract class BaseGenerator implements Generator
      * @param  mixed  $content
      *
      * @return string
+     *
+     * @throws UnableToGenerateETag
      */
     abstract public function resolveContent(mixed $content): string;
 
