@@ -7,6 +7,7 @@ use Aedart\Contracts\ETags\Exceptions\ETagException;
 use Aedart\Contracts\ETags\Generator;
 use Aedart\ETags\ETag;
 use Aedart\ETags\Exceptions\UnableToGenerateETag;
+use Throwable;
 
 /**
  * Base ETag Generator
