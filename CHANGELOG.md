@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Useless `$notFoundMsg` is now removed, inside Circuit Breaker Manager's internal "find or fail" methods (_cleanup_).
 
+## [6.5.1] - 2022-11-04
+
+### Fixed
+
+* Unintended filter criteria overwrite in `ConstraintsProcessor`. [#117](https://github.com/aedart/athenaeum/issues/117), [#118](https://github.com/aedart/athenaeum/pull/118).
+
 ## [6.5.0] - 2022-10-23
 
 ### Added
@@ -850,7 +856,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/6.5.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/6.5.1...HEAD
+[6.5.1]: https://github.com/aedart/athenaeum/compare/6.5.0...6.5.1
 [6.5.0]: https://github.com/aedart/athenaeum/compare/6.4.0...6.5.0
 [6.4.0]: https://github.com/aedart/athenaeum/compare/6.3.0...6.4.0
 [6.3.0]: https://github.com/aedart/athenaeum/compare/6.2.1...6.3.0
