@@ -2,6 +2,9 @@
 
 namespace Aedart\ETags\Generators;
 
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+
 /**
  * Generic ETag Generator
  *
@@ -20,6 +23,10 @@ class GenericGenerator extends BaseGenerator
 
         if (is_array($content)) {
             return serialize($content);
+        } elseif ($content instanceof Arrayable) {
+            return serialize($content->toArray());
+        } elseif ($content instanceof Jsonable) {
+            return $content->toJson();
         }
 
         return (string) $content;
