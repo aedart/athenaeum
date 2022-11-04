@@ -1,0 +1,60 @@
+<?php
+
+namespace Aedart\Tests\Integration\Filters\Relations;
+
+use Aedart\Contracts\Database\Query\Exceptions\CriteriaException;
+use Aedart\Contracts\Database\Query\FieldCriteria;
+use Aedart\Filters\Query\Filters\Fields\BelongsToFilter;
+use Aedart\Filters\Query\Filters\SortFilter;
+use Aedart\Testing\Helpers\ConsoleDebugger;
+use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
+use Aedart\Tests\TestCases\Filters\FiltersTestCase;
+
+/**
+ * RelationsFilteringTest
+ *
+ * @group filters
+ * @group filters-relations-filtering
+ *
+ * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @package Aedart\Tests\Integration\Filters\Relations
+ */
+class RelationsFilteringTest extends FiltersTestCase
+{
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws CriteriaException
+     */
+    public function canApplyLogicalOrConstraints(): void
+    {
+        $filters = [
+            BelongsToFilter::make('id', 'eq', 25, FieldCriteria::AND)
+                ->setRelation('restrictedOwner'),
+            BelongsToFilter::make('id', 'is_null', null, FieldCriteria::OR)
+                ->setRelation('restrictedOwner'),
+            new SortFilter([ 'restricted_to_owner_id' => 'desc' ])
+        ];
+
+        // Select products that belong to category, where product's owner is either a specific
+        // value or no owner set...
+
+        $category = new Category();
+        $category->id = 150;
+
+        $query = $category
+            ->products()
+            ->applyFilters($filters);
+            //->dd();
+
+        $sql = $query->toSql();
+
+        ConsoleDebugger::output($sql);
+
+        // Ensure that "where relation exists" clause has been added...
+        $this->assertStringContainsString('and (exists (select * from `owners` where `products`.`restricted_to_owner_id` = `owners`.`id` and `id` = ?) or not exists (select * from `owners` where `products`.`restricted_to_owner_id` = `owners`.`id`))', $sql);
+        $this->assertStringContainsString('order by `restricted_to_owner_id` desc', $sql);
+    }
+}
