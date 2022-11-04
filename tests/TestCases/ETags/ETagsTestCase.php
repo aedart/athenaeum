@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\TestCases\ETags;
 
+use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\ETags\Providers\ETagsServiceProvider;
 use Aedart\ETags\Traits\ETagGeneratorFactoryTrait;
@@ -49,6 +50,7 @@ abstract class ETagsTestCase extends LaravelTestCase
     protected function getPackageProviders($app)
     {
         return [
+            ConfigLoaderServiceProvider::class,
             ETagsServiceProvider::class,
         ];
     }
