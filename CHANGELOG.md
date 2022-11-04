@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 * Useless `$notFoundMsg` is now removed, inside Circuit Breaker Manager's internal "find or fail" methods (_cleanup_).
+* Root package `composer.json` now uses "self.version" again, for the Athenaeum packages it replaces.
 
 ## [6.5.1] - 2022-11-04
 
