@@ -97,11 +97,10 @@ class BelongsToFilter extends BaseFieldFilter
 
         // Determine the type of relation that the constraint must be built
         // for. E.g. use "whereHas" or "whereHasMorph" constraint.
-        $isMorph = false;
+
+        /** @var \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Relations\MorphTo $relationInstance */
         $relationInstance = $model->{$relation}();
-        if ($relationInstance instanceof MorphTo) {
-            $isMorph = true;
-        }
+        $isMorph = ($relationInstance instanceof MorphTo);
 
         // Extract relation field.
         $relationField = $this->extractRelationField($this->field());
