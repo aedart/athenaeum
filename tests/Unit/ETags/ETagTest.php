@@ -126,4 +126,18 @@ class ETagTest extends UnitTestCase
         // Not sure when this ever will be the case, but still ...
         $this->assertTrue($etagC->matches($etagC), 'C should match itself');
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function canMatchAgainstHttpHeaderValue(): void
+    {
+        $etag = ETag::make(1234);
+
+        $this->assertTrue($etag->matches('"1234"'), 'Should had matched value');
+    }
 }
