@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\ETags\Generators;
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Exceptions\ETagGeneratorException;
 use Aedart\Contracts\ETags\Exceptions\ProfileNotFoundException;
+use Aedart\ETags\Exceptions\UnableToGenerateETag;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\ETags\ETagsTestCase;
 use Illuminate\Contracts\Support\Arrayable;
@@ -87,5 +88,22 @@ class GenericGeneratorTest extends ETagsTestCase
 
         $this->assertInstanceOf(ETag::class, $eTag);
         $this->assertNotEmpty($eTag->raw());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagGeneratorException
+     * @throws ProfileNotFoundException
+     */
+    public function failsWhenNullContentGiven(): void
+    {
+        $this->expectException(UnableToGenerateETag::class);
+
+        $generator = $this->makeGenerator('default');
+
+        $generator->make(null);
     }
 }
