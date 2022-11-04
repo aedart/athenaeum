@@ -103,12 +103,27 @@ class ETagTest extends UnitTestCase
         $this->assertSame('W/"1234"', (string) $weakETag);
     }
 
-    public function canMatchAgainstAnotherEtag()
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function canMatchAgainstAnotherEtag(): void
     {
         $etagA = ETag::make(1234);
         $etagB = ETag::make(1234);
         $etagC = ETag::make(4321);
+        $etagD = ETag::make(4321, true);
 
+        $this->assertTrue($etagA->matches($etagB), 'A and B should match');
+        $this->assertTrue($etagB->matches($etagA), 'B and A should match');
+        $this->assertFalse($etagA->matches($etagC), 'A and C should NOT match');
+        $this->assertFalse($etagC->matches($etagA), 'C and A should NOT match');
+        $this->assertTrue($etagC->matches($etagD), 'C and D should match');
 
+        // Not sure when this ever will be the case, but still ...
+        $this->assertTrue($etagC->matches($etagC), 'C should match itself');
     }
 }
