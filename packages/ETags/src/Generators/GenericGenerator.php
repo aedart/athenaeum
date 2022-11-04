@@ -18,6 +18,10 @@ class GenericGenerator extends BaseGenerator
         // Whatever content is given, this generator assumes that
         // it can be cast to a string value...
 
+        if (is_array($content)) {
+            return serialize($content);
+        }
+
         return (string) $content;
     }
 }
