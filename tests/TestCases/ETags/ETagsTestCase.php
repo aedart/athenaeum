@@ -74,17 +74,17 @@ abstract class ETagsTestCase extends LaravelTestCase
     /**
      * Creates new ETag Generator or returns existing
      *
-     * @see \Aedart\Contracts\ETags\Factory::make
-     *
      * @param  string|null  $profile  [optional]
      * @param  array  $options  [optional]
      *
      * @return Generator
      *
      * @throws ProfileNotFoundException
+     *@see \Aedart\Contracts\ETags\Factory::profile
+     *
      */
     public function makeGenerator(string|null $profile = null, array $options = []): Generator
     {
-        return $this->getEtagGeneratorFactory()->make($profile, $options);
+        return $this->getEtagGeneratorFactory()->profile($profile, $options);
     }
 }

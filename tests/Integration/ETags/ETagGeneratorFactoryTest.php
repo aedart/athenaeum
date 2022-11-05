@@ -42,7 +42,7 @@ class ETagGeneratorFactoryTest extends ETagsTestCase
     {
         $generator = $this
             ->getEtagGeneratorFactory()
-            ->make();
+            ->profile();
 
         $this->assertInstanceOf(Generator::class, $generator);
     }
@@ -60,7 +60,7 @@ class ETagGeneratorFactoryTest extends ETagsTestCase
 
         $this
             ->getEtagGeneratorFactory()
-            ->make('unknown-profile');
+            ->profile('unknown-profile');
     }
 
     /**
@@ -74,7 +74,7 @@ class ETagGeneratorFactoryTest extends ETagsTestCase
     {
         $generator = $this
             ->getEtagGeneratorFactory()
-            ->make('model');
+            ->profile('model');
 
         $this->assertInstanceOf(Generator::class, $generator);
     }

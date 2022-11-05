@@ -31,7 +31,7 @@ class Factory implements
     /**
      * @inheritDoc
      */
-    public function make(string|null $profile = null, array $options = []): Generator
+    public function profile(string|null $profile = null, array $options = []): Generator
     {
         $profile = $profile ?? $this->defaultProfile();
 
