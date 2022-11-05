@@ -2,12 +2,14 @@
 
 namespace Aedart\ETags;
 
+use Aedart\Contracts\ETags\ETag as ETagInterface;
 use Aedart\Contracts\ETags\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\ETags\Factory as ETagGeneratorFactory;
 use Aedart\Contracts\ETags\Generator;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\ETags\Exceptions\ProfileNotFound;
 use Aedart\ETags\Generators\GenericGenerator;
+use Aedart\Support\Facades\IoCFacade;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 
 /**
@@ -63,6 +65,26 @@ class Factory implements
     }
 
     /**
+     * @inheritDoc
+     */
+    public function parse(string $httpHeaderValue): ETagInterface
+    {
+        $class = $this->eTagClass();
+
+        return $class::parse($httpHeaderValue);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function makeRaw(string $rawValue, bool $isWeak = false): ETagInterface
+    {
+        $class = $this->eTagClass();
+
+        return $class::make($rawValue, $isWeak);
+    }
+
+    /**
      * Dynamically call the default "profile" generator instance.
      *
      * @param  string  $method
@@ -80,6 +102,18 @@ class Factory implements
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * Returns class path to ETag
+     *
+     * @return string
+     */
+    protected function eTagClass(): string
+    {
+        // Obtain class path from service container or default.
+        // Note: full namespace SHOULD be used here to avoid import issues
+        return IoCFacade::tryMake('etag_class', \Aedart\ETags\ETag::class);
+    }
 
     /**
      * Creates ETag Generator that matches given profile

@@ -2,8 +2,8 @@
 
 namespace Aedart\ETags\Mixins;
 
-use Aedart\Contracts\ETags\ETag as ETagInterface;
-use Aedart\ETags\ETag;
+use Aedart\Contracts\ETags\ETag;
+use Aedart\ETags\Facades\Generator;
 use Closure;
 
 /**
@@ -21,20 +21,20 @@ class ETagHeaderMixin
     /**
      * Set the ETag Http Header
      *
-     * @param  ETagInterface|string|null  $eTag  [optional]
+     * @param  ETag|string|null  $eTag  [optional]
      *
      * @return Closure
      */
-    public function withEtag(ETagInterface|string|null $eTag = null): Closure
+    public function withEtag(ETag|string|null $eTag = null): Closure
     {
-        return function(ETagInterface|string|null $eTag = null) {
+        return function(ETag|string|null $eTag = null) {
             // Remove ETag header if null given...
             if (!isset($eTag)) {
                 return $this->setEtag(null);
             }
 
             if (is_string($eTag)) {
-                $eTag = ETag::parse($eTag);
+                $eTag = Generator::parse($eTag);
             }
 
             return $this->setEtag($eTag->raw(), $eTag->isWeak());

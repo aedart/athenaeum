@@ -2,11 +2,10 @@
 
 namespace Aedart\ETags\Generators;
 
-use Aedart\Contracts\ETags\ETag as ETagInterface;
-use Aedart\Contracts\ETags\Exceptions\ETagException;
+use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Generator;
-use Aedart\ETags\ETag;
 use Aedart\ETags\Exceptions\UnableToGenerateETag;
+use Aedart\ETags\Facades\Generator as GeneratorFacade;
 use Throwable;
 
 /**
@@ -36,10 +35,10 @@ abstract class BaseGenerator implements Generator
     /**
      * @inheritDoc
      */
-    public function make(mixed $content): ETagInterface
+    public function make(mixed $content): ETag
     {
         try {
-            $rawValue = $this->buildRawValue(
+            $rawValue = $this->hashRawValue(
                 $this->resolveContent($content)
             );
 
@@ -69,7 +68,7 @@ abstract class BaseGenerator implements Generator
      *
      * @return string
      */
-    protected function buildRawValue(string $content): string
+    protected function hashRawValue(string $content): string
     {
         return $this->hash($content, $this->hashAlgorithm());
     }
@@ -108,17 +107,15 @@ abstract class BaseGenerator implements Generator
     }
 
     /**
-     * Creates a new ETag instance
+     * Creates a new ETag instance for the raw value
      *
      * @param  string  $rawValue
      * @param  bool  $weak  [optional]
      *
-     * @return ETagInterface
-     *
-     * @throws ETagException
+     * @return ETag
      */
-    protected function makeETag(string $rawValue, bool $weak = false): ETagInterface
+    protected function makeETag(string $rawValue, bool $weak = false): ETag
     {
-        return ETag::make($rawValue, $weak);
+        return GeneratorFacade::makeRaw($rawValue, $weak);
     }
 }

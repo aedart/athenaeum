@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\ETags;
 
+use Aedart\Contracts\ETags\Exceptions\ETagException;
 use Aedart\Contracts\ETags\Exceptions\ProfileNotFoundException;
 
 /**
@@ -40,4 +41,31 @@ interface Factory
      * @return string
      */
     public function defaultGenerator(): string;
+
+    /**
+     * Creates a new ETag instance from given HTTP header value
+     *
+     * Alias for {@see ETag::parse}
+     *
+     * @param  string  $httpHeaderValue HTTP header value, e.g. "33a64df551425fcc55e4d42a148795d9f25f89d4" or W/"0815"
+     *
+     * @return ETag
+     *
+     * @throws ETagException If unable to parse given value
+     */
+    public function parse(string $httpHeaderValue): ETag;
+
+    /**
+     * Creates a new ETag instance for the raw value
+     *
+     * Alias for {@see ETag::make}
+     *
+     * @param  string  $rawValue The raw value of the eTag.
+     * @param  bool  $isWeak  [optional]
+     *
+     * @return ETag
+     *
+     * @throws ETagException If empty string provided as raw value
+     */
+    public function makeRaw(string $rawValue, bool $isWeak = false): ETag;
 }
