@@ -25,8 +25,8 @@ return [
         'default' => [
             'driver' => \Aedart\ETags\Generators\GenericGenerator::class,
             'options' => [
-                'hash_algo' => 'sha1',
-                'is_weak' => false,
+                'hash_algo' => 'crc32',
+                'is_weak' => true,
             ],
         ],
 
