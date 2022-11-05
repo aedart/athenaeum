@@ -12,7 +12,7 @@ use Illuminate\Http\Response;
  *
  * @group etags
  * @group etags-mixins
- * @group etags-header-mixin
+ * @group response-etags-mixin
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Mixins
