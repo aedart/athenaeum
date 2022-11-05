@@ -21,7 +21,7 @@ abstract class BaseGenerator implements Generator
     /**
      * Name of the default hashing algorithm
      */
-    protected const DEFAULT_HASH_ALGO = 'sha1';
+    protected const DEFAULT_HASH_ALGO = 'crc32';
 
     /**
      * Create a new ETag Generator instance
