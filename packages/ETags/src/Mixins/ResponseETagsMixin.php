@@ -7,7 +7,7 @@ use Aedart\ETags\Facades\Generator;
 use Closure;
 
 /**
- * Etag Header Mixin
+ * Response Etags Mixin
  *
  * Mixin is intended for Laravel's {@see \Illuminate\Http\Response}
  *
@@ -16,7 +16,7 @@ use Closure;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\ETags\Mixins
  */
-class ETagHeaderMixin
+class ResponseETagsMixin
 {
     /**
      * Set the ETag Http Header

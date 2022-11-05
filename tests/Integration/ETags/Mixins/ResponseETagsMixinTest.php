@@ -8,7 +8,7 @@ use Aedart\Tests\TestCases\ETags\ETagsTestCase;
 use Illuminate\Http\Response;
 
 /**
- * ETagHeaderMixin
+ * ResponseETagsMixinTest
  *
  * @group etags
  * @group etags-mixins
@@ -17,7 +17,7 @@ use Illuminate\Http\Response;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Mixins
  */
-class ETagHeaderMixinTest extends ETagsTestCase
+class ResponseETagsMixinTest extends ETagsTestCase
 {
     /**
      * @test
