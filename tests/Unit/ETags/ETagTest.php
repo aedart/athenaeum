@@ -110,21 +110,60 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
-    public function canMatchAgainstAnotherEtag(): void
+    public function canMatchEtags(): void
     {
-        $etagA = ETag::make(1234);
-        $etagB = ETag::make(1234);
-        $etagC = ETag::make(4321);
-        $etagD = ETag::make(4321, true);
+        //  @see https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2
+        /**
+            ETag 1 	ETag 2 	Strong Comparison 	Weak Comparison
+            W/"1" 	W/"1" 	no match 	        match
+            W/"1" 	W/"2" 	no match 	        no match
+            W/"1" 	"1" 	no match 	        match
+            "1" 	"1" 	match 	            match
+         */
 
-        $this->assertTrue($etagA->matches($etagB), 'A and B should match');
-        $this->assertTrue($etagB->matches($etagA), 'B and A should match');
-        $this->assertFalse($etagA->matches($etagC), 'A and C should NOT match');
-        $this->assertFalse($etagC->matches($etagA), 'C and A should NOT match');
-        $this->assertTrue($etagC->matches($etagD), 'C and D should match');
+        // ----------------------------------------------------------- //
+        // ETag 1 	ETag 2 	Strong Comparison 	Weak Comparison
+        // W/"1" 	W/"1" 	no match 	        match
+        $etagA = ETag::parse('W/"0815"');
+        $etagB = ETag::parse('W/"0815"');
 
-        // Not sure when this ever will be the case, but still ...
-        $this->assertTrue($etagC->matches($etagC), 'C should match itself');
+        $this->assertFalse($etagA->matches($etagB, true), '(a) strong comparison should NOT match');
+        $this->assertTrue($etagA->matches($etagB), '(b) weak comparison should match');
+
+        // ----------------------------------------------------------- //
+        // ETag 1 	ETag 2 	Strong Comparison 	Weak Comparison
+        // W/"1" 	W/"2" 	no match 	        no match
+        $etagA = ETag::parse('W/"0815"');
+        $etagB = ETag::parse('W/"0932"');
+
+        $this->assertFalse($etagA->matches($etagB, true), '(c) strong comparison should NOT match');
+        $this->assertFalse($etagA->matches($etagB), '(d) weak comparison should NOT match');
+
+        // ----------------------------------------------------------- //
+        // ETag 1 	ETag 2 	Strong Comparison 	Weak Comparison
+        // W/"1" 	"1" 	no match 	        match
+        $etagA = ETag::parse('W/"0815"');
+        $etagB = ETag::parse('"0815"');
+
+        $this->assertFalse($etagA->matches($etagB, true), '(e) strong comparison should NOT match');
+        $this->assertTrue($etagA->matches($etagB), '(f) weak comparison should match');
+
+        // ----------------------------------------------------------- //
+        // ETag 1 	ETag 2 	Strong Comparison 	Weak Comparison
+        // "1" 	    "1" 	match 	            match
+        $etagA = ETag::parse('"0815"');
+        $etagB = ETag::parse('"0815"');
+
+        $this->assertTrue($etagA->matches($etagB, true), '(g) strong comparison should match');
+        $this->assertTrue($etagA->matches($etagB), '(h) weak comparison should match');
+
+        // ----------------------------------------------------------- //
+        // Not match test...
+        $etagA = ETag::parse('W/"0815"');
+        $etagB = ETag::parse('"0815"');
+
+        $this->assertTrue($etagA->doesNotMatch($etagB, true), '(i) strong comparison should NOT match');
+        $this->assertFalse($etagA->doesNotMatch($etagB), '(j) weak comparison should match');
     }
 
     /**
@@ -138,6 +177,7 @@ class ETagTest extends UnitTestCase
     {
         $etag = ETag::make(1234);
 
-        $this->assertTrue($etag->matches('"1234"'), 'Should had matched value');
+        $this->assertTrue($etag->matches('"1234"'), '(a) should had matched value');
+        $this->assertFalse($etag->doesNotMatch('"1234"'), '(b) should had matched value');
     }
 }

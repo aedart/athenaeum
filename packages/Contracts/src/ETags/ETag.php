@@ -74,15 +74,38 @@ interface ETag extends Stringable
     public function isWeak(): bool;
 
     /**
-     * Determine if this ETag's raw value matches that of the given
+     * Determine if this ETag's value matches given ETag's value
      *
-     * **Caution**: _Method matches the raw values of the ETags. It
-     * completely ignores whether ETags are weak or not. E.g.:_
-     * _W/"1234" and "1234" are equivalent_
+     * By default, this method uses "weak comparison".
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2
      *
      * @param  ETag|string  $eTag ETag instance or HTTP header value
+     * @param  bool  $strongComparison  [optional] When true, two ETags are equivalent if
+     *                                  both are NOT WEAK and their raw values match
+     *                                  character-by-character.
+     *                                  When false, two ETags are equivalent if their
+     *                                  raw values match character-by-character, regardless
+     *                                  of either or both being tagged as "weak"
      *
      * @return bool
      */
-    public function matches(ETag|string $eTag): bool;
+    public function matches(ETag|string $eTag, bool $strongComparison = false): bool;
+
+    /**
+     * Determine if this ETag's value does not match given ETag's value
+     *
+     * Opposite of the {@see matches} method.
+     *
+     * @param  ETag|string  $eTag ETag instance or HTTP header value
+     * @param  bool  $strongComparison  [optional] When true, two ETags are equivalent if
+     *                                  both are NOT WEAK and their raw values match
+     *                                  character-by-character.
+     *                                  When false, two ETags are equivalent if their
+     *                                  raw values match character-by-character, regardless
+     *                                  of either or both being tagged as "weak"
+     *
+     * @return bool
+     */
+    public function doesNotMatch(ETag|string $eTag, bool $strongComparison = false): bool;
 }

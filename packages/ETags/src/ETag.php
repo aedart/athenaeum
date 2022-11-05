@@ -92,13 +92,27 @@ class ETag implements ETagInterface
     /**
      * @inheritDoc
      */
-    public function matches(ETagInterface|string $eTag): bool
+    public function matches(ETagInterface|string $eTag, bool $strongComparison = false): bool
     {
-        if (!($eTag instanceof ETagInterface)) {
-            $eTag = static::parse($eTag);
+        $eTag = $eTag instanceof ETagInterface
+            ? $eTag
+            : static::parse($eTag);
+
+        // When strong comparison is used, then neither etags are weak...
+        // @see https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2
+        if ($strongComparison && ($this->isWeak() || $eTag->isWeak())) {
+            return false;
         }
 
         return hash_equals($this->raw(), $eTag->raw());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function doesNotMatch(ETagInterface|string $eTag, bool $strongComparison = false): bool
+    {
+        return !$this->matches($eTag, $strongComparison);
     }
 
     /**
