@@ -2,9 +2,11 @@
 
 namespace Aedart\Tests\Integration\ETags;
 
+use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\ETags\Factory;
 use Aedart\Contracts\ETags\Generator;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\ETags\ETagsTestCase;
 
 /**
@@ -77,5 +79,19 @@ class ETagGeneratorFactoryTest extends ETagsTestCase
             ->profile('model');
 
         $this->assertInstanceOf(Generator::class, $generator);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function forwardsCallsToDefaultProfile(): void
+    {
+        $etag = $this->getEtagGeneratorFactory()->make(1234);
+
+        ConsoleDebugger::output((string) $etag);
+
+        $this->assertInstanceOf(ETag::class, $etag);
     }
 }

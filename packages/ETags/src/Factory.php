@@ -2,6 +2,7 @@
 
 namespace Aedart\ETags;
 
+use Aedart\Contracts\ETags\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\ETags\Factory as ETagGeneratorFactory;
 use Aedart\Contracts\ETags\Generator;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
@@ -59,6 +60,21 @@ class Factory implements
     public function defaultGenerator(): string
     {
         return GenericGenerator::class;
+    }
+
+    /**
+     * Dynamically call the default "profile" generator instance.
+     *
+     * @param  string  $method
+     * @param  array  $parameters
+     *
+     * @return mixed
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function __call(string $method, array $parameters): mixed
+    {
+        return $this->profile()->$method(...$parameters);
     }
 
     /*****************************************************************
