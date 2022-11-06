@@ -56,6 +56,8 @@ class ResponseETagsMixin
     /**
      * Set the response's cache headers
      *
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
+     *
      * @return Closure
      */
     public function withCache(): Closure
