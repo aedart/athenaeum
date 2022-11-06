@@ -5,6 +5,8 @@ namespace Aedart\ETags\Mixins;
 use Aedart\Contracts\ETags\ETag;
 use Aedart\ETags\Facades\Generator;
 use Closure;
+use DateTimeInterface;
+use Illuminate\Support\Carbon;
 
 /**
  * Response Etags Mixin
@@ -21,23 +23,21 @@ class ResponseETagsMixin
     /**
      * Set the ETag Http Header
      *
-     * @param  ETag|string|null  $eTag  [optional]
-     *
      * @return Closure
      */
-    public function withEtag(ETag|string|null $eTag = null): Closure
+    public function withEtag(): Closure
     {
-        return function(ETag|string|null $eTag = null) {
+        return function(ETag|string|null $etag = null) {
             // Remove ETag header if null given...
-            if (!isset($eTag)) {
+            if (!isset($etag)) {
                 return $this->setEtag(null);
             }
 
-            if (is_string($eTag)) {
-                $eTag = Generator::parse($eTag);
+            if (is_string($etag)) {
+                $etag = Generator::parse($etag);
             }
 
-            return $this->setEtag($eTag->raw(), $eTag->isWeak());
+            return $this->setEtag($etag->raw(), $etag->isWeak());
         };
     }
 
@@ -50,6 +50,55 @@ class ResponseETagsMixin
     {
         return function() {
             return $this->setEtag(null);
+        };
+    }
+
+    /**
+     * Set the response's cache headers
+     *
+     * @return Closure
+     */
+    public function withCache(): Closure
+    {
+        // @see \Symfony\Component\HttpFoundation\Response::setCache
+
+        return function(
+            ETag|string|null $etag = null,
+            string|DateTimeInterface|null $lastModified = null,
+            int|null $maxAge = null,
+            int|null $sharedMaxAge = null,
+            bool $public = false,
+            bool $private = false,
+            bool $mustRevalidate = false,
+            bool $noCache = false,
+            bool $noStore = false,
+            bool $noTransform = false,
+            bool $proxyRevalidate = false,
+            bool $immutable = false,
+        ) {
+            // Set Etag via "with Etag", because Symfony's setCache method
+            // does not allow specifying if etag is weak or not...
+            $this->withEtag($etag);
+
+            // Resolve evt. last modified date
+            $lastModified = is_string($lastModified)
+                ? Carbon::make($lastModified)
+                : $lastModified;
+
+            // Apply remaining cache headers...
+            return $this->setCache([
+                'must_revalidate' => $mustRevalidate,
+                'no_cache' => $noCache,
+                'no_store' => $noStore,
+                'no_transform' => $noTransform,
+                'public' => $public,
+                'private' => $private,
+                'proxy_revalidate' => $proxyRevalidate,
+                'max_age' => $maxAge,
+                's_maxage' => $sharedMaxAge,
+                'immutable' => $immutable,
+                'last_modified' => $lastModified,
+            ]);
         };
     }
 }

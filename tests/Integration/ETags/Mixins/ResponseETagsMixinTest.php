@@ -4,6 +4,7 @@ namespace Aedart\Tests\Integration\ETags\Mixins;
 
 use Aedart\Contracts\ETags\Exceptions\ETagException;
 use Aedart\ETags\ETag;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\ETags\ETagsTestCase;
 use Illuminate\Http\Response;
 
@@ -28,6 +29,7 @@ class ResponseETagsMixinTest extends ETagsTestCase
     {
         $this->assertTrue(Response::hasMacro('withEtag'), 'withEtag not installed');
         $this->assertTrue(Response::hasMacro('withoutEtag'), 'withoutEtag not installed');
+        $this->assertTrue(Response::hasMacro('withCache'), 'withCache not installed');
     }
 
     /**
@@ -71,5 +73,39 @@ class ResponseETagsMixinTest extends ETagsTestCase
         $result = $response->headers->get('etag');
 
         $this->assertEmpty($result);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function canSetCacheHeadersViaMacro(): void
+    {
+        $eTag = ETag::make(1234, true);
+
+        /** @var Response $response */
+        $response = (new Response())
+            ->withCache(
+                etag: $eTag,
+                lastModified: now()->addHours(3)->addSeconds(43),
+                private: true
+            );
+
+        ConsoleDebugger::output((string) $response);
+
+        $headers = $response->headers;
+
+        $this->assertNotEmpty($headers->get('etag'), 'No etag set');
+        $this->assertSame('W/"1234"', $headers->get('etag'), 'Incorrect Etag set');
+
+        $this->assertNotEmpty($headers->get('last-modified'), 'Last Modified not set');
+
+        $this->assertNotEmpty($headers->get('cache-control'), 'Cache Control not set');
+
+        // Note: if more cache control headers are set in this test, then this assertion is a bit wrong...
+        $this->assertSame('private', $headers->get('cache-control'), 'Incorrect cache-control');
     }
 }
