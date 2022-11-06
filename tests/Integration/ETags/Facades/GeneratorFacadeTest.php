@@ -70,7 +70,7 @@ class GeneratorFacadeTest extends ETagsTestCase
      */
     public function canObtainDifferentGeneratorProfile(): void
     {
-        $generator = Generator::profile('model');
+        $generator = Generator::profile('other');
 
         $this->assertInstanceOf(GeneratorInterface::class, $generator);
     }

@@ -76,7 +76,7 @@ class ETagGeneratorFactoryTest extends ETagsTestCase
     {
         $generator = $this
             ->getEtagGeneratorFactory()
-            ->profile('model');
+            ->profile('other');
 
         $this->assertInstanceOf(Generator::class, $generator);
     }

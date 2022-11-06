@@ -34,12 +34,11 @@ return [
             ],
         ],
 
-        // TODO: REMOVE THIS...
-        'model' => [
-            'driver' => \Aedart\ETags\Generators\EloquentModelGenerator::class,
+        'other' => [
+            'driver' => \Aedart\ETags\Generators\GenericGenerator::class,
             'options' => [
-                'weak_algo' => 'crc32',
-                'strong_algo' => 'sha256',
+                'weak_algo' => 'md5',
+                'strong_algo' => 'sha1',
             ],
         ]
     ]
