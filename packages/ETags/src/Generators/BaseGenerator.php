@@ -19,9 +19,16 @@ use Throwable;
 abstract class BaseGenerator implements Generator
 {
     /**
-     * Name of the default hashing algorithm
+     * Default hashing algorithm for hashing content to be
+     * used for weak comparison ETags
      */
-    protected const DEFAULT_HASH_ALGO = 'crc32';
+    protected const DEFAULT_WEAK_ALGO = 'crc32';
+
+    /**
+     * Default hashing algorithm for hashing content to be
+     * used for strong comparison ETags
+     */
+    protected const DEFAULT_STRONG_ALGO = 'sha256';
 
     /**
      * Create a new ETag Generator instance
@@ -35,52 +42,69 @@ abstract class BaseGenerator implements Generator
     /**
      * @inheritDoc
      */
-    public function make(mixed $content): ETag
+    public function make(mixed $content, bool $weak = true): ETag
     {
         try {
-            $rawValue = $this->hashRawValue(
-                $this->resolveContent($content)
+            $rawValue = $this->hashValue(
+                $this->resolveContent($content, $weak),
+                $weak
             );
 
-            $isWeak = $this->mustMarkAsWeak();
-
-            return $this->makeETag($rawValue, $isWeak);
+            return $this->makeETag($rawValue, $weak);
         } catch (Throwable $e) {
             throw new UnableToGenerateETag($e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
-     * Resolves the content to be hashed and used as ETag's raw value
-     *
-     * @param  mixed  $content
-     *
-     * @return string
-     *
-     * @throws UnableToGenerateETag
+     * @inheritdoc
      */
-    abstract public function resolveContent(mixed $content): string;
-
-    /**
-     * Builds an ETag's raw value from given content
-     *
-     * @param  string  $content
-     *
-     * @return string
-     */
-    protected function hashRawValue(string $content): string
+    public function makeWeak(mixed $content): ETag
     {
-        return $this->hash($content, $this->hashAlgorithm());
+        return $this->make($content, true);
     }
 
     /**
-     * Determine if generated ETag must be marked as "weak"
-     *
-     * @return bool
+     * @inheritdoc
      */
-    protected function mustMarkAsWeak(): bool
+    public function makeStrong(mixed $content): ETag
     {
-        return $this->options['is_weak'] ?? false;
+        return $this->make($content, false);
+    }
+
+    /**
+     * Resolves the content to be hashed and used as the {@see ETag::raw} value
+     *
+     * @param  mixed  $content
+     * @param  bool  $weak  [optional] Flag indicates if "weak" ETag is intended generated.
+     *                      If able, given content is modified for either "weak" or "strong"
+     *                      comparison.
+     *
+     * @return string Content to be hashed
+     *
+     * @throws UnableToGenerateETag
+     */
+    abstract public function resolveContent(mixed $content, bool $weak = true): string;
+
+    /**
+     * Hash given content
+     *
+     * @see weakHashAlgorithm
+     * @see strongHashAlgorithm
+     *
+     * @param  string  $content
+     * @param  bool  $weak  [optional] When true, a "strong" hashing algorithm is used.
+     *                      When false, a "weak" hashing algorithm is used.
+     *
+     * @return string
+     */
+    protected function hashValue(string $content, bool $weak = true): string
+    {
+        $algorithm = $weak
+            ? $this->weakHashAlgorithm()
+            : $this->strongHashAlgorithm();
+
+        return $this->hash($content, $algorithm);
     }
 
     /**
@@ -97,13 +121,23 @@ abstract class BaseGenerator implements Generator
     }
 
     /**
-     * Returns name of the hashing algorithm to use
+     * Returns name of hashing algorithm to be used for ETags flagged as "weak" (weak comparison)
      *
      * @return string
      */
-    protected function hashAlgorithm(): string
+    protected function weakHashAlgorithm(): string
     {
-        return $this->options['hash_algo'] ?? static::DEFAULT_HASH_ALGO;
+        return $this->options['weak_algo'] ?? static::DEFAULT_WEAK_ALGO;
+    }
+
+    /**
+     * Returns name of hashing algorithm to be used for ETags not flagged as "weak" (strong comparison)
+     *
+     * @return string
+     */
+    protected function strongHashAlgorithm(): string
+    {
+        return $this->options['strong_algo'] ?? static::DEFAULT_STRONG_ALGO;
     }
 
     /**
@@ -114,7 +148,7 @@ abstract class BaseGenerator implements Generator
      *
      * @return ETag
      */
-    protected function makeETag(string $rawValue, bool $weak = false): ETag
+    protected function makeETag(string $rawValue, bool $weak = true): ETag
     {
         return GeneratorFacade::makeRaw($rawValue, $weak);
     }

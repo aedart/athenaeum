@@ -92,6 +92,14 @@ class ETag implements ETagInterface
     /**
      * @inheritDoc
      */
+    public function isStrong(): bool
+    {
+        return !$this->isWeak();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function matches(ETagInterface|string $eTag, bool $strongComparison = false): bool
     {
         $eTag = $eTag instanceof ETagInterface

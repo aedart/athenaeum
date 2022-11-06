@@ -65,13 +65,22 @@ interface ETag extends Stringable
     public function toString(): string;
 
     /**
-     * Determine if ETag is weak
+     * Determine if ETag is flagged as "weak" (for weak comparison)
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag#directives
      *
      * @return bool
      */
     public function isWeak(): bool;
+
+    /**
+     * Determine if ETag is NOT flagged as "weak" (for strong comparison)
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag#directives
+     *
+     * @return bool
+     */
+    public function isStrong(): bool;
 
     /**
      * Determine if this ETag's value matches given ETag's value

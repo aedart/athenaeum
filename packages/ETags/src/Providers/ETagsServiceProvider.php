@@ -5,8 +5,10 @@ namespace Aedart\ETags\Providers;
 use Aedart\Contracts\ETags\Factory as ETagGeneratorFactory;
 use Aedart\ETags\ETag;
 use Aedart\ETags\Factory;
+//use Aedart\ETags\Mixins\RequestETagsMixin;
 use Aedart\ETags\Mixins\ResponseETagsMixin;
 use Illuminate\Contracts\Support\DeferrableProvider;
+//use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
 
@@ -43,6 +45,7 @@ class ETagsServiceProvider extends ServiceProvider implements DeferrableProvider
         ], 'config');
 
         // Install mixins / macros
+//        Request::mixin(new RequestETagsMixin());
         Response::mixin(new ResponseETagsMixin());
     }
 

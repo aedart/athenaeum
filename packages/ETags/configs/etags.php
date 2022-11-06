@@ -25,21 +25,13 @@ return [
         'default' => [
             'driver' => \Aedart\ETags\Generators\GenericGenerator::class,
             'options' => [
-                'hash_algo' => 'crc32',
-                'is_weak' => true,
+
+                // Hashing algorithm intended for ETags flagged as "weak" (weak comparison)
+                'weak_algo' => 'crc32',
+
+                // Hashing algorithm intended for ETags NOT flagged as "weak" (strong comparison)
+                'strong_algo' => 'sha256',
             ],
         ],
-
-        'model' => [
-            'driver' => \Aedart\ETags\Generators\EloquentModelGenerator::class,
-            'options' => [
-                'hash_algo' => 'crc32',
-                'is_weak' => true,
-
-                'attributes' => [
-                    'updated_at'
-                ],
-            ],
-        ]
     ]
 ];

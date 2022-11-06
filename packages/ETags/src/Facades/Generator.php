@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Facade;
 /**
  * ETag Generator Facade
  *
- * @method static \Aedart\Contracts\ETags\ETag make(mixed $content)
+ * @method static \Aedart\Contracts\ETags\ETag make(mixed $content, bool $weak = true)
+ * @method static \Aedart\Contracts\ETags\ETag makeWeak(mixed $content)
+ * @method static \Aedart\Contracts\ETags\ETag makeStrong(mixed $content)
  * @method static \Aedart\Contracts\ETags\ETag parse(string $httpHeaderValue)
  * @method static \Aedart\Contracts\ETags\ETag makeRaw(string $rawValue, bool $isWeak = false)
  * @method static \Aedart\Contracts\ETags\Generator profile(string|null $profile = null, array $options = [])

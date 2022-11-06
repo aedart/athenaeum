@@ -26,11 +26,41 @@ class GeneratorFacadeTest extends ETagsTestCase
      */
     public function canMakeETagViaFacade(): void
     {
-        $eTag = Generator::make(1234);
+        $eTag = Generator::make('something');
 
         ConsoleDebugger::output((string) $eTag);
 
         $this->assertInstanceOf(ETag::class, $eTag);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canMakeWeakETagViaFacade(): void
+    {
+        $eTag = Generator::makeWeak(1234);
+
+        $this->assertInstanceOf(ETag::class, $eTag);
+        $this->assertTrue($eTag->isWeak());
+
+        ConsoleDebugger::output((string) $eTag);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canMakeStrongETagViaFacade(): void
+    {
+        $eTag = Generator::makeStrong(1234);
+
+        $this->assertInstanceOf(ETag::class, $eTag);
+        $this->assertTrue($eTag->isStrong());
+
+        ConsoleDebugger::output((string) $eTag);
     }
 
     /**
