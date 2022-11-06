@@ -9,7 +9,7 @@ use Aedart\ETags\Facades\Generator;
 // Generate an ETag for strong comparison, of content
 $eTag = Generator::makeStrong($content);
 
-echo (string) $eTag; // "ade42fb9fb9dbd0895fe4a3472208f277670b20ed95827b4f9c973aedb844413"
+echo (string) $eTag; // "4720b076892bb2fb65e75af902273c73a2967e4a"
 ```
 
 Or to generate ETags that are flagged as "weak" (_for weak comparison_)

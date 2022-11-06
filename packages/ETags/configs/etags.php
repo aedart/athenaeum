@@ -30,7 +30,7 @@ return [
                 'weak_algo' => 'crc32',
 
                 // Hashing algorithm intended for ETags NOT flagged as "weak" (strong comparison)
-                'strong_algo' => 'sha256',
+                'strong_algo' => 'sha1',
             ],
         ],
     ]
