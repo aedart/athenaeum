@@ -51,6 +51,19 @@ class ETag implements ETagInterface
     /**
      * @inheritDoc
      */
+    public static function parse(string $rawHeaderValue): array
+    {
+        $values = preg_split('/\s*,\s*/', $rawHeaderValue, -1, PREG_SPLIT_NO_EMPTY);
+
+        return array_map(
+            fn($value) => static::parseSingle($value),
+            $values
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
     public static function parseSingle(string $value): static
     {
         if (str_contains($value, ',')) {

@@ -79,6 +79,22 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    public function canParseWildcard(): void
+    {
+        $etag = ETag::parseSingle('*');
+
+        ConsoleDebugger::output($etag);
+
+        $this->assertTrue($etag->isWildcard());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
     public function failsParsingSingleWhenMultipleEtagsGiven(): void
     {
         $this->expectException(UnableToParseETag::class);
@@ -101,6 +117,56 @@ class ETagTest extends UnitTestCase
         $value = '/"' . $raw;
 
         ETag::parseSingle($value);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function canParseMultipleEtagsFromHttpHeader(): void
+    {
+        $etags = ETag::parse('"15487",W/"r2d23574", W/"c3pio784",  W/"1234", *');
+
+        ConsoleDebugger::output($etags);
+
+        $this->assertIsArray($etags);
+        $this->assertCount(5, $etags);
+
+        foreach ($etags as $etag) {
+            $this->assertInstanceOf(ETagInterface::class, $etag);
+        }
+
+        $this->assertSame('15487', $etags[0]->raw(), 'a');
+        $this->assertTrue($etags[0]->isStrong(), 'b');
+
+        $this->assertSame('r2d23574', $etags[1]->raw(), 'c');
+        $this->assertTrue($etags[1]->isWeak(), 'd');
+
+        $this->assertSame('c3pio784', $etags[2]->raw(), 'e');
+        $this->assertFalse($etags[2]->isStrong(), 'f');
+
+        $this->assertSame('1234', $etags[3]->raw(), 'g');
+        $this->assertFalse( $etags[3]->isWildcard(), 'h');
+
+        $this->assertSame('*', $etags[4]->raw(), 'i');
+        $this->assertTrue($etags[4]->isWildcard(), 'j');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function failsParsingMultipleFromHttpHeaderWhenInvalidFormat(): void
+    {
+        $this->expectException(UnableToParseETag::class);
+
+        ETag::parse('"15487",W/"r2d23574", "invalid,  W/"1234",');
     }
 
     /**

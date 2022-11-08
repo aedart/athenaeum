@@ -38,12 +38,26 @@ interface ETag extends Stringable
     public static function make(string $rawValue, bool $isWeak = false): static;
 
     /**
-     * Creates a new ETag instance from given HTTP header value
+     * Creates one or more ETag instances from given raw http header value
+     *
+     * The "raw" Http header value can, for instance, be from an `If-Match` or
+     * `If-None-Match` header.
+     *
+     * @param  string  $rawHeaderValue E.g. W/"15487", W/"r2d23574", W/"c3pio784"
+     *
+     * @return static[]
+     *
+     * @throws ETagException If unable to parse given value
+     */
+    public static function parse(string $rawHeaderValue): array;
+
+    /**
+     * Creates a single new ETag instance from given value
      *
      * **Caution**: _Method is NOT able to parse multiple etags from given
-     * header value!_
+     * header value! Use {@see parse()} instead._
      *
-     * @param  string  $value HTTP header value, e.g. "33a64df551425fcc55e4d42a148795d9f25f89d4", W/"0815" or * (wildcard)
+     * @param  string  $value E.g. "33a64df551425fcc55e4d42a148795d9f25f89d4", W/"0815", or * (wildcard)
      *
      * @return static
      *

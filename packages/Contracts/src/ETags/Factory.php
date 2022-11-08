@@ -43,14 +43,24 @@ interface Factory
     public function defaultGenerator(): string;
 
     /**
-     * Creates a new ETag instance from given HTTP header value
+     * Creates one or more ETag instances from given raw http header value
      *
-     * Alias for {@see ETag::parseSingle}
+     * Alias for {@see ETag::parse()}
      *
-     * **Caution**: _Method is NOT able to parse multiple etags from given
-     * header value!_
+     * @param  string  $rawHeaderValue E.g. W/"15487", W/"r2d23574", W/"c3pio784"
      *
-     * @param  string  $value HTTP header value, e.g. "33a64df551425fcc55e4d42a148795d9f25f89d4", W/"0815" or * (wildcard)
+     * @return static[]
+     *
+     * @throws ETagException If unable to parse given value
+     */
+    public function parse(string $rawHeaderValue): array;
+
+    /**
+     * Creates a single new ETag instance from given value
+     *
+     * Alias for {@see ETag::parseSingle()}
+     *
+     * @param  string  $value E.g. "33a64df551425fcc55e4d42a148795d9f25f89d4", W/"0815" or * (wildcard)
      *
      * @return ETag
      *

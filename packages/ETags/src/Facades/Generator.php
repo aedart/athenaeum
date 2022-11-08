@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Aedart\Contracts\ETags\ETag make(mixed $content, bool $weak = true)
  * @method static \Aedart\Contracts\ETags\ETag makeWeak(mixed $content)
  * @method static \Aedart\Contracts\ETags\ETag makeStrong(mixed $content)
+ * @method static \Aedart\Contracts\ETags\ETag[] parse(string $rawHeaderValue)
  * @method static \Aedart\Contracts\ETags\ETag parseSingle(string $value)
  * @method static \Aedart\Contracts\ETags\ETag makeRaw(string $rawValue, bool $isWeak = false)
  * @method static \Aedart\Contracts\ETags\Generator profile(string|null $profile = null, array $options = [])

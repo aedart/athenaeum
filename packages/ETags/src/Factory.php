@@ -3,6 +3,7 @@
 namespace Aedart\ETags;
 
 use Aedart\Contracts\ETags\ETag as ETagInterface;
+use Aedart\Contracts\ETags\Exceptions\ETagException;
 use Aedart\Contracts\ETags\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\ETags\Factory as ETagGeneratorFactory;
 use Aedart\Contracts\ETags\Generator;
@@ -67,11 +68,21 @@ class Factory implements
     /**
      * @inheritDoc
      */
+    public function parse(string $rawHeaderValue): array
+    {
+        $class = $this->eTagClass();
+
+        return $class::parse($rawHeaderValue);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function parseSingle(string $value): ETagInterface
     {
         $class = $this->eTagClass();
 
-        return $class::parse($value);
+        return $class::parseSingle($value);
     }
 
     /**
