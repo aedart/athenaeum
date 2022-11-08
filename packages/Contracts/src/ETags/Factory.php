@@ -45,15 +45,18 @@ interface Factory
     /**
      * Creates a new ETag instance from given HTTP header value
      *
-     * Alias for {@see ETag::parse}
+     * Alias for {@see ETag::parseSingle}
      *
-     * @param  string  $httpHeaderValue HTTP header value, e.g. "33a64df551425fcc55e4d42a148795d9f25f89d4" or W/"0815"
+     * **Caution**: _Method is NOT able to parse multiple etags from given
+     * header value!_
+     *
+     * @param  string  $value HTTP header value, e.g. "33a64df551425fcc55e4d42a148795d9f25f89d4", W/"0815" or * (wildcard)
      *
      * @return ETag
      *
      * @throws ETagException If unable to parse given value
      */
-    public function parse(string $httpHeaderValue): ETag;
+    public function parseSingle(string $value): ETag;
 
     /**
      * Creates a new ETag instance for the raw value

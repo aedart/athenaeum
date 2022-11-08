@@ -59,17 +59,31 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
-    public function canParseFromHttpHeaderValue(): void
+    public function canParseSingleValue(): void
     {
         $raw = '0815';
         $value = 'W/"' . $raw . '"';
 
-        $etag = ETag::parse($value);
+        $etag = ETag::parseSingle($value);
 
         ConsoleDebugger::output($etag);
 
         $this->assertSame($raw, $etag->raw());
         $this->assertTrue($etag->isWeak());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function failsParsingSingleWhenMultipleEtagsGiven(): void
+    {
+        $this->expectException(UnableToParseETag::class);
+
+        ETag::parseSingle('"1324", "abcd"');
     }
 
     /**
@@ -86,7 +100,7 @@ class ETagTest extends UnitTestCase
         $raw = '0815';
         $value = '/"' . $raw;
 
-        ETag::parse($value);
+        ETag::parseSingle($value);
     }
 
     /**
@@ -124,8 +138,8 @@ class ETagTest extends UnitTestCase
         // ----------------------------------------------------------- //
         // ETag 1 	ETag 2 	Strong Comparison 	Weak Comparison
         // W/"1" 	W/"1" 	no match 	        match
-        $etagA = ETag::parse('W/"0815"');
-        $etagB = ETag::parse('W/"0815"');
+        $etagA = ETag::parseSingle('W/"0815"');
+        $etagB = ETag::parseSingle('W/"0815"');
 
         $this->assertFalse($etagA->matches($etagB, true), '(a) strong comparison should NOT match');
         $this->assertTrue($etagA->matches($etagB), '(b) weak comparison should match');
@@ -133,8 +147,8 @@ class ETagTest extends UnitTestCase
         // ----------------------------------------------------------- //
         // ETag 1 	ETag 2 	Strong Comparison 	Weak Comparison
         // W/"1" 	W/"2" 	no match 	        no match
-        $etagA = ETag::parse('W/"0815"');
-        $etagB = ETag::parse('W/"0932"');
+        $etagA = ETag::parseSingle('W/"0815"');
+        $etagB = ETag::parseSingle('W/"0932"');
 
         $this->assertFalse($etagA->matches($etagB, true), '(c) strong comparison should NOT match');
         $this->assertFalse($etagA->matches($etagB), '(d) weak comparison should NOT match');
@@ -142,8 +156,8 @@ class ETagTest extends UnitTestCase
         // ----------------------------------------------------------- //
         // ETag 1 	ETag 2 	Strong Comparison 	Weak Comparison
         // W/"1" 	"1" 	no match 	        match
-        $etagA = ETag::parse('W/"0815"');
-        $etagB = ETag::parse('"0815"');
+        $etagA = ETag::parseSingle('W/"0815"');
+        $etagB = ETag::parseSingle('"0815"');
 
         $this->assertFalse($etagA->matches($etagB, true), '(e) strong comparison should NOT match');
         $this->assertTrue($etagA->matches($etagB), '(f) weak comparison should match');
@@ -151,16 +165,16 @@ class ETagTest extends UnitTestCase
         // ----------------------------------------------------------- //
         // ETag 1 	ETag 2 	Strong Comparison 	Weak Comparison
         // "1" 	    "1" 	match 	            match
-        $etagA = ETag::parse('"0815"');
-        $etagB = ETag::parse('"0815"');
+        $etagA = ETag::parseSingle('"0815"');
+        $etagB = ETag::parseSingle('"0815"');
 
         $this->assertTrue($etagA->matches($etagB, true), '(g) strong comparison should match');
         $this->assertTrue($etagA->matches($etagB), '(h) weak comparison should match');
 
         // ----------------------------------------------------------- //
         // Not match test...
-        $etagA = ETag::parse('W/"0815"');
-        $etagB = ETag::parse('"0815"');
+        $etagA = ETag::parseSingle('W/"0815"');
+        $etagB = ETag::parseSingle('"0815"');
 
         $this->assertTrue($etagA->doesNotMatch($etagB, true), '(i) strong comparison should NOT match');
         $this->assertFalse($etagA->doesNotMatch($etagB), '(j) weak comparison should match');
@@ -173,7 +187,26 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
-    public function canMatchAgainstHttpHeaderValue(): void
+    public function canMatchAgainstWildcard(): void
+    {
+        $etagA = ETag::parseSingle('*');
+        $etagB = ETag::parseSingle('W/"0815"');
+
+        $this->assertTrue($etagA->matches($etagB, true), '(a) should match wildcard - strong comparison');
+        $this->assertFalse($etagA->doesNotMatch($etagB), '(b) weak comparison should match');
+
+        $this->assertTrue($etagB->matches($etagA, true), '(c) should match wildcard - strong comparison');
+        $this->assertFalse($etagB->doesNotMatch($etagA), '(d) weak comparison should match');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function canMatchAgainstSingleValueFromHttpHeader(): void
     {
         $etag = ETag::make(1234);
 

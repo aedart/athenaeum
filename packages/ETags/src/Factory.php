@@ -67,11 +67,11 @@ class Factory implements
     /**
      * @inheritDoc
      */
-    public function parse(string $httpHeaderValue): ETagInterface
+    public function parseSingle(string $value): ETagInterface
     {
         $class = $this->eTagClass();
 
-        return $class::parse($httpHeaderValue);
+        return $class::parse($value);
     }
 
     /**

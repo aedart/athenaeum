@@ -16,6 +16,16 @@ use Stringable;
 interface ETag extends Stringable
 {
     /**
+     * Weak ETag indicator / prefix
+     */
+    public const WEAK_INDICATOR = 'W/';
+
+    /**
+     * Wildcard symbol
+     */
+    public const WILDCARD_SYMBOL = '*';
+
+    /**
      * Creates a new ETag instance
      *
      * @param  string  $rawValue
@@ -30,13 +40,16 @@ interface ETag extends Stringable
     /**
      * Creates a new ETag instance from given HTTP header value
      *
-     * @param  string  $value HTTP header value, e.g. "33a64df551425fcc55e4d42a148795d9f25f89d4" or W/"0815"
+     * **Caution**: _Method is NOT able to parse multiple etags from given
+     * header value!_
+     *
+     * @param  string  $value HTTP header value, e.g. "33a64df551425fcc55e4d42a148795d9f25f89d4", W/"0815" or * (wildcard)
      *
      * @return static
      *
      * @throws ETagException If unable to parse given value
      */
-    public static function parse(string $value): static;
+    public static function parseSingle(string $value): static;
 
     /**
      * Return the raw value of the ETag
@@ -83,9 +96,23 @@ interface ETag extends Stringable
     public function isStrong(): bool;
 
     /**
+     * Determine if this ETag's value is set to '*' (wildcard / asterisk)
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Match#directives
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match#directives
+     *
+     * @return bool
+     */
+    public function isWildcard(): bool;
+
+    /**
      * Determine if this ETag's value matches given ETag's value
      *
      * By default, this method uses "weak comparison".
+     *
+     * **Note**: _If this ETag's or given ETag's value is '*' (wildcard / asterisk),
+     * then method returns true, regardless of strong or weak
+     * comparison mode._
      *
      * @see https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2
      *

@@ -17,9 +17,11 @@ use Aedart\ETags\Exceptions\UnableToParseETag;
 class ETag implements ETagInterface
 {
     /**
-     * Weak ETag indicator / prefix
+     * Special case, when raw value set to '*' (wildcard)
+     *
+     * @var bool
      */
-    protected const WEAK_INDICATOR = 'W/';
+    protected bool $isWildcard = false;
 
     /**
      * Creates a new ETag instance
@@ -34,6 +36,8 @@ class ETag implements ETagInterface
         if (empty($this->rawValue)) {
             throw new InvalidRawValue('Cannot create ETag for empty string value');
         }
+
+        $this->isWildcard = ($this->rawValue === static::WILDCARD_SYMBOL);
     }
 
     /**
@@ -47,8 +51,12 @@ class ETag implements ETagInterface
     /**
      * @inheritDoc
      */
-    public static function parse(string $value): static
+    public static function parseSingle(string $value): static
     {
+        if (str_contains($value, ',')) {
+            throw new UnableToParseETag(sprintf('Unable to parse multiple etags from: %s', $value));
+        }
+
         $isWeak = str_starts_with($value, static::WEAK_INDICATOR);
         $raw = static::extractRawValue($value);
 
@@ -100,11 +108,28 @@ class ETag implements ETagInterface
     /**
      * @inheritDoc
      */
+    public function isWildcard(): bool
+    {
+        return $this->isWildcard;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function matches(ETagInterface|string $eTag, bool $strongComparison = false): bool
     {
         $eTag = $eTag instanceof ETagInterface
             ? $eTag
-            : static::parse($eTag);
+            : static::parseSingle($eTag);
+
+        // When either etags are wildcards, return true. Note, this isn't exactly clearly defined
+        // in rfc9110's example comparisons table. But, it is mentioned as a valid value, in the
+        // directives descriptions.
+        // @see https://httpwg.org/specs/rfc9110.html#field.if-match
+        // @see https://httpwg.org/specs/rfc9110.html#field.if-none-match
+        if ($this->isWildcard() || $eTag->isWildcard()) {
+            return true;
+        }
 
         // When strong comparison is used, then neither etags are weak...
         // @see https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2
@@ -152,6 +177,10 @@ class ETag implements ETagInterface
      */
     protected static function extractRawValue(string $value): string|null
     {
+        if ($value === static::WILDCARD_SYMBOL) {
+            return $value;
+        }
+
         if (preg_match('/"([^"]+)"/', $value, $matches)) {
             return $matches[1];
         }

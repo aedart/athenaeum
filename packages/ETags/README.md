@@ -27,7 +27,7 @@ When you wish to create an `ETag` instance, e.g. from a Http request header, the
 ```php
 use Aedart\ETags\Facades\Generator;
 
-$eTag = Generator::parse($request->header('If-None-Match')); // E.g. W/"0815"
+$eTag = Generator::parseSingle($request->header('If-None-Match')); // E.g. W/"0815"
 
 echo $eTag->raw(); // E.g. 0815
 echo $eTag->isWeak(); // true

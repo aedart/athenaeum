@@ -34,7 +34,7 @@ class ResponseETagsMixin
             }
 
             if (is_string($etag)) {
-                $etag = Generator::parse($etag);
+                $etag = Generator::parseSingle($etag);
             }
 
             return $this->setEtag($etag->raw(), $etag->isWeak());
