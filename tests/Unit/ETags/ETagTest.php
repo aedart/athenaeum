@@ -162,6 +162,42 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    public function canParseSingleETagFromHttpHeader(): void
+    {
+        $etags = ETag::parse('"33a64df551425fcc55e4d42a148795d9f25f89d4"');
+
+        ConsoleDebugger::output($etags);
+
+        $this->assertIsArray($etags);
+        $this->assertCount(1, $etags);
+
+        $this->assertSame('33a64df551425fcc55e4d42a148795d9f25f89d4', $etags[0]->raw());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function returnsEmptyArrayWhenHttpHeaderValueIsEmpty(): void
+    {
+        $etags = ETag::parse('');
+
+        ConsoleDebugger::output($etags);
+
+        $this->assertIsArray($etags);
+        $this->assertEmpty($etags);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
     public function failsParsingMultipleFromHttpHeaderWhenInvalidFormat(): void
     {
         $this->expectException(UnableToParseETag::class);
