@@ -15,6 +15,7 @@ use Stringable;
  * ETags Collection
  *
  * @implements ArrayAccess<int, ETag>
+ * @implements IteratorAggregate<int, ETag>
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\ETags
