@@ -155,7 +155,11 @@ class ETagsCollection implements Collection
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        $this->etags[$offset] = $value;
+        if (is_null($offset)) {
+            $this->etags[] = $value;
+        } else {
+            $this->etags[$offset] = $value;
+        }
     }
 
     /**
