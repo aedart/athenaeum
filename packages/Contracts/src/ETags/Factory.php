@@ -43,17 +43,17 @@ interface Factory
     public function defaultGenerator(): string;
 
     /**
-     * Creates one or more ETag instances from given raw http header value
+     * Creates a collection of Etags from given raw http header value
      *
      * Alias for {@see ETag::parse()}
      *
      * @param  string  $rawHeaderValue E.g. W/"15487", W/"r2d23574", W/"c3pio784"
      *
-     * @return static[]
+     * @return Collection
      *
      * @throws ETagException If unable to parse given value
      */
-    public function parse(string $rawHeaderValue): array;
+    public function parse(string $rawHeaderValue): Collection;
 
     /**
      * Creates a single new ETag instance from given value

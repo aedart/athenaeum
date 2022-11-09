@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Integration\ETags\Facades;
 
+use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Generator as GeneratorInterface;
 use Aedart\ETags\Facades\Generator;
@@ -73,5 +74,18 @@ class GeneratorFacadeTest extends ETagsTestCase
         $generator = Generator::profile('other');
 
         $this->assertInstanceOf(GeneratorInterface::class, $generator);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canParseMultipleEtagsFromHttpHeader(): void
+    {
+        $collection = Generator::parse('"15487",W/"r2d23574", W/"c3pio784",  W/"1234", *');
+
+        $this->assertInstanceOf(Collection::class, $collection);
+        $this->assertCount(5, $collection);
     }
 }

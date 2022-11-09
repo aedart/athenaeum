@@ -2,9 +2,11 @@
 
 namespace Aedart\ETags;
 
+use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\ETag as ETagInterface;
 use Aedart\ETags\Exceptions\InvalidRawValue;
 use Aedart\ETags\Exceptions\UnableToParseETag;
+use Aedart\Support\Facades\IoCFacade;
 
 /**
  * ETag
@@ -51,13 +53,19 @@ class ETag implements ETagInterface
     /**
      * @inheritDoc
      */
-    public static function parse(string $rawHeaderValue): array
+    public static function parse(string $rawHeaderValue): Collection
     {
         $values = preg_split('/\s*,\s*/', $rawHeaderValue, -1, PREG_SPLIT_NO_EMPTY);
 
-        return array_map(
+        $etags = array_map(
             fn($value) => static::parseSingle($value),
             $values
+        );
+
+        return IoCFacade::tryMake(
+            abstract: Collection::class,
+            default: fn() => ETagsCollection::make($etags),
+            parameters: $etags
         );
     }
 

@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Unit\ETags;
 
+use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\ETag as ETagInterface;
 use Aedart\Contracts\ETags\Exceptions\ETagException;
 use Aedart\ETags\ETag;
@@ -132,7 +133,7 @@ class ETagTest extends UnitTestCase
 
         ConsoleDebugger::output($etags);
 
-        $this->assertIsArray($etags);
+        $this->assertInstanceOf(Collection::class, $etags);
         $this->assertCount(5, $etags);
 
         foreach ($etags as $etag) {
@@ -168,7 +169,7 @@ class ETagTest extends UnitTestCase
 
         ConsoleDebugger::output($etags);
 
-        $this->assertIsArray($etags);
+        $this->assertInstanceOf(Collection::class, $etags);
         $this->assertCount(1, $etags);
 
         $this->assertSame('33a64df551425fcc55e4d42a148795d9f25f89d4', $etags[0]->raw());
@@ -187,7 +188,7 @@ class ETagTest extends UnitTestCase
 
         ConsoleDebugger::output($etags);
 
-        $this->assertIsArray($etags);
+        $this->assertInstanceOf(Collection::class, $etags);
         $this->assertEmpty($etags);
     }
 

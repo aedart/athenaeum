@@ -2,8 +2,10 @@
 
 namespace Aedart\ETags\Providers;
 
+use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\Factory as ETagGeneratorFactory;
 use Aedart\ETags\ETag;
+use Aedart\ETags\ETagsCollection;
 use Aedart\ETags\Factory;
 //use Aedart\ETags\Mixins\RequestETagsMixin;
 use Aedart\ETags\Mixins\ResponseETagsMixin;
@@ -33,6 +35,10 @@ class ETagsServiceProvider extends ServiceProvider implements DeferrableProvider
         // must use...
         // @see \Aedart\ETags\Factory::eTagClass
         $this->app->singleton('etag_class', fn() => ETag::class);
+
+        $this->app->bind(Collection::class, function($app, array $etags = []) {
+            return ETagsCollection::make($etags);
+        });
     }
 
     /**
@@ -56,6 +62,8 @@ class ETagsServiceProvider extends ServiceProvider implements DeferrableProvider
     {
         return [
             ETagGeneratorFactory::class,
+            Collection::class,
+            'etag_class'
         ];
     }
 }
