@@ -75,6 +75,22 @@ class ETagsCollection implements Collection
     /**
      * @inheritDoc
      */
+    public function isEmpty(): bool
+    {
+        return empty($this->etags);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isNotEmpty(): bool
+    {
+        return !$this->isEmpty();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function all(): array
     {
         return $this->toArray();

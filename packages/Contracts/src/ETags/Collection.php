@@ -75,6 +75,20 @@ interface Collection extends
     public function doesntContain(ETag|string $eTag, bool $strongComparison = false): bool;
 
     /**
+     * Determine if collection is empty or not
+     *
+     * @return bool
+     */
+    public function isEmpty(): bool;
+
+    /**
+     * Determine if collection is not empty
+     *
+     * @return bool
+     */
+    public function isNotEmpty(): bool;
+
+    /**
      * Returns all etags in collection
      *
      * @return ETag[]
