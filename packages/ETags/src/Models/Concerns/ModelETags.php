@@ -44,7 +44,7 @@ trait ModelETags
     }
 
     /**
-     * Returns a "weak" ETag that represents this mode, intended for weak comparison
+     * Returns a "weak" ETag that represents this model, intended for weak comparison
      *
      * @param  string|null  $profile  [optional] Name of {@see Generator} profile to be used.
      *                                 If none given, then {@see etagGeneratorProfile} will be used.
@@ -59,7 +59,7 @@ trait ModelETags
     }
 
     /**
-     * Returns a ETag that represents this mode, intended for strong comparison
+     * Returns a ETag that represents this model, intended for strong comparison
      *
      * @param  string|null  $profile  [optional] Name of {@see Generator} profile to be used.
      *                                 If none given, then {@see etagGeneratorProfile} will be used.
