@@ -131,7 +131,10 @@ class ETagsCollection implements Collection
      */
     public function jsonSerialize()
     {
-        return $this->toArray();
+        return array_map(
+            fn(ETag $etag) => $etag->toString(),
+            $this->all()
+        );
     }
 
     /**
