@@ -190,9 +190,9 @@ class ETag implements ETagInterface
      ****************************************************************/
 
     /**
-     * Extracts raw value from given HTTP header value
+     * Extracts a single etag value (raw value) from given string
      *
-     * @param  string  $value HTTP header value
+     * @param  string  $value E.g. 'W/"gh665ft"'
      *
      * @return string|null Null if unable to extract value
      */
