@@ -10,6 +10,7 @@ use Aedart\ETags\Providers\ETagsServiceProvider;
 use Aedart\ETags\Traits\ETagGeneratorFactoryTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Codeception\Configuration;
+use Illuminate\Http\Request;
 
 /**
  * Etags Test Case
@@ -86,5 +87,26 @@ abstract class ETagsTestCase extends LaravelTestCase
     public function makeGenerator(string|null $profile = null, array $options = []): Generator
     {
         return $this->getEtagGeneratorFactory()->profile($profile, $options);
+    }
+
+    /**
+     * Creates a new request with etags
+     *
+     * @param  string|null  $ifMatch  [optional] Full header value
+     * @param  string|null  $ifNoneMatch  [optional] Full header value
+     * @param  string  $method  [optional]
+     *
+     * @return Request
+     */
+    public function createRequestWithEtags(
+        string|null $ifMatch = null,
+        string|null $ifNoneMatch = null,
+        string $method = 'post'
+    ): Request
+    {
+        return Request::create('/test', strtoupper($method), [], [], [], [
+            'HTTP_IF_MATCH' => $ifMatch ?? '',
+            'HTTP_IF_NONE_MATCH' => $ifNoneMatch ?? ''
+        ]);
     }
 }
