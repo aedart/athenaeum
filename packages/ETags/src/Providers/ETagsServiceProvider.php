@@ -10,9 +10,11 @@ use Aedart\ETags\Factory;
 use Aedart\ETags\Mixins\RequestETagsMixin;
 use Aedart\ETags\Mixins\ResponseETagsMixin;
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
+use ReflectionException;
 
 /**
  * ETags Service Provider
@@ -50,9 +52,7 @@ class ETagsServiceProvider extends ServiceProvider implements DeferrableProvider
             __DIR__ . '/../../configs/etags.php' => config_path('etags.php')
         ], 'config');
 
-        // Install mixins / macros
-        Request::mixin(new RequestETagsMixin());
-        Response::mixin(new ResponseETagsMixin());
+        $this->installMixins();
     }
 
     /**
@@ -65,5 +65,27 @@ class ETagsServiceProvider extends ServiceProvider implements DeferrableProvider
             Collection::class,
             'etag_class'
         ];
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Installs Request & Response mixins
+     *
+     * @return void
+     *
+     * @throws ReflectionException
+     */
+    protected function installMixins(): void
+    {
+        $requestMixin = new RequestETagsMixin();
+        $responseMixin = new ResponseETagsMixin();
+
+        Request::mixin($requestMixin);
+
+        Response::mixin($responseMixin);
+        JsonResponse::mixin($responseMixin);
     }
 }
