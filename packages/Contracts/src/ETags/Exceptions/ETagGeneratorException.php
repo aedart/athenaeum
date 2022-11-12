@@ -10,6 +10,6 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\ETags\Exceptions
  */
-interface ETagGeneratorException extends Throwable
+interface ETagGeneratorException extends ETagException
 {
 }
