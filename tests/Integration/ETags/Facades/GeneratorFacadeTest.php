@@ -83,9 +83,9 @@ class GeneratorFacadeTest extends ETagsTestCase
      */
     public function canParseMultipleEtagsFromHttpHeader(): void
     {
-        $collection = Generator::parse('"15487",W/"r2d23574", W/"c3pio784",  W/"1234", *');
+        $collection = Generator::parse('"15487",W/"r2d23574", W/"c3pio784",  W/"1234"');
 
         $this->assertInstanceOf(Collection::class, $collection);
-        $this->assertCount(5, $collection);
+        $this->assertCount(4, $collection);
     }
 }

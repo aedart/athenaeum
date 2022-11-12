@@ -129,12 +129,12 @@ class ETagTest extends UnitTestCase
      */
     public function canParseMultipleEtagsFromHttpHeader(): void
     {
-        $etags = ETag::parse('"15487",W/"r2d23574", W/"c3pio784",  W/"1234", *');
+        $etags = ETag::parse('"15487",W/"r2d23574", W/"c3pio784",  W/"1234"');
 
         ConsoleDebugger::output($etags);
 
         $this->assertInstanceOf(Collection::class, $etags);
-        $this->assertCount(5, $etags);
+        $this->assertCount(4, $etags);
 
         foreach ($etags as $etag) {
             $this->assertInstanceOf(ETagInterface::class, $etag);
@@ -151,9 +151,26 @@ class ETagTest extends UnitTestCase
 
         $this->assertSame('1234', $etags[3]->raw(), 'g');
         $this->assertFalse( $etags[3]->isWildcard(), 'h');
+    }
 
-        $this->assertSame('*', $etags[4]->raw(), 'i');
-        $this->assertTrue($etags[4]->isWildcard(), 'j');
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function canParseWildcardEtag(): void
+    {
+        $etags = ETag::parse('*');
+
+        ConsoleDebugger::output($etags);
+
+        $this->assertInstanceOf(Collection::class, $etags);
+        $this->assertCount(1, $etags);
+
+        $this->assertSame('*', $etags[0]->raw(), 'a');
+        $this->assertTrue($etags[0]->isWildcard(), 'b');
     }
 
     /**
