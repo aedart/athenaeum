@@ -3,8 +3,10 @@
 namespace Aedart\ETags\Mixins;
 
 use Aedart\Contracts\ETags\Collection;
+use Aedart\Contracts\ETags\Exceptions\ETagException;
 use Aedart\ETags\Facades\Generator;
 use Closure;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * Request Etags Mixin
@@ -27,9 +29,11 @@ class RequestETagsMixin
     {
         return function(string $header): Collection
         {
-            return Generator::parse(
-                $this->header($header, '')
-            );
+            try {
+                return Generator::parse($this->header($header, ''));
+            } catch (ETagException $e) {
+                throw new BadRequestHttpException(sprintf('Invalid etag value(s) in %s header', $header), $e);
+            }
         };
     }
 
