@@ -32,6 +32,13 @@ interface Collection extends
     /**
      * Creates a new ETags Collection instance
      *
+     * **WARNING:**: _A collection can consist of a list of etags or a single wildcard (*) etag._
+     * _Mixing wildcard etag with "regular" etags will cause exception to be thrown!_
+     * _See RFC-9110's notes regarding `If-Match` and `If-None-Match` header field for more information_
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#field.if-match
+     * @see https://httpwg.org/specs/rfc9110.html#field.if-none-match
+     *
      * @param  ETag[]  $etags  [optional]
      *
      * @return static

@@ -43,6 +43,13 @@ interface ETag extends Stringable
      * The "raw" Http header value can, for instance, be from an `If-Match` or
      * `If-None-Match` header.
      *
+     * **WARNING:**: _A collection can consist of a list of etags or a single wildcard (*) etag._
+     * _Mixing wildcard etag with "regular" etags will cause exception to be thrown!_
+     * _See RFC-9110's notes regarding `If-Match` and `If-None-Match` header field for more information_
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#field.if-match
+     * @see https://httpwg.org/specs/rfc9110.html#field.if-none-match
+     *
      * @param  string  $rawHeaderValue E.g. W/"15487", W/"r2d23574", W/"c3pio784"
      *
      * @return Collection

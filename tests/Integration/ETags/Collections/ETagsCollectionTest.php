@@ -6,6 +6,7 @@ use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Exceptions\ETagException;
 use Aedart\ETags\ETagsCollection;
+use Aedart\ETags\Exceptions\InvalidETagCollectionEntry;
 use Aedart\ETags\Facades\Generator;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\ETags\ETagsTestCase;
@@ -259,5 +260,97 @@ class ETagsCollectionTest extends ETagsTestCase
         $collection[27] = Generator::parseSingle('"0x34"');
         ConsoleDebugger::output((string) $collection);
         $this->assertTrue(isset($collection[27]), 'expected etag to exist after set via index');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function preventsCreatingMixedEtagsWithWildcardETag(): void
+    {
+        $this->expectException(InvalidETagCollectionEntry::class);
+
+        $this->makeCollection([
+            Generator::parseSingle('"bcc458"'),
+            Generator::parseSingle('"9842"'),
+
+            // This should cause exception...
+            Generator::parseSingle('*'),
+        ]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function preventsAddingWildcardEtagToListOfETags(): void
+    {
+        $this->expectException(InvalidETagCollectionEntry::class);
+
+        $collection = $this->makeCollection([
+            Generator::parseSingle('"bcc458"'),
+            Generator::parseSingle('"9842"'),
+        ]);
+
+        $collection[] = Generator::parseSingle('*');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function preventsAddingEtagToSingleWildcardCollection(): void
+    {
+        $this->expectException(InvalidETagCollectionEntry::class);
+
+        $collection = $this->makeCollection([
+            Generator::parseSingle('*')
+        ]);
+
+        $collection[] = Generator::parseSingle('"9842"');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function preventsReplacingExistingIfListOfEtags(): void
+    {
+        $this->expectException(InvalidETagCollectionEntry::class);
+
+        $collection = $this->makeCollection([
+            Generator::parseSingle('"bcc458"'),
+            Generator::parseSingle('"9842"'),
+        ]);
+
+        $collection[1] = Generator::parseSingle('*');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagException
+     */
+    public function canReplaceWildcardWithRegularEtag(): void
+    {
+        $collection = $this->makeCollection([
+            Generator::parseSingle('*')
+        ]);
+
+        $collection[0] = Generator::parseSingle('"bcc458"');
     }
 }
