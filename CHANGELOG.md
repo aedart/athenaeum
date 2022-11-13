@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.5.2] - 2022-11-13
+
+### Fixed
+
+* `ErrorException` Undefined array key "driver". [#123](https://github.com/aedart/athenaeum/issues/123).
+
+This defect was introduced by `orchestra/testbench`, from ` v7.12.0`, in which the "testing" database connection configuration was removed.
+Several tests assumed that a "testing" connection was available and attempted to use it.
+A custom `TestingConnection` util class now ensures such a connection exists for affected tests.
+
 ## [6.5.1] - 2022-11-04
 
 ### Fixed
