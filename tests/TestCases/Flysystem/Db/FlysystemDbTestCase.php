@@ -6,6 +6,7 @@ use Aedart\Contracts\Flysystem\Db\RecordTypes;
 use Aedart\Flysystem\Db\Adapters\DatabaseAdapter;
 use Aedart\Flysystem\Db\Providers\FlysystemDatabaseAdapterServiceProvider;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
+use Aedart\Testing\Laravel\Database\TestingConnection;
 use Aedart\Tests\TestCases\Flysystem\FlysystemTestCase;
 use Codeception\Configuration;
 use Illuminate\Support\Collection;
@@ -74,11 +75,7 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        // For these tests we will run against a sqlite in-memory database,
-        // so that we can safely clean up everything afterwards.
-        // NOTE: Configuration from orchestra test bench-core is used here!
-        $app['config']->set('database.default', 'testing');
-        $app['config']->set('database.connections.testing.foreign_key_constraints', true);
+        TestingConnection::enableConnection();
     }
 
     /**
