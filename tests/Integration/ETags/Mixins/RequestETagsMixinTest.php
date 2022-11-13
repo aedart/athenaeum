@@ -3,9 +3,12 @@
 namespace Aedart\Tests\Integration\ETags\Mixins;
 
 use Aedart\Contracts\ETags\Collection;
+use Aedart\Contracts\ETags\ETag;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\ETags\ETagsTestCase;
+use DateTimeInterface;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * RequestETagsMixinTest
@@ -29,6 +32,9 @@ class RequestETagsMixinTest extends ETagsTestCase
         $this->assertTrue(Request::hasMacro('etagsFrom'), 'etagsFrom not installed');
         $this->assertTrue(Request::hasMacro('ifMatchEtags'), 'ifMatchEtags not installed');
         $this->assertTrue(Request::hasMacro('ifNoneMatchEtags'), 'ifNoneMatchEtags not installed');
+
+        $this->assertTrue(Request::hasMacro('ifRangeEtagOrDate'), 'ifRangeEtagOrDate not installed');
+        $this->assertTrue(Request::hasMacro('hasIfRangeHeaders'), 'hasIfRangeHeaders not installed');
     }
 
     /**
@@ -53,6 +59,22 @@ class RequestETagsMixinTest extends ETagsTestCase
             'Etags (from If-Match)' => optional($request->ifMatchEtags())->toArray(),
             'Etags (from If-None-Match)' => optional($request->ifNoneMatchEtags())->toArray(),
         ]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function failsWhenInvalidEtagValues(): void
+    {
+        $this->expectException(BadRequestHttpException::class);
+
+        $request = $this->createRequestWithEtags(
+            ifMatch: 'W/"8741", invalid-etag-value"',
+        );
+
+        $request->etagsFrom('If-Match');
     }
 
     /**
@@ -115,5 +137,79 @@ class RequestETagsMixinTest extends ETagsTestCase
         $this->assertTrue($ifNoneMatchEtags->isNotEmpty(), 'If-None-Match collection does not contain any etags');
 
         $this->assertTrue($ifNoneMatchEtags->contains('W/"9876"'), 'Collection should contain etag');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canDetermineWhenIfRangeHeadersHaveValues(): void
+    {
+        $requestA = $this->createRequestWithEtags(
+            ifRange: '"ab4jf73"'
+        );
+        $requestB = $this->createRequestWithEtags(
+            ifRange: '"ab4jf73"',
+            range: 'bytes=0-150'
+        );
+
+        $this->assertFalse($requestA->hasIfRangeHeaders(), '(a) should not be true when "Range" header missing value');
+        $this->assertTrue($requestB->hasIfRangeHeaders(), '(b) should be true when "If-Range" and "Range" headers set');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canObtainEtagOrDateFromIfRangeHeader(): void
+    {
+        $requestA = $this->createRequestWithEtags(
+            ifRange: '"ab4jf73"'
+        );
+
+        $result = $requestA->ifRangeEtagOrDate();
+        $this->assertNull($result, 'Should not return anything when only "If-Range" header set');
+
+        // ---------------------------------------------------------------------- //
+
+        $requestB = $this->createRequestWithEtags(
+            ifRange: '"ab4jf73"',
+            range: 'bytes=0-150'
+        );
+
+        $result = $requestB->ifRangeEtagOrDate();
+        $this->assertInstanceOf(ETag::class, $result, 'Value should be an ETag');
+        $this->assertSame('ab4jf73', $result->raw());
+
+        // ---------------------------------------------------------------------- //
+
+        $date = today();
+        $requestB = $this->createRequestWithEtags(
+            ifRange: $date->format(DateTimeInterface::RFC7231),
+            range: 'bytes=0-150'
+        );
+
+        $result = $requestB->ifRangeEtagOrDate();
+        $this->assertInstanceOf(DateTimeInterface::class, $result, 'Value should be a Datetime');
+        $this->assertTrue($date->equalTo($result), 'Invalid date');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function failsWhenInvalidDateInIfRangeHeader(): void
+    {
+        $this->expectException(BadRequestHttpException::class);
+
+        $request = $this->createRequestWithEtags(
+            ifRange: 'my-invalid-date',
+            range: 'bytes=0-150'
+        );
+
+        $request->ifRangeEtagOrDate();
     }
 }

@@ -94,6 +94,8 @@ abstract class ETagsTestCase extends LaravelTestCase
      *
      * @param  string|null  $ifMatch  [optional] Full header value
      * @param  string|null  $ifNoneMatch  [optional] Full header value
+     * @param  string|null  $ifRange  [optional] Etag, HTTP-Date or null
+     * @param  string|null  $range  [optional]
      * @param  string  $method  [optional]
      *
      * @return Request
@@ -101,12 +103,16 @@ abstract class ETagsTestCase extends LaravelTestCase
     public function createRequestWithEtags(
         string|null $ifMatch = null,
         string|null $ifNoneMatch = null,
+        string|null $ifRange = null,
+        string|null $range = null,
         string $method = 'post'
     ): Request
     {
         return Request::create('/test', strtoupper($method), [], [], [], [
             'HTTP_IF_MATCH' => $ifMatch ?? '',
-            'HTTP_IF_NONE_MATCH' => $ifNoneMatch ?? ''
+            'HTTP_IF_NONE_MATCH' => $ifNoneMatch ?? '',
+            'HTTP_IF_RANGE' => $ifRange,
+            'HTTP_RANGE' => $range,
         ]);
     }
 }
