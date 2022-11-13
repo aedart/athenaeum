@@ -5,6 +5,7 @@ namespace Aedart\Tests\TestCases\Audit;
 use Aedart\Audit\Providers\AuditTrailServiceProvider;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
+use Aedart\Testing\Laravel\Database\TestingConnection;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Audit\Category;
 use Aedart\Tests\Helpers\Dummies\Audit\User;
@@ -55,10 +56,7 @@ abstract class AuditTestCase extends LaravelTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'testing');
-
-        // Enable foreign key constraints for SQLite testing database
-        $app['config']->set('database.connections.testing.foreign_key_constraints', true);
+        TestingConnection::enableConnection();
     }
 
     /*****************************************************************
