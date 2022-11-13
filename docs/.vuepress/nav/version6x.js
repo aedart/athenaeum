@@ -163,6 +163,23 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'ETags',
+            collapsable: true,
+            children: [
+                'etags/',
+                'etags/install',
+                'etags/setup',
+                {
+                    title: 'Generators',
+                    collapsable: true,
+                    children: [
+                         'etags/generators/', // N/A - no need for an index here...
+                        //'etags/generators/search',
+                    ]
+                },
+            ]
+        },
+        {
             title: 'Events',
             collapsable: true,
             children: [
