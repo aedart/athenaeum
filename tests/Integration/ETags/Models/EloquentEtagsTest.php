@@ -212,4 +212,28 @@ class EloquentEtagsTest extends ETagsTestCase
         ConsoleDebugger::output((string) $etagA, (string) $etagB);
         $this->assertNotSame($etagA, $etagB, 'Cached etags should had been invalidated');
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ETagGeneratorException
+     */
+    public function canClearCachedEtags(): void
+    {
+        $model = $this->makeModel([
+            'id' => 4321,
+            'name' => 'Jane',
+            'updated_at' => now()
+        ])->syncOriginal(); // A little cheating to trick model in thinking attributes are original!
+
+        $etagA = $model->getWeakEtag();
+        $etagB = $model
+            ->clearCachedEtag()
+            ->getWeakEtag();
+
+        ConsoleDebugger::output((string) $etagA, (string) $etagB);
+        $this->assertNotSame($etagA, $etagB, 'Cached etags should had been cleared');
+    }
 }
