@@ -1,27 +1,23 @@
 <?php
 
-namespace Aedart\Contracts\ETags\Models;
+namespace Aedart\Contracts\ETags;
 
-use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Exceptions\ETagGeneratorException;
-use Aedart\Contracts\ETags\Generator;
 
 /**
- * ETaggable
+ * Can Generate Etag
  *
- * Eloquent Models that inherit from this interface are able to generate
- * an Etag representation the model.
- *
- * @see \Aedart\Contracts\ETags\ETag
- * @see \Illuminate\Database\Eloquent\Model
+ * Able to generate Etag using predefined value.
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
- * @package Aedart\Contracts\ETags\Models
+ * @package Aedart\Contracts\ETags
  */
-interface ETaggable
+interface CanGenerateEtag
 {
     /**
-     * Returns an ETag that represents this model
+     * Generates a new ETag
+     *
+     * Method uses output from {@see etagValue()} to generate new ETag.
      *
      * @param  bool  $weak  [optional] When true, ETag is flagged as "weak",
      *                      indented to be used for "weak comparison" (E.g. If-None-Match Http header comparison).
@@ -32,47 +28,51 @@ interface ETaggable
      *
      * @return ETag
      *
-     * @throws ETagGeneratorException If unable to generate ETag for this model
+     * @throws ETagGeneratorException If unable to generate ETag
      */
     public function makeEtag(bool $weak = true, string|null $profile = null): ETag;
 
     /**
-     * Returns a "weak" ETag that represents this model, intended for weak comparison
+     * Returns a new "weak" ETag, intended for weak comparison
+     *
+     * Method uses output from {@see etagValue()} to generate new ETag.
      *
      * @param  string|null  $profile  [optional] Name of {@see Generator} profile to be used.
-     *                                 If none given, then {@see etagGeneratorProfile} will be used.
+     *                                If none given, then {@see etagGeneratorProfile} will be used.
      *
      * @return ETag
      *
-     * @throws ETagGeneratorException If unable to generate ETag for this model
+     * @throws ETagGeneratorException If unable to generate ETag
      */
-    public function weakEtag(string|null $profile = null): ETag;
+    public function makeWeakEtag(string|null $profile = null): ETag;
 
     /**
-     * Returns a ETag that represents this model, intended for strong comparison
+     * Returns a new ETag, intended for strong comparison
+     *
+     * Method uses output from {@see etagValue()} to generate new ETag.
      *
      * @param  string|null  $profile  [optional] Name of {@see Generator} profile to be used.
-     *                                 If none given, then {@see etagGeneratorProfile} will be used.
+     *                                If none given, then {@see etagGeneratorProfile} will be used.
      *
      * @return ETag
      *
-     * @throws ETagGeneratorException If unable to generate ETag for this model
+     * @throws ETagGeneratorException If unable to generate ETag
      */
-    public function strongEtag(string|null $profile = null): ETag;
+    public function makeStrongEtag(string|null $profile = null): ETag;
 
     /**
      * Returns name of the default ETag Generator profile to use,
-     * for this model
+     * for this component
      *
      * @return string
      */
     public function etagGeneratorProfile(): string;
 
     /**
-     * Returns a value to be used for when generating an ETag representation
-     * of this model
+     * Returns a value to be used for when generating an ETag
      *
-     * @param  bool  $weak  [optional]
+     * @param  bool  $weak  [optional] Indication whether value is going to be
+     *                      used for generating a "weak" flagged etag or not.
      *
      * @return mixed
      */
