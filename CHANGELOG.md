@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-* `ErrorException` Undefined array key "driver". [#123](https://github.com/aedart/athenaeum/issues/123).
+* `ErrorException` Undefined array key "driver". [#123](https://github.com/aedart/athenaeum/issues/123), [#124](https://github.com/aedart/athenaeum/issues/124).
 
 This defect was introduced by `orchestra/testbench`, from ` v7.12.0`, in which the "testing" database connection configuration was removed.
 Several tests assumed that a "testing" connection was available and attempted to use it.
@@ -862,7 +862,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/6.5.1...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/6.5.2...HEAD
+[6.5.2]: https://github.com/aedart/athenaeum/compare/6.5.1...6.5.2
 [6.5.1]: https://github.com/aedart/athenaeum/compare/6.5.0...6.5.1
 [6.5.0]: https://github.com/aedart/athenaeum/compare/6.4.0...6.5.0
 [6.4.0]: https://github.com/aedart/athenaeum/compare/6.3.0...6.4.0
