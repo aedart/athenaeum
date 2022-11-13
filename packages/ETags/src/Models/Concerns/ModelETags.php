@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Config;
 trait ModelETags
 {
     /**
-     * Returns an ETag that represents this model
+     * Returns a new ETag that represents this model
      *
      * @param  bool  $weak  [optional] When true, ETag is flagged as "weak",
      *                      indented to be used for "weak comparison" (E.g. If-None-Match Http header comparison).
@@ -44,7 +44,7 @@ trait ModelETags
     }
 
     /**
-     * Returns a "weak" ETag that represents this model, intended for weak comparison
+     * Returns a new "weak" ETag that represents this model, intended for weak comparison
      *
      * @param  string|null  $profile  [optional] Name of {@see Generator} profile to be used.
      *                                 If none given, then {@see etagGeneratorProfile} will be used.
@@ -59,7 +59,7 @@ trait ModelETags
     }
 
     /**
-     * Returns a ETag that represents this model, intended for strong comparison
+     * Returns a new ETag that represents this model, intended for strong comparison
      *
      * @param  string|null  $profile  [optional] Name of {@see Generator} profile to be used.
      *                                 If none given, then {@see etagGeneratorProfile} will be used.
