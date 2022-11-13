@@ -90,12 +90,11 @@ class RequestETagsMixin
                 return null;
             }
 
-            $ifRangeValue = $this->header('If-Range');
-
             // RFC-9110: "[...] A valid entity-tag can be distinguished from a valid
             // HTTP-date by examining the first three characters for a DQUOTE. [...]"
             // @see https://httpwg.org/specs/rfc9110.html#field.if-range
 
+            $ifRangeValue = $this->header('If-Range');
             if (str_contains(substr($ifRangeValue, 0, 3), '"')) {
                 return $this->etagsFrom('If-Range')[0];
             }
