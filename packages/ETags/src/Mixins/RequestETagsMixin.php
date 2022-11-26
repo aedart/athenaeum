@@ -101,11 +101,7 @@ class RequestETagsMixin
 
             // Otherwise we assume that an HTTP-date has been given and must
             // attempt to convert it into a datetime...
-            try {
-                return Carbon::make($ifRangeValue);
-            } catch (Throwable $e) {
-                throw new BadRequestHttpException(sprintf('Invalid HTTP-Date value in If-Range header: %s', $ifRangeValue), $e);
-            }
+            return $this->httpDateFrom('If-Range');
         };
     }
 
@@ -126,6 +122,84 @@ class RequestETagsMixin
             // @see https://httpwg.org/specs/rfc9110.html#field.if-range
 
             return $this->hasHeader('If-Range') && $this->hasHeader('Range');
+        };
+    }
+
+    /**
+     * Obtain HTTP-Date from given header
+     *
+     * @return Closure
+     */
+    public function httpDateFrom(): Closure
+    {
+        return function(string $header): DateTimeInterface|null
+        {
+            $value = $this->header($header);
+            if (!isset($value)) {
+                return null;
+            }
+
+            try {
+                return Carbon::createFromTimeString($value, 'GMT');
+            } catch (Throwable $e) {
+                throw new BadRequestHttpException(sprintf('Invalid HTTP-Date value in %s header', $header), $e);
+            }
+        };
+    }
+
+    /**
+     * Obtain `If-Modified-Since` Http Date, when available
+     *
+     * The Http Date is available when `If-Modified-Since` header is given,
+     * the request method is either GET or HEAD, and there is no `If-None-Match` header value
+     * specified.
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#field.if-modified-since
+     *
+     * @return Closure
+     */
+    public function ifModifiedSinceDate(): Closure
+    {
+        return function (): DateTimeInterface|null
+        {
+            // From RFC-9110:
+            // "[...] A recipient MUST ignore If-Modified-Since if the request contains an If-None-Match header field
+            // [...] A recipient MUST ignore the If-Modified-Since header field if the received field value
+            // is not a valid HTTP-date, the field value has more than one member, or if the
+            // request method is neither GET nor HEAD. [...]"
+            // @see https://httpwg.org/specs/rfc9110.html#field.if-modified-since
+
+            if (!in_array(strtoupper($this->method()), [ 'GET', 'HEAD' ]) || $this->hasHeader('If-None-Match')) {
+                return null;
+            }
+
+            return $this->httpDateFrom('If-Modified-Since');
+        };
+    }
+
+    /**
+     * Obtain `If-Unmodified-Since` Http Date, when available
+     *
+     * The Http Date is available when `If-Unmodified-Since` header is given,
+     * and there is no `If-Match` header value specified.
+     *
+     * @return Closure
+     */
+    public function ifUnmodifiedSinceDate(): Closure
+    {
+        return function (): DateTimeInterface|null
+        {
+            // From RFC-9110:
+            // "[...] A recipient MUST ignore If-Unmodified-Since if the request contains an If-Match header field
+            // [...] A recipient MUST ignore the If-Unmodified-Since header field if the received field value is
+            // not a valid HTTP-date (including when the field value appears to be a list of dates) [...]"
+            // @see https://httpwg.org/specs/rfc9110.html#field.if-unmodified-since
+
+            if ($this->hasHeader('If-Match')) {
+                return null;
+            }
+
+            return $this->httpDateFrom('If-Unmodified-Since');
         };
     }
 }

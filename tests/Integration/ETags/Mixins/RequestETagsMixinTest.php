@@ -35,6 +35,10 @@ class RequestETagsMixinTest extends ETagsTestCase
 
         $this->assertTrue(Request::hasMacro('ifRangeEtagOrDate'), 'ifRangeEtagOrDate not installed');
         $this->assertTrue(Request::hasMacro('hasIfRangeHeaders'), 'hasIfRangeHeaders not installed');
+
+        $this->assertTrue(Request::hasMacro('httpDateFrom'), 'httpDateFrom not installed');
+        $this->assertTrue(Request::hasMacro('ifModifiedSinceDate'), 'ifModifiedSinceDate not installed');
+        $this->assertTrue(Request::hasMacro('ifUnmodifiedSinceDate'), 'ifUnmodifiedSinceDate not installed');
     }
 
     /**
@@ -47,7 +51,7 @@ class RequestETagsMixinTest extends ETagsTestCase
         // This test is more or less just for the sake of debugging.
         // If it does not fail, then test is a pass...
 
-        $request = $this->createRequestWithEtags(
+        $request = $this->createRequest(
             ifMatch: 'W/"8741", "8920"',
             ifNoneMatch: '"1234", "aibb4hr", W/"9876"'
         );
@@ -70,7 +74,7 @@ class RequestETagsMixinTest extends ETagsTestCase
     {
         $this->expectException(BadRequestHttpException::class);
 
-        $request = $this->createRequestWithEtags(
+        $request = $this->createRequest(
             ifMatch: 'W/"8741", invalid-etag-value"',
         );
 
@@ -84,7 +88,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      */
     public function canGetIfMatchEtags(): void
     {
-        $request = $this->createRequestWithEtags(
+        $request = $this->createRequest(
             ifMatch: '"8741", "8920"'
         );
 
@@ -115,7 +119,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      */
     public function canGetIfNoneMatchEtags(): void
     {
-        $request = $this->createRequestWithEtags(
+        $request = $this->createRequest(
             ifNoneMatch: 'W/"1234", W/"aibb4hr", W/"9876"'
         );
 
@@ -146,10 +150,10 @@ class RequestETagsMixinTest extends ETagsTestCase
      */
     public function canDetermineWhenIfRangeHeadersHaveValues(): void
     {
-        $requestA = $this->createRequestWithEtags(
+        $requestA = $this->createRequest(
             ifRange: '"ab4jf73"'
         );
-        $requestB = $this->createRequestWithEtags(
+        $requestB = $this->createRequest(
             ifRange: '"ab4jf73"',
             range: 'bytes=0-150'
         );
@@ -165,7 +169,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      */
     public function canObtainEtagOrDateFromIfRangeHeader(): void
     {
-        $requestA = $this->createRequestWithEtags(
+        $requestA = $this->createRequest(
             ifRange: '"ab4jf73"'
         );
 
@@ -174,7 +178,7 @@ class RequestETagsMixinTest extends ETagsTestCase
 
         // ---------------------------------------------------------------------- //
 
-        $requestB = $this->createRequestWithEtags(
+        $requestB = $this->createRequest(
             ifRange: '"ab4jf73"',
             range: 'bytes=0-150'
         );
@@ -186,7 +190,7 @@ class RequestETagsMixinTest extends ETagsTestCase
         // ---------------------------------------------------------------------- //
 
         $date = today();
-        $requestB = $this->createRequestWithEtags(
+        $requestB = $this->createRequest(
             ifRange: $date->format(DateTimeInterface::RFC7231),
             range: 'bytes=0-150'
         );
@@ -205,11 +209,122 @@ class RequestETagsMixinTest extends ETagsTestCase
     {
         $this->expectException(BadRequestHttpException::class);
 
-        $request = $this->createRequestWithEtags(
+        $request = $this->createRequest(
             ifRange: 'my-invalid-date',
             range: 'bytes=0-150'
         );
 
         $request->ifRangeEtagOrDate();
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function failsWhenInvalidHttpDateGiven(): void
+    {
+        $this->expectException(BadRequestHttpException::class);
+
+        $request = $this->createRequest(
+            ifModifiedSince: 'my-invalid-date',
+        );
+
+        $request->httpDateFrom('If-Modified-Since');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function returnsNullIfModifiedSinceDateWhenIncorrectHttpMethod(): void
+    {
+        $request = $this->createRequest(
+            ifModifiedSince: now()->toRfc7231String(),
+            method: 'POST'
+        );
+
+        $date = $request->ifModifiedSinceDate();
+
+        ConsoleDebugger::output($date);
+
+        $this->assertNull($date);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function returnsNullIfModifiedSinceDateWhenIfNotMatchedHeaderSet(): void
+    {
+        $request = $this->createRequest(
+            ifNoneMatch: 'W/"1234", W/"aibb4hr", W/"9876"',
+            ifModifiedSince: now()->toRfc7231String(),
+            method: 'GET'
+        );
+
+        $date = $request->ifModifiedSinceDate();
+
+        ConsoleDebugger::output($date);
+
+        $this->assertNull($date);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canObtainIfModifiedSinceDate(): void
+    {
+        $request = $this->createRequest(
+            ifModifiedSince: now()->toRfc7231String(),
+            method: 'HEAD'
+        );
+
+        $date = $request->ifModifiedSinceDate();
+
+        ConsoleDebugger::output($date);
+
+        $this->assertInstanceOf(DateTimeInterface::class, $date);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function returnsNullIfUnmodifiedSinceDateWhenIfMatchHeaderSet(): void
+    {
+        $request = $this->createRequest(
+            ifMatch: 'W/"1234"',
+            ifUnmodifiedSince: now()->toRfc7231String(),
+        );
+
+        $date = $request->ifUnmodifiedSinceDate();
+
+        ConsoleDebugger::output($date);
+
+        $this->assertNull($date);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canObtainIfUnmodifiedSinceDate(): void
+    {
+        $request = $this->createRequest(
+            ifUnmodifiedSince: now()->toRfc7231String(),
+        );
+
+        $date = $request->ifUnmodifiedSinceDate();
+
+        ConsoleDebugger::output($date);
+
+        $this->assertInstanceOf(DateTimeInterface::class, $date);
     }
 }

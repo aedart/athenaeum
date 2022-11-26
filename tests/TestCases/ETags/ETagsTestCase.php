@@ -9,6 +9,7 @@ use Aedart\Contracts\ETags\Generator;
 use Aedart\ETags\Providers\ETagsServiceProvider;
 use Aedart\ETags\Traits\ETagGeneratorFactoryTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
+use Aedart\Utils\Arr;
 use Codeception\Configuration;
 use Illuminate\Http\Request;
 
@@ -90,29 +91,37 @@ abstract class ETagsTestCase extends LaravelTestCase
     }
 
     /**
-     * Creates a new request with etags
+     * Creates a new request with given header values
      *
      * @param  string|null  $ifMatch  [optional] Full header value
      * @param  string|null  $ifNoneMatch  [optional] Full header value
+     * @param  string|null  $ifModifiedSince  [optional] Full header value
+     * @param  string|null  $ifUnmodifiedSince  [optional] Full header value
      * @param  string|null  $ifRange  [optional] Etag, HTTP-Date or null
      * @param  string|null  $range  [optional]
      * @param  string  $method  [optional]
      *
      * @return Request
      */
-    public function createRequestWithEtags(
+    public function createRequest(
         string|null $ifMatch = null,
         string|null $ifNoneMatch = null,
+        string|null $ifModifiedSince = null,
+        string|null $ifUnmodifiedSince = null,
         string|null $ifRange = null,
         string|null $range = null,
         string $method = 'post'
     ): Request
     {
-        return Request::create('/test', strtoupper($method), [], [], [], [
-            'HTTP_IF_MATCH' => $ifMatch ?? '',
-            'HTTP_IF_NONE_MATCH' => $ifNoneMatch ?? '',
+        $headers = array_filter([
+            'HTTP_IF_MATCH' => $ifMatch,
+            'HTTP_IF_NONE_MATCH' => $ifNoneMatch,
+            'HTTP_IF_MODIFIED_SINCE' => $ifModifiedSince,
+            'HTTP_IF_UNMODIFIED_SINCE' => $ifUnmodifiedSince,
             'HTTP_IF_RANGE' => $ifRange,
             'HTTP_RANGE' => $range,
-        ]);
+        ], fn($value) => !empty($value));
+
+        return Request::create('/test', strtoupper($method), [], [], [], $headers);
     }
 }
