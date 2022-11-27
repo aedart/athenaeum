@@ -1,5 +1,6 @@
 ---
 description: About the ETags Package
+sidebarDepth: 0
 ---
 
 # ETags
@@ -13,45 +14,62 @@ The default provided implementation is able to generate ETags for [weak and stro
 use Aedart\ETags\Facades\Generator;
 
 // Generate an ETag for strong comparison, of content
-$eTag = Generator::makeStrong($content);
+$etag = Generator::makeStrong($content);
 
-echo (string) $eTag; // "4720b076892bb2fb65e75af902273c73a2967e4a"
+echo (string) $etag; // "4720b076892bb2fb65e75af902273c73a2967e4a"
 ```
 
 Or to generate ETags that are flagged as "weak" (_for weak comparison_)
 
 ```php
-$eTag = Generator::makeWeak($content);
+$etag = Generator::makeWeak($content);
 
-echo (string) $eTag; // W/"0815"
+echo (string) $etag; // W/"0815"
 ```
 
 ## Parsing
 
-When you wish to create an `ETag` instance, e.g. from a Http request header, then you can achieve this in the following way:
-
-TODO: Adapt this... parse vs. parse single...
+To parse ETags from Http headers, you can use the `parse()` method. It returns a collection of `ETag` instances.
 
 ```php
-use Aedart\ETags\Facades\Generator;
+// E.g. If-None-Match: W/"0815", W/"0816", W/"0817"
+$collection = Generator::parse($request->header('If-None-Match'));  
 
-$eTag = Generator::parseSingle($request->header('If-None-Match')); // E.g. W/"0815"
-
-echo $eTag->raw(); // E.g. 0815
-echo $eTag->isWeak(); // true
+foreach ($collection as $etag) {
+    echo (string) $etag;
+}
 ```
 
-## Matching
+## Compare
 
 Lastly, ETags can also be matched against each other, in accordance with [RFC9110](https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2).
 
-TODO: Adapt this...
+#### Using Collection
 
 ```php
-$eTagA = Generator::parseSingle('W/"0815"');
-$eTagB = Generator::parseSingle('W/"0815"');
+// Etags from Http Header
+$collection = Generator::parse($request->header('If-Match')); // E.g. 'W/"0815"' 
 
-echo $eTagA->matches($eTagB, true); // false - strong comparison
-echo $eTagA->matches($eTagB); // true - weak comparison
+// Other Etag for your resource
+$etag = Generator::makeWeak($content); // E.g. W/"0815"
+
+// Compare etags against resource's etag
+echo $collection->contains($etag, true); // false - strong comparison
+echo $collection->contains($etag);       // true - weak comparison
 ```
 
+#### Using Etag instance
+
+You can also compare individual `ETag` instances, using the `matches()` method.
+
+```php
+$etagA = Generator::parseSingle('W/"0815"');
+$etagB = Generator::parseSingle('W/"0815"');
+
+echo $etagA->matches($etagB, true); // false - strong comparison
+echo $etagA->matches($etagB);       // true - weak comparison
+```
+
+## Onward
+
+For additional examples, installation guide and more, please continue reading the documentation.
