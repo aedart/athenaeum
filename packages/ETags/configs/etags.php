@@ -26,10 +26,10 @@ return [
             'driver' => \Aedart\ETags\Generators\GenericGenerator::class,
             'options' => [
 
-                // Hashing algorithm intended for ETags flagged as "weak" (weak comparison)
+                // Hashing algorithm to be used for ETags flagged as "weak" (weak comparison)
                 'weak_algo' => 'crc32',
 
-                // Hashing algorithm intended for ETags NOT flagged as "weak" (strong comparison)
+                // Hashing algorithm to be used for ETags NOT flagged as "weak" (strong comparison)
                 'strong_algo' => 'sha1',
             ],
         ],
