@@ -169,14 +169,16 @@ module.exports.sidebar = function(){
                 'etags/',
                 'etags/install',
                 'etags/setup',
+                'etags/usage',
                 {
                     title: 'Generators',
                     collapsable: true,
                     children: [
-                         'etags/generators/', // N/A - no need for an index here...
-                        //'etags/generators/search',
+                        'etags/generators/',
+                        'etags/generators/custom',
                     ]
                 },
+                'etags/eloquent',
             ]
         },
         {

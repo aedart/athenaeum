@@ -7,7 +7,7 @@ sidebarDepth: 0
 
 ## Service Provider
 
-Register `ETagsServiceProvider` inside your `configs/app.php`. 
+Register `ETagsServiceProvider` inside your `config/app.php`. 
 
 ```php
 return [
@@ -47,4 +47,44 @@ If you are using the [Athenaeum Core Application](../core/), then run the follow
 
 ```shell
 php {your-cli-app} vendor:publish-all
+```
+
+## Configuration
+
+In the `config/etags.php` you can create or change the "profiles" for the Etags Generator.
+
+```php
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default ETag Generator
+    |--------------------------------------------------------------------------
+    */
+
+    'default_generator' => env('DEFAULT_ETAG_GENERATOR', 'default'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Generator Profiles
+    |--------------------------------------------------------------------------
+    */
+
+    'profiles' => [
+
+        'default' => [
+            'driver' => \Aedart\ETags\Generators\GenericGenerator::class,
+            'options' => [
+
+                // Hashing algorithm to be used for ETags flagged
+                // as "weak" (weak comparison)
+                'weak_algo' => 'crc32',
+
+                // Hashing algorithm to be used for ETags
+                // NOT flagged as "weak" (strong comparison)
+                'strong_algo' => 'sha1',
+            ],
+        ],
+    ]
+];
 ```
