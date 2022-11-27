@@ -6,7 +6,7 @@ description: How to setup Configuration Loader
 ## Inside Laravel
 
 If you are using this component inside a typical Laravel application, then all you have to do, is to register `ConfigLoaderServiceProvider`.
-This can be done in your `configs/app.php` file.
+This can be done in your `config/app.php` file.
 
 ```php
 return [

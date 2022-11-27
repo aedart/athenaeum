@@ -8,7 +8,7 @@ description: How to Register Service Providers
 
 ## Register Service Providers
 
-Just like within a regular Laravel application, you can register you service providers in the `providers` array, located in your `/configs/app.php`. (_configuration path [can be specified](../integration.md) in your application instance_).
+Just like within a regular Laravel application, you can register you service providers in the `providers` array, located in your `/config/app.php`. (_configuration path [can be specified](../integration.md) in your application instance_).
 
 ## Register a Laravel Service Provider
 
@@ -25,7 +25,7 @@ composer require illuminate/redis
 
 ### Register `RedisServiceProvider`
 
-In your `/configs/app.php`, add the class path to the Redis service provider.
+In your `/config/app.php`, add the class path to the Redis service provider.
 
 ```php
 <?php

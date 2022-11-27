@@ -12,7 +12,7 @@ This component is, amongst other things, used to automatically find a [relation'
 
 ## Registration of Api Resources
 
-Your registration should primarily be undertaken inside your `configs/api-resources.php`. 
+Your registration should primarily be undertaken inside your `config/api-resources.php`. 
 See [how to register Api Resource](./README.md#register-api-resource) introduction.
 
 Nevertheless, the remaining of this sections will illustrate how to work with the `Registrar`, so that you

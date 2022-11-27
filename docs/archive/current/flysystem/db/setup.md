@@ -12,7 +12,7 @@ The database adapter is written such that it can be used within a regular Larave
 
 ### Register Service Provider
 
-Register `FlysystemDatabaseAdapterServiceProvider` inside your `configs/app.php`.
+Register `FlysystemDatabaseAdapterServiceProvider` inside your `config/app.php`.
 
 ```php
 return [
@@ -50,7 +50,7 @@ php artisan migrate
 
 ### Add storage disk "profile"
 
-In your `configs/filesystems.php`, add a new storage disk profile, which uses `database` as its driver:
+In your `config/filesystems.php`, add a new storage disk profile, which uses `database` as its driver:
 The followings shows a custom disk that uses the database driver and has `my_disk` as "profile" name. 
 
 ```php

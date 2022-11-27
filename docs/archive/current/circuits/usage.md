@@ -8,7 +8,7 @@ description: How to use Circuit Breaker
 
 ## Obtain Circuit Breaker
 
-Once you have defined your "service" and circuit breaker settings, in your `configs/circuit-breaker`, you can obtain a `CircuitBreaker` instance.
+Once you have defined your "service" and circuit breaker settings, in your `config/circuit-breaker`, you can obtain a `CircuitBreaker` instance.
 This can be done via the `CircuitBreakerManagerTrait`.
 
 ```php
@@ -23,7 +23,7 @@ class WeatherService
     public function forecast()
     {
         // Obtain circuit breaker for "weather_service" (defined in your
-        // configs/circuit-breakers.php file)
+        // config/circuit-breakers.php file)
         $circuitBreaker = $this->getCircuitBreakerManager()
             ->create('weather_service');
             

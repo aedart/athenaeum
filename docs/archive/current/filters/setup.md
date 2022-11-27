@@ -6,7 +6,7 @@ description: How to setup Filters Package
 
 ## Register Service Provider
 
-Register `FiltersServiceProvider` inside your `configs/app.php`. 
+Register `FiltersServiceProvider` inside your `config/app.php`. 
 
 ```php
 return [

@@ -22,7 +22,7 @@ You can read more about the configuration in Laravel's [documentation](https://l
 
 ## Register `LogServiceProvider`
 
-Add the class path to `LogServiceProvider` in your `providers` array, in your `/configs/app.php` configuration file.
+Add the class path to `LogServiceProvider` in your `providers` array, in your `/config/app.php` configuration file.
 
 ```php
 <?php

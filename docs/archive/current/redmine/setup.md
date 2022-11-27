@@ -19,7 +19,7 @@ To use this API Client, you are required to have setup the [Http Client](./../ht
 
 ## Register Service Provider
 
-Register `RedmineServiceProvider` in your `configs/app.php` configuration file.
+Register `RedmineServiceProvider` in your `config/app.php` configuration file.
 
 ```php
 return [
@@ -49,7 +49,7 @@ Run `vendor:publish` to publish this package's configuration.
 php artisan vendor:publish
 ```
 
-After the command has completed, you should see `configs/redmine.php` in your application.
+After the command has completed, you should see `config/redmine.php` in your application.
 
 ### Publish Assets for Athenaeum Core Application
 
@@ -61,13 +61,13 @@ php {your-cli-app} vendor:publish-all
 
 ## Configuration
 
-Inside your `configs/redmine.php` file, you can specify the "connections" profiles.
+Inside your `config/redmine.php` file, you can specify the "connections" profiles.
 These are nothing more than identifiers for what [Http Client](./../http/clients/setup.md) connection profile to be used.
 
 By default, a `"redmine"` http client profile is expected to exist. Feel free to change this to whatever connection profile you wish.
 However, please know that only a connection profiles using the `JsonHttpClient` as driver can be used for the Redmine Clients.
 
-### In your `configs/http-clients.php`
+### In your `config/http-clients.php`
 
 Add a dedicated Redmine profile (_you can name it whatever your wish_). Make sure to specify the `base_uri` to your Redmine server url.
 
@@ -93,7 +93,7 @@ return [
 ];
 ```
 
-### In your `configs/redmine.php`
+### In your `config/redmine.php`
 
 Make sure that you have specified the `authentication` setting (_your API token_).
 

@@ -8,7 +8,7 @@ description: How to setup Maintenance Modes
 
 ## Register Service Provider
 
-Register `MaintenanceModeServiceProvider` inside your `configs/app.php`. 
+Register `MaintenanceModeServiceProvider` inside your `config/app.php`. 
 
 ```php
 return [

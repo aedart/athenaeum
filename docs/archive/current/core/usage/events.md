@@ -9,7 +9,7 @@ Please read Laravel's [documentation](https://laravel.com/docs/9.x/events), to g
 
 ## Register Event Listeners
 
-By default, when you need to register [event listeners](https://laravel.com/docs/9.x/events#defining-listeners) or [subscribers](https://laravel.com/docs/9.x/events#event-subscribers), you need to state them within your `/configs/events.php` configuration file.
+By default, when you need to register [event listeners](https://laravel.com/docs/9.x/events#defining-listeners) or [subscribers](https://laravel.com/docs/9.x/events#event-subscribers), you need to state them within your `/config/events.php` configuration file.
 See the [Athenaeum Package](../../events) for details and examples.
 
 ### Via Service Provider

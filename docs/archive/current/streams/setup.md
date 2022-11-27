@@ -18,7 +18,7 @@ To gain the most of this package, you should register its service provider and p
 
 ### Register Service Provider
 
-In your `configs/app.php`, register `StreamServiceProvider`. 
+In your `config/app.php`, register `StreamServiceProvider`. 
 
 ```php
 return [
@@ -49,7 +49,7 @@ Run `vendor:publish` to publish this package's configuration.
 php artisan vendor:publish
 ```
 
-You should now have a new `configs/streams.php` configuration available in your application. 
+You should now have a new `config/streams.php` configuration available in your application. 
 
 #### Publish Assets for Athenaeum Core Application
 
@@ -61,7 +61,7 @@ php {your-cli-app} vendor:publish-all
 
 ### Configuration
 
-The `configs/streams.php` configuration allows you to add and customise different "profiles" for the stream "locking" and "transaction" mechanisms. 
+The `config/streams.php` configuration allows you to add and customise different "profiles" for the stream "locking" and "transaction" mechanisms. 
 Feel free to thinker with these as you see fit.
 
 _More information about the mentioned mechanisms are covered in later sections._
