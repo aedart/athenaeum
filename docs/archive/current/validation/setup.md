@@ -8,7 +8,7 @@ description: How to setup Validation
 
 ## Register Service Provider
 
-Register `ValidationServiceProvider` inside your `configs/app.php`. 
+Register `ValidationServiceProvider` inside your `config/app.php`. 
 
 ```php
 return [

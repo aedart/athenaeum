@@ -35,7 +35,7 @@ class DefinesUserTasks implements SchedulesTasks
 
 ## Register Schedules
 
-Once you have completed your schedules, state the component's class path inside `configs/schedule.php`.
+Once you have completed your schedules, state the component's class path inside `config/schedule.php`.
 
 ```php
 <?php

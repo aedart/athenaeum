@@ -3,7 +3,7 @@ description: How to register Commands
 ---
 # Commands
 
-To add new [commands](https://laravel.com/docs/9.x/artisan#writing-commands) to artisan, simply state the command's class paths inside your `configs/commands.php`
+To add new [commands](https://laravel.com/docs/9.x/artisan#writing-commands) to artisan, simply state the command's class paths inside your `config/commands.php`
 
 ```php
 <?php

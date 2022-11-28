@@ -56,7 +56,7 @@ echo $result; // Jim
 
 ## Customise Behaviour
 
-If you are using the streams component inside a Laravel application, then you can customise the locking behaviour via the `configs/streams.php` configuration.
+If you are using the streams component inside a Laravel application, then you can customise the locking behaviour via the `config/streams.php` configuration.
 Here, you may change existing lock profiles or add new ones.
 
 ```php

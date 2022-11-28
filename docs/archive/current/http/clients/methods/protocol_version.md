@@ -15,7 +15,7 @@ $builder = $client
 
 ## Via Configuration
 
-The protocol version number can also be set via `configs/http-clients.php`.
+The protocol version number can also be set via `config/http-clients.php`.
 
 ```php
 <?php

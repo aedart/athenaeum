@@ -5,7 +5,7 @@ description: How to setup Console
 
 ## Register Service Provider
 
-Register `ConsoleServiceProvider` inside your `configs/app.php`. 
+Register `ConsoleServiceProvider` inside your `config/app.php`. 
 
 ```php
 return [
@@ -35,7 +35,7 @@ Run `vendor:publish` to publish this package's assets.
 php artisan vendor:publish
 ```
 
-The following configuration files should be added inside your `configs/` directory:
+The following configuration files should be added inside your `config/` directory:
 
 - `commands.php`
 - `schedule.php`

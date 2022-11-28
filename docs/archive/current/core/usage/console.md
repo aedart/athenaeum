@@ -42,7 +42,7 @@ If you wish to create console commands, then you have to do so manually.
 
 ## Register Commands
 
-You can register the command via the `configs/commands.php` configuration file.
+You can register the command via the `config/commands.php` configuration file.
 Please review the [Console Package's documentation](../../console/commands.md) for details.
 
 ### Via Service Provider
@@ -73,7 +73,7 @@ class MyConsoleServiceProvider extends ServiceProvider
 }
 ```
 
-Once you have completed your service provider, register it in your `/configs/app.php` configuration file.
+Once you have completed your service provider, register it in your `/config/app.php` configuration file.
 
 ```php
 <?php

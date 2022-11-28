@@ -10,7 +10,7 @@ To make use of Laravel's [Cache](https://laravel.com/docs/9.x/cache) component, 
 
 ## Configuration
 
-In your `/configs/cache.php`, you will find several cache "stores", each having a driver.
+In your `/config/cache.php`, you will find several cache "stores", each having a driver.
 Please ensure that your server environment and application supports the drivers, that you wish to make use of.
 For instance, if you wish to use a "store" that requires [Redis](https://redis.io/) as a driver, then you must fulfill it's requirements. 
 See Laravel's [Redis package](https://packagist.org/packages/illuminate/redis) and it's [documentation](https://laravel.com/docs/9.x/redis) for details.

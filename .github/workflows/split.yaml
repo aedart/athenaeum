@@ -75,6 +75,8 @@ jobs:
             remote: 'athenaeum-database'
           - local: 'Dto'
             remote: 'athenaeum-dto'
+          - local: 'ETags'
+            remote: 'athenaeum-etags'
           - local: 'Events'
             remote: 'athenaeum-events'
           - local: 'Filters'

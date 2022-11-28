@@ -30,7 +30,7 @@ class MyCustomGrammar extends DefaultGrammar
 }
 ```
 
-Once you have performed your adaptations, simply create a new grammar profile in your `configs/http-clients.php` and make use of it.
+Once you have performed your adaptations, simply create a new grammar profile in your `config/http-clients.php` and make use of it.
 
 ```php
 <?php
