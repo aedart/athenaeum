@@ -179,6 +179,7 @@ module.exports.sidebar = function(){
                     ]
                 },
                 'etags/eloquent',
+                'etags/macros',
             ]
         },
         {
