@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.6.0] - 2022-11-28
+
+### Added
+
+* New ETags utilities package. [#126](https://github.com/aedart/athenaeum/pull/126).
+
 ### Changed
 
 * Useless `$notFoundMsg` is now removed, inside Circuit Breaker Manager's internal "find or fail" methods (_cleanup_).
@@ -871,7 +877,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/6.5.2...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/6.6.0...HEAD
+[6.6.0]: https://github.com/aedart/athenaeum/compare/6.5.2...6.6.0
 [6.5.2]: https://github.com/aedart/athenaeum/compare/6.5.1...6.5.2
 [6.5.1]: https://github.com/aedart/athenaeum/compare/6.5.0...6.5.1
 [6.5.0]: https://github.com/aedart/athenaeum/compare/6.4.0...6.5.0
