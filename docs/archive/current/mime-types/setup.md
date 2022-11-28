@@ -47,7 +47,7 @@ When using this package with Laravel, you can choose to register the package's s
 
 ### Register Service Provider
 
-Register `MimeTypesDetectionServiceProvider` inside your `configs/app.php`. 
+Register `MimeTypesDetectionServiceProvider` inside your `config/app.php`. 
 
 ```php
 return [
@@ -78,7 +78,7 @@ Run `vendor:publish` to publish this package's configuration.
 php artisan vendor:publish
 ```
 
-The `configs/mime-types-detection.php` configuration will be available in your application.
+The `config/mime-types-detection.php` configuration will be available in your application.
 
 #### Publish Assets for Athenaeum Core Application
 
@@ -90,7 +90,7 @@ php {your-cli-app} vendor:publish-all
 
 ### Configuration
 
-Inside the `configs/mime-types-detection.php` file, you can create or change "profiles" for the mime-type detector.
+Inside the `config/mime-types-detection.php` file, you can create or change "profiles" for the mime-type detector.
 
 ```php
 <?php

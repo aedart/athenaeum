@@ -128,8 +128,7 @@ class Manager implements
         $key = 'circuit-breakers.stores.' . $store;
 
         if (!$config->has($key)) {
-            $notFoundMsg = $notFoundMsg ?? 'Store (profile) "%s" does not exist';
-            throw new ProfileNotFound(sprintf($notFoundMsg, $store));
+            throw new ProfileNotFound(sprintf('Store (profile) "%s" does not exist', $store));
         }
 
         return $config->get($key);
@@ -150,8 +149,7 @@ class Manager implements
         $key = 'circuit-breakers.services.' . $service;
 
         if (!$config->has($key)) {
-            $notFoundMsg = $notFoundMsg ?? 'Service (profile) "%s" does not exist';
-            throw new ProfileNotFound(sprintf($notFoundMsg, $service));
+            throw new ProfileNotFound(sprintf('Service (profile) "%s" does not exist', $service));
         }
 
         return $config->get($key);

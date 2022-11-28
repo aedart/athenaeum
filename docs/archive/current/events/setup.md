@@ -6,7 +6,7 @@ description: How to setup Events Package
 
 ## Register Service Provider
 
-Register `ListenersViaConfigServiceProvider` inside your `configs/app.php`. 
+Register `ListenersViaConfigServiceProvider` inside your `config/app.php`. 
 
 ```php
 return [

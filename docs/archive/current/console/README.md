@@ -11,7 +11,7 @@ It serves as an alternative to the default registration method provided by [Lara
 
 ```php
 <?php
-// configs/commands.php
+// config/commands.php
 return [
     \Acme\Console\DatabaseDumpCommand::class,
     \Acme\Console\ExportPicturesCommand::class,
@@ -23,7 +23,7 @@ return [
 
 ```php
 <?php
-// configs/schedule.php
+// config/schedule.php
 return [
     'tasks' => [
         \Acme\Tasks\DefinesCacheCleanupTasks::class,

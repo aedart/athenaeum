@@ -11,7 +11,7 @@ In this section, you will find a brief introduction for how to manage the cache 
 
 ## Configuration
 
-In your `configs/acl.php` configuration file, you will find a `cache` setting.
+In your `config/acl.php` configuration file, you will find a `cache` setting.
 Here you can customise what cache store to use, how long permissions & roles should be cached, and what key-prefix should be used. 
 
 ```php

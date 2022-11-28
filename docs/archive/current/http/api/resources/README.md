@@ -46,7 +46,7 @@ class AddressResource extends ApiResource
 ## Register Api Resource
 
 Once you have created your Api Resource, you must register it in the [Registrar](./registrar.md).
-The easiest way of doing so, is by defining a new key-value pair inside your `configs/api-resources.php` configuration file.
+The easiest way of doing so, is by defining a new key-value pair inside your `config/api-resources.php` configuration file.
 
 ```php
 use App\Models\Address;

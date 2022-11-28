@@ -114,7 +114,7 @@ Consider assigning your desired Http output to a response handler, if such is po
 
 ### Register Your Exception Handler
 
-Once your "leaf" exception handler has been completed, add it's class path in the `handlers` array, which is located in the `/configs/exceptions.php` file.
+Once your "leaf" exception handler has been completed, add it's class path in the `handlers` array, which is located in the `/config/exceptions.php` file.
 
 ```php{11}
 <?php
@@ -327,14 +327,14 @@ class RollsBackTransactions extends CleanupHandler
 }
 ```
 
-Should you make use of such "cleanup handlers", then you are recommended to **register them before other exception handlers**, in your `configs/exceptions.php`.
+Should you make use of such "cleanup handlers", then you are recommended to **register them before other exception handlers**, in your `config/exceptions.php`.
 Consider the following example:
 
 ```php
 <?php
 return [
 
-    // ... inside configs/exceptions.php...
+    // ... inside config/exceptions.php...
     
     // ... previous not shown ...
 

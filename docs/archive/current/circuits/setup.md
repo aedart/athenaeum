@@ -8,7 +8,7 @@ description: How to setup Circuits
 
 ## Register Service Provider
 
-Register `CircuitBreakerServiceProvider` inside your `configs/app.php`. 
+Register `CircuitBreakerServiceProvider` inside your `config/app.php`. 
 
 ```php
 return [
@@ -38,7 +38,7 @@ Run `vendor:publish` to publish package's assets.
 php artisan vendor:publish
 ```
 
-Once completed, the following configuration file should be available inside your `configs/` directory:
+Once completed, the following configuration file should be available inside your `config/` directory:
 
 - `circuit-breakers`
 
@@ -52,7 +52,7 @@ php {your-cli-app} vendor:publish-all
 
 ## Configuration
 
-The `configs/circuit-breakers.php` configuration file, is intended to contain a list of "services".
+The `config/circuit-breakers.php` configuration file, is intended to contain a list of "services".
 Each service has a list of settings (_options_) for it's corresponding circuit breaker instance.
 Add or change these settings as you see fit.
 
@@ -119,7 +119,7 @@ return [
 
 Each Circuit Breaker uses a `Store` to keep track of it's state (_closed, open, half-open_).
 In your configuration, you can specify the profile-name of the store to use.
-Additional store configuration can be specified in your configuration file (`configs/circuit-breakers.php`).
+Additional store configuration can be specified in your configuration file (`config/circuit-breakers.php`).
 
 ::: warning
 Currently, only cache stores that inherit from [`LockProvider`](https://laravel.com/docs/9.x/cache#atomic-locks) can be used.

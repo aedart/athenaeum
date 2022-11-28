@@ -94,7 +94,7 @@ class Person implements Populatable
 
 ### Listener option replaced, in Audit Trail package
 
-The `listener` option found in `configs/audit-trail.php` has been replaced by `subscriber`, which uses an [event subscriber](https://laravel.com/docs/9.x/events#event-subscribers) component instead.
+The `listener` option found in `config/audit-trail.php` has been replaced by `subscriber`, which uses an [event subscriber](https://laravel.com/docs/9.x/events#event-subscribers) component instead.
 
 ```php
 return [
@@ -112,8 +112,8 @@ return [
 
 ### RFC3339 used as default format
 
-[RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) is now set as the default `datetime_format` option for the Http Query Grammar Profiles, in `configs/http-clients`.
-_If you already have a datetime format specified in `configs/http-clients.php`, then this change will not affect you._
+[RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) is now set as the default `datetime_format` option for the Http Query Grammar Profiles, in `config/http-clients`.
+_If you already have a datetime format specified in `config/http-clients.php`, then this change will not affect you._
 
 ### Language directory path in Core `Application`
 
