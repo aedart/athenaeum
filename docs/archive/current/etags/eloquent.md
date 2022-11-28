@@ -17,8 +17,8 @@ use Aedart\ETags\Facades\Generator;
 $etag = Generator::make($model); // Uses all properties returned by toArray()
 ```
 
-If you are able to generalise what properties to use when creating etags, for all of your Eloquent Models, then perhaps you should [create a custom generator](./generators/custom.md) for your models.
-Alternatively, if you need to customise what properties to be used, per model, then the following approach could be better suitable.
+If you are able to generalise what properties to use when creating etags, for all of your Eloquent Models, then you can [create a custom generator](./generators/custom.md) for your models.
+Alternatively, if you need to customise what properties must be used, per model, then the following approach could be better suitable.
 
 ## Customise Model ETag value
 
@@ -38,21 +38,21 @@ class User extends Model
     
     public function etagValue(bool $weak = true): mixed
     {
-        $name = $this->name ?? '';
+        $id = $this->getKey() ?? '';
         $updatedAt = optional($this->updated_at)->toRfc3339String(true) ?? '';
     
         if ($weak) {
-            return "user_{$name}_{$updatedAt}";
+            return "users_{$id}_{$updatedAt}";
         }
-    
+
         $email = $this->email ?? '';
     
-        return "user_{$name}_{$email}_{$updatedAt}";
+        return "users_{$id}_{$email}_{$updatedAt}";
     }    
 }
 ```
 
-**Note**: _For the same of simplicity, the above shown example assumes model does not have an `id`. However, in a real world situation, you most likely would use a model's unique key, if available._
+**Note**: _For the sake of the example, an additional property is added (`email`) when value is to be used for a "strong comparison" etag. Feel free to ignore `$weak` if you do not require such logic._
 
 Later in your application, you can simply invoke `getEtag()`, `getStrongEtag()` or `getWeakEtag()` to create an etag representation of your model.
 
@@ -66,13 +66,12 @@ echo (string) $etagB; // E.g. W/"846b00e9"
 
 ### The `etagValue()` method
 
-::: warning Caution
-By default, when you use the `EloquentEtag` trait, your model will be able to create etags, even without overwriting or implementing the `etagValue()` method.
-This does **NOT** offer any performance improvements, as the default implementation assumes it must use all of your model's attributes, when creating an `ETag` for "strong" comparison.
+::: warning Recommendation
 
-**Recommendation**: _you SHOULD always implement the `etagValue()` such that it fits your needs, rather than relying on the default behaviour._
+_By default, you are not required to implement / overwrite the `etagValue()` method._
+_However, it is recommended that you do overwrite this method and return the value(s) that best fit your needs._
+
+_Furthermore, you SHOULD handle situations when your model instance does not have the required attributes to return a value. E.g. by throwing an exception or default other appropriate behaviour._
+
 :::
-
-## Onward
-
-You are strongly encouraged to review the source code of the `EloquentEtag` trait, to gain a better understanding of how things work. 
+ 
