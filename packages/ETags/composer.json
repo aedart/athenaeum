@@ -1,7 +1,7 @@
 {
     "name": "aedart/athenaeum-etags",
-    "description": "ETag Utility for your Laravel Application",
-    "keywords": ["Athenaeum", "ETag", "Entity Tag", "Generator", "Http"],
+    "description": "ETags utilities for your Laravel Application",
+    "keywords": ["Athenaeum", "ETag", "Entity Tag", "Generator", "HTTP conditional requests"],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
