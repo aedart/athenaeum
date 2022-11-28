@@ -14,7 +14,7 @@ Please check their [documentation](https://docs.laminas.dev/laminas-diactoros/v2
 
 ## Register Service Provider
 
-Register `HttpSerializationServiceProvider` in your `configs/app.php`. 
+Register `HttpSerializationServiceProvider` in your `config/app.php`. 
 
 ```php
 return [

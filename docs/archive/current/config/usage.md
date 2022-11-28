@@ -22,7 +22,7 @@ The `Loader` will automatically scan through nested directories and attempt to l
 Imagine the following structure.
 
 ```
-configs/
+config/
     modules/
         box.json
         circle.yml
@@ -34,7 +34,7 @@ Once these files are loaded, the nested directories then become part of the conf
 This means that if you need to access the property `width`, inside `box.json`, then you must state the full name for it.
 
 ```php
-$loader->setDirectory('configs/');
+$loader->setDirectory('config/');
 $loader->load();
 $repository = $loader->getConfig();
 

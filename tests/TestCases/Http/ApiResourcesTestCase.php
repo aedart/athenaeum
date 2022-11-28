@@ -9,6 +9,7 @@ use Aedart\Contracts\Config\Parsers\Exceptions\FileParserException;
 use Aedart\Http\Api\Providers\ApiResourceServiceProvider;
 use Aedart\Http\Api\Traits\ApiResourceRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
+use Aedart\Testing\Laravel\Database\TestingConnection;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Validation\Providers\ValidationServiceProvider;
 use Codeception\Configuration;
@@ -81,10 +82,7 @@ abstract class ApiResourcesTestCase extends LaravelTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'testing');
-
-        // Enable foreign key constraints for SQLite testing database
-        $app['config']->set('database.connections.testing.foreign_key_constraints', true);
+        TestingConnection::enableConnection();
     }
 
     /*****************************************************************

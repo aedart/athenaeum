@@ -97,11 +97,10 @@ class BelongsToFilter extends BaseFieldFilter
 
         // Determine the type of relation that the constraint must be built
         // for. E.g. use "whereHas" or "whereHasMorph" constraint.
-        $isMorph = false;
-        $relationInstance = $model->{$relation};
-        if ($relationInstance instanceof MorphTo) {
-            $isMorph = true;
-        }
+
+        /** @var \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Relations\MorphTo $relationInstance */
+        $relationInstance = $model->{$relation}();
+        $isMorph = ($relationInstance instanceof MorphTo);
 
         // Extract relation field.
         $relationField = $this->extractRelationField($this->field());
@@ -259,7 +258,7 @@ class BelongsToFilter extends BaseFieldFilter
             return;
         }
 
-        // Allow list of numeric values...
+        // Allow list of numeric or string values...
         if (in_array($operator, [ 'in', 'not_in' ]) && Str::contains($value, ',')) {
             $values = $this->valueToList($value);
 

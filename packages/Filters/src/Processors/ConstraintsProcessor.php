@@ -227,9 +227,10 @@ class ConstraintsProcessor extends BaseProcessor
                 return $filter::make($column, $operator, $value, $logical);
             }
 
-            // (Re)-configure if instance was provided
+            // When an instance is provided, then it must be cloned and
+            // configured with field name, operator, value,...etc
             if ($filter instanceof FieldCriteria) {
-                return $filter
+                return (clone $filter)
                     ->setField($column)
                     ->setOperator($operator)
                     ->setLogical($logical)

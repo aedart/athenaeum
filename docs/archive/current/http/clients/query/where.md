@@ -291,7 +291,7 @@ $response = $client
 **Caution**: _Not conventional!_
 
 The ampersand + pipe symbols (_`&|`_) are used as a prefix, for each field/filter that acts as an "or" conjunction.
-This symbol can be changed in the grammar's configuration, in `configs/http-clients.php`.
+This symbol can be changed in the grammar's configuration, in `config/http-clients.php`.
 
 ```http
 /users?name=john&|gender=male
@@ -303,7 +303,7 @@ This symbol can be changed in the grammar's configuration, in `configs/http-clie
 **Caution**: _Not conventional!_
 
 The pipe symbol (_`|`_) is used as a prefix, for each field/filter that acts as an "or" conjunction.
-This symbol can be changed in the grammar's configuration, in `configs/http-clients.php`.
+This symbol can be changed in the grammar's configuration, in `config/http-clients.php`.
 
 ```http
 /users?filter[name]=john&filter[|gender]=male

@@ -10,7 +10,7 @@ The `FileInfoSampler` is a wrapper for the [`finfo` class](https://www.php.net/m
 
 `FileInfoSampler` offers the following options, which can be specified in your "profile" settings.
 
-_If you are using package in a regular Laravel application, then you can change options in your `configs/mime-types-detection.php` file._
+_If you are using package in a regular Laravel application, then you can change options in your `config/mime-types-detection.php` file._
 
 ```php
 use Aedart\MimeTypes\Detector;

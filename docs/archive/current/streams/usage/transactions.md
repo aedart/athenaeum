@@ -74,7 +74,7 @@ Backup of the target stream is _NOT ENABLED_, by the default transaction "profil
 Without any additional configuration or customisation, no backup is made.
 :::
 
-Backup can be configured in your `configs/streams.php` configuration file, when situated within a regular Laravel application.
+Backup can be configured in your `config/streams.php` configuration file, when situated within a regular Laravel application.
 However, you can always overwrite the profile's "backup" configuration using the `$options` argument, in the `transaction()` method, regardless of what profile is used. 
 
 ```php
@@ -112,7 +112,7 @@ Unless the `remove_after_commit` setting is set to `true`, then the backup file 
 
 ## Customisation
 
-As previously mentioned, if using stream transactions in a Laravel application, then you can add or change profiles in the `configs/streams.php` configuration file.
+As previously mentioned, if using stream transactions in a Laravel application, then you can add or change profiles in the `config/streams.php` configuration file.
 When you wish to use a specific transaction, state the profile name in the `$profile` argument of the `transaction()` method.
 
 ```php
@@ -167,7 +167,7 @@ class MyFileStream extends FileStream
 }
 ```
 
-For additional information about each of the above shown settings, please review the `configs/streams.php` located inside this package.
+For additional information about each of the above shown settings, please review the `config/streams.php` located inside this package.
 
 ## Onward
 

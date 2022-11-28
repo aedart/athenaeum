@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.6.0] - 2022-11-28
+
+### Added
+
+* New ETags utilities package. [#126](https://github.com/aedart/athenaeum/pull/126).
+
+### Changed
+
+* Useless `$notFoundMsg` is now removed, inside Circuit Breaker Manager's internal "find or fail" methods (_cleanup_).
+* Root package `composer.json` now uses "self.version" again, for the Athenaeum packages it replaces.
+
+### Fixed
+
+* Default configuration directory changed to `config/`, to match a default Laravel application (_fixed in documentation_). 
+
+## [6.5.2] - 2022-11-13
+
+### Fixed
+
+* `ErrorException` Undefined array key "driver". [#123](https://github.com/aedart/athenaeum/issues/123), [#124](https://github.com/aedart/athenaeum/issues/124).
+
+This defect was introduced by `orchestra/testbench`, from ` v7.12.0`, in which the "testing" database connection configuration was removed.
+Several tests assumed that a "testing" connection was available and attempted to use it.
+A custom `TestingConnection` util class now ensures such a connection exists for affected tests.
+
+## [6.5.1] - 2022-11-04
+
+### Fixed
+
+* Unintended filter criteria overwrite in `ConstraintsProcessor`. [#117](https://github.com/aedart/athenaeum/issues/117), [#118](https://github.com/aedart/athenaeum/pull/118).
+
 ## [6.5.0] - 2022-10-23
 
 ### Added
@@ -846,7 +877,10 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/6.5.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/6.6.0...HEAD
+[6.6.0]: https://github.com/aedart/athenaeum/compare/6.5.2...6.6.0
+[6.5.2]: https://github.com/aedart/athenaeum/compare/6.5.1...6.5.2
+[6.5.1]: https://github.com/aedart/athenaeum/compare/6.5.0...6.5.1
 [6.5.0]: https://github.com/aedart/athenaeum/compare/6.4.0...6.5.0
 [6.4.0]: https://github.com/aedart/athenaeum/compare/6.3.0...6.4.0
 [6.3.0]: https://github.com/aedart/athenaeum/compare/6.2.1...6.3.0

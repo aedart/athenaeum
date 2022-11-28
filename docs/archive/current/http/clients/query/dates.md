@@ -12,7 +12,7 @@ The Http Query builder offers a few methods for adding date-based conditions, in
 ## Formats
 
 Before showing examples of each supported method, you should know that you can change the date and time formats, for each grammar.
-This can be done in your `configs/http-clients.php` configuration file, under each grammar profile.
+This can be done in your `config/http-clients.php` configuration file, under each grammar profile.
 The formats are parsed using PHP's [`DateTime::format()` method](https://www.php.net/manual/en/datetime.format.php).
 
 ```php

@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\TestCases\Database;
 
+use Aedart\Testing\Laravel\Database\TestingConnection;
 use Aedart\Testing\TestCases\LaravelTestCase;
 
 /**
@@ -31,10 +32,7 @@ abstract class DatabaseTestCase extends LaravelTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'testing');
-
-        // Enable foreign key constraints for SQLite testing database
-        $app['config']->set('database.connections.testing.foreign_key_constraints', true);
+        TestingConnection::enableConnection();
     }
 
     /*****************************************************************

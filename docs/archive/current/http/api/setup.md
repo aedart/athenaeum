@@ -8,7 +8,7 @@ description: How to setup Http Api
 
 ## Register Service Provider
 
-Register `ApiResourceServiceProvider` inside your `configs/app.php`. 
+Register `ApiResourceServiceProvider` inside your `config/app.php`. 
 
 ```php
 return [

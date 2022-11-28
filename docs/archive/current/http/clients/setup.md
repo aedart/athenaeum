@@ -8,7 +8,7 @@ description: How to setup Http Clients
 
 ## Register Service Provider
 
-Register `HttpClientServiceProvider` inside your `configs/app.php`. 
+Register `HttpClientServiceProvider` inside your `config/app.php`. 
 
 ```php
 return [
@@ -52,7 +52,7 @@ php {your-cli-app} vendor:publish-all
 
 ## Configuration
 
-In your `/configs/http-clients.php` configuration, you should see a list of "profiles".
+In your `/config/http-clients.php` configuration, you should see a list of "profiles".
 Feel free to add as many profiles as your application requires.
 
 Each profile consists of two keys:
@@ -115,7 +115,7 @@ The following grammars are offered by default:
 - `JsonApiGrammar`: Adheres to [Json API's](https://jsonapi.org/format/1.1/#fetching) syntax for Http Queries.
 - `ODataGrammar`: Adheres to [OData's](https://www.odata.org/getting-started/basic-tutorial/#queryData) syntax for Http Queries.
 
-You can find a matching profile, inside your `configs/http-clients.php`, where you may change any of the available options.
+You can find a matching profile, inside your `config/http-clients.php`, where you may change any of the available options.
 
 ```php
 <?php

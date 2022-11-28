@@ -8,7 +8,7 @@ description: How to setup Audit
 
 ## Register Service Provider
 
-Register `AuditTrailServiceProvider` in your `configs/app.php`. 
+Register `AuditTrailServiceProvider` in your `config/app.php`. 
 
 ```php
 return [
@@ -38,7 +38,7 @@ Run `vendor:publish` to publish package's assets.
 php artisan vendor:publish
 ```
 
-The package should publish a `configs/audit-trail.php` and a migration file inside your `database/migrations` directory.
+The package should publish a `config/audit-trail.php` and a migration file inside your `database/migrations` directory.
 
 **Please make sure to configure the audit trail components, before running migrations!**
 

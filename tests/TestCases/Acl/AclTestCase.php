@@ -10,10 +10,12 @@ use Aedart\Acl\Traits\RegistrarTrait;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Support\Helpers\Auth\Access\GateTrait;
+use Aedart\Testing\Laravel\Database\TestingConnection;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Acl\User;
 use Codeception\Configuration;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -66,10 +68,7 @@ abstract class AclTestCase extends LaravelTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'testing');
-
-        // Enable foreign key constraints for SQLite testing database
-        $app['config']->set('database.connections.testing.foreign_key_constraints', true);
+        TestingConnection::enableConnection();
     }
 
     /*****************************************************************

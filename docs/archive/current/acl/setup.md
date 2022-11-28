@@ -10,7 +10,7 @@ In this section, setup of the ACL package is covered. It goes without saying, yo
 
 ## Register Service Provider
 
-Register `AclServiceProvider` inside your `configs/app.php`. 
+Register `AclServiceProvider` inside your `config/app.php`. 
 
 ```php
 return [
@@ -40,7 +40,7 @@ Run `vendor:publish` to publish this package's configuration.
 php artisan vendor:publish
 ```
 
-After the command has completed, you should see `configs/acl.php` in your application.
+After the command has completed, you should see `config/acl.php` in your application.
 
 ### Publish Assets for Athenaeum Core Application
 
@@ -52,7 +52,7 @@ php {your-cli-app} vendor:publish-all
 
 ## Configuration
 
-Inside the `configs/acl.php` file, you can change configuration for this package.
+Inside the `config/acl.php` file, you can change configuration for this package.
 
 ### Using your own models
 

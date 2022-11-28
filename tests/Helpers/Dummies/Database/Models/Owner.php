@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @property int $id Unique identifier
  * @property string $name Name of owner
- * @property int $category_id Foreign key
+ * @property int|null $category_id Foreign key
  *
  * @property-read Category|null $category
  *
