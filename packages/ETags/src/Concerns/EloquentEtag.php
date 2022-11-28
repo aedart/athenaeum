@@ -118,39 +118,13 @@ trait EloquentEtag
         // RECOMMENDATION: Overwrite this method and adapt its return value
         // to fit your Eloquent model...
 
-        return match ($weak) {
-            true => $this->weakEtagAttributes(),
-            false => $this->strongETagAttributes(),
-        };
-    }
+        $updatedAt = optional($this->attributes[$this->getUpdatedAtColumn()] ?? null)
+            ->toRfc3339String(true) ?? '';
 
-    /**
-     * Returns values to be used for generating a "weak" ETag (weak comparison)
-     *
-     * @see etagValue()
-     *
-     * @return string[]|int[]|float[] Values to be used for generating {@see ETag::raw} value
-     */
-    protected function weakEtagAttributes(): array
-    {
-        return [
+        return implode('_', [
             $this->getTable(),
-            $this->getKey(),
-            $this->attributes[$this->getUpdatedAtColumn()] ?? null
-        ];
-    }
-
-    /**
-     * Returns values to be used for generating an  ETag (strong comparison)
-     *
-     * @see etagValue()
-     *
-     * @return string[]|int[]|float[] Values to be used for generating {@see ETag::raw} value
-     */
-    protected function strongETagAttributes(): array
-    {
-        return [ $this->getTable(), ...array_values(
-            $this->attributesToArray()
-        )];
+            $this->getKey() ?? '',
+            $updatedAt
+        ]);
     }
 }
