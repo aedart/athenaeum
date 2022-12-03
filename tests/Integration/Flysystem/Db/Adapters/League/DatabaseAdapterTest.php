@@ -9,7 +9,6 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Migrations\Migration;
 use League\Flysystem\AdapterTestUtilities\FilesystemAdapterTestCase as BaseTestCase;
-use League\Flysystem\Config;
 use League\Flysystem\FilesystemAdapter;
 
 /**
@@ -138,5 +137,27 @@ class DatabaseAdapterTest extends BaseTestCase
         // because it could NOT obtain the "data provider"... This simple overwrite
         // somehow works...!?
         parent::writing_and_reading_files_with_special_path($path);
+    }
+
+    /**
+     * @test
+     * @inheritdoc
+     */
+    public function get_checksum(): void
+    {
+        // The original test always assumes a md5 checksum of a file. However, the database adapter
+        // might apply a different default hashing algorithm therefore, we change the adapter to
+        // fit the original test
+
+        /** @var DatabaseAdapter $adapter */
+        $adapter = $this->createFilesystemAdapter();
+        $adapter->setHashAlgorithm('md5');
+        $this->useAdapter($adapter);
+
+        // Invoke original test...
+        parent::get_checksum();
+
+        // Clear "custom" adapter...
+        $this->clearCustomAdapter();
     }
 }
