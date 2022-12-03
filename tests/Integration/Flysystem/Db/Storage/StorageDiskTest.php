@@ -38,7 +38,6 @@ class StorageDiskTest extends FlysystemDbTestCase
             'contents_table' => 'file_contents',
             'hash_algo' => 'sha256',
             'path_prefix' => '',
-            'throw' => true
         ]);
     }
 
