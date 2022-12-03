@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* The `DatabaseAdapter` now supports League's [checksum](https://flysystem.thephpleague.com/docs/usage/checksums/) operation.
+* The `DatabaseAdapter` now supports League's [checksum](https://flysystem.thephpleague.com/docs/usage/checksums/) operation. [#121](https://github.com/aedart/athenaeum/issues/121).
 
 ### Removed
 
 * `throw` option for flysystem database connection. This option was never used.
+
+### Deprecated
+
+* `language()` method in `SearchProcessor`. This method has no effect on the search processor, nor its underlying `SearchFilter`. [#125](https://github.com/aedart/athenaeum/issues/125).
 
 ## [6.6.0] - 2022-11-28
 
