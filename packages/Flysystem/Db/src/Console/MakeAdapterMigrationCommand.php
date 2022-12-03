@@ -74,7 +74,6 @@ Example:
         'contents_table' => '{$contentsTable}',
         'hash_algo' => 'sha256',
         'path_prefix' => '',
-        'throw' => true
     ]
 ],
 EOF,
