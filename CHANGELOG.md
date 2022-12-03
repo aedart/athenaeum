@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* The `DatabaseAdapter` now supports League's [checksum](https://flysystem.thephpleague.com/docs/usage/checksums/) operation.
+
 ### Removed
 
 * `throw` option for flysystem database connection. This option was never used.
