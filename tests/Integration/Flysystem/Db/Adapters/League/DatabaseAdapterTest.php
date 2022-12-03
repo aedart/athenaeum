@@ -15,6 +15,7 @@ use League\Flysystem\FilesystemAdapter;
 /**
  * DatabaseAdapterTest
  *
+ * @group flysystem
  * @group flysystem-db
  * @group flysystem-db-league-tests
  *
