@@ -37,6 +37,8 @@ class SearchProcessor extends BaseProcessor
     protected int $maxSearchTermLength = 100;
 
     /**
+     * @deprecated Since v6.7 - Will be removed in next major version
+     *
      * The language to use
      *
      * @var string
@@ -101,6 +103,8 @@ class SearchProcessor extends BaseProcessor
     }
 
     /**
+     * @deprecated Since v6.7 - Will be removed in next major version
+     *
      * Set the language to be used
      *
      * Language is typically used for determining the "stop words"

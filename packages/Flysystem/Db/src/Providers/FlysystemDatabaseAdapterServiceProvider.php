@@ -49,17 +49,23 @@ class FlysystemDatabaseAdapterServiceProvider extends ServiceProvider
                 ->getConnectionResolver()
                 ->connection(data_get($settings, 'connection', 'mysql'));
 
+            // Obtain hashing / checksum algorithm
+            $algo = data_get($settings, 'hash_algo', 'sha256');
+
             // Create and configure adapter
             $adapter = (new DatabaseAdapter(
                 data_get($settings, 'files_table', 'files'),
                 data_get($settings, 'contents_table', 'files_contents'),
                 $connection,
             ))
-                ->setHashAlgorithm(data_get($settings, 'hash_algo', 'sha256'))
+                ->setHashAlgorithm($algo)
                 ->setPathPrefix(data_get($settings, 'path_prefix', ''));
 
             return new FilesystemAdapter(
-                new Filesystem($adapter),
+                new Filesystem(
+                    adapter: $adapter,
+                    config: [ 'checksum_algo' => $algo ]
+                ),
                 $adapter,
                 $settings
             );

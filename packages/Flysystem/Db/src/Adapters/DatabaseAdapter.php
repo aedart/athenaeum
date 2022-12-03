@@ -15,6 +15,7 @@ use Aedart\Support\Helpers\Database\DbTrait;
 use Aedart\Utils\Arr;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Builder;
+use League\Flysystem\ChecksumProvider;
 use League\Flysystem\Config;
 use League\Flysystem\FileAttributes;
 use League\Flysystem\FilesystemAdapter;
@@ -27,6 +28,7 @@ use League\Flysystem\UnableToCreateDirectory;
 use League\Flysystem\UnableToDeleteDirectory;
 use League\Flysystem\UnableToDeleteFile;
 use League\Flysystem\UnableToMoveFile;
+use League\Flysystem\UnableToProvideChecksum;
 use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\UnableToSetVisibility;
@@ -42,6 +44,7 @@ use Throwable;
  * @package Aedart\Flysystem\Db\Adapters
  */
 class DatabaseAdapter implements FilesystemAdapter,
+    ChecksumProvider,
     DbAware
 {
     use Concerns\ExtraMetaData;
@@ -444,6 +447,30 @@ class DatabaseAdapter implements FilesystemAdapter,
             return $this->getFileMeta($path);
         } catch (Throwable $e) {
             throw UnableToRetrieveMetadata::fileSize($path, $e->getMessage(), $e);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function checksum(string $path, Config $config): string
+    {
+        try {
+            // When no algorithm is specified , then simply return the "content hash",
+            // from the file meta-data.
+            if (null === $config->get('checksum_algo')) {
+                return $this->getFileMeta($path)->extraMetadata()['hash'];
+            }
+
+            // Otherwise, we need to rehash entire file content...
+            return $this->resolveContentHash(
+                stream: $this->openStreamFrom(
+                    $this->readStream($path)
+                ),
+                config: $config
+            );
+        } catch (Throwable $e) {
+            throw new UnableToProvideChecksum($e->getMessage(), $path, $e);
         }
     }
 

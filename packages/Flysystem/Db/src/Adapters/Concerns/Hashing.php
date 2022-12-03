@@ -55,7 +55,10 @@ trait Hashing
      *
      * If "hash" is given via `$config`, then that value is returned.
      * Otherwise, the stream content is hashed using adapter's specified
-     * hashing algorithm
+     * hashing algorithm.
+     *
+     * NOTE: If the config contains a `checksum_algo` (League's default option),
+     * then this hashing algorithm will be used instead of this adapter's default.
      *
      * @see setHashAlgorithm
      * @see getHashAlgorithm
@@ -76,6 +79,8 @@ trait Hashing
             return $hash;
         }
 
-        return $stream->hash($this->getHashAlgorithm());
+        $algo = $config->get('checksum_algo', $this->getHashAlgorithm());
+
+        return $stream->hash($algo);
     }
 }
