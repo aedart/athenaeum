@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.7.0] - 2022-12-03
+
 ### Changed
 
 * The `DatabaseAdapter` now supports League's [checksum](https://flysystem.thephpleague.com/docs/usage/checksums/) operation. [#121](https://github.com/aedart/athenaeum/issues/121).
@@ -889,7 +891,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/6.6.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/6.7.0...HEAD
+[6.7.0]: https://github.com/aedart/athenaeum/compare/6.6.0...6.7.0
 [6.6.0]: https://github.com/aedart/athenaeum/compare/6.5.2...6.6.0
 [6.5.2]: https://github.com/aedart/athenaeum/compare/6.5.1...6.5.2
 [6.5.1]: https://github.com/aedart/athenaeum/compare/6.5.0...6.5.1
