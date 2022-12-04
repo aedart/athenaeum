@@ -30,6 +30,7 @@ abstract class ApiResource extends JsonResource
     use Concerns\Timestamps;
     use Concerns\FieldSelection;
     use Concerns\Relations;
+    use Concerns\HttpCaching;
 
     /**
      * Additional payload formatting
@@ -124,7 +125,10 @@ abstract class ApiResource extends JsonResource
      */
     public function toResponse($request)
     {
-        return (new ApiResourceResponse($this))->toResponse($request);
+        return $this->applyCacheHeaders(
+            response: (new ApiResourceResponse($this))->toResponse($request),
+            request: $request
+        );
     }
 
     /**
@@ -204,7 +208,7 @@ abstract class ApiResource extends JsonResource
     {
         $resource = $this->resource;
 
-        return match(true) {
+        return match (true) {
             $this->mustUseSlugAsPrimaryKey() && $resource instanceof Sluggable => $resource->getSlugKeyName(),
             $resource instanceof Model => $resource->getKeyName(),
             default => throw new LogicException(sprintf('Unable to determine resource identifier key name for %s', var_export($resource, true)))
