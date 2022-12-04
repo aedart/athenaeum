@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* `getResourceKeyName()` in `ApiResource` now throws `LogicException`, if unable to determine resource's identifier key name.
+
 ### Fixed
 
 * Code style of all packages. Easy coding standard configuration, in `ecs.php`, was previously not applied correctly.

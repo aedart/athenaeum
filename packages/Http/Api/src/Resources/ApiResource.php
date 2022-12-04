@@ -5,10 +5,12 @@ namespace Aedart\Http\Api\Resources;
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Contracts\Http\Api\Resources\Relations\Exceptions\RelationReferenceException;
 use Aedart\Http\Api\Responses\ApiResourceResponse;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Validation\ValidationException;
+use LogicException;
 use Teapot\StatusCode\All as HttpStatus;
 
 /**
@@ -200,11 +202,13 @@ abstract class ApiResource extends JsonResource
      */
     public function getResourceKeyName(): string
     {
-        if ($this->mustUseSlugAsPrimaryKey() && $this->resource instanceof Sluggable) {
-            return $this->resource->getSlugKeyName();
-        }
+        $resource = $this->resource;
 
-        return $this->resource->getKeyName();
+        return match(true) {
+            $this->mustUseSlugAsPrimaryKey() && $resource instanceof Sluggable => $resource->getSlugKeyName(),
+            $resource instanceof Model => $resource->getKeyName(),
+            default => throw new LogicException(sprintf('Unable to determine resource identifier key name for %s', var_export($resource, true)))
+        };
     }
 
     /**
