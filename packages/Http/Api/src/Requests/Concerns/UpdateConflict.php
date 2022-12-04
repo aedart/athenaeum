@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 /**
+ * @deprecated This needs to be reworked entirely!
+ *
  * Concerns Update Conflict
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
