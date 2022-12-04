@@ -6,6 +6,7 @@ use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Contracts\Config\Loaders\Exceptions\InvalidPathException;
 use Aedart\Contracts\Config\Parsers\Exceptions\FileParserException;
+use Aedart\ETags\Providers\ETagsServiceProvider;
 use Aedart\Http\Api\Providers\ApiResourceServiceProvider;
 use Aedart\Http\Api\Traits\ApiResourceRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
@@ -73,6 +74,7 @@ abstract class ApiResourcesTestCase extends LaravelTestCase
         return [
             ConfigLoaderServiceProvider::class,
             ApiResourceServiceProvider::class,
+            ETagsServiceProvider::class,
             ValidationServiceProvider::class
         ];
     }
