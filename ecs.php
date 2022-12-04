@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
-use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
 return static function (ECSConfig $config): void {
@@ -20,8 +19,7 @@ return static function (ECSConfig $config): void {
     ]);
 
     // Set paths
-    $parameters = $config->parameters();
-    $parameters->set(Option::PATHS, [
+    $config->paths([
         'packages',
         'tests/Helpers',
         'tests/TestCases',
@@ -32,8 +30,7 @@ return static function (ECSConfig $config): void {
     ]);
 
     // Skip
-    $parameters->set(Option::SKIP, [
-
+    $config->skip([
         SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff::class . '.UnusedProperty' => [
             # The "private int $height" is used by Dto, via magic methods...
             'tests/Helpers/Dummies/Properties/Accessibility/Person.php'
