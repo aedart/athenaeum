@@ -2,7 +2,8 @@
 
 namespace Aedart\Http\Api\Requests\Concerns;
 
-use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * Concerns a Single Record
@@ -15,33 +16,29 @@ trait SingleRecord
     /**
      * The requested record
      *
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var Model
      */
-    public $record;
+    public Model $record;
 
     /**
-     * Find the requested record or fail
+     * Finds the requested record or fail
      *
-     * @param  Validator  $validator
+     * @return Model
      *
-     * @return \Illuminate\Database\Eloquent\Model
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @throws ModelNotFoundException
      */
-    abstract public function findRecordOrFail(Validator $validator);
+    abstract public function findRecordOrFail(): Model;
 
     /**
-     * Prepare the requested record
-     *
-     * @param  Validator  $validator
+     * Finds and prepares the requested record
      *
      * @return void
      */
-    public function prepareRecord(Validator $validator): void
+    public function findAndPrepareRecord(): void
     {
-        $this->record = $this->findRecordOrFail($validator);
+        $this->record = $this->findRecordOrFail();
 
-        $this->whenRecordIsFound($this->record, $validator);
+        $this->whenRecordIsFound($this->record);
     }
 
     /**
@@ -50,12 +47,11 @@ trait SingleRecord
      * This method is invoked immediately after {@see findRecordOrFail},
      * if a record was found.
      *
-     * @param \Illuminate\Database\Eloquent\Model $record
-     * @param  Validator  $validator
+     * @param Model $record
      *
      * @return void
      */
-    public function whenRecordIsFound($record, Validator $validator): void
+    public function whenRecordIsFound(Model $record): void
     {
         // N/A - Overwrite this method if you need additional prepare or
         // validation logic, immediately after requested record was found.

@@ -5,6 +5,7 @@ namespace Aedart\Http\Api\Requests\Resources;
 use Aedart\Http\Api\Requests\Concerns;
 use Aedart\Http\Api\Requests\ValidatedApiRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\Rule;
 
 /**
  * Show Single Resource Request
@@ -17,11 +18,6 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest
     use Concerns\SingleRecord;
 
     /**
-     * @inheritdoc
-     */
-    protected bool $withRouteParameters = true;
-
-    /**
      * @inheritDoc
      */
     public function authorizeAfterValidation(): bool
@@ -32,10 +28,12 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest
     /**
      * @inheritDoc
      */
-    public function prepareForAfterValidation(Validator $validator): void
+    protected function prepareForValidation()
     {
-        $this->prepareRecord($validator);
+        // Attempt to find and prepare requested record, before
+        // the validation is applied. This allows certain rules,
+        // like `Rule::unique()->ignore()` to be applied safely.
 
-        parent::prepareForAfterValidation($validator);
+        $this->findAndPrepareRecord();
     }
 }

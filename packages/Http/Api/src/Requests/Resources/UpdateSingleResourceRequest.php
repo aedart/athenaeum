@@ -3,7 +3,6 @@
 namespace Aedart\Http\Api\Requests\Resources;
 
 use Aedart\Http\Api\Requests\Concerns;
-use Illuminate\Contracts\Validation\Validator;
 
 /**
  * Update Single Resource Request
@@ -26,7 +25,7 @@ abstract class UpdateSingleResourceRequest extends ShowSingleResourceRequest
     /**
      * @inheritDoc
      */
-    public function whenRecordIsFound($record, Validator $validator): void
+    public function whenRecordIsFound($record): void
     {
         // TODO: Prevent update conflict, e.g. if ETags mismatch or If-Unmodified-Since header set...
     }
