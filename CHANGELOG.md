@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* `HttpCaching` concern in `ApiResource`, which can make it easier to set Http Cache Control headers. 
+
 ### Changed
 
 * `getResourceKeyName()` in `ApiResource` now throws `LogicException`, if unable to determine resource's identifier key name.
