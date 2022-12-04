@@ -9,20 +9,18 @@ use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
 return static function (ECSConfig $config): void {
     // A. standalone rule
-    $services = $config->services();
-    $services->set(ArraySyntaxFixer::class)
-        ->call('configure', [[
-            'syntax' => 'short',
-        ]]);
+    $config->ruleWithConfiguration(ArraySyntaxFixer::class, [
+        'syntax' => 'short',
+    ]);
 
     // B. full sets
-    $parameters = $config->parameters();
-    $parameters->set(Option::SETS, [
+    $config->sets([
         SetList::CLEAN_CODE,
         SetList::PSR_12,
     ]);
 
     // Set paths
+    $parameters = $config->parameters();
     $parameters->set(Option::PATHS, [
         'packages',
         'tests/Helpers',
