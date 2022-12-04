@@ -11,7 +11,7 @@ use Aedart\Contracts\Http\Clients\Requests\Criteria;
  *
  * @see Builder
  * @see Builder::applyCriteria
- * 
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Requests\Builders\Concerns
  */

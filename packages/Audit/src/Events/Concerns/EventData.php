@@ -2,7 +2,6 @@
 
 namespace Aedart\Audit\Events\Concerns;
 
-use Aedart\Audit\Events\ModelHasChanged;
 use Aedart\Audit\Observers\Concerns\ModelAttributes;
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
@@ -82,12 +81,12 @@ trait EventData
     
     /**
      * Set the user that caused the change
-     * 
+     *
      * **Note**: Method only stores user's primary identifier, when a model
      * is given!
-     * 
+     *
      * @param  Model|Authenticatable|null  $user  [optional]
-     * 
+     *
      * @return static
      */
     public function byUser(Model|Authenticatable|null $user): static
@@ -127,9 +126,9 @@ trait EventData
 
     /**
      * Set eventual user provided message associated with the event
-     * 
+     *
      * @param  string|null  $message  [optional]
-     * 
+     *
      * @return self
      */
     public function withMessage(string|null $message = null): static
@@ -141,11 +140,11 @@ trait EventData
 
     /**
      * Set Date and time of when the event happened.
-     * 
+     *
      * **Note**: When no date is given, then method will to current date time.
-     * 
+     *
      * @param  DateTimeInterface|Carbon|string|null  $performedAt  [optional]
-     * 
+     *
      * @return self
      */
     public function performedAt(DateTimeInterface|Carbon|string|null $performedAt = null): static

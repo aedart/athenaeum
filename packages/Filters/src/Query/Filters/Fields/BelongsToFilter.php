@@ -77,8 +77,7 @@ class BelongsToFilter extends BaseFieldFilter
         string $operator = 'eq',
         mixed $value = null,
         string $logical = FieldCriteria::AND
-    ): static
-    {
+    ): static {
         return new static($field, $operator, $value, $logical);
     }
 

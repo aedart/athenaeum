@@ -27,8 +27,7 @@ class WrapperTest extends UnitTestCase
      */
     public function defineDecorator(): object
     {
-        return new class {
-
+        return new class() {
             public const WRAPPER_NAME = 'decorator';
 
             /**
@@ -41,8 +40,7 @@ class WrapperTest extends UnitTestCase
                 string $mode,
                 int $options,
                 ?string &$opened_path
-            ): bool
-            {
+            ): bool {
                 $path = str_replace(static::WRAPPER_NAME . '://', '', $path);
 
                 $this->stream = fopen($path, $mode);
@@ -83,7 +81,7 @@ class WrapperTest extends UnitTestCase
             public function stream_read(int $count): string|false
             {
                 ConsoleDebugger::output('READING', [
-                    'count' =>  $count
+                    'count' => $count
                 ]);
 
                 return fread($this->stream, $count);

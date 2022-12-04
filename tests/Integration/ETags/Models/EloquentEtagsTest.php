@@ -35,8 +35,7 @@ class EloquentEtagsTest extends ETagsTestCase
      */
     public function makeModel(array $attributes = []): Model|HasEtag
     {
-        $modelClass = new class extends Model implements HasEtag
-        {
+        $modelClass = new class() extends Model implements HasEtag {
             use EloquentEtag;
 
             protected $table = 'users';
@@ -180,7 +179,6 @@ class EloquentEtagsTest extends ETagsTestCase
 
         ConsoleDebugger::output((string) $etagA, (string) $etagB);
         $this->assertNotSame($etagA, $etagB, 'Cached etags should had been invalidated');
-
     }
 
     /**

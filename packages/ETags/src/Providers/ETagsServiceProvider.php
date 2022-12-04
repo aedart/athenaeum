@@ -36,9 +36,9 @@ class ETagsServiceProvider extends ServiceProvider implements DeferrableProvider
         // Register the ETag class path that the generator factory
         // must use...
         // @see \Aedart\ETags\Factory::eTagClass
-        $this->app->singleton('etag_class', fn() => ETag::class);
+        $this->app->singleton('etag_class', fn () => ETag::class);
 
-        $this->app->bind(Collection::class, function($app, array $etags = []) {
+        $this->app->bind(Collection::class, function ($app, array $etags = []) {
             return ETagsCollection::make($etags);
         });
     }

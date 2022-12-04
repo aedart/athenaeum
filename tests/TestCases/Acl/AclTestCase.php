@@ -15,7 +15,6 @@ use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Acl\User;
 use Codeception\Configuration;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 
 /**

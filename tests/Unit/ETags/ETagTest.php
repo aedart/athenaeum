@@ -150,7 +150,7 @@ class ETagTest extends UnitTestCase
         $this->assertFalse($etags[2]->isStrong(), 'f');
 
         $this->assertSame('1234', $etags[3]->raw(), 'g');
-        $this->assertFalse( $etags[3]->isWildcard(), 'h');
+        $this->assertFalse($etags[3]->isWildcard(), 'h');
     }
 
     /**

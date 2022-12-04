@@ -4,7 +4,6 @@ namespace Aedart\Http\Api\Resources;
 
 use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Contracts\Http\Api\Resources\Relations\Exceptions\RelationReferenceException;
-use Aedart\Http\Api\Resources\Concerns;
 use Aedart\Http\Api\Responses\ApiResourceResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

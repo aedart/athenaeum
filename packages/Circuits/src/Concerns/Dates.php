@@ -39,8 +39,7 @@ trait Dates
     protected function resolveDate(
         DateTimeInterface|string|null $date = null,
         DateTimeInterface|string|null $default = 'now'
-    ): DateTimeInterface|null
-    {
+    ): DateTimeInterface|null {
         if ($date instanceof DateTimeInterface) {
             return $date;
         } elseif (is_string($date)) {

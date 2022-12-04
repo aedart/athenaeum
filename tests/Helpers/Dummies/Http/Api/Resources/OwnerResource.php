@@ -36,7 +36,7 @@ class OwnerResource extends ApiResource
             'id' => $this->getKey(),
             'name' => $this->name,
             'address' => $this->belongsToReference('address')
-                ->withLabel(function(Address $model) {
+                ->withLabel(function (Address $model) {
                     $street = $model->street;
                     $code = $model->postal_code;
                     $city = $model->city;

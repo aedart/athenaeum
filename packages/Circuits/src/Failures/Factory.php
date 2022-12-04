@@ -24,8 +24,7 @@ class Factory implements FailureFactory
         array $context = [],
         DateTimeInterface|string|null $reportedAt = null,
         int $totalFailures = 0
-    ): Failure
-    {
+    ): Failure {
         return $this->makeFromArray([
             'reason' => $reason,
             'context' => $context,

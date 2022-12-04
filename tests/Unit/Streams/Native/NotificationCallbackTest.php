@@ -24,7 +24,7 @@ class NotificationCallbackTest extends UnitTestCase
     public function notifiesOnStreamChange()
     {
         $hasInvoked = false;
-        $callback = function() use(&$hasInvoked) {
+        $callback = function () use (&$hasInvoked) {
             $args = func_get_args();
 
             ConsoleDebugger::output($args);

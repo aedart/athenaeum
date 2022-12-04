@@ -64,7 +64,6 @@ trait UpdateConflict
 
     protected function obtainSubmittedLastUpdatedAt(Request $request, Validator $validator): Carbon|null
     {
-
     }
 
     // TODO: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag

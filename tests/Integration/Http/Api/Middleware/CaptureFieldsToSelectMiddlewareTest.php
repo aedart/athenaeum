@@ -23,7 +23,6 @@ use Illuminate\Validation\ValidationException;
  */
 class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
 {
-
     /**
      * @test
      *
@@ -38,7 +37,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
         $result = null;
 
         /** @var Response $response */
-        $response = (new CaptureFieldsToSelect())->handle($request, function() use(&$result) {
+        $response = (new CaptureFieldsToSelect())->handle($request, function () use (&$result) {
             $result = IoCFacade::tryMake(SelectedFieldsCollection::class);
             return new Response();
         });
@@ -65,7 +64,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
         $result = null;
 
         /** @var Response $response */
-        $response = (new CaptureFieldsToSelect())->handle($request, function() use(&$result) {
+        $response = (new CaptureFieldsToSelect())->handle($request, function () use (&$result) {
             $result = IoCFacade::tryMake(SelectedFieldsCollection::class);
             return new Response();
         });
@@ -103,7 +102,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
         $result = null;
 
         /** @var Response $response */
-        $response = (new CaptureFieldsToSelect())->handle($request, function() use(&$result) {
+        $response = (new CaptureFieldsToSelect())->handle($request, function () use (&$result) {
             $result = IoCFacade::tryMake(SelectedFieldsCollection::class);
             return new Response();
         });
@@ -133,7 +132,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
         $requestedFields = $this->getFaker()->words(21);
         $request = new Request([ 'select' => implode(',', $requestedFields) ]);
 
-        (new CaptureFieldsToSelect())->handle($request, function() use(&$result) {
+        (new CaptureFieldsToSelect())->handle($request, function () use (&$result) {
             $result = IoCFacade::tryMake(SelectedFieldsCollection::class);
             return new Response();
         });
@@ -159,7 +158,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
 
         $request = new Request([ 'select' => implode(',', $requestedFields) ]);
 
-        (new CaptureFieldsToSelect())->handle($request, function() use(&$result) {
+        (new CaptureFieldsToSelect())->handle($request, function () use (&$result) {
             $result = IoCFacade::tryMake(SelectedFieldsCollection::class);
             return new Response();
         });

@@ -45,7 +45,7 @@ trait MimeTypes
      */
     public function defaultMimeTypeDetectorCallback(): callable
     {
-        return function(Detectable|FileStream $stream, Config $config) {
+        return function (Detectable|FileStream $stream, Config $config) {
             $profile = $config->get('mime_type_detector', null);
             $options = $config->get('mime_type_options', []);
 

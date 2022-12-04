@@ -2,12 +2,10 @@
 
 namespace Aedart\Audit\Events;
 
-use Aedart\Audit\Events\Concerns;
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Support\Carbon;
 use Throwable;
 

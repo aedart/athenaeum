@@ -28,15 +28,15 @@ class C1_RewindAndRestorePositionTest extends StreamTestCase
 
         $stream = Stream::make($resource);
 
-        $stream->rewindAfter(function(Stream $stream) {
-                $res = $stream->resource();
-                fwrite($res, 'aa');
-                fseek($res, 0, SEEK_SET);
+        $stream->rewindAfter(function (Stream $stream) {
+            $res = $stream->resource();
+            fwrite($res, 'aa');
+            fseek($res, 0, SEEK_SET);
 
-                while(!feof($res)) {
-                    fgets($res, 3);
-                }
-            });
+            while (!feof($res)) {
+                fgets($res, 3);
+            }
+        });
 
         $this->assertSame(0, $stream->position());
         $this->assertFalse($stream->eof());
@@ -55,7 +55,7 @@ class C1_RewindAndRestorePositionTest extends StreamTestCase
         $stream = Stream::make($resource);
 
         $content = 'aaa';
-        $output = $stream->rewindAfter(function(Stream $stream) use($content) {
+        $output = $stream->rewindAfter(function (Stream $stream) use ($content) {
             $res = $stream->resource();
             fwrite($res, $content);
             fseek($res, 0, SEEK_SET);
@@ -80,7 +80,7 @@ class C1_RewindAndRestorePositionTest extends StreamTestCase
         fseek($resource, 0, SEEK_END);
 
         $stream = Stream::make($resource);
-        $stream->restorePositionAfter(function(Stream $stream) {
+        $stream->restorePositionAfter(function (Stream $stream) {
             fseek($stream->resource(), 0, SEEK_SET);
         });
 
@@ -102,7 +102,7 @@ class C1_RewindAndRestorePositionTest extends StreamTestCase
 
         $stream = Stream::make($resource);
 
-        $output = $stream->restorePositionAfter(function(Stream $stream) use($content) {
+        $output = $stream->restorePositionAfter(function (Stream $stream) use ($content) {
             $res = $stream->resource();
             fseek($res, 0, SEEK_SET);
 

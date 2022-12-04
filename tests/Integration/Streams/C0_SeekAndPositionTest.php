@@ -146,7 +146,7 @@ class C0_SeekAndPositionTest extends StreamTestCase
         // Funny thing about EOL... you actually need to read something from
         // the stream, before the meta-data (internally in PHP) is updated.
         // Setting the position does not appear to be enough!
-        while(!feof($resource)) {
+        while (!feof($resource)) {
             fgets($resource, 3);
         }
 

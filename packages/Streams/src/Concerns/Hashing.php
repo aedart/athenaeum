@@ -23,8 +23,7 @@ trait Hashing
         int $flags = 0,
         string $key = '',
         array $options = []
-    ): string
-    {
+    ): string {
         $msg = 'Unable to compute stream\'s hash';
         $this
             ->assertNotDetached($msg)
@@ -37,7 +36,7 @@ trait Hashing
             $context = hash_init($algo, $flags, $key);
         }
 
-        $this->restorePositionAfter(function(StreamInterface $stream) use ($context) {
+        $this->restorePositionAfter(function (StreamInterface $stream) use ($context) {
             $stream->rewind();
 
             hash_update_stream($context, $this->resource());

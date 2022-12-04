@@ -24,11 +24,11 @@ class StreamServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register()
     {
-        $this->app->bind(MetaRepositoryInterface::class, function() {
+        $this->app->bind(MetaRepositoryInterface::class, function () {
             return new Repository();
         });
 
-        $this->app->singleton(LockFactoryInterface::class, function() {
+        $this->app->singleton(LockFactoryInterface::class, function () {
             $config = config();
 
             return new LockFactory(
@@ -37,7 +37,7 @@ class StreamServiceProvider extends ServiceProvider implements DeferrableProvide
             );
         });
 
-        $this->app->singleton(TransactionFactoryInterface::class, function() {
+        $this->app->singleton(TransactionFactoryInterface::class, function () {
             $config = config();
 
             return new TransactionFactory(

@@ -2,7 +2,6 @@
 
 namespace Aedart\Audit\Events;
 
-use Aedart\Audit\Events\Concerns;
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -59,8 +58,7 @@ class MultipleModelsChanged
         array|null $changed = null,
         string|null $message = null,
         DateTimeInterface|Carbon|string|null $performedAt = null
-    )
-    {
+    ) {
         // Resolve models argument
         if (!($models instanceof Collection)) {
             $models = collect($models);

@@ -11,7 +11,7 @@ use Illuminate\Contracts\Foundation\MaintenanceMode;
  *
  * @group maintenance-modes
  * @group maintenance-modes-manager
- * 
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Maintenance\Modes
  */

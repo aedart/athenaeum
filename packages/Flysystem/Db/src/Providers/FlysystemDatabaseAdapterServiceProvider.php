@@ -43,7 +43,7 @@ class FlysystemDatabaseAdapterServiceProvider extends ServiceProvider
      */
     protected function enableAdapterAsStorageDriver(): void
     {
-        Storage::extend('database', function($app, array $settings) {
+        Storage::extend('database', function ($app, array $settings) {
             // Resolve database connection
             $connection = $this
                 ->getConnectionResolver()

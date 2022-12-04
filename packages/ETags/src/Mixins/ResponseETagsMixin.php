@@ -27,7 +27,7 @@ class ResponseETagsMixin
      */
     public function withEtag(): Closure
     {
-        return function(ETag|string|null $etag = null) {
+        return function (ETag|string|null $etag = null) {
             // Remove ETag header if null given...
             if (!isset($etag)) {
                 return $this->setEtag(null);
@@ -48,7 +48,7 @@ class ResponseETagsMixin
      */
     public function withoutEtag(): Closure
     {
-        return function() {
+        return function () {
             return $this->setEtag(null);
         };
     }
@@ -64,7 +64,7 @@ class ResponseETagsMixin
     {
         // @see \Symfony\Component\HttpFoundation\Response::setCache
 
-        return function(
+        return function (
             ETag|string|null $etag = null,
             string|DateTimeInterface|null $lastModified = null,
             int|null $maxAge = null,

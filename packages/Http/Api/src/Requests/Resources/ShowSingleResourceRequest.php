@@ -4,6 +4,7 @@ namespace Aedart\Http\Api\Requests\Resources;
 
 use Aedart\Http\Api\Requests\Concerns;
 use Aedart\Http\Api\Requests\ValidatedApiRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * Show Single Resource Request

@@ -32,8 +32,7 @@ class InvalidParameter extends ProcessorException implements InvalidParameterExc
         string $message = "",
         int $code = 0,
         Throwable|null $previous = null
-    ): static
-    {
+    ): static {
         return static::make($processor, $message, $code, $previous)
             ->setParameter($parameter);
     }

@@ -122,7 +122,7 @@ trait FieldSelection
      */
     protected function fieldsToSelectCollection(): SelectedFieldsCollectionInterface
     {
-        return IoCFacade::tryMake(SelectedFieldsCollectionInterface::class, function() {
+        return IoCFacade::tryMake(SelectedFieldsCollectionInterface::class, function () {
             return new SelectedFieldsCollection([]);
         });
     }

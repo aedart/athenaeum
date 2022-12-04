@@ -5,7 +5,6 @@ namespace Aedart\Http\Api\Resources\Relations;
 use Aedart\Contracts\Http\Api\Resources\Relations\Exceptions\RelationReferenceException as RelationReferenceExceptionInterface;
 use Aedart\Contracts\Http\Api\Resources\Relations\RelationReference;
 use Aedart\Http\Api\Resources\ApiResource;
-use Aedart\Http\Api\Resources\Relations\Concerns;
 use Aedart\Http\Api\Resources\Relations\Exceptions\CannotInvokeCallback;
 use Aedart\Http\Api\Resources\Relations\Exceptions\RelationReferenceException;
 use Aedart\Http\Api\Traits\ApiResourceRegistrarTrait;
@@ -61,7 +60,8 @@ abstract class BaseRelationReference implements RelationReference
     public function __construct(
         protected mixed $resource,
         protected string $relation
-    ){}
+    ) {
+    }
 
     /**
      * @inheritDoc
@@ -217,7 +217,7 @@ abstract class BaseRelationReference implements RelationReference
      */
     public function formatMultipleLoadedModels(Collection $related, $relationReference): array
     {
-        return $related->map(function(Model $model) use($relationReference) {
+        return $related->map(function (Model $model) use ($relationReference) {
             return $relationReference->formatSingleLoadedModel($model, $relationReference);
         })->toArray();
     }
