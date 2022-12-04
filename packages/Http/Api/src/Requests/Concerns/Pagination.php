@@ -95,8 +95,8 @@ trait Pagination
         $show = "digits_between:{$this->showMinimum},{$this->showMaximum}";
 
         return [
-            'page' => ['nullable', 'integer', 'min:1'],
-            'show' => ['nullable', 'integer', $show]
+            $this->pageKey => ['nullable', 'integer', 'min:1'],
+            $this->showKey => ['nullable', 'integer', $show]
         ];
     }
 
