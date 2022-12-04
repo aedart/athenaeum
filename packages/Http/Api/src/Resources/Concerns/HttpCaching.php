@@ -10,7 +10,7 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Http Caching
+ * Concerns Http Caching
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
  *
