@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* Easy coding standard configuration, in `ecs.php`. Style configuration was not applied at all!
+
 ## [6.7.0] - 2022-12-03
 
 ### Changed
