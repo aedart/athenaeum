@@ -4,6 +4,7 @@ namespace Aedart\Http\Api\Requests\Resources;
 
 use Aedart\Http\Api\Requests\Concerns;
 use Aedart\Http\Api\Requests\ValidatedApiRequest;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 
 /**
@@ -15,6 +16,7 @@ use Illuminate\Validation\Rule;
 abstract class ShowSingleResourceRequest extends ValidatedApiRequest
 {
     use Concerns\SingleRecord;
+    use Concerns\HttpConditionals;
 
     /**
      * @inheritDoc
@@ -34,5 +36,17 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest
         // like `Rule::unique()->ignore()` to be applied safely.
 
         $this->findAndPrepareRecord();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function whenRecordIsFound(Model $record): void
+    {
+        if (!$this->mustEvaluateConditionalHeaders()) {
+            return;
+        }
+
+        $this->evaluateRequestPreconditions();
     }
 }
