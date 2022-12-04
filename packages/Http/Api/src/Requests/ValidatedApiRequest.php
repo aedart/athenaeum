@@ -18,16 +18,6 @@ abstract class ValidatedApiRequest extends FormRequest
     use Concerns\Authorisation;
 
     /**
-     * When true, then current route's parameters are
-     * merged into the data to be validated
-     *
-     * @see validationData
-     *
-     * @var bool
-     */
-    protected bool $withRouteParameters = false;
-
-    /**
      * Returns validation rules for this request
      *
      * @return array
@@ -93,13 +83,6 @@ abstract class ValidatedApiRequest extends FormRequest
      */
     public function validationData(): array
     {
-        if ($this->withRouteParameters) {
-            return [
-                ...$this->route()->parameters(),
-                ...parent::validationData()
-            ];
-        }
-
         return parent::validationData();
     }
 
