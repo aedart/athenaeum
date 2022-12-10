@@ -408,7 +408,7 @@ trait HttpConditionals
 
         // [...] If the HTTP-date validator provided is not a strong validator in the sense defined by
         // Section 8.8.2.2, the condition is false. [...]
-            // -> Not sure how this can be determined here, or if at all feasible?
+        // -> Not sure how this can be determined here, or if at all feasible?
 
         // [...] If the HTTP-date validator provided exactly matches the Last-Modified field value for
         // the selected representation, the condition is true. [...]

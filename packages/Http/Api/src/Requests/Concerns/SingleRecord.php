@@ -73,7 +73,7 @@ trait SingleRecord
     {
         $record = $this->record;
 
-        return match(true) {
+        return match (true) {
             $record instanceof HasEtag => $record->getStrongEtag(),
             $record instanceof CanGenerateEtag => $record->makeStrongEtag(),
             default => null
@@ -91,7 +91,7 @@ trait SingleRecord
     {
         $record = $this->record;
 
-        return match(true) {
+        return match (true) {
             $record instanceof HasEtag => $record->getWeakEtag(),
             $record instanceof CanGenerateEtag => $record->makeWeakEtag(),
             default => null
