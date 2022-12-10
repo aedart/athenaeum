@@ -173,6 +173,8 @@ class PreconditionsEvaluator
      * The callback is only invoked as a result of a failed precondition of
      * "If-Match" or "If-Unmodified-Since" http conditional requests.
      *
+     * @see onAbortStateChangeSucceeded
+     *
      * @param  callable|null  $callback  [optional] Request instance is given as callback argument.
      *                                   Callback MUST return boolean value!
      *
@@ -191,6 +193,8 @@ class PreconditionsEvaluator
      *
      * The callback MUST abort request with a "2xx" successful status. Commonly, this
      * can be achieved by throwing an {@see HttpException}.
+     *
+     * @see determineStateChangeSuccess
      *
      * @param  callable|null  $callback  [optional] Request instance is given as callback argument.
      *                                   Callback MUST abort request, e.g. by throwing an exception.
