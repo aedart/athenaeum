@@ -2,10 +2,10 @@
 
 namespace Aedart\Http\Api\Requests\Resources;
 
+use Aedart\Contracts\ETags\Exceptions\ETagGeneratorException;
 use Aedart\Http\Api\Requests\Concerns;
 use Aedart\Http\Api\Requests\ValidatedApiRequest;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Validation\Rule;
 
 /**
  * Show Single Resource Request
@@ -31,22 +31,27 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest
      */
     protected function prepareForValidation()
     {
-        // Attempt to find and prepare requested record, before
-        // the validation is applied. This allows certain rules,
-        // like `Rule::unique()->ignore()` to be applied safely.
+        // Attempt to find and prepare requested record, before the validation
+        // is applied. This allows certain rules, like `Rule::unique()->ignore()`
+        // to be applied safely.
 
         $this->findAndPrepareRecord();
     }
 
     /**
      * @inheritdoc
+     *
+     * @throws ETagGeneratorException
      */
     public function whenRecordIsFound(Model $record): void
     {
-        if (!$this->mustEvaluateConditionalHeaders()) {
+        if (!$this->mustEvaluateRequestPreconditions()) {
             return;
         }
 
-        $this->evaluateRequestPreconditions();
+        $this->evaluateRequestPreconditions(
+            etag: $this->getRecordStrongEtag(),
+            lastModified: $this->getRecordLastModifiedDate()
+        );
     }
 }
