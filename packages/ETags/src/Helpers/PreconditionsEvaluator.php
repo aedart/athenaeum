@@ -30,6 +30,28 @@ class PreconditionsEvaluator
     protected $stateChangeSucceededCallback = null;
 
     /**
+     * Callback that can determine if requested "Range" is applicable
+     *
+     * @var callable|null
+     */
+    protected $isRangeApplicableCallback = null;
+
+    /**
+     * Callback that must handle situation when "If-Range" condition is true
+     * and requested "Range" is applicable.
+     *
+     * @var callable|null
+     */
+    protected $ifRangePartialContentCallback = null;
+
+    /**
+     * Callback to be invoked, when "Range" header must be ignored
+     *
+     * @var callable|null
+     */
+    protected $ignoreRangeCallback = null;
+
+    /**
      * Callback to invoke when aborting due to state change already has
      * succeeded
      *
@@ -72,7 +94,35 @@ class PreconditionsEvaluator
         return new static($request);
     }
 
-    // TODO
+    /**
+     * Evaluate request preconditions
+     *
+     * By default, the evaluation assumes that "Range" request is NOT supported. To change this behaviour, specify a
+     * callback via {@see determineWhenRangeIsApplicable()}.
+     *
+     * The following conditional request header fields are evaluated by this method:
+     * - If-Match
+     * - If-Unmodified-Since
+     * - If-None-Match
+     * - If-Modified-Since
+     * - If-Range & Range (If supported)
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#evaluation
+     * @see determineStateChangeSuccess
+     * @see onAbortStateChangeSucceeded
+     * @see onAbortPreconditionFailed
+     * @see onAbortNotModified
+     * @see determineWhenRangeIsApplicable
+     * @see handleIfRangePartialContent
+     * @see whenRangeMustBeIgnored
+     *
+     * @param  ETag|null  $etag  [optional] Requested resource's etag, if available
+     * @param  DateTimeInterface|null  $lastModified  [optional] Requested resource's last modification date, if available
+     *
+     * @return void
+     *
+     * @throws HttpException
+     */
     public function evaluate(ETag|null $etag = null, DateTimeInterface|null $lastModified = null): void
     {
         // [...] a server MUST ignore the conditional request header fields [...] when received with a
@@ -99,7 +149,7 @@ class PreconditionsEvaluator
         }
 
         // 2. When recipient is the origin server, If-Match is not present, and If-Unmodified-Since is present, [...]:
-        if ($headers->has('If-Unmodified-Since') && !$headers->has('If-Match') && isset($lastModified)) {
+        if (isset($lastModified) && $headers->has('If-Unmodified-Since') && !$headers->has('If-Match')) {
             // [...] A recipient MUST ignore the If-Unmodified-Since header field if the resource does
             // not have a modification date available. [...]
             if ($this->ifUnmodifiedSinceConditionPasses($lastModified)) {
@@ -128,7 +178,7 @@ class PreconditionsEvaluator
         }
 
         // 4. When the method is GET or HEAD, If-None-Match is not present, and If-Modified-Since is present, [...]:
-        if ($headers->has('If-Modified-Since') && !$headers->has('If-None-Match') && in_array($this->getMethod(), ['GET', 'HEAD']) && isset($lastModified)) {
+        if (isset($lastModified) && $headers->has('If-Modified-Since') && !$headers->has('If-None-Match') && in_array($this->getMethod(), ['GET', 'HEAD'])) {
             // [...] A recipient MUST ignore the If-Modified-Since header field if the resource does
             // not have a modification date available. [...]
             if ($this->ifModifiedSinceConditionPasses($lastModified)) {
@@ -142,22 +192,32 @@ class PreconditionsEvaluator
 
         // 5. When the method is GET and both Range and If-Range are present, [...]:
         five:
-        if ($headers->has('If-Range') && $headers->has('Range') && $this->getMethod() === 'GET' && $this->isRangeRequestSupported()) {
+        if ($this->isRangeRequestSupported() && $headers->has('If-Range') && $headers->has('Range') && $this->getMethod() === 'GET') {
             // [...] An origin server MUST ignore an If-Range header field received in a request for
             // a target resource that does not support Range requests. [...]
-            // TODO: is "range" applicable callback ... or something... ???
-            if ($this->ifRangeConditionPasses($etag, $lastModified)) {
+            if ($this->ifRangeConditionPasses($etag, $lastModified) && $this->isRangeApplicable()) {
                 // [...] if true and the Range is applicable to the selected representation,
                 // respond 206 (Partial Content) [...]
-                // TODO: Uhm... callback?.. or?
+                $this->processIfRangePartialContent();
+                return;
             }
 
             // [...] otherwise, ignore the Range header field and respond 200 (OK) [...]
-            // -> In this case we let the request proceed, so it can respond accordingly.
+            $this->ignoreRangeHeader();
+            return;
         }
 
         // 6. Otherwise:
         //      [...] perform the requested method and respond according to its success or failure [...]
+
+        // EXTENSION: When "Range" is requested, but without "If-Range" header, and "Range" is supported.
+        // (Strictly speaking, this is NOT part of RFC9110's "13.2. Evaluation of Preconditions").
+        if ($this->isRangeRequestSupported() && $headers->has('Range') && $this->getMethod() === 'GET') {
+            // At this point, the evaluator has a callback that can determine if "Range" is applicable.
+            // The callback is responsible for validating the requested range(s). So, it is practical
+            // to perform that validation here, to reduce possible duplicate logic elsewhere.
+            $this->isRangeApplicable();
+        }
     }
 
     /**
@@ -188,11 +248,76 @@ class PreconditionsEvaluator
     }
 
     /**
+     * Set callback that is able to determine if requested "Range" is applicable,
+     * to the selected resource.
+     *
+     * When setting a callback, the {@see evaluate()} method will assume that the request
+     * supports "If-Range" and "Range" headers, and process those headers accordingly.
+     *
+     * The callback is responsible for validating the requested range(s) and SHOULD abort the request
+     * with "416 Range Not Satisfiable" client error, or "400 Bad Request" if requested range(s)
+     * cannot be satisfied or are malformed.
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#field.range
+     *
+     * @param  callable|null  $callback  [optional] Request instance is given as callback argument.
+     *                                   Callback MUST return boolean value!
+     *
+     * @return self
+     */
+    public function determineWhenRangeIsApplicable(callable|null $callback = null): static
+    {
+        $this->isRangeApplicableCallback = $callback;
+
+        return $this;
+    }
+
+    /**
+     * Set callback that must deal with the situation when "If-Range" condition is true,
+     * and "Range" is applicable.
+     *
+     * The callback SHOULD result in a "206 Partial Content" response, by the application.
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#field.if-range
+     * @see whenRangeMustBeIgnored()
+     *
+     * @param  callable|null  $callback  [optional] Request instance is given as callback argument.
+     *
+     * @return self
+     */
+    public function handleIfRangePartialContent(callable|null $callback = null): static
+    {
+        $this->ifRangePartialContentCallback = $callback;
+
+        return $this;
+    }
+
+    /**
+     * Set callback to be invoked when the "Range" header field must be ignored.
+     *
+     * The callback is only invoked when the "If-Range" condition is false.
+     *
+     * The callback SHOULD result in a "200 Ok" response, by the application.
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#field.if-range
+     *
+     * @param  callable|null  $callback  [optional] Request instance is given as callback argument.
+     *
+     * @return self
+     */
+    public function whenRangeMustBeIgnored(callable|null $callback = null): static
+    {
+        $this->ignoreRangeCallback = $callback;
+
+        return $this;
+    }
+
+    /**
      * Set callback to be invoked when aborting request due to state change has already
      * succeeded.
      *
-     * The callback MUST abort request with a "2xx" successful status. Commonly, this
-     * can be achieved by throwing an {@see HttpException}.
+     * The callback MUST result in aborting the request with a "2xx" successful status.
+     * Commonly, this can be achieved by throwing an {@see HttpException}.
      *
      * @see determineStateChangeSuccess
      *
@@ -242,18 +367,6 @@ class PreconditionsEvaluator
         $this->abortNotModifiedCallback = $callback;
 
         return $this;
-    }
-
-    /**
-     * TODO: ... This too must somehow be customizable via callbacks... or similar.
-     *
-     * Determine if "Range" request is supported by the resource
-     *
-     * @return bool
-     */
-    public function isRangeRequestSupported(): bool
-    {
-        return false;
     }
 
     /**
@@ -459,6 +572,56 @@ class PreconditionsEvaluator
         // Otherwise, this is not a state-change request or no state change success could be determined.
         // Thus, we abort the request with a "precondition failed"
         $this->abortPreconditionFailed();
+    }
+
+    /**
+     * Determine if requested "Range" is applicable
+     *
+     * @return bool
+     */
+    protected function isRangeApplicable(): bool
+    {
+        $callback = $this->isRangeApplicableCallback ?? fn() => false;
+
+        return $callback($this->request());
+    }
+
+    /**
+     * Determine if "Range" request is supported by the resource
+     *
+     * @return bool
+     */
+    protected function isRangeRequestSupported(): bool
+    {
+        // We assume that "Range" request is supported, when developer has
+        // specified a way to determine if requested "Range" is applicable.
+
+        return is_callable($this->isRangeApplicableCallback);
+    }
+
+    /**
+     * Invokes callback that must handle situation where "If-Range" and "Range"
+     * condition is true and somehow result in a "206 Partial Content" response.
+     *
+     * @return void
+     */
+    protected function processIfRangePartialContent(): void
+    {
+        $callback = $this->ifRangePartialContentCallback ?? fn() => false;
+
+        $callback($this->request());
+    }
+
+    /**
+     * Invokes callback for when the "Range" header must be ignored
+     *
+     * @return void
+     */
+    protected function ignoreRangeHeader(): void
+    {
+        $callback = $this->ignoreRangeCallback ?? fn() => false;
+
+        $callback($this->request());
     }
 
     /**
