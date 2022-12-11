@@ -50,6 +50,7 @@
         "orchestra/testbench": "^v7.7.0",
         "orchestra/testbench-dusk": "^v7.7.0",
         "predis/predis": "^1.1.10",
+        "ramsey/http-range": "^1.1.0",
         "roave/security-advisories": "dev-master",
         "symfony/var-dumper": "^v6.0.11",
         "symfony/yaml": "^v6.0.12",

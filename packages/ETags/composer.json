@@ -18,10 +18,16 @@
         "aedart/athenaeum-utils": "^6.8",
         "illuminate/http": "^v9.30.1"
     },
+    "require-dev": {
+        "ramsey/http-range": "^1.1.0"
+    },
     "autoload": {
         "psr-4": {
             "Aedart\\ETags\\": "src"
         }
+    },
+    "suggest": {
+        "ramsey/http-range": "If you want to evaluate If-Range/Range header fields and validate requested range(s)"
     },
     "config": {
         "sort-packages": true
