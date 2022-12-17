@@ -68,4 +68,12 @@ class GenericResource implements ResourceContext
     {
         return $this->size;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function supportsRangeRequest(): bool
+    {
+        return $this->size() > 0;
+    }
 }
