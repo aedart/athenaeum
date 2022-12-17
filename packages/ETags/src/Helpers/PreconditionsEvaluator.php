@@ -12,6 +12,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
 
 /**
+ * @deprecated Needs to be redesigned / split into several customisable classes.
+ *
  * Request Preconditions Evaluator
  *
  * Responsible for evaluating request preconditions, according to RFC9110
