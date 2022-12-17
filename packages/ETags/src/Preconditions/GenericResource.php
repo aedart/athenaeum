@@ -22,11 +22,15 @@ class GenericResource implements ResourceContext
      * @param  ETag|null  $etag  [optional]
      * @param  DateTimeInterface|null  $lastModifiedDate  [optional]
      * @param  int  $size  [optional]
+     * @param  callable|null $determineStateChangeSuccess  [optional] Callback that determines if a state change
+     *                                                     has already succeeded on the resource. Callback MUST
+     *                                                     return a boolean value.
      */
     public function __construct(
         protected ETag|null $etag = null,
         protected DateTimeInterface|null $lastModifiedDate = null,
-        protected int $size = 0
+        protected int $size = 0,
+        protected $determineStateChangeSuccess = null
     ) {}
 
     /**
@@ -75,5 +79,15 @@ class GenericResource implements ResourceContext
     public function supportsRangeRequest(): bool
     {
         return $this->size() > 0;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function hasStateChangeAlreadySucceeded($request): bool
+    {
+        $determineCallback = $this->determineStateChangeSuccess ?? fn () => false;
+
+        return $determineCallback($request, $this);
     }
 }

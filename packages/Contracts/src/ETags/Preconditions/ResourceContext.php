@@ -59,4 +59,24 @@ interface ResourceContext
      * @return bool
      */
     public function supportsRangeRequest(): bool;
+
+    /**
+     * Determine if state change has already succeeded for resource.
+     *
+     * Example: If a DELETE request is made and the resource is already deleted,
+     * then this method can return true.
+     *
+     * Determining state change success is valid for "If-Match" or "If-Unmodified-Since" http
+     * conditional requests, when they are evaluated to false, for none-safe request methods,
+     * such as POST, PUT, DELETE... etc.
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#field.if-match
+     * @see https://httpwg.org/specs/rfc9110.html#field.if-modified-since
+     * @see https://httpwg.org/specs/rfc9110.html#precedence
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return bool
+     */
+    public function hasStateChangeAlreadySucceeded($request): bool;
 }
