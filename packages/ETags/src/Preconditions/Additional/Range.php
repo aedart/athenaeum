@@ -20,7 +20,11 @@ class Range extends BasePrecondition
      */
     public function isApplicable(ResourceContext $resource): bool
     {
-        // TODO: Implement isApplicable() method.
+        // x. When "Range" is requested, but without "If-Range" header, and "Range" is supported:
+        // (Strictly speaking, this is NOT part of RFC9110's "13.2. Evaluation of Preconditions")
+        return $resource->supportsRangeRequest()
+            && $this->getHeaders()->has('Range')
+            && $this->getMethod() === 'GET';
     }
 
     /**
@@ -28,7 +32,12 @@ class Range extends BasePrecondition
      */
     public function passes(ResourceContext $resource): bool
     {
-        // TODO: Implement passes() method.
+        // TODO: THIS MUST SOMEHOW BE IMPLEMENTED! PERHAPS VIA THE RESOURCE ?
+        // TODO: ...also change the description of this...
+        // At this point, the evaluator has a callback that can determine if "Range" is applicable.
+        // The callback is responsible for validating the requested range(s). So, it is practical
+        // to perform that validation here, to reduce possible duplicate logic elsewhere.
+        return $this->isRangeApplicable();
     }
 
     /**
@@ -36,7 +45,7 @@ class Range extends BasePrecondition
      */
     public function whenPasses(ResourceContext $resource): ResourceContext|string
     {
-        // TODO: Implement whenPasses() method.
+        return $this->actions()->processRangeHeader($resource);
     }
 
     /**
@@ -44,6 +53,7 @@ class Range extends BasePrecondition
      */
     public function whenFails(ResourceContext $resource): ResourceContext|string
     {
-        // TODO: Implement whenFails() method.
+        // TODO: Uhm... should request be aborted,... or just ignore "Range" ?
+        return $this->actions()->ignoreRangeHeader($resource);
     }
 }
