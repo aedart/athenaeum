@@ -4,6 +4,7 @@ namespace Aedart\ETags\Preconditions\Rfc9110;
 
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
+use Illuminate\Support\Carbon;
 
 /**
  * If-Modified-Since precondition
@@ -20,7 +21,12 @@ class IfModifiedSince extends BasePrecondition
      */
     public function isApplicable(ResourceContext $resource): bool
     {
-        // TODO: Implement isApplicable() method.
+        // 4. When the method is GET or HEAD, If-None-Match is not present, and If-Modified-Since is present, [...]:
+        $headers = $this->getHeaders();
+        return $resource->hasLastModifiedDate()
+            && $headers->has('If-Modified-Since')
+            && !$headers->has('If-None-Match')
+            && in_array($this->getMethod(), ['GET', 'HEAD']);
     }
 
     /**
@@ -28,7 +34,14 @@ class IfModifiedSince extends BasePrecondition
      */
     public function passes(ResourceContext $resource): bool
     {
-        // TODO: Implement passes() method.
+        $ifModifiedSince = $this->getIfModifiedSinceDate();
+        if (!isset($ifModifiedSince)) {
+            return true;
+        }
+
+        // [...] If the selected representation's last modification date is earlier or equal to
+        // the date provided in the field value, the condition is FALSE. [...]
+        return !Carbon::instance($resource->lastModifiedDate())->lessThanOrEqualTo($ifModifiedSince);
     }
 
     /**
@@ -36,7 +49,8 @@ class IfModifiedSince extends BasePrecondition
      */
     public function whenPasses(ResourceContext $resource): ResourceContext|string
     {
-        // TODO: Implement whenPasses() method.
+        // [...] if true, continue to step 5 (If-Range)
+        return IfRange::class;
     }
 
     /**
@@ -44,6 +58,7 @@ class IfModifiedSince extends BasePrecondition
      */
     public function whenFails(ResourceContext $resource): ResourceContext|string
     {
-        // TODO: Implement whenFails() method.
+        // [...] if false, respond 304 (Not Modified)
+        $this->actions()->abortNotModified($resource);
     }
 }
