@@ -20,7 +20,8 @@ class IfNoneMatch extends BasePrecondition
      */
     public function isApplicable(ResourceContext $resource): bool
     {
-        // TODO: Implement isApplicable() method.
+        // 3. When If-None-Match is present, [...]:
+        return $this->getHeaders()->has('If-None-Match');
     }
 
     /**
@@ -28,7 +29,17 @@ class IfNoneMatch extends BasePrecondition
      */
     public function passes(ResourceContext $resource): bool
     {
-        // TODO: Implement passes() method.
+        $ifNoneMatchCollection = $this->getIfNoneMatchEtags();
+
+        // [...] If the field value is "*", the condition is FALSE if the origin server has a current representation for the target resource.
+        // [...] If the field value is a list of entity tags, the condition is FALSE if one of the listed tags matches the entity tag of the selected representation.
+        // [...] A recipient MUST use the weak comparison [...] for If-None-Match
+        if ($resource->hasEtag() && $ifNoneMatchCollection->contains($resource->etag(), false)) {
+            return false;
+        }
+
+        // Otherwise, the condition is true.
+        return true;
     }
 
     /**
@@ -36,7 +47,8 @@ class IfNoneMatch extends BasePrecondition
      */
     public function whenPasses(ResourceContext $resource): ResourceContext|string
     {
-        // TODO: Implement whenPasses() method.
+        // [...] if true, continue to step 5 (If-Range)
+        return IfRange::class;
     }
 
     /**
@@ -44,6 +56,12 @@ class IfNoneMatch extends BasePrecondition
      */
     public function whenFails(ResourceContext $resource): ResourceContext|string
     {
-        // TODO: Implement whenFails() method.
+        // [...] if false for GET/HEAD, respond 304 (Not Modified)
+        if (in_array($this->getMethod(), ['GET', 'HEAD'])) {
+            $this->actions()->abortNotModified($resource);
+        }
+
+        // [...] if false for other methods, respond 412 (Precondition Failed)
+        $this->actions()->abortPreconditionFailed($resource);
     }
 }
