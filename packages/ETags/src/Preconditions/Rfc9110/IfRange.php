@@ -50,7 +50,7 @@ class IfRange extends BasePrecondition
     {
         // [...] if true and the Range is applicable to the selected representation,
         // respond 206 (Partial Content) [...]
-        return $this->actions()->processIfRangePartialContent($resource);
+        return $this->actions()->processRangeHeader($resource);
     }
 
     /**

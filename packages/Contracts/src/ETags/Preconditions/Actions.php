@@ -76,7 +76,7 @@ interface Actions
      *
      * @throws HttpExceptionInterface
      */
-    public function processIfRangePartialContent(ResourceContext $resource): mixed;
+    public function processRangeHeader(ResourceContext $resource): mixed;
 
     /**
      * Ignores "Range" header and proceeds regular request processing

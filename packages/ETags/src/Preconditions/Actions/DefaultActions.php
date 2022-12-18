@@ -44,7 +44,7 @@ class DefaultActions implements Actions
     /**
      * @inheritDoc
      */
-    public function processIfRangePartialContent(ResourceContext $resource): mixed
+    public function processRangeHeader(ResourceContext $resource): mixed
     {
         // Application SHOULD process the "Range" header field.
         return $resource->set('process_range', true);
