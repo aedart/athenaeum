@@ -4,6 +4,8 @@ namespace Aedart\ETags\Preconditions\Rfc9110;
 
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
+use Aedart\ETags\Preconditions\Rfc9110\Concerns;
+use Illuminate\Support\Carbon;
 
 /**
  * If-Unmodified-Since precondition
@@ -15,12 +17,16 @@ use Aedart\ETags\Preconditions\BasePrecondition;
  */
 class IfUnmodifiedSince extends BasePrecondition
 {
+    use Concerns\ResourceStateChange;
+
     /**
      * @inheritDoc
      */
     public function isApplicable(ResourceContext $resource): bool
     {
-        // TODO: Implement isApplicable() method.
+        // 2. When recipient is the origin server, If-Match is not present, and If-Unmodified-Since is present, [...]:
+        $headers = $this->getHeaders();
+        return $resource->hasLastModifiedDate() && $headers->has('If-Unmodified-Since') && !$headers->has('If-Match');
     }
 
     /**
@@ -28,7 +34,14 @@ class IfUnmodifiedSince extends BasePrecondition
      */
     public function passes(ResourceContext $resource): bool
     {
-        // TODO: Implement passes() method.
+        $ifUnmodifiedSince = $this->getIfUnmodifiedSinceDate();
+        if (!isset($ifUnmodifiedSince)) {
+            return false;
+        }
+
+        // [...] If the selected representation's last modification date is earlier than or equal to
+        // the date provided in the field value, the condition is TRUE. [...]
+        return Carbon::instance($resource->lastModifiedDate())->lessThanOrEqualTo($ifUnmodifiedSince);
     }
 
     /**
@@ -36,7 +49,8 @@ class IfUnmodifiedSince extends BasePrecondition
      */
     public function whenPasses(ResourceContext $resource): ResourceContext|string
     {
-        // TODO: Implement whenPasses() method.
+        // [...] if true, continue to step 3 (If-None-Match)
+        return IfNoneMatch::class;
     }
 
     /**
@@ -44,6 +58,7 @@ class IfUnmodifiedSince extends BasePrecondition
      */
     public function whenFails(ResourceContext $resource): ResourceContext|string
     {
-        // TODO: Implement whenFails() method.
+        // Abort the request appropriately...
+        $this->checkResourceStateChange($resource);
     }
 }
