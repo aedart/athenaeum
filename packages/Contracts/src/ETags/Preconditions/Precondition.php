@@ -2,6 +2,8 @@
 
 namespace Aedart\Contracts\ETags\Preconditions;
 
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+
 /**
  * Http Request Precondition
  *
@@ -11,15 +13,10 @@ namespace Aedart\Contracts\ETags\Preconditions;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\ETags\Preconditions
  */
-interface Precondition
+interface Precondition extends
+    HasRequest,
+    HasActions
 {
-    /**
-     * Returns unique string identifier of precondition
-     *
-     * @return string
-     */
-    public static function identifier(): string;
-
     /**
      * Determine if this precondition is applicable for evaluation
      *
@@ -29,8 +26,20 @@ interface Precondition
      */
     public function isApplicable(ResourceContext $resource): bool;
 
-    // TODO: .... only when is applicable
-    public function evaluate(ResourceContext $resource);
+    /**
+     * Evaluates this precondition via {@see passes()} and takes appropriate
+     * action if it passes or fails.
+     *
+     * This method SHOULD only be invoked if {@see isApplicable()} returns `true`.
+     *
+     * @param  ResourceContext  $resource
+     *
+     * @return ResourceContext|string Class path to another precondition to be evaluated, or
+     *                                {@see ResourceContext} when request should proceed.
+     *
+     * @throws HttpExceptionInterface
+     */
+    public function process(ResourceContext $resource): ResourceContext|string;
 
     /**
      * Determine if this precondition passes or not
