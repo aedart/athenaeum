@@ -4,6 +4,7 @@ namespace Aedart\ETags\Preconditions;
 
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
+use Aedart\Utils\Arr;
 use DateTimeInterface;
 
 /**
@@ -17,8 +18,16 @@ use DateTimeInterface;
 class GenericResource implements ResourceContext
 {
     /**
+     * Arbitrary data associated with this resource
+     *
+     * @var array Key-value store
+     */
+    protected array $items = [];
+
+    /**
      * Create a new "generic" resource
      *
+     * @param  mixed  $data E.g. requested record, file...etc
      * @param  ETag|null  $etag  [optional]
      * @param  DateTimeInterface|null  $lastModifiedDate  [optional]
      * @param  int  $size  [optional]
@@ -27,11 +36,20 @@ class GenericResource implements ResourceContext
      *                                                     return a boolean value.
      */
     public function __construct(
+        protected mixed $data,
         protected ETag|null $etag = null,
         protected DateTimeInterface|null $lastModifiedDate = null,
         protected int $size = 0,
         protected $determineStateChangeSuccess = null
     ) {}
+
+    /**
+     * @inheritDoc
+     */
+    public function data(): mixed
+    {
+        return $this->data;
+    }
 
     /**
      * @inheritDoc
@@ -89,5 +107,39 @@ class GenericResource implements ResourceContext
         $determineCallback = $this->determineStateChangeSuccess ?? fn () => false;
 
         return $determineCallback($request, $this);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function set(string|int $key, mixed $value): static
+    {
+        Arr::set($this->items, $key, $value);
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function get(string|int $key, mixed $default = null): mixed
+    {
+        return Arr::get($this->items, $key, $default);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function has(string|int $key): bool
+    {
+        return Arr::has($this->items, $key);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function all(): array
+    {
+        return $this->items;
     }
 }

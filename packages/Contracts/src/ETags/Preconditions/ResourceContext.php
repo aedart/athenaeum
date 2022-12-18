@@ -17,6 +17,13 @@ use DateTimeInterface;
 interface ResourceContext
 {
     /**
+     * Returns resource's data
+     *
+     * @return mixed E.g. the requested record, file,...etc
+     */
+    public function data(): mixed;
+
+    /**
      * Returns etag representation of resource
      *
      * @return ETag|null
@@ -79,4 +86,40 @@ interface ResourceContext
      * @return bool
      */
     public function hasStateChangeAlreadySucceeded($request): bool;
+
+    /**
+     * Set a value for given key
+     *
+     * @param  string|int  $key
+     * @param  mixed  $value
+     *
+     * @return self
+     */
+    public function set(string|int $key, mixed $value): static;
+
+    /**
+     * Get value for given key
+     *
+     * @param  string|int  $key
+     * @param  mixed $default  [optional]
+     *
+     * @return mixed
+     */
+    public function get(string|int $key, mixed $default = null): mixed;
+
+    /**
+     * Determine if value exists for key
+     *
+     * @param  string|int  $key
+     *
+     * @return bool
+     */
+    public function has(string|int $key): bool;
+
+    /**
+     * Returns all values associated with this resource
+     *
+     * @return array
+     */
+    public function all(): array;
 }
