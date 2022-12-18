@@ -4,6 +4,7 @@ namespace Aedart\ETags\Preconditions\Rfc9110;
 
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
+use Aedart\ETags\Preconditions\Rfc9110\Concerns;
 
 /**
  * If-Match precondition
@@ -15,12 +16,15 @@ use Aedart\ETags\Preconditions\BasePrecondition;
  */
 class IfMatch extends BasePrecondition
 {
+    use Concerns\ResourceStateChange;
+
     /**
      * @inheritDoc
      */
     public function isApplicable(ResourceContext $resource): bool
     {
-        // TODO: Implement isApplicable() method.
+        // 1. When recipient is the origin server and If-Match is present, [...]:
+        return $this->getHeaders()->has('If-Match');
     }
 
     /**
@@ -28,7 +32,19 @@ class IfMatch extends BasePrecondition
      */
     public function passes(ResourceContext $resource): bool
     {
-        // TODO: Implement passes() method.
+        $ifMatchCollection = $this->getIfMatchEtags();
+
+        // An origin server MUST use the strong comparison [...] for If-Match
+        if ($resource->hasEtag()
+            && $ifMatchCollection->isNotEmpty()
+            && $ifMatchCollection->contains($resource->etag(), true)
+        ) {
+            return true;
+        }
+
+        // This means either that there is no current representation of the resource,
+        // or that requested etag(s) do not match the etag of the resource.
+        return false;
     }
 
     /**
@@ -36,7 +52,8 @@ class IfMatch extends BasePrecondition
      */
     public function whenPasses(ResourceContext $resource): ResourceContext|string
     {
-        // TODO: Implement whenPasses() method.
+        // [...] if true, continue to step 3 (If-None-Match)
+        return IfNoneMatch::class;
     }
 
     /**
@@ -44,6 +61,7 @@ class IfMatch extends BasePrecondition
      */
     public function whenFails(ResourceContext $resource): ResourceContext|string
     {
-        // TODO: Implement whenFails() method.
+        // Abort the request appropriately...
+        $this->checkResourceStateChange($resource);
     }
 }
