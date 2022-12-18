@@ -1,6 +1,6 @@
 <?php
 
-namespace Aedart\ETags\Preconditions\Extensions;
+namespace Aedart\ETags\Preconditions\Additional;
 
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
