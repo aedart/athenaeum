@@ -6,7 +6,7 @@ use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
 
 /**
- * Range extension
+ * Range precondition
  *
  * @see https://httpwg.org/specs/rfc9110.html#field.range
  *
