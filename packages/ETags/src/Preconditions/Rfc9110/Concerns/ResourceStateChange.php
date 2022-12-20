@@ -14,8 +14,8 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 trait ResourceStateChange
 {
     /**
-     * Determines if resource already has successfully change desired state
-     * and aborts current request accordingly
+     * Determines if resource already has successfully changed to a desired state
+     * and aborts current request accordingly.
      *
      * @param  ResourceContext  $resource
      *
