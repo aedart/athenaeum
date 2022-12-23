@@ -8,8 +8,9 @@ use DateTimeInterface;
 /**
  * Resource Context
  *
- * A representation of some kind of "resource" that request preconditions
- * can evaluate.
+ * A representation of a "resource" that request preconditions can evaluate.
+ * The context can also hold state change information, which can be altered
+ * or set by preconditions, if needed.
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\ETags\Preconditions
