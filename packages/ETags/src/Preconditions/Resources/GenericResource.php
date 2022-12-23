@@ -96,6 +96,11 @@ class GenericResource implements ResourceContext
      */
     public function supportsRangeRequest(): bool
     {
+        // [...] A server that supports range requests MAY ignore a Range header
+        // field when the selected representation has no content (i.e., the
+        // selected representation's data is of zero length). [...]
+        // @see https://httpwg.org/specs/rfc9110.html#field.range
+
         return $this->size() > 0;
     }
 
