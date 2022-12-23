@@ -22,6 +22,10 @@ class Range extends BasePrecondition
     {
         // x. When "Range" is requested, but without "If-Range" header, and "Range" is supported:
         // (Strictly speaking, this is NOT part of RFC9110's "13.2. Evaluation of Preconditions")
+
+        // [...] A server MUST ignore a Range header field received with a request method that is unrecognized
+        // or for which range handling is not defined. For this specification, GET is the only method for
+        // which range handling is defined. [...]
         return $resource->supportsRangeRequest()
             && $this->getHeaders()->has('Range')
             && $this->getMethod() === 'GET';

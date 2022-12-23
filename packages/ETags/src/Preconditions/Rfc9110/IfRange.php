@@ -26,6 +26,9 @@ class IfRange extends BasePrecondition
         // 5. When the method is GET and both Range and If-Range are present, [...]:
         $headers = $this->getHeaders();
 
+        // [...] A server MUST ignore a Range header field received with a request method that is unrecognized
+        // or for which range handling is not defined. For this specification, GET is the only method for
+        // which range handling is defined. [...]
         return $resource->supportsRangeRequest()
             && $headers->has('If-Range')
             && $headers->has('Range')
