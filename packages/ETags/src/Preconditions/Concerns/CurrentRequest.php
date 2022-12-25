@@ -5,7 +5,6 @@ namespace Aedart\ETags\Preconditions\Concerns;
 use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\ETag;
 use DateTimeInterface;
-use Illuminate\Http\Request;
 
 /**
  * Concerns Current Precondition Request
@@ -20,14 +19,14 @@ trait CurrentRequest
     /**
      * The current request
      *
-     * @var Request
+     * @var \Illuminate\Http\Request
      */
-    protected Request $request;
+    protected $request;
 
     /**
      * Set the request
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return self
      */
@@ -41,7 +40,7 @@ trait CurrentRequest
     /**
      * Get the request
      *
-     * @return Request
+     * @return \Illuminate\Http\Request
      */
     public function getRequest()
     {
@@ -51,7 +50,7 @@ trait CurrentRequest
     /**
      * Alias for {@see getRequest()}
      *
-     * @return Request
+     * @return \Illuminate\Http\Request
      */
     public function request()
     {
