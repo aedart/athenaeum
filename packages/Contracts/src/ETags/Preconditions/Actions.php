@@ -60,6 +60,43 @@ interface Actions
     public function abortNotModified(ResourceContext $resource);
 
     /**
+     * Abort request with a "400 Bad Request"
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+     *
+     * @param  ResourceContext  $resource
+     * @param  string|null  $reason  [optional]
+     *
+     * @return never
+     *
+     * @throws HttpExceptionInterface
+     */
+    public function abortBadRequest(ResourceContext $resource, string|null $reason = null);
+
+    /**
+     * Abort request with a "416 Range Not Satisfiable"
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/416
+     *
+     * @param  ResourceContext  $resource
+     * @param  string  $range Range that cannot be satisfied
+     * @param  int  $totalSize Total size of requested resource
+     * @param  string  $rangeUnit Supported range unit, e.g. bytes
+     * @param  string|null  $reason  [optional]
+     *
+     * @return never
+     *
+     * @throws HttpExceptionInterface
+     */
+    public function abortRangeNotSatisfiable(
+        ResourceContext $resource,
+        string $range,
+        int $totalSize,
+        string $rangeUnit,
+        string|null $reason = null
+    );
+
+    /**
      * Process "Range" and response "206 Partial Content"
      *
      * Method can choose to change or set state of given resource context,

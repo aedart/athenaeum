@@ -4,7 +4,10 @@ namespace Aedart\ETags\Preconditions\Actions;
 
 use Aedart\Contracts\ETags\Preconditions\Actions;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
+use Aedart\ETags\Preconditions\Validators\Exceptions\RangeNotSatisfiable;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
 
 /**
@@ -39,6 +42,31 @@ class DefaultActions implements Actions
     public function abortNotModified(ResourceContext $resource)
     {
         throw new HttpException(304);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function abortBadRequest(ResourceContext $resource, ?string $reason = null)
+    {
+        $reason = $reason ?? '';
+
+        throw new BadRequestHttpException($reason);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function abortRangeNotSatisfiable(
+        ResourceContext $resource,
+        string $range,
+        int $totalSize,
+        string $rangeUnit,
+        ?string $reason = null
+    ) {
+        $reason = $reason ?? '';
+
+        throw new RangeNotSatisfiable($range, $totalSize, $rangeUnit, $reason);
     }
 
     /**
