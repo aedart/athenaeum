@@ -16,9 +16,7 @@
         "aedart/athenaeum-contracts": "^6.8",
         "aedart/athenaeum-support": "^6.8",
         "aedart/athenaeum-utils": "^6.8",
-        "illuminate/http": "^v9.30.1"
-    },
-    "require-dev": {
+        "illuminate/http": "^v9.30.1",
         "ramsey/http-range": "^1.1.0"
     },
     "autoload": {
