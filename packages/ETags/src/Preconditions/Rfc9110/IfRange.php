@@ -5,6 +5,7 @@ namespace Aedart\ETags\Preconditions\Rfc9110;
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
+use Aedart\ETags\Preconditions\Rfc9110\Concerns;
 use DateTimeInterface;
 use Illuminate\Support\Carbon;
 
@@ -18,6 +19,8 @@ use Illuminate\Support\Carbon;
  */
 class IfRange extends BasePrecondition
 {
+    use Concerns\RangeValidation;
+
     /**
      * @inheritDoc
      */
@@ -43,7 +46,7 @@ class IfRange extends BasePrecondition
         // [...] An origin server MUST ignore an If-Range header field received in a request for
         // a target resource that does not support Range requests. [...]
         return $this->ifRangeConditionPasses($resource->etag(), $resource->lastModifiedDate())
-            && $this->isRangeApplicable(); // TODO: THIS MUST SOMEHOW BE IMPLEMENTED! PERHAPS VIA THE RESOURCE ?
+            && $this->isRangeApplicable($resource);
     }
 
     /**

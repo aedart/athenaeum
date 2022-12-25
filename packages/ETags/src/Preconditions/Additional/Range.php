@@ -4,6 +4,7 @@ namespace Aedart\ETags\Preconditions\Additional;
 
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
+use Aedart\ETags\Preconditions\Rfc9110\Concerns;
 
 /**
  * Range precondition
@@ -15,6 +16,8 @@ use Aedart\ETags\Preconditions\BasePrecondition;
  */
 class Range extends BasePrecondition
 {
+    use Concerns\RangeValidation;
+
     /**
      * @inheritDoc
      */
@@ -36,12 +39,10 @@ class Range extends BasePrecondition
      */
     public function passes(ResourceContext $resource): bool
     {
-        // TODO: THIS MUST SOMEHOW BE IMPLEMENTED! PERHAPS VIA THE RESOURCE ?
-        // TODO: ...also change the description of this...
         // At this point, the evaluator has a callback that can determine if "Range" is applicable.
         // The callback is responsible for validating the requested range(s). So, it is practical
         // to perform that validation here, to reduce possible duplicate logic elsewhere.
-        return $this->isRangeApplicable();
+        return $this->isRangeApplicable($resource);
     }
 
     /**
