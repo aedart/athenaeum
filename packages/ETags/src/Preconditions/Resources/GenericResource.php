@@ -4,7 +4,7 @@ namespace Aedart\ETags\Preconditions\Resources;
 
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
-use Aedart\Utils\Arr;
+use Aedart\Utils\Concerns;
 use DateTimeInterface;
 
 /**
@@ -17,6 +17,8 @@ use DateTimeInterface;
  */
 class GenericResource implements ResourceContext
 {
+    use Concerns\ArbitraryData;
+
     /**
      * Arbitrary data associated with this resource
      *
@@ -27,10 +29,10 @@ class GenericResource implements ResourceContext
     /**
      * Create a new "generic" resource
      *
-     * @param  mixed  $data E.g. requested record, file...etc
+     * @param  mixed  $data E.g. a record, Eloquent model, a file...etc
      * @param  ETag|null  $etag  [optional]
      * @param  DateTimeInterface|null  $lastModifiedDate  [optional]
-     * @param  int  $size  [optional]
+     * @param  int  $size  [optional] Size of resource. Applicable if supporting "If-Range" and "Range" requests.
      * @param  callable|null $determineStateChangeSuccess  [optional] Callback that determines if a state change
      *                                                     has already succeeded on the resource. Callback MUST
      *                                                     return a boolean value.
@@ -112,39 +114,5 @@ class GenericResource implements ResourceContext
         $determineCallback = $this->determineStateChangeSuccess ?? fn () => false;
 
         return $determineCallback($request, $this);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function set(string|int $key, mixed $value): static
-    {
-        Arr::set($this->items, $key, $value);
-
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function get(string|int $key, mixed $default = null): mixed
-    {
-        return Arr::get($this->items, $key, $default);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function has(string|int $key): bool
-    {
-        return Arr::has($this->items, $key);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function all(): array
-    {
-        return $this->items;
     }
 }

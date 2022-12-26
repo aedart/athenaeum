@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\ETags\Preconditions;
 
 use Aedart\Contracts\ETags\ETag;
+use Aedart\Contracts\Utils\HasArbitraryData;
 use DateTimeInterface;
 
 /**
@@ -15,7 +16,7 @@ use DateTimeInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\ETags\Preconditions
  */
-interface ResourceContext
+interface ResourceContext extends HasArbitraryData
 {
     /**
      * Returns resource's data
@@ -87,40 +88,4 @@ interface ResourceContext
      * @return bool
      */
     public function hasStateChangeAlreadySucceeded($request): bool;
-
-    /**
-     * Set a value for given key
-     *
-     * @param  string|int  $key
-     * @param  mixed  $value
-     *
-     * @return self
-     */
-    public function set(string|int $key, mixed $value): static;
-
-    /**
-     * Get value for given key
-     *
-     * @param  string|int  $key
-     * @param  mixed $default  [optional]
-     *
-     * @return mixed
-     */
-    public function get(string|int $key, mixed $default = null): mixed;
-
-    /**
-     * Determine if value exists for key
-     *
-     * @param  string|int  $key
-     *
-     * @return bool
-     */
-    public function has(string|int $key): bool;
-
-    /**
-     * Returns all values associated with this resource
-     *
-     * @return array
-     */
-    public function all(): array;
 }
