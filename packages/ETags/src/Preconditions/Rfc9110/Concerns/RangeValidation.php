@@ -4,7 +4,9 @@ namespace Aedart\ETags\Preconditions\Rfc9110\Concerns;
 
 use Aedart\Contracts\ETags\Preconditions\RangeValidator;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
+use Aedart\Support\Facades\IoCFacade;
 use Ramsey\Collection\CollectionInterface;
+use Ramsey\Http\Range\Unit\UnitRangeInterface;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 /**
@@ -16,11 +18,11 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 trait RangeValidation
 {
     /**
-     * Validated range sets
+     * Verified range sets
      *
-     * @var CollectionInterface|null
+     * @var CollectionInterface<UnitRangeInterface>|null
      */
-    protected CollectionInterface|null $ranges = null;
+    protected CollectionInterface|null $verifiedRanges = null;
 
     /**
      * Determine if requested "Range" is applicable
@@ -48,18 +50,34 @@ trait RangeValidation
         }
 
         // Store a reference to the validated range sets and evaluate as true (Range is applicable).
-        $this->ranges = $collection;
+        $this->verifiedRanges = $collection;
         return true;
     }
 
-    // TODO: ...
-    protected function makeRangeValidator(ResourceContext $resource): RangeValidator
+    /**
+     * Returns the verified range sets
+     *
+     * @return CollectionInterface<UnitRangeInterface>|null
+     */
+    protected function getVerifiedRanges(): CollectionInterface|null
     {
-        // TODO: Use IoC to create validator instance. Configure it based on info. from
-        // TODO: resource context.
-
-        // TODO: Set current request
-        // TODO: Set actions
+        return $this->verifiedRanges;
     }
 
+    /**
+     * Creates a new range validator instance
+     *
+     * @param  ResourceContext  $resource
+     *
+     * @return RangeValidator
+     */
+    protected function makeRangeValidator(ResourceContext $resource): RangeValidator
+    {
+        return IoCFacade::make(RangeValidator::class, [
+            'rangeUnit' => $resource->allowedRangeUnit(),
+            'maxRangeSets' => $resource->maximumRangeSets()
+        ])
+            ->setRequest($this->getRequest())
+            ->setActions($this->getActions());
+    }
 }
