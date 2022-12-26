@@ -39,7 +39,7 @@ class RangeValidator implements RangeValidatorInterface
      * @see https://httpwg.org/specs/rfc9110.html#range.units
      * @see https://httpwg.org/specs/rfc9110.html#range.specifiers
      *
-     * @param  string  $rangeUnit  [optional] The range unit that is accepted by the server
+     * @param  string  $rangeUnit  [optional] Allowed or supported range unit, e.g. bytes
      * @param  int  $maxRangeSets  [optional] Maximum allowed range sets
      */
     public function __construct(
@@ -113,14 +113,15 @@ class RangeValidator implements RangeValidatorInterface
      * Verifies that ranges do not overlap or exceed resource's total size
      *
      * @param  UnitInterface  $unit
-     * @param  CollectionInterface|null  $collection  [optional]
+     * @param  CollectionInterface<UnitRangeInterface>|null  $collection  [optional]
      *
-     * @return CollectionInterface
+     * @return CollectionInterface<UnitRangeInterface>
      *
      * @throws RangeNotSatisfiable
      */
     protected function verifyRanges(UnitInterface $unit, CollectionInterface|null $collection = null): CollectionInterface
     {
+        /** @var CollectionInterface<UnitRangeInterface> $collection */
         $collection = $collection ?? $unit->getRanges();
 
         // Total size of the payload
@@ -129,26 +130,23 @@ class RangeValidator implements RangeValidatorInterface
         // Total amount of bytes requested
         $totalRequested = 0;
 
-        // Previous range's end position
-        $previousEnd = null;
+        // Previous range
+        $previous = null;
 
         foreach ($collection as $range) {
             /** @var UnitRangeInterface $range */
 
-            $start = $range->getStart();
-            $end = $range->getEnd();
-
-            // Abort if range overlaps with previous range...
-            if (isset($previousEnd) && $start <= $previousEnd) {
+            // Abort if range's start overlaps with previous range's end...
+            if (isset($previous) && $range->getStart() <= $previous->getEnd()) {
                 throw new RangeNotSatisfiable(
                     $unit->getRangeSet(),
                     $totalSize,
                     $unit->getRangeUnit(),
-                    sprintf('Range %s overlaps with previous range.', $range->getRange())
+                    sprintf('Range %s overlaps with previous range %s.', $range->getRange(), $previous->getRange())
                 );
             }
 
-            $previousEnd = $end;
+            $previous = $range;
             $totalRequested += $range->getLength();
         }
 
@@ -173,7 +171,7 @@ class RangeValidator implements RangeValidatorInterface
      *
      * @param  int $maxAllowed
      * @param  UnitInterface  $unit
-     * @param  CollectionInterface|null $collection  [optional]
+     * @param  CollectionInterface<UnitRangeInterface>|null $collection  [optional]
      *
      * @return void
      *
@@ -251,7 +249,7 @@ class RangeValidator implements RangeValidatorInterface
      *
      * @param  array  $data  [optional]
      *
-     * @return CollectionInterface
+     * @return CollectionInterface<UnitRangeInterface>
      */
     protected function makeCollection(array $data = []): CollectionInterface
     {
