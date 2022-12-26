@@ -6,6 +6,8 @@ use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\Utils\Concerns;
 use DateTimeInterface;
+use Ramsey\Collection\CollectionInterface;
+use Ramsey\Http\Range\Unit\UnitRangeInterface;
 
 /**
  * Generic Resource
@@ -20,11 +22,11 @@ class GenericResource implements ResourceContext
     use Concerns\ArbitraryData;
 
     /**
-     * Arbitrary data associated with this resource
+     * Requested range sets
      *
-     * @var array Key-value store
+     * @var CollectionInterface<UnitRangeInterface>|null
      */
-    protected array $items = [];
+    protected CollectionInterface|null $ranges = null;
 
     /**
      * Create a new "generic" resource
@@ -36,13 +38,17 @@ class GenericResource implements ResourceContext
      * @param  callable|null $determineStateChangeSuccess  [optional] Callback that determines if a state change
      *                                                     has already succeeded on the resource. Callback MUST
      *                                                     return a boolean value.
+     * @param  string  $rangeUnit  [optional] Allowed or supported range unit, e.g. bytes.
+     * @param  int  $maxRangeSets  [optional] Maximum allowed range sets.
      */
     public function __construct(
         protected mixed $data,
         protected ETag|null $etag = null,
         protected DateTimeInterface|null $lastModifiedDate = null,
         protected int $size = 0,
-        protected $determineStateChangeSuccess = null
+        protected $determineStateChangeSuccess = null,
+        protected string $rangeUnit = 'bytes',
+        protected int $maxRangeSets = 5
     ) {}
 
     /**
@@ -114,5 +120,57 @@ class GenericResource implements ResourceContext
         // @see https://httpwg.org/specs/rfc9110.html#field.range
 
         return $this->size() > 0;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function allowedRangeUnit(): string
+    {
+        return $this->rangeUnit;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function maximumRangeSets(): int
+    {
+        return $this->maxRangeSets;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setRequestedRanges(?CollectionInterface $ranges = null): static
+    {
+        $this->ranges = $ranges;
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function ranges(): CollectionInterface|null
+    {
+        return $this->ranges;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function mustProcessRange(): bool
+    {
+        $ranges = $this->ranges();
+
+        return $this->supportsRangeRequest() && isset($ranges) && !$ranges->isEmpty();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function mustIgnoreRange(): bool
+    {
+        return !$this->mustProcessRange();
     }
 }

@@ -5,6 +5,7 @@ namespace Aedart\ETags\Preconditions\Actions;
 use Aedart\Contracts\ETags\Preconditions\Actions;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\Validators\Exceptions\RangeNotSatisfiable;
+use Ramsey\Collection\CollectionInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
@@ -72,18 +73,16 @@ class DefaultActions implements Actions
     /**
      * @inheritDoc
      */
-    public function processRangeHeader(ResourceContext $resource): mixed
+    public function processRange(ResourceContext $resource, CollectionInterface|null $ranges = null): mixed
     {
-        // Application SHOULD process the "Range" header field.
-        return $resource->set('process_range', true);
+        return $resource->setRequestedRanges($ranges);
     }
 
     /**
      * @inheritDoc
      */
-    public function ignoreRangeHeader(ResourceContext $resource): mixed
+    public function ignoreRange(ResourceContext $resource): mixed
     {
-        // Application SHOULD ignore the "Range" header field
-        return $resource->set('process_range', false);
+        return $resource->setRequestedRanges(null);
     }
 }

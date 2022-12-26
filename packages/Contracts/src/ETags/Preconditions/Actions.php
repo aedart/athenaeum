@@ -2,6 +2,8 @@
 
 namespace Aedart\Contracts\ETags\Preconditions;
 
+use Ramsey\Collection\CollectionInterface;
+use Ramsey\Http\Range\Unit\UnitRangeInterface;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 /**
@@ -97,7 +99,7 @@ interface Actions
     );
 
     /**
-     * Process "Range" and response "206 Partial Content"
+     * Process "Range" header and response "206 Partial Content"
      *
      * Method can choose to change or set state of given resource context,
      * such that the application will react upon it and cause a "206 Partial Content"
@@ -106,23 +108,26 @@ interface Actions
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/206
      * @see https://httpwg.org/specs/rfc9110.html#field.if-range
+     * @see https://httpwg.org/specs/rfc9110.html#range.requests
      *
      * @param  ResourceContext  $resource
+     * @param  CollectionInterface<UnitRangeInterface>|null  $ranges  [optional]
      *
      * @return mixed
      *
      * @throws HttpExceptionInterface
      */
-    public function processRangeHeader(ResourceContext $resource): mixed;
+    public function processRange(ResourceContext $resource, CollectionInterface|null $ranges = null): mixed;
 
     /**
-     * Ignores "Range" header and proceeds regular request processing
+     * Ignore "Range" header and proceed to regular request processing
      *
      * Method can choose to change or set state of given resource context,
      * such that the application will ignore "Range" header field. Or, the
      * method can choose to abort the current request and respond accordingly.
      *
      * @see https://httpwg.org/specs/rfc9110.html#field.if-range
+     * @see https://httpwg.org/specs/rfc9110.html#range.requests
      *
      * @param  ResourceContext  $resource
      *
@@ -130,5 +135,5 @@ interface Actions
      *
      * @throws HttpExceptionInterface
      */
-    public function ignoreRangeHeader(ResourceContext $resource): mixed;
+    public function ignoreRange(ResourceContext $resource): mixed;
 }

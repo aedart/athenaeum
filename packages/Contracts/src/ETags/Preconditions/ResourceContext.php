@@ -5,6 +5,8 @@ namespace Aedart\Contracts\ETags\Preconditions;
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\Utils\HasArbitraryData;
 use DateTimeInterface;
+use Ramsey\Collection\CollectionInterface;
+use Ramsey\Http\Range\Unit\UnitRangeInterface;
 
 /**
  * Resource Context
@@ -83,9 +85,82 @@ interface ResourceContext extends HasArbitraryData
     /**
      * Determine if resource supports "Range" request
      *
+     * If {@see size()} returns 0 (zero), then this method must
+     * return false. Range request are not supported for resources
+     * that do not have content size specified.
+     *
      * @see https://httpwg.org/specs/rfc9110.html#range.requests
      *
      * @return bool
      */
     public function supportsRangeRequest(): bool;
+
+    /**
+     * Returns the allowed or supported range unit
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#range.units
+     *
+     * @return string E.g. bytes
+     */
+    public function allowedRangeUnit(): string;
+
+    /**
+     * Returns the maximum allowed or supported range sets
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#range.specifiers
+     *
+     * @return int
+     */
+    public function maximumRangeSets(): int;
+
+    /**
+     * Set the requested range sets for this resource's content
+     *
+     * @see mustProcessRange()
+     * @see https://httpwg.org/specs/rfc9110.html#field.if-range
+     * @see https://httpwg.org/specs/rfc9110.html#range.requests
+     *
+     * @param  CollectionInterface<UnitRangeInterface>|null  $ranges  [optional]
+     *
+     * @return self
+     */
+    public function setRequestedRanges(CollectionInterface|null $ranges = null): static;
+
+    /**
+     * Returns the requested range sets of this resource's content
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#field.if-range
+     * @see https://httpwg.org/specs/rfc9110.html#range.requests
+     *
+     * @return CollectionInterface<UnitRangeInterface>|null
+     */
+    public function ranges(): CollectionInterface|null;
+
+    /**
+     * Determine if "Range" header field must be processed or not
+     *
+     * Method must return true if;
+     *
+     *      a) This resource supports range requests
+     *      b) This resource has valid range sets available
+     *
+     * When true, the application MUST react upon this and produce an appropriate
+     * "206 Partial Content" response.
+     *
+     * @see supportsRangeRequest()
+     * @see ranges()
+     * @see https://httpwg.org/specs/rfc9110.html#field.if-range
+     * @see https://httpwg.org/specs/rfc9110.html#range.requests
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/206
+     *
+     * @return bool
+     */
+    public function mustProcessRange(): bool;
+
+    /**
+     * Inverse of {@see mustProcessRange()}
+     *
+     * @return bool
+     */
+    public function mustIgnoreRange(): bool;
 }
