@@ -39,12 +39,12 @@ class RangeValidator implements RangeValidatorInterface
      * @see https://httpwg.org/specs/rfc9110.html#range.units
      * @see https://httpwg.org/specs/rfc9110.html#range.specifiers
      *
-     * @param  string  $acceptsUnit  [optional] The range unit that is accepted by the server
-     * @param  int  $maxAllowedRangeSets  [optional] Maximum allowed range sets
+     * @param  string  $rangeUnit  [optional] The range unit that is accepted by the server
+     * @param  int  $maxRangeSets  [optional] Maximum allowed range sets
      */
     public function __construct(
-        protected string $acceptsUnit = 'bytes',
-        protected int $maxAllowedRangeSets = 5
+        protected string $rangeUnit = 'bytes',
+        protected int $maxRangeSets = 5
     ) {}
 
     /**
@@ -67,8 +67,8 @@ class RangeValidator implements RangeValidatorInterface
             }
 
             // Otherwise, we must make sure that amount of requested ranges does not exceed the
-            // maximum allowed / supported ranges.
-            $this->verifyAmountOfRanges($this->maxAllowedRangeSets(), $unit, $collection);
+            // maximum allowed ranges.
+            $this->verifyAmountOfRanges($this->maximumRangeSets(), $unit, $collection);
 
             // Lastly, each range must be verified...
             return $this->verifyRanges($unit, $collection);
@@ -85,28 +85,24 @@ class RangeValidator implements RangeValidatorInterface
             // [...] either the range-unit is not supported for that target resource or the ranges-specifier
             // is unsatisfiable with respect to the selected representation, the server SHOULD send a
             // 416 (Range Not Satisfiable) response. [...]
-            $this->actions()->abortRangeNotSatisfiable($resource, $e->getRange(), $e->getTotalSize(), $this->acceptedRangeUnit(), $e->getMessage());
+            $this->actions()->abortRangeNotSatisfiable($resource, $e->getRange(), $e->getTotalSize(), $this->allowedRangeUnit(), $e->getMessage());
         }
     }
 
     /**
-     * Returns the accepted range unit
-     *
-     * @return string E.g. bytes
+     * @inheritdoc
      */
-    public function acceptedRangeUnit(): string
+    public function allowedRangeUnit(): string
     {
-        return $this->acceptsUnit;
+        return $this->rangeUnit;
     }
 
     /**
-     * Returns the maximum allowed range sets in request
-     *
-     * @return int
+     * @inheritdoc
      */
-    public function maxAllowedRangeSets(): int
+    public function maximumRangeSets(): int
     {
-        return $this->maxAllowedRangeSets;
+        return $this->maxRangeSets;
     }
 
     /*****************************************************************
@@ -209,7 +205,7 @@ class RangeValidator implements RangeValidatorInterface
     protected function verifyRequestedRangeUnit(UnitInterface $unit): UnitInterface
     {
         $requested = $unit->getRangeUnit();
-        $accepts = $this->acceptedRangeUnit();
+        $accepts = $this->allowedRangeUnit();
 
         if (strtolower($requested) !== strtolower($accepts)) {
             throw new RangeUnitNotSupported(sprintf('Only "%s" is accepted as Range unit. %s was provided', $accepts, $requested));
