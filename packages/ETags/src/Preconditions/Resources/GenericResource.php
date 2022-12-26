@@ -88,6 +88,16 @@ class GenericResource implements ResourceContext
     /**
      * @inheritDoc
      */
+    public function hasStateChangeAlreadySucceeded($request): bool
+    {
+        $determineCallback = $this->determineStateChangeSuccess ?? fn () => false;
+
+        return $determineCallback($request, $this);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function size(): int
     {
         return $this->size;
@@ -104,15 +114,5 @@ class GenericResource implements ResourceContext
         // @see https://httpwg.org/specs/rfc9110.html#field.range
 
         return $this->size() > 0;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function hasStateChangeAlreadySucceeded($request): bool
-    {
-        $determineCallback = $this->determineStateChangeSuccess ?? fn () => false;
-
-        return $determineCallback($request, $this);
     }
 }

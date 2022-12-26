@@ -54,22 +54,6 @@ interface ResourceContext extends HasArbitraryData
     public function hasLastModifiedDate(): bool;
 
     /**
-     * Returns the size of the resource
-     *
-     * @return int
-     */
-    public function size(): int;
-
-    /**
-     * Determine if resource supports "Range" request
-     *
-     * @see https://httpwg.org/specs/rfc9110.html#range.requests
-     *
-     * @return bool
-     */
-    public function supportsRangeRequest(): bool;
-
-    /**
      * Determine if state change has already succeeded for resource.
      *
      * Example: If a DELETE request is made and the resource is already deleted,
@@ -88,4 +72,20 @@ interface ResourceContext extends HasArbitraryData
      * @return bool
      */
     public function hasStateChangeAlreadySucceeded($request): bool;
+
+    /**
+     * Returns the size of the resource
+     *
+     * @return int
+     */
+    public function size(): int;
+
+    /**
+     * Determine if resource supports "Range" request
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#range.requests
+     *
+     * @return bool
+     */
+    public function supportsRangeRequest(): bool;
 }
