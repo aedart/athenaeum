@@ -5,6 +5,7 @@ namespace Aedart\ETags\Preconditions\Additional;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
 use Aedart\ETags\Preconditions\Rfc9110\Concerns;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 /**
  * Range precondition
@@ -23,8 +24,9 @@ class Range extends BasePrecondition
      */
     public function isApplicable(ResourceContext $resource): bool
     {
-        // x. When "Range" is requested, but without "If-Range" header, and "Range" is supported:
-        // (Strictly speaking, this is NOT part of RFC9110's "13.2. Evaluation of Preconditions")
+        // x. When "Range" is requested, but without "If-Range" header, and "Range" is supported.
+        // Strictly speaking, this is NOT part of RFC9110's "13.2. Evaluation of Preconditions".
+        // However, "Range" header must be processed when received, even without "If-Range".
 
         // [...] A server MUST ignore a Range header field received with a request method that is unrecognized
         // or for which range handling is not defined. For this specification, GET is the only method for
@@ -35,13 +37,14 @@ class Range extends BasePrecondition
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * @throws HttpExceptionInterface
      */
     public function passes(ResourceContext $resource): bool
     {
-        // At this point, the evaluator has a callback that can determine if "Range" is applicable.
-        // The callback is responsible for validating the requested range(s). So, it is practical
-        // to perform that validation here, to reduce possible duplicate logic elsewhere.
+        // At this point, the precondition can determine if "Range" is applicable. Doing so
+        // allowed a developer to avoid having to manually validate it elsewhere in the application.
         return $this->isRangeApplicable($resource);
     }
 
@@ -50,7 +53,7 @@ class Range extends BasePrecondition
      */
     public function whenPasses(ResourceContext $resource): ResourceContext|string
     {
-        return $this->actions()->processRangeHeader($resource);
+        return $this->actions()->processRange($resource, $this->getVerifiedRanges());
     }
 
     /**
@@ -58,7 +61,6 @@ class Range extends BasePrecondition
      */
     public function whenFails(ResourceContext $resource): ResourceContext|string
     {
-        // TODO: Uhm... should request be aborted,... or just ignore "Range" ?
-        return $this->actions()->ignoreRangeHeader($resource);
+        return $this->actions()->ignoreRange($resource);
     }
 }

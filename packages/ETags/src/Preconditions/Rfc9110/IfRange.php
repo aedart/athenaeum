@@ -8,6 +8,7 @@ use Aedart\ETags\Preconditions\BasePrecondition;
 use Aedart\ETags\Preconditions\Rfc9110\Concerns;
 use DateTimeInterface;
 use Illuminate\Support\Carbon;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 /**
  * If-Range precondition
@@ -39,7 +40,9 @@ class IfRange extends BasePrecondition
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * @throws HttpExceptionInterface
      */
     public function passes(ResourceContext $resource): bool
     {
@@ -56,7 +59,7 @@ class IfRange extends BasePrecondition
     {
         // [...] if true and the Range is applicable to the selected representation,
         // respond 206 (Partial Content) [...]
-        return $this->actions()->processRangeHeader($resource);
+        return $this->actions()->processRange($resource, $this->getVerifiedRanges());
     }
 
     /**
@@ -65,7 +68,7 @@ class IfRange extends BasePrecondition
     public function whenFails(ResourceContext $resource): ResourceContext|string
     {
         // [...] otherwise, ignore the Range header field and respond 200 (OK) [...]
-        return $this->actions()->ignoreRangeHeader($resource);
+        return $this->actions()->ignoreRange($resource);
     }
 
     /**
