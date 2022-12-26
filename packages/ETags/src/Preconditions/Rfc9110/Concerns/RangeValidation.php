@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 trait RangeValidation
 {
     /**
-     * Verified range sets
+     * Last verified range sets
      *
      * @var CollectionInterface<UnitRangeInterface>|null
      */
@@ -38,18 +38,20 @@ trait RangeValidation
      */
     protected function isRangeApplicable(ResourceContext $resource): bool
     {
+        // Validate the requested "Range" header. If invalid, the validator will
+        // abort the request using appropriate abort actions.
         $collection = $this
             ->makeRangeValidator($resource)
             ->validate($resource);
 
-        // Edge case: no "Range" header available in request. Or [...] An origin server MUST
-        // ignore a Range header field that contains a range unit it does not understand [...]
-        // Regardless, we just mark range as not applicable.
+        // In situations when this method is invoked, but request does not contain
+        // a "Range" header, then empty range sets collection is returned. If so,
+        // the range is not applicable.
         if ($collection->isEmpty()) {
             return false;
         }
 
-        // Store a reference to the validated range sets and evaluate as true (Range is applicable).
+        // Otherwise, the range is applicable and we store a reference to the verified range sets.
         $this->verifiedRanges = $collection;
         return true;
     }

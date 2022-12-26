@@ -34,8 +34,8 @@ class Evaluator implements PreconditionsEvaluator
      * Creates a new request preconditions evaluator instance
      *
      * @param  Request  $request
-     * @param  string[]|Precondition[]  $preconditions  [optional]
-     * @param  PreconditionActions|null  $actions  [optional]
+     * @param  string[]|Precondition[]  $preconditions  [optional] Defaults to predefined preconditions when empty.
+     * @param  PreconditionActions|null  $actions  [optional] Defaults to predefined actions when none given.
      */
     public function __construct(Request $request, array $preconditions = [], PreconditionActions|null $actions = null) {
         $preconditions = !empty($preconditions)
@@ -239,7 +239,7 @@ class Evaluator implements PreconditionsEvaluator
         }
 
         // When requested precondition is ranked before the current (or is the current) precondition,
-        // then it might already have evaluated it. To avoid re-evaluation or possible infinite loop,
+        // then it might already be evaluated. To avoid re-evaluation or possible infinite loop,
         // the evaluation process must be stopped.
         $currentPrecondition = $preconditions[$currentIndex];
         $requestedPrecondition = $preconditions[$requestedIndex];
