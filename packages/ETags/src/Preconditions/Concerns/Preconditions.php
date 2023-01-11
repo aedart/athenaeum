@@ -75,5 +75,7 @@ trait Preconditions
     public function clearPreconditions(): static
     {
         $this->preconditions = [];
+
+        return $this;
     }
 }
