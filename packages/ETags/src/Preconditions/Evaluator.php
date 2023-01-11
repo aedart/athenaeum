@@ -268,7 +268,11 @@ class Evaluator implements PreconditionsEvaluator
         $preconditions = array_values($preconditions);
 
         foreach ($preconditions as $index => $precondition) {
-            if ($precondition::class === $target) {
+            $class = is_object($precondition)
+                ? $precondition::class
+                : $precondition;
+
+            if ($class === $target) {
                 return $index;
             }
         }
