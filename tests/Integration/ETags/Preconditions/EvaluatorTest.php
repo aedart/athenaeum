@@ -4,7 +4,6 @@ namespace Aedart\Tests\Integration\ETags\Preconditions;
 
 use Aedart\Contracts\ETags\Preconditions\Actions;
 use Aedart\Contracts\ETags\Preconditions\Evaluator;
-use Aedart\Contracts\ETags\Preconditions\Precondition;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
 use Aedart\Testing\Helpers\ConsoleDebugger;
