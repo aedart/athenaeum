@@ -41,4 +41,11 @@ interface HasPreconditions
      * @return static
      */
     public function addPrecondition(string|Precondition $precondition): static;
+
+    /**
+     * Clear all preconditions
+     *
+     * @return static
+     */
+    public function clearPreconditions(): static;
 }

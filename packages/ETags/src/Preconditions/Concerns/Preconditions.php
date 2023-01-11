@@ -66,4 +66,14 @@ trait Preconditions
 
         return $this;
     }
+
+    /**
+     * Clear all preconditions
+     *
+     * @return static
+     */
+    public function clearPreconditions(): static
+    {
+        $this->preconditions = [];
+    }
 }
