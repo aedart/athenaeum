@@ -3,7 +3,6 @@
 namespace Aedart\Tests\Integration\ETags\Preconditions\Rfc9110;
 
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
-use Aedart\ETags\Facades\Generator;
 use Aedart\ETags\Preconditions\Actions\DefaultActions;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
 use Carbon\Carbon;
