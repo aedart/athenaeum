@@ -26,6 +26,8 @@ class DefaultActions implements Actions
      */
     public function abortStateChangeAlreadySucceeded(ResourceContext $resource)
     {
+        // E.g. abort(response()->json(...));
+
         throw new HttpException(204);
     }
 
@@ -34,6 +36,8 @@ class DefaultActions implements Actions
      */
     public function abortPreconditionFailed(ResourceContext $resource)
     {
+        // E.g. abort(response()->json(...));
+
         throw new PreconditionFailedHttpException();
     }
 
@@ -42,6 +46,8 @@ class DefaultActions implements Actions
      */
     public function abortNotModified(ResourceContext $resource)
     {
+        // E.g. abort(response()->json(...));
+
         throw new HttpException(304);
     }
 
@@ -50,6 +56,8 @@ class DefaultActions implements Actions
      */
     public function abortBadRequest(ResourceContext $resource, ?string $reason = null)
     {
+        // E.g. abort(response()->json(...));
+
         $reason = $reason ?? '';
 
         throw new BadRequestHttpException($reason);
@@ -65,6 +73,8 @@ class DefaultActions implements Actions
         string $rangeUnit,
         ?string $reason = null
     ) {
+        // E.g. abort(response()->json(...));
+
         $reason = $reason ?? '';
 
         throw new RangeNotSatisfiable($range, $totalSize, $rangeUnit, $reason);
