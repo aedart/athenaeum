@@ -226,7 +226,7 @@ class RangeValidator implements RangeValidatorInterface
     {
         $factory = $this->makeUnitFactory();
 
-        $range = $request->header('Range', []);
+        $range = $request->header('Range', '');
         if (empty($range)) {
             throw new NoRangeException();
         }
