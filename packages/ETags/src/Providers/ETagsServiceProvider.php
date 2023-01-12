@@ -43,7 +43,10 @@ class ETagsServiceProvider extends ServiceProvider implements DeferrableProvider
             return ETagsCollection::make($etags);
         });
 
-        $this->app->bind(RangeValidatorInterface::class, function($app, string $rangeUnit = 'bytes', int $maxRangeSets = 5) {
+        $this->app->bind(RangeValidatorInterface::class, function($app, array $arguments = []) {
+            $rangeUnit = $arguments['rangeUnit'] ?? 'bytes';
+            $maxRangeSets = $arguments['maxRangeSets'] ?? 5;
+
             return new RangeValidator($rangeUnit, $maxRangeSets);
         });
     }
