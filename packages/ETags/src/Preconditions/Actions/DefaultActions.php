@@ -26,7 +26,7 @@ class DefaultActions implements Actions
      */
     public function abortStateChangeAlreadySucceeded(ResourceContext $resource)
     {
-        throw new HttpException(200);
+        throw new HttpException(204);
     }
 
     /**
