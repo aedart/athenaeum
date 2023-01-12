@@ -85,9 +85,6 @@ class IfNoneMatchTest extends PreconditionsTestCase
             request: $request,
             actions: new class extends DefaultActions
             {
-                /**
-                 * @inheritDoc
-                 */
                 public function abortNotModified(ResourceContext $resource)
                 {
                     throw new HttpException(304, 'Not modified');
@@ -130,9 +127,6 @@ class IfNoneMatchTest extends PreconditionsTestCase
             request: $request,
             actions: new class extends DefaultActions
             {
-                /**
-                 * @inheritDoc
-                 */
                 public function abortNotModified(ResourceContext $resource)
                 {
                     throw new HttpException(304, 'Not modified');
