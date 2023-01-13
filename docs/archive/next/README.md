@@ -26,7 +26,7 @@ _TBD: "To be decided"._
 
 ## `v7.x` Highlights
 
-These are some the new features of Athenaeum `v6.x`.
+These are the highlights of the latest major version of Athenaeum.
 
 ### PHP `v8.1` and Laravel `v10.x`
 
