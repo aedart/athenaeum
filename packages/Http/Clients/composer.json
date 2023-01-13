@@ -1,7 +1,13 @@
 {
     "name": "aedart/athenaeum-http-clients",
     "description": "Http Client wrapper along with a Manager that is able to handle multiple client instances (profiles)",
-    "keywords": ["Athenaeum", "Http Clients", "Psr-7", "Manager", "Profiles"],
+    "keywords": [
+        "Athenaeum",
+        "Http Clients",
+        "Psr-7",
+        "Manager",
+        "Profiles"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
@@ -12,7 +18,7 @@
         }
     ],
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1",
         "aedart/athenaeum-container": "^6.9",
         "aedart/athenaeum-contracts": "^6.9",
         "aedart/athenaeum-http-cookies": "^6.9",

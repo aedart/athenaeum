@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+**Breaking Changes**
+
+* Minimum required PHP version changed to `v8.1`.
+
+**Non-breaking Changes**
+
 * `getResourceKeyName()` in `ApiResource` now throws `LogicException`, if unable to determine resource's identifier key name.
 
 ### Fixed

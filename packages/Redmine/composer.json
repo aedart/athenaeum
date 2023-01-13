@@ -1,7 +1,11 @@
 {
     "name": "aedart/athenaeum-redmine",
     "description": "Redmine API Client for Laravel",
-    "keywords": ["Athenaeum", "Redmine", "API"],
+    "keywords": [
+        "Athenaeum",
+        "Redmine",
+        "API"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
@@ -12,11 +16,11 @@
         }
     ],
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1",
         "ext-json": "*",
         "aedart/athenaeum-dto": "^6.9",
-        "aedart/athenaeum-pagination": "^6.9",
-        "aedart/athenaeum-http-clients": "^6.9"
+        "aedart/athenaeum-http-clients": "^6.9",
+        "aedart/athenaeum-pagination": "^6.9"
     },
     "autoload": {
         "psr-4": {

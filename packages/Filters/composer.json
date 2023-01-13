@@ -1,7 +1,13 @@
 {
     "name": "aedart/athenaeum-filters",
     "description": "Search filter utilities, based on http query parameters",
-    "keywords": ["Athenaeum", "Search", "Filters", "Http", "API"],
+    "keywords": [
+        "Athenaeum",
+        "Search",
+        "Filters",
+        "Http",
+        "API"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
@@ -12,7 +18,7 @@
         }
     ],
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1",
         "aedart/athenaeum-contracts": "^6.9",
         "aedart/athenaeum-database": "^6.9",
         "aedart/athenaeum-support": "^6.9",

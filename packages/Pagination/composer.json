@@ -1,7 +1,10 @@
 {
     "name": "aedart/athenaeum-pagination",
     "description": "Pagination utility",
-    "keywords": ["Athenaeum", "Pagination"],
+    "keywords": [
+        "Athenaeum",
+        "Pagination"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
@@ -12,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1",
         "aedart/athenaeum-contracts": "^6.9"
     },
     "autoload": {

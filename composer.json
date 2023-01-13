@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1",
         "ext-fileinfo": "*",
         "ext-json": "*",
         "composer-runtime-api": "^2.0.0",

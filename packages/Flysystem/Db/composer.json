@@ -1,7 +1,13 @@
 {
     "name": "aedart/athenaeum-flysystem-db",
     "description": "Flysystem Database Adapter",
-    "keywords": ["Athenaeum", "Flysystem", "Database", "Adapter", "Laravel"],
+    "keywords": [
+        "Athenaeum",
+        "Flysystem",
+        "Database",
+        "Adapter",
+        "Laravel"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
@@ -12,7 +18,7 @@
         }
     ],
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1",
         "aedart/athenaeum-container": "^6.9",
         "aedart/athenaeum-database": "^6.9",
         "aedart/athenaeum-streams": "^6.9",
