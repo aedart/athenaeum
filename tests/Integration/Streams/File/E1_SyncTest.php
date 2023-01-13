@@ -1,0 +1,81 @@
+<?php
+
+namespace Aedart\Tests\Integration\Streams\File;
+
+use Aedart\Contracts\Streams\Exceptions\StreamException;
+use Aedart\Streams\FileStream;
+use Aedart\Testing\Helpers\ConsoleDebugger;
+use Aedart\Tests\TestCases\Streams\StreamTestCase;
+
+/**
+ * J0_SyncTest
+ *
+ * @group streams
+ * @group streams-file-e1
+ *
+ * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @package Aedart\Tests\Integration\Streams\File
+ */
+class E1_SyncTest extends StreamTestCase
+{
+    /**
+     * Name of test file
+     *
+     * @var string
+     */
+    protected string $syncFile = 'sync_file.txt';
+
+    /*****************************************************************
+     * Setup
+     ****************************************************************/
+
+    public function _before()
+    {
+        parent::_before();
+
+        $path = $this->outputFilePath($this->syncFile);
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        touch($path);
+    }
+
+    /*****************************************************************
+     * Actual Tests
+     ****************************************************************/
+
+    /**
+     * @test
+     *
+     * @return void
+     * @throws StreamException
+     */
+    public function canSyncChangesToFile(): void
+    {
+        $faker = $this->getFaker();
+        $path = $this->outputFilePath($this->syncFile);
+
+        $a = $faker->unique()->sentence();
+        $writeStream = FileStream::open($path, 'w');
+
+        // Add data and sync to file...
+        $writeStream
+            ->put($a)
+            ->sync();
+        ConsoleDebugger::output('Write (a): ' . $a);
+
+        // NOTE: changes are not synced for this operation...
+        $b = $faker->unique()->sentence();
+        $writeStream
+            ->put($b);
+        ConsoleDebugger::output('Write (b): ' . $b);
+
+        // Use a read stream to obtain written data...
+        $readStream = FileStream::open($path, 'r');
+        $result = $readStream->getContents();
+        ConsoleDebugger::output('Read (only a expected): ' . $result);
+
+        // Only the first write should be synced to the file
+        $this->assertSame($a, $result);
+    }
+}

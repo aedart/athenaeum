@@ -17,6 +17,7 @@ use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Codeception\Configuration;
+use Codeception\Exception\ConfigurationException;
 
 /**
  * Stream Test-Case
@@ -87,7 +88,7 @@ abstract class StreamTestCase extends LaravelTestCase
      *
      * @return string
      *
-     * @throws \Codeception\Exception\ConfigurationException
+     * @throws ConfigurationException
      */
     public function outputDir(): string
     {
@@ -108,6 +109,20 @@ abstract class StreamTestCase extends LaravelTestCase
     public function filePath(string $file): string
     {
         return $this->filesDir() . DIRECTORY_SEPARATOR . $file;
+    }
+
+    /**
+     * Returns full path to file in output data directory
+     *
+     * @param string $file
+     *
+     * @return string
+     *
+     * @throws ConfigurationException
+     */
+    public function outputFilePath(string $file): string
+    {
+        return $this->outputDir() . DIRECTORY_SEPARATOR . $file;
     }
 
     /**
@@ -152,7 +167,7 @@ abstract class StreamTestCase extends LaravelTestCase
      * @return FileStream
      *
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
-     * @throws \Codeception\Exception\ConfigurationException
+     * @throws ConfigurationException
      */
     public function openFileStreamForTransaction(string $file, string $mode = 'r+b'): FileStream
     {
