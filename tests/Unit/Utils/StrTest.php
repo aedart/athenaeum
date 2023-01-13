@@ -31,26 +31,4 @@ class StrTest extends UnitTestCase
 
         $this->assertSame('users slug with multiple separators', $output);
     }
-
-    /**
-     * @deprecated Since v6.4. Replaced by {@see \Aedart\Tests\Unit\Utils\ArrTest::canCreateTreeStructure}. Will be removed in next major version.
-     *
-     * @test
-     *
-     * @return void
-     */
-    public function canCreateTreeStructure()
-    {
-        $path = '/home/user/projects';
-        $output = Str::tree($path);
-
-        ConsoleDebugger::output($output);
-
-        $this->assertIsArray($output);
-        $this->assertCount(3, $output);
-
-        $this->assertSame('/home', $output[0]);
-        $this->assertSame('/home/user', $output[1]);
-        $this->assertSame('/home/user/projects', $output[2]);
-    }
 }
