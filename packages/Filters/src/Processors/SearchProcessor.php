@@ -106,7 +106,7 @@ class SearchProcessor extends BaseProcessor
      */
     protected function makeFilter(string $search): Criteria
     {
-        return new SearchFilter($search, $this->columns, $this->language);
+        return new SearchFilter($search, $this->columns);
     }
 
     /**
