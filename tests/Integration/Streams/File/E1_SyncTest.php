@@ -34,10 +34,14 @@ class E1_SyncTest extends StreamTestCase
         parent::_before();
 
         $path = $this->outputFilePath($this->syncFile);
-        if (file_exists($path)) {
-            unlink($path);
+
+        $fs = $this->getFile();
+        $fs->ensureDirectoryExists(dirname($path));
+        if ($fs->exists($path)) {
+            $fs->delete($path);
         }
-        file_put_contents($path, '');
+
+        touch($path);
     }
 
     /*****************************************************************
