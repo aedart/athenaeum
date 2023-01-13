@@ -162,7 +162,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.8-dev"
+            "dev-master": "7.0-dev"
         },
         "extra": {
             "bamarni-bin": {
