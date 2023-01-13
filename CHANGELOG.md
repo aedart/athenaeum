@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Breaking Changes**
 
 * Minimum required PHP version changed to `v8.1`.
+* Adapted CI environment to test PHP `v8.1` and `v8.2`.
 
 **Non-breaking Changes**
 
