@@ -87,8 +87,7 @@ class IfModifiedSinceTest extends PreconditionsTestCase
 
         $evaluator = $this->makeEvaluator(
             request: $request,
-            actions: new class extends DefaultActions
-            {
+            actions: new class() extends DefaultActions {
                 /**
                  * @inheritDoc
                  */
@@ -134,8 +133,7 @@ class IfModifiedSinceTest extends PreconditionsTestCase
 
         $evaluator = $this->makeEvaluator(
             request: $request,
-            actions: new class extends DefaultActions
-            {
+            actions: new class() extends DefaultActions {
                 public function abortNotModified(ResourceContext $resource)
                 {
                     throw new HttpException(304, 'Not modified');

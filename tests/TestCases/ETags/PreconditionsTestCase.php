@@ -47,8 +47,7 @@ abstract class PreconditionsTestCase extends ETagsTestCase
         callable|null $determineStateChangeSuccess = null,
         string $rangeUnit = 'bytes',
         int $maxRangeSets = 5
-    ): ResourceContext
-    {
+    ): ResourceContext {
         return new GenericResource(
             data: $data,
             etag: $etag,

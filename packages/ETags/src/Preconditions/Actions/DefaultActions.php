@@ -8,7 +8,6 @@ use Aedart\ETags\Preconditions\Validators\Exceptions\RangeNotSatisfiable;
 use Ramsey\Collection\CollectionInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
 
 /**

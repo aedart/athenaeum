@@ -30,7 +30,7 @@ class ArbitraryDataTest extends UnitTestCase
      */
     public function makeStore(array $items = []): HasArbitraryData
     {
-        $store = new class implements HasArbitraryData {
+        $store = new class() implements HasArbitraryData {
             use ArbitraryData;
 
             public function __construct(array $items = [])

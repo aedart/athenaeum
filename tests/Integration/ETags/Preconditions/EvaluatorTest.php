@@ -73,8 +73,7 @@ class EvaluatorTest extends PreconditionsTestCase
      */
     public function ignoresRequestWhenMethodNotSupported(): void
     {
-        $precondition = new class extends BasePrecondition
-        {
+        $precondition = new class() extends BasePrecondition {
             public function isApplicable(ResourceContext $resource): bool
             {
                 return true;
@@ -148,8 +147,7 @@ class EvaluatorTest extends PreconditionsTestCase
      */
     public function returnsResourceContextWhenPreconditionsPasses(): void
     {
-        $precondition = new class extends BasePrecondition
-        {
+        $precondition = new class() extends BasePrecondition {
             public function isApplicable(ResourceContext $resource): bool
             {
                 return true;
@@ -196,14 +194,13 @@ class EvaluatorTest extends PreconditionsTestCase
      */
     public function skipsPreconditionsWhenNotApplicable(): void
     {
-        $precondition = function(string|null $name) {
-            return new class($name) extends BasePrecondition
-            {
+        $precondition = function (string|null $name) {
+            return new class($name) extends BasePrecondition {
                 public function __construct(
                     public string|null $name,
                     public bool $isEvaluated = false
-                )
-                {}
+                ) {
+                }
 
                 public function isApplicable(ResourceContext $resource): bool
                 {
@@ -267,8 +264,7 @@ class EvaluatorTest extends PreconditionsTestCase
     public function canGoToAnotherPrecondition(): void
     {
         // The last precondition...
-        $preconditionC = new class extends BasePrecondition
-        {
+        $preconditionC = new class() extends BasePrecondition {
             public function isApplicable(ResourceContext $resource): bool
             {
                 ConsoleDebugger::output('C is applicable');
@@ -295,8 +291,7 @@ class EvaluatorTest extends PreconditionsTestCase
         };
 
         // Should not be triggered
-        $preconditionB = new class extends BasePrecondition
-        {
+        $preconditionB = new class() extends BasePrecondition {
             public function isApplicable(ResourceContext $resource): bool
             {
                 ConsoleDebugger::output('B is applicable');
@@ -323,10 +318,10 @@ class EvaluatorTest extends PreconditionsTestCase
         };
 
         // When A passes, it should return precondition C as its result...
-        $preconditionA = new class($preconditionC::class) extends BasePrecondition
-        {
+        $preconditionA = new class($preconditionC::class) extends BasePrecondition {
             public function __construct(protected string $nextPrecondition)
-            {}
+            {
+            }
 
             public function isApplicable(ResourceContext $resource): bool
             {
@@ -383,8 +378,7 @@ class EvaluatorTest extends PreconditionsTestCase
 
         // -------------------------------------------------------------------------------- //
 
-        $preconditionA = new class extends BasePrecondition
-        {
+        $preconditionA = new class() extends BasePrecondition {
             public function isApplicable(ResourceContext $resource): bool
             {
                 return true;
@@ -430,8 +424,7 @@ class EvaluatorTest extends PreconditionsTestCase
         // -------------------------------------------------------------------------------- //
 
         // A not applicable condition...
-        $preconditionA = new class extends BasePrecondition
-        {
+        $preconditionA = new class() extends BasePrecondition {
             public function isApplicable(ResourceContext $resource): bool
             {
                 ConsoleDebugger::output('A is NOT applicable');
@@ -456,10 +449,10 @@ class EvaluatorTest extends PreconditionsTestCase
         };
 
         // Applicable and passes... but returns first precondition (ranked lower) as result...
-        $preconditionB = new class($preconditionA::class) extends BasePrecondition
-        {
+        $preconditionB = new class($preconditionA::class) extends BasePrecondition {
             public function __construct(protected string $nextPrecondition)
-            {}
+            {
+            }
 
             public function isApplicable(ResourceContext $resource): bool
             {

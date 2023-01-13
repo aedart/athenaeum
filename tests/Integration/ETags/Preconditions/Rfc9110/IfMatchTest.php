@@ -102,7 +102,7 @@ class IfMatchTest extends PreconditionsTestCase
         $etag = Generator::makeStrong('abc');
         $resource = $this->makeResourceContext(
             etag: $etag,
-            determineStateChangeSuccess: function() {
+            determineStateChangeSuccess: function () {
                 return true;
             }
         );
@@ -113,8 +113,7 @@ class IfMatchTest extends PreconditionsTestCase
 
         $evaluator = $this->makeEvaluator(
             request: $request,
-            actions: new class extends DefaultActions
-            {
+            actions: new class() extends DefaultActions {
                 public function abortStateChangeAlreadySucceeded(ResourceContext $resource)
                 {
                     throw new HttpException(200, 'State already changed');

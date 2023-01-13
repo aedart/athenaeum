@@ -37,7 +37,8 @@ class Evaluator implements PreconditionsEvaluator
      * @param  string[]|Precondition[]  $preconditions  [optional] Defaults to predefined preconditions when empty.
      * @param  PreconditionActions|null  $actions  [optional] Defaults to predefined actions when none given.
      */
-    public function __construct(Request $request, array $preconditions = [], PreconditionActions|null $actions = null) {
+    public function __construct(Request $request, array $preconditions = [], PreconditionActions|null $actions = null)
+    {
         $preconditions = !empty($preconditions)
             ? $preconditions
             : $this->getDefaultPreconditions();
@@ -85,7 +86,7 @@ class Evaluator implements PreconditionsEvaluator
 
         $index = 0;
         $count = count($preconditions);
-        while($index < $count) {
+        while ($index < $count) {
 
             // Prepare teh next precondition, Skip to next, if it's not applicable.
             $precondition = $this->preparePrecondition($preconditions[$index]);

@@ -4,7 +4,6 @@ namespace Aedart\ETags\Preconditions;
 
 use Aedart\Contracts\ETags\Preconditions\Precondition;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
-use Aedart\ETags\Preconditions\Concerns;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 /**

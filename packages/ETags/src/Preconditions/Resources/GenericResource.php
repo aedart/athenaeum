@@ -49,7 +49,8 @@ class GenericResource implements ResourceContext
         protected $determineStateChangeSuccess = null,
         protected string $rangeUnit = 'bytes',
         protected int $maxRangeSets = 5
-    ) {}
+    ) {
+    }
 
     /**
      * @inheritDoc

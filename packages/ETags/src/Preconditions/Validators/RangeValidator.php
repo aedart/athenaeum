@@ -45,7 +45,8 @@ class RangeValidator implements RangeValidatorInterface
     public function __construct(
         protected string $rangeUnit = 'bytes',
         protected int $maxRangeSets = 5
-    ) {}
+    ) {
+    }
 
     /**
      * @inheritdoc
@@ -72,7 +73,7 @@ class RangeValidator implements RangeValidatorInterface
 
             // Lastly, each range must be verified...
             return $this->verifyRanges($unit, $collection);
-        } catch(NoRangeException $e) {
+        } catch (NoRangeException $e) {
             // Edge case: no "Range" header available in request. Or [...] An origin server MUST
             // ignore a Range header field that contains a range unit it does not understand [...]
             // Regardless, we just mark range as not applicable.

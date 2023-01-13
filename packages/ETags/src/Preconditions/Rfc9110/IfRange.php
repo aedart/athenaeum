@@ -5,7 +5,6 @@ namespace Aedart\ETags\Preconditions\Rfc9110;
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
-use Aedart\ETags\Preconditions\Rfc9110\Concerns;
 use DateTimeInterface;
 use Illuminate\Support\Carbon;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;

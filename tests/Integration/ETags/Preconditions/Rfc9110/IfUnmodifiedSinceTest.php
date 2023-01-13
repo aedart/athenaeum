@@ -142,7 +142,7 @@ class IfUnmodifiedSinceTest extends PreconditionsTestCase
         $lastModified = now()->subMinutes(7)->toRfc7231String();
         $resource = $this->makeResourceContext(
             lastModifiedDate: Carbon::make($lastModified),
-            determineStateChangeSuccess: function() {
+            determineStateChangeSuccess: function () {
                 return true;
             }
         );
@@ -153,8 +153,7 @@ class IfUnmodifiedSinceTest extends PreconditionsTestCase
 
         $evaluator = $this->makeEvaluator(
             request: $request,
-            actions: new class extends DefaultActions
-            {
+            actions: new class() extends DefaultActions {
                 public function abortStateChangeAlreadySucceeded(ResourceContext $resource)
                 {
                     throw new HttpException(200, 'State already changed');
