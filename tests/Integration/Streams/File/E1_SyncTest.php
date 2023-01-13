@@ -37,7 +37,7 @@ class E1_SyncTest extends StreamTestCase
         if (file_exists($path)) {
             unlink($path);
         }
-        touch($path);
+        file_put_contents($path, '');
     }
 
     /*****************************************************************
