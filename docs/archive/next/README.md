@@ -35,7 +35,7 @@ PHP version `v8.1` is now the minimum required version for Athenaeum.
 
 ### TODO: Other significant features, changes or defect fixes...
 
-TODO: ...
+_Come back later to review new features, changes and fixes..._
 
 
 ## Changelog
