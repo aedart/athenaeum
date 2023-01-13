@@ -59,7 +59,7 @@ If you wish to fix a bug, add new feature, or perhaps change an existing, then p
 * Write your code / changes
 * Create executable test-cases (_prove that your changes are solid!_)
 * Commit and push your changes to your fork-repository
-* Send a pull-request with your changes
+* Send a pull-request with your changes (_please check "Allow edits from maintainers"_)
 * _Drink a [Beer](https://en.wikipedia.org/wiki/Beer) - you earned it_ :)
 
 As soon as I receive the pull-request (_and have time for it_), I will review your changes and merge them into this project. If not, I will inform you why I choose not to.
