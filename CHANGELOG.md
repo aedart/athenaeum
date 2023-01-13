@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * `HttpCaching` concern in `ApiResource`, which can make it easier to set Http Cache Control headers. 
+* Http request preconditions evaluator, with support of RFC9110, in the ETags package.
 
 ### Changed
 
@@ -17,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+* Monorepo builder configuration broken after update.
 * Code style of all packages. Easy coding standard configuration, in `ecs.php`, was previously not applied correctly.
 
 ## [6.8.0] - 2023-01-09
