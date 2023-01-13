@@ -27,7 +27,8 @@ class PackageVersion implements Version
         protected string $version,
         protected string|null $fullVersion = null,
         protected string|null $reference = null
-    ) {}
+    ) {
+    }
 
     /**
      * @inheritDoc

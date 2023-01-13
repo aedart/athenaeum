@@ -35,7 +35,7 @@ class ResponseTest extends ApiResourcesTestCase
         // Prerequisites - we need a route to the resource, with appropriate
         // name...
 
-        Route::get('/games/{id}', function() {
+        Route::get('/games/{id}', function () {
             return response()->json();
         })->name('games.show');
 

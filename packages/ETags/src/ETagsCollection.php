@@ -147,7 +147,7 @@ class ETagsCollection implements Collection
     public function jsonSerialize()
     {
         return array_map(
-            fn(ETag $etag) => $etag->toString(),
+            fn (ETag $etag) => $etag->toString(),
             $this->all()
         );
     }
@@ -157,7 +157,7 @@ class ETagsCollection implements Collection
      */
     public function toString(): string
     {
-        return implode(', ', array_map(fn(ETag $etag) => $etag->toString(), $this->etags));
+        return implode(', ', array_map(fn (ETag $etag) => $etag->toString(), $this->etags));
     }
 
     /**

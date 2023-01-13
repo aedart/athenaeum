@@ -197,7 +197,7 @@ trait IoCPartial
         }
 
         // This means that everything else has failed, and we do not know how to handle the given type.
-        $allowedTypes = implode('|', array_map(function(ReflectionNamedType $type) {
+        $allowedTypes = implode('|', array_map(function (ReflectionNamedType $type) {
             return $type->getName();
         }, $unionTypes));
 

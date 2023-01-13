@@ -37,7 +37,7 @@ class X1_SupportsLockingTest extends StreamTestCase
     public function canDetermineViaCustomCallback()
     {
         $stream = $this->makeTextFileStream()
-            ->setSupportsLockingCallback(fn() => false);
+            ->setSupportsLockingCallback(fn () => false);
 
         $this->assertFalse($stream->supportsLocking());
     }

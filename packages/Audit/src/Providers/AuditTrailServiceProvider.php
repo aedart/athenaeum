@@ -2,8 +2,6 @@
 
 namespace Aedart\Audit\Providers;
 
-use Aedart\Audit\Events\ModelHasChanged;
-use Aedart\Audit\Listeners\RecordAuditTrailEntry;
 use Aedart\Audit\Subscribers\AuditTrailEventSubscriber;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;

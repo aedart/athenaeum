@@ -4,7 +4,6 @@ namespace Aedart\Streams\Meta;
 
 use Aedart\Contracts\Streams\Meta\Repository as MetaRepositoryInterface;
 use Illuminate\Support\Arr;
-use Throwable;
 
 /**
  * Meta Repository
@@ -21,7 +20,8 @@ class Repository implements MetaRepositoryInterface
      */
     public function __construct(
         protected array $data = []
-    ) {}
+    ) {
+    }
 
     /**
      * @inheritDoc

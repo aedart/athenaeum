@@ -34,8 +34,7 @@ class ApiErrorResponse extends JsonResponse
         int $status = HttpStatus::INTERNAL_SERVER_ERROR,
         array $source = [],
         Request|null $request = null
-    ): static
-    {
+    ): static {
         $payload = static::formatPayload($message, $status, $source, $request);
 
         return (new static($payload, $status))
@@ -93,8 +92,7 @@ class ApiErrorResponse extends JsonResponse
         int $status = HttpStatus::INTERNAL_SERVER_ERROR,
         array $source = [],
         Request|null $request = null
-    ): array
-    {
+    ): array {
         return [
             'status' => $status,
             'message' => $message,

@@ -214,8 +214,7 @@ abstract class MimeTypesTestCase extends LaravelTestCase
         string $ext,
         string $type,
         string $encoding
-    ): array
-    {
+    ): array {
         return [[
             $ext,
             $type,

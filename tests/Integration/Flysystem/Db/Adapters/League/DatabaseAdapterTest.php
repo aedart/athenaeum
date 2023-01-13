@@ -23,7 +23,6 @@ use League\Flysystem\FilesystemAdapter;
  */
 class DatabaseAdapterTest extends BaseTestCase
 {
-
     /**
      * Service Container instance
      *
@@ -83,7 +82,7 @@ class DatabaseAdapterTest extends BaseTestCase
         $capsule->setAsGlobal();
 
         // Bind schema builder, so we can run migration manually!
-        $container->singleton('db.schema', function() use($capsule) {
+        $container->singleton('db.schema', function () use ($capsule) {
             return $capsule->getConnection()->getSchemaBuilder();
         });
 

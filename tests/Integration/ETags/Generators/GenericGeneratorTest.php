@@ -35,28 +35,28 @@ class GenericGeneratorTest extends ETagsTestCase
      */
     public function dataProvider(): array
     {
-        $arrayableClass = new class implements Arrayable {
+        $arrayableClass = new class() implements Arrayable {
             public function toArray()
             {
                 return [ 1, 2, 3];
             }
         };
 
-        $jsonableClass = new class implements Jsonable {
+        $jsonableClass = new class() implements Jsonable {
             public function toJson($options = 0)
             {
                 return json_encode([ true ], $options);
             }
         };
 
-        $jsonSerializableClass = new class implements JsonSerializable {
+        $jsonSerializableClass = new class() implements JsonSerializable {
             public function jsonSerialize()
             {
                 return 'something';
             }
         };
 
-        $stringableClass = new class implements Stringable {
+        $stringableClass = new class() implements Stringable {
             public function __toString(): string
             {
                 return 'lipsum...';

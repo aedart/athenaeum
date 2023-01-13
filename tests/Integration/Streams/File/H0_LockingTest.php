@@ -61,8 +61,7 @@ class H0_LockingTest extends StreamTestCase
         $stream = $this->openFileStreamFor('text.txt');
 
         $completed = false;
-        $stream->exclusiveLock(function($lockedStream, $lock) use($stream, &$completed) {
-
+        $stream->exclusiveLock(function ($lockedStream, $lock) use ($stream, &$completed) {
             $this->assertSame($stream, $lockedStream, 'Invalid stream instance given');
             $this->assertInstanceOf(Lock::class, $lock);
 

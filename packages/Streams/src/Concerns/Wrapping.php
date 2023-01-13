@@ -40,7 +40,7 @@ trait Wrapping
             is_resource($data) => $this->wrapResource($data),
             $data instanceof StreamInterface => $data,
             $data instanceof PsrStreamInterface => $this->wrapPsrStream($data),
-            default => Throw new InvalidStreamResource('Unable to convert data to stream. Data appears to be invalid')
+            default => throw new InvalidStreamResource('Unable to convert data to stream. Data appears to be invalid')
         };
     }
 

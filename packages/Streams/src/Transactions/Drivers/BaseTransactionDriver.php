@@ -4,13 +4,13 @@ namespace Aedart\Streams\Transactions\Drivers;
 
 use Aedart\Contracts\Streams\Stream;
 use Aedart\Contracts\Streams\Transactions\Transaction;
+use Aedart\Streams\Exceptions\Transactions\CannotPerformTransactionOnStream;
+use Aedart\Streams\Exceptions\Transactions\FailedToBeginTransaction;
 use Aedart\Streams\Exceptions\Transactions\FailedToCommitTransaction;
 use Aedart\Streams\Exceptions\Transactions\FailedToRollbackTransaction;
-use Aedart\Streams\Exceptions\Transactions\CannotPerformTransactionOnStream;
 use Aedart\Streams\Exceptions\Transactions\TransactionAlreadyCommitted;
 use Aedart\Streams\Exceptions\Transactions\TransactionAlreadyRunning;
 use Aedart\Streams\Exceptions\Transactions\TransactionException;
-use Aedart\Streams\Exceptions\Transactions\FailedToBeginTransaction;
 use Aedart\Utils\Arr;
 use Throwable;
 
@@ -53,8 +53,8 @@ abstract class BaseTransactionDriver implements Transaction
     public function __construct(
         protected Stream $originalStream,
         protected array $options = []
-    )
-    {}
+    ) {
+    }
 
     /**
      * Determine if transaction can be performed for given stream

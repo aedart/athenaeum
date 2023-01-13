@@ -42,8 +42,8 @@ abstract class BaseSampler implements Sampler
     public function __construct(
         protected $data,
         protected array $options = []
-    )
-    {}
+    ) {
+    }
 
     /**
      * @inheritDoc
@@ -135,7 +135,7 @@ abstract class BaseSampler implements Sampler
      */
     protected function takeSample(mixed $data, int|null $length = null): string
     {
-        return match(true) {
+        return match (true) {
             is_string($data) => $this->takeSampleOfString($data, $length),
             is_resource($data) => $this->takeSampleOfStream($data, $length),
             default => throw new UnsupportedSampleData(sprintf('Cannot take sample. Type %s is not supported', gettype($data)))

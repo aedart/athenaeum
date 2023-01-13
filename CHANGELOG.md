@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Http conditional request evaluator, with support of [RFC9110 preconditions](https://developer.mozilla.org/en-US/docs/Web/HTTP/Conditional_requests), in the ETags package.
+* `HttpCaching` concern in `ApiResource`, which can make it easier to set Http Cache Control headers.
+
+### Changed
+
+* `getResourceKeyName()` in `ApiResource` now throws `LogicException`, if unable to determine resource's identifier key name.
+
+### Fixed
+
+* Monorepo builder configuration broken after update.
+* Code style of all packages. Easy coding standard configuration, in `ecs.php`, was previously not applied correctly.
+
 ## [6.8.0] - 2023-01-09
 
 ### Changed

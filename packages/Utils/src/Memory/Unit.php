@@ -133,7 +133,7 @@ class Unit implements
         $parsedValue = (float) $matches['value'];
         $unit = strtolower($matches['unit']);
 
-        return match($unit) {
+        return match ($unit) {
             // byte
             'b', 'byte', 'bytes' => static::make($parsedValue),
 
@@ -216,9 +216,9 @@ class Unit implements
     
     /**
      * Returns unit's value in bytes
-     * 
+     *
      * Bytes are the lowest value of memory unit.
-     * 
+     *
      * @return int
      */
     public function bytes(): int
@@ -760,8 +760,7 @@ class Unit implements
         bool $short = true,
         array $units = self::BINARY_UNITS,
         int $step = self::BINARY_VALUE
-    ): string
-    {
+    ): string {
         // Source inspired by: https://gist.github.com/liunian/9338301
         $bytes = $this->bytes;
 
@@ -796,7 +795,7 @@ class Unit implements
             $i++;
         }
 
-        return round($bytes, $precision). ' ' . $units[$i];
+        return round($bytes, $precision) . ' ' . $units[$i];
     }
 
     /**
@@ -821,10 +820,10 @@ class Unit implements
 
     /**
      * Divide unit's bytes with given value
-     * 
+     *
      * @param  int|float  $value
      * @param  int  $precision  [optional]
-     * 
+     *
      * @return float
      */
     protected function divideBytes(int|float $value, int $precision = 1): float

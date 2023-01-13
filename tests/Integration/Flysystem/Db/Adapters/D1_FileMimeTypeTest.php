@@ -89,7 +89,7 @@ class D1_FileMimeTypeTest extends FlysystemDbTestCase
 
         $customMimeType = 'application/ext-other';
         $adapter = new DatabaseAdapter('files', 'file_contents');
-        $adapter->detectMimeTypeUsing(function() use($customMimeType) {
+        $adapter->detectMimeTypeUsing(function () use ($customMimeType) {
             return $customMimeType;
         });
 

@@ -210,7 +210,7 @@ class X0_MiscTest extends StreamTestCase
         $remoteStream = Stream::make($resource);
         $localStream = $this->makeTextFileStream();
 
-        $this->assertFalse($remoteStream->isLocal(),'Remote cannot be local');
+        $this->assertFalse($remoteStream->isLocal(), 'Remote cannot be local');
         $this->assertTrue($remoteStream->isRemote(), 'Remote should be "remote"');
 
         $this->assertTrue($localStream->isLocal(), 'Local should be "local"');

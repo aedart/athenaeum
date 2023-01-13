@@ -65,11 +65,11 @@ class HasManyReferenceTest extends ApiResourcesTestCase
         // Prerequisites - we need a route to the resource, with appropriate
         // name...
 
-        Route::get('/owners/{id}', function() {
+        Route::get('/owners/{id}', function () {
             return response()->json();
         })->name('owners.show');
 
-        Route::get('/addresses/{id}', function() {
+        Route::get('/addresses/{id}', function () {
             return response()->json();
         })->name('addresses.show');
 
@@ -96,12 +96,12 @@ class HasManyReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new AddressResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 // Manually add relation
                 $payload['owners'] = $resource
                     ->hasManyReference('owners')
                     ->usePrimaryKey('id', 'ID')
-                    ->withLabel(function(Owner $model) {
+                    ->withLabel(function (Owner $model) {
                         return $model->name;
                     })
                     ->withSelfLink()
@@ -152,7 +152,7 @@ class HasManyReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new AddressResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 // Manually add relation
                 $payload['owners'] = $resource
                     ->hasManyReference('owners');
@@ -186,7 +186,7 @@ class HasManyReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new AddressResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 // Manually add relation
                 $payload['owners'] = $resource
                     ->hasManyReference('owners');

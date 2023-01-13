@@ -180,8 +180,7 @@ class Issue extends RedmineApiResource implements
         array $attachments,
         array $include = [],
         string|Connection|null $connection = null
-    ): static
-    {
+    ): static {
         $resource = static::make($data, $connection);
 
         // Ensure that "attachments" are automatically included,

@@ -58,13 +58,13 @@ class ETag implements ETagInterface
         $values = preg_split('/\s*,\s*/', $rawHeaderValue, -1, PREG_SPLIT_NO_EMPTY);
 
         $etags = array_map(
-            fn($value) => static::parseSingle($value),
+            fn ($value) => static::parseSingle($value),
             $values
         );
 
         return IoCFacade::tryMake(
             abstract: Collection::class,
-            default: fn() => ETagsCollection::make($etags),
+            default: fn () => ETagsCollection::make($etags),
             parameters: $etags
         );
     }

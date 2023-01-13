@@ -34,7 +34,7 @@ class GameFactory extends Factory
             'slug' => $faker->unique()->slug(3),
             'name' => 'Game: ' . $faker->text(10),
             'description' => $faker->realText(150),
-            'owner_id' => function() {
+            'owner_id' => function () {
                 return Owner::factory()->create();
             }
         ];

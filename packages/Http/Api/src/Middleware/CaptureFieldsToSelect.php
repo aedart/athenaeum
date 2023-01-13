@@ -79,7 +79,7 @@ class CaptureFieldsToSelect
      */
     protected function save(array $fields): void
     {
-        $this->getContainer()->singleton(SelectedFieldsCollectionInstance::class, function() use ($fields) {
+        $this->getContainer()->singleton(SelectedFieldsCollectionInstance::class, function () use ($fields) {
             return new SelectedFieldsCollection($fields);
         });
     }
@@ -109,7 +109,7 @@ class CaptureFieldsToSelect
             explode(',', $input)
         );
 
-        return array_map(function($field) {
+        return array_map(function ($field) {
             return strtolower(trim($field));
         }, $fields);
     }

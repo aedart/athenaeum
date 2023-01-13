@@ -29,8 +29,7 @@ trait Locking
         float $timeout = 0.5,
         string|null $profile = null,
         array $options = []
-    ): mixed
-    {
+    ): mixed {
         $lock = $this->getLockFactory()->create($this, $profile, $options);
 
         try {
@@ -58,8 +57,7 @@ trait Locking
         float $timeout = 0.5,
         string|null $profile = null,
         array $options = []
-    ): mixed
-    {
+    ): mixed {
         return $this->lock(
             $operation,
             LockTypes::EXCLUSIVE,
@@ -77,8 +75,7 @@ trait Locking
         float $timeout = 0.5,
         string|null $profile = null,
         array $options = []
-    ): mixed
-    {
+    ): mixed {
         return $this->lock(
             $operation,
             LockTypes::SHARED,

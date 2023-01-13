@@ -79,8 +79,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
         string $operator = '=',
         mixed $value = null,
         string $logical = FieldCriteria::AND
-    ): static
-    {
+    ): static {
         return new static($field, $operator, $value, $logical);
     }
 

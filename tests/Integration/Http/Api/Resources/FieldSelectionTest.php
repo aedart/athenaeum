@@ -198,7 +198,7 @@ class FieldSelectionTest extends ApiResourcesTestCase
         // Bind selected fields collection
 
         $select = [ 'name', 'updated_at' ];
-        IoCFacade::singleton(SelectedFieldsCollectionInterface::class, function() use($select) {
+        IoCFacade::singleton(SelectedFieldsCollectionInterface::class, function () use ($select) {
             return new SelectedFieldsCollection($select);
         });
 

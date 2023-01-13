@@ -47,7 +47,7 @@ class RelationsFilteringTest extends FiltersTestCase
         $query = $category
             ->products()
             ->applyFilters($filters);
-            //->dd();
+        //->dd();
 
         $sql = $query->toSql();
 

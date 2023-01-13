@@ -4,11 +4,13 @@ namespace Aedart\ETags\Providers;
 
 use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\Factory as ETagGeneratorFactory;
+use Aedart\Contracts\ETags\Preconditions\RangeValidator as RangeValidatorInterface;
 use Aedart\ETags\ETag;
 use Aedart\ETags\ETagsCollection;
 use Aedart\ETags\Factory;
 use Aedart\ETags\Mixins\RequestETagsMixin;
 use Aedart\ETags\Mixins\ResponseETagsMixin;
+use Aedart\ETags\Preconditions\Validators\RangeValidator;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -33,13 +35,19 @@ class ETagsServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function register()
     {
-        // Register the ETag class path that the generator factory
-        // must use...
+        // Register ETag class path that generator factory must use...
         // @see \Aedart\ETags\Factory::eTagClass
-        $this->app->singleton('etag_class', fn() => ETag::class);
+        $this->app->singleton('etag_class', fn () => ETag::class);
 
-        $this->app->bind(Collection::class, function($app, array $etags = []) {
+        $this->app->bind(Collection::class, function ($app, array $etags = []) {
             return ETagsCollection::make($etags);
+        });
+
+        $this->app->bind(RangeValidatorInterface::class, function ($app, array $arguments = []) {
+            $rangeUnit = $arguments['rangeUnit'] ?? 'bytes';
+            $maxRangeSets = $arguments['maxRangeSets'] ?? 5;
+
+            return new RangeValidator($rangeUnit, $maxRangeSets);
         });
     }
 
@@ -63,7 +71,8 @@ class ETagsServiceProvider extends ServiceProvider implements DeferrableProvider
         return [
             ETagGeneratorFactory::class,
             Collection::class,
-            'etag_class'
+            'etag_class',
+            RangeValidatorInterface::class
         ];
     }
 

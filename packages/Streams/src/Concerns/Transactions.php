@@ -27,8 +27,7 @@ trait Transactions
         int $attempts = 1,
         string|null $profile = null,
         array $options = []
-    ): mixed
-    {
+    ): mixed {
         return $this
             ->getTransactionFactory()
             ->create($this, $profile, $options)

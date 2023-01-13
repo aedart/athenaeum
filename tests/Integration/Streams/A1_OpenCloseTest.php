@@ -68,7 +68,7 @@ class A1_OpenCloseTest extends StreamTestCase
         $this->assertFalse($stream->isOpen());
 
         $stream->openUsing(function () {
-           return fopen('php://memory', 'r+b');
+            return fopen('php://memory', 'r+b');
         });
         $this->assertTrue($stream->isOpen());
     }

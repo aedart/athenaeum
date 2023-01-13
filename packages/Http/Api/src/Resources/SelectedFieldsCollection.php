@@ -19,7 +19,8 @@ class SelectedFieldsCollection implements SelectedFieldsCollectionInterface
      */
     public function __construct(
         protected array $fields = []
-    ){}
+    ) {
+    }
 
     /**
      * @inheritDoc

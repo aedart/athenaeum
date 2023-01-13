@@ -53,8 +53,7 @@ class Json
         bool $assoc = false,
         int $depth = 512,
         int $options = 0
-    ): mixed
-    {
+    ): mixed {
         $options |= JSON_THROW_ON_ERROR;
 
         return json_decode($json, $assoc, $depth, $options);

@@ -146,8 +146,7 @@ abstract class RedmineApiResource extends ArrayDto implements
         int $offset = 0,
         array $include = [],
         string|ConnectionInterface|null $connection = null
-    ): PaginatedResultsInterface
-    {
+    ): PaginatedResultsInterface {
         return static::fetchMultiple(function (Builder $request, ApiResource $resource) use ($include) {
             return $resource->applyIncludes($include, $request);
         }, $limit, $offset, $connection);
@@ -200,8 +199,7 @@ abstract class RedmineApiResource extends ArrayDto implements
         int $limit = 10,
         int $offset = 0,
         string|ConnectionInterface|null $connection = null
-    ): PaginatedResultsInterface
-    {
+    ): PaginatedResultsInterface {
         $resource = static::make([], $connection);
 
         return $resource->paginate(

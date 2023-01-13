@@ -312,8 +312,7 @@ abstract class BaseFieldFilter extends FieldFilter
         string $low = '>=',
         string $high = '<=',
         int $offset = 1
-    ): Builder|EloquentBuilder
-    {
+    ): Builder|EloquentBuilder {
         // The general database datetime format to use.
         $format = $this->datetimeFormat;
 

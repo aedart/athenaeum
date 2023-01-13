@@ -1,13 +1,12 @@
 <?php
 
+use Aedart\Contracts\Flysystem\Db\RecordTypes;
+use Aedart\Contracts\Flysystem\Visibility;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Aedart\Contracts\Flysystem\Visibility;
-use Aedart\Contracts\Flysystem\Db\RecordTypes;
 
-return new class extends Migration
-{
+return new class() extends Migration {
     /**
      * Table name where files and directories are to
      * be stored

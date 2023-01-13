@@ -35,7 +35,7 @@ trait SelfLink
     public function withSelfLink(string|callable $link): static
     {
         if (is_string($link)) {
-            $link = fn() => $link;
+            $link = fn () => $link;
         }
 
         $this->selfLinkCallback = $link;

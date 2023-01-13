@@ -10,7 +10,6 @@ use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Contracts\Streams\Transactions\Transactions;
 use Aedart\MimeTypes\Concerns\MimeTypeDetection;
 use Aedart\MimeTypes\Exceptions\MimeTypeDetectionException;
-use Aedart\Streams\Concerns;
 use Aedart\Streams\Exceptions\CannotOpenStream;
 use Aedart\Streams\Exceptions\StreamException;
 use Throwable;
@@ -101,8 +100,7 @@ class FileStream extends Stream implements
         int|null $length = null,
         int $offset = 0,
         int|null $maximumMemory = null
-    ): static
-    {
+    ): static {
         $this
             ->positionToEnd()
             ->performCopy(

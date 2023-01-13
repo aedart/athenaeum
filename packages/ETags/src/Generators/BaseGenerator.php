@@ -37,7 +37,8 @@ abstract class BaseGenerator implements Generator
      */
     public function __construct(
         protected array $options = []
-    ) {}
+    ) {
+    }
 
     /**
      * @inheritDoc

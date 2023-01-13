@@ -70,8 +70,7 @@ trait ModelChangedEvents
         array|null $original = null,
         array|null $changed = null,
         string|null $message = null
-    ): static
-    {
+    ): static {
         // Resolve models argument
         if (!($models instanceof Collection)) {
             $models = collect($models);
@@ -145,8 +144,7 @@ trait ModelChangedEvents
         array|null $original = null,
         array|null $changed = null,
         string|null $message = null
-    ): MultipleModelsChanged
-    {
+    ): MultipleModelsChanged {
         return new MultipleModelsChanged(
             $models,
             $this->user(),

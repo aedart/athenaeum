@@ -83,8 +83,7 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
 
         $newData = $this->getFaker()->realText();
         $hasProcessed = false;
-        $transaction->process(function(FileStream $processStream, Transaction $transaction) use($newData, &$hasProcessed) {
-
+        $transaction->process(function (FileStream $processStream, Transaction $transaction) use ($newData, &$hasProcessed) {
             $this->assertNotNull($transaction->stream(), 'Transaction lost reference to transaction');
 
             $processStream->append($newData);
@@ -186,8 +185,7 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
         $captured = false;
 
         try {
-            $transaction->process(function(FileStream $processStream) use($failMsg) {
-
+            $transaction->process(function (FileStream $processStream) use ($failMsg) {
                 $processStream->truncate(0);
                 throw new RuntimeException($failMsg);
             });
@@ -222,7 +220,7 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
         $failMsg = '@test - transaction attempts test';
 
         try {
-            $transaction->process(function() use(&$attempt, $failMsg) {
+            $transaction->process(function () use (&$attempt, $failMsg) {
                 $attempt++;
 
                 throw new RuntimeException($failMsg);

@@ -122,8 +122,7 @@ class Relation extends RedmineApiResource implements
         string $type = self::RELATES,
         float|null $delay = null,
         string|Connection|null $connection = null
-    ): static
-    {
+    ): static {
         $resource = static::make([
             'issue_id' => $parent,
             'issue_to_id' => $related,

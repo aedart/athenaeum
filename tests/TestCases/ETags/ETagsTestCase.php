@@ -9,7 +9,6 @@ use Aedart\Contracts\ETags\Generator;
 use Aedart\ETags\Providers\ETagsServiceProvider;
 use Aedart\ETags\Traits\ETagGeneratorFactoryTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
-use Aedart\Utils\Arr;
 use Codeception\Configuration;
 use Illuminate\Http\Request;
 
@@ -111,8 +110,7 @@ abstract class ETagsTestCase extends LaravelTestCase
         string|null $ifRange = null,
         string|null $range = null,
         string $method = 'post'
-    ): Request
-    {
+    ): Request {
         $headers = array_filter([
             'HTTP_IF_MATCH' => $ifMatch,
             'HTTP_IF_NONE_MATCH' => $ifNoneMatch,
@@ -120,7 +118,7 @@ abstract class ETagsTestCase extends LaravelTestCase
             'HTTP_IF_UNMODIFIED_SINCE' => $ifUnmodifiedSince,
             'HTTP_IF_RANGE' => $ifRange,
             'HTTP_RANGE' => $range,
-        ], fn($value) => !empty($value));
+        ], fn ($value) => !empty($value));
 
         return Request::create('/test', strtoupper($method), [], [], [], $headers);
     }

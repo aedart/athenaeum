@@ -2,6 +2,8 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Http\Api\Models;
 
+use Aedart\Contracts\ETags\HasEtag;
+use Aedart\ETags\Concerns\EloquentEtag;
 use Aedart\Redmine\Collections\Collection;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,9 +26,10 @@ use Illuminate\Support\Carbon;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Http\Api\Models
  */
-class User extends Model
+class User extends Model implements HasEtag
 {
     use HasFactory;
+    use EloquentEtag;
 
     /**
      * The table associated with the model.

@@ -71,7 +71,7 @@ if (!function_exists('config_path')) {
     }
 }
 
-if (! function_exists('lang_path')) {
+if (!function_exists('lang_path')) {
     /**
      * Get path to language files.
      *

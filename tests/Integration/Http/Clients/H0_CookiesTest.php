@@ -10,9 +10,6 @@ use Aedart\Contracts\Http\Cookies\SetCookie;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use DateTime;
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Carbon;
 use Teapot\StatusCode;
@@ -146,7 +143,7 @@ class H0_CookiesTest extends HttpClientsTestCase
     public function canAddCookieUsingCallback(string $profile)
     {
         $domain = 'https://acme.com';
-        $cookie = function (Cookie|SetCookie $cookie) use($domain) {
+        $cookie = function (Cookie|SetCookie $cookie) use ($domain) {
             $cookie
                 ->name('foo')
                 ->domain($domain)

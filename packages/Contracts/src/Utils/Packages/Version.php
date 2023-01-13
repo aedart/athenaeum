@@ -14,21 +14,21 @@ interface Version extends Stringable
 {
     /**
      * Returns the package name
-     * 
+     *
      * @return string
      */
     public function name(): string;
     
     /**
      * Returns the "pretty" or short version
-     * 
+     *
      * @return string
      */
     public function version(): string;
 
     /**
      * Returns the full version, if available
-     * 
+     *
      * @return string|null
      */
     public function fullVersion(): string|null;

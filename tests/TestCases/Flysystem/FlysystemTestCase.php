@@ -12,5 +12,4 @@ use Aedart\Testing\TestCases\LaravelTestCase;
  */
 abstract class FlysystemTestCase extends LaravelTestCase
 {
-
 }
