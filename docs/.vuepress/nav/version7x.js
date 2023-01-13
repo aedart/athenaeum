@@ -456,6 +456,7 @@ module.exports.sidebar = function(){
                         'streams/usage/writing',
                         'streams/usage/size',
                         'streams/usage/truncate',
+                        'streams/usage/sync',
                         'streams/usage/flush',
                         'streams/usage/hash',
                         'streams/usage/mime-type',
