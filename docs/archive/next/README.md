@@ -33,6 +33,16 @@ These are the highlights of the latest major version of Athenaeum.
 PHP version `v8.1` is now the minimum required version for Athenaeum.
 [Laravel `v10.x`](https://laravel.com/docs/10.x/releases) packages are now used.
 
+### Stream `hash()` accept hashing options
+
+Streams now accept and apply [hashing options](https://www.php.net/manual/en/function.hash-init) in `hash()` method. This was previously also supported, but required PHP `v8.1`.
+PHP version check is no longer performed internally. See [documentation](./streams/usage/hash.md) for more details.
+
+### Stream `sync()` is now supported
+
+File streams can now have their content synchronised to file, via the `sync()` method.
+See [example](./streams/usage/sync.md).
+
 ### TODO: Other significant features, changes or defect fixes...
 
 _Come back later to review new features, changes and fixes..._
