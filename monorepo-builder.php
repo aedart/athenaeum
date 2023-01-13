@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection;
-use Symplify\MonorepoBuilder\ValueObject\Option;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\AddTagToChangelogReleaseWorker;
+use Symplify\MonorepoBuilder\Config\MBConfig;
+use Symplify\MonorepoBuilder\ComposerJsonManipulator\ValueObject\ComposerJsonSection;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetCurrentMutualDependenciesReleaseWorker;
@@ -14,20 +12,24 @@ use Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateBranchAliasReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateReplaceReleaseWorker;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $parameters = $containerConfigurator->parameters();
+/**
+ * Mono-repository configuration
+ *
+ * @see https://github.com/symplify/monorepo-builder
+ */
+return static function (MBConfig $config): void {
 
     // Set the default branch name (used to be "master")...
-    $parameters->set(Option::DEFAULT_BRANCH_NAME, 'main');
+    $config->defaultBranch('main');
 
     // Location of packages...etc
-    $parameters->set(Option::PACKAGE_DIRECTORIES, [
+    $config->packageDirectories([
         // default value
         __DIR__ . '/packages',
     ]);
 
     // Remove from root composer.json
-    $parameters->set(Option::DATA_TO_REMOVE, [
+    $config->dataToRemove([
         ComposerJsonSection::REQUIRE => [
             // the line is removed by key, so version is irrelevant, thus *
             'codeception/codeception' => '*',
@@ -38,7 +40,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ]);
 
     // Append to root composer.json
-    $parameters->set(Option::DATA_TO_APPEND, [
+    $config->dataToAppend([
         ComposerJsonSection::REQUIRE_DEV => [
             'ext-sockets' => '*',
             'ext-curl' => '*',
@@ -64,15 +66,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ]);
 
     // Packages
-//    $parameters->set(Option::PACKAGE_DIRECTORIES, [
+//    $config->packageDirectories([
 //
 //    ]);
 
     // Package alias format
-    $parameters->set(Option::PACKAGE_ALIAS_FORMAT, '<major>.<minor>.x-dev');
+    $config->packageAliasFormat('<major>.<minor>.x-dev');
 
     // Section order in composer.json files
-    $parameters->set(Option::SECTION_ORDER, [
+    $config->composerSectionOrder([
         'name',
         'type',
         'description',
@@ -103,15 +105,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      * Release Workers
      ****************************************************************/
 
-    $services = $containerConfigurator->services();
-
-    # release workers - in order to execute
-    $services->set(UpdateReplaceReleaseWorker::class);
-    $services->set(SetCurrentMutualDependenciesReleaseWorker::class);
-//    $services->set(AddTagToChangelogReleaseWorker::class);
-    $services->set(TagVersionReleaseWorker::class);
-    $services->set(PushTagReleaseWorker::class);
-    $services->set(SetNextMutualDependenciesReleaseWorker::class);
-    $services->set(UpdateBranchAliasReleaseWorker::class);
-    $services->set(PushNextDevReleaseWorker::class);
+    $config->workers([
+        UpdateReplaceReleaseWorker::class,
+        SetCurrentMutualDependenciesReleaseWorker::class,
+        // AddTagToChangelogReleaseWorker::class,
+        TagVersionReleaseWorker::class,
+        PushTagReleaseWorker::class,
+        SetNextMutualDependenciesReleaseWorker::class,
+        UpdateBranchAliasReleaseWorker::class,
+        PushNextDevReleaseWorker::class,
+    ]);
 };
