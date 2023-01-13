@@ -13,7 +13,7 @@ The method accepts a number of arguments;
 * `bool $binary`: (_optional_) If `true`, outputs raw binary data.
 * `int $flags`: (_optional_) Optional settings for hash generation
 * `string $key`: (_optional_) Shared secret key, when `HASH_HMAC` specified in `$flags`
-* `array $options`: (_optional_) Options for the specified hashing algorithm (_from PHP `v8.1` only!_)
+* `array $options`: (_optional_) Options for the specified hashing algorithm
 
 ```php
 $stream = FileStream::open('persons.txt', 'rb');
