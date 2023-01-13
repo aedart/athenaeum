@@ -71,8 +71,7 @@ class DefaultActions implements Actions
         int $totalSize,
         string $rangeUnit,
         ?string $reason = null
-    ): never
-    {
+    ): never {
         // E.g. abort(response()->json(...));
 
         $reason = $reason ?? '';
