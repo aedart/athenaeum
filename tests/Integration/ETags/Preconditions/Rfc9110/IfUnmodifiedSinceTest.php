@@ -154,7 +154,7 @@ class IfUnmodifiedSinceTest extends PreconditionsTestCase
         $evaluator = $this->makeEvaluator(
             request: $request,
             actions: new class() extends DefaultActions {
-                public function abortStateChangeAlreadySucceeded(ResourceContext $resource)
+                public function abortStateChangeAlreadySucceeded(ResourceContext $resource): never
                 {
                     throw new HttpException(200, 'State already changed');
                 }

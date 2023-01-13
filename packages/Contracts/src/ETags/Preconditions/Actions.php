@@ -33,7 +33,7 @@ interface Actions
      *
      * @throws HttpExceptionInterface
      */
-    public function abortStateChangeAlreadySucceeded(ResourceContext $resource);
+    public function abortStateChangeAlreadySucceeded(ResourceContext $resource): never;
 
     /**
      * Abort request with a "412 Precondition Failed" client error
@@ -46,7 +46,7 @@ interface Actions
      *
      * @throws HttpExceptionInterface
      */
-    public function abortPreconditionFailed(ResourceContext $resource);
+    public function abortPreconditionFailed(ResourceContext $resource): never;
 
     /**
      * Abort request with a "304 Not Modified"
@@ -59,7 +59,7 @@ interface Actions
      *
      * @throws HttpExceptionInterface
      */
-    public function abortNotModified(ResourceContext $resource);
+    public function abortNotModified(ResourceContext $resource): never;
 
     /**
      * Abort request with a "400 Bad Request"
@@ -73,7 +73,7 @@ interface Actions
      *
      * @throws HttpExceptionInterface
      */
-    public function abortBadRequest(ResourceContext $resource, string|null $reason = null);
+    public function abortBadRequest(ResourceContext $resource, string|null $reason = null): never;
 
     /**
      * Abort request with a "416 Range Not Satisfiable"
@@ -96,7 +96,7 @@ interface Actions
         int $totalSize,
         string $rangeUnit,
         string|null $reason = null
-    );
+    ): never;
 
     /**
      * Process "Range" header and response "206 Partial Content"

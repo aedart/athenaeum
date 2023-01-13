@@ -23,7 +23,7 @@ class DefaultActions implements Actions
     /**
      * @inheritDoc
      */
-    public function abortStateChangeAlreadySucceeded(ResourceContext $resource)
+    public function abortStateChangeAlreadySucceeded(ResourceContext $resource): never
     {
         // E.g. abort(response()->json(...));
 
@@ -33,7 +33,7 @@ class DefaultActions implements Actions
     /**
      * @inheritDoc
      */
-    public function abortPreconditionFailed(ResourceContext $resource)
+    public function abortPreconditionFailed(ResourceContext $resource): never
     {
         // E.g. abort(response()->json(...));
 
@@ -43,7 +43,7 @@ class DefaultActions implements Actions
     /**
      * @inheritDoc
      */
-    public function abortNotModified(ResourceContext $resource)
+    public function abortNotModified(ResourceContext $resource): never
     {
         // E.g. abort(response()->json(...));
 
@@ -53,7 +53,7 @@ class DefaultActions implements Actions
     /**
      * @inheritDoc
      */
-    public function abortBadRequest(ResourceContext $resource, ?string $reason = null)
+    public function abortBadRequest(ResourceContext $resource, ?string $reason = null): never
     {
         // E.g. abort(response()->json(...));
 
@@ -71,7 +71,8 @@ class DefaultActions implements Actions
         int $totalSize,
         string $rangeUnit,
         ?string $reason = null
-    ) {
+    ): never
+    {
         // E.g. abort(response()->json(...));
 
         $reason = $reason ?? '';

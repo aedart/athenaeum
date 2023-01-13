@@ -84,7 +84,7 @@ class IfNoneMatchTest extends PreconditionsTestCase
         $evaluator = $this->makeEvaluator(
             request: $request,
             actions: new class() extends DefaultActions {
-                public function abortNotModified(ResourceContext $resource)
+                public function abortNotModified(ResourceContext $resource): never
                 {
                     throw new HttpException(304, 'Not modified');
                 }
@@ -125,7 +125,7 @@ class IfNoneMatchTest extends PreconditionsTestCase
         $evaluator = $this->makeEvaluator(
             request: $request,
             actions: new class() extends DefaultActions {
-                public function abortNotModified(ResourceContext $resource)
+                public function abortNotModified(ResourceContext $resource): never
                 {
                     throw new HttpException(304, 'Not modified');
                 }
