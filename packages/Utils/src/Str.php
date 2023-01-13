@@ -25,26 +25,4 @@ class Str extends BaseStr
     {
         return static::of($slug)->replace($separator, ' ');
     }
-
-    /**
-     * @deprecated Since v6.4. Replaced by {@see \Aedart\Utils\Arr::tree}. Will be removed in next major version.
-     *
-     * Returns an array that represents a "tree" structure for given string.
-     *
-     * Example:
-     * ```
-     * $tree = Str::tree('/home/user/projects')
-     *
-     * // [ '/home', '/home/user', '/home/user/projects' ]
-     * ```
-     *
-     * @param string $str
-     * @param string $delimiter [optional]
-     *
-     * @return string[]
-     */
-    public static function tree(string $str, string $delimiter = '/'): array
-    {
-        return Arr::tree($str, $delimiter);
-    }
 }
