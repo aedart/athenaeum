@@ -43,8 +43,6 @@ $version = Version::application();
 
 ### Version file
 
-_**Available since** `v6.1.x`_
-
 By default, the `application()` method will return the root package's version, obtained via composer.
 If this does not work for you, then you can choose to specify a "version file" as argument.
 

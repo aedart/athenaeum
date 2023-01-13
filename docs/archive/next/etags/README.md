@@ -5,8 +5,6 @@ sidebarDepth: 0
 
 # ETags
 
-_**Available since** `v6.6.x`_
-
 Provides a "profile" based approach to generate [ETags](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag) of content, in your Laravel application.
 The default provided implementation is able to generate ETags for [weak and strong comparisons](https://httpwg.org/specs/rfc9110.html#entity.tag.comparison).
 
