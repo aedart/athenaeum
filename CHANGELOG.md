@@ -29,6 +29,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Monorepo builder configuration broken after update.
 * Code style of all packages. Easy coding standard configuration, in `ecs.php`, was previously not applied correctly.
 
+### Removed
+
+* `SearchProcessor::language()`. Features didn't work as intended. No replacement has been implemented.
+* `Str::tree()`. Replaced by `Arr::tree()`.
+
 ## [6.8.0] - 2023-01-09
 
 ### Changed

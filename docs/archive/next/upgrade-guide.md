@@ -19,6 +19,15 @@ You need PHP `v8.1` or higher to run Athenaeum packages.
 
 Please read Laravel's [upgrade guide](https://laravel.com/docs/10.x/upgrade), before continuing here.
 
+### Removed `SearchProcessor::language()`
+
+The deprecated `\Aedart\Filters\Processors\SearchProcessor::language()` method has been removed. This features didn't work as intended.
+No replacement has been implemented.
+
+### Removed `Str::tree()`
+
+`\Aedart\Utils\Str::tree()` was deprecated in `v6.4`. It has been replaced by `\Aedart\Utils\Arr::tree()`.
+
 ## Onward
 
 More extensive details can be found in the [changelog](https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md).
