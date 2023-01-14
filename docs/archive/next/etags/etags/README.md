@@ -1,5 +1,5 @@
 ---
-description: How to use ETag package
+description: How to work with ETags
 sidebarDepth: 0
 ---
 
@@ -45,7 +45,7 @@ To obtain a `Generator` for a different profile, simply specify the profile's na
 $generator = $factory->profile('my-custom-profile');
 ```
 
-For more information, see [Generator documentation](etags/generators/README.md).
+For more information, see [Generator documentation](./generators/README.md).
 
 ## Make an Etag
 
@@ -155,9 +155,9 @@ echo $etag->isWildcard(); // true
 You have the following two comparison options, when you want to compare etags:
 
 * **strong comparison**: _two entity tags are equivalent if both are not weak and their opaque-tags match character-by-character (source [RFC-9110]((https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2)))._
-* **weak comparison**: _two entity tags are equivalent if their opaque-tags match character-by-character, regardless of either or both being tagged as "weak" (source [RFC-9110]((https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2)))._ 
+* **weak comparison**: _two entity tags are equivalent if their opaque-tags match character-by-character, regardless of either or both being tagged as "weak" (source [RFC-9110]((https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2)))._
 
-Please read RFC-9110's description of [`If-Match`](https://httpwg.org/specs/rfc9110.html#field.if-match), 
+Please read RFC-9110's description of [`If-Match`](https://httpwg.org/specs/rfc9110.html#field.if-match),
 [`If-None-Match`](https://httpwg.org/specs/rfc9110.html#field.if-none-match) Http headers,
 and [how the comparison works](https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2)
 to understand the difference and when to use either of the comparison methods.
@@ -186,7 +186,7 @@ echo $collection->contains($etag, true); // false - strong comparison
 echo $collection->contains($etag);       // true - weak comparison
 ```
 
-You may also compare against a string etag value directly.  
+You may also compare against a string etag value directly.
 
 ```php
 echo $collection->contains('W/"c3pio784"', true); // false - strong comparison
@@ -195,7 +195,7 @@ echo $collection->contains('W/"c3pio784"');       // true - weak comparison
 
 ### Via ETag
 
-To compare two `ETag` instances against each other, use the `matches()` method. 
+To compare two `ETag` instances against each other, use the `matches()` method.
 
 ```php
 $etagA = Generator::parseSingle('W/"r2d23574"');

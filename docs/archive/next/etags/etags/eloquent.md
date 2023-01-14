@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Eloquent Models
 
-Although the default provided [`Generator`](./generators/README.md) is able to create an etag representation of your [Eloquent Models](https://laravel.com/docs/9.x/eloquent),
+Although the default provided [`Generator`](generators/README.md) is able to create an etag representation of your [Eloquent Models](https://laravel.com/docs/9.x/eloquent),
 it is NOT the best suited (_nor fastest_) approach.
 
 When creating an `Etag` for an Eloquent model, the default generator (`GenericGenerator`) will use the model's properties returned by `toArray()` and attempt to make a string representation of the entire array's content.
@@ -17,7 +17,7 @@ use Aedart\ETags\Facades\Generator;
 $etag = Generator::make($model); // Uses all properties returned by toArray()
 ```
 
-If you are able to generalise what properties to use when creating etags, for all of your Eloquent Models, then you can [create a custom generator](./generators/custom.md) for your models.
+If you are able to generalise what properties to use when creating etags, for all of your Eloquent Models, then you can [create a custom generator](generators/custom.md) for your models.
 Alternatively, if you need to customise what properties must be used, per model, then the following approach could be better suitable.
 
 ## Customise Model ETag value

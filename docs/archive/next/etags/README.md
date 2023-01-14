@@ -3,7 +3,7 @@ description: About the ETags and Http Conditional Requests Package
 sidebarDepth: 0
 ---
 
-# ETags & Http Conditional Requests
+# Introduction
 
 This package provides a "profile" based approach to generate [ETags](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag), and an evaluator to deal with [Http Conditional Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Conditional_requests), for your Laravel application.
 

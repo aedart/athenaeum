@@ -169,16 +169,35 @@ module.exports.sidebar = function(){
                 'etags/',
                 'etags/install',
                 'etags/setup',
-                'etags/usage',
                 {
-                    title: 'Generators',
+                    title: 'ETags usage',
                     collapsable: true,
                     children: [
-                        'etags/generators/',
-                        'etags/generators/custom',
+                        'etags/etags/',
+                        {
+                            title: 'Generators',
+                            collapsable: true,
+                            children: [
+                                'etags/etags/generators/',
+                                'etags/etags/generators/custom',
+                            ]
+                        },
+                        'etags/etags/eloquent',
                     ]
                 },
-                'etags/eloquent',
+
+                /* TODO:*/
+                // 'etags/usage',
+                // {
+                //     title: 'Generators',
+                //     collapsable: true,
+                //     children: [
+                //         'etags/generators/',
+                //         'etags/generators/custom',
+                //     ]
+                // },
+                //'etags/eloquent',
+                /* TODO: END*/
                 'etags/macros',
             ]
         },
