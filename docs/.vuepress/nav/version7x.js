@@ -185,19 +185,6 @@ module.exports.sidebar = function(){
                         'etags/etags/eloquent',
                     ]
                 },
-
-                /* TODO:*/
-                // 'etags/usage',
-                // {
-                //     title: 'Generators',
-                //     collapsable: true,
-                //     children: [
-                //         'etags/generators/',
-                //         'etags/generators/custom',
-                //     ]
-                // },
-                //'etags/eloquent',
-                /* TODO: END*/
                 'etags/macros',
             ]
         },
