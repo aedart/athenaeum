@@ -1,6 +1,6 @@
 {
     "name": "aedart/athenaeum-etags",
-    "description": "ETags utilities for your Laravel Application",
+    "description": "ETags utilities and Http Conditional Request evaluation for your Laravel Application",
     "keywords": [
         "Athenaeum",
         "ETag",
@@ -29,9 +29,6 @@
         "psr-4": {
             "Aedart\\ETags\\": "src"
         }
-    },
-    "suggest": {
-        "ramsey/http-range": "If you want to evaluate If-Range/Range header fields and validate requested range(s)"
     },
     "config": {
         "sort-packages": true
