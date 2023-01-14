@@ -159,4 +159,28 @@ class DatabaseAdapterTest extends BaseTestCase
         // Clear "custom" adapter...
         $this->clearCustomAdapter();
     }
+
+    /**
+     * @test
+     *
+     * @inheritdoc
+     */
+    public function generating_a_public_url(): void
+    {
+        // This test is automatically SKIPPED. But, there is no need to
+        // mark it as such. The Database adapter does not support this feature!
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @test
+     *
+     * @inheritdoc
+     */
+    public function generating_a_temporary_url(): void
+    {
+        // This test is automatically SKIPPED. But, there is no need to
+        // mark it as such. The Database adapter does not support this feature!
+        $this->assertTrue(true);
+    }
 }
