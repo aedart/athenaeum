@@ -185,6 +185,36 @@ module.exports.sidebar = function(){
                         'etags/etags/eloquent',
                     ]
                 },
+                {
+                    title: 'Evaluator usage',
+                    collapsable: true,
+                    children: [
+                        'etags/evaluator/',
+                        'etags/evaluator/resource-context',
+                        'etags/evaluator/preconditions',
+                        'etags/evaluator/actions',
+                        {
+                            title: 'RFC 9110',
+                            collapsable: true,
+                            children: [
+                                'etags/evaluator/rfc9110/if-match',
+                                'etags/evaluator/rfc9110/if-unmodified-since',
+                                'etags/evaluator/rfc9110/if-none-match',
+                                'etags/evaluator/rfc9110/if-modified-since',
+                                'etags/evaluator/rfc9110/if-range',
+                            ]
+                        },
+                        {
+                            title: 'Extensions',
+                            collapsable: true,
+                            children: [
+                                'etags/evaluator/extensions/',
+                                'etags/evaluator/extensions/range',
+                            ]
+                        },
+                        'etags/evaluator/range-validator',
+                    ]
+                },
                 'etags/macros',
             ]
         },
