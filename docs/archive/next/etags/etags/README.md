@@ -3,10 +3,9 @@ description: How to work with ETags
 sidebarDepth: 0
 ---
 
-# Usage
+# How to use
 
-At the heart of this package is a `Factory` that is able to generate `ETag` instances, for arbitrary content, as well as
-to parse strings that contain etag values and turn them into a collection of etags instances.
+A `factory` is responsible for generating `ETag` instances, and parsing of Http header values. 
 
 [[TOC]]
 
