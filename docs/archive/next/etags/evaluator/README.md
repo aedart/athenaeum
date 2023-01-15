@@ -168,8 +168,11 @@ $evaluator = Evaluator::make(
 ```
 
 Once you have instantiated an evaluator instance, use the `evaluate()` method to evaluate request's preconditions against the requested resource.
-The method accepts a [`ResourceContext`](./resource-context.md) instance and will either return it against (_possible changed_), or throw a `HttpException`. 
+The method accepts a [`ResourceContext`](./resource-context.md) instance and will either return the resource (_possible changed_), or throw a `HttpException`. 
 
 ```php
 $evaluator->evaluate($resource);
 ```
+
+If an exception is thrown, then your Laravel application's exception handler will process it and create a response.
+See [Laravel's documentation](https://laravel.com/docs/9.x/errors#the-exception-handler) for additional information.
