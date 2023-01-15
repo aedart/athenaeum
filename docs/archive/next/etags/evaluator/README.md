@@ -26,7 +26,7 @@ See [supported preconditions](./preconditions.md#supported-preconditions) for ad
 
 Http Conditional Requests are always specific to the requested resource and the [Http Method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods).
 It is therefore recommended that you evaluate the requested resource inside your [Form Request](https://laravel.com/docs/9.x/validation#form-request-validation).
-When doing so, you should be able to avoid bloating your [controller](https://laravel.com/docs/9.x/controllers#main-content) or [route action](https://laravel.com/docs/9.x/routing#basic-routing).
+When doing so, you should be able to keep your [controller](https://laravel.com/docs/9.x/controllers#main-content) or [route action](https://laravel.com/docs/9.x/routing#basic-routing) clean from this kind of logic.
 Consider the following form request:
 
 ```php
