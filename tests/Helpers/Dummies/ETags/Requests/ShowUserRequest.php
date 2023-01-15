@@ -72,17 +72,33 @@ class ShowUserRequest extends FormRequest
      */
     public function evaluatePreconditions(Validator $validator): void
     {
-        // 1) Find requested resource or fail. Wrap it inside a Resource Context
+        // 1) Find requested resource or fail.
         $model = $this->findOrFailModel();
-        $resource = new GenericResource(
+
+        // 2) Wrap it inside a Resource Context
+        $resource = $this->makeResourceContext($model);
+
+        // 3) Evaluate request's preconditions against resource...
+        $this->resource = Evaluator::make($this)
+            ->evaluate($resource);
+    }
+
+    /**
+     * Wraps the model into a resource context
+     *
+     * @param  Model&HasEtag  $model
+     *
+     * @return ResourceContext
+     *
+     * @throws ETagGeneratorException
+     */
+    protected function makeResourceContext(Model & HasEtag $model): ResourceContext
+    {
+        return new GenericResource(
             data: $model,
             etag: $model->getStrongEtag(),
             lastModifiedDate: $model->updated_at
         );
-
-        // 2) Evaluate request's preconditions against resource...
-        $this->resource = Evaluator::make($this)
-            ->evaluate($resource);
     }
 
     /**
