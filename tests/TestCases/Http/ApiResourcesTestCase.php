@@ -74,7 +74,6 @@ abstract class ApiResourcesTestCase extends LaravelTestCase
         return [
             ConfigLoaderServiceProvider::class,
             ApiResourceServiceProvider::class,
-            ETagsServiceProvider::class,
             ValidationServiceProvider::class
         ];
     }

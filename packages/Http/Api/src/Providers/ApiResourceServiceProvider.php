@@ -3,9 +3,11 @@
 namespace Aedart\Http\Api\Providers;
 
 use Aedart\Contracts\Http\Api\Registrar as RegistrarInterface;
+use Aedart\ETags\Providers\ETagsServiceProvider;
 use Aedart\Http\Api\Registrar;
 use Aedart\Http\Api\Traits\ApiResourceRegistrarTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
+use Illuminate\Support\AggregateServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -14,28 +16,15 @@ use Illuminate\Support\ServiceProvider;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Api\Providers
  */
-class ApiResourceServiceProvider extends ServiceProvider
+class ApiResourceServiceProvider extends AggregateServiceProvider
 {
-    use ConfigTrait;
-    use ApiResourceRegistrarTrait;
-
-    public array $singletons = [
-        RegistrarInterface::class => Registrar::class
-    ];
-
     /**
-     * Bootstrap this service
+     * List of providers
+     *
+     * @var array
      */
-    public function boot()
-    {
-        $this->publishes([
-            __DIR__ . '/../../configs/api-resources.php' => config_path('api-resources.php')
-        ], 'config');
-
-        // -------------------------------------------------------------------- //
-        // Register api resources that are defined in configuration
-        $this->getApiResourceRegistrar()->register(
-            $this->getConfig()->get('api-resources.registry', [])
-        );
-    }
+    protected $providers = [
+        ETagsServiceProvider::class,
+        JsonResourceServiceProvider::class
+    ];
 }
