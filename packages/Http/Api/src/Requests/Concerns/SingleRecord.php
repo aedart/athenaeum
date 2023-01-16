@@ -119,11 +119,11 @@ trait SingleRecord
     {
         $record = $this->record;
 
-        $updatedAtColumn = $record->getUpdatedAtColumn();
-        if (!isset($updatedAtColumn)) {
+        $column = $record->getUpdatedAtColumn();
+        if (!isset($column)) {
             return null;
         }
 
-        return $record[$updatedAtColumn];
+        return $record[$column] ?? null;
     }
 }
