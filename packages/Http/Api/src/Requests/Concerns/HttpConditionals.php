@@ -32,6 +32,24 @@ trait HttpConditionals
     public ResourceContext|null $resource;
 
     /**
+     * Allowed or supported range unit
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#range.units
+     *
+     * @var string
+     */
+    protected string $allowedRangeUnit = 'bytes';
+
+    /**
+     * Maximum allowed range sets.
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#rule.ranges-specifier
+     *
+     * @var int
+     */
+    protected int $maximumRangeSets = 5;
+
+    /**
      * Evaluates request's preconditions for the given resource
      *
      * @param  mixed  $record E.g. an Eloquent record
@@ -73,13 +91,48 @@ trait HttpConditionals
         DateTimeInterface|null $lastModifiedDate = null
     ): ResourceContext
     {
-        // Overwrite this method to set other resource context specifics.
-
-        return $this->makeResourceContext(
+        return new GenericResource(
             data: $record,
             etag: $etag,
-            lastModifiedDate: $lastModifiedDate
+            lastModifiedDate: $lastModifiedDate,
+            size: $this->determineSizeOf($record),
+            determineStateChangeSuccess: [$this, 'hasStateChangeAlreadySucceeded'],
+            rangeUnit: $this->allowedRangeUnit,
+            maxRangeSets: $this->maximumRangeSets
         );
+    }
+
+    /**
+     * Determine the size of given record or data
+     *
+     * @param mixed $data E.g. file path, content or stream...etc
+     *
+     * @return int If 0 (zero) is returned, then "Range" request is not supported
+     */
+    public function determineSizeOf(mixed $data): int
+    {
+        // Overwrite this method when your request supports "If-Range" / "Range" fields
+        // and return the size, e.g. in bytes, for the given record or data.
+
+        return 0;
+    }
+
+    /**
+     * Determine if state change has already succeeded for resource.
+     *
+     * This method is applied for "If-Match" or "If-Unmodified-Since" preconditions,
+     * when they are evaluated to false...
+     *
+     * @see \Aedart\Contracts\ETags\Preconditions\ResourceContext::hasStateChangeAlreadySucceeded
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param ResourceContext $resource
+     *
+     * @return bool
+     */
+    public function hasStateChangeAlreadySucceeded($request, ResourceContext $resource): bool
+    {
+        return false;
     }
 
     /**
@@ -123,41 +176,5 @@ trait HttpConditionals
         // @see \Aedart\ETags\Preconditions\Evaluator::getDefaultPreconditions
 
         return [];
-    }
-
-    /**
-     * Returns a new resource context instance
-     *
-     * @param  mixed  $data E.g. a record, Eloquent model, a file...etc
-     * @param  ETag|null  $etag  [optional] E.g. record's etag
-     * @param  DateTimeInterface|null  $lastModifiedDate  [optional] E.g. records last modified date
-     * @param  int  $size  [optional] Size of resource. Applicable if supporting "If-Range" and "Range" requests.
-     * @param  callable|null $determineStateChangeSuccess  [optional] Callback that determines if a state change
-     *                                                     has already succeeded on the resource. Callback MUST
-     *                                                     return a boolean value.
-     * @param  string  $rangeUnit  [optional] Allowed or supported range unit, e.g. bytes.
-     * @param  int  $maxRangeSets  [optional] Maximum allowed range sets.
-     *
-     * @return ResourceContext
-     */
-    protected function makeResourceContext(
-        mixed $data,
-        ETag|null $etag = null,
-        DateTimeInterface|null $lastModifiedDate = null,
-        int $size = 0,
-        callable|null $determineStateChangeSuccess = null,
-        string $rangeUnit = 'bytes',
-        int $maxRangeSets = 5
-    ): ResourceContext
-    {
-        return new GenericResource(
-            data: $data,
-            etag: $etag,
-            lastModifiedDate: $lastModifiedDate,
-            size: $size,
-            determineStateChangeSuccess: $determineStateChangeSuccess,
-            rangeUnit: $rangeUnit,
-            maxRangeSets: $maxRangeSets
-        );
     }
 }
