@@ -5,7 +5,6 @@ namespace Aedart\Tests\Integration\ETags\Preconditions\Rfc9110;
 use Aedart\ETags\Facades\Generator;
 use Aedart\ETags\Preconditions\Validators\Exceptions\RangeNotSatisfiable;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
-use Carbon\Carbon;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;

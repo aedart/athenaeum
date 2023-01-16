@@ -5,7 +5,6 @@ namespace Aedart\Tests\Integration\ETags\Preconditions\Rfc9110;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\Actions\DefaultActions;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
-use Carbon\Carbon;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;

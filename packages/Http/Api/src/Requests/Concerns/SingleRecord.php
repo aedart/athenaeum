@@ -55,7 +55,7 @@ trait SingleRecord
     {
         $this->record = $this->findRecordOrFail();
 
-        if (!$this->authorizeFoundRecord($this->record)){
+        if (!$this->authorizeFoundRecord($this->record)) {
             $this->failedAuthorization();
         }
 

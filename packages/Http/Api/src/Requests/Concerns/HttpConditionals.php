@@ -65,8 +65,7 @@ trait HttpConditionals
         mixed $record,
         ETag|null $etag = null,
         DateTimeInterface|null $lastModifiedDate = null
-    ): ResourceContext
-    {
+    ): ResourceContext {
         // Wrap given record or data into a resource context
         $resource = $this->wrapIntoResourceContext($record, $etag, $lastModifiedDate);
 
@@ -89,8 +88,7 @@ trait HttpConditionals
         mixed $record,
         ETag|null $etag = null,
         DateTimeInterface|null $lastModifiedDate = null
-    ): ResourceContext
-    {
+    ): ResourceContext {
         return new GenericResource(
             data: $record,
             etag: $etag,

@@ -4,7 +4,6 @@ namespace Aedart\ETags\Preconditions\Rfc9110;
 
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
-use Illuminate\Support\Carbon;
 
 /**
  * If-Unmodified-Since precondition
