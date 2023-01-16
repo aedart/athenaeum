@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Model;
 abstract class ShowSingleResourceRequest extends ValidatedApiRequest
 {
     use Concerns\SingleRecord;
-    use Concerns\HttpConditionals;
 
     /**
      * @inheritDoc
@@ -45,13 +44,13 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest
      */
     public function whenRecordIsFound(Model $record): void
     {
-        if (!$this->mustEvaluateRequestPreconditions()) {
-            return;
-        }
-
-        $this->evaluateRequestPreconditions(
-            etag: $this->getRecordStrongEtag(),
-            lastModified: $this->getRecordLastModifiedDate()
-        );
+//        if (!$this->mustEvaluateRequestPreconditions()) {
+//            return;
+//        }
+//
+//        $this->evaluateRequestPreconditions(
+//            etag: $this->getRecordStrongEtag(),
+//            lastModified: $this->getRecordLastModifiedDate()
+//        );
     }
 }
