@@ -141,6 +141,6 @@ class IfRange extends BasePrecondition
 
         // [...] If the HTTP-date validator provided exactly matches the Last-Modified field value for
         // the selected representation, the condition is true. [...]
-        return Carbon::instance($lastModified)->equalTo($ifRange);
+        return $this->reducePrecisionToSeconds($lastModified)->equalTo($ifRange);
     }
 }

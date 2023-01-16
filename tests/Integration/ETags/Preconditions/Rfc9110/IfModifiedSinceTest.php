@@ -34,9 +34,9 @@ class IfModifiedSinceTest extends PreconditionsTestCase
         // NOTE: [...] If the selected representation's last modification date is EARLIER or EQUAL to
         // the date provided in the field value, the condition is FALSE. [...]
 
-        $lastModified = now()->toRfc7231String();
+        $lastModified = now();
         $resource = $this->makeResourceContext(
-            lastModifiedDate: Carbon::make($lastModified)
+            lastModifiedDate: $lastModified
         );
 
         $request = $this->createRequest(
@@ -75,9 +75,9 @@ class IfModifiedSinceTest extends PreconditionsTestCase
         // NOTE: [...] If the selected representation's last modification date is EARLIER or EQUAL to
         // the date provided in the field value, the condition is FALSE. [...]
 
-        $lastModified = now()->subMinutes(2)->toRfc7231String();
+        $lastModified = now()->subMinutes(2);
         $resource = $this->makeResourceContext(
-            lastModifiedDate: Carbon::make($lastModified)
+            lastModifiedDate: $lastModified
         );
 
         $request = $this->createRequest(
@@ -121,13 +121,13 @@ class IfModifiedSinceTest extends PreconditionsTestCase
         // NOTE: [...] If the selected representation's last modification date is EARLIER or EQUAL to
         // the date provided in the field value, the condition is FALSE. [...]
 
-        $lastModified = now()->subMinutes(2)->toRfc7231String();
+        $lastModified = now()->subMinutes(2);
         $resource = $this->makeResourceContext(
-            lastModifiedDate: Carbon::make($lastModified)
+            lastModifiedDate: $lastModified
         );
 
         $request = $this->createRequest(
-            ifModifiedSince: $lastModified,
+            ifModifiedSince: $lastModified->toRfc7231String(),
             method: 'get'
         );
 
