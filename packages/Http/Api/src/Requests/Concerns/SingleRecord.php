@@ -36,6 +36,15 @@ trait SingleRecord
     abstract public function findRecordOrFail(): Model;
 
     /**
+     * Determine if user is authorised to see or process the record
+     *
+     * @param Model $record
+     *
+     * @return bool
+     */
+    abstract public function authorizeFoundRecord(Model $record): bool;
+
+    /**
      * Finds and prepares the requested record
      *
      * @return void
@@ -45,6 +54,10 @@ trait SingleRecord
     public function findAndPrepareRecord(): void
     {
         $this->record = $this->findRecordOrFail();
+
+        if (!$this->authorizeFoundRecord($this->record)){
+            $this->failedAuthorization();
+        }
 
         $this->whenRecordIsFound($this->record);
     }
