@@ -63,6 +63,18 @@ trait SingleRecord
     }
 
     /**
+     * Returns record's etag if available
+     *
+     * @return ETag|null
+     *
+     * @throws ETagGeneratorException
+     */
+    public function getRecordEtag(): ETag|null
+    {
+        return $this->getRecordStrongEtag();
+    }
+
+    /**
      * Returns record's etag (for strong comparison), if one is available
      *
      * @return ETag|null
