@@ -9,6 +9,7 @@ use Aedart\Contracts\ETags\HasEtag;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Throwable;
 
 /**
  * Concerns a Single Record
@@ -38,6 +39,8 @@ trait SingleRecord
      * Finds and prepares the requested record
      *
      * @return void
+     *
+     * @throws Throwable
      */
     public function findAndPrepareRecord(): void
     {
