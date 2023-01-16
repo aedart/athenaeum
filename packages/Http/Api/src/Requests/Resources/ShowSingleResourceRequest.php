@@ -6,6 +6,8 @@ use Aedart\Contracts\ETags\Exceptions\ETagGeneratorException;
 use Aedart\Http\Api\Requests\Concerns;
 use Aedart\Http\Api\Requests\ValidatedApiRequest;
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Throwable;
 
 /**
  * Show Single Resource Request
@@ -20,13 +22,15 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest
     /**
      * @inheritDoc
      */
-    public function authorizeAfterValidation(): bool
+    public function authorizeFoundRecord(Model $record): bool
     {
         return $this->allows('show', $this->record);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * @throws Throwable
      */
     protected function prepareForValidation()
     {
@@ -38,19 +42,34 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest
     }
 
     /**
-     * @inheritdoc
+     * Determine if this request supports preconditions
+     *
+     * @return bool True if preconditions must be evaluated
+     */
+    abstract public function mustEvaluateRequestPreconditions(): bool;
+
+    /**
+     * {@inheritdoc}
      *
      * @throws ETagGeneratorException
+     * @throws HttpExceptionInterface
+     * @throws Throwable
      */
     public function whenRecordIsFound(Model $record): void
     {
-//        if (!$this->mustEvaluateRequestPreconditions()) {
-//            return;
-//        }
-//
-//        $this->evaluateRequestPreconditions(
-//            etag: $this->getRecordStrongEtag(),
-//            lastModified: $this->getRecordLastModifiedDate()
-//        );
+        if (!$this->mustEvaluateRequestPreconditions()) {
+            return;
+        }
+
+        // [...] a recipient cache or origin server MUST evaluate received request preconditions after
+        // it has successfully performed its normal request checks and JUST BEFORE it would process the
+        // request content (if any) or perform the action associated with the request method. [...]
+        // @see https://httpwg.org/specs/rfc9110.html#when.to.evaluate
+
+        $this->evaluateRequestPreconditions(
+            record: $record,
+            etag: $this->getRecordEtag(),
+            lastModifiedDate: $this->getRecordLastModifiedDate()
+        );
     }
 }
