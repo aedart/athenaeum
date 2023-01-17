@@ -14,7 +14,7 @@ use Illuminate\Contracts\Validation\Validator;
  *
  * @see https://laravel.com/docs/9.x/controllers#restful-scoping-resource-routes
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Api\Requests\Resources
  */
 abstract class ListRelatedResourcesRequest extends ShowSingleResourceRequest implements HasAuthorisationModel
