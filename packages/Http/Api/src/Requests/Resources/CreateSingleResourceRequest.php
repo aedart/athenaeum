@@ -3,6 +3,7 @@
 namespace Aedart\Http\Api\Requests\Resources;
 
 use Aedart\Contracts\ETags\ETag;
+use Aedart\Contracts\Http\Api\Requests\HasAuthorisationModel;
 use Aedart\Http\Api\Requests\ValidatedApiRequest;
 use DateTimeInterface;
 use Illuminate\Contracts\Validation\Validator;
@@ -16,7 +17,7 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Api\Requests\Resources
  */
-abstract class CreateSingleResourceRequest extends ValidatedApiRequest
+abstract class CreateSingleResourceRequest extends ValidatedApiRequest implements HasAuthorisationModel
 {
     /**
      * @inheritdoc
