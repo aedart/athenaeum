@@ -13,8 +13,8 @@ interface CanDetermineEvaluation
     /**
      * Determine whether this request supports preconditions or not.
      *
-     * When true, then request must evaluate request's preconditions.
-     * Otherwise, the request MUST ignore them.
+     * When true, then preconditions MUST be evaluated by this request.
+     * Otherwise, they must be ignored.
      *
      * @return bool
      */
