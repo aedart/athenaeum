@@ -34,16 +34,12 @@ trait HttpConditionals
     /**
      * Allowed or supported range unit
      *
-     * @see https://httpwg.org/specs/rfc9110.html#range.units
-     *
      * @var string
      */
     protected string $allowedRangeUnit = 'bytes';
 
     /**
      * Maximum allowed range sets.
-     *
-     * @see https://httpwg.org/specs/rfc9110.html#rule.ranges-specifier
      *
      * @var int
      */
@@ -67,7 +63,7 @@ trait HttpConditionals
         DateTimeInterface|null $lastModifiedDate = null
     ): ResourceContext {
         // Wrap given record or data into a resource context
-        $resource = $this->wrapIntoResourceContext($record, $etag, $lastModifiedDate);
+        $resource = $this->wrapResourceContext($record, $etag, $lastModifiedDate);
 
         // Evaluate evt. requested preconditions...
         return $this->resource = $this
@@ -76,7 +72,7 @@ trait HttpConditionals
     }
 
     /**
-     * Wraps record into a resource context for precondition evaluation
+     * Wraps record or data into a resource context
      *
      * @param  mixed  $record E.g. an Eloquent record
      * @param  ETag|null  $etag  [optional] E.g. record's etag
@@ -84,7 +80,7 @@ trait HttpConditionals
      *
      * @return ResourceContext
      */
-    public function wrapIntoResourceContext(
+    public function wrapResourceContext(
         mixed $record,
         ETag|null $etag = null,
         DateTimeInterface|null $lastModifiedDate = null
@@ -95,8 +91,8 @@ trait HttpConditionals
             lastModifiedDate: $lastModifiedDate,
             size: $this->determineSizeOf($record),
             determineStateChangeSuccess: [$this, 'hasStateChangeAlreadySucceeded'],
-            rangeUnit: $this->allowedRangeUnit,
-            maxRangeSets: $this->maximumRangeSets
+            rangeUnit: $this->rangeUnit(),
+            maxRangeSets: $this->maxRangeSets()
         );
     }
 
@@ -131,6 +127,30 @@ trait HttpConditionals
     public function hasStateChangeAlreadySucceeded($request, ResourceContext $resource): bool
     {
         return false;
+    }
+
+    /**
+     * Allowed or supported range unit
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#range.units
+     *
+     * @return string
+     */
+    public function rangeUnit(): string
+    {
+        return $this->allowedRangeUnit;
+    }
+
+    /**
+     * Maximum allowed range sets.
+     *
+     * @see https://httpwg.org/specs/rfc9110.html#rule.ranges-specifier
+     *
+     * @return int
+     */
+    public function maxRangeSets(): int
+    {
+        return $this->maximumRangeSets;
     }
 
     /**
