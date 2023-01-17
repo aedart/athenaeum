@@ -3,6 +3,7 @@
 namespace Aedart\Http\Api\Requests\Resources;
 
 use Aedart\Contracts\ETags\Exceptions\ETagGeneratorException;
+use Aedart\Contracts\Http\Api\Requests\Preconditions\CanDetermineEvaluation;
 use Aedart\Http\Api\Requests\Concerns;
 use Aedart\Http\Api\Requests\ValidatedApiRequest;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +16,7 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Api\Requests\Resources
  */
-abstract class ShowSingleResourceRequest extends ValidatedApiRequest
+abstract class ShowSingleResourceRequest extends ValidatedApiRequest implements CanDetermineEvaluation
 {
     use Concerns\SingleRecord;
 
@@ -42,13 +43,6 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest
     }
 
     /**
-     * Determine if this request supports preconditions
-     *
-     * @return bool True if preconditions must be evaluated
-     */
-    abstract public function mustEvaluateRequestPreconditions(): bool;
-
-    /**
      * {@inheritdoc}
      *
      * @throws ETagGeneratorException
@@ -57,7 +51,7 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest
      */
     public function whenRecordIsFound(Model $record): void
     {
-        if (!$this->mustEvaluateRequestPreconditions()) {
+        if (!$this->mustEvaluatePreconditions()) {
             return;
         }
 

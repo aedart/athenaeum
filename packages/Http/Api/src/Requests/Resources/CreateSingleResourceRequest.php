@@ -4,6 +4,7 @@ namespace Aedart\Http\Api\Requests\Resources;
 
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\Http\Api\Requests\HasAuthorisationModel;
+use Aedart\Contracts\Http\Api\Requests\Preconditions\CanDetermineEvaluation;
 use Aedart\Http\Api\Requests\ValidatedApiRequest;
 use DateTimeInterface;
 use Illuminate\Contracts\Validation\Validator;
@@ -17,7 +18,9 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Api\Requests\Resources
  */
-abstract class CreateSingleResourceRequest extends ValidatedApiRequest implements HasAuthorisationModel
+abstract class CreateSingleResourceRequest extends ValidatedApiRequest implements
+    HasAuthorisationModel,
+    CanDetermineEvaluation
 {
     /**
      * @inheritdoc
@@ -26,13 +29,6 @@ abstract class CreateSingleResourceRequest extends ValidatedApiRequest implement
     {
         return $this->allows('store', $this->authorisationModel());
     }
-
-    /**
-     * Determine if this request supports preconditions
-     *
-     * @return bool True if preconditions must be evaluated
-     */
-    abstract public function mustEvaluateRequestPreconditions(): bool;
 
     /**
      * {@inheritdoc}
@@ -64,7 +60,7 @@ abstract class CreateSingleResourceRequest extends ValidatedApiRequest implement
      */
     public function performRequestPreconditionsEvaluation(array $data): void
     {
-        if (!$this->mustEvaluateRequestPreconditions()) {
+        if (!$this->mustEvaluatePreconditions()) {
             return;
         }
 
