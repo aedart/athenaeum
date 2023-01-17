@@ -11,7 +11,10 @@ namespace Aedart\Contracts\Http\Api\Requests\Preconditions;
 interface CanDetermineEvaluation
 {
     /**
-     * Determine if request's preconditions must be evaluated or not
+     * Determine whether this request supports preconditions or not.
+     *
+     * When true, then request must evaluate request's preconditions.
+     * Otherwise, the request MUST ignore them.
      *
      * @return bool
      */
