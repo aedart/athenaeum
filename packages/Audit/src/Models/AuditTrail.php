@@ -27,7 +27,7 @@ use Illuminate\Support\Carbon;
  * @property-read Model|Authenticatable|null $user The user that caused audit trail entry
  * @property-read Model $auditable The parent auditable model
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Models
  */
 class AuditTrail extends Model

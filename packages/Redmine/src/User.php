@@ -42,7 +42,7 @@ use Carbon\Carbon;
  * @property ListOfReferences<Reference>|Reference[]|null $groups Related data that can be requested included.
  * @property ListOfMembershipReferences<MembershipReference>|MembershipReference[]|null $memberships Related data that can be requested included.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class User extends RedmineApiResource implements

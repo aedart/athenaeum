@@ -5,7 +5,7 @@ namespace Aedart\Filters\Processors\Concerns;
 /**
  * Properties To Columns
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Processors\Concerns
  */
 trait PropertiesToColumns

@@ -11,7 +11,7 @@ use Aedart\Utils\Arr;
  *
  * @see \Aedart\Contracts\Filters\BuiltFiltersMap
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters
  */
 class BuiltFilters implements BuiltFiltersMap

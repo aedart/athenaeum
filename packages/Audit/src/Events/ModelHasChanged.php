@@ -12,7 +12,7 @@ use Throwable;
 /**
  * Model Has Changed Event
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Events
  */
 class ModelHasChanged

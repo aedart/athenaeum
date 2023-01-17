@@ -12,7 +12,7 @@ use InvalidArgumentException;
  * An attachment that was recently uploaded (has a token) and about to
  * be associated with a resource
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Attachments
  */
 class PendingAttachment implements Arrayable

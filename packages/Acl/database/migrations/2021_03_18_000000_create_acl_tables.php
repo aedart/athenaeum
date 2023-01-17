@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Create Acl Tables Database Migration
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  */
 class CreateAclTables extends Migration
 {

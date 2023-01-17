@@ -12,7 +12,7 @@ use Aedart\Contracts\Pagination\Paginator as PaginatorInterface;
  * actual results pagination - it is only able to provide information
  * about the amount of results, pages, limit and offsets.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Pagination
  */
 class Paginator implements PaginatorInterface

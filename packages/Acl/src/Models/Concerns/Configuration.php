@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Concerns Acl Configuration
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Acl\Models\Concerns
  */
 trait Configuration

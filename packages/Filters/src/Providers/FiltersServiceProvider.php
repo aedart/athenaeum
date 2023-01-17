@@ -10,7 +10,7 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Filters Service Provider
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Providers
  */
 class FiltersServiceProvider extends ServiceProvider implements DeferrableProvider

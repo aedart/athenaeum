@@ -7,7 +7,7 @@ use Aedart\Audit\Events\ModelHasChanged;
 /**
  * Record Audit Trail Entry - Event Listener
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Listeners
  */
 class RecordAuditTrailEntry extends RecordsEntries

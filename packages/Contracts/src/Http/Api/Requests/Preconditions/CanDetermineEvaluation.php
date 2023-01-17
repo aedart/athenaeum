@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Http\Api\Requests\Preconditions;
 /**
  * Can Determine Preconditions Evaluation
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Api\Requests\Preconditions
  */
 interface CanDetermineEvaluation

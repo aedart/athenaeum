@@ -18,7 +18,7 @@ use Aedart\Redmine\Relations\OneFromList;
  * @property Reference $default_status
  * @property string[]|null $enabled_standard_fields
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class Tracker extends RedmineApiResource implements

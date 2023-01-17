@@ -14,7 +14,7 @@ use Throwable;
  * Should be thrown whenever an error response has been received, e.g.
  * Http Status 4xx or 5xx.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Redmine\Exceptions
  */
 interface ErrorResponseException extends RedmineException,

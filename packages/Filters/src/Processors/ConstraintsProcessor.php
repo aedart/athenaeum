@@ -22,7 +22,7 @@ use LogicException;
  * Be default, this processor expects that constraint filters have the following
  * format: "[name-of-parameter][property][operator]=value", e.g. `filter[age][gt]=24`
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Processors
  */
 class ConstraintsProcessor extends BaseProcessor

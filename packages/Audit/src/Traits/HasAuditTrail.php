@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property-read AuditTrail[]|Collection $auditTrail Audit trail entries caused by this user
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Traits
  */
 trait HasAuditTrail

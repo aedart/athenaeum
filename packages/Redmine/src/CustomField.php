@@ -33,7 +33,7 @@ use Aedart\Redmine\Relations\HasMany;
  * @property ListOfReferences<Reference>|Reference[]|null $trackers
  * @property ListOfReferences<Reference>|Reference[]|null $roles
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class CustomField extends RedmineApiResource implements

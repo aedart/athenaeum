@@ -20,7 +20,7 @@ use Aedart\Redmine\Relations\Custom\AssignedTo;
  *
  * @property int $assigned_to_id Property only available or expected when creating or updating resource.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class IssueCategory extends RedmineApiResource implements

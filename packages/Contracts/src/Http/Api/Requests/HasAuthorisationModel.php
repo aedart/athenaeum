@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Http\Api\Requests;
 /**
  * Has Authorisation Model
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Api\Requests
  */
 interface HasAuthorisationModel

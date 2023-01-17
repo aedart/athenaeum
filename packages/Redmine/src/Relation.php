@@ -20,7 +20,7 @@ use Throwable;
  * @property string $relation_type
  * @property float $delay
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class Relation extends RedmineApiResource implements

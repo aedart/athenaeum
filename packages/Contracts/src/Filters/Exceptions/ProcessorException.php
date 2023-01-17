@@ -8,7 +8,7 @@ use Throwable;
 /**
  * Http Query Parameter Processor Exception
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Filters\Exceptions
  */
 interface ProcessorException extends Throwable

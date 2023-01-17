@@ -9,7 +9,7 @@ use Aedart\Contracts\Redmine\Connection;
  *
  * @see \Aedart\Contracts\Redmine\ConnectionAware
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Traits
  */
 trait ConnectionTrait

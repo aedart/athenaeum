@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Delete Single Resource Request
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Api\Requests\Resources
  */
 abstract class DeleteSingleResourceRequest extends ShowSingleResourceRequest

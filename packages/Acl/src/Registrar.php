@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @see \Aedart\Contracts\Acl\Registrar
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Acl
  */
 class Registrar implements

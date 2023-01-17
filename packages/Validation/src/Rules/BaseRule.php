@@ -12,7 +12,7 @@ use Illuminate\Contracts\Validation\Rule;
  * Abstraction that offers common utility methods for
  * validation rules.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Acl\Rules
  */
 abstract class BaseRule implements

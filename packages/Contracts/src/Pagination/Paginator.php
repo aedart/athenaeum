@@ -7,7 +7,7 @@ use LogicException;
 /**
  * Paginator
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Pagination
  */
 interface Paginator

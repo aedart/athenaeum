@@ -17,7 +17,7 @@ use Carbon\Carbon;
  * @property ListOfDetails<Detail>|Detail[]|null $details
  * @property Carbon $created_on
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials
  */
 class Journal extends ArrayDto

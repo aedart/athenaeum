@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Create Audit Trail Table Migration
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  */
 class CreateAuditTrailTable extends Migration
 {

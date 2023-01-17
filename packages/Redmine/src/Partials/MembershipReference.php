@@ -11,7 +11,7 @@ use Aedart\Dto\ArrayDto;
  * @property Reference $project
  * @property ListOfRoleReferences<RoleReference>|RoleReference[]|null $roles
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials
  */
 class MembershipReference extends ArrayDto

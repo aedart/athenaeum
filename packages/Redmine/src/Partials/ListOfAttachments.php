@@ -7,7 +7,7 @@ use Aedart\Redmine\Attachment;
 /**
  * List Of Attachments
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials
  */
 class ListOfAttachments extends NestedList

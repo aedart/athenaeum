@@ -20,7 +20,7 @@ use Aedart\Redmine\User;
  * This custom relation attempt to figure out what kind og reference it is
  * and resolve the user or group resource.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Relations\Custom
  */
 class AssignedTo extends BelongsTo

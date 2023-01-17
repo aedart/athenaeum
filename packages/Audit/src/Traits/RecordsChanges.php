@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Config;
  *
  * @property-read AuditTrail[]|Collection $recordedChanges Audit trail entries for this model
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Traits
  */
 trait RecordsChanges

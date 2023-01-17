@@ -9,7 +9,7 @@ use RuntimeException;
 /**
  * Concerns Database Driver
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Query\Filters\Concerns
  */
 trait DatabaseDriver

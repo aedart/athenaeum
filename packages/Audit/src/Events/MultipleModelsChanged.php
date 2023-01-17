@@ -20,7 +20,7 @@ use Throwable;
  * - all records are soft-deleted.
  * - all records are recovered.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Events
  */
 class MultipleModelsChanged

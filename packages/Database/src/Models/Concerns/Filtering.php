@@ -15,7 +15,7 @@ use Illuminate\Contracts\Database\Query\Builder;
  *
  * @method static Builder|EloquentBuilder applyFilters(Criteria|Criteria[] $filters) Apply one or more filters (criteria). Method will not apply filters that are not applicable.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Database\Models\Concerns
  */
 trait Filtering

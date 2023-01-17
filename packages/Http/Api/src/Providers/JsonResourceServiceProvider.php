@@ -11,7 +11,7 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Json Resource Service Provider
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Api\Providers
  */
 class JsonResourceServiceProvider extends ServiceProvider

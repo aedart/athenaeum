@@ -9,7 +9,7 @@ use Throwable;
  *
  * Base exception for Redmine API related exceptions.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Redmine\Exceptions
  */
 interface RedmineException extends Throwable

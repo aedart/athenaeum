@@ -42,7 +42,7 @@ use Throwable;
  *
  * Base abstraction for a Redmine Resource (an API endpoint).
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 abstract class RedmineApiResource extends ArrayDto implements

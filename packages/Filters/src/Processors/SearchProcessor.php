@@ -15,7 +15,7 @@ use LogicException;
  *
  * Builds a search query filter, for the requested search term.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Processors
  */
 class SearchProcessor extends BaseProcessor

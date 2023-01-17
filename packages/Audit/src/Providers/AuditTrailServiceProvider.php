@@ -10,7 +10,7 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Audit Trail Service Provider
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Providers
  */
 class AuditTrailServiceProvider extends ServiceProvider

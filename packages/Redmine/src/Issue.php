@@ -83,7 +83,7 @@ use Throwable;
  * @property ListOfJournals<Journal>|Journal[]|null $journals Related data that can be requested included.
  * @property ListOfReferences<Reference>|Reference[]|null $watchers Related data that can be requested included.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class Issue extends RedmineApiResource implements

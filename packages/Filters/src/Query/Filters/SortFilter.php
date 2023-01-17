@@ -11,7 +11,7 @@ use Illuminate\Contracts\Database\Query\Builder;
  *
  * Applies sorting to query (order by clauses).
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Query\Filters
  */
 class SortFilter extends Filter

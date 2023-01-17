@@ -8,7 +8,7 @@ namespace Aedart\Database\Models\Concerns;
  *
  * @see \Aedart\Contracts\Database\Models\Instantiatable
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Database\Models\Concerns
  */
 trait Instance

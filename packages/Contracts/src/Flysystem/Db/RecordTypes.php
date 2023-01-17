@@ -7,7 +7,7 @@ use League\Flysystem\StorageAttributes;
 /**
  * Record Types
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Flysystem\Db
  */
 interface RecordTypes

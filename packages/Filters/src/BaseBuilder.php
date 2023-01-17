@@ -18,7 +18,7 @@ use Illuminate\Validation\ValidationException;
  *
  * @see \Aedart\Contracts\Filters\Builder
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters
  */
 abstract class BaseBuilder implements Builder

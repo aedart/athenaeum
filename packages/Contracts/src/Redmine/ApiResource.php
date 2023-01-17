@@ -16,7 +16,7 @@ use Throwable;
 /**
  * Redmine Resource
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Redmine
  */
 interface ApiResource extends Dto,

@@ -12,7 +12,7 @@ use Aedart\Dto\ArrayDto;
  * @property mixed $old_value
  * @property mixed $new_value
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials\Journals
  */
 class Detail extends ArrayDto

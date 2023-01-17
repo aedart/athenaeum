@@ -15,7 +15,7 @@ use LogicException;
  * Builds a sorting filter, acc. to the requested properties results
  * must be sorted by.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Processors
  */
 class SortingProcessor extends BaseProcessor
