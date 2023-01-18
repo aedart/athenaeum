@@ -60,6 +60,10 @@ abstract class ProcessMultipleResourcesRequest extends ValidatedApiRequest imple
     {
         parent::after($validator);
 
-        $this->findAndPrepareRecords($validator, $this->authorisationModel());
+        // Obtain the requested targets (identifiers) and find matching records
+        $key = $this->targetsKey();
+        $targets = $validator->validated()[$key] ?? [];
+
+        $this->findAndPrepareRecords($targets, $this->authorisationModel());
     }
 }

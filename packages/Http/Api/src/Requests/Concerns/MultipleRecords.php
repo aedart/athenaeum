@@ -3,7 +3,7 @@
 namespace Aedart\Http\Api\Requests\Concerns;
 
 use Aedart\Validation\Rules\AlphaDashDot;
-use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Validation\ValidationException;
-use Throwable;
 
 /**
  * Concerns Multiple Records
@@ -33,7 +32,14 @@ trait MultipleRecords
      *
      * @var string[]
      */
-    protected array $with = [];
+    protected array $relations = [];
+
+    /**
+     * Relations callback
+     *
+     * @var callable|null
+     */
+    protected $relationsCallback = null;
 
     /**
      * Include "trashed" records or not
@@ -100,20 +106,34 @@ trait MultipleRecords
     /**
      * Finds and prepares requested target records
      *
-     * @param Validator $validator
-     * @param string $model Class path to model
+     * Method attempts to find and verify records that match given targets.
+     * After the records are found, the {@see whenRecordsAreFound()} hook method
+     * is invoked.
      *
-     * @return void
+     * @see findRequestedRecords
+     * @see verifyAllRecordsFound
+     * @see whenRecordsAreFound
      *
-     * @throws Throwable
+     * @param string[]|int[] $targets List of unique identifiers
+     * @param string $model Class path to model to be used
+     * @param string|null $targetsKey [optional] Defaults to {@see targetsKey()} when none given
+     * @param string|null $modelKey [optional] Defaults to {@see modelKeyName()} when none given
+     *
+     * @return Collection
+     *
+     * @throws ValidationException If not all requested targets are found
+     * @throws AuthorizationException If authenticated user does not have permission
+     *                                to see or process found records.
      */
-    public function findAndPrepareRecords(Validator $validator, string $model): void
+    public function findAndPrepareRecords(
+        array $targets,
+        string $model,
+        string|null $targetsKey = null,
+        string|null $modelKey = null
+    ): Collection
     {
-        $key = $this->targetsKey();
-        $modelKey = $this->modelKeyName();
-
-        // Obtain the targets...
-        $targets = $validator->validated()[$key] ?? [];
+        $targetsKey = $targetsKey ?? $this->targetsKey();
+        $modelKey = $modelKey ?? $this->modelKeyName();
 
         // Find the requested records. Note, we cannot be sure that all requested are
         // found at this stage.
@@ -123,21 +143,24 @@ trait MultipleRecords
             $modelKey
         );
 
-        // Verify that all requested records are found, or fail.
-        $this->records = $this->verifyAllRecordsFound(
-            $targets,
-            $found,
-            $modelKey,
-            $key
-        );
-
-        // Ensure that user has permission to see or process requested records
-        if (!$this->authorizeFoundRecords($this->records)) {
+        // Ensure that user has permission to see or process the records that
+        // are found, regardless if all or only some were found.
+        if (!$this->authorizeFoundRecords($found)) {
             $this->failedAuthorization();
         }
 
-        // Finally, invoke "post found" hook method.
+        // Verify that all requested records are found, or fail.
+        $found = $this->verifyAllRecordsFound(
+            $targets,
+            $found,
+            $modelKey,
+            $targetsKey
+        );
+
+        // Finally, invoke "post found" hook method and return found records.
         $this->whenRecordsAreFound($this->records);
+
+        return $this->records = $found;
     }
 
     /**
@@ -159,9 +182,11 @@ trait MultipleRecords
     /**
      * Find requested targets, using given model
      *
-     * @param string[]|int[] $targets
+     * @param string[]|int[] $targets Unique list of identifiers
      * @param string $model Class path to model that must be used
-     * @param string $key [optional] Name of key to match targets against
+     * @param string $key [optional] Unique key in model to match against targets
+     * @param array|null $relations [optional] Evt. relations to eager-load. Defaults to {@see with()} set relations
+     * @param callable|null $relationsCallback [optional] Evt. relations callback. Defaults to {@see with()} set callback
      *
      * @return Collection<Model>
      */
@@ -169,11 +194,17 @@ trait MultipleRecords
         array $targets,
         string $model,
         string $key = 'id',
+        array|null $relations = null,
+        callable|null $relationsCallback = null
     ): Collection {
+        $relations = $relations ?? $this->relations;
+        $relationsCallback = $relationsCallback ?? $this->relationsCallback;
+
         /** @var EloquentBuilder|Builder $query */
         $query = $model::query();
 
         $query = $this->applySoftDeletes($query, $model);
+        $query = $this->applyEagerLoading($query, $relations, $relationsCallback);
         $query = $this->applySearch($query, $key, $targets);
 
         // Finally, find the requested records...
@@ -183,10 +214,10 @@ trait MultipleRecords
     /**
      * Verifies that all requested records are found or fails
      *
-     * @param string[]|int[] $requested
-     * @param Collection<Model> $found
-     * @param string $matchKey Name of key to match
-     * @param string $targetsKey Name of property in request payload
+     * @param string[]|int[] $requested List of unique identifiers
+     * @param Collection<Model> $found Collection of found records
+     * @param string $matchKey Key to match from found records
+     * @param string $targetsKey Name of property in request payload that contains "targets"
      *
      * @return Collection<Model>
      *
@@ -228,7 +259,7 @@ trait MultipleRecords
      */
     public function acceptIntegerValues(): static
     {
-        $this->targetIdentifierRules = $this->integerValueRules();
+        $this->targetIdentifierRules = $this->uniqueIntegerValuesRules();
         $this->modelKeyName = $this->integerKeyName;
 
         return $this;
@@ -241,8 +272,28 @@ trait MultipleRecords
      */
     public function acceptStringValues(): static
     {
-        $this->targetIdentifierRules = $this->stringValueRules();
+        $this->targetIdentifierRules = $this->uniqueStringValuesRules();
         $this->modelKeyName = $this->stringKeyName;
+
+        return $this;
+    }
+
+    /**
+     * Set the relations to be eager-loaded for requested records
+     *
+     * @param string[]|string $relations
+     * @param callable|null $callback
+     *
+     * @return self
+     */
+    public function with(array|string $relations, callable|null $callback = null): static
+    {
+        if (!is_array($relations)) {
+            $relations = [ $relations ];
+        }
+
+        $this->relations = $relations;
+        $this->relationsCallback = $callback;
 
         return $this;
     }
@@ -254,6 +305,10 @@ trait MultipleRecords
      */
     public function targetIdentifierRules(): array
     {
+        if (empty($this->targetIdentifierRules)) {
+            $this->acceptIntegerValues();
+        }
+
         return $this->targetIdentifierRules;
     }
 
@@ -278,11 +333,11 @@ trait MultipleRecords
     }
 
     /**
-     * Returns "distinct" integer values validation rules
+     * Returns unique integer values validation rules
      *
      * @return array
      */
-    protected function integerValueRules(): array
+    protected function uniqueIntegerValuesRules(): array
     {
         return [
             'required',
@@ -293,11 +348,11 @@ trait MultipleRecords
     }
 
     /**
-     * Returns "distinct" string values validation rules
+     * Returns unique string values validation rules
      *
      * @return array
      */
-    protected function stringValueRules(): array
+    protected function uniqueStringValuesRules(): array
     {
         return [
             'required',
@@ -332,6 +387,21 @@ trait MultipleRecords
     }
 
     /**
+     * Applies the relations to be eager-loaded for given query
+     *
+     * @param EloquentBuilder|Builder $query
+     * @param string[] $relations [optional]
+     * @param callable|null $callback [optional]
+     *
+     * @return EloquentBuilder|Builder
+     */
+    protected function applyEagerLoading(EloquentBuilder|Builder $query, array $relations = [], callable|null $callback = null): EloquentBuilder|Builder
+    {
+        return $query
+            ->with($relations, $callback);
+    }
+
+    /**
      * Applies "search" constraints for query
      *
      * @param EloquentBuilder|Builder $query
@@ -342,10 +412,7 @@ trait MultipleRecords
      */
     protected function applySearch(EloquentBuilder|Builder $query, string $key, array $targets): EloquentBuilder|Builder
     {
-        // Overwrite this method, if you require more advanced find records logic.
-
         return $query
-            ->with($this->with)
             ->whereIn($key, $targets);
     }
 
