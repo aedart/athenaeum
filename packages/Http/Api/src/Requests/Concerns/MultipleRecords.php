@@ -42,11 +42,11 @@ trait MultipleRecords
     protected bool $withTrashed = false;
 
     /**
-     * Validation rules for target identifiers
+     * Validation rules for target identifier
      *
      * @var array
      */
-    protected array $identifiersRules = [];
+    protected array $targetIdentifierRules = [];
 
     /**
      * Name of column which is used for selecting database records
@@ -227,7 +227,7 @@ trait MultipleRecords
      */
     public function acceptIntegerValues(): static
     {
-        $this->identifiersRules = $this->integerValueRules();
+        $this->targetIdentifierRules = $this->integerValueRules();
         $this->modelKeyName = $this->integerKeyName;
 
         return $this;
@@ -240,10 +240,20 @@ trait MultipleRecords
      */
     public function acceptStringValues(): static
     {
-        $this->identifiersRules = $this->stringValueRules();
+        $this->targetIdentifierRules = $this->stringValueRules();
         $this->modelKeyName = $this->stringKeyName;
 
         return $this;
+    }
+
+    /**
+     * Validation rules for target identifier
+     *
+     * @return array
+     */
+    public function targetIdentifierRules(): array
+    {
+        return $this->targetIdentifierRules;
     }
 
     /**
