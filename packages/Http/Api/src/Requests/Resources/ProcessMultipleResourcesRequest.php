@@ -41,6 +41,7 @@ abstract class ProcessMultipleResourcesRequest extends ValidatedApiRequest imple
 
         return array_merge(parent::rules(), [
             $key => [
+                'bail',
                 'required',
                 'array',
                 "min:{$this->min}",
