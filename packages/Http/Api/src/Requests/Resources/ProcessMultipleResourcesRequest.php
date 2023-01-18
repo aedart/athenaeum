@@ -11,6 +11,8 @@ use Throwable;
 /**
  * Process Multiple Resources Request
  *
+ * Request abstraction for processing multiple existing resources.
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Api\Requests\Resources
  */
