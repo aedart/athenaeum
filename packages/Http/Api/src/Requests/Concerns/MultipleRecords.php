@@ -130,8 +130,7 @@ trait MultipleRecords
         string $model,
         string|null $targetsKey = null,
         string|null $modelKey = null
-    ): Collection
-    {
+    ): Collection {
         $targetsKey = $targetsKey ?? $this->targetsKey();
         $modelKey = $modelKey ?? $this->modelKeyName();
 
