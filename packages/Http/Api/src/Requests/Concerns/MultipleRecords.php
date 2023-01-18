@@ -374,15 +374,11 @@ trait MultipleRecords
         $includeDeletedRecords = $this->withTrashed;
         $supportsSoftDeletes = in_array(SoftDeletes::class, class_uses_recursive($model));
 
-        if ($supportsSoftDeletes && $includeDeletedRecords) {
-            return $query->withTrashed();
-        }
-
-        if ($supportsSoftDeletes) {
-            return $query->withoutTrashed();
-        }
-
-        return $query;
+        return match (true) {
+            $supportsSoftDeletes && $includeDeletedRecords => $query->withTrashed(),
+            $supportsSoftDeletes => $query->withoutTrashed(),
+            default => $query
+        };
     }
 
     /**
