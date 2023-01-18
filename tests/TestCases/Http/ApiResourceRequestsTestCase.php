@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\TestCases\Http;
 
+use Aedart\Filters\Providers\FiltersServiceProvider;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\User;
 
 /**
@@ -28,6 +29,16 @@ abstract class ApiResourceRequestsTestCase extends ApiResourcesTestCase
         parent::_before();
 
         $this->seedUsers();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getPackageProviders($app): array
+    {
+        return array_merge(parent::getPackageProviders($app), [
+            FiltersServiceProvider::class
+        ]);
     }
 
     /*****************************************************************
