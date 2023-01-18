@@ -19,13 +19,6 @@ abstract class ProcessMultipleResourcesRequest extends ValidatedApiRequest imple
     use Concerns\MultipleRecords;
 
     /**
-     * Eloquent class path to the model in question
-     *
-     * @var string
-     */
-    protected string $model;
-
-    /**
      * Minimum amount of requested "targets"
      *
      * @var int
@@ -54,7 +47,7 @@ abstract class ProcessMultipleResourcesRequest extends ValidatedApiRequest imple
                 "max:{$this->max}"
             ],
 
-            "{$key}.*" => $this->identifiersRules,
+            "{$key}.*" => $this->identifiersRules(),
         ]);
     }
 
