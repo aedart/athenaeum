@@ -33,6 +33,15 @@ class JsonResourceServiceProvider extends ServiceProvider
         ], 'config');
 
         // -------------------------------------------------------------------- //
+
+        $langDir = __DIR__ . '/../../resources/lang';
+        $this->loadTranslationsFrom($langDir, 'athenaeum-http-api');
+
+        $this->publishes([
+            $langDir => $this->app->langPath('vendor/athenaeum-http-api'),
+        ]);
+
+        // -------------------------------------------------------------------- //
         // Register api resources that are defined in configuration
         $this->getApiResourceRegistrar()->register(
             $this->getConfig()->get('api-resources.registry', [])

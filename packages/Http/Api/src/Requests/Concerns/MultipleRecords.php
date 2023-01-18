@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 
@@ -358,6 +359,8 @@ trait MultipleRecords
      */
     protected function makeRecordNotFoundMessage(string|int $target, string|int $index): string
     {
-        return sprintf('#%s - Target %s does not exist', $index, $target);
+        $key = 'athenaeum-http-api::api-resources.record_not_found';
+
+        return Lang::get($key, [ 'record' => $target ]);
     }
 }
