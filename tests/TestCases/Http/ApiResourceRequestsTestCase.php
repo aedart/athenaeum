@@ -4,7 +4,9 @@ namespace Aedart\Tests\TestCases\Http;
 
 use Aedart\Filters\Providers\FiltersServiceProvider;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Game;
+use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Owner;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\User;
+use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\OwnerResource;
 
 /**
  * Api Resource Requests Test Case
@@ -32,6 +34,8 @@ abstract class ApiResourceRequestsTestCase extends ApiResourcesTestCase
         $this
             ->seedUsers()
             ->seedGames();
+
+        $this->registerResources();
     }
 
     /**
@@ -42,6 +46,22 @@ abstract class ApiResourceRequestsTestCase extends ApiResourcesTestCase
         return array_merge(parent::getPackageProviders($app), [
             FiltersServiceProvider::class
         ]);
+    }
+
+    /**
+     * Registers resources for tests
+     *
+     * @return self
+     */
+    protected function registerResources(): static
+    {
+        $registrar = $this->getApiResourceRegistrar();
+
+        $registrar->register([
+            Owner::class => OwnerResource::class
+        ]);
+
+        return $this;
     }
 
     /*****************************************************************
