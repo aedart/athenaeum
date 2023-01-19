@@ -70,6 +70,26 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    public function doesNotFailWhenNullEtagHeaderValueReceived(): void
+    {
+        // This is really an edge case, where somehow null is set as value
+        // for a header...
+        $request = Request::create('/test', 'GET', [], [], [], [
+            'HTTP_IF_MATCH' => null
+        ]);
+
+        /** @var Collection $ifMatchEtags */
+        $ifMatchEtags = $request->etagsFrom('If-Match');
+
+        $this->assertInstanceOf(Collection::class, $ifMatchEtags, 'If-Match etags not a collection');
+        $this->assertTrue($ifMatchEtags->isEmpty());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
     public function failsWhenInvalidEtagValues(): void
     {
         $this->expectException(BadRequestHttpException::class);
