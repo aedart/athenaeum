@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Helpers\Dummies\Http\Api\Models;
 
 use Aedart\Contracts\Database\Models\Sluggable;
+use Aedart\Database\Models\Concerns\Filtering;
 use Aedart\Database\Models\Concerns\Slugs;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Factories\GameFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,6 +36,7 @@ class Game extends Model implements Sluggable
     use Slugs;
     use SoftDeletes;
     use HasFactory;
+    use Filtering;
 
     /**
      * The table associated with the model.

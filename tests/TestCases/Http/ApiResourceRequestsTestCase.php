@@ -3,6 +3,7 @@
 namespace Aedart\Tests\TestCases\Http;
 
 use Aedart\Filters\Providers\FiltersServiceProvider;
+use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Game;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\User;
 
 /**
@@ -28,7 +29,9 @@ abstract class ApiResourceRequestsTestCase extends ApiResourcesTestCase
     {
         parent::_before();
 
-        $this->seedUsers();
+        $this
+            ->seedUsers()
+            ->seedGames();
     }
 
     /**
@@ -48,12 +51,28 @@ abstract class ApiResourceRequestsTestCase extends ApiResourcesTestCase
     /**
      * Seeds the users table with dummy records
      *
-     * @return void
+     * @return self
      */
-    protected function seedUsers(): void
+    protected function seedUsers(): static
     {
         User::factory()
             ->count(25)
             ->create();
+
+        return $this;
+    }
+
+    /**
+     * Seeds the games table with dummy records
+     *
+     * @return self
+     */
+    public function seedGames(): static
+    {
+        Game::factory()
+            ->count(25)
+            ->create();
+
+        return $this;
     }
 }
