@@ -3,8 +3,10 @@
 namespace Aedart\Tests\Helpers\Dummies\Http\Api\Models;
 
 use Aedart\Contracts\Database\Models\Sluggable;
+use Aedart\Contracts\ETags\HasEtag;
 use Aedart\Database\Models\Concerns\Filtering;
 use Aedart\Database\Models\Concerns\Slugs;
+use Aedart\ETags\Concerns\EloquentEtag;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Factories\GameFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -31,11 +33,14 @@ use Illuminate\Support\Carbon;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Http\Api\Models
  */
-class Game extends Model implements Sluggable
+class Game extends Model implements
+    Sluggable,
+    HasEtag
 {
     use Slugs;
     use SoftDeletes;
     use HasFactory;
+    use EloquentEtag;
     use Filtering;
 
     /**
