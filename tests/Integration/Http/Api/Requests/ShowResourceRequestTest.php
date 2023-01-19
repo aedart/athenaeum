@@ -32,7 +32,7 @@ class ShowResourceRequestTest extends ApiResourceRequestsTestCase
         parent::_before();
 
         // Debugging
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
     }
 
     /*****************************************************************
@@ -94,7 +94,8 @@ class ShowResourceRequestTest extends ApiResourceRequestsTestCase
         // ------------------------------------------------------------------ //
 
         Route::get('/users/{id}', function (ShowUserRequest $request) {
-            return UserResource::make($request->record);
+            return UserResource::make($request->record)
+                ->withCache();
         })->name('users.show');
 
         Route::getRoutes()->refreshNameLookups();
@@ -109,6 +110,7 @@ class ShowResourceRequestTest extends ApiResourceRequestsTestCase
         Response::decode($responseA);
 
         // ------------------------------------------------------------------ //
+        // If-None-Match
 
         $headersA = $responseA->headers;
         $responseB = $this
@@ -118,5 +120,16 @@ class ShowResourceRequestTest extends ApiResourceRequestsTestCase
             ->assertStatus(HttpStatus::NOT_MODIFIED);
 
         Response::decode($responseB);
+
+        // ------------------------------------------------------------------ //
+        // If-Modified-Since
+
+        $responseC = $this
+            ->getJson($url, [
+                'If-Modified-Since' => $headersA->get('last-modified')
+            ])
+            ->assertStatus(HttpStatus::NOT_MODIFIED);
+
+        Response::decode($responseC);
     }
 }
