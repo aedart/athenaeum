@@ -30,7 +30,7 @@ class ListDeletedResourcesTest extends ApiResourceRequestsTestCase
         parent::_before();
 
         // Debugging
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
     }
 
     /*****************************************************************
