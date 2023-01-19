@@ -36,8 +36,11 @@ class Response
         }
 
         if ($debug) {
-            ConsoleDebugger::output($jsonResponse->headers->all());
-            ConsoleDebugger::output($content);
+            ConsoleDebugger::output([
+                'status' => $jsonResponse->getStatusCode() . ' ' . $jsonResponse->statusText(),
+                'headers' => $jsonResponse->headers->all(),
+                'body' => $content
+            ]);
         }
 
         return $content;
