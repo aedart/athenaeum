@@ -17,12 +17,12 @@ use Teapot\StatusCode\All as HttpStatus;
  * @group http-api
  * @group api-resource
  * @group api-resource-requests
- * @group show-resource-request
+ * @group show-single-resource-request
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
-class ShowResourceRequestTest extends ApiResourceRequestsTestCase
+class ShowSingleResourceRequestTest extends ApiResourceRequestsTestCase
 {
     /**
      * @inheritDoc
