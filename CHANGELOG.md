@@ -39,6 +39,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `SearchProcessor::language()`. Features didn't work as intended. No replacement has been implemented.
 * `Str::tree()`. Replaced by `Arr::tree()`.
 
+## [6.8.1] - 2023-01-19
+
+### Fixed
+
+* Type Error when attempting to parse etags collection from Http header value that was set to `null`, in `\Aedart\ETags\Mixins\RequestETagsMixin::etagsFrom()`.
+
 ## [6.8.0] - 2023-01-09
 
 ### Changed
@@ -929,7 +935,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/6.8.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/6.8.1...HEAD
+[6.8.1]: https://github.com/aedart/athenaeum/compare/6.8.0...6.8.1
 [6.8.0]: https://github.com/aedart/athenaeum/compare/6.7.0...6.8.0
 [6.7.0]: https://github.com/aedart/athenaeum/compare/6.6.0...6.7.0
 [6.6.0]: https://github.com/aedart/athenaeum/compare/6.5.2...6.6.0
