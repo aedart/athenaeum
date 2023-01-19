@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Users;
 
+use Aedart\Contracts\Filters\Builder;
 use Aedart\Http\Api\Requests\Resources\ListResourcesRequest;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\User;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Users\Filters\UsersFiltersBuilder;
@@ -27,7 +28,7 @@ class ListUsersRequest extends ListResourcesRequest
     /**
      * @inheritDoc
      */
-    public function filtersBuilder(): string|null
+    public function filtersBuilder(): string|Builder|null
     {
         return UsersFiltersBuilder::class;
     }

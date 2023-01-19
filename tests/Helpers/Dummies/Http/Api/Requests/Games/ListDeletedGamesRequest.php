@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Games;
 
+use Aedart\Contracts\Filters\Builder;
 use Aedart\Http\Api\Requests\Resources\ListDeletedResourcesRequest;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Game;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Games\Filters\GamesFiltersBuilder;
@@ -27,9 +28,9 @@ class ListDeletedGamesRequest extends ListDeletedResourcesRequest
     /**
      * @inheritDoc
      */
-    public function filtersBuilder(): string|null
+    public function filtersBuilder(): string|Builder|null
     {
-        return GamesFiltersBuilder::class;
+        return GamesFiltersBuilder::make($this);
     }
 
     /**
