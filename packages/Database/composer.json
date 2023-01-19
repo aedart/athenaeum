@@ -1,7 +1,11 @@
 {
     "name": "aedart/athenaeum-database",
     "description": "Database utilities for Laravel",
-    "keywords": ["Athenaeum", "Database", "Db"],
+    "keywords": [
+        "Athenaeum",
+        "Database",
+        "Db"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
@@ -13,9 +17,9 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "aedart/athenaeum-contracts": "^6.9",
-        "aedart/athenaeum-support": "^6.9",
-        "aedart/athenaeum-utils": "^6.9",
+        "aedart/athenaeum-contracts": "^6.8.1",
+        "aedart/athenaeum-support": "^6.8.1",
+        "aedart/athenaeum-utils": "^6.8.1",
         "illuminate/database": "^v9.30.1"
     },
     "autoload": {

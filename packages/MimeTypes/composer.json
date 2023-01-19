@@ -1,7 +1,11 @@
 {
     "name": "aedart/athenaeum-mime-types",
     "description": "Mime-Types",
-    "keywords": ["Athenaeum", "Utilities", "mime-type"],
+    "keywords": [
+        "Athenaeum",
+        "Utilities",
+        "mime-type"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
@@ -14,8 +18,8 @@
     "require": {
         "php": "^8.0.2",
         "ext-fileinfo": "*",
-        "aedart/athenaeum-contracts": "^6.9",
-        "aedart/athenaeum-support": "^6.9"
+        "aedart/athenaeum-contracts": "^6.8.1",
+        "aedart/athenaeum-support": "^6.8.1"
     },
     "autoload": {
         "psr-4": {

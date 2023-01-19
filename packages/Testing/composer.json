@@ -1,7 +1,10 @@
 {
     "name": "aedart/athenaeum-testing",
     "description": "Testing utilities built on top of Orchestra Testbench and Codeception",
-    "keywords": ["Athenaeum", "Testing"],
+    "keywords": [
+        "Athenaeum",
+        "Testing"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
@@ -13,8 +16,8 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "aedart/athenaeum-container": "^6.9",
-        "aedart/athenaeum-contracts": "^6.9",
+        "aedart/athenaeum-container": "^6.8.1",
+        "aedart/athenaeum-contracts": "^6.8.1",
         "codeception/codeception": "^5.0.2",
         "codeception/module-asserts": "^3.0.0",
         "fakerphp/faker": "^v1.20.0",

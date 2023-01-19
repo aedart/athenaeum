@@ -1,7 +1,12 @@
 {
     "name": "aedart/athenaeum-container",
     "description": "Slightly adapted version of Laravel's Service Container",
-    "keywords": ["Athenaeum", "IoC", "Container", "Service Container"],
+    "keywords": [
+        "Athenaeum",
+        "IoC",
+        "Container",
+        "Service Container"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
@@ -13,8 +18,8 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "aedart/athenaeum-contracts": "^6.9",
-        "aedart/athenaeum-support": "^6.9",
+        "aedart/athenaeum-contracts": "^6.8.1",
+        "aedart/athenaeum-support": "^6.8.1",
         "illuminate/container": "^v9.30.1"
     },
     "autoload": {

@@ -1,7 +1,15 @@
 {
     "name": "aedart/athenaeum-utils",
     "description": "Offers a few utility components that are used by the Athenaeum packages",
-    "keywords": ["Athenaeum", "Utilities", "Array", "Json", "Math", "Function", "Version"],
+    "keywords": [
+        "Athenaeum",
+        "Utilities",
+        "Array",
+        "Json",
+        "Math",
+        "Function",
+        "Version"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
@@ -14,7 +22,7 @@
     "require": {
         "php": "^8.0.2",
         "composer-runtime-api": "^2.0.0",
-        "aedart/athenaeum-contracts": "^6.9",
+        "aedart/athenaeum-contracts": "^6.8.1",
         "illuminate/support": "^v9.30.1"
     },
     "autoload": {

@@ -1,7 +1,16 @@
 {
     "name": "aedart/athenaeum-config",
     "description": "A loader that is able to load various types of configuration files",
-    "keywords": ["Athenaeum", "Configuration", "Loader", "ini", "Json", "PHP Array", "yaml", "toml"],
+    "keywords": [
+        "Athenaeum",
+        "Configuration",
+        "Loader",
+        "ini",
+        "Json",
+        "PHP Array",
+        "yaml",
+        "toml"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
@@ -13,9 +22,9 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "aedart/athenaeum-contracts": "^6.9",
-        "aedart/athenaeum-support": "^6.9",
-        "aedart/athenaeum-utils": "^6.9",
+        "aedart/athenaeum-contracts": "^6.8.1",
+        "aedart/athenaeum-support": "^6.8.1",
+        "aedart/athenaeum-utils": "^6.8.1",
         "illuminate/config": "^v9.30.1",
         "illuminate/filesystem": "^v9.30.1"
     },
