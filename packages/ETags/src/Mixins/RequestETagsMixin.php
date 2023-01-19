@@ -5,6 +5,7 @@ namespace Aedart\ETags\Mixins;
 use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Exceptions\ETagException;
+use Aedart\ETags\Exceptions\InvalidRawValue;
 use Aedart\ETags\Facades\Generator;
 use Closure;
 use DateTimeInterface;
@@ -33,7 +34,12 @@ class RequestETagsMixin
     {
         return function (string $header): Collection {
             try {
-                return Generator::parse($this->header($header, ''));
+                $value = $this->header($header);
+                if (empty($value)) {
+                    $value = '';
+                }
+
+                return Generator::parse($value);
             } catch (ETagException $e) {
                 throw new BadRequestHttpException(sprintf('Invalid etag value(s) in %s header', $header), $e);
             }
@@ -129,7 +135,7 @@ class RequestETagsMixin
     {
         return function (string $header): DateTimeInterface|null {
             $value = $this->header($header);
-            if (!isset($value)) {
+            if (empty($value)) {
                 return null;
             }
 
