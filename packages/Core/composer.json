@@ -1,7 +1,11 @@
 {
     "name": "aedart/athenaeum-core",
     "description": "A custom Laravel Application implementation, intended to be testing, tinkering or developing non-essential custom applications.",
-    "keywords": ["Athenaeum", "Core", "Application"],
+    "keywords": [
+        "Athenaeum",
+        "Core",
+        "Application"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",

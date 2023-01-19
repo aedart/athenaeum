@@ -1,7 +1,11 @@
 {
     "name": "aedart/athenaeum-mime-types",
     "description": "Mime-Types",
-    "keywords": ["Athenaeum", "Utilities", "mime-type"],
+    "keywords": [
+        "Athenaeum",
+        "Utilities",
+        "mime-type"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",

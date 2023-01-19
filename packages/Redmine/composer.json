@@ -1,7 +1,11 @@
 {
     "name": "aedart/athenaeum-redmine",
     "description": "Redmine API Client for Laravel",
-    "keywords": ["Athenaeum", "Redmine", "API"],
+    "keywords": [
+        "Athenaeum",
+        "Redmine",
+        "API"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",

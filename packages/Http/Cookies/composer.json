@@ -1,7 +1,13 @@
 {
     "name": "aedart/athenaeum-http-cookies",
     "description": "Simple DTOs for Http Cookie and Set-Cookie",
-    "keywords": ["Athenaeum", "Http", "Cookie", "Set-Cookie", "Dto"],
+    "keywords": [
+        "Athenaeum",
+        "Http",
+        "Cookie",
+        "Set-Cookie",
+        "Dto"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",

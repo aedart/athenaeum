@@ -1,7 +1,11 @@
 {
     "name": "aedart/athenaeum-contracts",
     "description": "Athenaeum contracts package",
-    "keywords": ["Athenaeum", "Contracts", "Interfaces"],
+    "keywords": [
+        "Athenaeum",
+        "Contracts",
+        "Interfaces"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",

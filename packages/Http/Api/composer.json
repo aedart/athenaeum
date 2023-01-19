@@ -1,7 +1,12 @@
 {
     "name": "aedart/athenaeum-http-api",
     "description": "Json based API utilities",
-    "keywords": ["Athenaeum", "Http", "Json", "API"],
+    "keywords": [
+        "Athenaeum",
+        "Http",
+        "Json",
+        "API"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",

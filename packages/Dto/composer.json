@@ -1,7 +1,11 @@
 {
     "name": "aedart/athenaeum-dto",
     "description": "Data Transfer Object (DTO) abstraction",
-    "keywords": ["Athenaeum", "DTO", "Data transfer object"],
+    "keywords": [
+        "Athenaeum",
+        "DTO",
+        "Data transfer object"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",

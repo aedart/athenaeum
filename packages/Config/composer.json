@@ -1,7 +1,16 @@
 {
     "name": "aedart/athenaeum-config",
     "description": "A loader that is able to load various types of configuration files",
-    "keywords": ["Athenaeum", "Configuration", "Loader", "ini", "Json", "PHP Array", "yaml", "toml"],
+    "keywords": [
+        "Athenaeum",
+        "Configuration",
+        "Loader",
+        "ini",
+        "Json",
+        "PHP Array",
+        "yaml",
+        "toml"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",

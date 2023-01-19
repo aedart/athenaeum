@@ -1,7 +1,11 @@
 {
     "name": "aedart/athenaeum-database",
     "description": "Database utilities for Laravel",
-    "keywords": ["Athenaeum", "Database", "Db"],
+    "keywords": [
+        "Athenaeum",
+        "Database",
+        "Db"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",

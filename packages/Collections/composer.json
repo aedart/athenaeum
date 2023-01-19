@@ -1,7 +1,11 @@
 {
     "name": "aedart/athenaeum-collections",
     "description": "Collections and data processing utilities",
-    "keywords": ["Athenaeum", "Collections", "Items Processor"],
+    "keywords": [
+        "Athenaeum",
+        "Collections",
+        "Items Processor"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",

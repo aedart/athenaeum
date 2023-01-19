@@ -1,7 +1,13 @@
 {
     "name": "aedart/athenaeum-audit",
     "description": "Audit trail package for Laravel Eloquent",
-    "keywords": ["Athenaeum", "Audit Trail", "Audit Log", "History", "Eloquent"],
+    "keywords": [
+        "Athenaeum",
+        "Audit Trail",
+        "Audit Log",
+        "History",
+        "Eloquent"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "support": {
         "issues": "https://github.com/aedart/athenaeum/issues",

@@ -1,7 +1,15 @@
 {
     "name": "aedart/athenaeum-utils",
     "description": "Offers a few utility components that are used by the Athenaeum packages",
-    "keywords": ["Athenaeum", "Utilities", "Array", "Json", "Math", "Function", "Version"],
+    "keywords": [
+        "Athenaeum",
+        "Utilities",
+        "Array",
+        "Json",
+        "Math",
+        "Function",
+        "Version"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",

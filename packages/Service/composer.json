@@ -1,7 +1,11 @@
 {
     "name": "aedart/athenaeum-service",
     "description": "Service Registrar that is able to register and boot Laravel Service Providers",
-    "keywords": ["Athenaeum", "Service Registrar", "Service Provider"],
+    "keywords": [
+        "Athenaeum",
+        "Service Registrar",
+        "Service Provider"
+    ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
     "type": "library",
