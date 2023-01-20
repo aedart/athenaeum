@@ -21,7 +21,7 @@ class SearchFilterTest extends FiltersTestCase
     /**
      * @test
      */
-    public function canBeApplied()
+    public function canApplyFilter()
     {
         $search = $this->getFaker()->words(3, true);
         $columns = [ 'name', 'description' ];
@@ -45,5 +45,27 @@ class SearchFilterTest extends FiltersTestCase
         foreach ($columns as $column) {
             $this->assertStringContainsString($column, $sql, 'Column not part of search query!');
         }
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canApplySearchCallback(): void
+    {
+        $search = $this->getFaker()->words(3, true);
+
+        $filter = new SearchFilter($search, function($query, $search) {
+            return $query->where('my_column', '>', $search);
+        });
+
+        $query = $filter->apply(Category::query());
+        $sql = $query->toSql();
+        $bindings = $query->getBindings();
+
+        ConsoleDebugger::output($sql, $bindings);
+
+        $this->assertStringContainsString('where (`my_column` > ?)', $sql);
     }
 }

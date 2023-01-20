@@ -27,9 +27,9 @@ class SearchFilter extends Filter
     protected string $search;
 
     /**
-     * List of columns to search
+     * List of columns to be matched or callbacks to apply
      *
-     * @var string[]
+     * @var string[]|callable[]
      */
     protected array $columns;
 
@@ -37,10 +37,14 @@ class SearchFilter extends Filter
      * SearchFilter
      *
      * @param string $search
-     * @param string[] $columns
+     * @param string|callable|string[]|callable[] $columns
      */
-    public function __construct(string $search, array $columns)
+    public function __construct(string $search, string|callable|array $columns)
     {
+        if (!is_array($columns)) {
+            $columns = [ $columns ];
+        }
+
         $this->search = $search;
         $this->columns = $columns;
     }
@@ -78,10 +82,29 @@ class SearchFilter extends Filter
     protected function searchFor(string $searchTerm, Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         foreach ($this->columns as $column) {
+            if (!is_string($column) && is_callable($column)) {
+                $query = $this->applySearchCallback($column, $query, $searchTerm);
+                continue;
+            }
+
             $query = $this->matchColumn($column, $searchTerm, $query);
         }
 
         return $query;
+    }
+
+    /**
+     * Applies search callback for given search term
+     *
+     * @param callable $callback
+     * @param Builder|EloquentBuilder $query
+     * @param string $searchTerm
+     *
+     * @return Builder|EloquentBuilder
+     */
+    protected function applySearchCallback(callable $callback, Builder|EloquentBuilder $query, string $searchTerm): Builder|EloquentBuilder
+    {
+        return $callback($query, $searchTerm);
     }
 
     /**
