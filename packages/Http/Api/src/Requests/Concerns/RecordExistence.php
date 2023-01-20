@@ -21,7 +21,7 @@ trait RecordExistence
      * @param string[]|int[] $requested List of unique identifiers
      * @param Collection<Model> $found Collection of found records
      * @param string $matchKey Key to match from found records (model key)
-     * @param string $targetsKey Property in requested payload that contain
+     * @param string $targetsKey [optional] Property in requested payload that contain
      *                           "targets" (unique identifiers) to match
      *
      * @return Collection<Model>
@@ -32,24 +32,34 @@ trait RecordExistence
         array $requested,
         Collection $found,
         string $matchKey,
-        string $targetsKey
+        string $targetsKey = 'targets'
     ): Collection {
-        // When the amount found matches amount requested, then we assume that all were
-        // found. Might not be the most correct, but should be fast...
-        if ($found->count() === count($requested)) {
+
+        // If by any change nothing is requested, then just skip the rest and
+        // return what was found, if anything at all...
+        if (empty($requested)) {
             return $found;
         }
 
-        // Otherwise, the difference must be identified and exception thrown.
-        $foundValues = $found->pluck($matchKey)->toArray();
-        $difference = array_diff($requested, $foundValues);
+        // Obtain the found records' identifiers - the matching key
+        $foundIdentifiers = $found
+            ->pluck($matchKey)
+            ->toArray();
+
+        // Compute the difference between requested and found. If there is no
+        // difference, then all requested records are found...
+        $difference = array_diff($requested, $foundIdentifiers);
+        if ($found->count() === count($requested) && empty($difference)) {
+            return $found;
+        }
+
+        // Otherwise it means that at least one requested identifier was not
+        // part of the found identifiers list. A validation exception must
+        // therefore be thrown, with not found identifier(s).
 
         $errors = [];
         foreach ($difference as $notFound) {
             $index = array_search($notFound, $requested);
-            if ($index === false) {
-                $index = $notFound;
-            }
 
             $errors["{$targetsKey}.{$index}"] = $this->makeRecordNotFoundMessage($notFound, $index);
         }

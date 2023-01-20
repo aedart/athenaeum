@@ -58,12 +58,34 @@ class RecordExistenceConcernTest extends ApiResourceRequestsTestCase
             ->pluck('slug')
             ->toArray();
 
-        $matchKey = 'slug';
+        // ------------------------------------------------------------------ //
+
+        $result = $this->makeConcern()
+            ->verifyAllRecordsFound($requested, $found, 'slug');
+
+        // ------------------------------------------------------------------ //
+
+        $this->assertSame($found, $result);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function returnAllFoundWhenNothingRequested(): void
+    {
+        /** @var Collection<Game> $found */
+        $found = Game::factory()
+            ->count(5)
+            ->create();
+
+        $requested = [];
 
         // ------------------------------------------------------------------ //
 
         $result = $this->makeConcern()
-            ->verifyAllRecordsFound($requested, $found, $matchKey);
+            ->verifyAllRecordsFound($requested, $found, 'slug');
 
         // ------------------------------------------------------------------ //
 
@@ -93,8 +115,6 @@ class RecordExistenceConcernTest extends ApiResourceRequestsTestCase
             ...$invalid,
         ];
 
-        $matchKey = 'slug';
-
         // ------------------------------------------------------------------ //
 
         $exceptionThrown = false;
@@ -102,7 +122,7 @@ class RecordExistenceConcernTest extends ApiResourceRequestsTestCase
 
         try {
             $this->makeConcern()
-                ->verifyAllRecordsFound($requested, $found, $matchKey);
+                ->verifyAllRecordsFound($requested, $found, 'slug');
         } catch (ValidationException $e) {
             ConsoleDebugger::output($e->errors());
 
