@@ -143,7 +143,7 @@ trait MultipleRecords
         );
 
         // Finally, invoke "post found" hook method and return found records.
-        $this->whenRecordsAreFound($this->records);
+        $this->whenRecordsAreFound($found);
 
         return $this->records = $found;
     }
