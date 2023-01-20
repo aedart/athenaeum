@@ -48,7 +48,7 @@ class Database
      * @param string[]|callable[] $columns
      * @param string|null $prefix [optional] E.g. table name
      *
-     * @return array
+     * @return string[]|callable[]
      */
     public static function prefixColumns(array $columns, string|null $prefix = null): array
     {
