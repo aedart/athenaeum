@@ -39,6 +39,9 @@ abstract class ProcessMultipleResourcesRequest extends ValidatedApiRequest imple
      */
     protected function prepareForValidation()
     {
+        // Overwrite this method to configure additional request behaviour,
+        // e.g. $this->with([ ... ]) relations to eager load, ...etc
+
         $this->configureValuesToAccept();
     }
 
