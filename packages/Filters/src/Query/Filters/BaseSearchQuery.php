@@ -25,7 +25,8 @@ abstract class BaseSearchQuery
      */
     public function __construct(
         protected string|null $tablePrefix = null
-    ) {}
+    ) {
+    }
 
     /**
      * Returns table prefix

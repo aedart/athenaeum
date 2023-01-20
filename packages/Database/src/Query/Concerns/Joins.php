@@ -67,8 +67,7 @@ trait Joins
         string|null $second = null,
         string $type = 'inner',
         bool $where = false
-    ): Builder|EloquentBuilder
-    {
+    ): Builder|EloquentBuilder {
         if ($this->hasJoinTo($query, $table)) {
             return $query;
         }

@@ -45,7 +45,7 @@ class DatabaseUtilsTest extends DatabaseTestCase
         $columns = [
             'name',
             'price',
-            fn() => true,
+            fn () => true,
         ];
 
         $result = Database::prefixColumns($columns, $prefix);

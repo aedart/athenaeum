@@ -59,7 +59,7 @@ class SearchFilterTest extends FiltersTestCase
     {
         $search = $this->getFaker()->words(3, true);
 
-        $filter = new SearchFilter($search, function($query, $search) {
+        $filter = new SearchFilter($search, function ($query, $search) {
             return $query->where('my_column', '>', $search);
         });
 
@@ -81,8 +81,7 @@ class SearchFilterTest extends FiltersTestCase
     {
         $search = $this->getFaker()->words(3, true);
 
-        $searchQuery = new class extends BaseSearchQuery
-        {
+        $searchQuery = new class() extends BaseSearchQuery {
             public function __invoke(Builder|EloquentBuilder $query, string $search): Builder|EloquentBuilder
             {
                 return $query
