@@ -63,20 +63,6 @@ trait MultipleRecords
     protected string $modelKeyName;
 
     /**
-     * Name of integer type primary key
-     *
-     * @var string
-     */
-    protected string $integerKeyName = 'id';
-
-    /**
-     * Name of string type identifier key
-     *
-     * @var string
-     */
-    protected string $stringKeyName = 'slug';
-
-    /**
      * Name of property in received request payload that
      * holds identifiers.
      *
@@ -254,12 +240,14 @@ trait MultipleRecords
     /**
      * Accepts integer values for {@see targetsKey()} property
      *
+     * @param string $key [optional] Name of unique key in model
+     *
      * @return self
      */
-    public function acceptIntegerValues(): static
+    public function acceptIntegerValues(string $key = 'id'): static
     {
         $this->targetIdentifierRules = $this->uniqueIntegerValuesRules();
-        $this->modelKeyName = $this->integerKeyName;
+        $this->modelKeyName = $key;
 
         return $this;
     }
@@ -267,12 +255,14 @@ trait MultipleRecords
     /**
      * Accepts string values for {@see targetsKey()} property
      *
+     * @param string $key [optional] Name of unique key in model
+     *
      * @return self
      */
-    public function acceptStringValues(): static
+    public function acceptStringValues(string $key = 'slug'): static
     {
         $this->targetIdentifierRules = $this->uniqueStringValuesRules();
-        $this->modelKeyName = $this->stringKeyName;
+        $this->modelKeyName = $key;
 
         return $this;
     }
