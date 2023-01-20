@@ -2,10 +2,13 @@
 
 namespace Aedart\Tests\Integration\Filters;
 
+use Aedart\Filters\Query\Filters\BaseSearchQuery;
 use Aedart\Filters\Query\Filters\SearchFilter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 /**
  * SearchFilterTest
@@ -67,5 +70,35 @@ class SearchFilterTest extends FiltersTestCase
         ConsoleDebugger::output($sql, $bindings);
 
         $this->assertStringContainsString('where (`my_column` > ?)', $sql);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canApplyInvokableSearchQueryInstance(): void
+    {
+        $search = $this->getFaker()->words(3, true);
+
+        $searchQuery = new class extends BaseSearchQuery
+        {
+            public function __invoke(Builder|EloquentBuilder $query, string $search): Builder|EloquentBuilder
+            {
+                return $query
+                    ->orWhere('name', '=', $search)
+                    ->orWhere('owner', '=', $search);
+            }
+        };
+
+        $filter = new SearchFilter($search, $searchQuery);
+
+        $query = $filter->apply(Category::query());
+        $sql = $query->toSql();
+        $bindings = $query->getBindings();
+
+        ConsoleDebugger::output($sql, $bindings);
+
+        $this->assertStringContainsString('where (`name` = ? or `owner` = ?)', $sql);
     }
 }
