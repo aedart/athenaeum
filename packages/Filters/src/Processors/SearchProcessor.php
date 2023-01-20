@@ -23,9 +23,9 @@ class SearchProcessor extends BaseProcessor
     use TranslatorTrait;
 
     /**
-     * List of table columns to search
+     * List of columns to search or search callbacks
      *
-     * @var string[]
+     * @var string[]|callable[]
      */
     protected array $columns;
 
@@ -50,7 +50,7 @@ class SearchProcessor extends BaseProcessor
 
         // Abort if no columns are set
         if (empty($this->columns)) {
-            throw new LogicException('No table columns specified to search in');
+            throw new LogicException('No columns or callbacks specified to search in');
         }
 
         // Validate and sanitise search term(s)
@@ -68,12 +68,16 @@ class SearchProcessor extends BaseProcessor
     /**
      * Set the columns to be searched
      *
-     * @param string[] $columns
+     * @param string|callable|string[]|callable[] $columns
      *
      * @return self
      */
-    public function columns(array $columns): static
+    public function columns(string|callable|array $columns): static
     {
+        if (!is_array($columns)) {
+            $columns = [ $columns ];
+        }
+
         $this->columns = $columns;
 
         return $this;
