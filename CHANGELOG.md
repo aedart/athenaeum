@@ -23,13 +23,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Minimum required PHP version changed to `v8.1`.
 * Adapted CI environment to test PHP `v8.1` and `v8.2`.
-* `ApiResourceServiceProvider` changed to be an aggregate service provider that automatically registers `ETagsServiceProvider`. 
+* `ApiResourceServiceProvider` changed to be an aggregate service provider that automatically registers `ETagsServiceProvider`.
 
 **Non-breaking Changes**
 
 * `getResourceKeyName()` in `ApiResource` now throws `LogicException`, if unable to determine resource's identifier key name.
 * `hash()` method can now accept options for the specified hashing algorithm. [#106](https://github.com/aedart/athenaeum/issues/106)
 * Temporary and public URL tests for database adapter are forced to evaluate to true. Original tests marked them as skipped, because features are not supported.
+* `SaerchFilter` no longer applies unnecessary query constraint (_the first comparison constraint_).
 
 ### Fixed
 
