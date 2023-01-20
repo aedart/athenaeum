@@ -20,8 +20,9 @@ trait RecordExistence
      *
      * @param string[]|int[] $requested List of unique identifiers
      * @param Collection<Model> $found Collection of found records
-     * @param string $matchKey Key to match from found records
-     * @param string $targetsKey Name of property in request payload that contains "targets"
+     * @param string $matchKey Key to match from found records (model key)
+     * @param string $targetsKey Property in requested payload that contain
+     *                           "targets" (unique identifiers) to match
      *
      * @return Collection<Model>
      *
