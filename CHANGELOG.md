@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `HttpCaching` concern in `ApiResource`, which can make it easier to set Http Cache Control headers.
 * `HasArbitraryData` interface and a default implementation in `ArbitraryData` concern, as part of the utils package. 
 * `sync()` method added for `FileStream`. [#105](https://github.com/aedart/athenaeum/issues/105).
-* `Db` utility, in the Database package.
+* `Database` utility component, in the Database package.
 * Test `Response` utility.
 
 ### Changed

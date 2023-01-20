@@ -8,14 +8,14 @@ use Illuminate\Database\ConnectionInterface;
 use RuntimeException;
 
 /**
- * Db
+ * Database (Utilities)
  *
- * Offers various database utilities
+ * Offers various database, connection and query utilities.
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Database\Utils
  */
-class Db
+class Database
 {
     /**
      * Determine the Pdo driver name that is used by given connection or query

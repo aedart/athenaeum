@@ -2,7 +2,7 @@
 
 namespace Aedart\Filters\Query\Filters\Concerns;
 
-use Aedart\Database\Utils\Db;
+use Aedart\Database\Utils\Database;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\ConnectionInterface;
@@ -27,6 +27,6 @@ trait DatabaseDriver
      */
     protected function determineDriver(ConnectionInterface|Builder|EloquentBuilder $connection): string
     {
-        return Db::determineDriver($connection);
+        return Database::determineDriver($connection);
     }
 }
