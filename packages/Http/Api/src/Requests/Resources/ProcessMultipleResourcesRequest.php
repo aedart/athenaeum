@@ -35,6 +35,14 @@ abstract class ProcessMultipleResourcesRequest extends ValidatedApiRequest imple
     protected int $max = 10;
 
     /**
+     * @inheritdoc
+     */
+    protected function prepareForValidation()
+    {
+        $this->configureValuesToAccept();
+    }
+
+    /**
      * @inheritDoc
      */
     public function rules(): array
