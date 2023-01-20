@@ -9,6 +9,7 @@ use Aedart\Contracts\ETags\HasEtag;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Throwable;
 
 /**
  * Concerns a Single Record
@@ -35,13 +36,28 @@ trait SingleRecord
     abstract public function findRecordOrFail(): Model;
 
     /**
+     * Determine if user is authorised to see or process the record
+     *
+     * @param Model $record
+     *
+     * @return bool
+     */
+    abstract public function authorizeFoundRecord(Model $record): bool;
+
+    /**
      * Finds and prepares the requested record
      *
      * @return void
+     *
+     * @throws Throwable
      */
     public function findAndPrepareRecord(): void
     {
         $this->record = $this->findRecordOrFail();
+
+        if (!$this->authorizeFoundRecord($this->record)) {
+            $this->failedAuthorization();
+        }
 
         $this->whenRecordIsFound($this->record);
     }
@@ -60,6 +76,18 @@ trait SingleRecord
     {
         // N/A - Overwrite this method if you need additional prepare or
         // validation logic, immediately after requested record was found.
+    }
+
+    /**
+     * Returns record's etag if available
+     *
+     * @return ETag|null
+     *
+     * @throws ETagGeneratorException
+     */
+    public function getRecordEtag(): ETag|null
+    {
+        return $this->getRecordStrongEtag();
     }
 
     /**
@@ -107,11 +135,11 @@ trait SingleRecord
     {
         $record = $this->record;
 
-        $updatedAtColumn = $record->getUpdatedAtColumn();
-        if (!isset($updatedAtColumn)) {
+        $column = $record->getUpdatedAtColumn();
+        if (!isset($column)) {
             return null;
         }
 
-        return $record[$updatedAtColumn];
+        return $record[$column] ?? null;
     }
 }

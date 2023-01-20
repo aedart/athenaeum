@@ -15,7 +15,7 @@ use Aedart\Database\Query\Exceptions\InvalidOperator;
  * @see \Aedart\Contracts\Database\Query\FieldCriteria
  * @see \Aedart\Database\Query\Filter
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Database\Query
  */
 abstract class FieldFilter extends Filter implements FieldCriteria

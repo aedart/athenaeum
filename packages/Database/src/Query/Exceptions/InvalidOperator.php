@@ -9,7 +9,7 @@ use Aedart\Contracts\Database\Query\Exceptions\InvalidOperatorException;
  *
  * @see \Aedart\Contracts\Database\Query\Exceptions\InvalidOperatorException
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Database\Query\Exceptions
  */
 class InvalidOperator extends FilterException implements InvalidOperatorException

@@ -11,7 +11,7 @@ use Aedart\Dto\ArrayDto;
  * @property Reference $tracker
  * @property string $subject
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials
  */
 class ChildIssueReference extends ArrayDto

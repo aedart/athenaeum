@@ -7,7 +7,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 /**
  * Sluggable
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Database\Models
  */
 interface Sluggable

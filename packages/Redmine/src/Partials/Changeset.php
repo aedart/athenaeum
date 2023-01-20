@@ -14,7 +14,7 @@ use Carbon\Carbon;
  * @property string $comments
  * @property Carbon $committed_on
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials
  */
 class Changeset extends ArrayDto

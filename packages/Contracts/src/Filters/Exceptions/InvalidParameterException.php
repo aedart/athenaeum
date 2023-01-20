@@ -10,7 +10,7 @@ use Throwable;
  *
  * Should be thrown whenever invalid http query parameters are received.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Filters\Exceptions
  */
 interface InvalidParameterException extends ProcessorException

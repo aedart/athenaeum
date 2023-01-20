@@ -2,7 +2,7 @@
 
 namespace Aedart\Http\Api\Requests\Resources;
 
-use Aedart\Http\Api\Requests\Concerns;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Update Single Resource Request
@@ -12,21 +12,11 @@ use Aedart\Http\Api\Requests\Concerns;
  */
 abstract class UpdateSingleResourceRequest extends ShowSingleResourceRequest
 {
-    use Concerns\UpdateConflict;
-
     /**
      * @inheritDoc
      */
-    public function authorizeAfterValidation(): bool
+    public function authorizeFoundRecord(Model $record): bool
     {
         return $this->allows('update', $this->record);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function whenRecordIsFound($record): void
-    {
-        // TODO: Prevent update conflict, e.g. if ETags mismatch or If-Unmodified-Since header set...
     }
 }

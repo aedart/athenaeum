@@ -9,7 +9,7 @@ use Aedart\Redmine\Relations\HasMany;
  *
  * @see https://www.redmine.org/projects/redmine/wiki/Rest_Enumerations
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class IssuePriority extends Enumeration

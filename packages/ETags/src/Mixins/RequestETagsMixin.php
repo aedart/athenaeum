@@ -5,7 +5,6 @@ namespace Aedart\ETags\Mixins;
 use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Exceptions\ETagException;
-use Aedart\ETags\Exceptions\InvalidRawValue;
 use Aedart\ETags\Facades\Generator;
 use Closure;
 use DateTimeInterface;

@@ -12,7 +12,7 @@ use Illuminate\Contracts\Database\Query\Builder;
  * A search filter that attempts to match given search term against
  * one or many table columns.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Query\Filters
  */
 class SearchFilter extends Filter

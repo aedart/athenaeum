@@ -27,7 +27,7 @@ use Throwable;
  *
  * @property Permission[]|Collection $permissions The permissions that belong to this group
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Acl\Models\Permissions
  */
 class Group extends Model implements Sluggable

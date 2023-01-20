@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Concerns Audit Trail Configuration
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Models\Concerns
  */
 trait AuditTrailConfiguration

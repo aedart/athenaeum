@@ -9,7 +9,7 @@ use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
  *
  * @see UnsupportedOperationException
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Exceptions
  */
 class UnsupportedOperation extends RedmineException implements UnsupportedOperationException

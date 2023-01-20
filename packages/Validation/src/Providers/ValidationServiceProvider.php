@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Validation Service Provider
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Acl\Providers
  */
 class ValidationServiceProvider extends ServiceProvider
@@ -20,7 +20,7 @@ class ValidationServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'athenaeum-validation');
 
         $this->publishes([
-            __DIR__ . '/../../resources/lang' => resource_path('lang/vendor/athenaeum-validation'),
+            __DIR__ . '/../../resources/lang' => $this->app->langPath('vendor/athenaeum-validation'),
         ]);
     }
 }

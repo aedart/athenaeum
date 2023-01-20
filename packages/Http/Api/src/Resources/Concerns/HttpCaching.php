@@ -73,11 +73,14 @@ trait HttpCaching
     }
 
     /**
+     * Sets http cache headers for given response
+     *
      * @see \Aedart\ETags\Mixins\ResponseETagsMixin::withCache
      *
-     * @param $response
-     * @param $request
-     * @return mixed
+     * @param \Illuminate\Http\JsonResponse $response
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function applyCacheHeaders($response, $request)
     {

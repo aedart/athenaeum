@@ -15,7 +15,7 @@ use Illuminate\Contracts\Auth\Access\Gate;
  *
  * @see Gate
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Acl
  */
 interface Registrar extends CacheAware

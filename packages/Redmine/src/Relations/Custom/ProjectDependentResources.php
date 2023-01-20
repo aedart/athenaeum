@@ -9,7 +9,7 @@ use Aedart\Redmine\Relations\HasMany;
  *
  * @see \Aedart\Redmine\Concerns\ProjectDependentResource
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Relations\Custom
  */
 class ProjectDependentResources extends HasMany

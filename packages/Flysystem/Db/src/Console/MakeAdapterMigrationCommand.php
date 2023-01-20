@@ -9,7 +9,7 @@ use RuntimeException;
 /**
  * Make Adapter Migration Command
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Flysystem\Db\Console
  */
 class MakeAdapterMigrationCommand extends Command

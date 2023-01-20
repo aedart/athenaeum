@@ -12,7 +12,7 @@ use Throwable;
  *
  * @see \Aedart\Contracts\Filters\Exceptions\ProcessorException
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Exceptions
  */
 class ProcessorException extends RuntimeException implements ProcessorExceptionInterface

@@ -5,7 +5,6 @@ namespace Aedart\Tests\Integration\ETags\Preconditions\Rfc9110;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\Actions\DefaultActions;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
-use Carbon\Carbon;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
@@ -35,13 +34,13 @@ class IfUnmodifiedSinceTest extends PreconditionsTestCase
         // NOTE: [...] If the selected representation's last modification date is EARLIER than or EQUAL to
         // the date provided in the field value, the condition is TRUE. [...]
 
-        $lastModified = now()->subMinutes(3)->toRfc7231String();
+        $lastModified = now()->subMinutes(3);
         $resource = $this->makeResourceContext(
-            lastModifiedDate: Carbon::make($lastModified)
+            lastModifiedDate: $lastModified
         );
 
         $request = $this->createRequest(
-            ifUnmodifiedSince: $lastModified
+            ifUnmodifiedSince: $lastModified->toRfc7231String()
         );
 
         $evaluator = $this->makeEvaluator($request);
@@ -69,9 +68,9 @@ class IfUnmodifiedSinceTest extends PreconditionsTestCase
         // NOTE: [...] If the selected representation's last modification date is EARLIER than or EQUAL to
         // the date provided in the field value, the condition is TRUE. [...]
 
-        $lastModified = now()->subMinutes(7)->toRfc7231String();
+        $lastModified = now()->subMinutes(7);
         $resource = $this->makeResourceContext(
-            lastModifiedDate: Carbon::make($lastModified)
+            lastModifiedDate: $lastModified
         );
 
         $request = $this->createRequest(
@@ -107,9 +106,9 @@ class IfUnmodifiedSinceTest extends PreconditionsTestCase
         // NOTE: [...] If the selected representation's last modification date is EARLIER than or EQUAL to
         // the date provided in the field value, the condition is TRUE. [...]
 
-        $lastModified = now()->subMinutes(3)->toRfc7231String();
+        $lastModified = now()->subMinutes(3);
         $resource = $this->makeResourceContext(
-            lastModifiedDate: Carbon::make($lastModified)
+            lastModifiedDate: $lastModified
         );
 
         $request = $this->createRequest(
@@ -139,9 +138,9 @@ class IfUnmodifiedSinceTest extends PreconditionsTestCase
 
         // -------------------------------------------------------------------- //
 
-        $lastModified = now()->subMinutes(7)->toRfc7231String();
+        $lastModified = now()->subMinutes(7);
         $resource = $this->makeResourceContext(
-            lastModifiedDate: Carbon::make($lastModified),
+            lastModifiedDate: $lastModified,
             determineStateChangeSuccess: function () {
                 return true;
             }

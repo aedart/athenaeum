@@ -29,7 +29,7 @@ use Throwable;
  * @property Permission[]|Collection $permissions Permissions that are granted to this role
  * @property BaseModel|Authenticatable $users Users that have this role are assigned to them
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Acl\Models
  */
 class Role extends Model implements Sluggable

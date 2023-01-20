@@ -12,7 +12,7 @@ use Aedart\Dto\ArrayDto;
  * @property bool|null $multiple
  * @property mixed $value
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials
  */
 class CustomFieldReference extends ArrayDto

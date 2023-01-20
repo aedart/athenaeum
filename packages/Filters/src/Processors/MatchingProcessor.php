@@ -15,7 +15,7 @@ use Aedart\Filters\Exceptions\InvalidParameter;
  *
  * @see \Aedart\Contracts\Filters\BuiltFiltersMap::meta
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Processors
  */
 class MatchingProcessor extends BaseProcessor

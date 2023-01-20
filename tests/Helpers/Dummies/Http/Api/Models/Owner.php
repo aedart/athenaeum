@@ -3,11 +3,14 @@
 namespace Aedart\Tests\Helpers\Dummies\Http\Api\Models;
 
 use Aedart\Contracts\Database\Models\Sluggable;
+use Aedart\Database\Models\Concerns\Filtering;
 use Aedart\Database\Models\Concerns\Slugs;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Factories\OwnerFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -22,6 +25,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon $updated_at
  *
  * @property-read Address|null $address Owner's address
+ * @property-read Collection<Game>|null $games Games this owner has
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Http\Api\Models
@@ -30,6 +34,7 @@ class Owner extends Model implements Sluggable
 {
     use Slugs;
     use HasFactory;
+    use Filtering;
 
     /**
      * The table associated with the model.
@@ -76,5 +81,15 @@ class Owner extends Model implements Sluggable
     public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class, 'address_id');
+    }
+
+    /**
+     * Games this owner has
+     *
+     * @return HasMany
+     */
+    public function games(): HasMany
+    {
+        return $this->hasMany(Game::class, 'owner_id');
     }
 }

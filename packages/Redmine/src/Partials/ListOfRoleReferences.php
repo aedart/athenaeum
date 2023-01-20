@@ -7,7 +7,7 @@ namespace Aedart\Redmine\Partials;
  *
  * @see RoleReference
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials
  */
 class ListOfRoleReferences extends NestedList

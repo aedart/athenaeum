@@ -9,7 +9,7 @@ use Throwable;
  *
  * General criteria exception.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Database\Query\Exceptions
  */
 interface CriteriaException extends Throwable

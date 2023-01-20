@@ -11,7 +11,7 @@ use Aedart\Dto\ArrayDto;
  * @property string $name
  * @property bool|null $inherited
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials
  */
 class RoleReference extends ArrayDto

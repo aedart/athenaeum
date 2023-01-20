@@ -15,7 +15,7 @@ use Symfony\Component\Finder\Finder;
  *
  * @see \Orchestra\Testbench\Bootstrap\LoadConfiguration
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Testing\Laravel\Bootstrap
  */
 class LoadSpecifiedConfiguration

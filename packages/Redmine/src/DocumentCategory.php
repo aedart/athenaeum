@@ -7,7 +7,7 @@ namespace Aedart\Redmine;
  *
  * @see https://www.redmine.org/projects/redmine/wiki/Rest_Enumerations
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class DocumentCategory extends Enumeration

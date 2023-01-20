@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
  *
  * @see \Illuminate\Database\Eloquent\Model
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Database
  */
 abstract class Model extends BaseModel implements Instantiatable

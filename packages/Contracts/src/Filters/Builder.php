@@ -8,7 +8,7 @@ namespace Aedart\Contracts\Filters;
  * Responsible for processing a request and built appropriate
  * query filters
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Filters
  */
 interface Builder

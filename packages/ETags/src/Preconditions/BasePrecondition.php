@@ -4,6 +4,9 @@ namespace Aedart\ETags\Preconditions;
 
 use Aedart\Contracts\ETags\Preconditions\Precondition;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
+use DateTimeInterface;
+use Illuminate\Support\Carbon;
+use LogicException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 /**
@@ -52,4 +55,44 @@ abstract class BasePrecondition implements Precondition
      * @throws HttpExceptionInterface
      */
     abstract public function whenFails(ResourceContext $resource): ResourceContext|string;
+
+    /**
+     * Resolve "last modified date" for given resource
+     *
+     * @param ResourceContext $resource
+     *
+     * @return Carbon
+     */
+    protected function resolveLastModifiedDate(ResourceContext $resource): Carbon
+    {
+        // Method SHOULD NOT be invoked when resource does not have a last modified date!
+        if (!$resource->hasLastModifiedDate()) {
+            throw new LogicException('Resource Context does not have a last modified date set!');
+        }
+
+        // When comparing a resource's "last modified date", the given datetime instance
+        // might contain a high precision, e.g. milliseconds, whereas a precondition's
+        // datetime instance will not (converted from string value). To ensure this
+        // does not become a problem, the last modified date to formatted and re-converted
+        // to a datetime instance.
+
+        return $this->reducePrecisionToSeconds($resource->lastModifiedDate());
+    }
+
+    /**
+     * Reconverts given datetime
+     *
+     * Method formats given datetime to RFC 7231 and then back to a datetime
+     * instance. Doing so will reduce date's precision to seconds!
+     *
+     * @param DateTimeInterface $datetime
+     *
+     * @return Carbon
+     */
+    protected function reducePrecisionToSeconds(DateTimeInterface $datetime): Carbon
+    {
+        $original = Carbon::instance($datetime);
+
+        return Carbon::make($original->toRfc7231String());
+    }
 }

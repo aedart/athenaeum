@@ -40,13 +40,6 @@ trait Authorisation
     }
 
     /**
-     * Returns the model in question for authorisation
-     *
-     * @return string|null Class path or null when no model required
-     */
-    abstract public function authorisationModel(): string|null;
-
-    /**
      * Determine if ability should be granted for current user.
      * (Is user allowed to...)
      *

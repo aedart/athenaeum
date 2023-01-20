@@ -9,7 +9,7 @@ namespace Aedart\Validation\Rules;
  *
  * @see https://semver.org/
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Validation\Rules
  */
 class SemanticVersion extends BaseRule

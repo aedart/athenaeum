@@ -8,7 +8,7 @@ use Illuminate\Support\Stringable;
 /**
  * String utility
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Utils
  */
 class Str extends BaseStr

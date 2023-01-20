@@ -11,7 +11,7 @@ use Throwable;
 /**
  * Concerns Model Attributes
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Observers\Concerns
  */
 trait ModelAttributes

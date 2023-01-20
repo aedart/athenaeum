@@ -18,7 +18,7 @@ use Aedart\Contracts\Database\Query\Exceptions\InvalidOperatorException;
  *
  * @see Criteria
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Database\Query
  */
 interface FieldCriteria extends Criteria

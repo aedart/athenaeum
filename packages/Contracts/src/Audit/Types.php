@@ -8,7 +8,7 @@ namespace Aedart\Contracts\Audit;
  *
  * Contains a few predefined Audit Trail Entry types.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Audit
  */
 interface Types

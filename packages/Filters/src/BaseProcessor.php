@@ -14,7 +14,7 @@ use RuntimeException;
  *
  * @see \Aedart\Contracts\Filters\Processor
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters
  */
 abstract class BaseProcessor implements Processor

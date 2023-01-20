@@ -4,7 +4,6 @@ namespace Aedart\ETags\Preconditions\Rfc9110;
 
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
-use Illuminate\Support\Carbon;
 
 /**
  * If-Modified-Since precondition
@@ -41,7 +40,7 @@ class IfModifiedSince extends BasePrecondition
 
         // [...] If the selected representation's last modification date is earlier or equal to
         // the date provided in the field value, the condition is FALSE. [...]
-        return !Carbon::instance($resource->lastModifiedDate())->lessThanOrEqualTo($ifModifiedSince);
+        return !$this->resolveLastModifiedDate($resource)->lessThanOrEqualTo($ifModifiedSince);
     }
 
     /**

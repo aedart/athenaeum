@@ -8,7 +8,7 @@ use Illuminate\Contracts\Database\Query\Builder;
 /**
  * String Filter
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Query\Filters\Fields
  */
 class StringFilter extends BaseFieldFilter

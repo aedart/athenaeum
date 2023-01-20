@@ -15,6 +15,7 @@ use Illuminate\Validation\ValidationException;
 abstract class ValidatedApiRequest extends FormRequest
 {
     use Concerns\Authorisation;
+    use Concerns\HttpConditionals;
 
     /**
      * Returns validation rules for this request
@@ -25,6 +26,14 @@ abstract class ValidatedApiRequest extends FormRequest
     {
         return [];
     }
+
+//    /**
+//     * @inheritDoc
+//     */
+//    protected function prepareForValidation()
+//    {
+//        // N/A
+//    }
 
     /**
      * Perform post request data validation, e.g. business logic validation
@@ -77,13 +86,13 @@ abstract class ValidatedApiRequest extends FormRequest
             ->after([$this, 'after']);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function validationData(): array
-    {
-        return parent::validationData();
-    }
+//    /**
+//     * @inheritDoc
+//     */
+//    public function validationData(): array
+//    {
+//        return parent::validationData();
+//    }
 
     /**
      * {@inheritDoc}

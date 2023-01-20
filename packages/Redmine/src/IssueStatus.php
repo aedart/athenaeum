@@ -14,7 +14,7 @@ use Aedart\Redmine\Relations\HasMany;
  * @property string $name
  * @property bool $is_closed
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class IssueStatus extends RedmineApiResource implements
