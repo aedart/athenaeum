@@ -33,7 +33,7 @@ class RecordExistenceConcernTest extends ApiResourceRequestsTestCase
      */
     public function makeConcern()
     {
-        return new class {
+        return new class() {
             use RecordExistence;
         };
     }
