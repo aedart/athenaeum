@@ -33,4 +33,30 @@ class DatabaseUtilsTest extends DatabaseTestCase
 
         $this->assertNotEmpty($result);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canPrefixColumns(): void
+    {
+        $prefix = 'games';
+        $columns = [
+            'name',
+            'price',
+            fn() => true,
+        ];
+
+        $result = Database::prefixColumns($columns, $prefix);
+
+        // dump($result);
+        // ConsoleDebugger::output($result); // WARNING: debugger causes memory leak due to closure
+
+        $this->assertCount(3, $columns);
+
+        $this->assertIsCallable($result[2], 'Callback not returned');
+        $this->assertTrue(in_array('games.name', $result), 'name not prefixed');
+        $this->assertTrue(in_array('games.price', $result), 'price not prefixed');
+    }
 }
