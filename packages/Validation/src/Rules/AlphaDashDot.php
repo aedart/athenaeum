@@ -5,13 +5,13 @@ namespace Aedart\Validation\Rules;
 /**
  * Alpha Dash Dot
  *
- * Ensures attribute is an alpha-numeric string, allowing dashes, underscores and
+ * Ensures attribute is an alphanumeric string, allowing dashes, underscores and
  * dots.
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Acl\Rules
  */
-class AlphaDashDot extends BaseRule
+class AlphaDashDot extends AthenaeumRule
 {
     /**
      * @inheritDoc

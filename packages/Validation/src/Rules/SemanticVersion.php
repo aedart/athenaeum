@@ -12,7 +12,7 @@ namespace Aedart\Validation\Rules;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Validation\Rules
  */
-class SemanticVersion extends BaseRule
+class SemanticVersion extends AthenaeumRule
 {
     /**
      * Regex pattern for matching Semantic Version string
