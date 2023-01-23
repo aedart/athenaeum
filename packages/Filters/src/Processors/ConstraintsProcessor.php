@@ -220,23 +220,13 @@ class ConstraintsProcessor extends BaseProcessor
         try {
             $filter = $this->filtersMap[$property];
 
-            // Create instance if class path provided
-            if (is_string($filter)) {
-                return $filter::make($column, $operator, $value, $logical);
-            }
-
-            // When an instance is provided, then it must be cloned and
-            // configured with field name, operator, value,...etc
-            if ($filter instanceof FieldCriteria) {
-                return (clone $filter)
-                    ->setField($column)
-                    ->setOperator($operator)
-                    ->setLogical($logical)
-                    ->setValue($value);
-            }
-
-            // Fail otherwise...
-            throw new LogicException(sprintf('Invalid filter for property %s. Expected a class path or FieldCriteria instance', $property));
+            // Create a new filter when class path is provided, or copy given
+            // filter instance.
+            return match (true) {
+                is_string($filter) => $this->makeFilter($filter, $column, $operator, $value, $logical),
+                $filter instanceof FieldCriteria => $this->copyFilter($filter, $column, $operator, $value, $logical),
+                default => throw new LogicException(sprintf('Invalid filter for property %s. Expected a class path or FieldCriteria instance', $property))
+            };
         } catch (InvalidOperatorException $e) {
             // To ensure that the correct parameter (e.g. filter.[property]) is specified,
             // we need to create the correct parameter name,
@@ -253,6 +243,59 @@ class ConstraintsProcessor extends BaseProcessor
 
             throw InvalidParameter::forParameter($param, $this, $e->getMessage());
         }
+    }
+
+    /**
+     * Creates a new filter instance from class path
+     *
+     * @param string $class Class path to {@see FieldCriteria}
+     * @param string $column
+     * @param string $operator
+     * @param mixed $value
+     * @param string $logical [optional] Logical boolean operator; if constraint filter should be
+     *                        be applied using "AND" or via "OR" clauses...
+     *
+     * @return FieldCriteria
+
+     * @throws CriteriaException
+     * @throws InvalidOperatorException
+     */
+    protected function makeFilter(
+        string $class,
+        string $column,
+        string $operator,
+        mixed $value,
+        string $logical = FieldCriteria::AND
+    ): FieldCriteria {
+        return $class::make($column, $operator, $value, $logical);
+    }
+
+    /**
+     * Copies given filter instance and sets new field, operator... etc
+     *
+     * @param FieldCriteria $filter
+     * @param string $newColumn
+     * @param string $newOperator
+     * @param mixed $newValue
+     * @param string $newLogical [optional]
+     *
+     * @return FieldCriteria
+     *
+     * @throws CriteriaException
+     * @throws InvalidOperatorException
+     */
+    protected function copyFilter(
+        FieldCriteria $filter,
+        string $newColumn,
+        string $newOperator,
+        mixed $newValue,
+        string $newLogical = FieldCriteria::AND
+    ): FieldCriteria {
+        return (clone $filter)
+            ->setField($newColumn)
+            ->setOperator($newOperator)
+            ->setValue($newValue)
+            ->setLogical($newLogical);
     }
 
     /**
