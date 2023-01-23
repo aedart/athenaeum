@@ -2,8 +2,10 @@
 
 namespace Aedart\Filters\Query\Filters\Concerns;
 
+use Aedart\Database\Utils\Database;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\ConnectionInterface;
 use RuntimeException;
 
 /**
@@ -15,24 +17,16 @@ use RuntimeException;
 trait DatabaseDriver
 {
     /**
-     * Determines the "shorthand" database connection driver name
+     * Determines the Pdo driver used by given connection or query
      *
-     * @param Builder|EloquentBuilder $query
+     * @param ConnectionInterface|Builder|EloquentBuilder $connection
      *
      * @return string
      *
      * @throws RuntimeException If unable to determine driver name
      */
-    protected function determineDriver(Builder|EloquentBuilder $query): string
+    protected function determineDriver(ConnectionInterface|Builder|EloquentBuilder $connection): string
     {
-        $connection = $query->getConnection();
-
-        // WARNING: getDriverName() is a public method that we use,
-        // yet it's not specified in the interface.
-        if (method_exists($connection, 'getDriverName')) {
-            return $connection->getDriverName();
-        }
-
-        throw new RuntimeException(sprintf('Unable to determine shorthand connection driver name for %s', $connection::class));
+        return Database::determineDriver($connection);
     }
 }

@@ -398,15 +398,12 @@ abstract class BaseFieldFilter extends FieldFilter
     {
         $driver = $this->determineDriver($query);
 
-        switch ($driver) {
+        return match ($driver) {
             // Use the case-insensitive "ilike" operator, so that...
             // @see https://github.com/postgres/postgres/blob/master/src/backend/utils/adt/like.c
-            case 'pgsql':
-                return 'ilike';
-
-            default:
-                return 'like';
-        }
+            'pgsql' => 'ilike',
+            default => 'like'
+        };
     }
 
     /**

@@ -27,9 +27,9 @@ class SearchFilter extends Filter
     protected string $search;
 
     /**
-     * List of columns to search
+     * List of columns to be matched or callbacks to apply
      *
-     * @var string[]
+     * @var string[]|callable[]
      */
     protected array $columns;
 
@@ -37,10 +37,14 @@ class SearchFilter extends Filter
      * SearchFilter
      *
      * @param string $search
-     * @param string[] $columns
+     * @param string|callable|string[]|callable[] $columns
      */
-    public function __construct(string $search, array $columns)
+    public function __construct(string $search, string|callable|array $columns)
     {
+        if (!is_array($columns)) {
+            $columns = [ $columns ];
+        }
+
         $this->search = $search;
         $this->columns = $columns;
     }
@@ -78,10 +82,29 @@ class SearchFilter extends Filter
     protected function searchFor(string $searchTerm, Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         foreach ($this->columns as $column) {
+            if (!is_string($column) && is_callable($column)) {
+                $query = $this->applySearchCallback($column, $query, $searchTerm);
+                continue;
+            }
+
             $query = $this->matchColumn($column, $searchTerm, $query);
         }
 
         return $query;
+    }
+
+    /**
+     * Applies search callback for given search term
+     *
+     * @param callable $callback
+     * @param Builder|EloquentBuilder $query
+     * @param string $searchTerm
+     *
+     * @return Builder|EloquentBuilder
+     */
+    protected function applySearchCallback(callable $callback, Builder|EloquentBuilder $query, string $searchTerm): Builder|EloquentBuilder
+    {
+        return $callback($query, $searchTerm);
     }
 
     /**
@@ -117,15 +140,7 @@ class SearchFilter extends Filter
      */
     protected function buildPsqlWhereLike(string $column, string $search, Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
-        // Sadly Postgres' way of performing "simple" case-insensitive searches, is
-        // via a none-standard "ilike" operator. Alternatives are available, yet
-        // they are much more cumbersome and very driver specific.
-        // Other databases support setting the collation / ctype and thus offer
-        // case-insensitive string as an implicit operations, e.g. via like operator.
-        // Postgres also offers this, but FAILS for "like" operator (I do not know why!)
-        // @see https://github.com/postgres/postgres/blob/master/src/backend/utils/adt/like.c
         return $query
-            ->orWhere($column, 'ilike', "{$search}")
             ->orWhere($column, 'ilike', "{$search}%")
             ->orWhere($column, 'ilike', "%{$search}%");
     }
@@ -142,7 +157,6 @@ class SearchFilter extends Filter
     protected function buildDefaultWhereLike(string $column, string $search, Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         return $query
-            ->orWhere($column, 'like', "{$search}")
             ->orWhere($column, 'like', "{$search}%")
             ->orWhere($column, 'like', "%{$search}%");
     }
