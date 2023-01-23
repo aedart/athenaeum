@@ -8,7 +8,7 @@ use Aedart\Support\Helpers\Translation\TranslatorTrait;
 /**
  * Concerns Filter Assertions
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Processors\Concerns
  */
 trait FilterAssertions

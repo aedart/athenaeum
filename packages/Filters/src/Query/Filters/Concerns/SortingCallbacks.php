@@ -5,7 +5,7 @@ namespace Aedart\Filters\Query\Filters\Concerns;
 /**
  * Concerns Sorting Callbacks
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Query\Filters\Concerns
  */
 trait SortingCallbacks

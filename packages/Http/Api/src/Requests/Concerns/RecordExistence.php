@@ -10,7 +10,7 @@ use Illuminate\Validation\ValidationException;
 /**
  * Concerns Record Existence
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Api\Requests\Concerns
  */
 trait RecordExistence

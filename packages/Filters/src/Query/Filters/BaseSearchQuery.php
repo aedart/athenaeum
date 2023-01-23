@@ -8,7 +8,7 @@ use Illuminate\Contracts\Database\Query\Builder;
 /**
  * Base Search Query
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Query
  */
 abstract class BaseSearchQuery extends BaseFilterQuery

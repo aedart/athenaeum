@@ -8,7 +8,7 @@ use Aedart\Database\Query\Concerns\Joins;
 /**
  * Base Filter Query
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Query\Filters
  */
 abstract class BaseFilterQuery

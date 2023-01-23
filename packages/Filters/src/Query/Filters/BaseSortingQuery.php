@@ -8,7 +8,7 @@ use Illuminate\Contracts\Database\Query\Builder;
 /**
  * Base Sorting Query
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Query\Filters
  */
 abstract class BaseSortingQuery extends BaseFilterQuery

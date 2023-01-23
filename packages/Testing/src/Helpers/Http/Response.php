@@ -11,7 +11,7 @@ use JsonException;
  *
  * Http Response test utilities
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Testing\Helpers\Http
  */
 class Response

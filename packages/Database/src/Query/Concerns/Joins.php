@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 /**
  * Concerns Query Joins
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Database\Query\Concerns
  */
 trait Joins

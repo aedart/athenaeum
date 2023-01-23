@@ -13,7 +13,7 @@ use RuntimeException;
  *
  * Offers various database, connection and query utilities.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Database\Utils
  */
 class Database
