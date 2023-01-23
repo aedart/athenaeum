@@ -6,6 +6,7 @@ use Aedart\Contracts\Database\Query\Criteria;
 use Aedart\Contracts\Filters\BuiltFiltersMap;
 use Aedart\Filters\BaseProcessor;
 use Aedart\Filters\Exceptions\InvalidParameter;
+use Aedart\Filters\Query\Filters\Concerns\SortingCallbacks;
 use Aedart\Filters\Query\Filters\SortFilter;
 use LogicException;
 
@@ -21,6 +22,7 @@ use LogicException;
 class SortingProcessor extends BaseProcessor
 {
     use Concerns\PropertiesToColumns;
+    use SortingCallbacks;
 
     /**
      * List of sortable properties (the allowed properties)
@@ -177,7 +179,9 @@ class SortingProcessor extends BaseProcessor
      */
     public function makeFilter(array $columns): Criteria
     {
-        return new SortFilter($columns);
+        return (new SortFilter($columns))->withSortingCallbacks(
+            $this->getSortingCallbacks()
+        );
     }
 
     /**
