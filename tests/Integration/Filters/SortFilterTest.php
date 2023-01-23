@@ -54,7 +54,7 @@ class SortFilterTest extends FiltersTestCase
         $filter = (new SortFilter([
             'slug' => 'desc',
             'name' => 'asc'
-        ]))->withSortingCallback('name', function($query, $column, $direction) {
+        ]))->withSortingCallback('name', function ($query, $column, $direction) {
             return $query->orderBy("users.{$column}", $direction);
         });
 
@@ -74,8 +74,7 @@ class SortFilterTest extends FiltersTestCase
      */
     public function canApplyInvokableSortingQuery(): void
     {
-        $sortingQuery = new class extends BaseSortingQuery
-        {
+        $sortingQuery = new class() extends BaseSortingQuery {
             public function __invoke(
                 Builder|EloquentBuilder $query,
                 string $column,

@@ -23,7 +23,8 @@ abstract class BaseFilterQuery
      */
     public function __construct(
         protected string|null $tablePrefix = null
-    ) {}
+    ) {
+    }
 
     /**
      * Returns table prefix
