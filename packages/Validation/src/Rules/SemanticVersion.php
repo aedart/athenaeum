@@ -28,7 +28,7 @@ class SemanticVersion extends AthenaeumRule
      */
     public function passes($attribute, $value)
     {
-        $this->attribute = $attribute;
+        $this->setAttribute($attribute);
 
         if (!preg_match(static::REGEX_PATTERN, $value)) {
             return false;
@@ -43,7 +43,7 @@ class SemanticVersion extends AthenaeumRule
     public function message()
     {
         return $this->trans('sem_version', [
-            'attribute' => $this->attribute
+            'attribute' => $this->getAttribute()
         ]);
     }
 }

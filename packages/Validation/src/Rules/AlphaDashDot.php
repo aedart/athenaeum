@@ -18,7 +18,7 @@ class AlphaDashDot extends AthenaeumRule
      */
     public function passes($attribute, $value)
     {
-        $this->attribute = $attribute;
+        $this->setAttribute($attribute);
 
         // Ensure that value is string or numeric
         if (!is_string($value) && !is_numeric($value)) {
@@ -36,7 +36,7 @@ class AlphaDashDot extends AthenaeumRule
     public function message()
     {
         return $this->trans('alpha_dash_dot', [
-            'attribute' => $this->attribute
+            'attribute' => $this->getAttribute()
         ]);
     }
 }

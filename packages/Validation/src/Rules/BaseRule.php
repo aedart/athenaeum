@@ -18,12 +18,6 @@ abstract class BaseRule implements
     Rule,
     TranslatorAware
 {
+    use Concerns\Attribute;
     use Concerns\Translations;
-
-    /**
-     * Name of the attribute in question
-     *
-     * @var string
-     */
-    protected string $attribute;
 }
