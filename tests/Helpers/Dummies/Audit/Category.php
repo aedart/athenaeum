@@ -3,7 +3,7 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Audit;
 
-use Aedart\Audit\Concerns\ChangeRecoding;
+use Aedart\Audit\Concerns\ChangeRecording;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category as BaseCategory;
 
 /**
@@ -18,7 +18,7 @@ use Aedart\Tests\Helpers\Dummies\Database\Models\Category as BaseCategory;
  */
 class Category extends BaseCategory
 {
-    use ChangeRecoding;
+    use ChangeRecording;
 
     /**
      * @inheritdoc

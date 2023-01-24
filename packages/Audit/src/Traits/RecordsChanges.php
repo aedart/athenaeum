@@ -3,12 +3,12 @@
 
 namespace Aedart\Audit\Traits;
 
-use Aedart\Audit\Concerns\ChangeRecoding;
+use Aedart\Audit\Concerns\ChangeRecording;
 use Aedart\Audit\Models\AuditTrail;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * @deprecated Since 7.0, replaced by {@see \Aedart\Audit\Concerns\ChangeRecoding}
+ * @deprecated Since 7.0, replaced by {@see \Aedart\Audit\Concerns\ChangeRecording}
  *
  * Records Changes
  *
@@ -22,5 +22,5 @@ use Illuminate\Database\Eloquent\Collection;
  */
 trait RecordsChanges
 {
-    use ChangeRecoding;
+    use ChangeRecording;
 }

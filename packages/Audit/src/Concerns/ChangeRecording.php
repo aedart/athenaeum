@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Config;
  * @package Aedart\Audit\Concerns
  */
 
-trait ChangeRecoding
+trait ChangeRecording
 {
     use AuditTrailConfig;
 
