@@ -7,6 +7,7 @@ use Aedart\Audit\Models\AuditTrail;
 use Aedart\Audit\Observers\ModelObserver;
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -75,7 +76,7 @@ trait ChangeRecording
      * @param array|null $original [optional] Original data (attributes) before change occurred. Defaults to model's original data.
      * @param array|null $changed [optional] Changed data (attributes) after change occurred. Defaults to model's changed data.
      * @param string|null $message [optional]
-     * @param Model|null $user [optional] Defaults to current authenticated user.
+     * @param Authenticatable|Model|null $user [optional] Defaults to current authenticated user.
      * @param DateTimeInterface|string|null $performedAt [optional] Defaults to "now".
      *
      * @return self
@@ -85,12 +86,12 @@ trait ChangeRecording
         array|null $original = null,
         array|null $changed = null,
         string|null $message = null,
-        Model|null $user = null,
+        Authenticatable|Model|null $user = null,
         DateTimeInterface|string|null $performedAt = null
     ): static {
         $user = $user ?? Auth::user();
 
-        ModelHasChanged::dispatch($this, $user, $type, $original, $changed, $message);
+        ModelHasChanged::dispatch($this, $user, $type, $original, $changed, $message, $performedAt);
 
         return $this;
     }
