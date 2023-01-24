@@ -3,7 +3,6 @@
 namespace Aedart\Audit\Concerns;
 
 use Aedart\Audit\Models\AuditTrail;
-use Aedart\Audit\Models\Concerns\AuditTrailConfiguration;
 use Aedart\Audit\Observers\ModelObserver;
 use Aedart\Contracts\Audit\Types;
 use Illuminate\Database\Eloquent\Collection;
@@ -24,7 +23,7 @@ use Illuminate\Support\Facades\Config;
 
 trait ChangeRecoding
 {
-    use AuditTrailConfiguration;
+    use AuditTrailConfig;
 
     /**
      * The attributes that should be hidden for Audit Trail Entries

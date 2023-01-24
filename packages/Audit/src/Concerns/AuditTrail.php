@@ -2,7 +2,6 @@
 
 namespace Aedart\Audit\Concerns;
 
-use Aedart\Audit\Models\Concerns\AuditTrailConfiguration;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -19,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 trait AuditTrail
 {
-    use AuditTrailConfiguration;
+    use AuditTrailConfig;
 
     /*****************************************************************
      * Relations
