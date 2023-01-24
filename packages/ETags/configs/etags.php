@@ -27,10 +27,10 @@ return [
             'options' => [
 
                 // Hashing algorithm to be used for ETags flagged as "weak" (weak comparison)
-                'weak_algo' => 'crc32',
+                'weak_algo' => 'xxh3',
 
                 // Hashing algorithm to be used for ETags NOT flagged as "weak" (strong comparison)
-                'strong_algo' => 'sha1',
+                'strong_algo' => 'xxh128',
             ],
         ],
     ]
