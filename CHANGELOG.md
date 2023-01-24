@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Adapted CI environment to test PHP `v8.1` and `v8.2`.
 * `ApiResourceServiceProvider` changed to be an aggregate service provider that automatically registers `ETagsServiceProvider`.
 * `SearchFilter` no longer applies unnecessary query constraint (_the first comparison constraint_).
+* Dispatching "multiple models changed", via `ModelChangedEvents::dispatchMultipleModelsChanged` no longer skips all models, if the first is marked as "skip next recording", in audit package.  
 
 **Non-breaking Changes**
 
