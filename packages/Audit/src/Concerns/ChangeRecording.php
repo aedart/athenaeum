@@ -57,7 +57,7 @@ trait ChangeRecording
      *
      * @return void
      */
-    public static function bootChangeRecoding()
+    public static function bootChangeRecording()
     {
         // Obtain class path to observer. Note: since we are in a static method,
         // we need to obtain this from the configuration via a facade.
