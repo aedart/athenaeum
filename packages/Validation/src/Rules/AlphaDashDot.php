@@ -2,6 +2,8 @@
 
 namespace Aedart\Validation\Rules;
 
+use Aedart\Validation\Rules\Concerns;
+
 /**
  * Alpha Dash Dot
  *
@@ -11,8 +13,18 @@ namespace Aedart\Validation\Rules;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Acl\Rules
  */
-class AlphaDashDot extends AthenaeumRule
+class AlphaDashDot extends BaseRule
 {
+    use Concerns\AthenaeumRule;
+
+    /**
+     * Creates a new alpha-dash-dot validation rule instance
+     */
+    public function __construct()
+    {
+        $this->useAthenaeumTranslations();
+    }
+
     /**
      * @inheritDoc
      */

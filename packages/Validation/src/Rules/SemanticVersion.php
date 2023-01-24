@@ -2,6 +2,8 @@
 
 namespace Aedart\Validation\Rules;
 
+use Aedart\Validation\Rules\Concerns;
+
 /**
  * Semantic Version
  *
@@ -12,8 +14,10 @@ namespace Aedart\Validation\Rules;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Validation\Rules
  */
-class SemanticVersion extends AthenaeumRule
+class SemanticVersion extends BaseRule
 {
+    use Concerns\AthenaeumRule;
+
     /**
      * Regex pattern for matching Semantic Version string
      *
@@ -22,6 +26,14 @@ class SemanticVersion extends AthenaeumRule
      * @see https://semver.org/
      */
     protected const REGEX_PATTERN = '/^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/';
+
+    /**
+     * Creates a new semantic version validation rule instance
+     */
+    public function __construct()
+    {
+        $this->useAthenaeumTranslations();
+    }
 
     /**
      * @inheritDoc
