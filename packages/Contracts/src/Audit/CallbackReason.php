@@ -13,11 +13,11 @@ interface CallbackReason
     /**
      * Register a reason for the next audit trail entry
      *
-     * @param string|callable $reason
+     * @param string|callable|null $reason
      *
      * @return self
      */
-    public function register(string|callable $reason): static;
+    public function register(string|callable|null $reason): static;
 
     /**
      * Resolves an audit trail message (a reason), if one was specified

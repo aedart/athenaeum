@@ -86,10 +86,7 @@ class Callback
 
         // Clear the registered reason and restore previous, if one
         // was available.
-        $callbackReason->clear();
-        if (isset($previous)) {
-            $callbackReason->register($previous);
-        }
+        $callbackReason->register($previous);
 
         return $result;
     }

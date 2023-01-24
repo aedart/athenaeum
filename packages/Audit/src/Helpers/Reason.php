@@ -22,7 +22,7 @@ class Reason implements CallbackReason
     /**
      * @inheritdoc
      */
-    public function register(string|callable $reason): static
+    public function register(string|callable|null $reason): static
     {
         $reason = is_string($reason)
             ? fn () => $reason
