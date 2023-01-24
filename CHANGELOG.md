@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Prefixing` concern, in the database package.
 * `BaseRule` can now set and obtain a `FailedState` (_a [`UnitEnum`](https://www.php.net/manual/en/class.unitenum.php)_), to allow handling of more complex error messages.
 * `RemoveResponsePayload` middleware in the Http Api package.
+* `recordNewChange()` util method in `ChangeRecording` concern, in audit package.
 * Test `Response` utility.
 
 ### Changed
@@ -49,7 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 
-* `\Aedart\Audit\Traits\RecordsChanges` trait. Replaced by `\Aedart\Audit\Concerns\ChangeRecoding`.
+* `\Aedart\Audit\Traits\RecordsChanges` trait. Replaced by `\Aedart\Audit\Concerns\ChangeRecording`.
 * `\Aedart\Audit\Traits\HasAuditTrail` trait  Replaced by `\Aedart\Audit\Concerns\AuditTrail`.
 * `\Aedart\Audit\Models\Concerns\AuditTrailConfiguration` concern. Replaced by `\Aedart\Audit\Concerns\AuditTrailConfig`.
 
