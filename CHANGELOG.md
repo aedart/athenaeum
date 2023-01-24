@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Query `Joins` concern, in the database package.
 * `Prefixing` concern, in the database package.
 * `BaseRule` can now set and obtain a `FailedState` (_a [`UnitEnum`](https://www.php.net/manual/en/class.unitenum.php)_), to allow handling of more complex error messages.
+* `RemoveResponsePayload` middleware in the Http Api package.
 * Test `Response` utility.
 
 ### Changed
