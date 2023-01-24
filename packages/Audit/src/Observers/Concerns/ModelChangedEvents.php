@@ -77,7 +77,7 @@ trait ModelChangedEvents
         }
 
         // Filter off models that are marked as "skipped" for next recording...
-        $models = $models->filter(function($model) {
+        $models = $models->filter(function ($model) {
             if (method_exists($model, 'mustRecordNextChange')) {
                 return $model->mustRecordNextChange();
             }

@@ -45,7 +45,7 @@ class C1_ModelObserverTest extends AuditTestCase
 
         // ---------------------------------------------------------- //
 
-        $skipped = $models->filter(function($model) {
+        $skipped = $models->filter(function ($model) {
             return !$model->mustRecordNextChange();
         });
         ConsoleDebugger::output([
