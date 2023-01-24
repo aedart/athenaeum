@@ -87,8 +87,7 @@ trait ChangeRecording
         string|null $message = null,
         Model|null $user = null,
         DateTimeInterface|string|null $performedAt = null
-    ): static
-    {
+    ): static {
         $user = $user ?? Auth::user();
 
         ModelHasChanged::dispatch($this, $user, $type, $original, $changed, $message);
