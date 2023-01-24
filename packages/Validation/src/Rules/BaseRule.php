@@ -20,4 +20,5 @@ abstract class BaseRule implements
 {
     use Concerns\Attribute;
     use Concerns\Translations;
+    use Concerns\ValidationFailure;
 }
