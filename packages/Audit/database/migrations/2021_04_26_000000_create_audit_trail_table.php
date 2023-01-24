@@ -1,6 +1,6 @@
 <?php
 
-use Aedart\Audit\Models\Concerns;
+use Aedart\Audit\Concerns\AuditTrailConfig;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\ColumnDefinition;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Schema;
  */
 class CreateAuditTrailTable extends Migration
 {
-    use Concerns\AuditTrailConfiguration;
+    use AuditTrailConfig;
 
     /**
      * Run the migrations.

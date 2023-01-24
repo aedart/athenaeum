@@ -2,7 +2,7 @@
 
 namespace Aedart\Audit\Models;
 
-use Aedart\Audit\Models\Concerns as AuditTrailConcerns;
+use Aedart\Audit\Concerns\AuditTrailConfig;
 use Aedart\Database\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -32,7 +32,7 @@ use Illuminate\Support\Carbon;
  */
 class AuditTrail extends Model
 {
-    use AuditTrailConcerns\AuditTrailConfiguration;
+    use AuditTrailConfig;
 
     /**
      * The attributes that should be cast.
