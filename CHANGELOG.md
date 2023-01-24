@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Database` utility component, in the database package.
 * Query `Joins` concern, in the database package.
 * `Prefixing` concern, in the database package.
+* `BaseRule` can now set and obtain a `FailedState`, to allow handling of more complex error messages.
 * Test `Response` utility.
 
 ### Changed
