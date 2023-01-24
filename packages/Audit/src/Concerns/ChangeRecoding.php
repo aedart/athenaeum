@@ -2,18 +2,21 @@
 
 namespace Aedart\Audit\Concerns;
 
+use Aedart\Audit\Events\ModelHasChanged;
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Audit\Observers\ModelObserver;
 use Aedart\Contracts\Audit\Types;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 
 /**
  * Concerns Model Change Recoding
  *
- * Intended to be used by models that must keep an audit trail of its
- * changes.
+ * Intended to be used by models that must keep an audit trail of their changes.
  *
  * @property-read AuditTrail[]|Collection $recordedChanges Audit trail entries for this model
  *
@@ -44,6 +47,10 @@ trait ChangeRecoding
      */
     protected bool $skipNextRecording = false;
 
+    /*****************************************************************
+     * Setup
+     ****************************************************************/
+
     /**
      * Boots has audit trail functionality for this model
      *
@@ -55,6 +62,38 @@ trait ChangeRecoding
         // we need to obtain this from the configuration via a facade.
         $observer = Config::get('audit-trail.observer', ModelObserver::class);
         static::observe($observer);
+    }
+
+    /*****************************************************************
+     * Recording
+     ****************************************************************/
+
+    /**
+     * Record a new change for this model
+     *
+     * @param string $type Name of "event" or "action" type that is recorded.
+     * @param array|null $original [optional] Original data (attributes) before change occurred. Defaults to model's original data.
+     * @param array|null $changed [optional] Changed data (attributes) after change occurred. Defaults to model's changed data.
+     * @param string|null $message [optional]
+     * @param Model|null $user [optional] Defaults to current authenticated user.
+     * @param DateTimeInterface|string|null $performedAt [optional] Defaults to "now".
+     *
+     * @return self
+     */
+    public function recordNewChange(
+        string $type,
+        array|null $original = null,
+        array|null $changed = null,
+        string|null $message = null,
+        Model|null $user = null,
+        DateTimeInterface|string|null $performedAt = null
+    ): static
+    {
+        $user = $user ?? Auth::user();
+
+        ModelHasChanged::dispatch($this, $user, $type, $original, $changed, $message);
+
+        return $this;
     }
 
     /*****************************************************************
