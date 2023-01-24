@@ -5,7 +5,7 @@ namespace Aedart\Validation\Rules;
 /**
  * Alpha Dash Dot
  *
- * Ensures attribute is an alpha-numeric string, allowing dashes, underscores and
+ * Ensures attribute is an alphanumeric string, allowing dashes, underscores and
  * dots.
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
@@ -13,12 +13,22 @@ namespace Aedart\Validation\Rules;
  */
 class AlphaDashDot extends BaseRule
 {
+    use Concerns\AthenaeumRule;
+
+    /**
+     * Creates a new alpha-dash-dot validation rule instance
+     */
+    public function __construct()
+    {
+        $this->useAthenaeumTranslations();
+    }
+
     /**
      * @inheritDoc
      */
     public function passes($attribute, $value)
     {
-        $this->attribute = $attribute;
+        $this->setAttribute($attribute);
 
         // Ensure that value is string or numeric
         if (!is_string($value) && !is_numeric($value)) {
@@ -36,7 +46,7 @@ class AlphaDashDot extends BaseRule
     public function message()
     {
         return $this->trans('alpha_dash_dot', [
-            'attribute' => $this->attribute
+            'attribute' => $this->getAttribute()
         ]);
     }
 }
