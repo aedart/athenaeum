@@ -47,6 +47,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Monorepo builder configuration broken after update.
 * Code style of all packages. Easy coding standard configuration, in `ecs.php`, was previously not applied correctly.
 
+### Deprecated
+
+* `\Aedart\Audit\Traits\RecordsChanges` trait. Replaced by `\Aedart\Audit\Concerns\ChangeRecoding`.
+* `\Aedart\Audit\Traits\HasAuditTrail` trait  Replaced by `\Aedart\Audit\Concerns\AuditTrail`.
+* `\Aedart\Audit\Models\Concerns\AuditTrailConfiguration` concern. Replaced by `\Aedart\Audit\Concerns\AuditTrailConfig`.
+
 ### Removed
 
 * `SearchProcessor::language()`. Features didn't work as intended. No replacement has been implemented.
