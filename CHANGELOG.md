@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Prefixing` concern, in the database package.
 * `BaseRule` can now set and obtain a `FailedState` (_a [`UnitEnum`](https://www.php.net/manual/en/class.unitenum.php)_), to allow handling of more complex error messages.
 * `RemoveResponsePayload` middleware in the Http Api package.
+* Audit `Callback` helper, which allows setting a custom message for all audit trail events dispatched in a callback.
 * `recordNewChange()` util method in `ChangeRecording` concern, in audit package.
 * Test `Response` utility.
 
