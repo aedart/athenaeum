@@ -76,12 +76,17 @@ trait ModelChangedEvents
             $models = collect($models);
         }
 
-        // Determine if event dispatching should be aborted, based on first model's
-        // "must record next change" state.
-        $first = $models->first();
+        // Filter off models that are marked as "skipped" for next recording...
+        $models = $models->filter(function($model) {
+            if (method_exists($model, 'mustRecordNextChange')) {
+                return $model->mustRecordNextChange();
+            }
 
-        // Abort if model does not wish to record its next change
-        if (method_exists($first, 'mustRecordNextChange') && !$first->mustRecordNextChange()) {
+            return true;
+        });
+
+        // Abort if no models changed...
+        if ($models->isEmpty()) {
             return $this;
         }
 
