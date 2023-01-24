@@ -2,8 +2,6 @@
 
 namespace Aedart\Validation\Rules;
 
-use Aedart\Validation\Rules\Concerns;
-
 /**
  * Semantic Version
  *
