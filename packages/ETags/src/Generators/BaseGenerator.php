@@ -22,13 +22,13 @@ abstract class BaseGenerator implements Generator
      * Default hashing algorithm for hashing content to be
      * used for weak comparison ETags
      */
-    protected const DEFAULT_WEAK_ALGO = 'crc32';
+    protected const DEFAULT_WEAK_ALGO = 'xxh3';
 
     /**
      * Default hashing algorithm for hashing content to be
      * used for strong comparison ETags
      */
-    protected const DEFAULT_STRONG_ALGO = 'sha256';
+    protected const DEFAULT_STRONG_ALGO = 'xxh128';
 
     /**
      * Create a new ETag Generator instance

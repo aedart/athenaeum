@@ -25,7 +25,7 @@ class F0_HashingTest extends StreamTestCase
      */
     public function canObtainHashOfStreamsContent()
     {
-        $algo = 'crc32';
+        $algo = 'xxh3';
         $data = $this->getFaker()->realText(50);
 
         $stream = FileStream::openTemporary('r+b', 25)
