@@ -231,7 +231,11 @@ class Registrar implements RegistrarInterface
         // Singletons
         if (property_exists($provider, 'singletons')) {
             foreach ($provider->singletons as $abstract => $concrete) {
-                $ioc->singleton($abstract, $concrete);
+                $key = is_int($abstract)
+                    ? $concrete
+                    : $abstract;
+
+                $ioc->singleton($key, $concrete);
             }
         }
 
