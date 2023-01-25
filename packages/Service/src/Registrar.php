@@ -96,19 +96,21 @@ class Registrar implements RegistrarInterface
             return false;
         }
 
-        // Boot provider in the same way that Laravel's Application
-        // does such.
-        // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L826
+        $hasBooted = false;
+
+        $provider->callBootingCallbacks();
+
+        // Invoke boot on provider in the same was that Laravel's Application does it...
+        // @see \Illuminate\Foundation\Application::bootProvider
         if (method_exists($provider, 'boot')) {
             $this->getApp()->call([$provider, 'boot']);
-
             $this->markAsBooted($provider);
-
-            return true;
+            $hasBooted = true;
         }
 
-        // Means that provider didn't contain a boot method
-        return false;
+        $provider->callBootedCallbacks();
+
+        return $hasBooted;
     }
 
     /**
