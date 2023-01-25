@@ -134,18 +134,9 @@ class Registrar implements RegistrarInterface
      */
     public function isRegistered($provider): bool
     {
-        $providers = $this->providers();
-        if ($provider instanceof ServiceProvider) {
-            return in_array($provider, $providers);
-        }
-
-        // In case that a string has been given,...
         $registered = $this->getProviders($provider);
-        if (!empty($registered)) {
-            return true;
-        }
 
-        return false;
+        return !empty($registered);
     }
 
     /**
