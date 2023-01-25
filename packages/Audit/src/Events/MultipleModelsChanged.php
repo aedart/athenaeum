@@ -30,9 +30,9 @@ class MultipleModelsChanged
     /**
      * The models that have changed
      *
-     * @var Collection|Model[]
+     * @var Collection<Model>
      */
-    public Collection|array $models;
+    public Collection $models;
 
     /**
      * Creates new "multiple models changed" event instance
