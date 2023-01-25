@@ -239,8 +239,7 @@ class RegistrarTest extends AthenaeumTestCase
      */
     public function invokesBootCallbacks(): void
     {
-        $provider = new class($this->ioc) extends ServiceProvider
-        {
+        $provider = new class($this->ioc) extends ServiceProvider {
             public bool $isBooted = false;
 
             public function boot(): void
@@ -251,13 +250,13 @@ class RegistrarTest extends AthenaeumTestCase
         };
 
         $bootingInvoked = false;
-        $provider->booting(function() use(&$bootingInvoked) {
+        $provider->booting(function () use (&$bootingInvoked) {
             $bootingInvoked = true;
             ConsoleDebugger::output('booting()');
         });
 
         $bootedInvoked = false;
-        $provider->booted(function() use(&$bootedInvoked) {
+        $provider->booted(function () use (&$bootedInvoked) {
             $bootedInvoked = true;
             ConsoleDebugger::output('booted()');
         });
