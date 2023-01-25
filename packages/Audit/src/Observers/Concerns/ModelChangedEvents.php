@@ -7,8 +7,10 @@ use Aedart\Audit\Events\ModelHasChanged;
 use Aedart\Audit\Events\MultipleModelsChanged;
 use Aedart\Support\Helpers\Auth\AuthTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
+use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Throwable;
 
@@ -28,21 +30,46 @@ trait ModelChangedEvents
      *
      * @param  Model  $model  The model that has changed
      * @param  string  $type  [optional] The event type
+     * @param array|null $original [optional] Original data (attributes) before change occurred.
+     *                                        Default's to given model's original data, if none given.
+     * @param array|null $changed [optional] Changed data (attributes) after change occurred.
+     *                                        Default's to given model's changed data, if none given.
      * @param  string|null  $message  [optional] Eventual user provided message associated with the event.
      *                              Defaults to model's Audit Trail Message, if available
+     * @param Model|Authenticatable|null $user [optional] The user that caused the change.
+     *                                         Defaults to current authenticated user.
+     * @param DateTimeInterface|Carbon|string|null $performedAt [optional] Date and time of when the event happened.
+     *                                                          Defaults to model's "updated at" value, if available,
+     *                                                          If not, then current date time is used.
      *
      * @return self
      *
      * @throws Throwable
      */
-    public function dispatchModelChanged(Model $model, string $type, string|null $message = null): static
+    public function dispatchModelChanged(
+        Model $model,
+        string $type,
+        array|null $original = null,
+        array|null $changed = null,
+        string|null $message = null,
+        Model|Authenticatable|null $user = null,
+        DateTimeInterface|Carbon|string|null $performedAt = null
+    ): static
     {
         // Abort if model does not wish to record its next change
         if (method_exists($model, 'mustRecordNextChange') && !$model->mustRecordNextChange()) {
             return $this;
         }
 
-        $event = $this->makeHasChangedEvent($model, $type, $message);
+        $event = $this->makeHasChangedEvent(
+            model: $model,
+            type: $type,
+            original: $original,
+            changed: $changed,
+            message: $message,
+            user: $user,
+            performedAt: $performedAt
+        );
 
         $this->getDispatcher()->dispatch($event);
 
@@ -59,6 +86,11 @@ trait ModelChangedEvents
      * @param array|null $changed [optional] Changed data (attributes) after change occurred.
      *                                        Default's to given model's changed data, if none given.
      * @param string|null $message [optional] Eventual user provided message associated with the event
+     * @param Model|Authenticatable|null $user [optional] The user that caused the change.
+     *                                         Defaults to current authenticated user.
+     * @param DateTimeInterface|Carbon|string|null $performedAt [optional] Date and time of when the event happened.
+     *                                                          Defaults to model's "updated at" value, if available,
+     *                                                          If not, then current date time is used.
      *
      * @return self
      *
@@ -69,7 +101,9 @@ trait ModelChangedEvents
         string $type,
         array|null $original = null,
         array|null $changed = null,
-        string|null $message = null
+        string|null $message = null,
+        Model|Authenticatable|null $user = null,
+        DateTimeInterface|Carbon|string|null $performedAt = null
     ): static {
         // Resolve models argument
         if (!($models instanceof Collection)) {
@@ -91,11 +125,13 @@ trait ModelChangedEvents
         }
 
         $event = $this->makeMultipleModelsChangedEvent(
-            $models,
-            $type,
-            $original,
-            $changed,
-            $message
+            models: $models,
+            type: $type,
+            original: $original,
+            changed: $changed,
+            message: $message,
+            user: $user,
+            performedAt: $performedAt
         );
 
         $this->getDispatcher()->dispatch($event);
@@ -108,23 +144,41 @@ trait ModelChangedEvents
      *
      * @param  Model  $model  The model that has changed
      * @param  string  $type  [optional] The event type
+     * @param  array|null  $original  [optional] Original data (attributes) before change occurred.
+     *                                        Default's to given model's original data, if none given.
+     * @param  array|null  $changed  [optional] Changed data (attributes) after change occurred.
+     *                                        Default's to given model's changed data, if none given.
      * @param  string|null  $message  [optional] Eventual user provided message associated with the event.
      *                              Defaults to model's Audit Trail Message, if available
+     * @param Model|Authenticatable|null $user [optional] The user that caused the change.
+     *                                         Defaults to current authenticated user.
+     * @param DateTimeInterface|Carbon|string|null $performedAt [optional] Date and time of when the event happened.
+     *                                                          Defaults to model's "updated at" value, if available,
+     *                                                          If not, then current date time is used.
      *
      * @return ModelHasChanged
      *
      * @throws Throwable
      */
-    public function makeHasChangedEvent(Model $model, string $type, string|null $message = null): ModelHasChanged
+    public function makeHasChangedEvent(
+        Model $model,
+        string $type,
+        array|null $original = null,
+        array|null $changed = null,
+        string|null $message = null,
+        Model|Authenticatable|null $user = null,
+        DateTimeInterface|Carbon|string|null $performedAt = null
+    ): ModelHasChanged
     {
         // Create new model has changed event
         return new ModelHasChanged(
-            $model,
-            $this->user(),
-            $type,
-            null, // Original data is resolved from model in this context
-            null, // Changed data is resolved from model in this context
-            $message
+            model: $model,
+            user: $user ?? $this->user(),
+            type: $type,
+            original: $original,
+            changed: $changed,
+            message: $message,
+            performedAt: $performedAt
         );
     }
 
@@ -138,6 +192,11 @@ trait ModelChangedEvents
      * @param  array|null  $changed  [optional] Changed data (attributes) after change occurred.
      *                                        Default's to given model's changed data, if none given.
      * @param  string|null  $message  [optional] Eventual user provided message associated with the event
+     * @param Model|Authenticatable|null $user [optional] The user that caused the change.
+     *                                         Defaults to current authenticated user.
+     * @param DateTimeInterface|Carbon|string|null $performedAt [optional] Date and time of when the event happened.
+     *                                                          Defaults to model's "updated at" value, if available,
+     *                                                          If not, then current date time is used.
      *
      * @return MultipleModelsChanged
      *
@@ -148,15 +207,18 @@ trait ModelChangedEvents
         string $type,
         array|null $original = null,
         array|null $changed = null,
-        string|null $message = null
+        string|null $message = null,
+        Model|Authenticatable|null $user = null,
+        DateTimeInterface|Carbon|string|null $performedAt = null
     ): MultipleModelsChanged {
         return new MultipleModelsChanged(
-            $models,
-            $this->user(),
-            $type,
-            $original,
-            $changed,
-            $message
+            models: $models,
+            user: $user ?? $this->user(),
+            type: $type,
+            original: $original,
+            changed: $changed,
+            message: $message,
+            performedAt: $performedAt
         );
     }
 
