@@ -65,7 +65,7 @@ class BulkRecorder
     {
         $recorder = static::make();
 
-        return $recorder->dispatch(
+        return $recorder::recordModelsChanged(
             models: $recorder->findModels($modelType, $identifiers),
             type: $type,
             message: $message,
