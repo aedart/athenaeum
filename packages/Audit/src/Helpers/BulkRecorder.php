@@ -187,7 +187,7 @@ class BulkRecorder
 
         $isSluggableModel = $this->isSluggableModel($model);
         $isListOfSlugs = $this->isListOfSlugs($identifiers);
-        
+
         // In case that slugs are given, then we must query the database to obtain primary keys...
         if ($isSluggableModel && $isListOfSlugs) {
             return $model::withTrashed()
