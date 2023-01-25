@@ -61,8 +61,7 @@ class BulkRecorder
         array|null $changed = null,
         Model|Authenticatable|null $user = null,
         DateTimeInterface|Carbon|string|null $performedAt = null
-    ): static
-    {
+    ): static {
         $recorder = static::make();
 
         return $recorder::recordModelsChanged(
@@ -101,8 +100,7 @@ class BulkRecorder
         array|null $changed = null,
         Model|Authenticatable|null $user = null,
         DateTimeInterface|Carbon|string|null $performedAt = null
-    ): static
-    {
+    ): static {
         return static::make()->dispatch(
             models: $models,
             type: $type,
@@ -140,8 +138,7 @@ class BulkRecorder
         array|null $changed = null,
         Model|Authenticatable|null $user = null,
         DateTimeInterface|Carbon|string|null $performedAt = null
-    ): static
-    {
+    ): static {
         return $this->dispatchMultipleModelsChanged(
             models: $this->prepareModels($models),
             type: $type,

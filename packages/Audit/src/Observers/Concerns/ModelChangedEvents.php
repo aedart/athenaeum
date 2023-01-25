@@ -54,8 +54,7 @@ trait ModelChangedEvents
         string|null $message = null,
         Model|Authenticatable|null $user = null,
         DateTimeInterface|Carbon|string|null $performedAt = null
-    ): static
-    {
+    ): static {
         // Abort if model does not wish to record its next change
         if (method_exists($model, 'mustRecordNextChange') && !$model->mustRecordNextChange()) {
             return $this;
@@ -168,8 +167,7 @@ trait ModelChangedEvents
         string|null $message = null,
         Model|Authenticatable|null $user = null,
         DateTimeInterface|Carbon|string|null $performedAt = null
-    ): ModelHasChanged
-    {
+    ): ModelHasChanged {
         // Create new model has changed event
         return new ModelHasChanged(
             model: $model,
