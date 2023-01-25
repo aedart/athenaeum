@@ -24,14 +24,14 @@ class Registrar implements RegistrarInterface
      *
      * @var ServiceProvider[]
      */
-    protected array $providers = [];
+    protected array $registered = [];
 
     /**
      * List of booted service providers
      *
      * @var ServiceProvider[]
      */
-    protected array $bootedServiceProviders = [];
+    protected array $booted = [];
 
     /**
      * Registrar constructor.
@@ -102,7 +102,7 @@ class Registrar implements RegistrarInterface
         if (method_exists($provider, 'boot')) {
             $this->getApp()->call([$provider, 'boot']);
 
-            $this->bootedServiceProviders[] = $provider;
+            $this->markAsBooted($provider);
 
             return true;
         }
@@ -161,7 +161,7 @@ class Registrar implements RegistrarInterface
      */
     public function providers(): array
     {
-        return $this->providers;
+        return $this->registered;
     }
 
     /**
@@ -184,7 +184,7 @@ class Registrar implements RegistrarInterface
      */
     public function booted(): array
     {
-        return $this->bootedServiceProviders;
+        return $this->booted;
     }
 
     /**
@@ -239,8 +239,31 @@ class Registrar implements RegistrarInterface
             }
         }
 
-        // Add provider to list of registered providers
-        $this->providers[] = $provider;
+        $this->markAsRegistered($provider);
+    }
+
+    /**
+     * Mark service provider as registered
+     *
+     * @param ServiceProvider $provider
+     *
+     * @return void
+     */
+    protected function markAsRegistered(ServiceProvider $provider): void
+    {
+        $this->registered[] = $provider;
+    }
+
+    /**
+     * Mark service provider as booted
+     *
+     * @param ServiceProvider $provider
+     *
+     * @return void
+     */
+    protected function markAsBooted(ServiceProvider $provider): void
+    {
+        $this->booted[] = $provider;
     }
 
     /**
