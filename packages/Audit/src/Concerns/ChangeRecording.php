@@ -6,6 +6,8 @@ use Aedart\Audit\Events\ModelHasChanged;
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Audit\Observers\ModelObserver;
 use Aedart\Contracts\Audit\Types;
+use Aedart\Contracts\Database\Models\Sluggable;
+use Aedart\Database\Models\Concerns\Slugs;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
@@ -94,6 +96,17 @@ trait ChangeRecording
         ModelHasChanged::dispatch($this, $user, $type, $original, $changed, $message, $performedAt);
 
         return $this;
+    }
+
+    /**
+     * Determine if this model must use slugs as an identifier
+     * for when recording audit trail entries
+     *
+     * @return bool
+     */
+    public function useSlugAsIdentifier(): bool
+    {
+        return $this instanceof Sluggable || in_array(Slugs::class, class_uses_recursive($this));
     }
 
     /*****************************************************************
