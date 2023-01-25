@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `ApiResourceServiceProvider` changed to be an aggregate service provider that automatically registers `ETagsServiceProvider`.
 * `SearchFilter` no longer applies unnecessary query constraint (_the first comparison constraint_).
 * Dispatching "multiple models changed", via `ModelChangedEvents::dispatchMultipleModelsChanged` no longer skips all models, if the first is marked as "skip next recording", in audit package.  
+* `$models` attribute (_public_) can no longer be an `array`, in `MultipleModelsChanged`. Attribute must be of `Collection` instance.
 
 **Non-breaking Changes**
 
