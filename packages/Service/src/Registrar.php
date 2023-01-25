@@ -250,7 +250,7 @@ class Registrar implements RegistrarInterface
      *
      * @return string
      */
-    protected function providerNamespace($provider): string
+    protected function providerNamespace(ServiceProvider|string $provider): string
     {
         return is_string($provider)
             ? $provider
