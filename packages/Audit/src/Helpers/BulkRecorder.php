@@ -11,6 +11,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use LogicException;
 use Throwable;
 
 /**
@@ -184,12 +185,19 @@ class BulkRecorder
             ? $model
             : new $model();
 
+        $isSluggableModel = $this->isSluggableModel($model);
+        $isListOfSlugs = $this->isListOfSlugs($identifiers);
+        
         // In case that slugs are given, then we must query the database to obtain primary keys...
-        if ($this->isSluggableModel($model) && $this->isListOfSlugs($identifiers)) {
+        if ($isSluggableModel && $isListOfSlugs) {
             return $model::withTrashed()
                 ->select($model->getKeyName())
                 ->whereSlugIn($identifiers)
                 ->get();
+
+        // If model is not sluggable, but list of slugs has been given, then abort.
+        } elseif (!$isSluggableModel && $isListOfSlugs) {
+            throw new LogicException(sprintf('%s is not Sluggable, but list of string identifiers has been provided', $model::class));
         }
 
         // Otherwise, simply create new model instances and add them to collection
