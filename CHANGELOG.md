@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `recordNewChange()` util method in `ChangeRecording` concern, in audit package.
 * Service `Registrar` invokes booting and booted callbacks of service providers.
 * Service `Registrar` can now bind singleton instances of non-associative `$singletons` array, if available in service providers.
-* `DateTimeFormats` interface that contains PHP's predefined date and time formats, along with a few additional, such as RFC 3339 that supports `"Z"` or `"-/+00:00"` offset.
+* `DateTimeFormats` interface that contains PHP's predefined date and time formats, along with a few additional, such as RFC3339 that supports `"Z"` or `"-/+00:00"` offset.
 * `asMicroSeconds()` in the `Duration` util.
 * `now()` in the `Duration` util.
 * Test `Response` utility.
@@ -57,9 +57,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+* `DatetimeFilter` does not accept dates formatted as RFC3339 with `"Z"` (_Zulu_). 
+* Typed property `Duration::$microTimeStamp` must not be accessed before initialization.
 * Monorepo builder configuration broken after update.
 * Code style of all packages. Easy coding standard configuration, in `ecs.php`, was previously not applied correctly.
-* Typed property `Duration::$microTimeStamp` must not be accessed before initialization.
+
 
 ### Deprecated
 
