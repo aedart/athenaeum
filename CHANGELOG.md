@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `recordNewChange()` util method in `ChangeRecording` concern, in audit package.
 * Service `Registrar` invokes booting and booted callbacks of service providers.
 * Service `Registrar` can now bind singleton instances of non-associative `$singletons` array, if available in service providers.
+* `asMicroSeconds()` in the `Duration` util.
 * Test `Response` utility.
 
 ### Changed
