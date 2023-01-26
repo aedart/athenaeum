@@ -31,6 +31,8 @@ class Duration implements Stringable
      */
     public function __construct(DateInterval|DateTimeInterface|MicroTimeStamp|int|null $time = null)
     {
+        $time = $time ?? new DateTime();
+
         if ($time instanceof DateTimeInterface) {
             $this->microTimeStamp = MicroTimeStamp::fromDateTime($time);
         } elseif ($time instanceof DateInterval) {
@@ -40,6 +42,16 @@ class Duration implements Stringable
         } elseif (is_integer($time)) {
             $this->microTimeStamp = MicroTimeStamp::fromSeconds($time);
         }
+    }
+
+    /**
+     * Creates instance from current date and time
+     *
+     * @return static
+     */
+    public static function now(): static
+    {
+        return new static();
     }
 
     /**
