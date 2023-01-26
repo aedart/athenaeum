@@ -26,7 +26,8 @@ class MicroTimeStamp
     public function __construct(
         protected int $minutes = 0,
         protected int $microSeconds = 0
-    ) {}
+    ) {
+    }
 
     /**
      * Factory to create from seconds and optional microseconds
