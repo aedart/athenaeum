@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Audit;
 
-use Aedart\Audit\Traits\HasAuditTrail;
+use Aedart\Audit\Concerns\AuditTrail;
 use Aedart\Contracts\Database\Models\Instantiatable;
 use Aedart\Database\Models\Concerns;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,7 +18,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements Instantiatable
 {
     use Concerns\Instance;
-    use HasAuditTrail;
+    use AuditTrail;
 
     /**
      * The attributes that are mass assignable.

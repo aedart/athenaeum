@@ -6,6 +6,7 @@ namespace Aedart\Tests\Integration\Audit;
 use Aedart\Audit\Events\ModelHasChanged;
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Contracts\Audit\Types;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Audit\AuditTestCase;
 use Illuminate\Support\Facades\Auth;
 
@@ -324,5 +325,35 @@ class B0_AuditTrailTest extends AuditTestCase
         $history = $category->recordedChanges()->get();
 
         $this->assertEmpty($history);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canRecordCustomChanges(): void
+    {
+        $category = $this->makeCategory();
+        $category->save();
+
+        // ---------------------------------------------------------- //
+
+        $category->recordNewChange(
+            type: 'custom',
+            original: [ 'a' => null ],
+            changed: [ 'a' => true ]
+        );
+
+        // ---------------------------------------------------------- //
+
+        /** @var AuditTrail $history */
+        $history = $category->recordedChanges()->get()->last();
+
+        ConsoleDebugger::output($history->toArray());
+
+        $this->assertSame('custom', $history->type);
+        $this->assertSame([ 'a' => null ], $history->original_data);
+        $this->assertSame([ 'a' => true ], $history->changed_data);
     }
 }

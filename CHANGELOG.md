@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Prefixing` concern, in the database package.
 * `BaseRule` can now set and obtain a `FailedState` (_a [`UnitEnum`](https://www.php.net/manual/en/class.unitenum.php)_), to allow handling of more complex error messages.
 * `RemoveResponsePayload` middleware in the Http Api package.
+* Audit `Callback` helper, which allows setting a custom message for all audit trail events dispatched in a callback.
+* `BulkRecorder` helper in audit package.
+* `recordNewChange()` util method in `ChangeRecording` concern, in audit package.
 * Test `Response` utility.
 
 ### Changed
@@ -30,6 +33,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Adapted CI environment to test PHP `v8.1` and `v8.2`.
 * `ApiResourceServiceProvider` changed to be an aggregate service provider that automatically registers `ETagsServiceProvider`.
 * `SearchFilter` no longer applies unnecessary query constraint (_the first comparison constraint_).
+* Dispatching "multiple models changed", via `ModelChangedEvents::dispatchMultipleModelsChanged` no longer skips all models, if the first is marked as "skip next recording", in audit package.  
+* `$models` attribute (_public_) can no longer be an `array`, in `MultipleModelsChanged`. Attribute must be of `Collection` instance.
+* `ModelChangedEvents` has been redesigned to accept all supported arguments for model changed events.
 
 **Non-breaking Changes**
 
@@ -46,6 +52,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Monorepo builder configuration broken after update.
 * Code style of all packages. Easy coding standard configuration, in `ecs.php`, was previously not applied correctly.
+
+### Deprecated
+
+* `\Aedart\Audit\Traits\RecordsChanges` trait. Replaced by `\Aedart\Audit\Concerns\ChangeRecording`.
+* `\Aedart\Audit\Traits\HasAuditTrail` trait  Replaced by `\Aedart\Audit\Concerns\AuditTrail`.
+* `\Aedart\Audit\Models\Concerns\AuditTrailConfiguration` concern. Replaced by `\Aedart\Audit\Concerns\AuditTrailConfig`.
 
 ### Removed
 

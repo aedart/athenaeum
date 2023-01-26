@@ -3,6 +3,7 @@
 
 namespace Aedart\Audit\Observers\Concerns;
 
+use Aedart\Audit\Concerns\CallbackReason;
 use Aedart\Utils\Helpers\Invoker;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,8 @@ use Throwable;
  */
 trait ModelAttributes
 {
+    use CallbackReason;
+
     /**
      * Resolves the given model's original data (attributes)
      *
@@ -83,6 +86,13 @@ trait ModelAttributes
      */
     protected function resolveAuditTrailMessage(Model $model, string $type): string|null
     {
+        // Resolve message from "callback", when one exists
+        $callbackReason = $this->callbackReason();
+        if ($callbackReason->exists()) {
+            return $callbackReason->resolve($model, $type);
+        }
+
+        // Otherwise, use model's audit trail message
         if (method_exists($model, 'getAuditTrailMessage')) {
             return $model->getAuditTrailMessage($type);
         }
