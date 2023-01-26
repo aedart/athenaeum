@@ -32,8 +32,32 @@ class DatetimeFilter extends DateFilter
         return match ($operator) {
             'is_null' => $this->buildWhereNullConstraint($query),
             'not_null' => $this->buildWhereNotNullConstraint($query),
-            default => $this->buildWhereDatetimeConstraint($query, $this->utc)
+            default => $this->buildWhereDatetimeConstraint($query, $this->mustConvertToUtc())
         };
+    }
+
+    /**
+     * Set whether datetime must be converted to UTC or not
+     *
+     * @param bool $convert
+     *
+     * @return self
+     */
+    public function convertToUtc(bool $convert = false): static
+    {
+        $this->utc = $convert;
+
+        return $this;
+    }
+
+    /**
+     * Determine if datetime must be converted to UTC
+     *
+     * @return bool
+     */
+    public function mustConvertToUtc(): bool
+    {
+        return $this->utc;
     }
 
     /*****************************************************************

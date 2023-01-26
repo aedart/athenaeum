@@ -2,6 +2,8 @@
 
 namespace Aedart\Filters\Query\Filters\Fields;
 
+use Aedart\Contracts\Database\Query\FieldCriteria;
+
 /**
  * UTC Datetime Filter
  *
@@ -11,10 +13,16 @@ namespace Aedart\Filters\Query\Filters\Fields;
 class UTCDatetimeFilter extends DatetimeFilter
 {
     /**
-     * State whether given datetime must be converted
-     * to UTC or not
-     *
-     * @var bool
+     * @inheritDoc
      */
-    protected bool $utc = true;
+    public function __construct(
+        ?string $field = null,
+        ?string $operator = null,
+        mixed $value = null,
+        string $logical = FieldCriteria::AND
+    ) {
+        parent::__construct($field, $operator, $value, $logical);
+
+        $this->convertToUtc(true);
+    }
 }

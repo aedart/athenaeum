@@ -267,7 +267,7 @@ abstract class BaseFieldFilter extends FieldFilter
      * Builds "where [field] [operator] [datetime value]" constraint
      *
      * @param Builder|EloquentBuilder $query
-     * @param bool $utc  [optional]
+     * @param bool $utc  [optional] Converts datetime value to UTC if true
      *
      * @return Builder|EloquentBuilder
      */
