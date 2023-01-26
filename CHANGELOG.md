@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Http conditional request evaluator, with support of [RFC9110 preconditions](https://developer.mozilla.org/en-US/docs/Web/HTTP/Conditional_requests), in the ETags package.
 * API Request abstractions, in the Http Api package.
+* Support for uploading data using a stream, via `attachStream()` method, in Http Clients package.
 * `HttpCaching` concern in `ApiResource`, which can make it easier to set Http Cache Control headers.
 * `HasArbitraryData` interface and a default implementation in `ArbitraryData` concern, as part of the utils package. 
 * `sync()` method added for `FileStream`. [#105](https://github.com/aedart/athenaeum/issues/105).
