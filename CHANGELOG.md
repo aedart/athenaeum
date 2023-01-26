@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Service `Registrar` can now bind singleton instances of non-associative `$singletons` array, if available in service providers.
 * `DateTimeFormats` interface that contains PHP's predefined date and time formats, along with a few additional, such as RFC3339 that supports `"Z"` or `"-/+00:00"` offset.
 * `asMicroSeconds()` in the `Duration` util.
+* `setAllowedDateFormats()` in `DateFilter`.
 * `setDatabaseDatetimeFormat()` in `BaseFieldFilter` abstraction.
 * `now()` in the `Duration` util.
 * Test `Response` utility.
@@ -37,6 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Minimum required PHP version changed to `v8.1`.
 * Adapted CI environment to test PHP `v8.1` and `v8.2`.
+* `FieldFilter` constructor and `make()` method arguments are now optional, to allow creating instances without triggering immediate validation of field, operator and value.
+* `DateFilter::allowedDateFormats()` visibility changed to public and now returns default date / datetime formats, when none specified.
 * `ApiResourceServiceProvider` changed to be an aggregate service provider that automatically registers `ETagsServiceProvider`.
 * `SearchFilter` no longer applies unnecessary query constraint (_the first comparison constraint_).
 * Dispatching "multiple models changed", via `ModelChangedEvents::dispatchMultipleModelsChanged` no longer skips all models, if the first is marked as "skip next recording", in audit package.  
@@ -49,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `SortFilter` and `SortingProcessor` now support custom sorting callbacks.
 * `getResourceKeyName()` in `ApiResource` now throws `LogicException`, if unable to determine resource's identifier key name.
 * `hash()` method can now accept options for the specified hashing algorithm. [#106](https://github.com/aedart/athenaeum/issues/106).
+* Methods for setting and determining if datetime should be converted to UTC, in `DatetimeFilter`.
 * Switched to [`xxHash`](https://php.watch/versions/8.1/xxHash) as default hashing algorithm in etags `BaseGenerator` and example configuration.
 * Temporary and public URL tests for database adapter are forced to evaluate to true. Original tests marked them as skipped, because features are not supported.
 * Extracted translation utilities into own trait in `BaseRule`, which now allow setting translation key prefix (_vendor prefix_). [#114](https://github.com/aedart/athenaeum/issues/114).
