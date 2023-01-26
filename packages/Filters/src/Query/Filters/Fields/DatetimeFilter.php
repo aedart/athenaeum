@@ -65,11 +65,9 @@ class DatetimeFilter extends DateFilter
      ****************************************************************/
 
     /**
-     * Returns list of allowed date formats
-     *
-     * @return string[]
+     * @inheritdoc
      */
-    protected function allowedDateFormats(): array
+    protected function defaultAllowedFormats(): array
     {
         return [
             // In case that you are having trouble validating a full RFC3339,

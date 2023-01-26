@@ -2,7 +2,9 @@
 
 namespace Aedart\Tests\Integration\Filters\Processors;
 
+use Aedart\Contracts\Utils\Dates\DateTimeFormats;
 use Aedart\Filters\Processors\ConstraintsProcessor;
+use Aedart\Filters\Query\Filters\Fields\DatetimeFilter;
 use Aedart\Filters\Query\Filters\Fields\NumericFilter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
@@ -35,6 +37,10 @@ class ConstraintsProcessorTest extends FiltersTestCase
             $key => ConstraintsProcessor::make()
                 ->filters([
                     'id' => NumericFilter::class,
+                    'created_at' => DatetimeFilter::make()
+                        ->setAllowedDateFormats([
+                            DateTimeFormats::RFC3339_ZULU
+                        ])
                 ])
         ];
 
@@ -45,6 +51,9 @@ class ConstraintsProcessorTest extends FiltersTestCase
                 'filter' => [
                     'id' => [
                         'gt' => 2
+                    ],
+                    'created_at' => [
+                        'lte' => '2005-08-15T15:52:01Z',
                     ]
                 ]
             ]
@@ -56,15 +65,16 @@ class ConstraintsProcessorTest extends FiltersTestCase
         // --------------------------------------------------------------- //
 
         $filters = $built->get($key);
-        $this->assertCount(1, $filters);
+        $this->assertCount(2, $filters);
 
         // Apply filter and assert that sql can be generated...
-        $filter = $filters[0];
-        $query = $filter->apply(Category::query());
+        foreach ($filters as $filter) {
+            $query = $filter->apply(Category::query());
 
-        $sql = $query->toSql();
-        ConsoleDebugger::output($sql);
+            $sql = $query->toSql();
+            ConsoleDebugger::output($sql);
 
-        $this->assertNotEmpty($sql, 'Query was not built');
+            $this->assertNotEmpty($sql, 'Query was not built');
+        }
     }
 }
