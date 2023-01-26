@@ -185,6 +185,16 @@ class Duration implements Stringable
     }
 
     /**
+     * Returns duration as integer micro-seconds
+     *
+     * @return int
+     */
+    public function asMicroSeconds(): int
+    {
+        return $this->microTimeStamp->getMicroSeconds();
+    }
+
+    /**
      * Return duration as integer seconds.
      *
      * @return int
