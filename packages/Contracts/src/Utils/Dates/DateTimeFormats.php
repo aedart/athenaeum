@@ -84,6 +84,7 @@ interface DateTimeFormats
     /**
      * RFC 3339 (example: 2005-08-15T15:52:01+00:00)
      *
+     * @see RFC3339_ZULU
      * @see https://www.rfc-editor.org/rfc/rfc3339#section-5.6
      */
     public const RFC3339 = DateTimeInterface::RFC3339;
@@ -91,6 +92,7 @@ interface DateTimeFormats
     /**
      * RFC 3339 EXTENDED format (example: 2005-08-15T15:52:01.000+00:00)
      *
+     * @see RFC3339_EXTENDED_ZULU
      * @see https://www.rfc-editor.org/rfc/rfc3339#section-5.6
      */
     public const RFC3339_EXTENDED = DateTimeInterface::RFC3339_EXTENDED;
@@ -98,6 +100,7 @@ interface DateTimeFormats
     /**
      * RFC 7231 (example: Sat, 30 Apr 2016 17:52:13 GMT)
      *
+     * @see RFC9110
      * @see https://www.rfc-editor.org/rfc/rfc7231#section-7.1.1.1
      */
     public const RFC7231 = DateTimeInterface::RFC7231;
@@ -136,6 +139,8 @@ interface DateTimeFormats
 
     /**
      * RFC 9110 "IMF-fixdate" format (example: Sun, 06 Nov 1994 08:49:37 GMT)
+     *
+     * Also known as "Http Date"
      *
      * **Note**: _Format does NOT support leap seconds! E.g. 23:59:60 is not accepted by this PHP format!_
      *
