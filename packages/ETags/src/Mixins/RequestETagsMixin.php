@@ -5,6 +5,7 @@ namespace Aedart\ETags\Mixins;
 use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Exceptions\ETagException;
+use Aedart\Contracts\Utils\Dates\DateTimeFormats;
 use Aedart\ETags\Facades\Generator;
 use Closure;
 use DateTimeInterface;
@@ -139,7 +140,7 @@ class RequestETagsMixin
             }
 
             try {
-                return Carbon::createFromTimeString($value, 'GMT');
+                return Carbon::createFromFormat(DateTimeFormats::RFC9110, $value);
             } catch (Throwable $e) {
                 throw new BadRequestHttpException(sprintf('Invalid HTTP-Date value in %s header', $header), $e);
             }

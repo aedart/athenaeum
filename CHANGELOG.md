@@ -25,6 +25,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `recordNewChange()` util method in `ChangeRecording` concern, in audit package.
 * Service `Registrar` invokes booting and booted callbacks of service providers.
 * Service `Registrar` can now bind singleton instances of non-associative `$singletons` array, if available in service providers.
+* `DateTimeFormats` interface that contains PHP's predefined date and time formats, along with a few additional, such as RFC3339 that supports `"Z"` or `"-/+00:00"` offset.
+* `asMicroSeconds()` in the `Duration` util.
+* `setAllowedDateFormats()` in `DateFilter`.
+* `setDatabaseDatetimeFormat()` in `BaseFieldFilter` abstraction.
+* `now()` in the `Duration` util.
 * Test `Response` utility.
 
 ### Changed
@@ -33,6 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Minimum required PHP version changed to `v8.1`.
 * Adapted CI environment to test PHP `v8.1` and `v8.2`.
+* `FieldFilter` constructor and `make()` method arguments are now optional, to allow creating instances without triggering immediate validation of field, operator and value.
+* `DateFilter::allowedDateFormats()` visibility changed to public and now returns default date / datetime formats, when none specified.
 * `ApiResourceServiceProvider` changed to be an aggregate service provider that automatically registers `ETagsServiceProvider`.
 * `SearchFilter` no longer applies unnecessary query constraint (_the first comparison constraint_).
 * Dispatching "multiple models changed", via `ModelChangedEvents::dispatchMultipleModelsChanged` no longer skips all models, if the first is marked as "skip next recording", in audit package.  
@@ -45,15 +52,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `SortFilter` and `SortingProcessor` now support custom sorting callbacks.
 * `getResourceKeyName()` in `ApiResource` now throws `LogicException`, if unable to determine resource's identifier key name.
 * `hash()` method can now accept options for the specified hashing algorithm. [#106](https://github.com/aedart/athenaeum/issues/106).
+* Methods for setting and determining if datetime should be converted to UTC, in `DatetimeFilter`.
 * Switched to [`xxHash`](https://php.watch/versions/8.1/xxHash) as default hashing algorithm in etags `BaseGenerator` and example configuration.
 * Temporary and public URL tests for database adapter are forced to evaluate to true. Original tests marked them as skipped, because features are not supported.
 * Extracted translation utilities into own trait in `BaseRule`, which now allow setting translation key prefix (_vendor prefix_). [#114](https://github.com/aedart/athenaeum/issues/114).
 * Extracted `$attribute` into own trait in `BaseRule`. Can now be set or obtained via appropriate getter and setter methods.
+* `MicroTimeStamp::fromDateTime()` now accepts `\DateTimeInterface` instead of `\DateTime`.
+* `Duration` now accepts `\DateTimeInterface` instead of `\DateTime`.
+* `RequestETagsMixin::httpDateFrom()` now parses Http Date acc. to RFC9110 (_a looser date format parsing was previously used_).
 
 ### Fixed
 
+* `DatetimeFilter` does not accept dates formatted as RFC3339 with `"Z"` (_Zulu_). 
+* Typed property `Duration::$microTimeStamp` must not be accessed before initialization.
 * Monorepo builder configuration broken after update.
 * Code style of all packages. Easy coding standard configuration, in `ecs.php`, was previously not applied correctly.
+
 
 ### Deprecated
 

@@ -2,7 +2,7 @@
 
 namespace Aedart\Filters\Query\Filters\Fields;
 
-use DateTimeInterface;
+use Aedart\Contracts\Utils\Dates\DateTimeFormats;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
 
@@ -32,8 +32,32 @@ class DatetimeFilter extends DateFilter
         return match ($operator) {
             'is_null' => $this->buildWhereNullConstraint($query),
             'not_null' => $this->buildWhereNotNullConstraint($query),
-            default => $this->buildWhereDatetimeConstraint($query, $this->utc)
+            default => $this->buildWhereDatetimeConstraint($query, $this->mustConvertToUtc())
         };
+    }
+
+    /**
+     * Set whether datetime must be converted to UTC or not
+     *
+     * @param bool $convert
+     *
+     * @return self
+     */
+    public function convertToUtc(bool $convert = false): static
+    {
+        $this->utc = $convert;
+
+        return $this;
+    }
+
+    /**
+     * Determine if datetime must be converted to UTC
+     *
+     * @return bool
+     */
+    public function mustConvertToUtc(): bool
+    {
+        return $this->utc;
     }
 
     /*****************************************************************
@@ -41,11 +65,9 @@ class DatetimeFilter extends DateFilter
      ****************************************************************/
 
     /**
-     * Returns list of allowed date formats
-     *
-     * @return string[]
+     * @inheritdoc
      */
-    protected function allowedDateFormats(): array
+    protected function defaultAllowedFormats(): array
     {
         return [
             // In case that you are having trouble validating a full RFC3339,
@@ -53,8 +75,8 @@ class DatetimeFilter extends DateFilter
             // should be URL encoded, when used submitted via http query parameters.
             // "+00:00" will then become "%2B00:00". Thus, "2021-06-17T06:33:00%2B00:00"
             // should pass the RFC3339 format validation.
-            DateTimeInterface::RFC3339_EXTENDED,
-            DateTimeInterface::RFC3339,
+            DateTimeFormats::RFC3339_EXTENDED_ZULU,
+            DateTimeFormats::RFC3339_ZULU,
             'Y-m-d H:i:s',
             'Y-m-d H:i',
             'Y-m-d',
