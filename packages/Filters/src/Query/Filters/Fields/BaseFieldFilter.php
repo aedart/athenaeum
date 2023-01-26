@@ -69,6 +69,16 @@ abstract class BaseFieldFilter extends FieldFilter
         return $this;
     }
 
+    /**
+     * Get the datetime format used for queries
+     *
+     * @return string
+     */
+    public function getDatabaseDatetimeFormat(): string
+    {
+        return $this->databaseDatetimeFormat;
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -301,10 +311,10 @@ abstract class BaseFieldFilter extends FieldFilter
 
         // Otherwise, for regular comparisons operators (<,>, <=, and >=)
         if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhere($field, $operator, $date->format($this->databaseDatetimeFormat));
+            return $query->orWhere($field, $operator, $date->format($this->getDatabaseDatetimeFormat()));
         }
 
-        return $query->where($field, $operator, $date->format($this->databaseDatetimeFormat));
+        return $query->where($field, $operator, $date->format($this->getDatabaseDatetimeFormat()));
     }
 
     /**
@@ -328,7 +338,7 @@ abstract class BaseFieldFilter extends FieldFilter
         int $offset = 1
     ): Builder|EloquentBuilder {
         // The general database datetime format to use.
-        $format = $this->databaseDatetimeFormat;
+        $format = $this->getDatabaseDatetimeFormat();
 
         // In case that no "seconds" precision is given, then ensure
         // that we increase the offset and adapt the format. This should
