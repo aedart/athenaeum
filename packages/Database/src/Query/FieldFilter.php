@@ -39,7 +39,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
      *
      * @var mixed
      */
-    protected mixed $value;
+    protected mixed $value = null;
 
     /**
      * The logical operator
@@ -51,32 +51,40 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     /**
      * FieldFilter
      *
-     * @param string $field
-     * @param string $operator [optional]
+     * @param string|null $field [optional]
+     * @param string|null $operator [optional]
      * @param mixed $value [optional]
      * @param string $logical [optional]
      *
      * @throws CriteriaException
      */
     public function __construct(
-        string $field,
-        string $operator = '=',
+        string|null $field = null,
+        string|null $operator = null,
         mixed $value = null,
         string $logical = FieldCriteria::AND
     ) {
-        $this
-            ->setField($field)
-            ->setOperator($operator)
-            ->setLogical($logical)
-            ->setValue($value);
+        if (isset($field)) {
+            $this->setField($field);
+        }
+
+        if (isset($operator)) {
+            $this->setOperator($operator);
+        }
+
+        $this->setLogical($logical);
+
+        if (isset($value)) {
+            $this->setValue($value);
+        }
     }
 
     /**
      * @inheritdoc
      */
     public static function make(
-        string $field,
-        string $operator = '=',
+        string|null $field = null,
+        string|null $operator = null,
         mixed $value = null,
         string $logical = FieldCriteria::AND
     ): static {

@@ -44,12 +44,10 @@ class BelongsToFilter extends BaseFieldFilter
 
     /**
      * {@inheritDoc}
-     *
-     * @param string $field [optional]
      */
     public function __construct(
-        string $field = 'id',
-        string $operator = 'eq',
+        string|null $field = null,
+        string|null $operator = null,
         mixed $value = null,
         string $logical = FieldCriteria::AND
     ) {
@@ -64,17 +62,17 @@ class BelongsToFilter extends BaseFieldFilter
             $this->skipValueAssert = true;
         }
 
+        $operator = $operator ?? 'eq';
+
         parent::__construct($field, $operator, $value, $logical);
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @param string $field [optional]
      */
     public static function make(
-        string $field = 'id',
-        string $operator = 'eq',
+        string|null $field = null,
+        string|null $operator = null,
         mixed $value = null,
         string $logical = FieldCriteria::AND
     ): static {
