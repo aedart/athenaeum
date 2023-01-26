@@ -14,6 +14,7 @@ use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Http\Cookies\Cookie;
+use Aedart\Contracts\Streams\Stream;
 use DateTimeInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
@@ -746,6 +747,22 @@ interface Builder extends HttpClientAware,
     public function attachFile(
         string $name,
         string $path,
+        array $headers = [],
+        string|null $filename = null
+    ): static;
+
+    /**
+     * Attach file using a stream
+     *
+     * @param string $name Form input name
+     * @param Stream|resource $stream
+     * @param array $headers [optional] Http headers for attachment
+     * @param string|null $filename [optional] Filename to be used by request
+     * @return self
+     */
+    public function attachStream(
+        string $name,
+        $stream,
         array $headers = [],
         string|null $filename = null
     ): static;

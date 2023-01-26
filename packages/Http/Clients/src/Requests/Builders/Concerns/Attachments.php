@@ -137,6 +137,26 @@ trait Attachments
      *
      * @throws Throwable
      */
+    public function attachStream(
+        string $name,
+        $stream,
+        array $headers = [],
+        string|null $filename = null
+    ): static {
+        $attachment = $this->makeAttachment([
+            'name' => $name,
+            'headers' => $headers,
+            'filename' => $filename
+        ])->attachStream($stream);
+
+        return $this->withAttachment($attachment);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @throws Throwable
+     */
     public function makeAttachment(array $data = []): Attachment
     {
         return new RequestAttachment($data);
