@@ -4,6 +4,7 @@ namespace Aedart\Utils\Dates;
 
 use DateInterval;
 use DateTime;
+use DateTimeInterface;
 use Stringable;
 
 /**
@@ -26,11 +27,11 @@ class Duration implements Stringable
     /**
      * Constructor that can take a DateTime, a DateInterval, a MicroTimeStamp or integer seconds
      *
-     * @param  DateInterval|DateTime|int|MicroTimeStamp|null  $time  [optional]
+     * @param  DateInterval|DateTimeInterface|int|MicroTimeStamp|null  $time  [optional]
      */
-    public function __construct(DateInterval|DateTime|MicroTimeStamp|int|null $time = null)
+    public function __construct(DateInterval|DateTimeInterface|MicroTimeStamp|int|null $time = null)
     {
-        if ($time instanceof DateTime) {
+        if ($time instanceof DateTimeInterface) {
             $this->microTimeStamp = MicroTimeStamp::fromDateTime($time);
         } elseif ($time instanceof DateInterval) {
             $this->microTimeStamp = MicroTimeStamp::fromDateInterval($time);
@@ -44,11 +45,11 @@ class Duration implements Stringable
     /**
      * Create instance from either a DateTime, a DateInterval, a MicroTimeStamp or integer seconds
      *
-     * @param  DateTime|DateInterval|MicroTimeStamp|int  $interval
+     * @param  DateTimeInterface|DateInterval|MicroTimeStamp|int  $interval
      *
      * @return static
      */
-    public static function from(DateTime|DateInterval|MicroTimeStamp|int $interval): static
+    public static function from(DateTimeInterface|DateInterval|MicroTimeStamp|int $interval): static
     {
         return new static($interval);
     }
@@ -120,7 +121,7 @@ class Duration implements Stringable
      */
     public static function fromStringHoursMinutes(string $hoursMinutes, string $separator = ':'): static
     {
-        list($hours, $minutes) = explode($separator, $hoursMinutes);
+        [$hours, $minutes] = explode($separator, $hoursMinutes);
 
         return static::fromHoursMinutes($hours, $minutes);
     }
@@ -128,11 +129,11 @@ class Duration implements Stringable
     /**
      * Create instance from difference of two DateTime objects.
      *
-     * @param  DateTime  $start
-     * @param  DateTime  $stop
+     * @param  DateTimeInterface  $start
+     * @param  DateTimeInterface  $stop
      * @return static
      */
-    public static function fromDifference(DateTime $start, DateTime $stop): static
+    public static function fromDifference(DateTimeInterface $start, DateTimeInterface $stop): static
     {
         return new static($start->diff($stop));
     }
