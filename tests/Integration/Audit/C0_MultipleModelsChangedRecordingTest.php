@@ -2,9 +2,9 @@
 
 namespace Aedart\Tests\Integration\Audit;
 
+use Aedart\Audit\Concerns\ChangeRecording;
 use Aedart\Audit\Events\MultipleModelsChanged;
 use Aedart\Audit\Models\AuditTrail;
-use Aedart\Audit\Traits\RecordsChanges;
 use Aedart\Tests\Helpers\Dummies\Audit\Category;
 use Aedart\Tests\TestCases\Audit\AuditTestCase;
 use Illuminate\Database\Eloquent\Collection;
@@ -58,7 +58,7 @@ class C0_MultipleModelsChangedRecordingTest extends AuditTestCase
         }
 
         // Verify that history / audit trail entries can be obtained via model.
-        /** @var Model|RecordsChanges $last */
+        /** @var Model & ChangeRecording $last */
         $last = $models->last();
         $auditTrails = $last->recordedChanges()->get();
 
