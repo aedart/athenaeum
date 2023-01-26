@@ -53,7 +53,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Extracted translation utilities into own trait in `BaseRule`, which now allow setting translation key prefix (_vendor prefix_). [#114](https://github.com/aedart/athenaeum/issues/114).
 * Extracted `$attribute` into own trait in `BaseRule`. Can now be set or obtained via appropriate getter and setter methods.
 * `MicroTimeStamp::fromDateTime()` now accepts `\DateTimeInterface` instead of `\DateTime`.
-* `Duration` now accepts `\DateTimeInterface` instead of `\DateTime`. 
+* `Duration` now accepts `\DateTimeInterface` instead of `\DateTime`.
+* `RequestETagsMixin::httpDateFrom()` now parses Http Date acc. to RFC9110 (_a looser date format parsing was previously used_).
 
 ### Fixed
 
