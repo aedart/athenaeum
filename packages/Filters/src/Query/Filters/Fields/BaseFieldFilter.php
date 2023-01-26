@@ -30,7 +30,7 @@ abstract class BaseFieldFilter extends FieldFilter
      *
      * @var string
      */
-    protected string $datetimeFormat = 'Y-m-d H:i:s';
+    protected string $databaseDatetimeFormat = 'Y-m-d H:i:s';
 
     /**
      * Map of operators (aliases) and corresponding database
@@ -51,6 +51,20 @@ abstract class BaseFieldFilter extends FieldFilter
         $this->assertOperator($operator, $this->allowedOperators());
 
         $this->operator = $this->operatorAliases()[$operator];
+
+        return $this;
+    }
+
+    /**
+     * Set the datetime format used for queries
+     *
+     * @param string $format
+     *
+     * @return self
+     */
+    public function setDatabaseDatetimeFormat(string $format): static
+    {
+        $this->databaseDatetimeFormat = $format;
 
         return $this;
     }
@@ -287,10 +301,10 @@ abstract class BaseFieldFilter extends FieldFilter
 
         // Otherwise, for regular comparisons operators (<,>, <=, and >=)
         if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhere($field, $operator, $date->format($this->datetimeFormat));
+            return $query->orWhere($field, $operator, $date->format($this->databaseDatetimeFormat));
         }
 
-        return $query->where($field, $operator, $date->format($this->datetimeFormat));
+        return $query->where($field, $operator, $date->format($this->databaseDatetimeFormat));
     }
 
     /**
@@ -314,7 +328,7 @@ abstract class BaseFieldFilter extends FieldFilter
         int $offset = 1
     ): Builder|EloquentBuilder {
         // The general database datetime format to use.
-        $format = $this->datetimeFormat;
+        $format = $this->databaseDatetimeFormat;
 
         // In case that no "seconds" precision is given, then ensure
         // that we increase the offset and adapt the format. This should
