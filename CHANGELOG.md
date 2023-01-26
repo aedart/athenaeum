@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Service `Registrar` can now bind singleton instances of non-associative `$singletons` array, if available in service providers.
 * `DateTimeFormats` interface that contains PHP's predefined date and time formats, along with a few additional, such as RFC3339 that supports `"Z"` or `"-/+00:00"` offset.
 * `asMicroSeconds()` in the `Duration` util.
+* `setDatabaseDatetimeFormat()` in `BaseFieldFilter` abstraction.
 * `now()` in the `Duration` util.
 * Test `Response` utility.
 
