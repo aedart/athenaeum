@@ -260,6 +260,45 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      *
      * @param string $profile
      *
+     * @throws ProfileNotFoundException
+     */
+    public function canAttachUsingStream(string $profile)
+    {
+        $file = $this->attachmentsPath() . 'lipsum.txt';
+
+        $stream = fopen($file, 'r');
+
+        $builder = $this->client($profile)
+            ->withOption('handler', $this->makeRespondsOkMock())
+            ->attachStream('arr', $stream);
+
+        $builder->post('/records');
+
+        // --------------------------------------------------------------- //
+
+        $this->assertTrue($builder->hasAttachment('arr'), 'file not in builder');
+
+        // --------------------------------------------------------------- //
+
+        $request = $this->lastRequest;
+        $contents = $request->getBody()->getContents();
+        ConsoleDebugger::output($contents);
+
+        $this->assertAttachmentInPayload(
+            $contents,
+            'arr',
+            file_get_contents($file),
+            [],
+            'lipsum.txt'
+        );
+    }
+
+    /**
+     * @test
+     * @dataProvider providesClientProfiles
+     *
+     * @param string $profile
+     *
      * @throws InvalidFilePathException
      * @throws ProfileNotFoundException
      */
