@@ -11,7 +11,7 @@ use League\Flysystem\Config;
 /**
  * Concerns Streams
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Flysystem\Db\Adapters\Concerns
  */
 trait Streams

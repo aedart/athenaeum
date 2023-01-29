@@ -18,7 +18,7 @@ use Traversable;
  *
  * @see \Aedart\Contracts\Redmine\PaginatedResults
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Pagination
  */
 class PaginatedResults extends Paginator implements PaginatedResultsInterface

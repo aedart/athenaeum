@@ -12,7 +12,7 @@ use Aedart\Testing\Laravel\DuskTestHelper;
  *
  * @see \Aedart\Testing\Laravel\DuskTestHelper
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Testing\TestCases
  */
 abstract class BrowserTestCase extends IntegrationTestCase

@@ -23,7 +23,7 @@ use JsonException;
  *
  * @property ListOfReferences<Reference>|Reference[]|null $users Related data that can be requested included.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class Group extends RedmineApiResource implements

@@ -17,7 +17,7 @@ use Aedart\Contracts\Redmine\Listable;
  * @property string|null $users_visibility
  * @property string[]|null $permissions
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class Role extends RedmineApiResource implements

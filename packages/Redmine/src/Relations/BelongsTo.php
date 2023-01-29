@@ -9,7 +9,7 @@ use Aedart\Redmine\Exceptions\RelationException;
 /**
  * Belongs To Resource Relation
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Relations
  */
 class BelongsTo extends ResourceRelation

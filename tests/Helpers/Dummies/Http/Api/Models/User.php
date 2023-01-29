@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Helpers\Dummies\Http\Api\Models;
 
 use Aedart\Contracts\ETags\HasEtag;
+use Aedart\Database\Models\Concerns\Filtering;
 use Aedart\ETags\Concerns\EloquentEtag;
 use Aedart\Redmine\Collections\Collection;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Factories\UserFactory;
@@ -30,6 +31,7 @@ class User extends Model implements HasEtag
 {
     use HasFactory;
     use EloquentEtag;
+    use Filtering;
 
     /**
      * The table associated with the model.

@@ -10,7 +10,7 @@ use Iterator;
 /**
  * Results Iterator
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Redmine\Iterators
  */
 interface ResultsIterator extends Iterator,

@@ -4,7 +4,6 @@ namespace Aedart\ETags\Preconditions\Rfc9110;
 
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
-use Illuminate\Support\Carbon;
 
 /**
  * If-Unmodified-Since precondition
@@ -40,7 +39,7 @@ class IfUnmodifiedSince extends BasePrecondition
 
         // [...] If the selected representation's last modification date is earlier than or equal to
         // the date provided in the field value, the condition is TRUE. [...]
-        return Carbon::instance($resource->lastModifiedDate())->lessThanOrEqualTo($ifUnmodifiedSince);
+        return $this->resolveLastModifiedDate($resource)->lessThanOrEqualTo($ifUnmodifiedSince);
     }
 
     /**

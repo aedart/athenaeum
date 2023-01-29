@@ -17,7 +17,7 @@ use Aedart\Redmine\Exceptions\RelationException;
  *
  * @see https://www.redmine.org/projects/redmine/wiki/Rest_IssueStatuses
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Relations
  */
 class OneFromList extends BelongsTo

@@ -17,7 +17,7 @@ use Throwable;
  * To be used for resource that are strictly tight to a project, e.g.
  * resources that can only be listed or created for a project.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Concerns
  */
 trait ProjectDependentResource

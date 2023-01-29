@@ -15,7 +15,7 @@ use InvalidArgumentException;
  *
  * @property Role[]|Collection $roles The roles assigned to this model
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Acl\Traits
  */
 trait HasRoles

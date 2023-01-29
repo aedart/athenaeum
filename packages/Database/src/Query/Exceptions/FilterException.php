@@ -10,7 +10,7 @@ use RuntimeException;
  *
  * @see \Aedart\Contracts\Database\Query\Exceptions\CriteriaException
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Database\Query\Exceptions
  */
 class FilterException extends RuntimeException implements CriteriaException

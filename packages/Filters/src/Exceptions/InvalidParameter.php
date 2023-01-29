@@ -11,7 +11,7 @@ use Throwable;
  *
  * @see \Aedart\Contracts\Filters\Exceptions\InvalidParameterException
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Exceptions
  */
 class InvalidParameter extends ProcessorException implements InvalidParameterException

@@ -28,9 +28,10 @@ trait Filtering
     /**
      * Request filters builder to use for this request
      *
-     * @return string|null Class path or null if request does not support filters
+     * @return string|Builder|null Class path, builder instance or null if request
+     *                             does not support filters
      */
-    abstract public function filtersBuilder(): string|null;
+    abstract public function filtersBuilder(): string|Builder|null;
 
     /**
      * Modifies the built filters, before they are applied
@@ -61,19 +62,6 @@ trait Filtering
         $this->filters = $this->resolveFiltersFromRequest($this);
     }
 
-    /**
-     * Creates a new filters builder instance
-     *
-     * @param  string  $builderClass
-     * @param  Request  $request
-     *
-     * @return Builder
-     */
-    public function makeFiltersBuilder(string $builderClass, Request $request): Builder
-    {
-        return $builderClass::make($request);
-    }
-
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -89,13 +77,15 @@ trait Filtering
      */
     protected function resolveFiltersFromRequest(Request $request): BuiltFiltersMap|null
     {
-        $builderClass = $this->filtersBuilder();
+        $builder = $this->filtersBuilder();
 
-        if (!isset($builderClass)) {
+        if (!isset($builder)) {
             return null;
         }
 
-        $builder = $this->makeFiltersBuilder($builderClass, $request);
+        if (!($builder instanceof Builder)) {
+            $builder = $builder::make($request);
+        }
 
         return $this->modifyFilters(
             $builder->build()

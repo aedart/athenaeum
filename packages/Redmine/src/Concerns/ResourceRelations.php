@@ -14,7 +14,7 @@ use Aedart\Redmine\Relations\OneFromList;
  *
  * @template T
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Concerns
  */
 trait ResourceRelations

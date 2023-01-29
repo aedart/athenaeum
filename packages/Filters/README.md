@@ -56,8 +56,7 @@ class ListUsersRequest exends FormRequest
 
     public function after(Validator $validator)
     {        
-        // Using your custom filters builder, build filters
-        // for this request...
+        // Add filters using your custom builder
         $this->filters = UserFilterBuilder::make($this)
             ->build();
     }

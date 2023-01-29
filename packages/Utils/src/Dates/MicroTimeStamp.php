@@ -3,14 +3,14 @@
 namespace Aedart\Utils\Dates;
 
 use DateInterval;
-use DateTime;
+use DateTimeInterface;
 
 /**
  * TimeStamp with microseconds resolution.
  *
  * Can hold very large values, but with some limitations:
- *   Years are always 365 days.
- *   Months are always 30 days.
+ * - Years are always 365 days.
+ * - Months are always 30 days.
  *
  * @author steffen
  * @package Aedart\Utils\Dates
@@ -18,57 +18,43 @@ use DateTime;
 class MicroTimeStamp
 {
     /**
-     * Property to hold minutes.
-     *
-     * @var int
-     */
-    protected int $minutes;
-
-    /**
-     * Property to hold microseconds
-     *
-     * @var int
-     */
-    protected int $microSeconds;
-
-    /**
      * Constructor that can populate the timestamp
      *
-     * @param  int  $minutes
-     * @param  int  $microSeconds
+     * @param  int  $minutes [optional]
+     * @param  int  $microSeconds [optional]
      */
-    public function __construct(int $minutes = 0, int $microSeconds = 0)
-    {
-        $this->minutes = $minutes;
-        $this->microSeconds = $microSeconds;
+    public function __construct(
+        protected int $minutes = 0,
+        protected int $microSeconds = 0
+    ) {
     }
 
     /**
      * Factory to create from seconds and optional microseconds
      *
      * @param  int  $seconds
-     * @param  int  $microSeconds
+     * @param  int  $microSeconds [optional]
      *
-     * @return MicroTimeStamp
+     * @return static
      */
-    public static function fromSeconds(int $seconds, int $microSeconds = 0): MicroTimeStamp
+    public static function fromSeconds(int $seconds, int $microSeconds = 0): static
     {
-        return new MicroTimeStamp($seconds / 60, (($seconds % 60) * 1000000) + $microSeconds);
+        return new static($seconds / 60, (($seconds % 60) * 1000000) + $microSeconds);
     }
 
     /**
      * Factory to create from a DateTime object.
      * Time is relative to Unix epoch.
      *
-     * @param  DateTime  $dt
+     * @param  DateTimeInterface  $dt
      *
-     * @return MicroTimeStamp
+     * @return static
      */
-    public static function fromDateTime(DateTime $dt): MicroTimeStamp
+    public static function fromDateTime(DateTimeInterface $dt): static
     {
-        list($seconds, $microSeconds) = explode(' ', $dt->format('U u'));
+        [$seconds, $microSeconds] = explode(' ', $dt->format('U u'));
 
-        return MicroTimeStamp::fromSeconds($seconds, $microSeconds);
+        return static::fromSeconds($seconds, $microSeconds);
     }
 
     /**
@@ -77,9 +63,9 @@ class MicroTimeStamp
      *
      * @param  DateInterval  $dt
      *
-     * @return MicroTimeStamp
+     * @return static
      */
-    public static function fromDateInterval(DateInterval $dt): MicroTimeStamp
+    public static function fromDateInterval(DateInterval $dt): static
     {
         $minutes = ($dt->y * 365 * 24 * 60) + ($dt->m * 30 * 24 * 60) + ($dt->d * 24 * 60) + ($dt->h * 60) + $dt->i + intval($dt->s / 60);
         $microSeconds = intval((($dt->s % 60) + $dt->f) * 1000000);
@@ -89,7 +75,7 @@ class MicroTimeStamp
             $microSeconds *= -1;
         }
 
-        return new MicroTimeStamp($minutes, $microSeconds);
+        return new static($minutes, $microSeconds);
     }
 
     /**
@@ -97,14 +83,14 @@ class MicroTimeStamp
      *
      * @param  float  $seconds
      *
-     * @return MicroTimeStamp
+     * @return static
      */
-    public static function fromSecondsFloat(float $seconds): MicroTimeStamp
+    public static function fromSecondsFloat(float $seconds): static
     {
         $minutes = intval($seconds / 60);
         $microSeconds = intval(($seconds * 1000000) % 60000000);
 
-        return new MicroTimeStamp($minutes, $microSeconds);
+        return new static($minutes, $microSeconds);
     }
 
     /**
@@ -119,6 +105,7 @@ class MicroTimeStamp
 
     /**
      * Get the actual microseconds content.
+     *
      * @return int
      */
     public function getMicroSeconds(): int

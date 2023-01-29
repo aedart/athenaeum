@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
  *
  * @see \Aedart\Filters\BaseBuilder
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Builders
  */
 class GenericBuilder extends BaseBuilder

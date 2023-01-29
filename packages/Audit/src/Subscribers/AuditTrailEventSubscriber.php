@@ -12,7 +12,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 /**
  * Audit Trail Event Subscriber
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Subscribers
  */
 class AuditTrailEventSubscriber

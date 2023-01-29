@@ -6,7 +6,6 @@ use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
 use DateTimeInterface;
-use Illuminate\Support\Carbon;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 /**
@@ -141,6 +140,6 @@ class IfRange extends BasePrecondition
 
         // [...] If the HTTP-date validator provided exactly matches the Last-Modified field value for
         // the selected representation, the condition is true. [...]
-        return Carbon::instance($lastModified)->equalTo($ifRange);
+        return $this->reducePrecisionToSeconds($lastModified)->equalTo($ifRange);
     }
 }

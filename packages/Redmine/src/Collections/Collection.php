@@ -10,7 +10,7 @@ use Illuminate\Support\Collection as BaseCollection;
  *
  * Contains one or more Redmine API Resources.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Collections
  */
 class Collection extends BaseCollection

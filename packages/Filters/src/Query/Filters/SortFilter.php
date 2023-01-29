@@ -3,6 +3,7 @@
 namespace Aedart\Filters\Query\Filters;
 
 use Aedart\Database\Query\Filter;
+use Aedart\Filters\Query\Filters\Concerns\SortingCallbacks;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
 
@@ -11,11 +12,13 @@ use Illuminate\Contracts\Database\Query\Builder;
  *
  * Applies sorting to query (order by clauses).
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Query\Filters
  */
 class SortFilter extends Filter
 {
+    use SortingCallbacks;
+
     /**
      * List of columns and their sorting direction
      *
@@ -36,7 +39,17 @@ class SortFilter extends Filter
      */
     public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
+        $callbacks = $this->getSortingCallbacks();
+
+        // Add "order by ..." clause or use custom sorting callback when available.
         foreach ($this->columns as $column => $direction) {
+            if (isset($callbacks[$column])) {
+                $callback = $callbacks[$column];
+
+                $query = $callback($query, $column, $direction);
+                continue;
+            }
+
             $query = $query->orderBy($column, $direction);
         }
 

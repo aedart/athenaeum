@@ -2,15 +2,21 @@
 
 namespace Aedart\Http\Api\Requests\Concerns;
 
-use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\ETag;
+use Aedart\Contracts\ETags\Preconditions\Actions as PreconditionActions;
+use Aedart\Contracts\ETags\Preconditions\Evaluator as PreconditionsEvaluator;
+use Aedart\Contracts\ETags\Preconditions\Precondition;
+use Aedart\Contracts\ETags\Preconditions\ResourceContext;
+use Aedart\ETags\Preconditions\Evaluator;
+use Aedart\ETags\Preconditions\Resources\GenericResource;
 use DateTimeInterface;
-use Illuminate\Support\Carbon;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Throwable;
 
 /**
  * Concerns Http Conditionals
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Conditional_requests
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Api\Requests\Concerns
@@ -18,400 +24,175 @@ use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
 trait HttpConditionals
 {
     /**
-     * Determine if Http Conditional Request Headers must be evaluated
+     * The resource context that has been evaluated
+     * against requested preconditions
      *
-     * @see evaluateRequestPreconditions()
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Conditional_requests#conditional_headers
-     *
-     * @return bool
+     * @var ResourceContext|null
      */
-    abstract public function mustEvaluateRequestPreconditions(): bool;
+    public ResourceContext|null $resource;
 
-    // TODO:
-    public function evaluateRequestPreconditions(ETag|null $etag = null, DateTimeInterface|null $lastModified = null): void
-    {
-        // [...] a server MUST ignore the conditional request header fields [...] when received with a
-        // request method that does not involve the selection or modification of a selected representation,
-        // such as CONNECT, OPTIONS, or TRACE [...]
-        // @see https://httpwg.org/specs/rfc9110.html#when.to.evaluate
-        if (in_array($this->getMethod(), ['CONNECT', 'OPTIONS', 'TRACE'])) {
-            return;
-        }
+    /**
+     * Allowed or supported range unit
+     *
+     * @var string
+     */
+    protected string $allowedRangeUnit = 'bytes';
 
-        // "[...] When more than one conditional request header field is present in a request, the order
-        // in which the fields are evaluated becomes important [...]"
-        // @see https://httpwg.org/specs/rfc9110.html#precedence
-        $headers = $this->headers;
+    /**
+     * Maximum allowed range sets.
+     *
+     * @var int
+     */
+    protected int $maximumRangeSets = 5;
 
-        // 1. When recipient is the origin server and If-Match is present, [...]:
-        if ($headers->has('If-Match')) {
-            if ($this->ifMatchConditionPasses($etag)) {
-                // [...] if true, continue to step 3
-                goto three;
-            }
+    /**
+     * Evaluates request's preconditions for the given resource
+     *
+     * @param  mixed  $record E.g. an Eloquent record
+     * @param  ETag|null  $etag  [optional] E.g. record's etag
+     * @param  DateTimeInterface|null  $lastModifiedDate  [optional] E.g. records last modified date
+     *
+     * @return ResourceContext
+     *
+     * @throws HttpExceptionInterface
+     * @throws Throwable
+     */
+    public function evaluateRequestPreconditions(
+        mixed $record,
+        ETag|null $etag = null,
+        DateTimeInterface|null $lastModifiedDate = null
+    ): ResourceContext {
+        // Wrap given record or data into a resource context
+        $resource = $this->wrapResourceContext($record, $etag, $lastModifiedDate);
 
-            $this->checkResourceStateChange();
-        }
-
-        // 2. When recipient is the origin server, If-Match is not present, and If-Unmodified-Since is present, [...]:
-        if ($headers->has('If-Unmodified-Since') && !$headers->has('If-Match') && isset($lastModified)) {
-            // [...] A recipient MUST ignore the If-Unmodified-Since header field if the resource does
-            // not have a modification date available. [...]
-            if ($this->ifUnmodifiedSinceConditionPasses($lastModified)) {
-                // [...] if true, continue to step 3
-                goto three;
-            }
-
-            $this->checkResourceStateChange();
-        }
-
-        // 3. When If-None-Match is present, [...]:
-        three:
-        if ($headers->has('If-None-Match')) {
-            if ($this->ifNoneMatchConditionPasses($etag)) {
-                // [...] if true, continue to step 5
-                goto five;
-            }
-
-            // [...] if false for GET/HEAD, respond 304 (Not Modified)
-            if (in_array($this->getMethod(), ['GET', 'HEAD'])) {
-                $this->abortNotModified();
-            }
-
-            // [...] if false for other methods, respond 412 (Precondition Failed)
-            $this->abortPreconditionFailed();
-        }
-
-        // 4. When the method is GET or HEAD, If-None-Match is not present, and If-Modified-Since is present, [...]:
-        if ($headers->has('If-Modified-Since') && !$headers->has('If-None-Match') && in_array($this->getMethod(), ['GET', 'HEAD']) && isset($lastModified)) {
-            // [...] A recipient MUST ignore the If-Modified-Since header field if the resource does
-            // not have a modification date available. [...]
-            if ($this->ifModifiedSinceConditionPasses($lastModified)) {
-                // [...] if true, continue to step 5
-                goto five;
-            }
-
-            // [...] if false, respond 304 (Not Modified)
-            $this->abortNotModified();
-        }
-
-        // 5. When the method is GET and both Range and If-Range are present, [...]:
-        five:
-        if ($headers->has('If-Range') && $headers->has('Range') && $this->getMethod() === 'GET' && $this->isRangeRequestSupported()) {
-            // [...] An origin server MUST ignore an If-Range header field received in a request for
-            // a target resource that does not support Range requests. [...]
-            // TODO: is "range" applicable callback ... or something... ???
-            if ($this->ifRangeConditionPasses($etag, $lastModified)) {
-                // [...] if true and the Range is applicable to the selected representation,
-                // respond 206 (Partial Content) [...]
-                // TODO: Uhm... callback?.. or?
-            }
-
-            // [...] otherwise, ignore the Range header field and respond 200 (OK) [...]
-                // -> In this case we let the request proceed, so it can respond accordingly.
-        }
-
-        // 6. Otherwise:
-        //      [...] perform the requested method and respond according to its success or failure [...]
+        // Evaluate evt. requested preconditions...
+        return $this->resource = $this
+            ->makePreconditionsEvaluator()
+            ->evaluate($resource);
     }
 
     /**
-     * Determine if state-changing request has already succeeded
+     * Wraps record or data into a resource context
      *
-     * This method SHOULD only be invoked for none-safe methods,
-     * e.g. POST, PUT, DELETE... etc.
+     * @param  mixed  $record E.g. an Eloquent record
+     * @param  ETag|null  $etag  [optional] E.g. record's etag
+     * @param  DateTimeInterface|null  $lastModifiedDate  [optional] E.g. records last modified date
      *
-     * @see checkResourceStateChange
-     *
-     * @return bool
+     * @return ResourceContext
      */
-    public function hasStateChangeAlreadySucceeded(): bool
-    {
-        // Overwrite this method, if you are able to determine if a state-change
-        // has already succeeded.
-        // Example: If a DELETE resource request is made and the resource is
-        // already deleted, then you can return true.
-
-        return false;
+    public function wrapResourceContext(
+        mixed $record,
+        ETag|null $etag = null,
+        DateTimeInterface|null $lastModifiedDate = null
+    ): ResourceContext {
+        return new GenericResource(
+            data: $record,
+            etag: $etag,
+            lastModifiedDate: $lastModifiedDate,
+            size: $this->determineSizeOf($record),
+            determineStateChangeSuccess: [$this, 'hasStateChangeAlreadySucceeded'],
+            rangeUnit: $this->rangeUnit(),
+            maxRangeSets: $this->maxRangeSets()
+        );
     }
 
     /**
-     * Determines if a state change has already succeeded and reacts accordingly.
+     * Determine the size of given record or data
      *
-     * If a successful state change can be determined, then request is aborted vis
-     * a 2xx success status. Otherwise, the request is aborted with a precondition
-     * failed status.
+     * @param mixed $data E.g. file path, content or stream...etc
      *
-     * This method should only be invoked as a result of a failed precondition of
-     * "If-Match" or "If-Unmodified-Since" http conditional requests.
-     *
-     * @see abortStateChangeAlreadySucceeded()
-     * @see abortPreconditionFailed()
-     *
-     * @return never
-     *
-     * @throws HttpException
+     * @return int If 0 (zero) is returned, then "Range" request is not supported
      */
-    public function checkResourceStateChange()
+    public function determineSizeOf(mixed $data): int
     {
-        // [...] if false, respond 412 (Precondition Failed) unless it can be determined that the
-        // state-changing request has already succeeded [...]
+        // Overwrite this method when your request supports "If-Range" / "Range" fields
+        // and return the size, e.g. in bytes, for the given record or data.
 
-        if (!$this->isSafeMethod() && $this->hasStateChangeAlreadySucceeded()) {
-            // [...]  if the request is a state-changing operation that appears to have already been
-            // applied to the selected representation, the origin server MAY respond with a
-            // 2xx (Successful) status code [...]
-            $this->abortStateChangeAlreadySucceeded();
-        }
-
-        // Otherwise, this is not a state-change request or no state change success could be determined.
-        // Thus, we abort the request with a "precondition failed"
-        $this->abortPreconditionFailed();
+        return 0;
     }
 
     /**
-     * Determine if "Range" request is supported by the resource
+     * Determine if state change has already succeeded for resource.
+     *
+     * This method is applied for "If-Match" or "If-Unmodified-Since" preconditions,
+     * when they are evaluated to false...
+     *
+     * @see \Aedart\Contracts\ETags\Preconditions\ResourceContext::hasStateChangeAlreadySucceeded
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param ResourceContext $resource
      *
      * @return bool
      */
-    public function isRangeRequestSupported(): bool
+    public function hasStateChangeAlreadySucceeded($request, ResourceContext $resource): bool
     {
         return false;
     }
 
     /**
-     * Abort request with a "2xx" successful status, due to a
+     * Allowed or supported range unit
      *
-     * @return never
+     * @see https://httpwg.org/specs/rfc9110.html#range.units
      *
-     * @throws HttpException
+     * @return string
      */
-    public function abortStateChangeAlreadySucceeded()
+    public function rangeUnit(): string
     {
-        abort(200);
+        return $this->allowedRangeUnit;
     }
 
     /**
-     * Abort request with a "412 Precondition Failed" client error
+     * Maximum allowed range sets.
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/412
+     * @see https://httpwg.org/specs/rfc9110.html#rule.ranges-specifier
      *
-     * @return never
-     *
-     * @throws HttpException
+     * @return int
      */
-    public function abortPreconditionFailed()
+    public function maxRangeSets(): int
     {
-        throw new PreconditionFailedHttpException();
+        return $this->maximumRangeSets;
     }
 
     /**
-     * Abort request with a "304 Not Modified"
+     * Returns a new preconditions evaluator instance
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/304
-     *
-     * @return never
-     *
-     * @throws HttpException
+     * @return PreconditionsEvaluator
      */
-    public function abortNotModified()
+    public function makePreconditionsEvaluator(): PreconditionsEvaluator
     {
-        abort(304);
+        return Evaluator::make(
+            request: $this,
+            preconditions: $this->supportedPreconditionsList(),
+            actions: $this->preconditionActions()
+        );
     }
 
     /**
-     * Alias for {@see isMethodSafe()}
+     * Returns precondition actions
      *
-     * @see https://developer.mozilla.org/en-US/docs/Glossary/Safe/HTTP
-     * @see https://developer.mozilla.org/en-US/docs/Glossary/Idempotent
-     *
-     * @return bool
+     * @return PreconditionActions|null
      */
-    public function isSafeMethod(): bool
+    public function preconditionActions(): PreconditionActions|null
     {
-        return $this->isMethodSafe();
-    }
+        // Return null if "default" actions are to be used by
+        // the evaluator. However, you are encouraged to create
+        // actions that specific for your application / request.
+        // @see \Aedart\ETags\Preconditions\Actions\DefaultActions
 
-    /*****************************************************************
-     * Internals
-     ****************************************************************/
-
-    /**
-     * Determine whether "If-Match" condition passes or not
-     *
-     * NOTE: Call this method ONLY when an "If-Match" header is available.
-     *
-     * @see https://httpwg.org/specs/rfc9110.html#field.if-match
-     *
-     * @param  ETag|null  $etag  [optional] Current resource's etag, if any
-     *
-     * @return bool
-     */
-    protected function ifMatchConditionPasses(ETag|null $etag = null): bool
-    {
-        // Obtain "If-Match" etags collection.
-        // @see \Aedart\ETags\Mixins\RequestETagsMixin::ifMatchEtags
-        /** @var Collection $ifMatchCollection */
-        $ifMatchCollection = $this->ifMatchEtags();
-
-        // An origin server MUST use the strong comparison [...] for If-Match
-        if (isset($etag) && $ifMatchCollection->isNotEmpty() && $ifMatchCollection->contains($etag, true)) {
-            return true;
-        }
-
-        // This means either that there is no current representation of the resource,
-        // or that requested etag(s) do not match the etag of the resource.
-        return false;
+        return null;
     }
 
     /**
-     * Determine whether "If-Unmodified-Since" condition passes or not
+     * Returns list of supported preconditions for this request
      *
-     * NOTE: Call this method ONLY when an "If-Unmodified-Since" header is available,
-     * and the requested resource has a last modification date.
-     *
-     * @see https://httpwg.org/specs/rfc9110.html#field.if-unmodified-since
-     *
-     * @param  DateTimeInterface  $lastModified Current resource's last modified date
-     *
-     * @return bool
+     * @return string[]|Precondition[]
      */
-    protected function ifUnmodifiedSinceConditionPasses(DateTimeInterface $lastModified): bool
+    public function supportedPreconditionsList(): array
     {
-        // Obtain requested "If-Unmodified-Since" date
-        // @see \Aedart\ETags\Mixins\RequestETagsMixin::ifUnmodifiedSinceDate
-        $ifUnmodifiedSince = $this->ifUnmodifiedSinceDate();
+        // Return an empty array, if default evaluator's default
+        // preconditions should be supported.
+        // @see \Aedart\ETags\Preconditions\Evaluator::getDefaultPreconditions
 
-        // [...] If the selected representation's last modification date is earlier than or equal to
-        // the date provided in the field value, the condition is TRUE. [...]
-        return Carbon::instance($lastModified)->lessThanOrEqualTo($ifUnmodifiedSince);
-    }
-
-    /**
-     * Determine whether "If-None-Match" condition passes or not
-     *
-     * NOTE: Call this method ONLY when an "If-None-Match" header is available.
-     *
-     * @see https://httpwg.org/specs/rfc9110.html#field.if-none-match
-     *
-     * @param  ETag|null  $etag  [optional] Current resource's etag, if any
-     *
-     * @return bool
-     */
-    protected function ifNoneMatchConditionPasses(ETag|null $etag = null): bool
-    {
-        // Obtain "If-None-Match" etags collection.
-        // @see \Aedart\ETags\Mixins\RequestETagsMixin::ifNoneMatchEtags
-        /** @var Collection $ifNoneMatchCollection */
-        $ifNoneMatchCollection = $this->ifNoneMatchEtags();
-
-        // [...] If the field value is "*", the condition is FALSE if the origin server has a current representation for the target resource.
-        // [...] If the field value is a list of entity tags, the condition is FALSE if one of the listed tags matches the entity tag of the selected representation.
-        // [...] A recipient MUST use the weak comparison [...] for If-None-Match
-        if (isset($etag) && $ifNoneMatchCollection->contains($etag, false)) {
-            return false;
-        }
-
-        // Otherwise, the condition is true.
-        return true;
-    }
-
-    /**
-     * Determine whether "If-Modified-Since" condition passes or not
-     *
-     * NOTE: Call this method ONLY when an "If-Modified-Since" header is available,
-     * and the requested resource has a last modification date.
-     *
-     * @see https://httpwg.org/specs/rfc9110.html#field.if-modified-since
-     *
-     * @param  DateTimeInterface  $lastModified Current resource's last modified date
-     *
-     * @return bool
-     */
-    protected function ifModifiedSinceConditionPasses(DateTimeInterface $lastModified): bool
-    {
-        // Obtain requested "If-Modified-Since" date
-        // @see \Aedart\ETags\Mixins\RequestETagsMixin::ifModifiedSinceDate
-        $ifModifiedSince = $this->ifModifiedSinceDate();
-
-        // [...] If the selected representation's last modification date is earlier or equal to
-        // the date provided in the field value, the condition is FALSE. [...]
-        return !Carbon::instance($lastModified)->lessThanOrEqualTo($ifModifiedSince);
-    }
-
-    /**
-     * Determine whether "If-Range" condition passes or not
-     *
-     * NOTE: Call this method ONLY when an "If-Range" and "Range" headers are available.
-     *
-     * @see https://httpwg.org/specs/rfc9110.html#field.if-range
-     *
-     * @param  ETag|null  $etag  [optional] Resource's etag, if any
-     * @param  DateTimeInterface|null  $lastModified  [optional] Resource's last modification date, if any
-     *
-     * @return bool
-     */
-    protected function ifRangeConditionPasses(ETag|null $etag = null, DateTimeInterface|null $lastModified = null): bool
-    {
-        // Obtain requested "If-Range" ETag or Http Date
-        // @see \Aedart\ETags\Mixins\RequestETagsMixin::ifRangeEtagOrDate
-        $value = $this->ifRangeEtagOrDate();
-
-        // Evaluate etag
-        if ($value instanceof ETag) {
-            return $this->doesIfRangeEtagMatch($value, $etag);
-        }
-
-        // Otherwise, evaluate Http Date...
-        if ($value instanceof DateTimeInterface) {
-            return $this->doesIfRangeDateMatch($value, $lastModified);
-        }
-
-        // If by any change the value was resolved to null, then the condition is false...
-        return false;
-    }
-
-    /**
-     * Determine if the "If-Range" ETag matches that of the resource
-     *
-     * @param  ETag  $ifRange ETag of If-Range header
-     * @param  ETag|null  $etag  [optional] Resource's etag
-     *
-     * @return bool
-     */
-    protected function doesIfRangeEtagMatch(ETag $ifRange, ETag|null $etag = null): bool
-    {
-        // We assume that the condition fails, when the resource has no etag representation...
-        if (!isset($etag)) {
-            return false;
-        }
-
-        // [...] If the entity-tag validator provided exactly matches the ETag field value for the
-        // selected representation using the strong comparison [...], the condition is true.
-        return $ifRange->matches($etag, true);
-    }
-
-    /**
-     * Determine if the "If-Range" HttpDate matches the last modification date of resource
-     *
-     * @param  DateTimeInterface  $ifRange Http Date of If-Range header
-     * @param  DateTimeInterface|null  $lastModified  [optional] Resource's last modification date
-     *
-     * @return bool
-     */
-    protected function doesIfRangeDateMatch(DateTimeInterface $ifRange, DateTimeInterface|null $lastModified = null): bool
-    {
-        // We assume the condition fails, when resource has no last modification date...
-        if (!isset($lastModified)) {
-            return false;
-        }
-
-        // [...] If the HTTP-date validator provided is not a strong validator in the sense defined by
-        // Section 8.8.2.2, the condition is false. [...]
-        // -> Not sure how this can be determined here, or if at all feasible?
-
-        // [...] If the HTTP-date validator provided exactly matches the Last-Modified field value for
-        // the selected representation, the condition is true. [...]
-        return Carbon::instance($lastModified)->equalTo($ifRange);
+        return [];
     }
 }

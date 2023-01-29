@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Integration\Service;
 
 use Aedart\Contracts\Service\Registrar as RegistrarInterface;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\Helpers\MessageBag;
 use Aedart\Testing\TestCases\AthenaeumTestCase;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\Partials\ProviderState;
@@ -229,5 +230,45 @@ class RegistrarTest extends AthenaeumTestCase
         $this->assertStringContainsString('C3 has booted', $messages[11]);
         $this->assertStringContainsString('C has booted', $messages[12]);
         $this->assertStringContainsString('D has booted', $messages[13]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function invokesBootCallbacks(): void
+    {
+        $provider = new class($this->ioc) extends ServiceProvider {
+            public bool $isBooted = false;
+
+            public function boot(): void
+            {
+                $this->isBooted = true;
+                ConsoleDebugger::output('boot()');
+            }
+        };
+
+        $bootingInvoked = false;
+        $provider->booting(function () use (&$bootingInvoked) {
+            $bootingInvoked = true;
+            ConsoleDebugger::output('booting()');
+        });
+
+        $bootedInvoked = false;
+        $provider->booted(function () use (&$bootedInvoked) {
+            $bootedInvoked = true;
+            ConsoleDebugger::output('booted()');
+        });
+
+        // -------------------------------------------------------------------- //
+
+        $registrar = $this->makeRegistrar();
+        $registrar->register($provider);
+
+        // -------------------------------------------------------------------- //
+
+        $this->assertTrue($bootingInvoked, 'booting callback not invoked');
+        $this->assertTrue($bootedInvoked, 'booted callback not invoked');
     }
 }

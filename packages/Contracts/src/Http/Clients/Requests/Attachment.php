@@ -4,6 +4,7 @@
 namespace Aedart\Contracts\Http\Clients\Requests;
 
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
+use Aedart\Contracts\Streams\Stream;
 use Aedart\Contracts\Utils\Populatable;
 use Illuminate\Contracts\Support\Arrayable;
 use Psr\Http\Message\StreamInterface;
@@ -81,6 +82,15 @@ interface Attachment extends Populatable,
      * @throws InvalidFilePathException
      */
     public function attachFile(string $path): static;
+
+    /**
+     * Use stream as this attachment's content
+     *
+     * @param Stream|resource $stream
+     *
+     * @return self
+     */
+    public function attachStream($stream): static;
 
     /**
      * Set the attachment's filename to be used by a request

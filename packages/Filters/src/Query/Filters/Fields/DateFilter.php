@@ -10,11 +10,18 @@ use InvalidArgumentException;
 /**
  * Date Filter
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Query\Filters\Fields
  */
 class DateFilter extends BaseFieldFilter
 {
+    /**
+     * List of allowed date / datetime formats
+     *
+     * @var string[]
+     */
+    protected array $allowedFormats = [];
+
     /**
      * @inheritDoc
      */
@@ -46,6 +53,38 @@ class DateFilter extends BaseFieldFilter
             'is_null' => 'is_null',
             'not_null' => 'not_null',
         ];
+    }
+
+    /**
+     * Set list of allowed date / datetime formats
+     *
+     * @param string|string[] $formats
+     *
+     * @return self
+     */
+    public function setAllowedDateFormats(string|array $formats): static
+    {
+        if (is_string($formats)) {
+            $formats = [ $formats ];
+        }
+
+        $this->allowedFormats = $formats;
+
+        return $this;
+    }
+
+    /**
+     * Returns list of allowed date / datetime formats
+     *
+     * @return string[]
+     */
+    public function allowedDateFormats(): array
+    {
+        if (empty($this->allowedFormats)) {
+            $this->setAllowedDateFormats($this->defaultAllowedFormats());
+        }
+
+        return $this->allowedFormats;
     }
 
     /*****************************************************************
@@ -80,11 +119,11 @@ class DateFilter extends BaseFieldFilter
     }
 
     /**
-     * Returns list of allowed date formats
+     * Returns default allowed date / datetime formats
      *
      * @return string[]
      */
-    protected function allowedDateFormats(): array
+    protected function defaultAllowedFormats(): array
     {
         return [
             'Y-m-d',

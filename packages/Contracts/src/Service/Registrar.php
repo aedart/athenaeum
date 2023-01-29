@@ -116,7 +116,7 @@ interface Registrar
      *
      * @param \Illuminate\Support\ServiceProvider|string $provider Service Provider or class path
      *
-     * @return ServiceProvider
+     * @return \Illuminate\Support\ServiceProvider
      */
     public function resolveProvider($provider);
 }

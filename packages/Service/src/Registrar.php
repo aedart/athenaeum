@@ -24,14 +24,14 @@ class Registrar implements RegistrarInterface
      *
      * @var ServiceProvider[]
      */
-    protected array $providers = [];
+    protected array $registered = [];
 
     /**
      * List of booted service providers
      *
      * @var ServiceProvider[]
      */
-    protected array $bootedServiceProviders = [];
+    protected array $booted = [];
 
     /**
      * Registrar constructor.
@@ -96,19 +96,21 @@ class Registrar implements RegistrarInterface
             return false;
         }
 
-        // Boot provider in the same way that Laravel's Application
-        // does such.
-        // @see https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Application.php#L826
+        $hasBooted = false;
+
+        $provider->callBootingCallbacks();
+
+        // Invoke boot on provider in the same was that Laravel's Application does it...
+        // @see \Illuminate\Foundation\Application::bootProvider
         if (method_exists($provider, 'boot')) {
             $this->getApp()->call([$provider, 'boot']);
-
-            $this->bootedServiceProviders[] = $provider;
-
-            return true;
+            $this->markAsBooted($provider);
+            $hasBooted = true;
         }
 
-        // Means that provider didn't contain a boot method
-        return false;
+        $provider->callBootedCallbacks();
+
+        return $hasBooted;
     }
 
     /**
@@ -134,18 +136,9 @@ class Registrar implements RegistrarInterface
      */
     public function isRegistered($provider): bool
     {
-        $providers = $this->providers();
-        if ($provider instanceof ServiceProvider) {
-            return in_array($provider, $providers);
-        }
-
-        // In case that a string has been given,...
         $registered = $this->getProviders($provider);
-        if (!empty($registered)) {
-            return true;
-        }
 
-        return false;
+        return !empty($registered);
     }
 
     /**
@@ -161,7 +154,7 @@ class Registrar implements RegistrarInterface
      */
     public function providers(): array
     {
-        return $this->providers;
+        return $this->registered;
     }
 
     /**
@@ -184,7 +177,7 @@ class Registrar implements RegistrarInterface
      */
     public function booted(): array
     {
-        return $this->bootedServiceProviders;
+        return $this->booted;
     }
 
     /**
@@ -231,12 +224,39 @@ class Registrar implements RegistrarInterface
         // Singletons
         if (property_exists($provider, 'singletons')) {
             foreach ($provider->singletons as $abstract => $concrete) {
-                $ioc->singleton($abstract, $concrete);
+                $key = is_int($abstract)
+                    ? $concrete
+                    : $abstract;
+
+                $ioc->singleton($key, $concrete);
             }
         }
 
-        // Add provider to list of registered providers
-        $this->providers[] = $provider;
+        $this->markAsRegistered($provider);
+    }
+
+    /**
+     * Mark service provider as registered
+     *
+     * @param ServiceProvider $provider
+     *
+     * @return void
+     */
+    protected function markAsRegistered(ServiceProvider $provider): void
+    {
+        $this->registered[] = $provider;
+    }
+
+    /**
+     * Mark service provider as booted
+     *
+     * @param ServiceProvider $provider
+     *
+     * @return void
+     */
+    protected function markAsBooted(ServiceProvider $provider): void
+    {
+        $this->booted[] = $provider;
     }
 
     /**
@@ -246,7 +266,7 @@ class Registrar implements RegistrarInterface
      *
      * @return string
      */
-    protected function providerNamespace($provider): string
+    protected function providerNamespace(ServiceProvider|string $provider): string
     {
         return is_string($provider)
             ? $provider

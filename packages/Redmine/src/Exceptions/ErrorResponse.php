@@ -12,7 +12,7 @@ use Throwable;
 /**
  * Error Response Exception
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Exceptions
  */
 class ErrorResponse extends RedmineException implements ErrorResponseException

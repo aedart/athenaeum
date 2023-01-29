@@ -9,7 +9,7 @@ use League\Flysystem\Config;
 /**
  * Concerns Hashing
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Flysystem\Db\Adapters\Concerns
  */
 trait Hashing

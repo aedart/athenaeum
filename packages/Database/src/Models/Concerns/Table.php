@@ -6,7 +6,7 @@ namespace Aedart\Database\Models\Concerns;
 /**
  * Concerns Database Table
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Database\Models\Concerns
  */
 trait Table

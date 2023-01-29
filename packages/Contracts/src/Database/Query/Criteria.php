@@ -16,7 +16,7 @@ use Illuminate\Contracts\Database\Query\Builder;
  * @see https://laravel.com/docs/8.x/eloquent#applying-global-scopes
  * @see https://en.wikipedia.org/wiki/Specification_pattern
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Database\Query
  */
 interface Criteria

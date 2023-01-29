@@ -11,7 +11,7 @@ use Throwable;
  *
  * Callback invoke utility.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Utils\Helpers
  */
 class Invoker

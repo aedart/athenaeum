@@ -11,7 +11,7 @@ use Traversable;
 /**
  * Traversable Results
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Pagination
  */
 class TraversableResults implements TraversableResultsInterface

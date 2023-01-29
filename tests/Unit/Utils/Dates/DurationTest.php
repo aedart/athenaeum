@@ -32,6 +32,18 @@ class DurationTest extends UnitTestCase
 
     /**
      * @test
+     *
+     * @return void
+     */
+    public function canInstantiateWithoutArguments(): void
+    {
+        $duration = Duration::now();
+
+        $this->assertGreaterThan(0, $duration->asMicroSeconds());
+    }
+
+    /**
+     * @test
      */
     public function longDuration()
     {

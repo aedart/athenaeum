@@ -5,7 +5,6 @@ namespace Aedart\Tests\Integration\ETags\Preconditions\Rfc9110;
 use Aedart\ETags\Facades\Generator;
 use Aedart\ETags\Preconditions\Validators\Exceptions\RangeNotSatisfiable;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
-use Carbon\Carbon;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
@@ -112,14 +111,14 @@ class IfRangeTest extends PreconditionsTestCase
         // [...] If the HTTP-date validator provided exactly matches the Last-Modified field value for
         // the selected representation, the condition is true. [...]
 
-        $lastModified = now()->subMinutes(3)->toRfc7231String();
+        $lastModified = now()->subMinutes(3);
         $resource = $this->makeResourceContext(
-            lastModifiedDate: Carbon::make($lastModified),
+            lastModifiedDate: $lastModified,
             size: 512
         );
 
         $request = $this->createRequest(
-            ifRange: $lastModified,
+            ifRange: $lastModified->toRfc7231String(),
             range: 'bytes=0-299,300-450',
             method: 'get'
         );
@@ -152,9 +151,9 @@ class IfRangeTest extends PreconditionsTestCase
         // [...] If the HTTP-date validator provided exactly matches the Last-Modified field value for
         // the selected representation, the condition is true. [...]
 
-        $lastModified = now()->subMinutes(3)->toRfc7231String();
+        $lastModified = now()->subMinutes(3);
         $resource = $this->makeResourceContext(
-            lastModifiedDate: Carbon::make($lastModified),
+            lastModifiedDate: $lastModified,
             size: 512
         );
 

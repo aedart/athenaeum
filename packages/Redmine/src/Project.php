@@ -48,7 +48,7 @@ use Throwable;
  * @property ListOfReferences<Reference>|Reference[]|null $enabled_modules Related data that can be requested included.
  * @property ListOfReferences<Reference>|Reference[]|null $time_entry_activities Related data that can be requested included.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class Project extends RedmineApiResource implements

@@ -9,7 +9,7 @@ use League\Flysystem\Config;
 /**
  * Concerns Extra Meta-Data
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Flysystem\Db\Adapters\Concerns
  */
 trait ExtraMetaData

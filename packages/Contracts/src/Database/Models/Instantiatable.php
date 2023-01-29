@@ -6,7 +6,7 @@ namespace Aedart\Contracts\Database\Models;
 /**
  * Instantiatable
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Database\Models
  */
 interface Instantiatable

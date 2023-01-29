@@ -13,7 +13,7 @@ use Illuminate\Testing\PendingCommand;
  * @see \Orchestra\Testbench\Database\MigrateProcessor
  * @see \Orchestra\Testbench\Contracts\TestCase
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Testing\Laravel\Database
  */
 class MigrateProcessor

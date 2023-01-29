@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Redmine Service Provider
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Providers
  */
 class RedmineServiceProvider extends ServiceProvider

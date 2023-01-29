@@ -12,7 +12,7 @@ use Aedart\Contracts\Redmine\Relations\ResourceRelation as ResourceRelationInter
  *
  * Base abstraction for a resource relation
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Relations
  */
 abstract class ResourceRelation implements ResourceRelationInterface
