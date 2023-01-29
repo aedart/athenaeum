@@ -186,7 +186,7 @@ module.exports.sidebar = function(){
                     ]
                 },
                 {
-                    title: 'Evaluator usage',
+                    title: 'Http Request Preconditions',
                     collapsable: true,
                     children: [
                         'etags/evaluator/',
