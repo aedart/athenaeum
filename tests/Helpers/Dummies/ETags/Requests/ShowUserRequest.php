@@ -8,12 +8,9 @@ use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Concerns\EloquentEtag;
 use Aedart\ETags\Preconditions\Evaluator;
 use Aedart\ETags\Preconditions\Resources\GenericResource;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Carbon;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Throwable;
 
 /**
  * Show User Request
@@ -45,32 +42,9 @@ class ShowUserRequest extends FormRequest
     }
 
     /**
-     * Adds after validation hooks
-     *
-     * @param  Validator  $validator
-     *
-     * @return void
+     * @inheritdoc
      */
-    public function withValidator(Validator $validator): void
-    {
-        // Acc. to RFC9110, evaluation of preconditions SHOULD be performed
-        // after regular input validation...
-        // @see https://httpwg.org/specs/rfc9110.html#when.to.evaluate
-        $validator->after([$this, 'evaluatePreconditions']);
-    }
-
-    /**
-     * Evaluates request's preconditions against resource
-     *
-     * @param  Validator  $validator
-     *
-     * @return void
-     *
-     * @throws ETagGeneratorException
-     * @throws HttpExceptionInterface
-     * @throws Throwable
-     */
-    public function evaluatePreconditions(Validator $validator): void
+    protected function prepareForValidation()
     {
         // 1) Find requested resource or fail.
         $model = $this->findOrFailModel();
