@@ -11,7 +11,7 @@ sidebarDepth: 0
 
 The design philosophy behind the request preconditions `Evaluator` is to evaluate an incoming [conditional request (precondition)](https://httpwg.org/specs/rfc9110.html#preconditions), e.g. `If-Match`, against the requested [resource](./resource-context.md).   
 
-When a precondition is evaluated, either of the following will happen:
+In general, when a precondition is evaluated either of the following will happen:
 
 * When it passes (`true`):
   * Evaluator continues to evaluate another precondition (_if requested_).
@@ -27,7 +27,6 @@ See [supported preconditions](./preconditions.md#supported-preconditions) for ad
 
 Http Conditional Requests are always specific to the requested resource and the [Http Method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods).
 It is therefore recommended that you evaluate the requested resource inside your [Form Request](https://laravel.com/docs/9.x/validation#form-request-validation).
-When doing so, you should be able to keep your [controller](https://laravel.com/docs/9.x/controllers#main-content) or [route action](https://laravel.com/docs/9.x/routing#basic-routing) clean from this kind of logic.
 Consider the following form request:
 
 ### Request
@@ -45,14 +44,7 @@ class ShowUserRequest extends FormRequest
 {
     public ResourceContext $resource;
 
-    public function withValidator(Validator $validator): void
-    {
-        // Acc. to RFC9110, evaluation of preconditions SHOULD be performed
-        // after regular validation...
-        $validator->after([$this, 'evaluatePreconditions']);
-    }
-
-    public function evaluatePreconditions(Validator $validator): void
+    protected function prepareForValidation()
     {
         // 1) Find requested resource or fail.
         $model = $this->findOrFailModel();
@@ -83,7 +75,7 @@ class ShowUserRequest extends FormRequest
 
 ### Route or Controller Action
 
-In your controller or route's action, you can then return the requested resource with [cache headers](./../macros.md#withcache). 
+In your controller or route action, you can then return the requested resource with [cache headers](./../macros.md#withcache). 
 
 ```php
 use Illuminate\Support\Facades\Route;
@@ -106,13 +98,16 @@ Route::get('/user/{id}', function (ShowUserRequest $request) {
 
 ### Responses
 
-Whenever a request without preconditions is received by your application, for instance:
+Whenever a request without preconditions is received by your application, your application will return the requested resource, along with a few cache headers. 
+For instance:
+
+**Request (_without precondition_)**
 
 ```txt
 GET /users/42 HTTP/1.1
 ```
 
-Then your application will return the requested resource, along with a few cache headers.
+**Response (_with cache headers_)**
 
 ```txt
 HTTP/1.1 200 OK
@@ -125,25 +120,30 @@ Content-Type: application/json
 ```
 
 However, when a request contains a preconditions, e.g. [`If-None-Match`](https://httpwg.org/specs/rfc9110.html#field.if-none-match), then it is processed.
-In the case of the following, the [`If-None-Match`](https://httpwg.org/specs/rfc9110.html#field.if-none-match) precondition
-fails because the etag value matches the resource's etag  and therefore
-a [304 Not Modified](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/304) response is returned. 
+In the example below, the precondition fails because the etag value matches the resource's etag.
+Therefore, a [304 Not Modified](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/304) response is returned. 
+
+**Request (_with precondition_)**
 
 ```txt
 GET /users/42 HTTP/1.1
 If-None-Match: "a81283f2670a78cd4c5a2e56cb0cd4ef5e357eb1"
 ```
 
+**Response (_If-None-Match precondition failed_)**
+
 ```txt
 HTTP/1.1 304 Not Modified
 ```
 
-Thus, the controller or route action is never executed. Instead, an exception is thrown and the application converts it into an appropriate response.
-
-You are free to implement the evaluation logic how you see fit, in your application.
-The above shown examples are only meant to demonstrate the general process. The rest is up to you.
+The controller or route action is never executed. Instead, an exception is thrown and the application converts it into an appropriate response.
+If the precondition had passed instead, then controller or route action would had been processed (_in this example_). 
 
 ## The Evaluator
+
+You are free to implement the evaluation logic how you see fit, in your application.
+The previous shown examples are only meant to demonstrate the general process. The rest is up to you.
+The following highlights how to instantiate an `Evaluator` instance.
 
 The `Evaluator::make()` method accepts 3 arguments:
 
@@ -174,5 +174,7 @@ The method accepts a [`ResourceContext`](./resource-context.md) instance and wil
 $evaluator->evaluate($resource);
 ```
 
-If an exception is thrown, then your Laravel application's exception handler will process it and create a response.
-See [Laravel's documentation](https://laravel.com/docs/9.x/errors#the-exception-handler) for additional information.
+## Exception Handling
+
+Whenever the `Evaluator` throws an exception, your Laravel application's exception handler will process it and create an appropriate response.
+Please read [Laravel's exception handler documentation](https://laravel.com/docs/9.x/errors#the-exception-handler) for additional information.
