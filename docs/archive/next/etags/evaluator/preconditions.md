@@ -7,7 +7,7 @@ sidebarDepth: 0
 
 ## Supported Preconditions
 
-By default, the `Evaluator` supports the following preconditions.
+By default, the `Evaluator` offers support for following preconditions.
 
 ### RFC 9110
 
