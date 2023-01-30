@@ -47,6 +47,29 @@ class Response
     }
 
     /**
+     * Returns stream content of response
+     *
+     * @param \Illuminate\Testing\TestResponse $response
+     * @param bool $debug [optional] Http headers and stream content is logged to console when true.
+     *
+     * @return string
+     */
+    public static function streamResponse($response, bool $debug = true): string
+    {
+        $content = $response->streamedContent();
+
+        if ($debug) {
+            ConsoleDebugger::output([
+                'status' => $response->getStatusCode() /*. ' ' . $response->statusText(),*/,
+                'headers' => $response->headers->all(),
+                'body' => $content
+            ]);
+        }
+
+        return $content;
+    }
+
+    /**
      * Returns Http headers from given response
      *
      * @param \Illuminate\Testing\TestResponse|\Illuminate\Http\Response $response
