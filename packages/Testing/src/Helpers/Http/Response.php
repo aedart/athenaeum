@@ -45,4 +45,23 @@ class Response
 
         return $content;
     }
+
+    /**
+     * Returns Http headers from given response
+     *
+     * @param \Illuminate\Testing\TestResponse|\Illuminate\Http\Response $response
+     * @param bool $debug [optional] Http headers are logged to console when true
+     *
+     * @return \Symfony\Component\HttpFoundation\ResponseHeaderBag
+     */
+    public static function headers($response, bool $debug = true)
+    {
+        $headers = $response->headers;
+
+        if ($debug) {
+            ConsoleDebugger::output($headers->all());
+        }
+
+        return $headers;
+    }
 }
