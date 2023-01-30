@@ -47,7 +47,7 @@ class RangeRequestTest extends PreconditionsTestCase
      *
      * @return void
      */
-    public function respondsWithFullStreamWhenNoRangeRequested(): void
+    public function respondsFullFileContentWhenNoRangeRequested(): void
     {
         Route::get('/files/{name}', function (DownloadFileRequest $request) {
             return StreamDownload::make($request->resource, $request->route('name'));
