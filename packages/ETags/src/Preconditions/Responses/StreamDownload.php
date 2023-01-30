@@ -52,7 +52,7 @@ class StreamDownload implements Responsable
         if ($resource->mustProcessRange()) {
         }
 
-        return $this->makeFullStreamDownload($resource, $name, $headers);
+        return $this->streamFullFile($resource, $name, $headers);
     }
 
     public function resource(): ResourceContext
@@ -92,7 +92,7 @@ class StreamDownload implements Responsable
         return $this->bufferSize;
     }
 
-    public function makeFullStreamDownload(ResourceContext $resource, string|null $name = null, array $headers = [])
+    public function streamFullFile(ResourceContext $resource, string|null $name = null, array $headers = [])
     {
         $stream = $this->resolveStream($resource);
 
