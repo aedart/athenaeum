@@ -163,6 +163,7 @@ class StreamDownload implements Responsable
      * @return FileStreamInterface & Detectable
      *
      * @throws StreamException
+     * @throws LogicException If unable to resolve stream from resource context
      */
     protected function resolveStream(ResourceContext $resource): FileStreamInterface & Detectable
     {
@@ -175,7 +176,7 @@ class StreamDownload implements Responsable
             $data instanceof FileStreamInterface => $data,
             is_string($data) && file_exists($data) => FileStream::open($data, 'r'),
             is_string($data) => FileStream::openMemory()->append($data)->positionToStart(),
-            default => throw new LogicException('Unable to resolve file stream for resource context')
+            default => throw new LogicException('Unable to resolve file stream from resource context data')
         };
     }
 
