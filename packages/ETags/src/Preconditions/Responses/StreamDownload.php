@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Teapot\StatusCode\All as Status;
 
 /**
+ * @deprecated Needs redesign...
+ *
  * Stream Download Response
  *
  * TODO: ...
