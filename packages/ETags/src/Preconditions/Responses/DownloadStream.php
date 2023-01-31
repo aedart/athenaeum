@@ -236,15 +236,14 @@ class DownloadStream implements
         // @see https://httpwg.org/specs/rfc9110.html#status.206
         // Symfony's Response Header Bag / Header Bag takes care of most of these...
 
-        $headers = $this->resolveHeaders();
-        $headers->set('Accept-Ranges', $this->rangeUnit());
-
-        if ($this->hasEtag()) {
-            $headers->set('ETag', $this->etag()->toString());
-        }
-
-        $headers->set('Content-Type', $stream->mimeType());
-        $headers->set('Content-Length', $stream->getSize());
+        $headers = $this->resolveHeaders([
+            'Accept-Ranges' => $this->rangeUnit(),
+            'ETag' => $this->hasEtag()
+                        ? (string) $this->etag()
+                        : null,
+            'Content-Type' => (string) $stream->mimeType(),
+            'Content-Length' => (int) $stream->getSize()
+        ]);
 
         // Finally, create response
         return $this->makeStreamedResponse(function() use($stream) {
@@ -627,16 +626,32 @@ class DownloadStream implements
     /**
      * Resolves Http headers for response
      *
+     * @param array $common [optional] Common Http headers to set, if none already set!
+     *                      NOTE: Empty headers will NOT be set.
+     *
      * @return HeaderBag
      */
-    protected function resolveHeaders(): HeaderBag
+    protected function resolveHeaders(array $common = []): HeaderBag
     {
+        // Make a new header bag with a copy of headers set.
         $headers = $this->makeHeaderBag(
             $this->headers()
         );
 
+        // Always attempt to add last modified date, if available...
         if ($this->hasLastModifiedDate()) {
             $headers->set('Last-Modified', $this->lastModifiedDate()->format(DateTimeFormats::RFC9110));
+        }
+
+        // Set the given "common" Http headers, if none was already
+        // specified in this download stream...
+        foreach ($common as $key => $value) {
+            // Skip a header was already set or value is null
+            if ($headers->has($key) || is_null($value) || (is_string($value) && empty($value))) {
+                continue;
+            }
+
+            $headers->set($key, $value);
         }
 
         return $headers;
