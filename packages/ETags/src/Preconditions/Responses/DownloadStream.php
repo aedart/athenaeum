@@ -162,8 +162,7 @@ class DownloadStream implements
         string $disposition = 'attachment',
         string $rangeUnit = 'bytes',
         int $bufferSize = BufferSizes::BUFFER_1MB
-    ): static
-    {
+    ): static {
         return new static(
             attachment: $attachment,
             name: $name,
@@ -246,7 +245,7 @@ class DownloadStream implements
         ]);
 
         // Finally, create response
-        return $this->makeStreamedResponse(function() use($stream) {
+        return $this->makeStreamedResponse(function () use ($stream) {
             $this->outputStream($stream);
         }, $this->name(), $headers->all(), $this->disposition());
     }

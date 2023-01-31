@@ -50,7 +50,6 @@ class RangeRequestTest extends PreconditionsTestCase
     public function respondsFullFileContentWhenNoRangeRequested(): void
     {
         Route::get('/files/{name}', function (DownloadFileRequest $request) {
-
             return DownloadStream::for($request->resource)
                 ->setName($request->route('name'));
         })->name('file.download');
