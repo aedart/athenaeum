@@ -4,14 +4,21 @@ namespace Aedart\ETags\Preconditions\Responses;
 
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
+use Aedart\Contracts\MimeTypes\Detectable;
 use Aedart\Contracts\Streams\BufferSizes;
+use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
 use Aedart\Contracts\Support\Helpers\Routing\ResponseFactoryAware;
+use Aedart\Contracts\Utils\Dates\DateTimeFormats;
+use Aedart\Streams\FileStream;
 use Aedart\Support\Helpers\Routing\ResponseFactoryTrait;
 use DateTimeInterface;
 use Illuminate\Contracts\Support\Responsable;
+use Psr\Http\Message\StreamInterface;
 use Ramsey\Collection\CollectionInterface;
 use Ramsey\Http\Range\Unit\UnitRangeInterface;
+use RuntimeException;
+use SplFileInfo;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Teapot\StatusCode\All as Status;
@@ -220,7 +227,29 @@ class DownloadStream implements
      */
     public function streamFullAttachment($request)
     {
-        // TODO ... full damn headers, assert attachment, get stream... etc...
+        // Obtain stream for attachment
+        $stream = $this->getStream();
+
+        // [...] MUST generate the following header fields, [...], if the field would have been
+        // sent in a 200 (OK) response to the same request: Date, Cache-Control, ETag, Expires,
+        // Content-Location, and Vary. [...]
+        // @see https://httpwg.org/specs/rfc9110.html#status.206
+        // Symfony's Response Header Bag / Header Bag takes care of most of these...
+
+        $headers = $this->resolveHeaders();
+        $headers->set('Accept-Ranges', $this->rangeUnit());
+
+        if ($this->hasEtag()) {
+            $headers->set('ETag', $this->etag()->toString());
+        }
+
+        $headers->set('Content-Type', $stream->mimeType());
+        $headers->set('Content-Length', $stream->getSize());
+
+        // Finally, create response
+        return $this->makeStreamedResponse(function() use($stream) {
+            $this->outputStream($stream);
+        }, $this->name(), $headers->all(), $this->disposition());
     }
 
     /**
@@ -404,6 +433,16 @@ class DownloadStream implements
     }
 
     /**
+     * Returns the Http headers for the response
+     *
+     * @return array
+     */
+    public function headers(): array
+    {
+        return $this->headers->all();
+    }
+
+    /**
      * Set attachment's ETag
      *
      * @param ETag|null $etag
@@ -535,11 +574,28 @@ class DownloadStream implements
     /**
      * Returns a file stream for the attachment
      *
-     * @return FileStreamInterface
+     * @return FileStreamInterface & Detectable
+     *
+     * @throws StreamException
+     * @throws RuntimeException
      */
-    public function getStream(): FileStreamInterface
+    public function getStream(): FileStreamInterface & Detectable
     {
-        // TODO:
+        $data = $this->attachment();
+
+        if (!isset($data)) {
+            throw new RuntimeException('Missing an attachment, unable to create file stream');
+        }
+
+        return match (true) {
+            is_resource($data) => FileStream::make($data),
+            $data instanceof StreamInterface => FileStream::makeFrom($data),
+            $data instanceof SplFileInfo => FileStream::open($data->getRealPath(), 'r'),
+            $data instanceof FileStreamInterface => $data,
+            is_string($data) && file_exists($data) => FileStream::open($data, 'r'),
+            is_string($data) => FileStream::openMemory()->append($data)->positionToStart(),
+            default => throw new RuntimeException('Unable to resolve file stream from attachment')
+        };
     }
 
     /*****************************************************************
@@ -547,12 +603,104 @@ class DownloadStream implements
      ****************************************************************/
 
     /**
-     * Returns a new Header bag instance
+     * Initialises a new Header bag for this download stream
      *
      * @return HeaderBag
      */
     protected function initHeaderBag(): HeaderBag
     {
-        return $this->headers = new ResponseHeaderBag();
+        return $this->headers = $this->makeHeaderBag();
+    }
+
+    /**
+     * Returns a new Header bag instance
+     *
+     * @param array $headers [optional]
+     *
+     * @return HeaderBag
+     */
+    protected function makeHeaderBag(array $headers = []): HeaderBag
+    {
+        return new ResponseHeaderBag($headers);
+    }
+
+    /**
+     * Resolves Http headers for response
+     *
+     * @return HeaderBag
+     */
+    protected function resolveHeaders(): HeaderBag
+    {
+        $headers = $this->makeHeaderBag(
+            $this->headers()
+        );
+
+        if ($this->hasLastModifiedDate()) {
+            $headers->set('Last-Modified', $this->lastModifiedDate()->format(DateTimeFormats::RFC9110));
+        }
+
+        return $headers;
+    }
+
+    /**
+     * Returns a new streamed response instance
+     *
+     * @param callable $callback
+     * @param string|null $name [optional]
+     * @param array $headers [optional]
+     * @param string $disposition [optional]
+     * @param int $status [optional]
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function makeStreamedResponse(
+        callable $callback,
+        string|null $name = null,
+        array $headers = [],
+        string $disposition = 'attachment',
+        int $status = Status::OK
+    ) {
+        $name = isset($name)
+            ? basename($name)
+            : null;
+
+        return $this
+            ->getResponseFactory()
+            ->streamDownload(
+                callback: $callback,
+                name: $name,
+                headers: $headers,
+                disposition: $disposition
+            )
+            ->setStatusCode($status);
+    }
+
+    /**
+     * Output stream's content
+     *
+     * @param FileStreamInterface $stream
+     * @param int|null $bufferSize [optional]
+     * @param bool $close [optional] If true, then the stream is closed after its content has been output
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    protected function outputStream(FileStreamInterface $stream, int|null $bufferSize = null, bool $close = true): void
+    {
+        $bufferSize = $bufferSize ?? $this->bufferSize();
+        $chunks = $stream->readAllInChunks($bufferSize);
+
+        foreach ($chunks as $chunk) {
+            echo $chunk;
+
+            if (connection_aborted() === 1) {
+                break;
+            }
+        }
+
+        if ($close) {
+            $stream->close();
+        }
     }
 }

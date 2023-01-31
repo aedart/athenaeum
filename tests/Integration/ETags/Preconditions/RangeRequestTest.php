@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Integration\ETags\Preconditions;
 
-use Aedart\ETags\Preconditions\Responses\StreamDownload;
+use Aedart\ETags\Preconditions\Responses\DownloadStream;
 use Aedart\Testing\Helpers\Http\Response;
 use Aedart\Tests\Helpers\Dummies\ETags\Requests\DownloadFileRequest;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
@@ -50,7 +50,9 @@ class RangeRequestTest extends PreconditionsTestCase
     public function respondsFullFileContentWhenNoRangeRequested(): void
     {
         Route::get('/files/{name}', function (DownloadFileRequest $request) {
-            return StreamDownload::make($request->resource, $request->route('name'));
+
+            return DownloadStream::for($request->resource)
+                ->setName($request->route('name'));
         })->name('file.download');
 
         Route::getRoutes()->refreshNameLookups();
