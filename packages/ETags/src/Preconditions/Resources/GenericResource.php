@@ -142,7 +142,7 @@ class GenericResource implements ResourceContext
     /**
      * @inheritDoc
      */
-    public function setRequestedRanges(?CollectionInterface $ranges = null): static
+    public function setRequestedRanges(CollectionInterface|null $ranges = null): static
     {
         $this->ranges = $ranges;
 
