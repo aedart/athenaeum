@@ -3,6 +3,7 @@
 namespace Aedart\ETags\Preconditions\Responses;
 
 use Aedart\Contracts\ETags\ETag;
+use Aedart\Contracts\ETags\Preconditions\Ranges\RangeSet;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\Contracts\MimeTypes\Detectable;
 use Aedart\Contracts\Streams\BufferSizes;
@@ -16,7 +17,6 @@ use DateTimeInterface;
 use Illuminate\Contracts\Support\Responsable;
 use Psr\Http\Message\StreamInterface;
 use Ramsey\Collection\CollectionInterface;
-use Ramsey\Http\Range\Unit\UnitRangeInterface;
 use RuntimeException;
 use SplFileInfo;
 use Symfony\Component\HttpFoundation\HeaderBag;
@@ -80,7 +80,7 @@ class DownloadStream implements
     /**
      * Requested range sets
      *
-     * @var CollectionInterface<UnitRangeInterface>|null
+     * @var CollectionInterface<RangeSet>|null
      */
     protected CollectionInterface|null $ranges = null;
 
@@ -240,8 +240,8 @@ class DownloadStream implements
             'ETag' => $this->hasEtag()
                         ? (string) $this->etag()
                         : null,
+            'Content-Length' => (int) $stream->getSize(),
             'Content-Type' => (string) $stream->mimeType(),
-            'Content-Length' => (int) $stream->getSize()
         ]);
 
         // Finally, create response
@@ -261,7 +261,34 @@ class DownloadStream implements
      */
     public function streamSinglePart($request)
     {
-        // TODO
+        // Abort if no ranges available
+        $ranges = $this->ranges();
+        if (!isset($ranges) || $ranges->isEmpty()) {
+            throw new RuntimeException('No ranges requested, unable to stream a single part');
+        }
+
+        // Obtain stream for the requested range.
+        $range = $ranges->first();
+        $stream = $this->getStream();
+        $copy = $stream->copy(
+            length: $range->getLength(),
+            offset: $range->getStart()
+        );
+
+        // [...] If a single part [...] the 206 response MUST generate a Content-Range header field,
+        // describing what range of the selected representation is enclosed, and a content consisting
+        // of the range [...]
+
+        $headers = $this->resolveHeaders([
+            'Content-Range' => $this->makeContentRange($range),
+            'Content-Length' => (int) $range->getLength(),
+            'Content-Type' => (string) $stream->mimeType(),
+        ]);
+
+        // Finally, create response
+        return $this->makeStreamedResponse(function () use ($copy) {
+            $this->outputStream($copy);
+        }, $this->name(), $headers->all(), $this->disposition(), Status::PARTIAL_CONTENT);
     }
 
     /**
@@ -275,7 +302,13 @@ class DownloadStream implements
      */
     public function streamMultipleParts($request)
     {
-        // TODO
+        // Abort if no ranges available
+        $ranges = $this->ranges();
+        if (!isset($ranges) || $ranges->isEmpty()) {
+            throw new RuntimeException('No ranges requested, unable to stream a single part');
+        }
+
+        // TODO: ...
     }
 
     /**
@@ -511,7 +544,7 @@ class DownloadStream implements
     /**
      * Set the requested range sets for attachment
      *
-     * @param  CollectionInterface<UnitRangeInterface>|null  $ranges  [optional]
+     * @param  CollectionInterface<RangeSet>|null  $ranges  [optional]
      *
      * @return self
      */
@@ -525,7 +558,7 @@ class DownloadStream implements
     /**
      * Get the requested range sets for attachment
      *
-     * @return CollectionInterface<UnitRangeInterface>|null
+     * @return CollectionInterface<RangeSet>|null
      */
     public function ranges(): CollectionInterface|null
     {
@@ -746,5 +779,17 @@ class DownloadStream implements
         if ($close) {
             $stream->close();
         }
+    }
+
+    /**
+     * Creates Content Range header value
+     *
+     * @param RangeSet $range
+     *
+     * @return string E.g. bytes 21010-47021/47022
+     */
+    protected function makeContentRange(RangeSet $range): string
+    {
+        return "{$range->unit()} {$range->getRange()}/{$range->getTotalSize()}";
     }
 }
