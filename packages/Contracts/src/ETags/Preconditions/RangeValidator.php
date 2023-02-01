@@ -2,8 +2,8 @@
 
 namespace Aedart\Contracts\ETags\Preconditions;
 
+use Aedart\Contracts\ETags\Preconditions\Ranges\RangeSet;
 use Ramsey\Collection\CollectionInterface;
-use Ramsey\Http\Range\Unit\UnitRangeInterface;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 /**
@@ -29,7 +29,7 @@ interface RangeValidator extends
      *
      * @param  ResourceContext  $resource
      *
-     * @return CollectionInterface<UnitRangeInterface> Validated unit ranges or empty collection.
+     * @return CollectionInterface<RangeSet> Validated unit ranges or empty collection.
      *
      *
      * @throws HttpExceptionInterface

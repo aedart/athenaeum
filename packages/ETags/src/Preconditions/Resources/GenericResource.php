@@ -3,11 +3,11 @@
 namespace Aedart\ETags\Preconditions\Resources;
 
 use Aedart\Contracts\ETags\ETag;
+use Aedart\Contracts\ETags\Preconditions\Ranges\RangeSet;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\Utils\Concerns;
 use DateTimeInterface;
 use Ramsey\Collection\CollectionInterface;
-use Ramsey\Http\Range\Unit\UnitRangeInterface;
 
 /**
  * Generic Resource
@@ -24,7 +24,7 @@ class GenericResource implements ResourceContext
     /**
      * Requested range sets
      *
-     * @var CollectionInterface<UnitRangeInterface>|null
+     * @var CollectionInterface<RangeSet>|null
      */
     protected CollectionInterface|null $ranges = null;
 

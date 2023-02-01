@@ -2,9 +2,11 @@
 
 namespace Aedart\ETags\Preconditions\Validators;
 
+use Aedart\Contracts\ETags\Preconditions\Ranges\RangeSet as RangeSetInterface;
 use Aedart\Contracts\ETags\Preconditions\RangeValidator as RangeValidatorInterface;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\Concerns;
+use Aedart\ETags\Preconditions\Ranges\RangeSet;
 use Aedart\ETags\Preconditions\Validators\Exceptions\RangeNotSatisfiable;
 use Aedart\ETags\Preconditions\Validators\Exceptions\RangeUnitNotSupported;
 use Ramsey\Collection\CollectionInterface;
@@ -72,7 +74,10 @@ class RangeValidator implements RangeValidatorInterface
             $this->verifyAmountOfRanges($this->maximumRangeSets(), $unit, $collection);
 
             // Lastly, each range must be verified...
-            return $this->verifyRanges($unit, $collection);
+            return $this->wrapCollectionValues(
+                unit: $unit,
+                collection: $this->verifyRanges($unit, $collection)
+            );
         } catch (NoRangeException $e) {
             // Edge case: no "Range" header available in request. Or [...] An origin server MUST
             // ignore a Range header field that contains a range unit it does not understand [...]
@@ -109,6 +114,24 @@ class RangeValidator implements RangeValidatorInterface
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * Wraps collection's values into range-set instances
+     *
+     * @param UnitInterface $unit
+     * @param CollectionInterface|null $collection [optional]
+     *
+     * @return CollectionInterface<RangeSetInterface>
+     */
+    protected function wrapCollectionValues(UnitInterface $unit, CollectionInterface|null $collection = null): CollectionInterface
+    {
+        /** @var CollectionInterface<UnitRangeInterface> $collection */
+        $collection = $collection ?? $unit->getRanges();
+
+        return $collection->map(function (UnitRangeInterface $unitRange) use ($unit) {
+            return RangeSet::from($unit->getRangeUnit(), $unitRange);
+        });
+    }
 
     /**
      * Verifies that ranges do not overlap or exceed resource's total size

@@ -3,10 +3,10 @@
 namespace Aedart\Contracts\ETags\Preconditions;
 
 use Aedart\Contracts\ETags\ETag;
+use Aedart\Contracts\ETags\Preconditions\Ranges\RangeSet;
 use Aedart\Contracts\Utils\HasArbitraryData;
 use DateTimeInterface;
 use Ramsey\Collection\CollectionInterface;
-use Ramsey\Http\Range\Unit\UnitRangeInterface;
 
 /**
  * Resource Context
@@ -120,7 +120,7 @@ interface ResourceContext extends HasArbitraryData
      * @see https://httpwg.org/specs/rfc9110.html#field.if-range
      * @see https://httpwg.org/specs/rfc9110.html#range.requests
      *
-     * @param  CollectionInterface<UnitRangeInterface>|null  $ranges  [optional]
+     * @param  CollectionInterface<RangeSet>|null  $ranges  [optional]
      *
      * @return self
      */
@@ -132,7 +132,7 @@ interface ResourceContext extends HasArbitraryData
      * @see https://httpwg.org/specs/rfc9110.html#field.if-range
      * @see https://httpwg.org/specs/rfc9110.html#range.requests
      *
-     * @return CollectionInterface<UnitRangeInterface>|null
+     * @return CollectionInterface<RangeSet>|null
      */
     public function ranges(): CollectionInterface|null;
 
