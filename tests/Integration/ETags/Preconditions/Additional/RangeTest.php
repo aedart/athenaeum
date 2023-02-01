@@ -63,7 +63,7 @@ class RangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
-    public function mustProcessRangeWhenResourceIsEmpty(): void
+    public function mustNotProcessRangeWhenResourceIsEmpty(): void
     {
         // x. When "Range" is requested, but without "If-Range" header, and "Range" is supported.
         // Strictly speaking, this is NOT part of RFC9110's "13.2. Evaluation of Preconditions".
