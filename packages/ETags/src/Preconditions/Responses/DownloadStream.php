@@ -92,6 +92,13 @@ class DownloadStream implements
     protected string $disposition;
 
     /**
+     * Custom resolve stream callback
+     *
+     * @var callable|null
+     */
+    protected $resolveStreamCallback = null;
+
+    /**
      * Creates a new download stream instance
      *
      * @param mixed|null $attachment [optional] The file to be attached to be streamed
@@ -561,6 +568,32 @@ class DownloadStream implements
     }
 
     /**
+     * Set custom callback to resolve stream for attachment
+     *
+     * @see getStream
+     *
+     * @param callable|null $callback Callback receives attachment and this download stream instance.
+     *
+     * @return self
+     */
+    public function setResolveStreamCallback(callable|null $callback): static
+    {
+        $this->resolveStreamCallback = $callback;
+
+        return $this;
+    }
+
+    /**
+     * Get custom callback to resolve stream for attachment
+     *
+     * @return callable|null
+     */
+    public function getResolveStreamCallback(): callable|null
+    {
+        return $this->resolveStreamCallback;
+    }
+
+    /**
      * Returns a file stream for the attachment
      *
      * @return FileStreamInterface & Detectable
@@ -571,11 +604,17 @@ class DownloadStream implements
     public function getStream(): FileStreamInterface & Detectable
     {
         $data = $this->attachment();
-
         if (!isset($data)) {
             throw new RuntimeException('Missing an attachment, unable to create file stream');
         }
 
+        // Resolve stream using custom callback, if available.
+        $callback = $this->getResolveStreamCallback();
+        if (isset($callback)) {
+            return $callback($data, $this);
+        }
+
+        // Otherwise, resolve it using the following...
         return match (true) {
             is_resource($data) => FileStream::make($data),
             $data instanceof StreamInterface => FileStream::makeFrom($data),
