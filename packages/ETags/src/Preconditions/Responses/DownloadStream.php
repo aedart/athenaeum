@@ -85,13 +85,6 @@ class DownloadStream implements
     protected CollectionInterface|null $ranges = null;
 
     /**
-     * The range unit to use for full attachment stream
-     *
-     * @var string E.g. bytes
-     */
-    protected string $rangeUnit;
-
-    /**
      * Http Content-Disposition
      *
      * @var string Either "inline" or "attachment"
@@ -103,24 +96,24 @@ class DownloadStream implements
      *
      * @param mixed|null $attachment [optional] The file to be attached to be streamed
      * @param string|null $name [optional] Filename
-     * @param array $headers [optional] Http headers
      * @param ETag|null $etag [optional] Attachment ETag
      * @param DateTimeInterface|null $lastModified [optional] Last modified date of attachment
      * @param CollectionInterface|null $ranges [optional] Requested ranges
      * @param string $disposition [optional] Http Content-Disposition, either "inline" or "attachment"
-     * @param string $rangeUnit [optional] Range unit to use for full attachment stream. Ignored if $ranges provided
+     * @param string $acceptRanges [optional] Accept Ranges Http header value
+     * @param array $headers [optional] Http headers
      * @param int $bufferSize [optional] Attachment / File read buffer size (PHP)
      *
      */
     public function __construct(
         mixed $attachment = null,
         string|null $name = null,
-        array $headers = [],
         ETag|null $etag = null,
         DateTimeInterface|null $lastModified = null,
         CollectionInterface|null $ranges = null,
         string $disposition = 'attachment',
-        string $rangeUnit = 'bytes',
+        string $acceptRanges = 'bytes',
+        array $headers = [],
         int $bufferSize = BufferSizes::BUFFER_1MB
     ) {
         $this->initHeaderBag();
@@ -128,12 +121,12 @@ class DownloadStream implements
         $this
             ->withAttachment($attachment)
             ->setName($name)
-            ->withHeaders($headers)
             ->withEtag($etag)
             ->setLastModifiedDate($lastModified)
             ->withRanges($ranges)
             ->setDisposition($disposition)
-            ->withRangeUnit($rangeUnit)
+            ->withAcceptRanges($acceptRanges)
+            ->withHeaders($headers)
             ->withBufferSize($bufferSize);
     }
 
@@ -142,12 +135,12 @@ class DownloadStream implements
      *
      * @param mixed|null $attachment [optional] The file to be attached to be streamed
      * @param string|null $name [optional] Filename
-     * @param array $headers [optional] Http headers
      * @param ETag|null $etag [optional] Attachment ETag
      * @param DateTimeInterface|null $lastModified [optional] Last modified date of attachment
      * @param CollectionInterface|null $ranges [optional] Requested ranges
      * @param string $disposition [optional] Http Content-Disposition, either "inline" or "attachment"
-     * @param string $rangeUnit [optional] Range unit to use for full attachment stream. Ignored if $ranges provided
+     * @param string $acceptRanges [optional] Accept Ranges Http header value
+     * @param array $headers [optional] Http headers
      * @param int $bufferSize [optional] Attachment / File read buffer size (PHP)
      *
      * @return static
@@ -155,23 +148,23 @@ class DownloadStream implements
     public static function make(
         mixed $attachment = null,
         string|null $name = null,
-        array $headers = [],
         ETag|null $etag = null,
         DateTimeInterface|null $lastModified = null,
         CollectionInterface|null $ranges = null,
         string $disposition = 'attachment',
-        string $rangeUnit = 'bytes',
+        string $acceptRanges = 'bytes',
+        array $headers = [],
         int $bufferSize = BufferSizes::BUFFER_1MB
     ): static {
         return new static(
             attachment: $attachment,
             name: $name,
-            headers: $headers,
             etag: $etag,
             lastModified: $lastModified,
             ranges: $ranges,
             disposition: $disposition,
-            rangeUnit: $rangeUnit,
+            acceptRanges: $acceptRanges,
+            headers: $headers,
             bufferSize: $bufferSize
         );
     }
@@ -191,7 +184,8 @@ class DownloadStream implements
             lastModified: $resource->lastModifiedDate(),
             ranges: $resource->mustProcessRange()
                         ? $resource->ranges()
-                        : null
+                        : null,
+            acceptRanges: $resource->allowedRangeUnit()
         );
     }
 
@@ -236,7 +230,6 @@ class DownloadStream implements
         // Symfony's Response Header Bag / Header Bag takes care of most of these...
 
         $headers = $this->resolveHeaders([
-            'Accept-Ranges' => $this->rangeUnit(),
             'ETag' => $this->hasEtag()
                         ? (string) $this->etag()
                         : null,
@@ -543,30 +536,28 @@ class DownloadStream implements
     }
 
     /**
-     * Set the range unit to use for full attachment stream
+     * Set the range unit value for the Accept-Ranges header
      *
      * This unit is ignored when {@see ranges()} returns a collection of
      * range sets.
      *
-     * @param string $unit E.g. bytes
+     * @param string $rangeUnit E.g. bytes
      *
      * @return self
      */
-    public function withRangeUnit(string $unit): static
+    public function withAcceptRanges(string $rangeUnit): static
     {
-        $this->rangeUnit = $unit;
-
-        return $this;
+        return $this->header('Accept-Ranges', $rangeUnit);
     }
 
     /**
-     * Get the range unit to use for full attachment stream
+     * Get the range unit value for the Accept-Ranges header
      *
      * @return string
      */
-    public function rangeUnit(): string
+    public function acceptRanges(): string
     {
-        return $this->rangeUnit;
+        return $this->headers->get('Accept-Ranges', 'none');
     }
 
     /**
