@@ -98,7 +98,8 @@ class RangeRequestTest extends PreconditionsTestCase
     {
         Route::get('/files/{name}', function (DownloadFileRequest $request) {
             return DownloadStream::for($request->resource)
-                ->setName($request->route('name'));
+                ->setName($request->route('name'))
+                ->withBufferSize(11);
         })->name('file.download');
 
         Route::getRoutes()->refreshNameLookups();
@@ -159,7 +160,7 @@ class RangeRequestTest extends PreconditionsTestCase
         $url = route('file.download', [ 'name' => $file ]);
         $response = $this
             ->get($url, [
-                'Range' => 'bytes=0-4,5-7,8-15'
+                'Range' => 'bytes=0-3,5-6,8-15'
             ])
             ->assertStatus(Status::PARTIAL_CONTENT)
             ->assertDownload($file);
@@ -178,6 +179,11 @@ class RangeRequestTest extends PreconditionsTestCase
 
         $this->assertNotEmpty($content, 'No content was streamed');
 
+        // ------------------------------------------------------------ //
+
+        ConsoleDebugger::output(str_repeat('- - ', 10));
+        $multipartResponse = Response::multipartResponse($response);
+
         $original = $this->getOriginalFileContent($file);
         $stream = FileStream::openTemporary()
             ->put($original)
@@ -185,26 +191,40 @@ class RangeRequestTest extends PreconditionsTestCase
 
         $a = $stream
             ->positionAt(0)
-            ->read(4 + 1);
+            ->read(3 + 1);
 
         $b = $stream
             ->positionAt(5)
-            ->read((7 - 5) + 1);
+            ->read((6 - 5) + 1);
 
         $c = $stream
             ->positionAt(8)
             ->read((15 - 8) + 1);
 
+        ConsoleDebugger::output(str_repeat('- - ', 10));
         ConsoleDebugger::output([
             'expected' => [
                 'a' => $a,
                 'b' => $b,
                 'c' => $c
-            ]
+            ],
+            'actual' => $multipartResponse->parts()->map(fn ($p) => $p->content)->all()
         ]);
 
-        $this->assertStringContainsString($a, $content, '1st range not part of output');
-        $this->assertStringContainsString($b, $content, '2nd range not part of output');
-        $this->assertStringContainsString($c, $content, '3rd range not part of output');
+        $collection = $multipartResponse->parts();
+        $this->assertNotEmpty($collection, 'No parts part of response body');
+        $this->assertCount(3, $collection);
+
+        $this->assertSame($a, $collection[0]->content, '1st part has wrong content');
+        $collection[0]->assertContentType('text/plain');
+        $collection[0]->assertContentLength(4);
+
+        $this->assertSame($b, $collection[1]->content, '2nd part has wrong content');
+        $collection[1]->assertContentType('text/plain');
+        $collection[1]->assertContentLength(2);
+
+        $this->assertSame($c, $collection[2]->content, '3rd part has wrong content');
+        $collection[2]->assertContentType('text/plain');
+        $collection[2]->assertContentLength(8);
     }
 }
