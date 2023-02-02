@@ -847,8 +847,7 @@ class DownloadStream implements
         RangeSet $range,
         int|null $bufferSize = null,
         bool $close = true
-    ): void
-    {
+    ): void {
         $bufferSize = $bufferSize ?? $this->bufferSize();
 
         // Set position where to start reading from...
@@ -868,7 +867,7 @@ class DownloadStream implements
         $end = $range->getEnd();
         $readLength = $bufferSize;
 
-        while(!$stream->eof() && ($position = $stream->tell()) <= $end) {
+        while (!$stream->eof() && ($position = $stream->tell()) <= $end) {
             // Prevent out-of-bounds issues
             if ($position + $bufferSize > $end) {
                 $readLength = $end - $position + 1;
@@ -909,8 +908,7 @@ class DownloadStream implements
         string $boundary,
         int|null $bufferSize = null,
         bool $close = true
-    ): void
-    {
+    ): void {
         $bufferSize = $bufferSize ?? $this->bufferSize();
         $newLine = PHP_EOL;
         $separator = "--{$boundary}{$newLine}";
