@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `setDatabaseDatetimeFormat()` in `BaseFieldFilter` abstraction.
 * `now()` in the `Duration` util.
 * Test `Response` utility.
+* `MultipartResoonse` testing utility.
 
 ### Changed
 
