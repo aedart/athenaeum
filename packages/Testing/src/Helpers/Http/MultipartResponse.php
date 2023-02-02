@@ -207,7 +207,7 @@ class MultipartResponse
      */
     protected function makeMultipartContent(string $rawPart): MultipartContent
     {
-        [$rawHeaders, $rawContent] = explode(PHP_EOL . PHP_EOL, $rawPart);
+        [$rawHeaders, $rawContent] = explode(PHP_EOL . PHP_EOL, $rawPart, 2);
 
         return new MultipartContent(
             headers: $this->parsePartHeaders($rawHeaders),
