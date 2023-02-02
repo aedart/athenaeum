@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\ETags\Preconditions;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\ETags\Preconditions\Responses\DownloadStream;
 use Aedart\Streams\FileStream;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\Helpers\Http\Response;
 use Aedart\Tests\Helpers\Dummies\ETags\Requests\DownloadFileRequest;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
@@ -134,5 +135,76 @@ class RangeRequestTest extends PreconditionsTestCase
             ->read(100);
 
         $this->assertSame($part, $content, 'Stream content does not match requested range');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function respondsMultiplePartsWhenMultipleRangesRequested(): void
+    {
+        Route::get('/files/{name}', function (DownloadFileRequest $request) {
+            return DownloadStream::for($request->resource)
+                ->setName($request->route('name'));
+        })->name('file.download');
+
+        Route::getRoutes()->refreshNameLookups();
+
+        // ------------------------------------------------------------ //
+
+        $file = 'my-document.txt';
+        $url = route('file.download', [ 'name' => $file ]);
+        $response = $this
+            ->get($url, [
+                'Range' => 'bytes=0-4,5-7,8-15'
+            ])
+            ->assertStatus(Status::PARTIAL_CONTENT)
+            ->assertDownload($file);
+
+        $headers = $response->headers;
+        $content = Response::streamResponse($response);
+
+        // ------------------------------------------------------------ //
+
+        $this->assertTrue($headers->has('Accept-Ranges'), 'Accept Ranges not set');
+        $this->assertTrue($headers->has('Last-Modified'), 'Last Modified not set');
+        $this->assertFalse($headers->has('ETag'), 'ETag should NOT be set (default behaviour)');
+        $this->assertTrue($headers->has('Content-Length'), 'Content Length not set');
+        $this->assertTrue($headers->has('Content-Type'), 'Content Type not set');
+        $this->assertTrue($headers->has('Content-Disposition'), 'Content Disposition not set');
+
+        $this->assertNotEmpty($content, 'No content was streamed');
+
+        $original = $this->getOriginalFileContent($file);
+        $stream = FileStream::openTemporary()
+            ->put($original)
+            ->positionToStart();
+
+        $a = $stream
+            ->positionAt(0)
+            ->read(4 + 1);
+
+        $b = $stream
+            ->positionAt(5)
+            ->read((7 - 5) + 1);
+
+        $c = $stream
+            ->positionAt(8)
+            ->read((15 - 8) + 1);
+
+        ConsoleDebugger::output([
+            'expected' => [
+                'a' => $a,
+                'b' => $b,
+                'c' => $c
+            ]
+        ]);
+
+        $this->assertStringContainsString($a, $content, '1st range not part of output');
+        $this->assertStringContainsString($b, $content, '2nd range not part of output');
+        $this->assertStringContainsString($c, $content, '3rd range not part of output');
     }
 }
