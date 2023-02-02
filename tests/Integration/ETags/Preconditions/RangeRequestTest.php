@@ -227,4 +227,63 @@ class RangeRequestTest extends PreconditionsTestCase
         $collection[2]->assertContentType('text/plain');
         $collection[2]->assertContentLength(8);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canCombinePartialsIntoSingleFile(): void
+    {
+        Route::get('/files/{name}', function (DownloadFileRequest $request) {
+            return DownloadStream::for($request->resource)
+                ->setName($request->route('name'));
+        })->name('file.download');
+
+        Route::getRoutes()->refreshNameLookups();
+
+        // ------------------------------------------------------------ //
+
+        $file = 'my-document.txt';
+        $url = route('file.download', [ 'name' => $file ]);
+
+        // ------------------------------------------------------------ //
+
+        // Single part
+        $responseA = $this
+            ->get($url, [
+                'Range' => 'bytes=0-250'
+            ])
+            ->assertStatus(Status::PARTIAL_CONTENT)
+            ->assertDownload($file);
+
+        // Multiple parts
+        $responseB = $this
+            ->get($url, [
+                'Range' => 'bytes=251-299,300-'
+            ])
+            ->assertStatus(Status::PARTIAL_CONTENT)
+            ->assertDownload($file);
+
+        // ------------------------------------------------------------ //
+
+        $contentA = Response::streamResponse($responseA);
+
+        ConsoleDebugger::output(str_repeat('- - ', 10));
+        $multipartResponse = Response::multipartResponse($responseB);
+
+        $result = $contentA;
+        foreach ($multipartResponse->parts() as $part) {
+            $part->assertHasContent();
+
+            $result .= $part->content;
+        }
+
+        // ------------------------------------------------------------ //
+
+        $expected = $this->getOriginalFileContent($file);
+
+        $this->assertSame(strlen($expected), strlen($result), 'Length of content does match expected');
+        $this->assertSame($expected, $result, 'Combination of multipart content does not match expected content!');
+    }
 }
