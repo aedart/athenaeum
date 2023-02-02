@@ -924,7 +924,7 @@ class DownloadStream implements
             // (newline)
             echo $separator;
             echo $contentType;
-            echo $this->makeContentRange($range) . "{$newLine}";
+            echo 'Content-Range: ' . $this->makeContentRange($range) . "{$newLine}";
             echo $newLine;
 
             // Output range, but make sure NOT to close the stream here...
