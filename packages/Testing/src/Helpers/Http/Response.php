@@ -49,7 +49,7 @@ class Response
     /**
      * Returns stream content of response
      *
-     * @param \Illuminate\Testing\TestResponse $response
+     * @param \Illuminate\Testing\TestResponse|\Symfony\Component\HttpFoundation\StreamedResponse $response
      * @param bool $debug [optional] Http headers and stream content is logged to console when true.
      *
      * @return string
@@ -67,6 +67,25 @@ class Response
         }
 
         return $content;
+    }
+
+    /**
+     * Creates a new multipart response instance from given response
+     *
+     * @param \Illuminate\Testing\TestResponse|\Symfony\Component\HttpFoundation\StreamedResponse $response
+     * @param bool $debug [optional] Http headers and stream content is logged to console when true.
+     *
+     * @return MultipartResponse
+     */
+    public static function multipartResponse($response, bool $debug = true)
+    {
+        $multipartResponse = MultipartResponse::from($response);
+
+        if ($debug) {
+            ConsoleDebugger::output($multipartResponse);
+        }
+
+        return $multipartResponse;
     }
 
     /**
