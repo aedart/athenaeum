@@ -6,6 +6,7 @@ use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Preconditions\Ranges\RangeSet;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\Contracts\MimeTypes\Detectable;
+use Aedart\Contracts\MimeTypes\Exceptions\MimeTypeDetectionException;
 use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
@@ -13,6 +14,7 @@ use Aedart\Contracts\Support\Helpers\Routing\ResponseFactoryAware;
 use Aedart\Contracts\Utils\Dates\DateTimeFormats;
 use Aedart\Streams\FileStream;
 use Aedart\Support\Helpers\Routing\ResponseFactoryTrait;
+use Aedart\Utils\Str;
 use DateTimeInterface;
 use Illuminate\Contracts\Support\Responsable;
 use Psr\Http\Message\StreamInterface;
@@ -97,6 +99,13 @@ class DownloadStream implements
      * @var callable|null
      */
     protected $resolveStreamCallback = null;
+
+    /**
+     * Boundary separator for when streaming multiple parts
+     *
+     * @var string|null
+     */
+    protected string|null $boundary = null;
 
     /**
      * Creates a new download stream instance
@@ -246,7 +255,7 @@ class DownloadStream implements
 
         // Finally, create response
         return $this->makeStreamedResponse(function () use ($stream) {
-            $this->outputStream($stream);
+            $this->outputEntireStream($stream);
         }, $this->name(), $headers->all(), $this->disposition());
     }
 
@@ -267,13 +276,9 @@ class DownloadStream implements
             throw new RuntimeException('No ranges requested, unable to stream a single part');
         }
 
-        // Obtain stream for the requested range.
+        // Obtain stream and range...
         $range = $ranges->first();
         $stream = $this->getStream();
-        $copy = $stream->copy(
-            length: $range->getLength(),
-            offset: $range->getStart()
-        );
 
         // [...] If a single part [...] the 206 response MUST generate a Content-Range header field,
         // describing what range of the selected representation is enclosed, and a content consisting
@@ -286,8 +291,8 @@ class DownloadStream implements
         ]);
 
         // Finally, create response
-        return $this->makeStreamedResponse(function () use ($copy) {
-            $this->outputStream($copy);
+        return $this->makeStreamedResponse(function () use ($stream, $range) {
+            $this->outputSingleRange($stream, $range);
         }, $this->name(), $headers->all(), $this->disposition(), Status::PARTIAL_CONTENT);
     }
 
@@ -308,7 +313,26 @@ class DownloadStream implements
             throw new RuntimeException('No ranges requested, unable to stream a single part');
         }
 
-        // TODO: ...
+        // Obtain stream and meta information...
+        $stream = $this->getStream();
+        $boundary = $this->boundary();
+        $total = $this->getTotalLength($ranges);
+
+        // [...] If multiple parts are being transferred, the server [...] MUST generate "multipart/byteranges"
+        // content, [...], and a Content-Type header field containing the "multipart/byteranges" media type and its
+        // required boundary parameter. To avoid confusion with single-part responses, a server MUST NOT generate
+        // a Content-Range header field in the HTTP header section of a multiple part response (this field will be
+        // sent in each part instead). [...]
+
+        $headers = $this->resolveHeaders([
+            'Content-Length' => $total,
+            'Content-Type' => "multipart/byteranges; boundary={$boundary}",
+        ]);
+
+        // Create the response
+        return $this->makeStreamedResponse(function () use ($stream, $ranges, $boundary) {
+            $this->outputMultipleRanges($stream, $ranges, $boundary);
+        }, $this->name(), $headers->all(), $this->disposition(), Status::PARTIAL_CONTENT);
     }
 
     /**
@@ -601,6 +625,31 @@ class DownloadStream implements
     }
 
     /**
+     * Set the boundary separator for when streaming multiple parts
+     *
+     * @param string|null $separator Separator without "--" prefix
+     *
+     * @return self
+     */
+    public function withBoundary(string|null $separator): static
+    {
+        $this->boundary = $separator;
+
+        return $this;
+    }
+
+    /**
+     * Get the boundary separator for when streaming multiple parts
+     *
+     * @return string The separator that was set or a generated separator, when
+     *                none was set. Separator does NOT contain "--" prefix!
+     */
+    public function boundary(): string
+    {
+        return $this->boundary ?? $this->makeBoundarySeparator();
+    }
+
+    /**
      * Set custom callback to resolve stream for attachment
      *
      * @see getStream
@@ -763,7 +812,7 @@ class DownloadStream implements
      *
      * @throws StreamException
      */
-    protected function outputStream(FileStreamInterface $stream, int|null $bufferSize = null, bool $close = true): void
+    protected function outputEntireStream(FileStreamInterface $stream, int|null $bufferSize = null, bool $close = true): void
     {
         $bufferSize = $bufferSize ?? $this->bufferSize();
         $chunks = $stream->readAllInChunks($bufferSize);
@@ -772,6 +821,130 @@ class DownloadStream implements
             echo $chunk;
 
             if (connection_aborted() === 1) {
+                break;
+            }
+        }
+
+        if ($close) {
+            $stream->close();
+        }
+    }
+
+    /**
+     * Output a single ranges for given stream
+     *
+     * @param FileStreamInterface $stream
+     * @param RangeSet $range
+     * @param int|null $bufferSize [optional]
+     * @param bool $close [optional]
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    protected function outputSingleRange(
+        FileStreamInterface $stream,
+        RangeSet $range,
+        int|null $bufferSize = null,
+        bool $close = true
+    ): void
+    {
+        $bufferSize = $bufferSize ?? $this->bufferSize();
+
+        // Set position where to start reading from...
+        $stream->positionAt($range->getStart());
+
+        // Whenever the amount of requested bytes is less than buffer, output it.
+        $length = $range->getLength();
+        if ($length <= $bufferSize && !$stream->eof()) {
+            echo $stream->read($length);
+            goto close;
+        }
+
+        // However, if requested amount of bytes is larger than our buffer size,
+        // we need to split output into smaller chunks. If we do not do this, we might
+        // exceed PHP's memory limits (for very large files only).
+
+        $end = $range->getEnd();
+        $readLength = $bufferSize;
+
+        while(!$stream->eof() && ($position = $stream->tell()) <= $end) {
+            // Prevent out-of-bounds issues
+            if ($position + $bufferSize > $end) {
+                $readLength = $end - $position + 1;
+            }
+
+            // Output chunk
+            echo $stream->read($readLength);
+
+            // Abort loop if required...
+            if (connection_aborted() === 1) {
+                break;
+            }
+        }
+
+        close:
+        if ($close) {
+            $stream->close();
+        }
+    }
+
+    /**
+     * Output multiple ranges for given stream
+     *
+     * @param FileStreamInterface&Detectable $stream
+     * @param CollectionInterface $ranges
+     * @param string $boundary
+     * @param int|null $bufferSize [optional]
+     * @param bool $close [optional]
+     *
+     * @return void
+     *
+     * @throws StreamException
+     * @throws MimeTypeDetectionException
+     */
+    protected function outputMultipleRanges(
+        FileStreamInterface & Detectable $stream,
+        CollectionInterface $ranges,
+        string $boundary,
+        int|null $bufferSize = null,
+        bool $close = true
+    ): void
+    {
+        $bufferSize = $bufferSize ?? $this->bufferSize();
+        $newLine = PHP_EOL;
+        $separator = "--{$boundary}{$newLine}";
+        $contentType = "Content-Type: {$stream->mimeType()}{$newLine}";
+
+        foreach ($ranges as $range) {
+            /** @var RangeSet $range */
+
+            // Output "header" for part. Example:
+            // --separator_string (newline)
+            // Content-Type: application/pdf (newline)
+            // Content-Range: bytes 234-639/8000 (newline)
+            // (newline)
+            echo $separator;
+            echo $contentType;
+            echo $this->makeContentRange($range) . "{$newLine}";
+            echo $newLine;
+
+            // Output range, but make sure NOT to close the stream here...
+            $this->outputSingleRange(
+                stream: $stream,
+                range: $range,
+                bufferSize: $bufferSize,
+                close: false
+            );
+
+            // Output newline, if not last range
+            $aborted = connection_aborted();
+            if ($range !== $ranges->last() && $aborted !== 1) {
+                echo $newLine;
+            }
+
+            // Abort loop if required...
+            if ($aborted === 1) {
                 break;
             }
         }
@@ -791,5 +964,35 @@ class DownloadStream implements
     protected function makeContentRange(RangeSet $range): string
     {
         return "{$range->unit()} {$range->getRange()}/{$range->getTotalSize()}";
+    }
+
+    /**
+     * Generates a new boundary separator
+     *
+     * @param int $length [optional]
+     *
+     * @return string
+     */
+    protected function makeBoundarySeparator(int $length = 16): string
+    {
+        return Str::random($length);
+    }
+
+    /**
+     * Returns the total length requested
+     *
+     * @param CollectionInterface<RangeSet> $ranges
+     *
+     * @return int E.g. amount of bytes
+     */
+    protected function getTotalLength(CollectionInterface $ranges): int
+    {
+        $total = 0;
+        foreach ($ranges as $range) {
+            /** @var RangeSet $range */
+            $total += $range->getLength();
+        }
+
+        return $total;
     }
 }
