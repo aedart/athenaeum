@@ -28,6 +28,9 @@ use Teapot\StatusCode\All as Status;
 /**
  * Download Stream (Response Helper)
  *
+ * @see https://httpwg.org/specs/rfc9110.html#status.206
+ * @see https://httpwg.org/specs/rfc9110.html#multipart.byteranges
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\ETags\Preconditions\Responses
  */
@@ -119,7 +122,6 @@ class DownloadStream implements
      * @param string $acceptRanges [optional] Accept Ranges Http header value
      * @param array $headers [optional] Http headers
      * @param int $bufferSize [optional] Attachment / File read buffer size (PHP)
-     *
      */
     public function __construct(
         mixed $attachment = null,
@@ -326,6 +328,8 @@ class DownloadStream implements
 
         $headers = $this->resolveHeaders([
             'Content-Length' => $total,
+
+            // [...] Despite the name, the "multipart/byteranges" media type is not limited to byte ranges [...]
             'Content-Type' => "multipart/byteranges; boundary={$boundary}",
         ]);
 
@@ -627,12 +631,19 @@ class DownloadStream implements
     /**
      * Set the boundary separator for when streaming multiple parts
      *
-     * @param string|null $separator Separator without "--" prefix
+     * @param string|null $separator Separator without "--" (leading hyphens) prefix
      *
      * @return self
      */
     public function withBoundary(string|null $separator): static
     {
+        // [...] Boundary delimiters [...] must be no longer than
+        // 70 characters, not counting the two leading hyphens.
+        // @see https://www.rfc-editor.org/rfc/rfc2046.html#section-5.1.1
+        if (isset($separator) && strlen($separator) > 70) {
+            throw new RuntimeException('Boundary separator is no allowed to be above 70 characters long');
+        }
+
         $this->boundary = $separator;
 
         return $this;
@@ -642,7 +653,7 @@ class DownloadStream implements
      * Get the boundary separator for when streaming multiple parts
      *
      * @return string The separator that was set or a generated separator, when
-     *                none was set. Separator does NOT contain "--" prefix!
+     *                none was set. Separator does NOT contain "--" (leading hyphens) prefix!
      */
     public function boundary(): string
     {
@@ -911,21 +922,32 @@ class DownloadStream implements
     ): void {
         $bufferSize = $bufferSize ?? $this->bufferSize();
         $newLine = PHP_EOL;
-        $separator = "--{$boundary}{$newLine}";
-        $contentType = "Content-Type: {$stream->mimeType()}{$newLine}";
+
+        //
+        $separator = "--{$boundary}";
+
+        // Content Type of each body part
+        $contentType = "Content-Type: {$stream->mimeType()}";
 
         foreach ($ranges as $range) {
             /** @var RangeSet $range */
+
+            // Output a newline, if this isn't the first range
+            if ($range !== $ranges->first()) {
+                echo $newLine;
+            }
 
             // Output "header" for part. Example:
             // --separator_string (newline)
             // Content-Type: application/pdf (newline)
             // Content-Range: bytes 234-639/8000 (newline)
             // (newline)
-            echo $separator;
-            echo $contentType;
-            echo 'Content-Range: ' . $this->makeContentRange($range) . "{$newLine}";
-            echo $newLine;
+            echo implode($newLine, [
+                $separator,
+                $contentType,
+                'Content-Range: ' . $this->makeContentRange($range),
+                $newLine
+            ]);
 
             // Output range, but make sure NOT to close the stream here...
             $this->outputSingleRange(
@@ -935,17 +957,19 @@ class DownloadStream implements
                 close: false
             );
 
-            // Output newline, if not last range
-            $aborted = connection_aborted();
-            if ($range !== $ranges->last() && $aborted !== 1) {
-                echo $newLine;
-            }
-
             // Abort loop if required...
-            if ($aborted === 1) {
+            if (connection_aborted() === 1) {
                 break;
             }
         }
+
+        // [...] The boundary delimiter line following the last body part is a
+        // distinguished delimiter that indicates that no further body parts
+        // will follow. Such a delimiter line is identical to the previous
+        // delimiter lines, with the addition of two more hyphens after the
+        // boundary parameter value.
+        // @see https://www.rfc-editor.org/rfc/rfc2046.html#section-5.1.1
+        echo "{$newLine}{$separator}--";
 
         if ($close) {
             $stream->close();
@@ -977,12 +1001,18 @@ class DownloadStream implements
     /**
      * Generates a new boundary separator
      *
-     * @param int $length [optional]
+     * @see https://www.rfc-editor.org/rfc/rfc2046.html#section-5.1.1
      *
-     * @return string
+     * @param int $length [optional] Max 70, acc. to rfc2046
+     *
+     * @return string Boundary separator without "--" (leading hyphens) prefix
      */
     protected function makeBoundarySeparator(int $length = 16): string
     {
+        if ($length > 70) {
+            throw new RuntimeException('Length of boundary cannot be more than 70 characters');
+        }
+
         return Str::random($length);
     }
 

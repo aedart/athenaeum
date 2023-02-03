@@ -184,8 +184,16 @@ class MultipartResponse
     {
         $separator = "--{$boundary}";
 
+        // Remove evt. "close" delimiter - the "distinguished delimiter",
+        // that signifies no further body parts.
+        // @see https://www.rfc-editor.org/rfc/rfc2046.html#section-5.1.1
+        $closeDelimiter = "{$separator}--";
+        $body = Str::replaceLast($closeDelimiter, '', $body);
+
+        // Split content by separator.
         $parts = explode($separator, $body);
 
+        // Parse each body part and wrap inside a multipart content object.
         $output = [];
         foreach ($parts as $rawPart) {
             if (empty($rawPart)) {
@@ -243,7 +251,9 @@ class MultipartResponse
             return $rawContent;
         }
 
-        // Remove the last character, if it matches end-of-line
+        // Remove the last character, if it matches end-of-line.
+        // This SHOULD ensure that newline characters that were added in
+        // a response are safely removed.
         $lastCharIndex = strlen($rawContent) - 1;
         if ($rawContent[$lastCharIndex] == PHP_EOL) {
             return Str::replaceLast(PHP_EOL, '', $rawContent);
