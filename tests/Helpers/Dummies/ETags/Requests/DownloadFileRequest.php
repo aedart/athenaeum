@@ -80,11 +80,9 @@ class DownloadFileRequest extends FormRequest
     {
         $etag = static::fileEtag($file);
 
-        return new GenericResource(
-            data: $file,
-            etag: $etag,
-            lastModifiedDate: Carbon::createFromTimestamp($file->getMTime()),
-            size: $file->getSize()
+        return GenericResource::forFile(
+            file: $file,
+            etag: $etag
         );
     }
 
