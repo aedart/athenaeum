@@ -23,8 +23,9 @@ Its constructor method accepts the following arguments:
 * `string $rangeUnit = 'bytes'`: (_optional_) Allowed or supported [range unit](https://httpwg.org/specs/rfc9110.html#range.units), e.g. `"bytes"`.
 * `int $maxRangeSets = 5`: (_optional_) Maximum allowed [range sets](https://httpwg.org/specs/rfc9110.html#rule.ranges-specifier).
 
-Most of the arguments are optional. You do not have to satisfy all of them, especially not when your requested resource is not intended to support them.
-As an example, imagine that an existing record (_e.g. an Eloquent Model instance_) is requested.
+Most of the arguments are optional. You do not have to satisfy all of them. This is especially true when your requested resource is not intended to support `If-Range` and `Range` preconditions.
+
+To demonstrate an example, imagine that an existing record (_e.g. an Eloquent Model instance_) is requested.
 If your model supports etags, and has a last modified date, then you can create a new `GenericResource` instance in the following way:
 
 ```php
@@ -95,7 +96,7 @@ and or [`If-Range`](https://httpwg.org/specs/rfc9110.html#field.if-range) precon
 ### Default Behaviour
 
 The `GenericResource` assumes that the resource in question does NOT support `Range` and `If-Range`.
-It defaults to `$size = 0`, in the constructor. This results in `Range` and `If-Reange` Http headers to be entirely ignored.
+It defaults to `$size = 0`, in the constructor. This results in `Range` and `If-Range` Http headers to be entirely ignored.
 Your resulting response should therefore include the full file content. 
 
 ### Size and Range Response
@@ -115,14 +116,97 @@ $resource new GenericResource(
 The `Evaluator`'s preconditions will automatically deal with validation of requested range-sets.
 You will, however, have to create an appropriate [206 Partial Content](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/206)
 in your controller or route action, when the "range" state has been set on the resource.
-Use the `mustProcessRange()`, `mustIgnoreRange()` and `ranges()` to deal with such.
 
 #### Example Request
 
 ```php
 
+use Aedart\Contracts\ETags\Preconditions\ResourceContext;
+use Aedart\ETags\Facades\Generator;
+use Aedart\ETags\Preconditions\Evaluator;
+use Aedart\ETags\Preconditions\Resources\GenericResource;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\File;
+use Illuminate\Support\Carbon;
+
+class DownloadFileRequest extends FormRequest
+{
+    public ResourceContext $resource;
+
+    public string $path;
+
+    protected function prepareForValidation()
+    {
+        // 1) Find requested file or fail.
+        $file = $this->findFileOrFail();
+
+        // 2) Wrap it inside a Resource Context
+        $resource = $this->makeResourceContext($file);
+
+        // 3) Evaluate request's preconditions against resource...
+        $this->resource = Evaluator::make($this)
+            ->evaluate($resource);
+    }
+
+    protected function makeResourceContext(File $file): ResourceContext
+    {
+        // (optional) generate custom etag for file 
+        $etag = Generator::makeRaw(
+            hash_file('xxh128', $file->getRealPath())
+        );
+
+        // Returns new resource for given file...
+        return GenericResource::forFile(
+            file: $file,
+            etag: $etag // Defaults to a "checksum" etag, when not specified!
+        );
+    }
+
+    protected function findFileOrFail(): File
+    {
+        // ... not shown here...
+    }
+}
 ```
 
 #### Example Action
+
+```php
+use Illuminate\Support\Facades\Route;
+use Aedart\ETags\Preconditions\Responses\DownloadStream;
+
+Route::get('/files/{name}', function (DownloadFileRequest $request) {
+
+    return DownloadStream::for($request->resource)
+        ->setName($request->route('name'));
+});
+```
+
+_See source code of `DownloadStream` response helper, for additional information._
+
+#### Example Response
+
+Based on the above shown request and action, if a client makes a request with `If-Range` and `Range` preconditions, then a [206 Partial Content](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/206) response is returned, if the preconditions match.
+
+**Request (_with If-Range and Range_)**
+
+```
+GET /files/contacts.txt HTTP/1.1
+If-Range: "a89ca792333a300d726d40ecbbb9b043"
+Range: bytes=0-99
+```
+
+**Response (_206 Partial Content_)**
+
+```
+HTTP/1.1 206 Partial Content
+Date: Fri, 03 Feb 2023 10:05:24 GMT
+Last-Modified: Tue, 15 Jan 2023 08:58:08 GMT
+Content-Range: bytes 0-99/2087
+Content-Length: 100
+Content-Type: plain/text
+
+(100 bytes of partial text file... not shown here)
+```
 
 ## Arbitrary Data
