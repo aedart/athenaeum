@@ -9,7 +9,7 @@ sidebarDepth: 0
 
 ## Applicable
 
-When the request method is `GET` and both `Range` and `If-Range` headers are present.
+When the request method is `GET` and both `Range` and `If-Range` headers are present, and the resource supports range requests.
 
 ## Condition
 
@@ -26,7 +26,7 @@ When `If-Range` header is an [ETag](https://httpwg.org/specs/rfc9110.html#field.
 1. If the Etag validator provided **exactly matches** the ETag of the resource using the strong comparison, the condition is **true**.
 2. Otherwise, the condition is **false**.
 
-**b**) If resource supports `Range` requests, if the requested ranges are applicable (_if they are valid_).
+**b**) If the requested ranges are applicable (_if they are valid_) for the requested resource.
 Validation of ranges is performed via a [`RangeValidator`](../range-validator.md).
 
 ---
