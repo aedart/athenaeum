@@ -17,12 +17,12 @@ use Teapot\StatusCode\All as Status;
  *
  * @group etags
  * @group preconditions
- * @group range-request
+ * @group partial-content-response
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions
  */
-class RangeRequestTest extends PreconditionsTestCase
+class PartialContentResponseTest extends PreconditionsTestCase
 {
     /*****************************************************************
      * Helpers
