@@ -9,7 +9,7 @@ sidebarDepth: 0
 
 ## Applicable
 
-When the request method is `GET` and both `Range` and `If-Range` headers are present, and the resource supports range requests.
+When the request method is `GET`, both `Range` and `If-Range` headers are present, and the resource supports range requests.
 
 ## Condition
 
