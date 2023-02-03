@@ -5,9 +5,14 @@ sidebarDepth: 0
 
 # Preconditions
 
+At the heart of the `Evaluator` are the preconditions that can be evaluated, when a request contain such.
+They are responsible for invoking appropriate [actions](actions.md), if applicable, whenever they pass or fail.
+
+[[TOC]]
+
 ## Supported Preconditions
 
-By default, the `Evaluator` offers support for following preconditions.
+Unless otherwise specified, the following preconditions are enabled by default in the `Evaluator`.
 
 ### RFC 9110
 
@@ -20,3 +25,43 @@ By default, the `Evaluator` offers support for following preconditions.
 ### Extensions
 
 * [Range](./extensions/range.md)
+
+## Disable Extensions
+
+If you do not wish to allow any other kind of preconditions evaluation than those defined by RFC 9110, then you can invoke the `useRfc9110Preconditions()` method.
+
+```php
+$evaluator->useRfc9110Preconditions();
+```
+
+## Specify Preconditions
+
+To specify what preconditions can be evaluated, if applicable, set the `$preconditions` argument in the `make()` method. Or, use the `setPreconditions()` method.
+
+```php
+// When creating a new instance...
+$evaluator = Evaluator::make(
+    reqeust: $request,
+    preconditions: [
+        MyCustomPreconditionA::class,
+        new OtherCustomPrecontion()
+    ],
+);
+
+// Or, when after instance has been instantiated
+$evaluator->setPreconditions([
+    MyCustomPreconditionA::class,
+    new OtherCustomPrecontion()
+]);
+```
+
+Alternatively, if you wish to add a custom precondition to be evaluated after those that are already set (_e.g. the default preconditions_), then use the `addPrecondition()` method.
+Just like when set custom preconditions, the method accepts a string class path or precondition instance as argument.
+
+```php
+$evaluator->addPrecondition(new MyCustomPrecondition());
+```
+
+## Custom Preconditions
+
+See [extensions](extensions/README.md) for more information.
