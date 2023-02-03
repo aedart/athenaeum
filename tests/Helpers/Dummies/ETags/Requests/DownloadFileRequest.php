@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Helpers\Dummies\ETags\Requests;
 
+use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Exceptions\ETagGeneratorException;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Facades\Generator;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\File;
 use Illuminate\Support\Carbon;
+use InvalidArgumentException;
 
 /**
  * Download File Request
@@ -76,8 +78,7 @@ class DownloadFileRequest extends FormRequest
      */
     protected function makeResourceContext(File $file): ResourceContext
     {
-        $checksum = hash('xxh3', $file->getContent());
-        $etag = Generator::makeRaw($checksum);
+        $etag = static::fileEtag($file);
 
         return new GenericResource(
             data: $file,
@@ -119,5 +120,53 @@ class DownloadFileRequest extends FormRequest
         $dir = Configuration::dataDir() . 'etags/files';
 
         return $dir . DIRECTORY_SEPARATOR . $file;
+    }
+
+    /**
+     * Generates etag for given file
+     *
+     * @param string|File $file Path to file or File instance
+     *
+     * @return ETag
+     */
+    public static function fileEtag(string|File $file): ETag
+    {
+        $file = static::resolveFile($file);
+
+        $checksum = hash('xxh3', $file->getContent());
+
+        return Generator::makeRaw($checksum);
+    }
+
+    /**
+     * Returns file's last modified date
+     *
+     * @param string|File $file Path to file or File instance
+     *
+     * @return Carbon
+     */
+    public static function fileLastModifiedDate(string|File $file): Carbon
+    {
+        $file = static::resolveFile($file);
+
+        return Carbon::createFromTimestamp($file->getMTime());
+    }
+
+    /**
+     * Resolves file instance
+     *
+     * @param string|File $file Path to file or File instance
+     *
+     * @return File
+     */
+    protected static function resolveFile(string|File $file): File
+    {
+        if (is_string($file) && file_exists($file)) {
+            $file = new File($file);
+        } elseif (is_string($file)) {
+            throw new InvalidArgumentException(sprintf('File path %s does not exist', $file));
+        }
+
+        return $file;
     }
 }

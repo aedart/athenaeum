@@ -2,13 +2,17 @@
 
 namespace Aedart\Tests\Integration\ETags\Preconditions;
 
+use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
+use Aedart\Contracts\Utils\Dates\DateTimeFormats;
+use Aedart\ETags\Facades\Generator;
 use Aedart\ETags\Preconditions\Responses\DownloadStream;
 use Aedart\Streams\FileStream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\Helpers\Http\Response;
 use Aedart\Tests\Helpers\Dummies\ETags\Requests\DownloadFileRequest;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
+use DateTimeInterface;
 use Illuminate\Support\Facades\Route;
 use Teapot\StatusCode\All as Status;
 
@@ -38,6 +42,34 @@ class PartialContentResponseTest extends PreconditionsTestCase
     public function getOriginalFileContent(string $file): string
     {
         return file_get_contents(
+            DownloadFileRequest::fullFilePath($file)
+        );
+    }
+
+    /**
+     * Generates etag for file
+     *
+     * @param string $file
+     *
+     * @return ETag
+     */
+    public function makeFileEtag(string $file): ETag
+    {
+        return DownloadFileRequest::fileEtag(
+            DownloadFileRequest::fullFilePath($file)
+        );
+    }
+
+    /**
+     * Get file's last modified date
+     *
+     * @param string $file
+     *
+     * @return DateTimeInterface
+     */
+    public function fileLastModifiedDate(string $file): DateTimeInterface
+    {
+        return DownloadFileRequest::fileLastModifiedDate(
             DownloadFileRequest::fullFilePath($file)
         );
     }
@@ -285,5 +317,177 @@ class PartialContentResponseTest extends PreconditionsTestCase
 
         $this->assertSame(strlen($expected), strlen($result), 'Length of content does match expected');
         $this->assertSame($expected, $result, 'Combination of multipart content does not match expected content!');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function respondsWithPartialContentWhenIfRangeEtagMatches(): void
+    {
+        Route::get('/files/{name}', function (DownloadFileRequest $request) {
+            return DownloadStream::for($request->resource)
+                ->setName($request->route('name'));
+        })->name('file.download');
+
+        Route::getRoutes()->refreshNameLookups();
+
+        // ------------------------------------------------------------ //
+
+        $file = 'my-document.txt';
+        $etag = $this->makeFileEtag($file);
+
+        $url = route('file.download', [ 'name' => $file ]);
+        $response = $this
+            ->get($url, [
+                'If-Range' => $etag->toString(),
+                'Range' => 'bytes=0-9'
+            ])
+            ->assertStatus(Status::PARTIAL_CONTENT)
+            ->assertDownload($file);
+
+        $content = Response::streamResponse($response);
+
+        // ------------------------------------------------------------ //
+
+        $this->assertNotEmpty($content, 'No content was streamed');
+
+        $original = $this->getOriginalFileContent($file);
+        $stream = FileStream::openTemporary()
+            ->put($original)
+            ->positionToStart();
+
+        $a = $stream
+            ->positionAt(0)
+            ->read(9 + 1);
+
+        $this->assertSame($a, $content, 'Stream content does not match requested range');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function respondsEntireAttachmentWhenIfRangeEtagDoesNotMatch(): void
+    {
+        Route::get('/files/{name}', function (DownloadFileRequest $request) {
+            return DownloadStream::for($request->resource)
+                ->setName($request->route('name'));
+        })->name('file.download');
+
+        Route::getRoutes()->refreshNameLookups();
+
+        // ------------------------------------------------------------ //
+
+        $file = 'my-document.txt';
+        $etag = Generator::makeStrong(1234); // Etag that does not match file's etag...
+
+        $url = route('file.download', [ 'name' => $file ]);
+        $response = $this
+            ->get($url, [
+                'If-Range' => $etag->toString(),
+                'Range' => 'bytes=0-9'
+            ])
+            ->assertOk()
+            ->assertDownload($file);
+
+        $content = Response::streamResponse($response);
+
+        // ------------------------------------------------------------ //
+
+        $this->assertNotEmpty($content, 'No content was streamed');
+
+        $original = $this->getOriginalFileContent($file);
+        $this->assertSame($original, $content, 'Stream content does not match original content!');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function respondsWithPartialContentWhenIfRangeDateMatches(): void
+    {
+        Route::get('/files/{name}', function (DownloadFileRequest $request) {
+            return DownloadStream::for($request->resource)
+                ->setName($request->route('name'));
+        })->name('file.download');
+
+        Route::getRoutes()->refreshNameLookups();
+
+        // ------------------------------------------------------------ //
+
+        $file = 'my-document.txt';
+        $lastModified = $this->fileLastModifiedDate($file)->format(DateTimeFormats::RFC9110);
+
+        $url = route('file.download', [ 'name' => $file ]);
+        $response = $this
+            ->get($url, [
+                'If-Range' => $lastModified,
+                'Range' => 'bytes=100-125'
+            ])
+            ->assertStatus(Status::PARTIAL_CONTENT)
+            ->assertDownload($file);
+
+        $content = Response::streamResponse($response);
+
+        // ------------------------------------------------------------ //
+
+        $this->assertNotEmpty($content, 'No content was streamed');
+
+        $original = $this->getOriginalFileContent($file);
+        $stream = FileStream::openTemporary()
+            ->put($original)
+            ->positionToStart();
+
+        $a = $stream
+            ->positionAt(100)
+            ->read((125 - 100) + 1);
+
+        $this->assertSame($a, $content, 'Stream content does not match requested range');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function respondsEntireAttachmentWhenIfRangeDateDoesNotMatch(): void
+    {
+        Route::get('/files/{name}', function (DownloadFileRequest $request) {
+            return DownloadStream::for($request->resource)
+                ->setName($request->route('name'));
+        })->name('file.download');
+
+        Route::getRoutes()->refreshNameLookups();
+
+        // ------------------------------------------------------------ //
+
+        $file = 'my-document.txt';
+        $lastModified = now()->format(DateTimeFormats::RFC9110);
+
+        $url = route('file.download', [ 'name' => $file ]);
+        $response = $this
+            ->get($url, [
+                'If-Range' => $lastModified,
+                'Range' => 'bytes=0-9'
+            ])
+            ->assertOk()
+            ->assertDownload($file);
+
+        $content = Response::streamResponse($response);
+
+        // ------------------------------------------------------------ //
+
+        $this->assertNotEmpty($content, 'No content was streamed');
+
+        $original = $this->getOriginalFileContent($file);
+        $this->assertSame($original, $content, 'Stream content does not match original content!');
     }
 }
