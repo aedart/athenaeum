@@ -9,7 +9,7 @@ sidebarDepth: 0
 
 ## The Basics
 
-The design philosophy behind the request preconditions `Evaluator` is to evaluate an incoming [conditional request (precondition)](https://httpwg.org/specs/rfc9110.html#preconditions), e.g. `If-Match`, against the requested [resource](./resource-context.md).   
+The design philosophy behind the request preconditions `Evaluator` is to evaluate an incoming [conditional request](https://httpwg.org/specs/rfc9110.html#preconditions), e.g. `If-Match`, against the requested [resource](./resource-context.md).   
 
 In general, when a precondition is evaluated either of the following will happen:
 
@@ -27,7 +27,7 @@ See [supported preconditions](./preconditions.md#supported-preconditions) for ad
 
 Http Conditional Requests are always specific to the requested resource and the [Http Method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods).
 It is therefore recommended that you evaluate the requested resource inside your [Form Request](https://laravel.com/docs/9.x/validation#form-request-validation).
-Consider the following form request:
+The following shows an example request:
 
 ### Request
 
@@ -136,16 +136,16 @@ If-None-Match: "a81283f2670a78cd4c5a2e56cb0cd4ef5e357eb1"
 HTTP/1.1 304 Not Modified
 ```
 
-The controller or route action is never executed. Instead, an exception is thrown and the application converts it into an appropriate response.
-If the precondition had passed instead, then controller or route action would had been processed (_in this example_). 
+The controller or route action is never executed. Instead, an exception is thrown and your application converts it into an appropriate response.
+If the precondition had passed instead, then controller or route action would have been processed (_in this example_). 
 
 ## The Evaluator
 
-You are free to implement the evaluation logic how you see fit, in your application.
+You are free to implement the evaluation logic as you see fit, within your application.
 The previous shown examples are only meant to demonstrate the general process. The rest is up to you.
-The following highlights how to instantiate an `Evaluator` instance.
+To instantiate an `Evaluator` instance, invoke the `Evaluator::make()` method. 
 
-The `Evaluator::make()` method accepts 3 arguments:
+The method accepts 3 arguments:
 
 * `Request $request`: the incoming request.
 * `string[]|Precondition[] $preconditions = []`: _(optional)_ list of [preconditions](./preconditions.md) to evaluate.
