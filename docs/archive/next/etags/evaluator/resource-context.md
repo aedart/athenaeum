@@ -133,8 +133,6 @@ class DownloadFileRequest extends FormRequest
 {
     public ResourceContext $resource;
 
-    public string $path;
-
     protected function prepareForValidation()
     {
         // 1) Find requested file or fail.
