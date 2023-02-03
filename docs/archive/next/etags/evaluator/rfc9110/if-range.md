@@ -47,3 +47,4 @@ Evaluator continues to [extensions](../extensions/README.md), when available. Ot
 ## References
 
 * [If-Range specification](https://httpwg.org/specs/rfc9110.html#field.if-range)
+* [Range extension](../extensions/range.md)
