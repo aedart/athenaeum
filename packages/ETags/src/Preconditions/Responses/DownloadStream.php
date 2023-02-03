@@ -961,7 +961,17 @@ class DownloadStream implements
      */
     protected function makeContentRange(RangeSet $range): string
     {
-        return "{$range->unit()} {$range->getRange()}/{$range->getTotalSize()}";
+        // The "$range->getRange()" output corresponds to whatever
+        // was requested. It does not always have a clear start
+        // and end. Therefore, we obtain the computed start, end,
+        // total... etc.
+
+        $unit = $range->unit();
+        $start = $range->getStart();
+        $end = $range->getEnd();
+        $total = $range->getTotalSize();
+
+        return "{$unit} {$start}-{$end}/{$total}";
     }
 
     /**
