@@ -8,9 +8,7 @@ sidebarDepth: 0
 **Class:** _`\Aedart\ETags\Preconditions\Additional\Range`_
 
 ::: warning Note
-This extension is NOT part of [RFC 9110](https://httpwg.org/specs/rfc9110.html).
-
-It is by default enabled in the `Evaluator`, because a client is able to perform a `Range` request, without `If-Range` precondition.
+This extension is enabled by default in the `Evaluator`, because a client is able to perform a `Range` request, without `If-Range` precondition.
 When such happens, it is prudent and feasible to perform the same kind of range-set validation, as for the RFC 9110 defined `If-Range` precondition.
 :::
 
