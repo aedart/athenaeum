@@ -113,7 +113,7 @@ $resource new GenericResource(
 );
 ```
 
-The `Evaluator`'s preconditions will automatically deal with validation of requested range-sets.
+The `Evaluator`'s preconditions will automatically deal with [validation of requested range-sets](range-validator.md).
 You will, however, have to create an appropriate [206 Partial Content](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/206)
 in your controller or route action, when the "range" state has been set on the resource.
 
@@ -210,3 +210,35 @@ Content-Type: plain/text
 ```
 
 ## Arbitrary Data
+
+The `ResourceContext` also has the ability to store and retrieve arbitrary data.
+This can be useful for adding additional meta information for a resource, or perhaps for dealing with complex state-changing logic.
+Regardless of reason, you can leverage this mechanism when you need it.
+
+Most commonly, you would set key-value pairs inside your resource, by accessing the resource in your custom [actions](actions.md).
+
+### Examples
+
+```php
+// Set key-value
+$resource->set('foo', 'bar');
+
+// Obtain value for key... default to a value if not available
+$value = $resource->get('foo', 'zap');
+
+// Determine if key exists
+if ($resource->has('foo')) {
+    // ...
+}
+
+// Forget (remove) a key-value pair
+$resource->delete('foo');
+
+// Get all key-value pairs
+$data = $resource->all();
+
+// Determine if resource has any key-value pairs set
+if ($resource->isEmpty()) {
+    // ...
+}
+```
