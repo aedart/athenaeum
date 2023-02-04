@@ -83,14 +83,22 @@ $c = Memory::fromGibibyte(1.33)
 The memory unit offers various conversion methods.
 
 ```php
-use Aedart\Utils\Memory;
-
 $gibibyte = Memory::fromGibibyte(1.33);
 
 echo $gibibyte->toMegabyte(); // 1428.1
 echo $gibibyte->toLegacyMegabyte(); // 1361.9
 // ...etc
 ```
+
+You can also use the `to()` method, to specify a string unit to convert the unit into:
+
+```php
+$unit = Memory::unit(5_340_000_000); // bytes
+
+echo $unit->to('gigabyte', 2); // 5.34
+```
+
+**Note** _The second argument is the rounding precision._ 
 
 ## Formatting
 
