@@ -11,9 +11,9 @@ use Aedart\ETags\Preconditions\Resources\GenericResource;
 use Codeception\Configuration;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\File;
 use Illuminate\Support\Carbon;
 use InvalidArgumentException;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Download File Request

@@ -11,6 +11,7 @@ use Aedart\Streams\FileStream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\Helpers\Http\Response;
 use Aedart\Tests\Helpers\Dummies\ETags\Requests\DownloadFileRequest;
+use Aedart\Tests\Helpers\Dummies\ETags\Requests\DownloadGenericFileRequest;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
 use DateTimeInterface;
 use Illuminate\Support\Facades\Route;
@@ -489,5 +490,50 @@ class PartialContentResponseTest extends PreconditionsTestCase
 
         $original = $this->getOriginalFileContent($file);
         $this->assertSame($original, $content, 'Stream content does not match original content!');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function respondsWithCustomRangeUnit(): void
+    {
+        Route::get('/files/{name}', function (DownloadGenericFileRequest $request) {
+            return DownloadStream::for($request->resource)
+                ->setName($request->route('name'));
+        })->name('file.download');
+
+        Route::getRoutes()->refreshNameLookups();
+
+        // ------------------------------------------------------------ //
+
+        $file = 'contacts.txt';
+        $url = route('file.download', [ 'name' => $file ]);
+        $response = $this
+            ->get($url, [
+                'Range' => 'kilobytes=0-2'
+            ])
+            ->assertStatus(Status::PARTIAL_CONTENT)
+            ->assertDownload($file);
+
+        $headers = $response->headers;
+        Response::streamResponse($response);
+
+        // ------------------------------------------------------------ //
+
+        $this->assertTrue($headers->has('Accept-Ranges'), 'Accept Ranges not set');
+        $this->assertSame('kilobytes', $headers->get('Accept-Ranges'), 'Incorrect Accept Ranges header');
+
+        $this->assertTrue($headers->has('Content-Range'), 'Content Range not set');
+        $this->assertSame('kilobytes 0-2/6', $headers->get('Content-Range'), 'Incorrect Content Range header');
+
+        // Funny part... Content-Length is always in bytes... (do not why standard is so strange)
+        // @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length
+        // @see https://httpwg.org/specs/rfc9110.html#field.content-length
+        $this->assertTrue($headers->has('Content-Length'), 'Content Length not set');
+        $this->assertSame('3000', $headers->get('Content-Length'), 'Incorrect Content Length header');
     }
 }

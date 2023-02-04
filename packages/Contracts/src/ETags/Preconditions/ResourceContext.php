@@ -78,7 +78,7 @@ interface ResourceContext extends HasArbitraryData
     /**
      * Returns the size of the resource
      *
-     * @return int
+     * @return int Bytes
      */
     public function size(): int;
 

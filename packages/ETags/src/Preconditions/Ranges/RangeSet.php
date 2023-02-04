@@ -3,7 +3,10 @@
 namespace Aedart\ETags\Preconditions\Ranges;
 
 use Aedart\Contracts\ETags\Preconditions\Ranges\RangeSet as RangeSetInterface;
+use Aedart\Utils\Memory;
+use InvalidArgumentException;
 use Ramsey\Http\Range\Unit\UnitRangeInterface;
+use RuntimeException;
 
 /**
  * Range-Set
@@ -96,5 +99,102 @@ class RangeSet implements RangeSetInterface
     public function getTotalSize()
     {
         return $this->totalSize;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getStartBytes(): int
+    {
+        return $this->convertToBytes(
+            $this->getStart()
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getEndBytes(): int
+    {
+        return $this->convertToBytes(
+            $this->getEnd()
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getLengthInBytes(): int
+    {
+        return $this->convertToBytes(
+            $this->getLength()
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTotalSizeInBytes(): int
+    {
+        return $this->convertToBytes(
+            $this->getTotalSize()
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function contentRange(): string
+    {
+        // The "getRange()" output corresponds to whatever was requested.
+        // It does not always have a clear start and end. Therefore, we
+        // obtain the computed start, end, total... etc.
+
+        $unit = $this->unit();
+        $start = $this->getStart();
+        $end = $this->getEnd();
+        $total = $this->getTotalSize();
+
+        return "{$unit} {$start}-{$end}/{$total}";
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function __toString(): string
+    {
+        return $this->contentRange();
+    }
+
+    /*****************************************************************
+     * Internals
+     ****************************************************************/
+
+    /**
+     * Converts given value to bytes
+     *
+     * @param  mixed  $value
+     * @param  string|null  $unit  [optional] Defaults to this range-set's unit, when none given
+     *
+     * @return int
+     *
+     * @throws RuntimeException If unable to convert value of given unit to bytes
+     */
+    protected function convertToBytes(mixed $value, string|null $unit = null): int
+    {
+        $unit = $unit ?? $this->unit();
+
+        if (!isset($value)) {
+            throw new RuntimeException(sprintf('Missing "value" of %s, for range %s', $unit, $this->getRange()));
+        }
+
+        try {
+            return match ($unit) {
+                'bytes' => (int) $value,
+                default => Memory::from("{$value} {$unit}")->bytes()
+            };
+        } catch (InvalidArgumentException $e) {
+            throw new RuntimeException(sprintf('Unable to convert %s %s to bytes, for range %s', $value, $unit, $this->getRange()), $e->getCode(), $e);
+        }
     }
 }

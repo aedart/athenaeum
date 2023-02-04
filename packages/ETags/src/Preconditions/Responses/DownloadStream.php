@@ -121,7 +121,7 @@ class DownloadStream implements
      * @param string $disposition [optional] Http Content-Disposition, either "inline" or "attachment"
      * @param string $acceptRanges [optional] Accept Ranges Http header value
      * @param array $headers [optional] Http headers
-     * @param int $bufferSize [optional] Attachment / File read buffer size (PHP)
+     * @param int $bufferSize [optional] Attachment / File read buffer size (PHP) in bytes
      */
     public function __construct(
         mixed $attachment = null,
@@ -159,7 +159,7 @@ class DownloadStream implements
      * @param string $disposition [optional] Http Content-Disposition, either "inline" or "attachment"
      * @param string $acceptRanges [optional] Accept Ranges Http header value
      * @param array $headers [optional] Http headers
-     * @param int $bufferSize [optional] Attachment / File read buffer size (PHP)
+     * @param int $bufferSize [optional] Attachment / File read buffer size (PHP) in bytes
      *
      * @return static
      */
@@ -251,7 +251,7 @@ class DownloadStream implements
             'ETag' => $this->hasEtag()
                         ? (string) $this->etag()
                         : null,
-            'Content-Length' => (int) $stream->getSize(),
+            'Content-Length' => (int) $stream->getSize(), // bytes
             'Content-Type' => (string) $stream->mimeType(),
         ]);
 
@@ -288,7 +288,7 @@ class DownloadStream implements
 
         $headers = $this->resolveHeaders([
             'Content-Range' => $this->makeContentRange($range),
-            'Content-Length' => (int) $range->getLength(),
+            'Content-Length' => (int) $range->getLengthInBytes(),
             'Content-Type' => (string) $stream->mimeType(),
         ]);
 
@@ -318,7 +318,7 @@ class DownloadStream implements
         // Obtain stream and meta information...
         $stream = $this->getStream();
         $boundary = $this->boundary();
-        $total = $this->getTotalLength($ranges);
+        $total = $this->contentLengthOfRanges($ranges); // Bytes
 
         // [...] If multiple parts are being transferred, the server [...] MUST generate "multipart/byteranges"
         // content, [...], and a Content-Type header field containing the "multipart/byteranges" media type and its
@@ -862,10 +862,10 @@ class DownloadStream implements
         $bufferSize = $bufferSize ?? $this->bufferSize();
 
         // Set position where to start reading from...
-        $stream->positionAt($range->getStart());
+        $stream->positionAt($range->getStartBytes());
 
         // Whenever the amount of requested bytes is less than buffer, output it.
-        $length = $range->getLength();
+        $length = $range->getLengthInBytes();
         if ($length <= $bufferSize && !$stream->eof()) {
             echo $stream->read($length);
             goto close;
@@ -875,7 +875,7 @@ class DownloadStream implements
         // we need to split output into smaller chunks. If we do not do this, we might
         // exceed PHP's memory limits (for very large files only).
 
-        $end = $range->getEnd();
+        $end = $range->getEndBytes();
         $readLength = $bufferSize;
 
         while (!$stream->eof() && ($position = $stream->tell()) <= $end) {
@@ -985,17 +985,7 @@ class DownloadStream implements
      */
     protected function makeContentRange(RangeSet $range): string
     {
-        // The "$range->getRange()" output corresponds to whatever
-        // was requested. It does not always have a clear start
-        // and end. Therefore, we obtain the computed start, end,
-        // total... etc.
-
-        $unit = $range->unit();
-        $start = $range->getStart();
-        $end = $range->getEnd();
-        $total = $range->getTotalSize();
-
-        return "{$unit} {$start}-{$end}/{$total}";
+        return $range->contentRange();
     }
 
     /**
@@ -1019,16 +1009,18 @@ class DownloadStream implements
     /**
      * Returns the total length requested
      *
+     * @see acceptRanges()
+     *
      * @param CollectionInterface<RangeSet> $ranges
      *
-     * @return int E.g. amount of bytes
+     * @return int In bytes
      */
-    protected function getTotalLength(CollectionInterface $ranges): int
+    protected function contentLengthOfRanges(CollectionInterface $ranges): int
     {
         $total = 0;
         foreach ($ranges as $range) {
             /** @var RangeSet $range */
-            $total += $range->getLength();
+            $total += $range->getLengthInBytes();
         }
 
         return $total;
