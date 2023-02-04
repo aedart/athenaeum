@@ -4,6 +4,8 @@ namespace Aedart\Tests\Helpers\Dummies\ETags\Requests;
 
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\Resources\GenericResource;
+use Aedart\Utils\Memory;
+use Aedart\Utils\Str;
 use Illuminate\Http\Testing\File as TestFile;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -50,8 +52,14 @@ class DownloadGenericFileRequest extends DownloadFileRequest
      */
     protected function findFileOrFail(): File
     {
-        $requested = $this->route('name');
+        $name = $this->route('name');
+        $size = static::$fileSize;
+        $unit = static::$rangeUnit;
 
-        return TestFile::create($requested, static::$fileSize);
+        $content = Str::random(
+            Memory::from("{$size} {$unit}")->bytes()
+        );
+
+        return TestFile::createWithContent($name, $content);
     }
 }
