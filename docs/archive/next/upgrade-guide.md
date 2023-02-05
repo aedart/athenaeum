@@ -19,6 +19,38 @@ You need PHP `v8.1` or higher to run Athenaeum packages.
 
 Please read Laravel's [upgrade guide](https://laravel.com/docs/10.x/upgrade), before continuing here.
 
+### Field Criteria
+
+The `\Aedart\Contracts\Database\Query\FieldCriteria::make()` and `\Aedart\Database\Query\FieldFilter::make()` now have optional `$field` argument.
+This will allow creating instances of custom filters, without specifying a field.
+The instance will NOT be applicable, until a field has been set.
+
+```php
+use Aedart\Filters\Query\Filters\Fields\BelongsToFilter;
+
+$filter = BelongsToFilter::make();
+
+// ...later in your application
+$filter->setField('authors');
+```
+
+### Date Filter
+
+The `\Aedart\Filters\Query\Filters\Fields\DateFilter::allowedDateFormats()` method's visibility has been changed to `public` (_previously `protected`_).
+The method now returns a default set of supported date formats.
+These can also be specified via the `setAllowedDateFormats()` method.
+
+```php
+use Aedart\Filters\Query\Filters\Fields\DateFilter;
+
+$filter = DateFilter::make('event_date')
+    ->setAllowedDateFormats('Y-m-d');
+```
+
+### Api Resource Service Provider
+
+The `ApiResourceServiceProvider` is now an aggregate service provider, which automatically registers the `ETagsServiceProvider` and the new `JsonResourceServiceProvider` (_the previous version of `ApiResourceServiceProvider`_).
+
 ### Audit Package
 
 The Audit package has been slightly refactored. As a result, a few components have been deprecated and replaced with improved versions.
