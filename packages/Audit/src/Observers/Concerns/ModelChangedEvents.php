@@ -29,7 +29,7 @@ trait ModelChangedEvents
      * Dispatches model has changed event
      *
      * @param  Model  $model  The model that has changed
-     * @param  string  $type  [optional] The event type
+     * @param  string  $type  The event type
      * @param array|null $original [optional] Original data (attributes) before change occurred.
      *                                        Default's to given model's original data, if none given.
      * @param array|null $changed [optional] Changed data (attributes) after change occurred.
@@ -79,7 +79,7 @@ trait ModelChangedEvents
      * Dispatches multiple models changed event
      *
      * @param  Collection<Model>|Model[]  $models The changed models
-     * @param string $type [optional] The event type
+     * @param string $type The event type
      * @param array|null $original [optional] Original data (attributes) before change occurred.
      *                                        Default's to given model's original data, if none given.
      * @param array|null $changed [optional] Changed data (attributes) after change occurred.
@@ -142,7 +142,7 @@ trait ModelChangedEvents
      * Creates a new "model has changed" event
      *
      * @param  Model  $model  The model that has changed
-     * @param  string  $type  [optional] The event type
+     * @param  string  $type  The event type
      * @param  array|null  $original  [optional] Original data (attributes) before change occurred.
      *                                        Default's to given model's original data, if none given.
      * @param  array|null  $changed  [optional] Changed data (attributes) after change occurred.
