@@ -979,6 +979,8 @@ class DownloadStream implements
     /**
      * Creates Content Range header value
      *
+     * @see https://httpwg.org/specs/rfc9110.html#field.content-range
+     *
      * @param RangeSet $range
      *
      * @return string E.g. bytes 21010-47021/47022
@@ -986,24 +988,6 @@ class DownloadStream implements
     protected function makeContentRange(RangeSet $range): string
     {
         return $range->contentRange();
-    }
-
-    /**
-     * Generates a new boundary separator
-     *
-     * @see https://www.rfc-editor.org/rfc/rfc2046.html#section-5.1.1
-     *
-     * @param int $length [optional] Max 70, acc. to rfc2046
-     *
-     * @return string Boundary separator without "--" (leading hyphens) prefix
-     */
-    protected function makeBoundarySeparator(int $length = 16): string
-    {
-        if ($length > 70) {
-            throw new RuntimeException('Length of boundary cannot be more than 70 characters');
-        }
-
-        return Str::random($length);
     }
 
     /**
@@ -1024,5 +1008,23 @@ class DownloadStream implements
         }
 
         return $total;
+    }
+
+    /**
+     * Generates a new boundary separator
+     *
+     * @see https://www.rfc-editor.org/rfc/rfc2046.html#section-5.1.1
+     *
+     * @param int $length [optional] Max 70, acc. to rfc2046
+     *
+     * @return string Boundary separator without "--" (leading hyphens) prefix
+     */
+    protected function makeBoundarySeparator(int $length = 16): string
+    {
+        if ($length > 70) {
+            throw new RuntimeException('Length of boundary cannot be more than 70 characters');
+        }
+
+        return Str::random($length);
     }
 }
