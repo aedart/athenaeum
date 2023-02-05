@@ -301,6 +301,7 @@ module.exports.sidebar = function(){
                                 'http/api/middleware/',
                                 'http/api/middleware/must-be-json',
                                 'http/api/middleware/fields-to-select',
+                                'http/api/middleware/remove-response-payload',
                             ]
                         }
                     ]

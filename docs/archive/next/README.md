@@ -90,6 +90,11 @@ $processor = SortingProcessor::make()
         });
 ```
 
+### Remove Response Payload Middleware
+
+A new middleware has been added for the Http Api package, which is able to remove a response's body, when a custom query parameter is available.
+See [middleware documentation](./http/api/middleware/remove-response-payload.md) for details.
+
 ### Stream `hash()` accept hashing options
 
 Streams now accept and apply [hashing options](https://www.php.net/manual/en/function.hash-init) in `hash()` method. This was previously also supported, but required PHP `v8.1`.
