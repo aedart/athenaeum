@@ -714,7 +714,6 @@ class DownloadStream implements
             $data instanceof StreamInterface => FileStream::makeFrom($data),
             $data instanceof SplFileInfo => FileStream::open($data->getRealPath(), 'r'),
             is_string($data) && file_exists($data) => FileStream::open($data, 'r'),
-            is_string($data) => FileStream::openMemory()->append($data)->positionToStart(),
             default => throw new RuntimeException('Unable to resolve file stream from attachment')
         };
     }
