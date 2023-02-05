@@ -20,7 +20,7 @@ Its constructor method accepts the following arguments:
 * **`DateTimeInterface|null $lastModifiedDate = null`: (_optional_) Resource's last modified date.**
 * `int $size = 0`: (_optional_) Size of resource. (_Applicable only if your request supports `If-Range` and `Range` requests._)
 * `callable|null $determineStateChangeSuccess = null`: (_optional_) Callback that determines if a state change has already succeeded on the resource.
-* `string $rangeUnit = 'bytes'`: (_optional_) Allowed or supported [range unit](https://httpwg.org/specs/rfc9110.html#range.units), e.g. `"bytes"`.
+* `string $rangeUnit = 'bytes'`: (_optional_) _See [Accept-Ranges](./download-stream.md#accept-ranges)_.
 * `int $maxRangeSets = 5`: (_optional_) Maximum allowed [range sets](https://httpwg.org/specs/rfc9110.html#rule.ranges-specifier).
 
 Most of the arguments are optional. You do not have to satisfy all of them. This is especially true when your requested resource is not intended to support `If-Range` and `Range` preconditions.
@@ -101,7 +101,7 @@ Your resulting response should therefore include the full file content.
 
 ### Size and Range Response
 
-You can specify a file's size using the `$size` constructor argument.
+You can specify a file's size (_in bytes_) using the `$size` constructor argument.
 When you do so, the `ResourceContext` is automatically marked to support `Range` and `If-Range` requests.  
 
 ```php{5}
@@ -180,7 +180,7 @@ Route::get('/files/{name}', function (DownloadFileRequest $request) {
 });
 ```
 
-_See source code of `DownloadStream` response helper, for additional information._
+_See [Download Stream](./download-stream.md) response helper, for additional information._
 
 #### Example Response
 
@@ -203,6 +203,7 @@ Last-Modified: Tue, 15 Jan 2023 08:58:08 GMT
 Content-Range: bytes 0-99/2087
 Content-Length: 100
 Content-Type: plain/text
+Content-Disposition: attachment; filename=contacts.txt
 
 (100 bytes of partial text file... not shown here)
 ```

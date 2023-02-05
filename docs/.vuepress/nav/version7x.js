@@ -213,6 +213,7 @@ module.exports.sidebar = function(){
                             ]
                         },
                         'etags/evaluator/range-validator',
+                        'etags/evaluator/download-stream',
                     ]
                 },
                 'etags/macros',
