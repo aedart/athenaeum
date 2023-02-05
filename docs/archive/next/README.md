@@ -62,6 +62,34 @@ Route::get('/downloads/{file}', function (DownloadFileRequest $request) {
 });
 ```
 
+### Custom Queries for Search and Sorting Filters
+
+The `SearchFilter` and `SearchProcessor` now support custom search callbacks.
+
+```php
+use Aedart\Filters\Processors\SearchProcessor;
+use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+
+$processor = SearchProcessor::make()
+        ->columns(function(Builder|EloquentBuilder $query, string $search) {
+            return $query
+                ->orWhere($column, 'like', "{$search}%");
+        });
+```
+
+The same applies for the `SortFilter` and `SortingProcessor`.
+
+```php
+use Aedart\Filters\Processors\SortingProcessor;
+
+$processor = SortingProcessor::make()
+        ->sortable([ 'email', 'name'])
+        ->withSortingCallback('email', function($query, $column, $direction) {
+            return $query->orderBy("users.{$column}", $direction);
+        });
+```
+
 ### Stream `hash()` accept hashing options
 
 Streams now accept and apply [hashing options](https://www.php.net/manual/en/function.hash-init) in `hash()` method. This was previously also supported, but required PHP `v8.1`.

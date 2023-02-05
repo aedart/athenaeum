@@ -135,3 +135,51 @@ Should you require more advanced formatting, then you are encouraged to extend t
 
 Furthermore, you may also specify a different symbol for distinguishing between multiple properties and sorting direction, by changing the `$delimiter` property.
 See the source code for additional information.
+
+### Custom Sorting Queries
+
+When you require special sorting logic, you can specify custom queries for each column.
+These queries have to be set apart from the sortable properties.
+
+```php
+$processor = SortingProcessor::make()
+        ->sortable([ 'email', 'name'])
+        
+        // Custom query per column via an array...
+        ->withSortingCallbacks([
+            'name' => function($query, $column, $direction) {
+                return $query->orderBy("users.{$column}", $direction);
+            },
+            
+            // ...etc
+        ])
+
+        // Or just for a single column...
+        ->withSortingCallback('email', function($query, $column, $direction) {
+            return $query->orderBy("users.{$column}", $direction);
+        });
+```
+
+You can also wrap your custom sorting query into an invokable class, e.g.:
+
+```php
+use Aedart\Filters\Query\Filters\BaseSortingQuery;
+use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+
+class MyCustomSorting extends BaseSortingQuery
+{
+    public function __invoke(
+        Builder|EloquentBuilder $query,
+        string $column,
+        string $direction = 'asc'
+    ): Builder|EloquentBuilder
+    {
+        return $query->orderBy("users.{$column}", $direction);
+    }
+}
+
+// ...In your sorting processor
+$processor = SortingProcessor::make()
+        ->withSortingCallback('name', new MyCustomSorting());
+```

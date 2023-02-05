@@ -43,3 +43,43 @@ return [
         ->maxSearchLength(150),
 ];
 ```
+
+### Custom Queries
+
+You may also specify custom queries instead of column names, to build a more advanced search query.
+The callback is given the current query scope and search term as arguments.
+Furthermore, the callback MUST return a query instance.
+
+```php
+use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+
+$processor = SearchProcessor::make()
+        ->columns(function(Builder|EloquentBuilder $query, string $search) {
+            return $query
+                ->orWhere($column, 'like', "{$search}%");
+        });
+```
+
+You may also wrap your custom search query into an invokable class, e.g.:
+
+```php
+use Aedart\Filters\Query\Filters\BaseSearchQuery;
+use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+
+class MyCustomSearch extends BaseSearchQuery
+{
+    public function __invoke(
+        Builder|EloquentBuilder $query,
+        string $search
+    ): Builder|EloquentBuilder
+    {
+            return $query->orWhere($column, 'like', "{$search}%");
+    }
+}
+
+// ...In your search processor
+$processor = SearchProcessor::make()
+        ->columns(new MyCustomSearch());
+```
