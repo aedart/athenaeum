@@ -14,11 +14,11 @@ In your Eloquent model, add the `RecordsChanges` trait, to enable automatic reco
 namespace Acme\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Aedart\Audit\Traits\RecordsChanges;
+use Aedart\Audit\Concerns;
 
 class Category extends Model
 {
-    use RecordsChanges;
+    use Concerns\ChangeRecording;
 }
 ```
 
@@ -45,7 +45,7 @@ If your model processes sensitive attributes, e.g. passwords, and you do not wis
 ```php
 class User extends Model
 {
-    use RecordsChanges;
+    use Concerns\ChangeRecording;
     
     protected array|null $hiddenInAuditTrail = [
         'password'
@@ -58,7 +58,7 @@ Alternatively, you may also define attributes to be hidden by overwriting the `a
 ```php
 class User extends Model
 {
-    use RecordsChanges;
+    use Concerns\ChangeRecording;
     
     public function attributesToHideForAudit(): array
     {
@@ -80,7 +80,7 @@ The second argument (_$type_) is the name of the event, e.g. `created, updated, 
 ```php
 class Category extends Model
 {
-    use RecordsChanges;
+    use Concerns\ChangeRecording;
     
     public function formatChangedData(array|null $filtered, string $type): array|null
     {
@@ -108,4 +108,4 @@ $category
 
 ## Onward
 
-For additional possibilities to format and customise audit trail entries, please review the source code of `\Aedart\Audit\Traits\RecordsChanges`.
+For additional possibilities to format and customise audit trail entries, please review the source code of `\Aedart\Audit\Concerns\ChangeRecording`.
