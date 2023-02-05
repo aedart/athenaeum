@@ -33,6 +33,35 @@ These are the highlights of the latest major version of Athenaeum.
 PHP version `v8.1` is now the minimum required version for Athenaeum.
 [Laravel `v10.x`](https://laravel.com/docs/10.x/releases) packages are now used.
 
+### Http Conditional Requests
+
+The [ETags package](./etags/README.md) has been upgraded to offer support for [RFC 9110's conditional requests](https://httpwg.org/specs/rfc9110.html#conditional.requests).
+The following preconditions are supported by default:
+
+* [If-Match](https://httpwg.org/specs/rfc9110.html#field.if-match)
+* [If-Unmodified-Since](https://httpwg.org/specs/rfc9110.html#field.if-unmodified-since)
+* [If-None-Match](https://httpwg.org/specs/rfc9110.html#field.if-none-match)
+* [If-Modified-Since](https://httpwg.org/specs/rfc9110.html#field.if-modified-since)
+* [If-Range](https://httpwg.org/specs/rfc9110.html#field.if-range)
+
+See [documentation](./etags/evaluator/README.md) for details.
+
+### `DownlaodStream` Response Helper
+
+As a part of the [ETags package](./etags/evaluator/download-stream.md), a `DownlaodStream` response helper is now available.
+It is able to create streamed response for `Range` requests.
+
+```php
+use Illuminate\Support\Facades\Route;
+use Aedart\ETags\Preconditions\Responses\DownloadStream;
+
+Route::get('/downloads/{file}', function (DownloadFileRequest $request) {
+
+    return DownloadStream::for($request->resource)
+        ->setName($request->route('file'));
+});
+```
+
 ### Stream `hash()` accept hashing options
 
 Streams now accept and apply [hashing options](https://www.php.net/manual/en/function.hash-init) in `hash()` method. This was previously also supported, but required PHP `v8.1`.
@@ -43,10 +72,14 @@ PHP version check is no longer performed internally. See [documentation](./strea
 File streams can now have their content synchronised to file, via the `sync()` method.
 See [example](./streams/usage/sync.md).
 
-### TODO: Other significant features, changes or defect fixes...
+### `to()` memory unit method
 
-_Come back later to review new features, changes and fixes..._
+The [Memory](./utils/memory.md) utility now offers a `to()` method, which allows specifying a string unit to convert the memory unit into.
 
+```php
+echo Memory::unit(6_270_000_000) // bytes
+    ->to('gigabyte', 2); // 6.27
+```
 
 ## Changelog
 
