@@ -136,13 +136,10 @@ class MyFilter extends BaseFieldFilter
     {
         $operator = $this->operator();
 
-        switch ($operator) {
-            case 'special':
-                return $query->where($this->field(), '%', $this->value());
-
-            default:
-                return $this->buildDefaultConstraint($query);
-        }
+        return match ($operator) {
+            'special' => $query->where($this->field(), '%', $this->value()),
+            default => $this->buildDefaultConstraint($query)
+        };
     }
 
     public function operatorAliases(): array
