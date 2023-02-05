@@ -111,13 +111,6 @@ class DownloadStream implements
     protected string|null $boundary = null;
 
     /**
-     * Content-Type of attachment
-     *
-     * @var string|null
-     */
-    protected string|null $contentType = null;
-
-    /**
      * Creates a new download stream instance
      *
      * @param mixed|null $attachment [optional] The file to be attached to be streamed
@@ -259,7 +252,7 @@ class DownloadStream implements
                         ? (string) $this->etag()
                         : null,
             'Content-Length' => (int) $stream->getSize(), // bytes
-            'Content-Type' => $this->makeContentType($stream),
+            'Content-Type' => (string) $stream->mimeType(),
         ]);
 
         // Finally, create response
@@ -296,7 +289,7 @@ class DownloadStream implements
         $headers = $this->resolveHeaders([
             'Content-Range' => $this->makeContentRange($range),
             'Content-Length' => $range->getLengthInBytes(),
-            'Content-Type' => $this->makeContentType($stream),
+            'Content-Type' => (string) $stream->mimeType(),
         ]);
 
         // Finally, create response
@@ -668,42 +661,6 @@ class DownloadStream implements
     }
 
     /**
-     * Set Content-Type of attachment
-     *
-     * @param  string|null  $mimeType
-     *
-     * @return self
-     */
-    public function withContentType(string|null $mimeType): static
-    {
-        $this->contentType = $mimeType;
-
-        return $this;
-    }
-
-    /**
-     * Returns Content-Type for given stream.
-     *
-     * If a custom Content-Type was set via {@see withContentType()}, then
-     * it will be returned by this method. Otherwise, the stream's mime-type
-     * is returned.
-     *
-     * @param  FileStreamInterface & Detectable  $stream
-     *
-     * @return string
-     *
-     * @throws MimeTypeDetectionException
-     */
-    public function makeContentType(FileStreamInterface & Detectable $stream): string
-    {
-        if (isset($this->contentType)) {
-            return $this->contentType;
-        }
-
-        return (string) $stream->mimeType();
-    }
-
-    /**
      * Set custom callback to resolve stream for attachment
      *
      * @see getStream
@@ -969,8 +926,11 @@ class DownloadStream implements
         //
         $separator = "--{$boundary}";
 
-        // Content Type of each body part
-        $contentType = "Content-Type: {$this->makeContentType($stream)}";
+        // Resolve Content-Type for each body part. Use Content-Type from the headers,
+        // if any was set. Otherwise, use stream's mime-type.
+        // (Unable to use the "resolveHeaders()" here...)
+        $mimeType = $this->headers->get('Content-Type', (string) $stream->mimeType());
+        $contentType = "Content-Type: {$mimeType}";
 
         foreach ($ranges as $range) {
             /** @var RangeSet $range */
