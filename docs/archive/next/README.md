@@ -46,9 +46,9 @@ The following preconditions are supported by default:
 
 See [documentation](./etags/evaluator/README.md) for details.
 
-### `DownlaodStream` Response Helper
+### `DownloadStream` Response Helper
 
-As a part of the [ETags package](./etags/evaluator/download-stream.md), a `DownlaodStream` response helper is now available.
+As a part of the [ETags package](./etags/evaluator/download-stream.md), a `DownloadStream` response helper is now available.
 It is able to create streamed response for `Range` requests.
 
 ```php
