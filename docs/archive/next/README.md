@@ -95,6 +95,18 @@ $processor = SortingProcessor::make()
 A new middleware has been added for the Http Api package, which is able to remove a response's body, when a custom query parameter is available.
 See [middleware documentation](./http/api/middleware/remove-response-payload.md) for details.
 
+### Attach File Stream for Http Client
+
+The Http Client now supports uploading a file stream.
+
+```php
+use Aedart\Streams\FileStream;
+
+$response = $client  
+        ->attachStream('2023_annual.pdf', FileStream::open('/reports/2023_annual.pdf', 'r'))
+        ->post('/reports/annual');
+```
+
 ### Stream `hash()` accept hashing options
 
 Streams now accept and apply [hashing options](https://www.php.net/manual/en/function.hash-init) in `hash()` method. This was previously also supported, but required PHP `v8.1`.

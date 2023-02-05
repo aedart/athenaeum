@@ -19,8 +19,7 @@ The method accepts four arguments:
 
 ```php
 $response = $client  
-        ->attachFile('annual_report', '/reports/2020_annual.pdf')
-        ->multipartFormat()
+        ->attachFile('annual_report', '/reports/2023_annual.pdf')
         ->post('/reports/annual');
 ```
 
@@ -39,9 +38,8 @@ $response = $client
             $attachment
                 ->name('annual_report')
                 ->contents(fopen('data.csv', 'r'))
-                ->filename('2020_annual.csv');
+                ->filename('2023_annual.csv');
         })
-        ->multipartFormat()
         ->post('/reports/annual');
 ```
 
@@ -74,9 +72,21 @@ $response = $client
                     ->filename('online-users.png');
             },
         ])
-        ->multipartFormat()
         ->post('/reports/annual');
 ``` 
+
+### Attach Stream
+
+The client also supports attaching a file stream, if needed.
+This can be done via the `attachStream()` method.
+
+```php
+use Aedart\Streams\FileStream;
+
+$response = $client  
+        ->attachStream('2023_annual.pdf', FileStream::open('/reports/2023_annual.pdf', 'r'))
+        ->post('/reports/annual');
+```
 
 ### Create Attachment
 
@@ -102,7 +112,6 @@ $response = $client
             $usersReportFile,
             $trendingChartFile,
         ])
-        ->multipartFormat()
         ->post('/reports/annual');
 ```
 
@@ -112,7 +121,6 @@ The `withAttachment()` method also accepts an `Attachment` instance directly.
 ```php
 $response = $client  
         ->withAttachment($annualReportFile)
-        ->multipartFormat()
         ->post('/reports/annual');
 ```
 :::
