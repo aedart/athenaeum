@@ -1,7 +1,11 @@
 # Athenaeum ETags
 
-Provides a "profile" based approach to generate [ETags](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag) of content, in your Laravel application.
-The default provided implementation is able to generate ETags for [weak and strong comparisons](https://httpwg.org/specs/rfc9110.html#entity.tag.comparison).
+This package provides a "profile" based approach to generate [ETags](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag), and an evaluator to deal with [Http Conditional Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Conditional_requests), for your Laravel application.
+
+
+## ETags Examples
+
+### Generate
 
 ```php
 use Aedart\ETags\Facades\Generator;
@@ -20,7 +24,7 @@ $etag = Generator::makeWeak($content);
 echo (string) $etag; // W/"0815"
 ```
 
-## Parsing
+### Parsing
 
 To parse ETags from Http headers, you can use the `parse()` method. It returns a collection of `ETag` instances.
 
@@ -33,9 +37,9 @@ foreach ($collection as $etag) {
 }
 ```
 
-## Compare
+### Compare
 
-Lastly, ETags can also be matched against each other, in accordance with [RFC9110](https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2).
+ETags can also be matched against each other, in accordance with [RFC9110](https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2).
 
 #### Using Collection
 
@@ -62,6 +66,37 @@ $etagB = Generator::parseSingle('W/"0815"');
 echo $etagA->matches($etagB, true); // false - strong comparison
 echo $etagA->matches($etagB);       // true - weak comparison
 ```
+
+## Evaluate Http Preconditions Examples
+
+The `Evaluator` component is able to process the incoming request against all the defined [RFC9110 preconditions](https://httpwg.org/specs/rfc9110.html#preconditions), in accordance with specified [evaluation precedence](https://httpwg.org/specs/rfc9110.html#precedence).
+Depending on the precondition requested, if it passes or fails, the request can either proceed or it will be aborted using customisable Http Exceptions.
+Your Laravel application should do the rest, whenever the request is aborted.
+
+```php
+use Aedart\ETags\Preconditions\Evaluator;
+use Aedart\ETags\Preconditions\Resources\GenericResource;
+
+// Process If-Match, If-None-Match, If-Modified-Since... etc
+// Depending on condition's pass/fail, the request can be aborted via
+// an appropriate Http Exception, or proceed to your logic...
+$resource = Evaluator::make($request)
+    ->evaluate(new GenericResource(
+        data: $model,
+        etag: $model->getStrongEtag(),
+        lastModifiedDate: $model->updated_at
+    ));
+```
+
+To summarise, the following preconditions are supported:
+
+* [If-Match](https://httpwg.org/specs/rfc9110.html#field.if-match)
+* [If-None-Match](https://httpwg.org/specs/rfc9110.html#field.if-none-match)
+* [If-Modified-Since](https://httpwg.org/specs/rfc9110.html#field.if-modified-since)
+* [If-Unmodified-Since](https://httpwg.org/specs/rfc9110.html#field.if-unmodified-since)
+* [If-Range](https://httpwg.org/specs/rfc9110.html#field.if-range)
+
+The `Evaluator` also supports adding your own custom preconditions to be evaluated, should you need such.
 
 ## Official Documentation
 

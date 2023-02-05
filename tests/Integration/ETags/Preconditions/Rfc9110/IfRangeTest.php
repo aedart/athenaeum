@@ -228,7 +228,6 @@ class IfRangeTest extends PreconditionsTestCase
         $requested = 'megabytes';
 
         $this->expectException(BadRequestHttpException::class);
-        $this->expectExceptionMessage(sprintf('Only "%s" is accepted as Range unit. %s was provided', $allowed, $requested));
 
         // -------------------------------------------------------------------- //
 

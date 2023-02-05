@@ -3,11 +3,14 @@
 namespace Aedart\ETags\Preconditions\Resources;
 
 use Aedart\Contracts\ETags\ETag;
+use Aedart\Contracts\ETags\Preconditions\Ranges\RangeSet;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
+use Aedart\ETags\Facades\Generator;
 use Aedart\Utils\Concerns;
 use DateTimeInterface;
+use Illuminate\Support\Carbon;
 use Ramsey\Collection\CollectionInterface;
-use Ramsey\Http\Range\Unit\UnitRangeInterface;
+use SplFileInfo;
 
 /**
  * Generic Resource
@@ -24,7 +27,7 @@ class GenericResource implements ResourceContext
     /**
      * Requested range sets
      *
-     * @var CollectionInterface<UnitRangeInterface>|null
+     * @var CollectionInterface<RangeSet>|null
      */
     protected CollectionInterface|null $ranges = null;
 
@@ -50,6 +53,43 @@ class GenericResource implements ResourceContext
         protected string $rangeUnit = 'bytes',
         protected int $maxRangeSets = 5
     ) {
+    }
+
+    /**
+     * Creates a new "generic" resource for given file
+     *
+     * @param SplFileInfo $file
+     * @param ETag|null $etag [optional] Resolves to a checksum of file, when none given.
+     * @param DateTimeInterface|null $lastModifiedDate [optional] Resolve to file's last modified date, when none given.
+     * @param callable|null $determineStateChangeSuccess [optional] Callback that determines if a state change
+     *                                                   has already succeeded on the resource. Callback MUST
+     *                                                   return a boolean value.
+     * @param string $rangeUnit [optional] Allowed or supported range unit, e.g. bytes.
+     * @param int $maxRangeSets [optional] Maximum allowed range sets.
+     * @return static
+     */
+    public static function forFile(
+        SplFileInfo $file,
+        ETag|null $etag = null,
+        DateTimeInterface|null $lastModifiedDate = null,
+        callable|null $determineStateChangeSuccess = null,
+        string $rangeUnit = 'bytes',
+        int $maxRangeSets = 5
+    ): static {
+        // Resolve etag and last modified date, when not given.
+        $etag = $etag ?? static::makeEtagForFile($file);
+        $lastModifiedDate = $lastModifiedDate ?? Carbon::createFromTimestamp($file->getMTime());
+
+        // Return new instance
+        return new static(
+            data: $file,
+            etag: $etag,
+            lastModifiedDate: $lastModifiedDate,
+            size: $file->getSize(),
+            determineStateChangeSuccess: $determineStateChangeSuccess,
+            rangeUnit: $rangeUnit,
+            maxRangeSets: $maxRangeSets
+        );
     }
 
     /**
@@ -142,7 +182,7 @@ class GenericResource implements ResourceContext
     /**
      * @inheritDoc
      */
-    public function setRequestedRanges(?CollectionInterface $ranges = null): static
+    public function setRequestedRanges(CollectionInterface|null $ranges = null): static
     {
         $this->ranges = $ranges;
 
@@ -173,5 +213,19 @@ class GenericResource implements ResourceContext
     public function mustIgnoreRange(): bool
     {
         return !$this->mustProcessRange();
+    }
+
+    /**
+     * Generates Etag for file
+     *
+     * @param SplFileInfo $file
+     *
+     * @return ETag
+     */
+    protected static function makeEtagForFile(SplFileInfo $file): ETag
+    {
+        $checksum = hash_file('xxh128', $file->getRealPath());
+
+        return Generator::makeRaw($checksum);
     }
 }

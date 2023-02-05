@@ -166,6 +166,53 @@ class Unit implements
         };
     }
 
+    /**
+     * Returns this unit's value (bytes) to the specified unit
+     *
+     * @param  string  $unit  [optional] Case insensitive unit, e.g. megabytes
+     * @param  int  $precision  [optional]
+     *
+     * @return int|float
+     *
+     * @throws InvalidArgumentException If unit is not supported
+     */
+    public function to(string $unit = 'bytes', int $precision = 1): int|float
+    {
+        $unit = strtolower($unit);
+
+        return match ($unit) {
+            // byte
+            'b', 'byte', 'bytes' => $this->bytes(),
+
+            // kilobyte / kibibyte
+            'k', 'kb', 'kilobyte', 'kilobytes' => $this->toKilobyte($precision),
+            'ki', 'kib', 'kibibyte', 'kibibytes' => $this->toKibibyte($precision),
+
+            // megabyte / mebibyte
+            'm', 'mb', 'megabyte', 'megabytes' => $this->toMegabyte($precision),
+            'mi', 'mib', 'mebibyte', 'mebibytes' => $this->toMebibyte($precision),
+
+            // Gigabyte / Gibibyte
+            'g', 'gb', 'gigabyte', 'gigabytes' => $this->toGigabyte($precision),
+            'gi', 'gib', 'gibibyte', 'gibibytes' => $this->toGibibyte($precision),
+
+            // Terabyte / Tebibyte
+            't', 'tb', 'terabyte', 'terabytes' => $this->toTerabyte($precision),
+            'ti', 'tib', 'tebibyte', 'tebibytes' => $this->toTebibyte($precision),
+
+            // Petabyte / Pebibyte
+            'p', 'pb', 'petabyte', 'petabytes' => $this->toPetabyte($precision),
+            'pi', 'pib', 'pebibyte', 'pebibytes' => $this->toPebibyte($precision),
+
+            // Exabyte / Exbibyte
+            'e', 'eb', 'exabyte', 'exabytes' => $this->toExabyte($precision),
+            'ei', 'eib', 'exbibyte', 'exbibytes' => $this->toExbibyte($precision),
+
+            // Fail if unit is known...
+            default => throw new InvalidArgumentException(sprintf('Unsupported "%s" unit. Cannot convert %s bytes to "%s"', $unit, $this->bytes(), $unit))
+        };
+    }
+
     /*****************************************************************
      * Operations
      ****************************************************************/
@@ -213,7 +260,7 @@ class Unit implements
     /*****************************************************************
      * Bytes
      ****************************************************************/
-    
+
     /**
      * Returns unit's value in bytes
      *

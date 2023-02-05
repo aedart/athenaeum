@@ -2,11 +2,15 @@
 
 namespace Aedart\ETags\Preconditions\Validators;
 
+use Aedart\Contracts\ETags\Preconditions\Ranges\RangeSet as RangeSetInterface;
 use Aedart\Contracts\ETags\Preconditions\RangeValidator as RangeValidatorInterface;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\Concerns;
+use Aedart\ETags\Preconditions\Ranges\RangeSet;
 use Aedart\ETags\Preconditions\Validators\Exceptions\RangeNotSatisfiable;
 use Aedart\ETags\Preconditions\Validators\Exceptions\RangeUnitNotSupported;
+use Aedart\Utils\Memory;
+use InvalidArgumentException;
 use Ramsey\Collection\CollectionInterface;
 use Ramsey\Http\Range\Exception\InvalidRangeSetException;
 use Ramsey\Http\Range\Exception\InvalidRangeUnitException;
@@ -72,7 +76,10 @@ class RangeValidator implements RangeValidatorInterface
             $this->verifyAmountOfRanges($this->maximumRangeSets(), $unit, $collection);
 
             // Lastly, each range must be verified...
-            return $this->verifyRanges($unit, $collection);
+            return $this->wrapCollectionValues(
+                unit: $unit,
+                collection: $this->verifyRanges($unit, $collection)
+            );
         } catch (NoRangeException $e) {
             // Edge case: no "Range" header available in request. Or [...] An origin server MUST
             // ignore a Range header field that contains a range unit it does not understand [...]
@@ -109,6 +116,24 @@ class RangeValidator implements RangeValidatorInterface
     /*****************************************************************
      * Internals
      ****************************************************************/
+
+    /**
+     * Wraps collection's values into range-set instances
+     *
+     * @param UnitInterface $unit
+     * @param CollectionInterface|null $collection [optional]
+     *
+     * @return CollectionInterface<RangeSetInterface>
+     */
+    protected function wrapCollectionValues(UnitInterface $unit, CollectionInterface|null $collection = null): CollectionInterface
+    {
+        /** @var CollectionInterface<UnitRangeInterface> $collection */
+        $collection = $collection ?? $unit->getRanges();
+
+        return $collection->map(function (UnitRangeInterface $unitRange) use ($unit) {
+            return RangeSet::from($unit->getRangeUnit(), $unitRange);
+        });
+    }
 
     /**
      * Verifies that ranges do not overlap or exceed resource's total size
@@ -217,7 +242,7 @@ class RangeValidator implements RangeValidatorInterface
      * Extracts unit(s) from the "Range" header field
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $totalSize
+     * @param  int  $totalSize Resource's total size in bytes
      *
      * @return UnitInterface
      *
@@ -225,14 +250,26 @@ class RangeValidator implements RangeValidatorInterface
      */
     protected function extractUnitFromRequest($request, int $totalSize): UnitInterface
     {
-        $factory = $this->makeUnitFactory();
-
         $range = $request->header('Range', '');
         if (empty($range)) {
             throw new NoRangeException();
         }
 
-        return $factory->getUnit($range, $totalSize);
+        try {
+            // Convert the total size of bytes to the allowed range unit (if supported).
+            // NOTE: While RFC 9110 does accept "other-range", the underlying implementation
+            // only supports "int-range" (DIGITS 0-9).
+            // @see https://httpwg.org/specs/rfc9110.html#rule.int-range
+            // @see https://httpwg.org/specs/rfc9110.html#rule.other-range
+            $total = Memory::unit($totalSize)
+                ->to($this->allowedRangeUnit(), 0);
+
+            return $this
+                ->makeUnitFactory()
+                ->getUnit($range, $total);
+        } catch (InvalidArgumentException $e) {
+            throw new RangeUnitNotSupported(sprintf('Unable to convert resource size (bytes) to "%s"', $this->allowedRangeUnit()), $e->getCode(), $e);
+        }
     }
 
     /**

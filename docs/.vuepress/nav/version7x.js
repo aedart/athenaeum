@@ -169,16 +169,53 @@ module.exports.sidebar = function(){
                 'etags/',
                 'etags/install',
                 'etags/setup',
-                'etags/usage',
                 {
-                    title: 'Generators',
+                    title: 'ETags usage',
                     collapsable: true,
                     children: [
-                        'etags/generators/',
-                        'etags/generators/custom',
+                        'etags/etags/',
+                        {
+                            title: 'Generators',
+                            collapsable: true,
+                            children: [
+                                'etags/etags/generators/',
+                                'etags/etags/generators/custom',
+                            ]
+                        },
+                        'etags/etags/eloquent',
                     ]
                 },
-                'etags/eloquent',
+                {
+                    title: 'Http Request Preconditions',
+                    collapsable: true,
+                    children: [
+                        'etags/evaluator/',
+                        'etags/evaluator/resource-context',
+                        'etags/evaluator/preconditions',
+                        'etags/evaluator/actions',
+                        {
+                            title: 'RFC 9110',
+                            collapsable: true,
+                            children: [
+                                'etags/evaluator/rfc9110/if-match',
+                                'etags/evaluator/rfc9110/if-unmodified-since',
+                                'etags/evaluator/rfc9110/if-none-match',
+                                'etags/evaluator/rfc9110/if-modified-since',
+                                'etags/evaluator/rfc9110/if-range',
+                            ]
+                        },
+                        {
+                            title: 'Extensions',
+                            collapsable: true,
+                            children: [
+                                'etags/evaluator/extensions/',
+                                'etags/evaluator/extensions/range',
+                            ]
+                        },
+                        'etags/evaluator/range-validator',
+                        'etags/evaluator/download-stream',
+                    ]
+                },
                 'etags/macros',
             ]
         },

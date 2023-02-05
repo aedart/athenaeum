@@ -374,7 +374,7 @@ class EvaluatorTest extends PreconditionsTestCase
     public function failsWhenIndexOfPreconditionNotFound(): void
     {
         $this->expectException(LogicException::class);
-        $this->expectErrorMessage('Unable to find unknown_precondition_class_path precondition');
+        $this->expectExceptionMessage('Unable to find unknown_precondition_class_path precondition');
 
         // -------------------------------------------------------------------------------- //
 

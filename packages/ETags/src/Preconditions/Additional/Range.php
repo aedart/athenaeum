@@ -31,8 +31,11 @@ class Range extends BasePrecondition
         // [...] A server MUST ignore a Range header field received with a request method that is unrecognized
         // or for which range handling is not defined. For this specification, GET is the only method for
         // which range handling is defined. [...]
+        $headers = $this->getHeaders();
+
         return $resource->supportsRangeRequest()
-            && $this->getHeaders()->has('Range')
+            && $headers->has('Range')
+            && !$headers->has('If-Range')
             && $this->getMethod() === 'GET';
     }
 
