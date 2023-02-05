@@ -36,7 +36,7 @@ interface FieldCriteria extends Criteria
     /**
      * Creates a new field criteria instance
      *
-     * @param string $field
+     * @param string|null $field [optional]
      * @param string $operator [optional]
      * @param mixed $value [optional]
      * @param string $logical [optional]
@@ -46,7 +46,7 @@ interface FieldCriteria extends Criteria
      * @throws CriteriaException
      */
     public static function make(
-        string $field,
+        string|null $field = null,
         string $operator = '=',
         mixed $value = null,
         string $logical = self::AND
