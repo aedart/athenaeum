@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Show Resource
 
-`ShowSingleResourceRequest` abstraction is intended for when a single resource is requested.
+`ShowSingleResourceRequest` abstraction is intended for when a single resource must be shown.
 
 [[TOC]]
 
