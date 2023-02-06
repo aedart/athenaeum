@@ -64,7 +64,7 @@ Route::get('/downloads/{file}', function (DownloadFileRequest $request) {
 
 ### API Requests
 
-The Http package has been upgraded with a few [Request abstractions](./http/api/requests/README.md).
+The Http Api package has been upgraded with a few [Request abstractions](./http/api/requests/README.md).
 These can speed up development of API endpoints. 
 
 **Example Request**
