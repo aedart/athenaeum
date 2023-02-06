@@ -295,6 +295,21 @@ module.exports.sidebar = function(){
                             ]
                         },
                         {
+                            title: 'Requests',
+                            collapsable: true,
+                            children: [
+                                'http/api/requests/',
+                                'http/api/requests/list-resources',
+                                'http/api/requests/list-related',
+                                'http/api/requests/list-deleted',
+                                'http/api/requests/show-single',
+                                'http/api/requests/create-single',
+                                'http/api/requests/update-single',
+                                'http/api/requests/delete-single',
+                                'http/api/requests/process-multiple',
+                            ]
+                        },
+                        {
                             title: 'Middleware',
                             collapsable: true,
                             children: [
