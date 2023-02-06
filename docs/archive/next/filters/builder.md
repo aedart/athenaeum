@@ -16,7 +16,7 @@ The output of the method is expected to be a map of http query parameters and co
 ```php
 use Aedart\Filters\BaseBuilder;
 
-class UserFilterBuilder extends BaseBuilder
+class UserFiltersBuilder extends BaseBuilder
 {
     public function processors(): array
     {
@@ -54,7 +54,7 @@ class ListUsersRequest exends FormRequest
 
     public function after(Validator $validator)
     {        
-        $this->filters = UserFilterBuilder::make($this)
+        $this->filters = UserFiltersBuilder::make($this)
             ->build();
     }
 
@@ -79,7 +79,7 @@ By default, if received http query parameters do not match any of the names stat
 If you wish to change this behavior, then us the `force()` method on those processors that always must be triggered, regardless of matching query parameters are received or not.
 
 ```php
-class UserFilterBuilder extends BaseBuilder
+class UserFiltersBuilder extends BaseBuilder
 {
     public function processors(): array
     {
