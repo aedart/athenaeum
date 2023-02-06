@@ -81,6 +81,8 @@ public function authorizeAfterValidation(): bool
 
 The `authorizeAfterValidation()` method is automatically invoked after the `after()` method has executed.
 
+**Note**: _Usually, authorisation check are performed **before** request preconditions are evaluated._
+
 ## Http Conditional Requests
 
 The `ValidatedApiRequest` also offers support for dealing with [Http Conditional Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Conditional_requests).

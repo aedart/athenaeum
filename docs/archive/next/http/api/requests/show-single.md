@@ -45,8 +45,6 @@ Authorisation checks is performed by the `authorizeFoundRecord()` method (_see s
 The request will check against a `show` ability.
 From the above shown examples, a `users.show` ability is checked.
 
-**Note**: _Authorisation check is performed **before** request preconditions are evaluated!_
-
 ## Request Preconditions
 
 To enable evaluation of requested preconditions, the `mustEvaluatePreconditions()` method must return `true`.
