@@ -90,8 +90,9 @@ $resource new GenericResource(
 
 ## Files and Range Support
 
-If your resource is a picture, document or other kind of file that is intended to support [`Range`](https://httpwg.org/specs/rfc9110.html#field.range) requests,
-and or [`If-Range`](https://httpwg.org/specs/rfc9110.html#field.if-range) precondition, then you must specify the `$size` of the resource.
+If your resource is a picture, document or other kind of file that is intended to support [`If-Range`](https://httpwg.org/specs/rfc9110.html#field.if-range)
+and [`Range`](https://httpwg.org/specs/rfc9110.html#field.range) requests, then you must specify the `$size` of the resource.
+The `$size` must always be specified in bytes.
 
 ### Default Behaviour
 
