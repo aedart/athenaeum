@@ -153,4 +153,15 @@ See [Database Query Filters](../../../database/query/criteria.md) for additional
 Although support for Http Request Conditionals is possible for this kind of request, it is **_not recommended_**.
 You will be required to compute a reliable [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag) and/or [Last-Modified](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified) date for the filtered and paginated results.
 This can end up costing a lot of CPU and thereby affect performance.
-Therefore, no request preconditions evaluation is enabled by default.
+Therefore, no preconditions evaluation is enabled by default, for this kind of request abstraction.
+
+Despite the above-mentioned recommendation, if you still wish to support evaluation of request preconditions, then you should consider generating a unique ETag which takes the following into consideration:
+
+* The requested query parameters (_e.g. filters and pagination_).
+* The filtered and paginated resources (_the resulting eloquent models with eventual eager-loaded relations_).
+* The type of resource that is requested.
+
+See [Show Single Resource](./show-single.md#request-preconditions) for examples of preconditions evaluation.
+In addition, you should also review the source code of `\Aedart\Http\Api\Requests\Concerns\HttpConditionals` (_available in all request abstractions_).
+
+Lastly, it might be prudent to ignore generating a `Last-Modified` date, if you enable preconditions evaluation for a collection of filtered and paginated resources.
