@@ -155,7 +155,7 @@ The following example will use an address' street name as the primary identifier
 return [
     // ...previous not shown... 
     'address' => $this->belongsToReference('address')
-        usePrimaryKey('street', 'place_id'),
+        usePrimaryKey('street', 'place_name'),
 ];
 ```
 
