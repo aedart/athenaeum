@@ -30,6 +30,8 @@ return [
 ];
 ```
 
+**Note**: _The [`ETagsServiceProvider`](../../etags/README.md) is automatically registered, when you register `ApiResourceServiceProvider`._
+
 ## Publish Assets
 
 Run `vendor:publish` to publish this package's assets.
@@ -38,9 +40,10 @@ Run `vendor:publish` to publish this package's assets.
 php artisan vendor:publish
 ```
 
-After the command has completed, you should see the following configuration file in your `/configs` directory:
+After the command has completed, you should see the following configuration files in your `/configs` directory:
 
 - `api-resources.php`
+- `etags.php` (_See [ETags package](../../etags/README.md) for additional information_)
 
 ### Publish Assets for Athenaeum Core Application
 
