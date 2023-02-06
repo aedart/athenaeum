@@ -9,7 +9,7 @@ sidebarDepth: 0
 
 ## Applicable
 
-When `If-Match` header is available in the requested.
+When `If-Match` header is requested.
 
 ## Condition
 

@@ -9,7 +9,7 @@ sidebarDepth: 0
 
 ## Applicable
 
-When `If-None-Match` header is available.
+When `If-None-Match` header is requested.
 
 ## Condition
 
