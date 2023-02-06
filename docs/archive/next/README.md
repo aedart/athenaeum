@@ -62,6 +62,41 @@ Route::get('/downloads/{file}', function (DownloadFileRequest $request) {
 });
 ```
 
+### API Requests
+
+The Http package has been upgraded with a few [Request abstractions](./http/api/requests/README.md).
+These can speed up development of API endpoints. 
+
+**Example Request**
+
+```php
+use Aedart\Http\Api\Requests\Resources\ShowSingleResourceRequest;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+
+class ShowUser extends ShowSingleResourceRequest
+{
+    public function findRecordOrFail(): Model
+    {
+        return User::findOrFail($this->route('id'));
+    }
+
+    public function mustEvaluatePreconditions(): bool
+    {
+        return true;
+    }
+}
+```
+
+**Example Action**
+
+```php
+Route::get('/users/{id}', function (ShowUser $request) {
+    return UserResource::make($request->record)
+        ->withCache();
+})->name('users.show');
+```
+
 ### Custom Queries for Search and Sorting Filters
 
 The `SearchFilter` and `SearchProcessor` now support custom search callbacks.
