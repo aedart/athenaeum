@@ -41,7 +41,7 @@ To specify what preconditions can be evaluated, if applicable, set the `$precond
 ```php
 // When creating a new instance...
 $evaluator = Evaluator::make(
-    reqeust: $request,
+    request: $request,
     preconditions: [
         MyCustomPreconditionA::class,
         new OtherCustomPrecontion()
