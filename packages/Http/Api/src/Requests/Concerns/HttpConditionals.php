@@ -160,11 +160,18 @@ trait HttpConditionals
      */
     public function makePreconditionsEvaluator(): PreconditionsEvaluator
     {
-        return Evaluator::make(
+        $evaluator = Evaluator::make(
             request: $this,
             preconditions: $this->supportedPreconditionsList(),
             actions: $this->preconditionActions()
         );
+
+        $additional = $this->additionalPreconditions();
+        foreach ($additional as $precondition) {
+            $evaluator->addPrecondition($precondition);
+        }
+
+        return $evaluator;
     }
 
     /**
@@ -192,6 +199,20 @@ trait HttpConditionals
         // Return an empty array, if default evaluator's default
         // preconditions should be supported.
         // @see \Aedart\ETags\Preconditions\Evaluator::getDefaultPreconditions
+
+        return [];
+    }
+
+    /**
+     * Returns list of additional preconditions (extensions)
+     *
+     * @return string[]|Precondition[]
+     */
+    public function additionalPreconditions(): array
+    {
+        // Extensions / additional preconditions to be added.
+        // Overwrite this method if you wish to use the default provided
+        // preconditions (RFC 9110) + your custom preconditions.
 
         return [];
     }
