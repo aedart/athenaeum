@@ -70,10 +70,22 @@ abstract class CreateSingleResourceRequest extends ValidatedApiRequest implement
         // @see https://httpwg.org/specs/rfc9110.html#when.to.evaluate
 
         $this->evaluateRequestPreconditions(
-            record: $data,
+            record: $this->wrapData($data),
             etag: $this->generateEtag($data),
             lastModifiedDate: $this->generateLastModifiedDate($data)
         );
+    }
+
+    /**
+     * Wraps the input data so it can be used by preconditions evaluator
+     *
+     * @param array $data Input data
+     *
+     * @return mixed
+     */
+    protected function wrapData(array $data): mixed
+    {
+        return $data;
     }
 
     /**
