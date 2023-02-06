@@ -152,7 +152,7 @@ See [Database Query Filters](../../../database/query/criteria.md) for additional
 
 Although support for Http Request Conditionals is possible for this kind of request, it is **_not recommended_**.
 You will be required to compute a reliable [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag) and/or [Last-Modified](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified) date for the filtered and paginated results.
-This can end up costing a lot of CPU and thereby affect performance.
+This can end up costing a lot of CPU cycles and thereby affect performance.
 Therefore, no preconditions evaluation is enabled by default, for this kind of request abstraction.
 
 Despite the above-mentioned recommendation, if you still wish to support evaluation of request preconditions, then you should consider generating a unique ETag which takes the following into consideration:
