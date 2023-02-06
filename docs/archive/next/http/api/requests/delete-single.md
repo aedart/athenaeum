@@ -4,3 +4,7 @@ sidebarDepth: 0
 ---
 
 # Delete Resource
+
+## Authorisation
+
+## Request Preconditions

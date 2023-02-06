@@ -4,3 +4,7 @@ sidebarDepth: 0
 ---
 
 # Create Resource
+
+## Authorisation
+
+## Request Preconditions

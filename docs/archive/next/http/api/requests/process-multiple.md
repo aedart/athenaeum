@@ -4,3 +4,7 @@ sidebarDepth: 0
 ---
 
 # Process Multiple Resources
+
+## Authorisation
+
+## Request Preconditions

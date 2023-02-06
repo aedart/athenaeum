@@ -4,3 +4,7 @@ sidebarDepth: 0
 ---
 
 # List Deleted
+
+## Authorisation
+
+## Request Preconditions
