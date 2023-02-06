@@ -63,7 +63,7 @@ trait Pagination
      *
      * @var string
      */
-    protected string $pageKey = 'page';
+    public string $pageKey = 'page';
 
     /**
      * Name of the query parameter that contains requested amount
@@ -71,7 +71,7 @@ trait Pagination
      *
      * @var string
      */
-    protected string $showKey = 'show';
+    public string $showKey = 'show';
 
     /**
      * Adds pagination rules for given validation rules
