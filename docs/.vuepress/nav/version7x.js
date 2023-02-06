@@ -291,6 +291,7 @@ module.exports.sidebar = function(){
                                 'http/api/resources/timestamps',
                                 'http/api/resources/self-link',
                                 'http/api/resources/relations',
+                                'http/api/resources/caching',
                                 'http/api/resources/registrar',
                             ]
                         },
