@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `asMicroSeconds()` in the `Duration` util.
 * `setAllowedDateFormats()` in `DateFilter`.
 * `setDatabaseDatetimeFormat()` in `BaseFieldFilter` abstraction.
+* Several `is{status}` methods added in Response `Status`, as well as additional Http status code utilities. 
 * `now()` in the `Duration` util.
 * `to()` method in Memory `Unit` util.
 * Test `Response` utility.
@@ -64,6 +65,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `MicroTimeStamp::fromDateTime()` now accepts `\DateTimeInterface` instead of `\DateTime`.
 * `Duration` now accepts `\DateTimeInterface` instead of `\DateTime`.
 * `RequestETagsMixin::httpDateFrom()` now parses Http Date acc. to RFC9110 (_a looser date format parsing was previously used_).
+* Response `Status` interface  now extends `\Stringable` (_Http Clients package_).
+* Response `Status` now guesses a status phrase when none given.
 
 ### Fixed
 
