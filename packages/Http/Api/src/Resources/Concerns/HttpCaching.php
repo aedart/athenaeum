@@ -145,7 +145,7 @@ trait HttpCaching
             'max_age' => null,
             's_maxage' => null,
             'must_revalidate' => false,
-            'no_cache' => false,
+            'no_cache' => true,
             'no_store' => false,
             'no_transform' => false,
             'public' => false,
