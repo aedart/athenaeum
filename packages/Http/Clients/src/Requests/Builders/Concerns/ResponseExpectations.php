@@ -95,7 +95,7 @@ trait ResponseExpectations
      *
      * @return ResponseExpectationInterface
      */
-    protected function resolveExpectation($callback): ResponseExpectationInterface
+    protected function resolveExpectation(callable|ResponseExpectationInterface $callback): ResponseExpectationInterface
     {
         if ($callback instanceof ResponseExpectationInterface) {
             return $callback;
