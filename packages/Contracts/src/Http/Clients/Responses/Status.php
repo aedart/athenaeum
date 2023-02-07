@@ -4,6 +4,7 @@ namespace Aedart\Contracts\Http\Clients\Responses;
 
 use Aedart\Contracts\Http\Clients\Exceptions\InvalidStatusCodeException;
 use Psr\Http\Message\ResponseInterface;
+use Stringable;
 
 /**
  * Response Http Status
@@ -15,7 +16,7 @@ use Psr\Http\Message\ResponseInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Clients\Responses
  */
-interface Status
+interface Status extends Stringable
 {
     /**
      * Returns the Http response status code

@@ -6,7 +6,6 @@ use Aedart\Contracts\Http\Clients\Exceptions\InvalidStatusCodeException;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Http\Clients\Exceptions\InvalidStatusCode;
 use Psr\Http\Message\ResponseInterface;
-use Stringable;
 
 /**
  * Http Response Status
@@ -16,9 +15,7 @@ use Stringable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Http\Clients\Responses
  */
-class ResponseStatus implements
-    Status,
-    Stringable
+class ResponseStatus implements Status
 {
     /**
      * Response Http status code
