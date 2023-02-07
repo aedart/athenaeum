@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `asMicroSeconds()` in the `Duration` util.
 * `setAllowedDateFormats()` in `DateFilter`.
 * `setDatabaseDatetimeFormat()` in `BaseFieldFilter` abstraction.
-* Several `is{status}` methods added in Response `Status`. 
+* Several `is{status}` methods added in Response `Status`, as well as additional Http status code utilities. 
 * `now()` in the `Duration` util.
 * `to()` method in Memory `Unit` util.
 * Test `Response` utility.
