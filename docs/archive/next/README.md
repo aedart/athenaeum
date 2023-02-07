@@ -97,6 +97,19 @@ Route::get('/users/{id}', function (ShowUser $request) {
 })->name('users.show');
 ```
 
+### Api Resource Http Caching
+
+Additionally, Api Resources now have the ability to set [Caching headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control), [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag), and [Last-Modified date](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified), via a single method:
+
+```php
+Route::get('/addresses/{id}', function ($id) {
+    return new AddressResource(Address::findOrFail($id))
+        ->withCache();
+});
+```
+
+See [documentation](./http/api/resources/caching.md) for details.
+
 ### Custom Queries for Search and Sorting Filters
 
 The `SearchFilter` and `SearchProcessor` now support custom search callbacks.
