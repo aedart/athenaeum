@@ -155,6 +155,33 @@ $response = $client
         ->post('/reports/annual');
 ```
 
+### Improved Status object
+
+The `Status` object that is provided for [response expectations](./http/clients/methods/expectations.md) has been improved.
+It now contains several helper methods for determining if it matches a desired Http status code.
+
+```php
+use Aedart\Contracts\Http\Clients\Responses\Status;
+use Teapot\StatusCode\All as StatusCode;
+
+$client
+    ->expect(function(Status $status){
+        if ($status->isBadGateway()) {
+            // ...
+        }
+            
+        if ($status->is(StatusCode::UNPROCESSABLE_ENTITY)) {
+            // ...
+        }
+        
+        if ($status->satisfies([ StatusCode::CREATED, StatusCode::NO_CONTENT ])) {
+            // ...
+        }
+        
+        // ... etc
+    });
+```
+
 ### Stream `hash()` accept hashing options
 
 Streams now accept and apply [hashing options](https://www.php.net/manual/en/function.hash-init) in `hash()` method. This was previously also supported, but required PHP `v8.1`.
