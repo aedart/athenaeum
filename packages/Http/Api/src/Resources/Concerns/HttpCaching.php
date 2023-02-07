@@ -45,6 +45,42 @@ trait HttpCaching
     }
 
     /**
+     * Returns an ETag representation of the resource, if possible
+     *
+     * @return ETag|string|null
+     *
+     * @throws ETagGeneratorException
+     */
+    public function getResourceEtag(): ETag|string|null
+    {
+        $resource = $this->resource;
+
+        return match (true) {
+            $resource instanceof HasEtag || method_exists($resource, 'getStrongEtag') => $resource->getStrongEtag(),
+            $resource instanceof CanGenerateEtag || method_exists($resource, 'makeStrongEtag') => $resource->makeStrongEtag(),
+            default => null
+        };
+    }
+
+    /**
+     * Returns the resource's "last modified date" if available
+     *
+     * @return string|DateTimeInterface|null
+     */
+    public function getResourceLastModifiedDate(): string|DateTimeInterface|null
+    {
+        $resource = $this->resource;
+
+        // Skip if resource isn't a model...
+        if (!($resource instanceof Model)) {
+            return null;
+        }
+
+        $updatedAtKey = $resource->getUpdatedAtColumn();
+        return $resource[$updatedAtKey] ?? null;
+    }
+
+    /**
      * Returns predefined Http cache headers
      *
      * @see \Symfony\Component\HttpFoundation\Response::setCache
@@ -108,42 +144,6 @@ trait HttpCaching
             proxyRevalidate: $headers['proxy_revalidate'] ?? false,
             immutable: $headers['immutable'] ?? false,
         );
-    }
-
-    /**
-     * Returns an ETag representation of the resource, if possible
-     *
-     * @return ETag|string|null
-     *
-     * @throws ETagGeneratorException
-     */
-    public function getResourceEtag(): ETag|string|null
-    {
-        $resource = $this->resource;
-
-        return match (true) {
-            $resource instanceof HasEtag || method_exists($resource, 'getStrongEtag') => $resource->getStrongEtag(),
-            $resource instanceof CanGenerateEtag || method_exists($resource, 'makeStrongEtag') => $resource->makeStrongEtag(),
-            default => null
-        };
-    }
-
-    /**
-     * Returns the resource's "last modified date" if available
-     *
-     * @return string|DateTimeInterface|null
-     */
-    public function getResourceLastModifiedDate(): string|DateTimeInterface|null
-    {
-        $resource = $this->resource;
-
-        // Skip if resource isn't a model...
-        if (!($resource instanceof Model)) {
-            return null;
-        }
-
-        $updatedAtKey = $resource->getUpdatedAtColumn();
-        return $resource[$updatedAtKey] ?? null;
     }
 
     /**
