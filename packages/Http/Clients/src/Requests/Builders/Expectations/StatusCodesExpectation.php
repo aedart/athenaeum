@@ -96,7 +96,7 @@ class StatusCodesExpectation extends ResponseExpectation
     public function expectation(Status $status, ResponseInterface $response, RequestInterface $request): void
     {
         // Abort if the http status code matches expected
-        if (in_array($status->code(), $this->expectedStatusCodes)) {
+        if ($status->satisfies($this->expectedStatusCodes)) {
             return;
         }
 
@@ -122,9 +122,9 @@ class StatusCodesExpectation extends ResponseExpectation
     {
         // Make a default "reason" message
         $expectedStatusCodes = implode('or ', $this->expectedStatusCodes);
-        $receivedStatusCode = $status->code();
+        $receivedStatusCode = (string) $status;
 
-        $reason = "Received http status $receivedStatusCode, but expected: $expectedStatusCodes";
+        $reason = sprintf('Received http status %s, but expected: %s', $receivedStatusCode, $expectedStatusCodes);
 
         // Create default exception and throw it
         throw ExpectationNotMet::make(
