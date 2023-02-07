@@ -29,7 +29,7 @@ In other words, as a developer you have to decide whether to make use of this me
 In order to assert that a received response has a specific Http Status Code, e.g. [200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200), state your expected/desired status code, as the first argument for the `expect()` method.
 
 ```php
-use Teapot\StatusCode;
+use Teapot\StatusCode\All as StatusCode;
 
 $response = $client
         ->expect(StatusCode::OK)
@@ -47,7 +47,7 @@ Therefore, when you provide a `callable` as the second argument, then the `Expec
 The provided callback is invoked instead. 
 
 ```php
-use Teapot\StatusCode;
+use Teapot\StatusCode\All as StatusCode;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Acme\Exceptions\BadResponse;
 
@@ -71,7 +71,7 @@ If the received status code matches one of the expected codes, then the response
 Should it not match, then either the `ExpectationNotMetException` is thrown, or the callback is invoked (_if provided_). 
 
 ```php
-use Teapot\StatusCode;
+use Teapot\StatusCode\All as StatusCode;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Acme\Exceptions\BadResponse;
 
@@ -123,7 +123,7 @@ They will be executed in the same order as you add them.
 ```php
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Psr\Http\Message\ResponseInterface;
-use Teapot\StatusCode;
+use Teapot\StatusCode\All as StatusCode;
 use Acme\Exceptions\BadResponse;
 
 $response = $client
@@ -141,6 +141,10 @@ $response = $client
 
         // Expect payload...
         ->expect(function(Status $status, ResponseInterface $response){
+            if ( ! $status->isOk()) {
+                throw new BadResponse('Bad response received: ' . (string) $status);
+            }
+        
             $content = $response->getBody()->getContents();
             $response->getBody()->rewind();
 
@@ -181,7 +185,6 @@ use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Utils\Json;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Teapot\StatusCode;
 use Acme\Exceptions\UserWasNotCreatedException;
 use Illuminate\Support\Facades\Validator;
 
@@ -192,6 +195,12 @@ class UserWasCreated extends ResponseExpectations
         ResponseInterface $response,
         RequestInterface $request
     ): void {
+        // Check status code
+        if ( ! $status->isCreated()) {
+            throw new UserWasNotCreatedException((string) $status);
+        }
+    
+        // Validate response body...
         $payload = Json::decode($response->getBody()->getContents(), true);
         $validator = Validator::make($payload, [
             'uuid' => 'required|uuid',
@@ -199,7 +208,7 @@ class UserWasCreated extends ResponseExpectations
         ]);    
 
         if ($validator->fails()) {
-            throw new UserWasNotCreatedException();
+            // ... do something else...
         }
     }
 }
@@ -217,3 +226,37 @@ The `expect()` method is not design nor intended to manipulate the received resp
 This falls outside the scope of the given method. It's only purpose is to allow status code and response validation.
 
 If you require a way to modify the incoming response or perhaps the outgoing request, then consider using [custom middleware](./middleware). 
+
+## Status Code Object
+
+The `Status` object, that given to your expectation callbacks, offers a variety of methods to quickly determine if it matches a desired Http status code.
+
+```php
+use Aedart\Contracts\Http\Clients\Responses\Status;
+use Teapot\StatusCode\All as StatusCode;
+
+$client
+    ->expect(function(Status $status){
+        if ($status->isMovedPermanently()) {
+            // ...
+        }
+    
+        if ($status->isBadRequest()) {
+            // ...
+        }
+        
+        if ($status->is(StatusCode::UNPROCESSABLE_ENTITY)) {
+            // ...
+        }
+        
+        if ($status->satisfies([ StatusCode::CREATED, StatusCode::NO_CONTENT ])) {
+            // ...
+        }
+        
+        if ( ! $status->isSuccessful()) {
+            // ...
+        }
+    });
+```
+
+_See `\Aedart\Contracts\Http\Clients\Responses\Status` for additional details._
