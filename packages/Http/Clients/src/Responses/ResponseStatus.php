@@ -41,7 +41,7 @@ class ResponseStatus implements Status
      */
     public function __construct(int $code, string $phrase = '')
     {
-        if (!is_numeric($code) || (int) $code < 100) {
+        if ($code < 100) {
             throw new InvalidStatusCode(sprintf('Must be a valid Http Response code. %s given', $code));
         }
 
