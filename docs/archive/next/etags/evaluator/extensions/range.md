@@ -14,7 +14,7 @@ When such happens, it is prudent and feasible to perform the same kind of range-
 
 ## Applicable
 
-When the request method is `GET`, `Range` header are present, `If-Range` is NOT present, and the resource supports range requests.
+When the request method is `GET`, `Range` header is present, `If-Range` is NOT present, and the resource supports range requests.
 
 ## Condition
 
@@ -24,12 +24,12 @@ Validation of ranges is performed via a [`RangeValidator`](../range-validator.md
 ## When it passes
 
 The [`processRange()`](../actions.md#process-range) action method is invoked.
-Request processing continues (_no further extensions are evaluated!_).
+Evaluator continues to [extensions](../extensions/README.md), when available. Otherwise, request processing continues.
 
 ## When it fails
 
 The [`ignoreRange()`](../actions.md#ignore-range) action method is invoked.
-Request processing continues (_no further extensions are evaluated!_).
+Evaluator continues to [extensions](../extensions/README.md), when available. Otherwise, request processing continues.
 
 ## References
 
