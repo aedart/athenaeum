@@ -490,4 +490,74 @@ class EvaluatorTest extends PreconditionsTestCase
 
         $evaluator->evaluate($this->makeResourceContext());
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws HttpExceptionInterface
+     * @throws Throwable
+     */
+    public function proceedsToNextPreconditionWhenEvaluatedToNull(): void
+    {
+        $precondition = function (string|null $name) {
+            return new class($name) extends BasePrecondition {
+                public function __construct(
+                    public string|null $name,
+                    public bool $isEvaluated = false
+                ) {
+                }
+
+                public function isApplicable(ResourceContext $resource): bool
+                {
+                    ConsoleDebugger::output($this->name);
+                    $this->isEvaluated = true;
+
+                    return false;
+                }
+
+                public function passes(ResourceContext $resource): bool
+                {
+                    return true;
+                }
+
+                public function whenPasses(ResourceContext $resource): ResourceContext|string|null
+                {
+                    return null;
+                }
+
+                public function whenFails(ResourceContext $resource): ResourceContext|string|null
+                {
+                    throw new InvalidArgumentException('Should NOT fail!');
+                }
+            };
+        };
+
+        $preconditionsList = [
+            $precondition('A'),
+            $precondition('B'),
+            $precondition('C'),
+        ];
+
+        // -------------------------------------------------------------------------------- //
+
+        $evaluator = $this->makeEvaluator($this->createRequest(), $preconditionsList);
+
+        // -------------------------------------------------------------------------------- //
+
+        $context = $this->makeResourceContext();
+        $result = $evaluator->evaluate($context);
+
+        $this->assertSame($context, $result);
+
+        $preconditions = $evaluator->getPreconditions();
+        $total = 0;
+        foreach ($preconditions as $p) {
+            $this->assertTrue($p->isEvaluated, sprintf('Precondition %s was not evaluated', $p->name));
+            $total++;
+        }
+
+        $this->assertSame(count($preconditionsList), $total, 'Incorrect amount of preconditions evaluated');
+    }
 }
