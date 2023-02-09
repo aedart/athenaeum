@@ -84,12 +84,12 @@ class EvaluatorTest extends PreconditionsTestCase
                 return false;
             }
 
-            public function whenPasses(ResourceContext $resource): ResourceContext|string
+            public function whenPasses(ResourceContext $resource): ResourceContext|string|null
             {
                 throw new InvalidArgumentException('Should NOT pass');
             }
 
-            public function whenFails(ResourceContext $resource): ResourceContext|string
+            public function whenFails(ResourceContext $resource): ResourceContext|string|null
             {
                 throw new InvalidArgumentException('precondition should NOT be executed');
             }
@@ -158,12 +158,12 @@ class EvaluatorTest extends PreconditionsTestCase
                 return true;
             }
 
-            public function whenPasses(ResourceContext $resource): ResourceContext|string
+            public function whenPasses(ResourceContext $resource): ResourceContext|string|null
             {
                 return $resource->set('foo', 'bar');
             }
 
-            public function whenFails(ResourceContext $resource): ResourceContext|string
+            public function whenFails(ResourceContext $resource): ResourceContext|string|null
             {
                 throw new InvalidArgumentException('precondition should NOT be executed');
             }
@@ -215,12 +215,12 @@ class EvaluatorTest extends PreconditionsTestCase
                     return false;
                 }
 
-                public function whenPasses(ResourceContext $resource): ResourceContext|string
+                public function whenPasses(ResourceContext $resource): ResourceContext|string|null
                 {
                     throw new InvalidArgumentException('Should NOT be applicable');
                 }
 
-                public function whenFails(ResourceContext $resource): ResourceContext|string
+                public function whenFails(ResourceContext $resource): ResourceContext|string|null
                 {
                     throw new InvalidArgumentException('Should NOT be applicable');
                 }
@@ -279,12 +279,12 @@ class EvaluatorTest extends PreconditionsTestCase
                 return true;
             }
 
-            public function whenPasses(ResourceContext $resource): ResourceContext|string
+            public function whenPasses(ResourceContext $resource): ResourceContext|string|null
             {
                 return $resource->set('foo', 'bar');
             }
 
-            public function whenFails(ResourceContext $resource): ResourceContext|string
+            public function whenFails(ResourceContext $resource): ResourceContext|string|null
             {
                 throw new InvalidArgumentException('C should NOT fail');
             }
@@ -306,12 +306,12 @@ class EvaluatorTest extends PreconditionsTestCase
                 return true;
             }
 
-            public function whenPasses(ResourceContext $resource): ResourceContext|string
+            public function whenPasses(ResourceContext $resource): ResourceContext|string|null
             {
                 throw new InvalidArgumentException('B should had been skipped');
             }
 
-            public function whenFails(ResourceContext $resource): ResourceContext|string
+            public function whenFails(ResourceContext $resource): ResourceContext|string|null
             {
                 throw new InvalidArgumentException('B should had been skipped');
             }
@@ -337,12 +337,12 @@ class EvaluatorTest extends PreconditionsTestCase
                 return true;
             }
 
-            public function whenPasses(ResourceContext $resource): ResourceContext|string
+            public function whenPasses(ResourceContext $resource): ResourceContext|string|null
             {
                 return $this->nextPrecondition;
             }
 
-            public function whenFails(ResourceContext $resource): ResourceContext|string
+            public function whenFails(ResourceContext $resource): ResourceContext|string|null
             {
                 throw new InvalidArgumentException('A should NOT fail...');
             }
@@ -389,12 +389,12 @@ class EvaluatorTest extends PreconditionsTestCase
                 return true;
             }
 
-            public function whenPasses(ResourceContext $resource): ResourceContext|string
+            public function whenPasses(ResourceContext $resource): ResourceContext|string|null
             {
                 return 'unknown_precondition_class_path';
             }
 
-            public function whenFails(ResourceContext $resource): ResourceContext|string
+            public function whenFails(ResourceContext $resource): ResourceContext|string|null
             {
                 throw new InvalidArgumentException('A should NOT fail...');
             }
@@ -437,12 +437,12 @@ class EvaluatorTest extends PreconditionsTestCase
                 return false;
             }
 
-            public function whenPasses(ResourceContext $resource): ResourceContext|string
+            public function whenPasses(ResourceContext $resource): ResourceContext|string|null
             {
                 throw new InvalidArgumentException('A should NOT be applicable');
             }
 
-            public function whenFails(ResourceContext $resource): ResourceContext|string
+            public function whenFails(ResourceContext $resource): ResourceContext|string|null
             {
                 throw new InvalidArgumentException('A should NOT be applicable');
             }
@@ -468,14 +468,14 @@ class EvaluatorTest extends PreconditionsTestCase
                 return true;
             }
 
-            public function whenPasses(ResourceContext $resource): ResourceContext|string
+            public function whenPasses(ResourceContext $resource): ResourceContext|string|null
             {
                 ConsoleDebugger::output(sprintf('B - Attempt to return %s as result (next precondition)', $this->nextPrecondition));
 
                 return $this->nextPrecondition;
             }
 
-            public function whenFails(ResourceContext $resource): ResourceContext|string
+            public function whenFails(ResourceContext $resource): ResourceContext|string|null
             {
                 throw new InvalidArgumentException('B should NOT fail...');
             }
