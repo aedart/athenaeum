@@ -28,11 +28,11 @@ If the requested "author" matches a predefined value, then the precondition pass
 
 ```php
 use Aedart\ETags\Preconditions\BasePrecondition;
-use Aedart\Contracts\ETags\Preconditions\ResourceContext;
+use Aedart\Contracts\ETags\Preconditions\ResourceContext as Resource;
 
 class IfAuthor extends BasePrecondition
 {
-    public function isApplicable(ResourceContext $resource): bool
+    public function isApplicable(Resource $resource): bool
     {
         // Determine when this precondition is applicable - when should it
         // be evaluated?
@@ -41,7 +41,7 @@ class IfAuthor extends BasePrecondition
             && isset($resource->data()->author)
     }
 
-    public function passes(ResourceContext $resource): bool
+    public function passes(Resource $resource): bool
     {
         // Determine when this precondition is considered "passed"
         $author = $this->getHeaders()->get('X-If-Author');
@@ -49,7 +49,7 @@ class IfAuthor extends BasePrecondition
         return $resource->data()->author === $author;
     }
 
-    public function whenPasses(ResourceContext $resource): ResourceContext|string
+    public function whenPasses(Resource $resource): Resource|string|null
     {
         // Change the state of the resource... e.g. add meta info about the requested
         // author... or whatever makes sense to you...
@@ -58,11 +58,11 @@ class IfAuthor extends BasePrecondition
         // Alternatively, you can use custom actions to change the state... 
         // E.g. $this->actions()->markAuthorBooksToBeLoaded($resource); 
     
-        // Finally, return the "changed" resource...
-        return $resource;
+        // Finally, allow evaluation of evt. next precondition...
+        return null;
     }
 
-    public function whenFails(ResourceContext $resource): ResourceContext|string
+    public function whenFails(Resource $resource): Resource|string|null
     {
         // E.g. abort the current request... or perform other logic...
         return $this->actions()->abortPreconditionFailed($resource);
@@ -74,40 +74,81 @@ class IfAuthor extends BasePrecondition
 
 The `whenPasses()` and `whenFails()` are responsible for **_either_** of the following:
 
-**a) Return a `ResourceContext`**
+### Return a `ResourceContext`
 
-When a "changed" resource is returned, the evaluator will stop further evaluation and allow your regular request processing to continue.
+When a "changed" resource is returned, the evaluator will **_stop further evaluation_** and allow your regular request processing to continue.
 Typically, this means that your request will proceed to input validation and your controller / route action is invoked.
 
-**b) Throw Http Exception**
-
-In situations when your precondition needs to stop the request processing entirely, you can throw an appropriate Http Exception.
-When doing so, your application's exception handler will deal with the exception and create a Http response accordingly.
-
-To ensure that your default exception handler creates an appropriate response, your exception should inherit from `\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface`. 
-
-**c) Return class path (_to next precondition_)**
-
-Lastly, if your precondition is intended to allow other preconditions to evaluate, then you can return a class path to the next precondition.
-Doing so means that the evaluator will automatically instantiate the new precondition, determine if its applicable, and evaluate it.
-
 ```php
-    // ...Inside your precondition...
+// ...Inside your precondition...
     
-    public function whenPasses(ResourceContext $resource): ResourceContext|string
-    {
-        // Change the state of the resource... e.g. add meta info about the requested
-        // author... or whatever makes sense to you...
-        $resource->set('load_author_book_titles', true);
-    
-        // Continue to next precondition
-        return MyOtherCustomPrecondition::class;
-    }
+public function whenPasses(Resource $resource): Resource|string|null
+{   
+    // Change state or data, and return resource. No further preconditions evaluated!
+    return $resource->set('pages_to_highlight', [ 2, 43, 44, 61]);
+}
 ```
 
-It might seem a bit cumbersome to explicitly return the "next" precondition's class path.
-But this is intentional. It will allow you to create complex flows of preconditions that must evaluated or skipped.  
-The [default supported](../preconditions.md#supported-preconditions) use this mechanism extensively.
+### Return class path (_to specific precondition_)
+
+By returning a class path to a specific precondition, the evaluator will automatically instantiate it, determine if its applicable, and evaluate it. 
+
+```php
+// ...Inside your precondition...
+
+public function whenPasses(Resource $resource): Resource|string|null
+{
+    // Change the state of the resource...
+    $resource->set('load_author_book_titles', true);
+
+    // Continue to specific precondition
+    return MyOtherCustomPrecondition::class;
+}
+```
+
+::: warning Caution
+While this mechanism allows you to create complex evaluation flow, it will **NOT** allow you to specify a class path to a precondition that:
+
+* Has already been evaluated.
+* Is located before the current precondition (_array index in [list of preconditions](../preconditions.md#specify-preconditions)_).
+* Does not exist in the evaluator's [list of preconditions](../preconditions.md#specify-preconditions).
+
+The evaluator will throw a `LogicException` if in such situations
+:::
+
+### Return `null` (_next precondition_)
+
+When you return `null` from your pass or fail method, the evaluator will simply continue to the next precondition in its list. 
+
+```php
+// ...Inside your precondition...
+
+public function whenPasses(Resource $resource): Resource|string|null
+{
+    // ...resource change logic not shown here...
+    
+    // Continue to next precondition
+    return null;
+}
+```
+
+### Throw Http Exception
+
+Lastly, in situations when your precondition needs to stop the request processing entirely, you can throw an appropriate Http Exception.
+When doing so, your application's exception handler will deal with the exception and create a Http response accordingly.
+
+```php
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+
+// ...Inside your precondition...
+
+public function whenFails(Resource $resource): Resource|string|null
+{
+    throw new BadRequestHttpException('X-If-Author value must be a string');
+}
+```
+
+To ensure that your default exception handler creates an appropriate response, your exception should inherit from `\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface`.
 
 ## Onward
 
