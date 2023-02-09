@@ -20,7 +20,7 @@ In general, when a precondition is evaluated either of the following will happen
   * The request is aborted by throwing an appropriate `HttpException`, via an [`Actions` component](./actions.md).
   * The [resource](./resource-context.md) changed and returned.
 
-All preconditions are evaluated in accordance with [RFC9110's order of precedence](https://httpwg.org/specs/rfc9110.html#precedence).
+All preconditions are evaluated in accordance with [RFC 9110's order of precedence](https://httpwg.org/specs/rfc9110.html#precedence).
 See [supported preconditions](./preconditions.md#supported-preconditions) for additional information.
 
 ## How to Evaluate
