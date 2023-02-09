@@ -57,7 +57,10 @@ class IfRange extends BasePrecondition
     {
         // [...] if true and the Range is applicable to the selected representation,
         // respond 206 (Partial Content) [...]
-        return $this->actions()->processRange($resource, $this->getVerifiedRanges());
+        $this->actions()->processRange($resource, $this->getVerifiedRanges());
+
+        // Allow evt. next precondition to be evaluated.
+        return null;
     }
 
     /**
@@ -66,7 +69,10 @@ class IfRange extends BasePrecondition
     public function whenFails(ResourceContext $resource): ResourceContext|string|null
     {
         // [...] otherwise, ignore the Range header field and respond 200 (OK) [...]
-        return $this->actions()->ignoreRange($resource);
+        $this->actions()->ignoreRange($resource);
+
+        // Allow evt. next precondition to be evaluated.
+        return null;
     }
 
     /**

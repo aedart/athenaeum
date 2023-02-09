@@ -56,7 +56,10 @@ class Range extends BasePrecondition
      */
     public function whenPasses(ResourceContext $resource): ResourceContext|string|null
     {
-        return $this->actions()->processRange($resource, $this->getVerifiedRanges());
+        $this->actions()->processRange($resource, $this->getVerifiedRanges());
+
+        // Allow evt. next precondition to be evaluated.
+        return null;
     }
 
     /**
@@ -64,6 +67,9 @@ class Range extends BasePrecondition
      */
     public function whenFails(ResourceContext $resource): ResourceContext|string|null
     {
-        return $this->actions()->ignoreRange($resource);
+        $this->actions()->ignoreRange($resource);
+
+        // Allow evt. next precondition to be evaluated.
+        return null;
     }
 }
