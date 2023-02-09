@@ -504,17 +504,15 @@ class EvaluatorTest extends PreconditionsTestCase
         $precondition = function (string|null $name) {
             return new class($name) extends BasePrecondition {
                 public function __construct(
-                    public string|null $name,
-                    public bool $isEvaluated = false
+                    public string|null $name
                 ) {
                 }
 
                 public function isApplicable(ResourceContext $resource): bool
                 {
                     ConsoleDebugger::output($this->name);
-                    $this->isEvaluated = true;
 
-                    return false;
+                    return true;
                 }
 
                 public function passes(ResourceContext $resource): bool
@@ -524,6 +522,12 @@ class EvaluatorTest extends PreconditionsTestCase
 
                 public function whenPasses(ResourceContext $resource): ResourceContext|string|null
                 {
+                    $passed = $resource->get('passed', []);
+                    $passed[] = $this::class;
+
+                    $resource->set('passed', $passed);
+
+                    // Go to next in list of preconditions...
                     return null;
                 }
 
@@ -551,13 +555,9 @@ class EvaluatorTest extends PreconditionsTestCase
 
         $this->assertSame($context, $result);
 
-        $preconditions = $evaluator->getPreconditions();
-        $total = 0;
-        foreach ($preconditions as $p) {
-            $this->assertTrue($p->isEvaluated, sprintf('Precondition %s was not evaluated', $p->name));
-            $total++;
-        }
+        $passed = $result->get('passed', []);
+        ConsoleDebugger::output($passed);
 
-        $this->assertSame(count($preconditionsList), $total, 'Incorrect amount of preconditions evaluated');
+        $this->assertCount(count($preconditionsList), $passed, 'Incorrect amount of preconditions evaluated');
     }
 }
