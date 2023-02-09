@@ -45,7 +45,7 @@ class IfUnmodifiedSince extends BasePrecondition
     /**
      * @inheritDoc
      */
-    public function whenPasses(ResourceContext $resource): ResourceContext|string
+    public function whenPasses(ResourceContext $resource): ResourceContext|string|null
     {
         // [...] if true, continue to step 3 (If-None-Match)
         return IfNoneMatch::class;
@@ -54,7 +54,7 @@ class IfUnmodifiedSince extends BasePrecondition
     /**
      * @inheritDoc
      */
-    public function whenFails(ResourceContext $resource): ResourceContext|string
+    public function whenFails(ResourceContext $resource): ResourceContext|string|null
     {
         // Abort the request appropriately...
         $this->checkResourceStateChange($resource);

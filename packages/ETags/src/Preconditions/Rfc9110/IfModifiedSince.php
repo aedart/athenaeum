@@ -46,7 +46,7 @@ class IfModifiedSince extends BasePrecondition
     /**
      * @inheritDoc
      */
-    public function whenPasses(ResourceContext $resource): ResourceContext|string
+    public function whenPasses(ResourceContext $resource): ResourceContext|string|null
     {
         // [...] if true, continue to step 5 (If-Range)
         return IfRange::class;
@@ -55,7 +55,7 @@ class IfModifiedSince extends BasePrecondition
     /**
      * @inheritDoc
      */
-    public function whenFails(ResourceContext $resource): ResourceContext|string
+    public function whenFails(ResourceContext $resource): ResourceContext|string|null
     {
         // [...] if false, respond 304 (Not Modified)
         $this->actions()->abortNotModified($resource);

@@ -53,7 +53,7 @@ class IfRange extends BasePrecondition
     /**
      * @inheritDoc
      */
-    public function whenPasses(ResourceContext $resource): ResourceContext|string
+    public function whenPasses(ResourceContext $resource): ResourceContext|string|null
     {
         // [...] if true and the Range is applicable to the selected representation,
         // respond 206 (Partial Content) [...]
@@ -63,7 +63,7 @@ class IfRange extends BasePrecondition
     /**
      * @inheritDoc
      */
-    public function whenFails(ResourceContext $resource): ResourceContext|string
+    public function whenFails(ResourceContext $resource): ResourceContext|string|null
     {
         // [...] otherwise, ignore the Range header field and respond 200 (OK) [...]
         return $this->actions()->ignoreRange($resource);

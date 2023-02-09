@@ -54,7 +54,7 @@ class Range extends BasePrecondition
     /**
      * @inheritDoc
      */
-    public function whenPasses(ResourceContext $resource): ResourceContext|string
+    public function whenPasses(ResourceContext $resource): ResourceContext|string|null
     {
         return $this->actions()->processRange($resource, $this->getVerifiedRanges());
     }
@@ -62,7 +62,7 @@ class Range extends BasePrecondition
     /**
      * @inheritDoc
      */
-    public function whenFails(ResourceContext $resource): ResourceContext|string
+    public function whenFails(ResourceContext $resource): ResourceContext|string|null
     {
         return $this->actions()->ignoreRange($resource);
     }

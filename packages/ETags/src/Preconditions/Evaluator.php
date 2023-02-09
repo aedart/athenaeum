@@ -98,9 +98,21 @@ class Evaluator implements PreconditionsEvaluator
             // When precondition is applicable, then it must be processed. The result can either be a changed
             // state of given resource, or a class path to another precondition that must be evaluated.
             $result = $precondition->process($resource);
+
+            // When null returned, continue to next precondition.
+            if (!isset($result)) {
+                $index = $this->verifyNextIndex(
+                    nextIndex: $index + 1,
+                    currentIndex: $index,
+                    preconditions: $preconditions
+                );
+                continue;
+            }
+
+            // When class path returned, continue to requested precondition.
             if (is_string($result)) {
-                $index = $this->verifyRequestedPrecondition(
-                    requestedIndex: $this->findIndexOfPreconditionOrFail($result, $preconditions),
+                $index = $this->verifyNextIndex(
+                    nextIndex: $this->findIndexOfPreconditionOrFail($result, $preconditions),
                     currentIndex: $index,
                     preconditions: $preconditions
                 );
@@ -224,26 +236,34 @@ class Evaluator implements PreconditionsEvaluator
     }
 
     /**
-     * Verifies requested precondition
+     * Verifies index
      *
-     * @param  int  $requestedIndex
+     * @param  int  $nextIndex
      * @param  int  $currentIndex
      * @param  string[]|Precondition[]  $preconditions
      *
      * @return int
      */
-    protected function verifyRequestedPrecondition(int $requestedIndex, int $currentIndex, array $preconditions): int
+    protected function verifyNextIndex(int $nextIndex, int $currentIndex, array $preconditions): int
     {
         // When requested precondition is ranked after the current, then we can proceed.
-        if ($requestedIndex > $currentIndex) {
-            return $requestedIndex;
+        if ($nextIndex > $currentIndex && $nextIndex <= count($preconditions)) {
+            return $nextIndex;
+        }
+
+        // In case that requested index simply does not exist...
+        if (!isset($preconditions[$nextIndex])) {
+            throw new LogicException(sprintf(
+                'Unable to evaluate precondition at index %s (does not exist)',
+                $nextIndex
+            ));
         }
 
         // When requested precondition is ranked before the current (or is the current) precondition,
         // then it might already be evaluated. To avoid re-evaluation or possible infinite loop,
         // the evaluation process must be stopped.
+        $requestedPrecondition = $preconditions[$nextIndex];
         $currentPrecondition = $preconditions[$currentIndex];
-        $requestedPrecondition = $preconditions[$requestedIndex];
 
         throw new LogicException(sprintf(
             'Unable to evaluate %s precondition. It has either already been evaluated, or its ranked before %s precondition',

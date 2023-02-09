@@ -45,7 +45,7 @@ class IfNoneMatch extends BasePrecondition
     /**
      * @inheritDoc
      */
-    public function whenPasses(ResourceContext $resource): ResourceContext|string
+    public function whenPasses(ResourceContext $resource): ResourceContext|string|null
     {
         // [...] if true, continue to step 5 (If-Range)
         return IfRange::class;
@@ -54,7 +54,7 @@ class IfNoneMatch extends BasePrecondition
     /**
      * @inheritDoc
      */
-    public function whenFails(ResourceContext $resource): ResourceContext|string
+    public function whenFails(ResourceContext $resource): ResourceContext|string|null
     {
         // [...] if false for GET/HEAD, respond 304 (Not Modified)
         if (in_array($this->getMethod(), ['GET', 'HEAD'])) {

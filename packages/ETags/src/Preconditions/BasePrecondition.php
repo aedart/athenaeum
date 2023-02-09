@@ -23,7 +23,7 @@ abstract class BasePrecondition implements Precondition
     /**
      * @inheritDoc
      */
-    public function process(ResourceContext $resource): ResourceContext|string
+    public function process(ResourceContext $resource): ResourceContext|string|null
     {
         if ($this->passes($resource)) {
             return $this->whenPasses($resource);
@@ -37,24 +37,28 @@ abstract class BasePrecondition implements Precondition
      *
      * @param  ResourceContext  $resource
      *
-     * @return ResourceContext|string Class path to another precondition to be evaluated, or
-     *                                {@see ResourceContext} when request should proceed.
+     * @return ResourceContext|string|null Class path to another precondition to be evaluated,
+     *                                     null if evaluator should continue to next precondition, or
+     *                                     {@see ResourceContext} when request should proceed
+     *                                     (stop evaluation of other preconditions).
      *
      * @throws HttpExceptionInterface
      */
-    abstract public function whenPasses(ResourceContext $resource): ResourceContext|string;
+    abstract public function whenPasses(ResourceContext $resource): ResourceContext|string|null;
 
     /**
      * Process unsuccessful precondition evaluation
      *
      * @param  ResourceContext  $resource
      *
-     * @return ResourceContext|string Class path to another precondition to be evaluated, or
-     *                                {@see ResourceContext} when request should proceed.
+     * @return ResourceContext|string|null Class path to another precondition to be evaluated,
+     *                                     null if evaluator should continue to next precondition, or
+     *                                     {@see ResourceContext} when request should proceed
+     *                                     (stop evaluation of other preconditions).
      *
      * @throws HttpExceptionInterface
      */
-    abstract public function whenFails(ResourceContext $resource): ResourceContext|string;
+    abstract public function whenFails(ResourceContext $resource): ResourceContext|string|null;
 
     /**
      * Resolve "last modified date" for given resource

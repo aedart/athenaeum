@@ -34,12 +34,14 @@ interface Precondition extends
      *
      * @param  ResourceContext  $resource
      *
-     * @return ResourceContext|string Class path to another precondition to be evaluated, or
-     *                                {@see ResourceContext} when request should proceed.
+     * @return ResourceContext|string|null Class path to another precondition to be evaluated,
+     *                                     null if evaluator should continue to next precondition, or
+     *                                     {@see ResourceContext} when request should proceed
+     *                                     (stop evaluation of other preconditions).
      *
      * @throws HttpExceptionInterface
      */
-    public function process(ResourceContext $resource): ResourceContext|string;
+    public function process(ResourceContext $resource): ResourceContext|string|null;
 
     /**
      * Determine if this precondition passes or not
