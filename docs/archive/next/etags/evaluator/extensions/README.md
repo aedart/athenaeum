@@ -23,8 +23,11 @@ You will be required to implement the following methods:
 * `whenPasses()` _invoked if the precondition passes._
 * `whenFails()` _invoked if the precondition fails._
 
-The following example precondition is applicable when a `X-If-Author` header is available.
-If the requested "author" matches a predefined value, then the precondition passes.
+
+The following hypothetical example assumes that a requested resource may have an author.
+When a `X-If-Author` header is requested, the value is matched against the resource's author field.
+Only when the requested header value matches the resources author, the request can proceed.
+Otherwise, the request is aborted.
 
 ```php
 use Aedart\ETags\Preconditions\BasePrecondition;
@@ -53,7 +56,7 @@ class IfAuthor extends BasePrecondition
     {
         // Change the state of the resource... e.g. add meta info about the requested
         // author... or whatever makes sense to you...
-        $resource->set('load_author_book_titles', true);
+        $resource->set('eager_load_author', true);
     
         // Alternatively, you can use custom actions to change the state... 
         // E.g. $this->actions()->markAuthorBooksToBeLoaded($resource); 
@@ -72,12 +75,12 @@ class IfAuthor extends BasePrecondition
 
 ## Pass / Fail Methods
 
-The `whenPasses()` and `whenFails()` are responsible for **_either_** of the following:
+The `whenPasses()` and `whenFails()` methods are responsible for **_either_** of the following:
 
 ### Return a `ResourceContext`
 
-When a "changed" resource is returned, the evaluator will **_stop further evaluation_** and allow your regular request processing to continue.
-Typically, this means that your request will proceed to input validation and your controller / route action is invoked.
+When a "changed" resource is returned, the evaluator will **_stop additional evaluation or preconditions_**.
+Your regular request processing will continue (_route or controller action is invoked_).
 
 ```php
 // ...Inside your precondition...
@@ -91,7 +94,7 @@ public function whenPasses(Resource $resource): Resource|string|null
 
 ### Return class path (_to specific precondition_)
 
-By returning a class path to a specific precondition, the evaluator will automatically instantiate it, determine if its applicable, and evaluate it. 
+By returning a class path to a specific precondition, the evaluator will instantiate it, determine if its applicable, and evaluate it. 
 
 ```php
 // ...Inside your precondition...
@@ -99,7 +102,7 @@ By returning a class path to a specific precondition, the evaluator will automat
 public function whenPasses(Resource $resource): Resource|string|null
 {
     // Change the state of the resource...
-    $resource->set('load_author_book_titles', true);
+    $resource->set('eager_load_author', true);
 
     // Continue to specific precondition
     return MyOtherCustomPrecondition::class;
@@ -107,18 +110,19 @@ public function whenPasses(Resource $resource): Resource|string|null
 ```
 
 ::: warning Caution
-While this mechanism allows you to create complex evaluation flow, it will **NOT** allow you to specify a class path to a precondition that:
+While this mechanism allows you to create a complex evaluation flow, it will **NOT** allow you to specify a class path to a precondition that:
 
 * Has already been evaluated.
 * Is located before the current precondition (_array index in [list of preconditions](../preconditions.md#specify-preconditions)_).
 * Does not exist in the evaluator's [list of preconditions](../preconditions.md#specify-preconditions).
 
-The evaluator will throw a `LogicException` if in such situations
+The evaluator will throw a `LogicException` if such situations arises.
 :::
 
 ### Return `null` (_next precondition_)
 
-When you return `null` from your pass or fail method, the evaluator will simply continue to the next precondition in its list. 
+When you return `null` from the pass or fail method, the evaluator will simply continue to the next precondition in its list. 
+If there are no more preconditions to evaluate, then your route or controller action will be invoked.
 
 ```php
 // ...Inside your precondition...
@@ -138,13 +142,19 @@ Lastly, in situations when your precondition needs to stop the request processin
 When doing so, your application's exception handler will deal with the exception and create a Http response accordingly.
 
 ```php
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
 
 // ...Inside your precondition...
 
 public function whenFails(Resource $resource): Resource|string|null
 {
-    throw new BadRequestHttpException('X-If-Author value must be a string');
+    // E.g. Use actions to abort request...
+    //return $this->actions()->abortPreconditionFailed($resource);
+
+    // Or, throw exception
+    throw new PreconditionFailedHttpException(
+        'Requested author name does not match resource\'s author'
+    );
 }
 ```
 
