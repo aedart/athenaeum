@@ -89,6 +89,33 @@ Now, the all create / make methods accept the following arguments:
 * `Model|Authenticatable|null $user = null` (_optional_) The user that caused the change. Defaults to current authenticated user.
 * `DateTimeInterface|Carbon|string|null $performedAt = null` (_optional_)  Date and time of when the event happened. Defaults to model's "updated at" value, if available, If not, then current date time is used.
 
+### Changed `publicPath()` and `langPath()` in Core Application
+
+From Laravel `v10.x`, the `\Illuminate\Contracts\Foundation\Application` interface defines `publicPath()` and `langPath()`, which the Core application inherits from.
+The method signature has changed and may cause compatible issues, if you overwrite these methods.
+
+**Before**
+
+```php
+// ...In \Aedart\Contracts\Core\Application...
+
+public function publicPath();
+
+public function langPath(string $path = ''): string;
+```
+
+**Now**
+
+```php
+// ...Inherited from \Illuminate\Contracts\Foundation\Application...
+
+public function publicPath($path = '');
+
+public function langPath($path = '');
+```
+
+If you have overwritten these methods, then you must ensure that the method signature is compatible with Laravel's `Application` interface.
+
 ### Removed `SearchProcessor::language()`
 
 The deprecated `\Aedart\Filters\Processors\SearchProcessor::language()` method has been removed. This features didn't work as intended.

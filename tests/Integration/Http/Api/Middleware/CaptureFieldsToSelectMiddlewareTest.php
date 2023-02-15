@@ -127,7 +127,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
     public function failsWhenTooManyFieldsAreRequested(): void
     {
         $this->expectException(ValidationException::class);
-        $this->expectExceptionMessage('The select must not have more than 20 items.');
+        $this->expectExceptionMessage('The select field must not have more than 20 items.');
 
         $requestedFields = $this->getFaker()->words(21);
         $request = new Request([ 'select' => implode(',', $requestedFields) ]);
