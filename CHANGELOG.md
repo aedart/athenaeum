@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `recordNewChange()` util method in `ChangeRecording` concern, in audit package.
 * Service `Registrar` invokes booting and booted callbacks of service providers.
 * Service `Registrar` can now bind singleton instances of non-associative `$singletons` array, if available in service providers.
+* `hasDebugModeEnabled()` in Core `Application` (_defined by Laravel's `Application` interface, from `v10.x`_).
 * `DateTimeFormats` interface that contains PHP's predefined date and time formats, along with a few additional, such as RFC3339 that supports `"Z"` or `"-/+00:00"` offset.
 * `asMicroSeconds()` in the `Duration` util.
 * `setAllowedDateFormats()` in `DateFilter`.
@@ -43,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Minimum required PHP version changed to `v8.1`.
 * Adapted CI environment to test PHP `v8.1` and `v8.2`.
+* Upgraded to use Laravel `v10.x` packages.
 * `FieldFilter` constructor and `make()` method arguments are now optional, to allow creating instances without triggering immediate validation of field, operator and value.
 * `DateFilter::allowedDateFormats()` visibility changed to public and now returns default date / datetime formats, when none specified.
 * `ApiResourceServiceProvider` changed to be an aggregate service provider that automatically registers `ETagsServiceProvider`.
@@ -50,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Dispatching "multiple models changed", via `ModelChangedEvents::dispatchMultipleModelsChanged` no longer skips all models, if the first is marked as "skip next recording", in audit package.  
 * `$models` attribute (_public_) can no longer be an `array`, in `MultipleModelsChanged`. Attribute must be of `Collection` instance.
 * `ModelChangedEvents` has been redesigned to accept all supported arguments for model changed events.
+* `publicPath()` and `langPath()` method signatures changes, in Core `Application`. Methods are now inherited from Laravel's `Application` interface (_Laravel `v10.x`_).
 
 **Non-breaking Changes**
 
