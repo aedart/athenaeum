@@ -19,7 +19,6 @@ You need PHP `v8.1` or higher to run Athenaeum packages.
 
 Please read Laravel's [upgrade guide](https://laravel.com/docs/10.x/upgrade), before continuing here.
 
-
 ### Field Criteria
 
 The `\Aedart\Contracts\Database\Query\FieldCriteria::make()` and `\Aedart\Database\Query\FieldFilter::make()` now have optional `$field` argument.
