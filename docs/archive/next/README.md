@@ -13,12 +13,11 @@ However, due to limited amount of project maintainers, no guarantees can be prov
 
 | Version | PHP         | Laravel | Release              | Security Fixes Until |
 |---------|-------------|---------|----------------------|----------------------|
-| `8.x`   | `8.2 - ?`   | _TBD_   | _TBD_                | _TBD_                |
+| `8.x`   | `8.2 - ?`   | `v11.x` | _~1st Quarter 2024_  | February 2025        |
 | `7.x`*  | `8.1 - 8.2` | `v10.x` | _~1st Quarter 2023_  | February 2024        |
 | `6.x`   | `8.0 - 8.1` | `v9.x`  | April 5th, 2022      | February 2023        |
 | `5.x`   | `7.4`       | `v8.x`  | October 4th, 2020    | _N/A_                |
-| `4.x`   | `7.4`       | `v7.x`  | April 15th, 2020     | _N/A_                |
-| `< 4.x` | _-_         | _-_     | _See `CHANGELOG.md`_ | _N/A_                |
+| `< 5.x` | _-_         | _-_     | _See `CHANGELOG.md`_ | _N/A_                |
 
 _*: current supported version._
 
