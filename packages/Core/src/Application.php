@@ -308,6 +308,14 @@ class Application extends IoC implements
     /**
      * @inheritDoc
      */
+    public function hasDebugModeEnabled()
+    {
+        return (bool) $this['config']->get('app.debug');
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function maintenanceMode()
     {
         return $this->make(MaintenanceMode::class);
