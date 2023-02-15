@@ -226,9 +226,17 @@ class Application extends IoC implements
     }
 
     /**
+     * @inheritdoc
+     */
+    public function publicPath($path = '')
+    {
+        return $this->getPathsContainer()->publicPath($path);
+    }
+
+    /**
      * @inheritDoc
      */
-    public function langPath(string $path = ''): string
+    public function langPath($path = '')
     {
         return $this->getPathsContainer()->langPath($path);
     }
@@ -541,14 +549,6 @@ class Application extends IoC implements
     /*****************************************************************
      * Custom methods implementation
      ****************************************************************/
-
-    /**
-     * @inheritdoc
-     */
-    public function publicPath()
-    {
-        return $this->getPathsContainer()->publicPath();
-    }
 
     /**
      * @inheritdoc
