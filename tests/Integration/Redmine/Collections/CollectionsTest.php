@@ -12,7 +12,7 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @group redmine
  * @group redmine-collections
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Collections
  */
 class CollectionsTest extends RedmineTestCase

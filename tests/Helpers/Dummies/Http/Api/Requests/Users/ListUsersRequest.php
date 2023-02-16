@@ -12,7 +12,7 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Users\Filters\UsersFiltersBui
  *
  * FOR TESTING PURPOSES ONLY!
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Users
  */
 class ListUsersRequest extends ListResourcesRequest

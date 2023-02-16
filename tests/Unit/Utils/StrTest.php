@@ -14,7 +14,7 @@ use Aedart\Utils\Str;
  * @group utils-str
  * @group str
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
 class StrTest extends UnitTestCase

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
  * @group flysystem-db
  * @group flysystem-db-storage-disk
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Storage
  */
 class StorageDiskTest extends FlysystemDbTestCase

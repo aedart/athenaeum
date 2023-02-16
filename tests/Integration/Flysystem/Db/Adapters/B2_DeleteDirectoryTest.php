@@ -13,7 +13,7 @@ use League\Flysystem\FilesystemException;
  * @group flysystem-db
  * @group flysystem-db-b2
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
 class B2_DeleteDirectoryTest extends FlysystemDbTestCase

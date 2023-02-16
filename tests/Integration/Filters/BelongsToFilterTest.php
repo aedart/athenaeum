@@ -13,7 +13,7 @@ use Aedart\Tests\TestCases\Filters\FiltersTestCase;
  * @group filters
  * @group filters-belongs-to
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters
  */
 class BelongsToFilterTest extends FiltersTestCase

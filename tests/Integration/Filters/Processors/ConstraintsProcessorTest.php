@@ -16,7 +16,7 @@ use Aedart\Tests\TestCases\Filters\FiltersTestCase;
  * @group filters
  * @group filters-constraints-processor
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Processors
  */
 class ConstraintsProcessorTest extends FiltersTestCase

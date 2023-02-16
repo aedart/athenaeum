@@ -12,7 +12,7 @@ use Aedart\Tests\TestCases\TraitTestCase;
  * @group acl-traits
  * @group traits
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Acl\Traits
  */
 class AclTraitsTest extends TraitTestCase

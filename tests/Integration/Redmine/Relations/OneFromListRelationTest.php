@@ -14,7 +14,7 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @group redmine-relations
  * @group redmine-relations-one-from-list
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Relations
  */
 class OneFromListRelationTest extends RedmineTestCase

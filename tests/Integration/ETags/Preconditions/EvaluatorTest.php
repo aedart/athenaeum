@@ -20,7 +20,7 @@ use Throwable;
  * @group preconditions
  * @group preconditions-evaluator
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions
  */
 class EvaluatorTest extends PreconditionsTestCase

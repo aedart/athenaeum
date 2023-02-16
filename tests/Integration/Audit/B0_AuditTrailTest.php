@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
  * @group audit
  * @group audit-trail
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Audit
  */
 class B0_AuditTrailTest extends AuditTestCase

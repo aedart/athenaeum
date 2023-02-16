@@ -17,7 +17,7 @@ use Illuminate\Validation\ValidationException;
  * @group api-resource-request-concerns
  * @group record-existence
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests\Concerns
  */
 class RecordExistenceConcernTest extends ApiResourceRequestsTestCase

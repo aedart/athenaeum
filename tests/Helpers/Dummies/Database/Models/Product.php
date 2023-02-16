@@ -23,7 +23,7 @@ use Illuminate\Support\Carbon;
  * @property-read Category|null $category The category this product belongs to
  * @property-read Owner|null $restrictedOwner Owner restriction
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Database\Models
  */
 class Product extends Model

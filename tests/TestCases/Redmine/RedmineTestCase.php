@@ -36,7 +36,7 @@ use Throwable;
  *
  * Base test case for the Redmine package components
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Redmine
  */
 abstract class RedmineTestCase extends LaravelTestCase

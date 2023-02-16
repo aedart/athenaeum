@@ -23,7 +23,7 @@ use Throwable;
  * @group redmine-resources-time-entry-activity
  * @group redmine-resources-doc-category
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
 class EnumerationResourcesTest extends RedmineTestCase

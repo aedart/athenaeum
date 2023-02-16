@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 /**
  * Preconditions Test Case
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\ETags
  */
 abstract class PreconditionsTestCase extends ETagsTestCase

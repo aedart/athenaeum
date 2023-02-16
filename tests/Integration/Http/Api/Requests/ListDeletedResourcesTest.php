@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
  * @group api-resource-requests
  * @group list-deleted-resources-request
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
 class ListDeletedResourcesTest extends ApiResourceRequestsTestCase

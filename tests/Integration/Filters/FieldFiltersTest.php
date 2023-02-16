@@ -23,7 +23,7 @@ use Aedart\Tests\TestCases\Filters\FiltersTestCase;
  * @group filters-datetime
  * @group filters-string
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters
  */
 class FieldFiltersTest extends FiltersTestCase

@@ -17,7 +17,7 @@ use RuntimeException;
  * @group redmine-resources
  * @group redmine-resources-attachment
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
 class AttachmentTest extends RedmineTestCase

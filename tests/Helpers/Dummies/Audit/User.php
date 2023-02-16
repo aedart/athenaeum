@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *
  * FOR TESTING PURPOSES ONLY
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Audit
  */
 class User extends Authenticatable implements Instantiatable

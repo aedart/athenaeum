@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @group acl
  * @group acl-registrar
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Acl
  */
 class RegistrarTest extends AclTestCase

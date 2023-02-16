@@ -12,7 +12,7 @@ use RuntimeException;
  * @group util
  * @group invoker
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
 class InvokerTest extends UnitTestCase

@@ -14,7 +14,7 @@ use RuntimeException;
  * @group filters
  * @group base-processor
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Filters
  */
 class BaseProcessorTest extends UnitTestCase

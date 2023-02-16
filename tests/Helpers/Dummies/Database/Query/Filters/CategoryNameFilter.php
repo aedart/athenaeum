@@ -11,7 +11,7 @@ use Illuminate\Contracts\Database\Query\Builder;
  *
  * FOR TESTING PURPOSES ONLY
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Database\Query\Filters
  */
 class CategoryNameFilter extends Filter

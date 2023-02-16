@@ -15,7 +15,7 @@ use Teapot\StatusCode\All as StatusCodes;
  * @group redmine-resource
  * @group redmine-resource-delete
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
 class DeleteTest extends RedmineTestCase

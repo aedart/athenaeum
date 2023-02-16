@@ -16,7 +16,7 @@ use Illuminate\Contracts\Validation\Rule;
  * Some of the valid and invalid data sets are found from the following regex example:
  * https://regex101.com/r/Ly7O1x/3/
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Validation\Rules
  */
 class SemanticVersionRuleTest extends ValidationTestCase

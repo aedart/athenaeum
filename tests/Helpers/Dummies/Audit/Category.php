@@ -13,7 +13,7 @@ use Aedart\Tests\Helpers\Dummies\Database\Models\Category as BaseCategory;
  *
  * @see \Aedart\Tests\Helpers\Dummies\Database\Models\Category
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Audit
  */
 class Category extends BaseCategory

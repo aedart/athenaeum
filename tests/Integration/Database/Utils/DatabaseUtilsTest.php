@@ -14,7 +14,7 @@ use Aedart\Tests\TestCases\Database\DatabaseTestCase;
  * @group db
  * @group db-utils
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Database\Utils
  */
 class DatabaseUtilsTest extends DatabaseTestCase

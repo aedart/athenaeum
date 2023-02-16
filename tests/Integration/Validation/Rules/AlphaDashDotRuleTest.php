@@ -13,7 +13,7 @@ use Illuminate\Contracts\Validation\Rule;
  * @group rules
  * @group alpha-dash-dot
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Validation\Rules
  */
 class AlphaDashDotRuleTest extends ValidationTestCase

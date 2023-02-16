@@ -19,7 +19,7 @@ use Teapot\StatusCode\All as HttpStatus;
  * @group api-resource-requests
  * @group create-single-resource-request
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
 class CreateSingleResourceRequestTest extends ApiResourceRequestsTestCase

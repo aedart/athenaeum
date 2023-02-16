@@ -10,7 +10,7 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\User;
  *
  * FOR TESTING PURPOSES ONLY!
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Users
  */
 class CreateUserRequest extends CreateSingleResourceRequest

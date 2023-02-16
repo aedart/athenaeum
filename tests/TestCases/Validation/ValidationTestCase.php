@@ -13,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 /**
  * Validation Test-Case
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Validation
  */
 abstract class ValidationTestCase extends LaravelTestCase

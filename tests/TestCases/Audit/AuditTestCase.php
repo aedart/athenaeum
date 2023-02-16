@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 /**
  * Audit Test Case
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Audit
  */
 abstract class AuditTestCase extends LaravelTestCase

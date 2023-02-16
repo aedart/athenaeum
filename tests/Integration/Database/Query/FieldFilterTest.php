@@ -17,7 +17,7 @@ use Aedart\Tests\TestCases\Database\DatabaseTestCase;
  * @group db-criteria
  * @group db-field-criteria
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Database\Query
  */
 class FieldFilterTest extends DatabaseTestCase

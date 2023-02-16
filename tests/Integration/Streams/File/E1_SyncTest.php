@@ -13,7 +13,7 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @group streams
  * @group streams-file-e1
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
 class E1_SyncTest extends StreamTestCase

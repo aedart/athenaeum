@@ -15,7 +15,7 @@ use Aedart\Tests\TestCases\Database\DatabaseTestCase;
  * @group db-query-concerns
  * @group query-joins-concern
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Database\Query\Concerns
  */
 class JoinsConcernTest extends DatabaseTestCase

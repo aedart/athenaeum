@@ -18,7 +18,7 @@ use League\Flysystem\FilesystemAdapter;
  * @group flysystem-db
  * @group flysystem-db-league-tests
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters\League
  */
 class DatabaseAdapterTest extends BaseTestCase

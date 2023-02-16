@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 /**
  * Filters Test Case
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Filters
  */
 abstract class FiltersTestCase extends LaravelTestCase
