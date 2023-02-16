@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+###  Fixed
+
+* Split workflow fails to push, due to strange [directory ownership issue of `/tmp/monorepo_split/build_directory`](https://github.com/danharrin/monorepo-split-github-action/pull/44). 
+
 ## [7.0.0-alpha] - 2023-02-16
 
 ### Added
