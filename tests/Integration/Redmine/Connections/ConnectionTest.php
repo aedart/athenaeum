@@ -16,7 +16,7 @@ use Aedart\Utils\Json;
  * @group redmine
  * @group redmine-connection
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Connections
  */
 class ConnectionTest extends RedmineTestCase

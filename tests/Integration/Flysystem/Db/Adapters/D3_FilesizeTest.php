@@ -11,7 +11,7 @@ use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
  * @group flysystem-db
  * @group flysystem-db-d3
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
 class D3_FilesizeTest extends FlysystemDbTestCase

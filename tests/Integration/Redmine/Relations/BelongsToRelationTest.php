@@ -13,7 +13,7 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @group redmine-relations
  * @group redmine-relations-belongs-to
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Relations
  */
 class BelongsToRelationTest extends RedmineTestCase

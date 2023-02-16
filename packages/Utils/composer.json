@@ -22,7 +22,7 @@
     "require": {
         "php": "^8.1",
         "composer-runtime-api": "^2.0.0",
-        "aedart/athenaeum-contracts": "^6.9",
+        "aedart/athenaeum-contracts": "^7.1",
         "illuminate/support": "^v10.0.0"
     },
     "autoload": {
@@ -38,7 +38,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.1.x-dev"
+            "dev-master": "7.1.x-dev"
         }
     },
     "minimum-stability": "dev",

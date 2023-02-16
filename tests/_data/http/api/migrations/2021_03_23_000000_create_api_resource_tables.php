@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Create Api Resource Tables
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  */
 class CreateApiResourceTables extends Migration
 {

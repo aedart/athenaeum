@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.0.1] - 2023-02-16
+
+### Fixed
+
+* Invalid `illuminate/testing` version constraint in Testing package.
+
+## [7.0.0] - 2023-02-16
+
+###  Fixed
+
+* Interdependencies of all Athenaeum packages. Force release major version `7.0.0`¹. 
+
+¹: _This issue was caused by [monorepo builder](https://github.com/symplify/monorepo-builder/issues/25) and prevented correct version download of the alpha pre-releases._
+
+## [7.0.0-alpha.1] - 2023-02-16
+
+###  Fixed
+
+* Split workflow fails to push packages, due to strange [directory ownership issue of `/tmp/monorepo_split/build_directory`](https://github.com/danharrin/monorepo-split-github-action/pull/44). 
+
+## [7.0.0-alpha] - 2023-02-16
+
 ### Added
 
 * Http conditional request evaluator, with support of [RFC9110 preconditions](https://developer.mozilla.org/en-US/docs/Web/HTTP/Conditional_requests), in the ETags package.
@@ -986,7 +1008,11 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/6.8.1...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.0.1...HEAD
+[7.0.1]: https://github.com/aedart/athenaeum/compare/7.0.0...7.0.1
+[7.0.0]: https://github.com/aedart/athenaeum/compare/7.0.0-alpha.1...7.0.0
+[7.0.0-alpha.1]: https://github.com/aedart/athenaeum/compare/7.0.0-alpha...7.0.0-alpha.1
+[7.0.0-alpha]: https://github.com/aedart/athenaeum/compare/6.8.1...7.0.0-alpha
 [6.8.1]: https://github.com/aedart/athenaeum/compare/6.8.0...6.8.1
 [6.8.0]: https://github.com/aedart/athenaeum/compare/6.7.0...6.8.0
 [6.7.0]: https://github.com/aedart/athenaeum/compare/6.6.0...6.7.0

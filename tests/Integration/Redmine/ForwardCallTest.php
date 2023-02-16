@@ -13,7 +13,7 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @group redmine-resource
  * @group redmine-resource-forward-call
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
 class ForwardCallTest extends RedmineTestCase

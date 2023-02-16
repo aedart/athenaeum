@@ -17,16 +17,16 @@
     ],
     "require": {
         "php": "^8.1",
-        "aedart/athenaeum-config": "^6.9",
-        "aedart/athenaeum-console": "^6.9",
-        "aedart/athenaeum-container": "^6.9",
-        "aedart/athenaeum-contracts": "^6.9",
-        "aedart/athenaeum-dto": "^6.9",
-        "aedart/athenaeum-events": "^6.9",
-        "aedart/athenaeum-maintenance-modes": "^6.9",
-        "aedart/athenaeum-service": "^6.9",
-        "aedart/athenaeum-support": "^6.9",
-        "aedart/athenaeum-utils": "^6.9",
+        "aedart/athenaeum-config": "^7.1",
+        "aedart/athenaeum-console": "^7.1",
+        "aedart/athenaeum-container": "^7.1",
+        "aedart/athenaeum-contracts": "^7.1",
+        "aedart/athenaeum-dto": "^7.1",
+        "aedart/athenaeum-events": "^7.1",
+        "aedart/athenaeum-maintenance-modes": "^7.1",
+        "aedart/athenaeum-service": "^7.1",
+        "aedart/athenaeum-support": "^7.1",
+        "aedart/athenaeum-utils": "^7.1",
         "illuminate/cache": "^v10.0.0",
         "illuminate/filesystem": "^v10.0.0",
         "psr/log": "^3.0.0",
@@ -49,7 +49,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.1.x-dev"
+            "dev-master": "7.1.x-dev"
         }
     },
     "minimum-stability": "dev",

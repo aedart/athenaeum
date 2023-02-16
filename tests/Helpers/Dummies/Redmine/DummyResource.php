@@ -16,7 +16,7 @@ use Aedart\Redmine\RedmineApiResource;
  * @property int|null $id
  * @property string|null $name
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Redmine
  */
 class DummyResource extends RedmineApiResource implements

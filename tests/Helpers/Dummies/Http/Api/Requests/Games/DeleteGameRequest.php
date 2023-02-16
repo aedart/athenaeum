@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * FOR TESTING PURPOSES ONLY!
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Games
  */
 class DeleteGameRequest extends DeleteSingleResourceRequest

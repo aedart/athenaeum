@@ -19,9 +19,9 @@
     ],
     "require": {
         "php": "^8.1",
-        "aedart/athenaeum-container": "^6.9",
-        "aedart/athenaeum-database": "^6.9",
-        "aedart/athenaeum-streams": "^6.9",
+        "aedart/athenaeum-container": "^7.1",
+        "aedart/athenaeum-database": "^7.1",
+        "aedart/athenaeum-streams": "^7.1",
         "illuminate/console": "^v10.0.0",
         "league/flysystem": "^3.12.2"
     },
@@ -41,7 +41,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.1.x-dev"
+            "dev-master": "7.1.x-dev"
         }
     },
     "minimum-stability": "dev",

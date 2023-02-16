@@ -12,7 +12,7 @@ use LogicException;
  * @group pagination
  * @group paginator
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Pagination
  */
 class PaginatorTest extends UnitTestCase

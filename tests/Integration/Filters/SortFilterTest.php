@@ -16,7 +16,7 @@ use Illuminate\Contracts\Database\Query\Builder;
  * @group filters
  * @group filters-sort
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters
  */
 class SortFilterTest extends FiltersTestCase

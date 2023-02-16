@@ -16,7 +16,7 @@ use Throwable;
  * @group redmine-pagination
  * @group redmine-pagination-traversable
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Pagination
  */
 class TraversableResultsTest extends RedmineTestCase

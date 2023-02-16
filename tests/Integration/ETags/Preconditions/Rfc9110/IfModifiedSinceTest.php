@@ -16,7 +16,7 @@ use Throwable;
  * @group preconditions
  * @group rfc9110-if-modified-since
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions\Rfc9110
  */
 class IfModifiedSinceTest extends PreconditionsTestCase

@@ -15,7 +15,7 @@ use Aedart\Tests\TestCases\Acl\AclTestCase;
  * @group acl-permission-group
  * @group acl-permission-group-model
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Acl\Models
  */
 class PermissionGroupModelTest extends AclTestCase

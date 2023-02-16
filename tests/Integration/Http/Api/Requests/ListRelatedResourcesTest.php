@@ -19,7 +19,7 @@ use JsonException;
  * @group api-resource-requests
  * @group list-related-resources-request
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
 class ListRelatedResourcesTest extends ApiResourceRequestsTestCase

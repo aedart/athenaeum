@@ -13,7 +13,7 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @group redmine-resources
  * @group redmine-resources-user
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
 class UserTest extends RedmineTestCase

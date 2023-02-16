@@ -13,7 +13,7 @@ use Aedart\Utils\Str;
  * @group flysystem-db
  * @group flysystem-db-console
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Console
  */
 class MakeAdapterMigrationCommandTest extends FlysystemDbTestCase

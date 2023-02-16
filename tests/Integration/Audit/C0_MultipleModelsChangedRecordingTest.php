@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @group audit-trail
  * @group audit-trail-multiple-changes-recording
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Audit
  */
 class C0_MultipleModelsChangedRecordingTest extends AuditTestCase

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Create Categories Table
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  */
 class CreateCategoriesTable extends Migration
 {

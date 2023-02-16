@@ -11,7 +11,7 @@ use Aedart\Filters\Exceptions\InvalidParameter;
  *
  * FOR TESTING PURPOSES ONLY.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Filters\Processors
  */
 class InvalidParamFailProcessor extends BaseProcessor

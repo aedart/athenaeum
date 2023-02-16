@@ -14,7 +14,7 @@ use Illuminate\Validation\ValidationException;
  * @group filters
  * @group filters-search-processor
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Processors
  */
 class SearchProcessorTest extends FiltersTestCase

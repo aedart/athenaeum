@@ -16,7 +16,7 @@ use Teapot\StatusCode\All as StatusCodes;
  * @group redmine-resource
  * @group redmine-resource-create
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
 class CreateTest extends RedmineTestCase

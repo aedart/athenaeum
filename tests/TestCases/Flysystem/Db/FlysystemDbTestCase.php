@@ -18,7 +18,7 @@ use League\Flysystem\FilesystemOperator;
 /**
  * Flysystem Db Test Case
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Flysystem\Db
  */
 abstract class FlysystemDbTestCase extends FlysystemTestCase

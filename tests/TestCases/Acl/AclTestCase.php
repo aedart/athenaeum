@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Hash;
 /**
  * AclTestCase
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Acl
  */
 abstract class AclTestCase extends LaravelTestCase

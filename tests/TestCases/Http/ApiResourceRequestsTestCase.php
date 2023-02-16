@@ -11,7 +11,7 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\OwnerResource;
 /**
  * Api Resource Requests Test Case
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Http
  */
 abstract class ApiResourceRequestsTestCase extends ApiResourcesTestCase

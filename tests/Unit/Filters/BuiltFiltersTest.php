@@ -15,7 +15,7 @@ use Aedart\Tests\Helpers\Dummies\Database\Query\Filters\GenericFilter;
  * @group filters
  * @group built-filters-map
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Filters
  */
 class BuiltFiltersTest extends UnitTestCase

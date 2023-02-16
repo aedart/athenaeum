@@ -17,7 +17,7 @@ use Throwable;
  * @group redmine-resources
  * @group redmine-resources-issue-category
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
 class IssueCategoryTest extends RedmineTestCase
