@@ -44,6 +44,7 @@
     "require-dev": {
         "ext-curl": "*",
         "ext-sockets": "*",
+        "illuminate/testing": "^v10.0.0",
         "bamarni/composer-bin-plugin": "^1.8.2",
         "codeception/codeception": "^5.0.9",
         "codeception/module-asserts": "^3.0.0",
