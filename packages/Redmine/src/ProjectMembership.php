@@ -23,7 +23,7 @@ use Aedart\Redmine\Relations\BelongsTo;
  * @property int|null $user_id NOTE: user or group id. Property only available or expected when creating or updating resource.
  * @property int[]|null $role_ids Property only available or expected when creating or updating resource.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class ProjectMembership extends RedmineApiResource implements

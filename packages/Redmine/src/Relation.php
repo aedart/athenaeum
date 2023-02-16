@@ -20,7 +20,7 @@ use Throwable;
  * @property string $relation_type
  * @property float $delay
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class Relation extends RedmineApiResource implements
@@ -122,8 +122,7 @@ class Relation extends RedmineApiResource implements
         string $type = self::RELATES,
         float|null $delay = null,
         string|Connection|null $connection = null
-    ): static
-    {
+    ): static {
         $resource = static::make([
             'issue_id' => $parent,
             'issue_to_id' => $related,

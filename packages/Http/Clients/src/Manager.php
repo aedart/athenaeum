@@ -3,7 +3,6 @@
 namespace Aedart\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Client;
-use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Manager as HttpClientsManager;
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;

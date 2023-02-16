@@ -28,7 +28,7 @@ use Carbon\Carbon;
  * @property Carbon $created_on
  * @property Carbon $updated_on
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class Version extends RedmineApiResource implements

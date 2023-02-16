@@ -11,7 +11,7 @@ use Throwable;
  *
  * @see \Aedart\Contracts\Filters\Exceptions\InvalidParameterException
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Exceptions
  */
 class InvalidParameter extends ProcessorException implements InvalidParameterException
@@ -32,8 +32,7 @@ class InvalidParameter extends ProcessorException implements InvalidParameterExc
         string $message = "",
         int $code = 0,
         Throwable|null $previous = null
-    ): static
-    {
+    ): static {
         return static::make($processor, $message, $code, $previous)
             ->setParameter($parameter);
     }

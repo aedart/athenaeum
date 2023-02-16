@@ -15,7 +15,7 @@ use LogicException;
  *
  * Builds a search query filter, for the requested search term.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Filters\Processors
  */
 class SearchProcessor extends BaseProcessor
@@ -23,9 +23,9 @@ class SearchProcessor extends BaseProcessor
     use TranslatorTrait;
 
     /**
-     * List of table columns to search
+     * List of columns to search or search callbacks
      *
-     * @var string[]
+     * @var string[]|callable[]
      */
     protected array $columns;
 
@@ -35,15 +35,6 @@ class SearchProcessor extends BaseProcessor
      * @var int
      */
     protected int $maxSearchTermLength = 100;
-
-    /**
-     * @deprecated Since v6.7 - Will be removed in next major version
-     *
-     * The language to use
-     *
-     * @var string
-     */
-    protected string $language = 'en';
 
     /**
      * @inheritDoc
@@ -59,7 +50,7 @@ class SearchProcessor extends BaseProcessor
 
         // Abort if no columns are set
         if (empty($this->columns)) {
-            throw new LogicException('No table columns specified to search in');
+            throw new LogicException('No columns or callbacks specified to search in');
         }
 
         // Validate and sanitise search term(s)
@@ -77,12 +68,16 @@ class SearchProcessor extends BaseProcessor
     /**
      * Set the columns to be searched
      *
-     * @param string[] $columns
+     * @param string|callable|string[]|callable[] $columns
      *
      * @return self
      */
-    public function columns(array $columns): static
+    public function columns(string|callable|array $columns): static
     {
+        if (!is_array($columns)) {
+            $columns = [ $columns ];
+        }
+
         $this->columns = $columns;
 
         return $this;
@@ -102,25 +97,6 @@ class SearchProcessor extends BaseProcessor
         return $this;
     }
 
-    /**
-     * @deprecated Since v6.7 - Will be removed in next major version
-     *
-     * Set the language to be used
-     *
-     * Language is typically used for determining the "stop words"
-     * to be removed, before a query is applied.
-     *
-     * @param string $language [optional]
-     *
-     * @return self
-     */
-    public function language(string $language = 'en'): static
-    {
-        $this->language = $language;
-
-        return $this;
-    }
-
     /*****************************************************************
      * Internals
      ****************************************************************/
@@ -134,7 +110,7 @@ class SearchProcessor extends BaseProcessor
      */
     protected function makeFilter(string $search): Criteria
     {
-        return new SearchFilter($search, $this->columns, $this->language);
+        return new SearchFilter($search, $this->columns);
     }
 
     /**

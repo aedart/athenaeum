@@ -13,7 +13,7 @@ use League\Flysystem\Filesystem;
 /**
  * Flysystem Database Adapter Service Provider
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Flysystem\Db\Providers
  */
 class FlysystemDatabaseAdapterServiceProvider extends ServiceProvider
@@ -43,7 +43,7 @@ class FlysystemDatabaseAdapterServiceProvider extends ServiceProvider
      */
     protected function enableAdapterAsStorageDriver(): void
     {
-        Storage::extend('database', function($app, array $settings) {
+        Storage::extend('database', function ($app, array $settings) {
             // Resolve database connection
             $connection = $this
                 ->getConnectionResolver()

@@ -22,26 +22,16 @@ If you manage to learn about these concepts, you stand a far better chance of un
 
 ## Laravel's Official Documentation
 
-You could start by going through Laravel's [official documentation](https://laravel.com/docs/9.x).
+You could start by going through Laravel's [official documentation](https://laravel.com/docs/10.x).
 It has good and up-to-date information, on all the major aspects.
-In particular, you should focus on [Architectural Concepts](https://laravel.com/docs/9.x/container).
+In particular, you should focus on [Architectural Concepts](https://laravel.com/docs/10.x/container).
 It contains everything you need to know, in order to satisfy the bare minimum.
 
-## Or... `~41` minutes of Laracast
+## Or... Watch Laracast!
 
 [Laracast](https://laracasts.com) contains some of the best video tutorials, that I know.
-It contains over 1.500 lessons and will surely get you up to speed on Laravel, PHP, Testing, Vue.js and much more.
-Yes, it does **cost a bit of money**, but you do not have to commit for more than a month, if it is not to your liking¹.
-
-If this is a viable option for you, then you could consider the following lessons, before going through all available lessons (_membership is required_).
-
-- [The Basics of the Service Container](https://laracasts.com/series/laravel-6-from-scratch/episodes/38), `~5` minutes
-- [Dependency Injection via Service Container](https://laracasts.com/series/laravel-6-from-scratch/episodes/39), `~11` minutes
-- [Facades](https://laracasts.com/series/laravel-6-from-scratch/episodes/40), `~14` minutes
-- [Service Providers](https://laracasts.com/series/laravel-6-from-scratch/episodes/41), `~11` minutes
-
-The above tutorials are just about enough, to gain a basic understanding of the previous mentioned concepts.
-(_Never episodes are most likely available on Laracast, yet the core principles remain the same._)
+It contains over thousands of lessons, for beginners and experts alike.
+It does **cost a bit of money**, but it is worth it¹.
 
 ¹: _I'm not paid for endorsing Laracast nor Laravel. I do so out of sincerity!_
 

@@ -60,11 +60,11 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
         // Prerequisites - we need a route to the resource, with appropriate
         // name...
 
-        Route::get('/games/{id}', function() {
+        Route::get('/games/{id}', function () {
             return response()->json();
         })->name('games.show');
 
-        Route::get('/owners/{id}', function() {
+        Route::get('/owners/{id}', function () {
             return response()->json();
         })->name('owners.show');
 
@@ -116,7 +116,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
 
         $default = 'my-default-value';
         $resource = (new GameResource($record))
-            ->format(function(array $payload) use($default) {
+            ->format(function (array $payload) use ($default) {
                 $payload['owner'] = $payload['owner']->defaultTo($default);
 
                 return $payload;
@@ -147,7 +147,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
 
         $default = 'value-from-callback';
         $resource = (new GameResource($record))
-            ->format(function(array $payload) use($default) {
+            ->format(function (array $payload) use ($default) {
                 $payload['owner'] = $payload['owner']->defaultTo(fn () => $default);
 
                 return $payload;
@@ -179,7 +179,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new GameResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 $payload['owner'] = $resource
                     ->belongsToReference('owner');
 
@@ -215,7 +215,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new GameResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 $payload['owner'] = $resource
                     ->belongsToReference('owner')
                     ->usePrimaryKey('id');
@@ -252,7 +252,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new GameResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 $payload['owner'] = $resource
                     ->belongsToReference('owner')
                     ->usePrimaryKey('id')
@@ -290,7 +290,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new GameResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 $payload['owner'] = $resource
                     ->belongsToReference('owner')
                     ->asRawIdentifier();
@@ -324,7 +324,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new GameResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 $payload['owner'] = $resource
                     ->belongsToReference('owner')
                     ->withLabel('name')
@@ -362,10 +362,10 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new GameResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 $payload['owner'] = $resource
                     ->belongsToReference('owner')
-                    ->withLabel(function(Owner $model) {
+                    ->withLabel(function (Owner $model) {
                         $id = $model->getKey();
                         $name = $model->name;
 
@@ -417,7 +417,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new GameResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 $payload['owner'] = $resource
                     ->belongsToReference('owner')
                     ->withResourceType();
@@ -444,7 +444,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new GameResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 $payload['owner'] = $resource
                     ->belongsToReference('owner')
                     ->withResourceType()
@@ -482,7 +482,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new GameResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 $payload['owner'] = $resource
                     ->belongsToReference('owner')
                     ->withResourceType(true, true);
@@ -519,7 +519,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new GameResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 $payload['owner'] = $resource
                     ->belongsToReference('owner')
                     ->withSelfLink()
@@ -557,10 +557,10 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new GameResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 $payload['owner'] = $resource
                     ->belongsToReference('owner')
-                    ->withAdditionalFormatting(function(array $output) {
+                    ->withAdditionalFormatting(function (array $output) {
                         $output['extra_info'] = true;
 
                         return $output;

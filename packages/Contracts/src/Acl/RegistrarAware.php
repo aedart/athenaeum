@@ -7,7 +7,7 @@ namespace Aedart\Contracts\Acl;
  *
  * @see Registrar
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Acl
  */
 interface RegistrarAware

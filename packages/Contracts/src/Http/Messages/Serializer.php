@@ -6,7 +6,6 @@ use Aedart\Contracts\Http\Messages\Exceptions\SerializationException;
 use Illuminate\Contracts\Support\Arrayable;
 use Stringable;
 
-
 /**
  * Http Message Serializer
  *

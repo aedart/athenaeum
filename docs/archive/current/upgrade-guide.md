@@ -5,154 +5,125 @@ sidebarDepth: 1
 
 # Upgrade Guide
 
-## From version 5.x to 6.x.
+## From version 6.x to 7.x.
 
 [[TOC]]
 
-### PHP version `8` required
+### PHP version `8.1` required
 
-You need PHP `v8.0.2` or higher to run Athenaeum packages.
+You need PHP `v8.1` or higher to run Athenaeum packages.
 
-**Note**: _PHP `v8.1` is supported!_
+**Note**: _PHP `v8.2` is supported!_
 
-### Laravel `v9.x`
+### Laravel `v10.x`
 
-Since Athenaeum has upgraded to Laravel `v9.x`, you should read Laravel's [upgrade guide](https://laravel.com/docs/9.x/upgrade), before continuing here.
+Please read Laravel's [upgrade guide](https://laravel.com/docs/10.x/upgrade), before continuing here.
 
-### Argument- and Return Types
+### Field Criteria
 
-Almost all components, throughout all packages, have their argument and return types changed. [Union Types](https://php.watch/versions/8.0/union-types) are now being used extensively, where appropriate.
-This means that you will most likely experience breaking changes if:
-
-* You implement an interface
-* You extend a component
-
-Some of these changes will be highlighted in this upgrade guide, yet there are too many to cover here.
-Please make sure to _test your code_ before using any Athenaeum package in a production environment!
-
-### Version util return type
-
-The `\Aedart\Utils\Version` utility now returns `\Aedart\Contracts\Utils\Packages\Version` for it's `application()` and `package()` methods.
+The `\Aedart\Contracts\Database\Query\FieldCriteria::make()` and `\Aedart\Database\Query\FieldFilter::make()` now have optional `$field` argument.
+This will allow creating instances of custom filters, without specifying a field.
+The instance will NOT be applicable, until a field has been set.
 
 ```php
-// Previously
-$version = Version::application(); // \Jean85\Version
+use Aedart\Filters\Query\Filters\Fields\BelongsToFilter;
 
-// Now...
-$version = Version::application(); // \Aedart\Contracts\Utils\Packages\Version
+$filter = BelongsToFilter::make();
+
+// ...later in your application
+$filter->setField('authors');
 ```
 
-In addition, a `PackageVersionException` is now thrown from the `package()` method, if a version cannot be obtained.
+### Date Filter
+
+The `\Aedart\Filters\Query\Filters\Fields\DateFilter::allowedDateFormats()` method's visibility has been changed to `public` (_previously `protected`_).
+The method now returns a default set of supported date formats.
+These can also be specified via the `setAllowedDateFormats()` method.
 
 ```php
-// Previously
-Version::package('acme/unknown-package');
-// OutOfBoundsException thrown
+use Aedart\Filters\Query\Filters\Fields\DateFilter;
 
-// Now...
-Version::package('acme/unknown-package');
-// \Aedart\Contracts\Utils\Packages\Exceptions\PackageVersionException thrown
+$filter = DateFilter::make('event_date')
+    ->setAllowedDateFormats('Y-m-d');
 ```
 
-See [#68](https://github.com/aedart/athenaeum/issues/68) for additional details.
+### Api Resource Service Provider
 
-### `populate()` now returns `static`
+The `ApiResourceServiceProvider` is now an aggregate service provider, which automatically registers the `ETagsServiceProvider` and the new `JsonResourceServiceProvider` (_the previous version of `ApiResourceServiceProvider`_).
 
-The `\Aedart\Contracts\Utils\Populatable::populate()` method new returns `static`.
-This allows for a more fluent experience, when working with DTOs, e.g.
+### Audit Package
+
+The Audit package has been slightly refactored. As a result, a few components have been deprecated and replaced with improved versions.
+However, the dispatched events have undergone some breaking changes. 
+
+#### Deprecations
+
+* `\Aedart\Audit\Traits\RecordsChanges` trait. Replaced by `\Aedart\Audit\Concerns\ChangeRecording`.
+* `\Aedart\Audit\Traits\HasAuditTrail` trait  Replaced by `\Aedart\Audit\Concerns\AuditTrail`.
+* `\Aedart\Audit\Models\Concerns\AuditTrailConfiguration` concern. Replaced by `\Aedart\Audit\Concerns\AuditTrailConfig`.
+
+The deprecated components will be removed in the next major version.
+
+#### Dispatch Multiple Models Changed
+
+The `ModelChangedEvents::dispatchMultipleModelsChanged()` no longer skips all models, if the first is marked as "skip next recording" (_via model's `skipRecordingNextChange()`_). 
+Instead, models are now filtered by their skip state. Only if the models allow recording, will they be included in the dispatched event.
+
+#### Multiple Models Changed Event
+
+The public `$models` attribute can no longer be an `array`, in `MultipleModelsChanged`.
+The attribute must now be a `Collection` instance.
+
+#### Model Changed Events (_trait_)
+
+The `\Aedart\Audit\Observers\Concerns\ModelChangedEvents` concern/trait has been redesigned.
+Its methods now accept all supported arguments of `ModelHasChanged` event.
+Previously, only `$model`, event `$type` and a `$message` was accepted.
+Now, the all create / make methods accept the following arguments:
+
+* `Model $model` The model that has changed.
+* `string $type` The event type.
+* `array|null $original = null` (_optional_) Original data (attributes) before change occurred. Default's to given model's original data, if none given. 
+* `array|null $changed = null` (_optional_) Changed data (attributes) after change occurred. Default's to given model's changed data, if none given.
+* `string|null $message = null` (_optional_) Eventual user provided message associated with the event. Defaults to model's Audit Trail Message, if available.
+* `Model|Authenticatable|null $user = null` (_optional_) The user that caused the change. Defaults to current authenticated user.
+* `DateTimeInterface|Carbon|string|null $performedAt = null` (_optional_)  Date and time of when the event happened. Defaults to model's "updated at" value, if available, If not, then current date time is used.
+
+### Changed `publicPath()` and `langPath()` in Core Application
+
+From Laravel `v10.x`, the `\Illuminate\Contracts\Foundation\Application` interface defines `publicPath()` and `langPath()`, which the Core application inherits from.
+The method signature has changed and may cause compatible issues, if you overwrite these methods.
+
+**Before**
 
 ```php
-// Previously
-$person->populate([
-    'name' => 'John Smith'
-]);
+// ...In \Aedart\Contracts\Core\Application...
 
-$person->setAge(28);
+public function publicPath();
 
-// Now...
-$person->populate([
-    'name' => 'John Smith'
-])->setAge(28);
+public function langPath(string $path = ''): string;
 ```
 
-If you have a custom implementation of `populate()`, then you must now ensure that the method returns.
+**Now**
 
 ```php
-use Aedart\Contracts\Utils\Populatable;
+// ...Inherited from \Illuminate\Contracts\Foundation\Application...
 
-class Person implements Populatable
-{
-    public function populate(array $data = []): static
-    {
-        // ...populate implementation not shown...
-        
-        // Make sure to return instance!
-        return $this;
-    }
-}
+public function publicPath($path = '');
+
+public function langPath($path = '');
 ```
 
-### Listener option replaced, in Audit Trail package
+If you have overwritten these methods, then you must ensure that the method signature is compatible with Laravel's `Application` interface.
 
-The `listener` option found in `config/audit-trail.php` has been replaced by `subscriber`, which uses an [event subscriber](https://laravel.com/docs/9.x/events#event-subscribers) component instead.
+### Removed `SearchProcessor::language()`
 
-```php
-return [
-    // ...previous not shown ...
-    
-    // 'listener' NO LONGER USED!
-    'listener' => \Aedart\Audit\Listeners\RecordAuditTrailEntry::class,
+The deprecated `\Aedart\Filters\Processors\SearchProcessor::language()` method has been removed. This features didn't work as intended.
+No replacement has been implemented.
 
-    // Replacement
-    'subscriber' => \Aedart\Audit\Subscribers\AuditTrailEventSubscriber::class,
+### Removed `Str::tree()`
 
-    // ...remaining not shown ...
-];
-```
-
-### RFC3339 used as default format
-
-[RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) is now set as the default `datetime_format` option for the Http Query Grammar Profiles, in `config/http-clients`.
-_If you already have a datetime format specified in `config/http-clients.php`, then this change will not affect you._
-
-### Language directory path in Core `Application`
-
-The Core `Application` and `PathsContainer` now offer a `langPath()` method. This method has been added due to the addition and changes regarding language files in Laravel.
-By default, if your application has not specified a custom language path, it will return a default path in the root of the project (_previously lang directory was located in `resources/lang`_).
-
-```php
-echo $application->langPath(); // lang
-```
-
-The application will ensure that if you still use `resources/lang`, then languages files will be read from there.
-See [Laravel's upgrade guide](https://laravel.com/docs/9.x/upgrade#the-lang-directory) for details.
-
-### Replaced `\DateTime` with `\DateTimeInterface`
-
-Several "aware-of" helpers previously declared `\DateTime` as their value type, e.g. `\Aedart\Contracts\Support\Properties\Integers\DateAware`.
-These have all been changed to accept `\DateTimeInterface` instead.
-
-_This change can affect you if you have overwritten any getter, setter or default-value method, from the "aware-of" components._
-
-### `$seed` can no longer be `null`
-
-The `$seed` argument for `\Aedart\Utils\Math::applySeed()` no longer accepts `null` as value.
-
-```php
-// Previously
-Math::applySeed(null); // Was allowed
-
-// Now...
-Math::applySeed(null); // NOT allowed!
-
-// Use 0 instead, if needed!
-Math::applySeed(0); // allowed
-```
-
-### Removed `MocksApplicationServices` from testing utilities
-
-The `\Illuminate\Foundation\Testing\Concerns\MocksApplicationServices` helper has been deprecated by Laravel and therefore removed from `AthenaeumTestHelper` and `LaravelTestHelper` entirely.
-If you rely on this component, then you are strongly encouraged to refactor your tests, as it will not be supported in future versions of Laravel.
+`\Aedart\Utils\Str::tree()` was deprecated in `v6.4`. It has been replaced by `\Aedart\Utils\Arr::tree()`.
 
 ## Onward
 

@@ -3,7 +3,7 @@
 namespace Aedart\Http\Api\Resources\Relations\Concerns;
 
 use Aedart\Contracts\Http\Api\Resources\Relations\Exceptions\RelationReferenceException as RelationReferenceExceptionInterface;
-use \Aedart\Contracts\Http\Api\Resources\Relations\RelationReference;
+use Aedart\Contracts\Http\Api\Resources\Relations\RelationReference;
 use Illuminate\Database\Eloquent\Model;
 
 /**

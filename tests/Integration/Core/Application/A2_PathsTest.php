@@ -5,7 +5,6 @@ namespace Aedart\Tests\Integration\Core\Application;
 use Aedart\Core\Helpers\Paths;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
-use LogicException;
 
 /**
  * A2_PathsTest

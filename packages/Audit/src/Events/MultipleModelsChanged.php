@@ -2,7 +2,6 @@
 
 namespace Aedart\Audit\Events;
 
-use Aedart\Audit\Events\Concerns;
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -21,7 +20,7 @@ use Throwable;
  * - all records are soft-deleted.
  * - all records are recovered.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Events
  */
 class MultipleModelsChanged
@@ -31,9 +30,9 @@ class MultipleModelsChanged
     /**
      * The models that have changed
      *
-     * @var Collection|Model[]
+     * @var Collection<Model>
      */
-    public Collection|array $models;
+    public Collection $models;
 
     /**
      * Creates new "multiple models changed" event instance
@@ -59,8 +58,7 @@ class MultipleModelsChanged
         array|null $changed = null,
         string|null $message = null,
         DateTimeInterface|Carbon|string|null $performedAt = null
-    )
-    {
+    ) {
         // Resolve models argument
         if (!($models instanceof Collection)) {
             $models = collect($models);

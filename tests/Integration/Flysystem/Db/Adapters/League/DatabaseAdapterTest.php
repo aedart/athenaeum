@@ -23,7 +23,6 @@ use League\Flysystem\FilesystemAdapter;
  */
 class DatabaseAdapterTest extends BaseTestCase
 {
-
     /**
      * Service Container instance
      *
@@ -83,7 +82,7 @@ class DatabaseAdapterTest extends BaseTestCase
         $capsule->setAsGlobal();
 
         // Bind schema builder, so we can run migration manually!
-        $container->singleton('db.schema', function() use($capsule) {
+        $container->singleton('db.schema', function () use ($capsule) {
             return $capsule->getConnection()->getSchemaBuilder();
         });
 
@@ -159,5 +158,29 @@ class DatabaseAdapterTest extends BaseTestCase
 
         // Clear "custom" adapter...
         $this->clearCustomAdapter();
+    }
+
+    /**
+     * @test
+     *
+     * @inheritdoc
+     */
+    public function generating_a_public_url(): void
+    {
+        // This test is automatically SKIPPED. But, there is no need to
+        // mark it as such. The Database adapter does not support this feature!
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @test
+     *
+     * @inheritdoc
+     */
+    public function generating_a_temporary_url(): void
+    {
+        // This test is automatically SKIPPED. But, there is no need to
+        // mark it as such. The Database adapter does not support this feature!
+        $this->assertTrue(true);
     }
 }

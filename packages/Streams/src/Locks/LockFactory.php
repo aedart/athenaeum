@@ -40,8 +40,7 @@ class LockFactory implements Factory
     public function __construct(
         protected array $profiles = [],
         protected string $defaultProfile = 'default'
-    )
-    {
+    ) {
         // Set fallback profiles, when none available
         if (empty($this->profiles)) {
             $this->usingProfiles($this->fallbackProfiles);

@@ -41,7 +41,7 @@ class FLockDriver extends BaseLockDriver
         // Resolve sleep duration (microsecond) Default = 0.01 seconds
         $sleep = $this->get('sleep', 10_000);
         if ($sleep < 1) {
-            throw new InvalidArgumentException (sprintf('Sleep duration cannot be less than 1. %d given', $sleep));
+            throw new InvalidArgumentException(sprintf('Sleep duration cannot be less than 1. %d given', $sleep));
         }
 
         $resource = $stream->resource();

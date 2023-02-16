@@ -18,7 +18,6 @@ use Illuminate\Http\Request;
  */
 class UserResource extends ApiResource
 {
-
     /**
      * @inheritDoc
      */

@@ -8,174 +8,197 @@ description: Athenaeum Release Notes
 
 ## Support Policy
 
-Athenaeum attempts to follow a release cycle that matches closely to that of [Laravel](https://laravel.com/docs/9.x/releases).
+Athenaeum attempts to follow a release cycle that matches closely to that of [Laravel](https://laravel.com/docs/10.x/releases).
 However, due to limited amount of project maintainers, no guarantees can be provided. 
 
 | Version | PHP         | Laravel | Release              | Security Fixes Until |
 |---------|-------------|---------|----------------------|----------------------|
-| `7.x`   | _`8.1`_     | _TBD_   | _TBD_                | _TBD_                |
-| `6.x`*  | `8.0 - 8.1` | `v9.x`  | April 5th, 2022      | February 2023        |
-| `5.x`   | `7.4`       | `v8.x`  | October 4th, 2020    | N/A                  |
-| `4.x`   | `7.4`       | `v7.x`  | April 15th, 2020     | N/A                  |
-| `< 4.x` | _-_         | _-_     | _See `CHANGELOG.md`_ | N/A                  |
+| `8.x`   | `8.2 - ?`   | `v11.x` | _~1st Quarter 2024_  | February 2025        |
+| `7.x`*  | `8.1 - 8.2` | `v10.x` | _~1st Quarter 2023_  | February 2024        |
+| `6.x`   | `8.0 - 8.1` | `v9.x`  | April 5th, 2022      | February 2023        |
+| `5.x`   | `7.4`       | `v8.x`  | October 4th, 2020    | _N/A_                |
+| `< 5.x` | _-_         | _-_     | _See `CHANGELOG.md`_ | _N/A_                |
 
 _*: current supported version._
 
 _TBD: "To be decided"._
 
-## `v6.x` Highlights
+## `v7.x` Highlights
 
-These are some the new features of Athenaeum `v6.x`.
+These are the highlights of the latest major version of Athenaeum.
 
-### PHP `v8` and Laravel `v9.x`
+### PHP `v8.1` and Laravel `v10.x`
 
-Athenaeum has been upgraded to usePHP `v8.0` and [Laravel `v9.x`](https://laravel.com/docs/9.x/releases).
-Furthermore, PHP `v8.1` is also supported.
+PHP version `v8.1` is now the minimum required version for Athenaeum.
+[Laravel `v10.x`](https://laravel.com/docs/10.x/releases) packages are now used.
 
-### Improved Documentation
+### Http Conditional Requests
 
-Several improvements have been made throughout the documentation.
-From version `6.x`, a [Security Policy](./security.md), [Code of Conduct](./code-of-conduct.md) and an improved [Contribution Guide](./contribution-guide.md) is made available.
+The [ETags package](./etags/README.md) has been upgraded to offer support for [RFC 9110's conditional requests](https://httpwg.org/specs/rfc9110.html#conditional.requests).
+The following preconditions are supported by default:
 
-### Union Types support in DTO
+* [If-Match](https://httpwg.org/specs/rfc9110.html#field.if-match)
+* [If-Unmodified-Since](https://httpwg.org/specs/rfc9110.html#field.if-unmodified-since)
+* [If-None-Match](https://httpwg.org/specs/rfc9110.html#field.if-none-match)
+* [If-Modified-Since](https://httpwg.org/specs/rfc9110.html#field.if-modified-since)
+* [If-Range](https://httpwg.org/specs/rfc9110.html#field.if-range)
 
-The `Dto` and `ArrayDto` now support [union types](https://php.watch/versions/8.0/union-types) for their properties.
-When populating a DTO, the most suitable match will bre chosen.
+See [documentation](./etags/evaluator/README.md) for details.
+
+### `DownloadStream` Response Helper
+
+As a part of the [ETags package](./etags/evaluator/download-stream.md), a `DownloadStream` response helper is now available.
+It is able to create streamed response for `Range` requests.
 
 ```php
-class Person extends ArrayDto
-{
-    protected array $allowed = [
-        'name' => 'string|null',
-    ];
-}
+use Illuminate\Support\Facades\Route;
+use Aedart\ETags\Preconditions\Responses\DownloadStream;
 
-class Organisation extends Dto
-{
-    protected array $allowed = [
-        'name' => 'string|null',
-        'slogan' => 'string|null',
-    ];
-}
+Route::get('/downloads/{file}', function (DownloadFileRequest $request) {
 
-class Record extends Dto
-{    
-    protected array $allowed = [
-        'reference' => ['string', Person::class, Organisation::class, 'null'],
-    ];
-}
-
-// ------------------------------------------------------------------------ //
-
-// Reference is a string...
-$record->populate([
-    'reference' => 'https:://google.com'
-]);
-echo gettype($record->reference); // string
-
-// Reference becomes a Person...
-$record->populate([
-    'reference' => [ 'name' => 'Jane Jensen' ]
-]);
-echo ($record->reference instanceof Person); // true
-
-// Reference becomes an Organisation...
-$record->populate([
-    'reference' => [ 'name' => 'Acme', 'slogan' => 'Building stuff...' ]
-]);
-echo ($record->reference instanceof Organisation); // true
+    return DownloadStream::for($request->resource)
+        ->setName($request->route('file'));
+});
 ```
 
-See [Union Type Handling documentation](./dto/nested-dto.md#union-types) for additional examples.
+### API Requests
 
-### Streams
+The Http Api package has been upgraded with a few [Request abstractions](./http/api/requests/README.md).
+These can speed up development of API endpoints. 
 
-A package that offers an extended version of [PSR-7's](https://www.php-fig.org/psr/psr-7/#13-streams) defined `StreamInterface`;
-a wrapper for common stream operations, mostly intended for file streams.
+**Example Request**
+
+```php
+use Aedart\Http\Api\Requests\Resources\ShowSingleResourceRequest;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+
+class ShowUser extends ShowSingleResourceRequest
+{
+    public function findRecordOrFail(): Model
+    {
+        return User::findOrFail($this->route('id'));
+    }
+
+    public function mustEvaluatePreconditions(): bool
+    {
+        return true;
+    }
+}
+```
+
+**Example Action**
+
+```php
+Route::get('/users/{id}', function (ShowUser $request) {
+    return UserResource::make($request->record)
+        ->withCache();
+})->name('users.show');
+```
+
+### Api Resource Http Caching
+
+Additionally, Api Resources now have the ability to set [Caching headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control), [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag), and [Last-Modified date](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified), via a single method:
+
+```php
+Route::get('/addresses/{id}', function ($id) {
+    return new AddressResource(Address::findOrFail($id))
+        ->withCache();
+});
+```
+
+See [documentation](./http/api/resources/caching.md) for details.
+
+### Custom Queries for Search and Sorting Filters
+
+The `SearchFilter` and `SearchProcessor` now support custom search callbacks.
+
+```php
+use Aedart\Filters\Processors\SearchProcessor;
+use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+
+$processor = SearchProcessor::make()
+        ->columns(function(Builder|EloquentBuilder $query, string $search) {
+            return $query
+                ->orWhere($column, 'like', "{$search}%");
+        });
+```
+
+The same applies for the `SortFilter` and `SortingProcessor`.
+
+```php
+use Aedart\Filters\Processors\SortingProcessor;
+
+$processor = SortingProcessor::make()
+        ->sortable([ 'email', 'name'])
+        ->withSortingCallback('email', function($query, $column, $direction) {
+            return $query->orderBy("users.{$column}", $direction);
+        });
+```
+
+### Remove Response Payload Middleware
+
+A new middleware has been added for the Http Api package, which is able to remove a response's body, when a custom query parameter is available.
+See [middleware documentation](./http/api/middleware/remove-response-payload.md) for details.
+
+### Attach File Stream for Http Client
+
+The Http Client now supports uploading a file stream.
 
 ```php
 use Aedart\Streams\FileStream;
 
-$stream = FileStream::open('my-file.txt')
-    ->put('Hi there');
-
-$more = FileStream::openMemory()
-    ->put("\nMore things to show...")
-    ->positionToStart();
-
-$stream
-    ->append($more);
-
-echo (string) $stream; // Hi there
-                       // More things to show...
+$response = $client  
+        ->attachStream('2023_annual.pdf', FileStream::open('/reports/2023_annual.pdf', 'r'))
+        ->post('/reports/annual');
 ```
 
-### MIME-types detection
+### Improved Status object
 
-The [MIME-types](./mime-types) packages offers a way to detect a file's MIME-type based on a small sample of its contents.
+The `Status` object that is provided for [response expectations](./http/clients/methods/expectations.md) has been improved.
+It now contains several helper methods for determining if it matches a desired Http status code.
 
 ```php
-use Aedart\MimeTypes\Detector;
+use Aedart\Contracts\Http\Clients\Responses\Status;
+use Teapot\StatusCode\All as StatusCode;
 
-$file = fopen('my-picture.jpg', 'rb');
-$mimeType = (new Detector())->detect($file);
+$client
+    ->expect(function(Status $status){
+        if ($status->isBadGateway()) {
+            // ...
+        }
+            
+        if ($status->is(StatusCode::UNPROCESSABLE_ENTITY)) {
+            // ...
+        }
+        
+        if ($status->satisfies([ StatusCode::CREATED, StatusCode::NO_CONTENT ])) {
+            // ...
+        }
+        
+        // ... etc
+    });
 ```
 
-### Maintenance Modes
+### Stream `hash()` accept hashing options
 
-A new [Maintenance Modes](./maintenance/modes) package has been added, which offers a few additional drivers that can be used for [storing application down](https://laravel.com/docs/9.x/configuration#maintenance-mode) state.
+Streams now accept and apply [hashing options](https://www.php.net/manual/en/function.hash-init) in `hash()` method. This was previously also supported, but required PHP `v8.1`.
+PHP version check is no longer performed internally. See [documentation](./streams/usage/hash.md) for more details.
 
-### Where not in slug...
+### Stream `sync()` is now supported
 
-The `\Aedart\Database\Models\Concerns\Slugs` concern now offers a `whereSlugNotIn()` [query scope](https://laravel.com/docs/9.x/eloquent#local-scopes) method.
+File streams can now have their content synchronised to file, via the `sync()` method.
+See [example](./streams/usage/sync.md).
+
+### `to()` memory unit method
+
+The [Memory](./utils/memory.md) utility now offers a `to()` method, which allows specifying a string unit to convert the memory unit into.
 
 ```php
-// ...inside your Eloquent model
-
-$result = $query
-    ->whereSlugNotIn(['alpha', 'beta', 'gamma'])
-    ->get();
+echo Memory::unit(6_270_000_000) // bytes
+    ->to('gigabyte', 2); // 6.27
 ```
-
-### Validate JSON
-
-The `Json` utility has been given a new method, which can be used to determine if a value is a valid JSON encoded string.
-
-```php
-use Aedart\Utils\Json;
-
-echo Json::isValid('{ "name": "Sven" }'); // true
-```
-
-### Memory Util
-
-A new `Memory` util component has been added. It offers a few methods to help you deal with conversion and formatting.
-
-```php
-use Aedart\Utils\Memory;
-
-$unit = Memory::from('3 MB');
-echo $unit->toKibibyte(); // 2929.7
-
-// ...or create from bytes...
-echo Memory::unit(482504)->legacyFormat(); // 471.2 kB
-```
-
-See [component documentation](./utils/memory.md) for more examples.
-
-### Purpose change of Core Application
-
-Perhaps a less important highlight, but still worth mentioning, is that the purpose of the [Core Application package](./core) has changed from Athenaeum `v6.x`.
-The Core Application package was originally developed to act as a "bridge" for integrating Laravel components and services into legacy applications.
-This is no longer the case. Version `6.x` requires a minimum of PHP `v8.0` and it does not feel right to presume that the Core Application can be used as originally intended (_see original motivation in [version `v4.x`](../v4x/core)_). 
-
-From version `6.x`, the Core Application is intended for the following purposes:
-
-* Testing
-* Tinkering
-* Development of **non-essential** standalone applications
-
-If you are using the Core Application, for its original intent, then you are **strongly encouraged** to consider redesigning your application, e.g. rewrite your application using [Laravel](https://laravel.com/) or other appropriate framework.  
 
 ## Changelog
 

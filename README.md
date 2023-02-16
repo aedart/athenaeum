@@ -1,7 +1,6 @@
 [![Latest Stable Version](https://poser.pugx.org/aedart/athenaeum/v/stable)](https://packagist.org/packages/aedart/athenaeum)
 [![Total Downloads](https://poser.pugx.org/aedart/athenaeum/downloads)](https://packagist.org/packages/aedart/athenaeum)
 [![Latest Unstable Version](https://poser.pugx.org/aedart/athenaeum/v/unstable)](https://packagist.org/packages/aedart/athenaeum)
-[![composer.lock](https://poser.pugx.org/aedart/athenaeum/composerlock)](https://packagist.org/packages/aedart/athenaeum)
 [![License](https://poser.pugx.org/aedart/athenaeum/license)](https://packagist.org/packages/aedart/athenaeum)
 [![Build Status](https://github.com/aedart/athenaeum/actions/workflows/tests.yaml/badge.svg?branch=main)](https://github.com/aedart/athenaeum/actions/workflows/tests.yaml)
 
@@ -26,6 +25,10 @@ _A Circuit Breaker to encapsulate failure prevention logic._
 **[Dto](https://aedart.github.io/athenaeum/archive/current/dto/)**
 
 _Data Transfer Object abstraction._
+
+**[ETags](https://aedart.github.io/athenaeum/archive/current/etags/)**
+
+_ETags and Http Conditional Request evaluation utilities._
 
 **[Http Clients](https://aedart.github.io/athenaeum/archive/current/http/clients/)** 
 

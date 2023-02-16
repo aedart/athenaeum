@@ -13,7 +13,7 @@ use Illuminate\Contracts\Database\Query\Builder;
  *
  * @see \Aedart\Contracts\Database\Query\Criteria
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Database\Query
  */
 abstract class Filter implements Criteria

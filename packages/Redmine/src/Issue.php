@@ -83,7 +83,7 @@ use Throwable;
  * @property ListOfJournals<Journal>|Journal[]|null $journals Related data that can be requested included.
  * @property ListOfReferences<Reference>|Reference[]|null $watchers Related data that can be requested included.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 class Issue extends RedmineApiResource implements
@@ -180,8 +180,7 @@ class Issue extends RedmineApiResource implements
         array $attachments,
         array $include = [],
         string|Connection|null $connection = null
-    ): static
-    {
+    ): static {
         $resource = static::make($data, $connection);
 
         // Ensure that "attachments" are automatically included,

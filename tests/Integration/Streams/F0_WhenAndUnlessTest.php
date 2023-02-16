@@ -26,7 +26,7 @@ class F0_WhenAndUnlessTest extends StreamTestCase
         $stream = new Stream();
 
         $applied = false;
-        $stream->when(true, function() use(&$applied) {
+        $stream->when(true, function () use (&$applied) {
             $applied = true;
         });
 
@@ -43,7 +43,7 @@ class F0_WhenAndUnlessTest extends StreamTestCase
         $stream = new Stream();
 
         $applied = false;
-        $stream->when(false, fn() => false, function() use(&$applied) {
+        $stream->when(false, fn () => false, function () use (&$applied) {
             $applied = true;
         });
 
@@ -60,7 +60,7 @@ class F0_WhenAndUnlessTest extends StreamTestCase
         $stream = new Stream();
 
         $applied = false;
-        $stream->when(fn() => true, function() use(&$applied) {
+        $stream->when(fn () => true, function () use (&$applied) {
             $applied = true;
         });
 
@@ -77,7 +77,7 @@ class F0_WhenAndUnlessTest extends StreamTestCase
         $stream = new Stream();
 
         $applied = false;
-        $stream->unless(false, function() use(&$applied) {
+        $stream->unless(false, function () use (&$applied) {
             $applied = true;
         });
 
@@ -94,7 +94,7 @@ class F0_WhenAndUnlessTest extends StreamTestCase
         $stream = new Stream();
 
         $applied = false;
-        $stream->unless(true, fn() => false, function() use(&$applied) {
+        $stream->unless(true, fn () => false, function () use (&$applied) {
             $applied = true;
         });
 
@@ -111,7 +111,7 @@ class F0_WhenAndUnlessTest extends StreamTestCase
         $stream = new Stream();
 
         $applied = false;
-        $stream->unless(fn() => false, function() use(&$applied) {
+        $stream->unless(fn () => false, function () use (&$applied) {
             $applied = true;
         });
 

@@ -133,7 +133,7 @@ class Unit implements
         $parsedValue = (float) $matches['value'];
         $unit = strtolower($matches['unit']);
 
-        return match($unit) {
+        return match ($unit) {
             // byte
             'b', 'byte', 'bytes' => static::make($parsedValue),
 
@@ -163,6 +163,53 @@ class Unit implements
 
             // Fail if unit is known...
             default => throw new InvalidArgumentException(sprintf('Unable to parse unit "%s" from %s', $unit, $value))
+        };
+    }
+
+    /**
+     * Returns this unit's value (bytes) to the specified unit
+     *
+     * @param  string  $unit  [optional] Case insensitive unit, e.g. megabytes
+     * @param  int  $precision  [optional]
+     *
+     * @return int|float
+     *
+     * @throws InvalidArgumentException If unit is not supported
+     */
+    public function to(string $unit = 'bytes', int $precision = 1): int|float
+    {
+        $unit = strtolower($unit);
+
+        return match ($unit) {
+            // byte
+            'b', 'byte', 'bytes' => $this->bytes(),
+
+            // kilobyte / kibibyte
+            'k', 'kb', 'kilobyte', 'kilobytes' => $this->toKilobyte($precision),
+            'ki', 'kib', 'kibibyte', 'kibibytes' => $this->toKibibyte($precision),
+
+            // megabyte / mebibyte
+            'm', 'mb', 'megabyte', 'megabytes' => $this->toMegabyte($precision),
+            'mi', 'mib', 'mebibyte', 'mebibytes' => $this->toMebibyte($precision),
+
+            // Gigabyte / Gibibyte
+            'g', 'gb', 'gigabyte', 'gigabytes' => $this->toGigabyte($precision),
+            'gi', 'gib', 'gibibyte', 'gibibytes' => $this->toGibibyte($precision),
+
+            // Terabyte / Tebibyte
+            't', 'tb', 'terabyte', 'terabytes' => $this->toTerabyte($precision),
+            'ti', 'tib', 'tebibyte', 'tebibytes' => $this->toTebibyte($precision),
+
+            // Petabyte / Pebibyte
+            'p', 'pb', 'petabyte', 'petabytes' => $this->toPetabyte($precision),
+            'pi', 'pib', 'pebibyte', 'pebibytes' => $this->toPebibyte($precision),
+
+            // Exabyte / Exbibyte
+            'e', 'eb', 'exabyte', 'exabytes' => $this->toExabyte($precision),
+            'ei', 'eib', 'exbibyte', 'exbibytes' => $this->toExbibyte($precision),
+
+            // Fail if unit is known...
+            default => throw new InvalidArgumentException(sprintf('Unsupported "%s" unit. Cannot convert %s bytes to "%s"', $unit, $this->bytes(), $unit))
         };
     }
 
@@ -213,12 +260,12 @@ class Unit implements
     /*****************************************************************
      * Bytes
      ****************************************************************/
-    
+
     /**
      * Returns unit's value in bytes
-     * 
+     *
      * Bytes are the lowest value of memory unit.
-     * 
+     *
      * @return int
      */
     public function bytes(): int
@@ -760,8 +807,7 @@ class Unit implements
         bool $short = true,
         array $units = self::BINARY_UNITS,
         int $step = self::BINARY_VALUE
-    ): string
-    {
+    ): string {
         // Source inspired by: https://gist.github.com/liunian/9338301
         $bytes = $this->bytes;
 
@@ -796,7 +842,7 @@ class Unit implements
             $i++;
         }
 
-        return round($bytes, $precision). ' ' . $units[$i];
+        return round($bytes, $precision) . ' ' . $units[$i];
     }
 
     /**
@@ -821,10 +867,10 @@ class Unit implements
 
     /**
      * Divide unit's bytes with given value
-     * 
+     *
      * @param  int|float  $value
      * @param  int  $precision  [optional]
-     * 
+     *
      * @return float
      */
     protected function divideBytes(int|float $value, int $precision = 1): float

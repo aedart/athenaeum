@@ -3,6 +3,7 @@
 namespace Aedart\Http\Clients\Requests;
 
 use Aedart\Contracts\Http\Clients\Requests\Attachment as AttachmentInterface;
+use Aedart\Contracts\Streams\Stream;
 use Aedart\Http\Clients\Exceptions\InvalidFilePath;
 use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
@@ -135,6 +136,18 @@ class Attachment implements AttachmentInterface
         }
 
         return $this->contents(fopen($path, 'r'));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attachStream($stream): static
+    {
+        if ($stream instanceof Stream) {
+            $stream = $stream->detach();
+        }
+
+        return $this->contents($stream);
     }
 
     /**

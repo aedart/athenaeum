@@ -7,7 +7,7 @@ namespace Aedart\Redmine\Exceptions;
  *
  * Should be thrown when a resource was expected, but does not exist
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Exceptions
  */
 class NotFound extends ErrorResponse

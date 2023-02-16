@@ -12,7 +12,7 @@ use Throwable;
 /**
  * Error Response Exception
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Exceptions
  */
 class ErrorResponse extends RedmineException implements ErrorResponseException
@@ -51,8 +51,7 @@ class ErrorResponse extends RedmineException implements ErrorResponseException
         RequestInterface $request,
         string|null $message = null,
         Throwable|null $previous = null
-    ): static
-    {
+    ): static {
         $message = $message ?? 'Received unexpected response from Redmine: ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase();
 
         return new static(

@@ -7,10 +7,10 @@ use Aedart\Contracts\Streams\Meta\Repository;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Streams\Exceptions\InvalidStreamResource;
 use Aedart\Streams\Exceptions\StreamAlreadyOpened;
-use Aedart\Streams\Exceptions\StreamNotReadable;
-use Aedart\Streams\Exceptions\StreamNotSeekable;
 use Aedart\Streams\Exceptions\StreamException;
 use Aedart\Streams\Exceptions\StreamIsDetached;
+use Aedart\Streams\Exceptions\StreamNotReadable;
+use Aedart\Streams\Exceptions\StreamNotSeekable;
 use Aedart\Streams\Exceptions\StreamNotWritable;
 use Aedart\Streams\Meta\Repository as DefaultMetaRepository;
 use Aedart\Support\Facades\IoCFacade;
@@ -442,7 +442,7 @@ class Stream implements StreamInterface
 
         $resource = $this->resource();
 
-        while(false !== ($char = fgetc($resource))) {
+        while (false !== ($char = fgetc($resource))) {
             yield $char;
         }
     }
@@ -452,7 +452,7 @@ class Stream implements StreamInterface
      */
     public function readAllLines(): iterable
     {
-        return $this->readAllUsing(fn($resource) => trim(fgets($resource)));
+        return $this->readAllUsing(fn ($resource) => trim(fgets($resource)));
     }
 
     /**
@@ -460,7 +460,7 @@ class Stream implements StreamInterface
      */
     public function readAllUsingDelimiter(int $length, string $ending = ''): iterable
     {
-        return $this->readAllUsing(fn($resource) => stream_get_line($resource, $length, $ending));
+        return $this->readAllUsing(fn ($resource) => stream_get_line($resource, $length, $ending));
     }
 
     /**
@@ -468,7 +468,7 @@ class Stream implements StreamInterface
      */
     public function readAllInChunks(int $size = BufferSizes::BUFFER_8KB): iterable
     {
-        return $this->readAllUsing(fn($resource) => fread($resource, $size));
+        return $this->readAllUsing(fn ($resource) => fread($resource, $size));
     }
 
     /**
@@ -482,7 +482,7 @@ class Stream implements StreamInterface
 
         $resource = $this->resource();
 
-        while($output = fscanf($resource, $format)) {
+        while ($output = fscanf($resource, $format)) {
             yield $output;
         }
     }
@@ -498,7 +498,7 @@ class Stream implements StreamInterface
 
         $resource = $this->resource();
 
-        while(!feof($resource)) {
+        while (!feof($resource)) {
             yield $callback($resource);
         }
     }
@@ -714,7 +714,7 @@ class Stream implements StreamInterface
      */
     public function getDefaultSupportsLockingCallback(): callable
     {
-        return function($resource) {
+        return function ($resource) {
             return stream_supports_lock($resource);
         };
     }

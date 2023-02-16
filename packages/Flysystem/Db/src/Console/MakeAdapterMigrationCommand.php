@@ -9,7 +9,7 @@ use RuntimeException;
 /**
  * Make Adapter Migration Command
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Flysystem\Db\Console
  */
 class MakeAdapterMigrationCommand extends Command
@@ -44,8 +44,8 @@ class MakeAdapterMigrationCommand extends Command
         // Resolve table names
         $filesTable = $this->resolveFilesTableName();
         $contentsTable = $this->resolveContentsTableName();
-        if ($filesTable == $contentsTable){
-            Throw new InvalidArgumentException(sprintf('"Files" and "contents" table names the same (%s == %s). Unable to create migration file!', $filesTable, $contentsTable));
+        if ($filesTable == $contentsTable) {
+            throw new InvalidArgumentException(sprintf('"Files" and "contents" table names the same (%s == %s). Unable to create migration file!', $filesTable, $contentsTable));
         }
 
         // Write migration file
@@ -121,7 +121,7 @@ EOF,
      */
     protected function resolveTableName(string $argument, string $question = 'Table name?', string|null $default = null): string
     {
-        $validation = function($answer) {
+        $validation = function ($answer) {
             if (!preg_match('/^[a-zA-Z_][a-zA-Z\p{N}_]{0,127}$/', $answer)) {
                 throw new InvalidArgumentException('Invalid table name provided. Please try again...');
             }

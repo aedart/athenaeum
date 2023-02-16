@@ -48,7 +48,7 @@ trait EloquentEtag
         // return cached etag, if one exists for the requested "weak" or
         // "strong" flag. Otherwise, create a new etag.
 
-        if (!$force && $this->canUseCachedEtag($weak)){
+        if (!$force && $this->canUseCachedEtag($weak)) {
             return $this->cachedEtags[$weak];
         }
 

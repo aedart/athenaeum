@@ -325,8 +325,7 @@ class Memory
         bool $short = true,
         array $units = Unit::BINARY_UNITS,
         int $step = Unit::BINARY_VALUE
-    ): string
-    {
+    ): string {
         return static::unit($bytes)->format($precision, $short, $units, $step);
     }
 }

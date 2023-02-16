@@ -40,8 +40,8 @@ abstract class BaseLockDriver implements Lock
     public function __construct(
         protected Stream $stream,
         protected array $options = []
-    )
-    {}
+    ) {
+    }
 
     /**
      * Destructor

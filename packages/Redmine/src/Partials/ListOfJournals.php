@@ -7,7 +7,7 @@ namespace Aedart\Redmine\Partials;
  *
  * @see Journal
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials
  */
 class ListOfJournals extends NestedList

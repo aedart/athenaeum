@@ -5,7 +5,7 @@ namespace Aedart\ETags\Mixins;
 use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Exceptions\ETagException;
-use Aedart\ETags\Exceptions\InvalidRawValue;
+use Aedart\Contracts\Utils\Dates\DateTimeFormats;
 use Aedart\ETags\Facades\Generator;
 use Closure;
 use DateTimeInterface;
@@ -32,8 +32,7 @@ class RequestETagsMixin
      */
     public function etagsFrom(): Closure
     {
-        return function(string $header): Collection
-        {
+        return function (string $header): Collection {
             try {
                 $value = $this->header($header);
                 if (empty($value)) {
@@ -56,8 +55,7 @@ class RequestETagsMixin
      */
     public function ifMatchEtags(): Closure
     {
-        return function(): Collection
-        {
+        return function (): Collection {
             return $this->etagsFrom('If-Match');
         };
     }
@@ -71,8 +69,7 @@ class RequestETagsMixin
      */
     public function ifNoneMatchEtags(): Closure
     {
-        return function(): Collection
-        {
+        return function (): Collection {
             return $this->etagsFrom('If-None-Match');
         };
     }
@@ -90,8 +87,7 @@ class RequestETagsMixin
      */
     public function ifRangeEtagOrDate(): Closure
     {
-        return function (): ETag|DateTimeInterface|null
-        {
+        return function (): ETag|DateTimeInterface|null {
             if (!$this->hasIfRangeHeaders()) {
                 return null;
             }
@@ -120,8 +116,7 @@ class RequestETagsMixin
      */
     public function hasIfRangeHeaders(): Closure
     {
-        return function(): bool
-        {
+        return function (): bool {
             // From RFC-9110
             // [...] A server MUST ignore an If-Range header field received in a request
             // that does not contain a Range header field [...]
@@ -138,15 +133,14 @@ class RequestETagsMixin
      */
     public function httpDateFrom(): Closure
     {
-        return function(string $header): DateTimeInterface|null
-        {
+        return function (string $header): DateTimeInterface|null {
             $value = $this->header($header);
             if (empty($value)) {
                 return null;
             }
 
             try {
-                return Carbon::createFromTimeString($value, 'GMT');
+                return Carbon::createFromFormat(DateTimeFormats::RFC9110, $value);
             } catch (Throwable $e) {
                 throw new BadRequestHttpException(sprintf('Invalid HTTP-Date value in %s header', $header), $e);
             }
@@ -166,8 +160,7 @@ class RequestETagsMixin
      */
     public function ifModifiedSinceDate(): Closure
     {
-        return function (): DateTimeInterface|null
-        {
+        return function (): DateTimeInterface|null {
             // From RFC-9110:
             // "[...] A recipient MUST ignore If-Modified-Since if the request contains an If-None-Match header field
             // [...] A recipient MUST ignore the If-Modified-Since header field if the received field value
@@ -193,8 +186,7 @@ class RequestETagsMixin
      */
     public function ifUnmodifiedSinceDate(): Closure
     {
-        return function (): DateTimeInterface|null
-        {
+        return function (): DateTimeInterface|null {
             // From RFC-9110:
             // "[...] A recipient MUST ignore If-Unmodified-Since if the request contains an If-Match header field
             // [...] A recipient MUST ignore the If-Unmodified-Since header field if the received field value is

@@ -81,7 +81,6 @@ trait Relations
         $output = [];
 
         foreach ($payload as $key => $value) {
-
             if (is_array($value)) {
                 $output[$key] = $this->resolveRelations($value, $request);
                 continue;

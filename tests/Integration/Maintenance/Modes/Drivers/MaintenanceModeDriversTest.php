@@ -4,10 +4,7 @@ namespace Aedart\Tests\Integration\Maintenance\Modes\Drivers;
 
 use Aedart\Maintenance\Modes\Drivers\ArrayBasedMode;
 use Aedart\Maintenance\Modes\Drivers\JsonFileBasedMode;
-use Aedart\Maintenance\Modes\FallbackManager;
-use Aedart\Support\Facades\IoCFacade;
 use Aedart\Tests\TestCases\Maintenance\Modes\MaintenanceModesTestCase;
-use Codeception\Configuration;
 use Illuminate\Contracts\Foundation\MaintenanceMode;
 
 /**

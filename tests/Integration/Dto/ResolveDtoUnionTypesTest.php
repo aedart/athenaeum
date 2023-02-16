@@ -89,7 +89,7 @@ class ResolveDtoUnionTypesTest extends DtoTestCase
         $this->assertInstanceOf(Person::class, $dtoC->reference);
 
         // Note: given array data matches the keys of Organisation and not Person, which is what we expect!
-        $dtoD = $this->makeDtoWithUnionTypes([ 'reference' => Organisation::makeNew( ['name' => $faker->company(), 'slogan' => $faker->sentence(4) ] ) ]);
+        $dtoD = $this->makeDtoWithUnionTypes([ 'reference' => Organisation::makeNew(['name' => $faker->company(), 'slogan' => $faker->sentence(4) ]) ]);
         $this->assertTrue(isset($dtoD->reference), 'Reference not set (d: Organisation)');
 
         $dtoE = $this->makeDtoWithUnionTypes([ 'reference' => [ 'name' => $faker->company(), 'slogan' => $faker->sentence(4) ] ]);

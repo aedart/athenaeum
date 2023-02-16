@@ -16,7 +16,7 @@ The output of the method is expected to be a map of http query parameters and co
 ```php
 use Aedart\Filters\BaseBuilder;
 
-class UserFilterBuilder extends BaseBuilder
+class UserFiltersBuilder extends BaseBuilder
 {
     public function processors(): array
     {
@@ -39,8 +39,8 @@ class UserFilterBuilder extends BaseBuilder
 
 ## How to use Builder
 
-Once you have created your builder, you can instantiate a new instance in your [Form Request](https://laravel.com/docs/9.x/validation#form-request-validation).
-The [after validation hook](https://laravel.com/docs/9.x/validation#after-validation-hook) is a possible place, where you can create a new builder instance.
+Once you have created your builder, you can instantiate a new instance in your [Form Request](https://laravel.com/docs/10.x/validation#form-request-validation).
+The [after validation hook](https://laravel.com/docs/10.x/validation#after-validation-hook) is a possible place, where you can create a new builder instance.
 However, feel free to initialise your builder where it suits you the most.
 
 Call the `build()` method to trigger the processing of http query parameters. The method returns the `BuiltFiltersMap` DTO, which contains all query filters that must be applied. 
@@ -54,7 +54,7 @@ class ListUsersRequest exends FormRequest
 
     public function after(Validator $validator)
     {        
-        $this->filters = UserFilterBuilder::make($this)
+        $this->filters = UserFiltersBuilder::make($this)
             ->build();
     }
 
@@ -79,7 +79,7 @@ By default, if received http query parameters do not match any of the names stat
 If you wish to change this behavior, then us the `force()` method on those processors that always must be triggered, regardless of matching query parameters are received or not.
 
 ```php
-class UserFilterBuilder extends BaseBuilder
+class UserFiltersBuilder extends BaseBuilder
 {
     public function processors(): array
     {

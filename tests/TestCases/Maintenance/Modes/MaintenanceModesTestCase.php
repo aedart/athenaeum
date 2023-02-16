@@ -4,7 +4,6 @@ namespace Aedart\Tests\TestCases\Maintenance\Modes;
 
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
-use Aedart\Http\Clients\Providers\HttpClientServiceProvider;
 use Aedart\Maintenance\Modes\FallbackManager;
 use Aedart\Maintenance\Modes\Providers\MaintenanceModeServiceProvider;
 use Aedart\Maintenance\Modes\Traits\MaintenanceModeManagerTrait;

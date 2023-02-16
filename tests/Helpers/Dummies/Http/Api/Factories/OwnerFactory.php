@@ -30,7 +30,7 @@ class OwnerFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->name(),
-            'address_id' => function() {
+            'address_id' => function () {
                 return Address::factory()->create();
             }
         ];

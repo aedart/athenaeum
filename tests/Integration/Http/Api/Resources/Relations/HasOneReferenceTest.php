@@ -60,11 +60,11 @@ class HasOneReferenceTest extends ApiResourcesTestCase
         // Prerequisites - we need a route to the resource, with appropriate
         // name...
 
-        Route::get('/owners/{id}', function() {
+        Route::get('/owners/{id}', function () {
             return response()->json();
         })->name('owners.show');
 
-        Route::get('/addresses/{id}', function() {
+        Route::get('/addresses/{id}', function () {
             return response()->json();
         })->name('addresses.show');
 
@@ -92,12 +92,12 @@ class HasOneReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new AddressResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 // Manually add relation
                 $payload['owner'] = $resource
                     ->hasOneReference('owner')
                     ->usePrimaryKey('id', 'ID')
-                    ->withLabel(function(Owner $model) {
+                    ->withLabel(function (Owner $model) {
                         return $model->name;
                     })
                     ->withSelfLink()

@@ -63,15 +63,15 @@ class NestedRelationsTest extends ApiResourcesTestCase
         // Prerequisites - we need a route to the resource, with appropriate
         // name...
 
-        Route::get('/games/{id}', function() {
+        Route::get('/games/{id}', function () {
             return response()->json();
         })->name('games.show');
 
-        Route::get('/owners/{id}', function() {
+        Route::get('/owners/{id}', function () {
             return response()->json();
         })->name('owners.show');
 
-        Route::get('/addresses/{id}', function() {
+        Route::get('/addresses/{id}', function () {
             return response()->json();
         })->name('addresses.show');
 
@@ -99,14 +99,14 @@ class NestedRelationsTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new GameResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 $payload['owner'] = $resource
                     ->belongsToReference('owner');
 
                 // Manually add a nested relation to the output
                 $payload['owner_address'] = $resource
                     ->belongsToReference('owner.address')
-                    ->withLabel(function(Address $model) {
+                    ->withLabel(function (Address $model) {
                         return $model->street;
                     })
                     ->withSelfLink()

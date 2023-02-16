@@ -27,7 +27,7 @@ use Throwable;
  *
  * @property Permission[]|Collection $permissions The permissions that belong to this group
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Acl\Models\Permissions
  */
 class Group extends Model implements Sluggable
@@ -91,8 +91,7 @@ class Group extends Model implements Sluggable
         string|null $name = null,
         string|null $description = null,
         bool $prefix = true
-    ): static
-    {
+    ): static {
         // Method is intended to streamline creation of permissions for
         // a specific group. Since multiple permissions can be requested
         // created, we use database transactions for this method.

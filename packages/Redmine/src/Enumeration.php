@@ -15,7 +15,7 @@ use Aedart\Contracts\Redmine\Listable;
  * @property string $name
  * @property bool $is_default
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
 abstract class Enumeration extends RedmineApiResource implements

@@ -1,7 +1,9 @@
 ---
-description: Athenaeum v7.x
+description: Athenaeum Release Notes
+sidebarDepth: 0
 ---
 
-# Version 7.x Documentation
+# Not Available
 
-_No `v7.x` documentation is yet available._
+_The next version of Athenaeum has yet to be designed and implemented. Come back at a later time to review the documentation..._
+ 

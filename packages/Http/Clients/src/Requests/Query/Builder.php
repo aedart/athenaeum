@@ -14,8 +14,8 @@ use Aedart\Http\Clients\Traits\GrammarManagerTrait;
 use Aedart\Http\Clients\Traits\GrammarTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use Aedart\Utils\Arr;
-use Illuminate\Contracts\Container\Container;
 use DateTimeInterface;
+use Illuminate\Contracts\Container\Container;
 use Stringable;
 
 /**
@@ -576,8 +576,7 @@ class Builder implements
         string $field,
         array $operatorsAndValues,
         string $conjunction = self::AND_CONJUNCTION
-    ): static
-    {
+    ): static {
         foreach ($operatorsAndValues as $operator => $value) {
             $this->addRegularWhere($field, $operator, $value, $conjunction);
         }
@@ -621,8 +620,7 @@ class Builder implements
         string $expression,
         array $bindings = [],
         string $conjunction = self::AND_CONJUNCTION
-    ): static
-    {
+    ): static {
         return $this->appendWhereCondition([
             self::FIELD => $expression,
             self::OPERATOR => null,
@@ -645,8 +643,7 @@ class Builder implements
         array $bindings = [],
         string $type = self::WHERE_TYPE_REGULAR,
         string $conjunction = self::AND_CONJUNCTION
-    ): static
-    {
+    ): static {
         // Add bindings, type, ...etc to where condition
         $where[self::BINDINGS] = $bindings;
         $where[self::TYPE] = $type;
@@ -675,8 +672,7 @@ class Builder implements
         mixed $operator = null,
         mixed $value = null,
         string $conjunction = self::AND_CONJUNCTION
-    ): static
-    {
+    ): static {
         // Resolve arguments
         if (!isset($value)) {
             $value = $operator;

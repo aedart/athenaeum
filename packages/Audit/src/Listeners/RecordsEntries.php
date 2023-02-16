@@ -2,11 +2,12 @@
 
 namespace Aedart\Audit\Listeners;
 
-use Aedart\Audit\Models\Concerns;
+use Aedart\Audit\Concerns\AuditTrailConfig;
 use Aedart\Utils\Json;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Config;
 use JsonException;
 
 /**
@@ -21,7 +22,7 @@ abstract class RecordsEntries implements ShouldQueue
 {
     use InteractsWithQueue;
     use Queueable;
-    use Concerns\AuditTrailConfiguration;
+    use AuditTrailConfig;
 
     /**
      * The number of times the queued listener may be attempted.
@@ -58,7 +59,7 @@ abstract class RecordsEntries implements ShouldQueue
      */
     protected function configureQueueSettings(): static
     {
-        $config = $this->getConfig()->get('audit-trail.queue', []);
+        $config = Config::get('audit-trail.queue', []);
 
         $this->connection = $config['connection'] ?? 'sync';
         $this->queue = $config['queue'] ?? 'default';

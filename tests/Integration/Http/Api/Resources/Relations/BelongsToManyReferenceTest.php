@@ -4,12 +4,9 @@ namespace Aedart\Tests\Integration\Http\Api\Resources\Relations;
 
 use Aedart\Http\Api\Resources\ApiResource;
 use Aedart\Testing\Helpers\ConsoleDebugger;
-use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Address;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Owner;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Role;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\User;
-use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\AddressResource;
-use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\OwnerResource;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\RoleResource;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\UserResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
@@ -65,11 +62,11 @@ class BelongsToManyReferenceTest extends ApiResourcesTestCase
         // Prerequisites - we need a route to the resource, with appropriate
         // name...
 
-        Route::get('/users/{id}', function() {
+        Route::get('/users/{id}', function () {
             return response()->json();
         })->name('users.show');
 
-        Route::get('/roles/{id}', function() {
+        Route::get('/roles/{id}', function () {
             return response()->json();
         })->name('roles.show');
 
@@ -96,7 +93,7 @@ class BelongsToManyReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new UserResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 // Manually add relation
                 $payload['roles'] = $resource
                     ->belongsToManyReference('roles')
@@ -152,7 +149,7 @@ class BelongsToManyReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new RoleResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 // Manually add relation
                 $payload['users'] = $resource
                     ->belongsToManyReference('users')
@@ -205,7 +202,7 @@ class BelongsToManyReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new UserResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 // Manually add relation
                 $payload['roles'] = $resource
                     ->belongsToManyReference('roles');
@@ -239,7 +236,7 @@ class BelongsToManyReferenceTest extends ApiResourcesTestCase
         // -------------------------------------------------------------- //
 
         $resource = (new UserResource($record))
-            ->format(function(array $payload, $request, ApiResource $resource) {
+            ->format(function (array $payload, $request, ApiResource $resource) {
                 // Manually add relation
                 $payload['roles'] = $resource
                     ->belongsToManyReference('roles');

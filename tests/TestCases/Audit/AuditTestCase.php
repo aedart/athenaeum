@@ -149,7 +149,7 @@ abstract class AuditTestCase extends LaravelTestCase
         $faker = $this->getFaker();
 
         $output = [];
-        while($amount--) {
+        while ($amount--) {
             $output[] = array_merge([
                 'slug' => $faker->unique()->slug(3),
                 'name' => $faker->words(4, true),

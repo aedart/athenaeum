@@ -33,7 +33,7 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
         $request->headers->set('ACCEPT', 'application/json');
 
         /** @var Response $response */
-        $response = (new RequestMustBeJson())->handle($request, function() {
+        $response = (new RequestMustBeJson())->handle($request, function () {
             return new Response();
         });
 
@@ -52,7 +52,7 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
         $request->headers->set('ACCEPT', 'application/json');
 
         /** @var Response $response */
-        $response = (new RequestMustBeJson())->handle($request, function() {
+        $response = (new RequestMustBeJson())->handle($request, function () {
             return new Response();
         });
 
@@ -74,7 +74,7 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
         $request->headers->set('CONTENT_TYPE', 'text/plain');
 
         /** @var Response $response */
-        (new RequestMustBeJson())->handle($request, function() {
+        (new RequestMustBeJson())->handle($request, function () {
             return new Response();
         });
     }
@@ -94,7 +94,7 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
         $request->headers->set('ACCEPT', 'text/plain');
 
         /** @var Response $response */
-        (new RequestMustBeJson())->handle($request, function() {
+        (new RequestMustBeJson())->handle($request, function () {
             return new Response();
         });
     }

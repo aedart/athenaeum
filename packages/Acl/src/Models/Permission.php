@@ -26,7 +26,7 @@ use Illuminate\Support\Carbon;
  * @property Group $group The group this permission belongs to
  * @property Role[]|Collection $roles The roles that have been granted this permission
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Acl\Models
  */
 class Permission extends Model implements Sluggable

@@ -14,7 +14,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
  * @method static Builder whereSlugIn(mixed $slugs)
  * @method static Builder whereSlugNotIn(mixed $slugs)
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Database\Models\Concerns
  */
 trait Slugs

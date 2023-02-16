@@ -67,7 +67,8 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         // Secondly, create a backup of the original stream and store
         // it inside a *.bak file.
         if ($this->mustBackup()) {
-            $this->backupFile = $this->backupOriginalStream($originalStream,
+            $this->backupFile = $this->backupOriginalStream(
+                $originalStream,
                 $this->backupDirectory()
             );
         }
@@ -172,8 +173,7 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
         string $profile,
         int $type,
         float $timeout
-    ): Lock
-    {
+    ): Lock {
         $lock = $stream
             ->getLockFactory()
             ->create($stream, $profile);
@@ -258,7 +258,7 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      */
     protected function copyStream(FileStreamInterface $stream, FileStreamInterface $target): FileStreamInterface
     {
-        return $stream->restorePositionAfter(function(FileStreamInterface $stream) use($target) {
+        return $stream->restorePositionAfter(function (FileStreamInterface $stream) use ($target) {
             return $stream
                 ->positionToStart()
                 ->copyTo($target);
@@ -273,7 +273,7 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      *
      * @return string
      */
-    protected function makeBackupFilename(FileStreamInterface $stream,  string $directory): string
+    protected function makeBackupFilename(FileStreamInterface $stream, string $directory): string
     {
         $uri = pathinfo($stream->uri(), PATHINFO_BASENAME);
         $date = Carbon::now()->format('Y_m_d_His_u');

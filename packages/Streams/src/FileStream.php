@@ -10,7 +10,6 @@ use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Contracts\Streams\Transactions\Transactions;
 use Aedart\MimeTypes\Concerns\MimeTypeDetection;
 use Aedart\MimeTypes\Exceptions\MimeTypeDetectionException;
-use Aedart\Streams\Concerns;
 use Aedart\Streams\Exceptions\CannotOpenStream;
 use Aedart\Streams\Exceptions\StreamException;
 use Throwable;
@@ -101,8 +100,7 @@ class FileStream extends Stream implements
         int|null $length = null,
         int $offset = 0,
         int|null $maximumMemory = null
-    ): static
-    {
+    ): static {
         $this
             ->positionToEnd()
             ->performCopy(
@@ -135,26 +133,21 @@ class FileStream extends Stream implements
 
     /**
      * {@inheritDoc}
-     *
-     * **CAUTION**: _Method is only supported from PHP v8.1_
-     * TODO: @see https://github.com/aedart/athenaeum/issues/105
      */
-//    public function sync(bool $includeMeta = true): static
-//    {
-//        $this->assertNotDetached('Unable to synchronizes data to file');
-//
-//        if ($includeMeta) {
-//            $result = fsync($this->resource());
-//        } else {
-//            $result = fdatasync($this->resource());
-//        }
-//
-//        if ($result === false) {
-//            throw new StreamException('Failed to synchronize data to file. Please check if stream is block or otherwise invalid');
-//        }
-//
-//        return $this;
-//    }
+    public function sync(bool $withoutMeta = true): static
+    {
+        $this->assertNotDetached('Unable to synchronizes data to file');
+
+        $result = ($withoutMeta)
+            ? fdatasync($this->resource())
+            : fsync($this->resource());
+
+        if ($result === false) {
+            throw new StreamException('Failed to synchronize data to file. Please check if stream is block or otherwise invalid');
+        }
+
+        return $this;
+    }
 
     /**
      * @inheritDoc

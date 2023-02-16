@@ -6,8 +6,9 @@ sidebarDepth: 0
 
 # Request / Response Macros
 
-When this package's service provider is registered, it installs a few [Http Request & Response Macros](https://laravel.com/docs/9.x/responses#response-macros).
-These provide, among other, some shortcut methods to obtain etags from [conditional headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Conditional_requests#conditional_headers) or to set cache headers with an etag.  
+Etags and precondition evaluator components depend on a few [Http Request & Response Macros](https://laravel.com/docs/10.x/responses#response-macros).
+These are automatically installed by this package's service provider.
+The following highlights the macros that are installed. 
 
 [[TOC]]
 

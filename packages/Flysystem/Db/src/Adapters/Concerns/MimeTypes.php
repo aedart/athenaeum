@@ -10,7 +10,7 @@ use League\Flysystem\Config;
 /**
  * Concerns Mime Types
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Flysystem\Db\Adapters\Concerns
  */
 trait MimeTypes
@@ -45,7 +45,7 @@ trait MimeTypes
      */
     public function defaultMimeTypeDetectorCallback(): callable
     {
-        return function(Detectable|FileStream $stream, Config $config) {
+        return function (Detectable|FileStream $stream, Config $config) {
             $profile = $config->get('mime_type_detector', null);
             $options = $config->get('mime_type_options', []);
 

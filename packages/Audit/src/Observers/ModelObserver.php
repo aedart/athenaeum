@@ -12,7 +12,7 @@ use Throwable;
  * Responsible for delegating Eloquent Model event, by dispatching
  * "has changed" event
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Observers
  */
 class ModelObserver

@@ -8,7 +8,7 @@ namespace Aedart\Contracts\Database\Query\Exceptions;
  * Should be thrown whenever an invalid or unsupported operator is attempted
  * used by a criteria / field criteria.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Database\Query\Exceptions
  */
 interface InvalidOperatorException extends CriteriaException

@@ -9,7 +9,7 @@ use Aedart\Redmine\Relation;
  *
  * @see Relation
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials
  */
 class ListOfRelatedIssues extends NestedList

@@ -8,6 +8,7 @@ use Aedart\Contracts\Http\Clients\Requests\Criteria;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation;
 use Aedart\Contracts\Http\Cookies\Cookie;
+use Aedart\Contracts\Streams\Stream;
 use Aedart\Contracts\Support\Helpers\Container\ContainerAware;
 use DateTimeInterface;
 use Psr\Http\Client\ClientInterface;
@@ -75,6 +76,7 @@ use Psr\Http\Message\UriInterface;
  * @method Attachment|null getAttachment(string $name) Get the attachment with the given name.
  * @method Attachment[] getAttachments() Get the attachments for the next request.
  * @method Builder attachFile(string $name, string $path, array $headers = [], string|null $filename = null) Attach a file to the next request.
+ * @method Builder attachStream(string $name, Stream|resource $stream, array $headers = [], string|null $filename = null) Attach file using a stream
  * @method Attachment makeAttachment(array $data = []) Creates a new attachment instance.
  * @method Builder withCookie(Cookie|array|callable $cookie) Add a cookie for the next request.
  * @method Builder withCookies(Cookie[]|callable[] $cookies = []) Add one or more cookies to the next request.

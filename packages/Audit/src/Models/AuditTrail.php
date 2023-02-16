@@ -2,7 +2,7 @@
 
 namespace Aedart\Audit\Models;
 
-use Aedart\Audit\Models\Concerns as AuditTrailConcerns;
+use Aedart\Audit\Concerns\AuditTrailConfig;
 use Aedart\Database\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,12 +27,12 @@ use Illuminate\Support\Carbon;
  * @property-read Model|Authenticatable|null $user The user that caused audit trail entry
  * @property-read Model $auditable The parent auditable model
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Models
  */
 class AuditTrail extends Model
 {
-    use AuditTrailConcerns\AuditTrailConfiguration;
+    use AuditTrailConfig;
 
     /**
      * The attributes that should be cast.

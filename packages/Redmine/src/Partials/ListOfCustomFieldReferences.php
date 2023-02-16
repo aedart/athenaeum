@@ -7,7 +7,7 @@ namespace Aedart\Redmine\Partials;
  *
  * @see \Aedart\Redmine\Partials\CustomFieldReference
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials
  */
 class ListOfCustomFieldReferences extends NestedList

@@ -37,7 +37,7 @@ class F0_ChecksumTest extends FlysystemDbTestCase
 
         // ----------------------------------------------------------------- //
 
-        $algo = 'crc32';
+        $algo = 'xxh3';
         $expected = hash($algo, $content);
         $result = $fs->checksum($path, [ 'checksum_algo' => $algo ]);
 

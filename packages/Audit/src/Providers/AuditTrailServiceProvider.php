@@ -2,9 +2,9 @@
 
 namespace Aedart\Audit\Providers;
 
-use Aedart\Audit\Events\ModelHasChanged;
-use Aedart\Audit\Listeners\RecordAuditTrailEntry;
+use Aedart\Audit\Helpers\Reason;
 use Aedart\Audit\Subscribers\AuditTrailEventSubscriber;
+use Aedart\Contracts\Audit\CallbackReason;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Illuminate\Support\ServiceProvider;
@@ -12,13 +12,17 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Audit Trail Service Provider
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Providers
  */
 class AuditTrailServiceProvider extends ServiceProvider
 {
     use ConfigTrait;
     use DispatcherTrait;
+
+    public array $singletons = [
+        CallbackReason::class => Reason::class
+    ];
 
     /**
      * Bootstrap this service

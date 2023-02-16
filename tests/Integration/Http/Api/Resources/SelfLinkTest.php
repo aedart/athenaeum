@@ -46,7 +46,7 @@ class SelfLinkTest extends ApiResourcesTestCase
         // Prerequisites - we need a route to the resource, with appropriate
         // name...
 
-        Route::get('/owners/{id}', function() {
+        Route::get('/owners/{id}', function () {
             return response()->json();
         })->name('owners.show');
 

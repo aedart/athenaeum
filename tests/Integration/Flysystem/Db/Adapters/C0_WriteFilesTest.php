@@ -17,7 +17,6 @@ use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
  */
 class C0_WriteFilesTest extends FlysystemDbTestCase
 {
-
     /**
      * @test
      *
