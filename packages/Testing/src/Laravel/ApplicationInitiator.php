@@ -192,7 +192,8 @@ trait ApplicationInitiator
      */
     protected function setAppKeyEnvironmentVariable(string $key): static
     {
-        ConsoleDebugger::output('APP_KEY = ' . $key);
+        // Debug
+//        ConsoleDebugger::output('APP_KEY = ' . $key);
 
         putenv('APP_KEY=' . $key);
 
