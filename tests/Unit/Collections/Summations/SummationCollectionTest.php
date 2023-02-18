@@ -216,7 +216,7 @@ class SummationCollectionTest extends UnitTestCase
     {
         $keyA = 'player.dexterity';
         $keyB = 'player.strength';
-        $value = $this->getFaker()->randomNumber(2);
+        $value = $this->getFaker()->randomNumber(2, true);
 
         $summation = $this->makeCollection()
             ->set($keyA, $value)
