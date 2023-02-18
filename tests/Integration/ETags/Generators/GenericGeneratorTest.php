@@ -50,7 +50,7 @@ class GenericGeneratorTest extends ETagsTestCase
         };
 
         $jsonSerializableClass = new class() implements JsonSerializable {
-            public function jsonSerialize()
+            public function jsonSerialize(): mixed
             {
                 return 'something';
             }
