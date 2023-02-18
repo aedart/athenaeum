@@ -1,6 +1,6 @@
 # Athenaeum Auth
 
-TODO...
+Contains a few authentication related utilities for Laravel.
 
 ## Documentation
 
