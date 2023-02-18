@@ -345,7 +345,7 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function count()
+    public function count(): int
     {
         return $this->getSize();
     }
@@ -394,7 +394,7 @@ class Stream implements StreamInterface
 
         return fgetc($this->resource());
     }
-    
+
     /**
      * @inheritDoc
      */
