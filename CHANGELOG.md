@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed 
+
+* `ApplicationInitiator` now offers utilities to set `APP_KEY`, in Testing package.
+
 ### Fixed
 
 * Summation collection unit test has a high probability of failure, due to weak generated random number.
