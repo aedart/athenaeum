@@ -146,7 +146,7 @@ class MultipartResponse
     /**
      * @inheritDoc
      */
-    public function __debugInfo(): array|null
+    public function __debugInfo(): array
     {
         return [
             'status' => $this->getStatusCode(),
