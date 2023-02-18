@@ -45,6 +45,13 @@ trait ApplicationInitiator
     protected bool $mustGenerateAppKey = false;
 
     /**
+     * Automatically enables package discoveries.
+     *
+     * @var bool
+     */
+    protected bool $enablesPackageDiscoveries = false;
+
+    /**
      * Start the Laravel application
      *
      * <br />
@@ -318,5 +325,14 @@ trait ApplicationInitiator
     protected function makeMigratorProcessor(array $options = []): MigrateProcessor
     {
         return new MigrateProcessor($this, $options);
+    }
+
+    public function ignorePackageDiscoveriesFrom()
+    {
+        return [
+            'spatie/laravel-ray',
+            'facade/ignition',
+            'sunspikes/clamav-validator'
+        ];
     }
 }
