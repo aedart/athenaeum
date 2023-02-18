@@ -128,7 +128,7 @@ class RehashPasswordIfNeededTest extends FortifyTestCase
 
         // ----------------------------------------------------------------------- //
 
-        Event::assertDispatched(function(PasswordWasRehashed $event) {
+        Event::assertDispatched(function (PasswordWasRehashed $event) {
             ConsoleDebugger::output([
                 'user' => $event->user->toArray(),
                 'hashed' => $event->hashed

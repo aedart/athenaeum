@@ -34,7 +34,8 @@ class RehashPasswordIfNeeded
         protected StatefulGuard $guard,
         protected Hasher $hasher,
         protected string $key = 'password'
-    ) {}
+    ) {
+    }
 
     /**
      * Rehashes user's password, if needed
