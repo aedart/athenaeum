@@ -2,7 +2,6 @@
 
 namespace Aedart\Testing\Laravel;
 
-use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration;
 use Aedart\Testing\Laravel\Database\MigrateProcessor;
 use Aedart\Utils\Str;
