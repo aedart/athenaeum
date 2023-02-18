@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* Summation collection unit test has a high probability of failure, due to weak generated random number.
+
 ## [7.0.1] - 2023-02-16
 
 ### Fixed
