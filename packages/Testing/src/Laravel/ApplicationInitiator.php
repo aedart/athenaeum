@@ -2,8 +2,10 @@
 
 namespace Aedart\Testing\Laravel;
 
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\Laravel\Bootstrap\LoadSpecifiedConfiguration;
 use Aedart\Testing\Laravel\Database\MigrateProcessor;
+use Aedart\Utils\Str;
 use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application;
@@ -36,6 +38,14 @@ trait ApplicationInitiator
     protected string $environment = 'testing';
 
     /**
+     * When true, APP_KEY environment variable is
+     * generated and set.
+     *
+     * @var bool
+     */
+    protected bool $mustGenerateAppKey = false;
+
+    /**
      * Start the Laravel application
      *
      * <br />
@@ -52,8 +62,12 @@ trait ApplicationInitiator
             return $this;
         }
 
-        // Set the environment
+        // Set the environment and application key
         $this->setApplicationEnvironment($this->environment);
+        if ($this->mustGenerateAppKey) {
+            $key = $this->generateAppKey();
+            $this->setAppKeyEnvironmentVariable($key);
+        }
 
         // Setup test environment
         $this->setUpTheTestEnvironment();
@@ -167,6 +181,46 @@ trait ApplicationInitiator
         putenv('APP_ENV=' . $environment);
 
         return $this;
+    }
+
+    /**
+     * Sets the APP_KEY environment variable
+     *
+     * @param  string  $key
+     *
+     * @return self
+     */
+    protected function setAppKeyEnvironmentVariable(string $key): static
+    {
+        ConsoleDebugger::output('APP_KEY = ' . $key);
+
+        putenv('APP_KEY=' . $key);
+
+        return $this;
+    }
+
+    /**
+     * Set whether APP_KEY environment must be generated at set, or not
+     *
+     * @param  bool  $generate  [optional]
+     *
+     * @return self
+     */
+    public function mustGenerateAppKey(bool $generate = true): static
+    {
+        $this->mustGenerateAppKey = $generate;
+
+        return $this;
+    }
+
+    /**
+     * Generates a new application key
+     *
+     * @return string
+     */
+    protected function generateAppKey(): string
+    {
+        return Str::random(32);
     }
 
     /**
