@@ -57,6 +57,8 @@ jobs:
             remote: 'athenaeum-acl'
           - local: 'Audit'
             remote: 'athenaeum-audit'
+          - local: 'Auth'
+            remote: 'athenaeum-auth'
           - local: 'Circuits'
             remote: 'athenaeum-circuits'
           - local: 'Collections'
