@@ -9,6 +9,7 @@ use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\ServiceProvider;
 use InvalidArgumentException;
 use Orchestra\Testbench\Concerns\Testing;
 use Orchestra\Testbench\Foundation\PackageManifest;
@@ -101,6 +102,10 @@ trait ApplicationInitiator
 
         // Tear down test environment
         $this->tearDownTheTestEnvironment();
+
+        // Empty evt. paths to be published, or we risk that when a publish
+        // command is invoked, unintended resources are published.
+        ServiceProvider::$publishes = [];
 
         // Clear the service container's own instance, which
         // is set to Laravel's Application at this point.

@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+* Resources from previous conducted tests are published, despite not registered. Fixed in `ApplicationInitiator` (_Testing package_) and `Application` (_Core application package_).
 * Summation collection unit test has a high probability of failure, due to weak generated random number.
 
 ## [7.0.1] - 2023-02-16
