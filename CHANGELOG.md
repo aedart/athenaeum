@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed 
 
 * `ApplicationInitiator` now offers utilities to set `APP_KEY`, in Testing package.
+* `$enablesPackageDiscoveries` set to `false` in `ApplicationInitiator` (_was previously not specified_).
 
 ### Fixed
 
