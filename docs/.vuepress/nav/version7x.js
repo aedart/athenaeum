@@ -38,6 +38,28 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Auth',
+            collapsable: true,
+            children: [
+                'auth/',
+                'auth/install',
+                {
+                    title: 'Fortify',
+                    collapsable: true,
+                    children: [
+                        'auth/fortify/', // Prerequisites
+                        {
+                            title: 'Actions',
+                            collapsable: true,
+                            children: [
+                                'auth/fortify/actions/rehash-password',
+                            ]
+                        },
+                    ]
+                },
+            ]
+        },
+        {
             title: 'Circuits',
             collapsable: true,
             children: [
