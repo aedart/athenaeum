@@ -200,7 +200,7 @@ trait ApplicationInitiator
     }
 
     /**
-     * Set whether APP_KEY environment must be generated at set, or not
+     * Set whether value for APP_KEY environment must be generated, or not
      *
      * @param  bool  $generate  [optional]
      *
