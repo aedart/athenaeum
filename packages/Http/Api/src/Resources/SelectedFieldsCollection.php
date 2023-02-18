@@ -49,7 +49,7 @@ class SelectedFieldsCollection implements SelectedFieldsCollectionInterface
     /**
      * @inheritDoc
      */
-    public function count()
+    public function count(): int
     {
         return count($this->fields);
     }

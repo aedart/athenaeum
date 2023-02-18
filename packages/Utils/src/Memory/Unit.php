@@ -848,7 +848,7 @@ class Unit implements
     /**
      * @inheritDoc
      */
-    public function count()
+    public function count(): int
     {
         return $this->bytes();
     }

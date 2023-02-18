@@ -746,6 +746,9 @@ class Application extends IoC implements
         $this->hasBootstrapped = false;
         $this->hasTriggeredRun = false;
 
+        // Empty evt. paths to be published.
+        ServiceProvider::$publishes = [];
+
         $this->setServiceProviderRegistrar(null);
         $this->setPathsContainer(null);
 

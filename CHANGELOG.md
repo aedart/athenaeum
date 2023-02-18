@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added 
+
+* Authentication package, with a Laravel Fortify action for rehashing user's password after login.
+
+### Changed 
+
+* `ApplicationInitiator` now offers utilities to set `APP_KEY`, in Testing package.
+* `$enablesPackageDiscoveries` set to `false` in `ApplicationInitiator` (_was previously not specified_).
+
+### Fixed
+
+* Resources from previous conducted tests are published, despite not registered. Fixed in `ApplicationInitiator` (_Testing package_) and `Application` (_Core application package_).
+* Missing return type for `count()` methods, in `\Aedart\Streams\Stream`, `\Aedart\Http\Api\Resources\SelectedFieldsCollection`, and `\Aedart\Utils\Memory\Unit`.
+* Missing return type for `__toString()` methods, in `\Aedart\ETags\ETagsCollection`, and `\Aedart\MimeTypes\MimeType`.
+* Missing return type for `jsonSerialize()`method, in `\Aedart\ETags\ETagsCollection`.
+* Incorrect return type for `__debugInfo()`, in `\Aedart\Testing\Helpers\Http\MultipartResponse` and `\Aedart\Testing\Helpers\Http\MultipartContent`.
+* Summation collection unit test has a high probability of failure, due to weak generated random number.
+
 ## [7.0.1] - 2023-02-16
 
 ### Fixed

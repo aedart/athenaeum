@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Stringable;
 
 /**
  * C5_WhereObjectTest
@@ -67,8 +68,8 @@ class C6_WhereObjectTest extends HttpClientsTestCase
      */
     public function canAddWhereObject(string $grammar, string $expected)
     {
-        $address = new class() {
-            public function __toString()
+        $address = new class() implements Stringable {
+            public function __toString(): string
             {
                 return 'Somewhere Str. 41';
             }

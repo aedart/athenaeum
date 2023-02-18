@@ -124,7 +124,7 @@ class MultipartContent
     /**
      * @inheritDoc
      */
-    public function __debugInfo(): array|null
+    public function __debugInfo(): array
     {
         return [
             'headers' => $this->headers->all(),

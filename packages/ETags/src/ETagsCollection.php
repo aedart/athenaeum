@@ -144,7 +144,7 @@ class ETagsCollection implements Collection
     /**
      * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return array_map(
             fn (ETag $etag) => $etag->toString(),
@@ -163,7 +163,7 @@ class ETagsCollection implements Collection
     /**
      * @inheritDoc
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toString();
     }
