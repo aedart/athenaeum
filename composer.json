@@ -48,6 +48,7 @@
         "codeception/codeception": "^5.0.9",
         "codeception/module-asserts": "^3.0.0",
         "illuminate/testing": "^v10.0.0",
+        "laravel/fortify": "^1.16.0",
         "league/flysystem-adapter-test-utilities": "^3.12.0",
         "orchestra/testbench": "^v8.0.0",
         "orchestra/testbench-dusk": "^v8.0.0",
@@ -67,6 +68,7 @@
             "Aedart\\": "src",
             "Aedart\\Acl\\": "packages/Acl/src",
             "Aedart\\Audit\\": "packages/Audit/src",
+            "Aedart\\Auth\\": "packages/Auth/src",
             "Aedart\\Circuits\\": "packages/Circuits/src",
             "Aedart\\Collections\\": "packages/Collections/src",
             "Aedart\\Config\\": "packages/Config/src",
@@ -105,6 +107,7 @@
     "replace": {
         "aedart/athenaeum-acl": "7.0.1",
         "aedart/athenaeum-audit": "7.0.1",
+        "aedart/athenaeum-auth": "7.0.1",
         "aedart/athenaeum-circuits": "7.0.1",
         "aedart/athenaeum-collections": "7.0.1",
         "aedart/athenaeum-config": "7.0.1",
