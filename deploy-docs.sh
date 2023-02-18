@@ -3,6 +3,8 @@
 # abort on errors
 set -e
 
+# TODO: Clear out built first, or risk of "error: src refspec main does not match any"... or similar issues..
+
 # build
 if command -v "yarn" > /dev/null;
 then
