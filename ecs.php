@@ -25,7 +25,6 @@ return static function (ECSConfig $config): void {
         'tests/TestCases',
         'tests/Integration',
         'tests/Unit',
-        'tests/Helpers',
         //'src',
     ]);
 
