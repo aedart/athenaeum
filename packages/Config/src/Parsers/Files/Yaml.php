@@ -25,6 +25,16 @@ class Yaml extends ParserBase
     }
 
     /**
+     * Returns alternative file extension for this parser
+     *
+     * @return string
+     */
+    public static function getAlternativeFileType(): string
+    {
+        return 'yaml';
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function parse(string $content): array
