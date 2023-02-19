@@ -7,12 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Support for parsing `*.neon` files, in Config package.
+
 ### Changed
 
 * Improved the `deploy-docs.sh` script.
 
 ### Fixed
 
+* Unable to parse `*.yaml` configuration files in `FileParserFactory` (_Config package_).
 * Removed duplicate path from easy-coding-standards configuration.
 
 ## [7.1.0] - 2023-02-18
