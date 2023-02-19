@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Support for parsing `*.neon` files, in Config package.
+* Enabled static analysis of all source code, using [PHPStan](https://phpstan.org/). 
 
 ### Changed
 
@@ -19,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Unable to parse `*.yaml` configuration files in `FileParserFactory` (_Config package_).
 * Removed duplicate path from easy-coding-standards configuration.
+* `GuzzleHttp\Psr7\stream_for` not found, in `InvalidHttpMessage` (_test utility_)
+* Incorrect check of trait usage by service provider, in Service `RegistrarTest`
 
 ## [7.1.0] - 2023-02-18
 
