@@ -1,0 +1,9 @@
+parameters:
+	level: 0
+	paths:
+		- packages
+		- src
+		- tests/Helpers
+		- tests/TestCases
+		- tests/Integration
+		- tests/Unit
