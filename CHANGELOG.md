@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Improved the `deploy-docs.sh` script.
 
+### Fixed
+
+* Removed duplicate path from easy-coding-standards configuration.
+
 ## [7.1.0] - 2023-02-18
 
 ### Added 
