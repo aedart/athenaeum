@@ -135,7 +135,7 @@ class RegistrarTest extends AthenaeumTestCase
             // Skip providers that do not inherit from "provider state".
             // The application might have one or more core providers registered
             // that do not inherit such.
-            if (!($provider instanceof ProviderState)) {
+            if (!in_array(ProviderState::class, class_uses($provider))) {
                 continue;
             }
 
