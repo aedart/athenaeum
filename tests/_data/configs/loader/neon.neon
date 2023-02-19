@@ -1,0 +1,24 @@
+address:
+    street: 742 Evergreen Terrace
+    city: Springfield
+    country: USA
+
+third:
+	- entity(a: 1)
+	- entity(a: 1)foo()bar()
+
+-
+  a: 1
+  b: 2
+
+-
+  - c
+
+dash subblock:
+- a
+- b
+
+text: '''
+	one
+	two
+'''
