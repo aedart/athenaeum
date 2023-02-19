@@ -5,6 +5,7 @@ namespace Aedart\Config\Parsers\Factories;
 use Aedart\Config\Parsers\Exceptions\NoFileParserFound;
 use Aedart\Config\Parsers\Files\Ini;
 use Aedart\Config\Parsers\Files\Json;
+use Aedart\Config\Parsers\Files\Neon;
 use Aedart\Config\Parsers\Files\PhpArray;
 use Aedart\Config\Parsers\Files\Toml;
 use Aedart\Config\Parsers\Files\Yaml;
@@ -30,8 +31,9 @@ class FileParserFactory implements FileParserFactoryInterface
             PhpArray::getFileType() => new PhpArray(),
             Json::getFileType() => new Json(),
             Ini::getFileType() => new Ini(),
-            Yaml::getFileType() => new Yaml(),
+            Yaml::getFileType(), Yaml::getAlternativeFileType() => new Yaml(),
             Toml::getFileType() => new Toml(),
+            Neon::getFileType() => new Neon(),
             default => throw new NoFileParserFound(sprintf('No parser found for "%s"', $type))
         };
     }

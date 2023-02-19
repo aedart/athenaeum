@@ -26,6 +26,8 @@ config/
     modules/
         box.json
         circle.yml
+        user.neon
+        server.toml
     main.ini
     core.php
 ```

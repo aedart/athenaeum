@@ -1,0 +1,20 @@
+parameters:
+	level: 0
+	paths:
+		- packages
+		- src
+		- tests/Helpers
+		- tests/TestCases
+		- tests/Integration
+		- tests/Unit
+	ignoreErrors:
+		- '#Unsafe usage of new static#'
+		-
+			message: '#Class App\\Models\\User not found#'
+			path: packages/*
+	excludePaths:
+		# Reports "Method Aedart\Circuits\CircuitBreaker::performAttempt() should return mixed but return statement is missing.", which is WRONG and cannot be ignored.
+		- packages/Circuits/src/CircuitBreaker.php
+
+		# @see https://github.com/aedart/athenaeum/issues/153
+		- packages/Core/src/Exceptions/Handlers/Adaptors/LaravelExceptionHandler.php

@@ -106,6 +106,7 @@ class ConfigLoaderTest extends LaravelTestCase
         $this->assertSame('mail.test.com', $config->get('json.email.server'));
         $this->assertSame('tests/_envs', $config->get('yaml.paths.envs'));
         $this->assertSame('192.168.1.1', $config->get('toml.database.server'));
+        $this->assertSame('742 Evergreen Terrace', $config->get('neon.address.street'));
 
         // Assert nested level
         $this->assertSame('Nested message', $config->get('nested.array.message'));
@@ -113,6 +114,7 @@ class ConfigLoaderTest extends LaravelTestCase
         $this->assertSame('Rick Johnson', $config->get('nested.json.name'));
         $this->assertSame('James Brown Jr.', $config->get('nested.yaml.actor'));
         $this->assertSame('10.0.0.5', $config->get('nested.toml.servers.omega.ip'));
+        $this->assertSame('Arial Springfield', $config->get('nested.neon.author.name'));
 
         // Assert deep nested ... (just to be sure!)
         $this->assertSame('Deep nested message', $config->get('nested.deep.module.message'));
