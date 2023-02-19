@@ -3,10 +3,9 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Http\Messages;
 
+use Aedart\Streams\FileStream;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
-
-use function GuzzleHttp\Psr7\stream_for;
 
 /**
  * Invalid Http Message
@@ -95,7 +94,7 @@ class InvalidHttpMessage implements MessageInterface
      */
     public function getBody()
     {
-        return stream_for('N/A');
+        return FileStream::openMemory();
     }
 
     /**
