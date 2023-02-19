@@ -30,7 +30,8 @@
     },
     "require-dev": {
         "symfony/yaml": "^v6.2.5",
-        "yosymfony/toml": "^1.0.4"
+        "yosymfony/toml": "^1.0.4",
+        "nette/neon": "^3.4.0"
     },
     "autoload": {
         "psr-4": {
