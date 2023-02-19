@@ -7,3 +7,5 @@ parameters:
 		- tests/TestCases
 		- tests/Integration
 		- tests/Unit
+	ignoreErrors:
+		- '#Unsafe usage of new static#'
