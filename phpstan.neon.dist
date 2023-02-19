@@ -12,3 +12,6 @@ parameters:
 		-
 			message: '#Class App\\Models\\User not found#'
 			path: packages/*
+	excludePaths:
+		# Reports "Method Aedart\Circuits\CircuitBreaker::performAttempt() should return mixed but return statement is missing.", which is WRONG and cannot be ignored.
+		- packages/Circuits/src/CircuitBreaker.php
