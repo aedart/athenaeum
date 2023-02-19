@@ -158,7 +158,7 @@
         ],
         "cs": "vendor-bin/cs/vendor/symplify/easy-coding-standard/bin/ecs check --ansi",
         "cs-fix": "vendor-bin/cs/vendor/symplify/easy-coding-standard/bin/ecs check --fix --ansi",
-        "analyse": "vendor/bin/phpstan analyse",
+        "analyse": "vendor/bin/phpstan analyse --ansi",
         "docs:dev": "npm run docs:dev --ansi"
     },
     "config": {
