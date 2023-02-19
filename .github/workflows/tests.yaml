@@ -80,10 +80,13 @@ jobs:
       # Run code analysis
       # ------------------------------------------------------------------------------------------------------- #
 
+      - name: "Analysis"
+        run: composer run analyse
+
       - name: "Compatibility check"
         run: composer run check
 
-      - name: "Code style check"
+      - name: "Style check"
         run: composer run cs
 
       # ------------------------------------------------------------------------------------------------------- #
