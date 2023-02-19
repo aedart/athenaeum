@@ -31,7 +31,7 @@ class FileParserFactory implements FileParserFactoryInterface
             PhpArray::getFileType() => new PhpArray(),
             Json::getFileType() => new Json(),
             Ini::getFileType() => new Ini(),
-            Yaml::getFileType() => new Yaml(),
+            Yaml::getFileType(), Yaml::getAlternativeFileType() => new Yaml(),
             Toml::getFileType() => new Toml(),
             Neon::getFileType() => new Neon(),
             default => throw new NoFileParserFound(sprintf('No parser found for "%s"', $type))
