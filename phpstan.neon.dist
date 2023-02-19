@@ -9,3 +9,6 @@ parameters:
 		- tests/Unit
 	ignoreErrors:
 		- '#Unsafe usage of new static#'
+		-
+			message: '#Class App\\Models\\User not found#'
+			path: packages/*
