@@ -45,6 +45,24 @@ class TranslationLoaderTest extends TranslationTestCase
         $this->assertGreaterThanOrEqual(3, $paths);
     }
 
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canDetectAvailableLocales(): void
+    {
+        $locales = $this->getLoader()->detectLocals();
+
+        ConsoleDebugger::output($locales);
+
+        $this->assertGreaterThanOrEqual(3, $locales);
+
+        $this->assertTrue(in_array('en', $locales), 'en not detected');
+        $this->assertTrue(in_array('en-uk', $locales), 'en-uk not detected');
+        $this->assertTrue(in_array('da', $locales), 'da not detected');
+    }
+
 //    /**
 //     * @test
 //     *
