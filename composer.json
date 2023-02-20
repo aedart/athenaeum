@@ -39,6 +39,7 @@
         "ramsey/http-range": "^1.1.0",
         "shrikeh/teapot": "^2.3.1",
         "symfony/console": "^v6.2.5",
+        "symfony/finder": "^6.2",
         "vlucas/phpdotenv": "^5.5.0"
     },
     "require-dev": {
