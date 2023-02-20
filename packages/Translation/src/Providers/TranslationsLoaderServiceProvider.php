@@ -21,7 +21,7 @@ class TranslationsLoaderServiceProvider extends ServiceProvider implements Defer
      */
     public function register()
     {
-        $this->app->singleton(TranslationsLoader::class, function() {
+        $this->app->singleton(TranslationsLoader::class, function () {
             // Some translation paths are only resolved after the application's
             // translator has been resolved. Therefore, we obtain the translator
             // instance to trigger paths registration behaviour.

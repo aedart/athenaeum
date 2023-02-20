@@ -161,7 +161,7 @@ class RawTranslationsLoader implements TranslationsLoader
             ->sortByName();
 
         foreach ($found as $item) {
-            $locales[] = $item->getBasename( '.' .  $item->getExtension());
+            $locales[] = $item->getBasename('.' . $item->getExtension());
         }
 
         return array_unique($locales);
