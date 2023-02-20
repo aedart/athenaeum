@@ -8,7 +8,7 @@ use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Translation\AcmeTranslationsServiceProvider;
 
 /**
- * TranslationTestCase
+ * Translation Test Case
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Translation
