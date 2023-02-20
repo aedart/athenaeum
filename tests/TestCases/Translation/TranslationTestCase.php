@@ -3,6 +3,7 @@
 namespace Aedart\Tests\TestCases\Translation;
 
 use Aedart\Http\Api\Providers\JsonResourceServiceProvider;
+use Aedart\Support\Helpers\Translation\TranslationLoaderTrait;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Translation\AcmeTranslationsServiceProvider;
@@ -16,6 +17,7 @@ use Aedart\Tests\Helpers\Dummies\Translation\AcmeTranslationsServiceProvider;
 abstract class TranslationTestCase extends LaravelTestCase
 {
     use TranslatorTrait;
+    use TranslationLoaderTrait;
 
     /*****************************************************************
      * Setup
