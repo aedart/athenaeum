@@ -2,11 +2,16 @@
 
 namespace Aedart\Tests\Integration\Translation\Exports\Drivers;
 
+use Aedart\Contracts\Translation\Exports\Exceptions\ExporterException;
 use Aedart\Contracts\Translation\Exports\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Translation\Exports\Exporter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Translation\TranslationTestCase;
+use Aedart\Translation\Exports\Drivers\BaseExporter;
+use Aedart\Translation\Exports\Exceptions\InvalidLocales;
+use Aedart\Translation\Exports\Exceptions\InvalidPaths;
 use Illuminate\Contracts\Translation\Loader;
+use Mockery as m;
 
 /**
  * BaseExporterTest
@@ -30,11 +35,11 @@ class BaseExporterTest extends TranslationTestCase
      *
      * @param array $options [optional]
      *
-     * @return Exporter
+     * @return Exporter|BaseExporter
      *
      * @throws ProfileNotFoundException
      */
-    public function exporter(array $options = []): Exporter
+    public function exporter(array $options = []): Exporter|BaseExporter
     {
         return $this->makeExporter('null', $options);
     }
@@ -81,12 +86,116 @@ class BaseExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
-    public function hasDefaultPaths(): void
+    public function canObtainNamespacePaths(): void
     {
-        // TODO: ...uhm, what about the default paths...
-
-        $paths = $this->exporter()->getPaths();
+        $paths = $this->exporter()->getNamespacePaths();
 
         ConsoleDebugger::output($paths);
+
+        $this->assertNotEmpty($paths);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function canObtainJsonPaths(): void
+    {
+        $paths = $this->exporter()->getJsonPaths();
+
+        ConsoleDebugger::output($paths);
+
+        $this->assertNotEmpty($paths);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function mergesNamespaceAndJsonPathsWithUserProvidedPaths(): void
+    {
+        $exporter = $this->exporter();
+        $paths = $exporter->getPaths();
+
+        ConsoleDebugger::output($paths);
+
+        // ------------------------------------------------------------- //
+
+        $this->assertGreaterThanOrEqual(4, $paths);
+
+        $namespacePaths = $exporter->getNamespacePaths();
+        foreach ($namespacePaths as $np) {
+            $this->assertTrue(in_array($np, $paths), sprintf('Namespace path %s not part of paths', $np));
+        }
+
+        $jsonPaths = $exporter->getJsonPaths();
+        foreach ($jsonPaths as $jp) {
+            $this->assertTrue(in_array($jp, $paths), sprintf('Json path %s not part of paths', $jp));
+        }
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ProfileNotFoundException
+     * @throws ExporterException
+     */
+    public function failsExportWhenNoPathsAvailable(): void
+    {
+        $this->expectException(InvalidPaths::class);
+
+        $loader = m::mock(Loader::class)
+            ->allows([
+                'namespaces' => [],
+                'jsonPaths' => [],
+            ]);
+
+        $exporter = $this->exporter([
+            'paths' => []
+        ])->setTranslationLoader($loader);
+
+        $exporter->export();
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ExporterException
+     * @throws ProfileNotFoundException
+     */
+    public function failsExportWhenInvalidLocalesProvided(): void
+    {
+        $this->expectException(InvalidLocales::class);
+
+        $this->exporter()->export([]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ExporterException
+     * @throws ProfileNotFoundException
+     */
+    public function canExport(): void
+    {
+        // NOTE: Test uses null driver, so no exports are to be expected.
+        // WE are only interested to see that the "performExport" method
+        // is invoked as intended.
+
+        $result = $this->exporter()->export();
+
+        $this->assertNull($result);
     }
 }
