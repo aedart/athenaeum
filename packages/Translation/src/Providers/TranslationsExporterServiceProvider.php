@@ -22,7 +22,7 @@ class TranslationsExporterServiceProvider extends ServiceProvider implements Def
      */
     public function register()
     {
-        $this->app->singleton(ManagerInterface::class, function() {
+        $this->app->singleton(ManagerInterface::class, function () {
             // Some translations paths are only resolved after the application's
             // translator instance has been resolved. So, to ensure that the loader
             // has correct paths, we attempt to resolve the loader from Laravel's

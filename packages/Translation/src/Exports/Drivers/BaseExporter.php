@@ -30,8 +30,7 @@ abstract class BaseExporter implements Exporter
     public function __construct(
         Loader|null $loader = null,
         protected array $options = []
-    )
-    {
+    ) {
         $this->setTranslationLoader($loader);
     }
 

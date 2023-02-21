@@ -54,7 +54,7 @@ class ManagerTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
-    public function failsWhenProfileNotFound():void
+    public function failsWhenProfileNotFound(): void
     {
         $this->expectException(ProfileNotFoundException::class);
 
