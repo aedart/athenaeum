@@ -3,7 +3,7 @@
 namespace Aedart\Tests\Unit\Translation\Traits;
 
 use Aedart\Tests\TestCases\TraitTestCase;
-use Aedart\Translation\Traits\TranslationsExportManagerTrait;
+use Aedart\Translation\Traits\TranslationsExporterManagerTrait;
 
 /**
  * TranslationTraitsTest
@@ -27,7 +27,7 @@ class TranslationTraitsTest extends TraitTestCase
     public function awareOfComponentsProvider()
     {
         return [
-            'TranslationsExportManagerTrait' => [ TranslationsExportManagerTrait::class ],
+            'TranslationsExportManagerTrait' => [ TranslationsExporterManagerTrait::class ],
         ];
     }
 
