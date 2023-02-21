@@ -3,12 +3,15 @@
 namespace Aedart\Translation\Exports;
 
 use Aedart\Contracts\Support\Helpers\Config\ConfigAware;
+use Aedart\Contracts\Support\Helpers\Translation\TranslationLoaderAware;
 use Aedart\Contracts\Translation\Exports\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Translation\Exports\Exporter;
 use Aedart\Contracts\Translation\Exports\Manager as ExportManager;
 use Aedart\Support\Helpers\Config\ConfigTrait;
+use Aedart\Support\Helpers\Translation\TranslationLoaderTrait;
 use Aedart\Translation\Exports\Drivers\ArrayExporter;
 use Aedart\Translation\Exports\Exceptions\ProfileNotFound;
+use Illuminate\Contracts\Translation\Loader;
 
 /**
  * Translations Export Manager
@@ -20,8 +23,10 @@ use Aedart\Translation\Exports\Exceptions\ProfileNotFound;
  */
 class Manager implements
     ExportManager,
+    TranslationLoaderAware,
     ConfigAware
 {
+    use TranslationLoaderTrait;
     use ConfigTrait;
 
     /**
@@ -30,6 +35,16 @@ class Manager implements
      * @var Exporter[] Key = profile name, Value = Exporter instance
      */
     protected array $exporters = [];
+
+    /**
+     * Create a new translations export manager
+     *
+     * @param Loader|null $loader [optional]
+     */
+    public function __construct(Loader|null $loader = null)
+    {
+        $this->setTranslationLoader($loader);
+    }
 
     /**
      * @inheritDoc
@@ -52,7 +67,10 @@ class Manager implements
     {
         $driver = $driver ?? $this->defaultExporter();
 
-        return new $driver($options);
+        return new $driver(
+            $this->getTranslationLoader(),
+            $options
+        );
     }
 
     /**
