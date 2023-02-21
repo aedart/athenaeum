@@ -5,6 +5,8 @@ namespace Aedart\Translation\Exports\Drivers;
 use Aedart\Contracts\Translation\Exports\Exporter;
 use Aedart\Support\Helpers\Translation\TranslationLoaderTrait;
 use Aedart\Translation\Exports\Exceptions\FailedToExportTranslations;
+use Aedart\Translation\Exports\Exceptions\InvalidLocales;
+use Aedart\Translation\Exports\Exceptions\InvalidPaths;
 use Illuminate\Contracts\Translation\Loader;
 use Symfony\Component\Finder\Finder;
 use Throwable;
@@ -41,6 +43,17 @@ abstract class BaseExporter implements Exporter
         $locales = $this->resolveLocales($locales);
         $paths = $this->getPaths();
 
+        if (empty($paths)) {
+            throw new InvalidPaths('No paths provided');
+        }
+
+        if (empty($locales)) {
+            throw new InvalidLocales(sprintf(
+                'No locales provided or unable to detect any locales in paths: %s',
+                implode(',', $paths)
+            ));
+        }
+
         try {
             return $this->performExport($locales, $paths);
         } catch (Throwable $e) {
@@ -68,6 +81,9 @@ abstract class BaseExporter implements Exporter
     public function detectLocals(): array
     {
         $paths = $this->getPaths();
+        if (empty($paths)) {
+            return [];
+        }
 
         return array_unique([
             ...$this->detectLocalesFromDirectories($paths),
@@ -80,7 +96,7 @@ abstract class BaseExporter implements Exporter
      */
     public function getPaths(): array
     {
-        // TODO: Implement getPaths() method.
+        return $this->options['paths'] ?? [];
     }
 
     /*****************************************************************
