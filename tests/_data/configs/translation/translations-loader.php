@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @deprecated
+ */
 return [
 
     /*
