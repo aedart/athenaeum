@@ -28,7 +28,9 @@ return [
                 'paths' => [
                     lang_path(),
                     realpath(__DIR__ . '/../../../../vendor/laravel/framework/src/Illuminate/Translation/lang')
-                ]
+                ],
+
+                'json_key' => '__JSON__'
             ],
         ],
 

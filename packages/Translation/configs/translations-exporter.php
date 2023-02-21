@@ -35,7 +35,10 @@ return [
                     // to include this path...
                     // realpath(__DIR__ . '/../vendor/laravel/framework/src/Illuminate/Translation/lang')
 
-                ]
+                ],
+
+                // Name of key in which json translations are to be found, for each locale
+                'json_key' => '__JSON__'
             ],
         ],
     ]

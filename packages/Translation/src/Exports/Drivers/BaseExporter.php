@@ -129,6 +129,16 @@ abstract class BaseExporter implements Exporter
         return array_values($nativeLoader->jsonPaths());
     }
 
+    /**
+     * Returns key in which json translations must be exported to
+     *
+     * @return string
+     */
+    public function jsonKey(): string
+    {
+        return $this->options['json_key'] ?? '__JSON__';
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
