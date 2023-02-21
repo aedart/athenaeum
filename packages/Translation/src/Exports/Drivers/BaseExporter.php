@@ -48,10 +48,7 @@ abstract class BaseExporter implements Exporter
         }
 
         if (empty($locales)) {
-            throw new InvalidLocales(sprintf(
-                'No locales provided or unable to detect any locales in paths: %s',
-                implode(',', $paths)
-            ));
+            throw new InvalidLocales('No locales provided or unable to detect locales in paths');
         }
 
         try {
