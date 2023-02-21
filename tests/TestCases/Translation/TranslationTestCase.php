@@ -12,7 +12,9 @@ use Aedart\Support\Facades\IoCFacade;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Translation\AcmeTranslationsServiceProvider;
+use Aedart\Translation\Providers\TranslationsExporterServiceProvider;
 use Aedart\Translation\Providers\TranslationsLoaderServiceProvider;
+use Aedart\Translation\Traits\TranslationsExporterManagerTrait;
 use Codeception\Configuration;
 
 /**
@@ -25,6 +27,7 @@ abstract class TranslationTestCase extends LaravelTestCase
 {
     use TranslatorTrait;
     use ConfigLoaderTrait;
+    use TranslationsExporterManagerTrait;
 
     /*****************************************************************
      * Setup
@@ -53,6 +56,7 @@ abstract class TranslationTestCase extends LaravelTestCase
         return [
             ConfigLoaderServiceProvider::class,
             TranslationsLoaderServiceProvider::class,
+            TranslationsExporterServiceProvider::class,
 
             // Packages that publishes or load translations...
             JsonResourceServiceProvider::class,
@@ -75,6 +79,8 @@ abstract class TranslationTestCase extends LaravelTestCase
      ****************************************************************/
 
     /**
+     * @deprecated
+     *
      * Get the translation loader
      *
      * @return TranslationsLoader
