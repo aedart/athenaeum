@@ -9,6 +9,8 @@ use Illuminate\Contracts\Translation\Loader;
 use Illuminate\Support\ServiceProvider;
 
 /**
+ * @deprecated
+ *
  * Translations Loader Service Provider
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
