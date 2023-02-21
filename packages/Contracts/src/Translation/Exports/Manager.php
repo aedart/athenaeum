@@ -5,7 +5,7 @@ namespace Aedart\Contracts\Translation\Exports;
 use Aedart\Contracts\Translation\Exports\Exceptions\ProfileNotFoundException;
 
 /**
- * Translations Exports Manager
+ * Translations Export Manager
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Translation\Exports
