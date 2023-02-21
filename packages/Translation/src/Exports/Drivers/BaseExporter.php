@@ -96,7 +96,41 @@ abstract class BaseExporter implements Exporter
      */
     public function getPaths(): array
     {
-        return $this->options['paths'] ?? [];
+        // To ensure that all relevant paths are returned, the user
+        // provided paths must be merged with those from the native
+        // translation loader.
+
+        return array_unique([
+            ...$this->getJsonPaths(),
+            ...$this->getNamespacePaths(),
+            ...$this->options['paths'] ?? []
+        ]);
+    }
+
+    /**
+     * Get registered "namespace" paths
+     *
+     * @return string[]
+     */
+    public function getNamespacePaths(): array
+    {
+        return array_values($this->getTranslationLoader()->namespaces());
+    }
+
+    /**
+     * Get registered json paths
+     *
+     * @return string[]
+     */
+    public function getJsonPaths(): array
+    {
+        $nativeLoader = $this->getTranslationLoader();
+
+        if (!method_exists($nativeLoader, 'jsonPaths')) {
+            return [];
+        }
+
+        return array_values($nativeLoader->jsonPaths());
     }
 
     /*****************************************************************
