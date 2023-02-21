@@ -26,14 +26,14 @@ interface Exporter extends TranslationLoaderAware
     public function export(string|array $locales = '*'): mixed;
 
     /**
-     * Detects the available locales
+     * Detects the available locales in the paths to be searched
      *
      * @return string[]
      */
     public function detectLocals(): array;
 
     /**
-     * Get paths to be searched
+     * Get paths in which to search for translations
      *
      * @return string[]
      */
