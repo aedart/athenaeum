@@ -15,7 +15,18 @@ class ArrayExporter extends BaseExporter
      */
     public function performExport(array $locales, array $paths): array
     {
+        // 1) Load json translations that match requested locales
+        $json = $this->loadJsonTranslations($locales);
+
+        // 2) Detect "groups"... or is it namespaces, from given paths ???
+
+        // 3 Load all "groups / name-thingies"
+
+        // 4 Namespaces... ??
+
         // TODO: Incomplete...
-        return [];
+        return array_merge_recursive(
+            $json
+        );
     }
 }
