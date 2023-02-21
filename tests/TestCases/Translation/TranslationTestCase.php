@@ -8,14 +8,11 @@ use Aedart\Contracts\Config\Loaders\Exceptions\InvalidPathException;
 use Aedart\Contracts\Config\Parsers\Exceptions\FileParserException;
 use Aedart\Contracts\Translation\Exports\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Translation\Exports\Exporter;
-use Aedart\Contracts\Translation\TranslationsLoader;
 use Aedart\Http\Api\Providers\JsonResourceServiceProvider;
-use Aedart\Support\Facades\IoCFacade;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Translation\AcmeTranslationsServiceProvider;
 use Aedart\Translation\Providers\TranslationsExporterServiceProvider;
-use Aedart\Translation\Providers\TranslationsLoaderServiceProvider;
 use Aedart\Translation\Traits\TranslationsExporterManagerTrait;
 use Codeception\Configuration;
 
@@ -57,7 +54,6 @@ abstract class TranslationTestCase extends LaravelTestCase
     {
         return [
             ConfigLoaderServiceProvider::class,
-            TranslationsLoaderServiceProvider::class,
             TranslationsExporterServiceProvider::class,
 
             // Packages that publishes or load translations...
@@ -79,18 +75,6 @@ abstract class TranslationTestCase extends LaravelTestCase
     /*****************************************************************
      * Helpers
      ****************************************************************/
-
-    /**
-     * @deprecated
-     *
-     * Get the translation loader
-     *
-     * @return TranslationsLoader
-     */
-    public function getLoader(): TranslationsLoader
-    {
-        return IoCFacade::make(TranslationsLoader::class);
-    }
 
     /**
      * Returns exporter that matches given profile
