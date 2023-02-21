@@ -14,7 +14,7 @@ use Aedart\Translation\Exports\Exceptions\ProfileNotFound;
 use Illuminate\Contracts\Translation\Loader;
 
 /**
- * Translations Export Manager
+ * Translations Exporter Manager
  *
  * @see \Aedart\Contracts\Translation\Exports\Manager
  *
