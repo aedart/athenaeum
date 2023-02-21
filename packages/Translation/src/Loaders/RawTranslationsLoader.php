@@ -8,6 +8,8 @@ use Illuminate\Contracts\Translation\Loader as NativeLoader;
 use Symfony\Component\Finder\Finder;
 
 /**
+ * @deprecated
+ *
  * Raw Translations Loader
  *
  * @author Alin Eugen Deac <aedart@gmail.com>

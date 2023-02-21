@@ -3,6 +3,8 @@
 namespace Aedart\Contracts\Translation;
 
 /**
+ * @deprecated
+ *
  * Translations Loader
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
