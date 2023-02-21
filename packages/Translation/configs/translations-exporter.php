@@ -26,9 +26,14 @@ return [
             'driver' => \Aedart\Translation\Exports\Drivers\ArrayExporter::class,
             'options' => [
 
-                // TODO: Incomplete...
-
                 'paths' => [
+
+                    // Application's "lang" directory...
+                    lang_path(),
+
+                    // In case that you do not have laravel's default translations published, you might want
+                    // to include this path...
+                    // realpath(__DIR__ . '/../vendor/laravel/framework/src/Illuminate/Translation/lang')
 
                 ]
             ],

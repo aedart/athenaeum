@@ -25,11 +25,9 @@ return [
         'default' => [
             'driver' => \Aedart\Translation\Exports\Drivers\ArrayExporter::class,
             'options' => [
-
-                // TODO: Incomplete...
-
                 'paths' => [
-
+                    lang_path(),
+                    realpath(__DIR__ . '/../../../../vendor/laravel/framework/src/Illuminate/Translation/lang')
                 ]
             ],
         ],
@@ -38,6 +36,7 @@ return [
             'driver' => \Aedart\Translation\Exports\Drivers\NullExporter::class,
             'options' => [
                 'paths' => [
+                    lang_path(),
                     realpath(__DIR__ . '/../../../../vendor/laravel/framework/src/Illuminate/Translation/lang')
                 ]
             ],
