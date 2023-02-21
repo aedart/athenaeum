@@ -228,7 +228,6 @@ abstract class BaseExporter implements Exporter
 
         $output = [];
         foreach ($locales as $locale) {
-
             if (!isset($output[$locale])) {
                 $output[$locale] = [$key => []];
             }
