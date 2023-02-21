@@ -7,6 +7,8 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Translation\TranslationTestCase;
 
 /**
+ * @deprecated 
+ *
  * TranslationLoaderTest
  *
  * @group translations
