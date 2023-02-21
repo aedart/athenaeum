@@ -212,4 +212,33 @@ abstract class BaseExporter implements Exporter
 
         return array_unique($locales);
     }
+
+    /**
+     * Load translation messages that are defined in json files
+     *
+     * @param string[] $locales
+     * @param string|null $key [optional]
+     *
+     * @return array
+     */
+    protected function loadJsonTranslations(array $locales, string|null $key = null): array
+    {
+        $loader = $this->getTranslationLoader();
+        $key = $key ?? $this->jsonKey();
+
+        $output = [];
+        foreach ($locales as $locale) {
+
+            if (!isset($output[$locale])) {
+                $output[$locale] = [$key => []];
+            }
+
+            $output[$locale][$key] = array_merge_recursive(
+                $output[$locale][$key],
+                $loader->load($locale, '*', '*')
+            );
+        }
+
+        return $output;
+    }
 }
