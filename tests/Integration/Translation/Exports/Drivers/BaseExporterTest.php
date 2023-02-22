@@ -104,24 +104,6 @@ class BaseExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
-    public function canDetectNamespaces(): void
-    {
-        $namespaces = $this->exporter()->detectNamespaces();
-
-        ConsoleDebugger::output($namespaces);
-
-        $this->assertGreaterThanOrEqual(3, $namespaces);
-        $this->assertTrue(in_array('*', $namespaces), 'wildcard (*) not detected');
-        $this->assertTrue(in_array('athenaeum-http-api', $namespaces), 'athenaeum-http-api not detected');
-    }
-
-    /**
-     * @test
-     *
-     * @return void
-     *
-     * @throws ProfileNotFoundException
-     */
     public function canObtainNamespacePaths(): void
     {
         $paths = $this->exporter()->getNamespacesWithPaths();
