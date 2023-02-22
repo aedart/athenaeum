@@ -93,8 +93,8 @@ class BaseExporterTest extends TranslationTestCase
         ConsoleDebugger::output($groups);
 
         $this->assertGreaterThanOrEqual(4, $groups);
-        $this->assertTrue(in_array('*.auth', $groups), '*.auth not detected');
-        $this->assertTrue(in_array('athenaeum-http-api.api-resources', $groups), 'athenaeum-http-api.api-resources not detected');
+        $this->assertTrue(in_array('*::auth', $groups), '*::auth not detected');
+        $this->assertTrue(in_array('athenaeum-http-api::api-resources', $groups), 'athenaeum-http-api::api-resources not detected');
     }
 
     /**

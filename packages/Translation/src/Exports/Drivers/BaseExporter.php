@@ -124,7 +124,7 @@ abstract class BaseExporter implements Exporter
         $output = $this->prefixGroups(
             groups: $this->findGroupsIn($notNamespacedPaths),
             prefix: $prefix
-                ? '*.'
+                ? '*'
                 : ''
         );
 
@@ -140,7 +140,7 @@ abstract class BaseExporter implements Exporter
             $found = $this->prefixGroups(
                 groups: $this->findGroupsIn([ $path ]),
                 prefix: $prefix
-                    ? $namespace . '.'
+                    ? $namespace
                     : ''
             );
 
@@ -377,7 +377,7 @@ abstract class BaseExporter implements Exporter
         }
 
         return array_map(function($group) use($prefix) {
-            return $prefix . $group;
+            return $prefix . '::' . $group;
         }, $groups);
     }
 
