@@ -37,7 +37,7 @@ interface Manager
     /**
      * Returns class path of a default exporter to use
      *
-     * @return string
+     * @return class-string<Exporter>
      */
     public function defaultExporter(): string;
 }
