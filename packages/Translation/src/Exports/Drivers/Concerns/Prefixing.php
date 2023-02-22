@@ -20,11 +20,11 @@ trait Prefixing
      */
     protected function prefixGroups(array $groups, string $namespace = ''): array
     {
-        if (empty($namespace) || empty($groups)){
+        if (empty($namespace) || empty($groups)) {
             return $groups;
         }
 
-        return array_map(function($group) use($namespace) {
+        return array_map(function ($group) use ($namespace) {
             return $this->prefixGroup($group, $namespace);
         }, $groups);
     }

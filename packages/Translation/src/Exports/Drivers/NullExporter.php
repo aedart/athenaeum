@@ -20,8 +20,7 @@ class NullExporter extends BaseExporter
         array $paths,
         array $locales,
         array $groups
-    ): mixed
-    {
+    ): mixed {
         return null;
     }
 }

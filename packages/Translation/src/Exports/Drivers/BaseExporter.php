@@ -4,7 +4,6 @@ namespace Aedart\Translation\Exports\Drivers;
 
 use Aedart\Contracts\Translation\Exports\Exporter;
 use Aedart\Support\Helpers\Translation\TranslationLoaderTrait;
-use Aedart\Translation\Exports\Drivers\Concerns;
 use Aedart\Translation\Exports\Exceptions\FailedToExportTranslations;
 use Aedart\Translation\Exports\Exceptions\InvalidLocales;
 use Aedart\Translation\Exports\Exceptions\InvalidPaths;
@@ -42,8 +41,7 @@ abstract class BaseExporter implements Exporter
     public function export(
         string|array $locales = '*',
         string|array $groups = '*'
-    ): mixed
-    {
+    ): mixed {
         $paths = $this->getPaths();
         if (empty($paths)) {
             throw new InvalidPaths('No paths provided');
@@ -113,7 +111,7 @@ abstract class BaseExporter implements Exporter
         $namespaces = $this->getNamespacesWithPaths();
 
         // Filter off namespace paths to avoid evt. loading issues.
-        $notNamespacedPaths = array_filter($paths, function($path) use($namespaces) {
+        $notNamespacedPaths = array_filter($paths, function ($path) use ($namespaces) {
             return !in_array($path, $namespaces);
         });
 
@@ -262,8 +260,7 @@ abstract class BaseExporter implements Exporter
     protected function load(
         array $locales,
         array $groups
-    ): array
-    {
+    ): array {
         // Load json translations that match requested locales
         $json = $this->loadJsonTranslations($locales);
 

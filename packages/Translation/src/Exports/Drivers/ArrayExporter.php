@@ -17,8 +17,7 @@ class ArrayExporter extends BaseExporter
         array $paths,
         array $locales,
         array $groups
-    ): array
-    {
+    ): array {
         return $this->load($locales, $groups);
     }
 }
