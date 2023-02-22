@@ -123,7 +123,7 @@ abstract class BaseExporter implements Exporter
         // with wildcard (*).
         $output = $this->prefixGroups(
             groups: $this->findGroupsIn($notNamespacedPaths),
-            prefix: $prefix
+            namespace: $prefix
                 ? '*'
                 : ''
         );
@@ -139,7 +139,7 @@ abstract class BaseExporter implements Exporter
 
             $found = $this->prefixGroups(
                 groups: $this->findGroupsIn([ $path ]),
-                prefix: $prefix
+                namespace: $prefix
                     ? $namespace
                     : ''
             );
@@ -363,22 +363,53 @@ abstract class BaseExporter implements Exporter
     }
 
     /**
-     * Prefix each group
+     * Prefix each group with given namespace
      *
      * @param string[] $groups
-     * @param string $prefix [optional]
+     * @param string $namespace [optional]
      *
      * @return string[]
      */
-    protected function prefixGroups(array $groups, string $prefix = ''): array
+    protected function prefixGroups(array $groups, string $namespace = ''): array
     {
-        if (empty($prefix) || empty($groups)){
+        if (empty($namespace) || empty($groups)){
             return $groups;
         }
 
-        return array_map(function($group) use($prefix) {
-            return $prefix . '::' . $group;
+        return array_map(function($group) use($namespace) {
+            return $this->prefixGroup($group, $namespace);
         }, $groups);
+    }
+
+    /**
+     * Prefix group with given namespace
+     *
+     * @param string $group
+     * @param string $namespace [optional]
+     *
+     * @return string
+     */
+    protected function prefixGroup(string $group, string $namespace = ''): string
+    {
+        if (empty($namespace)) {
+            return $group;
+        }
+
+        $separator = $this->prefixSeparator();
+
+        return "{$namespace}{$separator}{$group}";
+    }
+
+    /**
+     * Returns a namespace prefix separator
+     *
+     * @return string
+     */
+    protected function prefixSeparator(): string
+    {
+        // Use same kind of namespacing as shown in Laravel's documentation.
+        // @see https://laravel.com/docs/10.x/packages#language-files
+        return '::';
     }
 
     /**
