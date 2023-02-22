@@ -32,19 +32,24 @@ interface Exporter extends TranslationLoaderAware
     /**
      * Detects the available locales
      *
+     * @param string[]|null $paths [optional] Defaults to exporter's paths, provided
+     *                             by {@see getPaths()}, when none given.
+     *
      * @return string[]
      */
-    public function detectLocals(): array;
+    public function detectLocals(array|null $paths = null): array;
 
     /**
      * Detect available groups
      *
+     * @param string[]|null $paths [optional] Defaults to exporter's paths, provided
+     *                             by {@see getPaths()}, when none given.
      * @param bool $prefix [optional] When true, each group is prefixed with
      *                     the namespace it belongs to.
      *
      * @return string[] E.g. [ '*.auth', '*.pagination', ..., 'acme.users' ]
      */
-    public function detectGroups(bool $prefix = true): array;
+    public function detectGroups(array|null $paths = null, bool $prefix = true): array;
 
     /**
      * Get paths in which to search for translations

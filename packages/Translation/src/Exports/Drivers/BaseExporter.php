@@ -49,12 +49,12 @@ abstract class BaseExporter implements Exporter
             throw new InvalidPaths('No paths provided');
         }
 
-        $locales = $this->resolveLocales($locales);
+        $locales = $this->resolveLocales($locales, $paths);
         if (empty($locales)) {
             throw new InvalidLocales('No locales provided or unable to detect locales in paths');
         }
 
-        $groups = $this->resolveGroups($groups);
+        $groups = $this->resolveGroups($groups, $paths);
 
         try {
             return $this->performExport($paths, $locales, $groups);
@@ -87,9 +87,9 @@ abstract class BaseExporter implements Exporter
     /**
      * @inheritDoc
      */
-    public function detectLocals(): array
+    public function detectLocals(array|null $paths = null): array
     {
-        $paths = $this->getPaths();
+        $paths = $paths ?? $this->getPaths();
         if (empty($paths)) {
             return [];
         }
@@ -103,9 +103,9 @@ abstract class BaseExporter implements Exporter
     /**
      * @inheritDoc
      */
-    public function detectGroups(bool $prefix = true): array
+    public function detectGroups(array|null $paths = null, bool $prefix = true): array
     {
-        $paths = $this->getPaths();
+        $paths = $paths ?? $this->getPaths();
         if (empty($paths)) {
             return [];
         }
@@ -208,13 +208,14 @@ abstract class BaseExporter implements Exporter
      * Resolves given locales
      *
      * @param string|string[] $locales
+     * @param string[]|null $paths [optional] Paths in which to detect locales, when wildcard given.
      *
      * @return string[]
      */
-    protected function resolveLocales(string|array $locales): array
+    protected function resolveLocales(string|array $locales, array|null $paths = null): array
     {
         if ($locales === '*') {
-            return $this->detectLocals();
+            return $this->detectLocals($paths);
         }
 
         if (is_string($locales)) {
@@ -228,13 +229,14 @@ abstract class BaseExporter implements Exporter
      * Resolves given groups
      *
      * @param string|string[] $groups
+     * @param string[]|null $paths [optional] Paths in which to detect groups, when wildcard given.
      *
      * @return string[]
      */
-    protected function resolveGroups(string|array $groups): array
+    protected function resolveGroups(string|array $groups, array|null $paths = null): array
     {
         if ($groups === '*') {
-            return $this->detectGroups();
+            return $this->detectGroups($paths);
         }
 
         if (is_string($groups)) {
