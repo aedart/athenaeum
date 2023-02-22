@@ -46,6 +46,20 @@ return [
             ],
         ],
 
+
+        'lang_js_json' => [
+            'driver' => \Aedart\Translation\Exports\Drivers\LangJsJsonExporter::class,
+            'options' => [
+                'paths' => [
+                    lang_path(),
+                    realpath(__DIR__ . '/../../../../vendor/laravel/framework/src/Illuminate/Translation/lang')
+                ],
+                'json_key' => '__JSON__',
+                'json_options' => 0,
+                'depth' => 512
+            ],
+        ],
+
         'null' => [
             'driver' => \Aedart\Translation\Exports\Drivers\NullExporter::class,
             'options' => [
