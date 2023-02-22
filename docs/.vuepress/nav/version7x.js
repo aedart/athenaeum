@@ -584,6 +584,33 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Translation',
+            collapsable: true,
+            children: [
+                'translation/',
+                'translation/install',
+                {
+                    title: 'Exporters',
+                    collapsable: true,
+                    children: [
+                        'translation/exporters/',
+                        'translation/exporters/setup',
+                        'translation/exporters/usage',
+                        {
+                            title: 'Drivers',
+                            collapsable: true,
+                            children: [
+                                'translation/exporters/drivers/',
+                                'translation/exporters/drivers/array',
+                                'translation/exporters/drivers/lang-js',
+                                'translation/exporters/drivers/lang-js-json',
+                            ]
+                        },
+                    ]
+                },
+            ]
+        },
+        {
             title: 'Utils',
             collapsable: true,
             children: [
