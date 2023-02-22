@@ -37,21 +37,28 @@ abstract class BaseExporter implements Exporter
     /**
      * @inheritDoc
      */
-    public function export(string|array $locales = '*'): mixed
+    public function export(
+        string|array $locales = '*',
+        string|array $groups = '*',
+        string|array $namespaces = '*'
+    ): mixed
     {
-        $locales = $this->resolveLocales($locales);
         $paths = $this->getPaths();
-
         if (empty($paths)) {
             throw new InvalidPaths('No paths provided');
         }
 
+        $locales = $this->resolveLocales($locales);
         if (empty($locales)) {
             throw new InvalidLocales('No locales provided or unable to detect locales in paths');
         }
 
+        // TODO: Resolve groups and namespaces...
+        $groups = [];
+        $namespaces = [];
+
         try {
-            return $this->performExport($locales, $paths);
+            return $this->performExport($paths, $locales, $groups, $namespaces);
         } catch (Throwable $e) {
             throw new FailedToExportTranslations(sprintf(
                 'Unable to export locales %s: %s',
@@ -64,12 +71,21 @@ abstract class BaseExporter implements Exporter
     /**
      * Searches for translations and exports them
      *
-     * @param string[] $locales Locales to export
-     * @param string[] $paths Paths where to search for translations
+     * @param string[] $paths Paths where to search for translations.
+     * @param string[] $locales Locales to export.
+     * @param string[] $groups Groups to export.
+     * @param string[] $namespaces Namespaces to export.
      *
      * @return mixed
+     *
+     * @throws Throwable
      */
-    abstract public function performExport(array $locales, array $paths): mixed;
+    abstract public function performExport(
+        array $paths,
+        array $locales,
+        array $groups,
+        array $namespaces
+    ): mixed;
 
     /**
      * @inheritDoc

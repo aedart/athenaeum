@@ -16,21 +16,40 @@ interface Exporter extends TranslationLoaderAware
     /**
      * Export translations
      *
-     * @param string|string[] $locales [optional] Locales to export. When wildcard is provided,
-     *                                 then all available locales are exported.
+     * @param string|array $locales [optional] Locales to export. Wildcard (*) = all locales.
+     * @param string|array $groups [optional] Groups to export. Wildcard (*) = all groups.
+     * @param string|array $namespaces [optional] Namespaces to export. Wildcard (*) = all namespaces.
      *
      * @return mixed
      *
      * @throws ExporterException
      */
-    public function export(string|array $locales = '*'): mixed;
+    public function export(
+        string|array $locales = '*',
+        string|array $groups = '*',
+        string|array $namespaces = '*'
+    ): mixed;
 
     /**
-     * Detects the available locales in the paths to be searched
+     * Detects the available locales
      *
      * @return string[]
      */
     public function detectLocals(): array;
+
+    /**
+     * Detects available groups
+     *
+     * @return string[]
+     */
+    public function detectGroups(): array;
+
+    /**
+     * Detect available namespaces
+     *
+     * @return string[]
+     */
+    public function detectNamespaces(): array;
 
     /**
      * Get paths in which to search for translations

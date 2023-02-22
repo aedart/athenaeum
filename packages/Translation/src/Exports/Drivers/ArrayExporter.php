@@ -13,7 +13,12 @@ class ArrayExporter extends BaseExporter
     /**
      * @inheritDoc
      */
-    public function performExport(array $locales, array $paths): array
+    public function performExport(
+        array $paths,
+        array $locales,
+        array $groups,
+        array $namespaces
+    ): array
     {
         // 1) Load json translations that match requested locales
         $json = $this->loadJsonTranslations($locales);

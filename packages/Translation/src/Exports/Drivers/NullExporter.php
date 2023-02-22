@@ -16,7 +16,12 @@ class NullExporter extends BaseExporter
     /**
      * @inheritDoc
      */
-    public function performExport(array $locales, array $paths): mixed
+    public function performExport(
+        array $paths,
+        array $locales,
+        array $groups,
+        array $namespaces
+    ): mixed
     {
         return null;
     }
