@@ -53,9 +53,8 @@ abstract class BaseExporter implements Exporter
             throw new InvalidLocales('No locales provided or unable to detect locales in paths');
         }
 
-        // TODO: Resolve groups and namespaces...
-        $groups = [];
-        $namespaces = [];
+        $groups = $this->resolveGroups($groups);
+        $namespaces = $this->resolveNamespaces($namespaces);
 
         try {
             return $this->performExport($paths, $locales, $groups, $namespaces);
@@ -101,6 +100,26 @@ abstract class BaseExporter implements Exporter
             ...$this->detectLocalesFromDirectories($paths),
             ...$this->detectLocalesFromJsonFilesIn($paths)
         ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function detectGroups(): array
+    {
+        // TODO: Implement...
+
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function detectNamespaces(): array
+    {
+        // TODO: Implement...
+
+        return [];
     }
 
     /**
@@ -177,6 +196,46 @@ abstract class BaseExporter implements Exporter
         }
 
         return $locales;
+    }
+
+    /**
+     * Resolves given groups
+     *
+     * @param string|string[] $groups
+     *
+     * @return string[]
+     */
+    protected function resolveGroups(string|array $groups): array
+    {
+        if ($groups === '*') {
+            return $this->detectGroups();
+        }
+
+        if (is_string($groups)) {
+            $groups = [ $groups ];
+        }
+
+        return $groups;
+    }
+
+    /**
+     * Resolves given namespaces
+     *
+     * @param string|string[] $namespaces
+     *
+     * @return string[]
+     */
+    protected function resolveNamespaces(string|array $namespaces): array
+    {
+        if ($namespaces === '*') {
+            return $this->detectNamespaces();
+        }
+
+        if (is_string($namespaces)) {
+            $namespaces = [ $namespaces ];
+        }
+
+        return $namespaces;
     }
 
     /**
