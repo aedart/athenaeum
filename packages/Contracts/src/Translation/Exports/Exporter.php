@@ -38,14 +38,17 @@ interface Exporter extends TranslationLoaderAware
     public function detectLocals(): array;
 
     /**
-     * Detects available groups
+     * Detect available groups
      *
-     * @return string[]
+     * @param bool $prefix [optional] When true, each group is prefixed with
+     *                     the namespace it belongs to.
+     *
+     * @return string[] E.g. [ '*.auth', '*.pagination', ..., 'acme.users' ]
      */
-    public function detectGroups(): array;
+    public function detectGroups(bool $prefix = true): array;
 
     /**
-     * Detect available namespaces
+     * Detects available namespaces
      *
      * @return string[]
      */

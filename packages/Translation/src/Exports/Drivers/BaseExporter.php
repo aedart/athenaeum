@@ -105,11 +105,49 @@ abstract class BaseExporter implements Exporter
     /**
      * @inheritDoc
      */
-    public function detectGroups(): array
+    public function detectGroups(bool $prefix = true): array
     {
-        // TODO: Implement...
+        $paths = $this->getPaths();
+        if (empty($paths)) {
+            return [];
+        }
 
-        return [];
+        $namespaces = $this->getNamespacesWithPaths();
+
+        // Filter off namespace paths to avoid evt. loading issues.
+        $notNamespacedPaths = array_filter($paths, function($path) use($namespaces) {
+            return !in_array($path, $namespaces);
+        });
+
+        // Groups found in paths, which are not namespaced must be prefixed
+        // with wildcard (*).
+        $output = $this->prefixGroups(
+            groups: $this->findGroupsIn($notNamespacedPaths),
+            prefix: $prefix
+                ? '*.'
+                : ''
+        );
+
+        // Groups found in paths with namespaces. These are prefixed with their
+        // corresponding namespace.
+        foreach ($namespaces as $namespace => $path) {
+            // Skip if for some reason the namespace path isn't
+            // part of the paths
+            if (!in_array($path, $paths)) {
+                continue;
+            }
+
+            $found = $this->prefixGroups(
+                groups: $this->findGroupsIn([ $path ]),
+                prefix: $prefix
+                    ? $namespace . '.'
+                    : ''
+            );
+
+            $output = array_merge($output, $found);
+        }
+
+        return $output;
     }
 
     /**
@@ -117,9 +155,11 @@ abstract class BaseExporter implements Exporter
      */
     public function detectNamespaces(): array
     {
-        // TODO: Implement...
-
-        return [];
+        // Wildcard acts as the "root" namespace
+        return [
+            '*',
+            ...array_keys($this->getNamespacesWithPaths())
+        ];
     }
 
     /**
@@ -133,19 +173,19 @@ abstract class BaseExporter implements Exporter
 
         return array_unique([
             ...$this->getJsonPaths(),
-            ...$this->getNamespacePaths(),
+            ...array_values($this->getNamespacesWithPaths()),
             ...$this->options['paths'] ?? []
         ]);
     }
 
     /**
-     * Get registered "namespace" paths
+     * Get registered namespaces and their paths
      *
      * @return string[]
      */
-    public function getNamespacePaths(): array
+    public function getNamespacesWithPaths(): array
     {
-        return array_values($this->getTranslationLoader()->namespaces());
+        return $this->getTranslationLoader()->namespaces();
     }
 
     /**
@@ -286,6 +326,59 @@ abstract class BaseExporter implements Exporter
         }
 
         return array_unique($locales);
+    }
+
+    /**
+     * Returns groups found in given paths
+     *
+     * @param string[] $paths
+     *
+     * @return string[]
+     */
+    protected function findGroupsIn(array $paths): array
+    {
+        $groups = [];
+
+        // Normal language directory structure looks like this:
+        // + en
+        //     - messages.php
+        // + es
+        //     - messages.php
+        // ...etc
+        // @see https://laravel.com/docs/10.x/localization#introduction
+
+        $found = Finder::create()
+            ->files()
+            ->name('*.php')
+            ->ignoreDotFiles(true)
+            ->in($paths)
+            ->depth(1)
+            ->sortByName();
+
+        foreach ($found as $item) {
+            $groups[] = $item->getBasename('.' . $item->getExtension());
+        }
+
+        return array_unique($groups);
+    }
+
+    /**
+     * Prefix each group
+     *
+     * @param string[] $groups
+     * @param string $prefix [optional]
+     *
+     * @return string[]
+     */
+    protected function prefixGroups(array $groups, string $prefix = ''): array
+    {
+        if (empty($prefix) || empty($groups)){
+            return $groups;
+        }
+
+        return array_map(function($group) use($prefix) {
+            return $prefix . $group;
+        }, $groups);
     }
 
     /**

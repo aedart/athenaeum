@@ -86,9 +86,45 @@ class BaseExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    public function canDetectGroups(): void
+    {
+        $groups = $this->exporter()->detectGroups();
+
+        ConsoleDebugger::output($groups);
+
+        $this->assertGreaterThanOrEqual(4, $groups);
+        $this->assertTrue(in_array('*.auth', $groups), '*.auth not detected');
+        $this->assertTrue(in_array('athenaeum-http-api.api-resources', $groups), 'athenaeum-http-api.api-resources not detected');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function canDetectNamespaces(): void
+    {
+        $namespaces = $this->exporter()->detectNamespaces();
+
+        ConsoleDebugger::output($namespaces);
+
+        $this->assertGreaterThanOrEqual(3, $namespaces);
+        $this->assertTrue(in_array('*', $namespaces), 'wildcard (*) not detected');
+        $this->assertTrue(in_array('athenaeum-http-api', $namespaces), 'athenaeum-http-api not detected');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ProfileNotFoundException
+     */
     public function canObtainNamespacePaths(): void
     {
-        $paths = $this->exporter()->getNamespacePaths();
+        $paths = $this->exporter()->getNamespacesWithPaths();
 
         ConsoleDebugger::output($paths);
 
@@ -129,7 +165,7 @@ class BaseExporterTest extends TranslationTestCase
 
         $this->assertGreaterThanOrEqual(4, $paths);
 
-        $namespacePaths = $exporter->getNamespacePaths();
+        $namespacePaths = $exporter->getNamespacesWithPaths();
         foreach ($namespacePaths as $np) {
             $this->assertTrue(in_array($np, $paths), sprintf('Namespace path %s not part of paths', $np));
         }
