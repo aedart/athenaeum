@@ -19,16 +19,6 @@ class ArrayExporter extends BaseExporter
         array $groups
     ): array
     {
-        // 1) Load json translations that match requested locales
-        $json = $this->loadJsonTranslations($locales);
-
-        // 2) Load groups' translations (including evt. namespaced groups)
-        $translations = $this->loadTranslationsForGroups($locales, $groups);
-
-        // 3) Finally, merge the translations together
-        return array_merge_recursive(
-            $json,
-            $translations
-        );
+        return $this->load($locales, $groups);
     }
 }

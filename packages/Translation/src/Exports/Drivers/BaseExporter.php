@@ -394,6 +394,32 @@ abstract class BaseExporter implements Exporter
     }
 
     /**
+     * Loads translations belonging to given locales and groups.
+     *
+     * @param string[] $locales
+     * @param string[] $groups
+     *
+     * @return array
+     */
+    protected function load(
+        array $locales,
+        array $groups
+    ): array
+    {
+        // Load json translations that match requested locales
+        $json = $this->loadJsonTranslations($locales);
+
+        // Load groups' translations (including evt. namespaced groups)
+        $translations = $this->loadTranslationsForGroups($locales, $groups);
+
+        // Finally, merge the translations together
+        return array_merge_recursive(
+            $json,
+            $translations
+        );
+    }
+
+    /**
      * Load translation messages that are defined in json files
      *
      * @param string[] $locales
