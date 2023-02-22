@@ -19,8 +19,7 @@ class NullExporter extends BaseExporter
     public function performExport(
         array $paths,
         array $locales,
-        array $groups,
-        array $namespaces
+        array $groups
     ): mixed
     {
         return null;

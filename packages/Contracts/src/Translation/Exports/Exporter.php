@@ -17,8 +17,8 @@ interface Exporter extends TranslationLoaderAware
      * Export translations
      *
      * @param string|array $locales [optional] Locales to export. Wildcard (*) = all locales.
-     * @param string|array $groups [optional] Groups to export. Wildcard (*) = all groups.
-     * @param string|array $namespaces [optional] Namespaces to export. Wildcard (*) = all namespaces.
+     * @param string|array $groups [optional] Groups to export. Wildcard (*) = all groups, incl. namespaced groups,
+     *                             e.g. 'courier::messages'.
      *
      * @return mixed
      *
@@ -26,8 +26,7 @@ interface Exporter extends TranslationLoaderAware
      */
     public function export(
         string|array $locales = '*',
-        string|array $groups = '*',
-        string|array $namespaces = '*'
+        string|array $groups = '*'
     ): mixed;
 
     /**
@@ -46,13 +45,6 @@ interface Exporter extends TranslationLoaderAware
      * @return string[] E.g. [ '*.auth', '*.pagination', ..., 'acme.users' ]
      */
     public function detectGroups(bool $prefix = true): array;
-
-    /**
-     * Detects available namespaces
-     *
-     * @return string[]
-     */
-    public function detectNamespaces(): array;
 
     /**
      * Get paths in which to search for translations

@@ -39,8 +39,7 @@ abstract class BaseExporter implements Exporter
      */
     public function export(
         string|array $locales = '*',
-        string|array $groups = '*',
-        string|array $namespaces = '*'
+        string|array $groups = '*'
     ): mixed
     {
         $paths = $this->getPaths();
@@ -54,10 +53,9 @@ abstract class BaseExporter implements Exporter
         }
 
         $groups = $this->resolveGroups($groups);
-        $namespaces = $this->resolveNamespaces($namespaces);
 
         try {
-            return $this->performExport($paths, $locales, $groups, $namespaces);
+            return $this->performExport($paths, $locales, $groups);
         } catch (Throwable $e) {
             throw new FailedToExportTranslations(sprintf(
                 'Unable to export locales %s: %s',
@@ -73,7 +71,6 @@ abstract class BaseExporter implements Exporter
      * @param string[] $paths Paths where to search for translations.
      * @param string[] $locales Locales to export.
      * @param string[] $groups Groups to export.
-     * @param string[] $namespaces Namespaces to export.
      *
      * @return mixed
      *
@@ -82,8 +79,7 @@ abstract class BaseExporter implements Exporter
     abstract public function performExport(
         array $paths,
         array $locales,
-        array $groups,
-        array $namespaces
+        array $groups
     ): mixed;
 
     /**
@@ -148,18 +144,6 @@ abstract class BaseExporter implements Exporter
         }
 
         return $output;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function detectNamespaces(): array
-    {
-        // Wildcard acts as the "root" namespace
-        return [
-            '*',
-            ...array_keys($this->getNamespacesWithPaths())
-        ];
     }
 
     /**
@@ -235,7 +219,7 @@ abstract class BaseExporter implements Exporter
             $locales = [ $locales ];
         }
 
-        return $locales;
+        return array_unique($locales);
     }
 
     /**
@@ -255,27 +239,7 @@ abstract class BaseExporter implements Exporter
             $groups = [ $groups ];
         }
 
-        return $groups;
-    }
-
-    /**
-     * Resolves given namespaces
-     *
-     * @param string|string[] $namespaces
-     *
-     * @return string[]
-     */
-    protected function resolveNamespaces(string|array $namespaces): array
-    {
-        if ($namespaces === '*') {
-            return $this->detectNamespaces();
-        }
-
-        if (is_string($namespaces)) {
-            $namespaces = [ $namespaces ];
-        }
-
-        return $namespaces;
+        return array_unique($groups);
     }
 
     /**
@@ -413,6 +377,23 @@ abstract class BaseExporter implements Exporter
     }
 
     /**
+     * Removes wildcard namespace prefix from group
+     *
+     * @param string $group
+     *
+     * @return string
+     */
+    protected function removeWildcardPrefix(string $group): string
+    {
+        $prefix = '*' . $this->prefixSeparator();
+        if (str_starts_with($group, $prefix)) {
+            return str_replace($prefix, '', $group);
+        }
+
+        return $group;
+    }
+
+    /**
      * Load translation messages that are defined in json files
      *
      * @param string[] $locales
@@ -438,5 +419,57 @@ abstract class BaseExporter implements Exporter
         }
 
         return $output;
+    }
+
+    /**
+     * Loads translation messages belonging to locales and groups
+     *
+     * @param string[] $locales
+     * @param string[] $groups
+     *
+     * @return array
+     */
+    protected function loadTranslationsForGroups(array $locales, array $groups): array
+    {
+        $output = [];
+        foreach ($locales as $locale) {
+            if (!isset($output[$locale])) {
+                $output[$locale] = [];
+            }
+
+            foreach ($groups as $group) {
+                $translations = $this->loadGroupTranslations($locale, $group);
+                if (empty($translations)) {
+                    continue;
+                }
+
+                $output[$locale][$this->removeWildcardPrefix($group)] = $translations;
+            }
+        }
+
+        return $output;
+    }
+
+    /**
+     * Loads translation messages belonging to locale and group
+     *
+     * @param string $locale
+     * @param string $group
+     *
+     * @return array
+     */
+    protected function loadGroupTranslations(string $locale, string $group): array
+    {
+        // Ensure that group is prefixed with a namespace, so it can treat uniformly...
+        $separator = $this->prefixSeparator();
+        if (!str_contains($group, $separator)) {
+            $group = $this->prefixGroup($group, '*');
+        }
+
+        // Extract namespace from group and load the translation lines
+        // via the loader.
+        [$namespace, $group] = explode($separator, $group, 2);
+
+        return $this->getTranslationLoader()->load($locale, $group, $namespace);
     }
 }
