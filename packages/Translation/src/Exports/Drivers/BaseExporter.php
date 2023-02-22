@@ -9,7 +9,6 @@ use Aedart\Translation\Exports\Exceptions\FailedToExportTranslations;
 use Aedart\Translation\Exports\Exceptions\InvalidLocales;
 use Aedart\Translation\Exports\Exceptions\InvalidPaths;
 use Illuminate\Contracts\Translation\Loader;
-use Symfony\Component\Finder\Finder;
 use Throwable;
 
 /**
@@ -22,6 +21,7 @@ abstract class BaseExporter implements Exporter
 {
     use TranslationLoaderTrait;
     use Concerns\Prefixing;
+    use Concerns\Detection;
 
     /**
      * Creates a new translations exporter instance
@@ -120,7 +120,7 @@ abstract class BaseExporter implements Exporter
         // Groups found in paths, which are not namespaced must be prefixed
         // with wildcard (*).
         $output = $this->prefixGroups(
-            groups: $this->findGroupsIn($notNamespacedPaths),
+            groups: $this->detectGroupsIn($notNamespacedPaths),
             namespace: $prefix
                 ? '*'
                 : ''
@@ -136,7 +136,7 @@ abstract class BaseExporter implements Exporter
             }
 
             $found = $this->prefixGroups(
-                groups: $this->findGroupsIn([ $path ]),
+                groups: $this->detectGroupsIn([ $path ]),
                 namespace: $prefix
                     ? $namespace
                     : ''
@@ -247,91 +247,12 @@ abstract class BaseExporter implements Exporter
     }
 
     /**
-     * Detect locales from the names of the directories found in given paths
-     *
-     * @param string[] $paths
-     *
-     * @return string[] E.g. en, en-uk, fr, da... etc
-     */
-    protected function detectLocalesFromDirectories(array $paths): array
-    {
-        $locales = [];
-
-        $found = Finder::create()
-            ->in($paths)
-            ->directories()
-            ->depth(0)
-            ->sortByName();
-
-        foreach ($found as $item) {
-            $locales[] = $item->getBasename();
-        }
-
-        return array_unique($locales);
-    }
-
-    /**
-     * Detect locales from the json files' names in given paths
-     *
-     * @param string[] $paths
-     *
-     * @return string[] E.g. en, en-uk, fr, da... etc
-     */
-    protected function detectLocalesFromJsonFilesIn(array $paths): array
-    {
-        $locales = [];
-
-        $found = Finder::create()
-            ->files()
-            ->name('*.json')
-            ->ignoreDotFiles(true)
-            ->in($paths)
-            ->depth(0)
-            ->sortByName();
-
-        foreach ($found as $item) {
-            $locales[] = $item->getBasename('.' . $item->getExtension());
-        }
-
-        return array_unique($locales);
-    }
-
-    /**
-     * Returns groups found in given paths
-     *
-     * @param string[] $paths
-     *
-     * @return string[]
-     */
-    protected function findGroupsIn(array $paths): array
-    {
-        $groups = [];
-
-        // Normal language directory structure looks like this:
-        // + en
-        //     - messages.php
-        // + es
-        //     - messages.php
-        // ...etc
-        // @see https://laravel.com/docs/10.x/localization#introduction
-
-        $found = Finder::create()
-            ->files()
-            ->name('*.php')
-            ->ignoreDotFiles(true)
-            ->in($paths)
-            ->depth(1)
-            ->sortByName();
-
-        foreach ($found as $item) {
-            $groups[] = $item->getBasename('.' . $item->getExtension());
-        }
-
-        return array_unique($groups);
-    }
-
-    /**
      * Loads translations belonging to given locales and groups.
+     *
+     * **Caution**: _Method relies on assigned {@see Loader} to perform
+     * the heavy lifting, handle vendor overwrites, etc.
+     * This also means that if requested namespaced groups are not known
+     * by the loader, then they will not be loaded!_
      *
      * @param string[] $locales
      * @param string[] $groups
