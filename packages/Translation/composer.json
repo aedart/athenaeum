@@ -3,7 +3,8 @@
     "description": "Translation utilities for Laravel",
     "keywords": [
         "Athenaeum",
-        "Translation"
+        "Translation",
+        "Exporters"
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
