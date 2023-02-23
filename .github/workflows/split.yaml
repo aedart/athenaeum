@@ -111,6 +111,8 @@ jobs:
             remote: 'athenaeum-support'
           - local: 'Testing'
             remote: 'athenaeum-testing'
+          - local: 'Translation'
+            remote: 'athenaeum-translation'
           - local: 'Utils'
             remote: 'athenaeum-utils'
           - local: 'Validation'

@@ -1,0 +1,39 @@
+{
+    "name": "aedart/athenaeum-translation",
+    "description": "Translation utilities for Laravel",
+    "keywords": [
+        "Athenaeum",
+        "Translation",
+        "Exporters"
+    ],
+    "homepage": "https://aedart.github.io/athenaeum/",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "aedart/athenaeum-support": "^7.3",
+        "illuminate/translation": "^v10.0.0",
+        "symfony/finder": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\Translation\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "7.1.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -50,6 +50,7 @@ use Aedart\Support\Helpers\Routing\RouteRegistrarTrait;
 use Aedart\Support\Helpers\Routing\UrlGeneratorTrait;
 use Aedart\Support\Helpers\Session\SessionManagerTrait;
 use Aedart\Support\Helpers\Session\SessionTrait;
+use Aedart\Support\Helpers\Translation\TranslationLoaderTrait;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
 use Aedart\Support\Helpers\View\BladeTrait;
@@ -205,6 +206,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Translation
             'TranslatorTrait' => [ TranslatorTrait::class ],
+            'TranslationLoaderTrait' => [ TranslationLoaderTrait::class ],
 
             // Validation
             'ValidatorFactory' => [ ValidatorFactoryTrait::class ],
