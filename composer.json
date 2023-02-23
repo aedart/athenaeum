@@ -29,6 +29,7 @@
         "illuminate/http": "^v10.0.0",
         "illuminate/pipeline": "^v10.0.0",
         "illuminate/support": "^v10.0.0",
+        "illuminate/translation": "^v10.0.0",
         "illuminate/validation": "^v10.0.0",
         "league/flysystem": "^3.12.2",
         "mockery/mockery": "1.5.*",
@@ -70,6 +71,7 @@
         "psr-4": {
             "Aedart\\": "src",
             "Aedart\\Acl\\": "packages/Acl/src",
+            "Aedart\\Antivirus\\": "packages/Antivirus/src",
             "Aedart\\Audit\\": "packages/Audit/src",
             "Aedart\\Auth\\": "packages/Auth/src",
             "Aedart\\Circuits\\": "packages/Circuits/src",
@@ -110,6 +112,7 @@
     },
     "replace": {
         "aedart/athenaeum-acl": "7.3.0",
+        "aedart/athenaeum-antivirus": "7.3.0",
         "aedart/athenaeum-audit": "7.3.0",
         "aedart/athenaeum-auth": "7.3.0",
         "aedart/athenaeum-circuits": "7.3.0",

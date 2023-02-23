@@ -1,0 +1,39 @@
+{
+    "name": "aedart/athenaeum-antivirus",
+    "description": "Antivirus adapters for Laravel",
+    "keywords": [
+        "Athenaeum",
+        "Antivirus",
+        "Anti-virus",
+        "ClamAV"
+    ],
+    "homepage": "https://aedart.github.io/athenaeum/",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alin Eugen Deac",
+            "email": "aedart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "aedart/athenaeum-contracts": "^7.4",
+        "aedart/athenaeum-support": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aedart\\Antivirus\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "7.1.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

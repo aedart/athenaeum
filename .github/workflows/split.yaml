@@ -55,6 +55,8 @@ jobs:
         package:
           - local: 'Acl'
             remote: 'athenaeum-acl'
+          - local: 'Antivirus'
+            remote: 'athenaeum-antivirus'
           - local: 'Audit'
             remote: 'athenaeum-audit'
           - local: 'Auth'
