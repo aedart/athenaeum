@@ -39,6 +39,7 @@
         "ramsey/http-range": "^1.1.0",
         "shrikeh/teapot": "^2.3.1",
         "symfony/console": "^v6.2.5",
+        "symfony/finder": "^6.2",
         "vlucas/phpdotenv": "^5.5.0"
     },
     "require-dev": {
@@ -97,6 +98,7 @@
             "Aedart\\Streams\\": "packages/Streams/src",
             "Aedart\\Support\\": "packages/Support/src",
             "Aedart\\Testing\\": "packages/Testing/src",
+            "Aedart\\Translation\\": "packages/Translation/src",
             "Aedart\\Utils\\": "packages/Utils/src",
             "Aedart\\Validation\\": "packages/Validation/src"
         }
@@ -136,6 +138,7 @@
         "aedart/athenaeum-streams": "7.2.0",
         "aedart/athenaeum-support": "7.2.0",
         "aedart/athenaeum-testing": "7.2.0",
+        "aedart/athenaeum-translation": "7.2.0",
         "aedart/athenaeum-utils": "7.2.0",
         "aedart/athenaeum-validation": "7.2.0"
     },

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Translation package, with a profile-based translation exporter component.
+* Laravel Translation Loader aware component, in Support package.
+
 ## [7.2.0] - 2023-02-19
 
 ### Added
