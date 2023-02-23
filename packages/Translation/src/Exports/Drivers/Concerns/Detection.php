@@ -21,6 +21,10 @@ trait Detection
      */
     protected function detectLocalesFromDirectories(array $paths): array
     {
+        if (empty($paths)) {
+            return [];
+        }
+
         $locales = [];
 
         $found = Finder::create()
@@ -45,6 +49,10 @@ trait Detection
      */
     protected function detectLocalesFromJsonFilesIn(array $paths): array
     {
+        if (empty($paths)) {
+            return [];
+        }
+
         $locales = [];
 
         $found = Finder::create()
@@ -71,6 +79,10 @@ trait Detection
      */
     protected function detectGroupsIn(array $paths): array
     {
+        if (empty($paths)) {
+            return [];
+        }
+
         $groups = [];
 
         // Normal language directory structure looks like this:
