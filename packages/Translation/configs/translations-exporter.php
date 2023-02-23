@@ -35,9 +35,9 @@ return [
     | Namespaces and Json
     |--------------------------------------------------------------------------
     |
-    | Namespaces and paths to JSON translations to be registered. Use this to
-    | deal with 3rd party service providers that offer translations, yet are
-    | marked as deferrable and possibly not available during export.
+    | Register namespaced translations and paths to JSON translations. Use this
+    | when you want to use 3rd part translations without having to register
+    | their service providers.
     */
 
     'namespaces' => [

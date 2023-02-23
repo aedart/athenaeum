@@ -18,19 +18,10 @@ class AcmeTranslationsServiceProvider extends ServiceProvider
     /**
      * Boots this provider
      *
-     * **CAUTION**: This provider's boot method will NOT be invoked, if its marked as "deferrable".
-     * Only after it boots will the translations' paths be available...
-     *
-     * @see \Illuminate\Contracts\Support\DeferrableProvider
-     *
      * @return void
      */
     public function boot(): void
     {
-        // CAUTION: This provider's boot method will NOT be invoked, if its marked as "deferrable".
-        // Only after it boots will the translations' paths be available...
-        // @see \Illuminate\Contracts\Support\DeferrableProvider
-
         $dataDir = Configuration::dataDir();
 
         $this->loadTranslationsFrom($dataDir . 'translation/lang', 'translation-test');

@@ -6,8 +6,6 @@ return [
     |--------------------------------------------------------------------------
     | Default Exporter
     |--------------------------------------------------------------------------
-    |
-    | Name of default translations exporter profile to use, when none specified.
     */
 
     'default_exporter' => 'default',
@@ -16,10 +14,6 @@ return [
     |--------------------------------------------------------------------------
     | Language Directories
     |--------------------------------------------------------------------------
-    |
-    | Paths to directories that contain language files. Typically, this should
-    | only be your application's language directory. Paths are ONLY used for
-    | auto-discovery of available locales and groups.
     */
 
     'paths' => [
@@ -31,18 +25,14 @@ return [
     |--------------------------------------------------------------------------
     | Namespaces and Json
     |--------------------------------------------------------------------------
-    |
-    | Namespaces and paths to JSON translations to be registered. Use this to
-    | deal with 3rd party service providers that offer translations, yet are
-    | marked as deferrable and possibly not available during export.
     */
 
     'namespaces' => [
-        //'acme' => realpath(__DIR__ . '/../vendor/acme/package/lang'),
+        'deferrable' => \Codeception\Configuration::dataDir() . 'translation/deferrable'
     ],
 
     'json' => [
-        //realpath(__DIR__ . '/../vendor/acme/package/lang')
+        \Codeception\Configuration::dataDir() . 'translation/deferrable'
     ],
 
     /*

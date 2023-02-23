@@ -147,4 +147,37 @@ class ArrayExporterTest extends TranslationTestCase
         $this->assertArrayNotHasKey('da', $translations);
         $this->assertArrayNotHasKey('en-uk', $translations);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ExporterException
+     * @throws ProfileNotFoundException
+     */
+    public function canExportTranslationsFromNamespacesAndJsonPaths(): void
+    {
+        // NOTE: deferrable namespace is registered in test configuration
+
+        $translations = $this->exporter()->export(
+            locales: ['en-uk', 'da'],
+            groups: 'deferrable::messages'
+        );
+
+        ConsoleDebugger::output($translations);
+
+        // -----------------------------------------------------------------------------//
+
+        $this->assertNotEmpty($translations, 'No translations exported');
+
+        $this->assertArrayHasKey('en-uk', $translations);
+        $this->assertArrayHasKey('deferrable::messages', $translations['en-uk'], 'en-uk has no json group');
+        $this->assertNotEmpty($translations['en-uk']['deferrable::messages'], 'en-uk deferrable::messages is empty');
+
+        $this->assertArrayHasKey('da', $translations);
+        $this->assertArrayHasKey('__JSON__', $translations['da'], 'da has no json group');
+        $this->assertNotEmpty($translations['da']['__JSON__'], 'da __JSON__ is empty');
+        $this->assertArrayHasKey('measurement', $translations['da']['__JSON__'], 'no "measurement" item found in da __JSON__');
+    }
 }

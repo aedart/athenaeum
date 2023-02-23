@@ -12,6 +12,7 @@ use Aedart\Http\Api\Providers\JsonResourceServiceProvider;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Translation\AcmeTranslationsServiceProvider;
+use Aedart\Tests\Helpers\Dummies\Translation\DeferrableTranslationsServiceProvider;
 use Aedart\Translation\Providers\TranslationsExporterServiceProvider;
 use Aedart\Translation\Traits\TranslationsExporterManagerTrait;
 use Codeception\Configuration;
@@ -58,7 +59,8 @@ abstract class TranslationTestCase extends LaravelTestCase
 
             // Packages that publishes or load translations...
             JsonResourceServiceProvider::class,
-            AcmeTranslationsServiceProvider::class
+            AcmeTranslationsServiceProvider::class,
+            DeferrableTranslationsServiceProvider::class
         ];
     }
 
