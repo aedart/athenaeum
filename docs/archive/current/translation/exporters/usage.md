@@ -65,11 +65,46 @@ $acme = $exporter->export('be', 'acme::users');
 
 The output of the `export()` method depends on the chosen profile's [driver](./drivers/README.md).
 
-::: tip Note
-Each exporter offers a `paths` option, in which you can specify where to look for translations files.
-Those paths are used for detecting available locales and translation groups.
-Yet, **ONLY** translations that are [**REGISTERED** in the application](https://laravel.com/docs/10.x/packages#language-files) are exported.
+## Paths and Translations
 
-The reason for this behaviour, is to ensure that correct [package overwrites](https://laravel.com/docs/10.x/localization#overriding-package-language-files) are exported, as intended.
-Laravel's translation loader component does this, so you do not have to worry about it.
-:::
+Available locales and groups are automatically detected, based on the `paths` option (_in your `config/translations-exporter.php`_), 
+as well as registered namespaced translations and paths to JSON files, in Laravel's translation loader.
+
+If you wish to export translations from 3rd party packages, then you have the following options:
+
+1. Register 3rd party service provider to load translations. 
+2. Publish packages' resource (_if translations are published_)
+3. Or, manual registration of translations (_see below_)
+
+To use translations from packages, without having to register their service providers, you can register them in the configuration:  
+
+```php
+<?php
+
+return [
+    // ...previous not shown...
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Namespaces and Json
+    |--------------------------------------------------------------------------
+    |
+    | Register namespaced translations and paths to JSON translations. Use this
+    | when you want to use 3rd part translations without having to register
+    | their service providers.
+    */
+
+    'namespaces' => [
+        'acme' => realpath(__DIR__ . '/../vendor/acme/package/lang'),
+    ],
+
+    'json' => [
+        realpath(__DIR__ . '/../vendor/acme/package/lang')
+    ],
+
+    // ...remaining not shown ...
+];
+
+```
+ 
+Consequently, when you manually register namespaced translations and paths to JSON translations, then these will be made available in your application!
