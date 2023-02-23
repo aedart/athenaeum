@@ -10,3 +10,4 @@ The following exporters (_drivers_) are offered by default:
 * [`ArrayExporter`](./array.md)
 * [`LangJsExporter`](./lang-js.md)
 * [`LangJsJsonExporter`](./lang-js-json.md)
+* [`CacheExporter`](./cache.md)

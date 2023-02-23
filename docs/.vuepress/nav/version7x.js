@@ -604,6 +604,7 @@ module.exports.sidebar = function(){
                                 'translation/exporters/drivers/array',
                                 'translation/exporters/drivers/lang-js',
                                 'translation/exporters/drivers/lang-js-json',
+                                'translation/exporters/drivers/cache',
                             ]
                         },
                     ]

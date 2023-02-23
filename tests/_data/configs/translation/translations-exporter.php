@@ -69,6 +69,16 @@ return [
             ],
         ],
 
+        'cache' => [
+            'driver' => \Aedart\Translation\Exports\Drivers\CacheExporter::class,
+            'options' => [
+                'exporter' => 'default',
+                'cache' => 'array',
+                'ttl' => 300,
+                'prefix' => 'trans_export_'
+            ],
+        ],
+
         'null' => [
             'driver' => \Aedart\Translation\Exports\Drivers\NullExporter::class,
             'options' => [

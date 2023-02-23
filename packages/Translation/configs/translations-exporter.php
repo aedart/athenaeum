@@ -88,5 +88,22 @@ return [
                 'depth' => 512
             ],
         ],
+
+        'cache' => [
+            'driver' => \Aedart\Translation\Exports\Drivers\CacheExporter::class,
+            'options' => [
+                // The exporter to use
+                'exporter' => 'default',
+
+                // The cache store to use
+                'cache' => env('CACHE_DRIVER', 'file'),
+
+                // Time-to-live (in seconds)
+                'ttl' => 3600,
+
+                // Cache key prefix
+                'prefix' => 'trans_export_'
+            ],
+        ]
     ]
 ];

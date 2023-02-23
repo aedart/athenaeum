@@ -55,8 +55,6 @@ Once you have published the translation exporter's assets, you can configure exp
 Change the profiles as you see fit.
 
 ```php
-<?php
-
 return [
 
     /*
