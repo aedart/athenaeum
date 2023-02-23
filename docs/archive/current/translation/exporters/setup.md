@@ -39,7 +39,7 @@ Run `vendor:publish` to publish this package's configuration.
 php artisan vendor:publish
 ```
 
-You should now have a new `config/streams.php` configuration available in your application. 
+You should now have a new `config/translations-exporter.php` configuration available in your application. 
 
 ### Publish Assets for Athenaeum Core Application
 
@@ -67,6 +67,8 @@ return [
 
     'default_exporter' => env('DEFAULT_TRANSLATIONS_EXPORTER', 'default'),
 
+    // ...other options not here...
+
     /*
     |--------------------------------------------------------------------------
     | Exporter Profiles
@@ -78,16 +80,11 @@ return [
         'default' => [
             'driver' => \Aedart\Translation\Exports\Drivers\ArrayExporter::class,
             'options' => [
-
-                'paths' => [
-                    lang_path(),
-                ],
-
                 'json_key' => '__JSON__'
             ],
         ],
 
-        // ...remaining not shown ...
+        // ...remaining profiles not shown ...
     ]
 ];
 ```
