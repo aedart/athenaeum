@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.3.0] - 2023-02-23
+
 ### Added
 
 * Translation package, with a profile-based translation exporter component.
@@ -1051,7 +1053,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.2.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.3.0...HEAD
+[7.3.0]: https://github.com/aedart/athenaeum/compare/7.2.0...7.3.0
 [7.2.0]: https://github.com/aedart/athenaeum/compare/7.1.0...7.2.0
 [7.1.0]: https://github.com/aedart/athenaeum/compare/7.0.1...7.1.0
 [7.0.1]: https://github.com/aedart/athenaeum/compare/7.0.0...7.0.1
