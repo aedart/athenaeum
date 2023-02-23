@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Introduction
 
-The following "drivers" are offered by default:
+The following exporters (_drivers_) are offered by default:
 
 * [`ArrayExporter`](./array.md)
 * [`LangJsExporter`](./lang-js.md)
