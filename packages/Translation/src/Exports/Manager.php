@@ -105,8 +105,14 @@ class Manager implements
     {
         $configuration = $this->findProfileConfigurationOrFail($profile);
         $driver = $configuration['driver'] ?? null;
+
+        $driverOptions = $configuration['options'] ?? [];
+        if (!isset($driverOptions['paths'])) {
+            $driverOptions['paths'] = $this->getPaths();
+        }
+
         $options = array_merge(
-            $configuration['options'] ?? [],
+            $driverOptions,
             $options
         );
 
@@ -132,5 +138,15 @@ class Manager implements
         }
 
         return $config->get($key);
+    }
+
+    /**
+     * Returns paths in which locales and groups are located
+     *
+     * @return string[]
+     */
+    protected function getPaths(): array
+    {
+        return $this->getConfig()->get('translations-exporter.paths', [ lang_path() ]);
     }
 }
