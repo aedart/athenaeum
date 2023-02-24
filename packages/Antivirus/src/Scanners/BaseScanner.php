@@ -2,7 +2,10 @@
 
 namespace Aedart\Antivirus\Scanners;
 
+use Aedart\Antivirus\Exceptions\AntivirusException;
+use Aedart\Antivirus\Scanners\Concerns;
 use Aedart\Contracts\Antivirus\Events\FileWasScanned;
+use Aedart\Contracts\Antivirus\Exceptions\AntivirusException as AntivirusExceptionInterface;
 use Aedart\Contracts\Antivirus\Exceptions\UnsupportedStatusValueException;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Contracts\Antivirus\Results\Status;
@@ -15,6 +18,7 @@ use DateTimeInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Psr\Http\Message\StreamInterface;
 use SplFileInfo;
+use Throwable;
 
 /**
  * Base Scanner
@@ -27,6 +31,7 @@ use SplFileInfo;
 abstract class BaseScanner implements Scanner
 {
     use DispatcherTrait;
+    use Concerns\Streams;
 
     /**
      * Creates a new antivirus scanner instance
@@ -46,7 +51,26 @@ abstract class BaseScanner implements Scanner
      */
     public function scan(string|SplFileInfo|FileStream|StreamInterface $file): ScanResult
     {
-        // TODO: Add a default try-catch implementation that invokes a "scanFile" method...
+        try {
+            // Wrap the file into a stream and scan it.
+            $result = $this->scanStream(
+                $this->wrapFile($file)
+            );
+
+            // In case provided file is a stream, make sure to rewind
+            // it after it has been scanned. Underlying driver might not
+            // do this for us.
+            if ($file instanceof StreamInterface) {
+                $file->rewind();
+            }
+
+            // Finally, return the result...
+            return $result;
+        } catch (AntivirusExceptionInterface $e) {
+            throw $e;
+        } catch (Throwable $e) {
+            throw new AntivirusException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 
     /**
@@ -73,6 +97,17 @@ abstract class BaseScanner implements Scanner
     /*****************************************************************
      * Abstract methods
      ****************************************************************/
+
+    /**
+     * Performs a virus scan on given file stream
+     *
+     * @param FileStream $stream
+     *
+     * @return ScanResult
+     *
+     * @throws Throwable
+     */
+    abstract public function scanStream(FileStream $stream): ScanResult;
 
     /**
      * Return class path to file scan status to be used
