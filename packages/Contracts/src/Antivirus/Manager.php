@@ -22,7 +22,7 @@ interface Manager
      *
      * @throws ProfileNotFoundException
      */
-    public function make(string|null $name = null, array $options = []): Scanner;
+    public function profile(string|null $name = null, array $options = []): Scanner;
 
     /**
      * Creates a new antivirus scanner instance
