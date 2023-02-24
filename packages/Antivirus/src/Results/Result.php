@@ -29,7 +29,7 @@ class Result implements ScanResult
      * @param string $filename
      * @param int $filesize
      * @param array $details [optional]
-     * @param string|null $user [optional]
+     * @param string|int|null $user [optional]
      * @param DateTimeInterface|null $datetime [optional]
      */
     public function __construct(
@@ -37,7 +37,7 @@ class Result implements ScanResult
         protected string $filename,
         protected int $filesize,
         protected array $details = [],
-        protected string|null $user = null,
+        protected string|int|null $user = null,
         DateTimeInterface|null $datetime = null,
     ) {
         $this->datetime = $datetime ?? Date::now()->toImmutable();
@@ -110,7 +110,7 @@ class Result implements ScanResult
     /**
      * @inheritDoc
      */
-    public function user(): string|null
+    public function user(): string|int|null
     {
         return $this->user;
     }

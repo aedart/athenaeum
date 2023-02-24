@@ -76,10 +76,10 @@ interface ScanResult extends Arrayable
     /**
      * Get eventual user that performed the scan
      *
-     * @return string|null User identifier, e.g. username, email or database id,
+     * @return string|int|null User identifier, e.g. username, email or database id,
      *                     if a user was identified.
      */
-    public function user(): string|null;
+    public function user(): string|int|null;
 
     /**
      * Get additional details, if available

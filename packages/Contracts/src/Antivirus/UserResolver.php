@@ -13,8 +13,8 @@ interface UserResolver
     /**
      * Returns the user that caused a file scan, if possible
      *
-     * @return string|null User identifier, e.g. username, email or database id,
+     * @return string|int|null User identifier, e.g. username, email or database id,
      *                     if a user was identified.
      */
-    public function resolve(): string|null;
+    public function resolve(): string|int|null;
 }
