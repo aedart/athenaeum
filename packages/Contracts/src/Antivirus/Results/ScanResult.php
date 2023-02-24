@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Antivirus\Results;
 
 use DateTimeInterface;
+use Illuminate\Contracts\Support\Arrayable;
 
 /**
  * File Scan Result
@@ -10,7 +11,7 @@ use DateTimeInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Antivirus\Results
  */
-interface ScanResult
+interface ScanResult extends Arrayable
 {
     /**
      * Determine if the scan was successful
@@ -73,7 +74,15 @@ interface ScanResult
     public function datetime(): DateTimeInterface;
 
     /**
-     * Get eventual result details
+     * Get eventual user that performed the scan
+     *
+     * @return string|null User identifier, e.g. username, email or database id,
+     *                     if a user was identified.
+     */
+    public function user(): string|null;
+
+    /**
+     * Get additional details, if available
      *
      * @return array
      */
