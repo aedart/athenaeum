@@ -2,24 +2,28 @@
 
 namespace Aedart\Contracts\Antivirus\Results;
 
+use Aedart\Contracts\Antivirus\Exceptions\UnsupportedStatusValueException;
+use Stringable;
+
 /**
  * File Scan Status
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Antivirus\Results
  */
-interface Status
+interface Status extends Stringable
 {
     /**
      * Create a new scan status instance from given value
      *
-     * @param mixed|null $value [optional] When no value is given, then a default
-     *                          unsuccessful status is return (e.g. "unknown").
+     * @param mixed|null $value
      * @param string|null $reason [optional] Eventual failure reason
      *
      * @return static
+     *
+     * @throws UnsupportedStatusValueException
      */
-    public static function make(mixed $value = null, string|null $reason = null): static;
+    public static function make(mixed $value, string|null $reason = null): static;
 
     /**
      * Determine if this status represents a successful state
