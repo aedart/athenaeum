@@ -23,7 +23,7 @@ class AntivirusServiceProvider extends ServiceProvider implements DeferrableProv
     /**
      * @inheritdoc
      */
-    public function register()
+    public function register(): void
     {
         $this->app->singleton(UserResolver::class, function () {
             return new DefaultUserResolver();
@@ -42,7 +42,7 @@ class AntivirusServiceProvider extends ServiceProvider implements DeferrableProv
     /**
      * @inheritDoc
      */
-    public function provides()
+    public function provides(): array
     {
         return [
             UserResolver::class,
