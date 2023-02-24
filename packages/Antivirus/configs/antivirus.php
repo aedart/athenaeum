@@ -31,7 +31,7 @@ return [
             'options' => [
 
                 // Whether scanner should "pass" file scans (true), or
-                // "fail" then (false).
+                // "fail" them (false).
                 'should_pass' => false,
             ],
         ]
