@@ -85,7 +85,7 @@ class AntivirusServiceProvider extends ServiceProvider implements DeferrableProv
      */
     protected function bindResultComponents(): static
     {
-        $this->app->bind(ScanResult::class, function(Application $app, array $params) {
+        $this->app->bind(ScanResult::class, function (Application $app, array $params) {
             if (!isset($params['status']) || !($params['status'] instanceof Status)) {
                 throw new BindingResolutionException('Invalid "status" provided for Scan Result');
             }

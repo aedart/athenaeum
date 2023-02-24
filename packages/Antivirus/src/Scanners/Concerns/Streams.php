@@ -29,7 +29,7 @@ trait Streams
      */
     protected function wrapFile(string|SplFileInfo|FileStreamInterface|StreamInterface $file): FileStreamInterface
     {
-        return match(true) {
+        return match (true) {
             is_string($file) => $this->openStreamForPath($file),
             $file instanceof SplFileInfo => $this->openStreamForFileInfo($file),
             $file instanceof FileStreamInterface => $this->wrapStream($file),

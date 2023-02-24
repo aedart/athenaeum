@@ -3,7 +3,6 @@
 namespace Aedart\Antivirus\Scanners;
 
 use Aedart\Antivirus\Exceptions\AntivirusException;
-use Aedart\Antivirus\Scanners\Concerns;
 use Aedart\Contracts\Antivirus\Events\FileWasScanned;
 use Aedart\Contracts\Antivirus\Exceptions\AntivirusException as AntivirusExceptionInterface;
 use Aedart\Contracts\Antivirus\Exceptions\UnsupportedStatusValueException;
@@ -139,8 +138,7 @@ abstract class BaseScanner implements Scanner
         array $details = [],
         string|int|null $user = null,
         DateTimeInterface|null $datetime = null
-    ): ScanResult
-    {
+    ): ScanResult {
         return IoCFacade::make(ScanResult::class, [
             'status' => $status,
             'filename' => $filename,
