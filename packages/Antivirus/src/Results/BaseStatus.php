@@ -71,4 +71,12 @@ abstract class BaseStatus implements Status
     {
         return isset($this->reason);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function value(): mixed
+    {
+        return $this->value;
+    }
 }
