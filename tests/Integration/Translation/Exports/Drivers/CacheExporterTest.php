@@ -19,7 +19,7 @@ use Psr\SimpleCache\InvalidArgumentException;
  * @group translations-exporter-drivers
  * @group translations-exporter-drivers-cache
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Translation\Exports\Drivers
  */
 class CacheExporterTest extends TranslationTestCase

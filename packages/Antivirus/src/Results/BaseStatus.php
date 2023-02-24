@@ -10,7 +10,7 @@ use Aedart\Contracts\Antivirus\Results\Status;
  *
  * Abstraction for file san status.
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Antivirus\Results
  */
 abstract class BaseStatus implements Status

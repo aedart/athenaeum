@@ -20,7 +20,7 @@ use SplFileInfo;
  *
  * Abstraction for antivirus scanner
  *
- * @author Alin Eugen Deac <ade@rspsystems.com>
+ * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Antivirus\Scanners
  */
 abstract class BaseScanner implements Scanner
