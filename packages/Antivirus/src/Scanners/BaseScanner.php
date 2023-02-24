@@ -2,7 +2,6 @@
 
 namespace Aedart\Antivirus\Scanners;
 
-use Aedart\Antivirus\Events\FileWasScanned as FileWasScannedEvent;
 use Aedart\Contracts\Antivirus\Events\FileWasScanned;
 use Aedart\Contracts\Antivirus\Exceptions\UnsupportedStatusValueException;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
@@ -125,7 +124,7 @@ abstract class BaseScanner implements Scanner
      */
     protected function makeFileWasScannedEvent(ScanResult $result): FileWasScanned
     {
-        return new FileWasScannedEvent($result);
+        return IoCFacade::make(FileWasScanned::class, [ 'result' => $result ]);
     }
 
     /**
