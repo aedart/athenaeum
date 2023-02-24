@@ -113,7 +113,7 @@ abstract class BaseScanner implements Scanner
      *
      * @return class-string<Status>
      */
-    abstract protected function scanStatus(): string;
+    abstract protected function statusClass(): string;
 
     /*****************************************************************
      * Internals
@@ -161,7 +161,7 @@ abstract class BaseScanner implements Scanner
      */
     protected function makeScanStatus(mixed $value, string|null $reason = null): Status
     {
-        $class = $this->scanStatus();
+        $class = $this->statusClass();
 
         return $class::make($value, $reason);
     }
