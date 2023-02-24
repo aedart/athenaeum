@@ -11,6 +11,7 @@ use Aedart\Contracts\Antivirus\UserResolver;
 use Aedart\Contracts\Streams\FileStream;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
+use DateTimeInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Psr\Http\Message\StreamInterface;
 use SplFileInfo;
@@ -85,6 +86,37 @@ abstract class BaseScanner implements Scanner
      ****************************************************************/
 
     /**
+     * Creates a new file scan result instance
+     *
+     * @param Status $status
+     * @param string $filename
+     * @param int $filesize
+     * @param array $details [optional]
+     * @param string|int|null $user [optional]
+     * @param DateTimeInterface|null $datetime [optional]
+     *
+     * @return ScanResult
+     */
+    protected function makeScanResult(
+        Status $status,
+        string $filename,
+        int $filesize,
+        array $details = [],
+        string|int|null $user = null,
+        DateTimeInterface|null $datetime = null
+    ): ScanResult
+    {
+        return IoCFacade::make(ScanResult::class, [
+            'status' => $status,
+            'filename' => $filename,
+            'filesize' => $filesize,
+            'details' => $details,
+            'user' => $user ?? $this->user(),
+            'datetime' => $datetime
+        ]);
+    }
+
+    /**
      * Creates a new file scan status instance
      *
      * @param mixed $value
@@ -128,11 +160,11 @@ abstract class BaseScanner implements Scanner
     }
 
     /**
-     * Returns the user that caused a file scan, if possible
+     * Returns the user (identifier) that caused a file scan, if possible
      *
-     * @return string|null
+     * @return string|int|null
      */
-    protected function user(): string|null
+    protected function user(): string|int|null
     {
         /** @var UserResolver $resolver */
         $resolver = IoCFacade::make(UserResolver::class);
