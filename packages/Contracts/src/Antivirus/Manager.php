@@ -32,7 +32,7 @@ interface Manager
      *
      * @return Scanner
      */
-    public function scanner(string|null $driver, array $options = []): Scanner;
+    public function scanner(string|null $driver = null, array $options = []): Scanner;
 
     /**
      * Returns class path of a default scanner to use
