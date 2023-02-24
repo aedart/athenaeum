@@ -26,7 +26,7 @@ class FileWasScannedEventTest extends AntivirusTestCase
      *
      * @return void
      */
-    public function canObtainEvent(): void
+    public function canMakeEvent(): void
     {
         $scanResult = Mockery::mock(ScanResult::class);
 
