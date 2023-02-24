@@ -8,7 +8,9 @@ use Aedart\Contracts\Antivirus\Exceptions\UnsupportedStatusValueException;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Contracts\Antivirus\Results\Status;
 use Aedart\Contracts\Antivirus\Scanner;
+use Aedart\Contracts\Antivirus\UserResolver;
 use Aedart\Contracts\Streams\FileStream;
+use Aedart\Support\Facades\IoCFacade;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Illuminate\Contracts\Events\Dispatcher;
 use Psr\Http\Message\StreamInterface;
@@ -124,5 +126,18 @@ abstract class BaseScanner implements Scanner
     protected function makeFileWasScannedEvent(ScanResult $result): FileWasScanned
     {
         return new FileWasScannedEvent($result);
+    }
+
+    /**
+     * Returns the user that caused a file scan, if possible
+     *
+     * @return string|null
+     */
+    protected function user(): string|null
+    {
+        /** @var UserResolver $resolver */
+        $resolver = IoCFacade::make(UserResolver::class);
+
+        return $resolver->resolve();
     }
 }
