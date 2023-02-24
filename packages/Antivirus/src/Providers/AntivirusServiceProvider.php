@@ -34,6 +34,18 @@ class AntivirusServiceProvider extends ServiceProvider implements DeferrableProv
     }
 
     /**
+     * Boots this service provider
+     *
+     * @return void
+     */
+    public function boot(): void
+    {
+        $this->publishes([
+            __DIR__ . '/../../configs/antivirus.php' => config_path('antivirus.php')
+        ], 'config');
+    }
+
+    /**
      * @inheritDoc
      */
     public function provides(): array
