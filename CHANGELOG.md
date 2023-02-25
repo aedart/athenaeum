@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* Improved method description of `copy()` and `copyTo()` methods, in `FileStream`.
+
 ## [7.3.0] - 2023-02-23
 
 ### Added
