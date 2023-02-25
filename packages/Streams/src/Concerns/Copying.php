@@ -38,11 +38,35 @@ trait Copying
             throw new CannotCopyToTargetStream('Target stream is either detached or not writable.');
         }
 
-        $bytesCopied = stream_copy_to_stream(
+        return $this->copyResourceTo(
             $source->resource(),
             $target->resource(),
             $length,
             $offset
+        );
+    }
+
+    /**
+     * Copy from a source resource to a target resource
+     *
+     * @see https://www.php.net/manual/en/function.stream-copy-to-stream
+     *
+     * @param  resource $source The source resource to copy from
+     * @param  resource $target The target resource to copy to
+     * @param  int|null  $length  [optional] Maximum bytes to copy from source stream. By default, all bytes left are copied
+     * @param  int  $offset  [optional] The offset on source stream where to start to copy data from
+     *
+     * @return int Bytes copied
+     *
+     * @throws StreamException
+     */
+    protected function copyResourceTo($source, $target, int|null $length = null, int $offset = 0): int
+    {
+        $bytesCopied = stream_copy_to_stream(
+            from: $source,
+            to: $target,
+            length: $length,
+            offset: $offset
         );
 
         if ($bytesCopied === false) {
