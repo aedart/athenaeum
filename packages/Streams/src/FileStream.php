@@ -12,6 +12,7 @@ use Aedart\MimeTypes\Concerns\MimeTypeDetection;
 use Aedart\MimeTypes\Exceptions\MimeTypeDetectionException;
 use Aedart\Streams\Exceptions\CannotOpenStream;
 use Aedart\Streams\Exceptions\StreamException;
+use Psr\Http\Message\StreamInterface as PsrStreamInterface;
 use Throwable;
 
 /**
@@ -90,6 +91,33 @@ class FileStream extends Stream implements
         $this->performCopy($this, $target, $length, $offset);
 
         return $target;
+    }
+
+    /**
+     * Copy data from source stream into this stream
+     *
+     * @param  resource|PsrStreamInterface|StreamInterface $source  The source stream to copy from.
+     * @param  int|null  $length  [optional] Maximum bytes to copy from source stream. By default, all bytes left are copied
+     * @param  int  $offset  [optional] The offset on source stream where to start to copy data from
+     *
+     * @return static This stream with data appended from source stream
+     */
+    public function copyFrom($source, int|null $length = null, int $offset = 0): static
+    {
+        if (is_resource($source)) {
+            // Wrap ... copy, restore position and detach
+        }
+
+        if ($source instanceof StreamInterface) {
+            // Copy, restore position
+        }
+
+        if ($source instanceof PsrStreamInterface) {
+            // Uhm... copy, restore position... DO NOT DETACH.
+            // NOTE: We cannot obtain underlying resource here
+        }
+
+        // TODO: Throw exception if source type is unsupported...
     }
 
     /**
