@@ -858,33 +858,15 @@ class DownloadStream implements
         int|null $bufferSize = null,
         bool $close = true
     ): void {
-        $bufferSize = $bufferSize ?? $this->bufferSize();
+        $chunks = $stream->buffer(
+            length: $range->getLengthInBytes(),
+            offset: $range->getStartBytes(),
+            bufferSize: $bufferSize ?? $this->bufferSize()
+        );
 
-        // Set position where to start reading from...
-        $stream->positionAt($range->getStartBytes());
-
-        // Whenever the amount of requested bytes is less than buffer, output it.
-        $length = $range->getLengthInBytes();
-        if ($length <= $bufferSize && !$stream->eof()) {
-            echo $stream->read($length);
-            goto close;
-        }
-
-        // However, if requested amount of bytes is larger than our buffer size,
-        // we need to split output into smaller chunks. If we do not do this, we might
-        // exceed PHP's memory limits (for very large files only).
-
-        $end = $range->getEndBytes();
-        $readLength = $bufferSize;
-
-        while (!$stream->eof() && ($position = $stream->tell()) <= $end) {
-            // Prevent out-of-bounds issues
-            if ($position + $bufferSize > $end) {
-                $readLength = $end - $position + 1;
-            }
-
+        foreach ($chunks as $chunk) {
             // Output chunk
-            echo $stream->read($readLength);
+            echo $chunk;
 
             // Abort loop if required...
             if (connection_aborted() === 1) {
@@ -892,7 +874,6 @@ class DownloadStream implements
             }
         }
 
-        close:
         if ($close) {
             $stream->close();
         }
@@ -922,7 +903,8 @@ class DownloadStream implements
         $bufferSize = $bufferSize ?? $this->bufferSize();
         $newLine = PHP_EOL;
 
-        //
+        // Make separator. Note that the "--" prefix is required.
+        // @see https://www.rfc-editor.org/rfc/rfc2046.html#section-5.1.1
         $separator = "--{$boundary}";
 
         // Resolve Content-Type for each body part. Use Content-Type from the headers,

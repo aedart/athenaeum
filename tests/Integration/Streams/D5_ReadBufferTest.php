@@ -1,0 +1,227 @@
+<?php
+
+namespace Aedart\Tests\Integration\Streams;
+
+use Aedart\Contracts\Streams\BufferSizes;
+use Aedart\Contracts\Streams\Exceptions\StreamException;
+use Aedart\Streams\Stream;
+use Aedart\Testing\Helpers\ConsoleDebugger;
+use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Aedart\Utils\Str;
+
+/**
+ * D5_ReadBufferTest
+ *
+ * @group streams
+ * @group streams-d5
+ *
+ * @author Alin Eugen Deac <aedart@gmail.com>
+ * @package Aedart\Tests\Integration\Streams
+ */
+class D5_ReadBufferTest extends StreamTestCase
+{
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function canBufferStream(): void
+    {
+        $content = Str::random(50);
+        $resource = fopen('php://memory', 'r+b');
+        fwrite($resource, $content);
+        $stream = Stream::make($resource);
+
+        // -------------------------------------------------------------------- //
+
+        $length = null;
+        $offset = 0;
+        $bufferSize = BufferSizes::BUFFER_8KB;
+
+        $iterator = $stream->buffer($length, $offset, $bufferSize);
+
+        // -------------------------------------------------------------------- //
+
+        $buffer = '';
+        $iterations = 0;
+        foreach ($iterator as $chunk) {
+            ConsoleDebugger::output($chunk);
+
+            $buffer .= $chunk;
+            $iterations++;
+        }
+
+        $expected = substr($content, $offset, $length);
+        $this->assertSame($expected, $buffer);
+
+        $expectedIterations = (int) ceil(strlen($content) / $bufferSize);
+        $this->assertSame($expectedIterations, $iterations, 'Incorrect amount of iterations');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function canBufferLength(): void
+    {
+        $content = Str::random(50);
+        $resource = fopen('php://memory', 'r+b');
+        fwrite($resource, $content);
+        $stream = Stream::make($resource);
+
+        // -------------------------------------------------------------------- //
+
+        $length = 25;
+        $offset = 0;
+        $bufferSize = BufferSizes::BUFFER_8KB;
+
+        $iterator = $stream->buffer($length, $offset, $bufferSize);
+
+        // -------------------------------------------------------------------- //
+
+        $buffer = '';
+        $iterations = 0;
+        foreach ($iterator as $chunk) {
+            ConsoleDebugger::output($chunk);
+
+            $buffer .= $chunk;
+            $iterations++;
+        }
+
+        $expected = substr($content, $offset, $length);
+        $this->assertSame($expected, $buffer);
+
+        $expectedIterations = (int) ceil($length / $bufferSize);
+        $this->assertSame($expectedIterations, $iterations, 'Incorrect amount of iterations');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function canBufferFromOffset(): void
+    {
+        $content = Str::random(50);
+        $resource = fopen('php://memory', 'r+b');
+        fwrite($resource, $content);
+        $stream = Stream::make($resource);
+
+        // -------------------------------------------------------------------- //
+
+        $length = 11;
+        $offset = 22;
+        $bufferSize = BufferSizes::BUFFER_8KB;
+
+        $iterator = $stream->buffer($length, $offset, $bufferSize);
+
+        // -------------------------------------------------------------------- //
+
+        $buffer = '';
+        $iterations = 0;
+        foreach ($iterator as $chunk) {
+            ConsoleDebugger::output($chunk);
+
+            $buffer .= $chunk;
+            $iterations++;
+        }
+
+        $expected = substr($content, $offset, $length);
+        $this->assertSame($expected, $buffer);
+
+        $expectedIterations = (int) ceil($length / $bufferSize);
+        $this->assertSame($expectedIterations, $iterations, 'Incorrect amount of iterations');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function canBufferUsingSpecificBufferSize(): void
+    {
+        $content = Str::random(50);
+        $resource = fopen('php://memory', 'r+b');
+        fwrite($resource, $content);
+        $stream = Stream::make($resource);
+
+        // -------------------------------------------------------------------- //
+
+        $length = 11;
+        $offset = 22;
+        $bufferSize = 3;
+
+        $iterator = $stream->buffer($length, $offset, $bufferSize);
+
+        // -------------------------------------------------------------------- //
+
+        $buffer = '';
+        $iterations = 0;
+        foreach ($iterator as $chunk) {
+            ConsoleDebugger::output($chunk);
+
+            $buffer .= $chunk;
+            $iterations++;
+        }
+
+        $expected = substr($content, $offset, $length);
+        ConsoleDebugger::output('Final buffer: ' . $buffer);
+        $this->assertSame($expected, $buffer);
+
+        $expectedIterations = (int) ceil($length / $bufferSize);
+        $this->assertSame($expectedIterations, $iterations, 'Incorrect amount of iterations');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function doesNotExceedLengthWhenBufferSizeExceedsRemaining(): void
+    {
+        $content = Str::random(50);
+        $resource = fopen('php://memory', 'r+b');
+        fwrite($resource, $content);
+        $stream = Stream::make($resource);
+
+        // -------------------------------------------------------------------- //
+
+        $length = 8;
+        $offset = 22;
+
+        // 2 x 5 = 10, meaning that last chunk size MUST be reduced,
+        // or too much data will be read...
+        $bufferSize = 5;
+
+        $iterator = $stream->buffer($length, $offset, $bufferSize);
+
+        // -------------------------------------------------------------------- //
+
+        $buffer = '';
+        $iterations = 0;
+        foreach ($iterator as $chunk) {
+            ConsoleDebugger::output($chunk);
+
+            $buffer .= $chunk;
+            $iterations++;
+        }
+
+        $expected = substr($content, $offset, $length);
+        ConsoleDebugger::output('Final buffer: ' . $buffer);
+        $this->assertSame($expected, $buffer);
+
+        $expectedIterations = (int) ceil($length / $bufferSize);
+        $this->assertSame($expectedIterations, $iterations, 'Incorrect amount of iterations');
+    }
+}
