@@ -15,7 +15,7 @@ use Aedart\Streams\Exceptions\StreamException;
 trait Copying
 {
     /**
-     * Perform copy of this stream into given target
+     * Perform copy of source stream into given target
      *
      * @param  StreamInterface  $source The source to copy from
      * @param  StreamInterface  $target The target to copy to
