@@ -348,3 +348,26 @@ echo $buffer; // aabbcc
 ::: tip Note
 The position is automatically set to `0` (_the beginning of the stream_), when invoking the `readAllUsing()` method.
 :::
+
+## Buffer
+
+_**Available since** `v7.4.x`_
+
+To read the stream in chunks, using a specific buffer size, use the `buffer()` method.
+It accepts the following arguments:
+
+* `int|null $length = null`: (_optional_) Maximum bytes to read from stream. By default, all bytes left are read.
+* `int $offset = 0`: (_optional_) The offset on where to start to reading from.
+* `int $bufferSize = BufferSizes::BUFFER_8KB`: (_optional_) Read buffer size of each chunk in bytes.
+
+```php
+$iterator = $stream->buffer(
+    length: 250,
+    offset: 22,
+    bufferSize: 50
+);
+
+foreach ($iterator as $chunk) {
+    echo $chunk;
+}
+```

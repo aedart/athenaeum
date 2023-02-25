@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* `buffer()` method in `Stream` (_not yet available in interface_).
 * `copyFrom()` method in `FileStream` (_not yet available in interface_).
 
 ### Changed
