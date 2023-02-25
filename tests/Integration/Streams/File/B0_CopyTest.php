@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\Streams\File;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Streams\FileStream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use GuzzleHttp\Psr7\Stream as PsrStream;
 
 /**
  * B0_CopyTest
@@ -21,7 +22,7 @@ class B0_CopyTest extends StreamTestCase
      * @test
      *
      * @return void
-     * 
+     *
      * @throws StreamException
      */
     public function canCopyStream(): void
@@ -58,5 +59,84 @@ class B0_CopyTest extends StreamTestCase
         $this->assertNotSame($stream, $copy, 'Same instance returned!');
         $this->assertSame($target, $copy, 'Copy and target should be the same instance');
         $this->assertSame($stream->getContents(), $target->getContents());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function canCopyFromResource(): void
+    {
+        $data = $this->getFaker()->realText(25);
+        $source = FileStream::openMemory()
+            ->put($data)
+            ->positionToStart();
+
+        $target = FileStream::openMemory()
+            ->copyFrom($source->resource());
+
+        // ------------------------------------------------------------------ //
+
+        $source->rewind();
+        $target->rewind();
+
+        $this->assertSame($source->getContents(), $target->getContents());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function canCopyFromStream(): void
+    {
+        $data = $this->getFaker()->realText(25);
+        $source = FileStream::openMemory()
+            ->put($data)
+            ->positionToStart();
+
+        $target = FileStream::openMemory()
+            ->copyFrom($source);
+
+        // ------------------------------------------------------------------ //
+
+        $source->rewind();
+        $target->rewind();
+
+        $this->assertSame($source->getContents(), $target->getContents());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function canCopyFromPsrStream(): void
+    {
+        $data = $this->getFaker()->realText(50);
+
+        $source = new PsrStream(
+            fopen('php://memory', 'r+b')
+        );
+        $source->write($data);
+        $source->rewind();
+
+        $target = FileStream::openMemory()
+            ->copyFrom($source);
+
+        // ------------------------------------------------------------------ //
+
+        $source->rewind();
+        $target->rewind();
+
+        $this->assertSame($source->getContents(), $target->getContents());
+        $this->assertIsResource($source->detach(), 'PSR stream was detached by copy operation, but SHOULD NOT be');
     }
 }
