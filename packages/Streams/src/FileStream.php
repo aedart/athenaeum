@@ -96,6 +96,8 @@ class FileStream extends Stream implements
     /**
      * Copy data from source stream into this stream
      *
+     * **Note**: _Neither this stream nor the source stream are rewind after copy operation!_
+     *
      * @param  resource|PsrStreamInterface|StreamInterface $source  The source stream to copy from.
      * @param  int|null  $length  [optional] Maximum bytes to copy from source stream. By default, all bytes left are copied
      * @param  int  $offset  [optional] The offset on source stream where to start to copy data from

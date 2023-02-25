@@ -78,6 +78,8 @@ interface FileStream extends Stream
      *
      * Method is the equivalent of invoking {@see copyTo()} without a `$target`.
      *
+     * **Note**: _Neither this stream nor the copy stream are rewind after copy operation!_
+     *
      * @see copyTo()
      *
      * @param  int|null  $length  [optional] Maximum bytes to copy. By default, all bytes left are copied
@@ -93,6 +95,8 @@ interface FileStream extends Stream
      * Copy this stream into another stream
      *
      * @see https://www.php.net/manual/en/function.stream-copy-to-stream.php
+     *
+     * **Note**: _Neither this stream nor the target stream are rewind after copy operation!_
      *
      * @param  Stream|null  $target  [optional] Target stream to copy this stream's content into.
      *                               If `null` is given, then a new stream instance
