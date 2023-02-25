@@ -29,7 +29,7 @@ trait Copying
     protected function copySourceToTarget(StreamInterface $source, StreamInterface $target, int|null $length = null, int $offset = 0): int
     {
         // Abort if source is detached or not readable
-        if ($source->isDetached() || !$target->isReadable()) {
+        if ($source->isDetached() || !$source->isReadable()) {
             throw new CannotCopyToTargetStream('Source stream is either detached or not readable.');
         }
 
