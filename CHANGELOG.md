@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 * Incorrect "is readable" check of source stream in `copy()` and `copyTo()`, in `FileStream`.
+* Incorrect description of `append()` method in documentation, regarding PSR-7 stream detaching.
 
 ## [7.3.0] - 2023-02-23
 

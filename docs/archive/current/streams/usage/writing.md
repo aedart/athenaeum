@@ -148,21 +148,10 @@ $psrStream->rewind(); // Invalid - Exception is thrown
 The reason for this behavior is due to the limitation of [PSR-7's defined `StreamInterface`](https://www.php-fig.org/psr/psr-7/#34-psrhttpmessagestreaminterface).
 There is no safe way to obtain a reference to the underlying resource, without detaching it.
 PHP's native [`stream_copy_to_stream()`](https://www.php.net/manual/en/function.stream-copy-to-stream.php) can therefore not be applied.
-One would have to "manually" read the "data" stream, and add chunks of data manually. Such _could_ impact performance significantly.
 
 **Workaround**
 
-To avoid loosing reference to the underlying resource, of the given "data" stream, you _SHOULD_ wrap it into a `Stream` component provided by this package, using the [`makeFrom()` method](./open-close.md#existing-psr-stream). 
-
-```php
-// Detached "PSR stream" and wrapped into FileStream
-$from = FileStream::makeFrom($psrStream);
-
-$stream = FileStream::open('people.txt', 'r+b')
-    ->append($from);
-
-$from->rewind(); // Stream rewound
-```
+See [`copyFrom()`](#copy-from).
 
 :::
 
@@ -211,3 +200,34 @@ $copy = $stream->copyTo($target, 1, 1);
 echo ($copy === $target); // true
 echo (string) $copy; // b
 ```
+
+### Copy From
+
+Alternatively, you may also copy data from an existing resource or stream.
+
+```php
+$target = FileStream::openMemory()
+    ->copyFrom($existing);
+```
+
+Similar to the [`copyTo()`](#copy-to-target) method, this method accepts a `$source` stream, a `$length` and an `$offset` argument.
+
+The `$source` argument accepts the following types:
+
+* `resource`
+* `\Aedart\Contracts\Streams\Stream`
+* `\Psr\Http\Message\StreamInterface`
+
+::: tip PSR-7 Stream
+
+Unlike the [`copyTo()`](#copy) or [`append()`](#append) methods, this method will not [detach](./open-close.md#detaching-resource) the underlying resource of the source PSR-7 stream.
+
+```php
+$psrStream->rewind();
+$target = FileStream::openMemory()
+    ->copyFrom($psrStream);
+
+$psrStream->rewind(); // valid - underlying resource is still attached
+```
+
+:::
