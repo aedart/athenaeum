@@ -5,6 +5,7 @@ namespace Aedart\Streams\Concerns;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Streams\Exceptions\CannotCopyToTargetStream;
 use Aedart\Streams\Exceptions\StreamException;
+use Psr\Http\Message\StreamInterface as PsrStreamInterface;
 
 /**
  * Concerns Copying
@@ -18,7 +19,7 @@ trait Copying
      * Perform copy of source stream into given target stream
      *
      * @param  StreamInterface  $source The source to copy from
-     * @param  StreamInterface  $target The target to copy to
+     * @param  StreamInterface  $target The target stream to copy to
      * @param  int|null  $length  [optional] Maximum bytes to copy from source stream. By default, all bytes left are copied
      * @param  int  $offset  [optional] The offset on source stream where to start to copy data from
      *
@@ -44,6 +45,41 @@ trait Copying
             $length,
             $offset
         );
+    }
+
+    /**
+     * Copies data from a {@see PsrStreamInterface} stream to given target stream
+     *
+     * @param  PsrStreamInterface  $source PSR stream to copy from
+     * @param  StreamInterface  $target The target stream to copy to
+     * @param  int|null  $length  [optional] Maximum bytes to copy from source stream. By default, all bytes left are copied
+     * @param  int  $offset  [optional] The offset on source stream where to start to copy data from
+     *
+     * @return int Bytes copied
+     *
+     * @throws StreamException
+     */
+    protected function copyFromPsrStream(PsrStreamInterface $source, StreamInterface $target, int|null $length = null, int $offset = 0): int
+    {
+        if (!$source->isReadable() || !$source->isSeekable()) {
+            throw new CannotCopyToTargetStream('Source stream is either not readable or seekable.');
+        }
+
+        // Abort if target is not writable or detached
+        if ($target->isDetached() || !$target->isWritable()) {
+            throw new CannotCopyToTargetStream('Target stream is either detached or not writable.');
+        }
+
+        // Seek source stream
+        $source->seek($offset);
+
+        // Read specified length or get remaining data.
+        $data = isset($length) && $length > 0
+            ? $source->read($length)
+            : $source->getContents();
+
+        // Finally, write to target stream
+        return $target->write($data);
     }
 
     /**
