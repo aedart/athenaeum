@@ -16,6 +16,7 @@ use Aedart\Support\Helpers\Events\DispatcherTrait;
 use DateTimeInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UploadedFileInterface;
 use SplFileInfo;
 use Throwable;
 
@@ -48,17 +49,22 @@ abstract class BaseScanner implements Scanner
     /**
      * @inheritDoc
      */
-    public function scan(string|SplFileInfo|FileStream|StreamInterface $file): ScanResult
+    public function scan(string|SplFileInfo|UploadedFileInterface|FileStream|StreamInterface $file): ScanResult
     {
         try {
+            // Get Psr stream, in case that uploaded file instance (Psr) is given.
+            $file = $file instanceof UploadedFileInterface
+                ? $file->getStream()
+                : $file;
+
             // Wrap the file into a stream and scan it.
             $result = $this->scanStream(
                 $this->wrapFile($file)
             );
 
-            // In case provided file is a stream, make sure to rewind
-            // it after it has been scanned. Underlying driver might not
-            // do this for us.
+            // If case that a stream was initially given, then we must
+            // rewind it, after it was scanned. Underlying "driver"
+            // might not do this...
             if ($file instanceof StreamInterface) {
                 $file->rewind();
             }
@@ -75,13 +81,28 @@ abstract class BaseScanner implements Scanner
     /**
      * @inheritDoc
      */
-    public function isClean(string|SplFileInfo|FileStream|StreamInterface $file): bool
+    public function isClean(string|SplFileInfo|UploadedFileInterface|FileStream|StreamInterface $file): bool
     {
         return $this->scan($file)->isOk();
     }
 
     /**
-     * Get an "item" from this scanner's options
+     * Get value in this scanner's options for given key
+     *
+     * @param  string|int|array  $key
+     * @param  mixed  $value
+     *
+     * @return self
+     */
+    public function set(string|int|array $key, mixed $value): static
+    {
+        data_set($this->options, $key, $value);
+
+        return $this;
+    }
+
+    /**
+     * Get value from this scanner's options that matches key
      *
      * @param string|int|array|null $key
      * @param mixed $default [optional]

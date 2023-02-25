@@ -7,7 +7,8 @@ use Aedart\Contracts\Antivirus\Exceptions\AntivirusException;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Contracts\Streams\FileStream;
 use Aedart\Contracts\Support\Helpers\Events\DispatcherAware;
-use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\StreamInterface as PsrStreamInterface;
+use Psr\Http\Message\UploadedFileInterface;
 use SplFileInfo;
 
 /**
@@ -23,14 +24,14 @@ interface Scanner extends DispatcherAware
      *
      * Upon completion, this method dispatches a {@see FileWasScanned} event.
      *
-     * @param string|SplFileInfo|FileStream|StreamInterface $file Path to file, file object, or
+     * @param  string|SplFileInfo|UploadedFileInterface|FileStream|PsrStreamInterface  $file  Path to file, file object, or
      *                                                      a stream of the file.
      *
      * @return ScanResult
      *
      * @throws AntivirusException
      */
-    public function scan(string|SplFileInfo|FileStream|StreamInterface $file): ScanResult;
+    public function scan(string|SplFileInfo|UploadedFileInterface|FileStream|PsrStreamInterface $file): ScanResult;
 
     /**
      * Determine if file is clean
@@ -38,14 +39,14 @@ interface Scanner extends DispatcherAware
      * Method scans the file and returns true only if file does not contain
      * infections and no scanning errors occurred.
      *
-     * @param string|SplFileInfo|FileStream|StreamInterface $file Path to file, file object, or
+     * @param  string|SplFileInfo|UploadedFileInterface|FileStream|PsrStreamInterface  $file  Path to file, file object, or
      *                                                      a stream of the file.
      *
      * @return bool
      *
      * @throws AntivirusException
      */
-    public function isClean(string|SplFileInfo|FileStream|StreamInterface $file): bool;
+    public function isClean(string|SplFileInfo|UploadedFileInterface|FileStream|PsrStreamInterface $file): bool;
 
     /**
      * Returns the native driver used by this scanner
