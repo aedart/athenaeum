@@ -97,7 +97,7 @@ echo $buffer; // abc
 ```
 
 ::: tip Note
-_This method automatically rewinds the stream to its beginning. See [`readCharacter()`](#single-character) as an alternative method._
+_This method automatically rewinds the stream. See [`readCharacter()`](#single-character) as an alternative method._
 :::
 
 ## Read Lines
@@ -204,7 +204,7 @@ echo $buffer; // abc
 ```
 
 ::: tip Note
-_This method automatically rewinds the stream to its beginning. See [`readLine()`](#single-line) as an alternative method._
+_This method automatically rewinds the stream. See [`readLine()`](#single-line) as an alternative method._
 :::
 
 ::: tip Automatic Trim
@@ -251,7 +251,7 @@ echo $buffer; // aabbcc
 ```
 
 ::: tip Note
-_This method automatically rewinds the stream to its beginning. See [`readLineUntil()`](#single-line-until) as an alternative method._
+_This method automatically rewinds the stream. See [`readLineUntil()`](#single-line-until) as an alternative method._
 :::
 
 ## Scan Format
@@ -302,7 +302,7 @@ echo $buffer; // aa||bb||cc||
 ```
 
 ::: tip Note
-_This method automatically rewinds the stream to its beginning. See [`scan()`](#scan-format) as an alternative method._
+_This method automatically rewinds the stream. See [`scan()`](#scan-format) as an alternative method._
 :::
 
 ## Read Chunks
@@ -329,7 +329,7 @@ echo $buffer; // abc
 ```
 
 ::: tip Note
-_This method automatically rewinds the stream to its beginning. See [`buffer()`](#buffer) as an alternative method._
+_This method automatically rewinds the stream. See [`buffer()`](#buffer) as an alternative method._
 :::
 
 ## Read All using Callback
@@ -362,7 +362,7 @@ echo $buffer; // aabbcc
 ```
 
 ::: tip Note
-_This method automatically rewinds the stream to its beginning. See [`buffer()`](#buffer) as an alternative method._
+_This method automatically rewinds the stream. See [`buffer()`](#buffer) as an alternative method._
 :::
 
 ## Buffer
