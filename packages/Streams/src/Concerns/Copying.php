@@ -38,7 +38,7 @@ trait Copying
             throw new CannotCopyToTargetStream('Target stream is either detached or not writable.');
         }
 
-        return $this->copyResourceTo(
+        return $this->copyRawResource(
             $source->resource(),
             $target->resource(),
             $length,
@@ -60,7 +60,7 @@ trait Copying
      *
      * @throws StreamException
      */
-    protected function copyResourceTo($source, $target, int|null $length = null, int $offset = 0): int
+    protected function copyRawResource($source, $target, int|null $length = null, int $offset = 0): int
     {
         $bytesCopied = stream_copy_to_stream(
             from: $source,
