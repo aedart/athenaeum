@@ -67,8 +67,7 @@ trait Copying
         int|null $length = null,
         int $offset = 0,
         int $bufferSize = BufferSizes::BUFFER_8KB
-    ): int
-    {
+    ): int {
         // Abort if source is not readable or seekable
         if (!$source->isReadable() || !$source->isSeekable()) {
             throw new CannotCopyToTargetStream('Source stream is either not readable or seekable.');

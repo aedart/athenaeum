@@ -118,8 +118,7 @@ class FileStream extends Stream implements
         int|null $length = null,
         int $offset = 0,
         int $bufferSize = BufferSizes::BUFFER_8KB
-    ): static
-    {
+    ): static {
         // Obtain underlying resource, when a stream instance is provided.
         if ($source instanceof StreamInterface) {
             if ($source->isDetached() || !$source->isReadable()) {
