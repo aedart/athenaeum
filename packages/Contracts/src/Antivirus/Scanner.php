@@ -34,15 +34,12 @@ interface Scanner extends DispatcherAware
     public function scan(string|SplFileInfo|UploadedFile|FileStream|PsrStream $file): ScanResult;
 
     /**
-     * Determine if file is clean
-     *
-     * Method scans the file and returns true only if file does not contain
-     * infections and no scanning errors occurred.
+     * Determine if file is clean (not infected)
      *
      * @param  string|SplFileInfo|UploadedFile|FileStream|PsrStream  $file  Path to file, file object, or
      *                                                      a stream of the file.
      *
-     * @return bool
+     * @return bool True if file is not infected
      *
      * @throws AntivirusException
      */
