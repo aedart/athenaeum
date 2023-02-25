@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Improved method description of `copy()` and `copyTo()` methods, in `FileStream`.
 * Renamed internal `performCopy()` to `copySourceToTarget()` in `Copying` concern in Stream package.
+* Improved documentation regarding which read methods automatically rewinds the stream. 
 
 ### Fixed
 
