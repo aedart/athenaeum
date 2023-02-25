@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* `buffer()` method in `Stream` (_not yet available in interface_).
+* `copyFrom()` method in `FileStream` (_not yet available in interface_).
+
+### Changed
+
+* Renamed internal `performCopy()` to `copySourceToTarget()` in `Copying` concern in Stream package.
+* Refactored internal `outputSingleRange()` method in `DownloadStream`. Now uses stream `buffer()` method.
+* Improved method description of `copy()` and `copyTo()` methods, in `FileStream`.
+* Improved documentation regarding which read methods automatically rewinds the stream. 
+
+### Fixed
+
+* Incorrect "is readable" check of source stream in `copy()` and `copyTo()`, in `FileStream`.
+* Incorrect description of `append()` method in documentation, regarding PSR-7 stream detaching.
+
 ## [7.3.0] - 2023-02-23
 
 ### Added
