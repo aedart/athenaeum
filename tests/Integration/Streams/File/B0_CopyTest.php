@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\Streams\File;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Streams\FileStream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Aedart\Utils\Str;
 use GuzzleHttp\Psr7\Stream as PsrStream;
 
 /**
@@ -70,7 +71,7 @@ class B0_CopyTest extends StreamTestCase
      */
     public function canCopyFromResource(): void
     {
-        $data = $this->getFaker()->realText(25);
+        $data = Str::random(50);
         $source = FileStream::openMemory()
             ->put($data)
             ->positionToStart();
@@ -95,7 +96,7 @@ class B0_CopyTest extends StreamTestCase
      */
     public function canCopyFromStream(): void
     {
-        $data = $this->getFaker()->realText(25);
+        $data = Str::random(50);
         $source = FileStream::openMemory()
             ->put($data)
             ->positionToStart();
@@ -120,7 +121,7 @@ class B0_CopyTest extends StreamTestCase
      */
     public function canCopyFromPsrStream(): void
     {
-        $data = $this->getFaker()->realText(50);
+        $data = Str::random(50);
 
         $source = new PsrStream(
             fopen('php://memory', 'r+b')
@@ -138,5 +139,99 @@ class B0_CopyTest extends StreamTestCase
 
         $this->assertSame($source->getContents(), $target->getContents());
         $this->assertIsResource($source->detach(), 'PSR stream was detached by copy operation, but SHOULD NOT be');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function canCopyAtOffsetFromPsrStream(): void
+    {
+        $data = Str::random(50);
+
+        $source = new PsrStream(
+            fopen('php://memory', 'r+b')
+        );
+        $source->write($data);
+        $source->rewind();
+
+        $length = null;
+        $offset = 3;
+        $target = FileStream::openMemory()
+            ->copyFrom($source, $length, $offset);
+
+        // ------------------------------------------------------------------ //
+
+        $source->rewind();
+        $target->rewind();
+
+        $source->seek($offset);
+        $this->assertSame($source->getContents(), $target->getContents());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function canCopyLengthFromPsrStream(): void
+    {
+        $data = Str::random(50);
+
+        $source = new PsrStream(
+            fopen('php://memory', 'r+b')
+        );
+        $source->write($data);
+        $source->rewind();
+
+        $length = 19;
+        $offset = 0;
+        $target = FileStream::openMemory()
+            ->copyFrom($source, $length, $offset);
+
+        // ------------------------------------------------------------------ //
+
+        $source->rewind();
+        $target->rewind();
+
+        $source->seek($offset);
+        $this->assertSame($source->read($length), $target->getContents());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws StreamException
+     */
+    public function canCopyFromPsrStreamWithBuffer(): void
+    {
+        $data = Str::random(50);
+
+        $source = new PsrStream(
+            fopen('php://memory', 'r+b')
+        );
+        $source->write($data);
+        $source->rewind();
+
+        $length = null;
+        $offset = 0;
+        $buffer = 6;
+        $target = FileStream::openMemory()
+            ->copyFrom($source, $length, $offset, $buffer);
+
+        // ------------------------------------------------------------------ //
+
+        $source->rewind();
+        $target->rewind();
+
+        $source->seek($offset);
+        $this->assertSame($source->getContents(), $target->getContents());
     }
 }

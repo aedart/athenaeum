@@ -2,6 +2,7 @@
 
 namespace Aedart\Streams\Concerns;
 
+use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Aedart\Streams\Exceptions\CannotCopyToTargetStream;
 use Aedart\Streams\Exceptions\StreamException;
@@ -54,13 +55,21 @@ trait Copying
      * @param  StreamInterface  $target The target stream to copy to
      * @param  int|null  $length  [optional] Maximum bytes to copy from source stream. By default, all bytes left are copied
      * @param  int  $offset  [optional] The offset on source stream where to start to copy data from
+     * @param  int  $bufferSize  [optional] Read/Write size of each chunk in bytes.
      *
      * @return int Bytes copied
      *
      * @throws StreamException
      */
-    protected function copyFromPsrStream(PsrStreamInterface $source, StreamInterface $target, int|null $length = null, int $offset = 0): int
+    protected function copyFromPsrStream(
+        PsrStreamInterface $source,
+        StreamInterface $target,
+        int|null $length = null,
+        int $offset = 0,
+        int $bufferSize = BufferSizes::BUFFER_8KB
+    ): int
     {
+        // Abort if source is not readable or seekable
         if (!$source->isReadable() || !$source->isSeekable()) {
             throw new CannotCopyToTargetStream('Source stream is either not readable or seekable.');
         }
@@ -70,16 +79,42 @@ trait Copying
             throw new CannotCopyToTargetStream('Target stream is either detached or not writable.');
         }
 
-        // Seek source stream
+        // Abort in case that source's size cannot be determined.
+        $sourceSize = (int) $source->getSize();
+        if ($sourceSize === 0) {
+            throw new CannotCopyToTargetStream('Unable to read size of source stream.');
+        }
+
+        // Seek position in source stream
         $source->seek($offset);
 
-        // Read specified length or get remaining data.
-        $data = isset($length) && $length > 0
-            ? $source->read($length)
-            : $source->getContents();
+        // Resolve the read length. Whenever it is less than the buffer size,
+        // just read and write the data.
+        $length = $length ?? $sourceSize - $source->tell();
+        if ($length <= $bufferSize && !$source->eof()) {
+            return $target->write($source->read($length));
+        }
 
-        // Finally, write to target stream
-        return $target->write($data);
+        // Otherwise, since we cannot use PHP's stream_copy_to_stream, we need to manually
+        // and carefully buffer read and write from the source to the target. This must be
+        // done so, in case that a very large Psr stream is copied.
+        $writtenBytes = 0;
+        $end = $offset + $length - 1;
+        $readLength = $bufferSize;
+
+        while (!$source->eof() && ($position = $source->tell()) <= $end) {
+            // Prevent out-of-bounds issues
+            if ($position + $bufferSize > $end) {
+                $readLength = $end - $position + 1;
+            }
+
+            // Copy chunk...
+            $writtenBytes += $target->write(
+                $source->read($readLength)
+            );
+        }
+
+        return $writtenBytes;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Aedart\Streams;
 
 use Aedart\Contracts\MimeTypes\Detectable;
+use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
 use Aedart\Contracts\Streams\Hashing\Hashable;
 use Aedart\Contracts\Streams\Locks\Lockable;
@@ -105,12 +106,19 @@ class FileStream extends Stream implements
      * @param  resource|PsrStreamInterface|StreamInterface  $source  The source stream to copy from.
      * @param  int|null  $length  [optional] Maximum bytes to copy from source stream. By default, all bytes left are copied
      * @param  int  $offset  [optional] The offset on source stream where to start to copy data from
+     * @param  int  $bufferSize  [optional] Read/Write size of each chunk in bytes.
+     *                           Applicable ONLY if `$source` is instance of {@see PsrStreamInterface}.
      *
      * @return static This stream with data appended from source stream
      *
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
-    public function copyFrom($source, int|null $length = null, int $offset = 0): static
+    public function copyFrom(
+        $source,
+        int|null $length = null,
+        int $offset = 0,
+        int $bufferSize = BufferSizes::BUFFER_8KB
+    ): static
     {
         // Obtain underlying resource, when a stream instance is provided.
         if ($source instanceof StreamInterface) {
@@ -141,7 +149,8 @@ class FileStream extends Stream implements
                 source: $source,
                 target: $this,
                 length: $length,
-                offset: $offset
+                offset: $offset,
+                bufferSize: $bufferSize
             );
 
             return $this;
