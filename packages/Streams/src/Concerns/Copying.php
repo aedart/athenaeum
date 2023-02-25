@@ -70,7 +70,7 @@ trait Copying
         );
 
         if ($bytesCopied === false) {
-            throw new StreamException('Copy operation failed. Streams might be blocked or otherwise invalid, or "length" and "offset" are invalid');
+            throw new StreamException('Copy operation failed. Streams might be blocked, incorrect length, offset, or otherwise invalid');
         }
 
         return $bytesCopied;
