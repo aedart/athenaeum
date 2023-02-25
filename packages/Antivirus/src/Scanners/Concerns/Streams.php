@@ -4,9 +4,11 @@ namespace Aedart\Antivirus\Scanners\Concerns;
 
 use Aedart\Antivirus\Exceptions\UnableToOpenFileStream;
 use Aedart\Contracts\Antivirus\Exceptions\AntivirusException;
+use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
 use Aedart\Streams\FileStream;
-use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\StreamInterface as PsrStreamInterface;
+use Psr\Http\Message\UploadedFileInterface;
 use SplFileInfo;
 use Throwable;
 
@@ -19,15 +21,63 @@ use Throwable;
 trait Streams
 {
     /**
+     * Set maximum amount of bytes to keep in memory before writing to a temporary file.
+     *
+     * Applicable only when dealing with Psr Streams!
+     *
+     * @param  int|null  $bytes
+     *
+     * @return static
+     */
+    public function setStreamMaxMemory(int|null $bytes): static
+    {
+        return $this->set('temporary_stream_max_memory', $bytes);
+    }
+
+    /**
+     * Get maximum amount of bytes to keep in memory before writing to a temporary file.
+     *
+     * Applicable only when dealing with Psr Streams!
+     *
+     * @return int|null If null then defaults to 2 Mb.
+     */
+    public function getStreamMaxMemory(): int|null
+    {
+        return $this->get('temporary_stream_max_memory', BufferSizes::BUFFER_1MB * 2);
+    }
+
+    /**
+     * Set amount of bytes to read from stream
+     *
+     * @param  int|null  $bytes
+     *
+     * @return static
+     */
+    public function setStreamBufferSize(int|null $bytes): static
+    {
+        return $this->set('stream_buffer_size', $bytes);
+    }
+
+    /**
+     * Get amount of bytes to read from stream
+     *
+     * @return int|null If null then defaults to 2 Mb.
+     */
+    public function getStreamBufferSize(): int|null
+    {
+        return $this->get('stream_buffer_size', BufferSizes::BUFFER_1MB * 2);
+    }
+
+    /**
      * Wraps given file into a file stream
      *
-     * @param string|SplFileInfo|FileStreamInterface|StreamInterface $file
+     * @param string|SplFileInfo|UploadedFileInterface|FileStreamInterface|PsrStreamInterface  $file
      *
      * @return FileStreamInterface
      *
      * @throws AntivirusException
      */
-    protected function wrapFile(string|SplFileInfo|FileStreamInterface|StreamInterface $file): FileStreamInterface
+    protected function wrapFile(string|SplFileInfo|UploadedFileInterface|FileStreamInterface|PsrStreamInterface $file): FileStreamInterface
     {
         return match (true) {
             is_string($file) => $this->openStreamForPath($file),
@@ -37,7 +87,8 @@ trait Streams
             // When a Psr stream is given it must be copied, or we risk that it
             // might get detached and prevent further operations on it, outside
             // the scope of an antivirus scanner!
-            $file instanceof StreamInterface => $this->copyStream($file)
+            $file instanceof PsrStreamInterface => $this->copyPsrStream($file),
+            $file instanceof UploadedFileInterface => $this->copyPsrStream($file->getStream()),
         };
     }
 
@@ -102,24 +153,25 @@ trait Streams
     }
 
     /**
-     * Copies given stream
+     * Copies given PSR-7 stream into a new temporary stream
      *
-     * @param StreamInterface $stream Psr stream
+     * @param  PsrStreamInterface  $stream Psr stream
+     * @param bool $rewind [optional]
      *
      * @return FileStreamInterface
      *
      * @throws AntivirusException
      */
-    protected function copyStream(StreamInterface $stream): FileStreamInterface
+    protected function copyPsrStream(PsrStreamInterface $stream, bool $rewind = true): FileStreamInterface
     {
         try {
-            $stream->rewind();
+            $copy = FileStream::openTemporary(maximumMemory: $this->getStreamMaxMemory())
+                ->copyFrom(source: $stream, bufferSize: $this->getStreamBufferSize());
 
-            $copy = FileStream::openTemporary()
-                ->put($stream->getContents())
-                ->positionToStart();
-
-            $stream->rewind();
+            if ($rewind) {
+                $stream->rewind();
+                $copy->positionToStart();
+            }
 
             return $copy;
         } catch (Throwable $e) {
