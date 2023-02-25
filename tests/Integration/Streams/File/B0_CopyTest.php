@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Integration\Streams\File;
 
+use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Streams\FileStream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
 
@@ -20,9 +21,10 @@ class B0_CopyTest extends StreamTestCase
      * @test
      *
      * @return void
-     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     * 
+     * @throws StreamException
      */
-    public function canCopyStream()
+    public function canCopyStream(): void
     {
         $data = $this->getFaker()->realText(25);
         $stream = FileStream::openMemory()
@@ -39,9 +41,10 @@ class B0_CopyTest extends StreamTestCase
      * @test
      *
      * @return void
-     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     *
+     * @throws StreamException
      */
-    public function canCopyToTargetStream()
+    public function canCopyToTargetStream(): void
     {
         $data = $this->getFaker()->realText(25);
 
