@@ -16,7 +16,9 @@ use Aedart\Support\Helpers\Events\DispatcherTrait;
 use DateTimeInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\StreamInterface as PsrStream;
 use Psr\Http\Message\UploadedFileInterface;
+use Psr\Http\Message\UploadedFileInterface as UploadedFile;
 use SplFileInfo;
 use Throwable;
 
@@ -49,7 +51,7 @@ abstract class BaseScanner implements Scanner
     /**
      * @inheritDoc
      */
-    public function scan(string|SplFileInfo|UploadedFileInterface|FileStream|StreamInterface $file): ScanResult
+    public function scan(string|SplFileInfo|UploadedFile|FileStream|PsrStream $file): ScanResult
     {
         try {
             // Get Psr stream, in case that uploaded file instance (Psr) is given.
@@ -81,7 +83,7 @@ abstract class BaseScanner implements Scanner
     /**
      * @inheritDoc
      */
-    public function isClean(string|SplFileInfo|UploadedFileInterface|FileStream|StreamInterface $file): bool
+    public function isClean(string|SplFileInfo|UploadedFile|FileStream|PsrStream $file): bool
     {
         return $this->scan($file)->isOk();
     }
