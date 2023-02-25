@@ -88,7 +88,7 @@ class FileStream extends Stream implements
     {
         $target = $target ?? static::openTemporary();
 
-        $this->performCopy($this, $target, $length, $offset);
+        $this->copySourceToTarget($this, $target, $length, $offset);
 
         return $target;
     }
@@ -131,7 +131,7 @@ class FileStream extends Stream implements
     ): static {
         $this
             ->positionToEnd()
-            ->performCopy(
+            ->copySourceToTarget(
                 $this->wrap($data, $maximumMemory),
                 $this,
                 $length,

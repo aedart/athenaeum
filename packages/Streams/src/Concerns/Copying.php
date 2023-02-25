@@ -15,18 +15,18 @@ use Aedart\Streams\Exceptions\StreamException;
 trait Copying
 {
     /**
-     * Perform copy of source stream into given target
+     * Perform copy of source stream into given target stream
      *
      * @param  StreamInterface  $source The source to copy from
      * @param  StreamInterface  $target The target to copy to
-     * @param  int|null  $length  [optional]
-     * @param  int  $offset  [optional]
+     * @param  int|null  $length  [optional] Maximum bytes to copy from source stream. By default, all bytes left are copied
+     * @param  int  $offset  [optional] The offset on source stream where to start to copy data from
      *
      * @return int Bytes copied
      *
      * @throws StreamException
      */
-    protected function performCopy(StreamInterface $source, StreamInterface $target, int|null $length = null, int $offset = 0): int
+    protected function copySourceToTarget(StreamInterface $source, StreamInterface $target, int|null $length = null, int $offset = 0): int
     {
         // Abort if source is detached or not readable
         if ($source->isDetached() || !$target->isReadable()) {
