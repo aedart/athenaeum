@@ -68,52 +68,18 @@ trait Copying
         int $offset = 0,
         int $bufferSize = BufferSizes::BUFFER_8KB
     ): int {
-        // Abort if source is not readable or seekable
-        if (!$source->isReadable() || !$source->isSeekable()) {
-            throw new CannotCopyToTargetStream('Source stream is either not readable or seekable.');
-        }
-
         // Abort if target is not writable or detached
         if ($target->isDetached() || !$target->isWritable()) {
             throw new CannotCopyToTargetStream('Target stream is either detached or not writable.');
         }
 
-        // Abort in case that source's size cannot be determined.
-        $sourceSize = (int) $source->getSize();
-        if ($sourceSize === 0) {
-            throw new CannotCopyToTargetStream('Unable to read size of source stream.');
+        $bytes = 0;
+        $buffer = $this->bufferStream($source, $length, $offset, $bufferSize);
+        foreach ($buffer as $chunk) {
+            $bytes += $target->write($chunk);
         }
 
-        // Seek position in source stream
-        $source->seek($offset);
-
-        // Resolve the read length. Whenever it is less than the buffer size,
-        // just read and write the data.
-        $length = $length ?? $sourceSize - $source->tell();
-        if ($length <= $bufferSize && !$source->eof()) {
-            return $target->write($source->read($length));
-        }
-
-        // Otherwise, since we cannot use PHP's stream_copy_to_stream, we need to manually
-        // and carefully buffer read and write from the source to the target. This must be
-        // done so, in case that a very large Psr stream is copied.
-        $writtenBytes = 0;
-        $end = $offset + $length - 1;
-        $readLength = $bufferSize;
-
-        while (!$source->eof() && ($position = $source->tell()) <= $end) {
-            // Prevent out-of-bounds issues
-            if ($position + $bufferSize > $end) {
-                $readLength = $end - $position + 1;
-            }
-
-            // Copy chunk...
-            $writtenBytes += $target->write(
-                $source->read($readLength)
-            );
-        }
-
-        return $writtenBytes;
+        return $bytes;
     }
 
     /**
