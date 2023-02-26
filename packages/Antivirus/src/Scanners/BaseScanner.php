@@ -11,8 +11,10 @@ use Aedart\Contracts\Antivirus\Results\Status;
 use Aedart\Contracts\Antivirus\Scanner;
 use Aedart\Contracts\Antivirus\UserResolver;
 use Aedart\Contracts\Streams\FileStream;
+use Aedart\Contracts\Utils\HasDriverOptions;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
+use Aedart\Utils\Concerns\DriverOptions;
 use DateTimeInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Psr\Http\Message\StreamInterface;
@@ -30,9 +32,12 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Antivirus\Scanners
  */
-abstract class BaseScanner implements Scanner
+abstract class BaseScanner implements
+    Scanner,
+    HasDriverOptions
 {
     use DispatcherTrait;
+    use DriverOptions;
     use Concerns\Streams;
 
     /**
@@ -43,9 +48,11 @@ abstract class BaseScanner implements Scanner
      */
     public function __construct(
         Dispatcher|null $dispatcher = null,
-        protected array $options = []
+        array $options = []
     ) {
-        $this->setDispatcher($dispatcher);
+        $this
+            ->setDispatcher($dispatcher)
+            ->setOptions($options);
     }
 
     /**
@@ -86,34 +93,6 @@ abstract class BaseScanner implements Scanner
     public function isClean(string|SplFileInfo|UploadedFile|FileStream|PsrStream $file): bool
     {
         return $this->scan($file)->isOk();
-    }
-
-    /**
-     * Get value in this scanner's options for given key
-     *
-     * @param  string|int|array  $key
-     * @param  mixed  $value
-     *
-     * @return self
-     */
-    public function set(string|int|array $key, mixed $value): static
-    {
-        data_set($this->options, $key, $value);
-
-        return $this;
-    }
-
-    /**
-     * Get value from this scanner's options that matches key
-     *
-     * @param string|int|array|null $key
-     * @param mixed $default [optional]
-     *
-     * @return mixed
-     */
-    public function get(string|int|array|null $key, mixed $default = null): mixed
-    {
-        return data_get($this->options, $key, $default);
     }
 
     /*****************************************************************
