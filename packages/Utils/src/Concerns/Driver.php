@@ -30,7 +30,9 @@ trait Driver
             return $this->driver;
         }
 
-        return $this->driver = $this->makeDriver();
+        return $this->swapDriver(
+            $this->makeDriver()
+        );
     }
 
     /**
@@ -39,4 +41,18 @@ trait Driver
      * @return mixed
      */
     abstract protected function makeDriver(): mixed;
+
+    /**
+     * Swap the existing native driver with a new instance
+     *
+     * @param  mixed  $newDriver
+     *
+     * @return self
+     */
+    protected function swapDriver(mixed $newDriver): static
+    {
+        $this->driver = $newDriver;
+
+        return $this;
+    }
 }
