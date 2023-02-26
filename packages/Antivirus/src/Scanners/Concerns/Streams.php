@@ -39,9 +39,9 @@ trait Streams
      *
      * Applicable only when dealing with Psr Streams!
      *
-     * @return int|null If null then defaults to 2 Mb.
+     * @return int Defaults to 2 Mb if no value was set
      */
-    public function getStreamMaxMemory(): int|null
+    public function getStreamMaxMemory(): int
     {
         return $this->get('temporary_stream_max_memory', BufferSizes::BUFFER_1MB * 2);
     }
@@ -61,9 +61,9 @@ trait Streams
     /**
      * Get amount of bytes to read from stream
      *
-     * @return int|null If null then defaults to 2 Mb.
+     * @return int Defaults to 2 Mb if no value was set
      */
-    public function getStreamBufferSize(): int|null
+    public function getStreamBufferSize(): int
     {
         return $this->get('stream_buffer_size', BufferSizes::BUFFER_1MB * 2);
     }
@@ -71,14 +71,14 @@ trait Streams
     /**
      * Wraps given file into a file stream
      *
-     * @param string|SplFileInfo|UploadedFileInterface|FileStreamInterface|PsrStreamInterface  $file
+     * @param  string|SplFileInfo|UploadedFileInterface|FileStreamInterface|PsrStreamInterface  $file
      *
      * @return FileStreamInterface
      *
      * @throws AntivirusException
      */
-    protected function wrapFile(string|SplFileInfo|UploadedFileInterface|FileStreamInterface|PsrStreamInterface $file): FileStreamInterface
-    {
+    protected function wrapFile(string|SplFileInfo|UploadedFileInterface|FileStreamInterface|PsrStreamInterface $file
+    ): FileStreamInterface {
         return match (true) {
             is_string($file) => $this->openStreamForPath($file),
             $file instanceof SplFileInfo => $this->openStreamForFileInfo($file),
@@ -95,7 +95,7 @@ trait Streams
     /**
      * Open a stream for given file path
      *
-     * @param string $path
+     * @param  string  $path
      *
      * @return FileStreamInterface
      *
@@ -106,14 +106,17 @@ trait Streams
         try {
             return FileStream::open($path, 'r');
         } catch (Throwable $e) {
-            throw new UnableToOpenFileStream(sprintf('Unable to open stream for file path %s', $path), $e->getCode(), $e);
+            throw new UnableToOpenFileStream(sprintf(
+                'Unable to open stream for file path %s',
+                $path
+            ), $e->getCode(), $e);
         }
     }
 
     /**
      * Open a stream for given Spl File Info instance
      *
-     * @param SplFileInfo $file
+     * @param  SplFileInfo  $file
      *
      * @return FileStreamInterface
      *
@@ -132,8 +135,8 @@ trait Streams
     /**
      * Wrap stream
      *
-     * @param FileStreamInterface $stream
-     * @param bool $rewind [optional]
+     * @param  FileStreamInterface  $stream
+     * @param  bool  $rewind  [optional]
      *
      * @return FileStreamInterface
      *
@@ -155,8 +158,8 @@ trait Streams
     /**
      * Copies given PSR-7 stream into a new temporary stream
      *
-     * @param  PsrStreamInterface  $stream Psr stream
-     * @param bool $rewind [optional]
+     * @param  PsrStreamInterface  $stream  Psr stream
+     * @param  bool  $rewind  [optional]
      *
      * @return FileStreamInterface
      *
