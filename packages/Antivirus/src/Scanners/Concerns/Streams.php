@@ -77,7 +77,8 @@ trait Streams
      *
      * @throws AntivirusException
      */
-    protected function wrapFile(string|SplFileInfo|UploadedFileInterface|FileStreamInterface|PsrStreamInterface $file
+    protected function wrapFile(
+        string|SplFileInfo|UploadedFileInterface|FileStreamInterface|PsrStreamInterface $file
     ): FileStreamInterface {
         return match (true) {
             is_string($file) => $this->openStreamForPath($file),
