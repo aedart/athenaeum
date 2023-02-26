@@ -7,6 +7,7 @@ use Aedart\Contracts\Antivirus\Exceptions\AntivirusException;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Contracts\Streams\FileStream;
 use Aedart\Contracts\Support\Helpers\Events\DispatcherAware;
+use Aedart\Contracts\Utils\HasDriver;
 use Psr\Http\Message\StreamInterface as PsrStream;
 use Psr\Http\Message\UploadedFileInterface as UploadedFile;
 use SplFileInfo;
@@ -17,7 +18,9 @@ use SplFileInfo;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Antivirus
  */
-interface Scanner extends DispatcherAware
+interface Scanner extends
+    DispatcherAware,
+    HasDriver
 {
     /**
      * Scan a single file for infections
@@ -44,11 +47,4 @@ interface Scanner extends DispatcherAware
      * @throws AntivirusException
      */
     public function isClean(string|SplFileInfo|UploadedFile|FileStream|PsrStream $file): bool;
-
-    /**
-     * Returns the native driver used by this scanner
-     *
-     * @return mixed
-     */
-    public function driver(): mixed;
 }
