@@ -3,7 +3,6 @@
 namespace Aedart\Antivirus\Scanners;
 
 use Aedart\Antivirus\Exceptions\AntivirusException;
-use Aedart\Contracts\Antivirus\Events\FileWasScanned;
 use Aedart\Contracts\Antivirus\Exceptions\AntivirusException as AntivirusExceptionInterface;
 use Aedart\Contracts\Antivirus\Exceptions\UnsupportedStatusValueException;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
@@ -13,7 +12,6 @@ use Aedart\Contracts\Antivirus\UserResolver;
 use Aedart\Contracts\Streams\FileStream;
 use Aedart\Contracts\Utils\HasDriverOptions;
 use Aedart\Support\Facades\IoCFacade;
-use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Aedart\Utils\Concerns\DriverOptions;
 use DateTimeInterface;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -36,9 +34,9 @@ abstract class BaseScanner implements
     Scanner,
     HasDriverOptions
 {
-    use DispatcherTrait;
     use DriverOptions;
     use Concerns\Streams;
+    use Concerns\Events;
 
     /**
      * Creates a new antivirus scanner instance
@@ -166,32 +164,6 @@ abstract class BaseScanner implements
         $class = $this->statusClass();
 
         return $class::make($value, $reason);
-    }
-
-    /**
-     * Dispatches "file was scanned" event with given scan result
-     *
-     * @param ScanResult $result
-     *
-     * @return void
-     */
-    protected function dispatchFileWasScanned(ScanResult $result): void
-    {
-        $event = $this->makeFileWasScannedEvent($result);
-
-        $this->getDispatcher()->dispatch(FileWasScanned::class, $event);
-    }
-
-    /**
-     * Creates a new "file was scanned" event instance
-     *
-     * @param ScanResult $result
-     *
-     * @return FileWasScanned
-     */
-    protected function makeFileWasScannedEvent(ScanResult $result): FileWasScanned
-    {
-        return IoCFacade::make(FileWasScanned::class, [ 'result' => $result ]);
     }
 
     /**
