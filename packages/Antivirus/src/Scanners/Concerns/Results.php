@@ -33,8 +33,7 @@ trait Results
         array $details = [],
         string|int|null $user = null,
         DateTimeInterface|null $datetime = null
-    ): ScanResult
-    {
+    ): ScanResult {
         return IoCFacade::make(ScanResult::class, [
             'status' => $status,
             'filename' => $file->uri(),
