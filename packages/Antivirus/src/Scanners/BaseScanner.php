@@ -4,7 +4,6 @@ namespace Aedart\Antivirus\Scanners;
 
 use Aedart\Antivirus\Exceptions\AntivirusException;
 use Aedart\Contracts\Antivirus\Exceptions\AntivirusException as AntivirusExceptionInterface;
-use Aedart\Contracts\Antivirus\Exceptions\UnsupportedStatusValueException;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Contracts\Antivirus\Results\Status;
 use Aedart\Contracts\Antivirus\Scanner;
@@ -37,6 +36,7 @@ abstract class BaseScanner implements
     use DriverOptions;
     use Concerns\Streams;
     use Concerns\Events;
+    use Concerns\Status;
 
     /**
      * Creates a new antivirus scanner instance
@@ -93,10 +93,6 @@ abstract class BaseScanner implements
         return $this->scan($file)->isOk();
     }
 
-    /*****************************************************************
-     * Abstract methods
-     ****************************************************************/
-
     /**
      * Performs a virus scan on given file stream
      *
@@ -107,13 +103,6 @@ abstract class BaseScanner implements
      * @throws Throwable
      */
     abstract public function scanStream(FileStream $stream): ScanResult;
-
-    /**
-     * Return class path to file scan status to be used
-     *
-     * @return class-string<Status>
-     */
-    abstract protected function statusClass(): string;
 
     /*****************************************************************
      * Internals
@@ -147,23 +136,6 @@ abstract class BaseScanner implements
             'user' => $user ?? $this->user(),
             'datetime' => $datetime
         ]);
-    }
-
-    /**
-     * Creates a new file scan status instance
-     *
-     * @param mixed $value
-     * @param string|null $reason [optional]
-     *
-     * @return Status
-     *
-     * @throws UnsupportedStatusValueException
-     */
-    protected function makeScanStatus(mixed $value, string|null $reason = null): Status
-    {
-        $class = $this->statusClass();
-
-        return $class::make($value, $reason);
     }
 
     /**
