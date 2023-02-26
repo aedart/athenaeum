@@ -10,9 +10,9 @@ use Aedart\Contracts\Antivirus\UserResolver;
 use Aedart\Contracts\Streams\FileStream;
 use Aedart\Contracts\Utils\HasDriverOptions;
 use Aedart\Contracts\Utils\HasDriverProfile;
+use Aedart\Contracts\Utils\HasMockableDriver;
 use Aedart\Support\Facades\IoCFacade;
-use Aedart\Utils\Concerns\DriverOptions;
-use Aedart\Utils\Concerns\DriverProfile;
+use Aedart\Utils\Concerns\ProfileBasedDriver;
 use Illuminate\Contracts\Events\Dispatcher;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\StreamInterface as PsrStream;
@@ -31,22 +31,15 @@ use Throwable;
  */
 abstract class BaseScanner implements
     Scanner,
+    HasMockableDriver,
     HasDriverProfile,
     HasDriverOptions
 {
-    use DriverProfile;
-    use DriverOptions;
+    use ProfileBasedDriver;
     use Concerns\Streams;
     use Concerns\Events;
     use Concerns\Results;
     use Concerns\Status;
-
-    /**
-     * The underlying driver for this scanner
-     *
-     * @var mixed|null
-     */
-    protected mixed $driver = null;
 
     /**
      * Creates a new antivirus scanner instance
@@ -107,18 +100,6 @@ abstract class BaseScanner implements
     }
 
     /**
-     * @inheritDoc
-     */
-    public function driver(): mixed
-    {
-        if (isset($this->driver)) {
-            return $this->driver;
-        }
-
-        return $this->driver = $this->makeDriver();
-    }
-
-    /**
      * Performs a virus scan on given file stream
      *
      * @param FileStream $stream
@@ -128,13 +109,6 @@ abstract class BaseScanner implements
      * @throws Throwable
      */
     abstract public function scanStream(FileStream $stream): ScanResult;
-
-    /**
-     * Creates a new native driver instance
-     *
-     * @return mixed
-     */
-    abstract public function makeDriver(): mixed;
 
     /*****************************************************************
      * Internals
