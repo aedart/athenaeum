@@ -42,6 +42,13 @@ abstract class BaseScanner implements
     use Concerns\Status;
 
     /**
+     * The underlying driver for this scanner
+     *
+     * @var mixed|null
+     */
+    protected mixed $driver = null;
+
+    /**
      * Creates a new antivirus scanner instance
      *
      * @param Dispatcher|null $dispatcher [optional]
@@ -100,6 +107,18 @@ abstract class BaseScanner implements
     }
 
     /**
+     * @inheritDoc
+     */
+    public function driver(): mixed
+    {
+        if (isset($this->driver)) {
+            return $this->driver;
+        }
+
+        return $this->driver = $this->makeDriver();
+    }
+
+    /**
      * Performs a virus scan on given file stream
      *
      * @param FileStream $stream
@@ -109,6 +128,13 @@ abstract class BaseScanner implements
      * @throws Throwable
      */
     abstract public function scanStream(FileStream $stream): ScanResult;
+
+    /**
+     * Creates a new native driver instance
+     *
+     * @return mixed
+     */
+    abstract public function makeDriver(): mixed;
 
     /*****************************************************************
      * Internals

@@ -44,7 +44,7 @@ class NullScanner extends BaseScanner
     /**
      * @inheritDoc
      */
-    public function driver(): mixed
+    public function makeDriver(): mixed
     {
         return null;
     }
