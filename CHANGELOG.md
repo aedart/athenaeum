@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * `buffer()` method in `Stream` (_not yet available in interface_).
 * `copyFrom()` method in `FileStream` (_not yet available in interface_).
-* `DriverOptions` concern in Utils package.
+* `DriverOptions` and `DriverProfile` concerns in Utils package.
 
 ### Changed
 
