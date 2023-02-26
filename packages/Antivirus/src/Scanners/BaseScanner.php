@@ -9,8 +9,10 @@ use Aedart\Contracts\Antivirus\Scanner;
 use Aedart\Contracts\Antivirus\UserResolver;
 use Aedart\Contracts\Streams\FileStream;
 use Aedart\Contracts\Utils\HasDriverOptions;
+use Aedart\Contracts\Utils\HasDriverProfile;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Utils\Concerns\DriverOptions;
+use Aedart\Utils\Concerns\DriverProfile;
 use Illuminate\Contracts\Events\Dispatcher;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\StreamInterface as PsrStream;
@@ -29,8 +31,10 @@ use Throwable;
  */
 abstract class BaseScanner implements
     Scanner,
+    HasDriverProfile,
     HasDriverOptions
 {
+    use DriverProfile;
     use DriverOptions;
     use Concerns\Streams;
     use Concerns\Events;
@@ -41,14 +45,17 @@ abstract class BaseScanner implements
      * Creates a new antivirus scanner instance
      *
      * @param Dispatcher|null $dispatcher [optional]
+     * @param string|null $profile [optional]
      * @param array $options [optional]
      */
     public function __construct(
         Dispatcher|null $dispatcher = null,
+        string|null $profile = null,
         array $options = []
     ) {
         $this
             ->setDispatcher($dispatcher)
+            ->setProfile($profile)
             ->setOptions($options);
     }
 

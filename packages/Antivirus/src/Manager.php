@@ -70,9 +70,11 @@ class Manager implements
     public function scanner(string|null $driver = null, array $options = []): Scanner
     {
         $driver = $driver ?? $this->defaultScanner();
+        $profile = $options['profile'] ?? null;
 
         return new $driver(
             $this->getDispatcher(),
+            $profile,
             $options
         );
     }
@@ -112,6 +114,7 @@ class Manager implements
         $driver = $configuration['driver'] ?? null;
 
         $options = array_merge(
+            [ 'profile' => $profile ],
             $configuration['options'] ?? [],
             $options
         );
