@@ -22,13 +22,14 @@ class NullScanner extends BaseScanner
      */
     public function scanStream(FileStream $stream): ScanResult
     {
+        $status = $this->makeScanStatus(
+            $this->shouldPass(),
+            'File was not actually scanned (Null scanner)'
+        );
+
         return $this->makeScanResult(
-            status: $this->makeScanStatus(
-                $this->shouldPass(),
-                'File was not actually scanned (Null scanner)'
-            ),
-            filename: $stream->uri(),
-            filesize: (int) $stream->getSize(),
+            status: $status,
+            file: $stream
         );
     }
 

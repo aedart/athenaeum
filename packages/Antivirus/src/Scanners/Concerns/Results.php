@@ -4,6 +4,7 @@ namespace Aedart\Antivirus\Scanners\Concerns;
 
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Contracts\Antivirus\Results\Status;
+use Aedart\Contracts\Streams\FileStream;
 use Aedart\Support\Facades\IoCFacade;
 use DateTimeInterface;
 
@@ -18,30 +19,43 @@ trait Results
     /**
      * Creates a new file scan result instance
      *
-     * @param Status $status
-     * @param string $filename
-     * @param int $filesize
-     * @param array $details [optional]
-     * @param string|int|null $user [optional]
-     * @param DateTimeInterface|null $datetime [optional]
+     * @param  Status  $status
+     * @param  FileStream  $file
+     * @param  array  $details  [optional]
+     * @param  string|int|null  $user  [optional]
+     * @param  DateTimeInterface|null  $datetime  [optional]
      *
      * @return ScanResult
      */
     protected function makeScanResult(
         Status $status,
-        string $filename,
-        int $filesize,
+        FileStream $file,
         array $details = [],
         string|int|null $user = null,
         DateTimeInterface|null $datetime = null
-    ): ScanResult {
+    ): ScanResult
+    {
         return IoCFacade::make(ScanResult::class, [
             'status' => $status,
-            'filename' => $filename,
-            'filesize' => $filesize,
-            'details' => $details,
+            'filename' => $file->uri(),
+            'filesize' => (int) $file->getSize(),
+            'details' => $this->makeScanResultDetails($details),
             'user' => $user ?? $this->user(),
             'datetime' => $datetime
         ]);
+    }
+
+    /**
+     * Makes scan result details
+     *
+     * @param  array  $details  [optional]
+     *
+     * @return array
+     */
+    protected function makeScanResultDetails(array $details = []): array
+    {
+        return array_merge([
+            'profile' => $this->profile()
+        ], $details);
     }
 }
