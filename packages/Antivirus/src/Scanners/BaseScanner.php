@@ -5,14 +5,12 @@ namespace Aedart\Antivirus\Scanners;
 use Aedart\Antivirus\Exceptions\AntivirusException;
 use Aedart\Contracts\Antivirus\Exceptions\AntivirusException as AntivirusExceptionInterface;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
-use Aedart\Contracts\Antivirus\Results\Status;
 use Aedart\Contracts\Antivirus\Scanner;
 use Aedart\Contracts\Antivirus\UserResolver;
 use Aedart\Contracts\Streams\FileStream;
 use Aedart\Contracts\Utils\HasDriverOptions;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Utils\Concerns\DriverOptions;
-use DateTimeInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\StreamInterface as PsrStream;
@@ -36,6 +34,7 @@ abstract class BaseScanner implements
     use DriverOptions;
     use Concerns\Streams;
     use Concerns\Events;
+    use Concerns\Results;
     use Concerns\Status;
 
     /**
@@ -107,36 +106,6 @@ abstract class BaseScanner implements
     /*****************************************************************
      * Internals
      ****************************************************************/
-
-    /**
-     * Creates a new file scan result instance
-     *
-     * @param Status $status
-     * @param string $filename
-     * @param int $filesize
-     * @param array $details [optional]
-     * @param string|int|null $user [optional]
-     * @param DateTimeInterface|null $datetime [optional]
-     *
-     * @return ScanResult
-     */
-    protected function makeScanResult(
-        Status $status,
-        string $filename,
-        int $filesize,
-        array $details = [],
-        string|int|null $user = null,
-        DateTimeInterface|null $datetime = null
-    ): ScanResult {
-        return IoCFacade::make(ScanResult::class, [
-            'status' => $status,
-            'filename' => $filename,
-            'filesize' => $filesize,
-            'details' => $details,
-            'user' => $user ?? $this->user(),
-            'datetime' => $datetime
-        ]);
-    }
 
     /**
      * Returns the user (identifier) that caused a file scan, if possible
