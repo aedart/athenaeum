@@ -2,12 +2,13 @@
 
 namespace Aedart\Tests\Integration\Antivirus;
 
+use Aedart\Antivirus\Scanners\Status\GenericStatus;
+use Aedart\Contracts\Antivirus\Exceptions\UnsupportedStatusValueException;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Contracts\Antivirus\Results\Status;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
-use Mockery;
 use Psr\Container\ContainerExceptionInterface;
 
 /**
@@ -21,14 +22,42 @@ use Psr\Container\ContainerExceptionInterface;
  */
 class ScanResultTest extends AntivirusTestCase
 {
+    /*****************************************************************
+     * Helpers
+     ****************************************************************/
+
+
+    /**
+     * Makes a new scan status instance
+     *
+     * @param bool|null $pass [optional]
+     * @param string|null $reason [optional]
+     *
+     * @return Status
+     *
+     * @throws UnsupportedStatusValueException
+     */
+    public function makeScanStatus(bool|null $pass = null, string|null $reason = null): Status
+    {
+        $pass = $pass ?? $this->getFaker()->boolean();
+
+        return new GenericStatus($pass, $reason);
+    }
+
+    /*****************************************************************
+     * Actual tests
+     ****************************************************************/
+
+
     /**
      * @test
      *
      * @return void
+     * @throws UnsupportedStatusValueException
      */
     public function canMakeScanResult(): void
     {
-        $status = Mockery::mock(Status::class);
+        $status = $this->makeScanStatus();
 
         $args = [
             'status' => $status,
@@ -98,12 +127,13 @@ class ScanResultTest extends AntivirusTestCase
      * @test
      *
      * @return void
+     * @throws UnsupportedStatusValueException
      */
     public function failsWhenFilenameNotProvided(): void
     {
         $this->expectException(ContainerExceptionInterface::class);
 
-        $status = Mockery::mock(Status::class);
+        $status = $this->makeScanStatus();
 
         $args = [
             'status' => $status,
@@ -120,12 +150,13 @@ class ScanResultTest extends AntivirusTestCase
      * @test
      *
      * @return void
+     * @throws UnsupportedStatusValueException
      */
     public function failsWhenFilesizeNotProvided(): void
     {
         $this->expectException(ContainerExceptionInterface::class);
 
-        $status = Mockery::mock(Status::class);
+        $status = $this->makeScanStatus();
 
         $args = [
             'status' => $status,
