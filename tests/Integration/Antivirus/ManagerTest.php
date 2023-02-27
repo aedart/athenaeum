@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\Antivirus;
 use Aedart\Contracts\Antivirus\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Antivirus\Manager;
 use Aedart\Contracts\Antivirus\Scanner;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
 
 /**
@@ -77,5 +78,22 @@ class ManagerTest extends AntivirusTestCase
         $scannerB = $manager->profile();
 
         $this->assertSame($scannerA, $scannerB);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function forwardsDynamicCallsToDefaultScanner(): void
+    {
+        $manager = $this->getAntivirusManager();
+
+        // If method call does not fail, then test is ok
+        $options = $manager->getOptions();
+
+        ConsoleDebugger::output($options);
+
+        $this->assertIsArray($options);
     }
 }

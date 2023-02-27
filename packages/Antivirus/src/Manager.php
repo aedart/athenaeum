@@ -99,6 +99,21 @@ class Manager implements
     }
 
     /**
+     * Forwards dynamic calls to scanner (default profile)
+     *
+     * @param string $name Method name
+     * @param array $arguments
+     *
+     * @return mixed
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function __call(string $name, array $arguments): mixed
+    {
+        return $this->profile()->$name(...$arguments);
+    }
+
+    /**
      * Creates a new antivirus scanner instance for given profile
      *
      * @param string $profile
