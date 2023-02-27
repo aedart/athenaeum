@@ -6,6 +6,8 @@ use Aedart\Antivirus\Providers\AntivirusServiceProvider;
 use Aedart\Antivirus\Traits\AntivirusManagerTrait;
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
+use Aedart\Contracts\Antivirus\Exceptions\ProfileNotFoundException;
+use Aedart\Contracts\Antivirus\Scanner;
 use Aedart\Contracts\Config\Loaders\Exceptions\InvalidPathException;
 use Aedart\Contracts\Config\Parsers\Exceptions\FileParserException;
 use Aedart\Testing\TestCases\LaravelTestCase;
@@ -62,7 +64,44 @@ abstract class AntivirusTestCase extends LaravelTestCase
         return Configuration::dataDir() . 'configs/antivirus';
     }
 
+    /**
+     * Returns path to where dummy files are located
+     *
+     * @return string
+     */
+    public function dataDir(): string
+    {
+        return Configuration::dataDir() . 'antivirus';
+    }
+
     /*****************************************************************
      * Helpers
      ****************************************************************/
+
+    /**
+     * Returns a full path to given file
+     *
+     * @param string $file Filename with extension
+     *
+     * @return string
+     */
+    public function filePath(string $file): string
+    {
+        return $this->dataDir() . '/' . $file;
+    }
+
+    /**
+     * Returns a scanner instance that matches given profile
+     *
+     * @param string|null $profile [optional]
+     * @param array $options [optional]
+     *
+     * @return Scanner
+     *
+     * @throws ProfileNotFoundException
+     */
+    public function makeScanner(string|null $profile = null, array $options = []): Scanner
+    {
+        return $this->getAntivirusManager()->profile($profile, $options);
+    }
 }
