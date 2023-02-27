@@ -79,18 +79,6 @@ abstract class AntivirusTestCase extends LaravelTestCase
      ****************************************************************/
 
     /**
-     * Returns a full path to given file
-     *
-     * @param string $file Filename with extension
-     *
-     * @return string
-     */
-    public function filePath(string $file): string
-    {
-        return $this->dataDir() . '/' . $file;
-    }
-
-    /**
      * Returns a scanner instance that matches given profile
      *
      * @param string|null $profile [optional]
@@ -103,5 +91,47 @@ abstract class AntivirusTestCase extends LaravelTestCase
     public function makeScanner(string|null $profile = null, array $options = []): Scanner
     {
         return $this->getAntivirusManager()->profile($profile, $options);
+    }
+
+    /**
+     * Returns a full path to given file
+     *
+     * @param string $file Filename with extension
+     *
+     * @return string
+     */
+    public function filePath(string $file): string
+    {
+        return $this->dataDir() . '/' . $file;
+    }
+
+    /**
+     * Returns path to a clean test file
+     *
+     * @return string
+     */
+    public function cleanFile(): string
+    {
+        return $this->filePath('clean.txt');
+    }
+
+    /**
+     * Returns path to an infected test file
+     *
+     * @return string
+     */
+    public function infectedFile(): string
+    {
+        return $this->filePath('stdInfectedFile.txt');
+    }
+
+    /**
+     * Returns path to an infected test file that is compressed
+     *
+     * @return string
+     */
+    public function compressedInfectedFile(): string
+    {
+        return $this->filePath('stdInfectedFile.tar.xz');
     }
 }
