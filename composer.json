@@ -41,7 +41,8 @@
         "shrikeh/teapot": "^2.3.1",
         "symfony/console": "^v6.2.5",
         "symfony/finder": "^6.2",
-        "vlucas/phpdotenv": "^5.5.0"
+        "vlucas/phpdotenv": "^5.5.0",
+        "xenolope/quahog": "^3.0"
     },
     "require-dev": {
         "ext-curl": "*",
