@@ -42,11 +42,6 @@ class GenericStatus extends BaseStatus
             ? 'Passed'
             : 'Failed';
 
-        $reason = $this->reason();
-        $message = isset($reason)
-            ? ': ' . $reason
-            : '';
-
-        return "{$value}{$message}";
+        return $this->valueWithReason($value);
     }
 }

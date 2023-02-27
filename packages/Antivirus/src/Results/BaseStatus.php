@@ -79,4 +79,23 @@ abstract class BaseStatus implements Status
     {
         return $this->value;
     }
+
+    /**
+     * Returns formatted value with reason, if available
+     *
+     * @param string $value
+     * @param string|null $reason [optional] Defaults to {@see reason()} if none given
+     *
+     * @return string
+     */
+    protected function valueWithReason(string $value, string|null $reason = null): string
+    {
+        $reason = $reason ?? $this->reason();
+
+        $message = isset($reason)
+            ? ': ' . $reason
+            : '';
+
+        return "{$value}{$message}";
+    }
 }
