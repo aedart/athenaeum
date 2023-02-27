@@ -4,6 +4,7 @@ namespace Aedart\Antivirus\Results;
 
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Contracts\Antivirus\Results\Status;
+use Aedart\Contracts\Utils\Dates\DateTimeFormats;
 use DateTimeInterface;
 use Illuminate\Support\Facades\Date;
 
@@ -129,12 +130,24 @@ class Result implements ScanResult
     public function toArray(): array
     {
         return [
-            'status' => $this->status(),
+            'status' => (string) $this->status(),
             'filename' => $this->filename(),
             'filesize' => $this->filesize(),
-            'datetime' => $this->datetime(),
+            'datetime' => $this->formatDatetime($this->datetime()),
             'user' => $this->user(),
             'details' => $this->details()
         ];
+    }
+
+    /**
+     * Formats the datetime instance
+     *
+     * @param DateTimeInterface $datetime
+     *
+     * @return string
+     */
+    protected function formatDatetime(DateTimeInterface $datetime): string
+    {
+        return $datetime->format(DateTimeFormats::RFC3339_EXTENDED_ZULU);
     }
 }
