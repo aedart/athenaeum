@@ -19,6 +19,9 @@ use SplFileInfo;
  * @method static Scanner profile(string|null $name = null, array $options = []) Creates a new antivirus scanner instance or returns existing
  * @method static Scanner scanner(string|null $driver = null, array $options = []) Creates a new antivirus scanner instance
  *
+ * @see Manager
+ * @see Scanner
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Antivirus\Facades
  */
