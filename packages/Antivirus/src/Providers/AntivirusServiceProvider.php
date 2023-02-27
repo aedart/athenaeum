@@ -4,8 +4,10 @@ namespace Aedart\Antivirus\Providers;
 
 use Aedart\Antivirus\DefaultUserResolver;
 use Aedart\Antivirus\Events\FileWasScanned;
+use Aedart\Antivirus\Manager;
 use Aedart\Antivirus\Results\Result;
 use Aedart\Contracts\Antivirus\Events\FileWasScanned as FileWasScannedInterface;
+use Aedart\Contracts\Antivirus\Manager as AntivirusManager;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Contracts\Antivirus\Results\Status;
 use Aedart\Contracts\Antivirus\UserResolver;
@@ -30,7 +32,8 @@ class AntivirusServiceProvider extends ServiceProvider implements DeferrableProv
         $this
             ->bindUserResolver()
             ->bindEvents()
-            ->bindResultComponents();
+            ->bindResultComponents()
+            ->bindManager();
     }
 
     /**
@@ -53,8 +56,26 @@ class AntivirusServiceProvider extends ServiceProvider implements DeferrableProv
         return [
             UserResolver::class,
             FileWasScannedInterface::class,
-            ScanResult::class
+            ScanResult::class,
+            AntivirusManager::class
         ];
+    }
+
+    /**
+     * Binds antivirus manager
+     *
+     * @return self
+     */
+    protected function bindManager(): static
+    {
+        $this->app->singleton(AntivirusManager::class, function(Application $app) {
+            $dispatcher = $app->make('events');
+            $config = $app->make('config');
+
+            return new Manager($dispatcher, $config);
+        });
+
+        return $this;
     }
 
     /**
