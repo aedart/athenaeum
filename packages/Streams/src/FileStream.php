@@ -230,6 +230,30 @@ class FileStream extends Stream implements
         return $this;
     }
 
+    /**
+     * Returns filename, if available
+     *
+     * If a 'filename' has been specified in the stream's meta,
+     * then it will be favoured. Otherwise, the basename of
+     * {@see uri()} will be returned, if its known.
+     *
+     * @return string|null
+     */
+    public function filename(): string|null
+    {
+        $meta = $this->getMetadata('filename');
+        if (isset($meta)) {
+            return $meta;
+        }
+
+        $uri = $this->uri();
+        if ($uri === 'unknown') {
+            return null;
+        }
+
+        return basename($uri);
+    }
+
     /*****************************************************************
      * Internals
      ****************************************************************/
