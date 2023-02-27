@@ -12,6 +12,7 @@
         "php": "^8.1",
         "ext-fileinfo": "*",
         "ext-json": "*",
+        "ext-sockets": "*",
         "composer-runtime-api": "^2.0.0",
         "dragonmantank/cron-expression": "^3.3",
         "fakerphp/faker": "^v1.21.0",
@@ -46,7 +47,6 @@
     },
     "require-dev": {
         "ext-curl": "*",
-        "ext-sockets": "*",
         "bamarni/composer-bin-plugin": "^1.8.2",
         "codeception/codeception": "^5.0.9",
         "codeception/module-asserts": "^3.0.0",
