@@ -16,6 +16,7 @@ use Aedart\Streams\Exceptions\CannotOpenStream;
 use Aedart\Streams\Exceptions\InvalidStreamResource;
 use Aedart\Streams\Exceptions\StreamException;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
+use SplFileInfo;
 use Throwable;
 
 /**
@@ -54,6 +55,38 @@ class FileStream extends Stream implements
         }
 
         return static::make($stream);
+    }
+
+    /**
+     * Open a new file stream for a PHP SplFileInfo instance
+     *
+     * @see https://www.php.net/manual/en/class.splfileinfo.php
+     *
+     * @param  SplFileInfo  $file
+     * @param  string  $mode
+     * @param  bool  $useIncludePath  [optional]
+     * @param  resource|null  $context  [optional]
+     *
+     * @return static
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public static function openFileInfo(SplFileInfo $file, string $mode, bool $useIncludePath = false, $context = null): static
+    {
+        $stream = static::open(
+            filename: $file->getRealPath(),
+            mode: $mode,
+            useIncludePath: $useIncludePath,
+            context: $context
+        );
+
+        // In case that a Laravel / Symfony Uploaded File instance is given, then
+        // we can obtain an "original" filename, which should be used instead.
+        if (method_exists($file, 'getClientOriginalName')) {
+            $stream->meta()->set('filename', $file->getClientOriginalName());
+        }
+
+        return $stream;
     }
 
     /**

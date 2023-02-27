@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * `buffer()` method in `Stream` (_not yet available in interface_).
-* `copyFrom()` and `filename()` methods in `FileStream` (_not yet available in interface_).
+* `openFileInfo()`, `copyFrom()` and `filename()` methods in `FileStream` (_not yet available in interface_).
 * `Driver`, `MockableDriver`, `DriverProfile`, and `DriverOptions` concerns in Utils package.
 
 ### Changed
