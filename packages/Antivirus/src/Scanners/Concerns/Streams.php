@@ -7,8 +7,8 @@ use Aedart\Contracts\Antivirus\Exceptions\AntivirusException;
 use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
 use Aedart\Streams\FileStream;
-use Psr\Http\Message\StreamInterface as PsrStreamInterface;
-use Psr\Http\Message\UploadedFileInterface;
+use Psr\Http\Message\StreamInterface as PsrStream;
+use Psr\Http\Message\UploadedFileInterface as PsrUploadedFile;
 use SplFileInfo;
 use Throwable;
 
@@ -71,14 +71,14 @@ trait Streams
     /**
      * Wraps given file into a file stream
      *
-     * @param  string|SplFileInfo|UploadedFileInterface|FileStreamInterface|PsrStreamInterface  $file
+     * @param  string|SplFileInfo|PsrUploadedFile|FileStreamInterface|PsrStream  $file
      *
      * @return FileStreamInterface
      *
      * @throws AntivirusException
      */
     protected function wrapFile(
-        string|SplFileInfo|UploadedFileInterface|FileStreamInterface|PsrStreamInterface $file
+        string|SplFileInfo|PsrUploadedFile|FileStreamInterface|PsrStream $file
     ): FileStreamInterface {
         return match (true) {
             is_string($file) => $this->openStreamForPath($file),
@@ -88,8 +88,8 @@ trait Streams
             // When a Psr stream is given it must be copied, or we risk that it
             // might get detached and prevent further operations on it, outside
             // the scope of an antivirus scanner!
-            $file instanceof PsrStreamInterface => $this->copyPsrStream($file),
-            $file instanceof UploadedFileInterface => $this->copyPsrStream($file->getStream()),
+            $file instanceof PsrUploadedFile => $this->copyPsrUploadedFile($file),
+            $file instanceof PsrStream => $this->copyPsrStream($file),
         };
     }
 
@@ -125,12 +125,14 @@ trait Streams
      */
     protected function openStreamForFileInfo(SplFileInfo $file): FileStreamInterface
     {
-        $path = $file->getRealPath();
-        if ($path === false) {
-            throw new UnableToOpenFileStream(sprintf('File %s does not exist', $file->getFilename()));
+        try {
+            return FileStream::openFileInfo($file, 'r');
+        } catch (Throwable $e) {
+            throw new UnableToOpenFileStream(sprintf(
+                'Unable to open stream for file %s',
+                $file->getFilename()
+            ), $e->getCode(), $e);
         }
-
-        return $this->openStreamForPath($path);
     }
 
     /**
@@ -157,16 +159,48 @@ trait Streams
     }
 
     /**
+     * Copies given PSR-7 Uploaded File's content (PSR Stream) into a new temporary stream
+     *
+     * @param PsrUploadedFile $file
+     * @param bool $rewind [optional]
+     *
+     * @return FileStreamInterface
+     */
+    protected function copyPsrUploadedFile(PsrUploadedFile $file, bool $rewind = true): FileStreamInterface
+    {
+        try {
+            $copy = FileStream::openUploadedFile(
+                file: $file,
+                asCopy: true,
+                maximumMemory: $this->getStreamMaxMemory(),
+                bufferSize: $this->getStreamBufferSize(),
+            );
+
+            if ($rewind) {
+                $file->getStream()->rewind();
+                $copy->positionToStart();
+            }
+
+            return $copy;
+        } catch (Throwable $e) {
+            throw new UnableToOpenFileStream(sprintf(
+                'Unable to open stream for uploaded file %s',
+                $file->getClientFilename()
+            ), $e->getCode(), $e);
+        }
+    }
+
+    /**
      * Copies given PSR-7 stream into a new temporary stream
      *
-     * @param  PsrStreamInterface  $stream  Psr stream
+     * @param  PsrStream  $stream  Psr stream
      * @param  bool  $rewind  [optional]
      *
      * @return FileStreamInterface
      *
      * @throws AntivirusException
      */
-    protected function copyPsrStream(PsrStreamInterface $stream, bool $rewind = true): FileStreamInterface
+    protected function copyPsrStream(PsrStream $stream, bool $rewind = true): FileStreamInterface
     {
         try {
             $copy = FileStream::openTemporary(maximumMemory: $this->getStreamMaxMemory())

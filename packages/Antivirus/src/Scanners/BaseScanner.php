@@ -65,11 +65,6 @@ abstract class BaseScanner implements
     public function scan(string|SplFileInfo|UploadedFile|FileStream|PsrStream $file): ScanResult
     {
         try {
-            // Get Psr stream, in case that uploaded file instance (Psr) is given.
-            $file = $file instanceof UploadedFileInterface
-                ? $file->getStream()
-                : $file;
-
             // Wrap the file into a stream and scan it.
             $result = $this->scanStream(
                 $this->wrapFile($file)
@@ -81,7 +76,9 @@ abstract class BaseScanner implements
             // If case that a stream was initially given, then we must
             // rewind it, after it was scanned. Underlying "driver"
             // might not do this...
-            if ($file instanceof StreamInterface) {
+            if ($file instanceof UploadedFileInterface) {
+                $file->getStream()->rewind();
+            } elseif ($file instanceof StreamInterface) {
                 $file->rewind();
             }
 
