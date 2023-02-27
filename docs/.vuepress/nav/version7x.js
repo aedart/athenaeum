@@ -536,6 +536,7 @@ module.exports.sidebar = function(){
                         'streams/usage/flush',
                         'streams/usage/hash',
                         'streams/usage/mime-type',
+                        'streams/usage/filename',
                         'streams/usage/output',
                         'streams/usage/locking',
                         'streams/usage/transactions',
