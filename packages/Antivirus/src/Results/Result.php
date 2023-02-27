@@ -27,16 +27,18 @@ class Result implements ScanResult
      * Create a new file scan result instance
      *
      * @param Status $status
-     * @param string $filename
+     * @param string $filepath
      * @param int $filesize
+     * @param string|null $filename [optional]
      * @param array $details [optional]
      * @param string|int|null $user [optional]
      * @param DateTimeInterface|null $datetime [optional]
      */
     public function __construct(
         protected Status $status,
-        protected string $filename,
+        protected string $filepath,
         protected int $filesize,
+        protected string|null $filename = null,
         protected array $details = [],
         protected string|int|null $user = null,
         DateTimeInterface|null $datetime = null,
@@ -95,6 +97,14 @@ class Result implements ScanResult
     /**
      * @inheritDoc
      */
+    public function filepath(): string
+    {
+        return $this->filepath;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function filesize(): int
     {
         return $this->filesize;
@@ -132,6 +142,7 @@ class Result implements ScanResult
         return [
             'status' => (string) $this->status(),
             'filename' => $this->filename(),
+            'filepath' => $this->filepath(),
             'filesize' => $this->filesize(),
             'datetime' => $this->formatDatetime($this->datetime()),
             'user' => $this->user(),

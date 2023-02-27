@@ -34,10 +34,13 @@ trait Results
         string|int|null $user = null,
         DateTimeInterface|null $datetime = null
     ): ScanResult {
+//        dump([ 'meta' => $file->meta() ]);
+
         return IoCFacade::make(ScanResult::class, [
             'status' => $status,
-            'filename' => $file->uri(),
+            'filepath' => $file->uri(),
             'filesize' => (int) $file->getSize(),
+            'filename' => $file->filename(),
             'details' => $this->makeScanResultDetails($details),
             'user' => $user ?? $this->user(),
             'datetime' => $datetime

@@ -51,7 +51,7 @@ class BaseScannerTest extends AntivirusTestCase
             'String path' => [ $path ],
             'SplFileInfo' => [ new SplFileInfo($path) ],
             'Laravel uploaded file' => [ UploadedFile::fake()->create('other.txt', 'Lorum lipsum', 'text/plain') ],
-            'PSR-7 uploaded file' => [ new PsrUploadedFile($path, 12, UPLOAD_ERR_OK) ],
+            'PSR-7 uploaded file' => [ new PsrUploadedFile($path, 12, UPLOAD_ERR_OK, 'myFile.txt') ],
             'File stream' => [ FileStream::open($path, 'r') ],
             'PSR-7 file stream' => [ (new PsrUploadedFile($path, 12, UPLOAD_ERR_OK))->getStream() ],
         ];

@@ -53,11 +53,18 @@ interface ScanResult extends Arrayable
     public function hasReason(): bool;
 
     /**
-     * Get the name of the file that was scanned
+     * Get the name of the file, if available
+     *
+     * @return string|null
+     */
+    public function filename(): string|null;
+
+    /**
+     * Get the filepath or stream uri that was scanned
      *
      * @return string
      */
-    public function filename(): string;
+    public function filepath(): string;
 
     /**
      * Get the scanned file's size

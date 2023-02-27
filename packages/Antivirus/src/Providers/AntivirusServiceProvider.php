@@ -123,8 +123,8 @@ class AntivirusServiceProvider extends ServiceProvider implements DeferrableProv
                 throw new BindingResolutionException('Invalid "status" provided for Scan Result');
             }
 
-            if (!isset($params['filename'])) {
-                throw new BindingResolutionException('"filename" argument is required for Scan Result');
+            if (!isset($params['filepath'])) {
+                throw new BindingResolutionException('"filepath" argument is required for Scan Result');
             }
 
             if (!isset($params['filesize'])) {
@@ -133,8 +133,9 @@ class AntivirusServiceProvider extends ServiceProvider implements DeferrableProv
 
             return new Result(
                 status: $params['status'],
-                filename: $params['filename'],
+                filepath: $params['filepath'],
                 filesize: $params['filesize'],
+                filename: $params['filename'] ?? null,
                 details: $params['details'] ?? null,
                 user: $params['user'] ?? null,
                 datetime: $params['datetime'] ?? null

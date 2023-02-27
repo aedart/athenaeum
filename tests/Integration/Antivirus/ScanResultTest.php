@@ -61,6 +61,7 @@ class ScanResultTest extends AntivirusTestCase
 
         $args = [
             'status' => $status,
+            'filepath' => '/home/my_user/files/my_file.txt',
             'filename' => 'my_file.txt',
             'filesize' => 3241,
             'details' => [ 1, 2, 3],
@@ -77,6 +78,7 @@ class ScanResultTest extends AntivirusTestCase
         ConsoleDebugger::output($result->toArray());
 
         $this->assertSame($args['status'], $result->status(), 'incorrect status');
+        $this->assertSame($args['filepath'], $result->filepath(), 'incorrect filename');
         $this->assertSame($args['filename'], $result->filename(), 'incorrect filename');
         $this->assertSame($args['filesize'], $result->filesize(), 'incorrect filesize');
         $this->assertSame($args['details'], $result->details(), 'incorrect details');
@@ -94,6 +96,7 @@ class ScanResultTest extends AntivirusTestCase
         $this->expectException(ContainerExceptionInterface::class);
 
         $args = [
+            'filepath' => '/home/my_user/files/my_file.txt',
             'filename' => 'my_file.txt',
             'filesize' => 3241,
             'details' => [ 1, 2, 3],
@@ -114,6 +117,7 @@ class ScanResultTest extends AntivirusTestCase
 
         $args = [
             'status' => 'invalid',
+            'filepath' => '/home/my_user/files/my_file.txt',
             'filename' => 'my_file.txt',
             'filesize' => 3241,
             'details' => [ 1, 2, 3],
@@ -129,7 +133,7 @@ class ScanResultTest extends AntivirusTestCase
      * @return void
      * @throws UnsupportedStatusValueException
      */
-    public function failsWhenFilenameNotProvided(): void
+    public function failsWhenFilepathNotProvided(): void
     {
         $this->expectException(ContainerExceptionInterface::class);
 
@@ -137,7 +141,8 @@ class ScanResultTest extends AntivirusTestCase
 
         $args = [
             'status' => $status,
-            // 'filename' => 'my_file.txt',
+            // 'filepath' => '/home/my_user/files/my_file.txt',
+            'filename' => 'my_file.txt',
             'filesize' => 3241,
             'details' => [ 1, 2, 3],
             'user' => 'James Doe'
@@ -160,6 +165,7 @@ class ScanResultTest extends AntivirusTestCase
 
         $args = [
             'status' => $status,
+            'filepath' => '/home/my_user/files/my_file.txt',
             'filename' => 'my_file.txt',
             // 'filesize' => 3241,
             'details' => [ 1, 2, 3],
