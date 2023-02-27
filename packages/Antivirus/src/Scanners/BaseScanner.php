@@ -75,6 +75,9 @@ abstract class BaseScanner implements
                 $this->wrapFile($file)
             );
 
+            // Dispatch file was scanned event.
+            $this->dispatchFileWasScanned($result);
+
             // If case that a stream was initially given, then we must
             // rewind it, after it was scanned. Underlying "driver"
             // might not do this...
