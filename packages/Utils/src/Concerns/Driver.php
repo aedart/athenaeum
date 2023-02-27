@@ -26,7 +26,7 @@ trait Driver
      */
     public function driver(): mixed
     {
-        if (isset($this->driver)) {
+        if ($this->hasDriver()) {
             return $this->driver;
         }
 
@@ -54,5 +54,15 @@ trait Driver
         $this->driver = $newDriver;
 
         return $this;
+    }
+
+    /**
+     * Determine if a driver has been initialised
+     *
+     * @return bool
+     */
+    protected function hasDriver(): bool
+    {
+        return isset($this->driver);
     }
 }

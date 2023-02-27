@@ -73,6 +73,6 @@ trait MockableDriver
      */
     public function isDriverMocked(): bool
     {
-        return isset($this->driver) && $this->driver instanceof MockInterface;
+        return $this->hasDriver() && $this->driver instanceof MockInterface;
     }
 }
