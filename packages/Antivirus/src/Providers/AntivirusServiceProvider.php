@@ -68,7 +68,7 @@ class AntivirusServiceProvider extends ServiceProvider implements DeferrableProv
      */
     protected function bindManager(): static
     {
-        $this->app->singleton(AntivirusManager::class, function(Application $app) {
+        $this->app->singleton(AntivirusManager::class, function (Application $app) {
             $dispatcher = $app->make('events');
             $config = $app->make('config');
 
