@@ -35,17 +35,34 @@ class ClamAvStatus extends BaseStatus
     }
 
     /**
+     * Determine if ClamAV found infection in file
+     *
+     * @return bool
+     */
+    public function hasInfection(): bool
+    {
+        return $this->value()->isFound();
+    }
+
+    /**
+     * Determine if an error occurred during scanning
+     *
+     * @return bool
+     */
+    public function hasError(): bool
+    {
+        return $this->value()->isError();
+    }
+
+    /**
      * @inheritDoc
      */
     public function __toString(): string
     {
-        /** @var ClamAvDriverResult $value */
-        $value = $this->value();
-
         return match (true) {
-            $value->isOk() => $this->valueWithReason('Clean'),
-            $value->isFound() => $this->valueWithReason('Infected'),
-            $value->isError() => $this->valueWithReason('Error'),
+            $this->isOk() => $this->valueWithReason('Clean'),
+            $this->hasInfection() => $this->valueWithReason('Infected'),
+            $this->hasError() => $this->valueWithReason('Error'),
             default => $this->valueWithReason('Unknown'),
         };
     }
