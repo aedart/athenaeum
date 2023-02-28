@@ -4,8 +4,12 @@ namespace Aedart\Antivirus\Validation\Rules;
 
 use Aedart\Antivirus\Facades\Antivirus;
 use Aedart\Contracts\Antivirus\Exceptions\AntivirusException;
+use Aedart\Contracts\Streams\FileStream;
 use Aedart\Validation\Rules\BaseValidationRule;
 use Closure;
+use Psr\Http\Message\StreamInterface as PsrStream;
+use Psr\Http\Message\UploadedFileInterface as UploadedFile;
+use SplFileInfo;
 
 /**
  * Infection Free File Validation Rule
@@ -31,9 +35,13 @@ class InfectionFreeFile extends BaseValidationRule
     }
 
     /**
-     * {@inheritDoc}
+     * Scan the given file for infections, e.g. virus, malware or other harmful code...
      *
-     * Scans the given Uploaded File for infections. Fails if file is not "clean".
+     * @param string $attribute
+     * @param string|SplFileInfo|UploadedFile|FileStream|PsrStream $value
+     * @param Closure $fail
+     *
+     * @return void
      *
      * @throws AntivirusException
      */
