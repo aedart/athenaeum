@@ -65,6 +65,10 @@ class ClamAvTest extends AntivirusTestCase
         );
 
         $mock
+            ->shouldReceive('hasSession')
+            ->andReturn(true);
+
+        $mock
             ->shouldReceive('scanResourceStream')
             ->withAnyArgs()
             ->andReturn($result);
