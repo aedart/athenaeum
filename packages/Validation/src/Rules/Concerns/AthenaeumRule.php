@@ -3,6 +3,8 @@
 namespace Aedart\Validation\Rules\Concerns;
 
 /**
+ * @deprecated Since 7.4 - Will be removed in next major version
+ *
  * Concerns Athenaeum Validation Rule
  *
  * @author Alin Eugen Deac <aedart@gmail.com>

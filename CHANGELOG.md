@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* `BaseValidationRule` abstraction in Validation package.
 * `buffer()` method in `Stream` (_not yet available in interface_).
 * `copyFrom()` method in `FileStream` (_not yet available in interface_).
 
@@ -23,6 +24,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Incorrect "is readable" check of source stream in `copy()` and `copyTo()`, in `FileStream`.
 * Incorrect description of `append()` method in documentation, regarding PSR-7 stream detaching.
+
+### Deprecated
+
+* All concerns in the `\Aedart\Validation\Rules\Concerns\*` namespace. These will be removed in the next major version. 
+* `\Aedart\Contracts\Validation\FailedState`. Will be removed in the next major version.
+* `\Aedart\Validation\Rules\BaseRule`. Will be removed in the next major version. Use `\Aedart\Validation\Rules\BaseValidationRule` instead. 
 
 ## [7.3.0] - 2023-02-23
 
