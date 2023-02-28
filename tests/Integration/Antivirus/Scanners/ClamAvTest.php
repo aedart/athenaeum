@@ -41,7 +41,7 @@ class ClamAvTest extends AntivirusTestCase
      */
     public function scanner(callable|null $mockCallback = null, array $options = []): Scanner
     {
-        $mockSetup = function(Scanner|HasMockableDriver $scanner) use($mockCallback) {
+        $mockSetup = function (Scanner|HasMockableDriver $scanner) use ($mockCallback) {
             $mock = $scanner->mockDriver(AdaptedClient::class);
 
             $mockCallback($mock);
@@ -64,7 +64,7 @@ class ClamAvTest extends AntivirusTestCase
      */
     public function canScanCleanFile(): void
     {
-        $scanner = $this->scanner(function(MockInterface $mock) {
+        $scanner = $this->scanner(function (MockInterface $mock) {
             $result = new Result(
                 status: 'OK',
                 filename: $this->cleanFile(),
