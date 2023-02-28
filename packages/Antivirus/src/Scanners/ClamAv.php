@@ -30,6 +30,13 @@ class ClamAv extends BaseScanner
         /** @var AdaptedClient $driver */
         $driver = $this->driver();
 
+        // Prevent the native driver from closing immediately a scan,
+        // or we risk having to re-establish the connection when
+        // scanning multiple times in same setting.
+        if (!$driver->hasSession()) {
+            $driver->startSession();
+        }
+
         $nativeResult = $driver->scanResourceStream(
             stream: $stream->resource(),
             maxChunkSize: $this->chunkSize()
@@ -116,6 +123,20 @@ class ClamAv extends BaseScanner
     protected function statusClass(): string
     {
         return ClamAvStatus::class;
+    }
+
+    /**
+     * Clear the current driver
+     *
+     * @return self
+     */
+    protected function clearDriver(): static
+    {
+        if (!$this->isDriverMocked()) {
+            $this->swapDriver(null);
+        }
+
+        return $this;
     }
 
     /**
