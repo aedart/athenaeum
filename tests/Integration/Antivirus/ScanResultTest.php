@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Integration\Antivirus;
 
-use Aedart\Antivirus\Scanners\Status\GenericStatus;
+use Aedart\Antivirus\Results\GenericStatus;
 use Aedart\Contracts\Antivirus\Exceptions\UnsupportedStatusValueException;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Contracts\Antivirus\Results\Status;

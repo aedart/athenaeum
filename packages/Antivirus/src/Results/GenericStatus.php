@@ -1,9 +1,8 @@
 <?php
 
-namespace Aedart\Antivirus\Scanners\Status;
+namespace Aedart\Antivirus\Results;
 
 use Aedart\Antivirus\Exceptions\UnsupportedStatusValue;
-use Aedart\Antivirus\Results\BaseStatus;
 
 /**
  * Generic Status
