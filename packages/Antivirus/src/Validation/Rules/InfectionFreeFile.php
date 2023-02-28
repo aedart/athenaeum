@@ -27,7 +27,8 @@ class InfectionFreeFile extends BaseValidationRule
     public function __construct(
         protected string|null $profile = null,
         protected array $options = []
-    ) {}
+    ) {
+    }
 
     /**
      * {@inheritDoc}
