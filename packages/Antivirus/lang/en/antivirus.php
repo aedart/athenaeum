@@ -9,5 +9,5 @@ return [
     | Translations for the validation rule.
     */
 
-    // TODO: ...
+    'infected' => ':attribute appears to be infected with a virus, malware or other harmful software!',
 ];
