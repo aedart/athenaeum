@@ -85,7 +85,7 @@ class ClamAvTest extends AntivirusTestCase
     public function canScanCleanFile(): void
     {
         $file = $this->cleanFile();
-        $scanner = $this->scanner(function (MockInterface $mock) use($file) {
+        $scanner = $this->scanner(function (MockInterface $mock) use ($file) {
             $this->mockDriverScanResult(
                 mock: $mock,
                 status: 'ok',
@@ -110,7 +110,7 @@ class ClamAvTest extends AntivirusTestCase
     public function canScanInfectedFile(): void
     {
         $file = $this->infectedFile();
-        $scanner = $this->scanner(function (MockInterface $mock) use($file) {
+        $scanner = $this->scanner(function (MockInterface $mock) use ($file) {
             $this->mockDriverScanResult(
                 mock: $mock,
                 status: 'found',
@@ -136,7 +136,7 @@ class ClamAvTest extends AntivirusTestCase
     public function canScanCompressedInfectedFile(): void
     {
         $file = $this->compressedInfectedFile();
-        $scanner = $this->scanner(function (MockInterface $mock) use($file) {
+        $scanner = $this->scanner(function (MockInterface $mock) use ($file) {
             $this->mockDriverScanResult(
                 mock: $mock,
                 status: 'found',
