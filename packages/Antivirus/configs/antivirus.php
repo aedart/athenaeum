@@ -30,9 +30,9 @@ return [
 
                 // Socket address to the ClamAV client
                 // E.g.:
-                // - Unix socket: '/var/run/clamav/clamd.ctl'
+                // - Unix socket: 'unix:///var/run/clamav/clamd.ctl'
                 // - TCP socket: 'tcp://127.0.0.1:3310'
-                'socket' => env('CLAMAV_SOCKET', '/var/run/clamav/clamd.ctl'),
+                'socket' => env('CLAMAV_SOCKET', 'unix:///var/run/clamav/clamd.ctl'),
 
                 // Socket connection timeout (in seconds). If null, then
                 // the timeout is disabled!
