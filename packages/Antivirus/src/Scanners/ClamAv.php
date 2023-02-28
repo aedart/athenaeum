@@ -2,14 +2,13 @@
 
 namespace Aedart\Antivirus\Scanners;
 
-use Aedart\Antivirus\Scanners\Status\ClamAvStatus;
+use Aedart\Antivirus\Scanners\ClamAv\AdaptedClient;
+use Aedart\Antivirus\Scanners\ClamAv\ClamAvStatus;
 use Aedart\Contracts\Antivirus\Exceptions\UnsupportedStatusValueException;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\FileStream;
 use Socket\Raw\Factory as ConnectionFactory;
-use Xenolope\Quahog\Client;
-use Xenolope\Quahog\Exception\ConnectionException;
 use Xenolope\Quahog\Result;
 
 /**
@@ -24,28 +23,11 @@ use Xenolope\Quahog\Result;
 class ClamAv extends BaseScanner
 {
     /**
-     * Destructor
-     */
-    public function __destruct()
-    {
-        if (!$this->hasDriver() || $this->isDriverMocked()) {
-            return;
-        }
-
-        try {
-            $this->driver()->disconnect();
-        } catch (ConnectionException $e) {
-            // Unable to do anything at this point. Throwing exceptions in
-            // a destructor will just cause a fatal error...
-        }
-    }
-
-    /**
      * @inheritDoc
      */
     public function scanStream(FileStream $stream): ScanResult
     {
-        /** @var Client $driver */
+        /** @var AdaptedClient $driver */
         $driver = $this->driver();
 
         $nativeResult = $driver->scanResourceStream(
@@ -139,14 +121,14 @@ class ClamAv extends BaseScanner
     /**
      * @inheritDoc
      */
-    protected function makeDriver(): Client
+    protected function makeDriver(): AdaptedClient
     {
         $connection = (new ConnectionFactory())->createClient(
             address: $this->socket(),
             timeout: $this->socketTimeout()
         );
 
-        return new Client(
+        return new AdaptedClient(
             socket: $connection,
             timeout: $this->timeout(),
             mode: PHP_NORMAL_READ
