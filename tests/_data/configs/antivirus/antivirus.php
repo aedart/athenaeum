@@ -53,6 +53,20 @@ return [
             'options' => [
                 'should_pass' => false,
             ],
+        ],
+
+        // When tests are not intended to run LIVE and use native drivers, connections,...etc
+        'pass' => [
+            'driver' => \Aedart\Antivirus\Scanners\NullScanner::class,
+            'options' => [
+                'should_pass' => true,
+            ],
+        ],
+        'fail' => [
+            'driver' => \Aedart\Antivirus\Scanners\NullScanner::class,
+            'options' => [
+                'should_pass' => false,
+            ],
         ]
     ]
 ];
