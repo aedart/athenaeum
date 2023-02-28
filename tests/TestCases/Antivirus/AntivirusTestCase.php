@@ -130,8 +130,12 @@ abstract class AntivirusTestCase extends LaravelTestCase
     public function makeScanner(string|null $profile = null, array $options = [], callable|null $mockSetup = null): Scanner
     {
         $scanner = $this->getAntivirusManager()->profile($profile, $options);
+        if ($this->isLive()) {
+            return $scanner;
+        }
 
-        if (!$this->isLive() && isset($mockSetup)) {
+        // This means that a mock could be expected... but not always the case!
+        if (isset($mockSetup)) {
             ConsoleDebugger::output(sprintf('Mocking driver for %s scanner profile', $profile ?? 'default'));
             $mockSetup($scanner);
         }

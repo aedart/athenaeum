@@ -32,22 +32,42 @@ class ClamAvTest extends AntivirusTestCase
     /**
      * Returns the scanner to be tested...
      *
-     * @param callable|null $mockCallback [optional] Callback to configure native driver mocking.
+     * @param callable|null $callback [optional] Callback to configure native driver mock.
      * @param array $options [optional]
      *
      * @return Scanner
      *
      * @throws ProfileNotFoundException
      */
-    public function scanner(callable|null $mockCallback = null, array $options = []): Scanner
+    public function scanner(callable|null $callback = null, array $options = []): Scanner
     {
-        $mockSetup = function (Scanner|HasMockableDriver $scanner) use ($mockCallback) {
+        $mockSetup = function (Scanner|HasMockableDriver $scanner) use ($callback) {
             $mock = $scanner->mockDriver(AdaptedClient::class);
 
-            $mockCallback($mock);
+            $callback($mock);
         };
 
         return $this->makeScanner('clamav', $options, $mockSetup);
+    }
+
+    public function mockDriverScanResult(
+        MockInterface $mock,
+        string $status,
+        string $file,
+        string|null $reason = null,
+        string|null $id = null
+    ) {
+        $result = new Result(
+            status: strtoupper($status),
+            filename: $file,
+            reason: $reason,
+            id: $id
+        );
+
+        $mock
+            ->shouldReceive('scanResourceStream')
+            ->withAnyArgs()
+            ->andReturn($result);
     }
 
     /*****************************************************************
@@ -64,24 +84,70 @@ class ClamAvTest extends AntivirusTestCase
      */
     public function canScanCleanFile(): void
     {
-        $scanner = $this->scanner(function (MockInterface $mock) {
-            $result = new Result(
-                status: 'OK',
-                filename: $this->cleanFile(),
-                reason: null,
-                id: null
+        $file = $this->cleanFile();
+        $scanner = $this->scanner(function (MockInterface $mock) use($file) {
+            $this->mockDriverScanResult(
+                mock: $mock,
+                status: 'ok',
+                file: $file
             );
-
-            $mock
-                ->shouldReceive('scanResourceStream')
-                ->withAnyArgs()
-                ->andReturn($result);
         });
 
-        $result = $scanner->scan($this->cleanFile());
-
+        $result = $scanner->scan($file);
         ConsoleDebugger::output($result->toArray());
 
         $this->assertTrue($result->isOk());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ProfileNotFoundException
+     * @throws AntivirusException
+     */
+    public function canScanInfectedFile(): void
+    {
+        $file = $this->infectedFile();
+        $scanner = $this->scanner(function (MockInterface $mock) use($file) {
+            $this->mockDriverScanResult(
+                mock: $mock,
+                status: 'found',
+                file: $file
+            );
+        });
+
+        $result = $scanner->scan($file);
+        ConsoleDebugger::output($result->toArray());
+
+        $this->assertTrue($result->hasFailed());
+        $this->assertTrue($result->status()->hasInfection(), 'Status SHOULD indicate that infection was found');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ProfileNotFoundException
+     * @throws AntivirusException
+     */
+    public function canScanCompressedInfectedFile(): void
+    {
+        $file = $this->compressedInfectedFile();
+        $scanner = $this->scanner(function (MockInterface $mock) use($file) {
+            $this->mockDriverScanResult(
+                mock: $mock,
+                status: 'found',
+                file: $file
+            );
+        });
+
+        $result = $scanner->scan($file);
+        ConsoleDebugger::output($result->toArray());
+
+        $this->assertTrue($result->hasFailed());
+        $this->assertTrue($result->status()->hasInfection(), 'Status SHOULD indicate that infection was found');
     }
 }
