@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* `BaseValidationRule` abstraction in Validation package.
+* `BaseValidationRule` abstraction in Validation package (_an alternative to the deprecated `BaseRule` abstraction_).
 * `buffer()` method in `Stream` (_not yet available in interface_).
 * `openFileInfo()`, `openUploadedFile()`, `copyFrom()` and `filename()` methods in `FileStream` (_not yet available in interface_).
 * `Driver`, `MockableDriver`, `DriverProfile`, and `DriverOptions` concerns in Utils package.
