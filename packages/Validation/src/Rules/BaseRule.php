@@ -6,6 +6,8 @@ use Aedart\Contracts\Support\Helpers\Translation\TranslatorAware;
 use Illuminate\Contracts\Validation\Rule;
 
 /**
+ * @deprecated Since 7.4 - Use {@see BaseValidationRule} instead
+ *
  * Base Validation Rule
  *
  * Abstraction that offers common utility methods for
