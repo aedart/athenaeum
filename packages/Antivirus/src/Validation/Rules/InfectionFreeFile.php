@@ -38,10 +38,33 @@ class InfectionFreeFile extends BaseValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $scanner = Antivirus::profile($this->profile, $this->options);
+        $scanner = Antivirus::profile(
+            name: $this->profile(),
+            options: $this->options()
+        );
 
         if (!$scanner->isClean($value)) {
             $fail('athenaeum::antivirus.infected')->translate([ 'attribute' => $attribute ]);
         }
+    }
+
+    /**
+     * Get name of the antivirus profile to use
+     *
+     * @return string|null
+     */
+    public function profile(): string|null
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Get profile specific options
+     *
+     * @return array
+     */
+    public function options(): array
+    {
+        return $this->options;
     }
 }
