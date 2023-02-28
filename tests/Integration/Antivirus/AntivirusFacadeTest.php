@@ -7,6 +7,7 @@ use Aedart\Antivirus\Scanners\NullScanner;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
+use Illuminate\Support\Facades\Config;
 
 /**
  * AntivirusFacadeTest
@@ -27,6 +28,14 @@ class AntivirusFacadeTest extends AntivirusTestCase
      */
     public function canScan(): void
     {
+        // Configure antivirus profile, depending on if this is a live test or not...
+        if (!$this->isLive()) {
+            ConsoleDebugger::output('Antivirus default profile set to null');
+            Config::set('antivirus.default_scanner', 'null');
+        }
+
+        // -------------------------------------------------------------------------- //
+
         $file = $this->cleanFile();
 
         $result = Antivirus::scan($file);
