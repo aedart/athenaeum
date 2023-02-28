@@ -5,6 +5,8 @@ namespace Aedart\Validation\Rules\Concerns;
 use Aedart\Contracts\Validation\FailedState;
 
 /**
+ * @deprecated Since 7.4 - Will be removed in next major version
+ *
  * Concerns Validation Failure
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
