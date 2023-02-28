@@ -1,6 +1,6 @@
 {
     "name": "aedart/athenaeum-antivirus",
-    "description": "Antivirus adapters for Laravel",
+    "description": "Antivirus scanner for Laravel",
     "keywords": [
         "Athenaeum",
         "Antivirus",
