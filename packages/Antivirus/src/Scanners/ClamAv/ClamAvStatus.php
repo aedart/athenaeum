@@ -1,6 +1,6 @@
 <?php
 
-namespace Aedart\Antivirus\Scanners\Status;
+namespace Aedart\Antivirus\Scanners\ClamAv;
 
 use Aedart\Antivirus\Exceptions\UnsupportedStatusValue;
 use Aedart\Antivirus\Results\BaseStatus;

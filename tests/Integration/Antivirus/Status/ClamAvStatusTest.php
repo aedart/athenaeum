@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Integration\Antivirus\Status;
 
-use Aedart\Antivirus\Scanners\Status\ClamAvStatus;
+use Aedart\Antivirus\Scanners\ClamAv\ClamAvStatus;
 use Aedart\Contracts\Antivirus\Exceptions\UnsupportedStatusValueException;
 use Aedart\Contracts\Antivirus\Results\Status;
 use Aedart\Testing\Helpers\ConsoleDebugger;
