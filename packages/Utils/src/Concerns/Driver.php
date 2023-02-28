@@ -47,13 +47,11 @@ trait Driver
      *
      * @param  mixed  $newDriver
      *
-     * @return self
+     * @return mixed The new driver
      */
-    protected function swapDriver(mixed $newDriver): static
+    protected function swapDriver(mixed $newDriver): mixed
     {
-        $this->driver = $newDriver;
-
-        return $this;
+        return $this->driver = $newDriver;
     }
 
     /**

@@ -29,7 +29,7 @@ trait MockableDriver
         $mock = Mockery::mock(...$args)
             ->shouldAllowMockingProtectedMethods();
 
-        return $this->swapDriver($mock)->driver();
+        return $this->swapDriver($mock);
     }
 
     /**
@@ -45,7 +45,7 @@ trait MockableDriver
     {
         $spy = Mockery::spy(...$args);
 
-        return $this->swapDriver($spy)->driver();
+        return $this->swapDriver($spy);
     }
 
     /**
