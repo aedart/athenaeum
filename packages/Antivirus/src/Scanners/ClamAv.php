@@ -126,20 +126,6 @@ class ClamAv extends BaseScanner
     }
 
     /**
-     * Clear the current driver
-     *
-     * @return self
-     */
-    protected function clearDriver(): static
-    {
-        if (!$this->isDriverMocked()) {
-            $this->swapDriver(null);
-        }
-
-        return $this;
-    }
-
-    /**
      * @inheritDoc
      */
     protected function makeDriver(): AdaptedClient
