@@ -10,3 +10,8 @@ APP_ENV="testing"
 REDMINE_LIVE_TEST=false
 REDMINE_API_URI=https://your-redmine-url.com/
 REDMINE_TOKEN=your-redmine-api-token
+
+# Antivirus LIVE testing
+# When true, then real connections, native drivers, ...etc are used.
+# This can, for instance, be a real socket connection to ClamAV.
+ANTIVIRUS_LIVE_TEST=false

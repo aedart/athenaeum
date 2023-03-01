@@ -84,8 +84,7 @@ Behind the scene, [PHP's `fgetc()`](https://www.php.net/manual/en/function.fgetc
 $resource = fopen('php://memory', 'r+b');
 fwrite($resource, 'abc');
 
-$stream = FileStream::make($resource)
-    ->positionToStart();
+$stream = FileStream::make($resource);
 
 // Read all characters...
 $buffer = '';
@@ -96,6 +95,10 @@ foreach ($characters as $character) {
 
 echo $buffer; // abc
 ```
+
+::: tip Note
+_This method automatically rewinds the stream. See [`readCharacter()`](#single-character) as an alternative method._
+:::
 
 ## Read Lines
 
@@ -188,8 +191,7 @@ It returns an [`iterable`](https://www.php.net/manual/en/language.types.iterable
 $resource = fopen('php://memory', 'r+b');
 fwrite($resource, "a\nb\nc\n");
 
-$stream = FileStream::make($resource)
-    ->positionToStart();
+$stream = FileStream::make($resource);
 
 // Read all lines...
 $buffer = '';
@@ -200,6 +202,10 @@ foreach ($lines as $line) {
 
 echo $buffer; // abc
 ```
+
+::: tip Note
+_This method automatically rewinds the stream. See [`readLine()`](#single-line) as an alternative method._
+:::
 
 ::: tip Automatic Trim
 Unlike the `readLine()` method, `readAllLines()` automatically trims all lines before returning.
@@ -232,8 +238,7 @@ In the following example, each line is returned when either of these conditions 
 $resource = fopen('php://memory', 'r+b');
 fwrite($resource, "aa||bb||cc");
 
-$stream = FileStream::make($resource)
-    ->positionToStart();
+$stream = FileStream::make($resource);
 
 // Read all lines using a length / delimiter
 $buffer = '';
@@ -244,6 +249,10 @@ foreach ($iterator as $line) {
 
 echo $buffer; // aabbcc
 ```
+
+::: tip Note
+_This method automatically rewinds the stream. See [`readLineUntil()`](#single-line-until) as an alternative method._
+:::
 
 ## Scan Format
 
@@ -280,8 +289,7 @@ Use `readAllUsingFormat()` to scan entire stream's content according to specifie
 $resource = fopen('php://memory', 'r+b');
 fwrite($resource, "aa||\nbb||\ncc||\n");
 
-$stream = FileStream::make($resource)
-    ->positionToStart();
+$stream = FileStream::make($resource);
 
 // Scan according to format
 $buffer = '';
@@ -292,6 +300,10 @@ foreach ($all as $scanned) {
 
 echo $buffer; // aa||bb||cc||
 ```
+
+::: tip Note
+_This method automatically rewinds the stream. See [`scan()`](#scan-format) as an alternative method._
+:::
 
 ## Read Chunks
 
@@ -315,6 +327,10 @@ foreach ($chunks as $chunk) {
 
 echo $buffer; // abc
 ```
+
+::: tip Note
+_This method automatically rewinds the stream. See [`buffer()`](#buffer) as an alternative method._
+:::
 
 ## Read All using Callback
 
@@ -346,5 +362,28 @@ echo $buffer; // aabbcc
 ```
 
 ::: tip Note
-The position is automatically set to `0` (_the beginning of the stream_), when invoking the `readAllUsing()` method.
+_This method automatically rewinds the stream. See [`buffer()`](#buffer) as an alternative method._
 :::
+
+## Buffer
+
+_**Available since** `v7.4.x`_
+
+To read the stream in chunks, using a specific buffer size, use the `buffer()` method.
+It accepts the following arguments:
+
+* `int|null $length = null`: (_optional_) Maximum bytes to read from stream. By default, all bytes left are read.
+* `int $offset = 0`: (_optional_) The offset on where to start to reading from.
+* `int $bufferSize = BufferSizes::BUFFER_8KB`: (_optional_) Read buffer size of each chunk in bytes.
+
+```php
+$iterator = $stream->buffer(
+    length: 250,
+    offset: 22,
+    bufferSize: 50
+);
+
+foreach ($iterator as $chunk) {
+    echo $chunk;
+}
+```

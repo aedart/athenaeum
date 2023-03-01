@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Antivirus package, with a default [ClamAV](https://www.clamav.net/) scanner and validation rule for file uploads.
+* `BaseValidationRule` abstraction in Validation package (_an alternative to the deprecated `BaseRule` abstraction_).
+* `buffer()` method in `Stream` (_not yet available in interface_).
+* `openFileInfo()`, `openUploadedFile()`, `copyFrom()` and `filename()` methods in `FileStream` (_not yet available in interface_).
+* `Driver`, `MockableDriver`, `DriverProfile`, and `DriverOptions` concerns in Utils package.
+
+### Changed
+
+* Renamed internal `performCopy()` to `copySourceToTarget()` in `Copying` concern in Stream package.
+* Refactored internal `outputSingleRange()` method in `DownloadStream`. Now uses stream `buffer()` method.
+* Improved method description of `copy()` and `copyTo()` methods, in `FileStream`.
+* Improved documentation regarding which read methods automatically rewinds the stream. 
+
+### Fixed
+
+* Incorrect "is readable" check of source stream in `copy()` and `copyTo()`, in `FileStream`.
+* Incorrect description of `append()` method in documentation, regarding PSR-7 stream detaching.
+
+### Deprecated
+
+* All concerns in the `\Aedart\Validation\Rules\Concerns\*` namespace. These will be removed in the next major version. 
+* `\Aedart\Contracts\Validation\FailedState`. Will be removed in the next major version.
+* `\Aedart\Validation\Rules\BaseRule`. Will be removed in the next major version. Use `\Aedart\Validation\Rules\BaseValidationRule` instead. 
+
 ## [7.3.0] - 2023-02-23
 
 ### Added
