@@ -19,7 +19,7 @@ interface Box
      *
      * @return self
      */
-    public function setWith(?int $width = null);
+    public function setWidth(?int $width = null);
 
     /**
      * Get width

@@ -20,7 +20,7 @@ class Box implements BoxInterface
     /**
      * {@inheritdoc}
      */
-    public function setWith(?int $width = null)
+    public function setWidth(?int $width = null)
     {
         $this->width = $width;
 

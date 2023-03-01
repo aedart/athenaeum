@@ -67,10 +67,51 @@ $stream = Stream::makeFrom($psrStream);
 ```
 
 ::: warning
-
 The `makeFrom()` will automatically detach the given `StreamInterface` component's underlying `resource`.
 This means that you will no longer be able to use the provided PSR stream instance.
+:::
 
+### SplFileInfo
+
+_**Available since** `v7.4.x`_
+
+When working with uploaded files, e.g. from Laravel or Symfony (_[`SplFileInfo` instances](https://www.php.net/manual/en/class.splfileinfo.php)_), then you can open a file stream using the `openFileInfo()` method.
+
+```php
+$stream = FileStream::openFileInfo($uploadedFile, 'r');
+```
+
+::: tip Filename
+For Laravel and Symfony, the uploaded file's `getClientOriginalName()` return value is used as the stream's [`filename()` value](./filename.md).
+:::
+
+### PSR Uploaded File
+
+_**Available since** `v7.4.x`_
+
+You may also create a file stream instance for an existing [PSR-7 Uploaded File](https://www.php-fig.org/psr/psr-7/#36-psrhttpmessageuploadedfileinterface) instance, using the `openUploadedFile()` method.
+
+```php
+$stream = FileStream::openUploadedFile($psrUploadedFile);
+```
+
+::: warning
+Unless specified otherwise, the `openUploadedFile()` method will automatically detach the uploaded file's underlying stream.
+If you wish to avoid this, then set the `$asCopy` argument to true (_defaults to false_).
+
+```php
+// Copies the PSR stream into the file stream...
+$stream = FileStream::openUploadedFile(
+    file: $psrUploadedFile,
+    asCopy: true
+);
+```
+
+For more information, see the source code of `openUploadedFile()` and see also [copy from documentation](./writing.md#copy-from).
+:::
+
+::: tip Filename
+The uploaded file's `getClientFilename()` return value is used as the stream's [`filename()` value](./filename.md).
 :::
 
 ### Lazy

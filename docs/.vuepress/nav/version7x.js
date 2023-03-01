@@ -27,6 +27,28 @@ module.exports.sidebar = function(){
             ]
         },
         {
+            title: 'Antivirus',
+            collapsable: true,
+            children: [
+                'antivirus/',
+                'antivirus/install',
+                'antivirus/setup',
+                'antivirus/usage',
+                {
+                    title: 'Scanners',
+                    collapsable: true,
+                    children: [
+                        'antivirus/scanners/',
+                        'antivirus/scanners/clamav',
+                        'antivirus/scanners/null',
+                        'antivirus/scanners/custom',
+                    ]
+                },
+                'antivirus/events',
+                'antivirus/psr',
+            ]
+        },
+        {
             title: 'Audit',
             collapsable: true,
             children: [
@@ -536,6 +558,7 @@ module.exports.sidebar = function(){
                         'streams/usage/flush',
                         'streams/usage/hash',
                         'streams/usage/mime-type',
+                        'streams/usage/filename',
                         'streams/usage/output',
                         'streams/usage/locking',
                         'streams/usage/transactions',

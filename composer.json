@@ -12,6 +12,7 @@
         "php": "^8.1",
         "ext-fileinfo": "*",
         "ext-json": "*",
+        "ext-sockets": "*",
         "composer-runtime-api": "^2.0.0",
         "dragonmantank/cron-expression": "^3.3",
         "fakerphp/faker": "^v1.21.0",
@@ -29,6 +30,7 @@
         "illuminate/http": "^v10.0.0",
         "illuminate/pipeline": "^v10.0.0",
         "illuminate/support": "^v10.0.0",
+        "illuminate/translation": "^v10.0.0",
         "illuminate/validation": "^v10.0.0",
         "league/flysystem": "^3.12.2",
         "mockery/mockery": "1.5.*",
@@ -40,11 +42,11 @@
         "shrikeh/teapot": "^2.3.1",
         "symfony/console": "^v6.2.5",
         "symfony/finder": "^6.2",
-        "vlucas/phpdotenv": "^5.5.0"
+        "vlucas/phpdotenv": "^5.5.0",
+        "xenolope/quahog": "^3.0"
     },
     "require-dev": {
         "ext-curl": "*",
-        "ext-sockets": "*",
         "bamarni/composer-bin-plugin": "^1.8.2",
         "codeception/codeception": "^5.0.9",
         "codeception/module-asserts": "^3.0.0",
@@ -70,6 +72,7 @@
         "psr-4": {
             "Aedart\\": "src",
             "Aedart\\Acl\\": "packages/Acl/src",
+            "Aedart\\Antivirus\\": "packages/Antivirus/src",
             "Aedart\\Audit\\": "packages/Audit/src",
             "Aedart\\Auth\\": "packages/Auth/src",
             "Aedart\\Circuits\\": "packages/Circuits/src",
@@ -110,6 +113,7 @@
     },
     "replace": {
         "aedart/athenaeum-acl": "7.3.0",
+        "aedart/athenaeum-antivirus": "7.3.0",
         "aedart/athenaeum-audit": "7.3.0",
         "aedart/athenaeum-auth": "7.3.0",
         "aedart/athenaeum-circuits": "7.3.0",

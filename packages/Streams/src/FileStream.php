@@ -16,6 +16,8 @@ use Aedart\Streams\Exceptions\CannotOpenStream;
 use Aedart\Streams\Exceptions\InvalidStreamResource;
 use Aedart\Streams\Exceptions\StreamException;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
+use Psr\Http\Message\UploadedFileInterface as PsrUploadedFile;
+use SplFileInfo;
 use Throwable;
 
 /**
@@ -54,6 +56,85 @@ class FileStream extends Stream implements
         }
 
         return static::make($stream);
+    }
+
+    /**
+     * Open a new file stream for a PHP SplFileInfo instance
+     *
+     * Method attempts to set `filename` in meta, if SplFileInfo instance
+     * has a "getClientOriginalName" (Laravel / Symfony Uploaded File instance).
+     *
+     * @see filename()
+     * @see https://www.php.net/manual/en/class.splfileinfo.php
+     *
+     * @param  SplFileInfo  $file
+     * @param  string  $mode
+     * @param  bool  $useIncludePath  [optional]
+     * @param  resource|null  $context  [optional]
+     *
+     * @return static
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public static function openFileInfo(SplFileInfo $file, string $mode, bool $useIncludePath = false, $context = null): static
+    {
+        $stream = static::open(
+            filename: $file->getRealPath(),
+            mode: $mode,
+            useIncludePath: $useIncludePath,
+            context: $context
+        );
+
+        // In case that a Laravel / Symfony Uploaded File instance is given, then
+        // we can obtain an "original" filename, which should be used instead.
+        if (method_exists($file, 'getClientOriginalName')) {
+            $stream->meta()->set('filename', $file->getClientOriginalName());
+        }
+
+        return $stream;
+    }
+
+    /**
+     * Open a new file stream for {@see PsrUploadedFile}
+     *
+     * **Warning**: _Method will {@see detach()} underlying resource from given stream,
+     * before creating a new file stream instance, **unless** `$asCopy` is set to true._
+     *
+     * Method attempts to set `filename` in meta, from given Uploaded File's
+     * {@see PsrUploadedFile::getClientFilename}.
+     *
+     * @see filename()
+     *
+     * @param PsrUploadedFile $file
+     * @param bool $asCopy [optional] If true, then uploaded file's stream is copied (original stream is not detached).
+     * @param string $mode [optional] Only applicable if `$asCopy` is true.
+     * @param int|null $maximumMemory [optional] Maximum amount of bytes to keep in memory before writing to a temporary
+     *                                file. If none specified, then defaults to 2 Mb. Only applicable if `$asCopy` is true.
+     * @param int $bufferSize [optional] Read/Write size of copied chunk in bytes. Only applicable if `$asCopy` is true.
+     * @param resource|null $context [optional] Only applicable if `$asCopy` is true.
+     *
+     * @return static
+     *
+     * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
+     */
+    public static function openUploadedFile(
+        PsrUploadedFile $file,
+        bool $asCopy = false,
+        string $mode = 'r+b',
+        int|null $maximumMemory = null,
+        int $bufferSize = BufferSizes::BUFFER_8KB,
+        $context = null
+    ): static {
+        // Detach or copy uploaded file's stream
+        $stream = (!$asCopy)
+            ? static::makeFrom($file->getStream())
+            : static::openTemporary($mode, $maximumMemory, $context)
+                ->copyFrom(source: $file->getStream(), bufferSize: $bufferSize);
+
+        // Set the "client" filename in meta...
+        $stream->meta()->set('filename', $file->getClientFilename());
+
+        return $stream;
     }
 
     /**
@@ -228,6 +309,30 @@ class FileStream extends Stream implements
         }
 
         return $this;
+    }
+
+    /**
+     * Returns filename, if available
+     *
+     * If a 'filename' has been specified in the stream's meta,
+     * then it will be favoured. Otherwise, the basename of
+     * {@see uri()} will be returned, if its known.
+     *
+     * @return string|null
+     */
+    public function filename(): string|null
+    {
+        $meta = $this->getMetadata('filename');
+        if (isset($meta)) {
+            return $meta;
+        }
+
+        $uri = $this->uri();
+        if ($uri === 'unknown') {
+            return null;
+        }
+
+        return basename($uri);
     }
 
     /*****************************************************************
