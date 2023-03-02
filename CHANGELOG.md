@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Change
+
+* Reduced `sample_size` to 512 bytes, for "file-info" in tests (_Now in accordance with official documentation_).
+
 ## [7.4.0] - 2023-03-01
 
 ### Added
