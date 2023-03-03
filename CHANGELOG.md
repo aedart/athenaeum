@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Change
+
+* Reduced `sample_size` to 512 bytes, for "file-info" in tests, for the Mime Types package (_Now in accordance with official documentation_).
+* Improved documentation regarding supported types, for the Configuration package.
+
 ## [7.4.0] - 2023-03-01
 
 ### Added

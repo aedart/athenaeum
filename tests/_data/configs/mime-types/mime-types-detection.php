@@ -41,7 +41,8 @@ return [
         'file-info' => [
             'driver' => \Aedart\MimeTypes\Drivers\FileInfoSampler::class,
             'options' => [
-                'sample_size' => 1048576,
+//                'sample_size' => 1048576,
+                'sample_size' => \Aedart\Contracts\Streams\BufferSizes::BUFFER_1KB / 2,
                 'magic_database' => null
             ]
         ]

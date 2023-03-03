@@ -12,7 +12,7 @@ A few of the offered packages are:
 
 **[Config](https://aedart.github.io/athenaeum/archive/current/config/)**
 
-_A configuration loader, supporting *.ini, *.json, *.php, *.yml and *.toml._
+_A configuration loader, supporting *.ini, *.json, *.php, *.yml, *.toml, and *.neon._
 
 **[Core](https://aedart.github.io/athenaeum/archive/current/core/)**
 
