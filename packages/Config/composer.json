@@ -9,7 +9,8 @@
         "Json",
         "PHP Array",
         "yaml",
-        "toml"
+        "toml",
+        "neon"
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
