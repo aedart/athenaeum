@@ -68,7 +68,8 @@ class DatabaseAdapter implements
         protected string $filesTable,
         protected string $contentsTable,
         ConnectionInterface|null $connection = null,
-    ) {
+    )
+    {
         $this
             ->setDb($connection)
             ->setPathPrefix('');
@@ -123,7 +124,7 @@ class DatabaseAdapter implements
 
             $this->transaction(function (ConnectionInterface $connection) use ($path, $contents, $config) {
                 // Set connection in config, so that it can be passed further.
-                $config = $config->extend([ 'connection' => $connection ]);
+                $config = $config->extend(['connection' => $connection]);
 
                 // Wrap resource into stream and rewind. This will automatically
                 // fail if stream is not seekable.
@@ -348,9 +349,9 @@ class DatabaseAdapter implements
             $result = $connection
                 ->table($this->filesTable)
                 ->upsert(
-                    values: $records,
-                    uniqueBy: [ 'path' ],
-                    update: [
+                values: $records,
+                uniqueBy: ['path'],
+                update: [
                         'level',
                         'visibility',
                         'last_modified',
@@ -371,8 +372,8 @@ class DatabaseAdapter implements
      */
     public function setVisibility(string $path, string $visibility): void
     {
-        if (!in_array($visibility, Visibility::ALLOWED)) {
-            throw InvalidVisibilityProvided::withVisibility($visibility, implode('or ', Visibility::ALLOWED));
+        if (!in_array($visibility, Visibility::allowed())) {
+            throw InvalidVisibilityProvided::withVisibility($visibility, implode('or ', Visibility::allowed()));
         }
 
         try {
@@ -383,7 +384,7 @@ class DatabaseAdapter implements
                 ->table($this->filesTable)
                 ->where('path', $path)
                 ->limit(1)
-                ->update([ 'visibility' => $visibility ]);
+                ->update(['visibility' => $visibility]);
 
             if ($affected === 0) {
                 throw new RuntimeException(sprintf('Visibility was not changed. Unable to find file or directory: %s', $path));
@@ -455,10 +456,10 @@ class DatabaseAdapter implements
 
             // Otherwise, we need to rehash entire file content...
             return $this->resolveContentHash(
-                stream: $this->openStreamFrom(
+            stream: $this->openStreamFrom(
                     $this->readStream($path)
                 ),
-                config: $config
+            config: $config
             );
         } catch (Throwable $e) {
             throw new UnableToProvideChecksum($e->getMessage(), $path, $e);
@@ -669,7 +670,7 @@ class DatabaseAdapter implements
                 ->when($withContents, function (Builder $query) use ($files, $contents) {
                     // TODO: Select / Bind PDO::PARAM_LOB for file content, when requested.
                     // TODO: @see https://www.php.net/manual/en/pdo.lobs.php
-
+    
                     $query->join($contents, "{$files}.content_hash", '=', "{$contents}.hash");
                 })
 
@@ -763,7 +764,8 @@ class DatabaseAdapter implements
         string $directory = '',
         bool $deep = false,
         Config|null $config = null
-    ): iterable {
+    ): iterable
+    {
         try {
             $connection = $this->resolveConnection($config);
 
@@ -780,22 +782,26 @@ class DatabaseAdapter implements
                         $query
                             ->where('path', '=', $path)
                             ->orWhere('path', 'LIKE', "{$path}%");
-                    })
+                    }
+                    )
 
-                    // When deep listing requested
-                    ->when($deep, function (Builder $query) use ($path) {
-                        $query->where('level', '>=', $this->directoryLevel($path) + 1);
-                    }, function (Builder $query) use ($path) {
-                        // Otherwise...
-                        $query->where('level', $this->directoryLevel($path) + 1);
-                    });
+                        // When deep listing requested
+                        ->when($deep, function (Builder $query) use ($path) {
+                                $query->where('level', '>=', $this->directoryLevel($path) + 1);
+                            }
+                            , function (Builder $query) use ($path) {
+                                    // Otherwise...
+                                    $query->where('level', $this->directoryLevel($path) + 1);
+                                }
+                        );
                 }, function (Builder $query) use ($deep) {
-                    $query->when(!$deep, function (Builder $query) {
-                        // When no directory is requested ~ root level, ensure that we only list
-                        // those placed at level 0 when "deep" isn't requested
-                        $query->where('level', 0);
-                    });
-                })
+                $query->when(!$deep, function (Builder $query) {
+                    // When no directory is requested ~ root level, ensure that we only list
+                    // those placed at level 0 when "deep" isn't requested
+                    $query->where('level', 0);
+                }
+                );
+            })
                 ->orderBy('path', 'asc')
                 ->get();
 
@@ -878,9 +884,9 @@ class DatabaseAdapter implements
             ->resolveConnection($config)
             ->table($this->contentsTable)
             ->upsert(
-                values: [ $record ],
-                uniqueBy: [ 'hash' ],
-                update: [ 'reference_count' => $this->makeIncrementExpression(1, $config) ]
+            values: [$record],
+            uniqueBy: ['hash'],
+            update: ['reference_count' => $this->makeIncrementExpression(1, $config)]
             );
 
         if ($affected === 0) {

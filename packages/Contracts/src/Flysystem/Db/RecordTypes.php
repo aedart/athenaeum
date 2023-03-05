@@ -10,23 +10,23 @@ use League\Flysystem\StorageAttributes;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Flysystem\Db
  */
-interface RecordTypes
+enum RecordTypes
 {
     /**
      * Directory record type
      */
-    public const DIRECTORY = StorageAttributes::TYPE_DIRECTORY;
+    case DIRECTORY = StorageAttributes::TYPE_DIRECTORY;
 
     /**
      * File record type
      */
-    public const FILE = StorageAttributes::TYPE_FILE;
+    case FILE = StorageAttributes::TYPE_FILE;
 
     /**
      * List of supported record types
      */
-    public const ALLOWED = [
-        self::DIRECTORY,
-        self::FILE
-    ];
+    public static function allowed(): array
+    {
+        return [self::DIRECTORY, self::FILE];
+    }
 }

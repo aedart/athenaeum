@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration {
+return new class () extends Migration {
     /**
      * Table name where files and directories are to
      * be stored
@@ -33,7 +33,7 @@ return new class() extends Migration {
             $table->id();
 
             $table
-                ->enum('type', RecordTypes::ALLOWED)
+                ->enum('type', RecordTypes::allowed())
                 ->comment('Whether this is a file or directory');
 
             // Materialized Path pattern
@@ -61,8 +61,8 @@ return new class() extends Migration {
                 ->comment('File media type / mimetype');
 
             $table
-                ->enum('visibility', Visibility::ALLOWED)
-                ->default(Visibility::PRIVATE)
+                ->enum('visibility', Visibility::allowed())
+                ->default(Visibility::PRIVATE )
                 ->comment('File or directory visibility');
 
             $table

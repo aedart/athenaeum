@@ -62,7 +62,7 @@ return new class extends Migration
                 ->comment('File media type / mimetype');
 
             $table
-                ->enum('visibility', Visibility::ALLOWED)
+                ->enum('visibility', Visibility::allowed())
                 ->default(Visibility::PRIVATE)
                 ->comment('File or directory visibility');
 

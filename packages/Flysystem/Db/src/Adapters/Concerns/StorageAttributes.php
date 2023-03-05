@@ -36,11 +36,13 @@ trait StorageAttributes
         return match ($record['type']) {
             RecordTypes::FILE => $this->makeFileAttribute($record),
             RecordTypes::DIRECTORY => $this->makeDirectoryAttribute($record),
-            default => throw new LogicException(sprintf(
-                'Unable to normalise record of type %s. Allowed types: %s',
-                $record['type'],
-                implode(', ', RecordTypes::ALLOWED)
-            ))
+            default => throw new LogicException(
+                sprintf(
+                    'Unable to normalise record of type %s. Allowed types: %s',
+                    $record['type'],
+                    implode(', ', RecordTypes::allowed())
+                )
+            )
         };
     }
 
