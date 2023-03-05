@@ -25,8 +25,8 @@ enum Visibility
     /**
      * Allowed visibility types
      */
-    case ALLOWED = [
-    self::PUBLIC,
-    self::PRIVATE
-    ];
+    public static function allowed(): array
+    {
+        return [self::PUBLIC , self::PRIVATE ];
+    }
 }
