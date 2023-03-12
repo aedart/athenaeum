@@ -39,6 +39,10 @@ use Aedart\Support\Helpers\Mail\MailManagerTrait;
 use Aedart\Support\Helpers\Mail\MailQueueTrait;
 use Aedart\Support\Helpers\Notifications\NotificationDispatcherTrait;
 use Aedart\Support\Helpers\Notifications\NotificationFactoryTrait;
+use Aedart\Support\Helpers\Password\PasswordBrokerManagerTrait;
+use Aedart\Support\Helpers\Password\PasswordBrokerTrait;
+use Aedart\Support\Helpers\Pipeline\PipelineHubTrait;
+use Aedart\Support\Helpers\Pipeline\PipelineTrait;
 use Aedart\Support\Helpers\Queue\QueueFactoryTrait;
 use Aedart\Support\Helpers\Queue\QueueMonitorTrait;
 use Aedart\Support\Helpers\Queue\QueueTrait;
@@ -181,9 +185,17 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'MailerManagerTrait' => [ MailManagerTrait::class ],
             'MailQueueTrait' => [ MailQueueTrait::class ],
 
+            // Password
+            'PasswordBrokerTrait' => [ PasswordBrokerTrait::class ],
+            'PasswordBrokerManagerTrait' => [ PasswordBrokerManagerTrait::class ],
+
             // Notifications
             'NotificationDispatcherTrait' => [ NotificationDispatcherTrait::class ],
             'NotificationFactoryTrait' => [ NotificationFactoryTrait::class ],
+
+            // Pipeline
+            'PipelineTrait' => [ PipelineTrait::class ],
+            'PipelineHubTrait' => [ PipelineHubTrait::class ],
 
             // Queue
             'QueueFactoryTrait' => [ QueueFactoryTrait::class ],
