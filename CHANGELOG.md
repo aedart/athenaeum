@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Change
 
+* Minimum required version of Laravel packages changed to `v10.3`.
 * Reduced `sample_size` to 512 bytes, for "file-info" in tests, for the Mime Types package (_Now in accordance with official documentation_).
 * Improved documentation regarding supported types, for the Configuration package.
 

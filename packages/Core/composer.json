@@ -27,8 +27,8 @@
         "aedart/athenaeum-service": "^7.5",
         "aedart/athenaeum-support": "^7.5",
         "aedart/athenaeum-utils": "^7.5",
-        "illuminate/cache": "^v10.0.0",
-        "illuminate/filesystem": "^v10.0.0",
+        "illuminate/cache": "^v10.3.0",
+        "illuminate/filesystem": "^v10.3.0",
         "psr/log": "^3.0.0",
         "symfony/console": "^v6.2.5",
         "vlucas/phpdotenv": "^5.5.0"
