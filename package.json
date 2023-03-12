@@ -7,8 +7,8 @@
         "vuepress-plugin-element-tabs": "^0.2.8"
     },
     "scripts": {
-        "docs:dev": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider ./node_modules/.bin/vuepress dev docs",
-        "docs:build": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider ./node_modules/.bin/vuepress build docs",
-        "docs:build-prod": "cross-env NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider ./node_modules/.bin/vuepress build docs"
+        "docs:dev": "cross-env NODE_ENV=development ./node_modules/.bin/vuepress dev docs",
+        "docs:build": "cross-env NODE_ENV=development ./node_modules/.bin/vuepress build docs",
+        "docs:build-prod": "cross-env NODE_ENV=production ./node_modules/.bin/vuepress build docs"
     }
 }
