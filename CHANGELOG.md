@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* [`Pipeline` and `PipelineHub`](https://laravel.com/docs/10.x/helpers#pipeline) aware-of helpers, in Support package.
+* `PasswordBroker` and `PasswordBrokerManager` aware-of helpers, in Support package.
+
 ### Change
 
 * Minimum required version of Laravel packages changed to `v10.3`.
