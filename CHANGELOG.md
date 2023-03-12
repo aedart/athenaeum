@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.5.0] - 2023-03-12
+
 ### Added
 
 * [`Pipeline` and `PipelineHub`](https://laravel.com/docs/10.x/helpers#pipeline) aware-of helpers, in Support package.
@@ -1092,7 +1094,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.4.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.5.0...HEAD
+[7.5.0]: https://github.com/aedart/athenaeum/compare/7.4.0...7.5.0
 [7.4.0]: https://github.com/aedart/athenaeum/compare/7.3.0...7.4.0
 [7.3.0]: https://github.com/aedart/athenaeum/compare/7.2.0...7.3.0
 [7.2.0]: https://github.com/aedart/athenaeum/compare/7.1.0...7.2.0
