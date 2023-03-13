@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* `asSingleModel()` and `asMultipleModels()` shortcut methods for determining how to format loaded relation, in `BaseRelationReference`.
+
 ## [7.5.0] - 2023-03-12
 
 ### Added

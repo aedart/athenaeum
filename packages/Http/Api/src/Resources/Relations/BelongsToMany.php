@@ -20,6 +20,6 @@ class BelongsToMany extends BaseRelationReference
         parent::__construct($resource, $relation);
 
         // Default formatting is the same as for a "has many" relation reference
-        $this->whenLoaded([$this, 'formatMultipleLoadedModels']);
+        $this->asMultipleModels();
     }
 }

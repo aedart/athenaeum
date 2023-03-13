@@ -20,6 +20,6 @@ class HasOne extends BaseRelationReference
         parent::__construct($resource, $relation);
 
         // Default formatting is the same as for a "belongs to" relation reference
-        $this->whenLoaded([$this, 'formatSingleLoadedModel']);
+        $this->asSingleModel();
     }
 }

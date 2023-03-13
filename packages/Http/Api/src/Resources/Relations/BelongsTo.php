@@ -20,6 +20,6 @@ class BelongsTo extends BaseRelationReference
         parent::__construct($resource, $relation);
 
         // Set the default formatting for a single related model...
-        $this->whenLoaded([$this, 'formatSingleLoadedModel']);
+        $this->asSingleModel();
     }
 }
