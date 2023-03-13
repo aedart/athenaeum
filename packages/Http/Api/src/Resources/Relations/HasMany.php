@@ -20,6 +20,6 @@ class HasMany extends BaseRelationReference
         parent::__construct($resource, $relation);
 
         // Use default multiple models formatting
-        $this->whenLoaded([$this, 'formatMultipleLoadedModels']);
+        $this->asMultipleModels();
     }
 }

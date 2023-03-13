@@ -626,10 +626,10 @@ class MyCustomAddressRelation extends BaseRelationReference
         parent::__construct($resource, 'address'); // 2nd arg. is name of relation!
         
         // Example: Use existing "default" formatting callback... 
-        $this->whenLoaded([$this, 'formatSingleLoadedModel']);
+        $this->asSingleModel();
         
         // Example: always show the resource type:
-        $this->withoutResourceType();
+        $this->mustShowResourceType();
     }
 }
 ```

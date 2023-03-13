@@ -171,6 +171,32 @@ abstract class BaseRelationReference implements RelationReference
      ****************************************************************/
 
     /**
+     * Formats a single relation model, when relation is loaded
+     *
+     * @see whenLoaded
+     * @see formatSingleLoadedModel
+     *
+     * @return self
+     */
+    public function asSingleModel(): static
+    {
+        return $this->whenLoaded([$this, 'formatSingleLoadedModel']);
+    }
+
+    /**
+     * Formats multiple related models, when relation is loaded
+     *
+     * @see whenLoaded
+     * @see formatMultipleLoadedModels
+     *
+     * @return self
+     */
+    public function asMultipleModels(): static
+    {
+        return $this->whenLoaded([$this, 'formatMultipleLoadedModels']);
+    }
+
+    /**
      * Formats a single relation model as this reference's value
      *
      * @param  Model  $related
