@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* `getModel()` is now able to return assigned model from new `usingModel()` method, in `BaseRelationReference`.
+
 ## [7.6.0] - 2023-03-13
 
 ### Added
