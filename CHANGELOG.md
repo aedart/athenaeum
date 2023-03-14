@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.7.1] - 2023-03-14
+
+### Fixed
+
+* Call to undefined `getStatusCode()`, when no Http status provided and given exception is not instance of `HttpExceptionInterface`, in `ApiErrorResponse::makeFor()`. 
+
 ## [7.7.0] - 2023-03-13
 
 ### Changed
@@ -1106,7 +1112,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.7.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.7.1...HEAD
+[7.7.1]: https://github.com/aedart/athenaeum/compare/7.7.0...7.7.1
 [7.7.0]: https://github.com/aedart/athenaeum/compare/7.6.0...7.7.0
 [7.6.0]: https://github.com/aedart/athenaeum/compare/7.5.0...7.6.0
 [7.5.0]: https://github.com/aedart/athenaeum/compare/7.4.0...7.5.0

@@ -55,9 +55,11 @@ class ApiErrorResponse extends JsonResponse
         $isHttpException = static::isHttpException($e);
 
         // Resolve Http Status Code
-        $status = $status ?? $isHttpException
-            ? $e->getStatusCode()
-            : HttpStatus::INTERNAL_SERVER_ERROR;
+        if (!isset($status) && $isHttpException) {
+            $status = $e->getStatusCode();
+        } elseif (!isset($status)) {
+            $status = HttpStatus::INTERNAL_SERVER_ERROR;
+        }
 
         // Resolve status text, based on status code
         $message = Response::$statusTexts[$status];

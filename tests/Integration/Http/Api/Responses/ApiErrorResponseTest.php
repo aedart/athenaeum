@@ -111,4 +111,22 @@ class ApiErrorResponseTest extends ApiResourcesTestCase
 
         $this->assertSame(HttpStatus::NOT_FOUND, $response->status(), 'Incorrect status');
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function usesSpecifiedHttpStatusWhenGiven(): void
+    {
+        $ex = new NotFoundHttpException('record was not found');
+
+        $request = Request::create('something');
+        $expected = HttpStatus::NOT_MODIFIED;
+        $response = ApiErrorResponse::makeFor($ex, $expected, $request);
+
+        // --------------------------------------------------------------- //
+
+        $this->assertSame($expected, $response->status(), 'Incorrect status');
+    }
 }
