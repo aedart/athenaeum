@@ -65,7 +65,7 @@ public function authorize()
 ```
 
 The `authorize()` method is invoked before your regular validation is performed.
-But, sometimes it might not be possible or feasible to perform authorisation checks data validation.
+But, sometimes it might not be possible or feasible to perform authorisation checks before data validation.
 In such situations, you can leverage the `authorizeAfterValidation()` method.
 
 ```php
@@ -80,8 +80,6 @@ public function authorizeAfterValidation(): bool
 ```
 
 The `authorizeAfterValidation()` method is automatically invoked after the `after()` method has executed.
-
-**Note**: _Usually, authorisation check are performed **before** request preconditions are evaluated._
 
 ## Http Conditional Requests
 

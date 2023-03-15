@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* `$record` argument ignored when authorizing found record, in `ShowSingleResourceRequest`, `UpdateSingleResourceRequest` and `DeleteSingleResourceRequest`. 
+
 ## [7.7.1] - 2023-03-14
 
 ### Fixed

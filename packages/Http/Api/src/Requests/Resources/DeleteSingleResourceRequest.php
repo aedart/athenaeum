@@ -18,7 +18,7 @@ abstract class DeleteSingleResourceRequest extends ShowSingleResourceRequest
      */
     public function authorizeFoundRecord(Model $record): bool
     {
-        return $this->allows('destroy', $this->record);
+        return $this->allows('destroy', $record);
     }
 
     /**

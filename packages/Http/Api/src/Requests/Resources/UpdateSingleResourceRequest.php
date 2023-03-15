@@ -17,6 +17,6 @@ abstract class UpdateSingleResourceRequest extends ShowSingleResourceRequest
      */
     public function authorizeFoundRecord(Model $record): bool
     {
-        return $this->allows('update', $this->record);
+        return $this->allows('update', $record);
     }
 }

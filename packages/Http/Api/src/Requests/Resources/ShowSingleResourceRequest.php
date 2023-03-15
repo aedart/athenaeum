@@ -25,7 +25,7 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest implements 
      */
     public function authorizeFoundRecord(Model $record): bool
     {
-        return $this->allows('show', $this->record);
+        return $this->allows('show', $record);
     }
 
     /**
