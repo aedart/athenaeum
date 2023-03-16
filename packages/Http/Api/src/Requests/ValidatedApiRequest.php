@@ -27,13 +27,17 @@ abstract class ValidatedApiRequest extends FormRequest
         return [];
     }
 
-//    /**
-//     * @inheritDoc
-//     */
-//    protected function prepareForValidation()
-//    {
-//        // N/A
-//    }
+    /**
+     * @inheritDoc
+     */
+    protected function prepareForValidation()
+    {
+        // Validate route parameters, if required...
+        // @see \Aedart\Http\Api\Requests\Concerns\RouteParametersValidation
+        if (method_exists($this, 'validateRouteParameters')) {
+            $this->validateRouteParameters();
+        }
+    }
 
     /**
      * Perform post request data validation, e.g. business logic validation
