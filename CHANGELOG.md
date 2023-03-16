@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* `RouteParametersValidation` concern, in Http Api package.
+
 ## [7.7.2] - 2023-03-15
 
 ### Fixed
