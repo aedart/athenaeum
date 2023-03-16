@@ -352,6 +352,7 @@ module.exports.sidebar = function(){
                                 'http/api/requests/delete-single',
                                 'http/api/requests/list-related',
                                 'http/api/requests/process-multiple',
+                                'http/api/requests/helpers',
                             ]
                         },
                         {

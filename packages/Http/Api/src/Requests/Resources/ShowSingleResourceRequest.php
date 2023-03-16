@@ -35,6 +35,8 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest implements 
      */
     protected function prepareForValidation()
     {
+        parent::prepareForValidation();
+
         // Attempt to find and prepare requested record, before the validation
         // is applied. This allows certain rules, like `Rule::unique()->ignore()`
         // to be applied safely.
