@@ -102,7 +102,7 @@ class ShowProfile extends ValidatedApiRequest
         // 2) Evaluate request preconditions for "record"
         $resource = $this->evaluateRequestPreconditions(
             record: $model,
-            etag: $model->getStrongEtag(),
+            etag: fn () => $model->getStrongEtag(),
             lastModifiedDate: $model->updated_at
         );
     }
