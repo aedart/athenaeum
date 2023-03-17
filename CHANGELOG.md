@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.9.1] - 2023-03-17
+
+### Fixed
+
+* Default Eloquent Etag is not unique after it has been updated, due to `updated_at` not correctly obtained, in `EloquentEtag` concern.  
+
 ## [7.9.0] - 2023-03-17
 
 ### Changed
@@ -1131,7 +1137,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.9.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.9.1...HEAD
+[7.9.1]: https://github.com/aedart/athenaeum/compare/7.9.0...7.9.1
 [7.9.0]: https://github.com/aedart/athenaeum/compare/7.8.0...7.9.0
 [7.8.0]: https://github.com/aedart/athenaeum/compare/7.7.2...7.8.0
 [7.7.2]: https://github.com/aedart/athenaeum/compare/7.7.1...7.7.2
