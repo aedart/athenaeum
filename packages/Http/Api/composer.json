@@ -18,10 +18,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "aedart/athenaeum-contracts": "^7.9.1",
-        "aedart/athenaeum-etags": "^7.9.1",
-        "aedart/athenaeum-support": "^7.9.1",
-        "aedart/athenaeum-validation": "^7.9.1",
+        "aedart/athenaeum-contracts": "^7.10",
+        "aedart/athenaeum-etags": "^7.10",
+        "aedart/athenaeum-support": "^7.10",
+        "aedart/athenaeum-validation": "^7.10",
         "illuminate/http": "^v10.3.0",
         "shrikeh/teapot": "^2.3.1"
     },
