@@ -28,7 +28,7 @@ abstract class PreconditionsTestCase extends ETagsTestCase
      * Returns a new resource context
      *
      * @param  mixed  $data [optional] E.g. a record, Eloquent model, a file...etc
-     * @param  ETag|null  $etag  [optional]
+     * @param  ETag|callable|null  $etag  [optional]
      * @param  DateTimeInterface|null  $lastModifiedDate  [optional]
      * @param  int  $size  [optional] Size of resource. Applicable if supporting "If-Range" and "Range" requests.
      * @param  callable|null $determineStateChangeSuccess  [optional] Callback that determines if a state change
@@ -41,7 +41,7 @@ abstract class PreconditionsTestCase extends ETagsTestCase
      */
     public function makeResourceContext(
         mixed $data = [],
-        ETag|null $etag = null,
+        ETag|callable|null $etag = null,
         DateTimeInterface|null $lastModifiedDate = null,
         int $size = 0,
         callable|null $determineStateChangeSuccess = null,
