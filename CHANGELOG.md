@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* `GenericResource` now accepts a `callable` etag, which is invoked when the etag is requested from the resource.
+* `CreateSingleResourceRequest`, and `ShowSingleResourceRequest` now use a callback to resolve resource's etag, which increases performance in situations when no request is not conditional (_no preconditions requested_). 
+
 ## [7.8.0] - 2023-03-16
 
 ### Added
