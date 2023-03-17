@@ -61,7 +61,7 @@ class ShowUserRequest extends FormRequest
     {
         return new GenericResource(
             data: $model,
-            etag: $model->getStrongEtag(),
+            etag: fn () => $model->getStrongEtag(),
             lastModifiedDate: $model->updated_at
         );
     }
@@ -89,7 +89,7 @@ Route::get('/user/{id}', function (ShowUserRequest $request) {
     return response()
         ->json($payload)
         ->withCache(
-            etag: $resource->etag(),
+            etag: fn () => $resource->etag(),
             lastModified: $resource->lastModifiedDate(),
             private: true
         );

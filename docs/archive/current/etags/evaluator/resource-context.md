@@ -16,7 +16,7 @@ This packages comes with a `GenericResource`, which is a default implementation 
 Its constructor method accepts the following arguments:
 
 * **`mixed $data`: The requested resource, e.g. a record, Eloquent Model instance, a file... etc.**
-* **`ETag|null $etag = null`: (_optional_) Etag of the requested resource.**
+* **`ETag|callable|null $etag = null`: (_optional_) Etag of the requested resource or callback to resolve etag.**
 * **`DateTimeInterface|null $lastModifiedDate = null`: (_optional_) Resource's last modified date.**
 * `int $size = 0`: (_optional_) Size of resource. (_Applicable only if your request supports `If-Range` and `Range` requests._)
 * `callable|null $determineStateChangeSuccess = null`: (_optional_) Callback that determines if a state change has already succeeded on the resource.
@@ -34,6 +34,22 @@ use Aedart\ETags\Preconditions\Resources\GenericResource;
 $resource new GenericResource(
     data: $model,
     etag: $model->getStrongEtag(),
+    lastModifiedDate: $model->updated_at
+);
+```
+
+## Callable ETag Argument
+
+_**Available since** `v7.9.x`_
+
+The `$etag` argument can be specified as callback that resolves an actual `ETag` instance. 
+Doing so can increase performance of a request, when no preconditions are requested.
+The etag is only resolved when needed and not upfront.
+
+```php{3}
+$resource new GenericResource(
+    data: $model,
+    etag: fn () => $model->getStrongEtag(),
     lastModifiedDate: $model->updated_at
 );
 ```
@@ -72,7 +88,7 @@ use Aedart\ETags\Preconditions\Resources\GenericResource;
 
 $resource new GenericResource(
     data: $model,
-    etag: $model->getStrongEtag(),
+    etag: fn () => $model->getStrongEtag(),
     lastModifiedDate: $model->updated_at,
     determineStateChangeSuccess: function($request, $resource) {
         $model = $resource->data();
