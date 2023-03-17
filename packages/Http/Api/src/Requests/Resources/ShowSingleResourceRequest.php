@@ -64,7 +64,7 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest implements 
 
         $this->evaluateRequestPreconditions(
             record: $record,
-            etag: $this->getRecordEtag(),
+            etag: fn () => $this->getRecordEtag(),
             lastModifiedDate: $this->getRecordLastModifiedDate()
         );
     }
