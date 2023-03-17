@@ -4,6 +4,7 @@ namespace Aedart\ETags\Concerns;
 
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Contracts\ETags\Exceptions\ETagGeneratorException;
+use Illuminate\Support\Carbon;
 
 /**
  * Concerns Eloquent Etag
@@ -118,8 +119,10 @@ trait EloquentEtag
         // RECOMMENDATION: Overwrite this method and adapt its return value
         // to fit your Eloquent model...
 
-        $updatedAt = optional($this->attributes[$this->getUpdatedAtColumn()] ?? null)
-            ->toRfc3339String(true) ?? '';
+        $updatedAt = '';
+        if (isset($this->attributes[$this->getUpdatedAtColumn()])) {
+            $updatedAt = Carbon::make($this->attributes[$this->getUpdatedAtColumn()])->toRfc3339String(true);
+        }
 
         return implode('_', [
             $this->getTable(),
