@@ -12,8 +12,8 @@
         "typescript": "^5.0.2"
     },
     "scripts": {
-        "docs:dev": "cross-env NODE_ENV=development vuepress dev docsx --config docsx/.vuepress/config.ts",
-        "docs:build": "cross-env NODE_ENV=development vuepress build docsx --config docsx/.vuepress/config.ts",
-        "docs:build-prod": "cross-env NODE_ENV=production vuepress build docsx --config docsx/.vuepress/config.ts"
+        "docs:dev": "cross-env NODE_ENV=development vuepress dev docs --config docs/.vuepress/config.ts",
+        "docs:build": "cross-env NODE_ENV=development vuepress build docs --config docs/.vuepress/config.ts",
+        "docs:build-prod": "cross-env NODE_ENV=production vuepress build docs --config docs/.vuepress/config.ts"
     }
 }
