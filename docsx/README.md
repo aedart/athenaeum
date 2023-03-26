@@ -2,6 +2,10 @@
 home: true
 footer: Copyright © 2018-present Alin Eugen Deac, License BSD-3-Clause
 heroImage: /images/icon/apple-touch-icon.png
+actions:
+- text: View Documentation
+  link: /archive/current/
+  type: primary
 ---
 
 Athenaeum is a [mono repository](https://en.wikipedia.org/wiki/Monorepo); a collection of various packages.
