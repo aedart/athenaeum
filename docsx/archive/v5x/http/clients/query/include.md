@@ -13,27 +13,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?include=friends
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?include=friends
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$expand=friends
 ```
 :::
-
-::::
 
 ## Include Multiple Resources
 
@@ -45,25 +43,23 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?include=friends,jobs,hobbies
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?include=friends,jobs,hobbies
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$expand=friends,jobs,hobbies
 ```
 :::
-
-::::
 

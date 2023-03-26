@@ -63,27 +63,23 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
- 
-::: tab default
+::: details default
 ```http
 /users?created=2020-04-05T00:00:00+0000
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?filter[created]=2020-04-05T00:00:00+0000
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$filter=created eq 2020-04-05T00:00:00+0000
 ```
 :::
-
-::::
 
 ## Where Date
 
@@ -95,27 +91,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?created[gt]=2020-04-05
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?filter[created][gt]=2020-04-05
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$filter=created gt 2020-04-05
 ```
 :::
-
-::::
 
 ## Where Year
 
@@ -127,27 +121,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?created[lt]=2020
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?filter[created][lt]=2020
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$filter=created lt 2020
 ```
 :::
-
-::::
 
 ## Where Month
 
@@ -159,27 +151,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?created=07
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?filter[created]=07
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$filter=created eq 07
 ```
 :::
-
-::::
 
 ## Where Day
 
@@ -191,27 +181,23 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
- 
-::: tab default
+::: details default
 ```http
 /users?created[gt]=15
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?filter[created][gt]=15
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$filter=created gt 15
 ```
 :::
-
-::::
 
 ## Where Time
 
@@ -223,27 +209,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?created[lt]=16:58:00
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?filter[created][lt]=16:58:00
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$filter=created lt 16:58:00
 ```
 :::
-
-::::
 
 ## Or Methods
 

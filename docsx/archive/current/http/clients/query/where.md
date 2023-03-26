@@ -26,27 +26,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?name=john
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?filter[name]=john
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$filter=name eq 'john'
 ```
 :::
-
-::::
 
 ## Operator
 
@@ -60,27 +58,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?year[gt]=2020
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?filter[year][gt]=2020
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$filter=year gt 2020
 ```
 :::
-
-::::
 
 ## Multiple Conditions
 
@@ -94,27 +90,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?year[gt]=2020&year[lt]=2051
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?filter[year][gt]=2020&filter[year][lt]=2051
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$filter=year gt 2020 and year lt 2051
 ```
 :::
-
-::::
 
 ### Via Array
 
@@ -133,27 +127,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?year[gt]=2021&year[lt]=2031&name=john
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?filter[year][gt]=2021&filter[year][lt]=2031&filter[name]=john
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$filter=year gt 2021 and year lt 2031 and name eq 'john'
 ```
 :::
-
-::::
 
 ## Array Values
 
@@ -170,27 +162,25 @@ $response = $client
 The above shown example will produce the following query string.
 _Depending on your needs, this outcome might not be favourable for you._
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?users[in][0]=1&users[in][1]=2&users[in][2]=3&users[in][3]=4
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?filter[users][in][0]=1&filter[users][in][1]=2&filter[users][in][2]=3&filter[users][in][3]=4
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$filter=users in (1,2,3,4)
 ```
 :::
-
-::::
 
 Alternatively, you could convert array values in to a comma-separated list.
 If so, then you could create your condition in the following way:
@@ -201,21 +191,21 @@ $response = $client
         ->get('/users');
 ``` 
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?users[in]=1,2,3,4
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?filter[users][in]=1,2,3,4
 ```
 :::
  
-::: tab odata
+::: details odata
 
 **Caution**: _The above shown example will not create a valid OData "where users in ..." query.
 Consider using a regular array as value or make use of the `whereRaw()` method instead._ 
@@ -224,8 +214,6 @@ Consider using a regular array as value or make use of the `whereRaw()` method i
 /users?$filter=users in `1,2,3,4`
 ```
 :::
-
-::::
 
 ## Where Raw
 
@@ -243,15 +231,15 @@ $response = $client
         ->get('/users');
 ``` 
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?filter=user eq 10
 ```
 :::
 
-::: tab json api
+::: details json api
 
 **Caution**: _Resulting query string is not a valid Json API filter!_
 
@@ -260,7 +248,7 @@ $response = $client
 ```
 :::
  
-::: tab odata
+::: details odata
 
 **Caution**: _Resulting query string is not a valid OData filter!_ 
 
@@ -268,8 +256,6 @@ $response = $client
 /users?$filter=filter=user eq 10
 ```
 :::
-
-::::
 
 ## Or Where
 
@@ -284,9 +270,9 @@ $response = $client
         ->get('/users');
 ``` 
 
-:::: tabs
+
  
-::: tab default
+::: details default
 
 **Caution**: _Not conventional!_
 
@@ -298,7 +284,7 @@ This symbol can be changed in the grammar's configuration, in `config/http-clien
 ```
 :::
 
-::: tab json api
+::: details json api
 
 **Caution**: _Not conventional!_
 
@@ -310,13 +296,11 @@ This symbol can be changed in the grammar's configuration, in `config/http-clien
 ```
 :::
  
-::: tab odata
+::: details odata
 
 ```http
 /users?$filter=name eq 'john' or gender eq 'male'
 ```
 :::
-
-::::
 
 If your target API does support "or" conjunctions, yet these grammars fail to deliver the desired syntax for such, please consider [creating a custom grammar](./custom_grammar.md).
