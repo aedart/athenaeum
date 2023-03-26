@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.10.0] - 2023-03-26
+
+### Changed
+
+* Migrated documentation to use [vuepress v2](https://v2.vuepress.vuejs.org/). Also given the docs an improved look & feel. [#163](https://github.com/aedart/athenaeum/issues/163).
+
 ## [7.9.1] - 2023-03-17
 
 ### Fixed
@@ -1137,7 +1143,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.9.1...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.10.0...HEAD
+[7.10.0]: https://github.com/aedart/athenaeum/compare/7.9.1...7.10.0
 [7.9.1]: https://github.com/aedart/athenaeum/compare/7.9.0...7.9.1
 [7.9.0]: https://github.com/aedart/athenaeum/compare/7.8.0...7.9.0
 [7.8.0]: https://github.com/aedart/athenaeum/compare/7.7.2...7.8.0

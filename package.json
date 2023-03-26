@@ -1,14 +1,19 @@
 {
     "devDependencies": {
-        "@vuepress/plugin-back-to-top": "^1.3.1",
-        "cross-env": "^7.0.0",
-        "vue-tabs-component": "^1.5.0",
-        "vuepress": "^1.8.2",
-        "vuepress-plugin-element-tabs": "^0.2.8"
+        "@aedart/vuepress-utils": "^0.1.1",
+        "cross-env": "^7.0.3",
+        "vuepress": "2.0.0-beta.61",
+        "@vuepress/plugin-back-to-top": "2.0.0-beta.61",
+        "@vuepress/plugin-search": "2.0.0-beta.61",
+        "@vuepress/core": "2.0.0-beta.61",
+        "@vuepress/utils": "2.0.0-beta.61",
+        "@vuepress/client": "2.0.0-beta.61",
+        "tslib": "^2.5.0",
+        "typescript": "^5.0.2"
     },
     "scripts": {
-        "docs:dev": "cross-env NODE_ENV=development ./node_modules/.bin/vuepress dev docs",
-        "docs:build": "cross-env NODE_ENV=development ./node_modules/.bin/vuepress build docs",
-        "docs:build-prod": "cross-env NODE_ENV=production ./node_modules/.bin/vuepress build docs"
+        "docs:dev": "cross-env NODE_ENV=development vuepress dev docs --config docs/.vuepress/config.ts",
+        "docs:build": "cross-env NODE_ENV=development vuepress build docs --config docs/.vuepress/config.ts",
+        "docs:build-prod": "cross-env NODE_ENV=production vuepress build docs --config docs/.vuepress/config.ts"
     }
 }

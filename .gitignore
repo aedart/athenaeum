@@ -18,6 +18,14 @@ package-lock.json
 .todo.md
 tmp.php
 
+# Vuepress
+docs/.vuepress/.temp
+docs/.vuepress/.cache
+docs/.vuepress/dist
+docsx/.vuepress/.temp
+docsx/.vuepress/.cache
+docsx/.vuepress/dist
+
 # Ignore various environment files in root directory
 .env
 .testing

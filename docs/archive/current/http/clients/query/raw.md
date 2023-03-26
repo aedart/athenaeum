@@ -28,15 +28,15 @@ $response = $client
 ```
 
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?search=person from (a,b,c)
 ```
 :::
 
-::: tab json api
+::: details json api
 
 **Caution**: _Produced http query is not in accordance with Json API recommendations._
 
@@ -45,7 +45,7 @@ $response = $client
 ```
 :::
  
-::: tab odata
+::: details odata
 
 **Caution**: _Produced http query is not a valid OData query._
 
@@ -53,5 +53,3 @@ $response = $client
 /users?search=person from (a,b,c)
 ```
 :::
-
-::::

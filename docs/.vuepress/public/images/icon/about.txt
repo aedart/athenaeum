@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Akshar
+- Font Author: Copyright 2020 The Akshar Type Project Authors (https://github.com/tallchai/akshar-type)
+- Font Source: http://fonts.gstatic.com/s/akshar/v9/Yq6I-LyHWTfz9rGoqDaUbHvhkAUsSZECy9CY94XsnPc.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))
