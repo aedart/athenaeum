@@ -3,7 +3,7 @@ import {backToTopPlugin} from "@vuepress/plugin-back-to-top";
 import {searchPlugin} from "@vuepress/plugin-search";
 import {baseURL, prefixPath} from "@aedart/vuepress-utils";
 import {lastUpdatedPlugin} from "@aedart/vuepress-utils/plugins";
-// import Archive from "./archive";
+import Archive from "./archive";
 
 /**
  * Base URL of site
@@ -51,12 +51,12 @@ export default defineUserConfig({
         lastUpdatedText: 'Last Updated',
 
         navbar: [
-            // { text: 'Packages', link: prefixPath(Archive.currentFullPath, '/packages/') },
-            // Archive.asNavigationItem(),
+            { text: 'Packages', link: Archive.currentFullPath },
+            Archive.asNavigationItem(),
             { text: 'Changelog', link: 'https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md' },
         ],
 
-        // sidebar: Archive.sidebarConfiguration()
+        sidebar: Archive.sidebarConfiguration()
     }),
 
     plugins: [
@@ -67,8 +67,7 @@ export default defineUserConfig({
             maxSuggestions: 10,
 
             isSearchable: (page: Page) => {
-                return true;
-                // return page.path.includes(Archive.currentFullPath);
+                return page.path.includes(Archive.currentFullPath);
             },
 
             getExtraFields: (page: Page): string[] => {
