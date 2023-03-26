@@ -20,7 +20,7 @@ export default defineUserConfig({
     dest: './.build',
     lang: 'en-GB',
     title: 'Athenaeum',
-    description: 'Athenaeum Official Documentation',
+    description: 'Official Documentation',
 
     head: [
         // Icon
