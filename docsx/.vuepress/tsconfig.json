@@ -1,6 +1,10 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-
+        "paths": {
+            "@aedart/vuepress-utils/*": [
+                "./../../node_modules/@aedart/vuepress-utils/dist/*"
+            ],
+        }
     }
 }
