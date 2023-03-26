@@ -4,6 +4,7 @@ import Version1x from "./Version1x";
 import Version2x from "./Version2x";
 import Version3x from "./Version3x";
 import Version4x from "./Version4x";
+import Version5x from "./Version5x";
 import Version7x from "./Version7x";
 import Version8x from "./Version8x";
 
@@ -29,6 +30,7 @@ const NEXT: PagesCollection = Version8x;
 const VERSIONS: PagesCollection[] = [
     NEXT,
     CURRENT,
+    Version5x,
     Version4x,
     Version3x,
     Version2x,
