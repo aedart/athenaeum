@@ -18,28 +18,26 @@ $response = $client
     ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?sort=name asc,age desc
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?sort=name,-age
 ```
 :::
  
-::: tab odata
+::: details odata
 
 ```
 /users?$orderby=name asc,age desc
 ```
 :::
-
-::::
 
 ## Via Array
  
@@ -55,26 +53,24 @@ $response = $client
     ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?sort=name desc,age asc,jobs asc
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?sort=-name,age,jobs
 ```
 :::
  
-::: tab odata
+::: details odata
 
 ```
 /users?$orderby=name desc,age asc,jobs asc
 ```
 :::
-
-::::
 

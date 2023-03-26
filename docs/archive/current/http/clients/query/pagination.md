@@ -18,27 +18,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?limit=10&offset=5
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?page[limit]=10&page[offset]=5
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$top=10&$skip=5
 ```
 :::
-
-::::
 
 ### Take & Skip
 
@@ -52,27 +50,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?limit=10&offset=5
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?page[limit]=10&page[offset]=5
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$top=10&$skip=5
 ```
 :::
-
-::::
 
 ## Page & Show 
 
@@ -86,26 +82,24 @@ $response = $client
 ```
 
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?page=3&show=25
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?page[number]=3&page[size]=25
 ```
 :::
  
-::: tab odata
+::: details odata
 **Warning**: _Page-based pagination is not supported by OData_
 ```
 /users
 ```
 :::
-
-::::
 
