@@ -20,27 +20,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?select=name
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?fields[]=name
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$select=name
 ```
 :::
-
-::::
 
 ## Select Field from Resource
 
@@ -52,27 +50,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?select=friends.name
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?fields[friends]=name
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$select=friends.name
 ```
 :::
-
-::::
 
 ## Select Multiple Fields
 
@@ -89,27 +85,25 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?select=friends.name,friends.age,position.job_title
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?fields[friends]=name,age&fields[position]=job_title
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$select=friends.name,friends.age,position.job_title
 ```
 :::
-
-::::
 
 ## Select Raw Expression
 
@@ -122,24 +116,22 @@ $response = $client
         ->get('/users');
 ```
 
-:::: tabs
+
  
-::: tab default
+::: details default
 ```http
 /users?select=account(7)
 ```
 :::
 
-::: tab json api
+::: details json api
 ```http
 /users?fields[]=account(7)
 ```
 :::
  
-::: tab odata
+::: details odata
 ```http
 /users?$select=account(7)
 ```
 :::
-
-::::
