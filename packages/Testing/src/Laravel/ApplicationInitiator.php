@@ -173,6 +173,14 @@ trait ApplicationInitiator
     }
 
     /**
+     * @inheritdoc
+     */
+    protected function setUpTheTestEnvironmentTraitToBeIgnored(string $use): bool
+    {
+        return false;
+    }
+
+    /**
      * Refresh the application instance.
      *
      * @return void
