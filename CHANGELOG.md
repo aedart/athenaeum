@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.10.1] - 2023-04-07
+
+### Fixed
+
+* Missing implementation of abstract `setUpTheTestEnvironmentTraitToBeIgnored` (_declared in `\Orchestra\Testbench\Concerns\Testing`, since Orhestra Testbench `v8.4.0`_).
+
 ## [7.10.0] - 2023-03-26
 
 ### Changed
@@ -1143,7 +1149,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.10.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.10.1...HEAD
+[7.10.1]: https://github.com/aedart/athenaeum/compare/7.10.0...7.10.1
 [7.10.0]: https://github.com/aedart/athenaeum/compare/7.9.1...7.10.0
 [7.9.1]: https://github.com/aedart/athenaeum/compare/7.9.0...7.9.1
 [7.9.0]: https://github.com/aedart/athenaeum/compare/7.8.0...7.9.0
