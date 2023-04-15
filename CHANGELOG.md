@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.11.0] - 2023-04-15
+
+### Changed
+
+* Updated minimum required dependencies (_chore_).
+
 ## [7.10.1] - 2023-04-07
 
 ### Fixed
@@ -1079,7 +1085,6 @@ It will highjack the `app` binding, which will cause your application to behave 
   This caused strange behaviour, when attempting to overwrite an already set option.
 * Http Client `Manager` does not use default profile name from configuration, it always returns "default", when no profile name given.
 
-
 ## [3.1.0] - 2020-01-01
 
 ### Changed
@@ -1149,7 +1154,8 @@ It will highjack the `app` binding, which will cause your application to behave 
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.10.1...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.11.0...HEAD
+[7.11.0]: https://github.com/aedart/athenaeum/compare/7.10.1...7.11.0
 [7.10.1]: https://github.com/aedart/athenaeum/compare/7.10.0...7.10.1
 [7.10.0]: https://github.com/aedart/athenaeum/compare/7.9.1...7.10.0
 [7.9.1]: https://github.com/aedart/athenaeum/compare/7.9.0...7.9.1
