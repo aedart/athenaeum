@@ -21,7 +21,7 @@
         "aedart/athenaeum-contracts": "^7.11",
         "aedart/athenaeum-streams": "^7.11",
         "aedart/athenaeum-support": "^7.11",
-        "illuminate/events": "^v10.3.0",
+        "illuminate/events": "^v10.7.1",
         "xenolope/quahog": "^3.0"
     },
     "autoload": {
