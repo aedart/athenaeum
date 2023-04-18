@@ -63,9 +63,7 @@ abstract class ProcessMultipleResourcesRequest extends ValidatedApiRequest imple
                 "max:{$this->max}"
             ],
 
-            "{$key}.*" => function () {
-                return $this->targetIdentifierRules();
-            },
+            "{$key}.*" => $this->targetIdentifierRules(),
         ]);
     }
 
