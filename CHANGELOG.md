@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.11.1] - 2023-04-18
+
 ### Fixed
 
-* Target identifier rules not applied in `ProcessMultipleResourcesRequest`. Rules were wrapped in a closure which never got invoked.
+* Target identifier rules not applied in `ProcessMultipleResourcesRequest`. Rules were wrapped in a closure which never got invoked. [#165](https://github.com/aedart/athenaeum/pull/165).
 
 ## [7.11.0] - 2023-04-15
 
