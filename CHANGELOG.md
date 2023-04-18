@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-* Missing implementation of abstract `setUpTheTestEnvironmentTraitToBeIgnored` (_declared in `\Orchestra\Testbench\Concerns\Testing`, since Orhestra Testbench `v8.4.0`_).
+* Missing implementation of abstract `setUpTheTestEnvironmentTraitToBeIgnored` (_declared in `\Orchestra\Testbench\Concerns\Testing`, since Orchestra Testbench `v8.4.0`_).
 
 ## [7.10.0] - 2023-03-26
 
@@ -674,7 +674,7 @@ Will be removed in next major version (_in audit package_).
 
 * `AuditTrailServiceProvider` now publishes migrations rather than loading them directly. This allows changing to installation order (_migration file's timestamp_).
 
-**Caution**: _These changes can affect rolling back migrations. Please (re)publish service provider's assets to ensure your application is able to rollback the `create_audit_trail_table` migration._
+**Caution**: _These changes can affect rolling back migrations. Please (re)publish service provider's assets to ensure your application is able to roll back the `create_audit_trail_table` migration._
 
 ### Fixed
 
@@ -815,7 +815,7 @@ Will be removed in next major version (_in audit package_).
 ### Changed
 
 * `ApplicationInitiator` now makes use of custom `LoadSpecifiedConfiguration`.
-  A previously added, but not applied specialisation of Orchetra `LoadConfiguration`.
+  A previously added, but not applied specialisation of Orchestra `LoadConfiguration`.
   Custom component allows specifying the location of configuration files to be loaded, via `getBasePath()` and `getConfigPath()` methods¹.
 
 ¹: _This change will implicit ensure that changes to `LoadConfiguration` will be caught by tests and thereby prevent defects that resulted in patches `v5.3.3` to `v5.3.5`._
@@ -865,7 +865,7 @@ Both methods failed showing a correct amount, whenever the initial value surpass
 ### Changed
 
 * Laravel `v8.15.x` packages are now required as a minimum.
-* Updated [Orchesta Testbench](https://github.com/orchestral/testbench-core) dependencies to `v6.9.x`.
+* Updated [Orchestra Testbench](https://github.com/orchestral/testbench-core) dependencies to `v6.9.x`.
 * Added leading zero for `Durataion::toHoursMinutes` short format.
 * Disabled `failsIfCacheIsNotLockProvider` test, since botch file and null cache drivers [now support locks](https://github.com/laravel/framework/blob/8.x/CHANGELOG-8.x.md#v8150-2020-11-17).
 
@@ -994,7 +994,7 @@ Both methods failed showing a correct amount, whenever the initial value surpass
 
 ### Fixed
 
-* Broken inter-dependencies in all packages. Removed version `v4.0` from packagist.org to prevent conflicts.
+* Broken interdependencies in all packages. Removed version `v4.0` from packagist.org to prevent conflicts.
 
 ## [4.0.0] - 2020-04-15 [YANKED]
 
@@ -1041,13 +1041,13 @@ Both methods failed showing a correct amount, whenever the initial value surpass
 * Required PHP version changed to `v7.4.x`.
 * Upgraded Laravel dependencies to `v7.6.x`, Symfony to `v5.0.x`, Codeception to `v4.1.x`, and various other dependencies.
 * All class properties now have their [types declared](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties), if possible.
-* `dto:create` command now generates traits with class [type declarations](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties) for it's properties (_former `dto:create-aware-of` command_).
+* `dto:create` command now generates traits with class [type declarations](https://www.php.net/manual/en/migration74.new-features.php#migration74.new-features.core.typed-properties) for its properties (_former `dto:create-aware-of` command_).
 * `Dto` and `ArrayDto` now implements the `__serialize()` and `__unserialize()` magic methods.
 * Replaced `\Aedart\Dto` with `\Aedart\Dto\Dto`¹.
 * Replaced `\Aedart\ArrayDto` with `\Aedart\Dto\ArrayDto`¹.
 * [Codeception](https://github.com/Codeception/Codeception) and [Orchestra Testbench](https://github.com/orchestral/testbench) are now defined as dev-dependencies.
   You need to require these packages, if you depended on them².
-* (_Fix_) `IoC` no longer highjacks Laravel's `app` binding automatically, when `getInstance()` is invoked.
+* (_Fix_) `IoC` no longer high-jacks Laravel's `app` binding automatically, when `getInstance()` is invoked.
   This was used to get some of Laravel's components to work outside the scope of a Laravel application.
   Yet, this was a "hack" that potentially could lead to conflicted with Laravel. This was never intended³!
 * Redesign entire Http `Client` package, now makes use of a Request Builder and Http Query Builder.
@@ -1057,7 +1057,7 @@ Both methods failed showing a correct amount, whenever the initial value surpass
 * Converted athenaeum into a true [mono repository](ttps://en.wikipedia.org/wiki/Monorepo). All major components are now available as separate packages, via composer.
 * Code style to [PSR-12](https://www.php-fig.org/psr/psr-12/).
 * Replaced deprecated `Twig` components, in `TwigPartial` trait.
-* `UnitTestCase` now uses `FakerPartial` to setup [Faker](https://github.com/fzaninotto/Faker).
+* `UnitTestCase` now uses `FakerPartial` for setup [Faker](https://github.com/fzaninotto/Faker).
 * `UnitTestCase` now inherits from Codeception's `Unit` test-case.
 * Using `IoCFacade` to resolve default Http Client `Manager`, in `HttpClientsManagerTrait`.
 * Added `\Aedart\Contracts\Container\IoC` and `\Illuminate\Contracts\Container\Container` as `app` binding aliases, in `IoC`³.
@@ -1073,7 +1073,7 @@ Existing abstractions are still available, yet will be removed entirely in `v5.0
 
 ³: _You have to invoke `registerAsApplication()` explicitly to bind the `IoC` instance as `app`, should you require this during testing or outside a Laravel application.
 **Warning**: do NOT invoke mentioned method if you are using the `IoC` within a Laravel application.
-It will highjack the `app` binding, which will cause your application to behave unfavourable._
+It will high-jack the `app` binding, which will cause your application to behave unfavourable._
 
 ### Fixed
 
