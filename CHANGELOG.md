@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* Undefined array key when Http Status Code does not have a default status text, in `ApiErrorResponse::makeFor()`.
+
 ## [7.11.1] - 2023-04-18
 
 ### Fixed
