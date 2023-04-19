@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-* Undefined array key when Http Status Code does not have a default status text, in `ApiErrorResponse::makeFor()`.
+* Undefined array key when Http Status Code does not have a default status text, in `ApiErrorResponse::makeFor()`. [#166](https://github.com/aedart/athenaeum/pull/166).
 
 ## [7.11.1] - 2023-04-18
 
