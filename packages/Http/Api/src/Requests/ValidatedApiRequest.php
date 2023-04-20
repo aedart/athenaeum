@@ -2,6 +2,7 @@
 
 namespace Aedart\Http\Api\Requests;
 
+use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
@@ -37,6 +38,41 @@ abstract class ValidatedApiRequest extends FormRequest
         if (method_exists($this, 'validateRouteParameters')) {
             $this->validateRouteParameters();
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getValidatorInstance()
+    {
+        if ($this->validator) {
+            return $this->validator;
+        }
+
+        $factory = $this->container->make(ValidationFactory::class);
+
+        if (method_exists($this, 'validator')) {
+            $validator = $this->container->call([$this, 'validator'], compact('factory'));
+        } else {
+            $validator = $this->createDefaultValidator($factory);
+        }
+
+        if (method_exists($this, 'withValidator')) {
+            $this->withValidator($validator);
+        }
+
+        // TODO: This disables the "after validation rules" feature introduced by Laravel in v10.8.0
+        // TODO @see https://github.com/aedart/athenaeum/issues/167
+//        if (method_exists($this, 'after')) {
+//            $validator->after($this->container->call(
+//                $this->after(...),
+//                ['validator' => $validator]
+//            ));
+//        }
+
+        $this->setValidator($validator);
+
+        return $this->validator;
     }
 
     /**
