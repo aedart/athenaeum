@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* "_Class based after validation rules_" feature (_introduced in Laravel `v10.8.0`_) breaks abstract `ApiValidatedRequest`. [#167](https://github.com/aedart/athenaeum/pull/167).
+* Undefined array key when Http Status Code does not have a default status text, in `ApiErrorResponse::makeFor()`. [#166](https://github.com/aedart/athenaeum/pull/166).
+
+### Deprecated
+
+* `after()` method in `ApiValidatedRequest`. This method will be removed in the next major version. Replaced by the new `afterValidation()` method.  [#168](https://github.com/aedart/athenaeum/pull/168).
+
 ## [7.11.1] - 2023-04-18
 
 ### Fixed

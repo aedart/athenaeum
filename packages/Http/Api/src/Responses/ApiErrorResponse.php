@@ -62,7 +62,7 @@ class ApiErrorResponse extends JsonResponse
         }
 
         // Resolve status text, based on status code
-        $message = Response::$statusTexts[$status];
+        $message = Response::$statusTexts[$status] ?? $e->getMessage();
 
         // Create new Api error response
         $response = static::make(
