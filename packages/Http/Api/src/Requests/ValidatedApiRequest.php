@@ -2,6 +2,7 @@
 
 namespace Aedart\Http\Api\Requests;
 
+use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
@@ -40,6 +41,43 @@ abstract class ValidatedApiRequest extends FormRequest
     }
 
     /**
+     * @inheritdoc
+     */
+    protected function getValidatorInstance()
+    {
+        if ($this->validator) {
+            return $this->validator;
+        }
+
+        $factory = $this->container->make(ValidationFactory::class);
+
+        if (method_exists($this, 'validator')) {
+            $validator = $this->container->call([$this, 'validator'], compact('factory'));
+        } else {
+            $validator = $this->createDefaultValidator($factory);
+        }
+
+        if (method_exists($this, 'withValidator')) {
+            $this->withValidator($validator);
+        }
+
+        // TODO: This disables the "after validation rules" feature introduced by Laravel in v10.8.0
+        // TODO @see https://github.com/aedart/athenaeum/issues/167
+//        if (method_exists($this, 'after')) {
+//            $validator->after($this->container->call(
+//                $this->after(...),
+//                ['validator' => $validator]
+//            ));
+//        }
+
+        $this->setValidator($validator);
+
+        return $this->validator;
+    }
+
+    /**
+     * @deprecated Since 7.12.0 - Use `afterValidation` instead. Will be removed in next major version.
+     *
      * Perform post request data validation, e.g. business logic validation
      *
      * @param  Validator  $validator
@@ -52,6 +90,22 @@ abstract class ValidatedApiRequest extends FormRequest
     public function after(Validator $validator): void
     {
         // Business logic validation, e.g. complex record existence check, cross field validation... etc
+    }
+
+    /**
+     * Perform post request data validation, e.g. business logic validation
+     *
+     * @param Validator $validator
+     *
+     * @return void
+     *
+     * @throws ValidationException
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function afterValidation(Validator $validator): void
+    {
+        // Overwrite this method to add custom business logic validation.
+        // E.g. complex record existence checks, more advanced cross field validation... etc.
     }
 
     /**
@@ -87,7 +141,8 @@ abstract class ValidatedApiRequest extends FormRequest
     {
         $validator
             ->after([$this, 'prepareForAfterValidation'])
-            ->after([$this, 'after']);
+            ->after([$this, 'after']) // TODO: Deprecated
+            ->after([$this, 'afterValidation']);
     }
 
 //    /**
