@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.11.2] - 2023-04-20
+
 ### Fixed
 
 * "_Class based after validation rules_" feature (_introduced in Laravel `v10.8.0`_) breaks abstract `ApiValidatedRequest`. [#167](https://github.com/aedart/athenaeum/pull/167).
@@ -1169,7 +1171,9 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.11.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.11.2...HEAD
+[7.11.2]: https://github.com/aedart/athenaeum/compare/7.11.1...7.11.2
+[7.11.1]: https://github.com/aedart/athenaeum/compare/7.11.0...7.11.1
 [7.11.0]: https://github.com/aedart/athenaeum/compare/7.10.1...7.11.0
 [7.10.1]: https://github.com/aedart/athenaeum/compare/7.10.0...7.10.1
 [7.10.0]: https://github.com/aedart/athenaeum/compare/7.9.1...7.10.0
