@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Deprecated
+
+* `datetimeRangeComparison()` method (_in `BaseFieldFilter`_) because it does not produce correct range, in combination with `!=` filter operator. [#170](https://github.com/aedart/athenaeum/issues/170).
+
 ## [7.11.2] - 2023-04-20
 
 ### Fixed

@@ -318,6 +318,8 @@ abstract class BaseFieldFilter extends FieldFilter
     }
 
     /**
+     * @deprecated Since 7.11.3 - Will be removed in next major version - produces incorrect range.
+     *
      * Returns a datetime range comparison
      *
      * @param Builder|EloquentBuilder $query
