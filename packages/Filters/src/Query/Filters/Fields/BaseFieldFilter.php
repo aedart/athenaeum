@@ -282,24 +282,24 @@ abstract class BaseFieldFilter extends FieldFilter
             $date = $date->utc();
         }
 
+        // Offset value, for "high" (or inclusive) ranges.
+        $offset = ($date->second === 0)
+            ? 59 // Seconds
+            : 0;
+
         // If equals or not equals operators are chosen, then we need to build
-        // a range search for the given date, with a -/+ seconds offset, due
-        // to the database's datetime precision. IF not, then chances are that
-        // a submitted datetime can never be matched precisely, especially if
-        // seconds precision required.
-        if (in_array($operator, ['=', '!='])) {
-            // Operators to be used for range comparison
-            $low = '>=';
-            $high = '<=';
-
-            if ($operator === '!=') {
-                $low = '<';
-                $high = '>';
-            }
-
+        // a range search for the given datetime.
+        if (in_array($operator, ['=', '!=']) && $offset !== 0) {
             // Callback that builds the actual datetime comparison, with a -/+ seconds offset...
-            $dateComparisonCallback = function ($query) use ($date, $low, $high) {
-                return $this->datetimeRangeComparison($query, $date, $low, $high);
+            $dateComparisonCallback = function (Builder|EloquentBuilder $query) use ($date, $operator, $offset) {
+                $low = Carbon::make($date)->setSecond(0);
+                $high = Carbon::make($date)->setSecond(0)->addSeconds($offset);
+
+                if ($operator === '=') {
+                    return $this->buildDatetimeBetween($query, $low, $high);
+                }
+
+                return $this->buildDatetimeNotBetween($query, $low, $high);
             };
 
             if ($this->logical() === FieldCriteria::OR) {
@@ -309,15 +309,61 @@ abstract class BaseFieldFilter extends FieldFilter
             return $query->where($dateComparisonCallback);
         }
 
-        // Otherwise, for regular comparisons operators (<,>, <=, and >=)
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhere($field, $operator, $date->format($this->getDatabaseDatetimeFormat()));
+        // Otherwise, for regular comparisons operators (<,>, <=, and >=)...
+        // Apply offset, but only for <= or > operators, to have correct
+        // inclusive or exclusive range.
+        if ($offset !== 0) {
+            $date = match ($operator) {
+                '<=', '>' => Carbon::make($date)->setSecond(0)->addSeconds($offset),
+                default => $date
+            };
         }
 
-        return $query->where($field, $operator, $date->format($this->getDatabaseDatetimeFormat()));
+        $format = $this->getDatabaseDatetimeFormat();
+        if ($this->logical() === FieldCriteria::OR) {
+            return $query->orWhere($field, $operator, $date->format($format));
+        }
+
+        return $query->where($field, $operator, $date->format($format));
     }
 
     /**
+     * Builds "where [field] between [datetime a, datetime b]" constraint
+     *
+     * @param Builder|EloquentBuilder $query
+     * @param Carbon $low
+     * @param Carbon $high
+     *
+     * @return Builder|EloquentBuilder
+     */
+    protected function buildDatetimeBetween(Builder|EloquentBuilder $query, Carbon $low, Carbon $high): Builder|EloquentBuilder
+    {
+        $field = $this->getField();
+        $format = $this->getDatabaseDatetimeFormat();
+
+        return $query->whereBetween($field, [ $low->format($format), $high->format($format) ]);
+    }
+
+    /**
+     * Builds "where [field] not between [datetime a, datetime b]" constraint
+     *
+     * @param Builder|EloquentBuilder $query
+     * @param Carbon $low
+     * @param Carbon $high
+     *
+     * @return Builder|EloquentBuilder
+     */
+    protected function buildDatetimeNotBetween(Builder|EloquentBuilder $query, Carbon $low, Carbon $high): Builder|EloquentBuilder
+    {
+        $field = $this->getField();
+        $format = $this->getDatabaseDatetimeFormat();
+
+        return $query->whereNotBetween($field, [ $low->format($format), $high->format($format) ]);
+    }
+
+    /**
+     * @deprecated Since 7.11.3 - Will be removed in next major version - produces incorrect range.
+     *
      * Returns a datetime range comparison
      *
      * @param Builder|EloquentBuilder $query
