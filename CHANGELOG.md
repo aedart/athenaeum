@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.11.3] - 2023-04-28
+
+### Fixed
+
+* Incorrect inclusive or exclusive ranges query built, for when `!=` operator, in `DatetimeFilter` (_entire query refactored!_). [#170](https://github.com/aedart/athenaeum/issues/170).
+
 ### Deprecated
 
 * `datetimeRangeComparison()` method (_in `BaseFieldFilter`_) because it does not produce correct range, in combination with `!=` filter operator. [#170](https://github.com/aedart/athenaeum/issues/170).
@@ -1175,7 +1181,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.11.2...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.11.3...HEAD
+[7.11.3]: https://github.com/aedart/athenaeum/compare/7.11.2...7.11.3
 [7.11.2]: https://github.com/aedart/athenaeum/compare/7.11.1...7.11.2
 [7.11.1]: https://github.com/aedart/athenaeum/compare/7.11.0...7.11.1
 [7.11.0]: https://github.com/aedart/athenaeum/compare/7.10.1...7.11.0
