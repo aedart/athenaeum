@@ -78,7 +78,8 @@ class DateFormat extends BaseValidationRule
                 // Edge-case: if the format contains 'p' token (timezone offset), e.g. RCF 3339 Extended Zulu,
                 // then the "format()" output comparison might fail if +00:00 timezone offset is submitted.
                 // The output of the format converts +00:00 to 'Z', which then fails format output comparison.
-                if (str_contains($format, 'p')
+                if (
+                    (str_contains($format, 'p') && !str_contains($format, '\\p'))           // Only when unescaped 'p' token is present
                     && (str_ends_with($value, '+00:00') || str_ends_with($value, '-00:00'))
                     && $date->eq($value)
                 ) {
