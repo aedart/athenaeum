@@ -7,6 +7,7 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Validation\Providers\ValidationServiceProvider;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -57,11 +58,11 @@ abstract class ValidationTestCase extends LaravelTestCase
      * Validate input using given validation rule, expect pass
      *
      * @param mixed $input
-     * @param Rule $rule
+     * @param Rule|ValidationRule $rule
      *
      * @throws ValidationException
      */
-    public function shouldPass($input, Rule $rule)
+    public function shouldPass(mixed $input, Rule|ValidationRule $rule): void
     {
         $validator = $this->makeValidator([ 'input' => $input ], [ 'input' => $rule ]);
 
@@ -72,11 +73,11 @@ abstract class ValidationTestCase extends LaravelTestCase
      * Validate input using given validation rule, expect not to pass
      *
      * @param mixed $input
-     * @param Rule $rule
+     * @param Rule|ValidationRule $rule
      *
      * @throws ValidationException
      */
-    public function shouldNotPass($input, Rule $rule)
+    public function shouldNotPass(mixed $input, Rule|ValidationRule $rule): void
     {
         $this->expectException(ValidationException::class);
 
