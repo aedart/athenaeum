@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Custom `DateFormat` validation rule.
+
 ## [7.11.3] - 2023-04-28
 
 ### Fixed
