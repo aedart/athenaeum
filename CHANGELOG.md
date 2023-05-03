@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Custom `DateFormat` validation rule.
 
+### Changed
+
+* `DateFilter` and `DateTimeFilter` are now be able to accept RFC 3339 Extended Zulu formatted input and deal with UTC, even when timezone is submitted as `'+00:00'`, `'-00:00'` or `'Z'`.
+
 ## [7.11.3] - 2023-04-28
 
 ### Fixed
