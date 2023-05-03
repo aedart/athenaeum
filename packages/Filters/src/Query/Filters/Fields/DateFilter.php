@@ -3,6 +3,7 @@
 namespace Aedart\Filters\Query\Filters\Fields;
 
 use Aedart\Utils\Arr;
+use Aedart\Validation\Rules\DateFormat;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
 use InvalidArgumentException;
@@ -109,7 +110,7 @@ class DateFilter extends BaseFieldFilter
         // array-undot call. This is done in case of evt. table name prefixes, then we must
         // ensure that the "data" is associative, or the applied validation rule might fail.
         $validator = $this->getValidatorFactory()->make(Arr::undot([ $field => $value ]), [
-            $field => 'required|date_format:' . implode(',', $this->allowedDateFormats())
+            $field => [ 'required', new DateFormat(...$this->allowedDateFormats()) ]
         ]);
 
         if ($validator->fails()) {
