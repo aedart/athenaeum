@@ -669,6 +669,7 @@ export default PagesCollection.make('v7.x', '/v7x', [
                 collapsible: true,
                 children: [
                     'validation/rules/alpha-dash-dot',
+                    'validation/rules/date-format',
                     'validation/rules/semantic-version',
                 ]
             },
