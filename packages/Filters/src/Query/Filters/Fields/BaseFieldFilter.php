@@ -28,9 +28,9 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * The datetime format used by the database
      *
-     * @var string
+     * @var string|null
      */
-    protected string $databaseDatetimeFormat = 'Y-m-d H:i:s';
+    protected string|null $databaseDatetimeFormat = null;
 
     /**
      * Map of operators (aliases) and corresponding database
@@ -58,11 +58,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Set the datetime format used for queries
      *
-     * @param string $format
+     * @param string|null $format
      *
      * @return self
      */
-    public function setDatabaseDatetimeFormat(string $format): static
+    public function setDatabaseDatetimeFormat(string|null $format): static
     {
         $this->databaseDatetimeFormat = $format;
 
@@ -72,11 +72,43 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Get the datetime format used for queries
      *
+     * @return string|null
+     */
+    public function getDatabaseDatetimeFormat(): string|null
+    {
+        if (!isset($this->databaseDatetimeFormat)) {
+            $this->setDatabaseDatetimeFormat($this->getDefaultDatabaseDatetimeFormat());
+        }
+
+        return $this->databaseDatetimeFormat;
+    }
+
+    /**
+     * Returns a default datetime format to be used in queries
+     *
      * @return string
      */
-    public function getDatabaseDatetimeFormat(): string
+    public function getDefaultDatabaseDatetimeFormat(): string
     {
-        return $this->databaseDatetimeFormat;
+        return 'Y-m-d H:i:s';
+    }
+
+    /**
+     * Resolves the datetime format to be used
+     *
+     * @param Builder|EloquentBuilder $query
+     *
+     * @return string
+     */
+    public function resolveDatetimeFormat(Builder|EloquentBuilder $query): string
+    {
+        if (!isset($this->databaseDatetimeFormat) && $query instanceof EloquentBuilder) {
+            $format = $query->getModel()->getDateFormat();
+
+            $this->setDatabaseDatetimeFormat($format);
+        }
+
+        return $this->getDatabaseDatetimeFormat();
     }
 
     /*****************************************************************
@@ -309,7 +341,7 @@ abstract class BaseFieldFilter extends FieldFilter
             return $query->where($dateComparisonCallback);
         }
 
-        $format = $this->getDatabaseDatetimeFormat();
+        $format = $this->resolveDatetimeFormat($query);
         if ($this->logical() === FieldCriteria::OR) {
             return $query->orWhere($field, $operator, $date->format($format));
         }
@@ -329,7 +361,7 @@ abstract class BaseFieldFilter extends FieldFilter
     protected function buildDatetimeBetween(Builder|EloquentBuilder $query, Carbon $low, Carbon $high): Builder|EloquentBuilder
     {
         $field = $this->getField();
-        $format = $this->getDatabaseDatetimeFormat();
+        $format = $this->resolveDatetimeFormat($query);
 
         return $query->whereBetween($field, [ $low->format($format), $high->format($format) ]);
     }
@@ -346,7 +378,7 @@ abstract class BaseFieldFilter extends FieldFilter
     protected function buildDatetimeNotBetween(Builder|EloquentBuilder $query, Carbon $low, Carbon $high): Builder|EloquentBuilder
     {
         $field = $this->getField();
-        $format = $this->getDatabaseDatetimeFormat();
+        $format = $this->resolveDatetimeFormat($query);
 
         return $query->whereNotBetween($field, [ $low->format($format), $high->format($format) ]);
     }
@@ -374,7 +406,7 @@ abstract class BaseFieldFilter extends FieldFilter
         int $offset = 1
     ): Builder|EloquentBuilder {
         // The general database datetime format to use.
-        $format = $this->getDatabaseDatetimeFormat();
+        $format = $this->resolveDatetimeFormat($query);
 
         // In case that no "seconds" precision is given, then ensure
         // that we increase the offset and adapt the format. This should
