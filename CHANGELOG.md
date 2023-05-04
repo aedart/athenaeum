@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* 
+* Support for low/high datetime range offset for milliseconds precision, if Eloquent model's datetime format supports it.  
 * Date or datetime `Precision` enum, in utils package. 
 
 ### Changed
