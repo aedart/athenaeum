@@ -566,8 +566,8 @@ abstract class BaseFieldFilter extends FieldFilter
      */
     protected function makeLowDate(Carbon $date, Precision $precision = Precision::Second): Carbon
     {
-        return match($precision) {
-            Precision::Second =>  Carbon::make($date)->setSecond(0),
+        return match ($precision) {
+            Precision::Second => Carbon::make($date)->setSecond(0),
             Precision::Millisecond => Carbon::make($date)->setMillisecond(0),
             default => Carbon::make($date)
         };
@@ -584,8 +584,8 @@ abstract class BaseFieldFilter extends FieldFilter
      */
     protected function makeHighDate(Carbon $date, int $offset, Precision $precision = Precision::Second): Carbon
     {
-        return match($precision) {
-            Precision::Second =>  Carbon::make($date)->setSecond(0)->addSeconds($offset),
+        return match ($precision) {
+            Precision::Second => Carbon::make($date)->setSecond(0)->addSeconds($offset),
             Precision::Millisecond => Carbon::make($date)->setMillisecond(0)->addMilliseconds($offset),
             default => Carbon::make($date)
         };
