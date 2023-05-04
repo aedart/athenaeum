@@ -7,6 +7,7 @@ use Aedart\Database\Query\FieldFilter;
 use Aedart\Filters\Query\Filters\Concerns;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
+use Aedart\Utils\Dates\Precision;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Support\Carbon;
@@ -314,18 +315,30 @@ abstract class BaseFieldFilter extends FieldFilter
             $date = $date->utc();
         }
 
-        // Offset value, for "high" (or inclusive) ranges.
+        // Resolve an offset for "high" (inclusive) ranges.
+        $precision = Precision::Second;
         $offset = ($date->second === 0)
             ? 59 // Seconds
             : 0;
+
+        // Check if millisecond precision is supported by model, and adjust offset.
+        if ($offset === 0
+            && $query instanceof EloquentBuilder
+            && str_ends_with($query->getModel()->getDateFormat(), '.v')
+        ) {
+            $precision = Precision::Millisecond;
+            $offset = ($date->millisecond === 0)
+                ? 999 // Milliseconds
+                : 0;
+        }
 
         // If equals or not equals operators are chosen, then we need to build
         // a range search for the given datetime.
         if (in_array($operator, ['=', '!=']) && $offset !== 0) {
             // Callback that builds the actual datetime comparison, with a -/+ seconds offset...
-            $dateComparisonCallback = function (Builder|EloquentBuilder $query) use ($date, $operator, $offset) {
-                $low = Carbon::make($date)->setSecond(0);
-                $high = Carbon::make($date)->setSecond(0)->addSeconds($offset);
+            $dateComparisonCallback = function (Builder|EloquentBuilder $query) use ($date, $operator, $offset, $precision) {
+                $low = $this->makeLowDate($date, $precision);
+                $high = $this->makeHighDate($date, $offset, $precision);
 
                 if ($operator === '=') {
                     return $this->buildDatetimeBetween($query, $low, $high);
@@ -541,5 +554,40 @@ abstract class BaseFieldFilter extends FieldFilter
     protected function convertToBoolean(mixed $value): bool
     {
         return (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Creates a "low" range date
+     *
+     * @param Carbon $date
+     * @param Precision $precision [optional] Supports second and millisecond
+     *
+     * @return Carbon
+     */
+    protected function makeLowDate(Carbon $date, Precision $precision = Precision::Second): Carbon
+    {
+        return match($precision) {
+            Precision::Second =>  Carbon::make($date)->setSecond(0),
+            Precision::Millisecond => Carbon::make($date)->setMillisecond(0),
+            default => Carbon::make($date)
+        };
+    }
+
+    /**
+     * Creates a "high" range date
+     *
+     * @param Carbon $date
+     * @param int $offset
+     * @param Precision $precision [optional] Supports second and millisecond
+     *
+     * @return Carbon
+     */
+    protected function makeHighDate(Carbon $date, int $offset, Precision $precision = Precision::Second): Carbon
+    {
+        return match($precision) {
+            Precision::Second =>  Carbon::make($date)->setSecond(0)->addSeconds($offset),
+            Precision::Millisecond => Carbon::make($date)->setMillisecond(0)->addMilliseconds($offset),
+            default => Carbon::make($date)
+        };
     }
 }

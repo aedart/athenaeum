@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* 
+* Date or datetime `Precision` enum, in utils package. 
+
 ### Changed
 
 * Applied datetime format is now derived from Eloquent model (_when query is from a model_), in `DatetimeFilter`. Setting manual format is still supported. 
