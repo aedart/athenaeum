@@ -7,6 +7,7 @@ use Aedart\Database\Query\FieldFilter;
 use Aedart\Filters\Query\Filters\Concerns;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
+use Aedart\Utils\Dates\Precision;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Support\Carbon;
@@ -28,9 +29,9 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * The datetime format used by the database
      *
-     * @var string
+     * @var string|null
      */
-    protected string $databaseDatetimeFormat = 'Y-m-d H:i:s';
+    protected string|null $databaseDatetimeFormat = null;
 
     /**
      * Map of operators (aliases) and corresponding database
@@ -58,11 +59,11 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Set the datetime format used for queries
      *
-     * @param string $format
+     * @param string|null $format
      *
      * @return self
      */
-    public function setDatabaseDatetimeFormat(string $format): static
+    public function setDatabaseDatetimeFormat(string|null $format): static
     {
         $this->databaseDatetimeFormat = $format;
 
@@ -72,11 +73,43 @@ abstract class BaseFieldFilter extends FieldFilter
     /**
      * Get the datetime format used for queries
      *
+     * @return string|null
+     */
+    public function getDatabaseDatetimeFormat(): string|null
+    {
+        if (!isset($this->databaseDatetimeFormat)) {
+            $this->setDatabaseDatetimeFormat($this->getDefaultDatabaseDatetimeFormat());
+        }
+
+        return $this->databaseDatetimeFormat;
+    }
+
+    /**
+     * Returns a default datetime format to be used in queries
+     *
      * @return string
      */
-    public function getDatabaseDatetimeFormat(): string
+    public function getDefaultDatabaseDatetimeFormat(): string
     {
-        return $this->databaseDatetimeFormat;
+        return 'Y-m-d H:i:s';
+    }
+
+    /**
+     * Resolves the datetime format to be used
+     *
+     * @param Builder|EloquentBuilder $query
+     *
+     * @return string
+     */
+    public function resolveDatetimeFormat(Builder|EloquentBuilder $query): string
+    {
+        if (!isset($this->databaseDatetimeFormat) && $query instanceof EloquentBuilder) {
+            $format = $query->getModel()->getDateFormat();
+
+            $this->setDatabaseDatetimeFormat($format);
+        }
+
+        return $this->getDatabaseDatetimeFormat();
     }
 
     /*****************************************************************
@@ -282,18 +315,30 @@ abstract class BaseFieldFilter extends FieldFilter
             $date = $date->utc();
         }
 
-        // Offset value, for "high" (or inclusive) ranges.
+        // Resolve an offset for "high" (inclusive) ranges.
+        $precision = Precision::Second;
         $offset = ($date->second === 0)
             ? 59 // Seconds
             : 0;
+
+        // Check if millisecond precision is supported by model, and adjust offset.
+        if ($offset === 0
+            && $query instanceof EloquentBuilder
+            && str_ends_with($query->getModel()->getDateFormat(), '.v')
+        ) {
+            $precision = Precision::Millisecond;
+            $offset = ($date->millisecond === 0)
+                ? 999 // Milliseconds
+                : 0;
+        }
 
         // If equals or not equals operators are chosen, then we need to build
         // a range search for the given datetime.
         if (in_array($operator, ['=', '!=']) && $offset !== 0) {
             // Callback that builds the actual datetime comparison, with a -/+ seconds offset...
-            $dateComparisonCallback = function (Builder|EloquentBuilder $query) use ($date, $operator, $offset) {
-                $low = Carbon::make($date)->setSecond(0);
-                $high = Carbon::make($date)->setSecond(0)->addSeconds($offset);
+            $dateComparisonCallback = function (Builder|EloquentBuilder $query) use ($date, $operator, $offset, $precision) {
+                $low = $this->makeLowDate($date, $precision);
+                $high = $this->makeHighDate($date, $offset, $precision);
 
                 if ($operator === '=') {
                     return $this->buildDatetimeBetween($query, $low, $high);
@@ -309,17 +354,7 @@ abstract class BaseFieldFilter extends FieldFilter
             return $query->where($dateComparisonCallback);
         }
 
-        // Otherwise, for regular comparisons operators (<,>, <=, and >=)...
-        // Apply offset, but only for <= or > operators, to have correct
-        // inclusive or exclusive range.
-        if ($offset !== 0) {
-            $date = match ($operator) {
-                '<=', '>' => Carbon::make($date)->setSecond(0)->addSeconds($offset),
-                default => $date
-            };
-        }
-
-        $format = $this->getDatabaseDatetimeFormat();
+        $format = $this->resolveDatetimeFormat($query);
         if ($this->logical() === FieldCriteria::OR) {
             return $query->orWhere($field, $operator, $date->format($format));
         }
@@ -339,7 +374,7 @@ abstract class BaseFieldFilter extends FieldFilter
     protected function buildDatetimeBetween(Builder|EloquentBuilder $query, Carbon $low, Carbon $high): Builder|EloquentBuilder
     {
         $field = $this->getField();
-        $format = $this->getDatabaseDatetimeFormat();
+        $format = $this->resolveDatetimeFormat($query);
 
         return $query->whereBetween($field, [ $low->format($format), $high->format($format) ]);
     }
@@ -356,7 +391,7 @@ abstract class BaseFieldFilter extends FieldFilter
     protected function buildDatetimeNotBetween(Builder|EloquentBuilder $query, Carbon $low, Carbon $high): Builder|EloquentBuilder
     {
         $field = $this->getField();
-        $format = $this->getDatabaseDatetimeFormat();
+        $format = $this->resolveDatetimeFormat($query);
 
         return $query->whereNotBetween($field, [ $low->format($format), $high->format($format) ]);
     }
@@ -384,7 +419,7 @@ abstract class BaseFieldFilter extends FieldFilter
         int $offset = 1
     ): Builder|EloquentBuilder {
         // The general database datetime format to use.
-        $format = $this->getDatabaseDatetimeFormat();
+        $format = $this->resolveDatetimeFormat($query);
 
         // In case that no "seconds" precision is given, then ensure
         // that we increase the offset and adapt the format. This should
@@ -519,5 +554,40 @@ abstract class BaseFieldFilter extends FieldFilter
     protected function convertToBoolean(mixed $value): bool
     {
         return (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Creates a "low" range date
+     *
+     * @param Carbon $date
+     * @param Precision $precision [optional] Supports second and millisecond
+     *
+     * @return Carbon
+     */
+    protected function makeLowDate(Carbon $date, Precision $precision = Precision::Second): Carbon
+    {
+        return match($precision) {
+            Precision::Second =>  Carbon::make($date)->setSecond(0),
+            Precision::Millisecond => Carbon::make($date)->setMillisecond(0),
+            default => Carbon::make($date)
+        };
+    }
+
+    /**
+     * Creates a "high" range date
+     *
+     * @param Carbon $date
+     * @param int $offset
+     * @param Precision $precision [optional] Supports second and millisecond
+     *
+     * @return Carbon
+     */
+    protected function makeHighDate(Carbon $date, int $offset, Precision $precision = Precision::Second): Carbon
+    {
+        return match($precision) {
+            Precision::Second =>  Carbon::make($date)->setSecond(0)->addSeconds($offset),
+            Precision::Millisecond => Carbon::make($date)->setMillisecond(0)->addMilliseconds($offset),
+            default => Carbon::make($date)
+        };
     }
 }

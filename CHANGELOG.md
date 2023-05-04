@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Support for low/high datetime range offset for milliseconds precision, if Eloquent model's datetime format supports it.  
+* Date or datetime `Precision` enum, in utils package. 
+
+### Changed
+
+* Applied datetime format is now derived from Eloquent model (_when query is from a model_), in `DatetimeFilter`. Setting manual format is still supported. 
+
+### Fixed
+
+* Additional "high" range date constrain for `<=` and `>` causes incorrect results, in `DatetimeFilter`. These constraints have now been removed again.  
+
 ## [7.12.0] - 2023-05-03
 
 ### Added
