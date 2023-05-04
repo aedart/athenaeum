@@ -309,16 +309,6 @@ abstract class BaseFieldFilter extends FieldFilter
             return $query->where($dateComparisonCallback);
         }
 
-        // Otherwise, for regular comparisons operators (<,>, <=, and >=)...
-        // Apply offset, but only for <= or > operators, to have correct
-        // inclusive or exclusive range.
-        if ($offset !== 0) {
-            $date = match ($operator) {
-                '<=', '>' => Carbon::make($date)->setSecond(0)->addSeconds($offset),
-                default => $date
-            };
-        }
-
         $format = $this->getDatabaseDatetimeFormat();
         if ($this->logical() === FieldCriteria::OR) {
             return $query->orWhere($field, $operator, $date->format($format));

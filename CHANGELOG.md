@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* Additional "high" range date constrain for `<=` and `>` causes incorrect results, in `DatetimeFilter`. These constraints have now been removed again.  
+
 ## [7.12.0] - 2023-05-03
 
 ### Added
