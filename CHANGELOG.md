@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.14.0] - 2023-05-15
+
+### Changed
+
+* Updated dependencies.
+
 ## [7.13.0] - 2023-05-04
 
 ### Added
@@ -700,7 +706,7 @@ Will be removed in next major version (_in audit package_).
 
 ### Added
 
-* `differenceAssoc()` method in `Arr`. Able to compute the difference of multi-dimensional arrays.
+* `differenceAssoc()` method in `Arr`. Able to compute the difference of multidimensional arrays.
 
 ## [5.16.0] - 2021-05-26
 
@@ -1206,7 +1212,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.13.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.14.0...HEAD
+[7.14.0]: https://github.com/aedart/athenaeum/compare/7.13.0...7.14.0
 [7.13.0]: https://github.com/aedart/athenaeum/compare/7.12.0...7.13.0
 [7.12.0]: https://github.com/aedart/athenaeum/compare/7.11.3...7.12.0
 [7.11.3]: https://github.com/aedart/athenaeum/compare/7.11.2...7.11.3
