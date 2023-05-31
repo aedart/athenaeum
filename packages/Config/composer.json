@@ -26,12 +26,12 @@
         "aedart/athenaeum-contracts": "^7.15",
         "aedart/athenaeum-support": "^7.15",
         "aedart/athenaeum-utils": "^7.15",
-        "illuminate/config": "^v10.10.1",
-        "illuminate/filesystem": "^v10.10.1"
+        "illuminate/config": "^v10.13.0",
+        "illuminate/filesystem": "^v10.13.0"
     },
     "require-dev": {
         "nette/neon": "^3.4.0",
-        "symfony/yaml": "^v6.2.10",
+        "symfony/yaml": "^v6.3.0",
         "yosymfony/toml": "^1.0.4"
     },
     "autoload": {
