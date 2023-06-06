@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.15.0] - 2023-05-31
+
+### Changed
+
+* Updated dependencies.
+
+## [7.14.0] - 2023-05-15
+
+### Changed
+
+* Updated dependencies.
+
+## [7.13.0] - 2023-05-04
+
 ### Added
 
 * Support for low/high datetime range offset for milliseconds precision, if Eloquent model's datetime format supports it.  
@@ -28,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* `DateFilter` and `DateTimeFilter` are now be able to accept RFC 3339 Extended Zulu formatted input and deal with UTC, even when timezone is submitted as `'+00:00'`, `'-00:00'` or `'Z'`.
+* `DateFilter` and `DateTimeFilter` are now be able to accept RFC 3339 Extended Zulu formatted input and deal with UTC, even when timezone is submitted as `'+00:00'` or `'Z'`.
 
 ## [7.11.3] - 2023-04-28
 
@@ -698,7 +712,7 @@ Will be removed in next major version (_in audit package_).
 
 ### Added
 
-* `differenceAssoc()` method in `Arr`. Able to compute the difference of multi-dimensional arrays.
+* `differenceAssoc()` method in `Arr`. Able to compute the difference of multidimensional arrays.
 
 ## [5.16.0] - 2021-05-26
 
@@ -1204,7 +1218,10 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.12.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.15.0...HEAD
+[7.15.0]: https://github.com/aedart/athenaeum/compare/7.14.0...7.15.0
+[7.14.0]: https://github.com/aedart/athenaeum/compare/7.13.0...7.14.0
+[7.13.0]: https://github.com/aedart/athenaeum/compare/7.12.0...7.13.0
 [7.12.0]: https://github.com/aedart/athenaeum/compare/7.11.3...7.12.0
 [7.11.3]: https://github.com/aedart/athenaeum/compare/7.11.2...7.11.3
 [7.11.2]: https://github.com/aedart/athenaeum/compare/7.11.1...7.11.2
