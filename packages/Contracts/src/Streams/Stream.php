@@ -397,7 +397,7 @@ interface Stream extends StreamInterface,
      * @throws StreamException
      */
     public function setTimeout(int $seconds, int $microseconds = 0): static;
-    
+
     /**
      * Returns the underlying PHP stream, if not detached
      *
@@ -616,7 +616,7 @@ interface Stream extends StreamInterface,
     /**
      * Debug info
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function __debugInfo(): array;
 }
