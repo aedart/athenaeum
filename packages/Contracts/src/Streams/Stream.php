@@ -296,7 +296,7 @@ interface Stream extends StreamInterface,
     public function unless(bool|callable $result, callable $callback, callable|null $otherwise = null): static;
 
     /**
-     * Performs an operation and rewinds the position afterwards
+     * Performs an operation and rewinds the position afterward
      *
      * @param  callable  $operation Callback to invoke. This stream is given as callback argument
      *
@@ -307,7 +307,7 @@ interface Stream extends StreamInterface,
     public function rewindAfter(callable $operation): mixed;
 
     /**
-     * Performs an operation and restores the position afterwards
+     * Performs an operation and restores the position afterward
      *
      * @param  callable  $operation Callback to invoke. This stream is given as callback argument
      *
