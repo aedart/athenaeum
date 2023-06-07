@@ -904,17 +904,20 @@ class Stream implements StreamInterface
      */
     public function __debugInfo(): array
     {
-        $id = null;
-        $type = null;
-        $local = null;
-        $isTTY = null;
+        $safe = !$this->isDetached();
 
-        if (!$this->isDetached()) {
-            $id = $this->id();
-            $type = $this->type();
-            $local = $this->isLocal();
-            $isTTY = $this->isTTY();
-        }
+        $id = $safe
+            ? $this->id()
+            : null;
+        $type = $safe
+            ? $this->type()
+            : null;
+        $local = $safe
+            ? $this->isLocal()
+            : null;
+        $isTTY = $safe
+            ? $this->isTTY()
+            : null;
 
         return array_merge([
             'resource_id' => $id,

@@ -18,3 +18,6 @@ parameters:
 
 		# @see https://github.com/aedart/athenaeum/issues/153
 		- packages/Core/src/Exceptions/Handlers/Adaptors/LaravelExceptionHandler.php
+
+		# @see https://github.com/aedart/athenaeum/issues/173
+		- packages/Streams/src/Stream.php

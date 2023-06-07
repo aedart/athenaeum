@@ -296,7 +296,7 @@ interface Stream extends StreamInterface,
     public function unless(bool|callable $result, callable $callback, callable|null $otherwise = null): static;
 
     /**
-     * Performs an operation and rewinds the position afterwards
+     * Performs an operation and rewinds the position afterward
      *
      * @param  callable  $operation Callback to invoke. This stream is given as callback argument
      *
@@ -307,7 +307,7 @@ interface Stream extends StreamInterface,
     public function rewindAfter(callable $operation): mixed;
 
     /**
-     * Performs an operation and restores the position afterwards
+     * Performs an operation and restores the position afterward
      *
      * @param  callable  $operation Callback to invoke. This stream is given as callback argument
      *
@@ -397,7 +397,7 @@ interface Stream extends StreamInterface,
      * @throws StreamException
      */
     public function setTimeout(int $seconds, int $microseconds = 0): static;
-    
+
     /**
      * Returns the underlying PHP stream, if not detached
      *
@@ -616,7 +616,7 @@ interface Stream extends StreamInterface,
     /**
      * Debug info
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function __debugInfo(): array;
 }
