@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* Ignored `\Aedart\Streams\Stream` from being scanned by PHPStan, due to incorrect "___debugInfo() is not covariant with return type array of method Aedart\Contracts\Streams\Stream::__debugInfo()_" error message. [#173](https://github.com/aedart/athenaeum/issues/173).
+* Removed ignore rule for `\Aedart\Streams\Stream`, after update to latest version of PHPStan. [#173](https://github.com/aedart/athenaeum/issues/173).
+* ~~Ignored `\Aedart\Streams\Stream` from being scanned by PHPStan, due to incorrect "_`__debugInfo()` is not covariant with return type array of method Aedart\Contracts\Streams\Stream::__debugInfo()_" error message. [#173](https://github.com/aedart/athenaeum/issues/173).~~
 
 ## [7.15.0] - 2023-05-31
 
