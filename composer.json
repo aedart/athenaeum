@@ -56,7 +56,7 @@
         "nette/neon": "^3.4.0",
         "orchestra/testbench": "^v8.5.5",
         "orchestra/testbench-dusk": "^v8.6.3",
-        "phpstan/phpstan": "^1.10.15",
+        "phpstan/phpstan": "^1.10.18",
         "predis/predis": "^2.1.2",
         "roave/security-advisories": "dev-master",
         "symfony/var-dumper": "^v6.3.0",
