@@ -7,22 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.16.0] - 2023-06-16
+
 ### Changed
 
+* Updated dependencies (_service update_).
+* Refactored `BaseStore` to use `match()` expression instead of `switch` (_in circuit breaker package_).
+* Refactored `AppliesPayload` to use `match()` expression instead of `switch` (_in Http Client package_).
 * Removed ignore rule for `\Aedart\Streams\Stream`, after update to latest version of PHPStan. [#173](https://github.com/aedart/athenaeum/issues/173).
 * ~~Ignored `\Aedart\Streams\Stream` from being scanned by PHPStan, due to incorrect "_`__debugInfo()` is not covariant with return type array of method Aedart\Contracts\Streams\Stream::__debugInfo()_" error message. [#173](https://github.com/aedart/athenaeum/issues/173).~~
+* `Precision` cases documented using PHPDoc (_in Utils package_).
 
 ## [7.15.0] - 2023-05-31
 
 ### Changed
 
-* Updated dependencies.
+* Updated dependencies (_service update_).
 
 ## [7.14.0] - 2023-05-15
 
 ### Changed
 
-* Updated dependencies.
+* Updated dependencies (_service update_).
 
 ## [7.13.0] - 2023-05-04
 
@@ -1223,7 +1229,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.15.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.16.0...HEAD
+[7.16.0]: https://github.com/aedart/athenaeum/compare/7.15.0...7.16.0
 [7.15.0]: https://github.com/aedart/athenaeum/compare/7.14.0...7.15.0
 [7.14.0]: https://github.com/aedart/athenaeum/compare/7.13.0...7.14.0
 [7.13.0]: https://github.com/aedart/athenaeum/compare/7.12.0...7.13.0

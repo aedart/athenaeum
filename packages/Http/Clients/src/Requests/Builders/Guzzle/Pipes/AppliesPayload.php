@@ -62,18 +62,11 @@ class AppliesPayload
      */
     protected function obtainData(string $format, array $options, Builder $builder)
     {
-        switch ($format) {
-            case RequestOptions::JSON:
-            case RequestOptions::FORM_PARAMS:
-                return $this->jsonOrFormInputData($options, $builder);
-
-            case RequestOptions::MULTIPART:
-                return $this->attachmentData($options, $builder);
-
-            case RequestOptions::BODY:
-            default:
-                return $this->rawPayloadData($options, $builder);
-        }
+        return match ($format) {
+            RequestOptions::JSON, RequestOptions::FORM_PARAMS => $this->jsonOrFormInputData($options, $builder),
+            RequestOptions::MULTIPART => $this->attachmentData($options, $builder),
+            default => $this->rawPayloadData($options, $builder),
+        };
     }
 
     /**

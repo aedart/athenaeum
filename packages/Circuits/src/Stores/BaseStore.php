@@ -222,31 +222,16 @@ abstract class BaseStore implements
      */
     protected function dispatchStateChange(State $state): static
     {
-        switch ($state->id()) {
-            case CircuitBreaker::CLOSED:
-                $event = HasClosed::class;
-                $payload = new ChangedToClosed($state, $this->getFailure());
-                break;
+        return match ($state->id()) {
+            CircuitBreaker::CLOSED => $this->dispatchEvent(HasClosed::class, new ChangedToClosed($state, $this->getFailure())),
+            CircuitBreaker::OPEN => $this->dispatchEvent(HasOpened::class, new ChangedToOpen($state, $this->getFailure())),
+            CircuitBreaker::HALF_OPEN => $this->dispatchEvent(HasHalfOpened::class, new ChangedToHalfOpen($state, $this->getFailure())),
 
-            case CircuitBreaker::OPEN:
-                $event = HasOpened::class;
-                $payload = new ChangedToOpen($state, $this->getFailure());
-                break;
-
-            case CircuitBreaker::HALF_OPEN:
-                $event = HasHalfOpened::class;
-                $payload = new ChangedToHalfOpen($state, $this->getFailure());
-                break;
-
-            default:
-                // N/A -  we could fail here, but might not be suitable
-                // when considering that this method is "only" intended to
-                // dispatch state change events.
-                return $this;
-        }
-
-        // Finally, dispatch the event
-        return $this->dispatchEvent($event, $payload);
+            // N/A -  we could fail here, but might not be suitable
+            // when considering that this method is "only" intended to
+            // dispatch state change events.
+            default => $this
+        };
     }
 
     /**

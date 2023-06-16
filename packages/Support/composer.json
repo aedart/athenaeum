@@ -19,15 +19,15 @@
     ],
     "require": {
         "php": "^8.1",
-        "aedart/athenaeum-contracts": "^7.16",
-        "aedart/athenaeum-utils": "^7.16",
-        "illuminate/config": "^v10.13.0",
-        "illuminate/support": "^v10.13.0"
+        "aedart/athenaeum-contracts": "^7.17",
+        "aedart/athenaeum-utils": "^7.17",
+        "illuminate/config": "^v10.13.5",
+        "illuminate/support": "^v10.13.5"
     },
     "require-dev": {
         "predis/predis": "^2.1.2",
         "symfony/console": "^v6.3.0",
-        "twig/twig": "^3.6.0"
+        "twig/twig": "^3.6.1"
     },
     "autoload": {
         "psr-4": {
