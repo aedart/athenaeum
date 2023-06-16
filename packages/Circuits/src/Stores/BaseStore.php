@@ -222,7 +222,7 @@ abstract class BaseStore implements
      */
     protected function dispatchStateChange(State $state): static
     {
-        return match($state->id()) {
+        return match ($state->id()) {
             CircuitBreaker::CLOSED => $this->dispatchEvent(HasClosed::class, new ChangedToClosed($state, $this->getFailure())),
             CircuitBreaker::OPEN => $this->dispatchEvent(HasOpened::class, new ChangedToOpen($state, $this->getFailure())),
             CircuitBreaker::HALF_OPEN => $this->dispatchEvent(HasHalfOpened::class, new ChangedToHalfOpen($state, $this->getFailure())),
