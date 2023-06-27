@@ -25,7 +25,7 @@
         "illuminate/support": "^v10.13.5"
     },
     "require-dev": {
-        "predis/predis": "^2.1.2",
+        "predis/predis": "^2.2.0",
         "symfony/console": "^v6.3.0",
         "twig/twig": "^3.6.1"
     },

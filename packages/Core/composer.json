@@ -34,7 +34,7 @@
         "vlucas/phpdotenv": "^5.5.0"
     },
     "require-dev": {
-        "symfony/var-dumper": "^v6.3.0"
+        "symfony/var-dumper": "^v6.3.1"
     },
     "autoload": {
         "psr-4": {
