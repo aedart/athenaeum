@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.18.0] - 2023-07-06
+
+### Changed
+
+* Updated dependencies (_service update_).
+
 ## [7.17.0] - 2023-06-27
 
 ### Changed
@@ -1235,7 +1241,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.17.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.18.0...HEAD
+[7.18.0]: https://github.com/aedart/athenaeum/compare/7.17.0...7.18.0
 [7.17.0]: https://github.com/aedart/athenaeum/compare/7.16.0...7.17.0
 [7.16.0]: https://github.com/aedart/athenaeum/compare/7.15.0...7.16.0
 [7.15.0]: https://github.com/aedart/athenaeum/compare/7.14.0...7.15.0
