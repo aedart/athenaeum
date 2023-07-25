@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* Target `Illuminate\Contracts\Cache\Repository` is not instantiable while building `Illuminate\Console\Scheduling\ScheduleRunCommand`. [#174](https://github.com/aedart/athenaeum/issues/174).
+
 ## [7.18.0] - 2023-07-06
 
 ### Changed
