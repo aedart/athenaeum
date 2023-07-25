@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.18.1] - 2023-07-25
+
 ### Fixed
 
 * Target `Illuminate\Contracts\Cache\Repository` is not instantiable while building `Illuminate\Console\Scheduling\ScheduleRunCommand`. [#174](https://github.com/aedart/athenaeum/issues/174).
@@ -1245,7 +1247,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.18.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.18.1...HEAD
+[7.18.1]: https://github.com/aedart/athenaeum/compare/7.18.0...7.18.1
 [7.18.0]: https://github.com/aedart/athenaeum/compare/7.17.0...7.18.0
 [7.17.0]: https://github.com/aedart/athenaeum/compare/7.16.0...7.17.0
 [7.16.0]: https://github.com/aedart/athenaeum/compare/7.15.0...7.16.0
