@@ -9,6 +9,7 @@ use Illuminate\Cache\Console\ClearCommand;
 use Illuminate\Cache\Console\ForgetCommand;
 use Illuminate\Contracts\Cache\Factory;
 use Illuminate\Contracts\Cache\Repository;
+use Psr\SimpleCache\CacheInterface;
 
 /**
  * Cache Service Provider
@@ -25,13 +26,13 @@ class CacheServiceProvider extends LaravelCacheServiceProvider
     {
         parent::register();
 
-        // The "clear" and "forget" commands require the concrete
-        // "CacheManager" manager as dependency. Therefore, to ensure
-        // the correct instance is provided via the IoC, these aliases
-        // are required.
+        // Register a few aliases, which are needed by the "clear", "forget" and other
+        // console commands.
         $this->app->alias('cache', Factory::class);
         $this->app->alias('cache', CacheManager::class);
-        $this->app->alias(Repository::class, CacheManager::class);
+
+        $this->app->alias('cache.store', Repository::class);
+        $this->app->alias('cache.store', CacheInterface::class);
     }
 
 
@@ -53,7 +54,6 @@ class CacheServiceProvider extends LaravelCacheServiceProvider
         return array_merge(parent::provides(), [
             Factory::class,
             CacheManager::class,
-            Repository::class
         ]);
     }
 
