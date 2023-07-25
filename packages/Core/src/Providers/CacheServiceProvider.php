@@ -8,6 +8,7 @@ use Illuminate\Cache\CacheServiceProvider as LaravelCacheServiceProvider;
 use Illuminate\Cache\Console\ClearCommand;
 use Illuminate\Cache\Console\ForgetCommand;
 use Illuminate\Contracts\Cache\Factory;
+use Illuminate\Contracts\Cache\Repository;
 
 /**
  * Cache Service Provider
@@ -30,6 +31,7 @@ class CacheServiceProvider extends LaravelCacheServiceProvider
         // are required.
         $this->app->alias('cache', Factory::class);
         $this->app->alias('cache', CacheManager::class);
+        $this->app->alias(Repository::class, CacheManager::class);
     }
 
 
@@ -50,7 +52,8 @@ class CacheServiceProvider extends LaravelCacheServiceProvider
     {
         return array_merge(parent::provides(), [
             Factory::class,
-            CacheManager::class
+            CacheManager::class,
+            Repository::class
         ]);
     }
 
