@@ -49,9 +49,9 @@ return static function (MBConfig $config): void {
             'roave/security-advisories' => 'dev-master',
             'codeception/codeception' => '^5.0.10',
             "codeception/module-asserts" => "^3.0.0",
-            'orchestra/testbench' => '^v8.5.9',
-            'orchestra/testbench-dusk' => '^v8.6.4',
-            'illuminate/testing' => '^v10.14.1'
+            'orchestra/testbench' => '^v8.5.12',
+            'orchestra/testbench-dusk' => '^v8.6.7',
+            'illuminate/testing' => '^v10.17.1'
         ],
 
         ComposerJsonSection::AUTOLOAD => [
