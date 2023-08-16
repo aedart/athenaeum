@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* Missing validation package dependency (_in the AntiVirus package_). [#176](https://github.com/aedart/athenaeum/issues/176). 
+
 ## [7.19.0] - 2023-08-07
 
 * Updated dependencies (_service update_).
