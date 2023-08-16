@@ -21,10 +21,10 @@
         "codeception/codeception": "^5.0.10",
         "codeception/module-asserts": "^3.0.0",
         "fakerphp/faker": "^v1.23.0",
-        "illuminate/testing": "^v10.17.1",
+        "illuminate/testing": "^v10.19.0",
         "mockery/mockery": "1.5.*",
-        "orchestra/testbench": "^v8.5.12",
-        "orchestra/testbench-dusk": "^v8.6.7"
+        "orchestra/testbench": "^v8.8.1",
+        "orchestra/testbench-dusk": "^v8.8.7"
     },
     "autoload": {
         "psr-4": {
