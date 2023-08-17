@@ -17,24 +17,24 @@
     ],
     "require": {
         "php": "^8.1",
-        "aedart/athenaeum-config": "^7.17",
-        "aedart/athenaeum-console": "^7.17",
-        "aedart/athenaeum-container": "^7.17",
-        "aedart/athenaeum-contracts": "^7.17",
-        "aedart/athenaeum-dto": "^7.17",
-        "aedart/athenaeum-events": "^7.17",
-        "aedart/athenaeum-maintenance-modes": "^7.17",
-        "aedart/athenaeum-service": "^7.17",
-        "aedart/athenaeum-support": "^7.17",
-        "aedart/athenaeum-utils": "^7.17",
-        "illuminate/cache": "^v10.13.5",
-        "illuminate/filesystem": "^v10.13.5",
+        "aedart/athenaeum-config": "^7.21",
+        "aedart/athenaeum-console": "^7.21",
+        "aedart/athenaeum-container": "^7.21",
+        "aedart/athenaeum-contracts": "^7.21",
+        "aedart/athenaeum-dto": "^7.21",
+        "aedart/athenaeum-events": "^7.21",
+        "aedart/athenaeum-maintenance-modes": "^7.21",
+        "aedart/athenaeum-service": "^7.21",
+        "aedart/athenaeum-support": "^7.21",
+        "aedart/athenaeum-utils": "^7.21",
+        "illuminate/cache": "^v10.19.0",
+        "illuminate/filesystem": "^v10.19.0",
         "psr/log": "^3.0.0",
-        "symfony/console": "^v6.3.0",
+        "symfony/console": "^v6.3.2",
         "vlucas/phpdotenv": "^5.5.0"
     },
     "require-dev": {
-        "symfony/var-dumper": "^v6.3.0"
+        "symfony/var-dumper": "^v6.3.3"
     },
     "autoload": {
         "psr-4": {

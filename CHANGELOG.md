@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.20.0] - 2023-08-16
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* Missing validation package dependency (_in the AntiVirus package_). [#176](https://github.com/aedart/athenaeum/issues/176). 
+
+## [7.19.0] - 2023-08-07
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [7.18.1] - 2023-07-25
+
+### Fixed
+
+* Target `Illuminate\Contracts\Cache\Repository` is not instantiable while building `Illuminate\Console\Scheduling\ScheduleRunCommand`. [#174](https://github.com/aedart/athenaeum/issues/174).
+
+## [7.18.0] - 2023-07-06
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [7.17.0] - 2023-06-27
+
+### Changed
+
+* Updated dependencies (_service update_).
+
 ## [7.16.0] - 2023-06-16
 
 ### Changed
@@ -1229,7 +1263,12 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.16.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.20.0...HEAD
+[7.20.0]: https://github.com/aedart/athenaeum/compare/7.19.0...7.20.0
+[7.19.0]: https://github.com/aedart/athenaeum/compare/7.18.1...7.19.0
+[7.18.1]: https://github.com/aedart/athenaeum/compare/7.18.0...7.18.1
+[7.18.0]: https://github.com/aedart/athenaeum/compare/7.17.0...7.18.0
+[7.17.0]: https://github.com/aedart/athenaeum/compare/7.16.0...7.17.0
 [7.16.0]: https://github.com/aedart/athenaeum/compare/7.15.0...7.16.0
 [7.15.0]: https://github.com/aedart/athenaeum/compare/7.14.0...7.15.0
 [7.14.0]: https://github.com/aedart/athenaeum/compare/7.13.0...7.14.0
