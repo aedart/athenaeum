@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.21.0] - 2023-08-25
+
 ### Changed
 
 * Minimum required PHP version set to `8.1.22`, due to PHP's internal magic database. [#178](https://github.com/aedart/athenaeum/issues/178).
@@ -1271,7 +1273,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.20.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.21.0...HEAD
+[7.21.0]: https://github.com/aedart/athenaeum/compare/7.20.0...7.21.0
 [7.20.0]: https://github.com/aedart/athenaeum/compare/7.19.0...7.20.0
 [7.19.0]: https://github.com/aedart/athenaeum/compare/7.18.1...7.19.0
 [7.18.1]: https://github.com/aedart/athenaeum/compare/7.18.0...7.18.1
