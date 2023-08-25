@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* Minimum required PHP version set to `8.1.22`, due to PHP's internal magic database. [#178](https://github.com/aedart/athenaeum/issues/178).
+
+### Fixed
+
+* Incorrect expected MIME-Type for `*.xz` files. Before PHP `8.1.22`, the `FileInfoSampler` returned `application/octet-stream`. It now returns `application/x-xz`, which is the correct MIME-Type for `*.xz` files. [#178](https://github.com/aedart/athenaeum/issues/178). 
+
 ## [7.20.0] - 2023-08-16
 
 ### Changed

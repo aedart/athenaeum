@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.1.22",
         "aedart/athenaeum-container": "^7.21",
         "aedart/athenaeum-contracts": "^7.21",
         "aedart/athenaeum-support": "^7.21",
