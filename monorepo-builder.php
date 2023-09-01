@@ -47,11 +47,11 @@ return static function (MBConfig $config): void {
             'ext-curl' => '*',
             'bamarni/composer-bin-plugin' => '^1.8.2',
             'roave/security-advisories' => 'dev-master',
-            'codeception/codeception' => '^5.0.10',
+            'codeception/codeception' => '^5.0.11',
             "codeception/module-asserts" => "^3.0.0",
-            'orchestra/testbench' => '^v8.8.1',
-            'orchestra/testbench-dusk' => '^v8.8.0',
-            'illuminate/testing' => '^v10.19.0'
+            'orchestra/testbench' => '^v8.10.0',
+            'orchestra/testbench-dusk' => '^v8.10.0',
+            'illuminate/testing' => '^v10.21.0'
         ],
 
         ComposerJsonSection::AUTOLOAD => [
