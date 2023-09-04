@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.22.1] - 2023-09-04
+
 ### Fixed
 
 * `InfectionFreeFile` throws exception when invalid file is attempted scanned (_in the AntiVirus package_). [#180](https://github.com/aedart/athenaeum/issues/180).
@@ -1283,7 +1285,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.22.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.22.1...HEAD
+[7.22.1]: https://github.com/aedart/athenaeum/compare/7.22.0...7.22.1
 [7.22.0]: https://github.com/aedart/athenaeum/compare/7.21.0...7.22.0
 [7.21.0]: https://github.com/aedart/athenaeum/compare/7.20.0...7.21.0
 [7.20.0]: https://github.com/aedart/athenaeum/compare/7.19.0...7.20.0
