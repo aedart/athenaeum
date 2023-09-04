@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* `InfectionFreeFile` throws exception when invalid file is attempted scanned (_in the AntiVirus package_). [#180](https://github.com/aedart/athenaeum/issues/180).
+
 ## [7.22.0] - 2023-09-01
 
 ### Changed
