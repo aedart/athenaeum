@@ -2,6 +2,7 @@
 
 namespace Aedart\Antivirus\Validation\Rules;
 
+use Aedart\Antivirus\Exceptions\UnableToOpenFileStream;
 use Aedart\Antivirus\Facades\Antivirus;
 use Aedart\Contracts\Antivirus\Exceptions\AntivirusException;
 use Aedart\Contracts\Streams\FileStream;
@@ -52,9 +53,16 @@ class InfectionFreeFile extends BaseValidationRule
             options: $this->options()
         );
 
-        if (!$scanner->isClean($value)) {
-            $fail('athenaeum::antivirus.infected')->translate([ 'attribute' => $attribute ]);
+        try {
+            if (!$scanner->isClean($value)) {
+                $fail('athenaeum::antivirus.infected')->translate([ 'attribute' => $attribute ]);
+            }
+        } catch (UnableToOpenFileStream $e) {
+            // Fail validation whenever the file in question cannot be opened.
+            $fail('athenaeum::antivirus.invalid_file')->translate([ 'attribute' => $attribute ]);
         }
+
+        // Any other kind of exception SHOULD NOT be handled by this validation rule...
     }
 
     /**
