@@ -20,7 +20,7 @@
         "aedart/athenaeum-support": "^7.23"
     },
     "require-dev": {
-        "laravel/fortify": "^1.17.5"
+        "laravel/fortify": "^1.18.0"
     },
     "autoload": {
         "psr-4": {
