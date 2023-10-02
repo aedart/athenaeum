@@ -23,7 +23,7 @@
         "php": "^8.1.22",
         "composer-runtime-api": "^2.0.0",
         "aedart/athenaeum-contracts": "^7.24",
-        "illuminate/support": "^v10.23.1",
+        "illuminate/support": "^v10.25.2",
         "mockery/mockery": "1.5.*"
     },
     "autoload": {
