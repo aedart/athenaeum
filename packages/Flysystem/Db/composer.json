@@ -22,8 +22,8 @@
         "aedart/athenaeum-container": "^7.26",
         "aedart/athenaeum-database": "^7.26",
         "aedart/athenaeum-streams": "^7.26",
-        "illuminate/console": "^v10.25.2",
-        "league/flysystem": "^3.16.0"
+        "illuminate/console": "v10.32.1",
+        "league/flysystem": "^3.19.0"
     },
     "require-dev": {
         "league/flysystem-adapter-test-utilities": "^3.16.0"
