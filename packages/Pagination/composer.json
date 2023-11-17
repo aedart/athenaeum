@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": "^8.1.22",
-        "aedart/athenaeum-contracts": "^7.26"
+        "aedart/athenaeum-contracts": "^7.27"
     },
     "autoload": {
         "psr-4": {
