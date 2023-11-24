@@ -27,7 +27,7 @@
     "require-dev": {
         "predis/predis": "^2.2.2",
         "symfony/console": "^v6.3.8",
-        "twig/twig": "^3.7.1"
+        "twig/twig": "^3.8.0"
     },
     "autoload": {
         "psr-4": {
