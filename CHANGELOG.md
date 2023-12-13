@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* Unable to remove file, due to missing prefix (_in Flysystem `DatabaseAdapter`_).
+
 ## [7.27.0] - 2023-11-24
 
 ### Changed
