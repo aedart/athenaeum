@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.28.0] - 2023-12-13
+
+### Changed
+
+* Updated dependencies (_service update_).
+
 ### Fixed
 
 * Unable to remove file, due to missing prefix (_in Flysystem `DatabaseAdapter`_).
@@ -1319,7 +1325,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.27.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.28.0...HEAD
+[7.28.0]: https://github.com/aedart/athenaeum/compare/7.27.0...7.28.0
 [7.27.0]: https://github.com/aedart/athenaeum/compare/7.26.0...7.27.0
 [7.26.0]: https://github.com/aedart/athenaeum/compare/7.25.0...7.26.0
 [7.25.0]: https://github.com/aedart/athenaeum/compare/7.24.0...7.25.0
