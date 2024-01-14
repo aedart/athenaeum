@@ -45,8 +45,7 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
-abstract class RedmineApiResource extends ArrayDto implements
-    ApiResource
+abstract class RedmineApiResource extends ArrayDto implements ApiResource
 {
     use Concerns\ResourceRelations;
     use ConnectionTrait;

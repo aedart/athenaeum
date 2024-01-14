@@ -156,7 +156,6 @@ abstract class ResourceRelation implements ResourceRelationInterface
     protected function wrapFilters(): callable
     {
         return function (Builder $request, ApiResource $resource) {
-
             // Apply includes
             $applied = $resource->applyIncludes(
                 $this->getIncludes(),

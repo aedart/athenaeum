@@ -151,7 +151,6 @@ class ConsoleServiceProvider extends ServiceProvider implements DeferrableProvid
 
         // If a schedule already bound...
         if ($this->app->bound(Schedule::class)) {
-
             // NOTE: At this point, we are unable to (re)specify the timezone!
             // But we can instruct what cache store the schedule should use.
 

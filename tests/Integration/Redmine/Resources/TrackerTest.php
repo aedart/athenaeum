@@ -28,7 +28,7 @@ class TrackerTest extends RedmineTestCase
     public function canListTrackers()
     {
         // Debug
-//        Tracker::$debug = true;
+        //        Tracker::$debug = true;
 
         // ---------------------------------------------------------- //
         // List trackers

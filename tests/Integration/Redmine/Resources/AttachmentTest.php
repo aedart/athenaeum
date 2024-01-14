@@ -46,7 +46,7 @@ class AttachmentTest extends RedmineTestCase
     public function canUploadAFile()
     {
         // Debug
-//        Attachment::$debug = true;
+        //        Attachment::$debug = true;
 
         $file = $this->dummyFile();
 
@@ -90,7 +90,7 @@ class AttachmentTest extends RedmineTestCase
     public function canDownloadFile()
     {
         // Debug
-//        Attachment::$debug = true;
+        //        Attachment::$debug = true;
 
         $file = $this->dummyFile();
 

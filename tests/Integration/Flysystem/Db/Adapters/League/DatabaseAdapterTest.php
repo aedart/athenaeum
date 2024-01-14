@@ -114,16 +114,16 @@ class DatabaseAdapterTest extends BaseTestCase
         $this->assertTrue(true);
 
         // Original:
-//        $this->givenWeHaveAnExistingFile(
-//            'unknown-mime-type.md5',
-//            file_get_contents(__DIR__ . '/test_files/unknown-mime-type.md5')
-//        );
-//
-//        $this->expectException(UnableToRetrieveMetadata::class);
-//
-//        $this->runScenario(function () {
-//            $this->adapter()->mimeType('unknown-mime-type.md5');
-//        });
+        //        $this->givenWeHaveAnExistingFile(
+        //            'unknown-mime-type.md5',
+        //            file_get_contents(__DIR__ . '/test_files/unknown-mime-type.md5')
+        //        );
+        //
+        //        $this->expectException(UnableToRetrieveMetadata::class);
+        //
+        //        $this->runScenario(function () {
+        //            $this->adapter()->mimeType('unknown-mime-type.md5');
+        //        });
     }
 
     /**

@@ -87,7 +87,6 @@ class Evaluator implements PreconditionsEvaluator
         $index = 0;
         $count = count($preconditions);
         while ($index < $count) {
-
             // Prepare teh next precondition, Skip to next, if it's not applicable.
             $precondition = $this->preparePrecondition($preconditions[$index]);
             if (!$precondition->isApplicable($resource)) {

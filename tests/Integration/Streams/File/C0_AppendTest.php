@@ -155,7 +155,7 @@ class C0_AppendTest extends StreamTestCase
         // "overhead" check if stream is detached in the internal
         // performCopy() method...
         $this->expectException(StreamIsDetached::class);
-//        $this->expectException(CannotCopyToTargetStream::class);
+        //        $this->expectException(CannotCopyToTargetStream::class);
 
         $data = $this->getFaker()->realText(50);
         $source = FileStream::openMemory()

@@ -28,7 +28,7 @@ class UserTest extends RedmineTestCase
     public function canCreateUser()
     {
         // Debug
-//        user::$debug = true;
+        //        user::$debug = true;
 
         // ----------------------------------------------------------------------- //
 
@@ -68,7 +68,7 @@ class UserTest extends RedmineTestCase
     public function canUpdateUser()
     {
         // Debug
-//        User::$debug = true;
+        //        User::$debug = true;
 
         // ----------------------------------------------------------------------- //
 
@@ -123,7 +123,7 @@ class UserTest extends RedmineTestCase
     public function canListUsers()
     {
         // Debug
-//        User::$debug = true;
+        //        User::$debug = true;
 
         // ----------------------------------------------------------------------- //
 

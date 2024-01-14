@@ -255,7 +255,7 @@ class InfectionFreeFileRuleTest extends AntivirusTestCase
 
         // ----------------------------------------------------------------- //
 
-//        $this->withoutExceptionHandling();
+        //        $this->withoutExceptionHandling();
 
         $url = route('file.upload');
         $response = $this

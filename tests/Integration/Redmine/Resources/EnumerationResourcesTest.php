@@ -65,7 +65,7 @@ class EnumerationResourcesTest extends RedmineTestCase
     public function canListEnumeration(string $enumerationResource)
     {
         // Debug
-//        IssuePriority::$debug = true;
+        //        IssuePriority::$debug = true;
 
         $list = [
             [

@@ -235,7 +235,6 @@ class Kernel implements
             // Attempt to perform whatever is being requested.
             $result = $callback($this, $output);
         } catch (Throwable $e) {
-
             // Force throw exceptions if required by application
             if ($this->getCoreApplication()->mustThrowExceptions()) {
                 throw $e;
@@ -273,7 +272,6 @@ class Kernel implements
 
             return $handler->handle($e);
         } catch (Throwable $handlerException) {
-
             // In case exception was (re)thrown via handler, we simply output
             // it here... nothing else was can
             $this->getArtisan()->renderThrowable($handlerException, $output);

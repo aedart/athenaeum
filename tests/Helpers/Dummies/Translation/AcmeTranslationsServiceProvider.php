@@ -29,8 +29,8 @@ class AcmeTranslationsServiceProvider extends ServiceProvider
         $this->loadJsonTranslationsFrom($dataDir . 'translation/lang');
 
         // Not needed for tests...
-//        $this->publishes([
-//            $dataDir => $this->app->langPath('vendor/translation-test'),
-//        ]);
+        //        $this->publishes([
+        //            $dataDir => $this->app->langPath('vendor/translation-test'),
+        //        ]);
     }
 }

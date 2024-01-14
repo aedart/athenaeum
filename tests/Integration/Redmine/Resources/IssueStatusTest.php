@@ -28,7 +28,7 @@ class IssueStatusTest extends RedmineTestCase
     public function canListIssueStatuses()
     {
         // Debug
-//        IssueStatus::$debug = true;
+        //        IssueStatus::$debug = true;
 
         // ---------------------------------------------------------- //
         // List statuses

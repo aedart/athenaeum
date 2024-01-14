@@ -35,7 +35,7 @@ class SearchFilterTest extends FiltersTestCase
         $bindings = $query->getBindings();
 
         ConsoleDebugger::output($sql, $bindings);
-//        $this->assertStringContainsString($search, $sql); // Will not work, due to binding values!
+        //        $this->assertStringContainsString($search, $sql); // Will not work, due to binding values!
 
         // Bindings
         $this->assertNotEmpty($bindings, 'No bindings set');

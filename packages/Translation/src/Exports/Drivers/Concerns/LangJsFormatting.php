@@ -24,7 +24,6 @@ trait LangJsFormatting
         $output = [];
         foreach ($translations as $locale => $groups) {
             foreach ($groups as $group => $items) {
-
                 // Ensure locale / group key exists.
                 $key = "{$locale}.$group";
                 if (!isset($output[$key])) {

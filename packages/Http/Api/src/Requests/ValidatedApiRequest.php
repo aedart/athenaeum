@@ -63,12 +63,12 @@ abstract class ValidatedApiRequest extends FormRequest
 
         // TODO: This disables the "after validation rules" feature introduced by Laravel in v10.8.0
         // TODO @see https://github.com/aedart/athenaeum/issues/167
-//        if (method_exists($this, 'after')) {
-//            $validator->after($this->container->call(
-//                $this->after(...),
-//                ['validator' => $validator]
-//            ));
-//        }
+        //        if (method_exists($this, 'after')) {
+        //            $validator->after($this->container->call(
+        //                $this->after(...),
+        //                ['validator' => $validator]
+        //            ));
+        //        }
 
         $this->setValidator($validator);
 
@@ -145,13 +145,13 @@ abstract class ValidatedApiRequest extends FormRequest
             ->after([$this, 'afterValidation']);
     }
 
-//    /**
-//     * @inheritDoc
-//     */
-//    public function validationData(): array
-//    {
-//        return parent::validationData();
-//    }
+    //    /**
+    //     * @inheritDoc
+    //     */
+    //    public function validationData(): array
+    //    {
+    //        return parent::validationData();
+    //    }
 
     /**
      * {@inheritDoc}

@@ -251,7 +251,6 @@ class DatabaseAdapter implements
 
         try {
             $this->transaction(function (ConnectionInterface $connection) use ($path) {
-
                 // Create new configuration to pass connection into on...
                 $config = new Config([
                     'connection' => $connection

@@ -49,7 +49,6 @@ class FLockDriver extends BaseLockDriver
 
         // Attempt to acquire lock
         while (flock($resource, $type | LOCK_NB, $blocking) === false) {
-
             // Continue if timeout not reached
             $delta = (microtime(true) - $start);
             if ($blocking && $delta <= $timeout) {

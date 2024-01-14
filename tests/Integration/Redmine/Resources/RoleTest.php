@@ -29,7 +29,7 @@ class RoleTest extends RedmineTestCase
     public function canListRoles()
     {
         // Debug
-//        Role::$debug = true;
+        //        Role::$debug = true;
 
         // ---------------------------------------------------------- //
         // List roles
@@ -73,7 +73,7 @@ class RoleTest extends RedmineTestCase
     public function canFetchSingleRole()
     {
         // Debug
-//        Role::$debug = true;
+        //        Role::$debug = true;
 
         // ---------------------------------------------------------- //
         // Prerequisites - fetch random role

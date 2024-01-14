@@ -31,7 +31,7 @@ class TraversableResultsTest extends RedmineTestCase
     public function canTraverseAcrossMultipleApiResultsPages()
     {
         // Debug
-//        Issue::$debug = true;
+        //        Issue::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites - Create a large enough issue set, so that the traversable

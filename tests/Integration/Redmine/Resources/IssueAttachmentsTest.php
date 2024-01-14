@@ -27,7 +27,7 @@ class IssueAttachmentsTest extends RedmineTestCase
     public function canCreateIssueWithAttachments()
     {
         // Debug
-//        Issue::$debug = true;
+        //        Issue::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites

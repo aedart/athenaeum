@@ -29,7 +29,7 @@ class OneFromListRelationTest extends RedmineTestCase
     public function canObtainRelatedResource()
     {
         // Debug
-//        Issue::$debug = true;
+        //        Issue::$debug = true;
 
         // -------------------------------------------------------------------- //
         // Prerequisites - create a new issue

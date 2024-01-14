@@ -28,7 +28,7 @@ class IssueNotesTest extends RedmineTestCase
     public function canAddNoteToIssue()
     {
         // Debug
-//        Issue::$debug = true;
+        //        Issue::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites

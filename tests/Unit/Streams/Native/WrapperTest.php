@@ -54,7 +54,7 @@ class WrapperTest extends UnitTestCase
                     'opened_path' => $opened_path
                 ]);
 
-//                stream_set_read_buffer($this->stream, 24);
+                //                stream_set_read_buffer($this->stream, 24);
 
                 return true;
             }

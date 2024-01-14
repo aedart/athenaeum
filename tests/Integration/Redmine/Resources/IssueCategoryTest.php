@@ -71,7 +71,7 @@ class IssueCategoryTest extends RedmineTestCase
     public function canCreateIssueCategory()
     {
         // Debug
-//        IssueCategory::$debug = true;
+        //        IssueCategory::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites
@@ -124,7 +124,7 @@ class IssueCategoryTest extends RedmineTestCase
     public function canUpdateIssueCategory()
     {
         // Debug
-//        IssueCategory::$debug = true;
+        //        IssueCategory::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites - create a new category
@@ -171,7 +171,7 @@ class IssueCategoryTest extends RedmineTestCase
     public function canFetchIssueCategoriesForProject()
     {
         // Debug
-//        IssueCategory::$debug = true;
+        //        IssueCategory::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites - create a few categories for a project
@@ -210,7 +210,7 @@ class IssueCategoryTest extends RedmineTestCase
         $this->assertNotEmpty($categories->results(), 'No results obtained');
 
         // NOTE: ...Once again, Redmine does not care about pagination... damn it!
-//        $this->assertSame($limit, $categories->limit(), 'Incorrect limit');
+        //        $this->assertSame($limit, $categories->limit(), 'Incorrect limit');
 
         foreach ($categories as $category) {
             $this->assertInstanceOf(IssueCategory::class, $category);

@@ -36,8 +36,7 @@ use Aedart\Redmine\Relations\HasMany;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
-class CustomField extends RedmineApiResource implements
-    Listable
+class CustomField extends RedmineApiResource implements Listable
 {
     protected array $allowed = [
         'id' => 'int',
