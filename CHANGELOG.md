@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.30.0] - 2024-01-14
+
+### Changed
+
+* Updated dependencies (_service update_).
+* Updated "bin" dependencies (_this only affects the Athenaeum mono-repository / maintainers_).
+* Changed test version to PHP `8.1` for the PHPCompatibility check.
+
 ## [7.29.0] - 2024-01-02
 
 ### Changed
@@ -1332,7 +1340,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.29.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.30.0...HEAD
+[7.30.0]: https://github.com/aedart/athenaeum/compare/7.29.0...7.30.0
 [7.29.0]: https://github.com/aedart/athenaeum/compare/7.28.0...7.29.0
 [7.28.0]: https://github.com/aedart/athenaeum/compare/7.27.0...7.28.0
 [7.27.0]: https://github.com/aedart/athenaeum/compare/7.26.0...7.27.0
