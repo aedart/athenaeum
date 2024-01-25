@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.31.0] - 2024-01-25
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* Remove locked version constraint for `illuminate/*` packages¹. 
+
+¹: _"From version x" constraints were at some point removed by mistake and caused undesired locked/fixed versions of all Laravel packages._
+
 ## [7.30.1] - 2024-01-14
 
 ### Fixed
@@ -1346,7 +1358,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.30.1...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.31.0...HEAD
+[7.31.0]: https://github.com/aedart/athenaeum/compare/7.30.1...7.31.0
 [7.30.1]: https://github.com/aedart/athenaeum/compare/7.30.0...7.30.1
 [7.30.0]: https://github.com/aedart/athenaeum/compare/7.29.0...7.30.0
 [7.29.0]: https://github.com/aedart/athenaeum/compare/7.28.0...7.29.0
