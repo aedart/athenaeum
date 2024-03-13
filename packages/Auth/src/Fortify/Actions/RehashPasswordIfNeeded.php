@@ -9,6 +9,8 @@ use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Http\Request;
 
 /**
+ * @deprecated Since v8.x, password rehashing is now a default part of Laravel's \Illuminate\Contracts\Auth\UserProvider
+ *
  * Rehash Password If Needed Action
  *
  * If needed, this action will re-hash submitted plain-text password and notify
