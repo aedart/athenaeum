@@ -5,7 +5,6 @@ use Aedart\Support\Facades\IoCFacade;
 use Illuminate\Contracts\Foundation\Application;
 
 if (!function_exists('paths')) {
-
     /**
      * Get he paths container
      *
@@ -27,7 +26,6 @@ if (!function_exists('paths')) {
 }
 
 if (!function_exists('base_path')) {
-
     /**
      * Get a path within the "base" directory
      *
@@ -42,7 +40,6 @@ if (!function_exists('base_path')) {
 }
 
 if (!function_exists('bootstrap_path')) {
-
     /**
      * Get a path within the "bootstrap" directory
      *
@@ -57,7 +54,6 @@ if (!function_exists('bootstrap_path')) {
 }
 
 if (!function_exists('config_path')) {
-
     /**
      * Get a path within the "config" directory
      *
@@ -86,7 +82,6 @@ if (!function_exists('lang_path')) {
 }
 
 if (!function_exists('database_path')) {
-
     /**
      * Get a path with the "database" directory
      *
@@ -101,7 +96,6 @@ if (!function_exists('database_path')) {
 }
 
 if (!function_exists('environment_path')) {
-
     /**
      * Get a path within the "environment" directory
      *
@@ -121,7 +115,6 @@ if (!function_exists('environment_path')) {
 }
 
 if (!function_exists('resource_path')) {
-
     /**
      * Get a path within the "resources" directory
      *
@@ -136,7 +129,6 @@ if (!function_exists('resource_path')) {
 }
 
 if (!function_exists('storage_path')) {
-
     /**
      * Get a path within the "storage" directory
      *
@@ -156,7 +148,6 @@ if (!function_exists('storage_path')) {
 }
 
 if (!function_exists('public_path')) {
-
     /**
      * Get a path within the "public" directory
      *

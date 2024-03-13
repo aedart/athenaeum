@@ -7,6 +7,97 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.33.0] - 2024-03-13
+
+### Changed
+
+* Updated dependencies (_last expected service updated in the `v7.x` series._)
+
+## [7.32.0] - 2024-02-29
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [7.31.0] - 2024-01-25
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* Remove locked version constraint for `illuminate/*` packages¹. 
+
+¹: _"From version x" constraints were at some point removed by mistake and caused undesired locked/fixed versions of all Laravel packages._
+
+## [7.30.1] - 2024-01-14
+
+### Fixed
+
+* Various code style errors (_happened after update of bin dependencies - easy coding standard_).
+
+## [7.30.0] - 2024-01-14
+
+### Changed
+
+* Updated dependencies (_service update_).
+* Updated "bin" dependencies (_this only affects the Athenaeum mono-repository / maintainers_).
+* Changed test version to PHP `8.1` for the PHPCompatibility check.
+
+## [7.29.0] - 2024-01-02
+
+### Changed
+
+* License year bumped to 2024.
+* Updated dependencies (_service update_).
+
+## [7.28.0] - 2023-12-13
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* Unable to remove file, due to missing path prefix (_in Flysystem `DatabaseAdapter`_).
+
+## [7.27.0] - 2023-11-24
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [7.26.0] - 2023-11-17
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [7.25.0] - 2023-10-25
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [7.24.0] - 2023-10-02
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [7.23.0] - 2023-09-15
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [7.22.1] - 2023-09-04
+
+### Fixed
+
+* `InfectionFreeFile` throws exception when invalid file is attempted scanned (_in the AntiVirus package_). [#180](https://github.com/aedart/athenaeum/issues/180).
+
 ## [7.22.0] - 2023-09-01
 
 ### Changed
@@ -1070,7 +1161,7 @@ Both methods failed showing a correct amount, whenever the initial value surpass
 * Changed `StatusCodesExpectation`, now inherits from `ResponseExpectation`. Some internal methods have been redesigned. This change should not affect your code, unless you have custom Http Request `Builder` implementation.
 * Changed `withExpectation()`, in Request `Builder`. Now accepts both a `callable` and a `ResponseExpectation` instance. This change should not affect your code, unless you have custom Http Request `Builder` implementation.
 * Changed Request `Builder` and Http `Client` interfaces and concrete implementations. Now offers methods for adding `Middleware`. This change only affects you if you have a custom Http `Client` or Request `Builder` implementation.
-* Changed Http `Client` and Request `Builder`, added debugging methods (`debug()`, `dd()`, `log()`...etc). This change only affects you if you have a custom Http `Client` or Request `Builder` implementation.
+* Changed Http `Client` and Request `Builder`, added debugging methods (`debug()`, `dd()`, `log()`...etc.). This change only affects you if you have a custom Http `Client` or Request `Builder` implementation.
 
 **Non-breaking Changes**
 
@@ -1279,7 +1370,20 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.22.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/7.33.0...HEAD
+[7.33.0]: https://github.com/aedart/athenaeum/compare/7.32.0...7.33.0
+[7.32.0]: https://github.com/aedart/athenaeum/compare/7.31.0...7.32.0
+[7.31.0]: https://github.com/aedart/athenaeum/compare/7.30.1...7.31.0
+[7.30.1]: https://github.com/aedart/athenaeum/compare/7.30.0...7.30.1
+[7.30.0]: https://github.com/aedart/athenaeum/compare/7.29.0...7.30.0
+[7.29.0]: https://github.com/aedart/athenaeum/compare/7.28.0...7.29.0
+[7.28.0]: https://github.com/aedart/athenaeum/compare/7.27.0...7.28.0
+[7.27.0]: https://github.com/aedart/athenaeum/compare/7.26.0...7.27.0
+[7.26.0]: https://github.com/aedart/athenaeum/compare/7.25.0...7.26.0
+[7.25.0]: https://github.com/aedart/athenaeum/compare/7.24.0...7.25.0
+[7.24.0]: https://github.com/aedart/athenaeum/compare/7.23.0...7.24.0
+[7.23.0]: https://github.com/aedart/athenaeum/compare/7.22.1...7.23.0
+[7.22.1]: https://github.com/aedart/athenaeum/compare/7.22.0...7.22.1
 [7.22.0]: https://github.com/aedart/athenaeum/compare/7.21.0...7.22.0
 [7.21.0]: https://github.com/aedart/athenaeum/compare/7.20.0...7.21.0
 [7.20.0]: https://github.com/aedart/athenaeum/compare/7.19.0...7.20.0

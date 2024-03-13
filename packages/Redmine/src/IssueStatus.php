@@ -17,8 +17,7 @@ use Aedart\Redmine\Relations\HasMany;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
  */
-class IssueStatus extends RedmineApiResource implements
-    Listable
+class IssueStatus extends RedmineApiResource implements Listable
 {
     protected array $allowed = [
         'id' => 'int',

@@ -28,7 +28,7 @@ class CustomFieldTest extends RedmineTestCase
     public function canListCustomFields()
     {
         // Debug
-//        CustomField::$debug = true;
+        //        CustomField::$debug = true;
 
         $list = [
             [

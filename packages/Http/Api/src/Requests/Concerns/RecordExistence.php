@@ -34,7 +34,6 @@ trait RecordExistence
         string $matchKey,
         string $targetsKey = 'targets'
     ): Collection {
-
         // If by any change nothing is requested, then just skip the rest and
         // return what was found, if anything at all...
         if (empty($requested)) {

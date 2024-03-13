@@ -175,7 +175,6 @@ class NestedDtoTest extends DtoTestCase
      */
     public function canResolveBoundAbstractInstance()
     {
-
         // Bind the abstraction / interface
         $this->ioc->bind(NoteInterface::class, function ($app) {
             return new Note();

@@ -59,7 +59,6 @@ trait FieldSelection
         // collect()->only() method will not help us. We need to loop through the fields
         // and use the array helpers to select desired fields, from the payload
         foreach ($fields as $key) {
-
             // When requested field exists, we add it to the output.
             // If not, then an exception is thrown when Api resource
             // requires such.

@@ -32,7 +32,7 @@ class HasManyRelationTest extends RedmineTestCase
         // here, so that it can be testing in "live" mode.
 
         // Debug
-//        Project::$debug = true;
+        //        Project::$debug = true;
 
         // ------------------------------------------------------------------- //
         // Prerequisites - create a project with a few issues
@@ -111,7 +111,7 @@ class HasManyRelationTest extends RedmineTestCase
         // here, so that it can be testing in "live" mode.
 
         // Debug
-//        Project::$debug = true;
+        //        Project::$debug = true;
 
         // ------------------------------------------------------------------- //
         // Prerequisites - create a project with a few issues

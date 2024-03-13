@@ -175,7 +175,7 @@ class DurationTest extends UnitTestCase
         $duration = Duration::from(52200);
 
         $this->assertSame('14:30', $duration->format('%H:%i')); // Should out 14:30 (hours and minutes)
-//        $this->assertSame(0.6042, $duration->format('%D')); // Should output ~0.6042 days
+        //        $this->assertSame(0.6042, $duration->format('%D')); // Should output ~0.6042 days
         $this->assertSame(870, $duration->asMinutes()); // 870 minutes
     }
 

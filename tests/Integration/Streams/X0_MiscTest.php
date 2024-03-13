@@ -79,7 +79,7 @@ class X0_MiscTest extends StreamTestCase
         // and that it shouldn't be used...
         $stream = $this->makeTextFileStream('r');
 
-//        $this->assertGreaterThan(0, $stream->unreadBytes());
+        //        $this->assertGreaterThan(0, $stream->unreadBytes());
         $this->assertIsInt($stream->unreadBytes());
     }
 

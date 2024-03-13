@@ -32,8 +32,8 @@ abstract class UnitTestCase extends Unit
      */
     protected function _before()
     {
-//        error_reporting(-1);
-//        ini_set('display_errors', true);
+        //        error_reporting(-1);
+        //        ini_set('display_errors', true);
 
         $this->setupFaker();
     }

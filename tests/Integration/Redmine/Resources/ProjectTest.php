@@ -26,7 +26,7 @@ class ProjectTest extends RedmineTestCase
     public function canCreateProject()
     {
         // Debug
-//        Project::$debug = true;
+        //        Project::$debug = true;
 
         // ----------------------------------------------------------------------- //
 
@@ -62,7 +62,7 @@ class ProjectTest extends RedmineTestCase
     public function canUpdateProject()
     {
         // Debug
-//        Project::$debug = true;
+        //        Project::$debug = true;
 
         // ----------------------------------------------------------------------- //
 
@@ -113,7 +113,7 @@ class ProjectTest extends RedmineTestCase
     public function canListProjects()
     {
         // Debug
-//        Project::$debug = true;
+        //        Project::$debug = true;
 
         // ----------------------------------------------------------------------- //
 

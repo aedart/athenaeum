@@ -14,8 +14,7 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Collections\Summations\Rules
  */
-class AmountRule implements
-    ProcessingRule
+class AmountRule implements ProcessingRule
 {
     /**
      * @inheritDoc

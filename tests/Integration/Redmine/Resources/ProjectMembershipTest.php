@@ -32,7 +32,7 @@ class ProjectMembershipTest extends RedmineTestCase
     public function canCreateUserMembership()
     {
         // Debug
-//        ProjectMembership::$debug = true;
+        //        ProjectMembership::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites
@@ -90,7 +90,7 @@ class ProjectMembershipTest extends RedmineTestCase
     public function canCreateGroupMember()
     {
         // Debug
-//        ProjectMembership::$debug = true;
+        //        ProjectMembership::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites
@@ -148,7 +148,7 @@ class ProjectMembershipTest extends RedmineTestCase
     public function canUpdateMember()
     {
         // Debug
-//        ProjectMembership::$debug = true;
+        //        ProjectMembership::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites - create new member for project
@@ -208,7 +208,7 @@ class ProjectMembershipTest extends RedmineTestCase
     public function canFetchMembersForProject()
     {
         // Debug
-//        ProjectMembership::$debug = true;
+        //        ProjectMembership::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites - create a few versions for a project

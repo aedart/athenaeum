@@ -47,7 +47,6 @@ class ArgumentFaker
 
         $output = [];
         foreach ($parameters as $parameter) {
-
             // Create a mock as "faked" argument, if needed
             $type = $parameter->getType();
             if (isset($type) && !$type->isBuiltin()) {

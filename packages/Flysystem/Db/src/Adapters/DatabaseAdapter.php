@@ -251,7 +251,6 @@ class DatabaseAdapter implements
 
         try {
             $this->transaction(function (ConnectionInterface $connection) use ($path) {
-
                 // Create new configuration to pass connection into on...
                 $config = new Config([
                     'connection' => $connection
@@ -265,7 +264,7 @@ class DatabaseAdapter implements
                 $removed = $connection
                     ->table($this->filesTable)
                     ->where('type', RecordTypes::FILE)
-                    ->where('path', $path)
+                    ->where('path', $this->applyPrefix($path))
                     ->delete();
 
                 if ($removed === 0) {

@@ -192,7 +192,7 @@ class BulkRecorder
                 ->whereSlugIn($identifiers)
                 ->get();
 
-        // If model is not sluggable, but list of slugs has been given, then abort.
+            // If model is not sluggable, but list of slugs has been given, then abort.
         } elseif (!$isSluggableModel && $isListOfSlugs) {
             throw new LogicException(sprintf('%s is not Sluggable, but list of string identifiers has been provided', $model::class));
         }

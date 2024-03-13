@@ -24,14 +24,14 @@ class DeferrableTranslationsServiceProvider extends ServiceProvider implements D
      *
      * @return void
      */
-//    public function boot(): void
-//    {
-//        $dataDir = Configuration::dataDir();
-//
-//        $this->loadTranslationsFrom($dataDir . 'translation/deferrable', 'deferrable');
-//
-//        $this->loadJsonTranslationsFrom($dataDir . 'translation/deferrable');
-//    }
+    //    public function boot(): void
+    //    {
+    //        $dataDir = Configuration::dataDir();
+    //
+    //        $this->loadTranslationsFrom($dataDir . 'translation/deferrable', 'deferrable');
+    //
+    //        $this->loadJsonTranslationsFrom($dataDir . 'translation/deferrable');
+    //    }
 
     /**
      * @inheritDoc
