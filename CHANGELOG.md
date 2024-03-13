@@ -16,7 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Breaking Changes**
 
 * Minimum required PHP version changed to `v8.2`.
-* Upgraded to use Laravel `v11.x`, Symfony `v7.x`.
+* Adapted CI environment to test PHP `v8.2` and `v8.3`.
+* Upgraded to use Laravel `v11.x` packages.
+* Upgraded to use Symfony `v7.x` packages.
 * Reworked `TraitTester` to no longer use deprecated features from PHPUnit. Now using `Mockery` to mock traits instead.
 
 **Non-breaking Changes**
