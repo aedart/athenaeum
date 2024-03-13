@@ -34,6 +34,6 @@ class BelongsToFilterTest extends FiltersTestCase
         ConsoleDebugger::output($sql);
 
         // Ensure that "where relation exists" clause has been added...
-        $this->assertStringContainsString('where exists (select * from `categories`', $sql);
+        $this->assertStringContainsString('where exists (select * from "categories"', $sql);
     }
 }
