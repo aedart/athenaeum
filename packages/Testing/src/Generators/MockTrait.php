@@ -2,6 +2,8 @@
 
 namespace Aedart\Testing\Generators;
 
+use LogicException;
+
 /**
  * Mock Trait Generator
  *
@@ -18,6 +20,9 @@ class MockTrait
     public function __construct(
         protected string $trait
     ) {
+        if (!trait_exists($this->trait, false)) {
+            throw new LogicException(sprintf('%s is either not a trait or it does not exist', $this->trait));
+        }
     }
 
     /**
