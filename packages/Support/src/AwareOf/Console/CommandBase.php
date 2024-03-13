@@ -36,7 +36,7 @@ abstract class CommandBase extends Command
      *
      * @throws Throwable
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         // Set input
         $this->input = $input;
