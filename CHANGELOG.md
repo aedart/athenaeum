@@ -21,6 +21,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Non-breaking Changes**
 
+### Deprecated
+
+* `\Aedart\Auth\Fortify\Actions\RehashPasswordIfNeeded`, password rehashing is now a default part of Laravel's [`\Illuminate\Contracts\Auth\UserProvider`](https://laravel.com/docs/11.x/upgrade#authentication).
+
+### Fixed
+
+* Missing return type for `\Aedart\Support\AwareOf\Console\CommandBase::execute` (_after upgrade to Symfony `v7.x`_).
+* `RehashPasswordIfNeededTest` fails due to enabled auto-rehash password feature in Laravel.
+* Incorrect quotes for expected SQL, in `BelongsToFilterTest`, `SearchFilterTest`, `SortFilterTest`, `SearchProcessorTest`, and `RelationsFilteringTest` (_caused by updates to SQLite driver in Laravel `v11`_).  
+
 ## [7.33.0] - 2024-03-13
 
 ### Changed
