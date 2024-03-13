@@ -26,8 +26,8 @@
         "aedart/athenaeum-contracts": "^7.33",
         "aedart/athenaeum-support": "^7.33",
         "aedart/athenaeum-utils": "^7.33",
-        "illuminate/config": "^v10.46.0",
-        "illuminate/filesystem": "^v10.46.0"
+        "illuminate/config": "^v10.48.2",
+        "illuminate/filesystem": "^v10.48.2"
     },
     "require-dev": {
         "nette/neon": "^3.4.1",

@@ -20,7 +20,7 @@
         "php": "^8.1.22",
         "aedart/athenaeum-contracts": "^7.33",
         "aedart/athenaeum-support": "^7.33",
-        "illuminate/container": "^v10.46.0"
+        "illuminate/container": "^v10.48.2"
     },
     "autoload": {
         "psr-4": {
