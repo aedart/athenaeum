@@ -7,12 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* `\Aedart\Testing\Generators\MockTrait`, a replacement for the deprecated `MockTrait` in PHPUnit.
+
 ### Changed
 
 **Breaking Changes**
 
 * Minimum required PHP version changed to `v8.2`.
 * Upgraded to use Laravel `v11.x`, Symfony `v7.x`.
+* Reworked `TraitTester` to no longer use deprecated features from PHPUnit. Now using `Mockery` to mock traits instead.
 
 **Non-breaking Changes**
 
