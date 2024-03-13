@@ -19,13 +19,13 @@
         }
     ],
     "require": {
-        "php": "^8.1.22",
+        "php": "^8.2",
         "aedart/athenaeum-contracts": "^7.34",
         "aedart/athenaeum-database": "^7.34",
         "aedart/athenaeum-support": "^7.34",
         "aedart/athenaeum-utils": "^7.34",
         "aedart/athenaeum-validation": "^7.34",
-        "illuminate/auth": "^v10.48.2"
+        "illuminate/auth": "^v11.0.3"
     },
     "autoload": {
         "psr-4": {

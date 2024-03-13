@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.1.22",
+        "php": "^8.2",
         "ext-json": "*",
         "aedart/athenaeum-dto": "^7.34",
         "aedart/athenaeum-http-clients": "^7.34",

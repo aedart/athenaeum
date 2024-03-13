@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.1.22",
+        "php": "^8.2",
         "aedart/athenaeum-config": "^7.34",
         "aedart/athenaeum-console": "^7.34",
         "aedart/athenaeum-container": "^7.34",
@@ -27,14 +27,14 @@
         "aedart/athenaeum-service": "^7.34",
         "aedart/athenaeum-support": "^7.34",
         "aedart/athenaeum-utils": "^7.34",
-        "illuminate/cache": "^v10.48.2",
-        "illuminate/filesystem": "^v10.48.2",
+        "illuminate/cache": "^v11.0.3",
+        "illuminate/filesystem": "^v11.0.3",
         "psr/log": "^3.0.0",
-        "symfony/console": "^v6.4.4",
+        "symfony/console": "^v7.0.4",
         "vlucas/phpdotenv": "^5.6.0"
     },
     "require-dev": {
-        "symfony/var-dumper": "^v6.4.4"
+        "symfony/var-dumper": "^v7.0.4"
     },
     "autoload": {
         "psr-4": {
