@@ -18,6 +18,8 @@ use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 
 /**
+ * @deprecated Since v8.x - See \Aedart\Auth\Fortify\Actions\RehashPasswordIfNeeded
+ *
  * RehashPasswordIfNeededTest
  *
  * @group auth
