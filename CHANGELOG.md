@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+**Breaking Changes**
+
+* Minimum required PHP version changed to `v8.2`.
+* Upgraded to use Laravel `v11.x`, Symfony `v7.x`.
+
+**Non-breaking Changes**
+
 ## [7.33.0] - 2024-03-13
 
 ### Changed
