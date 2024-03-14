@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Reworked `TraitTester` to no longer use deprecated features from PHPUnit. Now using `Mockery` to mock traits instead.
 * Refactored `AlphaDashDot` and `SemanticVersion` to inherit from `BaseValidationRule`, in `\Aedart\Validation\Rules` (_previously inherited from deprecated `BaseRule`, which has been removed_). [#158](https://github.com/aedart/athenaeum/issues/158).
 * Converted `RecordTypes` and `Visibility` interfaces to enums, in `\Aedart\Contracts\Flysystem\Db` (_contributed by [Trukes](https://github.com/Trukes)_). [#161](https://github.com/aedart/athenaeum/issues/161), [#162](https://github.com/aedart/athenaeum/pull/162/).
+* `ValidatedApiRequest` no longer overwrites Laravel's "class based `after()` validation rules". [#168](https://github.com/aedart/athenaeum/issues/168), [#167](https://github.com/aedart/athenaeum/issues/167). 
 
 **Non-breaking Changes**
 
@@ -39,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+* `\Aedart\Http\Api\Requests\ValidatedApiRequest::after` (_was deprecated in `v7.12.0`_).
 * `\Aedart\Filters\Query\Filters\Fields\BaseFieldFilter::datetimeRangeComparison` (_was deprecated in `v7.11.3`_).
 * `\Aedart\Audit\Models\Concerns\AuditTrailConfiguration` (_was deprecated in `v7.4`_).
 * `\Aedart\Audit\Traits\HasAuditTrail` (_was deprecated in `v7.0`_).
