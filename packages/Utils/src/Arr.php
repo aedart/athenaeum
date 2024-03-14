@@ -24,7 +24,7 @@ class Arr extends ArrBase
      *
      * @return ArrayRandomizer
      */
-    public static function randomized(Engine|null $engine = null): ArrayRandomizer
+    public static function randomizer(Engine|null $engine = null): ArrayRandomizer
     {
         return Factory::make($engine);
     }

@@ -23,7 +23,7 @@ class Math
      *
      * @return NumericRandomizer
      */
-    public static function randomized(Engine|null $engine = null): NumericRandomizer
+    public static function randomizer(Engine|null $engine = null): NumericRandomizer
     {
         return Factory::make($engine);
     }

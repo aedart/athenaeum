@@ -26,7 +26,7 @@ class ArrTest extends UnitTestCase
      */
     public function returnsRandomizer(): void
     {
-        $randomizer = Arr::randomized();
+        $randomizer = Arr::randomizer();
 
         $this->assertInstanceOf(ArrayRandomizer::class, $randomizer);
     }

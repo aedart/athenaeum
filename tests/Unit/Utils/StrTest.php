@@ -27,7 +27,7 @@ class StrTest extends UnitTestCase
      */
     public function returnsRandomizer(): void
     {
-        $randomizer = Str::randomized();
+        $randomizer = Str::randomizer();
 
         $this->assertInstanceOf(StringRandomizer::class, $randomizer);
     }

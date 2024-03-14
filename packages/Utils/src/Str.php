@@ -23,7 +23,7 @@ class Str extends BaseStr
      *
      * @return StringRandomizer
      */
-    public static function randomized(Engine|null $engine = null): StringRandomizer
+    public static function randomizer(Engine|null $engine = null): StringRandomizer
     {
         return Factory::make($engine);
     }

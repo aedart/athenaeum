@@ -26,7 +26,7 @@ class MathTest extends UnitTestCase
      */
     public function returnsRandomizer(): void
     {
-        $randomizer = Math::randomized();
+        $randomizer = Math::randomizer();
 
         $this->assertInstanceOf(NumericRandomizer::class, $randomizer);
     }
