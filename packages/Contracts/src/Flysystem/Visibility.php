@@ -10,7 +10,7 @@ use League\Flysystem\Visibility as FlysystemVisibility;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Flysystem
  */
-enum Visibility
+enum Visibility: string
 {
     /**
      * Public visibility

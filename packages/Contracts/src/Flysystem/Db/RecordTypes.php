@@ -10,7 +10,7 @@ use League\Flysystem\StorageAttributes;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Flysystem\Db
  */
-enum RecordTypes
+enum RecordTypes: string
 {
     /**
      * Directory record type
