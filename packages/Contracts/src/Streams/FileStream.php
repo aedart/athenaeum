@@ -5,6 +5,7 @@ namespace Aedart\Contracts\Streams;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
+use Psr\Http\Message\UploadedFileInterface as PsrUploadedFile;
 use SplFileInfo;
 
 /**
@@ -62,6 +63,38 @@ interface FileStream extends Stream
      * @throws StreamException
      */
     public static function openFileInfo(SplFileInfo $file, string $mode, bool $useIncludePath = false, $context = null): static;
+
+    /**
+     * Open a new file stream for {@see PsrUploadedFile}
+     *
+     * **Warning**: _Method will {@see detach()} underlying resource from given stream,
+     * before creating a new file stream instance, **unless** `$asCopy` is set to true._
+     *
+     * Method attempts to set `filename` in meta, from given Uploaded File's
+     * {@see PsrUploadedFile::getClientFilename}.
+     *
+     * @see filename()
+     *
+     * @param PsrUploadedFile $file
+     * @param bool $asCopy [optional] If true, then uploaded file's stream is copied (original stream is not detached).
+     * @param string $mode [optional] Only applicable if `$asCopy` is true.
+     * @param int|null $maximumMemory [optional] Maximum amount of bytes to keep in memory before writing to a temporary
+     *                                file. If none specified, then defaults to 2 Mb. Only applicable if `$asCopy` is true.
+     * @param int $bufferSize [optional] Read/Write size of copied chunk in bytes. Only applicable if `$asCopy` is true.
+     * @param resource|null $context [optional] Only applicable if `$asCopy` is true.
+     *
+     * @return static
+     *
+     * @throws StreamException
+     */
+    public static function openUploadedFile(
+        PsrUploadedFile $file,
+        bool $asCopy = false,
+        string $mode = 'r+b',
+        int|null $maximumMemory = null,
+        int $bufferSize = BufferSizes::BUFFER_8KB,
+        $context = null
+    ): static;
 
     /**
      * Open a stream to 'php://memory' and wrap the resource into a new stream instance
