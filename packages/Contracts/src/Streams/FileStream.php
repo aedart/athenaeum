@@ -5,6 +5,7 @@ namespace Aedart\Contracts\Streams;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
+use SplFileInfo;
 
 /**
  * File Stream
@@ -41,6 +42,26 @@ interface FileStream extends Stream
         bool $useIncludePath = false,
         $context = null
     ): static;
+
+    /**
+     * Open a new file stream for a PHP SplFileInfo instance
+     *
+     * Method attempts to set `filename` in meta, if SplFileInfo instance
+     * has a "getClientOriginalName" (Laravel / Symfony Uploaded File instance).
+     *
+     * @see filename()
+     * @see https://www.php.net/manual/en/class.splfileinfo.php
+     *
+     * @param  SplFileInfo  $file
+     * @param  string  $mode
+     * @param  bool  $useIncludePath  [optional]
+     * @param  resource|null  $context  [optional]
+     *
+     * @return static
+     *
+     * @throws StreamException
+     */
+    public static function openFileInfo(SplFileInfo $file, string $mode, bool $useIncludePath = false, $context = null): static;
 
     /**
      * Open a stream to 'php://memory' and wrap the resource into a new stream instance
