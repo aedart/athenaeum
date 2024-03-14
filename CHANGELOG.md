@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * `\Aedart\Testing\Generators\MockTrait`, a replacement for the deprecated `MockTrait` in PHPUnit.
-* `ISO8601_EXPANDED` in `\Aedart\Contracts\Utils\Dates\DateTimeFormats`. [#142](https://github.com/aedart/athenaeum/issues/142). 
+* `ISO8601_EXPANDED` in `\Aedart\Contracts\Utils\Dates\DateTimeFormats`. [#142](https://github.com/aedart/athenaeum/issues/142).
 
 ### Changed
 
@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Refactored `AlphaDashDot` and `SemanticVersion` to inherit from `BaseValidationRule`, in `\Aedart\Validation\Rules` (_previously inherited from deprecated `BaseRule`, which has been removed_). [#158](https://github.com/aedart/athenaeum/issues/158).
 * Converted `RecordTypes` and `Visibility` interfaces to enums, in `\Aedart\Contracts\Flysystem\Db` (_contributed by [Trukes](https://github.com/Trukes)_). [#161](https://github.com/aedart/athenaeum/issues/161), [#162](https://github.com/aedart/athenaeum/pull/162/).
 * `ValidatedApiRequest` no longer overwrites Laravel's "class based `after()` validation rules". [#168](https://github.com/aedart/athenaeum/issues/168), [#167](https://github.com/aedart/athenaeum/issues/167). 
+* `buffer()` method in `\Aedart\Contracts\Streams\Stream` interface. [#156](https://github.com/aedart/athenaeum/issues/156).
+* `copyFrom()`, `openFileInfo()`, `openUploadedFile()` and `filename()` methods in `\Aedart\Contracts\Streams\FileStream` interface. [#156](https://github.com/aedart/athenaeum/issues/156).
 
 **Non-breaking Changes**
 
