@@ -2,8 +2,6 @@
 
 namespace Aedart\Contracts\Utils\Random;
 
-use Throwable;
-
 /**
  * Randomizer
  *
