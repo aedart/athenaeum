@@ -2,6 +2,9 @@
 
 namespace Aedart\Utils;
 
+use Aedart\Contracts\Utils\Random\NumericRandomizer;
+use Aedart\Utils\Random\Factory;
+use Random\Engine;
 use RuntimeException;
 use Throwable;
 
@@ -13,6 +16,18 @@ use Throwable;
  */
 class Math
 {
+    /**
+     * Returns a new Numeric Randomizer instance
+     *
+     * @param Engine|null $engine [optional]
+     *
+     * @return NumericRandomizer
+     */
+    public static function randomized(Engine|null $engine = null): NumericRandomizer
+    {
+        return Factory::make($engine);
+    }
+
     /**
      * Returns a random cryptographically secure, uniformly selected number
      *
@@ -50,7 +65,7 @@ class Math
     {
         // Source is from php.net's documentation:
         // @see https://www.php.net/manual/en/function.mt-srand.php#refsect1-function.mt-srand-examples
-        list($usec, $sec) = explode(' ', microtime());
+        [$usec, $sec] = explode(' ', microtime());
         return (int) $sec + $usec * 1000000;
     }
 
