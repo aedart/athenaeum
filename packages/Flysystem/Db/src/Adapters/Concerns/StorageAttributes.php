@@ -34,8 +34,8 @@ trait StorageAttributes
         $record = get_object_vars($record);
 
         return match ($record['type']) {
-            RecordTypes::FILE => $this->makeFileAttribute($record),
-            RecordTypes::DIRECTORY => $this->makeDirectoryAttribute($record),
+            RecordTypes::FILE->value => $this->makeFileAttribute($record),
+            RecordTypes::DIRECTORY->value => $this->makeDirectoryAttribute($record),
             default => throw new LogicException(
                 sprintf(
                     'Unable to normalise record of type %s. Allowed types: %s',

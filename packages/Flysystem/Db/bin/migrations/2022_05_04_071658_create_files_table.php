@@ -62,7 +62,7 @@ return new class () extends Migration {
 
             $table
                 ->enum('visibility', Visibility::allowed())
-                ->default(Visibility::PRIVATE )
+                ->default(Visibility::PRIVATE->value )
                 ->comment('File or directory visibility');
 
             $table

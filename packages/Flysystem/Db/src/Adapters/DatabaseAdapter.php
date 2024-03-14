@@ -149,7 +149,7 @@ class DatabaseAdapter implements
                     $wasUpdated = (bool) $connection
                         ->table($this->filesTable)
                         ->where('path', $record['path'])
-                        ->where('type', RecordTypes::FILE)
+                        ->where('type', RecordTypes::FILE->value)
                         ->limit(1)
                         ->update($record);
 
@@ -265,7 +265,7 @@ class DatabaseAdapter implements
                 // Remove file record
                 $removed = $connection
                     ->table($this->filesTable)
-                    ->where('type', RecordTypes::FILE)
+                    ->where('type', RecordTypes::FILE->value)
                     ->where('path', $path)
                     ->delete();
 
@@ -297,7 +297,7 @@ class DatabaseAdapter implements
                 $connection
                     ->table($this->filesTable)
                     ->where('path', $this->applyPrefix($path))
-                    ->where('type', RecordTypes::DIRECTORY)
+                    ->where('type', RecordTypes::DIRECTORY->value)
                     ->limit(1)
                     ->delete();
             });
@@ -335,7 +335,7 @@ class DatabaseAdapter implements
             $records = [];
             foreach ($directories as $directory) {
                 $records[] = [
-                    'type' => RecordTypes::DIRECTORY,
+                    'type' => RecordTypes::DIRECTORY->value,
                     'path' => $directory,
                     'level' => $this->directoryLevel($directory),
                     'visibility' => $visibility,
@@ -631,7 +631,7 @@ class DatabaseAdapter implements
                 ->table($this->filesTable)
                 ->select()
                 ->where('path', $this->applyPrefix($path))
-                ->where('type', RecordTypes::DIRECTORY)
+                ->where('type', RecordTypes::DIRECTORY->value)
                 ->limit(1)
                 ->get();
 
@@ -670,12 +670,12 @@ class DatabaseAdapter implements
                 ->when($withContents, function (Builder $query) use ($files, $contents) {
                     // TODO: Select / Bind PDO::PARAM_LOB for file content, when requested.
                     // TODO: @see https://www.php.net/manual/en/pdo.lobs.php
-    
+
                     $query->join($contents, "{$files}.content_hash", '=', "{$contents}.hash");
                 })
 
                 ->where("{$files}.path", $this->applyPrefix($path))
-                ->where('type', RecordTypes::FILE)
+                ->where('type', RecordTypes::FILE->value)
                 ->limit(1)
                 ->get();
 
@@ -721,7 +721,7 @@ class DatabaseAdapter implements
 
             $recordPaths[] = $record['path'];
 
-            if ($record['type'] === RecordTypes::FILE) {
+            if ($record['type'] === RecordTypes::FILE->value) {
                 $fileHashes[] = $record->extraMetadata()['hash'];
             }
         }
@@ -916,7 +916,7 @@ class DatabaseAdapter implements
     protected function prepareFileRecord(string $path, FileStream $stream, Config $config): array
     {
         return [
-            'type' => RecordTypes::FILE,
+            'type' => RecordTypes::FILE->value,
             'path' => $this->applyPrefix($path),
             'level' => $this->directoryLevel($path),
             'file_size' => $stream->getSize(),
