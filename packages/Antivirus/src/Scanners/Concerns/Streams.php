@@ -109,7 +109,7 @@ trait Streams
         } catch (Throwable $e) {
             throw new UnableToOpenFileStream(sprintf(
                 'Unable to open stream for file path %s',
-                $path
+                var_export($path, true)
             ), $e->getCode(), $e);
         }
     }
@@ -130,7 +130,7 @@ trait Streams
         } catch (Throwable $e) {
             throw new UnableToOpenFileStream(sprintf(
                 'Unable to open stream for file %s',
-                $file->getFilename()
+                var_export($file->getFilename(), true)
             ), $e->getCode(), $e);
         }
     }
@@ -185,7 +185,7 @@ trait Streams
         } catch (Throwable $e) {
             throw new UnableToOpenFileStream(sprintf(
                 'Unable to open stream for uploaded file %s',
-                $file->getClientFilename()
+                var_export($file->getClientFilename(), true)
             ), $e->getCode(), $e);
         }
     }

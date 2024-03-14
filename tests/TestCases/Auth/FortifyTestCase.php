@@ -118,9 +118,9 @@ abstract class FortifyTestCase extends LaravelTestCase
         $this->loadLaravelMigrations();
 
         // Install custom migrations
-//        $this->loadMigrationsFrom(
-//            $this->migrationsDir()
-//        );
+        //        $this->loadMigrationsFrom(
+        //            $this->migrationsDir()
+        //        );
 
         return $this;
     }

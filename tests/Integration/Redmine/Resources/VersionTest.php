@@ -68,7 +68,7 @@ class VersionTest extends RedmineTestCase
     public function canCreateVersion()
     {
         // Debug
-//        Version::$debug = true;
+        //        Version::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites
@@ -123,7 +123,7 @@ class VersionTest extends RedmineTestCase
     public function canUpdateVersion()
     {
         // Debug
-//        Version::$debug = true;
+        //        Version::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites - create a new version
@@ -171,7 +171,7 @@ class VersionTest extends RedmineTestCase
     public function canFetchVersionsForProject()
     {
         // Debug
-//        Version::$debug = true;
+        //        Version::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites - create a few versions for a project

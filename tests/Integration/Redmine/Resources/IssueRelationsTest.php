@@ -29,7 +29,7 @@ class IssueRelationsTest extends RedmineTestCase
     public function canRelateIssues()
     {
         // Debug
-//        Issue::$debug = true;
+        //        Issue::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites

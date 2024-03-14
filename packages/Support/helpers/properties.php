@@ -7,7 +7,6 @@
 use Aedart\Contracts\Utils\DataTypes;
 
 if (!function_exists('awareOfProperty')) {
-
     /**
      * Returns an array of configuration that allows a generator
      * to build an "aware-of property" component
@@ -39,7 +38,6 @@ if (!function_exists('awareOfProperty')) {
 }
 
 if (!function_exists('stringProperty')) {
-
     /**
      * Returns "string" aware-of property configuration
      *
@@ -64,7 +62,6 @@ if (!function_exists('stringProperty')) {
 }
 
 if (!function_exists('integerProperty')) {
-
     /**
      * Returns "integer" aware-of property configuration
      *
@@ -89,7 +86,6 @@ if (!function_exists('integerProperty')) {
 }
 
 if (!function_exists('floatProperty')) {
-
     /**
      * Returns "float" aware-of property configuration
      *
@@ -114,7 +110,6 @@ if (!function_exists('floatProperty')) {
 }
 
 if (!function_exists('booleanProperty')) {
-
     /**
      * Returns "boolean" aware-of property configuration
      *
@@ -139,7 +134,6 @@ if (!function_exists('booleanProperty')) {
 }
 
 if (!function_exists('arrayProperty')) {
-
     /**
      * Returns "array" aware-of property configuration
      *
@@ -164,7 +158,6 @@ if (!function_exists('arrayProperty')) {
 }
 
 if (!function_exists('callableProperty')) {
-
     /**
      * Returns "callable" aware-of property configuration
      *
@@ -189,7 +182,6 @@ if (!function_exists('callableProperty')) {
 }
 
 if (!function_exists('iterableProperty')) {
-
     /**
      * Returns "iterable" aware-of property configuration
      *
@@ -214,7 +206,6 @@ if (!function_exists('iterableProperty')) {
 }
 
 if (!function_exists('mixedProperty')) {
-
     /**
      * Returns "mixed" aware-of property configuration
      *
@@ -239,7 +230,6 @@ if (!function_exists('mixedProperty')) {
 }
 
 if (!function_exists('dateTimeProperty')) {
-
     /**
      * Returns "DateTime" aware-of property configuration
      *

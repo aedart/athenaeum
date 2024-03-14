@@ -32,7 +32,7 @@ class BelongsToRelationTest extends RedmineTestCase
         // If testing runs in "live" mode, then actual resources are used.
 
         // Debug
-//        Project::$debug = true;
+        //        Project::$debug = true;
 
         // ------------------------------------------------------------------- //
         // Prerequisites - create two resources that are related to each other

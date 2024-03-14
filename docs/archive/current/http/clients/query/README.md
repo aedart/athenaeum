@@ -25,9 +25,9 @@ $response = $client
 The following illustrates the request that was sent, from previous example.
 Each tab shows the http request that was sent, using a different Http Query Grammar.
 
-:::: tabs
+
  
-::: tab default
+::: details default
 Builds query strings, yet does not follow any specific convention or standard.
 
 ```http
@@ -35,7 +35,7 @@ GET https://acme.org/api/v1/users?last_name=thomsen&age[gt]=31
 ```
 :::
 
-::: tab json api
+::: details json api
 Builds query strings according to [Json API's recommendations](https://jsonapi.org/format/1.1/#fetching).
 
 ```http
@@ -43,12 +43,11 @@ GET https://acme.org/api/v1/users?filter[last_name]=thomsen&filter[age][gt]=31
 ```
 :::
  
-::: tab odata
+::: details odata
 Builds query strings according to [OData v4](https://www.odata.org/getting-started/basic-tutorial/#queryData)'s syntax.
 
 ```http
 GET https://acme.org/api/v1/users?$filter=last_name eq `thomsen` and age gt 31
 ```
 :::
- 
-::::
+

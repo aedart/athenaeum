@@ -52,6 +52,14 @@ abstract class BaseRelationReference implements RelationReference
     protected Request|null $request = null;
 
     /**
+     * Returns the Api Resource's assigned Eloquent model,
+     * that contains the target relation
+     *
+     * @var Model|null
+     */
+    protected Model|null $model = null;
+
+    /**
      * Creates a new relation reference
      *
      * @param  \Aedart\Http\Api\Resources\ApiResource|mixed  $resource
@@ -140,7 +148,28 @@ abstract class BaseRelationReference implements RelationReference
      */
     public function getModel()
     {
-        return $this->getApiResource()->resource;
+        if (isset($this->model)) {
+            return $this->model;
+        }
+
+        return $this->model = $this->getApiResource()->resource;
+    }
+
+    /**
+     * Set the Eloquent model that contains the target relation.
+     *
+     * When none is given, then {@see getModel()} will default
+     * to API resource's assigned eloquent model
+     *
+     * @param Model $model
+     *
+     * @return self
+     */
+    public function usingModel($model): static
+    {
+        $this->model = $model;
+
+        return $this;
     }
 
     /**
@@ -169,6 +198,32 @@ abstract class BaseRelationReference implements RelationReference
     /*****************************************************************
      * Default Formatting of Loaded Model(s)
      ****************************************************************/
+
+    /**
+     * Formats a single relation model, when relation is loaded
+     *
+     * @see whenLoaded
+     * @see formatSingleLoadedModel
+     *
+     * @return self
+     */
+    public function asSingleModel(): static
+    {
+        return $this->whenLoaded([$this, 'formatSingleLoadedModel']);
+    }
+
+    /**
+     * Formats multiple related models, when relation is loaded
+     *
+     * @see whenLoaded
+     * @see formatMultipleLoadedModels
+     *
+     * @return self
+     */
+    public function asMultipleModels(): static
+    {
+        return $this->whenLoaded([$this, 'formatMultipleLoadedModels']);
+    }
 
     /**
      * Formats a single relation model as this reference's value
@@ -299,7 +354,7 @@ abstract class BaseRelationReference implements RelationReference
      * @param  Model  $parent
      * @param  string  $relation Name of relation to load
      *
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection<\Illuminate\Database\Eloquent\Model>|null
+     * @return Model|\Illuminate\Database\Eloquent\Collection<Model>|null
      */
     protected function loadNestedRelation(Model $parent, string $relation)
     {

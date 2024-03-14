@@ -31,7 +31,7 @@ class AssignedToRelationTest extends RedmineTestCase
     public function returnsGroupWhenAssigned()
     {
         // Debug
-//        Group::$debug = true;
+        //        Group::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites - a new project with a members
@@ -86,7 +86,7 @@ class AssignedToRelationTest extends RedmineTestCase
     public function returnsUserWhenAssigned()
     {
         // Debug
-//        User::$debug = true;
+        //        User::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites - a new project with a members

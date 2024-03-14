@@ -25,7 +25,7 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest implements 
      */
     public function authorizeFoundRecord(Model $record): bool
     {
-        return $this->allows('show', $this->record);
+        return $this->allows('show', $record);
     }
 
     /**
@@ -35,6 +35,8 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest implements 
      */
     protected function prepareForValidation()
     {
+        parent::prepareForValidation();
+
         // Attempt to find and prepare requested record, before the validation
         // is applied. This allows certain rules, like `Rule::unique()->ignore()`
         // to be applied safely.
@@ -62,7 +64,7 @@ abstract class ShowSingleResourceRequest extends ValidatedApiRequest implements 
 
         $this->evaluateRequestPreconditions(
             record: $record,
-            etag: $this->getRecordEtag(),
+            etag: fn () => $this->getRecordEtag(),
             lastModifiedDate: $this->getRecordLastModifiedDate()
         );
     }

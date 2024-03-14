@@ -173,6 +173,14 @@ trait ApplicationInitiator
     }
 
     /**
+     * @inheritdoc
+     */
+    protected function setUpTheTestEnvironmentTraitToBeIgnored(string $use): bool
+    {
+        return false;
+    }
+
+    /**
      * Refresh the application instance.
      *
      * @return void
@@ -206,7 +214,7 @@ trait ApplicationInitiator
     protected function setAppKeyEnvironmentVariable(string $key): static
     {
         // Debug
-//        ConsoleDebugger::output('APP_KEY = ' . $key);
+        //        ConsoleDebugger::output('APP_KEY = ' . $key);
 
         putenv('APP_KEY=' . $key);
 

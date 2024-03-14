@@ -64,10 +64,10 @@ class MemoryTest extends UnitTestCase
         $this->assertNotEmpty($e, 'e empty');
         $this->assertNotEmpty($f, 'f empty');
         $this->assertNotEmpty($g, 'g empty');
-//        $this->assertNotEmpty($h, 'h empty');
-//        $this->assertNotEmpty($i, 'i empty');
-//
-//        $this->assertNotEmpty($x, 'x empty');
+        //        $this->assertNotEmpty($h, 'h empty');
+        //        $this->assertNotEmpty($i, 'i empty');
+        //
+        //        $this->assertNotEmpty($x, 'x empty');
         $this->assertNotEmpty($y, 'y empty');
     }
 

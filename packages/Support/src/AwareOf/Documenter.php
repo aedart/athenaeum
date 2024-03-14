@@ -76,7 +76,6 @@ class Documenter implements ConfigAware
     {
         $output = [];
         foreach ($awareOfComponents as $component) {
-
             // Make key (index
             $letter = strtoupper(substr($component['propertyName'], 0, 1));
             $index = $letter . '.' . $component['propertyName'] . '.' . $component['dataType'];
