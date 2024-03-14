@@ -2,8 +2,11 @@
 
 namespace Aedart\Utils;
 
+use Aedart\Contracts\Utils\Random\StringRandomizer;
+use Aedart\Utils\Random\Factory;
 use Illuminate\Support\Str as BaseStr;
 use Illuminate\Support\Stringable;
+use Random\Engine;
 
 /**
  * String utility
@@ -13,6 +16,18 @@ use Illuminate\Support\Stringable;
  */
 class Str extends BaseStr
 {
+    /**
+     * Returns a new String Randomizer instance
+     *
+     * @param Engine|null $engine [optional]
+     *
+     * @return StringRandomizer
+     */
+    public static function randomized(Engine|null $engine = null): StringRandomizer
+    {
+        return Factory::make($engine);
+    }
+
     /**
      * Converts slug back to words
      *
