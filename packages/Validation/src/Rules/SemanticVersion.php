@@ -2,6 +2,8 @@
 
 namespace Aedart\Validation\Rules;
 
+use Closure;
+
 /**
  * Semantic Version
  *
@@ -12,10 +14,8 @@ namespace Aedart\Validation\Rules;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Validation\Rules
  */
-class SemanticVersion extends BaseRule
+class SemanticVersion extends BaseValidationRule
 {
-    use Concerns\AthenaeumRule;
-
     /**
      * Regex pattern for matching Semantic Version string
      *
@@ -26,34 +26,30 @@ class SemanticVersion extends BaseRule
     protected const REGEX_PATTERN = '/^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/';
 
     /**
-     * Creates a new semantic version validation rule instance
+     * @inheritDoc
      */
-    public function __construct()
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $this->useAthenaeumTranslations();
+        if (!$this->isValid($value)) {
+            $fail('athenaeum-validation::messages.sem_version')->translate([
+                'attribute' => $attribute
+            ]);
+        }
     }
 
     /**
-     * @inheritDoc
+     * Determine if value is valid
+     *
+     * @param mixed $value
+     *
+     * @return bool
      */
-    public function passes($attribute, $value)
+    public function isValid(mixed $value): bool
     {
-        $this->setAttribute($attribute);
-
         if (!preg_match(static::REGEX_PATTERN, $value)) {
             return false;
         }
 
         return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function message()
-    {
-        return $this->trans('sem_version', [
-            'attribute' => $this->getAttribute()
-        ]);
     }
 }

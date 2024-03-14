@@ -4,7 +4,7 @@ namespace Aedart\Tests\Integration\Validation\Rules;
 
 use Aedart\Tests\TestCases\Validation\ValidationTestCase;
 use Aedart\Validation\Rules\AlphaDashDot;
-use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Contracts\Validation\ValidationRule;
 
 /**
  * AlphaDashDotRuleTest
@@ -57,9 +57,9 @@ class AlphaDashDotRuleTest extends ValidationTestCase
     /**
      * Creates new instance of validation rule
      *
-     * @return Rule
+     * @return ValidationRule
      */
-    public function makeRule(): Rule
+    public function makeRule(): ValidationRule
     {
         return new AlphaDashDot();
     }
@@ -76,7 +76,7 @@ class AlphaDashDotRuleTest extends ValidationTestCase
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function passesOnValidInput($input)
+    public function passesOnValidInput(mixed $input): void
     {
         $this->shouldPass($input, $this->makeRule());
     }
@@ -89,7 +89,7 @@ class AlphaDashDotRuleTest extends ValidationTestCase
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function failsOnInvalidInput($input)
+    public function failsOnInvalidInput(mixed $input): void
     {
         $this->shouldNotPass($input, $this->makeRule());
     }
