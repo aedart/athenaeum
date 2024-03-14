@@ -27,7 +27,7 @@ class IssueTest extends RedmineTestCase
     public function canCreateIssue()
     {
         // Debug
-//        Issue::$debug = true;
+        //        Issue::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites
@@ -71,7 +71,7 @@ class IssueTest extends RedmineTestCase
     public function canUpdateIssue()
     {
         // Debug
-//        Issue::$debug = true;
+        //        Issue::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites
@@ -130,7 +130,7 @@ class IssueTest extends RedmineTestCase
     public function canListIssues()
     {
         // Debug
-//        Issue::$debug = true;
+        //        Issue::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites

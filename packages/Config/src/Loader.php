@@ -92,7 +92,6 @@ class Loader implements LoaderInterface
         $file = $this->resolveFile($file);
 
         try {
-
             // Get the file path
             $path = $file->getRealPath();
 

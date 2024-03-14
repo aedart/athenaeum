@@ -1,5 +1,6 @@
 ---
 description: Athenaeum Release Notes
+sidebarDepth: 0
 ---
 
 # Release Notes

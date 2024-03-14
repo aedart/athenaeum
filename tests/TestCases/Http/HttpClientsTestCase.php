@@ -182,7 +182,6 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     {
         return function (callable $handler) {
             return function (RequestInterface $request, array $options) use ($handler) {
-
                 // Set the last request
                 $this->lastRequest = $request;
 

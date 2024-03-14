@@ -223,4 +223,54 @@ class InfectionFreeFileRuleTest extends AntivirusTestCase
             //->dump()
             ->assertNoContent();
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws JsonException
+     */
+    public function failsWhenInvalidFilePathGiven(): void
+    {
+        Route::post('/files', function (Request $request) {
+            $request->validate([
+                'file' => [
+                    'nullable',
+                    'file',
+                    $this->makeRule(true) // "shouldPass" does not apply for this test...
+                ]
+            ]);
+
+            return response()->noContent();
+        })->name('file.upload');
+
+        Route::getRoutes()->refreshNameLookups();
+
+        // ----------------------------------------------------------------- //
+
+        // NOTE: Invalid "file" to trigger underlying "unable to open stream..." exception, and thereby
+        // validation failure.
+        $file = 'null';
+
+        // ----------------------------------------------------------------- //
+
+        //        $this->withoutExceptionHandling();
+
+        $url = route('file.upload');
+        $response = $this
+            ->post($url, [
+                'file' => $file
+            ], [ 'accept' => 'application/json' ])
+            //->dump()
+            ->assertUnprocessable()
+            ->assertJson(
+                fn (AssertableJson $json) =>
+                $json
+                    ->has('errors.file')
+                    ->etc()
+            );
+
+        Response::decode($response);
+    }
 }

@@ -28,7 +28,7 @@ class GroupTest extends RedmineTestCase
     public function canCreateRole()
     {
         // Debug
-//        Group::$debug = true;
+        //        Group::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites - create a single user to be assigned to group
@@ -80,7 +80,7 @@ class GroupTest extends RedmineTestCase
     public function canUpdateGroup()
     {
         // Debug
-//        Group::$debug = true;
+        //        Group::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites - group with a single user assigned
@@ -162,7 +162,7 @@ class GroupTest extends RedmineTestCase
     public function canAddAndRemoveUsers()
     {
         // Debug
-//        Group::$debug = true;
+        //        Group::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites - create empty group
@@ -271,7 +271,7 @@ class GroupTest extends RedmineTestCase
     public function canListGroups()
     {
         // Debug
-//        Group::$debug = true;
+        //        Group::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites - create a single group (for the sake if live test mode)

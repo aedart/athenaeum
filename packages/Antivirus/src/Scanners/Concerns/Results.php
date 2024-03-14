@@ -34,7 +34,7 @@ trait Results
         string|int|null $user = null,
         DateTimeInterface|null $datetime = null
     ): ScanResult {
-//        dump([ 'meta' => $file->meta() ]);
+        //        dump([ 'meta' => $file->meta() ]);
 
         return IoCFacade::make(ScanResult::class, [
             'status' => $status,

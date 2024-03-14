@@ -35,7 +35,7 @@ class GenericResource implements ResourceContext
      * Create a new "generic" resource
      *
      * @param  mixed  $data E.g. a record, Eloquent model, a file...etc
-     * @param  ETag|null  $etag  [optional]
+     * @param  ETag|callable|null  $etag  [optional] When callback is given, then etag is resolved from callback.
      * @param  DateTimeInterface|null  $lastModifiedDate  [optional]
      * @param  int  $size  [optional] Size of resource. Applicable if supporting "If-Range" and "Range" requests.
      * @param  callable|null $determineStateChangeSuccess  [optional] Callback that determines if a state change
@@ -46,7 +46,7 @@ class GenericResource implements ResourceContext
      */
     public function __construct(
         protected mixed $data,
-        protected ETag|null $etag = null,
+        protected $etag = null,
         protected DateTimeInterface|null $lastModifiedDate = null,
         protected int $size = 0,
         protected $determineStateChangeSuccess = null,
@@ -59,7 +59,7 @@ class GenericResource implements ResourceContext
      * Creates a new "generic" resource for given file
      *
      * @param SplFileInfo $file
-     * @param ETag|null $etag [optional] Resolves to a checksum of file, when none given.
+     * @param ETag|callable|null $etag [optional] Resolves to a checksum of file, when none given.
      * @param DateTimeInterface|null $lastModifiedDate [optional] Resolve to file's last modified date, when none given.
      * @param callable|null $determineStateChangeSuccess [optional] Callback that determines if a state change
      *                                                   has already succeeded on the resource. Callback MUST
@@ -70,7 +70,7 @@ class GenericResource implements ResourceContext
      */
     public static function forFile(
         SplFileInfo $file,
-        ETag|null $etag = null,
+        ETag|callable|null $etag = null,
         DateTimeInterface|null $lastModifiedDate = null,
         callable|null $determineStateChangeSuccess = null,
         string $rangeUnit = 'bytes',
@@ -105,6 +105,12 @@ class GenericResource implements ResourceContext
      */
     public function etag(): ETag|null
     {
+        if (is_callable($this->etag)) {
+            $callback = $this->etag;
+
+            return $this->etag = $callback($this);
+        }
+
         return $this->etag;
     }
 

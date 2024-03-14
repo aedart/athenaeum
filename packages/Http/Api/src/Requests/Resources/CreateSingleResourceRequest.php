@@ -71,7 +71,7 @@ abstract class CreateSingleResourceRequest extends ValidatedApiRequest implement
 
         $this->evaluateRequestPreconditions(
             record: $this->wrapData($data),
-            etag: $this->generateEtag($data),
+            etag: fn () => $this->generateEtag($data),
             lastModifiedDate: $this->generateLastModifiedDate($data)
         );
     }

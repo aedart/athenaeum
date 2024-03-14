@@ -39,6 +39,8 @@ abstract class ProcessMultipleResourcesRequest extends ValidatedApiRequest imple
      */
     protected function prepareForValidation()
     {
+        parent::prepareForValidation();
+
         // Overwrite this method to configure additional request behaviour,
         // e.g. $this->with([ ... ]) relations to eager load, ...etc
 
@@ -61,9 +63,7 @@ abstract class ProcessMultipleResourcesRequest extends ValidatedApiRequest imple
                 "max:{$this->max}"
             ],
 
-            "{$key}.*" => function () {
-                return $this->targetIdentifierRules();
-            },
+            "{$key}.*" => $this->targetIdentifierRules(),
         ]);
     }
 

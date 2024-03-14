@@ -1,4 +1,5 @@
 ---
+title: Caching
 description: Http Api Resource Cache Headers
 sidebarDepth: 0
 ---
