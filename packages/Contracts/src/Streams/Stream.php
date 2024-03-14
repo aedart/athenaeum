@@ -260,6 +260,21 @@ interface Stream extends StreamInterface,
     public function readAllUsing(callable $callback): iterable;
 
     /**
+     * Read from this stream in chunks of specified buffer size
+     *
+     * @param  int|null  $length  [optional] Maximum bytes to read from stream. By default, all bytes left are read.
+     * @param  int  $offset  [optional] The offset on where to start to reading from.
+     * @param  int  $bufferSize  [optional] Read buffer size of each chunk in bytes.
+     *
+     * @return iterable<string>
+     */
+    public function buffer(
+        int|null $length = null,
+        int $offset = 0,
+        int $bufferSize = BufferSizes::BUFFER_8KB
+    ): iterable;
+
+    /**
      * Apply a callback, when result is true
      *
      * Method is inverse of {@see unless}.
