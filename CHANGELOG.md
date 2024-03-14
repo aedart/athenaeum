@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * `\Aedart\Testing\Generators\MockTrait`, a replacement for the deprecated `MockTrait` in PHPUnit.
+* `ISO8601_EXPANDED` in `\Aedart\Contracts\Utils\Dates\DateTimeFormats`. [#142](https://github.com/aedart/athenaeum/issues/142). 
 
 ### Changed
 
