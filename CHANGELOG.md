@@ -20,8 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Upgraded to use Laravel `v11.x` packages.
 * Upgraded to use Symfony `v7.x` packages.
 * Reworked `TraitTester` to no longer use deprecated features from PHPUnit. Now using `Mockery` to mock traits instead.
+* Refactored `AlphaDashDot` and `SemanticVersion` to inherit from `BaseValidationRule`, in `\Aedart\Validation\Rules` (_previously inherited from deprecated `BaseRule`, which has been removed_). [#158](https://github.com/aedart/athenaeum/issues/158).
 
 **Non-breaking Changes**
+
 
 ### Deprecated
 
@@ -32,6 +34,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Missing return type for `\Aedart\Support\AwareOf\Console\CommandBase::execute` (_after upgrade to Symfony `v7.x`_).
 * `RehashPasswordIfNeededTest` fails due to enabled auto-rehash password feature in Laravel.
 * Incorrect quotes for expected SQL, in `BelongsToFilterTest`, `SearchFilterTest`, `SortFilterTest`, `SearchProcessorTest`, and `RelationsFilteringTest` (_caused by updates to SQLite driver in Laravel `v11`_).  
+
+### Removed
+
+* `\Aedart\Filters\Query\Filters\Fields\BaseFieldFilter::datetimeRangeComparison` (_was deprecated in `v7.11.3`_).
+* `\Aedart\Audit\Models\Concerns\AuditTrailConfiguration` (_was deprecated in `v7.4`_).
+* `\Aedart\Audit\Traits\HasAuditTrail` (_was deprecated in `v7.0`_).
+* `\Aedart\Audit\Traits\RecordsChanges` (_was deprecated in `v7.0`_).
+* `\Aedart\Contracts\Validation\FailedState` (_was deprecated in `v7.4`_).
+* `\Aedart\Validation\Rules\BaseRule` (_was deprecated in `v7.4`_).
+* `\Aedart\Validation\Rules\Concerns\AthenaeumRule` (_was deprecated in `v7.4`_).
+* `\Aedart\Validation\Rules\Concerns\Attribute` (_was deprecated in `v7.4`_).
+* `\Aedart\Validation\Rules\Concerns\Translations` (_was deprecated in `v7.4`_).
+* `\Aedart\Validation\Rules\Concerns\ValidationFailure` (_was deprecated in `v7.4`_).
+* `\Aedart\Tests\Integration\Validation\Concerns\ValidationFailureTest` (_no longer required_).
 
 ## [7.33.0] - 2024-03-13
 
