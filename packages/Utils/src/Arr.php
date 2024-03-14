@@ -3,8 +3,11 @@
 
 namespace Aedart\Utils;
 
+use Aedart\Contracts\Utils\Random\ArrayRandomizer;
+use Aedart\Utils\Random\Factory;
 use Illuminate\Support\Arr as ArrBase;
 use InvalidArgumentException;
+use Random\Engine;
 
 /**
  * Array Utility
@@ -14,6 +17,18 @@ use InvalidArgumentException;
  */
 class Arr extends ArrBase
 {
+    /**
+     * Returns a new Array Randomizer instance
+     *
+     * @param Engine|null $engine [optional]
+     *
+     * @return ArrayRandomizer
+     */
+    public static function randomized(Engine|null $engine = null): ArrayRandomizer
+    {
+        return Factory::make($engine);
+    }
+
     /**
      * Returns a single random element from given list
      *
