@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration {
     /**
      * Table name where files and directories are to
      * be stored
@@ -62,7 +62,7 @@ return new class () extends Migration {
 
             $table
                 ->enum('visibility', Visibility::allowed())
-                ->default(Visibility::PRIVATE->value )
+                ->default(Visibility::PRIVATE->value)
                 ->comment('File or directory visibility');
 
             $table
