@@ -397,47 +397,6 @@ abstract class BaseFieldFilter extends FieldFilter
     }
 
     /**
-     * @deprecated Since 7.11.3 - Will be removed in next major version - produces incorrect range.
-     *
-     * Returns a datetime range comparison
-     *
-     * @param Builder|EloquentBuilder $query
-     * @param Carbon $date
-     * @param string $low [optional] Low end datetime comparison operator
-     * @param string $high [optional] High end datetime comparison operator
-     * @param int $offset [optional] Evt. -/+ seconds offset. If date has zero second
-     *                     then this offset will be multiplied with 60, to match a full
-     *                     minute...
-     *
-     * @return Builder|EloquentBuilder
-     */
-    protected function datetimeRangeComparison(
-        Builder|EloquentBuilder $query,
-        Carbon $date,
-        string $low = '>=',
-        string $high = '<=',
-        int $offset = 1
-    ): Builder|EloquentBuilder {
-        // The general database datetime format to use.
-        $format = $this->resolveDatetimeFormat($query);
-
-        // In case that no "seconds" precision is given, then ensure
-        // that we increase the offset and adapt the format. This should
-        // give a more acceptable result, rather than having "equals / not equals"
-        // fail finding anything...
-        if ($date->second === 0) {
-            $format = 'Y-m-d H:i:00';
-            $offset *= 60; // Seconds
-        }
-
-        $field = $this->getField();
-
-        return $query
-            ->where($field, $low, $date->format($format))
-            ->where($field, $high, $date->addSeconds($offset)->format($format));
-    }
-
-    /**
      * Builds "where [field] [operator] [date value]" constraint
      *
      * @param Builder|EloquentBuilder $query
