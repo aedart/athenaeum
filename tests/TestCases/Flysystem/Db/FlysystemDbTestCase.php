@@ -173,7 +173,7 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
     {
         return DB::table('files')
             ->select()
-            ->where('type', RecordTypes::FILE)
+            ->where('type', RecordTypes::FILE->value)
             ->get();
     }
 
@@ -186,7 +186,7 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
     {
         return DB::table('files')
             ->select()
-            ->where('type', RecordTypes::DIRECTORY)
+            ->where('type', RecordTypes::DIRECTORY->value)
             ->get();
     }
 

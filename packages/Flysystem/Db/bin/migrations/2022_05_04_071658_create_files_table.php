@@ -33,7 +33,7 @@ return new class() extends Migration {
             $table->id();
 
             $table
-                ->enum('type', RecordTypes::ALLOWED)
+                ->enum('type', RecordTypes::allowed())
                 ->comment('Whether this is a file or directory');
 
             // Materialized Path pattern
@@ -61,8 +61,8 @@ return new class() extends Migration {
                 ->comment('File media type / mimetype');
 
             $table
-                ->enum('visibility', Visibility::ALLOWED)
-                ->default(Visibility::PRIVATE)
+                ->enum('visibility', Visibility::allowed())
+                ->default(Visibility::PRIVATE->value)
                 ->comment('File or directory visibility');
 
             $table
