@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Upgraded to use Symfony `v7.x` packages.
 * Reworked `TraitTester` to no longer use deprecated features from PHPUnit. Now using `Mockery` to mock traits instead.
 * Refactored `AlphaDashDot` and `SemanticVersion` to inherit from `BaseValidationRule`, in `\Aedart\Validation\Rules` (_previously inherited from deprecated `BaseRule`, which has been removed_). [#158](https://github.com/aedart/athenaeum/issues/158).
+* Converted `RecordTypes` and `Visibility` interfaces to enums, in `\Aedart\Contracts\Flysystem\Db` (_contributed by [Trukes](https://github.com/Trukes)_). [#161](https://github.com/aedart/athenaeum/issues/161), [#162](https://github.com/aedart/athenaeum/pull/162/).
 
 **Non-breaking Changes**
 
