@@ -1,9 +1,9 @@
 <?php
 
-namespace Aedart\Tests\Unit\Utils\Randomizer;
+namespace Aedart\Tests\Unit\Utils\Random;
 
 use Aedart\Testing\TestCases\UnitTestCase;
-use Aedart\Utils\Randomizer\Factory;
+use Aedart\Utils\Random\Factory;
 use Random\Engine\Mt19937;
 
 /**
@@ -15,7 +15,7 @@ use Random\Engine\Mt19937;
  * @group utils-randomizer-factory
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
- * @package Aedart\Tests\Unit\Utils\Randomizer
+ * @package Aedart\Tests\Unit\Utils\Random
  */
 class FactoryTest extends UnitTestCase
 {
@@ -28,7 +28,7 @@ class FactoryTest extends UnitTestCase
     {
         $randomizer = Factory::make();
 
-        $this->assertNotNull($randomizer->engine);
+        $this->assertNotNull($randomizer->driver()->engine);
     }
 
     /**
@@ -41,6 +41,6 @@ class FactoryTest extends UnitTestCase
         $engine = new Mt19937();
         $randomizer = Factory::make($engine);
 
-        $this->assertSame($engine, $randomizer->engine);
+        $this->assertSame($engine, $randomizer->driver()->engine);
     }
 }
