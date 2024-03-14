@@ -57,6 +57,7 @@ class Memory
     /**
      * Returns the peak of memory allocated by PHP
      *
+     * @see usage()
      * @see https://www.php.net/manual/en/function.memory-get-peak-usage.php
      * @see https://www.php.net/manual/en/function.memory-reset-peak-usage.php
      *
@@ -73,6 +74,22 @@ class Memory
         }
 
         return $unit;
+    }
+
+    /**
+     * Returns the amount of memory allocated to PHP
+     *
+     * @see snapshot()
+     * @see https://www.php.net/manual/en/function.memory-get-usage.php
+     *
+     * @param bool $real [optional] If `true`, the total memory allocated from system
+     *                   is returned.
+     *
+     * @return Unit
+     */
+    public static function usage(bool $real = false): Unit
+    {
+        return static::unit(memory_get_usage($real));
     }
 
     /*****************************************************************
