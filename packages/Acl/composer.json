@@ -25,7 +25,7 @@
         "aedart/athenaeum-support": "^7.34",
         "aedart/athenaeum-utils": "^7.34",
         "aedart/athenaeum-validation": "^7.34",
-        "illuminate/auth": "^v11.0.3"
+        "illuminate/auth": "^v11.0.5"
     },
     "autoload": {
         "psr-4": {

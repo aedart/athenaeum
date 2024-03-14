@@ -21,9 +21,9 @@
     ],
     "require": {
         "php": "^8.2",
-        "composer-runtime-api": "^2.0.0",
+        "composer-runtime-api": "^2.2.2",
         "aedart/athenaeum-contracts": "^7.34",
-        "illuminate/support": "^v11.0.3",
+        "illuminate/support": "^v11.0.5",
         "mockery/mockery": "1.6.*"
     },
     "autoload": {
