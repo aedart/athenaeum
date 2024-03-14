@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Streams;
 
 use Aedart\Contracts\Streams\Exceptions\StreamException;
+use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
 
 /**
@@ -111,6 +112,30 @@ interface FileStream extends Stream
     public function copyTo(Stream|null $target = null, int|null $length = null, int $offset = 0): static;
 
     /**
+     * Copy data from source stream into this stream
+     *
+     * **Note**: _Neither this stream nor the source stream are rewound after copy operation!_
+     *
+     * **{@see PsrStreamInterface}**: _Unlike {@see append()}, this method will NOT detach the stream's underlying resource._
+     *
+     * @param  resource|PsrStreamInterface|StreamInterface  $source  The source stream to copy from.
+     * @param  int|null  $length  [optional] Maximum bytes to copy from source stream. By default, all bytes left are copied
+     * @param  int  $offset  [optional] The offset on source stream where to start to copy data from
+     * @param  int  $bufferSize  [optional] Read/Write size of each chunk in bytes.
+     *                           Applicable ONLY if `$source` is instance of {@see PsrStreamInterface}.
+     *
+     * @return static This stream with data appended from source stream
+     *
+     * @throws StreamException
+     */
+    public function copyFrom(
+        $source,
+        int|null $length = null,
+        int $offset = 0,
+        int $bufferSize = BufferSizes::BUFFER_8KB
+    ): static;
+
+    /**
      * Append data at the end of this stream
      *
      * Unlike {@see write()} and {@see put()}, this method will automatically move
@@ -118,7 +143,7 @@ interface FileStream extends Stream
      *
      * **Warning**: _Method will {@see detach()} `$data`'s underlying resource, if `$data` is a
      * pure {@see PsrStreamInterface} instance! If you wish for a continued valid resource reference in your
-     * stream instance, then you should wrap `$data` into a {@see Stream} instance using {@see Stream::makeFrom()}._
+     * stream instance, then you should use {@see copyFrom()}._
      *
      * @param  string|int|float|resource|PsrStreamInterface|Stream  $data
      * @param  int|null  $length  [optional] Maximum bytes to append. By default, all bytes left are appended
