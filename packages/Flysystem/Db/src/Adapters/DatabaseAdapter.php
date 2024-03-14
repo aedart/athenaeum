@@ -264,7 +264,7 @@ class DatabaseAdapter implements
                 $removed = $connection
                     ->table($this->filesTable)
                     ->where('type', RecordTypes::FILE->value)
-                    ->where('path', $path)
+                    ->where('path', $this->applyPrefix($path))
                     ->delete();
 
                 if ($removed === 0) {
