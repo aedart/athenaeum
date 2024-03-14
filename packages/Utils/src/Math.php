@@ -29,6 +29,8 @@ class Math
     }
 
     /**
+     * @deprecated Since v8.0 - Use \Aedart\Utils\Math::randomizer()->int() instead.
+     *
      * Returns a random cryptographically secure, uniformly selected number
      *
      * @see https://www.php.net/manual/en/function.random-int
