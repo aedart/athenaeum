@@ -54,6 +54,27 @@ class Memory
         return Unit::from($value);
     }
 
+    /**
+     * Returns the peak of memory allocated by PHP
+     *
+     * @see https://www.php.net/manual/en/function.memory-get-peak-usage.php
+     * @see https://www.php.net/manual/en/function.memory-reset-peak-usage.php
+     *
+     * @param bool $reset [optional] If `true`, peak memory usage is reset after memory usage obtained
+     *
+     * @return Unit
+     */
+    public static function snapshot(bool $reset = true): Unit
+    {
+        $unit = static::unit(memory_get_peak_usage());
+
+        if ($reset) {
+            memory_reset_peak_usage();
+        }
+
+        return $unit;
+    }
+
     /*****************************************************************
      * Kilobyte / Kibibyte
      ****************************************************************/
