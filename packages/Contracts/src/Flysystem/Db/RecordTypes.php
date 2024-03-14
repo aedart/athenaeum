@@ -24,9 +24,11 @@ enum RecordTypes: string
 
     /**
      * List of supported record types
+     *
+     * @return string[]
      */
     public static function allowed(): array
     {
-        return [self::DIRECTORY, self::FILE];
+        return array_column(self::cases(), 'value');
     }
 }

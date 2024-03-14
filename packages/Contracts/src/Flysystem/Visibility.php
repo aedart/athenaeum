@@ -24,9 +24,11 @@ enum Visibility: string
 
     /**
      * Allowed visibility types
+     *
+     * @return string[]
      */
     public static function allowed(): array
     {
-        return [self::PUBLIC , self::PRIVATE ];
+        return array_column(self::cases(), 'value');
     }
 }
