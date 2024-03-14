@@ -14,7 +14,9 @@ use Throwable;
 class Math
 {
     /**
-     * Generates a random number between given min and max values
+     * Returns a random cryptographically secure, uniformly selected number
+     *
+     * @see https://www.php.net/manual/en/function.random-int
      *
      * @param int $min [optional] Must be greater than or equals PHP_INT_MIN
      * @param int $max [optional] Must be less than or equals PHP_INT_MAX
