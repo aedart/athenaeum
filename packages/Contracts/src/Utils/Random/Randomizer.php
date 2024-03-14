@@ -39,6 +39,8 @@ interface Randomizer
      * Returns next positive integer
      *
      * @return int
+     *
+     * @throws Throwable
      */
     public function nextInt(): int;
 
