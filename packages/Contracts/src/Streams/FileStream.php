@@ -257,4 +257,15 @@ interface FileStream extends Stream
      * @throws StreamException
      */
     public function flush(): static;
+
+    /**
+     * Returns filename, if available
+     *
+     * If a 'filename' has been specified in the stream's meta,
+     * then it will be favoured. Otherwise, the basename of
+     * {@see uri()} will be returned, if its known.
+     *
+     * @return string|null
+     */
+    public function filename(): string|null;
 }
