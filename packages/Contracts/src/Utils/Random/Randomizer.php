@@ -73,6 +73,8 @@ interface Randomizer
      * @param string $bytes
      *
      * @return string New shuffled bytes
+     *
+     * @throws Throwable
      */
     public function shuffleBytes(string $bytes): string;
 
