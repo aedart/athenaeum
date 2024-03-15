@@ -3,6 +3,7 @@
 namespace Aedart\Utils;
 
 use Aedart\Contracts\Utils\Random\NumericRandomizer;
+use Aedart\Contracts\Utils\Random\Type;
 use Aedart\Utils\Random\Factory;
 use Random\Engine;
 use RuntimeException;
@@ -25,7 +26,7 @@ class Math
      */
     public static function randomizer(Engine|null $engine = null): NumericRandomizer
     {
-        return Factory::make($engine);
+        return Factory::make(Type::Numeric, $engine);
     }
 
     /**

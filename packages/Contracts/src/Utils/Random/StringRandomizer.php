@@ -5,12 +5,12 @@ namespace Aedart\Contracts\Utils\Random;
 use Throwable;
 
 /**
- * String Randomizer
+ * String (Bytes) Randomizer
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Contracts\Utils\Random
  */
-interface StringRandomizer
+interface StringRandomizer extends Randomizer
 {
     /**
      * Returns random bytes
@@ -32,5 +32,5 @@ interface StringRandomizer
      *
      * @throws Throwable
      */
-    public function shuffleBytes(string $bytes): string;
+    public function shuffle(string $bytes): string;
 }

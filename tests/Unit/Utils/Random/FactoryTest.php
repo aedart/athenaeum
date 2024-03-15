@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Unit\Utils\Random;
 
+use Aedart\Contracts\Utils\Random\Type;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Random\Factory;
 use Random\Engine\Mt19937;
@@ -26,7 +27,7 @@ class FactoryTest extends UnitTestCase
      */
     public function returnsRandomizerWithDefaultEngine(): void
     {
-        $randomizer = Factory::make();
+        $randomizer = Factory::make(Type::String);
 
         $this->assertNotNull($randomizer->driver()->engine);
     }
@@ -39,7 +40,7 @@ class FactoryTest extends UnitTestCase
     public function returnsRandomizerWithSpecifiedEngine(): void
     {
         $engine = new Mt19937();
-        $randomizer = Factory::make($engine);
+        $randomizer = Factory::make(Type::Array, $engine);
 
         $this->assertSame($engine, $randomizer->driver()->engine);
     }

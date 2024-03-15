@@ -10,7 +10,7 @@ use Throwable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Contracts\Utils\Random
  */
-interface ArrayRandomizer
+interface ArrayRandomizer extends Randomizer
 {
     /**
      * Returns random array keys

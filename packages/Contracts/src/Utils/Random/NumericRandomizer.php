@@ -10,7 +10,7 @@ use Throwable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Contracts\Utils\Random
  */
-interface NumericRandomizer
+interface NumericRandomizer extends Randomizer
 {
     /**
      * Returns a uniformly selected integer

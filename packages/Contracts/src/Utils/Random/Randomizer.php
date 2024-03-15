@@ -2,21 +2,14 @@
 
 namespace Aedart\Contracts\Utils\Random;
 
+use Aedart\Contracts\Utils\HasDriver;
+
 /**
  * Randomizer
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Contracts\Utils\Random
  */
-interface Randomizer extends
-    StringRandomizer,
-    NumericRandomizer,
-    ArrayRandomizer
+interface Randomizer extends HasDriver
 {
-    /**
-     * Returns the underlying driver of this randomizer
-     *
-     * @return mixed
-     */
-    public function driver(): mixed;
 }

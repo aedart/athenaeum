@@ -3,6 +3,7 @@
 namespace Aedart\Utils;
 
 use Aedart\Contracts\Utils\Random\StringRandomizer;
+use Aedart\Contracts\Utils\Random\Type;
 use Aedart\Utils\Random\Factory;
 use Illuminate\Support\Str as BaseStr;
 use Illuminate\Support\Stringable;
@@ -25,7 +26,7 @@ class Str extends BaseStr
      */
     public static function randomizer(Engine|null $engine = null): StringRandomizer
     {
-        return Factory::make($engine);
+        return Factory::make(Type::String, $engine);
     }
 
     /**

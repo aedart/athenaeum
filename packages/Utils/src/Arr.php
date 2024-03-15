@@ -4,6 +4,7 @@
 namespace Aedart\Utils;
 
 use Aedart\Contracts\Utils\Random\ArrayRandomizer;
+use Aedart\Contracts\Utils\Random\Type;
 use Aedart\Utils\Random\Factory;
 use Illuminate\Support\Arr as ArrBase;
 use InvalidArgumentException;
@@ -26,7 +27,7 @@ class Arr extends ArrBase
      */
     public static function randomizer(Engine|null $engine = null): ArrayRandomizer
     {
-        return Factory::make($engine);
+        return Factory::make(Type::Array, $engine);
     }
 
     /**

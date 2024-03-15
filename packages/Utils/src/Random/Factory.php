@@ -2,9 +2,14 @@
 
 namespace Aedart\Utils\Random;
 
+use Aedart\Contracts\Utils\Random\Factory as RandomizerFactory;
 use Aedart\Contracts\Utils\Random\Randomizer as RandomizerInterface;
+use Aedart\Contracts\Utils\Random\Type;
+use Aedart\Utils\Random\Types\ArrayRandomizer;
+use Aedart\Utils\Random\Types\NumericRandomizer;
+use Aedart\Utils\Random\Types\StringRandomizer;
 use Random\Engine;
-use Random\Randomizer as NativeRandomizer;
+use Random\Randomizer;
 
 /**
  * Randomizer Factory
@@ -14,21 +19,34 @@ use Random\Randomizer as NativeRandomizer;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Utils\Random
  */
-class Factory
+class Factory implements RandomizerFactory
 {
+
     /**
-     * Returns a new Randomizer instance, using given engine
+     * @inheritDoc
+     */
+    public static function make(Type $type, Engine|null $engine = null): RandomizerInterface
+    {
+        $driver = static::makeDriver($engine);
+
+        return match($type) {
+            Type::Array => new ArrayRandomizer($driver),
+            Type::String => new StringRandomizer($driver),
+            Type::Numeric => new NumericRandomizer($driver)
+        };
+    }
+
+    /**
+     * Returns a new driver instance
      *
-     * @see https://www.php.net/manual/en/random-randomizer.construct.php
+     * @see https://www.php.net/manual/en/class.random-randomizer.php
      *
      * @param Engine|null $engine [optional]
      *
-     * @return RandomizerInterface
+     * @return Randomizer
      */
-    public static function make(Engine|null $engine = null): RandomizerInterface
+    protected static function makeDriver(Engine|null $engine = null): Randomizer
     {
-        $driver = new NativeRandomizer($engine);
-
-        return new Randomizer($driver);
+        return new Randomizer($engine);
     }
 }
