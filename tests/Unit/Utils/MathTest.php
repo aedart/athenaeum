@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Unit\Utils;
 
+use Aedart\Contracts\Utils\Random\NumericRandomizer;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Math;
@@ -18,6 +19,18 @@ use RuntimeException;
  */
 class MathTest extends UnitTestCase
 {
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function returnsRandomizer(): void
+    {
+        $randomizer = Math::randomizer();
+
+        $this->assertInstanceOf(NumericRandomizer::class, $randomizer);
+    }
+
     /**
      * @test
      */

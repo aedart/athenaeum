@@ -3,6 +3,7 @@
 
 namespace Aedart\Tests\Unit\Utils;
 
+use Aedart\Contracts\Utils\Random\ArrayRandomizer;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Arr;
@@ -18,6 +19,18 @@ use Aedart\Utils\Arr;
  */
 class ArrTest extends UnitTestCase
 {
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function returnsRandomizer(): void
+    {
+        $randomizer = Arr::randomizer();
+
+        $this->assertInstanceOf(ArrayRandomizer::class, $randomizer);
+    }
+
     /**
      * @test
      */

@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `\Aedart\Testing\Generators\MockTrait`, a replacement for the deprecated `MockTrait` in PHPUnit.
 * `ISO8601_EXPANDED` in `\Aedart\Contracts\Utils\Dates\DateTimeFormats`. [#142](https://github.com/aedart/athenaeum/issues/142).
 * `snapshot()` and `usage()` in `\Aedart\Utils\Memory`. [#104](https://github.com/aedart/athenaeum/issues/104).
+* `randomizer()` in `\Aedart\Utils\Math`, `\Aedart\Utils\Arr` and `\Aedart\Utils\Str`. [#150](https://github.com/aedart/athenaeum/issues/150), [#151](https://github.com/aedart/athenaeum/issues/151).
+* Randomizer `Factory` that is able to return either of the following `StringRandomizer`, `NumericRandomizer` or `ArrayRandomizer` (_adapters for PHP's native `Random\Randomizer`_), in `\Aedart\Utils\Random`. [#150](https://github.com/aedart/athenaeum/issues/150).
 
 ### Changed
 
@@ -34,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 
 * `\Aedart\Auth\Fortify\Actions\RehashPasswordIfNeeded`, password rehashing is now a default part of Laravel's [`\Illuminate\Contracts\Auth\UserProvider`](https://laravel.com/docs/11.x/upgrade#authentication).
+* `\Aedart\Utils\Math::randomInt()` - replaced by `\Aedart\Utils\Math::randomizer()->int()`. [#150](https://github.com/aedart/athenaeum/issues/150).
 
 ### Fixed
 
