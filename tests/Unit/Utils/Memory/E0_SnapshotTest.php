@@ -42,7 +42,7 @@ class E0_SnapshotTest extends UnitTestCase
         $this->assertGreaterThan(0, $snapshotAfter->bytes(), 'after');
 
         // Can be unreliable, when multiple tests are executed...
-//        $this->assertGreaterThanOrEqual($snapshotBefore->bytes(), $snapshotAfter->bytes());
+        //        $this->assertGreaterThanOrEqual($snapshotBefore->bytes(), $snapshotAfter->bytes());
     }
 
     /**
@@ -67,6 +67,6 @@ class E0_SnapshotTest extends UnitTestCase
         $this->assertGreaterThan(0, $snapshotAfter->bytes(), 'after');
 
         // Can be unreliable, when multiple tests are executed...
-//        $this->assertLessThanOrEqual($snapshotBefore->bytes(), $snapshotAfter->bytes());
+        //        $this->assertLessThanOrEqual($snapshotBefore->bytes(), $snapshotAfter->bytes());
     }
 }

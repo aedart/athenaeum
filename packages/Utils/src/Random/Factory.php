@@ -21,7 +21,6 @@ use Random\Randomizer;
  */
 class Factory implements RandomizerFactory
 {
-
     /**
      * @inheritDoc
      */
@@ -29,7 +28,7 @@ class Factory implements RandomizerFactory
     {
         $driver = static::makeDriver($engine);
 
-        return match($type) {
+        return match ($type) {
             Type::Array => new ArrayRandomizer($driver),
             Type::String => new StringRandomizer($driver),
             Type::Numeric => new NumericRandomizer($driver)
