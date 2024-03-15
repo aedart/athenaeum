@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `ValidatedApiRequest` no longer overwrites Laravel's "class based `after()` validation rules". [#168](https://github.com/aedart/athenaeum/issues/168), [#167](https://github.com/aedart/athenaeum/issues/167). 
 * `buffer()` method in `\Aedart\Contracts\Streams\Stream` interface. [#156](https://github.com/aedart/athenaeum/issues/156).
 * `copyFrom()`, `openFileInfo()`, `openUploadedFile()` and `filename()` methods in `\Aedart\Contracts\Streams\FileStream` interface. [#156](https://github.com/aedart/athenaeum/issues/156).
+* `defaultScanner()` now returns `ClamAv` scanner (_previously returned `NullScanner`_), in `\Aedart\Antivirus\Manager`.
 
 **Non-breaking Changes**
 
