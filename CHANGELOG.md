@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Missing return type for `\Aedart\Support\AwareOf\Console\CommandBase::execute` (_after upgrade to Symfony `v7.x`_).
 * `RehashPasswordIfNeededTest` fails due to enabled auto-rehash password feature in Laravel.
 * Incorrect quotes for expected SQL, in `BelongsToFilterTest`, `SearchFilterTest`, `SortFilterTest`, `SearchProcessorTest`, and `RelationsFilteringTest` (_caused by updates to SQLite driver in Laravel `v11`_).  
+* `LaravelExceptionHandler::render()` response violates interface, in `\Aedart\Core` (_A new `AdaptedExceptionHandler` interface has been added which overwrites `render()` return to `void`_). [#153](https://github.com/aedart/athenaeum/issues/153).
 
 ### Removed
 
