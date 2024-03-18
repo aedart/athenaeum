@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * `\Aedart\Auth\Fortify\Actions\RehashPasswordIfNeeded` and `\Aedart\Auth\Fortify\Events\PasswordWasRehashed`. Password rehashing is now a default part of Laravel's [`\Illuminate\Contracts\Auth\UserProvider`](https://laravel.com/docs/11.x/upgrade#authentication).
 * `\Aedart\Utils\Math::randomInt()` - replaced by `\Aedart\Utils\Math::randomizer()->int()`. [#150](https://github.com/aedart/athenaeum/issues/150).
+* `\Aedart\Utils\Arr::randomElement()` - replaced by `\Aedart\Utils\Arr::randomizer()->value()`. [#150](https://github.com/aedart/athenaeum/issues/150).
 
 ### Fixed
 
