@@ -15,6 +15,7 @@
     "scripts": {
         "docs:dev": "cross-env NODE_ENV=development vuepress dev docs --config docs/.vuepress/config.ts",
         "docs:build": "cross-env NODE_ENV=development vuepress build docs --config docs/.vuepress/config.ts",
-        "docs:build-prod": "cross-env NODE_ENV=production vuepress build docs --config docs/.vuepress/config.ts"
+        "docs:build-prod": "cross-env NODE_ENV=production vuepress build docs --config docs/.vuepress/config.ts",
+        "docs:export-pdf": "press-export-pdf export --config docs/.vuepress/vuepress-pdf.config.ts"
     }
 }
