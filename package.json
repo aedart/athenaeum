@@ -8,6 +8,7 @@
         "@vuepress/core": "2.0.0-beta.61",
         "@vuepress/utils": "2.0.0-beta.61",
         "@vuepress/client": "2.0.0-beta.61",
+        "@condorhero/vuepress-plugin-export-pdf-v2": "^3.0.2",
         "tslib": "^2.5.0",
         "typescript": "^5.0.2"
     },
