@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Criteria
 
-Within this context, criteria (_or criterion_) is the similar to Laravel's database [Query Scopes](https://laravel.com/docs/10.x/eloquent#query-scopes).
+Within this context, criteria (_or criterion_) is the similar to Laravel's database [Query Scopes](https://laravel.com/docs/11.x/eloquent#query-scopes).
 It allows you to add additional constraints, scopes, attachments, cookies, expectations or http query parameters, whilst isolating it in a separate class.  
 
 [[TOC]]

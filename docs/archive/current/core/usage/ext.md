@@ -102,7 +102,7 @@ class AcmeApplication extends Application
 
 ## Application is a Service Container
 
-Just like Laravel's Foundation Application, the Athenaeum Core Application extends the [Service Container](https://laravel.com/docs/10.x/container).
+Just like Laravel's Foundation Application, the Athenaeum Core Application extends the [Service Container](https://laravel.com/docs/11.x/container).
 This means that, you can gain access to services and components.
 _But not before those service have been registered!_
 

@@ -68,11 +68,11 @@ class CurrencyController
 A Http Client "package" was made available in version 3.x of the Athenaeum library.
 It offered the manager to handle multiple "profiles" and some fluent methods for gradually building a request.
 But it was not as comprehensive as the current version.
-When Laravel released it's v7.x version, it came with a custom [Http Client](https://laravel.com/docs/10.x/http-client#introduction).
+When Laravel released it's v7.x version, it came with a custom [Http Client](https://laravel.com/docs/11.x/http-client#introduction).
 Therefore, this package became somewhat irrelevant and was considered for deprecation.
 Ultimately, I decided to redesign this package entirely, mixing some of the already provided features with lots of new ones.
 
-As a result, this package now draws inspiration from both Laravel's Http Client, as well as the [Database Query Builder](https://laravel.com/docs/10.x/queries#introduction).
+As a result, this package now draws inspiration from both Laravel's Http Client, as well as the [Database Query Builder](https://laravel.com/docs/11.x/queries#introduction).
 You will find many similarities between the client offered by Laravel, and the one provided by this package.
 The intent isn't to copy Laravel's Http Client, but rather to provide a slightly different approach on request building.
 

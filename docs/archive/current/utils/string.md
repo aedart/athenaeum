@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # String
 
-Extended version of Laravel's [`Str` component](https://laravel.com/docs/10.x/helpers#strings-method-list).
+Extended version of Laravel's [`Str` component](https://laravel.com/docs/11.x/helpers#strings-method-list).
 
 [[TOC]]
 

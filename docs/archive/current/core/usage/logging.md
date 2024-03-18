@@ -18,7 +18,7 @@ composer require illuminate/log
 ## Logger Configuration
 
 Copy the `logging.php` configuration file from Laravel's [Repository](https://github.com/laravel/laravel/blob/master/config/logging.php), and place it within your `/configs` directory.
-You can read more about the configuration in Laravel's [documentation](https://laravel.com/docs/10.x/logging).
+You can read more about the configuration in Laravel's [documentation](https://laravel.com/docs/11.x/logging).
 
 ## Register `LogServiceProvider`
 
@@ -66,7 +66,7 @@ $logger->info('Logger works great');
 
 ### Via `Log` Facade
 
-You can also use Laravel's `Log` [Facade](https://laravel.com/docs/10.x/facades). 
+You can also use Laravel's `Log` [Facade](https://laravel.com/docs/11.x/facades). 
 
 ```php
 <?php

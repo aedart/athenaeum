@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Introduction
 
-This package also offers a few opinionated [Form Request](https://laravel.com/docs/10.x/validation#form-request-validation) abstractions, intended to be used for APIs.
+This package also offers a few opinionated [Form Request](https://laravel.com/docs/11.x/validation#form-request-validation) abstractions, intended to be used for APIs.
 
 [[TOC]]
 
@@ -43,7 +43,7 @@ The `$validator` instance that is provided for the `after()` method contains all
 You can access the data and use it, if needed.
 Examples of what kind of additional validation you might perform, could be:
 
-* Complex cross-field validation that [regular validation rules](https://laravel.com/docs/10.x/validation#available-validation-rules) might not be able to satisfy.
+* Complex cross-field validation that [regular validation rules](https://laravel.com/docs/11.x/validation#available-validation-rules) might not be able to satisfy.
 * Query additional resources and ensure they exist, match or otherwise fit with what is requested.
 * Perform special domain specific conditions check (_whatever that might be for your application_).
 * _Prepare data to be processed by your route or controller action._

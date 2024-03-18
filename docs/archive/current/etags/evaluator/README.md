@@ -26,7 +26,7 @@ See [supported preconditions](./preconditions.md#supported-preconditions) for ad
 ## How to Evaluate
 
 Http Conditional Requests are always specific to the requested resource and the [Http Method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods).
-It is therefore recommended that you evaluate the requested resource inside your [Form Request](https://laravel.com/docs/10.x/validation#form-request-validation).
+It is therefore recommended that you evaluate the requested resource inside your [Form Request](https://laravel.com/docs/11.x/validation#form-request-validation).
 The following shows an example request:
 
 ### Request
@@ -177,4 +177,4 @@ $evaluator->evaluate($resource);
 ## Exception Handling
 
 Whenever the `Evaluator` throws an exception, your Laravel application's exception handler will process it and create an appropriate response.
-Please read [Laravel's exception handler documentation](https://laravel.com/docs/10.x/errors#the-exception-handler) for additional information.
+Please read [Laravel's exception handler documentation](https://laravel.com/docs/11.x/errors#the-exception-handler) for additional information.

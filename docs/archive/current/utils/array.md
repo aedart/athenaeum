@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Array
 
-Extended version of Laravel's [`Arr` component](https://laravel.com/docs/10.x/helpers#arrays).
+Extended version of Laravel's [`Arr` component](https://laravel.com/docs/11.x/helpers#arrays).
 
 [[TOC]]
 
@@ -19,7 +19,7 @@ use Aedart\Utils\Arr;
 $element = Arr::randomElement(['Jim', 'Sine', 'Ally', 'Gordon']);
 ```
 
-See also Laravel's [`Arr::random`](https://laravel.com/docs/10.x/helpers#method-array-random).
+See also Laravel's [`Arr::random`](https://laravel.com/docs/11.x/helpers#method-array-random).
 
 ### Seeding
 

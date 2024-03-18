@@ -24,7 +24,7 @@ class Box
 }
 ```
 
-As soon as you invoke the getter method (_`getConfig()`_), a local reference to the bound `Repository` is obtained from the [Service Container](https://laravel.com/docs/10.x/container).
+As soon as you invoke the getter method (_`getConfig()`_), a local reference to the bound `Repository` is obtained from the [Service Container](https://laravel.com/docs/11.x/container).
 
 ```php
 $box = new Box();

@@ -90,7 +90,7 @@ use Illuminate\Support\Facades\Storage;
 Storage::disk('my_disk')->put('example.txt', 'Contents');
 ```
 
-See [Laravel documentation](https://laravel.com/docs/10.x/filesystem) for additional examples on how to use custom disk profiles.
+See [Laravel documentation](https://laravel.com/docs/11.x/filesystem) for additional examples on how to use custom disk profiles.
 
 ## Outside Laravel
 

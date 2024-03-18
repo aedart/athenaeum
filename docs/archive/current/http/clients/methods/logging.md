@@ -20,7 +20,7 @@ composer require illuminate/log
 
 Afterwards, in your `config/app.php`, you need to register the `LogServiceProvider`.
 Also, you will require a copy of the `logging.php` configuration file from Laravel's [Repository](https://github.com/laravel/laravel/blob/master/config/logging.php), and place it within your `/configs` directory.
-Read more about the configuration in Laravel's [documentation](https://laravel.com/docs/10.x/logging).
+Read more about the configuration in Laravel's [documentation](https://laravel.com/docs/11.x/logging).
 
 ```php
 return [

@@ -107,7 +107,7 @@ $post = Post::findOrCreateBySlug('april-morning-tunes', [
 
 ## Query Scopes
 
-The following local [query scope methods](https://laravel.com/docs/10.x/eloquent#local-scopes) are offered:
+The following local [query scope methods](https://laravel.com/docs/11.x/eloquent#local-scopes) are offered:
 
 ### `whereSlug`
 
@@ -131,7 +131,7 @@ $posts = Post::query()
 
 ## Soft-deleted vs. Finding by slugs
 
-If your model supports [soft-deleting](https://laravel.com/docs/10.x/eloquent#soft-deleting), and you attempt to find a record by a slug that has been soft deleted, then none of the _"find by slug"_ methods are going to return a match.
+If your model supports [soft-deleting](https://laravel.com/docs/11.x/eloquent#soft-deleting), and you attempt to find a record by a slug that has been soft deleted, then none of the _"find by slug"_ methods are going to return a match.
 To query models that have been soft deleted, you must make use of Eloquent's `withTrashed()` method.
 
 ```php

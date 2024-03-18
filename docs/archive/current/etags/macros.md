@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 # Request / Response Macros
 
-Etags and precondition evaluator components depend on a few [Http Request & Response Macros](https://laravel.com/docs/10.x/responses#response-macros).
+Etags and precondition evaluator components depend on a few [Http Request & Response Macros](https://laravel.com/docs/11.x/responses#response-macros).
 These are automatically installed by this package's service provider.
 The following highlights the macros that are installed. 
 

@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Fluent Api
 
-In similar fashion to [Laravel's Http Client](https://laravel.com/docs/10.x/http-client), you can chain methods together and thereby gradually build your request. 
+In similar fashion to [Laravel's Http Client](https://laravel.com/docs/11.x/http-client), you can chain methods together and thereby gradually build your request. 
 
 ```php
 $response = $client

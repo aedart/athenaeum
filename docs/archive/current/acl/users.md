@@ -68,7 +68,7 @@ $user->syncRoles([
 ]);
 ```
 
-For additional information about relations synchronisation, please review Laravel's [documentation](https://laravel.com/docs/10.x/eloquent-relationships#syncing-associations).
+For additional information about relations synchronisation, please review Laravel's [documentation](https://laravel.com/docs/11.x/eloquent-relationships#syncing-associations).
 
 ## Check user's roles
 
@@ -102,7 +102,7 @@ echo $user->hasAnyRoles([ 'editor', 'reviewer' ]); // e.g. true (1)
 
 ## Check user's permissions
 
-During runtime, if you have defined permissions in the `AuthServiceProvider` (See [setup](./setup.md)), you can use [Laravel's builtin mechanisms](https://laravel.com/docs/10.x/authorization#authorizing-actions-using-policies) to check a user's permissions.
+During runtime, if you have defined permissions in the `AuthServiceProvider` (See [setup](./setup.md)), you can use [Laravel's builtin mechanisms](https://laravel.com/docs/11.x/authorization#authorizing-actions-using-policies) to check a user's permissions.
 
 ```php
 <?php
