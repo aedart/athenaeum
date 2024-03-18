@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* `@condorhero/vuepress-plugin-export-pdf-v2` package as dev dependency (_due to PDF export experiment of docs, in `packages.json`_).
+
 ## [8.0.0] - 2024-03-18
 
 ### Added
