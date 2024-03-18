@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `snapshot()` and `usage()` in `\Aedart\Utils\Memory`. [#104](https://github.com/aedart/athenaeum/issues/104).
 * `randomizer()` in `\Aedart\Utils\Math`, `\Aedart\Utils\Arr` and `\Aedart\Utils\Str`. [#150](https://github.com/aedart/athenaeum/issues/150), [#151](https://github.com/aedart/athenaeum/issues/151).
 * Randomizer `Factory` that is able to return either of the following `StringRandomizer`, `NumericRandomizer` or `ArrayRandomizer` (_adapters for PHP's native `Random\Randomizer`_), in `\Aedart\Utils\Random`. [#150](https://github.com/aedart/athenaeum/issues/150).
+* `buffer()` method in `\Aedart\Contracts\Streams\Stream` interface. [#156](https://github.com/aedart/athenaeum/issues/156).
+* `copyFrom()`, `openFileInfo()`, `openUploadedFile()` and `filename()` methods in `\Aedart\Contracts\Streams\FileStream` interface. [#156](https://github.com/aedart/athenaeum/issues/156).
 
 ### Changed
 
@@ -26,17 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Reworked `TraitTester` to no longer use deprecated features from PHPUnit. Now using `Mockery` to mock traits instead.
 * Refactored `AlphaDashDot` and `SemanticVersion` to inherit from `BaseValidationRule`, in `\Aedart\Validation\Rules` (_previously inherited from deprecated `BaseRule`, which has been removed_). [#158](https://github.com/aedart/athenaeum/issues/158).
 * Converted `RecordTypes` and `Visibility` interfaces to enums, in `\Aedart\Contracts\Flysystem\Db` (_contributed by [Trukes](https://github.com/Trukes)_). [#161](https://github.com/aedart/athenaeum/issues/161), [#162](https://github.com/aedart/athenaeum/pull/162/).
-* `ValidatedApiRequest` no longer overwrites Laravel's "class based `after()` validation rules". [#168](https://github.com/aedart/athenaeum/issues/168), [#167](https://github.com/aedart/athenaeum/issues/167). 
-* `buffer()` method in `\Aedart\Contracts\Streams\Stream` interface. [#156](https://github.com/aedart/athenaeum/issues/156).
-* `copyFrom()`, `openFileInfo()`, `openUploadedFile()` and `filename()` methods in `\Aedart\Contracts\Streams\FileStream` interface. [#156](https://github.com/aedart/athenaeum/issues/156).
+* `ValidatedApiRequest` no longer overwrites Laravel's "class based `after()` validation rules". [#168](https://github.com/aedart/athenaeum/issues/168), [#167](https://github.com/aedart/athenaeum/issues/167).
 * `defaultScanner()` now returns `ClamAv` scanner (_previously returned `NullScanner`_), in `\Aedart\Antivirus\Manager`.
-
-**Non-breaking Changes**
-
 
 ### Deprecated
 
-* `\Aedart\Auth\Fortify\Actions\RehashPasswordIfNeeded`, password rehashing is now a default part of Laravel's [`\Illuminate\Contracts\Auth\UserProvider`](https://laravel.com/docs/11.x/upgrade#authentication).
+* `\Aedart\Auth\Fortify\Actions\RehashPasswordIfNeeded` and `\Aedart\Auth\Fortify\Events\PasswordWasRehashed`. Password rehashing is now a default part of Laravel's [`\Illuminate\Contracts\Auth\UserProvider`](https://laravel.com/docs/11.x/upgrade#authentication).
 * `\Aedart\Utils\Math::randomInt()` - replaced by `\Aedart\Utils\Math::randomizer()->int()`. [#150](https://github.com/aedart/athenaeum/issues/150).
 
 ### Fixed
