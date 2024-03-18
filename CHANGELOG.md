@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.0.0] - 2024-03-18
+
 ### Added
 
 * `\Aedart\Testing\Generators\MockTrait`, a replacement for the deprecated `MockTrait` in PHPUnit.
@@ -1422,7 +1424,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/7.33.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/8.0.0...HEAD
+[8.0.0]: https://github.com/aedart/athenaeum/compare/7.33.0...8.0.0
 [7.33.0]: https://github.com/aedart/athenaeum/compare/7.32.0...7.33.0
 [7.32.0]: https://github.com/aedart/athenaeum/compare/7.31.0...7.32.0
 [7.31.0]: https://github.com/aedart/athenaeum/compare/7.30.1...7.31.0
