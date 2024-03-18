@@ -37,7 +37,7 @@ abstract class CreateSingleResourceRequest extends ValidatedApiRequest implement
      * @throws Throwable
      * @throws ValidationException
      */
-    public function after(Validator $validator): void
+    public function afterValidation(Validator $validator): void
     {
         // After received data has been validated, we can use it to evaluate evt. request
         // preconditions.

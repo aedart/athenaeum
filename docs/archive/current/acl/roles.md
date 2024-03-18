@@ -22,7 +22,7 @@ $manager = Role::create([
 ]);
 ```
 
-See Laravel's [documentation](https://laravel.com/docs/10.x/eloquent#inserting-and-updating-models) for additional information on how to create new records.
+See Laravel's [documentation](https://laravel.com/docs/11.x/eloquent#inserting-and-updating-models) for additional information on how to create new records.
 
 ### New role with permissions
 
@@ -97,7 +97,7 @@ $role->syncPermissions([
 ]);
 ```
 
-For additional information about relations synchronisation, please review Laravel's [documentation](https://laravel.com/docs/10.x/eloquent-relationships#syncing-associations).
+For additional information about relations synchronisation, please review Laravel's [documentation](https://laravel.com/docs/11.x/eloquent-relationships#syncing-associations).
 
 ## Update role with permissions
 

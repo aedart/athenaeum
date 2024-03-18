@@ -54,7 +54,7 @@ class RelationsFilteringTest extends FiltersTestCase
         ConsoleDebugger::output($sql);
 
         // Ensure that "where relation exists" clause has been added...
-        $this->assertStringContainsString('and (exists (select * from `owners` where `products`.`restricted_to_owner_id` = `owners`.`id` and `id` = ?) or not exists (select * from `owners` where `products`.`restricted_to_owner_id` = `owners`.`id`))', $sql);
-        $this->assertStringContainsString('order by `restricted_to_owner_id` desc', $sql);
+        $this->assertStringContainsString('and (exists (select * from "owners" where "products"."restricted_to_owner_id" = "owners"."id" and "id" = ?) or not exists (select * from "owners" where "products"."restricted_to_owner_id" = "owners"."id"))', $sql);
+        $this->assertStringContainsString('order by "restricted_to_owner_id" desc', $sql);
     }
 }

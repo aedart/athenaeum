@@ -10,23 +10,25 @@ use League\Flysystem\Visibility as FlysystemVisibility;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Flysystem
  */
-interface Visibility
+enum Visibility: string
 {
     /**
      * Public visibility
      */
-    public const PUBLIC = FlysystemVisibility::PUBLIC;
+    case PUBLIC = FlysystemVisibility::PUBLIC;
 
     /**
      * Private visibility
      */
-    public const PRIVATE = FlysystemVisibility::PRIVATE;
+    case PRIVATE = FlysystemVisibility::PRIVATE;
 
     /**
      * Allowed visibility types
+     *
+     * @return string[]
      */
-    public const ALLOWED = [
-        self::PUBLIC,
-        self::PRIVATE
-    ];
+    public static function allowed(): array
+    {
+        return array_column(self::cases(), 'value');
+    }
 }

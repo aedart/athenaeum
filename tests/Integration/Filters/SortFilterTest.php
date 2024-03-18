@@ -64,7 +64,7 @@ class SortFilterTest extends FiltersTestCase
         ConsoleDebugger::output($sql);
 
         $this->assertStringContainsString('order by', $sql);
-        $this->assertStringContainsString('`users`.`name` asc', $sql);
+        $this->assertStringContainsString('"users"."name" asc', $sql);
     }
 
     /**
@@ -97,6 +97,6 @@ class SortFilterTest extends FiltersTestCase
         ConsoleDebugger::output($sql);
 
         $this->assertStringContainsString('order by', $sql);
-        $this->assertStringContainsString('`users`.`age` desc', $sql);
+        $this->assertStringContainsString('"users"."age" desc', $sql);
     }
 }

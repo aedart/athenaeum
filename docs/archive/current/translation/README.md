@@ -4,9 +4,7 @@ description: About the Translation package
 
 # Introduction
 
-_**Available since** `v7.3.x`_
-
-The translation package contains a few utilities for [Laravel's Localization utilities](https://laravel.com/docs/10.x/localization).
+The translation package contains a few utilities for [Laravel's Localization utilities](https://laravel.com/docs/11.x/localization).
 
 ## Exporters
 

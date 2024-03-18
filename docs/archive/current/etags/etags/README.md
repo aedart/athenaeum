@@ -80,7 +80,7 @@ echo (string) $strongEtag; // E.g. "4720b076892bb2fb65e75af902273c73a2967e4a"
 
 ## Using Facade
 
-This package also comes with a [Facade](https://laravel.com/docs/10.x/facades), that allows you to achieve the same as previously shown.
+This package also comes with a [Facade](https://laravel.com/docs/11.x/facades), that allows you to achieve the same as previously shown.
 
 ### Create new Etags
 

@@ -118,7 +118,7 @@ From the above example, the following permission slug is inserted into the datab
 ::: tip How should you name your permissions?
 If you find yourself wondering how you should name your permission slugs, perhaps you can use the same names as for your routes.
 
-See Laravel's [resource routes](https://laravel.com/docs/10.x/controllers#actions-handled-by-resource-controller) documentation for inspiration.
+See Laravel's [resource routes](https://laravel.com/docs/11.x/controllers#actions-handled-by-resource-controller) documentation for inspiration.
 :::
 
 ## Find or create behaviour

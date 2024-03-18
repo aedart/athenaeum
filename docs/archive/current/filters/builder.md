@@ -39,8 +39,8 @@ class UserFiltersBuilder extends BaseBuilder
 
 ## How to use Builder
 
-Once you have created your builder, you can instantiate a new instance in your [Form Request](https://laravel.com/docs/10.x/validation#form-request-validation).
-The [after validation hook](https://laravel.com/docs/10.x/validation#after-validation-hook) is a possible place, where you can create a new builder instance.
+Once you have created your builder, you can instantiate a new instance in your [Form Request](https://laravel.com/docs/11.x/validation#form-request-validation).
+The [after validation hook](https://laravel.com/docs/11.x/validation#after-validation-hook) is a possible place, where you can create a new builder instance.
 However, feel free to initialise your builder where it suits you the most.
 
 Call the `build()` method to trigger the processing of http query parameters. The method returns the `BuiltFiltersMap` DTO, which contains all query filters that must be applied. 
@@ -52,7 +52,7 @@ class ListUsersRequest exends FormRequest
 {
     public ?BuiltFiltersMap $filters = null;
 
-    public function after(Validator $validator)
+    public function afterValidation(Validator $validator)
     {        
         $this->filters = UserFiltersBuilder::make($this)
             ->build();

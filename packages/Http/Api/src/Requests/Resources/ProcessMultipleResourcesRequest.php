@@ -72,9 +72,9 @@ abstract class ProcessMultipleResourcesRequest extends ValidatedApiRequest imple
      *
      * @throws Throwable
      */
-    public function after(Validator $validator): void
+    public function afterValidation(Validator $validator): void
     {
-        parent::after($validator);
+        parent::afterValidation($validator);
 
         // Obtain the requested targets (identifiers) and find matching records
         $key = $this->targetsKey();

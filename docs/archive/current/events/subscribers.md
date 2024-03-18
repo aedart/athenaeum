@@ -4,7 +4,7 @@ description: Registration of Subscribers
 
 # Subscribers
 
-To register event [Subscribers](https://laravel.com/docs/10.x/events#event-subscribers), state the class path of your subscribers inside the `subscribers` key, in your `/config/events.php` file.
+To register event [Subscribers](https://laravel.com/docs/11.x/events#event-subscribers), state the class path of your subscribers inside the `subscribers` key, in your `/config/events.php` file.
 
 ```php
 <?php

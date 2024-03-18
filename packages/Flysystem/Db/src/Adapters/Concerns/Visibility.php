@@ -2,7 +2,7 @@
 
 namespace Aedart\Flysystem\Db\Adapters\Concerns;
 
-use Aedart\Contracts\Flysystem\Visibility as VisibilityInterface;
+use Aedart\Contracts\Flysystem\Visibility as VisibilityEnum;
 use League\Flysystem\Config;
 
 /**
@@ -24,7 +24,7 @@ trait Visibility
     {
         return $config->get(
             Config::OPTION_VISIBILITY,
-            $config->get(Config::OPTION_DIRECTORY_VISIBILITY, VisibilityInterface::PRIVATE)
+            $config->get(Config::OPTION_DIRECTORY_VISIBILITY, VisibilityEnum::PRIVATE->value)
         );
     }
 
@@ -37,6 +37,6 @@ trait Visibility
      */
     protected function resolveFileVisibility(Config $config): string
     {
-        return $config->get(Config::OPTION_VISIBILITY, VisibilityInterface::PRIVATE);
+        return $config->get(Config::OPTION_VISIBILITY, VisibilityEnum::PRIVATE->value);
     }
 }

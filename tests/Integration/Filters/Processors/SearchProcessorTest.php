@@ -138,6 +138,6 @@ class SearchProcessorTest extends FiltersTestCase
         ConsoleDebugger::output($sql);
 
         $this->assertNotEmpty($sql, 'Query was not built');
-        $this->assertStringContainsString('where (`my_column` = ?)', $sql);
+        $this->assertStringContainsString('where ("my_column" = ?)', $sql);
     }
 }

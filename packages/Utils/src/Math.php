@@ -2,6 +2,10 @@
 
 namespace Aedart\Utils;
 
+use Aedart\Contracts\Utils\Random\NumericRandomizer;
+use Aedart\Contracts\Utils\Random\Type;
+use Aedart\Utils\Random\Factory;
+use Random\Engine;
 use RuntimeException;
 use Throwable;
 
@@ -14,7 +18,23 @@ use Throwable;
 class Math
 {
     /**
-     * Generates a random number between given min and max values
+     * Returns a new Numeric Randomizer instance
+     *
+     * @param Engine|null $engine [optional]
+     *
+     * @return NumericRandomizer
+     */
+    public static function randomizer(Engine|null $engine = null): NumericRandomizer
+    {
+        return Factory::make(Type::Numeric, $engine);
+    }
+
+    /**
+     * @deprecated Since v8.0 - Use \Aedart\Utils\Math::randomizer()->int() instead.
+     *
+     * Returns a random cryptographically secure, uniformly selected number
+     *
+     * @see https://www.php.net/manual/en/function.random-int
      *
      * @param int $min [optional] Must be greater than or equals PHP_INT_MIN
      * @param int $max [optional] Must be less than or equals PHP_INT_MAX
@@ -48,7 +68,7 @@ class Math
     {
         // Source is from php.net's documentation:
         // @see https://www.php.net/manual/en/function.mt-srand.php#refsect1-function.mt-srand-examples
-        list($usec, $sec) = explode(' ', microtime());
+        [$usec, $sec] = explode(' ', microtime());
         return (int) $sec + $usec * 1000000;
     }
 

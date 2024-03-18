@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Introduction
 
-This package also offers a few opinionated [Form Request](https://laravel.com/docs/10.x/validation#form-request-validation) abstractions, intended to be used for APIs.
+This package also offers a few opinionated [Form Request](https://laravel.com/docs/11.x/validation#form-request-validation) abstractions, intended to be used for APIs.
 
 [[TOC]]
 
@@ -17,7 +17,7 @@ The abstractions inherit from the `FormRequest` class, which is only available i
 ## Validated Api Request
 
 At the top-most abstraction level, you will find the `ValidatedApiRequest`.
-It offers but a few additional features, such as an `after()` method that can be overwritten to perform additional business logic validation, after your request's regular validation has completed.
+It offers but a few additional features, such as an `afterValidation()` method that can be overwritten to perform additional business logic validation, after your request's regular validation has completed.
 
 ```php
 use Aedart\Http\Api\Requests\ValidatedApiRequest;
@@ -32,18 +32,18 @@ class ShowProfile extends ValidatedApiRequest
         ];
     }
     
-    public function after(Validator $validator): void
+    public function afterValidation(Validator $validator): void
     {
         // Use this method to perform additional validation.
     }
 }
 ```
 
-The `$validator` instance that is provided for the `after()` method contains all valid data.
+The `$validator` instance that is provided for the `afterValidation()` method contains all valid data.
 You can access the data and use it, if needed.
 Examples of what kind of additional validation you might perform, could be:
 
-* Complex cross-field validation that [regular validation rules](https://laravel.com/docs/10.x/validation#available-validation-rules) might not be able to satisfy.
+* Complex cross-field validation that [regular validation rules](https://laravel.com/docs/11.x/validation#available-validation-rules) might not be able to satisfy.
 * Query additional resources and ensure they exist, match or otherwise fit with what is requested.
 * Perform special domain specific conditions check (_whatever that might be for your application_).
 * _Prepare data to be processed by your route or controller action._
@@ -79,7 +79,7 @@ public function authorizeAfterValidation(): bool
 }
 ```
 
-The `authorizeAfterValidation()` method is automatically invoked after the `after()` method has executed.
+The `authorizeAfterValidation()` method is automatically invoked after the `afterValidation()` method has executed.
 
 ## Http Conditional Requests
 

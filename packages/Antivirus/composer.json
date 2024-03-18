@@ -16,13 +16,13 @@
         }
     ],
     "require": {
-        "php": "^8.1.22",
+        "php": "^8.2",
         "ext-sockets": "*",
         "aedart/athenaeum-contracts": "^7.34",
         "aedart/athenaeum-streams": "^7.34",
         "aedart/athenaeum-support": "^7.34",
         "aedart/athenaeum-validation": "^7.34",
-        "illuminate/events": "^v10.48.2",
+        "illuminate/events": "^v11.0.5",
         "xenolope/quahog": "^3.0"
     },
     "autoload": {

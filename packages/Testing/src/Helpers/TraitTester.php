@@ -3,8 +3,10 @@
 namespace Aedart\Testing\Helpers;
 
 use Aedart\Testing\Exceptions\IncorrectPropertiesAmount;
+use Aedart\Testing\Generators\MockTrait;
+use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionException;
@@ -31,7 +33,7 @@ class TraitTester
     /**
      * Trait class path
      *
-     * @var string
+     * @var class-string
      */
     protected string $trait;
 
@@ -45,9 +47,9 @@ class TraitTester
     /**
      * The mocked trait
      *
-     * @var MockObject
+     * @var MockInterface
      */
-    protected MockObject $mock;
+    protected MockInterface $mock;
 
     /**
      * TraitTester constructor.
@@ -87,7 +89,7 @@ class TraitTester
      *
      * @throws ReflectionException
      */
-    public function assert(mixed $setValue = null, mixed $defaultValue = null, bool $assertDefaultIsNull = true)
+    public function assert(mixed $setValue = null, mixed $defaultValue = null, bool $assertDefaultIsNull = true): void
     {
         $trait = $this->trait;
         $method = $this->setPropertyMethodName();
@@ -108,7 +110,7 @@ class TraitTester
      *
      * @throws ExpectationFailedException
      */
-    public function assertWithValues(mixed $setValue, mixed $defaultValue, bool $assertDefaultIsNull = true)
+    public function assertWithValues(mixed $setValue, mixed $defaultValue, bool $assertDefaultIsNull = true): void
     {
         $mock = $this->mock;
 
@@ -133,44 +135,44 @@ class TraitTester
      * Assert that the default value is `null`, by invoking the trait's
      * `get-default-property` method
      *
-     * @param MockObject $mock
+     * @param MockInterface $mock
      * @param string|null $method [optional] Method name is guessed if none provided
      * @param string $failMessage [optional]
      *
      * @throws ExpectationFailedException
      */
     public function assertDefaultValueIsNull(
-        MockObject $mock,
+        MockInterface $mock,
         string|null $method = null,
         string $failMessage = 'Default value should be null'
-    ) {
+    ): void {
         $method = $method ?? $this->getDefaultPropertyMethodName();
 
         ConsoleDebugger::output(sprintf(' testing %s()', $method));
 
-        $this->testCase->assertNull($mock->$method(), $failMessage);
+        $this->testCase->assertNull($mock->{$method}(), $failMessage);
     }
 
     /**
      * Assert that no value is set, by invoking the trait's
      * `has-property` method
      *
-     * @param MockObject $mock
+     * @param MockInterface $mock
      * @param string|null $method [optional] Method name is guessed if none provided
      * @param string $failMessage [optional]
      *
      * @throws ExpectationFailedException
      */
     public function assertHasNoValue(
-        MockObject $mock,
+        MockInterface $mock,
         string|null $method = null,
         string $failMessage = 'Should not have a value set'
-    ) {
+    ): void {
         $method = $method ?? $this->hasPropertyMethodName();
 
         ConsoleDebugger::output(sprintf(' testing %s()', $method));
 
-        $this->testCase->assertFalse($mock->$method(), $failMessage);
+        $this->testCase->assertFalse($mock->{$method}(), $failMessage);
     }
 
     /**
@@ -178,7 +180,7 @@ class TraitTester
      * by invoking the trait's `set-property` and `get-property`
      * methods
      *
-     * @param MockObject $mock
+     * @param MockInterface $mock
      * @param mixed $value
      * @param null|string $setMethod [optional] Method name is guessed if none provided
      * @param null|string $getMethod [optional] Method name is guessed if none provided
@@ -187,12 +189,12 @@ class TraitTester
      * @throws ExpectationFailedException
      */
     public function assertCanSetAndGetValue(
-        MockObject $mock,
+        MockInterface $mock,
         mixed $value,
         string|null $setMethod = null,
         string|null $getMethod = null,
         string $failMessage = 'Incorrect value obtained'
-    ) {
+    ): void {
         $setMethod = $setMethod ?? $this->setPropertyMethodName();
         $getMethod = $getMethod ?? $this->getPropertyMethodName();
 
@@ -202,11 +204,11 @@ class TraitTester
             ConsoleDebugger::output(sprintf(' testing %s(%s)', $setMethod, var_export($value, true)));
         }
 
-        $mock->$setMethod($value);
+        $mock->{$setMethod}($value);
 
         ConsoleDebugger::output(sprintf(' testing %s()', $getMethod));
 
-        $this->testCase->assertSame($value, $mock->$getMethod(), $failMessage);
+        $this->testCase->assertSame($value, $mock->{$getMethod}(), $failMessage);
     }
 
     /**
@@ -228,7 +230,7 @@ class TraitTester
         string|null $defaultMethod = null,
         string|null $getMethod = null,
         string $failMessage = 'Incorrect default value returned'
-    ) {
+    ): void {
         $defaultMethod = $defaultMethod ?? $this->getDefaultPropertyMethodName();
         $getMethod = $getMethod ?? $this->getPropertyMethodName();
 
@@ -238,17 +240,15 @@ class TraitTester
             ConsoleDebugger::output(sprintf(' mocking %s(), must return %s', $defaultMethod, var_export($defaultValue, true)));
         }
 
-        $mock = $this->makeTraitMock($trait, [
-            $defaultMethod
-        ]);
-
-        $mock->expects($this->testCase->any())
-            ->method($defaultMethod)
-            ->willReturn($defaultValue);
+        $mock = $this->makeTraitMock($trait);
+        $mock
+            ->shouldReceive($defaultMethod)
+            ->withAnyArgs()
+            ->andReturn($defaultValue);
 
         ConsoleDebugger::output(sprintf(' testing %s()', $getMethod));
 
-        $this->testCase->assertSame($defaultValue, $mock->$getMethod(), $failMessage);
+        $this->testCase->assertSame($defaultValue, $mock->{$getMethod}(), $failMessage);
     }
 
     /*****************************************************************
@@ -258,31 +258,23 @@ class TraitTester
     /**
      * Returns a mock for the given trait
      *
-     * @param string $trait Trait class path
-     * @param string[] $methods [optional] Methods to be mocked
+     * @param class-string $trait Trait class path
      *
-     * @return MockObject
+     * @return MockInterface
      */
-    public function makeTraitMock(string $trait, array $methods = []): MockObject
+    public function makeTraitMock(string $trait): MockInterface
     {
-        $builder = $this->testCase->getMockBuilder($trait);
-        $builder
-            ->setMockClassName('')
-            ->enableOriginalConstructor()
-            ->enableOriginalClone()
-            ->enableAutoload()
-            ->enableArgumentCloning()
-            ->onlyMethods($methods);
+        $generated = (new MockTrait($trait))->generate();
 
-        return $builder->getMockForTrait();
+        return Mockery::mock($generated)->makePartial();
     }
 
     /**
      * Get the trait mock
      *
-     * @return MockObject
+     * @return MockInterface
      */
-    public function getTraitMock(): MockObject
+    public function getTraitMock(): MockInterface
     {
         return $this->mock;
     }

@@ -45,7 +45,7 @@ class UserFilterBuilder extends BaseBuilder
 
 **In your request**
 
-To use your custom filters builder, create a new instance in your request, e.g. in the [after validation hook](https://laravel.com/docs/10.x/validation#after-validation-hook).
+To use your custom filters builder, create a new instance in your request, e.g. in the [after validation hook](https://laravel.com/docs/11.x/validation#after-validation-hook).
 
 ```php
 namespace Acme\Requests;
@@ -58,7 +58,7 @@ class ListUsersRequest exends FormRequest
 {
     public ?BuiltFiltersMap $filters = null;
 
-    public function after(Validator $validator)
+    public function afterValidation(Validator $validator)
     {        
         // Using your custom filters builder, build filters
         // for this request...

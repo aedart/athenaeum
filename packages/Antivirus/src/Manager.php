@@ -3,7 +3,7 @@
 namespace Aedart\Antivirus;
 
 use Aedart\Antivirus\Exceptions\ProfileNotFound;
-use Aedart\Antivirus\Scanners\NullScanner;
+use Aedart\Antivirus\Scanners\ClamAv;
 use Aedart\Contracts\Antivirus\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Antivirus\Manager as AntivirusManager;
 use Aedart\Contracts\Antivirus\Scanner;
@@ -84,8 +84,7 @@ class Manager implements
      */
     public function defaultScanner(): string
     {
-        // TODO: Change this to ClamAv...
-        return NullScanner::class;
+        return ClamAv::class;
     }
 
     /**

@@ -73,8 +73,6 @@ This means that you will no longer be able to use the provided PSR stream instan
 
 ### SplFileInfo
 
-_**Available since** `v7.4.x`_
-
 When working with uploaded files, e.g. from Laravel or Symfony (_[`SplFileInfo` instances](https://www.php.net/manual/en/class.splfileinfo.php)_), then you can open a file stream using the `openFileInfo()` method.
 
 ```php
@@ -86,8 +84,6 @@ For Laravel and Symfony, the uploaded file's `getClientOriginalName()` return va
 :::
 
 ### PSR Uploaded File
-
-_**Available since** `v7.4.x`_
 
 You may also create a file stream instance for an existing [PSR-7 Uploaded File](https://www.php-fig.org/psr/psr-7/#36-psrhttpmessageuploadedfileinterface) instance, using the `openUploadedFile()` method.
 

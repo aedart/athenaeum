@@ -5,9 +5,9 @@ sidebarDepth: 0
 
 # Introduction
 
-> "_[...] A resource class represents a single model that needs to be transformed into a JSON structure [...]_" ([source Laravel docs.](https://laravel.com/docs/10.x/eloquent-resources#concept-overview))
+> "_[...] A resource class represents a single model that needs to be transformed into a JSON structure [...]_" ([source Laravel docs.](https://laravel.com/docs/11.x/eloquent-resources#concept-overview))
 
-The `ApiResource` is an extended / adapted version of Laravel's [`JsonResource`](https://laravel.com/docs/10.x/eloquent-resources#concept-overview).
+The `ApiResource` is an extended / adapted version of Laravel's [`JsonResource`](https://laravel.com/docs/11.x/eloquent-resources#concept-overview).
 It ensures that each Api Resource that you create has a "type" and a "self" link.
 Additionally, all of your Api Resources are registered in a [Registrar](./registrar.md).
 

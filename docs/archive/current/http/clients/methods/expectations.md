@@ -177,7 +177,7 @@ $response = $client
 You may also extract your expectation logic into a separate class, if you wish so.
 Simply extend the `ResponseExpectation` class and implement the `expectation()` method.
 The benefit of doing so, is that you can encapsulate more complex response validation logic.
-For instance, you can use Laravel's [Validator](https://laravel.com/docs/10.x/validation#manually-creating-validators) to perform validation of a response's payload.  
+For instance, you can use Laravel's [Validator](https://laravel.com/docs/11.x/validation#manually-creating-validators) to perform validation of a response's payload.  
 
 ```php
 use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;

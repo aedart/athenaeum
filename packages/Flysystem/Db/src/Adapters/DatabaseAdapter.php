@@ -123,7 +123,7 @@ class DatabaseAdapter implements
 
             $this->transaction(function (ConnectionInterface $connection) use ($path, $contents, $config) {
                 // Set connection in config, so that it can be passed further.
-                $config = $config->extend([ 'connection' => $connection ]);
+                $config = $config->extend(['connection' => $connection]);
 
                 // Wrap resource into stream and rewind. This will automatically
                 // fail if stream is not seekable.
@@ -148,7 +148,7 @@ class DatabaseAdapter implements
                     $wasUpdated = (bool) $connection
                         ->table($this->filesTable)
                         ->where('path', $record['path'])
-                        ->where('type', RecordTypes::FILE)
+                        ->where('type', RecordTypes::FILE->value)
                         ->limit(1)
                         ->update($record);
 
@@ -263,7 +263,7 @@ class DatabaseAdapter implements
                 // Remove file record
                 $removed = $connection
                     ->table($this->filesTable)
-                    ->where('type', RecordTypes::FILE)
+                    ->where('type', RecordTypes::FILE->value)
                     ->where('path', $this->applyPrefix($path))
                     ->delete();
 
@@ -295,7 +295,7 @@ class DatabaseAdapter implements
                 $connection
                     ->table($this->filesTable)
                     ->where('path', $this->applyPrefix($path))
-                    ->where('type', RecordTypes::DIRECTORY)
+                    ->where('type', RecordTypes::DIRECTORY->value)
                     ->limit(1)
                     ->delete();
             });
@@ -333,7 +333,7 @@ class DatabaseAdapter implements
             $records = [];
             foreach ($directories as $directory) {
                 $records[] = [
-                    'type' => RecordTypes::DIRECTORY,
+                    'type' => RecordTypes::DIRECTORY->value,
                     'path' => $directory,
                     'level' => $this->directoryLevel($directory),
                     'visibility' => $visibility,
@@ -348,13 +348,13 @@ class DatabaseAdapter implements
                 ->table($this->filesTable)
                 ->upsert(
                     values: $records,
-                    uniqueBy: [ 'path' ],
+                    uniqueBy: ['path'],
                     update: [
-                        'level',
-                        'visibility',
-                        'last_modified',
-                        'extra_metadata'
-                    ]
+                            'level',
+                            'visibility',
+                            'last_modified',
+                            'extra_metadata'
+                        ]
                 );
 
             if (!$result) {
@@ -370,8 +370,8 @@ class DatabaseAdapter implements
      */
     public function setVisibility(string $path, string $visibility): void
     {
-        if (!in_array($visibility, Visibility::ALLOWED)) {
-            throw InvalidVisibilityProvided::withVisibility($visibility, implode('or ', Visibility::ALLOWED));
+        if (!in_array($visibility, Visibility::allowed())) {
+            throw InvalidVisibilityProvided::withVisibility($visibility, implode('or ', Visibility::allowed()));
         }
 
         try {
@@ -382,7 +382,7 @@ class DatabaseAdapter implements
                 ->table($this->filesTable)
                 ->where('path', $path)
                 ->limit(1)
-                ->update([ 'visibility' => $visibility ]);
+                ->update(['visibility' => $visibility]);
 
             if ($affected === 0) {
                 throw new RuntimeException(sprintf('Visibility was not changed. Unable to find file or directory: %s', $path));
@@ -629,7 +629,7 @@ class DatabaseAdapter implements
                 ->table($this->filesTable)
                 ->select()
                 ->where('path', $this->applyPrefix($path))
-                ->where('type', RecordTypes::DIRECTORY)
+                ->where('type', RecordTypes::DIRECTORY->value)
                 ->limit(1)
                 ->get();
 
@@ -673,7 +673,7 @@ class DatabaseAdapter implements
                 })
 
                 ->where("{$files}.path", $this->applyPrefix($path))
-                ->where('type', RecordTypes::FILE)
+                ->where('type', RecordTypes::FILE->value)
                 ->limit(1)
                 ->get();
 
@@ -719,7 +719,7 @@ class DatabaseAdapter implements
 
             $recordPaths[] = $record['path'];
 
-            if ($record['type'] === RecordTypes::FILE) {
+            if ($record['type'] === RecordTypes::FILE->value) {
                 $fileHashes[] = $record->extraMetadata()['hash'];
             }
         }
@@ -775,25 +775,34 @@ class DatabaseAdapter implements
                 ->table($this->filesTable)
                 ->select()
                 ->when(!empty($path), function (Builder $query) use ($path, $deep) {
-                    $query->where(function (Builder $query) use ($path) {
-                        $query
-                            ->where('path', '=', $path)
-                            ->orWhere('path', 'LIKE', "{$path}%");
-                    })
+                    $query->where(
+                        function (Builder $query) use ($path) {
+                            $query
+                                ->where('path', '=', $path)
+                                ->orWhere('path', 'LIKE', "{$path}%");
+                        }
+                    )
 
-                    // When deep listing requested
-                    ->when($deep, function (Builder $query) use ($path) {
-                        $query->where('level', '>=', $this->directoryLevel($path) + 1);
-                    }, function (Builder $query) use ($path) {
-                        // Otherwise...
-                        $query->where('level', $this->directoryLevel($path) + 1);
-                    });
+                        // When deep listing requested
+                        ->when(
+                            $deep,
+                            function (Builder $query) use ($path) {
+                                $query->where('level', '>=', $this->directoryLevel($path) + 1);
+                            },
+                            function (Builder $query) use ($path) {
+                                // Otherwise...
+                                $query->where('level', $this->directoryLevel($path) + 1);
+                            }
+                        );
                 }, function (Builder $query) use ($deep) {
-                    $query->when(!$deep, function (Builder $query) {
-                        // When no directory is requested ~ root level, ensure that we only list
-                        // those placed at level 0 when "deep" isn't requested
-                        $query->where('level', 0);
-                    });
+                    $query->when(
+                        !$deep,
+                        function (Builder $query) {
+                            // When no directory is requested ~ root level, ensure that we only list
+                            // those placed at level 0 when "deep" isn't requested
+                            $query->where('level', 0);
+                        }
+                    );
                 })
                 ->orderBy('path', 'asc')
                 ->get();
@@ -877,9 +886,9 @@ class DatabaseAdapter implements
             ->resolveConnection($config)
             ->table($this->contentsTable)
             ->upsert(
-                values: [ $record ],
-                uniqueBy: [ 'hash' ],
-                update: [ 'reference_count' => $this->makeIncrementExpression(1, $config) ]
+                values: [$record],
+                uniqueBy: ['hash'],
+                update: ['reference_count' => $this->makeIncrementExpression(1, $config)]
             );
 
         if ($affected === 0) {
@@ -909,7 +918,7 @@ class DatabaseAdapter implements
     protected function prepareFileRecord(string $path, FileStream $stream, Config $config): array
     {
         return [
-            'type' => RecordTypes::FILE,
+            'type' => RecordTypes::FILE->value,
             'path' => $this->applyPrefix($path),
             'level' => $this->directoryLevel($path),
             'file_size' => $stream->getSize(),

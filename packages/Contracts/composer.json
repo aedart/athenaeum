@@ -16,8 +16,8 @@
         }
     ],
     "require": {
-        "php": "^8.1.22",
-        "illuminate/contracts": "^v10.48.2"
+        "php": "^8.2",
+        "illuminate/contracts": "^v11.0.5"
     },
     "autoload": {
         "psr-4": {

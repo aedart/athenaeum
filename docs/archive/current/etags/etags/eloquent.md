@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Eloquent Models
 
-Although the default provided [`Generator`](generators/README.md) is able to create an etag representation of your [Eloquent Models](https://laravel.com/docs/10.x/eloquent),
+Although the default provided [`Generator`](generators/README.md) is able to create an etag representation of your [Eloquent Models](https://laravel.com/docs/11.x/eloquent),
 it is NOT the best suited (_nor fastest_) approach.
 
 When creating an `Etag` for an Eloquent model, the default generator (`GenericGenerator`) will use the model's properties returned by `toArray()` and attempt to make a string representation of the entire array's content.

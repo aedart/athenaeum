@@ -15,6 +15,3 @@ parameters:
 	excludePaths:
 		# Reports "Method Aedart\Circuits\CircuitBreaker::performAttempt() should return mixed but return statement is missing.", which is WRONG and cannot be ignored.
 		- packages/Circuits/src/CircuitBreaker.php
-
-		# @see https://github.com/aedart/athenaeum/issues/153
-		- packages/Core/src/Exceptions/Handlers/Adaptors/LaravelExceptionHandler.php

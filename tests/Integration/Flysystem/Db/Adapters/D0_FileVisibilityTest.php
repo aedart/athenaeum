@@ -57,12 +57,12 @@ class D0_FileVisibilityTest extends FlysystemDbTestCase
         $fs = $this->filesystem();
         $fs->write($path, $content);
 
-        $fs->setVisibility($path, Visibility::PRIVATE);
+        $fs->setVisibility($path, Visibility::PRIVATE->value);
 
         // ----------------------------------------------------------------- //
 
         $result = $fs->visibility($path);
 
-        $this->assertSame(Visibility::PRIVATE, $result);
+        $this->assertSame(Visibility::PRIVATE->value, $result);
     }
 }

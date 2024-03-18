@@ -69,7 +69,7 @@ class SearchFilterTest extends FiltersTestCase
 
         ConsoleDebugger::output($sql, $bindings);
 
-        $this->assertStringContainsString('where (`my_column` > ?)', $sql);
+        $this->assertStringContainsString('where ("my_column" > ?)', $sql);
     }
 
     /**
@@ -98,6 +98,6 @@ class SearchFilterTest extends FiltersTestCase
 
         ConsoleDebugger::output($sql, $bindings);
 
-        $this->assertStringContainsString('where (`name` = ? or `owner` = ?)', $sql);
+        $this->assertStringContainsString('where ("name" = ? or "owner" = ?)', $sql);
     }
 }

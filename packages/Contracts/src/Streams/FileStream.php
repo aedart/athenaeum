@@ -3,7 +3,10 @@
 namespace Aedart\Contracts\Streams;
 
 use Aedart\Contracts\Streams\Exceptions\StreamException;
+use Aedart\Contracts\Streams\Stream as StreamInterface;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
+use Psr\Http\Message\UploadedFileInterface as PsrUploadedFile;
+use SplFileInfo;
 
 /**
  * File Stream
@@ -38,6 +41,58 @@ interface FileStream extends Stream
         string $filename,
         string $mode,
         bool $useIncludePath = false,
+        $context = null
+    ): static;
+
+    /**
+     * Open a new file stream for a PHP SplFileInfo instance
+     *
+     * Method attempts to set `filename` in meta, if SplFileInfo instance
+     * has a "getClientOriginalName" (Laravel / Symfony Uploaded File instance).
+     *
+     * @see filename()
+     * @see https://www.php.net/manual/en/class.splfileinfo.php
+     *
+     * @param  SplFileInfo  $file
+     * @param  string  $mode
+     * @param  bool  $useIncludePath  [optional]
+     * @param  resource|null  $context  [optional]
+     *
+     * @return static
+     *
+     * @throws StreamException
+     */
+    public static function openFileInfo(SplFileInfo $file, string $mode, bool $useIncludePath = false, $context = null): static;
+
+    /**
+     * Open a new file stream for {@see PsrUploadedFile}
+     *
+     * **Warning**: _Method will {@see detach()} underlying resource from given stream,
+     * before creating a new file stream instance, **unless** `$asCopy` is set to true._
+     *
+     * Method attempts to set `filename` in meta, from given Uploaded File's
+     * {@see PsrUploadedFile::getClientFilename}.
+     *
+     * @see filename()
+     *
+     * @param PsrUploadedFile $file
+     * @param bool $asCopy [optional] If true, then uploaded file's stream is copied (original stream is not detached).
+     * @param string $mode [optional] Only applicable if `$asCopy` is true.
+     * @param int|null $maximumMemory [optional] Maximum amount of bytes to keep in memory before writing to a temporary
+     *                                file. If none specified, then defaults to 2 Mb. Only applicable if `$asCopy` is true.
+     * @param int $bufferSize [optional] Read/Write size of copied chunk in bytes. Only applicable if `$asCopy` is true.
+     * @param resource|null $context [optional] Only applicable if `$asCopy` is true.
+     *
+     * @return static
+     *
+     * @throws StreamException
+     */
+    public static function openUploadedFile(
+        PsrUploadedFile $file,
+        bool $asCopy = false,
+        string $mode = 'r+b',
+        int|null $maximumMemory = null,
+        int $bufferSize = BufferSizes::BUFFER_8KB,
         $context = null
     ): static;
 
@@ -111,6 +166,30 @@ interface FileStream extends Stream
     public function copyTo(Stream|null $target = null, int|null $length = null, int $offset = 0): static;
 
     /**
+     * Copy data from source stream into this stream
+     *
+     * **Note**: _Neither this stream nor the source stream are rewound after copy operation!_
+     *
+     * **{@see PsrStreamInterface}**: _Unlike {@see append()}, this method will NOT detach the stream's underlying resource._
+     *
+     * @param  resource|PsrStreamInterface|StreamInterface  $source  The source stream to copy from.
+     * @param  int|null  $length  [optional] Maximum bytes to copy from source stream. By default, all bytes left are copied
+     * @param  int  $offset  [optional] The offset on source stream where to start to copy data from
+     * @param  int  $bufferSize  [optional] Read/Write size of each chunk in bytes.
+     *                           Applicable ONLY if `$source` is instance of {@see PsrStreamInterface}.
+     *
+     * @return static This stream with data appended from source stream
+     *
+     * @throws StreamException
+     */
+    public function copyFrom(
+        $source,
+        int|null $length = null,
+        int $offset = 0,
+        int $bufferSize = BufferSizes::BUFFER_8KB
+    ): static;
+
+    /**
      * Append data at the end of this stream
      *
      * Unlike {@see write()} and {@see put()}, this method will automatically move
@@ -118,7 +197,7 @@ interface FileStream extends Stream
      *
      * **Warning**: _Method will {@see detach()} `$data`'s underlying resource, if `$data` is a
      * pure {@see PsrStreamInterface} instance! If you wish for a continued valid resource reference in your
-     * stream instance, then you should wrap `$data` into a {@see Stream} instance using {@see Stream::makeFrom()}._
+     * stream instance, then you should use {@see copyFrom()}._
      *
      * @param  string|int|float|resource|PsrStreamInterface|Stream  $data
      * @param  int|null  $length  [optional] Maximum bytes to append. By default, all bytes left are appended
@@ -178,4 +257,15 @@ interface FileStream extends Stream
      * @throws StreamException
      */
     public function flush(): static;
+
+    /**
+     * Returns filename, if available
+     *
+     * If a 'filename' has been specified in the stream's meta,
+     * then it will be favoured. Otherwise, the basename of
+     * {@see uri()} will be returned, if its known.
+     *
+     * @return string|null
+     */
+    public function filename(): string|null;
 }

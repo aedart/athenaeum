@@ -3,8 +3,12 @@
 
 namespace Aedart\Utils;
 
+use Aedart\Contracts\Utils\Random\ArrayRandomizer;
+use Aedart\Contracts\Utils\Random\Type;
+use Aedart\Utils\Random\Factory;
 use Illuminate\Support\Arr as ArrBase;
 use InvalidArgumentException;
+use Random\Engine;
 
 /**
  * Array Utility
@@ -15,6 +19,20 @@ use InvalidArgumentException;
 class Arr extends ArrBase
 {
     /**
+     * Returns a new Array Randomizer instance
+     *
+     * @param Engine|null $engine [optional]
+     *
+     * @return ArrayRandomizer
+     */
+    public static function randomizer(Engine|null $engine = null): ArrayRandomizer
+    {
+        return Factory::make(Type::Array, $engine);
+    }
+
+    /**
+     * @deprecated Since v8.0 - Use \Aedart\Utils\Arr::randomizer()->value() instead.
+     *
      * Returns a single random element from given list
      *
      * @see \Aedart\Utils\Math::applySeed

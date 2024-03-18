@@ -5,125 +5,146 @@ sidebarDepth: 1
 
 # Upgrade Guide
 
-## From version 6.x to 7.x.
+## From version 7.x to 8.x
 
 [[TOC]]
 
-### PHP version `8.1` required
+### PHP version `8.2` required
 
-You need PHP `v8.1` or higher to run Athenaeum packages.
+You need PHP `v8.2` or higher to run Athenaeum packages.
 
-**Note**: _PHP `v8.2` is supported!_
+**Note**: _PHP `v8.3` is supported!_
 
-### Laravel `v10.x`
+### Laravel `v11.x`
 
-Please read Laravel's [upgrade guide](https://laravel.com/docs/10.x/upgrade), before continuing here.
+Please read Laravel's [upgrade guide](https://laravel.com/docs/11.x/upgrade), before continuing here.
 
-### Field Criteria
+### Anti-Virus Default Scanner
 
-The `\Aedart\Contracts\Database\Query\FieldCriteria::make()` and `\Aedart\Database\Query\FieldFilter::make()` now have optional `$field` argument.
-This will allow creating instances of custom filters, without specifying a field.
-The instance will NOT be applicable, until a field has been set.
-
-```php
-use Aedart\Filters\Query\Filters\Fields\BelongsToFilter;
-
-$filter = BelongsToFilter::make();
-
-// ...later in your application
-$filter->setField('authors');
-```
-
-### Date Filter
-
-The `\Aedart\Filters\Query\Filters\Fields\DateFilter::allowedDateFormats()` method's visibility has been changed to `public` (_previously `protected`_).
-The method now returns a default set of supported date formats.
-These can also be specified via the `setAllowedDateFormats()` method.
+In version Athenaeum `v7.x`, a `NullScanner` was returned as the default scanner, when no profile was specified.
+The default scanner has now been changed to `ClamAv`, when no profile is specified.
 
 ```php
-use Aedart\Filters\Query\Filters\Fields\DateFilter;
+use Aedart\Antivirus\Facades\Antivirus;
 
-$filter = DateFilter::make('event_date')
-    ->setAllowedDateFormats('Y-m-d');
+$scanner = Antivirus::profile(); // ClamAv
 ```
 
-### Api Resource Service Provider
+You can change this behaviour by editing your `config/antivirus.php` configuration file.
 
-The `ApiResourceServiceProvider` is now an aggregate service provider, which automatically registers the `ETagsServiceProvider` and the new `JsonResourceServiceProvider` (_the previous version of `ApiResourceServiceProvider`_).
+### Validated API Request `after()`
 
-### Audit Package
+The `ValidatedApiRequest` no longer overwrites Laravel's "class based `after()` validation rules". [#168](https://github.com/aedart/athenaeum/issues/168), [#167](https://github.com/aedart/athenaeum/issues/167).
+Now, you need to overwrite the `afterValidation()`, if you wish to perform post validation logic. 
 
-The Audit package has been slightly refactored. As a result, a few components have been deprecated and replaced with improved versions.
-However, the dispatched events have undergone some breaking changes. 
-
-#### Deprecations
-
-* `\Aedart\Audit\Traits\RecordsChanges` trait. Replaced by `\Aedart\Audit\Concerns\ChangeRecording`.
-* `\Aedart\Audit\Traits\HasAuditTrail` trait  Replaced by `\Aedart\Audit\Concerns\AuditTrail`.
-* `\Aedart\Audit\Models\Concerns\AuditTrailConfiguration` concern. Replaced by `\Aedart\Audit\Concerns\AuditTrailConfig`.
-
-The deprecated components will be removed in the next major version.
-
-#### Dispatch Multiple Models Changed
-
-The `ModelChangedEvents::dispatchMultipleModelsChanged()` no longer skips all models, if the first is marked as "skip next recording" (_via model's `skipRecordingNextChange()`_). 
-Instead, models are now filtered by their skip state. Only if the models allow recording, will they be included in the dispatched event.
-
-#### Multiple Models Changed Event
-
-The public `$models` attribute can no longer be an `array`, in `MultipleModelsChanged`.
-The attribute must now be a `Collection` instance.
-
-#### Model Changed Events (_trait_)
-
-The `\Aedart\Audit\Observers\Concerns\ModelChangedEvents` concern/trait has been redesigned.
-Its methods now accept all supported arguments of `ModelHasChanged` event.
-Previously, only `$model`, event `$type` and a `$message` was accepted.
-Now, the all create / make methods accept the following arguments:
-
-* `Model $model` The model that has changed.
-* `string $type` The event type.
-* `array|null $original = null` (_optional_) Original data (attributes) before change occurred. Default's to given model's original data, if none given. 
-* `array|null $changed = null` (_optional_) Changed data (attributes) after change occurred. Default's to given model's changed data, if none given.
-* `string|null $message = null` (_optional_) Eventual user provided message associated with the event. Defaults to model's Audit Trail Message, if available.
-* `Model|Authenticatable|null $user = null` (_optional_) The user that caused the change. Defaults to current authenticated user.
-* `DateTimeInterface|Carbon|string|null $performedAt = null` (_optional_)  Date and time of when the event happened. Defaults to model's "updated at" value, if available, If not, then current date time is used.
-
-### Changed `publicPath()` and `langPath()` in Core Application
-
-From Laravel `v10.x`, the `\Illuminate\Contracts\Foundation\Application` interface defines `publicPath()` and `langPath()`, which the Core application inherits from.
-The method signature has changed and may cause compatible issues, if you overwrite these methods.
-
-**Before**
+**_:x: previously_**
 
 ```php
-// ...In \Aedart\Contracts\Core\Application...
+namespace Acme\Requests;
 
-public function publicPath();
+use Illuminate\Foundation\Http\FormRequest;
 
-public function langPath(string $path = ''): string;
+class ListUsersRequest exends FormRequest
+{
+    public function after(Validator $validator)
+    {        
+        // ...not shown
+    }
+}
 ```
 
-**Now**
+**_:heavy_check_mark: Now_**
 
 ```php
-// ...Inherited from \Illuminate\Contracts\Foundation\Application...
+namespace Acme\Requests;
 
-public function publicPath($path = '');
+use Illuminate\Foundation\Http\FormRequest;
 
-public function langPath($path = '');
+class ListUsersRequest exends FormRequest
+{
+    public function afterValidation(Validator $validator)
+    {        
+        // ...not shown
+    }
+}
 ```
 
-If you have overwritten these methods, then you must ensure that the method signature is compatible with Laravel's `Application` interface.
+### Flysystem
 
-### Removed `SearchProcessor::language()`
+The `RecordTypes` and `Visibility` interface has been converted into an [enum](https://www.php.net/manual/en/language.types.enumerations.php),
+in `\Aedart\Contracts\Flysystem\Db` (_contributed by [Trukes](https://github.com/Trukes)_).
+This change _should not_ affect your existing code, unless you are directly dependent on previous `const` values in
+the defined interfaces. If that is the case, then you might have to explicitly require the enum case's
+[`value`](https://www.php.net/manual/en/language.enumerations.backed.php).  
 
-The deprecated `\Aedart\Filters\Processors\SearchProcessor::language()` method has been removed. This features didn't work as intended.
-No replacement has been implemented.
+**_:x: previously_**
 
-### Removed `Str::tree()`
+```php
+use Aedart\Contracts\Flysystem\Visibility;
 
-`\Aedart\Utils\Str::tree()` was deprecated in `v6.4`. It has been replaced by `\Aedart\Utils\Arr::tree()`.
+$visibility = Visibility::PRIVATE; // private
+```
+
+**_:heavy_check_mark: Now_**
+
+```php
+use Aedart\Contracts\Flysystem\Visibility;
+
+$visibility = Visibility::PRIVATE->value; // private
+```
+
+### Validation
+
+The `AlphaDashDot` and `SemanticVersion` validation rules now inherit from `BaseValidationRule`, in
+`\Aedart\Validation\Rules`. If you are extending these validation rules, then you may have to adapt your code.
+
+Additionally, if you have validation rules that inherit from `\Aedart\Validation\Rules\BaseRule` (_removed_), then you
+must upgrade them to inherit from the new `BaseValidationRule`.
+
+**_:x: previously_**
+
+```php
+use Aedart\Validation\Rules\BaseRule;
+
+class MyValidationRule extends BaseRule
+{
+    // ...not shown...
+}
+```
+
+**_:heavy_check_mark: Now_**
+
+```php
+use Aedart\Validation\Rules\BaseValidationRule;
+
+class MyValidationRule extends BaseValidationRule
+{
+    // ...not shown...
+}
+```
+
+See the source code and [Laravel Validation Rules](https://laravel.com/docs/11.x/validation#custom-validation-rules) for additional information.
+
+### Trait Tester
+
+The `TraitTester` in `\Aedart\Testing\Helpers` has been reworked to use [`Mockery`](https://github.com/mockery/mockery),
+instead of the previous trait testing utilities offered by PHPUnit.
+This change should not affect you, unless you are extending / overwriting this testing utility. 
+
+### Password Rehashing Action
+
+Automatic password rehashing has become a default part of Laravel, since version `v11.x`
+(_see [Laravel documentation](https://laravel.com/docs/11.x/releases#automatic-password-rehashing) for details_).
+For this reason, the `RehashPasswordIfNeeded` action and `PasswordWasRehashed`, in `\Aedart\Auth\Fortify`, have been
+deprecated and will be removed in the next major version.
+
+### Random Int
+
+The `Math::randomInt`, in `\Aedart\Utils`, has been deprecated. Please use `Math::randomizer()->int()` instead.
+
+### Removed Deprecated Components
+
+Several deprecated components have been removed. Please review the `CHANGELOG.md` for details.
 
 ## Onward
 

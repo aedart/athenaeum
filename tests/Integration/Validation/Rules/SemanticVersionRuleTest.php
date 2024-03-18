@@ -4,7 +4,7 @@ namespace Aedart\Tests\Integration\Validation\Rules;
 
 use Aedart\Tests\TestCases\Validation\ValidationTestCase;
 use Aedart\Validation\Rules\SemanticVersion;
-use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Contracts\Validation\ValidationRule;
 
 /**
  * SemanticVersionRuleTest
@@ -64,9 +64,9 @@ class SemanticVersionRuleTest extends ValidationTestCase
     /**
      * Creates new instance of validation rule
      *
-     * @return Rule
+     * @return ValidationRule
      */
-    public function makeRule(): Rule
+    public function makeRule(): ValidationRule
     {
         return new SemanticVersion();
     }
@@ -83,7 +83,7 @@ class SemanticVersionRuleTest extends ValidationTestCase
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function passesOnValidInput($input)
+    public function passesOnValidInput(mixed $input): void
     {
         $this->shouldPass($input, $this->makeRule());
     }
@@ -96,7 +96,7 @@ class SemanticVersionRuleTest extends ValidationTestCase
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function failsOnInvalidInput($input)
+    public function failsOnInvalidInput(mixed $input): void
     {
         $this->shouldNotPass($input, $this->makeRule());
     }

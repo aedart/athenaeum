@@ -22,7 +22,7 @@ $config->set('app.name', 'Acme Inc. Application');
 
 ## Behind The Scene
 
-Laravel's [Configuration Repository](https://github.com/laravel/framework/blob/6.x/src/Illuminate/Config/Repository.php) is used to hold the configuration, whilst the [Athenaeum Config Loader](../../config) is used to load and populate the Repository.
+Laravel's [Configuration Repository](https://github.com/laravel/framework/blob/11.x/src/Illuminate/Config/Repository.php) is used to hold the configuration, whilst the [Athenaeum Config Loader](../../config) is used to load and populate the Repository.
 This offers you slightly different configuration possibilities, than within a regular Laravel application.
 Amongst such possibilities, is the the ability to use nested directories, within your `/configs` directory.
 Also the loader supports various file types and the possibility to add your own [custom file parsers](../../config/custom.md).

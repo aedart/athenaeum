@@ -18,6 +18,8 @@ use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 
 /**
+ * @deprecated Since v8.x - See \Aedart\Auth\Fortify\Actions\RehashPasswordIfNeeded
+ *
  * RehashPasswordIfNeededTest
  *
  * @group auth
@@ -96,6 +98,9 @@ class RehashPasswordIfNeededTest extends FortifyTestCase
     {
         // Create new user... were the default config `hashing.bcrypt.rounds` are used.
         $user = $this->createUser();
+
+        // Disable "rehash_on_login" feature, so the "action" can be tested.
+        config()->set('hashing.rehash_on_login', false);
 
         // Change Hasher (bcrypt) rounds. This must be done on the instance, because
         // the configuration was already read during boot.
