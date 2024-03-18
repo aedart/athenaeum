@@ -67,13 +67,11 @@ class Memory
      */
     public static function snapshot(bool $reset = true): Unit
     {
-        $unit = static::unit(memory_get_peak_usage());
-
         if ($reset) {
             memory_reset_peak_usage();
         }
 
-        return $unit;
+        return static::unit(memory_get_peak_usage());
     }
 
     /**
