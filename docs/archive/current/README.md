@@ -33,7 +33,21 @@ These are the highlights of the latest major version of Athenaeum.
 PHP version `v8.2` is now the minimum required version for Athenaeum.
 [Laravel `v10.x`](https://laravel.com/docs/11.x/releases) packages are now used.
 
-## Memory Snapshot
+### Randomizers
+
+`Math`, `Str` and `Arr` now offer a `randomizer()` method that returns an adapter for PHP's [`Random\Randomizer`](https://www.php.net/manual/en/class.random-randomizer.php).
+
+```php
+use Aedart\Utils\Arr;
+
+$arr = [ 'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5 ];
+
+Arr::randomizer()->values($arr, 2); // [ 5, 2 ]
+```
+
+See [`Math::randomizer()`](./utils/math.md#randomizer), [`Str::randomizer()`](./utils/string.md#randomizer) and [`Arr::randomizer()`](./utils/array.md#randomizer) for additional information.
+
+### Memory Snapshot
 
 The [`Memory::snapshot()`](./utils/memory.md#snapshot) method returns the current memory usage.
 
