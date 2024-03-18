@@ -113,6 +113,25 @@ $unit->format(); // Defaults to "binary"
 
 See [wiki](https://en.wikipedia.org/wiki/Byte#Multiple-byte_units), and source code for details.
 
+## Snapshot
+
+The `snapshot()` method returns the current amount of memory used by PHP. 
+
+```php
+$snapshot = Memory::snapshot();
+
+echo $snapshot->bytes(); // 544812
+```
+
+The method also accepts a boolean `$reset` argument, which will automatically
+[reset the peak memory](https://www.php.net/manual/en/function.memory-reset-peak-usage.php), before capturing the snapshot.
+
+```php
+$snapshot = Memory::snapshot(true);
+
+echo $snapshot->bytes(); // 527729
+```
+
 ## Onward
 
 Please review the source code of `Aedart\Utils\Memory` and `Aedart\Utils\Memory\Unit` for additional information.
