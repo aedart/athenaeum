@@ -16,12 +16,12 @@
     ],
     "require": {
         "php": "^8.2",
-        "aedart/athenaeum-container": "^7.34",
-        "aedart/athenaeum-contracts": "^7.34",
+        "aedart/athenaeum-container": "^8.1",
+        "aedart/athenaeum-contracts": "^8.1",
         "codeception/codeception": "^5.1.2",
         "codeception/module-asserts": "^3.0.0",
         "fakerphp/faker": "^v1.23.1",
-        "illuminate/testing": "^v11.0.5",
+        "illuminate/testing": "^v11.0.7",
         "mockery/mockery": "1.6.*",
         "orchestra/testbench": "^v9.0.0",
         "orchestra/testbench-dusk": "^v9.0.0"

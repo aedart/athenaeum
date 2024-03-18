@@ -18,11 +18,11 @@
     ],
     "require": {
         "php": "^8.2",
-        "aedart/athenaeum-contracts": "^7.34",
-        "aedart/athenaeum-support": "^7.34",
+        "aedart/athenaeum-contracts": "^8.1",
+        "aedart/athenaeum-support": "^8.1",
         "dragonmantank/cron-expression": "^3.3.3",
-        "illuminate/cache": "^v11.0.5",
-        "illuminate/console": "^v11.0.5"
+        "illuminate/cache": "^v11.0.7",
+        "illuminate/console": "^v11.0.7"
     },
     "autoload": {
         "psr-4": {
