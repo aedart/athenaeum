@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Events\Dispatchable;
 
 /**
+ * @deprecated Since v8.x, password rehashing is now a default part of Laravel's \Illuminate\Contracts\Auth\UserProvider
+ *
  * Password Was Rehashed Event
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
