@@ -33,7 +33,17 @@ These are the highlights of the latest major version of Athenaeum.
 PHP version `v8.2` is now the minimum required version for Athenaeum.
 [Laravel `v10.x`](https://laravel.com/docs/11.x/releases) packages are now used.
 
-TODO...
+## Memory Snapshot
+
+The [`Memory::snapshot()`](./utils/memory.md#snapshot) method returns the current memory usage.
+
+```php
+use Aedart\Utils\Memory;
+
+$snapshot = Memory::snapshot();
+
+echo $snapshot->bytes(); // 544812
+```
 
 ## Changelog
 
