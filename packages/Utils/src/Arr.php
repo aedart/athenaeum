@@ -31,6 +31,8 @@ class Arr extends ArrBase
     }
 
     /**
+     * @deprecated Since v8.0 - Use \Aedart\Utils\Arr::randomizer()->value() instead.
+     *
      * Returns a single random element from given list
      *
      * @see \Aedart\Utils\Math::applySeed
