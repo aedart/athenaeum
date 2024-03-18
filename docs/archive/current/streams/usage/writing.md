@@ -203,8 +203,6 @@ echo (string) $copy; // b
 
 ### Copy From
 
-_**Available since** `v7.4.x`_
-
 Alternatively, you may also copy data from an existing resource or stream.
 
 ```php

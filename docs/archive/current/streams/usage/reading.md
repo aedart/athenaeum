@@ -367,8 +367,6 @@ _This method automatically rewinds the stream. See [`buffer()`](#buffer) as an a
 
 ## Buffer
 
-_**Available since** `v7.4.x`_
-
 To read the stream in chunks, using a specific buffer size, use the `buffer()` method.
 It accepts the following arguments:
 

@@ -5,8 +5,6 @@ sidebarDepth: 0
 
 # Filename
 
-_**Available since** `v7.4.x`_
-
 There are two methods for obtaining the filename. The first is `uri()`, which return the `uri` [metadata](./meta.md).
 The second is `filename()`, which returns the file's [basename](https://www.php.net/manual/en/function.basename), or a custom `filename` entry from the stream's metadata.
 

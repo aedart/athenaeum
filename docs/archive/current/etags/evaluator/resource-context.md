@@ -40,8 +40,6 @@ $resource new GenericResource(
 
 ## Callable ETag Argument
 
-_**Available since** `v7.9.x`_
-
 The `$etag` argument can be specified as callback that resolves an actual `ETag` instance. 
 Doing so can increase performance of a request, when no preconditions are requested.
 The etag is only resolved when needed and not upfront.

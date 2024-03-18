@@ -5,8 +5,6 @@ sidebarDepth: 0
 
 # Helpers
 
-_**Available since** `v7.8.x`_
-
 [[TOC]]
 
 ## Route Parameters Validation

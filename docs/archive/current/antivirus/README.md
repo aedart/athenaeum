@@ -4,8 +4,6 @@ description: About the Antivirus Package
 
 # Introduction
 
-_**Available since** `v7.4.x`_
-
 The Antivirus package provides a "profile-based" approach for scanning files for infections, such as viruses, malware or other harmful code.
 
 ```php

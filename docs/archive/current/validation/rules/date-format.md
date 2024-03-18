@@ -4,8 +4,6 @@ description: Date Format validation rule
 
 # Date Format
 
-_**Available since** `v7.12.x`_
-
 Adaptation of Laravel's [`date_format`](https://laravel.com/docs/10.x/validation#rule-date-format) rule.
 The difference is that, this rule handles an edge case that concerns UTC timezone offset.
 
