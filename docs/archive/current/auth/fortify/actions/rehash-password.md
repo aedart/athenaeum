@@ -6,6 +6,11 @@ sidebarDepth: 0
 
 # Rehash Password If Needed
 
+::: danger Deprecated
+This action has been deprecated since version `v8.x`. Automatic password rehashing has become a default part of Laravel.
+Please see [Laravel's documentation](https://laravel.com/docs/11.x/releases#automatic-password-rehashing) for details.
+:::
+
 The `RehashPasswordIfNeeded` action is responsible for rehashing the user's password, when it is required.
 Internally, the `Hasher` component is used for [determining if the password needs to be rehashed](https://laravel.com/docs/11.x/hashing#determining-if-a-password-needs-to-be-rehashed), as well as the actual rehashing.
 
