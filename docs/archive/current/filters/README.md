@@ -58,7 +58,7 @@ class ListUsersRequest exends FormRequest
 {
     public ?BuiltFiltersMap $filters = null;
 
-    public function after(Validator $validator)
+    public function afterValidation(Validator $validator)
     {        
         // Using your custom filters builder, build filters
         // for this request...

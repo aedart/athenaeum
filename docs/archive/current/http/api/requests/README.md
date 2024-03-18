@@ -17,7 +17,7 @@ The abstractions inherit from the `FormRequest` class, which is only available i
 ## Validated Api Request
 
 At the top-most abstraction level, you will find the `ValidatedApiRequest`.
-It offers but a few additional features, such as an `after()` method that can be overwritten to perform additional business logic validation, after your request's regular validation has completed.
+It offers but a few additional features, such as an `afterValidation()` method that can be overwritten to perform additional business logic validation, after your request's regular validation has completed.
 
 ```php
 use Aedart\Http\Api\Requests\ValidatedApiRequest;
@@ -32,14 +32,14 @@ class ShowProfile extends ValidatedApiRequest
         ];
     }
     
-    public function after(Validator $validator): void
+    public function afterValidation(Validator $validator): void
     {
         // Use this method to perform additional validation.
     }
 }
 ```
 
-The `$validator` instance that is provided for the `after()` method contains all valid data.
+The `$validator` instance that is provided for the `afterValidation()` method contains all valid data.
 You can access the data and use it, if needed.
 Examples of what kind of additional validation you might perform, could be:
 
@@ -79,7 +79,7 @@ public function authorizeAfterValidation(): bool
 }
 ```
 
-The `authorizeAfterValidation()` method is automatically invoked after the `after()` method has executed.
+The `authorizeAfterValidation()` method is automatically invoked after the `afterValidation()` method has executed.
 
 ## Http Conditional Requests
 

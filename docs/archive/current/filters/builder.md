@@ -52,7 +52,7 @@ class ListUsersRequest exends FormRequest
 {
     public ?BuiltFiltersMap $filters = null;
 
-    public function after(Validator $validator)
+    public function afterValidation(Validator $validator)
     {        
         $this->filters = UserFiltersBuilder::make($this)
             ->build();
