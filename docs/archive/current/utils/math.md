@@ -25,7 +25,7 @@ $value = Math::randomInt(1, 10);
 
 ## `randomizer()`
 
-The `randomizer()` returns a `NumericRandomizer` component - an adapter for PHP [`Random\Randomizer`](https://www.php.net/manual/en/class.random-randomizer.php).  
+The `randomizer()` method returns a `NumericRandomizer` component - an adapter for PHP [`Random\Randomizer`](https://www.php.net/manual/en/class.random-randomizer.php).  
 
 ```php
 $randomizer = Math::randomizer();
