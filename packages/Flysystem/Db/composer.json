@@ -19,9 +19,9 @@
     ],
     "require": {
         "php": "^8.2",
-        "aedart/athenaeum-container": "^8.1",
-        "aedart/athenaeum-database": "^8.1",
-        "aedart/athenaeum-streams": "^8.1",
+        "aedart/athenaeum-container": "^8.2",
+        "aedart/athenaeum-database": "^8.2",
+        "aedart/athenaeum-streams": "^8.2",
         "illuminate/console": "^v11.2.0",
         "league/flysystem": "^3.25.0"
     },
