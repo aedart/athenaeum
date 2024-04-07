@@ -21,7 +21,7 @@
         "aedart/athenaeum-contracts": "^8.1",
         "aedart/athenaeum-mime-types": "^8.1",
         "aedart/athenaeum-support": "^8.1",
-        "psr/http-message": "^1.1 || ^2.0"
+        "psr/http-message": "^1.1"
     },
     "autoload": {
         "psr-4": {
