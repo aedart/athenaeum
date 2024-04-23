@@ -18,8 +18,8 @@
     ],
     "require": {
         "php": "^8.2",
-        "aedart/athenaeum-contracts": "^8.2",
-        "aedart/athenaeum-support": "^8.2",
+        "aedart/athenaeum-contracts": "^8.3",
+        "aedart/athenaeum-support": "^8.3",
         "illuminate/container": "^v11.4.0"
     },
     "autoload": {
