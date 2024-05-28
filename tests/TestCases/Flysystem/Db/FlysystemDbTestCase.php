@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\FilesystemOperator;
+use PDO;
 
 /**
  * Flysystem Db Test Case
@@ -74,7 +75,45 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
+        // sqlite (memory)
         TestingConnection::enableConnection();
+
+        // Postgresql
+        //        TestingConnection::enableConnection('pgsql', [
+        //            'driver' => 'pgsql',
+        //            //'url' => env('DB_URL'),
+        //            'host' => '127.0.0.1',
+        //            'port' => '5432',
+        //            'database' => 'laravel',
+        //            'username' => 'root',
+        //            'password' => 'secret',
+        //            'charset' => 'utf8',
+        //            'prefix' => '',
+        //            'prefix_indexes' => true,
+        //            'search_path' => 'public',
+        //            'sslmode' => 'prefer',
+        //        ]);
+
+        // MariaDB
+        //        TestingConnection::enableConnection('mariadb', [
+        //            'driver' => 'mariadb',
+        //            // 'url' => env('DB_URL'),
+        //            'host' => '127.0.0.1',
+        //            'port' => '3306',
+        //            'database' => 'laravel',
+        //            'username' => 'root',
+        //            'password' => 'secret',
+        //            'unix_socket' => '',
+        //            'charset' => 'utf8mb4',
+        //            'collation' => 'utf8mb4_unicode_ci',
+        //            'prefix' => '',
+        //            'prefix_indexes' => true,
+        //            'strict' => true,
+        //            'engine' => null,
+        //            'options' => extension_loaded('pdo_mysql') ? array_filter([
+        //                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+        //            ]) : [],
+        //        ]);
     }
 
     /**
