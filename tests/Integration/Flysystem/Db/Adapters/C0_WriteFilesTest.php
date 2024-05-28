@@ -4,6 +4,7 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use RuntimeException;
 
 /**
  * C0_WriteFilesTest
@@ -187,6 +188,14 @@ class C0_WriteFilesTest extends FlysystemDbTestCase
         $this->assertSame(1, (int) $contentsList[0]->reference_count, 'Invalid reference_count');
 
         $this->assertSame($contentB, $fs->read($path), 'Incorrect content retrieved via filesystem');
-        $this->assertSame($contentB, $contentsList[0]->contents, 'Incorrect content in contents-table!');
+
+        $target = $contentsList[0]->contents;
+        $contents = match(true) {
+            is_resource($target) => stream_get_contents($target),
+            is_string($target) => $target,
+            default => throw new RuntimeException(sprintf('Unknown contents type: %s', gettype($target)))
+        };
+
+        $this->assertSame($contentB, $contents, 'Incorrect content in contents-table!');
     }
 }
