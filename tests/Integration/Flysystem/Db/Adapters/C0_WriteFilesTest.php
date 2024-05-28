@@ -190,7 +190,7 @@ class C0_WriteFilesTest extends FlysystemDbTestCase
         $this->assertSame($contentB, $fs->read($path), 'Incorrect content retrieved via filesystem');
 
         $target = $contentsList[0]->contents;
-        $contents = match(true) {
+        $contents = match (true) {
             is_resource($target) => stream_get_contents($target),
             is_string($target) => $target,
             default => throw new RuntimeException(sprintf('Unknown contents type: %s', gettype($target)))
