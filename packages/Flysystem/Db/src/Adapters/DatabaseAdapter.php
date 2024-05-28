@@ -371,13 +371,16 @@ class DatabaseAdapter implements
         try {
             $path = $this->applyPrefix($path);
 
-            // Change the path's visibility. Ignore affected records,...
-            $this
+            $affected = $this
                 ->resolveConnection()
                 ->table($this->filesTable)
                 ->where('path', $path)
                 ->limit(1)
                 ->update(['visibility' => $visibility]);
+
+            if ($affected === 0) {
+                throw new RuntimeException(sprintf('Visibility was not changed. Unable to find file or directory: %s', $path));
+            }
         } catch (Throwable $e) {
             throw UnableToSetVisibility::atLocation($path, $e->getMessage(), $e);
         }
