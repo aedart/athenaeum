@@ -200,10 +200,7 @@ class DatabaseAdapter implements
                 throw new RuntimeException('Unable to read file contents');
             }
 
-            $wasClosed = fclose($resource);
-            if (!$wasClosed) {
-                throw new RuntimeException('Failed to close file contents stream.');
-            }
+            $this->closeStream($resource);
 
             return $content;
         } catch (Throwable $e) {
@@ -856,7 +853,7 @@ class DatabaseAdapter implements
         if (is_resource($contents)) {
             $this->writeStream($destination, $contents, $config);
 
-            fclose($contents);
+            $this->closeStream($contents);
         } else {
             $this->write($destination, $contents, $config);
         }
@@ -960,6 +957,25 @@ class DatabaseAdapter implements
                 ->positionToStart()
                 ->resource()
         ];
+    }
+
+    /**
+     * Closes given stream, if it's a resources. Fails if unable to close.
+     *
+     * @param resource $stream
+     *
+     * @return void
+     */
+    protected function closeStream($stream): void
+    {
+        if (!is_resource($stream)) {
+            return;
+        }
+
+        $wasClosed = fclose($stream);
+        if (!$wasClosed) {
+            throw new RuntimeException('Failed to close stream.');
+        }
     }
 
     /**
