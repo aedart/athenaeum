@@ -4,6 +4,7 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
 use Aedart\Contracts\Flysystem\Visibility;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use League\Flysystem\Config;
 use League\Flysystem\InvalidVisibilityProvided;
 
 /**
@@ -55,7 +56,9 @@ class D0_FileVisibilityTest extends FlysystemDbTestCase
         // ----------------------------------------------------------------- //
 
         $fs = $this->filesystem();
-        $fs->write($path, $content);
+        $fs->write($path, $content, [
+            Config::OPTION_VISIBILITY => 'public'
+        ]);
 
         $fs->setVisibility($path, Visibility::PRIVATE->value);
 

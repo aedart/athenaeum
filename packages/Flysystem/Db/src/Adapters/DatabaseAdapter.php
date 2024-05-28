@@ -200,10 +200,7 @@ class DatabaseAdapter implements
                 throw new RuntimeException('Unable to read file contents');
             }
 
-            $wasClosed = fclose($resource);
-            if (!$wasClosed) {
-                throw new RuntimeException('Failed to close file contents stream.');
-            }
+            $this->closeStream($resource);
 
             return $content;
         } catch (Throwable $e) {
@@ -343,23 +340,20 @@ class DatabaseAdapter implements
             }
 
             // Upsert directories - create them if they do not exist,
-            // or update them, if already created.
-            $result = $connection
+            // or update them, if already created. Ignore amount of
+            // affected records (directories might already exist).
+            $connection
                 ->table($this->filesTable)
                 ->upsert(
                     values: $records,
                     uniqueBy: ['path'],
                     update: [
-                            'level',
-                            'visibility',
-                            'last_modified',
-                            'extra_metadata'
-                        ]
+                        'level',
+                        'visibility',
+                        'last_modified',
+                        'extra_metadata'
+                    ]
                 );
-
-            if (!$result) {
-                throw new RuntimeException(sprintf('Directory was not created in table: %s', $this->filesTable));
-            }
         } catch (Throwable $e) {
             throw UnableToCreateDirectory::dueToFailure($path, $e);
         }
@@ -856,7 +850,7 @@ class DatabaseAdapter implements
         if (is_resource($contents)) {
             $this->writeStream($destination, $contents, $config);
 
-            fclose($contents);
+            $this->closeStream($contents);
         } else {
             $this->write($destination, $contents, $config);
         }
@@ -960,6 +954,25 @@ class DatabaseAdapter implements
                 ->positionToStart()
                 ->resource()
         ];
+    }
+
+    /**
+     * Closes given stream, if it's a resources. Fails if unable to close.
+     *
+     * @param resource $stream
+     *
+     * @return void
+     */
+    protected function closeStream($stream): void
+    {
+        if (!is_resource($stream)) {
+            return;
+        }
+
+        $wasClosed = fclose($stream);
+        if (!$wasClosed) {
+            throw new RuntimeException('Failed to close stream.');
+        }
     }
 
     /**
