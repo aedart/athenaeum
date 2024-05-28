@@ -340,23 +340,20 @@ class DatabaseAdapter implements
             }
 
             // Upsert directories - create them if they do not exist,
-            // or update them, if already created.
-            $result = $connection
+            // or update them, if already created. Ignore amount of
+            // affected records (directories might already exist).
+            $connection
                 ->table($this->filesTable)
                 ->upsert(
                     values: $records,
                     uniqueBy: ['path'],
                     update: [
-                            'level',
-                            'visibility',
-                            'last_modified',
-                            'extra_metadata'
-                        ]
+                        'level',
+                        'visibility',
+                        'last_modified',
+                        'extra_metadata'
+                    ]
                 );
-
-            if (!$result) {
-                throw UnableToCreateDirectory::atLocation($path, sprintf('Directory was not created in table: %s', $this->filesTable));
-            }
         } catch (Throwable $e) {
             throw UnableToCreateDirectory::dueToFailure($path, $e);
         }
