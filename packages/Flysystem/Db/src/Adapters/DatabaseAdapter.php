@@ -355,7 +355,7 @@ class DatabaseAdapter implements
                 );
 
             if (!$result) {
-                throw new RuntimeException(sprintf('Directory was not created in table: %s', $this->filesTable));
+                throw UnableToCreateDirectory::atLocation($path, sprintf('Directory was not created in table: %s', $this->filesTable));
             }
         } catch (Throwable $e) {
             throw UnableToCreateDirectory::dueToFailure($path, $e);
