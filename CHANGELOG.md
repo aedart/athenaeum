@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* Updated dependencies (_service update_).
+* `\Aedart\Tests\Integration\Flysystem\Db\Storage\StorageDiskTest::getEnvironmentSetUp()` now uses the default database connection.
+
+### Fixed
+
+* `fclose()`: supplied resource is not a valid stream resource when attempting to copy a stream, in `DatabaseAdapter` (_psql connections were affected_).
+* `DatabaseAdapter::createDirectory()` fails when attempting to create directories that already exists (_mariadb connections were affected_).
+* Incorrect dummy file visibility when created, in `\Aedart\Tests\Integration\Flysystem\Db\Adapters\D0_FileVisibilityTest::canSetVisibilityForFile()` (_mariadb connection was affected_)
+* Incorrect test assertion of file contents, in `\Aedart\Tests\Integration\Flysystem\Db\Adapters\C0_WriteFilesTest::canUpdateFile()` (_psql connection was affected_).
+
 ## [8.3.0] - 2024-05-07
 
 ### Changed

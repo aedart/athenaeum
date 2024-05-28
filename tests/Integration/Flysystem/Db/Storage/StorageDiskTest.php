@@ -33,7 +33,7 @@ class StorageDiskTest extends FlysystemDbTestCase
         // Add database storage disk to configuration.
         $app['config']->set('filesystems.disks.database', [
             'driver' => 'database',
-            'connection' => 'testing',
+            'connection' => $app['config']->get('database.default', 'testing'),
             'files_table' => 'files',
             'contents_table' => 'file_contents',
             'hash_algo' => 'sha256',
