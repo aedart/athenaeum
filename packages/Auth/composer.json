@@ -16,11 +16,11 @@
     ],
     "require": {
         "php": "^8.2",
-        "aedart/athenaeum-contracts": "^8.1",
-        "aedart/athenaeum-support": "^8.1"
+        "aedart/athenaeum-contracts": "^8.4",
+        "aedart/athenaeum-support": "^8.4"
     },
     "require-dev": {
-        "laravel/fortify": "^1.21.0"
+        "laravel/fortify": "^1.21.2"
     },
     "autoload": {
         "psr-4": {

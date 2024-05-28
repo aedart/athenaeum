@@ -7,9 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.3.0] - 2024-05-07
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [8.2.0] - 2024-04-23
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [8.1.0] - 2024-04-07
+
 ### Added
 
 * `@condorhero/vuepress-plugin-export-pdf-v2` package as dev dependency (_due to PDF export experiment of docs, in `packages.json`_).
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* `Aedart\Streams\Stream::close()` not compatible with `Psr\Http\Message\StreamInterface::close(): void` (_happens when psr/http-message `v2.0` is required_). [#187](https://github.com/aedart/athenaeum/issues/187).
 
 ## [8.0.0] - 2024-03-18
 
@@ -1428,7 +1450,10 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/8.0.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/8.3.0...HEAD
+[8.3.0]: https://github.com/aedart/athenaeum/compare/8.2.0...8.3.0
+[8.2.0]: https://github.com/aedart/athenaeum/compare/8.1.0...8.2.0
+[8.1.0]: https://github.com/aedart/athenaeum/compare/8.0.0...8.1.0
 [8.0.0]: https://github.com/aedart/athenaeum/compare/7.33.0...8.0.0
 [7.33.0]: https://github.com/aedart/athenaeum/compare/7.32.0...7.33.0
 [7.32.0]: https://github.com/aedart/athenaeum/compare/7.31.0...7.32.0

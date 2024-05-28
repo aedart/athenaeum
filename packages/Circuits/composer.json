@@ -16,11 +16,11 @@
     ],
     "require": {
         "php": "^8.2",
-        "aedart/athenaeum-contracts": "^8.1",
-        "aedart/athenaeum-support": "^8.1",
-        "aedart/athenaeum-utils": "^8.1",
-        "illuminate/cache": "^v11.0.7",
-        "illuminate/events": "^v11.0.7"
+        "aedart/athenaeum-contracts": "^8.4",
+        "aedart/athenaeum-support": "^8.4",
+        "aedart/athenaeum-utils": "^8.4",
+        "illuminate/cache": "^v11.6.0",
+        "illuminate/events": "^v11.6.0"
     },
     "autoload": {
         "psr-4": {
