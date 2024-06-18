@@ -176,7 +176,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "8.5.x-dev"
+            "dev-master": "8.6.x-dev"
         },
         "extra": {
             "bamarni-bin": {
