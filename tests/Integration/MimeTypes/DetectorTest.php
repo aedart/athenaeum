@@ -103,4 +103,22 @@ class DetectorTest extends MimeTypesTestCase
             ->getMimeTypeDetector()
             ->detectForFile('some_unknown_file.txt');
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws MimeTypeDetectionException
+     */
+    public function hasSampleSizeSetInSample(): void
+    {
+        // When using inside Laravel, a default sample size SHOULD be
+        // set automatically.
+        // @see https://github.com/aedart/athenaeum/issues/191
+        $stream = $this->getFileStream('txt');
+        $sampler = $this->getMimeTypeDetector()->makeSampler($stream);
+
+        $this->assertGreaterThan(0, $sampler->getSampleSize());
+    }
 }
