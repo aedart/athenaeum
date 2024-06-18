@@ -90,7 +90,7 @@ abstract class BaseSampler implements Sampler
      */
     public function getSampleSize(): int
     {
-        if (!isset($this->sampleSize)) {
+        if (!isset($this->sampleSize) || $this->sampleSize === 0) {
             $this->setSampleSize($this->get('sample_size', 0));
         }
 
