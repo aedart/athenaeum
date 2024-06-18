@@ -7,17 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.4.0] - 2024-05-28
+
 ### Changed
 
 * Updated dependencies (_service update_).
-* `\Aedart\Tests\Integration\Flysystem\Db\Storage\StorageDiskTest::getEnvironmentSetUp()` now uses the default database connection.
+* `\Aedart\Tests\Integration\Flysystem\Db\Storage\StorageDiskTest::getEnvironmentSetUp()` now uses the default database connection. [#190](https://github.com/aedart/athenaeum/pull/190).
 
 ### Fixed
 
-* `fclose()`: supplied resource is not a valid stream resource when attempting to copy a stream, in `DatabaseAdapter` (_psql connections were affected_).
-* `DatabaseAdapter::createDirectory()` fails when attempting to create directories that already exists (_mariadb connections were affected_).
-* Incorrect dummy file visibility when created, in `\Aedart\Tests\Integration\Flysystem\Db\Adapters\D0_FileVisibilityTest::canSetVisibilityForFile()` (_mariadb connection was affected_)
-* Incorrect test assertion of file contents, in `\Aedart\Tests\Integration\Flysystem\Db\Adapters\C0_WriteFilesTest::canUpdateFile()` (_psql connection was affected_).
+* `fclose()`: supplied resource is not a valid stream resource when attempting to copy a stream, in `DatabaseAdapter` (_psql connections were affected_). [#190](https://github.com/aedart/athenaeum/pull/190).
+* `DatabaseAdapter::createDirectory()` fails when attempting to create directories that already exists (_mariadb connections were affected_). [#190](https://github.com/aedart/athenaeum/pull/190).
+* Incorrect dummy file visibility when created, in `\Aedart\Tests\Integration\Flysystem\Db\Adapters\D0_FileVisibilityTest::canSetVisibilityForFile()` (_mariadb connection was affected_). [#190](https://github.com/aedart/athenaeum/pull/190).
+* Incorrect test assertion of file contents, in `\Aedart\Tests\Integration\Flysystem\Db\Adapters\C0_WriteFilesTest::canUpdateFile()` (_psql connection was affected_). [#190](https://github.com/aedart/athenaeum/pull/190).
 
 ## [8.3.0] - 2024-05-07
 
@@ -1462,7 +1464,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/8.3.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/8.4.0...HEAD
+[8.4.0]: https://github.com/aedart/athenaeum/compare/8.3.0...8.4.0
 [8.3.0]: https://github.com/aedart/athenaeum/compare/8.2.0...8.3.0
 [8.2.0]: https://github.com/aedart/athenaeum/compare/8.1.0...8.2.0
 [8.1.0]: https://github.com/aedart/athenaeum/compare/8.0.0...8.1.0
