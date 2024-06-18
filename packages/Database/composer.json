@@ -20,7 +20,7 @@
         "aedart/athenaeum-contracts": "^8.5",
         "aedart/athenaeum-support": "^8.5",
         "aedart/athenaeum-utils": "^8.5",
-        "illuminate/database": "^v11.8.0"
+        "illuminate/database": "^v11.10.0"
     },
     "autoload": {
         "psr-4": {
