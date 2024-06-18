@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* Out-of-memory when attempting to detect mime-type of large file. [#191](https://github.com/aedart/athenaeum/pull/191).
+
 ## [8.4.0] - 2024-05-28
 
 ### Changed
