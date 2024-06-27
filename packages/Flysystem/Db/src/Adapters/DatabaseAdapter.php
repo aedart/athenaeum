@@ -773,7 +773,7 @@ class DatabaseAdapter implements
                         function (Builder $query) use ($path) {
                             $query
                                 ->where('path', '=', $path)
-                                ->orWhere('path', 'LIKE', "{$path}%");
+                                ->orWhere('path', 'LIKE', "{$path}/%");
                         }
                     )
 
