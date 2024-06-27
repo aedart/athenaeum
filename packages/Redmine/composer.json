@@ -18,9 +18,9 @@
     "require": {
         "php": "^8.2",
         "ext-json": "*",
-        "aedart/athenaeum-dto": "^8.5",
-        "aedart/athenaeum-http-clients": "^8.5",
-        "aedart/athenaeum-pagination": "^8.5"
+        "aedart/athenaeum-dto": "^8.6",
+        "aedart/athenaeum-http-clients": "^8.6",
+        "aedart/athenaeum-pagination": "^8.6"
     },
     "autoload": {
         "psr-4": {
