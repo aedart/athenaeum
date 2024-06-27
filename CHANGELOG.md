@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* Incorrect contents listing, due to missing separator affix in path (_in `DatabaseAdapter`_). [#193](https://github.com/aedart/athenaeum/issues/193).
+
 ## [8.5.0] - 2024-06-18
 
 ### Changed
