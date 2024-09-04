@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.9.0] - 2024-09-04
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* Incorrect `port` argument, in `BrowserTestCase` (_`--port` expected, but `port` was given as argument_).
+
 ## [8.8.0] - 2024-08-07
 
 ### Changed
@@ -1496,7 +1506,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/8.8.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/8.9.0...HEAD
+[8.9.0]: https://github.com/aedart/athenaeum/compare/8.8.0...8.9.0
 [8.8.0]: https://github.com/aedart/athenaeum/compare/8.7.0...8.8.0
 [8.7.0]: https://github.com/aedart/athenaeum/compare/8.6.0...8.7.0
 [8.6.0]: https://github.com/aedart/athenaeum/compare/8.5.0...8.6.0
