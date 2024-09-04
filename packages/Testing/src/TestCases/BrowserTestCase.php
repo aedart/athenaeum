@@ -68,7 +68,7 @@ abstract class BrowserTestCase extends IntegrationTestCase
         ConsoleDebugger::output('Starting Chrome Driver');
 
         static::startChromeDriver([
-            'port' => 9515,
+            '--port' => 9515,
             // '--verbose'
         ]);
     }
