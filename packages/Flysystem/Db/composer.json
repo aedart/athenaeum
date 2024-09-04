@@ -10,19 +10,19 @@
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
-    "type": "library",
     "authors": [
         {
             "name": "Alin Eugen Deac",
             "email": "aedart@gmail.com"
         }
     ],
+    "type": "library",
     "require": {
         "php": "^8.2",
         "aedart/athenaeum-container": "^8.9",
         "aedart/athenaeum-database": "^8.9",
         "aedart/athenaeum-streams": "^8.9",
-        "illuminate/console": "^v11.20.0",
+        "illuminate/console": "^v11.22.0",
         "league/flysystem": "^3.28.0"
     },
     "require-dev": {
@@ -33,16 +33,16 @@
             "Aedart\\Flysystem\\Db\\": "src"
         }
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "7.1.x-dev"
+        }
+    },
     "bin": [
         "bin/table_schemas"
     ],
     "config": {
         "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "7.1.x-dev"
-        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

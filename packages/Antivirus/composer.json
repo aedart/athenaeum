@@ -8,13 +8,13 @@
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
-    "type": "library",
     "authors": [
         {
             "name": "Alin Eugen Deac",
             "email": "aedart@gmail.com"
         }
     ],
+    "type": "library",
     "require": {
         "php": "^8.2",
         "ext-sockets": "*",
@@ -22,7 +22,7 @@
         "aedart/athenaeum-streams": "^8.9",
         "aedart/athenaeum-support": "^8.9",
         "aedart/athenaeum-validation": "^8.9",
-        "illuminate/events": "^v11.20.0",
+        "illuminate/events": "^v11.22.0",
         "xenolope/quahog": "^3.0"
     },
     "autoload": {
@@ -30,13 +30,13 @@
             "Aedart\\Antivirus\\": "src"
         }
     },
-    "config": {
-        "sort-packages": true
-    },
     "extra": {
         "branch-alias": {
             "dev-master": "7.1.x-dev"
         }
+    },
+    "config": {
+        "sort-packages": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true

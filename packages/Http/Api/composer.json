@@ -9,20 +9,20 @@
     ],
     "homepage": "https://aedart.github.io/athenaeum/",
     "license": "BSD-3-Clause",
-    "type": "library",
     "authors": [
         {
             "name": "Alin Eugen Deac",
             "email": "aedart@gmail.com"
         }
     ],
+    "type": "library",
     "require": {
         "php": "^8.2",
         "aedart/athenaeum-contracts": "^8.9",
         "aedart/athenaeum-etags": "^8.9",
         "aedart/athenaeum-support": "^8.9",
         "aedart/athenaeum-validation": "^8.9",
-        "illuminate/http": "^v11.20.0",
+        "illuminate/http": "^v11.22.0",
         "shrikeh/teapot": "^2.3.1"
     },
     "autoload": {
@@ -30,16 +30,16 @@
             "Aedart\\Http\\Api\\": "src"
         }
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "7.1.x-dev"
+        }
+    },
     "suggest": {
         "laravel/framework": "Required if you want to make use of API Request abstractions"
     },
     "config": {
         "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "7.1.x-dev"
-        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
