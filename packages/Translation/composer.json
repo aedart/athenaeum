@@ -17,7 +17,7 @@
     "type": "library",
     "require": {
         "php": "^8.2",
-        "aedart/athenaeum-support": "^8.10",
+        "aedart/athenaeum-support": "^8.11",
         "illuminate/translation": "^v11.23.5",
         "symfony/finder": "^7.1.4"
     },
