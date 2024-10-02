@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Updated dependencies (_service update_).
 
+### Fixed
+
+* `DatabaseAdapter` fails when attempting to move or copy to the same destination as the source (_adapter now skips performing `move()` or `copy()`, if source and destination are the same_). [#195](https://github.com/aedart/athenaeum/issues/195).
+
 ## [8.10.0] - 2024-09-23
 
 ### Changed

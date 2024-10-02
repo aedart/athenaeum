@@ -471,6 +471,11 @@ class DatabaseAdapter implements
      */
     public function move(string $source, string $destination, Config $config): void
     {
+        // Skip when source and destination are the same...
+        if ($source === $destination) {
+            return;
+        }
+
         try {
             // Copy the file
             $this->performCopy($source, $destination, $config);
@@ -487,6 +492,11 @@ class DatabaseAdapter implements
      */
     public function copy(string $source, string $destination, Config $config): void
     {
+        // Skip when source and destination are the same...
+        if ($source === $destination) {
+            return;
+        }
+
         try {
             $this->performCopy($source, $destination, $config);
         } catch (Throwable $e) {
