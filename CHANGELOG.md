@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.13.0] - 2024-10-29
+
+### Changed
+
+* Updated dependencies (_service update_).
+
 ### Fixed
 
 * `TypeError` thrown in `CaptureFieldsToSelect` middleware, when "select" query parameter is not a string. [#197](https://github.com/aedart/athenaeum/issues/197).
@@ -1532,7 +1538,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/8.12.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/8.13.0...HEAD
+[8.13.0]: https://github.com/aedart/athenaeum/compare/8.12.0...8.13.0
 [8.12.0]: https://github.com/aedart/athenaeum/compare/8.11.0...8.12.0
 [8.11.0]: https://github.com/aedart/athenaeum/compare/8.10.0...8.11.0
 [8.10.0]: https://github.com/aedart/athenaeum/compare/8.9.0...8.10.0
