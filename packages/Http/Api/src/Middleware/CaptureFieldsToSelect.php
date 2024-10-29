@@ -10,6 +10,7 @@ use Aedart\Validation\Rules\AlphaDashDot;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * Capture Fields To Select Middleware
@@ -97,17 +98,22 @@ class CaptureFieldsToSelect
     /**
      * Prepares the selected fields
      *
-     * @param  string  $input Raw query parameter value
+     * @param mixed $input Raw query parameter value
      *
-     * @return string[]
+     * @return array
      *
      * @throws ValidationException
+     * @throws BadRequestHttpException
      */
-    protected function prepareSelectedFields(string $input): array
+    protected function prepareSelectedFields(mixed $input): array
     {
-        $fields = $this->validateSelectedFields(
-            explode(',', $input)
-        );
+        $input = match (true) {
+            is_string($input) => explode(',', $input),
+            is_array($input) => $input,
+            default => throw new BadRequestHttpException(sprintf('Malformed %s query parameter', $this->selectQueryKey))
+        };
+
+        $fields = $this->validateSelectedFields($input);
 
         return array_map(function ($field) {
             return strtolower(trim($field));

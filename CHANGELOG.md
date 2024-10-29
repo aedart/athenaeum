@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* `TypeError` thrown in `CaptureFieldsToSelect` middleware, when "select" query parameter is not a string. [#197](https://github.com/aedart/athenaeum/issues/197).
+
 ## [8.12.0] - 2024-10-21
 
 ### Changed
