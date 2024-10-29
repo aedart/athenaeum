@@ -6,14 +6,12 @@ use Aedart\Contracts\Http\Api\SelectedFieldsCollection;
 use Aedart\Http\Api\Middleware\CaptureFieldsToSelect;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Testing\Helpers\ConsoleDebugger;
-use Aedart\Tests\Helpers\Dummies\Http\Api\Models\User;
-use Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Users\ListUsersRequest;
-use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\UserResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * CaptureFieldsToSelectMiddlewareTest
@@ -172,8 +170,6 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
      * @test
      *
      * @return void
-     *
-     * @throws ValidationException
      */
     public function doesNotFailWhenFieldsRequestedAsAnArray(): void
     {
@@ -182,7 +178,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
         /** @var SelectedFieldsCollection|null $result */
         $result = null;
 
-        Route::get('/users', function (Request $request) use(&$result) {
+        Route::get('/users', function (Request $request) use (&$result) {
             $result = IoCFacade::tryMake(SelectedFieldsCollection::class);
 
             return new Response();
@@ -207,5 +203,25 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
         $this->assertTrue($result->has('id'), '"id" field not available');
         $this->assertTrue($result->has('user'), '"user" field not available');
         $this->assertTrue($result->has('details'), '"details" field not available');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ValidationException
+     */
+    public function failsWhenFieldsRequestedAreMalformed(): void
+    {
+        // @see https://github.com/aedart/athenaeum/issues/197
+
+        $this->expectException(BadRequestHttpException::class);
+
+        $request = new Request([ 'select' => true ]); // NOTE: This should result in a "400 Bad Request" being thrown.
+
+        (new CaptureFieldsToSelect())->handle($request, function () {
+            return new Response();
+        });
     }
 }
