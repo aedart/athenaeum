@@ -21,12 +21,12 @@
         "php": "^8.2",
         "aedart/athenaeum-contracts": "^8.13",
         "aedart/athenaeum-utils": "^8.13",
-        "illuminate/config": "^v11.28.1",
-        "illuminate/support": "^v11.28.1"
+        "illuminate/config": "^v11.29.0",
+        "illuminate/support": "^v11.29.0"
     },
     "require-dev": {
         "predis/predis": "^2.2.2",
-        "symfony/console": "^v7.1.5",
+        "symfony/console": "^v7.1.6",
         "twig/twig": "^3.14.0"
     },
     "autoload": {
