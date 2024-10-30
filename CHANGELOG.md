@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Test that ensures the `RequestMustBeJson` middleware throws `BadRequestHttpException`, when no `content-type` is set in the request headers.
+
 ## [8.13.0] - 2024-10-29
 
 ### Changed
