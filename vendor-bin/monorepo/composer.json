@@ -1,6 +1,6 @@
 {
     "require": {
-        "symplify/monorepo-builder": "^11.2.20",
-        "symfony/console": "^6.2"
+        "symplify/monorepo-builder": "^11.2.22",
+        "symfony/console": "^6.4.14"
     }
 }

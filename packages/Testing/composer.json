@@ -20,8 +20,8 @@
         "aedart/athenaeum-contracts": "^8.14",
         "codeception/codeception": "^5.1.2",
         "codeception/module-asserts": "^3.0.0",
-        "fakerphp/faker": "^v1.23.1",
-        "illuminate/testing": "^v11.29.0",
+        "fakerphp/faker": "^v1.24.0",
+        "illuminate/testing": "^v11.31.0",
         "mockery/mockery": "1.6.*",
         "orchestra/testbench": "^v9.5.2",
         "orchestra/testbench-dusk": "^v9.8.1"
