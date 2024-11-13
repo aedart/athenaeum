@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.14.0] - 2024-11-13
+
 ### Added
 
 * Test that ensures the `RequestMustBeJson` middleware throws `BadRequestHttpException`, when no `content-type` is set in the request headers.
+
+### Changed
+
+* Updated dependencies (_service update_).
 
 ## [8.13.0] - 2024-10-29
 
@@ -1542,7 +1548,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/8.13.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/8.14.0...HEAD
+[8.14.0]: https://github.com/aedart/athenaeum/compare/8.13.0...8.14.0
 [8.13.0]: https://github.com/aedart/athenaeum/compare/8.12.0...8.13.0
 [8.12.0]: https://github.com/aedart/athenaeum/compare/8.11.0...8.12.0
 [8.11.0]: https://github.com/aedart/athenaeum/compare/8.10.0...8.11.0
