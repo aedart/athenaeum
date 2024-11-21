@@ -7,6 +7,72 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.14.0] - 2024-11-13
+
+### Added
+
+* Test that ensures the `RequestMustBeJson` middleware throws `BadRequestHttpException`, when no `content-type` is set in the request headers.
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [8.13.0] - 2024-10-29
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* `TypeError` thrown in `CaptureFieldsToSelect` middleware, when "select" query parameter is not a string. [#197](https://github.com/aedart/athenaeum/issues/197).
+
+## [8.12.0] - 2024-10-21
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [8.11.0] - 2024-10-02
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* `DatabaseAdapter` fails when attempting to move or copy to the same destination as the source (_adapter now skips performing `move()` or `copy()`, if source and destination are the same_). [#195](https://github.com/aedart/athenaeum/issues/195).
+
+## [8.10.0] - 2024-09-23
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [8.9.0] - 2024-09-04
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* Incorrect `port` argument, in `BrowserTestCase` (_`--port` expected, but `port` was given as argument_).
+
+## [8.8.0] - 2024-08-07
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [8.7.0] - 2024-07-22
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [8.6.0] - 2024-06-27
+
 ### Changed
 
 * Updated dependencies (_service update_).
@@ -1482,7 +1548,16 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/8.5.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/8.14.0...HEAD
+[8.14.0]: https://github.com/aedart/athenaeum/compare/8.13.0...8.14.0
+[8.13.0]: https://github.com/aedart/athenaeum/compare/8.12.0...8.13.0
+[8.12.0]: https://github.com/aedart/athenaeum/compare/8.11.0...8.12.0
+[8.11.0]: https://github.com/aedart/athenaeum/compare/8.10.0...8.11.0
+[8.10.0]: https://github.com/aedart/athenaeum/compare/8.9.0...8.10.0
+[8.9.0]: https://github.com/aedart/athenaeum/compare/8.8.0...8.9.0
+[8.8.0]: https://github.com/aedart/athenaeum/compare/8.7.0...8.8.0
+[8.7.0]: https://github.com/aedart/athenaeum/compare/8.6.0...8.7.0
+[8.6.0]: https://github.com/aedart/athenaeum/compare/8.5.0...8.6.0
 [8.5.0]: https://github.com/aedart/athenaeum/compare/8.4.0...8.5.0
 [8.4.0]: https://github.com/aedart/athenaeum/compare/8.3.0...8.4.0
 [8.3.0]: https://github.com/aedart/athenaeum/compare/8.2.0...8.3.0

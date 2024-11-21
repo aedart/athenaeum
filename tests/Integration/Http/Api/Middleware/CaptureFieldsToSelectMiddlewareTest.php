@@ -9,7 +9,9 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * CaptureFieldsToSelectMiddlewareTest
@@ -158,8 +160,67 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
 
         $request = new Request([ 'select' => implode(',', $requestedFields) ]);
 
-        (new CaptureFieldsToSelect())->handle($request, function () use (&$result) {
+        (new CaptureFieldsToSelect())->handle($request, function () {
             $result = IoCFacade::tryMake(SelectedFieldsCollection::class);
+            return new Response();
+        });
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function doesNotFailWhenFieldsRequestedAsAnArray(): void
+    {
+        // @see https://github.com/aedart/athenaeum/issues/197
+
+        /** @var SelectedFieldsCollection|null $result */
+        $result = null;
+
+        Route::get('/users', function (Request $request) use (&$result) {
+            $result = IoCFacade::tryMake(SelectedFieldsCollection::class);
+
+            return new Response();
+        })
+            ->middleware(CaptureFieldsToSelect::class)
+            ->name('users.index');
+
+        Route::getRoutes()->refreshNameLookups();
+
+        // ------------------------------------------------------------------------------------ //
+
+        $url = route('users.index') . '?select[0]=id&select[1]=user&select[2]=details';
+        $this
+            ->getJson($url)
+            ->assertOk();
+
+        // ------------------------------------------------------------------------------------ //
+
+        ConsoleDebugger::output($result);
+
+        $this->assertNotNull($result, 'no fields collection registered');
+        $this->assertTrue($result->has('id'), '"id" field not available');
+        $this->assertTrue($result->has('user'), '"user" field not available');
+        $this->assertTrue($result->has('details'), '"details" field not available');
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws ValidationException
+     */
+    public function failsWhenFieldsRequestedAreMalformed(): void
+    {
+        // @see https://github.com/aedart/athenaeum/issues/197
+
+        $this->expectException(BadRequestHttpException::class);
+
+        $request = new Request([ 'select' => true ]); // NOTE: This should result in a "400 Bad Request" being thrown.
+
+        (new CaptureFieldsToSelect())->handle($request, function () {
             return new Response();
         });
     }

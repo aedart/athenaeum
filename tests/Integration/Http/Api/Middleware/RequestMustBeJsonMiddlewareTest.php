@@ -84,6 +84,26 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    public function rejectsWhenContentTypeMissingForContentModificationMethod(): void
+    {
+        $this->expectException(BadRequestHttpException::class);
+        $this->expectExceptionMessage('Invalid content-type header. Request can only process JSON content type, e.g. application/json');
+
+        $request = new Request();
+        $request->setMethod('POST');
+        // No Content-Type header here - should be rejected.
+
+        /** @var Response $response */
+        (new RequestMustBeJson())->handle($request, function () {
+            return new Response();
+        });
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
     public function rejectsWhenAcceptHeaderNotValid(): void
     {
         $this->expectException(BadRequestHttpException::class);
