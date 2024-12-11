@@ -20,11 +20,11 @@
         "aedart/athenaeum-contracts": "^8.17",
         "codeception/codeception": "^5.1.2",
         "codeception/module-asserts": "^3.0.0",
-        "fakerphp/faker": "^v1.24.0",
-        "illuminate/testing": "^v11.34.2",
+        "fakerphp/faker": "^v1.24.1",
+        "illuminate/testing": "^v11.35.0",
         "mockery/mockery": "1.6.*",
-        "orchestra/testbench": "^v9.6.1",
-        "orchestra/testbench-dusk": "^v9.9.1"
+        "orchestra/testbench": "^v9.7.0",
+        "orchestra/testbench-dusk": "^v9.10.0"
     },
     "autoload": {
         "psr-4": {
