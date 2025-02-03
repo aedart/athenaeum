@@ -19,8 +19,8 @@
         "aedart/athenaeum-contracts": "^8.19",
         "aedart/athenaeum-support": "^8.19",
         "aedart/athenaeum-utils": "^8.19",
-        "illuminate/cache": "^v11.36.1",
-        "illuminate/events": "^v11.36.1"
+        "illuminate/cache": "^v11.41.3",
+        "illuminate/events": "^v11.41.3"
     },
     "autoload": {
         "psr-4": {
