@@ -21,6 +21,14 @@ class StringRandomizer extends BaseRandomizer implements StringRandomizerInterfa
     }
 
     /**
+     * @inheritdoc
+     */
+    public function bytesFromString(string $string, int $length): string
+    {
+        return $this->driver()->getBytesFromString($string, $length);
+    }
+
+    /**
      * @inheritDoc
      */
     public function shuffle(string $bytes): string
