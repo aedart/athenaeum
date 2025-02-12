@@ -4,6 +4,10 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 
 ## [Unreleased]
 
+### Added
+
+* `Json::isValid()` now accepts `$depth` and `$options` parameters.
+
 ### Changed
 
 **Breaking Changes**
@@ -13,7 +17,7 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 
 **Non-breaking Changes**
 
-* N/A
+* Now using native `json_validate()`, in `\Aedart\Utils\Json::isValid`. [#120](https://github.com/aedart/athenaeum/issues/120).
 
 
 ### Fixed
