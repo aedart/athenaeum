@@ -19,3 +19,4 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 ### Fixed
 
 * Fix [implicitly nullable parameter declarations](https://php.watch/versions/8.4/implicitly-marking-parameter-type-nullable-deprecated), throughout various components (_deprecated from PHP 8.4_).
+* Fix passing `E_USER_ERROR` as the error_level for `trigger_error()`, in core application tests (_deprecated from PHP 8.4_). 
