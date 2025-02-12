@@ -6,6 +6,7 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 
 ### Added
 
+* `float()` and `nextFloat()` methods in `NumericRandomizer` (_in the Utils package_).
 * `Json::isValid()` now accepts `$depth` and `$options` parameters.
 
 ### Changed
