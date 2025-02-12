@@ -18,12 +18,12 @@ interface ETag extends Stringable
     /**
      * Weak ETag indicator / prefix
      */
-    public const WEAK_INDICATOR = 'W/';
+    public const string WEAK_INDICATOR = 'W/';
 
     /**
      * Wildcard symbol
      */
-    public const WILDCARD_SYMBOL = '*';
+    public const string WILDCARD_SYMBOL = '*';
 
     /**
      * Creates a new ETag instance

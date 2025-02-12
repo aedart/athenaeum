@@ -24,24 +24,24 @@ interface AccessibilityLevels
      * Public level - no 'protected' nor 'private' properties
      * are going to be automatically get / set
      */
-    public const PUBLIC_LEVEL = ReflectionProperty::IS_PUBLIC;
+    public const int PUBLIC_LEVEL = ReflectionProperty::IS_PUBLIC;
 
     /**
      * Protected level - properties that are declared
      * 'protected' can be set / get.
      */
-    public const PROTECTED_LEVEL = ReflectionProperty::IS_PROTECTED;
+    public const int PROTECTED_LEVEL = ReflectionProperty::IS_PROTECTED;
 
     /**
      * Private level - properties that are declared
      * 'protected' or 'private' can be set / get.
      */
-    public const PRIVATE_LEVEL = ReflectionProperty::IS_PRIVATE;
+    public const int PRIVATE_LEVEL = ReflectionProperty::IS_PRIVATE;
 
     /**
      * Levels map, key = level, value = name of level
      */
-    public const LEVELS = [
+    public const array LEVELS = [
         self::PUBLIC_LEVEL => 'public',
         self::PROTECTED_LEVEL => 'protected',
         self::PRIVATE_LEVEL => 'private',

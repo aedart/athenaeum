@@ -15,7 +15,7 @@ interface Sluggable
     /**
      * Default slug key name
      */
-    public const DEFAULT_SLUG_KEY_NAME = 'slug';
+    public const string DEFAULT_SLUG_KEY_NAME = 'slug';
 
     /**
      * Returns the name of the slug key

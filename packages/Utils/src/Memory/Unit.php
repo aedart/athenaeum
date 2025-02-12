@@ -25,7 +25,7 @@ class Unit implements
      *
      * Source: https://en.wikipedia.org/wiki/Byte
      */
-    public const DECIMAL_UNITS = [
+    public const array DECIMAL_UNITS = [
         'B' => 'Bytes',
         'kB' => 'Kilobytes',
         'MB' => 'Megabytes',
@@ -44,7 +44,7 @@ class Unit implements
      *
      * Source: https://en.wikipedia.org/wiki/Byte
      */
-    public const BINARY_UNITS = [
+    public const array BINARY_UNITS = [
         'B' => 'Bytes',
         'KiB' => 'Kibibytes',
         'MiB' => 'Mebibytes',
@@ -61,14 +61,14 @@ class Unit implements
      *
      * Source: https://en.wikipedia.org/wiki/Byte#Multiple-byte_units
      */
-    public const DECIMAL_VALUE = 1000;
+    public const int DECIMAL_VALUE = 1000;
 
     /**
      * Value based on powers of 2 in which 1 kibibyte (KiB) is equal to 1024 bytes
      *
      * Source: https://en.wikipedia.org/wiki/Byte#Multiple-byte_units
      */
-    public const BINARY_VALUE = 1024;
+    public const int BINARY_VALUE = 1024;
 
     /**
      * Creates a new memory unit of given size

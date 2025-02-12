@@ -28,52 +28,52 @@ class Relation extends RedmineApiResource implements Deletable
     /**
      * Relates relation type (default)
      */
-    public const RELATES = 'relates';
+    public const string RELATES = 'relates';
 
     /**
      * Duplicates relation type
      */
-    public const DUPLICATES = 'duplicates';
+    public const string DUPLICATES = 'duplicates';
 
     /**
      * Duplicated relation type
      */
-    public const DUPLICATED = 'duplicated';
+    public const string DUPLICATED = 'duplicated';
 
     /**
      * Blocks relation type
      */
-    public const BLOCKS = 'blocks';
+    public const string BLOCKS = 'blocks';
 
     /**
      * Blocked relation type
      */
-    public const BLOCKED = 'blocked';
+    public const string BLOCKED = 'blocked';
 
     /**
      * Precedes relation type
      */
-    public const PRECEDES = 'precedes';
+    public const string PRECEDES = 'precedes';
 
     /**
      * Follows relation type
      */
-    public const FOLLOWS = 'follows';
+    public const string FOLLOWS = 'follows';
 
     /**
      * Copied to relation type
      */
-    public const COPIED_TO = 'copied_to';
+    public const string COPIED_TO = 'copied_to';
 
     /**
      * Copied from relation type
      */
-    public const COPIED_FROM = 'copied_from';
+    public const string COPIED_FROM = 'copied_from';
 
     /**
      * Supported relation types
      */
-    public const RELATION_TYPES = [
+    public const array RELATION_TYPES = [
         self::RELATES,
         self::DUPLICATES,
         self::DUPLICATED,

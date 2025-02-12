@@ -22,7 +22,7 @@ interface SetCookie extends Cookie
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies
      */
-    public const SAME_SITE_STRICT = 'strict';
+    public const string SAME_SITE_STRICT = 'strict';
 
     /**
      * Lax same-site policy
@@ -33,7 +33,7 @@ interface SetCookie extends Cookie
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies
      */
-    public const SAME_SITE_LAX = 'lax';
+    public const string SAME_SITE_LAX = 'lax';
 
     /**
      * None same-site policy
@@ -42,7 +42,7 @@ interface SetCookie extends Cookie
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies
      */
-    public const SAME_SITE_NONE = 'none';
+    public const string SAME_SITE_NONE = 'none';
 
     /**
      * Set the maximum lifetime of the cookie

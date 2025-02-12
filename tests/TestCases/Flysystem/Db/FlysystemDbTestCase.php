@@ -29,7 +29,7 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
     /**
      * Name of the console command
      */
-    public const MAKE_MIGRATION_CMD = 'flysystem:make-adapter-migration';
+    public const string MAKE_MIGRATION_CMD = 'flysystem:make-adapter-migration';
 
     /**
      * State whether migrations should be installed or not
