@@ -27,5 +27,5 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 
 ### Removed
 
-* `\Aedart\Auth\Fortify\Actions\RehashPasswordIfNeeded` (_was deprecated in Athenaeum `v8.x`_)
-* `\Aedart\Auth\Fortify\Events\PasswordWasRehashed` (_was deprecated in Athenaeum `v8.x`_)
+* `\Aedart\Auth\Fortify\Actions\RehashPasswordIfNeeded` (_was deprecated in Athenaeum `v8.x`_). [#182](https://github.com/aedart/athenaeum/issues/182).
+* `\Aedart\Auth\Fortify\Events\PasswordWasRehashed` (_was deprecated in Athenaeum `v8.x`_). [#182](https://github.com/aedart/athenaeum/issues/182).
