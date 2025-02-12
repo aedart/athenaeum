@@ -149,6 +149,11 @@
         "sort-packages": true,
         "allow-plugins": {
             "bamarni/composer-bin-plugin": true
+        },
+        "bamarni-bin": {
+            "bin-links": false,
+            "target-directory": "vendor-bin",
+            "forward-command": false
         }
     },
     "replace": {
