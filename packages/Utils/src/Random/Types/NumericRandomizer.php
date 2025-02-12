@@ -34,7 +34,7 @@ class NumericRandomizer extends BaseRandomizer implements NumericRandomizerInter
      */
     public function float(float $min, float $max, IntervalBoundary $boundary = IntervalBoundary::ClosedOpen): float
     {
-        return $this->driver()->float($min, $max, $boundary);
+        return $this->driver()->getFloat($min, $max, $boundary);
     }
 
     /**
