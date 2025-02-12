@@ -22,7 +22,7 @@
         "aedart/athenaeum-container": "^8.20",
         "aedart/athenaeum-database": "^8.20",
         "aedart/athenaeum-streams": "^8.20",
-        "illuminate/console": "^v11.41.3",
+        "illuminate/console": "^v11.42.0",
         "league/flysystem": "^3.29.1"
     },
     "require-dev": {
