@@ -35,7 +35,7 @@ class Stream implements StreamInterface
      *
      * @see \GuzzleHttp\Psr7\Stream::READABLE_MODES
      */
-    public const READABLE_MODES = '/r|a\+|ab\+|w\+|wb\+|x\+|xb\+|c\+|cb\+/';
+    public const string READABLE_MODES = '/r|a\+|ab\+|w\+|wb\+|x\+|xb\+|c\+|cb\+/';
 
     /**
      * Writeable modes regex
@@ -44,7 +44,7 @@ class Stream implements StreamInterface
      *
      * @see \GuzzleHttp\Psr7\Stream::WRITABLE_MODES
      */
-    public const WRITABLE_MODES = '/a|w|r\+|rb\+|rw|x|c/';
+    public const string WRITABLE_MODES = '/a|w|r\+|rb\+|rw|x|c/';
 
     /**
      * The actual resource stream

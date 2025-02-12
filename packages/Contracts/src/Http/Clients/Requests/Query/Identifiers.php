@@ -13,180 +13,180 @@ interface Identifiers
     /**
      * Ascending order
      */
-    public const ASCENDING = 'asc';
+    public const string ASCENDING = 'asc';
 
     /**
      * Descending order
      */
-    public const DESCENDING = 'desc';
+    public const string DESCENDING = 'desc';
 
     /**
      * Datetime date-format identifier
      */
-    public const DATETIME_FORMAT = 'datetime_format';
+    public const string DATETIME_FORMAT = 'datetime_format';
 
     /**
      * Date date-format identifier
      */
-    public const DATE_FORMAT = 'date_format';
+    public const string DATE_FORMAT = 'date_format';
 
     /**
      * Year date-format identifier
      */
-    public const YEAR_FORMAT = 'year_format';
+    public const string YEAR_FORMAT = 'year_format';
 
     /**
      * Month date-format identifier
      */
-    public const MONTH_FORMAT = 'month_format';
+    public const string MONTH_FORMAT = 'month_format';
 
     /**
      * Day date-format identifier
      */
-    public const DAY_FORMAT = 'day_format';
+    public const string DAY_FORMAT = 'day_format';
 
     /**
      * Time date-format identifier
      */
-    public const TIME_FORMAT = 'time_format';
+    public const string TIME_FORMAT = 'time_format';
 
     /**
      * Http query parameter separator identifier
      */
-    public const PARAMETER_SEPARATOR = 'parameter_separator';
+    public const string PARAMETER_SEPARATOR = 'parameter_separator';
 
     /**
      * "And where" conjunction separator identifier
      */
-    public const AND_SEPARATOR = 'and_separator';
+    public const string AND_SEPARATOR = 'and_separator';
 
     /**
      * "Or where" conjunction separator identifier
      */
-    public const OR_SEPARATOR = 'or_separator';
+    public const string OR_SEPARATOR = 'or_separator';
 
     /**
      * Bindings identifier
      */
-    public const BINDINGS = '@:bindings:@';
+    public const string BINDINGS = '@:bindings:@';
 
     /**
      * Type identifier
      */
-    public const TYPE = '@:type:@';
+    public const string TYPE = '@:type:@';
 
     /**
      * Default equals identifier
      */
-    public const EQUALS = '=';
+    public const string EQUALS = '=';
 
     /**
      * Field identifier
      */
-    public const FIELD = '@:field:@';
+    public const string FIELD = '@:field:@';
 
     /**
      * Fields identifier
      */
-    public const FIELDS = '@:fields:@';
+    public const string FIELDS = '@:fields:@';
 
     /**
      * Value identifier
      */
-    public const VALUE = '@:value:@';
+    public const string VALUE = '@:value:@';
 
     /**
      * Raw expression identifier
      */
-    public const RAW = '@:raw:@';
+    public const string RAW = '@:raw:@';
 
     /**
      * Expression identifier
      */
-    public const EXPRESSION = '@:expression:@';
+    public const string EXPRESSION = '@:expression:@';
 
     /**
      * Selects identifier
      */
-    public const SELECTS = '@:selects:@';
+    public const string SELECTS = '@:selects:@';
 
     /**
      * Regular field selection type identifier
      */
-    public const SELECT_TYPE_REGULAR = '@:select_regular:@';
+    public const string SELECT_TYPE_REGULAR = '@:select_regular:@';
 
     /**
      * Raw field selection type identifier
      */
-    public const SELECT_TYPE_RAW = '@:select_raw:@';
+    public const string SELECT_TYPE_RAW = '@:select_raw:@';
 
     /**
      * Wheres (conditions) identifier
      */
-    public const WHERES = '@:wheres:@';
+    public const string WHERES = '@:wheres:@';
 
     /**
      * Regular where type identifier
      */
-    public const WHERE_TYPE_REGULAR = '@:where_regular:@';
+    public const string WHERE_TYPE_REGULAR = '@:where_regular:@';
 
     /**
      * Raw where type identifier
      */
-    public const WHERE_TYPE_RAW = '@:where_raw:@';
+    public const string WHERE_TYPE_RAW = '@:where_raw:@';
 
     /**
      * Conjunction identifier
      */
-    public const CONJUNCTION = '@:conjunction:@';
+    public const string CONJUNCTION = '@:conjunction:@';
 
     /**
      * "And" conjunction identifier
      */
-    public const AND_CONJUNCTION = '@:and:@';
+    public const string AND_CONJUNCTION = '@:and:@';
 
     /**
      * "Or" conjunction identifier
      */
-    public const OR_CONJUNCTION = '@:or:@';
+    public const string OR_CONJUNCTION = '@:or:@';
 
     /**
      * Operator identifier
      */
-    public const OPERATOR = '@:operator:@';
+    public const string OPERATOR = '@:operator:@';
 
     /**
      * Includes identifier
      */
-    public const INCLUDES = '@:includes:@';
+    public const string INCLUDES = '@:includes:@';
 
     /**
      * Limit identifier
      */
-    public const LIMIT = '@:limit:@';
+    public const string LIMIT = '@:limit:@';
 
     /**
      * Offset identifier
      */
-    public const OFFSET = '@:offset:@';
+    public const string OFFSET = '@:offset:@';
 
     /**
      * Page number identifier
      */
-    public const PAGE_NUMBER = '@:page_number:@';
+    public const string PAGE_NUMBER = '@:page_number:@';
 
     /**
      * Page size identifier
      */
-    public const PAGE_SIZE = '@:page_size:@';
+    public const string PAGE_SIZE = '@:page_size:@';
 
     /**
      * Sorting order criteria identifier
      */
-    public const ORDER_BY = '@:order_by:@';
+    public const string ORDER_BY = '@:order_by:@';
 
     /**
      * Sorting order direction identifier
      */
-    public const DIRECTION = '@:direction:@';
+    public const string DIRECTION = '@:direction:@';
 }
