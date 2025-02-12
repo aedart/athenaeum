@@ -57,6 +57,8 @@ interface NumericRandomizer extends Randomizer
      * @see https://www.php.net/manual/en/random-randomizer.nextfloat.php
      *
      * @return float
+     *
+     * @throws Throwable
      */
     public function nextFloat(): float;
 }
