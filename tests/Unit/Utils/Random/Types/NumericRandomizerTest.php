@@ -74,4 +74,34 @@ class NumericRandomizerTest extends UnitTestCase
 
         $this->assertIsInt($result);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function canGetRandomFloat(): void
+    {
+        $result = $this->makeRandomizer()->float(0, 1);
+
+        ConsoleDebugger::output($result);
+
+        $this->assertIsFloat($result);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws Throwable
+     */
+    public function canGetNextFloat(): void
+    {
+        $result = $this->makeRandomizer()->nextFloat();
+
+        ConsoleDebugger::output($result);
+
+        $this->assertIsFloat($result);
+    }
 }
