@@ -26,8 +26,8 @@ jobs:
       matrix:
 
         # See OS and PHP version options on https://github.com/shivammathur/setup-php
-        operating-system: [ 'ubuntu-22.04' ]
-        php-versions: [ '8.2', '8.3' ]
+        operating-system: [ 'ubuntu-24.04' ]
+        php-versions: [ '8.3', '8.4' ]
 
     steps:
 
@@ -47,9 +47,10 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
 
-          # PHP Extensions are based on those that Laravel also uses.args:
-          # @see https://github.com/laravel/framework/blob/11.x/.github/workflows/tests.yml
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, redis-phpredis/phpredis@5.3.7, igbinary, msgpack, lzf, zstd, lz4, memcached, gmp
+          # PHP Extensions:
+          # @see https://github.com/laravel/framework/blob/master/.github/workflows/tests.yml
+          extensions: xml, curl, mbstring, zip, pcntl, sqlite3, gd, redis, igbinary, msgpack, memcached, gmp
+          #extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, redis, igbinary, msgpack, memcached, gmp, :php-psr
           ini-values: error_reporting=E_ALL
           tools: composer:v2
           coverage: none
@@ -57,21 +58,6 @@ jobs:
       # ------------------------------------------------------------------------------------------------------- #
       # Install dependencies
       # ------------------------------------------------------------------------------------------------------- #
-
-      # Not sure that caching packages is a too good idea...
-#      - name: "Get composer cache directory"
-#        id: composer-cache
-#        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-#
-#      - name: "Cache composer dependencies"
-#        uses: actions/cache@v2
-#        with:
-#          path: ${{ steps.composer-cache.outputs.dir }}
-#
-#          # Use composer.json for key, if composer.lock is not committed.
-#          # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-#          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-#          restore-keys: ${{ runner.os }}-composer-
 
       - name: "Install dependencies"
         run: composer install --no-progress --prefer-dist --no-interaction --optimize-autoloader --ansi

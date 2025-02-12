@@ -227,7 +227,7 @@ class Kernel implements
      *
      * @throws Throwable In case exceptions must be thrown
      */
-    protected function attempt(callable $callback, OutputInterface $output = null): mixed
+    protected function attempt(callable $callback, OutputInterface|null $output = null): mixed
     {
         $output = $output ?? $this->resolveDefaultOutput();
 

@@ -26,7 +26,7 @@ trait AdditionalFormatting
      * Set a callback that applies additional formatting to the final
      * relation reference value
      *
-     * **Note**: _Given callback is applied as the last step, after primary key, resource type, self-link,...etc has
+     * **Note**: _Given callback is applied as the last step, after primary key, resource type, self-link,...etc. has
      * been resolved._
      *
      * @param  callable|null  $callback  [optional] Formatted reference value, related {@see Model} and {@see RelationReference}
@@ -35,7 +35,7 @@ trait AdditionalFormatting
      *
      * @return self
      */
-    public function withAdditionalFormatting(callable $callback = null): static
+    public function withAdditionalFormatting(callable|null $callback = null): static
     {
         $this->additionalFormattingCallback = $callback;
 

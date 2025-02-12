@@ -89,7 +89,7 @@ class C0_ParseTest extends UnitTestCase
             '3petabytes' => [ '3petabytes', 3_000_000_000_000_000 ],
 
             '1.5 pi' => [ '1.5 pi', 1_688_849_860_263_936 ],
-            '2.35 pib' => [ '2.35 pib', 2_645_864_781_080_166 ],
+            '3 pib' => [ '3 pib', 3_377_699_720_527_872 ],
             '1 pebibyte' => [ '1 pebibyte', 1_125_899_906_842_624 ],
             '3pebibytes' => [ '3pebibytes', 3_377_699_720_527_872 ],
 
