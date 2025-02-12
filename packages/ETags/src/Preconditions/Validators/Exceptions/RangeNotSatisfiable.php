@@ -54,7 +54,7 @@ class RangeNotSatisfiable extends HttpException implements RangeNotSatisfiableEx
         int $totalSize,
         string $rangeUnit,
         string $message = '',
-        Throwable $previous = null,
+        Throwable|null $previous = null,
         array $headers = [],
         int $code = 0
     ) {

@@ -115,7 +115,7 @@ abstract class CircuitBreakerTestCase extends LaravelTestCase
      *
      * @return Store
      */
-    protected function makeStoreWithService(string $driver = null, array $options = []): Store
+    protected function makeStoreWithService(string|null $driver = null, array $options = []): Store
     {
         $service = $this->getFaker()->unique()->words(3, true);
 
@@ -131,7 +131,7 @@ abstract class CircuitBreakerTestCase extends LaravelTestCase
      *
      * @return Store
      */
-    protected function makeStore(string $service, string $driver = null, array $options = []): Store
+    protected function makeStore(string|null $service, string $driver = null, array $options = []): Store
     {
         return $this->getCircuitBreakerManager()->store($service, $driver, $options);
     }
@@ -150,9 +150,9 @@ abstract class CircuitBreakerTestCase extends LaravelTestCase
      */
     protected function makeState(
         int $id,
-        ?int $previous = null,
-        $createdAt = null,
-        $expiresAt = null
+        int|null $previous = null,
+        string|DateTimeInterface|null $createdAt = null,
+        string|DateTimeInterface|null $expiresAt = null
     ): State {
         $createdAt = $createdAt ?? Date::now();
 
@@ -175,9 +175,9 @@ abstract class CircuitBreakerTestCase extends LaravelTestCase
      * @return Failure
      */
     public function makeFailure(
-        ?string $reason = null,
+        string|null $reason = null,
         array $context = [],
-        $reportedAt = null,
+        string|DateTimeInterface|null $reportedAt = null,
         int $totalFailures = 0
     ): Failure {
         $reportedAt = $reportedAt ?? Date::now();
