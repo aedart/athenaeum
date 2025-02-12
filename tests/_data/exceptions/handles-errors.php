@@ -11,4 +11,4 @@ $app = require_once 'bootstrap.php';
 
 $app->run();
 
-trigger_error('Custom PHP Error captured', E_USER_ERROR);
+trigger_error('Custom PHP Error captured', E_USER_WARNING);
