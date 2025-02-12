@@ -131,7 +131,7 @@ abstract class CircuitBreakerTestCase extends LaravelTestCase
      *
      * @return Store
      */
-    protected function makeStore(string|null $service, string $driver = null, array $options = []): Store
+    protected function makeStore(string|null $service, string|null $driver = null, array $options = []): Store
     {
         return $this->getCircuitBreakerManager()->store($service, $driver, $options);
     }
