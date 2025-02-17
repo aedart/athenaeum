@@ -6,7 +6,7 @@ use Aedart\Contracts\Utils\Random\NumericRandomizer;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Math;
-use RuntimeException;
+use ValueError;
 
 /**
  * MathTest
@@ -36,9 +36,9 @@ class MathTest extends UnitTestCase
      */
     public function failsRandomIntWhenInvalidArguments()
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(ValueError::class);
 
-        Math::randomInt(1, -1);
+        Math::randomizer()->int(1, -1);
     }
 
     /**

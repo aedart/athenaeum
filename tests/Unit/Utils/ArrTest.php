@@ -7,6 +7,8 @@ use Aedart\Contracts\Utils\Random\ArrayRandomizer;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Arr;
+use Random\Engine\Mt19937;
+use Throwable;
 
 /**
  * ArrTest
@@ -33,16 +35,20 @@ class ArrTest extends UnitTestCase
 
     /**
      * @test
+     *
+     * @throws Throwable
      */
     public function returnsSameValueWhenSeededWithStaticValue()
     {
-        $list = range('a', 'z');
+        $list = [ 'a', 'b', 'c' ];
 
         $seed = 123456;
 
-        $resultA = Arr::randomElement($list, $seed);
-        $resultB = Arr::randomElement($list, $seed);
-        $resultC = Arr::randomElement($list, $seed);
+        $randomizer = Arr::randomizer(new Mt19937($seed));
+
+        $resultA = $randomizer->value($list);
+        $resultB = $randomizer->value($list);
+        $resultC = $randomizer->value($list);
 
         ConsoleDebugger::output($resultA, $resultB, $resultC);
 
