@@ -19,7 +19,15 @@ You need PHP `v8.3` or higher to run Athenaeum packages.
 
 Please read Laravel's [upgrade guide](https://laravel.com/docs/12.x/upgrade), before continuing here.
 
-...TODO
+### Removed `Arr::randomElement()`
+
+`\Aedart\Utils\Arr::randomElement()` was deprecated in `v8.x`. It has been replaced
+by `\Aedart\Utils\Arr::randomizer()->value()`.
+
+### Removed `Math::randomInt()`
+
+`\Aedart\Utils\Math::randomInt()` was deprecated in `v8.x`. It has been replaced
+by `\Aedart\Utils\Math::randomizer()->int()`.
 
 ## Onward
 
