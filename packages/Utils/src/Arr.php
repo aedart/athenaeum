@@ -31,31 +31,6 @@ class Arr extends ArrBase
     }
 
     /**
-     * @deprecated Since v8.0 - Use \Aedart\Utils\Arr::randomizer()->value() instead.
-     *
-     * Returns a single random element from given list
-     *
-     * @see \Aedart\Utils\Math::applySeed
-     *
-     * @param array $list
-     * @param int|null $seed [optional] Number to seed the random generator.
-     * @param int $mode [optional] The seeding algorithm to use
-     *
-     * @return mixed
-     */
-    public static function randomElement(array $list, int|null $seed = null, int $mode = MT_RAND_MT19937): mixed
-    {
-        // Seed generator if required
-        if (isset($seed)) {
-            Math::applySeed($seed, $mode);
-        }
-
-        $index = array_rand($list, 1);
-
-        return $list[$index];
-    }
-
-    /**
      * Computes the difference of multidimensional arrays
      *
      * @param array $array The array to compare from
