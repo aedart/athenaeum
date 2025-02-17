@@ -25,7 +25,7 @@
         "aedart/athenaeum-http-messages": "^8.21",
         "aedart/athenaeum-support": "^8.21",
         "guzzlehttp/guzzle": "^7.9.2",
-        "illuminate/pipeline": "^v11.42.0",
+        "illuminate/pipeline": "^v11.42.1",
         "psr/http-client": "^1.0.3",
         "psr/http-factory": "^1.1.0",
         "psr/http-message": "^1.1",
