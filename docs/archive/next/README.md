@@ -34,7 +34,10 @@ These are the highlights of the latest major version of Athenaeum.
 PHP version `v8.3` is now the minimum required version for Athenaeum.
 [Laravel `v12.x`](https://laravel.com/docs/12.x/releases) packages are now used.
 
+### Deprecated "Aware-of" Properties
 
+The ["aware-of" properties](support/properties/available-helpers.md) have been deprecated. These have served their purpose in the past, but are now no longer
+relevant. The components will be removed in the next major version. There are no plans to offer any alternatives.
 
 ## Changelog
 
