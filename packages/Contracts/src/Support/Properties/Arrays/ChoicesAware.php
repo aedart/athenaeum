@@ -3,6 +3,8 @@
 namespace Aedart\Contracts\Support\Properties\Arrays;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Choices Aware
  *
  * Component is aware of array "choices"

@@ -3,6 +3,8 @@
 namespace Aedart\Contracts\Support\Properties\Floats;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Discount Aware
  *
  * Component is aware of float "discount"

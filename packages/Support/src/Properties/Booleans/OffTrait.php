@@ -3,6 +3,8 @@
 namespace Aedart\Support\Properties\Booleans;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Off Trait
  *
  * @see \Aedart\Contracts\Support\Properties\Booleans\OffAware

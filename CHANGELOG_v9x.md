@@ -37,3 +37,9 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 * `\Aedart\Auth\Fortify\Events\PasswordWasRehashed` (_was deprecated in Athenaeum `v8.x`_). [#182](https://github.com/aedart/athenaeum/issues/182).
 * `\Aedart\Utils\Arr::randomElement()` (_was deprecated in Athenaeum `v8.x`_). Replaced by `\Aedart\Utils\Arr::randomizer()->value()`.
 * `\Aedart\Utils\Math::randomInt()` (_was deprecated in Athenaeum `v8.x`_). Replaced by `\Aedart\Utils\Math::randomizer()->int()`.
+
+### Deprecated
+
+* All "aware-of" components defined in `Aedart\Contracts\Support\Properties` and `Aedart\Support\Properties`. These will be removed in the next major version.
+* `properties.php` (_aware-of generator configuration file, in the root of Athenaeum_). Will be removed it the next major version.
+* `resources/athenaeum` templates (_for aware-of components_), in `Support` package. These will be removed it the next major version. 

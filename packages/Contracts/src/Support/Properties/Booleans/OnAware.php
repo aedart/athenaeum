@@ -3,6 +3,8 @@
 namespace Aedart\Contracts\Support\Properties\Booleans;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * On Aware
  *
  * Component is aware of bool "on"

@@ -3,6 +3,8 @@
 namespace Aedart\Support\Properties\Strings;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Currency Trait
  *
  * @see \Aedart\Contracts\Support\Properties\Strings\CurrencyAware

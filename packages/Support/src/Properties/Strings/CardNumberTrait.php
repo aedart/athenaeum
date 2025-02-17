@@ -3,6 +3,8 @@
 namespace Aedart\Support\Properties\Strings;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Card number Trait
  *
  * @see \Aedart\Contracts\Support\Properties\Strings\CardNumberAware

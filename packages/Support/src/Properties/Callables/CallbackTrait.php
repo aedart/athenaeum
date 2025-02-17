@@ -3,6 +3,8 @@
 namespace Aedart\Support\Properties\Callables;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Callback Trait
  *
  * @see \Aedart\Contracts\Support\Properties\Callables\CallbackAware

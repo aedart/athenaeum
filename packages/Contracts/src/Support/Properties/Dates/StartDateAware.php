@@ -3,6 +3,8 @@
 namespace Aedart\Contracts\Support\Properties\Dates;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Start date Aware
  *
  * Component is aware of \DateTimeInterface "start date"
