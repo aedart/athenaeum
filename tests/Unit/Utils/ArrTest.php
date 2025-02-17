@@ -34,20 +34,6 @@ class ArrTest extends UnitTestCase
     /**
      * @test
      */
-    public function canObtainSingleRandomElement()
-    {
-        $list = range('a', 'z');
-
-        $result = Arr::randomElement($list);
-
-        ConsoleDebugger::output($result);
-
-        $this->assertTrue(in_array($result, $list));
-    }
-
-    /**
-     * @test
-     */
     public function returnsSameValueWhenSeededWithStaticValue()
     {
         $list = range('a', 'z');

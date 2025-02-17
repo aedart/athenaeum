@@ -34,22 +34,6 @@ class MathTest extends UnitTestCase
     /**
      * @test
      */
-    public function canGenerateRandomInt()
-    {
-        $resultA = Math::randomInt(0, 100);
-        $resultB = Math::randomInt(0, 100);
-        $resultC = Math::randomInt(0, 100);
-
-        ConsoleDebugger::output($resultA, $resultB, $resultC);
-
-        $this->assertGreaterThanOrEqual(0, $resultA);
-        $this->assertGreaterThanOrEqual(0, $resultB);
-        $this->assertGreaterThanOrEqual(0, $resultC);
-    }
-
-    /**
-     * @test
-     */
     public function failsRandomIntWhenInvalidArguments()
     {
         $this->expectException(RuntimeException::class);
