@@ -5,6 +5,12 @@ sidebarDepth: 0
 
 # Available Aware-of Helpers
 
+::: danger Deprecated
+All the "aware-of" properties listed here have been deprecated from `v9.x`.
+They will be removed in the next major version.
+Please consider creating your own "aware-of" components, instead of relying on these.
+:::
+
 The following list are the available Aware-of helpers.
 
 [[TOC]]
