@@ -145,7 +145,7 @@ trait ApplicationInitiator
      */
     public function getConfigPath(): string
     {
-        return $this->getBasePath() . '/config';
+        return $this->getApplicationBasePath() . '/config';
     }
 
     /*****************************************************************
@@ -252,7 +252,7 @@ trait ApplicationInitiator
      */
     protected function resolveApplication()
     {
-        return tap(new Application($this->getBasePath()), function ($app) {
+        return tap(new Application($this->getApplicationBasePath()), function ($app) {
             $app->bind(
                 'Illuminate\Foundation\Bootstrap\LoadConfiguration',
                 $this->resolveConfigurationLoaderBinding()
