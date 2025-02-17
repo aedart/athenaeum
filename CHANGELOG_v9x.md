@@ -34,5 +34,5 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 
 * `\Aedart\Auth\Fortify\Actions\RehashPasswordIfNeeded` (_was deprecated in Athenaeum `v8.x`_). [#182](https://github.com/aedart/athenaeum/issues/182).
 * `\Aedart\Auth\Fortify\Events\PasswordWasRehashed` (_was deprecated in Athenaeum `v8.x`_). [#182](https://github.com/aedart/athenaeum/issues/182).
-* `\Aedart\Utils\Arr::randomElement()` (_was deprecated in Athenaeum `v8.x`_)
-* `\Aedart\Utils\Math::randomInt()` (_was deprecated in Athenaeum `v8.x`_)
+* `\Aedart\Utils\Arr::randomElement()` (_was deprecated in Athenaeum `v8.x`_). Replaced by `\Aedart\Utils\Arr::randomizer()->value()`.
+* `\Aedart\Utils\Math::randomInt()` (_was deprecated in Athenaeum `v8.x`_). Replaced by `\Aedart\Utils\Math::randomizer()->int()`.
