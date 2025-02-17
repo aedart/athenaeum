@@ -24,6 +24,7 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 * Now using native `json_validate()`, in `\Aedart\Utils\Json::isValid`. [#120](https://github.com/aedart/athenaeum/issues/120).
 * "Split Packages" GitHub workflow no longer triggered in pull requests.
 * Class constants now have [types](https://php.watch/versions/8.3/typed-constants) declared.
+* `\Aedart\Console\Commands\PirateTalkCommand` now uses `\Aedart\Utils\Arr::randomizer()->value()` to pick random sentence.
 
 ### Fixed
 
