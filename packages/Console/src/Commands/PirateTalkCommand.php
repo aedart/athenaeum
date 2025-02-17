@@ -4,6 +4,7 @@ namespace Aedart\Console\Commands;
 
 use Aedart\Utils\Arr;
 use Illuminate\Console\Command;
+use Throwable;
 
 /**
  * Pirate Talk Command
@@ -33,6 +34,8 @@ class PirateTalkCommand extends Command
      * Execute this command
      *
      * @return int
+     *
+     * @throws Throwable
      */
     public function handle(): int
     {
@@ -63,7 +66,7 @@ class PirateTalkCommand extends Command
         ];
 
         // Say something, you pirate!
-        $this->output->text(Arr::randomElement($sentences));
+        $this->output->text(Arr::randomizer()->value($sentences));
 
         return 0;
     }
