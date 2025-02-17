@@ -41,3 +41,5 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 ### Deprecated
 
 * All "aware-of" components defined in `Aedart\Contracts\Support\Properties` and `Aedart\Support\Properties`. These will be removed in the next major version.
+* `properties.php` (_aware-of generator configuration file, in the root of Athenaeum_). Will be removed it the next major version.
+* `resources/athenaeum` templates (_for aware-of components_), in `Support` package. These will be removed it the next major version. 
