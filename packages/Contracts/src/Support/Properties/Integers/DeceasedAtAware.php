@@ -3,6 +3,8 @@
 namespace Aedart\Contracts\Support\Properties\Integers;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Deceased at Aware
  *
  * Component is aware of int "deceased at"

@@ -3,6 +3,8 @@
 namespace Aedart\Support\Properties\Integers;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Index Trait
  *
  * @see \Aedart\Contracts\Support\Properties\Integers\IndexAware

@@ -3,6 +3,8 @@
 namespace Aedart\Contracts\Support\Properties\Strings;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Production date Aware
  *
  * Component is aware of string "production date"

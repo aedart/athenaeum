@@ -3,6 +3,8 @@
 namespace Aedart\Contracts\Support\Properties\Mixes;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Value Aware
  *
  * Component is aware of mixed "value"
