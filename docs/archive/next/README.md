@@ -34,6 +34,11 @@ These are the highlights of the latest major version of Athenaeum.
 PHP version `v8.3` is now the minimum required version for Athenaeum.
 [Laravel `v12.x`](https://laravel.com/docs/12.x/releases) packages are now used.
 
+### TOML version 1.0.0 Supported
+
+The [configuration loader](./config/README.md) now supports [toml](https://github.com/toml-lang/toml) version `1.0.0` format.
+Please see the [upgrade guide](./upgrade-guide.md) for details.
+
 ### Deprecated "Aware-of" Properties
 
 The ["aware-of" properties](support/properties/available-helpers.md) have been deprecated. These have served their purpose in the past, but are now no longer
