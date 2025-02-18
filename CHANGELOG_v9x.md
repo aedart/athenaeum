@@ -18,6 +18,7 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 * Minimum required PHP version changed to `v8.3`.
 * Adapted CI environment to test PHP `v8.3` and `v8.4`.
 * Upgraded to use PHPStan `v2.x` [#200](https://github.com/aedart/athenaeum/issues/200).
+* Replaced `yosymfony/toml` with `devium/toml` as supported toml parser (_affected component `\Aedart\Config\Parsers\Files\Toml`_). [#213](https://github.com/aedart/athenaeum/issues/213).
 
 **Non-breaking Changes**
 
