@@ -99,12 +99,12 @@ interface Attachment extends Populatable,
      *
      * @return self
      */
-    public function filename(?string $name = null): static;
+    public function filename(string|null $name = null): static;
 
     /**
      * Get the attachment's filename to be used by a request
      *
      * @return string|null
      */
-    public function getFilename(): ?string;
+    public function getFilename(): string|null;
 }

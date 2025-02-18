@@ -109,7 +109,7 @@ class ExpectationNotMet extends RuntimeException implements ExpectationNotMetExc
     /**
      * @inheritDoc
      */
-    public function getRequest(): ?RequestInterface
+    public function getRequest(): RequestInterface|null
     {
         return $this->getExpectation()->request();
     }

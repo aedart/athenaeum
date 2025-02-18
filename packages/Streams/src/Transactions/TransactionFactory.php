@@ -46,7 +46,7 @@ class TransactionFactory implements Factory
     /**
      * @inheritDoc
      */
-    public function create(Stream $stream, ?string $profile = null, array $options = []): Transaction
+    public function create(Stream $stream, string|null $profile = null, array $options = []): Transaction
     {
         $profile = $profile ?? $this->defaultProfile;
 

@@ -400,7 +400,7 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function readLine(?int $length = null): string|false
+    public function readLine(int|null $length = null): string|false
     {
         $msg = 'Unable to read line';
         $this

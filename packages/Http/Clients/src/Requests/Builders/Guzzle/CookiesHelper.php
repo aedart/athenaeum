@@ -363,7 +363,7 @@ class CookiesHelper
      *
      * @return int|null Null if no date is given
      */
-    protected function rfcDateToTimestamp(?string $date = null): ?int
+    protected function rfcDateToTimestamp(string|null $date = null): int|null
     {
         if (!isset($date)) {
             return null;

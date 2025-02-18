@@ -56,5 +56,5 @@ interface ExpectationNotMetException extends Throwable
      *
      * @return RequestInterface|null
      */
-    public function getRequest(): ?RequestInterface;
+    public function getRequest(): RequestInterface|null;
 }

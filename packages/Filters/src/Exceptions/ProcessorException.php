@@ -50,7 +50,7 @@ class ProcessorException extends RuntimeException implements ProcessorExceptionI
     /**
      * @inheritDoc
      */
-    public function processor(): ?Processor
+    public function processor(): Processor|null
     {
         return $this->processor;
     }

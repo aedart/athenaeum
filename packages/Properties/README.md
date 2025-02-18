@@ -18,7 +18,7 @@ class Person
 {
     use Overload;
     
-    protected ?string $name = null;
+    protected string|null $name = null;
     
     public function getName() : string
     {

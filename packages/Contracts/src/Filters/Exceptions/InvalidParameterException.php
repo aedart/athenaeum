@@ -53,5 +53,5 @@ interface InvalidParameterException extends ProcessorException
      *
      * @return string|null
      */
-    public function parameter(): ?string;
+    public function parameter(): string|null;
 }

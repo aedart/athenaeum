@@ -52,7 +52,7 @@ class Detector implements DetectorInterface
     /**
      * @inheritDoc
      */
-    public function detect($data, ?string $profile = null, array $options = []): MimeTypeInterface
+    public function detect($data, string|null $profile = null, array $options = []): MimeTypeInterface
     {
         $sampler = $this->makeSampler($data, $profile, $options);
 
@@ -68,7 +68,7 @@ class Detector implements DetectorInterface
     /**
      * @inheritDoc
      */
-    public function detectForFile(string $file, ?string $profile = null, array $options = []): MimeTypeInterface
+    public function detectForFile(string $file, string|null $profile = null, array $options = []): MimeTypeInterface
     {
         if (!is_file($file)) {
             throw new FileNotFound(sprintf('File %s does not exist.', $file));
@@ -88,7 +88,7 @@ class Detector implements DetectorInterface
     /**
      * @inheritDoc
      */
-    public function makeSampler($data, ?string $profile = null, array $options = []): Sampler
+    public function makeSampler($data, string|null $profile = null, array $options = []): Sampler
     {
         $profile = $profile ?? $this->defaultProfile;
 

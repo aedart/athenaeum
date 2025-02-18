@@ -46,7 +46,7 @@ class Attachment implements AttachmentInterface
      *
      * @var string|null
      */
-    protected ?string $filename = null;
+    protected string|null $filename = null;
 
     /**
      * Attachment constructor.
@@ -153,7 +153,7 @@ class Attachment implements AttachmentInterface
     /**
      * @inheritDoc
      */
-    public function filename(?string $name = null): static
+    public function filename(string|null $name = null): static
     {
         $this->filename = $name;
 
@@ -163,7 +163,7 @@ class Attachment implements AttachmentInterface
     /**
      * @inheritDoc
      */
-    public function getFilename(): ?string
+    public function getFilename(): string|null
     {
         return $this->filename;
     }

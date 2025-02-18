@@ -16,8 +16,8 @@ class UTCDatetimeFilter extends DatetimeFilter
      * @inheritDoc
      */
     public function __construct(
-        ?string $field = null,
-        ?string $operator = null,
+        string|null $field = null,
+        string|null $operator = null,
         mixed $value = null,
         string $logical = FieldCriteria::AND
     ) {

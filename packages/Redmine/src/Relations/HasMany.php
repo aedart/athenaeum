@@ -27,7 +27,7 @@ class HasMany extends ResourceRelation
      *
      * @var string|null
      */
-    protected ?string $filterKey = null;
+    protected string|null $filterKey = null;
 
     /**
      * The parent resource's primary key value

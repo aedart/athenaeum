@@ -228,7 +228,7 @@ class ODataGrammar extends BaseGrammar
      *
      * Not supported
      */
-    protected function compilePageNumber(?int $number = null): string
+    protected function compilePageNumber(int|null $number = null): string
     {
         return '';
     }
@@ -238,7 +238,7 @@ class ODataGrammar extends BaseGrammar
      *
      * Not supported
      */
-    protected function compilePageSize(?int $amount = null): string
+    protected function compilePageSize(int|null $amount = null): string
     {
         return '';
     }
