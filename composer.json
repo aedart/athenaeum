@@ -62,7 +62,7 @@
         "symfony/var-dumper": "^v7.2.3",
         "symfony/yaml": "^v7.2.3",
         "twig/twig": "^3.20.0",
-        "yosymfony/toml": "^1.0.4"
+        "devium/toml": "^1.0.5"
     },
     "autoload": {
         "files": [

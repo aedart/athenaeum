@@ -32,7 +32,7 @@
     "require-dev": {
         "nette/neon": "^3.4.4",
         "symfony/yaml": "^v7.2.3",
-        "yosymfony/toml": "^1.0.4"
+        "devium/toml": "^1.0.5"
     },
     "autoload": {
         "psr-4": {
