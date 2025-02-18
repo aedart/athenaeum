@@ -112,7 +112,7 @@ class Builder implements
             ->setContainer($container)
             ->resolveGrammar($grammar);
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -427,7 +427,7 @@ class Builder implements
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             self::SELECTS => $this->selects,

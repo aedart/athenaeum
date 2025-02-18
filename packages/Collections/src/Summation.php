@@ -227,7 +227,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return array_map(function ($value) {
             return $value instanceof Arrayable ? $value->toArray() : $value;

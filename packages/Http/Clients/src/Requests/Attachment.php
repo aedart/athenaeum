@@ -171,7 +171,7 @@ class Attachment implements AttachmentInterface
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'name' => $this->getName(),

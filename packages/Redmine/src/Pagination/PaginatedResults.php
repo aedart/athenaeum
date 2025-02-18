@@ -90,7 +90,7 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'results' => $this->results()->toArray(),

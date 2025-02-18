@@ -18,7 +18,7 @@ class ResponseSerializer extends BaseSerializer implements ResponseSerializerInt
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         $response = $this->getHttpResponse();
 

@@ -58,7 +58,7 @@ class PendingAttachment implements Arrayable
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'token' => $this->attachment->token,

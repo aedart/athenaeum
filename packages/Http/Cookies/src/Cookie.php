@@ -93,7 +93,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'name' => $this->getName(),

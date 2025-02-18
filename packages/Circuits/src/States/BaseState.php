@@ -114,7 +114,7 @@ abstract class BaseState implements State
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'id' => $this->id(),

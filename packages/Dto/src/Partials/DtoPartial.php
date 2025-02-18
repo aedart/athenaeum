@@ -83,7 +83,7 @@ trait DtoPartial
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $properties = $this->populatableProperties();
         $output = [];

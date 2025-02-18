@@ -92,7 +92,7 @@ class CircuitBreakerFailure implements Failure
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'reason' => $this->reason(),
