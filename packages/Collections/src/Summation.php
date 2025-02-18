@@ -237,7 +237,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function toJson($options = 0)
+    public function toJson($options = 0): string
     {
         return Json::encode($this->jsonSerialize(), $options);
     }
