@@ -85,8 +85,7 @@ class CacheStore extends BaseStore implements
     {
         parent::__construct($service, $options);
 
-        $this
-            ->prepareKeys();
+        $this->prepareKeys();
     }
 
     /**
