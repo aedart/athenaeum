@@ -3,8 +3,8 @@
 namespace Aedart\Config\Parsers\Files;
 
 use Aedart\Config\Parsers\Exceptions\UnableToParseFile;
-use Throwable;
 use Devium\Toml\Toml as TomlParser;
+use Throwable;
 
 /**
  * Toml (Tom's Obvious, Minimal Language) Configuration File Parser
