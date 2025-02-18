@@ -20,6 +20,7 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 * Upgraded to use PHPStan `v2.x` [#200](https://github.com/aedart/athenaeum/issues/200).
 * Replaced `yosymfony/toml` with `devium/toml` as supported toml parser (_affected component `\Aedart\Config\Parsers\Files\Toml`_). [#213](https://github.com/aedart/athenaeum/issues/213).
 * `array` return type for various implementation of Laravel's `toArray()` method (_inherited from `\Illuminate\Contracts\Support\Arrayable`_).
+* `string` return type for various implementation of Laravel's `toJson()` method (_inherited from `\Illuminate\Contracts\Support\Jsonable`_).
 
 **Non-breaking Changes**
 
