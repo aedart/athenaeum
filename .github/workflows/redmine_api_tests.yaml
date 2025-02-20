@@ -62,7 +62,7 @@ jobs:
                     repository: 'redmine/redmine'
                     version: ${{ matrix.redmine-versions }}
                     database: 'sqlite3'
-                    ruby-version: '3.2'
+                    ruby-version: '3.1'
                     path: '${{ github.workspace }}/redmine'
 
             # TODO: ... enable Rest API for Redmine
