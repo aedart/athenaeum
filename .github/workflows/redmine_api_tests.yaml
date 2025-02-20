@@ -128,6 +128,6 @@ jobs:
                 # @see https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsenv
                 env:
                     REDMINE_LIVE_TEST: true
-                    REDMINE_API_URI: ${{ steps.api-url-var.outputs.REDMINE_URL }}
+                    REDMINE_API_URI: ${{ env.REDMINE_URL }}
                     REDMINE_TOKEN: ${{ env.REDMINE_API_KEY }}
                 run: vendor/bin/codecept run -g redmine --debug
