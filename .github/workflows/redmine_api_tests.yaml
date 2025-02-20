@@ -144,6 +144,6 @@ jobs:
                 if: ${{ failure() }}
                 with:
                     name: "redmine_${{ matrix.redmine-versions }}_php_${{ matrix.php-versions }}_logs"
-                    path: ${{ REDMINE_INSTALL_PATH }}/logs/
+                    path: ${{ env.REDMINE_INSTALL_PATH }}/logs/
                     if-no-files-found: ignore
                     retention-days: 10
