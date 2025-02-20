@@ -17,9 +17,10 @@ env:
     REDMINE_USER: 'admin'
     REDMINE_PASSWORD: 'admin'
 
-    # Host and port for Redmine instance
+    # Host, port and URL for Redmine instance
     REDMINE_HOST: 'localhost'
     REDMINE_PORT: 3000
+    REDMINE_URL: 'http://${{ env.REDMINE_HOST }}:${{ env.REDMINE_PORT }}'
 
 jobs:
     redmine_api_tests:
@@ -99,7 +100,7 @@ jobs:
                     nohup bundle exec rails server -e production -b ${{ env.REDMINE_HOST }} -p ${{ env.REDMINE_PORT }} &
 
             -   name: "Check if Redmine is running"
-                run: curl --silent --show-error --head http://${{ env.REDMINE_HOST }}:${{ env.REDMINE_PORT }}
+                run: curl --silent --show-error --head ${{ env.REDMINE_URL }}
 
             # TODO: ...API Token?
             # TODO: ...environment variables for .testing?
