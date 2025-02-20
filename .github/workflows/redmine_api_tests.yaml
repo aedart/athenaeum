@@ -20,7 +20,7 @@ env:
     # Host, port and URL for Redmine instance
     REDMINE_HOST: 'localhost'
     REDMINE_PORT: 3000
-    # REDMINE_URL: 'http://${{ env.REDMINE_HOST }}:${{ env.REDMINE_PORT }}' # $REDMINE_PORT var generated later...
+    # REDMINE_URL: 'http://${{ env.REDMINE_HOST }}:${{ env.REDMINE_PORT }}' # Generated later...
 
     # API Key (for testing only)
     REDMINE_API_KEY: '${{ github.sha }}'
@@ -80,17 +80,16 @@ jobs:
                     cd ${{ env.REDMINE_INSTALL_PATH }}
                     nohup bundle exec rails server -e production -b ${{ env.REDMINE_HOST }} -p ${{ env.REDMINE_PORT }} &
 
-            -   name: "Set URL variable"
-                id: api-url-var
+            -   name: "Set Redmine URL variable"
                 run: |
                     echo "REDMINE_URL=http://${{ env.REDMINE_HOST }}:${{ env.REDMINE_PORT }}" >> $GITHUB_ENV
 
             -   name: "Check if Redmine is running"
-                run: curl --silent --show-error --head $REDMINE_URL
+                run: curl --silent --show-error --head ${{ env.REDMINE_URL }}
 
             -   name: "Check if API is responding"
                 run: |
-                    curl -H "X-Redmine-API-Key: ${{ env.REDMINE_API_KEY }}" --silent --show-error --head $REDMINE_URL/issues.json
+                    curl -H "X-Redmine-API-Key: ${{ env.REDMINE_API_KEY }}" --silent --show-error --head ${{ env.REDMINE_URL }}/issues.json
 
             # ------------------------------------------------------------------------------------------------------- #
             # Setup & configure PHP
