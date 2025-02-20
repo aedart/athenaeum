@@ -43,32 +43,6 @@ jobs:
 
         steps:
 
-            #            # ------------------------------------------------------------------------------------------------------- #
-            #            # Checkout code ...
-            #            # ------------------------------------------------------------------------------------------------------- #
-            #
-            #            -   name: "Checkout"
-            #                uses: actions/checkout@v4
-            #
-            #            # ------------------------------------------------------------------------------------------------------- #
-            #            # Setup & configure PHP
-            #            # ------------------------------------------------------------------------------------------------------- #
-            #
-            #            -   name: "Setup PHP"
-            #                uses: shivammathur/setup-php@v2
-            #                with:
-            #                    php-version: ${{ matrix.php-versions }}
-            #
-            #                    # PHP Extensions are based on those that Laravel also uses.args:
-            #                    # @see https://github.com/laravel/framework/blob/11.x/.github/workflows/tests.yml
-            #                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, redis-phpredis/phpredis@5.3.7, igbinary, msgpack, lzf, zstd, lz4, memcached, gmp
-            #                    ini-values: error_reporting=E_ALL
-            #                    tools: composer:v2
-            #                    coverage: none
-            #
-            #            -   name: "Install dependencies"
-            #                run: composer install --no-progress --prefer-dist --no-interaction --optimize-autoloader --ansi
-
             # ------------------------------------------------------------------------------------------------------- #
             # Setup & configure Redmine
             # ------------------------------------------------------------------------------------------------------- #
@@ -82,8 +56,8 @@ jobs:
                     ruby-version: '3.1'
                     path: "${{ env.REDMINE_INSTALL_PATH }}"
 
-#            -   name: "Debug: output redmine config dir"
-#                run: ls ${{ env.REDMINE_INSTALL_PATH }}/config
+            #            -   name: "Debug: output redmine config dir"
+            #                run: ls ${{ env.REDMINE_INSTALL_PATH }}/config
 
             -   name: "Enable REST Api"
                 uses: rmeneely/update-yaml@v1
@@ -97,10 +71,8 @@ jobs:
                     infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
                     varlist: 'sys_api_key.default=${{ env.REDMINE_API_KEY }}'
 
-            -   name: "Debug: settings.xml"
-                run: cat ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
-
-            # TODO: ... create user
+            #            -   name: "Debug: settings.xml"
+            #                run: cat ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
 
             # @see https://guides.rubyonrails.org/command_line.html#bin-rails-server
             -   name: "Start Redmine"
@@ -119,13 +91,42 @@ jobs:
                 run: |
                     curl -H "X-Redmine-API-Key: ${{ env.REDMINE_API_KEY }}" --silent --show-error --head $REDMINE_URL/issues.json
 
+            # ------------------------------------------------------------------------------------------------------- #
+            # Setup & configure PHP
+            # ------------------------------------------------------------------------------------------------------- #
 
-            # TODO: ...API Token?
-            # TODO: ...environment variables for .testing?
+            -   name: "Checkout Athenaeum"
+                uses: actions/checkout@v4
 
+            -   name: "Setup PHP"
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php-versions }}
+
+                    # PHP Extensions are based on those that Laravel also uses.args:
+                    # @see https://github.com/laravel/framework/blob/11.x/.github/workflows/tests.yml
+                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, redis-phpredis/phpredis@5.3.7, igbinary, msgpack, lzf, zstd, lz4, memcached, gmp
+                    ini-values: error_reporting=E_ALL
+                    tools: composer:v2
+                    coverage: none
+
+            -   name: "Install dependencies"
+                run: composer install --no-progress --prefer-dist --no-interaction --optimize-autoloader --ansi
 
             # ------------------------------------------------------------------------------------------------------- #
             # Run API Tests
             # ------------------------------------------------------------------------------------------------------- #
 
-            # TODO: ...
+            -   name: "Prepare test environment"
+                run: |
+                    composer run test-env --ansi
+                    vendor/bin/codecept build
+
+            -   name: "Run API tests"
+                # @see .testing.example
+                # @see https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsenv
+                env:
+                    REDMINE_LIVE_TEST: true
+                    REDMINE_API_URI: $REDMINE_URL
+                    REDMINE_TOKEN: ${{ env.REDMINE_API_KEY }}
+                run: vendor/bin/codecept run -g redmine --debug
