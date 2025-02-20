@@ -84,12 +84,6 @@ abstract class RedmineTestCase extends LaravelTestCase
 
         // Read the "live" test state from the environment file
         $this->live = env('REDMINE_LIVE_TEST', false);
-
-        ConsoleDebugger::output([
-            'env live' => env('REDMINE_LIVE_TEST'),
-            'url' => env('REDMINE_API_URI'),
-            'token' => env('REDMINE_TOKEN'),
-        ]);
     }
 
     /**
