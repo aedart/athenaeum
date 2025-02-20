@@ -19,6 +19,7 @@ use Aedart\Redmine\Role;
 use Aedart\Redmine\User;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Utils\Json;
@@ -83,6 +84,12 @@ abstract class RedmineTestCase extends LaravelTestCase
 
         // Read the "live" test state from the environment file
         $this->live = env('REDMINE_LIVE_TEST', false);
+
+        ConsoleDebugger::output([
+            'env live' => env('REDMINE_LIVE_TEST'),
+            'url' => env('REDMINE_API_URI'),
+            'token' => env('REDMINE_TOKEN'),
+        ]);
     }
 
     /**
