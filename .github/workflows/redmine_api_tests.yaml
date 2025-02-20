@@ -4,7 +4,9 @@
 
 name: 'Redmine API Tests'
 
-# TODO: When should this be triggered?
+# TODO: This should NOT run as often as everything else... perhaps a schedule?
+on:
+    push
 
 jobs:
     redmine_api_tests:
