@@ -96,7 +96,7 @@ jobs:
             -   name: "Start Redmine"
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
-                    nohup bundle exec rails server -e production -b ${{ env.REDMINE_HOST }} -p ${{ env.REDMINE_PORT }}
+                    nohup bundle exec rails server -e production -b ${{ env.REDMINE_HOST }} -p ${{ env.REDMINE_PORT }} >/dev/null 2>&1 &
 
             -   name: "Check if Redmine is running"
                 run: curl --silent --show-error --head http://${{ env.REDMINE_HOST }}:${{ env.REDMINE_PORT }}
