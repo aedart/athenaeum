@@ -123,6 +123,13 @@ jobs:
                     vendor/bin/codecept build
 
             -   name: "Run API tests"
+                # Upload evt. error logs from Redmine as an artifact
+                uses: actions/upload-artifact@v4
+                with:
+                    name: 'redmine_logs'
+                    path: ${{ REDMINE_INSTALL_PATH }}/logs/
+
+                # Ensure ENV are set...
                 # @see .testing.example
                 # @see https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsenv
                 env:
