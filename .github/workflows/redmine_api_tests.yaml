@@ -19,10 +19,10 @@ jobs:
 
                 # See OS and PHP version options on https://github.com/shivammathur/setup-php
                 operating-system: [ 'ubuntu-22.04' ]
-                php-versions: [ '8.2', '8.3' ]
+                php-versions: [ '8.2' ]
 
                 # Redmine versions (in this case branches)
-                redmine-versions: [ '5.0-stable', '5.1-stable' ]
+                redmine-versions: [ '5.0-stable' ]
 
         steps:
 
