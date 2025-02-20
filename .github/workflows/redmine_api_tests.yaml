@@ -14,13 +14,16 @@ env:
 
     # The default user for a new Redmine installation
     # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-10-Logging-into-the-application
-    REDMINE_USER: 'admin'
-    REDMINE_PASSWORD: 'admin'
+    # REDMINE_USER: 'admin' # Should not be needed
+    # REDMINE_PASSWORD: 'admin' # Should not be needed
 
     # Host, port and URL for Redmine instance
     REDMINE_HOST: 'localhost'
     REDMINE_PORT: 3000
     REDMINE_URL: 'http://${{ env.REDMINE_HOST }}:${{ env.REDMINE_PORT }}'
+
+    # API Key (for testing only)
+    REDMINE_API_KEY: '${{ github.sha }}'
 
 jobs:
     redmine_api_tests:
@@ -88,8 +91,14 @@ jobs:
                     infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
                     varlist: 'rest_api_enabled.default=1'
 
-#            -   name: "Debug: settings.xml"
-#                run: cat ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+            -   name: "Set system API key"
+                uses: rmeneely/update-yaml@v1
+                with:
+                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+                    varlist: 'sys_api_key.default=${{ env.REDMINE_API_KEY }}'
+
+            -   name: "Debug: settings.xml"
+                run: cat ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
 
             # TODO: ... create user
 
@@ -101,6 +110,10 @@ jobs:
 
             -   name: "Check if Redmine is running"
                 run: curl --silent --show-error --head ${{ env.REDMINE_URL }}
+
+            -   name: "Check if API is responding"
+                run: curl -H "X-Redmine-API-Key: ${{ env.REDMINE_API_KEY }}" --silent --show-error --head ${{ env.REDMINE_URL }}/issues.json
+
 
             # TODO: ...API Token?
             # TODO: ...environment variables for .testing?
