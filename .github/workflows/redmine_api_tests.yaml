@@ -81,6 +81,7 @@ jobs:
                     nohup bundle exec rails server -e production -b ${{ env.REDMINE_HOST }} -p ${{ env.REDMINE_PORT }} &
 
             -   name: "Set URL variable"
+                id: api-url-var
                 run: |
                     echo "REDMINE_URL=http://${{ env.REDMINE_HOST }}:${{ env.REDMINE_PORT }}" >> $GITHUB_ENV
 
@@ -113,20 +114,6 @@ jobs:
             -   name: "Install dependencies"
                 run: composer install --no-progress --prefer-dist --no-interaction --optimize-autoloader --ansi
 
-#            # Ideally, we should just be able to "export" environment variables to the bash,
-#            # but it does not seem to work as intended. Also attempted to use workflow step's "env:", but that
-#            # also seems to not work.
-#            # @see .testing.example
-#            # @see https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsenv
-#            -   name: "Update .testing environment file"
-#                env:
-#                    ENV_FILE: '.testing'
-#                run: |
-#                    sed -i 's@REDMINE_LIVE_TEST=false@REDMINE_LIVE_TEST=true@g' ${{ env.ENV_FILE }}
-#                    sed -i 's@REDMINE_API_URI=https://your-redmine-url.com/@REDMINE_API_URI=$REDMINE_URL/@g' ${{ env.ENV_FILE }}
-#                    sed -i 's@REDMINE_TOKEN=your-redmine-api-token@REDMINE_TOKEN=${{ env.REDMINE_API_KEY }}@g' ${{ env.ENV_FILE }}
-#                    cat .testing
-
             # ------------------------------------------------------------------------------------------------------- #
             # Run API Tests
             # ------------------------------------------------------------------------------------------------------- #
@@ -141,6 +128,6 @@ jobs:
                 # @see https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsenv
                 env:
                     REDMINE_LIVE_TEST: true
-                    REDMINE_API_URI: '$REDMINE_URL'
+                    REDMINE_API_URI: ${{ steps.api-url-var.outputs.REDMINE_URL }}
                     REDMINE_TOKEN: ${{ env.REDMINE_API_KEY }}
                 run: vendor/bin/codecept run -g redmine --debug
