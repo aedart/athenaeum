@@ -56,8 +56,12 @@ jobs:
                     ruby-version: '3.1'
                     path: "${{ env.REDMINE_INSTALL_PATH }}"
 
-            #            -   name: "Debug: output redmine config dir"
-            #                run: ls ${{ env.REDMINE_INSTALL_PATH }}/config
+            # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-8-File-system-permissions
+            -   name: "Set file permissions"
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    mkdir -p tmp tmp/pdf public/assets public/plugin_assets
+                    chmod -R 755 log files tmp public/assets public/plugin_assets
 
             -   name: "Enable REST Api"
                 uses: rmeneely/update-yaml@v1
