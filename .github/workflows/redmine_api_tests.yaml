@@ -8,6 +8,10 @@ name: 'Redmine API Tests'
 on:
     push
 
+env:
+    # Location where Redmine instance must be installed
+    REDMINE_INSTALL_PATH: '${{ github.workspace }}/redmine'
+
 jobs:
     redmine_api_tests:
         name: "Redmine ${{ matrix.redmine-versions }} API Tests (using PHP ${{ matrix.php-versions }})"
@@ -26,31 +30,31 @@ jobs:
 
         steps:
 
-#            # ------------------------------------------------------------------------------------------------------- #
-#            # Checkout code ...
-#            # ------------------------------------------------------------------------------------------------------- #
-#
-#            -   name: "Checkout"
-#                uses: actions/checkout@v4
-#
-#            # ------------------------------------------------------------------------------------------------------- #
-#            # Setup & configure PHP
-#            # ------------------------------------------------------------------------------------------------------- #
-#
-#            -   name: "Setup PHP"
-#                uses: shivammathur/setup-php@v2
-#                with:
-#                    php-version: ${{ matrix.php-versions }}
-#
-#                    # PHP Extensions are based on those that Laravel also uses.args:
-#                    # @see https://github.com/laravel/framework/blob/11.x/.github/workflows/tests.yml
-#                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, redis-phpredis/phpredis@5.3.7, igbinary, msgpack, lzf, zstd, lz4, memcached, gmp
-#                    ini-values: error_reporting=E_ALL
-#                    tools: composer:v2
-#                    coverage: none
-#
-#            -   name: "Install dependencies"
-#                run: composer install --no-progress --prefer-dist --no-interaction --optimize-autoloader --ansi
+            #            # ------------------------------------------------------------------------------------------------------- #
+            #            # Checkout code ...
+            #            # ------------------------------------------------------------------------------------------------------- #
+            #
+            #            -   name: "Checkout"
+            #                uses: actions/checkout@v4
+            #
+            #            # ------------------------------------------------------------------------------------------------------- #
+            #            # Setup & configure PHP
+            #            # ------------------------------------------------------------------------------------------------------- #
+            #
+            #            -   name: "Setup PHP"
+            #                uses: shivammathur/setup-php@v2
+            #                with:
+            #                    php-version: ${{ matrix.php-versions }}
+            #
+            #                    # PHP Extensions are based on those that Laravel also uses.args:
+            #                    # @see https://github.com/laravel/framework/blob/11.x/.github/workflows/tests.yml
+            #                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, redis-phpredis/phpredis@5.3.7, igbinary, msgpack, lzf, zstd, lz4, memcached, gmp
+            #                    ini-values: error_reporting=E_ALL
+            #                    tools: composer:v2
+            #                    coverage: none
+            #
+            #            -   name: "Install dependencies"
+            #                run: composer install --no-progress --prefer-dist --no-interaction --optimize-autoloader --ansi
 
             # ------------------------------------------------------------------------------------------------------- #
             # Setup & configure Redmine
@@ -63,9 +67,16 @@ jobs:
                     version: ${{ matrix.redmine-versions }}
                     database: 'sqlite3'
                     ruby-version: '3.1'
-                    path: '${{ github.workspace }}/redmine'
+                    path: "${{ env.REDMINE_INSTALL_PATH }}"
 
-            # TODO: ... enable Rest API for Redmine
+            -   name: "Enable REST Api"
+                uses: mikefarah/yq@master
+                with:
+                    cmd: yq -i '.rest_api_enabled.default = 1' ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+
+            -   name: "Debug: settings.xml"
+                run: cat ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+
             # TODO: ... create user
             # TODO: ... start / run Redmine
 
