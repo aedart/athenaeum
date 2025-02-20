@@ -57,7 +57,7 @@ jobs:
                     path: "${{ env.REDMINE_INSTALL_PATH }}"
 
             # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-8-File-system-permissions
-            -   name: "Set file permissions"
+            -   name: "Set permissions"
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
                     mkdir -p tmp tmp/pdf public/assets public/plugin_assets
