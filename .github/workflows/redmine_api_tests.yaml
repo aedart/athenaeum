@@ -123,12 +123,6 @@ jobs:
                     vendor/bin/codecept build
 
             -   name: "Run API tests"
-                # Upload evt. error logs from Redmine as an artifact
-                uses: actions/upload-artifact@v4
-                with:
-                    name: 'redmine_logs'
-                    path: ${{ REDMINE_INSTALL_PATH }}/logs/
-
                 # Ensure ENV are set...
                 # @see .testing.example
                 # @see https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsenv
@@ -137,3 +131,19 @@ jobs:
                     REDMINE_API_URI: ${{ env.REDMINE_URL }}
                     REDMINE_TOKEN: ${{ env.REDMINE_API_KEY }}
                 run: vendor/bin/codecept run -g redmine --debug
+
+            # ------------------------------------------------------------------------------------------------------- #
+            # Artifacts
+            # ------------------------------------------------------------------------------------------------------- #
+
+            -   name: "Save Redmine logs"
+                uses: actions/upload-artifact@v4
+
+                # Run ONLY in case of failure - no need to store useless data!
+                # @see https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/evaluate-expressions-in-workflows-and-actions#status-check-functions
+                if: ${{ failure() }}
+                with:
+                    name: "redmine_${{ matrix.redmine-versions }}_php_${{ matrix.php-versions }}_logs"
+                    path: ${{ REDMINE_INSTALL_PATH }}/logs/
+                    if-no-files-found: ignore
+                    retention-days: 10
