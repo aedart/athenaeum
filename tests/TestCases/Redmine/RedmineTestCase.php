@@ -19,7 +19,6 @@ use Aedart\Redmine\Role;
 use Aedart\Redmine\User;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
-use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Utils\Json;
