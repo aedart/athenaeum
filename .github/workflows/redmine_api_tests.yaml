@@ -12,6 +12,15 @@ env:
     # Location where Redmine instance must be installed
     REDMINE_INSTALL_PATH: '${{ github.workspace }}/redmine'
 
+    # The default user for a new Redmine installation
+    # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-10-Logging-into-the-application
+    REDMINE_USER: 'admin'
+    REDMINE_PASSWORD: 'admin'
+
+    # Host and port for Redmine instance
+    REDMINE_HOST: 'localhost'
+    REDMINE_PORT: 3000
+
 jobs:
     redmine_api_tests:
         name: "Redmine ${{ matrix.redmine-versions }} API Tests (using PHP ${{ matrix.php-versions }})"
@@ -69,15 +78,8 @@ jobs:
                     ruby-version: '3.1'
                     path: "${{ env.REDMINE_INSTALL_PATH }}"
 
-            -   name: "Debug: output redmine dir"
-                run: |
-                    ls ${{ env.REDMINE_INSTALL_PATH }}
-                    ls ${{ env.REDMINE_INSTALL_PATH }}/config
-
-#            -   name: "Enable REST Api"
-#                uses: mikefarah/yq@master
-#                with:
-#                    cmd: yq -i '.rest_api_enabled.default = 1' ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+#            -   name: "Debug: output redmine config dir"
+#                run: ls ${{ env.REDMINE_INSTALL_PATH }}/config
 
             -   name: "Enable REST Api"
                 uses: rmeneely/update-yaml@v1
@@ -85,14 +87,20 @@ jobs:
                     infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
                     varlist: 'rest_api_enabled.default=1'
 
-            -   name: "Debug: settings.xml"
-                run: cat ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+#            -   name: "Debug: settings.xml"
+#                run: cat ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
 
             # TODO: ... create user
-            # TODO: ... start / run Redmine
+
+            # @see https://guides.rubyonrails.org/command_line.html#bin-rails-server
+            -   name: "Start Redmine"
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    nohup bundle exec rails server webrick -e production -b ${{ env.REDMINE_HOST }} -p ${{ env.REDMINE_PORT }}
 
             # TODO: ...API Token?
             # TODO: ...environment variables for .testing?
+
 
             # ------------------------------------------------------------------------------------------------------- #
             # Run API Tests
