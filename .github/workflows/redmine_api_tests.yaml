@@ -70,12 +70,20 @@ jobs:
                     path: "${{ env.REDMINE_INSTALL_PATH }}"
 
             -   name: "Debug: output redmine dir"
-                run: ls ${{ env.REDMINE_INSTALL_PATH }}
+                run: |
+                    ls ${{ env.REDMINE_INSTALL_PATH }}
+                    ls ${{ env.REDMINE_INSTALL_PATH }}/config
+
+#            -   name: "Enable REST Api"
+#                uses: mikefarah/yq@master
+#                with:
+#                    cmd: yq -i '.rest_api_enabled.default = 1' ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
 
             -   name: "Enable REST Api"
-                uses: mikefarah/yq@master
+                uses: rmeneely/update-yaml@v1
                 with:
-                    cmd: yq -i '.rest_api_enabled.default = 1' ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+                    varlist: 'rest_api_enabled.default=1'
 
             -   name: "Debug: settings.xml"
                 run: cat ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
