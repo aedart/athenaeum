@@ -63,7 +63,7 @@ jobs:
                     version: ${{ matrix.redmine-versions }}
                     database: 'sqlite3'
                     ruby-version: '3.3'
-                    path: '.'
+                    path: '/var/www/redmine'
 
             # TODO: ... enable Rest API for Redmine
             # TODO: ... create user
