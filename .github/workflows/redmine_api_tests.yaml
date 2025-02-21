@@ -87,7 +87,7 @@ jobs:
             -   name: "Start Redmine"
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
-                    nohup bundle exec rails server -e production -b ${{ env.REDMINE_HOST }} -p ${{ env.REDMINE_PORT }} &
+                    nohup bundle exec rails server -e production -b ${{ env.REDMINE_HOST }} -p ${{ env.REDMINE_PORT }} >> log/redmine_server.log 2>&1 &
 
             -   name: "Set Redmine URL variable"
                 run: |
