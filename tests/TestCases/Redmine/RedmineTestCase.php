@@ -432,7 +432,7 @@ abstract class RedmineTestCase extends LaravelTestCase
         // When using a live connection, it is important that the response can be debugged.
         // To do so, we specify a custom "failed expectation handler", ...
         return Connection::resolve($profile)
-            ->useFailedExpectationHandler(function(Status $status, ResponseInterface $response, RequestInterface $request) {
+            ->useFailedExpectationHandler(function (Status $status, ResponseInterface $response, RequestInterface $request) {
                 // Output response, when running in debug mode
                 ConsoleDebugger::output([
                     'request' => (string) $request->getUri(),

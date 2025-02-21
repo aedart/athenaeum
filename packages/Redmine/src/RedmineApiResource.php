@@ -142,7 +142,7 @@ abstract class RedmineApiResource extends ArrayDto implements ApiResource
             && method_exists($connection, 'failedExpectationHandler')
             && $connection->hasFailedExpectationHandler()
         ) {
-          $this->useFailedExpectationHandler($connection->failedExpectationHandler());
+            $this->useFailedExpectationHandler($connection->failedExpectationHandler());
         }
 
         return $this->traitSetConnection($connection);
