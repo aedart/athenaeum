@@ -48,7 +48,9 @@ use Throwable;
 abstract class RedmineApiResource extends ArrayDto implements ApiResource
 {
     use Concerns\ResourceRelations;
-    use ConnectionTrait;
+    use ConnectionTrait {
+        setConnection as traitSetConnection;
+    }
     use ForwardsCalls;
 
     /**
@@ -127,6 +129,23 @@ abstract class RedmineApiResource extends ArrayDto implements ApiResource
     public static function make(array $data = [], string|ConnectionInterface|null $connection = null): static
     {
         return new static($data, $connection);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setConnection(ConnectionInterface|null $connection): static
+    {
+        // TODO: Simplify this check in version 9.x
+        if (isset($connection)
+            && method_exists($connection, 'hasFailedExpectationHandler')
+            && method_exists($connection, 'failedExpectationHandler')
+            && $connection->hasFailedExpectationHandler()
+        ) {
+          $this->useFailedExpectationHandler($connection->failedExpectationHandler());
+        }
+
+        return $this->traitSetConnection($connection);
     }
 
     /**
