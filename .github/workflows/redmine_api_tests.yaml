@@ -134,7 +134,7 @@ jobs:
                     REDMINE_LIVE_TEST: true
                     REDMINE_API_URI: ${{ env.REDMINE_URL }}
                     REDMINE_TOKEN: ${{ env.REDMINE_API_KEY }}
-                run: vendor/bin/codecept run -g redmine --debug
+                run: vendor/bin/codecept run -f -g redmine --debug
 
             # ------------------------------------------------------------------------------------------------------- #
             # Artifacts
