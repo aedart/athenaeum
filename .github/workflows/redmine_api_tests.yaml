@@ -69,7 +69,7 @@ jobs:
                 uses: DamianReeves/write-file-action@master
                 with:
                     path: ${{ env.REDMINE_INSTALL_PATH }}/config/database.yml
-                    write-mode: append
+                    write-mode: overwrite
                     contents: |
                           ${{ env.REDMINE_ENVIRONMENT }}:
                             adapter: sqlite3
