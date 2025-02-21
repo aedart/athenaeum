@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* GitHub workflow for "live" testing the Redmine API (`redmine_api_tests.yaml`). 
+
+### Changed
+
+* Redmine `Connection` now allows setting a general failed expectation handler, which is used by `RedmineApiResource`, if available. 
+* Received response is now logged to the console, when running Redmine Api tests in debug mode, in `RedmineTestCase::liveOrMockedConnection`.
+
 ## [8.21.0] - 2025-02-17
 
 ### Changed
