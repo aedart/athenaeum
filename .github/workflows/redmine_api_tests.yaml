@@ -135,6 +135,8 @@ jobs:
 
             # @see https://guides.rubyonrails.org/command_line.html#bin-rails-server
             -   name: "Start Redmine"
+                env:
+                    RAILS_ENV: ${{ env.REDMINE_ENVIRONMENT }}
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
                     nohup bundle exec rails server -e ${{ env.REDMINE_ENVIRONMENT }} -b ${{ env.REDMINE_HOST }} -p ${{ env.REDMINE_PORT }} &
