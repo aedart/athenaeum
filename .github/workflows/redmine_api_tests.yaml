@@ -116,6 +116,11 @@ jobs:
             #            -   name: "Debug: settings.xml"
             #                run: cat ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
 
+            -   name: "Session store secret"
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    RAILS_ENV=${{ env.REDMINE_ENVIRONMENT }} bundle exec rake generate_secret_token
+
             # This step might be needed before Redmine can work as intended. Note that the RAILS_ENV corresponds
             # to the database name and not the environment, in this context.
             # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-7-Database-default-data-set
