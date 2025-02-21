@@ -13,9 +13,7 @@ env:
     REDMINE_INSTALL_PATH: '${{ github.workspace }}/redmine'
 
     # The Redmine environment to be setup (e.g. production, development and test)
-    # WARNING: If "test" is set, then additional dependencies are installed, which
-    # can cause issues!
-    REDMINE_ENVIRONMENT: 'development'
+    REDMINE_ENVIRONMENT: 'test'
 
     # The default user for a new Redmine installation
     # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-10-Logging-into-the-application
@@ -52,8 +50,7 @@ jobs:
             # Setup & configure Redmine
             # ------------------------------------------------------------------------------------------------------- #
 
-            # NOTE: This step installs a "test" environment, which causes some issues with the
-            # additional dependencies that are installed.
+            # NOTE: This step installs a "test" environment by default.
             -   name: "Install Redmine"
                 uses: hidakatsuya/action-setup-redmine@v2
                 with:
@@ -63,9 +60,9 @@ jobs:
                     ruby-version: '3.1'
                     path: "${{ env.REDMINE_INSTALL_PATH }}"
 
-            # To avoid a "Puma caught this error: cannot load such file -- rack/media_type (LoadError)"
-            # when using "test" environment, we define the "development" environment database instead.
+            # Define a different environment, if needed (if requested environment is not "test")
             -   name: "Define '${{ env.REDMINE_ENVIRONMENT }}' environment"
+                if: ${{ env.REDMINE_ENVIRONMENT != 'test' }}
                 uses: DamianReeves/write-file-action@master
                 with:
                     path: ${{ env.REDMINE_INSTALL_PATH }}/config/database.yml
@@ -75,14 +72,17 @@ jobs:
                             adapter: sqlite3
                             database: db/${{ env.REDMINE_ENVIRONMENT }}.sqlite3
             -   name: "Debug config/database.yml"
+                if: ${{ env.REDMINE_ENVIRONMENT != 'test' }}
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
                     cat config/database.yml
             -   name: "(Re)install dependencies"
+                if: ${{ env.REDMINE_ENVIRONMENT != 'test' }}
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
                     bundle install
             -   name: "Migrate database"
+                if: ${{ env.REDMINE_ENVIRONMENT != 'test' }}
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
                     RAILS_ENV=${{ env.REDMINE_ENVIRONMENT }} bundle exec rake db:create db:migrate
