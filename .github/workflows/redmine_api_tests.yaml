@@ -29,7 +29,7 @@ env:
     REDMINE_API_KEY: '${{ github.sha }}'
 
     # The ruby version to use...
-    RUBY_VERSION: '2.7'
+    RUBY_VERSION: '3.1'
 
 jobs:
     redmine_api_tests:
