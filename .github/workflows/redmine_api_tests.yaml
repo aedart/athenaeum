@@ -71,7 +71,7 @@ jobs:
                     path: ${{ env.REDMINE_INSTALL_PATH }}/config/database.yml
                     write-mode: append
                     contents: |
-                        \n${{ env.REDMINE_ENVIRONMENT }}:
+                        ${{ env.REDMINE_ENVIRONMENT }}:
                             adapter: sqlite3
                             database: db/${{ env.REDMINE_ENVIRONMENT }}.sqlite3
             -   name: "Debug config/database.yml"
@@ -85,7 +85,7 @@ jobs:
             -   name: "Migrate database"
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
-                    bin/rails db:create db:migrate
+                    RAILS_ENV=${{ env.REDMINE_ENVIRONMENT }} bundle exec rake db:create db:migrate
 
             # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-8-File-system-permissions
             -   name: "Set permissions"
