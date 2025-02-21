@@ -81,7 +81,7 @@ jobs:
             -   name: "Migrate database"
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
-                    rails db:create db:migrate
+                    bin/rails db:create db:migrate
 
             # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-8-File-system-permissions
             -   name: "Set permissions"
