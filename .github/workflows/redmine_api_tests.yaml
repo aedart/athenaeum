@@ -28,6 +28,9 @@ env:
     # API Key (for testing only)
     REDMINE_API_KEY: '${{ github.sha }}'
 
+    # The ruby version to use...
+    RUBY_VERSION: '2.7'
+
 jobs:
     redmine_api_tests:
         name: "Redmine ${{ matrix.redmine-versions }} API Tests (using PHP ${{ matrix.php-versions }})"
@@ -57,8 +60,10 @@ jobs:
                     repository: 'redmine/redmine'
                     version: ${{ matrix.redmine-versions }}
                     database: 'sqlite3'
-                    ruby-version: '3.1'
+                    ruby-version: ${{ env.RUBY_VERSION }}
                     path: "${{ env.REDMINE_INSTALL_PATH }}"
+
+            # ------------------------------------------------------------------------------------------------------- #
 
             # Define a different environment, if needed (if requested environment is not "test")
             -   name: "Define '${{ env.REDMINE_ENVIRONMENT }}' environment"
@@ -86,6 +91,8 @@ jobs:
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
                     RAILS_ENV=${{ env.REDMINE_ENVIRONMENT }} bundle exec rake db:create db:migrate
+
+            # ------------------------------------------------------------------------------------------------------- #
 
             # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-8-File-system-permissions
             -   name: "Set permissions"
