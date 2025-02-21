@@ -60,7 +60,7 @@ jobs:
             -   name: "Set permissions"
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
-                    mkdir -p tmp tmp/pdf public/assets public/plugin_assets
+                    mkdir -p tmp tmp/pdf public/assets public/plugin_assets app/assets
                     chmod -R 755 log files tmp plugins app/assets public/assets public/plugin_assets config db
 
             -   name: "Enable REST Api"
