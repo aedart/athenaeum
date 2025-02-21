@@ -154,7 +154,7 @@ jobs:
                 with:
                     name: "redmine_${{ matrix.redmine-versions }}_php_${{ matrix.php-versions }}_logs"
                     path: |
-                        ${{ env.REDMINE_INSTALL_PATH }}/logs/
+                        ${{ env.REDMINE_INSTALL_PATH }}/log/
                         ${{ github.workspace }}/tests/_output/redmine/
                     if-no-files-found: ignore
                     retention-days: 10
