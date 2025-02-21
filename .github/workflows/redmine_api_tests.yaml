@@ -71,9 +71,13 @@ jobs:
                     path: ${{ env.REDMINE_INSTALL_PATH }}/config/database.yml
                     write-mode: append
                     contents: |
-                        ${{ env.REDMINE_ENVIRONMENT }}:
+                        \n${{ env.REDMINE_ENVIRONMENT }}:
                             adapter: sqlite3
                             database: db/${{ env.REDMINE_ENVIRONMENT }}.sqlite3
+            -   name: "Debug config/database.yml"
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    cat config/database.yml
             -   name: "(Re)install dependencies"
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
