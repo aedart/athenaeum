@@ -71,7 +71,7 @@ jobs:
                     path: ${{ env.REDMINE_INSTALL_PATH }}/config/database.yml
                     write-mode: overwrite
                     contents: |
-                          ${{ env.REDMINE_ENVIRONMENT }}:
+                        ${{ env.REDMINE_ENVIRONMENT }}:
                             adapter: sqlite3
                             database: db/${{ env.REDMINE_ENVIRONMENT }}.sqlite3
             -   name: "Debug config/database.yml"
