@@ -124,6 +124,8 @@ jobs:
                     cd ${{ env.REDMINE_INSTALL_PATH }}
                     RAILS_ENV=${{ env.REDMINE_ENVIRONMENT }} REDMINE_LANG=en bundle exec rake redmine:load_default_data
 
+            # ------------------------------------------------------------------------------------------------------- #
+
 #            # Redmine 5.x series fails API requests due to the following error:
 #            # "Puma caught this error: cannot load such file -- rack/media_type (LoadError)"
 #            # Therefore, here we try to resolve this issue by manually installing additional
@@ -140,6 +142,8 @@ jobs:
 #                    cd ${{ env.REDMINE_INSTALL_PATH }}
 #                    bundle install
 
+            # ------------------------------------------------------------------------------------------------------- #
+
             # @see https://guides.rubyonrails.org/command_line.html#bin-rails-server
             -   name: "Start Redmine"
                 env:
@@ -147,6 +151,8 @@ jobs:
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
                     nohup bundle exec rails server -e ${{ env.REDMINE_ENVIRONMENT }} -b ${{ env.REDMINE_HOST }} -p ${{ env.REDMINE_PORT }} &
+
+            # ------------------------------------------------------------------------------------------------------- #
 
             -   name: "Set Redmine URL variable"
                 run: |
