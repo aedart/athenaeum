@@ -78,6 +78,11 @@ jobs:
             #            -   name: "Debug: settings.xml"
             #                run: cat ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
 
+            -   name: "Migrate database default data set"
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    RAILS_ENV=production REDMINE_LANG=en bundle exec rake redmine:load_default_data
+
             # @see https://guides.rubyonrails.org/command_line.html#bin-rails-server
             -   name: "Start Redmine"
                 run: |
