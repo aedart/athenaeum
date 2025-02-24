@@ -13,14 +13,18 @@ use Aedart\Support\Helpers\Bus\QueueingBusTrait;
 use Aedart\Support\Helpers\Cache\CacheFactoryTrait;
 use Aedart\Support\Helpers\Cache\CacheStoreTrait;
 use Aedart\Support\Helpers\Cache\CacheTrait;
+use Aedart\Support\Helpers\Cache\RateLimiterTrait;
+use Aedart\Support\Helpers\Concurrency\ConcurrencyManagerTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Console\ArtisanTrait;
+use Aedart\Support\Helpers\Console\ScheduleTrait;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use Aedart\Support\Helpers\Cookie\CookieTrait;
 use Aedart\Support\Helpers\Cookie\QueueingCookieTrait;
 use Aedart\Support\Helpers\Database\ConnectionResolverTrait;
 use Aedart\Support\Helpers\Database\DbTrait;
 use Aedart\Support\Helpers\Database\SchemaTrait;
+use Aedart\Support\Helpers\Debug\ExceptionHandlerTrait;
 use Aedart\Support\Helpers\Encryption\CryptTrait;
 use Aedart\Support\Helpers\Events\DispatcherTrait;
 use Aedart\Support\Helpers\Events\EventTrait;
@@ -29,9 +33,11 @@ use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Support\Helpers\Filesystem\StorageFactoryTrait;
 use Aedart\Support\Helpers\Filesystem\StorageTrait;
 use Aedart\Support\Helpers\Foundation\AppTrait;
+use Aedart\Support\Helpers\Foundation\ViteTrait;
 use Aedart\Support\Helpers\Hashing\HashTrait;
 use Aedart\Support\Helpers\Http\ClientFactoryTrait;
 use Aedart\Support\Helpers\Http\RequestTrait;
+use Aedart\Support\Helpers\Logging\LogContextRepositoryTrait;
 use Aedart\Support\Helpers\Logging\LogManagerTrait;
 use Aedart\Support\Helpers\Logging\LogTrait;
 use Aedart\Support\Helpers\Mail\MailerTrait;
@@ -43,6 +49,7 @@ use Aedart\Support\Helpers\Password\PasswordBrokerManagerTrait;
 use Aedart\Support\Helpers\Password\PasswordBrokerTrait;
 use Aedart\Support\Helpers\Pipeline\PipelineHubTrait;
 use Aedart\Support\Helpers\Pipeline\PipelineTrait;
+use Aedart\Support\Helpers\Process\ProcessFactoryTrait;
 use Aedart\Support\Helpers\Queue\QueueFactoryTrait;
 use Aedart\Support\Helpers\Queue\QueueMonitorTrait;
 use Aedart\Support\Helpers\Queue\QueueTrait;
@@ -54,6 +61,8 @@ use Aedart\Support\Helpers\Routing\RouteRegistrarTrait;
 use Aedart\Support\Helpers\Routing\UrlGeneratorTrait;
 use Aedart\Support\Helpers\Session\SessionManagerTrait;
 use Aedart\Support\Helpers\Session\SessionTrait;
+use Aedart\Support\Helpers\Support\DateFactoryTrait;
+use Aedart\Support\Helpers\Testing\ParallelTestingTrait;
 use Aedart\Support\Helpers\Translation\TranslationLoaderTrait;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
@@ -62,12 +71,20 @@ use Aedart\Support\Helpers\View\ViewFactoryTrait;
 use Aedart\Testing\Helpers\ArgumentFaker;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
+use Illuminate\Cache\RateLimiter;
+use Illuminate\Concurrency\ConcurrencyManager;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\Vite;
 use Illuminate\Http\Request;
+use Illuminate\Log\Context\Repository as LogContextRepository;
 use Illuminate\Log\LogManager;
+use Illuminate\Process\Factory as ProcessFactory;
 use Illuminate\Routing\Redirector;
 use Illuminate\Session\SessionManager;
+use Illuminate\Support\DateFactory;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Testing\ParallelTesting;
 use Illuminate\View\Compilers\BladeCompiler;
 use Mockery as m;
 use ReflectionException;
@@ -134,12 +151,17 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'CacheFactoryTrait' => [ CacheFactoryTrait::class ],
             'CacheStoreTrait' => [ CacheStoreTrait::class ],
             'CacheTrait' => [ CacheTrait::class ],
+            'RateLimiterTrait' => [ RateLimiterTrait::class, RateLimiter::class ],
+
+            // Concurrency
+            'ConcurrencyManagerTrait' => [ ConcurrencyManagerTrait::class, ConcurrencyManager::class ],
 
             // Config
             'ConfigTrait' => [ ConfigTrait::class ],
 
             // Console
             'ArtisanTrait' => [ ArtisanTrait::class ],
+            'ScheduleTrait' => [ ScheduleTrait::class, Schedule::class ],
 
             // Container
             'ContainerTrait' => [ ContainerTrait::class ],
@@ -152,6 +174,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'ConnectionResolverTrait' => [ ConnectionResolverTrait::class ],
             'DbTrait' => [ DbTrait::class ],
             'SchemaTrait' => [ SchemaTrait::class ],
+
+            // Debug
+            'ExceptionHandlerTrait' => [ ExceptionHandlerTrait::class ],
 
             // Encryption
             'CryptTrait' => [ CryptTrait::class ],
@@ -168,6 +193,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 
             // Foundation
             'AppTrait' => [ AppTrait::class ],
+            'ViteTrait' => [ ViteTrait::class, Vite::class ],
 
             // Hashing
             'HashTrait' => [ HashTrait::class ],
@@ -177,6 +203,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'RequestTrait' => [ RequestTrait::class, Request::class ],
 
             // Logging
+            'LogContextRepositoryTrait' => [ LogContextRepositoryTrait::class, LogContextRepository::class ],
             'LogManagerTrait' => [ LogManagerTrait::class, LogManager::class ],
             'LogTrait' => [ LogTrait::class ],
 
@@ -197,6 +224,9 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             'PipelineTrait' => [ PipelineTrait::class ],
             'PipelineHubTrait' => [ PipelineHubTrait::class ],
 
+            // Process
+            'ProcessFactoryTrait' => [ ProcessFactoryTrait::class, ProcessFactory::class ],
+
             // Queue
             'QueueFactoryTrait' => [ QueueFactoryTrait::class ],
             'QueueMonitorTrait' => [ QueueMonitorTrait::class ],
@@ -215,6 +245,12 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
             // Session
             'SessionManagerTrait' => [ SessionManagerTrait::class, SessionManager::class ],
             'SessionTrait' => [ SessionTrait::class ],
+
+            // Support
+            'DateFactoryTrait' => [ DateFactoryTrait::class, DateFactory::class ],
+
+            // Testing
+            'ParallelTestingTrait' => [ ParallelTestingTrait::class, ParallelTesting::class ],
 
             // Translation
             'TranslatorTrait' => [ TranslatorTrait::class ],
