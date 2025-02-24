@@ -9,6 +9,7 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 * `float()` and `nextFloat()` methods in `NumericRandomizer` (_in the Utils package_). [#184](https://github.com/aedart/athenaeum/issues/184)
 * `bytesFromString()` in `StringRandomizer` (_in the Utils package_). [#185](https://github.com/aedart/athenaeum/issues/185)
 * `Json::isValid()` now accepts `$depth` and `$options` parameters.
+* `ConcurrencyManager`, `LogContextRepository`, `DateFactory`, `ExceptionHandler`, `ParallelTesting`, `ProcessFactory`, `RateLimiter`, `Schedule` and `Vite` aware-of helpers, in `Aedart\Support\Helpers`.
 * Configuration for `composer-bin-plugin` (_in root `composer.json`_).
 
 ### Changed
