@@ -19,7 +19,7 @@
     "require": {
         "php": "^8.3",
         "aedart/athenaeum-support": "^8.22",
-        "illuminate/events": "^v12.x-dev"
+        "illuminate/events": "^v12.0.1"
     },
     "autoload": {
         "psr-4": {
