@@ -9,6 +9,7 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 * `float()` and `nextFloat()` methods in `NumericRandomizer` (_in the Utils package_). [#184](https://github.com/aedart/athenaeum/issues/184)
 * `bytesFromString()` in `StringRandomizer` (_in the Utils package_). [#185](https://github.com/aedart/athenaeum/issues/185)
 * `Json::isValid()` now accepts `$depth` and `$options` parameters.
+* `ConcurrencyManager`, `LogContextRepository`, `DateFactory`, `ExceptionHandler`, `ParallelTesting`, `ProcessFactory`, `RateLimiter`, `Schedule` and `Vite` aware-of helpers, in `Aedart\Support\Helpers`.
 * Configuration for `composer-bin-plugin` (_in root `composer.json`_).
 
 ### Changed
@@ -17,6 +18,7 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 
 * Minimum required PHP version changed to `v8.3`.
 * Adapted CI environment to test PHP `v8.3` and `v8.4`.
+* Upgraded to use Laravel `v12.x` packages.
 * Upgraded to use PHPStan `v2.x` [#200](https://github.com/aedart/athenaeum/issues/200).
 * Replaced `yosymfony/toml` with `devium/toml` as supported toml parser (_affected component `\Aedart\Config\Parsers\Files\Toml`_). [#213](https://github.com/aedart/athenaeum/issues/213).
 * `array` return type for various implementation of Laravel's `toArray()` method (_inherited from `\Illuminate\Contracts\Support\Arrayable`_).
