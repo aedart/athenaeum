@@ -109,12 +109,7 @@ class EnvFile
     {
         $key = $this->resolveKey($key);
 
-        $result = preg_match(
-            pattern: $this->makeKeySearchPattern($key),
-            subject: $this->contents
-        );
-
-        return $result === 1;
+        return str_contains($this->contents, "\n{$key}=");
     }
 
     /**
@@ -203,6 +198,6 @@ class EnvFile
      */
     protected function resolveKey(string $key): string
     {
-        return strtolower($key);
+        return strtoupper($key);
     }
 }
