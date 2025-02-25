@@ -17,7 +17,10 @@
     "require": {
         "php": "^8.3",
         "aedart/athenaeum-contracts": "^8.22",
-        "aedart/athenaeum-support": "^8.22"
+        "aedart/athenaeum-support": "^8.22",
+        "laravel/fortify": "^1.25.4",
+        "illuminate/validation": "^v12.0.1",
+        "shrikeh/teapot": "^3.0.0"
     },
     "require-dev": {
         "laravel/fortify": "^1.25.4"
