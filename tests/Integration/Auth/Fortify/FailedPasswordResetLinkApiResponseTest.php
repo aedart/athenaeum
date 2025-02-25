@@ -32,7 +32,7 @@ class FailedPasswordResetLinkApiResponseTest extends FortifyTestCase
         $request = Request::create(
             uri: 'https://acme.com/api/v1/password-reset',
             method: 'POST',
-            server:  [
+            server: [
                 'HTTP_ACCEPT' => 'application/json'
             ],
         );
