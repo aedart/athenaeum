@@ -13,7 +13,7 @@ use Teapot\StatusCode\All as Status;
  *
  * @see \Illuminate\Contracts\Auth\PasswordBroker::INVALID_USER
  * @see \Laravel\Fortify\Contracts\FailedPasswordResetLinkRequestResponse
- * @see \Aedart\Auth\Fortify\Responses\FailedPasswordResetLinkRequestResponse
+ * @see \Aedart\Auth\Fortify\Responses\FailedPasswordResetLinkApiResponse
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Auth\Fortify\Exceptions

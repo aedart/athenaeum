@@ -13,7 +13,7 @@ use Laravel\Fortify\Http\Responses\FailedPasswordResetLinkRequestResponse as Bas
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Auth\Fortify\Responses
  */
-class FailedPasswordResetLinkRequestResponse extends BaseResponse
+class FailedPasswordResetLinkApiResponse extends BaseResponse
 {
     /**
      * @inheritdoc
@@ -29,7 +29,8 @@ class FailedPasswordResetLinkRequestResponse extends BaseResponse
             throw PasswordResetLinkFailure::withMessages([]);
         }
 
-        // Otherwise, redirect to the previous URL (original behaviour...)
+        // Otherwise, redirect to the previous URL (original behaviour...).
+        // CAUTION: This can reveal that the user does not exist!
         return back()
             ->withInput($request->only('email'))
             ->withErrors(['email' => trans($this->status)]);
