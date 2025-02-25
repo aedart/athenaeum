@@ -11,6 +11,7 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 * `Json::isValid()` now accepts `$depth` and `$options` parameters.
 * Custom `FailedPasswordResetLinkApiResponse` in `aedart/athenaeum-auth` package.
 * `FailedLoginAttempt` and `PasswordResetLinkFailure` exceptions in `aedart/athenaeum-auth` package.
+* `EnvFile` component, in `Aedart\Support`. [#219](https://github.com/aedart/athenaeum/issues/219).
 * `ConcurrencyManager`, `LogContextRepository`, `DateFactory`, `ExceptionHandler`, `ParallelTesting`, `ProcessFactory`, `RateLimiter`, `Schedule` and `Vite` aware-of helpers, in `Aedart\Support\Helpers`.
 * Configuration for `composer-bin-plugin` (_in root `composer.json`_).
 
