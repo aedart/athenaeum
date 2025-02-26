@@ -4,7 +4,8 @@ description: How to create Array Dto
 
 # Array DTO
 
-While the `Dto` abstraction is good for situations where you must adhere to interfaces that define getters and setters, it can be a bit cumbersome to maintain a large number classes.
+While the `Dto` abstraction is good for situations where you must adhere to interfaces that define lots of getters and
+setters, it can be a bit cumbersome to maintain a large number of classes.
 This can especially be true, if you must create DTOs to represent all the resources available for a large scale API.
 
 In such situations, the `ArrayDto` abstraction is perhaps better suited.
