@@ -40,20 +40,30 @@ PHP version `v8.3` is now the minimum required version for Athenaeum.
 and [`nextFloat()`](./utils/math.md#nextfloat). Additionally, the `StringRandomizer` now offers a
 [`bytesFromString()`](./utils/string.md#bytesfromstring) method.
 
+### Environment File utility
+
+The `EnvFile` can be used for replacing the value of an existing key, or appending a new key-value pair, in the
+application's environment file.
+
+See [Support package documentation](./support/env-file.md) for details.
+
 ### Auth Exceptions and Responses
 
 The Auth package has received a few new components, intended to be used in combination with for Laravel Fortify.
 Among them are a few predefined exceptions and response helpers.
+
 See [Auth Fortify documentation](./auth/fortify/README.md) for details.
 
 ### TOML version 1.0.0 Supported
 
 The [configuration loader](./config/README.md) now supports [toml](https://github.com/toml-lang/toml) version `1.0.0` format.
+
 Please see the [upgrade guide](./upgrade-guide.md) for details.
 
 ### Additional parameters for `Json::isValid()`  
 
 The `Json::isValid()` now accepts `$depth` and `$options` as optional parameters.
+
 See [documentation](./utils/json.md#validation) for details.
 
 ### Deprecation of "Aware-of" Properties
