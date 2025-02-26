@@ -34,6 +34,11 @@ These are the highlights of the latest major version of Athenaeum.
 PHP version `v8.3` is now the minimum required version for Athenaeum.
 [Laravel `v12.x`](https://laravel.com/docs/12.x/releases) packages are now used.
 
+### Randomizer `float()` and `nextFloat()`
+
+The `NumericRandomizer` now supports `float()` and `nextFloat()`.
+See [documentation](./utils/math.md#float) for details.
+
 ### TOML version 1.0.0 Supported
 
 The [configuration loader](./config/README.md) now supports [toml](https://github.com/toml-lang/toml) version `1.0.0` format.
