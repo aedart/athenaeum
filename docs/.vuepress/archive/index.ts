@@ -9,20 +9,21 @@ import Version6x from "./Version6x";
 import Version7x from "./Version7x";
 import Version8x from "./Version8x";
 import Version9x from "./Version9x";
+import Version10x from "./Version10x";
 
 /**
  * The "current" version
  *
  * @type {PagesCollection}
  */
-const CURRENT: PagesCollection = Version8x;
+const CURRENT: PagesCollection = Version9x;
 
 /**
  * The "next" version
  *
  * @type {PagesCollection}
  */
-const NEXT: PagesCollection = Version9x;
+const NEXT: PagesCollection = Version10x;
 
 /**
  * List of versions
@@ -32,6 +33,7 @@ const NEXT: PagesCollection = Version9x;
 const VERSIONS: PagesCollection[] = [
     NEXT,
     CURRENT,
+    Version8x,
     Version7x,
     Version6x,
     Version5x,
