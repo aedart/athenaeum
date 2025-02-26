@@ -11,9 +11,9 @@ Offers complementary components and helpers to [Laravel's Support package](https
 Traits that offer [Getters and Setters](https://en.wikipedia.org/wiki/Mutator_method) helpers for some of Laravel's core packages. 
 
 These components allow you to manually set and retrieve a Laravel component, e.g. a configuration `Repository`.
-Additionally, when no component instance has been specified, it will automatically default to whatever Laravel has bound in the [Service Container](https://laravel.com/docs/11.x/container).
+Additionally, when no component instance has been specified, it will automatically default to whatever Laravel has bound in the [Service Container](https://laravel.com/docs/12.x/container).
 
-You can think of these helpers as supplements, or alternatives to Laravel's native [Facades](https://laravel.com/docs/11.x/facades).
+You can think of these helpers as supplements, or alternatives to Laravel's native [Facades](https://laravel.com/docs/12.x/facades).
 
 ```php
 use \Aedart\Support\Helpers\Config\ConfigTrait;

@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Delete Resource
 
-For requests that are intended to delete or [soft-delete](https://laravel.com/docs/11.x/eloquent#soft-deleting) a resource, you can use the `DeleteSingleResourceRequest` abstraction.
+For requests that are intended to delete or [soft-delete](https://laravel.com/docs/12.x/eloquent#soft-deleting) a resource, you can use the `DeleteSingleResourceRequest` abstraction.
 
 [[TOC]]
 

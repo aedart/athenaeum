@@ -81,7 +81,7 @@ Exceptions, of the mentioned kind, will be rethrown as Laravel's `ValidationExce
 
 ### Advanced Input Validation
 
-You can also use Laravel's [validator](https://laravel.com/docs/11.x/validation#manually-creating-validators) and let it do all the heavy lifting.
+You can also use Laravel's [validator](https://laravel.com/docs/12.x/validation#manually-creating-validators) and let it do all the heavy lifting.
 The `BaseProcessor` offers a reference to the validator factory, via the `getValidatorFactory()` method.
 
 ```php

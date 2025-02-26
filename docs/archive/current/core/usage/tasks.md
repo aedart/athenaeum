@@ -4,7 +4,7 @@ description: Task Scheduling in Core Application
 
 # Task Scheduling
 
-Laravel's [Tasks Scheduling](https://laravel.com/docs/11.x/scheduling) is also offered by the [Console Application](./console).
+Laravel's [Tasks Scheduling](https://laravel.com/docs/12.x/scheduling) is also offered by the [Console Application](./console).
 
 ## Define Tasks
 
@@ -13,7 +13,7 @@ The [Console Package](../../console/schedules.md) contains examples of how to de
 ## Run Scheduled Tasks
 
 Just like Laravel, you need to add the `schedule:run` command to your [Cron](https://en.wikipedia.org/wiki/Cron).
-Review Laravel's [documentation](https://laravel.com/docs/11.x/scheduling) for more information about how to run scheduled tasks
+Review Laravel's [documentation](https://laravel.com/docs/12.x/scheduling) for more information about how to run scheduled tasks
 
 ```
 * * * * * cd /your-project-path && php cli.php schedule:run >> /dev/null 2>&1
@@ -26,5 +26,5 @@ Waleed Ahmed wrote a nice article about [how to use Task Scheduler on Windows 10
 
 ## Limitations
 
-[Scheduled Queued Jobs](https://laravel.com/docs/11.x/scheduling#scheduling-queued-jobs) are not support by default.
+[Scheduled Queued Jobs](https://laravel.com/docs/12.x/scheduling#scheduling-queued-jobs) are not support by default.
 You have to add Laravel's [Queue package](https://packagist.org/packages/illuminate/queue) by on your own, in order to gain access to this feature. 

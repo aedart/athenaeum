@@ -105,7 +105,7 @@ By default, the request expects a payload to be formatted in the following way:
 }
 ```
 
-A `targets` key is expected to contain a [distinct](https://laravel.com/docs/11.x/validation#rule-distinct) list of integers or string values.
+A `targets` key is expected to contain a [distinct](https://laravel.com/docs/12.x/validation#rule-distinct) list of integers or string values.
 These values act as identifiers for when querying records in the database. 
 If the `targets` key name is not to your liking, then you can change this by overwriting the `ccc` property.
 

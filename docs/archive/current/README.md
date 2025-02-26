@@ -9,7 +9,7 @@ sidebarDepth: 0
 
 ## Support Policy
 
-Athenaeum attempts to follow a release cycle that matches closely to that of [Laravel](https://laravel.com/docs/11.x/releases).
+Athenaeum attempts to follow a release cycle that matches closely to that of [Laravel](https://laravel.com/docs/12.x/releases).
 However, due to limited amount of project maintainers, no guarantees can be provided. 
 
 | Version | PHP         | Laravel | Release              | Security Fixes Until |

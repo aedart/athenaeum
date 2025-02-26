@@ -4,7 +4,7 @@ description: How to use Cache
 
 # Caching
 
-To make use of Laravel's [Cache](https://laravel.com/docs/11.x/cache) component, you _should_ spend a bit of time configuring it.
+To make use of Laravel's [Cache](https://laravel.com/docs/12.x/cache) component, you _should_ spend a bit of time configuring it.
 
 [[TOC]]
 
@@ -13,10 +13,10 @@ To make use of Laravel's [Cache](https://laravel.com/docs/11.x/cache) component,
 In your `/config/cache.php`, you will find several cache "stores", each having a driver.
 Please ensure that your server environment and application supports the drivers, that you wish to make use of.
 For instance, if you wish to use a "store" that requires [Redis](https://redis.io/) as a driver, then you must fulfill it's requirements. 
-See Laravel's [Redis package](https://packagist.org/packages/illuminate/redis) and it's [documentation](https://laravel.com/docs/11.x/redis) for details.
+See Laravel's [Redis package](https://packagist.org/packages/illuminate/redis) and it's [documentation](https://laravel.com/docs/12.x/redis) for details.
 
 In the example illustrated below, a "user-tags" store has been added.
-It relies of the Redis driver, which uses a custom "users" [connection](https://laravel.com/docs/11.x/redis#configuration).
+It relies of the Redis driver, which uses a custom "users" [connection](https://laravel.com/docs/12.x/redis#configuration).
 
 ```php
 <?php
@@ -69,7 +69,7 @@ $foo = $cache->get('foo');
 
 ### Via Facade
 
-You can also use Laravel's `Cache` [Facade](https://laravel.com/docs/11.x/facades), to achieve the same result.
+You can also use Laravel's `Cache` [Facade](https://laravel.com/docs/12.x/facades), to achieve the same result.
 
 ```php
 <?php
