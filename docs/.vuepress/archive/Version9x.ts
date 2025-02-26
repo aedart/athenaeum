@@ -598,6 +598,7 @@ export default PagesCollection.make('v9.x', '/v9x', [
                     'support/laravel/available-helpers',
                 ]
             },
+            'support/env-file',
             {
                 text: 'Aware-of Properties',
                 collapsible: true,
