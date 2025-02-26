@@ -46,6 +46,11 @@ and [`nextFloat()`](./utils/math.md#nextfloat). Additionally, the `StringRandomi
 The [configuration loader](./config/README.md) now supports [toml](https://github.com/toml-lang/toml) version `1.0.0` format.
 Please see the [upgrade guide](./upgrade-guide.md) for details.
 
+### Additional parameters for `Json::isValid()`  
+
+The `Json::isValid()` now accepts `$depth` and `$options` as optional parameters.
+See [documentation](./utils/json.md#validation) for details.
+
 ### Deprecation of "Aware-of" Properties
 
 The ["aware-of" properties](support/properties/available-helpers.md) have been deprecated. These have served their purpose in the past, but are now no longer
