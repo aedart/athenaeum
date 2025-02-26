@@ -40,6 +40,11 @@ PHP version `v8.3` is now the minimum required version for Athenaeum.
 and [`nextFloat()`](./utils/math.md#nextfloat). Additionally, the `StringRandomizer` now offers a
 [`bytesFromString()`](./utils/string.md#bytesfromstring) method.
 
+### Auth Exceptions and Responses
+
+The Auth package has received a few new components, intended to be used in combination with for Laravel Fortify.
+Among them are a few predefined exceptions and response helpers.
+See [Auth Fortify documentation](./auth/fortify/README.md) for details.
 
 ### TOML version 1.0.0 Supported
 
