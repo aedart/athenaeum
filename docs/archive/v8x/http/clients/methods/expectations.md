@@ -229,8 +229,7 @@ If you require a way to modify the incoming response or perhaps the outgoing req
 
 ## Status Code Object
 
-The `Status` object that is provided offers a variety of methods to quickly determine if it matches a desired Http
-status code.
+The `Status` object, that given to your expectation callbacks, offers a variety of methods to quickly determine if it matches a desired Http status code.
 
 ```php
 use Aedart\Contracts\Http\Clients\Responses\Status;
@@ -255,10 +254,6 @@ $client
         }
         
         if ( ! $status->isSuccessful()) {
-            // ...
-        }
-        
-        if ($status->isServerError()) {
             // ...
         }
     });

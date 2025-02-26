@@ -9,6 +9,20 @@ Offers math related utility methods.
 
 [[TOC]]
 
+## `randomInt()`
+
+::: warning Deprecated
+The `randomInt()` method has been deprecated. Please use [`randomizer()`](#randomizer) instead.
+:::
+
+Generates a random number between given minimum and maximum values.
+
+```php
+use Aedart\Utils\Math;
+
+$value = Math::randomInt(1, 10);
+```
+
 ## `randomizer()`
 
 The `randomizer()` method returns a `NumericRandomizer` component - an adapter for PHP [`Random\Randomizer`](https://www.php.net/manual/en/class.random-randomizer.php).  

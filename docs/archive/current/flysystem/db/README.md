@@ -20,7 +20,7 @@ Behind the scene, [Laravel's Database package](https://packagist.org/packages/il
 * SQLite
 * SQL Server
 
-_See [Laravel's official documentation for more information](https://laravel.com/docs/11.x/database#introduction)._
+_See [Laravel's official documentation for more information](https://laravel.com/docs/12.x/database#introduction)._
 
 ## Data Deduplication
 

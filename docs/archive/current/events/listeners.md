@@ -4,7 +4,7 @@ description: Registration of Event Listeners
 
 # Listeners
 
-To register event listeners, state the [Event](https://laravel.com/docs/11.x/events#defining-events) class path or identifier inside the `listeners` key, in your `/config/events.php` file.
+To register event listeners, state the [Event](https://laravel.com/docs/12.x/events#defining-events) class path or identifier inside the `listeners` key, in your `/config/events.php` file.
 Then, state the class paths of your event listeners for the given event.
 
 ```php

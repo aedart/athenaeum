@@ -141,7 +141,7 @@ class MyTest extends LaravelTestCase
 
 ## Browser Test-Case
 
-`BrowserTestCase` can be used for writing tests to be executed in a browser. [Laravel Dusk](https://laravel.com/docs/11.x/dusk) is used behind the scene.
+`BrowserTestCase` can be used for writing tests to be executed in a browser. [Laravel Dusk](https://laravel.com/docs/12.x/dusk) is used behind the scene.
 Please review the Test-Case's source code and Laravel documentation for additional information.
 
 ```php

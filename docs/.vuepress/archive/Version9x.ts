@@ -75,10 +75,18 @@ export default PagesCollection.make('v9.x', '/v9x', [
                 children: [
                     'auth/fortify/', // Prerequisites
                     {
-                        text: 'Actions',
+                        text: 'Exceptions',
                         collapsible: true,
                         children: [
-                            'auth/fortify/actions/rehash-password',
+                            'auth/fortify/exceptions/failed-login-attempt',
+                            'auth/fortify/exceptions/pass-reset-link-failure',
+                        ]
+                    },
+                    {
+                        text: 'Responses',
+                        collapsible: true,
+                        children: [
+                            'auth/fortify/responses/failed-pass-reset-link',
                         ]
                     },
                 ]
@@ -590,6 +598,7 @@ export default PagesCollection.make('v9.x', '/v9x', [
                     'support/laravel/available-helpers',
                 ]
             },
+            'support/env-file',
             {
                 text: 'Aware-of Properties',
                 collapsible: true,

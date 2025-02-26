@@ -35,6 +35,7 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 * "Split Packages" GitHub workflow no longer triggered in pull requests.
 * Class constants now have [types](https://php.watch/versions/8.3/typed-constants) declared.
 * `\Aedart\Console\Commands\PirateTalkCommand` now uses `\Aedart\Utils\Arr::randomizer()->value()` to pick random sentence.
+* Simplified the "Available Helpers" (_Laravel "Aware-of" helpers_) documentation.
 
 ### Fixed
 

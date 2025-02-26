@@ -9,20 +9,6 @@ Offers math related utility methods.
 
 [[TOC]]
 
-## `randomInt()`
-
-::: warning Deprecated
-The `randomInt()` method has been deprecated. Please use [`randomizer()`](#randomizer) instead.
-:::
-
-Generates a random number between given minimum and maximum values.
-
-```php
-use Aedart\Utils\Math;
-
-$value = Math::randomInt(1, 10);
-```
-
 ## `randomizer()`
 
 The `randomizer()` method returns a `NumericRandomizer` component - an adapter for PHP [`Random\Randomizer`](https://www.php.net/manual/en/class.random-randomizer.php).  
@@ -59,6 +45,26 @@ echo Math::randomizer()->nextInt(); // 4
 ```
 
 _See [`Random\Randomizer::nextInt()`](https://www.php.net/manual/en/random-randomizer.nextint.php) for details._
+
+### `float()`
+
+`float()` method returns a uniformly selected float between provided `$min` and `$max`:
+
+```php
+echo Math::randomizer()->float(1.3, 5.2); // 3.7874125015802
+```
+
+_See [`Random\Randomizer::getFloat()`](https://www.php.net/manual/en/random-randomizer.getfloat.php) for details._
+
+### `nextFloat()`
+
+Returns the next float.
+
+```php
+echo Math::randomizer()->nextFloat(); // 0.087539659531495
+```
+
+_See [`Random\Randomizer::nextFloat()`](https://www.php.net/manual/en/random-randomizer.nextfloat.php) for details._
 
 ## `seed()`
 
