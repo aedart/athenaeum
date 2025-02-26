@@ -41,4 +41,8 @@ The method also accepts two optional arguments:
 * `int $depth`, _recursion depth._
 * `array $options`, _flags_
 
+```php
+$valid = Json::isValid($myPayload, 10, JSON_INVALID_UTF8_IGNORE);
+```
+
 See PHP's [documentation](https://www.php.net/manual/en/function.json-validate.php) for additional details.
