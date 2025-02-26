@@ -38,6 +38,17 @@ Str::randomizer()->bytes(10); // \pǓY��n
 
 _See [`Random\Randomizer::getBytes()`](https://www.php.net/manual/en/random-randomizer.getbytes.php) for details._
 
+### `bytesFromString()`
+
+Returns random bytes from a given string.
+
+```php
+$str = 'abcdefghijklmnopqrstuvwxyz0123456789';
+Str::randomizer()->bytesFromString($str, 10); // hnm1vb3nu6
+```
+
+_See [`Random\Randomizer::getBytesFromString()`](https://www.php.net/manual/en/random-randomizer.getbytesfromstring.php) for details._
+
 ### `shuffle()`
 
 Shuffles given bytes.
