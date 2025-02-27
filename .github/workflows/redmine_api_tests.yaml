@@ -85,6 +85,7 @@ jobs:
                 if: ${{ env.REDMINE_ENVIRONMENT != 'test' }}
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
+                    bundle config set --local without 'test'
                     bundle install
             -   name: "Migrate database"
                 if: ${{ env.REDMINE_ENVIRONMENT != 'test' }}
