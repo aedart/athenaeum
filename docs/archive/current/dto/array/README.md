@@ -18,7 +18,7 @@ Extend the `ArrayDto` abstraction and declare your DTO's properties, via the `$a
 
 The keys of the `$allowed` variable correspond to your property's name, whereas the values correspond to the property's data type.
 
-Whenever your DTO is populated, it will automatically ensure to [cast](http://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting) the property to it's decalred type. 
+Whenever your DTO is populated, it will automatically ensure to [cast](http://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting) the property to it's declared type. 
 
 ```php
 use Aedart\Dto\ArrayDto;
