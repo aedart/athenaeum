@@ -102,6 +102,12 @@ jobs:
                     mkdir -p tmp tmp/pdf public/assets public/plugin_assets app/assets
                     chmod -R 755 log files tmp plugins app/assets public/assets public/plugin_assets config db
 
+            -   name: "Configure host name"
+                uses: rmeneely/update-yaml@v1
+                with:
+                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+                    varlist: 'host_name.default=${{ env.REDMINE_HOST }}:${{ env.REDMINE_PORT }}'
+
             -   name: "Enable REST Api"
                 uses: rmeneely/update-yaml@v1
                 with:
