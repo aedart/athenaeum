@@ -13,7 +13,7 @@ env:
     REDMINE_INSTALL_PATH: '${{ github.workspace }}/redmine'
 
     # The Redmine environment to be setup (e.g. production, development and test)
-    REDMINE_ENVIRONMENT: 'test'
+    REDMINE_ENVIRONMENT: 'development'
 
     # The default user for a new Redmine installation
     # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-10-Logging-into-the-application
