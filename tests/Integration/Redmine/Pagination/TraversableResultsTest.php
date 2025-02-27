@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\Redmine\Pagination;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Issue;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use JsonException;
@@ -32,15 +33,13 @@ class TraversableResultsTest extends RedmineTestCase
     public function canTraverseAcrossMultipleApiResultsPages()
     {
         // Debug
-        //        Issue::$debug = true;
+        RedmineApiResource::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites - Create a large enough issue set, so that the traversable
         // if forced to paginate results
 
         $project = $this->createProject();
-
-        ConsoleDebugger::output($project);
 
         $issueA = $this->createIssue($project->id());
         $issueB = $this->createIssue($project->id());
@@ -107,5 +106,8 @@ class TraversableResultsTest extends RedmineTestCase
         }
 
         $project->delete();
+
+        // Debug
+        RedmineApiResource::$debug = false;
     }
 }
