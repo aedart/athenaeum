@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\Redmine\Pagination;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Issue;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use JsonException;
 use Throwable;
@@ -38,6 +39,8 @@ class TraversableResultsTest extends RedmineTestCase
         // if forced to paginate results
 
         $project = $this->createProject();
+
+        ConsoleDebugger::output($project);
 
         $issueA = $this->createIssue($project->id());
         $issueB = $this->createIssue($project->id());
