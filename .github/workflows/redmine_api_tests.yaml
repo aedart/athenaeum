@@ -154,6 +154,18 @@ jobs:
 #                    cd ${{ env.REDMINE_INSTALL_PATH }}
 #                    bundle install
 
+            -   name: "Define additional dependencies"
+                uses: DamianReeves/write-file-action@master
+                with:
+                    path: ${{ env.REDMINE_INSTALL_PATH }}/Gemfile.local
+                    write-mode: overwrite
+                    contents: |
+                        gem 'webrick'
+            -   name: "Install additional dependencies"
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    bundle install
+
             # ------------------------------------------------------------------------------------------------------- #
 
             # @see https://guides.rubyonrails.org/command_line.html#bin-rails-server
