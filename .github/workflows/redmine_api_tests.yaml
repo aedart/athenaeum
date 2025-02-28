@@ -114,6 +114,12 @@ jobs:
                     infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
                     varlist: 'rest_api_enabled.default=1'
 
+            -   name: "Enable system API"
+                uses: rmeneely/update-yaml@v1
+                with:
+                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+                    varlist: 'sys_api_enabled=1'
+
             -   name: "Set system API key"
                 uses: rmeneely/update-yaml@v1
                 with:
