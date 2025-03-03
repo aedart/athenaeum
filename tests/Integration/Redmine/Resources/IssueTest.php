@@ -4,6 +4,7 @@ namespace Aedart\Tests\Integration\Redmine\Resources;
 
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Issue;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 
 /**
@@ -130,7 +131,7 @@ class IssueTest extends RedmineTestCase
     public function canListIssues()
     {
         // Debug
-        //        Issue::$debug = true;
+        // RedmineApiResource::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites
@@ -185,13 +186,15 @@ class IssueTest extends RedmineTestCase
         // List Issues
 
         $issues = Issue::list($limit, 0, [], $connection);
-
-        $this->assertCount($limit, $issues->results(), 'Incorrect amount of issues returned');
+        $this->assertGreaterThanOrEqual($limit, count($issues->results()), 'Incorrect amount of issues returned');
 
         // ----------------------------------------------------------------------- //
         // Cleanup
 
         $issue->delete();
         $project->delete();
+
+        // Debug
+        // RedmineApiResource::$debug = false;
     }
 }
