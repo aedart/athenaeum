@@ -4,6 +4,7 @@ namespace Aedart\Tests\Integration\Redmine\Resources;
 
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Project;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Redmine\Version;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 
@@ -68,7 +69,7 @@ class VersionTest extends RedmineTestCase
     public function canCreateVersion()
     {
         // Debug
-        //        Version::$debug = true;
+        // RedmineApiResource::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites
@@ -111,6 +112,9 @@ class VersionTest extends RedmineTestCase
 
         $project->setConnection($originalConnection);
         $project->delete();
+
+        // Debug
+        // RedmineApiResource::$debug = false;
     }
 
     /**
