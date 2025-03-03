@@ -25,6 +25,8 @@ use Carbon\Carbon;
  * @property Carbon $due_date
  * @property string $sharing
  * @property string $wiki_page_title
+ * @property float $estimated_hours
+ * @property float $spent_hours
  * @property Carbon $created_on
  * @property Carbon $updated_on
  *
@@ -106,6 +108,8 @@ class Version extends RedmineApiResource implements
         'due_date' => 'date',
         'sharing' => 'string',
         'wiki_page_title' => 'string',
+        'estimated_hours' => 'float',
+        'spent_hours' => 'float',
         'created_on' => 'date',
         'updated_on' => 'date',
     ];
