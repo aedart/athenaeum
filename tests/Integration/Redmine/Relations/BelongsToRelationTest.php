@@ -100,10 +100,16 @@ class BelongsToRelationTest extends RedmineTestCase
 
         // When testing locally, using a Sqlite database, the API request might be too soon after the first
         // project was deleted, which causes a "Database locked" exception / 500 Internal Server Error from
-        // Redmine. To avoid this, we wait for ~100 ms.
-        usleep(100_000);
+        // Redmine. To avoid this, we wait for ~250 ms.
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
 
         $parent->delete();
+
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
 
         // Debug
         // RedmineApiResource::$debug = false;
