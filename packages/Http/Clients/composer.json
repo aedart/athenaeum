@@ -28,7 +28,7 @@
         "illuminate/pipeline": "^v12.0.1",
         "psr/http-client": "^1.0.3",
         "psr/http-factory": "^1.1.0",
-        "psr/http-message": "^1.1",
+        "psr/http-message": "^2.0",
         "shrikeh/teapot": "^3.0.0"
     },
     "autoload": {
