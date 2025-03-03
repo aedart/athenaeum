@@ -4,6 +4,7 @@ namespace Aedart\Tests\Integration\Redmine\Relations\Custom;
 
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Group;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Redmine\User;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use JsonException;
@@ -31,7 +32,7 @@ class AssignedToRelationTest extends RedmineTestCase
     public function returnsGroupWhenAssigned()
     {
         // Debug
-        //        Group::$debug = true;
+        // RedmineApiResource::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites - a new project with a members
@@ -74,6 +75,9 @@ class AssignedToRelationTest extends RedmineTestCase
         $member->delete();
         $group->delete();
         $project->delete();
+
+        // Debug
+        // RedmineApiResource::$debug = false;
     }
 
     /**
@@ -86,7 +90,7 @@ class AssignedToRelationTest extends RedmineTestCase
     public function returnsUserWhenAssigned()
     {
         // Debug
-        //        User::$debug = true;
+        // RedmineApiResource::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites - a new project with a members
@@ -128,5 +132,8 @@ class AssignedToRelationTest extends RedmineTestCase
         $member->delete();
         $user->delete();
         $project->delete();
+
+        // Debug
+        // RedmineApiResource::$debug = false;
     }
 }
