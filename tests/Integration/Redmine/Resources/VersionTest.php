@@ -111,7 +111,15 @@ class VersionTest extends RedmineTestCase
         $version->delete();
 
         $project->setConnection($originalConnection);
+
         $project->delete();
+
+        // When testing locally, using a Sqlite database, the API request might be too soon after the first
+        // project was deleted, which causes a "Database locked" exception / 500 Internal Server Error from
+        // Redmine. To avoid this, we wait for ~250 ms.
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
 
         // Debug
         // RedmineApiResource::$debug = false;
@@ -163,7 +171,15 @@ class VersionTest extends RedmineTestCase
         // Cleanup
 
         $version->delete();
+
         $project->delete();
+
+        // When testing locally, using a Sqlite database, the API request might be too soon after the first
+        // project was deleted, which causes a "Database locked" exception / 500 Internal Server Error from
+        // Redmine. To avoid this, we wait for ~250 ms.
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
     }
 
     /**
@@ -225,6 +241,13 @@ class VersionTest extends RedmineTestCase
         $versionA->delete();
         $versionB->delete();
         $versionC->delete();
+
+        // When testing locally, using a Sqlite database, the API request might be too soon after the first
+        // project was deleted, which causes a "Database locked" exception / 500 Internal Server Error from
+        // Redmine. To avoid this, we wait for ~250 ms.
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
 
         $project->delete();
     }
