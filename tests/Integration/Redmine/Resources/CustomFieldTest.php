@@ -4,6 +4,7 @@ namespace Aedart\Tests\Integration\Redmine\Resources;
 
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\CustomField;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 
 /**
@@ -28,7 +29,11 @@ class CustomFieldTest extends RedmineTestCase
     public function canListCustomFields()
     {
         // Debug
-        //        CustomField::$debug = true;
+        // RedmineApiResource::$debug = true;
+
+        // NOTE: The problem with this test is that Redmine's API does not support creating
+        // custom fields. This means that if "live" tests are to be performed, then custom
+        // fields must be manually created!
 
         $list = [
             [
@@ -61,5 +66,8 @@ class CustomFieldTest extends RedmineTestCase
         // Depending on "live" test's redmine instance, no custom fields might be installed.
         // API does not support creation or modification, making this test very hard to work with...
         $this->assertGreaterThanOrEqual(0, count($fields->results()));
+
+        // Debug
+        // RedmineApiResource::$debug = false;
     }
 }

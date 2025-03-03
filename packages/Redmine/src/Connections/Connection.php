@@ -47,6 +47,13 @@ class Connection implements ConnectionInterface
     protected array $mockedResponse = [];
 
     /**
+     * General failed expectation handler
+     *
+     * @var callable|null
+     */
+    protected $failedExpectationHandler = null;
+
+    /**
      * Connection
      *
      * @param string|null $connection [optional] Profile name. Defaults to a default connection
@@ -133,6 +140,40 @@ class Connection implements ConnectionInterface
     public function getMockedResponse(): array
     {
         return $this->mockedResponse;
+    }
+
+    /**
+     * Set a general expectation handler for this connection
+     *
+     * @param callable|null $handler
+     *
+     * @return self
+     */
+    public function useFailedExpectationHandler(callable|null $handler): static
+    {
+        $this->failedExpectationHandler = $handler;
+
+        return $this;
+    }
+
+    /**
+     * Determine if an expectation handler has been set for this connection
+     *
+     * @return bool
+     */
+    public function hasFailedExpectationHandler(): bool
+    {
+        return isset($this->failedExpectationHandler) && is_callable($this->failedExpectationHandler);
+    }
+
+    /**
+     * Returns this connection's general failed expectation handler
+     *
+     * @return callable|null
+     */
+    public function failedExpectationHandler(): callable|null
+    {
+        return $this->failedExpectationHandler;
     }
 
     /*****************************************************************

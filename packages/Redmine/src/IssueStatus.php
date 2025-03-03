@@ -13,6 +13,7 @@ use Aedart\Redmine\Relations\HasMany;
  * @property int $id
  * @property string $name
  * @property bool $is_closed
+ * @property string|null $description
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
@@ -22,7 +23,8 @@ class IssueStatus extends RedmineApiResource implements Listable
     protected array $allowed = [
         'id' => 'int',
         'name' => 'string',
-        'is_closed' => 'bool'
+        'is_closed' => 'bool',
+        'description' => 'string',
     ];
 
     /**

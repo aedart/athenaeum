@@ -18,10 +18,10 @@
     "require": {
         "php": "^8.2",
         "ext-sockets": "*",
-        "aedart/athenaeum-contracts": "^8.22",
-        "aedart/athenaeum-streams": "^8.22",
-        "aedart/athenaeum-support": "^8.22",
-        "aedart/athenaeum-validation": "^8.22",
+        "aedart/athenaeum-contracts": "^8.23",
+        "aedart/athenaeum-streams": "^8.23",
+        "aedart/athenaeum-support": "^8.23",
+        "aedart/athenaeum-validation": "^8.23",
         "illuminate/events": "^v11.42.1",
         "xenolope/quahog": "^3.0"
     },

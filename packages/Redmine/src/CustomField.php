@@ -18,6 +18,7 @@ use Aedart\Redmine\Relations\HasMany;
  *
  * @property int $id
  * @property string $name
+ * @property string|null $description
  * @property string $customized_type
  * @property string $field_format
  * @property string $regexp
@@ -41,6 +42,7 @@ class CustomField extends RedmineApiResource implements Listable
     protected array $allowed = [
         'id' => 'int',
         'name' => 'string',
+        'description' => 'string',
         'customized_type' => 'string',
         'field_format' => 'string',
         'regexp' => 'string',

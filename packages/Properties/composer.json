@@ -18,8 +18,8 @@
     ],
     "require": {
         "php": "^8.2",
-        "aedart/athenaeum-contracts": "^8.22",
-        "aedart/athenaeum-utils": "^8.22"
+        "aedart/athenaeum-contracts": "^8.23",
+        "aedart/athenaeum-utils": "^8.23"
     },
     "autoload": {
         "psr-4": {

@@ -1,0 +1,273 @@
+# ------------------------------------------------------------------------------------------------------ #
+# Redmine API Tests
+# ------------------------------------------------------------------------------------------------------ #
+
+name: 'Redmine API Tests'
+
+on:
+#    push
+
+    # Due to the difficulties of getting Redmine to be installed and configured correctly in the CI,
+    # this workflow should NOT run automatically.
+    workflow_dispatch
+
+env:
+    # Location where Redmine instance must be installed
+    REDMINE_INSTALL_PATH: '${{ github.workspace }}/redmine'
+
+    # The Redmine environment to be setup (e.g. production, development and test)
+    REDMINE_ENVIRONMENT: 'development'
+
+    # The default user for a new Redmine installation
+    # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-10-Logging-into-the-application
+    # REDMINE_USER: 'admin' # Should not be needed
+    # REDMINE_PASSWORD: 'admin' # Should not be needed
+
+    # Host, port and URL for Redmine instance
+    REDMINE_HOST: 'localhost'
+    REDMINE_PORT: 3000
+    # REDMINE_URL: 'http://${{ env.REDMINE_HOST }}:${{ env.REDMINE_PORT }}' # Generated later...
+
+    # API Key (for testing only)
+    REDMINE_API_KEY: '${{ github.sha }}'
+
+    # The ruby version to use...
+    RUBY_VERSION: '3.1'
+
+jobs:
+    redmine_api_tests:
+        name: "Redmine ${{ matrix.redmine-versions }} API Tests (using PHP ${{ matrix.php-versions }})"
+        runs-on: ${{ matrix.operating-system }}
+
+        strategy:
+            fail-fast: true
+            matrix:
+
+                # See OS and PHP version options on https://github.com/shivammathur/setup-php
+                operating-system: [ 'ubuntu-22.04' ]
+                php-versions: [ '8.2' ]
+
+                # Redmine versions (in this case branches)
+                redmine-versions: [ '5.0-stable' ]
+
+        steps:
+
+            # ------------------------------------------------------------------------------------------------------- #
+            # Setup & configure Redmine
+            # ------------------------------------------------------------------------------------------------------- #
+
+            # NOTE: This step installs a "test" environment by default.
+            -   name: "Install Redmine"
+                uses: hidakatsuya/action-setup-redmine@v2
+                with:
+                    repository: 'redmine/redmine'
+                    version: ${{ matrix.redmine-versions }}
+                    database: 'sqlite3'
+                    ruby-version: ${{ env.RUBY_VERSION }}
+                    path: "${{ env.REDMINE_INSTALL_PATH }}"
+
+            # ------------------------------------------------------------------------------------------------------- #
+
+            # Define a different environment, if needed (if requested environment is not "test")
+            -   name: "Define '${{ env.REDMINE_ENVIRONMENT }}' environment"
+                if: ${{ env.REDMINE_ENVIRONMENT != 'test' }}
+                uses: DamianReeves/write-file-action@master
+                with:
+                    path: ${{ env.REDMINE_INSTALL_PATH }}/config/database.yml
+                    write-mode: overwrite
+                    contents: |
+                        ${{ env.REDMINE_ENVIRONMENT }}:
+                            adapter: sqlite3
+                            database: db/${{ env.REDMINE_ENVIRONMENT }}.sqlite3
+            -   name: "Debug config/database.yml"
+                if: ${{ env.REDMINE_ENVIRONMENT != 'test' }}
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    cat config/database.yml
+            -   name: "(Re)install dependencies"
+                if: ${{ env.REDMINE_ENVIRONMENT != 'test' }}
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    bundle config set --local without 'test'
+                    bundle install
+            -   name: "Migrate database"
+                if: ${{ env.REDMINE_ENVIRONMENT != 'test' }}
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    RAILS_ENV=${{ env.REDMINE_ENVIRONMENT }} bundle exec rake db:create db:migrate
+
+            # ------------------------------------------------------------------------------------------------------- #
+
+            # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-8-File-system-permissions
+            -   name: "Set permissions"
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    mkdir -p tmp tmp/pdf public/assets public/plugin_assets app/assets
+                    chmod -R 755 log files tmp plugins app/assets public/assets public/plugin_assets config db
+
+            -   name: "Configure host name"
+                uses: rmeneely/update-yaml@v1
+                with:
+                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+                    varlist: 'host_name.default=${{ env.REDMINE_HOST }}:${{ env.REDMINE_PORT }}'
+
+            -   name: "Enable REST Api"
+                uses: rmeneely/update-yaml@v1
+                with:
+                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+                    varlist: 'rest_api_enabled.default=1'
+
+            -   name: "Allow issues to be assigned to groups"
+                uses: rmeneely/update-yaml@v1
+                with:
+                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+                    varlist: 'issue_group_assignment.default=1'
+
+                # These appear to have no effect.
+#            -   name: "Enable system API"
+#                uses: rmeneely/update-yaml@v1
+#                with:
+#                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+#                    varlist: 'sys_api_enabled=1'
+#
+#            -   name: "Set system API key"
+#                uses: rmeneely/update-yaml@v1
+#                with:
+#                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+#                    varlist: 'sys_api_key.default=${{ env.REDMINE_API_KEY }}'
+
+            #            -   name: "Debug: settings.xml"
+            #                run: cat ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+
+            -   name: "Session store secret"
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    RAILS_ENV=${{ env.REDMINE_ENVIRONMENT }} bundle exec rake generate_secret_token
+
+            # This step might be needed before Redmine can work as intended. Note that the RAILS_ENV corresponds
+            # to the database name and not the environment, in this context.
+            # @see https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Step-7-Database-default-data-set
+            -   name: "Migrate database default data set"
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    RAILS_ENV=${{ env.REDMINE_ENVIRONMENT }} REDMINE_LANG=en bundle exec rake redmine:load_default_data
+
+            # ------------------------------------------------------------------------------------------------------- #
+
+            -   name: "Add API token for default user"
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    sqlite3 db/${{ env.REDMINE_ENVIRONMENT }}.sqlite3 "update users set must_change_passwd = 0 where id = 1"
+                    sqlite3 db/${{ env.REDMINE_ENVIRONMENT }}.sqlite3 "insert into tokens (user_id, action, value, created_on, updated_on) values (1, 'api', '${{ env.REDMINE_API_KEY }}', datetime('now'), datetime('now'))"
+
+            # ------------------------------------------------------------------------------------------------------- #
+
+#            # Redmine 5.x series fails API requests due to the following error:
+#            # "Puma caught this error: cannot load such file -- rack/media_type (LoadError)"
+#            # Therefore, here we try to resolve this issue by manually installing additional
+#            # dependencies, e.g. "media_type". This might only happen for the "test" environment!
+#            -   name: "Define additional dependencies"
+#                uses: DamianReeves/write-file-action@master
+#                with:
+#                    path: ${{ env.REDMINE_INSTALL_PATH }}/Gemfile.local
+#                    write-mode: overwrite
+#                    contents: |
+#                        gem 'media_type'
+#            -   name: "Install additional dependencies"
+#                run: |
+#                    cd ${{ env.REDMINE_INSTALL_PATH }}
+#                    bundle install
+
+            -   name: "Define additional dependencies"
+                uses: DamianReeves/write-file-action@master
+                with:
+                    path: ${{ env.REDMINE_INSTALL_PATH }}/Gemfile.local
+                    write-mode: overwrite
+                    contents: |
+                        gem 'webrick'
+            -   name: "Install additional dependencies"
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    bundle install
+
+            # ------------------------------------------------------------------------------------------------------- #
+
+            # @see https://guides.rubyonrails.org/command_line.html#bin-rails-server
+            -   name: "Start Redmine"
+                env:
+                    RAILS_ENV: ${{ env.REDMINE_ENVIRONMENT }}
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    nohup bundle exec rails server -e ${{ env.REDMINE_ENVIRONMENT }} -b ${{ env.REDMINE_HOST }} -p ${{ env.REDMINE_PORT }} &
+
+            # ------------------------------------------------------------------------------------------------------- #
+
+            -   name: "Set Redmine URL variable"
+                run: |
+                    echo "REDMINE_URL=http://${{ env.REDMINE_HOST }}:${{ env.REDMINE_PORT }}" >> $GITHUB_ENV
+
+            -   name: "Check if Redmine is running"
+                run: curl --silent --show-error --head ${{ env.REDMINE_URL }}
+
+            -   name: "Check if API is responding"
+                run: |
+                    curl -H "X-Redmine-API-Key: ${{ env.REDMINE_API_KEY }}" --silent --show-error --head ${{ env.REDMINE_URL }}/issues.json
+
+            # ------------------------------------------------------------------------------------------------------- #
+            # Setup & configure PHP
+            # ------------------------------------------------------------------------------------------------------- #
+
+            -   name: "Checkout Athenaeum"
+                uses: actions/checkout@v4
+
+            -   name: "Setup PHP"
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php-versions }}
+
+                    # PHP Extensions are based on those that Laravel also uses.args:
+                    # @see https://github.com/laravel/framework/blob/11.x/.github/workflows/tests.yml
+                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, redis-phpredis/phpredis@5.3.7, igbinary, msgpack, lzf, zstd, lz4, memcached, gmp
+                    ini-values: error_reporting=E_ALL
+                    tools: composer:v2
+                    coverage: none
+
+            -   name: "Install dependencies"
+                run: composer install --no-progress --prefer-dist --no-interaction --optimize-autoloader --ansi
+
+            # ------------------------------------------------------------------------------------------------------- #
+            # Run API Tests
+            # ------------------------------------------------------------------------------------------------------- #
+
+            -   name: "Prepare test environment"
+                run: |
+                    composer run test-env --ansi
+                    vendor/bin/codecept build
+
+            -   name: "Run API tests"
+                # Ensure ENV are set...
+                # @see .testing.example
+                # @see https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsenv
+                env:
+                    REDMINE_LIVE_TEST: true
+                    REDMINE_API_URI: ${{ env.REDMINE_URL }}
+                    REDMINE_TOKEN: ${{ env.REDMINE_API_KEY }}
+                run: vendor/bin/codecept run -f -g redmine --debug
+
+            # ------------------------------------------------------------------------------------------------------- #
+            # Artifacts
+            # ------------------------------------------------------------------------------------------------------- #
+
+            -   name: "Save Redmine logs"
+                uses: actions/upload-artifact@v4
+
+                # Run ONLY in case of failure - no need to store useless data!
+                # @see https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/evaluate-expressions-in-workflows-and-actions#status-check-functions
+                if: ${{ failure() }}
+                with:
+                    name: "redmine_${{ matrix.redmine-versions }}_php_${{ matrix.php-versions }}_logs"
+                    path: |
+                        ${{ env.REDMINE_INSTALL_PATH }}/log/
+                        ${{ github.workspace }}/tests/_output/redmine/
+                    if-no-files-found: ignore
+                    retention-days: 10

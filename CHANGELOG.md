@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.22.0] - 2025-03-03
+
+### Added
+
+* ~~GitHub workflow for "live" testing the Redmine API (`redmine_api_tests.yaml`)~~ (_disabled due to Redmine installation and configuration difficulties in the CI_).
+* `\Aedart\Redmine\Partials\IssueStatusReference` for Redmine package.
+
+### Changed
+
+* Redmine `Connection` now allows setting a general failed expectation handler, which is used by `RedmineApiResource`, if available.
+* Received response is now logged to the console, when running Redmine Api tests in debug mode, in `RedmineTestCase::liveOrMockedConnection`.
+
+### Fixed
+
+* Fix unknown / unsupported `is_closed` property for `status` reference in `\Aedart\Redmine\Issue` (`Reference` replaced by new `IssueStatusReference`).
+* Fix unknown / unsupported `updated_on`, `passwd_changed_on` and `twofa_scheme` properties for `\Aedart\Redmine\User`.
+* Fix unknown / unsupported `estimated_hours`, and `spent_hours` properties for `\Aedart\Redmine\Version`.
+* `RedmineApiResource` fails when `204 No Content` is received (_caused by expectation handler logic in `\Aedart\Redmine\RedmineApiResource::defaultFailedExpectationHandler()`_).
+* Fix limit cannot be less than 1, 0 provided, in `\Aedart\Redmine\Pagination\PaginatedResults::fromResponse()` (_happens when no results are available in Redmine_).
+* Fix unknown / unsupported `active` property for enumerations (_`\Aedart\Redmine\Enumeration`_).
+* Fix unknown / unsupported `description` property for `\Aedart\Redmine\IssueStatus`.
+* Fix unknown / unsupported `description` property for `\Aedart\Redmine\CustomField`.
+* Fix bad results assertion in `\Aedart\Tests\Integration\Redmine\Resources\IssueTest::canListIssues()`.
+* Fix "SQLite3::BusyException: database is locked", when running local tests against Redmine, using sqlite database adapter (_`usleeep()` timeout introduced in several tests for "live" mode!_).
+* Fix "identifier already tale" error, when attempting to create new projects during tests, in `\Aedart\Tests\TestCases\Redmine\RedmineTestCase::createProject()`.
+
 ## [8.21.0] - 2025-02-17
 
 ### Changed
@@ -1595,7 +1621,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/8.21.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/8.22.0...HEAD
+[8.22.0]: https://github.com/aedart/athenaeum/compare/8.21.0...8.22.0
 [8.21.0]: https://github.com/aedart/athenaeum/compare/8.20.0...8.21.0
 [8.20.0]: https://github.com/aedart/athenaeum/compare/8.19.0...8.20.0
 [8.19.0]: https://github.com/aedart/athenaeum/compare/8.18.0...8.19.0
