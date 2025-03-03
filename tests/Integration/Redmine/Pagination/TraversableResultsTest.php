@@ -33,7 +33,7 @@ class TraversableResultsTest extends RedmineTestCase
     public function canTraverseAcrossMultipleApiResultsPages()
     {
         // Debug
-        RedmineApiResource::$debug = true;
+        // RedmineApiResource::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites - Create a large enough issue set, so that the traversable
@@ -108,6 +108,6 @@ class TraversableResultsTest extends RedmineTestCase
         $project->delete();
 
         // Debug
-        RedmineApiResource::$debug = false;
+        // RedmineApiResource::$debug = false;
     }
 }
