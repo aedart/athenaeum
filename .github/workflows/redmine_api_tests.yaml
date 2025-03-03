@@ -114,6 +114,12 @@ jobs:
                     infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
                     varlist: 'rest_api_enabled.default=1'
 
+            -   name: "Allow issues to be assigned to groups"
+                uses: rmeneely/update-yaml@v1
+                with:
+                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+                    varlist: 'issue_group_assignment.default=1'
+
                 # These appear to have no effect.
 #            -   name: "Enable system API"
 #                uses: rmeneely/update-yaml@v1
