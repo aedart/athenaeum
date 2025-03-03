@@ -15,6 +15,7 @@ use Aedart\Redmine\Partials\Changeset;
 use Aedart\Redmine\Partials\ChildIssueReference;
 use Aedart\Redmine\Partials\CustomFieldReference;
 use Aedart\Redmine\Partials\IssueParentReference;
+use Aedart\Redmine\Partials\IssueStatusReference;
 use Aedart\Redmine\Partials\Journal;
 use Aedart\Redmine\Partials\ListOfAttachments;
 use Aedart\Redmine\Partials\ListOfChangesets;
@@ -42,7 +43,7 @@ use Throwable;
  * @property int $id
  * @property Reference $project
  * @property Reference $tracker
- * @property Reference $status
+ * @property IssueStatusReference $status
  * @property Reference $priority
  * @property Reference $author
  * @property Reference|null $assigned_to
@@ -96,7 +97,7 @@ class Issue extends RedmineApiResource implements
         'id' => 'int',
         'project' => Reference::class,
         'tracker' => Reference::class,
-        'status' => Reference::class,
+        'status' => IssueStatusReference::class,
         'priority' => Reference::class,
         'author' => Reference::class,
         'assigned_to' => Reference::class,
