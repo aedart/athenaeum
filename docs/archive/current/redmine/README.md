@@ -38,10 +38,12 @@ Issue::findOrFail(9874)
 
 ## Compatibility
 
-| Athenaeum Redmine Client | Redmine version |
-|--------------------------|-----------------|
-| `v6.x`                   | `>= v4.x`*      |
-| From `v5.19`             | `>= v4.x`*      |
+| Athenaeum Redmine Client | Redmine version            |
+|--------------------------|----------------------------|
+| From `v8.22`             | `v4.x`, `v5.0.x`, `v5.1.x` |
+| `v7.x`                   | `v4.x`                     |
+| `v6.x`                   | `v4.x`                     |
+| From `v5.19`             | `v4.x`                     |
 
 *:_This package might also work with newer versions of Redmine._
 

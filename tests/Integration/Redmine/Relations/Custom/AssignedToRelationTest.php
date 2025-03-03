@@ -4,6 +4,7 @@ namespace Aedart\Tests\Integration\Redmine\Relations\Custom;
 
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Group;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Redmine\User;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use JsonException;
@@ -31,7 +32,7 @@ class AssignedToRelationTest extends RedmineTestCase
     public function returnsGroupWhenAssigned()
     {
         // Debug
-        //        Group::$debug = true;
+        // RedmineApiResource::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites - a new project with a members
@@ -73,7 +74,22 @@ class AssignedToRelationTest extends RedmineTestCase
         $issue->delete();
         $member->delete();
         $group->delete();
+
+        // When testing locally, using a Sqlite database, the API request might be too soon after the first
+        // project was deleted, which causes a "Database locked" exception / 500 Internal Server Error from
+        // Redmine. To avoid this, we wait for ~250 ms.
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
+
         $project->delete();
+
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
+
+        // Debug
+        // RedmineApiResource::$debug = false;
     }
 
     /**
@@ -86,7 +102,7 @@ class AssignedToRelationTest extends RedmineTestCase
     public function returnsUserWhenAssigned()
     {
         // Debug
-        //        User::$debug = true;
+        // RedmineApiResource::$debug = true;
 
         // -------------------------------------------------------- //
         // Prerequisites - a new project with a members
@@ -127,6 +143,21 @@ class AssignedToRelationTest extends RedmineTestCase
         $issue->delete();
         $member->delete();
         $user->delete();
+
+        // When testing locally, using a Sqlite database, the API request might be too soon after the first
+        // project was deleted, which causes a "Database locked" exception / 500 Internal Server Error from
+        // Redmine. To avoid this, we wait for ~250 ms.
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
+
         $project->delete();
+
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
+
+        // Debug
+        // RedmineApiResource::$debug = false;
     }
 }

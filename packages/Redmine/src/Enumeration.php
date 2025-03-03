@@ -14,6 +14,7 @@ use Aedart\Contracts\Redmine\Listable;
  * @property int $id
  * @property string $name
  * @property bool $is_default
+ * @property bool $active
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine
@@ -23,7 +24,8 @@ abstract class Enumeration extends RedmineApiResource implements Listable
     protected array $allowed = [
         'id' => 'int',
         'name' => 'string',
-        'is_default' => 'bool'
+        'is_default' => 'bool',
+        'active' => 'bool',
     ];
 
     /**

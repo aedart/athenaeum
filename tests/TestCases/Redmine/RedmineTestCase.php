@@ -4,6 +4,7 @@ namespace Aedart\Tests\TestCases\Redmine;
 
 use Aedart\Config\Providers\ConfigLoaderServiceProvider;
 use Aedart\Config\Traits\ConfigLoaderTrait;
+use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
 use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
@@ -19,6 +20,7 @@ use Aedart\Redmine\Role;
 use Aedart\Redmine\User;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
+use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Utils\Json;
@@ -27,6 +29,7 @@ use Codeception\Exception\ConfigurationException;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Illuminate\Support\Facades\Http;
 use JsonException;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Teapot\StatusCode\All as StatusCodes;
 use Throwable;
@@ -407,13 +410,46 @@ abstract class RedmineTestCase extends LaravelTestCase
         return Connection::resolve($profile)->mock($responses);
     }
 
-    public function liveOrMockedConnection(array $responses, ?string $profile = null)
+    /**
+     * Returns a "live" or mocked connection to the Redmine Api
+     *
+     * @see isLive()
+     *
+     * @param ResponseInterface[] $responses
+     * @param string|null $profile [optional] Connection profile name
+     *
+     * @return ConnectionInterface
+     *
+     * @throws ConnectionException
+     * @throws Throwable
+     */
+    public function liveOrMockedConnection(array $responses, string|null $profile = null): ConnectionInterface
     {
-        if ($this->isLive()) {
-            return Connection::resolve($profile);
+        if (!$this->isLive()) {
+            return Connection::resolve($profile)->mock($responses);
         }
 
-        return Connection::resolve($profile)->mock($responses);
+        // When using a live connection, it is important that the response can be debugged.
+        // To do so, we specify a custom "failed expectation handler", ...
+        return Connection::resolve($profile)
+            ->useFailedExpectationHandler(function (Status $status, ResponseInterface $response, RequestInterface $request) {
+                // Output response, when running in debug mode
+                ConsoleDebugger::output([
+                    'request' => (string) $request->getUri(),
+                    'response' => [
+                        'status' => $status->code() . ' ' . $status->phrase(),
+                        'headers' => $response->getHeaders(),
+                        'body' => $response->getBody()->getContents()
+                    ]
+                ]);
+
+                // Ensure to rewind content for response.
+                $response->getBody()->rewind();
+
+                // Forward to evt. default specified expectation handler
+                $defaultHandler = Project::make()->failedExpectationHandler();
+                $defaultHandler($status, $response, $request);
+            });
     }
 
     /**
@@ -528,7 +564,11 @@ abstract class RedmineTestCase extends LaravelTestCase
     {
         $data = [
             'name' => 'Test project via @aedart/athenaeum-redmine',
-            'identifier' => 'test-auto-created-' . now()->timestamp,
+            'identifier' => implode('-', [
+                'test-auto-created',
+                now()->timestamp,
+                now()->microsecond
+            ]),
             'description' => 'Projects are been created via Redmine API Client, in [Athenaeum](https://github.com/aedart/athenaeum) package.'
         ];
 

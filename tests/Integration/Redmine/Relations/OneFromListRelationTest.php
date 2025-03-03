@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\Redmine\Relations;
 use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
 use Aedart\Redmine\Issue;
 use Aedart\Redmine\IssueStatus;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 
 /**
@@ -29,7 +30,7 @@ class OneFromListRelationTest extends RedmineTestCase
     public function canObtainRelatedResource()
     {
         // Debug
-        //        Issue::$debug = true;
+        // RedmineApiResource::$debug = true;
 
         // -------------------------------------------------------------------- //
         // Prerequisites - create a new issue
@@ -79,6 +80,21 @@ class OneFromListRelationTest extends RedmineTestCase
         // Cleanup
 
         $issue->delete();
+
+        // When testing locally, using a Sqlite database, the API request might be too soon after the first
+        // project was deleted, which causes a "Database locked" exception / 500 Internal Server Error from
+        // Redmine. To avoid this, we wait for ~250 ms.
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
+
         $project->delete();
+
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
+
+        // Debug
+        // RedmineApiResource::$debug = true;
     }
 }

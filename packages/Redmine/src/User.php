@@ -27,9 +27,12 @@ use Carbon\Carbon;
  * @property string $lastname
  * @property string $mail
  * @property string|null $api_key
+ * @property string|null $twofa_scheme
  * @property int $status
  * @property Carbon $created_on
- * @property Carbon $last_login_on
+ * @property Carbon $updated_on
+ * @property Carbon|null $last_login_on
+ * @property Carbon|null $passwd_changed_on
  * @property ListOfCustomFieldReferences<CustomFieldReference>|CustomFieldReference[]|null $custom_fields
  *
  * @property string $password Property only available or expected when creating or updating resource.
@@ -142,7 +145,10 @@ class User extends RedmineApiResource implements
         'lastname' => 'string',
         'mail' => 'string',
         'created_on' => 'date',
+        'updated_on' => 'date',
         'last_login_on' => 'date',
+        'passwd_changed_on' => 'date',
+        'twofa_scheme' => 'string',
         'api_key' => 'string',
         'status' => 'int',
         'custom_fields' => ListOfCustomFieldReferences::class,
