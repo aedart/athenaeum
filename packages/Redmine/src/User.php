@@ -29,6 +29,7 @@ use Carbon\Carbon;
  * @property string|null $api_key
  * @property int $status
  * @property Carbon $created_on
+ * @property Carbon $updated_on
  * @property Carbon $last_login_on
  * @property ListOfCustomFieldReferences<CustomFieldReference>|CustomFieldReference[]|null $custom_fields
  *
@@ -142,6 +143,7 @@ class User extends RedmineApiResource implements
         'lastname' => 'string',
         'mail' => 'string',
         'created_on' => 'date',
+        'updated_on' => 'date',
         'last_login_on' => 'date',
         'api_key' => 'string',
         'status' => 'int',
