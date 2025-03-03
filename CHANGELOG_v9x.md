@@ -22,10 +22,16 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 * Minimum required PHP version changed to `v8.3`.
 * Adapted CI environment to test PHP `v8.3` and `v8.4`.
 * Upgraded to use Laravel `v12.x` packages.
+* Upgraded to use PSR Http Message `v2.0` package. [#188](https://github.com/aedart/athenaeum/issues/188).
+* Upgraded to use `ramsey/http-range v2.0` package. [#188](https://github.com/aedart/athenaeum/issues/188).
 * Upgraded to use PHPStan `v2.x` [#200](https://github.com/aedart/athenaeum/issues/200).
+* Adapted `\Aedart\Streams\Stream` to be compatible with `\Psr\Http\Message\StreamInterface` version `2.x`. [#188](https://github.com/aedart/athenaeum/issues/188).
+* Adapted `\Aedart\ETags\Preconditions\Ranges\RangeSet` to be compatible with `UnitRangeInterface` from `ramsey/http-range v2.0`. [#188](https://github.com/aedart/athenaeum/issues/188).
+* Adapted `\Aedart\Http\Clients\Requests\AdaptedRequest` to be compatible with PSR Http Message `v2.0` interfaces.
 * Replaced `yosymfony/toml` with `devium/toml` as supported toml parser (_affected component `\Aedart\Config\Parsers\Files\Toml`_). [#213](https://github.com/aedart/athenaeum/issues/213).
 * `array` return type for various implementation of Laravel's `toArray()` method (_inherited from `\Illuminate\Contracts\Support\Arrayable`_).
 * `string` return type for various implementation of Laravel's `toJson()` method (_inherited from `\Illuminate\Contracts\Support\Jsonable`_).
+* Adapted `\Aedart\Tests\Helpers\Dummies\Http\Messages\InvalidHttpMessage` to be compatible with PSR Http Message `v2.0` interfaces. [#188](https://github.com/aedart/athenaeum/issues/188).
 
 **Non-breaking Changes**
 
