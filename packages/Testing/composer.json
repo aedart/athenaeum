@@ -18,13 +18,13 @@
         "php": "^8.3",
         "aedart/athenaeum-container": "^8.23",
         "aedart/athenaeum-contracts": "^8.23",
-        "codeception/codeception": "^5.2.0",
+        "codeception/codeception": "^5.2.1",
         "codeception/module-asserts": "^3.0.0",
         "fakerphp/faker": "^v1.24.1",
         "illuminate/testing": "^v12.0.1",
         "mockery/mockery": "1.6.*",
         "orchestra/testbench": "^v10.0.0",
-        "orchestra/testbench-dusk": "^v10.0.2"
+        "orchestra/testbench-dusk": "^v10.0.3"
     },
     "autoload": {
         "psr-4": {
