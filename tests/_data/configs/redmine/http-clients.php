@@ -30,7 +30,12 @@ return [
             'driver'    => \Aedart\Http\Clients\Drivers\JsonHttpClient::class,
             'options'   => [
                 'grammar-profile' => 'default',
-                'base_uri' => env('REDMINE_API_URI', 'https://your-redmine-domain.com/'),
+                'base_uri' => env('REDMINE_API_URI', 'http://localhost:3000'),
+
+                'middleware' => [
+                    //\Aedart\Http\Clients\Middleware\RequestResponseLogging::class
+                    //\Aedart\Http\Clients\Middleware\RequestResponseDebugging::class
+                ]
             ]
         ],
 

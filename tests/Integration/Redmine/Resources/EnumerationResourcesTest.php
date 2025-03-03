@@ -8,6 +8,7 @@ use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\DocumentCategory;
 use Aedart\Redmine\Enumeration;
 use Aedart\Redmine\IssuePriority;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Redmine\TimeEntryActivity;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use JsonException;
@@ -65,7 +66,7 @@ class EnumerationResourcesTest extends RedmineTestCase
     public function canListEnumeration(string $enumerationResource)
     {
         // Debug
-        //        IssuePriority::$debug = true;
+        // RedmineApiResource::$debug = true;
 
         $list = [
             [
@@ -96,5 +97,8 @@ class EnumerationResourcesTest extends RedmineTestCase
         foreach ($found as $resource) {
             $this->assertInstanceOf($enumerationResource, $resource);
         }
+
+        // Debug
+        // RedmineApiResource::$debug = false;
     }
 }

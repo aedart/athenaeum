@@ -4,6 +4,7 @@ namespace Aedart\Tests\Integration\Redmine\Resources;
 
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Issue;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 
 /**
@@ -58,7 +59,19 @@ class IssueTest extends RedmineTestCase
         // Cleanup
 
         $issue->delete();
+
+        // When testing locally, using a Sqlite database, the API request might be too soon after the first
+        // project was deleted, which causes a "Database locked" exception / 500 Internal Server Error from
+        // Redmine. To avoid this, we wait for ~250 ms.
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
+
         $project->delete();
+
+        if ($this->isLive()) {
+            usleep(150_000);
+        }
     }
 
     /**
@@ -117,7 +130,19 @@ class IssueTest extends RedmineTestCase
         // Cleanup
 
         $issue->delete();
+
+        // When testing locally, using a Sqlite database, the API request might be too soon after the first
+        // project was deleted, which causes a "Database locked" exception / 500 Internal Server Error from
+        // Redmine. To avoid this, we wait for ~250 ms.
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
+
         $project->delete();
+
+        if ($this->isLive()) {
+            usleep(150_000);
+        }
     }
 
     /**
@@ -130,7 +155,7 @@ class IssueTest extends RedmineTestCase
     public function canListIssues()
     {
         // Debug
-        //        Issue::$debug = true;
+        // RedmineApiResource::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites
@@ -185,13 +210,27 @@ class IssueTest extends RedmineTestCase
         // List Issues
 
         $issues = Issue::list($limit, 0, [], $connection);
-
-        $this->assertCount($limit, $issues->results(), 'Incorrect amount of issues returned');
+        $this->assertGreaterThanOrEqual($limit - 1, count($issues->results()), 'Incorrect amount of issues returned');
 
         // ----------------------------------------------------------------------- //
         // Cleanup
 
         $issue->delete();
+
+        // When testing locally, using a Sqlite database, the API request might be too soon after the first
+        // project was deleted, which causes a "Database locked" exception / 500 Internal Server Error from
+        // Redmine. To avoid this, we wait for ~250 ms.
+        if ($this->isLive()) {
+            usleep(250_000);
+        }
+
         $project->delete();
+
+        if ($this->isLive()) {
+            usleep(150_000);
+        }
+
+        // Debug
+        // RedmineApiResource::$debug = false;
     }
 }

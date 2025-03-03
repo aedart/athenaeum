@@ -60,11 +60,16 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
 
         // Extract list (found results)
         $results = Collection::fromResponsePayload($payload, $resource);
+        $amountResults = count($results);
 
         // Extract pagination details
-        $total = $resource->extractOrDefault('total_count', $payload, count($results));
-        $limit = $resource->extractOrDefault('limit', $payload, count($results));
+        $total = $resource->extractOrDefault('total_count', $payload, $amountResults);
+        $limit = $resource->extractOrDefault('limit', $payload, $amountResults);
         $offset = $resource->extractOrDefault('offset', $payload, 0);
+
+        if ($limit < 1 && $amountResults === 0) {
+            $limit = 1;
+        }
 
         return new static($results, $total, $limit, $offset);
     }
