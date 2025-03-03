@@ -120,7 +120,7 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function close()
+    public function close(): void
     {
         $resource = $this->detach();
 
@@ -224,7 +224,7 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function seek($offset, $whence = SEEK_SET)
+    public function seek($offset, $whence = SEEK_SET): void
     {
         $msg = 'Unable to move stream position';
 
@@ -242,7 +242,7 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->seek(0);
     }

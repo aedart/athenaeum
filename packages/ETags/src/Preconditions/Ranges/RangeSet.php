@@ -21,16 +21,16 @@ class RangeSet implements RangeSetInterface
      *
      * @param string $unit
      * @param string $range
-     * @param int $start
-     * @param int $end
-     * @param mixed $totalSize
+     * @param float|int|string $start
+     * @param float|int|string $end
+     * @param float|int|string $totalSize
      */
     public function __construct(
         protected string $unit,
         protected string $range,
-        protected int $start,
-        protected int $end,
-        protected mixed $totalSize
+        protected float|int|string $start,
+        protected float|int|string $end,
+        protected float|int|string $totalSize
     ) {
     }
 
@@ -72,7 +72,7 @@ class RangeSet implements RangeSetInterface
     /**
      * @inheritDoc
      */
-    public function getStart()
+    public function getStart(): float | int | string
     {
         return $this->start;
     }
@@ -80,7 +80,7 @@ class RangeSet implements RangeSetInterface
     /**
      * @inheritDoc
      */
-    public function getEnd()
+    public function getEnd(): float | int | string
     {
         return $this->end;
     }
@@ -88,7 +88,7 @@ class RangeSet implements RangeSetInterface
     /**
      * @inheritDoc
      */
-    public function getLength()
+    public function getLength(): float | int | string
     {
         return (int) $this->getEnd() - (int) $this->getStart() + 1;
     }
@@ -96,7 +96,7 @@ class RangeSet implements RangeSetInterface
     /**
      * @inheritDoc
      */
-    public function getTotalSize()
+    public function getTotalSize(): float | int | string
     {
         return $this->totalSize;
     }
