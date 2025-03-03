@@ -835,8 +835,10 @@ abstract class RedmineApiResource extends ArrayDto implements ApiResource
             throw Conflict::from($response, $request);
         }
 
-        // Otherwise,
-        throw UnexpectedResponse::from($response, $request);
+        // Otherwise, abort if a client or server error was received...
+        if ($status->isClientError() || $status->isServerError()) {
+            throw UnexpectedResponse::from($response, $request);
+        }
     }
 
     /**
