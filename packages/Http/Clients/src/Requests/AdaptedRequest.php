@@ -67,7 +67,7 @@ class AdaptedRequest implements
     /**
      * @inheritDoc
      */
-    public function withProtocolVersion($version): MessageInterface
+    public function withProtocolVersion(string $version): MessageInterface
     {
         return new static(
             $this->request->withProtocolVersion($version),
@@ -86,7 +86,7 @@ class AdaptedRequest implements
     /**
      * @inheritDoc
      */
-    public function hasHeader($name): bool
+    public function hasHeader(string $name): bool
     {
         return $this->request->hasHeader($name);
     }
@@ -94,7 +94,7 @@ class AdaptedRequest implements
     /**
      * @inheritDoc
      */
-    public function getHeader($name): array
+    public function getHeader(string $name): array
     {
         return $this->request->getHeader($name);
     }
@@ -102,7 +102,7 @@ class AdaptedRequest implements
     /**
      * @inheritDoc
      */
-    public function getHeaderLine($name): string
+    public function getHeaderLine(string $name): string
     {
         return $this->request->getHeaderLine($name);
     }
@@ -110,7 +110,7 @@ class AdaptedRequest implements
     /**
      * @inheritDoc
      */
-    public function withHeader($name, $value): MessageInterface
+    public function withHeader(string $name, $value): MessageInterface
     {
         return new static(
             $this->request->withHeader($name, $value),
@@ -121,7 +121,7 @@ class AdaptedRequest implements
     /**
      * @inheritDoc
      */
-    public function withAddedHeader($name, $value): MessageInterface
+    public function withAddedHeader(string $name, $value): MessageInterface
     {
         return new static(
             $this->request->withAddedHeader($name, $value),
@@ -132,7 +132,7 @@ class AdaptedRequest implements
     /**
      * @inheritDoc
      */
-    public function withoutHeader($name): MessageInterface
+    public function withoutHeader(string $name): MessageInterface
     {
         return new static(
             $this->request->withoutHeader($name),
@@ -170,7 +170,7 @@ class AdaptedRequest implements
     /**
      * @inheritDoc
      */
-    public function withRequestTarget($requestTarget): RequestInterface
+    public function withRequestTarget(string $requestTarget): RequestInterface
     {
         return new static(
             $this->request->withRequestTarget($requestTarget),
@@ -189,7 +189,7 @@ class AdaptedRequest implements
     /**
      * @inheritDoc
      */
-    public function withMethod($method): RequestInterface
+    public function withMethod(string $method): RequestInterface
     {
         return new static(
             $this->request->withMethod($method),
@@ -208,7 +208,7 @@ class AdaptedRequest implements
     /**
      * @inheritDoc
      */
-    public function withUri(UriInterface $uri, $preserveHost = false): RequestInterface
+    public function withUri(UriInterface $uri, bool $preserveHost = false): RequestInterface
     {
         return new static(
             $this->request->withUri($uri, $preserveHost),
