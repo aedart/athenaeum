@@ -114,17 +114,18 @@ jobs:
                     infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
                     varlist: 'rest_api_enabled.default=1'
 
-            -   name: "Enable system API"
-                uses: rmeneely/update-yaml@v1
-                with:
-                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
-                    varlist: 'sys_api_enabled=1'
-
-            -   name: "Set system API key"
-                uses: rmeneely/update-yaml@v1
-                with:
-                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
-                    varlist: 'sys_api_key.default=${{ env.REDMINE_API_KEY }}'
+                # These appear to have no effect.
+#            -   name: "Enable system API"
+#                uses: rmeneely/update-yaml@v1
+#                with:
+#                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+#                    varlist: 'sys_api_enabled=1'
+#
+#            -   name: "Set system API key"
+#                uses: rmeneely/update-yaml@v1
+#                with:
+#                    infile: ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
+#                    varlist: 'sys_api_key.default=${{ env.REDMINE_API_KEY }}'
 
             #            -   name: "Debug: settings.xml"
             #                run: cat ${{ env.REDMINE_INSTALL_PATH }}/config/settings.yml
@@ -141,6 +142,14 @@ jobs:
                 run: |
                     cd ${{ env.REDMINE_INSTALL_PATH }}
                     RAILS_ENV=${{ env.REDMINE_ENVIRONMENT }} REDMINE_LANG=en bundle exec rake redmine:load_default_data
+
+            # ------------------------------------------------------------------------------------------------------- #
+
+            -   name: "Add API token for default user"
+                run: |
+                    cd ${{ env.REDMINE_INSTALL_PATH }}
+                    sqlite3 db/${{ env.REDMINE_ENVIRONMENT }}.sqlite3 "update users set must_change_passwd = 0 where id = 1"
+                    sqlite3 db/${{ env.REDMINE_ENVIRONMENT }}.sqlite3 "insert into tokens (user_id, action, value, created_on, updated_on) values (1, 'api', '${{ env.REDMINE_API_KEY }}', datetime('now'), datetime('now'))"
 
             # ------------------------------------------------------------------------------------------------------- #
 
