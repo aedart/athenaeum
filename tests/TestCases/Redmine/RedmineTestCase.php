@@ -564,7 +564,11 @@ abstract class RedmineTestCase extends LaravelTestCase
     {
         $data = [
             'name' => 'Test project via @aedart/athenaeum-redmine',
-            'identifier' => 'test-auto-created-' . now()->timestamp,
+            'identifier' => implode('-', [
+                'test-auto-created',
+                now()->timestamp,
+                now()->microsecond
+            ]),
             'description' => 'Projects are been created via Redmine API Client, in [Athenaeum](https://github.com/aedart/athenaeum) package.'
         ];
 
