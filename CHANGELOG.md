@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.22.0] - 2025-03-03
+
 ### Added
 
 * ~~GitHub workflow for "live" testing the Redmine API (`redmine_api_tests.yaml`)~~ (_disabled due to Redmine installation and configuration difficulties in the CI_).
@@ -1619,7 +1621,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/8.21.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/8.22.0...HEAD
+[8.22.0]: https://github.com/aedart/athenaeum/compare/8.21.0...8.22.0
 [8.21.0]: https://github.com/aedart/athenaeum/compare/8.20.0...8.21.0
 [8.20.0]: https://github.com/aedart/athenaeum/compare/8.19.0...8.20.0
 [8.19.0]: https://github.com/aedart/athenaeum/compare/8.18.0...8.19.0
