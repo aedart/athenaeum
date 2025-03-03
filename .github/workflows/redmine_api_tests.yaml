@@ -4,9 +4,12 @@
 
 name: 'Redmine API Tests'
 
-# TODO: This should NOT run as often as everything else... perhaps a schedule?
 on:
-    push
+#    push
+
+    # Due to the difficulties of getting Redmine to be installed and configured correctly in the CI,
+    # this workflow should NOT run automatically.
+    workflow_dispatch
 
 env:
     # Location where Redmine instance must be installed
