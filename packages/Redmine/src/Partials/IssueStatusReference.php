@@ -2,8 +2,6 @@
 
 namespace Aedart\Redmine\Partials;
 
-use Aedart\Dto\ArrayDto;
-
 /**
  * Issue Status Reference
  *

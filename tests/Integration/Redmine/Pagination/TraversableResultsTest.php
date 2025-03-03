@@ -6,7 +6,6 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Issue;
 use Aedart\Redmine\RedmineApiResource;
-use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use JsonException;
 use Throwable;
