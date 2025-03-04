@@ -32,7 +32,7 @@ env:
     REDMINE_API_KEY: '${{ github.sha }}'
 
     # The ruby version to use...
-    RUBY_VERSION: '3.1'
+    RUBY_VERSION: '3.3'
 
 jobs:
     redmine_api_tests:
@@ -45,7 +45,7 @@ jobs:
 
                 # See OS and PHP version options on https://github.com/shivammathur/setup-php
                 operating-system: [ 'ubuntu-24.04' ]
-                php-versions: [ '8.2' ]
+                php-versions: [ '8.3' ]
 
                 # Redmine versions (in this case branches)
                 redmine-versions: [ '6.0-stable' ]
