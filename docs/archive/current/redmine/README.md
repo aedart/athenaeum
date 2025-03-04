@@ -40,6 +40,7 @@ Issue::findOrFail(9874)
 
 | Athenaeum Redmine Client | Redmine version            |
 |--------------------------|----------------------------|
+| `v9.x`                   | `v6.0.x`                   |
 | From `v8.22`             | `v4.x`, `v5.0.x`, `v5.1.x` |
 | `v7.x`                   | `v4.x`                     |
 | `v6.x`                   | `v4.x`                     |
