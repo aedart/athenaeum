@@ -4,6 +4,7 @@ namespace Aedart\Tests\Integration\Redmine\Resources;
 
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Issue;
+use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 
 /**
@@ -28,7 +29,7 @@ class IssueNotesTest extends RedmineTestCase
     public function canAddNoteToIssue()
     {
         // Debug
-        //        Issue::$debug = true;
+        // RedmineApiResource::$debug = true;
 
         // ----------------------------------------------------------------------- //
         // Prerequisites
@@ -95,5 +96,8 @@ class IssueNotesTest extends RedmineTestCase
         if ($this->isLive()) {
             usleep(150_000);
         }
+
+        // Debug
+        // RedmineApiResource::$debug = false;
     }
 }

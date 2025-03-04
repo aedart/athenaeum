@@ -16,6 +16,7 @@ use Carbon\Carbon;
  * @property bool $private_notes
  * @property ListOfDetails<Detail>|Detail[]|null $details
  * @property Carbon $created_on
+ * @property Carbon|null $updated_on
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Redmine\Partials
@@ -28,6 +29,7 @@ class Journal extends ArrayDto
         'notes' => 'string',
         'private_notes' => 'bool',
         'details' => ListOfDetails::class,
-        'created_on' => 'date'
+        'created_on' => 'date',
+        'updated_on' => 'date',
     ];
 }

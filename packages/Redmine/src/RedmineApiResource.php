@@ -87,7 +87,8 @@ abstract class RedmineApiResource extends ArrayDto implements ApiResource
      */
     protected array $expectedStatusCodes = [
         StatusCodes::OK,
-        StatusCodes::CREATED
+        StatusCodes::CREATED,
+        StatusCodes::NO_CONTENT
     ];
 
     /**
