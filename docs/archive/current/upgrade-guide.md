@@ -19,6 +19,16 @@ You need PHP `v8.3` or higher to run Athenaeum packages.
 
 Please read Laravel's [upgrade guide](https://laravel.com/docs/12.x/upgrade), before continuing here.
 
+### Upgrade to `ramsey/http-range` `v2.x` and `psr/http-message` `v2.x`
+
+Several HTTP related components and packages have been upgraded to use the latest version of
+[`ramsey/http-range`](https://github.com/ramsey/http-range) and thereby also
+[`psr/http-message` `v2.x`](https://github.com/php-fig/http-message).
+The [Streams](./streams/README.md) package is also affected by these changes.
+
+Mostly, the changes are concerned with method return types and method parameter types.
+For additional information, please review the changelog and eventually the source code of the mentioned packages.
+
 ### TOML parser changed to `devium/toml`
 
 The [configuration loader](./config/README.md) now requires [`devium/toml`](https://github.com/vanodevium/toml) for
