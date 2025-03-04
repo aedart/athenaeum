@@ -5,14 +5,14 @@ sidebarDepth: 0
 
 # Relations
 
-Similar to [Laravel's native Api Resources](https://laravel.com/docs/11.x/eloquent-resources#conditional-relationships), this package offers a way to include and represent relations (_in a fluent manner_), if they are eager-loaded for the given model. 
+Similar to [Laravel's native Api Resources](https://laravel.com/docs/12.x/eloquent-resources#conditional-relationships), this package offers a way to include and represent relations (_in a fluent manner_), if they are eager-loaded for the given model. 
 In this context, the representation of such relations are referred to as "relation references". 
 
 [[TOC]]
 
 ## Simple Example
 
-Imagine that your User model has a defined a [belongs to "Address" relation](https://laravel.com/docs/11.x/eloquent-relationships#one-to-many-inverse).
+Imagine that your User model has a defined a [belongs to "Address" relation](https://laravel.com/docs/12.x/eloquent-relationships#one-to-many-inverse).
 If you wish to display that relation in the model's corresponding Api Resource, you can use the `belongsToReference()` method (_inside the Api Resource class_).
 The method expects a valid relation name, which must be defined in the Model.
 

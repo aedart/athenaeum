@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Utils\Random;
 
+use Random\IntervalBoundary;
 use Throwable;
 
 /**
@@ -15,6 +16,8 @@ interface NumericRandomizer extends Randomizer
     /**
      * Returns a uniformly selected integer
      *
+     * @see https://www.php.net/manual/en/random-randomizer.getint.php
+     *
      * @param int $min
      * @param int $max
      *
@@ -27,9 +30,35 @@ interface NumericRandomizer extends Randomizer
     /**
      * Returns next positive integer
      *
+     * @see https://www.php.net/manual/en/random-randomizer.nextint.php
+     *
      * @return int
      *
      * @throws Throwable
      */
     public function nextInt(): int;
+
+    /**
+     * Returns a uniformly selected float
+     *
+     * @see https://www.php.net/manual/en/random-randomizer.getfloat.php
+     *
+     * @param float $min
+     * @param float $max
+     * @param IntervalBoundary $boundary [optional]
+     *
+     * @return float
+     */
+    public function float(float $min, float $max, IntervalBoundary $boundary = IntervalBoundary::ClosedOpen): float;
+
+    /**
+     * Get the next float
+     *
+     * @see https://www.php.net/manual/en/random-randomizer.nextfloat.php
+     *
+     * @return float
+     *
+     * @throws Throwable
+     */
+    public function nextFloat(): float;
 }

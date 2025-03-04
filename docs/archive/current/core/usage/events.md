@@ -4,12 +4,12 @@ description: How to Register Event Listeners
 
 # Events
 
-The [Event Dispatcher](https://laravel.com/docs/11.x/events) that comes with this package, offers you an application-wide observer pattern implementation.
-Please read Laravel's [documentation](https://laravel.com/docs/11.x/events), to gain some basic understanding of it's capabilities.
+The [Event Dispatcher](https://laravel.com/docs/12.x/events) that comes with this package, offers you an application-wide observer pattern implementation.
+Please read Laravel's [documentation](https://laravel.com/docs/12.x/events), to gain some basic understanding of it's capabilities.
 
 ## Register Event Listeners
 
-By default, when you need to register [event listeners](https://laravel.com/docs/11.x/events#defining-listeners) or [subscribers](https://laravel.com/docs/11.x/events#event-subscribers), you need to state them within your `/config/events.php` configuration file.
+By default, when you need to register [event listeners](https://laravel.com/docs/12.x/events#defining-listeners) or [subscribers](https://laravel.com/docs/12.x/events#event-subscribers), you need to state them within your `/config/events.php` configuration file.
 See the [Athenaeum Package](../../events) for details and examples.
 
 ### Via Service Provider
@@ -42,7 +42,7 @@ class MyEventServiceProvider extends ServiceProvider
 
 ## Limitations
 
-This package does not come with Laravel's [Queues](https://laravel.com/docs/11.x/queues).
-As a consequence of this, [queued event listeners](https://laravel.com/docs/11.x/events#queued-event-listeners) are not available by default.
+This package does not come with Laravel's [Queues](https://laravel.com/docs/12.x/queues).
+As a consequence of this, [queued event listeners](https://laravel.com/docs/12.x/events#queued-event-listeners) are not available by default.
 You could try to include the [Queue package](https://packagist.org/packages/illuminate/queue) by yourself.
 Read the [Service Providers chapter](providers) for additional information. 

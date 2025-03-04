@@ -3,6 +3,7 @@
 namespace Aedart\Utils\Random\Types;
 
 use Aedart\Contracts\Utils\Random\NumericRandomizer as NumericRandomizerInterface;
+use Random\IntervalBoundary;
 
 /**
  * Numeric Randomizer
@@ -26,5 +27,21 @@ class NumericRandomizer extends BaseRandomizer implements NumericRandomizerInter
     public function nextInt(): int
     {
         return $this->driver()->nextInt();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function float(float $min, float $max, IntervalBoundary $boundary = IntervalBoundary::ClosedOpen): float
+    {
+        return $this->driver()->getFloat($min, $max, $boundary);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function nextFloat(): float
+    {
+        return $this->driver()->nextFloat();
     }
 }

@@ -113,7 +113,7 @@ abstract class NestedList implements
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->list;
     }
@@ -121,7 +121,7 @@ abstract class NestedList implements
     /**
      * @inheritDoc
      */
-    public function toJson($options = 0)
+    public function toJson($options = 0): string
     {
         return Json::encode($this->jsonSerialize(), $options);
     }

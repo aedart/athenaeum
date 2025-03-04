@@ -177,7 +177,7 @@ $response = $client
 You may also extract your expectation logic into a separate class, if you wish so.
 Simply extend the `ResponseExpectation` class and implement the `expectation()` method.
 The benefit of doing so, is that you can encapsulate more complex response validation logic.
-For instance, you can use Laravel's [Validator](https://laravel.com/docs/11.x/validation#manually-creating-validators) to perform validation of a response's payload.  
+For instance, you can use Laravel's [Validator](https://laravel.com/docs/12.x/validation#manually-creating-validators) to perform validation of a response's payload.  
 
 ```php
 use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
@@ -229,7 +229,8 @@ If you require a way to modify the incoming response or perhaps the outgoing req
 
 ## Status Code Object
 
-The `Status` object, that given to your expectation callbacks, offers a variety of methods to quickly determine if it matches a desired Http status code.
+The `Status` object that is provided offers a variety of methods to quickly determine if it matches a desired Http
+status code.
 
 ```php
 use Aedart\Contracts\Http\Clients\Responses\Status;
@@ -254,6 +255,10 @@ $client
         }
         
         if ( ! $status->isSuccessful()) {
+            // ...
+        }
+        
+        if ($status->isServerError()) {
             // ...
         }
     });

@@ -83,7 +83,7 @@ trait DtoPartial
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $properties = $this->populatableProperties();
         $output = [];
@@ -109,7 +109,7 @@ trait DtoPartial
      *
      * @throws JsonException
      */
-    public function toJson($options = 0)
+    public function toJson($options = 0): string
     {
         return Json::encode($this->jsonSerialize(), $options);
     }

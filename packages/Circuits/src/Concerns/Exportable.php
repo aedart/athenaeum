@@ -18,7 +18,7 @@ trait Exportable
      *
      * @throws JsonException
      */
-    public function toJson($options = 0)
+    public function toJson($options = 0): string
     {
         return Json::encode($this->toArray(), $options);
     }

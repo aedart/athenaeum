@@ -20,7 +20,7 @@ class InvalidHttpMessage implements MessageInterface
     /**
      * @inheritDoc
      */
-    public function getProtocolVersion()
+    public function getProtocolVersion(): string
     {
         return '0.x';
     }
@@ -28,7 +28,7 @@ class InvalidHttpMessage implements MessageInterface
     /**
      * @inheritDoc
      */
-    public function withProtocolVersion($version)
+    public function withProtocolVersion(string $version): MessageInterface
     {
         return new static();
     }
@@ -36,7 +36,7 @@ class InvalidHttpMessage implements MessageInterface
     /**
      * @inheritDoc
      */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return [];
     }
@@ -44,7 +44,7 @@ class InvalidHttpMessage implements MessageInterface
     /**
      * @inheritDoc
      */
-    public function hasHeader($name)
+    public function hasHeader(string $name): bool
     {
         return false;
     }
@@ -52,7 +52,7 @@ class InvalidHttpMessage implements MessageInterface
     /**
      * @inheritDoc
      */
-    public function getHeader($name)
+    public function getHeader(string $name): array
     {
         return [];
     }
@@ -60,7 +60,7 @@ class InvalidHttpMessage implements MessageInterface
     /**
      * @inheritDoc
      */
-    public function getHeaderLine($name)
+    public function getHeaderLine(string $name): string
     {
         return '';
     }
@@ -68,7 +68,7 @@ class InvalidHttpMessage implements MessageInterface
     /**
      * @inheritDoc
      */
-    public function withHeader($name, $value)
+    public function withHeader(string $name, $value): MessageInterface
     {
         return new static();
     }
@@ -76,7 +76,7 @@ class InvalidHttpMessage implements MessageInterface
     /**
      * @inheritDoc
      */
-    public function withAddedHeader($name, $value)
+    public function withAddedHeader(string $name, $value): MessageInterface
     {
         return new static();
     }
@@ -84,7 +84,7 @@ class InvalidHttpMessage implements MessageInterface
     /**
      * @inheritDoc
      */
-    public function withoutHeader($name)
+    public function withoutHeader(string $name): MessageInterface
     {
         return new static();
     }
@@ -92,7 +92,7 @@ class InvalidHttpMessage implements MessageInterface
     /**
      * @inheritDoc
      */
-    public function getBody()
+    public function getBody(): StreamInterface
     {
         return FileStream::openMemory();
     }
@@ -100,7 +100,7 @@ class InvalidHttpMessage implements MessageInterface
     /**
      * @inheritDoc
      */
-    public function withBody(StreamInterface $body)
+    public function withBody(StreamInterface $body): MessageInterface
     {
         return new static();
     }

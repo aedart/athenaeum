@@ -3,6 +3,8 @@
 namespace Aedart\Support\Properties\Dates;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Date Trait
  *
  * @see \Aedart\Contracts\Support\Properties\Dates\DateAware

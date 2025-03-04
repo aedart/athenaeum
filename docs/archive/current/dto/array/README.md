@@ -4,7 +4,8 @@ description: How to create Array Dto
 
 # Array DTO
 
-While the `Dto` abstraction is good for situations where you must adhere to interfaces that define getters and setters, it can be a bit cumbersome to maintain a large number classes.
+While the `Dto` abstraction is good for situations where you must adhere to interfaces that define lots of getters and
+setters, it can be a bit cumbersome to maintain a large number of classes.
 This can especially be true, if you must create DTOs to represent all the resources available for a large scale API.
 
 In such situations, the `ArrayDto` abstraction is perhaps better suited.
@@ -17,7 +18,7 @@ Extend the `ArrayDto` abstraction and declare your DTO's properties, via the `$a
 
 The keys of the `$allowed` variable correspond to your property's name, whereas the values correspond to the property's data type.
 
-Whenever your DTO is populated, it will automatically ensure to [cast](http://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting) the property to it's decalred type. 
+Whenever your DTO is populated, it will automatically ensure to [cast](http://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting) the property to it's declared type. 
 
 ```php
 use Aedart\Dto\ArrayDto;

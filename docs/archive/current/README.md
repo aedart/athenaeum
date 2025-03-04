@@ -9,13 +9,14 @@ sidebarDepth: 0
 
 ## Support Policy
 
-Athenaeum attempts to follow a release cycle that matches closely to that of [Laravel](https://laravel.com/docs/11.x/releases).
+Athenaeum attempts to follow a release cycle that matches closely to that of [Laravel](https://laravel.com/docs/12.x/releases).
 However, due to limited amount of project maintainers, no guarantees can be provided. 
 
 | Version | PHP         | Laravel | Release              | Security Fixes Until |
 |---------|-------------|---------|----------------------|----------------------|
-| `9.x`   | `8.3 - ?`   | `v12.x` | _~1st Quarter 2025_  | _TBD_                |
-| `8.x`*  | `8.2 - 8.3` | `v11.x` | Match 18th, 2024     | February 2025        |
+| `10.x`  | `8.4 - ?`   | `v13.x` | _~1st Quarter 2026_  | _TBD_                |
+| `9.x`*  | `8.3 - 8.4` | `v12.x` | March 4th, 2025      | February 2026        |
+| `8.x`   | `8.2 - 8.3` | `v11.x` | March 18th, 2024     | February 2025        |
 | `7.x`   | `8.1 - 8.2` | `v10.x` | February 16th, 2023  | March 2024           |
 | `6.x`   | `8.0 - 8.1` | `v9.x`  | April 5th, 2022      | February 2023        |
 | `< 6.x` | _-_         | _-_     | _See `CHANGELOG.md`_ | _N/A_                |
@@ -24,40 +25,55 @@ _*: current supported version._
 
 _TBD: "To be decided"._
 
-## `v8.x` Highlights
+## `v9.x` Highlights
 
 These are the highlights of the latest major version of Athenaeum.
 
-### PHP `v8.2` and Laravel `v11.x`
+### PHP `v8.3` and Laravel `v12.x`
 
-PHP version `v8.2` is now the minimum required version for Athenaeum.
-[Laravel `v10.x`](https://laravel.com/docs/11.x/releases) packages are now used.
+PHP version `v8.3` is now the minimum required version for Athenaeum.
+[Laravel `v12.x`](https://laravel.com/docs/12.x/releases) packages are now used.
 
-### Randomizers
+### Randomizer `float()`, `nextFloat()` and `bytesFromString()`
 
-`Math`, `Str` and `Arr` now offer a `randomizer()` method that returns an adapter for PHP's [`Random\Randomizer`](https://www.php.net/manual/en/class.random-randomizer.php).
+`NumericRandomizer` now supports generating random floats via [`float()`](./utils/math.md#float)
+and [`nextFloat()`](./utils/math.md#nextfloat). Additionally, the `StringRandomizer` now offers a
+[`bytesFromString()`](./utils/string.md#bytesfromstring) method.
 
-```php
-use Aedart\Utils\Arr;
+### Environment File utility
 
-$arr = [ 'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5 ];
+The `EnvFile` can be used for replacing the value of an existing key, or appending a new key-value pair, in the
+application's environment file.
 
-Arr::randomizer()->values($arr, 2); // [ 5, 2 ]
-```
+See [Support package documentation](./support/env-file.md) for details.
 
-See [`Math::randomizer()`](./utils/math.md#randomizer), [`Str::randomizer()`](./utils/string.md#randomizer) and [`Arr::randomizer()`](./utils/array.md#randomizer) for additional information.
+### Redmine `v6.0.x` API 
 
-### Memory Snapshot
+The [Redmine Client](./redmine/README.md) now supports [Redmine `v6.0.x` API](https://www.redmine.org/projects/redmine/wiki/Rest_api). 
 
-The [`Memory::snapshot()`](./utils/memory.md#snapshot) method returns the current memory usage.
+### Auth Exceptions and Responses
 
-```php
-use Aedart\Utils\Memory;
+The Auth package has received a few new components, intended to be used in combination with for Laravel Fortify.
+Among them are a few predefined exceptions and response helpers.
 
-$snapshot = Memory::snapshot();
+See [Auth Fortify documentation](./auth/fortify/README.md) for details.
 
-echo $snapshot->bytes(); // 544812
-```
+### TOML version 1.0.0 Supported
+
+The [configuration loader](./config/README.md) now supports [toml](https://github.com/toml-lang/toml) version `1.0.0` format.
+
+Please see the [upgrade guide](./upgrade-guide.md) for details.
+
+### Additional parameters for `Json::isValid()`  
+
+The `Json::isValid()` now accepts `$depth` and `$options` as optional parameters.
+
+See [documentation](./utils/json.md#validation) for details.
+
+### Deprecation of "Aware-of" Properties
+
+The ["aware-of" properties](support/properties/available-helpers.md) have been deprecated. These have served their purpose in the past, but are now no longer
+relevant. The components will be removed in the next major version. There are no plans to offer any alternatives.
 
 ## Changelog
 

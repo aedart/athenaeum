@@ -42,22 +42,22 @@ class Version extends RedmineApiResource implements
     /**
      * Open - version status (default)
      */
-    public const STATUS_OPEN = 'open';
+    public const string STATUS_OPEN = 'open';
 
     /**
      * Locked - version status
      */
-    public const STATUS_LOCKED = 'locked';
+    public const string STATUS_LOCKED = 'locked';
 
     /**
      * Closed - version status
      */
-    public const STATUS_CLOSED = 'closed';
+    public const string STATUS_CLOSED = 'closed';
 
     /**
      * List of predefined version status
      */
-    public const STATUS_LIST = [
+    public const array STATUS_LIST = [
         self::STATUS_OPEN,
         self::STATUS_LOCKED,
         self::STATUS_CLOSED,
@@ -66,32 +66,32 @@ class Version extends RedmineApiResource implements
     /**
      * Version is shared with no other projects (default)
      */
-    public const SHARED_WITH_NONE = 'none';
+    public const string SHARED_WITH_NONE = 'none';
 
     /**
      * Version is shared owning project's sub-projects
      */
-    public const SHARED_WITH_SUB_PROJECTS = 'descendants';
+    public const string SHARED_WITH_SUB_PROJECTS = 'descendants';
 
     /**
      * Version is shared project hierarchy
      */
-    public const SHARED_WITH_PROJECT_HIERARCHY = 'hierarchy';
+    public const string SHARED_WITH_PROJECT_HIERARCHY = 'hierarchy';
 
     /**
      * Version is shared with project tree
      */
-    public const SHARED_WITH_PROJECT_TREE = 'tree';
+    public const string SHARED_WITH_PROJECT_TREE = 'tree';
 
     /**
      * Version is shared with all projects
      */
-    public const SHARED_WITH_ALL = 'system';
+    public const string SHARED_WITH_ALL = 'system';
 
     /**
      * List of predefined "shared with" state
      */
-    public const SHARED_WITH_LIST = [
+    public const array SHARED_WITH_LIST = [
         self::SHARED_WITH_NONE,
         self::SHARED_WITH_SUB_PROJECTS,
         self::SHARED_WITH_PROJECT_HIERARCHY,

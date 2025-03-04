@@ -136,7 +136,7 @@ class RulesCollection implements Rules
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->rules();
     }

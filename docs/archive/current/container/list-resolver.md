@@ -27,7 +27,7 @@ $list = [
 $filters = (new ListResolver())->make($list);
 ```
 
-Behind the scene, the [`make()`](https://laravel.com/docs/11.x/container#the-make-method) method is used to resolve the list of dependencies.
+Behind the scene, the [`make()`](https://laravel.com/docs/12.x/container#the-make-method) method is used to resolve the list of dependencies.
 This means that even if your components have nested dependencies, then these too will be resolved.  
 
 ## Arguments

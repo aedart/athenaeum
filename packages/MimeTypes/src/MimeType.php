@@ -87,7 +87,7 @@ class MimeType implements MimeTypeInterface
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'description' => $this->description(),

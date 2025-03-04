@@ -19,9 +19,9 @@ interface CircuitBreaker
      * Closed state identifier - initial state
      *
      * The success state - the circuit breaker has
-     * not reached it's failure threshold.
+     * not reached its failure threshold.
      */
-    public const CLOSED = 0;
+    public const int CLOSED = 0;
 
     /**
      * Open state identifier
@@ -29,7 +29,7 @@ interface CircuitBreaker
      * This is the failure state - the circuit breaker has
      * tripped, because the failure threshold has been reached.
      */
-    public const OPEN = 2;
+    public const int OPEN = 2;
 
     /**
      * Half-open state identifier
@@ -39,7 +39,7 @@ interface CircuitBreaker
      * be changed to {@see CLOSED}, otherwise the state must
      * change back to {@see OPEN}.
      */
-    public const HALF_OPEN = 4;
+    public const int HALF_OPEN = 4;
 
     /**
      * Returns the name

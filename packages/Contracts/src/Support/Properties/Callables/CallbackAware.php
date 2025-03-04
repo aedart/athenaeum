@@ -3,6 +3,8 @@
 namespace Aedart\Contracts\Support\Properties\Callables;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Callback Aware
  *
  * Component is aware of callable "callback"

@@ -33,11 +33,11 @@ abstract class ParserBase implements FileParser
     /**
      * ParserBase constructor.
      *
-     * @param null|string $filePath [optional]
+     * @param string|null $filePath [optional]
      *
      * @throws FileDoesNotExistException
      */
-    public function __construct(?string $filePath = null)
+    public function __construct(string|null $filePath = null)
     {
         if (isset($filePath)) {
             $this->setFilePath($filePath);

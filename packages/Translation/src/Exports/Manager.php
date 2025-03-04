@@ -49,7 +49,7 @@ class Manager implements
     /**
      * @inheritDoc
      */
-    public function profile(?string $name = null, array $options = []): Exporter
+    public function profile(string|null $name = null, array $options = []): Exporter
     {
         $name = $name ?? $this->defaultProfile();
 

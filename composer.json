@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "ext-fileinfo": "*",
         "ext-json": "*",
         "ext-sockets": "*",
@@ -17,29 +17,29 @@
         "dragonmantank/cron-expression": "^3.4.0",
         "fakerphp/faker": "^v1.24.1",
         "guzzlehttp/guzzle": "^7.9.2",
-        "illuminate/auth": "^v11.42.1",
-        "illuminate/cache": "^v11.42.1",
-        "illuminate/collections": "^v11.42.1",
-        "illuminate/config": "^v11.42.1",
-        "illuminate/console": "^v11.42.1",
-        "illuminate/container": "^v11.42.1",
-        "illuminate/contracts": "^v11.42.1",
-        "illuminate/database": "^v11.42.1",
-        "illuminate/events": "^v11.42.1",
-        "illuminate/filesystem": "^v11.42.1",
-        "illuminate/http": "^v11.42.1",
-        "illuminate/pipeline": "^v11.42.1",
-        "illuminate/support": "^v11.42.1",
-        "illuminate/translation": "^v11.42.1",
-        "illuminate/validation": "^v11.42.1",
+        "illuminate/auth": "^v12.0.1",
+        "illuminate/cache": "^v12.0.1",
+        "illuminate/collections": "^v12.0.1",
+        "illuminate/config": "^v12.0.1",
+        "illuminate/console": "^v12.0.1",
+        "illuminate/container": "^v12.0.1",
+        "illuminate/contracts": "^v12.0.1",
+        "illuminate/database": "^v12.0.1",
+        "illuminate/events": "^v12.0.1",
+        "illuminate/filesystem": "^v12.0.1",
+        "illuminate/http": "^v12.0.1",
+        "illuminate/pipeline": "^v12.0.1",
+        "illuminate/support": "^v12.0.1",
+        "illuminate/translation": "^v12.0.1",
+        "illuminate/validation": "^v12.0.1",
         "league/flysystem": "^3.29.1",
         "mockery/mockery": "1.6.*",
         "psr/http-client": "^1.0.3",
         "psr/http-factory": "^1.1.0",
-        "psr/http-message": "^1.1",
+        "psr/http-message": "^2.0",
         "psr/log": "^3.0.2",
-        "ramsey/http-range": "^1.1.0",
-        "shrikeh/teapot": "^2.3.1",
+        "ramsey/http-range": "^2.0.0",
+        "shrikeh/teapot": "^3.0.0",
         "symfony/console": "^v7.2.1",
         "symfony/finder": "^7.2.2",
         "vlucas/phpdotenv": "^5.6.1",
@@ -48,21 +48,21 @@
     "require-dev": {
         "ext-curl": "*",
         "bamarni/composer-bin-plugin": "^1.8.2",
-        "codeception/codeception": "^5.2.0",
+        "codeception/codeception": "^5.2.1",
         "codeception/module-asserts": "^3.0.0",
-        "illuminate/testing": "^v11.42.1",
+        "illuminate/testing": "^v12.0.1",
         "laravel/fortify": "^1.25.4",
         "league/flysystem-adapter-test-utilities": "^3.29.0",
         "nette/neon": "^3.4.4",
-        "orchestra/testbench": "^v9.10.0",
-        "orchestra/testbench-dusk": "^v9.12.1",
-        "phpstan/phpstan": "^1.12.18",
+        "orchestra/testbench": "^v10.0.0",
+        "orchestra/testbench-dusk": "^v10.0.3",
+        "phpstan/phpstan": "^2.1.4",
         "predis/predis": "^2.3.0",
         "roave/security-advisories": "dev-master",
         "symfony/var-dumper": "^v7.2.3",
         "symfony/yaml": "^v7.2.3",
         "twig/twig": "^3.20.0",
-        "yosymfony/toml": "^1.0.4"
+        "devium/toml": "^1.0.5"
     },
     "autoload": {
         "files": [
@@ -113,7 +113,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "8.23.x-dev"
+            "dev-master": "9.1.x-dev"
         },
         "extra": {
             "bamarni-bin": {
@@ -138,7 +138,7 @@
             "@composer bin all update --ansi"
         ],
         "check": [
-            "vendor-bin/cs/vendor/squizlabs/php_codesniffer/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary --runtime-set testVersion 8.2- ./packages ./tests"
+            "vendor-bin/cs/vendor/squizlabs/php_codesniffer/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary --runtime-set testVersion 8.3- ./packages ./tests"
         ],
         "cs": "vendor-bin/cs/vendor/symplify/easy-coding-standard/bin/ecs check --ansi",
         "cs-fix": "vendor-bin/cs/vendor/symplify/easy-coding-standard/bin/ecs check --fix --ansi",
@@ -149,6 +149,11 @@
         "sort-packages": true,
         "allow-plugins": {
             "bamarni/composer-bin-plugin": true
+        },
+        "bamarni-bin": {
+            "bin-links": false,
+            "target-directory": "vendor-bin",
+            "forward-command": false
         }
     },
     "replace": {

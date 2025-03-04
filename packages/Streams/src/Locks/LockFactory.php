@@ -50,7 +50,7 @@ class LockFactory implements Factory
     /**
      * @inheritDoc
      */
-    public function create(Stream $stream, ?string $profile = null, array $options = []): Lock
+    public function create(Stream $stream, string|null $profile = null, array $options = []): Lock
     {
         $profile = $profile ?? $this->defaultProfile;
 

@@ -26,12 +26,12 @@ interface FieldCriteria extends Criteria
     /**
      * Logical 'and' operator
      */
-    public const AND = 'and';
+    public const string AND = 'and';
 
     /**
      * Logical 'or' operator
      */
-    public const OR = 'or';
+    public const string OR = 'or';
 
     /**
      * Creates a new field criteria instance

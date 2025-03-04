@@ -17,7 +17,7 @@ interface LockTypes
      *
      * @see https://www.php.net/manual/en/function.flock.php
      */
-    public const SHARED = 1;
+    public const int SHARED = 1;
 
     /**
      * Exclusive lock type (writer)
@@ -26,5 +26,5 @@ interface LockTypes
      *
      * @see https://www.php.net/manual/en/function.flock.php
      */
-    public const EXCLUSIVE = 2;
+    public const int EXCLUSIVE = 2;
 }

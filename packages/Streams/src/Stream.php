@@ -35,7 +35,7 @@ class Stream implements StreamInterface
      *
      * @see \GuzzleHttp\Psr7\Stream::READABLE_MODES
      */
-    public const READABLE_MODES = '/r|a\+|ab\+|w\+|wb\+|x\+|xb\+|c\+|cb\+/';
+    public const string READABLE_MODES = '/r|a\+|ab\+|w\+|wb\+|x\+|xb\+|c\+|cb\+/';
 
     /**
      * Writeable modes regex
@@ -44,7 +44,7 @@ class Stream implements StreamInterface
      *
      * @see \GuzzleHttp\Psr7\Stream::WRITABLE_MODES
      */
-    public const WRITABLE_MODES = '/a|w|r\+|rb\+|rw|x|c/';
+    public const string WRITABLE_MODES = '/a|w|r\+|rb\+|rw|x|c/';
 
     /**
      * The actual resource stream
@@ -120,7 +120,7 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function close()
+    public function close(): void
     {
         $resource = $this->detach();
 
@@ -224,7 +224,7 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function seek($offset, $whence = SEEK_SET)
+    public function seek($offset, $whence = SEEK_SET): void
     {
         $msg = 'Unable to move stream position';
 
@@ -242,7 +242,7 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->seek(0);
     }
@@ -400,7 +400,7 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function readLine(?int $length = null): string|false
+    public function readLine(int|null $length = null): string|false
     {
         $msg = 'Unable to read line';
         $this

@@ -59,33 +59,33 @@ class User extends RedmineApiResource implements
      *
      * @see https://www.redmine.org/projects/redmine/repository/entry/trunk/app/models/principal.rb
      */
-    public const STATUS_ANONYMOUS = 0;
+    public const int STATUS_ANONYMOUS = 0;
 
     /**
      * Active user status - predefined by Redmine
      *
      * @see https://www.redmine.org/projects/redmine/repository/entry/trunk/app/models/principal.rb
      */
-    public const STATUS_ACTIVE = 1;
+    public const int STATUS_ACTIVE = 1;
 
     /**
      * Registered user status - predefined by Redmine
      *
      * @see https://www.redmine.org/projects/redmine/repository/entry/trunk/app/models/principal.rb
      */
-    public const STATUS_REGISTERED = 2;
+    public const int STATUS_REGISTERED = 2;
 
     /**
      * Locked user status - predefined by Redmine
      *
      * @see https://www.redmine.org/projects/redmine/repository/entry/trunk/app/models/principal.rb
      */
-    public const STATUS_LOCKED = 3;
+    public const int STATUS_LOCKED = 3;
 
     /**
      * List of available user status
      */
-    public const STATUS_LIST = [
+    public const array STATUS_LIST = [
         self::STATUS_ANONYMOUS,
         self::STATUS_ACTIVE,
         self::STATUS_REGISTERED,
@@ -95,7 +95,7 @@ class User extends RedmineApiResource implements
     /**
      * All events - mail notification mode
      */
-    public const ALL_MAIL_NOTIFICATION = 'all';
+    public const string ALL_MAIL_NOTIFICATION = 'all';
 
     /**
      * Selected Projects Only - mail notification mode
@@ -103,32 +103,32 @@ class User extends RedmineApiResource implements
      * NOTE: When this mode is selected, then `notified_project_ids` property is
      * expected.
      */
-    public const SELECTED_MAIL_NOTIFICATION = 'selected';
+    public const string SELECTED_MAIL_NOTIFICATION = 'selected';
 
     /**
      * Only user's events - mail notification mode
      */
-    public const ONLY_MY_EVENTS_MAIL_NOTIFICATION = 'only_my_events';
+    public const string ONLY_MY_EVENTS_MAIL_NOTIFICATION = 'only_my_events';
 
     /**
      * Only assigned - mail notification mode
      */
-    public const ONLY_ASSIGNED_MAIL_NOTIFICATION = 'only_assigned';
+    public const string ONLY_ASSIGNED_MAIL_NOTIFICATION = 'only_assigned';
 
     /**
      * Only owner - mail notification mode
      */
-    public const ONLY_OWNER_MAIL_NOTIFICATION = 'only_owner';
+    public const string ONLY_OWNER_MAIL_NOTIFICATION = 'only_owner';
 
     /**
      * None - mail notification mode
      */
-    public const NONE_MAIL_NOTIFICATION = 'none';
+    public const string NONE_MAIL_NOTIFICATION = 'none';
 
     /**
      * List of available mail notification modes
      */
-    public const MAIL_NOTIFICATIONS_LIST = [
+    public const array MAIL_NOTIFICATIONS_LIST = [
         self::ALL_MAIL_NOTIFICATION,
         self::SELECTED_MAIL_NOTIFICATION,
         self::ONLY_MY_EVENTS_MAIL_NOTIFICATION,

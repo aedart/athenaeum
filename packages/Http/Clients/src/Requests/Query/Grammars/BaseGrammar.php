@@ -433,7 +433,7 @@ abstract class BaseGrammar implements
      *
      * @return string Limit or empty string if no amount given
      */
-    protected function compileLimit(?int $amount = null): string
+    protected function compileLimit(int|null $amount = null): string
     {
         if (empty($amount)) {
             return '';
@@ -449,7 +449,7 @@ abstract class BaseGrammar implements
      *
      * @return string Limit or empty string if no offset given
      */
-    protected function compileOffset(?int $offset = null): string
+    protected function compileOffset(int|null $offset = null): string
     {
         if (empty($offset)) {
             return '';
@@ -465,7 +465,7 @@ abstract class BaseGrammar implements
      *
      * @return string Page number or empty string if page number given
      */
-    protected function compilePageNumber(?int $number = null): string
+    protected function compilePageNumber(int|null $number = null): string
     {
         if (empty($number)) {
             return '';
@@ -481,7 +481,7 @@ abstract class BaseGrammar implements
      *
      * @return string Page size or empty string if no amount given
      */
-    protected function compilePageSize(?int $amount = null): string
+    protected function compilePageSize(int|null $amount = null): string
     {
         if (empty($amount)) {
             return '';

@@ -52,7 +52,7 @@ use Acme\Filters\UserFilterBuilder;
 
 class ListUsersRequest exends FormRequest
 {
-    public ?BuiltFiltersMap $filters = null;
+    public BuiltFiltersMap|null $filters = null;
 
     public function after(Validator $validator)
     {        

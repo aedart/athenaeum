@@ -95,7 +95,7 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'results' => $this->results()->toArray(),
@@ -117,7 +117,7 @@ class PaginatedResults extends Paginator implements PaginatedResultsInterface
      *
      * @throws JsonException
      */
-    public function toJson($options = 0)
+    public function toJson($options = 0): string
     {
         return Json::encode($this->jsonSerialize(), $options);
     }

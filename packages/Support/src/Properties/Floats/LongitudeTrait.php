@@ -3,6 +3,8 @@
 namespace Aedart\Support\Properties\Floats;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Longitude Trait
  *
  * @see \Aedart\Contracts\Support\Properties\Floats\LongitudeAware

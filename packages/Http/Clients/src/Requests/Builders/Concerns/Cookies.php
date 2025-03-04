@@ -94,7 +94,7 @@ trait Cookies
     /**
      * @inheritdoc
      */
-    public function getCookie(string $name): ?Cookie
+    public function getCookie(string $name): Cookie|null
     {
         if ($this->hasCookie($name)) {
             return $this->cookies[$name];

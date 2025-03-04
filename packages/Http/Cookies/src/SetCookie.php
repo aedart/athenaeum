@@ -219,7 +219,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritdoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return array_merge(parent::toArray(), [
             'expires' => $this->getExpires(),

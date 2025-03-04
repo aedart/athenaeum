@@ -3,6 +3,8 @@
 namespace Aedart\Support\Properties\Mixes;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Xml Trait
  *
  * @see \Aedart\Contracts\Support\Properties\Mixes\XmlAware

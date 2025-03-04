@@ -78,7 +78,7 @@ abstract class RecordsEntries implements ShouldQueue
      *
      * @throws JsonException
      */
-    protected function convertToJson(?array $data = null): ?string
+    protected function convertToJson(array|null $data = null): string|null
     {
         if (!isset($data)) {
             return null;

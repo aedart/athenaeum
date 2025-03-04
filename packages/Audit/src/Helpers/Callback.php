@@ -58,7 +58,7 @@ class Callback
      *
      * @return self
      */
-    public function because(string|callable $reason = null): static
+    public function because(string|callable|null $reason = null): static
     {
         $this->reason = $reason;
 

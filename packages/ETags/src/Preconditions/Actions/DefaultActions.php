@@ -53,7 +53,7 @@ class DefaultActions implements Actions
     /**
      * @inheritDoc
      */
-    public function abortBadRequest(ResourceContext $resource, ?string $reason = null): never
+    public function abortBadRequest(ResourceContext $resource, string|null $reason = null): never
     {
         // E.g. abort(response()->json(...));
 
@@ -70,7 +70,7 @@ class DefaultActions implements Actions
         string $range,
         int $totalSize,
         string $rangeUnit,
-        ?string $reason = null
+        string|null $reason = null
     ): never {
         // E.g. abort(response()->json(...));
 

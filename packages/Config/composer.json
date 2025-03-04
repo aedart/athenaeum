@@ -22,17 +22,17 @@
     ],
     "type": "library",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "aedart/athenaeum-contracts": "^8.23",
         "aedart/athenaeum-support": "^8.23",
         "aedart/athenaeum-utils": "^8.23",
-        "illuminate/config": "^v11.42.1",
-        "illuminate/filesystem": "^v11.42.1"
+        "illuminate/config": "^v12.0.1",
+        "illuminate/filesystem": "^v12.0.1"
     },
     "require-dev": {
+        "devium/toml": "^1.0.5",
         "nette/neon": "^3.4.4",
-        "symfony/yaml": "^v7.2.3",
-        "yosymfony/toml": "^1.0.4"
+        "symfony/yaml": "^v7.2.3"
     },
     "autoload": {
         "psr-4": {

@@ -18,7 +18,7 @@ class RequestSerializer extends BaseSerializer implements RequestSerializerInter
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         $request = $this->getHttpRequest();
 

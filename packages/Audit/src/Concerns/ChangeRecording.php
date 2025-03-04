@@ -144,7 +144,7 @@ trait ChangeRecording
      *
      * @return array|null
      */
-    public function formatOriginalData(?array $filtered, string $type): array|null
+    public function formatOriginalData(array|null $filtered, string $type): array|null
     {
         return $filtered;
     }

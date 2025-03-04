@@ -18,13 +18,13 @@
     ],
     "type": "library",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "aedart/athenaeum-contracts": "^8.23",
         "aedart/athenaeum-streams": "^8.23",
         "aedart/athenaeum-support": "^8.23",
         "aedart/athenaeum-utils": "^8.23",
-        "illuminate/http": "^v11.42.1",
-        "ramsey/http-range": "^1.1.0"
+        "illuminate/http": "^v12.0.1",
+        "ramsey/http-range": "^2.0.0"
     },
     "autoload": {
         "psr-4": {

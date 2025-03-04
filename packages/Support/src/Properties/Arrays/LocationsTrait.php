@@ -3,6 +3,8 @@
 namespace Aedart\Support\Properties\Arrays;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Locations Trait
  *
  * @see \Aedart\Contracts\Support\Properties\Arrays\LocationsAware

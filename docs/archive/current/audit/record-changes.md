@@ -26,7 +26,7 @@ Whenever you change the model's attributes and save the changes, a new audit tra
 
 ## Retrieve Audit Trail
 
-To retrieve an audit trail, for your model, you can use the `recordedChanges()` [relationship method](https://laravel.com/docs/11.x/eloquent-relationships).
+To retrieve an audit trail, for your model, you can use the `recordedChanges()` [relationship method](https://laravel.com/docs/12.x/eloquent-relationships).
 
 ```php
 $changes = $category

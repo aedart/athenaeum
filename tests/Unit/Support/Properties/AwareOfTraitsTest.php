@@ -10,6 +10,8 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * AwareOfTraitsTest
  *
  * @group support

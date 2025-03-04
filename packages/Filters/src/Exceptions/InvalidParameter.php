@@ -21,7 +21,7 @@ class InvalidParameter extends ProcessorException implements InvalidParameterExc
      *
      * @var string|null
      */
-    protected ?string $param = null;
+    protected string|null $param = null;
 
     /**
      * @inheritDoc
@@ -50,7 +50,7 @@ class InvalidParameter extends ProcessorException implements InvalidParameterExc
     /**
      * @inheritDoc
      */
-    public function parameter(): ?string
+    public function parameter(): string|null
     {
         if (isset($this->param)) {
             return $this->param;

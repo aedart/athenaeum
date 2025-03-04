@@ -3,8 +3,8 @@
 namespace Aedart\Config\Parsers\Files;
 
 use Aedart\Config\Parsers\Exceptions\UnableToParseFile;
+use Devium\Toml\Toml as TomlParser;
 use Throwable;
-use Yosymfony\Toml\Toml as TomlParser;
 
 /**
  * Toml (Tom's Obvious, Minimal Language) Configuration File Parser
@@ -30,7 +30,7 @@ class Toml extends ParserBase
     public function parse(string $content): array
     {
         try {
-            return TomlParser::parse($content);
+            return TomlParser::decode($content, true);
         } catch (Throwable $e) {
             throw new UnableToParseFile($e->getMessage(), $e->getCode(), $e);
         }

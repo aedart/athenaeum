@@ -40,7 +40,7 @@ class Registrar implements
      *
      * @var string|null
      */
-    protected ?string $key = null;
+    protected string|null $key = null;
 
     /**
      * Cache ttl
@@ -127,7 +127,7 @@ class Registrar implements
     /**
      * @inheritdoc
      */
-    public function getDefaultCache(): ?Repository
+    public function getDefaultCache(): Repository|null
     {
         return $this->getCacheFactory()->store(
             $this->getConfig()->get('acl.cache.store')

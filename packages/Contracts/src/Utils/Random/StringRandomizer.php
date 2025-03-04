@@ -24,6 +24,18 @@ interface StringRandomizer extends Randomizer
     public function bytes(int $length): string;
 
     /**
+     * Returns random bytes from given string
+     *
+     * @param string $string
+     * @param int $length
+     *
+     * @return string
+     *
+     * @throws Throwable
+     */
+    public function bytesFromString(string $string, int $length): string;
+
+    /**
      * Shuffles given bytes
      *
      * @param string $bytes

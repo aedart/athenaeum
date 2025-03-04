@@ -6,7 +6,7 @@ sidebarDepth: 0
 # List Deleted
 
 The `ListDeletedResourcesRequest` abstraction is an extended version of [List Resources request](./list-resources.md).
-It is intended for when ["soft-deleted"](https://laravel.com/docs/11.x/eloquent#soft-deleting) resources must be listed.
+It is intended for when ["soft-deleted"](https://laravel.com/docs/12.x/eloquent#soft-deleting) resources must be listed.
 
 [[TOC]]
 

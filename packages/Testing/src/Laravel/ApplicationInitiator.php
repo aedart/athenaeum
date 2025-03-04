@@ -123,7 +123,7 @@ trait ApplicationInitiator
      *
      * @return Application|null
      */
-    public function getApplication(): ?Application
+    public function getApplication(): Application|null
     {
         return $this->app;
     }

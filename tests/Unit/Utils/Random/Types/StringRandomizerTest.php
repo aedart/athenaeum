@@ -66,6 +66,22 @@ class StringRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    public function canGetRandomBytesFromString(): void
+    {
+        $result = $this->makeRandomizer()->bytesFromString('abcdefghijklmnopqrstuvwxyz0123456789', 10);
+
+        ConsoleDebugger::output($result);
+
+        $this->assertIsString($result);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     *
+     * @throws Throwable
+     */
     public function canShuffleBytes(): void
     {
         $result = $this->makeRandomizer()->shuffle(implode('', range('a', 'z')));

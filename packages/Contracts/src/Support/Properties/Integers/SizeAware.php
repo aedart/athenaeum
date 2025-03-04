@@ -3,6 +3,8 @@
 namespace Aedart\Contracts\Support\Properties\Integers;
 
 /**
+ * @deprecated Since version 9.x. Component will be removed in next major version.
+ *
  * Size Aware
  *
  * Component is aware of int "size"

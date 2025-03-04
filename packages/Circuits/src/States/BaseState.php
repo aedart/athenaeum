@@ -106,7 +106,7 @@ abstract class BaseState implements State
     /**
      * @inheritDoc
      */
-    public function previous(): ?int
+    public function previous(): int|null
     {
         return $this->previous;
     }
@@ -114,7 +114,7 @@ abstract class BaseState implements State
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'id' => $this->id(),

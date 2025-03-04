@@ -94,7 +94,7 @@ class Repository implements MetaRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->all();
     }

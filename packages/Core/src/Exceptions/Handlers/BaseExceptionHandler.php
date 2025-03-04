@@ -88,7 +88,7 @@ abstract class BaseExceptionHandler implements
     /**
      * @inheritdoc
      */
-    public function getDefaultLog(): ?LoggerInterface
+    public function getDefaultLog(): LoggerInterface|null
     {
         $channel = $this->getConfig()->get('exceptions.log-profile', 'stack');
 

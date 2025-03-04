@@ -15,27 +15,27 @@ interface DataTypes
     /**
      * Boolean Type
      */
-    public const BOOL_TYPE = 'bool';
+    public const string BOOL_TYPE = 'bool';
 
     /**
      * Integer Type
      */
-    public const INT_TYPE = 'int';
+    public const string INT_TYPE = 'int';
 
     /**
      * Float (double) Type
      */
-    public const FLOAT_TYPE = 'float';
+    public const string FLOAT_TYPE = 'float';
 
     /**
      * String Type
      */
-    public const STRING_TYPE = 'string';
+    public const string STRING_TYPE = 'string';
 
     /**
      * Scalar Types
      */
-    public const SCALAR_TYPES = [
+    public const array SCALAR_TYPES = [
         self::BOOL_TYPE,
         self::INT_TYPE,
         self::FLOAT_TYPE,
@@ -47,27 +47,27 @@ interface DataTypes
     /**
      * Array Type
      */
-    public const ARRAY_TYPE = 'array';
+    public const string ARRAY_TYPE = 'array';
 
     /**
      * Object Type
      */
-    public const OBJECT_TYPE = 'object';
+    public const string OBJECT_TYPE = 'object';
 
     /**
      * Callable Type
      */
-    public const CALLABLE_TYPE = 'callable';
+    public const string CALLABLE_TYPE = 'callable';
 
     /**
      * Iterable Type
      */
-    public const ITERABLE_TYPE = 'iterable';
+    public const string ITERABLE_TYPE = 'iterable';
 
     /**
      * Compound Types
      */
-    public const COMPOUND_TYPES = [
+    public const array COMPOUND_TYPES = [
         self::ARRAY_TYPE,
         self::OBJECT_TYPE,
         self::CALLABLE_TYPE,
@@ -79,17 +79,17 @@ interface DataTypes
     /**
      * Resource Type
      */
-    public const RESOURCE_TYPE = 'resource';
+    public const string RESOURCE_TYPE = 'resource';
 
     /**
      * Null Type
      */
-    public const NULL_TYPE = 'null';
+    public const string NULL_TYPE = 'null';
 
     /**
      * Special Types
      */
-    public const SPECIAL_TYPES = [
+    public const array SPECIAL_TYPES = [
         self::RESOURCE_TYPE,
         self::NULL_TYPE
     ];
@@ -99,12 +99,12 @@ interface DataTypes
     /**
      * Mixed type
      */
-    public const MIXED_TYPE = 'mixed';
+    public const string MIXED_TYPE = 'mixed';
 
     /**
      * Pseudo types
      */
-    public const PSEUDO_TYPES = [
+    public const array PSEUDO_TYPES = [
         self::MIXED_TYPE
     ];
 
@@ -113,5 +113,5 @@ interface DataTypes
     /**
      * Date Time type
      */
-    public const DATE_TIME_TYPE = '\DateTimeInterface';
+    public const string DATE_TIME_TYPE = '\DateTimeInterface';
 }

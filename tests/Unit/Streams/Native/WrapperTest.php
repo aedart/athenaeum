@@ -28,7 +28,7 @@ class WrapperTest extends UnitTestCase
     public function defineDecorator(): object
     {
         return new class() {
-            public const WRAPPER_NAME = 'decorator';
+            public const string WRAPPER_NAME = 'decorator';
 
             /**
              * @var resource
