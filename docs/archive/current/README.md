@@ -47,6 +47,10 @@ application's environment file.
 
 See [Support package documentation](./support/env-file.md) for details.
 
+### Redmine `v6.0.x` API 
+
+The [Redmine Client](./redmine/README.md) now supports [Redmine `v6.0.x` API](https://www.redmine.org/projects/redmine/wiki/Rest_api). 
+
 ### Auth Exceptions and Responses
 
 The Auth package has received a few new components, intended to be used in combination with for Laravel Fortify.
