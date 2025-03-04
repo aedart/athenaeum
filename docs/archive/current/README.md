@@ -15,8 +15,8 @@ However, due to limited amount of project maintainers, no guarantees can be prov
 | Version | PHP         | Laravel | Release              | Security Fixes Until |
 |---------|-------------|---------|----------------------|----------------------|
 | `10.x`  | `8.4 - ?`   | `v13.x` | _~1st Quarter 2026_  | _TBD_                |
-| `9.x`*  | `8.3 - 8.4` | `v12.x` | _~1st Quarter 2025_  | February 2026        |
-| `8.x`   | `8.2 - 8.3` | `v11.x` | Match 18th, 2024     | February 2025        |
+| `9.x`*  | `8.3 - 8.4` | `v12.x` | March 4th, 2025      | February 2026        |
+| `8.x`   | `8.2 - 8.3` | `v11.x` | March 18th, 2024     | February 2025        |
 | `7.x`   | `8.1 - 8.2` | `v10.x` | February 16th, 2023  | March 2024           |
 | `6.x`   | `8.0 - 8.1` | `v9.x`  | April 5th, 2022      | February 2023        |
 | `< 6.x` | _-_         | _-_     | _See `CHANGELOG.md`_ | _N/A_                |
