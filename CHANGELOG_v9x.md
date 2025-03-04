@@ -32,6 +32,8 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 * `array` return type for various implementation of Laravel's `toArray()` method (_inherited from `\Illuminate\Contracts\Support\Arrayable`_).
 * `string` return type for various implementation of Laravel's `toJson()` method (_inherited from `\Illuminate\Contracts\Support\Jsonable`_).
 * Adapted `\Aedart\Tests\Helpers\Dummies\Http\Messages\InvalidHttpMessage` to be compatible with PSR Http Message `v2.0` interfaces. [#188](https://github.com/aedart/athenaeum/issues/188).
+* "204 No Content" is now an acceptable response Http status code, in `\Aedart\Redmine\RedmineApiResource`.
+* OS changed to Redmine `6.0-stable` and PHP `v8.3` in `redmine_api_tests.yaml` (_GitHub Actions workflow_).
 
 **Non-breaking Changes**
 
@@ -42,11 +44,13 @@ TODO: Temporary changelog file for the upcoming major version `9.x`.
 * Class constants now have [types](https://php.watch/versions/8.3/typed-constants) declared.
 * `\Aedart\Console\Commands\PirateTalkCommand` now uses `\Aedart\Utils\Arr::randomizer()->value()` to pick random sentence.
 * Simplified the "Available Helpers" (_Laravel "Aware-of" helpers_) documentation.
+* OS changed to ubuntu `24.04` in `redmine_api_tests.yaml` (_GitHub Actions workflow_).
 
 ### Fixed
 
 * Fix [implicitly nullable parameter declarations](https://php.watch/versions/8.4/implicitly-marking-parameter-type-nullable-deprecated), throughout various components (_deprecated from PHP 8.4_).
 * Fix passing `E_USER_ERROR` as the error_level for `trigger_error()`, in core application tests (_deprecated from PHP 8.4_).
+* Fix unknown / unsupported `updated_on` property for `\Aedart\Redmine\Partials\Journal`.
 
 ### Removed
 
