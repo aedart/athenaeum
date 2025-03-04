@@ -44,7 +44,7 @@ jobs:
             matrix:
 
                 # See OS and PHP version options on https://github.com/shivammathur/setup-php
-                operating-system: [ 'ubuntu-22.04' ]
+                operating-system: [ 'ubuntu-24.04' ]
                 php-versions: [ '8.2' ]
 
                 # Redmine versions (in this case branches)
