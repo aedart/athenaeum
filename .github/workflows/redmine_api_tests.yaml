@@ -48,7 +48,7 @@ jobs:
                 php-versions: [ '8.2' ]
 
                 # Redmine versions (in this case branches)
-                redmine-versions: [ '5.0-stable' ]
+                redmine-versions: [ '6.0-stable' ]
 
         steps:
 
