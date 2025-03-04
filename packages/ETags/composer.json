@@ -19,10 +19,10 @@
     "type": "library",
     "require": {
         "php": "^8.3",
-        "aedart/athenaeum-contracts": "^9.0",
-        "aedart/athenaeum-streams": "^9.0",
-        "aedart/athenaeum-support": "^9.0",
-        "aedart/athenaeum-utils": "^9.0",
+        "aedart/athenaeum-contracts": "^9.1",
+        "aedart/athenaeum-streams": "^9.1",
+        "aedart/athenaeum-support": "^9.1",
+        "aedart/athenaeum-utils": "^9.1",
         "illuminate/http": "^v12.0.1",
         "ramsey/http-range": "^2.0.0"
     },
