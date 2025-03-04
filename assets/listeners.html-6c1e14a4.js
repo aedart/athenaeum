@@ -1,0 +1,22 @@
+import{_ as e,M as t,p,q as o,R as s,t as n,N as c,a1 as i}from"./framework-efe98465.js";const l={},r=s("h1",{id:"listeners",tabindex:"-1"},[s("a",{class:"header-anchor",href:"#listeners","aria-hidden":"true"},"#"),n(" Listeners")],-1),u={href:"https://laravel.com/docs/8.x/events#defining-events",target:"_blank",rel:"noopener noreferrer"},d=s("code",null,"listeners",-1),k=s("code",null,"/configs/events.php",-1),m=i(`<div class="language-php line-numbers-mode" data-ext="php"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token keyword">return</span> <span class="token punctuation">[</span>
+
+    <span class="token string single-quoted-string">&#39;listeners&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+    
+        <span class="token comment">// Class path for event</span>
+        <span class="token class-name class-name-fully-qualified static-context"><span class="token punctuation">\\</span>Acme<span class="token punctuation">\\</span>Imports<span class="token punctuation">\\</span>Events<span class="token punctuation">\\</span>ProductsImportent</span><span class="token operator">::</span><span class="token keyword">class</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+        
+            <span class="token comment">// Event listeners</span>
+            <span class="token class-name class-name-fully-qualified static-context"><span class="token punctuation">\\</span>Acme<span class="token punctuation">\\</span>Imports<span class="token punctuation">\\</span>Listeners<span class="token punctuation">\\</span>NotifyStaffAboutNewProducts</span><span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">,</span>
+            <span class="token class-name class-name-fully-qualified static-context"><span class="token punctuation">\\</span>Acme<span class="token punctuation">\\</span>Imports<span class="token punctuation">\\</span>Listeners<span class="token punctuation">\\</span>MarkImportFileAsDone</span><span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    
+        <span class="token comment">// Event identifier, e.g. a wildcard event listener</span>
+        <span class="token string single-quoted-string">&#39;\\Acme\\Imports\\Events\\*&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+            <span class="token class-name class-name-fully-qualified static-context"><span class="token punctuation">\\</span>Acma<span class="token punctuation">\\</span>Imports<span class="token punctuation">\\</span>Listeners<span class="token punctuation">\\</span>LogImportAction</span><span class="token operator">::</span><span class="token keyword">class</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    
+    <span class="token comment">// ... remaining not shown ...</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</span></code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,1);function v(h,f){const a=t("ExternalLinkIcon");return p(),o("div",null,[r,s("p",null,[n("To register event listeners, state the "),s("a",u,[n("Event"),c(a)]),n(" class path or identifier inside the "),d,n(" key, in your "),k,n(" file. Then, state the class paths of your event listeners for the given event.")]),m])}const _=e(l,[["render",v],["__file","listeners.html.vue"]]);export{_ as default};

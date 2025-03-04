@@ -1,0 +1,29 @@
+import{_ as s,p as n,q as a,a1 as e}from"./framework-efe98465.js";const t={},p=e(`<h1 id="properties-visibility" tabindex="-1"><a class="header-anchor" href="#properties-visibility" aria-hidden="true">#</a> Properties Visibility</h1><h2 id="protected-vs-private-properties" tabindex="-1"><a class="header-anchor" href="#protected-vs-private-properties" aria-hidden="true">#</a> Protected vs. Private properties</h2><p>By default, only <code>protected</code> properties will be accessible (<em>overloaded</em>). This means that <code>private</code> declared properties are inaccessible.</p><div class="language-php line-numbers-mode" data-ext="php"><pre class="language-php"><code><span class="token keyword">use</span> <span class="token package">Aedart<span class="token punctuation">\\</span>Properties<span class="token punctuation">\\</span>Overload</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">Person</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">use</span> <span class="token package">Overload</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">protected</span> <span class="token operator">?</span><span class="token keyword type-hint">string</span> <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span> <span class="token comment">// Accessible</span>
+
+    <span class="token keyword">private</span> <span class="token operator">?</span><span class="token keyword type-hint">int</span> <span class="token variable">$age</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span> <span class="token comment">// Inaccessible</span>
+
+    <span class="token comment">// ...remaining not shown ...</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="behaviour-override" tabindex="-1"><a class="header-anchor" href="#behaviour-override" aria-hidden="true">#</a> Behaviour override</h2><p>Should you wish to also expose your private declared properties, then this behaviour can be set per object from an inside scope.</p><div class="language-php line-numbers-mode" data-ext="php"><pre class="language-php"><code><span class="token keyword">use</span> <span class="token package">Aedart<span class="token punctuation">\\</span>Contracts<span class="token punctuation">\\</span>Properties<span class="token punctuation">\\</span>AccessibilityLevels</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Aedart<span class="token punctuation">\\</span>Properties<span class="token punctuation">\\</span>Overload</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">Person</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">use</span> <span class="token package">Overload</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">protected</span> <span class="token operator">?</span><span class="token keyword type-hint">string</span> <span class="token variable">$name</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span> <span class="token comment">// Accessible</span>
+
+    <span class="token keyword">private</span> <span class="token operator">?</span><span class="token keyword type-hint">int</span> <span class="token variable">$age</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>    <span class="token comment">// Accessible</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	    <span class="token comment">// Change the property accessibility to private</span>
+	    <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token function">setPropertyAccessibilityLevel</span><span class="token punctuation">(</span><span class="token class-name static-context">AccessibilityLevels</span><span class="token operator">::</span><span class="token constant">PRIVATE_LEVEL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,7),i=[p];function o(c,l){return n(),a("div",null,i)}const d=s(t,[["render",o],["__file","visibility.html.vue"]]);export{d as default};

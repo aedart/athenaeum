@@ -1,0 +1,1 @@
+const a=JSON.parse('{"key":"v-705c21a6","path":"/archive/","title":"Archive","lang":"en-GB","frontmatter":{},"headers":[],"git":{"updatedTime":1581239299000,"contributors":[{"name":"Alin Eugen Deac","email":"aedart@gmail.com","commits":3}]},"filePathRelative":"archive/README.md","lastUpdatedDateFormat":"yyyy-MM-dd HH:mm:ss ZZZZ","lastUpdatedDateOptions":{}}');export{a as data};
