@@ -19,10 +19,10 @@
     "type": "library",
     "require": {
         "php": "^8.3",
-        "aedart/athenaeum-contracts": "^9.1",
-        "aedart/athenaeum-database": "^9.1",
-        "aedart/athenaeum-support": "^9.1",
-        "aedart/athenaeum-utils": "^9.1"
+        "aedart/athenaeum-contracts": "^9.2",
+        "aedart/athenaeum-database": "^9.2",
+        "aedart/athenaeum-support": "^9.2",
+        "aedart/athenaeum-utils": "^9.2"
     },
     "autoload": {
         "psr-4": {
