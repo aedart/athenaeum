@@ -105,7 +105,7 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
      */
     protected function assertLogFileContainers(string $expected, string $failMsg = 'invalid log entry')
     {
-        $logFile = $this->outputPath() . 'storage/logs/athenaeum.log';
+        $logFile = $this->outputPath() . 'storage/logs/laravel.log';
         $this->assertFileExists($logFile, 'Log file not created');
 
         $content = file_get_contents($logFile);
