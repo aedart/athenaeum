@@ -23,6 +23,13 @@ use Throwable;
 abstract class BaseTransactionDriver implements Transaction
 {
     /**
+     * The steam to be locked
+     *
+     * @var Stream|null
+     */
+    protected Stream|null $originalStream = null;
+
+    /**
      * The stream instance that will be passed to
      * the process operation callback
      *
@@ -51,9 +58,10 @@ abstract class BaseTransactionDriver implements Transaction
      * @param  array  $options  [optional]
      */
     public function __construct(
-        protected Stream $originalStream,
+        Stream $originalStream,
         protected array $options = []
     ) {
+        $this->originalStream = $originalStream;
     }
 
     /**
@@ -173,14 +181,12 @@ abstract class BaseTransactionDriver implements Transaction
     {
         $this->failIfAlreadyCommitted();
 
-        // Attempt to commit and close this transaction afterwards.
+        // Attempt to commit and close this transaction afterward.
         try {
             $this->performCommit(
                 $this->stream(),
                 $this->originalStream()
             );
-
-            $this->hasCommitted = true;
 
             $this->close();
         } catch (Throwable $e) {
@@ -307,8 +313,10 @@ abstract class BaseTransactionDriver implements Transaction
         // This should render the transaction instance useless, so that
         // it cannot be re-committed...
 
+        $this->hasCommitted = true;
+
         $this->processingStream = null;
-        unset($this->originalStream);
+        $this->originalStream = null;
 
         return $this;
     }

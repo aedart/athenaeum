@@ -129,7 +129,13 @@ class OverloadTest extends PropertiesTestCase
     public function canUnsetProperty()
     {
         $dummy = $this->makeDummy();
-        unset($dummy->name);
+
+        // NOTE: unset($dummy->name) can yield an error from PHP v8.4, due to possible property hook in
+        // subclass. Therefore, here we simply set the property to null.
+        // unset($dummy->name);
+
+        $dummy->name = null;
+
         $this->assertFalse($dummy->isPropSet('name'));
     }
 

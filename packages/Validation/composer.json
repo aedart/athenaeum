@@ -19,7 +19,7 @@
         "aedart/athenaeum-contracts": "^9.2",
         "aedart/athenaeum-support": "^9.2",
         "aedart/athenaeum-utils": "^9.2",
-        "illuminate/validation": "^v12.0.1"
+        "illuminate/validation": "^v12.2.0"
     },
     "autoload": {
         "psr-4": {
