@@ -19,23 +19,23 @@ class Person
     /**
      * Name of person
      *
-     * @var string
+     * @var string|null
      */
-    public string $name = 'John Doe';
+    public string|null $name = 'John Doe';
 
     /**
      * Age of person
      *
-     * @var int
+     * @var int|null
      */
-    protected int $age = 42;
+    protected int|null $age = 42;
 
     /**
      * Height of person
      *
-     * @var int
+     * @var int|null
      */
-    private int $height = 193;
+    private int|null $height = 193;
 
     /**
      * N/A
@@ -90,8 +90,8 @@ class Person
     /**
      * Unset this person's name
      */
-    public function unsetName()
+    public function unsetName(): void
     {
-        unset($this->name);
+        $this->name = null;
     }
 }

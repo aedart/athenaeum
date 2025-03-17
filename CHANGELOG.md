@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Updated dependencies (_service update_).
 
+### Fixed
+
+* Unable to unset properties `$stream`, `$meta`, `$isReadable` and `$isWritable`, in `\Aedart\Streams\Stream::detach()`, due to possible hooks in a subclass (_phpstan error for PHP `v8.4`_). [#226](https://github.com/aedart/athenaeum/issues/226). 
+* Unable to unset property `$originalStream`, in `\Aedart\Streams\Transactions\Drivers\BaseTransactionDriver::close()`, due to possible hooks in a subclass (_phpstan error for PHP `v8.4`_). [#226](https://github.com/aedart/athenaeum/issues/226). 
+* Unable to unset property `$name`, in `\Aedart\Tests\Helpers\Dummies\Properties\Accessibility\Person::unsetName()`, due to possible hooks in a subclass (_phpstan error for PHP `v8.4`_). [#226](https://github.com/aedart/athenaeum/issues/226). 
+* Unable to unset property `$name`, in `\Aedart\Tests\Unit\Properties\OverloadTest::canUnsetProperty()`, due to possible hooks in a subclass (_phpstan error for PHP `v8.4`_). [#226](https://github.com/aedart/athenaeum/issues/226). 
+
 ## [9.1.0] - 2025-03-06
 
 ### Changed

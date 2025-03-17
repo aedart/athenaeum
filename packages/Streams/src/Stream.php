@@ -49,7 +49,7 @@ class Stream implements StreamInterface
     /**
      * The actual resource stream
      *
-     * @var resource
+     * @var resource|null
      */
     protected $stream;
 
@@ -169,12 +169,12 @@ class Stream implements StreamInterface
         }
 
         $resource = $this->stream;
-        unset(
-            $this->stream,
-            $this->meta,
-            $this->isReadable,
-            $this->isWritable
-        );
+
+        // Reset properties.
+        $this->stream = null;
+        $this->setMetaRepository();
+        $this->isReadable = null;
+        $this->isWritable = null;
 
         return $resource;
     }
