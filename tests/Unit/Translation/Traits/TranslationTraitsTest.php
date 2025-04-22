@@ -4,6 +4,9 @@ namespace Aedart\Tests\Unit\Translation\Traits;
 
 use Aedart\Tests\TestCases\TraitTestCase;
 use Aedart\Translation\Traits\TranslationsExporterManagerTrait;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * TranslationTraitsTest
@@ -15,6 +18,11 @@ use Aedart\Translation\Traits\TranslationsExporterManagerTrait;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Translation\Traits
  */
+#[Group(
+    'translation',
+    'translation-traits',
+    'traits'
+)]
 class TranslationTraitsTest extends TraitTestCase
 {
     /*****************************************************************
@@ -43,6 +51,8 @@ class TranslationTraitsTest extends TraitTestCase
      *
      * @throws \ReflectionException
      */
+    #[DataProvider('awareOfComponentsProvider')]
+    #[Test]
     public function canInvokeAwareOfMethods(string $awareOfTrait)
     {
         $this->assertTraitMethods($awareOfTrait, null, null);

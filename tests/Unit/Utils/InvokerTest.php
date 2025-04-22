@@ -4,6 +4,8 @@ namespace Aedart\Tests\Unit\Utils;
 
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Helpers\Invoker;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use RuntimeException;
 
 /**
@@ -15,6 +17,10 @@ use RuntimeException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
+#[Group(
+    'utils',
+    'invoker',
+)]
 class InvokerTest extends UnitTestCase
 {
     /**
@@ -22,6 +28,7 @@ class InvokerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function invokesCallback()
     {
         $callback = function () {
@@ -39,6 +46,7 @@ class InvokerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function callsFallbackWhenCallbackNotCallable()
     {
         $callback = []; // Invalid callback
@@ -58,6 +66,7 @@ class InvokerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function failsWhenNotCallable()
     {
         $this->expectException(RuntimeException::class);
@@ -75,6 +84,7 @@ class InvokerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function callsCallbackWithArguments()
     {
         $callback = function ($a, $b, $c) {

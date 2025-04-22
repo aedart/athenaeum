@@ -4,6 +4,8 @@ namespace Aedart\Tests\Unit\Utils\Packages;
 
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Packages\PackageVersion;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * PackageVersionTest
@@ -15,6 +17,11 @@ use Aedart\Utils\Packages\PackageVersion;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Packages
  */
+#[Group(
+    'utils',
+    'version',
+    'package-version',
+)]
 class PackageVersionTest extends UnitTestCase
 {
     /**
@@ -22,6 +29,7 @@ class PackageVersionTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreatePackageVersion()
     {
         $name = 'acme/silly-package';
@@ -51,6 +59,7 @@ class PackageVersionTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCastToString()
     {
         $name = 'acme/other-package';

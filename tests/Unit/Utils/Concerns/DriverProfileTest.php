@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Concerns;
 use Aedart\Contracts\Utils\HasDriverProfile;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Concerns\DriverProfile;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DriverProfileTest
@@ -15,6 +17,10 @@ use Aedart\Utils\Concerns\DriverProfile;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Concerns
  */
+#[Group(
+    'utils',
+    'driver-profile',
+)]
 class DriverProfileTest extends UnitTestCase
 {
     /*****************************************************************
@@ -51,6 +57,7 @@ class DriverProfileTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainProfile(): void
     {
         $profile = 'my_driver_profile_name';

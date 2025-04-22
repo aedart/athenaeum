@@ -4,6 +4,9 @@ namespace Aedart\Tests\Unit\Utils\Memory;
 
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C1_ToUnitTest
@@ -17,6 +20,13 @@ use Aedart\Utils\Memory;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
+#[Group(
+    'utils',
+    'utils-memory',
+    'utils-memory-unit',
+    'utils-memory-unit-c1',
+    'utils-memory-unit-to',
+)]
 class C1_ToUnitTest extends UnitTestCase
 {
     /*****************************************************************
@@ -118,6 +128,8 @@ class C1_ToUnitTest extends UnitTestCase
      *
      * @return void
      */
+    #[DataProvider('valuesProvider')]
+    #[Test]
     public function canConvertFromBytesTo(string $unit, int $bytes, int|float $expectedValue): void
     {
         $memoryUnit = Memory::unit($bytes);

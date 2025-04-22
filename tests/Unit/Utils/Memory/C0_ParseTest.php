@@ -5,7 +5,10 @@ namespace Aedart\Tests\Unit\Utils\Memory;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C0_ParseTest
@@ -19,6 +22,13 @@ use InvalidArgumentException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
+#[Group(
+    'utils',
+    'utils-memory',
+    'utils-memory-unit',
+    'utils-memory-unit-c0',
+    'utils-memory-unit-parser',
+)]
 class C0_ParseTest extends UnitTestCase
 {
     /*****************************************************************
@@ -119,6 +129,8 @@ class C0_ParseTest extends UnitTestCase
      *
      * @return void
      */
+    #[DataProvider('valuesProvider')]
+    #[Test]
     public function canParseStringValue(string $value, int $expectedBytes)
     {
         $unit = Memory::from($value);
@@ -136,6 +148,7 @@ class C0_ParseTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenFormatIsInvalid()
     {
         $this->expectException(InvalidArgumentException::class);
@@ -148,6 +161,7 @@ class C0_ParseTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenUnitIsKnown()
     {
         $this->expectException(InvalidArgumentException::class);

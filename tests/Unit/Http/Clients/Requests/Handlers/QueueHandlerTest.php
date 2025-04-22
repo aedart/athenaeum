@@ -7,7 +7,9 @@ use Aedart\Http\Clients\Requests\Handlers\QueueHandler;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Tests\Helpers\Dummies\Http\Clients\Middleware\DummyMiddleware;
 use Aedart\Tests\Helpers\Dummies\Http\Clients\Requests\Handlers\DummyHandler;
+use Codeception\Attribute\Group;
 use GuzzleHttp\Psr7\Request;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -20,6 +22,11 @@ use Psr\Http\Message\ResponseInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Http\Clients\Requests\Handlers
  */
+#[Group(
+    'http-clients',
+    'http-clients-middleware',
+    'http-clients-queue-handler',
+)]
 class QueueHandlerTest extends UnitTestCase
 {
     /*****************************************************************
@@ -55,6 +62,7 @@ class QueueHandlerTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canProcessMiddleware()
     {
         // ------------------------------------------------------- //

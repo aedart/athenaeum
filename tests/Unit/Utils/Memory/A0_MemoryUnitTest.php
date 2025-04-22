@@ -5,7 +5,9 @@ namespace Aedart\Tests\Unit\Utils\Memory;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
 use Aedart\Utils\Memory\Unit;
+use Codeception\Attribute\Group;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * A0_MemoryUnitTest
@@ -19,6 +21,13 @@ use InvalidArgumentException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
+#[Group(
+    'utils',
+    'utils-memory',
+    'utils-memory-unit',
+    'utils-memory-unit-a0',
+    'utils-memory-unit-bytes',
+)]
 class A0_MemoryUnitTest extends UnitTestCase
 {
     /**
@@ -26,6 +35,7 @@ class A0_MemoryUnitTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateMemoryUnit()
     {
         $unit = Memory::unit();
@@ -38,6 +48,7 @@ class A0_MemoryUnitTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainBytes()
     {
         $bytes = 3;
@@ -51,6 +62,7 @@ class A0_MemoryUnitTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenNegativeBytesProvided()
     {
         $this->expectException(InvalidArgumentException::class);

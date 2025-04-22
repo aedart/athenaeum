@@ -5,7 +5,9 @@ namespace Aedart\Tests\Unit\Filters;
 use Aedart\Contracts\Filters\Processor;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Tests\Helpers\Dummies\Filters\Processors\NullProcessor;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Attributes\Test;
 use RuntimeException;
 
 /**
@@ -17,6 +19,10 @@ use RuntimeException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Filters
  */
+#[Group(
+    'filters',
+    'base-processor',
+)]
 class BaseProcessorTest extends UnitTestCase
 {
     /*****************************************************************
@@ -66,6 +72,7 @@ class BaseProcessorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateInstance()
     {
         $processor = $this->makeProcessor();
@@ -76,6 +83,7 @@ class BaseProcessorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canAssignRequest()
     {
         $request = $this->makeRequest();
@@ -90,6 +98,7 @@ class BaseProcessorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsWhenRequestNotSpecified()
     {
         $this->expectException(RuntimeException::class);
@@ -102,6 +111,7 @@ class BaseProcessorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canAssignParameter()
     {
         $param = $this->getFaker()->slug();
@@ -116,6 +126,7 @@ class BaseProcessorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsWhenNoParameterAssigned()
     {
         $this->expectException(RuntimeException::class);
@@ -128,6 +139,7 @@ class BaseProcessorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainValue()
     {
         $expected = $this->getFaker()->name();
@@ -150,6 +162,7 @@ class BaseProcessorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetForceState()
     {
         $processor = $this->makeProcessor();

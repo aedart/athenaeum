@@ -4,6 +4,8 @@ namespace Aedart\Tests\Unit\Properties;
 
 use Aedart\Properties\Exceptions\UndefinedProperty;
 use Aedart\Tests\TestCases\Properties\PropertiesTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * OverloadTest
@@ -14,11 +16,16 @@ use Aedart\Tests\TestCases\Properties\PropertiesTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Properties
  */
+#[Group(
+    'properties',
+    'properties-overload'
+)]
 class OverloadTest extends PropertiesTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canReadAccessibleProperty()
     {
         $dummy = $this->makeDummy();
@@ -28,6 +35,7 @@ class OverloadTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsOnNoneExistingProperty()
     {
         $this->expectException(UndefinedProperty::class);
@@ -39,6 +47,7 @@ class OverloadTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsPropertyReadWithoutGetter()
     {
         $this->expectException(UndefinedProperty::class);
@@ -50,6 +59,7 @@ class OverloadTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetAccessibleProperty()
     {
         $dummy = $this->makeDummy();
@@ -63,6 +73,7 @@ class OverloadTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function canHandleFluentReturnForSetter()
     {
         $dummy = $this->makeDummy();
@@ -76,6 +87,7 @@ class OverloadTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsSettingNoneExistingProperty()
     {
         $this->expectException(UndefinedProperty::class);
@@ -87,6 +99,7 @@ class OverloadTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsPropertyWriteWithoutSetter()
     {
         $this->expectException(UndefinedProperty::class);
@@ -98,6 +111,7 @@ class OverloadTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineIfPropertyIsset()
     {
         $dummy = $this->makeDummy();
@@ -107,6 +121,7 @@ class OverloadTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineIfPropertyIsNotSet()
     {
         $dummy = $this->makeDummy();
@@ -117,6 +132,7 @@ class OverloadTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineIfNoneExistingPropertyIsset()
     {
         $dummy = $this->makeDummy();
@@ -126,6 +142,7 @@ class OverloadTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function canUnsetProperty()
     {
         $dummy = $this->makeDummy();
@@ -142,6 +159,7 @@ class OverloadTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsUnsetIfPropertyDoesNotExist()
     {
         $this->expectException(UndefinedProperty::class);

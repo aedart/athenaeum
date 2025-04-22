@@ -10,6 +10,8 @@ use Aedart\ETags\Exceptions\InvalidRawValue;
 use Aedart\ETags\Exceptions\UnableToParseETag;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ETagTest
@@ -20,6 +22,10 @@ use Aedart\Testing\TestCases\UnitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\ETags
  */
+#[Group(
+    'etags',
+    'etags-dto',
+)]
 class ETagTest extends UnitTestCase
 {
     /**
@@ -27,6 +33,7 @@ class ETagTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canMakeNewInstance(): void
     {
         $raw = '1234';
@@ -46,6 +53,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function failsWhenEmptyRawValue(): void
     {
         $this->expectException(InvalidRawValue::class);
@@ -60,6 +68,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canParseSingleValue(): void
     {
         $raw = '0815';
@@ -80,6 +89,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canParseWildcard(): void
     {
         $etag = ETag::parseSingle('*');
@@ -96,6 +106,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function failsParsingSingleWhenMultipleEtagsGiven(): void
     {
         $this->expectException(UnableToParseETag::class);
@@ -110,6 +121,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function failsParsingWhenValueInvalid(): void
     {
         $this->expectException(UnableToParseETag::class);
@@ -127,6 +139,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canParseMultipleEtagsFromHttpHeader(): void
     {
         $etags = ETag::parse('"15487",W/"r2d23574", W/"c3pio784",  W/"1234"');
@@ -160,6 +173,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canParseWildcardEtag(): void
     {
         $etags = ETag::parse('*');
@@ -180,6 +194,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canParseSingleETagFromHttpHeader(): void
     {
         $etags = ETag::parse('"33a64df551425fcc55e4d42a148795d9f25f89d4"');
@@ -199,6 +214,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function returnsEmptyArrayWhenHttpHeaderValueIsEmpty(): void
     {
         $etags = ETag::parse('');
@@ -216,6 +232,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function failsParsingMultipleFromHttpHeaderWhenInvalidFormat(): void
     {
         $this->expectException(UnableToParseETag::class);
@@ -228,6 +245,7 @@ class ETagTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function formatsValueCorrectly(): void
     {
         $etag = ETag::make(1234);
@@ -244,6 +262,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canMatchEtags(): void
     {
         //  @see https://httpwg.org/specs/rfc9110.html#rfc.section.8.8.3.2
@@ -307,6 +326,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canMatchAgainstWildcard(): void
     {
         $etagA = ETag::parseSingle('*');
@@ -326,6 +346,7 @@ class ETagTest extends UnitTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canMatchAgainstSingleValueFromHttpHeader(): void
     {
         $etag = ETag::make(1234);

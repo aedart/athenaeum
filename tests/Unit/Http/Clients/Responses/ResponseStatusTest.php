@@ -7,7 +7,10 @@ use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Http\Clients\Responses\ResponseStatus;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -20,6 +23,11 @@ use Psr\Http\Message\ResponseInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Clients\Responses
  */
+#[Group(
+    'http-clients',
+    'http-status',
+    'response-status',
+)]
 class ResponseStatusTest extends UnitTestCase
 {
     /*****************************************************************
@@ -147,6 +155,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function failsWhenStatusIsBelowInformational()
     {
         $this->expectException(InvalidStatusCodeException::class);
@@ -161,6 +170,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function failsWhenStatusIsAboveServerError(): void
     {
         $this->expectException(InvalidStatusCodeException::class);
@@ -173,6 +183,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function canObtainStatusCode()
     {
         $status = $this->makeStatus(200);
@@ -185,6 +196,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function canObtainReasonPhrase()
     {
         $status = $this->makeStatus(200, 'ok');
@@ -197,6 +209,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function canDetermineIfInformational()
     {
         $status = $this->makeStatus(101);
@@ -214,6 +227,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function canDetermineIfSuccessful()
     {
         $status = $this->makeStatus(202);
@@ -231,6 +245,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function canDetermineIfRedirection()
     {
         $status = $this->makeStatus(300);
@@ -248,6 +263,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function canDetermineIfClientError()
     {
         $status = $this->makeStatus(404);
@@ -265,6 +281,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function canDetermineIfServerError()
     {
         $status = $this->makeStatus(503);
@@ -282,6 +299,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function canCreateFromResponse()
     {
         $response = new Response(204);
@@ -299,6 +317,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function canConvertIntoString()
     {
         $response = new Response(204);
@@ -317,6 +336,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function canMatchAgainstOtherStatus(): void
     {
         $statusA = $this->makeStatus(200);
@@ -337,6 +357,7 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[Test]
     public function canDetermineIfCodeSatisfies(): void
     {
         $status = $this->makeStatus(201);
@@ -361,6 +382,8 @@ class ResponseStatusTest extends UnitTestCase
      *
      * @throws InvalidStatusCodeException
      */
+    #[DataProvider('statusCodeProvider')]
+    #[Test]
     public function isStatus(int $code, string $method): void
     {
         $status = $this->makeStatus($code);

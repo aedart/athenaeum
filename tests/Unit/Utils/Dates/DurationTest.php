@@ -5,8 +5,10 @@ namespace Aedart\Tests\Unit\Utils\Dates;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Dates\Duration;
+use Codeception\Attribute\Group;
 use DateInterval;
 use DateTime;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DurationTest
@@ -18,11 +20,17 @@ use DateTime;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Dates
  */
+#[Group(
+    'utils',
+    'date',
+    'duration',
+)]
 class DurationTest extends UnitTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canInstantiate()
     {
         $duration = new Duration(42);
@@ -35,6 +43,7 @@ class DurationTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canInstantiateWithoutArguments(): void
     {
         $duration = Duration::now();
@@ -45,6 +54,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function longDuration()
     {
         $seconds = 10 * 365 * 24 * 3600; // 10 years of seconds
@@ -57,6 +67,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function instantiateFromDateInterval()
     {
         $duration = Duration::from(new DateInterval('P10Y7DT4H5M34S'));
@@ -67,6 +78,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function instantiateFromDateTime()
     {
         $duration = Duration::from(new DateTime('@' . (42 * 60)));
@@ -77,6 +89,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function instantiateFromString()
     {
         $duration = Duration::fromString('@' . (42 * 60));
@@ -87,6 +100,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function instantiateFromDifference()
     {
         $now = '2020-09-23';
@@ -102,6 +116,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function instantiateFromInvertedDifference()
     {
         $now = '2020-09-23';
@@ -117,6 +132,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function instantiateFromStringHoursMinutes()
     {
         $a = '00:30';
@@ -135,6 +151,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function addInterval()
     {
         $duration = Duration::fromString('@40');
@@ -146,6 +163,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function subtractInterval()
     {
         $duration = Duration::fromString('@44');
@@ -157,6 +175,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function measureInterval()
     {
         $duration = new Duration();
@@ -170,6 +189,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function requestedTestCase()
     {
         $duration = Duration::from(52200);
@@ -182,6 +202,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function toMinutesSeconds()
     {
         $duration = Duration::from(65);
@@ -192,6 +213,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canShowAbove60Minutes()
     {
         $duration = Duration::from(3600);
@@ -206,6 +228,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function toHoursMinutes()
     {
         $duration = Duration::from(52200);
@@ -217,6 +240,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canShowAbove24Hours()
     {
         $duration = Duration::from(86400);
@@ -231,6 +255,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function toDaysHoursMinutes()
     {
         $duration = Duration::from(225000);
@@ -243,6 +268,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function toSignedHoursMinutes()
     {
         $duration = Duration::from(-52200);
@@ -269,6 +295,7 @@ class DurationTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function testToString()
     {
         $duration = Duration::from(225000);

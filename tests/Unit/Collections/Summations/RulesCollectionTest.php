@@ -9,7 +9,9 @@ use Aedart\Contracts\Collections\Summations\Rules\ProcessingRule;
 use Aedart\Contracts\Collections\Summations\Rules\Rules;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * RulesCollectionTest
@@ -21,6 +23,11 @@ use Mockery as m;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Collections\Summations
  */
+#[Group(
+    'collections',
+    'summations',
+    'rules-collection'
+)]
 class RulesCollectionTest extends UnitTestCase
 {
     /*****************************************************************
@@ -106,6 +113,7 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainInstance()
     {
         $collection = $this->makeCollection();
@@ -116,6 +124,7 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainItem()
     {
         $item = $this->makeItemMock();
@@ -129,6 +138,7 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateNewInstanceWithItem()
     {
         $item = $this->makeItemMock();
@@ -144,6 +154,7 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainSummationCollection()
     {
         $summation = $this->makeSummationCollection();
@@ -157,6 +168,7 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateNewInstanceWithSummation()
     {
         $summation = $this->makeSummationCollection();
@@ -172,6 +184,7 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainRules()
     {
         $rules = $this->makeProcessingRuleMocks();
@@ -185,6 +198,7 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateNewInstanceWithRules()
     {
         $rules = $this->makeProcessingRuleMocks();
@@ -200,6 +214,7 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canExportToArray()
     {
         $rules = $this->makeProcessingRuleMocks();
@@ -213,6 +228,7 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canLoopThroughRules()
     {
         $rules = $this->makeProcessingRuleMocks();
@@ -231,6 +247,7 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCountRulesInCollection()
     {
         $collection = $this->makeCollection(null, $this->makeProcessingRuleMocks(5));
@@ -242,6 +259,7 @@ class RulesCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canProcessRules()
     {
         $item = $this->makeItemMock();

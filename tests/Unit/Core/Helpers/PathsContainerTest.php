@@ -7,6 +7,8 @@ use Aedart\Contracts\Core\Helpers\PathsContainer;
 use Aedart\Core\Helpers\Paths;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * PathsContainerTest
@@ -19,6 +21,12 @@ use Aedart\Testing\TestCases\UnitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Core\Helpers
  */
+#[Group(
+    'core',
+    'application',
+    'application-helpers',
+    'paths-container'
+)]
 class PathsContainerTest extends UnitTestCase
 {
     /*****************************************************************
@@ -47,6 +55,7 @@ class PathsContainerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function hasDefaultPathsSet()
     {
         $container = $this->makePathsContainer();
@@ -68,6 +77,7 @@ class PathsContainerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canResolvePathInBaseDir()
     {
         $container = $this->makePathsContainer();
@@ -85,6 +95,7 @@ class PathsContainerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canResolvePathInBootstrapDir()
     {
         $container = $this->makePathsContainer();
@@ -102,6 +113,7 @@ class PathsContainerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canResolvePathInConfigDir()
     {
         $container = $this->makePathsContainer();
@@ -119,6 +131,7 @@ class PathsContainerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canResolvePathInDatabaseDir()
     {
         $container = $this->makePathsContainer();
@@ -136,6 +149,7 @@ class PathsContainerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canResolvePathInEnvironmentDir()
     {
         $container = $this->makePathsContainer();
@@ -153,6 +167,7 @@ class PathsContainerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canResolvePathInResourceDir()
     {
         $container = $this->makePathsContainer();
@@ -170,6 +185,7 @@ class PathsContainerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canResolvePathInStorageDir()
     {
         $container = $this->makePathsContainer();
@@ -187,6 +203,7 @@ class PathsContainerTest extends UnitTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canResolvePathInPublicDir()
     {
         $container = $this->makePathsContainer();

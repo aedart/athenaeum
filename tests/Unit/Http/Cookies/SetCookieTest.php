@@ -6,7 +6,9 @@ use Aedart\Contracts\Http\Cookies\SetCookie as SetCookieInterface;
 use Aedart\Http\Cookies\SetCookie;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
 use DateTime;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -18,6 +20,10 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Cookies
  */
+#[Group(
+    'http-cookies',
+    'set-cookies',
+)]
 class SetCookieTest extends UnitTestCase
 {
     /*****************************************************************
@@ -75,6 +81,7 @@ class SetCookieTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canPopulate()
     {
         $data = $this->cookieData();
@@ -100,6 +107,7 @@ class SetCookieTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canExportToArray()
     {
         $data = $this->cookieData();

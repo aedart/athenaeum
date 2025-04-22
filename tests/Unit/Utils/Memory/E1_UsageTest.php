@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Memory;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E1_UsageTest
@@ -18,6 +20,13 @@ use Aedart\Utils\Memory;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
+#[Group(
+    'utils',
+    'utils-memory',
+    'utils-memory-unit',
+    'utils-memory-unit-e1',
+    'utils-memory-unit-usage',
+)]
 class E1_UsageTest extends UnitTestCase
 {
     /**
@@ -25,6 +34,7 @@ class E1_UsageTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainMemoryUsage(): void
     {
         $bytes = 1024 * 1024 * 8;
@@ -46,6 +56,7 @@ class E1_UsageTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainMemoryRealUsage(): void
     {
         $bytes = 1024 * 1024 * 8;
