@@ -51,7 +51,7 @@ return static function (MBConfig $config): void {
             "codeception/module-asserts" => "^3.0.0",
             'orchestra/testbench' => '^v10.2.1',
             'orchestra/testbench-dusk' => '^v10.2.1',
-            'illuminate/testing' => '^vv12.9.2'
+            'illuminate/testing' => '^v12.10.0'
         ],
 
         ComposerJsonSection::AUTOLOAD => [

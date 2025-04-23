@@ -50,7 +50,7 @@
         "bamarni/composer-bin-plugin": "^1.8.2",
         "codeception/codeception": "^5.2.1",
         "codeception/module-asserts": "^3.0.0",
-        "devium/toml": "^1.0.5",
+        "devium/toml": "^1.0.6",
         "illuminate/testing": "^v12.9.2",
         "laravel/fortify": "^1.25.4",
         "league/flysystem-adapter-test-utilities": "^3.29.0",
