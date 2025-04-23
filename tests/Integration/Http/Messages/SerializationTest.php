@@ -6,6 +6,8 @@ use Aedart\Contracts\Http\Messages\Exceptions\SerializationException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpSerializationTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode\Http;
 
 /**
@@ -18,11 +20,17 @@ use Teapot\StatusCode\Http;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Messages
  */
+#[Group(
+    'http',
+    'http-messages',
+    'http-message-serialisation',
+)]
 class SerializationTest extends HttpSerializationTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canObtainFactory()
     {
         $factory = $this->getHttpSerializerFactory();
@@ -35,6 +43,7 @@ class SerializationTest extends HttpSerializationTestCase
      *
      * @throws \Aedart\Contracts\Http\Messages\Exceptions\SerializationException
      */
+    #[Test]
     public function failsWhenInvalidHttpMessageProvided()
     {
         $this->expectException(SerializationException::class);
@@ -50,6 +59,7 @@ class SerializationTest extends HttpSerializationTestCase
      * @throws SerializationException
      * @throws \JsonException
      */
+    #[Test]
     public function canSerializeRequest()
     {
         $request = $this->makeRequest(
@@ -89,6 +99,7 @@ class SerializationTest extends HttpSerializationTestCase
      * @throws SerializationException
      * @throws \JsonException
      */
+    #[Test]
     public function canSerializeRequestToArray()
     {
         $request = $this->makeRequest(
@@ -135,6 +146,7 @@ class SerializationTest extends HttpSerializationTestCase
      * @throws SerializationException
      * @throws \JsonException
      */
+    #[Test]
     public function canSerializeResponse()
     {
         $response = $this->makeResponse(
@@ -169,6 +181,7 @@ class SerializationTest extends HttpSerializationTestCase
      * @throws SerializationException
      * @throws \JsonException
      */
+    #[Test]
     public function canSerializeResponseToArray()
     {
         $response = $this->makeResponse(

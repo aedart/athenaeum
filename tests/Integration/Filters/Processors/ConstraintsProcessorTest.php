@@ -9,6 +9,8 @@ use Aedart\Filters\Query\Filters\Fields\NumericFilter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ConstraintsProcessorTest
@@ -19,6 +21,10 @@ use Aedart\Tests\TestCases\Filters\FiltersTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Processors
  */
+#[Group(
+    'filters',
+    'filters-constraints-processor',
+)]
 class ConstraintsProcessorTest extends FiltersTestCase
 {
     /**
@@ -26,6 +32,7 @@ class ConstraintsProcessorTest extends FiltersTestCase
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[Test]
     public function canBuildSearchQuery()
     {
         // NOTE: In this test we do not focus on all the types of field filters

@@ -6,7 +6,10 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Facades\Date;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C6_WhereDateTest
@@ -19,6 +22,12 @@ use Illuminate\Support\Facades\Date;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-g0',
+    'http-query-grammars',
+)]
 class G0_WhereDatetimeTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -122,6 +131,8 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesWhereDatetime')]
+    #[Test]
     public function canAddWhereDatetime(string $grammar, string $expected)
     {
         $result = $this
@@ -144,6 +155,8 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesWhereDatetimeFromDateInstance')]
+    #[Test]
     public function canAddWhereDatetimeFromDateInstance(string $grammar, string $expected)
     {
         $result = $this
@@ -165,6 +178,8 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesDefaultDate')]
+    #[Test]
     public function defaultsToNowWhenNoDateGiven(string $grammar)
     {
         $result = $this
@@ -192,6 +207,8 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesOrWhereDatetime')]
+    #[Test]
     public function canAddOrWhereDatetime(string $grammar, string $expected)
     {
         $result = $this

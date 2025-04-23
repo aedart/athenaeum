@@ -6,6 +6,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E0_LimitOffsetTest
@@ -18,6 +21,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-e0',
+    'http-query-grammars',
+)]
 class E0_LimitOffsetTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -107,6 +116,8 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesLimit')]
+    #[Test]
     public function canSetLimit(string $grammar, string $expected)
     {
         $result = $this
@@ -129,6 +140,8 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesOffset')]
+    #[Test]
     public function canSetOffset(string $grammar, string $expected)
     {
         $result = $this
@@ -151,6 +164,8 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesLimitAndOffset')]
+    #[Test]
     public function canSetLimitAndOffset(string $grammar, string $expected)
     {
         $result = $this

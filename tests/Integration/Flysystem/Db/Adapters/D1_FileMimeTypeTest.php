@@ -5,7 +5,9 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 use Aedart\Flysystem\Db\Adapters\DatabaseAdapter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D1_FileMimeTypeTest
@@ -17,6 +19,11 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-d1'
+)]
 class D1_FileMimeTypeTest extends FlysystemDbTestCase
 {
     /**
@@ -26,6 +33,7 @@ class D1_FileMimeTypeTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function canDetermineMimeTypeForFile(): void
     {
         $path = 'home/books/october_falls.txt';
@@ -52,6 +60,7 @@ class D1_FileMimeTypeTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function canSpecifyCustomMimeType(): void
     {
         $path = 'home/books/october_falls.txt';
@@ -80,6 +89,7 @@ class D1_FileMimeTypeTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function canSetCustomDetectCallback(): void
     {
         $path = 'home/books/october_falls.txt';

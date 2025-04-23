@@ -7,7 +7,9 @@ use Aedart\Antivirus\Scanners\NullScanner;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Facades\Config;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * AntivirusFacadeTest
@@ -19,6 +21,11 @@ use Illuminate\Support\Facades\Config;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus
  */
+#[Group(
+    'antivirus',
+    'antivirus-facade',
+    'facades'
+)]
 class AntivirusFacadeTest extends AntivirusTestCase
 {
     /**
@@ -26,6 +33,7 @@ class AntivirusFacadeTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function canScan(): void
     {
         // Configure antivirus profile, depending on if this is a live test or not...
@@ -50,6 +58,7 @@ class AntivirusFacadeTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainScannerProfile(): void
     {
         $scanner = Antivirus::profile('null');

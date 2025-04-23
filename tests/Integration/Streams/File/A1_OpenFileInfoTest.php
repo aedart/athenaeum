@@ -5,7 +5,9 @@ namespace Aedart\Tests\Integration\Streams\File;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Streams\FileStream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Http\UploadedFile;
+use PHPUnit\Framework\Attributes\Test;
 use SplFileInfo;
 
 /**
@@ -17,6 +19,11 @@ use SplFileInfo;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-a1',
+)]
 class A1_OpenFileInfoTest extends StreamTestCase
 {
     /**
@@ -26,6 +33,7 @@ class A1_OpenFileInfoTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canOpenFileInfo(): void
     {
         $file = $this->filePath('text.txt');
@@ -44,6 +52,7 @@ class A1_OpenFileInfoTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canOpenLaravelUploadedFile(): void
     {
         $file = 'text.txt';

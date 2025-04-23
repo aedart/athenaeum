@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E0_FilesAndDirectoryListing
@@ -15,6 +17,11 @@ use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-e0'
+)]
 class E0_FilesAndDirectoryListingTest extends FlysystemDbTestCase
 {
     /**
@@ -24,6 +31,7 @@ class E0_FilesAndDirectoryListingTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function canListDirectoriesAndFiles(): void
     {
         $directories = [
@@ -104,6 +112,7 @@ class E0_FilesAndDirectoryListingTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function doesNotListContentsFromOtherDirectoriesWithSimilarPath(): void
     {
         // @see https://github.com/aedart/athenaeum/issues/193

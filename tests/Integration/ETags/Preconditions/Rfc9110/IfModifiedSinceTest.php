@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\ETags\Preconditions\Rfc9110;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\Actions\DefaultActions;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
@@ -19,6 +21,11 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions\Rfc9110
  */
+#[Group(
+    'etags',
+    'preconditions',
+    'rfc9110-if-modified-since'
+)]
 class IfModifiedSinceTest extends PreconditionsTestCase
 {
     /**
@@ -28,6 +35,7 @@ class IfModifiedSinceTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function continuesToIfRangeWhenPasses(): void
     {
         // NOTE: [...] If the selected representation's last modification date is EARLIER or EQUAL to
@@ -63,6 +71,7 @@ class IfModifiedSinceTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function failsWhenLastModifiedIsEarlierThanIfModifiedSince(): void
     {
         // [...] if false, respond 304 (Not Modified)
@@ -109,6 +118,7 @@ class IfModifiedSinceTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function failsWhenLastModifiedIsEqualThanIfModifiedSince(): void
     {
         // [...] if false, respond 304 (Not Modified)

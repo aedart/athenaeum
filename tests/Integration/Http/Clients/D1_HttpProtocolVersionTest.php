@@ -4,6 +4,9 @@ namespace Aedart\Tests\Integration\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -15,6 +18,11 @@ use Psr\Http\Message\ResponseInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-d1',
+)]
 class D1_HttpProtocolVersionTest extends HttpClientsTestCase
 {
     /**
@@ -25,6 +33,8 @@ class D1_HttpProtocolVersionTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function extractsHttpProtocolVersionFromOptions(string $profile)
     {
         $version = '2.0';
@@ -44,6 +54,8 @@ class D1_HttpProtocolVersionTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function usesHttpProtocolVersion(string $profile)
     {
         $client = $this->client($profile);

@@ -6,8 +6,10 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Owner;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\OwnerResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * MetaTest
@@ -19,6 +21,11 @@ use Illuminate\Support\Facades\Route;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-meta',
+)]
 class MetaTest extends ApiResourcesTestCase
 {
     /**
@@ -26,6 +33,7 @@ class MetaTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function addsMetaToAdditionalData(): void
     {
         // ------------------------------------------------------------------ //

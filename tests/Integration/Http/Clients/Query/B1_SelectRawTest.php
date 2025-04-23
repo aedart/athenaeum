@@ -6,6 +6,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * B1_SelectRawTest
@@ -18,6 +21,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-b1',
+    'http-query-grammars',
+)]
 class B1_SelectRawTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -107,6 +116,8 @@ class B1_SelectRawTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesSelectRawData')]
+    #[Test]
     public function canSelectRawExpression(string $grammar, string $expected)
     {
         $result = $this
@@ -129,6 +140,8 @@ class B1_SelectRawTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesInjectsBindingsData')]
+    #[Test]
     public function injectsBindings(string $grammar, string $expected)
     {
         $result = $this
@@ -151,6 +164,8 @@ class B1_SelectRawTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesSelectRegularAndRawData')]
+    #[Test]
     public function canSelectRegularAndRaw(string $grammar, string $expected)
     {
         $result = $this

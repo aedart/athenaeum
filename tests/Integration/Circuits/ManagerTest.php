@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Circuits;
 use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Exceptions\ProfileNotFoundException;
 use Aedart\Tests\TestCases\Circuits\CircuitBreakerTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ManagerTest
@@ -16,6 +18,11 @@ use Aedart\Tests\TestCases\Circuits\CircuitBreakerTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Circuits
  */
+#[Group(
+    'circuits',
+    'circuit-breaker',
+    'circuit-breaker-manager',
+)]
 class ManagerTest extends CircuitBreakerTestCase
 {
     /**
@@ -23,6 +30,7 @@ class ManagerTest extends CircuitBreakerTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canCreateCircuitBreaker()
     {
         $circuitBreaker = $this->makeCircuitBreaker('my_service');
@@ -35,6 +43,7 @@ class ManagerTest extends CircuitBreakerTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function returnsSameCircuitBreaker()
     {
         $circuitBreakerA = $this->makeCircuitBreaker('my_service');
@@ -48,6 +57,7 @@ class ManagerTest extends CircuitBreakerTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function failsWhenServiceDoesNotExist()
     {
         $this->expectException(ProfileNotFoundException::class);
@@ -60,6 +70,7 @@ class ManagerTest extends CircuitBreakerTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function failsWhenStoreProfileDoesNotExist()
     {
         $this->expectException(ProfileNotFoundException::class);

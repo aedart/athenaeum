@@ -6,6 +6,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Requests\Query\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammar;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * A0_InstanceTest
@@ -18,6 +21,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-a0',
+    'http-query-grammars',
+)]
 class A0_InstanceTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -50,6 +59,8 @@ class A0_InstanceTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesGrammars')]
+    #[Test]
     public function canObtainInstance(string $grammar)
     {
         $query = $this->query($grammar);
@@ -65,6 +76,8 @@ class A0_InstanceTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesGrammars')]
+    #[Test]
     public function hasGrammarInstance(string $grammar)
     {
         $query = $this->query($grammar);

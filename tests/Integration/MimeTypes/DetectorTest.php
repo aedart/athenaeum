@@ -10,6 +10,8 @@ use Aedart\MimeTypes\Exceptions\FileNotFound;
 use Aedart\MimeTypes\Exceptions\ProfileNotFound;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\MimeTypes\MimeTypesTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DetectorTest
@@ -20,6 +22,10 @@ use Aedart\Tests\TestCases\MimeTypes\MimeTypesTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\MimeTypes
  */
+#[Group(
+    'mime-types',
+    'mime-types-detector',
+)]
 class DetectorTest extends MimeTypesTestCase
 {
     /**
@@ -27,6 +33,7 @@ class DetectorTest extends MimeTypesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainDetector()
     {
         $detector = $this->getMimeTypeDetector();
@@ -42,6 +49,7 @@ class DetectorTest extends MimeTypesTestCase
      *
      * @throws MimeTypeDetectionException
      */
+    #[Test]
     public function canMakeSamplerInstance()
     {
         $sampler = $this
@@ -59,6 +67,7 @@ class DetectorTest extends MimeTypesTestCase
      *
      * @throws MimeTypeDetectionException
      */
+    #[Test]
     public function failsWhenSamplerProfileDoesNotExist()
     {
         $this->expectException(ProfileNotFound::class);
@@ -75,6 +84,7 @@ class DetectorTest extends MimeTypesTestCase
      *
      * @throws MimeTypeDetectionException
      */
+    #[Test]
     public function canDetectMimeTypeUsingFilePath()
     {
         $file = $this->filePath('txt');
@@ -95,6 +105,7 @@ class DetectorTest extends MimeTypesTestCase
      *
      * @throws MimeTypeDetectionException
      */
+    #[Test]
     public function failsIfFileNotFound()
     {
         $this->expectException(FileNotFound::class);
@@ -111,6 +122,7 @@ class DetectorTest extends MimeTypesTestCase
      *
      * @throws MimeTypeDetectionException
      */
+    #[Test]
     public function hasSampleSizeSetInSample(): void
     {
         // When using inside Laravel, a default sample size SHOULD be

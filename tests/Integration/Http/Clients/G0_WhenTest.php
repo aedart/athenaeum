@@ -5,6 +5,9 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * G0_WhenTest
@@ -15,6 +18,11 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-g0',
+)]
 class G0_WhenTest extends HttpClientsTestCase
 {
     /**
@@ -25,6 +33,8 @@ class G0_WhenTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function appliesCallbackWhenTrue(string $profile)
     {
         $client = $this->client($profile);
@@ -45,6 +55,8 @@ class G0_WhenTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function appliesOtherwiseCallbackWhenFalse(string $profile)
     {
         $client = $this->client($profile);
@@ -67,6 +79,8 @@ class G0_WhenTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function resolvesCallableResultForWhen(string $profile)
     {
         $client = $this->client($profile);
@@ -89,6 +103,8 @@ class G0_WhenTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function appliesCallbackUnlessFalse(string $profile)
     {
         $client = $this->client($profile);
@@ -109,6 +125,8 @@ class G0_WhenTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function appliesOtherwiseCallbackUnlessTrue(string $profile)
     {
         $client = $this->client($profile);
@@ -131,6 +149,8 @@ class G0_WhenTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function resolvesCallableResultForUnless(string $profile)
     {
         $client = $this->client($profile);

@@ -8,7 +8,9 @@ use Aedart\Tests\Helpers\Dummies\Dto\Address;
 use Aedart\Tests\Helpers\Dummies\Dto\City;
 use Aedart\Tests\Helpers\Dummies\Dto\Note;
 use Aedart\Tests\TestCases\Dto\DtoTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * NestedArrayDtoTest
@@ -21,11 +23,18 @@ use Illuminate\Contracts\Container\BindingResolutionException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Dto
  */
+#[Group(
+    'dto',
+    'array-dto',
+    'dto-nested',
+    'array-dto-nested',
+)]
 class NestedArrayDtoTest extends DtoTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canPopulateWithObjects()
     {
         $data = $this->arrayDtoData();
@@ -48,6 +57,7 @@ class NestedArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canResolveUnboundInstances()
     {
         $data = $this->arrayDtoData();
@@ -69,6 +79,7 @@ class NestedArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsResolvingWhenNoServiceContainerAvailable()
     {
         $this->expectException(BindingResolutionException::class);
@@ -90,6 +101,7 @@ class NestedArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canJsonSerialiseNestedInstances()
     {
         $data = $this->arrayDtoData();
@@ -111,6 +123,7 @@ class NestedArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSerialiseNestedInstances()
     {
         $data = [
@@ -142,6 +155,7 @@ class NestedArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canResolveSettingPropertyDirectly()
     {
         $dto = $this->makeArrayDto();
@@ -162,6 +176,7 @@ class NestedArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canResolveBoundAbstractInstance()
     {
         // Bind the abstraction / interface
@@ -198,6 +213,7 @@ class NestedArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsResolvingAbstractInstance()
     {
         // NOTE: Here the interface is not bound. The IoC should thus fail resolving.

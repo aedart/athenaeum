@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Database\Query\Concerns;
 use Aedart\Database\Query\Concerns\Joins;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Database\DatabaseTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * JoinsConcernTest
@@ -18,6 +20,13 @@ use Aedart\Tests\TestCases\Database\DatabaseTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Database\Query\Concerns
  */
+#[Group(
+    'db',
+    'database',
+    'db-query',
+    'db-query-concerns',
+    'query-joins-concern',
+)]
 class JoinsConcernTest extends DatabaseTestCase
 {
     /*****************************************************************
@@ -45,6 +54,7 @@ class JoinsConcernTest extends DatabaseTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsFalseWhenQueryHasNoJoins(): void
     {
         $query = Category::query();
@@ -60,6 +70,7 @@ class JoinsConcernTest extends DatabaseTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsTrueWhenQueryHasJoinExpressionToTable(): void
     {
         $table = 'owners';
@@ -80,6 +91,7 @@ class JoinsConcernTest extends DatabaseTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsFalseWhenNotJoinExpressionToDesiredTable(): void
     {
         $query = Category::query()
@@ -98,6 +110,7 @@ class JoinsConcernTest extends DatabaseTestCase
      *
      * @return void
      */
+    #[Test]
     public function appliesJoinWhenNotAlreadyJoinedToTable(): void
     {
         $concern = $this->makeConcern();
@@ -114,6 +127,7 @@ class JoinsConcernTest extends DatabaseTestCase
      *
      * @return void
      */
+    #[Test]
     public function doesNotApplyJoinIfAlreadyJoinedToTable(): void
     {
         $concern = $this->makeConcern();

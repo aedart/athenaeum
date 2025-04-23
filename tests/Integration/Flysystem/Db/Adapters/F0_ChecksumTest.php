@@ -4,7 +4,9 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use Codeception\Attribute\Group;
 use League\Flysystem\FilesystemException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * F0_ChecksumTest
@@ -16,6 +18,11 @@ use League\Flysystem\FilesystemException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-f0'
+)]
 class F0_ChecksumTest extends FlysystemDbTestCase
 {
     /**
@@ -25,6 +32,7 @@ class F0_ChecksumTest extends FlysystemDbTestCase
      *
      * @throws FilesystemException
      */
+    #[Test]
     public function canGetChecksumUsingCustomAlgo(): void
     {
         $path = 'home/books/october_falls.txt';

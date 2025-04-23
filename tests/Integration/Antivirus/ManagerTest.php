@@ -7,6 +7,8 @@ use Aedart\Contracts\Antivirus\Manager;
 use Aedart\Contracts\Antivirus\Scanner;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ManagerTest
@@ -17,6 +19,10 @@ use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus
  */
+#[Group(
+    'antivirus',
+    'antivirus-manager',
+)]
 class ManagerTest extends AntivirusTestCase
 {
     /**
@@ -24,6 +30,7 @@ class ManagerTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainInstance(): void
     {
         $manager = $this->getAntivirusManager();
@@ -38,6 +45,7 @@ class ManagerTest extends AntivirusTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canMakeDefaultScanner(): void
     {
         $scanner = $this
@@ -54,6 +62,7 @@ class ManagerTest extends AntivirusTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function failsWhenProfileNotFound(): void
     {
         $this->expectException(ProfileNotFoundException::class);
@@ -70,6 +79,7 @@ class ManagerTest extends AntivirusTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function returnsSameScannerInstance(): void
     {
         $manager = $this->getAntivirusManager();
@@ -85,6 +95,7 @@ class ManagerTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function forwardsDynamicCallsToDefaultScanner(): void
     {
         $manager = $this->getAntivirusManager();

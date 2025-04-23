@@ -4,7 +4,9 @@ namespace Aedart\Tests\Integration\Core\Console;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Console\AthenaeumCoreConsoleTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Console\Scheduling\Schedule;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D0_ScheduleTest
@@ -16,6 +18,11 @@ use Illuminate\Console\Scheduling\Schedule;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Console
  */
+#[Group(
+    'application',
+    'application-console',
+    'application-console-d0',
+)]
 class D0_ScheduleTest extends AthenaeumCoreConsoleTestCase
 {
     /*****************************************************************
@@ -60,6 +67,7 @@ class D0_ScheduleTest extends AthenaeumCoreConsoleTestCase
     /**
      * @test
      */
+    #[Test]
     public function hasRegisteredScheduledTasksFromConfig()
     {
         // Ensure console kernel and application are resolved
@@ -76,6 +84,7 @@ class D0_ScheduleTest extends AthenaeumCoreConsoleTestCase
     /**
      * @test
      */
+    #[Test]
     public function canRunSchedule()
     {
         // Ensure console kernel and application are resolved

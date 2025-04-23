@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Redmine\Collections;
 use Aedart\Redmine\Collections\Collection;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * CollectionsTest
@@ -15,6 +17,10 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Collections
  */
+#[Group(
+    'redmine',
+    'redmine-collections',
+)]
 class CollectionsTest extends RedmineTestCase
 {
     /**
@@ -22,6 +28,7 @@ class CollectionsTest extends RedmineTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canCreateFromResponsePayload()
     {
         $payload = $this->makeDummyList(5);
@@ -42,6 +49,7 @@ class CollectionsTest extends RedmineTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function hasResourceClassDefined()
     {
         $payload = $this->makeDummyList();
@@ -56,6 +64,7 @@ class CollectionsTest extends RedmineTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canFilterResourcesFromCollection()
     {
         // This test ensures that the Redmine Resource (DTO)'s

@@ -11,7 +11,9 @@ use Aedart\ETags\Facades\Generator;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\ETags\ETagsTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ETagsCollectionTest
@@ -22,6 +24,10 @@ use JsonException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Collections
  */
+#[Group(
+    'etags',
+    'etags-collection',
+)]
 class ETagsCollectionTest extends ETagsTestCase
 {
     /*****************************************************************
@@ -53,6 +59,7 @@ class ETagsCollectionTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canMakeInstance(): void
     {
         $collection = $this->makeCollection();
@@ -67,6 +74,7 @@ class ETagsCollectionTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canMakeInstanceWithEtags(): void
     {
         $collection = $this->makeCollection([
@@ -87,6 +95,7 @@ class ETagsCollectionTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canObtainAllEtags(): void
     {
         $collection = $this->makeCollection([
@@ -115,6 +124,7 @@ class ETagsCollectionTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canIterateThroughCollection(): void
     {
         $collection = $this->makeCollection([
@@ -141,6 +151,7 @@ class ETagsCollectionTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canExportToJson(): void
     {
         $collection = $this->makeCollection([
@@ -174,6 +185,7 @@ class ETagsCollectionTest extends ETagsTestCase
      * @throws ETagException
      * @throws JsonException
      */
+    #[Test]
     public function canSerialiseToJson(): void
     {
         $collection = $this->makeCollection([
@@ -204,6 +216,7 @@ class ETagsCollectionTest extends ETagsTestCase
      * @return void
      * @throws ETagException
      */
+    #[Test]
     public function canExportToString(): void
     {
         $collection = $this->makeCollection([
@@ -234,6 +247,7 @@ class ETagsCollectionTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canAccessCollectionLikeAnArray(): void
     {
         $collection = $this->makeCollection([
@@ -269,6 +283,7 @@ class ETagsCollectionTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function preventsCreatingMixedEtagsWithWildcardETag(): void
     {
         $this->expectException(InvalidETagCollectionEntry::class);
@@ -289,6 +304,7 @@ class ETagsCollectionTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function preventsAddingWildcardEtagToListOfETags(): void
     {
         $this->expectException(InvalidETagCollectionEntry::class);
@@ -308,6 +324,7 @@ class ETagsCollectionTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function preventsAddingEtagToSingleWildcardCollection(): void
     {
         $this->expectException(InvalidETagCollectionEntry::class);
@@ -326,6 +343,7 @@ class ETagsCollectionTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function preventsReplacingExistingIfListOfEtags(): void
     {
         $this->expectException(InvalidETagCollectionEntry::class);
@@ -345,6 +363,7 @@ class ETagsCollectionTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canReplaceWildcardWithRegularEtag(): void
     {
         $collection = $this->makeCollection([

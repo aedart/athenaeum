@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Streams\File;
 
 use Aedart\Streams\FileStream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E0_FlushTest
@@ -14,6 +16,11 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-e0',
+)]
 class E0_FlushTest extends StreamTestCase
 {
     /**
@@ -22,6 +29,7 @@ class E0_FlushTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canFlushBufferedToFile()
     {
         // Hmm... not sure how this should be tested. Perhaps this does

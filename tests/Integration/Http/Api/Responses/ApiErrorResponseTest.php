@@ -6,9 +6,11 @@ use Aedart\Http\Api\Responses\ApiErrorResponse;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Teapot\StatusCode\All as HttpStatus;
 
@@ -21,6 +23,10 @@ use Teapot\StatusCode\All as HttpStatus;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Responses
  */
+#[Group(
+    'http-api',
+    'api-error-response',
+)]
 class ApiErrorResponseTest extends ApiResourcesTestCase
 {
     /**
@@ -30,6 +36,7 @@ class ApiErrorResponseTest extends ApiResourcesTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function canMakeResponseForException(): void
     {
         $ex = new InvalidArgumentException('test');
@@ -57,6 +64,7 @@ class ApiErrorResponseTest extends ApiResourcesTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function addsStackTraceWhenAppInDebugMode(): void
     {
         // Enable application's debug state
@@ -100,6 +108,7 @@ class ApiErrorResponseTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function usesHttpExceptionHeaders(): void
     {
         $ex = new NotFoundHttpException('record was not found');
@@ -117,6 +126,7 @@ class ApiErrorResponseTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function usesSpecifiedHttpStatusWhenGiven(): void
     {
         $ex = new NotFoundHttpException('record was not found');

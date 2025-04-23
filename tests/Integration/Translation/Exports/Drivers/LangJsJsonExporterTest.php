@@ -9,7 +9,9 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Translation\TranslationTestCase;
 use Aedart\Translation\Exports\Drivers\LangJsJsonExporter;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * LangJsJsonExporterTest
@@ -22,6 +24,12 @@ use JsonException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Translation\Exports\Drivers
  */
+#[Group(
+    'translations',
+    'translations-exporter',
+    'translations-exporter-drivers',
+    'translations-exporter-drivers-lang-js-json',
+)]
 class LangJsJsonExporterTest extends TranslationTestCase
 {
     /*****************************************************************
@@ -53,6 +61,7 @@ class LangJsJsonExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canObtainExporter(): void
     {
         $exporter = $this->exporter();
@@ -68,6 +77,7 @@ class LangJsJsonExporterTest extends TranslationTestCase
      * @throws ProfileNotFoundException
      * @throws ExporterException
      */
+    #[Test]
     public function canExport(): void
     {
         $translations = $this->exporter()->export();
@@ -88,6 +98,7 @@ class LangJsJsonExporterTest extends TranslationTestCase
      * @throws ProfileNotFoundException
      * @throws JsonException
      */
+    #[Test]
     public function canExportSpecificLocaleAndGroups(): void
     {
         $translations = $this->exporter()->export(

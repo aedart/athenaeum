@@ -8,6 +8,8 @@ use Aedart\Streams\Stream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
 use Aedart\Utils\Str;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D5_ReadBufferTest
@@ -18,6 +20,10 @@ use Aedart\Utils\Str;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-d5',
+)]
 class D5_ReadBufferTest extends StreamTestCase
 {
     /**
@@ -27,6 +33,7 @@ class D5_ReadBufferTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canBufferStream(): void
     {
         $content = Str::random(50);
@@ -67,6 +74,7 @@ class D5_ReadBufferTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canBufferLength(): void
     {
         $content = Str::random(50);
@@ -107,6 +115,7 @@ class D5_ReadBufferTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canBufferFromOffset(): void
     {
         $content = Str::random(50);
@@ -147,6 +156,7 @@ class D5_ReadBufferTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canBufferUsingSpecificBufferSize(): void
     {
         $content = Str::random(50);
@@ -188,6 +198,7 @@ class D5_ReadBufferTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function doesNotExceedLengthWhenBufferSizeExceedsRemaining(): void
     {
         $content = Str::random(50);

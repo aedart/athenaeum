@@ -8,7 +8,9 @@ use Aedart\Support\EnvFile;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Support\EnvFileTestCase;
 use Aedart\Utils\Str;
+use Codeception\Attribute\Group;
 use Codeception\Exception\ConfigurationException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * EnvFileTest
@@ -21,6 +23,12 @@ use Codeception\Exception\ConfigurationException;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Integration\Support\Env
  */
+#[Group(
+    'laravel',
+    'support',
+    'support-env',
+    'support-env-file',
+)]
 class EnvFileTest extends EnvFileTestCase
 {
     /**
@@ -28,6 +36,7 @@ class EnvFileTest extends EnvFileTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsLoadingIfEnvironmentFileDoesNotExist(): void
     {
         $this->expectException(FileNotFound::class);
@@ -42,6 +51,7 @@ class EnvFileTest extends EnvFileTestCase
      *
      * @throws ConfigurationException
      */
+    #[Test]
     public function canLoadEnvironmentFileContents(): void
     {
         $contents = EnvFile::load($this->envFilePath())->contents();
@@ -58,6 +68,7 @@ class EnvFileTest extends EnvFileTestCase
      *
      * @throws ConfigurationException
      */
+    #[Test]
     public function canDetermineIfKeyExists(): void
     {
         $env = EnvFile::load($this->envFilePath());
@@ -76,6 +87,7 @@ class EnvFileTest extends EnvFileTestCase
      *
      * @throws ConfigurationException
      */
+    #[Test]
     public function canAppendKeyValuePair(): void
     {
         $env = EnvFile::load($this->envFilePath());
@@ -101,6 +113,7 @@ class EnvFileTest extends EnvFileTestCase
      *
      * @throws ConfigurationException
      */
+    #[Test]
     public function canAppendKeyValuePairWithComment(): void
     {
         $env = EnvFile::load($this->envFilePath());
@@ -127,6 +140,7 @@ class EnvFileTest extends EnvFileTestCase
      *
      * @throws ConfigurationException
      */
+    #[Test]
     public function canReplaceKeyValuePair(): void
     {
         $env = EnvFile::load($this->envFilePath());
@@ -152,6 +166,7 @@ class EnvFileTest extends EnvFileTestCase
      *
      * @throws ConfigurationException
      */
+    #[Test]
     public function failsReplacingKeyValueIfKeyDoesNotExist(): void
     {
         $this->expectException(KeyNotFound::class);
@@ -171,6 +186,7 @@ class EnvFileTest extends EnvFileTestCase
      *
      * @throws ConfigurationException
      */
+    #[Test]
     public function canSaveChangesToFile(): void
     {
         $env = EnvFile::load($this->envFilePath());

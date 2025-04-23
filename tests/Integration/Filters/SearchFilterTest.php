@@ -7,8 +7,10 @@ use Aedart\Filters\Query\Filters\SearchFilter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * SearchFilterTest
@@ -19,11 +21,16 @@ use Illuminate\Contracts\Database\Query\Builder;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters
  */
+#[Group(
+    'filters',
+    'filters-search',
+)]
 class SearchFilterTest extends FiltersTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canApplyFilter()
     {
         $search = $this->getFaker()->words(3, true);
@@ -55,6 +62,7 @@ class SearchFilterTest extends FiltersTestCase
      *
      * @return void
      */
+    #[Test]
     public function canApplySearchCallback(): void
     {
         $search = $this->getFaker()->words(3, true);
@@ -77,6 +85,7 @@ class SearchFilterTest extends FiltersTestCase
      *
      * @return void
      */
+    #[Test]
     public function canApplyInvokableSearchQueryInstance(): void
     {
         $search = $this->getFaker()->words(3, true);

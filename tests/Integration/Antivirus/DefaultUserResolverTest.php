@@ -7,7 +7,9 @@ use Aedart\Support\Facades\IoCFacade;
 use Aedart\Support\Helpers\Auth\AuthTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Auth\GenericUser;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DefaultUserResolverTest
@@ -18,6 +20,10 @@ use Illuminate\Auth\GenericUser;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus
  */
+#[Group(
+    'antivirus',
+    'antivirus-user-resolver',
+)]
 class DefaultUserResolverTest extends AntivirusTestCase
 {
     use AuthTrait;
@@ -45,6 +51,7 @@ class DefaultUserResolverTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainResolver(): void
     {
         $resolver = $this->resolver();
@@ -57,6 +64,7 @@ class DefaultUserResolverTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsNullWhenNoUserAuthenticated(): void
     {
         $result = $this->resolver()->resolve();
@@ -69,6 +77,7 @@ class DefaultUserResolverTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsIdentifierWhenUserAuthenticated(): void
     {
         $user = new GenericUser([

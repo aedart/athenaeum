@@ -8,8 +8,10 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\User;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Users\UpdateUserRequest;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\UserResource;
 use Aedart\Tests\TestCases\Http\ApiResourceRequestsTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Facades\Route;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode\All as HttpStatus;
 
 /**
@@ -23,6 +25,12 @@ use Teapot\StatusCode\All as HttpStatus;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-requests',
+    'update-single-resource-request'
+)]
 class UpdateSingleResourceRequestTest extends ApiResourceRequestsTestCase
 {
     /**
@@ -47,6 +55,7 @@ class UpdateSingleResourceRequestTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function canCreateSingleResource(): void
     {
         /** @var User $user */
@@ -98,6 +107,7 @@ class UpdateSingleResourceRequestTest extends ApiResourceRequestsTestCase
      * @throws JsonException
      * @throws ETagGeneratorException
      */
+    #[Test]
     public function evaluatesRequestPrecondition(): void
     {
         /** @var User $user */

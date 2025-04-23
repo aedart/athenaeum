@@ -6,7 +6,11 @@ use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode\All as StatusCodes;
+use Throwable;
 
 /**
  * UpdateTest
@@ -18,15 +22,21 @@ use Teapot\StatusCode\All as StatusCodes;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
+#[Group(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-update'
+)]
 class UpdateTest extends RedmineTestCase
 {
     /**
      * @test
      *
      * @throws ConnectionException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canUpdateExistingResource()
     {
         $name = $this->getFaker()->name();
@@ -46,9 +56,10 @@ class UpdateTest extends RedmineTestCase
      * @test
      *
      * @throws ConnectionException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canUpdateAndReload()
     {
         $name = $this->getFaker()->name();
@@ -81,9 +92,10 @@ class UpdateTest extends RedmineTestCase
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function failsIfDoesNotSupportUpdateOperation()
     {
         $this->expectException(UnsupportedOperationException::class);

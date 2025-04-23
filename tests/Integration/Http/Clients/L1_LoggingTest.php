@@ -2,11 +2,15 @@
 
 namespace Aedart\Tests\Integration\Http\Clients;
 
+use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Filesystem\Filesystem;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode;
 
 /**
@@ -18,6 +22,11 @@ use Teapot\StatusCode;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-l1',
+)]
 class L1_LoggingTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -68,10 +77,11 @@ class L1_LoggingTest extends HttpClientsTestCase
      * @test
      * @dataProvider providesClientProfiles
      *
-     * @param  string  $profile
-     *
+     * @param string $profile
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canLogRequestAndResponse(string $profile)
     {
         $this
@@ -97,6 +107,8 @@ class L1_LoggingTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canLogUsingCustomCallback(string $profile)
     {
         $callbackInvoked = false;
@@ -121,6 +133,8 @@ class L1_LoggingTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function logsBeforeResponseExpectations(string $profile)
     {
         $callbackOrder = [];

@@ -7,6 +7,8 @@ use Aedart\Testing\GetterSetterTraitTester;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Testing\TestCases\LaravelTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use ReflectionException;
 
 /**
@@ -20,6 +22,12 @@ use ReflectionException;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Integration\Support\Env\Concerns
  */
+#[Group(
+    'laravel',
+    'support',
+    'support-env',
+    'support-env-concern',
+)]
 class EnvironmentFilePathTest extends LaravelTestCase
 {
     use GetterSetterTraitTester;
@@ -31,6 +39,7 @@ class EnvironmentFilePathTest extends LaravelTestCase
      *
      * @throws ReflectionException
      */
+    #[Test]
     public function canSetAndRetrieveEnvironmentFilePath(): void
     {
         $this->assertTraitMethods(
@@ -46,6 +55,7 @@ class EnvironmentFilePathTest extends LaravelTestCase
      *
      * @throws ReflectionException
      */
+    #[Test]
     public function hasDefaultPath(): void
     {
         // Assert a default method

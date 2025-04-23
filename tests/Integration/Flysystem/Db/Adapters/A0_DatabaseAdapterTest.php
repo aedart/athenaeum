@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
 use Aedart\Flysystem\Db\Adapters\DatabaseAdapter;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * A0_DatabaseAdapterTest
@@ -15,6 +17,11 @@ use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-a0'
+)]
 class A0_DatabaseAdapterTest extends FlysystemDbTestCase
 {
     /**
@@ -22,6 +29,7 @@ class A0_DatabaseAdapterTest extends FlysystemDbTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainAdapterInstance(): void
     {
         $adapter = new DatabaseAdapter('files', 'file_contents', null);
@@ -35,6 +43,7 @@ class A0_DatabaseAdapterTest extends FlysystemDbTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainFilesystemWithDbAdapter(): void
     {
         $fs = $this->filesystem();

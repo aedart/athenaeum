@@ -4,7 +4,9 @@ namespace Aedart\Tests\Integration\Core\Application;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Foundation\MaintenanceMode;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * H0_MaintenanceModeTest
@@ -15,6 +17,10 @@ use Illuminate\Contracts\Foundation\MaintenanceMode;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
+#[Group(
+    'application',
+    'application-h0',
+)]
 class H0_MaintenanceModeTest extends AthenaeumCoreTestCase
 {
     /**
@@ -22,6 +28,7 @@ class H0_MaintenanceModeTest extends AthenaeumCoreTestCase
      *
      * @return void
      */
+    #[Test]
     public function hasMaintenanceModeDriverRegistered()
     {
         $driver = $this->app->maintenanceMode();
@@ -36,6 +43,7 @@ class H0_MaintenanceModeTest extends AthenaeumCoreTestCase
      *
      * @return void
      */
+    #[Test]
     public function canSetInMaintenanceMode()
     {
         $app = $this->app;

@@ -13,6 +13,8 @@ use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderB;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderC;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderD;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E0_ProvidersRegistrationTest
@@ -23,6 +25,10 @@ use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
+#[Group(
+    'application',
+    'application-e0',
+)]
 class E0_ProvidersRegistrationTest extends AthenaeumCoreTestCase
 {
     /*****************************************************************
@@ -48,6 +54,7 @@ class E0_ProvidersRegistrationTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function registersAppServiceProviders()
     {
         $this->bootstrap();

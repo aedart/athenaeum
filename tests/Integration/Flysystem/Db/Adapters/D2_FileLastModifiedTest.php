@@ -3,6 +3,8 @@
 namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D2_FileLastModifiedTest
@@ -14,6 +16,11 @@ use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-d2'
+)]
 class D2_FileLastModifiedTest extends FlysystemDbTestCase
 {
     /**
@@ -23,6 +30,7 @@ class D2_FileLastModifiedTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function canSetAndObtainLastModifiedTimestamp(): void
     {
         $path = 'home/books/october_falls.txt';

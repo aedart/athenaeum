@@ -8,8 +8,10 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Owner;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\GameResource;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\OwnerResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode\All as HttpStatus;
 
 /**
@@ -22,6 +24,11 @@ use Teapot\StatusCode\All as HttpStatus;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-response',
+)]
 class ResponseTest extends ApiResourcesTestCase
 {
     /**
@@ -29,6 +36,7 @@ class ResponseTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canRespondWithCreatedStatus(): void
     {
         // ------------------------------------------------------------------ //
@@ -70,6 +78,7 @@ class ResponseTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canRespondUpdated(): void
     {
         $model = new Owner([ 'name' => 'Jim' ]);

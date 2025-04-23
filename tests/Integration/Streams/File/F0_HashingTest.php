@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Streams\File;
 use Aedart\Streams\FileStream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * F0_HashingTest
@@ -15,6 +17,11 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-f0',
+)]
 class F0_HashingTest extends StreamTestCase
 {
     /**
@@ -23,6 +30,7 @@ class F0_HashingTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canObtainHashOfStreamsContent()
     {
         $algo = 'xxh3';

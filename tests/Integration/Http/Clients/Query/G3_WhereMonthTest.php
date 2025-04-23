@@ -6,6 +6,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C9_WhereMonthTest
@@ -18,6 +21,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-g3',
+    'http-query-grammars',
+)]
 class G3_WhereMonthTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -89,6 +98,8 @@ class G3_WhereMonthTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesWhereMonth')]
+    #[Test]
     public function canAddWhereMonth(string $grammar, string $expected)
     {
         $result = $this
@@ -111,6 +122,8 @@ class G3_WhereMonthTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesOrWhereMonth')]
+    #[Test]
     public function canAddOrWhereMonth(string $grammar, string $expected)
     {
         $result = $this

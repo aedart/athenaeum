@@ -7,6 +7,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E1_PageNumberPageSizeTest
@@ -19,6 +22,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-e1',
+    'http-query-grammars',
+)]
 class E1_PageNumberPageSizeTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -64,6 +73,8 @@ class E1_PageNumberPageSizeTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesPageWithSize')]
+    #[Test]
     public function canSetPageWithSize(string $grammar, string $expected)
     {
         $result = $this

@@ -5,8 +5,11 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D4_AuthorisationHeadersTest
@@ -17,6 +20,11 @@ use GuzzleHttp\Psr7\Response;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-d4',
+)]
 class D4_AuthorisationHeadersTest extends HttpClientsTestCase
 {
     /**
@@ -27,6 +35,8 @@ class D4_AuthorisationHeadersTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function sendsBasicAuthHeader(string $profile)
     {
         $client = $this->client($profile);
@@ -53,6 +63,8 @@ class D4_AuthorisationHeadersTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function sendsDigestAuthHeader(string $profile)
     {
         // This test is is inspired by Guzzle's own way of testing
@@ -86,6 +98,8 @@ class D4_AuthorisationHeadersTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function sendsTokenAuthHeader(string $profile)
     {
         $client = $this->client($profile);

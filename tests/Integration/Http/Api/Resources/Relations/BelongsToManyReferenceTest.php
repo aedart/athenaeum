@@ -10,8 +10,10 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\User;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\RoleResource;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\UserResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * BelongsToManyReferenceTest
@@ -25,6 +27,13 @@ use Illuminate\Support\Facades\Route;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources\Relations
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-relations',
+    'api-resource-relations-references',
+    'api-resource-relation-belongs-to-many',
+)]
 class BelongsToManyReferenceTest extends ApiResourcesTestCase
 {
     /**
@@ -83,6 +92,7 @@ class BelongsToManyReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFormatBelongsToManyReference(): void
     {
         /** @var User $record */
@@ -137,6 +147,7 @@ class BelongsToManyReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFormatBelongsToManyReferenceFromInverseModel(): void
     {
         /** @var Role $record */
@@ -193,6 +204,7 @@ class BelongsToManyReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsNullWhenNotRelationNotEagerLoaded(): void
     {
         /** @var User $record */
@@ -225,6 +237,7 @@ class BelongsToManyReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsEmptyArrayWhenNoRelatedModelsExist(): void
     {
         /** @var User $record */

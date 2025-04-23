@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Acl\Models;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Acl\AclTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * UserModelTest
@@ -16,11 +18,18 @@ use Aedart\Tests\TestCases\Acl\AclTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Acl\Models
  */
+#[Group(
+    'acl',
+    'acl-models',
+    'acl-user',
+    'acl-user-model'
+)]
 class UserModelTest extends AclTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canAssignSingleRole()
     {
         $role = $this->createRole();
@@ -48,6 +57,7 @@ class UserModelTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canAssignManyRoles()
     {
         $roles = $this->createRoles();
@@ -75,6 +85,7 @@ class UserModelTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canAssignSingleRoleViaSlug()
     {
         $role = $this->createRole();
@@ -102,6 +113,7 @@ class UserModelTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canAssignManyRolesViaSlugs()
     {
         $roles = $this->createRoles();
@@ -131,6 +143,7 @@ class UserModelTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canAssignSingleRoleViaId()
     {
         $role = $this->createRole();
@@ -158,6 +171,7 @@ class UserModelTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canAssignManyRolesViaIds()
     {
         $roles = $this->createRoles();
@@ -187,6 +201,7 @@ class UserModelTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canUnassignSingleRole()
     {
         $roles = $this->createRoles();
@@ -219,6 +234,7 @@ class UserModelTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canUnassignManyRoles()
     {
         $roles = $this->createRoles();
@@ -249,6 +265,7 @@ class UserModelTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canUnassignSingleRoleViaSlug()
     {
         $roles = $this->createRoles();
@@ -281,6 +298,7 @@ class UserModelTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canUnassignManyRolesViaSlugs()
     {
         $roles = $this->createRoles();
@@ -313,6 +331,7 @@ class UserModelTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canUnassignSingleRoleViaId()
     {
         $roles = $this->createRoles();
@@ -345,6 +364,7 @@ class UserModelTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canUnassignManyRolesViaIds()
     {
         $roles = $this->createRoles();
@@ -379,6 +399,7 @@ class UserModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canSyncRoles()
     {
         $roles = $this->createRoles();
@@ -412,6 +433,7 @@ class UserModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canUnassignAllRoles()
     {
         $roles = $this->createRoles();
@@ -439,6 +461,7 @@ class UserModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canDetermineIfHasAllOrAnyRolesAssigned()
     {
         // In this test, we ensure that model is able to distinguish exactly
@@ -479,6 +502,7 @@ class UserModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function unassignsRolesWhenUserIsDeleted()
     {
         $roles = $this->createRoles();
@@ -500,6 +524,7 @@ class UserModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canDetermineIfPermissionIsGranted()
     {
         // Create two sets of permission groups, grant some permissions

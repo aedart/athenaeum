@@ -3,7 +3,9 @@
 namespace Aedart\Tests\Integration\Audit;
 
 use Aedart\Tests\TestCases\Audit\AuditTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Facades\Schema;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * A0_MigrationTest
@@ -15,11 +17,17 @@ use Illuminate\Support\Facades\Schema;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Audit
  */
+#[Group(
+    'audit',
+    'audit-trail',
+    'audit-a0',
+)]
 class A0_MigrationTest extends AuditTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function hasInstalledMigration()
     {
         // By Laravel application

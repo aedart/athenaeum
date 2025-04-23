@@ -7,9 +7,11 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Game;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\GameResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * CollectionTest
@@ -21,6 +23,11 @@ use JsonException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-collection',
+)]
 class CollectionTest extends ApiResourcesTestCase
 {
     /**
@@ -68,6 +75,7 @@ class CollectionTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFormatCollection(): void
     {
         $records = Game::query()
@@ -118,6 +126,7 @@ class CollectionTest extends ApiResourcesTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function canReturnPaginatedResponse(): void
     {
         $records = Game::query()

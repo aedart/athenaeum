@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Console;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
 use Aedart\Utils\Str;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * MakeAdapterMigrationCommandTest
@@ -16,6 +18,11 @@ use Aedart\Utils\Str;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Console
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-console'
+)]
 class MakeAdapterMigrationCommandTest extends FlysystemDbTestCase
 {
     /**
@@ -30,6 +37,7 @@ class MakeAdapterMigrationCommandTest extends FlysystemDbTestCase
      *
      * @return void
      */
+    #[Test]
     public function commandIsRegisteredInArtisan()
     {
         $this
@@ -46,6 +54,7 @@ class MakeAdapterMigrationCommandTest extends FlysystemDbTestCase
      *
      * @throws \Codeception\Exception\ConfigurationException
      */
+    #[Test]
     public function canCreateDefaultAdapterMigrationFile()
     {
         $this

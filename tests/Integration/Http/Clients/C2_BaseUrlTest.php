@@ -5,6 +5,9 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C3_BaseUrlTest
@@ -15,6 +18,11 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-c2',
+)]
 class C2_BaseUrlTest extends HttpClientsTestCase
 {
     /**
@@ -25,6 +33,8 @@ class C2_BaseUrlTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function extractsBaseUrlFromOptions(string $profile)
     {
         $url = 'https://acme.org';
@@ -45,6 +55,8 @@ class C2_BaseUrlTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canSetBaseUrl(string $profile)
     {
         $baseUrl = 'https://acme.org';

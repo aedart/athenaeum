@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\ETags\Preconditions\Rfc9110;
 use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\Actions\DefaultActions;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
@@ -20,6 +22,11 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions\Rfc9110
  */
+#[Group(
+    'etags',
+    'preconditions',
+    'rfc9110-if-unmodified-since'
+)]
 class IfUnmodifiedSinceTest extends PreconditionsTestCase
 {
     /**
@@ -29,6 +36,7 @@ class IfUnmodifiedSinceTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function continuesToIfNoneMatchWhenPasses(): void
     {
         // NOTE: [...] If the selected representation's last modification date is EARLIER than or EQUAL to
@@ -63,6 +71,7 @@ class IfUnmodifiedSinceTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function passesWhenLastModifiedEarlierThanUnmodified(): void
     {
         // NOTE: [...] If the selected representation's last modification date is EARLIER than or EQUAL to
@@ -97,6 +106,7 @@ class IfUnmodifiedSinceTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function respondsPreconditionFailsWhenConditionFails(): void
     {
         $this->expectException(PreconditionFailedHttpException::class);
@@ -131,6 +141,7 @@ class IfUnmodifiedSinceTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function abortsIfStateChangeAlreadySucceeded(): void
     {
         $this->expectException(HttpException::class);

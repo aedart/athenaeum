@@ -6,6 +6,8 @@ use Aedart\Filters\Processors\SortingProcessor;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * SortProcessorTest
@@ -16,6 +18,10 @@ use Aedart\Tests\TestCases\Filters\FiltersTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Processors
  */
+#[Group(
+    'filters',
+    'filters-sorting-processor',
+)]
 class SortingProcessorTest extends FiltersTestCase
 {
     /**
@@ -23,6 +29,7 @@ class SortingProcessorTest extends FiltersTestCase
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[Test]
     public function canBuildSearchQuery()
     {
         $key = 'sort';

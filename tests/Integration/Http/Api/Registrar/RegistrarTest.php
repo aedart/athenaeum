@@ -7,6 +7,8 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Owner;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\GameResource;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\OwnerResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * RegistrarTest
@@ -18,6 +20,11 @@ use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Registrar
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-registrar'
+)]
 class RegistrarTest extends ApiResourcesTestCase
 {
     /**
@@ -25,6 +32,7 @@ class RegistrarTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canRegisterFromConfiguration(): void
     {
         $registrar = $this->getApiResourceRegistrar();
@@ -42,6 +50,7 @@ class RegistrarTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canSetResourceUsingInstances(): void
     {
         $registrar = $this->getApiResourceRegistrar();
@@ -60,6 +69,7 @@ class RegistrarTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canGetResourceClassForModel(): void
     {
         $registrar = $this->getApiResourceRegistrar();
@@ -80,6 +90,7 @@ class RegistrarTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFindModelByResourceType(): void
     {
         $registrar = $this->getApiResourceRegistrar();
@@ -100,6 +111,7 @@ class RegistrarTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFindResourceByType(): void
     {
         $registrar = $this->getApiResourceRegistrar();
@@ -120,6 +132,7 @@ class RegistrarTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canForgetApiResource(): void
     {
         $registrar = $this->getApiResourceRegistrar();

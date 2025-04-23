@@ -6,6 +6,8 @@ use Aedart\Database\Utils\Database;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Database\DatabaseTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DatabaseUtilsTest
@@ -17,6 +19,11 @@ use Aedart\Tests\TestCases\Database\DatabaseTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Database\Utils
  */
+#[Group(
+    'db',
+    'database',
+    'db-utils',
+)]
 class DatabaseUtilsTest extends DatabaseTestCase
 {
     /**
@@ -24,6 +31,7 @@ class DatabaseUtilsTest extends DatabaseTestCase
      *
      * @return void
      */
+    #[Test]
     public function canDetermineDriver(): void
     {
         $query = Category::query();
@@ -39,6 +47,7 @@ class DatabaseUtilsTest extends DatabaseTestCase
      *
      * @return void
      */
+    #[Test]
     public function canPrefixColumns(): void
     {
         $prefix = 'games';

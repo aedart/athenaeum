@@ -7,7 +7,9 @@ use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Issue;
 use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -20,6 +22,11 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Pagination
  */
+#[Group(
+    'redmine',
+    'redmine-pagination',
+    'redmine-pagination-traversable',
+)]
 class TraversableResultsTest extends RedmineTestCase
 {
     /**
@@ -29,6 +36,7 @@ class TraversableResultsTest extends RedmineTestCase
      * @throws JsonException
      * @throws Throwable
      */
+    #[Test]
     public function canTraverseAcrossMultipleApiResultsPages()
     {
         // Debug

@@ -6,7 +6,11 @@ use Aedart\Contracts\Redmine\Exceptions\ConnectionException;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode\All as StatusCodes;
+use Throwable;
 
 /**
  * DeleteTest
@@ -18,15 +22,21 @@ use Teapot\StatusCode\All as StatusCodes;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
+#[Group(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-delete',
+)]
 class DeleteTest extends RedmineTestCase
 {
     /**
      * @test
      *
      * @throws ConnectionException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canDeleteResource()
     {
         $connection = $this->connectionWithMock();
@@ -41,9 +51,10 @@ class DeleteTest extends RedmineTestCase
      * @test
      *
      * @throws ConnectionException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function returnsFalseWhenDoesNotExist()
     {
         // Mock response - if delete method sends a request, then
@@ -60,9 +71,10 @@ class DeleteTest extends RedmineTestCase
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function failsIfDoesNotSupportDeleteOperation()
     {
         $this->expectException(UnsupportedOperationException::class);

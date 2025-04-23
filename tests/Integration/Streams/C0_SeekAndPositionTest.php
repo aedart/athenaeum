@@ -6,6 +6,8 @@ use Aedart\Streams\Exceptions\StreamNotSeekable;
 use Aedart\Streams\Stream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C0_SeekAndPositionTest
@@ -16,6 +18,10 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-c0',
+)]
 class C0_SeekAndPositionTest extends StreamTestCase
 {
     /**
@@ -24,6 +30,7 @@ class C0_SeekAndPositionTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetermineIfSeekable()
     {
         $streamA = $this->makeTextFileStream();
@@ -39,6 +46,7 @@ class C0_SeekAndPositionTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canObtainPointPosition()
     {
         $streamA = $this->makeTextFileStream();
@@ -67,6 +75,7 @@ class C0_SeekAndPositionTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canRewind()
     {
         $resource = fopen('php://memory', 'r+b');
@@ -85,6 +94,7 @@ class C0_SeekAndPositionTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canSetPositionToStart()
     {
         $resource = fopen('php://memory', 'r+b');
@@ -103,6 +113,7 @@ class C0_SeekAndPositionTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canSetPositionToEnd()
     {
         $text = $this->getFaker()->word();
@@ -121,6 +132,7 @@ class C0_SeekAndPositionTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function failsSettingPositionWhenStreamNotSeekable()
     {
         $this->expectException(StreamNotSeekable::class);
@@ -135,6 +147,7 @@ class C0_SeekAndPositionTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetermineIfEndOfFile()
     {
         $streamA = $this->makeTextFileStream();

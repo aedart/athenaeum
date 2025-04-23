@@ -6,7 +6,10 @@ use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E0_PayloadTest
@@ -17,6 +20,11 @@ use JsonException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-e0',
+)]
 class E0_PayloadTest extends HttpClientsTestCase
 {
     /**
@@ -27,6 +35,8 @@ class E0_PayloadTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function extractsFormInputDataFromOptions(string $profile)
     {
         $data = [
@@ -49,6 +59,8 @@ class E0_PayloadTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function extractsJsonDataFromOptions(string $profile)
     {
         $data = [
@@ -72,6 +84,8 @@ class E0_PayloadTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws JsonException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canSetDataViaTheBuilder(string $profile)
     {
         $client = $this->client($profile);
@@ -104,6 +118,8 @@ class E0_PayloadTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws JsonException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function mergesMultipleDataSources(string $profile)
     {
         $client = $this->client($profile);

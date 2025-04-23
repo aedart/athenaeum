@@ -4,8 +4,10 @@ namespace Aedart\Tests\Integration\Http\Api\Middleware;
 
 use Aedart\Http\Api\Middleware\RequestMustBeJson;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
@@ -18,6 +20,11 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Middleware
  */
+#[Group(
+    'http-api',
+    'http-api-middleware',
+    'http-api-middleware-must-be-json'
+)]
 class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
 {
     /**
@@ -25,6 +32,7 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canProcessesDataSubmissionRequest(): void
     {
         $request = new Request();
@@ -45,6 +53,7 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canProcessesDataRetrievalRequest(): void
     {
         $request = new Request();
@@ -64,6 +73,7 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function rejectsWhenContentTypeHeaderNotValid(): void
     {
         $this->expectException(BadRequestHttpException::class);
@@ -84,6 +94,7 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function rejectsWhenContentTypeMissingForContentModificationMethod(): void
     {
         $this->expectException(BadRequestHttpException::class);
@@ -104,6 +115,7 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function rejectsWhenAcceptHeaderNotValid(): void
     {
         $this->expectException(BadRequestHttpException::class);

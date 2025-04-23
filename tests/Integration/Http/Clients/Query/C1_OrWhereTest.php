@@ -6,6 +6,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C6_OrWhereTest
@@ -18,6 +21,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-c1',
+    'http-query-grammars',
+)]
 class C1_OrWhereTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -84,6 +93,8 @@ class C1_OrWhereTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesOrWhere')]
+    #[Test]
     public function canAddOrWhere(string $grammar, string $expected)
     {
         $result = $this
@@ -107,6 +118,8 @@ class C1_OrWhereTest extends HttpClientsTestCase
      * @throws HttpQueryBuilderException
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesMultipleConditionsViaArray')]
+    #[Test]
     public function canAddMultipleConditionsViaArray(string $grammar, string $expected)
     {
         $result = $this

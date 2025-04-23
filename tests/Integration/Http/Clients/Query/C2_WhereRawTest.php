@@ -6,6 +6,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C1_WhereRawTest
@@ -18,6 +21,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-c2',
+    'http-query-grammars',
+)]
 class C2_WhereRawTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -146,6 +155,8 @@ class C2_WhereRawTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesWhereRawData')]
+    #[Test]
     public function canAddWhereRawExpression(string $grammar, string $expected)
     {
         $result = $this
@@ -168,6 +179,8 @@ class C2_WhereRawTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesOrWhereRawData')]
+    #[Test]
     public function canAddOrWhereRawExpression(string $grammar, string $expected)
     {
         $result = $this
@@ -191,6 +204,8 @@ class C2_WhereRawTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesInjectsBindingsData')]
+    #[Test]
     public function injectsBindings(string $grammar, string $expected)
     {
         $result = $this
@@ -213,6 +228,8 @@ class C2_WhereRawTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesCombineWhereWithRawWhere')]
+    #[Test]
     public function canCombineWhereWithRawWhere(string $grammar, string $expected)
     {
         $result = $this

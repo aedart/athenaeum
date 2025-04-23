@@ -6,6 +6,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C11_WhereTimeTest
@@ -18,6 +21,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-g5',
+    'http-query-grammars',
+)]
 class G5_WhereTimeTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -84,6 +93,8 @@ class G5_WhereTimeTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesWhereTime')]
+    #[Test]
     public function canAddWhereTime(string $grammar, string $expected)
     {
         $result = $this
@@ -106,6 +117,8 @@ class G5_WhereTimeTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesOrWhereTime')]
+    #[Test]
     public function canAddOrWhereTime(string $grammar, string $expected)
     {
         $result = $this

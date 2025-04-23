@@ -6,6 +6,8 @@ use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Facades\Generator;
 use Aedart\ETags\Preconditions\Actions\DefaultActions;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
@@ -21,6 +23,11 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions\Rfc9110
  */
+#[Group(
+    'etags',
+    'preconditions',
+    'rfc9110-if-match'
+)]
 class IfMatchTest extends PreconditionsTestCase
 {
     /**
@@ -30,6 +37,7 @@ class IfMatchTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function continuesToIfNoneMatchWhenPasses(): void
     {
         $etag = Generator::makeStrong('abc');
@@ -61,6 +69,7 @@ class IfMatchTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function respondsPreconditionFailsWhenConditionFails(): void
     {
         $this->expectException(PreconditionFailedHttpException::class);
@@ -92,6 +101,7 @@ class IfMatchTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function abortsIfStateChangeAlreadySucceeded(): void
     {
         $this->expectException(HttpException::class);

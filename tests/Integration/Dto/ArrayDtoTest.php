@@ -7,6 +7,8 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Dto\Organisation;
 use Aedart\Tests\TestCases\Dto\DtoTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ArrayDtoTest
@@ -17,11 +19,16 @@ use Aedart\Utils\Json;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Dto
  */
+#[Group(
+    'dto',
+    'array-dto',
+)]
 class ArrayDtoTest extends DtoTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canCreateInstance()
     {
         $dto = $this->makeArrayDto();
@@ -32,6 +39,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateInstanceWithProperties()
     {
         $data = $this->arrayDtoData();
@@ -45,6 +53,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineIfExists()
     {
         $data = $this->arrayDtoData();
@@ -59,6 +68,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canGetAndSetProperty()
     {
         $name = $this->faker->name();
@@ -75,6 +85,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsReadingWhenPropertyDoesNotExist()
     {
         $this->expectException(UndefinedProperty::class);
@@ -86,6 +97,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsWritingWhenPropertyDoesNotExist()
     {
         $this->expectException(UndefinedProperty::class);
@@ -97,6 +109,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canUnsetProperty()
     {
         $data = $this->arrayDtoData();
@@ -110,6 +123,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canBeJsonSerialised()
     {
         $data = $this->arrayDtoData();
@@ -124,6 +138,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canBeExportedToJson()
     {
         $data = $this->arrayDtoData();
@@ -138,6 +153,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canBeSerialisedAndUnserialised()
     {
         $data = [
@@ -160,6 +176,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canBeRepresentedAsString()
     {
         $data = $this->arrayDtoData();
@@ -174,6 +191,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateInstanceFromJson()
     {
         $json = '{"name":"Stacy Douglas","employees":54}';
@@ -187,6 +205,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainDebugInfo()
     {
         $data = $this->arrayDtoData();
@@ -203,6 +222,7 @@ class ArrayDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function debugInfoDoesNotContainUnsetProperty()
     {
         $data = $this->arrayDtoData();

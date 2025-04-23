@@ -6,8 +6,10 @@ use Aedart\Contracts\ETags\Collection;
 use Aedart\Contracts\ETags\ETag;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\ETags\ETagsTestCase;
+use Codeception\Attribute\Group;
 use DateTimeInterface;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
@@ -20,6 +22,11 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Mixins
  */
+#[Group(
+    'etags',
+    'etags-mixins',
+    'request-etags-mixin'
+)]
 class RequestETagsMixinTest extends ETagsTestCase
 {
     /**
@@ -27,6 +34,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function hasInstalledMixinInRequest(): void
     {
         $this->assertTrue(Request::hasMacro('etagsFrom'), 'etagsFrom not installed');
@@ -46,6 +54,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function requestHeadersControl(): void
     {
         // This test is more or less just for the sake of debugging.
@@ -70,6 +79,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function doesNotFailWhenNullEtagHeaderValueReceived(): void
     {
         // This is really an edge case, where somehow null is set as value
@@ -90,6 +100,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenInvalidEtagValues(): void
     {
         $this->expectException(BadRequestHttpException::class);
@@ -106,6 +117,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function canGetIfMatchEtags(): void
     {
         $request = $this->createRequest(
@@ -137,6 +149,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function canGetIfNoneMatchEtags(): void
     {
         $request = $this->createRequest(
@@ -168,6 +181,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function canDetermineWhenIfRangeHeadersHaveValues(): void
     {
         $requestA = $this->createRequest(
@@ -187,6 +201,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainEtagOrDateFromIfRangeHeader(): void
     {
         $requestA = $this->createRequest(
@@ -225,6 +240,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenInvalidDateInIfRangeHeader(): void
     {
         $this->expectException(BadRequestHttpException::class);
@@ -242,6 +258,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenInvalidHttpDateGiven(): void
     {
         $this->expectException(BadRequestHttpException::class);
@@ -258,6 +275,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsNullIfModifiedSinceDateWhenIncorrectHttpMethod(): void
     {
         $request = $this->createRequest(
@@ -277,6 +295,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsNullIfModifiedSinceDateWhenIfNotMatchedHeaderSet(): void
     {
         $request = $this->createRequest(
@@ -297,6 +316,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainIfModifiedSinceDate(): void
     {
         $request = $this->createRequest(
@@ -316,6 +336,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsNullIfUnmodifiedSinceDateWhenIfMatchHeaderSet(): void
     {
         $request = $this->createRequest(
@@ -335,6 +356,7 @@ class RequestETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainIfUnmodifiedSinceDate(): void
     {
         $request = $this->createRequest(

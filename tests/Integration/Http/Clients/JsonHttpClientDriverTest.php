@@ -5,6 +5,9 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * JsonHttpClientDriverTest
@@ -16,6 +19,11 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-json',
+)]
 class JsonHttpClientDriverTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -58,6 +66,8 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
      *
      * @param string $method
      */
+    #[DataProvider('httpMethods')]
+    #[Test]
     public function setsJsonContentType(string $method)
     {
         $client = $this->getHttpClient();
@@ -77,6 +87,8 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
      *
      * @param string $method
      */
+    #[DataProvider('httpMethods')]
+    #[Test]
     public function setsJsonAcceptHeader(string $method)
     {
         $client = $this->getHttpClient();
@@ -93,6 +105,7 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
     /**
      * @test
      */
+    #[Test]
     public function maintainsDefaultHeadersAfterRequest()
     {
         $client = $this->getHttpClient()
@@ -111,6 +124,7 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
     /**
      * @test
      */
+    #[Test]
     public function requestIsJsonEncoded()
     {
         $body = [

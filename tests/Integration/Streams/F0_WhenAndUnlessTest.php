@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Streams;
 
 use Aedart\Streams\Stream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * F0_WhenAndUnlessTest
@@ -14,6 +16,10 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-f0',
+)]
 class F0_WhenAndUnlessTest extends StreamTestCase
 {
     /**
@@ -21,6 +27,7 @@ class F0_WhenAndUnlessTest extends StreamTestCase
      *
      * @return void
      */
+    #[Test]
     public function appliesCallbackWhenTrue()
     {
         $stream = new Stream();
@@ -38,6 +45,7 @@ class F0_WhenAndUnlessTest extends StreamTestCase
      *
      * @return void
      */
+    #[Test]
     public function appliesOtherwiseCallbackWhenFalse()
     {
         $stream = new Stream();
@@ -55,6 +63,7 @@ class F0_WhenAndUnlessTest extends StreamTestCase
      *
      * @return void
      */
+    #[Test]
     public function resolveCallableResultForWhen()
     {
         $stream = new Stream();
@@ -72,6 +81,7 @@ class F0_WhenAndUnlessTest extends StreamTestCase
      *
      * @return void
      */
+    #[Test]
     public function appliesCallbackUnlessFalse()
     {
         $stream = new Stream();
@@ -89,6 +99,7 @@ class F0_WhenAndUnlessTest extends StreamTestCase
      *
      * @return void
      */
+    #[Test]
     public function appliesOtherwiseCallbackUnlessFalse()
     {
         $stream = new Stream();
@@ -106,6 +117,7 @@ class F0_WhenAndUnlessTest extends StreamTestCase
      *
      * @return void
      */
+    #[Test]
     public function resolveCallableResultForUnless()
     {
         $stream = new Stream();

@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C2_CopyFileTest
@@ -15,6 +17,11 @@ use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-c2'
+)]
 class C2_CopyFileTest extends FlysystemDbTestCase
 {
     /**
@@ -24,6 +31,7 @@ class C2_CopyFileTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function canCopyFile(): void
     {
         $pathA = 'home/books/october_falls.txt';

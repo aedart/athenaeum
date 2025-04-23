@@ -8,7 +8,9 @@ use Aedart\Tests\Helpers\Dummies\Events\Listeners\DoesNothing;
 use Aedart\Tests\Helpers\Dummies\Events\Subscribers\FooEventSubscriber;
 use Aedart\Tests\Helpers\Dummies\Events\TestEvent;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * EventServiceProviderTest
@@ -19,6 +21,10 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Events\Provider
  */
+#[Group(
+    'application',
+    'events',
+)]
 class EventServiceProviderTest extends AthenaeumCoreTestCase
 {
     /**
@@ -54,6 +60,7 @@ class EventServiceProviderTest extends AthenaeumCoreTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function hasLoadedEventsConfiguration()
     {
         $this->app->run();
@@ -67,6 +74,7 @@ class EventServiceProviderTest extends AthenaeumCoreTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function hasRegisteredListeners()
     {
         $this->app->run();
@@ -83,6 +91,7 @@ class EventServiceProviderTest extends AthenaeumCoreTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function hasRegisteredSubscribers()
     {
         $this->app->run();

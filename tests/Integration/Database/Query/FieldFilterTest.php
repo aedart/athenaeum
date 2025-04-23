@@ -7,6 +7,8 @@ use Aedart\Contracts\Database\Query\Exceptions\InvalidOperatorException;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\Helpers\Dummies\Database\Query\Filters\GenericFilter;
 use Aedart\Tests\TestCases\Database\DatabaseTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * FieldFilterTest
@@ -20,11 +22,19 @@ use Aedart\Tests\TestCases\Database\DatabaseTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Database\Query
  */
+#[Group(
+    'db',
+    'database',
+    'db-filters',
+    'db-criteria',
+    'db-field-criteria',
+)]
 class FieldFilterTest extends DatabaseTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canApplyFieldFilter()
     {
         // Create dummy data
@@ -46,6 +56,7 @@ class FieldFilterTest extends DatabaseTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsWhenFieldIsEmpty()
     {
         $this->expectException(CriteriaException::class);
@@ -56,6 +67,7 @@ class FieldFilterTest extends DatabaseTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsWhenOperatorIsUnsupported()
     {
         $this->expectException(InvalidOperatorException::class);

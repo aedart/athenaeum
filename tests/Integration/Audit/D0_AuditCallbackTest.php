@@ -6,7 +6,9 @@ use Aedart\Audit\Helpers\Callback;
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Audit\AuditTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Database\Eloquent\Collection;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D0_AuditCallbackTest
@@ -15,10 +17,18 @@ use Illuminate\Database\Eloquent\Collection;
  * @group audit-trail
  * @group audit-callback
  * @group audit-callback-reason
+ * @group audit-d0
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Audit
  */
+#[Group(
+    'audit',
+    'audit-trail',
+    'audit-callback',
+    'audit-callback-reason',
+    'audit-d0',
+)]
 class D0_AuditCallbackTest extends AuditTestCase
 {
     /**
@@ -26,6 +36,7 @@ class D0_AuditCallbackTest extends AuditTestCase
      *
      * @return void
      */
+    #[Test]
     public function canSpecifyCustomReasonForAuditTrails(): void
     {
         $reason = $this->getFaker()->sentence();
@@ -61,6 +72,7 @@ class D0_AuditCallbackTest extends AuditTestCase
      *
      * @return void
      */
+    #[Test]
     public function canRestorePreviousReasons(): void
     {
         $reason = 'a';
