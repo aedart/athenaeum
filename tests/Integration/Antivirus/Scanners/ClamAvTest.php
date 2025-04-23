@@ -75,8 +75,7 @@ class ClamAvTest extends AntivirusTestCase
         string $file,
         string|null $reason = null,
         string|null $id = null
-    ): MockInterface
-    {
+    ): MockInterface {
         $result = new Result(
             status: strtoupper($status),
             filename: $file,
