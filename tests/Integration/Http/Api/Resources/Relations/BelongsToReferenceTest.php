@@ -10,8 +10,10 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Owner;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\GameResource;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\OwnerResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * BelongsToReferenceTest
@@ -25,6 +27,13 @@ use Illuminate\Support\Facades\Route;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources\Relations
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-relations',
+    'api-resource-relations-references',
+    'api-resource-relation-belongs-to',
+)]
 class BelongsToReferenceTest extends ApiResourcesTestCase
 {
     /**
@@ -81,6 +90,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function defaultsToNullWhenRelationNotLoaded(): void
     {
         $record = Game::query()
@@ -106,6 +116,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsDefaultValueForRelation(): void
     {
         $record = Game::query()
@@ -137,6 +148,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsCallbackValueForRelation(): void
     {
         $record = Game::query()
@@ -168,6 +180,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canDisplayRelationIdentifier(): void
     {
         /** @var Game $record */
@@ -204,6 +217,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canUseCustomPrimaryKey(): void
     {
         /** @var Game $record */
@@ -241,6 +255,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canDisplayCustomIdentifierDisplayName(): void
     {
         /** @var Game $record */
@@ -279,6 +294,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFormatAsRawIdentifier(): void
     {
         /** @var Game $record */
@@ -313,6 +329,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canDisplayWithLabel(): void
     {
         /** @var Game $record */
@@ -351,6 +368,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canDisplayWithLabelCallback(): void
     {
         /** @var Game $record */
@@ -397,6 +415,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsShowingResourceTypeWhenNotRegistered(): void
     {
         $this->expectException(RelationReferenceException::class);
@@ -433,6 +452,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canShowApiResourceType(): void
     {
         /** @var Game $record */
@@ -471,6 +491,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canShowApiResourceTypeInPluralForm(): void
     {
         /** @var Game $record */
@@ -508,6 +529,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canShowSelfLink(): void
     {
         /** @var Game $record */
@@ -546,6 +568,7 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function appliesAdditionalCallback(): void
     {
         /** @var Game $record */

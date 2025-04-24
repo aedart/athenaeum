@@ -7,6 +7,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C4_WhereCallbackTest
@@ -19,6 +22,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-c5',
+    'http-query-grammars',
+)]
 class C5_WhereCallbackTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -62,6 +71,8 @@ class C5_WhereCallbackTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesWhereCallback')]
+    #[Test]
     public function canAddWhereCallback(string $grammar, string $expected)
     {
         $result = $this

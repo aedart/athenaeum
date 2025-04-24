@@ -9,6 +9,9 @@ use Aedart\Redmine\Exceptions\InvalidConnection;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ConnectionTest
@@ -19,6 +22,10 @@ use Aedart\Utils\Json;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Connections
  */
+#[Group(
+    'redmine',
+    'redmine-connection',
+)]
 class ConnectionTest extends RedmineTestCase
 {
     /**
@@ -26,6 +33,7 @@ class ConnectionTest extends RedmineTestCase
      *
      * @throws ConnectionException
      */
+    #[Test]
     public function canResolveDefaultConnection()
     {
         $connection = Connection::resolve();
@@ -38,6 +46,7 @@ class ConnectionTest extends RedmineTestCase
      *
      * @throws ConnectionException
      */
+    #[Test]
     public function canResolveRequestedConnection()
     {
         $connection = Connection::resolve('my_custom_connection');
@@ -50,6 +59,7 @@ class ConnectionTest extends RedmineTestCase
      *
      * @throws ConnectionException
      */
+    #[Test]
     public function resolvesGivenConnection()
     {
         $custom = Connection::resolve('my_custom_connection');
@@ -64,6 +74,7 @@ class ConnectionTest extends RedmineTestCase
      *
      * @throws ConnectionException
      */
+    #[Test]
     public function canObtainHttpClient()
     {
         $client = Connection::resolve()->client();
@@ -75,8 +86,9 @@ class ConnectionTest extends RedmineTestCase
      * @test
      *
      * @throws ConnectionException
-     * @throws \JsonException
+     * @throws JsonException
      */
+    #[Test]
     public function canMockResponse()
     {
         $data = [
@@ -105,6 +117,7 @@ class ConnectionTest extends RedmineTestCase
      *
      * @throws ConnectionException
      */
+    #[Test]
     public function failsWhenConnectionProfileDoesNotExist()
     {
         $this->expectException(InvalidConnection::class);
@@ -118,6 +131,7 @@ class ConnectionTest extends RedmineTestCase
      *
      * @throws ConnectionException
      */
+    #[Test]
     public function failsWhenHttpClientProfileDoesNotExist()
     {
         $this->expectException(InvalidConnection::class);

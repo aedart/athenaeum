@@ -6,7 +6,9 @@ use Aedart\Contracts\ETags\Exceptions\ETagException;
 use Aedart\ETags\ETag;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\ETags\ETagsTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Response;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ResponseETagsMixinTest
@@ -18,6 +20,11 @@ use Illuminate\Http\Response;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Mixins
  */
+#[Group(
+    'etags',
+    'etags-mixins',
+    'response-etags-mixin'
+)]
 class ResponseETagsMixinTest extends ETagsTestCase
 {
     /**
@@ -25,6 +32,7 @@ class ResponseETagsMixinTest extends ETagsTestCase
      *
      * @return void
      */
+    #[Test]
     public function hasInstalledMixinInResponse(): void
     {
         $this->assertTrue(Response::hasMacro('withEtag'), 'withEtag not installed');
@@ -39,6 +47,7 @@ class ResponseETagsMixinTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canSetEtagViaMacro(): void
     {
         $eTag = ETag::make(1234);
@@ -60,6 +69,7 @@ class ResponseETagsMixinTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canRemoveEtagViaMacro(): void
     {
         $eTag = ETag::make(1234);
@@ -82,6 +92,7 @@ class ResponseETagsMixinTest extends ETagsTestCase
      *
      * @throws ETagException
      */
+    #[Test]
     public function canSetCacheHeadersViaMacro(): void
     {
         $eTag = ETag::make(1234, true);

@@ -12,6 +12,9 @@ use Aedart\Filters\Query\Filters\Fields\UTCDatetimeFilter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * FieldFiltersTest
@@ -26,6 +29,14 @@ use Aedart\Tests\TestCases\Filters\FiltersTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters
  */
+#[Group(
+    'filters',
+    'filters-fields',
+    'filters-numeric',
+    'filters-boolean',
+    'filters-datetime',
+    'filters-string',
+)]
 class FieldFiltersTest extends FiltersTestCase
 {
     /*****************************************************************
@@ -113,6 +124,8 @@ class FieldFiltersTest extends FiltersTestCase
      * @param string $operator
      * @param mixed $value
      */
+    #[DataProvider('providersFieldFilters')]
+    #[Test]
     public function canBeApplied(string $class, string $field, string $operator, $value)
     {
         /** @var FieldCriteria $filter */

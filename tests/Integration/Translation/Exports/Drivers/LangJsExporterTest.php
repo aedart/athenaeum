@@ -8,6 +8,8 @@ use Aedart\Contracts\Translation\Exports\Exporter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Translation\TranslationTestCase;
 use Aedart\Translation\Exports\Drivers\LangJsExporter;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * LangJsExporterTest
@@ -20,6 +22,12 @@ use Aedart\Translation\Exports\Drivers\LangJsExporter;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Translation\Exports\Drivers
  */
+#[Group(
+    'translations',
+    'translations-exporter',
+    'translations-exporter-drivers',
+    'translations-exporter-drivers-lang-js',
+)]
 class LangJsExporterTest extends TranslationTestCase
 {
     /*****************************************************************
@@ -51,6 +59,7 @@ class LangJsExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canObtainExporter(): void
     {
         $exporter = $this->exporter();
@@ -66,6 +75,7 @@ class LangJsExporterTest extends TranslationTestCase
      * @throws ProfileNotFoundException
      * @throws ExporterException
      */
+    #[Test]
     public function canExport(): void
     {
         $translations = $this->exporter()->export();
@@ -99,6 +109,7 @@ class LangJsExporterTest extends TranslationTestCase
      * @throws ExporterException
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canExportSpecificLocaleAndGroups(): void
     {
         $translations = $this->exporter()->export(

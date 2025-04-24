@@ -6,9 +6,11 @@ use Aedart\Tests\Helpers\Dummies\Dto\Organisation;
 use Aedart\Tests\Helpers\Dummies\Dto\Person;
 use Aedart\Tests\TestCases\Dto\DtoTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
 use DateTimeInterface;
 use Illuminate\Support\Carbon;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use TypeError;
 
 /**
@@ -21,6 +23,11 @@ use TypeError;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Dto
  */
+#[Group(
+    'dto',
+    'dto-union-types',
+    'array-dto-union-types'
+)]
 class ResolveArrayDtoUnionTypesTest extends DtoTestCase
 {
     /**
@@ -28,6 +35,7 @@ class ResolveArrayDtoUnionTypesTest extends DtoTestCase
      *
      * @return void
      */
+    #[Test]
     public function resolvesScalarTypes()
     {
         $faker = $this->getFaker();
@@ -60,6 +68,7 @@ class ResolveArrayDtoUnionTypesTest extends DtoTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function resolvesArrayTypes()
     {
         $faker = $this->getFaker();
@@ -78,6 +87,7 @@ class ResolveArrayDtoUnionTypesTest extends DtoTestCase
      *
      * @return void
      */
+    #[Test]
     public function resolvesDateTypes()
     {
         $dtoA = $this->makeArrayDtoWithUnionTypes([ 'createdAt' => Carbon::now() ]);
@@ -102,6 +112,7 @@ class ResolveArrayDtoUnionTypesTest extends DtoTestCase
      *
      * @return void
      */
+    #[Test]
     public function resolvesObjectTypes()
     {
         $faker = $this->getFaker();
@@ -140,6 +151,7 @@ class ResolveArrayDtoUnionTypesTest extends DtoTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenUnableToResolveType()
     {
         $this->expectException(TypeError::class);

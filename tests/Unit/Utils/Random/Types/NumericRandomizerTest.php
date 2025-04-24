@@ -7,6 +7,8 @@ use Aedart\Contracts\Utils\Random\Type;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Random\Factory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -20,6 +22,12 @@ use Throwable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Unit\Utils\Random\Types
  */
+#[Group(
+    'utils',
+    'utils-random',
+    'utils-randomizer',
+    'numeric-randomizer',
+)]
 class NumericRandomizerTest extends UnitTestCase
 {
     /*****************************************************************
@@ -50,6 +58,7 @@ class NumericRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canGetRandomInt(): void
     {
         $result = $this->makeRandomizer()->int(1, 10);
@@ -66,6 +75,7 @@ class NumericRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canGetNextInt(): void
     {
         $result = $this->makeRandomizer()->nextInt();
@@ -80,6 +90,7 @@ class NumericRandomizerTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canGetRandomFloat(): void
     {
         $result = $this->makeRandomizer()->float(0, 1);
@@ -96,6 +107,7 @@ class NumericRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canGetNextFloat(): void
     {
         $result = $this->makeRandomizer()->nextFloat();

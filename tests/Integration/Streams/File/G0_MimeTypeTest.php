@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Streams\File;
 use Aedart\Streams\FileStream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * G0_MimeTypeTest
@@ -15,6 +17,11 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-g0',
+)]
 class G0_MimeTypeTest extends StreamTestCase
 {
     /**
@@ -25,6 +32,7 @@ class G0_MimeTypeTest extends StreamTestCase
      * @throws \Aedart\Contracts\MimeTypes\Exceptions\MimeTypeDetectionException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetectStreamMimeType()
     {
         $stream = FileStream::makeFrom(

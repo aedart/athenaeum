@@ -5,7 +5,9 @@ namespace Aedart\Tests\Unit\Utils;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
+use Codeception\Attribute\Group;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * MemoryTest
@@ -16,6 +18,10 @@ use InvalidArgumentException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
+#[Group(
+    'utils',
+    'utils-memory',
+)]
 class MemoryTest extends UnitTestCase
 {
     /**
@@ -23,6 +29,7 @@ class MemoryTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFormat()
     {
         // NOTE: See tests in Aedart\Tests\Unit\Utils\Memory, rather than the tests in here.
@@ -76,6 +83,7 @@ class MemoryTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsFormattingBytesWhenNegativeValueGiven()
     {
         $this->expectException(InvalidArgumentException::class);
@@ -88,6 +96,7 @@ class MemoryTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsFormattingBytesWhenNoUnitsProvided()
     {
         $this->expectException(InvalidArgumentException::class);

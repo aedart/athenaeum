@@ -7,7 +7,9 @@ use Aedart\Audit\Observers\ModelObserver;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Audit\Category;
 use Aedart\Tests\TestCases\Audit\AuditTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Database\Eloquent\Collection;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -16,10 +18,17 @@ use Throwable;
  * @group audit
  * @group audit-trail
  * @group audit-trail-observer
+ * @group audit-c1
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Audit
  */
+#[Group(
+    'audit',
+    'audit-trail',
+    'audit-trail-observer',
+    'audit-c1',
+)]
 class C1_ModelObserverTest extends AuditTestCase
 {
     /**
@@ -29,6 +38,7 @@ class C1_ModelObserverTest extends AuditTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canSkipRecordingForSomeModels(): void
     {
         // a) mass insert new records

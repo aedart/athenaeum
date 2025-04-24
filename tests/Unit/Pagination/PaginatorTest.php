@@ -4,7 +4,9 @@ namespace Aedart\Tests\Unit\Pagination;
 
 use Aedart\Pagination\Paginator;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
 use LogicException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * PaginatorTest
@@ -15,6 +17,10 @@ use LogicException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Pagination
  */
+#[Group(
+    'pagination',
+    'paginator'
+)]
 class PaginatorTest extends UnitTestCase
 {
     /*****************************************************************
@@ -33,6 +39,7 @@ class PaginatorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetTotalLimitAndOffset()
     {
         $total = 10;
@@ -48,6 +55,7 @@ class PaginatorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsWhenNegativeTotalProvided()
     {
         $this->expectException(LogicException::class);
@@ -58,6 +66,7 @@ class PaginatorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsWhenLessThanOneLimitProvided()
     {
         $this->expectException(LogicException::class);
@@ -68,6 +77,7 @@ class PaginatorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsWhenNegativeOffsetProvided()
     {
         $this->expectException(LogicException::class);
@@ -78,6 +88,7 @@ class PaginatorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function resolvesCurrentPage()
     {
         $paginator = $this->makePaginator(3, 1);
@@ -97,6 +108,7 @@ class PaginatorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function resolvesFirstAndLastPages()
     {
         $paginator = $this->makePaginator(10, 3);
@@ -108,6 +120,7 @@ class PaginatorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function resolvesNextAndPreviousPages()
     {
         $paginator = $this->makePaginator(3, 1);
@@ -130,6 +143,7 @@ class PaginatorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function getObtainOffsetForPage()
     {
         $paginator = $this->makePaginator(10, 2);
@@ -146,6 +160,7 @@ class PaginatorTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function offsetForPreviousAndNextPages()
     {
         $paginator = $this->makePaginator(3, 1);

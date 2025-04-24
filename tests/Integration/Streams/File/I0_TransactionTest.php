@@ -3,6 +3,9 @@
 namespace Aedart\Tests\Integration\Streams\File;
 
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 /**
  * I0_TransactionTest
@@ -14,6 +17,11 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-i0',
+)]
 class I0_TransactionTest extends StreamTestCase
 {
     /**
@@ -23,8 +31,9 @@ class I0_TransactionTest extends StreamTestCase
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      * @throws \Aedart\Contracts\Streams\Exceptions\TransactionException
      * @throws \Codeception\Exception\ConfigurationException
-     * @throws \Throwable
+     * @throws Throwable
      */
+    #[Test]
     public function canPerformTransactionOnStream()
     {
         $stream = $this->openFileStreamForTransaction('text.txt');

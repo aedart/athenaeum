@@ -2,11 +2,15 @@
 
 namespace Aedart\Tests\Integration\Http\Clients;
 
+use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Http\Messages\Traits\HttpSerializerFactoryTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\MessageInterface;
 use Symfony\Component\VarDumper\VarDumper;
 use Teapot\StatusCode;
@@ -20,6 +24,11 @@ use Teapot\StatusCode;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-l0',
+)]
 class L0_DebuggingTest extends HttpClientsTestCase
 {
     use HttpSerializerFactoryTrait;
@@ -28,10 +37,12 @@ class L0_DebuggingTest extends HttpClientsTestCase
      * @test
      * @dataProvider providesClientProfiles
      *
-     * @param  string  $profile
+     * @param string $profile
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canDebugRequestAndResponse(string $profile)
     {
         // Amount of times debug method has been invoked.
@@ -64,6 +75,8 @@ class L0_DebuggingTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canDumpAndDie(string $profile)
     {
         // Amount of times debug method has been invoked.
@@ -100,6 +113,8 @@ class L0_DebuggingTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canDebugUsingCustomCallback(string $profile)
     {
         $callbackInvoked = false;
@@ -124,6 +139,8 @@ class L0_DebuggingTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canDumpAndDieUsingCustomCallback(string $profile)
     {
         $callbackInvoked = false;
@@ -148,6 +165,8 @@ class L0_DebuggingTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function debugsBeforeResponseExpectations(string $profile)
     {
         $callbackOrder = [];
@@ -177,6 +196,8 @@ class L0_DebuggingTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canReadStreamAfterDebugUsingStr(string $profile)
     {
         $mockContent = Json::encode(['message' => 'With pumpkin seeds drink hollandaise sauce.']);
@@ -218,6 +239,8 @@ class L0_DebuggingTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canReadStreamAfterDebugUsingArr(string $profile)
     {
         $mockContent = Json::encode(['message' => 'With pumpkin seeds drink hollandaise sauce.']);

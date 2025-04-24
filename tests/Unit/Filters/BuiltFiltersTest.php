@@ -8,6 +8,8 @@ use Aedart\Contracts\Filters\BuiltFiltersMap;
 use Aedart\Filters\BuiltFilters;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Tests\Helpers\Dummies\Database\Query\Filters\GenericFilter;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * BuiltFiltersTest
@@ -18,6 +20,10 @@ use Aedart\Tests\Helpers\Dummies\Database\Query\Filters\GenericFilter;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Filters
  */
+#[Group(
+    'filters',
+    'built-filters-map',
+)]
 class BuiltFiltersTest extends UnitTestCase
 {
     /*****************************************************************
@@ -58,6 +64,7 @@ class BuiltFiltersTest extends UnitTestCase
      *
      * @throws CriteriaException
      */
+    #[Test]
     public function canAddAndRetrieveFilter()
     {
         $map = $this->makeMap();
@@ -82,6 +89,7 @@ class BuiltFiltersTest extends UnitTestCase
      *
      * @throws CriteriaException
      */
+    #[Test]
     public function returnsDefaultWhenNoFilterAdded()
     {
         $map = $this->makeMap();
@@ -99,6 +107,7 @@ class BuiltFiltersTest extends UnitTestCase
      *
      * @throws CriteriaException
      */
+    #[Test]
     public function canObtainAllFilters()
     {
         $map = $this->makeMap();
@@ -127,6 +136,7 @@ class BuiltFiltersTest extends UnitTestCase
      *
      * @throws CriteriaException
      */
+    #[Test]
     public function canForgetFilters()
     {
         $map = $this->makeMap();
@@ -153,6 +163,7 @@ class BuiltFiltersTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetAndObtainMeta()
     {
         $map = $this->makeMap();
@@ -171,6 +182,7 @@ class BuiltFiltersTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function returnsDefaultWhenNoMetaSet()
     {
         $map = $this->makeMap();
@@ -186,6 +198,7 @@ class BuiltFiltersTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canForgetMeta()
     {
         $map = $this->makeMap();
@@ -206,6 +219,7 @@ class BuiltFiltersTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainAllMeta()
     {
         $map = $this->makeMap();
@@ -231,6 +245,7 @@ class BuiltFiltersTest extends UnitTestCase
      *
      * @throws CriteriaException
      */
+    #[Test]
     public function canForgetAll()
     {
         $map = $this->makeMap();

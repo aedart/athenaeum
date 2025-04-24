@@ -6,6 +6,8 @@ use Aedart\Contracts\Translation\Exports\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Translation\Exports\Exporter;
 use Aedart\Contracts\Translation\Exports\Manager;
 use Aedart\Tests\TestCases\Translation\TranslationTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ManagerTest
@@ -17,6 +19,11 @@ use Aedart\Tests\TestCases\Translation\TranslationTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Translation\Exports
  */
+#[Group(
+    'translations',
+    'translations-exporter',
+    'translations-exporter-manager',
+)]
 class ManagerTest extends TranslationTestCase
 {
     /**
@@ -24,6 +31,7 @@ class ManagerTest extends TranslationTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainInstance(): void
     {
         $manager = $this->getTranslationsExporterManager();
@@ -38,6 +46,7 @@ class ManagerTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canMakeDefaultExporter(): void
     {
         $exporter = $this
@@ -54,6 +63,7 @@ class ManagerTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function failsWhenProfileNotFound(): void
     {
         $this->expectException(ProfileNotFoundException::class);
@@ -70,6 +80,7 @@ class ManagerTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function returnsSameExporterInstance(): void
     {
         $manager = $this->getTranslationsExporterManager();

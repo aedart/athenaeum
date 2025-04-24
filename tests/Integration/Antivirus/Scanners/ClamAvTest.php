@@ -9,7 +9,9 @@ use Aedart\Contracts\Antivirus\Scanner;
 use Aedart\Contracts\Utils\HasMockableDriver;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
+use Codeception\Attribute\Group;
 use Mockery\MockInterface;
+use PHPUnit\Framework\Attributes\Test;
 use Xenolope\Quahog\Result;
 
 /**
@@ -23,6 +25,12 @@ use Xenolope\Quahog\Result;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus\Scanners
  */
+#[Group(
+    'antivirus',
+    'antivirus-scanners',
+    'antivirus-scanners-clamav',
+    'clamav',
+)]
 class ClamAvTest extends AntivirusTestCase
 {
     /*****************************************************************
@@ -50,13 +58,24 @@ class ClamAvTest extends AntivirusTestCase
         return $this->makeScanner('clamav', $options, $mockSetup);
     }
 
+    /**
+     * Returns a mocked driver scan results
+     *
+     * @param MockInterface $mock
+     * @param string $status
+     * @param string $file
+     * @param string|null $reason
+     * @param string|null $id
+     *
+     * @return MockInterface
+     */
     public function mockDriverScanResult(
         MockInterface $mock,
         string $status,
         string $file,
         string|null $reason = null,
         string|null $id = null
-    ) {
+    ): MockInterface {
         $result = new Result(
             status: strtoupper($status),
             filename: $file,
@@ -72,6 +91,8 @@ class ClamAvTest extends AntivirusTestCase
             ->shouldReceive('scanResourceStream')
             ->withAnyArgs()
             ->andReturn($result);
+
+        return $mock;
     }
 
     /*****************************************************************
@@ -86,6 +107,7 @@ class ClamAvTest extends AntivirusTestCase
      * @throws ProfileNotFoundException
      * @throws AntivirusException
      */
+    #[Test]
     public function canScanCleanFile(): void
     {
         $file = $this->cleanFile();
@@ -111,6 +133,7 @@ class ClamAvTest extends AntivirusTestCase
      * @throws ProfileNotFoundException
      * @throws AntivirusException
      */
+    #[Test]
     public function canScanInfectedFile(): void
     {
         $file = $this->infectedFile();
@@ -137,6 +160,7 @@ class ClamAvTest extends AntivirusTestCase
      * @throws ProfileNotFoundException
      * @throws AntivirusException
      */
+    #[Test]
     public function canScanCompressedInfectedFile(): void
     {
         $file = $this->compressedInfectedFile();

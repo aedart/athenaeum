@@ -8,6 +8,8 @@ use Aedart\Tests\Helpers\Dummies\Database\Query\Filters\CategorySlugFilter;
 use Aedart\Tests\Helpers\Dummies\Database\Query\Filters\OptionalCategoryDescFilter;
 use Aedart\Tests\TestCases\Database\DatabaseTestCase;
 use Aedart\Utils\Str;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * FilteringTest
@@ -20,11 +22,18 @@ use Aedart\Utils\Str;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Database\Query
  */
+#[Group(
+    'db',
+    'database',
+    'db-filters',
+    'db-criteria',
+)]
 class FilteringTest extends DatabaseTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canApplySingleFilter()
     {
         // Create dummy data
@@ -46,6 +55,7 @@ class FilteringTest extends DatabaseTestCase
     /**
      * @test
      */
+    #[Test]
     public function canApplyMultipleFilters()
     {
         // Create dummy data
@@ -83,6 +93,7 @@ class FilteringTest extends DatabaseTestCase
     /**
      * @test
      */
+    #[Test]
     public function skipsInapplicableFilters()
     {
         // Create dummy data

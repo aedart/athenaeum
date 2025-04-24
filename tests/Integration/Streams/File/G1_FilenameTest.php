@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Streams\File;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * G1_FilenameTest
@@ -15,6 +17,11 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-g1',
+)]
 class G1_FilenameTest extends StreamTestCase
 {
     /**
@@ -24,6 +31,7 @@ class G1_FilenameTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function returnsFilenameFromMeta(): void
     {
         $filename = 'my_file.txt';
@@ -44,6 +52,7 @@ class G1_FilenameTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function returnsFilenameFromUri(): void
     {
         $filename = 'text.txt';
@@ -62,6 +71,7 @@ class G1_FilenameTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function returnsNullIfUriUnknown(): void
     {
         $stream = $this->openFileStreamFor('text.txt');

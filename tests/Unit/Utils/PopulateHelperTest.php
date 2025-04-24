@@ -4,7 +4,9 @@ namespace Aedart\Tests\Unit\Utils;
 
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Helpers\PopulateHelper;
+use Codeception\Attribute\Group;
 use Exception;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * PopulateHelperTest
@@ -15,11 +17,16 @@ use Exception;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
+#[Group(
+    'utils',
+    'populate-helper',
+)]
 class PopulateHelperTest extends UnitTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canVerifyRequiredProperties()
     {
         $data = [
@@ -36,6 +43,7 @@ class PopulateHelperTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsIfIncorrectCount()
     {
         $this->expectException(Exception::class);
@@ -54,6 +62,7 @@ class PopulateHelperTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsIfRequiredMissing()
     {
         $this->expectException(Exception::class);

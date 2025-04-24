@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Core\Application;
 use Aedart\Core\Helpers\Paths;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * A2_PathsTest
@@ -15,6 +17,10 @@ use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
+#[Group(
+    'application',
+    'application-a2',
+)]
 class A2_PathsTest extends AthenaeumCoreTestCase
 {
     /**
@@ -22,6 +28,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function useDefaultPathsContainerWhenNoneGiven()
     {
         $this->app->destroy();
@@ -37,6 +44,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canCreateInstanceWithCustomPathsContainer()
     {
         $this->app->destroy();
@@ -54,6 +62,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canReadBasePath()
     {
         $path = $this->app->basePath();
@@ -64,6 +73,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canReadBootstrapPath()
     {
         $path = $this->app->bootstrapPath();
@@ -74,6 +84,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canReadConfigPath()
     {
         $path = $this->app->configPath();
@@ -86,6 +97,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      *
      * @return void
      */
+    #[Test]
     public function canReadLangPath()
     {
         $path = $this->app->langPath();
@@ -96,6 +108,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canReadDatabasePath()
     {
         $path = $this->app->databasePath();
@@ -106,6 +119,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canReadEnvironmentPath()
     {
         $path = $this->app->environmentPath();
@@ -116,6 +130,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canReadResourcePath()
     {
         $path = $this->app->resourcePath();
@@ -126,6 +141,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canReadStoragePath()
     {
         $path = $this->app->storagePath();
@@ -136,6 +152,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canReadPublicPath()
     {
         $path = $this->app->publicPath();
@@ -150,6 +167,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function returnsPathInBaseDir()
     {
         $path = 'readme.' . $this->getFaker()->fileExtension();
@@ -164,6 +182,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function returnsPathInBootstrapDir()
     {
         $path = 'readme.' . $this->getFaker()->fileExtension();
@@ -178,6 +197,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function returnsPathInConfigDir()
     {
         $path = 'readme.' . $this->getFaker()->fileExtension();
@@ -192,6 +212,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function returnsPathInDatabaseDir()
     {
         $path = 'readme.' . $this->getFaker()->fileExtension();
@@ -206,6 +227,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function returnsPathInEnvironmentDir()
     {
         $path = 'readme.' . $this->getFaker()->fileExtension();
@@ -220,6 +242,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function returnsPathInResourceDir()
     {
         $path = 'readme.' . $this->getFaker()->fileExtension();
@@ -234,6 +257,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function returnsPathInStorageDir()
     {
         $path = 'readme.' . $this->getFaker()->fileExtension();
@@ -248,6 +272,7 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function returnsPathInPublicDir()
     {
         $path = 'readme.' . $this->getFaker()->fileExtension();

@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Concerns;
 use Aedart\Contracts\Utils\HasDriver;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Concerns\Driver;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DriverTest
@@ -15,6 +17,10 @@ use Aedart\Utils\Concerns\Driver;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Concerns
  */
+#[Group(
+    'utils',
+    'driver',
+)]
 class DriverTest extends UnitTestCase
 {
     /*****************************************************************
@@ -49,6 +55,7 @@ class DriverTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainDriver(): void
     {
         $driver = $this->makeDriver();

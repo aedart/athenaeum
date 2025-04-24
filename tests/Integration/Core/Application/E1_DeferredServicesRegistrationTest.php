@@ -9,6 +9,8 @@ use Aedart\Tests\Helpers\Dummies\Contracts\Box;
 use Aedart\Tests\Helpers\Dummies\Events\TestEvent;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\DeferredServiceProvider;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E1_DeferredServicesRegistrationTest
@@ -19,6 +21,10 @@ use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
+#[Group(
+    'application',
+    'application-e1',
+)]
 class E1_DeferredServicesRegistrationTest extends AthenaeumCoreTestCase
 {
     /*****************************************************************
@@ -44,6 +50,7 @@ class E1_DeferredServicesRegistrationTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canRegisterDeferredServices()
     {
         $this->bootstrap();
@@ -54,6 +61,7 @@ class E1_DeferredServicesRegistrationTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canResolveDeferredService()
     {
         $this->bootstrap();
@@ -72,6 +80,7 @@ class E1_DeferredServicesRegistrationTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function triggersRegistrationViaEvent()
     {
         $this->bootstrap();

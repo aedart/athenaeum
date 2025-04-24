@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Streams;
 
 use Aedart\Streams\Stream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C1_RewindAndRestorePositionTest
@@ -14,6 +16,10 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-c1',
+)]
 class C1_RewindAndRestorePositionTest extends StreamTestCase
 {
     /**
@@ -22,6 +28,7 @@ class C1_RewindAndRestorePositionTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function rewindsAfterCallbackInvoked()
     {
         $resource = fopen('php://memory', 'r+b');
@@ -48,6 +55,7 @@ class C1_RewindAndRestorePositionTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function returnsRewindCallbackOutput()
     {
         $resource = fopen('php://memory', 'r+b');
@@ -73,6 +81,7 @@ class C1_RewindAndRestorePositionTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function restoresPositionAfterCallbackInvoked()
     {
         $resource = fopen('php://memory', 'r+b');
@@ -93,6 +102,7 @@ class C1_RewindAndRestorePositionTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function returnsRestoreCallbackOutput()
     {
         $content = 'bbb';

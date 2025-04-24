@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Helpers\MethodHelper;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * MethodHelperTest
@@ -15,6 +17,10 @@ use Aedart\Utils\Helpers\MethodHelper;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
+#[Group(
+    'utils',
+    'method-helper',
+)]
 class MethodHelperTest extends UnitTestCase
 {
     /*****************************************************************
@@ -43,6 +49,7 @@ class MethodHelperTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canMakeGetterName()
     {
         $property = $this->makePropertyName();
@@ -57,6 +64,7 @@ class MethodHelperTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function usesCachedGetterName()
     {
         // As long as test does not fail, it's considered passed.
@@ -74,6 +82,7 @@ class MethodHelperTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canMakeSetterName()
     {
         $property = $this->makePropertyName();
@@ -88,6 +97,7 @@ class MethodHelperTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function usesCachedSetterName()
     {
         // As long as test does not fail, it's considered passed.
@@ -105,6 +115,7 @@ class MethodHelperTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCallMethod()
     {
         $method = fn ($lastName) => 'James ' . $lastName;
@@ -119,6 +130,7 @@ class MethodHelperTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function returnsValueIfNotCallable()
     {
         $method = $this->faker->name();

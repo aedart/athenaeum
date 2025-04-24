@@ -4,6 +4,8 @@ namespace Aedart\Tests\Unit\Utils\Memory;
 
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D0_AddSubtractTest
@@ -18,6 +20,14 @@ use Aedart\Utils\Memory;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
+#[Group(
+    'utils',
+    'utils-memory',
+    'utils-memory-unit',
+    'utils-memory-unit-d0',
+    'utils-memory-unit-add',
+    'utils-memory-unit-subtract',
+)]
 class D0_AddSubtractTest extends UnitTestCase
 {
     /**
@@ -25,6 +35,7 @@ class D0_AddSubtractTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canAddBytes()
     {
         $original = Memory::unit(1);
@@ -39,6 +50,7 @@ class D0_AddSubtractTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canAddUnitValue()
     {
         $original = Memory::unit(10);
@@ -55,6 +67,7 @@ class D0_AddSubtractTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canSubtractBytes()
     {
         $original = Memory::unit(8);
@@ -69,6 +82,7 @@ class D0_AddSubtractTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canSubtractUnitValue()
     {
         $original = Memory::unit(10);

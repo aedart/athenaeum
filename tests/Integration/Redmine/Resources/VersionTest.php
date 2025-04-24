@@ -7,6 +7,10 @@ use Aedart\Redmine\Project;
 use Aedart\Redmine\RedmineApiResource;
 use Aedart\Redmine\Version;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 /**
  * VersionTest
@@ -18,6 +22,11 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
+#[Group(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-version',
+)]
 class VersionTest extends RedmineTestCase
 {
     /*****************************************************************
@@ -31,8 +40,8 @@ class VersionTest extends RedmineTestCase
      *
      * @return Version
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
     public function createVersion(Project $project): Version
     {
@@ -63,9 +72,10 @@ class VersionTest extends RedmineTestCase
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canCreateVersion()
     {
         // Debug
@@ -129,9 +139,10 @@ class VersionTest extends RedmineTestCase
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canUpdateVersion()
     {
         // Debug
@@ -185,9 +196,10 @@ class VersionTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canFetchVersionsForProject()
     {
         // Debug

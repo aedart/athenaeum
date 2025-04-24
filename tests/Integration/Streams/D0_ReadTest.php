@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Streams;
 use Aedart\Streams\Stream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D0_ReadTest
@@ -15,6 +17,10 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-d0',
+)]
 class D0_ReadTest extends StreamTestCase
 {
     /**
@@ -23,6 +29,7 @@ class D0_ReadTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetermineIfReadable()
     {
         $streamA = $this->makeTextFileStream('rb');
@@ -38,6 +45,7 @@ class D0_ReadTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canReadBytesFromStream()
     {
         $stream = $this->makeTextFileStream();
@@ -56,6 +64,7 @@ class D0_ReadTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canGetContents()
     {
         $content = $this->getFaker()->sentence();
@@ -83,6 +92,7 @@ class D0_ReadTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function returnsRemainingContents()
     {
         $content = 'abc';
@@ -109,6 +119,7 @@ class D0_ReadTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function toStringReturnsAllContent()
     {
         $content = $this->getFaker()->sentence();

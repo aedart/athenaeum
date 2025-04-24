@@ -4,12 +4,15 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters\League;
 
 use Aedart\Container\IoC;
 use Aedart\Flysystem\Db\Adapters\DatabaseAdapter;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Migrations\Migration;
-use League\Flysystem\AdapterTestUtilities\FilesystemAdapterTestCase as BaseTestCase;
+//use League\Flysystem\AdapterTestUtilities\FilesystemAdapterTestCase as BaseTestCase;
 use League\Flysystem\FilesystemAdapter;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DatabaseAdapterTest
@@ -21,7 +24,12 @@ use League\Flysystem\FilesystemAdapter;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters\League
  */
-class DatabaseAdapterTest extends BaseTestCase
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-league-tests'
+)]
+class DatabaseAdapterTest extends BaseFilesystemAdapterTestCase
 {
     /**
      * Service Container instance
@@ -37,6 +45,7 @@ class DatabaseAdapterTest extends BaseTestCase
     /**
      * @inheritdoc
      */
+    //#[AfterClass] // Not needed here...
     public static function tearDownAfterClass(): void
     {
         IoC::getInstance()->destroy();
@@ -103,6 +112,7 @@ class DatabaseAdapterTest extends BaseTestCase
     /**
      * @test
      */
+    #[Test]
     public function fetching_unknown_mime_type_of_a_file(): void
     {
         // Here the original test is simply invalid - the applied MIME-Type
@@ -130,6 +140,8 @@ class DatabaseAdapterTest extends BaseTestCase
      * @test
      * @dataProvider filenameProvider
      */
+    #[DataProvider('filenameProvider')]
+    #[Test]
     public function writing_and_reading_files_with_special_path(string $path): void
     {
         // NOTE: At some point, Codeception / PHPUnit started to fail the parent test,
@@ -142,6 +154,7 @@ class DatabaseAdapterTest extends BaseTestCase
      * @test
      * @inheritdoc
      */
+    #[Test]
     public function get_checksum(): void
     {
         // The original test always assumes a md5 checksum of a file. However, the database adapter
@@ -165,6 +178,7 @@ class DatabaseAdapterTest extends BaseTestCase
      *
      * @inheritdoc
      */
+    #[Test]
     public function generating_a_public_url(): void
     {
         // This test is automatically SKIPPED. But, there is no need to
@@ -177,6 +191,7 @@ class DatabaseAdapterTest extends BaseTestCase
      *
      * @inheritdoc
      */
+    #[Test]
     public function generating_a_temporary_url(): void
     {
         // This test is automatically SKIPPED. But, there is no need to

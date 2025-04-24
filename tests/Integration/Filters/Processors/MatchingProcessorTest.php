@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Filters\Processors;
 use Aedart\Contracts\Database\Query\FieldCriteria;
 use Aedart\Filters\Processors\MatchingProcessor;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * MatchingProcessorTest
@@ -16,6 +18,11 @@ use Aedart\Tests\TestCases\Filters\FiltersTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Processors
  */
+#[Group(
+    'filters',
+    'filters-processors',
+    'filters-matching-processor'
+)]
 class MatchingProcessorTest extends FiltersTestCase
 {
     /**
@@ -23,6 +30,7 @@ class MatchingProcessorTest extends FiltersTestCase
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[Test]
     public function setsLogicalOperatorAsMeta()
     {
         $key = 'match';

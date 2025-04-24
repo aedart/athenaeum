@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Concerns;
 use Aedart\Contracts\Utils\HasArbitraryData;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Concerns\ArbitraryData;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ArbitraryDataTest
@@ -15,6 +17,10 @@ use Aedart\Utils\Concerns\ArbitraryData;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Concerns
  */
+#[Group(
+    'utils',
+    'arbitrary-data',
+)]
 class ArbitraryDataTest extends UnitTestCase
 {
     /*****************************************************************
@@ -51,6 +57,7 @@ class ArbitraryDataTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canSetAndObtainValue(): void
     {
         $store = $this->makeStore();
@@ -79,6 +86,7 @@ class ArbitraryDataTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canSetAndObtainViaArrayAccess(): void
     {
         $store = $this->makeStore();
@@ -107,6 +115,7 @@ class ArbitraryDataTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canRemoveItems(): void
     {
         $store = $this->makeStore([
@@ -130,6 +139,7 @@ class ArbitraryDataTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canClearItems(): void
     {
         $store = $this->makeStore([
@@ -152,6 +162,7 @@ class ArbitraryDataTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainAllItems(): void
     {
         $expected = [

@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Memory;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * B2_GigaAndGibibyteTest
@@ -19,6 +21,14 @@ use Aedart\Utils\Memory;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
+#[Group(
+    'utils',
+    'utils-memory',
+    'utils-memory-unit',
+    'utils-memory-unit-b2',
+    'utils-memory-unit-gigabyte',
+    'utils-memory-unit-gibibyte',
+)]
 class B2_GigaAndGibibyteTest extends UnitTestCase
 {
     /**
@@ -26,6 +36,7 @@ class B2_GigaAndGibibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromGigabyte()
     {
         $value = 2;
@@ -46,6 +57,7 @@ class B2_GigaAndGibibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromLegacyGigabyte()
     {
         $value = 3;
@@ -66,6 +78,7 @@ class B2_GigaAndGibibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromGibibyte()
     {
         $value = 5;
@@ -86,6 +99,7 @@ class B2_GigaAndGibibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToGigabyte()
     {
         $bytes = 2 * pow(1000, 3);
@@ -105,6 +119,7 @@ class B2_GigaAndGibibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToLegacyGigabyte()
     {
         $bytes = 5 * pow(1024, 3);
@@ -124,6 +139,7 @@ class B2_GigaAndGibibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToGibibyte()
     {
         $bytes = 3 * pow(1024, 3);

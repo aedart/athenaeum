@@ -7,9 +7,12 @@ use Aedart\Contracts\ETags\Exceptions\ETagGeneratorException;
 use Aedart\Contracts\ETags\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\ETags\ETagsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use JsonSerializable;
+use PHPUnit\Framework\Attributes\Test;
 use Stringable;
 
 /**
@@ -22,6 +25,11 @@ use Stringable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Generators
  */
+#[Group(
+    'etags',
+    'etags-generators',
+    'etags-generic-generator'
+)]
 class GenericGeneratorTest extends ETagsTestCase
 {
     /*****************************************************************
@@ -102,6 +110,8 @@ class GenericGeneratorTest extends ETagsTestCase
      * @throws ETagGeneratorException
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('dataProvider')]
+    #[Test]
     public function canMakeWeakETag(mixed $content): void
     {
         $eTag = $this->makeGenerator()->makeWeak($content);
@@ -123,6 +133,8 @@ class GenericGeneratorTest extends ETagsTestCase
      * @throws ETagGeneratorException
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('dataProvider')]
+    #[Test]
     public function canMakeStrongETag(mixed $content): void
     {
         $eTag = $this->makeGenerator()->makeStrong($content);

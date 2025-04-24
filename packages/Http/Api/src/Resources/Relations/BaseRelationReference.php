@@ -365,14 +365,15 @@ abstract class BaseRelationReference implements RelationReference
 
         // By default, we assume that requested relation name is not a nested
         // relation and attempt to obtain it directly.
-        if ($parent->relationLoaded($relation) && isset($parent->{$relation})) {
+        $isNestedRelation = Str::contains($relation, '.');
+        if ($parent->relationLoaded($relation) && !$isNestedRelation) {
             return $parent->getRelation($relation);
         }
 
         // If no relation was obtained, we check if requested relation contains a dot.
         // In such a case, it means that requested relation is a nested relation. We
         // must traverse the chain to get it.
-        if (Str::contains($relation, '.')) {
+        if ($isNestedRelation) {
             $relations = explode('.', $relation);
 
             // Get the name of the "top most" relation (parent). If it is loaded,

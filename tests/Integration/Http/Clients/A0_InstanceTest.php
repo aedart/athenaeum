@@ -4,6 +4,9 @@ namespace Aedart\Tests\Integration\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * A0_InstanceTest
@@ -14,6 +17,11 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-a0',
+)]
 class A0_InstanceTest extends HttpClientsTestCase
 {
     /**
@@ -24,6 +32,8 @@ class A0_InstanceTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canObtainInstance(string $profile)
     {
         $client = $this->client($profile);
@@ -39,6 +49,8 @@ class A0_InstanceTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canObtainDriver(string $profile)
     {
         $client = $this->client($profile);
@@ -55,6 +67,8 @@ class A0_InstanceTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canCreateBuilder(string $profile)
     {
         $client = $this->client($profile);

@@ -5,6 +5,9 @@ namespace Aedart\Tests\Integration\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -16,6 +19,11 @@ use Psr\Http\Message\ResponseInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-d0',
+)]
 class D0_HeadersTest extends HttpClientsTestCase
 {
     /**
@@ -26,6 +34,8 @@ class D0_HeadersTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function extractsHeadersFromOptions(string $profile)
     {
         $agent = 'Aedart/HttpClient/2.0';
@@ -48,6 +58,8 @@ class D0_HeadersTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function setsHeadersForRequest(string $profile)
     {
         $client = $this->client($profile);
@@ -72,6 +84,8 @@ class D0_HeadersTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canSpecifyMultipleHeaders(string $profile)
     {
         $client = $this->client($profile);
@@ -97,6 +111,8 @@ class D0_HeadersTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canRemoveHeaderBeforeRequest(string $profile)
     {
         $client = $this->client($profile, [

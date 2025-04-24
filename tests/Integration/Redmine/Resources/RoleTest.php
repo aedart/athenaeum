@@ -6,6 +6,10 @@ use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Role;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 /**
  * RoleTest
@@ -17,15 +21,21 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
+#[Group(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-role',
+)]
 class RoleTest extends RedmineTestCase
 {
     /**
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canListRoles()
     {
         // Debug
@@ -67,9 +77,10 @@ class RoleTest extends RedmineTestCase
      *
      * @throws UnsupportedOperationException
      * @throws ErrorResponseException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canFetchSingleRole()
     {
         // Debug

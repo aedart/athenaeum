@@ -6,7 +6,9 @@ use Aedart\Contracts\Antivirus\Events\FileWasScanned;
 use Aedart\Contracts\Antivirus\Results\ScanResult;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
+use Codeception\Attribute\Group;
 use Mockery;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Container\ContainerExceptionInterface;
 
 /**
@@ -19,6 +21,11 @@ use Psr\Container\ContainerExceptionInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus
  */
+#[Group(
+    'antivirus',
+    'antivirus-events',
+    'antivirus-file-was-scanned-event',
+)]
 class FileWasScannedEventTest extends AntivirusTestCase
 {
     /**
@@ -26,6 +33,7 @@ class FileWasScannedEventTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function canMakeEvent(): void
     {
         $scanResult = Mockery::mock(ScanResult::class);
@@ -40,6 +48,7 @@ class FileWasScannedEventTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenNoResultParameterGiven(): void
     {
         $this->expectException(ContainerExceptionInterface::class);
@@ -54,6 +63,7 @@ class FileWasScannedEventTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenResultParameterValidScanResultInstance(): void
     {
         $this->expectException(ContainerExceptionInterface::class);

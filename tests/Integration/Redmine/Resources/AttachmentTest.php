@@ -6,9 +6,13 @@ use Aedart\Contracts\Http\Clients\Exceptions\InvalidUriException;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Attachment;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
 use Codeception\Exception\ConfigurationException;
 use InvalidArgumentException;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use RuntimeException;
+use Throwable;
 
 /**
  * AttachmentTest
@@ -20,14 +24,20 @@ use RuntimeException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
+#[Group(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-attachment',
+)]
 class AttachmentTest extends RedmineTestCase
 {
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function failsIfFileDoesNotExist()
     {
         $this->expectException(InvalidArgumentException::class);
@@ -40,9 +50,10 @@ class AttachmentTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canUploadAFile()
     {
         // Debug
@@ -84,9 +95,10 @@ class AttachmentTest extends RedmineTestCase
      * @throws ConfigurationException
      * @throws InvalidUriException
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canDownloadFile()
     {
         // Debug
@@ -138,8 +150,9 @@ class AttachmentTest extends RedmineTestCase
      *
      * @throws InvalidUriException
      * @throws ConfigurationException
-     * @throws \Throwable
+     * @throws Throwable
      */
+    #[Test]
     public function failDownloadWhenNoContentUrlSpecified()
     {
         $this->expectException(RuntimeException::class);
@@ -152,8 +165,9 @@ class AttachmentTest extends RedmineTestCase
      *
      * @throws InvalidUriException
      * @throws ConfigurationException
-     * @throws \Throwable
+     * @throws Throwable
      */
+    #[Test]
     public function failDownloadWhenDirectoryIsInvalid()
     {
         $this->expectException(InvalidArgumentException::class);

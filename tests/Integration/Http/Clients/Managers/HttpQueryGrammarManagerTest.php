@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Http\Clients\Managers;
 
 use Aedart\Contracts\Http\Clients\Requests\Query\Grammar;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * HttpQueryGrammarManagerTest
@@ -15,11 +17,17 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Managers
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-query-manager',
+)]
 class HttpQueryGrammarManagerTest extends HttpClientsTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canObtainInstance()
     {
         $manager = $this->getGrammarManager();
@@ -32,6 +40,7 @@ class HttpQueryGrammarManagerTest extends HttpClientsTestCase
      *
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      */
+    #[Test]
     public function canCreateDefaultGrammar()
     {
         $manager = $this->getGrammarManager();
@@ -45,6 +54,7 @@ class HttpQueryGrammarManagerTest extends HttpClientsTestCase
      *
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      */
+    #[Test]
     public function returnsSameGrammar()
     {
         $manager = $this->getGrammarManager();

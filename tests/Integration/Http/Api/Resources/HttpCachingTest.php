@@ -8,7 +8,9 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\User;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\UserResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * HttpCachingTest
@@ -20,6 +22,11 @@ use Illuminate\Http\Request;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-http-caching',
+)]
 class HttpCachingTest extends ApiResourcesTestCase
 {
     /**
@@ -27,6 +34,7 @@ class HttpCachingTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function appliesCacheHeadersToResponse(): void
     {
         $faker = $this->getFaker();
@@ -69,6 +77,7 @@ class HttpCachingTest extends ApiResourcesTestCase
      *
      * @throws ETagGeneratorException
      */
+    #[Test]
     public function canSetResourceEtag(): void
     {
         $faker = $this->getFaker();
@@ -104,6 +113,7 @@ class HttpCachingTest extends ApiResourcesTestCase
      *
      * @throws ETagGeneratorException
      */
+    #[Test]
     public function canRemoveResourceEtagFromHeaders(): void
     {
         $faker = $this->getFaker();
@@ -140,6 +150,7 @@ class HttpCachingTest extends ApiResourcesTestCase
      *
      * @throws ETagGeneratorException
      */
+    #[Test]
     public function canSetResourceLastModifiedDate(): void
     {
         $faker = $this->getFaker();
@@ -175,6 +186,7 @@ class HttpCachingTest extends ApiResourcesTestCase
      *
      * @throws ETagGeneratorException
      */
+    #[Test]
     public function canRemoveResourceLastModifiedDateFromHeaders(): void
     {
         $faker = $this->getFaker();

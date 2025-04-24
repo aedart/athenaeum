@@ -8,8 +8,10 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Owner;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Owners\ListOwnerGamesRequest;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\GameResource;
 use Aedart\Tests\TestCases\Http\ApiResourceRequestsTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Facades\Route;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ListRelatedResourcesTest
@@ -22,6 +24,12 @@ use JsonException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-requests',
+    'list-related-resources-request'
+)]
 class ListRelatedResourcesTest extends ApiResourceRequestsTestCase
 {
     /**
@@ -46,6 +54,7 @@ class ListRelatedResourcesTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function canListPaginatedResources(): void
     {
         $owner = Owner::factory()
@@ -96,6 +105,7 @@ class ListRelatedResourcesTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function canBuildAndApplyFilters(): void
     {
         $owner = Owner::factory()

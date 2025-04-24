@@ -4,6 +4,9 @@ namespace Aedart\Tests\Unit\Redmine\Traits;
 
 use Aedart\Redmine\Traits\ConnectionTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * RedmineTraitsTest
@@ -14,6 +17,10 @@ use Aedart\Tests\TestCases\TraitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Redmine\Traits
  */
+#[Group(
+    'redmine',
+    'traits'
+)]
 class RedmineTraitsTest extends TraitTestCase
 {
     /**
@@ -38,6 +45,8 @@ class RedmineTraitsTest extends TraitTestCase
      *
      * @throws \ReflectionException
      */
+    #[DataProvider('awareOfComponentsProvider')]
+    #[Test]
     public function canInvokeAwareOfMethods(string $awareOfTrait)
     {
         $this->assertTraitMethods($awareOfTrait, null, null);

@@ -7,6 +7,10 @@ use Aedart\Redmine\Issue;
 use Aedart\Redmine\IssueStatus;
 use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 /**
  * OneFromListRelationTest
@@ -18,15 +22,21 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Relations
  */
+#[Group(
+    'redmine',
+    'redmine-relations',
+    'redmine-relations-one-from-list',
+)]
 class OneFromListRelationTest extends RedmineTestCase
 {
     /**
      * @test
      *
      * @throws ErrorResponseException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canObtainRelatedResource()
     {
         // Debug

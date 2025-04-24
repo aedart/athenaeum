@@ -8,6 +8,10 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 /**
  * PaginatedResultsTest
@@ -18,14 +22,19 @@ use Aedart\Utils\Json;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Pagination
  */
+#[Group(
+    'redmine',
+    'redmine-pagination',
+)]
 class PaginatedResultsTest extends RedmineTestCase
 {
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canCreateFromResponse()
     {
         $dummies = $this->makePaginatedDummyPayload();
@@ -39,9 +48,10 @@ class PaginatedResultsTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function hasPaginationInformation()
     {
         $total = 67;
@@ -61,9 +71,10 @@ class PaginatedResultsTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function iterateThroughResults()
     {
         $amount = 5;
@@ -80,9 +91,10 @@ class PaginatedResultsTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canObtainResultsCollection()
     {
         $dummies = $this->makePaginatedDummyPayload();
@@ -97,9 +109,10 @@ class PaginatedResultsTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canExportArray()
     {
         $dummies = $this->makePaginatedDummyPayload();
@@ -117,9 +130,10 @@ class PaginatedResultsTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canExportToJson()
     {
         $dummies = $this->makePaginatedDummyPayload();
@@ -137,9 +151,10 @@ class PaginatedResultsTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canBeJsonEncoded()
     {
         $dummies = $this->makePaginatedDummyPayload();
@@ -157,9 +172,10 @@ class PaginatedResultsTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canBeConvertedToString()
     {
         $dummies = $this->makePaginatedDummyPayload();

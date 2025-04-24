@@ -7,6 +7,8 @@ use Aedart\Contracts\Streams\Locks\Lock;
 use Aedart\Streams\Exceptions\Locks\ProfileNotFound;
 use Aedart\Streams\FileStream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * LockFactoryTest
@@ -18,6 +20,11 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File\Locks
  */
+#[Group(
+    'streams',
+    'stream-lock',
+    'stream-lock-factory',
+)]
 class LockFactoryTest extends StreamTestCase
 {
     /**
@@ -25,6 +32,7 @@ class LockFactoryTest extends StreamTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainInstance()
     {
         $factory = $this->getLockFactory();
@@ -39,6 +47,7 @@ class LockFactoryTest extends StreamTestCase
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canCreateLock()
     {
         $stream = FileStream::makeFrom(
@@ -58,6 +67,7 @@ class LockFactoryTest extends StreamTestCase
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function failsIfProfileNotFound()
     {
         $this->expectException(ProfileNotFound::class);

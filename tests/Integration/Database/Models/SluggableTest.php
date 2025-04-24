@@ -5,9 +5,11 @@ namespace Aedart\Tests\Integration\Database\Models;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Database\DatabaseTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Carbon;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * SluggableTest
@@ -20,11 +22,18 @@ use Illuminate\Support\Carbon;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Database\Models
  */
+#[Group(
+    'db',
+    'database',
+    'db-models',
+    'db-sluggable',
+)]
 class SluggableTest extends DatabaseTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canFindBySlug()
     {
         $slug = 'products';
@@ -50,6 +59,7 @@ class SluggableTest extends DatabaseTestCase
     /**
      * @test
      */
+    #[Test]
     public function canFindBySlugOrFail()
     {
         $slug = 'products';
@@ -73,6 +83,7 @@ class SluggableTest extends DatabaseTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsWhenUnableToFindBySlug()
     {
         $this->expectException(ModelNotFoundException::class);
@@ -99,6 +110,7 @@ class SluggableTest extends DatabaseTestCase
      *
      * @see https://github.com/aedart/athenaeum/issues/39
      */
+    #[Test]
     public function canFindOrCreateBySlug()
     {
         $slug = 'products';
@@ -146,6 +158,7 @@ class SluggableTest extends DatabaseTestCase
      *
      * @see https://github.com/aedart/athenaeum/issues/39
      */
+    #[Test]
     public function failsCreationWhenAlreadyExists()
     {
         // This is a control test, which should ensure that creation
@@ -170,6 +183,7 @@ class SluggableTest extends DatabaseTestCase
     /**
      * @test
      */
+    #[Test]
     public function canFindByManySlugs()
     {
         // ------------------------------------------------------- //

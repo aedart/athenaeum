@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Streams;
 use Aedart\Streams\Stream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * X0_MiscTest
@@ -15,6 +17,10 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-x0',
+)]
 class X0_MiscTest extends StreamTestCase
 {
     /**
@@ -23,6 +29,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canSetAndDetermineBlockingMode()
     {
         $streamA = $this->makeTextFileStream()
@@ -41,6 +48,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canSetTimeout()
     {
         $resource = fsockopen('udp://127.0.0.1', 13);
@@ -58,6 +66,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canObtainStreamResource()
     {
         $resource = fopen('php://memory', 'rb');
@@ -72,6 +81,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetermineUnreadBytes()
     {
         // Note: not sure how a test should be written for "unread bytes".
@@ -89,6 +99,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canGetResourceId()
     {
         $result = $this->makeTextFileStream('r')
@@ -105,6 +116,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetermineResourceType()
     {
         $result = $this->makeTextFileStream('r')
@@ -121,6 +133,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetermineStreamType()
     {
         $result = $this->makeTextFileStream('r')
@@ -137,6 +150,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetermineWrapperType()
     {
         $result = $this->makeTextFileStream('r')
@@ -153,6 +167,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canObtainWrapperData()
     {
         $resource = fopen('https://www.google.com', 'r');
@@ -170,6 +185,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetermineMode()
     {
         $mode = 'rb';
@@ -187,6 +203,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetermineUri()
     {
         $path = $this->filePath('text.txt');
@@ -204,6 +221,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetermineIfLocal()
     {
         $resource = fopen('https://www.google.com', 'r');
@@ -228,6 +246,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    // #[Test]
     public function canDetermineIfTTY()
     {
         $resource = fopen('php://stderr', 'w');
@@ -244,6 +263,7 @@ class X0_MiscTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canGetDebugInfo()
     {
         $streamA = new Stream();

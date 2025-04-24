@@ -5,8 +5,10 @@ namespace Aedart\Tests\Integration\Console;
 use Aedart\Support\AwareOf\Console\ScaffoldCommand;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\IntegrationTestCase;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
 use Illuminate\Filesystem\Filesystem;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
@@ -20,6 +22,12 @@ use Symfony\Component\Console\Tester\CommandTester;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Console
  */
+#[Group(
+    'console',
+    'aware-of',
+    'aware-of-scaffold',
+    'aware-of-scaffold-command',
+)]
 class AwareOfScaffoldCommandTest extends IntegrationTestCase
 {
     /**
@@ -40,6 +48,7 @@ class AwareOfScaffoldCommandTest extends IntegrationTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateAwareOfComponents()
     {
         $command = new ScaffoldCommand();

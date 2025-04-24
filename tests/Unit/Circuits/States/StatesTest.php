@@ -11,9 +11,12 @@ use Aedart\Contracts\Circuits\State;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use DateTimeInterface;
 use Illuminate\Support\Facades\Date;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * StatesTest
@@ -24,6 +27,10 @@ use JsonException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Circuits\States
  */
+#[Group(
+    'circuits',
+    'circuits-states',
+)]
 class StatesTest extends UnitTestCase
 {
     /*****************************************************************
@@ -72,6 +79,8 @@ class StatesTest extends UnitTestCase
      *
      * @param mixed $state
      */
+    #[DataProvider('providesStates')]
+    #[Test]
     public function canCreateInstance($state)
     {
         $this->assertInstanceOf(State::class, $state);
@@ -83,6 +92,8 @@ class StatesTest extends UnitTestCase
      *
      * @param State $state
      */
+    #[DataProvider('providesStates')]
+    #[Test]
     public function hasIdentifierAndName($state)
     {
         $id = $state->id();
@@ -105,6 +116,8 @@ class StatesTest extends UnitTestCase
      *
      * @param State $state
      */
+    #[DataProvider('providesStates')]
+    #[Test]
     public function hasDefaultCreatedAt($state)
     {
         $createdAt = $state->createdAt();
@@ -120,6 +133,8 @@ class StatesTest extends UnitTestCase
      *
      * @param State $state
      */
+    #[DataProvider('providesStates')]
+    #[Test]
     public function canCreateStateThatExpires($state)
     {
         $expiresAt = Date::now()->subRealSeconds(5);
@@ -139,6 +154,8 @@ class StatesTest extends UnitTestCase
      *
      * @param State $state
      */
+    #[DataProvider('providesStates')]
+    #[Test]
     public function canDetermineIfExpired($state)
     {
         // By default, when no expires at provided, state should
@@ -163,6 +180,8 @@ class StatesTest extends UnitTestCase
      *
      * @param State $state
      */
+    #[DataProvider('providesStates')]
+    #[Test]
     public function canCreateStateWithPreviousId($state)
     {
         // By default, when none provided, "previous" should be null
@@ -186,6 +205,8 @@ class StatesTest extends UnitTestCase
      *
      * @param State $state
      */
+    #[DataProvider('providesStates')]
+    #[Test]
     public function canExportToArray($state)
     {
         $data = [
@@ -213,6 +234,8 @@ class StatesTest extends UnitTestCase
      *
      * @param State $state
      */
+    #[DataProvider('providesStates')]
+    #[Test]
     public function canExportToJson($state)
     {
         $data = [
@@ -238,6 +261,8 @@ class StatesTest extends UnitTestCase
      *
      * @throws JsonException
      */
+    #[DataProvider('providesStates')]
+    #[Test]
     public function canConvertToJson($state)
     {
         $data = [
@@ -261,6 +286,8 @@ class StatesTest extends UnitTestCase
      *
      * @param State $state
      */
+    #[DataProvider('providesStates')]
+    #[Test]
     public function canCastToString($state)
     {
         $result = (string) $state;
@@ -275,6 +302,8 @@ class StatesTest extends UnitTestCase
      *
      * @param State $state
      */
+    #[DataProvider('providesStates')]
+    #[Test]
     public function canSerializeAndUnserialize($state)
     {
         // NOTE: Dates are passed on string here on purpose, otherwise

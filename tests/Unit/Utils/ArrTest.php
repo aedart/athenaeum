@@ -7,6 +7,8 @@ use Aedart\Contracts\Utils\Random\ArrayRandomizer;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Arr;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Random\Engine\Mt19937;
 use Throwable;
 
@@ -19,6 +21,10 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
+#[Group(
+    'utils',
+    'array',
+)]
 class ArrTest extends UnitTestCase
 {
     /**
@@ -26,6 +32,7 @@ class ArrTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsRandomizer(): void
     {
         $randomizer = Arr::randomizer();
@@ -38,6 +45,7 @@ class ArrTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function returnsSameValueWhenSeededWithStaticValue()
     {
         $list = [ 'a', 'b', 'c' ];
@@ -60,6 +68,7 @@ class ArrTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canReturnDifferenceOfAssociate()
     {
         $original = [
@@ -105,6 +114,7 @@ class ArrTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function doesNotFailDiffOfAssocWhenEmptyNestedArrays()
     {
         $original = [
@@ -128,6 +138,7 @@ class ArrTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function doesNotFailDiffOfAssocWhenEmptyNullValues()
     {
         $original = [
@@ -149,6 +160,7 @@ class ArrTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateTreeStructure()
     {
         $path = '/home/user/projects';

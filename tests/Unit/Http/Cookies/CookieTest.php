@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Http\Cookies;
 use Aedart\Contracts\Http\Cookies\Cookie as CookieInterface;
 use Aedart\Http\Cookies\Cookie;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -15,6 +17,9 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Cookies
  */
+#[Group(
+    'http-cookies',
+)]
 class CookieTest extends UnitTestCase
 {
     /*****************************************************************
@@ -44,6 +49,7 @@ class CookieTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canPopulate()
     {
         $name = 'token';
@@ -63,6 +69,7 @@ class CookieTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canExportToArray()
     {
         $name = 'token';

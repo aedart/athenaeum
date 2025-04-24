@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Random;
 use Aedart\Contracts\Utils\Random\Type;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Random\Factory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Random\Engine\Mt19937;
 
 /**
@@ -18,6 +20,12 @@ use Random\Engine\Mt19937;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Unit\Utils\Random
  */
+#[Group(
+    'utils',
+    'utils-random',
+    'utils-randomizer',
+    'utils-randomizer-factory',
+)]
 class FactoryTest extends UnitTestCase
 {
     /**
@@ -25,6 +33,7 @@ class FactoryTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsRandomizerWithDefaultEngine(): void
     {
         $randomizer = Factory::make(Type::String);
@@ -37,6 +46,7 @@ class FactoryTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsRandomizerWithSpecifiedEngine(): void
     {
         $engine = new Mt19937();

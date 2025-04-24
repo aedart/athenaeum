@@ -6,6 +6,9 @@ use Aedart\Console\Traits\CoreApplicationTrait;
 use Aedart\Console\Traits\LastInputTrait;
 use Aedart\Console\Traits\LastOutputTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ConsoleTraitsTest
@@ -17,6 +20,11 @@ use Aedart\Tests\TestCases\TraitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Console\Traits
  */
+#[Group(
+    'config',
+    'config-traits',
+    'traits'
+)]
 class ConsoleTraitsTest extends TraitTestCase
 {
     /*****************************************************************
@@ -47,6 +55,8 @@ class ConsoleTraitsTest extends TraitTestCase
      *
      * @throws \ReflectionException
      */
+    #[DataProvider('awareOfComponentsProvider')]
+    #[Test]
     public function canInvokeAwareOfMethods(string $awareOfTrait)
     {
         $this->assertTraitMethods($awareOfTrait, null, null);

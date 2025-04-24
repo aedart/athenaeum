@@ -5,9 +5,11 @@ namespace Aedart\Tests\Unit\Http\Clients\Requests;
 use Aedart\Contracts\Http\Clients\Requests\HasDriverOptions;
 use Aedart\Http\Clients\Requests\AdaptedRequest;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Stream;
 use GuzzleHttp\Psr7\Uri;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
@@ -22,6 +24,11 @@ use Psr\Http\Message\UriInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Clients\Requests
  */
+#[Group(
+    'http-clients',
+    'adapted-request',
+    'psr-7',
+)]
 class AdaptedRequestTest extends UnitTestCase
 {
     /*****************************************************************
@@ -61,6 +68,7 @@ class AdaptedRequestTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainDriverOptions()
     {
         $options = ['a', 'b', 'c'];
@@ -73,6 +81,7 @@ class AdaptedRequestTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetAndObtainProtocolVersion()
     {
         $version = '2.0';
@@ -88,6 +97,7 @@ class AdaptedRequestTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetAndObtainHeaders()
     {
         $request = $this
@@ -115,6 +125,7 @@ class AdaptedRequestTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canRemoveHeader()
     {
         $request = $this
@@ -134,6 +145,7 @@ class AdaptedRequestTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetAndObtainBody()
     {
         $stream = new Stream(fopen('php://memory', 'r+'));
@@ -153,6 +165,7 @@ class AdaptedRequestTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetAndObtainRequestTarget()
     {
         $target = 'https://acme.org';
@@ -169,6 +182,7 @@ class AdaptedRequestTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetAndGetHttpMethod()
     {
         $request = $this
@@ -183,6 +197,7 @@ class AdaptedRequestTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetAndObtainUri()
     {
         $uri = new Uri('/users/relations/notes');

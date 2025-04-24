@@ -4,7 +4,10 @@ namespace Aedart\Tests\Integration\Validation\Rules;
 
 use Aedart\Tests\TestCases\Validation\ValidationTestCase;
 use Aedart\Validation\Rules\SemanticVersion;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Validation\ValidationRule;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * SemanticVersionRuleTest
@@ -19,6 +22,11 @@ use Illuminate\Contracts\Validation\ValidationRule;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Validation\Rules
  */
+#[Group(
+    'validation',
+    'rules',
+    'version',
+)]
 class SemanticVersionRuleTest extends ValidationTestCase
 {
     /*****************************************************************
@@ -83,6 +91,8 @@ class SemanticVersionRuleTest extends ValidationTestCase
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[DataProvider('validInput')]
+    #[Test]
     public function passesOnValidInput(mixed $input): void
     {
         $this->shouldPass($input, $this->makeRule());
@@ -96,6 +106,8 @@ class SemanticVersionRuleTest extends ValidationTestCase
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[DataProvider('invalidInput')]
+    #[Test]
     public function failsOnInvalidInput(mixed $input): void
     {
         $this->shouldNotPass($input, $this->makeRule());

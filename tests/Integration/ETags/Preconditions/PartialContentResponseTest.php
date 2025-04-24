@@ -13,8 +13,10 @@ use Aedart\Testing\Helpers\Http\Response;
 use Aedart\Tests\Helpers\Dummies\ETags\Requests\DownloadFileRequest;
 use Aedart\Tests\Helpers\Dummies\ETags\Requests\DownloadGenericFileRequest;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
+use Codeception\Attribute\Group;
 use DateTimeInterface;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode\All as Status;
 
 /**
@@ -27,6 +29,11 @@ use Teapot\StatusCode\All as Status;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions
  */
+#[Group(
+    'etags',
+    'preconditions',
+    'partial-content-response'
+)]
 class PartialContentResponseTest extends PreconditionsTestCase
 {
     /*****************************************************************
@@ -84,6 +91,7 @@ class PartialContentResponseTest extends PreconditionsTestCase
      *
      * @return void
      */
+    #[Test]
     public function respondsWithEntireAttachmentWhenNoRangeRequested(): void
     {
         Route::get('/files/{name}', function (DownloadFileRequest $request) {
@@ -127,6 +135,7 @@ class PartialContentResponseTest extends PreconditionsTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function respondsSinglePartWhenASingleRangeRequested(): void
     {
         Route::get('/files/{name}', function (DownloadFileRequest $request) {
@@ -178,6 +187,7 @@ class PartialContentResponseTest extends PreconditionsTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function respondsMultiplePartsWhenMultipleRangesRequested(): void
     {
         Route::get('/files/{name}', function (DownloadFileRequest $request) {
@@ -266,6 +276,7 @@ class PartialContentResponseTest extends PreconditionsTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCombinePartialsIntoSingleFile(): void
     {
         Route::get('/files/{name}', function (DownloadFileRequest $request) {
@@ -327,6 +338,7 @@ class PartialContentResponseTest extends PreconditionsTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function respondsWithPartialContentWhenIfRangeEtagMatches(): void
     {
         Route::get('/files/{name}', function (DownloadFileRequest $request) {
@@ -373,6 +385,7 @@ class PartialContentResponseTest extends PreconditionsTestCase
      *
      * @return void
      */
+    #[Test]
     public function respondsEntireAttachmentWhenIfRangeEtagDoesNotMatch(): void
     {
         Route::get('/files/{name}', function (DownloadFileRequest $request) {
@@ -413,6 +426,7 @@ class PartialContentResponseTest extends PreconditionsTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function respondsWithPartialContentWhenIfRangeDateMatches(): void
     {
         Route::get('/files/{name}', function (DownloadFileRequest $request) {
@@ -459,6 +473,7 @@ class PartialContentResponseTest extends PreconditionsTestCase
      *
      * @return void
      */
+    #[Test]
     public function respondsEntireAttachmentWhenIfRangeDateDoesNotMatch(): void
     {
         Route::get('/files/{name}', function (DownloadFileRequest $request) {
@@ -499,6 +514,7 @@ class PartialContentResponseTest extends PreconditionsTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function respondsWithCustomRangeUnit(): void
     {
         Route::get('/files/{name}', function (DownloadGenericFileRequest $request) {

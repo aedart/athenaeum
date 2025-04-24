@@ -4,7 +4,9 @@ namespace Aedart\Tests\Integration\Core\Console;
 
 use Aedart\Tests\Helpers\Dummies\Console\Commands\Exceptions\CommandFailure;
 use Aedart\Tests\TestCases\Console\AthenaeumCoreConsoleTestCase;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C0_ExceptionHandlingTest
@@ -16,6 +18,11 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Console
  */
+#[Group(
+    'application',
+    'application-console',
+    'application-console-c0',
+)]
 class C0_ExceptionHandlingTest extends AthenaeumCoreConsoleTestCase
 {
     /**
@@ -39,6 +46,7 @@ class C0_ExceptionHandlingTest extends AthenaeumCoreConsoleTestCase
     /**
      * @test
      */
+    #[Test]
     public function respectsMustThrowExceptionsState()
     {
         $this->expectException(CommandFailure::class);
@@ -53,6 +61,7 @@ class C0_ExceptionHandlingTest extends AthenaeumCoreConsoleTestCase
     /**
      * @test
      */
+    #[Test]
     public function handlesException()
     {
         $this->getApplication()->forceThrowExceptions(false);

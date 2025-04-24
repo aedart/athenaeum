@@ -7,7 +7,9 @@ use Aedart\Streams\Exceptions\InvalidStreamResource;
 use Aedart\Streams\Exceptions\StreamIsDetached;
 use Aedart\Streams\FileStream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
 use GuzzleHttp\Psr7\Stream as PsrStream;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C0_AppendTest
@@ -18,6 +20,11 @@ use GuzzleHttp\Psr7\Stream as PsrStream;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-c0',
+)]
 class C0_AppendTest extends StreamTestCase
 {
     /**
@@ -26,6 +33,7 @@ class C0_AppendTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canAppendStringData()
     {
         $data = $this->getFaker()->realText(50);
@@ -43,6 +51,7 @@ class C0_AppendTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canAppendNumericData()
     {
         $data = $this->getFaker()->randomDigitNotNull();
@@ -60,6 +69,7 @@ class C0_AppendTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canAppendDataFromResource()
     {
         $data = $this->getFaker()->realText(50);
@@ -81,6 +91,7 @@ class C0_AppendTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canAppendFromPsrStream()
     {
         $data = $this->getFaker()->realText(50);
@@ -104,6 +115,7 @@ class C0_AppendTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canAppendFromAnotherStream()
     {
         $data = $this->getFaker()->realText(50);
@@ -126,6 +138,7 @@ class C0_AppendTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function failsIfDataStreamIsDetached()
     {
         $this->expectException(CannotCopyToTargetStream::class);
@@ -148,6 +161,7 @@ class C0_AppendTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function failsIfTargetStreamIsDetached()
     {
         // Note: append() will attempt to move position to end on
@@ -174,6 +188,7 @@ class C0_AppendTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function failsAppendIfDataTypeNotSupported()
     {
         $this->expectException(InvalidStreamResource::class);

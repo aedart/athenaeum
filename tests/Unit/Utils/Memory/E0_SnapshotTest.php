@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Memory;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E0_SnapshotTest
@@ -18,6 +20,13 @@ use Aedart\Utils\Memory;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
+#[Group(
+    'utils',
+    'utils-memory',
+    'utils-memory-unit',
+    'utils-memory-unit-e0',
+    'utils-memory-unit-snapshot',
+)]
 class E0_SnapshotTest extends UnitTestCase
 {
     /**
@@ -25,6 +34,7 @@ class E0_SnapshotTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainSnapshotWithoutReset(): void
     {
         $str = str_repeat('a', 1024 * 1024 * 4);
@@ -50,6 +60,7 @@ class E0_SnapshotTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainSnapshotWithReset(): void
     {
         $str = str_repeat('a', 1024 * 1024 * 4);

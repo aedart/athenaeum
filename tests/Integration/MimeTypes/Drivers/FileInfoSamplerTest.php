@@ -5,6 +5,9 @@ namespace Aedart\Tests\Integration\MimeTypes\Drivers;
 use Aedart\Contracts\MimeTypes\Exceptions\MimeTypeDetectionException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\MimeTypes\MimeTypesTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * FileInfoSamplerTest
@@ -16,6 +19,11 @@ use Aedart\Tests\TestCases\MimeTypes\MimeTypesTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\MimeTypes\Drivers
  */
+#[Group(
+    'mime-types',
+    'mime-types-samplers',
+    'file-info-sampler'
+)]
 class FileInfoSamplerTest extends MimeTypesTestCase
 {
     /*****************************************************************
@@ -43,6 +51,7 @@ class FileInfoSamplerTest extends MimeTypesTestCase
      *
      * @throws MimeTypeDetectionException
      */
+    #[Test]
     public function failsWhenInvalidMagicDatabasePathProvided()
     {
         $this->expectException(MimeTypeDetectionException::class);
@@ -65,9 +74,11 @@ class FileInfoSamplerTest extends MimeTypesTestCase
      *
      * @throws MimeTypeDetectionException
      */
+    #[DataProvider('testFiles')]
+    #[Test]
     public function canDetectFromString(array $expectation)
     {
-        list($ext, $type, $encoding) = $expectation;
+        [$ext, $type, $encoding] = $expectation;
 
         $mimeType = $this->mimeTypeUsingStringContent($ext, $this->driverProfile());
 
@@ -90,9 +101,11 @@ class FileInfoSamplerTest extends MimeTypesTestCase
      *
      * @throws MimeTypeDetectionException
      */
+    #[DataProvider('testFiles')]
+    #[Test]
     public function canDetectFromStream(array $expectation)
     {
-        list($ext, $type, $encoding) = $expectation;
+        [$ext, $type, $encoding] = $expectation;
 
         $mimeType = $this->mimeTypeUsingStream($ext, $this->driverProfile());
 

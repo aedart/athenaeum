@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * X0_GuzzleSpecificTest
@@ -16,6 +18,11 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-x0',
+)]
 class X0_GuzzleSpecificTest extends HttpClientsTestCase
 {
     /**
@@ -23,6 +30,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function hasHttpErrorsDisabledByDefault()
     {
         $client = $this->client();
@@ -37,6 +45,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function hasConnectTimeoutSetByDefault()
     {
         $client = $this->client();
@@ -51,6 +60,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function hasRequestTimeoutSetByDefault()
     {
         $client = $this->client();
@@ -63,6 +73,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSpecifyTimeout()
     {
         $client = $this->client();
@@ -81,6 +92,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function hasFollowRedirectsSetByDefault()
     {
         $client = $this->client();
@@ -101,6 +113,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canDisableRedirectBehaviour()
     {
         $client = $this->client();
@@ -117,6 +130,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canSpecifyMaxRedirects()
     {
         $client = $this->client();
@@ -133,6 +147,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
     /**
      * @test
      */
+    #[Test]
     public function canUseFormDataFormat()
     {
         $builder = $this->client()
@@ -144,6 +159,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
     /**
      * @test
      */
+    #[Test]
     public function canUseJsonDataFormat()
     {
         $builder = $this->client()
@@ -155,6 +171,7 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
     /**
      * @test
      */
+    #[Test]
     public function canUseMultipartDataFormat()
     {
         $builder = $this->client()

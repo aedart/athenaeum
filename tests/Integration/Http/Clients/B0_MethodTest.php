@@ -5,6 +5,9 @@ namespace Aedart\Tests\Integration\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 use Teapot\StatusCode;
 
@@ -17,6 +20,11 @@ use Teapot\StatusCode;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-b0',
+)]
 class B0_MethodTest extends HttpClientsTestCase
 {
     /**
@@ -27,6 +35,8 @@ class B0_MethodTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canSetRequestMethod(string $profile)
     {
         $client = $this->client($profile);

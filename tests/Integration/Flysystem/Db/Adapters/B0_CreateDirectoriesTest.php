@@ -4,7 +4,9 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use Codeception\Attribute\Group;
 use League\Flysystem\FilesystemException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * B0_DirectoriesTest
@@ -16,6 +18,11 @@ use League\Flysystem\FilesystemException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-b0'
+)]
 class B0_CreateDirectoriesTest extends FlysystemDbTestCase
 {
     /**
@@ -25,6 +32,7 @@ class B0_CreateDirectoriesTest extends FlysystemDbTestCase
      *
      * @throws FilesystemException
      */
+    #[Test]
     public function canCreateDirectory()
     {
         $path = 'home';
@@ -47,6 +55,7 @@ class B0_CreateDirectoriesTest extends FlysystemDbTestCase
      *
      * @throws FilesystemException
      */
+    #[Test]
     public function canCreateDirectoryRecursively(): void
     {
         $path = 'home/user/project';
@@ -73,6 +82,7 @@ class B0_CreateDirectoriesTest extends FlysystemDbTestCase
      *
      * @throws FilesystemException
      */
+    #[Test]
     public function automaticallyPrefixesWhenCreatingDirectory(): void
     {
         $prefix = 'root';
@@ -99,6 +109,7 @@ class B0_CreateDirectoriesTest extends FlysystemDbTestCase
      *
      * @throws FilesystemException
      */
+    #[Test]
     public function updatesDirectoryIfAlreadyExists(): void
     {
         $pathA = 'project_a';

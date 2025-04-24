@@ -4,7 +4,9 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use Codeception\Attribute\Group;
 use League\Flysystem\FilesystemException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * B1_ListDirectoriesTest
@@ -16,6 +18,11 @@ use League\Flysystem\FilesystemException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-b1'
+)]
 class B1_ListDirectoriesTest extends FlysystemDbTestCase
 {
     /*****************************************************************
@@ -29,6 +36,7 @@ class B1_ListDirectoriesTest extends FlysystemDbTestCase
      *
      * @throws FilesystemException
      */
+    #[Test]
     public function canListRootLevelDirectories(): void
     {
         $directories = [
@@ -61,6 +69,7 @@ class B1_ListDirectoriesTest extends FlysystemDbTestCase
      *
      * @throws FilesystemException
      */
+    #[Test]
     public function canListDirectoriesForSingleLevel(): void
     {
         $directories = [
@@ -94,6 +103,7 @@ class B1_ListDirectoriesTest extends FlysystemDbTestCase
      *
      * @throws FilesystemException
      */
+    #[Test]
     public function canListDirectoriesDeep(): void
     {
         $directories = [

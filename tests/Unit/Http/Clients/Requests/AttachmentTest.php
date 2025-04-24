@@ -6,7 +6,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\InvalidFilePathException;
 use Aedart\Contracts\Http\Clients\Requests\Attachment as AttachmentInterface;
 use Aedart\Http\Clients\Requests\Attachment;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -18,6 +20,10 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Clients\Requests
  */
+#[Group(
+    'http-clients',
+    'attachment',
+)]
 class AttachmentTest extends UnitTestCase
 {
     /*****************************************************************
@@ -45,6 +51,7 @@ class AttachmentTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canPopulateAttachment()
     {
         $attachment = $this->makeAttachment([ 'name' => $this->getFaker()->word() ])
@@ -66,6 +73,7 @@ class AttachmentTest extends UnitTestCase
      * @throws InvalidFilePathException
      * @throws Throwable
      */
+    #[Test]
     public function canAttachFile()
     {
         $path = Configuration::dataDir() . 'http/clients/attachments/test.md';
@@ -84,6 +92,7 @@ class AttachmentTest extends UnitTestCase
      * @throws InvalidFilePathException
      * @throws Throwable
      */
+    #[Test]
     public function failsIfPathToFileIsInvalid()
     {
         $this->expectException(InvalidFilePathException::class);

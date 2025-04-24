@@ -4,6 +4,9 @@ namespace Aedart\Tests\Integration\Streams\File;
 
 use Aedart\Contracts\Streams\Locks\Lock;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 /**
  * H0_LockingTest
@@ -15,6 +18,12 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-h0',
+    'stream-lock',
+)]
 class H0_LockingTest extends StreamTestCase
 {
     /**
@@ -22,8 +31,9 @@ class H0_LockingTest extends StreamTestCase
      *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
-     * @throws \Throwable
+     * @throws Throwable
      */
+    #[Test]
     public function canPerformOperationUsingExclusiveLock()
     {
         $stream = $this->openFileStreamFor('text.txt');
@@ -38,8 +48,9 @@ class H0_LockingTest extends StreamTestCase
      *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
-     * @throws \Throwable
+     * @throws Throwable
      */
+    #[Test]
     public function canPerformOperationUsingSharedLock()
     {
         $stream = $this->openFileStreamFor('text.txt');
@@ -54,8 +65,9 @@ class H0_LockingTest extends StreamTestCase
      *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
-     * @throws \Throwable
+     * @throws Throwable
      */
+    #[Test]
     public function lockOperationReceivesIntendedArguments()
     {
         $stream = $this->openFileStreamFor('text.txt');

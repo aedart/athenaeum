@@ -6,7 +6,9 @@ use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Streams\FileStream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
 use Aedart\Utils\Str;
+use Codeception\Attribute\Group;
 use GuzzleHttp\Psr7\Stream as PsrStream;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * B0_CopyTest
@@ -17,6 +19,11 @@ use GuzzleHttp\Psr7\Stream as PsrStream;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-b0',
+)]
 class B0_CopyTest extends StreamTestCase
 {
     /**
@@ -26,6 +33,7 @@ class B0_CopyTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canCopyStream(): void
     {
         $data = $this->getFaker()->realText(25);
@@ -46,6 +54,7 @@ class B0_CopyTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canCopyToTargetStream(): void
     {
         $data = $this->getFaker()->realText(25);
@@ -69,6 +78,7 @@ class B0_CopyTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canCopyFromResource(): void
     {
         $data = Str::random(50);
@@ -94,6 +104,7 @@ class B0_CopyTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canCopyFromStream(): void
     {
         $data = Str::random(50);
@@ -119,6 +130,7 @@ class B0_CopyTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canCopyFromPsrStream(): void
     {
         $data = Str::random(50);
@@ -148,6 +160,7 @@ class B0_CopyTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canCopyAtOffsetFromPsrStream(): void
     {
         $data = Str::random(50);
@@ -179,6 +192,7 @@ class B0_CopyTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canCopyLengthFromPsrStream(): void
     {
         $data = Str::random(50);
@@ -210,6 +224,7 @@ class B0_CopyTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canCopyFromPsrStreamWithBuffer(): void
     {
         $data = Str::random(50);

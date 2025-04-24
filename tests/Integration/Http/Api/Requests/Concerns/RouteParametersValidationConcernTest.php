@@ -7,9 +7,11 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Address;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Addresses\ShowAddressRequest;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\AddressResource;
 use Aedart\Tests\TestCases\Http\ApiResourceRequestsTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Testing\Fluent\AssertableJson;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * RouteParametersValidationConcernTest
@@ -22,6 +24,12 @@ use JsonException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests\Concerns
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-request-concerns',
+    'route-parameters-validation'
+)]
 class RouteParametersValidationConcernTest extends ApiResourceRequestsTestCase
 {
     /**
@@ -31,6 +39,7 @@ class RouteParametersValidationConcernTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function passesValidRouteParameter(): void
     {
         /** @var Address $expected */
@@ -63,6 +72,7 @@ class RouteParametersValidationConcernTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function failsInvalidRouteParameter(): void
     {
         Address::factory()

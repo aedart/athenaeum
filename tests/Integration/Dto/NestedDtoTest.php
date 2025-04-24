@@ -8,7 +8,9 @@ use Aedart\Tests\Helpers\Dummies\Dto\Address;
 use Aedart\Tests\Helpers\Dummies\Dto\City;
 use Aedart\Tests\Helpers\Dummies\Dto\Note;
 use Aedart\Tests\TestCases\Dto\DtoTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * NestedDtoTest
@@ -19,11 +21,16 @@ use Illuminate\Contracts\Container\BindingResolutionException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Dto
  */
+#[Group(
+    'dto',
+    'dto-nested',
+)]
 class NestedDtoTest extends DtoTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canPopulateWithObjects()
     {
         $data = [
@@ -50,6 +57,7 @@ class NestedDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canResolveUnboundInstances()
     {
         $data = [
@@ -74,6 +82,7 @@ class NestedDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsResolvingWhenNoServiceContainerAvailable()
     {
         $this->expectException(BindingResolutionException::class);
@@ -98,6 +107,7 @@ class NestedDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canJsonSerialiseNestedInstances()
     {
         $data = [
@@ -122,6 +132,7 @@ class NestedDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSerialiseNestedInstances()
     {
         $data = [
@@ -153,6 +164,7 @@ class NestedDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canResolveUsingOverloadMethodDirectly()
     {
         $dto = $this->makeDto();
@@ -173,6 +185,7 @@ class NestedDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canResolveBoundAbstractInstance()
     {
         // Bind the abstraction / interface
@@ -209,6 +222,7 @@ class NestedDtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsResolvingAbstractInstance()
     {
         // NOTE: Here the interface is not bound. The IoC should thus fail resolving.

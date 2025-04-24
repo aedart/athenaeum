@@ -7,6 +7,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Http\Clients\Requests\Attachment;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * F0_AttachmentsTest
@@ -17,6 +20,11 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-f0',
+)]
 class F0_AttachmentsTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -31,6 +39,8 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function extractsAttachmentsFromOptions(string $profile)
     {
         $pathPrefix = $this->attachmentsPath();
@@ -91,6 +101,8 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws InvalidFilePathException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canAttachUsingAttachmentInstance(string $profile)
     {
         $file = $this->attachmentsPath() . 'config.ini';
@@ -134,6 +146,8 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canAttachUsingCallback(string $profile)
     {
         $file = $this->attachmentsPath() . 'lipsum.txt';
@@ -177,6 +191,8 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canAttachUsingArray(string $profile)
     {
         $file = $this->attachmentsPath() . 'lipsum.txt';
@@ -219,6 +235,8 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canAttachUsingOptions(string $profile)
     {
         $file = $this->attachmentsPath() . 'test.md';
@@ -262,6 +280,8 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canAttachUsingStream(string $profile)
     {
         $file = $this->attachmentsPath() . 'lipsum.txt';
@@ -302,6 +322,8 @@ class F0_AttachmentsTest extends HttpClientsTestCase
      * @throws InvalidFilePathException
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canAttachMultipleFiles(string $profile)
     {
         $pathPrefix = $this->attachmentsPath();

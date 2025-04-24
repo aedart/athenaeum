@@ -5,7 +5,9 @@ namespace Aedart\Tests\Integration\Streams;
 use Aedart\Streams\Exceptions\StreamAlreadyOpened;
 use Aedart\Streams\Stream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
 use GuzzleHttp\Psr7\Stream as PsrStream;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * A1_OpenCloseTest
@@ -16,6 +18,10 @@ use GuzzleHttp\Psr7\Stream as PsrStream;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-a1',
+)]
 class A1_OpenCloseTest extends StreamTestCase
 {
     /**
@@ -24,6 +30,7 @@ class A1_OpenCloseTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canCreateViaMake()
     {
         $resource = fopen('php://memory', 'r+b');
@@ -40,6 +47,7 @@ class A1_OpenCloseTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canCreateFromPsr7Stream()
     {
         $resource = fopen('php://memory', 'r+b');
@@ -62,6 +70,7 @@ class A1_OpenCloseTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canOpenUsingCallback()
     {
         $stream = new Stream();
@@ -79,6 +88,7 @@ class A1_OpenCloseTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function failsOpeningViaCallbackIfAlreadyOpen()
     {
         $this->expectException(StreamAlreadyOpened::class);
@@ -97,6 +107,7 @@ class A1_OpenCloseTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetachStream()
     {
         $resource = fopen('php://memory', 'r+b');
@@ -115,6 +126,7 @@ class A1_OpenCloseTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canCloseStream()
     {
         $resource = fopen('php://memory', 'r+b');
@@ -132,6 +144,7 @@ class A1_OpenCloseTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function automaticallyClosesWhenDestructed()
     {
         $resource = fopen('php://memory', 'r+b');

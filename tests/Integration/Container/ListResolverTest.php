@@ -10,16 +10,24 @@ use Aedart\Tests\Helpers\Dummies\Container\ComponentWithArgsAndDependencies;
 use Aedart\Tests\Helpers\Dummies\Container\ComponentWithArguments;
 use Aedart\Tests\Helpers\Dummies\Container\ComponentWithDependency;
 use Aedart\Tests\Helpers\Dummies\Container\SimpleComponent;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ListResolverTest
  *
  * @group ioc
+ * @group container
  * @group list-resolver
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Container
  */
+#[Group(
+    'ioc',
+    'container',
+    'list-resolver',
+)]
 class ListResolverTest extends IntegrationTestCase
 {
     /*****************************************************************
@@ -66,6 +74,7 @@ class ListResolverTest extends IntegrationTestCase
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
+    #[Test]
     public function canResolveListOfDependencies()
     {
         $list = $this->makeList();
@@ -107,6 +116,7 @@ class ListResolverTest extends IntegrationTestCase
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
+    #[Test]
     public function appliesCallback()
     {
         $list = $this->makeList();
@@ -129,6 +139,7 @@ class ListResolverTest extends IntegrationTestCase
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
+    #[Test]
     public function skipsResolveIfAlreadyInstantiated()
     {
         // In this example the list consists of class paths and

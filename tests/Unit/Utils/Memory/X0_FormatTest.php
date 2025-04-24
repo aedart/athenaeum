@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Memory;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * X0_FormatTest
@@ -17,6 +19,13 @@ use Aedart\Utils\Memory;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
+#[Group(
+    'utils',
+    'utils-memory',
+    'utils-memory-unit',
+    'utils-memory-unit-x0',
+    'utils-memory-unit-format',
+)]
 class X0_FormatTest extends UnitTestCase
 {
     /**
@@ -24,6 +33,7 @@ class X0_FormatTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFormatUsingBinaryUnits()
     {
         $unit = Memory::fromMegabyte(3.1999);
@@ -40,6 +50,7 @@ class X0_FormatTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFormatUsingBinaryUnitsLongFormat()
     {
         $unit = Memory::fromMegabyte(3.1999);
@@ -56,6 +67,7 @@ class X0_FormatTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFormatUsingDecimalUnits()
     {
         $unit = Memory::fromMegabyte(3.1999);
@@ -72,6 +84,7 @@ class X0_FormatTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFormatUsingDecimalUnitsLongFormat()
     {
         $unit = Memory::fromMegabyte(3.1999);
@@ -88,6 +101,7 @@ class X0_FormatTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFormatLegacy()
     {
         $unit = Memory::fromMegabyte(3.1999);

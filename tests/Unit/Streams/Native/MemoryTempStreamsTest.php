@@ -4,6 +4,8 @@ namespace Aedart\Tests\Unit\Streams\Native;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * MemoryStreamTest
@@ -15,6 +17,11 @@ use Aedart\Testing\TestCases\UnitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Streams
  */
+#[Group(
+    'streams',
+    'streams-memory',
+    'streams-temp'
+)]
 class MemoryTempStreamsTest extends UnitTestCase
 {
     /**
@@ -22,6 +29,7 @@ class MemoryTempStreamsTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function memoryStreamsAreNotShared()
     {
         $a = fopen('php://memory', 'w+');
@@ -59,6 +67,7 @@ class MemoryTempStreamsTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function tempStreamsAreNotShared()
     {
         $a = fopen('php://temp', 'w+');

@@ -5,8 +5,10 @@ namespace Aedart\Tests\Integration\Streams\File;
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Streams\FileStream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
 use GuzzleHttp\Psr7\Stream;
 use GuzzleHttp\Psr7\UploadedFile;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\UploadedFileInterface;
 
 /**
@@ -18,6 +20,11 @@ use Psr\Http\Message\UploadedFileInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-a2',
+)]
 class A2_OpenUploadedFileTest extends StreamTestCase
 {
     /*****************************************************************
@@ -60,6 +67,7 @@ class A2_OpenUploadedFileTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canOpenUploadedFile(): void
     {
         $file = 'text.txt';
@@ -84,6 +92,7 @@ class A2_OpenUploadedFileTest extends StreamTestCase
      *
      * @throws StreamException
      */
+    #[Test]
     public function canOpenUploadFileAsCopy(): void
     {
         $uploadedFile = $this->makeUploadedFile('text.txt');

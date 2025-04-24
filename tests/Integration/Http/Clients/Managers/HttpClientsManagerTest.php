@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Http\Clients\Managers;
 
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * HttpClientsManagerTest
@@ -15,11 +17,17 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-manager',
+)]
 class HttpClientsManagerTest extends HttpClientsTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canObtainInstance()
     {
         $manager = $this->getHttpClientsManager();
@@ -32,6 +40,7 @@ class HttpClientsManagerTest extends HttpClientsTestCase
      *
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      */
+    #[Test]
     public function canCreateDefaultClient()
     {
         $manager = $this->getHttpClientsManager();
@@ -45,6 +54,7 @@ class HttpClientsManagerTest extends HttpClientsTestCase
      *
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      */
+    #[Test]
     public function canObtainDesiredProfile()
     {
         $manager = $this->getHttpClientsManager();
@@ -58,6 +68,7 @@ class HttpClientsManagerTest extends HttpClientsTestCase
      *
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      */
+    #[Test]
     public function returnsSameClient()
     {
         $manager = $this->getHttpClientsManager();
@@ -75,6 +86,7 @@ class HttpClientsManagerTest extends HttpClientsTestCase
      *
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      */
+    #[Test]
     public function returnFreshInstance()
     {
         $manager = $this->getHttpClientsManager();

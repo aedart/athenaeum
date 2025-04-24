@@ -4,7 +4,10 @@ namespace Aedart\Tests\Unit\Support\Properties;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\TraitTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
 use ReflectionClass;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -22,6 +25,12 @@ use Symfony\Component\Finder\SplFileInfo;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Support\Properties
  */
+#[Group(
+    'support',
+    'properties',
+    'aware-of',
+    'aware-of-properties',
+)]
 class AwareOfTraitsTest extends TraitTestCase
 {
     /*****************************************************************
@@ -83,6 +92,8 @@ class AwareOfTraitsTest extends TraitTestCase
      *
      * @throws \ReflectionException
      */
+    #[DataProvider('awareOfTraits')]
+    #[Test]
     public function canInvokeMethods(string $trait)
     {
         $this->assertTraitMethods($trait);

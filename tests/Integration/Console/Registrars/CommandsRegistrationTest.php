@@ -8,6 +8,9 @@ use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Support\Helpers\Console\ArtisanTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\LaravelTestCase;
+use Codeception\Attribute\Depends;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * CommandsRegistrarTest
@@ -18,6 +21,10 @@ use Aedart\Testing\TestCases\LaravelTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Console\Registrars
  */
+#[Group(
+    'console',
+    'commands-registration',
+)]
 class CommandsRegistrationTest extends LaravelTestCase
 {
     use ConfigTrait;
@@ -64,6 +71,7 @@ class CommandsRegistrationTest extends LaravelTestCase
     /**
      * @test
      */
+    #[Test]
     public function hasRegisteredCommandFromConfig()
     {
         $commands = $this->getArtisan()->all();
@@ -80,6 +88,8 @@ class CommandsRegistrationTest extends LaravelTestCase
      *
      * @depends hasRegisteredCommandFromConfig
      */
+    #[Depends('hasRegisteredCommandFromConfig')]
+    #[Test]
     public function canExecuteRegisteredCommand()
     {
         $exitCode = $this

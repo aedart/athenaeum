@@ -8,6 +8,9 @@ use Aedart\Contracts\Redmine\Exceptions\RedmineException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 /**
  * FilterCallbackTest
@@ -19,14 +22,20 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
+#[Group(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-filter-callback'
+)]
 class FilterCallbackTest extends RedmineTestCase
 {
     /**
      * @test
      *
      * @throws HttpQueryBuilderException
-     * @throws \Throwable
+     * @throws Throwable
      */
+    #[Test]
     public function canApplyFilterCallback()
     {
         $hasAppliedCallback = false;
@@ -51,8 +60,9 @@ class FilterCallbackTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
+    #[Test]
     public function failsIfCallbackDoesNotReturnValidRequestBuilder()
     {
         $this->expectException(RedmineException::class);

@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Memory;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * B3_TeraAndTebibyteTest
@@ -19,6 +21,14 @@ use Aedart\Utils\Memory;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
+#[Group(
+    'utils',
+    'utils-memory',
+    'utils-memory-unit',
+    'utils-memory-unit-b3',
+    'utils-memory-unit-terabyte',
+    'utils-memory-unit-tebibyte',
+)]
 class B3_TeraAndTebibyteTest extends UnitTestCase
 {
     /**
@@ -26,6 +36,7 @@ class B3_TeraAndTebibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromTerabyte()
     {
         $value = 2;
@@ -46,6 +57,7 @@ class B3_TeraAndTebibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromLegacyTerabyte()
     {
         $value = 3;
@@ -66,6 +78,7 @@ class B3_TeraAndTebibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromTebibyte()
     {
         $value = 5;
@@ -86,6 +99,7 @@ class B3_TeraAndTebibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToTerabyte()
     {
         $bytes = 2 * pow(1000, 4);
@@ -105,6 +119,7 @@ class B3_TeraAndTebibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToLegacyTerabyte()
     {
         $bytes = 5 * pow(1024, 4);
@@ -124,6 +139,7 @@ class B3_TeraAndTebibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToTebibyte()
     {
         $bytes = 3 * pow(1024, 4);

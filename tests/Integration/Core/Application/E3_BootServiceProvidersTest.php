@@ -13,6 +13,8 @@ use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderB;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderC;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderD;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E2_BootServiceProvidersTest
@@ -23,6 +25,10 @@ use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
+#[Group(
+    'application',
+    'application-e3',
+)]
 class E3_BootServiceProvidersTest extends AthenaeumCoreTestCase
 {
     /*****************************************************************
@@ -58,6 +64,7 @@ class E3_BootServiceProvidersTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function bootsServiceProviders()
     {
         $this->boot();
@@ -86,6 +93,7 @@ class E3_BootServiceProvidersTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function invokesBeforeAndAfterBootCallbacks()
     {
         // States
@@ -115,6 +123,7 @@ class E3_BootServiceProvidersTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function invokesAfterCallbackIfAlreadyBooted()
     {
         // States

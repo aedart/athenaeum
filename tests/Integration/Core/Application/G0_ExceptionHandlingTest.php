@@ -4,8 +4,10 @@ namespace Aedart\Tests\Integration\Core\Application;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\IntegrationTestCase;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
 use Illuminate\Filesystem\Filesystem;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * G0_ExceptionHandling
@@ -16,6 +18,10 @@ use Illuminate\Filesystem\Filesystem;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
+#[Group(
+    'application',
+    'application-g0',
+)]
 class G0_ExceptionHandlingTest extends IntegrationTestCase
 {
     /*****************************************************************
@@ -119,6 +125,7 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
     /**
      * @test
      */
+    #[Test]
     public function canLogSingleEntryWithoutFailure()
     {
         $output = $this->invokeApp('normal');
@@ -130,6 +137,7 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
     /**
      * @test
      */
+    #[Test]
     public function handlesErrors()
     {
         $output = $this->invokeApp('handles-errors');
@@ -143,6 +151,7 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
     /**
      * @test
      */
+    #[Test]
     public function handlesExceptions()
     {
         $output = $this->invokeApp('handles-exceptions');
@@ -156,6 +165,7 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
     /**
      * @test
      */
+    #[Test]
     public function handlesExceptionsDuringShutdown()
     {
         $output = $this->invokeApp('handles-shutdown');
@@ -169,6 +179,7 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
     /**
      * @test
      */
+    #[Test]
     public function terminatesGracefullyWhenExceptionIsHandled()
     {
         // This test has two aspects:
@@ -188,6 +199,7 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
     /**
      * @test
      */
+    #[Test]
     public function handlesExceptionHandlingFailure()
     {
         $output = $this->invokeApp('fails-exception-handling');

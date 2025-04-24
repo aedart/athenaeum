@@ -5,7 +5,10 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use GuzzleHttp\Psr7\Query;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -17,6 +20,11 @@ use Psr\Http\Message\ResponseInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-c1',
+)]
 class C1_QueryTest extends HttpClientsTestCase
 {
     /**
@@ -27,6 +35,8 @@ class C1_QueryTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function extractsStringQueryFromOptions(string $profile)
     {
         $query = 'name=Rudy&age[gt]=23&age[lt]=42';
@@ -46,6 +56,8 @@ class C1_QueryTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function extractsArrayQueryFromOptions(string $profile)
     {
         $query = [
@@ -74,6 +86,8 @@ class C1_QueryTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canSetQueryStringValues(string $profile)
     {
         $client = $this->client($profile);
@@ -120,6 +134,8 @@ class C1_QueryTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canBuildHttpQueryViaFluentMethods(string $profile)
     {
         $client = $this->client($profile);

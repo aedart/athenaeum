@@ -5,7 +5,9 @@ namespace Aedart\Tests\Integration\Core\Console;
 use Aedart\Support\Helpers\Filesystem\FileTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Console\AthenaeumCoreConsoleTestCase;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E0_PublishAllCommandTest
@@ -17,6 +19,11 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Console
  */
+#[Group(
+    'application',
+    'application-console',
+    'application-console-e0',
+)]
 class E0_PublishAllCommandTest extends AthenaeumCoreConsoleTestCase
 {
     use FileTrait;
@@ -58,6 +65,7 @@ class E0_PublishAllCommandTest extends AthenaeumCoreConsoleTestCase
     /**
      * @test
      */
+    #[Test]
     public function hasRegisteredPublishAllCommand()
     {
         $console = $this->getArtisan();
@@ -75,6 +83,7 @@ class E0_PublishAllCommandTest extends AthenaeumCoreConsoleTestCase
      *
      * @throws \Codeception\Exception\ConfigurationException
      */
+    #[Test]
     public function canPublishAssets()
     {
         // NOTE: The following has no affect at this point!

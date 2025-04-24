@@ -5,6 +5,10 @@ namespace Aedart\Tests\Integration\Redmine\Resources;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\User;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 /**
  * UserTest
@@ -16,15 +20,21 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
+#[Group(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-user',
+)]
 class UserTest extends RedmineTestCase
 {
     /**
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canCreateUser()
     {
         // Debug
@@ -62,9 +72,10 @@ class UserTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canUpdateUser()
     {
         // Debug
@@ -117,9 +128,10 @@ class UserTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canListUsers()
     {
         // Debug

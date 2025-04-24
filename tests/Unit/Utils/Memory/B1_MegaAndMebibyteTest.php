@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Memory;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * B1_MegaAndMebibyteTest
@@ -19,6 +21,14 @@ use Aedart\Utils\Memory;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
+#[Group(
+    'utils',
+    'utils-memory',
+    'utils-memory-unit',
+    'utils-memory-unit-b1',
+    'utils-memory-unit-megabyte',
+    'utils-memory-unit-mebibyte',
+)]
 class B1_MegaAndMebibyteTest extends UnitTestCase
 {
     /**
@@ -26,6 +36,7 @@ class B1_MegaAndMebibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromMegabyte()
     {
         $value = 3;
@@ -46,6 +57,7 @@ class B1_MegaAndMebibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromLegacyMegabyte()
     {
         $value = 4;
@@ -66,6 +78,7 @@ class B1_MegaAndMebibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromMebibyte()
     {
         $value = 5;
@@ -86,6 +99,7 @@ class B1_MegaAndMebibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToMegabyte()
     {
         $bytes = 2 * 1000 * 1000;
@@ -105,6 +119,7 @@ class B1_MegaAndMebibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToLegacyMegabyte()
     {
         $bytes = 5 * 1024 * 1024;
@@ -124,6 +139,7 @@ class B1_MegaAndMebibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToMebibyte()
     {
         $bytes = 3 * 1024 * 1024;

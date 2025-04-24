@@ -7,7 +7,9 @@ use Aedart\Contracts\Core\Helpers\PathsContainer;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Exceptions\UnableToDetectOrLoadEnv;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * A1_RunTest
@@ -18,6 +20,10 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
+#[Group(
+    'application',
+    'application-b0',
+)]
 class B0_EnvironmentTest extends AthenaeumCoreTestCase
 {
     /*****************************************************************
@@ -56,6 +62,7 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function failsWhenNoEnvironmentFileFound()
     {
         $this->expectException(UnableToDetectOrLoadEnv::class);
@@ -70,6 +77,7 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function defaultsToEnvironmentFromEnvFile()
     {
         $app = $this->app;
@@ -85,6 +93,7 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetectEnvironmentFromEnvVariable()
     {
         $app = $this->app;
@@ -103,6 +112,7 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetectEnvironmentFromConsole()
     {
         $app = $this->app;
@@ -126,6 +136,7 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineIfRunningInTestingEnv()
     {
         $app = $this->app;

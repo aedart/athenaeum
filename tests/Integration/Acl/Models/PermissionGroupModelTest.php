@@ -6,6 +6,8 @@ use Aedart\Acl\Models\Permission;
 use Aedart\Acl\Models\Permissions\Group;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Acl\AclTestCase;
+use Codeception\Attribute\Group as TestGroup;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * PermissionGroupModelTest
@@ -18,11 +20,18 @@ use Aedart\Tests\TestCases\Acl\AclTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Acl\Models
  */
+#[TestGroup(
+    'acl',
+    'acl-models',
+    'acl-permission-group',
+    'acl-permission-group-model'
+)]
 class PermissionGroupModelTest extends AclTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canCreateAndObtain()
     {
         $faker = $this->getFaker();
@@ -52,6 +61,7 @@ class PermissionGroupModelTest extends AclTestCase
      *
      * @throws \Exception
      */
+    #[Test]
     public function canSoftDeleteGroup()
     {
         /** @var group $group */
@@ -71,6 +81,7 @@ class PermissionGroupModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canCreateWithPermissions()
     {
         $permissions = $this->makePermissionsForGroupCreate();
@@ -91,6 +102,7 @@ class PermissionGroupModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function deletesPermissionsWhenGroupForcedDeleted()
     {
         $table = (new Permission())->getTable();

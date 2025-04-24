@@ -6,7 +6,9 @@ use Aedart\Acl\Models\Permission;
 use Aedart\Acl\Models\Role;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Acl\AclTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Database\Eloquent\Collection;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * RegistrarTest
@@ -17,6 +19,10 @@ use Illuminate\Database\Eloquent\Collection;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Acl
  */
+#[Group(
+    'acl',
+    'acl-registrar',
+)]
 class RegistrarTest extends AclTestCase
 {
     /**
@@ -79,6 +85,7 @@ class RegistrarTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDefinePermissions()
     {
         $gate = $this->getGate();
@@ -103,6 +110,7 @@ class RegistrarTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDeterminePermissionForUser()
     {
         $user = $this->createUser();
@@ -144,6 +152,7 @@ class RegistrarTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function cachesPermissions()
     {
         $registrar = $this->getRegistrar();

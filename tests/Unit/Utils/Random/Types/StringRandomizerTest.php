@@ -7,6 +7,8 @@ use Aedart\Contracts\Utils\Random\Type;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Random\Factory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -20,6 +22,12 @@ use Throwable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Unit\Utils\Random\Types
  */
+#[Group(
+    'utils',
+    'utils-random',
+    'utils-randomizer',
+    'string-randomizer',
+)]
 class StringRandomizerTest extends UnitTestCase
 {
     /*****************************************************************
@@ -50,6 +58,7 @@ class StringRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canGetRandomBytes(): void
     {
         $result = $this->makeRandomizer()->bytes(10);
@@ -66,6 +75,7 @@ class StringRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canGetRandomBytesFromString(): void
     {
         $result = $this->makeRandomizer()->bytesFromString('abcdefghijklmnopqrstuvwxyz0123456789', 10);
@@ -82,6 +92,7 @@ class StringRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canShuffleBytes(): void
     {
         $result = $this->makeRandomizer()->shuffle(implode('', range('a', 'z')));

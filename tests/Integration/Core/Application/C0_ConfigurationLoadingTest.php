@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Core\Application;
 use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C0_ConfigurationLoadingTest
@@ -15,6 +17,10 @@ use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
+#[Group(
+    'application',
+    'application-c0',
+)]
 class C0_ConfigurationLoadingTest extends AthenaeumCoreTestCase
 {
     /*****************************************************************
@@ -39,6 +45,7 @@ class C0_ConfigurationLoadingTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function canLoadConfiguration()
     {
         $this->bootstrap();

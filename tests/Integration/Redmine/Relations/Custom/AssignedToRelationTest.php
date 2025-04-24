@@ -4,10 +4,11 @@ namespace Aedart\Tests\Integration\Redmine\Relations\Custom;
 
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Group;
-use Aedart\Redmine\RedmineApiResource;
 use Aedart\Redmine\User;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group as TestGroup;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -20,6 +21,11 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Relations\Custom
  */
+#[TestGroup(
+    'redmine',
+    'redmine-relations',
+    'redmine-relations-assigned-to',
+)]
 class AssignedToRelationTest extends RedmineTestCase
 {
     /**
@@ -29,6 +35,7 @@ class AssignedToRelationTest extends RedmineTestCase
      * @throws JsonException
      * @throws Throwable
      */
+    #[Test]
     public function returnsGroupWhenAssigned()
     {
         // Debug
@@ -99,6 +106,7 @@ class AssignedToRelationTest extends RedmineTestCase
      * @throws JsonException
      * @throws Throwable
      */
+    #[Test]
     public function returnsUserWhenAssigned()
     {
         // Debug

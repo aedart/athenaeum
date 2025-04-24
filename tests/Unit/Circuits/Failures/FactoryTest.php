@@ -7,6 +7,8 @@ use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\Failures\Factory as FailureFactory;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * FactoryTest
@@ -18,6 +20,11 @@ use Aedart\Testing\TestCases\UnitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Circuits\Failures
  */
+#[Group(
+    'circuits',
+    'circuits-failure',
+    'circuits-failure-factory'
+)]
 class FactoryTest extends UnitTestCase
 {
     /*****************************************************************
@@ -41,6 +48,7 @@ class FactoryTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainInstance()
     {
         $factory = $this->makeFailureFactory();
@@ -51,6 +59,7 @@ class FactoryTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateFailure()
     {
         $factory = $this->makeFailureFactory();

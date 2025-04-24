@@ -6,6 +6,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C7_WhereDateTest
@@ -18,6 +21,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-g1',
+    'http-query-grammars',
+)]
 class G1_WhereDateTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -89,6 +98,8 @@ class G1_WhereDateTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesWhereDate')]
+    #[Test]
     public function canAddWhereDate(string $grammar, string $expected)
     {
         $result = $this
@@ -111,6 +122,8 @@ class G1_WhereDateTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesOrWhereDate')]
+    #[Test]
     public function canAddOrWhereDate(string $grammar, string $expected)
     {
         $result = $this

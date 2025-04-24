@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Memory;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * B5_ExaAndExbibyteTest
@@ -19,6 +21,14 @@ use Aedart\Utils\Memory;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
+#[Group(
+    'utils',
+    'utils-memory',
+    'utils-memory-unit',
+    'utils-memory-unit-b5',
+    'utils-memory-unit-exabyte',
+    'utils-memory-unit-exbibyte',
+)]
 class B5_ExaAndExbibyteTest extends UnitTestCase
 {
     /**
@@ -26,6 +36,7 @@ class B5_ExaAndExbibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromExabyte()
     {
         $value = 2;
@@ -46,6 +57,7 @@ class B5_ExaAndExbibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromExbibyte()
     {
         $value = 5;
@@ -66,6 +78,7 @@ class B5_ExaAndExbibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToExabyte()
     {
         $bytes = 2 * pow(1000, 6);
@@ -85,6 +98,7 @@ class B5_ExaAndExbibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToExbibyte()
     {
         $bytes = 3 * pow(1024, 6);

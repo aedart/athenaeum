@@ -7,7 +7,9 @@ use Aedart\Contracts\Antivirus\Exceptions\UnsupportedStatusValueException;
 use Aedart\Contracts\Antivirus\Results\Status;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
+use Codeception\Attribute\Group;
 use Mockery;
+use PHPUnit\Framework\Attributes\Test;
 use Xenolope\Quahog\Result as ClamAvDriverResult;
 
 /**
@@ -21,6 +23,12 @@ use Xenolope\Quahog\Result as ClamAvDriverResult;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus\Status
  */
+#[Group(
+    'antivirus',
+    'antivirus-status',
+    'antivirus-status-clamav',
+    'clamav',
+)]
 class ClamAvStatusTest extends AntivirusTestCase
 {
     /**
@@ -30,6 +38,7 @@ class ClamAvStatusTest extends AntivirusTestCase
      *
      * @throws UnsupportedStatusValueException
      */
+    #[Test]
     public function canMakeStatus(): void
     {
         $native = Mockery::mock(ClamAvDriverResult::class);
@@ -46,6 +55,7 @@ class ClamAvStatusTest extends AntivirusTestCase
      *
      * @throws UnsupportedStatusValueException
      */
+    #[Test]
     public function canDetermineIfOk(): void
     {
         $faker = $this->getFaker();
@@ -77,6 +87,7 @@ class ClamAvStatusTest extends AntivirusTestCase
      *
      * @throws UnsupportedStatusValueException
      */
+    #[Test]
     public function doesNotPassIfStatusIsUnknown(): void
     {
         $faker = $this->getFaker();

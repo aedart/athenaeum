@@ -8,6 +8,8 @@ use Aedart\Streams\Exceptions\Locks\StreamCannotBeLocked;
 use Aedart\Streams\FileStream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * FlockDriverTest
@@ -20,6 +22,12 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File\Locks\Drivers
  */
+#[Group(
+    'streams',
+    'stream-lock',
+    'stream-lock-drivers',
+    'stream-lock-driver-flock',
+)]
 class FlockDriverTest extends StreamTestCase
 {
     /*****************************************************************
@@ -47,6 +55,7 @@ class FlockDriverTest extends StreamTestCase
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canAcquireAndReleaseLock()
     {
         $stream = $this->openFileStreamFor('text.txt');
@@ -71,6 +80,7 @@ class FlockDriverTest extends StreamTestCase
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function hasCorrectStreamReference()
     {
         $stream = $this->openFileStreamFor('text.txt');
@@ -86,6 +96,7 @@ class FlockDriverTest extends StreamTestCase
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function failsAcquireIfAlreadyLocked()
     {
         $streamA = $this->openFileStreamFor('text.txt');
@@ -119,6 +130,7 @@ class FlockDriverTest extends StreamTestCase
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function failsAcquiringIfLockTypeIsUnknown()
     {
         $this->expectException(LockFailure::class);
@@ -136,6 +148,7 @@ class FlockDriverTest extends StreamTestCase
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function failsWhenStreamDoesNotSupportLocking()
     {
         $this->expectException(StreamCannotBeLocked::class);
