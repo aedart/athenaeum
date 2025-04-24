@@ -4,6 +4,7 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters\League;
 
 use Aedart\Container\IoC;
 use Aedart\Flysystem\Db\Adapters\DatabaseAdapter;
+use Codeception\Attribute\DataProvider;
 use Codeception\Attribute\Group;
 use Codeception\Configuration;
 use Illuminate\Contracts\Container\Container;
@@ -139,6 +140,7 @@ class DatabaseAdapterTest extends BaseTestCase
      * @test
      * @dataProvider filenameProvider
      */
+    #[DataProvider('filenameProvider')]
     #[Test]
     public function writing_and_reading_files_with_special_path(string $path): void
     {
