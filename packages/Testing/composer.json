@@ -21,7 +21,7 @@
         "codeception/codeception": "^5.2.1",
         "codeception/module-asserts": "^3.0.0",
         "fakerphp/faker": "^v1.24.1",
-        "illuminate/testing": "^v12.9.2",
+        "illuminate/testing": "^v12.10.1",
         "mockery/mockery": "1.6.*",
         "orchestra/testbench": "^v10.2.1",
         "orchestra/testbench-dusk": "^v10.2.1"

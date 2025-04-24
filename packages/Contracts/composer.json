@@ -17,7 +17,7 @@
     "type": "library",
     "require": {
         "php": "^8.3",
-        "illuminate/contracts": "^v12.9.2"
+        "illuminate/contracts": "^v12.10.1"
     },
     "autoload": {
         "psr-4": {
