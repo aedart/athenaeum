@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.4.0] - 2025-04-24
+
 ### Added
 
 * Codeception/PHPUnit Attributes for tests and test related components (_PHPUnit `v11.x` and previously accepted PHPDoc-like annotations, but annotations are not longer supported from PHPUnit `v12.x`_). [#229](https://github.com/aedart/athenaeum/issues/229), [#230](https://github.com/aedart/athenaeum/issues/230).
@@ -1731,7 +1733,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/9.3.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/9.4.0...HEAD
+[9.4.0]: https://github.com/aedart/athenaeum/compare/9.3.0...9.4.0
 [9.3.0]: https://github.com/aedart/athenaeum/compare/9.2.0...9.3.0
 [9.2.0]: https://github.com/aedart/athenaeum/compare/9.1.0...9.2.0
 [9.1.0]: https://github.com/aedart/athenaeum/compare/9.0.0...9.1.0
