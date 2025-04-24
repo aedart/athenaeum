@@ -9,6 +9,8 @@ use Codeception\Attribute\Group;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
+ * @deprecated Since 9.4.0 - Test is no longer required. Will be removed in next major version.
+ *
  * CacheStoreTest
  *
  * @group circuits
@@ -26,11 +28,13 @@ use PHPUnit\Framework\Attributes\Test;
 class CacheStoreTest extends CircuitBreakerTestCase
 {
     /**
+     * @deprecated
+     *
      * test
      *
      * @see https://github.com/laravel/framework/blob/8.x/CHANGELOG-8.x.md#v8150-2020-11-17
      */
-    #[Test]
+    // #[Test] // Test is no longer needed.
     public function failsIfCacheIsNotLockProvider()
     {
         $this->markTestSkipped('Laravel file cache store now supports locks, since v8.15');
