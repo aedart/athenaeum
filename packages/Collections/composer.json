@@ -17,10 +17,10 @@
     "type": "library",
     "require": {
         "php": "^8.3",
-        "aedart/athenaeum-container": "^9.4",
-        "aedart/athenaeum-contracts": "^9.4",
-        "aedart/athenaeum-support": "^9.4",
-        "aedart/athenaeum-utils": "^9.4",
+        "aedart/athenaeum-container": "^9.5",
+        "aedart/athenaeum-contracts": "^9.5",
+        "aedart/athenaeum-support": "^9.5",
+        "aedart/athenaeum-utils": "^9.5",
         "illuminate/collections": "^v12.10.1"
     },
     "autoload": {
