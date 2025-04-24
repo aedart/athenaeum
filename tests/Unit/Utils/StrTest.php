@@ -7,6 +7,8 @@ use Aedart\Contracts\Utils\Random\StringRandomizer;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Str;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * StrTest
@@ -18,6 +20,11 @@ use Aedart\Utils\Str;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
+#[Group(
+    'utils',
+    'utils-str',
+    'str',
+)]
 class StrTest extends UnitTestCase
 {
     /**
@@ -25,6 +32,7 @@ class StrTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsRandomizer(): void
     {
         $randomizer = Str::randomizer();
@@ -35,6 +43,7 @@ class StrTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canConvertSlugIntoWords()
     {
         $slug = 'users.slug-with-multiple_separators';

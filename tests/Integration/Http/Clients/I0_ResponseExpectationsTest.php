@@ -6,7 +6,10 @@ use Aedart\Contracts\Http\Clients\Exceptions\ExpectationNotMetException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode;
 
 /**
@@ -18,6 +21,11 @@ use Teapot\StatusCode;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-i0',
+)]
 class I0_ResponseExpectationsTest extends HttpClientsTestCase
 {
     /**
@@ -28,6 +36,8 @@ class I0_ResponseExpectationsTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canAddAndObtainExpectations(string $profile)
     {
         $expectations = [
@@ -57,6 +67,8 @@ class I0_ResponseExpectationsTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function appliesExpectations(string $profile)
     {
         $hasAppliedA = false;
@@ -93,6 +105,8 @@ class I0_ResponseExpectationsTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canExpectViaCallback(string $profile)
     {
         $hasApplied = false;
@@ -117,6 +131,8 @@ class I0_ResponseExpectationsTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function failsWithExceptionWhenExpectationNotMet(string $profile)
     {
         $this->expectException(ExpectationNotMetException::class);
@@ -139,6 +155,8 @@ class I0_ResponseExpectationsTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function appliesOtherwiseCallbackWhenExpectationNotMet(string $profile)
     {
         $mock = $this->makeResponseMock([
@@ -167,6 +185,8 @@ class I0_ResponseExpectationsTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function doesNothingWhenExpectationIsMet(string $profile)
     {
         $this->client($profile)

@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Acl\Models;
 use Aedart\Acl\Models\Role;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Acl\AclTestCase;
+use Codeception\Attribute\Group as TestGroup;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * RoleModelTest
@@ -17,11 +19,18 @@ use Aedart\Tests\TestCases\Acl\AclTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Acl\Models
  */
+#[TestGroup(
+    'acl',
+    'acl-models',
+    'acl-role',
+    'acl-role-model'
+)]
 class RoleModelTest extends AclTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canCreateAndObtain()
     {
         $faker = $this->getFaker();
@@ -50,6 +59,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canGrantSinglePermission()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -82,6 +92,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canGrantManyPermissions()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -113,6 +124,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canGrantSinglePermissionViaSlug()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -145,6 +157,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canGrantManyPermissionsViaSlugs()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -178,6 +191,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canGrantSinglePermissionViaId()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -210,6 +224,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canGrantManyPermissionsViaIds()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -243,6 +258,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canRevokeSinglePermission()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -278,6 +294,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canRevokeManyPermissions()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -311,6 +328,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canRevokeSinglePermissionViaSlug()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -346,6 +364,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canRevokeManyPermissionsViaSlugs()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -381,6 +400,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canRevokeSinglePermissionViaId()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -416,6 +436,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canRevokeManyPermissionsViaIds()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -451,6 +472,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canSyncPermissions()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -485,6 +507,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canRevokeAllPermissions()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -513,6 +536,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canDetermineIfHasAllOrAnyPermissionsGranted()
     {
         // In this test, we ensure that model is able to distinguish exactly
@@ -554,6 +578,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function doesNotRevokePermissionsWhenRoleIsSoftDeleted()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -576,6 +601,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function revokesPermissionsWhenRoleIsForceDeleted()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -598,6 +624,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canCreateRoleWithPermissions()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -626,6 +653,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canUpdateRoleWithPermissions()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -652,6 +680,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canUpdateRoleAndSyncPermissions()
     {
         $group = $this->createPermissionGroupWithPermissions('users');
@@ -688,6 +717,7 @@ class RoleModelTest extends AclTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function revokesAllPermissionsWhenSyncUpdating()
     {
         $group = $this->createPermissionGroupWithPermissions('users');

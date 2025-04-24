@@ -7,6 +7,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C8_WhereYearTest
@@ -19,6 +22,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-g2',
+    'http-query-grammars',
+)]
 class G2_WhereYearTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -90,6 +99,8 @@ class G2_WhereYearTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesWhereYear')]
+    #[Test]
     public function canAddWhereYear(string $grammar, string $expected)
     {
         $result = $this
@@ -112,6 +123,8 @@ class G2_WhereYearTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesOrWhereYear')]
+    #[Test]
     public function canAddOrWhereYear(string $grammar, string $expected)
     {
         $result = $this

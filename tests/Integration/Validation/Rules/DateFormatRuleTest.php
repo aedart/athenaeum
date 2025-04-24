@@ -5,8 +5,11 @@ namespace Aedart\Tests\Integration\Validation\Rules;
 use Aedart\Contracts\Utils\Dates\DateTimeFormats;
 use Aedart\Tests\TestCases\Validation\ValidationTestCase;
 use Aedart\Validation\Rules\DateFormat;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Validation\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DateFormatRuleTest
@@ -18,6 +21,11 @@ use Illuminate\Validation\ValidationException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Validation\Rules
  */
+#[Group(
+    'validation',
+    'rules',
+    'date-format',
+)]
 class DateFormatRuleTest extends ValidationTestCase
 {
     /*****************************************************************
@@ -87,6 +95,8 @@ class DateFormatRuleTest extends ValidationTestCase
      *
      * @throws ValidationException
      */
+    #[DataProvider('validInput')]
+    #[Test]
     public function passesOnValidInput(mixed $input, array $formats): void
     {
         $this->shouldPass($input, $this->makeRule($formats));
@@ -103,6 +113,8 @@ class DateFormatRuleTest extends ValidationTestCase
      *
      * @throws ValidationException
      */
+    #[DataProvider('invalidInput')]
+    #[Test]
     public function failsOnInvalidInput(mixed $input, array $formats): void
     {
         $this->shouldNotPass($input, $this->makeRule($formats));

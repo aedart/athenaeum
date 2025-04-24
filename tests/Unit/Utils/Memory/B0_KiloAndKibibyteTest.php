@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Memory;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * B1_KiloAndKibibyteTest
@@ -19,6 +21,14 @@ use Aedart\Utils\Memory;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
+#[Group(
+    'utils',
+    'utils-memory',
+    'utils-memory-unit',
+    'utils-memory-unit-b0',
+    'utils-memory-unit-kilobyte',
+    'utils-memory-unit-kibibyte',
+)]
 class B0_KiloAndKibibyteTest extends UnitTestCase
 {
     /**
@@ -26,6 +36,7 @@ class B0_KiloAndKibibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromKilobyte()
     {
         $value = 5;
@@ -46,6 +57,7 @@ class B0_KiloAndKibibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromLegacyKilobyte()
     {
         $value = 5;
@@ -66,6 +78,7 @@ class B0_KiloAndKibibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateFromKibibyte()
     {
         $value = 5;
@@ -86,6 +99,7 @@ class B0_KiloAndKibibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToKilobyte()
     {
         $bytes = 2 * 1000;
@@ -105,6 +119,7 @@ class B0_KiloAndKibibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToLegacyKilobyte()
     {
         $bytes = 5 * 1024;
@@ -124,6 +139,7 @@ class B0_KiloAndKibibyteTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canConvertToKibibyte()
     {
         $bytes = 3 * 1024;

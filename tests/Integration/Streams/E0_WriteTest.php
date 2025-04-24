@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Streams;
 
 use Aedart\Streams\Stream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E0_WriteTest
@@ -14,6 +16,10 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-e0',
+)]
 class E0_WriteTest extends StreamTestCase
 {
     /**
@@ -22,6 +28,7 @@ class E0_WriteTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canDetermineIfWritable()
     {
         $streamA = $this->makeTextFileStream('r+b');
@@ -37,6 +44,7 @@ class E0_WriteTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canWrite()
     {
         $resource = fopen('php://memory', 'r+b');
@@ -55,6 +63,7 @@ class E0_WriteTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canWriteViaPut()
     {
         $resource = fopen('php://memory', 'r+b');

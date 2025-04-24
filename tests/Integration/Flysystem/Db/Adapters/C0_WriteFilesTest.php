@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use RuntimeException;
 
 /**
@@ -16,6 +18,11 @@ use RuntimeException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-c0'
+)]
 class C0_WriteFilesTest extends FlysystemDbTestCase
 {
     /**
@@ -25,6 +32,7 @@ class C0_WriteFilesTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function canWriteAndReadFile(): void
     {
         $path = 'home/books/october_falls.txt';
@@ -59,6 +67,7 @@ class C0_WriteFilesTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function canDeduplicateContent(): void
     {
         $pathA = 'home/books/october_falls.txt';
@@ -89,6 +98,7 @@ class C0_WriteFilesTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function decreasesReferenceCount(): void
     {
         $pathA = 'home/books/october_falls.txt';
@@ -127,6 +137,7 @@ class C0_WriteFilesTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function cleanupWhenReferenceCountBecomesZero(): void
     {
         $pathA = 'home/books/october_falls.txt';
@@ -163,6 +174,7 @@ class C0_WriteFilesTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function canUpdateFile(): void
     {
         $faker = $this->getFaker();

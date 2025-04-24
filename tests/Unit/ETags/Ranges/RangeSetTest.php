@@ -7,6 +7,8 @@ use Aedart\ETags\Preconditions\Ranges\RangeSet;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Memory\Unit;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * RangeSetTest
@@ -18,6 +20,11 @@ use Aedart\Utils\Memory\Unit;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\ETags\Ranges
  */
+#[Group(
+    'etags',
+    'ranges',
+    'range-set',
+)]
 class RangeSetTest extends UnitTestCase
 {
     /*****************************************************************
@@ -60,6 +67,7 @@ class RangeSetTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateInstance(): void
     {
         $faker = $this->getFaker();
@@ -98,6 +106,7 @@ class RangeSetTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainBytes(): void
     {
         $faker = $this->getFaker();
@@ -144,6 +153,7 @@ class RangeSetTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainContentRangeValue(): void
     {
         $faker = $this->getFaker();

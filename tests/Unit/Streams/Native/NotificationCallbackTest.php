@@ -4,6 +4,8 @@ namespace Aedart\Tests\Unit\Streams\Native;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * NotificationCallbackTest
@@ -14,6 +16,10 @@ use Aedart\Testing\TestCases\UnitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Streams
  */
+#[Group(
+    'streams',
+    'streams-notification',
+)]
 class NotificationCallbackTest extends UnitTestCase
 {
     /**
@@ -21,6 +27,7 @@ class NotificationCallbackTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function notifiesOnStreamChange()
     {
         $hasInvoked = false;

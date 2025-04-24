@@ -7,8 +7,10 @@ use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Support\Helpers\Config\ConfigTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\LaravelTestCase;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
 use Illuminate\Config\Repository;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ConfigLoaderTest
@@ -19,6 +21,10 @@ use Illuminate\Config\Repository;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Config
  */
+#[Group(
+    'config',
+    'config-loader',
+)]
 class ConfigLoaderTest extends LaravelTestCase
 {
     use ConfigLoaderTrait;
@@ -59,6 +65,7 @@ class ConfigLoaderTest extends LaravelTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainInstance()
     {
         $loader = $this->getConfigLoader();
@@ -71,6 +78,7 @@ class ConfigLoaderTest extends LaravelTestCase
      *
      * @throws \Aedart\Contracts\Config\Loaders\Exceptions\InvalidPathException
      */
+    #[Test]
     public function convertsRelativePathsToRealPaths()
     {
         $loader = $this->getConfigLoader();
@@ -86,6 +94,7 @@ class ConfigLoaderTest extends LaravelTestCase
     /**
      * @test
      */
+    #[Test]
     public function canLoadConfigurationFiles()
     {
         $loader = $this->getConfigLoader();

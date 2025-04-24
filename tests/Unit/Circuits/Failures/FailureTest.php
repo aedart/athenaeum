@@ -7,8 +7,10 @@ use Aedart\Contracts\Circuits\Failure;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
 use DateTimeInterface;
 use Illuminate\Support\Facades\Date;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * FailureTest
@@ -19,6 +21,10 @@ use Illuminate\Support\Facades\Date;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Circuits\Failures
  */
+#[Group(
+    'circuits',
+    'circuits-failure',
+)]
 class FailureTest extends UnitTestCase
 {
     /*****************************************************************
@@ -44,6 +50,7 @@ class FailureTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateInstance()
     {
         $failure = $this->makeFailure();
@@ -54,6 +61,7 @@ class FailureTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateWithReasonAndContext()
     {
         $faker = $this->getFaker();
@@ -76,6 +84,7 @@ class FailureTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function hasReportedAtByDefault()
     {
         $failure = $this->makeFailure();
@@ -89,6 +98,7 @@ class FailureTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canExportToArray()
     {
         $faker = $this->getFaker();
@@ -114,6 +124,7 @@ class FailureTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canExportToJson()
     {
         $faker = $this->getFaker();
@@ -136,6 +147,7 @@ class FailureTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canConvertToJson()
     {
         $faker = $this->getFaker();
@@ -158,6 +170,7 @@ class FailureTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCastToString()
     {
         $result = (string) $this->makeFailure();
@@ -169,6 +182,7 @@ class FailureTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSerializeAndUnserialize()
     {
         $faker = $this->getFaker();

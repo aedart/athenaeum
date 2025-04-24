@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Core\Console;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Console\AthenaeumCoreConsoleTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * B0_ExecuteCommandsTest
@@ -15,11 +17,17 @@ use Aedart\Tests\TestCases\Console\AthenaeumCoreConsoleTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Console
  */
+#[Group(
+    'application',
+    'application-console',
+    'application-console-b0',
+)]
 class B0_ExecuteCommandsTest extends AthenaeumCoreConsoleTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function hasRegisteredCommandsFromConfig()
     {
         $console = $this->getArtisan();
@@ -35,6 +43,7 @@ class B0_ExecuteCommandsTest extends AthenaeumCoreConsoleTestCase
     /**
      * @test
      */
+    #[Test]
     public function canExecuteCommand()
     {
         $exitCode = $this

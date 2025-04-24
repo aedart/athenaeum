@@ -3,6 +3,8 @@
 namespace Aedart\Tests\Integration\ETags\Preconditions\Additional;
 
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
 
@@ -16,6 +18,11 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions\Additional
  */
+#[Group(
+    'etags',
+    'preconditions',
+    'additional-preconditions-range'
+)]
 class RangeTest extends PreconditionsTestCase
 {
     /**
@@ -25,6 +32,7 @@ class RangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function mustProcessRangeWhenRequested(): void
     {
         // x. When "Range" is requested, but without "If-Range" header, and "Range" is supported.
@@ -63,6 +71,7 @@ class RangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function mustNotProcessRangeWhenResourceIsEmpty(): void
     {
         // x. When "Range" is requested, but without "If-Range" header, and "Range" is supported.

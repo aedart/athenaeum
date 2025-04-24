@@ -3,6 +3,8 @@
 namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D3_FilesizeTest
@@ -14,6 +16,11 @@ use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-d3'
+)]
 class D3_FilesizeTest extends FlysystemDbTestCase
 {
     /**
@@ -23,6 +30,7 @@ class D3_FilesizeTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function canObtainFileSize(): void
     {
         $path = 'home/books/october_falls.txt';

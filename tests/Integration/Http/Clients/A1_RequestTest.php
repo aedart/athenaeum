@@ -5,6 +5,9 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 use Teapot\StatusCode;
 
@@ -18,6 +21,11 @@ use Teapot\StatusCode;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-a1',
+)]
 class A1_RequestTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -67,6 +75,8 @@ class A1_RequestTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canPerformGetRequest(string $profile)
     {
         $this->assertCanPerformRequest('GET', $profile);
@@ -80,6 +90,8 @@ class A1_RequestTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canPerformHeadRequest(string $profile)
     {
         $this->assertCanPerformRequest('HEAD', $profile);
@@ -93,6 +105,8 @@ class A1_RequestTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canPerformPostRequest(string $profile)
     {
         $this->assertCanPerformRequest('POST', $profile);
@@ -106,6 +120,8 @@ class A1_RequestTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canPerformPutRequest(string $profile)
     {
         $this->assertCanPerformRequest('PUT', $profile);
@@ -119,6 +135,8 @@ class A1_RequestTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canPerformDeleteRequest(string $profile)
     {
         $this->assertCanPerformRequest('DELETE', $profile);
@@ -132,6 +150,8 @@ class A1_RequestTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canPerformOptionsRequest(string $profile)
     {
         $this->assertCanPerformRequest('OPTIONS', $profile);
@@ -145,6 +165,8 @@ class A1_RequestTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canPerformPatchRequest(string $profile)
     {
         $this->assertCanPerformRequest('PATCH', $profile);
@@ -158,6 +180,8 @@ class A1_RequestTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canPerformRealRequest(string $profile)
     {
         // "live" integration test to see if guzzle works

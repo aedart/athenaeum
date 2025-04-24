@@ -9,8 +9,10 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Owner;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\AddressResource;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\OwnerResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * HasManyReferenceTest
@@ -24,6 +26,13 @@ use Illuminate\Support\Facades\Route;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources\Relations
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-relations',
+    'api-resource-relations-references',
+    'api-resource-relation-has-many',
+)]
 class HasManyReferenceTest extends ApiResourcesTestCase
 {
     /**
@@ -86,6 +95,7 @@ class HasManyReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canFormatHasManyReference(): void
     {
         /** @var Address $record */
@@ -143,6 +153,7 @@ class HasManyReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsNullWhenNotRelationNotEagerLoaded(): void
     {
         /** @var Address $record */
@@ -175,6 +186,7 @@ class HasManyReferenceTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsEmptyArrayWhenNoRelatedModelsExist(): void
     {
         /** @var Address $record */

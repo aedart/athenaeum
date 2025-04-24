@@ -12,10 +12,13 @@ use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Streams\FileStream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use GuzzleHttp\Psr7\UploadedFile as PsrUploadedFile;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Mockery;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\StreamInterface as PsrStream;
 use RuntimeException;
 use SplFileInfo;
@@ -30,6 +33,11 @@ use SplFileInfo;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus\Scanners
  */
+#[Group(
+    'antivirus',
+    'antivirus-scanners',
+    'antivirus-scanners-base',
+)]
 class BaseScannerTest extends AntivirusTestCase
 {
     /*****************************************************************
@@ -117,6 +125,8 @@ class BaseScannerTest extends AntivirusTestCase
      * @throws ProfileNotFoundException
      * @throws AntivirusException
      */
+    #[DataProvider('fileFormatsProvider')]
+    #[Test]
     public function canScan(mixed $file): void
     {
         // This test is concerned about the base scanners ability to "wrap"
@@ -140,6 +150,8 @@ class BaseScannerTest extends AntivirusTestCase
      * @throws AntivirusException
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('fileFormatsProvider')]
+    #[Test]
     public function canDetermineIfFileIsClean(mixed $file): void
     {
         // Here we do NOT care about actual clean / infected status, but
@@ -167,6 +179,8 @@ class BaseScannerTest extends AntivirusTestCase
      * @throws AntivirusException
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('invalidFilePathsProvider')]
+    #[Test]
     public function failsWhenUnableToOpenFileStream(mixed $file): void
     {
         // The focus of this test is to ensure that a correct exception
@@ -184,6 +198,7 @@ class BaseScannerTest extends AntivirusTestCase
      * @throws AntivirusException
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function dispatchesFileWasScannedEvent(): void
     {
         Event::fake();

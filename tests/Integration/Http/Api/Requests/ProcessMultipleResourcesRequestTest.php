@@ -6,10 +6,12 @@ use Aedart\Testing\Helpers\Http\Response;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Game;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Games\DeleteMultipleGamesRequest;
 use Aedart\Tests\TestCases\Http\ApiResourceRequestsTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Testing\Fluent\AssertableJson;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ProcessMultipleResourcesRequestTest
@@ -22,6 +24,12 @@ use JsonException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-requests',
+    'process-multiple-resources-request'
+)]
 class ProcessMultipleResourcesRequestTest extends ApiResourceRequestsTestCase
 {
     /**
@@ -46,6 +54,7 @@ class ProcessMultipleResourcesRequestTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function canProcessMultipleResources(): void
     {
         /** @var Collection<Game> $targets */
@@ -91,6 +100,7 @@ class ProcessMultipleResourcesRequestTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function failsWhenNoTargetsRequested(): void
     {
         Route::delete('/games', function (DeleteMultipleGamesRequest $request) {
@@ -119,6 +129,7 @@ class ProcessMultipleResourcesRequestTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function failsWhenTooManyTargetsRequested(): void
     {
         /** @var Collection<Game> $targets */
@@ -158,6 +169,7 @@ class ProcessMultipleResourcesRequestTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function failsWhenNotAllTargetsFound(): void
     {
         /** @var Collection<Game> $targets */

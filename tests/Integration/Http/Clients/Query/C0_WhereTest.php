@@ -6,6 +6,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C0_WhereTest
@@ -18,6 +21,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-c0',
+    'http-query-grammars',
+)]
 class C0_WhereTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -179,6 +188,8 @@ class C0_WhereTest extends HttpClientsTestCase
      * @throws HttpQueryBuilderException
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesWhereFieldEqualsValue')]
+    #[Test]
     public function canAddWhereFieldEqualsValue(string $grammar, string $expected)
     {
         $result = $this
@@ -201,6 +212,8 @@ class C0_WhereTest extends HttpClientsTestCase
      * @throws HttpQueryBuilderException
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesWhereWithOperatorAndValue')]
+    #[Test]
     public function canAddWhereWithOperatorAndValue(string $grammar, string $expected)
     {
         $result = $this
@@ -223,6 +236,8 @@ class C0_WhereTest extends HttpClientsTestCase
      * @throws HttpQueryBuilderException
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesMultipleConditionsOnSameField')]
+    #[Test]
     public function canAddMultipleConditionsOnSameField(string $grammar, string $expected)
     {
         $result = $this
@@ -246,6 +261,8 @@ class C0_WhereTest extends HttpClientsTestCase
      * @throws HttpQueryBuilderException
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesMultipleConditionsViaArray')]
+    #[Test]
     public function canAddMultipleConditionsViaArray(string $grammar, string $expected)
     {
         $result = $this
@@ -274,6 +291,8 @@ class C0_WhereTest extends HttpClientsTestCase
      * @throws HttpQueryBuilderException
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesWhereWithArrayValue')]
+    #[Test]
     public function canAddWhereWithArrayValue(string $grammar, string $expected)
     {
         $result = $this
@@ -296,6 +315,8 @@ class C0_WhereTest extends HttpClientsTestCase
      * @throws HttpQueryBuilderException
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesWhereWithOperatorAndArrayValue')]
+    #[Test]
     public function canAddWhereWithOperatorAndArrayValue(string $grammar, string $expected)
     {
         $result = $this

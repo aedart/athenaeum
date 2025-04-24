@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\ETags\Preconditions\Rfc9110;
 use Aedart\ETags\Facades\Generator;
 use Aedart\ETags\Preconditions\Validators\Exceptions\RangeNotSatisfiable;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
@@ -19,6 +21,11 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions\Rfc9110
  */
+#[Group(
+    'etags',
+    'preconditions',
+    'rfc9110-if-range'
+)]
 class IfRangeTest extends PreconditionsTestCase
 {
     /**
@@ -28,6 +35,7 @@ class IfRangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function mustProcessRangeWhenIfRangeEtagMatches(): void
     {
         // [...] If the entity-tag validator provided exactly matches the ETag field value for the
@@ -68,6 +76,7 @@ class IfRangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function mustIgnoreRangeWhenIfRangeEtagDoesNotMatch(): void
     {
         // [...] If the entity-tag validator provided exactly matches the ETag field value for the
@@ -106,6 +115,7 @@ class IfRangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function mustProcessRangeWhenIfRangeDateMatches(): void
     {
         // [...] If the HTTP-date validator provided exactly matches the Last-Modified field value for
@@ -146,6 +156,7 @@ class IfRangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function mustIgnoreRangeWhenIfRangeDateDoesNotMatch(): void
     {
         // [...] If the HTTP-date validator provided exactly matches the Last-Modified field value for
@@ -184,6 +195,7 @@ class IfRangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function ignoreRangesWhenNoRangeFieldRequest(): void
     {
         $etag = Generator::makeStrong('abc');
@@ -219,6 +231,7 @@ class IfRangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function respondsBadRequestWhenUnsupportedRangeSpecifiedRequested(): void
     {
         // [...] A server that supports range requests MAY ignore or reject a Range header
@@ -258,6 +271,7 @@ class IfRangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function respondsBadRequestWhenInvalidRangeFormatRequested(): void
     {
         // [...] A server that supports range requests MAY ignore or reject a Range header
@@ -294,6 +308,7 @@ class IfRangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function respondsNotSatisfiableWhenTooManyRangesRequested(): void
     {
         // [...] either the range-unit is not supported for that target resource or the ranges-specifier
@@ -334,6 +349,7 @@ class IfRangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function respondsNotSatisfiableWhenRangesOverlap(): void
     {
         // [...] either the range-unit is not supported for that target resource or the ranges-specifier
@@ -377,6 +393,7 @@ class IfRangeTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function respondsNotSatisfiableWhenRequestedRangeIsOutOfBounds(): void
     {
         // [...] either the range-unit is not supported for that target resource or the ranges-specifier

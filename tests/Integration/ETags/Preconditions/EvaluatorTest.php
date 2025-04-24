@@ -8,8 +8,10 @@ use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Preconditions\BasePrecondition;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
+use Codeception\Attribute\Group;
 use InvalidArgumentException;
 use LogicException;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
 
@@ -23,6 +25,11 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions
  */
+#[Group(
+    'etags',
+    'preconditions',
+    'preconditions-evaluator'
+)]
 class EvaluatorTest extends PreconditionsTestCase
 {
     /**
@@ -30,6 +37,7 @@ class EvaluatorTest extends PreconditionsTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainInstance(): void
     {
         $evaluator = $this->makeEvaluator($this->createRequest());
@@ -42,6 +50,7 @@ class EvaluatorTest extends PreconditionsTestCase
      *
      * @return void
      */
+    #[Test]
     public function hasDefaultPreconditions(): void
     {
         $evaluator = $this->makeEvaluator($this->createRequest());
@@ -55,6 +64,7 @@ class EvaluatorTest extends PreconditionsTestCase
      *
      * @return void
      */
+    #[Test]
     public function hasDefaultActions(): void
     {
         $evaluator = $this->makeEvaluator($this->createRequest());
@@ -71,6 +81,7 @@ class EvaluatorTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function ignoresRequestWhenMethodNotSupported(): void
     {
         $precondition = new class() extends BasePrecondition {
@@ -124,6 +135,7 @@ class EvaluatorTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function doesNothingWhenNoPreconditions(): void
     {
         $evaluator = $this->makeEvaluator($this->createRequest());
@@ -145,6 +157,7 @@ class EvaluatorTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function returnsResourceContextWhenPreconditionsPasses(): void
     {
         $precondition = new class() extends BasePrecondition {
@@ -192,6 +205,7 @@ class EvaluatorTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function skipsPreconditionsWhenNotApplicable(): void
     {
         $precondition = function (string|null $name) {
@@ -261,6 +275,7 @@ class EvaluatorTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function canGoToAnotherPrecondition(): void
     {
         // The last precondition...
@@ -371,6 +386,7 @@ class EvaluatorTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function failsWhenIndexOfPreconditionNotFound(): void
     {
         $this->expectException(LogicException::class);
@@ -416,6 +432,7 @@ class EvaluatorTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function failsWhenNextPreconditionIsRankedLowerThanCurrent(): void
     {
         $this->expectException(LogicException::class);
@@ -499,6 +516,7 @@ class EvaluatorTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function proceedsToNextPreconditionWhenEvaluatedToNull(): void
     {
         $precondition = function (string|null $name) {

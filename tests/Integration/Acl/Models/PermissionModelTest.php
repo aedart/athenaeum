@@ -6,6 +6,8 @@ use Aedart\Acl\Models\Permission;
 use Aedart\Acl\Models\Permissions\Group;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Acl\AclTestCase;
+use Codeception\Attribute\Group as TestGroup;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * PermissionModelTest
@@ -18,11 +20,18 @@ use Aedart\Tests\TestCases\Acl\AclTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Acl\Models
  */
+#[TestGroup(
+    'acl',
+    'acl-models',
+    'acl-permission',
+    'acl-permission-model'
+)]
 class PermissionModelTest extends AclTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canCreateAndObtain()
     {
         /** @var Group $group */
@@ -58,6 +67,7 @@ class PermissionModelTest extends AclTestCase
     /**
      * @test
      */
+    #[Test]
     public function canEagerLoadGroup()
     {
         /** @var Group $group */

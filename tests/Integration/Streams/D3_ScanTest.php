@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Streams;
 use Aedart\Streams\Stream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D3_ScanTest
@@ -15,6 +17,10 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-d3',
+)]
 class D3_ScanTest extends StreamTestCase
 {
     /**
@@ -23,6 +29,7 @@ class D3_ScanTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canScanAccordingToFormat()
     {
         $content = "aa-\nbb-\ncc-\n";
@@ -48,6 +55,7 @@ class D3_ScanTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canReadAllUsingFormat()
     {
         $content = "aa||\nbb||\ncc||\n";

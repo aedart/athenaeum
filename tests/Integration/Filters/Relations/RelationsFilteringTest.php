@@ -9,6 +9,8 @@ use Aedart\Filters\Query\Filters\SortFilter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * RelationsFilteringTest
@@ -19,6 +21,10 @@ use Aedart\Tests\TestCases\Filters\FiltersTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Relations
  */
+#[Group(
+    'filters',
+    'filters-relations-filtering',
+)]
 class RelationsFilteringTest extends FiltersTestCase
 {
     /**
@@ -28,6 +34,7 @@ class RelationsFilteringTest extends FiltersTestCase
      *
      * @throws CriteriaException
      */
+    #[Test]
     public function canApplyLogicalOrConstraints(): void
     {
         $filters = [

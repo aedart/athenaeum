@@ -6,6 +6,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * B0_SelectTest
@@ -18,6 +21,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-b0',
+    'http-query-grammars',
+)]
 class B0_SelectTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -130,6 +139,8 @@ class B0_SelectTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesSingleFieldData')]
+    #[Test]
     public function canSelectSingleField(string $grammar, string $expected)
     {
         $result = $this
@@ -152,6 +163,8 @@ class B0_SelectTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesSingleFieldFromResourceData')]
+    #[Test]
     public function canSelectSingleFieldFromResource(string $grammar, string $expected)
     {
         $result = $this
@@ -174,6 +187,8 @@ class B0_SelectTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesMultipleFieldsData')]
+    #[Test]
     public function canSelectMultipleFields(string $grammar, string $expected)
     {
         $result = $this
@@ -196,6 +211,8 @@ class B0_SelectTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesMultipleFieldsFromResourcesData')]
+    #[Test]
     public function canSelectMultipleFieldsFromResources(string $grammar, string $expected)
     {
         $result = $this

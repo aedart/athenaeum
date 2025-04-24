@@ -4,7 +4,9 @@ namespace Aedart\Tests\Integration\Maintenance\Modes;
 
 use Aedart\Maintenance\Modes\Drivers\ArrayBasedMode;
 use Aedart\Tests\TestCases\Maintenance\Modes\MaintenanceModesTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Foundation\MaintenanceMode;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * FallbackManagerTest
@@ -15,6 +17,10 @@ use Illuminate\Contracts\Foundation\MaintenanceMode;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Maintenance\Modes
  */
+#[Group(
+    'maintenance-modes',
+    'maintenance-modes-manager',
+)]
 class FallbackManagerTest extends MaintenanceModesTestCase
 {
     /**
@@ -24,6 +30,7 @@ class FallbackManagerTest extends MaintenanceModesTestCase
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
+    #[Test]
     public function canObtainInstance()
     {
         $manager = $this->createFallbackManager();
@@ -38,6 +45,7 @@ class FallbackManagerTest extends MaintenanceModesTestCase
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
+    #[Test]
     public function returnsDefaultDriver()
     {
         $manager = $this->createFallbackManager();
@@ -54,6 +62,7 @@ class FallbackManagerTest extends MaintenanceModesTestCase
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
+    #[Test]
     public function canObtainSpecificDriver()
     {
         $manager = $this->createFallbackManager();

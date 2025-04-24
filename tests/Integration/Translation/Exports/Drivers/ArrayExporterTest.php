@@ -8,6 +8,8 @@ use Aedart\Contracts\Translation\Exports\Exporter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Translation\TranslationTestCase;
 use Aedart\Translation\Exports\Drivers\ArrayExporter;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ArrayExporterTest
@@ -20,6 +22,12 @@ use Aedart\Translation\Exports\Drivers\ArrayExporter;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Translation\Exports\Drivers
  */
+#[Group(
+    'translations',
+    'translations-exporter',
+    'translations-exporter-drivers',
+    'translations-exporter-drivers-array',
+)]
 class ArrayExporterTest extends TranslationTestCase
 {
     /*****************************************************************
@@ -51,6 +59,7 @@ class ArrayExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canObtainExporter(): void
     {
         $exporter = $this->exporter();
@@ -66,6 +75,7 @@ class ArrayExporterTest extends TranslationTestCase
      * @throws ProfileNotFoundException
      * @throws ExporterException
      */
+    #[Test]
     public function canExport(): void
     {
         $translations = $this->exporter()->export();
@@ -118,6 +128,7 @@ class ArrayExporterTest extends TranslationTestCase
      * @throws ExporterException
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canExportSpecificLocaleAndGroups(): void
     {
         $translations = $this->exporter()->export(
@@ -156,6 +167,7 @@ class ArrayExporterTest extends TranslationTestCase
      * @throws ExporterException
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canExportTranslationsFromNamespacesAndJsonPaths(): void
     {
         // NOTE: deferrable namespace is registered in test configuration

@@ -6,8 +6,10 @@ use Aedart\Http\Api\Requests\Concerns\RecordExistence;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Game;
 use Aedart\Tests\TestCases\Http\ApiResourceRequestsTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * RecordExistenceConcernTest
@@ -20,6 +22,12 @@ use Illuminate\Validation\ValidationException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests\Concerns
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-request-concerns',
+    'record-existence'
+)]
 class RecordExistenceConcernTest extends ApiResourceRequestsTestCase
 {
     /*****************************************************************
@@ -47,6 +55,7 @@ class RecordExistenceConcernTest extends ApiResourceRequestsTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsCollectionWhenAllRecordsFound(): void
     {
         /** @var Collection<Game> $found */
@@ -73,6 +82,7 @@ class RecordExistenceConcernTest extends ApiResourceRequestsTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnAllFoundWhenNothingRequested(): void
     {
         /** @var Collection<Game> $found */
@@ -97,6 +107,7 @@ class RecordExistenceConcernTest extends ApiResourceRequestsTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenNotAllRecordsFound(): void
     {
         /** @var Collection<Game> $found */

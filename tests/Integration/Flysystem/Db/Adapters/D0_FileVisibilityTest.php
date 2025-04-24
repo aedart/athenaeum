@@ -4,8 +4,10 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Adapters;
 
 use Aedart\Contracts\Flysystem\Visibility;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use Codeception\Attribute\Group;
 use League\Flysystem\Config;
 use League\Flysystem\InvalidVisibilityProvided;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D0_FileVisibilityTest
@@ -17,6 +19,11 @@ use League\Flysystem\InvalidVisibilityProvided;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-d0'
+)]
 class D0_FileVisibilityTest extends FlysystemDbTestCase
 {
     /**
@@ -26,6 +33,7 @@ class D0_FileVisibilityTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function failsSettingVisibilityWhenValueNotSupported(): void
     {
         $this->expectException(InvalidVisibilityProvided::class);
@@ -48,6 +56,7 @@ class D0_FileVisibilityTest extends FlysystemDbTestCase
      *
      * @throws \League\Flysystem\FilesystemException
      */
+    #[Test]
     public function canSetVisibilityForFile(): void
     {
         $path = 'home/books/october_falls.txt';

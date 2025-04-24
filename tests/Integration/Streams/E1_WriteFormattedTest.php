@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Streams;
 use Aedart\Streams\Stream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E1_WriteFormattedTest
@@ -15,6 +17,10 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-e1',
+)]
 class E1_WriteFormattedTest extends StreamTestCase
 {
     /**
@@ -23,6 +29,7 @@ class E1_WriteFormattedTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canWriteFormatted()
     {
         $resource = fopen('php://memory', 'r+b');
@@ -54,6 +61,7 @@ class E1_WriteFormattedTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canWriteFormattedViaPutFormatted()
     {
         $resource = fopen('php://memory', 'r+b');

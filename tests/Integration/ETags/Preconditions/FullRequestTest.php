@@ -6,7 +6,9 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\ETags\Requests\ShowUserRequest;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode\All as HttpStatus;
 
 /**
@@ -19,6 +21,11 @@ use Teapot\StatusCode\All as HttpStatus;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions
  */
+#[Group(
+    'etags',
+    'preconditions',
+    'preconditions-full-request'
+)]
 class FullRequestTest extends PreconditionsTestCase
 {
     /**
@@ -26,6 +33,7 @@ class FullRequestTest extends PreconditionsTestCase
      *
      * @return void
      */
+    #[Test]
     public function canEvaluateAndProcessRequest(): void
     {
         Route::get('/user/{id}', function (ShowUserRequest $request) {

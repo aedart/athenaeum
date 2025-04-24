@@ -4,6 +4,9 @@ namespace Aedart\Tests\Unit\Service\Traits;
 
 use Aedart\Service\Traits\ServiceProviderRegistrarTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ServiceTraitsTest
@@ -15,6 +18,11 @@ use Aedart\Tests\TestCases\TraitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Service\Traits
  */
+#[Group(
+    'service',
+    'service-registrar',
+    'traits'
+)]
 class ServiceTraitsTest extends TraitTestCase
 {
     /**
@@ -39,6 +47,8 @@ class ServiceTraitsTest extends TraitTestCase
      *
      * @throws \ReflectionException
      */
+    #[DataProvider('awareOfComponentsProvider')]
+    #[Test]
     public function canInvokeAwareOfMethods(string $awareOfTrait)
     {
         $this->assertTraitMethods($awareOfTrait, null, null);

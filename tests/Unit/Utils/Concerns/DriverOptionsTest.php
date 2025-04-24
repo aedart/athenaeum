@@ -5,6 +5,8 @@ namespace Aedart\Tests\Unit\Utils\Concerns;
 use Aedart\Contracts\Utils\HasDriverOptions;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Concerns\DriverOptions;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DriverOptionsTest
@@ -15,6 +17,10 @@ use Aedart\Utils\Concerns\DriverOptions;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Concerns
  */
+#[Group(
+    'utils',
+    'driver-options',
+)]
 class DriverOptionsTest extends UnitTestCase
 {
     /*****************************************************************
@@ -51,6 +57,7 @@ class DriverOptionsTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canSetAndObtainOptions(): void
     {
         $options = [
@@ -71,6 +78,7 @@ class DriverOptionsTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canSetAndObtainValue(): void
     {
         $driver = $this->makeDriver();
@@ -94,6 +102,7 @@ class DriverOptionsTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canReturnsDefaultValue(): void
     {
         $driver = $this->makeDriver();

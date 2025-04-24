@@ -9,6 +9,8 @@ use Aedart\Contracts\Antivirus\Results\Status;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Container\ContainerExceptionInterface;
 
 /**
@@ -20,6 +22,10 @@ use Psr\Container\ContainerExceptionInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus
  */
+#[Group(
+    'antivirus',
+    'antivirus-scan-result',
+)]
 class ScanResultTest extends AntivirusTestCase
 {
     /*****************************************************************
@@ -55,6 +61,7 @@ class ScanResultTest extends AntivirusTestCase
      * @return void
      * @throws UnsupportedStatusValueException
      */
+    #[Test]
     public function canMakeScanResult(): void
     {
         $status = $this->makeScanStatus();
@@ -91,6 +98,7 @@ class ScanResultTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenStatusNotProvided(): void
     {
         $this->expectException(ContainerExceptionInterface::class);
@@ -111,6 +119,7 @@ class ScanResultTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenInvalidStatusProvided(): void
     {
         $this->expectException(ContainerExceptionInterface::class);
@@ -133,6 +142,7 @@ class ScanResultTest extends AntivirusTestCase
      * @return void
      * @throws UnsupportedStatusValueException
      */
+    #[Test]
     public function failsWhenFilepathNotProvided(): void
     {
         $this->expectException(ContainerExceptionInterface::class);
@@ -157,6 +167,7 @@ class ScanResultTest extends AntivirusTestCase
      * @return void
      * @throws UnsupportedStatusValueException
      */
+    #[Test]
     public function failsWhenFilesizeNotProvided(): void
     {
         $this->expectException(ContainerExceptionInterface::class);

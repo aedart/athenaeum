@@ -8,7 +8,9 @@ use Aedart\Contracts\Circuits\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Circuits\Exceptions\ServiceUnavailableException;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Tests\TestCases\Circuits\CircuitBreakerTestCase;
+use Codeception\Attribute\Group;
 use LogicException;
+use PHPUnit\Framework\Attributes\Test;
 use RuntimeException;
 
 /**
@@ -21,6 +23,11 @@ use RuntimeException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Circuits
  */
+#[Group(
+    'circuits',
+    'circuit-breaker',
+    'circuit-breaker-instance',
+)]
 class CircuitBreakerTest extends CircuitBreakerTestCase
 {
     /**
@@ -28,6 +35,7 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function returnsServiceName()
     {
         $service = 'my_service';
@@ -42,6 +50,7 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
+    #[Test]
     public function invokesCallback()
     {
         $callback = fn () => true;
@@ -59,6 +68,7 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
+    #[Test]
     public function failsWhenServiceIsUnavailable()
     {
         $this->expectException(ServiceUnavailableException::class);
@@ -77,6 +87,7 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
+    #[Test]
     public function invokesOtherwiseCallbackWhenServiceUnavailable()
     {
         $callback = function () {
@@ -97,6 +108,7 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
+    #[Test]
     public function tripsWhenFailureThresholdReached()
     {
         $amount = 0;
@@ -129,6 +141,7 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
+    #[Test]
     public function invokesOtherwiseCallbackWhenTripped()
     {
         $amount = 0;
@@ -154,6 +167,7 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
+    #[Test]
     public function invokesDefaultOtherwiseCallbackWhenServiceUnavailable()
     {
         $amount = 0;
@@ -181,6 +195,7 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      * @throws ServiceUnavailableException
      * @throws UnknownStateException
      */
+    #[Test]
     public function failsFastWhenStateIsOpen()
     {
         $callback = function () {
@@ -205,6 +220,7 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
+    #[Test]
     public function attemptsCallbackWhenGracePeriodHasPast()
     {
         $circuitBreaker = $this->makeCircuitBreaker('my_service')

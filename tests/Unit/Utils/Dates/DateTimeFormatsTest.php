@@ -5,7 +5,10 @@ namespace Aedart\Tests\Unit\Utils\Dates;
 use Aedart\Contracts\Utils\Dates\DateTimeFormats;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Carbon;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DateTimeFormatsTest
@@ -17,6 +20,11 @@ use Illuminate\Support\Carbon;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Dates
  */
+#[Group(
+    'utils',
+    'date',
+    'datetime-formats',
+)]
 class DateTimeFormatsTest extends UnitTestCase
 {
     public function formatsProvider(): array
@@ -79,6 +87,8 @@ class DateTimeFormatsTest extends UnitTestCase
      *
      * @return void
      */
+    #[DataProvider('formatsProvider')]
+    #[Test]
     public function canCreateFromFormat(string $format, string $dateStr): void
     {
         // a) Determine if date string has specified format

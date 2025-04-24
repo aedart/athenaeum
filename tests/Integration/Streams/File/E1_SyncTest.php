@@ -6,6 +6,8 @@ use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Streams\FileStream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * J0_SyncTest
@@ -16,6 +18,11 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-e1',
+)]
 class E1_SyncTest extends StreamTestCase
 {
     /**
@@ -54,6 +61,7 @@ class E1_SyncTest extends StreamTestCase
      * @return void
      * @throws StreamException
      */
+    #[Test]
     public function canSyncChangesToFile(): void
     {
         $faker = $this->getFaker();

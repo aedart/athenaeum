@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Streams;
 use Aedart\Streams\Stream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D2_ReadLinesTest
@@ -15,6 +17,10 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-d2',
+)]
 class D2_ReadLinesTest extends StreamTestCase
 {
     /**
@@ -23,6 +29,7 @@ class D2_ReadLinesTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canReadSingleLine()
     {
         $content = "a\nb\nc\n";
@@ -48,6 +55,7 @@ class D2_ReadLinesTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canReadSingleLineWithLengthLimitation()
     {
         $content = "aaa\nbbb\nccc\n";
@@ -73,6 +81,7 @@ class D2_ReadLinesTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canReadAllLines()
     {
         $content = "a\nb\nc\n";
@@ -100,6 +109,7 @@ class D2_ReadLinesTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canIterateThroughStreamLines()
     {
         $content = "a\nb\nc\n";
@@ -126,6 +136,7 @@ class D2_ReadLinesTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canReadSingleLineUntilDelimiter()
     {
         $content = "a;b;c;";
@@ -153,6 +164,7 @@ class D2_ReadLinesTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canReadAllLinesUntilDelimiter()
     {
         $content = "aa||bb||cc";

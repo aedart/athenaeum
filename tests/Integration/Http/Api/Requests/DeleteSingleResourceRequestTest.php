@@ -8,8 +8,10 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Game;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Games\DeleteGameRequest;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\GameResource;
 use Aedart\Tests\TestCases\Http\ApiResourceRequestsTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Facades\Route;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DeleteSingleResourceRequestTest
@@ -22,6 +24,12 @@ use JsonException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-requests',
+    'delete-single-resource-request'
+)]
 class DeleteSingleResourceRequestTest extends ApiResourceRequestsTestCase
 {
     /**
@@ -46,6 +54,7 @@ class DeleteSingleResourceRequestTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function canDeleteResource(): void
     {
         /** @var Game $expected */
@@ -89,6 +98,7 @@ class DeleteSingleResourceRequestTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException|ETagGeneratorException
      */
+    #[Test]
     public function evaluatesRequestPrecondition(): void
     {
         /** @var Game $expected */

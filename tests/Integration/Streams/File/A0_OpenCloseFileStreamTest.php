@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Streams\File;
 use Aedart\Streams\Exceptions\CannotOpenStream;
 use Aedart\Streams\FileStream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * A0_OpenCloseFileStreamTest
@@ -15,6 +17,11 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-a0',
+)]
 class A0_OpenCloseFileStreamTest extends StreamTestCase
 {
     /**
@@ -23,6 +30,7 @@ class A0_OpenCloseFileStreamTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canOpenMemoryStream()
     {
         $stream = FileStream::openMemory();
@@ -37,6 +45,7 @@ class A0_OpenCloseFileStreamTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canOpenTempStream()
     {
         $stream = FileStream::openTemporary();
@@ -51,6 +60,7 @@ class A0_OpenCloseFileStreamTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canOpenFileStream()
     {
         $path = $this->filePath('text.txt');
@@ -66,6 +76,7 @@ class A0_OpenCloseFileStreamTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function failsWhenFileCannotBeOpened()
     {
         $this->expectException(CannotOpenStream::class);

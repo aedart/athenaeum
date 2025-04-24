@@ -7,6 +7,8 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Dto\Person;
 use Aedart\Tests\TestCases\Dto\DtoTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DtoTest
@@ -16,11 +18,15 @@ use Aedart\Utils\Json;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Dto
  */
+#[Group(
+    'dto',
+)]
 class DtoTest extends DtoTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canCreateInstance()
     {
         $dto = $this->makeDto();
@@ -31,6 +37,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateInstanceWithProperties()
     {
         $data = [
@@ -47,6 +54,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineIfExists()
     {
         $data = [
@@ -64,6 +72,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canGetAndSetProperty()
     {
         $name = $this->faker->name();
@@ -80,6 +89,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsReadingWhenPropertyDoesNotExist()
     {
         $this->expectException(UndefinedProperty::class);
@@ -91,6 +101,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsWritingWhenPropertyDoesNotExist()
     {
         $this->expectException(UndefinedProperty::class);
@@ -102,6 +113,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canUnsetProperty()
     {
         $data = [
@@ -118,6 +130,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canBeJsonSerialised()
     {
         $data = [
@@ -135,6 +148,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canBeExportedToJson()
     {
         $data = [
@@ -152,6 +166,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canBeSerialisedAndUnserialised()
     {
         $data = [
@@ -174,6 +189,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canBeRepresentedAsString()
     {
         $data = [
@@ -191,6 +207,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateInstanceFromJson()
     {
         $json = '{"name":"Stacy Douglas","age":67571179}';
@@ -204,6 +221,7 @@ class DtoTest extends DtoTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainDebugInfo()
     {
         $data = [

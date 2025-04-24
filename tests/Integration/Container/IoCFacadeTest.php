@@ -6,21 +6,32 @@ namespace Aedart\Tests\Integration\Container;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Testing\TestCases\IntegrationTestCase;
 use Aedart\Tests\Helpers\Dummies\Box;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * IoCFacadeTest
  *
  * @group ioc
  * @group container
+ * @group ioc-facade
+ * @group facades
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Container
  */
+#[Group(
+    'ioc',
+    'container',
+    'ioc-facade',
+    'facades'
+)]
 class IoCFacadeTest extends IntegrationTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canResolveBinding()
     {
         $abstract = 'my_binding';
@@ -36,6 +47,7 @@ class IoCFacadeTest extends IntegrationTestCase
     /**
      * @test
      */
+    #[Test]
     public function returnsDefaultWhenBindingDoesNotExist()
     {
         $abstract = 'my_binding';
@@ -49,6 +61,7 @@ class IoCFacadeTest extends IntegrationTestCase
     /**
      * @test
      */
+    #[Test]
     public function resolvesCallbackValueAsDefault()
     {
         $abstract = 'my_binding';

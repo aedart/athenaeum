@@ -11,7 +11,10 @@ use Aedart\Redmine\IssuePriority;
 use Aedart\Redmine\RedmineApiResource;
 use Aedart\Redmine\TimeEntryActivity;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -27,6 +30,14 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
+#[Group(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-enum',
+    'redmine-resources-issue-priority',
+    'redmine-resources-time-entry-activity',
+    'redmine-resources-doc-category',
+)]
 class EnumerationResourcesTest extends RedmineTestCase
 {
     /*****************************************************************
@@ -55,7 +66,7 @@ class EnumerationResourcesTest extends RedmineTestCase
      * @test
      * @dataProvider providesEnumerationResources
      *
-     * @param string|Enumeration $enumerationResource Class path
+     * @param class-string<Enumeration> $enumerationResource Class path
      *
      * @throws JsonException
      * @throws ErrorResponseException
@@ -63,6 +74,8 @@ class EnumerationResourcesTest extends RedmineTestCase
      * @throws UnsupportedOperationException
      * @throws Throwable
      */
+    #[DataProvider('providesEnumerationResources')]
+    #[Test]
     public function canListEnumeration(string $enumerationResource)
     {
         // Debug

@@ -8,6 +8,8 @@ use Aedart\Streams\Stream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
 use Aedart\Utils\Arr;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * X2_MetaTest
@@ -18,6 +20,10 @@ use Aedart\Utils\Arr;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-x2',
+)]
 class X2_MetaTest extends StreamTestCase
 {
     /**
@@ -26,6 +32,7 @@ class X2_MetaTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canResolveNullMeta()
     {
         $resource = fopen('php://memory', 'rb');
@@ -42,6 +49,7 @@ class X2_MetaTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canResolveMetaFromArray()
     {
         $meta = [
@@ -64,6 +72,7 @@ class X2_MetaTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canResolveMetaFromMetaRepository()
     {
         $meta = new DefaultMetaRepository([
@@ -86,6 +95,7 @@ class X2_MetaTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function mergesRawMetaIntoRepository()
     {
         $resource = fopen('php://memory', 'rb');
@@ -108,6 +118,7 @@ class X2_MetaTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canSetMetaDataDirectly()
     {
         $resource = fopen('php://memory', 'rb');
@@ -124,6 +135,7 @@ class X2_MetaTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canObtainRawMeta()
     {
         $resource = fopen('php://memory', 'rb');

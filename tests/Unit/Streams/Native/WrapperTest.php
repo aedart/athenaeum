@@ -4,6 +4,8 @@ namespace Aedart\Tests\Unit\Streams\Native;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * WrapperTest
@@ -14,6 +16,10 @@ use Aedart\Testing\TestCases\UnitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Streams
  */
+#[Group(
+    'streams',
+    'streams-wrapper',
+)]
 class WrapperTest extends UnitTestCase
 {
     /*****************************************************************
@@ -125,6 +131,7 @@ class WrapperTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canWrapStream()
     {
         $wrapper = $this->defineDecorator();

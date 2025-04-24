@@ -6,6 +6,10 @@ use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
 use Aedart\Redmine\Project;
 use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 /**
  * BelongsToRelationTest
@@ -17,15 +21,21 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Relations
  */
+#[Group(
+    'redmine',
+    'redmine-relations',
+    'redmine-relations-belongs-to',
+)]
 class BelongsToRelationTest extends RedmineTestCase
 {
     /**
      * @test
      *
      * @throws ErrorResponseException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canObtainRelatedResource()
     {
         // The easiest way to ensure that belongs to relation works as intended,

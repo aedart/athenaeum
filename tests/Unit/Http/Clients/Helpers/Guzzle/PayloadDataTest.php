@@ -5,7 +5,9 @@ namespace Aedart\Tests\Unit\Http\Clients\Helpers\Guzzle;
 use Aedart\Http\Clients\Requests\Builders\Guzzle\PayloadData;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
 use GuzzleHttp\RequestOptions;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DataExtractorTest
@@ -17,11 +19,17 @@ use GuzzleHttp\RequestOptions;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Clients\Helpers\Guzzle
  */
+#[Group(
+    'http-clients',
+    'guzzle',
+    'guzzle-payload-data',
+)]
 class PayloadDataTest extends UnitTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canExtractDataFromOptions()
     {
         $options = [
@@ -53,6 +61,7 @@ class PayloadDataTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function extractsOnlyRawBodyIfStated()
     {
         $options = [

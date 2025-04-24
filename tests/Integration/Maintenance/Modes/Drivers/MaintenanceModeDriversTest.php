@@ -5,7 +5,10 @@ namespace Aedart\Tests\Integration\Maintenance\Modes\Drivers;
 use Aedart\Maintenance\Modes\Drivers\ArrayBasedMode;
 use Aedart\Maintenance\Modes\Drivers\JsonFileBasedMode;
 use Aedart\Tests\TestCases\Maintenance\Modes\MaintenanceModesTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Foundation\MaintenanceMode;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * MaintenanceModeDriversTest
@@ -16,6 +19,10 @@ use Illuminate\Contracts\Foundation\MaintenanceMode;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Maintenance\Modes\Drivers
  */
+#[Group(
+    'maintenance-modes',
+    'maintenance-modes-drivers',
+)]
 class MaintenanceModeDriversTest extends MaintenanceModesTestCase
 {
     /*****************************************************************
@@ -47,6 +54,8 @@ class MaintenanceModeDriversTest extends MaintenanceModesTestCase
      *
      * @return void
      */
+    #[DataProvider('providesDrivers')]
+    #[Test]
     public function canActiveAndDeactivate(MaintenanceMode $driver)
     {
         $driver->activate([]);
@@ -64,6 +73,8 @@ class MaintenanceModeDriversTest extends MaintenanceModesTestCase
      *
      * @return void
      */
+    #[DataProvider('providesDrivers')]
+    #[Test]
     public function canActiveWithPayload(MaintenanceMode $driver)
     {
         $payload = [

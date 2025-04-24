@@ -7,6 +7,8 @@ use Aedart\Contracts\Streams\FileStream;
 use Aedart\Contracts\Streams\Transactions\Transaction;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use RuntimeException;
 
 /**
@@ -20,6 +22,12 @@ use RuntimeException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File\Transactions\Drivers
  */
+#[Group(
+    'streams',
+    'stream-transaction',
+    'stream-transaction-drivers',
+    'stream-transaction-driver-cwr',
+)]
 class CopyWriteReplaceDriverTest extends StreamTestCase
 {
     /**
@@ -74,6 +82,7 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
      * @throws \Aedart\Contracts\Streams\Exceptions\TransactionException
      * @throws \Codeception\Exception\ConfigurationException
      */
+    #[Test]
     public function canProcessOperationWithinTransaction()
     {
         $stream = $this->openFileStreamForTransaction('text.txt');
@@ -104,6 +113,7 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
      * @throws \Codeception\Exception\ConfigurationException
      * @throws \Throwable
      */
+    #[Test]
     public function takesBackupOfOriginalStream()
     {
         // NOTE: Test profile has backup enabled!
@@ -139,6 +149,7 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
      * @throws \Codeception\Exception\ConfigurationException
      * @throws \Throwable
      */
+    #[Test]
     public function canRemoveBackupAfterCompletion()
     {
         $stream = $this->openFileStreamForTransaction('text.txt');
@@ -174,6 +185,7 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
      * @throws \Codeception\Exception\ConfigurationException
      * @throws \Throwable
      */
+    #[Test]
     public function canRecoverOriginalContentOnFailure()
     {
         $stream = $this->openFileStreamForTransaction('text.txt');
@@ -208,6 +220,7 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
      * @throws \Codeception\Exception\ConfigurationException
      * @throws \Throwable
      */
+    #[Test]
     public function ableToPerformMultipleProcessAttempts()
     {
         $stream = $this->openFileStreamForTransaction('text.txt');

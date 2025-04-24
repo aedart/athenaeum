@@ -7,6 +7,7 @@ use Aedart\Contracts\Antivirus\Events\FileWasScanned;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\Helpers\Http\Response;
 use Aedart\Tests\TestCases\Antivirus\AntivirusTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Testing\Fluent\AssertableJson;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use SplFileInfo;
 
 /**
@@ -25,6 +27,10 @@ use SplFileInfo;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus\Validation\Rules
  */
+#[Group(
+    'antivirus',
+    'antivirus-validation',
+)]
 class InfectionFreeFileRuleTest extends AntivirusTestCase
 {
     /**
@@ -97,6 +103,7 @@ class InfectionFreeFileRuleTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function passesCleanFile(): void
     {
         Route::post('/files', function (Request $request) {
@@ -136,6 +143,7 @@ class InfectionFreeFileRuleTest extends AntivirusTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function failsInfectedFile(): void
     {
         Route::post('/files', function (Request $request) {
@@ -181,6 +189,7 @@ class InfectionFreeFileRuleTest extends AntivirusTestCase
      *
      * @return void
      */
+    #[Test]
     public function canApplyRuleOnMultipleFiles(): void
     {
         Route::post('/files', function (Request $request) {
@@ -231,6 +240,7 @@ class InfectionFreeFileRuleTest extends AntivirusTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function failsWhenInvalidFilePathGiven(): void
     {
         Route::post('/files', function (Request $request) {

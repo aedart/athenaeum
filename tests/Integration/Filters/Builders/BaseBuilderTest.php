@@ -6,7 +6,9 @@ use Aedart\Contracts\Filters\BuiltFiltersMap;
 use Aedart\Tests\Helpers\Dummies\Filters\Processors\InvalidParamFailProcessor;
 use Aedart\Tests\Helpers\Dummies\Filters\Processors\NullProcessor;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Validation\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * BaseBuilderTest
@@ -18,6 +20,11 @@ use Illuminate\Validation\ValidationException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Builders
  */
+#[Group(
+    'filters',
+    'filters-builder',
+    'filters-base-builder',
+)]
 class BaseBuilderTest extends FiltersTestCase
 {
     /**
@@ -25,6 +32,7 @@ class BaseBuilderTest extends FiltersTestCase
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[Test]
     public function canBuild()
     {
         $processors = [
@@ -59,6 +67,7 @@ class BaseBuilderTest extends FiltersTestCase
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[Test]
     public function invokesProcessorsThatAreForced()
     {
         $processors = [
@@ -92,6 +101,7 @@ class BaseBuilderTest extends FiltersTestCase
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    #[Test]
     public function failsWhenProcessorDetectsInvalidParameter()
     {
         $this->expectException(ValidationException::class);

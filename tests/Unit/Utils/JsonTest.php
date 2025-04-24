@@ -5,7 +5,9 @@ namespace Aedart\Tests\Unit\Utils;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\Group;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * JsonTest
@@ -16,11 +18,16 @@ use JsonException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
+#[Group(
+    'utils',
+    'utils-json',
+)]
 class JsonTest extends UnitTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canEncodeAndDecodeJson()
     {
         $data = [
@@ -46,6 +53,7 @@ class JsonTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsEncodingJson()
     {
         $this->expectException(JsonException::class);
@@ -56,6 +64,7 @@ class JsonTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsDecodingJson()
     {
         $this->expectException(JsonException::class);
@@ -72,6 +81,7 @@ class JsonTest extends UnitTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function canDetermineIfValidJsonEncoded()
     {
         $validA = Json::encode('abc');

@@ -7,10 +7,12 @@ use Aedart\Http\Api\Middleware\CaptureFieldsToSelect;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
@@ -23,6 +25,11 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Middleware
  */
+#[Group(
+    'http-api',
+    'http-api-middleware',
+    'http-api-middleware-capture-select-fields'
+)]
 class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
 {
     /**
@@ -32,6 +39,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function doesNothingWhenNoSelectFieldsRequested(): void
     {
         $request = new Request();
@@ -55,6 +63,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function capturesRequestedFields(): void
     {
         $requestedFields = [ 'alpha', 'beta', 'gamma' ];
@@ -93,6 +102,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function selectFieldsCollectionIsForgottenAfterRequest(): void
     {
         $requestedFields = [ 'alpha', 'beta', 'gamma' ];
@@ -126,6 +136,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function failsWhenTooManyFieldsAreRequested(): void
     {
         $this->expectException(ValidationException::class);
@@ -147,6 +158,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function failsWhenRequestedFieldNamesAreInvalid(): void
     {
         $this->expectException(ValidationException::class);
@@ -171,6 +183,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function doesNotFailWhenFieldsRequestedAsAnArray(): void
     {
         // @see https://github.com/aedart/athenaeum/issues/197
@@ -212,6 +225,7 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function failsWhenFieldsRequestedAreMalformed(): void
     {
         // @see https://github.com/aedart/athenaeum/issues/197

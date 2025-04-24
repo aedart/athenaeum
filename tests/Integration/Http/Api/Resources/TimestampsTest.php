@@ -6,8 +6,10 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Game;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\GameResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * TimestampsTest
@@ -19,6 +21,11 @@ use Illuminate\Validation\ValidationException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-timestamps',
+)]
 class TimestampsTest extends ApiResourcesTestCase
 {
     /**
@@ -28,6 +35,7 @@ class TimestampsTest extends ApiResourcesTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function addsTimestampsToPayload(): void
     {
         $faker = $this->getFaker();

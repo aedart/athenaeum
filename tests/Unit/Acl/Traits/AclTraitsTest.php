@@ -4,6 +4,9 @@ namespace Aedart\Tests\Unit\Acl\Traits;
 
 use Aedart\Acl\Traits\RegistrarTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * AclTraitsTest
@@ -15,6 +18,11 @@ use Aedart\Tests\TestCases\TraitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Acl\Traits
  */
+#[Group(
+    'acl',
+    'acl-traits',
+    'traits'
+)]
 class AclTraitsTest extends TraitTestCase
 {
     /*****************************************************************
@@ -43,6 +51,8 @@ class AclTraitsTest extends TraitTestCase
      *
      * @throws \ReflectionException
      */
+    #[DataProvider('awareOfComponentsProvider')]
+    #[Test]
     public function canInvokeAwareOfMethods(string $awareOfTrait)
     {
         $this->assertTraitMethods($awareOfTrait, null, null);

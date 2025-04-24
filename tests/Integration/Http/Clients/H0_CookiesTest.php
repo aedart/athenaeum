@@ -9,9 +9,12 @@ use Aedart\Contracts\Http\Cookies\Cookie;
 use Aedart\Contracts\Http\Cookies\SetCookie;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use DateTime;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Carbon;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode;
 
 /**
@@ -23,6 +26,11 @@ use Teapot\StatusCode;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-h0',
+)]
 class H0_CookiesTest extends HttpClientsTestCase
 {
     /**
@@ -33,6 +41,8 @@ class H0_CookiesTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function extractsCookiesFromOptions(string $profile)
     {
         $cookieJar = $this->makeCookieJar([
@@ -57,6 +67,8 @@ class H0_CookiesTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canAddCookieUsingInstance(string $profile)
     {
         $domain = 'https://acme.com';
@@ -98,6 +110,8 @@ class H0_CookiesTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canAddCookieUsingArray(string $profile)
     {
         $domain = 'https://acme.com';
@@ -140,6 +154,8 @@ class H0_CookiesTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canAddCookieUsingCallback(string $profile)
     {
         $domain = 'https://acme.com';
@@ -183,6 +199,8 @@ class H0_CookiesTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canAddCookieUsingOptions(string $profile)
     {
         $domain = 'https://acme.com';
@@ -219,6 +237,7 @@ class H0_CookiesTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function preservesCookieJar()
     {
         // Create mocked response, with Set-Cookie header

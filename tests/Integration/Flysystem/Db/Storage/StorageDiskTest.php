@@ -4,8 +4,10 @@ namespace Aedart\Tests\Integration\Flysystem\Db\Storage;
 
 use Aedart\Flysystem\Db\Adapters\DatabaseAdapter;
 use Aedart\Tests\TestCases\Flysystem\Db\FlysystemDbTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * StorageDiskTest
@@ -17,6 +19,11 @@ use Illuminate\Support\Facades\Storage;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Storage
  */
+#[Group(
+    'flysystem',
+    'flysystem-db',
+    'flysystem-db-storage-disk'
+)]
 class StorageDiskTest extends FlysystemDbTestCase
 {
     /*****************************************************************
@@ -64,6 +71,7 @@ class StorageDiskTest extends FlysystemDbTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainDisk(): void
     {
         $disk = $this->disk();
@@ -82,6 +90,7 @@ class StorageDiskTest extends FlysystemDbTestCase
      *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
+    #[Test]
     public function canWriteAndReadFile(): void
     {
         $disk = $this->disk();

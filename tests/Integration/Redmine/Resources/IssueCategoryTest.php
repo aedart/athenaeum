@@ -7,7 +7,9 @@ use Aedart\Redmine\IssueCategory;
 use Aedart\Redmine\Project;
 use Aedart\Redmine\Version;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -20,6 +22,11 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
+#[Group(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-issue-category',
+)]
 class IssueCategoryTest extends RedmineTestCase
 {
     /*****************************************************************
@@ -65,9 +72,10 @@ class IssueCategoryTest extends RedmineTestCase
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canCreateIssueCategory()
     {
         // Debug
@@ -130,9 +138,10 @@ class IssueCategoryTest extends RedmineTestCase
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canUpdateIssueCategory()
     {
         // Debug
@@ -189,9 +198,10 @@ class IssueCategoryTest extends RedmineTestCase
     /**
      * @test
      *
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canFetchIssueCategoriesForProject()
     {
         // Debug

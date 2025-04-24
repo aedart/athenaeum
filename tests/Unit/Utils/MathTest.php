@@ -6,6 +6,8 @@ use Aedart\Contracts\Utils\Random\NumericRandomizer;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Math;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use ValueError;
 
 /**
@@ -17,6 +19,10 @@ use ValueError;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
+#[Group(
+    'utils',
+    'math',
+)]
 class MathTest extends UnitTestCase
 {
     /**
@@ -24,6 +30,7 @@ class MathTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsRandomizer(): void
     {
         $randomizer = Math::randomizer();
@@ -34,6 +41,7 @@ class MathTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsRandomIntWhenInvalidArguments()
     {
         $this->expectException(ValueError::class);
@@ -44,6 +52,7 @@ class MathTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canGenerateSeed()
     {
         // NOTE: We do not really care about how valid, good or
@@ -58,6 +67,7 @@ class MathTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canApplySeed()
     {
         $seed = 123456;

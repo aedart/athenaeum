@@ -4,6 +4,9 @@ namespace Aedart\Tests\Integration\Http\Clients\Query;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D0_IncludeTest
@@ -17,6 +20,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-d0',
+    'http-query-grammars',
+)]
 class D0_IncludeTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -83,6 +92,8 @@ class D0_IncludeTest extends HttpClientsTestCase
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
      */
+    #[DataProvider('providesSingleResourceData')]
+    #[Test]
     public function canIncludeSingleResource(string $grammar, string $expected)
     {
         $result = $this
@@ -105,6 +116,8 @@ class D0_IncludeTest extends HttpClientsTestCase
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException
      */
+    #[DataProvider('providesMultipleResourcesData')]
+    #[Test]
     public function canIncludeMultipleResources(string $grammar, string $expected)
     {
         $result = $this

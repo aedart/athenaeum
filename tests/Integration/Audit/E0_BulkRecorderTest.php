@@ -8,7 +8,9 @@ use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Audit\Category;
 use Aedart\Tests\Helpers\Dummies\Audit\User;
 use Aedart\Tests\TestCases\Audit\AuditTestCase;
+use Codeception\Attribute\Group;
 use LogicException;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -17,10 +19,17 @@ use Throwable;
  * @group audit
  * @group audit-trail
  * @group audit-bulk-recorder
+ * @group audit-e0
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Audit
  */
+#[Group(
+    'audit',
+    'audit-trail',
+    'audit-bulk-recorder',
+    'audit-d0',
+)]
 class E0_BulkRecorderTest extends AuditTestCase
 {
     /**
@@ -30,6 +39,7 @@ class E0_BulkRecorderTest extends AuditTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canRecordBulkChangesForIdentifiers(): void
     {
         $entries = $this->makeCategoriesData();
@@ -76,6 +86,7 @@ class E0_BulkRecorderTest extends AuditTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function failsWhenModelNotSluggableAndSlugsIdentifiersGiven(): void
     {
         $this->expectException(LogicException::class);
@@ -95,6 +106,7 @@ class E0_BulkRecorderTest extends AuditTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canRecordBulkChangesForCollection(): void
     {
         $entries = $this->makeCategoriesData();

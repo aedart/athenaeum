@@ -71,6 +71,8 @@ use Aedart\Support\Helpers\View\ViewFactoryTrait;
 use Aedart\Testing\Helpers\ArgumentFaker;
 use Aedart\Testing\Helpers\TraitTester;
 use Aedart\Tests\TestCases\Support\LaravelHelpersTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use Illuminate\Cache\RateLimiter;
 use Illuminate\Concurrency\ConcurrencyManager;
 use Illuminate\Console\Scheduling\Schedule;
@@ -87,6 +89,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Testing\ParallelTesting;
 use Illuminate\View\Compilers\BladeCompiler;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Test;
 use ReflectionException;
 
 /**
@@ -99,6 +102,11 @@ use ReflectionException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Support\Helpers
  */
+#[Group(
+    'laravel',
+    'support',
+    'support-helpers',
+)]
 class LaravelSupportHelpersTest extends LaravelHelpersTestCase
 {
     /*****************************************************************
@@ -278,6 +286,8 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
      *
      * @throws ReflectionException
      */
+    #[DataProvider('awareOfComponentsProvider')]
+    #[Test]
     public function canInvokeAwareOfMethods(string $awareOfTrait, string|null $laravelComponent = null)
     {
         $mockedValue = null;
@@ -302,6 +312,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
      *
      * depends canInvokeTraitMethods
      */
+    #[Test]
     public function cleanup()
     {
         $this->stopApplication();

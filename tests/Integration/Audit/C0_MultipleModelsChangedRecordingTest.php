@@ -7,8 +7,10 @@ use Aedart\Audit\Events\MultipleModelsChanged;
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Tests\Helpers\Dummies\Audit\Category;
 use Aedart\Tests\TestCases\Audit\AuditTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C0_MultipleModelsChangedRecordingTest
@@ -16,10 +18,17 @@ use Illuminate\Database\Eloquent\Model;
  * @group audit
  * @group audit-trail
  * @group audit-trail-multiple-changes-recording
+ * @group audit-c0
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Audit
  */
+#[Group(
+    'audit',
+    'audit-trail',
+    'audit-trail-multiple-changes-recording',
+    'audit-c0',
+)]
 class C0_MultipleModelsChangedRecordingTest extends AuditTestCase
 {
     /**
@@ -27,6 +36,7 @@ class C0_MultipleModelsChangedRecordingTest extends AuditTestCase
      *
      * @return void
      */
+    #[Test]
     public function recordsMultipleModelsChanged()
     {
         // a) mass insert new records

@@ -10,7 +10,12 @@ use Aedart\Redmine\Exceptions\UnexpectedResponse;
 use Aedart\Redmine\Exceptions\UnprocessableEntity;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode\All as StatusCodes;
+use Throwable;
 
 /**
  * ExpectationHandlersTest
@@ -22,6 +27,11 @@ use Teapot\StatusCode\All as StatusCodes;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
+#[Group(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-expectation-handlers',
+)]
 class ExpectationHandlersTest extends RedmineTestCase
 {
     /*****************************************************************
@@ -59,9 +69,11 @@ class ExpectationHandlersTest extends RedmineTestCase
      *
      * @throws ConnectionException
      * @throws ErrorResponseException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[DataProvider('responseExpectations')]
+    #[Test]
     public function appliesDefaultResponseExpectationHandler(int $responseStatusCode, string $expectedException)
     {
         $this->expectException($expectedException);
@@ -75,9 +87,10 @@ class ExpectationHandlersTest extends RedmineTestCase
      * @test
      *
      * @throws ConnectionException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canUseCustomExpectationHandler()
     {
         $connection = $this->connectionWithMock([], StatusCodes::SERVICE_UNAVAILABLE);

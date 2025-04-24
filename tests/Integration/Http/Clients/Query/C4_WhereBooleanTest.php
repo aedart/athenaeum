@@ -6,6 +6,9 @@ use Aedart\Contracts\Http\Clients\Exceptions\HttpQueryBuilderException;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * C3_WhereBooleanTest
@@ -18,6 +21,12 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
+#[Group(
+    'http-clients',
+    'http-query',
+    'http-query-c4',
+    'http-query-grammars',
+)]
 class C4_WhereBooleanTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -61,6 +70,8 @@ class C4_WhereBooleanTest extends HttpClientsTestCase
      * @throws ProfileNotFoundException
      * @throws HttpQueryBuilderException
      */
+    #[DataProvider('providesWhereBoolean')]
+    #[Test]
     public function canAddWhereBoolean(string $grammar, string $expected)
     {
         $result = $this

@@ -6,6 +6,8 @@ use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
 use Aedart\Core\Bootstrappers\SetDefaultTimezone;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D0_DefaultTimezoneTest
@@ -16,6 +18,10 @@ use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
+#[Group(
+    'application',
+    'application-d0',
+)]
 class D0_DefaultTimezoneTest extends AthenaeumCoreTestCase
 {
     /*****************************************************************
@@ -41,6 +47,7 @@ class D0_DefaultTimezoneTest extends AthenaeumCoreTestCase
     /**
      * @test
      */
+    #[Test]
     public function defaultTimezoneIsSet()
     {
         $this->bootstrap();

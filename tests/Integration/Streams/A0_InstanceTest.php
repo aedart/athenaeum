@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Streams;
 use Aedart\Streams\Exceptions\InvalidStreamResource;
 use Aedart\Streams\Stream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * A0_InstanceTest
@@ -15,6 +17,10 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
+#[Group(
+    'streams',
+    'stream-a0',
+)]
 class A0_InstanceTest extends StreamTestCase
 {
     /**
@@ -22,6 +28,7 @@ class A0_InstanceTest extends StreamTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateNewInstance()
     {
         $stream = new Stream();
@@ -36,6 +43,7 @@ class A0_InstanceTest extends StreamTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateInstanceWithResource()
     {
         $resource = fopen('php://memory', 'r+b');
@@ -51,6 +59,7 @@ class A0_InstanceTest extends StreamTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenResourceIsInvalid()
     {
         $this->expectException(InvalidStreamResource::class);
@@ -63,6 +72,7 @@ class A0_InstanceTest extends StreamTestCase
      *
      * @return void
      */
+    #[Test]
     public function canCreateInstanceWithMeta()
     {
         $stream = new Stream(

@@ -5,6 +5,8 @@ namespace Aedart\Tests\Integration\Dto;
 use Aedart\Tests\Helpers\Dummies\Dto\Organisation;
 use Aedart\Tests\Helpers\Dummies\Dto\Person;
 use Aedart\Tests\TestCases\Dto\DtoTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use TypeError;
 
 /**
@@ -16,6 +18,10 @@ use TypeError;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Dto
  */
+#[Group(
+    'dto',
+    'dto-union-types',
+)]
 class ResolveDtoUnionTypesTest extends DtoTestCase
 {
     /**
@@ -23,6 +29,7 @@ class ResolveDtoUnionTypesTest extends DtoTestCase
      *
      * @return void
      */
+    #[Test]
     public function resolvesScalarTypes()
     {
         $faker = $this->getFaker();
@@ -53,6 +60,7 @@ class ResolveDtoUnionTypesTest extends DtoTestCase
      *
      * @return void
      */
+    #[Test]
     public function resolvesArrayType()
     {
         $faker = $this->getFaker();
@@ -72,6 +80,7 @@ class ResolveDtoUnionTypesTest extends DtoTestCase
      *
      * @return void
      */
+    #[Test]
     public function resolvesObjectType()
     {
         $faker = $this->getFaker();
@@ -107,6 +116,7 @@ class ResolveDtoUnionTypesTest extends DtoTestCase
      *
      * @return void
      */
+    #[Test]
     public function failsWhenUnableToResolveType()
     {
         $this->expectException(TypeError::class);

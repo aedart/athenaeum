@@ -11,7 +11,9 @@ use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderA;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderB;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderC;
 use Aedart\Tests\Helpers\Dummies\Service\Providers\ServiceProviderD;
+use Codeception\Attribute\Group;
 use Illuminate\Support\ServiceProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * RegistrarTest
@@ -22,6 +24,10 @@ use Illuminate\Support\ServiceProvider;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Service
  */
+#[Group(
+    'service',
+    'service-registrar',
+)]
 class RegistrarTest extends AthenaeumTestCase
 {
     /**
@@ -85,6 +91,7 @@ class RegistrarTest extends AthenaeumTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCreateInstance()
     {
         $registrar = $this->makeRegistrar();
@@ -94,6 +101,7 @@ class RegistrarTest extends AthenaeumTestCase
     /**
      * @test
      */
+    #[Test]
     public function canRegisterMultipleServiceProviders()
     {
         $registrar = $this->makeRegistrar();
@@ -117,6 +125,7 @@ class RegistrarTest extends AthenaeumTestCase
     /**
      * @test
      */
+    #[Test]
     public function canRegisterAndBootMultipleServiceProviders()
     {
         $registrar = $this->makeRegistrar();
@@ -147,6 +156,7 @@ class RegistrarTest extends AthenaeumTestCase
     /**
      * @test
      */
+    #[Test]
     public function canRegisterAndBootUnsafe()
     {
         $registrar = $this->makeRegistrar();
@@ -168,6 +178,7 @@ class RegistrarTest extends AthenaeumTestCase
     /**
      * @test
      */
+    #[Test]
     public function doesNotRegisterSameProviderTwice()
     {
         $registrar = $this->makeRegistrar();
@@ -184,6 +195,7 @@ class RegistrarTest extends AthenaeumTestCase
     /**
      * @test
      */
+    #[Test]
     public function doesNotBootSameProviderTwice()
     {
         $registrar = $this->makeRegistrar();
@@ -205,6 +217,7 @@ class RegistrarTest extends AthenaeumTestCase
     /**
      * @test
      */
+    #[Test]
     public function canRegisterAndBootAggregateServiceProviders()
     {
         $registrar = $this->makeRegistrar();
@@ -237,6 +250,7 @@ class RegistrarTest extends AthenaeumTestCase
      *
      * @return void
      */
+    #[Test]
     public function invokesBootCallbacks(): void
     {
         $provider = new class($this->ioc) extends ServiceProvider {

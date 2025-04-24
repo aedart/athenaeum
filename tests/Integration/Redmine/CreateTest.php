@@ -7,7 +7,11 @@ use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode\All as StatusCodes;
+use Throwable;
 
 /**
  * CreateTest
@@ -19,15 +23,21 @@ use Teapot\StatusCode\All as StatusCodes;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
+#[Group(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-create',
+)]
 class CreateTest extends RedmineTestCase
 {
     /**
      * @test
      *
      * @throws ConnectionException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canCreateNewResource()
     {
         $faker = $this->getFaker();
@@ -51,9 +61,10 @@ class CreateTest extends RedmineTestCase
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function failsIfDoesNotSupportCreateOperation()
     {
         $this->expectException(UnsupportedOperationException::class);

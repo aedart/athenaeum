@@ -10,8 +10,10 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Game;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\AlternativeGameResource;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\GameResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * FieldSelectionTest
@@ -23,6 +25,11 @@ use Illuminate\Validation\ValidationException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-field-selection',
+)]
 class FieldSelectionTest extends ApiResourcesTestCase
 {
     /**
@@ -67,6 +74,7 @@ class FieldSelectionTest extends ApiResourcesTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function outputsOnlySelectedFields(): void
     {
         $faker = $this->getFaker();
@@ -106,6 +114,7 @@ class FieldSelectionTest extends ApiResourcesTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function canSelectFieldUsingDotNotation(): void
     {
         $faker = $this->getFaker();
@@ -145,6 +154,7 @@ class FieldSelectionTest extends ApiResourcesTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function failsWhenRequestedFieldsDoNotExist(): void
     {
         $noneExistingKey = 'none-existing.key.id';
@@ -180,6 +190,7 @@ class FieldSelectionTest extends ApiResourcesTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function obtainsRequestedFieldsFromSelectedFieldsCollection(): void
     {
         $faker = $this->getFaker();

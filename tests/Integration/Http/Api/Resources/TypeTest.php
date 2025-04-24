@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Http\Api\Resources;
 
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\GameResource;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * TypeTest
@@ -15,6 +17,11 @@ use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-type',
+)]
 class TypeTest extends ApiResourcesTestCase
 {
     /**
@@ -22,6 +29,7 @@ class TypeTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainResourceType(): void
     {
         $resource = new GameResource(null);
@@ -35,6 +43,7 @@ class TypeTest extends ApiResourcesTestCase
      *
      * @return void
      */
+    #[Test]
     public function canMatchType(): void
     {
         $resource = new GameResource(null);

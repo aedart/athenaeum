@@ -8,6 +8,9 @@ use Aedart\Http\Messages\Traits\HttpResponseTrait;
 use Aedart\Http\Messages\Traits\HttpSerializerFactoryTrait;
 use Aedart\Http\Messages\Traits\HttpServerRequestTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * HttpMessagesTraitsTest
@@ -19,6 +22,11 @@ use Aedart\Tests\TestCases\TraitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Messages\Traits
  */
+#[Group(
+    'http',
+    'http-messages',
+    'traits'
+)]
 class HttpMessagesTraitsTest extends TraitTestCase
 {
     /*****************************************************************
@@ -51,6 +59,8 @@ class HttpMessagesTraitsTest extends TraitTestCase
      *
      * @throws \ReflectionException
      */
+    #[DataProvider('awareOfComponentsProvider')]
+    #[Test]
     public function canInvokeAwareOfMethods(string $awareOfTrait)
     {
         $this->assertTraitMethods($awareOfTrait, null, null);

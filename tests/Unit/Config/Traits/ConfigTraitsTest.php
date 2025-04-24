@@ -5,6 +5,9 @@ namespace Aedart\Tests\Unit\Config\Traits;
 use Aedart\Config\Traits\ConfigLoaderTrait;
 use Aedart\Config\Traits\FileParserFactoryTrait;
 use Aedart\Tests\TestCases\TraitTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ConfigTraitsTest
@@ -16,6 +19,11 @@ use Aedart\Tests\TestCases\TraitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Config\Traits
  */
+#[Group(
+    'config',
+    'config-traits',
+    'traits'
+)]
 class ConfigTraitsTest extends TraitTestCase
 {
     /*****************************************************************
@@ -45,6 +53,8 @@ class ConfigTraitsTest extends TraitTestCase
      *
      * @throws \ReflectionException
      */
+    #[DataProvider('awareOfComponentsProvider')]
+    #[Test]
     public function canInvokeAwareOfMethods(string $awareOfTrait)
     {
         $this->assertTraitMethods($awareOfTrait, null, null);

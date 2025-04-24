@@ -7,8 +7,10 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\User;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Users\CreateUserRequest;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\UserResource;
 use Aedart\Tests\TestCases\Http\ApiResourceRequestsTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Facades\Route;
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode\All as HttpStatus;
 
 /**
@@ -22,6 +24,12 @@ use Teapot\StatusCode\All as HttpStatus;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-requests',
+    'create-single-resource-request'
+)]
 class CreateSingleResourceRequestTest extends ApiResourceRequestsTestCase
 {
     /**
@@ -46,6 +54,7 @@ class CreateSingleResourceRequestTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function canCreateSingleResource(): void
     {
         /** @var User $expected */
@@ -94,6 +103,7 @@ class CreateSingleResourceRequestTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function evaluatesRequestPrecondition(): void
     {
         /** @var User $expected */

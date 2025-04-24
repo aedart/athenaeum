@@ -7,8 +7,10 @@ use Aedart\Filters\Query\Filters\SortFilter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * SortFilterTest
@@ -19,6 +21,10 @@ use Illuminate\Contracts\Database\Query\Builder;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters
  */
+#[Group(
+    'filters',
+    'filters-sort',
+)]
 class SortFilterTest extends FiltersTestCase
 {
     /**
@@ -26,6 +32,7 @@ class SortFilterTest extends FiltersTestCase
      *
      * @return void
      */
+    #[Test]
     public function canBeApplied(): void
     {
         $filter = new SortFilter([
@@ -49,6 +56,7 @@ class SortFilterTest extends FiltersTestCase
      *
      * @return void
      */
+    #[Test]
     public function canApplySortingCallback(): void
     {
         $filter = (new SortFilter([
@@ -72,6 +80,7 @@ class SortFilterTest extends FiltersTestCase
      *
      * @return void
      */
+    #[Test]
     public function canApplyInvokableSortingQuery(): void
     {
         $sortingQuery = new class() extends BaseSortingQuery {

@@ -5,6 +5,10 @@ namespace Aedart\Tests\Integration\Redmine\Resources;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use Aedart\Redmine\Group;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group as TestGroup;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 /**
  * GroupTest
@@ -16,15 +20,21 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
+#[TestGroup(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-group',
+)]
 class GroupTest extends RedmineTestCase
 {
     /**
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canCreateRole()
     {
         // Debug
@@ -74,9 +84,10 @@ class GroupTest extends RedmineTestCase
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canUpdateGroup()
     {
         // Debug
@@ -156,9 +167,10 @@ class GroupTest extends RedmineTestCase
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canAddAndRemoveUsers()
     {
         // Debug
@@ -265,9 +277,10 @@ class GroupTest extends RedmineTestCase
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canListGroups()
     {
         // Debug

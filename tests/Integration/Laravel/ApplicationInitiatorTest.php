@@ -3,9 +3,11 @@
 namespace Aedart\Tests\Integration\Laravel;
 
 use Aedart\Testing\Laravel\LaravelTestHelper;
+use Codeception\Attribute\Group;
 use Codeception\Test\Unit;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ApplicationInitiatorTest
@@ -17,6 +19,11 @@ use Illuminate\Contracts\Foundation\Application;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Laravel
  */
+#[Group(
+    'laravel',
+    'testing',
+    'app-initiator',
+)]
 class ApplicationInitiatorTest extends Unit
 {
     use LaravelTestHelper;
@@ -52,6 +59,7 @@ class ApplicationInitiatorTest extends Unit
     /**
      * @test
      */
+    #[Test]
     public function applicationHasStarted()
     {
         $this->assertTrue($this->hasApplicationBeenStarted());
@@ -60,6 +68,7 @@ class ApplicationInitiatorTest extends Unit
     /**
      * @test
      */
+    #[Test]
     public function laravelApplicationIsAvailable()
     {
         $app = $this->getApplication();
@@ -70,6 +79,7 @@ class ApplicationInitiatorTest extends Unit
     /**
      * @test
      */
+    #[Test]
     public function laravelComponentIsAvailable()
     {
         $app = $this->getApplication();

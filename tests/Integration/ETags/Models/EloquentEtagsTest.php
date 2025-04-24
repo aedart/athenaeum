@@ -8,7 +8,9 @@ use Aedart\Contracts\ETags\HasEtag;
 use Aedart\ETags\Concerns\EloquentEtag;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\ETags\ETagsTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Database\Eloquent\Model;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * EloquentEtagsTest
@@ -20,6 +22,11 @@ use Illuminate\Database\Eloquent\Model;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Models
  */
+#[Group(
+    'etags',
+    'etags-eloquent-model',
+    'etags-eloquent-model-etags'
+)]
 class EloquentEtagsTest extends ETagsTestCase
 {
     /*****************************************************************
@@ -65,6 +72,7 @@ class EloquentEtagsTest extends ETagsTestCase
      * @throws ETagGeneratorException
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canMakeWeakEtagForModel(): void
     {
         $model = $this->makeModel([
@@ -89,6 +97,7 @@ class EloquentEtagsTest extends ETagsTestCase
      * @throws ETagGeneratorException
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canMakeStrongEtagForModel(): void
     {
         $model = $this->makeModel([
@@ -112,6 +121,7 @@ class EloquentEtagsTest extends ETagsTestCase
      *
      * @throws ETagGeneratorException
      */
+    #[Test]
     public function returnsCachedEtagWhenAvailable(): void
     {
         $model = $this->makeModel([
@@ -139,6 +149,7 @@ class EloquentEtagsTest extends ETagsTestCase
      *
      * @throws ETagGeneratorException
      */
+    #[Test]
     public function canForceNewEtag(): void
     {
         $model = $this->makeModel([
@@ -163,6 +174,7 @@ class EloquentEtagsTest extends ETagsTestCase
      *
      * @throws ETagGeneratorException
      */
+    #[Test]
     public function invalidatesCachedEtagWhenAttributesChange(): void
     {
         $model = $this->makeModel([
@@ -188,6 +200,7 @@ class EloquentEtagsTest extends ETagsTestCase
      *
      * @throws ETagGeneratorException
      */
+    #[Test]
     public function invalidatesCachedEtagWhenModelFilled(): void
     {
         $model = $this->makeModel([
@@ -218,6 +231,7 @@ class EloquentEtagsTest extends ETagsTestCase
      *
      * @throws ETagGeneratorException
      */
+    #[Test]
     public function canClearCachedEtags(): void
     {
         $model = $this->makeModel([

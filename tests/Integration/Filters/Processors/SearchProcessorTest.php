@@ -6,7 +6,9 @@ use Aedart\Filters\Processors\SearchProcessor;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Category;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Validation\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * SearchProcessorTest
@@ -17,6 +19,10 @@ use Illuminate\Validation\ValidationException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Processors
  */
+#[Group(
+    'filters',
+    'filters-search-processor',
+)]
 class SearchProcessorTest extends FiltersTestCase
 {
     /**
@@ -24,6 +30,7 @@ class SearchProcessorTest extends FiltersTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function canBuildSearchQuery()
     {
         $key = 'search';
@@ -63,6 +70,7 @@ class SearchProcessorTest extends FiltersTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function canSearchForZero()
     {
         $key = 'search';
@@ -104,6 +112,7 @@ class SearchProcessorTest extends FiltersTestCase
      *
      * @throws ValidationException
      */
+    #[Test]
     public function canSearchUsingCustomCallback(): void
     {
         $key = 'search';

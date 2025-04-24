@@ -7,6 +7,9 @@ use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Criteria;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * J0_CriteriaTest
@@ -17,6 +20,11 @@ use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-j0',
+)]
 class J0_CriteriaTest extends HttpClientsTestCase
 {
     /*****************************************************************
@@ -94,6 +102,8 @@ class J0_CriteriaTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canApplyCriteria(string $profile)
     {
         $criteria = $this->criteriaList();

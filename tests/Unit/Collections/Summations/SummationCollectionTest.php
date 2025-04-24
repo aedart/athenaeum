@@ -8,6 +8,9 @@ use Aedart\Contracts\Collections\Summation as SummationInterface;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Json;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * SummationCollectionTest
@@ -19,6 +22,11 @@ use Aedart\Utils\Json;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Collections
  */
+#[Group(
+    'collections',
+    'summations',
+    'summation-collection'
+)]
 class SummationCollectionTest extends UnitTestCase
 {
     /*****************************************************************
@@ -63,6 +71,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainInstance()
     {
         $summation = $this->makeCollection();
@@ -73,6 +82,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetAndGetValue()
     {
         $key = 'player.strength';
@@ -88,6 +98,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetAndGetViaArrayAccess()
     {
         $key = 'player.strength';
@@ -103,6 +114,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSetUsingCallback()
     {
         $key = 'player.strength';
@@ -120,6 +132,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function returnDefaultWhenKeyIsEmpty()
     {
         $key = 'player.strength';
@@ -134,6 +147,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function invokesCallbackWhenGivenAsDefault()
     {
         $key = 'player.strength';
@@ -150,6 +164,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineIfKeyExists()
     {
         $key = 'player.dexterity';
@@ -168,6 +183,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineIfKeyExistsViaArrayAccess()
     {
         $key = 'player.dexterity';
@@ -186,6 +202,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineIfKeyHasValue()
     {
         $keyA = 'player.dexterity';
@@ -212,6 +229,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineIfKeyHasValueViaArrayAccess()
     {
         $keyA = 'player.dexterity';
@@ -232,6 +250,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineIfCollectionIsEmpty()
     {
         $summationA = $this->makeCollection([
@@ -252,6 +271,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canRemoveKey()
     {
         $summation = $this->makeCollection([
@@ -269,6 +289,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canRemoveKeyViaArrayAccess()
     {
         $summation = $this->makeCollection([
@@ -285,6 +306,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canCountElementsInCollection()
     {
         $summation = $this->makeCollection([
@@ -300,6 +322,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canLoopThroughElements()
     {
         $results = [
@@ -323,6 +346,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canExportToArray()
     {
         $elements = [
@@ -340,6 +364,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canConvertToJson()
     {
         $elements = [
@@ -360,6 +385,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canConvertToString()
     {
         $summation = $this->makeCollection([
@@ -378,6 +404,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canIncreaseValue()
     {
         $key = 'player.score';
@@ -392,6 +419,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canIncreaseValueViaCallback()
     {
         $key = 'player.score';
@@ -408,6 +436,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDecreaseValue()
     {
         $key = 'player.score';
@@ -422,6 +451,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDecreaseValueViaCallback()
     {
         $key = 'player.score';
@@ -438,6 +468,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canMultiplyValue()
     {
         $key = 'player.score';
@@ -452,6 +483,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canMultiplyValueViaCallback()
     {
         $key = 'player.score';
@@ -468,6 +500,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDivideValue()
     {
         $key = 'player.score';
@@ -482,6 +515,7 @@ class SummationCollectionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDivideValueViaCallback()
     {
         $key = 'player.score';
@@ -501,6 +535,8 @@ class SummationCollectionTest extends UnitTestCase
      *
      * @param  string  $method
      */
+    #[DataProvider('methodProvider')]
+    #[Test]
     public function failsArithmeticOperationIfKeyDoesNotExist(string $method)
     {
         $this->expectException(KeyNotFound::class);

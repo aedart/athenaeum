@@ -3,6 +3,8 @@
 namespace Aedart\Tests\Unit\Properties;
 
 use Aedart\Tests\TestCases\Properties\PropertiesTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ReflectionsTest
@@ -13,11 +15,16 @@ use Aedart\Tests\TestCases\Properties\PropertiesTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Properties
  */
+#[Group(
+    'properties',
+    'properties-reflections'
+)]
 class ReflectionsTest extends PropertiesTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function hasInternalMethod()
     {
         $method = $this->getMethod('hasInternalMethod');
@@ -28,6 +35,7 @@ class ReflectionsTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function getInternalProperty()
     {
         $method = $this->getMethod('getInternalProperty');
@@ -42,6 +50,7 @@ class ReflectionsTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function doesNotHaveInternalProperty()
     {
         $method = $this->getMethod('hasInternalProperty');
@@ -54,6 +63,7 @@ class ReflectionsTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function hasAccessibleInternalProperty()
     {
         $method = $this->getMethod('hasInternalProperty');
@@ -66,6 +76,7 @@ class ReflectionsTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function hasInaccessibleInternalProperty()
     {
         $method = $this->getMethod('hasInternalProperty');

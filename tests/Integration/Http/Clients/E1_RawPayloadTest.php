@@ -5,7 +5,10 @@ namespace Aedart\Tests\Integration\Http\Clients;
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use GuzzleHttp\RequestOptions;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E1_RawPayloadTest
@@ -16,6 +19,11 @@ use GuzzleHttp\RequestOptions;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
+#[Group(
+    'http',
+    'http-clients',
+    'http-clients-e1',
+)]
 class E1_RawPayloadTest extends HttpClientsTestCase
 {
     /**
@@ -26,6 +34,8 @@ class E1_RawPayloadTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function extractsRawPayloadFromOptions(string $profile)
     {
         $payload = '<p>When the cannon falls for puerto rico, all lads hail swashbuckling, weird scabbards.</p>';
@@ -46,6 +56,8 @@ class E1_RawPayloadTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function canSetTheRawPayload(string $profile)
     {
         $client = $this->client($profile);
@@ -71,6 +83,8 @@ class E1_RawPayloadTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function favoursRawPayloadFromOptions(string $profile)
     {
         $client = $this->client($profile);
@@ -98,6 +112,8 @@ class E1_RawPayloadTest extends HttpClientsTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[DataProvider('providesClientProfiles')]
+    #[Test]
     public function ignoresArrayDataIfRawPayloadSet(string $profile)
     {
         $client = $this->client($profile);

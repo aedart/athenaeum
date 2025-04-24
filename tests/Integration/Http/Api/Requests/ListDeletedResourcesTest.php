@@ -7,7 +7,9 @@ use Aedart\Tests\Helpers\Dummies\Http\Api\Models\Game;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Requests\Games\ListDeletedGamesRequest;
 use Aedart\Tests\Helpers\Dummies\Http\Api\Resources\GameResource;
 use Aedart\Tests\TestCases\Http\ApiResourceRequestsTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ListDeletedResourcesTest
@@ -20,6 +22,12 @@ use Illuminate\Support\Facades\Route;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
+#[Group(
+    'http-api',
+    'api-resource',
+    'api-resource-requests',
+    'list-deleted-resources-request'
+)]
 class ListDeletedResourcesTest extends ApiResourceRequestsTestCase
 {
     /**
@@ -45,6 +53,7 @@ class ListDeletedResourcesTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function canListPaginatedResources(): void
     {
         // Create a few deleted games...
@@ -87,6 +96,7 @@ class ListDeletedResourcesTest extends ApiResourceRequestsTestCase
      *
      * @throws JsonException
      */
+    #[Test]
     public function canBuildAndApplyFilters(): void
     {
         /** @var Game $expected */

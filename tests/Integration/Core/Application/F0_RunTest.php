@@ -3,6 +3,8 @@
 namespace Aedart\Tests\Integration\Core\Application;
 
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * F0_RunTest
@@ -13,6 +15,10 @@ use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
+#[Group(
+    'application',
+    'application-f0',
+)]
 class F0_RunTest extends AthenaeumCoreTestCase
 {
     /**
@@ -20,6 +26,7 @@ class F0_RunTest extends AthenaeumCoreTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function canRunApplication()
     {
         $this->app->run();
@@ -32,6 +39,7 @@ class F0_RunTest extends AthenaeumCoreTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function invokesRunCallback()
     {
         $invoked = false;
@@ -49,6 +57,7 @@ class F0_RunTest extends AthenaeumCoreTestCase
      *
      * @throws \Throwable
      */
+    #[Test]
     public function doesNotRunIfAlreadyRunning()
     {
         // Run application

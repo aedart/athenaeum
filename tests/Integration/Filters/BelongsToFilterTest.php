@@ -6,6 +6,8 @@ use Aedart\Filters\Query\Filters\Fields\BelongsToFilter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Database\Models\Owner;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * BelongsToFilterTest
@@ -16,6 +18,10 @@ use Aedart\Tests\TestCases\Filters\FiltersTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters
  */
+#[Group(
+    'filters',
+    'filters-belongs-to',
+)]
 class BelongsToFilterTest extends FiltersTestCase
 {
     /**
@@ -23,6 +29,7 @@ class BelongsToFilterTest extends FiltersTestCase
      *
      * @throws \Aedart\Contracts\Database\Query\Exceptions\CriteriaException
      */
+    #[Test]
     public function canBeApplied()
     {
         $filter = BelongsToFilter::make('id')

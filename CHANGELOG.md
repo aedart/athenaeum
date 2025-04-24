@@ -7,9 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Codeception/PHPUnit Attributes for tests and test related components (_PHPUnit `v11.x` and previously accepted PHPDoc-like annotations, but annotations are not longer supported from PHPUnit `v12.x`_). [#229](https://github.com/aedart/athenaeum/issues/229), [#230](https://github.com/aedart/athenaeum/issues/230).
+* `BaseFilesystemAdapterTestCase`, to provide compatibility for PHPUnit `v12.x`.
+
 ### Changed
 
-* Updated dependencies (_service update_).
+* Updated dependencies (_service update_). 
+
+### Fixed
+
+* CI does not run all tests (_caused by missing Codeception/PHPUnit Attributes, when PHPUnit `v12.x` used._). [#229](https://github.com/aedart/athenaeum/issues/229).
+* Unable to load nested relation, in `\Aedart\Http\Api\Resources\Relations\BaseRelationReference::loadNestedRelation()` (_caused by minor changes in Laravel's way of determining if nested relations are loaded._).
+
+### Deprecated
+
+* `\Aedart\Tests\Integration\Circuits\Stores\CacheStoreTest` - test is no longer needed.
 
 ## [9.3.0] - 2025-03-31
 

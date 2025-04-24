@@ -4,6 +4,8 @@ namespace Aedart\Tests\Integration\Streams\File;
 
 use Aedart\Streams\FileStream;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * D0_TruncateTest
@@ -14,6 +16,11 @@ use Aedart\Tests\TestCases\Streams\StreamTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
+#[Group(
+    'streams',
+    'stream-file',
+    'stream-file-d0',
+)]
 class D0_TruncateTest extends StreamTestCase
 {
     /**
@@ -22,6 +29,7 @@ class D0_TruncateTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canTruncateStream()
     {
         $data = $this->getFaker()->realText(50);
@@ -39,6 +47,7 @@ class D0_TruncateTest extends StreamTestCase
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
+    #[Test]
     public function canTruncateStreamToSpecificSize()
     {
         $data = $this->getFaker()->realText(50);

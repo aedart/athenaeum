@@ -6,6 +6,10 @@ use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
 use Aedart\Redmine\Issue;
 use Aedart\Redmine\Project;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
+use Throwable;
 
 /**
  * HasManyRelationTest
@@ -17,15 +21,21 @@ use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Relations
  */
+#[Group(
+    'redmine',
+    'redmine-relations',
+    'redmine-relations-has-many',
+)]
 class HasManyRelationTest extends RedmineTestCase
 {
     /**
      * @test
      *
      * @throws ErrorResponseException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canObtainRelatedResources()
     {
         // Similar to the "belongs to" relation test(s), we also use a real resource
@@ -113,9 +123,10 @@ class HasManyRelationTest extends RedmineTestCase
      * @test
      *
      * @throws ErrorResponseException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canFetchAllRelated()
     {
         // Similar to the "belongs to" relation test(s), we also use a real resource

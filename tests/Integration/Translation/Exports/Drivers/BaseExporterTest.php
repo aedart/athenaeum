@@ -10,8 +10,10 @@ use Aedart\Tests\TestCases\Translation\TranslationTestCase;
 use Aedart\Translation\Exports\Drivers\BaseExporter;
 use Aedart\Translation\Exports\Exceptions\InvalidLocales;
 use Aedart\Translation\Exports\Exceptions\InvalidPaths;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Translation\Loader;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * BaseExporterTest
@@ -24,6 +26,12 @@ use Mockery as m;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Translation\Exports\Drivers
  */
+#[Group(
+    'translations',
+    'translations-exporter',
+    'translations-exporter-drivers',
+    'translations-exporter-drivers-base',
+)]
 class BaseExporterTest extends TranslationTestCase
 {
     /*****************************************************************
@@ -55,6 +63,7 @@ class BaseExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function hasTranslationsLoader(): void
     {
         $loader = $this->exporter()->getTranslationLoader();
@@ -69,6 +78,7 @@ class BaseExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canDetectLocals(): void
     {
         $locales = $this->exporter()->detectLocals();
@@ -86,6 +96,7 @@ class BaseExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canDetectGroups(): void
     {
         $groups = $this->exporter()->detectGroups();
@@ -104,6 +115,7 @@ class BaseExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canObtainNamespacePaths(): void
     {
         $paths = $this->exporter()->getNamespacesWithPaths();
@@ -120,6 +132,7 @@ class BaseExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canObtainJsonPaths(): void
     {
         $paths = $this->exporter()->getJsonPaths();
@@ -136,6 +149,7 @@ class BaseExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function mergesNamespaceAndJsonPathsWithUserProvidedPaths(): void
     {
         $exporter = $this->exporter();
@@ -166,6 +180,7 @@ class BaseExporterTest extends TranslationTestCase
      * @throws ProfileNotFoundException
      * @throws ExporterException
      */
+    #[Test]
     public function failsExportWhenNoPathsAvailable(): void
     {
         $this->expectException(InvalidPaths::class);
@@ -191,6 +206,7 @@ class BaseExporterTest extends TranslationTestCase
      * @throws ExporterException
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function failsExportWhenInvalidLocalesProvided(): void
     {
         $this->expectException(InvalidLocales::class);
@@ -206,6 +222,7 @@ class BaseExporterTest extends TranslationTestCase
      * @throws ExporterException
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canExport(): void
     {
         // NOTE: Test uses null driver, so no exports are to be expected.

@@ -6,7 +6,9 @@ use Aedart\Contracts\Utils\Packages\Exceptions\PackageNotInstalledException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Version;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * VersionTest
@@ -17,6 +19,10 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
+#[Group(
+    'utils',
+    'version',
+)]
 class VersionTest extends UnitTestCase
 {
     /*****************************************************************
@@ -40,6 +46,7 @@ class VersionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineVersionOfPackage()
     {
         $version = Version::package('illuminate/support');
@@ -52,6 +59,7 @@ class VersionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function failsDeterminingVersionOfUnknownPackage()
     {
         $this->expectException(PackageNotInstalledException::class);
@@ -62,6 +70,7 @@ class VersionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function cachesPackageVersion()
     {
         $package = 'aedart/athenaeum';
@@ -78,6 +87,7 @@ class VersionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canClearCachedPackageVersion()
     {
         $package = 'aedart/athenaeum';
@@ -93,6 +103,7 @@ class VersionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canDetermineIfVersionIsAvailableForPackage()
     {
         $resultA = Version::hasFor('aedart/athenaeum');
@@ -105,6 +116,7 @@ class VersionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canGetApplicationVersion()
     {
         $version = Version::application();
@@ -117,6 +129,7 @@ class VersionTest extends UnitTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainAthenaeumPackageVersion()
     {
         $version = Version::package('aedart/athenaeum-support');
@@ -132,6 +145,7 @@ class VersionTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canUseVersionFromFile()
     {
         $file = Configuration::dataDir() . '/utils/version/version.txt';
@@ -149,6 +163,7 @@ class VersionTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canReadBuiltVersionFile()
     {
         $file = Configuration::dataDir() . '/utils/version/built-version.txt';
@@ -157,7 +172,7 @@ class VersionTest extends UnitTestCase
 
         ConsoleDebugger::output($version);
 
-        list($versionInFile, $reference) = explode('@', file_get_contents($file));
+        [$versionInFile, $reference] = explode('@', file_get_contents($file));
 
         $this->assertNotEmpty($version);
         $this->assertSame($versionInFile, $version->version());

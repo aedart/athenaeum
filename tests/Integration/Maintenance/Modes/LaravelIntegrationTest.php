@@ -5,7 +5,10 @@ namespace Aedart\Tests\Integration\Maintenance\Modes;
 use Aedart\Maintenance\Modes\FallbackManager;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Maintenance\Modes\MaintenanceModesTestCase;
+use Codeception\Attribute\DataProvider;
+use Codeception\Attribute\Group;
 use Illuminate\Contracts\Foundation\MaintenanceMode;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * LaravelIntegrationTest
@@ -16,6 +19,10 @@ use Illuminate\Contracts\Foundation\MaintenanceMode;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Maintenance\Modes
  */
+#[Group(
+    'maintenance-modes',
+    'maintenance-modes-integration-to-laravel',
+)]
 class LaravelIntegrationTest extends MaintenanceModesTestCase
 {
     /*****************************************************************
@@ -44,6 +51,7 @@ class LaravelIntegrationTest extends MaintenanceModesTestCase
      *
      * @return void
      */
+    #[Test]
     public function fallbackManagerNotRegistered()
     {
         $manager = $this->getMaintenanceModeManager();
@@ -61,6 +69,8 @@ class LaravelIntegrationTest extends MaintenanceModesTestCase
      * @param  string  $name
      * @return void
      */
+    #[DataProvider('providesDrivers')]
+    #[Test]
     public function hasInstalledDriver(string $name)
     {
         $manager = $this->getMaintenanceModeManager();

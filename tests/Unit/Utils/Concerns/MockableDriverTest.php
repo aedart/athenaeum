@@ -7,7 +7,9 @@ use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Tests\Helpers\Dummies\Box;
 use Aedart\Tests\Helpers\Dummies\Contracts\Box as BoxInterface;
 use Aedart\Utils\Concerns\MockableDriver;
+use Codeception\Attribute\Group;
 use Mockery\MockInterface;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * MockableDriverTest
@@ -19,6 +21,11 @@ use Mockery\MockInterface;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Concerns
  */
+#[Group(
+    'utils',
+    'driver',
+    'mockable-driver',
+)]
 class MockableDriverTest extends UnitTestCase
 {
     /*****************************************************************
@@ -65,6 +72,7 @@ class MockableDriverTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsNativeDriverWhenNotMocked(): void
     {
         $component = $this->makeComponent();
@@ -80,6 +88,7 @@ class MockableDriverTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canMockNativeDriver(): void
     {
         $expected = 123;
@@ -102,6 +111,7 @@ class MockableDriverTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canPartiallyMockNativeDriver(): void
     {
         $expected = 123;
@@ -126,6 +136,7 @@ class MockableDriverTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canSpyMockNativeDriver(): void
     {
         $expected = 123;

@@ -9,6 +9,8 @@ use Aedart\Support\Helpers\Cache\CacheFactoryTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Translation\TranslationTestCase;
 use Aedart\Translation\Exports\Drivers\CacheExporter;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\SimpleCache\InvalidArgumentException;
 
 /**
@@ -22,6 +24,12 @@ use Psr\SimpleCache\InvalidArgumentException;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Translation\Exports\Drivers
  */
+#[Group(
+    'translations',
+    'translations-exporter',
+    'translations-exporter-drivers',
+    'translations-exporter-drivers-cache',
+)]
 class CacheExporterTest extends TranslationTestCase
 {
     use CacheFactoryTrait;
@@ -55,6 +63,7 @@ class CacheExporterTest extends TranslationTestCase
      *
      * @throws ProfileNotFoundException
      */
+    #[Test]
     public function canObtainExporter(): void
     {
         $exporter = $this->exporter();
@@ -71,6 +80,7 @@ class CacheExporterTest extends TranslationTestCase
      * @throws ExporterException
      * @throws InvalidArgumentException
      */
+    #[Test]
     public function cachesExports(): void
     {
         $exporter = $this->exporter();

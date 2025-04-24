@@ -4,6 +4,8 @@ namespace Aedart\Tests\Unit\Properties;
 
 use Aedart\Contracts\Properties\AccessibilityLevels;
 use Aedart\Tests\TestCases\Properties\PropertiesTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use RangeException;
 use ReflectionClass;
 
@@ -16,11 +18,16 @@ use ReflectionClass;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Properties
  */
+#[Group(
+    'properties',
+    'properties-accessibility'
+)]
 class AccessibilityTest extends PropertiesTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function getDefaultPropertyAccessibilityLevel()
     {
         $method = $this->getMethod('getPropertyAccessibilityLevel');
@@ -31,6 +38,7 @@ class AccessibilityTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function setAndGetPropertyAccessibilityLevel()
     {
         $setter = $this->getMethod('setPropertyAccessibilityLevel');
@@ -45,6 +53,7 @@ class AccessibilityTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function setInvalidPropertyAccessibilityLevel()
     {
         $this->expectException(RangeException::class);
@@ -58,6 +67,7 @@ class AccessibilityTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function isPublicPropertyAccessible()
     {
         $isAccessibleMethod = $this->getMethod('isPropertyAccessible');
@@ -70,6 +80,7 @@ class AccessibilityTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function isProtectedPropertyAccessible()
     {
         $isAccessibleMethod = $this->getMethod('isPropertyAccessible');
@@ -82,6 +93,7 @@ class AccessibilityTest extends PropertiesTestCase
     /**
      * @test
      */
+    #[Test]
     public function isPrivatePropertyAccessible()
     {
         $isAccessibleMethod = $this->getMethod('isPropertyAccessible');

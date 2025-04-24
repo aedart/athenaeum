@@ -8,22 +8,31 @@ use Aedart\Audit\Models\AuditTrail;
 use Aedart\Contracts\Audit\Types;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Audit\AuditTestCase;
+use Codeception\Attribute\Group;
 use Illuminate\Support\Facades\Auth;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * AuditTrailTest
  *
  * @group audit
  * @group audit-trail
+ * @group audit-b0
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Audit
  */
+#[Group(
+    'audit',
+    'audit-trail',
+    'audit-b0',
+)]
 class B0_AuditTrailTest extends AuditTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function recordsCreateEvent()
     {
         $category = $this->makeCategory();
@@ -59,6 +68,7 @@ class B0_AuditTrailTest extends AuditTestCase
     /**
      * @test
      */
+    #[Test]
     public function recordsUpdateEvents()
     {
         $description = $this->getFaker()->sentence();
@@ -101,6 +111,7 @@ class B0_AuditTrailTest extends AuditTestCase
     /**
      * @test
      */
+    #[Test]
     public function recordsDeletedEvents()
     {
         $category = $this->makeCategory();
@@ -130,6 +141,7 @@ class B0_AuditTrailTest extends AuditTestCase
     /**
      * @test
      */
+    #[Test]
     public function recordsForceDeletedEvents()
     {
         $category = $this->makeCategory();
@@ -159,6 +171,7 @@ class B0_AuditTrailTest extends AuditTestCase
     /**
      * @test
      */
+    #[Test]
     public function recordsRestoreEvents()
     {
         $category = $this->makeCategory();
@@ -187,6 +200,7 @@ class B0_AuditTrailTest extends AuditTestCase
     /**
      * @test
      */
+    #[Test]
     public function recordsUserThatCausedChange()
     {
         $user = $this->createUser();
@@ -210,6 +224,7 @@ class B0_AuditTrailTest extends AuditTestCase
     /**
      * @test
      */
+    #[Test]
     public function nullsUserIdWhenUserNoLongerExists()
     {
         $user = $this->createUser();
@@ -241,6 +256,7 @@ class B0_AuditTrailTest extends AuditTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainUserAuditTrail()
     {
         $user = $this->createUser();
@@ -269,6 +285,7 @@ class B0_AuditTrailTest extends AuditTestCase
     /**
      * @test
      */
+    #[Test]
     public function canRecordCustomEvents()
     {
         $faker = $this->getFaker();
@@ -312,6 +329,7 @@ class B0_AuditTrailTest extends AuditTestCase
     /**
      * @test
      */
+    #[Test]
     public function canSkipNextRecordingChange()
     {
         $category = $this->makeCategory();
@@ -332,6 +350,7 @@ class B0_AuditTrailTest extends AuditTestCase
      *
      * @return void
      */
+    #[Test]
     public function canRecordCustomChanges(): void
     {
         $category = $this->makeCategory();

@@ -14,6 +14,8 @@ use Aedart\Tests\Helpers\Dummies\Collections\Summations\Rules\AmountRule;
 use Aedart\Tests\Helpers\Dummies\Collections\Summations\Rules\PauseRule;
 use Aedart\Tests\Helpers\Dummies\Collections\Summations\Rules\RunningRule;
 use Aedart\Tests\Helpers\Dummies\Collections\Summations\Rules\WalkingRule;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ItemsProcessorTest
@@ -25,6 +27,11 @@ use Aedart\Tests\Helpers\Dummies\Collections\Summations\Rules\WalkingRule;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Collections\Summations
  */
+#[Group(
+    'collections',
+    'summations',
+    'items-processor',
+)]
 class ItemsProcessorTest extends IntegrationTestCase
 {
     /*****************************************************************
@@ -111,6 +118,7 @@ class ItemsProcessorTest extends IntegrationTestCase
     /**
      * @test
      */
+    #[Test]
     public function canObtainInstance()
     {
         $processor = $this->makeProcessor([ new NullProcessingRule() ]);
@@ -121,6 +129,7 @@ class ItemsProcessorTest extends IntegrationTestCase
     /**
      * @test
      */
+    #[Test]
     public function canProcessItems()
     {
         // Create new processor with given rules (testing if they can be resolved...)
@@ -156,6 +165,7 @@ class ItemsProcessorTest extends IntegrationTestCase
     /**
      * @test
      */
+    #[Test]
     public function canProcessYieldedItems()
     {
         // Create new processor with given rules (testing if they can be resolved...)

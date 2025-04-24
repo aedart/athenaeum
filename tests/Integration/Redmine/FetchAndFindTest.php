@@ -8,7 +8,11 @@ use Aedart\Redmine\Exceptions\NotFound;
 use Aedart\Redmine\RedmineApiResource;
 use Aedart\Tests\Helpers\Dummies\Redmine\DummyResource;
 use Aedart\Tests\TestCases\Redmine\RedmineTestCase;
+use Codeception\Attribute\Group;
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use Teapot\StatusCode\All as StatusCodes;
+use Throwable;
 
 /**
  * FetchAndFindTest
@@ -23,11 +27,20 @@ use Teapot\StatusCode\All as StatusCodes;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
+#[Group(
+    'redmine',
+    'redmine-resources',
+    'redmine-resources-list',
+    'redmine-resources-fetch',
+    'redmine-resources-fetch-multiple',
+    'redmine-resources-find',
+)]
 class FetchAndFindTest extends RedmineTestCase
 {
     /**
      * @test
      */
+    #[Test]
     public function canFetchMultipleViaList()
     {
         $amount = 8;
@@ -63,9 +76,10 @@ class FetchAndFindTest extends RedmineTestCase
      * @test
      *
      * @throws ConnectionException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function canFindSingleResource()
     {
         $id = 1324;
@@ -85,9 +99,10 @@ class FetchAndFindTest extends RedmineTestCase
      * @test
      *
      * @throws ConnectionException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function failsWhenResourceDoesNotExist()
     {
         $this->expectException(NotFound::class);
@@ -101,9 +116,10 @@ class FetchAndFindTest extends RedmineTestCase
      * @test
      *
      * @throws ConnectionException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function findReturnsNullWhenResourceDoesNotExist()
     {
         $connection = $this->connectionWithMock([], StatusCodes::NOT_FOUND);
@@ -117,9 +133,10 @@ class FetchAndFindTest extends RedmineTestCase
      * @test
      *
      * @throws UnsupportedOperationException
-     * @throws \JsonException
-     * @throws \Throwable
+     * @throws JsonException
+     * @throws Throwable
      */
+    #[Test]
     public function failsIfDoesNotSupportListingOperation()
     {
         $this->expectException(UnsupportedOperationException::class);

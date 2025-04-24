@@ -30,7 +30,7 @@
         "illuminate/filesystem": "^v12.9.2"
     },
     "require-dev": {
-        "devium/toml": "^1.0.5",
+        "devium/toml": "^1.0.6",
         "nette/neon": "^3.4.4",
         "symfony/yaml": "^v7.2.5"
     },

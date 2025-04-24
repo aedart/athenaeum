@@ -6,6 +6,8 @@ use Aedart\Core\Bootstrappers\DetectAndLoadEnvironment;
 use Aedart\Core\Bootstrappers\LoadConfiguration;
 use Aedart\Core\Bootstrappers\RegisterApplicationAliases;
 use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * E1_AliasRegistrationTest
@@ -16,6 +18,10 @@ use Aedart\Tests\TestCases\AthenaeumCoreTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
+#[Group(
+    'application',
+    'application-e2',
+)]
 class E2_AliasRegistrationTest extends AthenaeumCoreTestCase
 {
     /*****************************************************************
@@ -43,6 +49,7 @@ class E2_AliasRegistrationTest extends AthenaeumCoreTestCase
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
+    #[Test]
     public function hasRegisteredAliases()
     {
         $this->bootstrap();

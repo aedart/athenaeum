@@ -7,6 +7,8 @@ use Aedart\Contracts\Utils\Random\Type;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Random\Factory;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Throwable;
 
 /**
@@ -20,6 +22,12 @@ use Throwable;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Unit\Utils\Random\Types
  */
+#[Group(
+    'utils',
+    'utils-random',
+    'utils-randomizer',
+    'array-randomizer',
+)]
 class ArrayRandomizerTest extends UnitTestCase
 {
     /*****************************************************************
@@ -50,6 +58,7 @@ class ArrayRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canPickKeys(): void
     {
         $result = $this->makeRandomizer()->pickKeys([ 'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5 ], 2);
@@ -66,6 +75,7 @@ class ArrayRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canPickSingleKey(): void
     {
         $result = $this->makeRandomizer()->pickKey([ 'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5 ]);
@@ -82,6 +92,7 @@ class ArrayRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canPickValues(): void
     {
         $arr = [ 'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5 ];
@@ -101,6 +112,7 @@ class ArrayRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canPickValuesAndPreserveKeys(): void
     {
         $arr = [ 'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5 ];
@@ -121,6 +133,7 @@ class ArrayRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canPickSingleValue(): void
     {
         $arr = [ 'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5 ];
@@ -138,6 +151,7 @@ class ArrayRandomizerTest extends UnitTestCase
      *
      * @throws Throwable
      */
+    #[Test]
     public function canShuffle(): void
     {
         $result = $this->makeRandomizer()->shuffle([ 'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5 ]);

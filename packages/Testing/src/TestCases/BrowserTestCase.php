@@ -4,6 +4,7 @@ namespace Aedart\Testing\TestCases;
 
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\Laravel\DuskTestHelper;
+use Codeception\Attribute\BeforeClass;
 
 /**
  * Browser Test Case
@@ -55,9 +56,8 @@ abstract class BrowserTestCase extends IntegrationTestCase
 
     /**
      * Prepares chrome driver, before each test
-     *
-     * @beforeClass
      */
+    #[BeforeClass]
     public static function prepare()
     {
         // Avoid starting multiple chrome driver processes

@@ -7,7 +7,9 @@ use Aedart\Contracts\Core\Helpers\NamespaceDetector as NamespaceDetectorInterfac
 use Aedart\Core\Helpers\NamespaceDetector;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
 use Codeception\Configuration;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * NamespaceDetectorTest
@@ -20,6 +22,12 @@ use Codeception\Configuration;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Core\Helpers
  */
+#[Group(
+    'core',
+    'application',
+    'application-helpers',
+    'namespace-detector'
+)]
 class NamespaceDetectorTest extends UnitTestCase
 {
     /*****************************************************************
@@ -77,6 +85,7 @@ class NamespaceDetectorTest extends UnitTestCase
      *
      * @throws \RuntimeException
      */
+    #[Test]
     public function canDetectNamespace()
     {
         $namespace = $this->makeDetector()->detect($this->validComposerFile());
@@ -90,6 +99,7 @@ class NamespaceDetectorTest extends UnitTestCase
      *
      * @throws \RuntimeException
      */
+    #[Test]
     public function failsIfComposerFileDoesNotExist()
     {
         $this->expectException(\RuntimeException::class);
@@ -102,6 +112,7 @@ class NamespaceDetectorTest extends UnitTestCase
      *
      * @throws \RuntimeException
      */
+    #[Test]
     public function failsIfComposerFileDoesNotHavePsr4()
     {
         $this->expectException(\RuntimeException::class);

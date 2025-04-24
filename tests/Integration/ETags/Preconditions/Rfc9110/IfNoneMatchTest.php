@@ -6,6 +6,8 @@ use Aedart\Contracts\ETags\Preconditions\ResourceContext;
 use Aedart\ETags\Facades\Generator;
 use Aedart\ETags\Preconditions\Actions\DefaultActions;
 use Aedart\Tests\TestCases\ETags\PreconditionsTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
@@ -21,6 +23,11 @@ use Throwable;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions\Rfc9110
  */
+#[Group(
+    'etags',
+    'preconditions',
+    'rfc9110-if-none-match'
+)]
 class IfNoneMatchTest extends PreconditionsTestCase
 {
     /**
@@ -30,6 +37,7 @@ class IfNoneMatchTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function continuesToIfRangeWhenPasses(): void
     {
         $etag = Generator::makeStrong('abc');
@@ -62,6 +70,7 @@ class IfNoneMatchTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function failsWhenWildcardRequested(): void
     {
         // [...] if false for GET/HEAD, respond 304 (Not Modified)
@@ -103,6 +112,7 @@ class IfNoneMatchTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function failsWhenListOfEtagsWithMatchingValueRequested(): void
     {
         // [...] if false for GET/HEAD, respond 304 (Not Modified)
@@ -144,6 +154,7 @@ class IfNoneMatchTest extends PreconditionsTestCase
      * @throws HttpExceptionInterface
      * @throws Throwable
      */
+    #[Test]
     public function respondsPreconditionFails(): void
     {
         // [...] if false for GET/HEAD, respond 304 (Not Modified)

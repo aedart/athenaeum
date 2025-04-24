@@ -6,6 +6,8 @@ use Aedart\Contracts\Streams\Meta\Repository as RepositoryInterface;
 use Aedart\Streams\Meta\Repository;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
+use Codeception\Attribute\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * RepositoryTest
@@ -17,6 +19,11 @@ use Aedart\Testing\TestCases\UnitTestCase;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Streams\Meta
  */
+#[Group(
+    'streams',
+    'streams-meta',
+    'streams-meta-repository'
+)]
 class RepositoryTest extends UnitTestCase
 {
     /*****************************************************************
@@ -44,6 +51,7 @@ class RepositoryTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainInstance()
     {
         $repo = $this->makeRepository();
@@ -56,6 +64,7 @@ class RepositoryTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canSetAndObtainMeta()
     {
         $repo = $this->makeRepository();
@@ -76,6 +85,7 @@ class RepositoryTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function returnsDefaultValue()
     {
         $repo = $this->makeRepository();
@@ -93,6 +103,7 @@ class RepositoryTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canRemoveMeta()
     {
         $repo = $this->makeRepository();
@@ -112,6 +123,7 @@ class RepositoryTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canMergeNewMetaIntoRepository()
     {
         $repo = $this->makeRepository([
@@ -134,6 +146,7 @@ class RepositoryTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canObtainAllMeta()
     {
         $repo = $this->makeRepository([
@@ -157,6 +170,7 @@ class RepositoryTest extends UnitTestCase
      *
      * @return void
      */
+    #[Test]
     public function canUseArrayAccessOnRepository()
     {
         $repo = $this->makeRepository();
