@@ -18,10 +18,10 @@
         "php": "^8.3",
         "aedart/athenaeum-container": "^9.6",
         "aedart/athenaeum-contracts": "^9.6",
-        "codeception/codeception": "^5.3.0",
+        "codeception/codeception": "^5.3.1",
         "codeception/module-asserts": "^3.2.0",
         "fakerphp/faker": "^v1.24.1",
-        "illuminate/testing": "^v12.13.0",
+        "illuminate/testing": "^v12.15.0",
         "mockery/mockery": "1.6.*",
         "orchestra/testbench": "^v10.3.0",
         "orchestra/testbench-dusk": "^v10.3.0"

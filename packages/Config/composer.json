@@ -26,8 +26,8 @@
         "aedart/athenaeum-contracts": "^9.6",
         "aedart/athenaeum-support": "^9.6",
         "aedart/athenaeum-utils": "^9.6",
-        "illuminate/config": "^v12.13.0",
-        "illuminate/filesystem": "^v12.13.0"
+        "illuminate/config": "^v12.15.0",
+        "illuminate/filesystem": "^v12.15.0"
     },
     "require-dev": {
         "devium/toml": "^1.0.6",
