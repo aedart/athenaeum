@@ -22,7 +22,7 @@
         "aedart/athenaeum-etags": "^9.8",
         "aedart/athenaeum-support": "^9.8",
         "aedart/athenaeum-validation": "^9.8",
-        "illuminate/http": "^v12.17.0",
+        "illuminate/http": "^v12.19.3",
         "shrikeh/teapot": "^3.0.0"
     },
     "autoload": {
