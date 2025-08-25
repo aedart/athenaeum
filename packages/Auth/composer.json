@@ -18,12 +18,12 @@
         "php": "^8.3",
         "aedart/athenaeum-contracts": "^9.10",
         "aedart/athenaeum-support": "^9.10",
-        "illuminate/validation": "^v12.20.0",
-        "laravel/fortify": "^1.27.0",
+        "illuminate/validation": "^v12.25.0",
+        "laravel/fortify": "^1.28.0",
         "shrikeh/teapot": "^3.0.0"
     },
     "require-dev": {
-        "laravel/fortify": "^1.27.0"
+        "laravel/fortify": "^1.28.0"
     },
     "autoload": {
         "psr-4": {
