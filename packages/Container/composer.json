@@ -18,9 +18,9 @@
     "type": "library",
     "require": {
         "php": "^8.3",
-        "aedart/athenaeum-contracts": "^9.4",
-        "aedart/athenaeum-support": "^9.4",
-        "illuminate/container": "^v12.9.2"
+        "aedart/athenaeum-contracts": "^9.12",
+        "aedart/athenaeum-support": "^9.12",
+        "illuminate/container": "^v12.28.1"
     },
     "autoload": {
         "psr-4": {

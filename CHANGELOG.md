@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.11.0] - 2025-09-05
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [9.10.0] - 2025-08-25
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* Unstable development version of `symfony/var-dumper` required as dev-dependency, in root `composer.json`. 
+
+## [9.9.0] - 2025-07-21
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [9.8.0] - 2025-06-27
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [9.7.0] - 2025-06-10
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [9.6.0] - 2025-05-26
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [9.5.0] - 2025-05-12
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [9.4.0] - 2025-04-24
+
 ### Added
 
 * Codeception/PHPUnit Attributes for tests and test related components (_PHPUnit `v11.x` and previously accepted PHPDoc-like annotations, but annotations are not longer supported from PHPUnit `v12.x`_). [#229](https://github.com/aedart/athenaeum/issues/229), [#230](https://github.com/aedart/athenaeum/issues/230).
@@ -1731,7 +1779,15 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/9.3.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/9.10.0...HEAD
+[9.11.0]: https://github.com/aedart/athenaeum/compare/9.10.0...9.11.0
+[9.10.0]: https://github.com/aedart/athenaeum/compare/9.9.0...9.10.0
+[9.9.0]: https://github.com/aedart/athenaeum/compare/9.8.0...9.9.0
+[9.8.0]: https://github.com/aedart/athenaeum/compare/9.7.0...9.8.0
+[9.7.0]: https://github.com/aedart/athenaeum/compare/9.6.0...9.7.0
+[9.6.0]: https://github.com/aedart/athenaeum/compare/9.5.0...9.6.0
+[9.5.0]: https://github.com/aedart/athenaeum/compare/9.4.0...9.5.0
+[9.4.0]: https://github.com/aedart/athenaeum/compare/9.3.0...9.4.0
 [9.3.0]: https://github.com/aedart/athenaeum/compare/9.2.0...9.3.0
 [9.2.0]: https://github.com/aedart/athenaeum/compare/9.1.0...9.2.0
 [9.1.0]: https://github.com/aedart/athenaeum/compare/9.0.0...9.1.0

@@ -19,11 +19,11 @@
     "type": "library",
     "require": {
         "php": "^8.3",
-        "aedart/athenaeum-container": "^9.4",
-        "aedart/athenaeum-database": "^9.4",
-        "aedart/athenaeum-streams": "^9.4",
-        "illuminate/console": "^v12.9.2",
-        "league/flysystem": "^3.29.1"
+        "aedart/athenaeum-container": "^9.12",
+        "aedart/athenaeum-database": "^9.12",
+        "aedart/athenaeum-streams": "^9.12",
+        "illuminate/console": "^v12.28.1",
+        "league/flysystem": "^3.30.0"
     },
     "require-dev": {
         "league/flysystem-adapter-test-utilities": "^3.29.0"
