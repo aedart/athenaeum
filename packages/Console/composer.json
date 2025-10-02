@@ -18,8 +18,8 @@
     "type": "library",
     "require": {
         "php": "^8.3",
-        "aedart/athenaeum-contracts": "^9.13",
-        "aedart/athenaeum-support": "^9.13",
+        "aedart/athenaeum-contracts": "^9.14",
+        "aedart/athenaeum-support": "^9.14",
         "dragonmantank/cron-expression": "^3.4.0",
         "illuminate/cache": "^v12.32.5",
         "illuminate/console": "^v12.32.5"
