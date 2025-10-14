@@ -18,7 +18,7 @@
     "type": "library",
     "require": {
         "php": "^8.3",
-        "aedart/athenaeum-support": "^9.14",
+        "aedart/athenaeum-support": "^9.15",
         "illuminate/events": "^v12.33.0"
     },
     "autoload": {
