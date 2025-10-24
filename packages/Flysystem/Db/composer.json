@@ -22,11 +22,11 @@
         "aedart/athenaeum-container": "^9.15",
         "aedart/athenaeum-database": "^9.15",
         "aedart/athenaeum-streams": "^9.15",
-        "illuminate/console": "^v12.33.0",
-        "league/flysystem": "^3.30.0"
+        "illuminate/console": "^v12.35.1",
+        "league/flysystem": "^3.30.1"
     },
     "require-dev": {
-        "league/flysystem-adapter-test-utilities": "^3.29.0"
+        "league/flysystem-adapter-test-utilities": "^3.30.1"
     },
     "autoload": {
         "psr-4": {
