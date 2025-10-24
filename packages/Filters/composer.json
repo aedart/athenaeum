@@ -19,11 +19,11 @@
     "type": "library",
     "require": {
         "php": "^8.3",
-        "aedart/athenaeum-contracts": "^9.15",
-        "aedart/athenaeum-database": "^9.15",
-        "aedart/athenaeum-support": "^9.15",
-        "aedart/athenaeum-utils": "^9.15",
-        "aedart/athenaeum-validation": "^9.15",
+        "aedart/athenaeum-contracts": "^9.16",
+        "aedart/athenaeum-database": "^9.16",
+        "aedart/athenaeum-support": "^9.16",
+        "aedart/athenaeum-utils": "^9.16",
+        "aedart/athenaeum-validation": "^9.16",
         "illuminate/http": "^v12.35.1",
         "illuminate/pipeline": "^v12.35.1"
     },
