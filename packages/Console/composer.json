@@ -20,9 +20,9 @@
         "php": "^8.3",
         "aedart/athenaeum-contracts": "^9.16",
         "aedart/athenaeum-support": "^9.16",
-        "dragonmantank/cron-expression": "^3.4.0",
-        "illuminate/cache": "^v12.35.1",
-        "illuminate/console": "^v12.35.1"
+        "dragonmantank/cron-expression": "^3.6.0",
+        "illuminate/cache": "^v12.37.0",
+        "illuminate/console": "^v12.37.0"
     },
     "autoload": {
         "psr-4": {
