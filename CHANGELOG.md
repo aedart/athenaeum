@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.17.0] - 2025-11-24
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [9.16.0] - 2025-11-06
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [9.15.0] - 2025-10-24
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [9.14.0] - 2025-10-14
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [9.13.0] - 2025-10-02
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+## [9.12.0] - 2025-09-17
+
+### Changed
+
+* Updated dependencies (_service update_).
+
 ## [9.11.0] - 2025-09-05
 
 ### Changed
@@ -1779,7 +1815,13 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/9.10.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/9.17.0...HEAD
+[9.17.0]: https://github.com/aedart/athenaeum/compare/9.16.0...9.17.0
+[9.16.0]: https://github.com/aedart/athenaeum/compare/9.15.0...9.16.0
+[9.15.0]: https://github.com/aedart/athenaeum/compare/9.14.0...9.15.0
+[9.14.0]: https://github.com/aedart/athenaeum/compare/9.13.0...9.14.0
+[9.13.0]: https://github.com/aedart/athenaeum/compare/9.12.0...9.13.0
+[9.12.0]: https://github.com/aedart/athenaeum/compare/9.11.0...9.12.0
 [9.11.0]: https://github.com/aedart/athenaeum/compare/9.10.0...9.11.0
 [9.10.0]: https://github.com/aedart/athenaeum/compare/9.9.0...9.10.0
 [9.9.0]: https://github.com/aedart/athenaeum/compare/9.8.0...9.9.0
