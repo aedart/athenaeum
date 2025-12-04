@@ -23,9 +23,9 @@
     "type": "library",
     "require": {
         "php": "^8.3",
-        "aedart/athenaeum-contracts": "^9.18",
-        "aedart/athenaeum-support": "^9.18",
-        "aedart/athenaeum-utils": "^9.18",
+        "aedart/athenaeum-contracts": "^9.19",
+        "aedart/athenaeum-support": "^9.19",
+        "aedart/athenaeum-utils": "^9.19",
         "illuminate/config": "^v12.41.1",
         "illuminate/filesystem": "^v12.41.1"
     },
