@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.3",
         "aedart/athenaeum-support": "^9.19",
-        "illuminate/translation": "^v12.41.1",
+        "illuminate/translation": "^v12.42.0",
         "symfony/finder": "^7.4.0"
     },
     "autoload": {
