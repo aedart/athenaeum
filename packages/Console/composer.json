@@ -21,8 +21,8 @@
         "aedart/athenaeum-contracts": "^9.21",
         "aedart/athenaeum-support": "^9.21",
         "dragonmantank/cron-expression": "^3.6.0",
-        "illuminate/cache": "^v12.44.0",
-        "illuminate/console": "^v12.44.0"
+        "illuminate/cache": "^v12.47.0",
+        "illuminate/console": "^v12.47.0"
     },
     "autoload": {
         "psr-4": {
