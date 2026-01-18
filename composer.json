@@ -113,7 +113,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "9.21.x-dev"
+            "dev-master": "9.22.x-dev"
         },
         "extra": {
             "bamarni-bin": {
