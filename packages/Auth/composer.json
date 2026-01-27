@@ -18,7 +18,7 @@
         "php": "^8.3",
         "aedart/athenaeum-contracts": "^9.22",
         "aedart/athenaeum-support": "^9.22",
-        "illuminate/validation": "^v12.47.0",
+        "illuminate/validation": "^v12.48.1",
         "laravel/fortify": "^1.33.0",
         "shrikeh/teapot": "^3.0.0"
     },
