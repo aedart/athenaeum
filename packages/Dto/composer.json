@@ -17,9 +17,9 @@
     "type": "library",
     "require": {
         "php": "^8.3",
-        "aedart/athenaeum-contracts": "^9.18",
-        "aedart/athenaeum-properties": "^9.18",
-        "aedart/athenaeum-utils": "^9.18"
+        "aedart/athenaeum-contracts": "^9.23",
+        "aedart/athenaeum-properties": "^9.23",
+        "aedart/athenaeum-utils": "^9.23"
     },
     "autoload": {
         "psr-4": {
