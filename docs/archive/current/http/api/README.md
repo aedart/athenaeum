@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Http API
 
-Opinionated utilities to help shape and format your API, using [Laravel's API Resources](https://laravel.com/docs/12.x/eloquent-resources). 
+Opinionated utilities to help shape and format your API, using [Laravel's API Resources](https://laravel.com/docs/13.x/eloquent-resources). 
 
 ## Example
 

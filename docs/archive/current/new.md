@@ -24,7 +24,7 @@ If you manage to learn about these concepts, you stand a far better chance of un
 
 You could start by going through Laravel's [official documentation](https://laravel.com/docs/12.x).
 It has good and up-to-date information, on all the major aspects.
-In particular, you should focus on [Architectural Concepts](https://laravel.com/docs/12.x/container).
+In particular, you should focus on [Architectural Concepts](https://laravel.com/docs/13.x/container).
 It contains everything you need to know, in order to satisfy the bare minimum.
 
 ## Or... Watch Laracast!

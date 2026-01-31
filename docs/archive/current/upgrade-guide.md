@@ -17,7 +17,7 @@ You need PHP `v8.3` or higher to run Athenaeum packages.
 
 ### Laravel `v12.x`
 
-Please read Laravel's [upgrade guide](https://laravel.com/docs/12.x/upgrade), before continuing here.
+Please read Laravel's [upgrade guide](https://laravel.com/docs/13.x/upgrade), before continuing here.
 
 ### Upgrade to `ramsey/http-range` `v2.x` and `psr/http-message` `v2.x`
 

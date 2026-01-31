@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Authentication
 
-Inspired by [Laravel's Http Client](https://laravel.com/docs/12.x/http-client#authentication), authentication headers can be specified via these shortcut methods.
+Inspired by [Laravel's Http Client](https://laravel.com/docs/13.x/http-client#authentication), authentication headers can be specified via these shortcut methods.
 
 [[TOC]]
 
