@@ -16,7 +16,7 @@ Temporary changelog for `v10.x` series.
 
 **Non-breaking Changes**
 
-* N/A
+* Removed PHPUnit annotations from tests. [#233](https://github.com/aedart/athenaeum/issues/233).
 
 ### Fixed
 
