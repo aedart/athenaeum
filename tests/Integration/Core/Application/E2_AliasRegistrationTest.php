@@ -12,9 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E1_AliasRegistrationTest
  *
- * @group application
- * @group application-e2
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
@@ -45,8 +42,6 @@ class E2_AliasRegistrationTest extends AthenaeumCoreTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     #[Test]

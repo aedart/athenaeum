@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * X0_MiscTest
  *
- * @group streams
- * @group streams-x0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -24,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class X0_MiscTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -43,8 +38,6 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -61,8 +54,6 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -76,8 +67,6 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -94,8 +83,6 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -111,8 +98,6 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -128,8 +113,6 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -145,8 +128,6 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -162,8 +143,6 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -180,8 +159,6 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -198,8 +175,6 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -216,8 +191,6 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -241,8 +214,6 @@ class X0_MiscTest extends StreamTestCase
      *
      * @see https://github.com/actions/runner/issues/241
      *
-     * test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -258,8 +229,6 @@ class X0_MiscTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

@@ -13,10 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ConsoleTraitsTest
  *
- * @group console
- * @group console-traits
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Console\Traits
  */
@@ -48,9 +44,6 @@ class ConsoleTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

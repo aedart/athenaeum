@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ManagerTest
  *
- * @group circuits
- * @group circuit-breaker
- * @group circuit-breaker-manager
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Circuits
  */
@@ -26,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class ManagerTest extends CircuitBreakerTestCase
 {
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]
@@ -39,8 +33,6 @@ class ManagerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]
@@ -53,8 +45,6 @@ class ManagerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]
@@ -66,8 +56,6 @@ class ManagerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]

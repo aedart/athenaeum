@@ -16,11 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * DeleteSingleResourceRequestTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-requests
- * @group delete-single-resource-request
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
@@ -48,8 +43,6 @@ class DeleteSingleResourceRequestTest extends ApiResourceRequestsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -92,8 +85,6 @@ class DeleteSingleResourceRequestTest extends ApiResourceRequestsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException|ETagGeneratorException

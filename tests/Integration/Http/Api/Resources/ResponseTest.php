@@ -17,10 +17,6 @@ use Teapot\StatusCode\All as HttpStatus;
 /**
  * ResponseTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-response
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
@@ -32,8 +28,6 @@ use Teapot\StatusCode\All as HttpStatus;
 class ResponseTest extends ApiResourcesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -74,8 +68,6 @@ class ResponseTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

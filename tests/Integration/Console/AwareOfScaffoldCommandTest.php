@@ -14,11 +14,6 @@ use Symfony\Component\Console\Tester\CommandTester;
 /**
  * AwareOfScaffoldCommandTest
  *
- * @group console
- * @group aware-of
- * @group aware-of-scaffold
- * @group aware-of-scaffold-command
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Console
  */
@@ -45,9 +40,6 @@ class AwareOfScaffoldCommandTest extends IntegrationTestCase
      * Actual Test
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canCreateAwareOfComponents()
     {

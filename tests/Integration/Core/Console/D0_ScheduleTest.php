@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D0_ScheduleTest
  *
- * @group application
- * @group application-console
- * @group application-console-d0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Console
  */
@@ -64,9 +60,6 @@ class D0_ScheduleTest extends AthenaeumCoreConsoleTestCase
      * Actual tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function hasRegisteredScheduledTasksFromConfig()
     {
@@ -81,9 +74,6 @@ class D0_ScheduleTest extends AthenaeumCoreConsoleTestCase
         $this->assertNotEmpty($events, 'No events');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canRunSchedule()
     {

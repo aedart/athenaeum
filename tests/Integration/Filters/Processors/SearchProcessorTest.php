@@ -13,9 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * SearchProcessorTest
  *
- * @group filters
- * @group filters-search-processor
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Processors
  */
@@ -26,8 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 class SearchProcessorTest extends FiltersTestCase
 {
     /**
-     * @test
-     *
      * @throws ValidationException
      */
     #[Test]
@@ -66,8 +61,6 @@ class SearchProcessorTest extends FiltersTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ValidationException
      */
     #[Test]
@@ -106,8 +99,6 @@ class SearchProcessorTest extends FiltersTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException

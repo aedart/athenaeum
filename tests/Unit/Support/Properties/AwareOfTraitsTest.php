@@ -17,11 +17,6 @@ use Symfony\Component\Finder\SplFileInfo;
  *
  * AwareOfTraitsTest
  *
- * @group support
- * @group properties
- * @group aware-of
- * @group aware-of-properties
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Support\Properties
  */
@@ -85,9 +80,6 @@ class AwareOfTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfTraits
-     *
      * @param string $trait Class path
      *
      * @throws \ReflectionException

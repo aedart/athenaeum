@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * CollectionsTest
  *
- * @group redmine
- * @group redmine-collections
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Collections
  */
@@ -24,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class CollectionsTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -45,8 +40,6 @@ class CollectionsTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -60,8 +53,6 @@ class CollectionsTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]

@@ -14,11 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C6_WhereDateTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-g0
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -122,9 +117,6 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesWhereDatetime
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -146,9 +138,6 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesWhereDatetimeFromDateInstance
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -170,9 +159,6 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesDefaultDate
-     *
      * @param string $grammar
      *
      * @throws ProfileNotFoundException
@@ -198,9 +184,6 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesOrWhereDatetime
-     *
      * @param string $grammar
      * @param string $expected
      *

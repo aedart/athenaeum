@@ -13,10 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * FailedPasswordResetLinkApiResponseTest
  *
- * @group auth
- * @group fortify
- * @group failed-password-reset-link-api-response
- *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Integration\Auth\Fortify
  */
@@ -28,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class FailedPasswordResetLinkApiResponseTest extends FortifyTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

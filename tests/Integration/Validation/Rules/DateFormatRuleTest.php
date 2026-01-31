@@ -14,10 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * DateFormatRuleTest
  *
- * @group validation
- * @group rules
- * @group date-format
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Validation\Rules
  */
@@ -85,9 +81,6 @@ class DateFormatRuleTest extends ValidationTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider validInput
-     *
      * @param mixed $input
      * @param string[] $formats
      *
@@ -103,9 +96,6 @@ class DateFormatRuleTest extends ValidationTestCase
     }
 
     /**
-     * @test
-     * @dataProvider invalidInput
-     *
      * @param mixed $input
      * @param string[] $formats
      *

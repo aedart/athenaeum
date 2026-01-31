@@ -14,9 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * X2_MetaTest
  *
- * @group streams
- * @group streams-x2
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -27,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class X2_MetaTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -44,8 +39,6 @@ class X2_MetaTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -67,8 +60,6 @@ class X2_MetaTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -90,8 +81,6 @@ class X2_MetaTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -113,8 +102,6 @@ class X2_MetaTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -130,8 +117,6 @@ class X2_MetaTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

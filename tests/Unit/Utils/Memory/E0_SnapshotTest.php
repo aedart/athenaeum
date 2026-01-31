@@ -11,12 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E0_SnapshotTest
  *
- * @group utils
- * @group utils-memory
- * @group utils-memory-unit
- * @group utils-memory-unit-e0
- * @group utils-memory-snapshot
- *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
@@ -30,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class E0_SnapshotTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -56,8 +48,6 @@ class E0_SnapshotTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

@@ -18,9 +18,6 @@ use Teapot\StatusCode;
 /**
  * L0_DebuggingTest
  *
- * @group http-clients
- * @group http-clients-l0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -34,8 +31,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     use HttpSerializerFactoryTrait;
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
      *
      * @param string $profile
      *
@@ -68,9 +63,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -106,9 +98,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -132,9 +121,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -158,9 +144,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -189,9 +172,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -232,9 +212,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException

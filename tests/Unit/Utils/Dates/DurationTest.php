@@ -13,10 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * DurationTest
  *
- * @group utils
- * @group date
- * @group duration
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Dates
  */
@@ -27,9 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class DurationTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canInstantiate()
     {
@@ -39,8 +32,6 @@ class DurationTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -51,9 +42,6 @@ class DurationTest extends UnitTestCase
         $this->assertGreaterThan(0, $duration->asMicroSeconds());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function longDuration()
     {
@@ -64,9 +52,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame(floatval($seconds), $duration->asFloatSeconds());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function instantiateFromDateInterval()
     {
@@ -75,9 +60,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame('10-00-07 04:05:34', $duration->format('%Y-%M-%D %H:%I:%S'));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function instantiateFromDateTime()
     {
@@ -86,9 +68,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame(42 * 60, $duration->asSeconds());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function instantiateFromString()
     {
@@ -97,9 +76,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame(42 * 60, $duration->asSeconds());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function instantiateFromDifference()
     {
@@ -113,9 +89,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame('00-00-00 05:06:42.023456', $duration->format('%r%Y-%M-%D %H:%I:%S.%F'));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function instantiateFromInvertedDifference()
     {
@@ -129,9 +102,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame('-00-00-00 05:06:42.023456', $duration->format('%r%Y-%M-%D %H:%I:%S.%F'));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function instantiateFromStringHoursMinutes()
     {
@@ -148,9 +118,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame(-5100, $durationC->asSeconds());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function addInterval()
     {
@@ -160,9 +127,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame(42, $duration->asSeconds());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function subtractInterval()
     {
@@ -172,9 +136,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame(42, $duration->asSeconds());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function measureInterval()
     {
@@ -186,9 +147,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame(1, $duration->asSeconds());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function requestedTestCase()
     {
@@ -199,9 +157,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame(870, $duration->asMinutes()); // 870 minutes
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function toMinutesSeconds()
     {
@@ -210,9 +165,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame('01:05', $duration->toMinutesSeconds());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canShowAbove60Minutes()
     {
@@ -225,9 +177,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame('870:00', $duration->toMinutesSeconds());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function toHoursMinutes()
     {
@@ -237,9 +186,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame('14 hours 30 minutes', $duration->toHoursMinutes(true));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canShowAbove24Hours()
     {
@@ -252,9 +198,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame('31:00', $duration->toHoursMinutes());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function toDaysHoursMinutes()
     {
@@ -265,9 +208,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame('2 days 14 hours 30 minutes', $duration->toDaysHoursMinutes(true));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function toSignedHoursMinutes()
     {
@@ -292,9 +232,6 @@ class DurationTest extends UnitTestCase
         $this->assertSame('-00:05', $duration->toMinutesSeconds());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function testToString()
     {

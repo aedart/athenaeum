@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * StorageDiskTest
  *
- * @group flysystem
- * @group flysystem-db
- * @group flysystem-db-storage-disk
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Storage
  */
@@ -67,8 +63,6 @@ class StorageDiskTest extends FlysystemDbTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -84,8 +78,6 @@ class StorageDiskTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException

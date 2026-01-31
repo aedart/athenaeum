@@ -13,10 +13,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 /**
  * RequestMustBeJsonMiddlewareTest
  *
- * @group http-api
- * @group http-api-middleware
- * @group http-api-middleware-must-be-json
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Middleware
  */
@@ -28,8 +24,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -49,8 +43,6 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -69,8 +61,6 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -90,8 +80,6 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -111,8 +99,6 @@ class RequestMustBeJsonMiddlewareTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

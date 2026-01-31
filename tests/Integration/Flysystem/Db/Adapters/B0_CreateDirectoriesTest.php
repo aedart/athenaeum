@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * B0_DirectoriesTest
  *
- * @group flysystem
- * @group flysystem-db
- * @group flysystem-db-b0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
@@ -26,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class B0_CreateDirectoriesTest extends FlysystemDbTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws FilesystemException
@@ -49,8 +43,6 @@ class B0_CreateDirectoriesTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws FilesystemException
@@ -76,8 +68,6 @@ class B0_CreateDirectoriesTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws FilesystemException
@@ -103,8 +93,6 @@ class B0_CreateDirectoriesTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws FilesystemException

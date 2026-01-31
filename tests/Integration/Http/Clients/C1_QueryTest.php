@@ -14,9 +14,6 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * C1_QueryTest
  *
- * @group http-clients
- * @group http-clients-c1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -28,9 +25,6 @@ use Psr\Http\Message\ResponseInterface;
 class C1_QueryTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -49,9 +43,6 @@ class C1_QueryTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -79,9 +70,6 @@ class C1_QueryTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -127,9 +115,6 @@ class C1_QueryTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException

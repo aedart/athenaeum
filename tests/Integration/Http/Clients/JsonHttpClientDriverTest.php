@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * JsonHttpClientDriverTest
  *
- * @group http
- * @group http-clients
- * @group http-clients-json
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -61,9 +57,6 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider httpMethods
-     *
      * @param string $method
      */
     #[DataProvider('httpMethods')]
@@ -82,9 +75,6 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider httpMethods
-     *
      * @param string $method
      */
     #[DataProvider('httpMethods')]
@@ -102,9 +92,6 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
         $this->assertSame('application/json', $headers['Accept'][0]);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function maintainsDefaultHeadersAfterRequest()
     {
@@ -121,9 +108,6 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
         $this->assertSame('application/json', $contentType, 'Content-Type header not set for next request');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function requestIsJsonEncoded()
     {

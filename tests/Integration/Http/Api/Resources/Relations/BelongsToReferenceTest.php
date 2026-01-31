@@ -18,12 +18,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * BelongsToReferenceTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-relations
- * @group api-resource-relation-references
- * @group api-resource-relation-belongs-to
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources\Relations
  */
@@ -86,8 +80,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -112,8 +104,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -144,8 +134,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -176,8 +164,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -213,8 +199,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -251,8 +235,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -290,8 +272,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -325,8 +305,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -364,8 +342,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -411,8 +387,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -448,8 +422,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -487,8 +459,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -525,8 +495,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -564,8 +532,6 @@ class BelongsToReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

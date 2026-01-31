@@ -15,10 +15,6 @@ use Throwable;
 /**
  * TraversableResultsTest
  *
- * @group redmine
- * @group redmine-pagination
- * @group redmine-pagination-traversable
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Pagination
  */
@@ -30,8 +26,6 @@ use Throwable;
 class TraversableResultsTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable

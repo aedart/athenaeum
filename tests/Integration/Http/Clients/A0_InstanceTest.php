@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A0_InstanceTest
  *
- * @group http-clients
- * @group http-clients-a0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -25,9 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class A0_InstanceTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -42,9 +36,6 @@ class A0_InstanceTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -60,9 +51,6 @@ class A0_InstanceTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException

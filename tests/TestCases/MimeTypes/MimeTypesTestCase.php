@@ -34,7 +34,7 @@ abstract class MimeTypesTestCase extends LaravelTestCase
     protected $mimeTypeData = null;
 
     /**
-     * @test
+     * Test file stream
      *
      * @var resource|null
      */

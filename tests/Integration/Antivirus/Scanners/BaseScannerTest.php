@@ -26,10 +26,6 @@ use SplFileInfo;
 /**
  * BaseScannerTest
  *
- * @group antivirus
- * @group antivirus-scanners
- * @group antivirus-scanners-base
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus\Scanners
  */
@@ -115,9 +111,6 @@ class BaseScannerTest extends AntivirusTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider fileFormatsProvider
-     *
      * @param mixed $file
      *
      * @return void
@@ -140,9 +133,6 @@ class BaseScannerTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     * @dataProvider fileFormatsProvider
-     *
      * @param mixed $file
      *
      * @return void
@@ -169,9 +159,6 @@ class BaseScannerTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     * @dataProvider invalidFilePathsProvider
-     *
      * @param mixed $file
      *
      * @return void
@@ -191,8 +178,6 @@ class BaseScannerTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws AntivirusException

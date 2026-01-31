@@ -16,9 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ConnectionTest
  *
- * @group redmine
- * @group redmine-connection
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Connections
  */
@@ -29,8 +26,6 @@ use PHPUnit\Framework\Attributes\Test;
 class ConnectionTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws ConnectionException
      */
     #[Test]
@@ -42,8 +37,6 @@ class ConnectionTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConnectionException
      */
     #[Test]
@@ -55,8 +48,6 @@ class ConnectionTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConnectionException
      */
     #[Test]
@@ -70,8 +61,6 @@ class ConnectionTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConnectionException
      */
     #[Test]
@@ -83,8 +72,6 @@ class ConnectionTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConnectionException
      * @throws JsonException
      */
@@ -113,8 +100,6 @@ class ConnectionTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConnectionException
      */
     #[Test]
@@ -127,8 +112,6 @@ class ConnectionTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConnectionException
      */
     #[Test]

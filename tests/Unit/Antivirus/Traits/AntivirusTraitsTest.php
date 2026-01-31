@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * AntivirusTraitsTest
  *
- * @group antivirus
- * @group antivirus-traits
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Antivirus\Traits
  */
@@ -44,9 +40,6 @@ class AntivirusTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

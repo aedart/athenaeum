@@ -14,9 +14,6 @@ use Throwable;
 /**
  * SetCookieTest
  *
- * @group http-cookies
- * @group set-cookie
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Cookies
  */
@@ -77,8 +74,6 @@ class SetCookieTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @throws Throwable
      */
     #[Test]
@@ -103,8 +98,6 @@ class SetCookieTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws Throwable
      */
     #[Test]

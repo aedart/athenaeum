@@ -19,13 +19,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * NestedRelationsTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-relations
- * @group api-resource-relation-references
- * @group api-resource-relation-belongs-to
- * @group api-resource-relation-nested-relations
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources\Relations
  */
@@ -94,8 +87,6 @@ class NestedRelationsTest extends ApiResourcesTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

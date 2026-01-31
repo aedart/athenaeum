@@ -14,11 +14,6 @@ use ReflectionException;
 /**
  * EnvironmentFilePathTest
  *
- * @group laravel
- * @group support
- * @group support-env
- * @group support-env-concerns
- *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Integration\Support\Env\Concerns
  */
@@ -33,8 +28,6 @@ class EnvironmentFilePathTest extends LaravelTestCase
     use GetterSetterTraitTester;
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ReflectionException
@@ -49,8 +42,6 @@ class EnvironmentFilePathTest extends LaravelTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ReflectionException

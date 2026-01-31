@@ -20,9 +20,6 @@ use Teapot\StatusCode;
 /**
  * H0_CookiesTest
  *
- * @group http-clients
- * @group http-clients-h0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -34,9 +31,6 @@ use Teapot\StatusCode;
 class H0_CookiesTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -60,9 +54,6 @@ class H0_CookiesTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -103,9 +94,6 @@ class H0_CookiesTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -147,9 +135,6 @@ class H0_CookiesTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -192,9 +177,6 @@ class H0_CookiesTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -233,8 +215,6 @@ class H0_CookiesTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]

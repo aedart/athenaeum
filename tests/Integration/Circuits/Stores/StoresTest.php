@@ -16,9 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * StoresTest
  *
- * @group circuits
- * @group circuits-stores
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Circuits\Stores
  */
@@ -52,9 +49,6 @@ class StoresTest extends CircuitBreakerTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
      * @param string $driver
      * @param array $options
      */
@@ -68,9 +62,6 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
      * @param string $driver
      * @param array $options
      *
@@ -92,9 +83,6 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
      * @param string $driver
      * @param array $options
      */
@@ -117,9 +105,6 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
      * @param string $driver
      * @param array $options
      */
@@ -136,9 +121,6 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
      * @param string $driver
      * @param array $options
      */
@@ -169,9 +151,6 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
      * @param string $driver
      * @param array $options
      *
@@ -199,9 +178,6 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
      * @param string $driver
      * @param array $options
      *
@@ -221,9 +197,6 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
      * @param string $driver
      * @param array $options
      *

@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A2_CloneTest
  *
- * @group streams
- * @group streams-a2
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -24,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class A2_CloneTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

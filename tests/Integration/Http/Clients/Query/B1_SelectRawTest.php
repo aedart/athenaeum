@@ -13,11 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * B1_SelectRawTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-b1
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -107,9 +102,6 @@ class B1_SelectRawTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesSelectRawData
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -131,9 +123,6 @@ class B1_SelectRawTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesInjectsBindingsData
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -155,9 +144,6 @@ class B1_SelectRawTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesSelectRegularAndRawData
-     *
      * @param string $grammar
      * @param string $expected
      *

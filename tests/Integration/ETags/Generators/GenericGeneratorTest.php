@@ -18,10 +18,6 @@ use Stringable;
 /**
  * GenericGeneratorTest
  *
- * @group etags
- * @group etags-generators
- * @group etags-generic-generator
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Generators
  */
@@ -100,9 +96,6 @@ class GenericGeneratorTest extends ETagsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider dataProvider
-     *
      * @param  mixed  $content
      *
      * @return void
@@ -123,9 +116,6 @@ class GenericGeneratorTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider dataProvider
-     *
      * @param  mixed  $content
      *
      * @return void

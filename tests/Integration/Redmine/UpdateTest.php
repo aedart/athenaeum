@@ -15,10 +15,6 @@ use Throwable;
 /**
  * UpdateTest
  *
- * @group redmine
- * @group redmine-resource
- * @group redmine-resource-update
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
@@ -30,8 +26,6 @@ use Throwable;
 class UpdateTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws ConnectionException
      * @throws JsonException
      * @throws Throwable
@@ -53,8 +47,6 @@ class UpdateTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConnectionException
      * @throws JsonException
      * @throws Throwable
@@ -89,8 +81,6 @@ class UpdateTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable

@@ -13,11 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A1_RawExpressionTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-a1
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -56,9 +51,6 @@ class A1_RawExpressionTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesWhereRawData
-     *
      * @param string $grammar
      * @param string $expected
      *

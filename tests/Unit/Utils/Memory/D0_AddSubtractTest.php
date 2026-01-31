@@ -10,13 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D0_AddSubtractTest
  *
- * @group utils
- * @group utils-memory
- * @group utils-memory-unit
- * @group utils-memory-unit-d0
- * @group utils-memory-unit-add
- * @group utils-memory-unit-subtract
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
@@ -31,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class D0_AddSubtractTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -46,8 +37,6 @@ class D0_AddSubtractTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -63,8 +52,6 @@ class D0_AddSubtractTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -78,8 +65,6 @@ class D0_AddSubtractTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

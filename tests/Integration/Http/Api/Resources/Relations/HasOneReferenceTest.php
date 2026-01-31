@@ -17,12 +17,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * HasOneReferenceTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-relations
- * @group api-resource-relation-references
- * @group api-resource-relation-has-one
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources\Relations
  */
@@ -86,8 +80,6 @@ class HasOneReferenceTest extends ApiResourcesTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

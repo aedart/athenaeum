@@ -16,10 +16,6 @@ use RuntimeException;
 /**
  * CircuitBreakerTest
  *
- * @group circuits
- * @group circuit-breaker
- * @group circuit-breaker-instance
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Circuits
  */
@@ -31,8 +27,6 @@ use RuntimeException;
 class CircuitBreakerTest extends CircuitBreakerTestCase
 {
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]
@@ -45,8 +39,6 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
@@ -63,8 +55,6 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
@@ -82,8 +72,6 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
@@ -103,8 +91,6 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
@@ -136,8 +122,6 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
@@ -162,8 +146,6 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
@@ -189,8 +171,6 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      * @throws UnknownStateException
@@ -215,8 +195,6 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */

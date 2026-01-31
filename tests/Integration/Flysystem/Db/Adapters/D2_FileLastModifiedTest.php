@@ -9,10 +9,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D2_FileLastModifiedTest
  *
- * @group flysystem
- * @group flysystem-db
- * @group flysystem-db-d2
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
@@ -24,8 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 class D2_FileLastModifiedTest extends FlysystemDbTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \League\Flysystem\FilesystemException

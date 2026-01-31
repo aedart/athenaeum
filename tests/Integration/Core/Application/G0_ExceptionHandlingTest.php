@@ -12,9 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * G0_ExceptionHandling
  *
- * @group application
- * @group application-g0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
@@ -122,9 +119,6 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canLogSingleEntryWithoutFailure()
     {
@@ -134,9 +128,6 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
         $this->assertLogFileContainers('normal application works');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function handlesErrors()
     {
@@ -148,9 +139,6 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
         $this->assertLogFileContainers($expected);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function handlesExceptions()
     {
@@ -162,9 +150,6 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
         $this->assertLogFileContainers($expected);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function handlesExceptionsDuringShutdown()
     {
@@ -176,9 +161,6 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
         $this->assertLogFileContainers($expected);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function terminatesGracefullyWhenExceptionIsHandled()
     {
@@ -196,9 +178,6 @@ class G0_ExceptionHandlingTest extends IntegrationTestCase
         $this->assertStringContainsString('Terminating...', $output, 'incorrect output');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function handlesExceptionHandlingFailure()
     {

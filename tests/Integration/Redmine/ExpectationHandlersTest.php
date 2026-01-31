@@ -20,10 +20,6 @@ use Throwable;
 /**
  * ExpectationHandlersTest
  *
- * @group redmine
- * @group redmine-resource
- * @group redmine-resource-expectation-handlers
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
@@ -61,9 +57,6 @@ class ExpectationHandlersTest extends RedmineTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider responseExpectations
-     *
      * @param int $responseStatusCode
      * @param string $expectedException
      *
@@ -84,8 +77,6 @@ class ExpectationHandlersTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConnectionException
      * @throws JsonException
      * @throws Throwable

@@ -14,9 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D4_AuthorisationHeadersTest
  *
- * @group http-clients
- * @group http-clients-d4
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -28,9 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class D4_AuthorisationHeadersTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -56,9 +50,6 @@ class D4_AuthorisationHeadersTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -91,9 +82,6 @@ class D4_AuthorisationHeadersTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException

@@ -11,9 +11,6 @@ use RuntimeException;
 /**
  * InvokerTest
  *
- * @group util
- * @group invoker
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
@@ -24,8 +21,6 @@ use RuntimeException;
 class InvokerTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -42,8 +37,6 @@ class InvokerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -62,8 +55,6 @@ class InvokerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -80,8 +71,6 @@ class InvokerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]

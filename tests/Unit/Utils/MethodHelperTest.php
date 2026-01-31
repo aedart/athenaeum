@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * MethodHelperTest
  *
- * @group utils
- * @group method-helper
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
@@ -46,9 +43,6 @@ class MethodHelperTest extends UnitTestCase
      * Actual tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canMakeGetterName()
     {
@@ -61,9 +55,6 @@ class MethodHelperTest extends UnitTestCase
         $this->assertSame('get' . ucfirst($property), $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function usesCachedGetterName()
     {
@@ -79,9 +70,6 @@ class MethodHelperTest extends UnitTestCase
         $this->assertSame($resultA, $resultB);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canMakeSetterName()
     {
@@ -94,9 +82,6 @@ class MethodHelperTest extends UnitTestCase
         $this->assertSame('set' . ucfirst($property), $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function usesCachedSetterName()
     {
@@ -112,9 +97,6 @@ class MethodHelperTest extends UnitTestCase
         $this->assertSame($resultA, $resultB);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canCallMethod()
     {
@@ -127,9 +109,6 @@ class MethodHelperTest extends UnitTestCase
         $this->assertSame('James Bond', $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function returnsValueIfNotCallable()
     {

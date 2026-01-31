@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A0_InstanceTest
  *
- * @group streams
- * @group streams-a0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -24,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class A0_InstanceTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -39,8 +34,6 @@ class A0_InstanceTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -55,8 +48,6 @@ class A0_InstanceTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -68,8 +59,6 @@ class A0_InstanceTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

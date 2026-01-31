@@ -16,10 +16,6 @@ use TypeError;
 /**
  * ResolveArrayDtoUnionTypesTest
  *
- * @group dto
- * @group dto-union-types
- * @group array-dto-union-types
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Dto
  */
@@ -31,8 +27,6 @@ use TypeError;
 class ResolveArrayDtoUnionTypesTest extends DtoTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -62,8 +56,6 @@ class ResolveArrayDtoUnionTypesTest extends DtoTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -83,8 +75,6 @@ class ResolveArrayDtoUnionTypesTest extends DtoTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -108,8 +98,6 @@ class ResolveArrayDtoUnionTypesTest extends DtoTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -147,8 +135,6 @@ class ResolveArrayDtoUnionTypesTest extends DtoTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

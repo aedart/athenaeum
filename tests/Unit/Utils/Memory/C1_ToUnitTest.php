@@ -11,12 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C1_ToUnitTest
  *
- * @group utils
- * @group utils-memory
- * @group utils-memory-unit
- * @group utils-memory-unit-c1
- * @group utils-memory-unit-to
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
@@ -119,9 +113,6 @@ class C1_ToUnitTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider valuesProvider
-     *
      * @param  string  $unit
      * @param  int  $bytes
      * @param  int|float  $expectedValue

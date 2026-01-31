@@ -15,10 +15,6 @@ use Throwable;
 /**
  * VersionTest
  *
- * @group redmine
- * @group redmine-resources
- * @group redmine-resources-version
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
@@ -69,8 +65,6 @@ class VersionTest extends RedmineTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable
@@ -136,8 +130,6 @@ class VersionTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable
@@ -194,8 +186,6 @@ class VersionTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */

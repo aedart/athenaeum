@@ -18,9 +18,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ETagsCollectionTest
  *
- * @group etags
- * @group etags-collection
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Collections
  */
@@ -53,8 +50,6 @@ class ETagsCollectionTest extends ETagsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -68,8 +63,6 @@ class ETagsCollectionTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -89,8 +82,6 @@ class ETagsCollectionTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -118,8 +109,6 @@ class ETagsCollectionTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -145,8 +134,6 @@ class ETagsCollectionTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -178,8 +165,6 @@ class ETagsCollectionTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -211,8 +196,6 @@ class ETagsCollectionTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws ETagException
      */
@@ -241,8 +224,6 @@ class ETagsCollectionTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -277,8 +258,6 @@ class ETagsCollectionTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -298,8 +277,6 @@ class ETagsCollectionTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -318,8 +295,6 @@ class ETagsCollectionTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -337,8 +312,6 @@ class ETagsCollectionTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -357,8 +330,6 @@ class ETagsCollectionTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException

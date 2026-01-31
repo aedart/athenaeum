@@ -14,9 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E0_PayloadTest
  *
- * @group http-clients
- * @group http-clients-e0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -28,9 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class E0_PayloadTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -52,9 +46,6 @@ class E0_PayloadTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -76,9 +67,6 @@ class E0_PayloadTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -110,9 +98,6 @@ class E0_PayloadTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException

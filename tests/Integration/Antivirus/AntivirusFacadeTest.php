@@ -14,10 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * AntivirusFacadeTest
  *
- * @group antivirus
- * @group antivirus-facade
- * @group facades
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus
  */
@@ -29,8 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class AntivirusFacadeTest extends AntivirusTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -54,8 +48,6 @@ class AntivirusFacadeTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

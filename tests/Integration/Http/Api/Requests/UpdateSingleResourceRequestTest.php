@@ -17,11 +17,6 @@ use Teapot\StatusCode\All as HttpStatus;
 /**
  * UpdateSingleResourceRequestTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-requests
- * @group update-single-resource-request
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
@@ -49,8 +44,6 @@ class UpdateSingleResourceRequestTest extends ApiResourceRequestsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -100,8 +93,6 @@ class UpdateSingleResourceRequestTest extends ApiResourceRequestsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException

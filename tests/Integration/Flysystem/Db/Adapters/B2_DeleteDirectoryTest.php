@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * B2_DeleteDirectoryTest
  *
- * @group flysystem
- * @group flysystem-db
- * @group flysystem-db-b2
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
@@ -26,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class B2_DeleteDirectoryTest extends FlysystemDbTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws FilesystemException
@@ -58,8 +52,6 @@ class B2_DeleteDirectoryTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws FilesystemException

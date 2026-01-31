@@ -14,9 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A1_RunTest
  *
- * @group application
- * @group application-b0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
@@ -58,8 +55,6 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -74,9 +69,6 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
         $this->bootstrap();
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function defaultsToEnvironmentFromEnvFile()
     {
@@ -90,9 +82,6 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
         $this->assertSame('development', $app->environment());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetectEnvironmentFromEnvVariable()
     {
@@ -109,9 +98,6 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
         $this->assertSame('playing', $app->environment());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetectEnvironmentFromConsole()
     {
@@ -133,9 +119,6 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
      * Test of utility methods
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineIfRunningInTestingEnv()
     {

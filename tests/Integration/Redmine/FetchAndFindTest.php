@@ -17,13 +17,6 @@ use Throwable;
 /**
  * FetchAndFindTest
  *
- * @group redmine
- * @group redmine-resource
- * @group redmine-resource-list
- * @group redmine-resource-fetch
- * @group redmine-resource-fetch-multiple
- * @group redmine-resource-find
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
@@ -37,9 +30,6 @@ use Throwable;
 )]
 class FetchAndFindTest extends RedmineTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canFetchMultipleViaList()
     {
@@ -73,8 +63,6 @@ class FetchAndFindTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConnectionException
      * @throws JsonException
      * @throws Throwable
@@ -96,8 +84,6 @@ class FetchAndFindTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConnectionException
      * @throws JsonException
      * @throws Throwable
@@ -113,8 +99,6 @@ class FetchAndFindTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConnectionException
      * @throws JsonException
      * @throws Throwable
@@ -130,8 +114,6 @@ class FetchAndFindTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable

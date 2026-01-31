@@ -14,11 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * FlockDriverTest
  *
- * @group streams
- * @group stream-lock
- * @group stream-lock-drivers
- * @group stream-lock-driver-flock
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File\Locks\Drivers
  */
@@ -49,8 +44,6 @@ class FlockDriverTest extends StreamTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
@@ -74,8 +67,6 @@ class FlockDriverTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
@@ -90,8 +81,6 @@ class FlockDriverTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
@@ -124,8 +113,6 @@ class FlockDriverTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
@@ -142,8 +129,6 @@ class FlockDriverTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException

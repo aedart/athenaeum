@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * F0_ChecksumTest
  *
- * @group flysystem
- * @group flysystem-db
- * @group flysystem-db-f0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
@@ -26,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class F0_ChecksumTest extends FlysystemDbTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws FilesystemException

@@ -16,11 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * LangJsJsonExporterTest
  *
- * @group translations
- * @group translations-exporter
- * @group translations-exporter-drivers
- * @group translations-exporter-drivers-lang-js-json
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Translation\Exports\Drivers
  */
@@ -55,8 +50,6 @@ class LangJsJsonExporterTest extends TranslationTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -70,8 +63,6 @@ class LangJsJsonExporterTest extends TranslationTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -90,8 +81,6 @@ class LangJsJsonExporterTest extends TranslationTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ExporterException

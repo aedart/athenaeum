@@ -14,9 +14,6 @@ use Throwable;
 /**
  * AttachmentTest
  *
- * @group http-clients
- * @group attachment
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Clients\Requests
  */
@@ -48,9 +45,6 @@ class AttachmentTest extends UnitTestCase
      * Actual tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canPopulateAttachment()
     {
@@ -68,8 +62,6 @@ class AttachmentTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidFilePathException
      * @throws Throwable
      */
@@ -87,8 +79,6 @@ class AttachmentTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidFilePathException
      * @throws Throwable
      */

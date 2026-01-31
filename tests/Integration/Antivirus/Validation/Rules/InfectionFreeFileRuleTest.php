@@ -21,9 +21,6 @@ use SplFileInfo;
 /**
  * InfectionFreeFileRuleTest
  *
- * @group antivirus
- * @group antivirus-validation
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus\Validation\Rules
  */
@@ -99,8 +96,6 @@ class InfectionFreeFileRuleTest extends AntivirusTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -137,8 +132,6 @@ class InfectionFreeFileRuleTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -185,8 +178,6 @@ class InfectionFreeFileRuleTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -234,8 +225,6 @@ class InfectionFreeFileRuleTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException

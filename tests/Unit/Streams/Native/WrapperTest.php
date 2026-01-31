@@ -10,9 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * WrapperTest
  *
- * @group streams
- * @group streams-wrapper
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Streams
  */
@@ -127,8 +124,6 @@ class WrapperTest extends UnitTestCase
 
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

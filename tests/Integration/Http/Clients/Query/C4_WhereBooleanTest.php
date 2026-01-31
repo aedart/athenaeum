@@ -13,11 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C3_WhereBooleanTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-c4
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -61,9 +56,6 @@ class C4_WhereBooleanTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesWhereBoolean
-     *
      * @param string $grammar
      * @param string $expected
      *

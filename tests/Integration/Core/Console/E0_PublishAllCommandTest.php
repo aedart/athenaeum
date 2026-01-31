@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E0_PublishAllCommandTest
  *
- * @group application
- * @group application-console
- * @group application-console-e0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Console
  */
@@ -62,9 +58,6 @@ class E0_PublishAllCommandTest extends AthenaeumCoreConsoleTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function hasRegisteredPublishAllCommand()
     {
@@ -79,8 +72,6 @@ class E0_PublishAllCommandTest extends AthenaeumCoreConsoleTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Codeception\Exception\ConfigurationException
      */
     #[Test]

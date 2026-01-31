@@ -17,12 +17,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * HasManyReferenceTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-relations
- * @group api-resource-relation-references
- * @group api-resource-relation-has-many
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources\Relations
  */
@@ -91,8 +85,6 @@ class HasManyReferenceTest extends ApiResourcesTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -149,8 +141,6 @@ class HasManyReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -182,8 +172,6 @@ class HasManyReferenceTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

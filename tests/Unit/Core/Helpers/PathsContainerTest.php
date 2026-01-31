@@ -13,11 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * PathsContainerTest
  *
- * @group core
- * @group application
- * @group application-helpers
- * @group paths-container
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Core\Helpers
  */
@@ -51,8 +46,6 @@ class PathsContainerTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -73,8 +66,6 @@ class PathsContainerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -91,8 +82,6 @@ class PathsContainerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -109,8 +98,6 @@ class PathsContainerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -127,8 +114,6 @@ class PathsContainerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -145,8 +130,6 @@ class PathsContainerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -163,8 +146,6 @@ class PathsContainerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -181,8 +162,6 @@ class PathsContainerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -199,8 +178,6 @@ class PathsContainerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]

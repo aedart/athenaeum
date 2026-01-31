@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ArbitraryDataTest
  *
- * @group utils
- * @group arbitrary-data
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Concerns
  */
@@ -53,8 +50,6 @@ class ArbitraryDataTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -82,8 +77,6 @@ class ArbitraryDataTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -111,8 +104,6 @@ class ArbitraryDataTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -135,8 +126,6 @@ class ArbitraryDataTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -158,8 +147,6 @@ class ArbitraryDataTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

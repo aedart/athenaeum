@@ -13,9 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * RegistrarTest
  *
- * @group acl
- * @group acl-registrar
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Acl
  */
@@ -82,9 +79,6 @@ class RegistrarTest extends AclTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDefinePermissions()
     {
@@ -107,9 +101,6 @@ class RegistrarTest extends AclTestCase
         $this->assertSame($slugs, $keys, 'Incorrect abilities defined');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDeterminePermissionForUser()
     {
@@ -149,9 +140,6 @@ class RegistrarTest extends AclTestCase
         }
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function cachesPermissions()
     {

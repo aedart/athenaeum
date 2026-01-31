@@ -13,9 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * MaintenanceModeDriversTest
  *
- * @group maintenance-modes
- * @group maintenance-modes-drivers
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Maintenance\Modes\Drivers
  */
@@ -47,9 +44,6 @@ class MaintenanceModeDriversTest extends MaintenanceModesTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesDrivers
-     *
      * @param  MaintenanceMode  $driver
      *
      * @return void
@@ -66,9 +60,6 @@ class MaintenanceModeDriversTest extends MaintenanceModesTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesDrivers
-     *
      * @param  MaintenanceMode  $driver
      *
      * @return void

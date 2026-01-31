@@ -11,12 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D0_IncludeTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-d0
- * @group http-query-grammars
- *
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -83,9 +77,6 @@ class D0_IncludeTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesSingleResourceData
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -107,9 +98,6 @@ class D0_IncludeTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesMultipleResourcesData
-     *
      * @param string $grammar
      * @param string $expected
      *

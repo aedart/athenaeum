@@ -15,9 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E1_DeferredServicesRegistrationTest
  *
- * @group application
- * @group application-e1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
@@ -47,9 +44,6 @@ class E1_DeferredServicesRegistrationTest extends AthenaeumCoreTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canRegisterDeferredServices()
     {
@@ -58,9 +52,6 @@ class E1_DeferredServicesRegistrationTest extends AthenaeumCoreTestCase
         $this->assertTrue($this->app->isDeferredService(Box::class), 'Component should be registered as a deferred service');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canResolveDeferredService()
     {
@@ -77,9 +68,6 @@ class E1_DeferredServicesRegistrationTest extends AthenaeumCoreTestCase
         $this->assertFalse($this->app->isDeferredService(Box::class), 'Component should no longer be deferred');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function triggersRegistrationViaEvent()
     {

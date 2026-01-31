@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * MatchingProcessorTest
  *
- * @group filters
- * @group filters-processors
- * @group filters-matching-processor
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Processors
  */
@@ -26,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class MatchingProcessorTest extends FiltersTestCase
 {
     /**
-     * @test
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
     #[Test]

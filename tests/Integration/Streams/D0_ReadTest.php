@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D0_ReadTest
  *
- * @group streams
- * @group streams-d0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -24,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class D0_ReadTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -40,8 +35,6 @@ class D0_ReadTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -59,8 +52,6 @@ class D0_ReadTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -87,8 +78,6 @@ class D0_ReadTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -114,8 +103,6 @@ class D0_ReadTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

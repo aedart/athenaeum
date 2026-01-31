@@ -13,12 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D0_AuditCallbackTest
  *
- * @group audit
- * @group audit-trail
- * @group audit-callback
- * @group audit-callback-reason
- * @group audit-d0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Audit
  */
@@ -32,8 +26,6 @@ use PHPUnit\Framework\Attributes\Test;
 class D0_AuditCallbackTest extends AuditTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -68,8 +60,6 @@ class D0_AuditCallbackTest extends AuditTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
