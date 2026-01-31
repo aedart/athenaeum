@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * MimeTypeTraitsTest
  *
- * @group mime-types
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\MimeTypes
  */
@@ -38,9 +35,6 @@ class MimeTypeTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

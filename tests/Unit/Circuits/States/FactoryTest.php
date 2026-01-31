@@ -14,10 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * FactoryTest
  *
- * @group circuits
- * @group circuits-states
- * @group circuits-states-factory
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Circuits\States
  */
@@ -47,9 +43,6 @@ class FactoryTest extends UnitTestCase
      * Actual Test
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainInstance()
     {
@@ -59,7 +52,6 @@ class FactoryTest extends UnitTestCase
     }
 
     /**
-     * @test
      * @throws UnknownStateException
      */
     #[Test]
@@ -73,7 +65,6 @@ class FactoryTest extends UnitTestCase
     }
 
     /**
-     * @test
      * @throws UnknownStateException
      */
     #[Test]
@@ -85,8 +76,6 @@ class FactoryTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnknownStateException
      */
     #[Test]

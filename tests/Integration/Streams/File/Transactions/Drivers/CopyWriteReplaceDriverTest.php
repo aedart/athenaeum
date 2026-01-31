@@ -14,11 +14,6 @@ use RuntimeException;
 /**
  * CopyWriteReplaceDriverTest
  *
- * @group streams
- * @group stream-transaction
- * @group stream-transaction-drivers
- * @group stream-transaction-driver-cwr
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File\Transactions\Drivers
  */
@@ -74,8 +69,6 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
@@ -104,8 +97,6 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
@@ -140,8 +131,6 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws TransactionException
@@ -176,8 +165,6 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws TransactionException
@@ -211,8 +198,6 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws TransactionException

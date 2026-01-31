@@ -16,11 +16,6 @@ use Throwable;
 /**
  * E0_BulkRecorderTest
  *
- * @group audit
- * @group audit-trail
- * @group audit-bulk-recorder
- * @group audit-e0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Audit
  */
@@ -33,8 +28,6 @@ use Throwable;
 class E0_BulkRecorderTest extends AuditTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws Throwable
@@ -80,8 +73,6 @@ class E0_BulkRecorderTest extends AuditTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws Throwable
@@ -100,8 +91,6 @@ class E0_BulkRecorderTest extends AuditTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws Throwable

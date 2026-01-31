@@ -14,11 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ListDeletedResourcesTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-requests
- * @group list-deleted-resources-request
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
@@ -45,10 +40,7 @@ class ListDeletedResourcesTest extends ApiResourceRequestsTestCase
      * Actual Tests
      ****************************************************************/
 
-
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -90,8 +82,6 @@ class ListDeletedResourcesTest extends ApiResourceRequestsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException

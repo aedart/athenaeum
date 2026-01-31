@@ -14,10 +14,6 @@ use Throwable;
 /**
  * AssignedToRelationTest
  *
- * @group redmine
- * @group redmine-relations
- * @group redmine-relations-assigned-to
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Relations\Custom
  */
@@ -29,8 +25,6 @@ use Throwable;
 class AssignedToRelationTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable
@@ -100,8 +94,6 @@ class AssignedToRelationTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable

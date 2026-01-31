@@ -14,10 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * TimestampsTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-timestamps
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
@@ -29,8 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class TimestampsTest extends ApiResourcesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException

@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * PaginatorTest
  *
- * @group pagination
- * @group paginator
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Pagination
  */
@@ -36,9 +33,6 @@ class PaginatorTest extends UnitTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetTotalLimitAndOffset()
     {
@@ -52,9 +46,6 @@ class PaginatorTest extends UnitTestCase
         $this->assertSame($offset, $paginator->offset(), 'Incorrect offset');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsWhenNegativeTotalProvided()
     {
@@ -63,9 +54,6 @@ class PaginatorTest extends UnitTestCase
         $this->makePaginator(-1);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsWhenLessThanOneLimitProvided()
     {
@@ -74,9 +62,6 @@ class PaginatorTest extends UnitTestCase
         $this->makePaginator(0, 0);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsWhenNegativeOffsetProvided()
     {
@@ -85,9 +70,6 @@ class PaginatorTest extends UnitTestCase
         $this->makePaginator(0, 1, -1);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function resolvesCurrentPage()
     {
@@ -105,9 +87,6 @@ class PaginatorTest extends UnitTestCase
         $this->assertSame(3, $paginator->currentPage(), 'invalid 3. page');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function resolvesFirstAndLastPages()
     {
@@ -117,9 +96,6 @@ class PaginatorTest extends UnitTestCase
         $this->assertSame(4, $paginator->lastPage(), 'invalid last page / total pages');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function resolvesNextAndPreviousPages()
     {
@@ -140,9 +116,6 @@ class PaginatorTest extends UnitTestCase
         $this->assertNull($paginator->nextPage(), 'Invalid next when on 3. page');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function getObtainOffsetForPage()
     {
@@ -157,9 +130,6 @@ class PaginatorTest extends UnitTestCase
         $this->assertSame(8, $paginator->offsetForPage(5), 'Invalid offset for page 5');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function offsetForPreviousAndNextPages()
     {

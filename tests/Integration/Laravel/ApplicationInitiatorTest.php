@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ApplicationInitiatorTest
  *
- * @group laravel
- * @group testing
- * @group app-initiator
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Laravel
  */
@@ -56,18 +52,12 @@ class ApplicationInitiatorTest extends Unit
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function applicationHasStarted()
     {
         $this->assertTrue($this->hasApplicationBeenStarted());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function laravelApplicationIsAvailable()
     {
@@ -76,9 +66,6 @@ class ApplicationInitiatorTest extends Unit
         $this->assertInstanceOf(Application::class, $app);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function laravelComponentIsAvailable()
     {

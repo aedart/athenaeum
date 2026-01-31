@@ -13,12 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * FieldFilterTest
  *
- * @group database
- * @group db
- * @group db-filters
- * @group db-criteria
- * @group db-field-criteria
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Database\Query
  */
@@ -31,9 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class FieldFilterTest extends DatabaseTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canApplyFieldFilter()
     {
@@ -53,9 +44,6 @@ class FieldFilterTest extends DatabaseTestCase
         $this->assertSame('Books', $result->name, 'Incorrect result');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsWhenFieldIsEmpty()
     {
@@ -64,9 +52,6 @@ class FieldFilterTest extends DatabaseTestCase
         new GenericFilter('', '=', 'Books');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsWhenOperatorIsUnsupported()
     {

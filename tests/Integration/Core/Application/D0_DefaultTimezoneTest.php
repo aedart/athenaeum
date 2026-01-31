@@ -12,9 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D0_DefaultTimezoneTest
  *
- * @group application
- * @group application-d0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
@@ -44,9 +41,6 @@ class D0_DefaultTimezoneTest extends AthenaeumCoreTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function defaultTimezoneIsSet()
     {

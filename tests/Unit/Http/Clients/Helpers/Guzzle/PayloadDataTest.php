@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * DataExtractorTest
  *
- * @group http-clients
- * @group guzzle
- * @group guzzle-payload-data
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Clients\Helpers\Guzzle
  */
@@ -26,9 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class PayloadDataTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canExtractDataFromOptions()
     {
@@ -58,9 +51,6 @@ class PayloadDataTest extends UnitTestCase
         $this->assertArrayNotHasKey('address', $data);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function extractsOnlyRawBodyIfStated()
     {

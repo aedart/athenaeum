@@ -14,10 +14,6 @@ use Teapot\StatusCode\All as HttpStatus;
 /**
  * FullRequestTest
  *
- * @group etags
- * @group preconditions
- * @group preconditions-full-request
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions
  */
@@ -29,8 +25,6 @@ use Teapot\StatusCode\All as HttpStatus;
 class FullRequestTest extends PreconditionsTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

@@ -15,10 +15,6 @@ use Throwable;
 /**
  * OneFromListRelationTest
  *
- * @group redmine
- * @group redmine-relations
- * @group redmine-relations-one-from-list
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Relations
  */
@@ -30,8 +26,6 @@ use Throwable;
 class OneFromListRelationTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws ErrorResponseException
      * @throws JsonException
      * @throws Throwable

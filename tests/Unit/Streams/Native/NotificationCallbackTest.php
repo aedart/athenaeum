@@ -10,9 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * NotificationCallbackTest
  *
- * @group streams
- * @group streams-notification
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Streams
  */
@@ -23,8 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 class NotificationCallbackTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

@@ -13,9 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * VersionTest
  *
- * @group utils
- * @group version
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
@@ -43,9 +40,6 @@ class VersionTest extends UnitTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineVersionOfPackage()
     {
@@ -56,9 +50,6 @@ class VersionTest extends UnitTestCase
         $this->assertNotEmpty($version);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsDeterminingVersionOfUnknownPackage()
     {
@@ -67,9 +58,6 @@ class VersionTest extends UnitTestCase
         Version::package('acme/unknown-pgk-' . $this->getFaker()->word());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function cachesPackageVersion()
     {
@@ -84,9 +72,6 @@ class VersionTest extends UnitTestCase
         $this->assertArrayHasKey($package, $cache);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canClearCachedPackageVersion()
     {
@@ -100,9 +85,6 @@ class VersionTest extends UnitTestCase
         $this->assertEmpty($cache);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineIfVersionIsAvailableForPackage()
     {
@@ -113,9 +95,6 @@ class VersionTest extends UnitTestCase
         $this->assertFalse($resultB, 'Should not exist for B');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canGetApplicationVersion()
     {
@@ -126,9 +105,6 @@ class VersionTest extends UnitTestCase
         $this->assertNotEmpty($version);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainAthenaeumPackageVersion()
     {
@@ -141,8 +117,6 @@ class VersionTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -159,8 +133,6 @@ class VersionTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

@@ -18,10 +18,6 @@ use Throwable;
 /**
  * EvaluatorTest
  *
- * @group etags
- * @group preconditions
- * @group preconditions-evaluator
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions
  */
@@ -33,8 +29,6 @@ use Throwable;
 class EvaluatorTest extends PreconditionsTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -46,8 +40,6 @@ class EvaluatorTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -60,8 +52,6 @@ class EvaluatorTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -74,8 +64,6 @@ class EvaluatorTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws HttpExceptionInterface
@@ -129,8 +117,6 @@ class EvaluatorTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws HttpExceptionInterface
      * @throws Throwable
@@ -151,8 +137,6 @@ class EvaluatorTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws HttpExceptionInterface
      * @throws Throwable
@@ -199,8 +183,6 @@ class EvaluatorTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws HttpExceptionInterface
      * @throws Throwable
@@ -269,8 +251,6 @@ class EvaluatorTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws HttpExceptionInterface
      * @throws Throwable
@@ -380,8 +360,6 @@ class EvaluatorTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws HttpExceptionInterface
      * @throws Throwable
@@ -426,8 +404,6 @@ class EvaluatorTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws HttpExceptionInterface
      * @throws Throwable
@@ -509,8 +485,6 @@ class EvaluatorTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws HttpExceptionInterface

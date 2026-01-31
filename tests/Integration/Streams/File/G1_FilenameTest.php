@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * G1_FilenameTest
  *
- * @group streams
- * @group streams-file-g1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
@@ -25,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class G1_FilenameTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -46,8 +41,6 @@ class G1_FilenameTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -65,8 +58,6 @@ class G1_FilenameTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException

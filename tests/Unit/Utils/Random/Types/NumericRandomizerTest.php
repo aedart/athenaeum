@@ -14,11 +14,6 @@ use Throwable;
 /**
  * NumericRandomizerTest
  *
- * @group utils
- * @group utils-random
- * @group utils-randomizer
- * @group numeric-randomizer
- *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Unit\Utils\Random\Types
  */
@@ -52,8 +47,6 @@ class NumericRandomizerTest extends UnitTestCase
     // and return value(s)...
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws Throwable
@@ -69,8 +62,6 @@ class NumericRandomizerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws Throwable
@@ -86,8 +77,6 @@ class NumericRandomizerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -101,8 +90,6 @@ class NumericRandomizerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws Throwable

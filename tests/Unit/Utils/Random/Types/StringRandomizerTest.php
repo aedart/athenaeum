@@ -14,11 +14,6 @@ use Throwable;
 /**
  * StringRandomizerTest
  *
- * @group utils
- * @group utils-random
- * @group utils-randomizer
- * @group string-randomizer
- *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Unit\Utils\Random\Types
  */
@@ -52,8 +47,6 @@ class StringRandomizerTest extends UnitTestCase
     // and return value(s)...
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws Throwable
@@ -69,8 +62,6 @@ class StringRandomizerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws Throwable
@@ -86,8 +77,6 @@ class StringRandomizerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws Throwable

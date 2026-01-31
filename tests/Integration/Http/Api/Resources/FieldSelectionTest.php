@@ -18,10 +18,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * FieldSelectionTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-field-selection
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
@@ -33,8 +29,6 @@ use PHPUnit\Framework\Attributes\Test;
 class FieldSelectionTest extends ApiResourcesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException
@@ -68,8 +62,6 @@ class FieldSelectionTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException
@@ -108,8 +100,6 @@ class FieldSelectionTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException
@@ -148,8 +138,6 @@ class FieldSelectionTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException
@@ -184,8 +172,6 @@ class FieldSelectionTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException

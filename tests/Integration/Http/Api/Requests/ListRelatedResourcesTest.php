@@ -16,11 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ListRelatedResourcesTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-requests
- * @group list-related-resources-request
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
@@ -48,8 +43,6 @@ class ListRelatedResourcesTest extends ApiResourceRequestsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -99,8 +92,6 @@ class ListRelatedResourcesTest extends ApiResourceRequestsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException

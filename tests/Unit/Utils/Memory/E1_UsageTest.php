@@ -11,12 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E1_UsageTest
  *
- * @group utils
- * @group utils-memory
- * @group utils-memory-unit
- * @group utils-memory-unit-e1
- * @group utils-memory-usage
- *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
@@ -30,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class E1_UsageTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -52,8 +44,6 @@ class E1_UsageTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

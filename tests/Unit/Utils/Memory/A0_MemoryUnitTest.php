@@ -12,12 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A0_MemoryUnitTest
  *
- * @group utils
- * @group utils-memory
- * @group utils-memory-unit
- * @group utils-memory-unit-a0
- * @group utils-memory-unit-bytes
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
@@ -31,8 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class A0_MemoryUnitTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -44,8 +36,6 @@ class A0_MemoryUnitTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -58,8 +48,6 @@ class A0_MemoryUnitTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

@@ -11,11 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * F0_OrderByTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-f0
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -128,9 +123,6 @@ class F0_OrderByTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesOrderBySingleFieldAsc
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -152,9 +144,6 @@ class F0_OrderByTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesOrderBySingleFieldDesc
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -176,9 +165,6 @@ class F0_OrderByTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesOrderByMultipleFields
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -201,9 +187,6 @@ class F0_OrderByTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesOrderByMultipleFieldsViaArray
-     *
      * @param string $grammar
      * @param string $expected
      *

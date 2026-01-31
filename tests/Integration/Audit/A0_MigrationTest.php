@@ -10,10 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A0_MigrationTest
  *
- * @group audit
- * @group audit-trail
- * @group audit-a0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Audit
  */
@@ -24,9 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class A0_MigrationTest extends AuditTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function hasInstalledMigration()
     {

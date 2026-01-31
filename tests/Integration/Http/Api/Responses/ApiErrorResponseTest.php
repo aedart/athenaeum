@@ -17,9 +17,6 @@ use Teapot\StatusCode\All as HttpStatus;
 /**
  * ApiErrorResponseTest
  *
- * @group http-api
- * @group api-error-response
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Responses
  */
@@ -30,8 +27,6 @@ use Teapot\StatusCode\All as HttpStatus;
 class ApiErrorResponseTest extends ApiResourcesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -58,8 +53,6 @@ class ApiErrorResponseTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -104,8 +97,6 @@ class ApiErrorResponseTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -122,8 +113,6 @@ class ApiErrorResponseTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

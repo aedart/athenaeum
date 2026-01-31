@@ -9,9 +9,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * X1_SupportsLockingTest
  *
- * @group streams
- * @group streams-x1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -22,8 +19,6 @@ use PHPUnit\Framework\Attributes\Test;
 class X1_SupportsLockingTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -36,8 +31,6 @@ class X1_SupportsLockingTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

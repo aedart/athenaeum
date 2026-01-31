@@ -14,10 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * MockableDriverTest
  *
- * @group utils
- * @group driver
- * @group mockable-driver
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Concerns
  */
@@ -68,8 +64,6 @@ class MockableDriverTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -84,8 +78,6 @@ class MockableDriverTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -107,8 +99,6 @@ class MockableDriverTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -132,8 +122,6 @@ class MockableDriverTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

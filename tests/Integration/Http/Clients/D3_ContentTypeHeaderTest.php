@@ -12,9 +12,6 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * D3_ContentTypeHeaderTest
  *
- * @group http-clients
- * @group http-clients-d3
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -26,9 +23,6 @@ use Psr\Http\Message\ResponseInterface;
 class D3_ContentTypeHeaderTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException

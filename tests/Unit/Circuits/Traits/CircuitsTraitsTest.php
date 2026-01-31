@@ -15,10 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * CircuitsTraitsTest
  *
- * @group circuits
- * @group circuits-traits
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Circuits\Traits
  */
@@ -52,9 +48,6 @@ class CircuitsTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

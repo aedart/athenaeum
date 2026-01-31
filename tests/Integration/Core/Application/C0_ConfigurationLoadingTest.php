@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C0_ConfigurationLoadingTest
  *
- * @group application
- * @group application-c0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
@@ -42,9 +39,6 @@ class C0_ConfigurationLoadingTest extends AthenaeumCoreTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canLoadConfiguration()
     {

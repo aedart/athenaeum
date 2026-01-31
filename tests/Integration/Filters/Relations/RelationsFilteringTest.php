@@ -15,9 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * RelationsFilteringTest
  *
- * @group filters
- * @group filters-relations-filtering
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Relations
  */
@@ -28,8 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class RelationsFilteringTest extends FiltersTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws CriteriaException

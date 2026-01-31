@@ -12,9 +12,6 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * D1_HttpProtocolVersionTest
  *
- * @group http-clients
- * @group http-clients-d1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -26,9 +23,6 @@ use Psr\Http\Message\ResponseInterface;
 class D1_HttpProtocolVersionTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -47,9 +41,6 @@ class D1_HttpProtocolVersionTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException

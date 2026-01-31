@@ -16,9 +16,6 @@ use Psr\Container\ContainerExceptionInterface;
 /**
  * ScanResultTest
  *
- * @group antivirus
- * @group antivirus-scan-result
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus
  */
@@ -56,8 +53,6 @@ class ScanResultTest extends AntivirusTestCase
 
 
     /**
-     * @test
-     *
      * @return void
      * @throws UnsupportedStatusValueException
      */
@@ -94,8 +89,6 @@ class ScanResultTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -115,8 +108,6 @@ class ScanResultTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -137,8 +128,6 @@ class ScanResultTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws UnsupportedStatusValueException
      */
@@ -162,8 +151,6 @@ class ScanResultTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws UnsupportedStatusValueException
      */

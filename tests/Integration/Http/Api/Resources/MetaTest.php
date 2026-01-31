@@ -14,10 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * MetaTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-meta
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
@@ -29,8 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class MetaTest extends ApiResourcesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * TransactionFactoryTest
  *
- * @group streams
- * @group stream-transaction
- * @group stream-transaction-factory
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File\Transactions
  */
@@ -27,8 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 class TransactionFactoryTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     public function canObtainInstance()
@@ -39,8 +33,6 @@ class TransactionFactoryTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      * @throws \Aedart\Contracts\Streams\Exceptions\TransactionException
@@ -57,8 +49,6 @@ class TransactionFactoryTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      * @throws \Aedart\Contracts\Streams\Exceptions\TransactionException

@@ -22,10 +22,6 @@ use Teapot\StatusCode\All as Status;
 /**
  * RangeRequestTest
  *
- * @group etags
- * @group preconditions
- * @group partial-content-response
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions
  */
@@ -87,8 +83,6 @@ class PartialContentResponseTest extends PreconditionsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -129,8 +123,6 @@ class PartialContentResponseTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -181,8 +173,6 @@ class PartialContentResponseTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -272,8 +262,6 @@ class PartialContentResponseTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -332,8 +320,6 @@ class PartialContentResponseTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -381,8 +367,6 @@ class PartialContentResponseTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -420,8 +404,6 @@ class PartialContentResponseTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -469,8 +451,6 @@ class PartialContentResponseTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -508,8 +488,6 @@ class PartialContentResponseTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException

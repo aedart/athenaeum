@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * RedmineTraitsTest
  *
- * @group redmine
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Redmine\Traits
  */
@@ -38,9 +35,6 @@ class RedmineTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

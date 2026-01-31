@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A0_OpenCloseFileStreamTest
  *
- * @group streams
- * @group streams-file-a0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
@@ -25,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class A0_OpenCloseFileStreamTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -40,8 +35,6 @@ class A0_OpenCloseFileStreamTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -55,8 +48,6 @@ class A0_OpenCloseFileStreamTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -71,8 +62,6 @@ class A0_OpenCloseFileStreamTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

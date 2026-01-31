@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * DatabaseUtilsTest
  *
- * @group database
- * @group db
- * @group db-utils
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Database\Utils
  */
@@ -27,8 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 class DatabaseUtilsTest extends DatabaseTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -43,8 +37,6 @@ class DatabaseUtilsTest extends DatabaseTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

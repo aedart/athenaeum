@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C0_ExceptionHandlingTest
  *
- * @group application
- * @group application-console
- * @group application-console-c0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Console
  */
@@ -43,9 +39,6 @@ class C0_ExceptionHandlingTest extends AthenaeumCoreConsoleTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function respectsMustThrowExceptionsState()
     {
@@ -58,9 +51,6 @@ class C0_ExceptionHandlingTest extends AthenaeumCoreConsoleTestCase
             ->artisan('test:fail');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function handlesException()
     {

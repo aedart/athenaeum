@@ -95,10 +95,6 @@ use ReflectionException;
 /**
  * LaravelSupportHelpersTest
  *
- * @group laravel
- * @group support
- * @group support-helpers
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Support\Helpers
  */
@@ -278,9 +274,6 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      * @param string|null $laravelComponent  [optional] Class path to Laravel component that must be mocked.
      *
@@ -307,11 +300,6 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
         $this->assertNotNull($value, 'Default value is not set. Please check your Laravel services');
     }
 
-    /**
-     * @test
-     *
-     * depends canInvokeTraitMethods
-     */
     #[Test]
     public function cleanup()
     {

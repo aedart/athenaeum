@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * AclTraitsTest
  *
- * @group acl
- * @group acl-traits
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Acl\Traits
  */
@@ -44,9 +40,6 @@ class AclTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

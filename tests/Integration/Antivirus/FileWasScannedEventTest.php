@@ -14,10 +14,6 @@ use Psr\Container\ContainerExceptionInterface;
 /**
  * FileWasScannedEventTest
  *
- * @group antivirus
- * @group antivirus-events
- * @group antivirus-file-was-scanned-event
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus
  */
@@ -29,8 +25,6 @@ use Psr\Container\ContainerExceptionInterface;
 class FileWasScannedEventTest extends AntivirusTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -44,8 +38,6 @@ class FileWasScannedEventTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -59,8 +51,6 @@ class FileWasScannedEventTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

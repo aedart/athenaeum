@@ -16,10 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * RulesCollectionTest
  *
- * @group collections
- * @group summations
- * @group rules-collection
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Collections\Summations
  */
@@ -110,9 +106,6 @@ class RulesCollectionTest extends UnitTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainInstance()
     {
@@ -121,9 +114,6 @@ class RulesCollectionTest extends UnitTestCase
         $this->assertNotNull($collection);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainItem()
     {
@@ -135,9 +125,6 @@ class RulesCollectionTest extends UnitTestCase
         $this->assertSame($item, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canCreateNewInstanceWithItem()
     {
@@ -151,9 +138,6 @@ class RulesCollectionTest extends UnitTestCase
         $this->assertNotSame($collectionA, $collectionB);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainSummationCollection()
     {
@@ -165,9 +149,6 @@ class RulesCollectionTest extends UnitTestCase
         $this->assertSame($summation, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canCreateNewInstanceWithSummation()
     {
@@ -181,9 +162,6 @@ class RulesCollectionTest extends UnitTestCase
         $this->assertNotSame($collectionA, $collectionB);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainRules()
     {
@@ -195,9 +173,6 @@ class RulesCollectionTest extends UnitTestCase
         $this->assertSame($rules, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canCreateNewInstanceWithRules()
     {
@@ -211,9 +186,6 @@ class RulesCollectionTest extends UnitTestCase
         $this->assertNotSame($collectionA, $collectionB);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canExportToArray()
     {
@@ -225,9 +197,6 @@ class RulesCollectionTest extends UnitTestCase
         $this->assertSame($rules, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canLoopThroughRules()
     {
@@ -244,9 +213,6 @@ class RulesCollectionTest extends UnitTestCase
         $this->assertSame(count($rules), $c, 'Incorrect amount looped through');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canCountRulesInCollection()
     {
@@ -256,9 +222,6 @@ class RulesCollectionTest extends UnitTestCase
         $this->assertSame(5, $collection->count(), 'Incorrect amount via count()');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canProcessRules()
     {

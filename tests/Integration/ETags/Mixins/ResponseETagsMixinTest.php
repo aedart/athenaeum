@@ -13,10 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ResponseETagsMixinTest
  *
- * @group etags
- * @group etags-mixins
- * @group response-etags-mixin
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Mixins
  */
@@ -28,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class ResponseETagsMixinTest extends ETagsTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -41,8 +35,6 @@ class ResponseETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -63,8 +55,6 @@ class ResponseETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -86,8 +76,6 @@ class ResponseETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException

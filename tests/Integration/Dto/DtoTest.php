@@ -13,8 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * DtoTest
  *
- * @group dto
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Dto
  */
@@ -23,9 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class DtoTest extends DtoTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canCreateInstance()
     {
@@ -34,9 +29,6 @@ class DtoTest extends DtoTestCase
         $this->assertNotNull($dto);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canCreateInstanceWithProperties()
     {
@@ -51,9 +43,6 @@ class DtoTest extends DtoTestCase
         $this->assertSame($data['age'], $dto->age);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineIfExists()
     {
@@ -69,9 +58,6 @@ class DtoTest extends DtoTestCase
         $this->assertFalse(isset($dto['unknownProperty']), 'Unknown property should NOT Exist');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canGetAndSetProperty()
     {
@@ -86,9 +72,6 @@ class DtoTest extends DtoTestCase
         $this->assertSame($age, $dto['age']);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsReadingWhenPropertyDoesNotExist()
     {
@@ -98,9 +81,6 @@ class DtoTest extends DtoTestCase
         $dto['myUnknownProperty'];
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsWritingWhenPropertyDoesNotExist()
     {
@@ -110,9 +90,6 @@ class DtoTest extends DtoTestCase
         $dto['myUnknownProperty'] = 42;
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canUnsetProperty()
     {
@@ -127,9 +104,6 @@ class DtoTest extends DtoTestCase
         $this->assertFalse(isset($dto['name']));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canBeJsonSerialised()
     {
@@ -145,9 +119,6 @@ class DtoTest extends DtoTestCase
         $this->assertJson($encoded);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canBeExportedToJson()
     {
@@ -163,9 +134,6 @@ class DtoTest extends DtoTestCase
         $this->assertJson($encoded);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canBeSerialisedAndUnserialised()
     {
@@ -186,9 +154,6 @@ class DtoTest extends DtoTestCase
         $this->assertSame($data['age'], $newDto['age']);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canBeRepresentedAsString()
     {
@@ -204,9 +169,6 @@ class DtoTest extends DtoTestCase
         $this->assertIsString($encoded);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canCreateInstanceFromJson()
     {
@@ -218,9 +180,6 @@ class DtoTest extends DtoTestCase
         $this->assertSame(67571179, $dto['age']);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainDebugInfo()
     {

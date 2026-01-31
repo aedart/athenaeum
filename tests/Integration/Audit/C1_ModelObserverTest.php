@@ -15,11 +15,6 @@ use Throwable;
 /**
  * C1_ModelObserverTest
  *
- * @group audit
- * @group audit-trail
- * @group audit-trail-observer
- * @group audit-c1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Audit
  */
@@ -32,8 +27,6 @@ use Throwable;
 class C1_ModelObserverTest extends AuditTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws Throwable

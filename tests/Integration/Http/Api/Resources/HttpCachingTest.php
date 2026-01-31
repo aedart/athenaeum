@@ -15,10 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * HttpCachingTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-http-caching
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
@@ -30,8 +26,6 @@ use PHPUnit\Framework\Attributes\Test;
 class HttpCachingTest extends ApiResourcesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -71,8 +65,6 @@ class HttpCachingTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagGeneratorException
@@ -107,8 +99,6 @@ class HttpCachingTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagGeneratorException
@@ -144,8 +134,6 @@ class HttpCachingTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagGeneratorException
@@ -180,8 +168,6 @@ class HttpCachingTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagGeneratorException

@@ -16,10 +16,6 @@ use Throwable;
 /**
  * IfNoneMatchTest
  *
- * @group etags
- * @group preconditions
- * @group rfc9110-if-none-match
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions\Rfc9110
  */
@@ -31,8 +27,6 @@ use Throwable;
 class IfNoneMatchTest extends PreconditionsTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws HttpExceptionInterface
      * @throws Throwable
@@ -64,8 +58,6 @@ class IfNoneMatchTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws HttpExceptionInterface
      * @throws Throwable
@@ -106,8 +98,6 @@ class IfNoneMatchTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws HttpExceptionInterface
      * @throws Throwable
@@ -148,8 +138,6 @@ class IfNoneMatchTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws HttpExceptionInterface
      * @throws Throwable

@@ -13,11 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C11_WhereTimeTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-g5
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -84,9 +79,6 @@ class G5_WhereTimeTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesWhereTime
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -108,9 +100,6 @@ class G5_WhereTimeTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesOrWhereTime
-     *
      * @param string $grammar
      * @param string $expected
      *

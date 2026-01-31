@@ -10,10 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A0_DatabaseAdapterTest
  *
- * @group flysystem
- * @group flysystem-db
- * @group flysystem-db-a0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
@@ -25,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class A0_DatabaseAdapterTest extends FlysystemDbTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -39,8 +33,6 @@ class A0_DatabaseAdapterTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

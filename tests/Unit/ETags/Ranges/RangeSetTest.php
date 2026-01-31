@@ -13,10 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * RangeSetTest
  *
- * @group etags
- * @group ranges
- * @group range-set
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\ETags\Ranges
  */
@@ -63,8 +59,6 @@ class RangeSetTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -102,8 +96,6 @@ class RangeSetTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -149,8 +141,6 @@ class RangeSetTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

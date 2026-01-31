@@ -10,10 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * GenericResourceTest
  *
- * @group etags
- * @group resource-context
- * @group generic-resource-context
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions\Resources
  */
@@ -25,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class GenericResourceTest extends PreconditionsTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

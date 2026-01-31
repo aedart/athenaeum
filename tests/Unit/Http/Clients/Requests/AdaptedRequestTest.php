@@ -17,10 +17,6 @@ use Psr\Http\Message\UriInterface;
 /**
  * AdaptedRequestTest
  *
- * @group http-clients
- * @group adapted-request
- * @group psr-7
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Clients\Requests
  */
@@ -65,9 +61,6 @@ class AdaptedRequestTest extends UnitTestCase
      * Actual Test
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainDriverOptions()
     {
@@ -78,9 +71,6 @@ class AdaptedRequestTest extends UnitTestCase
         $this->assertSame($options, $request->getDriverOptions());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetAndObtainProtocolVersion()
     {
@@ -94,9 +84,6 @@ class AdaptedRequestTest extends UnitTestCase
         $this->assertSame($version, $request->getProtocolVersion());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetAndObtainHeaders()
     {
@@ -122,9 +109,6 @@ class AdaptedRequestTest extends UnitTestCase
         ], $request->getHeaders(), 'Incorrect headers');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canRemoveHeader()
     {
@@ -142,9 +126,6 @@ class AdaptedRequestTest extends UnitTestCase
         ], $request->getHeaders(), 'Incorrect headers');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetAndObtainBody()
     {
@@ -162,9 +143,6 @@ class AdaptedRequestTest extends UnitTestCase
         $this->assertSame('Foo', $content);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetAndObtainRequestTarget()
     {
@@ -179,9 +157,6 @@ class AdaptedRequestTest extends UnitTestCase
         $this->assertSame($target, $request->getRequestTarget());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetAndGetHttpMethod()
     {
@@ -194,9 +169,6 @@ class AdaptedRequestTest extends UnitTestCase
         $this->assertSame('PATCH', $request->getMethod());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetAndObtainUri()
     {

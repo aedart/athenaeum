@@ -15,9 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * CommandsRegistrarTest
  *
- * @group console
- * @group commands-registration
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Console\Registrars
  */
@@ -68,9 +65,6 @@ class CommandsRegistrationTest extends LaravelTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function hasRegisteredCommandFromConfig()
     {
@@ -84,8 +78,6 @@ class CommandsRegistrationTest extends LaravelTestCase
     }
 
     /**
-     * @test
-     *
      * @depends hasRegisteredCommandFromConfig
      */
     #[Depends('hasRegisteredCommandFromConfig')]

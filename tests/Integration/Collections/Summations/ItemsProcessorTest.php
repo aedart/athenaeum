@@ -20,10 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ItemsProcessorTest
  *
- * @group collections
- * @group summations
- * @group items-processor
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Collections\Summations
  */
@@ -115,9 +111,6 @@ class ItemsProcessorTest extends IntegrationTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainInstance()
     {
@@ -126,9 +119,6 @@ class ItemsProcessorTest extends IntegrationTestCase
         $this->assertNotNull($processor);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canProcessItems()
     {
@@ -162,9 +152,6 @@ class ItemsProcessorTest extends IntegrationTestCase
         $this->assertSame(2.9, $results->get('average'));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canProcessYieldedItems()
     {

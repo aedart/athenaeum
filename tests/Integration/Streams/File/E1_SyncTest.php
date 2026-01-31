@@ -12,9 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * J0_SyncTest
  *
- * @group streams
- * @group streams-file-e1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
@@ -56,8 +53,6 @@ class E1_SyncTest extends StreamTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      * @throws StreamException
      */

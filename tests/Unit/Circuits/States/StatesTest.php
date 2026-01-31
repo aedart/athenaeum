@@ -21,9 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * StatesTest
  *
- * @group circuits
- * @group circuits-states
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Circuits\States
  */
@@ -74,9 +71,6 @@ class StatesTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
      * @param mixed $state
      */
     #[DataProvider('providesStates')]
@@ -87,9 +81,6 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
      * @param State $state
      */
     #[DataProvider('providesStates')]
@@ -111,9 +102,6 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
      * @param State $state
      */
     #[DataProvider('providesStates')]
@@ -128,9 +116,6 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
      * @param State $state
      */
     #[DataProvider('providesStates')]
@@ -149,9 +134,6 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
      * @param State $state
      */
     #[DataProvider('providesStates')]
@@ -175,9 +157,6 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
      * @param State $state
      */
     #[DataProvider('providesStates')]
@@ -200,9 +179,6 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
      * @param State $state
      */
     #[DataProvider('providesStates')]
@@ -229,9 +205,6 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
      * @param State $state
      */
     #[DataProvider('providesStates')]
@@ -254,9 +227,6 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
      * @param State $state
      *
      * @throws JsonException
@@ -281,9 +251,6 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
      * @param State $state
      */
     #[DataProvider('providesStates')]
@@ -297,9 +264,6 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
      * @param State $state
      */
     #[DataProvider('providesStates')]

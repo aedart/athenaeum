@@ -10,10 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A0_InstanceTest
  *
- * @group application
- * @group application-console
- * @group application-console-a0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Console
  */
@@ -24,9 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class A0_InstanceTest extends AthenaeumCoreConsoleTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainInstance()
     {

@@ -13,10 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
  *
  * CacheStoreTest
  *
- * @group circuits
- * @group circuits-stores
- * @group circuits-stores-cache
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Circuits\Stores
  */

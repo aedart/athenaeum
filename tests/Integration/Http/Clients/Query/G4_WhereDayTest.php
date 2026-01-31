@@ -13,11 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C10_WhereDayTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-g4
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -89,9 +84,6 @@ class G4_WhereDayTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesWhereDay
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -113,9 +105,6 @@ class G4_WhereDayTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesOrWhereDay
-     *
      * @param string $grammar
      * @param string $expected
      *

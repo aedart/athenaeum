@@ -13,9 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * K0_MiddlewareTest
  *
- * @group http-clients
- * @group http-clients-k0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -31,9 +28,6 @@ class K0_MiddlewareTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -56,9 +50,6 @@ class K0_MiddlewareTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -75,9 +66,6 @@ class K0_MiddlewareTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException

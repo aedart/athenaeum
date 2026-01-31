@@ -16,11 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ProcessMultipleResourcesRequestTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-requests
- * @group process-multiple-resources-request
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
@@ -48,8 +43,6 @@ class ProcessMultipleResourcesRequestTest extends ApiResourceRequestsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -94,8 +87,6 @@ class ProcessMultipleResourcesRequestTest extends ApiResourceRequestsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -123,8 +114,6 @@ class ProcessMultipleResourcesRequestTest extends ApiResourceRequestsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -163,8 +152,6 @@ class ProcessMultipleResourcesRequestTest extends ApiResourceRequestsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException

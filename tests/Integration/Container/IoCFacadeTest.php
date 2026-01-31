@@ -12,11 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * IoCFacadeTest
  *
- * @group ioc
- * @group container
- * @group ioc-facade
- * @group facades
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Container
  */
@@ -28,9 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class IoCFacadeTest extends IntegrationTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canResolveBinding()
     {
@@ -44,9 +36,6 @@ class IoCFacadeTest extends IntegrationTestCase
         $this->assertInstanceOf(Box::class, $resolved, 'unable to resolve binding');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function returnsDefaultWhenBindingDoesNotExist()
     {
@@ -58,9 +47,6 @@ class IoCFacadeTest extends IntegrationTestCase
         $this->assertSame($default, $resolved, 'incorrect default resolved');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function resolvesCallbackValueAsDefault()
     {

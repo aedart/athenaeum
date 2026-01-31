@@ -13,9 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * LaravelIntegrationTest
  *
- * @group maintenance-modes
- * @group maintenance-modes-integration-to-laravel
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Maintenance\Modes
  */
@@ -47,8 +44,6 @@ class LaravelIntegrationTest extends MaintenanceModesTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -63,9 +58,6 @@ class LaravelIntegrationTest extends MaintenanceModesTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesDrivers
-     *
      * @param  string  $name
      * @return void
      */

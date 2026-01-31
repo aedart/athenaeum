@@ -11,11 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ApiTraitsTest
  *
- * @group http
- * @group http-api
- * @group http-api-traits
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Api\Traits
  */
@@ -46,9 +41,6 @@ class ApiTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

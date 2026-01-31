@@ -11,11 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * X0_FormatTest
  *
- * @group utils
- * @group utils-memory
- * @group utils-memory-unit-x0
- * @group utils-memory-unit-format
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
@@ -29,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class X0_FormatTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -46,8 +39,6 @@ class X0_FormatTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -63,8 +54,6 @@ class X0_FormatTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -80,8 +69,6 @@ class X0_FormatTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -97,8 +84,6 @@ class X0_FormatTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

@@ -10,10 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * HttpQueryGrammarManagerTest
  *
- * @group http
- * @group http-clients
- * @group http-query-manager
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Managers
  */
@@ -24,9 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class HttpQueryGrammarManagerTest extends HttpClientsTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainInstance()
     {
@@ -36,8 +29,6 @@ class HttpQueryGrammarManagerTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      */
     #[Test]
@@ -50,8 +41,6 @@ class HttpQueryGrammarManagerTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      */
     #[Test]

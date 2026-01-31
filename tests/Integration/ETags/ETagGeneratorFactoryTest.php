@@ -14,9 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ETagGeneratorFactoryTest
  *
- * @group etags
- * @group etags-generator-factory
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags
  */
@@ -27,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class ETagGeneratorFactoryTest extends ETagsTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -41,8 +36,6 @@ class ETagGeneratorFactoryTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -58,8 +51,6 @@ class ETagGeneratorFactoryTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -75,8 +66,6 @@ class ETagGeneratorFactoryTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -92,8 +81,6 @@ class ETagGeneratorFactoryTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

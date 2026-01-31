@@ -10,10 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * HttpClientsManagerTest
  *
- * @group http
- * @group http-clients
- * @group http-clients-manager
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -24,9 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class HttpClientsManagerTest extends HttpClientsTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainInstance()
     {
@@ -36,8 +29,6 @@ class HttpClientsManagerTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      */
     #[Test]
@@ -50,8 +41,6 @@ class HttpClientsManagerTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      */
     #[Test]
@@ -64,8 +53,6 @@ class HttpClientsManagerTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      */
     #[Test]
@@ -82,8 +69,6 @@ class HttpClientsManagerTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException
      */
     #[Test]

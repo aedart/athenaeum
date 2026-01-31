@@ -15,9 +15,6 @@ use Throwable;
 /**
  * ArrTest
  *
- * @group utils
- * @group array
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
@@ -28,8 +25,6 @@ use Throwable;
 class ArrTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -41,8 +36,6 @@ class ArrTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws Throwable
      */
     #[Test]
@@ -65,9 +58,6 @@ class ArrTest extends UnitTestCase
         $this->assertSame($resultB, $resultC);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canReturnDifferenceOfAssociate()
     {
@@ -111,9 +101,6 @@ class ArrTest extends UnitTestCase
         $this->assertArrayHasKey('max', $validation);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function doesNotFailDiffOfAssocWhenEmptyNestedArrays()
     {
@@ -135,9 +122,6 @@ class ArrTest extends UnitTestCase
         $this->assertArrayHasKey('value', $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function doesNotFailDiffOfAssocWhenEmptyNullValues()
     {
@@ -156,8 +140,6 @@ class ArrTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

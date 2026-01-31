@@ -15,10 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * SummationCollectionTest
  *
- * @group collections
- * @group summations
- * @group summation-collection
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Collections
  */
@@ -68,9 +64,6 @@ class SummationCollectionTest extends UnitTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainInstance()
     {
@@ -79,9 +72,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertNotNull($summation);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetAndGetValue()
     {
@@ -95,9 +85,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame($value, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetAndGetViaArrayAccess()
     {
@@ -111,9 +98,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame($value, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetUsingCallback()
     {
@@ -129,9 +113,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame($value, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function returnDefaultWhenKeyIsEmpty()
     {
@@ -144,9 +125,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame($value, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function invokesCallbackWhenGivenAsDefault()
     {
@@ -161,9 +139,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame($value, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineIfKeyExists()
     {
@@ -180,9 +155,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertTrue($resultB, 'Key should exist');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineIfKeyExistsViaArrayAccess()
     {
@@ -199,9 +171,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertTrue($resultB, 'Key should exist');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineIfKeyHasValue()
     {
@@ -226,9 +195,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertTrue($resultD, 'Key B should be empty');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineIfKeyHasValueViaArrayAccess()
     {
@@ -247,9 +213,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertTrue($resultB, 'B should be set, but empty');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineIfCollectionIsEmpty()
     {
@@ -268,9 +231,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertFalse($summationB->isNotEmpty(), 'B IS EMPTY');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canRemoveKey()
     {
@@ -286,9 +246,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertFalse($summation->has('b'), 'b should no longer be set');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canRemoveKeyViaArrayAccess()
     {
@@ -303,9 +260,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertFalse($summation->has('c'), 'c should no longer be set');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canCountElementsInCollection()
     {
@@ -319,9 +273,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame(3, $summation->count(), 'Incorrect amount via count()');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canLoopThroughElements()
     {
@@ -343,9 +294,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame(count($results), $c, 'Incorrect amount looped through');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canExportToArray()
     {
@@ -361,9 +309,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame($elements, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canConvertToJson()
     {
@@ -382,9 +327,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertJson($resultB, 'Was unable to export to Json');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canConvertToString()
     {
@@ -401,9 +343,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertNotEmpty($result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canIncreaseValue()
     {
@@ -416,9 +355,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame(15, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canIncreaseValueViaCallback()
     {
@@ -433,9 +369,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame(15, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDecreaseValue()
     {
@@ -448,9 +381,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame(-5, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDecreaseValueViaCallback()
     {
@@ -465,9 +395,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame(-5, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canMultiplyValue()
     {
@@ -480,9 +407,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame(25, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canMultiplyValueViaCallback()
     {
@@ -497,9 +421,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame(50, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDivideValue()
     {
@@ -512,9 +433,6 @@ class SummationCollectionTest extends UnitTestCase
         $this->assertSame(10, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDivideValueViaCallback()
     {
@@ -530,9 +448,6 @@ class SummationCollectionTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider methodProvider
-     *
      * @param  string  $method
      */
     #[DataProvider('methodProvider')]

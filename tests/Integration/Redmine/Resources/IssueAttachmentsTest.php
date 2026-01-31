@@ -13,10 +13,6 @@ use Throwable;
 /**
  * IssueAttachmentsTest
  *
- * @group redmine
- * @group redmine-resources
- * @group redmine-resources-issue-attachments
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
@@ -28,8 +24,6 @@ use Throwable;
 class IssueAttachmentsTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */

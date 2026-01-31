@@ -14,11 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C4_WhereCallbackTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-c5
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -62,9 +57,6 @@ class C5_WhereCallbackTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesWhereCallback
-     *
      * @param string $grammar
      * @param string $expected
      *

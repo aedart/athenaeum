@@ -12,9 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * MemoryTest
  *
- * @group utils
- * @group utils-memory
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
@@ -25,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class MemoryTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -79,8 +74,6 @@ class MemoryTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -92,8 +85,6 @@ class MemoryTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

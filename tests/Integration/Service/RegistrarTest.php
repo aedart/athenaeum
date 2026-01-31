@@ -18,9 +18,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * RegistrarTest
  *
- * @group service
- * @group service-registrar
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Service
  */
@@ -88,9 +85,6 @@ class RegistrarTest extends AthenaeumTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canCreateInstance()
     {
@@ -98,9 +92,6 @@ class RegistrarTest extends AthenaeumTestCase
         $this->assertNotNull($registrar);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canRegisterMultipleServiceProviders()
     {
@@ -122,9 +113,6 @@ class RegistrarTest extends AthenaeumTestCase
         }
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canRegisterAndBootMultipleServiceProviders()
     {
@@ -153,9 +141,6 @@ class RegistrarTest extends AthenaeumTestCase
         }
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canRegisterAndBootUnsafe()
     {
@@ -175,9 +160,6 @@ class RegistrarTest extends AthenaeumTestCase
         $this->assertStringContainsString('D has booted', $messages[5]);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function doesNotRegisterSameProviderTwice()
     {
@@ -192,9 +174,6 @@ class RegistrarTest extends AthenaeumTestCase
         $this->assertFalse($second, 'Same service provider registered, but should not be');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function doesNotBootSameProviderTwice()
     {
@@ -214,9 +193,6 @@ class RegistrarTest extends AthenaeumTestCase
         $this->assertFalse($result, 'Should NOT have booted already booted service provider');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canRegisterAndBootAggregateServiceProviders()
     {
@@ -246,8 +222,6 @@ class RegistrarTest extends AthenaeumTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
