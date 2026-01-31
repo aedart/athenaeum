@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Download Stream
 
-The `DownloadStream` is a response helper that is able to create a [streamed download response](https://laravel.com/docs/12.x/responses#streamed-downloads) for an attachment.
+The `DownloadStream` is a response helper that is able to create a [streamed download response](https://laravel.com/docs/13.x/responses#streamed-downloads) for an attachment.
 Whenever a `Range` is requested, the helper will create either of the following stream download responses:
 
 - The entire attachment.

@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 # Failed Password Reset Link (API Response)
 
-In an edge case scenario, a ["forgot password"](https://laravel.com/docs/12.x/fortify#requesting-a-password-reset-link)
+In an edge case scenario, a ["forgot password"](https://laravel.com/docs/13.x/fortify#requesting-a-password-reset-link)
 mechanism can potentially be misused to guess if a user account exists or not. Most commonly, this is done so by
 requesting a password reset, to a specified email. When your application responds with a
 [successful response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#successful_responses) for a valid email,

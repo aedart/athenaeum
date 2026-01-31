@@ -8,12 +8,12 @@ The Athenaeum Core Application is a custom implementation of [Laravel's](https:/
 
 It offers the following features:
 
-- Registration and booting of [Service Providers](https://laravel.com/docs/12.x/providers)
-- Laravel's [Service Container](https://laravel.com/docs/12.x/container)
-- Laravel's [Configuration Repository](https://laravel.com/docs/12.x/configuration)
-- Laravel's [Event Dispatcher](https://laravel.com/docs/12.x/events)
-- Laravel's [Cache Repository](https://laravel.com/docs/12.x/cache)
-- Laravel's [Console Application](https://laravel.com/docs/12.x/artisan) (_lightweight version of Artisan_)
+- Registration and booting of [Service Providers](https://laravel.com/docs/13.x/providers)
+- Laravel's [Service Container](https://laravel.com/docs/13.x/container)
+- Laravel's [Configuration Repository](https://laravel.com/docs/13.x/configuration)
+- Laravel's [Event Dispatcher](https://laravel.com/docs/13.x/events)
+- Laravel's [Cache Repository](https://laravel.com/docs/13.x/cache)
+- Laravel's [Console Application](https://laravel.com/docs/13.x/artisan) (_lightweight version of Artisan_)
 - Exception Handling (_optional_)
 
 ## Motivation
@@ -33,8 +33,8 @@ You _SHOULD NOT_ use this application, unless you are very familiar with Laravel
 The Core Application comes with a number of limitations, most of which are on purpose.
 
 * No Http Request / Response Support
-* No Frontend Support (_no [Blade](https://laravel.com/docs/12.x/blade)_)
-* No Database Support (_no [Eloquent](https://laravel.com/docs/12.x/eloquent)_)
+* No Frontend Support (_no [Blade](https://laravel.com/docs/13.x/blade)_)
+* No Database Support (_no [Eloquent](https://laravel.com/docs/13.x/eloquent)_)
 * ...etc
 
 This package is NOT intended to act as a replacement for Laravel, nor Lumen.

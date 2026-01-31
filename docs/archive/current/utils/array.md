@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Array
 
-Extended version of Laravel's [`Arr` component](https://laravel.com/docs/12.x/helpers#arrays).
+Extended version of Laravel's [`Arr` component](https://laravel.com/docs/13.x/helpers#arrays).
 
 [[TOC]]
 

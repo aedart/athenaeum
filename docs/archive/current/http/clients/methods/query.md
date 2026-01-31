@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Http Query
 
-The Http Client comes with a powerful [Http Query Builder](../query/) that allows you to set query parameters in a fluent manner, similar to [Laravel's database query builder](https://laravel.com/docs/12.x/queries#introduction) (_but with significantly less features_).
+The Http Client comes with a powerful [Http Query Builder](../query/) that allows you to set query parameters in a fluent manner, similar to [Laravel's database query builder](https://laravel.com/docs/13.x/queries#introduction) (_but with significantly less features_).
 You can read more about the builder, in the upcoming [chapter](../query/).
 For now, the more traditional ways of setting a request's http query parameters is briefly illustrated.
 This may be useful for you, when the provided query builder isn't able to meet your needs.

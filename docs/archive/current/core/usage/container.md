@@ -4,10 +4,10 @@ description: How to use Service Container
 
 # Service Container
 
-The Core Application is essentially an extended version of Laravel's [Service Container](https://laravel.com/docs/12.x/container).
+The Core Application is essentially an extended version of Laravel's [Service Container](https://laravel.com/docs/13.x/container).
 It works exactly as you are used to, in your Laravel projects.
 This chapter only briefly highlights some of it's major features.
-For more saturated examples and information on how to use the Service Container, please review Laravel's [documentation](https://laravel.com/docs/12.x/container). 
+For more saturated examples and information on how to use the Service Container, please review Laravel's [documentation](https://laravel.com/docs/13.x/container). 
 
 [[TOC]]
 
@@ -103,7 +103,7 @@ In the next few sections, different approaches are explored.
 
 ### Using the `App` Facade
 
-You can also resolve your bindings, by using Laravel's `App` [Facade](https://laravel.com/docs/12.x/facades).
+You can also resolve your bindings, by using Laravel's `App` [Facade](https://laravel.com/docs/13.x/facades).
 This Facade provides access to your application instance, as long as your application is running.
 Such can be useful, in situations where you might not have direct access to your `$app`.
 
@@ -120,7 +120,7 @@ $weatherStation = App::make(Station::class);
 
 ::: warning Caution
 Depending upon how you use Facades, they can either help you to get the job done or become a hindrance.
-You should take some time to read about their conceptual [benefits and limitations](https://laravel.com/docs/12.x/facades#when-to-use-facades).  
+You should take some time to read about their conceptual [benefits and limitations](https://laravel.com/docs/13.x/facades#when-to-use-facades).  
 :::
 
 ### Using the `IoCFacade`
