@@ -35,7 +35,7 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
         $app = parent::createApplication($paths);
 
         // Set the environment path
-        $app->getPathsContainer()->setEnvironmentPath(Configuration::dataDir() . 'environment');
+        $app->getPathsContainer()->environmentPath = Configuration::dataDir() . 'environment';
 
         return $app;
     }
@@ -64,7 +64,7 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
 
         // Set environment path to a none-existing dir.
         $app = $this->app;
-        $app->getPathsContainer()->setEnvironmentPath(Configuration::dataDir() . 'none-existing-directory');
+        $app->getPathsContainer()->environmentPath = Configuration::dataDir() . 'none-existing-directory';
 
         $this->bootstrap();
     }

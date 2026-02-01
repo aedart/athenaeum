@@ -2,41 +2,27 @@
 
 namespace Aedart\Contracts\Core\Helpers;
 
-use Aedart\Contracts\Support\Properties\Strings\BasePathAware;
-use Aedart\Contracts\Support\Properties\Strings\BootstrapPathAware;
-use Aedart\Contracts\Support\Properties\Strings\ConfigPathAware;
-use Aedart\Contracts\Support\Properties\Strings\DatabasePathAware;
-use Aedart\Contracts\Support\Properties\Strings\EnvironmentPathAware;
-use Aedart\Contracts\Support\Properties\Strings\LangPathAware;
-use Aedart\Contracts\Support\Properties\Strings\PublicPathAware;
-use Aedart\Contracts\Support\Properties\Strings\ResourcePathAware;
-use Aedart\Contracts\Support\Properties\Strings\StoragePathAware;
-use Aedart\Contracts\Utils\Populatable;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Jsonable;
-use JsonSerializable;
+use Aedart\Contracts\Dto;
 
 /**
  * Paths Container
  *
  * Keeps track of various application related paths
  *
+ * @property string|null $path Base directory path
+ * @property string|null $bootstrapPath Bootstrap directory path
+ * @property string|null $configPath Config directory path
+ * @property string|null $langPath Lang directory path
+ * @property string|null $databasePath Database directory path
+ * @property string|null $environmentPath Environment directory path
+ * @property string|null $resourcePath Resource directory path
+ * @property string|null $storagePath Storage directory path
+ * @property string|null $publicPath Public directory path
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Core\Helpers
  */
-interface PathsContainer extends BasePathAware,
-    BootstrapPathAware,
-    ConfigPathAware,
-    LangPathAware,
-    DatabasePathAware,
-    EnvironmentPathAware,
-    ResourcePathAware,
-    StoragePathAware,
-    PublicPathAware,
-    Populatable,
-    Arrayable,
-    Jsonable,
-    JsonSerializable
+interface PathsContainer extends Dto
 {
     /**
      * Get a path within the "base" directory
