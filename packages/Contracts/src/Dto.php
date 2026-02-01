@@ -53,7 +53,7 @@ interface Dto extends ArrayAccess,
      * resolving dependency injection or eventual
      * nested object
      *
-     * @return Container|null IoC service Container or null if none defined
+     * @return Container|null IoC Service Container or null if none defined
      */
     public function container(): Container|null;
 
