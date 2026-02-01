@@ -78,39 +78,4 @@ interface Dto extends ArrayAccess,
      * @throws JsonException
      */
     public static function fromJson(string $json): static;
-
-    /**
-     * Set a property's value
-     *
-     * @param  string  $name
-     * @param  mixed $value
-     *
-     * @return void
-     */
-    public function __set(string $name, mixed $value): void;
-
-    /**
-     * Get value for given property
-     *
-     * @param  string  $name
-     *
-     * @return mixed
-     */
-    public function __get(string $name): mixed;
-
-    /**
-     * Determine if property has been set
-     *
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function __isset(string $name): bool;
-
-    /**
-     * Unset property
-     *
-     * @param string $name
-     */
-    public function __unset(string $name): void;
 }

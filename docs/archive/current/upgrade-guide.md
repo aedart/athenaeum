@@ -43,17 +43,6 @@ $paths = new Paths();
 $paths->configPath = getcwd() . DIRECTORY_SEPARATOR . 'environments';
 ```
 
-### `Dto` interface and Dynamic Properties
-
-Setting a value for an undeclared class property has been deprecated [since PHP `v8.2`](https://php.watch/versions/8.2/dynamic-properties-deprecated). 
-To avoid any deprecation notices in concrete implementations, the `Dto`¹ interface now defines PHP's `__set()`, `__get()`, `__isset()`, and `__unset()` magic methods. 
-This change will only affect you, if you have a custom implementation of the `Dto`. If you use the default provided abstractions², then this should not
-affect you at all.
-
-¹: _`\Aedart\Contracts\Dto`._
-
-²: _`\Aedart\Dto\Dto` and `\Aedart\Dto\ArrayDto`._
-
 ## Onward
 
 More extensive details can be found in the [changelog](https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md).
