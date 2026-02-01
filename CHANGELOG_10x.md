@@ -24,7 +24,9 @@ Temporary changelog for `v10.x` series.
 
 ### Removed
 
-* N/A
+* "Aware-of" components defined in `Aedart\Contracts\Support\Properties` and `Aedart\Support\Properties` (_was deprecated in Athenaeum `v9.x`_). [#210](https://github.com/aedart/athenaeum/issues/210).
+* `properties.php` (_aware-of generator configuration file, in the root of Athenaeum_) (_was deprecated in Athenaeum `v9.x`_). [#210](https://github.com/aedart/athenaeum/issues/210).
+* `resources/athenaeum` templates (_for aware-of components_), in `Support` package (_was deprecated in Athenaeum `v9.x`_). [#210](https://github.com/aedart/athenaeum/issues/210).
 
 ### Deprecated
 

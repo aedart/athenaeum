@@ -43,6 +43,17 @@ $paths = new Paths();
 $paths->configPath = getcwd() . DIRECTORY_SEPARATOR . 'environments';
 ```
 
+### Removed "Aware-of" Components
+
+The "aware-of" components that were located in `Aedart\Contracts\Support\Properties` and `Aedart\Support\Properties` have been removed.
+They have been deprecated since `v9.x`. No replacements are offered!
+
+If you depend on any of those components, please review the source code of previous versions of the Athenaeum Support package.
+
+### Other Deprecated Components
+
+Several other deprecated components have also been removed. Please review the `CHANGELOG.md` for additional details.
+
 ## Onward
 
 More extensive details can be found in the [changelog](https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md).

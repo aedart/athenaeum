@@ -34,7 +34,12 @@ These are the highlights of the latest major version of Athenaeum.
 PHP version `v8.4` is now the minimum required version for Athenaeum.
 [Laravel `v13.x`](https://laravel.com/docs/13.x/releases) packages are now used.
 
-...TODO
+### Removed "Aware-of" Components
+
+The "aware-of" components have been removed.
+Please see the [upgrade guide](./upgrade-guide.md#removed-aware-of-components) for additional details.
+
+### ...TODO
 
 ## Changelog
 

@@ -604,7 +604,6 @@ export default PagesCollection.make('v10.x', '/v10x', [
                 collapsible: true,
                 children: [
                     'support/properties/',
-                    'support/properties/available-helpers',
                 ]
             },
             'support/live-templates',

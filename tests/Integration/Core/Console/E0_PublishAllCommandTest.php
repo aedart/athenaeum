@@ -95,21 +95,15 @@ class E0_PublishAllCommandTest extends AthenaeumCoreConsoleTestCase
         $fs = $this->getFile();
 
         $target = $this->targetPublishDir();
-        $targetA = $target . 'athenaeum';
-        $targetB = $target . 'templates';
+        $targetA = $target . 'templates';
 
         $this->assertTrue($fs->isDirectory($target), 'Output dir not created');
         $this->assertTrue($fs->isDirectory($targetA), 'Nested resource A not published');
-        $this->assertTrue($fs->isDirectory($targetB), 'Nested resource B not published');
 
         // Ensure directories are not empty
         $filesInA = $fs->allFiles($targetA);
         //ConsoleDebugger::output($filesInA);
         $this->assertNotEmpty($filesInA, 'target A has no files published');
-
-        $filesInB = $fs->allFiles($targetB);
-        //ConsoleDebugger::output($filesInB);
-        $this->assertNotEmpty($filesInB, 'target B has no files published');
 
         // ------------------------------------------------------------ //
 
