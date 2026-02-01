@@ -9,15 +9,15 @@ use Aedart\Contracts\Dto;
  *
  * Keeps track of various application related paths
  *
- * @param string|null $path Base directory path
- * @param string|null $bootstrapPath Bootstrap directory path
- * @param string|null $configPath Config directory path
- * @param string|null $langPath Lang directory path
- * @param string|null $databasePath Database directory path
- * @param string|null $environmentPath Environment directory path
- * @param string|null $resourcePath Resource directory path
- * @param string|null $storagePath Storage directory path
- * @param string|null $publicPath Public directory path
+ * @property string|null $path Base directory path
+ * @property string|null $bootstrapPath Bootstrap directory path
+ * @property string|null $configPath Config directory path
+ * @property string|null $langPath Lang directory path
+ * @property string|null $databasePath Database directory path
+ * @property string|null $environmentPath Environment directory path
+ * @property string|null $resourcePath Resource directory path
+ * @property string|null $storagePath Storage directory path
+ * @property string|null $publicPath Public directory path
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Core\Helpers
