@@ -12,8 +12,7 @@ Temporary changelog for `v10.x` series.
 
 **Breaking Changes**
 
-* The `Paths` container has been redesigned to inherit from `ArrayDto`. It no longer depends on the removed "Aware-of" components. (_in the Core package_). [#211](https://github.com/aedart/athenaeum/issues/211).
-* `Dto` interface now defines the following magic methods: `__set()`, `__get()`, `__isset()`, and `__unset()`.   
+* The `Paths` container has been redesigned to inherit from `ArrayDto`. It no longer depends on the removed "Aware-of" components. (_in the Core package_). [#211](https://github.com/aedart/athenaeum/issues/211). 
 
 **Non-breaking Changes**
 
