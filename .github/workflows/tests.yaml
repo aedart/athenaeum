@@ -9,6 +9,7 @@ name: 'Code Analysis and Tests'
 on:
   push:
   pull_request:
+      types: [opened, reopened, ready_for_review]
 
   # Schedule tests to run every day at 06:00 (if possible)
   # Doing so should enable us to capture evt. changes in
