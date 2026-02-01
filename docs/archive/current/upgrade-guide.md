@@ -19,6 +19,41 @@ You need PHP `v8.4` or higher to run Athenaeum packages.
 
 Please read Laravel's [upgrade guide](https://laravel.com/docs/13.x/upgrade), before continuing here.
 
+### `Paths` Container now inherits from `ArrayDto`
+
+The `Paths` container now inherits from `ArrayDto`. It no longer depends on the deprecated / removed "Aware-of" components.
+All mutator methods (_setters_) have been removed. If you wish to manually set a directory path, you must do so by setting the property's value directly
+
+**_:x: previously_**
+
+```php
+use Aedart\Core\Helpers\Paths;
+
+$paths = new Paths();
+$paths->setConfigPath(getcwd() . DIRECTORY_SEPARATOR . 'environments');
+
+```
+
+**_:heavy_check_mark: Now_**
+
+```php
+use Aedart\Core\Helpers\Paths;
+
+$paths = new Paths();
+$paths->configPath = getcwd() . DIRECTORY_SEPARATOR . 'environments';
+```
+
+### `Dto` interface and Dynamic Properties
+
+Setting a value for an undeclared class property has been deprecated [since PHP `v8.2`](https://php.watch/versions/8.2/dynamic-properties-deprecated). 
+To avoid any deprecation notices in concrete implementations, the `Dto`¹ interface now defines PHP's `__set()`, `__get()`, `__isset()`, and `__unset()` magic methods. 
+This change will only affect you, if you have a custom implementation of the `Dto`. If you use the default provided abstractions², then this should not
+affect you at all.
+
+¹: _`\Aedart\Contracts\Dto`._
+
+²: _`\Aedart\Dto\Dto` and `\Aedart\Dto\ArrayDto`._
+
 ## Onward
 
 More extensive details can be found in the [changelog](https://github.com/aedart/athenaeum/blob/master/CHANGELOG.md).
