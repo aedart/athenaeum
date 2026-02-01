@@ -17,6 +17,7 @@ Temporary changelog for `v10.x` series.
 **Non-breaking Changes**
 
 * Removed PHPUnit annotations from tests. [#233](https://github.com/aedart/athenaeum/issues/233).
+* Changed event triggers pull requests to "opened", "reopened", and "ready_for_review" (_GitHub actions_). [#241](https://github.com/aedart/athenaeum/issues/241).
 
 ### Fixed
 
