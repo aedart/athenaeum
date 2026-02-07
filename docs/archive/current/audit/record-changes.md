@@ -95,15 +95,27 @@ class Category extends Model
 
 ## Skip a Recording
 
-In situations when you wish to skip recording an audit trail entry, e.g. for a single operation, use the `skipRecordingNextChange()` method.
+When you need to perform an operation without recording it, then you can use `withoutRecording()`.
+It accepts a callback that is invoked with the model instance as argument.
 
-```php{2}
+```php
+$category->withoutRecording(function($myCategoryModel) {
+    $myCategoryModel->name = 'Products';
+    $myCategoryModel->save();
+});
+```
+
+The above shown example is the equivalent to the using `skipRecordingNextChange()` and `recordNextChange()` (_resetting the skip recording state_):
+
+```php
 $category
     ->skipRecordingNextChange()
     ->fill([
         'name' => 'Products',
     ])
     ->save();
+
+$category->recordNextChange();
 ```
 
 ## Onward
