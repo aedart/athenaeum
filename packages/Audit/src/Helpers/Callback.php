@@ -29,25 +29,49 @@ class Callback
     protected $reason = null;
 
     /**
+     * Arguments to be passed on to the callback
+     *
+     * @var array
+     */
+    protected array $arguments = [];
+
+    /**
      * Creates a new callback instance
      *
-     * @param callable $callback
+     * @param  callable  $callback
+     * @param  ...$arguments  [optional]
      */
-    public function __construct(callable $callback)
+    public function __construct(callable $callback, ...$arguments)
     {
         $this->callback = $callback;
+        $this->with(...$arguments);
     }
 
     /**
      * Creates a new audit callback instance with given callback
      *
      * @param callable $callback
+     * @param  ...$arguments  [optional]
      *
      * @return Callback
      */
-    public static function perform(callable $callback): static
+    public static function perform(callable $callback, ...$arguments): static
     {
-        return new static($callback);
+        return new static($callback, $arguments);
+    }
+
+    /**
+     * Set arguments to be passed on to the callback
+     *
+     * @param ...$arguments
+     *
+     * @return self
+     */
+    public function with(...$arguments): static
+    {
+        $this->arguments = $arguments;
+
+        return $this;
     }
 
     /**
@@ -82,7 +106,9 @@ class Callback
         // Invoke the audit callback, which may result in one or more
         // new audit trail entries being recorded.
         $callback = $this->callback;
-        $result = $callback();
+        $arguments = $this->arguments;
+
+        $result = $callback(...$arguments);
 
         // Clear the registered reason and restore previous, if one
         // was available.
