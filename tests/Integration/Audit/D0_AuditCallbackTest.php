@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\Audit;
 use Aedart\Audit\Helpers\Callback;
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Testing\Helpers\ConsoleDebugger;
+use Aedart\Tests\Helpers\Dummies\Audit\Category;
 use Aedart\Tests\TestCases\Audit\AuditTestCase;
 use Codeception\Attribute\Group;
 use Illuminate\Database\Eloquent\Collection;
@@ -47,6 +48,36 @@ class D0_AuditCallbackTest extends AuditTestCase
 
         /** @var AuditTrail $history */
         $history = $category->recordedChanges()->first();
+
+        ConsoleDebugger::output([
+            'reason' => $reason,
+            'audit_trail_msg' => $history->message
+        ]);
+
+        // -------------------------------------------------------- //
+
+        $this->assertNotNull($history);
+        $this->assertSame($reason, $history->message);
+    }
+
+    #[Test]
+    public function canPerformUsingCallbackWithCustomMessage(): void
+    {
+        $category = $this->makeCategory();
+        $category->save();
+
+        // -------------------------------------------------------- //
+
+        $reason = $this->getFaker()->sentence();
+        $category->performUsing(function (Category $model) {
+            $model->name = 'Foo';
+            $model->save();
+        }, $reason);
+
+        // -------------------------------------------------------- //
+
+        /** @var AuditTrail $history */
+        $history = $category->recordedChanges()->latest('id')->first();
 
         ConsoleDebugger::output([
             'reason' => $reason,
