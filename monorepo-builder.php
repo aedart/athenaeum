@@ -45,7 +45,7 @@ return static function (MBConfig $config): void {
         ComposerJsonSection::REQUIRE_DEV => [
             'ext-sockets' => '*',
             'ext-curl' => '*',
-            'bamarni/composer-bin-plugin' => '^1.8.2',
+            'bamarni/composer-bin-plugin' => '^1.9.1',
             'roave/security-advisories' => 'dev-master',
             'codeception/codeception' => '^5.3.4',
             "codeception/module-asserts" => "^3.3.0",
