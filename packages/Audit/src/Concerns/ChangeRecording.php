@@ -7,7 +7,6 @@ use Aedart\Audit\Helpers\Callback;
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Audit\Observers\ModelObserver;
 use Aedart\Contracts\Audit\Types;
-use Aedart\Contracts\Database\Models\Sluggable;
 use Aedart\Database\Models\Concerns\Slugs;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;

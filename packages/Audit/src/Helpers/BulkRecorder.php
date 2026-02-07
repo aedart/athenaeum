@@ -4,8 +4,6 @@ namespace Aedart\Audit\Helpers;
 
 use Aedart\Audit\Observers\Concerns\ModelChangedEvents;
 use Aedart\Contracts\Audit\Types;
-use Aedart\Contracts\Database\Models\Sluggable;
-use Aedart\Database\Models\Concerns\Slugs;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
