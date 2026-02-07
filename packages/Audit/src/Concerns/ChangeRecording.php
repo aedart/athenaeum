@@ -361,11 +361,11 @@ trait ChangeRecording
      */
     public function withoutRecording(callable $callback): mixed
     {
-        $this->skipRecordingNextChange(true);
+        $this->skipRecordingNextChange();
 
         $result = $callback($this);
 
-        $this->skipRecordingNextChange(false);
+        $this->recordNextChange();
 
         return $result;
     }
