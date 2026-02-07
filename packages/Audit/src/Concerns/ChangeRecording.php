@@ -102,12 +102,12 @@ trait ChangeRecording
     /**
      * Perform changes on this model using a callback, with a custom message
      *
-     * @param  callable  $callback
+     * @param  callable  $callback Callback that performs a change on the given model
      * @param  string|null  $reason  [optional] Custom message to be used in the resulting audit trail entry
      *
      * @return mixed
      */
-    public function performUsing(callable $callback, string|null $reason = null): mixed
+    public function performChange(callable $callback, string|null $reason = null): mixed
     {
         return Callback::perform($callback)
             ->with($this)

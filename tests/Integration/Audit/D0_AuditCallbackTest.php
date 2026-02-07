@@ -69,7 +69,7 @@ class D0_AuditCallbackTest extends AuditTestCase
         // -------------------------------------------------------- //
 
         $reason = $this->getFaker()->sentence();
-        $category->performUsing(function (Category $model) {
+        $category->performChange(function (Category $model) {
             $model->name = 'Foo';
             $model->save();
         }, $reason);
