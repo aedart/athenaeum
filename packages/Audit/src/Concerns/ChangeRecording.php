@@ -337,6 +337,24 @@ trait ChangeRecording
      ****************************************************************/
 
     /**
+     * Perform an operation on this model without recording it
+     *
+     * @param  callable  $callback
+     *
+     * @return mixed
+     */
+    public function withoutRecording(callable $callback): mixed
+    {
+        $this->skipRecordingNextChange(true);
+
+        $result = $callback($this);
+
+        $this->skipRecordingNextChange(false);
+
+        return $result;
+    }
+
+    /**
      * Skip recording next change
      *
      * @param bool $skip [optional]
