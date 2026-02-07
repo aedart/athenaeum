@@ -18,7 +18,7 @@ trait AuditTrailConfig
     /**
      * Returns Audit Trail model class path
      *
-     * @return string
+     * @return class-string<AuditTrail|Model>
      */
     public function auditTrailModel(): string
     {
@@ -38,7 +38,7 @@ trait AuditTrailConfig
     /**
      * Returns Application User Model class path
      *
-     * @return string
+     * @return class-string<\App\Models\User|Model|Authenticatable>
      */
     public function auditTrailUserModel(): string
     {
