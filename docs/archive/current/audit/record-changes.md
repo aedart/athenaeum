@@ -24,14 +24,41 @@ class Category extends Model
 
 Whenever you change the model's attributes and save the changes, a new audit trail record will be stored in the database.
 
+```php
+$category = new Category();
+$category->name = 'Cars';
+$category->save(); // change is automatically recorded.
+```
+
 ## Retrieve Audit Trail
 
 To retrieve an audit trail, for your model, you can use the `recordedChanges()` [relationship method](https://laravel.com/docs/13.x/eloquent-relationships).
 
 ```php
-$changes = $category
-    ->recordedChanges()
-    ->first();
+$changes = $category->recordedChanges()->first();
+
+dump($changes->toArray());
+```
+
+The above example will output an entry similar to:
+
+```txt
+Array
+(
+    [id] => 1
+    [user_id] => 
+    [auditable_type] => Acme\Models\Category
+    [auditable_id] => 1
+    [type] => created
+    [message] => Recording created event
+    [original_data] => null
+    [changed_data] => Array
+        (
+            [name] => Cars
+        )
+    [performed_at] => 2026-02-07T11:06:39.000000Z
+    [created_at] => 2026-02-07T11:06:39.000000Z
+)
 ```
 
 ## Customise Recorded Changes
@@ -65,6 +92,7 @@ class User extends Model
         return [
             'password',
             'token',
+            ...$this->auditTimestampAttributes()
             // ...etc
         ];
     }
