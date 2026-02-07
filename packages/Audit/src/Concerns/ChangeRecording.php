@@ -123,7 +123,7 @@ trait ChangeRecording
      */
     public function useSlugAsIdentifier(): bool
     {
-        return $this instanceof Sluggable || in_array(Slugs::class, class_uses_recursive($this));
+        return isSluggable($this);
     }
 
     /*****************************************************************

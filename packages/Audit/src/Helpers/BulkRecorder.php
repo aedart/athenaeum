@@ -224,7 +224,7 @@ class BulkRecorder
         }
 
         // Default to determine using if slugs should be used or not...
-        return $model instanceof Sluggable || in_array(Slugs::class, class_uses_recursive($model));
+        return isSluggable($model);
     }
 
     /**
