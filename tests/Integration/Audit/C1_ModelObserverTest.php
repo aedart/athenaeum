@@ -87,7 +87,7 @@ class C1_ModelObserverTest extends AuditTestCase
         // ---------------------------------------------------------- //
 
         $newName = $faker->unique()->words(3, true);
-        $category->withoutRecording(function(Category $model) use ($newName) {
+        $category->withoutRecording(function (Category $model) use ($newName) {
             $model->name = $newName;
             $model->save();
         });
