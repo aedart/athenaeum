@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Config;
  *
  * Intended to be used by models that must keep an audit trail of their changes.
  *
- * @property-read AuditTrail[]|Collection $recordedChanges Audit trail entries for this model
+ * @property-read Collection<AuditTrail> $recordedChanges Audit trail entries for this model
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Concerns
@@ -57,12 +57,11 @@ trait ChangeRecording
      *
      * @return void
      */
-    public static function bootChangeRecording()
+    public static function bootChangeRecording(): void
     {
-        // Obtain class path to observer. Note: since we are in a static method,
-        // we need to obtain this from the configuration via a facade.
-        $observer = Config::get('audit-trail.observer', ModelObserver::class);
-        static::observe($observer);
+        static::observe(
+            Config::get('audit-trail.observer', ModelObserver::class)
+        );
     }
 
     /*****************************************************************
