@@ -3,6 +3,7 @@
 namespace Aedart\Audit\Concerns;
 
 use Aedart\Audit\Events\ModelHasChanged;
+use Aedart\Audit\Helpers\Callback;
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Audit\Observers\ModelObserver;
 use Aedart\Contracts\Audit\Types;
@@ -96,6 +97,22 @@ trait ChangeRecording
         ModelHasChanged::dispatch($this, $user, $type, $original, $changed, $message, $performedAt);
 
         return $this;
+    }
+
+    /**
+     * Perform changes on this model using a callback, with a custom message
+     *
+     * @param  callable  $callback
+     * @param  string|null  $reason  [optional] Custom message to be used in the resulting audit trail entry
+     *
+     * @return mixed
+     */
+    public function performUsing(callable $callback, string|null $reason = null): mixed
+    {
+        return Callback::perform($callback)
+            ->with($this)
+            ->because($reason)
+            ->execute();
     }
 
     /**
