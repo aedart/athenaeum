@@ -7,6 +7,7 @@ Temporary changelog for `v10.x` series.
 ### Added
 
 * `withoutRecording()` util method to perform an operation without recording model's changes, in `\Aedart\Audit\Concerns\ChangeRecording` (_Audit Trail package_).
+* `performChange()` util method that allows setting the next audit trail message, when performing changes, in `\Aedart\Audit\Concerns\ChangeRecording` (_Audit Trail package_).
 
 ### Changed
 
@@ -16,6 +17,8 @@ Temporary changelog for `v10.x` series.
 
 **Non-breaking Changes**
 
+* `\Aedart\Audit\Helpers\Callback` now supports custom arguments to be passed on to the provided callback (_Audit Trail package_).
+* Improved documentation examples for Audit Trail package.
 * Removed PHPUnit annotations from tests. [#233](https://github.com/aedart/athenaeum/issues/233).
 * Changed event triggers pull requests to "opened", "reopened", and "ready_for_review", and enabled concurrency check (_GitHub actions_). [#241](https://github.com/aedart/athenaeum/issues/241).
 
