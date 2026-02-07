@@ -6,7 +6,7 @@ Temporary changelog for `v10.x` series.
 
 ### Added
 
-* N/A
+* `withoutRecording()` util method to perform an operation without recording model's changes, in `\Aedart\Audit\Concerns\ChangeRecording` (_Audit Trail package_).
 
 ### Changed
 
