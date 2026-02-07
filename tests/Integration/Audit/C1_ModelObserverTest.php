@@ -72,4 +72,33 @@ class C1_ModelObserverTest extends AuditTestCase
         // 2 of the models are marked as "skip recording"...
         $this->assertCount(count($entries) - 2, $history, 'Incorrect amount of audit trail entries recorded');
     }
+
+    #[Test]
+    public function canPerformOperationWithoutRecording(): void
+    {
+        $faker = $this->getFaker();
+        $originalName = $faker->unique()->words(3, true);
+
+        $category = $this->makeCategory([
+            'name' => $originalName,
+        ]);
+        $category->save();
+
+        // ---------------------------------------------------------- //
+
+        $newName = $faker->unique()->words(3, true);
+        $category->withoutRecording(function(Category $model) use ($newName) {
+            $model->name = $newName;
+            $model->save();
+        });
+
+        // ---------------------------------------------------------- //
+
+        $changes = $category->recordedChanges()->get();
+        ConsoleDebugger::output([
+            'changes' => $changes->toArray()
+        ]);
+
+        $this->assertSame(1, $changes->count(), 'Incorrect amount of audit trail entries recorded');
+    }
 }
