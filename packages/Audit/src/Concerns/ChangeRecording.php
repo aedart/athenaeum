@@ -26,7 +26,6 @@ use Illuminate\Support\Facades\Config;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Concerns
  */
-
 trait ChangeRecording
 {
     use AuditTrailConfig;
