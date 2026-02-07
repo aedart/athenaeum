@@ -26,7 +26,7 @@ class AuditTrailEventSubscriber
      *
      * @return void
      */
-    public function subscribe(Dispatcher $dispatcher)
+    public function subscribe(Dispatcher $dispatcher): void
     {
         // Handle change event for a single model
         $dispatcher->listen(
