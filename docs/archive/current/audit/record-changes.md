@@ -67,10 +67,10 @@ There are a number of ways that you can customise a model's recordings. In this 
 
 ### Custom Message
 
-You can specify a custom message for the recorded audit trail entry, using the `performUsing()` util method, in your model.
+You can specify a custom message for the recorded audit trail entry, using the `performChange()` util method, in your model.
 
 ```php
-$category->performUsing(function(Category $model) {
+$category->performChange(function(Category $model) {
     $model->description 'Contains information about cars';
     $model->save();
 }, 'Changed incorrect description');
