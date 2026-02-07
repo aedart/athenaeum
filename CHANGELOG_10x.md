@@ -8,6 +8,7 @@ Temporary changelog for `v10.x` series.
 
 * `withoutRecording()` util method to perform an operation without recording model's changes, in `\Aedart\Audit\Concerns\ChangeRecording` (_Audit Trail package_).
 * `performChange()` util method that allows setting the next audit trail message, when performing changes, in `\Aedart\Audit\Concerns\ChangeRecording` (_Audit Trail package_).
+* `isSluggable()` util in `helpers/models.php` (_Database package_).
 
 ### Changed
 
