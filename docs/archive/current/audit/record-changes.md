@@ -63,7 +63,47 @@ Array
 
 ## Customise Recorded Changes
 
-There are a number of ways that you can customise the data / attributes that will be recorded. In this section, some of them are briefly introduced.
+There are a number of ways that you can customise a model's recordings. In this section, some of them are briefly introduced.
+
+### Custom Message
+
+You can specify a custom message for the recorded audit trail entry, using the `performUsing()` util method, in your model.
+
+```php
+$category->performUsing(function(Category $model) {
+    $model->description 'Contains information about cars';
+    $model->save();
+}, 'Changed incorrect description');
+
+// Later...
+$changes = $category->recordedChanges()->latest()->first();
+
+dump($changes->toArray());
+```
+
+The above example will output an entry similar to:
+
+```txt
+Array
+(
+    [id] => 4
+    [user_id] => 
+    [auditable_type] => Acme\Models\Category
+    [auditable_id] => 1
+    [type] => updated
+    [message] => Changed incorrect description
+    [original_data] => 
+        (
+            [description] => Information about persons
+        )
+    [changed_data] => Array
+        (
+            [description] => Contains information about cars
+        )
+    [performed_at] => 2026-02-07T12:45:03.000000Z
+    [created_at] => 2026-02-07T12:45:03.000000Z
+)
+```
 
 ### Hide Attributes
 
