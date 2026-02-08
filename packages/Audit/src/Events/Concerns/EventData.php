@@ -92,8 +92,7 @@ trait EventData
         array|null $original = null,
         array|null $changed = null,
         string|null $message = null,
-    ): static
-    {
+    ): static {
         $record = $this
             ->resolveRecordFormatter($model)
             ->format($type, $original, $changed, $message);

@@ -5,7 +5,6 @@ namespace Aedart\Audit\Observers\Concerns;
 
 use Aedart\Audit\Concerns\CallbackReason;
 use Aedart\Utils\Helpers\Invoker;
-use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Throwable;
 

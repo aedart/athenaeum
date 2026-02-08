@@ -2,14 +2,11 @@
 
 namespace Aedart\Audit\Events;
 
-use Aedart\Audit\Formatters\LegacyRecordFormatter;
-use Aedart\Contracts\Audit\Formatter;
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
-use LogicException;
 use Throwable;
 
 /**
