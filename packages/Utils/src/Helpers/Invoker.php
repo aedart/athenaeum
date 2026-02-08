@@ -3,6 +3,7 @@
 
 namespace Aedart\Utils\Helpers;
 
+use Aedart\Utils\Helpers\Concerns;
 use RuntimeException;
 use Throwable;
 
@@ -16,6 +17,8 @@ use Throwable;
  */
 class Invoker
 {
+    use Concerns\Arguments;
+
     /**
      * The callback to invoke
      *
@@ -30,13 +33,6 @@ class Invoker
      * @var mixed
      */
     protected mixed $fallback = null;
-
-    /**
-     * Arguments to be passed on to callback
-     *
-     * @var array
-     */
-    protected array $arguments = [];
 
     /**
      * Invoker constructor.
@@ -78,36 +74,6 @@ class Invoker
     public function hasCallback(): bool
     {
         return isset($this->callback) && is_callable($this->callback);
-    }
-
-    /**
-     * Add arguments that must be passed to callback
-     *
-     * Method merges given arguments with et. already added
-     * arguments.
-     *
-     * @param mixed ...$arguments
-     *
-     * @return self
-     */
-    public function with(...$arguments): static
-    {
-        $this->arguments = array_merge(
-            $this->arguments,
-            $arguments
-        );
-
-        return $this;
-    }
-
-    /**
-     * Returns the arguments
-     *
-     * @return array
-     */
-    public function getArguments(): array
-    {
-        return $this->arguments;
     }
 
     /**
