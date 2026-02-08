@@ -17,37 +17,31 @@ use Throwable;
  */
 class Invoker
 {
+    use Concerns\Callback;
     use Concerns\Arguments;
-
-    /**
-     * The callback to invoke
-     *
-     * @var mixed
-     */
-    protected mixed $callback;
 
     /**
      * Fallback callback to invoke, if
      * primary callback is not callable
      *
-     * @var mixed
+     * @var callable|mixed
      */
     protected mixed $fallback = null;
 
     /**
      * Invoker constructor.
      *
-     * @param mixed $callback
+     * @param callable $callback
      */
     public function __construct(mixed $callback)
     {
-        $this->callback = $callback;
+        $this->setCallback($callback);
     }
 
     /**
      * Creates a new invoker instance with given callback
      *
-     * @param mixed $callback
+     * @param callable|mixed $callback
      *
      * @return static
      */
@@ -57,30 +51,10 @@ class Invoker
     }
 
     /**
-     * Returns the callback
-     *
-     * @return mixed
-     */
-    public function getCallback(): mixed
-    {
-        return $this->callback;
-    }
-
-    /**
-     * Determine if a callback was set and that it is callable
-     *
-     * @return bool
-     */
-    public function hasCallback(): bool
-    {
-        return isset($this->callback) && is_callable($this->callback);
-    }
-
-    /**
      * Add fallback callback to be used, in case that given
      * callback is not callable
      *
-     * @param mixed $callback
+     * @param callable|mixed $callback
      *
      * @return self
      */
@@ -94,7 +68,7 @@ class Invoker
     /**
      * Return evt. fallback callback
      *
-     * @return mixed
+     * @return callable|mixed
      */
     public function getFallback(): mixed
     {
@@ -134,19 +108,5 @@ class Invoker
         }
 
         throw new RuntimeException('Unable to invoke callback or fallback');
-    }
-
-    /**
-     * Calls the given callback with given arguments and returns its
-     * resulting output
-     *
-     * @param callable $callback
-     * @param array $arguments [optional]
-     *
-     * @return mixed
-     */
-    protected function callCallback(callable $callback, array $arguments = []): mixed
-    {
-        return $callback(...$arguments);
     }
 }
