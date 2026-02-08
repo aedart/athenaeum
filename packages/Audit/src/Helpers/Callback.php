@@ -3,6 +3,8 @@
 namespace Aedart\Audit\Helpers;
 
 use Aedart\Audit\Concerns\CallbackReason;
+use Aedart\Utils\Helpers\Concerns\Arguments;
+use Aedart\Utils\Helpers\Concerns\Callback as ConcernsCallback;
 
 /**
  * Audit Callback
@@ -13,13 +15,8 @@ use Aedart\Audit\Concerns\CallbackReason;
 class Callback
 {
     use CallbackReason;
-
-    /**
-     * The callback to invoke
-     *
-     * @var callable
-     */
-    protected $callback;
+    use ConcernsCallback;
+    use Arguments;
 
     /**
      * Callback that resolves audit trail entry reason
@@ -29,13 +26,6 @@ class Callback
     protected $reason = null;
 
     /**
-     * Arguments to be passed on to the callback
-     *
-     * @var array
-     */
-    protected array $arguments = [];
-
-    /**
      * Creates a new callback instance
      *
      * @param  callable  $callback
@@ -43,8 +33,9 @@ class Callback
      */
     public function __construct(callable $callback, ...$arguments)
     {
-        $this->callback = $callback;
-        $this->with(...$arguments);
+        $this
+            ->setCallback($callback)
+            ->with(...$arguments);
     }
 
     /**
@@ -57,21 +48,7 @@ class Callback
      */
     public static function perform(callable $callback, ...$arguments): static
     {
-        return new static($callback, $arguments);
-    }
-
-    /**
-     * Set arguments to be passed on to the callback
-     *
-     * @param ...$arguments
-     *
-     * @return self
-     */
-    public function with(...$arguments): static
-    {
-        $this->arguments = $arguments;
-
-        return $this;
+        return new static($callback, ...$arguments);
     }
 
     /**
@@ -105,10 +82,11 @@ class Callback
 
         // Invoke the audit callback, which may result in one or more
         // new audit trail entries being recorded.
-        $callback = $this->callback;
-        $arguments = $this->arguments;
 
-        $result = $callback(...$arguments);
+        $result = $this->callCallback(
+            callback: $this->getCallback(),
+            arguments: $this->getArguments()
+        );
 
         // Clear the registered reason and restore previous, if one
         // was available.
