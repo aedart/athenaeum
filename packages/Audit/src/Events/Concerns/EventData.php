@@ -11,6 +11,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Support\Carbon;
+use LogicException;
 
 /**
  * Concerns Event Data for audit trail
