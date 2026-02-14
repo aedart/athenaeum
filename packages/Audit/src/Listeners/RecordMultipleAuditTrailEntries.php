@@ -35,7 +35,7 @@ class RecordMultipleAuditTrailEntries extends RecordsEntries
      *
      * @throws Throwable
      */
-    public function handle(MultipleModelsChanged $event)
+    public function handle(MultipleModelsChanged $event): void
     {
         // Resolve user
         $userId = $event->user;

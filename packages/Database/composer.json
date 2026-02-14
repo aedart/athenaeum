@@ -25,7 +25,10 @@
     "autoload": {
         "psr-4": {
             "Aedart\\Database\\": "src"
-        }
+        },
+        "files": [
+            "helpers/models.php"
+        ]
     },
     "extra": {
         "branch-alias": {

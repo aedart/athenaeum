@@ -61,6 +61,7 @@ export default PagesCollection.make('v10.x', '/v10x', [
             'audit/setup',
             'audit/record-changes',
             'audit/events',
+            'audit/formatting',
         ]
     },
     {

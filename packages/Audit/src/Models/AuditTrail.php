@@ -69,7 +69,7 @@ class AuditTrail extends Model
     /**
      * @inheritdoc
      */
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 

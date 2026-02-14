@@ -67,6 +67,7 @@
     "autoload": {
         "files": [
             "packages/Core/helpers/paths.php",
+            "packages/Database/helpers/models.php",
             "packages/Support/helpers/properties.php"
         ],
         "psr-4": {

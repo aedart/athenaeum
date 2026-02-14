@@ -2,13 +2,16 @@
 
 namespace Aedart\Audit\Events\Concerns;
 
+use Aedart\Audit\Formatters\LegacyRecordFormatter;
 use Aedart\Audit\Observers\Concerns\ModelAttributes;
+use Aedart\Contracts\Audit\Formatter;
 use Aedart\Contracts\Audit\Types;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Support\Carbon;
+use LogicException;
 
 /**
  * Concerns Event Data for audit trail
@@ -27,14 +30,14 @@ trait EventData
      * @var string
      */
     public string $type = Types::UPDATED;
-    
+
     /**
      * Unique user identifier that caused change
      *
      * @var string|int|null
      */
     public string|int|null $user = null;
-    
+
     /**
      * Original data (attributes) before change occurred
      *
@@ -66,6 +69,57 @@ trait EventData
     public DateTimeInterface|Carbon|string|null $performedAt = null;
 
     /**
+     * Format audit trail record (event data)
+     *
+     * Method automatically sets this event's original and changed data, as well
+     * the event type and eventual message.
+     *
+     * @param  Model  $model
+     * @param  string  $type Event type
+     * @param  array|null  $original  [optional] Default's to given model's original data, if none given.
+     * @param  array|null  $changed  [optional] Default's to given model's changed data, if none given.
+     * @param  string|null  $message  [optional] Eventual provided message associated with the event
+     *
+     * @return self
+     *
+     * @see type
+     * @see withOriginalData
+     * @see withChangedData
+     * @see withMessage
+     */
+    public function format(
+        Model $model,
+        string $type,
+        array|null $original = null,
+        array|null $changed = null,
+        string|null $message = null,
+    ): static {
+        $record = $this
+            ->resolveRecordFormatter($model)
+            ->format($type, $original, $changed, $message);
+
+        return $this
+            ->type($type)
+            ->withOriginalData($record->original())
+            ->withChangedData($record->changed())
+            ->withMessage($record->message());
+    }
+
+    /**
+     * Returns a default audit trail record formatter
+     *
+     * @param Model $model
+     *
+     * @return Formatter
+     */
+    public function makeDefaultAuditTrailFormatter(Model $model): Formatter
+    {
+        // TODO: Replace Legacy Record Formatter with "DefaultRecordFormatter"
+        // TODO: @see https://github.com/aedart/athenaeum/issues/245
+        return new LegacyRecordFormatter($model);
+    }
+
+    /**
      * Set the event type
      *
      * @param  string  $type  [optional]
@@ -78,7 +132,7 @@ trait EventData
 
         return $this;
     }
-    
+
     /**
      * Set the user that caused the change
      *
@@ -92,10 +146,10 @@ trait EventData
     public function byUser(Model|Authenticatable|null $user): static
     {
         $this->user = optional($user)->getKey();
-        
+
         return $this;
     }
-    
+
     /**
      * Set the original data (attributes) before changed occurred
      *
@@ -134,7 +188,7 @@ trait EventData
     public function withMessage(string|null $message = null): static
     {
         $this->message = $message;
-        
+
         return $this;
     }
 
@@ -152,7 +206,42 @@ trait EventData
         $performedAt = $performedAt ?? Carbon::now();
 
         $this->performedAt = $this->formatDatetime($performedAt);
-        
+
         return $this;
+    }
+
+    /**
+     * Format the given date time
+     *
+     * @param DateTimeInterface $date
+     *
+     * @return string
+     */
+    protected function formatDatetime(DateTimeInterface $date): string
+    {
+        return $date->format(DateTimeInterface::RFC3339);
+    }
+
+    /**
+     * Resolves an Audit Trail Record Formatter for the given model
+     *
+     * @param  Model  $model
+     *
+     * @return Formatter
+     */
+    protected function resolveRecordFormatter(Model $model): Formatter
+    {
+        $formatter = match (true) {
+            method_exists($model, 'auditTrailRecordFormatter') => $model->auditTrailRecordFormatter(),
+            default => $this->makeDefaultAuditTrailFormatter($model),
+        };
+
+        return match (true) {
+            $formatter instanceof Formatter => $formatter,
+            is_null($formatter) => $this->makeDefaultAuditTrailFormatter($model),
+            is_string($formatter) && class_exists($formatter) => new $formatter($model),
+            is_string($formatter) && !class_exists($formatter) => throw new LogicException(sprintf('Invalid Audit Trail Formatter class path "%s", for model %s', $formatter, $model::class)),
+            default => throw new LogicException(sprintf('Unable to resolve Audit Trail Record Formatter for model %s', $model::class))
+        };
     }
 }
