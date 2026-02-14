@@ -78,4 +78,24 @@ class LegacyRecordFormatter extends BaseFormatter
             })
             ->call();
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function message(string $type): string|null
+    {
+        $message = parent::message($type);
+        if (!is_null($message)) {
+            return $message;
+        }
+
+        // Legacy behaviour, default to obtaining audit trail message from
+        // model, if available.
+        $model = $this->getModel();
+        if (method_exists($model, 'getAuditTrailMessage')) {
+            return $model->getAuditTrailMessage($type);
+        }
+
+        return null;
+    }
 }
