@@ -242,7 +242,7 @@ trait EventData
         }
 
         if (!($formatter instanceof Formatter)) {
-            throw new LogicException(sprintf('Unable to resolve Audit Trail Record Formatter for model %s', get_class($model)));
+            throw new LogicException(sprintf('Unable to resolve Audit Trail Record Formatter for model %s', $model::class));
         }
 
         return $formatter;
