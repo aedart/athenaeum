@@ -149,15 +149,15 @@ abstract class BaseFormatter implements Formatter
      *
      * @see originalData
      *
-     * @param array|null $filtered The filtered original data (if any)
+     * @param array|null $data The filtered original data (if any)
      * @param string $type Event type
      *
      * @return array|null
      */
-    public function formatOriginal(array|null $filtered, string $type): array|null
+    public function formatOriginal(array|null $data, string $type): array|null
     {
         // Override this method to customize formatting of the original data.
-        return $filtered;
+        return $data;
     }
 
     /**
@@ -165,15 +165,15 @@ abstract class BaseFormatter implements Formatter
      *
      * @see changedData
      *
-     * @param array|null $filtered The filtered changed data (if any)
+     * @param array|null $data The filtered changed data (if any)
      * @param string $type Event type
      *
      * @return array|null
      */
-    public function formatChanged(array|null $filtered, string $type): array|null
+    public function formatChanged(array|null $data, string $type): array|null
     {
         // Override this method to customize formatting of the changed data.
-        return $filtered;
+        return $data;
     }
 
     /**
