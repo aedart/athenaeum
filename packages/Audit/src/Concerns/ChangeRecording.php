@@ -376,6 +376,8 @@ trait ChangeRecording
      * @param string $type Audit Trail Entry type, e.g. created, updated, deleted... etc
      *
      * @return string|null
+     *
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} to customise audit trail message
      */
     public function getAuditTrailMessage(string $type): string|null
     {
