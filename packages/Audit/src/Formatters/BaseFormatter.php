@@ -79,7 +79,7 @@ abstract class BaseFormatter implements Formatter
         $callbackReason = $this->callbackReason();
         if ($callbackReason->exists()) {
             $message = $callbackReason->resolve($this->getModel(), $type);
-            return $this->formatMessage($message, $type);
+            return $this->formatMessage($type, $message);
         }
 
         return null;
