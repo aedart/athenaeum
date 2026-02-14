@@ -2,8 +2,6 @@
 
 namespace Aedart\Audit\Formatters;
 
-use Aedart\Contracts\Audit\RecordData;
-
 /**
  * Default Audit Trail Record Formatter
  *
