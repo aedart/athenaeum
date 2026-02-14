@@ -6,7 +6,7 @@ description: How to Configure Models, Audit package
 
 [[TOC]]
 
-## Enable Recording Changes
+## Enable Recording
 
 In your Eloquent model, add the `RecordsChanges` trait, to enable automatic recording of changes.
 
@@ -30,9 +30,12 @@ $category->name = 'Cars';
 $category->save(); // change is automatically recorded.
 ```
 
-## Retrieve Audit Trail
+Behind this scene, events containing original and change attributes are dispatched.
+See the [Events chapter](./events.md) for additional information.
 
-To retrieve an audit trail, for your model, you can use the `recordedChanges()` [relationship method](https://laravel.com/docs/13.x/eloquent-relationships).
+## Retrieve Changes
+
+To retrieve an audit trail for your model, use the `recordedChanges()` [relationship method](https://laravel.com/docs/13.x/eloquent-relationships).
 
 ```php
 $changes = $category->recordedChanges()->first();
@@ -61,19 +64,15 @@ Array
 )
 ```
 
-## Customise Recorded Changes
+## Specify custom message for a change
 
-There are a number of ways that you can customise a model's recordings. In this section, some of them are briefly introduced.
-
-### Custom Message
-
-You can specify a custom message for the recorded audit trail entry, using the `performChange()` util method, in your model.
+If you wish to associate a custom message with a change , use the `performChange()` method.
 
 ```php
 $category->performChange(function(Category $model) {
     $model->description 'Contains information about cars';
     $model->save();
-}, 'Changed incorrect description');
+}, 'Changed incorrect description'); // Custom message in audit trail entry
 
 // Later...
 $changes = $category->recordedChanges()->latest()->first();
@@ -105,62 +104,6 @@ Array
 )
 ```
 
-### Hide Attributes
-
-If your model processes sensitive attributes, e.g. passwords, and you do not wish to be included in an audit trail entry, then you can hide it by defining it in the `$hiddenInAuditTrail` property.
-
-```php
-class User extends Model
-{
-    use Concerns\ChangeRecording;
-    
-    protected array|null $hiddenInAuditTrail = [
-        'password'
-    ];
-}
-```
-
-Alternatively, you may also define attributes to be hidden by overwriting the `attributesToHideForAudit()` method.
-
-```php
-class User extends Model
-{
-    use Concerns\ChangeRecording;
-    
-    public function attributesToHideForAudit(): array
-    {
-        return [
-            'password',
-            'token',
-            ...$this->auditTimestampAttributes()
-            // ...etc
-        ];
-    }
-}
-```
-
-### Format Attributes
-
-The `formatChangedData()` enables you to format attributes before they are stored within an audit trail record.
-The first argument contains the filtered attributes (_attributes intended to be saved in audit trail record_).
-The second argument (_$type_) is the name of the event, e.g. `created, updated, deleted, restored, force-deleted... etc`.
-
-```php
-class Category extends Model
-{
-    use Concerns\ChangeRecording;
-    
-    public function formatChangedData(array|null $filtered, string $type): array|null
-    {
-        if (isset($filtered['name'])) {
-            $filtered['name'] = strtolower($filtered['name']);
-        }
-        
-        return $filtered;
-    }
-}
-```
-
 ## Skip a Recording
 
 When you need to perform an operation without recording it, then you can use `withoutRecording()`.
@@ -186,6 +129,10 @@ $category
 $category->recordNextChange();
 ```
 
-## Onward
+::: tip Note
+[Eloquent events](https://laravel.com/docs/13.x/eloquent#events), e.g. 'saving', 'saved', 'deleting'...etc, are still dispatched when you skip recording changes.
+:::
 
-For additional possibilities to format and customise audit trail entries, please review the source code of `\Aedart\Audit\Concerns\ChangeRecording`.
+## Formatting
+
+See the [Formatting chapter](./formatting.md) for more information.
