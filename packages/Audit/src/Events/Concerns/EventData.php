@@ -108,13 +108,15 @@ trait EventData
     /**
      * Returns a default audit trail record formatter
      *
-     * @return class-string<Formatter>|Formatter
+     * @param Model $model
+     *
+     * @return Formatter
      */
-    public function defaultAuditTrailRecordFormatter(): string|Formatter
+    public function makeDefaultAuditTrailFormatter(Model $model): Formatter
     {
         // TODO: Replace Legacy Record Formatter with "DefaultRecordFormatter"
         // TODO: @see https://github.com/aedart/athenaeum/issues/245
-        return LegacyRecordFormatter::class;
+        return new LegacyRecordFormatter($model);
     }
 
     /**
@@ -229,22 +231,17 @@ trait EventData
      */
     protected function resolveRecordFormatter(Model $model): Formatter
     {
-        $formatter = method_exists($model, 'auditTrailRecordFormatter')
-            ? $model->auditTrailRecordFormatter()
-            : $this->defaultAuditTrailRecordFormatter();
+        $formatter = match (true) {
+            method_exists($model, 'auditTrailRecordFormatter') => $model->auditTrailRecordFormatter(),
+            default => $this->makeDefaultAuditTrailFormatter($model),
+        };
 
-        if (is_null($formatter)) {
-            $formatter = $this->defaultAuditTrailRecordFormatter();
-        }
-
-        if (is_string($formatter) && class_exists($formatter)) {
-            $formatter = new $formatter($model);
-        }
-
-        if (!($formatter instanceof Formatter)) {
-            throw new LogicException(sprintf('Unable to resolve Audit Trail Record Formatter for model %s', $model::class));
-        }
-
-        return $formatter;
+        return match (true) {
+            $formatter instanceof Formatter => $formatter,
+            is_null($formatter) => $this->makeDefaultAuditTrailFormatter($model),
+            is_string($formatter) && class_exists($formatter) => new $formatter($model),
+            is_string($formatter) && !class_exists($formatter) => throw new LogicException(sprintf('Invalid Audit Trail Formatter class path "%s", for model %s', $formatter, $model::class)),
+            default => throw new LogicException(sprintf('Unable to resolve Audit Trail Record Formatter for model %s', $model::class))
+        };
     }
 }
