@@ -76,20 +76,27 @@ abstract class BaseFormatter implements Formatter
      */
     public function message(string $type): string|null
     {
-        $model = $this->getModel();
-
-        // Resolve message from "callback", when one exists
         $callbackReason = $this->callbackReason();
         if ($callbackReason->exists()) {
-            return $callbackReason->resolve($model, $type);
-        }
-
-        // Otherwise, use model's audit trail message
-        if (method_exists($model, 'getAuditTrailMessage')) {
-            return $model->getAuditTrailMessage($type);
+            $message = $callbackReason->resolve($this->getModel(), $type);
+            return $this->formatMessage($message, $type);
         }
 
         return null;
+    }
+
+    /**
+     * Format audit trail message, if one is provided for the change
+     *
+     * @param  string  $type Event type
+     * @param  string|null  $message  [optional]
+     *
+     * @return string|null
+     */
+    public function formatMessage(string $type, string|null $message = null): string|null
+    {
+        // Override this method to customize message.
+        return $message;
     }
 
     /**
@@ -149,12 +156,12 @@ abstract class BaseFormatter implements Formatter
      */
     public function formatOriginal(array|null $filtered, string $type): array|null
     {
+        // Override this method to customize formatting of the original data.
         return $filtered;
     }
 
     /**
-     * Formats the changed data (attributes) to be saved in
-     * Audit Trail Entry
+     * Formats the changed data (attributes) to be saved in Audit Trail Entry
      *
      * @see changedData
      *
@@ -165,6 +172,7 @@ abstract class BaseFormatter implements Formatter
      */
     public function formatChanged(array|null $filtered, string $type): array|null
     {
+        // Override this method to customize formatting of the changed data.
         return $filtered;
     }
 
