@@ -30,7 +30,7 @@ class RecordAuditTrailEntry extends RecordsEntries
      *
      * @return void
      */
-    public function handle(ModelHasChanged $event)
+    public function handle(ModelHasChanged $event): void
     {
         // In rare situations, the provided user that caused the event might be force-deleted,
         // in which case inserting the audit trail entry will fail, due to its foreign-key

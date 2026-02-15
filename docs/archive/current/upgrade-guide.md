@@ -19,6 +19,61 @@ You need PHP `v8.4` or higher to run Athenaeum packages.
 
 Please read Laravel's [upgrade guide](https://laravel.com/docs/13.x/upgrade), before continuing here.
 
+### Audit Trail
+
+Several components and methods concerning audit trail formatting have been deprecated.
+Formatting of audit trail entries has been extracted into their own `Formatter` classes.
+While the previous formatting logic is still supported in the current version (`v10.x`), it is highly recommended that you refactor.
+
+**_:x: previously_**
+
+```php
+namespace Acme\Models;
+
+use Aedart\Audit\Concerns\ChangeRecording;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use ChangeRecording;
+    
+    public function formatOriginalData(array|null $filtered, string $type): array|null
+    {
+        // ...formatting not shown here...
+        return $filtered;
+    }
+    
+    public function formatChangedData(array|null $filtered, string $type): array|null
+    {
+        // ...formatting not shown here...
+        return $filtered;
+    }
+}
+```
+
+**_:heavy_check_mark: Now_**
+
+```php
+namespace Acme\Models;
+
+use Aedart\Contracts\Audit\Formatter;
+use Aedart\Audit\Concerns\ChangeRecording;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use ChangeRecording;
+    
+    public function auditTrailRecordFormatter(): string|Formatter|null
+    {
+        // Formatting of audit trail entry moved into custom "formatter"... 
+        return UserAuditTrailFormatter::class;
+    }
+}
+```
+
+Please review the [Audit Trail Formatting](./audit/formatting.md) documentation for additional information.
+
 ### `Paths` Container now inherits from `ArrayDto`
 
 The `Paths` container now inherits from `ArrayDto`. It no longer depends on the deprecated / removed "Aware-of" components.

@@ -34,6 +34,31 @@ These are the highlights of the latest major version of Athenaeum.
 PHP version `v8.4` is now the minimum required version for Athenaeum.
 [Laravel `v13.x`](https://laravel.com/docs/13.x/releases) packages are now used.
 
+### Audit Trail Formatting Changed
+
+Parts of the [Audit Trail](./audit/README.md) package has been redesigned. Formatting of audit trail entries has been
+extracted into new `Formatter` classes.
+
+```php
+use Aedart\Audit\Formatters\BaseFormatter;
+use Illuminate\Database\Eloquent\Model;
+
+class UserAuditTrailFormatter extends BaseFormatter
+{
+    public function __construct(Model $model)
+    {
+        parent::__construct($model);
+        
+        $this->hide([
+            'last_login',
+            'updated_at'
+        ]);
+    }
+}
+```
+
+See the [upgrade guide](./upgrade-guide.md#audit-trail) for details.
+
 ### Removed "Aware-of" Components
 
 The "aware-of" components have been removed.

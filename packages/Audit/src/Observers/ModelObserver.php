@@ -35,7 +35,7 @@ class ModelObserver
      *
      * @throws Throwable
      */
-    public function created(Model $model)
+    public function created(Model $model): void
     {
         $this->dispatchModelChanged($model, Types::CREATED);
     }
@@ -49,7 +49,7 @@ class ModelObserver
      *
      * @throws Throwable
      */
-    public function updating(Model $model)
+    public function updating(Model $model): void
     {
         $this->dispatchModelChanged($model, Types::UPDATED);
     }
@@ -63,7 +63,7 @@ class ModelObserver
      *
      * @throws Throwable
      */
-    public function deleted(Model $model)
+    public function deleted(Model $model): void
     {
         // Avoid dispatching, if model is being force-deleted.
         // Force-deletes are handled in different method.
@@ -83,7 +83,7 @@ class ModelObserver
      *
      * @throws Throwable
      */
-    public function restored(Model $model)
+    public function restored(Model $model): void
     {
         $this->dispatchModelChanged($model, Types::RESTORED);
     }
@@ -97,7 +97,7 @@ class ModelObserver
      *
      * @throws Throwable
      */
-    public function forceDeleted(Model $model)
+    public function forceDeleted(Model $model): void
     {
         $this->dispatchModelChanged($model, Types::FORCE_DELETED);
     }

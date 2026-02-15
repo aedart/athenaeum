@@ -3,6 +3,8 @@
 namespace Aedart\Audit\Helpers;
 
 use Aedart\Audit\Concerns\CallbackReason;
+use Aedart\Utils\Helpers\Concerns\Arguments;
+use Aedart\Utils\Helpers\Concerns\Callback as ConcernsCallback;
 
 /**
  * Audit Callback
@@ -13,13 +15,8 @@ use Aedart\Audit\Concerns\CallbackReason;
 class Callback
 {
     use CallbackReason;
-
-    /**
-     * The callback to invoke
-     *
-     * @var callable
-     */
-    protected $callback;
+    use ConcernsCallback;
+    use Arguments;
 
     /**
      * Callback that resolves audit trail entry reason
@@ -31,23 +28,27 @@ class Callback
     /**
      * Creates a new callback instance
      *
-     * @param callable $callback
+     * @param  callable  $callback
+     * @param  ...$arguments  [optional]
      */
-    public function __construct(callable $callback)
+    public function __construct(callable $callback, ...$arguments)
     {
-        $this->callback = $callback;
+        $this
+            ->setCallback($callback)
+            ->with(...$arguments);
     }
 
     /**
      * Creates a new audit callback instance with given callback
      *
      * @param callable $callback
+     * @param  ...$arguments  [optional]
      *
      * @return Callback
      */
-    public static function perform(callable $callback): static
+    public static function perform(callable $callback, ...$arguments): static
     {
-        return new static($callback);
+        return new static($callback, ...$arguments);
     }
 
     /**
@@ -81,8 +82,11 @@ class Callback
 
         // Invoke the audit callback, which may result in one or more
         // new audit trail entries being recorded.
-        $callback = $this->callback;
-        $result = $callback();
+
+        $result = $this->callCallback(
+            callback: $this->getCallback(),
+            arguments: $this->getArguments()
+        );
 
         // Clear the registered reason and restore previous, if one
         // was available.

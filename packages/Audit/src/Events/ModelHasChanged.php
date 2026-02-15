@@ -22,7 +22,7 @@ class ModelHasChanged
     /**
      * Class path of model that was changed
      *
-     * @var string
+     * @var class-string<Model>
      */
     public string $model;
 
@@ -62,23 +62,15 @@ class ModelHasChanged
         $this->model = $model::class;
         $this->id = $model->getKey();
 
-        // Resolve the original and changed data (attributes). It's important that this is done during
-        // event instance creation, because once this event is serialised / unserialised, the
-        // "dirty / changed" attributes are lost on given model.
-        // Furthermore, we use given original and changed, if provided.
-        $original = $original ?? $this->resolveOriginalData($model, $type);
-        $changed = $changed ?? $this->resolveChangedData($model, $type);
-
-        // Reduce original attributes, by excluding attributes that have not been changed.
-        // This should reduce amount of data stored per entry.
-        $original = $this->reduceOriginal($original, $changed);
-
         $this
             ->byUser($user)
-            ->type($type)
-            ->withOriginalData($original)
-            ->withChangedData($changed)
-            ->withMessage($message ?? $this->resolveAuditTrailMessage($model, $type))
+            ->format(
+                model: $model,
+                type: $type,
+                original: $original,
+                changed: $changed,
+                message: $message,
+            )
             ->performedAt($performedAt);
     }
 }
