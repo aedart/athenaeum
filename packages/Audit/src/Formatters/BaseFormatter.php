@@ -21,6 +21,15 @@ abstract class BaseFormatter implements Formatter
     use CallbackReason;
 
     /**
+     * Default event types to omit attribute changes for
+     */
+    public const array DEFAULT_OMIT_EVENTS = [
+        Types::DELETED,
+        Types::FORCE_DELETED,
+        Types::RESTORED
+    ];
+
+    /**
      * The model in question
      *
      * @var Model
@@ -32,11 +41,7 @@ abstract class BaseFormatter implements Formatter
      *
      * @var string[]
      */
-    protected array $omitForTypes = [
-        Types::DELETED,
-        Types::FORCE_DELETED,
-        Types::RESTORED
-    ];
+    protected array $omitForTypes = [];
 
     /**
      * The attributes that should be hidden for Audit Trail entries
@@ -57,6 +62,8 @@ abstract class BaseFormatter implements Formatter
     public function __construct(Model $model)
     {
         $this->model = $model;
+
+        $this->omit(static::DEFAULT_OMIT_EVENTS);
     }
 
     /**
@@ -323,8 +330,27 @@ abstract class BaseFormatter implements Formatter
     }
 
     /**
-     * Omit changes for given event types
+     * Add event types to omit attribute changes for
      *
+     * @param  string|string[]  $types
+     *
+     * @return self
+     */
+    public function omit(string|array $types): static
+    {
+        if (!is_array($types)) {
+            $types = [$types];
+        }
+
+        $this->omitForTypes = array_merge($this->omitForTypes, $types);
+
+        return $this;
+    }
+
+    /**
+     * Set the event types to omit attribute changes for
+     *
+     * @see omit
      * @see shouldOmitChangesFor
      *
      * @param  string|string[]  $types
