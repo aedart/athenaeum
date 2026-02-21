@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Updated dependencies (_service update_).
 
+### Fixed
+
+* String datetime not handled correctly in `EventData::performedAt()` (_Audit Trail package_). [#246](https://github.com/aedart/athenaeum/issues/246).
+
 ## [9.23.0] - 2026-02-07
 
 ### Changed
