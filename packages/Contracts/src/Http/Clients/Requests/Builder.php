@@ -906,7 +906,7 @@ interface Builder extends HttpClientAware,
      *
      * Given callback will be invoked after a response has been received, in the {@see request} method.
      *
-     * @param  callable(Status $status, ResponseInterface $response, RequestInterface $request): (void)|ResponseExpectation  $expectation
+     * @param  ResponseExpectation|callable(Status $status, ResponseInterface $response, RequestInterface $request): void  $expectation
      *                  Expectation callback.
      *
      * @return self
@@ -918,7 +918,7 @@ interface Builder extends HttpClientAware,
      *
      * MUST add given list of expectations via the {@see withExpectation} method.
      *
-     * @param callable[]|ResponseExpectation[] $expectations [optional]
+     * @param array<ResponseExpectation|callable(Status $status, ResponseInterface $response, RequestInterface $request): void> $expectations [optional]
      *
      * @return self
      */
@@ -948,7 +948,7 @@ interface Builder extends HttpClientAware,
      * Add middleware to process next outgoing request, and it's
      * incoming response
      *
-     * @param  string|Middleware|Middleware[]|string[]  $middleware Class path, Middleware instance or list hereof
+     * @param  class-string<Middleware>|Middleware|array<class-string<Middleware>|Middleware>  $middleware Class path, Middleware instance or list hereof
      *
      * @return self
      */
@@ -957,7 +957,7 @@ interface Builder extends HttpClientAware,
     /**
      * Add middleware at the beginning of the middleware list
      *
-     * @param  string|Middleware  $middleware Class path or Middleware instance
+     * @param  class-string<Middleware>|Middleware  $middleware Class path or Middleware instance
      *
      * @return self
      */
@@ -966,7 +966,7 @@ interface Builder extends HttpClientAware,
     /**
      * Append middleware to the end of the middleware list
      *
-     * @param  string|Middleware  $middleware Class path or Middleware instance
+     * @param  class-string<Middleware>|Middleware  $middleware Class path or Middleware instance
      *
      * @return self
      */

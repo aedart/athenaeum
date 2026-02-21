@@ -161,7 +161,7 @@ class CompositeExceptionHandler extends BaseExceptionHandler implements
     /**
      * Resolves the given exception handler
      *
-     * @param  string|ExceptionHandler  $handler
+     * @param  class-string<ExceptionHandler>|ExceptionHandler  $handler
      *
      * @return ExceptionHandler
      *

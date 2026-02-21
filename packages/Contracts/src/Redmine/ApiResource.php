@@ -299,7 +299,7 @@ interface ApiResource extends Dto,
     /**
      * Applies a filter or conditions callback
      *
-     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
+     * @param null|callable(Builder $request, ApiResource $resource): Builder $filters [optional] Callback that applies filters on the given Request {@see Builder}.
      *                          The callback MUST return a valid {@see Builder}
      * @param Builder|null $request [optional] Defaults to a new Request Builder, if none given
      *
@@ -404,7 +404,7 @@ interface ApiResource extends Dto,
      * Decodes the given response's Json payload
      *
      * @param ResponseInterface $response
-     * @param string|null [$extract] Name of top-level attribute to extract from payload,
+     * @param string|null $extract [optional] Name of top-level attribute to extract from payload,
      *                              E.g. "issue". If none given, then entire response
      *                              payload is returned.
      *

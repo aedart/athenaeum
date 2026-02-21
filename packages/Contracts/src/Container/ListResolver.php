@@ -20,7 +20,7 @@ interface ListResolver
      *
      * @see with
      *
-     * @param  array  $dependencies  List of class paths, identifiers or key-value pairs, where
+     * @param  array<class-string>|array<class-string, mixed>  $dependencies  List of class paths, identifiers or key-value pairs, where
      *                              key = class path, value = instance arguments.
      *
      * @return array

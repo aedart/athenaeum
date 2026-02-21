@@ -13,7 +13,7 @@ interface HasAuthorisationModel
     /**
      * Returns the model in question for authorisation
      *
-     * @return string|null Class path or null when no model required
+     * @return class-string<Illuminate\Database\Eloquent\Model>|null Class path or null when no model required
      */
     public function authorisationModel(): string|null;
 }

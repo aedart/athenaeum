@@ -31,7 +31,7 @@ interface Manager
      * Creates a new store instance
      *
      * @param string $service Service name
-     * @param string|null $driver [optional] Class path to store "driver". If none given,
+     * @param class-string<Store>|null $driver [optional] Class path to store "driver". If none given,
      *                            then {@see defaultStore} is used.
      * @param array $options [optional] Store options
      *
@@ -42,7 +42,7 @@ interface Manager
     /**
      * Returns a default store
      *
-     * @return string Class path
+     * @return class-string<Store> Class path
      */
     public function defaultStore(): string;
 }

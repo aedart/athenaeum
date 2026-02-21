@@ -19,7 +19,7 @@ interface ItemsProcessor
     /**
      * Process given items and return resulting summation collection
      *
-     * Method will invoke `before` and `after` callbacks, if available.
+     * Method invokes the {@link before} and {@link after} callbacks, if available.
      *
      * @see before
      * @see after
@@ -36,7 +36,7 @@ interface ItemsProcessor
      * Apply a callback onto the Summation Collection, before
      * items are processed.
      *
-     * @param  callable|null  $callback  [optional] Summation Collection is given
+     * @param  callable(Summation): (Summation)|null  $callback  [optional] Summation Collection is given
      *                                   as argument to callback, when invoked.
      *                                   Callback MUST return a Summation Collection!
      *
@@ -48,7 +48,7 @@ interface ItemsProcessor
      * Apply a callback onto the Summation Collection, before
      * items are processed.
      *
-     * @param  callable|null  $callback  [optional] Summation Collection is given
+     * @param  callable(Summation): (Summation)|null  $callback  [optional] Summation Collection is given
      *                                   as argument to callback, when invoked.
      *                                   Callback MUST return a Summation Collection!
      *
@@ -66,8 +66,7 @@ interface ItemsProcessor
     /**
      * Creates a new items' processor with given processing rules
      *
-     * @param  ProcessingRule[]|Repository|string[]  $rules Processing Rules instances, class paths or Repository of
-     *                                                processing rules.
+     * @param  array<ProcessingRule|Repository|class-string<Repository>>  $rules
      *
      * @return static
      */

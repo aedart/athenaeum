@@ -27,7 +27,7 @@ interface Manager
     /**
      * Creates a new exporter instance
      *
-     * @param string|null $driver [optional] Class path to {@see Exporter} to use
+     * @param class-string<Exporter>|null $driver [optional] Class path to {@see Exporter} to use
      * @param array $options [optional] Exporter specific options
      *
      * @return Exporter

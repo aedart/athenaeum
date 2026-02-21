@@ -12,6 +12,8 @@ use Throwable;
  *
  * Adapted version of Laravel's Application
  *
+ * @template S of \Illuminate\Support\ServiceProvider
+ *
  * @see \Illuminate\Contracts\Foundation\Application
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
@@ -58,11 +60,11 @@ interface Application extends IoC,
      * @see register
      * @see \Illuminate\Contracts\Support\DeferrableProvider
      *
-     * @param \Illuminate\Support\ServiceProvider[]|string[] $providers
+     * @param array<S|class-string<S>> $providers
      *
      * @return self
      */
-    public function registerMultipleServiceProviders(array $providers);
+    public function registerMultipleServiceProviders(array $providers): static;
 
     /**
      * Get this application's deferred services
@@ -98,7 +100,7 @@ interface Application extends IoC,
      *
      * Method does nothing, if application is already running
      *
-     * @param callable|null $callback [optional] Invoked after bootstrap and boot has completed
+     * @param null|callable(static): void $callback [optional] Invoked after bootstrap and boot has completed
      *
      * @see isRunning
      * @see bootstrapWith
@@ -113,14 +115,14 @@ interface Application extends IoC,
     /**
      * Get the application's core "bootstrappers"
      *
-     * @return CanBeBootstrapped[]|string[] Instances or list of class paths
+     * @return array<CanBeBootstrapped|class-string<CanBeBootstrapped>> Instances or list of class paths
      */
     public function getCoreBootstrappers(): array;
 
     /**
      * Get this application's core service providers.
      *
-     * @return \Illuminate\Support\ServiceProvider[]|string[] Instances or list of class paths
+     * @return array<S|class-string<S>> Instances or list of class paths
      */
     public function getCoreServiceProviders(): array;
 

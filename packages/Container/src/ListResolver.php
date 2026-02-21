@@ -71,7 +71,7 @@ class ListResolver implements
     /**
      * Resolve given key-value pair
      *
-     * @param  string|int  $key  String class path or array index, in which
+     * @param  class-string|int  $key  String class path or array index, in which
      *                        case it will be ignored
      * @param  mixed  $value  String class path or instance arguments.
      *
