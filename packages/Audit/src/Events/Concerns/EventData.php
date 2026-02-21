@@ -205,7 +205,9 @@ trait EventData
     {
         $performedAt = $performedAt ?? Carbon::now();
 
-        $this->performedAt = $this->formatDatetime($performedAt);
+        $this->performedAt = $this->formatDatetime(
+            Carbon::make($performedAt)
+        );
 
         return $this;
     }
