@@ -29,6 +29,8 @@ Temporary changelog for `v10.x` series.
 * `Invoker` util has been refactored, its arguments and callback methods have been extracted into its own traits (_Utils package_).
 * Removed PHPUnit annotations from tests. [#233](https://github.com/aedart/athenaeum/issues/233).
 * Changed event triggers pull requests to "opened", "reopened", and "ready_for_review", and enabled concurrency check (_GitHub actions_). [#241](https://github.com/aedart/athenaeum/issues/241).
+* `RequestMustBeJson` middleware has been refactored to use a static array of target HTTP methods (_Http Api package_).
+* `RemoveResponsePayload` middleware now uses a static array of truthy values (_Http Api package_).
 * Improved `resolveContent()` method in `GenericGenerator` (_ETags package_).
 * Improved PHPDoc for `callable` parameters (_ETags and Http Api packages_).
 
