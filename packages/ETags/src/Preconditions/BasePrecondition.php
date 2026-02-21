@@ -37,7 +37,7 @@ abstract class BasePrecondition implements Precondition
      *
      * @param  ResourceContext  $resource
      *
-     * @return ResourceContext|string|null Class path to another precondition to be evaluated,
+     * @return ResourceContext|class-string<Precondition>|null Class path to another precondition to be evaluated,
      *                                     null if evaluator should continue to next precondition, or
      *                                     {@see ResourceContext} when request should proceed
      *                                     (stop evaluation of other preconditions).
@@ -51,7 +51,7 @@ abstract class BasePrecondition implements Precondition
      *
      * @param  ResourceContext  $resource
      *
-     * @return ResourceContext|string|null Class path to another precondition to be evaluated,
+     * @return ResourceContext|class-string<Precondition>|null Class path to another precondition to be evaluated,
      *                                     null if evaluator should continue to next precondition, or
      *                                     {@see ResourceContext} when request should proceed
      *                                     (stop evaluation of other preconditions).

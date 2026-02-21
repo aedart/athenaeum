@@ -93,7 +93,7 @@ trait CurrentRequest
     /**
      * Get collection of etags from the If-Match header
      *
-     * @return Collection
+     * @return Collection<ETag>
      */
     protected function getIfMatchEtags(): Collection
     {

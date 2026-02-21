@@ -15,16 +15,12 @@ trait Preconditions
     /**
      * List of preconditions
      *
-     * @var string[]|Precondition[]
+     * @var array<class-string<Precondition>|Precondition>
      */
     protected array $preconditions = [];
 
     /**
-     * Set preconditions
-     *
-     * @param  string[]|Precondition[]  $preconditions List of class paths or {@see Precondition} instances
-     *
-     * @return self
+     * @inheritdoc
      */
     public function setPreconditions(array $preconditions): static
     {
@@ -34,9 +30,7 @@ trait Preconditions
     }
 
     /**
-     * Get preconditions
-     *
-     * @return string[]|Precondition[] List of class paths or {@see Precondition} instances
+     * @inheritdoc
      */
     public function getPreconditions(): array
     {
@@ -44,9 +38,7 @@ trait Preconditions
     }
 
     /**
-     * Alias for {@see getPreconditions()}
-     *
-     * @return string[]|Precondition[]
+     * @inheritdoc
      */
     public function preconditions(): array
     {
@@ -54,11 +46,7 @@ trait Preconditions
     }
 
     /**
-     * Add a new precondition at the end of the list of preconditions
-     *
-     * @param  string|Precondition  $precondition Class path or {@see Precondition} instance
-     *
-     * @return static
+     * @inheritdoc
      */
     public function addPrecondition(string|Precondition $precondition): static
     {
@@ -68,9 +56,7 @@ trait Preconditions
     }
 
     /**
-     * Clear all preconditions
-     *
-     * @return static
+     * @inheritdoc
      */
     public function clearPreconditions(): static
     {
