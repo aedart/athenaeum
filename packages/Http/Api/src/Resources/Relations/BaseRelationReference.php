@@ -331,7 +331,7 @@ abstract class BaseRelationReference implements RelationReference
      *
      * @throws RelationReferenceExceptionInterface
      */
-    protected function findApiResourceOrFail(Model $relation, BaseRelationReference $relationReference = null): ApiResource
+    protected function findApiResourceOrFail(Model $relation, BaseRelationReference|null $relationReference = null): ApiResource
     {
         $resourceClass = $this->getApiResourceRegistrar()->get($relation);
 
