@@ -23,14 +23,14 @@ class ResponseExpectation implements ResponseExpectationInterface
     /**
      * The expectation callback
      *
-     * @var callable
+     * @var callable(Status $status, ResponseInterface $response, RequestInterface $request): void
      */
     protected $expectationCallback;
 
     /**
      * ResponseExpectation constructor.
      *
-     * @param  callable|null  $callback  [optional]
+     * @param  callable(Status $status, ResponseInterface $response, RequestInterface $request): (void)|null  $callback  [optional]
      */
     public function __construct(callable|null $callback = null)
     {

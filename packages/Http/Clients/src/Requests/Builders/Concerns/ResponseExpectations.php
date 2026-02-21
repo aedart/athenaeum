@@ -4,9 +4,12 @@ namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation as ResponseExpectationInterface;
+use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Http\Clients\Requests\Builders\Expectations\ResponseExpectation;
 use Aedart\Http\Clients\Requests\Builders\Expectations\StatusCodesExpectation;
 use InvalidArgumentException;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Concerns Response Expectations
@@ -91,7 +94,7 @@ trait ResponseExpectations
     /**
      * Resolve given response expectation
      *
-     * @param  callable|ResponseExpectationInterface  $callback
+     * @param  callable(Status $status, ResponseInterface $response, RequestInterface $request): (void)|ResponseExpectationInterface  $callback
      *
      * @return ResponseExpectationInterface
      */

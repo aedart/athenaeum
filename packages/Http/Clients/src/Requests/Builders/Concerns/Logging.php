@@ -20,7 +20,7 @@ trait Logging
     /**
      * Request / Response logging callback
      *
-     * @var callable|null
+     * @var callable(string $type, MessageInterface $message, Builder $builder): (void)|null
      */
     protected $logCallback = null;
 
@@ -54,7 +54,7 @@ trait Logging
      * Set the request / response logging callback to be
      * applied.
      *
-     * @param  callable  $callback
+     * @param  callable(string $type, MessageInterface $message, Builder $builder): void  $callback
      *
      * @return Builder
      */
