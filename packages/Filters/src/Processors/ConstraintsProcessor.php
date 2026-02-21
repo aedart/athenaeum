@@ -32,7 +32,7 @@ class ConstraintsProcessor extends BaseProcessor
     /**
      * Filters map
      *
-     * @var array Key-value pair, key = requested property, value = field filter class path
+     * @var array<string, class-string<FieldCriteria>> Key-value pair, key = requested property, value = field filter class path
      */
     protected array $filtersMap = [];
 
@@ -98,7 +98,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @see FieldCriteria
      *
-     * @param array $map Key-value pair. Key = requested property, value = filter class path
+     * @param array<string, class-string<FieldCriteria>> $map Key-value pair. Key = requested property, value = filter class path
      *
      * @return self
      */
@@ -247,7 +247,7 @@ class ConstraintsProcessor extends BaseProcessor
     /**
      * Creates a new filter instance from class path
      *
-     * @param string $class Class path to {@see FieldCriteria}
+     * @param class-string<FieldCriteria> $class Class path to {@see FieldCriteria}
      * @param string $column
      * @param string $operator
      * @param mixed $value

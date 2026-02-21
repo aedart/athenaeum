@@ -21,7 +21,7 @@ class AssignsPredefinedMiddleware
      * Predefined middleware to be assigned
      * Middleware is prepended in reverse order!
      *
-     * @var string[]|Middleware[]
+     * @var array<class-string<Middleware>|Middleware>
      */
     protected array $middleware = [
         AppliesResponseExpectations::class,
@@ -65,7 +65,7 @@ class AssignsPredefinedMiddleware
     /**
      * Assign target middleware, if not already assigned
      *
-     * @param string|Middleware $middleware Class path or Middleware instance
+     * @param class-string<Middleware>|Middleware $middleware Class path or Middleware instance
      */
     protected function assignMiddleware(string|Middleware $middleware)
     {
@@ -80,7 +80,7 @@ class AssignsPredefinedMiddleware
     /**
      * Determine if middleware has already been assigned
      *
-     * @param string|Middleware $middleware Class path or Middleware instance
+     * @param class-string<Middleware>|Middleware $middleware Class path or Middleware instance
      *
      * @return bool
      */

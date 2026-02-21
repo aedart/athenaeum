@@ -37,7 +37,7 @@ class BulkRecorder
      *
      * @see dispatch
      *
-     * @param string|Model $modelType Model instance or class path
+     * @param class-string<Model>|Model $modelType Model instance or class path
      * @param string[]|int[] $identifiers Primary keys or slugs
      * @param string $type [optional]
      * @param string|null $message [optional]
@@ -169,7 +169,7 @@ class BulkRecorder
     /**
      * Find models of the given type, for given identifiers
      *
-     * @param string|Model $model Model instance or class path
+     * @param class-string<Model>|Model $model Model instance or class path
      * @param string[]|int[] $identifiers Primary keys or slugs
      *
      * @return Collection<Model> Collection of models with only identifiers (primary key) set

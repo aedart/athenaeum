@@ -27,7 +27,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
     /**
      * Class path to the related resource
      *
-     * @var string|ApiResource Class path
+     * @var class-string<ApiResource>|ApiResource Class path
      */
     protected string|ApiResource $related;
 
@@ -56,7 +56,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
      * ResourceRelation
      *
      * @param ApiResource $parent
-     * @param string|ApiResource $related Class path or Api resource instance
+     * @param class-string<ApiResource>|ApiResource $related Class path or Api resource instance
      */
     public function __construct(ApiResource $parent, string|ApiResource $related)
     {
