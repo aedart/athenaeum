@@ -22,7 +22,7 @@
         "aedart/athenaeum-streams": "^9.24",
         "aedart/athenaeum-support": "^9.24",
         "aedart/athenaeum-validation": "^9.24",
-        "illuminate/events": "^v12.50.0",
+        "illuminate/events": "^v12.52.0",
         "xenolope/quahog": "^3.0"
     },
     "autoload": {
