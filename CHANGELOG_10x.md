@@ -29,6 +29,7 @@ Temporary changelog for `v10.x` series.
 * `Invoker` util has been refactored, its arguments and callback methods have been extracted into its own traits (_Utils package_).
 * Removed PHPUnit annotations from tests. [#233](https://github.com/aedart/athenaeum/issues/233).
 * Changed event triggers pull requests to "opened", "reopened", and "ready_for_review", and enabled concurrency check (_GitHub actions_). [#241](https://github.com/aedart/athenaeum/issues/241).
+* Improved `resolveContent()` method in `GenericGenerator` (_ETags package_).
 
 ### Fixed
 
