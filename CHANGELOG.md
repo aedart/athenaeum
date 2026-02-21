@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.24.0] - 2026-02-21
+
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* String datetime not handled correctly in `EventData::performedAt()` (_Audit Trail package_). [#246](https://github.com/aedart/athenaeum/issues/246).
+
 ## [9.23.0] - 2026-02-07
 
 ### Changed
@@ -1851,7 +1861,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/9.23.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/9.24.0...HEAD
+[9.24.0]: https://github.com/aedart/athenaeum/compare/9.23.0...9.24.0
 [9.23.0]: https://github.com/aedart/athenaeum/compare/9.22.0...9.23.0
 [9.22.0]: https://github.com/aedart/athenaeum/compare/9.21.0...9.22.0
 [9.21.0]: https://github.com/aedart/athenaeum/compare/9.20.0...9.21.0
