@@ -27,14 +27,14 @@ trait EventData
      * @var string
      */
     public string $type = Types::UPDATED;
-    
+
     /**
      * Unique user identifier that caused change
      *
      * @var string|int|null
      */
     public string|int|null $user = null;
-    
+
     /**
      * Original data (attributes) before change occurred
      *
@@ -78,7 +78,7 @@ trait EventData
 
         return $this;
     }
-    
+
     /**
      * Set the user that caused the change
      *
@@ -92,10 +92,10 @@ trait EventData
     public function byUser(Model|Authenticatable|null $user): static
     {
         $this->user = optional($user)->getKey();
-        
+
         return $this;
     }
-    
+
     /**
      * Set the original data (attributes) before changed occurred
      *
@@ -134,7 +134,7 @@ trait EventData
     public function withMessage(string|null $message = null): static
     {
         $this->message = $message;
-        
+
         return $this;
     }
 
@@ -151,8 +151,10 @@ trait EventData
     {
         $performedAt = $performedAt ?? Carbon::now();
 
-        $this->performedAt = $this->formatDatetime($performedAt);
-        
+        $this->performedAt = $this->formatDatetime(
+            Carbon::make($performedAt)
+        );
+
         return $this;
     }
 }
