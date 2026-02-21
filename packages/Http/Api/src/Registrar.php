@@ -122,7 +122,7 @@ class Registrar implements RegistrarInterface
     /**
      * Determine if api resource matches given type
      *
-     * @param  string  $resource Api Resource class path
+     * @param  class-string<\Aedart\Http\Api\Resources\ApiResource>  $resource
      * @param  string  $type Resource type (singular or plural form)
      *
      * @return bool
@@ -141,9 +141,11 @@ class Registrar implements RegistrarInterface
     /**
      * Resolves the class path of given target
      *
-     * @param  object|string  $target Class instance or string class path
+     * @template T
      *
-     * @return string Class path
+     * @param  object|class-string<T>  $target Class instance or string class path
+     *
+     * @return class-string<T> Class path
      */
     protected function resolveClassPath(object|string $target): string
     {

@@ -27,7 +27,8 @@ interface RelationReference
     /**
      * Set callback that formats the loaded relation
      *
-     * @param  callable  $callback The eager-loaded relation model or collection is given
+     * @param  callable(\Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection $relation, static $relationReference): mixed  $callback
+     *                             The eager-loaded relation model or collection is given
      *                             as callback argument, along with this relation reference.
      *                             The callback MUST return some kind of value. Null is a
      *                             valid return value.
@@ -40,22 +41,22 @@ interface RelationReference
     /**
      * Alias for {@see defaultTo}
      *
-     * @param callable|mixed $default
+     * @param callable(static $relationReference): mixed|mixed $default
      *
      * @return self
      */
-    public function otherwise($default = null): static;
+    public function otherwise(mixed $default = null): static;
 
     /**
      * Set the default value to return when relation
      * is not loaded or available
      *
-     * @param callable|mixed $default  [optional] When callback is given, then this
+     * @param callable(static $relationReference): mixed|mixed $default  [optional] When callback is given, then this
      *                                 relation reference is given as argument.
      *
      * @return self
      */
-    public function defaultTo($default = null): static;
+    public function defaultTo(mixed $default = null): static;
 
     /**
      * Set the current request

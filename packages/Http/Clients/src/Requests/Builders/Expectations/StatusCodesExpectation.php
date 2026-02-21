@@ -26,7 +26,7 @@ class StatusCodesExpectation extends ResponseExpectation
     /**
      * Otherwise handler
      *
-     * @var callable|null
+     * @var callable(Status $status, ResponseInterface $response, RequestInterface $request): (void)|null
      */
     protected $otherwise = null;
 
@@ -34,7 +34,7 @@ class StatusCodesExpectation extends ResponseExpectation
      * StatusCodesExpectation constructor.
      *
      * @param int|int[] $expectedStatusCodes The http status code(s) that are expected
-     * @param callable|null $otherwise [optional] Callback to be invoked when received http status code does not
+     * @param callable(Status $status, ResponseInterface $response, RequestInterface $request): (void)|null $otherwise [optional] Callback to be invoked when received http status code does not
      *                                 match either of the expected codes.
      */
     public function __construct($expectedStatusCodes, callable|null $otherwise = null)
@@ -71,7 +71,7 @@ class StatusCodesExpectation extends ResponseExpectation
      * Set otherwise handler, to be invoked is response's
      * status code didn't meet expectation
      *
-     * @param callable|null $otherwise
+     * @param callable(Status $status, ResponseInterface $response, RequestInterface $request): (void)|null $otherwise  [optional]
      *
      * @return self
      */
@@ -146,7 +146,7 @@ class StatusCodesExpectation extends ResponseExpectation
      * @see setOtherwise
      * @see buildDefaultOtherwiseCallback
      *
-     * @return callable
+     * @return callable(Status $status, ResponseInterface $response, RequestInterface $request): void
      */
     protected function resolveOtherwiseCallback(): callable
     {

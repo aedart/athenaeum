@@ -17,14 +17,11 @@ interface ResponseExpectation
     /**
      * Add an expectation for the next response.
      *
-     * An "expectation" is a callback that verifies the received
-     * response's Http status code, Http headers, and possibly
-     * it's payload body. If the response is considered invalid,
+     * An "expectation" is a callback that verifies the received response's Http status code,
+     * Http headers, and possibly it's payload body. If the response is considered invalid,
      * the callback SHOULD throw an exception.
      *
-     * @param callable $expectation Expectation callback. When invoked, it is given a
-     *                  {@see Status}, {@see ResponseInterface} and {@see RequestInterface} as
-     *                  argument, in the stated order.
+     * @param callable(Status $status, ResponseInterface $response, RequestInterface $request): (void) $expectation Expectation callback.
      *
      * @return self
      */
@@ -33,7 +30,7 @@ interface ResponseExpectation
     /**
      * Returns the assigned expectation callback
      *
-     * @return callable If no expectation was assign, method MUST return {@see expectation}
+     * @return callable(Status $status, ResponseInterface $response, RequestInterface $request): (void)
      */
     public function getExpectation(): callable;
 

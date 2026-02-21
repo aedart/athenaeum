@@ -23,7 +23,7 @@ class ResponseETagsMixin
     /**
      * Set the ETag Http Header
      *
-     * @return Closure
+     * @return Closure(ETag|string|null $etag): \Illuminate\Http\Response
      */
     public function withEtag(): Closure
     {
@@ -44,7 +44,7 @@ class ResponseETagsMixin
     /**
      * Remove the ETag Http Header
      *
-     * @return Closure
+     * @return Closure(): \Illuminate\Http\Response
      */
     public function withoutEtag(): Closure
     {

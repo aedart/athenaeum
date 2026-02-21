@@ -18,7 +18,7 @@ trait AdditionalFormatting
      * Callback that applies additional formatting
      * to the final relation reference value
      *
-     * @var callable|null
+     * @var callable(array $output, Model $relation, static $relationReference): array|null
      */
     protected $additionalFormattingCallback = null;
 
@@ -29,7 +29,8 @@ trait AdditionalFormatting
      * **Note**: _Given callback is applied as the last step, after primary key, resource type, self-link,...etc. has
      * been resolved._
      *
-     * @param  callable|null  $callback  [optional] Formatted reference value, related {@see Model} and {@see RelationReference}
+     * @param  callable(array $output, Model $relation, static $relationReference): array|null  $callback  [optional]
+     *                                   Formatted reference value, related {@see Model} and {@see RelationReference}
      *                                   are given as callback arguments. Return value of this callback will be used
      *                                   as this reference's final output value.
      *
@@ -57,7 +58,7 @@ trait AdditionalFormatting
      * Returns evt. callback that applies additional formatting to the final
      * relation reference value
      *
-     * @return callable|null
+     * @return callable(array $output, Model $relation, static $relationReference): array|null
      */
     public function getAdditionalFormattingCallback(): callable|null
     {
@@ -75,7 +76,7 @@ trait AdditionalFormatting
      *
      * @throws RelationReferenceExceptionInterface
      */
-    protected function applyAdditionalFormatting(array $output, Model $relation, $relationReference): array
+    protected function applyAdditionalFormatting(array $output, Model $relation, mixed $relationReference): array
     {
         if (!$relationReference->hasAdditionalFormatting()) {
             return $output;

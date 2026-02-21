@@ -33,14 +33,14 @@ abstract class BaseRelationReference implements RelationReference
     /**
      * Default value to use when relation not loaded
      *
-     * @var callable|mixed
+     * @var callable(static $relationReference): mixed|mixed
      */
     protected $defaultValue = null;
 
     /**
      * Callback to be applied on loaded relation
      *
-     * @var callable|null
+     * @var callable(Model|Collection $relation, static $relationReference): mixed|null
      */
     protected $whenLoadedCallback = null;
 
@@ -102,7 +102,7 @@ abstract class BaseRelationReference implements RelationReference
     /**
      * @inheritDoc
      */
-    public function otherwise($default = null): static
+    public function otherwise(mixed $default = null): static
     {
         return $this->defaultTo($default);
     }
@@ -110,7 +110,7 @@ abstract class BaseRelationReference implements RelationReference
     /**
      * @inheritDoc
      */
-    public function defaultTo($default = null): static
+    public function defaultTo(mixed $default = null): static
     {
         $this->defaultValue = $default;
 
@@ -235,7 +235,7 @@ abstract class BaseRelationReference implements RelationReference
      *
      * @throws RelationReferenceExceptionInterface
      */
-    public function formatSingleLoadedModel(Model $related, $relationReference): mixed
+    public function formatSingleLoadedModel(Model $related, BaseRelationReference $relationReference): mixed
     {
         // Obtain the relation's primary identifier and return it directly,
         // when relation must be formatted as a primitive value.
@@ -270,7 +270,7 @@ abstract class BaseRelationReference implements RelationReference
      *
      * @return array List of reference values, one for each related model
      */
-    public function formatMultipleLoadedModels(Collection $related, $relationReference): array
+    public function formatMultipleLoadedModels(Collection $related, BaseRelationReference $relationReference): array
     {
         return $related->map(function (Model $model) use ($relationReference) {
             return $relationReference->formatSingleLoadedModel($model, $relationReference);
@@ -331,7 +331,7 @@ abstract class BaseRelationReference implements RelationReference
      *
      * @throws RelationReferenceExceptionInterface
      */
-    protected function findApiResourceOrFail(Model $relation, $relationReference = null): ApiResource
+    protected function findApiResourceOrFail(Model $relation, BaseRelationReference|null $relationReference = null): ApiResource
     {
         $resourceClass = $this->getApiResourceRegistrar()->get($relation);
 

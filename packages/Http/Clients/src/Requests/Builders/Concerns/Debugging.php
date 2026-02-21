@@ -26,7 +26,7 @@ trait Debugging
     /**
      * Request / Response callback to be applied.
      *
-     * @var callable|null
+     * @var callable(string $type, MessageInterface $message, Builder $builder): (void)|null
      */
     protected $debugCallback = null;
 
@@ -89,7 +89,7 @@ trait Debugging
      * Set the request / response debug callback to be
      * applied.
      *
-     * @param  callable  $callback
+     * @param  callable(string $type, MessageInterface $message, Builder $builder): void  $callback
      *
      * @return Builder
      */
@@ -103,11 +103,11 @@ trait Debugging
     /**
      * Returns a "null" debug callback method.
      *
-     * @return callable
+     * @return callable(string $type, MessageInterface $message, Builder $builder): void
      */
     protected function makeNullDebugCallback(): callable
     {
-        return function (string $type, MessageInterface $message, Builder $builder) {
+        return function (string $type, MessageInterface $message, Builder $builder): void {
             // N/A...
         };
     }
@@ -115,11 +115,11 @@ trait Debugging
     /**
      * Returns a default "dump" callback
      *
-     * @return callable
+     * @return callable(string $type, MessageInterface $message, Builder $builder): void
      */
     protected function makeDumpCallback(): callable
     {
-        return function (string $type, MessageInterface $message, Builder $builder) {
+        return function (string $type, MessageInterface $message, Builder $builder): void {
             VarDumper::dump($this->makeDebugContext($type, $message));
         };
     }
@@ -127,11 +127,11 @@ trait Debugging
     /**
      * Returns a default "dump and die" callback
      *
-     * @return callable
+     * @return callable(string $type, MessageInterface $message, Builder $builder): void
      */
     protected function makeDumpAndDieCallback(): callable
     {
-        return function (string $type, MessageInterface $message, Builder $builder) {
+        return function (string $type, MessageInterface $message, Builder $builder): void {
             // Obtain reference to var dumper handler.
             $originalHandler = VarDumper::setHandler(null);
             VarDumper::setHandler($originalHandler);

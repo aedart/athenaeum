@@ -113,7 +113,7 @@ class Cookie implements CookieInterface
      *
      * @throws InvalidArgumentException If property does not exist
      */
-    protected function populateProperty(string $property, mixed $value)
+    protected function populateProperty(string $property, mixed $value): void
     {
         if (!method_exists($this, $property)) {
             throw new InvalidArgumentException(sprintf('Property %s does not exist', $property));
