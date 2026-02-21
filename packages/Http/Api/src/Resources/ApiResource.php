@@ -35,7 +35,7 @@ abstract class ApiResource extends JsonResource
     /**
      * Additional payload formatting
      *
-     * @var callable|null
+     * @var callable(array $payload, Request $request, static $apiResource): array|null
      */
     protected $additionalFormatter = null;
 
@@ -59,7 +59,7 @@ abstract class ApiResource extends JsonResource
     /**
      * Set callback that applies additional formatting on payload
      *
-     * @param  callable|null  $formatter (Pre)formatted payload, {@see Request} and this {@see ApiResource} are
+     * @param  callable(array $payload, Request $request, static $apiResource): array|null  $formatter (Pre)formatted payload, {@see Request} and this {@see ApiResource} are
      *                                   given as callback arguments. Callback MUST return an array!
      *
      * @return self

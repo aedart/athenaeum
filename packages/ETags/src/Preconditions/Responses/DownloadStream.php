@@ -99,7 +99,7 @@ class DownloadStream implements
     /**
      * Custom resolve stream callback
      *
-     * @var callable|null
+     * @var callable(mixed $data, static $downloadStream): (FileStreamInterface & Detectable)|null
      */
     protected $resolveStreamCallback = null;
 
@@ -665,7 +665,7 @@ class DownloadStream implements
      *
      * @see getStream
      *
-     * @param callable|null $callback Callback receives attachment and this download stream instance.
+     * @param callable(mixed $data, static $downloadStream): (FileStreamInterface & Detectable)|null $callback Callback receives attachment and this download stream instance.
      *
      * @return self
      */
@@ -679,7 +679,7 @@ class DownloadStream implements
     /**
      * Get custom callback to resolve stream for attachment
      *
-     * @return callable|null
+     * @return callable(mixed $data, static $downloadStream): (FileStreamInterface & Detectable)|null
      */
     public function getResolveStreamCallback(): callable|null
     {

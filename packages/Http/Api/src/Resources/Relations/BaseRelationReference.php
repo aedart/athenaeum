@@ -33,14 +33,14 @@ abstract class BaseRelationReference implements RelationReference
     /**
      * Default value to use when relation not loaded
      *
-     * @var callable|mixed
+     * @var callable(static $relationReference): mixed|mixed
      */
     protected $defaultValue = null;
 
     /**
      * Callback to be applied on loaded relation
      *
-     * @var callable|null
+     * @var callable(Model|Collection $relation, static $relationReference): mixed|null
      */
     protected $whenLoadedCallback = null;
 
@@ -102,7 +102,7 @@ abstract class BaseRelationReference implements RelationReference
     /**
      * @inheritDoc
      */
-    public function otherwise($default = null): static
+    public function otherwise(mixed $default = null): static
     {
         return $this->defaultTo($default);
     }
@@ -110,7 +110,7 @@ abstract class BaseRelationReference implements RelationReference
     /**
      * @inheritDoc
      */
-    public function defaultTo($default = null): static
+    public function defaultTo(mixed $default = null): static
     {
         $this->defaultValue = $default;
 
