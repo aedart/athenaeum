@@ -235,7 +235,7 @@ abstract class BaseRelationReference implements RelationReference
      *
      * @throws RelationReferenceExceptionInterface
      */
-    public function formatSingleLoadedModel(Model $related, $relationReference): mixed
+    public function formatSingleLoadedModel(Model $related, BaseRelationReference $relationReference): mixed
     {
         // Obtain the relation's primary identifier and return it directly,
         // when relation must be formatted as a primitive value.
@@ -270,7 +270,7 @@ abstract class BaseRelationReference implements RelationReference
      *
      * @return array List of reference values, one for each related model
      */
-    public function formatMultipleLoadedModels(Collection $related, $relationReference): array
+    public function formatMultipleLoadedModels(Collection $related, BaseRelationReference $relationReference): array
     {
         return $related->map(function (Model $model) use ($relationReference) {
             return $relationReference->formatSingleLoadedModel($model, $relationReference);
@@ -331,7 +331,7 @@ abstract class BaseRelationReference implements RelationReference
      *
      * @throws RelationReferenceExceptionInterface
      */
-    protected function findApiResourceOrFail(Model $relation, $relationReference = null): ApiResource
+    protected function findApiResourceOrFail(Model $relation, BaseRelationReference $relationReference = null): ApiResource
     {
         $resourceClass = $this->getApiResourceRegistrar()->get($relation);
 
