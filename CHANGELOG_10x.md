@@ -30,6 +30,7 @@ Temporary changelog for `v10.x` series.
 * Removed PHPUnit annotations from tests. [#233](https://github.com/aedart/athenaeum/issues/233).
 * Changed event triggers pull requests to "opened", "reopened", and "ready_for_review", and enabled concurrency check (_GitHub actions_). [#241](https://github.com/aedart/athenaeum/issues/241).
 * Improved `resolveContent()` method in `GenericGenerator` (_ETags package_).
+* Improved PHPDoc for `callable` parameters (_ETags and Http Api packages_).
 
 ### Fixed
 
