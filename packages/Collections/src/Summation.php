@@ -199,7 +199,7 @@ class Summation implements SummationInterface
     /**
      * @inheritDoc
      */
-    public function dd(): void
+    public function dd(): never
     {
         $this->dump();
 
@@ -321,7 +321,7 @@ class Summation implements SummationInterface
      * Performs an arithmetic operation on key's value.
      *
      * @param  string  $key
-     * @param  callable|float|int  $amount If amount is a callback, then
+     * @param  float|int|callable(mixed $value, static $summation): mixed  $amount If amount is a callback, then
      *                                    callback is invoked with key's value and this
      *                                    Summation as arguments. The resulting output is
      *                                    set as key's new value.
@@ -357,7 +357,7 @@ class Summation implements SummationInterface
      * Applies given callback and sets key's value
      *
      * @param  string  $key
-     * @param  callable  $callback
+     * @param  callable(mixed $value, static $summation): mixed  $callback
      * @param  mixed  $value  [optional] If provided, then this value is passed on as
      *                        callback's argument, along with this Summation instance
      *
