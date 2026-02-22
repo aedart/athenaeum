@@ -22,21 +22,21 @@ trait Configuration
     /**
      * In-memory Cache of acl models' class paths
      *
-     * @var array<string, class-string> key = identifier, value = class path
+     * @var array<string, class-string<Model>> key = identifier, value = class path
      */
     protected static array $aclModels = [];
 
     /**
      * In-memory Cache of acl table names
      *
-     * @var array<string, class-string> key = identifier, value = table name
+     * @var array<string, string> key = identifier, value = table name
      */
     protected static array $aclTables = [];
 
     /**
      * Returns the class path to the user eloquent model
      *
-     * @return class-string
+     * @return class-string<Model & Authenticatable>
      */
     public function aclUserModel(): string
     {
@@ -46,9 +46,9 @@ trait Configuration
     /**
      * Creates a new user eloquent model instance
      *
-     * @return Model|Authenticatable
+     * @return Model & Authenticatable
      */
-    public function aclUserModelInstance(): Model|Authenticatable
+    public function aclUserModelInstance(): Model & Authenticatable
     {
         // NOTE: We cannot rely on the "make()" method being available
         // for the user model. So we create a new instance the old
@@ -60,7 +60,7 @@ trait Configuration
     /**
      * Returns class path to role eloquent model
      *
-     * @return class-string
+     * @return class-string<Model|Role>
      */
     public function aclRoleModel(): string
     {
@@ -80,7 +80,7 @@ trait Configuration
     /**
      * Returns class path to permissions eloquent model
      *
-     * @return string
+     * @return class-string<Model|Permission>
      */
     public function aclPermissionsModel(): string
     {
@@ -100,7 +100,7 @@ trait Configuration
     /**
      * Returns class path to permission group eloquent model
      *
-     * @return class-string
+     * @return class-string<Model|PermissionGroup>
      */
     public function aclPermissionsGroupModel(): string
     {
@@ -122,7 +122,7 @@ trait Configuration
      *
      * @param string $identifier
      *
-     * @return class-string|null
+     * @return class-string<Model>|null
      */
     public function aclModel(string $identifier): string|null
     {
@@ -138,7 +138,7 @@ trait Configuration
      *
      * @param string $identifier
      *
-     * @return class-string|null
+     * @return string|null
      */
     public function aclTable(string $identifier): string|null
     {
