@@ -66,8 +66,10 @@ class AssignsPredefinedMiddleware
      * Assign target middleware, if not already assigned
      *
      * @param class-string<Middleware>|Middleware $middleware Class path or Middleware instance
+     *
+     * @return void
      */
-    protected function assignMiddleware(string|Middleware $middleware)
+    protected function assignMiddleware(string|Middleware $middleware): void
     {
         // Skip if middleware has already been assigned
         if ($this->isAlreadyAssigned($middleware)) {
