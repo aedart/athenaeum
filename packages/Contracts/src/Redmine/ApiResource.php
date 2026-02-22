@@ -5,11 +5,13 @@ namespace Aedart\Contracts\Redmine;
 use Aedart\Contracts\Dto;
 use Aedart\Contracts\Http\Clients\Client;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Redmine\Connection as ConnectionInterface;
 use Aedart\Contracts\Redmine\Exceptions\ErrorResponseException;
 use Aedart\Contracts\Redmine\Exceptions\RedmineException;
 use Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException;
 use JsonException;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
@@ -118,7 +120,7 @@ interface ApiResource extends Dto,
      * </pre>
      *
      * @param string|int $id Redmine resource id
-     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
+     * @param null|callable(Builder $request, static $apiResource): Builder $filters [optional] Callback that applies filters on the given Request {@see Builder}.
      *                          The callback MUST return a valid {@see Builder}
      * @param string|Connection|null $connection [optional] Redmine connection profile
      *
@@ -144,7 +146,7 @@ interface ApiResource extends Dto,
      *
      * @see isListable
      *
-     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
+     * @param null|callable(Builder $request, static $apiResource): Builder $filters [optional] Callback that applies filters on the given Request {@see Builder}.
      *                               The callback MUST return a valid {@see Builder}
      * @param int $limit [optional]
      * @param int $offset [optional]
@@ -176,7 +178,7 @@ interface ApiResource extends Dto,
      * can decrease performance a lot, due to many API requests.
      * You SHOULD NOT set the pool size too small, if you wish to limit the amount of requests!_
      *
-     * @param callable|null $filters [optional] Callback that applies filters on the given Request {@see Builder}.
+     * @param null|callable(Builder $request, static $apiResource): Builder $filters [optional] Callback that applies filters on the given Request {@see Builder}.
      *                               The callback MUST return a valid {@see Builder}
      * @param int $size [optional] The "pool" size - maximum limit of results to fetch per request
      * @param string|ConnectionInterface|null $connection [optional] Redmine connection profile
@@ -456,9 +458,9 @@ interface ApiResource extends Dto,
      *
      * Handler is used by the {@see prepareNextRequest()} method.
      *
-     * @param  callable  $handler
+     * @param  callable(Status $status, ResponseInterface $response, RequestInterface $request): void  $handler
      *
-     * @return callable Previous set expectation handler
+     * @return callable(Status $status, ResponseInterface $response, RequestInterface $request): void Previous set expectation handler
      */
     public function useFailedExpectationHandler(callable $handler): callable;
 
@@ -467,7 +469,7 @@ interface ApiResource extends Dto,
      *
      * Handler is used by the {@see prepareNextRequest()} method.
      *
-     * @return callable
+     * @return callable(Status $status, ResponseInterface $response, RequestInterface $request): void
      */
     public function failedExpectationHandler(): callable;
 

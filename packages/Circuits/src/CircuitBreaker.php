@@ -85,7 +85,7 @@ class CircuitBreaker implements
     /**
      * The default otherwise callback
      *
-     * @var callable|null
+     * @var null|callable(static): mixed
      */
     protected $otherwise = null;
 
@@ -410,8 +410,8 @@ class CircuitBreaker implements
      * Reports success, if `$callback` succeeds, otherwise method
      * will report failure.
      *
-     * @param  callable  $callback
-     * @param  callable  $otherwise
+     * @param  callable(static): mixed  $callback
+     * @param  callable(static): mixed  $otherwise
      *
      * @return mixed
      *
@@ -455,8 +455,8 @@ class CircuitBreaker implements
      * If unable to change state, the `$otherwise` callback is invoked.
      *
      * @param State $state Current state
-     * @param callable $callback
-     * @param callable $otherwise
+     * @param callable(static): mixed $callback
+     * @param callable(static): mixed $otherwise
      *
      * @return mixed
      *
@@ -515,7 +515,7 @@ class CircuitBreaker implements
     /**
      * Invokes given callback
      *
-     * @param callable $callback
+     * @param callable(static): mixed $callback
      *
      * @return mixed Resulting output of callback
      */
@@ -529,7 +529,7 @@ class CircuitBreaker implements
      *
      * @see attempt
      *
-     * @return callable
+     * @return callable(static): mixed
      */
     protected function defaultOtherwiseCallback(): callable
     {

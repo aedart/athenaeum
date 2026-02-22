@@ -58,7 +58,7 @@ interface Stream extends StreamInterface,
      *
      * Method will fail, if stream is already opened!
      *
-     * @param  callable  $callback Callback must return a resource
+     * @param  callable(static): resource|mixed  $callback Callback must return a resource
      *
      * @return self
      *
@@ -249,7 +249,7 @@ interface Stream extends StreamInterface,
     /**
      * Read all contents using given callback
      *
-     * @param  callable  $callback Callback is invoked until end-of-file is reached.
+     * @param  callable(resource): mixed  $callback Callback is invoked until end-of-file is reached.
      *                             This stream's resource as argument.
      *                             Callback MUST read from stream resource return data!
      *
@@ -281,11 +281,11 @@ interface Stream extends StreamInterface,
      *
      * Any value returned by the callback methods, is ignored.
      *
-     * @param  bool|callable  $result E.g. the boolean result of a condition. If callback is given, then its
+     * @param  bool|callable(static): bool  $result E.g. the boolean result of a condition. If callback is given, then its
      *                              resulting value is used as result.
-     * @param  callable  $callback The callback to apply, if result is `true`.
+     * @param  callable(static): void  $callback The callback to apply, if result is `true`.
      *                          Stream instance is given as callback's argument.
-     * @param  callable|null  $otherwise [optional] Callback to apply, if result evaluates is `false`.
+     * @param  null|callable(static): void  $otherwise [optional] Callback to apply, if result evaluates is `false`.
      *                          Stream instance is given as callback's argument.
      *
      * @return self
@@ -299,11 +299,11 @@ interface Stream extends StreamInterface,
      *
      * Any value returned by the callback methods, is ignored.
      *
-     * @param  bool|callable  $result E.g. the boolean result of a condition. If callback is given, then its
+     * @param  bool|callable(static): bool  $result E.g. the boolean result of a condition. If callback is given, then its
      *                              resulting value is used as result.
-     * @param  callable  $callback The callback to apply, if result is `false`.
+     * @param  callable(static): void  $callback The callback to apply, if result is `false`.
      *                          Stream instance is given as callback's argument.
-     * @param  callable|null  $otherwise [optional] Callback to apply, if result evaluates is `true`.
+     * @param  null|callable(static): void  $otherwise [optional] Callback to apply, if result evaluates is `true`.
      *                          Stream instance is given as callback's argument.
      *
      * @return self
@@ -313,7 +313,7 @@ interface Stream extends StreamInterface,
     /**
      * Performs an operation and rewinds the position afterward
      *
-     * @param  callable  $operation Callback to invoke. This stream is given as callback argument
+     * @param  callable(static): mixed  $operation Callback to invoke. This stream is given as callback argument
      *
      * @return mixed Callback return value, if any
      *
@@ -324,7 +324,7 @@ interface Stream extends StreamInterface,
     /**
      * Performs an operation and restores the position afterward
      *
-     * @param  callable  $operation Callback to invoke. This stream is given as callback argument
+     * @param  callable(static): mixed  $operation Callback to invoke. This stream is given as callback argument
      *
      * @return mixed Callback return value, if any
      *

@@ -31,7 +31,7 @@ interface Transaction
      * again, if the maximum amount of retries has not been exceeded. If maximum retries
      * is reached, then transaction is rolled back and exception is thrown.
      *
-     * @param  callable  $operation Operation callback is given a {@see Stream} and this
+     * @param  callable(Stream|null $processStream, static $stream): mixed  $operation Operation callback is given a {@see Stream} and this
      *                              transaction instance as arguments.
      * @param  int  $attempts  [optional] Maximum amount of attempts to perform operation
      *

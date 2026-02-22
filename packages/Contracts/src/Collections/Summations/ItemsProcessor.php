@@ -36,7 +36,7 @@ interface ItemsProcessor
      * Apply a callback onto the Summation Collection, before
      * items are processed.
      *
-     * @param  callable(Summation): (Summation)|null  $callback  [optional] Summation Collection is given
+     * @param  null|callable(Summation): Summation  $callback  [optional] Summation Collection is given
      *                                   as argument to callback, when invoked.
      *                                   Callback MUST return a Summation Collection!
      *
@@ -48,7 +48,7 @@ interface ItemsProcessor
      * Apply a callback onto the Summation Collection, before
      * items are processed.
      *
-     * @param  callable(Summation): (Summation)|null  $callback  [optional] Summation Collection is given
+     * @param  null|callable(Summation): Summation  $callback  [optional] Summation Collection is given
      *                                   as argument to callback, when invoked.
      *                                   Callback MUST return a Summation Collection!
      *

@@ -7,6 +7,8 @@ use Aedart\Contracts\Audit\CallbackReason;
 /**
  * Audit Callback Reason
  *
+ * @template M of \Illuminate\Database\Eloquent\Model
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Helpers
  */
@@ -15,7 +17,7 @@ class Reason implements CallbackReason
     /**
      * Callback that resolves audit trail entry reason
      *
-     * @var callable|null
+     * @var null|callable(M $model, string $type): string
      */
     protected $reason = null;
 

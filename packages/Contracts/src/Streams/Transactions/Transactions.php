@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Streams\Transactions;
 
 use Aedart\Contracts\Streams\Exceptions\TransactionException;
+use Aedart\Contracts\Streams\Stream;
 use Throwable;
 
 /**
@@ -18,7 +19,7 @@ interface Transactions extends TransactionFactoryAware
      *
      * @see Transaction::process()
      *
-     * @param  callable  $operation Operation callback is given a {@see Stream} and this
+     * @param  callable(Stream|null $processStream, static $stream): mixed  $operation Operation callback is given a {@see Stream} and this
      *                              transaction instance as arguments.
      * @param  int  $attempts  [optional] Maximum amount of attempts to perform operation
      * @param  string|null  $profile  [optional] Transaction profile driver to use. If `null`, then a default driver is used.

@@ -96,7 +96,7 @@ abstract class RedmineApiResource extends ArrayDto implements ApiResource
      *
      * Applied only when {@see $enableExpectations} is enabled
      *
-     * @var callable
+     * @var callable(Status $status, ResponseInterface $response, RequestInterface $request): void
      */
     protected $failedExpectationHandler;
 
