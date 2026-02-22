@@ -32,8 +32,9 @@ interface Lockable extends LockFactoryAware
      * @see \Aedart\Contracts\Streams\Locks\Lock
      * @see Stream::supportsLocking()
      *
-     * @param  callable  $operation Callback to invoke. This stream instance and acquired lock are given
-     *                              as callback arguments.
+     * @param  callable(Stream $stream, Lock $lock): mixed  $operation Callback to invoke.
+     *                                                      This stream instance and acquired lock are given
+     *                                                      as callback arguments.
      * @param  int  $type  [optional] The type of lock. {@see LockTypes::EXCLUSIVE} lock (writer) or {@see LockTypes::SHARED} lock (reader).
      * @param  float  $timeout  [optional] Timeout of acquiring lock in seconds.
      * @param  string|null  $profile  [optional] Lock profile driver to use. If `null`, then a default driver is used.
@@ -58,7 +59,7 @@ interface Lockable extends LockFactoryAware
      *
      * @see lock()
      *
-     * @param  callable  $operation
+     * @param  callable(Stream $stream, Lock $lock): mixed  $operation
      * @param  float  $timeout  [optional]
      * @param  string|null  $profile  [optional]
      * @param  array  $options  [optional]
@@ -81,7 +82,7 @@ interface Lockable extends LockFactoryAware
      *
      * @see lock()
      *
-     * @param  callable  $operation
+     * @param  callable(Stream $stream, Lock $lock): mixed  $operation
      * @param  float  $timeout  [optional]
      * @param  string|null  $profile  [optional]
      * @param  array  $options  [optional]

@@ -20,7 +20,7 @@ interface ListResolver
      *
      * @see with
      *
-     * @param  array  $dependencies  List of class paths, identifiers or key-value pairs, where
+     * @param  array<class-string>|array<class-string, mixed>  $dependencies  List of class paths, identifiers or key-value pairs, where
      *                              key = class path, value = instance arguments.
      *
      * @return array
@@ -32,7 +32,9 @@ interface ListResolver
     /**
      * Add callback to be invoked for each resolved instance
      *
-     * @param  callable  $callback  Resolved instance is given as callback argument.
+     * @template R of mixed Resolve Instance
+     *
+     * @param  callable(R $instance): R  $callback  Resolved instance is given as callback argument.
      *                             Callback MUST return the resolved instance!
      *
      * @return self

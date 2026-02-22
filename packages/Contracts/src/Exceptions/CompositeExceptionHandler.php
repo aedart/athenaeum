@@ -18,7 +18,7 @@ interface CompositeExceptionHandler extends ExceptionHandler
     /**
      * Add a "leaf" exception handler
      *
-     * @param string|ExceptionHandler  $handler Class path or exception handler instance
+     * @param class-string<ExceptionHandler>|ExceptionHandler  $handler Class path or exception handler instance
      *
      * @return self
      *
@@ -29,7 +29,7 @@ interface CompositeExceptionHandler extends ExceptionHandler
     /**
      * Set the "leaf" exception handlers
      *
-     * @param string[]|ExceptionHandler[] $handlers [optional] List of class paths or instances
+     * @param array<class-string<ExceptionHandler>|ExceptionHandler> $handlers [optional] List of class paths or instances
      *
      * @return self
      *

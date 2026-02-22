@@ -102,7 +102,7 @@ trait MultipleRecords
      * @see whenRecordsAreFound
      *
      * @param string[]|int[] $targets List of unique identifiers
-     * @param string $model Class path to model to be used
+     * @param class-string<Model> $model Class path to model to be used
      * @param string|null $targetsKey [optional] Defaults to {@see targetsKey()} when none given
      * @param string|null $modelKey [optional] Defaults to {@see modelKeyName()} when none given
      *
@@ -169,7 +169,7 @@ trait MultipleRecords
      * Find requested targets, using given model
      *
      * @param string[]|int[] $targets Unique list of identifiers
-     * @param string $model Class path to model that must be used
+     * @param class-string<Model> $model Class path to model that must be used
      * @param string $key [optional] Unique key in model to match against targets
      * @param array|null $relations [optional] Evt. relations to eager-load. Defaults to {@see with()} set relations
      * @param callable|null $relationsCallback [optional] Evt. relations callback. Defaults to {@see with()} set callback

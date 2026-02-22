@@ -23,10 +23,11 @@ class ListResolver implements
     use ContainerTrait;
 
     /**
-     * Callback to be applied for each resolved
-     * instance.
+     * Callback to be applied for each resolved instance.
      *
-     * @var callable|null
+     * @template R of mixed Resolve Instance
+     *
+     * @var null|callable(R $instance): R
      */
     protected $callback = null;
 
@@ -71,7 +72,7 @@ class ListResolver implements
     /**
      * Resolve given key-value pair
      *
-     * @param  string|int  $key  String class path or array index, in which
+     * @param  class-string|int  $key  String class path or array index, in which
      *                        case it will be ignored
      * @param  mixed  $value  String class path or instance arguments.
      *

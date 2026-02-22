@@ -118,8 +118,8 @@ interface CircuitBreaker
      * @see times
      * @see retryDelay
      *
-     * @param callable $callback Request or action to invoke on 3rd party service
-     * @param callable|null $otherwise [optional] This callback is invoked if state is {@see OPEN}
+     * @param callable(static): mixed $callback Request or action to invoke on 3rd party service
+     * @param null|callable(static): mixed $otherwise [optional] This callback is invoked if state is {@see OPEN}
      *                      or if `$callback` fails.
      *
      * @return mixed Callback's resulting output. If `$otherwise` callback is provided,
@@ -136,7 +136,7 @@ interface CircuitBreaker
      * This callback is only invoked if not `$otherwise` callback is provided,
      * when {@see attempt} is invoked.
      *
-     * @param  callable|null  $otherwise  [optional] Default callback to invoke, if state is {@see OPEN}
+     * @param  null|callable(static): mixed  $otherwise  [optional] Default callback to invoke, if state is {@see OPEN}
      *
      * @return self
      */
@@ -148,7 +148,7 @@ interface CircuitBreaker
      *
      * @see otherwise
      *
-     * @return callable If no default was set, a built-in default callback MUST
+     * @return callable(static): mixed If no default was set, a built-in default callback MUST
      *                  be returned.
      */
     public function getOtherwise(): callable;

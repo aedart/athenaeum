@@ -7,6 +7,10 @@ use Aedart\Contracts\Http\Api\Resources\Relations\Exceptions\RelationReferenceEx
 /**
  * Relation Reference
  *
+ * @template M of \Illuminate\Database\Eloquent\Model
+ * @template C of \Illuminate\Database\Eloquent\Collection<M>
+ * @template R of \Illuminate\Http\Request
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Api\Resources\Relations
  */
@@ -27,7 +31,7 @@ interface RelationReference
     /**
      * Set callback that formats the loaded relation
      *
-     * @param  callable(\Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection $relation, static $relationReference): mixed  $callback
+     * @param  callable(M|C $relation, static $relationReference): mixed  $callback
      *                             The eager-loaded relation model or collection is given
      *                             as callback argument, along with this relation reference.
      *                             The callback MUST return some kind of value. Null is a
@@ -61,7 +65,7 @@ interface RelationReference
     /**
      * Set the current request
      *
-     * @param \Illuminate\Http\Request $request
+     * @param R $request
      *
      * @return self
      */
@@ -70,7 +74,7 @@ interface RelationReference
     /**
      * Returns the current request
      *
-     * @return \Illuminate\Http\Request|null
+     * @return R|null
      */
     public function getRequest();
 
@@ -85,7 +89,7 @@ interface RelationReference
      * Returns the Api Resource's assigned Eloquent model,
      * that contains the target relation
      *
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @return M|null
      */
     public function getModel();
 
@@ -93,7 +97,7 @@ interface RelationReference
      * Returns related model or collection of models,
      * if the relation was eager loaded
      *
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection<\Illuminate\Database\Eloquent\Model>|null
+     * @return M|C|null
      */
     public function getEagerLoadedRelation();
 

@@ -31,7 +31,7 @@ class Manager implements
     /**
      * List of instantiated scanners
      *
-     * @var Scanner[] Key = profile name, Value = Scanner instance
+     * @var array<string, Scanner>
      */
     protected array $scanners = [];
 

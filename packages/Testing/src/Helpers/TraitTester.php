@@ -55,7 +55,7 @@ class TraitTester
      * TraitTester constructor.
      *
      * @param TestCase $testCase
-     * @param string $trait Trait class path
+     * @param class-string $trait Trait class path
      * @param string|null $property [optional]
      *
      * @throws ReflectionException

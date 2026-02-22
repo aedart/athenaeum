@@ -28,7 +28,7 @@ trait Middleware
     /**
      * Collection of middleware
      *
-     * @var Collection|null
+     * @var Collection<MiddlewareInterface>|null
      */
     protected Collection|null $middleware = null;
 
@@ -130,7 +130,7 @@ trait Middleware
     /**
      * Resolve middleware instance
      *
-     * @param  string|MiddlewareInterface  $middleware
+     * @param  class-string<MiddlewareInterface>|MiddlewareInterface  $middleware
      *
      * @return MiddlewareInterface
      *
@@ -150,7 +150,7 @@ trait Middleware
      *
      * @param MiddlewareInterface[] $middleware
      *
-     * @return Collection
+     * @return Collection<MiddlewareInterface>
      */
     protected function makeMiddlewareCollation(array $middleware = []): Collection
     {

@@ -54,7 +54,7 @@ class HasMany extends ResourceRelation
      * Creates new has many resource relation instance
      *
      * @param  ApiResource  $parent
-     * @param  string|ApiResource  $related Class path or Api resource instance
+     * @param  class-string<ApiResource>|ApiResource  $related Class path or Api resource instance
      * @param  string|null  $filterKey  [optional] name of the filtering key to be applied
      *                                  when obtaining the related resources
      */

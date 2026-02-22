@@ -268,7 +268,7 @@ trait IoCPartial
     /**
      * Builds the given class and populates it
      *
-     * @param string $class Class path to instantiate / resolve from IoC
+     * @param class-string $class Class path to instantiate / resolve from IoC
      * @param ReflectionParameter|string $parameter Name of property or property reflection
      * @param mixed $value The value to be passed to the setter method
      *
@@ -299,7 +299,7 @@ trait IoCPartial
     /**
      * Resolve instance from Service Container
      *
-     * @param  string  $class
+     * @param  class-string  $class
      * @param  string  $property
      * @param  mixed  $value
      *

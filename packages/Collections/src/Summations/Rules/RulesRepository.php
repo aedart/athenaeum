@@ -29,7 +29,7 @@ class RulesRepository implements
     /**
      * List of processing rules
      *
-     * @var ProcessingRule[]|string[]
+     * @var array<ProcessingRule|class-string<ProcessingRule>>
      */
     protected array $rules = [];
 
@@ -43,7 +43,7 @@ class RulesRepository implements
     /**
      * RulesRepository constructor.
      *
-     * @param  string[]|ProcessingRule[]  $rules  [optional] List of class paths or Processing Rules instances
+     * @param  array<ProcessingRule|class-string<ProcessingRule>>  $rules  [optional] List of class paths or Processing Rules instances
      * @param  Container|null  $container  [optional]
      */
     public function __construct(array $rules = [], Container|null $container = null)
@@ -113,6 +113,8 @@ class RulesRepository implements
 
     /**
      * @inheritDoc
+     *
+     * @return array<ProcessingRule|class-string<ProcessingRule>>
      */
     public function toArray(): array
     {

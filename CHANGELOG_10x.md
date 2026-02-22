@@ -20,6 +20,7 @@ Temporary changelog for `v10.x` series.
 * The `Paths` container has been redesigned to inherit from `ArrayDto`. It no longer depends on the removed "Aware-of" components. (_Core package_). [#211](https://github.com/aedart/athenaeum/issues/211).
 * Audit Trail Record formatting is now applied via new `Formatter`, performed via `\Aedart\Audit\Events\Concerns\EventData::format()` (_Audit Trail package_).
 * Moved `formatDatetime()` from `\Aedart\Audit\Observers\Concerns\ModelAttributes` to `\Aedart\Audit\Events\Concerns\EventData` (_Audit Trail package_).
+* Changed return type of `Summation::dd()` from `void` to `never` (_Collections package_).
 
 **Non-breaking Changes**
 
@@ -32,7 +33,7 @@ Temporary changelog for `v10.x` series.
 * `RequestMustBeJson` middleware has been refactored to use a static array of target HTTP methods (_Http Api package_).
 * `RemoveResponsePayload` middleware now uses a static array of truthy values (_Http Api package_).
 * Improved `resolveContent()` method in `GenericGenerator` (_ETags package_).
-* Improved PHPDoc for `callable` parameters (_ETags and Http Api packages_).
+* Improved PHPDoc for `callable` and "class paths" parameters (_throughout multiple packages_).
 
 ### Fixed
 

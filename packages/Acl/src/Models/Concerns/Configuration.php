@@ -22,21 +22,21 @@ trait Configuration
     /**
      * In-memory Cache of acl models' class paths
      *
-     * @var array key = identifier, value = class path
+     * @var array<string, class-string> key = identifier, value = class path
      */
     protected static array $aclModels = [];
 
     /**
      * In-memory Cache of acl table names
      *
-     * @var array key = identifier, value = table name
+     * @var array<string, class-string> key = identifier, value = table name
      */
     protected static array $aclTables = [];
 
     /**
      * Returns the class path to the user eloquent model
      *
-     * @return string
+     * @return class-string
      */
     public function aclUserModel(): string
     {
@@ -60,7 +60,7 @@ trait Configuration
     /**
      * Returns class path to role eloquent model
      *
-     * @return string
+     * @return class-string
      */
     public function aclRoleModel(): string
     {
@@ -100,7 +100,7 @@ trait Configuration
     /**
      * Returns class path to permission group eloquent model
      *
-     * @return string
+     * @return class-string
      */
     public function aclPermissionsGroupModel(): string
     {
@@ -122,7 +122,7 @@ trait Configuration
      *
      * @param string $identifier
      *
-     * @return string|null
+     * @return class-string|null
      */
     public function aclModel(string $identifier): string|null
     {
@@ -138,7 +138,7 @@ trait Configuration
      *
      * @param string $identifier
      *
-     * @return string|null
+     * @return class-string|null
      */
     public function aclTable(string $identifier): string|null
     {

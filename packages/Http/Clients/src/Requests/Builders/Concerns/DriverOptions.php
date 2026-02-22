@@ -115,7 +115,7 @@ trait DriverOptions
      * @see makePipeline
      * @see \Illuminate\Contracts\Pipeline\Pipeline
      *
-     * @param string[] $pipes List of class paths
+     * @param array<class-string> $pipes List of class paths
      * @param array $options [optional]
      *
      * @return array Processed Driver Options
