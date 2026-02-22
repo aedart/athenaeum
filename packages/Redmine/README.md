@@ -32,33 +32,10 @@ Issue::findOrFail(9874)
     ->delete();
 ```
 
-## Compatibility
+## Compatibility and Limitations
 
-| Athenaeum Redmine Client | Redmine version |
-|--------------------------|-----------------|
-| From `v5.19`             | `>= v4.x`*      |
-
-*:_This package might also work with newer versions of Redmine._
-
-## Limitations
-
-This package offers "Resources" that cover most of Redmine's [REST Api](https://www.redmine.org/projects/redmine/wiki/rest_api).
-Yet, if you have previously worked with Redmine's API, then you know that it can be somewhat inconsistent. Depending on the resource that you are working with, you might not be able to perform certain operations, because it's not supported by the API.
-You might therefore experience the following exception:
-
-```php
-\Aedart\Contracts\Redmine\Exceptions\UnsupportedOperationException
-```
-
-Please consult yourself with [Redmine's Api documentation](https://www.redmine.org/projects/redmine/wiki/rest_api), to review what operations the current API version supports.
-
-## Alternative
-
-You might also be interested in alternative Redmine API Clients:
-
-* [tuner88/laravel-redmine-api](https://packagist.org/packages/tuner88/laravel-redmine-api), Laravel wrapper for `kbsali/redmine-api`
-* [limetecbiotechnologies/redmineapibundle ](https://packagist.org/packages/limetecbiotechnologies/redmineapibundle), Symfony wrapper for `kbsali/redmine-api`
-* [kbsali/redmine-api](https://packagist.org/packages/kbsali/redmine-api)
+Please consult yourself with [Redmine's Api documentation](https://www.redmine.org/projects/redmine/wiki/rest_api), and this [package's documentation](https://aedart.github.io/athenaeum/archive/current/redmine/)
+for details concerning compatibility and limitations.
 
 ## Documentation
 
