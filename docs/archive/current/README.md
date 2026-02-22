@@ -59,12 +59,15 @@ class UserAuditTrailFormatter extends BaseFormatter
 
 See the [upgrade guide](./upgrade-guide.md#audit-trail) for details.
 
+### Improved PHPDoc
+
+Callback signatures for `callable` have been defined, where such has been possible. 
+In addition, `string` params have been replaced with `class-string<...>`, where class path is expected.
+
 ### Removed "Aware-of" Components
 
 The "aware-of" components have been removed.
 Please see the [upgrade guide](./upgrade-guide.md#removed-aware-of-components) for additional details.
-
-### ...TODO
 
 ## Changelog
 
