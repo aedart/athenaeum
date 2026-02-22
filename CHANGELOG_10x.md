@@ -33,7 +33,8 @@ Temporary changelog for `v10.x` series.
 * `RequestMustBeJson` middleware has been refactored to use a static array of target HTTP methods (_Http Api package_).
 * `RemoveResponsePayload` middleware now uses a static array of truthy values (_Http Api package_).
 * Improved `resolveContent()` method in `GenericGenerator` (_ETags package_).
-* Improved PHPDoc for `callable` and "class paths" parameters (_throughout multiple packages_).
+* Callback signatures for `callable` have been defined (_PHPDoc_).
+* `string` params have been replaced with `class-string<...>`, where class path is expected (_PHPDoc_).
 
 ### Fixed
 
