@@ -3,7 +3,7 @@
         "squizlabs/php_codesniffer": "^3.13.5",
         "symplify/easy-coding-standard": "^12.6.2",
         "phpcompatibility/php-compatibility": "^9.3.5",
-        "dealerdirect/phpcodesniffer-composer-installer": "^1.1.2",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.2.0",
         "symplify/config-transformer": "^12.4.3"
     },
     "config": {
