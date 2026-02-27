@@ -20,7 +20,7 @@
     ],
     "type": "library",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "composer-runtime-api": "^2.2.2",
         "aedart/athenaeum-contracts": "^9.26",
         "illuminate/support": "^v12.53.0",

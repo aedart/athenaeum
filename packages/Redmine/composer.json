@@ -16,7 +16,7 @@
     ],
     "type": "library",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "ext-json": "*",
         "aedart/athenaeum-dto": "^9.26",
         "aedart/athenaeum-http-clients": "^9.26",
