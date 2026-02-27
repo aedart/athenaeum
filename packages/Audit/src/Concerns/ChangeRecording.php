@@ -153,6 +153,7 @@ trait ChangeRecording
      *
      * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function originalData(string $type): array|null
     {
         if ($this->shouldOmitDataFor($type)) {
@@ -178,6 +179,7 @@ trait ChangeRecording
      *
      * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function formatOriginalData(array|null $filtered, string $type): array|null
     {
         return $filtered;
@@ -193,6 +195,7 @@ trait ChangeRecording
      *
      * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function changedData(string $type): array|null
     {
         if ($this->shouldOmitDataFor($type)) {
@@ -224,6 +227,7 @@ trait ChangeRecording
      *
      * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function formatChangedData(array|null $filtered, string $type): array|null
     {
         return $filtered;
@@ -244,6 +248,7 @@ trait ChangeRecording
      *
      * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function filterAuditData(array|null $attributes = null): array|null
     {
         if (empty($attributes)) {
@@ -269,6 +274,7 @@ trait ChangeRecording
      *
      * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function getHiddenForAudit(): array
     {
         if (!isset($this->hiddenInAuditTrail)) {
@@ -289,6 +295,7 @@ trait ChangeRecording
      *
      * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function makeHiddenForAudit(array|string|null $attributes): static
     {
         $attributes = is_array($attributes)
@@ -313,6 +320,7 @@ trait ChangeRecording
      *
      * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function attributesToHideForAudit(): array
     {
         // Use this method to hide attributes from Audit Trail entry
@@ -326,6 +334,7 @@ trait ChangeRecording
      *
      * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function auditTimestampAttributes(): array
     {
         $attributes = [
@@ -350,6 +359,7 @@ trait ChangeRecording
      *
      * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function shouldOmitDataFor(string $type): bool
     {
         $skipOn = [
@@ -379,6 +389,7 @@ trait ChangeRecording
      *
      * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} to customise audit trail message
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function getAuditTrailMessage(string $type): string|null
     {
         return null;
