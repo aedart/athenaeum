@@ -31,8 +31,8 @@ trait ModelAttributes
      * @throws Throwable
      *
      * @deprecated Since v10.x, Will be removed in next major version.
-     *
      */
+    #[\Deprecated(message: "ModelAttributes trait will be removed in next major version. Use \Aedart\Audit\Formatters\DefaultRecordFormatter instead.", since: "10.x")]
     protected function resolveOriginalData(Model $model, string $type): mixed
     {
         return Invoker::invoke([$model, 'originalData'])
@@ -54,8 +54,8 @@ trait ModelAttributes
      * @throws Throwable
      *
      * @deprecated Since v10.x, Will be removed in next major version.
-     *
      */
+    #[\Deprecated(message: "ModelAttributes trait will be removed in next major version. Use \Aedart\Audit\Formatters\DefaultRecordFormatter instead.", since: "10.x")]
     protected function resolveChangedData(Model $model, string $type): mixed
     {
         return Invoker::invoke([$model, 'changedData'])
@@ -76,6 +76,7 @@ trait ModelAttributes
      *
      * @deprecated Since v10.x, Will be removed in next major version.
      */
+    #[\Deprecated(message: "ModelAttributes trait will be removed in next major version. Use \Aedart\Audit\Formatters\DefaultRecordFormatter instead.", since: "10.x")]
     protected function reduceOriginal(array|null $original, array|null $changed): array|null
     {
         if (!empty($original) && !empty($changed)) {
@@ -95,6 +96,7 @@ trait ModelAttributes
      *
      * @deprecated Since v10.x, Will be removed in next major version.
      */
+    #[\Deprecated(message: "ModelAttributes trait will be removed in next major version. Use \Aedart\Audit\Formatters\DefaultRecordFormatter instead.", since: "10.x")]
     protected function resolveAuditTrailMessage(Model $model, string $type): string|null
     {
         // Resolve message from "callback", when one exists
@@ -121,6 +123,7 @@ trait ModelAttributes
      *
      * @deprecated Since v10.x, Will be removed in next major version.
      */
+    #[\Deprecated(message: "ModelAttributes trait will be removed in next major version. Use \Aedart\Audit\Formatters\DefaultRecordFormatter instead.", since: "10.x")]
     protected function pluck(array $keys, array $target): array
     {
         return collect($target)
