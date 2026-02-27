@@ -40,7 +40,7 @@ Temporary changelog for `v10.x` series.
 
 ### Fixed
 
-* N/A
+* Passing `E_USER_ERROR` to `trigger_error()` is deprecated since 8.4, in `tests/_data/exceptions/handles-shutdown.php`.
 
 ### Removed
 
