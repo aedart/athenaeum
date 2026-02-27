@@ -17,6 +17,8 @@ Temporary changelog for `v10.x` series.
 
 **Breaking Changes**
 
+* Minimum required PHP version changed to `v8.4`.
+* Adapted CI environment to test PHP `v8.4` and `v8.5`.
 * The `Paths` container has been redesigned to inherit from `ArrayDto`. It no longer depends on the removed "Aware-of" components. (_Core package_). [#211](https://github.com/aedart/athenaeum/issues/211).
 * Audit Trail Record formatting is now applied via new `Formatter`, performed via `\Aedart\Audit\Events\Concerns\EventData::format()` (_Audit Trail package_).
 * Moved `formatDatetime()` from `\Aedart\Audit\Observers\Concerns\ModelAttributes` to `\Aedart\Audit\Events\Concerns\EventData` (_Audit Trail package_).
@@ -38,7 +40,7 @@ Temporary changelog for `v10.x` series.
 
 ### Fixed
 
-* N/A
+* Passing `E_USER_ERROR` to `trigger_error()` is deprecated since 8.4, in `tests/_data/exceptions/handles-shutdown.php`.
 
 ### Removed
 

@@ -16,7 +16,7 @@
     ],
     "type": "library",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "ext-sockets": "*",
         "aedart/athenaeum-contracts": "^9.26",
         "aedart/athenaeum-streams": "^9.26",

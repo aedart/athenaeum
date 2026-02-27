@@ -16,7 +16,7 @@
     ],
     "type": "library",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "aedart/athenaeum-config": "^9.26",
         "aedart/athenaeum-console": "^9.26",
         "aedart/athenaeum-container": "^9.26",

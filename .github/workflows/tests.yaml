@@ -31,7 +31,7 @@ jobs:
 
         # See OS and PHP version options on https://github.com/shivammathur/setup-php
         operating-system: [ 'ubuntu-24.04' ]
-        php-versions: [ '8.3', '8.4' ]
+        php-versions: [ '8.4', '8.5' ]
 
     steps:
 
