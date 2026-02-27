@@ -139,7 +139,7 @@
             "@composer bin all update --ansi"
         ],
         "check": [
-            "vendor-bin/cs/vendor/squizlabs/php_codesniffer/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary --runtime-set testVersion 8.3- ./packages ./tests"
+            "vendor-bin/cs/vendor/squizlabs/php_codesniffer/bin/phpcs -p --standard=PHPCompatibility --colors --report-full --report-summary --runtime-set testVersion 8.4- ./packages ./tests"
         ],
         "cs": "vendor-bin/cs/vendor/symplify/easy-coding-standard/bin/ecs check --ansi",
         "cs-fix": "vendor-bin/cs/vendor/symplify/easy-coding-standard/bin/ecs check --fix --ansi",
