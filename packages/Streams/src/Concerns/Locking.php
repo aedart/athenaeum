@@ -3,7 +3,7 @@
 namespace Aedart\Streams\Concerns;
 
 use Aedart\Contracts\Streams\Locks\Factory;
-use Aedart\Contracts\Streams\Locks\LockTypes;
+use Aedart\Contracts\Streams\Locks\LockType;
 use Aedart\Streams\Locks\LockFactory;
 use Aedart\Streams\Traits\LockFactoryTrait;
 use Aedart\Support\Facades\IoCFacade;
@@ -25,7 +25,7 @@ trait Locking
      */
     public function lock(
         callable $operation,
-        int $type = LockTypes::EXCLUSIVE,
+        int|LockType $type = LockType::EXCLUSIVE,
         float $timeout = 0.5,
         string|null $profile = null,
         array $options = []
@@ -60,7 +60,7 @@ trait Locking
     ): mixed {
         return $this->lock(
             $operation,
-            LockTypes::EXCLUSIVE,
+            LockType::EXCLUSIVE,
             $timeout,
             $profile,
             $options
@@ -78,7 +78,7 @@ trait Locking
     ): mixed {
         return $this->lock(
             $operation,
-            LockTypes::SHARED,
+            LockType::SHARED,
             $timeout,
             $profile,
             $options

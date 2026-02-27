@@ -67,7 +67,7 @@ return [
                     'profile' => env('STREAM_LOCK', 'default'),
 
                     // Type of lock to be used
-                    'type' => \Aedart\Contracts\Streams\Locks\LockTypes::EXCLUSIVE,
+                    'type' => \Aedart\Contracts\Streams\Locks\LockType::EXCLUSIVE,
 
                     // Acquire lock timeout in seconds
                     'timeout' => 0.5,

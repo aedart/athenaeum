@@ -2,7 +2,7 @@
 
 namespace Aedart\Streams\Locks\Drivers;
 
-use Aedart\Contracts\Streams\Locks\LockTypes;
+use Aedart\Contracts\Streams\Locks\LockType;
 use Aedart\Contracts\Streams\Stream;
 use Aedart\Streams\Exceptions\Locks\AcquireLockTimeout;
 use InvalidArgumentException;
@@ -18,26 +18,10 @@ use InvalidArgumentException;
 class FLockDriver extends BaseLockDriver
 {
     /**
-     * Lock type map
-     *
-     * @var array
-     */
-    protected static array $lockTypeMap = [
-        LockTypes::SHARED => LOCK_SH,
-        LockTypes::EXCLUSIVE => LOCK_EX,
-    ];
-
-    /**
      * @inheritDoc
      */
-    public function acquireLock(Stream $stream, int $type, float $timeout): bool
+    public function acquireLock(Stream $stream, LockType $type, float $timeout): bool
     {
-        if (!isset(static::$lockTypeMap[$type])) {
-            throw new InvalidArgumentException(sprintf('Lock type %d is not supported', $type));
-        }
-
-        $type = static::$lockTypeMap[$type];
-
         // Resolve sleep duration (microsecond) Default = 0.01 seconds
         $sleep = $this->get('sleep', 10_000);
         if ($sleep < 1) {
@@ -48,7 +32,7 @@ class FLockDriver extends BaseLockDriver
         $start = microtime(true);
 
         // Attempt to acquire lock
-        while (flock($resource, $type | LOCK_NB, $blocking) === false) {
+        while (flock($resource, $type->operation() | LOCK_NB, $blocking) === false) {
             // Continue if timeout not reached
             $delta = (microtime(true) - $start);
             if ($blocking && $delta <= $timeout) {
