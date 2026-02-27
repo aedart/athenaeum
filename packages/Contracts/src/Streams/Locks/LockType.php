@@ -39,7 +39,7 @@ enum LockType: int
      */
     public function operation(): int
     {
-        return match($this) {
+        return match ($this) {
             LockType::SHARED => LOCK_SH,
             LockType::EXCLUSIVE => LOCK_EX,
         };
