@@ -21,7 +21,10 @@ interface SetCookie extends Cookie
      * included. [...]" (mozilla.org)
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies
+     *
+     * @deprecated use {@see \Aedart\Contracts\Http\Cookies\SameSite::STRICT} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Contracts\Http\Cookies\SameSite::STRICT instead", since: "10.x")]
     public const string SAME_SITE_STRICT = 'strict';
 
     /**
@@ -32,7 +35,10 @@ interface SetCookie extends Cookie
      * from an external site [...]" (mozilla.org)
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies
+     *
+     * @deprecated use {@see \Aedart\Contracts\Http\Cookies\SameSite::LAX} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Contracts\Http\Cookies\SameSite::LAX instead", since: "10.x")]
     public const string SAME_SITE_LAX = 'lax';
 
     /**
@@ -41,7 +47,10 @@ interface SetCookie extends Cookie
      * "[...] The browser will send cookies with both cross-site requests and same-site requests. [...]" (mozilla.org)
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies
+     *
+     * @deprecated use {@see \Aedart\Contracts\Http\Cookies\SameSite::NONE} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Contracts\Http\Cookies\SameSite::NONE instead", since: "10.x")]
     public const string SAME_SITE_NONE = 'none';
 
     /**
