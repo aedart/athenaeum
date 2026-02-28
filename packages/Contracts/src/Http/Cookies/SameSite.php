@@ -2,6 +2,8 @@
 
 namespace Aedart\Contracts\Http\Cookies;
 
+use ValueError;
+
 /**
  * Http Set-Cookie Same-Site Attribute
  *
@@ -39,4 +41,45 @@ enum SameSite: string
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#none
      */
     case NONE = 'None';
+
+    /**
+     * Returns all cases' values
+     *
+     * @return string[]
+     */
+    static public function values(): array
+    {
+        return array_map(fn ($case) => $case->value, self::cases());
+    }
+
+    /**
+     * Translates a string (case-insensitive) into the corresponding `SameSite` case, if any.
+     *
+     * @param  string  $value
+     *
+     * @return SameSite
+     *
+     * @throws ValueError if there is no matching case defined
+     *
+     * @see static::from()
+     */
+    static public function fromValue(string $value): SameSite
+    {
+        return self::from(ucfirst(strtolower($value)));
+    }
+
+    /**
+     * Translates a string (case-insensitive) into the corresponding `SameSite` case, if any.
+     * If there is no matching case defined, it will return null.
+     *
+     * @param  string  $value
+     *
+     * @return SameSite|null
+     *
+     * @see static::tryFrom()
+     */
+    static public function tryFromValue(string $value): SameSite|null
+    {
+        return self::tryFrom(ucfirst(strtolower($value)));
+    }
 }
