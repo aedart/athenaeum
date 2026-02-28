@@ -14,6 +14,7 @@ Temporary changelog for `v10.x` series.
 * `Arguments` and `Callback` concerns (_Utils package_).
 * `LockType` enum (_Streams package_).
 * `Type` enum (_Http Messages package_).
+* `SameSite` enum (_Http Cookies package_).
 
 ### Changed
 
@@ -27,6 +28,7 @@ Temporary changelog for `v10.x` series.
 * Refactored `FileStream`'s locking feature to use new `LockType` enum (_Streams package_).
 * Refactored Http Request `Builder` to use new Http Message `Type` enum (_Http Clients package_).
 * Refactored `RequestResponseDebugging` and `RequestresponseLogging` Middleware to use new Http Message `Type` enum (_Http Clients package_).
+* `getSameSite()` now returns `SameSite|null`, in `SetCookie` (_Http Cookies package_).
 * Changed return type of `Summation::dd()` from `void` to `never` (_Collections package_).
 
 **Non-breaking Changes**
@@ -39,6 +41,7 @@ Temporary changelog for `v10.x` series.
 * Changed event triggers pull requests to "opened", "reopened", and "ready_for_review", and enabled concurrency check (_GitHub actions_). [#241](https://github.com/aedart/athenaeum/issues/241).
 * `RequestMustBeJson` middleware has been refactored to use a static array of target HTTP methods (_Http Api package_).
 * `RemoveResponsePayload` middleware now uses a static array of truthy values (_Http Api package_).
+* `sameSite()` method now accepts `SameSite` enum case, in `SetCookie` (_Http Cookies package_).
 * Improved `resolveContent()` method in `GenericGenerator` (_ETags package_).
 * Callback signatures for `callable` have been defined (_PHPDoc_).
 * `string` params have been replaced with `class-string<...>`, where class path is expected (_PHPDoc_).
@@ -72,3 +75,6 @@ Temporary changelog for `v10.x` series.
 * `\Aedart\Audit\Concerns\ChangeRecording::$hiddenInAuditTrail`, replaced by `Formatter` components (_Audit Trail package_).
 * `\Aedart\Contracts\Streams\Locks\LockTypes`, replaced by `LockType` enum (_Streams package_).
 * `\Aedart\Contracts\Http\Messages\Types`, replaced by `Type` enum (_Http Messages package_).
+* `\Aedart\Contracts\Http\Cookies\SetCookie::SAME_SITE_STRICT`, replaced by `SameSite::STRICT` enum case (_Http Cookies package_).
+* `\Aedart\Contracts\Http\Cookies\SetCookie::SAME_SITE_LAX`, replaced by `SameSite::LAX` enum case (_Http Cookies package_).
+* `\Aedart\Contracts\Http\Cookies\SetCookie::SAME_SITE_NONE`, replaced by `SameSite::NONE` enum case (_Http Cookies package_).
