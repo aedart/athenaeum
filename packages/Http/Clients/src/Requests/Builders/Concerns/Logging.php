@@ -3,6 +3,7 @@
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Contracts\Http\Messages\Type;
 use Aedart\Support\Helpers\Logging\LogTrait;
 use Illuminate\Support\Str;
 use Psr\Http\Message\MessageInterface;
@@ -20,7 +21,7 @@ trait Logging
     /**
      * Request / Response logging callback
      *
-     * @var callable(string $type, MessageInterface $message, Builder $builder): (void)|null
+     * @var callable(Type $type, MessageInterface $message, Builder $builder): (void)|null
      */
     protected $logCallback = null;
 
@@ -54,7 +55,7 @@ trait Logging
      * Set the request / response logging callback to be
      * applied.
      *
-     * @param  callable(string $type, MessageInterface $message, Builder $builder): void  $callback
+     * @param  callable(Type $type, MessageInterface $message, Builder $builder): void  $callback
      *
      * @return Builder
      */
@@ -72,7 +73,7 @@ trait Logging
      */
     protected function makeNullLogCallback(): callable
     {
-        return function (string $type, MessageInterface $message, Builder $builder) {
+        return function (Type $type, MessageInterface $message, Builder $builder) {
             // N/A...
         };
     }
@@ -84,9 +85,9 @@ trait Logging
      */
     protected function makeLogCallback(): callable
     {
-        return function (string $type, MessageInterface $message, Builder $builder) {
+        return function (Type $type, MessageInterface $message, Builder $builder) {
             $this->getLog()->info(
-                Str::ucfirst($type),
+                Str::ucfirst($type->value),
                 $this->makeDebugContext($type, $message)
             );
         };

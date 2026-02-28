@@ -4,6 +4,7 @@ namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Messages\Exceptions\SerializationException;
+use Aedart\Contracts\Http\Messages\Type;
 use Aedart\Http\Messages\Traits\HttpSerializerFactoryTrait;
 use Psr\Http\Message\MessageInterface;
 use Symfony\Component\VarDumper\VarDumper;
@@ -26,7 +27,7 @@ trait Debugging
     /**
      * Request / Response callback to be applied.
      *
-     * @var callable(string $type, MessageInterface $message, Builder $builder): (void)|null
+     * @var callable(Type $type, MessageInterface $message, Builder $builder): (void)|null
      */
     protected $debugCallback = null;
 
@@ -65,20 +66,20 @@ trait Debugging
     /**
      * Creates a context array for given Http Message
      *
-     * @param string $type E.g. request or response
+     * @param Type $type E.g. request or response
      * @param  MessageInterface  $message
      * @return array
      *
      * @throws SerializationException
      */
-    public function makeDebugContext(string $type, MessageInterface $message): array
+    public function makeDebugContext(Type $type, MessageInterface $message): array
     {
         $serialized = $this
             ->getHttpSerializerFactory()
             ->make($message)
             ->toArray();
 
-        return [ $type => $serialized ];
+        return [ $type->value => $serialized ];
     }
 
     /*****************************************************************
@@ -89,7 +90,7 @@ trait Debugging
      * Set the request / response debug callback to be
      * applied.
      *
-     * @param  callable(string $type, MessageInterface $message, Builder $builder): void  $callback
+     * @param  callable(Type $type, MessageInterface $message, Builder $builder): void  $callback
      *
      * @return Builder
      */
@@ -103,11 +104,11 @@ trait Debugging
     /**
      * Returns a "null" debug callback method.
      *
-     * @return callable(string $type, MessageInterface $message, Builder $builder): void
+     * @return callable(Type $type, MessageInterface $message, Builder $builder): void
      */
     protected function makeNullDebugCallback(): callable
     {
-        return function (string $type, MessageInterface $message, Builder $builder): void {
+        return function (Type $type, MessageInterface $message, Builder $builder): void {
             // N/A...
         };
     }
@@ -115,11 +116,11 @@ trait Debugging
     /**
      * Returns a default "dump" callback
      *
-     * @return callable(string $type, MessageInterface $message, Builder $builder): void
+     * @return callable(Type $type, MessageInterface $message, Builder $builder): void
      */
     protected function makeDumpCallback(): callable
     {
-        return function (string $type, MessageInterface $message, Builder $builder): void {
+        return function (Type $type, MessageInterface $message, Builder $builder): void {
             VarDumper::dump($this->makeDebugContext($type, $message));
         };
     }
@@ -127,11 +128,11 @@ trait Debugging
     /**
      * Returns a default "dump and die" callback
      *
-     * @return callable(string $type, MessageInterface $message, Builder $builder): void
+     * @return callable(Type $type, MessageInterface $message, Builder $builder): void
      */
     protected function makeDumpAndDieCallback(): callable
     {
-        return function (string $type, MessageInterface $message, Builder $builder): void {
+        return function (Type $type, MessageInterface $message, Builder $builder): void {
             // Obtain reference to var dumper handler.
             $originalHandler = VarDumper::setHandler(null);
             VarDumper::setHandler($originalHandler);

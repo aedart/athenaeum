@@ -14,6 +14,7 @@ use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Http\Cookies\Cookie;
+use Aedart\Contracts\Http\Messages\Type;
 use Aedart\Contracts\Streams\Stream;
 use DateTimeInterface;
 use Psr\Http\Message\MessageInterface;
@@ -1063,7 +1064,7 @@ interface Builder extends HttpClientAware,
      * If you require more logging control, then consider
      * using custom {@see Middleware} instead of this method.
      *
-     * @param callable(string $type, MessageInterface $message, Builder $builder): (void)|null $callback  [optional]
+     * @param callable(Type $type, MessageInterface $message, Builder $builder): (void)|null $callback  [optional]
      *                                 Custom callback for logging Http message.
      *                                 If no callback is provided, then a default logging callback is applied.
      *
@@ -1078,7 +1079,7 @@ interface Builder extends HttpClientAware,
      *
      * @see log
      *
-     * @return callable(string $type, MessageInterface $message, Builder $builder): void
+     * @return callable(Type $type, MessageInterface $message, Builder $builder): void
      */
     public function logCallback(): callable;
 
@@ -1098,7 +1099,7 @@ interface Builder extends HttpClientAware,
      *      ->get('/users');
      * ```
      *
-     * @param callable(string $type, MessageInterface $message, Builder $builder): (void)|null $callback  [optional]
+     * @param callable(Type $type, MessageInterface $message, Builder $builder): (void)|null $callback  [optional]
      *                                  Custom callback for performing Http message debugging.
      *                                  If no callback is provided, then a default debugging callback is applied.
      *
@@ -1125,7 +1126,7 @@ interface Builder extends HttpClientAware,
      *      ->get('/users');
      * ```
      *
-     * @param callable(string $type, MessageInterface $message, Builder $builder): (void)|null $callback  [optional]
+     * @param callable(Type $type, MessageInterface $message, Builder $builder): (void)|null $callback  [optional]
      *                                 Custom callback for performing Http message debugging.
      *                                 If no callback is provided, then a default debugging callback is applied.
      *
@@ -1142,7 +1143,7 @@ interface Builder extends HttpClientAware,
      * @see debug
      * @see dd
      *
-     * @return callable(string $type, MessageInterface $message, Builder $builder): void
+     * @return callable(Type $type, MessageInterface $message, Builder $builder): void
      */
     public function debugCallback(): callable;
 
