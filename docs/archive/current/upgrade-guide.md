@@ -98,6 +98,55 @@ $paths = new Paths();
 $paths->configPath = getcwd() . DIRECTORY_SEPARATOR . 'environments';
 ```
 
+### File Stream Locks
+
+The `LockTypes` (_interface_) has been replaced with a new `LockType` enum.
+
+**_:x: previously_**
+
+```php
+use Aedart\Contracts\Streams\Locks\LockTypes;
+```
+
+**_:heavy_check_mark: Now_**
+
+```php
+use Aedart\Contracts\Streams\Locks\LockType;
+```
+
+Your file stream "transactions" configuration, in `config/streams.php`, _SHOULD_ be modified to use the `LockType` enum.     
+
+```php
+<?php
+
+return [
+
+    // ...previous not shown...
+
+    'transactions' => [
+
+        'default' => [
+            'driver' => \Aedart\Streams\Transactions\Drivers\CopyWriteReplaceDriver::class,
+            'options' => [
+                'maxMemory' => 5 * \Aedart\Contracts\Streams\BufferSizes::BUFFER_1MB,
+                'lock' => [
+                    'enabled' => true,
+                    'profile' => env('STREAM_LOCK', 'default'),
+
+                    // Use LockType enum value here...
+                    'type' => \Aedart\Contracts\Streams\Locks\LockType::EXCLUSIVE,
+
+                    'timeout' => 0.5,
+                ],
+                
+                // ...remaining not shown ...
+            ]
+        ]
+    ]
+];
+
+```
+
 ### Removed "Aware-of" Components
 
 The "aware-of" components that were located in `Aedart\Contracts\Support\Properties` and `Aedart\Support\Properties` have been removed.
