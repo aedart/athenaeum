@@ -33,8 +33,8 @@ enum SameSite: string
     case LAX = 'Lax';
 
     /**
-     * "[...] The browser will send cookies with both cross-site requests and same-site requests. [...]"
-     * "[...] The `Secure` attribute must also be set when using this value [...]" (mozilla.org)
+     * "[...] The browser will send cookies with both cross-site requests and same-site requests. [...]
+     * The `Secure` attribute must also be set when using this value [...]" (mozilla.org)
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#none
      */
