@@ -117,8 +117,6 @@ use Aedart\Contracts\Streams\Locks\LockType;
 Your file stream "transactions" configuration, in `config/streams.php`, _SHOULD_ be modified to use the `LockType` enum.     
 
 ```php
-<?php
-
 return [
 
     // ...previous not shown...
@@ -144,7 +142,54 @@ return [
         ]
     ]
 ];
+```
 
+### Http Client Debugging and Logging
+
+The Http Message `Types` (_interface_) has been replaced with a new `Type` enum. This affects all custom debugging
+and logging callbacks, in the Http Client. Previously a string value from the constants defined in the `Types` interface
+was used. Now, the `Type` enum case is passed on to the callbacks. Affected methods are:
+
+* `log()`
+* `debug()`
+* `dd()`
+
+**_:x: previously_**
+
+```php
+use Aedart\Contracts\Http\Messages\Type;
+use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Psr\Http\Message\MessageInterface;
+
+$response = $client
+        ->where('date', 'today')
+        ->debug(function(string $type, MessageInterface $message, Builder $builder) {
+            if ($type === 'request') {
+                // debug a request...
+            } else {
+                // debug response...
+            }       
+        })
+        ->get('/weather');
+```
+
+**_:heavy_check_mark: Now_**
+
+```php
+use Aedart\Contracts\Http\Messages\Type;
+use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Psr\Http\Message\MessageInterface;
+
+$response = $client
+        ->where('date', 'today')
+        ->debug(function(Type $type, MessageInterface $message, Builder $builder) {
+            if ($type === Type::REQUEST) {
+                // debug a request...
+            } else {
+                // debug response...
+            }       
+        })
+        ->get('/weather');
 ```
 
 ### Removed "Aware-of" Components

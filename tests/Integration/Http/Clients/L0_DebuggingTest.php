@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Integration\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
+use Aedart\Contracts\Http\Messages\Type;
 use Aedart\Http\Messages\Traits\HttpSerializerFactoryTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
@@ -190,7 +191,7 @@ class L0_DebuggingTest extends HttpClientsTestCase
         $response = $this
             ->client($profile)
             ->withOption('handler', $this->makeResponseMock([ $mockResponse ]))
-            ->debug(function (string $type, MessageInterface $message) {
+            ->debug(function (Type $type, MessageInterface $message) {
                 // Simulated var dump, using toString
                 $serialized = $this->getHttpSerializerFactory()
                     ->make($message)
@@ -230,7 +231,7 @@ class L0_DebuggingTest extends HttpClientsTestCase
         $response = $this
             ->client($profile)
             ->withOption('handler', $this->makeResponseMock([ $mockResponse ]))
-            ->debug(function (string $type, MessageInterface $message) {
+            ->debug(function (Type $type, MessageInterface $message) {
                 // Simulated var dump, using toArray
                 $serialized = $this->getHttpSerializerFactory()
                     ->make($message)

@@ -69,12 +69,13 @@ Similar to [`debug()` and `dd()`](./debugging), you can provide the `log()` with
 When doing so, it's up to you how a request or response should be logged and how.
 
 ```php
+use Aedart\Contracts\Http\Messages\Type;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Psr\Http\Message\MessageInterface;
 
 $response = $client
         ->where('date', 'today')
-        ->log(function(string $type, MessageInterface $message, Builder $builder) {
+        ->log(function(Type $type, MessageInterface $message, Builder $builder) {
             // ... log http message ...       
         })
         ->get('/weather');
