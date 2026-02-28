@@ -288,6 +288,6 @@ class H0_CookiesTest extends HttpClientsTestCase
 
         $data = $cookie->toArray();
         $this->assertArrayHasKey('SameSite', $data, 'Same Site does not exist');
-        $this->assertSame($data['SameSite'], $sameSite, 'Incorrect Same Site');
+        $this->assertSame($data['SameSite'], $sameSite?->value, 'Incorrect Same Site');
     }
 }
