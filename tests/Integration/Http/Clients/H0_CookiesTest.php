@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Builders\Guzzle\CookieJarAware;
 use Aedart\Contracts\Http\Cookies\Cookie;
+use Aedart\Contracts\Http\Cookies\SameSite;
 use Aedart\Contracts\Http\Cookies\SetCookie;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
@@ -231,8 +232,8 @@ class H0_CookiesTest extends HttpClientsTestCase
         $maxAge = $this->getFaker()->randomNumber(3, true);
         $secure = true;
         $httpOnly = true;
-        $sameSite = SetCookie::SAME_SITE_STRICT;
-        $header = "$name=$value; Domain=$domain; Path=$path; Expires=$expires; Max-Age=$maxAge; Secure; HttpOnly; SameSite=$sameSite;";
+        $sameSite = SameSite::STRICT;
+        $header = "{$name}={$value}; Domain={$domain}; Path={$path}; Expires={$expires}; Max-Age={$maxAge}; Secure; HttpOnly; SameSite={$sameSite->value};";
 
         $mockedResponse = new Response(StatusCode::OK, [
             'Set-Cookie' => $header
@@ -287,6 +288,6 @@ class H0_CookiesTest extends HttpClientsTestCase
 
         $data = $cookie->toArray();
         $this->assertArrayHasKey('SameSite', $data, 'Same Site does not exist');
-        $this->assertSame($data['SameSite'], $sameSite, 'Incorrect Same Site');
+        $this->assertSame($data['SameSite'], $sameSite?->value, 'Incorrect Same Site');
     }
 }

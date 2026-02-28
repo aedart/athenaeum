@@ -192,6 +192,72 @@ $response = $client
         ->get('/weather');
 ```
 
+### Set-Cookies SameSite
+
+The predefined [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#samesitesamesite-value) constants in 
+`SetCookie` have been deprecated. Use the `SameSite` enum cases instead.
+The `sameSite()` and `getSameSite()` methods are affected.
+
+**_:x: previously_**
+
+```php
+use Aedart\Http\Cookies\SetCookie;
+
+$cookie = new SetCookie()->sameSite('lax');
+
+$policy = $cookie->getSameSite() // string 'lax'
+```
+
+**_:heavy_check_mark: Now_**
+
+```php
+use Aedart\Contracts\Http\Cookies\SameSite;
+use Aedart\Http\Cookies\SetCookie;
+
+$cookie = new SetCookie()->sameSite('lax'); 
+
+$policy = $cookie->getSameSite() // SameSite::LAX enum case
+```
+
+The `sameSite()` also accepts an enum case.
+
+```php
+use Aedart\Contracts\Http\Cookies\SameSite;
+use Aedart\Http\Cookies\SetCookie;
+
+$cookie = new SetCookie()->sameSite(SameSite::STRICT); 
+
+$policy = $cookie->getSameSite() // SameSite::STRICT enum case
+```
+
+#### Secure Flag
+
+If you set `SameSite::NONE` as the same-site value, then the `secure` flag is automatically set to `true`;  
+
+**_:x: previously_**
+
+```php
+use Aedart\Http\Cookies\SetCookie;
+
+$cookie = new SetCookie()
+    ->secure(false)
+    ->sameSite('none'); 
+
+$secure = $cookie->isSecure() // false
+```
+
+**_:heavy_check_mark: Now_**
+
+```php
+use Aedart\Http\Cookies\SetCookie;
+
+$cookie = new SetCookie()
+    ->secure(false)
+    ->sameSite('none'); 
+
+$secure = $cookie->isSecure() // true
+```
+
 ### Removed "Aware-of" Components
 
 The "aware-of" components that were located in `Aedart\Contracts\Support\Properties` and `Aedart\Support\Properties` have been removed.

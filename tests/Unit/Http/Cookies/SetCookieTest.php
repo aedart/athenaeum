@@ -2,6 +2,7 @@
 
 namespace Aedart\Tests\Unit\Http\Cookies;
 
+use Aedart\Contracts\Http\Cookies\SameSite;
 use Aedart\Contracts\Http\Cookies\SetCookie as SetCookieInterface;
 use Aedart\Http\Cookies\SetCookie;
 use Aedart\Testing\Helpers\ConsoleDebugger;
@@ -62,9 +63,9 @@ class SetCookieTest extends UnitTestCase
             'secure' => $faker->boolean(),
             'httpOnly' => $faker->boolean(),
             'sameSite' => $faker->randomElement([
-                SetCookieInterface::SAME_SITE_NONE,
-                SetCookieInterface::SAME_SITE_LAX,
-                SetCookieInterface::SAME_SITE_STRICT,
+                SameSite::STRICT->value,
+                SameSite::LAX->value,
+                SameSite::NONE->value,
             ])
         ], $data);
     }
@@ -92,9 +93,15 @@ class SetCookieTest extends UnitTestCase
         $this->assertSame($data['maxAge'], $cookie->getMaxAge(), 'Incorrect max-age');
         $this->assertSame($data['domain'], $cookie->getDomain(), 'Incorrect domain');
         $this->assertSame($data['path'], $cookie->getPath(), 'Incorrect path');
-        $this->assertSame($data['secure'], $cookie->isSecure(), 'Incorrect secure');
+
         $this->assertSame($data['httpOnly'], $cookie->isHttpOnly(), 'Incorrect http-only');
-        $this->assertSame($data['sameSite'], $cookie->getSameSite(), 'Incorrect same-site');
+        $this->assertSame($data['sameSite'], $cookie->getSameSite()?->value, 'Incorrect same-site');
+
+        if ($data['sameSite'] === SameSite::NONE->value) {
+            $this->assertTrue($cookie->isSecure(), 'Incorrect secure for SameSite: None');
+        } else {
+            $this->assertSame($data['secure'], $cookie->isSecure(), 'Incorrect secure');
+        }
     }
 
     /**
@@ -104,6 +111,9 @@ class SetCookieTest extends UnitTestCase
     public function canExportToArray()
     {
         $data = $this->cookieData();
+        if ($data['sameSite'] === SameSite::NONE->value) {
+            $data['secure'] = true;
+        }
 
         $cookie = $this->makeCookie($data);
 

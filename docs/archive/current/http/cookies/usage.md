@@ -34,11 +34,12 @@ It offers the following properties
 - `domain`: Hosts to where the cookie will be sent
 - `path`: Path that must exist on the requested url
 - `secure`: State of whether the cookie should be sent via https
-- `httpOnly`: Whether or not accessing the cookie is forbidden via JavaScript.
+- `httpOnly`: Whether accessing the cookie is forbidden via JavaScript, or not.
 - `sameSite`: whether cookie should be available for cross-site requests
 
 ```php
 <?php
+use Aedart\Contracts\Http\Cookies\SameSite;
 use Aedart\Http\Cookies\SetCookie;
 
 $cookie = new SetCookie([
@@ -50,7 +51,7 @@ $cookie = new SetCookie([
     'path' => '/',
     'secure' => true,
     'httpOnly' => false,
-    'sameSite' => SetCookie::SAME_SITE_LAX
+    'sameSite' => SameSite::LAX
 ]);
 ```
 
