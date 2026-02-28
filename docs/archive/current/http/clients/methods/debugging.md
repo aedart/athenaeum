@@ -113,7 +113,7 @@ use Psr\Http\Message\MessageInterface;
 $response = $client
         ->where('date', 'today')
         ->debug(function(Type $type, MessageInterface $message, Builder $builder) {
-            if ($type == Type::REQUEST) {
+            if ($type === Type::REQUEST) {
                 // debug a request...
             } else {
                 // debug response...
