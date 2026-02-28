@@ -47,7 +47,7 @@ enum SameSite: string
      *
      * @return string[]
      */
-    static public function values(): array
+    public static function values(): array
     {
         return array_map(fn ($case) => $case->value, self::cases());
     }
@@ -63,7 +63,7 @@ enum SameSite: string
      *
      * @see static::from()
      */
-    static public function fromValue(string $value): SameSite
+    public static function fromValue(string $value): SameSite
     {
         return self::from(ucfirst(strtolower($value)));
     }
@@ -78,7 +78,7 @@ enum SameSite: string
      *
      * @see static::tryFrom()
      */
-    static public function tryFromValue(string $value): SameSite|null
+    public static function tryFromValue(string $value): SameSite|null
     {
         return self::tryFrom(ucfirst(strtolower($value)));
     }
