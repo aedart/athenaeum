@@ -20,7 +20,7 @@ interface SetCookie extends Cookie
      * location, none of the cookies tagged with the Strict attribute will be
      * included. [...]" (mozilla.org)
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#samesitesamesite-value
      *
      * @deprecated use {@see \Aedart\Contracts\Http\Cookies\SameSite::STRICT} instead, since v10.x
      */
@@ -34,7 +34,7 @@ interface SetCookie extends Cookie
      * to load images or frames, but will be sent when a user navigates to the URL
      * from an external site [...]" (mozilla.org)
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#samesitesamesite-value
      *
      * @deprecated use {@see \Aedart\Contracts\Http\Cookies\SameSite::LAX} instead, since v10.x
      */
@@ -46,7 +46,7 @@ interface SetCookie extends Cookie
      *
      * "[...] The browser will send cookies with both cross-site requests and same-site requests. [...]" (mozilla.org)
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#samesitesamesite-value
      *
      * @deprecated use {@see \Aedart\Contracts\Http\Cookies\SameSite::NONE} instead, since v10.x
      */
@@ -58,7 +58,7 @@ interface SetCookie extends Cookie
      *
      * If both expires and {@see maxAge} are set, then {@see maxAge} is favoured.
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Session_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#expiresdate
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Date
      * @see https://tools.ietf.org/html/rfc7231#section-7.1.1.2
      *
@@ -71,7 +71,7 @@ interface SetCookie extends Cookie
     /**
      * Returns the maximum lifetime of the cookie
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Session_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#expiresdate
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Date
      * @see https://tools.ietf.org/html/rfc7231#section-7.1.1.2
      *
@@ -87,7 +87,7 @@ interface SetCookie extends Cookie
      *
      * If both {@see expires} and max-age are set, then max-age is favoured.
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Session_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#max-agenumber
      *
      * @param int|null $seconds [optional]
      *
@@ -98,7 +98,7 @@ interface SetCookie extends Cookie
     /**
      * Returns the number of seconds until the cookie expires
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Session_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#max-agenumber
      *
      * @return int|null
      */
@@ -107,7 +107,7 @@ interface SetCookie extends Cookie
     /**
      * Set the host(s) where the cookie will be sent to
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Scope_of_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#domaindomain-value
      *
      * @param string|null $domain [optional]
      *
@@ -118,7 +118,7 @@ interface SetCookie extends Cookie
     /**
      * Returns the host(s) where the cookie will be sent to
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Scope_of_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#domaindomain-value
      *
      * @return string|null
      */
@@ -127,7 +127,7 @@ interface SetCookie extends Cookie
     /**
      * Set the cookie path that must exist on the requested url
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Scope_of_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#pathpath-value
      *
      * @param string|null $path [optional]
      *
@@ -138,7 +138,7 @@ interface SetCookie extends Cookie
     /**
      * Returns the cookie path that must exist on the requested url
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Scope_of_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#pathpath-value
      *
      * @return string|null
      */
@@ -147,7 +147,7 @@ interface SetCookie extends Cookie
     /**
      * Set the state of whether the cookie should be sent via https
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Secure_and_HttpOnly_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#secure
      *
      * @param bool $isSecure [optional] True if cookie should only be sent via https
      *
@@ -158,7 +158,7 @@ interface SetCookie extends Cookie
     /**
      * Returns the cookie-secure state
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Secure_and_HttpOnly_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#secure
      *
      * @return bool True if cookie should only be sent via https
      */
@@ -176,7 +176,7 @@ interface SetCookie extends Cookie
     /**
      * Set the http only state
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Secure_and_HttpOnly_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#httponly
      *
      * @param bool $httpOnly [optional] If true, accessing the cookie is forbidden
      *                      via JavaScript.
@@ -188,7 +188,7 @@ interface SetCookie extends Cookie
     /**
      * Get the http only state
      *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Secure_and_HttpOnly_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#httponly
      *
      * @return bool If true, accessing the cookie is forbidden via JavaScript.
      */
@@ -207,26 +207,23 @@ interface SetCookie extends Cookie
     /**
      * Set the same-site policy; whether cookie should be available for cross-site requests
      *
-     * @see SAME_SITE_STRICT
-     * @see SAME_SITE_LAX
-     * @see SAME_SITE_NONE
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies
+     * **Note**: _If {@link SameSite::NONE} is specified, then the {@link secure()} is automatically
+     * set to `true`._
      *
-     * @param string|null $policy [optional]
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#samesitesamesite-value
+     *
+     * @param string|SameSite|null $policy [optional]
      *
      * @return self
      */
-    public function sameSite(string|null $policy = null): static;
+    public function sameSite(string|SameSite|null $policy = null): static;
 
     /**
      * Get the same-site policy; whether cookie should be available for cross-site requests
      *
-     * @see SAME_SITE_STRICT
-     * @see SAME_SITE_LAX
-     * @see SAME_SITE_NONE
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies
+     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#samesitesamesite-value
      *
-     * @return string|null
+     * @return SameSite|null
      */
-    public function getSameSite(): string|null;
+    public function getSameSite(): SameSite|null;
 }
