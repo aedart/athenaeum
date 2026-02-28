@@ -44,7 +44,7 @@ return [
      | Transaction profiles
      |--------------------------------------------------------------------------
      |
-     | List of available lock profiles.
+     | List of available transaction profiles.
     */
 
     'transactions' => [
