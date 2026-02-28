@@ -35,7 +35,7 @@ interface Lockable extends LockFactoryAware
      * @param  callable(Stream $stream, Lock $lock): mixed  $operation Callback to invoke.
      *                                                      This stream instance and acquired lock are given
      *                                                      as callback arguments.
-     * @param  int  $type  [optional] The type of lock. {@see LockTypes::EXCLUSIVE} lock (writer) or {@see LockTypes::SHARED} lock (reader).
+     * @param  int|LockType  $type  [optional] The type of lock.
      * @param  float  $timeout  [optional] Timeout of acquiring lock in seconds.
      * @param  string|null  $profile  [optional] Lock profile driver to use. If `null`, then a default driver is used.
      * @param  array  $options  [optional] Lock driver specific options
@@ -46,14 +46,14 @@ interface Lockable extends LockFactoryAware
      */
     public function lock(
         callable $operation,
-        int $type = LockTypes::EXCLUSIVE,
+        int|LockType $type = LockType::EXCLUSIVE,
         float $timeout = 0.5,
         string|null $profile = null,
         array $options = []
     ): mixed;
 
     /**
-     * Locks stream and performs given operation, using {@see LockTypes::EXCLUSIVE}
+     * Locks stream and performs given operation, using {@see LockType::EXCLUSIVE}
      *
      * Method is a shortcut for invoking {@see lock()} with exclusive lock type.
      *
@@ -76,7 +76,7 @@ interface Lockable extends LockFactoryAware
     ): mixed;
 
     /**
-     * Locks stream and performs given operation, using {@see LockTypes::SHARED}
+     * Locks stream and performs given operation, using {@see LockType::SHARED}
      *
      * Method is a shortcut for invoking {@see lock()} with shared lock type.
      *

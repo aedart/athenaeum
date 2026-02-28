@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Integration\Streams\File\Locks\Drivers;
 
-use Aedart\Contracts\Streams\Locks\LockTypes;
+use Aedart\Contracts\Streams\Locks\LockType;
 use Aedart\Streams\Exceptions\Locks\LockFailure;
 use Aedart\Streams\Exceptions\Locks\StreamCannotBeLocked;
 use Aedart\Streams\FileStream;
@@ -99,7 +99,7 @@ class FlockDriverTest extends StreamTestCase
         $failureMsg = '';
         try {
             $lockB = $this->makeLock($streamB, $this->lockProfile());
-            $lockB->acquire(LockTypes::EXCLUSIVE, 0.01);
+            $lockB->acquire(LockType::EXCLUSIVE, 0.01);
         } catch (LockFailure $e) {
             ConsoleDebugger::output($e->getMessage());
 

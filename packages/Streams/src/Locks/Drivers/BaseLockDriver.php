@@ -4,7 +4,7 @@ namespace Aedart\Streams\Locks\Drivers;
 
 use Aedart\Contracts\Streams\Exceptions\StreamException;
 use Aedart\Contracts\Streams\Locks\Lock;
-use Aedart\Contracts\Streams\Locks\LockTypes;
+use Aedart\Contracts\Streams\Locks\LockType;
 use Aedart\Contracts\Streams\Stream;
 use Aedart\Streams\Exceptions\Locks\LockFailure;
 use Aedart\Streams\Exceptions\Locks\LockReleaseFailure;
@@ -57,14 +57,14 @@ abstract class BaseLockDriver implements Lock
      * Acquire lock
      *
      * @param  Stream  $stream
-     * @param  int  $type  {@see LockTypes::EXCLUSIVE} lock (writer) or {@see LockTypes::SHARED} lock (reader)
+     * @param  LockType  $type
      * @param  float  $timeout  Timeout in seconds.
      *
      * @return bool
      *
      * @throws Throwable
      */
-    abstract public function acquireLock(Stream $stream, int $type, float $timeout): bool;
+    abstract public function acquireLock(Stream $stream, LockType $type, float $timeout): bool;
 
     /**
      * Release lock
@@ -82,7 +82,7 @@ abstract class BaseLockDriver implements Lock
      *
      * @throws StreamException
      */
-    public function acquire(int $type = LockTypes::EXCLUSIVE, float $timeout = 0.5): bool
+    public function acquire(int|LockType $type = LockType::EXCLUSIVE, float $timeout = 0.5): bool
     {
         // Skip if already acquired
         if ($this->isAcquired()) {
@@ -98,6 +98,10 @@ abstract class BaseLockDriver implements Lock
         }
 
         try {
+            $type = is_int($type)
+                ? $type::from($type)
+                : $type;
+
             $acquired = $this->acquireLock($this->getStream(), $type, $timeout);
 
             $this->setAcquired($acquired);

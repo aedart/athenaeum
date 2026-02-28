@@ -12,6 +12,7 @@ Temporary changelog for `v10.x` series.
 * `performChange()` util method that allows setting the next audit trail message, when performing changes, in `\Aedart\Audit\Concerns\ChangeRecording` (_Audit Trail package_).
 * `isSluggable()` util in `helpers/models.php` (_Database package_).
 * `Arguments` and `Callback` concerns (_Utils package_).
+* `LockType` enum (_Streams package_).
 
 ### Changed
 
@@ -22,6 +23,7 @@ Temporary changelog for `v10.x` series.
 * The `Paths` container has been redesigned to inherit from `ArrayDto`. It no longer depends on the removed "Aware-of" components. (_Core package_). [#211](https://github.com/aedart/athenaeum/issues/211).
 * Audit Trail Record formatting is now applied via new `Formatter`, performed via `\Aedart\Audit\Events\Concerns\EventData::format()` (_Audit Trail package_).
 * Moved `formatDatetime()` from `\Aedart\Audit\Observers\Concerns\ModelAttributes` to `\Aedart\Audit\Events\Concerns\EventData` (_Audit Trail package_).
+* Refactored `FileStream`'s locking feature to use new `LockType` enum (_Streams package_).
 * Changed return type of `Summation::dd()` from `void` to `never` (_Collections package_).
 
 **Non-breaking Changes**
@@ -65,3 +67,4 @@ Temporary changelog for `v10.x` series.
 * `\Aedart\Audit\Concerns\ChangeRecording::shouldOmitDataFor`, replaced by `Formatter` components (_Audit Trail package_). 
 * `\Aedart\Audit\Concerns\ChangeRecording::getAuditTrailMessage`, replaced by `Formatter` components (_Audit Trail package_). 
 * `\Aedart\Audit\Concerns\ChangeRecording::$hiddenInAuditTrail`, replaced by `Formatter` components (_Audit Trail package_).
+* `\Aedart\Contracts\Streams\Locks\LockTypes`, replaced by `LockType` enum (_Streams package_).

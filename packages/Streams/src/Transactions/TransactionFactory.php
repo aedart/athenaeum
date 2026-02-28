@@ -3,7 +3,7 @@
 namespace Aedart\Streams\Transactions;
 
 use Aedart\Contracts\Streams\BufferSizes;
-use Aedart\Contracts\Streams\Locks\LockTypes;
+use Aedart\Contracts\Streams\Locks\LockType;
 use Aedart\Contracts\Streams\Stream;
 use Aedart\Contracts\Streams\Transactions\Factory;
 use Aedart\Contracts\Streams\Transactions\Transaction;
@@ -111,7 +111,7 @@ class TransactionFactory implements Factory
                     'lock' => [
                         'enabled' => true,
                         'profile' => 'default',
-                        'type' => LockTypes::EXCLUSIVE,
+                        'type' => LockType::EXCLUSIVE,
                         'timeout' => 0.5,
                     ],
 
