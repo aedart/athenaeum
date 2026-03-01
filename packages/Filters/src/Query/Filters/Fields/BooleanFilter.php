@@ -52,7 +52,7 @@ class BooleanFilter extends BaseFieldFilter
     /**
      * @inheritDoc
      */
-    protected function assertValue($value)
+    protected function assertValue(mixed $value): void
     {
         $acceptable = ['yes', 'no', 'true', 'false', true, false, 0, 1, '0', '1'];
 

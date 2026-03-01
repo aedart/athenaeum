@@ -4,6 +4,7 @@ namespace Aedart\Contracts\Database\Query;
 
 use Aedart\Contracts\Database\Query\Exceptions\CriteriaException;
 use Aedart\Contracts\Database\Query\Exceptions\InvalidOperatorException;
+use Aedart\Contracts\Database\Query\Operators\LogicalOperator;
 
 /**
  * Field Criteria (Query filter)
@@ -45,7 +46,7 @@ interface FieldCriteria extends Criteria
      * @param string|null $field [optional]
      * @param string $operator [optional]
      * @param mixed $value [optional]
-     * @param string $logical [optional]
+     * @param string|LogicalOperator $logical [optional]
      *
      * @return static
      *
@@ -55,7 +56,7 @@ interface FieldCriteria extends Criteria
         string|null $field = null,
         string $operator = '=',
         mixed $value = null,
-        string $logical = self::AND
+        string|LogicalOperator $logical = LogicalOperator::AND
     ): static;
 
     /**
@@ -137,26 +138,26 @@ interface FieldCriteria extends Criteria
      * Set the logical operator that determines how criteria
      * must be added in relation to other criteria
      *
-     * @param string $operator AND, OR
+     * @param string|LogicalOperator $operator  [optional]
      *
      * @return self
      *
      * @throws InvalidOperatorException
      */
-    public function setLogical(string $operator = self::AND): static;
+    public function setLogical(string|LogicalOperator $operator = LogicalOperator::AND): static;
 
     /**
      * Get the logical operator that determines how criteria
      * must be added in relation to other criteria
      *
-     * @return string
+     * @return LogicalOperator
      */
-    public function getLogical(): string;
+    public function getLogical(): LogicalOperator;
 
     /**
      * Alias for {@see getLogical()}
      *
-     * @return string
+     * @return LogicalOperator
      */
-    public function logical(): string;
+    public function logical(): LogicalOperator;
 }

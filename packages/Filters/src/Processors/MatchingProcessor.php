@@ -2,7 +2,7 @@
 
 namespace Aedart\Filters\Processors;
 
-use Aedart\Contracts\Database\Query\FieldCriteria;
+use Aedart\Contracts\Database\Query\Operators\LogicalOperator;
 use Aedart\Contracts\Filters\BuiltFiltersMap;
 use Aedart\Filters\BaseProcessor;
 use Aedart\Filters\Exceptions\InvalidParameter;
@@ -30,11 +30,11 @@ class MatchingProcessor extends BaseProcessor
     /**
      * Supported logical operators
      *
-     * @var string[] Key-value pair. Key => requested value, value = logical operator
+     * @var array<string, string> Key-value pair. Key => requested value, value = logical operator value
      */
     protected array $allowedMap = [
-        'all' => FieldCriteria::AND,
-        'any' => FieldCriteria::OR,
+        'all' => LogicalOperator::AND->value,
+        'any' => LogicalOperator::OR->value,
     ];
 
     /**

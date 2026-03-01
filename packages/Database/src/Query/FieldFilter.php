@@ -4,8 +4,12 @@ namespace Aedart\Database\Query;
 
 use Aedart\Contracts\Database\Query\Exceptions\CriteriaException;
 use Aedart\Contracts\Database\Query\FieldCriteria;
+use Aedart\Contracts\Database\Query\Operators\LogicalOperator;
 use Aedart\Database\Query\Exceptions\FilterException;
 use Aedart\Database\Query\Exceptions\InvalidOperator;
+use BackedEnum;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 /**
  * Field Filter
@@ -44,9 +48,9 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     /**
      * The logical operator
      *
-     * @var string
+     * @var LogicalOperator
      */
-    protected string $logicalOperator;
+    protected LogicalOperator $logicalOperator;
 
     /**
      * FieldFilter
@@ -54,7 +58,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
      * @param string|null $field [optional]
      * @param string|null $operator [optional]
      * @param mixed $value [optional]
-     * @param string $logical [optional]
+     * @param string|LogicalOperator $logical [optional]
      *
      * @throws CriteriaException
      */
@@ -62,7 +66,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
         string|null $field = null,
         string|null $operator = null,
         mixed $value = null,
-        string $logical = FieldCriteria::AND
+        string|LogicalOperator $logical = LogicalOperator::AND
     ) {
         if (isset($field)) {
             $this->setField($field);
@@ -86,7 +90,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
         string|null $field = null,
         string|null $operator = null,
         mixed $value = null,
-        string $logical = FieldCriteria::AND
+        string|LogicalOperator $logical = LogicalOperator::AND
     ): static {
         return new static($field, $operator, $value, $logical);
     }
@@ -178,11 +182,13 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     /**
      * @inheritDoc
      */
-    public function setLogical(string $operator = self::AND): static
+    public function setLogical(string|LogicalOperator $operator = LogicalOperator::AND): static
     {
         $this->assertOperator($operator, $this->allowedLogicalOperators());
 
-        $this->logicalOperator = $operator;
+        $this->logicalOperator = is_string($operator)
+            ? LogicalOperator::from($operator)
+            : $operator;
 
         return $this;
     }
@@ -190,7 +196,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     /**
      * @inheritDoc
      */
-    public function getLogical(): string
+    public function getLogical(): LogicalOperator
     {
         return $this->logicalOperator;
     }
@@ -198,7 +204,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     /**
      * @inheritDoc
      */
-    public function logical(): string
+    public function logical(): LogicalOperator
     {
         return $this->getLogical();
     }
@@ -215,10 +221,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
      */
     protected function allowedLogicalOperators(): array
     {
-        return [
-            FieldCriteria::AND,
-            FieldCriteria::OR,
-        ];
+        return LogicalOperator::values();
     }
 
     /**
@@ -235,20 +238,25 @@ abstract class FieldFilter extends Filter implements FieldCriteria
     /**
      * Assert whether given operators is allowed or not
      *
-     * @param string $operator
+     * @param string|BackedEnum $operator
      * @param string[] $allowed [optional]
      *
      * @throws InvalidOperator
      */
-    protected function assertOperator(string $operator, array $allowed = [ '*' ])
+    protected function assertOperator(string|BackedEnum $operator, array $allowed = [ '*' ]): void
     {
         // Skip assert if all operators are allowed.
         if (!empty($allowed) && $allowed[0] === '*') {
             return;
         }
 
-        if (!in_array($operator, $allowed)) {
-            throw new InvalidOperator(sprintf('Operator %s is not supported. Allowed operators: %s', $operator, implode(', ', $allowed)));
+        $value = match (true) {
+            $operator instanceof BackedEnum => $operator->value,
+            default => $operator,
+        };
+
+        if (!in_array($value, $allowed)) {
+            throw new InvalidOperator(sprintf('Operator %s is not supported. Allowed operators: %s', $value, implode(', ', $allowed)));
         }
     }
 
@@ -259,7 +267,7 @@ abstract class FieldFilter extends Filter implements FieldCriteria
      *
      * @throws FilterException
      */
-    protected function assertField(string $field)
+    protected function assertField(string $field): void
     {
         if (empty($field)) {
             throw new FilterException('A field name was expected, but empty string was given');
@@ -273,10 +281,29 @@ abstract class FieldFilter extends Filter implements FieldCriteria
      *
      * @throws FilterException
      */
-    protected function assertValue(mixed $value)
+    protected function assertValue(mixed $value): void
     {
         // N/A - by default no value assertion is done here.
         // Overwrite this method, if you wish to assert value,
         // before this filter is applied.
+    }
+
+    /**
+     * Returns query based on this filter's logical operator
+     *
+     * @param  callable(static): (Builder|EloquentBuilder)  $and
+     * @param  callable(static): (Builder|EloquentBuilder)  $or
+     *
+     * @return Builder|EloquentBuilder
+     *
+     * @see logical()
+     */
+    protected function buildFor(callable $and, callable $or): Builder|EloquentBuilder
+    {
+        if ($this->logical() === LogicalOperator::OR) {
+            return $or($this);
+        }
+
+        return $and($this);
     }
 }

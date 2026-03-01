@@ -34,7 +34,7 @@ class SortingProcessor extends BaseProcessor
     /**
      * Map of sorting directions
      *
-     * @var string[] Key-value pairs, key = requested identifier, value = sql sorting direction
+     * @var array<string, string> Key-value pairs, key = requested identifier, value = sql sorting direction
      */
     protected array $directions = [
         'asc' => 'asc',

@@ -44,7 +44,7 @@ class StringFilter extends BaseFieldFilter
             'eq' => '=',
             'ne' => '!=',
 
-            // NOTE: Values do NOT correspond directly to sql operators for these...
+            // NOTE: Values do NOT correspond directly to SQL operators for these...
             'is_null' => 'is_null',
             'not_null' => 'not_null',
             'in' => 'in',
