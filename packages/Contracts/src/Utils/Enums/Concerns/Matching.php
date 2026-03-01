@@ -25,6 +25,7 @@ trait Matching
             && !($value instanceof static)
             && (is_string($value) || is_int($value))
         ) {
+            /** @phpstan-ignore staticMethod.notFound (static is a BackedEnum at this point) */
             $value = static::from($value);
         }
 
