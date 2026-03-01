@@ -25,12 +25,18 @@ interface FieldCriteria extends Criteria
 {
     /**
      * Logical 'and' operator
+     *
+     * @deprecated use {@see \Aedart\Contracts\Database\Query\Operators\LogicalOperator::AND} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Contracts\Database\Query\Operators\LogicalOperator::AND instead", since: "10.x")]
     public const string AND = 'and';
 
     /**
      * Logical 'or' operator
+     *
+     * @deprecated use {@see \Aedart\Contracts\Database\Query\Operators\LogicalOperator::OR} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Contracts\Database\Query\Operators\LogicalOperator::OR instead", since: "10.x")]
     public const string OR = 'or';
 
     /**
