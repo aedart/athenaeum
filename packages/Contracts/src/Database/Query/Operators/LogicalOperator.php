@@ -19,4 +19,14 @@ enum LogicalOperator: string
      * Logical 'or' operator
      */
     case OR = 'or';
+
+    /**
+     * Returns all cases' values
+     *
+     * @return string[]
+     */
+    public static function values(): array
+    {
+        return array_map(fn ($case) => $case->value, self::cases());
+    }
 }
