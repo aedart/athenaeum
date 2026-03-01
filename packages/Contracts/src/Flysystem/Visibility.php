@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Flysystem;
 
+use Aedart\Contracts\Utils\Enums\Concerns;
 use League\Flysystem\Visibility as FlysystemVisibility;
 
 /**
@@ -12,6 +13,8 @@ use League\Flysystem\Visibility as FlysystemVisibility;
  */
 enum Visibility: string
 {
+    use Concerns\BackedEnums;
+
     /**
      * Public visibility
      */
@@ -29,6 +32,6 @@ enum Visibility: string
      */
     public static function allowed(): array
     {
-        return array_column(self::cases(), 'value');
+        return self::values();
     }
 }

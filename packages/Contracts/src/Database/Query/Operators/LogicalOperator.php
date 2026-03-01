@@ -2,6 +2,8 @@
 
 namespace Aedart\Contracts\Database\Query\Operators;
 
+use Aedart\Contracts\Utils\Enums\Concerns;
+
 /**
  * Logical Operator
  *
@@ -10,6 +12,8 @@ namespace Aedart\Contracts\Database\Query\Operators;
  */
 enum LogicalOperator: string
 {
+    use Concerns\BackedEnums;
+
     /**
      * Logical 'and' operator
      */
@@ -19,14 +23,4 @@ enum LogicalOperator: string
      * Logical 'or' operator
      */
     case OR = 'or';
-
-    /**
-     * Returns all cases' values
-     *
-     * @return string[]
-     */
-    public static function values(): array
-    {
-        return array_map(fn ($case) => $case->value, self::cases());
-    }
 }
