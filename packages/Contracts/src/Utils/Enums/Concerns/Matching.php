@@ -40,6 +40,6 @@ trait Matching
      */
     public function matchesAny(array $values): bool
     {
-        return array_any($values, static fn ($value) => $this->matches($value));
+        return array_any($values, fn ($value) => $this->matches($value));
     }
 }
