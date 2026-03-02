@@ -364,7 +364,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @param mixed $requested
      */
-    protected function validateRequestedFilters(mixed $requested)
+    protected function validateRequestedFilters(mixed $requested): void
     {
         $allowed = array_keys($this->filtersMap);
 
