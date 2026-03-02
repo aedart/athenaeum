@@ -66,13 +66,16 @@ class MatchingProcessor extends BaseProcessor
      * Specify supported value and what logical operator it corresponds to
      *
      * @param string $value Requested / submitted value
-     * @param string $logicalOperator Corresponding logical operator
+     * @param string|LogicalOperator $logicalOperator Corresponding logical operator
      *
      * @return self
      */
-    public function allows(string $value, string $logicalOperator): static
+    public function allows(string $value, string|LogicalOperator $logicalOperator): static
     {
-        $this->allowedMap[$value] = $logicalOperator;
+        $this->allowedMap[$value] = match (true) {
+            is_string($logicalOperator) => LogicalOperator::from($logicalOperator)->value,
+            default => $logicalOperator->value
+        };
 
         return $this;
     }

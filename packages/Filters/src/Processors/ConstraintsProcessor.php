@@ -352,11 +352,11 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @param BuiltFiltersMap $built
      *
-     * @return string
+     * @return string|LogicalOperator
      */
-    protected function resolveLogicalBooleanOperator(BuiltFiltersMap $built): string
+    protected function resolveLogicalBooleanOperator(BuiltFiltersMap $built): string|LogicalOperator
     {
-        return $built->getMeta($this->matchingKey, FieldCriteria::AND);
+        return $built->getMeta($this->matchingKey, LogicalOperator::AND);
     }
 
     /**
