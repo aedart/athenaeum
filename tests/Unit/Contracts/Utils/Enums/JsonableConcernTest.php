@@ -55,8 +55,6 @@ class JsonableConcernTest extends UnitTestCase
     #[Test]
     public function canExportToJson(StringState|IntegerState $enum, int|string $expected): void
     {
-        dump((string) $enum);
-
         $result = $enum->toJson();
 
         ConsoleDebugger::output($result);
