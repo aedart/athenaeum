@@ -2,6 +2,8 @@
 
 namespace Aedart\Contracts\Utils\Random;
 
+use Aedart\Contracts\Utils\Enums\Concerns;
+
 /**
  * Randomizer Type
  *
@@ -10,6 +12,8 @@ namespace Aedart\Contracts\Utils\Random;
  */
 enum Type
 {
+    use Concerns\Enums;
+
     /**
      * Array Randomizer
      */

@@ -60,7 +60,7 @@ class NumericFilter extends BaseFieldFilter
     /**
      * @inheritDoc
      */
-    protected function assertValue(mixed $value)
+    protected function assertValue(mixed $value): void
     {
         // Allow empty values, when "is null / not null" operators are
         // chosen.
@@ -90,7 +90,7 @@ class NumericFilter extends BaseFieldFilter
      *
      * @throws InvalidArgumentException
      */
-    protected function assertNumericValue(mixed $value)
+    protected function assertNumericValue(mixed $value): void
     {
         if (!is_numeric($value)) {
             $translator = $this->getTranslator();

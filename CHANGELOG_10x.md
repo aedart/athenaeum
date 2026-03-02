@@ -15,6 +15,9 @@ Temporary changelog for `v10.x` series.
 * `LockType` enum (_Streams package_).
 * `Type` enum (_Http Messages package_).
 * `SameSite` enum (_Http Cookies package_).
+* `LogicalOperator` enum (_Database package_).
+* `Names`, `Values`, `Matching`, `Arrayable`, `Jsonable`, `Enums` and `BackedEnums` concerns (_Contracts package_).
+* `HasDefault` interface for Enums (_Contracts package_).
 
 ### Changed
 
@@ -29,6 +32,9 @@ Temporary changelog for `v10.x` series.
 * Refactored Http Request `Builder` to use new Http Message `Type` enum (_Http Clients package_).
 * Refactored `RequestResponseDebugging` and `RequestresponseLogging` Middleware to use new Http Message `Type` enum (_Http Clients package_).
 * `getSameSite()` now returns `SameSite|null`, in `SetCookie` (_Http Cookies package_).
+* `getLogical()` and `logical()` new return `LogicalOperator` enum case (_Database package_).
+* Filters adapted to use `LogicalOperator` instead of `FieldCriteria::AND` / `FieldCriteria::OR` constants (_Database and Filters packages_).
+* `allows()` now also supports `LogicalOperator` enum as its second argument, in `Aedart\Filters\Processors\MatchingProcessor`. (_Filters packages_)
 * Changed return type of `Summation::dd()` from `void` to `never` (_Collections package_).
 
 **Non-breaking Changes**
@@ -78,3 +84,5 @@ Temporary changelog for `v10.x` series.
 * `\Aedart\Contracts\Http\Cookies\SetCookie::SAME_SITE_STRICT`, replaced by `SameSite::STRICT` enum case (_Http Cookies package_).
 * `\Aedart\Contracts\Http\Cookies\SetCookie::SAME_SITE_LAX`, replaced by `SameSite::LAX` enum case (_Http Cookies package_).
 * `\Aedart\Contracts\Http\Cookies\SetCookie::SAME_SITE_NONE`, replaced by `SameSite::NONE` enum case (_Http Cookies package_).
+* `\Aedart\Contracts\Database\Query\FieldCriteria::AND`, replaced by `LogicalOperator::AND` enum case (_Database package_).
+* `\Aedart\Contracts\Database\Query\FieldCriteria::OR`, replaced by `LogicalOperator::OR` enum case (_Database package_).

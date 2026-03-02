@@ -2,6 +2,7 @@
 
 namespace Aedart\Contracts\Http\Cookies;
 
+use Aedart\Contracts\Utils\Enums\Concerns;
 use ValueError;
 
 /**
@@ -15,6 +16,8 @@ use ValueError;
  */
 enum SameSite: string
 {
+    use Concerns\BackedEnums;
+
     /**
      * "[...] The browser will only send cookies for same-site requests [...].
      * If the request originated from a different URL than the URL of the current
@@ -41,16 +44,6 @@ enum SameSite: string
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie#none
      */
     case NONE = 'None';
-
-    /**
-     * Returns all cases' values
-     *
-     * @return string[]
-     */
-    public static function values(): array
-    {
-        return array_map(fn ($case) => $case->value, self::cases());
-    }
 
     /**
      * Translates a string (case-insensitive) into the corresponding `SameSite` case, if any.

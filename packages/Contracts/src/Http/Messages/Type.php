@@ -2,6 +2,8 @@
 
 namespace Aedart\Contracts\Http\Messages;
 
+use Aedart\Contracts\Utils\Enums\Concerns;
+
 /**
  * Http Message Type
  *
@@ -10,6 +12,8 @@ namespace Aedart\Contracts\Http\Messages;
  */
 enum Type: string
 {
+    use Concerns\BackedEnums;
+
     /**
      * Request type
      */

@@ -10,8 +10,8 @@ It instructs how the constraint filters must be applied; using either a logical 
 
 By default, the processor maps the following identifiers to logical `AND/OR` operators:
 
-* `all` = `AND` operator
-* `any` = `OR` operator
+* `all` = `AND` operator (`LogicalOperator::AND`).
+* `any` = `OR` operator (`LogicalOperator::OR`).
 
 **Example**
 
@@ -54,11 +54,11 @@ If the default `all` and `any` identifiers are not to your liking, then you may 
 It accepts a string identifier and the logical boolean operator that the identifier must be mapped to.
 
 ```php
-use Aedart\Contracts\Database\Query\FieldCriteria;
+use Aedart\Contracts\Database\Query\Operators\LogicalOperator;
 
 return [
     'match' => MatchingProcessor::make()
-        ->allows('and', FieldCriteria::AND)
-        ->allows('or', FieldCriteria::OR)
+        ->allows('and', LogicalOperator::AND)
+        ->allows('or', LogicalOperator::OR)
 ];
 ```

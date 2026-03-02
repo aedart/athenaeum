@@ -2,7 +2,6 @@
 
 namespace Aedart\Tests\Helpers\Dummies\Database\Query\Filters;
 
-use Aedart\Contracts\Database\Query\FieldCriteria;
 use Aedart\Database\Query\FieldFilter;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
@@ -22,11 +21,10 @@ class GenericFilter extends FieldFilter
      */
     public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhere($this->field(), $this->operator(), $this->value());
-        }
-
-        return $query->where($this->field(), $this->operator(), $this->value());
+        return $this->buildFor(
+            and: fn () => $query->where($this->field(), $this->operator(), $this->value()),
+            or: fn () => $query->orWhere($this->field(), $this->operator(), $this->value())
+        );
     }
 
     /*****************************************************************
