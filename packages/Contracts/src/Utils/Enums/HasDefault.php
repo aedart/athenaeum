@@ -13,7 +13,7 @@ interface HasDefault
     /**
      * Returns the default case of this enum
      *
-     * @return static
+     * @return self
      */
-    public static function default(): static;
+    public static function default(): self;
 }
