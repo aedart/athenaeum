@@ -74,6 +74,97 @@ class User extends Authenticatable
 
 Please review the [Audit Trail Formatting](./audit/formatting.md) documentation for additional information.
 
+
+### Field Criteria Logical Operators
+
+The logical operator constants (`FieldCriteria::AND` and `FieldCriteria::OR`) have been deprecated and replaced by a new `LogicalOperator` enum.
+If you have custom query filters that inherit from `FieldCriteria`, then you must change your comparison of the logical operator.
+
+**_:x: previously_**
+
+```php
+use Aedart\Database\Query\FieldFilter;
+use Aedart\Contracts\Database\Query\FieldCriteria;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
+
+class StringFilter extends FieldFilter
+{
+    public function apply(Builder|EloquentBuilder $query)
+    {
+        if ($this->logical() === FieldCriteria::OR) {
+            return $query->orWhere(
+                $this->field(),
+                $this->operator(),
+                $this->value()
+            );
+        }
+
+        return $query->where(
+            $this->field(),
+            $this->operator(),
+            $this->value()
+        );
+    }
+}
+```
+
+**_:heavy_check_mark: Now_**
+
+```php{2,10}
+use Aedart\Database\Query\FieldFilter;
+use Aedart\Contracts\Database\Query\Operators\LogicalOperator
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
+
+class StringFilter extends FieldFilter
+{
+    public function apply(Builder|EloquentBuilder $query)
+    {
+        if ($this->logical() === LogicalOperator::OR) {
+            return $query->orWhere(
+                $this->field(),
+                $this->operator(),
+                $this->value()
+            );
+        }
+
+        return $query->where(
+            $this->field(),
+            $this->operator(),
+            $this->value()
+        );
+    }
+}
+```
+
+You can also use the `buildFor()` utility method, instead of performing manual comparison.
+
+```php
+use Aedart\Database\Query\FieldFilter;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
+
+class StringFilter extends FieldFilter
+{
+    public function apply(Builder|EloquentBuilder $query)
+    {
+        return $this->buildFor(
+            and: fn () => $query->where(
+                    $this->field(),
+                    $this->operator(),
+                    $this->value()
+                ),
+            or: fn () => $query->orWhere(
+                    $this->field(),
+                    $this->operator(),
+                    $this->value()
+                ), 
+        );
+    }
+}
+```
+
 ### `Paths` Container now inherits from `ArrayDto`
 
 The `Paths` container now inherits from `ArrayDto`. It no longer depends on the deprecated / removed "Aware-of" components.
