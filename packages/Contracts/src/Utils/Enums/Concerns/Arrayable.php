@@ -16,7 +16,7 @@ trait Arrayable
     /**
      * Returns an array representation of this backed enum
      *
-     * @return array<string, string|int>
+     * @return array<string, string|int> Names and values
      */
     public static function toArray(): array
     {
