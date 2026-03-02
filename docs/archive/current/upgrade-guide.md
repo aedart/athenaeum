@@ -138,7 +138,7 @@ class StringFilter extends FieldFilter
 }
 ```
 
-You can also use the `buildFor()` utility method, instead of performing manual comparison.
+You can also use the `buildFor()` utility method, instead of performing manual comparison of the logical operator.
 
 ```php
 use Aedart\Database\Query\FieldFilter;
