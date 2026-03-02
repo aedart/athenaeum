@@ -13,5 +13,6 @@ namespace Aedart\Contracts\Utils\Enums\Concerns;
 trait BackedEnums
 {
     use Matching;
+    use Arrayable;
     use Jsonable;
 }

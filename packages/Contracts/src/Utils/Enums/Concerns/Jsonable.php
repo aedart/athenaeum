@@ -8,13 +8,13 @@ use JsonException;
 /**
  * Concerns Backed Enum Jsonable
  *
+ * @see \JsonSerializable
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Utils\Enums\Concerns
  */
 trait Jsonable
 {
-    use Arrayable;
-
     /**
      * Returns a JSON representation of this backed enum
      *
@@ -26,18 +26,20 @@ trait Jsonable
      *
      * @see Json::encode
      */
-    public static function toJson(int $options = 0): string
+    public function toJson(int $options = 0): string
     {
-        return Json::encode(static::jsonSerialize(), $options);
+        return Json::encode($this->jsonSerialize(), $options);
     }
 
     /**
-     * Returns the data which should be serialized to JSON
+     * Returns data which should be serialized to JSON
      *
-     * @return array
+     * @return mixed
      */
-    public static function jsonSerialize(): array
+    public function jsonSerialize(): mixed
     {
-        return static::toArray();
+        // Overwrite this method, when your backed enum needs to
+        // output more complex data...
+        return $this->value;
     }
 }

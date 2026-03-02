@@ -34,8 +34,8 @@ class JsonableConcernTest extends UnitTestCase
     public function enums(): array
     {
         return [
-            'Backed Enum (string)' => [ StringState::class ],
-            'Backed Enum (integer)' => [ IntegerState::class ],
+            'Backed Enum (string)' => [ StringState::OPEN, '"open"' ],
+            'Backed Enum (integer)' => [ IntegerState::CLOSED, '20' ],
         ];
     }
 
@@ -44,7 +44,8 @@ class JsonableConcernTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @param  class-string<StringState|IntegerState>  $enumClass
+     * @param  StringState|IntegerState  $enum
+     * @param  int|string $expected
      *
      * @return void
      *
@@ -52,17 +53,14 @@ class JsonableConcernTest extends UnitTestCase
      */
     #[DataProvider('enums')]
     #[Test]
-    public function canExportToJson(string $enumClass): void
+    public function canExportToJson(StringState|IntegerState $enum, int|string $expected): void
     {
-        $result = $enumClass::toJson(JSON_PRETTY_PRINT);
+        dump((string) $enum);
+
+        $result = $enum->toJson();
 
         ConsoleDebugger::output($result);
 
-        $decoded = Json::decode($result, true);
-        $keys = array_keys($decoded);
-        $values = array_values($decoded);
-
-        $this->assertEquals($enumClass::names(), $keys, 'incorrect keys');
-        $this->assertEquals($enumClass::values(), $values, 'incorrect values');
+        $this->assertSame($expected, $result);
     }
 }
