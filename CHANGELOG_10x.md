@@ -34,6 +34,7 @@ Temporary changelog for `v10.x` series.
 * `getSameSite()` now returns `SameSite|null`, in `SetCookie` (_Http Cookies package_).
 * `getLogical()` and `logical()` new return `LogicalOperator` enum case (_Database package_).
 * Filters adapted to use `LogicalOperator` instead of `FieldCriteria::AND` / `FieldCriteria::OR` constants (_Database and Filters packages_).
+* `allows()` now also supports `LogicalOperator` enum as its second argument, in `Aedart\Filters\Processors\MatchingProcessor`. (_Filters packages_)
 * Changed return type of `Summation::dd()` from `void` to `never` (_Collections package_).
 
 **Non-breaking Changes**
