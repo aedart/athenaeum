@@ -20,7 +20,10 @@ interface CircuitBreaker
      *
      * The success state - the circuit breaker has
      * not reached its failure threshold.
+     *
+     * @deprecated use {@see \Aedart\Contracts\Circuits\States\Identifier::CLOSED} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Contracts\Circuits\States\Identifier::CLOSED instead", since: "10.x")]
     public const int CLOSED = 0;
 
     /**
@@ -28,7 +31,10 @@ interface CircuitBreaker
      *
      * This is the failure state - the circuit breaker has
      * tripped, because the failure threshold has been reached.
+     *
+     * @deprecated use {@see \Aedart\Contracts\Circuits\States\Identifier::OPEN} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Contracts\Circuits\States\Identifier::OPEN instead", since: "10.x")]
     public const int OPEN = 2;
 
     /**
@@ -38,7 +44,10 @@ interface CircuitBreaker
      * If that request or action succeeds, then the state must
      * be changed to {@see CLOSED}, otherwise the state must
      * change back to {@see OPEN}.
+     *
+     * @deprecated use {@see \Aedart\Contracts\Circuits\States\Identifier::HALF_OPEN} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Contracts\Circuits\States\Identifier::HALF_OPEN instead", since: "10.x")]
     public const int HALF_OPEN = 4;
 
     /**
