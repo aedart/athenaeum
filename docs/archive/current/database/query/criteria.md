@@ -114,7 +114,7 @@ This abstraction allows you to create slightly more constraints to be applied us
 
 ```php
 use Aedart\Database\Query\FieldFilter;
-use Aedart\Contracts\Database\Query\FieldCriteria;
+use Aedart\Contracts\Database\Query\Operators\LogicalOperator
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
 
@@ -122,11 +122,46 @@ class StringFilter extends FieldFilter
 {
     public function apply(Builder|EloquentBuilder $query)
     {
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhere($this->field(), $this->operator(), $this->value());
+        if ($this->logical() === LogicalOperator::OR) {
+            return $query->orWhere(
+                $this->field(),
+                $this->operator(),
+                $this->value()
+            );
         }
 
-        return $query->where($this->field(), $this->operator(), $this->value());
+        return $query->where(
+            $this->field(),
+            $this->operator(),
+            $this->value()
+        );
+    }
+}
+```
+
+Or, you can use the `buildFor()` utility method.
+
+```php
+use Aedart\Database\Query\FieldFilter;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
+
+class StringFilter extends FieldFilter
+{
+    public function apply(Builder|EloquentBuilder $query)
+    {
+        return $this->buildFor(
+            and: fn () => $query->where(
+                    $this->field(),
+                    $this->operator(),
+                    $this->value()
+                ),
+            or: fn () => $query->orWhere(
+                    $this->field(),
+                    $this->operator(),
+                    $this->value()
+                ), 
+        );
     }
 }
 ```
@@ -134,11 +169,11 @@ class StringFilter extends FieldFilter
 **Usage**
 
 ```php
-use Aedart\Contracts\Database\Query\FieldCriteria;
+use Aedart\Contracts\Database\Query\Operators\LogicalOperator;
 
 $result = Category::applyFilters([
-    StringFilter::make('name', 'LIKE', '%games%', FieldCriteria::OR),
-    StringFilter::make('name', 'LIKE', '%video%', FieldCriteria::OR),
+    StringFilter::make('name', 'LIKE', '%games%', LogicalOperator::OR),
+    StringFilter::make('name', 'LIKE', '%video%', LogicalOperator::OR),
 ])->get()
 ```
 
