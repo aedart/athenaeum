@@ -4,7 +4,6 @@ namespace Aedart\Circuits\States;
 
 use Aedart\Circuits\Concerns;
 use Aedart\Circuits\Exceptions\UnknownState;
-use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\States\Factory as StatesFactory;
 use Aedart\Contracts\Circuits\States\Identifier;
