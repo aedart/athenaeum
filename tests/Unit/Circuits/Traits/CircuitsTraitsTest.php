@@ -32,7 +32,7 @@ class CircuitsTraitsTest extends TraitTestCase
     /**
      * @return array
      */
-    public function awareOfComponentsProvider()
+    public function awareOfComponentsProvider(): array
     {
         return [
             'CircuitBreakerTrait' => [ CircuitBreakerTrait::class ],
@@ -54,7 +54,7 @@ class CircuitsTraitsTest extends TraitTestCase
      */
     #[DataProvider('awareOfComponentsProvider')]
     #[Test]
-    public function canInvokeAwareOfMethods(string $awareOfTrait)
+    public function canInvokeAwareOfMethods(string $awareOfTrait): void
     {
         $this->assertTraitMethods($awareOfTrait, null, null);
     }

@@ -45,7 +45,7 @@ class FailureTest extends UnitTestCase
      ****************************************************************/
 
     #[Test]
-    public function canCreateInstance()
+    public function canCreateInstance(): void
     {
         $failure = $this->makeFailure();
 
@@ -53,7 +53,7 @@ class FailureTest extends UnitTestCase
     }
 
     #[Test]
-    public function canCreateWithReasonAndContext()
+    public function canCreateWithReasonAndContext(): void
     {
         $faker = $this->getFaker();
 
@@ -73,7 +73,7 @@ class FailureTest extends UnitTestCase
     }
 
     #[Test]
-    public function hasReportedAtByDefault()
+    public function hasReportedAtByDefault(): void
     {
         $failure = $this->makeFailure();
 
@@ -84,7 +84,7 @@ class FailureTest extends UnitTestCase
     }
 
     #[Test]
-    public function canExportToArray()
+    public function canExportToArray(): void
     {
         $faker = $this->getFaker();
 
@@ -107,7 +107,7 @@ class FailureTest extends UnitTestCase
     }
 
     #[Test]
-    public function canExportToJson()
+    public function canExportToJson(): void
     {
         $faker = $this->getFaker();
 
@@ -127,7 +127,7 @@ class FailureTest extends UnitTestCase
     }
 
     #[Test]
-    public function canConvertToJson()
+    public function canConvertToJson(): void
     {
         $faker = $this->getFaker();
 
@@ -147,7 +147,7 @@ class FailureTest extends UnitTestCase
     }
 
     #[Test]
-    public function canCastToString()
+    public function canCastToString(): void
     {
         $result = (string) $this->makeFailure();
         ConsoleDebugger::output($result);
@@ -156,7 +156,7 @@ class FailureTest extends UnitTestCase
     }
 
     #[Test]
-    public function canSerializeAndUnserialize()
+    public function canSerializeAndUnserialize(): void
     {
         $faker = $this->getFaker();
 

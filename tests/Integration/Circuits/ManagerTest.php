@@ -25,7 +25,7 @@ class ManagerTest extends CircuitBreakerTestCase
      * @throws ProfileNotFoundException
      */
     #[Test]
-    public function canCreateCircuitBreaker()
+    public function canCreateCircuitBreaker(): void
     {
         $circuitBreaker = $this->makeCircuitBreaker('my_service');
 
@@ -36,7 +36,7 @@ class ManagerTest extends CircuitBreakerTestCase
      * @throws ProfileNotFoundException
      */
     #[Test]
-    public function returnsSameCircuitBreaker()
+    public function returnsSameCircuitBreaker(): void
     {
         $circuitBreakerA = $this->makeCircuitBreaker('my_service');
         $circuitBreakerB = $this->makeCircuitBreaker('my_service');
@@ -48,7 +48,7 @@ class ManagerTest extends CircuitBreakerTestCase
      * @throws ProfileNotFoundException
      */
     #[Test]
-    public function failsWhenServiceDoesNotExist()
+    public function failsWhenServiceDoesNotExist(): void
     {
         $this->expectException(ProfileNotFoundException::class);
 
@@ -59,7 +59,7 @@ class ManagerTest extends CircuitBreakerTestCase
      * @throws ProfileNotFoundException
      */
     #[Test]
-    public function failsWhenStoreProfileDoesNotExist()
+    public function failsWhenStoreProfileDoesNotExist(): void
     {
         $this->expectException(ProfileNotFoundException::class);
 

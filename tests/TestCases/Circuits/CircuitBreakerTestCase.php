@@ -13,6 +13,7 @@ use Aedart\Contracts\Circuits\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\State;
+use Aedart\Contracts\Circuits\States\Identifier;
 use Aedart\Contracts\Circuits\Store;
 use Aedart\Testing\TestCases\LaravelTestCase;
 use Codeception\Configuration;
@@ -139,8 +140,8 @@ abstract class CircuitBreakerTestCase extends LaravelTestCase
     /**
      * Creates a new state instance
      *
-     * @param int $id
-     * @param int|null $previous [optional]
+     * @param int|Identifier $id
+     * @param int|Identifier|null $previous [optional]
      * @param string|DateTimeInterface|null $createdAt [optional]
      * @param string|DateTimeInterface|null $expiresAt [optional]
      *
@@ -149,8 +150,8 @@ abstract class CircuitBreakerTestCase extends LaravelTestCase
      * @throws UnknownStateException
      */
     protected function makeState(
-        int $id,
-        int|null $previous = null,
+        int|Identifier $id,
+        int|Identifier|null $previous = null,
         string|DateTimeInterface|null $createdAt = null,
         string|DateTimeInterface|null $expiresAt = null
     ): State {
