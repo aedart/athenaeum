@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Circuits;
 
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
+use Aedart\Contracts\Circuits\States\Identifier;
 use DateTimeInterface;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
@@ -30,11 +31,11 @@ interface State extends Arrayable,
     public static function make(array $data = []): static;
 
     /**
-     * Returns the numeric identifier of this state
+     * Returns the identifier of this state
      *
-     * @return int
+     * @return Identifier
      */
-    public function id(): int;
+    public function id(): Identifier;
 
     /**
      * Returns the name of this state
@@ -69,7 +70,7 @@ interface State extends Arrayable,
      * Returns the previous state's identifier, if
      * any is available
      *
-     * @return int|null
+     * @return Identifier|null
      */
-    public function previous(): int|null;
+    public function previous(): Identifier|null;
 }

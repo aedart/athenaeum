@@ -5,6 +5,7 @@ namespace Aedart\Circuits\States;
 use Aedart\Circuits\Concerns;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\State;
+use Aedart\Contracts\Circuits\States\Identifier;
 use DateTimeInterface;
 use Illuminate\Support\Facades\Date;
 
@@ -24,9 +25,9 @@ abstract class BaseState implements State
     /**
      * Previous state identifier
      *
-     * @var int|null
+     * @var Identifier|null
      */
-    protected int|null $previous = null;
+    protected Identifier|null $previous = null;
 
     /**
      * Date and time of when this state was created
@@ -64,14 +65,10 @@ abstract class BaseState implements State
 
     /**
      * @inheritDoc
-     *
-     * @throws UnknownStateException
      */
     public function name(): string
     {
-        return $this->getIdentifierName(
-            $this->id()
-        );
+        return $this->id()->name();
     }
 
     /**
@@ -106,7 +103,7 @@ abstract class BaseState implements State
     /**
      * @inheritDoc
      */
-    public function previous(): int|null
+    public function previous(): Identifier|null
     {
         return $this->previous;
     }
@@ -145,17 +142,15 @@ abstract class BaseState implements State
     /**
      * Set previous state identifier
      *
-     * @param int|null $id [optional]
+     * @param int|Identifier|null $id [optional]
      *
      * @return self
      *
      * @throws UnknownStateException
      */
-    protected function setPrevious(int|null $id = null): static
+    protected function setPrevious(int|Identifier|null $id = null): static
     {
-        $this->assertStateIdentifier($id);
-
-        $this->previous = $id;
+        $this->previous = $this->resolveStateIdentifier($id);
 
         return $this;
     }
