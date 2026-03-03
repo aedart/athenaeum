@@ -16,6 +16,7 @@ Temporary changelog for `v10.x` series.
 * `Type` enum (_Http Messages package_).
 * `SameSite` enum (_Http Cookies package_).
 * `LogicalOperator` enum (_Database package_).
+* `Identifier` enum (_Circuits package_).
 * `Names`, `Values`, `Matching`, `Arrayable`, `Jsonable`, `Enums` and `BackedEnums` concerns (_Contracts package_).
 * `HasDefault` interface for Enums (_Contracts package_).
 
@@ -34,7 +35,11 @@ Temporary changelog for `v10.x` series.
 * `getSameSite()` now returns `SameSite|null`, in `SetCookie` (_Http Cookies package_).
 * `getLogical()` and `logical()` new return `LogicalOperator` enum case (_Database package_).
 * Filters adapted to use `LogicalOperator` instead of `FieldCriteria::AND` / `FieldCriteria::OR` constants (_Database and Filters packages_).
-* `allows()` now also supports `LogicalOperator` enum as its second argument, in `Aedart\Filters\Processors\MatchingProcessor`. (_Filters packages_)
+* `allows()` now also supports `LogicalOperator` enum as its second argument, in `Aedart\Filters\Processors\MatchingProcessor`. (_Filters packages_).
+* `make()` method now also accepts `Identifier` enum cases for `$id` and `$previous`, in `\Aedart\Contracts\Circuits\States\Factory` (_Circuits package_).
+* Return type of `id()` changed to `Identifier`, in `\Aedart\Contracts\Circuits\State` (_Circuits package_).
+* Return type of `previous()` changed to `Identifier|null`, in `\Aedart\Contracts\Circuits\State` (_Circuits package_).
+* `CircuitBreaker` and Circuit `Store` now relies on  `Identifier` enum, instead of predefined state identifier constants (_Circuits package_).
 * Changed return type of `Summation::dd()` from `void` to `never` (_Collections package_).
 
 **Non-breaking Changes**
@@ -61,6 +66,7 @@ Temporary changelog for `v10.x` series.
 * "Aware-of" components defined in `Aedart\Contracts\Support\Properties` and `Aedart\Support\Properties` (_was deprecated in Athenaeum `v9.x`_). [#210](https://github.com/aedart/athenaeum/issues/210).
 * `properties.php` (_aware-of generator configuration file, in the root of Athenaeum_) (_was deprecated in Athenaeum `v9.x`_). [#210](https://github.com/aedart/athenaeum/issues/210).
 * `resources/athenaeum` templates (_for aware-of components_), in `Support` package (_was deprecated in Athenaeum `v9.x`_). [#210](https://github.com/aedart/athenaeum/issues/210).
+* `\Aedart\Tests\Integration\Circuits\Stores\CacheStoreTest` (_was deprecated in `v9.4.0`_).
 
 ### Deprecated
 
@@ -86,3 +92,10 @@ Temporary changelog for `v10.x` series.
 * `\Aedart\Contracts\Http\Cookies\SetCookie::SAME_SITE_NONE`, replaced by `SameSite::NONE` enum case (_Http Cookies package_).
 * `\Aedart\Contracts\Database\Query\FieldCriteria::AND`, replaced by `LogicalOperator::AND` enum case (_Database package_).
 * `\Aedart\Contracts\Database\Query\FieldCriteria::OR`, replaced by `LogicalOperator::OR` enum case (_Database package_).
+* `\Aedart\Contracts\Circuits\CircuitBreaker::CLOSED`, replaced by `Identifier::CLOSED` enum case (_Circuits package_).
+* `\Aedart\Contracts\Circuits\CircuitBreaker::OPEN`, replaced by `Identifier::OPEN` enum case (_Circuits package_).
+* `\Aedart\Contracts\Circuits\CircuitBreaker::HALF_OPEN`, replaced by `Identifier::HALF_OPEN` enum case (_Circuits package_).
+* `\Aedart\Circuits\Concerns\Identifiers::$validStates`, replaced by `Identifier` enum (_Circuits package_).
+* `\Aedart\Circuits\Concerns\Identifiers::validStates`, replaced by `Identifier` enum (_Circuits package_).
+* `\Aedart\Circuits\Concerns\Identifiers::getIdentifierName`, replaced by `Identifier::name()` enum (_Circuits package_).
+* `\Aedart\Circuits\Concerns\Identifiers::assertStateIdentifier`, replaced by `Identifier::name()` enum (_Circuits package_).
