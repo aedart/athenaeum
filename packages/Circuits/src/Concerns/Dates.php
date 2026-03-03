@@ -42,6 +42,7 @@ trait Dates
     ): DateTimeInterface|null {
         return match(true) {
             $date instanceof DateTimeInterface => $date,
+            is_string($date) => Date::make($date),
             !isset($date) && $default === 'now' => $this->now(),
             default => Date::make($default)
         };
