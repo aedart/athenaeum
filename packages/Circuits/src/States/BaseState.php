@@ -114,11 +114,11 @@ abstract class BaseState implements State
     public function toArray(): array
     {
         return [
-            'id' => $this->id(),
+            'id' => $this->id()->value,
             'name' => $this->name(),
             'created_at' => $this->formatDate($this->createdAt()),
             'expires_at' => $this->formatDate($this->expiresAt()),
-            'previous' => $this->previous()
+            'previous' => $this->previous()?->value
         ];
     }
 
@@ -150,7 +150,10 @@ abstract class BaseState implements State
      */
     protected function setPrevious(int|Identifier|null $id = null): static
     {
-        $this->previous = $this->resolveStateIdentifier($id);
+        $this->previous = match(true) {
+            is_null($id) => null, // Ensure NOT to set a default previous here...
+            default => $this->resolveStateIdentifier($id)
+        };
 
         return $this;
     }
