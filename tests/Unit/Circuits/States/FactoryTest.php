@@ -3,7 +3,6 @@
 namespace Aedart\Tests\Unit\Circuits\States;
 
 use Aedart\Circuits\States\Factory;
-use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\States\Factory as StatesFactory;

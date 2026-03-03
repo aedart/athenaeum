@@ -91,7 +91,7 @@ trait Identifiers
      */
     protected function resolveStateIdentifier(int|Identifier|null $id = null): Identifier
     {
-        $resolved = match(true) {
+        $resolved = match (true) {
             is_null($id) => Identifier::default(),
             $id instanceof Identifier => $id,
             default => identifier::tryFrom($id)

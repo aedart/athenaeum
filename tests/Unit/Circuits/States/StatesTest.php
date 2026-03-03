@@ -5,7 +5,6 @@ namespace Aedart\Tests\Unit\Circuits\States;
 use Aedart\Circuits\States\ClosedState;
 use Aedart\Circuits\States\HalfOpenState;
 use Aedart\Circuits\States\OpenState;
-use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\States\Identifier;
@@ -64,7 +63,7 @@ class StatesTest extends UnitTestCase
     public function randomStateId(): int
     {
         return $this->getFaker()->randomElement(
-            array_map( fn (Identifier $id) =>  $id->value, Identifier::cases())
+            array_map(fn (Identifier $id) => $id->value, Identifier::cases())
         );
     }
 

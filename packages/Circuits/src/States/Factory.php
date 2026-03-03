@@ -49,7 +49,7 @@ class Factory implements StatesFactory
 
         $id = $this->resolveStateIdentifier($data['id']);
 
-        return match($id) {
+        return match ($id) {
             Identifier::CLOSED => ClosedState::make($data),
             Identifier::OPEN => OpenState::make($data),
             Identifier::HALF_OPEN => HalfOpenState::make($data),

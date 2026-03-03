@@ -56,7 +56,7 @@ enum Identifier: int implements HasDefault
      */
     public function name(): string
     {
-        return match($this) {
+        return match ($this) {
             self::CLOSED => 'closed',
             self::OPEN => 'open',
             self::HALF_OPEN => 'half open',

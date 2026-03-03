@@ -150,7 +150,7 @@ abstract class BaseState implements State
      */
     protected function setPrevious(int|Identifier|null $id = null): static
     {
-        $this->previous = match(true) {
+        $this->previous = match (true) {
             is_null($id) => null, // Ensure NOT to set a default previous here...
             default => $this->resolveStateIdentifier($id)
         };
