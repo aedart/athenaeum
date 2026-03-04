@@ -9,6 +9,8 @@ use Aedart\Properties\Overload;
  *
  * FOR TESTING ONLY
  *
+ * @deprecated will be removed in next major version, since v10.x
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Properties\Accessibility
  */
