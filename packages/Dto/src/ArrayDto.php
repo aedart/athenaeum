@@ -3,7 +3,6 @@
 namespace Aedart\Dto;
 
 use Aedart\Contracts\Dto;
-use Aedart\Dto\Concerns;
 use Aedart\Dto\Exceptions\UndefinedProperty;
 use Aedart\Utils\Helpers\MethodHelper;
 use Aedart\Utils\Json;
@@ -149,7 +148,7 @@ abstract class ArrayDto implements Dto
     public function jsonSerialize(): mixed
     {
         return array_map(function ($value) {
-            return match(true) {
+            return match (true) {
                 $value instanceof JsonSerializable => $value->jsonSerialize(),
                 $value instanceof Arrayable => $value->toArray(),
                 default => $value,
