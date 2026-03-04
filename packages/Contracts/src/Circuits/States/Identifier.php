@@ -4,6 +4,7 @@ namespace Aedart\Contracts\Circuits\States;
 
 use Aedart\Contracts\Utils\Enums\Concerns;
 use Aedart\Contracts\Utils\Enums\HasDefault;
+use JsonSerializable;
 
 /**
  * Circuit Breaker State Identifier
@@ -11,7 +12,9 @@ use Aedart\Contracts\Utils\Enums\HasDefault;
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Contracts\Circuits\States
  */
-enum Identifier: int implements HasDefault
+enum Identifier: int implements
+    HasDefault,
+    JsonSerializable
 {
     use Concerns\BackedEnums;
 

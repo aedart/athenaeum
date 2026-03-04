@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Http\Cookies;
 
 use Aedart\Contracts\Utils\Enums\Concerns;
+use JsonSerializable;
 use ValueError;
 
 /**
@@ -14,7 +15,7 @@ use ValueError;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Cookies
  */
-enum SameSite: string
+enum SameSite: string implements JsonSerializable
 {
     use Concerns\BackedEnums;
 

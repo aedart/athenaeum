@@ -2,6 +2,8 @@
 
 namespace Aedart\Contracts\Flysystem\Db;
 
+use Aedart\Contracts\Utils\Enums\Concerns;
+use JsonSerializable;
 use League\Flysystem\StorageAttributes;
 
 /**
@@ -10,8 +12,10 @@ use League\Flysystem\StorageAttributes;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Flysystem\Db
  */
-enum RecordTypes: string
+enum RecordTypes: string implements JsonSerializable
 {
+    use Concerns\BackedEnums;
+
     /**
      * Directory record type
      */
