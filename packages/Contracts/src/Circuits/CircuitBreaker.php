@@ -63,8 +63,8 @@ interface CircuitBreaker
     /**
      * Determine if the service is available
      *
-     * Method returns true if the circuit breaker's state is {@see CLOSED}.
-     * It MAY return true if state is {@see HALF_OPEN} - yet this is left to
+     * Method returns true if the circuit breaker's state is {@see Identifier::CLOSED}.
+     * It MAY return true if state is {@see Identifier::HALF_OPEN} - yet this is left to
      * actual implementation.
      *
      * @return bool
@@ -72,7 +72,7 @@ interface CircuitBreaker
     public function isAvailable(): bool;
 
     /**
-     * Change circuit breaker's state to {@see CLOSED}
+     * Change circuit breaker's state to {@see Identifier::CLOSED}
      *
      * This method SHOULD only be used when a request or action has
      * succeeded.
@@ -89,7 +89,7 @@ interface CircuitBreaker
     /**
      * Report failure and increments internal failure count.
      *
-     * Method MUST change the state to {@see OPEN}, if the internal
+     * Method MUST change the state to {@see Identifier::OPEN}, if the internal
      * failure count reaches the failure threshold.
      *
      * @see lastFailure
@@ -118,8 +118,8 @@ interface CircuitBreaker
      * Attempt to execute callback, e.g. request a resource or invoke action
      * from 3rd party service.
      *
-     * Must invoke `$callback`, if state is {@see CLOSED} or {@see HALF_OPEN}.
-     * Must invoke `$otherwise` callback if provided, when state is {@see OPEN}.
+     * Must invoke `$callback`, if state is {@see Identifier::CLOSED} or {@see Identifier::HALF_OPEN}.
+     * Must invoke `$otherwise` callback if provided, when state is {@see Identifier::OPEN}.
      *
      * Whenever a failure is detected, it MUST be reported via {@see reportFailure}.
      * Consequently, the {@see reportSuccess} method MUST be used upon success.
@@ -128,31 +128,31 @@ interface CircuitBreaker
      * @see retryDelay
      *
      * @param callable(static): mixed $callback Request or action to invoke on 3rd party service
-     * @param null|callable(static): mixed $otherwise [optional] This callback is invoked if state is {@see OPEN}
+     * @param null|callable(static): mixed $otherwise [optional] This callback is invoked if state is {@see Identifier::OPEN}
      *                      or if `$callback` fails.
      *
      * @return mixed Callback's resulting output. If `$otherwise` callback is provided,
      *               and it is invoked, then it's resulting output is returned.
      *
-     * @throws ServiceUnavailableException If state is {@see OPEN} and no `$otherwise` callback provided
+     * @throws ServiceUnavailableException If state is {@see Identifier::OPEN} and no `$otherwise` callback provided
      */
     public function attempt(callable $callback, callable|null $otherwise = null): mixed;
 
     /**
-     * Set the default callback to be invoked, when state is {@see OPEN} or
+     * Set the default callback to be invoked, when state is {@see Identifier::OPEN} or
      * if an attempt callback fails, in the {@see attempt} method.
      *
      * This callback is only invoked if not `$otherwise` callback is provided,
      * when {@see attempt} is invoked.
      *
-     * @param  null|callable(static): mixed  $otherwise  [optional] Default callback to invoke, if state is {@see OPEN}
+     * @param  null|callable(static): mixed  $otherwise  [optional] Default callback to invoke, if state is {@see Identifier::OPEN}
      *
      * @return self
      */
     public function otherwise(callable|null $otherwise = null): self;
 
     /**
-     * Returns the default callback to be invoked, when state is {@see OPEN} or
+     * Returns the default callback to be invoked, when state is {@see Identifier::OPEN} or
      * if an attempt callback fails, in the {@see attempt} method.
      *
      * @see otherwise
@@ -243,7 +243,7 @@ interface CircuitBreaker
     /**
      * Trip this circuit breaker
      *
-     * Method must change state to {@see OPEN} and start
+     * Method must change state to {@see Identifier::OPEN} and start
      * a grace period time measurement, if one isn't already
      * started.
      *
@@ -256,7 +256,7 @@ interface CircuitBreaker
      *
      * A grace period is started whenever circuit breaker is tripped.
      * It is used to determine if circuit breaker can attempt to change
-     * state to {@see HALF_OPEN}.
+     * state to {@see Identifier::HALF_OPEN}.
      *
      * @param int $seconds
      *
@@ -274,21 +274,21 @@ interface CircuitBreaker
     public function gracePeriod(): int;
 
     /**
-     * Determine if Circuit Breaker is in {@see CLOSED} state
+     * Determine if Circuit Breaker is in {@see Identifier::CLOSED} state
      *
      * @return bool
      */
     public function isClosed(): bool;
 
     /**
-     * Determine if Circuit Breaker is in {@see OPEN} state
+     * Determine if Circuit Breaker is in {@see Identifier::OPEN} state
      *
      * @return bool
      */
     public function isOpen(): bool;
 
     /**
-     * Determine if Circuit Breaker is in {@see HALF_OPEN} state
+     * Determine if Circuit Breaker is in {@see Identifier::HALF_OPEN} state
      *
      * @return bool
      */
