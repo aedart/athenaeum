@@ -89,6 +89,7 @@ abstract class CircuitBreakerTestCase extends LaravelTestCase
      * @return CircuitBreaker
      *
      * @throws ProfileNotFoundException
+     * @throws UnknownStateException
      */
     protected function makeCircuitBreaker(string $service, array $options = [], bool $reset = true): CircuitBreaker
     {
@@ -98,7 +99,7 @@ abstract class CircuitBreakerTestCase extends LaravelTestCase
         if ($reset) {
             $circuitBreaker->store()->reset();
             $circuitBreaker->changeState(
-                $this->makeState(CircuitBreaker::CLOSED)
+                $this->makeState(Identifier::CLOSED)
             );
         }
 
