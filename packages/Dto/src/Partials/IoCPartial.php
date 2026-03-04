@@ -13,6 +13,8 @@ use Aedart\Dto\Concerns;
  *
  * This partial is intended for the Dto abstraction(s)
  *
+ * @deprecated use {@see \Aedart\Dto\Concerns\Dependencies} instead, since v10.x
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Dto\Partials
  */
