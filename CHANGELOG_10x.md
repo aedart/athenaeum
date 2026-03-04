@@ -54,6 +54,7 @@ Temporary changelog for `v10.x` series.
 * `RemoveResponsePayload` middleware now uses a static array of truthy values (_Http Api package_).
 * `sameSite()` method now accepts `SameSite` enum case, in `SetCookie` (_Http Cookies package_).
 * Improved `resolveContent()` method in `GenericGenerator` (_ETags package_).
+* Backed enums that use the `BackedEnums` now inherit from `\JsonSerializable`.
 * Callback signatures for `callable` have been defined (_PHPDoc_).
 * `string` params have been replaced with `class-string<...>`, where class path is expected (_PHPDoc_).
 
