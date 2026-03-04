@@ -117,9 +117,8 @@ trait Dependencies
             return $value;
         }
 
-        // If the value corresponds to the given expected class,
-        // then there is no need to resolve anything from the
-        // IoC service container.
+        // If the value corresponds to the given expected class, then there is no need to resolve
+        // anything from the service container.
         $className = $type->getName();
         if ($value instanceof $className) {
             return $value;
@@ -167,7 +166,7 @@ trait Dependencies
                 return $value;
             }
 
-            // In case that "null" is provided and it is allowed...
+            // When "null" is provided, and it is allowed...
             if ($valueType === 'NULL' && $type->allowsNull()) {
                 return $value;
             }
@@ -204,7 +203,7 @@ trait Dependencies
     /**
      * Attempt to populate user-defined class, e.g. DTO or populatable instance
      *
-     * @param  string  $type
+     * @param  class-string  $type
      * @param  string  $parameter
      * @param  mixed  $value
      *
