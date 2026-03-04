@@ -3,10 +3,10 @@
 namespace Aedart\Dto;
 
 use Aedart\Contracts\Dto;
+use Aedart\Dto\Exceptions\UndefinedProperty;
 use Aedart\Dto\Partials\CastingPartial;
 use Aedart\Dto\Partials\DtoPartial;
 use Aedart\Dto\Partials\IoCPartial;
-use Aedart\Properties\Exceptions\UndefinedProperty;
 use Aedart\Utils\Helpers\MethodHelper;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
