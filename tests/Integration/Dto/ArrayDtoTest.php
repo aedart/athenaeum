@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Integration\Dto;
 
-use Aedart\Properties\Exceptions\UndefinedProperty;
+use Aedart\Contracts\Dto\Exceptions\UndefinedPropertyException;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\Helpers\Dummies\Dto\Organisation;
 use Aedart\Tests\TestCases\Dto\DtoTestCase;
@@ -70,7 +70,7 @@ class ArrayDtoTest extends DtoTestCase
     #[Test]
     public function failsReadingWhenPropertyDoesNotExist()
     {
-        $this->expectException(UndefinedProperty::class);
+        $this->expectException(UndefinedPropertyException::class);
 
         $dto = $this->makeArrayDto();
         $dto['myUnknownProperty'];
@@ -79,7 +79,7 @@ class ArrayDtoTest extends DtoTestCase
     #[Test]
     public function failsWritingWhenPropertyDoesNotExist()
     {
-        $this->expectException(UndefinedProperty::class);
+        $this->expectException(UndefinedPropertyException::class);
 
         $dto = $this->makeArrayDto();
         $dto['myUnknownProperty'] = 42;
