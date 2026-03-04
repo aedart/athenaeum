@@ -1,6 +1,7 @@
 {
     "name": "aedart/athenaeum-properties",
-    "description": "Provides means to dynamically deal with inaccessible properties, by implementing some of PHP's magic methods",
+    "description": "DEPRECATED - Provides means to dynamically deal with inaccessible properties, by implementing some of PHP's magic methods",
+    "abandoned": "aedart/athenaeum-dto",
     "keywords": [
         "Athenaeum",
         "Properties",
