@@ -15,6 +15,8 @@ use ReflectionProperty;
  * a components properties and their accessibility (in overloading
  * context)
  *
+ * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Properties
  */
@@ -34,7 +36,10 @@ trait Reflections
      * @return bool True if property exists and is accessible for "overloading"
      *
      * @throws ReflectionException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     protected function hasInternalProperty(string $name): bool
     {
         $reflection = new ReflectionClass($this);
@@ -55,7 +60,10 @@ trait Reflections
      * @return ReflectionProperty The given property
      *
      * @throws ReflectionException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     protected function getInternalProperty(string $name): ReflectionProperty
     {
         return (new ReflectionClass($this))->getProperty($name);
@@ -69,7 +77,10 @@ trait Reflections
      * @return bool True if method exists, false if not
      *
      * @throws ReflectionException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     protected function hasInternalMethod(string $name): bool
     {
         static $methods = [];

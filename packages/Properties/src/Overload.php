@@ -2,6 +2,7 @@
 
 namespace Aedart\Properties;
 
+use Aedart\Contracts\Dto\Exceptions\UndefinedPropertyException;
 use Aedart\Properties\Exceptions\UndefinedProperty;
 use Aedart\Utils\Helpers\MethodHelper;
 use ReflectionException;
@@ -15,6 +16,8 @@ use ReflectionProperty;
  * Components using this trait will have their properties overloaded.
  *
  * @link http://php.net/manual/en/language.oop5.overloading.php
+ *
+ * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Properties
@@ -35,8 +38,11 @@ trait Overload
      * @return mixed
      *
      * @throws ReflectionException
-     * @throws UndefinedProperty
+     * @throws UndefinedPropertyException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function __get(string $name): mixed
     {
         if (!$this->hasInternalProperty($name)) {
@@ -55,8 +61,11 @@ trait Overload
      * @return void
      *
      * @throws ReflectionException
-     * @throws UndefinedProperty
+     * @throws UndefinedPropertyException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function __set(string $name, mixed $value): void
     {
         if (!$this->hasInternalProperty($name)) {
@@ -79,7 +88,10 @@ trait Overload
      * @return bool
      *
      * @throws ReflectionException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function __isset(string $name): bool
     {
         if (!$this->hasInternalProperty($name)) {
@@ -95,7 +107,10 @@ trait Overload
      * @param string $name
      *
      * @throws ReflectionException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function __unset(string $name): void
     {
         if (!$this->hasInternalProperty($name)) {
@@ -117,8 +132,11 @@ trait Overload
      * @return mixed
      *
      * @throws ReflectionException
-     * @throws UndefinedProperty
+     * @throws UndefinedPropertyException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     protected function invokeGetter(ReflectionProperty $property): mixed
     {
         $methodName = MethodHelper::makeGetterName($property->getName());
@@ -142,8 +160,11 @@ trait Overload
      * @return mixed
      *
      * @throws ReflectionException
-     * @throws UndefinedProperty
+     * @throws UndefinedPropertyException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     protected function invokeSetter(ReflectionProperty $property, mixed $value): mixed
     {
         $methodName = MethodHelper::makeSetterName($property->getName());

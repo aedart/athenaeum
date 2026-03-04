@@ -34,6 +34,8 @@ use ReflectionProperty;
  *
  * @see AccessibilityLevels
  *
+ * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Properties
  */
@@ -59,7 +61,10 @@ trait Accessibility
      * @return self
      *
      * @throws RangeException If level is invalid
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     protected function setPropertyAccessibilityLevel(int $level): static
     {
         if (!$this->isPropertyAccessibilityLevelValid($level)) {
@@ -80,7 +85,10 @@ trait Accessibility
      * @see getDefaultPropertyAccessibilityLevel()
      *
      * @return int Property accessibility level
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     protected function getPropertyAccessibilityLevel(): int
     {
         if (!isset($this->propertyAccessibilityLevel)) {
@@ -96,7 +104,10 @@ trait Accessibility
      * @see AccessibilityLevels
      *
      * @return int Default property accessibility level
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     protected function getDefaultPropertyAccessibilityLevel(): int
     {
         return AccessibilityLevels::PROTECTED_LEVEL;
@@ -110,7 +121,10 @@ trait Accessibility
      * @param int $level Property accessibility level
      *
      * @return bool True if level is valid, false if not
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     protected function isPropertyAccessibilityLevelValid(int $level): bool
     {
         if (!isset(AccessibilityLevels::LEVELS[$level])) {
@@ -134,7 +148,10 @@ trait Accessibility
      * @param ReflectionProperty $property The given property in question
      *
      * @return bool True if the given property is accessible, false if not
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     protected function isPropertyAccessible(ReflectionProperty $property): bool
     {
         $level = $this->getPropertyAccessibilityLevel();
