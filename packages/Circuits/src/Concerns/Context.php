@@ -21,8 +21,7 @@ trait Context
     protected array $context = [];
 
     /**
-     * Arbitrary data associated with exception
-     * or failure
+     * Arbitrary data associated with exception or failure
      *
      * @return array
      */
@@ -32,8 +31,7 @@ trait Context
     }
 
     /**
-     * Set arbitrary data associated with exception
-     * or failure
+     * Set arbitrary data associated with exception or failure
      *
      * @param array $context [optional]
      *

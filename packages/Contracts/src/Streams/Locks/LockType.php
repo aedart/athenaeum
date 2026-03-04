@@ -2,14 +2,19 @@
 
 namespace Aedart\Contracts\Streams\Locks;
 
+use Aedart\Contracts\Utils\Enums\Concerns;
+use JsonSerializable;
+
 /**
  * Lock Type
  *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Contracts\Streams\Locks
  */
-enum LockType: int
+enum LockType: int implements JsonSerializable
 {
+    use Concerns\BackedEnums;
+
     /**
      * Shared lock type (reader)
      *

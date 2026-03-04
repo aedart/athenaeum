@@ -4,10 +4,10 @@ namespace Aedart\Circuits\Stores;
 
 use Aedart\Circuits\Exceptions\StateCannotBeLocked;
 use Aedart\Circuits\Exceptions\StoreException;
-use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\State;
+use Aedart\Contracts\Circuits\States\Identifier;
 use Aedart\Contracts\Circuits\States\Lockable;
 use Aedart\Contracts\Circuits\Store;
 use Aedart\Contracts\Support\Helpers\Cache\CacheAware;
@@ -108,6 +108,9 @@ class CacheStore extends BaseStore implements
 
     /**
      * @inheritDoc
+     *
+     * @throws UnknownStateException
+     * @throws InvalidArgumentException
      */
     public function getState(): State
     {
@@ -120,7 +123,7 @@ class CacheStore extends BaseStore implements
         $state = $this->getCache()->get($this->stateKey);
 
         if (!isset($state)) {
-            return $this->getStateFactory()->make(CircuitBreaker::CLOSED);
+            return $this->getStateFactory()->make(Identifier::CLOSED);
         }
 
         return $this->fromStore($state);
@@ -140,9 +143,9 @@ class CacheStore extends BaseStore implements
         /** @var \Illuminate\Contracts\Cache\Store|LockProvider $store */
         $store = $this->getCache()->getStore();
         $lock = $store->lock(
-            $this->lockedStateKey,
-            $this->stateTtl($state),
-            $this->service
+            name: $this->lockedStateKey,
+            seconds: $this->stateTtl($state),
+            owner: $this->service
         );
 
         // Attempt to acquire lock. If successfully, then the callback is invoked and

@@ -17,8 +17,8 @@ interface Factory
     /**
      * Creates a new state instance that matches given identifier
      *
-     * @param int $id
-     * @param int|null $previous [optional] Previous state identifier
+     * @param int|Identifier $id
+     * @param int|Identifier|null $previous [optional] Previous state identifier
      * @param  DateTimeInterface|string|null  $createdAt [optional]
      * @param  DateTimeInterface|string|null  $expiresAt [optional]
      *
@@ -27,8 +27,8 @@ interface Factory
      * @throws UnknownStateException
      */
     public function make(
-        int $id,
-        int|null $previous = null,
+        int|Identifier $id,
+        int|Identifier|null $previous = null,
         DateTimeInterface|string|null $createdAt = null,
         DateTimeInterface|string|null $expiresAt = null
     ): State;

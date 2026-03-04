@@ -42,7 +42,7 @@ class FactoryTest extends UnitTestCase
      ****************************************************************/
 
     #[Test]
-    public function canObtainInstance()
+    public function canObtainInstance(): void
     {
         $factory = $this->makeFailureFactory();
 
@@ -50,7 +50,7 @@ class FactoryTest extends UnitTestCase
     }
 
     #[Test]
-    public function canCreateFailure()
+    public function canCreateFailure(): void
     {
         $factory = $this->makeFailureFactory();
 

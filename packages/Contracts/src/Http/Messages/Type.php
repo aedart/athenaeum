@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Http\Messages;
 
 use Aedart\Contracts\Utils\Enums\Concerns;
+use JsonSerializable;
 
 /**
  * Http Message Type
@@ -10,7 +11,7 @@ use Aedart\Contracts\Utils\Enums\Concerns;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Http\Messages
  */
-enum Type: string
+enum Type: string implements JsonSerializable
 {
     use Concerns\BackedEnums;
 

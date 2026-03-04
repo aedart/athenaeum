@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Helpers\Dummies\Contracts\Utils\Enums;
 
 use Aedart\Contracts\Utils\Enums\Concerns;
+use JsonSerializable;
 
 /**
  * Integer State
@@ -10,7 +11,7 @@ use Aedart\Contracts\Utils\Enums\Concerns;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Contracts\Utils\Enums
  */
-enum IntegerState: int
+enum IntegerState: int implements JsonSerializable
 {
     use Concerns\BackedEnums;
 

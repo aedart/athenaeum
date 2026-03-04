@@ -3,10 +3,10 @@
 namespace Aedart\Tests\Unit\Circuits\States;
 
 use Aedart\Circuits\States\Factory;
-use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\State;
 use Aedart\Contracts\Circuits\States\Factory as StatesFactory;
+use Aedart\Contracts\Circuits\States\Identifier;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Codeception\Attribute\Group;
 use PHPUnit\Framework\Attributes\Test;
@@ -44,7 +44,7 @@ class FactoryTest extends UnitTestCase
      ****************************************************************/
 
     #[Test]
-    public function canObtainInstance()
+    public function canObtainInstance(): void
     {
         $factory = $this->makeStatesFactory();
 
@@ -55,11 +55,11 @@ class FactoryTest extends UnitTestCase
      * @throws UnknownStateException
      */
     #[Test]
-    public function canCreateState()
+    public function canCreateState(): void
     {
         $factory = $this->makeStatesFactory();
 
-        $state = $factory->make(CircuitBreaker::OPEN);
+        $state = $factory->make(Identifier::OPEN);
 
         $this->assertInstanceOf(State::class, $state);
     }
@@ -68,7 +68,7 @@ class FactoryTest extends UnitTestCase
      * @throws UnknownStateException
      */
     #[Test]
-    public function failsWhenNoIdProvided()
+    public function failsWhenNoIdProvided(): void
     {
         $this->expectException(UnknownStateException::class);
 
@@ -79,7 +79,7 @@ class FactoryTest extends UnitTestCase
      * @throws UnknownStateException
      */
     #[Test]
-    public function failsWhenIdIsUnknown()
+    public function failsWhenIdIsUnknown(): void
     {
         $this->expectException(UnknownStateException::class);
 

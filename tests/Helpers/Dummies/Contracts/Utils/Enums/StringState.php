@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Helpers\Dummies\Contracts\Utils\Enums;
 
 use Aedart\Contracts\Utils\Enums\Concerns;
+use JsonSerializable;
 
 /**
  * String State
@@ -12,7 +13,7 @@ use Aedart\Contracts\Utils\Enums\Concerns;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Contracts\Utils\Enums
  */
-enum StringState: string
+enum StringState: string implements JsonSerializable
 {
     use Concerns\BackedEnums;
 

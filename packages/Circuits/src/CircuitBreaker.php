@@ -13,6 +13,7 @@ use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\Failures\FailureFactoryAware;
 use Aedart\Contracts\Circuits\State;
+use Aedart\Contracts\Circuits\States\Identifier;
 use Aedart\Contracts\Circuits\States\StateFactoryAware;
 use Aedart\Contracts\Circuits\Store;
 use Aedart\Contracts\Circuits\Stores\StoreAware;
@@ -61,7 +62,7 @@ class CircuitBreaker implements
 
     /**
      * Maximum amount of failures before circuit breaker
-     * must trip; change state to {@see static::OPEN}
+     * must trip; change state to {@see Identifier::OPEN}
      *
      * @var int
      */
@@ -131,7 +132,7 @@ class CircuitBreaker implements
 
         // Change to closed state
         $this->changeState(
-            $this->makeState(static::CLOSED)
+            $this->makeState(Identifier::CLOSED)
         );
 
         return $this;
@@ -169,10 +170,10 @@ class CircuitBreaker implements
         }
 
         $failure = $this->getFailureFactory()->make(
-            $exception->getMessage(),
-            $context,
-            $this->now(),
-            $this->totalFailures()
+            reason: $exception->getMessage(),
+            context: $context,
+            reportedAt: $this->now(),
+            totalFailures: $this->totalFailures()
         );
 
         return $this->reportFailure($failure);
@@ -302,7 +303,7 @@ class CircuitBreaker implements
     {
         // Change state to open
         $this->changeState(
-            $this->makeState(static::OPEN)
+            $this->makeState(Identifier::OPEN)
         );
 
         // Register a grace period time measurement
@@ -332,7 +333,7 @@ class CircuitBreaker implements
      */
     public function isClosed(): bool
     {
-        return $this->state()->id() === static::CLOSED;
+        return $this->state()->id() === Identifier::CLOSED;
     }
 
     /**
@@ -340,7 +341,7 @@ class CircuitBreaker implements
      */
     public function isOpen(): bool
     {
-        return $this->state()->id() === static::OPEN;
+        return $this->state()->id() === Identifier::OPEN;
     }
 
     /**
@@ -348,7 +349,7 @@ class CircuitBreaker implements
      */
     public function isHalfOpen(): bool
     {
-        return $this->state()->id() === static::HALF_OPEN;
+        return $this->state()->id() === Identifier::HALF_OPEN;
     }
 
     /**
@@ -383,7 +384,7 @@ class CircuitBreaker implements
      * Prepare circuit breaker, set its properties according
      * to received options
      */
-    protected function prepareFromOptions()
+    protected function prepareFromOptions(): void
     {
         $this->timezone = $this->getOption('timezone', $this->timezone);
         $this->stateTtl = $this->getOption('state_ttl', $this->stateTtl);
@@ -449,7 +450,7 @@ class CircuitBreaker implements
     }
 
     /**
-     * Tries to change state to {@see CircuitBreakerInterface::HALF_OPEN} and execute
+     * Tries to change state to {@see Identifier::HALF_OPEN} and execute
      * given callback.
      *
      * If unable to change state, the `$otherwise` callback is invoked.
@@ -465,7 +466,7 @@ class CircuitBreaker implements
      */
     protected function tryHalfOpen(State $state, callable $callback, callable $otherwise): mixed
     {
-        $halfOpen = $this->makeState(static::HALF_OPEN, $state);
+        $halfOpen = $this->makeState(Identifier::HALF_OPEN, $state);
         $wasLocked = false;
 
         $result = $this->store()->lockState($halfOpen, function () use (&$wasLocked, $callback, $otherwise) {
@@ -499,7 +500,7 @@ class CircuitBreaker implements
     }
 
     /**
-     * Determine if state is available ({@see static::CLOSED} or {@see static::HALF_OPEN})
+     * Determine if state is available ({@see Identifier::CLOSED} or {@see Identifier::HALF_OPEN})
      *
      * @param State $state
      *
@@ -509,7 +510,7 @@ class CircuitBreaker implements
     {
         $id = $this->state()->id();
 
-        return $id === static::CLOSED || $id === static::HALF_OPEN;
+        return $id === Identifier::CLOSED || $id === Identifier::HALF_OPEN;
     }
 
     /**
@@ -535,9 +536,9 @@ class CircuitBreaker implements
     {
         return function () {
             throw ServiceUnavailable::make(
-                $this->name(),
-                $this->state(),
-                $this->lastFailure()
+                service: $this->name(),
+                lastState: $this->state(),
+                lastFailure: $this->lastFailure()
             );
         };
     }
@@ -565,7 +566,7 @@ class CircuitBreaker implements
      */
     protected function hasGracePeriodPast(State $current): bool
     {
-        if ($current->id() !== static::OPEN) {
+        if ($current->id() !== Identifier::OPEN) {
             return false;
         }
 
@@ -575,22 +576,22 @@ class CircuitBreaker implements
     /**
      * Creates a new state instance
      *
-     * @param int $id State identifier
+     * @param int|Identifier $id State identifier
      * @param State|null $previous [optional] Resolves to current state if none given
      *
      * @return State
      *
      * @throws UnknownStateException
      */
-    protected function makeState(int $id, State|null $previous = null): State
+    protected function makeState(int|Identifier $id, State|null $previous = null): State
     {
         $previous = $previous ?? $this->state();
 
         return $this->getStateFactory()->make(
-            $id,
-            $previous->id(),
-            $this->now(),
-            $this->resolveStateExpiresAt()
+            id: $id,
+            previous: $previous->id(),
+            createdAt: $this->now(),
+            expiresAt: $this->resolveStateExpiresAt()
         );
     }
 

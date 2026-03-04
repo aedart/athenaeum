@@ -3,6 +3,7 @@
 namespace Aedart\Contracts\Flysystem;
 
 use Aedart\Contracts\Utils\Enums\Concerns;
+use JsonSerializable;
 use League\Flysystem\Visibility as FlysystemVisibility;
 
 /**
@@ -11,7 +12,7 @@ use League\Flysystem\Visibility as FlysystemVisibility;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Flysystem
  */
-enum Visibility: string
+enum Visibility: string implements JsonSerializable
 {
     use Concerns\BackedEnums;
 

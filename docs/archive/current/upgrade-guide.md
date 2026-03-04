@@ -349,6 +349,37 @@ $cookie = new SetCookie()
 $secure = $cookie->isSecure() // true
 ```
 
+### Circuit Breaker State Identifiers
+
+The state identifiers (_constants_) defined in `\Aedart\Contracts\Circuits\CircuitBreaker` have been deprecated. A new `Identifier` enum has replaced them.
+Consequently, the `id()` method of circuit breaker's `State` now returns an enum case. Unless you have logic that directly depends on the circuit breaker's
+state identifier, then this change _should_ not affect your.
+
+**_:x: previously_**
+
+```php
+use Aedart\Contracts\Circuits\CircuitBreaker;
+
+/** @var CircuitBreaker $circuitBreaker */
+$id = $circuitBreaker->state()->id();
+
+echo gettype($id); // integer
+var_export($id === CircuitBreaker::CLOSED); // true
+```
+
+**_:heavy_check_mark: Now_**
+
+```php
+use Aedart\Contracts\Circuits\States\Identifier;
+use Aedart\Contracts\Circuits\CircuitBreaker;
+
+/** @var CircuitBreaker $circuitBreaker */
+$id = $circuitBreaker->state()->id();
+
+echo gettype($id); // object
+var_export($id === Identifier::CLOSED); // true
+```
+
 ### Removed "Aware-of" Components
 
 The "aware-of" components that were located in `Aedart\Contracts\Support\Properties` and `Aedart\Support\Properties` have been removed.

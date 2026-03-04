@@ -40,15 +40,12 @@ trait Dates
         DateTimeInterface|string|null $date = null,
         DateTimeInterface|string|null $default = 'now'
     ): DateTimeInterface|null {
-        if ($date instanceof DateTimeInterface) {
-            return $date;
-        } elseif (is_string($date)) {
-            return Date::make($date);
-        } elseif (!isset($date) && $default === 'now') {
-            return Date::now($this->timezone);
-        } else {
-            return Date::make($default);
-        }
+        return match (true) {
+            $date instanceof DateTimeInterface => $date,
+            is_string($date) => Date::make($date),
+            !isset($date) && $default === 'now' => $this->now(),
+            default => Date::make($default)
+        };
     }
 
     /**
@@ -83,6 +80,6 @@ trait Dates
      */
     protected function formatDate(DateTimeInterface|null $date = null): string|null
     {
-        return optional($date)->format($this->dateFormat);
+        return $date?->format($this->dateFormat);
     }
 }

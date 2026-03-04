@@ -8,6 +8,7 @@ use Aedart\Contracts\Circuits\Events\HasHalfOpened;
 use Aedart\Contracts\Circuits\Events\HasOpened;
 use Aedart\Contracts\Circuits\Exceptions\StateCannotBeLockedException;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
+use Aedart\Contracts\Circuits\States\Identifier;
 use Aedart\Contracts\Circuits\States\Lockable;
 
 /**
@@ -43,7 +44,7 @@ interface Store
      * Returns circuit breaker's state
      *
      * If no state is available, e.g. if none previously set,
-     * then this method MUST return a {@see CircuitBreaker::CLOSED} state
+     * then this method MUST return a {@see Identifier::CLOSED} state
      *
      * @return State
      */
@@ -53,7 +54,7 @@ interface Store
      * Attempt to obtain a lock for given state
      *
      * This method is intended for setting intermediate states,
-     * e.g. like the {@see CircuitBreaker::HALF_OPEN} state.
+     * e.g. like the {@see Identifier::HALF_OPEN} state.
      *
      * @param State|Lockable $state Lockable state
      * @param callable $callback Invoked if locked is successfully acquired.
@@ -108,9 +109,8 @@ interface Store
     /**
      * Starts measuring a "grace period" (time past)
      *
-     * Method is intended to be invoked whenever a
-     * circuit breaker failure threshold has been
-     * reached, and it's state is changed to {@see CircuitBreaker::OPEN}.
+     * Method is intended to be invoked whenever a circuit breaker failure threshold has been
+     * reached, and it's state is changed to {@see Identifier::OPEN}.
      *
      * Method MUST not (re)start time measurement, if
      * a grace period measurement has already been started.
@@ -124,9 +124,8 @@ interface Store
     /**
      * Determine if a grace period has past
      *
-     * A grace period is measured from the time of
-     * the first registered failure and until a time
-     * interval has past.
+     * A grace period is measured from the time of the first registered
+     * failure and until a time interval has past.
      *
      * @return bool
      */
