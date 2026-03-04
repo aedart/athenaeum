@@ -5,7 +5,6 @@ namespace Aedart\Dto;
 use Aedart\Contracts\Dto;
 use Aedart\Dto\Concerns;
 use Aedart\Dto\Exceptions\UndefinedProperty;
-use Aedart\Dto\Partials\CastingPartial;
 use Aedart\Utils\Helpers\MethodHelper;
 use Aedart\Utils\Json;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -27,7 +26,7 @@ use Throwable;
 abstract class ArrayDto implements Dto
 {
     use Concerns\Dependencies;
-    use CastingPartial;
+    use Concerns\Casting;
 
     /**
      * The properties of this Dto
