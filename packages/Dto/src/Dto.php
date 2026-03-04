@@ -31,6 +31,8 @@ use Throwable;
  *
  * @see \Aedart\Contracts\Dto
  *
+ * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Dto
  */
