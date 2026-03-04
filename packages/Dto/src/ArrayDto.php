@@ -3,10 +3,10 @@
 namespace Aedart\Dto;
 
 use Aedart\Contracts\Dto;
+use Aedart\Dto\Concerns;
 use Aedart\Dto\Exceptions\UndefinedProperty;
 use Aedart\Dto\Partials\CastingPartial;
 use Aedart\Dto\Partials\DtoPartial;
-use Aedart\Dto\Partials\IoCPartial;
 use Aedart\Utils\Helpers\MethodHelper;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
@@ -23,7 +23,7 @@ use Throwable;
  */
 abstract class ArrayDto implements Dto
 {
-    use IoCPartial;
+    use Concerns\Dependencies;
     use DtoPartial;
     use CastingPartial;
 
