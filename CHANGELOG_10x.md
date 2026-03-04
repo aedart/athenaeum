@@ -39,7 +39,7 @@ Temporary changelog for `v10.x` series.
 * `make()` method now also accepts `Identifier` enum cases for `$id` and `$previous`, in `\Aedart\Contracts\Circuits\States\Factory` (_Circuits package_).
 * Return type of `id()` changed to `Identifier`, in `\Aedart\Contracts\Circuits\State` (_Circuits package_).
 * Return type of `previous()` changed to `Identifier|null`, in `\Aedart\Contracts\Circuits\State` (_Circuits package_).
-* `CircuitBreaker` and Circuit `Store` now relies on  `Identifier` enum, instead of predefined state identifier constants (_Circuits package_).
+* `CircuitBreaker` and Circuit `Store` now relies on `Identifier` enum, instead of predefined state identifier constants (_Circuits package_).
 * Changed return type of `Summation::dd()` from `void` to `never` (_Collections package_).
 
 **Non-breaking Changes**
