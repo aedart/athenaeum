@@ -39,8 +39,8 @@ enum Identifier: int implements
      *
      * In this state, a single request (or action) is attempted.
      * If that request or action succeeds, then the state must
-     * be changed to {@see CLOSED}, otherwise the state must
-     * change back to {@see OPEN}.
+     * be changed to {@see Identifier::CLOSED}, otherwise the state must
+     * change back to {@see Identifier::OPEN}.
      */
     case HALF_OPEN = 4;
 
