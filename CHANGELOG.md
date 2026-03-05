@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* `BelongsToFilter` does not assert value (_Filters package_). [#261](https://github.com/aedart/athenaeum/issues/261).
+
 ## [9.25.0] - 2026-02-27
 
 ### Changed
