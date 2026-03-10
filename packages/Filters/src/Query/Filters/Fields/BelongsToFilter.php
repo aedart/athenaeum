@@ -65,6 +65,9 @@ class BelongsToFilter extends BaseFieldFilter
         $operator = $operator ?? 'eq';
 
         parent::__construct($field, $operator, $value, $logical);
+
+        // Reset the skip assert state...
+        $this->skipValueAssert = false;
     }
 
     /**
