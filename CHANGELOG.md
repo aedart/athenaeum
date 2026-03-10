@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.25.1] - 2026-03-05
+
+### Fixed
+
+* `BelongsToFilter` does not assert value before applying query (_Filters package_). [#261](https://github.com/aedart/athenaeum/issues/261).
+
 ## [9.25.0] - 2026-02-27
 
 ### Changed
@@ -1867,7 +1873,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/9.25.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/9.25.1...HEAD
+[9.25.1]: https://github.com/aedart/athenaeum/compare/9.25.0...9.25.1
 [9.25.0]: https://github.com/aedart/athenaeum/compare/9.24.0...9.25.0
 [9.24.0]: https://github.com/aedart/athenaeum/compare/9.23.0...9.24.0
 [9.23.0]: https://github.com/aedart/athenaeum/compare/9.22.0...9.23.0
