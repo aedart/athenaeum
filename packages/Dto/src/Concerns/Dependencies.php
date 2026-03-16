@@ -4,7 +4,6 @@ namespace Aedart\Dto\Concerns;
 
 use Aedart\Contracts\Dto;
 use Aedart\Contracts\Utils\Populatable;
-use Aedart\Utils\Memory\Unit;
 use BackedEnum;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
@@ -326,7 +325,7 @@ trait Dependencies
         // Otherwise, attempt to create enum-case from value
         try {
             return $class::from($value);
-        } catch(ValueError|TypeError $exception) {
+        } catch (ValueError|TypeError $exception) {
             throw new TypeError(
                 sprintf('Unable to populate property "%s": %s', $property, $exception->getMessage()),
                 $exception->getCode(),
