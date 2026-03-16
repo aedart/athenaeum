@@ -6,8 +6,10 @@ use Aedart\Testing\TestCases\IntegrationTestCase;
 use Aedart\Tests\Helpers\Dummies\Dto\Article;
 use Aedart\Tests\Helpers\Dummies\Dto\Organisation;
 use Aedart\Tests\Helpers\Dummies\Dto\Person;
+use Aedart\Tests\Helpers\Dummies\Dto\Product;
 use Aedart\Tests\Helpers\Dummies\Dto\Record;
 use Carbon\Carbon;
+use Throwable;
 
 /**
  * DTo Test Case
@@ -27,7 +29,7 @@ abstract class DtoTestCase extends IntegrationTestCase
      * @param array $data [optional]
      * @return Person
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function makeDto(array $data = []): Person
     {
@@ -69,6 +71,20 @@ abstract class DtoTestCase extends IntegrationTestCase
     public function makeArrayDtoWithUnionTypes(array $data = []): Article
     {
         return Article::makeNew($data);
+    }
+
+    /**
+     * Returns a new Array Dto that contains an enum among its properties
+     *
+     * @param array $data [optional]
+     *
+     * @return Product
+     *
+     * @throws Throwable
+     */
+    public function makeArrayDtoWithEnum(array $data = []): Product
+    {
+        return Product::makeNew($data);
     }
 
     /*****************************************************************
