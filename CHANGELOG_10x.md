@@ -10,6 +10,7 @@ Temporary changelog for `v10.x` series.
 * `LegacyRecordFormatter` (_deprecated_) for compatibility with current audit trail record formatting (_Audit Trail package_).
 * `withoutRecording()` util method to perform an operation without recording model's changes, in `\Aedart\Audit\Concerns\ChangeRecording` (_Audit Trail package_).
 * `performChange()` util method that allows setting the next audit trail message, when performing changes, in `\Aedart\Audit\Concerns\ChangeRecording` (_Audit Trail package_).
+* Support for resolving `BackedEnum` types in `ArrayDto` (_Dto package_).
 * `isSluggable()` util in `helpers/models.php` (_Database package_).
 * `Arguments` and `Callback` concerns (_Utils package_).
 * `LockType` enum (_Streams package_).
