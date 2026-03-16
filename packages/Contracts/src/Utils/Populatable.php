@@ -20,17 +20,17 @@ interface Populatable
      * If an empty array is provided, nothing is populated.
      *
      * If a value or property is not given via $data, then it
-     * is NOT modified / changed.
+     * is **NOT** changed.
      *
-     * Example:
+     * **Example**:
      * ```
-     *      $myComponent->populate([
-     *          'myProperty' => 'myPropertyValue',
-     *          'myOtherProperty' => 42.5
-     *      ])
+     * $myComponent->populate([
+     *   'myProperty' => 'myPropertyValue',
+     *   'myOtherProperty' => 42.5
+     * ])
      * ```
      *
-     * @param array $data [optional] Key-value pair, key = property name, value = property value
+     * @param array<string, mixed> $data [optional] Key-value pair, key = property name, value = property value
      *
      * @return self
      *

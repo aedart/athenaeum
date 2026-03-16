@@ -31,6 +31,8 @@ use Throwable;
  *
  * @see \Aedart\Contracts\Dto
  *
+ * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Dto
  */
@@ -49,7 +51,10 @@ abstract class Dto implements DtoInterface
      * @param Container|null $container [optional]
      *
      * @throws Throwable
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function __construct(array $properties = [], Container|null $container = null)
     {
         $this
@@ -63,7 +68,10 @@ abstract class Dto implements DtoInterface
      * @throws ReflectionException
      * @throws BindingResolutionException
      * @throws Throwable
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function __set(string $name, mixed $value): void
     {
         $resolvedValue = $value;
@@ -80,7 +88,10 @@ abstract class Dto implements DtoInterface
      * {@inheritdoc}
      *
      * @throws ReflectionException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function populatableProperties(): array
     {
         $reflection = new ReflectionClass($this);

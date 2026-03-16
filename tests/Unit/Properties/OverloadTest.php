@@ -10,6 +10,8 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * OverloadTest
  *
+ * @deprecated will be removed in next major version, since v10.x
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Properties
  */

@@ -2,7 +2,6 @@
 
 namespace Aedart\Contracts\Utils\Enums\Concerns;
 
-use Aedart\Utils\Json;
 use JsonException;
 
 /**
@@ -28,7 +27,9 @@ trait Jsonable
      */
     public function toJson(int $options = 0): string
     {
-        return Json::encode($this->jsonSerialize(), $options);
+        $options |= JSON_THROW_ON_ERROR;
+
+        return json_encode($this->jsonSerialize(), $options);
     }
 
     /**

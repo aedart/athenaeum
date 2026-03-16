@@ -10,6 +10,7 @@ Temporary changelog for `v10.x` series.
 * `LegacyRecordFormatter` (_deprecated_) for compatibility with current audit trail record formatting (_Audit Trail package_).
 * `withoutRecording()` util method to perform an operation without recording model's changes, in `\Aedart\Audit\Concerns\ChangeRecording` (_Audit Trail package_).
 * `performChange()` util method that allows setting the next audit trail message, when performing changes, in `\Aedart\Audit\Concerns\ChangeRecording` (_Audit Trail package_).
+* Support for resolving `BackedEnum` types in `ArrayDto` (_Dto package_).
 * `isSluggable()` util in `helpers/models.php` (_Database package_).
 * `Arguments` and `Callback` concerns (_Utils package_).
 * `LockType` enum (_Streams package_).
@@ -19,6 +20,9 @@ Temporary changelog for `v10.x` series.
 * `Identifier` enum (_Circuits package_).
 * `Names`, `Values`, `Matching`, `Arrayable`, `Jsonable`, `Enums` and `BackedEnums` concerns (_Contracts package_).
 * `HasDefault` interface for Enums (_Contracts package_).
+* `UndefinedPropertyException` interface (_Contracts package_).
+* `Dependencies` and `Casting` concerns (_Dto package_).
+* `UndefinedProperty` exception (_Dto package_).
 
 ### Changed
 
@@ -41,6 +45,8 @@ Temporary changelog for `v10.x` series.
 * Return type of `previous()` changed to `Identifier|null`, in `\Aedart\Contracts\Circuits\State` (_Circuits package_).
 * `CircuitBreaker` and Circuit `Store` now relies on `Identifier` enum, instead of predefined state identifier constants (_Circuits package_).
 * Changed return type of `Summation::dd()` from `void` to `never` (_Collections package_).
+* Refactored `ArrayDto` to use new `Dependencies` and `Casting` concerns. Previously used "partials", which have been new been deprecated (_Dto package_).
+* `ArrayDto` now throws `Aedart\Dto\Exceptions\UndefinedProperty`. Previously `\Aedart\Properties\Exceptions\UndefinedProperty` was thrown (_Dto package_).
 
 **Non-breaking Changes**
 
@@ -57,6 +63,7 @@ Temporary changelog for `v10.x` series.
 * Backed enums that use the `BackedEnums` now inherit from `\JsonSerializable`.
 * Callback signatures for `callable` have been defined (_PHPDoc_).
 * `string` params have been replaced with `class-string<...>`, where class path is expected (_PHPDoc_).
+* `UndefinedProperty` exception (_deprecated_) now inherits from `UndefinedPropertyException` interface (_Properties package_).
 
 ### Fixed
 
@@ -100,3 +107,20 @@ Temporary changelog for `v10.x` series.
 * `\Aedart\Circuits\Concerns\Identifiers::validStates`, replaced by `Identifier` enum (_Circuits package_).
 * `\Aedart\Circuits\Concerns\Identifiers::getIdentifierName`, replaced by `Identifier::name()` enum (_Circuits package_).
 * `\Aedart\Circuits\Concerns\Identifiers::assertStateIdentifier`, replaced by `Identifier::name()` enum (_Circuits package_).
+* `\Aedart\Dto\Dto`, replaced by `ArrayDto` (_Dto package_).
+* `\Aedart\Dto\Partials\IoCPartial`, replaced by `Dependencies` concern (_Dto package_).
+* `\Aedart\Dto\Partials\CastingPartial`, replaced by `Casting` concern (_Dto package_).
+* `\Aedart\Dto\Partials\DtoPartial` (_Dto package_).
+* `\Aedart\Tests\Integration\Dto\DtoTest` (_Dto package_).
+* `\Aedart\Tests\Integration\Dto\NestedDtoTest` (_Dto package_).
+* `\Aedart\Tests\Integration\Dto\NestedDtoTest` (_Dto package_).
+* `\Aedart\Contracts\Properties\AccessibilityLevels` (_Properties package_).
+* `\Aedart\Properties\Exceptions\UndefinedProperty`, replaced by `UndefinedProperty` exception in Dto package (_Properties package_).
+* `\Aedart\Properties\Accessibility`, replaced by `ArrayDto` (_Properties package_).
+* `\Aedart\Properties\Reflections`, replaced by `ArrayDto` (_Properties package_).
+* `\Aedart\Properties\Overload`, replaced by `ArrayDto` (_Properties package_).
+* `\Aedart\Tests\Unit\Properties\ReflectionsTest` (_Properties package_).
+* `\Aedart\Tests\Unit\Properties\OverloadTest` (_Properties package_).
+* `\Aedart\Tests\Unit\Properties\ReflectionsTest` (_Properties package_).
+* `\Aedart\Tests\Helpers\Dummies\Properties\Accessibility\Person` (_Properties package_).
+* `\Aedart\Tests\TestCases\Properties\PropertiesTestCase` (_Properties package_).

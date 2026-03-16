@@ -14,6 +14,8 @@ use JsonSerializable;
  * Contains common Dto methods.
  * This partial is intended for the Dto abstraction(s)
  *
+ * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Dto\Partials
  */
@@ -40,7 +42,10 @@ trait DtoPartial
      * @return self
      *
      * @throws Throwable In case that one or more of the given array entries are invalid
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function populate(array $data = []): static
     {
         foreach ($data as $property => $value) {
@@ -57,7 +62,10 @@ trait DtoPartial
      * @param Container|null $container [optional]
      *
      * @return static
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public static function makeNew(array $properties = [], Container|null $container = null): static
     {
         return new static($properties, $container);
@@ -72,7 +80,10 @@ trait DtoPartial
      * @return static
      *
      * @throws JsonException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public static function fromJson(string $json): static
     {
         return static::makeNew(Json::decode($json, true));
@@ -82,7 +93,10 @@ trait DtoPartial
      * Get the instance as an array.
      *
      * @return array
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function toArray(): array
     {
         $properties = $this->populatableProperties();
@@ -108,7 +122,10 @@ trait DtoPartial
      * @return string
      *
      * @throws JsonException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function toJson($options = 0): string
     {
         return Json::encode($this->jsonSerialize(), $options);
@@ -116,7 +133,10 @@ trait DtoPartial
 
     /**
      * @inheritdoc
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function jsonSerialize(): mixed
     {
         return array_map(function ($value) {
@@ -134,7 +154,10 @@ trait DtoPartial
      * Returns the data this DTO chooses to have serialised
      *
      * @return array
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function __serialize(): array
     {
         // Filter off properties that have "null" as value!
@@ -147,7 +170,10 @@ trait DtoPartial
      * Populates this DTO with unserialized data
      *
      * @param array $data
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function __unserialize(array $data): void
     {
         $this->populate($data);
@@ -159,7 +185,10 @@ trait DtoPartial
      * @return string
      *
      * @throws JsonException
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function __toString(): string
     {
         return $this->toJson();
@@ -169,7 +198,10 @@ trait DtoPartial
      * Debug info
      *
      * @return array
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function __debugInfo(): array
     {
         return $this->toArray();
@@ -181,7 +213,10 @@ trait DtoPartial
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function offsetExists(mixed $offset): bool
     {
         return isset($this->$offset);
@@ -189,7 +224,10 @@ trait DtoPartial
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function offsetGet(mixed $offset): mixed
     {
         return $this->$offset;
@@ -197,7 +235,10 @@ trait DtoPartial
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->$offset = $value;
@@ -205,7 +246,10 @@ trait DtoPartial
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     public function offsetUnset(mixed $offset): void
     {
         unset($this->$offset);
@@ -221,7 +265,10 @@ trait DtoPartial
      * @param string $property
      *
      * @return bool
+     *
+     * @deprecated use {@see \Aedart\Dto\ArrayDto} instead, since v10.x
      */
+    #[\Deprecated(message: "use \Aedart\Dto\ArrayDto instead", since: "10.x")]
     protected function isPropertyUnset(string $property): bool
     {
         return !property_exists($this, $property);
