@@ -4,10 +4,13 @@ namespace Aedart\Dto\Concerns;
 
 use Aedart\Contracts\Dto;
 use Aedart\Contracts\Utils\Populatable;
+use Aedart\Utils\Memory\Unit;
+use BackedEnum;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Facades\App;
 use ReflectionClass;
+use ReflectionEnum;
 use ReflectionException;
 use ReflectionNamedType;
 use ReflectionParameter;
@@ -15,6 +18,8 @@ use ReflectionType;
 use ReflectionUnionType;
 use Throwable;
 use TypeError;
+use UnitEnum;
+use ValueError;
 
 /**
  * Concerns Dependencies
@@ -276,6 +281,10 @@ trait Dependencies
             return $value;
         }
 
+        if (new ReflectionClass($class)->isEnum()) {
+            return $this->resolveEnum($class, $parameter, $value);
+        }
+
         $name = $parameter;
         if ($parameter instanceof ReflectionParameter) {
             $name = $parameter->getName();
@@ -285,6 +294,45 @@ trait Dependencies
         $instance = $this->resolveInstanceFromIoC($class, $name, $value);
 
         return $this->resolveInstancePopulation($instance, $parameter, $value);
+    }
+
+    /**
+     * Resolve enum
+     *
+     * **Note**: _Only {@see BackedEnum} is supported as the property's `$class`_
+     *
+     * @param class-string<BackedEnum> $class
+     * @param string $property
+     * @param mixed $value
+     *
+     * @return BackedEnum
+     *
+     * @throws ReflectionException
+     * @throws TypeError
+     */
+    protected function resolveEnum(string $class, string $property, mixed $value): BackedEnum
+    {
+        $expected = new ReflectionEnum($class);
+
+        // Fail if the expected is not a BackedEnum. (UnitEnum is not supported...)
+        if (!$expected->isBacked()) {
+            throw new TypeError(sprintf(
+                'Unsupported UnitEnum (%s) as allowed property "%s". Please use a BackedEnum instead!',
+                $class,
+                $property,
+            ));
+        }
+
+        // Otherwise, attempt to create enum-case from value
+        try {
+            return $class::from($value);
+        } catch(ValueError|TypeError $exception) {
+            throw new TypeError(
+                sprintf('Unable to populate property "%s": %s', $property, $exception->getMessage()),
+                $exception->getCode(),
+                $exception
+            );
+        }
     }
 
     /**

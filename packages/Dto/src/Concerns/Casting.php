@@ -8,6 +8,7 @@ use DateTimeInterface;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use JsonException;
 use LogicException;
+use ReflectionClass;
 use Throwable;
 use TypeError;
 
@@ -106,7 +107,9 @@ trait Casting
                 $type === 'date' && ($value instanceof DateTimeInterface || is_string($value)) => $this->castAsDate($value),
 
                 // When type is a class path and value is an instance of the type...
-                class_exists($type) && is_object($value) && $value instanceof $type => $this->resolveClassAndPopulate($type, $name, $value),
+                // Or, if expected type is an enum
+                class_exists($type) && is_object($value) && $value instanceof $type,
+                class_exists($type) && new ReflectionClass($type)->isEnum() => $this->resolveClassAndPopulate($type, $name, $value),
 
                 // When type is a class and an array value is given, we assume that type is a DTO or populate instance.
                 class_exists($type) && is_array($value) => $this->attemptPopulateUserDefinedClass($type, $name, $value),
