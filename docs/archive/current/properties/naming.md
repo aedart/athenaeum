@@ -4,6 +4,10 @@ description: Naming Convention for Properties
 
 # Naming Convention
 
+::: warning Deprecated
+This package has been deprecated, since version `10.x`. Please use the [`Dto` package](../dto/README.md) instead.
+:::
+
 ## Property Names
 
 Properties can either be stated in [CamelCase](http://en.wikipedia.org/wiki/CamelCase) or [Snake Case](http://en.wikipedia.org/wiki/Snake_case).

@@ -74,7 +74,6 @@ class User extends Authenticatable
 
 Please review the [Audit Trail Formatting](./audit/formatting.md) documentation for additional information.
 
-
 ### Field Criteria Logical Operators
 
 The logical operator constants (`FieldCriteria::AND` and `FieldCriteria::OR`) have been deprecated and replaced by a new `LogicalOperator` enum.
@@ -379,6 +378,41 @@ $id = $circuitBreaker->state()->id();
 echo gettype($id); // object
 var_export($id === Identifier::CLOSED); // true
 ```
+
+### DTO
+
+With the addition of [property hooks](https://www.php.net/manual/en/language.oop5.property-hooks.php), in PHP `v8.4`,
+the `Dto` abstraction has become somewhat irrelevant. It has therefore been deprecated and will no longer be
+supported in future versions. You are encourgaed to the `ArrayDto` abstraction instead, or create DTOs usign PHP
+native property hooks instead.
+
+**_:x: previously_**
+
+```php
+use Aedart\Dto\Dto;
+
+class Person extends Dto
+{
+    protected string|null $name = '';
+    protected int|null $age = 0;
+}
+```
+
+**_:heavy_check_mark: Now_**
+
+```php
+use Aedart\Dto\ArrayDto;
+
+class Person extends ArrayDto
+{
+    protected array $allowed = [
+        'name' => 'string|null',
+        'age' => 'int|null'
+    ];
+}
+```
+
+See [package documentation](./dto/usage.md) for additional examples.
 
 ### Removed "Aware-of" Components
 

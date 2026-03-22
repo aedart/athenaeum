@@ -3,13 +3,14 @@
 namespace Aedart\Dto;
 
 use Aedart\Contracts\Dto;
-use Aedart\Dto\Partials\CastingPartial;
-use Aedart\Dto\Partials\DtoPartial;
-use Aedart\Dto\Partials\IoCPartial;
-use Aedart\Properties\Exceptions\UndefinedProperty;
+use Aedart\Dto\Exceptions\UndefinedProperty;
 use Aedart\Utils\Helpers\MethodHelper;
+use Aedart\Utils\Json;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Support\Arrayable;
+use JsonException;
+use JsonSerializable;
 use ReflectionException;
 use Throwable;
 
@@ -23,30 +24,29 @@ use Throwable;
  */
 abstract class ArrayDto implements Dto
 {
-    use IoCPartial;
-    use DtoPartial;
-    use CastingPartial;
+    use Concerns\Dependencies;
+    use Concerns\Casting;
 
     /**
      * The properties of this Dto
      *
-     * @var array Key = property's name, value = property's value
+     * @var array<string, mixed> Key = property's name, value = property's value
      */
     protected array $properties = [];
 
     /**
-     * Defines the allowed properties and their
-     * data type.
+     * Defines the allowed properties and their data type.
      *
-     * <pre>
-     * [
-     *      'name'      => 'string',
-     *      'age'       => 'int',
-     *      'address'   => \Acme\Dto\Address::class
-     * ]
-     * </pre>
+     * **Example**
+     * ```
+     *  [
+     *       'name'      => 'string',
+     *       'age'       => 'int',
+     *       'address'   => \Acme\Dto\Address::class
+     *  ]
+     * ```
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected array $allowed = [];
 
@@ -66,14 +66,130 @@ abstract class ArrayDto implements Dto
     }
 
     /**
-     * Returns a list of the properties / attributes that
-     * this Data Transfer Object can be populated with
+     * @inheritdoc
+     *
+     * @throws Throwable
+     */
+    public static function makeNew(array $properties = [], Container|null $container = null): static
+    {
+        return new static($properties, $container);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @throws Throwable
+     */
+    public static function fromJson(string $json): static
+    {
+        return static::makeNew(Json::decode($json, true));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function populate(array $data = []): static
+    {
+        foreach ($data as $property => $value) {
+            $this->__set($property, $value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns a list of the properties / attributes that can be populated
      *
      * @return string[]
+     *
+     * @see populate()
      */
     public function populatableProperties(): array
     {
         return array_keys($this->allowed);
+    }
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        $properties = $this->populatableProperties();
+        $output = [];
+
+        foreach ($properties as $property) {
+            // Make sure that property is not unset
+            if (!isset($this->{$property})) {
+                continue;
+            }
+
+            // Ensure to obtain value via evt. getter method
+            $output[$property] = $this->__get($property);
+        }
+
+        return $output;
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @throws JsonException
+     */
+    public function toJson($options = 0): string
+    {
+        return Json::encode($this->jsonSerialize(), $options);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function jsonSerialize(): mixed
+    {
+        return array_map(function ($value) {
+            return match (true) {
+                $value instanceof JsonSerializable => $value->jsonSerialize(),
+                $value instanceof Arrayable => $value->toArray(),
+                default => $value,
+            };
+        }, $this->toArray());
+    }
+
+    /*****************************************************************
+     * Array Access Methods
+     ****************************************************************/
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetExists(mixed $offset): bool
+    {
+        return $this->__isset($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetGet(mixed $offset): mixed
+    {
+        return $this->__get($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        $this->__set($offset, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetUnset(mixed $offset): void
+    {
+        $this->__unset($offset);
     }
 
     /*****************************************************************
@@ -103,7 +219,7 @@ abstract class ArrayDto implements Dto
         // Invoke mutator, if one exists.
         $mutator = MethodHelper::makeSetterName($name);
         if (method_exists($this, $mutator)) {
-            $this->$mutator($this->resolveValue($mutator, $value));
+            $this->{$mutator}($this->resolveValue($mutator, $value));
             return;
         }
 
@@ -130,7 +246,7 @@ abstract class ArrayDto implements Dto
         // Invoke accessor, if one exists.
         $accessor = MethodHelper::makeGetterName($name);
         if (method_exists($this, $accessor)) {
-            return $this->$accessor();
+            return $this->{$accessor}();
         }
 
         // Otherwise, return property if a value exists or
@@ -164,15 +280,48 @@ abstract class ArrayDto implements Dto
         unset($this->properties[$name]);
     }
 
-    /*****************************************************************
-     * Internals
-     ****************************************************************/
+    /**
+     * Returns the data to be serialized
+     *
+     * @return array
+     */
+    public function __serialize(): array
+    {
+        // Filter off properties that have "null" as value!
+        // Those might cause undesired unserialize effect,
+        // in case of nested Dto instances...
+        return array_filter($this->toArray(), fn ($value) => isset($value));
+    }
+
+    /**
+     * Populates this DTO with unserialized data
+     *
+     * @param array $data
+     *
+     * @throws Throwable
+     */
+    public function __unserialize(array $data): void
+    {
+        $this->populate($data);
+    }
 
     /**
      * @inheritdoc
+     *
+     * @throws JsonException
      */
-    protected function isPropertyUnset(string $property): bool
+    public function __toString(): string
     {
-        return !isset($this->{$property});
+        return $this->toJson();
+    }
+
+    /**
+     * Debug info
+     *
+     * @return array
+     */
+    public function __debugInfo(): array
+    {
+        return $this->toArray();
     }
 }

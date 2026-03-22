@@ -11,6 +11,8 @@ use ReflectionMethod;
 /**
  * Properties Test Case
  *
+ * @deprecated will be removed in next major version, since v10.x
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Properties
  */

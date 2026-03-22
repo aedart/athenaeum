@@ -208,15 +208,7 @@ export default PagesCollection.make('v10.x', '/v10x', [
         children: [
             'dto/',
             'dto/install',
-            'dto/interface',
-            'dto/concrete-dto',
             'dto/usage',
-            'dto/populate',
-            'dto/export',
-            'dto/json',
-            'dto/serialization',
-            'dto/nested-dto',
-            'dto/array/',
         ]
     },
     {
@@ -488,6 +480,7 @@ export default PagesCollection.make('v10.x', '/v10x', [
             },
         ]
     },
+    // TODO: Deprecated since v10.x - documentation will be removed in next major version!
     {
         text: 'Properties',
         collapsible: true,
