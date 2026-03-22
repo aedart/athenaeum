@@ -379,9 +379,12 @@ echo gettype($id); // object
 var_export($id === Identifier::CLOSED); // true
 ```
 
-### DTO Deprecation
+### DTO
 
-The `Dto` abstraction has been deprecated. Please use the `ArrayDto` abstraction instead.
+With the addition of [property hooks](https://www.php.net/manual/en/language.oop5.property-hooks.php), in PHP `v8.4`,
+the `Dto` abstraction has become somewhat irrelevant. It has therefore been deprecated and will no longer be
+supported in future versions. You are encourgaed to the `ArrayDto` abstraction instead, or create DTOs usign PHP
+native property hooks instead.
 
 **_:x: previously_**
 
