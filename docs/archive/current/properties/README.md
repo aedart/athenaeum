@@ -4,6 +4,10 @@ description: About the Properties Package
 
 # Properties Overload
 
+::: warning Deprecated
+This package has been deprecated, since version `10.x`. Please use the [`Dto` package](../dto/README.md) instead.
+:::
+
 This package provides means to dynamically deal with inaccessible properties, by implementing some of PHP's [magic methods](https://www.php.net/manual/en/language.oop5.magic.php).
 
 The usage of getters- and setters-methods is enforced, ensuring that if a property is indeed available, its corresponding getter or setter method will be invoked.

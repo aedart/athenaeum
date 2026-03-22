@@ -4,6 +4,10 @@ description: Properties Visibility and Accessibility
 
 # Properties Visibility
 
+::: warning Deprecated
+This package has been deprecated, since version `10.x`. Please use the [`Dto` package](../dto/README.md) instead.
+:::
+
 ## Protected vs. Private properties
 
 By default, only `protected` properties will be accessible (_overloaded_).

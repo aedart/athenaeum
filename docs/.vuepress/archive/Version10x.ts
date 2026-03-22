@@ -480,6 +480,7 @@ export default PagesCollection.make('v10.x', '/v10x', [
             },
         ]
     },
+    // TODO: Deprecated since v10.x - documentation will be removed in next major version!
     {
         text: 'Properties',
         collapsible: true,
