@@ -59,6 +59,30 @@ class UserAuditTrailFormatter extends BaseFormatter
 
 See the [upgrade guide](./upgrade-guide.md#audit-trail) for details.
 
+### Support for Backed Enums in DTO
+
+The `ArrayDto` now supports `BackedEnum` as data types.
+
+```php
+enum Status: string
+{
+    case DRAFT = 'draft';
+    case PUBLISHED = 'published';
+    case UNPUBLISHED = 'unpublished';
+    case UNDER_REVIEW = 'review';
+}
+
+class Article extends ArrayDto
+{
+    protected array $allowed = [
+        'title' => 'string',
+        'status' => Status::class
+    ];
+}
+```
+
+For additional information, please review the [`Dto` package documentation](./dto/usage.md#backed-enums).
+
 ### Improved PHPDoc
 
 Callback signatures for `callable` have been defined, where such has been possible. 
