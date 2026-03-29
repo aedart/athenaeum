@@ -21,7 +21,7 @@ class ConsoleDebugger
      *
      * @param mixed ...$message
      */
-    public static function output(...$message)
+    public static function output(...$message): void
     {
         if (class_exists(Debug::class)) {
             $message = array_map(function ($msg) {

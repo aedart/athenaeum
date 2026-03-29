@@ -44,7 +44,7 @@ class HasManyReferenceTest extends ApiResourcesTestCase
     /**
      * @inheritDoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 

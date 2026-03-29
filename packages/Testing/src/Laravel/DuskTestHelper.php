@@ -6,6 +6,7 @@ use Closure;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Illuminate\Contracts\Foundation\Application as ApplicationInterface;
 use Illuminate\Foundation\Application;
 use Laravel\Dusk\Browser;
 use LogicException;
@@ -106,7 +107,7 @@ trait DuskTestHelper
      *
      * @return string
      */
-    protected function getBasePath()
+    protected function getBasePath(): string
     {
         return __DIR__ . '/../laravel';
     }
@@ -137,7 +138,7 @@ trait DuskTestHelper
     /**
      * @inheritdoc
      */
-    protected function resolveApplication()
+    protected function resolveApplication(): ApplicationInterface
     {
         return tap(
             new Application($this->getBasePath()),
@@ -186,8 +187,11 @@ trait DuskTestHelper
 
     /**
      * @inheritdoc
+     *
+     * @deprecated Since v10.x, no longer supported
      */
-    protected function baseUrl()
+    #[\Deprecated(message: "no longer supported", since: "10.x")]
+    protected function baseUrl(): string
     {
         return sprintf(
             '%s://%s:%d',
@@ -230,7 +234,7 @@ trait DuskTestHelper
     /**
      * @inheritdoc
      */
-    protected function user()
+    protected function user(): callable
     {
         throw new LogicException('No user resolver method specified. Unable to resolve user!');
     }
@@ -238,7 +242,7 @@ trait DuskTestHelper
     /**
      * @inheritdoc
      */
-    protected function prepareDirectories()
+    protected function prepareDirectories(): void
     {
         $this->prepareBrowserDirectories();
 
@@ -250,7 +254,7 @@ trait DuskTestHelper
     /**
      * Prepares browser output directories
      */
-    protected function prepareBrowserDirectories()
+    protected function prepareBrowserDirectories(): void
     {
         $directories = [
             $this->browserScreenshots,

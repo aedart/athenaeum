@@ -32,7 +32,7 @@ trait HandlesApplicationCallbacks
      *
      * @param callable $callback
      */
-    public function afterApplicationCreated(callable $callback)
+    public function afterApplicationCreated(callable $callback): void
     {
         $this->afterAppCreated[] = $callback;
 
@@ -46,7 +46,7 @@ trait HandlesApplicationCallbacks
      *
      * @see afterApplicationCreated
      */
-    protected function invokeAfterCreatedCallbacks()
+    protected function invokeAfterCreatedCallbacks(): void
     {
         foreach ($this->afterAppCreated as $callback) {
             $callback();
@@ -58,7 +58,7 @@ trait HandlesApplicationCallbacks
      *
      * @param callable $callback
      */
-    protected function beforeApplicationDestroyed(callable $callback)
+    protected function beforeApplicationDestroyed(callable $callback): void
     {
         $this->beforeAppDestroyed[] = $callback;
     }
@@ -68,7 +68,7 @@ trait HandlesApplicationCallbacks
      *
      * @see beforeApplicationDestroyed
      */
-    protected function invokeBeforeDestroyedCallbacks()
+    protected function invokeBeforeDestroyedCallbacks(): void
     {
         foreach ($this->beforeAppDestroyed as $callback) {
             $callback();

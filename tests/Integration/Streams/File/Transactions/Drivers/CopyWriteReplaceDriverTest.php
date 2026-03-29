@@ -28,7 +28,7 @@ class CopyWriteReplaceDriverTest extends StreamTestCase
     /**
      * @inheritDoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 

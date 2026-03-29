@@ -264,7 +264,7 @@ class TraitTester
      */
     public function makeTraitMock(string $trait): MockInterface
     {
-        $generated = (new MockTrait($trait))->generate();
+        $generated = new MockTrait($trait)->generate();
 
         return Mockery::mock($generated)->makePartial();
     }

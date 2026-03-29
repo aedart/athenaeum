@@ -7,6 +7,7 @@ use Aedart\Testing\Laravel\Database\MigrateProcessor;
 use Aedart\Utils\Str;
 use Closure;
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Foundation\Application as ApplicationInterface;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
@@ -153,8 +154,19 @@ trait ApplicationInitiator
      ****************************************************************/
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
+    protected function defineEnvironment($app)
+    {
+        // Define environment.
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @deprecated Since v10.x, use {@see defineEnvironment()} instead
+     */
+    #[\Deprecated(message: "use defineEnvironment() instead", since: "10.x")]
     protected function getEnvironmentSetUp($app)
     {
         // Define your environment setup
@@ -163,9 +175,9 @@ trait ApplicationInitiator
     /**
      * Boot the testing helper traits.
      *
-     * @return array
+     * @return array<class-string, class-string>
      */
-    protected function setUpTraits()
+    protected function setUpTraits(): array
     {
         $uses = array_flip(class_uses_recursive(static::class));
 
@@ -185,7 +197,7 @@ trait ApplicationInitiator
      *
      * @return void
      */
-    protected function refreshApplication()
+    protected function refreshApplication(): void
     {
         $this->app = $this->createApplication();
     }
@@ -250,7 +262,7 @@ trait ApplicationInitiator
      *
      * @return Application
      */
-    protected function resolveApplication()
+    protected function resolveApplication(): ApplicationInterface
     {
         return tap(new Application($this->getApplicationBasePath()), function ($app) {
             $app->bind(

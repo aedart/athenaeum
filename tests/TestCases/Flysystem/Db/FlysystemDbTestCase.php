@@ -45,7 +45,7 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
     /**
      * @inheritDoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -65,7 +65,7 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
     /**
      * @inheritdoc
      */
-    protected function _after()
+    protected function _after(): void
     {
         parent::_after();
     }
@@ -73,7 +73,7 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
     /**
      * @inheritdoc
      */
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app): void
     {
         // sqlite (memory)
         TestingConnection::enableConnection();

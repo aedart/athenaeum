@@ -33,7 +33,7 @@ class InfectionFreeFileRuleTest extends AntivirusTestCase
     /**
      * @inheritdoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 

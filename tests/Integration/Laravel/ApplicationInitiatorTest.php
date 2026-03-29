@@ -31,7 +31,7 @@ class ApplicationInitiatorTest extends Unit
     /**
      * {@inheritdoc}
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -41,7 +41,7 @@ class ApplicationInitiatorTest extends Unit
     /**
      * {@inheritdoc}
      */
-    protected function _after()
+    protected function _after(): void
     {
         parent::_after();
 

@@ -32,7 +32,7 @@ abstract class MaintenanceModesTestCase extends LaravelTestCase
     /**
      * @inheritDoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -50,7 +50,7 @@ abstract class MaintenanceModesTestCase extends LaravelTestCase
     /**
      * @inheritDoc
      */
-    protected function _after()
+    protected function _after(): void
     {
         parent::_after();
     }

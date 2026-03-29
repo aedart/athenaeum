@@ -27,7 +27,7 @@ class EventServiceProviderTest extends AthenaeumCoreTestCase
     /**
      * @inheritdoc
      */
-    protected function _after()
+    protected function _after(): void
     {
         MessageBag::clearAll();
 

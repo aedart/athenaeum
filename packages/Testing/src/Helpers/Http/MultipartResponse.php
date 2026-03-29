@@ -122,7 +122,7 @@ class MultipartResponse
      *
      * @return self
      */
-    public function assertPartialContent()
+    public function assertPartialContent(): static
     {
         return $this->assertStatus(Status::PARTIAL_CONTENT);
     }
@@ -134,7 +134,7 @@ class MultipartResponse
      *
      * @return self
      */
-    public function assertStatus($status)
+    public function assertStatus($status): static
     {
         $message = $this->statusMessageWithDetails($status, $actual = $this->getStatusCode());
 
