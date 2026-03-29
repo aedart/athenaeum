@@ -175,9 +175,9 @@ abstract class AclTestCase extends LaravelTestCase
      */
     public function createPermissionGroupWithPermissions(
         string $slug,
-        ?array $permissions = null,
-        ?string $name = null,
-        ?string $description = null,
+        null|array $permissions = null,
+        null|string $name = null,
+        null|string $description = null,
         bool $prefix = true
     ): Group {
         $permissions = $permissions ?? $this->makePermissionsForGroupCreate();

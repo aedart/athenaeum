@@ -38,14 +38,14 @@ class Organisation extends ArrayDto
         'note' => Note::class
     ];
 
-    public function setSlogan(?string $slogan)
+    public function setSlogan(null|string $slogan)
     {
         $this->properties['slogan'] = strtoupper($slogan);
 
         return $this;
     }
 
-    public function getSlogan(): ?string
+    public function getSlogan(): null|string
     {
         return $this->properties['slogan'] ?? null;
     }

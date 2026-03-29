@@ -42,7 +42,7 @@ class WrapperTest extends UnitTestCase
                 string $path,
                 string $mode,
                 int $options,
-                ?string &$opened_path
+                null|string &$opened_path
             ): bool {
                 $path = str_replace(static::WRAPPER_NAME . '://', '', $path);
 

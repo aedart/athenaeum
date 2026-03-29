@@ -25,28 +25,28 @@ class Person extends Dto
      *
      * @var string|null
      */
-    protected ?string $name = null;
+    protected null|string $name = null;
 
     /**
      * Age of person
      *
      * @var int|null
      */
-    protected ?int $age = null;
+    protected null|int $age = null;
 
     /**
      * Address
      *
      * @var Address|null
      */
-    protected ?Address $address = null;
+    protected null|Address $address = null;
 
     /**
      * Note
      *
      * @var NoteInterface|null
      */
-    protected ?NoteInterface $note = null;
+    protected null|NoteInterface $note = null;
 
     /**
      * Set name
@@ -55,7 +55,7 @@ class Person extends Dto
      *
      * @return self
      */
-    public function setName(?string $name)
+    public function setName(null|string $name)
     {
         $this->name = $name;
 
@@ -67,7 +67,7 @@ class Person extends Dto
      *
      * @return string|null name or null if none name has been set
      */
-    public function getName(): ?string
+    public function getName(): null|string
     {
         return $this->name;
     }
@@ -79,7 +79,7 @@ class Person extends Dto
      *
      * @return self
      */
-    public function setAge(?int $age)
+    public function setAge(null|int $age)
     {
         $this->age = $age;
 
@@ -91,7 +91,7 @@ class Person extends Dto
      *
      * @return int|null age or null if none age has been set
      */
-    public function getAge(): ?int
+    public function getAge(): null|int
     {
         return $this->age;
     }
@@ -103,7 +103,7 @@ class Person extends Dto
      *
      * @return self
      */
-    public function setAddress(?Address $address)
+    public function setAddress(null|Address $address)
     {
         $this->address = $address;
 
@@ -115,7 +115,7 @@ class Person extends Dto
      *
      * @return Address|null address or null if none address has been set
      */
-    public function getAddress(): ?Address
+    public function getAddress(): null|Address
     {
         return $this->address;
     }
@@ -127,7 +127,7 @@ class Person extends Dto
      *
      * @return self
      */
-    public function setNote(?NoteInterface $note)
+    public function setNote(null|NoteInterface $note)
     {
         $this->note = $note;
 
@@ -139,7 +139,7 @@ class Person extends Dto
      *
      * @return NoteInterface|null note or null if none note has been set
      */
-    public function getNote(): ?NoteInterface
+    public function getNote(): null|NoteInterface
     {
         return $this->note;
     }

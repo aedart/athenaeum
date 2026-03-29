@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
+use PhpCsFixer\Fixer\LanguageConstruct\NullableTypeDeclarationFixer;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
 return static function (ECSConfig $config): void {
-    // A. standalone rule
-    $config->ruleWithConfiguration(ArraySyntaxFixer::class, [
-        'syntax' => 'short',
+    // A. standalone rules
+    $config->rulesWithConfiguration([
+        ArraySyntaxFixer::class => [
+            'syntax' => 'short',
+        ],
+        NullableTypeDeclarationFixer::class => [
+            'syntax' => 'union'
+        ]
     ]);
 
     // B. full sets

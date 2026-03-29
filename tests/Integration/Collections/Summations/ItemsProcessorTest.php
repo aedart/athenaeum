@@ -45,7 +45,7 @@ class ItemsProcessorTest extends IntegrationTestCase
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function makeProcessor($rules, ?Summation $summation = null): ItemsProcessorInterface
+    public function makeProcessor($rules, null|Summation $summation = null): ItemsProcessorInterface
     {
         return new ItemsProcessor($rules, $summation);
     }

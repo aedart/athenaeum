@@ -22,14 +22,14 @@ class City extends Dto
      *
      * @var string|null
      */
-    protected ?string $name = null;
+    protected null|string $name = null;
 
     /**
      * Zip Code
      *
      * @var int|null
      */
-    protected ?int $zipCode = null;
+    protected null|int $zipCode = null;
 
     /**
      * Set name
@@ -38,7 +38,7 @@ class City extends Dto
      *
      * @return self
      */
-    public function setName(?string $name)
+    public function setName(null|string $name)
     {
         $this->name = $name;
 
@@ -50,7 +50,7 @@ class City extends Dto
      *
      * @return string|null name or null if none name has been set
      */
-    public function getName(): ?string
+    public function getName(): null|string
     {
         return $this->name;
     }
@@ -62,7 +62,7 @@ class City extends Dto
      *
      * @return self
      */
-    public function setZipCode(?int $code)
+    public function setZipCode(null|int $code)
     {
         $this->zipCode = $code;
 
@@ -74,7 +74,7 @@ class City extends Dto
      *
      * @return int|null zip code or null if none zip code has been set
      */
-    public function getZipCode(): ?int
+    public function getZipCode(): null|int
     {
         return $this->zipCode;
     }

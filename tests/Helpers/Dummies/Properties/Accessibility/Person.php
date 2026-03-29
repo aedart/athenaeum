@@ -56,7 +56,7 @@ class Person
      *
      * @return self
      */
-    public function setName(?string $value)
+    public function setName(null|string $value)
     {
         $this->name = $value;
 
@@ -68,7 +68,7 @@ class Person
      *
      * @return null|string
      */
-    public function getName(): ?string
+    public function getName(): null|string
     {
         return $this->name;
     }

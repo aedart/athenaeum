@@ -19,14 +19,14 @@ interface Box
      *
      * @return self
      */
-    public function setWidth(?int $width = null);
+    public function setWidth(null|int $width = null);
 
     /**
      * Get width
      *
      * @return int|null
      */
-    public function getWidth(): ?int;
+    public function getWidth(): null|int;
 
     /**
      * Set height
@@ -35,12 +35,12 @@ interface Box
      *
      * @return self
      */
-    public function setHeight(?int $height = null);
+    public function setHeight(null|int $height = null);
 
     /**
      * Get height
      *
      * @return int|null
      */
-    public function getHeight(): ?int;
+    public function getHeight(): null|int;
 }

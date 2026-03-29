@@ -14,13 +14,13 @@ use Aedart\Tests\Helpers\Dummies\Contracts\Box as BoxInterface;
  */
 class Box implements BoxInterface
 {
-    protected ?int $width;
-    protected ?int $height;
+    protected null|int $width;
+    protected null|int $height;
 
     /**
      * {@inheritdoc}
      */
-    public function setWidth(?int $width = null)
+    public function setWidth(null|int $width = null)
     {
         $this->width = $width;
 
@@ -30,7 +30,7 @@ class Box implements BoxInterface
     /**
      * {@inheritdoc}
      */
-    public function getWidth(): ?int
+    public function getWidth(): null|int
     {
         return $this->width;
     }
@@ -38,7 +38,7 @@ class Box implements BoxInterface
     /**
      * {@inheritdoc}
      */
-    public function setHeight(?int $height = null)
+    public function setHeight(null|int $height = null)
     {
         $this->height = $height;
 
@@ -48,7 +48,7 @@ class Box implements BoxInterface
     /**
      * {@inheritdoc}
      */
-    public function getHeight(): ?int
+    public function getHeight(): null|int
     {
         return $this->height;
     }

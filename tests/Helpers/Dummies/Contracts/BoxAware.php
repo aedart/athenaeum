@@ -19,7 +19,7 @@ interface BoxAware
      *
      * @return self
      */
-    public function setBox(?Box $box);
+    public function setBox(null|Box $box);
 
     /**
      * Get box
@@ -32,7 +32,7 @@ interface BoxAware
      *
      * @return Box|null box or null if none box has been set
      */
-    public function getBox(): ?Box;
+    public function getBox(): null|Box;
 
     /**
      * Check if box has been set
@@ -46,5 +46,5 @@ interface BoxAware
      *
      * @return Box|null A default box value or Null if no default value is available
      */
-    public function getDefaultBox(): ?Box;
+    public function getDefaultBox(): null|Box;
 }

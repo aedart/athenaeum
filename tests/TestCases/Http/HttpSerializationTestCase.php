@@ -79,7 +79,7 @@ abstract class HttpSerializationTestCase extends LaravelTestCase
         array $headers = [],
         $body = null,
         string $version = '1.1',
-        ?string $reason = null
+        null|string $reason = null
     ): ResponseInterface {
         return new Response($status, $headers, $body, $version, $reason);
     }

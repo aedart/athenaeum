@@ -352,7 +352,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      *
      * @throws JsonException
      */
-    public function mockUploadedResponse(?int $id = null, ?string $token = null): ResponseInterface
+    public function mockUploadedResponse(null|int $id = null, null|string $token = null): ResponseInterface
     {
         $faker = $this->getFaker();
 
@@ -388,7 +388,7 @@ abstract class RedmineTestCase extends LaravelTestCase
         array $body = [],
         int $status = StatusCodes::OK,
         array $headers = [],
-        ?string $profile = null
+        null|string $profile = null
     ): ConnectionInterface {
         $response = $this->mockJsonResponse($body, $status, $headers);
 
@@ -405,7 +405,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      *
      * @throws ConnectionException
      */
-    public function connectWithMultipleMocks(array $responses, ?string $profile = null): ConnectionInterface
+    public function connectWithMultipleMocks(array $responses, null|string $profile = null): ConnectionInterface
     {
         return Connection::resolve($profile)->mock($responses);
     }

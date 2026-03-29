@@ -29,7 +29,7 @@ class JsonHttpClientDriverTest extends HttpClientsTestCase
     /**
      * {@inheritdoc}
      */
-    public function getDefaultHttpClient(): ?Client
+    public function getDefaultHttpClient(): null|Client
     {
         return $this->client('json');
     }

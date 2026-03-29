@@ -21,7 +21,7 @@ trait BoxTrait
      *
      * @var Box|null
      */
-    protected ?Box $box = null;
+    protected null|Box $box = null;
 
     /**
      * Set box
@@ -30,7 +30,7 @@ trait BoxTrait
      *
      * @return self
      */
-    public function setBox(?Box $box)
+    public function setBox(null|Box $box)
     {
         $this->box = $box;
 
@@ -48,7 +48,7 @@ trait BoxTrait
      *
      * @return Box|null box or null if none box has been set
      */
-    public function getBox(): ?Box
+    public function getBox(): null|Box
     {
         if (!$this->hasBox()) {
             $this->setBox($this->getDefaultBox());
@@ -71,7 +71,7 @@ trait BoxTrait
      *
      * @return Box|null A default box value or Null if no default value is available
      */
-    public function getDefaultBox(): ?Box
+    public function getDefaultBox(): null|Box
     {
         return null;
     }

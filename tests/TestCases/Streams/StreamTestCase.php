@@ -202,7 +202,7 @@ abstract class StreamTestCase extends LaravelTestCase
      *
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      */
-    public function makeLock(StreamInterface $stream, ?string $profile = null, array $options = []): Lock
+    public function makeLock(StreamInterface $stream, null|string $profile = null, array $options = []): Lock
     {
         return $this->getLockFactory()->create($stream, $profile, $options);
     }

@@ -50,7 +50,7 @@ abstract class HttpClientsTestCase extends LaravelTestCase
      *
      * @var null|RequestInterface
      */
-    protected ?RequestInterface $lastRequest = null;
+    protected null|RequestInterface $lastRequest = null;
 
     /*****************************************************************
      * Setup Methods
@@ -124,7 +124,7 @@ abstract class HttpClientsTestCase extends LaravelTestCase
      *
      * @throws ProfileNotFoundException
      */
-    public function client(?string $profile = null, array $options = []): Client
+    public function client(null|string $profile = null, array $options = []): Client
     {
         return $this->getHttpClientsManager()->profile($profile, $options);
     }
@@ -293,7 +293,7 @@ abstract class HttpClientsTestCase extends LaravelTestCase
         string $name,
         string $value,
         array $headers = [],
-        ?string $filename = null
+        null|string $filename = null
     ) {
         // Assert name
         $this->assertStringContainsString("name=\"{$name}\"", $body, "{$name} is not part of payload");
