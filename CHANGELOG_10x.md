@@ -68,6 +68,7 @@ Temporary changelog for `v10.x` series.
 * Adapted manager's `extend` callback logic to no longer use `$this`, due to changes in Laravel `v13.x`, in `MaintenanceModeServiceProvider` (_Maintenance package_). [see upgrade guide](https://laravel.com/docs/13.x/upgrade#manager-extend-callback-binding).  
 * Adapted storage manager's `extend` callback logic to no longer use `$this`, in `FlysystemDatabaseAdapterServiceProvider` (_Flysystem package_). [see upgrade guide](https://laravel.com/docs/13.x/upgrade#manager-extend-callback-binding).  
 * Audit trail observer registration is performed after model has booted, in `ChangeRecording` concern (_Audit package_). [see upgrade guide](https://laravel.com/docs/13.x/upgrade#model-booting-and-nested-instantiation).
+* Improved method return types, in `ApplicationInitiator`, `DuskTestHelper` traits and other testing utilities (_Testing package_).  
 
 ### Fixed
 
@@ -79,6 +80,7 @@ Temporary changelog for `v10.x` series.
 * `properties.php` (_aware-of generator configuration file, in the root of Athenaeum_) (_was deprecated in Athenaeum `v9.x`_). [#210](https://github.com/aedart/athenaeum/issues/210).
 * `resources/athenaeum` templates (_for aware-of components_), in `Support` package (_was deprecated in Athenaeum `v9.x`_). [#210](https://github.com/aedart/athenaeum/issues/210).
 * `\Aedart\Tests\Integration\Circuits\Stores\CacheStoreTest` (_was deprecated in `v9.4.0`_).
+* `\Aedart\Testing\Laravel\DuskTestHelper::baseUrl` (_was removed in Orchestra Testbench Dusk `v6.x`_).
 
 ### Deprecated
 
@@ -128,3 +130,4 @@ Temporary changelog for `v10.x` series.
 * `\Aedart\Tests\Unit\Properties\ReflectionsTest` (_Properties package_).
 * `\Aedart\Tests\Helpers\Dummies\Properties\Accessibility\Person` (_Properties package_).
 * `\Aedart\Tests\TestCases\Properties\PropertiesTestCase` (_Properties package_).
+* `\Aedart\Testing\Laravel\ApplicationInitiator::getEnvironmentSetUp`, replaced by `defineEnvironment` (_Testing package_).
