@@ -69,11 +69,11 @@ class MaintenanceModeServiceProvider extends ServiceProvider
         $manager = $this->getMaintenanceModeManager();
         $fallback = $this->createFallbackManager();
 
-        $manager->extend('array', function () use($fallback) {
+        $manager->extend('array', function () use ($fallback) {
             return $fallback->driver('array');
         });
 
-        $manager->extend('json', function () use($fallback) {
+        $manager->extend('json', function () use ($fallback) {
             return $fallback->driver('json');
         });
     }
