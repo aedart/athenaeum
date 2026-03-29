@@ -153,8 +153,19 @@ trait ApplicationInitiator
      ****************************************************************/
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
+    protected function defineEnvironment($app)
+    {
+        // Define environment.
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @deprecated Since v10.x, use {@see defineEnvironment()} instead
+     */
+    #[\Deprecated(message: "use defineEnvironment() instead", since: "10.x")]
     protected function getEnvironmentSetUp($app)
     {
         // Define your environment setup
