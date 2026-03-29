@@ -38,7 +38,7 @@ abstract class IntegrationTestCase extends UnitTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -52,7 +52,7 @@ abstract class IntegrationTestCase extends UnitTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _after()
+    protected function _after(): void
     {
         if (isset($this->ioc)) {
             $this->ioc->destroy();

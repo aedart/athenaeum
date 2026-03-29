@@ -5,6 +5,7 @@ namespace Aedart\Testing\Helpers\Http;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Utils\Json;
 use JsonException;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
  * Response
@@ -17,7 +18,7 @@ use JsonException;
 class Response
 {
     /**
-     * Decodes the json payload from given response
+     * Decodes the JSON payload from given response
      *
      * @param \Illuminate\Testing\TestResponse|\Illuminate\Http\Response $jsonResponse
      * @param bool $debug [optional] Http headers and decoded body is logged to console when true
@@ -77,7 +78,7 @@ class Response
      *
      * @return MultipartResponse
      */
-    public static function multipartResponse($response, bool $debug = true)
+    public static function multipartResponse($response, bool $debug = true): MultipartResponse
     {
         $multipartResponse = MultipartResponse::from($response);
 
@@ -94,9 +95,9 @@ class Response
      * @param \Illuminate\Testing\TestResponse|\Illuminate\Http\Response $response
      * @param bool $debug [optional] Http headers are logged to console when true
      *
-     * @return \Symfony\Component\HttpFoundation\ResponseHeaderBag
+     * @return ResponseHeaderBag
      */
-    public static function headers($response, bool $debug = true)
+    public static function headers($response, bool $debug = true): ResponseHeaderBag
     {
         $headers = $response->headers;
 

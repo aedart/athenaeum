@@ -30,7 +30,7 @@ abstract class UnitTestCase extends Unit
     /**
      * {@inheritdoc}
      */
-    protected function _before()
+    protected function _before(): void
     {
         //        error_reporting(-1);
         //        ini_set('display_errors', true);
@@ -41,7 +41,7 @@ abstract class UnitTestCase extends Unit
     /**
      * {@inheritdoc}
      */
-    protected function _after()
+    protected function _after(): void
     {
         m::close();
     }
