@@ -73,7 +73,7 @@ abstract class FlysystemDbTestCase extends FlysystemTestCase
     /**
      * @inheritdoc
      */
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app): void
     {
         // sqlite (memory)
         TestingConnection::enableConnection();

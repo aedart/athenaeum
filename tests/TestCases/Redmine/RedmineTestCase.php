@@ -111,7 +111,7 @@ abstract class RedmineTestCase extends LaravelTestCase
     /**
      * @inheritdoc
      */
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app): void
     {
         // Ensure .env is loaded
         $app->useEnvironmentPath(__DIR__ . '/../../../');

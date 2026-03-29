@@ -30,7 +30,7 @@ abstract class DatabaseTestCase extends LaravelTestCase
     /**
      * @inheritdoc
      */
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app): void
     {
         TestingConnection::enableConnection();
     }

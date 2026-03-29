@@ -29,9 +29,9 @@ class StorageDiskTest extends FlysystemDbTestCase
     /**
      * @inheritdoc
      */
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app): void
     {
-        parent::getEnvironmentSetUp($app);
+        parent::defineEnvironment($app);
 
         // Add database storage disk to configuration.
         $app['config']->set('filesystems.disks.database', [

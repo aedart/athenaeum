@@ -61,7 +61,7 @@ abstract class AntivirusTestCase extends LaravelTestCase
     /**
      * @inheritdoc
      */
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         // Ensure .env is loaded
         $app->useEnvironmentPath(__DIR__ . '/../../../');
