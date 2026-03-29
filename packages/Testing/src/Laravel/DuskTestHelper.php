@@ -187,7 +187,10 @@ trait DuskTestHelper
 
     /**
      * @inheritdoc
+     *
+     * @deprecated Since v10.x, no longer supported
      */
+    #[\Deprecated(message: "no longer supported", since: "10.x")]
     protected function baseUrl(): string
     {
         return sprintf(
