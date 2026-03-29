@@ -39,7 +39,7 @@ class RulesCollectionTest extends UnitTestCase
      *
      * @return Rules
      */
-    public function makeCollection($item = null, array $rules = [], ?Summation $summation = null): Rules
+    public function makeCollection($item = null, array $rules = [], null|Summation $summation = null): Rules
     {
         $item = $item ?? $this->makeItemMock();
         $summation = $summation ?? $this->makeSummationCollection();
@@ -76,7 +76,7 @@ class RulesCollectionTest extends UnitTestCase
      *
      * @return ProcessingRule[]|m\LegacyMockInterface[]|m\MockInterface[]
      */
-    public function makeProcessingRuleMocks(int $amount = 3, ?callable $callback = null): array
+    public function makeProcessingRuleMocks(int $amount = 3, null|callable $callback = null): array
     {
         // Resolve callback
         $callback = $callback ?? function ($mock) {

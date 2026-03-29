@@ -23,7 +23,7 @@ class Category extends BaseCategory
     /**
      * @inheritdoc
      */
-    public function getAuditTrailMessage(string $type): ?string
+    public function getAuditTrailMessage(string $type): null|string
     {
         return "Recording {$type} event";
     }

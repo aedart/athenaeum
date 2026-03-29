@@ -19,7 +19,7 @@ trait NameTrait
      *
      * @var string|null
      */
-    protected ?string $name = null;
+    protected null|string $name = null;
 
     /**
      * Set name
@@ -28,7 +28,7 @@ trait NameTrait
      *
      * @return self
      */
-    public function setName(?string $name)
+    public function setName(null|string $name)
     {
         $this->name = $name;
 
@@ -46,7 +46,7 @@ trait NameTrait
      *
      * @return string|null name or null if none name has been set
      */
-    public function getName(): ?string
+    public function getName(): null|string
     {
         if (!$this->hasName()) {
             $this->setName($this->getDefaultName());
@@ -69,7 +69,7 @@ trait NameTrait
      *
      * @return string|null A default name value or Null if no default value is available
      */
-    public function getDefaultName(): ?string
+    public function getDefaultName(): null|string
     {
         return null;
     }
