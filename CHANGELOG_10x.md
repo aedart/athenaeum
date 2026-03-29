@@ -29,6 +29,7 @@ Temporary changelog for `v10.x` series.
 **Breaking Changes**
 
 * Minimum required PHP version changed to `v8.4`.
+* Upgraded to use Laravel `v13.x` packages.
 * Adapted CI environment to test PHP `v8.4` and `v8.5`.
 * The `Paths` container has been redesigned to inherit from `ArrayDto`. It no longer depends on the removed "Aware-of" components. (_Core package_). [#211](https://github.com/aedart/athenaeum/issues/211).
 * Audit Trail Record formatting is now applied via new `Formatter`, performed via `\Aedart\Audit\Events\Concerns\EventData::format()` (_Audit Trail package_).
@@ -64,6 +65,9 @@ Temporary changelog for `v10.x` series.
 * Callback signatures for `callable` have been defined (_PHPDoc_).
 * `string` params have been replaced with `class-string<...>`, where class path is expected (_PHPDoc_).
 * `UndefinedProperty` exception (_deprecated_) now inherits from `UndefinedPropertyException` interface (_Properties package_).
+* Adapted manager's `extend` callback logic to no longer use `$this`, due to changes in Laravel `v13.x`, in `MaintenanceModeServiceProvider` (_Maintenance package_). [see upgrade guide](https://laravel.com/docs/13.x/upgrade#manager-extend-callback-binding).  
+* Adapted storage manager's `extend` callback logic to no longer use `$this`, in `FlysystemDatabaseAdapterServiceProvider` (_Flysystem package_). [see upgrade guide](https://laravel.com/docs/13.x/upgrade#manager-extend-callback-binding).  
+* Audit trail observer registration is performed after model has booted, in `ChangeRecording` concern (_Audit package_). [see upgrade guide](https://laravel.com/docs/13.x/upgrade#model-booting-and-nested-instantiation).
 
 ### Fixed
 
