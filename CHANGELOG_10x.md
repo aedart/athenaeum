@@ -70,6 +70,7 @@ Temporary changelog for `v10.x` series.
 * Adapted storage manager's `extend` callback logic to no longer use `$this`, in `FlysystemDatabaseAdapterServiceProvider` (_Flysystem package_). [see upgrade guide](https://laravel.com/docs/13.x/upgrade#manager-extend-callback-binding).  
 * Audit trail observer registration is performed after model has booted, in `ChangeRecording` concern (_Audit package_). [see upgrade guide](https://laravel.com/docs/13.x/upgrade#model-booting-and-nested-instantiation).
 * Improved method return types, in `ApplicationInitiator`, `DuskTestHelper` traits and other testing utilities (_Testing package_).  
+* Improved code style, switch to enforce union type for nullable arguments, in `ecs.php`.
 
 ### Fixed
 
