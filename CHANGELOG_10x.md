@@ -31,7 +31,7 @@ Temporary changelog for `v10.x` series.
 * Minimum required PHP version changed to `v8.4`.
 * Upgraded to use Laravel `v13.x` packages.
 * Upgraded to use Symfony `v8.x` packages.
-* Adapted CI environment to test PHP `v8.4` and `v8.5`.
+* Adapted CI environment to test using PHP `v8.4` and `v8.5`.
 * The `Paths` container has been redesigned to inherit from `ArrayDto`. It no longer depends on the removed "Aware-of" components. (_Core package_). [#211](https://github.com/aedart/athenaeum/issues/211).
 * Audit Trail Record formatting is now applied via new `Formatter`, performed via `\Aedart\Audit\Events\Concerns\EventData::format()` (_Audit Trail package_).
 * Moved `formatDatetime()` from `\Aedart\Audit\Observers\Concerns\ModelAttributes` to `\Aedart\Audit\Events\Concerns\EventData` (_Audit Trail package_).
