@@ -29,10 +29,10 @@ _TBD: "To be decided"._
 
 These are the highlights of the latest major version of Athenaeum.
 
-### PHP `v8.4` and Laravel `v13.x`
+### PHP `v8.4`, Laravel `v13.x` and Symfony `v8.x`
 
 PHP version `v8.4` is now the minimum required version for Athenaeum.
-[Laravel `v13.x`](https://laravel.com/docs/13.x/releases) packages are now used.
+[Laravel `v13.x`](https://laravel.com/docs/13.x/releases) and [Symfony `v8.x`](https://symfony.com/releases/8.0) packages are now used.
 
 ### Audit Trail Formatting Changed
 
