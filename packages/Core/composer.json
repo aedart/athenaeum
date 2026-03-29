@@ -27,10 +27,10 @@
         "aedart/athenaeum-service": "^9.26",
         "aedart/athenaeum-support": "^9.26",
         "aedart/athenaeum-utils": "^9.26",
-        "illuminate/cache": "^v12.53.0",
-        "illuminate/filesystem": "^v12.53.0",
+        "illuminate/cache": "^v13.2.0",
+        "illuminate/filesystem": "^v13.2.0",
         "psr/log": "^3.0.2",
-        "symfony/console": "^v7.4.6",
+        "symfony/console": "^v7.4.7",
         "vlucas/phpdotenv": "^5.6.3"
     },
     "require-dev": {

@@ -43,21 +43,22 @@ class FlysystemDatabaseAdapterServiceProvider extends ServiceProvider
      */
     protected function enableAdapterAsStorageDriver(): void
     {
-        Storage::extend('database', function ($app, array $settings) {
+        $resolver = $this->getConnectionResolver();
+
+        Storage::extend('database', function ($app, array $settings) use ($resolver) {
             // Resolve database connection
-            $connection = $this
-                ->getConnectionResolver()
+            $connection = $resolver
                 ->connection(data_get($settings, 'connection', 'mysql'));
 
             // Obtain hashing / checksum algorithm
             $algo = data_get($settings, 'hash_algo', 'sha256');
 
             // Create and configure adapter
-            $adapter = (new DatabaseAdapter(
+            $adapter = new DatabaseAdapter(
                 data_get($settings, 'files_table', 'files'),
                 data_get($settings, 'contents_table', 'files_contents'),
                 $connection,
-            ))
+            )
                 ->setHashAlgorithm($algo)
                 ->setPathPrefix(data_get($settings, 'path_prefix', ''));
 

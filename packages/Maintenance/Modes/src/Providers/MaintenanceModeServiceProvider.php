@@ -4,6 +4,7 @@ namespace Aedart\Maintenance\Modes\Providers;
 
 use Aedart\Maintenance\Modes\FallbackManager;
 use Aedart\Maintenance\Modes\Traits\MaintenanceModeManagerTrait;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Foundation\MaintenanceMode;
 use Illuminate\Support\ServiceProvider;
 
@@ -61,17 +62,19 @@ class MaintenanceModeServiceProvider extends ServiceProvider
      * Installs additional maintenance modes into Laravel's manager
      *
      * @return void
+     * @throws BindingResolutionException
      */
     protected function installMaintenanceModes(): void
     {
         $manager = $this->getMaintenanceModeManager();
+        $fallback = $this->createFallbackManager();
 
-        $manager->extend('array', function () {
-            return $this->createFallbackManager()->driver('array');
+        $manager->extend('array', function () use ($fallback) {
+            return $fallback->driver('array');
         });
 
-        $manager->extend('json', function () {
-            return $this->createFallbackManager()->driver('json');
+        $manager->extend('json', function () use ($fallback) {
+            return $fallback->driver('json');
         });
     }
 

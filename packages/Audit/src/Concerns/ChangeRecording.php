@@ -62,9 +62,11 @@ trait ChangeRecording
      */
     public static function bootChangeRecording(): void
     {
-        static::observe(
-            Config::get('audit-trail.observer', ModelObserver::class)
-        );
+        static::whenBooted(function () {
+            static::observe(
+                Config::get('audit-trail.observer', ModelObserver::class)
+            );
+        });
     }
 
     /*****************************************************************
