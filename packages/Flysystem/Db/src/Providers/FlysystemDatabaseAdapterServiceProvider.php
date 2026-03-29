@@ -45,7 +45,7 @@ class FlysystemDatabaseAdapterServiceProvider extends ServiceProvider
     {
         $resolver = $this->getConnectionResolver();
 
-        Storage::extend('database', function ($app, array $settings) use($resolver) {
+        Storage::extend('database', function ($app, array $settings) use ($resolver) {
             // Resolve database connection
             $connection = $resolver
                 ->connection(data_get($settings, 'connection', 'mysql'));
