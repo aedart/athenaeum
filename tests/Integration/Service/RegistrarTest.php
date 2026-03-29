@@ -30,7 +30,7 @@ class RegistrarTest extends AthenaeumTestCase
     /**
      * @inheritdoc
      */
-    protected function _after()
+    protected function _after(): void
     {
         // Clear cached messages
         MessageBag::clearAll();

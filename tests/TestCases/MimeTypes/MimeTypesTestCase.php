@@ -49,7 +49,7 @@ abstract class MimeTypesTestCase extends LaravelTestCase
      *
      * @throws \Aedart\Contracts\Config\Loaders\Exceptions\InvalidPathException
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -61,7 +61,7 @@ abstract class MimeTypesTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _after()
+    protected function _after(): void
     {
         if (isset($this->fileStream) && is_resource($this->fileStream)) {
             fclose($this->fileStream);

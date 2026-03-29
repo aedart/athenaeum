@@ -33,7 +33,7 @@ class L1_LoggingTest extends HttpClientsTestCase
     /**
      * @inheritDoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 

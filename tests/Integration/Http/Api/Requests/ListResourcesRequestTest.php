@@ -29,7 +29,7 @@ class ListResourcesRequestTest extends ApiResourceRequestsTestCase
     /**
      * @inheritDoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 

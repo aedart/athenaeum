@@ -33,7 +33,7 @@ class E1_SyncTest extends StreamTestCase
      * Setup
      ****************************************************************/
 
-    public function _before()
+    public function _before(): void
     {
         parent::_before();
 

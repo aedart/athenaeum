@@ -66,7 +66,7 @@ abstract class RedmineTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -91,7 +91,7 @@ abstract class RedmineTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _after()
+    protected function _after(): void
     {
         parent::_after();
     }
@@ -99,7 +99,7 @@ abstract class RedmineTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             ConfigLoaderServiceProvider::class,

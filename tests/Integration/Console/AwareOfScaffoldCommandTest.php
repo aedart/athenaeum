@@ -28,7 +28,7 @@ class AwareOfScaffoldCommandTest extends IntegrationTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 

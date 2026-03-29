@@ -24,7 +24,7 @@ class C0_ExceptionHandlingTest extends AthenaeumCoreConsoleTestCase
     /**
      * @inheritdoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         // Cleanup
         $file = Configuration::outputDir() . 'console/logs/athenaeum.log';

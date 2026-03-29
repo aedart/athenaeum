@@ -109,7 +109,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
      * Setup Methods
      ****************************************************************/
 
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -117,7 +117,7 @@ class LaravelSupportHelpersTest extends LaravelHelpersTestCase
         Config::set('database.redis.client', 'predis');
     }
 
-    protected function _after()
+    protected function _after(): void
     {
         // Prevent laravel from stopping, as this just increases
         // the time it takes to execute

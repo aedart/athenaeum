@@ -59,7 +59,7 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -71,7 +71,7 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _after()
+    protected function _after(): void
     {
         $this->lastRequest = null;
 

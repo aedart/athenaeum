@@ -30,7 +30,7 @@ abstract class ETagsTestCase extends LaravelTestCase
     /**
      * @inheritDoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -42,7 +42,7 @@ abstract class ETagsTestCase extends LaravelTestCase
     /**
      * @inheritDoc
      */
-    protected function _after()
+    protected function _after(): void
     {
         parent::_after();
     }

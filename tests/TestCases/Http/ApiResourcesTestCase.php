@@ -44,7 +44,7 @@ abstract class ApiResourcesTestCase extends LaravelTestCase
      * @throws InvalidPathException
      * @throws FileParserException
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -60,7 +60,7 @@ abstract class ApiResourcesTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _after()
+    protected function _after(): void
     {
         parent::_after();
     }
