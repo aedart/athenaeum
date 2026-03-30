@@ -23,6 +23,7 @@ Temporary changelog for `v10.x` series.
 * `UndefinedPropertyException` interface (_Contracts package_).
 * `Dependencies` and `Casting` concerns (_Dto package_).
 * `UndefinedProperty` exception (_Dto package_).
+* `useFailedExpectationHandler`, `hasFailedExpectationHandler` and `failedExpectationHandler`, in `Connection` interface (_Redmine package_).
 
 ### Changed
 
