@@ -76,6 +76,7 @@ Temporary changelog for `v10.x` series.
 ### Fixed
 
 * Passing `E_USER_ERROR` to `trigger_error()` is deprecated since 8.4, in `tests/_data/exceptions/handles-shutdown.php`.
+* Unstable tests in `SummationCollectionTest` (_test failures happened when Faker return 0 as random number_). [#255](https://github.com/aedart/athenaeum/issues/255).
 
 ### Removed
 
