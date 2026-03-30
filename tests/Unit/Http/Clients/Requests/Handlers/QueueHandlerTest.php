@@ -15,10 +15,6 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * QueueHandlerTest
  *
- * @group http-clients
- * @group http-clients-middleware
- * @group http-clients-queue-handler
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\TestCases\Http\Clients\Requests\Handlers
  */
@@ -59,9 +55,6 @@ class QueueHandlerTest extends UnitTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canProcessMiddleware()
     {

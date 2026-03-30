@@ -15,11 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * EnvFileTest
  *
- * @group laravel
- * @group support
- * @group support-env
- * @group support-env-file
- *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Integration\Support\Env
  */
@@ -32,8 +27,6 @@ use PHPUnit\Framework\Attributes\Test;
 class EnvFileTest extends EnvFileTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -45,8 +38,6 @@ class EnvFileTest extends EnvFileTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ConfigurationException
@@ -62,8 +53,6 @@ class EnvFileTest extends EnvFileTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ConfigurationException
@@ -81,8 +70,6 @@ class EnvFileTest extends EnvFileTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ConfigurationException
@@ -107,8 +94,6 @@ class EnvFileTest extends EnvFileTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ConfigurationException
@@ -134,8 +119,6 @@ class EnvFileTest extends EnvFileTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ConfigurationException
@@ -160,8 +143,6 @@ class EnvFileTest extends EnvFileTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ConfigurationException
@@ -180,8 +161,6 @@ class EnvFileTest extends EnvFileTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ConfigurationException

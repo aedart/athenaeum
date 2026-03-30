@@ -15,9 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * FailureTest
  *
- * @group circuits
- * @group circuits-failure
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Circuits\Failures
  */
@@ -47,22 +44,16 @@ class FailureTest extends UnitTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
-    public function canCreateInstance()
+    public function canCreateInstance(): void
     {
         $failure = $this->makeFailure();
 
         $this->assertInstanceOf(Failure::class, $failure);
     }
 
-    /**
-     * @test
-     */
     #[Test]
-    public function canCreateWithReasonAndContext()
+    public function canCreateWithReasonAndContext(): void
     {
         $faker = $this->getFaker();
 
@@ -81,11 +72,8 @@ class FailureTest extends UnitTestCase
         $this->assertSame($data['total_failures'], $failure->totalFailures(), 'Incorrect context');
     }
 
-    /**
-     * @test
-     */
     #[Test]
-    public function hasReportedAtByDefault()
+    public function hasReportedAtByDefault(): void
     {
         $failure = $this->makeFailure();
 
@@ -95,11 +83,8 @@ class FailureTest extends UnitTestCase
         $this->assertInstanceOf(DateTimeInterface::class, $reportedAt);
     }
 
-    /**
-     * @test
-     */
     #[Test]
-    public function canExportToArray()
+    public function canExportToArray(): void
     {
         $faker = $this->getFaker();
 
@@ -121,11 +106,8 @@ class FailureTest extends UnitTestCase
         $this->assertArrayHasKey('total_failures', $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
-    public function canExportToJson()
+    public function canExportToJson(): void
     {
         $faker = $this->getFaker();
 
@@ -144,11 +126,8 @@ class FailureTest extends UnitTestCase
         $this->assertJson($result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
-    public function canConvertToJson()
+    public function canConvertToJson(): void
     {
         $faker = $this->getFaker();
 
@@ -167,11 +146,8 @@ class FailureTest extends UnitTestCase
         $this->assertJson($result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
-    public function canCastToString()
+    public function canCastToString(): void
     {
         $result = (string) $this->makeFailure();
         ConsoleDebugger::output($result);
@@ -179,11 +155,8 @@ class FailureTest extends UnitTestCase
         $this->assertIsString($result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
-    public function canSerializeAndUnserialize()
+    public function canSerializeAndUnserialize(): void
     {
         $faker = $this->getFaker();
 

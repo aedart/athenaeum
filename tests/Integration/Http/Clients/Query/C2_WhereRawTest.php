@@ -13,11 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C1_WhereRawTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-c2
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -146,9 +141,6 @@ class C2_WhereRawTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesWhereRawData
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -170,9 +162,6 @@ class C2_WhereRawTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesOrWhereRawData
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -195,9 +184,6 @@ class C2_WhereRawTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesInjectsBindingsData
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -219,9 +205,6 @@ class C2_WhereRawTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesCombineWhereWithRawWhere
-     *
      * @param string $grammar
      * @param string $expected
      *

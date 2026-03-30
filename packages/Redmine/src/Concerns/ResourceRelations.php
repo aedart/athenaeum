@@ -22,7 +22,7 @@ trait ResourceRelations
     /**
      * Returns new belongs to relation
      *
-     * @param string|ApiResource $related Class path to related resource
+     * @param class-string<ApiResource>|ApiResource $related Class path to related resource
      * @param Dto|null $reference [optional] Reference Dto in parent resource that holds foreign key to
      *                                       related resource
      *
@@ -39,7 +39,7 @@ trait ResourceRelations
     /**
      * Returns new one from list relation
      *
-     * @param string|ApiResource $related Class path to related resource
+     * @param class-string<ApiResource>|ApiResource $related Class path to related resource
      * @param Dto|null $reference [optional] Reference Dto in parent resource that holds foreign key to
      *                                       related resource
      *
@@ -56,7 +56,7 @@ trait ResourceRelations
     /**
      * Returns new has many relation
      *
-     * @param string|ApiResource $related Class path to related resource
+     * @param class-string<ApiResource>|ApiResource $related Class path to related resource
      * @param string|null $filterKey [optional]
      *
      * @return HasMany<PaginatedResults<T>|array<T>>

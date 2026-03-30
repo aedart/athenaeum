@@ -16,11 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * RouteParametersValidationConcernTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-request-concerns
- * @group route-parameters-validation
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests\Concerns
  */
@@ -33,8 +28,6 @@ use PHPUnit\Framework\Attributes\Test;
 class RouteParametersValidationConcernTest extends ApiResourceRequestsTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -66,8 +59,6 @@ class RouteParametersValidationConcernTest extends ApiResourceRequestsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException

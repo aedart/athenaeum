@@ -2,7 +2,7 @@
 
 namespace Aedart\Filters\Query\Filters\Fields;
 
-use Aedart\Contracts\Database\Query\FieldCriteria;
+use Aedart\Contracts\Database\Query\Operators\LogicalOperator;
 use Aedart\Utils\Str;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
@@ -49,7 +49,7 @@ class BelongsToFilter extends BaseFieldFilter
         string|null $field = null,
         string|null $operator = null,
         mixed $value = null,
-        string $logical = FieldCriteria::AND
+        string|LogicalOperator $logical = LogicalOperator::AND
     ) {
         // This filter is intended to be created as an instance, and not
         // stated as a class path inside a "constraints processor". The "relation"
@@ -77,7 +77,7 @@ class BelongsToFilter extends BaseFieldFilter
         string|null $field = null,
         string|null $operator = null,
         mixed $value = null,
-        string $logical = FieldCriteria::AND
+        string|LogicalOperator $logical = LogicalOperator::AND
     ): static {
         return new static($field, $operator, $value, $logical);
     }
@@ -243,7 +243,7 @@ class BelongsToFilter extends BaseFieldFilter
     /**
      * @inheritDoc
      */
-    protected function assertValue(mixed $value)
+    protected function assertValue(mixed $value): void
     {
         // Skip value assertion if requested. Reset state when doing so...
         if ($this->skipValueAssert) {
@@ -289,7 +289,7 @@ class BelongsToFilter extends BaseFieldFilter
      *
      * @throws InvalidArgumentException
      */
-    protected function assertInteger(mixed $value)
+    protected function assertInteger(mixed $value): void
     {
         if (!ctype_digit(strval($value))) {
             $translator = $this->getTranslator();
@@ -305,7 +305,7 @@ class BelongsToFilter extends BaseFieldFilter
      *
      * @throws InvalidArgumentException
      */
-    protected function assertString(mixed $value)
+    protected function assertString(mixed $value): void
     {
         if (!(is_string($value) && !is_numeric($value))) {
             $translator = $this->getTranslator();
@@ -324,15 +324,14 @@ class BelongsToFilter extends BaseFieldFilter
      */
     protected function buildWhereHasMorph(MorphTo $query, string $field): MorphTo
     {
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereHasMorph($this->relation(), '*', function ($query) use ($field) {
+        return $this->buildFor(
+            and: fn () => $query->whereHasMorph($this->relation(), '*', function ($query) use ($field) {
                 $query->where($field, $this->operator(), $this->value());
-            });
-        }
-
-        return $query->whereHasMorph($this->relation(), '*', function ($query) use ($field) {
-            $query->where($field, $this->operator(), $this->value());
-        });
+            }),
+            or: fn () => $query->orWhereHasMorph($this->relation(), '*', function ($query) use ($field) {
+                $query->where($field, $this->operator(), $this->value());
+            })
+        );
     }
 
     /**
@@ -347,15 +346,14 @@ class BelongsToFilter extends BaseFieldFilter
     {
         $value = $this->valueToList($this->value());
 
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereHasMorph($this->relation(), '*', function ($query) use ($field, $value) {
+        return $this->buildFor(
+            and: fn () => $query->whereHasMorph($this->relation(), '*', function ($query) use ($field, $value) {
                 $query->whereIn($field, $value);
-            });
-        }
-
-        return $query->whereHasMorph($this->relation(), '*', function ($query) use ($field, $value) {
-            $query->whereIn($field, $value);
-        });
+            }),
+            or: fn () => $query->orWhereHasMorph($this->relation(), '*', function ($query) use ($field, $value) {
+                $query->whereIn($field, $value);
+            })
+        );
     }
 
     /**
@@ -370,15 +368,14 @@ class BelongsToFilter extends BaseFieldFilter
     {
         $value = $this->valueToList($this->value());
 
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereHasMorph($this->relation(), '*', function ($query) use ($field, $value) {
+        return $this->buildFor(
+            and: fn () => $query->whereHasMorph($this->relation(), '*', function ($query) use ($field, $value) {
                 $query->whereNotIn($field, $value);
-            });
-        }
-
-        return $query->whereHasMorph($this->relation(), '*', function ($query) use ($field, $value) {
-            $query->whereNotIn($field, $value);
-        });
+            }),
+            or: fn () => $query->orWhereHasMorph($this->relation(), '*', function ($query) use ($field, $value) {
+                $query->whereNotIn($field, $value);
+            })
+        );
     }
 
     /**
@@ -391,15 +388,14 @@ class BelongsToFilter extends BaseFieldFilter
      */
     protected function buildWhereHas(Builder|EloquentBuilder $query, string $field): Builder|EloquentBuilder
     {
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereHas($this->relation(), function ($query) use ($field) {
+        return $this->buildFor(
+            and: fn () => $query->whereHas($this->relation(), function ($query) use ($field) {
                 $query->where($field, $this->operator(), $this->value());
-            });
-        }
-
-        return $query->whereHas($this->relation(), function ($query) use ($field) {
-            $query->where($field, $this->operator(), $this->value());
-        });
+            }),
+            or: fn () => $query->orWhereHas($this->relation(), function ($query) use ($field) {
+                $query->where($field, $this->operator(), $this->value());
+            }),
+        );
     }
 
     /**
@@ -410,19 +406,18 @@ class BelongsToFilter extends BaseFieldFilter
      *
      * @return Builder|EloquentBuilder
      */
-    protected function buildWhereRelationIn(Builder|EloquentBuilder $query, string $field)
+    protected function buildWhereRelationIn(Builder|EloquentBuilder $query, string $field): Builder|EloquentBuilder
     {
         $value = $this->valueToList($this->value());
 
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereHas($this->relation(), function ($query) use ($field, $value) {
+        return $this->buildFor(
+            and: fn () => $query->whereHas($this->relation(), function ($query) use ($field, $value) {
                 $query->whereIn($field, $value);
-            });
-        }
-
-        return $query->whereHas($this->relation(), function ($query) use ($field, $value) {
-            $query->whereIn($field, $value);
-        });
+            }),
+            or: fn () => $query->orWhereHas($this->relation(), function ($query) use ($field, $value) {
+                $query->whereIn($field, $value);
+            })
+        );
     }
 
     /**
@@ -437,15 +432,14 @@ class BelongsToFilter extends BaseFieldFilter
     {
         $value = $this->valueToList($this->value());
 
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereHas($this->relation(), function ($query) use ($field, $value) {
+        return $this->buildFor(
+            and: fn () => $query->whereHas($this->relation(), function ($query) use ($field, $value) {
                 $query->whereNotIn($field, $value);
-            });
-        }
-
-        return $query->whereHas($this->relation(), function ($query) use ($field, $value) {
-            $query->whereNotIn($field, $value);
-        });
+            }),
+            or: fn () => $query->orWhereHas($this->relation(), function ($query) use ($field, $value) {
+                $query->whereNotIn($field, $value);
+            })
+        );
     }
 
     /**
@@ -457,11 +451,10 @@ class BelongsToFilter extends BaseFieldFilter
      */
     protected function buildWhereRelationExists(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orHas($this->relation());
-        }
-
-        return $query->has($this->relation());
+        return $this->buildFor(
+            and: fn () => $query->has($this->relation()),
+            or: fn () => $query->orHas($this->relation())
+        );
     }
 
     /**
@@ -473,11 +466,10 @@ class BelongsToFilter extends BaseFieldFilter
      */
     protected function buildWhereRelationDoesNotExists(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orDoesntHave($this->relation());
-        }
-
-        return $query->doesntHave($this->relation());
+        return $this->buildFor(
+            and: fn () => $query->doesntHave($this->relation()),
+            or: fn () => $query->orDoesntHave($this->relation())
+        );
     }
 
     /**

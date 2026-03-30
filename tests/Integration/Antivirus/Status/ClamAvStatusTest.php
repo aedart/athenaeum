@@ -15,11 +15,6 @@ use Xenolope\Quahog\Result as ClamAvDriverResult;
 /**
  * ClamAvStatusTest
  *
- * @group antivirus
- * @group antivirus-status
- * @group antivirus-status-clamav
- * @group clamav
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus\Status
  */
@@ -32,8 +27,6 @@ use Xenolope\Quahog\Result as ClamAvDriverResult;
 class ClamAvStatusTest extends AntivirusTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws UnsupportedStatusValueException
@@ -49,8 +42,6 @@ class ClamAvStatusTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws UnsupportedStatusValueException
@@ -81,8 +72,6 @@ class ClamAvStatusTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws UnsupportedStatusValueException

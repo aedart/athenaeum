@@ -14,11 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E1_PageNumberPageSizeTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-e1
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -64,9 +59,6 @@ class E1_PageNumberPageSizeTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesPageWithSize
-     *
      * @param string $grammar
      * @param string $expected
      *

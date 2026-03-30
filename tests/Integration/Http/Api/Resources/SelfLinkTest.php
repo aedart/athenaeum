@@ -14,10 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * SelfLinkTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-self-link
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
@@ -29,8 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class SelfLinkTest extends ApiResourcesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -44,8 +38,6 @@ class SelfLinkTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -84,8 +76,6 @@ class SelfLinkTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

@@ -13,10 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * RegistrarTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-registrar
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Registrar
  */
@@ -28,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class RegistrarTest extends ApiResourcesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -46,8 +40,6 @@ class RegistrarTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -65,8 +57,6 @@ class RegistrarTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -86,8 +76,6 @@ class RegistrarTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -107,8 +95,6 @@ class RegistrarTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -128,8 +114,6 @@ class RegistrarTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

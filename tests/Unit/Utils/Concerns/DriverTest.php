@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * DriverTest
  *
- * @group utils
- * @group driver
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Concerns
  */
@@ -51,8 +48,6 @@ class DriverTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

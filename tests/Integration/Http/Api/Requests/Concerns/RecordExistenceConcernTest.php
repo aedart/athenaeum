@@ -14,11 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * RecordExistenceConcernTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-request-concerns
- * @group record-existence
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests\Concerns
  */
@@ -51,8 +46,6 @@ class RecordExistenceConcernTest extends ApiResourceRequestsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -78,8 +71,6 @@ class RecordExistenceConcernTest extends ApiResourceRequestsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -103,8 +94,6 @@ class RecordExistenceConcernTest extends ApiResourceRequestsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

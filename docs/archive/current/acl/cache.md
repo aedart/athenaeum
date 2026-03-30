@@ -77,6 +77,6 @@ class RolesController extends Controller
 ### No auto-flush offered
 
 The current ACL package does not offer any automatic way of flushing the cached permissions & roles.
-Should you require such logic, then you may accomplish this via Eloquent's [events](https://laravel.com/docs/12.x/eloquent#events) and [event observers](https://laravel.com/docs/12.x/eloquent#observers).
+Should you require such logic, then you may accomplish this via Eloquent's [events](https://laravel.com/docs/13.x/eloquent#events) and [event observers](https://laravel.com/docs/13.x/eloquent#observers).
 
 

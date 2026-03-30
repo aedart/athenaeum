@@ -12,9 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * SortProcessorTest
  *
- * @group filters
- * @group filters-sorting-processor
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Processors
  */
@@ -25,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class SortingProcessorTest extends FiltersTestCase
 {
     /**
-     * @test
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
     #[Test]

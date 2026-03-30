@@ -9,6 +9,8 @@ use Throwable;
 /**
  * Http Query Parameters Processor
  *
+ * @template R of \Illuminate\Http\Request
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Contracts\Filters
  */
@@ -28,7 +30,7 @@ interface Processor
      * on the received http query parameters.
      *
      * @param BuiltFiltersMap $built
-     * @param callable $next
+     * @param callable(BuiltFiltersMap $built): mixed $next
      *
      * @return mixed
      *
@@ -41,7 +43,7 @@ interface Processor
      * Set the current request from which the http query parameter
      * must be processed
      *
-     * @param \Illuminate\Http\Request $request
+     * @param R $request
      *
      * @return self
      */
@@ -50,7 +52,7 @@ interface Processor
     /**
      * Get the current request
      *
-     * @return \Illuminate\Http\Request
+     * @return R
      *
      * @throws RuntimeException If no request was assigned
      */

@@ -11,13 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * B4_PetaAndPebibyteTest
  *
- * @group utils
- * @group utils-memory
- * @group utils-memory-unit
- * @group utils-memory-unit-b4
- * @group utils-memory-unit-petabyte
- * @group utils-memory-unit-pebibyte
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
@@ -32,8 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class B4_PetaAndPebibyteTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -53,8 +44,6 @@ class B4_PetaAndPebibyteTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -74,8 +63,6 @@ class B4_PetaAndPebibyteTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -94,8 +81,6 @@ class B4_PetaAndPebibyteTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

@@ -14,11 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C8_WhereYearTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-g2
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -90,9 +85,6 @@ class G2_WhereYearTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesWhereYear
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -114,9 +106,6 @@ class G2_WhereYearTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesOrWhereYear
-     *
      * @param string $grammar
      * @param string $expected
      *

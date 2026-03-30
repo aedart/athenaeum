@@ -66,7 +66,7 @@ abstract class RedmineTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -91,7 +91,7 @@ abstract class RedmineTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _after()
+    protected function _after(): void
     {
         parent::_after();
     }
@@ -99,7 +99,7 @@ abstract class RedmineTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             ConfigLoaderServiceProvider::class,
@@ -111,7 +111,7 @@ abstract class RedmineTestCase extends LaravelTestCase
     /**
      * @inheritdoc
      */
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app): void
     {
         // Ensure .env is loaded
         $app->useEnvironmentPath(__DIR__ . '/../../../');
@@ -352,7 +352,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      *
      * @throws JsonException
      */
-    public function mockUploadedResponse(?int $id = null, ?string $token = null): ResponseInterface
+    public function mockUploadedResponse(null|int $id = null, null|string $token = null): ResponseInterface
     {
         $faker = $this->getFaker();
 
@@ -388,7 +388,7 @@ abstract class RedmineTestCase extends LaravelTestCase
         array $body = [],
         int $status = StatusCodes::OK,
         array $headers = [],
-        ?string $profile = null
+        null|string $profile = null
     ): ConnectionInterface {
         $response = $this->mockJsonResponse($body, $status, $headers);
 
@@ -405,7 +405,7 @@ abstract class RedmineTestCase extends LaravelTestCase
      *
      * @throws ConnectionException
      */
-    public function connectWithMultipleMocks(array $responses, ?string $profile = null): ConnectionInterface
+    public function connectWithMultipleMocks(array $responses, null|string $profile = null): ConnectionInterface
     {
         return Connection::resolve($profile)->mock($responses);
     }

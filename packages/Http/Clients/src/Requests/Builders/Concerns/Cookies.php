@@ -142,7 +142,7 @@ trait Cookies
     /**
      * Resolves a cookie from given callback
      *
-     * @param  callable  $callback  New {@see Cookie} instance is given as callback argument
+     * @param  callable(Cookie): void  $callback  New {@see Cookie} instance is given as callback argument
      *
      * @return Cookie
      *

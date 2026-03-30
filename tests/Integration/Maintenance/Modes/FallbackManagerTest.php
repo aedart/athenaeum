@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * FallbackManagerTest
  *
- * @group maintenance-modes
- * @group maintenance-modes-manager
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Maintenance\Modes
  */
@@ -24,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class FallbackManagerTest extends MaintenanceModesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
@@ -39,8 +34,6 @@ class FallbackManagerTest extends MaintenanceModesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
@@ -56,8 +49,6 @@ class FallbackManagerTest extends MaintenanceModesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException

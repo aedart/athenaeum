@@ -28,7 +28,7 @@ interface Factory
     /**
      * Creates a new ETag generator instance
      *
-     * @param  string|null  $driver  [optional] Class path to the {@see Generator} "driver"
+     * @param  class-string<Generator>|null  $driver  [optional] Class path to the {@see Generator} "driver"
      * @param  array  $options  [optional] Generator specific options
      *
      * @return Generator
@@ -38,7 +38,7 @@ interface Factory
     /**
      * Returns a default ETag Generator class path
      *
-     * @return string
+     * @return class-string<Generator>
      */
     public function defaultGenerator(): string;
 

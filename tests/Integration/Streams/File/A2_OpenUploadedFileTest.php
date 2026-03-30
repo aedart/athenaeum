@@ -14,9 +14,6 @@ use Psr\Http\Message\UploadedFileInterface;
 /**
  * A2_OpenUploadedFileTest
  *
- * @group streams
- * @group streams-file-a2
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
@@ -59,10 +56,7 @@ class A2_OpenUploadedFileTest extends StreamTestCase
      * Actual Tests
      ****************************************************************/
 
-
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -86,8 +80,6 @@ class A2_OpenUploadedFileTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException

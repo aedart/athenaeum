@@ -28,7 +28,7 @@ class RequestETagsMixin
     /**
      * Get a collection of etags from given header
      *
-     * @return Closure
+     * @return Closure(): Collection
      */
     public function etagsFrom(): Closure
     {
@@ -51,7 +51,7 @@ class RequestETagsMixin
      *
      * @see https://httpwg.org/specs/rfc9110.html#field.if-match
      *
-     * @return Closure
+     * @return Closure(): Collection
      */
     public function ifMatchEtags(): Closure
     {
@@ -65,7 +65,7 @@ class RequestETagsMixin
      *
      * @see https://httpwg.org/specs/rfc9110.html#field.if-none-match
      *
-     * @return Closure
+     * @return Closure(): Collection
      */
     public function ifNoneMatchEtags(): Closure
     {
@@ -83,7 +83,7 @@ class RequestETagsMixin
      *
      * @see https://httpwg.org/specs/rfc9110.html#field.if-range
      *
-     * @return Closure
+     * @return Closure(): ETag|DateTimeInterface|null
      */
     public function ifRangeEtagOrDate(): Closure
     {
@@ -112,7 +112,7 @@ class RequestETagsMixin
      *
      * @see https://httpwg.org/specs/rfc9110.html#field.if-range
      *
-     * @return Closure
+     * @return Closure(): bool
      */
     public function hasIfRangeHeaders(): Closure
     {
@@ -129,7 +129,7 @@ class RequestETagsMixin
     /**
      * Obtain HTTP-Date from given header
      *
-     * @return Closure
+     * @return Closure(string $header): DateTimeInterface|null
      */
     public function httpDateFrom(): Closure
     {
@@ -156,7 +156,7 @@ class RequestETagsMixin
      *
      * @see https://httpwg.org/specs/rfc9110.html#field.if-modified-since
      *
-     * @return Closure
+     * @return Closure(): DateTimeInterface|null
      */
     public function ifModifiedSinceDate(): Closure
     {
@@ -182,7 +182,7 @@ class RequestETagsMixin
      * The Http Date is available when `If-Unmodified-Since` header is given,
      * and there is no `If-Match` header value specified.
      *
-     * @return Closure
+     * @return Closure(): DateTimeInterface|null
      */
     public function ifUnmodifiedSinceDate(): Closure
     {

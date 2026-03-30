@@ -5,6 +5,8 @@ namespace Aedart\Contracts\Audit;
 /**
  * Audit Callback Reason
  *
+ * @template M of \Illuminate\Database\Eloquent\Model
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Helpers
  */
@@ -13,7 +15,7 @@ interface CallbackReason
     /**
      * Register a reason for the next audit trail entry
      *
-     * @param string|callable|null $reason
+     * @param string|null|callable(M, string): string $reason
      *
      * @return self
      */
@@ -22,7 +24,7 @@ interface CallbackReason
     /**
      * Resolves an audit trail message (a reason), if one was specified
      *
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param M $model
      * @param string $type
      *
      * @return string|null
@@ -39,7 +41,7 @@ interface CallbackReason
     /**
      * Returns the reason callback, if any was registered
      *
-     * @return callable|null
+     * @return null|callable(M, string): string
      */
     public function get(): callable|null;
 

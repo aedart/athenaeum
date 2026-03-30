@@ -12,9 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A1_OpenCloseTest
  *
- * @group streams
- * @group streams-a1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -25,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class A1_OpenCloseTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -42,8 +37,6 @@ class A1_OpenCloseTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -65,8 +58,6 @@ class A1_OpenCloseTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -83,8 +74,6 @@ class A1_OpenCloseTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -102,8 +91,6 @@ class A1_OpenCloseTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -121,8 +108,6 @@ class A1_OpenCloseTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -139,8 +124,6 @@ class A1_OpenCloseTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

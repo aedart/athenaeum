@@ -29,7 +29,7 @@ abstract class AthenaeumTestCase extends IntegrationTestCase
     /**
      * @inheritdoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -51,7 +51,7 @@ abstract class AthenaeumTestCase extends IntegrationTestCase
     /**
      * @inheritdoc
      */
-    protected function _after()
+    protected function _after(): void
     {
         // Destroy application before destroying ioc
         $this->stopApplication();

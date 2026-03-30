@@ -20,7 +20,7 @@ composer require illuminate/log
 
 Afterwards, in your `config/app.php`, you need to register the `LogServiceProvider`.
 Also, you will require a copy of the `logging.php` configuration file from Laravel's [Repository](https://github.com/laravel/laravel/blob/master/config/logging.php), and place it within your `/configs` directory.
-Read more about the configuration in Laravel's [documentation](https://laravel.com/docs/12.x/logging).
+Read more about the configuration in Laravel's [documentation](https://laravel.com/docs/13.x/logging).
 
 ```php
 return [
@@ -69,12 +69,13 @@ Similar to [`debug()` and `dd()`](./debugging), you can provide the `log()` with
 When doing so, it's up to you how a request or response should be logged and how.
 
 ```php
+use Aedart\Contracts\Http\Messages\Type;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Psr\Http\Message\MessageInterface;
 
 $response = $client
         ->where('date', 'today')
-        ->log(function(string $type, MessageInterface $message, Builder $builder) {
+        ->log(function(Type $type, MessageInterface $message, Builder $builder) {
             // ... log http message ...       
         })
         ->get('/weather');

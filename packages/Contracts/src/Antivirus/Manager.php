@@ -27,7 +27,7 @@ interface Manager
     /**
      * Creates a new antivirus scanner instance
      *
-     * @param string|null $driver [optional] Class path to {@see Scanner}
+     * @param class-string<Scanner>|null $driver [optional] Class path to {@see Scanner}
      * @param array $options [optional] Scanner options
      *
      * @return Scanner

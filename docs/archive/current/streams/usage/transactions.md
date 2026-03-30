@@ -129,7 +129,7 @@ You are encouraged to extend the `FileStream` component and overwrite the `getDe
 ```php
 use Aedart\Streams\FileStream;
 use Aedart\Contracts\Streams\BufferSizes;
-use Aedart\Contracts\Streams\Locks\LockTypes;
+use Aedart\Contracts\Streams\Locks\LockType;
 use Aedart\Contracts\Streams\Transactions\Factory;
 use Aedart\Streams\Transactions\TransactionFactory;
 use Aedart\Streams\Transactions\Drivers\CopyWriteReplaceDriver;
@@ -147,7 +147,7 @@ class MyFileStream extends FileStream
                     'lock' => [
                         'enabled' => true,
                         'profile' => 'default',
-                        'type' => LockTypes::EXCLUSIVE,
+                        'type' => LockType::EXCLUSIVE,
                         'timeout' => 0.01,
                     ],
 

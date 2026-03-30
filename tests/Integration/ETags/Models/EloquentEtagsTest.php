@@ -15,10 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * EloquentEtagsTest
  *
- * @group etags
- * @group etags-eloquent-model
- * @group etags-eloquent-model-etags
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Models
  */
@@ -65,8 +61,6 @@ class EloquentEtagsTest extends ETagsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagGeneratorException
@@ -90,8 +84,6 @@ class EloquentEtagsTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagGeneratorException
@@ -115,8 +107,6 @@ class EloquentEtagsTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagGeneratorException
@@ -143,8 +133,6 @@ class EloquentEtagsTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagGeneratorException
@@ -168,8 +156,6 @@ class EloquentEtagsTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagGeneratorException
@@ -194,8 +180,6 @@ class EloquentEtagsTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagGeneratorException
@@ -225,8 +209,6 @@ class EloquentEtagsTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagGeneratorException

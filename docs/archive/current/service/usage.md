@@ -54,7 +54,7 @@ $registrar->registerMultiple([
 ## Boot 
 
 The `bootAll()` method can be used to boot all Service Providers that have yet to be booted.
-See [Laravel's documentation](https://laravel.com/docs/12.x/providers#the-boot-method) for additional information about the boot method.
+See [Laravel's documentation](https://laravel.com/docs/13.x/providers#the-boot-method) for additional information about the boot method.
 
 ```php
 $registrar->bootAll();

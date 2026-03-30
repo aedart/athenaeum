@@ -19,12 +19,12 @@ interface Note
      *
      * @return self
      */
-    public function setContent(?string $content);
+    public function setContent(null|string $content);
 
     /**
      * Get content
      *
      * @return string|null content or null if none content has been set
      */
-    public function getContent(): ?string;
+    public function getContent(): null|string;
 }

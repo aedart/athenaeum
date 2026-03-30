@@ -6,7 +6,7 @@ use Aedart\Contracts\Http\Clients\Middleware;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Builders\HttpRequestBuilderAware;
 use Aedart\Contracts\Http\Clients\Requests\Handler;
-use Aedart\Contracts\Http\Messages\Types;
+use Aedart\Contracts\Http\Messages\Type;
 use Aedart\Http\Clients\Traits\HttpRequestBuilderTrait;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -38,13 +38,13 @@ class RequestResponseDebugging implements
         $callback = $builder->debugCallback();
 
         // Invoke debug for request...
-        $callback(Types::TYPE_REQUEST, $request, $builder);
+        $callback(Type::REQUEST, $request, $builder);
 
         // Perform request and obtain response.
         $response = $handler->handle($request);
 
         // Invoke debug for response...
-        $callback(Types::TYPE_RESPONSE, $response, $builder);
+        $callback(Type::RESPONSE, $response, $builder);
 
         return $response;
     }

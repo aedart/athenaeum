@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * DriverOptionsTest
  *
- * @group utils
- * @group driver-options
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Concerns
  */
@@ -53,8 +50,6 @@ class DriverOptionsTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -74,8 +69,6 @@ class DriverOptionsTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -98,8 +91,6 @@ class DriverOptionsTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

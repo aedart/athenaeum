@@ -15,10 +15,6 @@ use Throwable;
 /**
  * DeleteTest
  *
- * @group redmine
- * @group redmine-resource
- * @group redmine-resource-delete
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
@@ -30,8 +26,6 @@ use Throwable;
 class DeleteTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws ConnectionException
      * @throws JsonException
      * @throws Throwable
@@ -48,8 +42,6 @@ class DeleteTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConnectionException
      * @throws JsonException
      * @throws Throwable
@@ -68,8 +60,6 @@ class DeleteTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable

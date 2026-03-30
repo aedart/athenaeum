@@ -14,8 +14,10 @@ use Aedart\Contracts\Http\Clients\Requests\Query\Builder as Query;
 use Aedart\Contracts\Http\Clients\Responses\ResponseExpectation;
 use Aedart\Contracts\Http\Clients\Responses\Status;
 use Aedart\Contracts\Http\Cookies\Cookie;
+use Aedart\Contracts\Http\Messages\Type;
 use Aedart\Contracts\Streams\Stream;
 use DateTimeInterface;
+use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -63,7 +65,7 @@ interface Builder extends HttpClientAware,
     RequestFactoryInterface
 {
     /**
-     * Make a GET request
+     * Perform a GET request
      *
      * MUST use the {@see request} method to perform actual request.
      *
@@ -77,7 +79,7 @@ interface Builder extends HttpClientAware,
     public function get(string|UriInterface|null $uri = null): ResponseInterface;
 
     /**
-     * Make a HEAD request
+     * Perform a HEAD request
      *
      * MUST use the {@see request} method to perform actual request.
      *
@@ -91,7 +93,7 @@ interface Builder extends HttpClientAware,
     public function head(string|UriInterface|null $uri = null): ResponseInterface;
 
     /**
-     * Make a POST request
+     * Perform a POST request
      *
      * MUST use the {@see request} method to perform actual request.
      *
@@ -106,7 +108,7 @@ interface Builder extends HttpClientAware,
     public function post(string|UriInterface|null $uri = null, array $body = []): ResponseInterface;
 
     /**
-     * Make a PUT request
+     * Perform a PUT request
      *
      * MUST use the {@see request} method to perform actual request.
      *
@@ -121,7 +123,7 @@ interface Builder extends HttpClientAware,
     public function put(string|UriInterface|null $uri = null, array $body = []): ResponseInterface;
 
     /**
-     * Make a DELETE request
+     * Perform a DELETE request
      *
      * MUST use the {@see request} method to perform actual request.
      *
@@ -136,7 +138,7 @@ interface Builder extends HttpClientAware,
     public function delete(string|UriInterface|null $uri = null, array $body = []): ResponseInterface;
 
     /**
-     * Make a OPTIONS request
+     * Perform a OPTIONS request
      *
      * MUST use the {@see request} method to perform actual request.
      *
@@ -150,7 +152,7 @@ interface Builder extends HttpClientAware,
     public function options(string|UriInterface|null $uri = null): ResponseInterface;
 
     /**
-     * Make a PATCH request
+     * Perform a PATCH request
      *
      * MUST use the {@see request} method to perform actual request.
      *
@@ -165,7 +167,7 @@ interface Builder extends HttpClientAware,
     public function patch(string|UriInterface|null $uri = null, array $body = []): ResponseInterface;
 
     /**
-     * Make a http request
+     * Perform an http request
      *
      * MUST use the PSR-17 {@see createRequest} method to create a request, prior to sending
      * it via the PSR-18 {@see Client::sendRequest} method.
@@ -181,7 +183,7 @@ interface Builder extends HttpClientAware,
      * @param string|UriInterface|null $uri [optional] If none given, then Uri from {@see getUri} MUST be used.
      *                                  Http query is ignored if it is set via builder's {@see query}
      * @param array $options [optional] Driver specific options. These options SHOULD be merged with
-     *                       builder's already set options, which SHOULD be obtain via {@see getOptions}.
+     *                       builder's already set options, which SHOULD be obtained via {@see getOptions}.
      *                       The options provided here SHOULD take precedence over the builder's already
      *                       set options, when merging them together.
      *
@@ -387,7 +389,7 @@ interface Builder extends HttpClientAware,
     public function formFormat(): self;
 
     /**
-     * Use json as data format as next request's body format.
+     * Use JSON as data format as next request's body format.
      *
      * Method might set Accept or Content-Type headers,
      * if required.
@@ -546,11 +548,11 @@ interface Builder extends HttpClientAware,
      *
      * Any value returned by the callback methods, is ignored.
      *
-     * @param bool|callable $result E.g. the boolean result of a condition. If callback is given, then its
+     * @param bool|callable(Builder): bool $result E.g. the boolean result of a condition. If callback is given, then its
      *                              resulting value is used as result.
-     * @param callable $callback The callback to apply, if result is `true`.
+     * @param callable(Builder): void $callback The callback to apply, if result is `true`.
      *                          Request builder instance is given as callback's argument.
-     * @param callable|null $otherwise [optional] Callback to apply, if result evaluates is `false`.
+     * @param callable(Builder): (void)|null $otherwise [optional] Callback to apply, if result evaluates is `false`.
      *                          Request builder instance is given as callback's argument.
      *
      * @return self
@@ -564,11 +566,11 @@ interface Builder extends HttpClientAware,
      *
      * Any value returned by the callback methods, is ignored.
      *
-     * @param bool|callable $result E.g. the boolean result of a condition. If callback is given, then its
+     * @param bool|callable(Builder): bool $result E.g. the boolean result of a condition. If callback is given, then its
      *                              resulting value is used as result.
-     * @param callable $callback The callback to apply, if result is `false`.
+     * @param callable(Builder): void $callback The callback to apply, if result is `false`.
      *                          Request builder instance is given as callback's argument.
-     * @param callable|null $otherwise [optional] Callback to apply, if result evaluates is `true`.
+     * @param callable(Builder): (void)|null $otherwise [optional] Callback to apply, if result evaluates is `true`.
      *                          Request builder instance is given as callback's argument.
      *
      * @return self
@@ -672,7 +674,7 @@ interface Builder extends HttpClientAware,
     /**
      * Add an attachment to the next request
      *
-     * @param Attachment|array|callable $attachment If a callback is provided, a new {@see Attachment}
+     * @param Attachment|array|callable(Attachment): void $attachment If a callback is provided, a new {@see Attachment}
      *                          instance will be given as the callback's argument.
      *
      * @return self
@@ -686,7 +688,7 @@ interface Builder extends HttpClientAware,
      *
      * @see withAttachment
      *
-     * @param Attachment[]|callable[] $attachments List of attachments, callbacks or data-arrays
+     * @param array<Attachment|array|callable(Attachment): void> $attachments List of attachments, callbacks or data-arrays.
      *                              Callbacks are given new {@see Attachment} instance as argument.
      *
      * @return self
@@ -785,7 +787,7 @@ interface Builder extends HttpClientAware,
      * If a Cookie with the same name has already been added,
      * it will be overwritten.
      *
-     * @param Cookie|array|callable $cookie If a callback is provided, a new {@see Cookie}
+     * @param Cookie|array|callable(Cookie): void $cookie If a callback is provided, a new {@see Cookie}
      *                          instance will be given as the callback's argument.
      *
      * @return self
@@ -799,7 +801,7 @@ interface Builder extends HttpClientAware,
      *
      * @see withCookie
      *
-     * @param Cookie[]|callable[] $cookies List of cookies, callbacks or data-arrays
+     * @param array<Cookie|array|callable(Cookie): void> $cookies List of cookies, callbacks or data-arrays
      *                              Callbacks are given new {@see Cookie} instance as argument.
      *
      * @return self
@@ -872,7 +874,7 @@ interface Builder extends HttpClientAware,
 
     /**
      * Expect the received response's http status code to match given code
-     * or be amongst a list of valid codes
+     * or be amongst a list of valid codes.
      *
      * Once a response has been received, it's http status code is matched
      * against given expected status code(s). If it does not match, then
@@ -880,13 +882,13 @@ interface Builder extends HttpClientAware,
      *
      * Method MUST build and add expectation via the {@see withExpectation} method.
      *
-     * @param  callable|int|int[]|ResponseExpectation  $status Expected http status code(s). If a callback is provided,
+     * @param  callable(Status $status, ResponseInterface $response, RequestInterface $request): (void)|int|int[]|ResponseExpectation  $status
+     *                                  Expected http status code(s). If a callback is provided,
      *                                  then it MUST be added as an expectation via {@see withExpectation}.
      *                                  Second argument is ignored, if callback is given.
-     * @param callable|null $otherwise [optional] Callback to be invoked if received http status code
-     *                              does not match. When invoked, it is given a {@see Status},
-     *                              {@see ResponseInterface} and {@see RequestInterface} as argument, in the
-     *                              stated order. If no callback is given, a {@see ExpectationNotMetException}
+     * @param callable(Status $status, ResponseInterface $response, RequestInterface $request): (void)|null $otherwise [optional]
+     *                              Callback to be invoked if received http status code
+     *                              does not match. If no callback is given, a {@see ExpectationNotMetException}
      *                              will be thrown, if received status code does not match.
      *                              This argument is IGNORED, if first argument is a callback or
      *
@@ -900,17 +902,13 @@ interface Builder extends HttpClientAware,
     /**
      * Add an expectation for the next response.
      *
-     * An "expectation" is a callback that verifies the received
-     * response's Http status code, Http headers, and possibly
-     * its payload body. If the response is considered invalid,
-     * the callback SHOULD throw an exception.
+     * An "expectation" is a callback that verifies the received response's Http status code, Http headers, and possibly
+     * its payload body. If the response is considered invalid, the callback SHOULD throw an exception.
      *
-     * Given callback will be invoked after a response has been received,
-     * in the {@see request} method.
+     * Given callback will be invoked after a response has been received, in the {@see request} method.
      *
-     * @param  callable|ResponseExpectation  $expectation Expectation callback. When invoked, it is given a
-     *                  {@see Status}, {@see ResponseInterface} and {@see RequestInterface} as
-     *                  argument, in the stated order.
+     * @param  ResponseExpectation|callable(Status $status, ResponseInterface $response, RequestInterface $request): void  $expectation
+     *                  Expectation callback.
      *
      * @return self
      */
@@ -921,7 +919,7 @@ interface Builder extends HttpClientAware,
      *
      * MUST add given list of expectations via the {@see withExpectation} method.
      *
-     * @param callable[]|ResponseExpectation[] $expectations [optional]
+     * @param array<ResponseExpectation|callable(Status $status, ResponseInterface $response, RequestInterface $request): void> $expectations [optional]
      *
      * @return self
      */
@@ -951,7 +949,7 @@ interface Builder extends HttpClientAware,
      * Add middleware to process next outgoing request, and it's
      * incoming response
      *
-     * @param  string|Middleware|Middleware[]|string[]  $middleware Class path, Middleware instance or list hereof
+     * @param  class-string<Middleware>|Middleware|array<class-string<Middleware>|Middleware>  $middleware Class path, Middleware instance or list hereof
      *
      * @return self
      */
@@ -960,7 +958,7 @@ interface Builder extends HttpClientAware,
     /**
      * Add middleware at the beginning of the middleware list
      *
-     * @param  string|Middleware  $middleware Class path or Middleware instance
+     * @param  class-string<Middleware>|Middleware  $middleware Class path or Middleware instance
      *
      * @return self
      */
@@ -969,7 +967,7 @@ interface Builder extends HttpClientAware,
     /**
      * Append middleware to the end of the middleware list
      *
-     * @param  string|Middleware  $middleware Class path or Middleware instance
+     * @param  class-string<Middleware>|Middleware  $middleware Class path or Middleware instance
      *
      * @return self
      */
@@ -1066,9 +1064,8 @@ interface Builder extends HttpClientAware,
      * If you require more logging control, then consider
      * using custom {@see Middleware} instead of this method.
      *
-     * @param callable|null $callback  [optional] Custom callback for logging Http message.
-     *                                 Callback is given a `string` type, the Http Message instance as arguments, and
-     *                                 instance of the request builder.
+     * @param callable(Type $type, MessageInterface $message, Builder $builder): (void)|null $callback  [optional]
+     *                                 Custom callback for logging Http message.
      *                                 If no callback is provided, then a default logging callback is applied.
      *
      * @return self
@@ -1082,7 +1079,7 @@ interface Builder extends HttpClientAware,
      *
      * @see log
      *
-     * @return callable
+     * @return callable(Type $type, MessageInterface $message, Builder $builder): void
      */
     public function logCallback(): callable;
 
@@ -1102,10 +1099,9 @@ interface Builder extends HttpClientAware,
      *      ->get('/users');
      * ```
      *
-     * @param callable|null $callback  [optional] Custom callback for performing Http message debugging.
-     *                                 Callback is given a `string` type, the Http Message instance as arguments, and
-     *                                 instance of the request builder.
-     *                                 If no callback is provided, then a default debugging callback is applied.
+     * @param callable(Type $type, MessageInterface $message, Builder $builder): (void)|null $callback  [optional]
+     *                                  Custom callback for performing Http message debugging.
+     *                                  If no callback is provided, then a default debugging callback is applied.
      *
      * @return self
      */
@@ -1130,9 +1126,8 @@ interface Builder extends HttpClientAware,
      *      ->get('/users');
      * ```
      *
-     * @param callable|null $callback  [optional] Custom callback for performing Http message debugging.
-     *                                 Callback is given a `string` type, the Http Message instance as arguments, and
-     *                                 instance of the request builder.
+     * @param callable(Type $type, MessageInterface $message, Builder $builder): (void)|null $callback  [optional]
+     *                                 Custom callback for performing Http message debugging.
      *                                 If no callback is provided, then a default debugging callback is applied.
      *
      * @return self
@@ -1141,13 +1136,14 @@ interface Builder extends HttpClientAware,
 
     /**
      * Returns the last assigned debugging callback.
+     *
      * If no debugging method was assigned, method returns
      * a callback that does not do anything.
      *
      * @see debug
      * @see dd
      *
-     * @return callable
+     * @return callable(Type $type, MessageInterface $message, Builder $builder): void
      */
     public function debugCallback(): callable;
 

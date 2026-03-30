@@ -13,10 +13,6 @@ use Throwable;
 /**
  * ProjectMembershipTest
  *
- * @group redmine
- * @group redmine-resources
- * @group redmine-resources-membership
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
@@ -32,8 +28,6 @@ class ProjectMembershipTest extends RedmineTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable
@@ -103,8 +97,6 @@ class ProjectMembershipTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable
@@ -174,8 +166,6 @@ class ProjectMembershipTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable
@@ -248,8 +238,6 @@ class ProjectMembershipTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */

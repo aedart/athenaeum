@@ -10,10 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * PackageVersionTest
  *
- * @group utils
- * @group version
- * @group package-version
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Packages
  */
@@ -25,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class PackageVersionTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -55,8 +49,6 @@ class PackageVersionTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

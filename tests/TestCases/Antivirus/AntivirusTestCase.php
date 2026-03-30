@@ -46,7 +46,7 @@ abstract class AntivirusTestCase extends LaravelTestCase
      * @throws InvalidPathException
      * @throws FileParserException
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -61,7 +61,7 @@ abstract class AntivirusTestCase extends LaravelTestCase
     /**
      * @inheritdoc
      */
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         // Ensure .env is loaded
         $app->useEnvironmentPath(__DIR__ . '/../../../');
@@ -83,7 +83,7 @@ abstract class AntivirusTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             ConfigLoaderServiceProvider::class,

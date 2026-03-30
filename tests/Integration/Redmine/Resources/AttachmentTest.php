@@ -17,10 +17,6 @@ use Throwable;
 /**
  * AttachmentTest
  *
- * @group redmine
- * @group redmine-resources
- * @group redmine-resources-attachment
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
@@ -32,8 +28,6 @@ use Throwable;
 class AttachmentTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */
@@ -48,8 +42,6 @@ class AttachmentTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */
@@ -90,8 +82,6 @@ class AttachmentTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ConfigurationException
      * @throws InvalidUriException
      * @throws UnsupportedOperationException
@@ -146,8 +136,6 @@ class AttachmentTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidUriException
      * @throws ConfigurationException
      * @throws Throwable
@@ -161,8 +149,6 @@ class AttachmentTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidUriException
      * @throws ConfigurationException
      * @throws Throwable

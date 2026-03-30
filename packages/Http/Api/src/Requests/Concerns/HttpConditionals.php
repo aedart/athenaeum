@@ -49,7 +49,7 @@ trait HttpConditionals
      * Evaluates request's preconditions for the given resource
      *
      * @param  mixed  $record E.g. an Eloquent record
-     * @param  ETag|callable|null  $etag  [optional] E.g. record's etag or callback that resolves etag.
+     * @param  ETag|callable(ResourceContext): (ETag|null)|null  $etag  [optional] E.g. record's etag or callback that resolves etag.
      * @param  DateTimeInterface|null  $lastModifiedDate  [optional] E.g. records last modified date
      *
      * @return ResourceContext
@@ -75,7 +75,7 @@ trait HttpConditionals
      * Wraps record or data into a resource context
      *
      * @param  mixed  $record E.g. an Eloquent record
-     * @param  ETag|callable|null  $etag  [optional] E.g. record's etag or callback that resolves etag.
+     * @param  ETag|callable(ResourceContext): (ETag|null)|null  $etag  [optional] E.g. record's etag or callback that resolves etag.
      * @param  DateTimeInterface|null  $lastModifiedDate  [optional] E.g. records last modified date
      *
      * @return ResourceContext

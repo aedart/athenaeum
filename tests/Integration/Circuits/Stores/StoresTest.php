@@ -3,9 +3,9 @@
 namespace Aedart\Tests\Integration\Circuits\Stores;
 
 use Aedart\Circuits\Stores\CacheStore;
-use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Exceptions\StateCannotBeLockedException;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
+use Aedart\Contracts\Circuits\States\Identifier;
 use Aedart\Contracts\Circuits\Store;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Circuits\CircuitBreakerTestCase;
@@ -15,9 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 
 /**
  * StoresTest
- *
- * @group circuits
- * @group circuits-stores
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Circuits\Stores
@@ -37,7 +34,7 @@ class StoresTest extends CircuitBreakerTestCase
      *
      * @return array
      */
-    public function providesStores()
+    public function providesStores(): array
     {
         return [
             'cache store' => [
@@ -52,15 +49,12 @@ class StoresTest extends CircuitBreakerTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
-     * @param string $driver
+     * @param class-string<Store> $driver
      * @param array $options
      */
     #[DataProvider('providesStores')]
     #[Test]
-    public function canObtainInstance(string $driver, array $options)
+    public function canObtainInstance(string $driver, array $options): void
     {
         $store = $this->makeStoreWithService($driver, $options);
 
@@ -68,19 +62,16 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
-     * @param string $driver
+     * @param class-string<Store> $driver
      * @param array $options
      *
      * @throws UnknownStateException
      */
     #[DataProvider('providesStores')]
     #[Test]
-    public function canSetAndObtainState(string $driver, array $options)
+    public function canSetAndObtainState(string $driver, array $options): void
     {
-        $state = $this->makeState(CircuitBreaker::CLOSED);
+        $state = $this->makeState(Identifier::CLOSED);
         $store = $this->makeStoreWithService($driver, $options);
 
         $this->assertTrue($store->setState($state), 'State was not set');
@@ -92,15 +83,12 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
-     * @param string $driver
+     * @param class-string<Store> $driver
      * @param array $options
      */
     #[DataProvider('providesStores')]
     #[Test]
-    public function canRegisterFailure(string $driver, array $options)
+    public function canRegisterFailure(string $driver, array $options): void
     {
         $failure = $this->makeFailure($this->getFaker()->sentence());
         $store = $this->makeStoreWithService($driver, $options);
@@ -117,15 +105,12 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
-     * @param string $driver
+     * @param class-string<Store> $driver
      * @param array $options
      */
     #[DataProvider('providesStores')]
     #[Test]
-    public function returnsNullWhenNoFailureRegistered(string $driver, array $options)
+    public function returnsNullWhenNoFailureRegistered(string $driver, array $options): void
     {
         $store = $this->makeStoreWithService($driver, $options);
 
@@ -136,15 +121,12 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
-     * @param string $driver
+     * @param class-string<Store> $driver
      * @param array $options
      */
     #[DataProvider('providesStores')]
     #[Test]
-    public function increasesFailuresCountWhenFailureRegistered(string $driver, array $options)
+    public function increasesFailuresCountWhenFailureRegistered(string $driver, array $options): void
     {
         $failureA = $this->makeFailure($this->getFaker()->sentence());
         $failureB = $this->makeFailure($this->getFaker()->sentence());
@@ -169,10 +151,7 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
-     * @param string $driver
+     * @param class-string<Store> $driver
      * @param array $options
      *
      * @throws UnknownStateException
@@ -180,9 +159,9 @@ class StoresTest extends CircuitBreakerTestCase
      */
     #[DataProvider('providesStores')]
     #[Test]
-    public function canLockState(string $driver, array $options)
+    public function canLockState(string $driver, array $options): void
     {
-        $state = $this->makeState(CircuitBreaker::HALF_OPEN);
+        $state = $this->makeState(Identifier::HALF_OPEN);
         $store = $this->makeStoreWithService($driver, $options);
 
         $lockObtained = false;
@@ -199,10 +178,7 @@ class StoresTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
-     * @param string $driver
+     * @param class-string<Store> $driver
      * @param array $options
      *
      * @throws UnknownStateException
@@ -210,21 +186,18 @@ class StoresTest extends CircuitBreakerTestCase
      */
     #[DataProvider('providesStores')]
     #[Test]
-    public function failsLockingIfStateIsNotLockable(string $driver, array $options)
+    public function failsLockingIfStateIsNotLockable(string $driver, array $options): void
     {
         $this->expectException(StateCannotBeLockedException::class);
 
-        $state = $this->makeState(CircuitBreaker::CLOSED);
+        $state = $this->makeState(Identifier::CLOSED);
         $store = $this->makeStoreWithService($driver, $options);
 
         $store->lockState($state, fn () => '');
     }
 
     /**
-     * @test
-     * @dataProvider providesStores
-     *
-     * @param string $driver
+     * @param class-string<Store> $driver
      * @param array $options
      *
      * @throws UnknownStateException
@@ -232,7 +205,7 @@ class StoresTest extends CircuitBreakerTestCase
      */
     #[DataProvider('providesStores')]
     #[Test]
-    public function canStartGracePeriod(string $driver, array $options)
+    public function canStartGracePeriod(string $driver, array $options): void
     {
         $store = $this->makeStoreWithService($driver, $options);
 

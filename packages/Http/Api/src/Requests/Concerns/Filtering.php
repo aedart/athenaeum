@@ -28,7 +28,7 @@ trait Filtering
     /**
      * Request filters builder to use for this request
      *
-     * @return string|Builder|null Class path, builder instance or null if request
+     * @return class-string<Builder>|Builder|null Class path, builder instance or null if request
      *                             does not support filters
      */
     abstract public function filtersBuilder(): string|Builder|null;

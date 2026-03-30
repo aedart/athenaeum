@@ -13,10 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * StrTest
  *
- * @group utils
- * @group utils-str
- * @group str
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
@@ -28,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class StrTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -40,9 +34,6 @@ class StrTest extends UnitTestCase
         $this->assertInstanceOf(StringRandomizer::class, $randomizer);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canConvertSlugIntoWords()
     {

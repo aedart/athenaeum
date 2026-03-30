@@ -14,11 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * SluggableTest
  *
- * @group database
- * @group db
- * @group db-models
- * @group db-sluggable
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Database\Models
  */
@@ -30,9 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class SluggableTest extends DatabaseTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canFindBySlug()
     {
@@ -56,9 +48,6 @@ class SluggableTest extends DatabaseTestCase
         $this->assertSame($first->id, $second->id, 'Incorrect model found');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canFindBySlugOrFail()
     {
@@ -80,9 +69,6 @@ class SluggableTest extends DatabaseTestCase
         $this->assertNotNull($second, 'Failed to find model via slug');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsWhenUnableToFindBySlug()
     {
@@ -106,8 +92,6 @@ class SluggableTest extends DatabaseTestCase
     }
 
     /**
-     * @test
-     *
      * @see https://github.com/aedart/athenaeum/issues/39
      */
     #[Test]
@@ -154,8 +138,6 @@ class SluggableTest extends DatabaseTestCase
     }
 
     /**
-     * @test
-     *
      * @see https://github.com/aedart/athenaeum/issues/39
      */
     #[Test]
@@ -180,9 +162,6 @@ class SluggableTest extends DatabaseTestCase
         Category::create($data);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canFindByManySlugs()
     {

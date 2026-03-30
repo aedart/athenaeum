@@ -11,10 +11,6 @@ use RuntimeException;
 /**
  * C0_WriteFilesTest
  *
- * @group flysystem
- * @group flysystem-db
- * @group flysystem-db-c0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
@@ -26,8 +22,6 @@ use RuntimeException;
 class C0_WriteFilesTest extends FlysystemDbTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \League\Flysystem\FilesystemException
@@ -61,8 +55,6 @@ class C0_WriteFilesTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \League\Flysystem\FilesystemException
@@ -92,8 +84,6 @@ class C0_WriteFilesTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \League\Flysystem\FilesystemException
@@ -131,8 +121,6 @@ class C0_WriteFilesTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \League\Flysystem\FilesystemException
@@ -168,8 +156,6 @@ class C0_WriteFilesTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \League\Flysystem\FilesystemException

@@ -19,7 +19,7 @@ interface AgeAware
      *
      * @return self
      */
-    public function setAge(?int $age);
+    public function setAge(null|int $age);
 
     /**
      * Get age
@@ -32,7 +32,7 @@ interface AgeAware
      *
      * @return int|null age or null if none age has been set
      */
-    public function getAge(): ?int;
+    public function getAge(): null|int;
 
     /**
      * Check if age has been set
@@ -46,5 +46,5 @@ interface AgeAware
      *
      * @return int|null A default age value or Null if no default value is available
      */
-    public function getDefaultAge(): ?int;
+    public function getDefaultAge(): null|int;
 }

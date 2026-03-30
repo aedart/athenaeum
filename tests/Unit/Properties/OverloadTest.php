@@ -10,8 +10,7 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * OverloadTest
  *
- * @group properties
- * @group properties-overload
+ * @deprecated will be removed in next major version, since v10.x
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Properties
@@ -22,9 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class OverloadTest extends PropertiesTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canReadAccessibleProperty()
     {
@@ -32,9 +28,6 @@ class OverloadTest extends PropertiesTestCase
         $this->assertSame('John Doe', $dummy->name);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsOnNoneExistingProperty()
     {
@@ -44,9 +37,6 @@ class OverloadTest extends PropertiesTestCase
         $dummy->address;
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsPropertyReadWithoutGetter()
     {
@@ -56,9 +46,6 @@ class OverloadTest extends PropertiesTestCase
         $dummy->age;
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetAccessibleProperty()
     {
@@ -70,9 +57,6 @@ class OverloadTest extends PropertiesTestCase
         $this->assertSame($newName, $dummy->getName());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canHandleFluentReturnForSetter()
     {
@@ -84,9 +68,6 @@ class OverloadTest extends PropertiesTestCase
         $this->assertSame($dummy, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsSettingNoneExistingProperty()
     {
@@ -96,9 +77,6 @@ class OverloadTest extends PropertiesTestCase
         $dummy->age = 98;
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsPropertyWriteWithoutSetter()
     {
@@ -108,9 +86,6 @@ class OverloadTest extends PropertiesTestCase
         $dummy->age = 'Brian Conner';
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineIfPropertyIsset()
     {
@@ -118,9 +93,6 @@ class OverloadTest extends PropertiesTestCase
         $this->assertTrue(isset($dummy->name));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineIfPropertyIsNotSet()
     {
@@ -129,9 +101,6 @@ class OverloadTest extends PropertiesTestCase
         $this->assertFalse(isset($dummy->name));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineIfNoneExistingPropertyIsset()
     {
@@ -139,9 +108,6 @@ class OverloadTest extends PropertiesTestCase
         $this->assertFalse(isset($dummy->rick));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canUnsetProperty()
     {
@@ -156,9 +122,6 @@ class OverloadTest extends PropertiesTestCase
         $this->assertFalse($dummy->isPropSet('name'));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsUnsetIfPropertyDoesNotExist()
     {

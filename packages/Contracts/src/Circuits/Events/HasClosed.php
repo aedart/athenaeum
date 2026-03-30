@@ -2,13 +2,13 @@
 
 namespace Aedart\Contracts\Circuits\Events;
 
-use Aedart\Contracts\Circuits\CircuitBreaker;
+use Aedart\Contracts\Circuits\States\Identifier;
 
 /**
  * Has Closed
  *
  * Should be dispatched immediately after a circuit breaker
- * has changed it's state to {@see CircuitBreaker::CLOSED}.
+ * has changed it's state to {@see Identifier::CLOSED}.
  *
  * Closed is the success state - initial state
  *

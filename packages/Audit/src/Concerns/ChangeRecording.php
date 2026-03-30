@@ -3,11 +3,11 @@
 namespace Aedart\Audit\Concerns;
 
 use Aedart\Audit\Events\ModelHasChanged;
+use Aedart\Audit\Helpers\Callback;
 use Aedart\Audit\Models\AuditTrail;
 use Aedart\Audit\Observers\ModelObserver;
+use Aedart\Contracts\Audit\Formatter;
 use Aedart\Contracts\Audit\Types;
-use Aedart\Contracts\Database\Models\Sluggable;
-use Aedart\Database\Models\Concerns\Slugs;
 use DateTimeInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
@@ -21,12 +21,11 @@ use Illuminate\Support\Facades\Config;
  *
  * Intended to be used by models that must keep an audit trail of their changes.
  *
- * @property-read AuditTrail[]|Collection $recordedChanges Audit trail entries for this model
+ * @property-read Collection<AuditTrail> $recordedChanges Audit trail entries for this model
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Concerns
  */
-
 trait ChangeRecording
 {
     use AuditTrailConfig;
@@ -39,6 +38,8 @@ trait ChangeRecording
      * @see getHiddenForAudit
      *
      * @var string[]
+     *
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
     protected array|null $hiddenInAuditTrail = null;
 
@@ -59,12 +60,13 @@ trait ChangeRecording
      *
      * @return void
      */
-    public static function bootChangeRecording()
+    public static function bootChangeRecording(): void
     {
-        // Obtain class path to observer. Note: since we are in a static method,
-        // we need to obtain this from the configuration via a facade.
-        $observer = Config::get('audit-trail.observer', ModelObserver::class);
-        static::observe($observer);
+        static::whenBooted(function () {
+            static::observe(
+                Config::get('audit-trail.observer', ModelObserver::class)
+            );
+        });
     }
 
     /*****************************************************************
@@ -99,6 +101,22 @@ trait ChangeRecording
     }
 
     /**
+     * Perform changes on this model using a callback, with a custom message
+     *
+     * @param  callable  $callback Callback that performs a change on the given model
+     * @param  string|null  $reason  [optional] Custom message to be used in the resulting audit trail entry
+     *
+     * @return mixed
+     */
+    public function performChange(callable $callback, string|null $reason = null): mixed
+    {
+        return Callback::perform($callback)
+            ->with($this)
+            ->because($reason)
+            ->execute();
+    }
+
+    /**
      * Determine if this model must use slugs as an identifier
      * for when recording audit trail entries
      *
@@ -106,7 +124,21 @@ trait ChangeRecording
      */
     public function useSlugAsIdentifier(): bool
     {
-        return $this instanceof Sluggable || in_array(Slugs::class, class_uses_recursive($this));
+        return isSluggable($this);
+    }
+
+    /*****************************************************************
+     * Audit Trail Record Formatting
+     ****************************************************************/
+
+    /**
+     * Returns an audit trail record formatter for this model
+     *
+     * @return class-string<Formatter>|Formatter|null
+     */
+    public function auditTrailRecordFormatter(): string|Formatter|null
+    {
+        return null;
     }
 
     /*****************************************************************
@@ -120,7 +152,10 @@ trait ChangeRecording
      * @param string $type Event type
      *
      * @return array|null
+     *
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function originalData(string $type): array|null
     {
         if ($this->shouldOmitDataFor($type)) {
@@ -137,13 +172,16 @@ trait ChangeRecording
      * Formats the original data (attributes) to be saved in
      * Audit Trail Entry
      *
-     * @see originalData
-     *
      * @param array|null $filtered The filtered original data (if any)
      * @param string $type Event type
      *
      * @return array|null
+     *
+     * @see originalData
+     *
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function formatOriginalData(array|null $filtered, string $type): array|null
     {
         return $filtered;
@@ -156,7 +194,10 @@ trait ChangeRecording
      * @param string $type Event type
      *
      * @return array|null
+     *
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function changedData(string $type): array|null
     {
         if ($this->shouldOmitDataFor($type)) {
@@ -179,13 +220,16 @@ trait ChangeRecording
      * Formats the changed data (attributes) to be saved in
      * Audit Trail Entry
      *
-     * @see changedData
-     *
      * @param array|null $filtered The filtered changed data (if any)
      * @param string $type Event type
      *
      * @return array|null
+     *
+     * @see changedData
+     *
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function formatChangedData(array|null $filtered, string $type): array|null
     {
         return $filtered;
@@ -197,13 +241,16 @@ trait ChangeRecording
      * Method removes any attribute that are not intended to be
      * part of an Audit Trail Entry.
      *
-     * @see getHiddenForAudit
-     * @see \Illuminate\Database\Eloquent\Concerns\HidesAttributes::getHidden
-     *
      * @param array|null $attributes [optional]
      *
      * @return array|null
+     *
+     * @see getHiddenForAudit
+     * @see \Illuminate\Database\Eloquent\Concerns\HidesAttributes::getHidden
+     *
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function filterAuditData(array|null $attributes = null): array|null
     {
         if (empty($attributes)) {
@@ -226,7 +273,10 @@ trait ChangeRecording
      * Get attributes that are hidden for Audit Trail Entries
      *
      * @return string[]
+     *
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function getHiddenForAudit(): array
     {
         if (!isset($this->hiddenInAuditTrail)) {
@@ -244,7 +294,10 @@ trait ChangeRecording
      * @param  string|string[]|null  $attributes
      *
      * @return self
+     *
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function makeHiddenForAudit(array|string|null $attributes): static
     {
         $attributes = is_array($attributes)
@@ -263,10 +316,13 @@ trait ChangeRecording
      * Returns list of attribute names that are NOT to be included
      * in Audit Trail Entries
      *
+     * @return string[]
+     *
      * @see makeHiddenForAudit
      *
-     * @return string[]
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function attributesToHideForAudit(): array
     {
         // Use this method to hide attributes from Audit Trail entry
@@ -277,7 +333,10 @@ trait ChangeRecording
      * Returns the model timestamp attribute names
      *
      * @return string[]
+     *
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function auditTimestampAttributes(): array
     {
         $attributes = [
@@ -299,7 +358,10 @@ trait ChangeRecording
      * @param string $type
      *
      * @return bool
+     *
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} instead
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function shouldOmitDataFor(string $type): bool
     {
         $skipOn = [
@@ -326,7 +388,10 @@ trait ChangeRecording
      * @param string $type Audit Trail Entry type, e.g. created, updated, deleted... etc
      *
      * @return string|null
+     *
+     * @deprecated Since v10.x, use {@see auditTrailRecordFormatter()} to customise audit trail message
      */
+    #[\Deprecated(message: "use auditTrailRecordFormatter() instead", since: "10.x")]
     public function getAuditTrailMessage(string $type): string|null
     {
         return null;
@@ -335,6 +400,24 @@ trait ChangeRecording
     /*****************************************************************
      * Skip Audit Trail Recording
      ****************************************************************/
+
+    /**
+     * Perform an operation on this model without recording it
+     *
+     * @param  callable  $callback
+     *
+     * @return mixed
+     */
+    public function withoutRecording(callable $callback): mixed
+    {
+        $this->skipRecordingNextChange();
+
+        $result = $callback($this);
+
+        $this->recordNextChange();
+
+        return $result;
+    }
 
     /**
      * Skip recording next change

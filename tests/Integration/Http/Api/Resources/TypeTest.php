@@ -10,10 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * TypeTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-type
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
@@ -25,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class TypeTest extends ApiResourcesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -39,8 +33,6 @@ class TypeTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * FileInfoSamplerTest
  *
- * @group mime-types
- * @group mime-types-samplers
- * @group file-info-sampler
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\MimeTypes\Drivers
  */
@@ -45,8 +41,6 @@ class FileInfoSamplerTest extends MimeTypesTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws MimeTypeDetectionException
@@ -65,9 +59,6 @@ class FileInfoSamplerTest extends MimeTypesTestCase
     }
 
     /**
-     * @test
-     * @dataProvider testFiles
-     *
      * @param  array  $expectation
      *
      * @return void
@@ -92,9 +83,6 @@ class FileInfoSamplerTest extends MimeTypesTestCase
     }
 
     /**
-     * @test
-     * @dataProvider testFiles
-     *
      * @param  array  $expectation
      *
      * @return void

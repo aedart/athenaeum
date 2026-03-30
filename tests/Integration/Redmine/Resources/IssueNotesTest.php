@@ -14,10 +14,6 @@ use Throwable;
 /**
  * IssueNotesTest
  *
- * @group redmine
- * @group redmine-resources
- * @group redmine-resources-issue-notes
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
@@ -29,8 +25,6 @@ use Throwable;
 class IssueNotesTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable

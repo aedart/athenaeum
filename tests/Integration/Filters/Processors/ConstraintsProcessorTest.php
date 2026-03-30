@@ -15,9 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ConstraintsProcessorTest
  *
- * @group filters
- * @group filters-constraints-processor
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Processors
  */
@@ -28,8 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class ConstraintsProcessorTest extends FiltersTestCase
 {
     /**
-     * @test
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
     #[Test]

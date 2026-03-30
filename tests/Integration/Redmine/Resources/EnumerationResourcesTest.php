@@ -20,13 +20,6 @@ use Throwable;
 /**
  * EnumerationResourcesTest
  *
- * @group redmine
- * @group redmine-resources
- * @group redmine-resources-enum
- * @group redmine-resources-issue-priority
- * @group redmine-resources-time-entry-activity
- * @group redmine-resources-doc-category
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
@@ -63,9 +56,6 @@ class EnumerationResourcesTest extends RedmineTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesEnumerationResources
-     *
      * @param class-string<Enumeration> $enumerationResource Class path
      *
      * @throws JsonException

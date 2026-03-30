@@ -2,7 +2,7 @@
 
 namespace Aedart\Tests\Integration\Filters\Processors;
 
-use Aedart\Contracts\Database\Query\FieldCriteria;
+use Aedart\Contracts\Database\Query\Operators\LogicalOperator;
 use Aedart\Filters\Processors\MatchingProcessor;
 use Aedart\Tests\TestCases\Filters\FiltersTestCase;
 use Codeception\Attribute\Group;
@@ -10,10 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 
 /**
  * MatchingProcessorTest
- *
- * @group filters
- * @group filters-processors
- * @group filters-matching-processor
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Processors
@@ -26,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class MatchingProcessorTest extends FiltersTestCase
 {
     /**
-     * @test
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
     #[Test]
@@ -49,6 +43,6 @@ class MatchingProcessorTest extends FiltersTestCase
         $built = $builder->build();
 
         $this->assertTrue($built->hasMeta($key), 'Meta not set');
-        $this->assertSame(FieldCriteria::OR, $built->getMeta($key));
+        $this->assertSame(LogicalOperator::OR->value, $built->getMeta($key));
     }
 }

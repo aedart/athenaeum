@@ -13,10 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * DateTimeFormatsTest
  *
- * @group utils
- * @group date
- * @group datetime-formats
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Dates
  */
@@ -79,9 +75,6 @@ class DateTimeFormatsTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider formatsProvider
-     *
      * @param string $format
      * @param string $dateStr
      *

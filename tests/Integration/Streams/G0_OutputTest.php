@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * G0_OutputTest
  *
- * @group streams
- * @group streams-g0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -24,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class G0_OutputTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

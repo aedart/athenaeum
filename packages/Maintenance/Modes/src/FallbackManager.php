@@ -30,7 +30,7 @@ class FallbackManager extends Manager
     }
 
     /**
-     * Creates an instance of the json file based maintenance mode driver
+     * Creates an instance of the JSON file based maintenance mode driver
      *
      * @return JsonFileBasedMode
      */

@@ -41,7 +41,7 @@ abstract class BaseExceptionHandler implements
     /**
      * List of exception that should not be reported
      *
-     * @var string[] Class paths
+     * @var array<class-string<Throwable>> Class paths
      */
     protected array $dontReport = [];
 

@@ -11,10 +11,6 @@ use Throwable;
 /**
  * H0_LockingTest
  *
- * @group streams
- * @group streams-file-h0
- * @group stream-lock
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
@@ -27,8 +23,6 @@ use Throwable;
 class H0_LockingTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      * @throws Throwable
@@ -44,8 +38,6 @@ class H0_LockingTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      * @throws Throwable
@@ -61,8 +53,6 @@ class H0_LockingTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      * @throws Throwable

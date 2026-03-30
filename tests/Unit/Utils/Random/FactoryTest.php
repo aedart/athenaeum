@@ -12,11 +12,6 @@ use Random\Engine\Mt19937;
 /**
  * FactoryTest
  *
- * @group utils
- * @group utils-random
- * @group utils-randomizer
- * @group utils-randomizer-factory
- *
  * @author Alin Eugen Deac <ade@rspsystems.com>
  * @package Aedart\Tests\Unit\Utils\Random
  */
@@ -29,8 +24,6 @@ use Random\Engine\Mt19937;
 class FactoryTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -42,8 +35,6 @@ class FactoryTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

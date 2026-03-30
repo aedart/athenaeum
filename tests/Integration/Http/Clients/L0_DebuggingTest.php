@@ -3,6 +3,7 @@
 namespace Aedart\Tests\Integration\Http\Clients;
 
 use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
+use Aedart\Contracts\Http\Messages\Type;
 use Aedart\Http\Messages\Traits\HttpSerializerFactoryTrait;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
@@ -18,9 +19,6 @@ use Teapot\StatusCode;
 /**
  * L0_DebuggingTest
  *
- * @group http-clients
- * @group http-clients-l0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -34,8 +32,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     use HttpSerializerFactoryTrait;
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
      *
      * @param string $profile
      *
@@ -68,9 +64,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -106,9 +99,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -132,9 +122,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -158,9 +145,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -189,9 +173,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -210,7 +191,7 @@ class L0_DebuggingTest extends HttpClientsTestCase
         $response = $this
             ->client($profile)
             ->withOption('handler', $this->makeResponseMock([ $mockResponse ]))
-            ->debug(function (string $type, MessageInterface $message) {
+            ->debug(function (Type $type, MessageInterface $message) {
                 // Simulated var dump, using toString
                 $serialized = $this->getHttpSerializerFactory()
                     ->make($message)
@@ -232,9 +213,6 @@ class L0_DebuggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -253,7 +231,7 @@ class L0_DebuggingTest extends HttpClientsTestCase
         $response = $this
             ->client($profile)
             ->withOption('handler', $this->makeResponseMock([ $mockResponse ]))
-            ->debug(function (string $type, MessageInterface $message) {
+            ->debug(function (Type $type, MessageInterface $message) {
                 // Simulated var dump, using toArray
                 $serialized = $this->getHttpSerializerFactory()
                     ->make($message)

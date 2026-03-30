@@ -10,9 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * B0_SizeTest
  *
- * @group streams
- * @group streams-b0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -23,8 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 class B0_SizeTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -40,8 +35,6 @@ class B0_SizeTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -55,8 +48,6 @@ class B0_SizeTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

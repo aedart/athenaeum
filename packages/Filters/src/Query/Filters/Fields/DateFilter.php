@@ -95,7 +95,7 @@ class DateFilter extends BaseFieldFilter
     /**
      * @inheritDoc
      */
-    protected function assertValue(mixed $value)
+    protected function assertValue(mixed $value): void
     {
         // Allow empty values, when "is null / not null" operators are
         // chosen.

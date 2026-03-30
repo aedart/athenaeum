@@ -45,7 +45,8 @@ interface ResourceRelation
     /**
      * Add a filter to be applied
      *
-     * @param callable $filter  Callback that applies filters on related resource's Request {@see Builder}.
+     * @param callable(Builder $request, ApiResource $resource): Builder $filter
+     *                          Callback that applies filters on related resource's Request {@see Builder}.
      *                          The callback MUST return a valid {@see Builder}
      *
      * @return self
@@ -56,7 +57,7 @@ interface ResourceRelation
      * Returns the filters to be applied onto
      * the related resource's request.
      *
-     * @return callable[]
+     * @return array<callable(Builder $request, ApiResource $resource): Builder>[]
      */
     public function getFilters(): array;
 
@@ -86,7 +87,7 @@ interface ResourceRelation
     /**
      * Get the related resource
      *
-     * @return ApiResource|string Class path
+     * @return ApiResource|class-string<ApiResource> Class path
      */
     public function related(): ApiResource|string;
 }

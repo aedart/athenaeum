@@ -2,7 +2,7 @@
 
 namespace Aedart\Filters\Query\Filters\Fields;
 
-use Aedart\Contracts\Database\Query\FieldCriteria;
+use Aedart\Contracts\Database\Query\Operators\LogicalOperator;
 
 /**
  * UTC Datetime Filter
@@ -19,7 +19,7 @@ class UTCDatetimeFilter extends DatetimeFilter
         string|null $field = null,
         string|null $operator = null,
         mixed $value = null,
-        string $logical = FieldCriteria::AND
+        string|LogicalOperator $logical = LogicalOperator::AND
     ) {
         parent::__construct($field, $operator, $value, $logical);
 

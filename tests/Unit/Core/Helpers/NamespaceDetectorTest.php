@@ -14,11 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * NamespaceDetectorTest
  *
- * @group core
- * @group application
- * @group application-helpers
- * @group namespace-detector
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Core\Helpers
  */
@@ -81,8 +76,6 @@ class NamespaceDetectorTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @throws \RuntimeException
      */
     #[Test]
@@ -95,8 +88,6 @@ class NamespaceDetectorTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \RuntimeException
      */
     #[Test]
@@ -108,8 +99,6 @@ class NamespaceDetectorTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \RuntimeException
      */
     #[Test]

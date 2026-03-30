@@ -14,10 +14,6 @@ use Symfony\Component\Console\Tester\CommandTester;
 /**
  * CreateAwareOfCommandTest
  *
- * @group console
- * @group aware-of
- * @group aware-of-command
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Console
  */
@@ -31,7 +27,7 @@ class CreateAwareOfCommandTest extends IntegrationTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -68,8 +64,6 @@ class CreateAwareOfCommandTest extends IntegrationTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \Codeception\Exception\ConfigurationException

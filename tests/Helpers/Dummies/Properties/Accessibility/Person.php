@@ -9,6 +9,8 @@ use Aedart\Properties\Overload;
  *
  * FOR TESTING ONLY
  *
+ * @deprecated will be removed in next major version, since v10.x
+ *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Helpers\Dummies\Properties\Accessibility
  */
@@ -54,7 +56,7 @@ class Person
      *
      * @return self
      */
-    public function setName(?string $value)
+    public function setName(null|string $value)
     {
         $this->name = $value;
 
@@ -66,7 +68,7 @@ class Person
      *
      * @return null|string
      */
-    public function getName(): ?string
+    public function getName(): null|string
     {
         return $this->name;
     }

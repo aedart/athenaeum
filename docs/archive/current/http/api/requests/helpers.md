@@ -9,7 +9,7 @@ sidebarDepth: 0
 
 ## Route Parameters Validation
 
-As an alternative to Laravel's [route parameters constraints](https://laravel.com/docs/12.x/routing#parameters-regular-expression-constraints), you can enable validation of received route parameters.
+As an alternative to Laravel's [route parameters constraints](https://laravel.com/docs/13.x/routing#parameters-regular-expression-constraints), you can enable validation of received route parameters.
 To do so, your request must use the `RouteParametersValidation` concern and implement a `routeParameterRules()` method.
 
 **Example Request**

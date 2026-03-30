@@ -55,7 +55,7 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
      * Pipes that are used to prepare this builder,
      * based on provided driver options
      *
-     * @var string[] List of class paths
+     * @var array<class-string> List of class paths
      */
     protected array $prepareBuilderPipes = [
         ExtractsBaseUrl::class,
@@ -71,7 +71,7 @@ class GuzzleRequestBuilder extends BaseBuilder implements CookieJarAware
      * Pipes that prepare the driver options, before
      * applied on request and sent
      *
-     * @var string[] List of class paths
+     * @var array<class-string> List of class paths
      */
     protected array $beforeRequestPipes = [
         MergeWithBuilderOptions::class,

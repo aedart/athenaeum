@@ -14,9 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * DefaultUserResolverTest
  *
- * @group antivirus
- * @group antivirus-user-resolver
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus
  */
@@ -47,8 +44,6 @@ class DefaultUserResolverTest extends AntivirusTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -60,8 +55,6 @@ class DefaultUserResolverTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -73,8 +66,6 @@ class DefaultUserResolverTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * AlphaDashDotRuleTest
  *
- * @group validation
- * @group rules
- * @group alpha-dash-dot
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Validation\Rules
  */
@@ -77,9 +73,6 @@ class AlphaDashDotRuleTest extends ValidationTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider validInput
-     *
      * @param mixed $input
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -92,9 +85,6 @@ class AlphaDashDotRuleTest extends ValidationTestCase
     }
 
     /**
-     * @test
-     * @dataProvider invalidInput
-     *
      * @param mixed $input
      *
      * @throws \Illuminate\Validation\ValidationException

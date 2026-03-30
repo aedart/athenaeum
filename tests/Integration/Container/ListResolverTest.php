@@ -16,10 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ListResolverTest
  *
- * @group ioc
- * @group container
- * @group list-resolver
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Container
  */
@@ -70,8 +66,6 @@ class ListResolverTest extends IntegrationTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     #[Test]
@@ -112,8 +106,6 @@ class ListResolverTest extends IntegrationTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     #[Test]
@@ -135,8 +127,6 @@ class ListResolverTest extends IntegrationTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     #[Test]

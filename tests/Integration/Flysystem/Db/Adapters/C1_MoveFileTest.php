@@ -10,10 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C1_MoveFileTest
  *
- * @group flysystem
- * @group flysystem-db
- * @group flysystem-db-c1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
@@ -25,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class C1_MoveFileTest extends FlysystemDbTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \League\Flysystem\FilesystemException

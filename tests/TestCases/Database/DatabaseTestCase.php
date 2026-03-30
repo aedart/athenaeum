@@ -20,7 +20,7 @@ abstract class DatabaseTestCase extends LaravelTestCase
     /**
      * @inheritDoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -30,7 +30,7 @@ abstract class DatabaseTestCase extends LaravelTestCase
     /**
      * @inheritdoc
      */
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app): void
     {
         TestingConnection::enableConnection();
     }

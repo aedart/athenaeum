@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A2_PathsTest
  *
- * @group application
- * @group application-a2
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
@@ -24,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class A2_PathsTest extends AthenaeumCoreTestCase
 {
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -40,8 +35,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -59,9 +52,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      * Paths that can be specified via Patch Container
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canReadBasePath()
     {
@@ -70,9 +60,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertNotEmpty($path);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canReadBootstrapPath()
     {
@@ -81,9 +68,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertNotEmpty($path);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canReadConfigPath()
     {
@@ -93,8 +77,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -105,9 +87,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertNotEmpty($path);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canReadDatabasePath()
     {
@@ -116,9 +95,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertNotEmpty($path);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canReadEnvironmentPath()
     {
@@ -127,9 +103,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertNotEmpty($path);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canReadResourcePath()
     {
@@ -138,9 +111,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertNotEmpty($path);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canReadStoragePath()
     {
@@ -149,9 +119,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertNotEmpty($path);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canReadPublicPath()
     {
@@ -164,9 +131,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
      * Global Helpers Test
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function returnsPathInBaseDir()
     {
@@ -179,9 +143,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertStringContainsString($path, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function returnsPathInBootstrapDir()
     {
@@ -194,9 +155,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertStringContainsString($path, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function returnsPathInConfigDir()
     {
@@ -209,9 +167,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertStringContainsString($path, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function returnsPathInDatabaseDir()
     {
@@ -224,9 +179,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertStringContainsString($path, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function returnsPathInEnvironmentDir()
     {
@@ -239,9 +191,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertStringContainsString($path, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function returnsPathInResourceDir()
     {
@@ -254,9 +203,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertStringContainsString($path, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function returnsPathInStorageDir()
     {
@@ -269,9 +215,6 @@ class A2_PathsTest extends AthenaeumCoreTestCase
         $this->assertStringContainsString($path, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function returnsPathInPublicDir()
     {

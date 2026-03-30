@@ -14,11 +14,6 @@ use Stringable;
 /**
  * C5_WhereObjectTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-c6
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -66,9 +61,6 @@ class C6_WhereObjectTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesWhereObject
-     *
      * @param string $grammar
      * @param string $expected
      *

@@ -13,9 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E1_RawPayloadTest
  *
- * @group http-clients
- * @group http-clients-e1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -27,9 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class E1_RawPayloadTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -49,9 +43,6 @@ class E1_RawPayloadTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -76,9 +67,6 @@ class E1_RawPayloadTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -105,9 +93,6 @@ class E1_RawPayloadTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException

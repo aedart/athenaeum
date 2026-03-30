@@ -13,12 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C0_ParseTest
  *
- * @group utils
- * @group utils-memory
- * @group utils-memory-unit
- * @group utils-memory-unit-c0
- * @group utils-memory-unit-parse
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
@@ -121,9 +115,6 @@ class C0_ParseTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider valuesProvider
-     *
      * @param  string  $value
      * @param  int  $expectedBytes
      *
@@ -144,8 +135,6 @@ class C0_ParseTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -157,8 +146,6 @@ class C0_ParseTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

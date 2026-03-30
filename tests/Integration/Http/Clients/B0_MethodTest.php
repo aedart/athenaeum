@@ -14,9 +14,6 @@ use Teapot\StatusCode;
 /**
  * B0_MethodTest
  *
- * @group http-clients
- * @group http-clients-b0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -28,9 +25,6 @@ use Teapot\StatusCode;
 class B0_MethodTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException

@@ -11,13 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * B2_GigaAndGibibyteTest
  *
- * @group utils
- * @group utils-memory
- * @group utils-memory-unit
- * @group utils-memory-unit-b2
- * @group utils-memory-unit-gigabyte
- * @group utils-memory-unit-gibibyte
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils\Memory
  */
@@ -32,8 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class B2_GigaAndGibibyteTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -53,8 +44,6 @@ class B2_GigaAndGibibyteTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -74,8 +63,6 @@ class B2_GigaAndGibibyteTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -95,8 +82,6 @@ class B2_GigaAndGibibyteTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -115,8 +100,6 @@ class B2_GigaAndGibibyteTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -135,8 +118,6 @@ class B2_GigaAndGibibyteTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

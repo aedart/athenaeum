@@ -16,9 +16,6 @@ use Teapot\StatusCode;
 /**
  * C0_UriTest
  *
- * @group http-clients
- * @group http-clients-c0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -30,9 +27,6 @@ use Teapot\StatusCode;
 class C0_UriTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -66,9 +60,6 @@ class C0_UriTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException

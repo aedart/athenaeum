@@ -6,7 +6,7 @@ sidebarDepth: 0
 # Password Reset Link Failure
 
 The `PasswordResetLinkFailure`¹ exception can be used as an alternative to Laravel Fortify's default validation exception,
-in situations [requesting a password reset link](https://laravel.com/docs/12.x/fortify#requesting-a-password-reset-link)
+in situations [requesting a password reset link](https://laravel.com/docs/13.x/fortify#requesting-a-password-reset-link)
 fails, e.g. due to invalid user credential.
 
 The exception results in an HTTP ["200 Ok"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) response, rather

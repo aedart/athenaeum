@@ -15,6 +15,8 @@ use Throwable;
  * Adaptor between Laravel's Artisan Console application and
  * Athenaeum Core Application.
  *
+ * @template C of \Symfony\Component\Console\Command\Command
+ *
  * @see \Illuminate\Contracts\Console\Kernel
  * @see \Aedart\Contracts\Core\Application
  *
@@ -50,7 +52,7 @@ interface Kernel extends LaravelConsoleKernel,
      *
      * @see addCommand
      *
-     * @param string[]|\Symfony\Component\Console\Command\Command[] $commands List of class paths or instances
+     * @param array<C|class-string<C>> $commands List of class paths or instances
      *
      * @return void
      */
@@ -59,7 +61,7 @@ interface Kernel extends LaravelConsoleKernel,
     /**
      * Register a command
      *
-     * @param string|\Symfony\Component\Console\Command\Command $command Class path or instance
+     * @param C|class-string<C> $command Class path or instance
      *
      * @return void
      */

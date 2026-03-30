@@ -16,9 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ETagTest
  *
- * @group etags
- * @group etag-dto
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\ETags
  */
@@ -29,8 +26,6 @@ use PHPUnit\Framework\Attributes\Test;
 class ETagTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -47,8 +42,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -62,8 +55,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -83,8 +74,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -100,8 +89,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -115,8 +102,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -133,8 +118,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -167,8 +150,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -188,8 +169,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -208,8 +187,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -226,8 +203,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -241,8 +216,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -256,8 +229,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -320,8 +291,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException
@@ -340,8 +309,6 @@ class ETagTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ETagException

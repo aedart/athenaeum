@@ -15,9 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * SearchFilterTest
  *
- * @group filters
- * @group filters-search
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters
  */
@@ -27,9 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class SearchFilterTest extends FiltersTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canApplyFilter()
     {
@@ -58,8 +52,6 @@ class SearchFilterTest extends FiltersTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -81,8 +73,6 @@ class SearchFilterTest extends FiltersTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

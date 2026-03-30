@@ -14,11 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * FilteringTest
  *
- * @group database
- * @group db
- * @group db-filters
- * @group db-criteria
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Database\Query
  */
@@ -30,9 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class FilteringTest extends DatabaseTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canApplySingleFilter()
     {
@@ -52,9 +44,6 @@ class FilteringTest extends DatabaseTestCase
         $this->assertSame('Products', $result->name, 'Incorrect result');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canApplyMultipleFilters()
     {
@@ -90,9 +79,6 @@ class FilteringTest extends DatabaseTestCase
         $this->assertSame('special-products', $result->slug, 'Incorrect slug');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function skipsInapplicableFilters()
     {

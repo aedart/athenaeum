@@ -14,10 +14,6 @@ use Throwable;
 /**
  * AssignedToRelationTest
  *
- * @group redmine
- * @group redmine-relations
- * @group redmine-relations-assigned-to
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Relations\Custom
  */
@@ -29,8 +25,6 @@ use Throwable;
 class AssignedToRelationTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable
@@ -43,6 +37,11 @@ class AssignedToRelationTest extends RedmineTestCase
 
         // -------------------------------------------------------- //
         // Prerequisites - a new project with a members
+        // NOTE: Groups MUST be allowed assigned to issues, or this test will
+        // fail. This can be done so in Redmine's settings:
+        // 1. Go to "Administration > Settings > Issue tracking"
+        // 2. Check "Allow issue assignment to groups" checkbox
+        // 3. Press the "Save" button (bottom of the settings page)
 
         $project = $this->createProject();
         $group = $this->createGroup();
@@ -100,8 +99,6 @@ class AssignedToRelationTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable

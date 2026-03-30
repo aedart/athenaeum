@@ -169,7 +169,7 @@ trait Attachments
     /**
      * Resolves an attachment from given callback
      *
-     * @param  callable  $callback  New {@see Attachment} instance is given as callback argument
+     * @param  callable(Attachment): void  $callback  New {@see Attachment} instance is given as callback argument
      *
      * @return Attachment
      *

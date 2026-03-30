@@ -16,11 +16,6 @@ use Psr\SimpleCache\InvalidArgumentException;
 /**
  * CacheExporterTest
  *
- * @group translations
- * @group translations-exporter
- * @group translations-exporter-drivers
- * @group translations-exporter-drivers-cache
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Translation\Exports\Drivers
  */
@@ -57,8 +52,6 @@ class CacheExporterTest extends TranslationTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -72,8 +65,6 @@ class CacheExporterTest extends TranslationTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException

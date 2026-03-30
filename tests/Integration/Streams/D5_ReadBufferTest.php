@@ -14,9 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D5_ReadBufferTest
  *
- * @group streams
- * @group streams-d5
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -27,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class D5_ReadBufferTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -68,8 +63,6 @@ class D5_ReadBufferTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -109,8 +102,6 @@ class D5_ReadBufferTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -150,8 +141,6 @@ class D5_ReadBufferTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -192,8 +181,6 @@ class D5_ReadBufferTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException

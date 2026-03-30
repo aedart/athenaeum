@@ -5,6 +5,7 @@ namespace Aedart\Filters\Processors;
 use Aedart\Contracts\Database\Query\Exceptions\CriteriaException;
 use Aedart\Contracts\Database\Query\Exceptions\InvalidOperatorException;
 use Aedart\Contracts\Database\Query\FieldCriteria;
+use Aedart\Contracts\Database\Query\Operators\LogicalOperator;
 use Aedart\Contracts\Filters\BuiltFiltersMap;
 use Aedart\Contracts\Filters\Exceptions\ProcessorException;
 use Aedart\Filters\BaseProcessor;
@@ -32,7 +33,7 @@ class ConstraintsProcessor extends BaseProcessor
     /**
      * Filters map
      *
-     * @var array Key-value pair, key = requested property, value = field filter class path
+     * @var array<string, class-string<FieldCriteria>> Key-value pair, key = requested property, value = field filter class path
      */
     protected array $filtersMap = [];
 
@@ -98,7 +99,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @see FieldCriteria
      *
-     * @param array $map Key-value pair. Key = requested property, value = filter class path
+     * @param array<string, class-string<FieldCriteria>> $map Key-value pair. Key = requested property, value = filter class path
      *
      * @return self
      */
@@ -150,7 +151,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @param  string  $property  Name of requested property to build a constraint filter for
      * @param  array  $criteria  Key-value pair, key = operator, value = mixed
-     * @param  string  $logical  Logical boolean operator that determines how filters'
+     * @param  string|LogicalOperator  $logical  Logical boolean operator that determines how filters'
      *                        where clauses should be applied, e.g. "AND" or "OR"
      * @param  BuiltFiltersMap  $built
      *
@@ -162,7 +163,7 @@ class ConstraintsProcessor extends BaseProcessor
     protected function addFiltersForCriteria(
         string $property,
         array $criteria,
-        string $logical,
+        string|LogicalOperator $logical,
         BuiltFiltersMap $built
     ): BuiltFiltersMap {
         $parameter = $this->parameter();
@@ -177,7 +178,7 @@ class ConstraintsProcessor extends BaseProcessor
             // do the reset, in case that an "OR" operator was requested. E.g. it will
             // automatically group "OR" expressions.
             $appliedLogical = !$built->has($parameter)
-                ? FieldCriteria::AND
+                ? LogicalOperator::AND
                 : $logical;
 
             $filter = $this->buildFilter($property, $operator, $value, $appliedLogical);
@@ -196,7 +197,7 @@ class ConstraintsProcessor extends BaseProcessor
      *                         appropriate table column name.
      * @param string $operator
      * @param mixed $value
-     * @param string $logical [optional] Logical boolean operator; if constraint filter should be
+     * @param string|LogicalOperator $logical [optional] Logical boolean operator; if constraint filter should be
      *                        be applied using "AND" or via "OR" clauses...
      *
      * @return FieldCriteria
@@ -210,7 +211,7 @@ class ConstraintsProcessor extends BaseProcessor
         string $property,
         string $operator,
         mixed $value,
-        string $logical = FieldCriteria::AND
+        string|LogicalOperator $logical = LogicalOperator::AND
     ): FieldCriteria {
         // Resolve column name from given property
         $column = $this->resolveColumnName($property);
@@ -247,11 +248,11 @@ class ConstraintsProcessor extends BaseProcessor
     /**
      * Creates a new filter instance from class path
      *
-     * @param string $class Class path to {@see FieldCriteria}
+     * @param class-string<FieldCriteria> $class Class path to {@see FieldCriteria}
      * @param string $column
      * @param string $operator
      * @param mixed $value
-     * @param string $logical [optional] Logical boolean operator; if constraint filter should be
+     * @param string|LogicalOperator $logical [optional] Logical boolean operator; if constraint filter should be
      *                        be applied using "AND" or via "OR" clauses...
      *
      * @return FieldCriteria
@@ -264,7 +265,7 @@ class ConstraintsProcessor extends BaseProcessor
         string $column,
         string $operator,
         mixed $value,
-        string $logical = FieldCriteria::AND
+        string|LogicalOperator $logical = LogicalOperator::AND
     ): FieldCriteria {
         return $class::make($column, $operator, $value, $logical);
     }
@@ -276,7 +277,7 @@ class ConstraintsProcessor extends BaseProcessor
      * @param string $newColumn
      * @param string $newOperator
      * @param mixed $newValue
-     * @param string $newLogical [optional]
+     * @param string|LogicalOperator $newLogical [optional]
      *
      * @return FieldCriteria
      *
@@ -288,7 +289,7 @@ class ConstraintsProcessor extends BaseProcessor
         string $newColumn,
         string $newOperator,
         mixed $newValue,
-        string $newLogical = FieldCriteria::AND
+        string|LogicalOperator $newLogical = LogicalOperator::AND
     ): FieldCriteria {
         return (clone $filter)
             ->setField($newColumn)
@@ -351,11 +352,11 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @param BuiltFiltersMap $built
      *
-     * @return string
+     * @return string|LogicalOperator
      */
-    protected function resolveLogicalBooleanOperator(BuiltFiltersMap $built): string
+    protected function resolveLogicalBooleanOperator(BuiltFiltersMap $built): string|LogicalOperator
     {
-        return $built->getMeta($this->matchingKey, FieldCriteria::AND);
+        return $built->getMeta($this->matchingKey, LogicalOperator::AND);
     }
 
     /**
@@ -363,7 +364,7 @@ class ConstraintsProcessor extends BaseProcessor
      *
      * @param mixed $requested
      */
-    protected function validateRequestedFilters(mixed $requested)
+    protected function validateRequestedFilters(mixed $requested): void
     {
         $allowed = array_keys($this->filtersMap);
 

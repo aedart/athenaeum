@@ -16,9 +16,6 @@ use Teapot\StatusCode;
 /**
  * L1_LoggingTest
  *
- * @group http-clients
- * @group http-clients-l1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -36,7 +33,7 @@ class L1_LoggingTest extends HttpClientsTestCase
     /**
      * @inheritDoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -74,9 +71,6 @@ class L1_LoggingTest extends HttpClientsTestCase
 
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      * @throws ProfileNotFoundException
      */
@@ -100,9 +94,6 @@ class L1_LoggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException
@@ -126,9 +117,6 @@ class L1_LoggingTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param  string  $profile
      *
      * @throws ProfileNotFoundException

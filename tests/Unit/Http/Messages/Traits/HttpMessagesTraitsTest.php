@@ -15,10 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * HttpMessagesTraitsTest
  *
- * @group http
- * @group http-messages
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Messages\Traits
  */
@@ -52,9 +48,6 @@ class HttpMessagesTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

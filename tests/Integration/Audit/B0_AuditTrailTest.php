@@ -15,10 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * AuditTrailTest
  *
- * @group audit
- * @group audit-trail
- * @group audit-b0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Audit
  */
@@ -29,9 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class B0_AuditTrailTest extends AuditTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function recordsCreateEvent()
     {
@@ -65,9 +58,6 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertArrayNotHasKey('updated_at', $changed);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function recordsUpdateEvents()
     {
@@ -108,9 +98,6 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertArrayNotHasKey('name', $changed, 'Changed should not have name');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function recordsDeletedEvents()
     {
@@ -138,9 +125,6 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertSame((string)$category->getKey(), (string)$history->auditable_id, 'Id of deleted model not persisted');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function recordsForceDeletedEvents()
     {
@@ -168,9 +152,6 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertSame((string)$category->getKey(), (string)$history->auditable_id, 'Id of deleted model not persisted');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function recordsRestoreEvents()
     {
@@ -197,9 +178,6 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertSame((string)$category->getKey(), (string)$history->auditable_id, 'Id of deleted model not persisted');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function recordsUserThatCausedChange()
     {
@@ -221,9 +199,6 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertNotNull($history->user_id, 'User id not persisted');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function nullsUserIdWhenUserNoLongerExists()
     {
@@ -253,9 +228,6 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertNull($history->user_id, 'User id should be null');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainUserAuditTrail()
     {
@@ -282,9 +254,6 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertCount(3, $history);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canRecordCustomEvents()
     {
@@ -326,9 +295,6 @@ class B0_AuditTrailTest extends AuditTestCase
         $this->assertSame($newDescription, $changed['description']);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSkipNextRecordingChange()
     {
@@ -346,8 +312,6 @@ class B0_AuditTrailTest extends AuditTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

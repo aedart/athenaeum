@@ -13,9 +13,6 @@ use RuntimeException;
 /**
  * BaseProcessorTest
  *
- * @group filters
- * @group base-processor
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Filters
  */
@@ -69,9 +66,6 @@ class BaseProcessorTest extends UnitTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canCreateInstance()
     {
@@ -80,9 +74,6 @@ class BaseProcessorTest extends UnitTestCase
         $this->assertNotNull($processor);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canAssignRequest()
     {
@@ -95,9 +86,6 @@ class BaseProcessorTest extends UnitTestCase
         $this->assertSame($request, $processor->request());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsWhenRequestNotSpecified()
     {
@@ -108,9 +96,6 @@ class BaseProcessorTest extends UnitTestCase
             ->request();
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canAssignParameter()
     {
@@ -123,9 +108,6 @@ class BaseProcessorTest extends UnitTestCase
         $this->assertSame($param, $processor->parameter());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsWhenNoParameterAssigned()
     {
@@ -136,9 +118,6 @@ class BaseProcessorTest extends UnitTestCase
             ->parameter();
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainValue()
     {
@@ -159,9 +138,6 @@ class BaseProcessorTest extends UnitTestCase
         $this->assertSame($expected, $value);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetForceState()
     {

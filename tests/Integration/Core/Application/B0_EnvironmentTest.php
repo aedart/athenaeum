@@ -14,9 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A1_RunTest
  *
- * @group application
- * @group application-b0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
@@ -38,7 +35,7 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
         $app = parent::createApplication($paths);
 
         // Set the environment path
-        $app->getPathsContainer()->setEnvironmentPath(Configuration::dataDir() . 'environment');
+        $app->getPathsContainer()->environmentPath = Configuration::dataDir() . 'environment';
 
         return $app;
     }
@@ -58,8 +55,6 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -69,14 +64,11 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
 
         // Set environment path to a none-existing dir.
         $app = $this->app;
-        $app->getPathsContainer()->setEnvironmentPath(Configuration::dataDir() . 'none-existing-directory');
+        $app->getPathsContainer()->environmentPath = Configuration::dataDir() . 'none-existing-directory';
 
         $this->bootstrap();
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function defaultsToEnvironmentFromEnvFile()
     {
@@ -90,9 +82,6 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
         $this->assertSame('development', $app->environment());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetectEnvironmentFromEnvVariable()
     {
@@ -109,9 +98,6 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
         $this->assertSame('playing', $app->environment());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetectEnvironmentFromConsole()
     {
@@ -133,9 +119,6 @@ class B0_EnvironmentTest extends AthenaeumCoreTestCase
      * Test of utility methods
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canDetermineIfRunningInTestingEnv()
     {

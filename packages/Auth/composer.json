@@ -15,15 +15,15 @@
     ],
     "type": "library",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "aedart/athenaeum-contracts": "^9.26",
         "aedart/athenaeum-support": "^9.26",
-        "illuminate/validation": "^v12.53.0",
-        "laravel/fortify": "^1.35.0",
+        "illuminate/validation": "^v13.2.0",
+        "laravel/fortify": "^1.36.2",
         "shrikeh/teapot": "^3.0.0"
     },
     "require-dev": {
-        "laravel/fortify": "^1.35.0"
+        "laravel/fortify": "^1.36.2"
     },
     "autoload": {
         "psr-4": {

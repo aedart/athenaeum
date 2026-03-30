@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ForwardCallTest
  *
- * @group redmine
- * @group redmine-resource
- * @group redmine-resource-forward-call
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
@@ -25,9 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class ForwardCallTest extends RedmineTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function forwardsMethodCalls()
     {

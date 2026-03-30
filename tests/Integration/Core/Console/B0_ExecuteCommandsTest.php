@@ -10,10 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * B0_ExecuteCommandsTest
  *
- * @group application
- * @group application-console
- * @group application-console-b0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Console
  */
@@ -24,9 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class B0_ExecuteCommandsTest extends AthenaeumCoreConsoleTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function hasRegisteredCommandsFromConfig()
     {
@@ -40,9 +33,6 @@ class B0_ExecuteCommandsTest extends AthenaeumCoreConsoleTestCase
         $this->assertTrue(in_array('pirate:talk', $names));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canExecuteCommand()
     {

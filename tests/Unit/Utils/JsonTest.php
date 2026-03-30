@@ -12,9 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * JsonTest
  *
- * @group utils
- * @group utils-json
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
@@ -24,9 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class JsonTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canEncodeAndDecodeJson()
     {
@@ -50,9 +44,6 @@ class JsonTest extends UnitTestCase
         $this->assertSame($data['age'], $decoded['age']);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsEncodingJson()
     {
@@ -61,9 +52,6 @@ class JsonTest extends UnitTestCase
         Json::encode(tmpfile());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsDecodingJson()
     {
@@ -75,8 +63,6 @@ class JsonTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException

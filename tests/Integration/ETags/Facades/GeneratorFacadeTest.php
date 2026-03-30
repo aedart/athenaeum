@@ -14,10 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * GeneratorFacadeTest
  *
- * @group etags
- * @group etags-facade
- * @group facades
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Facades
  */
@@ -29,8 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class GeneratorFacadeTest extends ETagsTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -44,8 +38,6 @@ class GeneratorFacadeTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -60,8 +52,6 @@ class GeneratorFacadeTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -76,8 +66,6 @@ class GeneratorFacadeTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -89,8 +77,6 @@ class GeneratorFacadeTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

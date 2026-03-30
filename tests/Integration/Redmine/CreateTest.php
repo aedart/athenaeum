@@ -16,10 +16,6 @@ use Throwable;
 /**
  * CreateTest
  *
- * @group redmine
- * @group redmine-resource
- * @group redmine-resource-create
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
@@ -31,8 +27,6 @@ use Throwable;
 class CreateTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws ConnectionException
      * @throws JsonException
      * @throws Throwable
@@ -58,8 +52,6 @@ class CreateTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable

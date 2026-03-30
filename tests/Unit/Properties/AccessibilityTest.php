@@ -12,8 +12,7 @@ use ReflectionClass;
 /**
  * AccessibilityTest
  *
- * @group properties
- * @group properties-accessibility
+ * @deprecated will be removed in next major version, since v10.x
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Properties
@@ -24,9 +23,6 @@ use ReflectionClass;
 )]
 class AccessibilityTest extends PropertiesTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function getDefaultPropertyAccessibilityLevel()
     {
@@ -35,9 +31,6 @@ class AccessibilityTest extends PropertiesTestCase
         $this->assertEquals(AccessibilityLevels::PROTECTED_LEVEL, $method->invoke($dummy));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function setAndGetPropertyAccessibilityLevel()
     {
@@ -50,9 +43,6 @@ class AccessibilityTest extends PropertiesTestCase
         $this->assertEquals(AccessibilityLevels::PRIVATE_LEVEL, $getter->invoke($dummy));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function setInvalidPropertyAccessibilityLevel()
     {
@@ -64,9 +54,6 @@ class AccessibilityTest extends PropertiesTestCase
         $setter->invoke($dummy, -42);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function isPublicPropertyAccessible()
     {
@@ -77,9 +64,6 @@ class AccessibilityTest extends PropertiesTestCase
         $this->assertTrue($isAccessibleMethod->invoke($dummy, $property));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function isProtectedPropertyAccessible()
     {
@@ -90,9 +74,6 @@ class AccessibilityTest extends PropertiesTestCase
         $this->assertTrue($isAccessibleMethod->invoke($dummy, $property));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function isPrivatePropertyAccessible()
     {

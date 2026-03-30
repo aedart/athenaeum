@@ -15,11 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C0_MultipleModelsChangedRecordingTest
  *
- * @group audit
- * @group audit-trail
- * @group audit-trail-multiple-changes-recording
- * @group audit-c0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Audit
  */
@@ -32,8 +27,6 @@ use PHPUnit\Framework\Attributes\Test;
 class C0_MultipleModelsChangedRecordingTest extends AuditTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

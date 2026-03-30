@@ -12,9 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C3_BaseUrlTest
  *
- * @group http-clients
- * @group http-clients-c2
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -26,9 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 class C2_BaseUrlTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -48,9 +42,6 @@ class C2_BaseUrlTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException

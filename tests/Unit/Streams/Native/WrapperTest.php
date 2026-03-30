@@ -10,9 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * WrapperTest
  *
- * @group streams
- * @group streams-wrapper
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Streams
  */
@@ -45,7 +42,7 @@ class WrapperTest extends UnitTestCase
                 string $path,
                 string $mode,
                 int $options,
-                ?string &$opened_path
+                null|string &$opened_path
             ): bool {
                 $path = str_replace(static::WRAPPER_NAME . '://', '', $path);
 
@@ -127,8 +124,6 @@ class WrapperTest extends UnitTestCase
 
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

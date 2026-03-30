@@ -15,9 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * SortFilterTest
  *
- * @group filters
- * @group filters-sort
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters
  */
@@ -28,8 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class SortFilterTest extends FiltersTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -52,8 +47,6 @@ class SortFilterTest extends FiltersTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -76,8 +69,6 @@ class SortFilterTest extends FiltersTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

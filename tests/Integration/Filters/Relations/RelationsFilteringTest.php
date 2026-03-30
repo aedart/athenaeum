@@ -3,7 +3,7 @@
 namespace Aedart\Tests\Integration\Filters\Relations;
 
 use Aedart\Contracts\Database\Query\Exceptions\CriteriaException;
-use Aedart\Contracts\Database\Query\FieldCriteria;
+use Aedart\Contracts\Database\Query\Operators\LogicalOperator;
 use Aedart\Filters\Query\Filters\Fields\BelongsToFilter;
 use Aedart\Filters\Query\Filters\SortFilter;
 use Aedart\Testing\Helpers\ConsoleDebugger;
@@ -15,9 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * RelationsFilteringTest
  *
- * @group filters
- * @group filters-relations-filtering
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Relations
  */
@@ -28,8 +25,6 @@ use PHPUnit\Framework\Attributes\Test;
 class RelationsFilteringTest extends FiltersTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws CriteriaException
@@ -38,9 +33,9 @@ class RelationsFilteringTest extends FiltersTestCase
     public function canApplyLogicalOrConstraints(): void
     {
         $filters = [
-            BelongsToFilter::make('id', 'eq', 25, FieldCriteria::AND)
+            BelongsToFilter::make('id', 'eq', 25, LogicalOperator::AND)
                 ->setRelation('restrictedOwner'),
-            BelongsToFilter::make('id', 'is_null', null, FieldCriteria::OR)
+            BelongsToFilter::make('id', 'is_null', null, LogicalOperator::OR)
                 ->setRelation('restrictedOwner'),
             new SortFilter([ 'restricted_to_owner_id' => 'desc' ])
         ];

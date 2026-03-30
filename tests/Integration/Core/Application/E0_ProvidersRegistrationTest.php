@@ -19,9 +19,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E0_ProvidersRegistrationTest
  *
- * @group application
- * @group application-e0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
@@ -51,9 +48,6 @@ class E0_ProvidersRegistrationTest extends AthenaeumCoreTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function registersAppServiceProviders()
     {

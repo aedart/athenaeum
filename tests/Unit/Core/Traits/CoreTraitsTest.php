@@ -13,11 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * CoreTraitsTest
  *
- * @group core
- * @group application
- * @group application-traits
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Core\Traits
  */
@@ -50,9 +45,6 @@ class CoreTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

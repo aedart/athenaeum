@@ -16,10 +16,6 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * ResponseStatusTest
  *
- * @group http-clients
- * @group http-status
- * @group response-status
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Clients\Responses
  */
@@ -151,8 +147,6 @@ class ResponseStatusTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @throws InvalidStatusCodeException
      */
     #[Test]
@@ -164,8 +158,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws InvalidStatusCodeException
@@ -179,8 +171,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidStatusCodeException
      */
     #[Test]
@@ -192,8 +182,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidStatusCodeException
      */
     #[Test]
@@ -205,8 +193,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidStatusCodeException
      */
     #[Test]
@@ -223,8 +209,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidStatusCodeException
      */
     #[Test]
@@ -241,8 +225,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidStatusCodeException
      */
     #[Test]
@@ -259,8 +241,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidStatusCodeException
      */
     #[Test]
@@ -277,8 +257,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidStatusCodeException
      */
     #[Test]
@@ -295,8 +273,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidStatusCodeException
      */
     #[Test]
@@ -313,8 +289,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws InvalidStatusCodeException
      */
     #[Test]
@@ -330,8 +304,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws InvalidStatusCodeException
@@ -351,8 +323,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws InvalidStatusCodeException
@@ -372,9 +342,6 @@ class ResponseStatusTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider statusCodeProvider
-     *
      * @param int $code
      * @param string $method
      *

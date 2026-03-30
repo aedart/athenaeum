@@ -14,11 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ArrayExporterTest
  *
- * @group translations
- * @group translations-exporter
- * @group translations-exporter-drivers
- * @group translations-exporter-drivers-array
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Translation\Exports\Drivers
  */
@@ -53,8 +48,6 @@ class ArrayExporterTest extends TranslationTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -68,8 +61,6 @@ class ArrayExporterTest extends TranslationTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -121,8 +112,6 @@ class ArrayExporterTest extends TranslationTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ExporterException
@@ -160,8 +149,6 @@ class ArrayExporterTest extends TranslationTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ExporterException

@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Clients\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Http\Clients\Requests\Builder;
 use Aedart\Contracts\Http\Clients\Requests\Builders\Guzzle\CookieJarAware;
 use Aedart\Contracts\Http\Cookies\Cookie;
+use Aedart\Contracts\Http\Cookies\SameSite;
 use Aedart\Contracts\Http\Cookies\SetCookie;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Http\HttpClientsTestCase;
@@ -20,9 +21,6 @@ use Teapot\StatusCode;
 /**
  * H0_CookiesTest
  *
- * @group http-clients
- * @group http-clients-h0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -34,9 +32,6 @@ use Teapot\StatusCode;
 class H0_CookiesTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -60,9 +55,6 @@ class H0_CookiesTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -103,9 +95,6 @@ class H0_CookiesTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -147,9 +136,6 @@ class H0_CookiesTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -192,9 +178,6 @@ class H0_CookiesTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -233,8 +216,6 @@ class H0_CookiesTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]
@@ -251,8 +232,8 @@ class H0_CookiesTest extends HttpClientsTestCase
         $maxAge = $this->getFaker()->randomNumber(3, true);
         $secure = true;
         $httpOnly = true;
-        $sameSite = SetCookie::SAME_SITE_STRICT;
-        $header = "$name=$value; Domain=$domain; Path=$path; Expires=$expires; Max-Age=$maxAge; Secure; HttpOnly; SameSite=$sameSite;";
+        $sameSite = SameSite::STRICT;
+        $header = "{$name}={$value}; Domain={$domain}; Path={$path}; Expires={$expires}; Max-Age={$maxAge}; Secure; HttpOnly; SameSite={$sameSite->value};";
 
         $mockedResponse = new Response(StatusCode::OK, [
             'Set-Cookie' => $header
@@ -307,6 +288,6 @@ class H0_CookiesTest extends HttpClientsTestCase
 
         $data = $cookie->toArray();
         $this->assertArrayHasKey('SameSite', $data, 'Same Site does not exist');
-        $this->assertSame($data['SameSite'], $sameSite, 'Incorrect Same Site');
+        $this->assertSame($data['SameSite'], $sameSite?->value, 'Incorrect Same Site');
     }
 }

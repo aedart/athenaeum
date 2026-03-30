@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * H0_MaintenanceModeTest
  *
- * @group application
- * @group application-h0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
@@ -24,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class H0_MaintenanceModeTest extends AthenaeumCoreTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -39,8 +34,6 @@ class H0_MaintenanceModeTest extends AthenaeumCoreTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

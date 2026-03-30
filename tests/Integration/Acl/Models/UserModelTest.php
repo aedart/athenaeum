@@ -10,11 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * UserModelTest
  *
- * @group acl
- * @group acl-models
- * @group acl-user
- * @group acl-user-model
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Acl\Models
  */
@@ -26,9 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class UserModelTest extends AclTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canAssignSingleRole()
     {
@@ -54,9 +46,6 @@ class UserModelTest extends AclTestCase
         );
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canAssignManyRoles()
     {
@@ -82,9 +71,6 @@ class UserModelTest extends AclTestCase
         );
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canAssignSingleRoleViaSlug()
     {
@@ -110,9 +96,6 @@ class UserModelTest extends AclTestCase
         );
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canAssignManyRolesViaSlugs()
     {
@@ -140,9 +123,6 @@ class UserModelTest extends AclTestCase
         );
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canAssignSingleRoleViaId()
     {
@@ -168,9 +148,6 @@ class UserModelTest extends AclTestCase
         );
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canAssignManyRolesViaIds()
     {
@@ -198,9 +175,6 @@ class UserModelTest extends AclTestCase
         );
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canUnassignSingleRole()
     {
@@ -231,9 +205,6 @@ class UserModelTest extends AclTestCase
         );
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canUnassignManyRoles()
     {
@@ -262,9 +233,6 @@ class UserModelTest extends AclTestCase
         );
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canUnassignSingleRoleViaSlug()
     {
@@ -295,9 +263,6 @@ class UserModelTest extends AclTestCase
         );
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canUnassignManyRolesViaSlugs()
     {
@@ -328,9 +293,6 @@ class UserModelTest extends AclTestCase
         );
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canUnassignSingleRoleViaId()
     {
@@ -361,9 +323,6 @@ class UserModelTest extends AclTestCase
         );
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canUnassignManyRolesViaIds()
     {
@@ -395,8 +354,6 @@ class UserModelTest extends AclTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -429,8 +386,6 @@ class UserModelTest extends AclTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -457,8 +412,6 @@ class UserModelTest extends AclTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -498,8 +451,6 @@ class UserModelTest extends AclTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -520,8 +471,6 @@ class UserModelTest extends AclTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]

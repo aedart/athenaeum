@@ -15,9 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * CommandsRegistrarTest
  *
- * @group console
- * @group commands-registration
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Console\Registrars
  */
@@ -37,7 +34,7 @@ class CommandsRegistrationTest extends LaravelTestCase
     /**
      * @inheritdoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -47,7 +44,7 @@ class CommandsRegistrationTest extends LaravelTestCase
     /**
      * @inheritdoc
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             ConsoleServiceProvider::class
@@ -57,7 +54,7 @@ class CommandsRegistrationTest extends LaravelTestCase
     /**
      * Adds commands to the configuration
      */
-    protected function addCommandsToConfig()
+    protected function addCommandsToConfig(): void
     {
         $this->getConfig()->set('commands', [
             PirateTalkCommand::class
@@ -68,9 +65,6 @@ class CommandsRegistrationTest extends LaravelTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function hasRegisteredCommandFromConfig()
     {
@@ -84,8 +78,6 @@ class CommandsRegistrationTest extends LaravelTestCase
     }
 
     /**
-     * @test
-     *
      * @depends hasRegisteredCommandFromConfig
      */
     #[Depends('hasRegisteredCommandFromConfig')]

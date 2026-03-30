@@ -31,7 +31,7 @@ class AttemptToAuthenticate extends BaseAttemptToAuthenticate
 ```
 
 To use such an action, you will have to modify Laravel Fortify's default
-[authentication pipeline](https://laravel.com/docs/12.x/fortify#customizing-the-authentication-pipeline).
+[authentication pipeline](https://laravel.com/docs/13.x/fortify#customizing-the-authentication-pipeline).
 
 ```php
 Fortify::authenticateThrough(function (Request $request) {

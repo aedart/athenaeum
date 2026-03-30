@@ -14,11 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * LangJsExporterTest
  *
- * @group translations
- * @group translations-exporter
- * @group translations-exporter-drivers
- * @group translations-exporter-drivers-lang-js
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Translation\Exports\Drivers
  */
@@ -53,8 +48,6 @@ class LangJsExporterTest extends TranslationTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -68,8 +61,6 @@ class LangJsExporterTest extends TranslationTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -102,8 +93,6 @@ class LangJsExporterTest extends TranslationTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ExporterException

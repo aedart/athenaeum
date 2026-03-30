@@ -22,7 +22,7 @@ class Note extends Dto implements NoteInterface
      *
      * @var string|null
      */
-    protected ?string $content = null;
+    protected null|string $content = null;
 
     /**
      * Set content
@@ -31,7 +31,7 @@ class Note extends Dto implements NoteInterface
      *
      * @return self
      */
-    public function setContent(?string $content)
+    public function setContent(null|string $content)
     {
         $this->content = $content;
 
@@ -43,7 +43,7 @@ class Note extends Dto implements NoteInterface
      *
      * @return string|null content or null if none content has been set
      */
-    public function getContent(): ?string
+    public function getContent(): null|string
     {
         return $this->content;
     }

@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * G0_MimeTypeTest
  *
- * @group streams
- * @group streams-file-g0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
@@ -25,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class G0_MimeTypeTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \Aedart\Contracts\MimeTypes\Exceptions\MimeTypeDetectionException

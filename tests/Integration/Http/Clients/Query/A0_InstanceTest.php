@@ -13,11 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * A0_InstanceTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-a0
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -52,9 +47,6 @@ class A0_InstanceTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesGrammars
-     *
      * @param string $grammar
      *
      * @throws ProfileNotFoundException
@@ -69,9 +61,6 @@ class A0_InstanceTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesGrammars
-     *
      * @param string $grammar
      *
      * @throws ProfileNotFoundException

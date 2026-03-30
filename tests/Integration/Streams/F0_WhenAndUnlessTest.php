@@ -10,9 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * F0_WhenAndUnlessTest
  *
- * @group streams
- * @group streams-f0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -23,8 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 class F0_WhenAndUnlessTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -41,8 +36,6 @@ class F0_WhenAndUnlessTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -59,8 +52,6 @@ class F0_WhenAndUnlessTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -77,8 +68,6 @@ class F0_WhenAndUnlessTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -95,8 +84,6 @@ class F0_WhenAndUnlessTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -113,8 +100,6 @@ class F0_WhenAndUnlessTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

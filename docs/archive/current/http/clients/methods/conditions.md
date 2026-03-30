@@ -5,7 +5,7 @@ sidebarDepth: 0
 
 # Conditions
 
-Inspired heavily by Laravel's [Collections](https://laravel.com/docs/12.x/collections#method-when), the `when()` and `unless()` methods give you the possibility to invoke callbacks, when a condition evaluates to `true`. 
+Inspired heavily by Laravel's [Collections](https://laravel.com/docs/13.x/collections#method-when), the `when()` and `unless()` methods give you the possibility to invoke callbacks, when a condition evaluates to `true`. 
 
 [[TOC]]
 

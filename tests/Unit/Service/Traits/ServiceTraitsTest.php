@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ServiceTraitsTest
  *
- * @group service
- * @group service-registrar
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Service\Traits
  */
@@ -40,9 +36,6 @@ class ServiceTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

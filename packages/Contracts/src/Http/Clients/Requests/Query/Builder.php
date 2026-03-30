@@ -439,7 +439,7 @@ interface Builder extends Identifiers,
      * Build this http query
      *
      * Method MUST use {@see Grammar} provided by the {@see getGrammar}
-     * to build a http query, which can be applied on a request
+     * to build an http query, which can be applied on a request
      *
      * @return string Http query string.
      *

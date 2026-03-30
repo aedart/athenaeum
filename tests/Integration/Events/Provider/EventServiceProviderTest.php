@@ -15,9 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * EventServiceProviderTest
  *
- * @group application
- * @group events
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Events\Provider
  */
@@ -30,7 +27,7 @@ class EventServiceProviderTest extends AthenaeumCoreTestCase
     /**
      * @inheritdoc
      */
-    protected function _after()
+    protected function _after(): void
     {
         MessageBag::clearAll();
 
@@ -56,8 +53,6 @@ class EventServiceProviderTest extends AthenaeumCoreTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -70,8 +65,6 @@ class EventServiceProviderTest extends AthenaeumCoreTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -87,8 +80,6 @@ class EventServiceProviderTest extends AthenaeumCoreTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]

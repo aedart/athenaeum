@@ -32,7 +32,7 @@ trait GetterSetterTraitTester
      * If set or default values are given, method will attempt to
      * guess what data to generate that fulfills argument(s).
      *
-     * @param string $trait Trait class path
+     * @param class-string $trait Trait class path
      * @param mixed $setValue [optional] Auto generated, if none given
      * @param mixed $defaultValue [optional] Auto generated, if none given
      * @param bool $assertDefaultIsNull [optional] If true, then "get-default" will be asserted to
@@ -54,7 +54,7 @@ trait GetterSetterTraitTester
      * all methods, specifying and retrieving the given value, as well as
      * mocking a custom value return.
      *
-     * @param string $trait Trait class path
+     * @param class-string $trait Trait class path
      * @param mixed $setValue
      * @param mixed $defaultValue
      * @param bool $assertDefaultIsNull [optional] If true, then "get-default" will be asserted to
@@ -78,7 +78,7 @@ trait GetterSetterTraitTester
     /**
      * Returns a new Trait Tester
      *
-     * @param string $trait Trait class path
+     * @param class-string $trait Trait class path
      * @param null|string $property [optional] Property name is guessed if none given
      *
      * @return TraitTester

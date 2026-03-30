@@ -34,7 +34,7 @@ class Evaluator implements PreconditionsEvaluator
      * Creates a new request preconditions evaluator instance
      *
      * @param  Request  $request
-     * @param  string[]|Precondition[]  $preconditions  [optional] Defaults to predefined preconditions when empty.
+     * @param  array<class-string<Precondition>|Precondition>  $preconditions  [optional] Defaults to predefined preconditions when empty.
      * @param  PreconditionActions|null  $actions  [optional] Defaults to predefined actions when none given.
      */
     public function __construct(Request $request, array $preconditions = [], PreconditionActions|null $actions = null)
@@ -55,7 +55,7 @@ class Evaluator implements PreconditionsEvaluator
      * Returns a new request preconditions evaluator instance
      *
      * @param  Request $request
-     * @param  string[]|Precondition[]  $preconditions  [optional]
+     * @param  array<class-string<Precondition>|Precondition>  $preconditions  [optional]
      * @param  PreconditionActions|null  $actions  [optional]
      *
      * @return static
@@ -141,7 +141,7 @@ class Evaluator implements PreconditionsEvaluator
     /**
      * Returns default preconditions
      *
-     * @return string[]|Precondition[]
+     * @return array<class-string<Precondition>|Precondition>
      */
     public function getDefaultPreconditions(): array
     {
@@ -169,7 +169,7 @@ class Evaluator implements PreconditionsEvaluator
     /**
      * Returns list of RFC9110 defined request preconditions
      *
-     * @return string[]|Precondition[]
+     * @return array<class-string<Precondition>|Precondition>
      */
     public function getRfc9110Preconditions(): array
     {
@@ -219,7 +219,7 @@ class Evaluator implements PreconditionsEvaluator
     /**
      * Prepares the precondition for evaluation
      *
-     * @param  string|Precondition  $precondition Class path or {@see Precondition} instance
+     * @param  class-string<Precondition>|Precondition  $precondition Class path or {@see Precondition} instance
      *
      * @return Precondition
      */
@@ -276,7 +276,7 @@ class Evaluator implements PreconditionsEvaluator
      *
      * Method fails if unable to find target's index
      *
-     * @param  string  $target Class path
+     * @param  class-string<Precondition>  $target
      * @param  string[]|Precondition[]  $preconditions
      *
      * @return int

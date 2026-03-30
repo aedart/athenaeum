@@ -13,10 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * LockFactoryTest
  *
- * @group streams
- * @group stream-lock
- * @group stream-lock-factory
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File\Locks
  */
@@ -28,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class LockFactoryTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -41,8 +35,6 @@ class LockFactoryTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
@@ -61,8 +53,6 @@ class LockFactoryTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException

@@ -13,10 +13,6 @@ use Throwable;
 /**
  * GroupTest
  *
- * @group redmine
- * @group redmine-resources
- * @group redmine-resources-group
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
@@ -28,8 +24,6 @@ use Throwable;
 class GroupTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable
@@ -81,8 +75,6 @@ class GroupTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable
@@ -164,8 +156,6 @@ class GroupTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable
@@ -274,8 +264,6 @@ class GroupTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable

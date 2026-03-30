@@ -19,9 +19,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E2_BootServiceProvidersTest
  *
- * @group application
- * @group application-e3
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
@@ -61,9 +58,6 @@ class E3_BootServiceProvidersTest extends AthenaeumCoreTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function bootsServiceProviders()
     {
@@ -90,9 +84,6 @@ class E3_BootServiceProvidersTest extends AthenaeumCoreTestCase
         $this->assertGreaterThanOrEqual(count($expected), count($providers), 'Incorrect amount of services booted');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function invokesBeforeAndAfterBootCallbacks()
     {
@@ -120,9 +111,6 @@ class E3_BootServiceProvidersTest extends AthenaeumCoreTestCase
         $this->assertTrue($hasInvokedAfter, 'after callback not invoked');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function invokesAfterCallbackIfAlreadyBooted()
     {

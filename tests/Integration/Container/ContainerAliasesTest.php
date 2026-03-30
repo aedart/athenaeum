@@ -12,9 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ContainerAliasesTest
  *
- * @group ioc
- * @group container
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Container
  */
@@ -42,9 +39,6 @@ class ContainerAliasesTest extends IntegrationTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider aliasProvider
-     *
      * @param string $alias
      */
     #[DataProvider('aliasProvider')]

@@ -13,10 +13,6 @@ use Throwable;
 /**
  * TrackerTest
  *
- * @group redmine
- * @group redmine-resources
- * @group redmine-resources-trackers
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
@@ -28,8 +24,6 @@ use Throwable;
 class TrackerTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws UnsupportedOperationException
      * @throws JsonException
      * @throws Throwable

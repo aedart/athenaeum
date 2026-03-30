@@ -13,7 +13,6 @@ use Aedart\Circuits\States\HalfOpenState;
 use Aedart\Circuits\States\OpenState;
 use Aedart\Circuits\Traits\FailureFactoryTrait;
 use Aedart\Circuits\Traits\StateFactoryTrait;
-use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Events\CircuitBreakerEvent;
 use Aedart\Contracts\Circuits\Events\FailureReported;
 use Aedart\Contracts\Circuits\Events\HasClosed;
@@ -22,6 +21,7 @@ use Aedart\Contracts\Circuits\Events\HasOpened;
 use Aedart\Contracts\Circuits\Failure;
 use Aedart\Contracts\Circuits\Failures\FailureFactoryAware;
 use Aedart\Contracts\Circuits\State;
+use Aedart\Contracts\Circuits\States\Identifier;
 use Aedart\Contracts\Circuits\States\StateFactoryAware;
 use Aedart\Contracts\Circuits\Store;
 use Aedart\Contracts\Support\Helpers\Events\DispatcherAware;
@@ -101,8 +101,7 @@ abstract class BaseStore implements
     }
 
     /**
-     * Convert, e.g. serialise, value so that store can
-     * persist it.
+     * Convert, e.g. serialize, value so that store can persist it.
      *
      * @param mixed $value
      *
@@ -223,9 +222,9 @@ abstract class BaseStore implements
     protected function dispatchStateChange(State $state): static
     {
         return match ($state->id()) {
-            CircuitBreaker::CLOSED => $this->dispatchEvent(HasClosed::class, new ChangedToClosed($state, $this->getFailure())),
-            CircuitBreaker::OPEN => $this->dispatchEvent(HasOpened::class, new ChangedToOpen($state, $this->getFailure())),
-            CircuitBreaker::HALF_OPEN => $this->dispatchEvent(HasHalfOpened::class, new ChangedToHalfOpen($state, $this->getFailure())),
+            Identifier::CLOSED => $this->dispatchEvent(HasClosed::class, new ChangedToClosed($state, $this->getFailure())),
+            Identifier::OPEN => $this->dispatchEvent(HasOpened::class, new ChangedToOpen($state, $this->getFailure())),
+            Identifier::HALF_OPEN => $this->dispatchEvent(HasHalfOpened::class, new ChangedToHalfOpen($state, $this->getFailure())),
 
             // N/A -  we could fail here, but might not be suitable
             // when considering that this method is "only" intended to
@@ -235,7 +234,7 @@ abstract class BaseStore implements
     }
 
     /**
-     * Dispatch a failure was reported {@see CircuitBreaker::CLOSED} event
+     * Dispatch a failure was reported {@see Identifier::CLOSED} event
      *
      * @param Failure $failure
      *
@@ -252,7 +251,7 @@ abstract class BaseStore implements
     /**
      * Dispatch circuit breaker event
      *
-     * @param string $event Identifier
+     * @param string $event
      * @param CircuitBreakerEvent $payload
      *
      * @return self;

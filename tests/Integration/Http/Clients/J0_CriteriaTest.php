@@ -14,9 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * J0_CriteriaTest
  *
- * @group http-clients
- * @group http-clients-j0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -95,9 +92,6 @@ class J0_CriteriaTest extends HttpClientsTestCase
 
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException

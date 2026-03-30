@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * SemanticVersionRuleTest
  *
- * @group validation
- * @group rules
- * @group version
- *
  * Some of the valid and invalid data sets are found from the following regex example:
  * https://regex101.com/r/Ly7O1x/3/
  *
@@ -84,9 +80,6 @@ class SemanticVersionRuleTest extends ValidationTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider validInput
-     *
      * @param mixed $input
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -99,9 +92,6 @@ class SemanticVersionRuleTest extends ValidationTestCase
     }
 
     /**
-     * @test
-     * @dataProvider invalidInput
-     *
      * @param mixed $input
      *
      * @throws \Illuminate\Validation\ValidationException

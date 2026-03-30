@@ -9,8 +9,7 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ReflectionsTest
  *
- * @group properties
- * @group properties-reflections
+ * @deprecated will be removed in next major version, since v10.x
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Properties
@@ -21,9 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class ReflectionsTest extends PropertiesTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function hasInternalMethod()
     {
@@ -32,9 +28,6 @@ class ReflectionsTest extends PropertiesTestCase
         $this->assertTrue($method->invoke($dummy, 'myInternalMethod'));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function getInternalProperty()
     {
@@ -47,9 +40,6 @@ class ReflectionsTest extends PropertiesTestCase
         $this->assertSame('John Doe', $property->getValue($dummy));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function doesNotHaveInternalProperty()
     {
@@ -60,9 +50,6 @@ class ReflectionsTest extends PropertiesTestCase
         $this->assertFalse($method->invoke($dummy, 'job'));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function hasAccessibleInternalProperty()
     {
@@ -73,9 +60,6 @@ class ReflectionsTest extends PropertiesTestCase
         $this->assertTrue($method->invoke($dummy, 'name'));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function hasInaccessibleInternalProperty()
     {

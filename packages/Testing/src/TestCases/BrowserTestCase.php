@@ -37,7 +37,7 @@ abstract class BrowserTestCase extends IntegrationTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -47,7 +47,7 @@ abstract class BrowserTestCase extends IntegrationTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _after()
+    protected function _after(): void
     {
         $this->stopApplication();
 
@@ -58,7 +58,7 @@ abstract class BrowserTestCase extends IntegrationTestCase
      * Prepares chrome driver, before each test
      */
     #[BeforeClass]
-    public static function prepare()
+    public static function prepare(): void
     {
         // Avoid starting multiple chrome driver processes
         if (isset(static::$chromeProcess) && static::$chromeProcess->isRunning()) {
@@ -81,7 +81,7 @@ abstract class BrowserTestCase extends IntegrationTestCase
     public static function _setUpBeforeClass(): void
     {
         // Disable this, if you already are running a local server.
-        // Otherwise you might get refused starting the "Dusk Server".
+        // Otherwise, you might get refused starting the "Dusk Server".
         static::serve(static::serverHost(), static::serverPort());
     }
 

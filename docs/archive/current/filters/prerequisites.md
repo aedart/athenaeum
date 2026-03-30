@@ -10,4 +10,4 @@ You should have some basic understanding of how to create and apply [query filte
 
 ## Requests
 
-In addition, you should have some knowledge of how to work with [Form Requests](https://laravel.com/docs/12.x/validation#form-request-validation).
+In addition, you should have some knowledge of how to work with [Form Requests](https://laravel.com/docs/13.x/validation#form-request-validation).

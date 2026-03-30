@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ConfigTraitsTest
  *
- * @group config
- * @group config-traits
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Config\Traits
  */
@@ -46,9 +42,6 @@ class ConfigTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

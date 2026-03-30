@@ -16,10 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * Http Clients Traits Test
  *
- * @group http
- * @group http-clients
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Http\Clients\Traits
  */
@@ -54,9 +50,6 @@ class HttpClientsTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

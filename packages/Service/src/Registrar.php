@@ -181,11 +181,7 @@ class Registrar implements RegistrarInterface
     }
 
     /**
-     * Create service provider instance, if required
-     *
-     * @param ServiceProvider|string $provider
-     *
-     * @return ServiceProvider
+     * @inheritdoc
      */
     public function resolveProvider($provider)
     {
@@ -205,7 +201,7 @@ class Registrar implements RegistrarInterface
      *
      * @param ServiceProvider $provider
      */
-    protected function performRegistration(ServiceProvider $provider)
+    protected function performRegistration(ServiceProvider $provider): void
     {
         $provider->register();
 

@@ -49,7 +49,7 @@ class MigrateProcessor
      *
      * @return self
      */
-    public function up(): self
+    public function up(): static
     {
         $this->dispatch('migrate');
 
@@ -61,7 +61,7 @@ class MigrateProcessor
      *
      * @return self
      */
-    public function rollback(): self
+    public function rollback(): static
     {
         $this->dispatch('migrate:rollback');
 

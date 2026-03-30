@@ -14,9 +14,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * BuiltFiltersTest
  *
- * @group filters
- * @group built-filters-map
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Filters
  */
@@ -60,8 +57,6 @@ class BuiltFiltersTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @throws CriteriaException
      */
     #[Test]
@@ -85,8 +80,6 @@ class BuiltFiltersTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws CriteriaException
      */
     #[Test]
@@ -103,8 +96,6 @@ class BuiltFiltersTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws CriteriaException
      */
     #[Test]
@@ -132,8 +123,6 @@ class BuiltFiltersTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws CriteriaException
      */
     #[Test]
@@ -160,9 +149,6 @@ class BuiltFiltersTest extends UnitTestCase
         $this->assertFalse($map->has($key));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSetAndObtainMeta()
     {
@@ -179,9 +165,6 @@ class BuiltFiltersTest extends UnitTestCase
         $this->assertSame($value, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function returnsDefaultWhenNoMetaSet()
     {
@@ -195,9 +178,6 @@ class BuiltFiltersTest extends UnitTestCase
         $this->assertSame($default, $result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canForgetMeta()
     {
@@ -216,9 +196,6 @@ class BuiltFiltersTest extends UnitTestCase
         $this->assertFalse($map->hasMeta($key));
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainAllMeta()
     {
@@ -241,8 +218,6 @@ class BuiltFiltersTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @throws CriteriaException
      */
     #[Test]

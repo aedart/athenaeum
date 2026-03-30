@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * MakeAdapterMigrationCommandTest
  *
- * @group flysystem
- * @group flysystem-db
- * @group flysystem-db-console
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Console
  */
@@ -33,8 +29,6 @@ class MakeAdapterMigrationCommandTest extends FlysystemDbTestCase
     protected bool $installAdapterMigrations = false;
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -48,8 +42,6 @@ class MakeAdapterMigrationCommandTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \Codeception\Exception\ConfigurationException

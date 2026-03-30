@@ -43,7 +43,7 @@ abstract class StreamTestCase extends LaravelTestCase
      * @throws InvalidPathException
      * @throws FileParserException
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -55,7 +55,7 @@ abstract class StreamTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             ConfigLoaderServiceProvider::class,
@@ -202,7 +202,7 @@ abstract class StreamTestCase extends LaravelTestCase
      *
      * @throws \Aedart\Contracts\Streams\Exceptions\LockException
      */
-    public function makeLock(StreamInterface $stream, ?string $profile = null, array $options = []): Lock
+    public function makeLock(StreamInterface $stream, null|string $profile = null, array $options = []): Lock
     {
         return $this->getLockFactory()->create($stream, $profile, $options);
     }

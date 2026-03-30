@@ -6,7 +6,7 @@ use Aedart\Contracts\Streams\BufferSizes;
 use Aedart\Contracts\Streams\FileStream as FileStreamInterface;
 use Aedart\Contracts\Streams\Locks\Lock;
 use Aedart\Contracts\Streams\Locks\Lockable;
-use Aedart\Contracts\Streams\Locks\LockTypes;
+use Aedart\Contracts\Streams\Locks\LockType;
 use Aedart\Contracts\Streams\Stream;
 use Aedart\Streams\FileStream;
 use Illuminate\Support\Carbon;
@@ -161,7 +161,7 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      *
      * @param  Lockable|Stream  $stream
      * @param  string  $profile
-     * @param  int  $type
+     * @param  int|LockType  $type
      * @param  float  $timeout
      *
      * @return Lock
@@ -171,7 +171,7 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
     protected function acquireLock(
         Lockable|Stream $stream,
         string $profile,
-        int $type,
+        int|LockType $type,
         float $timeout
     ): Lock {
         $lock = $stream
@@ -305,7 +305,7 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
      *
      * @return void
      */
-    protected function ensureDirectoryExists(string $path)
+    protected function ensureDirectoryExists(string $path): void
     {
         if (!is_dir($path)) {
             mkdir($path, 0755, true);
@@ -335,11 +335,11 @@ class CopyWriteReplaceDriver extends BaseTransactionDriver
     /**
      * Returns lock type to use
      *
-     * @return int
+     * @return int|LockType
      */
-    protected function lockType(): int
+    protected function lockType(): int|LockType
     {
-        return $this->get('lock.type', LockTypes::EXCLUSIVE);
+        return $this->get('lock.type', LockType::EXCLUSIVE);
     }
 
     /**

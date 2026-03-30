@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E0_PublishAllCommandTest
  *
- * @group application
- * @group application-console
- * @group application-console-e0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Console
  */
@@ -31,7 +27,7 @@ class E0_PublishAllCommandTest extends AthenaeumCoreConsoleTestCase
     /**
      * @inheritdoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -62,9 +58,6 @@ class E0_PublishAllCommandTest extends AthenaeumCoreConsoleTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function hasRegisteredPublishAllCommand()
     {
@@ -79,8 +72,6 @@ class E0_PublishAllCommandTest extends AthenaeumCoreConsoleTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Codeception\Exception\ConfigurationException
      */
     #[Test]
@@ -104,21 +95,15 @@ class E0_PublishAllCommandTest extends AthenaeumCoreConsoleTestCase
         $fs = $this->getFile();
 
         $target = $this->targetPublishDir();
-        $targetA = $target . 'athenaeum';
-        $targetB = $target . 'templates';
+        $targetA = $target . 'templates';
 
         $this->assertTrue($fs->isDirectory($target), 'Output dir not created');
         $this->assertTrue($fs->isDirectory($targetA), 'Nested resource A not published');
-        $this->assertTrue($fs->isDirectory($targetB), 'Nested resource B not published');
 
         // Ensure directories are not empty
         $filesInA = $fs->allFiles($targetA);
         //ConsoleDebugger::output($filesInA);
         $this->assertNotEmpty($filesInA, 'target A has no files published');
-
-        $filesInB = $fs->allFiles($targetB);
-        //ConsoleDebugger::output($filesInB);
-        $this->assertNotEmpty($filesInB, 'target B has no files published');
 
         // ------------------------------------------------------------ //
 

@@ -16,11 +16,6 @@ use Teapot\StatusCode\All as HttpStatus;
 /**
  * ShowResourceRequestTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-requests
- * @group show-single-resource-request
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Requests
  */
@@ -35,7 +30,7 @@ class ShowSingleResourceRequestTest extends ApiResourceRequestsTestCase
     /**
      * @inheritDoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -48,8 +43,6 @@ class ShowSingleResourceRequestTest extends ApiResourceRequestsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -88,8 +81,6 @@ class ShowSingleResourceRequestTest extends ApiResourceRequestsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException

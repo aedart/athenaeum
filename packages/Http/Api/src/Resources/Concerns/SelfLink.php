@@ -19,14 +19,14 @@ trait SelfLink
      * A callback responsible for creating resource's
      * self link.
      *
-     * @var callable|null
+     * @var callable(Request $request, static $apiResource): (string|null)|null
      */
     protected $selfLinkCallback = null;
 
     /**
      * Set this resource's self link
      *
-     * @param  string|callable  $link   When callback is provided, it will receive the
+     * @param  string|callable(Request $request, static $apiResource): (string|null)  $link   When callback is provided, it will receive the
      *                                  {@see Request} and this {@see \Aedart\Http\Api\Resources\ApiResource} as
      *                                  arguments. Callback MUST return a string or null.
      *

@@ -12,11 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * PermissionGroupModelTest
  *
- * @group acl
- * @group acl-models
- * @group acl-permission-group
- * @group acl-permission-group-model
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Acl\Models
  */
@@ -28,9 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class PermissionGroupModelTest extends AclTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canCreateAndObtain()
     {
@@ -57,8 +49,6 @@ class PermissionGroupModelTest extends AclTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Exception
      */
     #[Test]
@@ -77,8 +67,6 @@ class PermissionGroupModelTest extends AclTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -98,8 +86,6 @@ class PermissionGroupModelTest extends AclTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]

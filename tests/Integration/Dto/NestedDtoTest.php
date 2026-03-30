@@ -15,8 +15,7 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * NestedDtoTest
  *
- * @group dto
- * @group dto-nested
+ * @deprecated will be removed in next major version, since v10.x
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Dto
@@ -27,9 +26,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class NestedDtoTest extends DtoTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canPopulateWithObjects()
     {
@@ -54,9 +50,6 @@ class NestedDtoTest extends DtoTestCase
         $this->assertSame($data['address']['city'], $dto->address->city);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canResolveUnboundInstances()
     {
@@ -79,9 +72,6 @@ class NestedDtoTest extends DtoTestCase
         $this->assertSame($data['address']['city']['name'], $dto->address->city->name);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsResolvingWhenNoServiceContainerAvailable()
     {
@@ -104,9 +94,6 @@ class NestedDtoTest extends DtoTestCase
         $this->makeDto($data);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canJsonSerialiseNestedInstances()
     {
@@ -129,9 +116,6 @@ class NestedDtoTest extends DtoTestCase
         $this->assertJson($result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSerialiseNestedInstances()
     {
@@ -161,9 +145,6 @@ class NestedDtoTest extends DtoTestCase
         $this->assertSame($data['address']['city']['name'], $address['city']['name'], 'Invalid unserialised nested dto property');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canResolveUsingOverloadMethodDirectly()
     {
@@ -182,9 +163,6 @@ class NestedDtoTest extends DtoTestCase
         $this->assertSame($data['city']['zipCode'], $dto->address->city->zipCode, 'ZipCode was expected to be of a different value!');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canResolveBoundAbstractInstance()
     {
@@ -219,9 +197,6 @@ class NestedDtoTest extends DtoTestCase
         $this->assertSame($expected, $content);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsResolvingAbstractInstance()
     {

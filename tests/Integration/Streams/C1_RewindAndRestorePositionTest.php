@@ -10,9 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C1_RewindAndRestorePositionTest
  *
- * @group streams
- * @group streams-c1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -23,8 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 class C1_RewindAndRestorePositionTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -50,8 +45,6 @@ class C1_RewindAndRestorePositionTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -76,8 +69,6 @@ class C1_RewindAndRestorePositionTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -97,8 +88,6 @@ class C1_RewindAndRestorePositionTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

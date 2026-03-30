@@ -41,7 +41,7 @@ class BelongsTo extends ResourceRelation
      * Creates new belongs to resource relation instance
      *
      * @param ApiResource $parent
-     * @param string|ApiResource $related Class path
+     * @param class-string<ApiResource>|ApiResource $related Class path
      * @param Dto|null $reference [optional] Reference Dto in parent resource that holds foreign key to
      *                                       related resource
      *

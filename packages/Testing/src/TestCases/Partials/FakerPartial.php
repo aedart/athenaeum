@@ -32,7 +32,7 @@ trait FakerPartial
     /**
      * Setup the faker generator
      */
-    protected function setupFaker()
+    protected function setupFaker(): void
     {
         $this->setFaker($this->makeFaker(
             $this->fakerLocale

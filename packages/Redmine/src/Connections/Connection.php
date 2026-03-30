@@ -143,11 +143,7 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Set a general expectation handler for this connection
-     *
-     * @param callable|null $handler
-     *
-     * @return self
+     * @inheritdoc
      */
     public function useFailedExpectationHandler(callable|null $handler): static
     {
@@ -157,9 +153,7 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Determine if an expectation handler has been set for this connection
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function hasFailedExpectationHandler(): bool
     {
@@ -167,9 +161,7 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Returns this connection's general failed expectation handler
-     *
-     * @return callable|null
+     * @inheritdoc
      */
     public function failedExpectationHandler(): callable|null
     {

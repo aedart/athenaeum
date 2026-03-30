@@ -15,10 +15,6 @@ use Throwable;
 /**
  * FilterCallbackTest
  *
- * @group redmine
- * @group redmine-resource
- * @group redmine-resource-filter-callback
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine
  */
@@ -30,8 +26,6 @@ use Throwable;
 class FilterCallbackTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws HttpQueryBuilderException
      * @throws Throwable
      */
@@ -58,8 +52,6 @@ class FilterCallbackTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws Throwable
      */
     #[Test]

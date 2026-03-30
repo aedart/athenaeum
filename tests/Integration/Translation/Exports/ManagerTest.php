@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ManagerTest
  *
- * @group translations
- * @group translations-exporter
- * @group translations-exporter-manager
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Translation\Exports
  */
@@ -27,8 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 class ManagerTest extends TranslationTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -40,8 +34,6 @@ class ManagerTest extends TranslationTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -57,8 +49,6 @@ class ManagerTest extends TranslationTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -74,8 +64,6 @@ class ManagerTest extends TranslationTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException

@@ -13,11 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * B0_SelectTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-b0
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -130,9 +125,6 @@ class B0_SelectTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesSingleFieldData
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -154,9 +146,6 @@ class B0_SelectTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesSingleFieldFromResourceData
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -178,9 +167,6 @@ class B0_SelectTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesMultipleFieldsData
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -202,9 +188,6 @@ class B0_SelectTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesMultipleFieldsFromResourcesData
-     *
      * @param string $grammar
      * @param string $expected
      *

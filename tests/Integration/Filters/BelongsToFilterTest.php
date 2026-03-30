@@ -13,9 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * BelongsToFilterTest
  *
- * @group filters
- * @group filters-belongs-to
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters
  */
@@ -26,8 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 class BelongsToFilterTest extends FiltersTestCase
 {
     /**
-     * @test
-     *
      * @throws \Aedart\Contracts\Database\Query\Exceptions\CriteriaException
      */
     #[Test]

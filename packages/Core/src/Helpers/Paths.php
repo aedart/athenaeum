@@ -3,16 +3,7 @@
 namespace Aedart\Core\Helpers;
 
 use Aedart\Contracts\Core\Helpers\PathsContainer;
-use Aedart\Dto\Dto;
-use Aedart\Support\Properties\Strings\BasePathTrait;
-use Aedart\Support\Properties\Strings\BootstrapPathTrait;
-use Aedart\Support\Properties\Strings\ConfigPathTrait;
-use Aedart\Support\Properties\Strings\DatabasePathTrait;
-use Aedart\Support\Properties\Strings\EnvironmentPathTrait;
-use Aedart\Support\Properties\Strings\LangPathTrait;
-use Aedart\Support\Properties\Strings\PublicPathTrait;
-use Aedart\Support\Properties\Strings\ResourcePathTrait;
-use Aedart\Support\Properties\Strings\StoragePathTrait;
+use Aedart\Dto\ArrayDto;
 
 /**
  * Paths Container
@@ -22,17 +13,25 @@ use Aedart\Support\Properties\Strings\StoragePathTrait;
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Core\Helpers
  */
-class Paths extends Dto implements PathsContainer
+class Paths extends ArrayDto implements PathsContainer
 {
-    use BasePathTrait;
-    use BootstrapPathTrait;
-    use ConfigPathTrait;
-    use LangPathTrait;
-    use DatabasePathTrait;
-    use EnvironmentPathTrait;
-    use ResourcePathTrait;
-    use StoragePathTrait;
-    use PublicPathTrait;
+    /**
+     * Defines the allowed properties and their
+     * data type.
+     *
+     * @type array<string, string>
+     */
+    protected array $allowed = [
+        'basePath' => 'string',
+        'bootstrapPath' => 'string',
+        'configPath' => 'string',
+        'langPath' => 'string',
+        'databasePath' => 'string',
+        'environmentPath' => 'string',
+        'resourcePath' => 'string',
+        'storagePath' => 'string',
+        'publicPath' => 'string',
+    ];
 
     /**
      * @inheritDoc
@@ -107,11 +106,23 @@ class Paths extends Dto implements PathsContainer
     }
 
     /*****************************************************************
-     * Defaults
+     * Accessors
      ****************************************************************/
 
     /**
-     * @inheritdoc
+     * Get the base directory path
+     *
+     * @return string|null
+     */
+    public function getBasePath(): string|null
+    {
+        return $this->properties['basePath'] ?? $this->getDefaultBasePath();
+    }
+
+    /**
+     * Get a default base directory path
+     *
+     * @return string|null
      */
     public function getDefaultBasePath(): string|null
     {
@@ -119,7 +130,19 @@ class Paths extends Dto implements PathsContainer
     }
 
     /**
-     * @inheritdoc
+     * Get the bootstrap directory path
+     *
+     * @return string|null
+     */
+    public function getBootstrapPath(): string|null
+    {
+        return $this->properties['bootstrapPath'] ?? $this->getDefaultBootstrapPath();
+    }
+
+    /**
+     * Get a default bootstrap directory path
+     *
+     * @return string|null
      */
     public function getDefaultBootstrapPath(): string|null
     {
@@ -127,7 +150,19 @@ class Paths extends Dto implements PathsContainer
     }
 
     /**
-     * @inheritdoc
+     * Get config directory path
+     *
+     * @return string|null
+     */
+    public function getConfigPath(): string|null
+    {
+        return $this->properties['configPath'] ?? $this->getDefaultConfigPath();
+    }
+
+    /**
+     * Get a default config directory path
+     *
+     * @return string|null
      */
     public function getDefaultConfigPath(): string|null
     {
@@ -135,7 +170,19 @@ class Paths extends Dto implements PathsContainer
     }
 
     /**
-     * @inheritDoc
+     * Get lang directory path
+     *
+     * @return string|null
+     */
+    public function getLangPath(): string|null
+    {
+        return $this->properties['langPath'] ?? $this->getDefaultLangPath();
+    }
+
+    /**
+     * Ge a default lang directory path
+     *
+     * @return string|null
      */
     public function getDefaultLangPath(): string|null
     {
@@ -152,7 +199,19 @@ class Paths extends Dto implements PathsContainer
     }
 
     /**
-     * @inheritdoc
+     * Get database directory path
+     *
+     * @return string|null
+     */
+    public function getDatabasePath(): string|null
+    {
+        return $this->properties['databasePath'] ?? $this->getDefaultDatabasePath();
+    }
+
+    /**
+     * Get a default database directory path
+     *
+     * @return string|null
      */
     public function getDefaultDatabasePath(): string|null
     {
@@ -160,7 +219,19 @@ class Paths extends Dto implements PathsContainer
     }
 
     /**
-     * @inheritdoc
+     * Get environment directory path
+     *
+     * @return string|null
+     */
+    public function getEnvironmentPath(): string|null
+    {
+        return $this->properties['environmentPath'] ?? $this->getDefaultEnvironmentPath();
+    }
+
+    /**
+     * Get a default environment directory path
+     *
+     * @return string|null
      */
     public function getDefaultEnvironmentPath(): string|null
     {
@@ -168,7 +239,19 @@ class Paths extends Dto implements PathsContainer
     }
 
     /**
-     * @inheritdoc
+     * Get resource directory path
+     *
+     * @return string|null
+     */
+    public function getResourcePath(): string|null
+    {
+        return $this->properties['resourcePath'] ?? $this->getDefaultResourcePath();
+    }
+
+    /**
+     * Get a default resource directory path
+     *
+     * @return string|null
      */
     public function getDefaultResourcePath(): string|null
     {
@@ -176,7 +259,19 @@ class Paths extends Dto implements PathsContainer
     }
 
     /**
-     * @inheritdoc
+     * Get storage directory path
+     *
+     * @return string|null
+     */
+    public function getStoragePath(): string|null
+    {
+        return $this->properties['storagePath'] ?? $this->getDefaultStoragePath();
+    }
+
+    /**
+     * Get a default storage directory path
+     *
+     * @return string|null
      */
     public function getDefaultStoragePath(): string|null
     {
@@ -184,7 +279,19 @@ class Paths extends Dto implements PathsContainer
     }
 
     /**
-     * @inheritdoc
+     * Get public directory path
+     *
+     * @return string|null
+     */
+    public function getPublicPath(): string|null
+    {
+        return $this->properties['publicPath'] ?? $this->getDefaultPublicPath();
+    }
+
+    /**
+     * Get a default public directory path
+     *
+     * @return string|null
      */
     public function getDefaultPublicPath(): string|null
     {

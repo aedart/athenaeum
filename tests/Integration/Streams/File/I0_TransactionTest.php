@@ -10,10 +10,6 @@ use Throwable;
 /**
  * I0_TransactionTest
  *
- * @group streams
- * @group streams-file-i0
- * @group stream-transaction
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
@@ -25,8 +21,6 @@ use Throwable;
 class I0_TransactionTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      * @throws \Aedart\Contracts\Streams\Exceptions\TransactionException

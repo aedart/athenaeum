@@ -30,7 +30,7 @@ class ArgumentFaker
      * Able to generate fake data for scalar types and mocks
      * for objects, if arguments are type-hinted
      *
-     * @param string $target Class path
+     * @param class-string $target Class path
      * @param string $method
      * @param Generator|null $faker [optional] If none given, a generator is automatically created
      *
@@ -98,7 +98,7 @@ class ArgumentFaker
     /**
      * Returns a mock for the given target
      *
-     * @param string $target Class path
+     * @param class-string $target Class path
      *
      * @return MockInterface
      */

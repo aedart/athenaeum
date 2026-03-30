@@ -16,7 +16,7 @@
     ],
     "type": "library",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "aedart/athenaeum-contracts": "^9.26",
         "aedart/athenaeum-properties": "^9.26",
         "aedart/athenaeum-utils": "^9.26"

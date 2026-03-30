@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * F0_HashingTest
  *
- * @group streams
- * @group streams-file-f0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
@@ -25,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class F0_HashingTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

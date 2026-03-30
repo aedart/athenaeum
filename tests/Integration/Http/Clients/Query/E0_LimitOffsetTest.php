@@ -13,11 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E0_LimitOffsetTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-e0
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -107,9 +102,6 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesLimit
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -131,9 +123,6 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesOffset
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -155,9 +144,6 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesLimitAndOffset
-     *
      * @param string $grammar
      * @param string $expected
      *

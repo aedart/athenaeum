@@ -9,9 +9,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * UnitTestCaseTest
  *
- * @group testing
- * @group testCase
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Testing
  */
@@ -21,18 +18,12 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class UnitTestCaseTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canTestSomething()
     {
         $this->assertTrue(true);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function hasFakerDependency()
     {

@@ -50,6 +50,8 @@ use Throwable;
 /**
  * Application
  *
+ * @template S of \Illuminate\Support\ServiceProvider
+ *
  * @see \Aedart\Contracts\Core\Application
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
@@ -146,7 +148,7 @@ class Application extends IoC implements
     /**
      * Default core bootstrappers
      *
-     * @var string[] Class paths
+     * @var array<CanBeBootstrapped|class-string<CanBeBootstrapped>> Class paths
      */
     protected array $defaultCoreBootstrappers = [
         DetectAndLoadEnvironment::class,
@@ -160,7 +162,7 @@ class Application extends IoC implements
     /**
      * Default core service providers
      *
-     * @var string[] Class paths
+     * @var array<S|class-string<S>> Class paths
      */
     protected array $defaultCoreServiceProviders = [
         CoreServiceProvider::class,
@@ -634,7 +636,7 @@ class Application extends IoC implements
     /**
      * @inheritdoc
      */
-    public function registerMultipleServiceProviders(array $providers)
+    public function registerMultipleServiceProviders(array $providers): static
     {
         $registrar = $this->getServiceProviderRegistrar();
 

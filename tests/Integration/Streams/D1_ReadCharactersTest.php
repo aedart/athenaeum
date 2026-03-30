@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D1_ReadCharactersTest
  *
- * @group streams
- * @group streams-d1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -24,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class D1_ReadCharactersTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */
@@ -49,8 +44,6 @@ class D1_ReadCharactersTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

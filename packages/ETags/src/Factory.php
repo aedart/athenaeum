@@ -117,7 +117,7 @@ class Factory implements
     /**
      * Returns class path to ETag
      *
-     * @return string
+     * @return class-string<ETagInterface>
      */
     protected function eTagClass(): string
     {

@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * StorageDiskTest
  *
- * @group flysystem
- * @group flysystem-db
- * @group flysystem-db-storage-disk
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Storage
  */
@@ -33,9 +29,9 @@ class StorageDiskTest extends FlysystemDbTestCase
     /**
      * @inheritdoc
      */
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app): void
     {
-        parent::getEnvironmentSetUp($app);
+        parent::defineEnvironment($app);
 
         // Add database storage disk to configuration.
         $app['config']->set('filesystems.disks.database', [
@@ -67,8 +63,6 @@ class StorageDiskTest extends FlysystemDbTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -84,8 +78,6 @@ class StorageDiskTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException

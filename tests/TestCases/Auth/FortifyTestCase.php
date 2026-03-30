@@ -41,7 +41,7 @@ abstract class FortifyTestCase extends LaravelTestCase
      * @throws InvalidPathException
      * @throws FileParserException
      */
-    protected function _before()
+    protected function _before(): void
     {
         $this->mustGenerateAppKey();
 
@@ -59,7 +59,7 @@ abstract class FortifyTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function _after()
+    protected function _after(): void
     {
         parent::_after();
     }
@@ -78,7 +78,7 @@ abstract class FortifyTestCase extends LaravelTestCase
     /**
      * @inheritdoc
      */
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app): void
     {
         TestingConnection::enableConnection();
     }

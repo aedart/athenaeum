@@ -13,9 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * B0_CopyTest
  *
- * @group streams
- * @group streams-file-b0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
@@ -27,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class B0_CopyTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -48,8 +43,6 @@ class B0_CopyTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -72,8 +65,6 @@ class B0_CopyTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -98,8 +89,6 @@ class B0_CopyTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -124,8 +113,6 @@ class B0_CopyTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -154,8 +141,6 @@ class B0_CopyTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -186,8 +171,6 @@ class B0_CopyTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -218,8 +201,6 @@ class B0_CopyTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException

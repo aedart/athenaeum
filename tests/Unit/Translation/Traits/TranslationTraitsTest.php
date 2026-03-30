@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * TranslationTraitsTest
  *
- * @group translation
- * @group translation-traits
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Translation\Traits
  */
@@ -44,9 +40,6 @@ class TranslationTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

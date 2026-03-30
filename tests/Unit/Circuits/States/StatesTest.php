@@ -5,9 +5,9 @@ namespace Aedart\Tests\Unit\Circuits\States;
 use Aedart\Circuits\States\ClosedState;
 use Aedart\Circuits\States\HalfOpenState;
 use Aedart\Circuits\States\OpenState;
-use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
 use Aedart\Contracts\Circuits\State;
+use Aedart\Contracts\Circuits\States\Identifier;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Testing\TestCases\UnitTestCase;
 use Aedart\Utils\Json;
@@ -20,9 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 
 /**
  * StatesTest
- *
- * @group circuits
- * @group circuits-states
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Circuits\States
@@ -40,14 +37,15 @@ class StatesTest extends UnitTestCase
     /**
      * Provides state instances
      *
-     * @return array[]
+     * @return array<string, class-string<State>[]>
+     * @throws UnknownStateException
      */
     public function providesStates(): array
     {
         return [
-            'closed' => [ ClosedState::make() ],
-            'open' => [ OpenState::make() ],
-            'half open' => [ HalfOpenState::make() ],
+            'closed' => [ ClosedState::class ],
+            'open' => [ OpenState::class ],
+            'half open' => [ HalfOpenState::class ],
         ];
     }
 
@@ -65,7 +63,7 @@ class StatesTest extends UnitTestCase
     public function randomStateId(): int
     {
         return $this->getFaker()->randomElement(
-            array_keys(ClosedState::make()->validStates())
+            array_map(fn (Identifier $id) => $id->value, Identifier::cases())
         );
     }
 
@@ -74,52 +72,47 @@ class StatesTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
-     * @param mixed $state
+     * @param class-string<State> $state
+     * @throws UnknownStateException
      */
     #[DataProvider('providesStates')]
     #[Test]
-    public function canCreateInstance($state)
+    public function canCreateInstance(string $state): void
     {
+        $state = $state::make();
+
         $this->assertInstanceOf(State::class, $state);
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
-     * @param State $state
+     * @param class-string<State> $state
+     * @throws UnknownStateException
      */
     #[DataProvider('providesStates')]
     #[Test]
-    public function hasIdentifierAndName($state)
+    public function hasIdentifierAndName(string $state): void
     {
-        $id = $state->id();
+        $state = $state::make();
+
+        $id = $state->id()->value;
         $name = $state->name();
 
         ConsoleDebugger::output($id, $name);
 
-        $this->assertTrue(in_array($id, [
-            CircuitBreaker::CLOSED,
-            CircuitBreaker::OPEN,
-            CircuitBreaker::HALF_OPEN,
-        ]), 'Invalid id');
-
-        $this->assertNotEmpty($name, 'no name');
+        $this->assertIsInt($id, 'No ID for state');
+        $this->assertNotEmpty($name, 'No name for state');
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
-     * @param State $state
+     * @param class-string<State> $state
+     * @throws UnknownStateException
      */
     #[DataProvider('providesStates')]
     #[Test]
-    public function hasDefaultCreatedAt($state)
+    public function hasDefaultCreatedAt(string $state): void
     {
+        $state = $state::make();
+
         $createdAt = $state->createdAt();
 
         ConsoleDebugger::output((string) $createdAt);
@@ -128,15 +121,15 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
-     * @param State $state
+     * @param class-string<State> $state
+     * @throws UnknownStateException
      */
     #[DataProvider('providesStates')]
     #[Test]
-    public function canCreateStateThatExpires($state)
+    public function canCreateStateThatExpires(string $state): void
     {
+        $state = $state::make();
+
         $expiresAt = Date::now()->subRealSeconds(5);
 
         /** @var State $state */
@@ -149,15 +142,15 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
-     * @param State $state
+     * @param class-string<State> $state
+     * @throws UnknownStateException
      */
     #[DataProvider('providesStates')]
     #[Test]
-    public function canDetermineIfExpired($state)
+    public function canDetermineIfExpired(string $state): void
     {
+        $state = $state::make();
+
         // By default, when no expires at provided, state should
         // not be expired
         $this->assertFalse($state->hasExpired(), 'Should not be expired, when no expires at provided');
@@ -175,15 +168,15 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
-     * @param State $state
+     * @param class-string<State> $state
+     * @throws UnknownStateException
      */
     #[DataProvider('providesStates')]
     #[Test]
-    public function canCreateStateWithPreviousId($state)
+    public function canCreateStateWithPreviousId(string $state): void
     {
+        $state = $state::make();
+
         // By default, when none provided, "previous" should be null
         $this->assertNull($state->previous(), 'Previous should be null, when no provided');
 
@@ -193,21 +186,19 @@ class StatesTest extends UnitTestCase
         /** @var State $state */
         $state = $state::make([ 'previous' => $previous ]);
 
-        $result = $state->previous();
-        ConsoleDebugger::output((string) $result);
+        $result = $state->previous()?->value;
+        ConsoleDebugger::output($result);
 
         $this->assertSame($previous, $result, 'Incorrect previous identifier specified');
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
-     * @param State $state
+     * @param class-string<State> $state
+     * @throws UnknownStateException
      */
     #[DataProvider('providesStates')]
     #[Test]
-    public function canExportToArray($state)
+    public function canExportToArray(string $state): void
     {
         $data = [
             'created_at' => Date::now(),
@@ -229,14 +220,12 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
-     * @param State $state
+     * @param class-string<State> $state
+     * @throws UnknownStateException
      */
     #[DataProvider('providesStates')]
     #[Test]
-    public function canExportToJson($state)
+    public function canExportToJson(string $state): void
     {
         $data = [
             'created_at' => Date::now(),
@@ -254,16 +243,14 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
-     * @param State $state
+     * @param class-string<State> $state
      *
      * @throws JsonException
+     * @throws UnknownStateException
      */
     #[DataProvider('providesStates')]
     #[Test]
-    public function canConvertToJson($state)
+    public function canConvertToJson(string $state): void
     {
         $data = [
             'created_at' => Date::now(),
@@ -281,14 +268,11 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
-     * @param State $state
+     * @param class-string<State> $state
      */
     #[DataProvider('providesStates')]
     #[Test]
-    public function canCastToString($state)
+    public function canCastToString(string $state): void
     {
         $result = (string) $state;
         ConsoleDebugger::output($result);
@@ -297,14 +281,12 @@ class StatesTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesStates
-     *
-     * @param State $state
+     * @param class-string<State> $state
+     * @throws UnknownStateException
      */
     #[DataProvider('providesStates')]
     #[Test]
-    public function canSerializeAndUnserialize($state)
+    public function canSerializeAndUnserialize(string $state): void
     {
         // NOTE: Dates are passed on string here on purpose, otherwise
         // we might have too much precision (milliseconds) on "now", which
@@ -324,10 +306,11 @@ class StatesTest extends UnitTestCase
 
         /** @var State $unserialized */
         $unserialized = unserialize($serialised);
+        ConsoleDebugger::output($unserialized);
 
-        $this->assertInstanceOf(get_class($state), $unserialized);
+        $this->assertInstanceOf($state::class, $unserialized, 'Incorrect unserialization');
         $this->assertTrue($unserialized->createdAt()->eq($data['created_at']), 'Incorrect created at serialisation');
         $this->assertTrue($unserialized->expiresAt()->eq($data['expires_at']), 'Incorrect expires at serialisation');
-        $this->assertSame($data['previous'], $unserialized->previous(), 'Incorrect previous id serialisation');
+        $this->assertSame($data['previous'], $unserialized->previous()?->value, 'Incorrect previous id serialisation');
     }
 }

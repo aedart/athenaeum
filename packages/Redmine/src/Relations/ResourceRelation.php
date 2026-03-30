@@ -27,7 +27,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
     /**
      * Class path to the related resource
      *
-     * @var string|ApiResource Class path
+     * @var class-string<ApiResource>|ApiResource Class path
      */
     protected string|ApiResource $related;
 
@@ -41,7 +41,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
     /**
      * Filters to be applied onto the related resource's request.
      *
-     * @var callable[]
+     * @var array<callable(Builder $request, ApiResource $resource): Builder>
      */
     protected array $filters = [];
 
@@ -56,7 +56,7 @@ abstract class ResourceRelation implements ResourceRelationInterface
      * ResourceRelation
      *
      * @param ApiResource $parent
-     * @param string|ApiResource $related Class path or Api resource instance
+     * @param class-string<ApiResource>|ApiResource $related Class path or Api resource instance
      */
     public function __construct(ApiResource $parent, string|ApiResource $related)
     {
@@ -151,11 +151,11 @@ abstract class ResourceRelation implements ResourceRelationInterface
     /**
      * Wraps all includes and filters into a single filter callback
      *
-     * @return callable
+     * @return callable(Builder $request, ApiResource $resource): Builder
      */
     protected function wrapFilters(): callable
     {
-        return function (Builder $request, ApiResource $resource) {
+        return function (Builder $request, ApiResource $resource): Builder {
             // Apply includes
             $applied = $resource->applyIncludes(
                 $this->getIncludes(),

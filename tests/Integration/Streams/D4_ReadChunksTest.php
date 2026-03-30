@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D4_ReadChunksTest
  *
- * @group streams
- * @group streams-d4
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams
  */
@@ -24,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class D4_ReadChunksTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

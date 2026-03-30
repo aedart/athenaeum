@@ -78,7 +78,7 @@ class Stream implements StreamInterface
      * Callback that determines if stream's resource
      * supports locking
      *
-     * @var callable
+     * @var callable(resource): bool
      */
     protected $supportsLockingCallback = null;
 
@@ -529,7 +529,7 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function when(callable|bool $result, callable $callback, ?callable $otherwise = null): static
+    public function when(callable|bool $result, callable $callback, callable|null $otherwise = null): static
     {
         if (is_callable($result)) {
             $result = $result($this);
@@ -547,7 +547,7 @@ class Stream implements StreamInterface
     /**
      * @inheritDoc
      */
-    public function unless(callable|bool $result, callable $callback, ?callable $otherwise = null): static
+    public function unless(callable|bool $result, callable $callback, callable|null $otherwise = null): static
     {
         if (is_callable($result)) {
             $result = $result($this);
@@ -695,7 +695,7 @@ class Stream implements StreamInterface
     /**
      * Set callback that determines if stream's resource supports locking
      *
-     * @param  callable  $callback
+     * @param  callable(resource): bool  $callback
      *
      * @return self
      */
@@ -709,7 +709,7 @@ class Stream implements StreamInterface
     /**
      * Get callback for determining if stream's resource supports locking
      *
-     * @return callable
+     * @return callable(resource): bool
      */
     public function getSupportsLockingCallback(): callable
     {
@@ -723,7 +723,7 @@ class Stream implements StreamInterface
     /**
      * Returns default callback for determining if stream's resource supports locking
      *
-     * @return callable
+     * @return callable(resource): bool
      */
     public function getDefaultSupportsLockingCallback(): callable
     {

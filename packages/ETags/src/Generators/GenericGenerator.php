@@ -26,20 +26,22 @@ class GenericGenerator extends BaseGenerator
         // Note: This generator ignores the "weak" flag - it treats all content
         // in the same way; it attempts to convert all content into a string...
 
-        if (is_array($content)) {
-            return implode('', array_map(fn ($value) => $this->resolveContent($value, $weak), $content));
-        } elseif ($content instanceof Arrayable) {
-            return $this->resolveContent($content->toArray(), $weak);
-        }
-
         return match (true) {
-            is_string($content) || is_numeric($content) || $content instanceof Stringable => (string) $content,
+            is_array($content) => implode('', array_map(fn ($value) => $this->resolveContent($value, $weak), $content)),
+
+            is_string($content),
+            is_numeric($content),
+            $content instanceof Stringable,
+            empty($content) => (string) $content,
+
             is_bool($content) && $content => 'true',
             is_bool($content) && !$content => 'false',
-            empty($content) => '',
+
+            $content instanceof Arrayable => $this->resolveContent($content->toArray(), $weak),
             $content instanceof DateTimeInterface => $content->format(DateTimeInterface::RFC3339_EXTENDED),
             $content instanceof Jsonable => $content->toJson(),
             $content instanceof JsonSerializable => Json::encode($content->jsonSerialize()),
+
             default => throw new UnableToGenerateETag(sprintf('Unable to resolve content: %s', var_export($content, true)))
         };
     }

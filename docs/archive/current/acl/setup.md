@@ -4,7 +4,7 @@ description: How to setup ACL
 
 # Setup
 
-In this section, setup of the ACL package is covered. It goes without saying, you should have some prior knowledge about how to work with Laravel's [Authorization](https://laravel.com/docs/12.x/authorization), before attempting to use this package's components.
+In this section, setup of the ACL package is covered. It goes without saying, you should have some prior knowledge about how to work with Laravel's [Authorization](https://laravel.com/docs/13.x/authorization), before attempting to use this package's components.
 
 [[TOC]]
 

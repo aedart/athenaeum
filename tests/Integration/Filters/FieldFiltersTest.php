@@ -19,13 +19,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * FieldFiltersTest
  *
- * @group filters
- * @group filters-fields
- * @group filters-numeric
- * @group filters-boolean
- * @group filters-datetime
- * @group filters-string
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters
  */
@@ -116,9 +109,6 @@ class FieldFiltersTest extends FiltersTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providersFieldFilters
-     *
      * @param string $class FieldCriteria class path
      * @param string $field
      * @param string $operator

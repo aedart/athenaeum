@@ -55,7 +55,7 @@ class TraitTester
      * TraitTester constructor.
      *
      * @param TestCase $testCase
-     * @param string $trait Trait class path
+     * @param class-string $trait Trait class path
      * @param string|null $property [optional]
      *
      * @throws ReflectionException
@@ -264,7 +264,7 @@ class TraitTester
      */
     public function makeTraitMock(string $trait): MockInterface
     {
-        $generated = (new MockTrait($trait))->generate();
+        $generated = new MockTrait($trait)->generate();
 
         return Mockery::mock($generated)->makePartial();
     }

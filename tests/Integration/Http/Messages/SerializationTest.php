@@ -13,10 +13,6 @@ use Teapot\StatusCode\Http;
 /**
  * SerializationTest
  *
- * @group http
- * @group http-messages
- * @group http-message-serialisation
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Messages
  */
@@ -27,9 +23,6 @@ use Teapot\StatusCode\Http;
 )]
 class SerializationTest extends HttpSerializationTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainFactory()
     {
@@ -39,8 +32,6 @@ class SerializationTest extends HttpSerializationTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Aedart\Contracts\Http\Messages\Exceptions\SerializationException
      */
     #[Test]
@@ -54,8 +45,6 @@ class SerializationTest extends HttpSerializationTestCase
     }
 
     /**
-     * @test
-     *
      * @throws SerializationException
      * @throws \JsonException
      */
@@ -94,8 +83,6 @@ class SerializationTest extends HttpSerializationTestCase
     }
 
     /**
-     * @test
-     *
      * @throws SerializationException
      * @throws \JsonException
      */
@@ -141,8 +128,6 @@ class SerializationTest extends HttpSerializationTestCase
     }
 
     /**
-     * @test
-     *
      * @throws SerializationException
      * @throws \JsonException
      */
@@ -176,8 +161,6 @@ class SerializationTest extends HttpSerializationTestCase
     }
 
     /**
-     * @test
-     *
      * @throws SerializationException
      * @throws \JsonException
      */

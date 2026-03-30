@@ -13,9 +13,6 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * B0_HeadersTest
  *
- * @group http-clients
- * @group http-clients-d0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -27,9 +24,6 @@ use Psr\Http\Message\ResponseInterface;
 class D0_HeadersTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -51,9 +45,6 @@ class D0_HeadersTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -77,9 +68,6 @@ class D0_HeadersTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException
@@ -104,9 +92,6 @@ class D0_HeadersTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesClientProfiles
-     *
      * @param string $profile
      *
      * @throws ProfileNotFoundException

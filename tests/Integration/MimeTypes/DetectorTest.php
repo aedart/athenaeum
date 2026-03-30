@@ -16,9 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * DetectorTest
  *
- * @group mime-types
- * @group mime-types-detector
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\MimeTypes
  */
@@ -29,8 +26,6 @@ use PHPUnit\Framework\Attributes\Test;
 class DetectorTest extends MimeTypesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -43,8 +38,6 @@ class DetectorTest extends MimeTypesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws MimeTypeDetectionException
@@ -61,8 +54,6 @@ class DetectorTest extends MimeTypesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws MimeTypeDetectionException
@@ -78,8 +69,6 @@ class DetectorTest extends MimeTypesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws MimeTypeDetectionException
@@ -99,8 +88,6 @@ class DetectorTest extends MimeTypesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws MimeTypeDetectionException
@@ -116,8 +103,6 @@ class DetectorTest extends MimeTypesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws MimeTypeDetectionException

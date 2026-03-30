@@ -11,10 +11,6 @@ use Throwable;
 /**
  * RangeTest
  *
- * @group etags
- * @group preconditions
- * @group additional-preconditions-range
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Preconditions\Additional
  */
@@ -26,8 +22,6 @@ use Throwable;
 class RangeTest extends PreconditionsTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws HttpExceptionInterface
      * @throws Throwable
@@ -65,8 +59,6 @@ class RangeTest extends PreconditionsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      * @throws HttpExceptionInterface
      * @throws Throwable

@@ -15,9 +15,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ConfigLoaderTest
  *
- * @group config
- * @group config-loader
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Config
  */
@@ -62,9 +59,6 @@ class ConfigLoaderTest extends LaravelTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
     public function canObtainInstance()
     {
@@ -74,8 +68,6 @@ class ConfigLoaderTest extends LaravelTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Aedart\Contracts\Config\Loaders\Exceptions\InvalidPathException
      */
     #[Test]
@@ -91,9 +83,6 @@ class ConfigLoaderTest extends LaravelTestCase
         $this->assertSame($this->directory(), $convertedPath);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canLoadConfigurationFiles()
     {

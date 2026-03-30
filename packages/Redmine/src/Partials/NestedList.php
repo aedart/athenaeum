@@ -61,7 +61,7 @@ abstract class NestedList implements
     /**
      * Returns the type of item this list contains
      *
-     * @return string Class path to some kind of partial DTO
+     * @return class-string Class path to some kind of partial DTO
      */
     abstract public function itemType(): string;
 

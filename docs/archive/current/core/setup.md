@@ -44,12 +44,12 @@ return new \Aedart\Core\Application([
 ```
 
 ::: tip
-You can read more about the directory structure, e.g. what each directory is intended for, inside [Laravel's documentation](https://laravel.com/docs/12.x/structure#the-bootstrap-directory).
+You can read more about the directory structure, e.g. what each directory is intended for, inside [Laravel's documentation](https://laravel.com/docs/13.x/structure#the-bootstrap-directory).
 :::
 
 ## The Environment File (`.env`)
 
-In your `environmentPath` directory, create an [environment file](https://laravel.com/docs/12.x/configuration#environment-configuration) (`.env`).
+In your `environmentPath` directory, create an [environment file](https://laravel.com/docs/13.x/configuration#environment-configuration) (`.env`).
 At the very minimum, it should contain the following:
 
 ```ini
@@ -72,7 +72,7 @@ EXCEPTION_HANDLING_ENABLED=false
 ## The Console Application (`cli.php`)
 
 Create a `cli.php` file inside your `basePath` directory. Once again, the naming of the file does not matter.
-This file is where Laravel's [Console Application](https://laravel.com/docs/12.x/artisan) (_a lightweight version of Artisan_) is going to be created.
+This file is where Laravel's [Console Application](https://laravel.com/docs/13.x/artisan) (_a lightweight version of Artisan_) is going to be created.
 
 ```php
 <?php
@@ -151,7 +151,7 @@ For now, it's important that these are available in your application.
 ::: tip Note
 _If you are familiar with Laravel's `vendor:publish` command, you will immediately notice that this "publish assets" command does not offer the same features, as the one provided by Laravel.
 The `vendor:publish-all` is inspired by Laravel's publish command, yet it is not intended to offer the exact same features.
-Should you require more advanced publish features, then you will have to [create your own](https://laravel.com/docs/12.x/artisan#writing-commands) publish command._
+Should you require more advanced publish features, then you will have to [create your own](https://laravel.com/docs/13.x/artisan#writing-commands) publish command._
 :::
 
 ## Web

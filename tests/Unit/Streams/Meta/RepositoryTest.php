@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * RepositoryTest
  *
- * @group streams
- * @group streams-meta
- * @group streams-meta-repository
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Streams\Meta
  */
@@ -47,8 +43,6 @@ class RepositoryTest extends UnitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -60,8 +54,6 @@ class RepositoryTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -81,8 +73,6 @@ class RepositoryTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -99,8 +89,6 @@ class RepositoryTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -119,8 +107,6 @@ class RepositoryTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -142,8 +128,6 @@ class RepositoryTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -166,8 +150,6 @@ class RepositoryTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

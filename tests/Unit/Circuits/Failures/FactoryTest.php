@@ -13,10 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * FactoryTest
  *
- * @group circuits
- * @group circuits-failure
- * @group circuits-failure-factory
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Circuits\Failures
  */
@@ -45,22 +41,16 @@ class FactoryTest extends UnitTestCase
      * Actual Tests
      ****************************************************************/
 
-    /**
-     * @test
-     */
     #[Test]
-    public function canObtainInstance()
+    public function canObtainInstance(): void
     {
         $factory = $this->makeFailureFactory();
 
         $this->assertInstanceOf(FailureFactory::class, $factory);
     }
 
-    /**
-     * @test
-     */
     #[Test]
-    public function canCreateFailure()
+    public function canCreateFailure(): void
     {
         $factory = $this->makeFailureFactory();
 

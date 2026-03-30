@@ -17,11 +17,6 @@ use Xenolope\Quahog\Result;
 /**
  * ClamAvTest
  *
- * @group antivirus
- * @group antivirus-scanners
- * @group antivirus-scanners-clamav
- * @group clamav
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus\Scanners
  */
@@ -100,8 +95,6 @@ class ClamAvTest extends AntivirusTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -126,8 +119,6 @@ class ClamAvTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -153,8 +144,6 @@ class ClamAvTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException

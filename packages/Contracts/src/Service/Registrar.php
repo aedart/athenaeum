@@ -7,6 +7,8 @@ namespace Aedart\Contracts\Service;
  *
  * Able to register and boot service providers.
  *
+ * @template S of \Illuminate\Support\ServiceProvider
+ *
  * @see \Illuminate\Support\ServiceProvider
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
@@ -17,19 +19,19 @@ interface Registrar
     /**
      * Register a service provider
      *
-     * @param \Illuminate\Support\ServiceProvider|string $provider Service Provider instance or string namespace of provider
+     * @param S|class-string<S> $provider Service Provider instance or string namespace of provider
      * @param bool $boot [optional] Boot the given provider after registration, if not already booted
      *
      * @return bool False if provider already registered
-     * @see boot()
      *
+     * @see boot()
      */
     public function register($provider, bool $boot = true): bool;
 
     /**
      * Register multiple service providers
      *
-     * @param \Illuminate\Support\ServiceProvider[]|string[] $providers Service Provider instances or list of string namespaces
+     * @param array<S|class-string<S>> $providers Service Provider instances or list of string namespaces
      * @param bool $boot [optional] Boot providers after registration, if not already booted
      * @param bool $safeBoot [optional] If true, then providers are only booted after all
      *                       the given providers have been registered.
@@ -42,20 +44,20 @@ interface Registrar
     /**
      * Boot service provider
      *
-     * @param \Illuminate\Support\ServiceProvider $provider
+     * @param S $provider
      *
      * @return bool False if already booted or provider does not contain a boot method
-     * @see booted()
      *
+     * @see booted()
      */
     public function boot($provider): bool;
 
     /**
      * Boot the given list of service providers
      *
-     * @param \Illuminate\Support\ServiceProvider[] $providers
-     * @see boot()
+     * @param array<S> $providers
      *
+     * @see boot()
      */
     public function bootMultiple(array $providers): void;
 
@@ -72,7 +74,7 @@ interface Registrar
     /**
      * Determine if service provider has been registered
      *
-     * @param \Illuminate\Support\ServiceProvider|string $provider
+     * @param S|class-string<S> $provider
      *
      * @return bool
      */
@@ -81,7 +83,7 @@ interface Registrar
     /**
      * Determine if given service provider has been booted
      *
-     * @param \Illuminate\Support\ServiceProvider $provider
+     * @param S $provider
      *
      * @return bool
      */
@@ -90,7 +92,7 @@ interface Registrar
     /**
      * Get the registered service providers
      *
-     * @return \Illuminate\Support\ServiceProvider[]
+     * @return array<S>
      */
     public function providers(): array;
 
@@ -98,25 +100,25 @@ interface Registrar
      * Get the registered service providers instances that match
      * given service provider
      *
-     * @param \Illuminate\Support\ServiceProvider|string $provider Service provider instance or class path
+     * @param S|class-string<S> $provider Service provider instance or class path
      *
-     * @return \Illuminate\Support\ServiceProvider[]
+     * @return array<S>
      */
     public function getProviders($provider): array;
 
     /**
      * Get the booted service providers
      *
-     * @return \Illuminate\Support\ServiceProvider[]
+     * @return array<S>
      */
     public function booted(): array;
 
     /**
      * Create service provider instance, if required
      *
-     * @param \Illuminate\Support\ServiceProvider|string $provider Service Provider or class path
+     * @param S|class-string<S> $provider Service Provider or class path
      *
-     * @return \Illuminate\Support\ServiceProvider
+     * @return S
      */
     public function resolveProvider($provider);
 }

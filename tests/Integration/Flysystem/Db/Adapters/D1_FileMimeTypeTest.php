@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D1_FileMimeTypeTest
  *
- * @group flysystem
- * @group flysystem-db
- * @group flysystem-db-d1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
@@ -27,8 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 class D1_FileMimeTypeTest extends FlysystemDbTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \League\Flysystem\FilesystemException
@@ -54,8 +48,6 @@ class D1_FileMimeTypeTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \League\Flysystem\FilesystemException
@@ -83,8 +75,6 @@ class D1_FileMimeTypeTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \League\Flysystem\FilesystemException

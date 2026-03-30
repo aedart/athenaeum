@@ -13,10 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * BaseBuilderTest
  *
- * @group filters
- * @group filters-builder
- * @group filters-base-builder
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Filters\Builders
  */
@@ -28,8 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 class BaseBuilderTest extends FiltersTestCase
 {
     /**
-     * @test
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
     #[Test]
@@ -63,8 +57,6 @@ class BaseBuilderTest extends FiltersTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
     #[Test]
@@ -97,8 +89,6 @@ class BaseBuilderTest extends FiltersTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
     #[Test]

@@ -15,4 +15,4 @@ Athenaeum become the chosen name for this project and has existed since then.
 
 ## Meaning of "Athenaeum"
 
-> "[...] Used in the titles of periodicals concerned with literature, science, and art. [...]" ([Lexico](https://www.lexico.com/en/definition/athenaeum))
+> "[...] used in the titles of periodicals, libraries, or institutions dedicated to the promotion of literature, science, and art. [...]" ([Google AI](https://share.google/aimode/X4ypMAKvthNSSc3Gp))

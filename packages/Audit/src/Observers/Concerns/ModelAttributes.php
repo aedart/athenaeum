@@ -5,12 +5,13 @@ namespace Aedart\Audit\Observers\Concerns;
 
 use Aedart\Audit\Concerns\CallbackReason;
 use Aedart\Utils\Helpers\Invoker;
-use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Throwable;
 
 /**
  * Concerns Model Attributes
+ *
+ * @deprecated Since v10.x, Use {@see \Aedart\Audit\Formatters\DefaultRecordFormatter} instead.
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Audit\Observers\Concerns
@@ -22,13 +23,16 @@ trait ModelAttributes
     /**
      * Resolves the given model's original data (attributes)
      *
-     * @param Model $model
-     * @param string $type
+     * @param  Model  $model
+     * @param  string  $type
      *
      * @return mixed
      *
      * @throws Throwable
+     *
+     * @deprecated Since v10.x, Will be removed in next major version.
      */
+    #[\Deprecated(message: "ModelAttributes trait will be removed in next major version. Use \Aedart\Audit\Formatters\DefaultRecordFormatter instead.", since: "10.x")]
     protected function resolveOriginalData(Model $model, string $type): mixed
     {
         return Invoker::invoke([$model, 'originalData'])
@@ -42,13 +46,16 @@ trait ModelAttributes
     /**
      * Resolves the given model's changed data (attributes)
      *
-     * @param Model $model
-     * @param string $type
+     * @param  Model  $model
+     * @param  string  $type
      *
      * @return mixed
      *
      * @throws Throwable
+     *
+     * @deprecated Since v10.x, Will be removed in next major version.
      */
+    #[\Deprecated(message: "ModelAttributes trait will be removed in next major version. Use \Aedart\Audit\Formatters\DefaultRecordFormatter instead.", since: "10.x")]
     protected function resolveChangedData(Model $model, string $type): mixed
     {
         return Invoker::invoke([$model, 'changedData'])
@@ -66,7 +73,10 @@ trait ModelAttributes
      * @param array|null $changed
      *
      * @return array|null
+     *
+     * @deprecated Since v10.x, Will be removed in next major version.
      */
+    #[\Deprecated(message: "ModelAttributes trait will be removed in next major version. Use \Aedart\Audit\Formatters\DefaultRecordFormatter instead.", since: "10.x")]
     protected function reduceOriginal(array|null $original, array|null $changed): array|null
     {
         if (!empty($original) && !empty($changed)) {
@@ -83,7 +93,10 @@ trait ModelAttributes
      * @param string $type
      *
      * @return string|null
+     *
+     * @deprecated Since v10.x, Will be removed in next major version.
      */
+    #[\Deprecated(message: "ModelAttributes trait will be removed in next major version. Use \Aedart\Audit\Formatters\DefaultRecordFormatter instead.", since: "10.x")]
     protected function resolveAuditTrailMessage(Model $model, string $type): string|null
     {
         // Resolve message from "callback", when one exists
@@ -101,25 +114,16 @@ trait ModelAttributes
     }
 
     /**
-     * Format the given date time
-     *
-     * @param DateTimeInterface $date
-     *
-     * @return string
-     */
-    protected function formatDatetime(DateTimeInterface $date): string
-    {
-        return $date->format(DateTimeInterface::RFC3339);
-    }
-
-    /**
      * Plucks items from target that match given keys
      *
      * @param string[] $keys The keys to pluck from target
      * @param array $target
      *
      * @return array
+     *
+     * @deprecated Since v10.x, Will be removed in next major version.
      */
+    #[\Deprecated(message: "ModelAttributes trait will be removed in next major version. Use \Aedart\Audit\Formatters\DefaultRecordFormatter instead.", since: "10.x")]
     protected function pluck(array $keys, array $target): array
     {
         return collect($target)

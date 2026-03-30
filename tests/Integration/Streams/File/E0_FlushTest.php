@@ -10,9 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * E0_FlushTest
  *
- * @group streams
- * @group streams-file-e0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
@@ -24,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class E0_FlushTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      * @throws \Aedart\Contracts\Streams\Exceptions\StreamException
      */

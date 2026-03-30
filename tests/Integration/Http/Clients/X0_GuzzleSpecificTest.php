@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * X0_GuzzleSpecificTest
  *
- * @group http-clients
- * @group http-clients-x0
- * @group guzzle
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients
  */
@@ -26,8 +22,6 @@ use PHPUnit\Framework\Attributes\Test;
 class X0_GuzzleSpecificTest extends HttpClientsTestCase
 {
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]
@@ -41,8 +35,6 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]
@@ -56,8 +48,6 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]
@@ -70,9 +60,6 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
         $this->assertGreaterThan(0, $result, 'Timeout SHOULD be set!');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canSpecifyTimeout()
     {
@@ -88,8 +75,6 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]
@@ -109,8 +94,6 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]
@@ -126,8 +109,6 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]
@@ -144,9 +125,6 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
         $this->assertSame(5, $result['max'], 'Max amount of redirects is incorrect');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canUseFormDataFormat()
     {
@@ -156,9 +134,6 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
         $this->assertSame('form_params', $builder->getDataFormat());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canUseJsonDataFormat()
     {
@@ -168,9 +143,6 @@ class X0_GuzzleSpecificTest extends HttpClientsTestCase
         $this->assertSame('json', $builder->getDataFormat());
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canUseMultipartDataFormat()
     {

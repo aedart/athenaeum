@@ -12,10 +12,6 @@ use Throwable;
 /**
  * ProjectTest
  *
- * @group redmine
- * @group redmine-resources
- * @group redmine-resources-project
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Resources
  */
@@ -27,8 +23,6 @@ use Throwable;
 class ProjectTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */
@@ -71,8 +65,6 @@ class ProjectTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */
@@ -130,8 +122,6 @@ class ProjectTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */

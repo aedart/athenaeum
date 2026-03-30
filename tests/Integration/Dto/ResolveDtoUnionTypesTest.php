@@ -12,8 +12,7 @@ use TypeError;
 /**
  * ResolveDtoUnionTypesTest
  *
- * @group dto
- * @group dto-union-types
+ * @deprecated will be removed in next major version, since v10.x
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Dto
@@ -25,8 +24,6 @@ use TypeError;
 class ResolveDtoUnionTypesTest extends DtoTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -56,8 +53,6 @@ class ResolveDtoUnionTypesTest extends DtoTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -76,8 +71,6 @@ class ResolveDtoUnionTypesTest extends DtoTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -112,8 +105,6 @@ class ResolveDtoUnionTypesTest extends DtoTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

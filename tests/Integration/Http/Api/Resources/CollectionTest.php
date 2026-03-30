@@ -16,10 +16,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * CollectionTest
  *
- * @group http-api
- * @group api-resource
- * @group api-resource-collection
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Resources
  */
@@ -45,7 +41,7 @@ class CollectionTest extends ApiResourcesTestCase
     /**
      * @inheritDoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -71,8 +67,6 @@ class CollectionTest extends ApiResourcesTestCase
      ****************************************************************/
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -120,8 +114,6 @@ class CollectionTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException

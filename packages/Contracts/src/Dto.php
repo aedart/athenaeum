@@ -53,14 +53,14 @@ interface Dto extends ArrayAccess,
      * resolving dependency injection or eventual
      * nested object
      *
-     * @return Container|null IoC service Container or null if none defined
+     * @return Container|null IoC Service Container or null if none defined
      */
     public function container(): Container|null;
 
     /**
      * Returns a new instance of this Dto
      *
-     * @param array $properties [optional]
+     * @param array<string, mixed> $properties [optional]
      * @param Container|null $container [optional]
      *
      * @return static
@@ -68,8 +68,7 @@ interface Dto extends ArrayAccess,
     public static function makeNew(array $properties = [], Container|null $container = null): static;
 
     /**
-     * Create a new populated instance of this Dto from a
-     * json encoded string
+     * Create a new populated instance from JSON encoded string
      *
      * @param string $json
      *

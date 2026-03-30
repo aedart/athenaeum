@@ -13,11 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * C0_WhereTest
  *
- * @group http-clients
- * @group http-query
- * @group http-query-c0
- * @group http-query-grammars
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Clients\Query
  */
@@ -179,9 +174,6 @@ class C0_WhereTest extends HttpClientsTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider providesWhereFieldEqualsValue
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -203,9 +195,6 @@ class C0_WhereTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesWhereWithOperatorAndValue
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -227,9 +216,6 @@ class C0_WhereTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesMultipleConditionsOnSameField
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -252,9 +238,6 @@ class C0_WhereTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesMultipleConditionsViaArray
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -282,9 +265,6 @@ class C0_WhereTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesWhereWithArrayValue
-     *
      * @param string $grammar
      * @param string $expected
      *
@@ -306,9 +286,6 @@ class C0_WhereTest extends HttpClientsTestCase
     }
 
     /**
-     * @test
-     * @dataProvider providesWhereWithOperatorAndArrayValue
-     *
      * @param string $grammar
      * @param string $expected
      *

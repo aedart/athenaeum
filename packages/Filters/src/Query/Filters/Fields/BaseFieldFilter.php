@@ -2,7 +2,6 @@
 
 namespace Aedart\Filters\Query\Filters\Fields;
 
-use Aedart\Contracts\Database\Query\FieldCriteria;
 use Aedart\Database\Query\FieldFilter;
 use Aedart\Filters\Query\Filters\Concerns;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
@@ -129,7 +128,7 @@ abstract class BaseFieldFilter extends FieldFilter
      * Builds a default "where [field] [operator] [value]" constraint
      *
      * Caution: This is the most generic where clause build method. It assumes that assigned
-     * operator is a native supported sql operator.
+     * operator is a native supported SQL operator.
      *
      * @param Builder|EloquentBuilder $query
      *
@@ -137,11 +136,10 @@ abstract class BaseFieldFilter extends FieldFilter
      */
     protected function buildDefaultConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhere($this->field(), $this->operator(), $this->value());
-        }
-
-        return $query->where($this->field(), $this->operator(), $this->value());
+        return $this->buildFor(
+            and: fn () => $query->where($this->field(), $this->operator(), $this->value()),
+            or: fn () => $query->orWhere($this->field(), $this->operator(), $this->value())
+        );
     }
 
     /**
@@ -153,11 +151,10 @@ abstract class BaseFieldFilter extends FieldFilter
      */
     protected function buildWhereNullConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereNull($this->field());
-        }
-
-        return $query->whereNull($this->field());
+        return $this->buildFor(
+            and: fn () => $query->whereNull($this->field()),
+            or: fn () => $query->orWhereNull($this->field())
+        );
     }
 
     /**
@@ -169,11 +166,10 @@ abstract class BaseFieldFilter extends FieldFilter
      */
     protected function buildWhereNotNullConstraint(Builder|EloquentBuilder $query)
     {
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereNotNull($this->field());
-        }
-
-        return $query->whereNotNull($this->field());
+        return $this->buildFor(
+            and: fn () => $query->whereNotNull($this->field()),
+            or: fn () => $query->orWhereNotNull($this->field())
+        );
     }
 
     /**
@@ -187,11 +183,10 @@ abstract class BaseFieldFilter extends FieldFilter
     {
         $value = $this->valueToList($this->value());
 
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereIn($this->field(), $value);
-        }
-
-        return $query->whereIn($this->field(), $value);
+        return $this->buildFor(
+            and: fn () => $query->whereIn($this->field(), $value),
+            or: fn () => $query->orWhereIn($this->field(), $value)
+        );
     }
 
     /**
@@ -205,11 +200,10 @@ abstract class BaseFieldFilter extends FieldFilter
     {
         $value = $this->valueToList($this->value());
 
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereNotIn($this->field(), $value);
-        }
-
-        return $query->whereNotIn($this->field(), $value);
+        return $this->buildFor(
+            and: fn () => $query->whereNotIn($this->field(), $value),
+            or: fn () => $query->orWhereNotIn($this->field(), $value)
+        );
     }
 
     /**
@@ -347,19 +341,18 @@ abstract class BaseFieldFilter extends FieldFilter
                 return $this->buildDatetimeNotBetween($query, $low, $high);
             };
 
-            if ($this->logical() === FieldCriteria::OR) {
-                return $query->orWhere($dateComparisonCallback);
-            }
-
-            return $query->where($dateComparisonCallback);
+            return $this->buildFor(
+                and: fn () => $query->where($dateComparisonCallback),
+                or: fn () => $query->orWhere($dateComparisonCallback)
+            );
         }
 
         $format = $this->resolveDatetimeFormat($query);
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhere($field, $operator, $date->format($format));
-        }
 
-        return $query->where($field, $operator, $date->format($format));
+        return $this->buildFor(
+            and: fn () => $query->where($field, $operator, $date->format($format)),
+            or: fn () => $query->orWhere($field, $operator, $date->format($format))
+        );
     }
 
     /**
@@ -405,11 +398,10 @@ abstract class BaseFieldFilter extends FieldFilter
      */
     protected function buildWhereDateConstraint(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhereDate($this->field(), $this->operator(), $this->value());
-        }
-
-        return $query->whereDate($this->field(), $this->operator(), $this->value());
+        return $this->buildFor(
+            and: fn () => $query->whereDate($this->field(), $this->operator(), $this->value()),
+            or: fn () => $query->orWhereDate($this->field(), $this->operator(), $this->value())
+        );
     }
 
     /**
@@ -424,11 +416,10 @@ abstract class BaseFieldFilter extends FieldFilter
     {
         $like = $this->resolveLikeOperator($query);
 
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhere($this->field(), $like, $value);
-        }
-
-        return $query->where($this->field(), $like, $value);
+        return $this->buildFor(
+            and: fn () => $query->where($this->field(), $like, $value),
+            or: fn () => $query->orWhere($this->field(), $like, $value)
+        );
     }
 
     /**
@@ -443,11 +434,10 @@ abstract class BaseFieldFilter extends FieldFilter
     {
         $like = $this->resolveNotLikeOperator($query);
 
-        if ($this->logical() === FieldCriteria::OR) {
-            return $query->orWhere($this->field(), $like, $value);
-        }
-
-        return $query->where($this->field(), $like, $value);
+        return $this->buildFor(
+            and: fn () => $query->where($this->field(), $like, $value),
+            or: fn () => $query->orWhere($this->field(), $like, $value)
+        );
     }
 
     /**

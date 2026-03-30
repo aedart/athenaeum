@@ -47,28 +47,28 @@ class ItemsProcessor implements
     /**
      * Default Rules Repository class to use
      *
-     * @var string
+     * @var class-string<Repository>
      */
     protected string $defaultRepository = RulesRepository::class;
 
     /**
      * Before callback
      *
-     * @var callable|null
+     * @var callable(Summation): (Summation)|null
      */
     protected $before = null;
 
     /**
      * After callback
      *
-     * @var callable|null
+     * @var callable(Summation): (Summation)|null
      */
     protected $after = null;
 
     /**
      * ItemProcessor constructor.
      *
-     * @param  ProcessingRule[]|Repository|string[]  $rules Processing Rules instances, class paths or Repository of
+     * @param  array<ProcessingRule|Repository|class-string<Repository>> $rules Processing Rules instances, class paths or Repository of
      *                                                processing rules.
      * @param  Summation|null  $summation  [optional]
      * @param  Container|null  $container  [optional]
@@ -192,7 +192,7 @@ class ItemsProcessor implements
      * Applies given callback and returns resulting Summation
      *
      * @param  Summation  $summation
-     * @param  callable|null  $callback  [optional]
+     * @param  callable(Summation): (Summation)|null  $callback  [optional]
      *
      * @return Summation
      */
@@ -208,7 +208,7 @@ class ItemsProcessor implements
     /**
      * Resolves the Rules Repository
      *
-     * @param  ProcessingRule[]|Repository|string[]  $rules
+     * @param  array<ProcessingRule|Repository|class-string<Repository>>  $rules
      *
      * @return Repository
      *

@@ -37,7 +37,7 @@ abstract class AclTestCase extends LaravelTestCase
     /**
      * @inheritDoc
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -51,7 +51,7 @@ abstract class AclTestCase extends LaravelTestCase
     /**
      * {@inheritdoc}
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             ConfigLoaderServiceProvider::class,
@@ -65,7 +65,7 @@ abstract class AclTestCase extends LaravelTestCase
     /**
      * @inheritdoc
      */
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app): void
     {
         TestingConnection::enableConnection();
     }
@@ -175,9 +175,9 @@ abstract class AclTestCase extends LaravelTestCase
      */
     public function createPermissionGroupWithPermissions(
         string $slug,
-        ?array $permissions = null,
-        ?string $name = null,
-        ?string $description = null,
+        null|array $permissions = null,
+        null|string $name = null,
+        null|string $description = null,
         bool $prefix = true
     ): Group {
         $permissions = $permissions ?? $this->makePermissionsForGroupCreate();

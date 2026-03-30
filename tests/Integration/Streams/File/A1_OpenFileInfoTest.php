@@ -13,9 +13,6 @@ use SplFileInfo;
 /**
  * A1_OpenFileInfoTest
  *
- * @group streams
- * @group streams-file-a1
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Streams\File
  */
@@ -27,8 +24,6 @@ use SplFileInfo;
 class A1_OpenFileInfoTest extends StreamTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException
@@ -46,8 +41,6 @@ class A1_OpenFileInfoTest extends StreamTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws StreamException

@@ -10,10 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * MemoryStreamTest
  *
- * @group streams
- * @group streams-memory
- * @group streams-temp
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Streams
  */
@@ -25,8 +21,6 @@ use PHPUnit\Framework\Attributes\Test;
 class MemoryTempStreamsTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -63,8 +57,6 @@ class MemoryTempStreamsTest extends UnitTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

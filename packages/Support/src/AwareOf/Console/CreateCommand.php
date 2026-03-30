@@ -42,7 +42,7 @@ class CreateCommand extends CommandBase
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('dto:create')

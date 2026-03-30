@@ -1,4 +1,6 @@
-# Athenaeum Properties
+# Athenaeum Properties (DEPRECATED)
+
+**Deprecated**: _Please use the [Dto](https://packagist.org/packages/aedart/athenaeum-dto) package instead!_
 
 Provides means to dynamically deal with inaccessible properties, by implementing some of PHP's [magic methods](https://www.php.net/manual/en/language.oop5.magic.php).
 

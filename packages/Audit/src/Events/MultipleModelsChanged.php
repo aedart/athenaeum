@@ -71,25 +71,15 @@ class MultipleModelsChanged
 
         $this->models = $models;
 
-        // Resolve the original and changed data (attributes). Must be done before
-        // event is serialised. Here, we assume that the same kind of change is made
-        // for all models. So we obtain the first model and use to determine original
-        // and changed data, if nothing specific is given.
-
-        /** @var Model $model */
-        $model = $models->first();
-        $original = $original ?? $this->resolveOriginalData($model, $type);
-        $changed = $changed ?? $this->resolveChangedData($model, $type);
-
-        // Reduce original attributes, and set original and changed
-        $original = $this->reduceOriginal($original, $changed);
-
         $this
             ->byUser($user)
-            ->type($type)
-            ->withOriginalData($original)
-            ->withChangedData($changed)
-            ->withMessage($message ?? $this->resolveAuditTrailMessage($model, $type))
+            ->format(
+                model: $models->first(),
+                type: $type,
+                original: $original,
+                changed: $changed,
+                message: $message,
+            )
             ->performedAt($performedAt);
     }
 }

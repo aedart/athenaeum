@@ -15,10 +15,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 /**
  * RequestETagsMixinTest
  *
- * @group etags
- * @group etags-mixins
- * @group request-etags-mixin
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\ETags\Mixins
  */
@@ -30,8 +26,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class RequestETagsMixinTest extends ETagsTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -50,8 +44,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -75,8 +67,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -96,8 +86,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -113,8 +101,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -145,8 +131,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -177,8 +161,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -197,8 +179,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -236,8 +216,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -254,8 +232,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -271,8 +247,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -291,8 +265,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -312,8 +284,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -332,8 +302,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -352,8 +320,6 @@ class RequestETagsMixinTest extends ETagsTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

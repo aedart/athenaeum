@@ -13,9 +13,6 @@ use ValueError;
 /**
  * MathTest
  *
- * @group utils
- * @group math
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
@@ -26,8 +23,6 @@ use ValueError;
 class MathTest extends UnitTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -38,9 +33,6 @@ class MathTest extends UnitTestCase
         $this->assertInstanceOf(NumericRandomizer::class, $randomizer);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsRandomIntWhenInvalidArguments()
     {
@@ -49,9 +41,6 @@ class MathTest extends UnitTestCase
         Math::randomizer()->int(1, -1);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canGenerateSeed()
     {
@@ -64,9 +53,6 @@ class MathTest extends UnitTestCase
         $this->assertNotEmpty($result);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canApplySeed()
     {

@@ -9,9 +9,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * F0_RunTest
  *
- * @group application
- * @group application-f0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Core\Application
  */
@@ -22,8 +19,6 @@ use PHPUnit\Framework\Attributes\Test;
 class F0_RunTest extends AthenaeumCoreTestCase
 {
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -35,8 +30,6 @@ class F0_RunTest extends AthenaeumCoreTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]
@@ -53,8 +46,6 @@ class F0_RunTest extends AthenaeumCoreTestCase
     }
 
     /**
-     * @test
-     *
      * @throws \Throwable
      */
     #[Test]

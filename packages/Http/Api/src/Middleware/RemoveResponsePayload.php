@@ -17,6 +17,20 @@ use Teapot\StatusCode\All as Status;
 class RemoveResponsePayload
 {
     /**
+     * Values that are deemed truthy
+     *
+     * @var array
+     */
+    protected static array $values = [
+        '1',
+        'true',
+        1,
+        true,
+        'on',
+        'yes'
+    ];
+
+    /**
      * Converts response to "204 No Content" when a "no payload" query parameter
      * is requested.
      *
@@ -24,18 +38,18 @@ class RemoveResponsePayload
      *
      * @param Request $request
      * @param Closure $next
-     * @param string $key [optional] Name of query parameter
+     * @param string $key [optional] Query parameter that must trigger this middleware.
      *
      * @return JsonResponse|Response
      */
-    public function handle(Request $request, Closure $next, string $key = 'no_payload')
+    public function handle(Request $request, Closure $next, string $key = 'no_payload'): JsonResponse|Response
     {
         /** @var Response|JsonResponse $response */
         $response = $next($request);
 
         if ($response->isSuccessful()
             && $request->has($key)
-            && in_array($request->query($key, false), ['1', 'true', 1, true, 'on', 'yes'])
+            && in_array($request->query($key, false), static::$values)
         ) {
             return $response
                 ->setStatusCode(Status::NO_CONTENT)

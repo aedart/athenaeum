@@ -78,7 +78,7 @@ Array
 The `scan()` method accepts the following types as it's file argument: 
 
 * `string` path to file.
-* `SplFileInfo` uploaded file (_e.g. Laravel's [`UploadedFile` instance](https://laravel.com/docs/12.x/http-tests#testing-file-uploads)_).
+* `SplFileInfo` uploaded file (_e.g. Laravel's [`UploadedFile` instance](https://laravel.com/docs/13.x/http-tests#testing-file-uploads)_).
 * `FileStream` [file stream](../streams/README.md).
 * `UploadedFileInterface` [PSR-7 uploaded file](https://www.php-fig.org/psr/psr-7/#36-psrhttpmessageuploadedfileinterface) instance.
 * `StreamInterface` [PSR-7 stream](https://www.php-fig.org/psr/psr-7/#34-psrhttpmessagestreaminterface) instance.
@@ -149,7 +149,7 @@ if ($scanner->scan('contacts.txt')->isOk()) {
 
 ## Facade
 
-An alternative way of performing file scans, is by using the  `Antivirus` [Facade](https://laravel.com/docs/12.x/facades).
+An alternative way of performing file scans, is by using the  `Antivirus` [Facade](https://laravel.com/docs/13.x/facades).
 It allows you to perform a scan directly.
 
 ```php
@@ -171,7 +171,7 @@ $scanner = Antivirus::profile('my-scanner-profile');
 
 ## Validation Rule
 
-This package also comes with a custom [validation rule](https://laravel.com/docs/12.x/validation#custom-validation-rules), which can prevent upload of infected files.
+This package also comes with a custom [validation rule](https://laravel.com/docs/13.x/validation#custom-validation-rules), which can prevent upload of infected files.
 
 ```php
 use Aedart\Antivirus\Validation\Rules\InfectionFreeFile;

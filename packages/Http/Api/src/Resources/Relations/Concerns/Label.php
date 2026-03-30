@@ -15,7 +15,7 @@ trait Label
     /**
      * Ev.t label to show for relation.
      *
-     * @var string|callable|null
+     * @var string|callable(Model, static): (array)|null
      */
     protected $label = null;
 
@@ -30,7 +30,7 @@ trait Label
      * Set the attribute to use a relation's display name, or label.
      * Or specify a callback that creates a label.
      *
-     * @param  string|callable|null  $attribute  [optional]
+     * @param  string|callable(Model, static): (array)|null  $attribute  [optional]
      *
      * @return self
      */
@@ -64,7 +64,7 @@ trait Label
     /**
      * Returns attribute name, or callback, to be used as display name or label
      *
-     * @return string|callable|null
+     * @return string|callable(Model, static): (array)|null
      */
     public function getLabel(): string|callable|null
     {

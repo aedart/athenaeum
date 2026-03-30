@@ -7,6 +7,7 @@ use Aedart\Contracts\Circuits\CircuitBreaker;
 use Aedart\Contracts\Circuits\Exceptions\ProfileNotFoundException;
 use Aedart\Contracts\Circuits\Exceptions\ServiceUnavailableException;
 use Aedart\Contracts\Circuits\Exceptions\UnknownStateException;
+use Aedart\Contracts\Circuits\States\Identifier;
 use Aedart\Tests\TestCases\Circuits\CircuitBreakerTestCase;
 use Codeception\Attribute\Group;
 use LogicException;
@@ -15,10 +16,6 @@ use RuntimeException;
 
 /**
  * CircuitBreakerTest
- *
- * @group circuits
- * @group circuit-breaker
- * @group circuit-breaker-instance
  *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Circuits
@@ -31,12 +28,10 @@ use RuntimeException;
 class CircuitBreakerTest extends CircuitBreakerTestCase
 {
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      */
     #[Test]
-    public function returnsServiceName()
+    public function returnsServiceName(): void
     {
         $service = 'my_service';
         $circuitBreaker = $this->makeCircuitBreaker($service);
@@ -45,13 +40,11 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
     #[Test]
-    public function invokesCallback()
+    public function invokesCallback(): void
     {
         $callback = fn () => true;
 
@@ -59,17 +52,15 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
         $result = $circuitBreaker->attempt($callback);
 
         $this->assertTrue($result);
-        $this->assertSame(CircuitBreaker::CLOSED, $circuitBreaker->state()->id(), 'Incorrect state');
+        $this->assertSame(Identifier::CLOSED, $circuitBreaker->state()->id(), 'Incorrect state');
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
     #[Test]
-    public function failsWhenServiceIsUnavailable()
+    public function failsWhenServiceIsUnavailable(): void
     {
         $this->expectException(ServiceUnavailableException::class);
 
@@ -82,13 +73,11 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
     #[Test]
-    public function invokesOtherwiseCallbackWhenServiceUnavailable()
+    public function invokesOtherwiseCallbackWhenServiceUnavailable(): void
     {
         $callback = function () {
             throw new RuntimeException('Test Failure');
@@ -103,13 +92,11 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
     #[Test]
-    public function tripsWhenFailureThresholdReached()
+    public function tripsWhenFailureThresholdReached(): void
     {
         $amount = 0;
         $callback = function () use (&$amount) {
@@ -132,17 +119,15 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
 
         $this->assertSame(3, $amount, 'Incorrect amount of attempts');
         $this->assertNotNull($circuitBreaker->lastFailure(), 'Should contain a last failure');
-        $this->assertSame(CircuitBreaker::OPEN, $circuitBreaker->state()->id(), 'Should be "open"');
+        $this->assertSame(Identifier::OPEN, $circuitBreaker->state()->id(), 'Should be "open"');
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
     #[Test]
-    public function invokesOtherwiseCallbackWhenTripped()
+    public function invokesOtherwiseCallbackWhenTripped(): void
     {
         $amount = 0;
         $callback = function () use (&$amount) {
@@ -162,13 +147,11 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
     #[Test]
-    public function invokesDefaultOtherwiseCallbackWhenServiceUnavailable()
+    public function invokesDefaultOtherwiseCallbackWhenServiceUnavailable(): void
     {
         $amount = 0;
         $callback = function () use (&$amount) {
@@ -189,14 +172,12 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      * @throws UnknownStateException
      */
     #[Test]
-    public function failsFastWhenStateIsOpen()
+    public function failsFastWhenStateIsOpen(): void
     {
         $callback = function () {
             throw new RuntimeException('Test failure');
@@ -215,13 +196,11 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
     }
 
     /**
-     * @test
-     *
      * @throws ProfileNotFoundException
      * @throws ServiceUnavailableException
      */
     #[Test]
-    public function attemptsCallbackWhenGracePeriodHasPast()
+    public function attemptsCallbackWhenGracePeriodHasPast(): void
     {
         $circuitBreaker = $this->makeCircuitBreaker('my_service')
             ->retry(1, 0)
@@ -254,6 +233,6 @@ class CircuitBreakerTest extends CircuitBreakerTestCase
         // In short: service was recovered...
 
         $this->assertTrue($result);
-        $this->assertSame(CircuitBreaker::CLOSED, $circuitBreaker->state()->id(), 'Failed to change state after half-open');
+        $this->assertSame(Identifier::CLOSED, $circuitBreaker->state()->id(), 'Failed to change state after half-open');
     }
 }

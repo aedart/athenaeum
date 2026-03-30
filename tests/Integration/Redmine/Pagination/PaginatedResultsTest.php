@@ -16,9 +16,6 @@ use Throwable;
 /**
  * PaginatedResultsTest
  *
- * @group redmine
- * @group redmine-pagination
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Redmine\Pagination
  */
@@ -29,8 +26,6 @@ use Throwable;
 class PaginatedResultsTest extends RedmineTestCase
 {
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */
@@ -46,8 +41,6 @@ class PaginatedResultsTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */
@@ -69,8 +62,6 @@ class PaginatedResultsTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */
@@ -89,8 +80,6 @@ class PaginatedResultsTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */
@@ -107,8 +96,6 @@ class PaginatedResultsTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */
@@ -128,8 +115,6 @@ class PaginatedResultsTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */
@@ -149,8 +134,6 @@ class PaginatedResultsTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */
@@ -170,8 +153,6 @@ class PaginatedResultsTest extends RedmineTestCase
     }
 
     /**
-     * @test
-     *
      * @throws JsonException
      * @throws Throwable
      */

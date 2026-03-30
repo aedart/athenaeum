@@ -12,10 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * D0_FileVisibilityTest
  *
- * @group flysystem
- * @group flysystem-db
- * @group flysystem-db-d0
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Flysystem\Db\Adapters
  */
@@ -27,8 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 class D0_FileVisibilityTest extends FlysystemDbTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \League\Flysystem\FilesystemException
@@ -50,8 +44,6 @@ class D0_FileVisibilityTest extends FlysystemDbTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws \League\Flysystem\FilesystemException

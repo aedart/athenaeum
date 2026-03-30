@@ -12,11 +12,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * PermissionModelTest
  *
- * @group acl
- * @group acl-models
- * @group acl-permission
- * @group acl-permission-model
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Acl\Models
  */
@@ -28,9 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class PermissionModelTest extends AclTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canCreateAndObtain()
     {
@@ -64,9 +56,6 @@ class PermissionModelTest extends AclTestCase
         $this->assertNotEmpty($permission->updated_at, 'Updated at timestamp not set');
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function canEagerLoadGroup()
     {

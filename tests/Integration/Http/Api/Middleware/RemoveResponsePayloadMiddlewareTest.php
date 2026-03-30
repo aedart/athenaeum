@@ -15,10 +15,6 @@ use Teapot\StatusCode\All as Status;
 /**
  * RemoveResponsePayloadMiddlewareTest
  *
- * @group http-api
- * @group http-api-middleware
- * @group http-api-middleware-remove-payload
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Middleware
  */
@@ -30,8 +26,6 @@ use Teapot\StatusCode\All as Status;
 class RemoveResponsePayloadMiddlewareTest extends ApiResourcesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -66,8 +60,6 @@ class RemoveResponsePayloadMiddlewareTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException
@@ -102,8 +94,6 @@ class RemoveResponsePayloadMiddlewareTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws JsonException

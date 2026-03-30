@@ -36,7 +36,7 @@ abstract class LaravelTestCase extends IntegrationTestCase implements TestCase
     /**
      * {@inheritdoc}
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -46,7 +46,7 @@ abstract class LaravelTestCase extends IntegrationTestCase implements TestCase
     /**
      * {@inheritdoc}
      */
-    protected function _after()
+    protected function _after(): void
     {
         $this->stopApplication();
 

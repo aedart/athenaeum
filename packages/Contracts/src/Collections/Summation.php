@@ -47,7 +47,7 @@ interface Summation extends
      * Set the value for a given key
      *
      * @param  string  $key
-     * @param mixed $value If callback is provided, then it is invoked
+     * @param mixed|callable(mixed $value, static $summation): mixed $value If callback is provided, then it is invoked
      *                     with key's original value and this Summation
      *                     instance as arguments. The resulting output is
      *                     set as key's new value.
@@ -71,7 +71,7 @@ interface Summation extends
      * Alias for {@see add}
      *
      * @param  string  $key
-     * @param  callable|float|int  $amount [optional] If amount is a callback, then
+     * @param  float|int|callable(mixed $value, static $summation): mixed  $amount [optional] If amount is a callback, then
      *                      callback is invoked with key's value and this
      *                      Summation as arguments. The resulting output is
      *                      set as key's new value.
@@ -86,7 +86,7 @@ interface Summation extends
      * Alias for {@see subtract}
      *
      * @param  string  $key
-     * @param  callable|float|int  $amount [optional] If amount is a callback, then
+     * @param  float|int|callable(mixed $value, static $summation): mixed  $amount [optional] If amount is a callback, then
      *                      callback is invoked with key's value and this
      *                      Summation as arguments. The resulting output is
      *                      set as key's new value.
@@ -101,7 +101,7 @@ interface Summation extends
      * Add amount to key's value
      *
      * @param  string  $key
-     * @param  callable|float|int  $amount If amount is a callback, then
+     * @param  float|int|callable(mixed $value, static $summation): mixed  $amount If amount is a callback, then
      *                      callback is invoked with key's value and this
      *                      Summation as arguments. The resulting output is
      *                      set as key's new value.
@@ -116,7 +116,7 @@ interface Summation extends
      * Subtract amount from key's value
      *
      * @param  string  $key
-     * @param  callable|float|int  $amount If amount is a callback, then
+     * @param  float|int|callable(mixed $value, static $summation): mixed  $amount If amount is a callback, then
      *                      callback is invoked with key's value and this
      *                      Summation as arguments. The resulting output is
      *                      set as key's new value.
@@ -131,7 +131,7 @@ interface Summation extends
      * Multiply a key's value by given amount
      *
      * @param  string  $key
-     * @param  callable|float|int  $amount If amount is a callback, then
+     * @param  float|int|callable(mixed $value, static $summation): mixed  $amount If amount is a callback, then
      *                      callback is invoked with key's value and this
      *                      Summation as arguments. The resulting output is
      *                      set as key's new value.
@@ -146,7 +146,7 @@ interface Summation extends
      * Divide a key's value by given amount
      *
      * @param  string  $key
-     * @param  callable|float|int  $amount If amount is a callback, then
+     * @param  float|int|callable(mixed $value, static $summation): mixed  $amount If amount is a callback, then
      *                      callback is invoked with key's value and this
      *                      Summation as arguments. The resulting output is
      *                      set as key's new value.
@@ -163,7 +163,7 @@ interface Summation extends
      * If the key does not exist, then it is added.
      *
      * @param  string  $key
-     * @param  callable  $callback Callback is given original's value and this
+     * @param  callable(mixed $value, static $summation): mixed  $callback Callback is given original's value and this
      *                             Summation instance as arguments. The resulting output is
      *                             set as key's new value.
      *
@@ -226,7 +226,7 @@ interface Summation extends
      * Dumps collection and stops script
      * from further execution
      */
-    public function dd(): void;
+    public function dd(): never;
 
     /**
      * Dumps collection

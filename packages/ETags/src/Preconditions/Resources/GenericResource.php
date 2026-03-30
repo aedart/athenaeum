@@ -35,10 +35,10 @@ class GenericResource implements ResourceContext
      * Create a new "generic" resource
      *
      * @param  mixed  $data E.g. a record, Eloquent model, a file...etc
-     * @param  ETag|callable|null  $etag  [optional] When callback is given, then etag is resolved from callback.
+     * @param  ETag|callable(ResourceContext): (ETag|null)|null  $etag  [optional] When callback is given, then etag is resolved from callback.
      * @param  DateTimeInterface|null  $lastModifiedDate  [optional]
      * @param  int  $size  [optional] Size of resource. Applicable if supporting "If-Range" and "Range" requests.
-     * @param  callable|null $determineStateChangeSuccess  [optional] Callback that determines if a state change
+     * @param  callable(\Illuminate\Http\Request $request): bool|null $determineStateChangeSuccess  [optional] Callback that determines if a state change
      *                                                     has already succeeded on the resource. Callback MUST
      *                                                     return a boolean value.
      * @param  string  $rangeUnit  [optional] Allowed or supported range unit, e.g. bytes.
@@ -59,9 +59,9 @@ class GenericResource implements ResourceContext
      * Creates a new "generic" resource for given file
      *
      * @param SplFileInfo $file
-     * @param ETag|callable|null $etag [optional] Resolves to a checksum of file, when none given.
+     * @param ETag|callable(ResourceContext): (ETag|null)|null $etag [optional] Resolves to a checksum of file, when none given.
      * @param DateTimeInterface|null $lastModifiedDate [optional] Resolve to file's last modified date, when none given.
-     * @param callable|null $determineStateChangeSuccess [optional] Callback that determines if a state change
+     * @param callable(\Illuminate\Http\Request $request): bool|null $determineStateChangeSuccess [optional] Callback that determines if a state change
      *                                                   has already succeeded on the resource. Callback MUST
      *                                                   return a boolean value.
      * @param string $rangeUnit [optional] Allowed or supported range unit, e.g. bytes.

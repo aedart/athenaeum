@@ -11,10 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ETagsTraitsTest
  *
- * @group etags
- * @group etags-traits
- * @group traits
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\ETags\Traits
  */
@@ -44,9 +40,6 @@ class ETagsTraitsTest extends TraitTestCase
      ****************************************************************/
 
     /**
-     * @test
-     * @dataProvider awareOfComponentsProvider
-     *
      * @param string $awareOfTrait
      *
      * @throws \ReflectionException

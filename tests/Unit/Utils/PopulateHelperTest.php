@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * PopulateHelperTest
  *
- * @group utils
- * @group populate-helper
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Unit\Utils
  */
@@ -23,9 +20,6 @@ use PHPUnit\Framework\Attributes\Test;
 )]
 class PopulateHelperTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
     #[Test]
     public function canVerifyRequiredProperties()
     {
@@ -40,9 +34,6 @@ class PopulateHelperTest extends UnitTestCase
         PopulateHelper::verifyRequired($data, $required);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsIfIncorrectCount()
     {
@@ -59,9 +50,6 @@ class PopulateHelperTest extends UnitTestCase
         PopulateHelper::verifyRequired($data, $required);
     }
 
-    /**
-     * @test
-     */
     #[Test]
     public function failsIfRequiredMissing()
     {

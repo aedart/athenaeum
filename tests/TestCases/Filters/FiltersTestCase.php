@@ -44,7 +44,7 @@ abstract class FiltersTestCase extends LaravelTestCase
      *
      * @return Builder
      */
-    public function makeGenericBuilder(array $processors = [], ?Request $request = null): Builder
+    public function makeGenericBuilder(array $processors = [], null|Request $request = null): Builder
     {
         $request = $request ?? $this->makeRequest();
 

@@ -4,7 +4,7 @@ description: Console Application
 
 # Console
 
-Laravel's [Console Application](https://laravel.com/docs/12.x/artisan) is used to enable command-line interfacing.
+Laravel's [Console Application](https://laravel.com/docs/13.x/artisan) is used to enable command-line interfacing.
 It offers the ability to register and execute custom console commands.
 
 ## Create Commands
@@ -33,7 +33,7 @@ class MyCommand extends Command
 }
 ```
 
-For additional information about how to create console commands, please review Laravel's [documentation](https://laravel.com/docs/12.x/artisan#writing-commands). 
+For additional information about how to create console commands, please review Laravel's [documentation](https://laravel.com/docs/13.x/artisan#writing-commands). 
 
 ::: tip Note
 This package does not offer Laravel's `make:command` generator utility.

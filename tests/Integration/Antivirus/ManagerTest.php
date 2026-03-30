@@ -13,9 +13,6 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  * ManagerTest
  *
- * @group antivirus
- * @group antivirus-manager
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Antivirus
  */
@@ -26,8 +23,6 @@ use PHPUnit\Framework\Attributes\Test;
 class ManagerTest extends AntivirusTestCase
 {
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -39,8 +34,6 @@ class ManagerTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -56,8 +49,6 @@ class ManagerTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -73,8 +64,6 @@ class ManagerTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ProfileNotFoundException
@@ -91,8 +80,6 @@ class ManagerTest extends AntivirusTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]

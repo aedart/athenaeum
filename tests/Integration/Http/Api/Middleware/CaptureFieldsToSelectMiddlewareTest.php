@@ -18,10 +18,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 /**
  * CaptureFieldsToSelectMiddlewareTest
  *
- * @group http-api
- * @group http-api-middleware
- * @group http-api-middleware-capture-select-fields
- *
  * @author Alin Eugen Deac <aedart@gmail.com>
  * @package Aedart\Tests\Integration\Http\Api\Middleware
  */
@@ -33,8 +29,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
 {
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException
@@ -57,8 +51,6 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException
@@ -96,8 +88,6 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException
@@ -130,8 +120,6 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException
@@ -152,8 +140,6 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException
@@ -179,8 +165,6 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      */
     #[Test]
@@ -219,8 +203,6 @@ class CaptureFieldsToSelectMiddlewareTest extends ApiResourcesTestCase
     }
 
     /**
-     * @test
-     *
      * @return void
      *
      * @throws ValidationException

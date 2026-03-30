@@ -2,6 +2,7 @@
 
 namespace Aedart\Http\Cookies;
 
+use Aedart\Contracts\Http\Cookies\SameSite;
 use Aedart\Contracts\Http\Cookies\SetCookie as SetCookieInterface;
 use DateTime;
 
@@ -62,13 +63,9 @@ class SetCookie extends Cookie implements SetCookieInterface
      * Same-site policy; whether cookie should be available
      * for cross-site requests
      *
-     * @see SetCookieInterface::SAME_SITE_STRICT
-     * @see SetCookieInterface::SAME_SITE_LAX
-     * @see SetCookieInterface::SAME_SITE_NONE
-     *
-     * @var string|null
+     * @var SameSite|null
      */
-    protected string|null $sameSite = null;
+    protected SameSite|null $sameSite = null;
 
     /**
      * @inheritDoc
@@ -201,9 +198,17 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function sameSite(string|null $policy = null): static
+    public function sameSite(string|SameSite|null $policy = null): static
     {
+        $policy = is_string($policy)
+            ? SameSite::fromValue($policy)
+            : $policy;
+
         $this->sameSite = $policy;
+
+        if ($policy === SameSite::NONE) {
+            return $this->secure(true);
+        }
 
         return $this;
     }
@@ -211,7 +216,7 @@ class SetCookie extends Cookie implements SetCookieInterface
     /**
      * @inheritDoc
      */
-    public function getSameSite(): string|null
+    public function getSameSite(): SameSite|null
     {
         return $this->sameSite;
     }
@@ -228,7 +233,7 @@ class SetCookie extends Cookie implements SetCookieInterface
             'path' => $this->getPath(),
             'secure' => $this->isSecure(),
             'httpOnly' => $this->isHttpOnly(),
-            'sameSite' => $this->getSameSite()
+            'sameSite' => $this->getSameSite()?->value
         ]);
     }
 }

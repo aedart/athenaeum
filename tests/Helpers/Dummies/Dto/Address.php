@@ -22,14 +22,14 @@ class Address extends Dto
      *
      * @var string|null
      */
-    protected ?string $street = null;
+    protected null|string $street = null;
 
     /**
      * City
      *
      * @var City|null
      */
-    protected ?City $city = null;
+    protected null|City $city = null;
 
     /**
      * Set street
@@ -38,7 +38,7 @@ class Address extends Dto
      *
      * @return self
      */
-    public function setStreet(?string $name)
+    public function setStreet(null|string $name)
     {
         $this->street = $name;
 
@@ -50,7 +50,7 @@ class Address extends Dto
      *
      * @return string|null street or null if none street has been set
      */
-    public function getStreet(): ?string
+    public function getStreet(): null|string
     {
         return $this->street;
     }
@@ -62,7 +62,7 @@ class Address extends Dto
      *
      * @return self
      */
-    public function setCity(?City $city)
+    public function setCity(null|City $city)
     {
         $this->city = $city;
 
@@ -74,7 +74,7 @@ class Address extends Dto
      *
      * @return City|null city or null if none city has been set
      */
-    public function getCity(): ?City
+    public function getCity(): null|City
     {
         return $this->city;
     }
