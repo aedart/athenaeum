@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.0.0] - 2026-03-30
+
 ### Added
 
 * `Formatter` components that is responsible for formatting original and changed model data (_Audit Trail package_).
@@ -2005,7 +2007,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/9.25.1...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/10.0.0...HEAD
+[10.0.0]: https://github.com/aedart/athenaeum/compare/9.25.1...10.0.0
 [9.25.1]: https://github.com/aedart/athenaeum/compare/9.25.0...9.25.1
 [9.25.0]: https://github.com/aedart/athenaeum/compare/9.24.0...9.25.0
 [9.24.0]: https://github.com/aedart/athenaeum/compare/9.23.0...9.24.0
