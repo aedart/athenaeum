@@ -76,7 +76,7 @@ class SummationCollectionTest extends UnitTestCase
     public function canSetAndGetValue()
     {
         $key = 'player.strength';
-        $value = $this->getFaker()->randomNumber(2);
+        $value = $this->getFaker()->randomDigitNotNull();
 
         $result = $this->makeCollection()
             ->set($key, $value)
@@ -89,7 +89,7 @@ class SummationCollectionTest extends UnitTestCase
     public function canSetAndGetViaArrayAccess()
     {
         $key = 'player.strength';
-        $value = $this->getFaker()->randomNumber(2);
+        $value = $this->getFaker()->randomDigitNotNull();
 
         $summation = $this->makeCollection();
         $summation[$key] = $value;
@@ -102,7 +102,7 @@ class SummationCollectionTest extends UnitTestCase
     public function canSetUsingCallback()
     {
         $key = 'player.strength';
-        $value = $this->getFaker()->randomNumber(2);
+        $value = $this->getFaker()->randomDigitNotNull();
 
         $result = $this->makeCollection()
             ->set($key, function () use ($value) {
@@ -117,7 +117,7 @@ class SummationCollectionTest extends UnitTestCase
     public function returnDefaultWhenKeyIsEmpty()
     {
         $key = 'player.strength';
-        $value = $this->getFaker()->randomNumber(2);
+        $value = $this->getFaker()->randomDigitNotNull();
 
         $result = $this->makeCollection()
             ->get($key, $value);
@@ -129,7 +129,7 @@ class SummationCollectionTest extends UnitTestCase
     public function invokesCallbackWhenGivenAsDefault()
     {
         $key = 'player.strength';
-        $value = $this->getFaker()->randomNumber(2);
+        $value = $this->getFaker()->randomDigitNotNull();
 
         $result = $this->makeCollection()
             ->get($key, function () use ($value) {
@@ -143,7 +143,7 @@ class SummationCollectionTest extends UnitTestCase
     public function canDetermineIfKeyExists()
     {
         $key = 'player.dexterity';
-        $value = $this->getFaker()->randomNumber(2);
+        $value = $this->getFaker()->randomDigitNotNull();
 
         $summation = $this->makeCollection()
             ->set($key, $value);
@@ -159,7 +159,7 @@ class SummationCollectionTest extends UnitTestCase
     public function canDetermineIfKeyExistsViaArrayAccess()
     {
         $key = 'player.dexterity';
-        $value = $this->getFaker()->randomNumber(2);
+        $value = $this->getFaker()->randomDigitNotNull();
 
         $summation = $this->makeCollection()
             ->set($key, $value);
@@ -176,7 +176,7 @@ class SummationCollectionTest extends UnitTestCase
     {
         $keyA = 'player.dexterity';
         $keyB = 'player.strength';
-        $value = $this->getFaker()->randomNumber(2);
+        $value = $this->getFaker()->randomDigitNotNull();
 
         $summation = $this->makeCollection()
             ->set($keyA, $value)
@@ -200,7 +200,7 @@ class SummationCollectionTest extends UnitTestCase
     {
         $keyA = 'player.dexterity';
         $keyB = 'player.strength';
-        $value = $this->getFaker()->randomNumber(2, true);
+        $value = $this->getFaker()->randomDigitNotNull();
 
         $summation = $this->makeCollection()
             ->set($keyA, $value)
