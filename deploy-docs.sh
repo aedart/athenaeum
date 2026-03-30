@@ -5,7 +5,7 @@ set -e
 
 # A few properties
 repository="git@github.com:aedart/athenaeum.git"
-branch="main:gh-pages"
+branch="HEAD:gh-pages"
 build_directory=".build"
 
 # Clear the build directory, but keep the directory
