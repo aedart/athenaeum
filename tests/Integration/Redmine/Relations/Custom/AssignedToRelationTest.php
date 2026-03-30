@@ -37,6 +37,11 @@ class AssignedToRelationTest extends RedmineTestCase
 
         // -------------------------------------------------------- //
         // Prerequisites - a new project with a members
+        // NOTE: Groups MUST be allowed assigned to issues, or this test will
+        // fail. This can be done so in Redmine's settings:
+        // 1. Go to "Administration > Settings > Issue tracking"
+        // 2. Check "Allow issue assignment to groups" checkbox
+        // 3. Press the "Save" button (bottom of the settings page)
 
         $project = $this->createProject();
         $group = $this->createGroup();

@@ -137,12 +137,7 @@ abstract class RedmineApiResource extends ArrayDto implements ApiResource
      */
     public function setConnection(ConnectionInterface|null $connection): static
     {
-        // TODO: Simplify this check in version 9.x
-        if (isset($connection)
-            && method_exists($connection, 'hasFailedExpectationHandler')
-            && method_exists($connection, 'failedExpectationHandler')
-            && $connection->hasFailedExpectationHandler()
-        ) {
+        if (isset($connection) && $connection->hasFailedExpectationHandler()) {
             $this->useFailedExpectationHandler($connection->failedExpectationHandler());
         }
 
