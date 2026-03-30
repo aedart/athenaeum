@@ -68,4 +68,27 @@ interface Connection extends HttpClientAware
      * @return ResponseInterface[] Empty when no mocked responses have been set
      */
     public function getMockedResponse(): array;
+
+    /**
+     * Set a general expectation handler for this connection
+     *
+     * @param callable|null $handler
+     *
+     * @return self
+     */
+    public function useFailedExpectationHandler(callable|null $handler): static;
+
+    /**
+     * Determine if an expectation handler has been set for this connection
+     *
+     * @return bool
+     */
+    public function hasFailedExpectationHandler(): bool;
+
+    /**
+     * Returns this connection's general failed expectation handler
+     *
+     * @return callable|null
+     */
+    public function failedExpectationHandler(): callable|null;
 }
