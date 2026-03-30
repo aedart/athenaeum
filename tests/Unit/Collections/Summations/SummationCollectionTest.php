@@ -188,7 +188,7 @@ class SummationCollectionTest extends UnitTestCase
         $resultC = $summation->hasValue($keyB);
         $resultD = $summation->hasNoValue($keyB);
 
-        $this->assertTrue($resultA, 'key A should have value');
+        $this->assertTrue($resultA, sprintf('key A should have value - generated value: %s', var_export($value, true)));
         $this->assertFalse($resultB, 'Key A should not be empty');
 
         $this->assertFalse($resultC, 'key B should not have value');
