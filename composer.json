@@ -62,7 +62,7 @@
         "roave/security-advisories": "dev-master",
         "symfony/var-dumper": "^v8.0.6",
         "symfony/yaml": "^v8.0.6",
-        "twig/twig": "^3.23.0"
+        "twig/twig": "^3.24.0"
     },
     "autoload": {
         "files": [
