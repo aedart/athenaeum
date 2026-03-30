@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* Documentation deploy script failure, when gh-pages not checked out locally (_does not affect any functionality of Athenaeum packages_).
+
 ## [10.0.0] - 2026-03-30
 
 ### Added

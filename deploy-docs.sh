@@ -5,14 +5,18 @@ set -e
 
 # A few properties
 repository="git@github.com:aedart/athenaeum.git"
-branch="main:gh-pages"
+branch="HEAD:gh-pages"
 build_directory=".build"
 
 # Clear the build directory, but keep the directory
-cd "$build_directory"
-find . -type f -delete
-find . -type d -delete
-cd ..
+if [ -d "$build_directory" ]; then
+    cd "$build_directory" || exit
+    find . -mindepth 1 -delete
+    cd ..
+else
+    echo "Error: Directory '$build_directory' does not exist." >&2
+    exit 1
+fi
 
 # build the docs
 if command -v "yarn" > /dev/null;
