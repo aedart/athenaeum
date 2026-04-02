@@ -96,7 +96,7 @@ class Group extends Model implements Sluggable
         // a specific group. Since multiple permissions can be requested
         // created, we use database transactions for this method.
 
-        return (new static())->getConnection()->transaction(function () use ($slug, $permissions, $name, $description, $prefix) {
+        return new static()->getConnection()->transaction(function () use ($slug, $permissions, $name, $description, $prefix) {
             // Find or create permissions group
             $group = static::findOrCreateBySlug($slug, [
                 'name' => $name ?? (string) Str::slugToWords($slug)->ucfirst(),

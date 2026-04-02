@@ -45,4 +45,7 @@ const VERSIONS: PagesCollection[] = [
     Version1x
 ];
 
-export default Archive.make(CURRENT, NEXT, VERSIONS);
+const archive = Archive.make(CURRENT, NEXT, VERSIONS);
+archive.nextPath = '/next/';
+archive.currentPath = '/current/';
+export default archive;

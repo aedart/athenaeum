@@ -3,7 +3,7 @@ import {PagesCollection} from "@aedart/vuepress-utils/navigation";
 /**
  * Version 3.x
  */
-export default PagesCollection.make('v3.x', '/v3x', [
+export default PagesCollection.make('v3.x', '/v3x/', [
     {
         text: 'Version 3.x',
         collapsible: true,

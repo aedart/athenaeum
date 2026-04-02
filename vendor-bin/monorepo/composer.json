@@ -1,6 +1,6 @@
 {
     "require": {
         "symplify/monorepo-builder": "^12.5.2",
-        "symfony/console": "^v8.0.7"
+        "symfony/console": "^v8.0.8"
     }
 }
