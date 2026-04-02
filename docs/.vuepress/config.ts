@@ -1,8 +1,10 @@
-import {defaultTheme, defineUserConfig, Page} from 'vuepress';
-import {backToTopPlugin} from "@vuepress/plugin-back-to-top";
+import {defineUserConfig, Page} from 'vuepress';
+import { defaultTheme } from '@vuepress/theme-default'
+import { backToTopPlugin } from '@vuepress/plugin-back-to-top'
 import {searchPlugin} from "@vuepress/plugin-search";
 import {baseURL, prefixPath} from "@aedart/vuepress-utils";
 import {lastUpdatedPlugin} from "@aedart/vuepress-utils/plugins";
+import { viteBundler } from '@vuepress/bundler-vite'
 import Archive from "./archive";
 
 /**
@@ -81,7 +83,9 @@ export default defineUserConfig({
         }),
 
         lastUpdatedPlugin(),
-    ]
+    ],
+
+    bundler: viteBundler(),
 });
 
 /**
