@@ -83,7 +83,7 @@ trait Slugs
      */
     public static function findOrCreateBySlug(string $slug, array $values = [])
     {
-        $slugName = (new static())->getSlugKeyName();
+        $slugName = new static()->getSlugKeyName();
 
         // Find or create
         return static::firstOrCreate([ $slugName => $slug ], $values);
