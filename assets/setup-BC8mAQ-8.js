@@ -1,0 +1,111 @@
+import{a as e,c as t,i as n,l as r,n as i,o as a,r as o,s,t as c}from"./app-B19bQ_Jx.js";var l=JSON.parse(`{"path":"/archive/v7x/circuits/setup.html","title":"Setup","lang":"en-GB","frontmatter":{"description":"How to setup Circuits"},"git":{"updatedTime":1710755140000,"contributors":[{"name":"Alin Eugen Deac","username":"","email":"aedart@gmail.com","commits":11},{"name":"alin","username":"alin","email":"alin@rspsystems.com","commits":4,"url":"https://github.com/alin"}],"changelog":[{"hash":"0b773db2c29e613c193c6a8a8ecaa74e0cc81a52","time":1710755140000,"email":"alin@rspsystems.com","author":"alin","message":"Move v7x docs into own directory"},{"hash":"7dd88eb8639f07a92edc0307068c182ad60480bf","time":1676536191000,"email":"alin@rspsystems.com","author":"alin","message":"Update links to laravel v10.x docs"},{"hash":"c3a43866be46ea9e81b03f1534dc9be5e949e7a7","time":1676535042000,"email":"alin@rspsystems.com","author":"alin","message":"Set next version as current version docs"},{"hash":"0cbc5036daa09bc02b2f17d1d6c61d68b7bd132c","time":1673604853000,"email":"alin@rspsystems.com","author":"alin","message":"Prepare documentation structure for v7.x"},{"hash":"86899df74924fbee437044c03392c75112417d84","time":1669543271000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Fix path to \\"configuration\\" directory"},{"hash":"f76a6a9ee9fbbe034e247a6e03277a964895923d","time":1649185304000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Set v6.x docs as current"},{"hash":"66765a4da603059949fa1a708fa6e2f18f3cbf8a","time":1645883571000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Update laravel docs references"},{"hash":"16b77ef2aa746d05477ac41272b44eb212f266f2","time":1645364724000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Rename docs to current and next"},{"hash":"e1eb7a0df921a26267257b86490e85af9e79e577","time":1642238291000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Rename current to v5x"},{"hash":"1a2665824f4b73dad9e6d1bb2ca87c4512e06e78","time":1599585786000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Change laravel documentation reference links"},{"hash":"51cf3496f62ace461df76ec336a69b8f80f8014b","time":1599583988000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Add current"},{"hash":"6ef66d77bdeed32d21dc01b10204fe61266126ec","time":1599583962000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Rename to v4x"},{"hash":"0095ce1b06b5e5dc54408d8a99095c862eb9a109","time":1593944575000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Add warning about support cache stores"},{"hash":"b457ae3ea0b8611148631bba36c2ae9cd0ad3a1e","time":1590311606000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Add circuits package documentation"},{"hash":"fe77637e040e4f8b04e4296bc8cd291a3c1d0641","time":1589714762000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Add circuit breaker example config"}]},"filePathRelative":"archive/v7x/circuits/setup.md","lastUpdatedDateFormat":"yyyy-MM-dd HH:mm:ss ZZZZ","lastUpdatedDateOptions":{}}`),u={name:`setup.md`},d={class:`table-of-contents`};function f(c,l,u,f,p,m){let h=t(`router-link`);return s(),o(`div`,null,[l[5]||=i(`h1`,{id:`setup`,tabindex:`-1`},[i(`a`,{class:`header-anchor`,href:`#setup`},[i(`span`,null,`Setup`)])],-1),i(`nav`,d,[i(`ul`,null,[i(`li`,null,[a(h,{to:`#register-service-provider`},{default:r(()=>[...l[0]||=[e(`Register Service Provider`,-1)]]),_:1})]),i(`li`,null,[a(h,{to:`#publish-assets`},{default:r(()=>[...l[1]||=[e(`Publish Assets`,-1)]]),_:1}),i(`ul`,null,[i(`li`,null,[a(h,{to:`#publish-assets-for-athenaeum-core-application`},{default:r(()=>[...l[2]||=[e(`Publish Assets for Athenaeum Core Application`,-1)]]),_:1})])])]),i(`li`,null,[a(h,{to:`#configuration`},{default:r(()=>[...l[3]||=[e(`Configuration`,-1)]]),_:1}),i(`ul`,null,[i(`li`,null,[a(h,{to:`#store-configuration`},{default:r(()=>[...l[4]||=[e(`Store Configuration`,-1)]]),_:1})])])])])]),l[6]||=n(`<h2 id="register-service-provider" tabindex="-1"><a class="header-anchor" href="#register-service-provider"><span>Register Service Provider</span></a></h2><p>Register <code>CircuitBreakerServiceProvider</code> inside your <code>config/app.php</code>.</p><div class="language-php line-numbers-mode" data-highlighter="prismjs" data-ext="php"><pre><code class="language-php"><span class="line"><span class="token keyword">return</span> <span class="token punctuation">[</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment">// ... previous not shown ... //</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment">/*</span>
+<span class="line">    |--------------------------------------------------------------------------</span>
+<span class="line">    | Autoloaded Service Providers</span>
+<span class="line">    |--------------------------------------------------------------------------</span>
+<span class="line">    */</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token string single-quoted-string">&#39;providers&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span></span>
+<span class="line"></span>
+<span class="line">        <span class="token class-name class-name-fully-qualified static-context"><span class="token punctuation">\\</span>Aedart<span class="token punctuation">\\</span>Circuits<span class="token punctuation">\\</span>Providers<span class="token punctuation">\\</span>CircuitBreakerServiceProvider</span><span class="token operator">::</span><span class="token keyword">class</span></span>
+<span class="line"></span>
+<span class="line">        <span class="token comment">// ... remaining services not shown ... //</span></span>
+<span class="line">    <span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<span class="line"><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="publish-assets" tabindex="-1"><a class="header-anchor" href="#publish-assets"><span>Publish Assets</span></a></h2><p>Run <code>vendor:publish</code> to publish package&#39;s assets.</p><div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh"><pre><code class="language-bash"><span class="line">php artisan vendor:publish</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>Once completed, the following configuration file should be available inside your <code>config/</code> directory:</p><ul><li><code>circuit-breakers</code></li></ul><h3 id="publish-assets-for-athenaeum-core-application" tabindex="-1"><a class="header-anchor" href="#publish-assets-for-athenaeum-core-application"><span>Publish Assets for Athenaeum Core Application</span></a></h3><p>When using <a href="../../core">Athenaeum Core Application</a>, run <code>vendor:publish-all</code> to publish assets:</p><div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh"><pre><code class="language-bash"><span class="line">php <span class="token punctuation">{</span>your-cli-app<span class="token punctuation">}</span> vendor:publish-all</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><h2 id="configuration" tabindex="-1"><a class="header-anchor" href="#configuration"><span>Configuration</span></a></h2><p>The <code>config/circuit-breakers.php</code> configuration file, is intended to contain a list of &quot;services&quot;. Each service has a list of settings (<em>options</em>) for it&#39;s corresponding circuit breaker instance. Add or change these settings as you see fit.</p><div class="language-php line-numbers-mode" data-highlighter="prismjs" data-ext="php"><pre><code class="language-php"><span class="line"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">return</span> <span class="token punctuation">[</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token string single-quoted-string">&#39;services&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span></span>
+<span class="line"></span>
+<span class="line">        <span class="token string single-quoted-string">&#39;weather_service&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span></span>
+<span class="line"></span>
+<span class="line">            <span class="token comment">/*</span>
+<span class="line">             * Name of store to use</span>
+<span class="line">             */</span></span>
+<span class="line">            <span class="token string single-quoted-string">&#39;store&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;default&#39;</span><span class="token punctuation">,</span></span>
+<span class="line"></span>
+<span class="line">            <span class="token comment">/*</span>
+<span class="line">             * Maximum amount of times that a callback should</span>
+<span class="line">             * be attempted</span>
+<span class="line">             */</span></span>
+<span class="line">            <span class="token string single-quoted-string">&#39;retries&#39;</span> <span class="token operator">=&gt;</span> <span class="token number">3</span><span class="token punctuation">,</span></span>
+<span class="line"></span>
+<span class="line">            <span class="token comment">/*</span>
+<span class="line">             * Amount of milliseconds to wait before each attempt</span>
+<span class="line">             */</span></span>
+<span class="line">            <span class="token string single-quoted-string">&#39;delay&#39;</span> <span class="token operator">=&gt;</span> <span class="token number">100</span><span class="token punctuation">,</span></span>
+<span class="line"></span>
+<span class="line">            <span class="token comment">/*</span>
+<span class="line">             * Maximum amount of failures before circuit breaker</span>
+<span class="line">             * must trip (change state to &quot;open&quot;)</span>
+<span class="line">             */</span></span>
+<span class="line">            <span class="token string single-quoted-string">&#39;failure_threshold&#39;</span> <span class="token operator">=&gt;</span> <span class="token number">10</span><span class="token punctuation">,</span></span>
+<span class="line"></span>
+<span class="line">            <span class="token comment">/*</span>
+<span class="line">             * Grace period duration.</span>
+<span class="line">             *</span>
+<span class="line">             * The amount of seconds to wait before circuit breaker can</span>
+<span class="line">             * attempt to change state to &quot;half open&quot;, after failure</span>
+<span class="line">             * threshold has been reached.</span>
+<span class="line">             */</span></span>
+<span class="line">            <span class="token string single-quoted-string">&#39;grace_period&#39;</span> <span class="token operator">=&gt;</span> <span class="token number">10</span><span class="token punctuation">,</span></span>
+<span class="line"></span>
+<span class="line">            <span class="token comment">/*</span>
+<span class="line">             * Timezone</span>
+<span class="line">             */</span></span>
+<span class="line">            <span class="token string single-quoted-string">&#39;timezone&#39;</span> <span class="token operator">=&gt;</span> <span class="token function">env</span><span class="token punctuation">(</span><span class="token string single-quoted-string">&#39;TIMEZONE&#39;</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">&#39;UTC&#39;</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>
+<span class="line"></span>
+<span class="line">            <span class="token comment">/*</span>
+<span class="line">             * Time-to-live (ttl) for a state</span>
+<span class="line">             *</span>
+<span class="line">             * Duration in seconds. When none given, it defaults to</span>
+<span class="line">             * store&#39;s ttl.</span>
+<span class="line">             */</span></span>
+<span class="line">            <span class="token string single-quoted-string">&#39;state_ttl&#39;</span> <span class="token operator">=&gt;</span> <span class="token constant">null</span><span class="token punctuation">,</span></span>
+<span class="line">        <span class="token punctuation">]</span></span>
+<span class="line">    <span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment">// ... remaining not shown ...</span></span>
+<span class="line"><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
+<span class="line"></span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="store-configuration" tabindex="-1"><a class="header-anchor" href="#store-configuration"><span>Store Configuration</span></a></h3><p>Each Circuit Breaker uses a <code>Store</code> to keep track of it&#39;s state (<em>closed, open, half-open</em>). In your configuration, you can specify the profile-name of the store to use. Additional store configuration can be specified in your configuration file (<code>config/circuit-breakers.php</code>).</p><div class="hint-container warning"><p class="hint-container-title">Warning</p><p>Currently, only cache stores that inherit from <a href="https://laravel.com/docs/10.x/cache#atomic-locks" target="_blank" rel="noopener noreferrer"><code>LockProvider</code></a> can be used.</p></div><div class="language-php line-numbers-mode" data-highlighter="prismjs" data-ext="php"><pre><code class="language-php"><span class="line"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">return</span> <span class="token punctuation">[</span></span>
+<span class="line">    <span class="token comment">// ... previous not shown ...</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment">/*</span>
+<span class="line">    |--------------------------------------------------------------------------</span>
+<span class="line">    | Stores</span>
+<span class="line">    |--------------------------------------------------------------------------</span>
+<span class="line">    */</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token string single-quoted-string">&#39;stores&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span></span>
+<span class="line"></span>
+<span class="line">        <span class="token string single-quoted-string">&#39;default&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span></span>
+<span class="line">            <span class="token string single-quoted-string">&#39;driver&#39;</span> <span class="token operator">=&gt;</span> <span class="token class-name class-name-fully-qualified static-context"><span class="token punctuation">\\</span>Aedart<span class="token punctuation">\\</span>Circuits<span class="token punctuation">\\</span>Stores<span class="token punctuation">\\</span>CacheStore</span><span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">,</span></span>
+<span class="line">            <span class="token string single-quoted-string">&#39;options&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span></span>
+<span class="line"></span>
+<span class="line">                <span class="token comment">/*</span>
+<span class="line">                 * Name of Laravel Cache Store to use</span>
+<span class="line">                 *</span>
+<span class="line">                 * WARNING: Cache Store MUST inherit from LockProvider or</span>
+<span class="line">                 * it cannot be used.</span>
+<span class="line">                 *</span>
+<span class="line">                 * @see \\Illuminate\\Contracts\\Cache\\LockProvider</span>
+<span class="line">                 */</span></span>
+<span class="line">                <span class="token string single-quoted-string">&#39;cache-store&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;redis&#39;</span><span class="token punctuation">,</span></span>
+<span class="line"></span>
+<span class="line">                <span class="token comment">/*</span>
+<span class="line">                 * Default time-to-live (ttl) for a state.</span>
+<span class="line">                 */</span></span>
+<span class="line">                <span class="token string single-quoted-string">&#39;ttl&#39;</span> <span class="token operator">=&gt;</span> <span class="token number">3600</span><span class="token punctuation">,</span></span>
+<span class="line">            <span class="token punctuation">]</span></span>
+<span class="line">        <span class="token punctuation">]</span></span>
+<span class="line">    <span class="token punctuation">]</span></span>
+<span class="line"><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
+<span class="line"></span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,18)])}var p=c(u,[[`render`,f]]);export{l as _pageData,p as default};

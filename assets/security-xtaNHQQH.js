@@ -1,0 +1,57 @@
+import{a as e,c as t,i as n,l as r,n as i,o as a,r as o,s,t as c}from"./app-B19bQ_Jx.js";var l=JSON.parse(`{"path":"/archive/v8x/security.html","title":"Security Policy","lang":"en-GB","frontmatter":{"description":"Security Policy of Athenaeum","sidebarDepth":0},"git":{"updatedTime":1740576033000,"contributors":[{"name":"Alin Eugen Deac","username":"","email":"aedart@gmail.com","commits":3},{"name":"alin","username":"alin","email":"alin@rspsystems.com","commits":3,"url":"https://github.com/alin"}],"changelog":[{"hash":"1ba682e4d81dca7ea2cd25e1c3adb10bdf934959","time":1740576033000,"email":"alin@rspsystems.com","author":"alin","message":"Move \\"current\\" to v8x folder"},{"hash":"6545d234a8b515102f88bb7b147c981e0114b682","time":1710755169000,"email":"alin@rspsystems.com","author":"alin","message":"Add current (v8x) docs"},{"hash":"ee450d4fd9d547307127792dd3e4fb6203857464","time":1676535014000,"email":"alin@rspsystems.com","author":"alin","message":"Archive current version docs"},{"hash":"f76a6a9ee9fbbe034e247a6e03277a964895923d","time":1649185304000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Set v6.x docs as current"},{"hash":"16b77ef2aa746d05477ac41272b44eb212f266f2","time":1645364724000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Rename docs to current and next"},{"hash":"71eebfa2cc5e6b151802d07fba58c4b6ad02c795","time":1645363541000,"email":"aedart@gmail.com","author":"Alin Eugen Deac","message":"Add security policy and support policy"}]},"filePathRelative":"archive/v8x/security.md","lastUpdatedDateFormat":"yyyy-MM-dd HH:mm:ss ZZZZ","lastUpdatedDateOptions":{}}`),u={name:`security.md`},d={class:`table-of-contents`};function f(c,l,u,f,p,m){let h=t(`router-link`),g=t(`RouteLink`);return s(),o(`div`,null,[l[6]||=i(`h1`,{id:`security-policy`,tabindex:`-1`},[i(`a`,{class:`header-anchor`,href:`#security-policy`},[i(`span`,null,`Security Policy`)])],-1),l[7]||=i(`div`,{class:`hint-container warning`},[i(`p`,{class:`hint-container-title`},`Warning`),i(`p`,null,[i(`strong`,null,`DO NOT DISCLOSE SECURITY RELATED ISSUES PUBLICLY!`),i(`strong`,null,`PLEASE SEND AN ENCRYPTED EMAIL TO ME INSTEAD!`)]),i(`p`,null,[i(`em`,null,`See "How to report a vulnerability" for instructions.`)])],-1),i(`nav`,d,[i(`ul`,null,[i(`li`,null,[a(h,{to:`#how-to-report-a-vulnerability`},{default:r(()=>[...l[0]||=[e(`How to report a vulnerability`,-1)]]),_:1}),i(`ul`,null,[i(`li`,null,[a(h,{to:`#public-pgp-key`},{default:r(()=>[...l[1]||=[e(`Public PGP Key`,-1)]]),_:1})])])]),i(`li`,null,[a(h,{to:`#supported-versions`},{default:r(()=>[...l[2]||=[e(`Supported Versions`,-1)]]),_:1})])])]),l[8]||=n(`<h2 id="how-to-report-a-vulnerability" tabindex="-1"><a class="header-anchor" href="#how-to-report-a-vulnerability"><span>How to report a vulnerability</span></a></h2><p>If you have discovered a vulnerability, please send an <strong>encrypted email</strong> to Alin Eugen Deac (<a href="mailto:aedart@gmail.com" target="_blank" rel="noopener noreferrer">aedart@gmail.com</a>). Use the public PGP key listed below for encryption. Your email will be prioritised and addressed as quickly as possible.</p><p>In addition, please make sure that the contents of your email contains appropriate information about the vulnerability. E.g.:</p><ul><li>Where the vulnerability is located</li><li>Why it is a vulnerability</li><li>Affected version(s)</li><li>(<em>How it can be resolved, if you have a possible solution</em>)</li></ul><div class="hint-container tip"><p class="hint-container-title">How to encrypt emails using PGP</p><p>If you do not know how to use PGP encryption, then the following can help you</p><ul><li><a href="https://youtu.be/Ro3MSBS9w-A" target="_blank" rel="noopener noreferrer">How to Use PGP Encryption With Gmail and Other Web Email With Mailvelope</a></li><li><a href="https://github.com/mailvelope/mailvelope" target="_blank" rel="noopener noreferrer">Mailvelope - Browser Extension</a></li><li><a href="https://sela.io/pgp-en/" target="_blank" rel="noopener noreferrer">Sela - Online PGP Encrypt &amp; Decrypt</a></li></ul></div><h3 id="public-pgp-key" tabindex="-1"><a class="header-anchor" href="#public-pgp-key"><span>Public PGP Key</span></a></h3><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code class="language-text"><span class="line">-----BEGIN PGP PUBLIC KEY BLOCK-----</span>
+<span class="line">Version: Mailvelope v4.4.1</span>
+<span class="line">Comment: https://www.mailvelope.com</span>
+<span class="line"></span>
+<span class="line">xsFNBGISJyIBEAC6JEo+xr48WA6fDTVjJKuF3MaT91VBrjynKNxcCBHINLw8</span>
+<span class="line">qIiJYfRFvny0Ffx8xuKlK1rVJ4BpsX4fURb5mFiQtFe6paSBVLUOCDyjlhdz</span>
+<span class="line">srKwhtz4tDpzc94dCUWkNJgWNa4ah5TuEJZLdXGptYeUtj3/UNqmAxsx6NEj</span>
+<span class="line">/xXLX3eZ+rwn88UVxKoTFge1AwCLmRk0N55s6g1tQJ8MrGZvjjJ0OGCnDKhy</span>
+<span class="line">h3CZI2SqlovL4/MXq0cYexqyUDLcZzEgbAKvNA/vnxc9oIBEIZoRZ1QxqXO6</span>
+<span class="line">Z/Da8ItUJ8Eg8MmWIFmnqs+YfeOcHqxflm288c44BRPN3e3bM9tb8qhi+Xd8</span>
+<span class="line">SE3D0Az1QVq3aoKzvF35bnV0KwB86so8ud4/fVtfBq6kklS6ZSS3wNhCRG3f</span>
+<span class="line">imenk2DvOni9MqriXPOKxVBqa9yC0otua7/IoZGksNOwzjdUwpfY3guTv4iu</span>
+<span class="line">nUcieHBmXtX57N4PHx1DZAWi0Zyh0dop3cnV8my3ZdQ0fR+GSI49z+1gcpSE</span>
+<span class="line">OgANIDb5Ejk3EalmYxv4OKWl9M3sztaP5q7dOAo5vYoTwFv9cnjXaj7+8F7b</span>
+<span class="line">fH0rQi/xJWeHd7BKHzgwz3zP/Wz57wFNvW9Yg0HVjjkBB/fwmqIGtImkVICV</span>
+<span class="line">JfhnWBApezI+m8W4GI777GtG+DhR3nsTJQ43DQARAQABzSJBbGluIEV1Z2Vu</span>
+<span class="line">IERlYWMgPGFlZGFydEBnbWFpbC5jb20+wsF1BBABCAAfBQJiEiciBgsJBwgD</span>
+<span class="line">AgQVCAoCAxYCAQIZAQIbAwIeAQAKCRBcsQfpwXzHeO1kEACHLk3KrWzJ3qqP</span>
+<span class="line">RP4RERnaD3wXy7j2my4zuAEDPq4miEekSfSSgna0yca5L22scDcJYk18wOlX</span>
+<span class="line">f3TprZVkQ0xKKukHMgaJY3ydpug1dEM1Ve9TxzDVUEqiOAxg55P0s5rA8Uec</span>
+<span class="line">exW8lzQcfCnR4ascuPCKoxo/zbvVoIZr3tnKaQirE+DJFcbsJlqNROG/XV+f</span>
+<span class="line">mwjpI2/LIi+qJ/qxmL8iqE4KqUI147Usk1wztQGc6aY0OfK7uxZ+s0YvkbFQ</span>
+<span class="line">lBJoJLG0MVodq9fpiakEzWN0q1OoQEJALrm1OvZD4JtxGSeSVw973y33nBdg</span>
+<span class="line">NDbbwXmeh4mu6ObZgmNImxt/nTLBWsqYTS/3mzyUC/3eimuYWIsSi7A8JJ/s</span>
+<span class="line">AmcG+Wp7yM9rRbiuZG/m0C+HneAICBcJ4QDV84XY4bMgu2zMgyWM5dbd65cR</span>
+<span class="line">7ug+p8z7g7CieH+H1OYXNApn8+7HZjw7CbMsUaAGk4IgndCb1kxxI8+q1Et4</span>
+<span class="line">waR0mMJ6uOslbP+24uEwrIe2boW4mcssqlNBSfBR3OCWs0VWNvB1tq1NBUZK</span>
+<span class="line">rMuqdPzL/eNtObuNcEndXz18VWWmJBJaGCC7r5ARXB+MzO07B5UTHCu1mXCR</span>
+<span class="line">6t9gqLuSEOwpbK8BJHSuyxYAPPlc7X7BUSlyZVmEqiVgmtHM0F6E4pydR7e4</span>
+<span class="line">uSiBOG7d0c7BTQRiEiciARAAzR2TnBvCNI3/3bl6ZOPtru0Yr++gjIsNYsNc</span>
+<span class="line">61wHDy9mhRENi1AjYngJK4UEmDrm/3rxlIrZrVm2OOXTLFxveGWJozeR1ovk</span>
+<span class="line">og3zojZyYOgr8AabEtRAbsEHwIfjCSXV/z0c4mp05Jtcztll0OM+NE962gRI</span>
+<span class="line">gt7tDzJweWKdsHOF4agQ3+L4g+nD76ZFLnpjoZsfSekdJLtCfl4bYVQgi4/I</span>
+<span class="line">FFpJM3o7CiHeEjm26eaIu5SQ/U2Ciwnepgp7WDq+J9pbQS/5pq8wjSqUO0wW</span>
+<span class="line">zyrD4fEjx2TnBTzV7aea4OumKZB6X+lJwTTpvN7BVF2ODfL2IEohzk14p3kM</span>
+<span class="line">RMSpNgGtFeg7lfFDW9j0zK6vHOkFSDUZ0VbWpj6K6FtsimKx92bSS046Bdu4</span>
+<span class="line">7l8Vx33vGk/QL09YiEJkeqE39DJ28TShyw1mtfUQXAJykaPIO9bpImTgYjwu</span>
+<span class="line">umD9y7v3Ubr+9g0Bvsy7byEsppDtcFCuYK1wtd6kvdFZSCEAJIc23JGPwVLJ</span>
+<span class="line">Mo7gDgR8W30TBuvhi2hEuwQq1kgE2XgrYMb4BbIo5OTplRqKePvEyq+Xgn1K</span>
+<span class="line">Kak4HErs0X6uFcCXynAGINIV2H7pVCtCYC0XtaoG6WvtC6NR1TWGpmhVchY0</span>
+<span class="line">3jCQdBpwvQyuTw4DcSJcbhFmJzo9PdzRN8fu8M4Kh9LapvUAEQEAAcLBXwQY</span>
+<span class="line">AQgACQUCYhInIgIbDAAKCRBcsQfpwXzHeEmKD/4mysrPW/t9BfDE4kWYBCHO</span>
+<span class="line">l54lXV9FfC6xHAR0v9qJTurv87svOZBwWeL8lnyFELB9DCLjgOtNT9ZbUcdm</span>
+<span class="line">HuesBTm9jV83K3uvMBqzPKvxX1IZnxhVsg+KSRocY3PMa2QPCyriKDZ7tsFe</span>
+<span class="line">5yMeXqHOtHuDsVzYJhmCK9oz85tl5xozFVJgmapn007ozAoK6XsQQmjY8U+C</span>
+<span class="line">jiL/WHdN9yuFxYnxwCdtJ7Nh72uixs2nRZKjcCzWAFYHo6iJuWbxWG2l4LIq</span>
+<span class="line">Rh9x3pLDSCth4xigObAaGiIj4nMWtrX9Re8/lze3BFKfB0IDp0+KUl63afeI</span>
+<span class="line">/xcOoJ5JkhFqe/AJVX203Gr6niqn3ckD08zeB3ZgMgTVTo2uwX03wM9AHz43</span>
+<span class="line">0Sp5n1c321E6mWtrBPTDL8xdBccLETYcmpDKA6jHUepwQTxst3ytbv/G1nZ5</span>
+<span class="line">Dj6ADe/CSC95O6CO5BeXkM3gZeMmkuHtxjue1MLLhnGgrp1HMjxp5L92tUMU</span>
+<span class="line">6chem/yKqEE5Ac0TCNMDAs+soQ/ISN++NQtk1f5QEDE2F7Ji8eLAFSclnXbh</span>
+<span class="line">lf1Hu4IaSrvr8q+ctAGIgrh/N4oWDm/jYPT+QPCQEaYKUuGBNHIWWU5Pb+9S</span>
+<span class="line">1IIhuIP3hQAzawPbIeoEgt2lCIii3BjLcZAZ2cVv9KuCG09D7F86j5Dz/R7V</span>
+<span class="line">gA==</span>
+<span class="line">=E13G</span>
+<span class="line">-----END PGP PUBLIC KEY BLOCK-----</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="supported-versions" tabindex="-1"><a class="header-anchor" href="#supported-versions"><span>Supported Versions</span></a></h2>`,8),i(`p`,null,[l[4]||=e(`Please read the `,-1),a(g,{to:`/archive/v8x/#support-policy`},{default:r(()=>[...l[3]||=[e(`Support Policy`,-1)]]),_:1}),l[5]||=e(` for additional information about what versions are supported.`,-1)])])}var p=c(u,[[`render`,f]]);export{l as _pageData,p as default};

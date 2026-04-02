@@ -1,0 +1,29 @@
+import{i as e,r as t,s as n,t as r}from"./app-B19bQ_Jx.js";var i=JSON.parse(`{"path":"/archive/v7x/translation/exporters/drivers/lang-js.html","title":"Lang.js (Array)","lang":"en-GB","frontmatter":{"description":"About Lang.js Exporter","sidebarDepth":0},"git":{"updatedTime":1710755140000,"contributors":[{"name":"alin","username":"alin","email":"alin@rspsystems.com","commits":3,"url":"https://github.com/alin"}],"changelog":[{"hash":"0b773db2c29e613c193c6a8a8ecaa74e0cc81a52","time":1710755140000,"email":"alin@rspsystems.com","author":"alin","message":"Move v7x docs into own directory"},{"hash":"491d5c1895dfde26d210ed089568f46c7f0f561f","time":1677145191000,"email":"alin@rspsystems.com","author":"alin","message":"Improve  documentation of available exporters"},{"hash":"80c218bc1975f46c640aa9b2b63f19f537cdcecf","time":1677078052000,"email":"alin@rspsystems.com","author":"alin","message":"Add translation package docs"}]},"filePathRelative":"archive/v7x/translation/exporters/drivers/lang-js.md","lastUpdatedDateFormat":"yyyy-MM-dd HH:mm:ss ZZZZ","lastUpdatedDateOptions":{}}`),a={name:`lang-js.md`};function o(r,i,a,o,s,c){return n(),t(`div`,null,[...i[0]||=[e(`<h1 id="lang-js-array" tabindex="-1"><a class="header-anchor" href="#lang-js-array"><span>Lang.js (Array)</span></a></h1><p><strong>Driver</strong>: <code>\\Aedart\\Translation\\Exports\\Drivers\\LangJsExporter</code></p><p>If you are using <a href="https://github.com/rmariuzzo/Lang.js" target="_blank" rel="noopener noreferrer">lang.js</a>, then you can use this exporter to create an array, that is formatted according to the <a href="https://github.com/rmariuzzo/Lang.js#messages-source-format" target="_blank" rel="noopener noreferrer">desired message format</a>.</p><div class="language-php line-numbers-mode" data-highlighter="prismjs" data-ext="php"><pre><code class="language-php"><span class="line"><span class="token variable">$translations</span> <span class="token operator">=</span> <span class="token variable">$manager</span></span>
+<span class="line">    <span class="token operator">-&gt;</span><span class="token function">profile</span><span class="token punctuation">(</span><span class="token string single-quoted-string">&#39;array&#39;</span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token operator">-&gt;</span><span class="token function">export</span><span class="token punctuation">(</span><span class="token string single-quoted-string">&#39;en&#39;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span> <span class="token string single-quoted-string">&#39;auth&#39;</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">&#39;acme::users&#39;</span> <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token function">print_r</span><span class="token punctuation">(</span><span class="token variable">$translations</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>The output format looks similar to the following:</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code class="language-text"><span class="line">Array</span>
+<span class="line">(</span>
+<span class="line">    [en.__JSON__] =&gt; Array</span>
+<span class="line">        (</span>
+<span class="line">            [ok] =&gt; Nice, mate!</span>
+<span class="line">        )</span>
+<span class="line">    [en.auth] =&gt; Array</span>
+<span class="line">        (</span>
+<span class="line">            [failed] =&gt; These credentials do not match our records.</span>
+<span class="line">            [password] =&gt; The provided password is incorrect.</span>
+<span class="line">            [throttle] =&gt; Too many login attempts. Please try again in :seconds seconds.</span>
+<span class="line">        )</span>
+<span class="line">    [en.translation-test::users] =&gt; Array</span>
+<span class="line">        (</span>
+<span class="line">            [greetings] =&gt; Comrades are the cannons of the weird halitosis.</span>
+<span class="line">            [messages] =&gt; Array</span>
+<span class="line">                (</span>
+<span class="line">                    [a] =&gt; Spacecrafts meet with ellipse!</span>
+<span class="line">                    [b] =&gt; Uniqueness is the only samadhi, the only guarantee of solitude.</span>
+<span class="line">                    [c] =&gt; Ho-ho-ho! punishment of beauty.</span>
+<span class="line">                )</span>
+<span class="line">        )</span>
+<span class="line">)</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,6)]])}var s=r(a,[[`render`,o]]);export{i as _pageData,s as default};
