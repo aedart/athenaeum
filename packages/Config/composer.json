@@ -26,13 +26,13 @@
         "aedart/athenaeum-contracts": "^10.1",
         "aedart/athenaeum-support": "^10.1",
         "aedart/athenaeum-utils": "^10.1",
-        "illuminate/config": "^v13.2.0",
-        "illuminate/filesystem": "^v13.2.0"
+        "illuminate/config": "^v13.3.0",
+        "illuminate/filesystem": "^v13.3.0"
     },
     "require-dev": {
         "devium/toml": "^1.0.6",
         "nette/neon": "^3.4.7",
-        "symfony/yaml": "^v8.0.6"
+        "symfony/yaml": "^v8.0.8"
     },
     "autoload": {
         "psr-4": {
