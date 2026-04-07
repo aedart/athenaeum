@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+**Breaking Changes**
+
+* `default()` method has been renamed to `getDefault()`, because "default" is a reserved PHP keyword (_in `\Aedart\Contracts\Utils\Enums\HasDefault`_).
+
+**Non-breaking Changes**
+
 * Updated dependencies (_service update_).
 * Upgraded docs to use `vuepress` version `2.0.0-rc.28`. [#271](https://github.com/aedart/athenaeum/issues/271).
 
