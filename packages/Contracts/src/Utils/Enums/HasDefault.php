@@ -15,5 +15,5 @@ interface HasDefault
      *
      * @return self
      */
-    public static function default(): self;
+    public static function getDefault(): self;
 }
