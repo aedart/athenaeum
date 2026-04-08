@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+* Cannot instantiate abstract class `Aedart\Database\Model` (_caused by defect introduced in Laravel `v13.3.0`_). [#270](https://github.com/aedart/athenaeum/issues/270).
 * Side navigation not displayed in docs. [#271](https://github.com/aedart/athenaeum/issues/271).
 * Documentation deploy script failure, when gh-pages not checked out locally (_does not affect any functionality of Athenaeum packages_).
 * Broken links in the documentation.
