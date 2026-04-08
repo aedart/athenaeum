@@ -7,15 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.1.0] - 2026-04-08
+
 ### Changed
+
+**Breaking Changes**
+
+* `default()` method has been renamed to `getDefault()`, because "default" is a reserved PHP keyword (_in `\Aedart\Contracts\Utils\Enums\HasDefault`_).
+
+**Non-breaking Changes**
 
 * Updated dependencies (_service update_).
 * Upgraded docs to use `vuepress` version `2.0.0-rc.28`. [#271](https://github.com/aedart/athenaeum/issues/271).
 
 ### Fixed
 
+* Cannot instantiate abstract class `Aedart\Database\Model` (_caused by defect introduced in Laravel `v13.3.0`_). [#270](https://github.com/aedart/athenaeum/issues/270).
 * Side navigation not displayed in docs. [#271](https://github.com/aedart/athenaeum/issues/271).
 * Documentation deploy script failure, when gh-pages not checked out locally (_does not affect any functionality of Athenaeum packages_).
+* Broken links in the documentation.
 
 ## [10.0.0] - 2026-03-30
 
@@ -2017,7 +2027,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/10.0.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/10.1.0...HEAD
+[10.1.0]: https://github.com/aedart/athenaeum/compare/10.0.0...10.1.0
 [10.0.0]: https://github.com/aedart/athenaeum/compare/9.25.1...10.0.0
 [9.25.1]: https://github.com/aedart/athenaeum/compare/9.25.0...9.25.1
 [9.25.0]: https://github.com/aedart/athenaeum/compare/9.24.0...9.25.0

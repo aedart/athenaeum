@@ -85,14 +85,14 @@ trait Identifiers
      *
      * @param int|Identifier|null $id [optional]
      *
-     * @return Identifier {@see Identifier::default()} if `null` is given
+     * @return Identifier {@see Identifier::getDefault()} if `null` is given
      *
      * @throws UnknownStateException
      */
     protected function resolveStateIdentifier(int|Identifier|null $id = null): Identifier
     {
         $resolved = match (true) {
-            is_null($id) => Identifier::default(),
+            is_null($id) => Identifier::getDefault(),
             $id instanceof Identifier => $id,
             default => identifier::tryFrom($id)
         };

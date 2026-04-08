@@ -98,4 +98,4 @@ class UserFilterBuilder extends BaseBuilder
 ## Onward
 
 By now, you should be able to create your own customised search filters, based on the received input from http query parameters.
-In the next section, you will find a few [predefined resource](./predefined/README.md). These may be useful for you, or perhaps act as inspiration for your own processors and filters. 
+In the next section, you will find a few predefined resource. These may be useful for you, or perhaps act as inspiration for your own processors and filters. 

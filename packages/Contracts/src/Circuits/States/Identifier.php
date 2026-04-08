@@ -47,7 +47,7 @@ enum Identifier: int implements
     /**
      * @inheritDoc
      */
-    public static function default(): self
+    public static function getDefault(): self
     {
         return self::CLOSED;
     }
