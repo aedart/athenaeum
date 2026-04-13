@@ -5,6 +5,8 @@ namespace Aedart\Testing\Helpers\Http;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Utils\Json;
 use JsonException;
+use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
@@ -37,11 +39,31 @@ class Response
         }
 
         if ($debug) {
-            ConsoleDebugger::output([
-                'status' => $jsonResponse->getStatusCode() . ' ' . $jsonResponse->statusText(),
-                'headers' => $jsonResponse->headers->all(),
-                'body' => $content
-            ]);
+            if ($jsonResponse instanceof SymfonyResponse) {
+                $content = $jsonResponse->getContent();
+
+                ConsoleDebugger::output([
+                    'status' => $jsonResponse->getStatusCode() . ' ' . $jsonResponse->statusText(),
+                    'headers' => $jsonResponse->headers->all(),
+                    'body' => !empty($content)
+                        ? Json::decode($content, true)
+                        : null,
+                ]);
+            } elseif ($jsonResponse instanceof ResponseInterface) {
+                $content = $jsonResponse->getBody()->getContents();
+
+                ConsoleDebugger::output([
+                    'status' => $jsonResponse->getStatusCode() . ' ' . $jsonResponse->getReasonPhrase(),
+                    'headers' => $jsonResponse->getHeaders(),
+                    'body' => !empty($content)
+                        ? Json::decode($content, true)
+                        : null,
+                ]);
+
+                $jsonResponse->getBody()->rewind();
+            }
+
+            // Otherwise, do nothing in this case...
         }
 
         return $content;
