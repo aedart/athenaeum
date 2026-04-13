@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* Added support for Psr `Response` in `RemovesResponsePayload` (_Http Api package_). [#274](https://github.com/aedart/athenaeum/issues/274).
+* Added support for outputting Psr `Response` in `\Aedart\Testing\Helpers\Http\Response`.
+
+### Fixed
+
+* Unable to use Psr `Response` in `RemovesResponsePayload` Http Middleware (_Http Api package_). [#274](https://github.com/aedart/athenaeum/issues/274).
+
 ## [10.1.0] - 2026-04-08
 
 ### Changed

@@ -3,9 +3,12 @@
 namespace Aedart\Tests\Integration\Http\Api\Middleware;
 
 use Aedart\Http\Api\Middleware\RemoveResponsePayload;
+use Aedart\Streams\FileStream;
 use Aedart\Testing\Helpers\Http\Response;
 use Aedart\Tests\TestCases\Http\ApiResourcesTestCase;
+use Aedart\Utils\Json;
 use Codeception\Attribute\Group;
+use GuzzleHttp\Psr7\HttpFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use JsonException;
@@ -65,6 +68,47 @@ class RemoveResponsePayloadMiddlewareTest extends ApiResourcesTestCase
      * @throws JsonException
      */
     #[Test]
+    public function convertsPsrResponseToNoContent(): void
+    {
+        $key = 'nrp';
+        Route::patch('/games/{id}', function (Request $request) {
+            $factory = new HttpFactory();
+            $body = FileStream::openTemporary()
+                ->append(Json::encode([
+                    'name' => $request->get('name', 'N/A')
+                ]))
+                ->positionToStart();
+
+            return $factory->createResponse(Status::OK)
+                ->withHeader('Content-Type', 'application/json')
+                ->withBody($body);
+        })
+            ->name('games.show')
+            ->middleware([
+                RemoveResponsePayload::class . ':' . $key
+            ]);
+
+        // Refresh name lookup or test could fail...
+        Route::getRoutes()->refreshNameLookups();
+
+        // ------------------------------------------------------------------ //
+
+        $url = route('games.show', 42) . '?' . $key . '=1';
+        $response = $this
+            ->patchJson($url, [
+                'name' => 'Sine Gordon'
+            ])
+            ->assertNoContent();
+
+        Response::decode($response);
+    }
+
+    /**
+     * @return void
+     *
+     * @throws JsonException
+     */
+    #[Test]
     public function doesNotConvertWhenResponseIsNotSuccessful(): void
     {
         $key = 'nrp';
@@ -72,6 +116,47 @@ class RemoveResponsePayloadMiddlewareTest extends ApiResourcesTestCase
             return response()->json([
                 'error' => 'some error'
             ], Status::UNPROCESSABLE_ENTITY);
+        })
+            ->name('games.show')
+            ->middleware([
+                RemoveResponsePayload::class . ':' . $key
+            ]);
+
+        // Refresh name lookup or test could fail...
+        Route::getRoutes()->refreshNameLookups();
+
+        // ------------------------------------------------------------------ //
+
+        $url = route('games.show', 42) . '?' . $key . '=1';
+        $response = $this
+            ->patchJson($url, [
+                'name' => 'Sine Gordon'
+            ])
+            ->assertUnprocessable();
+
+        Response::decode($response);
+    }
+
+    /**
+     * @return void
+     *
+     * @throws JsonException
+     */
+    #[Test]
+    public function doesNotConvertWhenPsrResponseIsNotSuccessful(): void
+    {
+        $key = 'nrp';
+        Route::patch('/games/{id}', function (Request $request) {
+            $factory = new HttpFactory();
+            $body = FileStream::openTemporary()
+                ->append(Json::encode([
+                    'error' => 'some error'
+                ]))
+                ->positionToStart();
+
+            return $factory->createResponse(Status::UNPROCESSABLE_ENTITY)
+                ->withHeader('Content-Type', 'application/json')
+                ->withBody($body);
         })
             ->name('games.show')
             ->middleware([
