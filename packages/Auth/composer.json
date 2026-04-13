@@ -16,8 +16,8 @@
     "type": "library",
     "require": {
         "php": "^8.4",
-        "aedart/athenaeum-contracts": "^10.2",
-        "aedart/athenaeum-support": "^10.2",
+        "aedart/athenaeum-contracts": "^10.3",
+        "aedart/athenaeum-support": "^10.3",
         "illuminate/validation": "^v13.3.0",
         "laravel/fortify": "^1.36.2",
         "shrikeh/teapot": "^3.0.0"
