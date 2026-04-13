@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.2.0] - 2026-04-13
+
 ### Changed
 
 * Added support for Psr `Response` in `RemovesResponsePayload` (_Http Api package_). [#274](https://github.com/aedart/athenaeum/issues/274).
@@ -2036,7 +2038,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/10.1.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/10.2.0...HEAD
+[10.2.0]: https://github.com/aedart/athenaeum/compare/10.1.0...10.2.0
 [10.1.0]: https://github.com/aedart/athenaeum/compare/10.0.0...10.1.0
 [10.0.0]: https://github.com/aedart/athenaeum/compare/9.25.1...10.0.0
 [9.25.1]: https://github.com/aedart/athenaeum/compare/9.25.0...9.25.1
