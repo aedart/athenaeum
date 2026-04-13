@@ -62,6 +62,8 @@
         "roave/security-advisories": "dev-master",
         "symfony/var-dumper": "^v8.0.8",
         "symfony/yaml": "^v8.0.8",
+        "symfony/psr-http-message-bridge": "^v8.0.8",
+        "nyholm/psr7": "^1.8.2",
         "twig/twig": "^3.24.0"
     },
     "autoload": {

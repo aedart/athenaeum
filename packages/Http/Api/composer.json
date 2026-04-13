@@ -22,6 +22,7 @@
         "aedart/athenaeum-etags": "^10.2",
         "aedart/athenaeum-support": "^10.2",
         "aedart/athenaeum-validation": "^10.2",
+        "aedart/athenaeum-streams": "^10.2",
         "illuminate/http": "^v13.3.0",
         "shrikeh/teapot": "^3.0.0"
     },
