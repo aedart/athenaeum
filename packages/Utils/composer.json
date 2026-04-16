@@ -22,7 +22,7 @@
     "require": {
         "php": "^8.4",
         "composer-runtime-api": "^2.2.2",
-        "aedart/athenaeum-contracts": "^10.2",
+        "aedart/athenaeum-contracts": "^10.3",
         "illuminate/support": "^v13.3.0",
         "mockery/mockery": "1.6.*"
     },
