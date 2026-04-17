@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Refactored `EventData` concern to make use of new `Resolver` util (_Audit package_). [#276](https://github.com/aedart/athenaeum/issues/276).
 * `AuditTrailServiceProvider` now binds the `LegacyRecordFormatter` as the default formatter, which is returned by `Resolver::makeDefaultFormatter`(_Audit package_). [#276](https://github.com/aedart/athenaeum/issues/276), [#245](https://github.com/aedart/athenaeum/issues/245).
+* Updated dependencies (_service update_).
 
 ## [10.2.0] - 2026-04-13
 
