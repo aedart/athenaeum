@@ -3,6 +3,7 @@
 namespace Aedart\Audit\Formatters;
 
 use Aedart\Contracts\Audit\Formatter;
+use Aedart\Support\Facades\IoCFacade;
 use Illuminate\Database\Eloquent\Model;
 use LogicException;
 
@@ -46,8 +47,6 @@ class Resolver
      */
     public static function makeDefaultFormatter(Model $model): Formatter
     {
-        // TODO: Replace Legacy Record Formatter with "DefaultRecordFormatter"
-        // TODO: @see https://github.com/aedart/athenaeum/issues/245
-        return new LegacyRecordFormatter($model);
+        return IoCFacade::make(Formatter::class, compact('model'));
     }
 }
