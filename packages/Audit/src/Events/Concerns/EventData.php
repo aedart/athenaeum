@@ -2,7 +2,7 @@
 
 namespace Aedart\Audit\Events\Concerns;
 
-use Aedart\Audit\Formatters\LegacyRecordFormatter;
+use Aedart\Audit\Formatters\Resolver;
 use Aedart\Audit\Observers\Concerns\ModelAttributes;
 use Aedart\Contracts\Audit\Formatter;
 use Aedart\Contracts\Audit\Types;
@@ -11,7 +11,6 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Support\Carbon;
-use LogicException;
 
 /**
  * Concerns Event Data for audit trail
@@ -114,9 +113,7 @@ trait EventData
      */
     public function makeDefaultAuditTrailFormatter(Model $model): Formatter
     {
-        // TODO: Replace Legacy Record Formatter with "DefaultRecordFormatter"
-        // TODO: @see https://github.com/aedart/athenaeum/issues/245
-        return new LegacyRecordFormatter($model);
+        return Resolver::makeDefaultFormatter($model);
     }
 
     /**
@@ -233,17 +230,6 @@ trait EventData
      */
     protected function resolveRecordFormatter(Model $model): Formatter
     {
-        $formatter = match (true) {
-            method_exists($model, 'auditTrailRecordFormatter') => $model->auditTrailRecordFormatter(),
-            default => $this->makeDefaultAuditTrailFormatter($model),
-        };
-
-        return match (true) {
-            $formatter instanceof Formatter => $formatter,
-            is_null($formatter) => $this->makeDefaultAuditTrailFormatter($model),
-            is_string($formatter) && class_exists($formatter) => new $formatter($model),
-            is_string($formatter) && !class_exists($formatter) => throw new LogicException(sprintf('Invalid Audit Trail Formatter class path "%s", for model %s', $formatter, $model::class)),
-            default => throw new LogicException(sprintf('Unable to resolve Audit Trail Record Formatter for model %s', $model::class))
-        };
+        return Resolver::resolve($model);
     }
 }
