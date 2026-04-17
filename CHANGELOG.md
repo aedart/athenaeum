@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.3.0] - 2026-04-17
+
 ### Added
 
 * `Resolver` util that allows resolving an audit trail record `Formatter` for a given model (_Audit package_). [#276](https://github.com/aedart/athenaeum/issues/276).
@@ -2048,7 +2050,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/10.2.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/10.3.0...HEAD
+[10.3.0]: https://github.com/aedart/athenaeum/compare/10.2.0...10.3.0
 [10.2.0]: https://github.com/aedart/athenaeum/compare/10.1.0...10.2.0
 [10.1.0]: https://github.com/aedart/athenaeum/compare/10.0.0...10.1.0
 [10.0.0]: https://github.com/aedart/athenaeum/compare/9.25.1...10.0.0
