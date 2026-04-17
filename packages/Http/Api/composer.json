@@ -20,10 +20,10 @@
         "php": "^8.4",
         "aedart/athenaeum-contracts": "^10.3",
         "aedart/athenaeum-etags": "^10.3",
+        "aedart/athenaeum-streams": "^10.3",
         "aedart/athenaeum-support": "^10.3",
         "aedart/athenaeum-validation": "^10.3",
-        "aedart/athenaeum-streams": "^10.3",
-        "illuminate/http": "^v13.3.0",
+        "illuminate/http": "^v13.5.0",
         "shrikeh/teapot": "^3.0.0"
     },
     "autoload": {
