@@ -16,8 +16,8 @@
     "type": "library",
     "require": {
         "php": "^8.4",
-        "aedart/athenaeum-container": "^10.5",
-        "aedart/athenaeum-contracts": "^10.5",
+        "aedart/athenaeum-container": "^10.6",
+        "aedart/athenaeum-contracts": "^10.6",
         "codeception/codeception": "^5.3.5",
         "codeception/module-asserts": "^3.3.0",
         "fakerphp/faker": "^v1.24.1",
