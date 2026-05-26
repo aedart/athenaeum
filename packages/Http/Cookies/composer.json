@@ -19,7 +19,7 @@
     "type": "library",
     "require": {
         "php": "^8.4",
-        "aedart/athenaeum-contracts": "^10.7"
+        "aedart/athenaeum-contracts": "^10.8"
     },
     "autoload": {
         "psr-4": {

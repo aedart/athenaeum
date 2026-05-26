@@ -18,9 +18,9 @@
     "type": "library",
     "require": {
         "php": "^8.4",
-        "aedart/athenaeum-contracts": "^10.7",
-        "aedart/athenaeum-mime-types": "^10.7",
-        "aedart/athenaeum-support": "^10.7",
+        "aedart/athenaeum-contracts": "^10.8",
+        "aedart/athenaeum-mime-types": "^10.8",
+        "aedart/athenaeum-support": "^10.8",
         "psr/http-message": "^2.0"
     },
     "autoload": {
