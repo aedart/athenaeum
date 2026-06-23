@@ -20,11 +20,11 @@
     "type": "library",
     "require": {
         "php": "^8.4",
-        "aedart/athenaeum-contracts": "^10.10",
-        "aedart/athenaeum-database": "^10.10",
-        "aedart/athenaeum-support": "^10.10",
-        "aedart/athenaeum-utils": "^10.10",
-        "aedart/athenaeum-validation": "^10.10",
+        "aedart/athenaeum-contracts": "^10.11",
+        "aedart/athenaeum-database": "^10.11",
+        "aedart/athenaeum-support": "^10.11",
+        "aedart/athenaeum-utils": "^10.11",
+        "aedart/athenaeum-validation": "^10.11",
         "illuminate/auth": "^v13.16.1"
     },
     "autoload": {
