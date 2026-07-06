@@ -23,7 +23,7 @@
         "aedart/athenaeum-streams": "^10.12",
         "aedart/athenaeum-support": "^10.12",
         "aedart/athenaeum-validation": "^10.12",
-        "illuminate/http": "^v13.17.0",
+        "illuminate/http": "^v13.18.1",
         "shrikeh/teapot": "^3.0.0"
     },
     "autoload": {
