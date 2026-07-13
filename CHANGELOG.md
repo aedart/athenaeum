@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* Updated dependencies (_service update_).
+
+### Fixed
+
+* Method `HttpClientsTestCase::query()` overrides method `LaravelTestCase::query()`, but misses parameters (_renamed `query()` to `queryBuilder()` to avoid name conflict in tests_).
+
 ## [10.12.0] - 2026-07-06
 
 ### Changed
