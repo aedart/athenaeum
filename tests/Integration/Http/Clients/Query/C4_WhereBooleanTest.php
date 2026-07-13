@@ -67,7 +67,7 @@ class C4_WhereBooleanTest extends HttpClientsTestCase
     public function canAddWhereBoolean(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->where('has_children', true)
             ->where('has_posts', false)
             ->build();

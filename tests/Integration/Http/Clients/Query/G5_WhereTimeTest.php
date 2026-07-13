@@ -90,7 +90,7 @@ class G5_WhereTimeTest extends HttpClientsTestCase
     public function canAddWhereTime(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereTime('created', '2020-04-05 16:58')
             ->build();
 
@@ -111,7 +111,7 @@ class G5_WhereTimeTest extends HttpClientsTestCase
     public function canAddOrWhereTime(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereTime('created', '2020-04-05 16:58')
             ->orWhereTime('created', '2020-04-07 18:58')
             ->build();

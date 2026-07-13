@@ -90,7 +90,7 @@ class C1_OrWhereTest extends HttpClientsTestCase
     public function canAddOrWhere(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->where('name', 'john')
             ->orWhere('gender', 'male')
             ->build();
@@ -112,7 +112,7 @@ class C1_OrWhereTest extends HttpClientsTestCase
     public function canAddMultipleConditionsViaArray(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->orWhere([
                 'year' => [
                     'gt' => 2021,

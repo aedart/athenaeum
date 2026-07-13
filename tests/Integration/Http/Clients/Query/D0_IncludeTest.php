@@ -88,7 +88,7 @@ class D0_IncludeTest extends HttpClientsTestCase
     public function canIncludeSingleResource(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->include('jobs')
             ->build();
 
@@ -109,7 +109,7 @@ class D0_IncludeTest extends HttpClientsTestCase
     public function canIncludeMultipleResources(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->include('jobs')
             ->include(['posts', 'friends.name'])
             ->build();

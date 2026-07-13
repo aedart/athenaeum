@@ -79,7 +79,7 @@ class C6_WhereObjectTest extends HttpClientsTestCase
         };
 
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->where('address', $address)
             ->build();
 

@@ -70,7 +70,7 @@ class E1_PageNumberPageSizeTest extends HttpClientsTestCase
     public function canSetPageWithSize(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->page(3, 25)
             ->build();
 

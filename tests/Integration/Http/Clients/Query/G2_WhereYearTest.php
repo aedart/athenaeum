@@ -96,7 +96,7 @@ class G2_WhereYearTest extends HttpClientsTestCase
     public function canAddWhereYear(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereYear('created', now())
             ->build();
 
@@ -117,7 +117,7 @@ class G2_WhereYearTest extends HttpClientsTestCase
     public function canAddOrWhereYear(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereYear('created', now())
             ->orWhereYear('created', now()->addYears(2))
             ->build();

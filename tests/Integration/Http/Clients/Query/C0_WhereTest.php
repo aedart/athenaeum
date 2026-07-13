@@ -185,7 +185,7 @@ class C0_WhereTest extends HttpClientsTestCase
     public function canAddWhereFieldEqualsValue(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->where('name', 'john')
             ->build();
 
@@ -206,7 +206,7 @@ class C0_WhereTest extends HttpClientsTestCase
     public function canAddWhereWithOperatorAndValue(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->where('year', 'gt', 2020)
             ->build();
 
@@ -227,7 +227,7 @@ class C0_WhereTest extends HttpClientsTestCase
     public function canAddMultipleConditionsOnSameField(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->where('year', 'gt', 2020)
             ->where('year', 'lt', 2051)
             ->build();
@@ -249,7 +249,7 @@ class C0_WhereTest extends HttpClientsTestCase
     public function canAddMultipleConditionsViaArray(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->where([
                 'year' => [
                     'gt' => 2021,
@@ -276,7 +276,7 @@ class C0_WhereTest extends HttpClientsTestCase
     public function canAddWhereWithArrayValue(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->where('users', [1, 2, 3, 4])
             ->build();
 
@@ -297,7 +297,7 @@ class C0_WhereTest extends HttpClientsTestCase
     public function canAddWhereWithOperatorAndArrayValue(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->where('users', 'in', [1, 2, 3, 4])
             ->build();
 

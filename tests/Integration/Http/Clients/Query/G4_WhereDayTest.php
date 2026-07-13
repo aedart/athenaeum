@@ -95,7 +95,7 @@ class G4_WhereDayTest extends HttpClientsTestCase
     public function canAddWhereDay(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereDay('created', now())
             ->build();
 
@@ -116,7 +116,7 @@ class G4_WhereDayTest extends HttpClientsTestCase
     public function canAddOrWhereDay(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereDay('created', now())
             ->orWhereDay('created', now()->addDays(2))
             ->build();

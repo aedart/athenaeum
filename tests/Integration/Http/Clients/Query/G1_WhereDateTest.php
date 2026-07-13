@@ -95,7 +95,7 @@ class G1_WhereDateTest extends HttpClientsTestCase
     public function canAddWhereDate(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereDate('created', now())
             ->build();
 
@@ -116,7 +116,7 @@ class G1_WhereDateTest extends HttpClientsTestCase
     public function canAddOrWhereDate(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereDate('created', now())
             ->orWhereDate('created', now()->addYears(1))
             ->build();

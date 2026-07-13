@@ -95,7 +95,7 @@ class G3_WhereMonthTest extends HttpClientsTestCase
     public function canAddWhereMonth(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereMonth('created', now())
             ->build();
 
@@ -116,7 +116,7 @@ class G3_WhereMonthTest extends HttpClientsTestCase
     public function canAddOrWhereMonth(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereMonth('created', now())
             ->orWhereMonth('created', now()->addMonths(2))
             ->build();

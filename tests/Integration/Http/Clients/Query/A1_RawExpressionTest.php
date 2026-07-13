@@ -62,7 +62,7 @@ class A1_RawExpressionTest extends HttpClientsTestCase
     public function canAddRawExpressions(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->raw('search=person from (:list)', [ 'list' => 'a,b,c' ])
             ->build();
 

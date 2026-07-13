@@ -128,7 +128,7 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
     public function canAddWhereDatetime(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereDatetime('created', '2020-04-05')
             ->build();
 
@@ -149,7 +149,7 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
     public function canAddWhereDatetimeFromDateInstance(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereDatetime('created', Date::make('2020-04-05 12:29:01+02:00'))
             ->build();
 
@@ -169,7 +169,7 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
     public function defaultsToNowWhenNoDateGiven(string $grammar)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereDatetime('created')
             ->build();
 
@@ -195,7 +195,7 @@ class G0_WhereDatetimeTest extends HttpClientsTestCase
     public function canAddOrWhereDatetime(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereDatetime('created', '2020-04-05')
             ->orWhereDatetime('created', '2020-04-06')
             ->build();

@@ -113,7 +113,7 @@ class B1_SelectRawTest extends HttpClientsTestCase
     public function canSelectRawExpression(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->selectRaw('account(42)')
             ->build();
 
@@ -134,7 +134,7 @@ class B1_SelectRawTest extends HttpClientsTestCase
     public function injectsBindings(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->selectRaw('account(:number)', [ 'number' => 3214 ])
             ->build();
 
@@ -155,7 +155,7 @@ class B1_SelectRawTest extends HttpClientsTestCase
     public function canSelectRegularAndRaw(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->select('name', 'person')
             ->selectRaw('account(:number)', [ 'number' => 7 ])
             ->build();

@@ -68,7 +68,7 @@ class C5_WhereCallbackTest extends HttpClientsTestCase
     public function canAddWhereCallback(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->where('box_size', function () {
                 return 5 * 2;
             })

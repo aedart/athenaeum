@@ -152,7 +152,7 @@ class C2_WhereRawTest extends HttpClientsTestCase
     public function canAddWhereRawExpression(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereRaw('user=john')
             ->build();
 
@@ -173,7 +173,7 @@ class C2_WhereRawTest extends HttpClientsTestCase
     public function canAddOrWhereRawExpression(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereRaw('user=john')
             ->orWhereRaw('gender=male')
             ->build();
@@ -195,7 +195,7 @@ class C2_WhereRawTest extends HttpClientsTestCase
     public function injectsBindings(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->whereRaw('filter=user eq :amount', [ 'amount' => 10 ])
             ->build();
 
@@ -216,7 +216,7 @@ class C2_WhereRawTest extends HttpClientsTestCase
     public function canCombineWhereWithRawWhere(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->where('name', 'like', 'john')
             ->whereRaw('filter=age gt :amount', [ 'amount' => 25 ])
             ->build();

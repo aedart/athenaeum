@@ -136,7 +136,7 @@ class B0_SelectTest extends HttpClientsTestCase
     public function canSelectSingleField(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->select('name')
             ->build();
 
@@ -157,7 +157,7 @@ class B0_SelectTest extends HttpClientsTestCase
     public function canSelectSingleFieldFromResource(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->select('name', 'person')
             ->build();
 
@@ -178,7 +178,7 @@ class B0_SelectTest extends HttpClientsTestCase
     public function canSelectMultipleFields(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->select(['name', 'age', 'jobTitle'])
             ->build();
 
@@ -199,7 +199,7 @@ class B0_SelectTest extends HttpClientsTestCase
     public function canSelectMultipleFieldsFromResources(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->select([
                 'name' => 'person',
                 'age' => 'person',

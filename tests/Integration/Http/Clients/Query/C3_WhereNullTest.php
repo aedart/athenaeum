@@ -67,7 +67,7 @@ class C3_WhereNullTest extends HttpClientsTestCase
     public function canAddWhereNull(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->where('name', null)
             ->build();
 

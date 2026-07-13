@@ -113,7 +113,7 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
     public function canSetLimit(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->take(10)
             ->build();
 
@@ -134,7 +134,7 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
     public function canSetOffset(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->skip(5)
             ->build();
 
@@ -155,7 +155,7 @@ class E0_LimitOffsetTest extends HttpClientsTestCase
     public function canSetLimitAndOffset(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->take(50)
             ->skip(2)
             ->build();

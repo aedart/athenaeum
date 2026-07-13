@@ -55,7 +55,7 @@ class A0_InstanceTest extends HttpClientsTestCase
     #[Test]
     public function canObtainInstance(string $grammar)
     {
-        $query = $this->query($grammar);
+        $query = $this->queryBuilder($grammar);
 
         $this->assertInstanceOf(Builder::class, $query);
     }
@@ -69,7 +69,7 @@ class A0_InstanceTest extends HttpClientsTestCase
     #[Test]
     public function hasGrammarInstance(string $grammar)
     {
-        $query = $this->query($grammar);
+        $query = $this->queryBuilder($grammar);
         $grammar = $query->getGrammar();
 
         $this->assertInstanceOf(Grammar::class, $grammar);

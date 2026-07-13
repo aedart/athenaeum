@@ -134,7 +134,7 @@ class F0_OrderByTest extends HttpClientsTestCase
     public function canOrderBySingleFieldAsc(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->orderBy('name')
             ->build();
 
@@ -155,7 +155,7 @@ class F0_OrderByTest extends HttpClientsTestCase
     public function canOrderBySingleFieldDesc(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->orderBy('name', 'desc')
             ->build();
 
@@ -176,7 +176,7 @@ class F0_OrderByTest extends HttpClientsTestCase
     public function canOrderByMultipleFields(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->orderBy('name')
             ->orderBy('age', 'desc')
             ->build();
@@ -198,7 +198,7 @@ class F0_OrderByTest extends HttpClientsTestCase
     public function canOrderByMultipleFieldsViaArray(string $grammar, string $expected)
     {
         $result = $this
-            ->query($grammar)
+            ->queryBuilder($grammar)
             ->orderBy([
                 'name' => 'desc',
                 'age',

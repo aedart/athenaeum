@@ -117,8 +117,8 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     /**
      * Creates or obtains Http Client that matches given profile
      *
-     * @param string $profile [optional]
-     * @param array $options [optional]
+     * @param  string|null  $profile  [optional]
+     * @param  array  $options  [optional]
      *
      * @return Client
      *
@@ -132,13 +132,13 @@ abstract class HttpClientsTestCase extends LaravelTestCase
     /**
      * Creates a new Http Query instance
      *
-     * @param string|Grammar|null $grammar [optional]
+     * @param  string|Grammar|null  $grammar [optional]
      *
      * @return QueryBuilderInterface
      *
      * @throws ProfileNotFoundException
      */
-    public function query($grammar = null): QueryBuilderInterface
+    public function queryBuilder(Grammar|string|null $grammar = null): QueryBuilderInterface
     {
         return new QueryBuilder($grammar);
     }
