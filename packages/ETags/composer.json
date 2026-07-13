@@ -23,7 +23,7 @@
         "aedart/athenaeum-streams": "^10.13",
         "aedart/athenaeum-support": "^10.13",
         "aedart/athenaeum-utils": "^10.13",
-        "illuminate/http": "^v13.18.1",
+        "illuminate/http": "^v13.19.0",
         "ramsey/http-range": "^2.0.0"
     },
     "autoload": {

@@ -27,11 +27,11 @@
         "aedart/athenaeum-service": "^10.13",
         "aedart/athenaeum-support": "^10.13",
         "aedart/athenaeum-utils": "^10.13",
-        "illuminate/cache": "^v13.18.1",
-        "illuminate/filesystem": "^v13.18.1",
+        "illuminate/cache": "^v13.19.0",
+        "illuminate/filesystem": "^v13.19.0",
         "psr/log": "^3.0.2",
         "symfony/console": "^v8.1.1",
-        "vlucas/phpdotenv": "^5.6.3"
+        "vlucas/phpdotenv": "^5.6.4"
     },
     "require-dev": {
         "symfony/var-dumper": "^v8.1.1"
