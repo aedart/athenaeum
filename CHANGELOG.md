@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.16.1] - 2026-08-17
+
+### Fixed
+
+* Incorrect version constraint for `laravel/fortify` (_constraint resulted in dev version being used, instead of latest stable version_).
+
 ## [10.16.0] - 2026-08-14
 
 ### Changed
@@ -2133,7 +2139,8 @@ It will high-jack the `app` binding, which will cause your application to behave
 
 * Please review commits on [GitHub](https://github.com/aedart/athenaeum/commits/master)
 
-[Unreleased]: https://github.com/aedart/athenaeum/compare/10.16.0...HEAD
+[Unreleased]: https://github.com/aedart/athenaeum/compare/10.16.1...HEAD
+[10.16.1]: https://github.com/aedart/athenaeum/compare/10.16.0...10.16.1
 [10.16.0]: https://github.com/aedart/athenaeum/compare/10.15.0...10.16.0
 [10.15.0]: https://github.com/aedart/athenaeum/compare/10.14.0...10.15.0
 [10.14.0]: https://github.com/aedart/athenaeum/compare/10.13.0...10.14.0
