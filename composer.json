@@ -52,7 +52,7 @@
         "codeception/module-asserts": "^3.3.0",
         "devium/toml": "^1.1.0",
         "illuminate/testing": "^v13.25.0",
-        "laravel/fortify": "^1.38.3",
+        "laravel/fortify": "^1.38.0",
         "league/flysystem-adapter-test-utilities": "^3.30.1",
         "nette/neon": "^3.4.8",
         "nyholm/psr7": "^1.8.2",
