@@ -18,13 +18,13 @@
         "php": "^8.4",
         "aedart/athenaeum-container": "^10.21",
         "aedart/athenaeum-contracts": "^10.21",
-        "codeception/codeception": "^5.3.5",
+        "codeception/codeception": "^5.3.6",
         "codeception/module-asserts": "^3.3.0",
         "fakerphp/faker": "^v1.24.1",
-        "illuminate/testing": "^v13.32.0",
+        "illuminate/testing": "^v13.33.0",
         "mockery/mockery": "1.6.*",
-        "orchestra/testbench": "^v11.2.0",
-        "orchestra/testbench-dusk": "^v11.4.1"
+        "orchestra/testbench": "^v11.3.0",
+        "orchestra/testbench-dusk": "^v11.5.0"
     },
     "autoload": {
         "psr-4": {
