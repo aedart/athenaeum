@@ -92,11 +92,9 @@ trait Pagination
      */
     public function paginationValidationRules(): array
     {
-        $show = "digits_between:{$this->showMinimum},{$this->showMaximum}";
-
         return [
             $this->pageKey => ['nullable', 'integer', 'min:1'],
-            $this->showKey => ['nullable', 'integer', $show]
+            $this->showKey => ['nullable', 'integer', "min:{$this->showMinimum}", "max:{$this->showMaximum}"],
         ];
     }
 
