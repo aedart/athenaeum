@@ -81,6 +81,35 @@ class ListResourcesRequestTest extends ApiResourceRequestsTestCase
      * @throws JsonException
      */
     #[Test]
+    public function rejectsWhenPaginationValuesAreInvalid(): void
+    {
+        Route::get('/users', function (ListUsersRequest $request) {
+            return UserResource::collection(
+                User::query()
+                    ->paginate($request->show)
+            );
+        })->name('users.index');
+
+        Route::getRoutes()->refreshNameLookups();
+
+        // ------------------------------------------------------------------ //
+
+        $limit = 1000;
+
+        $url = route('users.index') . '?show=' . $limit . '&page=2';
+        $response = $this
+            ->getJson($url)
+            ->assertUnprocessable();
+
+        Response::decode($response);
+    }
+
+    /**
+     * @return void
+     *
+     * @throws JsonException
+     */
+    #[Test]
     public function canBuildAndApplyFilters(): void
     {
         /** @var User $expected */
