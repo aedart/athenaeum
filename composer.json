@@ -157,6 +157,11 @@
             "bin-links": false,
             "target-directory": "vendor-bin",
             "forward-command": false
+        },
+        "policy": {
+            "cooldown": {
+                "period": "3 days"
+            }
         }
     },
     "replace": {
