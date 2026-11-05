@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+* Added `cooldown` policy for dependencies, in root level `composer.json`.
+
 ## [10.25.0] - 2026-11-04
 
 ### Changed
