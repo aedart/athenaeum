@@ -161,6 +161,9 @@
         "policy": {
             "cooldown": {
                 "period": "3 days"
+            },
+            "abandoned": {
+                "audit": "report"
             }
         }
     },
