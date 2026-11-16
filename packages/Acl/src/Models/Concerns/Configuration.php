@@ -48,7 +48,7 @@ trait Configuration
      *
      * @return Model & Authenticatable
      */
-    public function aclUserModelInstance(): Model & Authenticatable
+    public function aclUserModelInstance(): Model &Authenticatable
     {
         // NOTE: We cannot rely on the "make()" method being available
         // for the user model. So we create a new instance the old

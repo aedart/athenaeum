@@ -694,7 +694,7 @@ class DownloadStream implements
      * @throws StreamException
      * @throws RuntimeException
      */
-    public function getStream(): FileStreamInterface & Detectable
+    public function getStream(): FileStreamInterface &Detectable
     {
         $data = $this->attachment();
         if (!isset($data)) {
@@ -894,7 +894,7 @@ class DownloadStream implements
      * @throws MimeTypeDetectionException
      */
     protected function outputMultipleRanges(
-        FileStreamInterface & Detectable $stream,
+        FileStreamInterface &Detectable $stream,
         CollectionInterface $ranges,
         string $boundary,
         int|null $bufferSize = null,

@@ -66,7 +66,7 @@ class ShowUserRequest extends FormRequest
      *
      * @throws ETagGeneratorException
      */
-    protected function makeResourceContext(Model & HasEtag $model): ResourceContext
+    protected function makeResourceContext(Model &HasEtag $model): ResourceContext
     {
         return new GenericResource(
             data: $model,
@@ -80,7 +80,7 @@ class ShowUserRequest extends FormRequest
      *
      * @return Model & HasEtag
      */
-    protected function findOrFailModel(): Model & HasEtag
+    protected function findOrFailModel(): Model &HasEtag
     {
         $model = new class() extends Model implements HasEtag {
             use EloquentEtag;

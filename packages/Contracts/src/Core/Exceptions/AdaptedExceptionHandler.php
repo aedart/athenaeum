@@ -16,7 +16,6 @@ interface AdaptedExceptionHandler extends ExceptionHandler
     /**
      * Overwritten {@see ExceptionHandler::render} that does NOT return.
      *
-     * @param $request
      * @param Throwable $e
      *
      * @return void

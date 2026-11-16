@@ -870,7 +870,6 @@ class DatabaseAdapter implements
      * Write file contents record
      *
      * @param string $path
-     * @param $stream
      * @param Config $config
      *
      * @return array
