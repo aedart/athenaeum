@@ -9,8 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+* `aedart/athenaeum-testing` now depends on `aedart/athenaeum-utils`. [#280](https://github.com/aedart/athenaeum/issues/280).
 * Updated dependencies (_service update_).
 
+### Fixed
+
+* PHP v8.6 compatibility issue using `trim()`, `ltrim()` and `rtrim()` without `$characters` parameter explicitly set (_in multiple packages_). [#280](https://github.com/aedart/athenaeum/issues/280).
+* Deprecation warning when for `is_integer()` (_function is deprecated in PHP v8.6_). [#280](https://github.com/aedart/athenaeum/issues/280).
 
 ## [10.26.0] - 2026-11-16
 
