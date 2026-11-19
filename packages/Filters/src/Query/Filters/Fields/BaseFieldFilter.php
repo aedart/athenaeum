@@ -7,6 +7,7 @@ use Aedart\Filters\Query\Filters\Concerns;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
 use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
 use Aedart\Utils\Dates\Precision;
+use Aedart\Utils\Str;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Support\Carbon;
@@ -486,7 +487,7 @@ abstract class BaseFieldFilter extends FieldFilter
     protected function valueToList(string $value, string $delimiter = ','): array
     {
         return array_map(function ($item) {
-            return trim($item);
+            return Str::trim($item);
         }, explode($delimiter, $value));
     }
 

@@ -8,6 +8,7 @@ use Aedart\Contracts\Http\Clients\Requests\Query\Grammar;
 use Aedart\Contracts\Http\Clients\Requests\Query\Identifiers;
 use Aedart\Http\Clients\Exceptions\UnableToBuildHttpQuery;
 use Aedart\Http\Clients\Requests\Query\Grammars\Dates\DateValue;
+use Aedart\Utils\Str;
 use DateTime;
 use DateTimeInterface;
 use Exception;
@@ -251,18 +252,18 @@ abstract class BaseGrammar implements
         foreach ($fields as $field => $from) {
             // When an expression is given
             if (is_numeric($field)) {
-                $output[] = trim($from);
+                $output[] = Str::trim($from);
                 continue;
             }
 
             // When "from resource" isn't provided
             if (empty($from)) {
-                $output[] = trim($field);
+                $output[] = Str::trim($field);
                 continue;
             }
 
             // When "from resource" and field is given
-            $output[] = $this->compileFieldFromResource(trim($field), trim($from));
+            $output[] = $this->compileFieldFromResource(Str::trim($field), Str::trim($from));
         }
 
         return implode(',', $output);
@@ -390,7 +391,7 @@ abstract class BaseGrammar implements
     {
         $conjunction = $this->resolveConjunction($where[self::CONJUNCTION]);
 
-        return trim($conjunction . $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]));
+        return Str::trim($conjunction . $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]));
     }
 
     /**
@@ -423,7 +424,7 @@ abstract class BaseGrammar implements
      */
     protected function compileInclude(string $resource): string
     {
-        return trim($resource);
+        return Str::trim($resource);
     }
 
     /**
@@ -600,7 +601,7 @@ abstract class BaseGrammar implements
             throw new UnableToBuildHttpQuery(sprintf('Expected string operator for %s, %s given', $field, gettype($operator)));
         }
 
-        return trim($operator);
+        return Str::trim($operator);
     }
 
     /**

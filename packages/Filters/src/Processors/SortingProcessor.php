@@ -8,6 +8,7 @@ use Aedart\Filters\BaseProcessor;
 use Aedart\Filters\Exceptions\InvalidParameter;
 use Aedart\Filters\Query\Filters\Concerns\SortingCallbacks;
 use Aedart\Filters\Query\Filters\SortFilter;
+use Aedart\Utils\Str;
 use LogicException;
 
 /**
@@ -302,7 +303,7 @@ class SortingProcessor extends BaseProcessor
     protected function extractListFromRequested(string $value, string $delimiter): array
     {
         return array_map(function ($item) {
-            return trim($item);
+            return Str::trim($item);
         }, explode($delimiter, $value));
     }
 

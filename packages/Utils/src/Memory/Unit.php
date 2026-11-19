@@ -2,6 +2,7 @@
 
 namespace Aedart\Utils\Memory;
 
+use Aedart\Utils\Str;
 use Countable;
 use InvalidArgumentException;
 use Stringable;
@@ -124,7 +125,7 @@ class Unit implements
      */
     public static function from(string $value): static
     {
-        $value = trim($value);
+        $value = Str::trim($value);
 
         if (!preg_match('/(?<value>([0-9]*[.])?[0-9]+)(?<space>\s?)(?<unit>([a-zA-Z]{1,10}))/', $value, $matches)) {
             throw new InvalidArgumentException(sprintf('Unable to parse "%s" into a valid unit', $value));

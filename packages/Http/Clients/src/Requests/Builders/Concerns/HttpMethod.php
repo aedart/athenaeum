@@ -3,6 +3,7 @@
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Utils\Str;
 
 /**
  * Concerns Http Method
@@ -28,7 +29,7 @@ trait HttpMethod
      */
     public function withMethod(string $method): static
     {
-        $this->method = strtoupper(trim($method));
+        $this->method = strtoupper(Str::trim($method));
 
         return $this;
     }

@@ -128,7 +128,7 @@ class Generator implements ConfigAware
      */
     protected function property(string $name): string
     {
-        return lcfirst(Str::studly(trim($name)));
+        return lcfirst(Str::studly(Str::trim($name)));
     }
 
     /**
@@ -177,7 +177,7 @@ class Generator implements ConfigAware
      */
     protected function type(string $type): string
     {
-        return trim($type);
+        return Str::trim($type);
     }
 
     /**
@@ -189,7 +189,7 @@ class Generator implements ConfigAware
      */
     protected function description(string $description): string
     {
-        return trim(ucfirst($description));
+        return Str::trim(ucfirst($description));
     }
 
     /**
@@ -201,7 +201,7 @@ class Generator implements ConfigAware
      */
     protected function inputArgument(string $name): string
     {
-        return lcfirst(Str::studly(trim($name)));
+        return lcfirst(Str::studly(Str::trim($name)));
     }
 
     /**

@@ -11,6 +11,7 @@ use Aedart\Config\Parsers\Files\Toml;
 use Aedart\Config\Parsers\Files\Yaml;
 use Aedart\Contracts\Config\Parsers\Factories\FileParserFactory as FileParserFactoryInterface;
 use Aedart\Contracts\Config\Parsers\FileParser;
+use Aedart\Utils\Str;
 
 /**
  * File Parser Factory
@@ -25,7 +26,7 @@ class FileParserFactory implements FileParserFactoryInterface
      */
     public function make(string $type): FileParser
     {
-        $type = strtolower(trim($type));
+        $type = strtolower(Str::trim($type));
 
         return match ($type) {
             PhpArray::getFileType() => new PhpArray(),

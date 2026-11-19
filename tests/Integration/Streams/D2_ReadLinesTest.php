@@ -5,6 +5,7 @@ namespace Aedart\Tests\Integration\Streams;
 use Aedart\Streams\Stream;
 use Aedart\Testing\Helpers\ConsoleDebugger;
 use Aedart\Tests\TestCases\Streams\StreamTestCase;
+use Aedart\Utils\Str;
 use Codeception\Attribute\Group;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -39,9 +40,9 @@ class D2_ReadLinesTest extends StreamTestCase
         $resultC = $stream->readLine();
 
         // Note: readLine also returns new line char!
-        $this->assertSame('a', trim($resultA));
-        $this->assertSame('b', trim($resultB));
-        $this->assertSame('c', trim($resultC));
+        $this->assertSame('a', Str::trim($resultA));
+        $this->assertSame('b', Str::trim($resultB));
+        $this->assertSame('c', Str::trim($resultC));
     }
 
     /**
@@ -63,9 +64,9 @@ class D2_ReadLinesTest extends StreamTestCase
         $resultC = $stream->readLine(3);
 
         // Note: results may seem off... but this is how the fgets behaves!
-        $this->assertSame('aa', trim($resultA));
-        $this->assertSame('a', trim($resultB));
-        $this->assertSame('bb', trim($resultC));
+        $this->assertSame('aa', Str::trim($resultA));
+        $this->assertSame('a', Str::trim($resultB));
+        $this->assertSame('bb', Str::trim($resultC));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Aedart\MimeTypes;
 
 use Aedart\Contracts\MimeTypes\MimeType as MimeTypeInterface;
+use Aedart\Utils\Str;
 
 /**
  * Mime-Type
@@ -45,11 +46,11 @@ class MimeType implements MimeTypeInterface
      */
     public function description(): string|null
     {
-        if (is_string($this->description) && empty(trim($this->description))) {
+        if (is_string($this->description) && empty(Str::trim($this->description))) {
             return null;
         }
 
-        return trim($this->description);
+        return Str::trim($this->description);
     }
 
     /**

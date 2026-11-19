@@ -3,6 +3,7 @@
 namespace Aedart\Http\Clients\Requests\Query\Grammars;
 
 use Aedart\Http\Clients\Exceptions\UnableToBuildHttpQuery;
+use Aedart\Utils\Str;
 
 /**
  * Open Data Protocol Grammar
@@ -121,7 +122,7 @@ class ODataGrammar extends BaseGrammar
             return '';
         }
 
-        return $this->filterKey . '=' . trim($compiled);
+        return $this->filterKey . '=' . Str::trim($compiled);
     }
 
     /**
@@ -145,7 +146,7 @@ class ODataGrammar extends BaseGrammar
     {
         $conjunction = ' ' . $this->resolveConjunction($where[self::CONJUNCTION]) . ' ';
 
-        return rtrim($conjunction . $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]));
+        return Str::rtrim($conjunction . $this->compileExpression($where[self::FIELD], $where[self::BINDINGS]));
     }
 
     /**
@@ -158,7 +159,7 @@ class ODataGrammar extends BaseGrammar
         }
 
         // Convert operator, if possible
-        $operator = trim($operator);
+        $operator = Str::trim($operator);
         if (isset($this->operatorMap[$operator])) {
             return $this->operatorMap[$operator];
         }

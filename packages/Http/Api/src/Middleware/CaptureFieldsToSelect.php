@@ -6,6 +6,7 @@ use Aedart\Contracts\Http\Api\SelectedFieldsCollection as SelectedFieldsCollecti
 use Aedart\Http\Api\Resources\SelectedFieldsCollection;
 use Aedart\Support\Helpers\Container\ContainerTrait;
 use Aedart\Support\Helpers\Validation\ValidatorFactoryTrait;
+use Aedart\Utils\Str;
 use Aedart\Validation\Rules\AlphaDashDot;
 use Closure;
 use Illuminate\Http\Request;
@@ -116,7 +117,7 @@ class CaptureFieldsToSelect
         $fields = $this->validateSelectedFields($input);
 
         return array_map(function ($field) {
-            return strtolower(trim($field));
+            return strtolower(Str::trim($field));
         }, $fields);
     }
 

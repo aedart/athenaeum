@@ -3,6 +3,8 @@
 
 namespace Aedart\Http\Clients\Requests\Query\Grammars;
 
+use Aedart\Utils\Str;
+
 /**
  * Json Api Grammar
  *
@@ -159,7 +161,7 @@ class JsonApiGrammar extends BaseGrammar
         // default using the "and" conjunction.
         if (!empty($where[self::CONJUNCTION])) {
             $andSymbol = $this->resolveConjunction(self::AND_CONJUNCTION);
-            return trim($andSymbol . $expression);
+            return Str::trim($andSymbol . $expression);
         }
 
         return $expression;

@@ -3,6 +3,7 @@
 namespace Aedart\Http\Clients\Requests\Builders\Concerns;
 
 use Aedart\Contracts\Http\Clients\Requests\Builder;
+use Aedart\Utils\Str;
 
 /**
  * Concerns Http Headers
@@ -129,7 +130,7 @@ trait HttpHeaders
     {
         return $this
             ->withoutHeader('Authorization')
-            ->withHeader('Authorization', trim($scheme . ' ' . $token));
+            ->withHeader('Authorization', Str::trim($scheme . ' ' . $token));
     }
 
     /*****************************************************************
@@ -145,6 +146,6 @@ trait HttpHeaders
      */
     protected function normaliseHeaderName(string $name): string
     {
-        return strtolower(trim($name));
+        return strtolower(Str::trim($name));
     }
 }

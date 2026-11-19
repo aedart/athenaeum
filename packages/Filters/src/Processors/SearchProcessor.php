@@ -8,6 +8,7 @@ use Aedart\Filters\BaseProcessor;
 use Aedart\Filters\Exceptions\InvalidParameter;
 use Aedart\Filters\Query\Filters\SearchFilter;
 use Aedart\Support\Helpers\Translation\TranslatorTrait;
+use Aedart\Utils\Str;
 use LogicException;
 
 /**
@@ -124,7 +125,7 @@ class SearchProcessor extends BaseProcessor
      */
     protected function cleanSearchTerm(string $search): string
     {
-        $search = trim($search);
+        $search = Str::trim($search);
 
         // Ensure search terms does not exceed max length
         if (mb_strlen($search) > $this->maxSearchTermLength) {

@@ -2,6 +2,7 @@
 
 namespace Aedart\Flysystem\Db\Console;
 
+use Aedart\Utils\Str;
 use Illuminate\Console\Command;
 use InvalidArgumentException;
 use RuntimeException;
@@ -138,7 +139,7 @@ EOF,
         // (Re)validate table name, when provided as option.
         $validation($name);
 
-        return strtolower(trim($name));
+        return strtolower(Str::trim($name));
     }
 
     /**

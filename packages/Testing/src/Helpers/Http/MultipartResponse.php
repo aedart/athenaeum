@@ -234,11 +234,11 @@ class MultipartResponse
     {
         $bag = new HeaderBag();
 
-        $rawHeaders = explode(PHP_EOL, trim($rawHeaders));
+        $rawHeaders = explode(PHP_EOL, Str::trim($rawHeaders));
         foreach ($rawHeaders as $rawHeader) {
             [$key, $value] = explode(':', $rawHeader);
 
-            $bag->set(trim($key), trim($value));
+            $bag->set(Str::trim($key), Str::trim($value));
         }
 
         return $bag;
@@ -246,7 +246,7 @@ class MultipartResponse
 
     protected function parsePartContent(string $rawContent): string
     {
-        $rawContent = ltrim($rawContent);
+        $rawContent = Str::ltrim($rawContent);
         if (empty($rawContent)) {
             return $rawContent;
         }

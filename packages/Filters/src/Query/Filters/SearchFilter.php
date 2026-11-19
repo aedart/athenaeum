@@ -3,6 +3,7 @@
 namespace Aedart\Filters\Query\Filters;
 
 use Aedart\Database\Query\Filter;
+use Aedart\Utils\Str;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
 
@@ -55,7 +56,7 @@ class SearchFilter extends Filter
     public function apply(Builder|EloquentBuilder $query): Builder|EloquentBuilder
     {
         return $query->where(function (Builder|EloquentBuilder $query) {
-            $search = trim($this->search);
+            $search = Str::trim($this->search);
             if (mb_strlen($search) === 0) {
                 return;
             }

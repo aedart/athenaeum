@@ -15,6 +15,7 @@ use Aedart\Streams\Exceptions\StreamNotWritable;
 use Aedart\Streams\Meta\Repository as DefaultMetaRepository;
 use Aedart\Support\Facades\IoCFacade;
 use Aedart\Utils\Memory;
+use Aedart\Utils\Str;
 use Psr\Http\Message\StreamInterface as PsrStreamInterface;
 use Traversable;
 
@@ -454,7 +455,7 @@ class Stream implements StreamInterface
      */
     public function readAllLines(): iterable
     {
-        return $this->readAllUsing(fn ($resource) => trim(fgets($resource)));
+        return $this->readAllUsing(fn ($resource) => Str::trim(fgets($resource)));
     }
 
     /**
