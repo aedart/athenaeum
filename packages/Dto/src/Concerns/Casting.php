@@ -100,7 +100,7 @@ trait Casting
         foreach ($allowedTypes as $type) {
             $result = match (true) {
                 in_array($type, ['string', 'str']) && is_string($value) => $this->castAsString($value),
-                in_array($type, ['integer', 'int']) && is_integer($value) => $this->castAsInteger($value),
+                in_array($type, ['integer', 'int']) && is_int($value) => $this->castAsInteger($value),
                 in_array($type, ['float', 'double']) && is_float($value) => $this->castAsFloat($value),
                 in_array($type, ['boolean', 'bool']) && is_bool($value) => $this->castAsBoolean($value),
                 in_array($type, ['array', 'arr']) && (is_array($value) || is_string($value)) => $this->castAsArray($value),

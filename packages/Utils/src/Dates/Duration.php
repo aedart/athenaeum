@@ -39,7 +39,7 @@ class Duration implements Stringable
             $this->microTimeStamp = MicroTimeStamp::fromDateInterval($time);
         } elseif ($time instanceof MicroTimeStamp) {
             $this->microTimeStamp = $time;
-        } elseif (is_integer($time)) {
+        } elseif (is_int($time)) {
             $this->microTimeStamp = MicroTimeStamp::fromSeconds($time);
         }
     }
