@@ -18,6 +18,7 @@
         "php": "^8.4",
         "aedart/athenaeum-container": "^10.27",
         "aedart/athenaeum-contracts": "^10.27",
+        "aedart/athenaeum-utils": "^10.27",
         "codeception/codeception": "^5.3.7",
         "codeception/module-asserts": "^3.3.0",
         "fakerphp/faker": "^v1.24.1",
